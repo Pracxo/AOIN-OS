@@ -1,0 +1,30 @@
+{
+  "scenario_id": "golden_path_brain",
+  "name": "Golden Path Brain",
+  "description": "Generic deterministic Brain golden path.",
+  "status": "active",
+  "scenario_type": "golden_path",
+  "owner_scope": ["workspace:dev-workspace"],
+  "steps": [
+    {"step_id": "01_health_check", "step_type": "health_check", "description": "Check health.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "02_kernel_status", "step_type": "kernel_status", "description": "Check kernel.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "03_kernel_self_test", "step_type": "kernel_self_test", "description": "Run self-test.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "04_create_event", "step_type": "create_event", "description": "Create generic event.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "05_create_attention_signal", "step_type": "create_attention_signal", "description": "Create attention signal.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "06_create_evidence", "step_type": "create_evidence", "description": "Create evidence.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "07_create_memory", "step_type": "create_memory", "description": "Create memory.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "08_retrieve_memory", "step_type": "retrieve_memory", "description": "Retrieve memory.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "09_compile_context", "step_type": "compile_context", "description": "Compile context.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "10_reason", "step_type": "reason", "description": "Run deterministic reasoning.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "11_plan", "step_type": "plan", "description": "Create plan.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "12_command_noop", "step_type": "command_noop", "description": "Run command noop.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "13_visual_map", "step_type": "visual_map", "description": "Build visual map.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}}
+  ],
+  "expected": {"status": "passed", "min_count": 13},
+  "tags": ["golden_path", "release_baseline", "brain"],
+  "metadata": {"dry_run": true, "external_services": false},
+  "created_by": null,
+  "created_at": null,
+  "updated_at": null,
+  "disabled_at": null
+}

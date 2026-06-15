@@ -1,0 +1,13 @@
+{
+  "fixture_id": "generic_sandbox_profile",
+  "name": "Generic Sandbox Profile",
+  "description": "Safe generic sandbox profile fixture for deterministic local validation.",
+  "status": "active",
+  "fixture_type": "sandbox_profile",
+  "owner_scope": ["workspace:dev-workspace"],
+  "content": {"label": "Generic Sandbox Profile", "kind": "sandbox_profile", "external_calls": false},
+  "loaded": false,
+  "result": {},
+  "created_at": null,
+  "loaded_at": null
+}

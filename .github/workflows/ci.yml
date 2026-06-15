@@ -1,0 +1,60 @@
+name: AION CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  brain-api-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install Brain API
+        run: python -m pip install -e "services/brain-api[dev]"
+      - name: Ruff
+        working-directory: services/brain-api
+        run: ruff check .
+      - name: Mypy
+        working-directory: services/brain-api
+        run: mypy src
+      - name: Pytest
+        working-directory: services/brain-api
+        run: pytest
+
+  sdk-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install SDK
+        run: python -m pip install -e "packages/aion-sdk-python[dev]"
+      - name: Ruff
+        working-directory: packages/aion-sdk-python
+        run: ruff check .
+      - name: Mypy
+        working-directory: packages/aion-sdk-python
+        run: mypy src
+      - name: Pytest
+        working-directory: packages/aion-sdk-python
+        run: pytest
+
+  repository-hygiene:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ensure scripts are executable
+        run: test -z "$(find scripts -maxdepth 1 -type f -name '*.sh' ! -perm -111 -print)"
+      - name: No domain drift
+        run: scripts/verify-no-domain-drift.sh
+      - name: Repository health
+        run: scripts/repo-health.sh
+      - name: Required root docs
+        run: test -f README.md && test -f AGENTS.md

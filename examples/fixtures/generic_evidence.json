@@ -1,0 +1,13 @@
+{
+  "fixture_id": "generic_evidence",
+  "name": "Generic Evidence",
+  "description": "Safe generic evidence fixture for deterministic local validation.",
+  "status": "active",
+  "fixture_type": "evidence",
+  "owner_scope": ["workspace:dev-workspace"],
+  "content": {"label": "Generic Evidence", "kind": "evidence", "external_calls": false},
+  "loaded": false,
+  "result": {},
+  "created_at": null,
+  "loaded_at": null
+}

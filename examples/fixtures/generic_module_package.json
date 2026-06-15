@@ -1,0 +1,13 @@
+{
+  "fixture_id": "generic_module_package",
+  "name": "Generic Module Package",
+  "description": "Safe generic module package fixture for deterministic local validation.",
+  "status": "active",
+  "fixture_type": "module_package",
+  "owner_scope": ["workspace:dev-workspace"],
+  "content": {"label": "Generic Module Package", "kind": "module_package", "external_calls": false},
+  "loaded": false,
+  "result": {},
+  "created_at": null,
+  "loaded_at": null
+}

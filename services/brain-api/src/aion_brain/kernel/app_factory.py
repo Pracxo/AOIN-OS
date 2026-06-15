@@ -1,0 +1,157 @@
+"""FastAPI application factory backed by the AION kernel container."""
+
+from fastapi import FastAPI, Request
+
+from aion_brain.api.approvals import router as approvals_router
+from aion_brain.api.attention import router as attention_router
+from aion_brain.api.audit_integrity import router as audit_integrity_router
+from aion_brain.api.autonomy import router as autonomy_router
+from aion_brain.api.backups import router as backups_router
+from aion_brain.api.brain import router as brain_router
+from aion_brain.api.capabilities import router as capabilities_router
+from aion_brain.api.commands import router as commands_router
+from aion_brain.api.connectors import router as connectors_router
+from aion_brain.api.consistency import router as consistency_router
+from aion_brain.api.cycles import router as cycles_router
+from aion_brain.api.event_reactions import router as event_reactions_router
+from aion_brain.api.events import router as events_router
+from aion_brain.api.evidence import router as evidence_router
+from aion_brain.api.execution import router as execution_router
+from aion_brain.api.freeze import router as freeze_router
+from aion_brain.api.goals import router as goals_router
+from aion_brain.api.graph_memory import router as graph_memory_router
+from aion_brain.api.guardrails import router as guardrails_router
+from aion_brain.api.health import router as health_router
+from aion_brain.api.idempotency import router as idempotency_router
+from aion_brain.api.identity import router as identity_router
+from aion_brain.api.inbox import router as inbox_router
+from aion_brain.api.kernel import api_router as api_support_router
+from aion_brain.api.kernel import router as kernel_router
+from aion_brain.api.learning import router as learning_router
+from aion_brain.api.mcp import router as mcp_router
+from aion_brain.api.memory import router as memory_router
+from aion_brain.api.memory_governance import router as memory_governance_router
+from aion_brain.api.model_gateway import router as model_gateway_router
+from aion_brain.api.module_developer import router as module_developer_router
+from aion_brain.api.modules import router as modules_router
+from aion_brain.api.observability import router as observability_router
+from aion_brain.api.operator import router as operator_router
+from aion_brain.api.outbox import router as outbox_router
+from aion_brain.api.performance import router as performance_router
+from aion_brain.api.policy import router as policy_router
+from aion_brain.api.policy_catalog import router as policy_catalog_router
+from aion_brain.api.reasoning import router as reasoning_router
+from aion_brain.api.reflection import router as reflection_router
+from aion_brain.api.regression import router as regression_router
+from aion_brain.api.release_baseline import router as release_baseline_router
+from aion_brain.api.release_package import router as release_package_router
+from aion_brain.api.replay import router as replay_router
+from aion_brain.api.resilience import router as resilience_router
+from aion_brain.api.retrieval import router as retrieval_router
+from aion_brain.api.risk import router as risk_router
+from aion_brain.api.runtime_config import router as runtime_config_router
+from aion_brain.api.sandbox import router as sandbox_router
+from aion_brain.api.scenarios import router as scenarios_router
+from aion_brain.api.schedules import router as schedules_router
+from aion_brain.api.scopes import router as scopes_router
+from aion_brain.api.secrets import router as secrets_router
+from aion_brain.api.security_baseline import router as security_baseline_router
+from aion_brain.api.skills import router as skills_router
+from aion_brain.api.tasks import router as tasks_router
+from aion_brain.api.telemetry import router as telemetry_router
+from aion_brain.api.traces import router as traces_router
+from aion_brain.api.versioning import router as versioning_router
+from aion_brain.api.visual import router as visual_router
+from aion_brain.api.workflows import router as workflows_router
+from aion_brain.api.working_memory import router as working_memory_router
+from aion_brain.api.workspaces import router as workspaces_router
+from aion_brain.api_support.exception_handlers import register_exception_handlers
+from aion_brain.api_support.middleware import RequestContextMiddleware
+from aion_brain.kernel.container import KernelContainer
+
+ROUTERS = (
+    health_router,
+    audit_integrity_router,
+    identity_router,
+    workspaces_router,
+    scopes_router,
+    events_router,
+    event_reactions_router,
+    commands_router,
+    idempotency_router,
+    outbox_router,
+    inbox_router,
+    consistency_router,
+    capabilities_router,
+    modules_router,
+    sandbox_router,
+    secrets_router,
+    connectors_router,
+    goals_router,
+    tasks_router,
+    schedules_router,
+    workflows_router,
+    cycles_router,
+    execution_router,
+    evidence_router,
+    memory_router,
+    memory_governance_router,
+    mcp_router,
+    graph_memory_router,
+    model_gateway_router,
+    module_developer_router,
+    retrieval_router,
+    reasoning_router,
+    reflection_router,
+    skills_router,
+    policy_router,
+    policy_catalog_router,
+    risk_router,
+    guardrails_router,
+    approvals_router,
+    attention_router,
+    working_memory_router,
+    autonomy_router,
+    brain_router,
+    traces_router,
+    learning_router,
+    telemetry_router,
+    scenarios_router,
+    release_baseline_router,
+    release_package_router,
+    backups_router,
+    performance_router,
+    security_baseline_router,
+    runtime_config_router,
+    resilience_router,
+    versioning_router,
+    freeze_router,
+    visual_router,
+    observability_router,
+    operator_router,
+    replay_router,
+    regression_router,
+    api_support_router,
+    kernel_router,
+)
+
+
+def create_app(container: KernelContainer | None = None) -> FastAPI:
+    """Create the AION Brain API around one process-wide composition root."""
+    kernel = container or KernelContainer()
+    app = FastAPI(title="AION Brain API", version=kernel.settings.version)
+    app.state.kernel_container = kernel
+    app.add_middleware(RequestContextMiddleware)
+    app.state.aion_request_context_middleware_present = True
+    register_exception_handlers(app)
+    for router in ROUTERS:
+        app.include_router(router)
+    return app
+
+
+def get_kernel_container(request: Request) -> KernelContainer:
+    """Return the process-wide kernel composition root from app state."""
+    container = getattr(request.app.state, "kernel_container", None)
+    if not isinstance(container, KernelContainer):
+        raise RuntimeError("AION kernel container is not configured")
+    return container

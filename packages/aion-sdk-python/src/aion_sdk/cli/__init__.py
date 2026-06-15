@@ -1,0 +1,2 @@
+"""aionctl CLI package."""
+

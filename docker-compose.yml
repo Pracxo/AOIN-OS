@@ -1,0 +1,95 @@
+services:
+  brain-api:
+    build:
+      context: ./services/brain-api
+    env_file:
+      - .env.example
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - redis
+      - nats
+      - opa
+    volumes:
+      - turbovec_indexes:/app/.aion_indexes/turbovec
+
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: aion
+      POSTGRES_USER: aion
+      POSTGRES_PASSWORD: aion_dev_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_pgvector_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  nats:
+    image: nats:2-alpine
+    command: ["-c", "/etc/nats/nats.conf"]
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+    volumes:
+      - ./infra/nats/nats.conf:/etc/nats/nats.conf:ro
+      - nats_data:/data
+
+  opa:
+    image: openpolicyagent/opa:latest
+    command: ["run", "--server", "--addr=0.0.0.0:8181", "/policies"]
+    ports:
+      - "8181:8181"
+    volumes:
+      - ./infra/opa/policies:/policies:ro
+
+  minio:
+    image: minio/minio:latest
+    profiles: ["storage"]
+    command: ["server", "/data", "--console-address", ":9001"]
+    environment:
+      MINIO_ROOT_USER: aion
+      MINIO_ROOT_PASSWORD: aion_dev_password
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+
+  temporal:
+    image: temporalio/auto-setup:latest
+    profiles: ["workflow"]
+    ports:
+      - "7233:7233"
+
+  otel-collector:
+    image: otel/opentelemetry-collector:latest
+    profiles: ["observability"]
+    command: ["--config=/etc/otel-collector.yaml"]
+    ports:
+      - "4317:4317"
+      - "4318:4318"
+    volumes:
+      - ./infra/otel/otel-collector.yaml:/etc/otel-collector.yaml:ro
+
+  litellm:
+    image: ghcr.io/berriai/litellm:main-latest
+    profiles: ["model-gateway"]
+    ports:
+      - "4000:4000"
+
+  mcp-placeholder:
+    image: alpine:3.20
+    profiles: ["mcp"]
+    command: ["sleep", "infinity"]
+
+volumes:
+  postgres_pgvector_data:
+  nats_data:
+  minio_data:
+  turbovec_indexes:

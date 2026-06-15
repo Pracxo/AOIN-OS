@@ -1,0 +1,312 @@
+"""Default generic policy catalog entries for AION Brain."""
+
+from __future__ import annotations
+
+from aion_brain.contracts.policy_catalog import (
+    PermissionCatalogEntry,
+    PolicyActionCatalogEntry,
+    PolicyRiskLevel,
+    RoleTemplate,
+)
+
+DEFAULT_ACTION_SPECS: tuple[tuple[str, str, str, PolicyRiskLevel], ...] = (
+    ("kernel.status.read", "kernel", "kernel", "low"),
+    ("kernel.boot.read", "kernel", "kernel", "low"),
+    ("kernel.services.read", "kernel", "kernel", "low"),
+    ("kernel.self_test.run", "kernel", "kernel", "medium"),
+    ("kernel.contracts.export", "kernel", "kernel", "medium"),
+    ("kernel.boundary_check.run", "kernel", "kernel", "medium"),
+    ("api.request.read", "api", "api_request", "low"),
+    ("api.openapi_hygiene.read", "api", "openapi_schema", "low"),
+    ("api.error_codes.read", "api", "api_error", "low"),
+    ("identity.actor.create", "identity", "actor", "medium"),
+    ("identity.actor.read", "identity", "actor", "low"),
+    ("identity.workspace.create", "identity", "workspace", "medium"),
+    ("identity.workspace.read", "identity", "workspace", "low"),
+    ("identity.permission.create", "identity", "permission", "medium"),
+    ("identity.permission.read", "identity", "permission", "low"),
+    ("scope.resolve", "scope", "scope", "low"),
+    ("policy.catalog.create", "policy", "policy_catalog", "medium"),
+    ("policy.catalog.read", "policy", "policy_catalog", "low"),
+    ("policy.catalog.update", "policy", "policy_catalog", "medium"),
+    ("policy.permission.create", "policy", "permission_catalog", "medium"),
+    ("policy.permission.read", "policy", "permission_catalog", "low"),
+    ("policy.permission.update", "policy", "permission_catalog", "medium"),
+    ("policy.role_template.create", "policy", "role_template", "medium"),
+    ("policy.role_template.read", "policy", "role_template", "low"),
+    ("policy.role_template.update", "policy", "role_template", "medium"),
+    ("policy.simulate", "policy", "policy_simulation", "medium"),
+    ("policy.test_case.create", "policy", "policy_test_case", "medium"),
+    ("policy.test_case.read", "policy", "policy_test_case", "low"),
+    ("policy.test.run", "policy", "policy_test_run", "medium"),
+    ("policy.coverage.read", "policy", "policy_coverage", "low"),
+    ("policy.bundle.export", "policy", "policy_bundle", "medium"),
+    ("policy.opa.status", "policy", "policy_engine", "low"),
+    ("event.ingest", "event", "event", "low"),
+    ("event.dispatch", "event", "event", "low"),
+    ("event.subscription.read", "event", "event_subscription", "low"),
+    ("command.dispatch", "command", "command", "low"),
+    ("command.read", "command", "command", "low"),
+    ("trace.read", "trace", "trace", "low"),
+    ("outbox.enqueue", "outbox", "outbox", "low"),
+    ("outbox.read", "outbox", "outbox", "low"),
+    ("inbox.receive", "inbox", "inbox", "low"),
+    ("inbox.read", "inbox", "inbox", "low"),
+    ("memory.retrieve", "memory", "memory_record", "low"),
+    ("memory.write", "memory", "memory_record", "medium"),
+    ("evidence.create", "evidence", "evidence_record", "medium"),
+    ("evidence.read", "evidence", "evidence_record", "low"),
+    ("retrieval.query", "retrieval", "retrieval", "low"),
+    ("reasoning.run", "reasoning", "reasoning_run", "medium"),
+    ("model.gateway.complete", "model", "model_call", "medium"),
+    ("model.provider.read", "model", "model_provider", "low"),
+    ("planning.create", "planning", "plan", "medium"),
+    ("plan.create", "planning", "plan", "medium"),
+    ("execution.step", "execution", "execution_step", "high"),
+    ("workflow.run", "workflow", "workflow", "medium"),
+    ("workflow.read", "workflow", "workflow", "low"),
+    ("workflow.heartbeat.write", "workflow", "workflow_heartbeat", "low"),
+    ("task.run", "task", "task", "medium"),
+    ("task.read", "task", "task", "low"),
+    ("goal.create", "goal", "goal", "medium"),
+    ("goal.read", "goal", "goal", "low"),
+    ("module.package.submit", "module", "module_package", "medium"),
+    ("module.package.read", "module", "module_package", "low"),
+    ("capability.list", "module", "capability", "low"),
+    ("capability.invoke", "module", "capability", "medium"),
+    ("mcp.server.read", "mcp", "mcp_server", "low"),
+    ("mcp.tools.sync", "mcp", "mcp_server", "medium"),
+    ("mcp.tool.invoke", "mcp", "mcp_tool", "medium"),
+    ("sandbox.profile.create", "sandbox", "sandbox_profile", "medium"),
+    ("sandbox.profile.read", "sandbox", "sandbox_profile", "low"),
+    ("sandbox.profile.validate", "sandbox", "sandbox_profile", "low"),
+    ("sandbox.run", "sandbox", "sandbox_run", "medium"),
+    ("connector.create", "connector", "connector", "medium"),
+    ("connector.read", "connector", "connector", "low"),
+    ("connector.validate", "connector", "connector", "low"),
+    ("secret_ref.create", "secret_ref", "secret_ref", "medium"),
+    ("secret_ref.read", "secret_ref", "secret_ref", "low"),
+    ("risk.assess", "risk", "risk_assessment", "medium"),
+    ("guardrail.evaluate", "guardrail", "guardrail", "medium"),
+    ("approval.request.read", "approval", "approval_request", "low"),
+    ("approval.decision.create", "approval", "approval_decision", "medium"),
+    ("autonomy.decide", "autonomy", "autonomy_decision", "medium"),
+    ("autonomy.status.read", "autonomy", "autonomy_status", "low"),
+    ("attention.decide", "attention", "attention_decision", "low"),
+    ("working_memory.read", "attention", "working_memory", "low"),
+    ("cycle.run", "cycle", "cycle_run", "medium"),
+    ("cycle.read", "cycle", "cycle_run", "low"),
+    ("visual.map.read", "visual", "brain_map", "low"),
+    ("visual.telemetry.read", "visual", "visual_telemetry", "low"),
+    ("visual.stream.read", "visual", "visual_stream", "low"),
+    ("visual.snapshot.create", "visual", "brain_map_snapshot", "medium"),
+    ("visual.snapshot.read", "visual", "brain_map_snapshot", "low"),
+    ("visual.timeline.read", "visual", "trace_timeline", "low"),
+    ("observability.read", "observability", "observability", "low"),
+    ("observability.event.create", "observability", "observability_event", "medium"),
+    ("replay.run", "replay", "replay", "medium"),
+    ("replay.read", "replay", "replay", "low"),
+    ("regression.run", "regression", "regression_run", "medium"),
+    ("regression.read", "regression", "regression_report", "low"),
+    ("skill.read", "skill", "skill", "low"),
+    ("skill.match", "skill", "skill", "low"),
+    ("reflection.create", "reflection", "reflection", "medium"),
+    ("reflection.read", "reflection", "reflection", "low"),
+    ("version.manifest.create", "release", "version_manifest", "medium"),
+    ("version.manifest.read", "release", "version_manifest", "low"),
+    ("version.manifest.freeze", "release", "version_manifest", "medium"),
+    ("version.feature.create", "release", "feature_registry", "medium"),
+    ("version.feature.read", "release", "feature_registry", "low"),
+    ("version.feature.deprecate", "release", "feature_registry", "medium"),
+    ("compatibility.matrix.generate", "release", "compatibility_matrix", "medium"),
+    ("compatibility.matrix.read", "release", "compatibility_matrix", "low"),
+    ("migration.baseline.generate", "release", "migration_baseline", "medium"),
+    ("release.artifact.generate", "release", "release_artifact", "medium"),
+    ("freeze_gate.run", "release", "freeze_gate", "medium"),
+    ("freeze_gate.read", "release", "freeze_gate", "low"),
+    ("release.package.create", "release", "release_package", "medium"),
+    ("release.package.read", "release", "release_package", "low"),
+    ("release.package.validate", "release", "release_package", "low"),
+    ("release.handoff.read", "release", "release_handoff", "low"),
+    ("backup.create", "backup", "backup", "medium"),
+    ("backup.read", "backup", "backup", "low"),
+    ("backup.validate", "backup", "backup", "low"),
+    ("backup.restore.preview", "backup", "restore_preview", "low"),
+    ("backup.restore.apply", "backup", "restore_job", "high"),
+    ("performance.benchmark.create", "performance", "benchmark", "medium"),
+    ("performance.benchmark.read", "performance", "benchmark", "low"),
+    ("performance.benchmark.run", "performance", "benchmark_run", "low"),
+    ("performance.baseline.create", "performance", "capacity_baseline", "medium"),
+    ("performance.baseline.read", "performance", "capacity_baseline", "low"),
+    ("performance.budget.create", "performance", "resource_budget", "medium"),
+    ("performance.budget.read", "performance", "resource_budget", "low"),
+    ("performance.summary.read", "performance", "performance_summary", "low"),
+    ("performance.regression.read", "performance", "regression_report", "low"),
+    ("sdk.compatibility.check", "sdk", "sdk_compatibility", "low"),
+    ("security.scan.run", "configuration", "security_scan", "medium"),
+    ("security.scan.read", "configuration", "security_scan", "low"),
+    ("security.threat_model.create", "configuration", "threat_model", "medium"),
+    ("security.threat_model.read", "configuration", "threat_model", "low"),
+    ("security.threat_model.update", "configuration", "threat_model", "medium"),
+    ("security.control.create", "configuration", "security_control", "medium"),
+    ("security.control.read", "configuration", "security_control", "low"),
+    ("security.control.update", "configuration", "security_control", "medium"),
+    ("security.hardening.run", "configuration", "hardening_gate", "medium"),
+    ("security.hardening.read", "configuration", "hardening_gate", "low"),
+    ("runtime_config.profile.create", "configuration", "config_profile", "medium"),
+    ("runtime_config.profile.read", "configuration", "config_profile", "low"),
+    ("runtime_config.profile.update", "configuration", "config_profile", "medium"),
+    (
+        "runtime_config.feature_override.create",
+        "configuration",
+        "feature_flag_override",
+        "medium",
+    ),
+    (
+        "runtime_config.feature_override.read",
+        "configuration",
+        "feature_flag_override",
+        "low",
+    ),
+    (
+        "runtime_config.feature_override.update",
+        "configuration",
+        "feature_flag_override",
+        "medium",
+    ),
+    ("runtime_config.snapshot.create", "configuration", "config_snapshot", "medium"),
+    ("runtime_config.snapshot.read", "configuration", "config_snapshot", "low"),
+    ("runtime_config.validate", "configuration", "config_validation", "medium"),
+    ("runtime_config.status.read", "configuration", "runtime_config_status", "low"),
+    ("runtime_config.change.read", "configuration", "config_change", "low"),
+    ("resilience.status.read", "configuration", "resilience_status", "low"),
+    ("resilience.dependency.check", "configuration", "dependency_health", "medium"),
+    ("resilience.dependency.read", "configuration", "dependency_health", "low"),
+    ("resilience.retry_policy.create", "configuration", "retry_policy", "medium"),
+    ("resilience.retry_policy.read", "configuration", "retry_policy", "low"),
+    ("resilience.retry_policy.update", "configuration", "retry_policy", "medium"),
+    ("resilience.circuit_breaker.create", "configuration", "circuit_breaker", "medium"),
+    ("resilience.circuit_breaker.read", "configuration", "circuit_breaker", "low"),
+    ("resilience.circuit_breaker.update", "configuration", "circuit_breaker", "medium"),
+    ("resilience.degraded.read", "configuration", "degraded_mode", "low"),
+    ("resilience.degraded.resolve", "configuration", "degraded_mode", "medium"),
+    ("resilience.fault_rule.create", "configuration", "fault_rule", "medium"),
+    ("resilience.fault_rule.read", "configuration", "fault_rule", "low"),
+    ("resilience.fault_rule.update", "configuration", "fault_rule", "medium"),
+    ("resilience.test.run", "configuration", "resilience_test", "medium"),
+    ("resilience.test.read", "configuration", "resilience_test", "low"),
+)
+
+
+def default_action_catalog_entries() -> list[PolicyActionCatalogEntry]:
+    """Return default generic action catalog entries."""
+    return [
+        PolicyActionCatalogEntry(
+            policy_action_id=f"policy-action-{action_type.replace('.', '-')}",
+            action_type=action_type,
+            category=category,
+            resource_type=resource_type,
+            default_risk_level=risk_level,
+            required_permission=_permission_for(action_type),
+            description=f"Allows AION action {action_type}.",
+            status="active",
+            metadata={"source": "aion_defaults"},
+        )
+        for action_type, category, resource_type, risk_level in DEFAULT_ACTION_SPECS
+    ]
+
+
+def default_permission_catalog_entries() -> list[PermissionCatalogEntry]:
+    """Return default permissions derived from the action catalog."""
+    entries: dict[str, PermissionCatalogEntry] = {}
+    for action in default_action_catalog_entries():
+        entries[action.required_permission] = PermissionCatalogEntry(
+            permission_id=f"permission-{action.required_permission.replace('.', '-')}",
+            permission=action.required_permission,
+            category=action.category,
+            resource_type=action.resource_type,
+            action_pattern=action.action_type,
+            description=f"Permission for {action.action_type}.",
+            status="active",
+            metadata={"source": "aion_defaults"},
+        )
+    return list(entries.values())
+
+
+def default_role_templates() -> list[RoleTemplate]:
+    """Return default generic role templates."""
+    permissions = sorted(entry.permission for entry in default_permission_catalog_entries())
+    read_permissions = sorted(
+        permission for permission in permissions if permission.endswith(".read")
+    )
+    run_permissions = sorted(
+        permission
+        for permission in permissions
+        if permission.endswith(".run") or permission.endswith(".dispatch")
+    )
+    policy_read = sorted(
+        permission for permission in permissions if permission.startswith("policy.")
+    )
+    return [
+        _role("owner", "Broad development owner permissions.", permissions, ["dev_only"]),
+        _role(
+            "admin",
+            "Manage most Brain resources except kernel boundary override.",
+            [permission for permission in permissions if permission != "kernel.boundary_check.run"],
+            ["bounded_kernel_access"],
+        ),
+        _role(
+            "operator",
+            "Run dry-run tasks, workflows, cycles, and commands.",
+            sorted(set(read_permissions + run_permissions + ["command.dispatch"])),
+            ["dry_run_first"],
+        ),
+        _role("viewer", "Read status, traces, visual, and catalog.", read_permissions, []),
+        _role(
+            "auditor",
+            "Read traces, audit, policy, requests, and visual projections.",
+            sorted(set(read_permissions + policy_read + ["api.request.read", "trace.read"])),
+            ["read_only"],
+        ),
+        _role(
+            "module",
+            "Read module metadata and perform dry-run capability invocation.",
+            ["capability.invoke", "capability.list", "module.package.read"],
+            ["dry_run_only"],
+        ),
+        _role(
+            "service",
+            "Internal service writes for events, outbox, telemetry, and heartbeats.",
+            [
+                "event.ingest",
+                "outbox.enqueue",
+                "observability.event.create",
+                "workflow.heartbeat.write",
+            ],
+            ["internal_only"],
+        ),
+    ]
+
+
+def _permission_for(action_type: str) -> str:
+    parts = action_type.split(".")
+    if len(parts) >= 2:
+        return f"{parts[0]}.{parts[-1]}"
+    return action_type
+
+
+def _role(
+    role_name: str,
+    description: str,
+    permissions: list[str],
+    constraints: list[str],
+) -> RoleTemplate:
+    return RoleTemplate(
+        role_template_id=f"role-template-{role_name}",
+        role_name=role_name,
+        description=description,
+        status="active",
+        permissions=sorted(set(permissions)),
+        constraints=constraints,
+        metadata={"source": "aion_defaults"},
+    )

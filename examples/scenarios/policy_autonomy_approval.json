@@ -1,0 +1,21 @@
+{
+  "scenario_id": "policy_autonomy_approval",
+  "name": "Policy Autonomy Approval",
+  "description": "Generic policy, autonomy, risk, and approval scenario.",
+  "status": "active",
+  "scenario_type": "policy",
+  "owner_scope": ["workspace:dev-workspace"],
+  "steps": [
+    {"step_id": "01_policy_simulate", "step_type": "policy_simulate", "description": "Simulate policy.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "02_autonomy_decide", "step_type": "autonomy_decide", "description": "Resolve autonomy.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "03_risk_assess", "step_type": "risk_assess", "description": "Assess risk.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "04_approval_create", "step_type": "approval_create", "description": "Create approval request.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}}
+  ],
+  "expected": {"status": "passed", "min_count": 4},
+  "tags": ["policy", "autonomy", "approval", "release_baseline"],
+  "metadata": {"dry_run": true, "external_services": false},
+  "created_by": null,
+  "created_at": null,
+  "updated_at": null,
+  "disabled_at": null
+}

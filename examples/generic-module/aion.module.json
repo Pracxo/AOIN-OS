@@ -1,0 +1,40 @@
+{
+  "module_id": "generic.example",
+  "version": "0.1.0",
+  "capabilities": [
+    {
+      "capability_id": "generic.example.echo",
+      "name": "generic.echo",
+      "description": "Generic example capability contract.",
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "output_schema": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "risk_level": "low",
+      "permissions_required": [
+        "capability.invoke"
+      ],
+      "memory_read_scopes": [],
+      "memory_write_scopes": [],
+      "execution_mode": "sync",
+      "timeout_seconds": 5,
+      "audit_level": "full",
+      "metadata": {
+        "example": true
+      }
+    }
+  ],
+  "permissions_required": [
+    "capability.invoke"
+  ],
+  "memory_read_scopes": [],
+  "memory_write_scopes": [],
+  "events_subscribed": [],
+  "events_published": [],
+  "execution_mode": "sync"
+}
+

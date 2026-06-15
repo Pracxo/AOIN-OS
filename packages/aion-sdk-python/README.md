@@ -1,0 +1,80 @@
+# AION Python SDK and aionctl
+
+`aion-sdk-python` is the Python developer interface for AION Brain. It talks
+only to public HTTP APIs exposed by the Brain API and does not import
+`aion_brain`, database drivers, provider SDKs, or domain modules.
+
+## Install
+
+```bash
+cd packages/aion-sdk-python
+python -m pip install -e ".[dev]"
+```
+
+## Configuration
+
+The SDK defaults to `http://localhost:8080` and reads:
+
+- `AION_BASE_URL`
+- `AION_ACTOR_ID`
+- `AION_WORKSPACE_ID`
+- `AION_ROLES`
+- `AION_PERMISSIONS`
+- `AION_SECURITY_SCOPE`
+- `AION_TRACE_ID`
+- `AION_CORRELATION_ID`
+- `AION_IDEMPOTENCY_KEY`
+- `AION_TIMEOUT_SECONDS`
+
+Comma-separated values are supported for roles, permissions, and scope.
+
+## Python Client
+
+```python
+from aion_sdk import AIONClient, AIONClientConfig
+
+config = AIONClientConfig(
+    base_url="http://localhost:8080",
+    actor_id="dev-owner",
+    workspace_id="main",
+    security_scope=["workspace:main"],
+)
+
+client = AIONClient(config)
+print(client.health.health())
+print(client.kernel.status())
+```
+
+Resources include `health`, `kernel`, `events`, `memory`, `reasoning`,
+`commands`, `workflows`, `autonomy`, `approvals`, `visual`, and `modules`.
+
+## aionctl
+
+```bash
+./scripts/aionctl.sh --scope workspace:main health
+./scripts/aionctl.sh --json kernel status
+./scripts/aionctl.sh --scope workspace:main kernel self-test
+./scripts/aionctl.sh --scope workspace:main smoke run
+./scripts/aionctl.sh modules scaffold --module-id generic.example --package-name generic-example --output examples/generic-module
+./scripts/aionctl.sh modules certify --module-package-id module-package-id
+```
+
+`aionctl` uses development identity headers only. It does not send bearer tokens
+or production auth secrets.
+
+## Contract Export
+
+```bash
+./scripts/aionctl.sh contracts export \
+  --output artifacts/aion-contracts.json \
+  --openapi-output artifacts/openapi.json
+```
+
+## Safety
+
+- No retries are hidden by the SDK.
+- Tests use `httpx.MockTransport` or CLI fakes.
+- `bootstrap dev` is conservative and does not enable full autonomy, external
+  models, external tools, workers, or schedulers.
+- Smoke tests use dry-run/noop requests and idempotency keys.
+- Module commands are contract-only and never execute module code.

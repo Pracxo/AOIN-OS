@@ -1,0 +1,24 @@
+# Release Candidate Checklist
+
+- [ ] Brain API tests pass.
+- [ ] SDK tests pass.
+- [ ] Ruff passes.
+- [ ] Mypy passes.
+- [ ] Docker build passes.
+- [ ] No-domain-drift passes.
+- [ ] Migration check passes.
+- [ ] Boundary check passes.
+- [ ] OpenAPI hygiene passes.
+- [ ] Policy coverage passes.
+- [ ] Kernel self-test passes.
+- [ ] Contract export passes.
+- [ ] Default golden path scenarios pass.
+- [ ] Release baseline run completes.
+- [ ] Failed scenario steps are inspected.
+- [ ] Release baseline report is exported or archived for review.
+- [ ] README updated.
+- [ ] AGENTS.md updated if rules changed.
+- [ ] ADR added for architecture decisions.
+- [ ] No secrets committed.
+- [ ] No `.env` committed.
+- [ ] No forbidden vertical modules added.

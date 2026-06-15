@@ -1,0 +1,226 @@
+"""Operator queue summary aggregation."""
+
+from __future__ import annotations
+
+from datetime import datetime
+from typing import Any, cast
+
+from aion_brain.contracts.operator import (
+    OperatorCardStatus,
+    OperatorQueueSummary,
+    OperatorQueueType,
+    OperatorSeverity,
+)
+
+_QUEUE_SPECS: tuple[tuple[OperatorQueueType, str, str, tuple[str, ...]], ...] = (
+    ("approvals", "Approvals", "approval_service", ("list_requests", "list")),
+    ("commands", "Commands", "command_service", ("list_commands", "list")),
+    ("outbox", "Outbox", "outbox_service", ("list_messages", "list")),
+    ("inbox", "Inbox", "inbox_service", ("list_messages", "list")),
+    ("workflows", "Workflows", "workflow_service", ("list_runs", "list_workflows", "list")),
+    ("tasks", "Tasks", "task_service", ("list_tasks", "list")),
+    ("dead_letters", "Event Dead Letters", "event_router_service", ("list_dead_letters", "list")),
+    ("backups", "Backup Jobs", "backup_service", ("list_jobs", "list_backups", "list")),
+    ("release_packages", "Release Packages", "release_service", ("list_packages", "list")),
+    (
+        "audit_verifications",
+        "Audit Verifications",
+        "audit_service",
+        ("list_verification_runs", "list"),
+    ),
+    ("resilience_tests", "Resilience Tests", "resilience_service", ("list_test_runs", "list")),
+    ("security_scans", "Security Scans", "security_service", ("list_scans", "list")),
+    ("scenarios", "Scenarios", "scenario_service", ("list_runs", "list_scenarios", "list")),
+)
+
+_RUNNING_STATUSES = {"running", "processing", "sending", "in_progress", "active"}
+_PENDING_STATUSES = {"pending", "waiting_for_approval", "queued", "scheduled", "created"}
+_BLOCKED_STATUSES = {"blocked", "blocked_by_policy", "blocked_by_autonomy", "dead_lettered"}
+_FAILED_STATUSES = {"failed", "error", "critical"}
+
+
+class QueueSummaryBuilder:
+    """Build read-only queue summaries."""
+
+    def __init__(self, **providers: object) -> None:
+        self._providers = providers
+
+    def build_queues(self, scope: list[str]) -> list[OperatorQueueSummary]:
+        """Build queue summaries from local service/repository contracts."""
+        return [
+            self._build_queue(queue_type, title, provider_key, methods, scope)
+            for queue_type, title, provider_key, methods in _QUEUE_SPECS
+        ]
+
+    def _build_queue(
+        self,
+        queue_type: OperatorQueueType,
+        title: str,
+        provider_key: str,
+        methods: tuple[str, ...],
+        scope: list[str],
+    ) -> OperatorQueueSummary:
+        provider = self._providers.get(provider_key)
+        if provider is None:
+            return _summary(
+                queue_type,
+                title,
+                0,
+                0,
+                0,
+                0,
+                "unknown",
+                "medium",
+                metadata={"available": False, "scope": scope},
+            )
+        try:
+            items = _list_items(provider, methods, scope)
+        except Exception as exc:
+            return _summary(
+                queue_type,
+                title,
+                0,
+                0,
+                0,
+                0,
+                "unknown",
+                "medium",
+                metadata={"available": True, "error": exc.__class__.__name__},
+            )
+        pending, running, blocked, failed = _count_statuses(items)
+        status = _queue_status(pending, running, blocked, failed)
+        return _summary(
+            queue_type,
+            title,
+            pending,
+            running,
+            blocked,
+            failed,
+            status,
+            _severity(status),
+            oldest_item_at=_oldest(items),
+            newest_item_at=_newest(items),
+            metadata={"available": True, "item_count": len(items)},
+        )
+
+
+def _summary(
+    queue_type: OperatorQueueType,
+    title: str,
+    pending: int,
+    running: int,
+    blocked: int,
+    failed: int,
+    status: OperatorCardStatus,
+    severity: OperatorSeverity,
+    *,
+    oldest_item_at: datetime | None = None,
+    newest_item_at: datetime | None = None,
+    metadata: dict[str, Any] | None = None,
+) -> OperatorQueueSummary:
+    return OperatorQueueSummary(
+        queue_id=f"queue-{queue_type}",
+        queue_type=queue_type,
+        title=title,
+        pending_count=pending,
+        running_count=running,
+        blocked_count=blocked,
+        failed_count=failed,
+        oldest_item_at=oldest_item_at,
+        newest_item_at=newest_item_at,
+        status=status,
+        severity=severity,
+        metadata=metadata or {},
+    )
+
+
+def _list_items(provider: object, methods: tuple[str, ...], scope: list[str]) -> list[object]:
+    for name in methods:
+        method = getattr(provider, name, None)
+        if callable(method):
+            if name == "list_requests":
+                try:
+                    from aion_brain.contracts.approvals import ApprovalInboxQuery
+
+                    return list(
+                        cast(Any, method)(
+                            ApprovalInboxQuery(scope=scope or ["workspace:main"], limit=100)
+                        )
+                        or []
+                    )
+                except (ImportError, TypeError):
+                    pass
+            return _call_list(method, scope)
+    return []
+
+
+def _call_list(method: object, scope: list[str]) -> list[object]:
+    callable_method = cast(Any, method)
+    attempts: tuple[dict[str, object], ...] = (
+        {"scope": scope, "limit": 100},
+        {"scope": scope},
+        {"limit": 100},
+        {},
+    )
+    for kwargs in attempts:
+        try:
+            value = callable_method(**kwargs)
+            return list(value or [])
+        except TypeError:
+            continue
+    return []
+
+
+def _count_statuses(items: list[object]) -> tuple[int, int, int, int]:
+    pending = running = blocked = failed = 0
+    for item in items:
+        status = str(getattr(item, "status", "") or "").lower()
+        if status in _PENDING_STATUSES:
+            pending += 1
+        elif status in _RUNNING_STATUSES:
+            running += 1
+        elif status in _BLOCKED_STATUSES:
+            blocked += 1
+        elif status in _FAILED_STATUSES:
+            failed += 1
+    return pending, running, blocked, failed
+
+
+def _queue_status(
+    pending: int,
+    running: int,
+    blocked: int,
+    failed: int,
+) -> OperatorCardStatus:
+    if failed:
+        return "failed"
+    if blocked:
+        return "blocked"
+    if pending or running:
+        return "warning"
+    return "healthy"
+
+
+def _severity(status: OperatorCardStatus) -> OperatorSeverity:
+    if status == "failed":
+        return "critical"
+    if status == "blocked":
+        return "high"
+    if status in {"warning", "unknown"}:
+        return "medium"
+    return "low"
+
+
+def _created_at(item: object) -> datetime | None:
+    value = getattr(item, "created_at", None) or getattr(item, "updated_at", None)
+    return value if isinstance(value, datetime) else None
+
+
+def _oldest(items: list[object]) -> datetime | None:
+    values = [value for value in (_created_at(item) for item in items) if value is not None]
+    return min(values) if values else None
+
+
+def _newest(items: list[object]) -> datetime | None:
+    values = [value for value in (_created_at(item) for item in items) if value is not None]
+    return max(values) if values else None

@@ -1,0 +1,780 @@
+# Policy Model
+
+The policy engine gates every Brain action before execution or delegation.
+
+Modules never self-authorize. They request execution through AION Brain, and the
+Brain asks the policy adapter for a decision.
+
+Policy can:
+
+- Allow execution.
+- Deny execution.
+- Require human approval.
+- Attach constraints.
+- Increase audit level.
+
+Open Policy Agent is prepared as the first policy adapter boundary. The public
+AION API still returns `PolicyDecision`, not OPA-specific objects.
+
+## Generic Vocabulary
+
+AION core policy vocabulary stays generic:
+
+- `event.ingest`
+- `event.subscription.create`
+- `event.subscription.read`
+- `event.subscription.disable`
+- `event.dispatch`
+- `event.dispatch.read`
+- `event.reaction.run`
+- `event.reaction.noop`
+- `event.dead_letter.read`
+- `event.dead_letter.resolve`
+- `event.dead_letter.replay`
+- `memory.retrieve`
+- `memory.write`
+- `context.compile`
+- `intent.classify`
+- `plan.create`
+- `plan.execute`
+- `execution.step`
+- `approval.request`
+- `risk.assess`
+- `guardrail.rule.create`
+- `guardrail.rule.read`
+- `guardrail.rule.disable`
+- `guardrail.evaluate`
+- `approval.request.create`
+- `approval.request.read`
+- `approval.decision.create`
+- `approval.request.cancel`
+- `approval.expire`
+- `reasoning.run`
+- `model.route`
+- `model.complete`
+- `response.verify`
+- `response.evaluate`
+- `capability.list`
+- `capability.register`
+- `capability.invoke`
+- `capability.bind_runtime`
+- `module.runtime.register`
+- `module.runtime.read`
+- `module.runtime.health_check`
+- `mcp.server.register`
+- `mcp.server.read`
+- `mcp.server.disable`
+- `mcp.server.health_check`
+- `mcp.tools.sync`
+- `mcp.tool.invoke`
+- `mcp.mapping.read`
+- `mcp.mapping.write`
+- `goal.create`
+- `goal.read`
+- `goal.transition`
+- `task.create`
+- `task.read`
+- `task.transition`
+- `task.run`
+- `schedule.create`
+- `schedule.read`
+- `schedule.update`
+- `cycle.template.create`
+- `cycle.template.read`
+- `cycle.template.disable`
+- `cycle.run`
+- `cycle.read`
+- `cycle.step.run`
+- `cycle.status.read`
+- `sleep_consolidation.run`
+- `maintenance.run`
+- `trace.read`
+- `learning.record`
+- `reflection.create`
+- `reflection.read`
+- `skill.candidate.create`
+- `skill.candidate.read`
+- `skill.candidate.update`
+- `skill.promote`
+- `skill.read`
+- `skill.activate`
+- `skill.disable`
+- `skill.archive`
+- `skill.match`
+- `identity.actor.create`
+- `identity.actor.read`
+- `identity.actor.disable`
+- `identity.workspace.create`
+- `identity.workspace.read`
+- `identity.workspace.archive`
+- `identity.membership.create`
+- `identity.membership.read`
+- `identity.membership.revoke`
+- `identity.permission.create`
+- `identity.permission.read`
+- `identity.permission.revoke`
+- `scope.resolve`
+- `evidence.create`
+- `evidence.read`
+- `evidence.search`
+- `evidence.link`
+- `evidence.ground`
+- `evidence.delete`
+
+Semantic adapter status reads and TurboVec status checks use the generic
+`memory.retrieve` action. Semantic indexing, TurboVec rebuild, and TurboVec
+single-memory reindex use the generic `memory.write` action. The policy
+vocabulary does not add vector-engine-specific or domain-specific actions.
+
+Domain policies will live outside Brain core later. Finance, trading, IT,
+legal, healthcare, HR, procurement, and other vertical rules must not be encoded
+in the core policy file.
+
+## Fail Closed
+
+Policy failures fail closed. If the policy engine is unavailable, malformed, or
+returns an invalid response, AION Brain returns a deny decision with reason
+`policy_engine_unavailable`.
+
+## Event Reaction Policy
+
+Event Reaction Router operations use generic event policy actions only.
+Subscription create/read/disable controls who can define or pause reactions.
+`event.dispatch` gates manual or opt-in intake dispatch. `event.reaction.run`
+gates every matched reaction action before any target service is called.
+
+Dry-run dispatch and low-risk reaction evaluation are allowed only when policy
+permits the actor and scope. Controlled actions still pass autonomy, risk, and
+approval gates. High and critical risk reactions require approval through the
+existing elevated-risk policy path.
+
+Dead-letter read, resolve, and replay are policy-gated. Replay is bounded,
+dry-run by default, and fails closed if the original event or router is
+unavailable. The core policy vocabulary stays domain-neutral and does not add
+target-specific vertical verbs.
+
+## Identity and Scope Policy
+
+Identity and workspace operations are generic Brain control-plane actions.
+Actor, workspace, membership, permission, and scope APIs all pass through the
+policy adapter before persistence or scope resolution.
+
+Policy input enrichment adds request-time actor context, roles, permissions,
+resolved security scope, workspace ID, and dev-mode state to `PolicyRequest`.
+Modules never self-authorize identity, workspace, membership, permission, or
+scope decisions.
+
+Development owner context may authorize local setup when `AION_ENV=development`
+and dev auth is enabled. Outside that dev-mode path, identity reads require
+matching generic permissions and identity mutations require owner or admin
+context. Scope resolution applies deny-wins permission semantics, blocks
+disabled actors, and constrains archived workspaces.
+
+Production authentication policies will be introduced outside Brain core later.
+The current policy vocabulary remains generic and does not include OAuth, SSO,
+tenant billing, or vertical-domain permission names.
+
+## Evidence Policy
+
+Evidence access uses generic `evidence.*` actions. `evidence.read` and
+`evidence.search` are low-risk actions when scope permits. `evidence.create`
+is allowed for low and medium risk when policy permits. `evidence.link` is a
+medium-risk relation write. `evidence.ground` is allowed for low and medium
+risk because it creates deterministic grounding claims without model calls.
+`evidence.delete` requires approval.
+
+Restricted evidence requires explicit `evidence.restricted.read` permission.
+Policy failures fail closed. Evidence policy does not fetch URLs, parse files,
+run OCR, invoke external storage SDKs, call model providers, or encode
+domain-specific evidence rules.
+
+## Execution Policy
+
+Execution uses generic policy actions only. `plan.execute` gates the run,
+`execution.step` gates each step, and `approval.request` records approval
+checkpoints. `dry_run` execution is allowed for low and medium risk when policy
+allows it. `controlled` execution still requires explicit policy evaluation.
+
+High and critical risks require approval. Unknown execution modes and unknown
+risks are denied. Capability invocation remains governed by `capability.invoke`
+and cannot self-authorize inside a module.
+
+## Risk, Guardrail, and Approval Policy
+
+Risk, guardrail, and approval control-plane actions stay generic:
+
+- `risk.assess`
+- `guardrail.rule.create`
+- `guardrail.rule.read`
+- `guardrail.rule.disable`
+- `guardrail.evaluate`
+- `approval.request.create`
+- `approval.request.read`
+- `approval.decision.create`
+- `approval.request.cancel`
+- `approval.expire`
+
+`risk.assess`, `guardrail.rule.read`, `guardrail.evaluate`,
+`approval.request.read`, and `approval.expire` are low-risk control-plane
+actions when scope permits. Guardrail creation, guardrail disabling, approval
+creation, approval decisions, and approval cancellation require explicit policy
+evaluation.
+
+Risk and guardrails fail closed. Critical generic risk is blocked by default at
+the guardrail layer, while high generic risk requires approval when approval is
+absent. Approval records do not self-authorize execution. A later execution,
+model, workflow, task, skill, module, or MCP request must still pass policy and
+present approval evidence.
+
+## Runtime Policy
+
+Module runtime registration is gated by `module.runtime.register` and requires
+medium-risk approval. Runtime reads use `module.runtime.read`, and health
+checks use `module.runtime.health_check`. Capability-to-runtime binding is
+gated by `capability.bind_runtime`.
+
+Capability invocation is still generic `capability.invoke`. Dry-run invocation
+is allowed for low and medium risk when policy allows it. Controlled invocation
+is allowed for low risk, and medium controlled invocation requires approval.
+High and critical invocation require approval. Unknown runtime types, unknown
+risks, and unknown modes are denied.
+
+HTTP runtime type is not executable in v0.1. MCP is an optional
+disabled-by-default adapter that can dry-run mapped capabilities safely and can
+perform controlled fake in-memory invocation only when explicitly enabled for
+tests or local demos. Policy and gateway behavior fail closed when runtime
+configuration, transport permissions, or health is unsafe.
+
+## MCP Policy
+
+MCP uses generic policy actions only:
+
+- `mcp.server.register`
+- `mcp.server.read`
+- `mcp.server.disable`
+- `mcp.server.health_check`
+- `mcp.tools.sync`
+- `mcp.tool.invoke`
+- `mcp.mapping.read`
+- `mcp.mapping.write`
+
+Read actions are low risk and require a development owner context or explicit
+MCP read permission. Registration, disable, sync, and mapping writes require an
+owner/admin context or explicit action permission plus approval.
+
+`mcp.tool.invoke` in `dry_run` mode is allowed for low and medium risk without
+external execution. `controlled` mode requires `mcp_enabled=true`, generic
+`capability.invoke` permission, transport safety, and approval for medium,
+high, or critical risk. HTTP and SSE transports require `mcp.network.use`.
+Stdio transport requires `mcp.stdio.use`. Unknown MCP actions, missing
+transport permission, disabled MCP, and policy failures fail closed.
+
+MCP policy never delegates authorization to MCP servers and never encodes
+domain-specific tool rules.
+
+## Lifecycle Policy
+
+Goal creation, reads, and transitions use generic `goal.*` actions. Cognitive
+task creation, reads, transitions, and explicit runs use generic `task.*`
+actions. Schedule metadata creation, reads, pause, and cancellation use generic
+`schedule.*` actions.
+
+`task.run` evaluates the requested `run_mode`. Low and medium risk dry-runs are
+allowed when policy allows the action. Controlled task runs are allowed only
+after policy evaluation and remain limited by the task runner. High and
+critical task runs require approval. Unknown task run modes fail closed.
+
+No lifecycle policy contains domain-specific actions. The policy engine governs
+the generic control plane only.
+
+## Memory Governance Policy
+
+Memory governance uses generic policy actions:
+
+- `memory.governance.rule.create`
+- `memory.governance.rule.read`
+- `memory.governance.rule.disable`
+- `memory.governance.evaluate`
+- `memory.decay.recompute`
+- `memory.retention.sweep`
+- `memory.forget.request`
+- `memory.forget.execute`
+- `memory.conflict.scan`
+- `memory.conflict.read`
+- `memory.conflict.resolve`
+- `memory.compact`
+
+Rule reads, governance evaluation, decay recompute, conflict scans, conflict
+reads, retention dry-runs, and forget requests are allowed only after policy
+evaluation. Forget requests are allowed to enter the governed approval workflow;
+forget execution remains approval-aware and high-risk targets fail closed
+without approval. Rule mutation, conflict resolution, retention mutation, and
+compaction pass through policy and may require approval depending on risk and
+settings.
+
+Memory policy never treats vector recall, graph recall, or compacted summaries
+as truth. Governance failures fail closed, and no governance policy contains
+domain-specific actions.
+
+## Reflection and Skill Policy
+
+Reflection creation and reads use generic `reflection.*` actions. Skill
+candidate creation, reads, and review updates use `skill.candidate.*` actions.
+Skill promotion, reads, lifecycle transitions, and matching use generic
+`skill.*` actions.
+
+Read and match actions are low-risk allowed when policy permits. Candidate
+creation can be low or medium risk. Candidate update, skill disable, and skill
+archive require policy evaluation. `skill.promote` and `skill.activate` fail
+closed for high and critical risk unless approval is present.
+
+Skills are procedural memory data. Policy never grants a skill permission to
+self-authorize, rewrite source code, execute shell commands, or call external
+model providers.
+
+## Visual and Observability Policy
+
+Visual projection and observability use generic policy actions:
+
+- `visual.map.read`
+- `visual.telemetry.read`
+- `visual.stream.read`
+- `visual.snapshot.create`
+- `visual.snapshot.read`
+- `visual.timeline.read`
+- `observability.read`
+- `observability.event.create`
+
+Visual and observability reads require generic `trace.read` or
+`telemetry.read` permission. Stream reads require `visual.stream.read`.
+Snapshot creation requires `visual.snapshot.create`. Internal development owner
+context may record local observability events. Unknown visual actions and
+policy failures fail closed. No visual policy contains frontend-specific or
+domain-specific rules.
+
+## Durable Workflow Policy
+
+Durable workflow governance uses generic policy actions:
+
+- `workflow.create`
+- `workflow.read`
+- `workflow.activate`
+- `workflow.disable`
+- `workflow.run`
+- `workflow.pause`
+- `workflow.resume`
+- `workflow.cancel`
+- `workflow.retry`
+- `workflow.scheduler.tick`
+- `workflow.worker.start_once`
+- `workflow.engine.status`
+- `workflow.temporal.status`
+- `workflow.heartbeat.write`
+
+Workflow reads and status checks are low-risk read actions. Definition writes,
+state transitions, explicit scheduler ticks, explicit worker ticks, retries,
+and heartbeat writes pass through policy. High and critical workflow risk
+levels require approval before controlled execution. Unknown workflow actions
+fail closed. No workflow policy contains domain-specific business rules.
+
+## Replay and Regression Policy
+
+Cognitive replay and regression use generic policy actions:
+
+- `snapshot.create`
+- `snapshot.read`
+- `replay.run`
+- `replay.read`
+- `regression.case.create`
+- `regression.case.read`
+- `regression.case.update`
+- `regression.run`
+- `regression.read`
+- `eval.adapter.run`
+
+Snapshot reads require trace-read permission. Replay is local and
+side-effect-free. Regression runs are local deterministic operations. The
+evaluation adapter action allows only the local adapter in v0.1; Promptfoo and
+Ragas fail closed until a future task explicitly enables them.
+
+## Model Gateway Policy
+
+Model gateway governance uses generic actions:
+
+- `model.provider.register`
+- `model.provider.read`
+- `model.provider.disable`
+- `model.provider.health_check`
+- `model.profile.register`
+- `model.profile.read`
+- `model.profile.disable`
+- `model.gateway.complete`
+- `model.route`
+- `model.complete`
+- `model.usage.read`
+- `model.budget.create`
+- `model.budget.read`
+- `model.budget.update`
+
+The deterministic provider is allowed for local development. Provider and
+profile reads are low-risk reads. Provider/profile registration and disabling
+require owner or admin context. External `model.complete` is denied unless
+`allow_external=true`, the model gateway is explicitly enabled, and the actor
+has `model.external.use`. High and critical model completion requires approval.
+Budget writes require owner or admin context. Unknown model actions, provider
+types, risks, and policy failures fail closed.
+
+## Attention Policy
+
+Attention and working memory use generic policy actions:
+
+- `attention.focus.create`
+- `attention.focus.read`
+- `attention.focus.update`
+- `attention.signal.create`
+- `attention.signal.read`
+- `attention.decide`
+- `attention.signal.update`
+- `working_memory.write`
+- `working_memory.read`
+- `working_memory.delete`
+- `interrupt.create`
+- `interrupt.read`
+- `interrupt.decide`
+- `context.budget.allocate`
+
+Focus read is scoped. Focus create/update requires actor context in scope.
+Attention signal creation is allowed for internal Brain services and scoped
+actors. Working memory read/write is scoped; delete requires scoped authority.
+Context budget allocation is an internal Brain control-plane action. Unknown
+attention actions fail closed. No attention policy contains domain-specific
+priority rules.
+
+## Autonomy Policy
+
+Autonomy governance uses generic policy actions:
+
+- `autonomy.profile.create`
+- `autonomy.profile.read`
+- `autonomy.profile.disable`
+- `autonomy.run_level.set`
+- `autonomy.run_level.read`
+- `autonomy.run_level.end`
+- `autonomy.delegation.create`
+- `autonomy.delegation.read`
+- `autonomy.delegation.revoke`
+- `autonomy.decide`
+- `autonomy.status.read`
+
+Profile, run-level, delegation, status, and decision reads are low-risk read
+actions when scoped. Profile creation, disabling, run-level changes,
+delegation creation/revocation, and autonomy decisions must pass through the
+policy engine. Unknown autonomy actions fail closed.
+
+Autonomy policy remains generic. It does not contain vertical business rules
+and does not grant modules permission to self-authorize. External models,
+external tools, scheduler control, background workers, skill promotion, and
+memory forgetting also require the Autonomy Governor's explicit profile gates.
+
+## Cognitive Cycle Policy
+
+Cognitive cycles use generic policy actions:
+
+- `cycle.template.create`
+- `cycle.template.read`
+- `cycle.template.disable`
+- `cycle.run`
+- `cycle.read`
+- `cycle.step.run`
+- `cycle.status.read`
+- `sleep_consolidation.run`
+- `maintenance.run`
+
+Template reads, run reads, status reads, manual dry-run cycle execution, and
+step dry-runs are low-risk actions when scoped. Controlled cycle mode still
+passes through policy, autonomy, risk, and approval checks. Controlled mode
+requires approval by default.
+
+Sleep consolidation and maintenance actions are coordinators over existing
+Brain services. They do not self-authorize memory mutation, skill promotion,
+external model calls, external tool calls, hard deletion, scheduler loops, or
+domain-specific behavior. Policy failures fail closed, and the cycle run is
+recorded as blocked or waiting for approval instead of executing steps.
+
+## Command and Consistency Policy
+
+The command consistency layer uses generic policy actions:
+
+- `command.dispatch`
+- `command.read`
+- `command.cancel`
+- `idempotency.read`
+- `outbox.enqueue`
+- `outbox.read`
+- `outbox.process`
+- `outbox.cancel`
+- `inbox.receive`
+- `inbox.read`
+- `inbox.process`
+- `processing_lease.acquire`
+- `processing_lease.release`
+- `consistency.check`
+- `consistency.repair`
+
+Dry-run command dispatch is allowed for low and medium risk when scoped.
+Controlled high and critical risk dispatch requires approval. Outbox enqueue
+and inbox receive are internal Brain service actions. Outbox processing is
+manual and non-dry-run processing requires explicit configuration and
+authorization. Consistency checks are read-like diagnostics; repair requires
+owner/admin authority and is limited to safe state transitions.
+
+Unknown command, idempotency, outbox, inbox, lease, and consistency actions
+fail closed. The policy vocabulary remains generic and contains no vertical
+business rules.
+
+## API Support Policy
+
+API hardening uses generic policy actions:
+
+- `api.request.read`
+- `api.openapi_hygiene.read`
+- `api.error_codes.read`
+
+Error code reads are low-risk. Request audit reads require an owner/admin,
+developer owner, `trace.read`, or `api.request.read` permission. OpenAPI
+hygiene reads require owner/admin or developer owner authority. Unknown API
+support actions fail closed.
+
+## Module Developer Policy
+
+The Module Developer Kit uses generic policy actions:
+
+- `module.package.submit`
+- `module.package.read`
+- `module.package.disable`
+- `module.package.certify`
+- `module.contract_test.run`
+- `module.scaffold.create`
+- `module.compatibility.check`
+
+Package submission, certification, disable, scaffold generation, compatibility
+checks, and contract tests all pass through policy and fail closed.
+
+## Sandbox, Secret, and Connector Policy
+
+Sandbox governance uses generic policy actions:
+
+- `sandbox.profile.create`
+- `sandbox.profile.read`
+- `sandbox.profile.disable`
+- `sandbox.profile.validate`
+- `sandbox.run`
+- `runtime_permission.grant`
+- `runtime_permission.read`
+- `runtime_permission.revoke`
+- `secret_ref.create`
+- `secret_ref.read`
+- `secret_ref.disable`
+- `secret_ref.rotate`
+- `connector.create`
+- `connector.read`
+- `connector.disable`
+- `connector.validate`
+
+Sandbox profile reads and validation are scoped read-like actions. Dry-run
+sandbox runs are allowed when scoped and policy permits. Controlled sandbox
+runs fail closed in v0.1 unless execution is explicitly enabled and approval is
+present. Runtime permission grants and revocations require owner/admin style
+authority. Secret refs never return raw secret values. Connector validation is
+metadata-only and does not connect to external systems.
+
+Unknown sandbox, secret ref, runtime permission, and connector actions are
+denied. The policy vocabulary remains generic and contains no vertical
+business rules.
+
+## Policy Catalog Governance
+
+AION Brain owns a generic policy action catalog and permission matrix. The
+catalog records known action types, default risk levels, required permissions,
+role templates, policy simulations, policy test cases, coverage reports, bundle
+exports, and OPA status checks.
+
+Generic policy catalog actions:
+
+- `policy.catalog.create`
+- `policy.catalog.read`
+- `policy.catalog.update`
+- `policy.permission.create`
+- `policy.permission.read`
+- `policy.permission.update`
+- `policy.role_template.create`
+- `policy.role_template.read`
+- `policy.role_template.update`
+- `policy.simulate`
+- `policy.test_case.create`
+- `policy.test_case.read`
+- `policy.test.run`
+- `policy.coverage.read`
+- `policy.bundle.export`
+- `policy.opa.status`
+
+Read actions are available to owner, admin, auditor, viewer, or specifically
+permissioned actors. Create/update actions require owner/admin style authority.
+Simulation, test runs, bundle export, and OPA status are governance actions for
+owner/admin/auditor flows. Unknown policy catalog actions fail closed.
+
+The Brain core catalog must not contain finance, trading, IT, legal,
+healthcare, HR, procurement, or other vertical policy actions. Domain policy
+catalogs may be added outside Brain core later.
+
+## Scenario and Release Baseline Policy
+
+The scenario harness uses generic policy actions:
+
+- `scenario.create`
+- `scenario.read`
+- `scenario.disable`
+- `scenario.run`
+- `scenario.seed_defaults`
+- `demo_fixture.read`
+- `demo_fixture.load`
+- `release_baseline.run`
+- `release_baseline.read`
+
+Scenario reads are scoped. Scenario creation, disabling, and default seeding
+require owner or admin style authority. Dry-run scenario execution is allowed
+for owner, admin, or operator style authority. Controlled scenario execution is
+denied by default in v0.1 unless explicit configuration changes it.
+
+Demo fixture reads and dry-run loads are generic local validation actions.
+Release baseline runs require owner or admin style authority and combine
+scenario results with quality gate summaries. Unknown scenario, fixture, or
+release baseline actions fail closed.
+
+## Versioning and Freeze Gate Policy
+
+Generic versioning and freeze actions:
+
+- `version.manifest.create`
+- `version.manifest.read`
+- `version.manifest.freeze`
+- `version.feature.create`
+- `version.feature.read`
+- `version.feature.deprecate`
+- `compatibility.matrix.generate`
+- `compatibility.matrix.read`
+- `migration.baseline.generate`
+- `release.artifact.generate`
+- `freeze_gate.run`
+- `freeze_gate.read`
+- `release.package.create`
+- `release.package.read`
+- `release.package.validate`
+- `release.handoff.read`
+- `sdk.compatibility.check`
+
+Read and compatibility checks are low-risk scoped actions. Manifest creation,
+feature mutation, compatibility generation, migration baseline generation,
+release artifact generation, freeze gate runs, and release package creation are
+governance actions. They must remain generic, metadata-only, local-first, and
+policy-gated. Release package reads, validation reads, and handoff reads are
+scoped read actions. Unknown versioning, freeze, or release package actions fail
+closed.
+
+## Local Backup and Restore Policy
+
+Generic backup and restore-preview actions:
+
+- `backup.create`
+- `backup.read`
+- `backup.validate`
+- `backup.restore.preview`
+- `backup.restore.apply`
+
+Backup reads, validation, and restore preview are low-risk scoped actions.
+Backup creation is a medium-risk local operation and requires policy approval in
+the default OPA policy. Restore apply is a high-risk action and must have
+approval present; AION v0.1 also disables restore apply by default at the
+service layer.
+
+Backup policy never authorizes direct database restore, cloud upload, raw secret
+export, or domain-specific resource actions. Unknown backup actions fail closed.
+
+## Security Baseline Policy
+
+Generic local security baseline actions:
+
+- `security.scan.run`
+- `security.scan.read`
+- `security.threat_model.create`
+- `security.threat_model.read`
+- `security.threat_model.update`
+- `security.control.create`
+- `security.control.read`
+- `security.control.update`
+- `security.hardening.run`
+- `security.hardening.read`
+
+Scan and hardening runs require owner, admin, or auditor style authority because
+they inspect local posture. Scan, threat model, control, and hardening reads
+also require owner, admin, or auditor style authority. Threat model and control
+create/update actions require owner or admin authority.
+
+Security baseline policy stays generic and local. Unknown security actions fail
+closed, and external scanner integrations do not define Brain core policy.
+
+## Runtime Configuration Policy
+
+Generic runtime configuration actions:
+
+- `runtime_config.profile.create`
+- `runtime_config.profile.read`
+- `runtime_config.profile.update`
+- `runtime_config.feature_override.create`
+- `runtime_config.feature_override.read`
+- `runtime_config.feature_override.update`
+- `runtime_config.snapshot.create`
+- `runtime_config.snapshot.read`
+- `runtime_config.validate`
+- `runtime_config.status.read`
+- `runtime_config.change.read`
+
+Profile reads are available to owner, admin, auditor, and scoped viewer style
+authority. Profile mutation and feature override mutation require owner or
+admin style authority. Snapshot creation, validation, and status inspection are
+policy-gated local governance actions.
+
+Runtime configuration policy never authorizes raw secret storage, process
+environment mutation, unsafe default enablement, or domain-specific config
+logic. Unknown runtime configuration actions fail closed.
+
+## Resilience Policy
+
+Generic resilience actions:
+
+- `resilience.status.read`
+- `resilience.dependency.check`
+- `resilience.dependency.read`
+- `resilience.retry_policy.create`
+- `resilience.retry_policy.read`
+- `resilience.retry_policy.update`
+- `resilience.circuit_breaker.create`
+- `resilience.circuit_breaker.read`
+- `resilience.circuit_breaker.update`
+- `resilience.degraded.read`
+- `resilience.degraded.resolve`
+- `resilience.fault_rule.create`
+- `resilience.fault_rule.read`
+- `resilience.fault_rule.update`
+- `resilience.test.run`
+- `resilience.test.read`
+
+Read actions are low-risk scoped control-plane reads. Retry policy and circuit
+breaker mutations are medium-risk governance actions. Fault rule creation and
+updates require development context and explicit authority because fault
+injection must stay disabled by default. Resilience tests are deterministic and
+local.
+
+Resilience policy never authorizes background workers, external failover,
+infrastructure repair, raw secret exposure, or domain-specific recovery logic.
+Unknown resilience actions fail closed.
