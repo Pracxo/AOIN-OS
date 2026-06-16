@@ -143,9 +143,7 @@ class CognitiveCycleOrchestrator:
         if autonomy is not None and not bool(getattr(autonomy, "allow", False)):
             return self._blocked_run(
                 run.model_copy(
-                    update={
-                        "autonomy_decision_id": getattr(autonomy, "autonomy_decision_id", None)
-                    }
+                    update={"autonomy_decision_id": getattr(autonomy, "autonomy_decision_id", None)}
                 ),
                 "autonomy_denied",
                 str(getattr(autonomy, "reason", "autonomy_denied")),
@@ -487,9 +485,7 @@ class CognitiveCycleOrchestrator:
                 trace_id=request.trace_id,
                 actor_id=request.actor_id,
                 workspace_id=request.workspace_id,
-                requested_mode="dry_run"
-                if request.mode == "dry_run"
-                else "supervised_controlled",
+                requested_mode="dry_run" if request.mode == "dry_run" else "supervised_controlled",
                 action_type="cycle.run",
                 resource_type="cognitive_cycle",
                 resource_id=request.cycle_run_id,

@@ -67,9 +67,7 @@ _TOKEN_ASSIGNMENT = re.compile(
     r"(?i)\b(token|access_token|refresh_token)\b\s*[:=]\s*[\"']?"
     r"([A-Za-z0-9][A-Za-z0-9._~+/=-]{15,})"
 )
-_PASSWORD_ASSIGNMENT = re.compile(
-    r"(?i)\b(password|passwd)\b\s*[:=]\s*[\"']?([^\"'\s]{8,})"
-)
+_PASSWORD_ASSIGNMENT = re.compile(r"(?i)\b(password|passwd)\b\s*[:=]\s*[\"']?([^\"'\s]{8,})")
 _BEARER = re.compile(r"(?i)\bbearer\s+([A-Za-z0-9._~+/=-]{16,})")
 _PRIVATE_KEY = re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----")
 _RAW_SECRET_VALUE = re.compile(r"\b(sk-[A-Za-z0-9_-]{10,})\b")
@@ -272,10 +270,7 @@ class SecretScanner:
         for lineno, line in enumerate(lines, start=1):
             if request.metadata.get("allow_ignore_comments", True) and IGNORE_COMMENT in line:
                 continue
-            if (
-                self._settings.security_allow_secret_scan_ignore_comments
-                and IGNORE_COMMENT in line
-            ):
+            if self._settings.security_allow_secret_scan_ignore_comments and IGNORE_COMMENT in line:
                 continue
             findings.extend(_line_findings(scan_id, relative, lineno, line, path.name))
         return findings
@@ -438,9 +433,7 @@ def _is_env_file(path: Path) -> bool:
 
 def _is_credential_named(path: Path) -> bool:
     lowered = path.name.lower()
-    has_credential_name = any(
-        name in lowered for name in ("credential", "credentials", "secret")
-    )
+    has_credential_name = any(name in lowered for name in ("credential", "credentials", "secret"))
     return has_credential_name and path.name != ".env.example"
 
 

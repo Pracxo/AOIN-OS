@@ -38,4 +38,3 @@ class CommandsResource:
                 "limit": limit,
             },
         )
-

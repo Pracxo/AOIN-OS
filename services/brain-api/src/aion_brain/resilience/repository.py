@@ -280,9 +280,7 @@ class ResilienceRepository:
         )
 
     def get_circuit_breaker(self, name: str) -> CircuitBreaker | None:
-        row = self._first(
-            select(aion_circuit_breakers).where(aion_circuit_breakers.c.name == name)
-        )
+        row = self._first(select(aion_circuit_breakers).where(aion_circuit_breakers.c.name == name))
         return CircuitBreaker(**dict(row)) if row else None
 
     def list_circuit_breakers(
@@ -376,8 +374,7 @@ class ResilienceRepository:
     def get_test_run(self, resilience_test_run_id: str) -> ResilienceTestRun | None:
         row = self._first(
             select(aion_resilience_test_runs).where(
-                aion_resilience_test_runs.c.resilience_test_run_id
-                == resilience_test_run_id
+                aion_resilience_test_runs.c.resilience_test_run_id == resilience_test_run_id
             )
         )
         return ResilienceTestRun(**dict(row)) if row else None
@@ -415,4 +412,3 @@ class ResilienceRepository:
         if not self._schema_ready and self._auto_create:
             resilience_metadata.create_all(self._engine)
             self._schema_ready = True
-

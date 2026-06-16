@@ -12,4 +12,3 @@ def test_content_hash_normalizes_line_endings_and_trailing_whitespace() -> None:
     """Line ending normalization preserves stable content addressing."""
     assert sha256_text("alpha \r\nbeta  \n") == sha256_text("alpha\nbeta\n")
     assert normalize_text_for_hash("alpha  \r\nbeta\t") == "alpha\nbeta"
-

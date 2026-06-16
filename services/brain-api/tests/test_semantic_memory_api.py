@@ -141,9 +141,7 @@ def test_turbovec_status_api_returns_public_status() -> None:
     """TurboVec status endpoint does not expose vendor objects."""
     app.dependency_overrides[get_semantic_memory_service] = lambda: FakeSemanticService()
     try:
-        response = TestClient(app).get(
-            "/brain/memory/semantic/turbovec/status?index_name=default"
-        )
+        response = TestClient(app).get("/brain/memory/semantic/turbovec/status?index_name=default")
     finally:
         app.dependency_overrides.clear()
 

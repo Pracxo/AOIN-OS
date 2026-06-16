@@ -142,9 +142,7 @@ class SkillService:
         )
         if not decision.allow:
             raise ValueError(f"policy_denied:{decision.reason}")
-        updated = candidate.model_copy(
-            update={"status": status, "updated_at": datetime.now(UTC)}
-        )
+        updated = candidate.model_copy(update={"status": status, "updated_at": datetime.now(UTC)})
         saved = _save_candidate(self._repository, updated)
         self._emit_candidate(saved, "skill_candidate_updated", saved.confidence)
         return saved

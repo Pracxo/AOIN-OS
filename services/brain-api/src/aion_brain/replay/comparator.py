@@ -136,9 +136,7 @@ def _reason(path: str, source: Any, replay: Any) -> str:
         return "plan_action_changed"
     if "policy" in path and path.endswith("allow"):
         return "policy_outcome_changed"
-    if "evaluation" in path and isinstance(source, int | float) and isinstance(
-        replay, int | float
-    ):
+    if "evaluation" in path and isinstance(source, int | float) and isinstance(replay, int | float):
         return "evaluation_score_changed"
     return "semantic_value_changed"
 
@@ -152,9 +150,7 @@ def _severity(path: str, source: Any, replay: Any, reason: str) -> str:
         return "high"
     if reason == "required_section_missing" and path.count(".") <= 2:
         return "high"
-    if reason == "required_item_missing" and (
-        "plan.steps" in path or "policy" in path
-    ):
+    if reason == "required_item_missing" and ("plan.steps" in path or "policy" in path):
         return "high"
     if (
         "evaluation" in path

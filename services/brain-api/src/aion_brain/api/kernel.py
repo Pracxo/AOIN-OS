@@ -229,8 +229,11 @@ def _emit(
     node_id: str,
     intensity: float,
 ) -> None:
+    emit = getattr(container.telemetry_service, "emit", None)
+    if not callable(emit):
+        return
     try:
-        container.telemetry_service.emit(
+        emit(
             VisualTelemetryEvent(
                 telemetry_id=f"telemetry-{node_id}-{event_type}",
                 trace_id=node_id,

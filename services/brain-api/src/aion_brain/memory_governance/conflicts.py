@@ -216,8 +216,7 @@ class MemoryConflictService:
         conflicts: list[MemoryConflict] = []
         for key, group in grouped.items():
             values = {
-                _metadata_text(record.metadata, "preference_value", "value")
-                for record in group
+                _metadata_text(record.metadata, "preference_value", "value") for record in group
             }
             if len(group) > 1 and len(values - {""}) > 1:
                 conflicts.append(

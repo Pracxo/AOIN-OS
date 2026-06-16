@@ -152,3 +152,166 @@ or optional adapter clients.
 The SDK calls public release package APIs only. It does not read local files,
 compute checksums, upload artifacts, call registries, or import Brain API
 internals.
+
+## Dialogue and Responses Resources
+
+`client.dialogue` supports:
+
+- `create_session(payload)`
+- `get_session(dialogue_session_id, scope)`
+- `list_sessions(scope, status=None, session_type=None, limit=50)`
+- `close_session(dialogue_session_id, reason)`
+- `create_message(payload)`
+- `list_messages(dialogue_session_id, scope, limit=100)`
+- `turn(payload)`
+- `pending_clarifications(scope, dialogue_session_id=None)`
+- `answer_clarification(clarification_id, answer)`
+- `feedback(payload)`
+
+`client.responses` supports:
+
+- `compose(payload)`
+- `get(response_id)`
+- `verify(response_id)`
+- `deliver_local(response_id)`
+- `deliveries(response_id)`
+
+The SDK uses public Brain HTTP APIs only. It does not import `aion_brain`,
+database drivers, provider SDKs, frontend code, or external delivery clients.
+Dialogue turns remain backend-only and do not execute controlled actions.
+
+## Beliefs Resource
+
+`client.beliefs` supports:
+
+- `create_claim(payload)`
+- `get_claim(claim_id, scope)`
+- `query(payload)`
+- `revise_claim(claim_id, payload)`
+- `create_support(payload)`
+- `list_supports(claim_id)`
+- `list_contradictions(scope, status=None, severity=None, limit=100)`
+- `resolve_contradiction(contradiction_id, reason)`
+- `extract(payload)`
+- `run_truth_maintenance(payload)`
+- `get_truth_maintenance(truth_run_id)`
+
+The SDK treats belief state as public Brain HTTP contracts only. It does not
+import `aion_brain`, database clients, model providers, fact-checking services,
+or visual frontend libraries.
+
+## Concepts and Entities Resources
+
+`client.concepts` supports:
+
+- `create(payload)`
+- `list(scope, query=None, concept_type=None, status="active", limit=100)`
+- `list_concepts(scope, query=None, concept_type=None, status="active", limit=100)`
+- `get(concept_id, scope)`
+- `archive(concept_id, reason, scope)`
+
+`client.entities` supports:
+
+- `create(payload)`
+- `get(entity_id, scope)`
+- `query(payload)`
+- `archive(entity_id, reason, scope)`
+- `delete(entity_id, reason, scope)`
+- `add_alias(payload, scope)`
+- `list_aliases(entity_id, scope)`
+- `create_mention(payload)`
+- `list_mentions(entity_id, scope, limit=100)`
+- `extract_mentions(payload)`
+- `resolve(payload)`
+- `get_resolution_run(resolution_run_id, scope)`
+- `create_reference(payload, scope)`
+- `list_references(scope, **filters)`
+- `propose_merge(payload, scope)`
+- `approve_merge(proposal_id, reason_or_payload, scope)`
+- `reject_merge(proposal_id, reason_or_payload, scope)`
+- `propose_split(payload, scope)`
+- `approve_split(proposal_id, reason_or_payload, scope)`
+- `reject_split(proposal_id, reason_or_payload, scope)`
+
+The SDK uses public Brain HTTP APIs only. It does not import `aion_brain`,
+external NLP libraries, model providers, image recognition services, or domain
+ontology packages.
+## DecisionsResource
+
+`client.decisions` exposes decision frames, options, utility profiles,
+evaluation, recommendation, counterfactual dry-runs, and decision journal
+records. SDK decision helpers call public Brain APIs only and never execute a
+selected option.
+
+## Outcomes Resource
+
+`client.outcomes` supports:
+
+- `create(payload)`
+- `get(outcome_id)`
+- `query(payload)`
+- `close(outcome_id, reason)`
+- `delete(outcome_id, reason)`
+- `create_expected_effect(payload)`
+- `get_expected_effect(expected_effect_id)`
+- `create_observed_effect(payload)`
+- `get_observed_effect(observed_effect_id)`
+- `verify(payload)`
+- `get_verification(verification_run_id)`
+- `create_attribution(payload)`
+- `list_attributions(**filters)`
+- `create_feedback(payload)`
+- `list_feedback(**filters)`
+- `resolve_feedback(feedback_id, resolution)`
+- `learning_bridge(outcome_id, dry_run=True)`
+
+The SDK calls public Brain HTTP APIs only. It does not import `aion_brain`,
+database clients, provider SDKs, frontend code, or external observability
+clients. Outcome learning bridge calls remain review-only.
+
+## Learning Resource
+
+`client.learning` supports:
+
+- `create_experience(payload)`
+- `get_experience(experience_id, scope)`
+- `query(payload)`
+- `archive_experience(experience_id, reason)`
+- `mine_patterns(payload)`
+- `list_patterns(scope=...)`
+- `list_lessons(scope=...)`
+- `synthesize(payload)`
+- `get_synthesis(synthesis_run_id)`
+- `list_skill_suggestions(scope=...)`
+- `accept_skill_suggestion(suggestion_id, reason)`
+- `reject_skill_suggestion(suggestion_id, reason)`
+- `convert_skill_suggestion(suggestion_id, reason=..., approval_present=False)`
+- `list_regression_suggestions(scope=...)`
+- `accept_regression_suggestion(regression_suggestion_id, reason)`
+- `reject_regression_suggestion(regression_suggestion_id, reason)`
+
+The SDK exposes learning synthesis through public Brain APIs only. It does not
+promote skills, create regression cases, call model providers, call external
+observability tools, or import Brain internals.
+
+## SelfModelResource
+
+`client.self_model` supports:
+
+- `describe(scope, include_capabilities=True, include_limitations=True, format="structured")`
+- `capabilities(scope, status=None, capability_type=None)`
+- `refresh_capabilities(scope, dry_run=True)`
+- `create_limitation(payload)`
+- `list_limitations(scope, status=None, category=None, severity=None, disclosure_required=None)`
+- `seed_limitations(scope, dry_run=True)`
+- `resolve_limitation(limitation_id, reason)`
+- `calibrate_confidence(payload)`
+- `list_confidence(trace_id=None, response_id=None, limit=100)`
+- `run_assessment(payload)`
+- `get_assessment(self_assessment_id)`
+- `create_introspection(payload)`
+- `get_introspection(introspection_snapshot_id, scope)`
+- `list_introspection(scope, snapshot_type=None, status=None, limit=50)`
+
+The SDK calls public Brain APIs only. It does not import `aion_brain`, model
+providers, frontend code, database clients, or external observability SDKs.

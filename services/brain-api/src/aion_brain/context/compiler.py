@@ -55,6 +55,7 @@ class ContextCompiler:
         graph_service: GraphMemoryService | None = None,
         capability_catalog: CapabilityCatalog | None = None,
         retrieval_router: RetrievalRouter | None = None,
+        belief_query_service: object | None = None,
         fusion_engine: ContextFusionEngine | None = None,
         attention_controller: AttentionController | None = None,
         context_budgeter: ContextBudgeter | None = None,
@@ -65,6 +66,7 @@ class ContextCompiler:
         self._graph_service = graph_service
         self._capability_catalog = capability_catalog or EmptyCapabilityCatalog()
         self._retrieval_router = retrieval_router
+        self._belief_query_service = belief_query_service
         self._fusion_engine = fusion_engine or ContextFusionEngine()
         self._attention_controller = attention_controller
         self._context_budgeter = context_budgeter
@@ -145,7 +147,13 @@ class ContextCompiler:
                 constraints.append("attention_unavailable")
 
         try:
-            retrieval_request = _retrieval_request(event, intent, scope, attention_decision)
+            retrieval_request = _retrieval_request(
+                event,
+                intent,
+                scope,
+                attention_decision,
+                include_situations=_situation_context_enabled(self._settings),
+            )
             retrieval_result = self._router().retrieve(retrieval_request)
             retrieval_result, budget_constraints = self._apply_context_budget(
                 event=event,
@@ -183,6 +191,12 @@ class ContextCompiler:
             }
         )
         for item in context_bundle.items:
+            if item.source == "belief_state":
+                _append_belief_constraints(item.metadata, constraints)
+            if item.source == "entity_registry":
+                _append_entity_constraints(item.metadata, constraints)
+            if item.source == "situation_model":
+                _append_situation_constraints(item.metadata, constraints)
             known_context.append(
                 {
                     "source": item.source,
@@ -217,6 +231,7 @@ class ContextCompiler:
             memory_service=self._memory_service,
             graph_memory_service=self._graph_service,
             capability_registry=self._capability_catalog,
+            belief_query_service=getattr(self, "_belief_query_service", None),
         )
         return self._retrieval_router
 
@@ -325,6 +340,20 @@ def _packet(
     if intent.goal == "unknown":
         open_questions.append("A clear goal is required before planning can continue.")
 
+    execution_limits: dict[str, Any] = {
+        "no_model_calls": True,
+        "no_capability_execution": True,
+    }
+    for item in known_context:
+        metadata = item.get("metadata")
+        if isinstance(metadata, dict):
+            if metadata.get("decision_frame_id"):
+                execution_limits["decision_frame_id"] = metadata["decision_frame_id"]
+            if metadata.get("decision_record_id"):
+                execution_limits["decision_record_id"] = metadata["decision_record_id"]
+        if item.get("source") == "decision_journal" and item.get("source_id"):
+            execution_limits.setdefault("decision_record_id", item["source_id"])
+
     return ContextPacket(
         context_id=f"context-{event.event_id}",
         intent_id=intent.intent_id,
@@ -336,7 +365,7 @@ def _packet(
         available_capability_ids=capability_ids,
         constraints=constraints,
         open_questions=open_questions,
-        execution_limits={"no_model_calls": True, "no_capability_execution": True},
+        execution_limits=execution_limits,
     )
 
 
@@ -351,12 +380,22 @@ def _retrieval_request(
     intent: IntentFrame,
     scope: list[str],
     attention_decision: AttentionDecision | None = None,
+    *,
+    include_situations: bool = False,
 ) -> RetrievalRequest:
     requested_sources: list[RetrievalSource] = []
     if intent.requires_memory:
         requested_sources.extend(
-            ["lexical_memory", "semantic_memory", "graph_memory", "evidence_vault"]
+            [
+                "lexical_memory",
+                "semantic_memory",
+                "graph_memory",
+                "evidence_vault",
+                "belief_state",
+            ]
         )
+    if include_situations:
+        requested_sources.extend(["situation_model", "temporal_state"])
     if attention_decision is not None:
         requested_sources.append("working_memory")
     requested_sources.append("capability_registry")
@@ -419,6 +458,14 @@ def _setting_int(settings: Settings | None, name: str, default: int) -> int:
     return int(getattr(settings, name, default))
 
 
+def _situation_context_enabled(settings: Settings | None) -> bool:
+    return bool(
+        settings is not None
+        and getattr(settings, "situations_enabled", False)
+        and getattr(settings, "situation_projection_enabled", False)
+    )
+
+
 def _payload_str(payload: dict[str, Any], key: str) -> str | None:
     value = payload.get(key)
     return value if isinstance(value, str) and value else None
@@ -433,3 +480,31 @@ def _unique_sources(sources: list[RetrievalSource]) -> list[RetrievalSource]:
         seen.add(source)
         unique.append(source)
     return unique
+
+
+def _append_belief_constraints(metadata: dict[str, Any], constraints: list[str]) -> None:
+    status = str(metadata.get("status", "unknown"))
+    if status in {"contradicted", "stale"}:
+        constraints.append(f"belief_{status}:{metadata.get('claim_type', 'generic')}")
+    constraints.append("belief_state_items_are_claims_not_absolute_truth")
+
+
+def _append_entity_constraints(metadata: dict[str, Any], constraints: list[str]) -> None:
+    status = str(metadata.get("status", "unknown"))
+    if status == "merged":
+        constraints.append("entity_reference_is_merged")
+    elif status == "archived":
+        constraints.append("entity_reference_is_archived")
+    constraints.append("entity_registry_items_are_references_not_raw_evidence")
+
+
+def _append_situation_constraints(metadata: dict[str, Any], constraints: list[str]) -> None:
+    status = str(metadata.get("status") or "").lower()
+    if status == "stale":
+        constraints.append("situation_projection_stale")
+    if status == "contradicted":
+        constraints.append("state_atom_contradicted")
+    situation_id = metadata.get("situation_id")
+    if isinstance(situation_id, str) and situation_id:
+        constraints.append(f"active_situation_id:{situation_id}")
+    constraints.append("state_atoms_are_recall_not_truth")

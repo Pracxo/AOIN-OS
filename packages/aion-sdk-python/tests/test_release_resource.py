@@ -22,9 +22,7 @@ def test_release_resource_create_package_calls_public_endpoint() -> None:
         seen["path"] = request.url.path
         return httpx.Response(200, json={"release_package_id": "package-1"})
 
-    _client(handler).release.create_package(
-        {"version": "0.1.0", "owner_scope": ["workspace:main"]}
-    )
+    _client(handler).release.create_package({"version": "0.1.0", "owner_scope": ["workspace:main"]})
 
     assert seen == {"method": "POST", "path": "/brain/release-package/create"}
 

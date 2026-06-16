@@ -45,4 +45,3 @@ class EvidenceChunker:
                 index += 1
             cursor += step
         return chunks
-

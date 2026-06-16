@@ -18,6 +18,5 @@ def test_visual_telemetry_emits_runtime_config_events() -> None:
     )
 
     assert any(
-        getattr(event, "event_type", None) == "config_profile_created"
-        for event in telemetry.events
+        getattr(event, "event_type", None) == "config_profile_created" for event in telemetry.events
     )

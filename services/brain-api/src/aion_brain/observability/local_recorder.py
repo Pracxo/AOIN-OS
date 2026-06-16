@@ -46,13 +46,9 @@ class LocalObservabilityRecorder:
             telemetry_event_count=len(telemetry),
             observability_event_count=len(observability_events),
             active_node_count=len({event.node_id for event in telemetry}),
-            blocked_event_count=sum(
-                "blocked" in event.event_type for event in telemetry
-            )
+            blocked_event_count=sum("blocked" in event.event_type for event in telemetry)
             + sum(event.level == "warning" for event in observability_events),
-            failed_event_count=sum(
-                "failed" in event.event_type for event in telemetry
-            )
+            failed_event_count=sum("failed" in event.event_type for event in telemetry)
             + sum(event.level == "error" for event in observability_events),
             latest_trace_id=latest_trace_id,
             generated_at=datetime.now(UTC),

@@ -35,9 +35,7 @@ def test_mcp_service_blocks_when_sandbox_validation_fails() -> None:
         settings=Settings(_env_file=None, AION_MCP_ENABLED=True),
         sandbox_service=FailingSandbox(),
     )
-    service.register_server(
-        MCPServerRegistrationRequest(server=server_payload(), activate=True)
-    )
+    service.register_server(MCPServerRegistrationRequest(server=server_payload(), activate=True))
     service.sync_tools(
         MCPSyncRequest(
             mcp_server_id="mcp-server-1",

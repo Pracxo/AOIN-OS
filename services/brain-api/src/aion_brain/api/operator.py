@@ -237,4 +237,3 @@ def operator_runbooks(
 
 def _scope(scope: list[str] | None, actor_context: ActorContext) -> list[str]:
     return scope or actor_context.security_scope or ["workspace:main"]
-

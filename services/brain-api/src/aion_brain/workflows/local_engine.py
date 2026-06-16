@@ -6,8 +6,10 @@ from uuid import uuid4
 
 from aion_brain.approvals.integration import ApprovalGateResult, evaluate_approval_gate
 from aion_brain.contracts.autonomy import AutonomyDecisionRequest
+from aion_brain.contracts.effects import ObservedEffectCreateRequest
 from aion_brain.contracts.execution import ExecutionRequest
 from aion_brain.contracts.modules import CapabilityInvocationRequest
+from aion_brain.contracts.outcomes import OutcomeCreateRequest
 from aion_brain.contracts.policy import PolicyDecision, PolicyRequest
 from aion_brain.contracts.tasks import TaskRunRequest
 from aion_brain.contracts.telemetry import VisualTelemetryEvent
@@ -58,6 +60,9 @@ class LocalWorkflowEngine:
         local_worker_enabled: bool = False,
         approval_service: object | None = None,
         autonomy_governor: object | None = None,
+        observed_effect_collector: object | None = None,
+        outcome_service: object | None = None,
+        settings: object | None = None,
     ) -> None:
         self._repository = repository
         self._policy_adapter = policy_adapter
@@ -70,6 +75,9 @@ class LocalWorkflowEngine:
         self._local_worker_enabled = local_worker_enabled
         self._approval_service = approval_service
         self._autonomy_governor = autonomy_governor
+        self._observed_effect_collector = observed_effect_collector
+        self._outcome_service = outcome_service
+        self._settings = settings
 
     def create_workflow(self, request: WorkflowCreateRequest) -> WorkflowDefinition:
         """Create a workflow definition after policy authorization."""
@@ -253,9 +261,7 @@ class LocalWorkflowEngine:
             else:
                 waiting_error = {
                     "reason": "approval_required",
-                    "approval_request_id": (
-                        gate.approval_request_id if gate is not None else None
-                    ),
+                    "approval_request_id": (gate.approval_request_id if gate is not None else None),
                 }
                 waiting_status = "waiting_for_approval"
             waiting = run.model_copy(
@@ -334,7 +340,59 @@ class LocalWorkflowEngine:
             1.0,
             {"workflow_id": workflow.workflow_id},
         )
-        return self._repository.save_run(completed)
+        saved_completed = self._repository.save_run(completed)
+        self._record_workflow_outcome(saved_completed, workflow.owner_scope)
+        return saved_completed
+
+    def _record_workflow_outcome(
+        self,
+        run: WorkflowRun,
+        owner_scope: list[str],
+    ) -> None:
+        if not bool(getattr(self._settings, "outcome_auto_collect_from_workflows", True)):
+            return
+        create_observed = getattr(self._observed_effect_collector, "create_observed_effect", None)
+        create_outcome = getattr(self._outcome_service, "create_outcome_once_for_source", None)
+        if not callable(create_observed) or not callable(create_outcome):
+            return
+        try:
+            observed = create_observed(
+                ObservedEffectCreateRequest(
+                    trace_id=run.trace_id,
+                    source_type="workflow",
+                    source_id=run.workflow_run_id,
+                    effect_type="workflow_completed",
+                    predicate="status",
+                    observed_value={"status": run.status},
+                    observation_source_type="workflow",
+                    observation_source_id=run.workflow_run_id,
+                    confidence=0.9 if run.status == "completed" else 0.6,
+                    owner_scope=owner_scope,
+                    metadata={"auto_collected": True, "completion_is_not_verification": True},
+                    observed_at=run.completed_at,
+                )
+            )
+            create_outcome(
+                OutcomeCreateRequest(
+                    trace_id=run.trace_id,
+                    actor_id=run.actor_id,
+                    workspace_id=run.workspace_id,
+                    source_type="workflow",
+                    source_id=run.workflow_run_id,
+                    outcome_type="workflow",
+                    title="Workflow outcome recorded",
+                    summary="Workflow completion was recorded as an observed effect.",
+                    owner_scope=owner_scope,
+                    observed_effects=[observed.observed_effect_id],
+                    confidence=observed.confidence,
+                    score=0.5,
+                    metadata={"auto_collected": True, "completion_is_not_verification": True},
+                    observed_at=run.completed_at,
+                    created_by=run.actor_id,
+                )
+            )
+        except Exception:
+            return
 
     def run_existing(self, workflow_run_id: str) -> WorkflowRun:
         """Run a persisted pending or retry-scheduled workflow run."""
@@ -552,9 +610,7 @@ class LocalWorkflowEngine:
                 {},
                 {
                     "reason": "approval_required",
-                    "approval_request_id": (
-                        gate.approval_request_id if gate is not None else None
-                    ),
+                    "approval_request_id": (gate.approval_request_id if gate is not None else None),
                 },
                 completed=False,
             )

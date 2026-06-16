@@ -17,4 +17,3 @@ def test_context_fusion_preserves_evidence_ref() -> None:
 
     assert bundle.evidence_refs == ["evidence-1"]
     assert bundle.metadata["evidence_refs"] == ["evidence-1"]
-

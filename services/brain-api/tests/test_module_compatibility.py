@@ -18,4 +18,3 @@ def test_compatibility_checker_warns_unsupported_execution_mode() -> None:
     report = ModuleCompatibilityChecker(Settings(_env_file=None)).check(bad)
 
     assert any(warning["code"] == "unsupported_execution_mode" for warning in report.warnings)
-

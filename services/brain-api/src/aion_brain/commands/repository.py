@@ -124,9 +124,7 @@ class CommandRepository:
         with self._engine.connect() as connection:
             row = (
                 connection.execute(
-                    select(aion_commands).where(
-                        aion_commands.c.idempotency_key == idempotency_key
-                    )
+                    select(aion_commands).where(aion_commands.c.idempotency_key == idempotency_key)
                 )
                 .mappings()
                 .first()

@@ -72,13 +72,11 @@ def write_release_tree(root: Path) -> None:
         "docker-compose.yml": "services: {}\n",
         "services/brain-api/src/aion_brain/__init__.py": "",
         "services/brain-api/pyproject.toml": (
-            "[project]\nname = \"aion-brain-api\"\nversion = \"0.1.0\"\n"
-            "dependencies = [\"fastapi\"]\n"
+            '[project]\nname = "aion-brain-api"\nversion = "0.1.0"\ndependencies = ["fastapi"]\n'
         ),
         "packages/aion-sdk-python/src/aion_sdk/__init__.py": "",
         "packages/aion-sdk-python/pyproject.toml": (
-            "[project]\nname = \"aion-sdk-python\"\nversion = \"0.1.0\"\n"
-            "dependencies = [\"httpx\"]\n"
+            '[project]\nname = "aion-sdk-python"\nversion = "0.1.0"\ndependencies = ["httpx"]\n'
         ),
         "infra/postgres/migrations/0001.py": "# migration\n",
         "infra/opa/policies/brain.rego": "package aion.brain\n",

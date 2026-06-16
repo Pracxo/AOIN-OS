@@ -17,4 +17,3 @@ def sha256_text(text: str) -> str:
 def sha256_bytes(data: bytes) -> str:
     """Return SHA-256 for bytes."""
     return hashlib.sha256(data).hexdigest()
-

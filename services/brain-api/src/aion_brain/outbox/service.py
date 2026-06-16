@@ -204,9 +204,7 @@ class OutboxService:
             error=dict(error),
         )
         event_type = (
-            "outbox_message_dead_lettered"
-            if status == "dead_lettered"
-            else "outbox_message_failed"
+            "outbox_message_dead_lettered" if status == "dead_lettered" else "outbox_message_failed"
         )
         self._emit(event_type, saved, 1.0 if status == "dead_lettered" else 0.8)
         return saved

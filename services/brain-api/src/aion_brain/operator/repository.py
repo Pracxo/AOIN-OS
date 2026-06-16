@@ -118,9 +118,7 @@ class OperatorRepository:
             connect_args={"check_same_thread": False}
             if (database_url or "").startswith("sqlite")
             else {},
-            poolclass=StaticPool
-            if (database_url or "").startswith("sqlite")
-            else QueuePool,
+            poolclass=StaticPool if (database_url or "").startswith("sqlite") else QueuePool,
         )
         self._auto_create = auto_create
         self._schema_ready = False
@@ -207,9 +205,7 @@ class OperatorRepository:
             aion_operator_acknowledgements.c.created_at.desc()
         )
         if source_type is not None:
-            statement = statement.where(
-                aion_operator_acknowledgements.c.source_type == source_type
-            )
+            statement = statement.where(aion_operator_acknowledgements.c.source_type == source_type)
         if source_id is not None:
             statement = statement.where(aion_operator_acknowledgements.c.source_id == source_id)
         return [_row_to_acknowledgement(row) for row in self._list(statement.limit(limit))]
@@ -220,9 +216,7 @@ class OperatorRepository:
         values = snapshot.model_dump(mode="python", exclude={"created_at"})
         values["created_at"] = snapshot.created_at or datetime.now(UTC)
         values["overview"] = snapshot.overview.model_dump(mode="json")
-        values["action_items"] = [
-            item.model_dump(mode="json") for item in snapshot.action_items
-        ]
+        values["action_items"] = [item.model_dump(mode="json") for item in snapshot.action_items]
         values["queue_summaries"] = [
             queue.model_dump(mode="json") for queue in snapshot.queue_summaries
         ]
@@ -260,11 +254,7 @@ class OperatorRepository:
         if status is not None:
             statement = statement.where(aion_operator_snapshots.c.status == status)
         snapshots = [_row_to_snapshot(row) for row in self._list(statement.limit(limit))]
-        return [
-            snapshot
-            for snapshot in snapshots
-            if _scope_matches(snapshot.owner_scope, scope)
-        ]
+        return [snapshot for snapshot in snapshots if _scope_matches(snapshot.owner_scope, scope)]
 
     def _ensure_schema(self) -> None:
         if self._schema_ready or not self._auto_create:

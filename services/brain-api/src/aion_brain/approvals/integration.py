@@ -76,9 +76,7 @@ def evaluate_approval_gate(
             reason="approval_control_plane_invalid_response",
             constraints=["fail_closed"],
         )
-    approval_id = (
-        result.approval_request.approval_request_id if result.approval_request else None
-    )
+    approval_id = result.approval_request.approval_request_id if result.approval_request else None
     constraints = [
         *result.risk_assessment.constraints,
         *result.guardrail_decision.constraints,

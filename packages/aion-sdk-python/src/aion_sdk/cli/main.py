@@ -13,9 +13,16 @@ from rich.console import Console
 
 from aion_sdk.cli.commands.audit import install_audit_commands
 from aion_sdk.cli.commands.backups import install_backup_commands
+from aion_sdk.cli.commands.beliefs import install_belief_commands
+from aion_sdk.cli.commands.concepts import install_concept_commands
 from aion_sdk.cli.commands.config import install_config_commands
+from aion_sdk.cli.commands.decisions import install_decision_commands
+from aion_sdk.cli.commands.dialogue import install_dialogue_commands
+from aion_sdk.cli.commands.entities import install_entity_commands
+from aion_sdk.cli.commands.learning import install_learning_commands
 from aion_sdk.cli.commands.modules import install_modules_commands
 from aion_sdk.cli.commands.operator import install_operator_commands
+from aion_sdk.cli.commands.outcomes import install_outcome_commands
 from aion_sdk.cli.commands.performance import install_performance_commands
 from aion_sdk.cli.commands.policy import install_policy_commands
 from aion_sdk.cli.commands.release import install_release_commands
@@ -23,6 +30,8 @@ from aion_sdk.cli.commands.resilience import install_resilience_commands
 from aion_sdk.cli.commands.sandbox import install_sandbox_commands
 from aion_sdk.cli.commands.scenarios import install_scenarios_commands
 from aion_sdk.cli.commands.security import install_security_commands
+from aion_sdk.cli.commands.self_model import install_self_model_commands
+from aion_sdk.cli.commands.situations import install_situation_commands
 from aion_sdk.cli.commands.versioning import install_versioning_commands
 from aion_sdk.client import AIONClient
 from aion_sdk.config import AIONClientConfig
@@ -266,9 +275,7 @@ def commands_dispatch(
         "mode": mode,
         "owner_scope": _scope(ctx),
         "payload": (
-            _load_inline_json_object(payload_json)
-            if payload_json
-            else {"source": "aionctl"}
+            _load_inline_json_object(payload_json) if payload_json else {"source": "aionctl"}
         ),
         "approval_present": False,
     }
@@ -534,6 +541,15 @@ install_config_commands(app, get_client=_client, get_scope=_scope, render=_rende
 install_resilience_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_audit_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_operator_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_dialogue_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_belief_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_concept_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_entity_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_situation_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_decision_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_outcome_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_learning_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_self_model_commands(app, get_client=_client, get_scope=_scope, render=_render)
 
 
 if __name__ == "__main__":

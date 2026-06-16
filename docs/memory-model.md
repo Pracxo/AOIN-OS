@@ -100,6 +100,21 @@ skills, evaluations, learning signals, and other Brain-owned targets. A memory
 record can help AION recall relevant context, but a grounding claim must point
 back to `EvidenceRecord` and `EvidenceChunk` IDs when AION needs source support.
 
+## Belief State
+
+Belief state sits beside memory, not inside raw memory records. A belief is an
+explicit claim with status, confidence, provenance, supports, contradictions,
+and revision history. Memory retrieval can surface `belief_state` items as
+context, but those items are labeled as claims, not absolute truth.
+
+Postgres remains canonical for the belief ledger. Vector recall, graph recall,
+or future compressed memory adapters may retrieve belief-adjacent context later,
+but they must not become the source of truth for claim status or revisions.
+
+Truth maintenance updates belief confidence and status through explicit
+revision records. It never rewrites source evidence, hides contradictions, or
+promotes retrieved memory into truth without a policy-gated claim.
+
 ## Adapter Boundaries
 
 `SemanticMemoryAdapter` is the public semantic memory interface. AION Brain
@@ -225,3 +240,34 @@ Working memory can reference memories, evidence, tasks, goals, skills,
 capabilities, traces, retrievals, plans, and approvals. It is not a truth store,
 does not promote itself to long-term memory, and must not store secrets or
 chain-of-thought. Canonical truth remains in the relevant ledger or repository.
+
+## Dialogue Memory Handoff
+
+Dialogue memory handoff converts approved dialogue content into memory
+candidates through AION-owned contracts. It is optional, policy-gated, and
+explicitly requested by the caller or future governance layer.
+
+The handoff path stores summaries and references, not raw hidden reasoning, raw
+prompts, raw headers, secrets, provider chat objects, or external delivery
+payloads. Dialogue messages remain dialogue ledger records; memory records are
+separate recall artifacts with their own scope, sensitivity, confidence, and
+provenance metadata.
+
+Postgres remains the canonical metadata store. Vector, graph, and future
+compressed recall adapters may index dialogue-derived memory later, but they
+must consume AION memory contracts and never become the source of truth.
+
+## Entity References in Memory
+
+Memory records may carry entity references as canonical pointers in metadata or
+source references. Entity references are not truth and do not replace memory
+governance, evidence grounding, or belief status.
+
+The Entity Resolver can link memories to entities through `ReferenceLink`
+records when extraction is explicitly requested. Unresolved mentions remain
+mentions until a future resolution run links them or an operator reviews them.
+
+Entity merge and split lifecycle state must be visible to memory consumers.
+Merged, archived, or unresolved entity references should be surfaced as
+constraints during retrieval and context compilation instead of being silently
+trusted.

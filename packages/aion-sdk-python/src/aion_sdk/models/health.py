@@ -12,4 +12,3 @@ class HealthModel(AIONSDKModel):
 class ReadinessModel(AIONSDKModel):
     status: str
     checks: dict[str, str]
-

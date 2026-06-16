@@ -177,9 +177,13 @@ class TaskRepository:
         """Return a task by ID."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_cognitive_tasks).where(aion_cognitive_tasks.c.task_id == task_id)
-            ).mappings().first()
+            row = (
+                connection.execute(
+                    select(aion_cognitive_tasks).where(aion_cognitive_tasks.c.task_id == task_id)
+                )
+                .mappings()
+                .first()
+            )
         if row is None:
             return None
         return _row_to_task(row)
@@ -219,11 +223,15 @@ class TaskRepository:
         """Return task run records for a task."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            rows = connection.execute(
-                select(aion_task_runs)
-                .where(aion_task_runs.c.task_id == task_id)
-                .order_by(aion_task_runs.c.created_at)
-            ).mappings().all()
+            rows = (
+                connection.execute(
+                    select(aion_task_runs)
+                    .where(aion_task_runs.c.task_id == task_id)
+                    .order_by(aion_task_runs.c.created_at)
+                )
+                .mappings()
+                .all()
+            )
         return [_row_to_task_run(row) for row in rows]
 
     def save_lifecycle_event(self, event: TaskLifecycleEvent) -> TaskLifecycleEvent:

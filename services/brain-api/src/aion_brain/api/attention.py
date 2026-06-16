@@ -351,9 +351,7 @@ def decide_interrupt(
 ) -> InterruptRecord:
     """Decide one interrupt."""
     actor_id = request.actor_id or actor_context.actor_id
-    enriched = request.model_copy(
-        update={"interrupt_id": interrupt_id, "actor_id": actor_id}
-    )
+    enriched = request.model_copy(update={"interrupt_id": interrupt_id, "actor_id": actor_id})
     try:
         return service.decide_interrupt(enriched)
     except PermissionError as exc:

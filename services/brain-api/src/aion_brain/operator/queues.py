@@ -31,6 +31,79 @@ _QUEUE_SPECS: tuple[tuple[OperatorQueueType, str, str, tuple[str, ...]], ...] = 
     ("resilience_tests", "Resilience Tests", "resilience_service", ("list_test_runs", "list")),
     ("security_scans", "Security Scans", "security_service", ("list_scans", "list")),
     ("scenarios", "Scenarios", "scenario_service", ("list_runs", "list_scenarios", "list")),
+    ("generic", "Dialogue Clarifications", "dialogue_service", ("list_pending",)),
+    (
+        "generic",
+        "Belief Contradictions",
+        "belief_contradiction_service",
+        ("list_contradictions",),
+    ),
+    (
+        "generic",
+        "Unresolved Entity Mentions",
+        "entity_repository",
+        ("list_mentions",),
+    ),
+    (
+        "generic",
+        "Entity Merge Proposals",
+        "entity_merge_service",
+        ("list_proposals",),
+    ),
+    (
+        "generic",
+        "Entity Split Proposals",
+        "entity_split_service",
+        ("list_proposals",),
+    ),
+    (
+        "generic",
+        "Situation Projection Runs",
+        "situation_projector",
+        ("list_failed_runs",),
+    ),
+    (
+        "generic",
+        "Open Decision Frames",
+        "decision_frame_service",
+        ("list_frames",),
+    ),
+    (
+        "generic",
+        "Decision Journal",
+        "decision_journal_service",
+        ("list_records",),
+    ),
+    (
+        "generic",
+        "Open Outcome Feedback",
+        "outcome_feedback_service",
+        ("list_feedback",),
+    ),
+    (
+        "generic",
+        "Effect Verification Runs",
+        "effect_verifier",
+        ("list_verification_runs",),
+    ),
+    (
+        "learning_patterns",
+        "Learning Patterns",
+        "learning_synthesis_repository",
+        ("list_patterns",),
+    ),
+    (
+        "skill_suggestions",
+        "Skill Suggestions",
+        "skill_suggestion_service",
+        ("list_suggestions",),
+    ),
+    (
+        "regression_suggestions",
+        "Regression Suggestions",
+        "regression_suggestion_service",
+        ("list_suggestions",),
+    ),
 )
 
 _RUNNING_STATUSES = {"running", "processing", "sending", "in_progress", "active"}

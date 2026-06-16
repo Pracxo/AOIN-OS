@@ -35,11 +35,9 @@ class Repository:
         return self.cases.get(case_id)
 
     def list_cases(self, *, status=None, tags=None, limit=50):
-        return [
-            case
-            for case in self.cases.values()
-            if status is None or case.status == status
-        ][:limit]
+        return [case for case in self.cases.values() if status is None or case.status == status][
+            :limit
+        ]
 
     def save_run(self, run):
         self.runs[run.regression_run_id] = run

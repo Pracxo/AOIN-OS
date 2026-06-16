@@ -26,6 +26,7 @@ from aion_brain.contracts.learning import LearningSignal
 from aion_brain.contracts.observability import ObservabilityEvent, ObservabilityLevel
 from aion_brain.contracts.policy import PolicyDecision
 from aion_brain.contracts.reflection import ReflectionRequest
+from aion_brain.contracts.responses import ResponseComposeRequest
 from aion_brain.contracts.state import BrainState
 from aion_brain.contracts.tasks import TaskCreateRequest, TaskType
 from aion_brain.contracts.telemetry import VisualTelemetryEvent
@@ -95,13 +96,19 @@ class BrainLoopService:
         self._attention_controller = attention_controller
         self._working_memory_service = working_memory_service
         self._autonomy_governor = autonomy_governor
+        self._response_composer: object | None = None
+
+    def set_response_composer(self, response_composer: object | None) -> None:
+        """Attach the optional deterministic response composer."""
+
+        self._response_composer = response_composer
 
     def think(self, event: AIONEvent, *, replay_mode: bool = False) -> DecisionTrace:
         """Run, evaluate, learn, emit telemetry, persist, and return the trace."""
         state = self.run_full_loop(event, replay_mode=replay_mode)
         if state.trace is None:
             raise RuntimeError("Brain runtime returned no trace")
-        return state.trace
+        return self._attach_response_metadata(state.trace, event)
 
     def run_full_loop(self, event: AIONEvent, *, replay_mode: bool = False) -> BrainState:
         """Run the full deterministic loop and persist every AION-009 artifact."""
@@ -305,6 +312,56 @@ class BrainLoopService:
         )
         self._observe(event, "brain_loop_completed", "brain_loop", "Brain loop completed.", trace)
         return state
+
+    def _attach_response_metadata(
+        self,
+        trace: DecisionTrace,
+        event: AIONEvent,
+    ) -> DecisionTrace:
+        compose = getattr(self._response_composer, "compose", None)
+        if not callable(compose):
+            return trace
+        try:
+            response = compose(
+                ResponseComposeRequest(
+                    dialogue_session_id=None,
+                    message_id=None,
+                    trace_id=trace.trace_id,
+                    reasoning_id=trace.reasoning_refs[0] if trace.reasoning_refs else None,
+                    plan_id=trace.plan_id,
+                    goal=str(event.payload.get("goal") or event.event_type),
+                    context={
+                        "owner_scope": event.security_scope or ["workspace:main"],
+                        "retrieved_memory_ids": trace.memory_refs,
+                        "evidence_refs": trace.outcome.get("evidence_refs", []),
+                        "constraints": trace.outcome.get("constraints", []),
+                    },
+                    reasoning_result=trace.outcome,
+                    plan={"plan_id": trace.plan_id} if trace.plan_id else {},
+                    require_grounding=False,
+                    response_type="answer",
+                    metadata={
+                        "owner_scope": event.security_scope or ["workspace:main"],
+                        "brain_think_metadata": True,
+                    },
+                )
+            )
+            response_id = getattr(response, "response_id", None)
+            response_status = getattr(response, "status", None)
+            return trace.model_copy(
+                update={
+                    "outcome": {
+                        **trace.outcome,
+                        "response_id": response_id,
+                        "response_status": response_status,
+                        "requires_clarification": bool(
+                            trace.outcome.get("reasoning_requires_clarification")
+                        ),
+                    }
+                }
+            )
+        except Exception:
+            return trace
 
     def _autonomy_decision(self, event: AIONEvent) -> AutonomyDecision | None:
         decide = getattr(self._autonomy_governor, "decide", None)

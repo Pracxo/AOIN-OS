@@ -116,9 +116,7 @@ class CognitiveTaskRunner:
                 "waiting_for_approval",
                 {
                     "reason": "approval_required",
-                    "approval_request_id": (
-                        gate.approval_request_id if gate is not None else None
-                    ),
+                    "approval_request_id": (gate.approval_request_id if gate is not None else None),
                 },
                 "task_run_blocked",
             )

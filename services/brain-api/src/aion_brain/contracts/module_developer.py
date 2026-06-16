@@ -317,4 +317,3 @@ def reject_secret_like_keys(value: object) -> None:
     elif isinstance(value, list):
         for item in value:
             reject_secret_like_keys(item)
-

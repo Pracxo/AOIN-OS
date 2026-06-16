@@ -180,4 +180,3 @@ def _call_list(service: object, method_name: str, **kwargs: Any) -> list[Any]:
         return list(method(**kwargs))
     except Exception:
         return []
-

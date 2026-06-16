@@ -52,4 +52,3 @@ def test_evidence_search_excludes_deleted_evidence() -> None:
     results = service.search(EvidenceSearchRequest(query="alpha", scope=["workspace:main"]))
 
     assert results == []
-

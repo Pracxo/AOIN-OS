@@ -288,9 +288,7 @@ class RegressionService:
         if expected is None or output is None:
             comparison = _failed_comparison(case.source_trace_id, replay.replay_trace_id)
             status = (
-                "blocked_by_policy"
-                if replay.status == "blocked_by_policy"
-                else "replay_failed"
+                "blocked_by_policy" if replay.status == "blocked_by_policy" else "replay_failed"
             )
         else:
             comparison = self._comparator.compare(expected, output)

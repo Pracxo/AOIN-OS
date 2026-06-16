@@ -139,3 +139,122 @@ modules, optional adapters, or external services.
 `aionctl release` calls `client.release`. It creates local package records and
 handoff reports only. It does not upload artifacts, call package registries,
 execute Docker, or enable domain modules.
+
+## Dialogue and Response Commands
+
+```bash
+./scripts/aionctl.sh dialogue start --title "Local session"
+./scripts/aionctl.sh dialogue send --message "Remember this context" --remember
+./scripts/aionctl.sh dialogue sessions
+./scripts/aionctl.sh dialogue messages --session-id dialogue-session-id
+./scripts/aionctl.sh dialogue clarifications
+./scripts/aionctl.sh dialogue answer --clarification-id clarification-id --answer "Use the scoped goal."
+./scripts/aionctl.sh responses get --response-id response-id
+./scripts/aionctl.sh responses verify --response-id response-id
+```
+
+`aionctl dialogue` and `aionctl responses` call the public Brain API through
+the SDK. They do not render a frontend chat UI, call provider chat APIs, send
+external messages, expose hidden reasoning, or trigger controlled execution.
+
+## Belief Commands
+
+```bash
+./scripts/aionctl.sh beliefs create --claim "A generic claim exists."
+./scripts/aionctl.sh beliefs query --query "generic"
+./scripts/aionctl.sh beliefs extract --text "A generic claim can be extracted."
+./scripts/aionctl.sh beliefs contradictions
+./scripts/aionctl.sh beliefs truth-maintenance run
+./scripts/aionctl.sh beliefs truth-maintenance get --truth-run-id truth-run-id
+```
+
+`aionctl beliefs` calls `client.beliefs`. It creates, queries, extracts, and
+maintains local belief records through Brain APIs only. It does not call
+external fact-checking services, model providers, frontend renderers, or
+domain-specific modules.
+
+## Concept and Entity Commands
+
+```bash
+./scripts/aionctl.sh concepts create --name "Generic Concept" --description "A generic concept."
+./scripts/aionctl.sh concepts list --query "generic"
+./scripts/aionctl.sh entities create --name "Canonical Reference"
+./scripts/aionctl.sh entities query --query "Canonical"
+./scripts/aionctl.sh entities extract-mentions --text "Use [[Canonical Reference]]."
+./scripts/aionctl.sh entities resolve --text "AION Brain uses memory governance"
+./scripts/aionctl.sh entities references --entity-id entity-id
+./scripts/aionctl.sh entities merge propose --primary entity-1 --duplicate entity-2 --reason "same generic reference"
+./scripts/aionctl.sh entities merge approve merge-proposal-id --reason "approved" --approved
+./scripts/aionctl.sh entities split propose --entity-id entity-1 --reason "too broad"
+```
+
+`aionctl concepts` and `aionctl entities` call the SDK only. Entity resolution
+defaults to dry-run. Merge and split approvals require explicit operator input.
+The CLI does not call external NLP services, model providers, image
+identification services, or domain-specific modules.
+## Decision Commands
+
+- `aionctl decisions frame create`
+- `aionctl decisions frames`
+- `aionctl decisions option add`
+- `aionctl decisions evaluate`
+- `aionctl decisions recommend`
+- `aionctl decisions counterfactual run`
+- `aionctl decisions journal record`
+- `aionctl decisions journal list`
+
+Evaluation and counterfactual commands default to dry-run behavior. Journal
+commands record a decision only; they do not execute the selected option.
+
+## Outcome Commands
+
+- `aionctl outcomes create`
+- `aionctl outcomes query`
+- `aionctl outcomes expected add`
+- `aionctl outcomes observed add`
+- `aionctl outcomes verify`
+- `aionctl outcomes feedback list`
+- `aionctl outcomes feedback resolve`
+- `aionctl outcomes learning-bridge`
+
+Outcome commands call the SDK and public Brain APIs only. Verification defaults
+to deterministic local checks. The learning bridge defaults to dry-run and
+does not promote skills, execute remediation, or call external services.
+
+## Learning Commands
+
+- `aionctl learning experiences create`
+- `aionctl learning experiences get`
+- `aionctl learning experiences query`
+- `aionctl learning patterns mine`
+- `aionctl learning patterns list`
+- `aionctl learning lessons list`
+- `aionctl learning synthesize`
+- `aionctl learning skill-suggestions list`
+- `aionctl learning skill-suggestions accept`
+- `aionctl learning skill-suggestions reject`
+- `aionctl learning skill-suggestions convert`
+- `aionctl learning regression-suggestions list`
+- `aionctl learning regression-suggestions accept`
+- `aionctl learning regression-suggestions reject`
+
+Learning commands are review-only. They do not promote skills, create active
+procedures, create regression cases, modify source code, or call external
+services.
+
+## Self Model Commands
+
+- `aionctl self describe`
+- `aionctl self capabilities`
+- `aionctl self capabilities refresh`
+- `aionctl self limitations`
+- `aionctl self limitations seed`
+- `aionctl self confidence calibrate`
+- `aionctl self assessment run`
+- `aionctl self introspection create`
+- `aionctl self introspection list`
+
+Self-model commands call the SDK only. They describe local AION capability
+awareness, limitations, confidence calibration, self-assessment, and
+introspection records without executing capabilities, enabling adapters,
+changing runtime config, or calling external services.

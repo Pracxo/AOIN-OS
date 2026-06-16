@@ -29,4 +29,3 @@ class EventAcceptanceModel(AIONSDKModel):
     correlation_id: str
     persisted: bool
     published: bool = Field(default=False)
-

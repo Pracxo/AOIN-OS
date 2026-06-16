@@ -108,3 +108,52 @@ Instructions for future Codex runs in this repository:
 - Operator acknowledgements must not resolve source issues.
 - Future UI work must consume Operator contracts rather than querying subsystem
   internals directly.
+- Dialogue work must remain backend contract work unless a future task
+  explicitly asks for UI.
+- Dialogue APIs must not expose provider-specific chat objects, frontend state,
+  raw prompts, hidden reasoning, chain-of-thought, raw headers, or secrets.
+- Dialogue turns must not perform controlled execution or external message
+  delivery in v0.1.
+- Response composition must stay deterministic and AION-contract-shaped until
+  a future task explicitly adds model-backed response generation behind an
+  adapter.
+- Dialogue memory handoff must store summaries and references only, remain
+  policy-gated, and avoid raw sensitive content.
+- Belief state must remain generic, explicit, scoped, and policy-gated.
+- Belief claims are not absolute truth; reasoning must see belief status,
+  confidence, supports, contradictions, and constraints.
+- Truth maintenance must stay deterministic and local in v0.1. Do not call
+  external fact-checking systems, model providers, web search, or domain
+  knowledge bases from belief services.
+- Entity references are not beliefs and are not truth. They are canonical
+  pointers that other AION systems may reference.
+- Do not add domain-specific entity types, concept types, or ontologies to
+  Brain core.
+- Do not auto-merge entities. Use explicit merge proposals and approvals.
+- Do not hard-delete entities, aliases, mentions, or reference links.
+- Do not infer sensitive identity attributes or use image-based identification
+  in entity resolution.
+- Decision services must never execute selected options.
+- Counterfactual services must never mutate source records.
+- Utility scoring must remain generic and domain-neutral.
+- Do not add domain-specific decision weights or option types to Brain core.
+- Outcome verification must remain deterministic, local, and generic.
+- Completion is not verification; source records must not be mutated by
+  outcome services.
+- Outcome feedback must not auto-promote skills, execute remediation, call
+  external services, or add domain-specific learning logic.
+- Experience ledger entries are generic learning inputs and must not replace
+  source record truth.
+- Pattern mining must remain deterministic and local in v0.1.
+- Learning synthesis must not auto-promote skills, create active procedures,
+  create regression cases, write source code, retry work, call model providers,
+  call external services, or add domain-specific learning logic.
+- Use Adaptive Intelligence Orchestration Nexus as the official meaning of
+  AION, and Adaptive Intelligence Orchestration Nexus Operating System as the
+  official meaning of AION OS.
+- Self-description must not claim sentience, personality, unavailable
+  features, production readiness, full autonomy, or domain expertise.
+- Capability claims must come from awareness records, kernel diagnostics,
+  configuration, or other governed AION contracts.
+- Confidence disclosures must be explicit when grounding is weak, confidence
+  is low, approval is required, or a capability is dry-run only.

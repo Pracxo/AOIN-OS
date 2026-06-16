@@ -58,4 +58,3 @@ def test_cycle_repository_filters_runs_by_scope(tmp_path) -> None:
 
     assert len(repository.list_runs(scope=["workspace:main"])) == 1
     assert repository.list_runs(scope=["workspace:other"]) == []
-

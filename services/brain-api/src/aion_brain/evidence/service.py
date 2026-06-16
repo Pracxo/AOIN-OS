@@ -3,6 +3,8 @@
 from datetime import UTC, datetime
 from uuid import uuid4
 
+from aion_brain.contracts.beliefs import ClaimExtractionRequest
+from aion_brain.contracts.entities import EntityResolutionRequest
 from aion_brain.contracts.evidence import (
     EvidenceChunk,
     EvidenceIngestRequest,
@@ -47,6 +49,10 @@ class EvidenceService:
         object_store: ObjectStoreAdapter | None = None,
         actor_context: ActorContext | None = None,
         chunker: EvidenceChunker | None = None,
+        claim_extractor: object | None = None,
+        belief_service: object | None = None,
+        entity_resolver: object | None = None,
+        settings: object | None = None,
     ) -> None:
         self._repository = evidence_repository
         self._policy_adapter = policy_adapter
@@ -54,6 +60,10 @@ class EvidenceService:
         self._object_store = object_store
         self._actor_context = actor_context or ActorContext()
         self._chunker = chunker or EvidenceChunker()
+        self._claim_extractor = claim_extractor
+        self._belief_service = belief_service
+        self._entity_resolver = entity_resolver
+        self._settings = settings
         self._enricher = PolicyInputEnricher()
 
     def with_actor_context(self, actor_context: ActorContext) -> "EvidenceService":
@@ -65,6 +75,10 @@ class EvidenceService:
             object_store=self._object_store,
             actor_context=actor_context,
             chunker=self._chunker,
+            claim_extractor=self._claim_extractor,
+            belief_service=self._belief_service,
+            entity_resolver=self._entity_resolver,
+            settings=self._settings,
         )
 
     def ingest(
@@ -133,12 +147,88 @@ class EvidenceService:
                 saved.trace_id,
                 {"evidence_id": saved.evidence_id},
             )
+        self._extract_claims_if_requested(request, saved, saved_chunks)
+        self._resolve_entities_if_requested(request, saved)
         return EvidenceIngestResponse(
             ingested=True,
             evidence=saved,
             chunk_count=len(saved_chunks),
             reason=None,
         )
+
+    def _extract_claims_if_requested(
+        self,
+        request: EvidenceIngestRequest,
+        evidence: EvidenceRecord,
+        chunks: list[EvidenceChunk],
+    ) -> None:
+        explicit = request.metadata.get("extract_claims") is True
+        enabled = bool(getattr(self._settings, "belief_auto_extract_from_evidence", False))
+        if not explicit and not enabled:
+            return
+        extract = getattr(self._claim_extractor, "extract", None)
+        create_claim = getattr(self._belief_service, "create_claim", None)
+        if not callable(extract) or not callable(create_claim):
+            return
+        text = request.content_text or evidence.summary
+        try:
+            result = extract(
+                ClaimExtractionRequest(
+                    source_type="evidence",
+                    source_id=evidence.evidence_id,
+                    text=text,
+                    trace_id=evidence.trace_id,
+                    owner_scope=evidence.owner_scope,
+                    max_claims=int(request.metadata.get("max_claims", 10)),
+                    metadata={"evidence_id": evidence.evidence_id},
+                )
+            )
+            chunk_refs = [chunk.chunk_id for chunk in chunks]
+            for claim_request in result.extracted_claims:
+                create_claim(
+                    claim_request.model_copy(
+                        update={
+                            "actor_id": self._actor_context.actor_id,
+                            "workspace_id": self._actor_context.workspace_id,
+                            "evidence_refs": [evidence.evidence_id, *chunk_refs[:1]],
+                        }
+                    )
+                )
+        except Exception:
+            return
+
+    def _resolve_entities_if_requested(
+        self,
+        request: EvidenceIngestRequest,
+        evidence: EvidenceRecord,
+    ) -> None:
+        explicit = request.metadata.get("extract_entities") is True
+        enabled = bool(getattr(self._settings, "entity_auto_extract_from_evidence", False))
+        if not explicit and not enabled:
+            return
+        resolve = getattr(self._entity_resolver, "resolve", None)
+        if not callable(resolve):
+            return
+        try:
+            resolve(
+                EntityResolutionRequest(
+                    trace_id=evidence.trace_id,
+                    actor_id=self._actor_context.actor_id,
+                    workspace_id=self._actor_context.workspace_id,
+                    owner_scope=evidence.owner_scope,
+                    source_type="evidence",
+                    source_id=evidence.evidence_id,
+                    text=request.content_text or evidence.summary,
+                    create_missing_entities=bool(
+                        request.metadata.get("create_missing_entities", False)
+                    ),
+                    dry_run=bool(request.metadata.get("entity_resolution_dry_run", False)),
+                    metadata={"evidence_id": evidence.evidence_id},
+                    created_by=self._actor_context.actor_id,
+                )
+            )
+        except Exception:
+            return
 
     def get_evidence(self, evidence_id: str, scope: list[str]) -> EvidenceRecord | None:
         """Return evidence after policy and scope checks."""

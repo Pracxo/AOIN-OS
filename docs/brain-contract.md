@@ -96,6 +96,18 @@ The contract includes:
 - `GroundingRequest`: request to ground statements in evidence.
 - `GroundingClaim`: deterministic source support result.
 - `GroundingResponse`: group of grounding claims.
+- `BeliefClaim`: explicit scoped claim in the belief ledger.
+- `BeliefClaimCreateRequest`: request to create a belief claim.
+- `BeliefSupport`: evidence or provenance support for a claim.
+- `BeliefSupportCreateRequest`: request to create a support relation.
+- `BeliefContradiction`: explicit contradiction attached to a claim.
+- `BeliefRevision`: immutable claim status or confidence revision.
+- `BeliefQuery`: request to query belief state.
+- `BeliefQueryResult`: query result with claims, supports, contradictions, and constraints.
+- `TruthMaintenanceRequest`: request to run deterministic truth maintenance.
+- `TruthMaintenanceRun`: persisted truth maintenance result.
+- `ClaimExtractionRequest`: deterministic text-to-claim extraction request.
+- `ClaimExtractionResult`: extracted claim proposals and constraints.
 - `ObjectRef`: AION-owned object reference contract.
 - `PolicyDecision`: authorization result.
 - `RiskAssessmentRequest`: generic request to score one proposed action.
@@ -232,6 +244,20 @@ graph memory according to explicit AION settings.
 Skill retrieval is also Brain-owned. `skill_registry` retrieval returns active
 skills as procedural memory candidates through `RetrievedContextItem`; it does
 not expose repository rows or execute any skill procedure.
+
+Belief state contracts are Brain-owned. `BeliefClaim` records an explicit
+claim, not an absolute fact. `BeliefSupport` and `BeliefContradiction` record
+why a claim is supported, weakened, contradicted, or stale. `BeliefRevision`
+records all status and confidence changes. `TruthMaintenanceRun` records a
+deterministic maintenance pass over claims. Public APIs must not expose database
+rows, vector store objects, graph engine objects, external fact-checking
+responses, or provider model outputs as belief contracts.
+
+Claim extraction is deterministic in v0.1. `ClaimExtractionRequest` can produce
+`BeliefClaimCreateRequest` proposals from dialogue or evidence only when
+explicitly requested or locally configured. Extracted claims still pass through
+policy and storage boundaries. Raw secrets, hidden reasoning, chain-of-thought,
+and raw prompts must not be stored as claims.
 
 Reasoning is recall and synthesis over supplied context, not unbounded truth.
 The trace stores `reasoning_refs`, while the model call ledger stores
@@ -741,3 +767,215 @@ breaker state. `DegradedModeEvent` records fallback posture and constraints.
 `FaultInjectionRule` is inert unless local fault injection is explicitly
 enabled. `ResilienceTestRun` is a deterministic local readiness report used by
 operators and the freeze gate.
+
+## Dialogue and Response Contracts
+
+AION Brain owns these dialogue contracts:
+
+- `DialogueSession`
+- `DialogueSessionCreateRequest`
+- `DialogueMessage`
+- `DialogueMessageCreateRequest`
+- `DialogueTurnRequest`
+- `DialogueTurnResult`
+- `ClarificationRequest`
+- `ClarificationAnswerRequest`
+- `DialogueFeedback`
+
+AION Brain owns these response contracts:
+
+- `ResponseComposeRequest`
+- `ResponseDraft`
+- `ResponseVerification`
+- `ResponseDeliveryRecord`
+
+Dialogue contracts describe backend session state only. They never expose
+frontend component state, provider-specific chat objects, external delivery
+handles, raw headers, raw prompts, hidden reasoning, chain-of-thought, raw
+secrets, SQLAlchemy rows, or domain module internals.
+
+`DialogueTurnResult` is the public result of one bounded dialogue turn. It can
+include a sanitized user message, decision trace reference, response draft,
+verification record, local delivery record, clarification request, memory
+handoff records, and policy decisions. It never performs controlled execution.
+
+`ResponseDraft` is a deterministic local draft. It records status, content hash,
+grounding references, memory references, evidence references, clarification
+references, constraints, and metadata. Verification and delivery are separate
+contracts so future interfaces can render or transport responses without
+changing AION Brain semantics.
+
+## Concept and Entity Contracts
+
+AION Brain owns these concept contracts:
+
+- `ConceptRecord`
+- `ConceptCreateRequest`
+- `ConceptArchiveRequest`
+
+AION Brain owns these entity and canonical reference contracts:
+
+- `EntityRecord`
+- `EntityCreateRequest`
+- `EntityAlias`
+- `EntityAliasCreateRequest`
+- `EntityMention`
+- `EntityMentionCreateRequest`
+- `ReferenceLink`
+- `ReferenceLinkCreateRequest`
+- `EntityResolutionRequest`
+- `EntityResolutionCandidate`
+- `EntityResolutionResult`
+- `EntityQuery`
+- `EntityQueryResult`
+- `EntityMergeProposal`
+- `EntityMergeProposalCreateRequest`
+- `EntitySplitProposal`
+- `EntitySplitProposalCreateRequest`
+
+Concept and entity contracts are generic Brain contracts. They never expose
+SQLAlchemy rows, NATS messages, external NLP objects, provider chat objects,
+frontend component state, raw headers, raw secrets, hidden reasoning, or
+domain-specific ontology internals.
+
+Entity references are canonical pointers, not verified truth. They can connect
+dialogue, responses, evidence, memories, beliefs, graph nodes, traces, commands,
+tasks, audit entries, concepts, and other entities through reference links.
+Belief contracts still own claims and truth-maintenance state.
+
+## Situation and Temporal State Contracts
+
+AION Brain owns these situation contracts:
+
+- `SituationRecord`
+- `SituationCreateRequest`
+- `SituationQuery`
+- `SituationQueryResult`
+- `SituationProjectionRequest`
+- `SituationProjectionResult`
+- `ContextContinuityRecord`
+- `ContextContinuityRequest`
+
+AION Brain owns these temporal state contracts:
+
+- `StateAtom`
+- `StateAtomCreateRequest`
+- `StateTransition`
+- `TemporalStateWindow`
+- `TemporalStateWindowRequest`
+
+Situation contracts describe current projected Brain state only. They never
+expose source database rows, raw headers, raw prompts, hidden reasoning,
+secrets, model-provider objects, frontend state, or domain-specific workflow
+internals.
+
+State atoms are projected observations with provenance references. They are
+recall and context continuity aids, not canonical truth.
+
+## Decision Contracts
+
+AION Brain owns these decision contracts:
+
+- `DecisionFrame`
+- `DecisionFrameCreateRequest`
+- `DecisionOption`
+- `DecisionOptionCreateRequest`
+- `UtilityProfile`
+- `UtilityProfileCreateRequest`
+- `OptionEvaluation`
+- `DecisionEvaluationRequest`
+- `TradeoffMatrix`
+- `CounterfactualRunRequest`
+- `CounterfactualRun`
+- `DecisionRecord`
+- `DecisionRecordRequest`
+- `DecisionRecommendation`
+
+Decision records are not execution requests. Counterfactuals project declared
+generic effects only. Utility weights stay generic and domain-neutral.
+
+## Outcome and Effect Contracts
+
+AION Brain owns these outcome contracts:
+
+- `ExpectedEffect`
+- `ExpectedEffectCreateRequest`
+- `ObservedEffect`
+- `ObservedEffectCreateRequest`
+- `OutcomeRecord`
+- `OutcomeCreateRequest`
+- `EffectVerificationRequest`
+- `EffectVerificationRun`
+- `CausalAttribution`
+- `OutcomeFeedback`
+- `OutcomeQuery`
+- `OutcomeQueryResult`
+
+Expected effects describe intended generic effects. Observed effects describe
+local Brain observations. Outcome records join references and verification
+state. Verification runs compare effects but do not prove truth.
+
+Outcome contracts must not expose SQLAlchemy rows, provider SDK objects,
+external observability objects, raw headers, raw secrets, hidden reasoning,
+or domain-specific workflow internals.
+
+Outcome feedback is a governed learning input only. It is never automatic
+remediation, skill promotion, source mutation, or external execution.
+
+## Experience and Learning Synthesis Contracts
+
+AION Brain owns these learning synthesis contracts:
+
+- `ExperienceRecord`
+- `ExperienceCreateRequest`
+- `ExperienceQuery`
+- `ExperienceQueryResult`
+- `LearningPattern`
+- `PatternMiningRequest`
+- `PatternMiningRun`
+- `LessonRecord`
+- `LearningSynthesisRequest`
+- `LearningSynthesisRun`
+- `SkillCandidateSuggestion`
+- `RegressionCandidateSuggestion`
+
+`ExperienceRecord` is the only generic observed-experience ledger contract.
+It references source records and never replaces their canonical lifecycle.
+
+`LearningPattern` and `LessonRecord` are review contracts. They summarize
+generic repeated experience shapes and lessons without executing behavior.
+
+`SkillCandidateSuggestion` is not an active skill, and
+`RegressionCandidateSuggestion` is not a regression case. Conversion and
+acceptance are review state only in v0.1.
+
+Learning synthesis contracts must not expose SQLAlchemy rows, provider SDK
+objects, external intelligence repository internals, raw prompts, raw headers,
+secrets, generated code, executable test bodies, or domain-specific workflow
+internals.
+
+## Self Model Contracts
+
+AION Brain owns these self-model contracts:
+
+- `SelfModelProfile`
+- `SelfDescriptionRequest`
+- `SelfDescription`
+- `CapabilityAwarenessRecord`
+- `LimitationRecord`
+- `LimitationCreateRequest`
+- `ConfidenceCalibration`
+- `ConfidenceCalibrationRequest`
+- `SelfAssessmentRequest`
+- `SelfAssessmentRun`
+- `IntrospectionSnapshotRequest`
+- `IntrospectionSnapshot`
+
+Self-model contracts are descriptive and diagnostic. They must not execute
+capabilities, approve actions, override policy, override autonomy, enable
+adapters, mutate runtime configuration, promote skills, or invent capabilities.
+
+Capability and limitation claims must come from awareness records, local
+configuration, kernel diagnostics, and governed AION contracts. They must not
+claim sentience, production readiness, full autonomy, unavailable integrations,
+or domain expertise.

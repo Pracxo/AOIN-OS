@@ -778,3 +778,232 @@ local.
 Resilience policy never authorizes background workers, external failover,
 infrastructure repair, raw secret exposure, or domain-specific recovery logic.
 Unknown resilience actions fail closed.
+
+## Dialogue and Response Policy
+
+Generic dialogue actions:
+
+- `dialogue.session.create`
+- `dialogue.session.read`
+- `dialogue.session.update`
+- `dialogue.message.create`
+- `dialogue.message.read`
+- `dialogue.message.delete`
+- `dialogue.turn`
+- `dialogue.clarification.create`
+- `dialogue.clarification.read`
+- `dialogue.clarification.update`
+- `dialogue.response.compose`
+- `dialogue.response.verify`
+- `dialogue.response.deliver`
+- `dialogue.feedback.create`
+- `dialogue.feedback.read`
+- `dialogue.memory_handoff`
+
+Dialogue policy gates backend conversation state. It never authorizes frontend
+rendering, provider chat object exposure, external delivery, or controlled
+execution. `dialogue.turn` is denied when the request context attempts
+controlled execution mode. `dialogue.memory_handoff` is medium-risk and remains
+governance-bound because it can create durable recall artifacts.
+
+Response policy stays generic. Existing `response.draft`, `response.verify`,
+and `response.evaluate` actions apply to response draft and verification
+behavior. Unknown dialogue or response actions fail closed.
+
+Generic belief actions:
+
+- `belief.claim.create`
+- `belief.claim.read`
+- `belief.claim.update`
+- `belief.claim.delete`
+- `belief.claim.extract`
+- `belief.support.create`
+- `belief.support.read`
+- `belief.support.delete`
+- `belief.contradiction.create`
+- `belief.contradiction.read`
+- `belief.contradiction.resolve`
+- `belief.query`
+- `belief.truth_maintenance.run`
+- `belief.truth_maintenance.read`
+
+Belief actions stay domain-neutral. Modules never self-authorize belief writes
+or contradiction resolution. Truth maintenance is policy-gated and fails closed
+when authorization is denied. Belief state is recall and working state for the
+Brain; policy must not treat retrieved belief claims as external proof.
+
+## Concept and Entity Policy
+
+Generic concept actions:
+
+- `concept.create`
+- `concept.read`
+- `concept.update`
+
+Generic entity actions:
+
+- `entity.create`
+- `entity.read`
+- `entity.update`
+- `entity.delete`
+- `entity.alias.create`
+- `entity.alias.read`
+- `entity.alias.delete`
+- `entity.mention.create`
+- `entity.mention.read`
+- `entity.resolve`
+- `entity.reference.create`
+- `entity.reference.read`
+- `entity.reference.delete`
+- `entity.merge.propose`
+- `entity.merge.read`
+- `entity.merge.approve`
+- `entity.split.propose`
+- `entity.split.read`
+- `entity.split.approve`
+- `entity.extract_mentions`
+
+Concept and entity read actions are low-risk scoped reads. Mention extraction
+and dry-run resolution are allowed only through explicit requests and scope
+checks. Creating missing entities during resolution requires entity creation
+authorization. Merge and split approval require explicit approval and fail
+closed when policy denies.
+
+Policy must not treat entity references as truth, infer sensitive identity
+attributes, authorize image-based identification, or allow domain-specific
+entity actions in Brain core. Unknown concept and entity actions fail closed.
+
+## Situation Policy
+
+Generic situation actions:
+
+- `situation.create`
+- `situation.read`
+- `situation.update`
+- `situation.project`
+- `situation.atom.create`
+- `situation.atom.read`
+- `situation.atom.update`
+- `situation.atom.delete`
+- `situation.transition.read`
+- `situation.temporal_window.create`
+- `situation.temporal_window.read`
+- `situation.continuity.record`
+- `situation.continuity.read`
+
+Situation projection, atom writes, temporal windows, and continuity records are
+policy-gated. Modules never self-authorize situation state. Dry-run projection
+persists nothing. Unknown situation actions fail closed.
+
+## Decision Policy
+
+Generic decision actions:
+
+- `decision.frame.create`
+- `decision.frame.read`
+- `decision.frame.update`
+- `decision.option.create`
+- `decision.option.read`
+- `decision.option.update`
+- `decision.utility_profile.create`
+- `decision.utility_profile.read`
+- `decision.utility_profile.update`
+- `decision.evaluate`
+- `decision.counterfactual.run`
+- `decision.record.create`
+- `decision.record.read`
+- `decision.record.update`
+- `decision.recommend`
+
+Decision policy gates evaluation, counterfactual projection, and journal
+records. Decision actions must not execute selected options and fail closed
+through the policy boundary.
+
+## Outcome Policy
+
+Generic outcome actions:
+
+- `outcome.create`
+- `outcome.read`
+- `outcome.update`
+- `outcome.delete`
+- `outcome.expected_effect.create`
+- `outcome.expected_effect.read`
+- `outcome.expected_effect.delete`
+- `outcome.observed_effect.create`
+- `outcome.observed_effect.read`
+- `outcome.observed_effect.collect`
+- `outcome.verify`
+- `outcome.verification.read`
+- `outcome.attribution.create`
+- `outcome.attribution.read`
+- `outcome.feedback.create`
+- `outcome.feedback.read`
+- `outcome.feedback.update`
+- `outcome.learning_bridge`
+
+Outcome policy gates expected-effect writes, observed-effect writes, outcome
+records, deterministic verification, causal attribution, feedback, and the
+learning bridge. Outcome failures fail closed at the policy boundary.
+
+Completion is not verification. The policy model must not allow outcome
+services to mutate source commands, workflows, decisions, memories, evidence,
+beliefs, or situations. Unknown outcome actions are denied.
+
+## Learning Synthesis Policy
+
+Generic learning actions:
+
+- `learning.experience.create`
+- `learning.experience.read`
+- `learning.experience.update`
+- `learning.experience.delete`
+- `learning.query`
+- `learning.pattern.mine`
+- `learning.pattern.read`
+- `learning.lesson.create`
+- `learning.lesson.read`
+- `learning.lesson.update`
+- `learning.synthesize`
+- `learning.synthesis.read`
+- `learning.skill_suggestion.create`
+- `learning.skill_suggestion.read`
+- `learning.skill_suggestion.update`
+- `learning.skill_suggestion.convert`
+- `learning.regression_suggestion.create`
+- `learning.regression_suggestion.read`
+- `learning.regression_suggestion.update`
+
+Learning synthesis policy gates experience writes, pattern mining, lesson
+creation, synthesis runs, and suggestion review. Policy failure fails closed.
+
+Learning policy does not authorize automatic skill promotion, automatic
+regression case creation, source code modification, external calls, or
+domain-specific learning behavior in Brain core.
+
+## Self Model Policy
+
+Generic self-model actions:
+
+- `self_model.read`
+- `self_model.update`
+- `self_model.describe`
+- `self_model.capability_awareness.read`
+- `self_model.capability_awareness.refresh`
+- `self_model.limitation.create`
+- `self_model.limitation.read`
+- `self_model.limitation.update`
+- `self_model.confidence.calibrate`
+- `self_model.confidence.read`
+- `self_model.assessment.run`
+- `self_model.assessment.read`
+- `self_model.introspection.create`
+- `self_model.introspection.read`
+
+Self-model policy gates descriptive profile reads, capability awareness,
+limitation writes, deterministic confidence calibration, self-assessment, and
+introspection snapshots. Policy failures fail closed.
+
+Self-model actions must not execute capabilities, enable adapters, mutate
+runtime configuration, promote skills, override autonomy, approve actions, or
+add domain-specific behavior to Brain core.

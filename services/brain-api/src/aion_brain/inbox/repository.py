@@ -93,9 +93,7 @@ class InboxRepository:
         with self._engine.connect() as connection:
             row = (
                 connection.execute(
-                    select(aion_inbox_messages).where(
-                        aion_inbox_messages.c.inbox_id == inbox_id
-                    )
+                    select(aion_inbox_messages).where(aion_inbox_messages.c.inbox_id == inbox_id)
                 )
                 .mappings()
                 .first()

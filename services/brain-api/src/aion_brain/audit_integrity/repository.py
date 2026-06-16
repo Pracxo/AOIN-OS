@@ -222,9 +222,7 @@ class AuditIntegrityRepository:
 
     def get_entry(self, audit_entry_id: str) -> AuditEntry | None:
         row = self._first(
-            select(aion_audit_entries).where(
-                aion_audit_entries.c.audit_entry_id == audit_entry_id
-            )
+            select(aion_audit_entries).where(aion_audit_entries.c.audit_entry_id == audit_entry_id)
         )
         return _row_to_model(row, AuditEntry) if row else None
 
@@ -374,8 +372,7 @@ class AuditIntegrityRepository:
     def get_verification_run(self, audit_verification_id: str) -> AuditVerificationRun | None:
         row = self._first(
             select(aion_audit_verification_runs).where(
-                aion_audit_verification_runs.c.audit_verification_id
-                == audit_verification_id
+                aion_audit_verification_runs.c.audit_verification_id == audit_verification_id
             )
         )
         return _row_to_model(row, AuditVerificationRun) if row else None

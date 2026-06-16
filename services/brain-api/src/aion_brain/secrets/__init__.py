@@ -1,2 +1,1 @@
 """Secret reference vault services."""
-

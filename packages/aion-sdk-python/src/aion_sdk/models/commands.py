@@ -20,4 +20,3 @@ class CommandDispatchResultModel(AIONSDKModel):
     command_id: str
     status: str
     idempotency_key: str | None = None
-

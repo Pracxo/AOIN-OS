@@ -1,2 +1,1 @@
 """Connector registry services."""
-

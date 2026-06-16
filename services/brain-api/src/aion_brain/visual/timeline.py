@@ -63,11 +63,14 @@ class TraceTimelineBuilder:
                 )
             )
         if request.include_telemetry:
-            telemetry = _call_optional(
-                self._trace_repository,
-                "list_visual_telemetry",
-                request.trace_id,
-            ) or []
+            telemetry = (
+                _call_optional(
+                    self._trace_repository,
+                    "list_visual_telemetry",
+                    request.trace_id,
+                )
+                or []
+            )
             for item in telemetry:
                 if not _include_telemetry(item.node_type, request):
                     continue
@@ -84,11 +87,14 @@ class TraceTimelineBuilder:
                     )
                 )
         if request.include_policy:
-            decisions = _call_optional(
-                self._trace_repository,
-                "list_policy_decisions",
-                request.trace_id,
-            ) or []
+            decisions = (
+                _call_optional(
+                    self._trace_repository,
+                    "list_policy_decisions",
+                    request.trace_id,
+                )
+                or []
+            )
             for decision in decisions:
                 events.append(
                     TraceTimelineEvent(
@@ -142,11 +148,14 @@ class TraceTimelineBuilder:
                     )
                 )
         if request.include_learning:
-            learning = _call_optional(
-                self._trace_repository,
-                "list_learning_signals",
-                request.trace_id,
-            ) or []
+            learning = (
+                _call_optional(
+                    self._trace_repository,
+                    "list_learning_signals",
+                    request.trace_id,
+                )
+                or []
+            )
             for signal in learning:
                 events.append(
                     TraceTimelineEvent(

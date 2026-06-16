@@ -50,4 +50,3 @@ def test_modules_resource_scaffold_calls_correct_endpoint() -> None:
     _client(handler).modules.scaffold({"module_id": "generic.example"})
 
     assert seen["path"] == "/brain/module-developer/scaffold"
-

@@ -108,4 +108,3 @@ def make_evidence(**updates: object) -> EvidenceRecord:
 def make_statement(statement: str = "alpha beta") -> GroundingStatement:
     """Create a grounding statement."""
     return GroundingStatement(statement_id="statement-1", statement=statement)
-

@@ -110,4 +110,3 @@ def test_cycle_settings_defaults_are_safe() -> None:
     assert settings.sleep_consolidation_enabled is True
     assert settings.cycle_controlled_mode_requires_approval is True
     assert settings.cycle_auto_run_enabled is False
-

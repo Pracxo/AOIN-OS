@@ -12,12 +12,8 @@ def test_run_level_service_sets_and_replaces_active_level() -> None:
     repository = autonomy_repository()
     service = RunLevelService(repository, AllowPolicy())
 
-    first = service.set_run_level(
-        SetRunLevelRequest(run_level="observe", reason="observe only")
-    )
-    second = service.set_run_level(
-        SetRunLevelRequest(run_level="dry_run", reason="enable dry run")
-    )
+    first = service.set_run_level(SetRunLevelRequest(run_level="observe", reason="observe only"))
+    second = service.set_run_level(SetRunLevelRequest(run_level="dry_run", reason="enable dry run"))
 
     assert repository.get_run_level(first.run_level_id).status == "ended"
     assert service.get_active_run_level(None, None) == second

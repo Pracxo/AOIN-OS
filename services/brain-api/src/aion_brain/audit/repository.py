@@ -197,7 +197,9 @@ class AuditRepository:
             connection.execute(
                 delete(aion_evaluations).where(aion_evaluations.c.trace_id == evaluation.trace_id)
             )
-            connection.execute(insert(aion_evaluations).values(**evaluation.model_dump(mode="python")))
+            connection.execute(
+                insert(aion_evaluations).values(**evaluation.model_dump(mode="python"))
+            )
         return evaluation
 
     def get_evaluation(self, trace_id: str) -> EvaluationRecord | None:
@@ -219,7 +221,9 @@ class AuditRepository:
                     aion_learning_signals.c.learning_id == signal.learning_id
                 )
             )
-            connection.execute(insert(aion_learning_signals).values(**signal.model_dump(mode="python")))
+            connection.execute(
+                insert(aion_learning_signals).values(**signal.model_dump(mode="python"))
+            )
         return signal
 
     def list_learning_signals(self, trace_id: str) -> list[LearningSignal]:

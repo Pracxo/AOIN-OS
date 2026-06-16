@@ -242,7 +242,9 @@ class ModelGatewayRepository:
                     aion_model_profiles.c.model_profile_id == record.model_profile_id
                 )
             )
-            connection.execute(insert(aion_model_profiles).values(**record.model_dump(mode="python")))
+            connection.execute(
+                insert(aion_model_profiles).values(**record.model_dump(mode="python"))
+            )
         return record
 
     def get_profile(self, model_profile_id: str) -> ModelProfile | None:
@@ -362,7 +364,9 @@ class ModelGatewayRepository:
                     aion_model_usage_records.c.usage_id == record.usage_id
                 )
             )
-            connection.execute(insert(aion_model_usage_records).values(**record.model_dump(mode="python")))
+            connection.execute(
+                insert(aion_model_usage_records).values(**record.model_dump(mode="python"))
+            )
         return record
 
     def list_usage(

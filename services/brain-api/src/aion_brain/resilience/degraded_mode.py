@@ -154,4 +154,3 @@ def _call_list(service: object | None, method_name: str, **kwargs: Any) -> list[
         return list(method(**kwargs))
     except Exception:
         return []
-

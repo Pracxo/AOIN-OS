@@ -5,6 +5,8 @@ from collections.abc import Sequence
 from datetime import UTC, datetime
 from typing import Any, cast
 
+from aion_brain.contracts.beliefs import BeliefQuery, BeliefQueryResult
+from aion_brain.contracts.entities import EntityQuery, EntityQueryResult
 from aion_brain.contracts.evidence import EvidenceSearchRequest, EvidenceSearchResult
 from aion_brain.contracts.graph import GraphQuery
 from aion_brain.contracts.memory import MemoryRetrievalRequest, SemanticMemoryQuery
@@ -16,6 +18,7 @@ from aion_brain.contracts.retrieval import (
     RetrievalSource,
     RetrievedContextItem,
 )
+from aion_brain.contracts.situations import SituationQuery
 from aion_brain.contracts.skills import SkillMatchRequest, SkillMatchResult
 from aion_brain.contracts.telemetry import (
     VisualNodeType,
@@ -43,6 +46,13 @@ class RetrievalRouter:
         trace_repository: object | None = None,
         evidence_service: object | None = None,
         working_memory_service: object | None = None,
+        belief_query_service: object | None = None,
+        entity_query_service: object | None = None,
+        concept_service: object | None = None,
+        situation_service: object | None = None,
+        state_atom_service: object | None = None,
+        temporal_state_window_service: object | None = None,
+        decision_journal_service: object | None = None,
         telemetry_service: object | None = None,
         retrieval_repository: RetrievalRepository | object | None = None,
         memory_governance_engine: object | None = None,
@@ -57,6 +67,13 @@ class RetrievalRouter:
         self._trace_repository = trace_repository
         self._evidence_service = evidence_service
         self._working_memory_service = working_memory_service
+        self._belief_query_service = belief_query_service
+        self._entity_query_service = entity_query_service
+        self._concept_service = concept_service
+        self._situation_service = situation_service
+        self._state_atom_service = state_atom_service
+        self._temporal_state_window_service = temporal_state_window_service
+        self._decision_journal_service = decision_journal_service
         self._telemetry_service = telemetry_service
         self._retrieval_repository = retrieval_repository
         self._memory_governance_engine = memory_governance_engine
@@ -90,9 +107,7 @@ class RetrievalRouter:
         ranked, governance_constraints = self._apply_memory_governance(request, ranked)
         constraints.extend(governance_constraints)
         filtered = [
-            item
-            for item in ranked
-            if request.min_score is None or item.score >= request.min_score
+            item for item in ranked if request.min_score is None or item.score >= request.min_score
         ][: request.limit]
         result = RetrievalResult(
             retrieval_id=request.retrieval_id,
@@ -127,6 +142,18 @@ class RetrievalRouter:
             return self._collect_evidence(request)
         if source == "working_memory":
             return self._collect_working_memory(request)
+        if source == "belief_state":
+            return self._collect_beliefs(request)
+        if source == "entity_registry":
+            return self._collect_entities(request)
+        if source == "concept_registry":
+            return self._collect_concepts(request)
+        if source == "situation_model":
+            return self._collect_situations(request)
+        if source == "temporal_state":
+            return self._collect_temporal_state(request)
+        if source == "decision_journal":
+            return self._collect_decision_journal(request)
         return []
 
     def _collect_lexical_memory(self, request: RetrievalRequest) -> list[RetrievedContextItem]:
@@ -206,9 +233,7 @@ class RetrievalRouter:
                     "retrieval_source": result.retrieval_source,
                     "created_at": result.memory.created_at.isoformat(),
                     "expires_at": (
-                        result.memory.expires_at.isoformat()
-                        if result.memory.expires_at
-                        else None
+                        result.memory.expires_at.isoformat() if result.memory.expires_at else None
                     ),
                     "matched_terms": result.matched_terms,
                     "base_relevance": result.score,
@@ -432,9 +457,7 @@ class RetrievalRouter:
                     source_id=chunk_id or result.evidence.evidence_id,
                     title=result.evidence.title,
                     content=(
-                        result.chunk.text
-                        if result.chunk is not None
-                        else result.evidence.summary
+                        result.chunk.text if result.chunk is not None else result.evidence.summary
                     ),
                     score=result.score,
                     confidence=result.evidence.confidence,
@@ -503,6 +526,319 @@ class RetrievalRouter:
                 )
             )
         return items
+
+    def _collect_beliefs(self, request: RetrievalRequest) -> list[RetrievedContextItem]:
+        query = getattr(self._belief_query_service, "query", None)
+        if not callable(query):
+            return []
+        include_contradicted = bool(request.metadata.get("include_contradicted"))
+        result = query(
+            BeliefQuery(
+                query=request.query,
+                scope=request.scope,
+                statuses=[],
+                limit=request.limit,
+                metadata={"include_contradicted": include_contradicted},
+            )
+        )
+        if not isinstance(result, BeliefQueryResult):
+            return []
+        items: list[RetrievedContextItem] = []
+        for claim in result.claims:
+            if claim.deleted_at is not None or claim.status in {"rejected", "archived"}:
+                continue
+            if claim.status == "contradicted" and not include_contradicted:
+                continue
+            items.append(
+                RetrievedContextItem(
+                    item_id=f"belief-{claim.claim_id}",
+                    source="belief_state",
+                    source_id=claim.claim_id,
+                    title="Belief claim",
+                    content=claim.claim_text,
+                    score=claim.confidence,
+                    confidence=claim.confidence,
+                    sensitivity=claim.sensitivity,
+                    owner_scope=claim.owner_scope,
+                    memory_type=None,
+                    capability_id=None,
+                    graph_node_ids=list(claim.graph_refs),
+                    graph_edge_ids=[],
+                    trace_refs=[claim.trace_id] if claim.trace_id else [],
+                    evidence_ref=claim.evidence_refs[0] if claim.evidence_refs else None,
+                    metadata={
+                        **claim.metadata,
+                        "status": claim.status,
+                        "claim_type": claim.claim_type,
+                        "belief_state_is_not_absolute_truth": True,
+                    },
+                )
+            )
+        return items
+
+    def _collect_entities(self, request: RetrievalRequest) -> list[RetrievedContextItem]:
+        query = getattr(self._entity_query_service, "query", None)
+        if not callable(query):
+            return []
+        result = query(
+            EntityQuery(
+                query=request.query,
+                scope=request.scope,
+                statuses=["active", "proposed"],
+                include_merged=False,
+                limit=request.limit,
+            )
+        )
+        if not isinstance(result, EntityQueryResult):
+            return []
+        items: list[RetrievedContextItem] = []
+        for entity in result.entities:
+            items.append(
+                RetrievedContextItem(
+                    item_id=f"entity-{entity.entity_id}",
+                    source="entity_registry",
+                    source_id=entity.entity_id,
+                    title=entity.entity_type,
+                    content=entity.canonical_name,
+                    score=entity.confidence,
+                    confidence=entity.confidence,
+                    sensitivity=entity.sensitivity,
+                    owner_scope=entity.owner_scope,
+                    memory_type=None,
+                    capability_id=None,
+                    graph_node_ids=list(entity.graph_refs),
+                    graph_edge_ids=[],
+                    trace_refs=[entity.trace_id] if entity.trace_id else [],
+                    evidence_ref=entity.evidence_refs[0] if entity.evidence_refs else None,
+                    metadata={
+                        **entity.metadata,
+                        "status": entity.status,
+                        "entity_type": entity.entity_type,
+                        "concept_refs": entity.concept_refs,
+                        "memory_refs": entity.memory_refs,
+                        "belief_refs": entity.belief_refs,
+                        "base_relevance": entity.confidence,
+                    },
+                )
+            )
+        return items
+
+    def _collect_concepts(self, request: RetrievalRequest) -> list[RetrievedContextItem]:
+        list_concepts = getattr(self._concept_service, "list_concepts", None)
+        if not callable(list_concepts):
+            return []
+        concepts = list_concepts(
+            scope=request.scope,
+            query=request.query,
+            status="active",
+            limit=request.limit,
+        )
+        items: list[RetrievedContextItem] = []
+        for concept in concepts:
+            content = f"{concept.name}: {concept.description}"
+            items.append(
+                RetrievedContextItem(
+                    item_id=f"concept-{concept.concept_id}",
+                    source="concept_registry",
+                    source_id=concept.concept_id,
+                    title=concept.concept_type,
+                    content=content,
+                    score=0.7,
+                    confidence=0.7,
+                    sensitivity="internal",
+                    owner_scope=concept.owner_scope,
+                    memory_type=None,
+                    capability_id=None,
+                    graph_node_ids=[],
+                    graph_edge_ids=[],
+                    trace_refs=[concept.trace_id] if concept.trace_id else [],
+                    evidence_ref=None,
+                    metadata={
+                        **concept.metadata,
+                        "status": concept.status,
+                        "concept_type": concept.concept_type,
+                        "aliases": concept.aliases,
+                        "base_relevance": 0.7,
+                    },
+                )
+            )
+        return items
+
+    def _collect_situations(self, request: RetrievalRequest) -> list[RetrievedContextItem]:
+        query = getattr(self._situation_service, "query", None)
+        if not callable(query):
+            return []
+        result = query(
+            SituationQuery(
+                trace_id=request.trace_id,
+                scope=request.scope,
+                statuses=["active", "stale"],
+                text=request.query,
+                include_state_atoms=True,
+                limit=request.limit,
+            )
+        )
+        items: list[RetrievedContextItem] = []
+        for situation in getattr(result, "situations", []):
+            items.append(
+                RetrievedContextItem(
+                    item_id=f"situation-{situation.situation_id}",
+                    source="situation_model",
+                    source_id=situation.situation_id,
+                    title=situation.title,
+                    content=f"{situation.title}: {situation.summary}",
+                    score=0.68,
+                    confidence=situation.confidence,
+                    sensitivity="internal",
+                    owner_scope=situation.owner_scope,
+                    memory_type=None,
+                    capability_id=None,
+                    graph_node_ids=[],
+                    graph_edge_ids=[],
+                    trace_refs=[situation.trace_id] if situation.trace_id else [],
+                    evidence_ref=situation.evidence_refs[0] if situation.evidence_refs else None,
+                    metadata={
+                        **situation.metadata,
+                        "status": situation.status,
+                        "situation_type": situation.situation_type,
+                        "active_goal_ids": situation.active_goal_ids,
+                        "active_task_ids": situation.active_task_ids,
+                        "base_relevance": 0.68,
+                    },
+                )
+            )
+        for atom in getattr(result, "state_atoms", []):
+            items.append(
+                RetrievedContextItem(
+                    item_id=f"state-atom-{atom.state_atom_id}",
+                    source="situation_model",
+                    source_id=atom.state_atom_id,
+                    title=atom.predicate,
+                    content=f"{atom.subject_ref or atom.source_id} {atom.predicate}: {atom.value}",
+                    score=0.66,
+                    confidence=atom.confidence,
+                    sensitivity=atom.sensitivity,
+                    owner_scope=atom.owner_scope,
+                    memory_type=None,
+                    capability_id=None,
+                    graph_node_ids=[],
+                    graph_edge_ids=[],
+                    trace_refs=[atom.trace_id] if atom.trace_id else [],
+                    evidence_ref=atom.evidence_refs[0] if atom.evidence_refs else None,
+                    metadata={
+                        **atom.metadata,
+                        "status": atom.status,
+                        "atom_type": atom.atom_type,
+                        "source_type": atom.source_type,
+                        "situation_id": atom.situation_id,
+                        "base_relevance": 0.66,
+                    },
+                )
+            )
+        return items
+
+    def _collect_temporal_state(self, request: RetrievalRequest) -> list[RetrievedContextItem]:
+        list_windows = getattr(self._temporal_state_window_service, "list_windows", None)
+        if not callable(list_windows):
+            return []
+        windows = list_windows(scope=request.scope, trace_id=request.trace_id, limit=request.limit)
+        return [
+            RetrievedContextItem(
+                item_id=f"temporal-window-{window.temporal_window_id}",
+                source="temporal_state",
+                source_id=window.temporal_window_id,
+                title=window.window_type,
+                content=window.summary,
+                score=0.65,
+                confidence=0.7,
+                sensitivity="internal",
+                owner_scope=window.owner_scope,
+                memory_type=None,
+                capability_id=None,
+                graph_node_ids=[],
+                graph_edge_ids=[],
+                trace_refs=[window.trace_id] if window.trace_id else [],
+                evidence_ref=None,
+                metadata={
+                    **window.metadata,
+                    "window_type": window.window_type,
+                    "start_at": window.start_at.isoformat(),
+                    "end_at": window.end_at.isoformat(),
+                    "state_atom_ids": window.state_atom_ids,
+                    "base_relevance": 0.65,
+                },
+            )
+            for window in windows
+        ]
+
+    def _collect_decision_journal(self, request: RetrievalRequest) -> list[RetrievedContextItem]:
+        list_records = getattr(self._decision_journal_service, "list_records", None)
+        repository = getattr(self._decision_journal_service, "_repository", None)
+        records = list_records(request.scope, limit=request.limit) if callable(list_records) else []
+        frames = []
+        list_frames = getattr(repository, "list_frames", None)
+        if callable(list_frames):
+            frames = list_frames(scope=request.scope, status="open", limit=request.limit)
+        items: list[RetrievedContextItem] = []
+        for frame in frames:
+            items.append(
+                RetrievedContextItem(
+                    item_id=f"decision-frame-{frame.decision_frame_id}",
+                    source="decision_journal",
+                    source_id=frame.decision_frame_id,
+                    title=frame.title,
+                    content=f"{frame.title}: {frame.question}",
+                    score=0.64,
+                    confidence=0.7,
+                    sensitivity="internal",
+                    owner_scope=frame.owner_scope,
+                    memory_type=None,
+                    capability_id=None,
+                    graph_node_ids=[],
+                    graph_edge_ids=[],
+                    trace_refs=[frame.trace_id] if frame.trace_id else [],
+                    evidence_ref=frame.evidence_refs[0] if frame.evidence_refs else None,
+                    metadata={
+                        "status": frame.status,
+                        "frame_type": frame.frame_type,
+                        "constraints": frame.constraints,
+                        "base_relevance": 0.64,
+                    },
+                )
+            )
+        for record in records:
+            frame = repository.get_frame(record.decision_frame_id) if repository else None
+            scope = frame.owner_scope if frame is not None else request.scope
+            selected = record.selected_option_id or "none"
+            items.append(
+                RetrievedContextItem(
+                    item_id=f"decision-record-{record.decision_record_id}",
+                    source="decision_journal",
+                    source_id=record.decision_record_id,
+                    title=record.decision_type,
+                    content=(
+                        f"Decision record {record.decision_type}: selected={selected}. "
+                        f"Rationale: {record.rationale}"
+                    ),
+                    score=0.62,
+                    confidence=0.7,
+                    sensitivity="internal",
+                    owner_scope=scope,
+                    memory_type=None,
+                    capability_id=None,
+                    graph_node_ids=[],
+                    graph_edge_ids=[],
+                    trace_refs=[record.trace_id] if record.trace_id else [],
+                    evidence_ref=None,
+                    metadata={
+                        "status": record.status,
+                        "decision_frame_id": record.decision_frame_id,
+                        "selected_option_id": record.selected_option_id,
+                        "base_relevance": 0.62,
+                    },
+                )
+            )
+        return items[: request.limit]
 
     def _authorize_global(self, request: RetrievalRequest) -> bool:
         decision = self._authorize(
@@ -652,9 +988,7 @@ class RetrievalRouter:
                 metadata = {
                     **item.metadata,
                     "governance_decision": str(decision_value),
-                    "governance_decision_id": str(
-                        getattr(decision, "governance_decision_id", "")
-                    ),
+                    "governance_decision_id": str(getattr(decision, "governance_decision_id", "")),
                 }
                 item = item.model_copy(update={"metadata": metadata})
         decay_score = _metadata_float(item.metadata, "governance_decay_score")
@@ -727,6 +1061,18 @@ def _action_for_source(source: RetrievalSource) -> str:
         return "evidence.search"
     if source == "working_memory":
         return "working_memory.read"
+    if source == "belief_state":
+        return "belief.query"
+    if source == "entity_registry":
+        return "entity.read"
+    if source == "concept_registry":
+        return "concept.read"
+    if source == "situation_model":
+        return "situation.read"
+    if source == "temporal_state":
+        return "situation.temporal_window.read"
+    if source == "decision_journal":
+        return "decision.record.read"
     return "memory.retrieve"
 
 
@@ -789,6 +1135,16 @@ def _telemetry_event_type(source: RetrievalSource) -> VisualTelemetryEventType:
         return "trace_created"
     if source == "evidence_vault":
         return "evidence_retrieved"
+    if source == "entity_registry":
+        return "entity_reference_resolved"
+    if source == "concept_registry":
+        return "concept_created"
+    if source == "situation_model":
+        return "situation_created"
+    if source == "temporal_state":
+        return "temporal_state_window_created"
+    if source == "decision_journal":
+        return "decision_recorded"
     return "memory_node_activated"
 
 
@@ -803,6 +1159,16 @@ def _telemetry_node_type(source: RetrievalSource) -> VisualNodeType:
         return "evidence"
     if source == "working_memory":
         return "working_memory"
+    if source == "entity_registry":
+        return "entity"
+    if source == "concept_registry":
+        return "concept"
+    if source == "situation_model":
+        return "situation"
+    if source == "temporal_state":
+        return "temporal_window"
+    if source == "decision_journal":
+        return "decision"
     return "memory"
 
 

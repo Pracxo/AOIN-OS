@@ -6,10 +6,7 @@ from tests.performance_fakes import SCOPE
 
 def test_default_benchmarks_contain_no_domain_terms() -> None:
     text = " ".join(
-        [
-            benchmark.model_dump_json()
-            for benchmark in list_default_benchmarks(SCOPE)
-        ]
+        [benchmark.model_dump_json() for benchmark in list_default_benchmarks(SCOPE)]
     ).lower()
 
     for term in {"finance", "trading", "legal", "healthcare", "medical", "payments"}:

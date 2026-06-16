@@ -100,11 +100,7 @@ def _lifecycle_readiness_score(trace: DecisionTrace, status: str) -> float:
 def _evidence_grounding_score(trace: DecisionTrace, status: str) -> float:
     claims = trace.outcome.get("grounding_claims")
     if isinstance(claims, list) and claims:
-        statuses = [
-            claim.get("verification_status")
-            for claim in claims
-            if isinstance(claim, dict)
-        ]
+        statuses = [claim.get("verification_status") for claim in claims if isinstance(claim, dict)]
         if any(value == "supported" for value in statuses):
             return 1.0
         if statuses and all(value == "insufficient_evidence" for value in statuses):

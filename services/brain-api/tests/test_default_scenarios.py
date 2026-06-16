@@ -16,10 +16,10 @@ def test_default_scenarios_contain_no_domain_terms() -> None:
     for scenario in list_default_scenarios(["workspace:main"]):
         parts.extend(
             [
-            scenario.scenario_id,
-            scenario.name,
-            scenario.description,
-            " ".join(scenario.tags),
+                scenario.scenario_id,
+                scenario.name,
+                scenario.description,
+                " ".join(scenario.tags),
             ]
         )
     text = " ".join(parts).lower()

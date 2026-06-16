@@ -110,9 +110,7 @@ def list_memberships(
 ) -> list[WorkspaceMembership]:
     """List workspace memberships."""
     try:
-        return service.with_actor_context(actor_context).list_memberships(
-            workspace_id=workspace_id
-        )
+        return service.with_actor_context(actor_context).list_memberships(workspace_id=workspace_id)
     except IdentityPolicyDenied as exc:
         raise _policy_denied(exc) from exc
 

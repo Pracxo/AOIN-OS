@@ -18,7 +18,9 @@ from aion_brain.contracts.commands import (
     CommandDispatchResult,
     CommandStatus,
 )
+from aion_brain.contracts.effects import ObservedEffectCreateRequest
 from aion_brain.contracts.idempotency import IdempotencyCheckRequest
+from aion_brain.contracts.outcomes import OutcomeCreateRequest
 from aion_brain.contracts.policy import PolicyDecision, PolicyRequest
 from aion_brain.contracts.risk import RiskAssessmentRequest, RiskLevel
 from aion_brain.contracts.sandbox import SandboxRunRequest
@@ -50,6 +52,8 @@ class CommandBus:
         sandbox_service: object | None = None,
         retry_policy_service: object | None = None,
         audit_sink: object | None = None,
+        observed_effect_collector: object | None = None,
+        outcome_service: object | None = None,
     ) -> None:
         self._repository = command_repository
         self._handlers = command_handlers
@@ -64,6 +68,8 @@ class CommandBus:
         self._sandbox_service = sandbox_service
         self._retry_policy_service = retry_policy_service
         self._audit_sink = audit_sink
+        self._observed_effect_collector = observed_effect_collector
+        self._outcome_service = outcome_service
 
     def set_retry_policy_service(self, retry_policy_service: object | None) -> None:
         """Attach retry policy metadata after kernel assembly."""
@@ -79,9 +85,7 @@ class CommandBus:
         compute_delay_ms = getattr(self._retry_policy_service, "compute_delay_ms", None)
         should_retry = getattr(self._retry_policy_service, "should_retry", None)
         if not (
-            callable(policy_for_target)
-            and callable(compute_delay_ms)
-            and callable(should_retry)
+            callable(policy_for_target) and callable(compute_delay_ms) and callable(should_retry)
         ):
             return {"retry_configured": False}
         try:
@@ -242,12 +246,63 @@ class CommandBus:
             "command_completed" if final.status == "completed" else "command_failed",
             "completed" if final.status == "completed" else "failed",
         )
+        self._record_command_outcome(final, request)
         result = self._result(final, False, outbox_ids, final.status)
         return self._complete_idempotency(request, result)
 
     def get(self, command_id: str) -> BrainCommand | None:
         """Return one command."""
         return self._repository.get(command_id)
+
+    def _record_command_outcome(
+        self,
+        command: BrainCommand,
+        request: CommandDispatchRequest,
+    ) -> None:
+        if not bool(getattr(self._settings, "outcome_auto_collect_from_commands", True)):
+            return
+        create_observed = getattr(self._observed_effect_collector, "create_observed_effect", None)
+        create_outcome = getattr(self._outcome_service, "create_outcome_once_for_source", None)
+        if not callable(create_observed) or not callable(create_outcome):
+            return
+        try:
+            observed = create_observed(
+                ObservedEffectCreateRequest(
+                    trace_id=command.trace_id,
+                    source_type="command",
+                    source_id=command.command_id,
+                    effect_type="command_completed",
+                    predicate="status",
+                    observed_value={"status": command.status},
+                    observation_source_type="command",
+                    observation_source_id=command.command_id,
+                    confidence=0.9 if command.status == "completed" else 0.6,
+                    owner_scope=request.owner_scope,
+                    metadata={"auto_collected": True, "completion_is_not_verification": True},
+                    observed_at=command.completed_at,
+                )
+            )
+            create_outcome(
+                OutcomeCreateRequest(
+                    trace_id=command.trace_id,
+                    actor_id=command.actor_id,
+                    workspace_id=command.workspace_id,
+                    source_type="command",
+                    source_id=command.command_id,
+                    outcome_type="command",
+                    title="Command outcome recorded",
+                    summary="Command completion was recorded as an observed effect.",
+                    owner_scope=request.owner_scope,
+                    observed_effects=[observed.observed_effect_id],
+                    confidence=observed.confidence,
+                    score=0.5,
+                    metadata={"auto_collected": True, "completion_is_not_verification": True},
+                    observed_at=command.completed_at,
+                    created_by=command.actor_id,
+                )
+            )
+        except Exception:
+            return
 
     def list_commands(
         self,

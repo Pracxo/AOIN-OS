@@ -44,4 +44,3 @@ class LocalObjectStore:
         if not content_ref.startswith(prefix):
             raise ValueError("unsupported local content_ref")
         return self._root / content_ref.removeprefix(prefix)
-

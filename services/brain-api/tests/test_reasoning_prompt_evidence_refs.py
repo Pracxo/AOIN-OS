@@ -32,4 +32,3 @@ def test_prompt_builder_includes_evidence_refs() -> None:
 
     assert items["evidence_refs"] == ["evidence-1"]
     assert any("Ground claims" in instruction for instruction in prompt.system_instructions)
-

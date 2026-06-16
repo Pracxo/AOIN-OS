@@ -306,9 +306,7 @@ def _replay_event(event: AIONEvent, replay_id: str, request: ReplayRequest) -> A
         "controlled_execution",
     }
     payload = {
-        key: value
-        for key, value in event.payload.items()
-        if key not in disabled_side_effect_keys
+        key: value for key, value in event.payload.items() if key not in disabled_side_effect_keys
     }
     payload["replay"] = True
     payload["replay_mode"] = request.mode

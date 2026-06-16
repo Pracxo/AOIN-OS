@@ -123,14 +123,14 @@ class RegressionRepository:
         """Persist and return a regression case."""
         self._ensure_schema()
         now = datetime.now(UTC)
-        stored = case.model_copy(
-            update={"created_at": case.created_at or now, "updated_at": now}
-        )
+        stored = case.model_copy(update={"created_at": case.created_at or now, "updated_at": now})
         with self._engine.begin() as connection:
             connection.execute(
                 delete(aion_regression_cases).where(aion_regression_cases.c.case_id == case.case_id)
             )
-            connection.execute(insert(aion_regression_cases).values(**stored.model_dump(mode="python")))
+            connection.execute(
+                insert(aion_regression_cases).values(**stored.model_dump(mode="python"))
+            )
         return stored
 
     def get_case(self, case_id: str) -> RegressionCase | None:

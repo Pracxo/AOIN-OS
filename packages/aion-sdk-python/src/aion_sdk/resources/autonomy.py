@@ -31,4 +31,3 @@ class AutonomyResource:
 
     def set_run_level(self, request: JSONDict) -> JSONValue:
         return self._client.post("/brain/autonomy/run-levels", json=request)
-

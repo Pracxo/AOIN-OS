@@ -22,4 +22,3 @@ class HealthResource:
 
     def ready(self) -> JSONValue:
         return self._client.get("/health/ready")
-

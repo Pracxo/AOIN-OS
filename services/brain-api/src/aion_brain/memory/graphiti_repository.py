@@ -223,11 +223,15 @@ class GraphitiRepository:
             "deleted_at": None,
         }
         with self._engine.begin() as connection:
-            existing = connection.execute(
-                select(aion_graphiti_sync_records).where(
-                    aion_graphiti_sync_records.c.sync_id == values["sync_id"]
+            existing = (
+                connection.execute(
+                    select(aion_graphiti_sync_records).where(
+                        aion_graphiti_sync_records.c.sync_id == values["sync_id"]
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
             if existing is None:
                 connection.execute(insert(aion_graphiti_sync_records).values(**values))
             else:
@@ -256,9 +260,7 @@ class GraphitiRepository:
         with self._engine.connect() as connection:
             rows = connection.execute(statement).mappings().all()
         records = [
-            _sync_from_row(row)
-            for row in rows
-            if _scope_matches(list(row["owner_scope"]), scope)
+            _sync_from_row(row) for row in rows if _scope_matches(list(row["owner_scope"]), scope)
         ]
         return records[:limit]
 

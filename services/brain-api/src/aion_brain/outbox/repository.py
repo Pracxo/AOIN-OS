@@ -143,9 +143,7 @@ class OutboxRepository:
         """List recent messages."""
         self._ensure_schema()
         statement = (
-            select(aion_outbox_messages)
-            .order_by(aion_outbox_messages.c.created_at)
-            .limit(limit)
+            select(aion_outbox_messages).order_by(aion_outbox_messages.c.created_at).limit(limit)
         )
         if status is not None:
             statement = statement.where(aion_outbox_messages.c.status == status)

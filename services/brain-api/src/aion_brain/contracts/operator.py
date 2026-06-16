@@ -28,6 +28,8 @@ OperatorCategory = Literal[
     "tasks",
     "cycles",
     "visual",
+    "learning",
+    "self_model",
     "sdk",
     "operator",
 ]
@@ -57,6 +59,9 @@ OperatorQueueType = Literal[
     "resilience_tests",
     "security_scans",
     "scenarios",
+    "learning_patterns",
+    "skill_suggestions",
+    "regression_suggestions",
     "generic",
 ]
 OperatorActionStatus = Literal["open", "acknowledged", "resolved", "dismissed"]
@@ -81,6 +86,18 @@ OperatorActionSourceType = Literal[
     "performance",
     "scenario",
     "visual",
+    "outcome",
+    "effect_verification",
+    "outcome_feedback",
+    "learning_pattern",
+    "skill_suggestion",
+    "regression_suggestion",
+    "learning_synthesis",
+    "self_model",
+    "limitation",
+    "self_assessment",
+    "capability_awareness",
+    "confidence_calibration",
     "generic",
 ]
 OperatorOverallStatus = Literal[

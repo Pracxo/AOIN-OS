@@ -198,9 +198,7 @@ def verify_audit(
 ) -> AuditVerificationRun:
     """Verify audit integrity."""
     _authorize(container, actor_context, "audit.verify", "audit", body.trace_id, "medium")
-    request = body.model_copy(
-        update={"created_by": body.created_by or actor_context.actor_id}
-    )
+    request = body.model_copy(update={"created_by": body.created_by or actor_context.actor_id})
     return verifier.verify(request)
 
 

@@ -185,8 +185,7 @@ def _coerce_search_result(raw: Any) -> tuple[list[float], list[int]]:
 
 def _looks_like_ids(values: list[Any]) -> bool:
     return all(
-        isinstance(value, int)
-        or (isinstance(value, float) and value.is_integer())
+        isinstance(value, int) or (isinstance(value, float) and value.is_integer())
         for value in values
     )
 

@@ -56,4 +56,3 @@ def test_build_headers_skips_empty_values_and_authorization() -> None:
     assert headers["Idempotency-Key"] == "idem-1"
     assert headers["X-Test"] == "ok"
     assert "Authorization" not in headers
-

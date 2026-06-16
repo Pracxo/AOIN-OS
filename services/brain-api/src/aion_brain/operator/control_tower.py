@@ -50,11 +50,7 @@ class OperatorControlTowerService:
         self._authorize("operator.overview.read", request.owner_scope, "operator", None)
         cards = self.status_cards(request.owner_scope) if request.include_cards else []
         queues = self.queues(request.owner_scope) if request.include_queues else []
-        actions = (
-            self.actions(request.owner_scope)
-            if request.include_actions
-            else []
-        )
+        actions = self.actions(request.owner_scope) if request.include_actions else []
         readiness = (
             self.readiness(request.owner_scope).model_dump(mode="json")
             if request.include_readiness

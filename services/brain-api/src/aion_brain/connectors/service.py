@@ -173,9 +173,7 @@ class ConnectorService:
                 )
             )
         failed = [check for check in checks if check.status == "failed"]
-        failed_has_high_severity = any(
-            check.severity in {"high", "critical"} for check in failed
-        )
+        failed_has_high_severity = any(check.severity in {"high", "critical"} for check in failed)
         result = SandboxValidationResult(
             validation_id=f"connector-validation-{uuid4().hex}",
             sandbox_profile_id=None,

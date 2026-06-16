@@ -173,8 +173,7 @@ class EvidenceRepository:
         self._ensure_schema()
         now = datetime.now(UTC)
         stored = [
-            chunk.model_copy(update={"created_at": chunk.created_at or now})
-            for chunk in chunks
+            chunk.model_copy(update={"created_at": chunk.created_at or now}) for chunk in chunks
         ]
         if stored:
             with self._engine.begin() as connection:

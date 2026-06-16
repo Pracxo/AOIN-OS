@@ -79,6 +79,16 @@ def test_settings_defaults_match_env_example(monkeypatch) -> None:
         "AION_DEPENDENCY_HEALTH_ENABLED",
         "AION_RETRY_POLICY_REGISTRY_ENABLED",
         "AION_RESILIENCE_FAIL_FREEZE_ON_CRITICAL",
+        "AION_LEARNING_SYNTHESIS_ENABLED",
+        "AION_EXPERIENCE_LEDGER_ENABLED",
+        "AION_PATTERN_MINING_ENABLED",
+        "AION_LESSON_RECORDS_ENABLED",
+        "AION_SKILL_SUGGESTIONS_ENABLED",
+        "AION_REGRESSION_SUGGESTIONS_ENABLED",
+        "AION_LEARNING_AUTO_SYNTHESIS_ENABLED",
+        "AION_LEARNING_MIN_PATTERN_FREQUENCY",
+        "AION_LEARNING_MIN_PATTERN_CONFIDENCE",
+        "AION_LEARNING_SKILL_SUGGESTIONS_PROMOTION_ALLOWED_DEFAULT",
     ]:
         monkeypatch.delenv(key, raising=False)
 
@@ -135,6 +145,16 @@ def test_settings_defaults_match_env_example(monkeypatch) -> None:
     assert settings.dependency_health_enabled is True
     assert settings.retry_policy_registry_enabled is True
     assert settings.resilience_fail_freeze_on_critical is True
+    assert settings.learning_synthesis_enabled is True
+    assert settings.experience_ledger_enabled is True
+    assert settings.pattern_mining_enabled is True
+    assert settings.lesson_records_enabled is True
+    assert settings.skill_suggestions_enabled is True
+    assert settings.regression_suggestions_enabled is True
+    assert settings.learning_auto_synthesis_enabled is False
+    assert settings.learning_min_pattern_frequency == 2
+    assert settings.learning_min_pattern_confidence == 0.6
+    assert settings.learning_skill_suggestions_promotion_allowed_default is False
     assert settings.runtime_adapter == "langgraph"
     assert settings.graph_memory_adapter == "postgres_graph"
     assert settings.default_graph_memory_adapter == "postgres_graph"
@@ -232,6 +252,19 @@ def test_settings_read_environment_variables(monkeypatch) -> None:
     monkeypatch.setenv("AION_DEPENDENCY_HEALTH_ENABLED", "false")
     monkeypatch.setenv("AION_RETRY_POLICY_REGISTRY_ENABLED", "false")
     monkeypatch.setenv("AION_RESILIENCE_FAIL_FREEZE_ON_CRITICAL", "false")
+    monkeypatch.setenv("AION_LEARNING_SYNTHESIS_ENABLED", "false")
+    monkeypatch.setenv("AION_EXPERIENCE_LEDGER_ENABLED", "false")
+    monkeypatch.setenv("AION_PATTERN_MINING_ENABLED", "false")
+    monkeypatch.setenv("AION_LESSON_RECORDS_ENABLED", "false")
+    monkeypatch.setenv("AION_SKILL_SUGGESTIONS_ENABLED", "false")
+    monkeypatch.setenv("AION_REGRESSION_SUGGESTIONS_ENABLED", "false")
+    monkeypatch.setenv("AION_LEARNING_AUTO_SYNTHESIS_ENABLED", "true")
+    monkeypatch.setenv("AION_LEARNING_MIN_PATTERN_FREQUENCY", "5")
+    monkeypatch.setenv("AION_LEARNING_MIN_PATTERN_CONFIDENCE", "0.85")
+    monkeypatch.setenv(
+        "AION_LEARNING_SKILL_SUGGESTIONS_PROMOTION_ALLOWED_DEFAULT",
+        "true",
+    )
 
     settings = Settings(_env_file=None)
 
@@ -297,3 +330,13 @@ def test_settings_read_environment_variables(monkeypatch) -> None:
     assert settings.dependency_health_enabled is False
     assert settings.retry_policy_registry_enabled is False
     assert settings.resilience_fail_freeze_on_critical is False
+    assert settings.learning_synthesis_enabled is False
+    assert settings.experience_ledger_enabled is False
+    assert settings.pattern_mining_enabled is False
+    assert settings.lesson_records_enabled is False
+    assert settings.skill_suggestions_enabled is False
+    assert settings.regression_suggestions_enabled is False
+    assert settings.learning_auto_synthesis_enabled is True
+    assert settings.learning_min_pattern_frequency == 5
+    assert settings.learning_min_pattern_confidence == 0.85
+    assert settings.learning_skill_suggestions_promotion_allowed_default is True

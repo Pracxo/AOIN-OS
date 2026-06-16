@@ -208,8 +208,7 @@ class PerformanceRepository:
         with self._engine.begin() as connection:
             connection.execute(
                 delete(aion_performance_samples).where(
-                    aion_performance_samples.c.performance_sample_id
-                    == sample.performance_sample_id
+                    aion_performance_samples.c.performance_sample_id == sample.performance_sample_id
                 )
             )
             connection.execute(insert(aion_performance_samples).values(**values))
@@ -262,11 +261,15 @@ class PerformanceRepository:
     def get_benchmark(self, benchmark_id: str) -> BenchmarkDefinition | None:
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_benchmark_definitions).where(
-                    aion_benchmark_definitions.c.benchmark_id == benchmark_id
+            row = (
+                connection.execute(
+                    select(aion_benchmark_definitions).where(
+                        aion_benchmark_definitions.c.benchmark_id == benchmark_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _row_to_benchmark(row) if row is not None else None
 
     def list_benchmarks(
@@ -310,11 +313,15 @@ class PerformanceRepository:
     def get_run(self, benchmark_run_id: str) -> BenchmarkRun | None:
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_benchmark_runs).where(
-                    aion_benchmark_runs.c.benchmark_run_id == benchmark_run_id
+            row = (
+                connection.execute(
+                    select(aion_benchmark_runs).where(
+                        aion_benchmark_runs.c.benchmark_run_id == benchmark_run_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         if row is None:
             return None
         samples = self.list_samples(benchmark_run_id=benchmark_run_id)
@@ -337,8 +344,7 @@ class PerformanceRepository:
         runs = [run for row in rows if (run := self.get_run(str(row["benchmark_run_id"])))]
         if benchmark_type:
             ids = {
-                item.benchmark_id
-                for item in self.list_benchmarks(benchmark_type=benchmark_type)
+                item.benchmark_id for item in self.list_benchmarks(benchmark_type=benchmark_type)
             }
             runs = [run for run in runs if run.benchmark_id in ids]
         return runs
@@ -351,8 +357,7 @@ class PerformanceRepository:
         with self._engine.begin() as connection:
             connection.execute(
                 delete(aion_capacity_baselines).where(
-                    aion_capacity_baselines.c.capacity_baseline_id
-                    == saved.capacity_baseline_id
+                    aion_capacity_baselines.c.capacity_baseline_id == saved.capacity_baseline_id
                 )
             )
             connection.execute(insert(aion_capacity_baselines).values(**values))
@@ -361,11 +366,15 @@ class PerformanceRepository:
     def get_baseline(self, capacity_baseline_id: str) -> CapacityBaseline | None:
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_capacity_baselines).where(
-                    aion_capacity_baselines.c.capacity_baseline_id == capacity_baseline_id
+            row = (
+                connection.execute(
+                    select(aion_capacity_baselines).where(
+                        aion_capacity_baselines.c.capacity_baseline_id == capacity_baseline_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _row_to_baseline(row) if row is not None else None
 
     def list_baselines(

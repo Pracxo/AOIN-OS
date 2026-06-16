@@ -251,11 +251,15 @@ class WorkflowRepository:
         """Return one workflow definition."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_workflow_definitions).where(
-                    aion_workflow_definitions.c.workflow_id == workflow_id
+            row = (
+                connection.execute(
+                    select(aion_workflow_definitions).where(
+                        aion_workflow_definitions.c.workflow_id == workflow_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _definition_from_row(row) if row is not None else None
 
     def list_workflows(
@@ -312,11 +316,15 @@ class WorkflowRepository:
         """Return one workflow run with step runs."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_workflow_runs).where(
-                    aion_workflow_runs.c.workflow_run_id == workflow_run_id
+            row = (
+                connection.execute(
+                    select(aion_workflow_runs).where(
+                        aion_workflow_runs.c.workflow_run_id == workflow_run_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         if row is None:
             return None
         run = _run_from_row(row)
@@ -333,9 +341,7 @@ class WorkflowRepository:
         """List workflow runs."""
         self._ensure_schema()
         statement = (
-            select(aion_workflow_runs)
-            .order_by(aion_workflow_runs.c.created_at.desc())
-            .limit(limit)
+            select(aion_workflow_runs).order_by(aion_workflow_runs.c.created_at.desc()).limit(limit)
         )
         if workflow_id is not None:
             statement = statement.where(aion_workflow_runs.c.workflow_id == workflow_id)
@@ -387,8 +393,7 @@ class WorkflowRepository:
         with self._engine.begin() as connection:
             existing = connection.execute(
                 select(aion_workflow_step_runs.c.workflow_step_run_id).where(
-                    aion_workflow_step_runs.c.workflow_step_run_id
-                    == step_run.workflow_step_run_id
+                    aion_workflow_step_runs.c.workflow_step_run_id == step_run.workflow_step_run_id
                 )
             ).first()
             if existing is None:
@@ -408,11 +413,15 @@ class WorkflowRepository:
         """Return step runs for a workflow run."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            rows = connection.execute(
-                select(aion_workflow_step_runs)
-                .where(aion_workflow_step_runs.c.workflow_run_id == workflow_run_id)
-                .order_by(aion_workflow_step_runs.c.created_at)
-            ).mappings().all()
+            rows = (
+                connection.execute(
+                    select(aion_workflow_step_runs)
+                    .where(aion_workflow_step_runs.c.workflow_run_id == workflow_run_id)
+                    .order_by(aion_workflow_step_runs.c.created_at)
+                )
+                .mappings()
+                .all()
+            )
         return [_step_run_from_row(row) for row in rows]
 
     def save_heartbeat(self, heartbeat: WorkflowHeartbeat) -> WorkflowHeartbeat:

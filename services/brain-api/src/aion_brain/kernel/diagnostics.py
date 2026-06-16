@@ -107,6 +107,41 @@ class KernelDiagnostics:
         ("operator_snapshot_service_present", "operator_snapshot_service", "medium"),
         ("operator_action_center_present", "operator_action_center_service", "medium"),
         ("operator_readiness_aggregator_present", "operator_readiness_aggregator", "medium"),
+        ("dialogue_session_service_present", "dialogue_session_service", "medium"),
+        ("dialogue_message_service_present", "dialogue_message_service", "medium"),
+        ("clarification_manager_present", "clarification_manager", "medium"),
+        ("response_composer_present", "response_composer", "medium"),
+        ("response_verifier_present", "response_verifier", "medium"),
+        ("dialogue_turn_service_present", "dialogue_turn_service", "medium"),
+        ("self_model_profile_service_present", "self_model_profile_service", "medium"),
+        ("capability_awareness_service_present", "capability_awareness_service", "medium"),
+        ("limitation_ledger_service_present", "limitation_ledger_service", "medium"),
+        ("confidence_calibrator_present", "confidence_calibrator", "medium"),
+        ("self_assessment_service_present", "self_assessment_service", "medium"),
+        ("introspection_snapshot_service_present", "introspection_snapshot_service", "medium"),
+        ("belief_service_present", "belief_service", "medium"),
+        ("belief_query_service_present", "belief_query_service", "medium"),
+        ("belief_support_service_present", "belief_support_service", "medium"),
+        ("belief_contradiction_service_present", "belief_contradiction_service", "medium"),
+        ("truth_maintenance_service_present", "truth_maintenance_service", "medium"),
+        ("claim_extractor_present", "claim_extractor", "medium"),
+        ("concept_service_present", "concept_service", "medium"),
+        ("entity_service_present", "entity_service", "medium"),
+        ("entity_query_service_present", "entity_query_service", "medium"),
+        ("entity_alias_service_present", "entity_alias_service", "medium"),
+        ("reference_link_service_present", "reference_link_service", "medium"),
+        ("entity_resolver_present", "entity_resolver", "medium"),
+        ("entity_merge_service_present", "entity_merge_service", "medium"),
+        ("entity_split_service_present", "entity_split_service", "medium"),
+        ("decision_frame_service_present", "decision_frame_service", "medium"),
+        ("option_evaluator_present", "option_evaluator", "medium"),
+        ("counterfactual_simulator_present", "counterfactual_simulator", "medium"),
+        ("decision_journal_service_present", "decision_journal_service", "medium"),
+        ("outcome_service_present", "outcome_service", "medium"),
+        ("expected_effect_service_present", "expected_effect_service", "medium"),
+        ("observed_effect_collector_present", "observed_effect_collector", "medium"),
+        ("effect_verifier_present", "effect_verifier", "medium"),
+        ("outcome_feedback_service_present", "outcome_feedback_service", "medium"),
     )
 
     def __init__(self, container: object) -> None:
@@ -207,8 +242,528 @@ class KernelDiagnostics:
         checks.extend(self._resilience_checks(settings))
         checks.extend(self._audit_integrity_checks(settings))
         checks.extend(self._operator_checks(settings))
+        checks.extend(self._dialogue_checks(settings))
+        checks.extend(self._self_model_checks(settings))
+        checks.extend(self._belief_checks(settings))
+        checks.extend(self._entity_checks(settings))
+        checks.extend(self._situation_checks(settings))
+        checks.extend(self._decision_checks(settings))
+        checks.extend(self._outcome_checks(settings))
+        checks.extend(self._learning_synthesis_checks(settings))
         checks.extend(self._repo_quality_checks())
         return checks
+
+    def _entity_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "concept_service",
+                "entity_service",
+                "entity_query_service",
+                "entity_alias_service",
+                "reference_link_service",
+                "entity_resolver",
+                "entity_merge_service",
+                "entity_split_service",
+            )
+        )
+        return [
+            self._result(
+                "concepts_enabled",
+                "concepts",
+                "passed" if bool(getattr(settings, "concepts_enabled", True)) else "warning",
+                "medium",
+                "Concept registry is enabled.",
+            ),
+            self._result(
+                "entities_enabled",
+                "entities",
+                "passed" if bool(getattr(settings, "entities_enabled", True)) else "warning",
+                "medium",
+                "Entity registry is enabled.",
+            ),
+            self._result(
+                "entity_resolution_enabled",
+                "entities",
+                (
+                    "passed"
+                    if bool(getattr(settings, "entity_resolution_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Entity resolution is enabled.",
+            ),
+            self._result(
+                "entity_auto_merge_disabled",
+                "entities",
+                (
+                    "passed"
+                    if not bool(getattr(settings, "entity_auto_merge_enabled", False))
+                    else "failed"
+                ),
+                "high",
+                "Entity auto-merge is disabled.",
+            ),
+            self._result(
+                "entity_services_present",
+                "entities",
+                "passed" if services_present else "failed",
+                "high",
+                "Entity and concept services are assembled.",
+            ),
+        ]
+
+    def _belief_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "belief_service",
+                "belief_support_service",
+                "belief_contradiction_service",
+                "belief_query_service",
+                "truth_maintenance_service",
+                "claim_extractor",
+            )
+        )
+        return [
+            self._result(
+                "beliefs_enabled",
+                "beliefs",
+                "passed" if bool(getattr(settings, "beliefs_enabled", True)) else "warning",
+                "medium",
+                "Belief State Manager is enabled.",
+            ),
+            self._result(
+                "belief_truth_maintenance_enabled",
+                "beliefs",
+                (
+                    "passed"
+                    if bool(getattr(settings, "belief_truth_maintenance_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Truth maintenance is enabled.",
+            ),
+            self._result(
+                "belief_claim_extraction_enabled",
+                "beliefs",
+                (
+                    "passed"
+                    if bool(getattr(settings, "belief_claim_extraction_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Deterministic claim extraction is enabled.",
+            ),
+            self._result(
+                "belief_services_present",
+                "beliefs",
+                "passed" if services_present else "failed",
+                "high",
+                "Belief services are assembled.",
+            ),
+        ]
+
+    def _situation_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "situation_service",
+                "state_atom_service",
+                "situation_projector",
+                "temporal_state_window_service",
+                "context_continuity_service",
+                "situation_query_service",
+            )
+        )
+        return [
+            self._result(
+                "situations_enabled",
+                "situations",
+                "passed" if bool(getattr(settings, "situations_enabled", True)) else "warning",
+                "medium",
+                "Situation model is enabled.",
+            ),
+            self._result(
+                "situation_projection_enabled",
+                "situations",
+                (
+                    "passed"
+                    if bool(getattr(settings, "situation_projection_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Situation projection is enabled.",
+            ),
+            self._result(
+                "temporal_state_enabled",
+                "situations",
+                "passed" if bool(getattr(settings, "temporal_state_enabled", True)) else "warning",
+                "medium",
+                "Temporal state is enabled.",
+            ),
+            self._result(
+                "context_continuity_enabled",
+                "situations",
+                (
+                    "passed"
+                    if bool(getattr(settings, "context_continuity_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Context continuity is enabled.",
+            ),
+            self._result(
+                "situation_services_present",
+                "situations",
+                "passed" if services_present else "failed",
+                "high",
+                "Situation services are assembled.",
+            ),
+        ]
+
+    def _decision_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "decision_frame_service",
+                "decision_option_service",
+                "utility_profile_service",
+                "option_evaluator",
+                "tradeoff_matrix_service",
+                "counterfactual_simulator",
+                "decision_journal_service",
+                "decision_recommendation_service",
+            )
+        )
+        return [
+            self._result(
+                "decisions_enabled",
+                "decisions",
+                "passed" if bool(getattr(settings, "decisions_enabled", True)) else "warning",
+                "medium",
+                "Decision intelligence is enabled.",
+            ),
+            self._result(
+                "counterfactuals_enabled",
+                "decisions",
+                (
+                    "passed"
+                    if bool(getattr(settings, "counterfactuals_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Counterfactual simulation is enabled.",
+            ),
+            self._result(
+                "decision_auto_commit_enabled",
+                "decisions",
+                (
+                    "warning"
+                    if bool(getattr(settings, "decision_auto_commit_enabled", False))
+                    else "passed"
+                ),
+                "high",
+                "Decision auto-commit is disabled by default.",
+            ),
+            self._result(
+                "decision_controlled_mode_enabled",
+                "decisions",
+                (
+                    "warning"
+                    if bool(getattr(settings, "decision_controlled_mode_enabled", False))
+                    else "passed"
+                ),
+                "high",
+                "Controlled decision mode is disabled by default.",
+            ),
+            self._result(
+                "decision_services_present",
+                "decisions",
+                "passed" if services_present else "failed",
+                "high",
+                "Decision services are assembled.",
+            ),
+        ]
+
+    def _outcome_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "expected_effect_service",
+                "observed_effect_collector",
+                "outcome_service",
+                "effect_verifier",
+                "causal_attribution_service",
+                "outcome_feedback_service",
+                "outcome_query_service",
+            )
+        )
+        return [
+            self._result(
+                "outcomes_enabled",
+                "outcomes",
+                "passed" if bool(getattr(settings, "outcomes_enabled", True)) else "warning",
+                "medium",
+                "Outcome Ledger is enabled.",
+            ),
+            self._result(
+                "effect_verification_enabled",
+                "outcomes",
+                (
+                    "passed"
+                    if bool(getattr(settings, "effect_verification_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Effect verification is enabled.",
+            ),
+            self._result(
+                "outcome_feedback_enabled",
+                "outcomes",
+                (
+                    "passed"
+                    if bool(getattr(settings, "outcome_feedback_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Outcome feedback is enabled.",
+            ),
+            self._result(
+                "outcome_auto_verify_enabled",
+                "outcomes",
+                (
+                    "warning"
+                    if bool(getattr(settings, "outcome_auto_verify_enabled", False))
+                    else "passed"
+                ),
+                "high",
+                "Outcome auto-verification is disabled by default.",
+            ),
+            self._result(
+                "outcome_services_present",
+                "outcomes",
+                "passed" if services_present else "failed",
+                "high",
+                "Outcome services are assembled.",
+            ),
+        ]
+
+    def _learning_synthesis_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "experience_service",
+                "pattern_miner",
+                "lesson_service",
+                "learning_synthesizer",
+                "skill_suggestion_service",
+                "regression_suggestion_service",
+                "learning_query_service",
+            )
+        )
+        return [
+            self._result(
+                "learning_synthesis_enabled",
+                "learning",
+                (
+                    "passed"
+                    if bool(getattr(settings, "learning_synthesis_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Learning synthesis is enabled.",
+            ),
+            self._result(
+                "experience_ledger_enabled",
+                "learning",
+                (
+                    "passed"
+                    if bool(getattr(settings, "experience_ledger_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Experience ledger is enabled.",
+            ),
+            self._result(
+                "pattern_mining_enabled",
+                "learning",
+                (
+                    "passed"
+                    if bool(getattr(settings, "pattern_mining_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Pattern mining is enabled.",
+            ),
+            self._result(
+                "skill_suggestions_enabled",
+                "learning",
+                (
+                    "passed"
+                    if bool(getattr(settings, "skill_suggestions_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Skill suggestions are enabled.",
+            ),
+            self._result(
+                "regression_suggestions_enabled",
+                "learning",
+                (
+                    "passed"
+                    if bool(getattr(settings, "regression_suggestions_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Regression suggestions are enabled.",
+            ),
+            self._result(
+                "learning_services_present",
+                "learning",
+                "passed" if services_present else "failed",
+                "high",
+                "Learning synthesis services are assembled.",
+            ),
+        ]
+
+    def _dialogue_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "dialogue_session_service",
+                "dialogue_message_service",
+                "clarification_manager",
+                "response_composer",
+                "response_verifier",
+                "response_delivery_service",
+                "dialogue_feedback_service",
+                "dialogue_turn_service",
+                "dialogue_memory_handoff_service",
+            )
+        )
+        return [
+            self._result(
+                "dialogue_enabled",
+                "dialogue",
+                "passed" if bool(getattr(settings, "dialogue_enabled", True)) else "warning",
+                "medium",
+                "Dialogue Session Manager is enabled.",
+            ),
+            self._result(
+                "response_composer_enabled",
+                "dialogue",
+                (
+                    "passed"
+                    if bool(getattr(settings, "response_composer_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Deterministic Response Composer is enabled.",
+            ),
+            self._result(
+                "clarification_loop_enabled",
+                "dialogue",
+                (
+                    "passed"
+                    if bool(getattr(settings, "clarification_loop_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Clarification Loop is enabled.",
+            ),
+            self._result(
+                "dialogue_services_present",
+                "dialogue",
+                "passed" if services_present else "failed",
+                "high",
+                "Dialogue services are assembled.",
+            ),
+        ]
+
+    def _self_model_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "self_model_profile_service",
+                "self_description_service",
+                "capability_awareness_service",
+                "limitation_ledger_service",
+                "confidence_calibrator",
+                "self_assessment_service",
+                "introspection_snapshot_service",
+            )
+        )
+        active_profile_present = (
+            getattr(self._container, "self_model_profile_service", None) is not None
+        )
+        return [
+            self._result(
+                "self_model_enabled",
+                "self_model",
+                "passed" if bool(getattr(settings, "self_model_enabled", True)) else "warning",
+                "medium",
+                "Self Model is enabled.",
+            ),
+            self._result(
+                "capability_awareness_enabled",
+                "self_model",
+                (
+                    "passed"
+                    if bool(getattr(settings, "capability_awareness_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Capability Awareness is enabled.",
+            ),
+            self._result(
+                "limitation_ledger_enabled",
+                "self_model",
+                (
+                    "passed"
+                    if bool(getattr(settings, "limitation_ledger_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Limitation Ledger is enabled.",
+            ),
+            self._result(
+                "confidence_calibration_enabled",
+                "self_model",
+                (
+                    "passed"
+                    if bool(getattr(settings, "confidence_calibration_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Confidence Calibration is enabled.",
+            ),
+            self._result(
+                "self_assessment_enabled",
+                "self_model",
+                (
+                    "passed"
+                    if bool(getattr(settings, "self_assessment_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Self Assessment is enabled.",
+            ),
+            self._result(
+                "active_self_model_present",
+                "self_model",
+                "passed" if active_profile_present else "failed",
+                "high",
+                "An active descriptive self-model is present.",
+            ),
+            self._result(
+                "self_model_services_present",
+                "self_model",
+                "passed" if services_present else "failed",
+                "high",
+                "Self-model services are assembled.",
+            ),
+        ]
 
     def _operator_checks(self, settings: object) -> list[DiagnosticCheck]:
         services_present = all(
@@ -366,11 +921,7 @@ class KernelDiagnostics:
             self._result(
                 "degraded_mode_enabled",
                 "resilience",
-                (
-                    "passed"
-                    if bool(getattr(settings, "degraded_mode_enabled", True))
-                    else "warning"
-                ),
+                ("passed" if bool(getattr(settings, "degraded_mode_enabled", True)) else "warning"),
                 "medium",
                 "Degraded mode reporting is enabled.",
             ),
@@ -757,9 +1308,7 @@ class KernelDiagnostics:
             self._result(
                 "policy_catalog_enabled",
                 "policy_catalog",
-                "passed"
-                if bool(getattr(settings, "policy_catalog_enabled", True))
-                else "warning",
+                "passed" if bool(getattr(settings, "policy_catalog_enabled", True)) else "warning",
                 "high",
                 "Policy catalog is enabled.",
             ),
@@ -835,9 +1384,7 @@ class KernelDiagnostics:
             self._result(
                 "docker_sandbox_enabled",
                 "sandbox",
-                "warning"
-                if bool(getattr(settings, "sandbox_docker_enabled", False))
-                else "passed",
+                "warning" if bool(getattr(settings, "sandbox_docker_enabled", False)) else "passed",
                 "critical",
                 "Docker sandbox execution is disabled.",
             ),
@@ -952,9 +1499,7 @@ class KernelDiagnostics:
             self._result(
                 "outbox_process_enabled",
                 "outbox",
-                "warning"
-                if bool(getattr(settings, "outbox_process_enabled", False))
-                else "passed",
+                "warning" if bool(getattr(settings, "outbox_process_enabled", False)) else "passed",
                 "medium",
                 "Outbox processing is manual and disabled by default.",
             ),
@@ -1015,15 +1560,13 @@ class KernelDiagnostics:
                 "autonomy",
                 (
                     "passed"
-                    if str(getattr(settings, "autonomy_default_max_mode", "dry_run"))
-                    == "dry_run"
+                    if str(getattr(settings, "autonomy_default_max_mode", "dry_run")) == "dry_run"
                     else "warning"
                 ),
                 "high",
                 (
                     "Default autonomy max mode is dry_run."
-                    if str(getattr(settings, "autonomy_default_max_mode", "dry_run"))
-                    == "dry_run"
+                    if str(getattr(settings, "autonomy_default_max_mode", "dry_run")) == "dry_run"
                     else "Default autonomy max mode allows controlled execution."
                 ),
             ),
@@ -1108,8 +1651,7 @@ class KernelDiagnostics:
     def _turbovec_checks(self, settings: object) -> list[DiagnosticCheck]:
         enabled = bool(getattr(settings, "turbovec_enabled", False))
         selected = (
-            str(getattr(settings, "default_semantic_adapter", "")).replace("-", "_")
-            == "turbovec"
+            str(getattr(settings, "default_semantic_adapter", "")).replace("-", "_") == "turbovec"
         )
         adapter = getattr(self._container, "turbovec_semantic_adapter", None)
         status = None

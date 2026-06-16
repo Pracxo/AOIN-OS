@@ -204,9 +204,7 @@ class ScenarioRepository:
         if status:
             statement = statement.where(aion_scenario_definitions.c.status == status)
         if scenario_type:
-            statement = statement.where(
-                aion_scenario_definitions.c.scenario_type == scenario_type
-            )
+            statement = statement.where(aion_scenario_definitions.c.scenario_type == scenario_type)
         statement = statement.order_by(aion_scenario_definitions.c.created_at.desc()).limit(limit)
         with self._engine.connect() as connection:
             rows = connection.execute(statement).mappings().all()

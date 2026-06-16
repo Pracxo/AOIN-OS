@@ -132,4 +132,3 @@ class ModuleContractTestHarness:
             completed_at=now,
         )
         return self._repository.save_certification_run(run)
-

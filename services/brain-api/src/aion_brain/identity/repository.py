@@ -146,9 +146,7 @@ class IdentityRepository:
         """Upsert an actor."""
         self._ensure_schema()
         now = datetime.now(UTC)
-        stored = actor.model_copy(
-            update={"created_at": actor.created_at or now, "updated_at": now}
-        )
+        stored = actor.model_copy(update={"created_at": actor.created_at or now, "updated_at": now})
         _upsert(
             self._engine,
             aion_actors,
@@ -162,9 +160,11 @@ class IdentityRepository:
         """Return an actor by ID."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_actors).where(aion_actors.c.actor_id == actor_id)
-            ).mappings().first()
+            row = (
+                connection.execute(select(aion_actors).where(aion_actors.c.actor_id == actor_id))
+                .mappings()
+                .first()
+            )
         return _row_to_actor(row) if row is not None else None
 
     def list_actors(self, *, status: str | None = None, limit: int = 50) -> list[ActorRecord]:
@@ -197,9 +197,13 @@ class IdentityRepository:
         """Return a workspace by ID."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_workspaces).where(aion_workspaces.c.workspace_id == workspace_id)
-            ).mappings().first()
+            row = (
+                connection.execute(
+                    select(aion_workspaces).where(aion_workspaces.c.workspace_id == workspace_id)
+                )
+                .mappings()
+                .first()
+            )
         return _row_to_workspace(row) if row is not None else None
 
     def list_workspaces(
@@ -210,9 +214,9 @@ class IdentityRepository:
     ) -> list[WorkspaceRecord]:
         """List workspaces."""
         self._ensure_schema()
-        statement = select(aion_workspaces).order_by(
-            aion_workspaces.c.created_at.desc()
-        ).limit(limit)
+        statement = (
+            select(aion_workspaces).order_by(aion_workspaces.c.created_at.desc()).limit(limit)
+        )
         if status is not None:
             statement = statement.where(aion_workspaces.c.status == status)
         with self._engine.connect() as connection:
@@ -239,23 +243,31 @@ class IdentityRepository:
         """Return a membership by workspace and actor."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_workspace_memberships).where(
-                    aion_workspace_memberships.c.workspace_id == workspace_id,
-                    aion_workspace_memberships.c.actor_id == actor_id,
+            row = (
+                connection.execute(
+                    select(aion_workspace_memberships).where(
+                        aion_workspace_memberships.c.workspace_id == workspace_id,
+                        aion_workspace_memberships.c.actor_id == actor_id,
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _row_to_membership(row) if row is not None else None
 
     def get_membership_by_id(self, membership_id: str) -> WorkspaceMembership | None:
         """Return a membership by ID."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_workspace_memberships).where(
-                    aion_workspace_memberships.c.membership_id == membership_id
+            row = (
+                connection.execute(
+                    select(aion_workspace_memberships).where(
+                        aion_workspace_memberships.c.membership_id == membership_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _row_to_membership(row) if row is not None else None
 
     def list_memberships(
@@ -294,9 +306,15 @@ class IdentityRepository:
         """Return a permission grant by ID."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_permission_grants).where(aion_permission_grants.c.grant_id == grant_id)
-            ).mappings().first()
+            row = (
+                connection.execute(
+                    select(aion_permission_grants).where(
+                        aion_permission_grants.c.grant_id == grant_id
+                    )
+                )
+                .mappings()
+                .first()
+            )
         return _row_to_grant(row) if row is not None else None
 
     def list_permission_grants(

@@ -29,6 +29,13 @@ _CARD_SPECS: tuple[tuple[str, str, OperatorCategory, str], ...] = (
     ("approvals", "Approval Pending", "approvals", "approval_service"),
     ("workflows", "Workflow Failures", "workflows", "workflow_service"),
     ("event_dead_letters", "Event Dead Letters", "events", "event_router_service"),
+    ("situations", "Active Situations", "memory", "situation_service"),
+    ("decisions", "Open Decisions", "approvals", "decision_frame_service"),
+    ("outcomes", "Outcome Ledger", "audit", "outcome_service"),
+    ("learning", "Learning Synthesis", "learning", "learning_synthesizer"),
+    ("self_model", "Self Model", "self_model", "self_model_service"),
+    ("capability_awareness", "Capability Awareness", "self_model", "capability_awareness_service"),
+    ("limitations", "Limitation Ledger", "self_model", "limitation_service"),
 )
 
 
@@ -208,9 +215,7 @@ def _metric_for(raw: object) -> dict[str, Any]:
         return {"item_count": len(raw)}
     if isinstance(raw, dict):
         return {
-            key: value
-            for key, value in raw.items()
-            if isinstance(value, (int, float, bool, str))
+            key: value for key, value in raw.items() if isinstance(value, (int, float, bool, str))
         }
     metric: dict[str, Any] = {}
     for key in ("pending_count", "failed_count", "latest_sequence", "checked_count"):

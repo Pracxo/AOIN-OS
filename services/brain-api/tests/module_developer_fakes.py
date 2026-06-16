@@ -200,4 +200,3 @@ def certifier(
         telemetry_service=telemetry,
         settings=Settings(_env_file=None, DATABASE_URL="sqlite+pysqlite:///:memory:"),
     )
-

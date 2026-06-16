@@ -122,6 +122,106 @@ class Settings(BaseSettings):
         default="local",
         validation_alias=AliasChoices("AION_OBSERVABILITY_ADAPTER", "observability_adapter"),
     )
+    dialogue_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_DIALOGUE_ENABLED", "dialogue_enabled"),
+    )
+    response_composer_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_RESPONSE_COMPOSER_ENABLED",
+            "response_composer_enabled",
+        ),
+    )
+    clarification_loop_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CLARIFICATION_LOOP_ENABLED",
+            "clarification_loop_enabled",
+        ),
+    )
+    dialogue_memory_handoff_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_DIALOGUE_MEMORY_HANDOFF_ENABLED",
+            "dialogue_memory_handoff_enabled",
+        ),
+    )
+    dialogue_store_messages: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_DIALOGUE_STORE_MESSAGES",
+            "dialogue_store_messages",
+        ),
+    )
+    dialogue_redact_sensitive_content: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_DIALOGUE_REDACT_SENSITIVE_CONTENT",
+            "dialogue_redact_sensitive_content",
+        ),
+    )
+    response_require_grounding_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_RESPONSE_REQUIRE_GROUNDING_DEFAULT",
+            "response_require_grounding_default",
+        ),
+    )
+    self_model_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_SELF_MODEL_ENABLED", "self_model_enabled"),
+    )
+    capability_awareness_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CAPABILITY_AWARENESS_ENABLED",
+            "capability_awareness_enabled",
+        ),
+    )
+    limitation_ledger_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_LIMITATION_LEDGER_ENABLED",
+            "limitation_ledger_enabled",
+        ),
+    )
+    confidence_calibration_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CONFIDENCE_CALIBRATION_ENABLED",
+            "confidence_calibration_enabled",
+        ),
+    )
+    introspection_snapshots_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_INTROSPECTION_SNAPSHOTS_ENABLED",
+            "introspection_snapshots_enabled",
+        ),
+    )
+    self_assessment_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_SELF_ASSESSMENT_ENABLED", "self_assessment_enabled"),
+    )
+    self_description_include_limitations_default: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_SELF_DESCRIPTION_INCLUDE_LIMITATIONS_DEFAULT",
+            "self_description_include_limitations_default",
+        ),
+    )
+    confidence_low_threshold: float = Field(
+        default=0.4,
+        validation_alias=AliasChoices("AION_CONFIDENCE_LOW_THRESHOLD", "confidence_low_threshold"),
+    )
+    confidence_high_threshold: float = Field(
+        default=0.75,
+        validation_alias=AliasChoices(
+            "AION_CONFIDENCE_HIGH_THRESHOLD",
+            "confidence_high_threshold",
+        ),
+    )
     scenarios_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices("AION_SCENARIOS_ENABLED", "scenarios_enabled"),
@@ -1214,6 +1314,353 @@ class Settings(BaseSettings):
         validation_alias=AliasChoices(
             "AION_POLICY_DEFAULTS_SEED_ENABLED",
             "policy_defaults_seed_enabled",
+        ),
+    )
+    beliefs_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_BELIEFS_ENABLED", "beliefs_enabled"),
+    )
+    concepts_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_CONCEPTS_ENABLED", "concepts_enabled"),
+    )
+    entities_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_ENTITIES_ENABLED", "entities_enabled"),
+    )
+    entity_resolution_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_ENTITY_RESOLUTION_ENABLED",
+            "entity_resolution_enabled",
+        ),
+    )
+    entity_mention_extraction_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_ENTITY_MENTION_EXTRACTION_ENABLED",
+            "entity_mention_extraction_enabled",
+        ),
+    )
+    entity_auto_extract_from_dialogue: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_ENTITY_AUTO_EXTRACT_FROM_DIALOGUE",
+            "entity_auto_extract_from_dialogue",
+        ),
+    )
+    entity_auto_extract_from_evidence: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_ENTITY_AUTO_EXTRACT_FROM_EVIDENCE",
+            "entity_auto_extract_from_evidence",
+        ),
+    )
+    entity_auto_extract_from_memory: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_ENTITY_AUTO_EXTRACT_FROM_MEMORY",
+            "entity_auto_extract_from_memory",
+        ),
+    )
+    entity_auto_merge_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_ENTITY_AUTO_MERGE_ENABLED",
+            "entity_auto_merge_enabled",
+        ),
+    )
+    entity_merge_requires_approval: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_ENTITY_MERGE_REQUIRES_APPROVAL",
+            "entity_merge_requires_approval",
+        ),
+    )
+    entity_resolution_min_score: float = Field(
+        default=0.72,
+        validation_alias=AliasChoices(
+            "AION_ENTITY_RESOLUTION_MIN_SCORE",
+            "entity_resolution_min_score",
+        ),
+    )
+    entity_resolution_create_missing_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_ENTITY_RESOLUTION_CREATE_MISSING_DEFAULT",
+            "entity_resolution_create_missing_default",
+        ),
+    )
+    belief_truth_maintenance_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_BELIEF_TRUTH_MAINTENANCE_ENABLED",
+            "belief_truth_maintenance_enabled",
+        ),
+    )
+    belief_claim_extraction_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_BELIEF_CLAIM_EXTRACTION_ENABLED",
+            "belief_claim_extraction_enabled",
+        ),
+    )
+    belief_auto_extract_from_dialogue: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_BELIEF_AUTO_EXTRACT_FROM_DIALOGUE",
+            "belief_auto_extract_from_dialogue",
+        ),
+    )
+    belief_auto_extract_from_evidence: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_BELIEF_AUTO_EXTRACT_FROM_EVIDENCE",
+            "belief_auto_extract_from_evidence",
+        ),
+    )
+    belief_min_supported_confidence: float = Field(
+        default=0.65,
+        validation_alias=AliasChoices(
+            "AION_BELIEF_MIN_SUPPORTED_CONFIDENCE",
+            "belief_min_supported_confidence",
+        ),
+    )
+    belief_stale_after_days: int = Field(
+        default=180,
+        validation_alias=AliasChoices(
+            "AION_BELIEF_STALE_AFTER_DAYS",
+            "belief_stale_after_days",
+        ),
+    )
+    belief_contradiction_detection_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_BELIEF_CONTRADICTION_DETECTION_ENABLED",
+            "belief_contradiction_detection_enabled",
+        ),
+    )
+    situations_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_SITUATIONS_ENABLED", "situations_enabled"),
+    )
+    situation_projection_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_SITUATION_PROJECTION_ENABLED",
+            "situation_projection_enabled",
+        ),
+    )
+    temporal_state_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_TEMPORAL_STATE_ENABLED", "temporal_state_enabled"),
+    )
+    context_continuity_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CONTEXT_CONTINUITY_ENABLED",
+            "context_continuity_enabled",
+        ),
+    )
+    situation_auto_project_from_dialogue: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_SITUATION_AUTO_PROJECT_FROM_DIALOGUE",
+            "situation_auto_project_from_dialogue",
+        ),
+    )
+    situation_auto_project_from_events: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_SITUATION_AUTO_PROJECT_FROM_EVENTS",
+            "situation_auto_project_from_events",
+        ),
+    )
+    situation_projection_default_window_hours: int = Field(
+        default=24,
+        validation_alias=AliasChoices(
+            "AION_SITUATION_PROJECTION_DEFAULT_WINDOW_HOURS",
+            "situation_projection_default_window_hours",
+        ),
+    )
+    situation_max_state_atoms_default: int = Field(
+        default=500,
+        validation_alias=AliasChoices(
+            "AION_SITUATION_MAX_STATE_ATOMS_DEFAULT",
+            "situation_max_state_atoms_default",
+        ),
+    )
+    decisions_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_DECISIONS_ENABLED", "decisions_enabled"),
+    )
+    counterfactuals_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_COUNTERFACTUALS_ENABLED", "counterfactuals_enabled"),
+    )
+    decision_auto_commit_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_DECISION_AUTO_COMMIT_ENABLED",
+            "decision_auto_commit_enabled",
+        ),
+    )
+    decision_default_utility_profile: str = Field(
+        default="generic-balanced",
+        validation_alias=AliasChoices(
+            "AION_DECISION_DEFAULT_UTILITY_PROFILE",
+            "decision_default_utility_profile",
+        ),
+    )
+    decision_require_approval_for_high_risk: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_DECISION_REQUIRE_APPROVAL_FOR_HIGH_RISK",
+            "decision_require_approval_for_high_risk",
+        ),
+    )
+    decision_max_options_default: int = Field(
+        default=10,
+        validation_alias=AliasChoices(
+            "AION_DECISION_MAX_OPTIONS_DEFAULT",
+            "decision_max_options_default",
+        ),
+    )
+    decision_counterfactual_max_changes_default: int = Field(
+        default=25,
+        validation_alias=AliasChoices(
+            "AION_DECISION_COUNTERFACTUAL_MAX_CHANGES_DEFAULT",
+            "decision_counterfactual_max_changes_default",
+        ),
+    )
+    decision_controlled_mode_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_DECISION_CONTROLLED_MODE_ENABLED",
+            "decision_controlled_mode_enabled",
+        ),
+    )
+    outcomes_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_OUTCOMES_ENABLED", "outcomes_enabled"),
+    )
+    effect_verification_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_EFFECT_VERIFICATION_ENABLED",
+            "effect_verification_enabled",
+        ),
+    )
+    outcome_feedback_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_OUTCOME_FEEDBACK_ENABLED",
+            "outcome_feedback_enabled",
+        ),
+    )
+    outcome_auto_collect_from_commands: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_OUTCOME_AUTO_COLLECT_FROM_COMMANDS",
+            "outcome_auto_collect_from_commands",
+        ),
+    )
+    outcome_auto_collect_from_workflows: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_OUTCOME_AUTO_COLLECT_FROM_WORKFLOWS",
+            "outcome_auto_collect_from_workflows",
+        ),
+    )
+    outcome_auto_verify_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_OUTCOME_AUTO_VERIFY_ENABLED",
+            "outcome_auto_verify_enabled",
+        ),
+    )
+    outcome_learning_feedback_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_OUTCOME_LEARNING_FEEDBACK_ENABLED",
+            "outcome_learning_feedback_enabled",
+        ),
+    )
+    outcome_min_verified_score: float = Field(
+        default=0.75,
+        validation_alias=AliasChoices(
+            "AION_OUTCOME_MIN_VERIFIED_SCORE",
+            "outcome_min_verified_score",
+        ),
+    )
+    learning_synthesis_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_LEARNING_SYNTHESIS_ENABLED",
+            "learning_synthesis_enabled",
+        ),
+    )
+    experience_ledger_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_EXPERIENCE_LEDGER_ENABLED",
+            "experience_ledger_enabled",
+        ),
+    )
+    pattern_mining_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_PATTERN_MINING_ENABLED",
+            "pattern_mining_enabled",
+        ),
+    )
+    lesson_records_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_LESSON_RECORDS_ENABLED",
+            "lesson_records_enabled",
+        ),
+    )
+    skill_suggestions_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_SKILL_SUGGESTIONS_ENABLED",
+            "skill_suggestions_enabled",
+        ),
+    )
+    regression_suggestions_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_REGRESSION_SUGGESTIONS_ENABLED",
+            "regression_suggestions_enabled",
+        ),
+    )
+    learning_auto_synthesis_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_LEARNING_AUTO_SYNTHESIS_ENABLED",
+            "learning_auto_synthesis_enabled",
+        ),
+    )
+    learning_min_pattern_frequency: int = Field(
+        default=2,
+        validation_alias=AliasChoices(
+            "AION_LEARNING_MIN_PATTERN_FREQUENCY",
+            "learning_min_pattern_frequency",
+        ),
+    )
+    learning_min_pattern_confidence: float = Field(
+        default=0.6,
+        validation_alias=AliasChoices(
+            "AION_LEARNING_MIN_PATTERN_CONFIDENCE",
+            "learning_min_pattern_confidence",
+        ),
+    )
+    learning_skill_suggestions_promotion_allowed_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_LEARNING_SKILL_SUGGESTIONS_PROMOTION_ALLOWED_DEFAULT",
+            "learning_skill_suggestions_promotion_allowed_default",
         ),
     )
 

@@ -9,9 +9,7 @@ from uuid import uuid4
 from aion_brain.contracts.model_gateway import PromptRedactionRecord
 from aion_brain.contracts.reasoning import PromptPacket
 
-_PRIVATE_KEY_PATTERN = (
-    r"-----BEGIN [A-Z ]*PRIVATE KEY-----.*?-----END [A-Z ]*PRIVATE KEY-----"
-)
+_PRIVATE_KEY_PATTERN = r"-----BEGIN [A-Z ]*PRIVATE KEY-----.*?-----END [A-Z ]*PRIVATE KEY-----"
 
 _PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
     ("private_key_like", re.compile(_PRIVATE_KEY_PATTERN, re.DOTALL)),
@@ -52,12 +50,8 @@ class PromptRedactor:
         redacted = prompt.model_copy(
             update={
                 "goal": _redact_value(prompt.goal),
-                "system_instructions": [
-                    _redact_value(item) for item in prompt.system_instructions
-                ],
-                "context_items": [
-                    _redact_value(item) for item in prompt.context_items
-                ],
+                "system_instructions": [_redact_value(item) for item in prompt.system_instructions],
+                "context_items": [_redact_value(item) for item in prompt.context_items],
                 "constraints": [_redact_value(item) for item in prompt.constraints],
                 "requested_output_schema": _redact_value(prompt.requested_output_schema),
             }

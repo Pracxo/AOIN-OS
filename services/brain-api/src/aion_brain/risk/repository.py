@@ -87,11 +87,15 @@ class RiskRepository:
         """Return one risk assessment."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_risk_assessments).where(
-                    aion_risk_assessments.c.risk_assessment_id == risk_assessment_id
+            row = (
+                connection.execute(
+                    select(aion_risk_assessments).where(
+                        aion_risk_assessments.c.risk_assessment_id == risk_assessment_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _assessment_from_row(row) if row is not None else None
 
     def _ensure_schema(self) -> None:

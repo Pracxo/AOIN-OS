@@ -141,4 +141,3 @@ def test_certifier_emits_visual_telemetry_events() -> None:
     assert "module_package_submitted" in event_types
     assert "module_certification_started" in event_types
     assert "module_certification_completed" in event_types
-

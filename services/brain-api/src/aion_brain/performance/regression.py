@@ -62,8 +62,10 @@ class PerformanceRegressionComparator:
                 regressions.append({**payload, "severity": "warning"})
             elif change_percent < -10:
                 improvements.append(payload)
-        status = "failed" if any(item["severity"] == "failed" for item in regressions) else (
-            "warning" if regressions else "passed"
+        status = (
+            "failed"
+            if any(item["severity"] == "failed" for item in regressions)
+            else ("warning" if regressions else "passed")
         )
         report = PerformanceRegressionReport(
             regression_report_id=f"performance-regression-{uuid4().hex}",

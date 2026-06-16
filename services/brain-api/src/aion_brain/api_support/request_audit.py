@@ -180,9 +180,7 @@ class APIRequestAuditService:
         if trace_id is not None:
             statement = statement.where(aion_api_request_records.c.trace_id == trace_id)
         if correlation_id is not None:
-            statement = statement.where(
-                aion_api_request_records.c.correlation_id == correlation_id
-            )
+            statement = statement.where(aion_api_request_records.c.correlation_id == correlation_id)
         with self._engine.connect() as connection:
             rows = connection.execute(statement).mappings().all()
         return [_row_to_record(row) for row in rows]

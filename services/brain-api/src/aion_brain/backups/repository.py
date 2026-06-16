@@ -206,16 +206,24 @@ class BackupRepository:
         """Return one backup job."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            job_row = connection.execute(
-                select(aion_backup_jobs).where(
-                    aion_backup_jobs.c.backup_job_id == backup_job_id
+            job_row = (
+                connection.execute(
+                    select(aion_backup_jobs).where(
+                        aion_backup_jobs.c.backup_job_id == backup_job_id
+                    )
                 )
-            ).mappings().first()
-            file_rows = connection.execute(
-                select(aion_backup_files)
-                .where(aion_backup_files.c.backup_job_id == backup_job_id)
-                .order_by(aion_backup_files.c.file_path)
-            ).mappings().all()
+                .mappings()
+                .first()
+            )
+            file_rows = (
+                connection.execute(
+                    select(aion_backup_files)
+                    .where(aion_backup_files.c.backup_job_id == backup_job_id)
+                    .order_by(aion_backup_files.c.file_path)
+                )
+                .mappings()
+                .all()
+            )
         if job_row is None:
             return None
         return _row_to_backup_job(job_row, list(file_rows))
@@ -260,11 +268,15 @@ class BackupRepository:
         """Return one restore preview."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_restore_previews).where(
-                    aion_restore_previews.c.restore_preview_id == restore_preview_id
+            row = (
+                connection.execute(
+                    select(aion_restore_previews).where(
+                        aion_restore_previews.c.restore_preview_id == restore_preview_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         if row is None:
             return None
         return _row_to_restore_preview(row)
@@ -306,9 +318,7 @@ def _row_to_backup_job(row: RowMapping, file_rows: list[RowMapping]) -> BackupJo
         redaction_mode=cast(BackupRedactionMode, str(row["redaction_mode"])),
         output_dir=str(row["output_dir"]),
         manifest=(
-            BackupManifest.model_validate(row["manifest"])
-            if row["manifest"] is not None
-            else None
+            BackupManifest.model_validate(row["manifest"]) if row["manifest"] is not None else None
         ),
         files=[_row_to_backup_file(file_row) for file_row in file_rows],
         checksums={str(key): str(value) for key, value in dict(row["checksums"]).items()},

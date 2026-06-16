@@ -60,4 +60,3 @@ class ModuleCompatibilityChecker:
             warnings=warnings,
             checked_at=datetime.now(UTC),
         )
-

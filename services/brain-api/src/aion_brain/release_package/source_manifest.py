@@ -114,9 +114,7 @@ class SourceManifestService:
             return
         size = path.stat().st_size
         if size > self._max_file_size_bytes:
-            excluded.append(
-                {"file_path": relative_text, "reason": "oversized", "size_bytes": size}
-            )
+            excluded.append({"file_path": relative_text, "reason": "oversized", "size_bytes": size})
             return
         files.append(
             {

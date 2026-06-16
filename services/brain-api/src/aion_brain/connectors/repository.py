@@ -109,11 +109,15 @@ class ConnectorRepository:
         """Return one connector definition."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_connector_definitions).where(
-                    aion_connector_definitions.c.connector_id == connector_id
+            row = (
+                connection.execute(
+                    select(aion_connector_definitions).where(
+                        aion_connector_definitions.c.connector_id == connector_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _row_to_connector(row) if row is not None else None
 
     def list(

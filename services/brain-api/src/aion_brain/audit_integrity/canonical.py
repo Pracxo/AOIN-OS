@@ -30,9 +30,7 @@ def _normalize(value: Any) -> Any:
         return value.isoformat()
     if isinstance(value, dict):
         volatile = {
-            str(item)
-            for item in value.get("_volatile_fields", [])
-            if isinstance(item, str)
+            str(item) for item in value.get("_volatile_fields", []) if isinstance(item, str)
         }
         result: dict[str, Any] = {}
         for key in sorted(value):

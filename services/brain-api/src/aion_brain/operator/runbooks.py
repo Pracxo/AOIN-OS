@@ -60,4 +60,3 @@ class RunbookRegistry:
     def get_by_category(self, category: str) -> list[OperatorRunbookLink]:
         """Return runbooks for one generic operator category."""
         return [runbook for runbook in self.list_runbooks() if runbook.category == category]
-

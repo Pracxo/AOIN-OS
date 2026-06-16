@@ -224,4 +224,3 @@ def make_sleep_record() -> SleepConsolidationRecord:
 def template_payload() -> dict[str, object]:
     """Return a cycle template payload."""
     return make_template().model_dump(mode="json")
-

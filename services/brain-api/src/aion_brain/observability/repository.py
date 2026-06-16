@@ -77,9 +77,11 @@ class ObservabilityRepository:
     def list_events(self, limit: int = 1000) -> list[ObservabilityEvent]:
         """Return recent observability events."""
         self._ensure_schema()
-        statement = select(aion_observability_events).order_by(
-            aion_observability_events.c.created_at.desc()
-        ).limit(limit)
+        statement = (
+            select(aion_observability_events)
+            .order_by(aion_observability_events.c.created_at.desc())
+            .limit(limit)
+        )
         with self._engine.connect() as connection:
             rows = connection.execute(statement).mappings().all()
         return [_row_to_event(row) for row in rows]

@@ -292,8 +292,7 @@ def _result(
 
 def _has_critical_failure(checks: list[SandboxValidationCheck]) -> bool:
     return any(
-        check.status == "failed" and check.severity in {"high", "critical"}
-        for check in checks
+        check.status == "failed" and check.severity in {"high", "critical"} for check in checks
     )
 
 

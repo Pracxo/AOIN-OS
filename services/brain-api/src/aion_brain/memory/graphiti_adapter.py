@@ -356,17 +356,21 @@ class GraphitiGraphMemoryAdapter:
                 0.8,
                 {"reason": status.reason, "operation": operation},
             )
-            result = _canonical_call(
-                self._canonical,
-                "neighbors" if operation == "neighbors" else "query_graph",
-                query.start_node_id,
-                query.scope,
-                max_depth=query.max_depth,
-                limit=query.limit,
-            ) if operation == "neighbors" and query.start_node_id else _canonical_call(
-                self._canonical,
-                "query_graph",
-                query,
+            result = (
+                _canonical_call(
+                    self._canonical,
+                    "neighbors" if operation == "neighbors" else "query_graph",
+                    query.start_node_id,
+                    query.scope,
+                    max_depth=query.max_depth,
+                    limit=query.limit,
+                )
+                if operation == "neighbors" and query.start_node_id
+                else _canonical_call(
+                    self._canonical,
+                    "query_graph",
+                    query,
+                )
             )
             if isinstance(result, GraphQueryResult):
                 return _graphiti_result(result, fallback=True, fallback_reason=status.reason)

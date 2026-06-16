@@ -1,6 +1,5 @@
 """Kernel container tests."""
 
-
 from aion_brain.config import Settings
 from aion_brain.kernel.container import KernelContainer
 from tests.kernel_fakes import kernel_container
@@ -28,7 +27,4 @@ def test_container_can_configure_turbovec_with_pgvector_fallback() -> None:
     container = KernelContainer(settings)
 
     assert container.semantic_memory_service.active_adapter_name == "pgvector"
-    assert (
-        container.semantic_memory_service.fallback_reason
-        == "turbovec_package_unavailable"
-    )
+    assert container.semantic_memory_service.fallback_reason == "turbovec_package_unavailable"

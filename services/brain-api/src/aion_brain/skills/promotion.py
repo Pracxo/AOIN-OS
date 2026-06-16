@@ -46,8 +46,7 @@ class SkillCandidateBuilder:
             source_learning_signal_ids=list(reflection.learning_signal_ids),
             name=str(change.get("name") or "Generic procedural memory"),
             description=str(
-                change.get("description")
-                or "A reviewed generic Brain procedure stored as data."
+                change.get("description") or "A reviewed generic Brain procedure stored as data."
             ),
             trigger_patterns=_trigger_patterns(change, reflection),
             preconditions=["policy_allows_requested_action"],
@@ -94,9 +93,7 @@ def _procedure_actions(change: dict[str, Any]) -> list[SkillProcedureAction]:
     if not isinstance(raw_steps, list):
         return []
     return [
-        cast(SkillProcedureAction, str(step))
-        for step in raw_steps
-        if str(step) in ACTION_POLICY
+        cast(SkillProcedureAction, str(step)) for step in raw_steps if str(step) in ACTION_POLICY
     ]
 
 

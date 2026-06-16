@@ -191,11 +191,15 @@ class SkillRepository:
         """Return a candidate by ID."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_skill_candidates).where(
-                    aion_skill_candidates.c.candidate_id == candidate_id
+            row = (
+                connection.execute(
+                    select(aion_skill_candidates).where(
+                        aion_skill_candidates.c.candidate_id == candidate_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         if row is None:
             return None
         return _row_to_candidate(row)
@@ -208,9 +212,11 @@ class SkillRepository:
     ) -> list[SkillCandidate]:
         """List candidates by optional status."""
         self._ensure_schema()
-        statement = select(aion_skill_candidates).order_by(
-            aion_skill_candidates.c.created_at.desc()
-        ).limit(limit)
+        statement = (
+            select(aion_skill_candidates)
+            .order_by(aion_skill_candidates.c.created_at.desc())
+            .limit(limit)
+        )
         if status is not None:
             statement = statement.where(aion_skill_candidates.c.status == status)
         with self._engine.connect() as connection:
@@ -246,9 +252,11 @@ class SkillRepository:
         """Return a skill by ID."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_skills).where(aion_skills.c.skill_id == skill_id)
-            ).mappings().first()
+            row = (
+                connection.execute(select(aion_skills).where(aion_skills.c.skill_id == skill_id))
+                .mappings()
+                .first()
+            )
         if row is None:
             return None
         return _row_to_skill(row)
@@ -275,7 +283,9 @@ class SkillRepository:
         self._ensure_schema()
         stored = version.model_copy(update={"created_at": version.created_at or datetime.now(UTC)})
         with self._engine.begin() as connection:
-            connection.execute(insert(aion_skill_versions).values(**stored.model_dump(mode="python")))
+            connection.execute(
+                insert(aion_skill_versions).values(**stored.model_dump(mode="python"))
+            )
         return stored
 
     def save_activation_event(self, event: SkillActivationEvent) -> SkillActivationEvent:

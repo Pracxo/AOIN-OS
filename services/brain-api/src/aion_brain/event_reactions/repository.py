@@ -182,9 +182,7 @@ class EventReactionRepository:
             }
         )
         values = stored.model_dump(mode="python")
-        values["trigger_rules"] = [
-            rule.model_dump(mode="json") for rule in stored.trigger_rules
-        ]
+        values["trigger_rules"] = [rule.model_dump(mode="json") for rule in stored.trigger_rules]
         with self._engine.begin() as connection:
             connection.execute(
                 delete(aion_event_subscriptions).where(
@@ -282,8 +280,7 @@ class EventReactionRepository:
         with self._engine.begin() as connection:
             connection.execute(
                 delete(aion_event_reaction_actions).where(
-                    aion_event_reaction_actions.c.reaction_action_id
-                    == stored.reaction_action_id
+                    aion_event_reaction_actions.c.reaction_action_id == stored.reaction_action_id
                 )
             )
             connection.execute(
@@ -369,9 +366,7 @@ def _create_engine(database_url: str) -> Engine:
 
 
 def _row_to_subscription(row: RowMapping) -> EventSubscription:
-    trigger_rules = [
-        EventTriggerRule.model_validate(rule) for rule in _list(row["trigger_rules"])
-    ]
+    trigger_rules = [EventTriggerRule.model_validate(rule) for rule in _list(row["trigger_rules"])]
     return EventSubscription(
         subscription_id=str(row["subscription_id"]),
         name=str(row["name"]),

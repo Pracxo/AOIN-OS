@@ -7,12 +7,17 @@ from aion_brain.api.attention import router as attention_router
 from aion_brain.api.audit_integrity import router as audit_integrity_router
 from aion_brain.api.autonomy import router as autonomy_router
 from aion_brain.api.backups import router as backups_router
+from aion_brain.api.beliefs import router as beliefs_router
 from aion_brain.api.brain import router as brain_router
 from aion_brain.api.capabilities import router as capabilities_router
 from aion_brain.api.commands import router as commands_router
+from aion_brain.api.concepts import router as concepts_router
 from aion_brain.api.connectors import router as connectors_router
 from aion_brain.api.consistency import router as consistency_router
 from aion_brain.api.cycles import router as cycles_router
+from aion_brain.api.decisions import router as decisions_router
+from aion_brain.api.dialogue import router as dialogue_router
+from aion_brain.api.entities import router as entities_router
 from aion_brain.api.event_reactions import router as event_reactions_router
 from aion_brain.api.events import router as events_router
 from aion_brain.api.evidence import router as evidence_router
@@ -28,6 +33,7 @@ from aion_brain.api.inbox import router as inbox_router
 from aion_brain.api.kernel import api_router as api_support_router
 from aion_brain.api.kernel import router as kernel_router
 from aion_brain.api.learning import router as learning_router
+from aion_brain.api.learning_synthesis import router as learning_synthesis_router
 from aion_brain.api.mcp import router as mcp_router
 from aion_brain.api.memory import router as memory_router
 from aion_brain.api.memory_governance import router as memory_governance_router
@@ -37,6 +43,7 @@ from aion_brain.api.modules import router as modules_router
 from aion_brain.api.observability import router as observability_router
 from aion_brain.api.operator import router as operator_router
 from aion_brain.api.outbox import router as outbox_router
+from aion_brain.api.outcomes import router as outcomes_router
 from aion_brain.api.performance import router as performance_router
 from aion_brain.api.policy import router as policy_router
 from aion_brain.api.policy_catalog import router as policy_catalog_router
@@ -47,6 +54,7 @@ from aion_brain.api.release_baseline import router as release_baseline_router
 from aion_brain.api.release_package import router as release_package_router
 from aion_brain.api.replay import router as replay_router
 from aion_brain.api.resilience import router as resilience_router
+from aion_brain.api.responses import router as responses_router
 from aion_brain.api.retrieval import router as retrieval_router
 from aion_brain.api.risk import router as risk_router
 from aion_brain.api.runtime_config import router as runtime_config_router
@@ -56,6 +64,8 @@ from aion_brain.api.schedules import router as schedules_router
 from aion_brain.api.scopes import router as scopes_router
 from aion_brain.api.secrets import router as secrets_router
 from aion_brain.api.security_baseline import router as security_baseline_router
+from aion_brain.api.self_model import router as self_model_router
+from aion_brain.api.situations import router as situations_router
 from aion_brain.api.skills import router as skills_router
 from aion_brain.api.tasks import router as tasks_router
 from aion_brain.api.telemetry import router as telemetry_router
@@ -93,6 +103,9 @@ ROUTERS = (
     workflows_router,
     cycles_router,
     execution_router,
+    beliefs_router,
+    concepts_router,
+    entities_router,
     evidence_router,
     memory_router,
     memory_governance_router,
@@ -112,9 +125,15 @@ ROUTERS = (
     attention_router,
     working_memory_router,
     autonomy_router,
+    dialogue_router,
+    responses_router,
+    situations_router,
+    decisions_router,
+    outcomes_router,
     brain_router,
     traces_router,
     learning_router,
+    learning_synthesis_router,
     telemetry_router,
     scenarios_router,
     release_baseline_router,
@@ -122,6 +141,7 @@ ROUTERS = (
     backups_router,
     performance_router,
     security_baseline_router,
+    self_model_router,
     runtime_config_router,
     resilience_router,
     versioning_router,

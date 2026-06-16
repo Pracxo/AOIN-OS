@@ -58,4 +58,3 @@ class ModulesResource:
             f"/brain/module-developer/packages/{module_package_id}/contract-tests/run",
             json={"dry_run": dry_run},
         )
-

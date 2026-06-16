@@ -9,6 +9,7 @@ from aion_brain.contracts.memory_governance import (
     MemoryCompactionRequest,
     MemoryConflictScanRequest,
 )
+from aion_brain.contracts.situations import SituationProjectionRequest
 from aion_brain.contracts.telemetry import VisualTelemetryEvent
 
 
@@ -28,6 +29,7 @@ class SleepConsolidationService:
         replay_service: object | None = None,
         visual_service: object | None = None,
         observability_service: object | None = None,
+        situation_projector: object | None = None,
         telemetry_service: object | None = None,
         cycle_repository: object | None = None,
         settings: object | None = None,
@@ -42,6 +44,7 @@ class SleepConsolidationService:
         self._replay_service = replay_service
         self._visual_service = visual_service
         self._observability_service = observability_service
+        self._situation_projector = situation_projector
         self._telemetry_service = telemetry_service
         self._cycle_repository = cycle_repository
         self._settings = settings
@@ -65,6 +68,7 @@ class SleepConsolidationService:
         regression_checked = self._run_regression(cycle_run)
         visual_snapshots = self._create_visual_snapshot(cycle_run, dry_run)
         observability = self._observability_summary(cycle_run)
+        situation_projection = self._project_situation(cycle_run)
 
         record = SleepConsolidationRecord(
             consolidation_id=f"sleep-consolidation-{uuid4().hex}",
@@ -89,6 +93,7 @@ class SleepConsolidationService:
                 "memory_conflicts": conflicts,
                 "memory_compaction": compaction,
                 "observability": observability,
+                "situation_projection": situation_projection,
                 "skill_promotion": "not_performed",
             },
             created_at=datetime.now(UTC),
@@ -104,6 +109,33 @@ class SleepConsolidationService:
             cycle_run.trace_id,
         )
         return saved
+
+    def _project_situation(self, cycle_run: CognitiveCycleRun) -> dict[str, Any]:
+        project = getattr(self._situation_projector, "project", None)
+        if not callable(project):
+            return {"status": "unavailable"}
+        try:
+            result = project(
+                SituationProjectionRequest(
+                    trace_id=cycle_run.trace_id,
+                    actor_id=cycle_run.actor_id,
+                    workspace_id=cycle_run.workspace_id,
+                    mode="dry_run",
+                    owner_scope=cycle_run.owner_scope,
+                    source_refs=[],
+                    metadata={
+                        "source": "sleep_consolidation",
+                        "cycle_run_id": cycle_run.cycle_run_id,
+                    },
+                )
+            )
+            return {
+                "status": result.status,
+                "projection_run_id": result.projection_run_id,
+                "state_atom_count": len(result.state_atom_ids),
+            }
+        except Exception as exc:
+            return {"status": "failed", "error": exc.__class__.__name__}
 
     def _sweep_working_memory(self, cycle_run: CognitiveCycleRun, dry_run: bool) -> dict[str, Any]:
         limit = int(

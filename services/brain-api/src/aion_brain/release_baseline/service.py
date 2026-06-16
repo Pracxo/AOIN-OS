@@ -117,9 +117,7 @@ class ReleaseBaselineService:
         )
         saved = self._repository.save(report)
         self._emit(
-            "release_baseline_completed"
-            if saved.status != "failed"
-            else "release_baseline_failed",
+            "release_baseline_completed" if saved.status != "failed" else "release_baseline_failed",
             release_baseline_id,
             request.owner_scope,
             {"version": request.version, "status": saved.status},

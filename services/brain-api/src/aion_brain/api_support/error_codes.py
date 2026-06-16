@@ -51,15 +51,11 @@ ERROR_CODE_TAXONOMY: dict[str, dict[str, Any]] = {
 
 def category_for_code(code: str) -> APIErrorCategory:
     """Return the stable category for an error code."""
-    category = ERROR_CODE_TAXONOMY.get(code, ERROR_CODE_TAXONOMY[AION_INTERNAL_ERROR])[
-        "category"
-    ]
+    category = ERROR_CODE_TAXONOMY.get(code, ERROR_CODE_TAXONOMY[AION_INTERNAL_ERROR])["category"]
     return str(category)  # type: ignore[return-value]
 
 
 def retryable_for_code(code: str) -> bool:
     """Return whether clients may retry this error code."""
-    retryable = ERROR_CODE_TAXONOMY.get(code, ERROR_CODE_TAXONOMY[AION_INTERNAL_ERROR])[
-        "retryable"
-    ]
+    retryable = ERROR_CODE_TAXONOMY.get(code, ERROR_CODE_TAXONOMY[AION_INTERNAL_ERROR])["retryable"]
     return bool(retryable)

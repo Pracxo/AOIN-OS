@@ -29,4 +29,3 @@ class ApprovalsResource:
 
     def decide(self, approval_request_id: str, request: JSONDict) -> JSONValue:
         return self._client.post(f"/brain/approvals/{approval_request_id}/decide", json=request)
-

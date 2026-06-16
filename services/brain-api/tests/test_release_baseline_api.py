@@ -23,9 +23,7 @@ class FakeReleaseBaselineService:
 
 
 def test_release_baseline_api_routes_work() -> None:
-    app.dependency_overrides[get_release_baseline_service] = (
-        lambda: FakeReleaseBaselineService()
-    )
+    app.dependency_overrides[get_release_baseline_service] = lambda: FakeReleaseBaselineService()
     app.dependency_overrides[get_actor_context] = actor_context
     try:
         client = TestClient(app)

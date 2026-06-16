@@ -17,4 +17,3 @@ class EventsResource:
     def ingest(self, event: JSONDict, *, idempotency_key: str | None = None) -> JSONValue:
         headers = {"Idempotency-Key": idempotency_key} if idempotency_key else None
         return self._client.post("/brain/events", json=event, headers=headers)
-

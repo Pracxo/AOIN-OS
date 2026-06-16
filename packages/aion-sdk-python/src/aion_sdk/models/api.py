@@ -22,4 +22,3 @@ class AIONErrorModel(AIONSDKModel):
 
 class AIONErrorResponseModel(AIONSDKModel):
     error: AIONErrorModel
-

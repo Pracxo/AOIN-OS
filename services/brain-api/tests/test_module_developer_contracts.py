@@ -59,4 +59,3 @@ def test_capability_certification_validates_score_bounds() -> None:
             failures=[],
             warnings=[],
         )
-

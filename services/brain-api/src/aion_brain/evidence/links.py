@@ -17,4 +17,3 @@ def unique_evidence_refs(links: list[EvidenceLink]) -> list[str]:
             seen.add(link.evidence_id)
             refs.append(link.evidence_id)
     return refs
-

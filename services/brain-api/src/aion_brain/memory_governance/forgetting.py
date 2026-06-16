@@ -91,10 +91,7 @@ class MemoryForgettingService:
             return result
 
         risk = self._assess_risk(request)
-        if (
-            self._settings.memory_forgetting_requires_approval
-            and not request.approval_present
-        ):
+        if self._settings.memory_forgetting_requires_approval and not request.approval_present:
             approval_id = self._create_approval(request, risk, forget_id)
             result = _result(
                 request,
@@ -212,9 +209,7 @@ class MemoryForgettingService:
                     resource_id=request.target_id,
                     title=f"Approval required for memory forget {request.target_id}",
                     description="AION requires approval before forgetting this memory target.",
-                    risk_assessment_id=(
-                        risk.risk_assessment_id if risk is not None else None
-                    ),
+                    risk_assessment_id=(risk.risk_assessment_id if risk is not None else None),
                     priority="high",
                     approval_scope=request.owner_scope,
                     payload={"forget_request_id": forget_id, "target_type": request.target_type},

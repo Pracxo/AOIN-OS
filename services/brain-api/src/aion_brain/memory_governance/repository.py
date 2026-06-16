@@ -239,8 +239,7 @@ class MemoryGovernanceRepository:
         with self._engine.begin() as connection:
             existing = connection.execute(
                 select(aion_memory_governance_rules.c.governance_rule_id).where(
-                    aion_memory_governance_rules.c.governance_rule_id
-                    == stored.governance_rule_id
+                    aion_memory_governance_rules.c.governance_rule_id == stored.governance_rule_id
                 )
             ).first()
             if existing is None:
@@ -260,11 +259,15 @@ class MemoryGovernanceRepository:
         """Return one governance rule."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_memory_governance_rules).where(
-                    aion_memory_governance_rules.c.governance_rule_id == governance_rule_id
+            row = (
+                connection.execute(
+                    select(aion_memory_governance_rules).where(
+                        aion_memory_governance_rules.c.governance_rule_id == governance_rule_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _rule_from_row(row) if row is not None else None
 
     def list_rules(
@@ -294,9 +297,7 @@ class MemoryGovernanceRepository:
         stored = decision.model_copy(update={"created_at": decision.created_at or _now()})
         with self._engine.begin() as connection:
             connection.execute(
-                insert(aion_memory_governance_decisions).values(
-                    **stored.model_dump(mode="python")
-                )
+                insert(aion_memory_governance_decisions).values(**stored.model_dump(mode="python"))
             )
         return stored
 
@@ -321,8 +322,7 @@ class MemoryGovernanceRepository:
         with self._engine.begin() as connection:
             existing = connection.execute(
                 select(aion_memory_forgetting_requests.c.forget_request_id).where(
-                    aion_memory_forgetting_requests.c.forget_request_id
-                    == stored.forget_request_id
+                    aion_memory_forgetting_requests.c.forget_request_id == stored.forget_request_id
                 )
             ).first()
             if existing is None:
@@ -345,11 +345,15 @@ class MemoryGovernanceRepository:
         """Return one forgetting request."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_memory_forgetting_requests).where(
-                    aion_memory_forgetting_requests.c.forget_request_id == forget_request_id
+            row = (
+                connection.execute(
+                    select(aion_memory_forgetting_requests).where(
+                        aion_memory_forgetting_requests.c.forget_request_id == forget_request_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _forget_request_from_row(row) if row is not None else None
 
     def save_conflict(self, conflict: MemoryConflict) -> MemoryConflict:
@@ -377,11 +381,15 @@ class MemoryGovernanceRepository:
         """Return one conflict."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_memory_conflicts).where(
-                    aion_memory_conflicts.c.conflict_id == conflict_id
+            row = (
+                connection.execute(
+                    select(aion_memory_conflicts).where(
+                        aion_memory_conflicts.c.conflict_id == conflict_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _conflict_from_row(row) if row is not None else None
 
     def list_conflicts(
@@ -417,8 +425,7 @@ class MemoryGovernanceRepository:
         with self._engine.begin() as connection:
             existing = connection.execute(
                 select(aion_memory_compaction_runs.c.compaction_run_id).where(
-                    aion_memory_compaction_runs.c.compaction_run_id
-                    == stored.compaction_run_id
+                    aion_memory_compaction_runs.c.compaction_run_id == stored.compaction_run_id
                 )
             ).first()
             if existing is None:
@@ -427,8 +434,7 @@ class MemoryGovernanceRepository:
                 connection.execute(
                     update(aion_memory_compaction_runs)
                     .where(
-                        aion_memory_compaction_runs.c.compaction_run_id
-                        == stored.compaction_run_id
+                        aion_memory_compaction_runs.c.compaction_run_id == stored.compaction_run_id
                     )
                     .values(**values)
                 )
@@ -438,11 +444,15 @@ class MemoryGovernanceRepository:
         """Return one compaction run."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_memory_compaction_runs).where(
-                    aion_memory_compaction_runs.c.compaction_run_id == compaction_run_id
+            row = (
+                connection.execute(
+                    select(aion_memory_compaction_runs).where(
+                        aion_memory_compaction_runs.c.compaction_run_id == compaction_run_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _compaction_run_from_row(row) if row is not None else None
 
     def save_compacted_record(self, record: MemoryCompactedRecord) -> MemoryCompactedRecord:

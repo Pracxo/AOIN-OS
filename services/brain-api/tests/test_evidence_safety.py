@@ -50,9 +50,7 @@ def test_no_pdf_parsing_ocr_external_storage_sdk_or_domain_logic_exists() -> Non
     evidence_root = Path("src/aion_brain/evidence")
     storage_root = Path("src/aion_brain/storage")
     text = "\n".join(
-        path.read_text()
-        for root in (evidence_root, storage_root)
-        for path in root.glob("*.py")
+        path.read_text() for root in (evidence_root, storage_root) for path in root.glob("*.py")
     ).lower()
 
     forbidden_terms = [

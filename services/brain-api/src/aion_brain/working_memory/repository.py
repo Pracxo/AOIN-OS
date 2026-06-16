@@ -114,11 +114,15 @@ class WorkingMemoryRepository:
         """Return one working memory slot."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_working_memory_slots).where(
-                    aion_working_memory_slots.c.slot_id == slot_id
+            row = (
+                connection.execute(
+                    select(aion_working_memory_slots).where(
+                        aion_working_memory_slots.c.slot_id == slot_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _slot_from_row(row) if row is not None else None
 
     def list_slots(

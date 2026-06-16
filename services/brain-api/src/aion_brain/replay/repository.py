@@ -106,7 +106,9 @@ class ReplayRepository:
                     aion_brain_snapshots.c.snapshot_id == stored.snapshot_id
                 )
             )
-            connection.execute(insert(aion_brain_snapshots).values(**stored.model_dump(mode="python")))
+            connection.execute(
+                insert(aion_brain_snapshots).values(**stored.model_dump(mode="python"))
+            )
         return stored
 
     def get_snapshot(self, snapshot_id: str) -> BrainSnapshot | None:

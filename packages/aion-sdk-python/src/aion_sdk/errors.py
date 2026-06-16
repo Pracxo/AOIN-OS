@@ -126,4 +126,3 @@ def _error_subclass(category: str, code: str, status_code: int) -> type[AIONAPIE
     if normalized in {"dependency", "unavailable", "timeout"} or status_code in {408, 503, 504}:
         return AIONDependencyUnavailableError
     return AIONAPIError
-

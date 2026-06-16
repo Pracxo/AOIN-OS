@@ -28,4 +28,3 @@ class MemoryRetrieveRequestModel(AIONSDKModel):
     scope: list[str]
     limit: int = 10
     memory_types: list[str] = Field(default_factory=list)
-

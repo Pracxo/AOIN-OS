@@ -416,9 +416,7 @@ class MCPService:
                     {},
                     {
                         "reason": (
-                            gate.reason
-                            if gate.final_decision == "block"
-                            else "approval_required"
+                            gate.reason if gate.final_decision == "block" else "approval_required"
                         ),
                         "approval_request_id": gate.approval_request_id,
                     },

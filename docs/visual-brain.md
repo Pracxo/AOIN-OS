@@ -174,3 +174,152 @@ or failed to trigger internal Brain reactions; it does not encode vertical
 workflow semantics. Dead-letter pulses should appear as blocked or failed
 activity in a future graph, and replay requests should appear as explicit
 operator-driven pulses rather than autonomous background activity.
+
+## Dialogue Projection
+
+Dialogue telemetry projects backend conversation artifacts into generic visual
+nodes:
+
+- `dialogue`
+- `message`
+- `clarification`
+- `response`
+- `feedback`
+
+Dialogue events can show session creation, message creation, turn start and
+completion, clarification requested or answered, response composed, response
+verified, local delivery recorded, feedback recorded, and memory handoff
+created. These events remain frontend-agnostic. A future renderer may animate
+conversation pulses beside reasoning, memory, policy, and trace nodes, but
+AION-051 adds no React, Canvas, WebSocket, or UI implementation.
+
+Dialogue projection must not include raw prompts, hidden reasoning,
+chain-of-thought, secrets, raw headers, or provider chat objects. The graph
+shows AION-owned cognitive events and references only.
+
+## Belief Projection
+
+Belief telemetry projects claim lifecycle events into the visual brain map
+without adding any frontend dependency. Generic belief events include claim
+creation, support addition, contradiction detection or resolution, belief
+queries, and truth maintenance runs.
+
+Future renderers can show belief nodes, claim nodes, contradiction nodes, and
+truth-maintenance pulses. Stale or contradicted claims should be visually
+distinguishable from supported claims, but the backend contract only emits
+frontend-agnostic node, edge, pulse, status, and metadata values.
+
+Belief projection must not display raw secrets, hidden reasoning, or raw prompt
+content. It should show claim IDs, source references, status, confidence, and
+trace references only.
+
+## Concept and Entity Projection
+
+Concept and entity telemetry projects canonical reference activity into the
+Visual Brain Projection without adding frontend dependencies.
+
+New generic visual nodes include:
+
+- `concept`
+- `entity`
+- `mention`
+- `reference`
+- `resolution`
+- `merge`
+- `split`
+
+Concept creation and archival produce concept pulses. Entity creation,
+archival, deletion, alias creation, mention creation, resolution start and
+completion, reference link creation, merge proposal/completion, and split
+proposal/completion produce entity resolver pulses.
+
+A future renderer may show the generic resolution path:
+
+`mention -> candidate -> entity -> reference link -> provenance`
+
+Reference edges are canonical pointers, not proof. Merge and split pulses show
+operator-governed lifecycle changes only. AION v0.1 adds no React, Canvas,
+Three.js, WebSocket, or UI implementation for this projection.
+## Decision Projection Nodes
+
+The visual projection layer can render decision frame nodes, option nodes,
+option evaluation nodes, tradeoff nodes, counterfactual projection nodes, and
+decision journal nodes.
+
+The generic decision path is:
+
+`situation -> frame -> options -> evaluation -> counterfactual -> recommendation -> journal`
+
+Decision visual telemetry never implies that an option executed. It only shows
+the recommendation and journal path.
+
+## Outcome Projection
+
+Outcome telemetry projects expected effects, observed effects, outcome records,
+verification runs, causal attributions, and outcome feedback into the Visual
+Brain Projection.
+
+Generic visual nodes include:
+
+- `expected_effect`
+- `observed_effect`
+- `outcome`
+- `effect_verification`
+- `causal_attribution`
+- `outcome_feedback`
+
+A future renderer may show the generic path:
+
+`expected effect -> observed effect -> outcome -> verification -> feedback`
+
+Outcome projection is frontend-agnostic. It does not render UI, call external
+observability services, mutate source records, or imply that an observed
+completion has been verified.
+
+## Learning Projection
+
+Learning synthesis telemetry projects experience records, pattern mining runs,
+learning patterns, lessons, skill suggestions, regression suggestions, and
+synthesis runs into the Visual Brain Projection.
+
+Generic visual nodes include:
+
+- `experience`
+- `learning_pattern`
+- `lesson`
+- `synthesis`
+- `skill_suggestion`
+- `regression_suggestion`
+
+A future renderer may show the generic path:
+
+`experience -> learning pattern -> lesson -> suggestion -> operator review`
+
+Learning projection is review-only. A pulse for a suggestion does not mean a
+skill was promoted, a regression was created, code was modified, or an
+external service was called.
+
+## Self Model Projection
+
+Self-model telemetry adds frontend-agnostic graph signals for:
+
+- `self_model`
+- `capability_awareness`
+- `limitation`
+- `confidence`
+- `self_assessment`
+- `introspection`
+
+The generic self-model visual path is:
+
+`kernel/config/capabilities -> awareness -> limitations -> confidence -> response disclosure`
+
+Self-description generation creates a `self_model` node for `aion`.
+Capability refresh creates a `capability_awareness` node for the capability
+inventory. Limitation creation creates limitation pulses, with critical
+limitations receiving the highest intensity. Confidence calibration creates
+confidence pulses using the calibrated score. Self-assessment and
+introspection snapshots create diagnostic pulses only.
+
+The projection remains backend-only in v0.1. It does not implement React,
+Canvas, Three.js, Rive, Lottie, WebSocket UI, or frontend-specific state.

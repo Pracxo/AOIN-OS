@@ -49,4 +49,3 @@ class MemoryResource:
 
     def governance_evaluate(self, request: JSONDict) -> JSONValue:
         return self._client.post("/brain/memory/governance/evaluate", json=request)
-

@@ -324,9 +324,7 @@ class IdentityService:
             VisualTelemetryEvent(
                 telemetry_id=f"telemetry-{node_id}-{event_type}",
                 trace_id=(
-                    self._actor_context.trace_id
-                    or self._actor_context.correlation_id
-                    or node_id
+                    self._actor_context.trace_id or self._actor_context.correlation_id or node_id
                 ),
                 event_type=event_type,
                 node_type=node_type,

@@ -25,9 +25,7 @@ def test_operator_resource_calls_expected_endpoints() -> None:
     client.operator.overview({"owner_scope": ["workspace:main"]})
     client.operator.readiness(["workspace:main"])
     client.operator.actions(["workspace:main"])
-    client.operator.acknowledge(
-        {"source_type": "generic", "source_id": "item-1", "reason": "seen"}
-    )
+    client.operator.acknowledge({"source_type": "generic", "source_id": "item-1", "reason": "seen"})
 
     assert seen == [
         ("POST", "/brain/operator/overview"),

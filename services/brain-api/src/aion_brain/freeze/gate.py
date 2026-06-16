@@ -823,9 +823,7 @@ class FreezeGateService:
         status = "passed"
         if result.status == "failed":
             status = (
-                "failed"
-                if bool(self._settings.resilience_fail_freeze_on_critical)
-                else "warning"
+                "failed" if bool(self._settings.resilience_fail_freeze_on_critical) else "warning"
             )
         elif result.status == "warning":
             status = "warning"

@@ -10,6 +10,8 @@ SYSTEM_INSTRUCTIONS = [
     "Do not introduce domain-specific assumptions.",
     "Use only provided context, constraints, and contracts.",
     "Ground claims in available evidence references when evidence is provided.",
+    "Treat belief_state context as claims with status metadata, not absolute truth.",
+    "Treat entity_registry context as canonical references, not raw evidence.",
 ]
 
 REQUESTED_OUTPUT_SCHEMA: dict[str, Any] = {
@@ -51,6 +53,14 @@ class PromptBuilder:
                 {"type": "known_context", "value": context.known_context},
                 {"type": "retrieved_memory_ids", "value": context.retrieved_memory_ids},
                 {"type": "evidence_refs", "value": _evidence_refs(context.known_context)},
+                {
+                    "type": "belief_status_metadata",
+                    "value": _belief_status_metadata(context.known_context),
+                },
+                {
+                    "type": "entity_reference_metadata",
+                    "value": _entity_reference_metadata(context.known_context),
+                },
                 {"type": "available_capability_ids", "value": context.available_capability_ids},
                 {"type": "constraints", "value": context.constraints},
                 {"type": "open_questions", "value": context.open_questions},
@@ -82,3 +92,42 @@ def _evidence_refs(known_context: list[dict[str, Any]]) -> list[str]:
                 seen.add(candidate)
                 refs.append(candidate)
     return refs
+
+
+def _belief_status_metadata(known_context: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    beliefs: list[dict[str, Any]] = []
+    for item in known_context:
+        if item.get("source") != "belief_state":
+            continue
+        metadata = item.get("metadata")
+        if not isinstance(metadata, dict):
+            metadata = {}
+        beliefs.append(
+            {
+                "source_id": item.get("source_id"),
+                "status": metadata.get("status", "unknown"),
+                "claim_type": metadata.get("claim_type", "generic"),
+                "not_absolute_truth": True,
+            }
+        )
+    return beliefs
+
+
+def _entity_reference_metadata(known_context: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    entities: list[dict[str, Any]] = []
+    for item in known_context:
+        if item.get("source") != "entity_registry":
+            continue
+        metadata = item.get("metadata")
+        if not isinstance(metadata, dict):
+            metadata = {}
+        entities.append(
+            {
+                "source_id": item.get("source_id"),
+                "status": metadata.get("status", "unknown"),
+                "entity_type": metadata.get("entity_type", "generic"),
+                "concept_refs": metadata.get("concept_refs", []),
+                "canonical_reference_only": True,
+            }
+        )
+    return entities

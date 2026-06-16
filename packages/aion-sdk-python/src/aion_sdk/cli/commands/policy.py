@@ -87,11 +87,15 @@ def install_policy_commands(
         risk_level: Annotated[str, typer.Option("--risk-level")] = "low",
     ) -> None:
         """Simulate a policy decision without executing an action."""
-        payload = _load_json(request_file) if request_file else _simulation_payload(
-            action_type,
-            resource_type,
-            risk_level,
-            get_scope(ctx),
+        payload = (
+            _load_json(request_file)
+            if request_file
+            else _simulation_payload(
+                action_type,
+                resource_type,
+                risk_level,
+                get_scope(ctx),
+            )
         )
         render(ctx, _client(get_client(ctx)).policy.simulate(payload))
 

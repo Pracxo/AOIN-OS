@@ -30,9 +30,7 @@ class ReadinessAggregator:
         cards = self._status_cards.build_cards(scope)
         actions = self._action_center.build_action_items(scope)
         blockers = [
-            item
-            for item in actions
-            if item.severity == "critical" and item.status == "open"
+            item for item in actions if item.severity == "critical" and item.status == "open"
         ]
         warnings = [
             item
@@ -49,8 +47,7 @@ class ReadinessAggregator:
             for card in cards
         ]
         critical_card_failure = any(
-            card.severity == "critical" and card.status in {"failed", "blocked"}
-            for card in cards
+            card.severity == "critical" and card.status in {"failed", "blocked"} for card in cards
         )
         core_failures = [
             card

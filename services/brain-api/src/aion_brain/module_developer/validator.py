@@ -294,4 +294,3 @@ def _contains_provider_term(value: object) -> bool:
 def _contains_domain_term(value: str) -> bool:
     lowered = value.lower()
     return any(term in lowered for term in DOMAIN_TERMS)
-

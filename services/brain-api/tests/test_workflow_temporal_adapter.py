@@ -64,8 +64,7 @@ def test_no_direct_temporalio_imports_outside_python_imports() -> None:
             else:
                 continue
             if any(
-                module == "temporalio" or module.startswith("temporalio.")
-                for module in modules
+                module == "temporalio" or module.startswith("temporalio.") for module in modules
             ):
                 offenders.append(path.relative_to(source_root).as_posix())
 

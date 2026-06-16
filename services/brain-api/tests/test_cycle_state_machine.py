@@ -33,4 +33,3 @@ def test_invalid_cycle_transitions_raise() -> None:
         require_valid_cycle_run_transition("completed", "running")
     with pytest.raises(ValueError):
         require_valid_cycle_step_transition("completed", "pending")
-

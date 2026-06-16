@@ -281,9 +281,7 @@ def _result(
     details: dict[str, Any],
 ) -> MemoryCompactionResult:
     completed_at = (
-        datetime.now(UTC)
-        if status in {"completed", "failed", "blocked_by_policy"}
-        else None
+        datetime.now(UTC) if status in {"completed", "failed", "blocked_by_policy"} else None
     )
     return MemoryCompactionResult(
         compaction_run_id=run_id,

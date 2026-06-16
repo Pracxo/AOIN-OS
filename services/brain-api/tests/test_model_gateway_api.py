@@ -54,12 +54,10 @@ def test_model_gateway_provider_profile_complete_usage_and_budget_apis_work() ->
         updated_at=datetime.now(UTC),
     )
     assert (
-        client.post("/brain/model-budgets", json=budget.model_dump(mode="json")).status_code
-        == 200
+        client.post("/brain/model-budgets", json=budget.model_dump(mode="json")).status_code == 200
     )
     assert client.get("/brain/model-budgets").status_code == 200
     assert client.post("/brain/model-profiles/external-profile/disable", json={}).status_code == 200
     assert (
-        client.post("/brain/model-providers/external-provider/disable", json={}).status_code
-        == 200
+        client.post("/brain/model-providers/external-provider/disable", json={}).status_code == 200
     )

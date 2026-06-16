@@ -231,11 +231,15 @@ class AttentionRepository:
         """Return one focus session."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_focus_sessions).where(
-                    aion_focus_sessions.c.focus_session_id == focus_session_id
+            row = (
+                connection.execute(
+                    select(aion_focus_sessions).where(
+                        aion_focus_sessions.c.focus_session_id == focus_session_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _focus_from_row(row) if row is not None else None
 
     def get_active_focus(
@@ -294,11 +298,15 @@ class AttentionRepository:
         """Return one attention signal."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_attention_signals).where(
-                    aion_attention_signals.c.attention_signal_id == attention_signal_id
+            row = (
+                connection.execute(
+                    select(aion_attention_signals).where(
+                        aion_attention_signals.c.attention_signal_id == attention_signal_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _signal_from_row(row) if row is not None else None
 
     def list_signals(
@@ -368,11 +376,15 @@ class AttentionRepository:
         """Return one interrupt."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_interrupt_records).where(
-                    aion_interrupt_records.c.interrupt_id == interrupt_id
+            row = (
+                connection.execute(
+                    select(aion_interrupt_records).where(
+                        aion_interrupt_records.c.interrupt_id == interrupt_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _interrupt_from_row(row) if row is not None else None
 
     def list_interrupts(

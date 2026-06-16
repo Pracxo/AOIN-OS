@@ -29,4 +29,3 @@ def test_visual_telemetry_emits_certification_events() -> None:
     node_types = {getattr(event, "node_type", None) for event in telemetry.events}
     assert "module_certification_completed" in event_types
     assert "certification" in node_types
-

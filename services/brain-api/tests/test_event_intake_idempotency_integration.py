@@ -59,7 +59,9 @@ def test_event_intake_idempotency_prevents_duplicate_persisted_event() -> None:
     """Same idempotency key and payload does not persist twice."""
     repository = FakeEventRepository()
     outbox = FakeOutbox()
-    idempotency = IdempotencyService(IdempotencyRepository(database_url="sqlite+pysqlite:///:memory:"))
+    idempotency = IdempotencyService(
+        IdempotencyRepository(database_url="sqlite+pysqlite:///:memory:")
+    )
     app.dependency_overrides[get_settings] = lambda: Settings(
         _env_file=None,
         DATABASE_URL="sqlite+pysqlite:///:memory:",

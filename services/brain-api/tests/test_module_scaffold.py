@@ -31,4 +31,3 @@ def test_scaffold_generator_creates_no_executable_code() -> None:
 
     assert all(not name.endswith((".py", ".sh", ".js", ".ts")) for name in scaffold.files)
     assert "external endpoint" in scaffold.readme
-

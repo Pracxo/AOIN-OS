@@ -36,8 +36,7 @@ class SkillMatcher:
 def _score_skill(skill: SkillRecord, request: SkillMatchRequest) -> SkillMatchResult:
     query_tokens = _tokens(request.query)
     pattern_scores = [
-        (_overlap(query_tokens, _tokens(pattern)), pattern)
-        for pattern in skill.trigger_patterns
+        (_overlap(query_tokens, _tokens(pattern)), pattern) for pattern in skill.trigger_patterns
     ]
     trigger_overlap = max((score for score, _ in pattern_scores), default=0.0)
     matched_patterns = [pattern for score, pattern in pattern_scores if score > 0.0]

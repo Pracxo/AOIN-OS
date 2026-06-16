@@ -12,4 +12,3 @@ def test_kernel_diagnostics_include_module_developer_checks() -> None:
     assert "module_certifier_present" in check_names
     assert "module_scaffold_generator_present" in check_names
     assert "module_contract_test_harness_present" in check_names
-

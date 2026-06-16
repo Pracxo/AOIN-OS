@@ -18,4 +18,3 @@ class ApprovalDecisionModel(AIONSDKModel):
     approval_request_id: str
     decision: str
     decided_by: str | None = None
-

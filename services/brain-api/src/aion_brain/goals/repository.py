@@ -125,9 +125,7 @@ class GoalRepository:
                 connection.execute(insert(aion_goals).values(**values))
             else:
                 connection.execute(
-                    update(aion_goals)
-                    .where(aion_goals.c.goal_id == goal.goal_id)
-                    .values(**values)
+                    update(aion_goals).where(aion_goals.c.goal_id == goal.goal_id).values(**values)
                 )
         return stored
 
@@ -135,9 +133,11 @@ class GoalRepository:
         """Return a goal by ID."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_goals).where(aion_goals.c.goal_id == goal_id)
-            ).mappings().first()
+            row = (
+                connection.execute(select(aion_goals).where(aion_goals.c.goal_id == goal_id))
+                .mappings()
+                .first()
+            )
         if row is None:
             return None
         return _row_to_goal(row)

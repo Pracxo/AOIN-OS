@@ -8,6 +8,7 @@ from uuid import uuid4
 
 from aion_brain.config import Settings
 from aion_brain.contracts.autonomy import AutonomyDecisionRequest
+from aion_brain.contracts.effects import ObservedEffectCreateRequest
 from aion_brain.contracts.module_developer import (
     CapabilityCertification,
     CapabilityCertificationCheck,
@@ -17,6 +18,7 @@ from aion_brain.contracts.module_developer import (
     ModulePackage,
     ModulePackageCreateRequest,
 )
+from aion_brain.contracts.outcomes import OutcomeCreateRequest
 from aion_brain.contracts.policy import PolicyRequest
 from aion_brain.contracts.risk import RiskAssessmentRequest
 from aion_brain.contracts.telemetry import VisualTelemetryEvent
@@ -40,6 +42,8 @@ class ModuleCertifier:
         telemetry_service: object | None,
         settings: Settings,
         sandbox_service: object | None = None,
+        observed_effect_collector: object | None = None,
+        outcome_service: object | None = None,
     ) -> None:
         self._repository = repository
         self._validator = validator
@@ -51,6 +55,8 @@ class ModuleCertifier:
         self._telemetry_service = telemetry_service
         self._settings = settings
         self._sandbox_service = sandbox_service
+        self._observed_effect_collector = observed_effect_collector
+        self._outcome_service = outcome_service
 
     def submit_package(self, request: ModulePackageCreateRequest) -> ModulePackage:
         """Validate and persist a module package."""
@@ -126,9 +132,7 @@ class ModuleCertifier:
         capability_certifications: list[CapabilityCertification] = []
         for capability in package.manifest.capabilities:
             capability_checks = self._validator.validate_capability(capability)
-            capability_checks.extend(
-                self._certification_checks(package, capability, request)
-            )
+            capability_checks.extend(self._certification_checks(package, capability, request))
             checks.extend(capability_checks)
             certification = _capability_certification(
                 package,
@@ -167,6 +171,7 @@ class ModuleCertifier:
             self._repository.save_package(
                 package.model_copy(update={"status": "certified", "updated_at": now})
             )
+        self._record_certification_outcome(stored, request)
         self._emit(
             "module_certification_completed",
             "certification",
@@ -175,6 +180,68 @@ class ModuleCertifier:
             {"status": status, "score": stored.score},
         )
         return stored
+
+    def _record_certification_outcome(
+        self,
+        run: ModuleCertificationRun,
+        request: ModuleCertificationRequest,
+    ) -> None:
+        if not getattr(self._settings, "outcomes_enabled", True):
+            return
+        if self._observed_effect_collector is None or self._outcome_service is None:
+            return
+        try:
+            create_observed = cast(
+                Any,
+                self._observed_effect_collector,
+            ).create_observed_effect
+            observed = create_observed(
+                ObservedEffectCreateRequest(
+                    trace_id=None,
+                    source_type="generic",
+                    source_id=run.certification_run_id,
+                    effect_type="status_change",
+                    subject_ref=run.module_package_id,
+                    predicate="certification_status",
+                    observed_value={
+                        "status": run.status,
+                        "score": run.score,
+                        "module_code_executed": False,
+                    },
+                    observation_source_type="system",
+                    observation_source_id=run.certification_run_id,
+                    confidence=0.8,
+                    owner_scope=request.owner_scope,
+                    observed_at=run.completed_at,
+                    metadata={"source": "module_certification"},
+                )
+            )
+            create_once = cast(Any, self._outcome_service).create_outcome_once_for_source
+            create_once(
+                OutcomeCreateRequest(
+                    trace_id=None,
+                    actor_id=request.actor_id,
+                    workspace_id=request.workspace_id,
+                    source_type="module_certification",
+                    source_id=run.certification_run_id,
+                    outcome_type="generic",
+                    title="Module certification completed",
+                    summary=f"Certification finished with status {run.status}.",
+                    owner_scope=request.owner_scope,
+                    observed_effects=[observed.observed_effect_id],
+                    confidence=0.8,
+                    score=run.score,
+                    metadata={
+                        "module_package_id": run.module_package_id,
+                        "module_id": run.module_id,
+                        "module_code_executed": False,
+                    },
+                    observed_at=run.completed_at,
+                    created_by=request.actor_id,
+                )
+            )
+        except Exception:
+            return
 
     def get_package(self, module_package_id: str) -> ModulePackage | None:
         """Return a package."""
@@ -618,7 +685,6 @@ def _check(
 def _has_wildcard_egress(value: object) -> bool:
     if isinstance(value, list):
         return any(
-            isinstance(item, dict) and item.get("destination_type") == "wildcard"
-            for item in value
+            isinstance(item, dict) and item.get("destination_type") == "wildcard" for item in value
         )
     return False

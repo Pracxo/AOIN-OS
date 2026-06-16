@@ -26,8 +26,7 @@ class PolicyInputEnricher:
             update={
                 "actor_id": policy_request.actor_id or actor_context.actor_id,
                 "workspace_id": policy_request.workspace_id or actor_context.workspace_id,
-                "security_scope": policy_request.security_scope
-                or actor_context.security_scope,
+                "security_scope": policy_request.security_scope or actor_context.security_scope,
                 "context": context,
             }
         )

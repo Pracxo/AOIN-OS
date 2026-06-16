@@ -194,11 +194,15 @@ class ModuleDeveloperRepository:
         """Return one module package."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_module_packages).where(
-                    aion_module_packages.c.module_package_id == module_package_id
+            row = (
+                connection.execute(
+                    select(aion_module_packages).where(
+                        aion_module_packages.c.module_package_id == module_package_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _row_to_package(row) if row is not None else None
 
     def list_packages(
@@ -247,12 +251,16 @@ class ModuleDeveloperRepository:
         """Return one certification run."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_module_certification_runs).where(
-                    aion_module_certification_runs.c.certification_run_id
-                    == certification_run_id
+            row = (
+                connection.execute(
+                    select(aion_module_certification_runs).where(
+                        aion_module_certification_runs.c.certification_run_id
+                        == certification_run_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _row_to_run(row) if row is not None else None
 
     def list_certification_runs(

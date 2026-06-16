@@ -131,9 +131,7 @@ def test_mcp_service_invoke_dry_run_and_controlled_modes() -> None:
         MCPInvocationRequest(**{**generated_payload, "mode": "controlled"})
     )
     completed = enabled.invoke(
-        MCPInvocationRequest(
-            **{**generated_payload, "mode": "controlled", "payload": {"value": 1}}
-        )
+        MCPInvocationRequest(**{**generated_payload, "mode": "controlled", "payload": {"value": 1}})
     )
     missing = enabled.invoke(
         MCPInvocationRequest(**{**generated_payload, "capability_id": "missing"})

@@ -58,16 +58,19 @@ def test_backup_api_routes_work(tmp_path: Path) -> None:
     finally:
         app.dependency_overrides.clear()
 
-    assert [response.status_code for response in [
-        created,
-        fetched,
-        listed,
-        validated,
-        validated_path,
-        preview,
-        restore,
-        preview_get,
-    ]] == [200, 200, 200, 200, 200, 200, 200, 200]
+    assert [
+        response.status_code
+        for response in [
+            created,
+            fetched,
+            listed,
+            validated,
+            validated_path,
+            preview,
+            restore,
+            preview_get,
+        ]
+    ] == [200, 200, 200, 200, 200, 200, 200, 200]
     assert restore.json()["status"] == "dry_run"
 
 

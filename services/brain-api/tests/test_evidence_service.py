@@ -88,11 +88,7 @@ class FakeEvidenceRepository:
         ][:limit]
 
     def get_chunks(self, evidence_id: str) -> list[EvidenceChunk]:
-        return [
-            chunk
-            for chunk in self.chunks.get(evidence_id, [])
-            if chunk.deleted_at is None
-        ]
+        return [chunk for chunk in self.chunks.get(evidence_id, []) if chunk.deleted_at is None]
 
     def save_link(self, link: EvidenceLink) -> EvidenceLink:
         self.links[link.link_id] = link
@@ -194,6 +190,10 @@ def make_service(
     repository: FakeEvidenceRepository | None = None,
     policy: FakePolicyAdapter | None = None,
     telemetry: FakeTelemetryService | None = None,
+    claim_extractor: object | None = None,
+    belief_service: object | None = None,
+    entity_resolver: object | None = None,
+    settings: object | None = None,
 ) -> EvidenceService:
     """Create an evidence service fake."""
     return EvidenceService(
@@ -201,6 +201,10 @@ def make_service(
         policy_adapter=policy or FakePolicyAdapter(),
         telemetry_service=telemetry,
         actor_context=make_actor_context(),
+        claim_extractor=claim_extractor,
+        belief_service=belief_service,
+        entity_resolver=entity_resolver,
+        settings=settings,
     )
 
 
@@ -261,4 +265,3 @@ def make_link(
         created_at=datetime.now(UTC),
         deleted_at=None,
     )
-

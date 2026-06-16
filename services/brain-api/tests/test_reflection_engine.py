@@ -92,8 +92,7 @@ def test_reflection_engine_creates_generic_low_score_observation() -> None:
 
     assert "low_score:plan_quality_score" in reflection.observations
     assert any(
-        change["change_type"] == "generic_procedure"
-        for change in reflection.proposed_changes
+        change["change_type"] == "generic_procedure" for change in reflection.proposed_changes
     )
 
 

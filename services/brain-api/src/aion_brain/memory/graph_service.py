@@ -224,9 +224,7 @@ class GraphMemoryService:
                 available=True,
                 default=default_name == "postgres_graph",
                 reason=(
-                    self._fallback_reason
-                    if active_name in {"postgres_graph", "postgres"}
-                    else None
+                    self._fallback_reason if active_name in {"postgres_graph", "postgres"} else None
                 ),
                 metadata={
                     "adapter_fallback": bool(self._fallback_reason)

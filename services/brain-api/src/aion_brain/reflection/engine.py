@@ -140,9 +140,10 @@ def _proposed_changes(request: ReflectionRequest) -> list[dict[str, Any]]:
                 "expected_outcomes": ["reviewed_generic_procedure_available"],
             }
         )
-    if request.evaluation is not None and request.evaluation.scores.get(
-        "memory_relevance_score", 1.0
-    ) < 0.5:
+    if (
+        request.evaluation is not None
+        and request.evaluation.scores.get("memory_relevance_score", 1.0) < 0.5
+    ):
         changes.append(
             {
                 "change_type": "retrieval_tuning",

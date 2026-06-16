@@ -105,4 +105,3 @@ def test_cli_modules_list_works(monkeypatch) -> None:  # type: ignore[no-untyped
 
     assert result.exit_code == 0
     assert _json(result)[0]["status"] == "submitted"
-

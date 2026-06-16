@@ -316,9 +316,7 @@ class ApprovalService:
                     resource_type=risk.resource_type,
                     resource_id=risk.resource_id,
                     title=f"Approval required for {risk.action_type}",
-                    description=(
-                        "AION requires approval before continuing this generic action."
-                    ),
+                    description=("AION requires approval before continuing this generic action."),
                     risk_assessment_id=risk.risk_assessment_id,
                     guardrail_decision_id=guardrail.guardrail_decision_id,
                     priority=_priority_for_risk(risk.computed_risk_level),

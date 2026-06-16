@@ -36,4 +36,3 @@ __all__ = [
     "AIONValidationError",
     "build_aion_headers",
 ]
-

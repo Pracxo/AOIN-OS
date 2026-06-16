@@ -146,11 +146,15 @@ class ModuleRuntimeRepository:
         """Return a module runtime by ID."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_module_runtimes).where(
-                    aion_module_runtimes.c.runtime_id == runtime_id
+            row = (
+                connection.execute(
+                    select(aion_module_runtimes).where(
+                        aion_module_runtimes.c.runtime_id == runtime_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         if row is None:
             return None
         return _row_to_runtime(row)
@@ -159,9 +163,13 @@ class ModuleRuntimeRepository:
         """Return all registered runtimes."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            rows = connection.execute(
-                select(aion_module_runtimes).order_by(aion_module_runtimes.c.created_at)
-            ).mappings().all()
+            rows = (
+                connection.execute(
+                    select(aion_module_runtimes).order_by(aion_module_runtimes.c.created_at)
+                )
+                .mappings()
+                .all()
+            )
         return [_row_to_runtime(row) for row in rows]
 
     def save_binding(self, binding: CapabilityRuntimeBinding) -> CapabilityRuntimeBinding:
@@ -185,9 +193,7 @@ class ModuleRuntimeRepository:
             else:
                 connection.execute(
                     update(aion_capability_runtime_bindings)
-                    .where(
-                        aion_capability_runtime_bindings.c.binding_id == binding.binding_id
-                    )
+                    .where(aion_capability_runtime_bindings.c.binding_id == binding.binding_id)
                     .values(**values)
                 )
         return stored
@@ -196,11 +202,15 @@ class ModuleRuntimeRepository:
         """Return a capability runtime binding by ID."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_capability_runtime_bindings).where(
-                    aion_capability_runtime_bindings.c.binding_id == binding_id
+            row = (
+                connection.execute(
+                    select(aion_capability_runtime_bindings).where(
+                        aion_capability_runtime_bindings.c.binding_id == binding_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         if row is None:
             return None
         return _row_to_binding(row)
@@ -213,13 +223,17 @@ class ModuleRuntimeRepository:
         """Return the active binding for a capability and invocation mode."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_capability_runtime_bindings)
-                .where(aion_capability_runtime_bindings.c.capability_id == capability_id)
-                .where(aion_capability_runtime_bindings.c.invocation_mode == invocation_mode)
-                .where(aion_capability_runtime_bindings.c.status == "active")
-                .order_by(aion_capability_runtime_bindings.c.created_at.desc())
-            ).mappings().first()
+            row = (
+                connection.execute(
+                    select(aion_capability_runtime_bindings)
+                    .where(aion_capability_runtime_bindings.c.capability_id == capability_id)
+                    .where(aion_capability_runtime_bindings.c.invocation_mode == invocation_mode)
+                    .where(aion_capability_runtime_bindings.c.status == "active")
+                    .order_by(aion_capability_runtime_bindings.c.created_at.desc())
+                )
+                .mappings()
+                .first()
+            )
         if row is None:
             return None
         return _row_to_binding(row)
@@ -228,11 +242,15 @@ class ModuleRuntimeRepository:
         """Return all capability runtime bindings."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            rows = connection.execute(
-                select(aion_capability_runtime_bindings).order_by(
-                    aion_capability_runtime_bindings.c.created_at
+            rows = (
+                connection.execute(
+                    select(aion_capability_runtime_bindings).order_by(
+                        aion_capability_runtime_bindings.c.created_at
+                    )
                 )
-            ).mappings().all()
+                .mappings()
+                .all()
+            )
         return [_row_to_binding(row) for row in rows]
 
     def save_health_check(self, health_check: ModuleHealthCheck) -> ModuleHealthCheck:
@@ -240,9 +258,7 @@ class ModuleRuntimeRepository:
         self._ensure_schema()
         with self._engine.begin() as connection:
             connection.execute(
-                insert(aion_module_health_checks).values(
-                    **health_check.model_dump(mode="python")
-                )
+                insert(aion_module_health_checks).values(**health_check.model_dump(mode="python"))
             )
         return health_check
 

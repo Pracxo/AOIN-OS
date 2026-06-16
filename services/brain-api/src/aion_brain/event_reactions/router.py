@@ -297,8 +297,7 @@ class EventReactionRouter:
         completed = sum(action.status in {"completed", "dry_run", "skipped"} for action in actions)
         failed = sum(action.status == "failed" for action in actions)
         blocked = sum(
-            action.status
-            in {"blocked_by_policy", "blocked_by_autonomy", "waiting_for_approval"}
+            action.status in {"blocked_by_policy", "blocked_by_autonomy", "waiting_for_approval"}
             for action in actions
         )
         final_record = record.model_copy(
@@ -500,9 +499,7 @@ class EventReactionRouter:
         if autonomy is not None:
             action = action.model_copy(
                 update={
-                    "autonomy_decision_id": str(
-                        getattr(autonomy, "autonomy_decision_id", "")
-                    )
+                    "autonomy_decision_id": str(getattr(autonomy, "autonomy_decision_id", ""))
                     or None
                 }
             )
@@ -704,9 +701,7 @@ class EventReactionRouter:
                 trace_id=request.trace_id or event.trace_id,
                 actor_id=request.actor_id or event.actor_id,
                 workspace_id=request.workspace_id or event.workspace_id,
-                requested_mode="dry_run"
-                if request.mode == "dry_run"
-                else "supervised_controlled",
+                requested_mode="dry_run" if request.mode == "dry_run" else "supervised_controlled",
                 action_type=action_type,
                 resource_type="event_reaction",
                 resource_id=resource_id,

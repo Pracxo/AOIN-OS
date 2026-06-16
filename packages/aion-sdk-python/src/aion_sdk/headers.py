@@ -34,4 +34,3 @@ def build_aion_headers(
                 headers[key] = value
     headers.pop("Authorization", None)
     return headers
-

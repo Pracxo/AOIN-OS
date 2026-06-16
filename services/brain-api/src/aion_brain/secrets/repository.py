@@ -110,9 +110,15 @@ class SecretRefRepository:
         """Return one secret reference."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_secret_refs).where(aion_secret_refs.c.secret_ref_id == secret_ref_id)
-            ).mappings().first()
+            row = (
+                connection.execute(
+                    select(aion_secret_refs).where(
+                        aion_secret_refs.c.secret_ref_id == secret_ref_id
+                    )
+                )
+                .mappings()
+                .first()
+            )
         return _row_to_secret(row) if row is not None else None
 
     def list(self, status: str | None = None) -> list[SecretRef]:

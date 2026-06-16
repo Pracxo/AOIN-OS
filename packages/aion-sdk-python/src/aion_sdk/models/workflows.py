@@ -20,4 +20,3 @@ class WorkflowRunModel(AIONSDKModel):
     workflow_id: str
     status: str
     owner_scope: list[str] = Field(default_factory=list)
-

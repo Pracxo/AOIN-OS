@@ -35,9 +35,7 @@ class MemoryDecayService:
         """Return a deterministic score and factor map."""
         current = now or datetime.now(UTC)
         created = (
-            memory.created_at
-            if memory.created_at.tzinfo
-            else memory.created_at.replace(tzinfo=UTC)
+            memory.created_at if memory.created_at.tzinfo else memory.created_at.replace(tzinfo=UTC)
         )
         age_days = max(0.0, (current - created).total_seconds() / 86400)
         half_life_days = max(1, self._settings.memory_default_decay_half_life_days)

@@ -291,4 +291,3 @@ class ResilienceStatusUpdateRequest(BaseModel):
 
     actor_id: str | None = None
     reason: str = Field(min_length=1)
-

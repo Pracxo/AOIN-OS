@@ -24,9 +24,7 @@ def test_mcp_runtime_adapter_is_guarded_without_service() -> None:
     assert result.error["reason"] == "mcp_service_not_configured"
     source = inspect.getsource(mcp_runtime)
     imports = [
-        imported
-        for node in ast.walk(ast.parse(source))
-        for imported in _imported_modules(node)
+        imported for node in ast.walk(ast.parse(source)) for imported in _imported_modules(node)
     ]
     assert "mcp" not in imports
     assert all(not imported.startswith("mcp.") for imported in imports)

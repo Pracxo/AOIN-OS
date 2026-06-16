@@ -99,9 +99,7 @@ class ContextBudgeter:
             if len(selected) >= budget.max_items:
                 break
         for item in items:
-            already_overflowed = any(
-                entry["item_id"] == item.item_id for entry in overflow
-            )
+            already_overflowed = any(entry["item_id"] == item.item_id for entry in overflow)
             if item not in selected and not already_overflowed:
                 overflow.append(_overflow_item(item, "max_items_exceeded"))
         updated = budget.model_copy(
@@ -176,8 +174,7 @@ def _allocation(request: ContextBudgetRequest) -> dict[str, int]:
     }
     total = sum(weights.values()) or 1.0
     allocation = {
-        source: int(request.max_items * (weight / total))
-        for source, weight in weights.items()
+        source: int(request.max_items * (weight / total)) for source, weight in weights.items()
     }
     remaining = request.max_items - sum(allocation.values())
     for source in sorted(sources):

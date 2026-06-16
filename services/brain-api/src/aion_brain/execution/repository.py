@@ -242,8 +242,7 @@ class ExecutionRepository:
                 connection.execute(
                     update(aion_capability_invocation_records)
                     .where(
-                        aion_capability_invocation_records.c.invocation_id
-                        == record.invocation_id
+                        aion_capability_invocation_records.c.invocation_id == record.invocation_id
                     )
                     .values(**values)
                 )
@@ -253,11 +252,15 @@ class ExecutionRepository:
         """Return an execution run with child records."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_execution_runs).where(
-                    aion_execution_runs.c.execution_id == execution_id
+            row = (
+                connection.execute(
+                    select(aion_execution_runs).where(
+                        aion_execution_runs.c.execution_id == execution_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         if row is None:
             return None
         return _row_to_run(
@@ -271,44 +274,60 @@ class ExecutionRepository:
         """Return execution steps for a run."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            rows = connection.execute(
-                select(aion_execution_steps)
-                .where(aion_execution_steps.c.execution_id == execution_id)
-                .order_by(aion_execution_steps.c.created_at)
-            ).mappings().all()
+            rows = (
+                connection.execute(
+                    select(aion_execution_steps)
+                    .where(aion_execution_steps.c.execution_id == execution_id)
+                    .order_by(aion_execution_steps.c.created_at)
+                )
+                .mappings()
+                .all()
+            )
         return [_row_to_step(row) for row in rows]
 
     def list_approvals(self, execution_id: str) -> list[ApprovalCheckpoint]:
         """Return approval checkpoints for a run."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            rows = connection.execute(
-                select(aion_approval_checkpoints)
-                .where(aion_approval_checkpoints.c.execution_id == execution_id)
-                .order_by(aion_approval_checkpoints.c.created_at)
-            ).mappings().all()
+            rows = (
+                connection.execute(
+                    select(aion_approval_checkpoints)
+                    .where(aion_approval_checkpoints.c.execution_id == execution_id)
+                    .order_by(aion_approval_checkpoints.c.created_at)
+                )
+                .mappings()
+                .all()
+            )
         return [_row_to_approval(row) for row in rows]
 
     def list_capability_invocations(self, execution_id: str) -> list[CapabilityInvocationRecord]:
         """Return capability invocation records for a run."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            rows = connection.execute(
-                select(aion_capability_invocation_records)
-                .where(aion_capability_invocation_records.c.execution_id == execution_id)
-                .order_by(aion_capability_invocation_records.c.created_at)
-            ).mappings().all()
+            rows = (
+                connection.execute(
+                    select(aion_capability_invocation_records)
+                    .where(aion_capability_invocation_records.c.execution_id == execution_id)
+                    .order_by(aion_capability_invocation_records.c.created_at)
+                )
+                .mappings()
+                .all()
+            )
         return [_row_to_invocation(row) for row in rows]
 
     def get_approval(self, approval_id: str) -> ApprovalCheckpoint | None:
         """Return an approval checkpoint."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_approval_checkpoints).where(
-                    aion_approval_checkpoints.c.approval_id == approval_id
+            row = (
+                connection.execute(
+                    select(aion_approval_checkpoints).where(
+                        aion_approval_checkpoints.c.approval_id == approval_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         if row is None:
             return None
         return _row_to_approval(row)

@@ -29,4 +29,3 @@ class KernelResource:
 
     def boundary_check(self) -> JSONValue:
         return self._client.post("/brain/kernel/boundary-check", json={})
-

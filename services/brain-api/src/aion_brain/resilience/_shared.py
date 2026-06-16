@@ -79,4 +79,3 @@ def emit_resilience_event(
             emit(event)
     except Exception:
         return
-

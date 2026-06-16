@@ -401,8 +401,7 @@ class AutonomyGovernor:
         delegation_id: str | None = None,
     ) -> AutonomyDecision:
         decision = AutonomyDecision(
-            autonomy_decision_id=request.autonomy_decision_id
-            or f"autonomy-decision-{uuid4().hex}",
+            autonomy_decision_id=request.autonomy_decision_id or f"autonomy-decision-{uuid4().hex}",
             trace_id=request.trace_id,
             actor_id=request.actor_id,
             workspace_id=request.workspace_id,

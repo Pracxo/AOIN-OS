@@ -181,9 +181,7 @@ class MCPRepository:
         values = server.model_dump(mode="python")
         values["created_at"] = values["created_at"] or now
         values["updated_at"] = now
-        stored = server.model_copy(
-            update={"created_at": values["created_at"], "updated_at": now}
-        )
+        stored = server.model_copy(update={"created_at": values["created_at"], "updated_at": now})
         with self._engine.begin() as connection:
             existing = connection.execute(
                 select(aion_mcp_servers.c.mcp_server_id).where(
@@ -204,11 +202,15 @@ class MCPRepository:
         """Return one MCP server."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_mcp_servers).where(
-                    aion_mcp_servers.c.mcp_server_id == mcp_server_id
+            row = (
+                connection.execute(
+                    select(aion_mcp_servers).where(
+                        aion_mcp_servers.c.mcp_server_id == mcp_server_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _server_from_row(row) if row is not None else None
 
     def list_servers(self, status: str | None = None) -> list[MCPServerRecord]:
@@ -248,9 +250,7 @@ class MCPRepository:
         values = mapping.model_dump(mode="python")
         values["created_at"] = values["created_at"] or now
         values["updated_at"] = now
-        stored = mapping.model_copy(
-            update={"created_at": values["created_at"], "updated_at": now}
-        )
+        stored = mapping.model_copy(update={"created_at": values["created_at"], "updated_at": now})
         with self._engine.begin() as connection:
             existing = connection.execute(
                 select(aion_mcp_capability_mappings.c.mapping_id).where(
@@ -271,11 +271,15 @@ class MCPRepository:
         """Return a mapping by AION capability ID."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_mcp_capability_mappings).where(
-                    aion_mcp_capability_mappings.c.capability_id == capability_id
+            row = (
+                connection.execute(
+                    select(aion_mcp_capability_mappings).where(
+                        aion_mcp_capability_mappings.c.capability_id == capability_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _mapping_from_row(row) if row is not None else None
 
     def get_mapping_by_tool(
@@ -286,11 +290,15 @@ class MCPRepository:
         """Return a mapping by MCP server and tool name."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_mcp_capability_mappings)
-                .where(aion_mcp_capability_mappings.c.mcp_server_id == mcp_server_id)
-                .where(aion_mcp_capability_mappings.c.mcp_tool_name == tool_name)
-            ).mappings().first()
+            row = (
+                connection.execute(
+                    select(aion_mcp_capability_mappings)
+                    .where(aion_mcp_capability_mappings.c.mcp_server_id == mcp_server_id)
+                    .where(aion_mcp_capability_mappings.c.mcp_tool_name == tool_name)
+                )
+                .mappings()
+                .first()
+            )
         return _mapping_from_row(row) if row is not None else None
 
     def list_mappings(

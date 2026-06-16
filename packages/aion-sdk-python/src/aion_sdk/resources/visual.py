@@ -25,4 +25,3 @@ class VisualResource:
 
     def timeline(self, request: JSONDict) -> JSONValue:
         return self._client.post("/brain/visual/timeline", json=request)
-

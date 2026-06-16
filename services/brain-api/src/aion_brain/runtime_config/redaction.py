@@ -32,10 +32,7 @@ def redact_config_value(key: str, value: Any) -> Any:
     if isinstance(value, dict):
         return sanitize_config_dict(value)
     if isinstance(value, list):
-        return [
-            sanitize_config_dict(item) if isinstance(item, dict) else item
-            for item in value
-        ]
+        return [sanitize_config_dict(item) if isinstance(item, dict) else item for item in value]
     return value
 
 

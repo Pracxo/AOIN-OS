@@ -15,6 +15,7 @@ def test_api_exposure_checker_detects_forbidden_domain_route_prefix() -> None:
         }
     )
 
-    assert next(check for check in checks if check["name"] == "no_domain_route_prefixes")[
-        "status"
-    ] == "failed"
+    assert (
+        next(check for check in checks if check["name"] == "no_domain_route_prefixes")["status"]
+        == "failed"
+    )

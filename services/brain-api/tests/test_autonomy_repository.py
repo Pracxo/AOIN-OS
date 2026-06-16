@@ -16,8 +16,7 @@ def test_repository_persists_profiles_run_levels_and_delegations() -> None:
     assert repository.get_profile(profile.autonomy_profile_id) == profile
     assert repository.get_active_profile(actor_id="actor-1", workspace_id="workspace-1") == profile
     assert (
-        repository.get_active_run_level(actor_id="actor-1", workspace_id="workspace-1")
-        == run_level
+        repository.get_active_run_level(actor_id="actor-1", workspace_id="workspace-1") == run_level
     )
     assert repository.get_delegation(delegation.delegation_id) == delegation
 

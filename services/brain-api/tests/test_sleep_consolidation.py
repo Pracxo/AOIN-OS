@@ -121,4 +121,3 @@ def test_sleep_consolidation_creates_skill_candidates_only_when_explicit() -> No
 
     assert record.skill_candidates_created == 1
     assert record.result["skill_promotion"] == "not_performed"
-

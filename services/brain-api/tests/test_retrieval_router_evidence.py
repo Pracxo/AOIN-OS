@@ -61,4 +61,3 @@ def test_retrieval_router_can_include_evidence_vault_results() -> None:
     assert result.items[0].source == "evidence_vault"
     assert result.items[0].evidence_ref == "evidence-1"
     assert result.items[0].metadata["chunk_id"] == "chunk-1"
-

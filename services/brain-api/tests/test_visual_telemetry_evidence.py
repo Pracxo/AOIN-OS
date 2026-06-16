@@ -13,4 +13,3 @@ def test_visual_telemetry_emits_evidence_events() -> None:
     event_types = [event.event_type for event in telemetry.events]
     assert "evidence_created" in event_types
     assert "evidence_chunk_created" in event_types
-

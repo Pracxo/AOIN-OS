@@ -14,9 +14,7 @@ FORBIDDEN_ROUTE_TERMS = (
     "payments",
     "procurement",
 )
-FORBIDDEN_ROUTE_PREFIXES = tuple(
-    f"/{term}" for term in FORBIDDEN_ROUTE_TERMS if term != "payments"
-)
+FORBIDDEN_ROUTE_PREFIXES = tuple(f"/{term}" for term in FORBIDDEN_ROUTE_TERMS if term != "payments")
 PROVIDER_OBJECT_TERMS = (
     "openaiobject",
     "anthropicmessage",

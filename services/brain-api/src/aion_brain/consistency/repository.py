@@ -159,8 +159,7 @@ class ConsistencyRepository:
         with self._engine.begin() as connection:
             connection.execute(
                 delete(aion_consistency_checks).where(
-                    aion_consistency_checks.c.consistency_check_id
-                    == stored.consistency_check_id
+                    aion_consistency_checks.c.consistency_check_id == stored.consistency_check_id
                 )
             )
             connection.execute(

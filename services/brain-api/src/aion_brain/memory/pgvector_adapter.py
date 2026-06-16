@@ -141,15 +141,19 @@ class PgVectorSemanticMemoryAdapter:
             """
         )
         with self._engine.connect() as connection:
-            rows = connection.execute(
-                statement,
-                {
-                    "query_embedding": query_embedding,
-                    "adapter_name": self.adapter_name,
-                    "dimensions": self._embedding_adapter.dimensions(),
-                    "candidate_limit": candidate_limit,
-                },
-            ).mappings().all()
+            rows = (
+                connection.execute(
+                    statement,
+                    {
+                        "query_embedding": query_embedding,
+                        "adapter_name": self.adapter_name,
+                        "dimensions": self._embedding_adapter.dimensions(),
+                        "candidate_limit": candidate_limit,
+                    },
+                )
+                .mappings()
+                .all()
+            )
         results = [
             _result_from_row(row, query, self.adapter_name)
             for row in rows

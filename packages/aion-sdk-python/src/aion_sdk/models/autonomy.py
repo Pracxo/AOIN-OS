@@ -19,4 +19,3 @@ class AutonomyDecisionModel(AIONSDKModel):
     allow: bool
     reason: str
     constraints: dict[str, Any] = Field(default_factory=dict)
-

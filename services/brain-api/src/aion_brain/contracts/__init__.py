@@ -47,7 +47,22 @@ from aion_brain.contracts.autonomy import (
     RunLevelRecord,
     SetRunLevelRequest,
 )
+from aion_brain.contracts.beliefs import (
+    BeliefClaim,
+    BeliefClaimCreateRequest,
+    BeliefContradiction,
+    BeliefQuery,
+    BeliefQueryResult,
+    BeliefRevision,
+    BeliefSupport,
+    BeliefSupportCreateRequest,
+    ClaimExtractionRequest,
+    ClaimExtractionResult,
+    TruthMaintenanceRequest,
+    TruthMaintenanceRun,
+)
 from aion_brain.contracts.capabilities import CapabilityManifest
+from aion_brain.contracts.capability_awareness import CapabilityAwarenessRecord
 from aion_brain.contracts.commands import (
     BrainCommand,
     CommandDispatchRequest,
@@ -58,6 +73,15 @@ from aion_brain.contracts.compatibility import (
     MigrationBaseline,
     ReleaseArtifactManifest,
     SDKCompatibilityReport,
+)
+from aion_brain.contracts.concepts import ConceptArchiveRequest, ConceptCreateRequest, ConceptRecord
+from aion_brain.contracts.confidence import (
+    ConfidenceCalibration,
+    ConfidenceCalibrationRequest,
+    IntrospectionSnapshot,
+    IntrospectionSnapshotRequest,
+    SelfAssessmentRequest,
+    SelfAssessmentRun,
 )
 from aion_brain.contracts.consistency import (
     ConsistencyCheckRequest,
@@ -74,6 +98,27 @@ from aion_brain.contracts.cycles import (
     CycleStatus,
     SleepConsolidationRecord,
     SleepConsolidationRequest,
+)
+from aion_brain.contracts.entities import (
+    EntityAlias,
+    EntityAliasCreateRequest,
+    EntityCreateRequest,
+    EntityDeleteRequest,
+    EntityExtractMentionsRequest,
+    EntityMention,
+    EntityMentionCreateRequest,
+    EntityMergeProposal,
+    EntityMergeProposalCreateRequest,
+    EntityProposalDecisionRequest,
+    EntityQuery,
+    EntityQueryResult,
+    EntityRecord,
+    EntityResolutionRequest,
+    EntityResolutionResult,
+    EntitySplitProposal,
+    EntitySplitProposalCreateRequest,
+    ReferenceLink,
+    ReferenceLinkCreateRequest,
 )
 from aion_brain.contracts.evaluation import EvaluationRecord
 from aion_brain.contracts.event_reactions import (
@@ -107,6 +152,11 @@ from aion_brain.contracts.execution import (
     ExecutionRequest,
     ExecutionRun,
     ExecutionStepRun,
+)
+from aion_brain.contracts.experience import (
+    ExperienceCreateRequest,
+    ExperienceQuery,
+    ExperienceRecord,
 )
 from aion_brain.contracts.freeze import FreezeGateCheck, FreezeGateRun, FreezeGateRunRequest
 from aion_brain.contracts.goals import GoalCreateRequest, GoalRecord, GoalTransitionRequest
@@ -143,6 +193,17 @@ from aion_brain.contracts.identity import (
 from aion_brain.contracts.inbox import InboxMessage, InboxReceiveRequest, InboxReceiveResult
 from aion_brain.contracts.intent import IntentFrame
 from aion_brain.contracts.learning import LearningSignal
+from aion_brain.contracts.learning_synthesis import (
+    ExperienceQueryResult,
+    LearningPattern,
+    LearningSynthesisRequest,
+    LearningSynthesisRun,
+    LessonRecord,
+    PatternMiningRequest,
+    PatternMiningRun,
+    RegressionCandidateSuggestion,
+    SkillCandidateSuggestion,
+)
 from aion_brain.contracts.mcp import (
     MCPAdapterStatus,
     MCPCapabilityMapping,
@@ -252,6 +313,13 @@ from aion_brain.contracts.scenarios import (
 )
 from aion_brain.contracts.schedules import ScheduleCreateRequest, ScheduleRecord
 from aion_brain.contracts.scopes import ActorContext, ScopeResolution, ScopeResolutionRequest
+from aion_brain.contracts.self_model import (
+    LimitationCreateRequest,
+    LimitationRecord,
+    SelfDescription,
+    SelfDescriptionRequest,
+    SelfModelProfile,
+)
 from aion_brain.contracts.skills import (
     SkillActivationEvent,
     SkillActivationRequest,
@@ -341,6 +409,14 @@ __all__ = [
     "AutonomyStatus",
     "ActorContext",
     "ActorRecord",
+    "BeliefClaim",
+    "BeliefClaimCreateRequest",
+    "BeliefContradiction",
+    "BeliefQuery",
+    "BeliefQueryResult",
+    "BeliefRevision",
+    "BeliefSupport",
+    "BeliefSupportCreateRequest",
     "BrainCommand",
     "BrainState",
     "BrainMap",
@@ -351,11 +427,14 @@ __all__ = [
     "BrainVisualEdge",
     "BrainVisualNode",
     "BrainSnapshot",
+    "CapabilityAwarenessRecord",
     "CapabilityManifest",
     "CapabilityBindingRequest",
     "CapabilityInvocationRequest",
     "CapabilityInvocationResult",
     "CapabilityRuntimeBinding",
+    "ClaimExtractionRequest",
+    "ClaimExtractionResult",
     "CognitiveCycleRun",
     "CognitiveCycleRunRequest",
     "CognitiveCycleStep",
@@ -364,6 +443,11 @@ __all__ = [
     "CommandDispatchRequest",
     "CommandDispatchResult",
     "CompatibilityMatrix",
+    "ConfidenceCalibration",
+    "ConfidenceCalibrationRequest",
+    "ConceptArchiveRequest",
+    "ConceptCreateRequest",
+    "ConceptRecord",
     "ConsistencyCheckRequest",
     "ConsistencyCheckResult",
     "ContextBudget",
@@ -378,6 +462,27 @@ __all__ = [
     "DemoFixtureLoadRequest",
     "DemoFixtureLoadResult",
     "EvaluationRecord",
+    "ExperienceCreateRequest",
+    "ExperienceQuery",
+    "ExperienceQueryResult",
+    "ExperienceRecord",
+    "EntityAlias",
+    "EntityAliasCreateRequest",
+    "EntityCreateRequest",
+    "EntityDeleteRequest",
+    "EntityExtractMentionsRequest",
+    "EntityMention",
+    "EntityMentionCreateRequest",
+    "EntityMergeProposal",
+    "EntityMergeProposalCreateRequest",
+    "EntityProposalDecisionRequest",
+    "EntityQuery",
+    "EntityQueryResult",
+    "EntityRecord",
+    "EntityResolutionRequest",
+    "EntityResolutionResult",
+    "EntitySplitProposal",
+    "EntitySplitProposalCreateRequest",
     "EvidenceChunk",
     "EvidenceIngestRequest",
     "EvidenceIngestResponse",
@@ -431,6 +536,8 @@ __all__ = [
     "InterruptCreateRequest",
     "InterruptDecisionRequest",
     "InterruptRecord",
+    "IntrospectionSnapshot",
+    "IntrospectionSnapshotRequest",
     "IdempotencyCheckRequest",
     "IdempotencyCheckResult",
     "IdempotencyRecord",
@@ -439,6 +546,12 @@ __all__ = [
     "InboxReceiveResult",
     "IntentFrame",
     "LearningSignal",
+    "LearningPattern",
+    "LearningSynthesisRequest",
+    "LearningSynthesisRun",
+    "LessonRecord",
+    "LimitationCreateRequest",
+    "LimitationRecord",
     "MemoryRecord",
     "MemoryDeleteResponse",
     "MemoryRetrievalRequest",
@@ -487,6 +600,8 @@ __all__ = [
     "SleepConsolidationRequest",
     "PlanGraph",
     "PlanStep",
+    "PatternMiningRequest",
+    "PatternMiningRun",
     "PolicyDecision",
     "PolicyRequest",
     "PermissionGrant",
@@ -499,6 +614,7 @@ __all__ = [
     "ReflectionRecord",
     "ReflectionRequest",
     "RegressionCase",
+    "RegressionCandidateSuggestion",
     "RegressionCaseCreateRequest",
     "RegressionRun",
     "RegressionRunRequest",
@@ -509,6 +625,8 @@ __all__ = [
     "ReleaseBaselineReport",
     "ReleaseBaselineRequest",
     "ReleaseArtifactManifest",
+    "ReferenceLink",
+    "ReferenceLinkCreateRequest",
     "RiskAssessment",
     "RiskAssessmentRequest",
     "RiskGuardrailEvaluation",
@@ -526,9 +644,15 @@ __all__ = [
     "SetRunLevelRequest",
     "ScopeResolution",
     "ScopeResolutionRequest",
+    "SelfAssessmentRequest",
+    "SelfAssessmentRun",
+    "SelfDescription",
+    "SelfDescriptionRequest",
+    "SelfModelProfile",
     "SkillActivationEvent",
     "SkillActivationRequest",
     "SkillCandidate",
+    "SkillCandidateSuggestion",
     "SkillMatchRequest",
     "SkillMatchResult",
     "SkillProcedureStep",
@@ -547,6 +671,8 @@ __all__ = [
     "TraceTimeline",
     "TraceTimelineEvent",
     "TraceTimelineRequest",
+    "TruthMaintenanceRequest",
+    "TruthMaintenanceRun",
     "TurboVecIndexStatus",
     "TurboVecRebuildRequest",
     "TurboVecRebuildResponse",

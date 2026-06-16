@@ -205,11 +205,12 @@ class VersioningRepository:
         with self._engine.begin() as connection:
             connection.execute(
                 delete(aion_version_manifests).where(
-                    aion_version_manifests.c.version_manifest_id
-                    == manifest.version_manifest_id
+                    aion_version_manifests.c.version_manifest_id == manifest.version_manifest_id
                 )
             )
-            connection.execute(insert(aion_version_manifests).values(**manifest.model_dump(mode="python")))
+            connection.execute(
+                insert(aion_version_manifests).values(**manifest.model_dump(mode="python"))
+            )
         return manifest
 
     def get_manifest(self, version: str) -> VersionManifest | None:
@@ -241,7 +242,9 @@ class VersioningRepository:
                     aion_feature_registry.c.feature_key == entry.feature_key
                 )
             )
-            connection.execute(insert(aion_feature_registry).values(**entry.model_dump(mode="python")))
+            connection.execute(
+                insert(aion_feature_registry).values(**entry.model_dump(mode="python"))
+            )
         return entry
 
     def get_feature(self, feature_key: str) -> FeatureRegistryEntry | None:

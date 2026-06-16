@@ -31,4 +31,3 @@ class InMemoryObjectStore:
     def delete(self, content_ref: str) -> bool:
         """Delete bytes from memory."""
         return self._objects.pop(content_ref, None) is not None
-

@@ -22,6 +22,7 @@ AION Brain owns:
 - Context packets
 - Memory policy
 - Memory governance rules, decisions, decay, forgetting, conflicts, and compaction
+- Belief claims, supports, contradictions, revisions, and truth maintenance runs
 - Capability manifest
 - Module runtime contracts and bindings
 - Policy decisions
@@ -112,6 +113,8 @@ Clients / Future Modules
 - `memory`: semantic and graph memory adapter interfaces.
 - `memory_governance`: retention, decay, policy-gated forgetting, generic
   conflict detection, and deterministic compaction.
+- `beliefs`: explicit claim ledger, support ledger, contradiction ledger,
+  deterministic claim extraction, and truth maintenance.
 - `reasoning`: Reasoning Mesh, local deterministic adapter, model routing, and
   gateway placeholders.
 - `capabilities`: capability manifest registry and MCP boundary.
@@ -138,6 +141,10 @@ Clients / Future Modules
 - `audit`: persisted trace, decision, evaluation, learning, and telemetry ledger.
 - `telemetry`: visual Brain graph event generation for future UI work.
 - `observability`: tracing placeholder.
+- `dialogue`: backend dialogue sessions, sanitized messages, clarification
+  requests, feedback, and policy-gated dialogue turns.
+- `responses`: deterministic response draft composition, verification, and
+  local API delivery records.
 
 ## Imported Infrastructure
 
@@ -199,6 +206,84 @@ Expected `/health` response:
   "version": "0.1.0"
 }
 ```
+
+## Dialogue and Responses
+
+v0.1 provides the backend contract layer for dialogue. It does not implement a
+frontend chat UI, provider-specific chat objects, external delivery, controlled
+execution, or external model calls from dialogue APIs.
+
+Dialogue endpoints:
+
+- `POST /brain/dialogue/sessions`
+- `GET /brain/dialogue/sessions`
+- `GET /brain/dialogue/sessions/{dialogue_session_id}`
+- `POST /brain/dialogue/sessions/{dialogue_session_id}/close`
+- `POST /brain/dialogue/messages`
+- `GET /brain/dialogue/messages/{message_id}`
+- `GET /brain/dialogue/sessions/{dialogue_session_id}/messages`
+- `DELETE /brain/dialogue/messages/{message_id}`
+- `POST /brain/dialogue/turn`
+- `GET /brain/dialogue/clarifications/pending`
+- `POST /brain/dialogue/clarifications/{clarification_id}/answer`
+- `POST /brain/dialogue/clarifications/{clarification_id}/cancel`
+- `POST /brain/dialogue/feedback`
+- `GET /brain/dialogue/feedback`
+
+Response endpoints:
+
+- `POST /brain/responses/compose`
+- `GET /brain/responses/{response_id}`
+- `POST /brain/responses/{response_id}/verify`
+- `POST /brain/responses/{response_id}/deliver-local`
+- `GET /brain/responses/{response_id}/deliveries`
+
+Configuration flags:
+
+- `AION_DIALOGUE_ENABLED`
+- `AION_RESPONSE_COMPOSER_ENABLED`
+- `AION_CLARIFICATION_LOOP_ENABLED`
+- `AION_DIALOGUE_MEMORY_HANDOFF_ENABLED`
+- `AION_DIALOGUE_STORE_MESSAGES`
+- `AION_DIALOGUE_REDACT_SENSITIVE_CONTENT`
+- `AION_RESPONSE_REQUIRE_GROUNDING_DEFAULT`
+
+## Belief State and Truth Maintenance
+
+v0.1 provides a generic Belief State Manager. A belief is an explicit claim
+with scope, provenance, confidence, status, and support metadata. Beliefs are
+recall and working state for reasoning, not absolute truth.
+
+Belief endpoints:
+
+- `POST /brain/beliefs/claims`
+- `GET /brain/beliefs/claims/{claim_id}`
+- `POST /brain/beliefs/query`
+- `POST /brain/beliefs/claims/{claim_id}/revise`
+- `DELETE /brain/beliefs/claims/{claim_id}`
+- `POST /brain/beliefs/supports`
+- `GET /brain/beliefs/claims/{claim_id}/supports`
+- `GET /brain/beliefs/contradictions`
+- `POST /brain/beliefs/contradictions/{contradiction_id}/resolve`
+- `POST /brain/beliefs/extract`
+- `POST /brain/beliefs/truth-maintenance/run`
+- `GET /brain/beliefs/truth-maintenance/{truth_run_id}`
+
+Truth maintenance recomputes claim confidence, marks stale claims, and records
+contradictions deterministically. It never calls external models or external
+fact-checking systems. Dialogue and evidence claim extraction are opt-in unless
+enabled by local settings.
+
+Configuration flags:
+
+- `AION_BELIEFS_ENABLED`
+- `AION_BELIEF_TRUTH_MAINTENANCE_ENABLED`
+- `AION_BELIEF_CLAIM_EXTRACTION_ENABLED`
+- `AION_BELIEF_AUTO_EXTRACT_FROM_DIALOGUE`
+- `AION_BELIEF_AUTO_EXTRACT_FROM_EVIDENCE`
+- `AION_BELIEF_MIN_SUPPORTED_CONFIDENCE`
+- `AION_BELIEF_STALE_AFTER_DAYS`
+- `AION_BELIEF_CONTRADICTION_DETECTION_ENABLED`
 
 `/health/live` reports process liveness. `/health/ready` reports dependency
 readiness for Postgres, Redis, NATS, and Open Policy Agent. Readiness failures
@@ -2273,3 +2358,268 @@ AION v0.1 Operator Control Tower is a backend API only. It does not implement a
 frontend or automatic remediation.
 
 See `docs/operations/operator-control-tower.md`.
+
+## Concept Registry and Entity Resolver
+
+AION v0.1 includes a generic Concept Registry, Entity Registry, deterministic
+Mention Extractor, Entity Resolver, Canonical Reference Link layer, and
+merge/split proposal workflow.
+
+The Concept Registry owns abstract Brain concepts. The Entity Registry owns
+canonical references, aliases, mentions, unresolved references, merged
+references, and reference links. Entity references can connect evidence,
+memory, beliefs, graph records, dialogue, responses, traces, audit entries, and
+provenance links.
+
+AION v0.1 entity resolution is deterministic and generic. Entity references
+are canonical pointers, not verified truth.
+
+Concept endpoints:
+
+- `POST /brain/concepts`
+- `GET /brain/concepts/{concept_id}`
+- `GET /brain/concepts`
+- `POST /brain/concepts/{concept_id}/archive`
+
+Entity endpoints:
+
+- `POST /brain/entities`
+- `GET /brain/entities/{entity_id}`
+- `POST /brain/entities/query`
+- `POST /brain/entities/{entity_id}/archive`
+- `DELETE /brain/entities/{entity_id}`
+- `POST /brain/entities/aliases`
+- `GET /brain/entities/{entity_id}/aliases`
+- `POST /brain/entities/mentions`
+- `GET /brain/entities/{entity_id}/mentions`
+- `POST /brain/entities/extract-mentions`
+- `POST /brain/entities/resolve`
+- `GET /brain/entities/resolution-runs/{resolution_run_id}`
+- `POST /brain/entities/references`
+- `GET /brain/entities/references`
+- `POST /brain/entities/merge-proposals`
+- `GET /brain/entities/merge-proposals`
+- `POST /brain/entities/merge-proposals/{merge_proposal_id}/approve`
+- `POST /brain/entities/merge-proposals/{merge_proposal_id}/reject`
+- `POST /brain/entities/split-proposals`
+- `GET /brain/entities/split-proposals`
+- `POST /brain/entities/split-proposals/{split_proposal_id}/approve`
+- `POST /brain/entities/split-proposals/{split_proposal_id}/reject`
+
+CLI examples:
+
+```bash
+./scripts/aionctl.sh entities query --query "AION"
+./scripts/aionctl.sh entities resolve --text "AION Brain uses memory governance"
+```
+
+The resolver does not call external NLP services, model providers, image
+identification systems, or domain modules. It does not infer sensitive identity
+attributes, auto-merge entities, or hard-delete canonical records.
+
+See `docs/adr/0047-concept-registry-entity-resolver.md`.
+
+## Situation Model and Temporal State
+
+AION v0.1 includes a backend Situation Model that projects generic current
+Brain state into situations, state atoms, transitions, temporal windows, and
+context continuity records.
+
+Situation projection is deterministic and local. It does not call LLMs, mutate
+source records, execute actions, or introduce domain-specific world models.
+State atoms are recall, not truth.
+
+Situation endpoints:
+
+- `POST /brain/situations`
+- `GET /brain/situations/{situation_id}`
+- `POST /brain/situations/query`
+- `POST /brain/situations/{situation_id}/close`
+- `POST /brain/situations/state-atoms`
+- `GET /brain/situations/state-atoms/{state_atom_id}`
+- `GET /brain/situations/state-atoms`
+- `POST /brain/situations/project`
+- `GET /brain/situations/projection-runs/{projection_run_id}`
+- `GET /brain/situations/transitions`
+- `POST /brain/situations/temporal-windows`
+- `GET /brain/situations/temporal-windows/{temporal_window_id}`
+- `GET /brain/situations/temporal-windows`
+- `POST /brain/situations/continuity`
+- `GET /brain/situations/continuity`
+
+CLI examples:
+
+```bash
+./scripts/aionctl.sh --scope workspace:main situations query
+./scripts/aionctl.sh --scope workspace:main situations project
+./scripts/aionctl.sh --scope workspace:main situations atoms
+```
+
+See `docs/situation-model.md` and
+`docs/adr/0048-situation-model-temporal-state.md`.
+## Decision Intelligence
+
+AION Brain v0.1 includes a Decision Frame Manager, Option Evaluator,
+Counterfactual Simulator, and Decision Journal. Decisions recommend but do not
+execute. Execution remains gated by policy, risk, approval, autonomy, and
+explicit execution APIs.
+
+Decision endpoints:
+
+- `POST /brain/decisions/frames`
+- `GET /brain/decisions/frames/{decision_frame_id}`
+- `GET /brain/decisions/frames`
+- `POST /brain/decisions/frames/{decision_frame_id}/close`
+- `POST /brain/decisions/options`
+- `GET /brain/decisions/frames/{decision_frame_id}/options`
+- `POST /brain/decisions/options/{decision_option_id}/archive`
+- `POST /brain/decisions/utility-profiles`
+- `GET /brain/decisions/utility-profiles`
+- `POST /brain/decisions/utility-profiles/seed-defaults`
+- `POST /brain/decisions/evaluate`
+- `POST /brain/decisions/recommend/{decision_frame_id}`
+- `POST /brain/decisions/counterfactuals/run`
+- `GET /brain/decisions/counterfactuals/{counterfactual_run_id}`
+- `POST /brain/decisions/journal`
+- `GET /brain/decisions/journal/{decision_record_id}`
+- `GET /brain/decisions/journal`
+- `POST /brain/decisions/journal/{decision_record_id}/supersede`
+
+CLI examples:
+
+```bash
+aionctl decisions frame create --title "Choose next step" --question "What should happen next?"
+aionctl decisions evaluate --frame-id decision-frame-1
+aionctl decisions counterfactual run --frame-id decision-frame-1
+```
+
+## Outcome Ledger and Effect Verification
+
+AION Brain v0.1 includes an Outcome Ledger for generic expected effects,
+observed effects, outcome records, verification runs, causal attributions, and
+outcome feedback.
+
+Outcome verification is deterministic and local. Completion is not treated as
+verification, and verification does not mutate source command, workflow,
+decision, plan, memory, evidence, belief, or situation records.
+
+Outcome endpoints:
+
+- `POST /brain/outcomes`
+- `GET /brain/outcomes/{outcome_id}`
+- `POST /brain/outcomes/query`
+- `POST /brain/outcomes/{outcome_id}/close`
+- `DELETE /brain/outcomes/{outcome_id}`
+- `POST /brain/outcomes/expected-effects`
+- `GET /brain/outcomes/expected-effects/{expected_effect_id}`
+- `POST /brain/outcomes/observed-effects`
+- `GET /brain/outcomes/observed-effects/{observed_effect_id}`
+- `POST /brain/outcomes/verify`
+- `GET /brain/outcomes/verifications/{verification_run_id}`
+- `POST /brain/outcomes/attributions`
+- `GET /brain/outcomes/attributions`
+- `POST /brain/outcomes/feedback`
+- `GET /brain/outcomes/feedback`
+- `POST /brain/outcomes/feedback/{feedback_id}/resolve`
+- `POST /brain/outcomes/learning-bridge`
+
+CLI examples:
+
+```bash
+./scripts/aionctl.sh outcomes query --source-type command
+./scripts/aionctl.sh outcomes verify --source-type command --source-id command-id
+./scripts/aionctl.sh outcomes feedback list
+./scripts/aionctl.sh outcomes learning-bridge --outcome-id outcome-id --dry-run
+```
+
+The learning bridge creates reviewable feedback only. It does not promote
+skills, auto-remediate failures, call model providers, call external systems,
+or add domain-specific logic.
+
+See `docs/adr/0050-outcome-ledger-effect-verification.md`.
+
+## Experience Ledger and Learning Synthesis
+
+AION Brain v0.1 now includes a generic Experience Ledger and deterministic
+Learning Synthesizer. Outcomes, feedback, commands, workflows, approvals,
+replays, regressions, audit records, and manual observations can be normalized
+into `ExperienceRecord` entries. Pattern mining groups repeated generic
+experience shapes, lesson synthesis records reviewable lessons, and suggestion
+services create passive skill and regression candidates.
+
+Learning synthesis is review-only. It does not promote skills, create active
+skills, create regression cases, modify source code, retry failed work, call
+model providers, call external services, or mutate source records.
+
+Learning endpoints:
+
+- `POST /brain/learning/experiences`
+- `GET /brain/learning/experiences/{experience_id}`
+- `POST /brain/learning/query`
+- `POST /brain/learning/experiences/{experience_id}/archive`
+- `POST /brain/learning/patterns/mine`
+- `GET /brain/learning/patterns`
+- `GET /brain/learning/lessons`
+- `POST /brain/learning/synthesize`
+- `GET /brain/learning/synthesis/{synthesis_run_id}`
+- `GET /brain/learning/skill-suggestions`
+- `POST /brain/learning/skill-suggestions/{suggestion_id}/accept`
+- `POST /brain/learning/skill-suggestions/{suggestion_id}/reject`
+- `POST /brain/learning/skill-suggestions/{suggestion_id}/convert-to-candidate`
+- `GET /brain/learning/regression-suggestions`
+- `POST /brain/learning/regression-suggestions/{suggestion_id}/accept`
+- `POST /brain/learning/regression-suggestions/{suggestion_id}/reject`
+
+CLI examples:
+
+```bash
+./scripts/aionctl.sh learning experiences create --source-type generic --source-id source-id --title "Observed outcome" --summary "Generic experience"
+./scripts/aionctl.sh learning patterns mine --dry-run
+./scripts/aionctl.sh learning synthesize --experience-id experience-id --mode dry_run
+./scripts/aionctl.sh learning skill-suggestions list --status suggested
+```
+
+See `docs/adr/0051-experience-ledger-learning-synthesis.md`.
+
+## Self Model and Capability Awareness
+
+AION means Adaptive Intelligence Orchestration Nexus. AION OS means Adaptive
+Intelligence Orchestration Nexus Operating System.
+
+AION Brain v0.1 includes a descriptive Self Model, Capability Awareness
+inventory, Limitation Ledger, deterministic Confidence Calibration,
+Self-Assessment records, and Introspection Snapshots. This layer tells
+operators and clients what AION is, what is active, what is disabled or
+optional, which limitations need disclosure, and when responses should expose
+uncertainty.
+
+AION v0.1 self model is descriptive and diagnostic. It does not claim
+sentience, production readiness, or full autonomy.
+
+Self-model endpoints:
+
+- `GET /brain/self`
+- `POST /brain/self/describe`
+- `GET /brain/self/capabilities`
+- `POST /brain/self/capabilities/refresh`
+- `POST /brain/self/limitations`
+- `GET /brain/self/limitations`
+- `POST /brain/self/limitations/seed-defaults`
+- `POST /brain/self/limitations/{limitation_id}/resolve`
+- `POST /brain/self/confidence/calibrate`
+- `GET /brain/self/confidence`
+- `POST /brain/self/assessment/run`
+- `GET /brain/self/assessment/{self_assessment_id}`
+- `POST /brain/self/introspection`
+- `GET /brain/self/introspection/{introspection_snapshot_id}`
+- `GET /brain/self/introspection`
+
+CLI examples:
+
+```bash
+./scripts/aionctl.sh self describe
+./scripts/aionctl.sh self capabilities
+./scripts/aionctl.sh self assessment run
+```
+
+See `docs/adr/0052-self-model-capability-awareness.md`.

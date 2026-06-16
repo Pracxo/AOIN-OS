@@ -48,3 +48,11 @@ Every architecture-changing Codex task must add or update an ADR.
 - [0042: Resilience Control Plane, Circuit Breakers, and Fault Injection](0042-resilience-circuit-breaker-fault-injection.md) - Defines local resilience posture controls.
 - [0043: Tamper-Evident Audit and Provenance](0043-tamper-evident-audit-provenance.md) - Defines local audit integrity and provenance.
 - [0044: Operator Control Tower and Action Center](0044-operator-control-tower-action-center.md) - Defines read-mostly operator aggregation.
+- [0045: Dialogue Response and Clarification Layer](0045-dialogue-response-clarification-layer.md) - Defines backend dialogue and response contracts.
+- [0046: Belief State and Truth Maintenance](0046-belief-state-truth-maintenance.md) - Defines explicit claim ledger and deterministic truth maintenance.
+- [0047: Concept Registry and Entity Resolver](0047-concept-registry-entity-resolver.md) - Defines canonical references, deterministic resolution, and merge/split governance.
+- [0048: Situation Model and Temporal State](0048-situation-model-temporal-state.md) - Defines generic state projection and temporal continuity.
+- [0049: Decision Frame and Counterfactual Simulator](0049-decision-frame-counterfactual-simulator.md) - Defines decision records, options, and dry-run counterfactuals.
+- [0050: Outcome Ledger, Effect Verification, and Learning Feedback Bridge](0050-outcome-ledger-effect-verification.md) - Defines expected effects, observed effects, verification, attribution, and feedback.
+- [0051: Experience Ledger and Learning Synthesis](0051-experience-ledger-learning-synthesis.md) - Defines generic experience records, pattern mining, lessons, and review-only suggestions.
+- [0052: Self Model and Capability Awareness](0052-self-model-capability-awareness.md) - Defines descriptive self-model, capability awareness, limitations, confidence calibration, and introspection.

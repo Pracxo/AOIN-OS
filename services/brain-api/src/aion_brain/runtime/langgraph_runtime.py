@@ -241,9 +241,7 @@ class LangGraphRuntimeAdapter:
                 state.get("errors", []),
                 reasoning,
                 execution_ready=bool(state.get("execution_ready", False)),
-                execution_approval_required=bool(
-                    state.get("execution_approval_required", False)
-                ),
+                execution_approval_required=bool(state.get("execution_approval_required", False)),
             ),
             created_at=datetime.now(UTC),
         )

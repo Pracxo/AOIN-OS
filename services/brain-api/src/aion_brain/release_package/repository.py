@@ -119,8 +119,7 @@ class ReleasePackageRepository:
         with self._engine.begin() as connection:
             connection.execute(
                 delete(aion_release_package_files).where(
-                    aion_release_package_files.c.release_package_id
-                    == package.release_package_id
+                    aion_release_package_files.c.release_package_id == package.release_package_id
                 )
             )
             connection.execute(
@@ -144,11 +143,15 @@ class ReleasePackageRepository:
         )
         with self._engine.connect() as connection:
             package_row = connection.execute(statement).mappings().first()
-            file_rows = connection.execute(
-                select(aion_release_package_files)
-                .where(aion_release_package_files.c.release_package_id == release_package_id)
-                .order_by(aion_release_package_files.c.file_path)
-            ).mappings().all()
+            file_rows = (
+                connection.execute(
+                    select(aion_release_package_files)
+                    .where(aion_release_package_files.c.release_package_id == release_package_id)
+                    .order_by(aion_release_package_files.c.file_path)
+                )
+                .mappings()
+                .all()
+            )
         if package_row is None:
             return None
         return _row_to_package(package_row, list(file_rows))

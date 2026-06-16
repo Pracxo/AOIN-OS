@@ -7,9 +7,7 @@ from tests.runtime_config_fakes import SCOPE, services, settings
 
 
 def test_config_validator_fails_unsafe_external_model_default() -> None:
-    *_, validator, _, _ = services(
-        configured_settings=settings(AION_MODEL_GATEWAY_ENABLED=True)
-    )
+    *_, validator, _, _ = services(configured_settings=settings(AION_MODEL_GATEWAY_ENABLED=True))
 
     run = validator.validate(ConfigValidationRequest(owner_scope=SCOPE))
 
@@ -18,9 +16,7 @@ def test_config_validator_fails_unsafe_external_model_default() -> None:
 
 
 def test_config_validator_fails_stacktrace_exposure() -> None:
-    *_, validator, _, _ = services(
-        configured_settings=settings(AION_API_STACKTRACE_EXPOSED=True)
-    )
+    *_, validator, _, _ = services(configured_settings=settings(AION_API_STACKTRACE_EXPOSED=True))
 
     run = validator.validate(ConfigValidationRequest(owner_scope=SCOPE))
 
@@ -29,9 +25,7 @@ def test_config_validator_fails_stacktrace_exposure() -> None:
 
 
 def test_config_validator_warns_optional_adapter_unavailable() -> None:
-    *_, validator, _, _ = services(
-        configured_settings=settings(AION_SANDBOX_DOCKER_ENABLED=True)
-    )
+    *_, validator, _, _ = services(configured_settings=settings(AION_SANDBOX_DOCKER_ENABLED=True))
 
     run = validator.validate(ConfigValidationRequest(owner_scope=SCOPE))
 

@@ -928,3 +928,214 @@ The freeze gate consumes the resilience test runner as a local readiness signal.
 Critical unhealthy dependencies or critical degraded posture can block a local
 release when configured to do so. Optional adapter warnings remain visible
 without hiding the underlying fallback state.
+
+## Dialogue Session and Response Layer
+
+The Dialogue Session Manager is a backend contract layer for conversational
+state. It owns dialogue sessions, sanitized messages, clarification requests,
+feedback, and dialogue turn orchestration. It does not implement a frontend UI,
+provider chat objects, external message delivery, controlled execution, or
+domain-specific conversation logic.
+
+`DialogueTurnService` coordinates policy, autonomy posture, optional Brain loop
+thinking, response composition, verification, local delivery recording, audit
+provenance, visual telemetry, and optional memory handoff. A dialogue turn may
+ask for clarification when the goal, grounding, confidence, or policy posture is
+not sufficient.
+
+`ResponseComposer` is deterministic in v0.1. It turns AION-owned trace,
+context, grounding, and clarification metadata into `ResponseDraft` contracts.
+`ResponseVerifier` checks grounding, policy posture, autonomy posture, hidden
+reasoning markers, and secret-like payloads before a response is treated as
+ready. `ResponseDeliveryService` records local API-return delivery only.
+
+Dialogue memory handoff is an adapter-ready governance boundary. It can create
+summarized memory records from allowed dialogue content when explicitly
+requested, but it must not store raw secrets, raw prompts, chain-of-thought,
+hidden reasoning, or uncontrolled execution artifacts.
+
+## Belief State Manager and Truth Maintenance
+
+The Belief State Manager stores explicit, scoped claims in the canonical Brain
+ledger. A claim has provenance, confidence, status, sensitivity, source
+references, support records, contradiction records, and revision history.
+Belief state is not absolute truth; it is a governed working model that
+reasoning and context compilation can consult with visible status metadata.
+
+The Claim Ledger persists `BeliefClaim`, `BeliefSupport`,
+`BeliefContradiction`, `BeliefRevision`, and `TruthMaintenanceRun` contracts.
+Repository methods return AION contracts only and never expose SQLAlchemy rows
+or database-specific types.
+
+Truth maintenance is deterministic in v0.1. It recomputes confidence from
+support, evidence references, contradictions, source type, and staleness. It can
+mark claims supported, uncertain, contradicted, stale, rejected, or archived.
+It does not call external fact-checking systems, model providers, web search,
+or vertical knowledge bases.
+
+Dialogue and evidence can opt in to deterministic claim extraction. Extracted
+claims still pass through policy, provenance, audit, and telemetry boundaries.
+Reasoning receives belief status metadata so stale or contradicted beliefs are
+visible as constraints instead of being silently treated as facts.
+
+## Concept Registry and Entity Resolver
+
+The Concept Registry owns generic abstract concepts such as goals, policies,
+tasks, constraints, capabilities, memory types, evidence types, and system
+components. It is not a domain ontology.
+
+The Entity Registry owns canonical references. It separates raw text mentions,
+aliases, unresolved references, canonical entities, merged references,
+superseded references, and reference links. Entity references identify records;
+they do not prove that a statement is true.
+
+Mention extraction is deterministic in v0.1. It recognizes explicit bracketed
+references, quoted names, dotted or snake-case identifiers, and generic
+title-case phrases. It skips secret-like text and hidden-reasoning markers and
+does not infer sensitive identity attributes.
+
+Entity resolution is deterministic and local. It scores normalized name
+matches, alias matches, shared source references, scope overlap, and mention
+confidence. Dry-run resolution persists the resolution run but does not create
+entities, mentions, or reference links.
+
+Reference links connect AION-owned records across evidence, memory, beliefs,
+dialogue, graph memory, traces, commands, tasks, audit entries, concepts, and
+entities. They may create provenance links where a provenance service is
+available.
+
+Merge and split workflows are proposal based. AION v0.1 does not auto-merge
+entities and never hard-deletes entity records or mentions. Approved merges
+mark the duplicate entity as `merged`; approved splits create proposed entity
+records while keeping the original entity intact.
+
+Entity references differ from beliefs and graph nodes:
+
+- Beliefs own explicit claims, confidence, support, contradiction, and truth
+  maintenance status.
+- Graph memory owns typed nodes and edges.
+- Entity references only provide canonical pointers that other systems can
+  attach to their own records.
+
+## Situation Model and Temporal State Projection
+
+The Situation Model builds a deterministic backend projection of current Brain
+state. It joins generic sources into `SituationRecord`, `StateAtom`,
+`StateTransition`, `TemporalStateWindow`, and `ContextContinuityRecord`
+contracts.
+
+The projection layer never mutates source records. It reads AION-owned records,
+normalizes them into state atoms, detects generic transitions, and persists
+projection records only in controlled mode. Dry runs persist nothing.
+
+Context compilation can retrieve `situation_model` and `temporal_state`
+sources. Retrieved atoms are treated as recall, not truth. Stale or
+contradicted atoms become constraints such as `situation_projection_stale` and
+`state_atom_contradicted`.
+
+The Situation Model remains separate from frontend rendering, model providers,
+and vertical workflows. AION public contracts do not expose vendor clients,
+SQLAlchemy rows, or domain-specific state internals.
+
+## Decision Intelligence Layer
+
+AION Decision Intelligence separates situation state, beliefs, goals,
+constraints, candidate options, tradeoffs, counterfactual outcomes, and journal
+records. The layer includes Decision Frame Manager, Decision Options, Utility
+Profiles, Option Evaluation, Tradeoff Matrix generation, Counterfactual
+Simulation, and Decision Journal records.
+
+Decision records recommend and journal only. They do not execute selected
+options. Execution remains owned by explicit execution APIs and remains gated
+by policy, risk, approval, and autonomy.
+
+## Outcome Ledger and Effect Verification
+
+The Outcome Ledger records the generic effect lifecycle:
+
+```text
+ExpectedEffect -> ObservedEffect -> OutcomeRecord -> EffectVerificationRun
+```
+
+`ExpectedEffect` captures what AION expected from a command, workflow, plan,
+decision option, counterfactual, execution, task, cycle, event reaction, or
+generic source. `ObservedEffect` captures what AION observed from local Brain
+records. `OutcomeRecord` joins those references without mutating the source
+records. `EffectVerificationRun` compares expected and observed effects using
+deterministic criteria.
+
+Outcome services sit behind `aion_brain.outcomes` boundaries. API routes,
+operator summaries, command completion, workflow completion, decision
+projection, visual telemetry, and learning feedback use those services instead
+of reading SQLAlchemy rows directly.
+
+Verification is not proof of truth. It is a bounded check that expected local
+effects are present, missing, unexpected, or contradicted. Controlled
+verification may update outcome status and score; dry-run verification does
+not mutate outcomes.
+
+The learning feedback bridge is review-only. It can create outcome feedback
+records and candidate learning metadata, but it never promotes skills,
+auto-remediates failures, writes source code, executes commands, or calls
+external services.
+
+## Experience Ledger and Learning Synthesis
+
+The Experience Ledger is the canonical generic store for observed Brain
+experience. It records source references, trace references, owner scope,
+score, confidence, and safe metadata without mutating source command,
+workflow, outcome, replay, audit, approval, or regression records.
+
+The Learning Synthesizer reads experiences and produces deterministic,
+reviewable learning material:
+
+- `LearningPattern` records repeated generic shapes.
+- `LessonRecord` stores reviewable lessons.
+- `SkillCandidateSuggestion` proposes a passive candidate only.
+- `RegressionCandidateSuggestion` proposes coverage only.
+- `LearningSynthesisRun` records what was synthesized.
+
+Pattern mining uses deterministic lexical grouping and bounded confidence
+thresholds. The synthesizer runs in `dry_run` or `controlled` mode. Dry runs do
+not persist generated learning material except the run record. Controlled runs
+persist review records but still do not promote skills, create active
+procedures, create regression cases, modify code, call models, or call external
+services.
+
+Operator Control Tower reads learning patterns and suggestions as action
+items. Visual telemetry receives generic learning events such as
+`experience_recorded`, `learning_pattern_detected`, `lesson_created`, and
+`learning_synthesis_completed`.
+
+Learning remains domain-neutral. Domain-specific learning, if introduced
+later, must live outside Brain core and communicate through generic contracts.
+
+## Self Model and Capability Awareness
+
+The Self Model is AION Brain's canonical descriptive layer. It defines the
+official AION meaning, active profile, architecture references, capability
+inventory, limitation ledger, confidence calibration records, self-assessment
+runs, and introspection snapshots.
+
+Capability Awareness reads local configuration, kernel services, adapter
+status, diagnostics, policy posture, autonomy posture, and optional adapter
+settings to produce factual `CapabilityAwarenessRecord` entries. Disabled and
+unavailable adapters must remain visible as disabled or optional-unavailable
+instead of being described as active.
+
+The Limitation Ledger stores generic disclosed limitations such as local-only
+operation, disabled external delivery, disabled arbitrary code execution,
+bounded autonomy, disabled optional adapters, and grounding limits.
+
+Confidence Calibration is deterministic. It scores local evidence, belief,
+memory, grounding, limitation, policy, autonomy, and verification signals. It
+adds required disclosures such as low-confidence or ungrounded-response
+metadata without calling model providers.
+
+Self Assessment and Introspection Snapshots are read-only diagnostics. They
+summarize local state and redacted configuration without mutating runtime
+configuration, enabling adapters, promoting skills, executing capabilities, or
+overriding policy.
+
+This layer is not a personality system and not a UI. It is a Brain-owned
+contract boundary for accurate self-description and limitation awareness.

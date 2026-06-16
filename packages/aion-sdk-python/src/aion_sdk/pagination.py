@@ -23,4 +23,3 @@ def decode_cursor(cursor: str) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise ValueError("cursor must decode to an object")
     return value
-

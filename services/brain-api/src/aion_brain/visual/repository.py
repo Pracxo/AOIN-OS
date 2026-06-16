@@ -104,17 +104,14 @@ class VisualRepository:
             statement = statement.where(aion_visual_telemetry.c.created_at >= query.since)
         if query.until:
             statement = statement.where(aion_visual_telemetry.c.created_at <= query.until)
-        statement = statement.order_by(aion_visual_telemetry.c.created_at.desc()).limit(
-            query.limit
-        )
+        statement = statement.order_by(aion_visual_telemetry.c.created_at.desc()).limit(query.limit)
         with self._engine.connect() as connection:
             rows = connection.execute(statement).mappings().all()
         events = [_row_to_telemetry(row) for row in rows]
         return [
             event
             for event in events
-            if _event_in_scope(event, query.scope)
-            and _workspace_matches(event, query.workspace_id)
+            if _event_in_scope(event, query.scope) and _workspace_matches(event, query.workspace_id)
         ][: query.limit]
 
     def count_telemetry(self, scope: list[str]) -> int:

@@ -85,9 +85,7 @@ def mapping_to_capability_manifest(
         version="0.1.0",
         capabilities=[mapping_to_capability_definition(mapping) for mapping in mappings],
         permissions_required=_dedupe(
-            permission
-            for mapping in mappings
-            for permission in mapping.permissions_required
+            permission for mapping in mappings for permission in mapping.permissions_required
         ),
         memory_read_scopes=_dedupe(
             scope for mapping in mappings for scope in mapping.memory_read_scopes

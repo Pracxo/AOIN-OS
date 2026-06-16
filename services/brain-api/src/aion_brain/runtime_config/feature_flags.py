@@ -57,8 +57,7 @@ class FeatureFlagOverrideService:
         self._ensure_feature_known(request.feature_key, request.owner_scope)
         now = datetime.now(UTC)
         override = FeatureFlagOverride(
-            feature_override_id=request.feature_override_id
-            or f"feature-override-{uuid4().hex}",
+            feature_override_id=request.feature_override_id or f"feature-override-{uuid4().hex}",
             feature_key=request.feature_key,
             enabled=request.enabled,
             source=request.source,
@@ -193,8 +192,7 @@ class FeatureFlagOverrideService:
             try:
                 features = list_features(scope)
                 return {
-                    str(feature.feature_key): bool(feature.default_enabled)
-                    for feature in features
+                    str(feature.feature_key): bool(feature.default_enabled) for feature in features
                 }
             except Exception:
                 pass

@@ -10,6 +10,4 @@ def test_percentile_helper_is_deterministic() -> None:
 
 
 def test_json_size_estimate_works_without_logging_payload() -> None:
-    assert estimate_json_size_bytes({"b": 2, "a": 1}) == estimate_json_size_bytes(
-        {"a": 1, "b": 2}
-    )
+    assert estimate_json_size_bytes({"b": 2, "a": 1}) == estimate_json_size_bytes({"a": 1, "b": 2})

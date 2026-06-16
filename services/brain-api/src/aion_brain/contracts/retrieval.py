@@ -14,6 +14,12 @@ RetrievalSource = Literal[
     "recent_trace",
     "evidence_vault",
     "working_memory",
+    "belief_state",
+    "entity_registry",
+    "concept_registry",
+    "situation_model",
+    "temporal_state",
+    "decision_journal",
     "learning_signal",
     "policy_constraint",
 ]

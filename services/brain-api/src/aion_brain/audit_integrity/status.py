@@ -19,9 +19,7 @@ def build_audit_integrity_status(repository: AuditIntegrityRepository) -> AuditI
         latest_sequence=latest_entry.sequence_number if latest_entry else 0,
         latest_entry_hash=latest_entry.entry_hash if latest_entry else None,
         latest_checkpoint_id=latest_checkpoint.checkpoint_id if latest_checkpoint else None,
-        latest_checkpoint_hash=(
-            latest_checkpoint.checkpoint_hash if latest_checkpoint else None
-        ),
+        latest_checkpoint_hash=(latest_checkpoint.checkpoint_hash if latest_checkpoint else None),
         verification_status=verification_status,
         open_violations=open_violations,
         generated_at=datetime.now(UTC),

@@ -119,9 +119,13 @@ class GraphRepository:
         self._ensure_schema()
         now = datetime.now(UTC)
         with self._engine.begin() as connection:
-            existing = connection.execute(
-                select(aion_graph_nodes).where(aion_graph_nodes.c.node_id == node.node_id)
-            ).mappings().first()
+            existing = (
+                connection.execute(
+                    select(aion_graph_nodes).where(aion_graph_nodes.c.node_id == node.node_id)
+                )
+                .mappings()
+                .first()
+            )
             values = _node_values(
                 node,
                 created_at=_created_at(existing, node.created_at, now),
@@ -148,9 +152,13 @@ class GraphRepository:
         self._ensure_schema()
         now = datetime.now(UTC)
         with self._engine.begin() as connection:
-            existing = connection.execute(
-                select(aion_graph_edges).where(aion_graph_edges.c.edge_id == edge.edge_id)
-            ).mappings().first()
+            existing = (
+                connection.execute(
+                    select(aion_graph_edges).where(aion_graph_edges.c.edge_id == edge.edge_id)
+                )
+                .mappings()
+                .first()
+            )
             values = _edge_values(
                 edge,
                 created_at=_created_at(existing, edge.created_at, now),

@@ -19,4 +19,3 @@ class ReasoningResource:
 
     def get_reasoning(self, reasoning_id: str) -> JSONValue:
         return self._client.get(f"/brain/reason/{reasoning_id}")
-

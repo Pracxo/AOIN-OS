@@ -47,8 +47,7 @@ def test_release_package_api_routes_work() -> None:
         app.dependency_overrides.clear()
 
     status_codes = [
-        response.status_code
-        for response in [created, fetched, listed, validation, handoff]
+        response.status_code for response in [created, fetched, listed, validation, handoff]
     ]
     assert status_codes == [
         200,

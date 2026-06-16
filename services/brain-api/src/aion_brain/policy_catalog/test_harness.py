@@ -64,10 +64,7 @@ class PolicyTestHarness:
         run_id = request.policy_test_run_id or f"policy-test-run-{uuid4().hex}"
         self._emit("policy_test_run_started", "test", run_id, 0.5, {})
         cases = self._select_cases(request)
-        results = [
-            self._run_case(test_case, actor_context)
-            for test_case in cases
-        ]
+        results = [self._run_case(test_case, actor_context) for test_case in cases]
         passed_count = sum(result["passed"] is True for result in results)
         failed_count = sum(result["passed"] is False for result in results)
         warning_count = 0
@@ -115,9 +112,7 @@ class PolicyTestHarness:
         expected = test_case.expected
         checks = {
             "allow": (
-                expected.get("allow") == simulation.decision.allow
-                if "allow" in expected
-                else True
+                expected.get("allow") == simulation.decision.allow if "allow" in expected else True
             ),
             "approval_required": (
                 expected.get("approval_required") == simulation.decision.approval_required

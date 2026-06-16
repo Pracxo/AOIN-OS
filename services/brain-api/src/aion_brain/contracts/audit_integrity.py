@@ -59,6 +59,21 @@ ProvenanceResourceType = Literal[
     "release_package",
     "scenario",
     "audit_entry",
+    "dialogue_session",
+    "dialogue_message",
+    "response",
+    "belief_claim",
+    "belief_support",
+    "belief_contradiction",
+    "truth_maintenance",
+    "concept",
+    "entity",
+    "entity_alias",
+    "entity_mention",
+    "reference_link",
+    "entity_resolution",
+    "entity_merge",
+    "entity_split",
 ]
 ProvenanceRelationType = Literal[
     "caused",
@@ -417,9 +432,7 @@ def _reject_unsafe_payload(value: Any, *, allow_redacted: bool) -> None:
             normalized = _normalize_key(str(key))
             if normalized in _CHAIN_OF_THOUGHT_KEYS:
                 raise ValueError("payload must not contain chain-of-thought")
-            if _contains_sensitive_key(str(key)) and not (
-                allow_redacted and item == "[REDACTED]"
-            ):
+            if _contains_sensitive_key(str(key)) and not (allow_redacted and item == "[REDACTED]"):
                 raise ValueError("payload must not contain raw secrets or prompts")
             _reject_unsafe_payload(item, allow_redacted=allow_redacted)
     elif isinstance(value, list):

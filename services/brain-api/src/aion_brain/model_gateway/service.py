@@ -648,12 +648,16 @@ def _observability_level(response: ModelGatewayResponse) -> ObservabilityLevel:
 
 
 def _actor_context(request: ModelGatewayRequest) -> ActorContext:
-    roles = [str(item) for item in request.metadata.get("roles", [])] if isinstance(
-        request.metadata.get("roles"), list
-    ) else []
-    permissions = [
-        str(item) for item in request.metadata.get("permissions", [])
-    ] if isinstance(request.metadata.get("permissions"), list) else []
+    roles = (
+        [str(item) for item in request.metadata.get("roles", [])]
+        if isinstance(request.metadata.get("roles"), list)
+        else []
+    )
+    permissions = (
+        [str(item) for item in request.metadata.get("permissions", [])]
+        if isinstance(request.metadata.get("permissions"), list)
+        else []
+    )
     return ActorContext(
         actor_id=request.actor_id,
         workspace_id=request.workspace_id,

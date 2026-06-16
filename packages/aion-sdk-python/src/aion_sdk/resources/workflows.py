@@ -28,4 +28,3 @@ class WorkflowsResource:
 
     def status(self) -> JSONValue:
         return self._client.get("/brain/workflows/engine/status")
-

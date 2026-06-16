@@ -130,9 +130,13 @@ class ScheduleRepository:
         """Return schedule metadata by ID."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_schedules).where(aion_schedules.c.schedule_id == schedule_id)
-            ).mappings().first()
+            row = (
+                connection.execute(
+                    select(aion_schedules).where(aion_schedules.c.schedule_id == schedule_id)
+                )
+                .mappings()
+                .first()
+            )
         if row is None:
             return None
         return _row_to_schedule(row)

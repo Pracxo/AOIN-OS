@@ -79,9 +79,7 @@ class IdempotencyService:
         """Start idempotent processing."""
         now = datetime.now(UTC)
         ttl = (
-            self._settings.idempotency_default_ttl_seconds
-            if self._settings is not None
-            else 86400
+            self._settings.idempotency_default_ttl_seconds if self._settings is not None else 86400
         )
         record = IdempotencyRecord(
             idempotency_key=request.idempotency_key,

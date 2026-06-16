@@ -75,3 +75,62 @@ turn drift into behavior automatically.
 Replay may persist a local learning signal marked as replay-derived. That
 signal remains a candidate under the same governed learning rules as every
 other signal.
+
+## Outcome Feedback Bridge
+
+Outcome feedback gives the learning loop verified or failed effect context.
+The bridge reads `OutcomeRecord` status, effect verification metadata, and
+causal attribution references, then creates reviewable `OutcomeFeedback`.
+
+Dry-run bridge calls do not persist feedback. Controlled bridge calls may
+persist feedback and candidate learning metadata only. They do not promote
+skills, activate procedures, rewrite memories, retry commands, create
+workflows, call model providers, or call external services.
+
+Failed, partial, contradicted, and verified outcomes can become learning
+signals, but every signal remains a candidate until a later governed promotion
+path explicitly approves it.
+
+## Experience Ledger
+
+AION-057 adds `ExperienceRecord` as the generic observed-experience contract.
+The ledger can reference outcomes, decisions, commands, workflows, regressions,
+replays, audit records, signals, and generic manual sources. Experience records
+hold a title, summary, owner scope, score, confidence, observed timestamp, and
+safe metadata.
+
+The ledger is canonical for learning synthesis input. Source records remain
+canonical for their own lifecycle and are not mutated by learning synthesis.
+
+## Pattern Mining
+
+Pattern mining is deterministic in v0.1. It groups experiences by generic
+experience type, source type, and a normalized lexical summary key. It then
+applies minimum frequency and confidence thresholds. No embeddings, LLM calls,
+semantic clustering, external repos, or domain-specific classifiers are used.
+
+Patterns are review material only. They can produce lessons, passive skill
+candidate suggestions, and passive regression candidate suggestions.
+
+## Lesson Records and Suggestions
+
+`LessonRecord` stores a generic lesson derived from a pattern. Lessons are
+recall and review aids, not executable behavior.
+
+`SkillCandidateSuggestion` is not a `SkillRecord`. It may be accepted, rejected,
+or converted into a passive candidate reference, but AION-057 does not promote
+or activate skills.
+
+`RegressionCandidateSuggestion` is not a regression case. It may be accepted or
+rejected, but AION-057 does not create executable regression tests.
+
+## Synthesis Modes
+
+`dry_run` synthesis returns proposed experiences, patterns, lessons, and
+suggestions without persisting generated learning material beyond the run
+record. `controlled` synthesis persists review records but still does not
+execute actions, mutate source records, call model providers, call external
+services, or write source code.
+
+Auto synthesis is disabled by default through
+`AION_LEARNING_AUTO_SYNTHESIS_ENABLED=false`.

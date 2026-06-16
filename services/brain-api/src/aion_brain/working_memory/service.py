@@ -51,9 +51,7 @@ class WorkingMemoryService:
         if ttl_seconds is None and not request.pinned:
             ttl_seconds = _default_ttl_seconds(self._settings)
         expires_at = (
-            None
-            if request.pinned or ttl_seconds is None
-            else now + timedelta(seconds=ttl_seconds)
+            None if request.pinned or ttl_seconds is None else now + timedelta(seconds=ttl_seconds)
         )
         slot = WorkingMemorySlot(
             slot_id=request.slot_id or f"wm-{uuid4().hex}",

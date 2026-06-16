@@ -12,4 +12,3 @@ class ReasoningResultModel(AIONSDKModel):
     trace_id: str | None = None
     status: str
     output: dict[str, Any] = Field(default_factory=dict)
-

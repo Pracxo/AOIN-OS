@@ -31,12 +31,21 @@ from aion_brain.backups.resource_readers import ResourceReaderRegistry
 from aion_brain.backups.restore_preview import RestorePreviewService
 from aion_brain.backups.restore_service import RestoreService
 from aion_brain.backups.validator import BackupValidator
+from aion_brain.beliefs.claim_extractor import ClaimExtractor
+from aion_brain.beliefs.contradictions import BeliefContradictionService
+from aion_brain.beliefs.query import BeliefQueryService
+from aion_brain.beliefs.repository import BeliefRepository
+from aion_brain.beliefs.service import BeliefService
+from aion_brain.beliefs.supports import BeliefSupportService
+from aion_brain.beliefs.truth_maintenance import TruthMaintenanceService
 from aion_brain.capabilities.mcp_adapter import MCPAdapter
 from aion_brain.capabilities.registry import CapabilityRegistry
 from aion_brain.capabilities.service import CapabilityService
 from aion_brain.commands.bus import CommandBus
 from aion_brain.commands.handlers import CommandHandlerRegistry
 from aion_brain.commands.repository import CommandRepository
+from aion_brain.concepts.repository import ConceptRepository
+from aion_brain.concepts.service import ConceptService
 from aion_brain.config import Settings, get_settings
 from aion_brain.connectors.repository import ConnectorRepository
 from aion_brain.connectors.service import ConnectorService
@@ -55,7 +64,31 @@ from aion_brain.cycles.maintenance import MaintenanceService
 from aion_brain.cycles.orchestrator import CognitiveCycleOrchestrator
 from aion_brain.cycles.repository import CognitiveCycleRepository
 from aion_brain.cycles.sleep import SleepConsolidationService
+from aion_brain.decisions.counterfactuals import CounterfactualSimulator
+from aion_brain.decisions.evaluator import OptionEvaluator
+from aion_brain.decisions.frames import DecisionFrameService
+from aion_brain.decisions.journal import DecisionJournalService
+from aion_brain.decisions.options import DecisionOptionService
+from aion_brain.decisions.recommendations import DecisionRecommendationService
+from aion_brain.decisions.repository import DecisionRepository
+from aion_brain.decisions.tradeoffs import TradeoffMatrixService
+from aion_brain.decisions.utility import UtilityProfileService
+from aion_brain.dialogue.clarification import ClarificationManager
+from aion_brain.dialogue.memory_handoff import DialogueMemoryHandoffService
+from aion_brain.dialogue.message_service import DialogueMessageService
+from aion_brain.dialogue.repository import DialogueRepository
+from aion_brain.dialogue.session_service import DialogueSessionService
+from aion_brain.dialogue.turn_service import DialogueTurnService
 from aion_brain.embeddings.hash_embedding import HashEmbeddingAdapter
+from aion_brain.entities.aliases import EntityAliasService
+from aion_brain.entities.mention_extractor import EntityMentionExtractor
+from aion_brain.entities.merge import EntityMergeService
+from aion_brain.entities.query import EntityQueryService
+from aion_brain.entities.references import ReferenceLinkService
+from aion_brain.entities.repository import EntityRepository
+from aion_brain.entities.resolver import EntityResolver
+from aion_brain.entities.service import EntityService
+from aion_brain.entities.split import EntitySplitService
 from aion_brain.evaluation.evaluator import Evaluator
 from aion_brain.event_reactions.actions import EventReactionActionRunner
 from aion_brain.event_reactions.dead_letters import EventDeadLetterService
@@ -90,6 +123,14 @@ from aion_brain.kernel.repository import KernelRepository
 from aion_brain.kernel.self_test import KernelSelfTestService
 from aion_brain.kernel.service_registry import KernelServiceRegistry
 from aion_brain.learning.engine import LearningEngine
+from aion_brain.learning_synthesis.experience import ExperienceService
+from aion_brain.learning_synthesis.lessons import LessonService
+from aion_brain.learning_synthesis.miner import PatternMiner
+from aion_brain.learning_synthesis.query import LearningQueryService
+from aion_brain.learning_synthesis.regression_suggestions import RegressionSuggestionService
+from aion_brain.learning_synthesis.repository import LearningSynthesisRepository
+from aion_brain.learning_synthesis.skill_suggestions import SkillSuggestionService
+from aion_brain.learning_synthesis.synthesizer import LearningSynthesizer
 from aion_brain.logging import configure_logging
 from aion_brain.mcp.compat import MCPCompat
 from aion_brain.mcp.repository import MCPRepository
@@ -146,6 +187,14 @@ from aion_brain.operator.snapshots import OperatorSnapshotService
 from aion_brain.operator.status_cards import StatusCardBuilder
 from aion_brain.outbox.repository import OutboxRepository
 from aion_brain.outbox.service import OutboxService
+from aion_brain.outcomes.attribution import CausalAttributionService
+from aion_brain.outcomes.collector import ObservedEffectCollector
+from aion_brain.outcomes.effects import ExpectedEffectService
+from aion_brain.outcomes.feedback import OutcomeFeedbackService
+from aion_brain.outcomes.query import OutcomeQueryService
+from aion_brain.outcomes.repository import OutcomeRepository
+from aion_brain.outcomes.service import OutcomeService
+from aion_brain.outcomes.verifier import EffectVerifier
 from aion_brain.performance.baseline import CapacityBaselineService
 from aion_brain.performance.budgets import ResourceBudgetService
 from aion_brain.performance.regression import PerformanceRegressionComparator
@@ -193,6 +242,10 @@ from aion_brain.resilience.fault_injection import FaultInjectionService
 from aion_brain.resilience.repository import ResilienceRepository
 from aion_brain.resilience.retry_policies import RetryPolicyService
 from aion_brain.resilience.test_runner import ResilienceTestRunner
+from aion_brain.responses.composer import ResponseComposer
+from aion_brain.responses.delivery import ResponseDeliveryService
+from aion_brain.responses.feedback import DialogueFeedbackService
+from aion_brain.responses.verifier import ResponseVerifier
 from aion_brain.retrieval.router import RetrievalRouter
 from aion_brain.risk.engine import RiskEngine
 from aion_brain.risk.repository import RiskRepository
@@ -228,6 +281,23 @@ from aion_brain.security_baseline.hardening_gate import HardeningGateService
 from aion_brain.security_baseline.repository import SecurityBaselineRepository
 from aion_brain.security_baseline.secret_scanner import SecretScanner
 from aion_brain.security_baseline.threat_model import ThreatModelService
+from aion_brain.self_model.assessment import SelfAssessmentService
+from aion_brain.self_model.capability_awareness import CapabilityAwarenessService
+from aion_brain.self_model.confidence import ConfidenceCalibrator
+from aion_brain.self_model.description import SelfDescriptionService
+from aion_brain.self_model.introspection import IntrospectionSnapshotService
+from aion_brain.self_model.limitations import LimitationLedgerService
+from aion_brain.self_model.profile import SelfModelProfileService
+from aion_brain.self_model.repository import SelfModelRepository
+from aion_brain.situations.continuity import ContextContinuityService
+from aion_brain.situations.normalizer import SituationNormalizer
+from aion_brain.situations.projector import SituationProjector
+from aion_brain.situations.query import SituationQueryService
+from aion_brain.situations.repository import SituationRepository
+from aion_brain.situations.service import SituationService
+from aion_brain.situations.state_atoms import StateAtomService
+from aion_brain.situations.temporal_windows import TemporalStateWindowService
+from aion_brain.situations.transitions import StateTransitionDetector
 from aion_brain.skills.matcher import SkillMatcher
 from aion_brain.skills.repository import SkillRepository
 from aion_brain.skills.service import SkillService
@@ -288,11 +358,8 @@ class KernelContainer:
         self.kernel_repository = kernel_repository or KernelRepository(self.settings.database_url)
         self.policy_adapter = policy_adapter or OPAAdapter(self.settings.opa_url)
 
-        self.audit_repository = cast(
-            AuditRepository,
-            telemetry_service or AuditRepository(self.settings.database_url),
-        )
-        self.telemetry_service = self.audit_repository
+        self.audit_repository = AuditRepository(self.settings.database_url)
+        self.telemetry_service = telemetry_service or self.audit_repository
         self.audit_integrity_repository = AuditIntegrityRepository(self.settings.database_url)
         self.audit_checkpoint_service = AuditCheckpointService(self.audit_integrity_repository)
         self.audit_integrity_ledger = AuditIntegrityLedger(
@@ -440,12 +507,327 @@ class KernelContainer:
             telemetry_service=self.telemetry_service,
         )
         self.object_store = LocalObjectStore(self.settings.local_object_root)
+        self.belief_repository = BeliefRepository(self.settings.database_url)
+        self.claim_extractor = ClaimExtractor()
+        self.belief_service = BeliefService(
+            self.belief_repository,
+            self.policy_adapter,
+            audit_ledger=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.belief_contradiction_service = BeliefContradictionService(
+            self.belief_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.belief_support_service = BeliefSupportService(
+            self.belief_repository,
+            self.policy_adapter,
+            contradiction_service=self.belief_contradiction_service,
+            telemetry_service=self.telemetry_service,
+        )
+        self.belief_query_service = BeliefQueryService(
+            self.belief_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.truth_maintenance_service = TruthMaintenanceService(
+            self.belief_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.concept_repository = ConceptRepository(self.settings.database_url)
+        self.concept_service = ConceptService(
+            self.concept_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.entity_repository = EntityRepository(self.settings.database_url)
+        self.entity_service = EntityService(
+            self.entity_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.entity_query_service = EntityQueryService(self.entity_service)
+        self.entity_alias_service = EntityAliasService(
+            self.entity_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.reference_link_service = ReferenceLinkService(
+            self.entity_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            provenance_service=self.provenance_service,
+        )
+        self.entity_mention_extractor = EntityMentionExtractor()
+        self.entity_resolver = EntityResolver(
+            self.entity_repository,
+            self.policy_adapter,
+            mention_extractor=self.entity_mention_extractor,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.entity_merge_service = EntityMergeService(
+            self.entity_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.entity_split_service = EntitySplitService(
+            self.entity_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.situation_repository = SituationRepository(self.settings.database_url)
+        self.situation_service = SituationService(
+            self.situation_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.state_atom_service = StateAtomService(
+            self.situation_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.situation_normalizer = SituationNormalizer()
+        self.state_transition_detector = StateTransitionDetector()
+        self.situation_projector = SituationProjector(
+            self.situation_repository,
+            self.policy_adapter,
+            situation_service=self.situation_service,
+            state_atom_service=self.state_atom_service,
+            normalizer=self.situation_normalizer,
+            transition_detector=self.state_transition_detector,
+            autonomy_governor=self.autonomy_governor,
+            telemetry_service=self.telemetry_service,
+        )
+        self.temporal_state_window_service = TemporalStateWindowService(
+            self.situation_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.context_continuity_service = ContextContinuityService(
+            self.situation_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.situation_query_service = SituationQueryService(self.situation_service)
+        self.outcome_repository = OutcomeRepository(self.settings.database_url)
+        self.expected_effect_service = ExpectedEffectService(
+            self.outcome_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+        )
+        self.observed_effect_collector = ObservedEffectCollector(
+            self.outcome_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.outcome_service = OutcomeService(
+            self.outcome_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            settings=self.settings,
+        )
+        self.effect_verifier = EffectVerifier(
+            self.outcome_repository,
+            self.policy_adapter,
+            observed_effect_collector=self.observed_effect_collector,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            settings=self.settings,
+        )
+        self.causal_attribution_service = CausalAttributionService(
+            self.outcome_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+        )
+        self.learning_synthesis_repository = LearningSynthesisRepository(self.settings.database_url)
+        self.experience_service = ExperienceService(
+            self.learning_synthesis_repository,
+            self.policy_adapter,
+            outcome_repository=self.outcome_repository,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+        )
+        self.pattern_miner = PatternMiner(
+            self.learning_synthesis_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+        )
+        self.lesson_service = LessonService(
+            self.learning_synthesis_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+        )
+        self.skill_suggestion_service = SkillSuggestionService(
+            self.learning_synthesis_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            settings=self.settings,
+        )
+        self.regression_suggestion_service = RegressionSuggestionService(
+            self.learning_synthesis_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+        )
+        self.learning_query_service = LearningQueryService(self.experience_service)
+        self.learning_synthesizer = LearningSynthesizer(
+            self.learning_synthesis_repository,
+            self.policy_adapter,
+            experience_service=self.experience_service,
+            pattern_miner=self.pattern_miner,
+            lesson_service=self.lesson_service,
+            skill_suggestion_service=self.skill_suggestion_service,
+            regression_suggestion_service=self.regression_suggestion_service,
+            outcome_repository=self.outcome_repository,
+            autonomy_governor=self.autonomy_governor,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            settings=self.settings,
+        )
+        self.outcome_feedback_service = OutcomeFeedbackService(
+            self.outcome_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            experience_service=self.experience_service,
+            learning_synthesizer=self.learning_synthesizer,
+        )
+        self.outcome_query_service = OutcomeQueryService(self.outcome_service)
+        self.self_model_repository = SelfModelRepository(self.settings.database_url)
+        self.capability_awareness_service = CapabilityAwarenessService(
+            self.self_model_repository,
+            self.policy_adapter,
+            settings=self.settings,
+            telemetry_service=self.telemetry_service,
+        )
+        self.limitation_ledger_service = LimitationLedgerService(
+            self.self_model_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+        )
+        self.self_model_profile_service = SelfModelProfileService(
+            self.self_model_repository,
+            self.policy_adapter,
+            capability_awareness_service=self.capability_awareness_service,
+            limitation_service=self.limitation_ledger_service,
+            settings=self.settings,
+            telemetry_service=self.telemetry_service,
+        )
+        self.self_description_service = SelfDescriptionService(self.self_model_profile_service)
+        self.confidence_calibrator = ConfidenceCalibrator(
+            self.self_model_repository,
+            self.policy_adapter,
+            settings=self.settings,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+        )
+        self.self_assessment_service = SelfAssessmentService(
+            self.self_model_repository,
+            self.policy_adapter,
+            profile_service=self.self_model_profile_service,
+            capability_awareness_service=self.capability_awareness_service,
+            limitation_service=self.limitation_ledger_service,
+            settings=self.settings,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+        )
+        self.introspection_snapshot_service = IntrospectionSnapshotService(
+            self.self_model_repository,
+            self.policy_adapter,
+            profile_service=self.self_model_profile_service,
+            capability_awareness_service=self.capability_awareness_service,
+            limitation_service=self.limitation_ledger_service,
+            confidence_calibrator=self.confidence_calibrator,
+            settings=self.settings,
+            telemetry_service=self.telemetry_service,
+        )
+        self.decision_repository = DecisionRepository(self.settings.database_url)
+        self.decision_frame_service = DecisionFrameService(
+            self.decision_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+        )
+        self.decision_option_service = DecisionOptionService(
+            self.decision_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            provenance_service=self.provenance_service,
+            expected_effect_service=self.expected_effect_service,
+        )
+        self.utility_profile_service = UtilityProfileService(
+            self.decision_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.tradeoff_matrix_service = TradeoffMatrixService(
+            self.decision_repository,
+            telemetry_service=self.telemetry_service,
+        )
+        self.option_evaluator = OptionEvaluator(
+            self.decision_repository,
+            self.policy_adapter,
+            self.utility_profile_service,
+            self.tradeoff_matrix_service,
+            risk_engine=self.risk_engine,
+            autonomy_governor=self.autonomy_governor,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.counterfactual_simulator = CounterfactualSimulator(
+            self.decision_repository,
+            self.policy_adapter,
+            autonomy_governor=self.autonomy_governor,
+            state_atom_service=self.state_atom_service,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+            expected_effect_service=self.expected_effect_service,
+        )
+        self.decision_journal_service = DecisionJournalService(
+            self.decision_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+        )
+        self.decision_recommendation_service = DecisionRecommendationService(
+            self.decision_repository,
+            self.decision_option_service,
+            self.option_evaluator,
+            self.counterfactual_simulator,
+            settings=self.settings,
+        )
         self.evidence_repository = EvidenceRepository(self.settings.database_url)
         self.evidence_service = EvidenceService(
             evidence_repository=self.evidence_repository,
             policy_adapter=self.policy_adapter,
             telemetry_service=self.telemetry_service,
             object_store=self.object_store,
+            claim_extractor=self.claim_extractor,
+            belief_service=self.belief_service,
+            entity_resolver=self.entity_resolver,
+            settings=self.settings,
         )
         self.memory_repository = MemoryRepository(self.settings.database_url)
         self.memory_service = PostgresMemoryService(
@@ -544,6 +926,7 @@ class KernelContainer:
             graph_service=self.graph_memory_service,
             capability_catalog=self.capability_registry,
             retrieval_router=self.retrieval_router,
+            belief_query_service=self.belief_query_service,
             attention_controller=self.attention_controller,
             context_budgeter=self.context_budgeter,
             settings=self.settings,
@@ -608,7 +991,10 @@ class KernelContainer:
             reasoning_repository=self.reasoning_repository,
             telemetry_service=self.telemetry_service,
         )
-        self.planner = Planner()
+        self.planner = Planner(
+            decision_frame_service=self.decision_frame_service,
+            expected_effect_service=self.expected_effect_service,
+        )
         self.module_runtime_repository = ModuleRuntimeRepository(self.settings.database_url)
         self.mcp_repository = MCPRepository(self.settings.database_url)
         self.sandbox_repository = SandboxRepository(self.settings.database_url)
@@ -689,6 +1075,8 @@ class KernelContainer:
             telemetry_service=self.telemetry_service,
             settings=self.settings,
             sandbox_service=self.sandbox_service,
+            observed_effect_collector=self.observed_effect_collector,
+            outcome_service=self.outcome_service,
         )
         self.brain_runtime = LangGraphRuntimeAdapter(
             intent_engine=IntentEngine(),
@@ -755,6 +1143,9 @@ class KernelContainer:
             local_worker_enabled=self.settings.workflow_local_worker_enabled,
             approval_service=self.approval_service,
             autonomy_governor=self.autonomy_governor,
+            observed_effect_collector=self.observed_effect_collector,
+            outcome_service=self.outcome_service,
+            settings=self.settings,
         )
         self.workflow_service = WorkflowService(
             local_engine=self.local_workflow_engine,
@@ -827,6 +1218,85 @@ class KernelContainer:
             working_memory_service=self.working_memory_service,
             autonomy_governor=self.autonomy_governor,
         )
+        self.dialogue_repository = DialogueRepository(self.settings.database_url)
+        self.dialogue_session_service = DialogueSessionService(
+            self.dialogue_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            focus_service=self.focus_service,
+        )
+        self.dialogue_message_service = DialogueMessageService(
+            self.dialogue_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.clarification_manager = ClarificationManager(
+            self.dialogue_repository,
+            self.dialogue_message_service,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.response_composer = ResponseComposer(
+            self.dialogue_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+            confidence_calibrator=self.confidence_calibrator,
+        )
+        self.response_verifier = ResponseVerifier(
+            self.dialogue_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            belief_service=self.belief_service,
+            entity_service=self.entity_service,
+            situation_service=self.situation_service,
+            state_atom_service=self.state_atom_service,
+            capability_awareness_service=self.capability_awareness_service,
+        )
+        self.response_delivery_service = ResponseDeliveryService(
+            self.dialogue_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.dialogue_feedback_service = DialogueFeedbackService(
+            self.dialogue_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.dialogue_memory_handoff_service = DialogueMemoryHandoffService(
+            self.dialogue_repository,
+            self.policy_adapter,
+            self.memory_service,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.dialogue_turn_service = DialogueTurnService(
+            session_service=self.dialogue_session_service,
+            message_service=self.dialogue_message_service,
+            clarification_manager=self.clarification_manager,
+            response_composer=self.response_composer,
+            response_verifier=self.response_verifier,
+            response_delivery=self.response_delivery_service,
+            brain_loop=self.brain_loop_service,
+            attention_controller=self.attention_controller,
+            working_memory_service=self.working_memory_service,
+            memory_handoff_service=self.dialogue_memory_handoff_service,
+            policy_adapter=self.policy_adapter,
+            autonomy_governor=self.autonomy_governor,
+            audit_ledger=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+            claim_extractor=self.claim_extractor,
+            belief_service=self.belief_service,
+            entity_resolver=self.entity_resolver,
+            context_continuity_service=self.context_continuity_service,
+            self_description_service=self.self_description_service,
+        )
+        set_response_composer = getattr(self.brain_loop_service, "set_response_composer", None)
+        if callable(set_response_composer):
+            set_response_composer(self.response_composer)
         self.visual_projection_service = VisualProjectionService(
             BrainMapBuilder(self.visual_repository, self.settings),
             self.visual_repository,
@@ -914,6 +1384,7 @@ class KernelContainer:
             replay_service=self.replay_service,
             visual_service=self.visual_projection_service,
             observability_service=self.observability_service,
+            situation_projector=self.situation_projector,
             telemetry_service=self.telemetry_service,
             cycle_repository=self.cognitive_cycle_repository,
             settings=self.settings,
@@ -1012,6 +1483,8 @@ class KernelContainer:
             telemetry_service=self.telemetry_service,
             settings=self.settings,
             sandbox_service=self.sandbox_service,
+            observed_effect_collector=self.observed_effect_collector,
+            outcome_service=self.outcome_service,
         )
         self.contract_export_service = ContractExportService(self.settings.version)
         self.boundary_checker = ArchitectureBoundaryChecker(Path(__file__).parents[1])
@@ -1348,6 +1821,19 @@ class KernelContainer:
             approval_service=self.approval_service,
             workflow_service=self.workflow_service,
             event_router_service=self.event_reaction_repository,
+            situation_service=self.situation_service,
+            decision_frame_service=self.decision_frame_service,
+            decision_journal_service=self.decision_journal_service,
+            outcome_service=self.outcome_service,
+            outcome_feedback_service=self.outcome_feedback_service,
+            effect_verifier=self.effect_verifier,
+            learning_synthesizer=self.learning_synthesizer,
+            learning_synthesis_repository=self.learning_synthesis_repository,
+            skill_suggestion_service=self.skill_suggestion_service,
+            regression_suggestion_service=self.regression_suggestion_service,
+            self_model_service=self.self_model_profile_service,
+            capability_awareness_service=self.capability_awareness_service,
+            limitation_service=self.limitation_ledger_service,
         )
         self.operator_queue_summary_builder = QueueSummaryBuilder(
             approval_service=self.approval_repository,
@@ -1363,6 +1849,23 @@ class KernelContainer:
             resilience_service=self.resilience_repository,
             security_service=self.security_baseline_repository,
             scenario_service=self.scenario_repository,
+            dialogue_service=self.clarification_manager,
+            belief_contradiction_service=self.belief_contradiction_service,
+            entity_repository=self.entity_repository,
+            entity_merge_service=self.entity_merge_service,
+            entity_split_service=self.entity_split_service,
+            situation_projector=self.situation_projector,
+            decision_frame_service=self.decision_frame_service,
+            decision_journal_service=self.decision_journal_service,
+            counterfactual_simulator=self.counterfactual_simulator,
+            outcome_service=self.outcome_service,
+            outcome_feedback_service=self.outcome_feedback_service,
+            effect_verifier=self.effect_verifier,
+            learning_synthesis_repository=self.learning_synthesis_repository,
+            skill_suggestion_service=self.skill_suggestion_service,
+            regression_suggestion_service=self.regression_suggestion_service,
+            limitation_service=self.limitation_ledger_service,
+            self_assessment_service=self.self_assessment_service,
         )
         self.operator_action_center_service = ActionCenterService(
             self.operator_repository,
@@ -1372,6 +1875,21 @@ class KernelContainer:
             command_service=self.command_bus,
             resilience_service=self.resilience_repository,
             audit_service=self.audit_integrity_repository,
+            belief_contradiction_service=self.belief_contradiction_service,
+            entity_repository=self.entity_repository,
+            entity_merge_service=self.entity_merge_service,
+            entity_split_service=self.entity_split_service,
+            situation_service=self.situation_service,
+            situation_projector=self.situation_projector,
+            decision_frame_service=self.decision_frame_service,
+            decision_journal_service=self.decision_journal_service,
+            counterfactual_simulator=self.counterfactual_simulator,
+            outcome_service=self.outcome_service,
+            outcome_feedback_service=self.outcome_feedback_service,
+            effect_verifier=self.effect_verifier,
+            learning_synthesis_repository=self.learning_synthesis_repository,
+            skill_suggestion_service=self.skill_suggestion_service,
+            regression_suggestion_service=self.regression_suggestion_service,
         )
         self.operator_readiness_aggregator = ReadinessAggregator(
             self.operator_status_card_builder,
@@ -1387,6 +1905,9 @@ class KernelContainer:
             runbooks=self.operator_runbook_registry,
             policy_adapter=self.policy_adapter,
             telemetry_service=self.telemetry_service,
+        )
+        self.introspection_snapshot_service.set_operator_service(
+            self.operator_control_tower_service
         )
         self.operator_snapshot_service = OperatorSnapshotService(
             self.operator_repository,
@@ -1561,6 +2082,13 @@ class KernelContainer:
             memory_governance_engine=self.memory_governance_engine,
             memory_decay_service=self.memory_decay_service,
             working_memory_service=self.working_memory_service,
+            belief_query_service=self.belief_query_service,
+            entity_query_service=self.entity_query_service,
+            concept_service=self.concept_service,
+            situation_service=self.situation_service,
+            state_atom_service=self.state_atom_service,
+            temporal_state_window_service=self.temporal_state_window_service,
+            decision_journal_service=self.decision_journal_service,
         )
 
     def _register_services(self) -> None:
@@ -1647,6 +2175,26 @@ class KernelContainer:
             ),
             ("planner", self.planner, "service", "deterministic"),
             ("brain_runtime", self.brain_runtime, "runtime", self.adapter_config.runtime_adapter),
+            ("dialogue_repository", self.dialogue_repository, "repository", "postgres"),
+            ("dialogue_session_service", self.dialogue_session_service, "service", "local"),
+            ("dialogue_message_service", self.dialogue_message_service, "service", "local"),
+            ("clarification_manager", self.clarification_manager, "service", "local"),
+            ("response_composer", self.response_composer, "service", "deterministic"),
+            ("response_verifier", self.response_verifier, "service", "local"),
+            (
+                "response_delivery_service",
+                self.response_delivery_service,
+                "service",
+                "local",
+            ),
+            ("dialogue_feedback_service", self.dialogue_feedback_service, "service", "local"),
+            (
+                "dialogue_memory_handoff_service",
+                self.dialogue_memory_handoff_service,
+                "service",
+                "local",
+            ),
+            ("dialogue_turn_service", self.dialogue_turn_service, "service", "local"),
             ("execution_orchestrator", self.execution_orchestrator, "execution", "local"),
             ("visual_projection_service", self.visual_projection_service, "visual", "local"),
             (
@@ -1664,6 +2212,121 @@ class KernelContainer:
             ("mcp_capability_adapter", self.mcp_capability_adapter, "adapter", "mcp"),
             ("identity_service", self.identity_service, "service", "local"),
             ("scope_service", self.scope_service, "service", "local"),
+            ("belief_repository", self.belief_repository, "repository", "postgres"),
+            ("claim_extractor", self.claim_extractor, "service", "deterministic"),
+            ("belief_service", self.belief_service, "service", "local"),
+            ("belief_support_service", self.belief_support_service, "service", "local"),
+            (
+                "belief_contradiction_service",
+                self.belief_contradiction_service,
+                "service",
+                "local",
+            ),
+            ("belief_query_service", self.belief_query_service, "service", "local"),
+            (
+                "truth_maintenance_service",
+                self.truth_maintenance_service,
+                "service",
+                "deterministic",
+            ),
+            ("concept_repository", self.concept_repository, "repository", "postgres"),
+            ("concept_service", self.concept_service, "service", "local"),
+            ("entity_repository", self.entity_repository, "repository", "postgres"),
+            ("entity_service", self.entity_service, "service", "local"),
+            ("entity_query_service", self.entity_query_service, "service", "local"),
+            ("entity_alias_service", self.entity_alias_service, "service", "local"),
+            ("reference_link_service", self.reference_link_service, "service", "local"),
+            (
+                "entity_mention_extractor",
+                self.entity_mention_extractor,
+                "service",
+                "deterministic",
+            ),
+            ("entity_resolver", self.entity_resolver, "service", "deterministic"),
+            ("entity_merge_service", self.entity_merge_service, "service", "local"),
+            ("entity_split_service", self.entity_split_service, "service", "local"),
+            ("situation_repository", self.situation_repository, "repository", "postgres"),
+            ("situation_service", self.situation_service, "service", "local"),
+            ("state_atom_service", self.state_atom_service, "service", "local"),
+            ("situation_normalizer", self.situation_normalizer, "service", "deterministic"),
+            (
+                "state_transition_detector",
+                self.state_transition_detector,
+                "service",
+                "deterministic",
+            ),
+            ("situation_projector", self.situation_projector, "service", "deterministic"),
+            (
+                "temporal_state_window_service",
+                self.temporal_state_window_service,
+                "service",
+                "local",
+            ),
+            ("context_continuity_service", self.context_continuity_service, "service", "local"),
+            ("situation_query_service", self.situation_query_service, "service", "local"),
+            ("outcome_repository", self.outcome_repository, "repository", "postgres"),
+            ("expected_effect_service", self.expected_effect_service, "service", "local"),
+            ("observed_effect_collector", self.observed_effect_collector, "service", "local"),
+            ("outcome_service", self.outcome_service, "service", "local"),
+            ("effect_verifier", self.effect_verifier, "service", "deterministic"),
+            ("causal_attribution_service", self.causal_attribution_service, "service", "local"),
+            ("outcome_feedback_service", self.outcome_feedback_service, "service", "local"),
+            ("outcome_query_service", self.outcome_query_service, "service", "local"),
+            ("self_model_repository", self.self_model_repository, "repository", "postgres"),
+            ("self_model_profile_service", self.self_model_profile_service, "service", "local"),
+            ("self_description_service", self.self_description_service, "service", "local"),
+            (
+                "capability_awareness_service",
+                self.capability_awareness_service,
+                "service",
+                "local",
+            ),
+            (
+                "limitation_ledger_service",
+                self.limitation_ledger_service,
+                "service",
+                "local",
+            ),
+            ("confidence_calibrator", self.confidence_calibrator, "service", "deterministic"),
+            ("self_assessment_service", self.self_assessment_service, "service", "local"),
+            (
+                "introspection_snapshot_service",
+                self.introspection_snapshot_service,
+                "service",
+                "local",
+            ),
+            (
+                "learning_synthesis_repository",
+                self.learning_synthesis_repository,
+                "repository",
+                "postgres",
+            ),
+            ("experience_service", self.experience_service, "service", "local"),
+            ("pattern_miner", self.pattern_miner, "service", "deterministic"),
+            ("lesson_service", self.lesson_service, "service", "local"),
+            ("learning_synthesizer", self.learning_synthesizer, "service", "deterministic"),
+            ("skill_suggestion_service", self.skill_suggestion_service, "service", "local"),
+            (
+                "regression_suggestion_service",
+                self.regression_suggestion_service,
+                "service",
+                "local",
+            ),
+            ("learning_query_service", self.learning_query_service, "service", "local"),
+            ("decision_repository", self.decision_repository, "repository", "postgres"),
+            ("decision_frame_service", self.decision_frame_service, "service", "local"),
+            ("decision_option_service", self.decision_option_service, "service", "local"),
+            ("utility_profile_service", self.utility_profile_service, "service", "local"),
+            ("option_evaluator", self.option_evaluator, "service", "deterministic"),
+            ("tradeoff_matrix_service", self.tradeoff_matrix_service, "service", "deterministic"),
+            ("counterfactual_simulator", self.counterfactual_simulator, "service", "deterministic"),
+            ("decision_journal_service", self.decision_journal_service, "service", "local"),
+            (
+                "decision_recommendation_service",
+                self.decision_recommendation_service,
+                "service",
+                "deterministic",
+            ),
             ("evidence_service", self.evidence_service, "service", "local"),
             ("module_runtime_gateway", self.module_runtime_gateway, "service", "local"),
             ("goal_service", self.goal_service, "service", "local"),

@@ -21,4 +21,3 @@ def test_chunker_creates_no_empty_chunks() -> None:
 
     assert chunks
     assert all(chunk.text.strip() for chunk in chunks)
-

@@ -27,9 +27,7 @@ def test_mcp_invocation_blocks_when_autonomy_denies() -> None:
     service._autonomy_governor = FakeAutonomyGovernor(allow=False)  # noqa: SLF001
 
     result = service.invoke(
-        MCPInvocationRequest(
-            **{**invocation_payload(), "capability_id": "mcp.test-server.echo"}
-        )
+        MCPInvocationRequest(**{**invocation_payload(), "capability_id": "mcp.test-server.echo"})
     )
 
     assert result.status == "blocked_by_policy"

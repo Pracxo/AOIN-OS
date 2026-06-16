@@ -49,6 +49,16 @@ class AIONClient:
         self.resilience = _import_resource("resilience").ResilienceResource(self)
         self.audit = _import_resource("audit").AuditResource(self)
         self.operator = _import_resource("operator").OperatorResource(self)
+        self.dialogue = _import_resource("dialogue").DialogueResource(self)
+        self.responses = _import_resource("responses").ResponsesResource(self)
+        self.beliefs = _import_resource("beliefs").BeliefsResource(self)
+        self.concepts = _import_resource("concepts").ConceptsResource(self)
+        self.entities = _import_resource("entities").EntitiesResource(self)
+        self.situations = _import_resource("situations").SituationsResource(self)
+        self.decisions = _import_resource("decisions").DecisionsResource(self)
+        self.outcomes = _import_resource("outcomes").OutcomesResource(self)
+        self.learning = _import_resource("learning").LearningResource(self)
+        self.self_model = _import_resource("self_model").SelfModelResource(self)
         self.runtime_config = cast(
             "ConfigResource",
             _import_resource("config").ConfigResource(self),
@@ -93,10 +103,11 @@ class AIONClient:
         self,
         path: str,
         *,
+        json: JSONValue = None,
         params: Any | None = None,
         headers: dict[str, str] | None = None,
     ) -> JSONValue:
-        return self.request("DELETE", path, params=params, headers=headers)
+        return self.request("DELETE", path, json=json, params=params, headers=headers)
 
     def request(
         self,

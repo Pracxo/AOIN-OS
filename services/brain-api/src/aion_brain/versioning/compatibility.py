@@ -280,9 +280,10 @@ def _available_sdk_resources() -> list[str]:
     resources: list[str] = []
     sdk_resource_dir = Path(__file__).parents[5] / "packages/aion-sdk-python/src/aion_sdk/resources"
     for name in SDK_REQUIRED_RESOURCES:
-        if find_spec(f"aion_sdk.resources.{name}") is not None or (
-            sdk_resource_dir / f"{name}.py"
-        ).is_file():
+        if (
+            find_spec(f"aion_sdk.resources.{name}") is not None
+            or (sdk_resource_dir / f"{name}.py").is_file()
+        ):
             resources.append(name)
     return resources
 

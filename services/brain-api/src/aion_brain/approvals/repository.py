@@ -137,8 +137,7 @@ class ApprovalRepository:
         with self._engine.begin() as connection:
             existing = connection.execute(
                 select(aion_approval_requests.c.approval_request_id).where(
-                    aion_approval_requests.c.approval_request_id
-                    == request.approval_request_id
+                    aion_approval_requests.c.approval_request_id == request.approval_request_id
                 )
             ).first()
             if existing is None:
@@ -147,8 +146,7 @@ class ApprovalRepository:
                 connection.execute(
                     update(aion_approval_requests)
                     .where(
-                        aion_approval_requests.c.approval_request_id
-                        == request.approval_request_id
+                        aion_approval_requests.c.approval_request_id == request.approval_request_id
                     )
                     .values(**values)
                 )
@@ -158,11 +156,15 @@ class ApprovalRepository:
         """Return one approval request."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_approval_requests).where(
-                    aion_approval_requests.c.approval_request_id == approval_request_id
+            row = (
+                connection.execute(
+                    select(aion_approval_requests).where(
+                        aion_approval_requests.c.approval_request_id == approval_request_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _request_from_row(row) if row is not None else None
 
     def list_requests(self, query: ApprovalInboxQuery) -> list[ApprovalRequest]:
@@ -174,9 +176,7 @@ class ApprovalRepository:
         if query.priority is not None:
             statement = statement.where(aion_approval_requests.c.priority == query.priority)
         if query.action_type is not None:
-            statement = statement.where(
-                aion_approval_requests.c.action_type == query.action_type
-            )
+            statement = statement.where(aion_approval_requests.c.action_type == query.action_type)
         if query.resource_type is not None:
             statement = statement.where(
                 aion_approval_requests.c.resource_type == query.resource_type
@@ -184,9 +184,7 @@ class ApprovalRepository:
         if query.actor_id is not None:
             statement = statement.where(aion_approval_requests.c.actor_id == query.actor_id)
         if query.workspace_id is not None:
-            statement = statement.where(
-                aion_approval_requests.c.workspace_id == query.workspace_id
-            )
+            statement = statement.where(aion_approval_requests.c.workspace_id == query.workspace_id)
         statement = statement.order_by(aion_approval_requests.c.created_at.desc()).limit(
             query.limit
         )
@@ -216,9 +214,7 @@ class ApprovalRepository:
         self._ensure_schema()
         with self._engine.begin() as connection:
             connection.execute(
-                insert(aion_approval_lifecycle_events).values(
-                    **event.model_dump(mode="python")
-                )
+                insert(aion_approval_lifecycle_events).values(**event.model_dump(mode="python"))
             )
         return event
 
@@ -227,10 +223,7 @@ class ApprovalRepository:
         self._ensure_schema()
         statement = (
             select(aion_approval_lifecycle_events)
-            .where(
-                aion_approval_lifecycle_events.c.approval_request_id
-                == approval_request_id
-            )
+            .where(aion_approval_lifecycle_events.c.approval_request_id == approval_request_id)
             .order_by(aion_approval_lifecycle_events.c.created_at)
         )
         with self._engine.connect() as connection:

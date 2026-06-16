@@ -17,4 +17,3 @@ class KernelStatusModel(AIONSDKModel):
 class KernelSelfTestResultModel(AIONSDKModel):
     status: str
     checks: list[dict[str, Any]] = Field(default_factory=list)
-

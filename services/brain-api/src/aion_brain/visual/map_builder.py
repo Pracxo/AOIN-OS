@@ -209,10 +209,10 @@ class BrainMapBuilder:
                     continue
                 self._add_edge(edges, previous.node_id, current.node_id, "triggered", current)
                 edge_type = SEQUENCE_EDGES.get(
-                (
-                    node_types.get(previous.node_id, "unknown"),
-                    node_types.get(current.node_id, "unknown"),
-                )
+                    (
+                        node_types.get(previous.node_id, "unknown"),
+                        node_types.get(current.node_id, "unknown"),
+                    )
                 )
                 if edge_type is not None:
                     current_status = status_from_event_type(current.event_type)
@@ -272,10 +272,10 @@ class BrainMapBuilder:
             update={
                 "weight": max(existing.weight, event.intensity),
                 "trace_refs": _unique([*existing.trace_refs, event.trace_id]),
-                    "last_seen_at": max(
-                        existing.last_seen_at or event.created_at,
-                        event.created_at,
-                    ),
+                "last_seen_at": max(
+                    existing.last_seen_at or event.created_at,
+                    event.created_at,
+                ),
             }
         )
 

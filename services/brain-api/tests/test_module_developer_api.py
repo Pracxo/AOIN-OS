@@ -81,4 +81,3 @@ def test_module_developer_api_contract_test_run_works() -> None:
 
     assert response.status_code == 200
     assert response.json()["report"]["module_code_executed"] is False
-

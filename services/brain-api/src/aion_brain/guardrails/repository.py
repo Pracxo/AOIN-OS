@@ -139,11 +139,15 @@ class GuardrailRepository:
         """Return one guardrail rule."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_guardrail_rules).where(
-                    aion_guardrail_rules.c.guardrail_id == guardrail_id
+            row = (
+                connection.execute(
+                    select(aion_guardrail_rules).where(
+                        aion_guardrail_rules.c.guardrail_id == guardrail_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _rule_from_row(row) if row is not None else None
 
     def list_rules(self, status: str | None = None) -> list[GuardrailRule]:

@@ -42,4 +42,3 @@ def test_contract_harness_run_is_dry_run_only() -> None:
 
     assert run.status == "passed"
     assert run.report["module_code_executed"] is False
-

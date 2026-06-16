@@ -50,8 +50,7 @@ class KernelSelfTestService:
         checks = self._diagnostics.run()
         checks.extend(self._local_checks(request, actor_context))
         critical_failed = any(
-            check.status == "failed" and check.severity in {"critical", "high"}
-            for check in checks
+            check.status == "failed" and check.severity in {"critical", "high"} for check in checks
         )
         warnings = any(check.status in {"warning", "skipped"} for check in checks)
         status = "failed" if critical_failed else ("degraded" if warnings else "passed")
@@ -128,19 +127,19 @@ class KernelSelfTestService:
     ) -> bool:
         try:
             policy_request = PolicyRequest(
-                    request_id=f"kernel-self-test-{uuid4().hex}",
-                    trace_id=actor_context.trace_id if actor_context else None,
-                    actor_id=actor_context.actor_id if actor_context else None,
-                    workspace_id=actor_context.workspace_id if actor_context else None,
-                    action_type="kernel.self_test.run",
-                    resource_type="kernel",
-                    resource_id=None,
-                    risk_level="low",
-                    approval_present=False,
-                    requested_permissions=[],
-                    security_scope=request.scope,
-                    context={"dry_run": True},
-                )
+                request_id=f"kernel-self-test-{uuid4().hex}",
+                trace_id=actor_context.trace_id if actor_context else None,
+                actor_id=actor_context.actor_id if actor_context else None,
+                workspace_id=actor_context.workspace_id if actor_context else None,
+                action_type="kernel.self_test.run",
+                resource_type="kernel",
+                resource_id=None,
+                risk_level="low",
+                approval_present=False,
+                requested_permissions=[],
+                security_scope=request.scope,
+                context={"dry_run": True},
+            )
             decision = self._policy_adapter.authorize(
                 PolicyInputEnricher().enrich(policy_request, actor_context or ActorContext())
             )

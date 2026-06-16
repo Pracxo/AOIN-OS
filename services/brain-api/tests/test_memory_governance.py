@@ -208,7 +208,9 @@ def test_conflict_scan_detects_duplicates_and_resolves() -> None:
     memory_service.create(memory("memory-2", summary="Alpha beta"))
     service = MemoryConflictService(
         memory_service=memory_service,
-        governance_repository=MemoryGovernanceRepository(database_url="sqlite+pysqlite:///:memory:"),
+        governance_repository=MemoryGovernanceRepository(
+            database_url="sqlite+pysqlite:///:memory:"
+        ),
         policy_adapter=AllowPolicy(),
         telemetry_service=None,
         settings=make_test_settings(),
@@ -269,7 +271,9 @@ def test_memory_governance_api_works_with_fakes() -> None:
     memory_service.create(memory("memory-1"))
     conflict_service = MemoryConflictService(
         memory_service=memory_service,
-        governance_repository=MemoryGovernanceRepository(database_url="sqlite+pysqlite:///:memory:"),
+        governance_repository=MemoryGovernanceRepository(
+            database_url="sqlite+pysqlite:///:memory:"
+        ),
         policy_adapter=AllowPolicy(),
         telemetry_service=None,
         settings=make_test_settings(),
@@ -425,7 +429,9 @@ def make_forgetting_service(
         risk_engine=None,
         approval_service=FakeApprovalService(),
         policy_adapter=AllowPolicy(),
-        governance_repository=MemoryGovernanceRepository(database_url="sqlite+pysqlite:///:memory:"),
+        governance_repository=MemoryGovernanceRepository(
+            database_url="sqlite+pysqlite:///:memory:"
+        ),
         telemetry_service=None,
         settings=make_test_settings(),
     )
@@ -435,7 +441,9 @@ def make_compaction_service(memory_service: PostgresMemoryService) -> MemoryComp
     """Create compaction service."""
     return MemoryCompactionService(
         memory_service=memory_service,
-        governance_repository=MemoryGovernanceRepository(database_url="sqlite+pysqlite:///:memory:"),
+        governance_repository=MemoryGovernanceRepository(
+            database_url="sqlite+pysqlite:///:memory:"
+        ),
         policy_adapter=AllowPolicy(),
         approval_service=FakeApprovalService(),
         telemetry_service=None,

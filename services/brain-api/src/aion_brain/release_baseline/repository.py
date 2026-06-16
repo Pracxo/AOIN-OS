@@ -73,9 +73,7 @@ class ReleaseBaselineRepository:
                 )
             )
             connection.execute(
-                insert(aion_release_baseline_reports).values(
-                    **report.model_dump(mode="python")
-                )
+                insert(aion_release_baseline_reports).values(**report.model_dump(mode="python"))
             )
         return report
 
@@ -103,9 +101,9 @@ class ReleaseBaselineRepository:
             statement = statement.where(aion_release_baseline_reports.c.version == version)
         if status:
             statement = statement.where(aion_release_baseline_reports.c.status == status)
-        statement = statement.order_by(
-            aion_release_baseline_reports.c.created_at.desc()
-        ).limit(limit)
+        statement = statement.order_by(aion_release_baseline_reports.c.created_at.desc()).limit(
+            limit
+        )
         with self._engine.connect() as connection:
             rows = connection.execute(statement).mappings().all()
         return [_row_to_report(row) for row in rows]

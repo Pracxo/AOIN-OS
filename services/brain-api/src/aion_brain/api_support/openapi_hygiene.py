@@ -77,9 +77,7 @@ class OpenAPIHygieneChecker:
             if not operation.get("tags"):
                 violations.append({"path": path, "method": method, "rule": "route_tags_required"})
             if not operation.get("operationId"):
-                violations.append(
-                    {"path": path, "method": method, "rule": "operation_id_required"}
-                )
+                violations.append({"path": path, "method": method, "rule": "operation_id_required"})
         return count
 
     def _check_schema_names(

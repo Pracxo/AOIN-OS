@@ -87,11 +87,7 @@ class PolicyCoverageAnalyzer:
                 f"unknown_role_permission:{item}" for item in missing_role_permissions
             )
         status = (
-            "failed"
-            if domain_violations
-            else "warning"
-            if uncatalogued or untested
-            else "passed"
+            "failed" if domain_violations else "warning" if uncatalogued or untested else "passed"
         )
         report = PolicyCoverageReport(
             report_id=f"policy-coverage-{uuid4().hex}",

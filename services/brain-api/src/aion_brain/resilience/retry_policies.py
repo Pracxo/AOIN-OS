@@ -128,9 +128,7 @@ class RetryPolicyService:
     def compute_delay_ms(self, policy: RetryPolicy, attempt: int) -> int:
         """Compute bounded retry delay for one attempt."""
         bounded_attempt = max(1, attempt)
-        base = policy.initial_delay_ms * (
-            policy.backoff_multiplier ** max(0, bounded_attempt - 1)
-        )
+        base = policy.initial_delay_ms * (policy.backoff_multiplier ** max(0, bounded_attempt - 1))
         delay = min(policy.max_delay_ms, int(base))
         if policy.jitter_enabled:
             seed = policy.metadata.get("seed", f"{policy.name}:{bounded_attempt}")
@@ -162,4 +160,3 @@ class RetryPolicyService:
             if policy.target_type == target_type:
                 return policy
         return None
-

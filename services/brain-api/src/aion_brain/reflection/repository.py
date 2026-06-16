@@ -90,9 +90,15 @@ class ReflectionRepository:
         """Return a reflection by ID."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_reflections).where(aion_reflections.c.reflection_id == reflection_id)
-            ).mappings().first()
+            row = (
+                connection.execute(
+                    select(aion_reflections).where(
+                        aion_reflections.c.reflection_id == reflection_id
+                    )
+                )
+                .mappings()
+                .first()
+            )
         if row is None:
             return None
         return _row_to_reflection(row)
@@ -107,8 +113,8 @@ class ReflectionRepository:
     ) -> list[ReflectionRecord]:
         """List reflections by optional filters."""
         self._ensure_schema()
-        statement = select(aion_reflections).order_by(aion_reflections.c.created_at.desc()).limit(
-            limit
+        statement = (
+            select(aion_reflections).order_by(aion_reflections.c.created_at.desc()).limit(limit)
         )
         if trace_id is not None:
             statement = statement.where(aion_reflections.c.trace_id == trace_id)

@@ -145,6 +145,7 @@ class ReleaseArtifactService:
         except Exception:
             return None
 
+
 def _file_checksums(root_dir: Path) -> dict[str, str]:
     checksums: dict[str, str] = {}
     for relative in RELEASE_ARTIFACT_FILES:

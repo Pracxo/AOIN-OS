@@ -121,8 +121,7 @@ class IdempotencyRepository:
                 record = _row_to_record(row).model_copy(update={"status": "expired"})
                 connection.execute(
                     delete(aion_idempotency_records).where(
-                        aion_idempotency_records.c.idempotency_key
-                        == record.idempotency_key
+                        aion_idempotency_records.c.idempotency_key == record.idempotency_key
                     )
                 )
                 connection.execute(

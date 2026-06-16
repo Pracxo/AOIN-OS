@@ -209,11 +209,15 @@ class SandboxRepository:
         """Return one sandbox profile."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_sandbox_profiles).where(
-                    aion_sandbox_profiles.c.sandbox_profile_id == sandbox_profile_id
+            row = (
+                connection.execute(
+                    select(aion_sandbox_profiles).where(
+                        aion_sandbox_profiles.c.sandbox_profile_id == sandbox_profile_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _row_to_profile(row) if row is not None else None
 
     def list_profiles(self, status: str | None = None) -> list[SandboxProfile]:
@@ -245,10 +249,7 @@ class SandboxRepository:
             else:
                 connection.execute(
                     update(aion_sandbox_validation_records)
-                    .where(
-                        aion_sandbox_validation_records.c.validation_id
-                        == result.validation_id
-                    )
+                    .where(aion_sandbox_validation_records.c.validation_id == result.validation_id)
                     .values(**values)
                 )
         return stored
@@ -321,12 +322,16 @@ class SandboxRepository:
         """Return one runtime permission grant."""
         self._ensure_schema()
         with self._engine.connect() as connection:
-            row = connection.execute(
-                select(aion_runtime_permission_grants).where(
-                    aion_runtime_permission_grants.c.runtime_permission_id
-                    == runtime_permission_id
+            row = (
+                connection.execute(
+                    select(aion_runtime_permission_grants).where(
+                        aion_runtime_permission_grants.c.runtime_permission_id
+                        == runtime_permission_id
+                    )
                 )
-            ).mappings().first()
+                .mappings()
+                .first()
+            )
         return _row_to_grant(row) if row is not None else None
 
     def list_runtime_permissions(

@@ -149,9 +149,12 @@ def test_brain_loop_writes_working_memory_and_attention_metadata() -> None:
 
     assert focus.created == []
     assert attention.signals
-    assert {
-        request.slot_type for request in working_memory.requests
-    } >= {"recent_event", "retrieved_context", "reasoning_note", "plan_note"}
+    assert {request.slot_type for request in working_memory.requests} >= {
+        "recent_event",
+        "retrieved_context",
+        "reasoning_note",
+        "plan_note",
+    }
     assert state.trace.outcome["attention_decision_id"] == "attention-1"
     assert state.trace.outcome["focus_session_id"] == "focus-1"
 

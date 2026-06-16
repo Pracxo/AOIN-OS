@@ -127,6 +127,122 @@ allowed_actions := {
 	"operator.snapshot.read",
 	"operator.readiness.read",
 	"operator.runbooks.read",
+	"dialogue.session.create",
+	"dialogue.session.read",
+	"dialogue.session.update",
+	"dialogue.message.create",
+	"dialogue.message.read",
+	"dialogue.message.delete",
+	"dialogue.turn",
+	"dialogue.clarification.create",
+	"dialogue.clarification.read",
+	"dialogue.clarification.update",
+	"dialogue.response.compose",
+	"dialogue.response.verify",
+	"dialogue.response.deliver",
+	"dialogue.feedback.create",
+	"dialogue.feedback.read",
+	"dialogue.memory_handoff",
+	"belief.claim.create",
+	"belief.claim.read",
+	"belief.claim.update",
+	"belief.claim.delete",
+	"belief.support.create",
+	"belief.support.read",
+	"belief.support.delete",
+	"belief.contradiction.create",
+	"belief.contradiction.read",
+	"belief.contradiction.resolve",
+	"belief.truth_maintenance.run",
+	"belief.query",
+	"belief.claim.extract",
+	"concept.create",
+	"concept.read",
+	"concept.update",
+	"entity.create",
+	"entity.read",
+	"entity.update",
+	"entity.delete",
+	"entity.alias.create",
+	"entity.alias.read",
+	"entity.alias.delete",
+	"entity.mention.create",
+	"entity.mention.read",
+	"entity.resolve",
+	"entity.reference.create",
+	"entity.reference.read",
+	"entity.reference.delete",
+	"entity.merge.propose",
+	"entity.merge.read",
+	"entity.merge.approve",
+	"entity.split.propose",
+	"entity.split.read",
+	"entity.split.approve",
+	"entity.extract_mentions",
+	"situation.create",
+	"situation.read",
+	"situation.update",
+	"situation.project",
+	"situation.atom.create",
+	"situation.atom.read",
+	"situation.atom.update",
+	"situation.atom.delete",
+	"situation.transition.read",
+	"situation.temporal_window.create",
+	"situation.temporal_window.read",
+	"situation.continuity.record",
+	"situation.continuity.read",
+	"decision.frame.create",
+	"decision.frame.read",
+	"decision.frame.update",
+	"decision.option.create",
+	"decision.option.read",
+	"decision.option.update",
+	"decision.utility_profile.create",
+	"decision.utility_profile.read",
+	"decision.utility_profile.update",
+	"decision.evaluate",
+	"decision.counterfactual.run",
+	"decision.record.create",
+	"decision.record.read",
+	"decision.record.update",
+	"decision.recommend",
+	"outcome.create",
+	"outcome.read",
+	"outcome.update",
+	"outcome.delete",
+	"outcome.expected_effect.create",
+	"outcome.expected_effect.read",
+	"outcome.expected_effect.delete",
+	"outcome.observed_effect.create",
+	"outcome.observed_effect.read",
+	"outcome.verify",
+	"outcome.attribution.create",
+	"outcome.attribution.read",
+	"outcome.attribution.delete",
+	"outcome.feedback.create",
+	"outcome.feedback.read",
+	"outcome.feedback.update",
+	"outcome.learning_bridge",
+	"learning.experience.create",
+	"learning.experience.read",
+	"learning.experience.update",
+	"learning.experience.delete",
+	"learning.query",
+	"learning.pattern.mine",
+	"learning.pattern.read",
+	"learning.lesson.create",
+	"learning.lesson.read",
+	"learning.lesson.update",
+	"learning.synthesize",
+	"learning.synthesis.read",
+	"learning.skill_suggestion.create",
+	"learning.skill_suggestion.read",
+	"learning.skill_suggestion.update",
+	"learning.skill_suggestion.convert",
+	"learning.regression_suggestion.create",
+	"learning.regression_suggestion.read",
+	"learning.regression_suggestion.update",
 	"memory.retrieve",
 	"memory.write",
 	"memory.governance.rule.create",
@@ -269,6 +385,20 @@ allowed_actions := {
 	"visual.timeline.read",
 	"observability.read",
 	"observability.event.create",
+	"self_model.read",
+	"self_model.update",
+	"self_model.describe",
+	"self_model.capability_awareness.read",
+	"self_model.capability_awareness.refresh",
+	"self_model.limitation.create",
+	"self_model.limitation.read",
+	"self_model.limitation.update",
+	"self_model.confidence.calibrate",
+	"self_model.confidence.read",
+	"self_model.assessment.run",
+	"self_model.assessment.read",
+	"self_model.introspection.create",
+	"self_model.introspection.read",
 	"attention.focus.create",
 	"attention.focus.read",
 	"attention.focus.update",
@@ -345,6 +475,23 @@ allowed_actions := {
 	"policy.opa.status",
 	"trace.read",
 	"learning.record",
+	"learning.experience.create",
+	"learning.experience.read",
+	"learning.experience.update",
+	"learning.query",
+	"learning.pattern.mine",
+	"learning.pattern.read",
+	"learning.lesson.create",
+	"learning.lesson.read",
+	"learning.lesson.update",
+	"learning.synthesize",
+	"learning.synthesis.read",
+	"learning.skill_suggestion.create",
+	"learning.skill_suggestion.read",
+	"learning.skill_suggestion.update",
+	"learning.regression_suggestion.create",
+	"learning.regression_suggestion.read",
+	"learning.regression_suggestion.update",
 }
 
 valid_risks := {"low", "medium", "high", "critical"}
@@ -444,6 +591,18 @@ low_allowed_actions := {
 	"skill.candidate.read",
 	"skill.read",
 	"skill.match",
+	"concept.create",
+	"concept.read",
+	"entity.create",
+	"entity.read",
+	"entity.alias.create",
+	"entity.alias.read",
+	"entity.mention.create",
+	"entity.mention.read",
+	"entity.resolve",
+	"entity.reference.create",
+	"entity.reference.read",
+	"entity.extract_mentions",
 	"evidence.read",
 	"evidence.search",
 	"evidence.ground",
@@ -452,6 +611,20 @@ low_allowed_actions := {
 	"visual.snapshot.read",
 	"visual.timeline.read",
 	"observability.read",
+	"self_model.read",
+	"self_model.update",
+	"self_model.describe",
+	"self_model.capability_awareness.read",
+	"self_model.capability_awareness.refresh",
+	"self_model.limitation.create",
+	"self_model.limitation.read",
+	"self_model.limitation.update",
+	"self_model.confidence.calibrate",
+	"self_model.confidence.read",
+	"self_model.assessment.run",
+	"self_model.assessment.read",
+	"self_model.introspection.create",
+	"self_model.introspection.read",
 	"audit.entry.read",
 	"audit.checkpoint.read",
 	"audit.provenance.read",
@@ -966,6 +1139,180 @@ decision := {
 	valid_risk
 	input.action_type == "operator.snapshot.create"
 	operator_snapshot_writer
+}
+
+decision := {
+	"allow": false,
+	"approval_required": false,
+	"reason": "dialogue_controlled_mode_denied",
+	"constraints": ["controlled_execution_not_allowed_from_dialogue"],
+	"audit_level": "high",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "dialogue.turn"
+	input.context.mode == "controlled"
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "dialogue_action_allowed",
+	"constraints": ["backend_only", "no_external_delivery"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	dialogue_action
+	not dialogue_controlled_mode
+	input.action_type != "dialogue.memory_handoff"
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "dialogue_memory_handoff_allowed",
+	"constraints": ["memory_governance_required"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "dialogue.memory_handoff"
+	input.risk_level == "medium"
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "belief_read_allowed",
+	"constraints": ["belief_status_and_confidence_required"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	belief_read_action
+	permissions_within_scope
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "belief_claim_create_allowed",
+	"constraints": ["no_memory_auto_promotion", "explicit_belief_status_required"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "belief.claim.create"
+	permissions_within_scope
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "belief_claim_extract_allowed",
+	"constraints": ["deterministic_extraction_only", "explicit_request_required"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "belief.claim.extract"
+	permissions_within_scope
+	input.context.explicit_request == true
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "belief_mutation_allowed",
+	"constraints": ["soft_delete_only", "revision_required"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	belief_mutation_action
+	admin_or_owner
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "belief_internal_support_allowed",
+	"constraints": ["support_contract_required"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "belief.support.create"
+	belief_internal_or_admin
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "belief_truth_maintenance_dry_run_allowed",
+	"constraints": ["dry_run_default"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "belief.truth_maintenance.run"
+	input.context.dry_run == true
+	belief_operator
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "belief_truth_maintenance_write_allowed",
+	"constraints": ["revision_required"],
+	"audit_level": "high",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "belief.truth_maintenance.run"
+	input.context.dry_run == false
+	admin_or_owner
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "registry_action_allowed",
+	"constraints": ["canonical_reference_contracts_required"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	registry_action
+	not registry_approval_action
+	input.risk_level != "critical"
+}
+
+decision := {
+	"allow": false,
+	"approval_required": true,
+	"reason": "registry_action_requires_approval",
+	"constraints": ["approval_required"],
+	"audit_level": "high",
+} if {
+	valid_action
+	valid_risk
+	registry_approval_action
+	not input.approval_present
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "registry_action_approved",
+	"constraints": ["approval_record_required"],
+	"audit_level": "high",
+} if {
+	valid_action
+	valid_risk
+	registry_approval_action
+	input.approval_present
 }
 
 decision := {
@@ -1908,6 +2255,9 @@ decision := {
 	not audit_action
 	not mcp_action
 	not api_support_action
+	not dialogue_action
+	not belief_action
+	not registry_action
 }
 
 decision := {
@@ -2118,6 +2468,8 @@ decision := {
 	not identity_or_scope_action
 	not evidence_action
 	not mcp_action
+	not dialogue_action
+	not belief_action
 }
 
 decision := {
@@ -2290,6 +2642,103 @@ visual_or_observability_action if {
 
 visual_or_observability_action if {
 	startswith(input.action_type, "observability.")
+}
+
+dialogue_action if {
+	startswith(input.action_type, "dialogue.")
+}
+
+dialogue_controlled_mode if {
+	input.action_type == "dialogue.turn"
+	input.context.mode == "controlled"
+}
+
+belief_action if {
+	startswith(input.action_type, "belief.")
+}
+
+registry_action if {
+	startswith(input.action_type, "concept.")
+}
+
+registry_action if {
+	startswith(input.action_type, "entity.")
+}
+
+registry_action if {
+	startswith(input.action_type, "situation.")
+}
+
+registry_action if {
+	startswith(input.action_type, "decision.")
+}
+
+registry_action if {
+	startswith(input.action_type, "outcome.")
+}
+
+registry_approval_action if {
+	input.action_type == "entity.merge.approve"
+}
+
+registry_approval_action if {
+	input.action_type == "entity.split.approve"
+}
+
+belief_read_action if {
+	input.action_type == "belief.claim.read"
+}
+
+belief_read_action if {
+	input.action_type == "belief.support.read"
+}
+
+belief_read_action if {
+	input.action_type == "belief.contradiction.read"
+}
+
+belief_read_action if {
+	input.action_type == "belief.query"
+}
+
+belief_mutation_action if {
+	input.action_type == "belief.claim.update"
+}
+
+belief_mutation_action if {
+	input.action_type == "belief.claim.delete"
+}
+
+belief_mutation_action if {
+	input.action_type == "belief.support.delete"
+}
+
+belief_mutation_action if {
+	input.action_type == "belief.contradiction.create"
+}
+
+belief_mutation_action if {
+	input.action_type == "belief.contradiction.resolve"
+}
+
+belief_internal_or_admin if {
+	admin_or_owner
+}
+
+belief_internal_or_admin if {
+	input.context.source == "internal_brain_service"
+}
+
+belief_internal_or_admin if {
+	input.context.actor_context.roles[_] == "system"
+}
+
+belief_operator if {
+	admin_or_owner
+}
+
+belief_operator if {
+	input.context.actor_context.roles[_] == "operator"
 }
 
 security_action if {

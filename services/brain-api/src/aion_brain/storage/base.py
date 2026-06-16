@@ -19,4 +19,3 @@ class ObjectStoreAdapter(Protocol):
     def delete(self, content_ref: str) -> bool:
         """Delete bytes for an AION object reference."""
         ...
-

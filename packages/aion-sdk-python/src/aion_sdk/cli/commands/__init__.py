@@ -1,2 +1,1 @@
 """aionctl command modules."""
-
