@@ -19,6 +19,7 @@ from aion_sdk.cli.commands.config import install_config_commands
 from aion_sdk.cli.commands.decisions import install_decision_commands
 from aion_sdk.cli.commands.dialogue import install_dialogue_commands
 from aion_sdk.cli.commands.entities import install_entity_commands
+from aion_sdk.cli.commands.explanations import install_explanation_commands
 from aion_sdk.cli.commands.learning import install_learning_commands
 from aion_sdk.cli.commands.modules import install_modules_commands
 from aion_sdk.cli.commands.operator import install_operator_commands
@@ -550,6 +551,7 @@ install_decision_commands(app, get_client=_client, get_scope=_scope, render=_ren
 install_outcome_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_learning_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_self_model_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_explanation_commands(app, get_client=_client, get_scope=_scope, render=_render)
 
 
 if __name__ == "__main__":

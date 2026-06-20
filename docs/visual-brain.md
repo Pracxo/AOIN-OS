@@ -323,3 +323,33 @@ introspection snapshots create diagnostic pulses only.
 
 The projection remains backend-only in v0.1. It does not implement React,
 Canvas, Three.js, Rive, Lottie, WebSocket UI, or frontend-specific state.
+
+## Explanation Projection
+
+Explanation telemetry projects public explanation activity into the Visual
+Brain Projection. Generic event types include:
+
+- `explanation_created`
+- `explanation_verified`
+- `explanation_blocked`
+- `trace_narrative_created`
+- `why_not_answer_created`
+- `explanation_feedback_recorded`
+
+Generic visual node types include:
+
+- `explanation`
+- `trace_narrative`
+- `why_not`
+- `explanation_feedback`
+
+The projection may later render an explanation path such as:
+
+`trace -> explanation -> verification -> feedback`
+
+and a why-not path such as:
+
+`blocked action -> why-not -> missing requirement -> next possible step`
+
+These are frontend-agnostic records. They do not expose hidden reasoning,
+raw prompts, raw secrets, or renderer-specific state.

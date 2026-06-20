@@ -59,6 +59,7 @@ class AIONClient:
         self.outcomes = _import_resource("outcomes").OutcomesResource(self)
         self.learning = _import_resource("learning").LearningResource(self)
         self.self_model = _import_resource("self_model").SelfModelResource(self)
+        self.explanations = _import_resource("explanations").ExplanationsResource(self)
         self.runtime_config = cast(
             "ConfigResource",
             _import_resource("config").ConfigResource(self),

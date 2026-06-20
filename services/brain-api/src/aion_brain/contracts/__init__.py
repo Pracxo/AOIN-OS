@@ -158,6 +158,15 @@ from aion_brain.contracts.experience import (
     ExperienceQuery,
     ExperienceRecord,
 )
+from aion_brain.contracts.explanations import (
+    ExplanationFeedback,
+    ExplanationRecord,
+    ExplanationRequest,
+    ExplanationStep,
+    ExplanationVerification,
+    WhyNotAnswer,
+    WhyNotRequest,
+)
 from aion_brain.contracts.freeze import FreezeGateCheck, FreezeGateRun, FreezeGateRunRequest
 from aion_brain.contracts.goals import GoalCreateRequest, GoalRecord, GoalTransitionRequest
 from aion_brain.contracts.graph import (
@@ -342,6 +351,7 @@ from aion_brain.contracts.tasks import (
     TaskTransitionRequest,
 )
 from aion_brain.contracts.telemetry import VisualTelemetryEvent
+from aion_brain.contracts.trace_narratives import TraceNarrative, TraceNarrativeRequest
 from aion_brain.contracts.traces import DecisionTrace
 from aion_brain.contracts.versioning import (
     DeprecationPolicy,
@@ -499,6 +509,11 @@ __all__ = [
     "EventSubscription",
     "EventSubscriptionCreateRequest",
     "EventTriggerRule",
+    "ExplanationFeedback",
+    "ExplanationRecord",
+    "ExplanationRequest",
+    "ExplanationStep",
+    "ExplanationVerification",
     "EvalAdapterRunRequest",
     "EvalAdapterRunResult",
     "FeatureRegistryEntry",
@@ -668,6 +683,8 @@ __all__ = [
     "TaskTransitionRequest",
     "SnapshotCreateRequest",
     "TraceComparison",
+    "TraceNarrative",
+    "TraceNarrativeRequest",
     "TraceTimeline",
     "TraceTimelineEvent",
     "TraceTimelineRequest",
@@ -701,4 +718,6 @@ __all__ = [
     "WorkingMemoryWriteRequest",
     "WorkspaceMembership",
     "WorkspaceRecord",
+    "WhyNotAnswer",
+    "WhyNotRequest",
 ]

@@ -979,3 +979,30 @@ Capability and limitation claims must come from awareness records, local
 configuration, kernel diagnostics, and governed AION contracts. They must not
 claim sentience, production readiness, full autonomy, unavailable integrations,
 or domain expertise.
+
+## Explanation Contracts
+
+AION Brain owns these explanation contracts:
+
+- `ExplanationStep`
+- `ExplanationRecord`
+- `ExplanationRequest`
+- `WhyNotRequest`
+- `WhyNotAnswer`
+- `TraceNarrativeRequest`
+- `TraceNarrative`
+- `ExplanationVerification`
+- `ExplanationFeedback`
+
+Explanation contracts describe observable system state only. They may include
+references to evidence, memory, beliefs, decisions, outcomes, audit entries,
+provenance links, policy decisions, autonomy decisions, risk assessments, and
+approval requests.
+
+Explanation contracts must not include chain-of-thought, hidden reasoning,
+raw prompts, raw headers, provider payloads, raw third-party client objects,
+SQLAlchemy rows, secrets, or domain-specific workflow internals.
+
+Why-not answers expose generic blockers and next possible steps. Trace
+narratives expose ordered public timeline events, key decisions, blockers,
+approvals, outcomes, evidence refs, and audit refs.

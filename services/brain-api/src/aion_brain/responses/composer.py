@@ -23,12 +23,19 @@ class ResponseComposer:
         telemetry_service: object | None = None,
         settings: object | None = None,
         confidence_calibrator: object | None = None,
+        explanation_builder: object | None = None,
     ) -> None:
         self._repository = repository
         self._policy_adapter = policy_adapter
         self._telemetry_service = telemetry_service
         self._settings = settings
         self._confidence_calibrator = confidence_calibrator
+        self._explanation_builder = explanation_builder
+
+    def set_explanation_builder(self, explanation_builder: object | None) -> None:
+        """Attach the explanation builder after kernel assembly."""
+
+        self._explanation_builder = explanation_builder
 
     def compose(self, request: ResponseComposeRequest) -> ResponseDraft:
         """Compose and persist one deterministic response draft."""
@@ -62,6 +69,11 @@ class ResponseComposer:
         response_type: ResponseType = request.response_type
         grounded = bool(evidence_refs or grounding_refs)
         status = "draft"
+        metadata = {
+            **request.metadata,
+            "require_grounding": require_grounding,
+            "deterministic_composer": True,
+        }
         if clarification_question:
             response_type = "clarification"
             content = f"I need one clarification before continuing: {clarification_question}"
@@ -77,14 +89,12 @@ class ResponseComposer:
             status = "blocked"
             constraints = [*constraints, "grounding_required"]
             content = "More grounding is needed before I can provide a reliable response."
+        elif explanation_summary := _explanation_summary(self._explanation_builder, request):
+            content = explanation_summary
+            metadata["explanation_included"] = True
         else:
             content = _response_content(request)
         now = datetime.now(UTC)
-        metadata = {
-            **request.metadata,
-            "require_grounding": require_grounding,
-            "deterministic_composer": True,
-        }
         if bool(getattr(self._settings, "confidence_calibration_enabled", True)):
             calibration = _calibrate_response(
                 self._confidence_calibrator,
@@ -169,6 +179,26 @@ def _response_content(request: ResponseComposeRequest) -> str:
     if request.goal:
         return f"I found relevant context for: {request.goal}."
     return "I found relevant context and prepared a response."
+
+
+def _explanation_summary(
+    explanation_builder: object | None, request: ResponseComposeRequest
+) -> str | None:
+    explicit = request.metadata.get("explanation_summary")
+    if isinstance(explicit, str) and explicit.strip():
+        return explicit.strip()
+    explanation_id = request.metadata.get("explanation_id")
+    if not explanation_id:
+        return None
+    get_explanation = getattr(explanation_builder, "get", None)
+    if not callable(get_explanation):
+        return None
+    try:
+        explanation = get_explanation(str(explanation_id), _scope_from_request(request))
+    except Exception:
+        return None
+    summary = getattr(explanation, "summary", None)
+    return summary.strip() if isinstance(summary, str) and summary.strip() else None
 
 
 def _decision_recommendation(request: ResponseComposeRequest) -> str | None:

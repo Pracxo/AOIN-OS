@@ -315,3 +315,23 @@ observability tools, or import Brain internals.
 
 The SDK calls public Brain APIs only. It does not import `aion_brain`, model
 providers, frontend code, database clients, or external observability SDKs.
+
+## ExplanationsResource
+
+`client.explanations` supports:
+
+- `explain(payload)`
+- `get(explanation_id, scope)`
+- `list(trace_id=None, target_type=None, target_id=None, limit=50)`
+- `verify(explanation_id)`
+- `why_not(payload)`
+- `get_why_not(why_not_id, scope)`
+- `trace_narrative(trace_id, payload)`
+- `get_trace_narrative(trace_narrative_id, scope)`
+- `list_trace_narratives(trace_id, limit=50)`
+- `feedback(payload)`
+- `list_feedback(**filters)`
+
+The SDK calls public Brain APIs only. It does not import `aion_brain`,
+database clients, provider SDKs, frontend code, or external observability
+clients.

@@ -56,3 +56,4 @@ Every architecture-changing Codex task must add or update an ADR.
 - [0050: Outcome Ledger, Effect Verification, and Learning Feedback Bridge](0050-outcome-ledger-effect-verification.md) - Defines expected effects, observed effects, verification, attribution, and feedback.
 - [0051: Experience Ledger and Learning Synthesis](0051-experience-ledger-learning-synthesis.md) - Defines generic experience records, pattern mining, lessons, and review-only suggestions.
 - [0052: Self Model and Capability Awareness](0052-self-model-capability-awareness.md) - Defines descriptive self-model, capability awareness, limitations, confidence calibration, and introspection.
+- [0053: Explanation Engine and Trace Narratives](0053-explanation-engine-trace-narratives.md) - Defines deterministic public explanations, why-not answers, trace narratives, verification, and feedback.

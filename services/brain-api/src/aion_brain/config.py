@@ -168,6 +168,56 @@ class Settings(BaseSettings):
             "response_require_grounding_default",
         ),
     )
+    explanations_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_EXPLANATIONS_ENABLED", "explanations_enabled"),
+    )
+    trace_narratives_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_TRACE_NARRATIVES_ENABLED",
+            "trace_narratives_enabled",
+        ),
+    )
+    why_not_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_WHY_NOT_ENABLED", "why_not_enabled"),
+    )
+    explanation_feedback_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_EXPLANATION_FEEDBACK_ENABLED",
+            "explanation_feedback_enabled",
+        ),
+    )
+    explanation_require_grounding_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_EXPLANATION_REQUIRE_GROUNDING_DEFAULT",
+            "explanation_require_grounding_default",
+        ),
+    )
+    explanation_max_steps_default: int = Field(
+        default=50,
+        validation_alias=AliasChoices(
+            "AION_EXPLANATION_MAX_STEPS_DEFAULT",
+            "explanation_max_steps_default",
+        ),
+    )
+    explanation_store_records: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_EXPLANATION_STORE_RECORDS",
+            "explanation_store_records",
+        ),
+    )
+    explanation_forbid_hidden_reasoning: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_EXPLANATION_FORBID_HIDDEN_REASONING",
+            "explanation_forbid_hidden_reasoning",
+        ),
+    )
     self_model_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices("AION_SELF_MODEL_ENABLED", "self_model_enabled"),

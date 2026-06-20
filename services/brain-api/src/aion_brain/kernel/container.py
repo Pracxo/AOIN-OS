@@ -102,6 +102,12 @@ from aion_brain.evidence.service import EvidenceService
 from aion_brain.execution.capability_invoker import CapabilityInvoker
 from aion_brain.execution.orchestrator import ExecutionOrchestrator
 from aion_brain.execution.repository import ExecutionRepository
+from aion_brain.explanations.builder import ExplanationBuilder
+from aion_brain.explanations.feedback import ExplanationFeedbackService
+from aion_brain.explanations.repository import ExplanationRepository
+from aion_brain.explanations.trace_narrative import TraceNarrativeBuilder
+from aion_brain.explanations.verifier import ExplanationVerifier
+from aion_brain.explanations.why_not import WhyNotService
 from aion_brain.freeze.gate import FreezeGateService
 from aion_brain.goals.repository import GoalRepository
 from aion_brain.goals.service import GoalService
@@ -1259,6 +1265,71 @@ class KernelContainer:
             self.policy_adapter,
             telemetry_service=self.telemetry_service,
         )
+        self.explanation_repository = ExplanationRepository(self.settings.database_url)
+        self.explanation_verifier = ExplanationVerifier(self.telemetry_service)
+        self.explanation_builder = ExplanationBuilder(
+            self.explanation_repository,
+            self.policy_adapter,
+            audit_ledger=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            policy_service=self.audit_repository,
+            risk_service=self.risk_engine,
+            approval_service=self.approval_service,
+            autonomy_service=self.autonomy_governor,
+            evidence_service=self.evidence_service,
+            memory_service=self.memory_service,
+            belief_service=self.belief_service,
+            decision_service=self.decision_repository,
+            outcome_service=self.outcome_service,
+            response_service=self.response_composer,
+            self_model_service=self.capability_awareness_service,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+            verifier=self.explanation_verifier,
+        )
+        self.why_not_service = WhyNotService(
+            self.explanation_repository,
+            self.policy_adapter,
+            policy_service=self.audit_repository,
+            autonomy_service=self.autonomy_governor,
+            approval_service=self.approval_service,
+            risk_service=self.risk_engine,
+            capability_awareness_service=self.capability_awareness_service,
+            limitation_service=self.limitation_ledger_service,
+            response_service=self.response_composer,
+            outcome_service=self.outcome_service,
+            telemetry_service=self.telemetry_service,
+            audit_ledger=self.audit_integrity_ledger,
+            settings=self.settings,
+        )
+        self.trace_narrative_builder = TraceNarrativeBuilder(
+            self.explanation_repository,
+            self.policy_adapter,
+            audit_ledger=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            event_repository=self.event_repository,
+            command_service=None,
+            policy_service=self.audit_repository,
+            approval_service=self.approval_service,
+            decision_service=self.decision_repository,
+            outcome_service=self.outcome_service,
+            response_service=self.response_composer,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.explanation_feedback_service = ExplanationFeedbackService(
+            self.explanation_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_ledger=self.audit_integrity_ledger,
+            settings=self.settings,
+        )
+        set_explanation_builder = getattr(self.response_composer, "set_explanation_builder", None)
+        if callable(set_explanation_builder):
+            set_explanation_builder(self.explanation_builder)
+        set_explanation_services = getattr(self.response_verifier, "set_explanation_services", None)
+        if callable(set_explanation_services):
+            set_explanation_services(self.explanation_verifier, self.explanation_builder)
         self.dialogue_feedback_service = DialogueFeedbackService(
             self.dialogue_repository,
             self.policy_adapter,
@@ -1293,6 +1364,8 @@ class KernelContainer:
             entity_resolver=self.entity_resolver,
             context_continuity_service=self.context_continuity_service,
             self_description_service=self.self_description_service,
+            explanation_builder=self.explanation_builder,
+            why_not_service=self.why_not_service,
         )
         set_response_composer = getattr(self.brain_loop_service, "set_response_composer", None)
         if callable(set_response_composer):
@@ -1890,6 +1963,7 @@ class KernelContainer:
             learning_synthesis_repository=self.learning_synthesis_repository,
             skill_suggestion_service=self.skill_suggestion_service,
             regression_suggestion_service=self.regression_suggestion_service,
+            explanation_service=self.explanation_builder,
         )
         self.operator_readiness_aggregator = ReadinessAggregator(
             self.operator_status_card_builder,
@@ -2184,6 +2258,17 @@ class KernelContainer:
             (
                 "response_delivery_service",
                 self.response_delivery_service,
+                "service",
+                "local",
+            ),
+            ("explanation_repository", self.explanation_repository, "repository", "postgres"),
+            ("explanation_builder", self.explanation_builder, "service", "deterministic"),
+            ("trace_narrative_builder", self.trace_narrative_builder, "service", "deterministic"),
+            ("why_not_service", self.why_not_service, "service", "deterministic"),
+            ("explanation_verifier", self.explanation_verifier, "service", "deterministic"),
+            (
+                "explanation_feedback_service",
+                self.explanation_feedback_service,
                 "service",
                 "local",
             ),

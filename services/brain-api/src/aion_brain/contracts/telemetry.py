@@ -436,6 +436,12 @@ VisualTelemetryEventType = Literal[
     "self_assessment_completed",
     "introspection_snapshot_created",
     "unsupported_capability_claim_detected",
+    "explanation_created",
+    "explanation_verified",
+    "explanation_blocked",
+    "trace_narrative_created",
+    "why_not_answer_created",
+    "explanation_feedback_recorded",
 ]
 
 VisualNodeType = Literal[
@@ -634,6 +640,10 @@ VisualNodeType = Literal[
     "confidence",
     "self_assessment",
     "introspection",
+    "explanation",
+    "trace_narrative",
+    "why_not",
+    "explanation_feedback",
 ]
 
 

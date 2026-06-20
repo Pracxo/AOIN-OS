@@ -1007,3 +1007,23 @@ introspection snapshots. Policy failures fail closed.
 Self-model actions must not execute capabilities, enable adapters, mutate
 runtime configuration, promote skills, override autonomy, approve actions, or
 add domain-specific behavior to Brain core.
+
+## Explanation Policy
+
+Generic explanation actions:
+
+- `explanation.create`
+- `explanation.read`
+- `explanation.verify`
+- `explanation.feedback.create`
+- `explanation.feedback.read`
+- `explanation.why_not`
+- `explanation.trace_narrative.create`
+- `explanation.trace_narrative.read`
+
+Explanation policy gates every explanation, trace narrative, why-not answer,
+verification, and feedback operation. Policy failures fail closed.
+
+Explanation policy does not authorize hidden reasoning disclosure, raw prompt
+export, secret exposure, provider payload disclosure, or domain-specific
+business rules in Brain core.

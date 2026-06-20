@@ -30,6 +30,8 @@ class ResponseVerifier:
         situation_service: object | None = None,
         state_atom_service: object | None = None,
         capability_awareness_service: object | None = None,
+        explanation_verifier: object | None = None,
+        explanation_builder: object | None = None,
     ) -> None:
         self._repository = repository
         self._policy_adapter = policy_adapter
@@ -39,6 +41,18 @@ class ResponseVerifier:
         self._situation_service = situation_service
         self._state_atom_service = state_atom_service
         self._capability_awareness_service = capability_awareness_service
+        self._explanation_verifier = explanation_verifier
+        self._explanation_builder = explanation_builder
+
+    def set_explanation_services(
+        self,
+        explanation_verifier: object | None,
+        explanation_builder: object | None = None,
+    ) -> None:
+        """Attach explanation services after kernel assembly."""
+
+        self._explanation_verifier = explanation_verifier
+        self._explanation_builder = explanation_builder
 
     def verify(self, response_id: str) -> ResponseVerification:
         """Verify and persist one response verification record."""
@@ -64,6 +78,7 @@ class ResponseVerifier:
                 *self._entity_issues(response, scope),
                 *self._situation_issues(response, scope),
                 *self._self_model_issues(response, scope),
+                *self._explanation_issues(response, scope),
             ],
         )
         score = max(0.0, 1.0 - (0.25 * len(issues)))
@@ -135,6 +150,29 @@ class ResponseVerifier:
             ):
                 issues.append({"code": "belief_ungrounded", "severity": "medium"})
         return issues
+
+    def _explanation_issues(
+        self,
+        response: ResponseDraft,
+        scope: list[str],
+    ) -> list[dict[str, object]]:
+        explanation_id = response.metadata.get("explanation_id")
+        if not explanation_id:
+            return []
+        get_explanation = getattr(self._explanation_builder, "get", None)
+        verify_explanation = getattr(self._explanation_verifier, "verify_explanation", None)
+        if not callable(get_explanation) or not callable(verify_explanation):
+            return []
+        try:
+            explanation = get_explanation(str(explanation_id), scope)
+            if explanation is None:
+                return [{"code": "explanation_missing", "severity": "medium"}]
+            verification = verify_explanation(explanation)
+        except Exception:
+            return [{"code": "explanation_verification_unavailable", "severity": "medium"}]
+        if getattr(verification, "status", "passed") == "failed":
+            return [{"code": "explanation_verification_failed", "severity": "high"}]
+        return []
 
     def _self_model_issues(
         self,

@@ -258,3 +258,16 @@ Self-model commands call the SDK only. They describe local AION capability
 awareness, limitations, confidence calibration, self-assessment, and
 introspection records without executing capabilities, enabling adapters,
 changing runtime config, or calling external services.
+
+## Explanation Commands
+
+- `aionctl explain target`
+- `aionctl explain why-not`
+- `aionctl explain trace`
+- `aionctl explain verify`
+- `aionctl explain feedback`
+
+Explanation commands call the SDK and public Brain APIs only. They build
+deterministic public explanations and trace narratives from observable records.
+They do not reveal chain-of-thought, raw prompts, raw headers, secrets, or
+provider payloads.

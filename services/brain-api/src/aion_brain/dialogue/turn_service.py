@@ -22,6 +22,7 @@ from aion_brain.contracts.dialogue import (
 )
 from aion_brain.contracts.entities import EntityResolutionRequest
 from aion_brain.contracts.events import AIONEvent
+from aion_brain.contracts.explanations import ExplanationRequest, WhyNotRequest
 from aion_brain.contracts.responses import ResponseComposeRequest, ResponseDraft
 from aion_brain.contracts.self_model import SelfDescriptionRequest
 from aion_brain.contracts.situations import ContextContinuityRequest
@@ -66,6 +67,8 @@ class DialogueTurnService:
         entity_resolver: object | None = None,
         context_continuity_service: object | None = None,
         self_description_service: object | None = None,
+        explanation_builder: object | None = None,
+        why_not_service: object | None = None,
     ) -> None:
         self._session_service = session_service
         self._message_service = message_service
@@ -88,6 +91,8 @@ class DialogueTurnService:
         self._entity_resolver = entity_resolver
         self._context_continuity_service = context_continuity_service
         self._self_description_service = self_description_service
+        self._explanation_builder = explanation_builder
+        self._why_not_service = why_not_service
 
     def turn(self, request: DialogueTurnRequest) -> DialogueTurnResult:
         """Run one bounded dialogue turn."""
@@ -457,6 +462,10 @@ class DialogueTurnService:
                     ),
                 }
                 metadata["self_description_source"] = "self_model"
+        explanation_result = self._explanation_result(request, session, message, trace)
+        if explanation_result:
+            outcome = {**outcome, "summary": explanation_result["summary"]}
+            metadata.update(explanation_result["metadata"])
         return self._response_composer.compose(
             ResponseComposeRequest(
                 dialogue_session_id=session.dialogue_session_id,
@@ -473,6 +482,107 @@ class DialogueTurnService:
                 metadata=metadata,
             )
         )
+
+    def _explanation_result(
+        self,
+        request: DialogueTurnRequest,
+        session: DialogueSession,
+        message: DialogueMessage,
+        trace: DecisionTrace | None,
+    ) -> dict[str, Any] | None:
+        use_explanations = request.metadata.get(
+            "use_explanations"
+        ) is True or _is_explanation_question(message.content)
+        if not use_explanations:
+            return None
+        if _is_why_not_question(message.content):
+            answer = self._why_not_answer(request, session, message, trace)
+            if answer is None:
+                return None
+            return {
+                "summary": answer.answer,
+                "metadata": {
+                    "why_not_id": answer.why_not_id,
+                    "explanation_source": "why_not_service",
+                },
+            }
+        explanation = self._explanation(request, session, message, trace)
+        if explanation is None:
+            return None
+        return {
+            "summary": explanation.summary,
+            "metadata": {
+                "explanation_id": explanation.explanation_id,
+                "explanation_source": "explanation_builder",
+            },
+        }
+
+    def _why_not_answer(
+        self,
+        request: DialogueTurnRequest,
+        session: DialogueSession,
+        message: DialogueMessage,
+        trace: DecisionTrace | None,
+    ) -> Any | None:
+        answer = getattr(self._why_not_service, "answer", None)
+        if not callable(answer):
+            return None
+        try:
+            return answer(
+                WhyNotRequest(
+                    trace_id=trace.trace_id if trace is not None else message.trace_id,
+                    actor_id=message.actor_id,
+                    workspace_id=message.workspace_id,
+                    question=message.content,
+                    target_type="trace",
+                    target_id=trace.trace_id if trace is not None else message.trace_id,
+                    requested_action=str(request.metadata.get("requested_action"))
+                    if request.metadata.get("requested_action")
+                    else None,
+                    owner_scope=session.owner_scope,
+                    metadata={**request.metadata, "source": "dialogue_turn"},
+                    created_by=message.actor_id,
+                )
+            )
+        except Exception:
+            return None
+
+    def _explanation(
+        self,
+        request: DialogueTurnRequest,
+        session: DialogueSession,
+        message: DialogueMessage,
+        trace: DecisionTrace | None,
+    ) -> Any | None:
+        explain = getattr(self._explanation_builder, "explain", None)
+        if not callable(explain):
+            return None
+        target_type = str(request.metadata.get("explanation_target_type") or "trace")
+        target_id = (
+            str(request.metadata.get("explanation_target_id"))
+            if request.metadata.get("explanation_target_id")
+            else (trace.trace_id if trace is not None else message.trace_id)
+        )
+        try:
+            return explain(
+                ExplanationRequest(
+                    trace_id=trace.trace_id if trace is not None else message.trace_id,
+                    actor_id=message.actor_id,
+                    workspace_id=message.workspace_id,
+                    explanation_type="why",
+                    target_type=target_type,  # type: ignore[arg-type]
+                    target_id=target_id,
+                    question=message.content,
+                    require_grounding=bool(
+                        request.metadata.get("require_explanation_grounding", False)
+                    ),
+                    owner_scope=session.owner_scope,
+                    metadata={**request.metadata, "source": "dialogue_turn"},
+                    created_by=message.actor_id,
+                )
+            )
+        except Exception:
+            return None
 
     def _self_description(self, scope: list[str]) -> Any | None:
         describe = getattr(self._self_description_service, "describe", None)
@@ -652,3 +762,22 @@ def _is_self_description_question(message: str) -> bool:
             "what are your limits",
         )
     )
+
+
+def _is_explanation_question(message: str) -> bool:
+    lowered = message.lower()
+    return any(
+        phrase in lowered
+        for phrase in (
+            "why",
+            "why not",
+            "explain",
+            "what happened",
+            "why was this blocked",
+        )
+    )
+
+
+def _is_why_not_question(message: str) -> bool:
+    lowered = message.lower()
+    return "why not" in lowered or "why was this blocked" in lowered or "blocked" in lowered

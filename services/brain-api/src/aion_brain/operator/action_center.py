@@ -61,6 +61,7 @@ class ActionCenterService:
         generated.extend(self._open_regression_suggestion_items(scope))
         generated.extend(self._failed_learning_synthesis_items(scope))
         generated.extend(self._critical_limitation_items(scope))
+        generated.extend(self._failed_explanation_items(scope))
         stored: list[OperatorActionItem] = []
         for item in generated[:limit]:
             saved = self._repository.save_action_item(item)
@@ -169,6 +170,38 @@ class ActionCenterService:
                 },
             )
             for item in items
+        ]
+
+    def _failed_explanation_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("explanation_service") or self._sources.get(
+            "explanation_builder"
+        )
+        list_explanations = getattr(source, "list", None)
+        if not callable(list_explanations):
+            return []
+        try:
+            items = list_explanations(limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "explanation_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity="medium",
+                title="Explanation verification requires inspection.",
+                description="An explanation record is failed or insufficiently grounded.",
+                recommended_action="review_explanation_record",
+                runbook_ref="docs/operations/operator-control-tower.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={
+                    "explanation_id": getattr(item, "explanation_id", None),
+                    "status": getattr(item, "status", "failed"),
+                },
+            )
+            for item in items
+            if str(getattr(item, "status", "")).lower() in {"failed", "insufficient_evidence"}
         ]
 
     def _failed_command_items(self) -> list[OperatorActionItem]:

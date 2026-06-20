@@ -22,6 +22,7 @@ from aion_brain.api.event_reactions import router as event_reactions_router
 from aion_brain.api.events import router as events_router
 from aion_brain.api.evidence import router as evidence_router
 from aion_brain.api.execution import router as execution_router
+from aion_brain.api.explanations import router as explanations_router
 from aion_brain.api.freeze import router as freeze_router
 from aion_brain.api.goals import router as goals_router
 from aion_brain.api.graph_memory import router as graph_memory_router
@@ -130,6 +131,7 @@ ROUTERS = (
     situations_router,
     decisions_router,
     outcomes_router,
+    explanations_router,
     brain_router,
     traces_router,
     learning_router,

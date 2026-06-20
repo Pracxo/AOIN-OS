@@ -366,7 +366,7 @@ class ExplanationFeedback(BaseModel):
         return value
 
     @model_validator(mode="after")
-    def require_feedback_target(self) -> "ExplanationFeedback":
+    def require_feedback_target(self) -> ExplanationFeedback:
         if not any((self.explanation_id, self.trace_narrative_id, self.why_not_id)):
             raise ValueError("feedback must target an explanation, trace narrative, or why-not")
         return self

@@ -112,6 +112,11 @@ class KernelDiagnostics:
         ("clarification_manager_present", "clarification_manager", "medium"),
         ("response_composer_present", "response_composer", "medium"),
         ("response_verifier_present", "response_verifier", "medium"),
+        ("explanation_builder_present", "explanation_builder", "medium"),
+        ("trace_narrative_builder_present", "trace_narrative_builder", "medium"),
+        ("why_not_service_present", "why_not_service", "medium"),
+        ("explanation_verifier_present", "explanation_verifier", "medium"),
+        ("explanation_feedback_service_present", "explanation_feedback_service", "medium"),
         ("dialogue_turn_service_present", "dialogue_turn_service", "medium"),
         ("self_model_profile_service_present", "self_model_profile_service", "medium"),
         ("capability_awareness_service_present", "capability_awareness_service", "medium"),
@@ -243,6 +248,7 @@ class KernelDiagnostics:
         checks.extend(self._audit_integrity_checks(settings))
         checks.extend(self._operator_checks(settings))
         checks.extend(self._dialogue_checks(settings))
+        checks.extend(self._explanation_checks(settings))
         checks.extend(self._self_model_checks(settings))
         checks.extend(self._belief_checks(settings))
         checks.extend(self._entity_checks(settings))
@@ -678,6 +684,63 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Dialogue services are assembled.",
+            ),
+        ]
+
+    def _explanation_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "explanation_builder",
+                "trace_narrative_builder",
+                "why_not_service",
+                "explanation_verifier",
+                "explanation_feedback_service",
+            )
+        )
+        return [
+            self._result(
+                "explanations_enabled",
+                "explanations",
+                "passed" if bool(getattr(settings, "explanations_enabled", True)) else "warning",
+                "medium",
+                "Explanation Engine is enabled.",
+            ),
+            self._result(
+                "trace_narratives_enabled",
+                "explanations",
+                (
+                    "passed"
+                    if bool(getattr(settings, "trace_narratives_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Trace Narrative Builder is enabled.",
+            ),
+            self._result(
+                "why_not_enabled",
+                "explanations",
+                "passed" if bool(getattr(settings, "why_not_enabled", True)) else "warning",
+                "medium",
+                "Why/why-not explanations are enabled.",
+            ),
+            self._result(
+                "explanation_forbid_hidden_reasoning",
+                "explanations",
+                (
+                    "passed"
+                    if bool(getattr(settings, "explanation_forbid_hidden_reasoning", True))
+                    else "failed"
+                ),
+                "high",
+                "Explanations are configured to forbid hidden reasoning exposure.",
+            ),
+            self._result(
+                "explanation_services_present",
+                "explanations",
+                "passed" if services_present else "failed",
+                "high",
+                "Explanation services are assembled.",
             ),
         ]
 

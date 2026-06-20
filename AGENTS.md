@@ -157,3 +157,9 @@ Instructions for future Codex runs in this repository:
   configuration, or other governed AION contracts.
 - Confidence disclosures must be explicit when grounding is weak, confidence
   is low, approval is required, or a capability is dry-run only.
+- Explanations must be deterministic public narratives over observable AION
+  records, not chain-of-thought or hidden reasoning.
+- Explanation services must redact raw prompts, provider payload markers, raw
+  headers, and secret-like keys before persistence or API return.
+- Why-not answers and trace narratives must stay generic, policy-gated,
+  frontend-agnostic, and domain-neutral.

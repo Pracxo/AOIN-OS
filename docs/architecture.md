@@ -1139,3 +1139,27 @@ overriding policy.
 
 This layer is not a personality system and not a UI. It is a Brain-owned
 contract boundary for accurate self-description and limitation awareness.
+
+## Explanation Engine and Trace Narrative Builder
+
+The Explanation Engine builds public, deterministic explanations from
+observable AION records. It never exposes hidden reasoning, chain-of-thought,
+raw prompts, raw headers, provider payloads, secrets, SQLAlchemy rows, or
+vendor SDK objects.
+
+The Trace Narrative Builder joins audit records, events, commands, policy
+decisions, approvals, outcomes, responses, and provenance references into an
+ordered public timeline for one trace. Missing sections produce partial or
+insufficient-record narratives instead of crashing.
+
+The Why-Not service answers why a requested action did not continue using
+generic blockers such as policy denial, approval requirements, autonomy mode,
+risk escalation, missing grounding, disabled capability, or missing records.
+
+Explanation services sit behind `aion_brain.explanations` boundaries. API
+routes, dialogue turns, response composition, response verification, operator
+action center items, visual telemetry, and SDK/CLI surfaces consume
+Explanation contracts instead of subsystem internals.
+
+All explanation creation, reading, verification, feedback, why-not, and trace
+narrative operations pass through policy and fail closed.

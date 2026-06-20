@@ -2623,3 +2623,44 @@ CLI examples:
 ```
 
 See `docs/adr/0052-self-model-capability-awareness.md`.
+
+## Explanation Engine and Trace Narratives
+
+AION Brain v0.1 includes a deterministic Explanation Engine for public,
+grounded "why" and "why-not" answers. It builds explanation records from
+observable AION contracts only: policy decisions, approvals, audit records,
+provenance links, memory/evidence refs, response records, outcome records,
+capability awareness, and local diagnostics.
+
+Explanations are not chain-of-thought. They are public narratives over
+recorded system state. The engine redacts secret-like keys, raw prompt markers,
+and hidden reasoning markers before persistence or API return.
+
+Explanation endpoints:
+
+- `POST /brain/explanations`
+- `GET /brain/explanations/{explanation_id}`
+- `GET /brain/explanations`
+- `POST /brain/explanations/{explanation_id}/verify`
+- `POST /brain/explanations/why-not`
+- `GET /brain/explanations/why-not/{why_not_id}`
+- `POST /brain/traces/{trace_id}/narrative`
+- `GET /brain/traces/narratives/{trace_narrative_id}`
+- `GET /brain/traces/{trace_id}/narratives`
+- `POST /brain/explanations/feedback`
+- `GET /brain/explanations/feedback`
+
+SDK and CLI examples:
+
+```bash
+./scripts/aionctl.sh explain target --target-type trace --target-id trace-id
+./scripts/aionctl.sh explain why-not --target-type trace --trace-id trace-id
+./scripts/aionctl.sh explain trace --trace-id trace-id
+./scripts/aionctl.sh explain verify --explanation-id explanation-id
+```
+
+`client.explanations` exposes the same public Brain APIs. The SDK does not
+import Brain internals, database clients, frontend code, provider SDKs, or
+external observability clients.
+
+See `docs/adr/0053-explanation-engine-trace-narratives.md`.
