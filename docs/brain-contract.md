@@ -142,9 +142,25 @@ The contract includes:
 - `RetrievalResult`: ranked, deduplicated retrieval output plus constraints.
 - `ContextFusionRequest`: request to assemble retrieved items for reasoning.
 - `ContextBundle`: deterministic fused context that feeds `ContextPacket`.
+- `ContractIndexRecord`: indexed source-code-owned contract shape.
+- `InterfaceInventoryRecord`: indexed API, SDK, CLI, policy, setting, telemetry, or registry interface.
+- `ContractSnapshot`: point-in-time contract and interface manifest.
+- `CompatibilityRule`: deterministic interface compatibility rule.
+- `CompatibilityScanRequest`: request to compare current or stored snapshots.
+- `CompatibilityScan`: result of a compatibility scan.
+- `InterfaceDriftFinding`: detected interface drift record.
+- `MigrationNote`: informational migration guidance that does not execute.
+- `ContractRegistryReport`: deterministic contract readiness summary.
 
 Public APIs must return AION contracts or plain JSON derived from them. They
 must not expose framework-specific objects from external engines.
+
+Contract Registry contracts are read-only descriptions of existing AION
+interfaces. They must not become generated source, mutate source contracts,
+execute migrations, expose raw prompts, expose hidden reasoning, expose raw
+headers, expose provider payloads, or carry secrets. Compatibility scans and
+migration notes are advisory records until another governed AION gate consumes
+them.
 
 Reasoning contracts are Brain-owned. Model providers receive inference inputs
 only through `ModelGatewayAdapter` and return `ModelCallRecord`. Public APIs

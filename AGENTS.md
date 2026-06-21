@@ -242,3 +242,10 @@ Instructions for future Codex runs in this repository:
   not perform the action.
 - Do not add domain-specific lifecycle policy, classification, retention,
   archive, redaction, or purge logic in Brain core.
+- Contract Registry scans are inventory only. Do not mutate source records,
+  generate code, repair interfaces, execute migration steps, or call external
+  services from contract registry services, SDK helpers, CLI commands,
+  telemetry, reports, or docs.
+- Contract Registry payloads must stay redacted and domain-neutral. Do not
+  expose hidden reasoning, chain-of-thought, raw prompts, raw headers, provider
+  payloads, secrets, or domain-specific compatibility rules.

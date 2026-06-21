@@ -15,6 +15,7 @@ from aion_brain.api.commands import router as commands_router
 from aion_brain.api.concepts import router as concepts_router
 from aion_brain.api.connectors import router as connectors_router
 from aion_brain.api.consistency import router as consistency_router
+from aion_brain.api.contract_registry import router as contract_registry_router
 from aion_brain.api.cycles import router as cycles_router
 from aion_brain.api.decisions import router as decisions_router
 from aion_brain.api.dialogue import router as dialogue_router
@@ -132,6 +133,7 @@ ROUTERS = (
     run_supervision_router,
     notifications_router,
     incidents_router,
+    contract_registry_router,
     resource_registry_router,
     lifecycle_router,
     prompts_router,

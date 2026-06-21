@@ -60,6 +60,19 @@ from aion_brain.consistency.checker import ConsistencyChecker
 from aion_brain.consistency.leases import ProcessingLeaseService
 from aion_brain.consistency.repository import ConsistencyRepository
 from aion_brain.context.compiler import ContextCompiler
+from aion_brain.contract_registry import (
+    CompatibilityRuleService,
+    ContractRegistryQueryService,
+    ContractRegistryReportService,
+    ContractRegistryRepository,
+    ContractScanner,
+    ContractSnapshotService,
+    InterfaceInventoryService,
+    MigrationNoteService,
+)
+from aion_brain.contract_registry import (
+    CompatibilityScanner as ContractCompatibilityScanner,
+)
 from aion_brain.contracts.kernel import (
     KernelAdapterConfig,
     KernelBootRecord,
@@ -2247,6 +2260,7 @@ class KernelContainer:
             self.policy_adapter,
             feature_override_service=self.feature_flag_override_service,
             telemetry_service=self.telemetry_service,
+            settings=self.settings,
         )
         self.resilience_repository = ResilienceRepository(self.settings.database_url)
         self.dependency_health_service = DependencyHealthService(
@@ -2529,6 +2543,73 @@ class KernelContainer:
             telemetry_service=self.telemetry_service,
             settings=self.settings,
         )
+        self.contract_registry_repository = ContractRegistryRepository(self.settings.database_url)
+        self.contract_scanner = ContractScanner(settings=self.settings)
+        self.interface_inventory_service = InterfaceInventoryService(
+            self.contract_registry_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.contract_snapshot_service = ContractSnapshotService(
+            self.contract_registry_repository,
+            self.contract_scanner,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            settings=self.settings,
+        )
+        self.compatibility_rule_service = CompatibilityRuleService(
+            self.contract_registry_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.migration_note_service = MigrationNoteService(
+            self.contract_registry_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.compatibility_scanner = ContractCompatibilityScanner(
+            self.contract_registry_repository,
+            self.contract_snapshot_service,
+            self.compatibility_rule_service,
+            self.policy_adapter,
+            migration_note_service=self.migration_note_service,
+            notification_router=self.notification_router,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+        )
+        self.contract_registry_report_service = ContractRegistryReportService(
+            self.contract_registry_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+        )
+        self.contract_registry_query_service = ContractRegistryQueryService(
+            self.contract_registry_repository,
+            self.policy_adapter,
+        )
+        set_contract_registry_services = getattr(
+            self.release_packager,
+            "set_contract_registry_services",
+            None,
+        )
+        if callable(set_contract_registry_services):
+            set_contract_registry_services(
+                repository=self.contract_registry_repository,
+                report_service=self.contract_registry_report_service,
+            )
+        set_contract_registry_repository = getattr(
+            self.freeze_gate_service,
+            "set_contract_registry_repository",
+            None,
+        )
+        if callable(set_contract_registry_repository):
+            set_contract_registry_repository(self.contract_registry_repository)
+        set_resource_provider = getattr(self.resource_scanner, "set_provider", None)
+        if callable(set_resource_provider):
+            set_resource_provider("contract_registry", self.contract_registry_repository)
         self.lifecycle_repository = LifecycleRepository(self.settings.database_url)
         self.lifecycle_policy_service = LifecyclePolicyService(
             self.lifecycle_repository,
@@ -2625,6 +2706,7 @@ class KernelContainer:
             scheduler_service=self.scheduler_query_service,
             incident_service=self.incident_service,
             registry_service=self.registry_query_service,
+            contract_registry_service=self.contract_registry_report_service,
             lifecycle_service=self.lifecycle_report_service,
         )
         self.operator_queue_summary_builder = QueueSummaryBuilder(
@@ -2684,6 +2766,7 @@ class KernelContainer:
             recovery_review_service=self.recovery_review_service,
             reference_validator=self.reference_validator,
             registry_rebuilder=self.registry_rebuilder,
+            contract_registry_repository=self.contract_registry_repository,
             archive_planner=self.archive_planner,
             redaction_planner=self.redaction_planner,
             purge_preview_service=self.purge_preview_service,
@@ -2734,6 +2817,7 @@ class KernelContainer:
             notification_digest_service=self.notification_digest_service,
             scheduler_service=self.scheduler_query_service,
             incident_service=self.incident_service,
+            contract_registry_repository=self.contract_registry_repository,
             archive_planner=self.archive_planner,
             redaction_planner=self.redaction_planner,
             purge_preview_service=self.purge_preview_service,
@@ -3673,6 +3757,45 @@ class KernelContainer:
                 "deterministic",
             ),
             ("registry_rebuilder", self.registry_rebuilder, "service", "deterministic"),
+            (
+                "contract_registry_repository",
+                self.contract_registry_repository,
+                "repository",
+                "postgres",
+            ),
+            ("contract_scanner", self.contract_scanner, "service", "deterministic"),
+            (
+                "interface_inventory_service",
+                self.interface_inventory_service,
+                "service",
+                "local",
+            ),
+            (
+                "contract_snapshot_service",
+                self.contract_snapshot_service,
+                "service",
+                "deterministic",
+            ),
+            (
+                "compatibility_rule_service",
+                self.compatibility_rule_service,
+                "service",
+                "local",
+            ),
+            ("compatibility_scanner", self.compatibility_scanner, "service", "deterministic"),
+            ("migration_note_service", self.migration_note_service, "service", "local"),
+            (
+                "contract_registry_report_service",
+                self.contract_registry_report_service,
+                "service",
+                "local",
+            ),
+            (
+                "contract_registry_query_service",
+                self.contract_registry_query_service,
+                "service",
+                "local",
+            ),
             ("lifecycle_repository", self.lifecycle_repository, "repository", "postgres"),
             ("lifecycle_policy_service", self.lifecycle_policy_service, "service", "local"),
             ("retention_classifier", self.retention_classifier, "service", "deterministic"),

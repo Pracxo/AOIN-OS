@@ -379,6 +379,23 @@ allowed_actions := {
 	"registry.broken_reference.update",
 	"registry.orphaned_resource.read",
 	"registry.orphaned_resource.update",
+	"contract_registry.resource.create",
+	"contract_registry.resource.read",
+	"contract_registry.resource.update",
+	"contract_registry.interface.read",
+	"contract_registry.snapshot.create",
+	"contract_registry.snapshot.read",
+	"contract_registry.rule.create",
+	"contract_registry.rule.read",
+	"contract_registry.rule.update",
+	"contract_registry.compatibility.scan",
+	"contract_registry.finding.read",
+	"contract_registry.finding.update",
+	"contract_registry.migration_note.create",
+	"contract_registry.migration_note.read",
+	"contract_registry.migration_note.update",
+	"contract_registry.report.create",
+	"contract_registry.report.read",
 	"response.draft",
 	"response.evaluate",
 	"response.verify",
@@ -829,6 +846,13 @@ low_allowed_actions := {
 	"visual.snapshot.read",
 	"visual.timeline.read",
 	"observability.read",
+	"contract_registry.resource.read",
+	"contract_registry.interface.read",
+	"contract_registry.snapshot.read",
+	"contract_registry.rule.read",
+	"contract_registry.finding.read",
+	"contract_registry.migration_note.read",
+	"contract_registry.report.read",
 	"lifecycle.policy.read",
 	"lifecycle.classify",
 	"lifecycle.classification.read",
@@ -1297,6 +1321,33 @@ decision := {
 	valid_risk
 	input.action_type == "observability.event.create"
 	observability_writer
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "contract_registry_read_allowed",
+	"constraints": ["source_code_is_source_of_truth", "no_source_mutation"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	contract_registry_read_action
+	contract_registry_permission
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "contract_registry_advisory_action_allowed",
+	"constraints": ["registry_indexes_only", "no_source_mutation", "no_code_generation"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	contract_registry_advisory_action
+	contract_registry_permission
+	not contract_registry_source_mutation_requested
 }
 
 decision := {
@@ -2830,6 +2881,7 @@ decision := {
 	not prompt_action
 	not belief_action
 	not registry_action
+	not contract_registry_action
 	not scheduler_action
 	not incident_action
 	not lifecycle_action
@@ -3554,6 +3606,90 @@ registry_action if {
 	startswith(input.action_type, "registry.")
 }
 
+contract_registry_action if {
+	startswith(input.action_type, "contract_registry.")
+}
+
+contract_registry_read_action if {
+	input.action_type == "contract_registry.resource.read"
+}
+
+contract_registry_read_action if {
+	input.action_type == "contract_registry.interface.read"
+}
+
+contract_registry_read_action if {
+	input.action_type == "contract_registry.snapshot.read"
+}
+
+contract_registry_read_action if {
+	input.action_type == "contract_registry.rule.read"
+}
+
+contract_registry_read_action if {
+	input.action_type == "contract_registry.finding.read"
+}
+
+contract_registry_read_action if {
+	input.action_type == "contract_registry.migration_note.read"
+}
+
+contract_registry_read_action if {
+	input.action_type == "contract_registry.report.read"
+}
+
+contract_registry_advisory_action if {
+	input.action_type == "contract_registry.resource.create"
+}
+
+contract_registry_advisory_action if {
+	input.action_type == "contract_registry.resource.update"
+}
+
+contract_registry_advisory_action if {
+	input.action_type == "contract_registry.snapshot.create"
+}
+
+contract_registry_advisory_action if {
+	input.action_type == "contract_registry.rule.create"
+}
+
+contract_registry_advisory_action if {
+	input.action_type == "contract_registry.rule.update"
+}
+
+contract_registry_advisory_action if {
+	input.action_type == "contract_registry.compatibility.scan"
+}
+
+contract_registry_advisory_action if {
+	input.action_type == "contract_registry.finding.update"
+}
+
+contract_registry_advisory_action if {
+	input.action_type == "contract_registry.migration_note.create"
+}
+
+contract_registry_advisory_action if {
+	input.action_type == "contract_registry.migration_note.update"
+}
+
+contract_registry_advisory_action if {
+	input.action_type == "contract_registry.report.create"
+}
+
+contract_registry_source_mutation_requested if {
+	input.context.source_mutated == true
+}
+
+contract_registry_source_mutation_requested if {
+	input.context.source_mutation_requested == true
+}
+
+contract_registry_source_mutation_requested if {
+	input.context.code_generated == true
+}
+
 registry_approval_action if {
 	input.action_type == "entity.merge.approve"
 }
@@ -3928,6 +4064,32 @@ visual_snapshot_create_permission if {
 
 observability_writer if {
 	dev_owner
+}
+
+contract_registry_permission if {
+	dev_owner
+}
+
+contract_registry_permission if {
+	input.context.actor_context.permissions[_] == input.action_type
+}
+
+contract_registry_permission if {
+	input.context.permissions[_] == input.action_type
+}
+
+contract_registry_permission if {
+	input.context.actor_context.permissions[_] == "contract_registry.read"
+	contract_registry_read_action
+}
+
+contract_registry_permission if {
+	input.context.actor_context.permissions[_] == "contract_registry.write"
+	contract_registry_advisory_action
+}
+
+contract_registry_permission if {
+	input.context.actor_context.permissions[_] == "operator"
 }
 
 lifecycle_permission if {

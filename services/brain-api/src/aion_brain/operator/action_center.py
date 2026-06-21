@@ -85,6 +85,7 @@ class ActionCenterService:
         generated.extend(self._critical_redaction_candidate_items(scope))
         generated.extend(self._blocked_purge_preview_items(scope))
         generated.extend(self._overdue_lifecycle_review_items(scope))
+        generated.extend(self._interface_drift_items(scope))
         stored: list[OperatorActionItem] = []
         for item in generated[:limit]:
             saved = self._repository.save_action_item(item)
@@ -271,6 +272,39 @@ class ActionCenterService:
                 metadata={"candidate_type": getattr(item, "candidate_type", "generic")},
             )
             for item in items
+        ]
+
+    def _interface_drift_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("contract_registry_repository")
+        list_findings = getattr(source, "list_findings", None)
+        if not callable(list_findings):
+            return []
+        try:
+            items = list_findings(status="open", limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="interface_drift",
+                source_id=_id_for(item, "drift_finding_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="registry",
+                severity=cast(OperatorSeverity, str(getattr(item, "severity", "medium"))),
+                title="Interface drift requires review.",
+                description="A contract compatibility scan found unresolved interface drift.",
+                recommended_action="review_contract_registry_drift",
+                runbook_ref="docs/contract-registry.md",
+                scope=scope or ["workspace:main"],
+                metadata={
+                    "finding_type": getattr(item, "finding_type", None),
+                    "interface_type": getattr(item, "interface_type", None),
+                    "breaking": getattr(item, "breaking", False),
+                    "source_records_mutated": False,
+                },
+            )
+            for item in items
+            if bool(getattr(item, "breaking", False))
+            or str(getattr(item, "severity", "")).lower() in {"high", "critical"}
         ]
 
     def _failed_explanation_items(self, scope: list[str]) -> list[OperatorActionItem]:

@@ -619,3 +619,26 @@ frontend code, shell tools, or repair systems.
 The SDK calls public Brain APIs only. It does not import `aion_brain`,
 database clients, object storage clients, source-system internals, frontend
 code, shell tools, or external archive services.
+
+## ContractsResource
+
+`client.contracts` supports:
+
+- `list_contracts(scope, contract_type=None, status=None, limit=100)`
+- `list_interfaces(scope, interface_type=None, source_system=None, status=None, limit=100)`
+- `create_snapshot(scope, snapshot_type="manual", trace_id=None)`
+- `get_snapshot(contract_snapshot_id, scope)`
+- `list_snapshots(scope, snapshot_type=None, status=None, limit=50)`
+- `create_rule(payload)`
+- `list_rules(scope, status=None, rule_type=None, limit=100)`
+- `seed_rules(scope, dry_run=True)`
+- `scan_compatibility(payload)`
+- `get_scan(compatibility_scan_id)`
+- `findings(status=None, severity=None, breaking=None, interface_type=None, limit=100)`
+- `dismiss_finding(drift_finding_id, reason)`
+- `migration_notes(scope, status=None, note_type=None, limit=100)`
+- `report(scope, trace_id=None)`
+
+The SDK calls public Contract Registry APIs only. It does not import
+`aion_brain`, read source files, mutate source contracts, generate code,
+execute migration steps, call external services, or expose raw secrets.

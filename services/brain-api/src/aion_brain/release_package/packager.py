@@ -57,6 +57,8 @@ class ReleasePackager:
         sbom_service: SBOMPlaceholderService | None = None,
         validator: ReleasePackageValidator | None = None,
         handoff_service: ReleaseHandoffService | None = None,
+        contract_registry_repository: object | None = None,
+        contract_registry_report_service: object | None = None,
         telemetry_service: object | None = None,
         root_dir: Path | None = None,
         settings: Settings | None = None,
@@ -83,8 +85,21 @@ class ReleasePackager:
             max_file_size_mb=self._settings.release_package_max_file_size_mb
         )
         self._handoff_service = handoff_service or ReleaseHandoffService()
+        self._contract_registry_repository = contract_registry_repository
+        self._contract_registry_report_service = contract_registry_report_service
         self._telemetry_service = telemetry_service
         self._audit_sink = audit_sink
+
+    def set_contract_registry_services(
+        self,
+        *,
+        repository: object | None = None,
+        report_service: object | None = None,
+    ) -> None:
+        """Attach Contract Registry summaries after kernel assembly."""
+
+        self._contract_registry_repository = repository
+        self._contract_registry_report_service = report_service
 
     def package(
         self,
@@ -250,6 +265,7 @@ class ReleasePackager:
                 if app is not None
                 else {"status": "warning", "message": "app_context_unavailable"},
             )
+            reports["contract_registry"] = self._contract_registry_summary(request.owner_scope)
         if request.include_policy_bundle:
             reports["policy_bundle"] = self._policy_bundle_report()
         if request.include_migration_baseline:
@@ -314,6 +330,21 @@ class ReleasePackager:
             except Exception as exc:
                 return {"status": "warning", "message": exc.__class__.__name__}
         return {"status": "warning", "message": "policy_bundle_service_unavailable"}
+
+    def _contract_registry_summary(self, scope: builtins.list[str]) -> dict[str, Any]:
+        latest_snapshot = _try_call(self._contract_registry_repository, "latest_snapshot")
+        latest_scan = _try_call(self._contract_registry_repository, "latest_scan")
+        report = _try_call(self._contract_registry_report_service, "generate", scope)
+        available = latest_snapshot is not None or latest_scan is not None or report is not None
+        return {
+            "available": available,
+            "status": "available" if available else "warning",
+            "snapshot": _snapshot_summary(latest_snapshot),
+            "compatibility_scan": _scan_summary(latest_scan),
+            "report": _report_summary(report),
+            "full_schemas_included": False,
+            "source_code_is_source_of_truth": True,
+        }
 
     def _release_baseline_report(self, request: ReleasePackageRequest) -> Any:
         from aion_brain.contracts.release_baseline import ReleaseBaselineRequest
@@ -595,6 +626,48 @@ def _artifact_type_for_generated(name: str) -> Any:
     if normalized == "source_manifest":
         return "manifest"
     return "report"
+
+
+def _snapshot_summary(value: Any) -> dict[str, Any]:
+    if not hasattr(value, "contract_snapshot_id"):
+        return {"available": False}
+    return {
+        "available": True,
+        "contract_snapshot_id": getattr(value, "contract_snapshot_id", None),
+        "status": getattr(value, "status", None),
+        "root_hash": getattr(value, "root_hash", None),
+        "contract_count": getattr(value, "contract_count", 0),
+        "interface_count": getattr(value, "interface_count", 0),
+        "created_at": str(getattr(value, "created_at", None)),
+    }
+
+
+def _scan_summary(value: Any) -> dict[str, Any]:
+    if not hasattr(value, "compatibility_scan_id"):
+        return {"available": False}
+    return {
+        "available": True,
+        "compatibility_scan_id": getattr(value, "compatibility_scan_id", None),
+        "status": getattr(value, "status", None),
+        "findings_count": getattr(value, "findings_count", 0),
+        "breaking_count": getattr(value, "breaking_count", 0),
+        "warning_count": getattr(value, "warning_count", 0),
+    }
+
+
+def _report_summary(value: Any) -> dict[str, Any]:
+    if not hasattr(value, "contract_report_id"):
+        return {"available": False}
+    return {
+        "available": True,
+        "contract_report_id": getattr(value, "contract_report_id", None),
+        "status": getattr(value, "status", None),
+        "active_breaking_findings": getattr(value, "active_breaking_findings", 0),
+        "active_warning_findings": getattr(value, "active_warning_findings", 0),
+        "missing_sdk_count": getattr(value, "missing_sdk_count", 0),
+        "missing_cli_count": getattr(value, "missing_cli_count", 0),
+        "missing_policy_count": getattr(value, "missing_policy_count", 0),
+    }
 
 
 def _is_relative_to(path: Path, parent: Path) -> bool:

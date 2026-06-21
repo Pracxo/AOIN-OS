@@ -17,6 +17,7 @@ from aion_sdk.cli.commands.backups import install_backup_commands
 from aion_sdk.cli.commands.beliefs import install_belief_commands
 from aion_sdk.cli.commands.concepts import install_concept_commands
 from aion_sdk.cli.commands.config import install_config_commands
+from aion_sdk.cli.commands.contracts import install_contract_commands
 from aion_sdk.cli.commands.decisions import install_decision_commands
 from aion_sdk.cli.commands.dialogue import install_dialogue_commands
 from aion_sdk.cli.commands.entities import install_entity_commands
@@ -573,6 +574,7 @@ install_notification_commands(app, get_client=_client, get_scope=_scope, render=
 install_scheduler_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_incident_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_registry_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_contract_commands(contracts_app, get_client=_client, get_scope=_scope, render=_render)
 install_lifecycle_commands(app, get_client=_client, get_scope=_scope, render=_render)
 
 

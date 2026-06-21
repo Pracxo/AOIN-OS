@@ -31,6 +31,19 @@ _QUEUE_SPECS: tuple[tuple[OperatorQueueType, str, str, tuple[str, ...]], ...] = 
     ("resilience_tests", "Resilience Tests", "resilience_service", ("list_test_runs", "list")),
     ("security_scans", "Security Scans", "security_service", ("list_scans", "list")),
     ("scenarios", "Scenarios", "scenario_service", ("list_runs", "list_scenarios", "list")),
+    (
+        "drift_findings",
+        "Interface Drift Findings",
+        "contract_registry_repository",
+        ("list_findings",),
+    ),
+    (
+        "migration_notes",
+        "Migration Notes",
+        "contract_registry_repository",
+        ("list_migration_notes",),
+    ),
+    ("compatibility_scans", "Compatibility Scans", "contract_registry_repository", ("list_scans",)),
     ("generic", "Dialogue Clarifications", "dialogue_service", ("list_pending",)),
     (
         "generic",
@@ -263,8 +276,10 @@ _PENDING_STATUSES = {
 }
 _OPEN_AS_PENDING_QUEUE_TYPES: set[OperatorQueueType] = {
     "broken_references",
+    "drift_findings",
     "incidents",
     "lifecycle_reviews",
+    "migration_notes",
     "orphaned_resources",
     "purge_previews",
     "redaction_candidates",

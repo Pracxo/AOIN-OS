@@ -62,6 +62,15 @@ class KernelDiagnostics:
         ("reference_validator_present", "reference_validator", "high"),
         ("registry_rebuilder_present", "registry_rebuilder", "medium"),
         ("registry_snapshot_service_present", "registry_snapshot_service", "medium"),
+        ("contract_registry_repository_present", "contract_registry_repository", "high"),
+        ("contract_scanner_present", "contract_scanner", "medium"),
+        ("interface_inventory_service_present", "interface_inventory_service", "high"),
+        ("contract_snapshot_service_present", "contract_snapshot_service", "high"),
+        ("compatibility_rule_service_present", "compatibility_rule_service", "medium"),
+        ("compatibility_scanner_present", "compatibility_scanner", "high"),
+        ("migration_note_service_present", "migration_note_service", "medium"),
+        ("contract_registry_report_service_present", "contract_registry_report_service", "medium"),
+        ("contract_registry_query_service_present", "contract_registry_query_service", "medium"),
         ("lifecycle_repository_present", "lifecycle_repository", "high"),
         ("lifecycle_policy_service_present", "lifecycle_policy_service", "high"),
         ("retention_classifier_present", "retention_classifier", "high"),
@@ -342,6 +351,7 @@ class KernelDiagnostics:
         checks.extend(self._run_supervision_checks(settings))
         checks.extend(self._notification_checks(settings))
         checks.extend(self._incident_checks(settings))
+        checks.extend(self._contract_registry_checks(settings))
         checks.extend(self._lifecycle_checks(settings))
         checks.extend(self._scheduler_checks(settings))
         checks.extend(self._entity_checks(settings))
@@ -945,6 +955,97 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Incident services are assembled.",
+            ),
+        ]
+
+    def _contract_registry_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "contract_registry_repository",
+                "contract_scanner",
+                "interface_inventory_service",
+                "contract_snapshot_service",
+                "compatibility_rule_service",
+                "compatibility_scanner",
+                "migration_note_service",
+                "contract_registry_report_service",
+                "contract_registry_query_service",
+            )
+        )
+        return [
+            self._result(
+                "contract_registry_enabled",
+                "contract_registry",
+                (
+                    "passed"
+                    if bool(getattr(settings, "contract_registry_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Contract Registry is enabled.",
+            ),
+            self._result(
+                "contract_snapshot_enabled",
+                "contract_registry",
+                (
+                    "passed"
+                    if bool(getattr(settings, "contract_snapshot_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Contract snapshot creation is enabled.",
+            ),
+            self._result(
+                "compatibility_scan_enabled",
+                "contract_registry",
+                (
+                    "passed"
+                    if bool(getattr(settings, "compatibility_scan_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Compatibility scanning is enabled.",
+            ),
+            self._result(
+                "interface_inventory_enabled",
+                "contract_registry",
+                (
+                    "passed"
+                    if bool(getattr(settings, "interface_inventory_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Interface inventory is enabled.",
+            ),
+            self._result(
+                "contract_registry_auto_snapshot_enabled",
+                "contract_registry",
+                (
+                    "warning"
+                    if bool(getattr(settings, "contract_registry_auto_snapshot_enabled", False))
+                    else "passed"
+                ),
+                "medium",
+                "Automatic contract snapshots are disabled by default.",
+            ),
+            self._result(
+                "compatibility_breaking_changes_fail_freeze",
+                "contract_registry",
+                (
+                    "passed"
+                    if bool(getattr(settings, "compatibility_breaking_changes_fail_freeze", True))
+                    else "warning"
+                ),
+                "high",
+                "Breaking compatibility findings fail the Freeze Gate.",
+            ),
+            self._result(
+                "contract_registry_services_present",
+                "contract_registry",
+                "passed" if services_present else "failed",
+                "high",
+                "Contract Registry services are assembled.",
             ),
         ]
 

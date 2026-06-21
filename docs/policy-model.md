@@ -120,6 +120,17 @@ AION core policy vocabulary stays generic:
 - `evidence.link`
 - `evidence.ground`
 - `evidence.delete`
+- `contract_registry.contract.read`
+- `contract_registry.interface.read`
+- `contract_registry.snapshot.create`
+- `contract_registry.snapshot.read`
+- `contract_registry.rule.create`
+- `contract_registry.rule.read`
+- `contract_registry.compatibility.scan`
+- `contract_registry.finding.read`
+- `contract_registry.finding.dismiss`
+- `contract_registry.migration_note.read`
+- `contract_registry.report.read`
 
 Semantic adapter status reads and TurboVec status checks use the generic
 `memory.retrieve` action. Semantic indexing, TurboVec rebuild, and TurboVec
@@ -129,6 +140,18 @@ vocabulary does not add vector-engine-specific or domain-specific actions.
 Domain policies will live outside Brain core later. Finance, trading, IT,
 legal, healthcare, HR, procurement, and other vertical rules must not be encoded
 in the core policy file.
+
+## Contract Registry Policy
+
+Contract Registry actions are generic control-plane actions. Reads are low
+risk. Snapshot creation and compatibility scans are medium-risk because they
+write advisory records, but they do not mutate source code. Finding dismissal is
+a governed metadata update only. Migration-note reads and reports are
+informational.
+
+Policy must fail closed. The registry must not self-authorize, generate source,
+execute migration steps, repair SDK or CLI methods, call external services, or
+add domain-specific compatibility rules.
 
 ## Fail Closed
 

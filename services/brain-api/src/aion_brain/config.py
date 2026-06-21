@@ -175,6 +175,62 @@ class Settings(BaseSettings):
             "registry_max_resources_per_rebuild",
         ),
     )
+    contract_registry_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CONTRACT_REGISTRY_ENABLED",
+            "contract_registry_enabled",
+        ),
+    )
+    contract_snapshot_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CONTRACT_SNAPSHOT_ENABLED",
+            "contract_snapshot_enabled",
+        ),
+    )
+    compatibility_scan_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_COMPATIBILITY_SCAN_ENABLED",
+            "compatibility_scan_enabled",
+        ),
+    )
+    interface_inventory_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_INTERFACE_INVENTORY_ENABLED",
+            "interface_inventory_enabled",
+        ),
+    )
+    contract_registry_auto_snapshot_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONTRACT_REGISTRY_AUTO_SNAPSHOT_ENABLED",
+            "contract_registry_auto_snapshot_enabled",
+        ),
+    )
+    compatibility_breaking_changes_fail_freeze: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_COMPATIBILITY_BREAKING_CHANGES_FAIL_FREEZE",
+            "compatibility_breaking_changes_fail_freeze",
+        ),
+    )
+    contract_registry_create_notifications_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONTRACT_REGISTRY_CREATE_NOTIFICATIONS_DEFAULT",
+            "contract_registry_create_notifications_default",
+        ),
+    )
+    contract_registry_max_interfaces_per_scan: int = Field(
+        default=100000,
+        validation_alias=AliasChoices(
+            "AION_CONTRACT_REGISTRY_MAX_INTERFACES_PER_SCAN",
+            "contract_registry_max_interfaces_per_scan",
+        ),
+    )
     lifecycle_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices("AION_LIFECYCLE_ENABLED", "lifecycle_enabled"),

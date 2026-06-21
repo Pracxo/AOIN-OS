@@ -23,11 +23,13 @@ class RuntimeConfigStatusService:
         *,
         feature_override_service: object,
         telemetry_service: object | None = None,
+        settings: object | None = None,
     ) -> None:
         self._repository = repository
         self._policy_adapter = policy_adapter
         self._feature_override_service = feature_override_service
         self._telemetry_service = telemetry_service
+        self._settings = settings
 
     def status(self, scope: list[str]) -> RuntimeConfigStatus:
         """Return effective runtime configuration status without secrets."""
@@ -62,10 +64,16 @@ class RuntimeConfigStatusService:
         effective_flags = getattr(self._feature_override_service, "effective_flags", None)
         if callable(effective_flags):
             try:
-                return dict(effective_flags(scope))
+                flags = dict(effective_flags(scope))
             except Exception:
-                return {}
-        return {}
+                flags = {}
+        else:
+            flags = {}
+        settings = getattr(self._repository, "_settings", None)
+        settings = settings or getattr(self, "_settings", None)
+        if settings is not None:
+            flags.update(_contract_registry_flags(settings))
+        return flags
 
     def _authorize(self, action_type: str, scope: list[str]) -> None:
         decision = self._policy_adapter.authorize(
@@ -86,3 +94,24 @@ class RuntimeConfigStatusService:
         )
         if not decision.allow:
             raise AIONPolicyDeniedException(decision.reason)
+
+
+def _contract_registry_flags(settings: object) -> dict[str, bool]:
+    return {
+        "contract_registry.enabled": bool(getattr(settings, "contract_registry_enabled", True)),
+        "contract_registry.snapshot_enabled": bool(
+            getattr(settings, "contract_snapshot_enabled", True)
+        ),
+        "contract_registry.compatibility_scan_enabled": bool(
+            getattr(settings, "compatibility_scan_enabled", True)
+        ),
+        "contract_registry.interface_inventory_enabled": bool(
+            getattr(settings, "interface_inventory_enabled", True)
+        ),
+        "contract_registry.auto_snapshot_enabled": bool(
+            getattr(settings, "contract_registry_auto_snapshot_enabled", False)
+        ),
+        "contract_registry.breaking_changes_fail_freeze": bool(
+            getattr(settings, "compatibility_breaking_changes_fail_freeze", True)
+        ),
+    }

@@ -475,3 +475,22 @@ previews, reviews, and reports. They do not mutate source records, execute
 archive, execute redaction, purge records, call object storage, call external
 services, expose hidden reasoning, print raw prompts, or add domain-specific
 retention behavior.
+
+## Contract Registry Commands
+
+- `aionctl contracts list`
+- `aionctl contracts interfaces`
+- `aionctl contracts snapshot`
+- `aionctl contracts snapshots`
+- `aionctl contracts rules`
+- `aionctl contracts rules seed`
+- `aionctl contracts scan`
+- `aionctl contracts findings`
+- `aionctl contracts migration-notes`
+- `aionctl contracts report`
+
+Contract commands call the SDK and public Brain APIs only. Scans default to
+`dry_run`. Commands do not mutate source records, generate code, repair SDK or
+CLI methods, execute migration steps, call external services, print raw
+prompts, expose hidden reasoning, expose raw headers, or add domain-specific
+compatibility logic.

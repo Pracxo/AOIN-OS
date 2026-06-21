@@ -82,6 +82,7 @@ class FreezeGateService:
         audit_integrity_ledger: object | None = None,
         audit_verifier: object | None = None,
         operator_readiness_service: object | None = None,
+        contract_registry_repository: object | None = None,
         audit_sink: object | None = None,
         telemetry_service: object | None = None,
         root_dir: Path | None = None,
@@ -111,10 +112,16 @@ class FreezeGateService:
         self._audit_integrity_ledger = audit_integrity_ledger
         self._audit_verifier = audit_verifier
         self._operator_readiness_service = operator_readiness_service
+        self._contract_registry_repository = contract_registry_repository
         self._audit_sink = audit_sink
         self._telemetry_service = telemetry_service
         self._root_dir = root_dir or Path(__file__).parents[5]
         self._settings = settings or get_settings()
+
+    def set_contract_registry_repository(self, repository: object | None) -> None:
+        """Attach Contract Registry after kernel assembly."""
+
+        self._contract_registry_repository = repository
 
     def run(self, request: FreezeGateRunRequest, *, app: object | None = None) -> FreezeGateRun:
         """Run the local freeze gate and persist the result."""
@@ -156,6 +163,30 @@ class FreezeGateService:
                     "contracts",
                     self._check_contract_hash_stable,
                     severity="high",
+                )
+            )
+            checks.append(
+                self._run_check(
+                    "contract_snapshot_available",
+                    "contracts",
+                    self._check_contract_snapshot_available,
+                    severity="high",
+                )
+            )
+            checks.append(
+                self._run_check(
+                    "compatibility_scan_passed",
+                    "contracts",
+                    self._check_compatibility_scan_passed,
+                    severity="high",
+                )
+            )
+            checks.append(
+                self._run_check(
+                    "no_active_breaking_interface_findings",
+                    "contracts",
+                    self._check_no_active_breaking_interface_findings,
+                    severity="critical",
                 )
             )
         if request.include_sdk_check:
@@ -508,6 +539,66 @@ class FreezeGateService:
             "status": "passed" if first == second else "failed",
             "message": "Contract hash is stable.",
             "details": {"hash": first},
+        }
+
+    def _check_contract_snapshot_available(self) -> dict[str, Any]:
+        latest = getattr(self._contract_registry_repository, "latest_snapshot", None)
+        snapshot = latest() if callable(latest) else None
+        return {
+            "status": "passed" if snapshot is not None else "warning",
+            "message": (
+                "Contract snapshot is available."
+                if snapshot is not None
+                else "No contract snapshot is available."
+            ),
+            "details": {
+                "contract_snapshot_id": getattr(snapshot, "contract_snapshot_id", None),
+                "root_hash": getattr(snapshot, "root_hash", None),
+            },
+        }
+
+    def _check_compatibility_scan_passed(self) -> dict[str, Any]:
+        latest = getattr(self._contract_registry_repository, "latest_scan", None)
+        scan = latest() if callable(latest) else None
+        status = getattr(scan, "status", None)
+        passed = status in {"passed", "warning", "dry_run"}
+        return {
+            "status": "passed" if passed else "warning",
+            "message": (
+                "Latest compatibility scan is acceptable."
+                if passed
+                else "No acceptable compatibility scan is available."
+            ),
+            "details": {
+                "compatibility_scan_id": getattr(scan, "compatibility_scan_id", None),
+                "status": status,
+                "breaking_count": getattr(scan, "breaking_count", 0),
+                "warning_count": getattr(scan, "warning_count", 0),
+            },
+        }
+
+    def _check_no_active_breaking_interface_findings(self) -> dict[str, Any]:
+        list_findings = getattr(self._contract_registry_repository, "list_findings", None)
+        findings = (
+            list_findings(status="open", breaking=True, limit=1000)
+            if callable(list_findings)
+            else []
+        )
+        fail_on_breaking = bool(
+            getattr(self._settings, "compatibility_breaking_changes_fail_freeze", True)
+        )
+        status = "failed" if findings and fail_on_breaking else "warning" if findings else "passed"
+        return {
+            "status": status,
+            "message": (
+                "No active breaking interface findings exist."
+                if not findings
+                else "Active breaking interface findings exist."
+            ),
+            "details": {
+                "breaking_count": len(findings),
+                "fail_on_breaking": fail_on_breaking,
+            },
         }
 
     def _check_sdk(self, scope: builtins.list[str]) -> dict[str, Any]:

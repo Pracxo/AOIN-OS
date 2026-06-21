@@ -41,6 +41,7 @@ _CARD_SPECS: tuple[tuple[str, str, OperatorCategory, str], ...] = (
     ("scheduler", "Temporal Scheduler", "scheduler", "scheduler_service"),
     ("incidents", "Open Incidents", "incidents", "incident_service"),
     ("registry", "Resource Registry", "registry", "registry_service"),
+    ("contract_registry", "Contract Registry", "registry", "contract_registry_service"),
     ("lifecycle", "Data Lifecycle", "lifecycle", "lifecycle_service"),
 )
 

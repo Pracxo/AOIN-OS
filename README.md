@@ -3126,3 +3126,48 @@ CLI examples:
 ```
 
 See `docs/adr/0064-data-lifecycle-retention-archive-preview.md`.
+
+## Contract Registry and Interface Drift
+
+AION v0.1 Contract Registry is a local, advisory interface-readiness layer. It
+indexes AION-owned contracts, API routes, SDK resources, CLI commands, policy
+actions, settings, visual telemetry vocabulary, and registry resource types. It
+creates snapshots, runs deterministic compatibility scans, records interface
+drift findings, generates informational migration notes, and produces contract
+readiness reports.
+
+The registry does not mutate source records, generate code, repair SDK or CLI
+methods, execute migration steps, call external services, expose hidden
+reasoning, print raw prompts, or add domain-specific compatibility logic.
+Source code remains the source of truth.
+
+Contract Registry endpoints:
+
+- `GET /brain/contracts/contracts`
+- `GET /brain/contracts/interfaces`
+- `POST /brain/contracts/snapshots`
+- `GET /brain/contracts/snapshots`
+- `GET /brain/contracts/snapshots/{contract_snapshot_id}`
+- `POST /brain/contracts/rules/seed-defaults`
+- `GET /brain/contracts/rules`
+- `POST /brain/contracts/compatibility/scan`
+- `GET /brain/contracts/compatibility/scans/{compatibility_scan_id}`
+- `GET /brain/contracts/findings`
+- `POST /brain/contracts/findings/{drift_finding_id}/dismiss`
+- `GET /brain/contracts/migration-notes`
+- `POST /brain/contracts/report`
+
+CLI examples:
+
+```bash
+./scripts/aionctl.sh contracts list
+./scripts/aionctl.sh contracts interfaces
+./scripts/aionctl.sh contracts snapshot
+./scripts/aionctl.sh contracts scan
+./scripts/aionctl.sh contracts findings
+./scripts/aionctl.sh contracts report
+```
+
+The Python SDK exposes the same surface through `client.contracts`.
+
+See `docs/adr/0065-contract-registry-interface-drift.md`.

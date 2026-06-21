@@ -80,6 +80,24 @@ node after soft delete.
 No UI implementation exists in v0.1. Visual telemetry is a Brain-owned data
 contract for future visualization work.
 
+## Contract Registry Projection
+
+Contract Registry telemetry projects interface readiness into the visual brain
+map. Contract snapshots, compatibility scans, interface drift findings,
+migration notes, and contract reports use frontend-agnostic node types:
+`contract_snapshot`, `compatibility_scan`, `interface_drift`,
+`migration_note`, and `contract_report`.
+
+Snapshot events should appear as source-of-truth inventory points. Compatibility
+scan events should appear as advisory gate activity. Breaking drift findings
+should appear as blocked or warning pulses depending on severity. Migration
+notes are informational nodes only; they must not imply that migration steps
+were executed.
+
+Projection payloads must remain redacted and generic. They must not include raw
+prompts, hidden reasoning, raw headers, provider payloads, secrets, generated
+source, or domain-specific interface logic.
+
 ## AION Brain Map
 
 The AION Brain Map is a backend projection of cognitive telemetry. It is

@@ -23,6 +23,10 @@ class ResourceScanner:
         self._providers = providers
         self.warnings: list[dict[str, object]] = []
 
+    def set_provider(self, source_system: str, provider: object) -> None:
+        """Add a local provider after kernel assembly order makes it available."""
+        self._providers[source_system] = provider
+
     def scan(
         self,
         resource_types: list[str],

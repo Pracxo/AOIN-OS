@@ -178,6 +178,25 @@ Future modules register capability manifests. AION Brain reads capability IDs,
 schemas, permissions, memory scopes, events, risk, and execution modes. It does
 not inspect or embed module internals.
 
+## Contract Registry and Interface Drift
+
+The Contract Registry is the local index of AION public and operator-facing
+interfaces. It inventories Pydantic contracts, FastAPI routes, SDK resources,
+CLI commands, OPA policy actions, environment settings, visual telemetry
+vocabulary, and registry resource types through deterministic scanners.
+
+Snapshots preserve point-in-time manifests and root hashes. Compatibility scans
+compare baseline and candidate snapshots with generic rules such as no removed
+routes, no removed SDK methods, no removed CLI commands, no removed policy
+actions, no removed settings, no removed telemetry events, no required-field
+additions, no visibility leaks, no secret schema, and no domain drift.
+
+The registry is advisory. It writes registry records, drift findings, migration
+notes, reports, audit/provenance events, visual telemetry, resource descriptors,
+operator queues, release-package summaries, and freeze-gate checks. It never
+mutates source records, generates code, repairs interfaces, executes migration
+steps, or calls external systems. Source code remains the source of truth.
+
 ## Module Bus and Runtime Gateway
 
 The Module Bus adds the controlled runtime boundary that sits after the
