@@ -249,3 +249,11 @@ Instructions for future Codex runs in this repository:
 - Contract Registry payloads must stay redacted and domain-neutral. Do not
   expose hidden reasoning, chain-of-thought, raw prompts, raw headers, provider
   payloads, secrets, or domain-specific compatibility rules.
+- Extension Registry intake is metadata only. Do not load code, install
+  packages, clone or download sources, register dynamic routes, activate
+  capabilities, create policy actions from manifests, call external services,
+  or run shell commands from extension registry services, SDK helpers, CLI
+  commands, telemetry, reports, or docs.
+- Extension manifests, package records, compatibility checks, reviews, and
+  install plans must stay redacted, generic, and non-executing. Install plans
+  must keep `executable=false` and `execution_allowed=false` in v0.1.

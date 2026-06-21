@@ -713,3 +713,38 @@ actions. Purge preview nodes represent blocked or warning impact previews, not
 deletion. Lifecycle projection remains backend-only and frontend-agnostic, and
 must not expose raw headers, hidden reasoning, raw prompts, secrets,
 source-system internals, or domain-specific retention logic.
+
+## Extension Registry Projection
+
+Extension Registry telemetry projects metadata intake and compatibility
+readiness into the Visual Brain Projection. Generic event types include:
+
+- `extension_package_registered`
+- `extension_manifest_validated`
+- `extension_compatibility_checked`
+- `extension_intake_started`
+- `extension_intake_completed`
+- `extension_review_recorded`
+- `extension_install_plan_created`
+
+Generic visual node types include:
+
+- `extension`
+- `extension_package`
+- `extension_manifest`
+- `extension_capability`
+- `extension_dependency`
+- `extension_compatibility`
+- `extension_review`
+- `extension_install_plan`
+
+The generic projection path is:
+
+`extension -> manifest -> compatibility -> review -> install plan`
+
+Blocked compatibility and unsafe runtime flags should project with higher
+intensity than ordinary metadata intake. Install-plan nodes represent future
+records only, not executable installation. Extension projection remains
+backend-only and frontend-agnostic, and must not expose source code payloads,
+package bytes, raw headers, hidden reasoning, raw prompts, provider payloads,
+secrets, external source metadata, or domain-specific module logic.

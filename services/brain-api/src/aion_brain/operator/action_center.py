@@ -86,6 +86,9 @@ class ActionCenterService:
         generated.extend(self._blocked_purge_preview_items(scope))
         generated.extend(self._overdue_lifecycle_review_items(scope))
         generated.extend(self._interface_drift_items(scope))
+        generated.extend(self._blocked_extension_package_items(scope))
+        generated.extend(self._pending_extension_review_items(scope))
+        generated.extend(self._high_risk_extension_declaration_items(scope))
         stored: list[OperatorActionItem] = []
         for item in generated[:limit]:
             saved = self._repository.save_action_item(item)
@@ -305,6 +308,110 @@ class ActionCenterService:
             for item in items
             if bool(getattr(item, "breaking", False))
             or str(getattr(item, "severity", "")).lower() in {"high", "critical"}
+        ]
+
+    def _blocked_extension_package_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("extension_registry_repository")
+        list_packages = getattr(source, "list_packages", None)
+        if not callable(list_packages):
+            return []
+        try:
+            items = list_packages(limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="extension_package",
+                source_id=_id_for(item, "extension_package_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="registry",
+                severity="high",
+                title="Extension package requires review.",
+                description=(
+                    "An extension metadata package is blocked, incompatible, or rejected."
+                ),
+                recommended_action="review_extension_package_metadata",
+                runbook_ref="docs/extensions.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={
+                    "extension_key": getattr(item, "extension_key", None),
+                    "status": getattr(item, "status", None),
+                    "compatibility_status": getattr(item, "compatibility_status", None),
+                    "metadata_only": True,
+                },
+            )
+            for item in items
+            if str(getattr(item, "status", "")).lower() in {"incompatible", "rejected"}
+            or str(getattr(item, "compatibility_status", "")).lower() in {"blocked", "failed"}
+        ]
+
+    def _pending_extension_review_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("extension_registry_repository")
+        list_packages = getattr(source, "list_packages", None)
+        if not callable(list_packages):
+            return []
+        try:
+            items = list_packages(review_status="pending", limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="extension_review",
+                source_id=_id_for(item, "extension_package_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="registry",
+                severity="medium",
+                title="Extension review is pending.",
+                description="An extension metadata package is waiting for operator review.",
+                recommended_action="record_extension_review",
+                runbook_ref="docs/extensions.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={
+                    "extension_key": getattr(item, "extension_key", None),
+                    "review_status": getattr(item, "review_status", None),
+                    "metadata_only": True,
+                },
+            )
+            for item in items
+        ]
+
+    def _high_risk_extension_declaration_items(
+        self,
+        scope: list[str],
+    ) -> list[OperatorActionItem]:
+        source = self._sources.get("extension_registry_repository")
+        list_declarations = getattr(source, "list_capability_declarations", None)
+        if not callable(list_declarations):
+            return []
+        try:
+            items = list_declarations(limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="extension_capability_declaration",
+                source_id=_id_for(item, "capability_declaration_id"),
+                trace_id=None,
+                category="registry",
+                severity="critical"
+                if getattr(item, "risk_level", None) == "critical"
+                else "high",
+                title="High-risk extension capability declaration.",
+                description=(
+                    "A declared extension capability is high risk and remains inactive."
+                ),
+                recommended_action="review_extension_capability_declaration",
+                runbook_ref="docs/extensions.md",
+                scope=scope or ["workspace:main"],
+                metadata={
+                    "capability_key": getattr(item, "capability_key", None),
+                    "risk_level": getattr(item, "risk_level", None),
+                    "requires_approval": getattr(item, "requires_approval", None),
+                    "requires_sandbox": getattr(item, "requires_sandbox", None),
+                },
+            )
+            for item in items
+            if str(getattr(item, "risk_level", "")).lower() in {"high", "critical"}
         ]
 
     def _failed_explanation_items(self, scope: list[str]) -> list[OperatorActionItem]:

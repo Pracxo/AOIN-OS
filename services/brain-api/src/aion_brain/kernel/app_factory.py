@@ -25,6 +25,7 @@ from aion_brain.api.events import router as events_router
 from aion_brain.api.evidence import router as evidence_router
 from aion_brain.api.execution import router as execution_router
 from aion_brain.api.explanations import router as explanations_router
+from aion_brain.api.extensions import router as extensions_router
 from aion_brain.api.freeze import router as freeze_router
 from aion_brain.api.goals import router as goals_router
 from aion_brain.api.graph_memory import router as graph_memory_router
@@ -134,6 +135,7 @@ ROUTERS = (
     notifications_router,
     incidents_router,
     contract_registry_router,
+    extensions_router,
     resource_registry_router,
     lifecycle_router,
     prompts_router,

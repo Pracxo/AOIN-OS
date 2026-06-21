@@ -396,6 +396,20 @@ allowed_actions := {
 	"contract_registry.migration_note.update",
 	"contract_registry.report.create",
 	"contract_registry.report.read",
+	"extension.package.create",
+	"extension.package.read",
+	"extension.package.update",
+	"extension.package.delete",
+	"extension.manifest.validate",
+	"extension.dependency.read",
+	"extension.capability_declaration.read",
+	"extension.compatibility.check",
+	"extension.intake",
+	"extension.review",
+	"extension.install_plan.create",
+	"extension.install_plan.read",
+	"extension.install_plan.update",
+	"extension.query",
 	"response.draft",
 	"response.evaluate",
 	"response.verify",
@@ -853,6 +867,12 @@ low_allowed_actions := {
 	"contract_registry.finding.read",
 	"contract_registry.migration_note.read",
 	"contract_registry.report.read",
+	"extension.package.read",
+	"extension.manifest.validate",
+	"extension.dependency.read",
+	"extension.capability_declaration.read",
+	"extension.install_plan.read",
+	"extension.query",
 	"lifecycle.policy.read",
 	"lifecycle.classify",
 	"lifecycle.classification.read",
@@ -1348,6 +1368,34 @@ decision := {
 	contract_registry_advisory_action
 	contract_registry_permission
 	not contract_registry_source_mutation_requested
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "extension_registry_read_allowed",
+	"constraints": ["metadata_only", "no_code_loading", "no_activation"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	extension_registry_read_action
+	extension_registry_permission
+	not extension_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "extension_registry_metadata_action_allowed",
+	"constraints": ["metadata_only", "no_code_loading", "no_activation", "no_external_sources"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	extension_registry_metadata_action
+	extension_registry_permission
+	not extension_unsafe_request
 }
 
 decision := {
@@ -2882,6 +2930,7 @@ decision := {
 	not belief_action
 	not registry_action
 	not contract_registry_action
+	not extension_registry_action
 	not scheduler_action
 	not incident_action
 	not lifecycle_action
@@ -3610,6 +3659,10 @@ contract_registry_action if {
 	startswith(input.action_type, "contract_registry.")
 }
 
+extension_registry_action if {
+	startswith(input.action_type, "extension.")
+}
+
 contract_registry_read_action if {
 	input.action_type == "contract_registry.resource.read"
 }
@@ -3687,6 +3740,86 @@ contract_registry_source_mutation_requested if {
 }
 
 contract_registry_source_mutation_requested if {
+	input.context.code_generated == true
+}
+
+extension_registry_read_action if {
+	input.action_type == "extension.package.read"
+}
+
+extension_registry_read_action if {
+	input.action_type == "extension.manifest.validate"
+}
+
+extension_registry_read_action if {
+	input.action_type == "extension.dependency.read"
+}
+
+extension_registry_read_action if {
+	input.action_type == "extension.capability_declaration.read"
+}
+
+extension_registry_read_action if {
+	input.action_type == "extension.install_plan.read"
+}
+
+extension_registry_read_action if {
+	input.action_type == "extension.query"
+}
+
+extension_registry_metadata_action if {
+	input.action_type == "extension.package.create"
+}
+
+extension_registry_metadata_action if {
+	input.action_type == "extension.package.update"
+}
+
+extension_registry_metadata_action if {
+	input.action_type == "extension.package.delete"
+}
+
+extension_registry_metadata_action if {
+	input.action_type == "extension.compatibility.check"
+}
+
+extension_registry_metadata_action if {
+	input.action_type == "extension.intake"
+}
+
+extension_registry_metadata_action if {
+	input.action_type == "extension.review"
+}
+
+extension_registry_metadata_action if {
+	input.action_type == "extension.install_plan.create"
+}
+
+extension_registry_metadata_action if {
+	input.action_type == "extension.install_plan.update"
+}
+
+extension_unsafe_request if {
+	input.context.source_mutated == true
+}
+
+extension_unsafe_request if {
+	input.context.source_mutation_requested == true
+}
+
+extension_unsafe_request if {
+	input.context.code_loading_requested == true
+}
+
+extension_unsafe_request if {
+	input.context.activation_requested == true
+}
+
+extension_unsafe_request if {
+	input.context.external_sources_requested == true
+}
+
+extension_unsafe_request if {
 	input.context.code_generated == true
 }
 
@@ -4089,6 +4222,38 @@ contract_registry_permission if {
 }
 
 contract_registry_permission if {
+	input.context.actor_context.permissions[_] == "operator"
+}
+
+extension_registry_permission if {
+	dev_owner
+}
+
+extension_registry_permission if {
+	input.context.actor_context.permissions[_] == input.action_type
+}
+
+extension_registry_permission if {
+	input.context.permissions[_] == input.action_type
+}
+
+extension_registry_permission if {
+	input.actor_id
+	input.requested_permissions[_] == input.action_type
+	input.security_scope[_] == sprintf("workspace:%s", [input.workspace_id])
+}
+
+extension_registry_permission if {
+	input.context.actor_context.permissions[_] == "extension.read"
+	extension_registry_read_action
+}
+
+extension_registry_permission if {
+	input.context.actor_context.permissions[_] == "extension.write"
+	extension_registry_metadata_action
+}
+
+extension_registry_permission if {
 	input.context.actor_context.permissions[_] == "operator"
 }
 

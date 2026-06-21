@@ -35,6 +35,7 @@ CRITICAL_FAILURE_CHECKS = {
     "runtime_config_validation_passed",
     "config_snapshot_created",
     "config_hash_available",
+    "extension_registry_safe",
     "resilience_status_healthy_or_only_optional_degraded",
     "audit_integrity_status_available",
     "audit_verification_passed_or_not_required",
@@ -83,6 +84,7 @@ class FreezeGateService:
         audit_verifier: object | None = None,
         operator_readiness_service: object | None = None,
         contract_registry_repository: object | None = None,
+        extension_registry_repository: object | None = None,
         audit_sink: object | None = None,
         telemetry_service: object | None = None,
         root_dir: Path | None = None,
@@ -113,6 +115,7 @@ class FreezeGateService:
         self._audit_verifier = audit_verifier
         self._operator_readiness_service = operator_readiness_service
         self._contract_registry_repository = contract_registry_repository
+        self._extension_registry_repository = extension_registry_repository
         self._audit_sink = audit_sink
         self._telemetry_service = telemetry_service
         self._root_dir = root_dir or Path(__file__).parents[5]
@@ -122,6 +125,11 @@ class FreezeGateService:
         """Attach Contract Registry after kernel assembly."""
 
         self._contract_registry_repository = repository
+
+    def set_extension_registry_repository(self, repository: object | None) -> None:
+        """Attach Extension Registry after kernel assembly."""
+
+        self._extension_registry_repository = repository
 
     def run(self, request: FreezeGateRunRequest, *, app: object | None = None) -> FreezeGateRun:
         """Run the local freeze gate and persist the result."""
@@ -198,6 +206,14 @@ class FreezeGateService:
                     severity="high",
                 )
             )
+        checks.append(
+            self._run_check(
+                "extension_registry_safe",
+                "extensions",
+                self._check_extension_registry_safe,
+                severity="critical",
+            )
+        )
         if request.include_migration_baseline:
             checks.append(
                 self._run_check(
@@ -598,6 +614,38 @@ class FreezeGateService:
             "details": {
                 "breaking_count": len(findings),
                 "fail_on_breaking": fail_on_breaking,
+            },
+        }
+
+    def _check_extension_registry_safe(self) -> dict[str, Any]:
+        list_packages = getattr(self._extension_registry_repository, "list_packages", None)
+        packages = list_packages(limit=1000) if callable(list_packages) else []
+        blocked = [
+            item
+            for item in packages
+            if getattr(item, "compatibility_status", None) in {"blocked", "failed"}
+            or getattr(item, "status", None) == "incompatible"
+        ]
+        unsafe_flags = {
+            "extension_code_loading_enabled": bool(
+                getattr(self._settings, "extension_code_loading_enabled", False)
+            ),
+            "extension_activation_enabled": bool(
+                getattr(self._settings, "extension_activation_enabled", False)
+            ),
+            "extension_external_sources_enabled": bool(
+                getattr(self._settings, "extension_external_sources_enabled", False)
+            ),
+        }
+        unsafe = [key for key, value in unsafe_flags.items() if value]
+        status = "failed" if blocked or unsafe else "passed"
+        return {
+            "status": status,
+            "message": "Extension registry remains metadata-only and compatible.",
+            "details": {
+                "package_count": len(packages),
+                "blocked_count": len(blocked),
+                "unsafe_flags": unsafe,
             },
         }
 

@@ -1461,3 +1461,31 @@ Lifecycle records feed operator cards, queues, action center items, visual
 telemetry, audit, provenance, SDK, and CLI surfaces through AION contracts. No
 surface may expose SQLAlchemy rows, raw headers, hidden reasoning, raw prompts,
 secrets, source-system internals, or domain-specific lifecycle behavior.
+
+## Extension Registry and Module Intake
+
+The Extension Registry is the Brain-owned metadata boundary for future modules.
+It records extension manifests, package metadata, declared capabilities,
+declared dependencies, compatibility checks, reviews, and non-executable future
+install plans.
+
+The extension path is:
+
+`manifest -> validation -> package metadata -> declarations -> compatibility -> review -> future install plan`
+
+The registry does not load code, install packages, run shell commands, clone or
+download sources, register dynamic routes, register active capabilities, create
+policy actions from manifests, call external services, or activate modules.
+Capability and dependency declarations remain descriptive until later governed
+tasks introduce execution and installation boundaries.
+
+Extension Registry records join existing AION infrastructure through adapters:
+Contract Registry and interface drift checks, Resource Registry descriptors,
+Capability Registry declarations, Policy Catalog actions, Runtime Config
+flags, Sandbox and Security Baseline gates, Audit and Provenance records,
+Operator queues, Notification hooks, Release Package summaries, Freeze Gate
+checks, and Visual Brain telemetry. These integrations remain records-first
+and policy-gated.
+
+Install plans are advisory records only in v0.1. They always keep
+`executable=false` and `execution_allowed=false`.

@@ -73,6 +73,7 @@ class RuntimeConfigStatusService:
         settings = settings or getattr(self, "_settings", None)
         if settings is not None:
             flags.update(_contract_registry_flags(settings))
+            flags.update(_extension_flags(settings))
         return flags
 
     def _authorize(self, action_type: str, scope: list[str]) -> None:
@@ -113,5 +114,32 @@ def _contract_registry_flags(settings: object) -> dict[str, bool]:
         ),
         "contract_registry.breaking_changes_fail_freeze": bool(
             getattr(settings, "compatibility_breaking_changes_fail_freeze", True)
+        ),
+    }
+
+
+def _extension_flags(settings: object) -> dict[str, bool]:
+    return {
+        "extensions.enabled": bool(getattr(settings, "extensions_enabled", True)),
+        "extension_registry.enabled": bool(
+            getattr(settings, "extension_registry_enabled", True)
+        ),
+        "extension_manifest_validation.enabled": bool(
+            getattr(settings, "extension_manifest_validation_enabled", True)
+        ),
+        "extension_compatibility_gate.enabled": bool(
+            getattr(settings, "extension_compatibility_gate_enabled", True)
+        ),
+        "extension_install_plans.enabled": bool(
+            getattr(settings, "extension_install_plans_enabled", True)
+        ),
+        "extension_code_loading.enabled": bool(
+            getattr(settings, "extension_code_loading_enabled", False)
+        ),
+        "extension_activation.enabled": bool(
+            getattr(settings, "extension_activation_enabled", False)
+        ),
+        "extension_external_sources.enabled": bool(
+            getattr(settings, "extension_external_sources_enabled", False)
         ),
     }

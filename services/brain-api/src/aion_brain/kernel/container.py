@@ -128,6 +128,18 @@ from aion_brain.explanations.repository import ExplanationRepository
 from aion_brain.explanations.trace_narrative import TraceNarrativeBuilder
 from aion_brain.explanations.verifier import ExplanationVerifier
 from aion_brain.explanations.why_not import WhyNotService
+from aion_brain.extensions import (
+    CapabilityDeclarationService,
+    DependencyDeclarationService,
+    ExtensionCompatibilityGate,
+    ExtensionIntakeService,
+    ExtensionPackageService,
+    ExtensionQueryService,
+    ExtensionRegistryRepository,
+    ExtensionReviewService,
+    InstallPlanService,
+    ManifestValidator,
+)
 from aion_brain.freeze.gate import FreezeGateService
 from aion_brain.goals.repository import GoalRepository
 from aion_brain.goals.service import GoalService
@@ -2590,6 +2602,64 @@ class KernelContainer:
             self.contract_registry_repository,
             self.policy_adapter,
         )
+        self.extension_registry_repository = ExtensionRegistryRepository(self.settings.database_url)
+        self.extension_manifest_validator = ManifestValidator(settings=self.settings)
+        self.extension_package_service = ExtensionPackageService(
+            self.extension_registry_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.extension_capability_service = CapabilityDeclarationService(
+            self.extension_registry_repository,
+            self.policy_adapter,
+        )
+        self.extension_dependency_service = DependencyDeclarationService(
+            self.extension_registry_repository,
+            self.policy_adapter,
+            contract_repository=self.contract_registry_repository,
+            policy_catalog=self.policy_catalog_service,
+            runtime_config_status=self.runtime_config_status_service,
+            settings=self.settings,
+        )
+        self.extension_install_plan_service = InstallPlanService(
+            self.extension_registry_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.extension_compatibility_gate = ExtensionCompatibilityGate(
+            self.extension_registry_repository,
+            self.policy_adapter,
+            manifest_validator=self.extension_manifest_validator,
+            dependency_service=self.extension_dependency_service,
+            capability_service=self.extension_capability_service,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.extension_intake_service = ExtensionIntakeService(
+            self.extension_registry_repository,
+            self.policy_adapter,
+            manifest_validator=self.extension_manifest_validator,
+            package_service=self.extension_package_service,
+            dependency_service=self.extension_dependency_service,
+            capability_service=self.extension_capability_service,
+            compatibility_gate=self.extension_compatibility_gate,
+            install_plan_service=self.extension_install_plan_service,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            notification_router=self.notification_router,
+            settings=self.settings,
+        )
+        self.extension_review_service = ExtensionReviewService(
+            self.extension_registry_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.extension_query_service = ExtensionQueryService(
+            self.extension_registry_repository,
+            self.policy_adapter,
+        )
         set_contract_registry_services = getattr(
             self.release_packager,
             "set_contract_registry_services",
@@ -2607,9 +2677,31 @@ class KernelContainer:
         )
         if callable(set_contract_registry_repository):
             set_contract_registry_repository(self.contract_registry_repository)
+        set_extension_registry_services = getattr(
+            self.release_packager,
+            "set_extension_registry_services",
+            None,
+        )
+        if callable(set_extension_registry_services):
+            set_extension_registry_services(repository=self.extension_registry_repository)
+        set_freeze_extension_registry = getattr(
+            self.freeze_gate_service,
+            "set_extension_registry_repository",
+            None,
+        )
+        if callable(set_freeze_extension_registry):
+            set_freeze_extension_registry(self.extension_registry_repository)
+        set_hardening_extension_registry = getattr(
+            self.hardening_gate_service,
+            "set_extension_registry_repository",
+            None,
+        )
+        if callable(set_hardening_extension_registry):
+            set_hardening_extension_registry(self.extension_registry_repository)
         set_resource_provider = getattr(self.resource_scanner, "set_provider", None)
         if callable(set_resource_provider):
             set_resource_provider("contract_registry", self.contract_registry_repository)
+            set_resource_provider("extension_registry", self.extension_registry_repository)
         self.lifecycle_repository = LifecycleRepository(self.settings.database_url)
         self.lifecycle_policy_service = LifecyclePolicyService(
             self.lifecycle_repository,
@@ -2707,6 +2799,7 @@ class KernelContainer:
             incident_service=self.incident_service,
             registry_service=self.registry_query_service,
             contract_registry_service=self.contract_registry_report_service,
+            extension_registry_service=self.extension_registry_repository,
             lifecycle_service=self.lifecycle_report_service,
         )
         self.operator_queue_summary_builder = QueueSummaryBuilder(
@@ -2767,6 +2860,7 @@ class KernelContainer:
             reference_validator=self.reference_validator,
             registry_rebuilder=self.registry_rebuilder,
             contract_registry_repository=self.contract_registry_repository,
+            extension_registry_repository=self.extension_registry_repository,
             archive_planner=self.archive_planner,
             redaction_planner=self.redaction_planner,
             purge_preview_service=self.purge_preview_service,
@@ -2818,6 +2912,7 @@ class KernelContainer:
             scheduler_service=self.scheduler_query_service,
             incident_service=self.incident_service,
             contract_registry_repository=self.contract_registry_repository,
+            extension_registry_repository=self.extension_registry_repository,
             archive_planner=self.archive_planner,
             redaction_planner=self.redaction_planner,
             purge_preview_service=self.purge_preview_service,
@@ -3796,6 +3891,46 @@ class KernelContainer:
                 "service",
                 "local",
             ),
+            (
+                "extension_registry_repository",
+                self.extension_registry_repository,
+                "repository",
+                "postgres",
+            ),
+            (
+                "extension_manifest_validator",
+                self.extension_manifest_validator,
+                "service",
+                "deterministic",
+            ),
+            ("extension_package_service", self.extension_package_service, "service", "local"),
+            (
+                "extension_capability_service",
+                self.extension_capability_service,
+                "service",
+                "local",
+            ),
+            (
+                "extension_dependency_service",
+                self.extension_dependency_service,
+                "service",
+                "local",
+            ),
+            (
+                "extension_compatibility_gate",
+                self.extension_compatibility_gate,
+                "service",
+                "deterministic",
+            ),
+            ("extension_intake_service", self.extension_intake_service, "service", "local"),
+            ("extension_review_service", self.extension_review_service, "service", "local"),
+            (
+                "extension_install_plan_service",
+                self.extension_install_plan_service,
+                "service",
+                "local",
+            ),
+            ("extension_query_service", self.extension_query_service, "service", "local"),
             ("lifecycle_repository", self.lifecycle_repository, "repository", "postgres"),
             ("lifecycle_policy_service", self.lifecycle_policy_service, "service", "local"),
             ("retention_classifier", self.retention_classifier, "service", "deterministic"),

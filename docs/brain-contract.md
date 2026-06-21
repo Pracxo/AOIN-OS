@@ -1336,3 +1336,39 @@ Lifecycle contracts must not mutate source records, execute archive, execute
 redaction, execute purge, call object stores, call external services, expose
 raw headers, hidden reasoning, raw prompts, provider payloads, secrets,
 SQLAlchemy rows, source-system internals, or domain-specific retention logic.
+
+## Extension Registry Contracts
+
+AION Brain owns these extension registry contracts:
+
+- `ExtensionManifest`
+- `ExtensionPackage`
+- `ExtensionCapabilityDeclaration`
+- `ExtensionDependencyDeclaration`
+- `ExtensionCompatibilityRequest`
+- `ExtensionCompatibilityRun`
+- `ExtensionIntakeRequest`
+- `ExtensionIntakeRun`
+- `ExtensionReviewRequest`
+- `ExtensionReview`
+- `ExtensionInstallPlan`
+- `ExtensionQuery`
+- `ExtensionQueryResult`
+
+`ExtensionManifest` is a metadata-only declaration. It may describe generic
+capabilities, dependencies, policy action names, settings, routes, events,
+resources, and sandbox requirements, but it must not include executable code,
+package bytes, raw secret access, unrestricted autonomy, external execution, or
+domain-specific workflow logic.
+
+`ExtensionPackage` stores manifest metadata after controlled intake.
+`ExtensionCapabilityDeclaration` and `ExtensionDependencyDeclaration` are
+descriptive records only and do not activate capabilities or install
+dependencies. `ExtensionCompatibilityRun` records local deterministic checks.
+`ExtensionReview` records operator review. `ExtensionInstallPlan` is a future
+install record and must keep `executable=false` and
+`execution_allowed=false`.
+
+Extension Registry contracts must not expose raw headers, hidden reasoning,
+raw prompts, provider payloads, secrets, SQLAlchemy rows, third-party module
+internals, source code payloads, or domain-specific module behavior.

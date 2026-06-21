@@ -69,3 +69,4 @@ Every architecture-changing Codex task must add or update an ADR.
 - [0063: Global Resource Registry and Link Integrity](0063-global-resource-registry-link-integrity.md) - Defines the registry index, resource URI spine, and non-repairing integrity checks.
 - [0064: Data Lifecycle Retention and Archive Preview](0064-data-lifecycle-retention-archive-preview.md) - Defines advisory retention classification, candidates, previews, and reports without source mutation.
 - [0065: Contract Registry and Interface Drift Gate](0065-contract-registry-interface-drift.md) - Defines contract inventory, snapshots, compatibility scans, and advisory interface drift records.
+- [0066: Extension Registry and Module Intake](0066-extension-registry-module-intake.md) - Defines metadata-only extension manifests, compatibility gates, reviews, and future install plans.

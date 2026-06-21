@@ -59,6 +59,12 @@ class HardeningGateService:
         self._telemetry_service = telemetry_service
         self._settings = settings or get_settings()
         self._audit_sink = audit_sink
+        self._extension_registry_repository: object | None = None
+
+    def set_extension_registry_repository(self, repository: object | None) -> None:
+        """Attach Extension Registry after kernel assembly."""
+
+        self._extension_registry_repository = repository
 
     def run(self, request: HardeningGateRequest, *, app: object | None = None) -> HardeningGateRun:
         """Run the local security hardening gate."""
@@ -116,6 +122,7 @@ class HardeningGateService:
             checks.append(self._backup_check())
         if request.include_release_package_check:
             checks.append(self._release_package_check())
+        checks.extend(self._extension_registry_checks())
         checks.extend(self._audit_integrity_checks())
         checks.append(self._control_catalog_check())
 
@@ -310,6 +317,55 @@ class HardeningGateService:
             "Release package safety checks are available.",
             "release",
         )
+
+    def _extension_registry_checks(self) -> builtins.list[dict[str, Any]]:
+        list_packages = getattr(self._extension_registry_repository, "list_packages", None)
+        packages = list_packages(limit=1000) if callable(list_packages) else []
+        blocked = [
+            item
+            for item in packages
+            if getattr(item, "compatibility_status", None) in {"blocked", "failed"}
+            or getattr(item, "status", None) == "incompatible"
+        ]
+        return [
+            _check(
+                "extension_code_loading_disabled",
+                (
+                    "failed"
+                    if self._settings.extension_code_loading_enabled
+                    else "passed"
+                ),
+                "Extension code loading is disabled.",
+                "extensions",
+            ),
+            _check(
+                "extension_activation_disabled",
+                (
+                    "failed"
+                    if self._settings.extension_activation_enabled
+                    else "passed"
+                ),
+                "Extension activation is disabled.",
+                "extensions",
+            ),
+            _check(
+                "extension_external_sources_disabled",
+                (
+                    "failed"
+                    if self._settings.extension_external_sources_enabled
+                    else "passed"
+                ),
+                "Extension external sources are disabled.",
+                "extensions",
+            ),
+            _check(
+                "no_blocked_extension_packages",
+                "failed" if blocked else "passed",
+                "Extension registry has no blocked package metadata.",
+                "extensions",
+                {"blocked_count": len(blocked), "package_count": len(packages)},
+            ),
+        ]
 
     def _audit_integrity_checks(self) -> builtins.list[dict[str, Any]]:
         return [

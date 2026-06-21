@@ -22,6 +22,7 @@ from aion_sdk.cli.commands.decisions import install_decision_commands
 from aion_sdk.cli.commands.dialogue import install_dialogue_commands
 from aion_sdk.cli.commands.entities import install_entity_commands
 from aion_sdk.cli.commands.explanations import install_explanation_commands
+from aion_sdk.cli.commands.extensions import install_extension_commands
 from aion_sdk.cli.commands.grounding import install_grounding_commands
 from aion_sdk.cli.commands.incidents import install_incident_commands
 from aion_sdk.cli.commands.instructions import install_instruction_commands
@@ -576,6 +577,7 @@ install_incident_commands(app, get_client=_client, get_scope=_scope, render=_ren
 install_registry_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_contract_commands(contracts_app, get_client=_client, get_scope=_scope, render=_render)
 install_lifecycle_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_extension_commands(app, get_client=_client, get_scope=_scope, render=_render)
 
 
 if __name__ == "__main__":

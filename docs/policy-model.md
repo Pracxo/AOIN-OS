@@ -1360,3 +1360,33 @@ external service calls, command execution, workflow execution, approval bypass,
 raw prompt disclosure, hidden reasoning disclosure, raw header export, secret
 export, or domain-specific retention logic. Unknown lifecycle actions fail
 closed.
+
+## Extension Registry Policy
+
+Generic extension actions:
+
+- `extension.package.create`
+- `extension.package.read`
+- `extension.package.update`
+- `extension.package.delete`
+- `extension.manifest.validate`
+- `extension.dependency.read`
+- `extension.capability_declaration.read`
+- `extension.compatibility.check`
+- `extension.intake`
+- `extension.review`
+- `extension.install_plan.create`
+- `extension.install_plan.read`
+- `extension.install_plan.update`
+- `extension.query`
+
+Extension reads and queries are scope-gated. Intake, package mutation,
+compatibility checks, reviews, and install-plan creation require scoped actors,
+operators, admins, or internal Brain services allowed by policy.
+
+Extension policy does not authorize code loading, package installation,
+external source retrieval, dynamic route registration, capability activation,
+policy action activation from manifests, command execution, workflow
+execution, approval bypass, raw prompt disclosure, hidden reasoning disclosure,
+raw header export, secret export, or domain-specific extension behavior.
+Unknown extension actions fail closed.

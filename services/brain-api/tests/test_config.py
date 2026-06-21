@@ -108,6 +108,15 @@ def test_settings_defaults_match_env_example(monkeypatch) -> None:
         "AION_EXTERNAL_NOTIFICATIONS_ENABLED",
         "AION_NOTIFICATION_LOCAL_DELIVERY_ONLY",
         "AION_NOTIFICATION_AUTO_CREATE_OPERATOR_ITEMS",
+        "AION_EXTENSIONS_ENABLED",
+        "AION_EXTENSION_REGISTRY_ENABLED",
+        "AION_EXTENSION_MANIFEST_VALIDATION_ENABLED",
+        "AION_EXTENSION_COMPATIBILITY_GATE_ENABLED",
+        "AION_EXTENSION_INSTALL_PLANS_ENABLED",
+        "AION_EXTENSION_CODE_LOADING_ENABLED",
+        "AION_EXTENSION_ACTIVATION_ENABLED",
+        "AION_EXTENSION_EXTERNAL_SOURCES_ENABLED",
+        "AION_EXTENSION_CREATE_NOTIFICATIONS_DEFAULT",
     ]:
         monkeypatch.delenv(key, raising=False)
 
@@ -224,6 +233,15 @@ def test_settings_defaults_match_env_example(monkeypatch) -> None:
     assert settings.external_notifications_enabled is False
     assert settings.notification_local_delivery_only is True
     assert settings.notification_auto_create_operator_items is True
+    assert settings.extensions_enabled is True
+    assert settings.extension_registry_enabled is True
+    assert settings.extension_manifest_validation_enabled is True
+    assert settings.extension_compatibility_gate_enabled is True
+    assert settings.extension_install_plans_enabled is True
+    assert settings.extension_code_loading_enabled is False
+    assert settings.extension_activation_enabled is False
+    assert settings.extension_external_sources_enabled is False
+    assert settings.extension_create_notifications_default is False
 
 
 def test_settings_read_environment_variables(monkeypatch) -> None:

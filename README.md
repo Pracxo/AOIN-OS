@@ -3171,3 +3171,50 @@ CLI examples:
 The Python SDK exposes the same surface through `client.contracts`.
 
 See `docs/adr/0065-contract-registry-interface-drift.md`.
+
+## Extension Registry and Module Intake
+
+AION v0.1 Extension Registry is a metadata-only intake layer for future
+modules. It validates local manifests, records package metadata, declared
+capabilities, declared dependencies, compatibility checks, reviews, and
+non-executable future install plans.
+
+The registry does not load code, install packages, run shell commands, clone or
+download sources, register dynamic routes, activate capabilities, create policy
+actions from manifests, call external services, or add domain-specific module
+logic. Install plans always keep `executable=false` and
+`execution_allowed=false` in v0.1.
+
+Extension Registry endpoints:
+
+- `POST /brain/extensions/manifests/validate`
+- `POST /brain/extensions/intake`
+- `GET /brain/extensions/intake-runs/{extension_intake_id}`
+- `GET /brain/extensions/packages/{extension_package_id}`
+- `POST /brain/extensions/query`
+- `POST /brain/extensions/packages/{extension_package_id}/archive`
+- `DELETE /brain/extensions/packages/{extension_package_id}`
+- `GET /brain/extensions/packages/{extension_package_id}/capabilities`
+- `GET /brain/extensions/packages/{extension_package_id}/dependencies`
+- `POST /brain/extensions/compatibility/check`
+- `GET /brain/extensions/compatibility/{extension_compatibility_id}`
+- `POST /brain/extensions/packages/{extension_package_id}/review`
+- `GET /brain/extensions/reviews`
+- `POST /brain/extensions/packages/{extension_package_id}/install-plan`
+- `GET /brain/extensions/install-plans/{install_plan_id}`
+- `GET /brain/extensions/install-plans`
+
+CLI examples:
+
+```bash
+./scripts/aionctl.sh extensions validate --manifest-file ./manifest.json
+./scripts/aionctl.sh extensions intake --manifest-file ./manifest.json
+./scripts/aionctl.sh extensions query
+./scripts/aionctl.sh extensions compatibility-check extension-package-1
+./scripts/aionctl.sh extensions install-plan extension-package-1
+```
+
+The Python SDK exposes the same surface through `client.extensions`.
+
+See `docs/extensions.md` and
+`docs/adr/0066-extension-registry-module-intake.md`.

@@ -44,6 +44,30 @@ _QUEUE_SPECS: tuple[tuple[OperatorQueueType, str, str, tuple[str, ...]], ...] = 
         ("list_migration_notes",),
     ),
     ("compatibility_scans", "Compatibility Scans", "contract_registry_repository", ("list_scans",)),
+    (
+        "extension_packages",
+        "Extension Packages",
+        "extension_registry_repository",
+        ("list_packages",),
+    ),
+    (
+        "extension_reviews",
+        "Extension Reviews",
+        "extension_registry_repository",
+        ("list_reviews",),
+    ),
+    (
+        "extension_compatibility",
+        "Extension Compatibility",
+        "extension_registry_repository",
+        ("list_compatibility_runs",),
+    ),
+    (
+        "extension_install_plans",
+        "Extension Install Plans",
+        "extension_registry_repository",
+        ("list_install_plans",),
+    ),
     ("generic", "Dialogue Clarifications", "dialogue_service", ("list_pending",)),
     (
         "generic",

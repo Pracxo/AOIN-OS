@@ -231,6 +231,66 @@ class Settings(BaseSettings):
             "contract_registry_max_interfaces_per_scan",
         ),
     )
+    extensions_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_EXTENSIONS_ENABLED", "extensions_enabled"),
+    )
+    extension_registry_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_EXTENSION_REGISTRY_ENABLED",
+            "extension_registry_enabled",
+        ),
+    )
+    extension_manifest_validation_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_EXTENSION_MANIFEST_VALIDATION_ENABLED",
+            "extension_manifest_validation_enabled",
+        ),
+    )
+    extension_compatibility_gate_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_EXTENSION_COMPATIBILITY_GATE_ENABLED",
+            "extension_compatibility_gate_enabled",
+        ),
+    )
+    extension_install_plans_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_EXTENSION_INSTALL_PLANS_ENABLED",
+            "extension_install_plans_enabled",
+        ),
+    )
+    extension_code_loading_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_EXTENSION_CODE_LOADING_ENABLED",
+            "extension_code_loading_enabled",
+        ),
+    )
+    extension_activation_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_EXTENSION_ACTIVATION_ENABLED",
+            "extension_activation_enabled",
+        ),
+    )
+    extension_external_sources_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_EXTENSION_EXTERNAL_SOURCES_ENABLED",
+            "extension_external_sources_enabled",
+        ),
+    )
+    extension_create_notifications_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_EXTENSION_CREATE_NOTIFICATIONS_DEFAULT",
+            "extension_create_notifications_default",
+        ),
+    )
     lifecycle_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices("AION_LIFECYCLE_ENABLED", "lifecycle_enabled"),
