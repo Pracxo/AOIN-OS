@@ -62,3 +62,4 @@ Every architecture-changing Codex task must add or update an ADR.
 - [0056: Prompt Packet and Model Input Governance](0056-prompt-packet-model-input-governance.md) - Defines provider-neutral prompt packets, boundary checks, injection detection, and model input manifests.
 - [0057: Model Output Governance](0057-model-output-governance.md) - Defines redacted model output intake, parsing, response candidates, and tool-intent capture.
 - [0058: Action Proposal Broker and Execution Handoff Gate](0058-action-proposal-broker-execution-handoff.md) - Defines reviewed action proposals and explicit dry-run handoff gates.
+- [0059: Run Supervision, Cancellation Gate, Timeout Policy, and Compensation Planner](0059-run-supervision-cancellation-compensation.md) - Defines generic run observation, manual control requests, timeout detection, and non-executing compensation plans.

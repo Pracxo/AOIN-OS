@@ -353,3 +353,19 @@ sources, expose raw prompts, or expose chain-of-thought.
 Prompt commands call the SDK and public Brain APIs only. Preview defaults to
 safe redaction. Commands do not print raw rendered prompts, hidden reasoning,
 provider payloads, raw secrets, or domain prompt packs.
+
+## Run Supervision Commands
+
+- `aionctl run-supervision runs`
+- `aionctl run-supervision sample`
+- `aionctl run-supervision sample-many`
+- `aionctl run-supervision control request`
+- `aionctl run-supervision control handoff`
+- `aionctl run-supervision timeout-policies`
+- `aionctl run-supervision compensation propose`
+- `aionctl run-supervision compensation list`
+- `aionctl run-supervision report`
+
+Run supervision commands call the SDK and public Brain APIs only. Control
+handoff defaults to dry-run. Timeout policy evaluation does not auto-cancel.
+Compensation planning and conversion do not execute actions.

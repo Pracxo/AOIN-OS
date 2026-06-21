@@ -73,6 +73,10 @@ class ActionCenterService:
         generated.extend(self._high_risk_action_proposal_items(scope))
         generated.extend(self._approval_waiting_action_proposal_items(scope))
         generated.extend(self._blocked_handoff_items())
+        generated.extend(self._stalled_run_supervision_items(scope))
+        generated.extend(self._failed_run_supervision_items(scope))
+        generated.extend(self._pending_run_control_items())
+        generated.extend(self._compensation_plan_items(scope))
         stored: list[OperatorActionItem] = []
         for item in generated[:limit]:
             saved = self._repository.save_action_item(item)
@@ -569,6 +573,134 @@ class ActionCenterService:
                     "status": getattr(item, "status", "blocked"),
                     "target_system": getattr(item, "target_system", None),
                     "blocker_refs": getattr(item, "blocker_refs", []),
+                },
+            )
+            for item in items
+        ]
+
+    def _stalled_run_supervision_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("run_supervision_service")
+        query = getattr(source, "query", None)
+        if not callable(query):
+            return []
+        try:
+            items = query(scope=scope, stalled=True, limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "run_supervision_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity="high",
+                title="Supervised run appears stalled.",
+                description="A supervised run needs operator review before any control request.",
+                recommended_action="review_stalled_run",
+                runbook_ref="docs/adr/0059-run-supervision-cancellation-compensation.md",
+                scope=getattr(item, "owner_scope", scope) or scope,
+                metadata={
+                    "status": getattr(item, "status", "stalled"),
+                    "target_system": getattr(item, "target_system", None),
+                    "current_status": getattr(item, "current_status", None),
+                },
+            )
+            for item in items
+        ]
+
+    def _failed_run_supervision_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("run_supervision_service")
+        query = getattr(source, "query", None)
+        if not callable(query):
+            return []
+        try:
+            failed = query(scope=scope, status="failed", limit=100)
+            timed_out = query(scope=scope, status="timed_out", limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "run_supervision_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity="high",
+                title="Supervised run needs follow-up.",
+                description=(
+                    "A supervised run failed or timed out; create a control request "
+                    "or compensation plan explicitly."
+                ),
+                recommended_action="review_supervised_run",
+                runbook_ref="docs/adr/0059-run-supervision-cancellation-compensation.md",
+                scope=getattr(item, "owner_scope", scope) or scope,
+                metadata={
+                    "status": getattr(item, "status", "failed"),
+                    "target_system": getattr(item, "target_system", None),
+                },
+            )
+            for item in [*failed, *timed_out]
+        ]
+
+    def _pending_run_control_items(self) -> list[OperatorActionItem]:
+        source = self._sources.get("run_control_service")
+        list_requests = getattr(source, "list_requests", None)
+        if not callable(list_requests):
+            return []
+        try:
+            items = [
+                *list_requests(status="requested", limit=100),
+                *list_requests(status="waiting_for_approval", limit=100),
+            ]
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "run_control_request_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity="medium",
+                title="Run control request awaits review.",
+                description="A manual control request is pending and does not execute itself.",
+                recommended_action="review_run_control_request",
+                runbook_ref="docs/adr/0059-run-supervision-cancellation-compensation.md",
+                scope=["workspace:main"],
+                metadata={
+                    "status": getattr(item, "status", "requested"),
+                    "control_type": getattr(item, "control_type", None),
+                    "requested_mode": getattr(item, "requested_mode", None),
+                },
+            )
+            for item in items
+        ]
+
+    def _compensation_plan_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("compensation_planner")
+        list_plans = getattr(source, "list_plans", None)
+        if not callable(list_plans):
+            return []
+        try:
+            items = list_plans(scope=scope, status="proposed", limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "compensation_plan_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity="medium",
+                title="Compensation plan awaits approval.",
+                description=(
+                    "A compensation plan can be reviewed or explicitly converted "
+                    "to action proposals."
+                ),
+                recommended_action="review_compensation_plan",
+                runbook_ref="docs/adr/0059-run-supervision-cancellation-compensation.md",
+                scope=getattr(item, "owner_scope", scope) or scope,
+                metadata={
+                    "status": getattr(item, "status", "proposed"),
+                    "plan_type": getattr(item, "plan_type", None),
                 },
             )
             for item in items

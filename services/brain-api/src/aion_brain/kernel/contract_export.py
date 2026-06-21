@@ -45,6 +45,11 @@ from aion_brain.contracts.compatibility import (
     ReleaseArtifactManifest,
     SDKCompatibilityReport,
 )
+from aion_brain.contracts.compensation import (
+    CompensationPlan,
+    CompensationPlanCreateRequest,
+    CompensationStep,
+)
 from aion_brain.contracts.context import ContextPacket
 from aion_brain.contracts.events import AIONEvent
 from aion_brain.contracts.evidence import EvidenceRecord
@@ -179,6 +184,16 @@ from aion_brain.contracts.release_package import (
 from aion_brain.contracts.replay import ReplayRequest
 from aion_brain.contracts.retrieval import RetrievalRequest
 from aion_brain.contracts.risk import RiskAssessment, RiskAssessmentRequest
+from aion_brain.contracts.run_control import RunControlRequest, RunControlRequestCreateRequest
+from aion_brain.contracts.run_supervision import (
+    RunStatusSample,
+    RunSupervisionCreateRequest,
+    RunSupervisionRecord,
+    RunSupervisionReport,
+    RunSupervisionReportRequest,
+    RunTargetRef,
+    RunTimeoutPolicy,
+)
 from aion_brain.contracts.scenarios import (
     DemoFixture,
     DemoFixtureLoadRequest,
@@ -298,6 +313,18 @@ CORE_CONTRACTS: tuple[type[BaseModel], ...] = (
     ActionProposalQueryResult,
     ExecutionHandoffRequest,
     ExecutionHandoff,
+    RunTargetRef,
+    RunSupervisionRecord,
+    RunSupervisionCreateRequest,
+    RunStatusSample,
+    RunControlRequest,
+    RunControlRequestCreateRequest,
+    RunTimeoutPolicy,
+    CompensationPlan,
+    CompensationStep,
+    CompensationPlanCreateRequest,
+    RunSupervisionReport,
+    RunSupervisionReportRequest,
     ModelBudgetRecord,
     ModelUsageRecord,
     ModelProviderHealth,

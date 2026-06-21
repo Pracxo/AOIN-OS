@@ -182,6 +182,24 @@ _QUEUE_SPECS: tuple[tuple[OperatorQueueType, str, str, tuple[str, ...]], ...] = 
         "tool_intent_review_service",
         ("list_reviews",),
     ),
+    (
+        "generic",
+        "Supervised Runs",
+        "run_supervision_service",
+        ("query",),
+    ),
+    (
+        "generic",
+        "Run Control Requests",
+        "run_control_service",
+        ("list_requests",),
+    ),
+    (
+        "generic",
+        "Compensation Plans",
+        "compensation_planner",
+        ("list_plans",),
+    ),
 )
 
 _RUNNING_STATUSES = {"running", "processing", "sending", "in_progress", "active"}
@@ -234,7 +252,7 @@ class QueueSummaryBuilder:
                 metadata={"available": False, "scope": scope},
             )
         try:
-            items = _list_items(provider, methods, scope)
+            items = _list_items(provider_key, provider, methods, scope)
         except Exception as exc:
             return _summary(
                 queue_type,
@@ -294,7 +312,9 @@ def _summary(
     )
 
 
-def _list_items(provider: object, methods: tuple[str, ...], scope: list[str]) -> list[object]:
+def _list_items(
+    provider_key: str, provider: object, methods: tuple[str, ...], scope: list[str]
+) -> list[object]:
     for name in methods:
         method = getattr(provider, name, None)
         if callable(method):
@@ -328,12 +348,16 @@ def _list_items(provider: object, methods: tuple[str, ...], scope: list[str]) ->
                     pass
             if name == "query":
                 try:
-                    from aion_brain.contracts.action_proposals import ActionProposalQuery
+                    if provider_key == "action_proposal_service":
+                        from aion_brain.contracts.action_proposals import ActionProposalQuery
 
-                    result = cast(Any, method)(
-                        ActionProposalQuery(scope=scope or ["workspace:main"], limit=100)
+                        result = cast(Any, method)(
+                            ActionProposalQuery(scope=scope or ["workspace:main"], limit=100)
+                        )
+                        return list(getattr(result, "proposals", []) or [])
+                    return list(
+                        cast(Any, method)(scope=scope or ["workspace:main"], limit=100) or []
                     )
-                    return list(getattr(result, "proposals", []) or [])
                 except (ImportError, TypeError):
                     pass
             return _call_list(method, scope)

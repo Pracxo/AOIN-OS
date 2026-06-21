@@ -448,3 +448,30 @@ clients, or frontend code.
 The SDK calls public Brain APIs only. It does not import `aion_brain`, model
 providers, provider prompt SDKs, database clients, frontend code, or external
 prompt optimization services.
+
+## RunSupervisionResource
+
+`client.run_supervision` supports:
+
+- `create_run(payload)`
+- `get_run(run_supervision_id, scope)`
+- `list_runs(scope, target_system=None, status=None, stalled=None, limit=100)`
+- `sample(run_supervision_id, scope)`
+- `sample_many(scope, status="active", limit=100)`
+- `archive(run_supervision_id, reason)`
+- `create_control_request(payload)`
+- `list_control_requests(run_supervision_id=None, status=None, control_type=None, limit=100)`
+- `handoff_control(run_control_request_id, approval_present=False)`
+- `create_timeout_policy(payload)`
+- `list_timeout_policies(scope, status=None, target_system=None, run_type=None)`
+- `create_compensation_plan(payload)`
+- `propose_compensation(run_supervision_id, trigger_reason)`
+- `get_compensation_plan(compensation_plan_id, scope)`
+- `list_compensation_plans(scope, status=None, run_supervision_id=None, limit=100)`
+- `approve_compensation_plan(compensation_plan_id, reason, approval_present=False)`
+- `convert_compensation_to_action_proposals(compensation_plan_id, reason, approval_present=False)`
+- `create_report(payload)`
+
+The SDK calls public Brain APIs only. It does not import `aion_brain`, target
+subsystem internals, database clients, provider SDKs, frontend code, or
+external orchestration clients.

@@ -1294,3 +1294,27 @@ The action path is:
 All public APIs return AION-owned contracts and never expose target service
 internals, raw provider output, hidden reasoning, raw prompts, raw headers,
 secrets, SQLAlchemy rows, or domain-specific action logic.
+
+## Run Supervision and Control
+
+Run Supervision is the Brain-owned observation layer for governed target runs.
+It registers supervised runs, samples target status through local adapters,
+detects stalled or timed-out records, creates manual control requests, prepares
+non-executing compensation plans, and generates operator reports.
+
+Run supervision differs from execution. Target systems remain authoritative for
+their own lifecycle state and control semantics. Supervision stores
+`RunSupervisionRecord` metadata, `RunStatusSample` observations, timeout policy
+metadata, `RunControlRequest` records, `CompensationPlan` records, and
+`RunSupervisionReport` summaries. It does not shell out, call external systems,
+force-cancel target runs, execute compensation steps, or mutate target state
+outside explicit governed target APIs.
+
+The supervision path is:
+
+`handoff / command / workflow -> supervised run -> status sample -> control request / compensation plan -> operator review`
+
+Control requests are dry-run by default. Timeout policies create blockers or
+operator action items only. Compensation plans may be converted to action
+proposals through an explicit API, but the plans and steps do not execute
+themselves.

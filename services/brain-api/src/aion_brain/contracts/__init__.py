@@ -74,6 +74,11 @@ from aion_brain.contracts.compatibility import (
     ReleaseArtifactManifest,
     SDKCompatibilityReport,
 )
+from aion_brain.contracts.compensation import (
+    CompensationPlan,
+    CompensationPlanCreateRequest,
+    CompensationStep,
+)
 from aion_brain.contracts.concepts import ConceptArchiveRequest, ConceptCreateRequest, ConceptRecord
 from aion_brain.contracts.confidence import (
     ConfidenceCalibration,
@@ -309,6 +314,16 @@ from aion_brain.contracts.retrieval import (
     RetrievedContextItem,
 )
 from aion_brain.contracts.risk import RiskAssessment, RiskAssessmentRequest
+from aion_brain.contracts.run_control import RunControlRequest, RunControlRequestCreateRequest
+from aion_brain.contracts.run_supervision import (
+    RunStatusSample,
+    RunSupervisionCreateRequest,
+    RunSupervisionRecord,
+    RunSupervisionReport,
+    RunSupervisionReportRequest,
+    RunTargetRef,
+    RunTimeoutPolicy,
+)
 from aion_brain.contracts.scenarios import (
     DemoFixture,
     DemoFixtureLoadRequest,
@@ -452,6 +467,9 @@ __all__ = [
     "CognitiveCycleTemplate",
     "CommandDispatchRequest",
     "CommandDispatchResult",
+    "CompensationPlan",
+    "CompensationPlanCreateRequest",
+    "CompensationStep",
     "CompatibilityMatrix",
     "ConfidenceCalibration",
     "ConfidenceCalibrationRequest",
@@ -644,6 +662,15 @@ __all__ = [
     "ReferenceLinkCreateRequest",
     "RiskAssessment",
     "RiskAssessmentRequest",
+    "RunControlRequest",
+    "RunControlRequestCreateRequest",
+    "RunStatusSample",
+    "RunSupervisionCreateRequest",
+    "RunSupervisionRecord",
+    "RunSupervisionReport",
+    "RunSupervisionReportRequest",
+    "RunTargetRef",
+    "RunTimeoutPolicy",
     "RiskGuardrailEvaluation",
     "RiskGuardrailEvaluationRequest",
     "RunLevelRecord",

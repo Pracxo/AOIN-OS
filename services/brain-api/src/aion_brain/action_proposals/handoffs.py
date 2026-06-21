@@ -12,6 +12,7 @@ from aion_brain.contracts.commands import CommandDispatchRequest, CommandTargetT
 from aion_brain.contracts.cycles import CognitiveCycleRunRequest
 from aion_brain.contracts.execution_handoffs import ExecutionHandoff, ExecutionHandoffRequest
 from aion_brain.contracts.modules import CapabilityInvocationRequest
+from aion_brain.contracts.run_supervision import RunSupervisionCreateRequest, RunType
 from aion_brain.contracts.sandbox import SandboxRunRequest, SandboxRunTargetType
 from aion_brain.contracts.scopes import ActorContext
 from aion_brain.contracts.workflows import WorkflowRunRequest
@@ -40,6 +41,7 @@ class ExecutionHandoffService:
         telemetry_service: object | None = None,
         audit_sink: object | None = None,
         provenance_service: object | None = None,
+        run_supervision_service: object | None = None,
         settings: object | None = None,
         actor_context: ActorContext | None = None,
     ) -> None:
@@ -59,6 +61,7 @@ class ExecutionHandoffService:
         self._telemetry_service = telemetry_service
         self._audit_sink = audit_sink
         self._provenance_service = provenance_service
+        self._run_supervision_service = run_supervision_service
         self._settings = settings
         self._actor_context = actor_context or ActorContext()
 
@@ -80,9 +83,14 @@ class ExecutionHandoffService:
             telemetry_service=self._telemetry_service,
             audit_sink=self._audit_sink,
             provenance_service=self._provenance_service,
+            run_supervision_service=self._run_supervision_service,
             settings=self._settings,
             actor_context=actor_context,
         )
+
+    def set_run_supervision_service(self, run_supervision_service: object | None) -> None:
+        """Attach run supervision after kernel assembly."""
+        self._run_supervision_service = run_supervision_service
 
     def handoff(self, request: ExecutionHandoffRequest) -> ExecutionHandoff:
         """Create a handoff record. Dry-run does not call target services."""
@@ -193,6 +201,11 @@ class ExecutionHandoffService:
                     update={"status": "handed_off", "updated_at": datetime.now(UTC)}
                 ),
             )
+        if stored.status == "handed_off" or (
+            stored.status == "dry_run"
+            and bool(stored.metadata.get("create_supervision_for_dry_run", False))
+        ):
+            stored = self._maybe_create_supervision(stored, proposal)
         self._record_audit("execution_handoff_created", stored.execution_handoff_id)
         self._record_provenance(
             proposal.action_proposal_id, stored.execution_handoff_id, "handed_off_as"
@@ -211,6 +224,49 @@ class ExecutionHandoffService:
             payload={"status": stored.status, "target_system": stored.target_system},
         )
         return stored
+
+    def _maybe_create_supervision(
+        self, handoff: ExecutionHandoff, proposal: ActionProposal
+    ) -> ExecutionHandoff:
+        create = getattr(self._run_supervision_service, "create", None)
+        if not callable(create):
+            return handoff
+        target_run_id = handoff.target_run_id or handoff.target_request_id
+        try:
+            record = create(
+                RunSupervisionCreateRequest(
+                    trace_id=handoff.trace_id,
+                    actor_id=handoff.actor_id,
+                    workspace_id=handoff.workspace_id,
+                    source_type="execution_handoff",
+                    source_id=handoff.execution_handoff_id,
+                    target_system=handoff.target_system,
+                    target_run_id=target_run_id,
+                    run_type=_run_type_for_target(handoff.target_system),
+                    owner_scope=proposal.owner_scope,
+                    title=f"Supervise {handoff.target_system} handoff",
+                    description="Run supervision record created after explicit execution handoff.",
+                    cancellable=handoff.target_system in {"command_bus", "workflow_engine"},
+                    pausable=handoff.target_system == "workflow_engine",
+                    resumable=handoff.target_system == "workflow_engine",
+                    compensation_available=True,
+                    metadata={
+                        "execution_handoff_id": handoff.execution_handoff_id,
+                        "handoff_status": handoff.status,
+                    },
+                    created_by=handoff.created_by,
+                )
+            )
+        except Exception:
+            return handoff
+        return handoff.model_copy(
+            update={
+                "metadata": {
+                    **handoff.metadata,
+                    "run_supervision_id": getattr(record, "run_supervision_id", None),
+                }
+            }
+        )
 
     def get_handoff(self, execution_handoff_id: str, scope: list[str]) -> ExecutionHandoff | None:
         authorize(
@@ -486,6 +542,24 @@ def _target_run_id(result: object) -> str | None:
         if isinstance(value, str):
             return value
     return None
+
+
+def _run_type_for_target(target_system: str) -> RunType:
+    if target_system == "command_bus":
+        return "command"
+    if target_system == "workflow_engine":
+        return "workflow"
+    if target_system == "execution_orchestrator":
+        return "execution"
+    if target_system == "capability_runtime":
+        return "capability"
+    if target_system == "mcp_adapter":
+        return "mcp_tool"
+    if target_system == "cognitive_cycle":
+        return "cycle"
+    if target_system == "sandbox":
+        return "sandbox"
+    return "generic"
 
 
 def _str_or_none(value: object) -> str | None:

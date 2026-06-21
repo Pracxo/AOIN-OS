@@ -63,6 +63,7 @@ from aion_brain.api.resilience import router as resilience_router
 from aion_brain.api.responses import router as responses_router
 from aion_brain.api.retrieval import router as retrieval_router
 from aion_brain.api.risk import router as risk_router
+from aion_brain.api.run_supervision import router as run_supervision_router
 from aion_brain.api.runtime_config import router as runtime_config_router
 from aion_brain.api.sandbox import router as sandbox_router
 from aion_brain.api.scenarios import router as scenarios_router
@@ -122,6 +123,7 @@ ROUTERS = (
     model_gateway_router,
     model_outputs_router,
     action_proposals_router,
+    run_supervision_router,
     prompts_router,
     module_developer_router,
     retrieval_router,

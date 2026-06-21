@@ -1,5 +1,6 @@
 """Workflow orchestration service and adapter selector."""
 
+from aion_brain.contracts.run_supervision import RunSupervisionCreateRequest
 from aion_brain.contracts.workflows import (
     TemporalAdapterStatus,
     WorkflowCreateRequest,
@@ -23,11 +24,17 @@ class WorkflowService:
         temporal_adapter: TemporalAdapter,
         workflow_engine_adapter: str,
         temporal_enabled: bool,
+        run_supervision_service: object | None = None,
     ) -> None:
         self._local_engine = local_engine
         self._temporal_adapter = temporal_adapter
         self._workflow_engine_adapter = workflow_engine_adapter
         self._temporal_enabled = temporal_enabled
+        self._run_supervision_service = run_supervision_service
+
+    def set_run_supervision_service(self, run_supervision_service: object | None) -> None:
+        """Attach run supervision after kernel assembly."""
+        self._run_supervision_service = run_supervision_service
 
     def create_workflow(self, request: WorkflowCreateRequest) -> WorkflowDefinition:
         """Create a workflow definition in the canonical local repository."""
@@ -66,8 +73,45 @@ class WorkflowService:
     def run_workflow(self, request: WorkflowRunRequest) -> WorkflowRun:
         """Run a workflow through the selected adapter."""
         if self._workflow_engine_adapter == "temporal" and self._temporal_enabled:
-            return self._temporal_adapter.run_workflow(request)
-        return self._local_engine.run_workflow(request)
+            run = self._temporal_adapter.run_workflow(request)
+        else:
+            run = self._local_engine.run_workflow(request)
+        self._maybe_create_supervision(request, run)
+        return run
+
+    def _maybe_create_supervision(self, request: WorkflowRunRequest, run: WorkflowRun) -> None:
+        if request.metadata.get("supervise") is not True:
+            return
+        create = getattr(self._run_supervision_service, "create", None)
+        if not callable(create):
+            return
+        try:
+            create(
+                RunSupervisionCreateRequest(
+                    trace_id=run.trace_id,
+                    actor_id=run.actor_id,
+                    workspace_id=run.workspace_id,
+                    source_type="workflow",
+                    source_id=run.workflow_run_id,
+                    target_system="workflow_engine",
+                    target_run_id=run.workflow_run_id,
+                    run_type="workflow",
+                    owner_scope=list(request.metadata.get("owner_scope") or ["workspace:main"]),
+                    title=f"Supervise workflow {run.workflow_id}",
+                    description="Run supervision record created from workflow metadata opt-in.",
+                    cancellable=True,
+                    pausable=True,
+                    resumable=True,
+                    compensation_available=True,
+                    metadata={
+                        "workflow_status": run.status,
+                        "created_by_metadata_supervise": True,
+                    },
+                    created_by=run.actor_id,
+                )
+            )
+        except Exception:
+            return
 
     def get_run(self, workflow_run_id: str, scope: list[str]) -> WorkflowRun | None:
         """Return one workflow run."""

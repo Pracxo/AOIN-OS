@@ -298,6 +298,15 @@ from aion_brain.responses.verifier import ResponseVerifier
 from aion_brain.retrieval.router import RetrievalRouter
 from aion_brain.risk.engine import RiskEngine
 from aion_brain.risk.repository import RiskRepository
+from aion_brain.run_supervision.compensation import CompensationPlanner
+from aion_brain.run_supervision.control import RunControlService
+from aion_brain.run_supervision.query import RunSupervisionQueryService
+from aion_brain.run_supervision.reports import RunSupervisionReportService
+from aion_brain.run_supervision.repository import RunSupervisionRepository
+from aion_brain.run_supervision.service import RunSupervisionService
+from aion_brain.run_supervision.status_sampler import RunStatusSampler
+from aion_brain.run_supervision.targets import RunTargetStatusAdapter
+from aion_brain.run_supervision.timeouts import TimeoutPolicyService
 from aion_brain.runtime.langgraph_runtime import LangGraphRuntimeAdapter
 from aion_brain.runtime_config.feature_flags import FeatureFlagOverrideService
 from aion_brain.runtime_config.profiles import ConfigProfileService
@@ -1873,6 +1882,82 @@ class KernelContainer:
             self.action_proposal_repository,
             self.policy_adapter,
         )
+        self.run_supervision_repository = RunSupervisionRepository(self.settings.database_url)
+        self.run_target_status_adapter = RunTargetStatusAdapter(
+            command_bus=self.command_bus,
+            workflow_service=self.workflow_service,
+            execution_orchestrator=self.execution_orchestrator,
+            capability_runtime=self.module_runtime_gateway,
+            mcp_service=self.mcp_service,
+            cycle_orchestrator=self.cognitive_cycle_orchestrator,
+            sandbox_service=self.sandbox_service,
+        )
+        self.run_supervision_service = RunSupervisionService(
+            self.run_supervision_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            settings=self.settings,
+        )
+        self.run_status_sampler = RunStatusSampler(
+            self.run_supervision_repository,
+            self.run_target_status_adapter,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            settings=self.settings,
+        )
+        self.timeout_policy_service = TimeoutPolicyService(
+            self.run_supervision_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.run_control_service = RunControlService(
+            self.run_supervision_repository,
+            self.run_target_status_adapter,
+            self.policy_adapter,
+            approval_service=self.approval_service,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.compensation_planner = CompensationPlanner(
+            self.run_supervision_repository,
+            self.policy_adapter,
+            action_proposal_service=self.action_proposal_service,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            settings=self.settings,
+        )
+        self.run_supervision_report_service = RunSupervisionReportService(
+            self.run_supervision_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.run_supervision_query_service = RunSupervisionQueryService(
+            self.run_supervision_service
+        )
+        for supervised_service in (
+            self.execution_handoff_service,
+            self.command_bus,
+            self.workflow_service,
+            self.execution_orchestrator,
+            self.module_runtime_gateway,
+            self.mcp_service,
+            self.sandbox_service,
+            self.cognitive_cycle_orchestrator,
+            self.outcome_service,
+        ):
+            set_run_supervision = getattr(
+                supervised_service,
+                "set_run_supervision_service",
+                None,
+            )
+            if callable(set_run_supervision):
+                set_run_supervision(self.run_supervision_service)
         set_tool_intent_review = getattr(
             self.output_governance_service,
             "set_tool_intent_review_service",
@@ -2289,6 +2374,9 @@ class KernelContainer:
             action_review_service=self.action_review_service,
             execution_handoff_service=self.execution_handoff_service,
             tool_intent_review_service=self.tool_intent_review_service,
+            run_supervision_service=self.run_supervision_service,
+            run_control_service=self.run_control_service,
+            compensation_planner=self.compensation_planner,
         )
         self.operator_action_center_service = ActionCenterService(
             self.operator_repository,
@@ -2326,6 +2414,9 @@ class KernelContainer:
             action_blocker_service=self.action_blocker_service,
             execution_handoff_service=self.execution_handoff_service,
             tool_intent_review_service=self.tool_intent_review_service,
+            run_supervision_service=self.run_supervision_service,
+            run_control_service=self.run_control_service,
+            compensation_planner=self.compensation_planner,
         )
         self.operator_readiness_aggregator = ReadinessAggregator(
             self.operator_status_card_builder,
@@ -2655,6 +2746,60 @@ class KernelContainer:
             (
                 "action_proposal_query_service",
                 self.action_proposal_query_service,
+                "service",
+                "local",
+            ),
+            (
+                "run_supervision_repository",
+                self.run_supervision_repository,
+                "repository",
+                "postgres",
+            ),
+            (
+                "run_target_status_adapter",
+                self.run_target_status_adapter,
+                "adapter",
+                "local",
+            ),
+            (
+                "run_supervision_service",
+                self.run_supervision_service,
+                "service",
+                "local",
+            ),
+            (
+                "run_status_sampler",
+                self.run_status_sampler,
+                "service",
+                "local",
+            ),
+            (
+                "run_control_service",
+                self.run_control_service,
+                "service",
+                "local",
+            ),
+            (
+                "timeout_policy_service",
+                self.timeout_policy_service,
+                "service",
+                "local",
+            ),
+            (
+                "compensation_planner",
+                self.compensation_planner,
+                "service",
+                "local",
+            ),
+            (
+                "run_supervision_report_service",
+                self.run_supervision_report_service,
+                "service",
+                "local",
+            ),
+            (
+                "run_supervision_query_service",
+                self.run_supervision_query_service,
                 "service",
                 "local",
             ),

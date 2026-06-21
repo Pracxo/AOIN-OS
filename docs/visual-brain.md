@@ -509,3 +509,41 @@ higher intensity than normal dry-run handoffs. Handoff nodes represent
 handoff records, not completed target execution. The projection remains
 backend-only and frontend-agnostic, and must not expose raw payloads, hidden
 reasoning, secrets, target service internals, or domain-specific action logic.
+
+## Run Supervision Projection
+
+Run supervision telemetry projects governed run observation into the Visual
+Brain Projection. Generic event types include:
+
+- `run_supervision_created`
+- `run_status_sampled`
+- `run_stalled_detected`
+- `run_timeout_detected`
+- `run_control_requested`
+- `run_control_handed_off`
+- `run_control_blocked`
+- `compensation_plan_created`
+- `compensation_plan_approved`
+- `compensation_steps_converted`
+- `run_supervision_report_created`
+
+Generic visual node types include:
+
+- `run_supervision`
+- `run_status_sample`
+- `run_control`
+- `timeout_policy`
+- `compensation_plan`
+- `compensation_step`
+- `supervision_report`
+
+The generic supervision path is:
+
+`handoff -> supervised run -> status sample -> control request / compensation plan -> outcome`
+
+Stalled and timed-out runs should project with higher intensity than ordinary
+status samples. Control request nodes represent requests, not direct target
+mutation. Compensation plan nodes represent proposed recovery paths, not
+execution. The projection remains backend-only and frontend-agnostic, and must
+not expose raw target internals, raw headers, secrets, or domain-specific
+remediation logic.

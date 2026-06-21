@@ -122,6 +122,59 @@ class Settings(BaseSettings):
         default="local",
         validation_alias=AliasChoices("AION_OBSERVABILITY_ADAPTER", "observability_adapter"),
     )
+    run_supervision_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_RUN_SUPERVISION_ENABLED",
+            "run_supervision_enabled",
+        ),
+    )
+    run_control_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_RUN_CONTROL_ENABLED", "run_control_enabled"),
+    )
+    run_timeout_policy_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_RUN_TIMEOUT_POLICY_ENABLED",
+            "run_timeout_policy_enabled",
+        ),
+    )
+    run_compensation_planning_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_RUN_COMPENSATION_PLANNING_ENABLED",
+            "run_compensation_planning_enabled",
+        ),
+    )
+    run_supervision_background_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_RUN_SUPERVISION_BACKGROUND_ENABLED",
+            "run_supervision_background_enabled",
+        ),
+    )
+    run_control_controlled_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_RUN_CONTROL_CONTROLLED_ENABLED",
+            "run_control_controlled_enabled",
+        ),
+    )
+    compensation_execution_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_COMPENSATION_EXECUTION_ENABLED",
+            "compensation_execution_enabled",
+        ),
+    )
+    run_supervision_default_stall_seconds: int = Field(
+        default=900,
+        validation_alias=AliasChoices(
+            "AION_RUN_SUPERVISION_DEFAULT_STALL_SECONDS",
+            "run_supervision_default_stall_seconds",
+        ),
+    )
     dialogue_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices("AION_DIALOGUE_ENABLED", "dialogue_enabled"),

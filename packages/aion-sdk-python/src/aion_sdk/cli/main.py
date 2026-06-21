@@ -33,6 +33,7 @@ from aion_sdk.cli.commands.policy import install_policy_commands
 from aion_sdk.cli.commands.prompts import install_prompt_commands
 from aion_sdk.cli.commands.release import install_release_commands
 from aion_sdk.cli.commands.resilience import install_resilience_commands
+from aion_sdk.cli.commands.run_supervision import install_run_supervision_commands
 from aion_sdk.cli.commands.sandbox import install_sandbox_commands
 from aion_sdk.cli.commands.scenarios import install_scenarios_commands
 from aion_sdk.cli.commands.security import install_security_commands
@@ -562,6 +563,7 @@ install_grounding_commands(app, get_client=_client, get_scope=_scope, render=_re
 install_prompt_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_model_output_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_action_proposal_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_run_supervision_commands(app, get_client=_client, get_scope=_scope, render=_render)
 
 
 if __name__ == "__main__":

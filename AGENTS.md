@@ -203,3 +203,10 @@ Instructions for future Codex runs in this repository:
 - Controlled action handoff must remain disabled by default.
 - Action handoff targets must be governed AION systems only.
 - Do not add external target systems in Brain core.
+- Run supervision must not own execution semantics.
+- Run supervision may observe, sample, report, and request; target subsystems
+  remain authoritative for execution state.
+- Control requests must be dry-run by default.
+- Timeout policies must not auto-cancel in v0.1.
+- Compensation plans must not execute themselves.
+- Do not add domain-specific compensation logic in Brain core.

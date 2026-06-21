@@ -41,6 +41,10 @@ class KernelDiagnostics:
         ("action_proposal_service_present", "action_proposal_service", "high"),
         ("tool_intent_review_service_present", "tool_intent_review_service", "medium"),
         ("execution_handoff_service_present", "execution_handoff_service", "high"),
+        ("run_supervision_service_present", "run_supervision_service", "high"),
+        ("run_status_sampler_present", "run_status_sampler", "high"),
+        ("run_control_service_present", "run_control_service", "high"),
+        ("compensation_planner_present", "compensation_planner", "high"),
         ("prompt_redactor_present", "prompt_redactor", "high"),
         ("prompt_repository_present", "prompt_repository", "high"),
         ("prompt_compiler_present", "prompt_compiler", "high"),
@@ -301,6 +305,7 @@ class KernelDiagnostics:
         checks.extend(self._prompt_checks(settings))
         checks.extend(self._model_output_checks(settings))
         checks.extend(self._action_proposal_checks(settings))
+        checks.extend(self._run_supervision_checks(settings))
         checks.extend(self._entity_checks(settings))
         checks.extend(self._situation_checks(settings))
         checks.extend(self._decision_checks(settings))
@@ -584,6 +589,100 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Action proposal broker services are assembled.",
+            ),
+        ]
+
+    def _run_supervision_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "run_supervision_repository",
+                "run_target_status_adapter",
+                "run_supervision_service",
+                "run_status_sampler",
+                "run_control_service",
+                "timeout_policy_service",
+                "compensation_planner",
+                "run_supervision_report_service",
+                "run_supervision_query_service",
+            )
+        )
+        return [
+            self._result(
+                "run_supervision_enabled",
+                "run_supervision",
+                "passed" if bool(getattr(settings, "run_supervision_enabled", True)) else "warning",
+                "high",
+                "Run supervision is enabled.",
+            ),
+            self._result(
+                "run_control_enabled",
+                "run_supervision",
+                "passed" if bool(getattr(settings, "run_control_enabled", True)) else "warning",
+                "high",
+                "Run control requests are enabled.",
+            ),
+            self._result(
+                "run_timeout_policy_enabled",
+                "run_supervision",
+                (
+                    "passed"
+                    if bool(getattr(settings, "run_timeout_policy_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Run timeout policies are enabled.",
+            ),
+            self._result(
+                "run_compensation_planning_enabled",
+                "run_supervision",
+                (
+                    "passed"
+                    if bool(getattr(settings, "run_compensation_planning_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Run compensation planning is enabled.",
+            ),
+            self._result(
+                "run_supervision_background_enabled",
+                "run_supervision",
+                (
+                    "passed"
+                    if not bool(getattr(settings, "run_supervision_background_enabled", False))
+                    else "warning"
+                ),
+                "critical",
+                "No background run supervisor starts in v0.1.",
+            ),
+            self._result(
+                "run_control_controlled_enabled",
+                "run_supervision",
+                (
+                    "passed"
+                    if not bool(getattr(settings, "run_control_controlled_enabled", False))
+                    else "warning"
+                ),
+                "critical",
+                "Controlled run control is disabled by default.",
+            ),
+            self._result(
+                "compensation_execution_enabled",
+                "run_supervision",
+                (
+                    "passed"
+                    if not bool(getattr(settings, "compensation_execution_enabled", False))
+                    else "warning"
+                ),
+                "critical",
+                "Compensation execution is disabled in v0.1.",
+            ),
+            self._result(
+                "run_supervision_services_present",
+                "run_supervision",
+                "passed" if services_present else "failed",
+                "high",
+                "Run supervision services are assembled.",
             ),
         ]
 

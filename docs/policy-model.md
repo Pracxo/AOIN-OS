@@ -1138,3 +1138,36 @@ proposal actions fail closed.
 Policy does not authorize model-generated tool execution, proposal
 self-execution, external targets, approval bypass, autonomy bypass, or
 domain-specific action rules.
+
+## Run Supervision Policy
+
+Generic run supervision actions:
+
+- `run_supervision.create`
+- `run_supervision.read`
+- `run_supervision.update`
+- `run_supervision.delete`
+- `run_supervision.sample`
+- `run_supervision.control.request`
+- `run_supervision.control.read`
+- `run_supervision.control.handoff`
+- `run_supervision.timeout_policy.create`
+- `run_supervision.timeout_policy.read`
+- `run_supervision.timeout_policy.update`
+- `run_supervision.compensation.create`
+- `run_supervision.compensation.read`
+- `run_supervision.compensation.update`
+- `run_supervision.compensation.convert`
+- `run_supervision.report.create`
+- `run_supervision.report.read`
+
+Run supervision reads are scope-gated. Create, sample, reports, and dry-run
+control requests are allowed only for scoped actors or internal Brain services.
+Archive, delete, timeout policy mutation, compensation approval, and
+compensation conversion require the stricter owner, admin, operator, approval,
+or internal-service path defined by the policy engine.
+
+Controlled control handoff remains denied unless runtime configuration,
+policy, risk, autonomy, target support, and approval gates allow it. Timeout
+policy evaluation does not authorize auto-cancel. Compensation policy does not
+authorize direct execution. Unknown run supervision actions fail closed.

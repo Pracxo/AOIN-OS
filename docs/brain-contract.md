@@ -1134,3 +1134,34 @@ store raw secrets, or include domain-specific action types.
 records and, only when explicitly requested and safe, action proposals.
 `ExecutionHandoffRequest` is the explicit gate for handoff to governed AION
 systems. Dry-run handoff builds the target request without dispatching it.
+
+## Run Supervision Contracts
+
+AION Brain owns these run supervision and control contracts:
+
+- `RunTargetRef`
+- `RunSupervisionRecord`
+- `RunSupervisionCreateRequest`
+- `RunStatusSample`
+- `RunControlRequest`
+- `RunControlRequestCreateRequest`
+- `RunTimeoutPolicy`
+- `CompensationPlan`
+- `CompensationStep`
+- `CompensationPlanCreateRequest`
+- `RunSupervisionReport`
+- `RunSupervisionReportRequest`
+
+Run supervision contracts are target-neutral and domain-neutral. They describe
+observation, status sampling, manual control requests, timeout policies,
+compensation planning, and reports. They must not execute target actions,
+start background supervisors, auto-cancel runs, auto-resume runs, execute
+compensation, call external systems, bypass target APIs, expose raw headers,
+store raw secrets, or include domain-specific remediation logic.
+
+`RunSupervisionRecord` tracks the Brain-owned observation record for a target
+run. `RunStatusSample` captures deterministic local status polling.
+`RunControlRequest` is a manual request and defaults to dry-run.
+`RunTimeoutPolicy` detects stale or timed-out runs without auto-cancelling.
+`CompensationPlan` and `CompensationStep` are proposals only until explicitly
+converted into action proposals.

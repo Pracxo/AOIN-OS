@@ -23,6 +23,7 @@ from aion_brain.contracts.idempotency import IdempotencyCheckRequest
 from aion_brain.contracts.outcomes import OutcomeCreateRequest
 from aion_brain.contracts.policy import PolicyDecision, PolicyRequest
 from aion_brain.contracts.risk import RiskAssessmentRequest, RiskLevel
+from aion_brain.contracts.run_supervision import RunSupervisionCreateRequest
 from aion_brain.contracts.sandbox import SandboxRunRequest
 from aion_brain.contracts.telemetry import (
     VisualTelemetryEvent,
@@ -54,6 +55,7 @@ class CommandBus:
         audit_sink: object | None = None,
         observed_effect_collector: object | None = None,
         outcome_service: object | None = None,
+        run_supervision_service: object | None = None,
     ) -> None:
         self._repository = command_repository
         self._handlers = command_handlers
@@ -70,6 +72,7 @@ class CommandBus:
         self._audit_sink = audit_sink
         self._observed_effect_collector = observed_effect_collector
         self._outcome_service = outcome_service
+        self._run_supervision_service = run_supervision_service
 
     def set_retry_policy_service(self, retry_policy_service: object | None) -> None:
         """Attach retry policy metadata after kernel assembly."""
@@ -78,6 +81,10 @@ class CommandBus:
     def set_audit_sink(self, audit_sink: object | None) -> None:
         """Attach audit sink after kernel assembly."""
         self._audit_sink = audit_sink
+
+    def set_run_supervision_service(self, run_supervision_service: object | None) -> None:
+        """Attach run supervision after kernel assembly."""
+        self._run_supervision_service = run_supervision_service
 
     def retry_metadata(self, attempt: int, status: str) -> dict[str, object]:
         """Return retry metadata for command handling without auto-retrying."""
@@ -572,6 +579,7 @@ class CommandBus:
         request: CommandDispatchRequest,
         result: CommandDispatchResult,
     ) -> CommandDispatchResult:
+        self._maybe_create_supervision(request, result.command)
         if request.idempotency_key and self._settings.idempotency_enabled:
             payload = result.model_dump(mode="json")
             if result.command.status == "failed":
@@ -579,6 +587,40 @@ class CommandBus:
             else:
                 self._idempotency.complete(request.idempotency_key, payload)
         return result
+
+    def _maybe_create_supervision(
+        self, request: CommandDispatchRequest, command: BrainCommand
+    ) -> None:
+        if request.metadata.get("supervise") is not True:
+            return
+        create = getattr(self._run_supervision_service, "create", None)
+        if not callable(create):
+            return
+        try:
+            create(
+                RunSupervisionCreateRequest(
+                    trace_id=command.trace_id,
+                    actor_id=command.actor_id,
+                    workspace_id=command.workspace_id,
+                    source_type="command",
+                    source_id=command.command_id,
+                    target_system="command_bus",
+                    target_run_id=command.command_id,
+                    run_type="command",
+                    owner_scope=request.owner_scope,
+                    title=f"Supervise command {command.command_type}",
+                    description="Run supervision record created from command metadata opt-in.",
+                    cancellable=True,
+                    compensation_available=True,
+                    metadata={
+                        "command_status": command.status,
+                        "created_by_metadata_supervise": True,
+                    },
+                    created_by=command.actor_id,
+                )
+            )
+        except Exception:
+            return
 
     def _emit(self, event_type: str, command: BrainCommand, intensity: float) -> None:
         if self._telemetry_service is None:

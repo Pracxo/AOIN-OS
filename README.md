@@ -2848,3 +2848,45 @@ CLI examples:
 ```
 
 See `docs/adr/0058-action-proposal-broker-execution-handoff.md`.
+
+## Run Supervision, Control, Timeout, and Compensation
+
+AION v0.1 run supervision observes and requests. It does not auto-cancel,
+auto-remediate, or execute compensation.
+
+Run Supervision registers target-neutral records for governed runs and samples
+their status through local target adapters. Cancellation and control requests
+are manual records and default to dry-run. Timeout policies detect stale,
+stalled, or timed-out runs without forcing cancellation. The Compensation
+Planner creates proposed recovery plans only; plans and steps never execute
+themselves.
+
+Run supervision endpoints:
+
+- `POST /brain/run-supervision/runs`
+- `GET /brain/run-supervision/runs/{run_supervision_id}`
+- `GET /brain/run-supervision/runs`
+- `POST /brain/run-supervision/runs/{run_supervision_id}/sample`
+- `POST /brain/run-supervision/sample-many`
+- `POST /brain/run-supervision/runs/{run_supervision_id}/archive`
+- `POST /brain/run-supervision/control-requests`
+- `GET /brain/run-supervision/control-requests`
+- `POST /brain/run-supervision/control-requests/{run_control_request_id}/handoff`
+- `POST /brain/run-supervision/timeout-policies`
+- `GET /brain/run-supervision/timeout-policies`
+- `POST /brain/run-supervision/compensation-plans`
+- `POST /brain/run-supervision/runs/{run_supervision_id}/propose-compensation`
+- `GET /brain/run-supervision/compensation-plans/{compensation_plan_id}`
+- `GET /brain/run-supervision/compensation-plans`
+- `POST /brain/run-supervision/compensation-plans/{compensation_plan_id}/approve`
+- `POST /brain/run-supervision/compensation-plans/{compensation_plan_id}/convert-to-action-proposals`
+- `POST /brain/run-supervision/reports`
+
+CLI examples:
+
+```bash
+./scripts/aionctl.sh run-supervision sample --run-supervision-id run-supervision-id
+./scripts/aionctl.sh run-supervision compensation propose --run-supervision-id run-supervision-id
+```
+
+See `docs/adr/0059-run-supervision-cancellation-compensation.md`.
