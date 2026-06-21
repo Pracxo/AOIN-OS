@@ -671,3 +671,13 @@ The SDK calls public Module Binding APIs only. It does not import
 `aion_brain`, load extension code, install packages, activate capabilities,
 register routes, mutate runtime configuration, execute mount plans, call
 external services, or expose raw secrets.
+
+## Conformance Resource
+
+`client.conformance` exposes the Capability Conformance Harness and readiness
+assessment APIs. It calls public HTTP endpoints only and does not import Brain
+API internals.
+
+Useful methods include `create_profile`, `list_profiles`,
+`seed_default_profiles`, `create_test_vector`, `generate_test_vectors`, `run`,
+`list_findings`, `assess_readiness`, `list_readiness_assessments`, and `query`.

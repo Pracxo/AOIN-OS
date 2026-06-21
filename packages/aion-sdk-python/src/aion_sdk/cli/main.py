@@ -17,6 +17,7 @@ from aion_sdk.cli.commands.backups import install_backup_commands
 from aion_sdk.cli.commands.beliefs import install_belief_commands
 from aion_sdk.cli.commands.concepts import install_concept_commands
 from aion_sdk.cli.commands.config import install_config_commands
+from aion_sdk.cli.commands.conformance import install_conformance_commands
 from aion_sdk.cli.commands.contracts import install_contract_commands
 from aion_sdk.cli.commands.decisions import install_decision_commands
 from aion_sdk.cli.commands.dialogue import install_dialogue_commands
@@ -580,6 +581,7 @@ install_contract_commands(contracts_app, get_client=_client, get_scope=_scope, r
 install_lifecycle_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_extension_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_module_binding_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_conformance_commands(app, get_client=_client, get_scope=_scope, render=_render)
 
 
 if __name__ == "__main__":

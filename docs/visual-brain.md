@@ -786,3 +786,29 @@ Module binding projection remains backend-only and frontend-agnostic, and must
 not expose source code payloads, package bytes, raw headers, hidden reasoning,
 raw prompts, provider payloads, secrets, runtime internals, or
 domain-specific module logic.
+
+## Capability Conformance Projection
+
+Capability Conformance telemetry projects schema-only conformance work into the
+Visual Brain Projection. Generic event types include:
+
+- `conformance_profile_created`
+- `capability_test_vector_created`
+- `mock_invocation_simulated`
+- `conformance_run_started`
+- `conformance_run_completed`
+- `conformance_finding_dismissed`
+- `readiness_assessment_created`
+
+Generic visual node types include:
+
+- `conformance_profile`
+- `test_vector`
+- `mock_invocation`
+- `conformance_run`
+- `conformance_finding`
+- `readiness_assessment`
+
+These nodes represent backend projection records only. They do not imply
+package installation, route registration, capability execution, sandbox
+execution, external calls, or activation.

@@ -1526,3 +1526,19 @@ Bindings differ from active capabilities and modules because they are staged
 records only. Active capability registration, module loading, package
 installation, route registration, runtime configuration mutation, and execution
 remain outside this layer.
+
+## Capability Conformance Harness
+
+The Capability Conformance Harness sits after the Extension Registry and
+Capability Binding Registry. It converts staged metadata into conformance
+profiles, capability test vectors, schema-only mock invocation records,
+conformance runs, findings, and readiness assessments.
+
+The harness is a governance layer, not an execution layer. It validates
+contracts, policy action references, settings, schema shape, sandbox metadata,
+and unsafe activation flags. It never loads extension code, installs packages,
+invokes capabilities, calls MCP, runs sandbox code, registers dynamic routes, or
+calls external systems.
+
+Extension readiness assessments are local records that can block future
+activation. In v0.1 `activation_ready` is always false.

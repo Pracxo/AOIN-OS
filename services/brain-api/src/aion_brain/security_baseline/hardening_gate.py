@@ -61,6 +61,7 @@ class HardeningGateService:
         self._audit_sink = audit_sink
         self._extension_registry_repository: object | None = None
         self._module_binding_repository: object | None = None
+        self._conformance_repository: object | None = None
 
     def set_extension_registry_repository(self, repository: object | None) -> None:
         """Attach Extension Registry after kernel assembly."""
@@ -71,6 +72,11 @@ class HardeningGateService:
         """Attach module binding registry after kernel assembly."""
 
         self._module_binding_repository = repository
+
+    def set_conformance_repository(self, repository: object | None) -> None:
+        """Attach conformance readiness metadata after kernel assembly."""
+
+        self._conformance_repository = repository
 
     def run(self, request: HardeningGateRequest, *, app: object | None = None) -> HardeningGateRun:
         """Run the local security hardening gate."""
@@ -130,6 +136,7 @@ class HardeningGateService:
             checks.append(self._release_package_check())
         checks.extend(self._extension_registry_checks())
         checks.extend(self._module_binding_checks())
+        checks.extend(self._conformance_checks())
         checks.extend(self._audit_integrity_checks())
         checks.append(self._control_catalog_check())
 
@@ -416,6 +423,73 @@ class HardeningGateService:
                 "No blocked capability binding metadata is present.",
                 "module_bindings",
                 details={"count": len(blocked)},
+            ),
+        ]
+
+    def _conformance_checks(self) -> builtins.list[dict[str, Any]]:
+        if self._conformance_repository is None:
+            return [
+                _check(
+                    "conformance_repository_optional",
+                    "passed",
+                    "Conformance repository is optional in isolated hardening tests.",
+                    "conformance",
+                )
+            ]
+        list_runs = getattr(self._conformance_repository, "list_runs", None)
+        list_findings = getattr(self._conformance_repository, "list_findings", None)
+        list_readiness = getattr(self._conformance_repository, "list_readiness", None)
+        runs = list_runs(limit=1000) if callable(list_runs) else []
+        findings = list_findings(status="open", limit=1000) if callable(list_findings) else []
+        readiness = list_readiness(limit=1000) if callable(list_readiness) else []
+        failed_runs = [
+            item for item in runs if getattr(item, "status", None) in {"failed", "blocked"}
+        ]
+        high_findings = [
+            item for item in findings if getattr(item, "severity", None) in {"high", "critical"}
+        ]
+        blocked_readiness = [
+            item for item in readiness if getattr(item, "status", None) == "blocked"
+        ]
+        return [
+            _check(
+                "conformance_code_execution_disabled",
+                "failed" if self._settings.conformance_code_execution_enabled else "passed",
+                "Conformance code execution is disabled.",
+                "conformance",
+            ),
+            _check(
+                "conformance_external_calls_disabled",
+                "failed" if self._settings.conformance_external_calls_enabled else "passed",
+                "Conformance external calls are disabled.",
+                "conformance",
+            ),
+            _check(
+                "readiness_activation_disabled",
+                "failed" if self._settings.readiness_activation_enabled else "passed",
+                "Readiness activation is disabled.",
+                "conformance",
+            ),
+            _check(
+                "no_failed_conformance_runs",
+                "failed" if failed_runs else "passed",
+                "No failed or blocked conformance runs are present.",
+                "conformance",
+                {"count": len(failed_runs)},
+            ),
+            _check(
+                "no_high_conformance_findings",
+                "failed" if high_findings else "passed",
+                "No high-severity conformance findings are open.",
+                "conformance",
+                {"count": len(high_findings)},
+            ),
+            _check(
+                "no_blocked_readiness_assessments",
+                "failed" if blocked_readiness else "passed",
+                "No blocked extension readiness assessments are present.",
+                "conformance",
+                {"count": len(blocked_readiness)},
             ),
         ]
 

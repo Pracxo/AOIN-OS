@@ -426,6 +426,18 @@ allowed_actions := {
 	"route_binding_preview.create",
 	"route_binding_preview.read",
 	"module_binding.query",
+	"conformance.profile.create",
+	"conformance.profile.read",
+	"conformance.profile.update",
+	"conformance.test_vector.create",
+	"conformance.test_vector.read",
+	"conformance.test_vector.update",
+	"conformance.run",
+	"conformance.finding.read",
+	"conformance.finding.update",
+	"conformance.readiness.assess",
+	"conformance.readiness.read",
+	"conformance.query",
 	"response.draft",
 	"response.evaluate",
 	"response.verify",
@@ -895,6 +907,11 @@ low_allowed_actions := {
 	"module_mount_plan.read",
 	"route_binding_preview.read",
 	"module_binding.query",
+	"conformance.profile.read",
+	"conformance.test_vector.read",
+	"conformance.finding.read",
+	"conformance.readiness.read",
+	"conformance.query",
 	"lifecycle.policy.read",
 	"lifecycle.classify",
 	"lifecycle.classification.read",
@@ -1446,6 +1463,34 @@ decision := {
 	module_binding_metadata_action
 	module_binding_permission
 	not module_binding_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "conformance_read_allowed",
+	"constraints": ["metadata_only", "no_code_loading", "no_package_install", "no_activation", "no_external_calls"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	conformance_read_action
+	conformance_permission
+	not conformance_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "conformance_metadata_action_allowed",
+	"constraints": ["metadata_only", "no_code_loading", "no_package_install", "no_activation", "no_external_calls", "no_source_mutation"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	conformance_metadata_action
+	conformance_permission
+	not conformance_unsafe_request
 }
 
 decision := {
@@ -2982,6 +3027,7 @@ decision := {
 	not contract_registry_action
 	not extension_registry_action
 	not module_binding_action
+	not conformance_action
 	not scheduler_action
 	not incident_action
 	not lifecycle_action
@@ -3994,6 +4040,102 @@ module_binding_unsafe_request if {
 	input.context.code_generated == true
 }
 
+conformance_action if {
+	startswith(input.action_type, "conformance.")
+}
+
+conformance_read_action if {
+	input.action_type == "conformance.profile.read"
+}
+
+conformance_read_action if {
+	input.action_type == "conformance.test_vector.read"
+}
+
+conformance_read_action if {
+	input.action_type == "conformance.finding.read"
+}
+
+conformance_read_action if {
+	input.action_type == "conformance.readiness.read"
+}
+
+conformance_read_action if {
+	input.action_type == "conformance.query"
+}
+
+conformance_metadata_action if {
+	input.action_type == "conformance.profile.create"
+}
+
+conformance_metadata_action if {
+	input.action_type == "conformance.profile.update"
+}
+
+conformance_metadata_action if {
+	input.action_type == "conformance.test_vector.create"
+}
+
+conformance_metadata_action if {
+	input.action_type == "conformance.test_vector.update"
+}
+
+conformance_metadata_action if {
+	input.action_type == "conformance.run"
+}
+
+conformance_metadata_action if {
+	input.action_type == "conformance.finding.update"
+}
+
+conformance_metadata_action if {
+	input.action_type == "conformance.readiness.assess"
+}
+
+conformance_unsafe_request if {
+	input.context.source_mutated == true
+}
+
+conformance_unsafe_request if {
+	input.context.source_mutation_requested == true
+}
+
+conformance_unsafe_request if {
+	input.context.code_loading_requested == true
+}
+
+conformance_unsafe_request if {
+	input.context.package_install_requested == true
+}
+
+conformance_unsafe_request if {
+	input.context.activation_requested == true
+}
+
+conformance_unsafe_request if {
+	input.context.capability_execution_requested == true
+}
+
+conformance_unsafe_request if {
+	input.context.external_call_requested == true
+}
+
+conformance_unsafe_request if {
+	input.context.external_source_requested == true
+}
+
+conformance_unsafe_request if {
+	input.context.dynamic_route_registration_requested == true
+}
+
+conformance_unsafe_request if {
+	input.context.shell_command_requested == true
+}
+
+conformance_unsafe_request if {
+	input.context.code_generated == true
+}
+
 registry_approval_action if {
 	input.action_type == "entity.merge.approve"
 }
@@ -4457,6 +4599,44 @@ module_binding_permission if {
 }
 
 module_binding_permission if {
+	input.context.actor_context.permissions[_] == "operator"
+}
+
+conformance_permission if {
+	dev_owner
+}
+
+conformance_permission if {
+	input.context.actor_context.permissions[_] == input.action_type
+}
+
+conformance_permission if {
+	input.context.permissions[_] == input.action_type
+}
+
+conformance_permission if {
+	conformance_read_action
+	input.requested_permissions[_] == input.action_type
+	count(input.security_scope) > 0
+}
+
+conformance_permission if {
+	input.actor_id
+	input.requested_permissions[_] == input.action_type
+	input.security_scope[_] == sprintf("workspace:%s", [input.workspace_id])
+}
+
+conformance_permission if {
+	input.context.actor_context.permissions[_] == "conformance.read"
+	conformance_read_action
+}
+
+conformance_permission if {
+	input.context.actor_context.permissions[_] == "conformance.write"
+	conformance_metadata_action
+}
+
+conformance_permission if {
 	input.context.actor_context.permissions[_] == "operator"
 }
 

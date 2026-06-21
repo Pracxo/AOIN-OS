@@ -92,6 +92,8 @@ class ActionCenterService:
         generated.extend(self._blocked_capability_binding_items(scope))
         generated.extend(self._high_risk_capability_binding_items(scope))
         generated.extend(self._blocked_module_mount_plan_items(scope))
+        generated.extend(self._open_conformance_finding_items(scope))
+        generated.extend(self._blocked_readiness_assessment_items(scope))
         stored: list[OperatorActionItem] = []
         for item in generated[:limit]:
             saved = self._repository.save_action_item(item)
@@ -502,6 +504,68 @@ class ActionCenterService:
                     "module_slot_id": getattr(item, "module_slot_id", None),
                     "blocked": getattr(item, "blocked", True),
                     "execution_allowed": getattr(item, "execution_allowed", False),
+                },
+            )
+            for item in items
+        ]
+
+    def _open_conformance_finding_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("conformance_repository")
+        list_findings = getattr(source, "list_findings", None)
+        if not callable(list_findings):
+            return []
+        try:
+            items = list_findings(status="open", limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="conformance_finding",
+                source_id=_id_for(item, "conformance_finding_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="registry",
+                severity=_finding_severity(item),
+                title="Conformance finding is open.",
+                description="A capability conformance finding requires metadata review.",
+                recommended_action="review_conformance_finding",
+                runbook_ref="docs/capability-conformance.md",
+                scope=scope or ["workspace:main"],
+                metadata={
+                    "finding_type": getattr(item, "finding_type", None),
+                    "severity": getattr(item, "severity", None),
+                    "status": getattr(item, "status", None),
+                    "metadata_only": True,
+                },
+            )
+            for item in items
+        ]
+
+    def _blocked_readiness_assessment_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("conformance_repository")
+        list_readiness = getattr(source, "list_readiness", None)
+        if not callable(list_readiness):
+            return []
+        try:
+            items = list_readiness(status="blocked", limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="readiness_assessment",
+                source_id=_id_for(item, "readiness_assessment_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="registry",
+                severity="high",
+                title="Extension readiness is blocked.",
+                description="A metadata readiness assessment has blockers and remains inactive.",
+                recommended_action="review_readiness_blockers",
+                runbook_ref="docs/capability-conformance.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={
+                    "readiness_level": getattr(item, "readiness_level", None),
+                    "activation_ready": getattr(item, "activation_ready", False),
+                    "blocker_refs": getattr(item, "blocker_refs", []),
+                    "metadata_only": True,
                 },
             )
             for item in items
@@ -1814,6 +1878,13 @@ def _metadata_scope(item: object, fallback: list[str]) -> list[str]:
         if isinstance(value, list) and value:
             return [str(entry) for entry in value]
     return fallback or ["workspace:main"]
+
+
+def _finding_severity(item: object) -> OperatorSeverity:
+    severity = str(getattr(item, "severity", "medium")).lower()
+    if severity in {"low", "medium", "high", "critical"}:
+        return cast(OperatorSeverity, severity)
+    return "medium"
 
 
 def _approval_severity(item: object) -> OperatorSeverity:

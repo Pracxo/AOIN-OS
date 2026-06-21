@@ -61,6 +61,7 @@ class ReleasePackager:
         contract_registry_report_service: object | None = None,
         extension_registry_repository: object | None = None,
         module_binding_repository: object | None = None,
+        conformance_repository: object | None = None,
         telemetry_service: object | None = None,
         root_dir: Path | None = None,
         settings: Settings | None = None,
@@ -91,6 +92,7 @@ class ReleasePackager:
         self._contract_registry_report_service = contract_registry_report_service
         self._extension_registry_repository = extension_registry_repository
         self._module_binding_repository = module_binding_repository
+        self._conformance_repository = conformance_repository
         self._telemetry_service = telemetry_service
         self._audit_sink = audit_sink
 
@@ -121,6 +123,11 @@ class ReleasePackager:
         """Attach module binding summaries after kernel assembly."""
 
         self._module_binding_repository = repository
+
+    def set_conformance_repository(self, repository: object | None = None) -> None:
+        """Attach capability conformance summaries after kernel assembly."""
+
+        self._conformance_repository = repository
 
     def package(
         self,
@@ -289,6 +296,7 @@ class ReleasePackager:
             reports["contract_registry"] = self._contract_registry_summary(request.owner_scope)
             reports["extension_registry"] = self._extension_registry_summary(request.owner_scope)
             reports["module_binding_registry"] = self._module_binding_summary(request.owner_scope)
+            reports["capability_conformance"] = self._conformance_summary(request.owner_scope)
         if request.include_policy_bundle:
             reports["policy_bundle"] = self._policy_bundle_report()
         if request.include_migration_baseline:
@@ -424,6 +432,46 @@ class ReleasePackager:
             "activation_allowed": False,
             "execution_allowed": False,
             "dynamic_route_registration_allowed": False,
+            "source_code_is_source_of_truth": True,
+        }
+
+    def _conformance_summary(self, scope: builtins.list[str]) -> dict[str, Any]:
+        status = _try_call(self._conformance_repository, "status", scope)
+        runs = _try_call(self._conformance_repository, "list_runs", limit=500)
+        findings = _try_call(
+            self._conformance_repository,
+            "list_findings",
+            status="open",
+            limit=500,
+        )
+        readiness = _try_call(self._conformance_repository, "list_readiness", limit=500)
+        runs = runs if isinstance(runs, list) else []
+        findings = findings if isinstance(findings, list) else []
+        readiness = readiness if isinstance(readiness, list) else []
+        failed_runs = [
+            item for item in runs if getattr(item, "status", None) in {"failed", "blocked"}
+        ]
+        blocked_readiness = [
+            item for item in readiness if getattr(item, "status", None) == "blocked"
+        ]
+        return {
+            "available": self._conformance_repository is not None,
+            "status": (
+                "blocked"
+                if failed_runs or blocked_readiness
+                else _jsonable(status).get("status", "warning")
+                if isinstance(_jsonable(status), dict)
+                else "warning"
+            ),
+            "conformance_run_count": len(runs),
+            "failed_conformance_count": len(failed_runs),
+            "open_finding_count": len(findings),
+            "readiness_assessment_count": len(readiness),
+            "blocked_readiness_count": len(blocked_readiness),
+            "metadata_only": True,
+            "activation_allowed": False,
+            "code_loading_allowed": False,
+            "external_calls_allowed": False,
             "source_code_is_source_of_truth": True,
         }
 

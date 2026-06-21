@@ -99,6 +99,18 @@ _QUEUE_SPECS: tuple[tuple[OperatorQueueType, str, str, tuple[str, ...]], ...] = 
         "module_binding_repository",
         ("list_route_previews",),
     ),
+    (
+        "conformance_findings",
+        "Conformance Findings",
+        "conformance_repository",
+        ("list_findings",),
+    ),
+    (
+        "readiness_assessments",
+        "Readiness Assessments",
+        "conformance_repository",
+        ("list_readiness",),
+    ),
     ("generic", "Dialogue Clarifications", "dialogue_service", ("list_pending",)),
     (
         "generic",
@@ -333,6 +345,7 @@ _OPEN_AS_PENDING_QUEUE_TYPES: set[OperatorQueueType] = {
     "broken_references",
     "drift_findings",
     "incidents",
+    "conformance_findings",
     "lifecycle_reviews",
     "migration_notes",
     "orphaned_resources",

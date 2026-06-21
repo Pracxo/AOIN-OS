@@ -39,6 +39,12 @@ Instructions for future Codex runs in this repository:
 - Policy actions and permissions must remain generic dotted lowercase names.
 - Keep policy simulations side-effect-free; they must never execute target actions.
 - Policy tests must not require live OPA or external network services.
+- Conformance harness work must remain metadata/schema-only.
+- Conformance must never load package code, install packages, activate
+  extensions, invoke capabilities, call MCP, call sandbox runtimes, register
+  dynamic routes, or call external services.
+- Readiness assessments may block future activation, but must not activate
+  anything in v0.1.
 - Before completing any task, run the narrow tests for the changed area.
 - For architecture tasks, run boundary check and no-domain-drift.
 - For API tasks, run OpenAPI hygiene.

@@ -37,6 +37,7 @@ CRITICAL_FAILURE_CHECKS = {
     "config_hash_available",
     "extension_registry_safe",
     "module_binding_registry_safe",
+    "conformance_readiness_gate_safe",
     "resilience_status_healthy_or_only_optional_degraded",
     "audit_integrity_status_available",
     "audit_verification_passed_or_not_required",
@@ -118,6 +119,7 @@ class FreezeGateService:
         self._contract_registry_repository = contract_registry_repository
         self._extension_registry_repository = extension_registry_repository
         self._module_binding_repository: object | None = None
+        self._conformance_repository: object | None = None
         self._audit_sink = audit_sink
         self._telemetry_service = telemetry_service
         self._root_dir = root_dir or Path(__file__).parents[5]
@@ -137,6 +139,11 @@ class FreezeGateService:
         """Attach module binding registry after kernel assembly."""
 
         self._module_binding_repository = repository
+
+    def set_conformance_repository(self, repository: object | None) -> None:
+        """Attach conformance readiness gate after kernel assembly."""
+
+        self._conformance_repository = repository
 
     def run(self, request: FreezeGateRunRequest, *, app: object | None = None) -> FreezeGateRun:
         """Run the local freeze gate and persist the result."""
@@ -226,6 +233,14 @@ class FreezeGateService:
                 "module_binding_registry_safe",
                 "module_bindings",
                 self._check_module_binding_registry_safe,
+                severity="critical",
+            )
+        )
+        checks.append(
+            self._run_check(
+                "conformance_readiness_gate_safe",
+                "conformance",
+                self._check_conformance_readiness_gate_safe,
                 severity="critical",
             )
         )
@@ -690,6 +705,59 @@ class FreezeGateService:
                 "binding_count": len(bindings),
                 "blocked_binding_count": len(blocked),
                 "open_conflict_count": len(conflicts),
+                "unsafe_flags": unsafe,
+            },
+        }
+
+    def _check_conformance_readiness_gate_safe(self) -> dict[str, Any]:
+        list_runs = getattr(self._conformance_repository, "list_runs", None)
+        list_findings = getattr(self._conformance_repository, "list_findings", None)
+        list_readiness = getattr(self._conformance_repository, "list_readiness", None)
+        if not any(callable(method) for method in (list_runs, list_findings, list_readiness)):
+            return {
+                "status": "warning",
+                "message": "Conformance repository is not wired into this freeze context.",
+                "details": {"available": False},
+            }
+        runs = list_runs(limit=1000) if callable(list_runs) else []
+        findings = list_findings(status="open", limit=1000) if callable(list_findings) else []
+        readiness = list_readiness(limit=1000) if callable(list_readiness) else []
+        failed_runs = [
+            item for item in runs if getattr(item, "status", None) in {"failed", "blocked"}
+        ]
+        critical_findings = [
+            item for item in findings if getattr(item, "severity", None) in {"high", "critical"}
+        ]
+        blocked_readiness = [
+            item for item in readiness if getattr(item, "status", None) == "blocked"
+        ]
+        unsafe_flags = {
+            "conformance_code_execution_enabled": bool(
+                getattr(self._settings, "conformance_code_execution_enabled", False)
+            ),
+            "conformance_external_calls_enabled": bool(
+                getattr(self._settings, "conformance_external_calls_enabled", False)
+            ),
+            "readiness_activation_enabled": bool(
+                getattr(self._settings, "readiness_activation_enabled", False)
+            ),
+        }
+        unsafe = [key for key, value in unsafe_flags.items() if value]
+        status = (
+            "failed"
+            if failed_runs or critical_findings or blocked_readiness or unsafe
+            else "passed"
+        )
+        return {
+            "status": status,
+            "message": "Capability conformance readiness remains metadata-only and inactive.",
+            "details": {
+                "conformance_run_count": len(runs),
+                "failed_conformance_count": len(failed_runs),
+                "open_finding_count": len(findings),
+                "critical_finding_count": len(critical_findings),
+                "readiness_assessment_count": len(readiness),
+                "blocked_readiness_count": len(blocked_readiness),
                 "unsafe_flags": unsafe,
             },
         }

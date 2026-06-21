@@ -351,6 +351,66 @@ class Settings(BaseSettings):
             "module_binding_create_notifications_default",
         ),
     )
+    conformance_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_CONFORMANCE_ENABLED", "conformance_enabled"),
+    )
+    conformance_profiles_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CONFORMANCE_PROFILES_ENABLED",
+            "conformance_profiles_enabled",
+        ),
+    )
+    capability_test_vectors_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CAPABILITY_TEST_VECTORS_ENABLED",
+            "capability_test_vectors_enabled",
+        ),
+    )
+    mock_invocation_simulator_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MOCK_INVOCATION_SIMULATOR_ENABLED",
+            "mock_invocation_simulator_enabled",
+        ),
+    )
+    extension_readiness_gate_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_EXTENSION_READINESS_GATE_ENABLED",
+            "extension_readiness_gate_enabled",
+        ),
+    )
+    conformance_code_execution_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONFORMANCE_CODE_EXECUTION_ENABLED",
+            "conformance_code_execution_enabled",
+        ),
+    )
+    conformance_external_calls_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONFORMANCE_EXTERNAL_CALLS_ENABLED",
+            "conformance_external_calls_enabled",
+        ),
+    )
+    readiness_activation_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_READINESS_ACTIVATION_ENABLED",
+            "readiness_activation_enabled",
+        ),
+    )
+    conformance_create_notifications_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONFORMANCE_CREATE_NOTIFICATIONS_DEFAULT",
+            "conformance_create_notifications_default",
+        ),
+    )
     lifecycle_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices("AION_LIFECYCLE_ENABLED", "lifecycle_enabled"),

@@ -1408,3 +1408,29 @@ Module binding contracts must not expose raw headers, hidden reasoning, raw
 prompts, provider payloads, secrets, SQLAlchemy rows, source code payloads,
 runtime client objects, third-party module internals, or domain-specific module
 logic.
+
+## Capability Conformance Contracts
+
+AION Brain owns these generic conformance contracts:
+
+- `ConformanceProfile`
+- `CapabilityTestVector`
+- `MockInvocationRecord`
+- `ConformanceRun`
+- `ConformanceFinding`
+- `ReadinessAssessment`
+- `ConformanceQuery`
+- `ConformanceQueryResult`
+
+`MockInvocationRecord` is a schema-only simulation record. It stores hashes,
+redacted inputs, placeholder output shapes, booleans for schema/policy/sandbox
+validity, and findings. It must not represent real capability execution.
+
+`ReadinessAssessment` summarizes local extension/module/binding readiness. It
+must keep `activation_ready=false` in v0.1 and may block future activation when
+required conformance records are missing or failing.
+
+Conformance contracts must not expose raw headers, hidden reasoning, raw
+prompts, provider payloads, secrets, SQLAlchemy rows, source code payloads,
+runtime client objects, package bytes, third-party module internals,
+capability execution results, or domain-specific module logic.

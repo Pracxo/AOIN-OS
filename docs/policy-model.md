@@ -1423,3 +1423,25 @@ route registration, runtime configuration mutation, shell commands, external
 calls, approval bypass, raw prompt disclosure, hidden reasoning disclosure,
 raw header export, secret export, or domain-specific module logic. Unknown
 module binding actions fail closed.
+
+## Capability Conformance Policy
+
+Generic conformance actions:
+
+- `conformance.profile.create`
+- `conformance.profile.read`
+- `conformance.profile.update`
+- `conformance.test_vector.create`
+- `conformance.test_vector.read`
+- `conformance.test_vector.update`
+- `conformance.run`
+- `conformance.finding.read`
+- `conformance.finding.update`
+- `conformance.readiness.assess`
+- `conformance.readiness.read`
+- `conformance.query`
+
+Conformance policy authorizes metadata and schema checks only. Requests that
+imply code loading, package installation, activation, dynamic route
+registration, capability execution, MCP calls, sandbox code execution, external
+calls, or source-record mutation fail closed.

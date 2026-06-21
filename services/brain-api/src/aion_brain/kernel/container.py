@@ -54,6 +54,17 @@ from aion_brain.commands.repository import CommandRepository
 from aion_brain.concepts.repository import ConceptRepository
 from aion_brain.concepts.service import ConceptService
 from aion_brain.config import Settings, get_settings
+from aion_brain.conformance import (
+    CapabilityTestVectorService,
+    ConformanceFindingService,
+    ConformanceProfileService,
+    ConformanceQueryService,
+    ConformanceRepository,
+    ConformanceRunner,
+    MockInvocationSimulator,
+    ReadinessAssessmentService,
+    SchemaConformanceChecker,
+)
 from aion_brain.connectors.repository import ConnectorRepository
 from aion_brain.connectors.service import ConnectorService
 from aion_brain.consistency.checker import ConsistencyChecker
@@ -2699,6 +2710,57 @@ class KernelContainer:
             self.module_binding_repository,
             self.policy_adapter,
         )
+        self.conformance_repository = ConformanceRepository(self.settings.database_url)
+        self.conformance_schema_checker = SchemaConformanceChecker()
+        self.conformance_profile_service = ConformanceProfileService(
+            self.conformance_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.capability_test_vector_service = CapabilityTestVectorService(
+            self.conformance_repository,
+            self.policy_adapter,
+            module_binding_repository=self.module_binding_repository,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.mock_invocation_simulator = MockInvocationSimulator(
+            self.conformance_repository,
+            schema_checker=self.conformance_schema_checker,
+            module_binding_repository=self.module_binding_repository,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.conformance_runner = ConformanceRunner(
+            self.conformance_repository,
+            self.policy_adapter,
+            schema_checker=self.conformance_schema_checker,
+            mock_simulator=self.mock_invocation_simulator,
+            module_binding_repository=self.module_binding_repository,
+            contract_repository=self.contract_registry_repository,
+            policy_catalog_repository=self.policy_catalog_repository,
+            autonomy_governor=self.autonomy_governor,
+            notification_router=self.notification_router,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            settings=self.settings,
+        )
+        self.conformance_finding_service = ConformanceFindingService(
+            self.conformance_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.readiness_assessment_service = ReadinessAssessmentService(
+            self.conformance_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.conformance_query_service = ConformanceQueryService(
+            self.conformance_repository,
+            self.policy_adapter,
+        )
         self.extension_intake_service = ExtensionIntakeService(
             self.extension_registry_repository,
             self.policy_adapter,
@@ -2755,6 +2817,13 @@ class KernelContainer:
         )
         if callable(set_module_binding_registry):
             set_module_binding_registry(repository=self.module_binding_repository)
+        set_conformance_repository = getattr(
+            self.release_packager,
+            "set_conformance_repository",
+            None,
+        )
+        if callable(set_conformance_repository):
+            set_conformance_repository(repository=self.conformance_repository)
         set_freeze_extension_registry = getattr(
             self.freeze_gate_service,
             "set_extension_registry_repository",
@@ -2769,6 +2838,13 @@ class KernelContainer:
         )
         if callable(set_freeze_module_binding_registry):
             set_freeze_module_binding_registry(self.module_binding_repository)
+        set_freeze_conformance_repository = getattr(
+            self.freeze_gate_service,
+            "set_conformance_repository",
+            None,
+        )
+        if callable(set_freeze_conformance_repository):
+            set_freeze_conformance_repository(self.conformance_repository)
         set_hardening_extension_registry = getattr(
             self.hardening_gate_service,
             "set_extension_registry_repository",
@@ -2783,11 +2859,19 @@ class KernelContainer:
         )
         if callable(set_hardening_module_binding_registry):
             set_hardening_module_binding_registry(self.module_binding_repository)
+        set_hardening_conformance_repository = getattr(
+            self.hardening_gate_service,
+            "set_conformance_repository",
+            None,
+        )
+        if callable(set_hardening_conformance_repository):
+            set_hardening_conformance_repository(self.conformance_repository)
         set_resource_provider = getattr(self.resource_scanner, "set_provider", None)
         if callable(set_resource_provider):
             set_resource_provider("contract_registry", self.contract_registry_repository)
             set_resource_provider("extension_registry", self.extension_registry_repository)
             set_resource_provider("module_binding_registry", self.module_binding_repository)
+            set_resource_provider("conformance", self.conformance_repository)
         self.lifecycle_repository = LifecycleRepository(self.settings.database_url)
         self.lifecycle_policy_service = LifecyclePolicyService(
             self.lifecycle_repository,
@@ -2887,6 +2971,7 @@ class KernelContainer:
             contract_registry_service=self.contract_registry_report_service,
             extension_registry_service=self.extension_registry_repository,
             module_binding_service=self.module_binding_repository,
+            conformance_service=self.conformance_repository,
             lifecycle_service=self.lifecycle_report_service,
         )
         self.operator_queue_summary_builder = QueueSummaryBuilder(
@@ -2949,6 +3034,7 @@ class KernelContainer:
             contract_registry_repository=self.contract_registry_repository,
             extension_registry_repository=self.extension_registry_repository,
             module_binding_repository=self.module_binding_repository,
+            conformance_repository=self.conformance_repository,
             archive_planner=self.archive_planner,
             redaction_planner=self.redaction_planner,
             purge_preview_service=self.purge_preview_service,
@@ -3002,6 +3088,7 @@ class KernelContainer:
             contract_registry_repository=self.contract_registry_repository,
             extension_registry_repository=self.extension_registry_repository,
             module_binding_repository=self.module_binding_repository,
+            conformance_repository=self.conformance_repository,
             archive_planner=self.archive_planner,
             redaction_planner=self.redaction_planner,
             purge_preview_service=self.purge_preview_service,
@@ -4055,6 +4142,50 @@ class KernelContainer:
             (
                 "module_binding_query_service",
                 self.module_binding_query_service,
+                "service",
+                "local",
+            ),
+            ("conformance_repository", self.conformance_repository, "repository", "postgres"),
+            (
+                "conformance_schema_checker",
+                self.conformance_schema_checker,
+                "service",
+                "deterministic",
+            ),
+            (
+                "conformance_profile_service",
+                self.conformance_profile_service,
+                "service",
+                "local",
+            ),
+            (
+                "capability_test_vector_service",
+                self.capability_test_vector_service,
+                "service",
+                "local",
+            ),
+            (
+                "mock_invocation_simulator",
+                self.mock_invocation_simulator,
+                "service",
+                "deterministic",
+            ),
+            ("conformance_runner", self.conformance_runner, "service", "deterministic"),
+            (
+                "conformance_finding_service",
+                self.conformance_finding_service,
+                "service",
+                "local",
+            ),
+            (
+                "readiness_assessment_service",
+                self.readiness_assessment_service,
+                "service",
+                "deterministic",
+            ),
+            (
+                "conformance_query_service",
+                self.conformance_query_service,
                 "service",
                 "local",
             ),

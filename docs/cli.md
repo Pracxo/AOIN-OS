@@ -514,3 +514,22 @@ previews only. They do not load extension code, install packages, activate
 capabilities, register routes, mutate runtime configuration, execute mount
 plans, call external services, print raw prompts, expose hidden reasoning, or
 add domain-specific module behavior.
+
+## Conformance Commands
+
+The CLI exposes the local conformance harness through SDK calls:
+
+```bash
+aionctl conformance profiles
+aionctl conformance profiles seed
+aionctl conformance test-vectors
+aionctl conformance test-vectors generate <capability-binding-id>
+aionctl conformance run --capability-binding-id <capability-binding-id>
+aionctl conformance findings
+aionctl readiness assess --capability-binding-id <capability-binding-id>
+aionctl readiness list
+aionctl conformance query
+```
+
+These commands create or read conformance records only. They do not execute
+package code, invoke capabilities, activate modules, or call external systems.

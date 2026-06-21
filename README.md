@@ -148,6 +148,8 @@ Clients / Future Modules
   local API delivery records.
 - `notifications`: local-only notification topics, subscriptions, alert
   routing, escalation queue records, query helpers, and digests.
+- `conformance`: metadata-only capability conformance profiles, test vectors,
+  schema mock invocation records, findings, and extension readiness assessments.
 
 ## Imported Infrastructure
 
@@ -3267,3 +3269,55 @@ CLI examples:
 The Python SDK exposes the same surface through `client.module_bindings`.
 
 See `docs/adr/0067-capability-binding-module-slot-manager.md`.
+
+## Capability Conformance Harness
+
+AION v0.1 includes a Capability Conformance Harness for staged module and
+capability metadata. It validates schemas, required policy actions, settings,
+sandbox declarations, and safe metadata flags before a future activation layer
+exists.
+
+The mock invocation simulator is schema-only. It hashes and redacts input
+payloads, returns deterministic placeholder output shapes, and never invokes a
+capability, loads package code, installs packages, calls MCP, calls sandbox
+runtimes, registers routes, or contacts external services.
+
+Readiness assessments consume conformance runs and produce local readiness
+records. `activation_ready` remains false in v0.1.
+
+Conformance endpoints:
+
+- `POST /brain/conformance/profiles`
+- `GET /brain/conformance/profiles/{conformance_profile_id}`
+- `GET /brain/conformance/profiles`
+- `POST /brain/conformance/profiles/seed-defaults`
+- `POST /brain/conformance/test-vectors`
+- `GET /brain/conformance/test-vectors/{test_vector_id}`
+- `GET /brain/conformance/test-vectors`
+- `POST /brain/conformance/test-vectors/generate-for-binding/{capability_binding_id}`
+- `POST /brain/conformance/run`
+- `GET /brain/conformance/runs/{conformance_run_id}`
+- `GET /brain/conformance/findings`
+- `POST /brain/conformance/findings/{conformance_finding_id}/dismiss`
+- `POST /brain/readiness/assess`
+- `GET /brain/readiness/assessments/{readiness_assessment_id}`
+- `GET /brain/readiness/assessments`
+- `POST /brain/conformance/query`
+
+Developer commands:
+
+```bash
+./scripts/aionctl.sh --scope workspace:main conformance profiles
+./scripts/aionctl.sh --scope workspace:main conformance profiles seed
+./scripts/aionctl.sh --scope workspace:main conformance test-vectors
+./scripts/aionctl.sh --scope workspace:main conformance test-vectors generate <capability-binding-id>
+./scripts/aionctl.sh --scope workspace:main conformance run --capability-binding-id <capability-binding-id>
+./scripts/aionctl.sh --scope workspace:main conformance findings
+./scripts/aionctl.sh --scope workspace:main readiness assess --capability-binding-id <capability-binding-id>
+./scripts/aionctl.sh --scope workspace:main readiness list
+./scripts/aionctl.sh --scope workspace:main conformance query
+```
+
+The Python SDK exposes the same surface through `client.conformance`.
+
+See `docs/adr/0068-capability-conformance-readiness-gate.md`.
