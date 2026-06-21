@@ -65,3 +65,5 @@ Every architecture-changing Codex task must add or update an ADR.
 - [0059: Run Supervision, Cancellation Gate, Timeout Policy, and Compensation Planner](0059-run-supervision-cancellation-compensation.md) - Defines generic run observation, manual control requests, timeout detection, and non-executing compensation plans.
 - [0060: Internal Notification and Alert Routing](0060-internal-notification-alert-routing.md) - Defines local notification, alert, escalation, and digest boundaries.
 - [0061: Temporal Scheduler, Reminder Queue, Due Item Ledger, and Local Tick Orchestrator](0061-temporal-scheduler-local-tick.md) - Defines local tick-driven scheduler records without background execution.
+- [0062: Incident Correlation, Root Cause Candidates, and Recovery Review](0062-incident-correlation-root-cause-review.md) - Defines local incident grouping, candidates, and review boundaries.
+- [0063: Global Resource Registry and Link Integrity](0063-global-resource-registry-link-integrity.md) - Defines the registry index, resource URI spine, and non-repairing integrity checks.

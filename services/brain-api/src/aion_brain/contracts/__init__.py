@@ -206,6 +206,16 @@ from aion_brain.contracts.identity import (
     WorkspaceRecord,
 )
 from aion_brain.contracts.inbox import InboxMessage, InboxReceiveRequest, InboxReceiveResult
+from aion_brain.contracts.incidents import (
+    IncidentCorrelationRequest,
+    IncidentCorrelationRule,
+    IncidentCorrelationRun,
+    IncidentCreateRequest,
+    IncidentQuery,
+    IncidentRecord,
+    IncidentSignal,
+    IncidentSignalCreateRequest,
+)
 from aion_brain.contracts.intent import IntentFrame
 from aion_brain.contracts.learning import LearningSignal
 from aion_brain.contracts.learning_synthesis import (
@@ -318,6 +328,24 @@ from aion_brain.contracts.replay import (
     SnapshotCreateRequest,
     TraceComparison,
 )
+from aion_brain.contracts.resource_references import (
+    BrokenReference,
+    OrphanedResource,
+    ResourceReferenceCreateRequest,
+    ResourceReferenceLink,
+)
+from aion_brain.contracts.resource_registry import (
+    ReferenceValidationRequest,
+    ReferenceValidationRun,
+    RegistryRebuildRequest,
+    RegistryRebuildRun,
+    RegistrySnapshot,
+    ResourceDescriptor,
+    ResourceIndexRecord,
+    ResourceIndexUpsertRequest,
+    ResourceRegistryQuery,
+    ResourceRegistryQueryResult,
+)
 from aion_brain.contracts.retrieval import (
     ContextBundle,
     ContextFusionRequest,
@@ -326,6 +354,12 @@ from aion_brain.contracts.retrieval import (
     RetrievedContextItem,
 )
 from aion_brain.contracts.risk import RiskAssessment, RiskAssessmentRequest
+from aion_brain.contracts.root_cause import (
+    RecoveryReview,
+    RecoveryReviewRequest,
+    RootCauseCandidate,
+    RootCauseCandidateRequest,
+)
 from aion_brain.contracts.run_control import RunControlRequest, RunControlRequestCreateRequest
 from aion_brain.contracts.run_supervision import (
     RunStatusSample,
@@ -602,6 +636,28 @@ __all__ = [
     "InboxMessage",
     "InboxReceiveRequest",
     "InboxReceiveResult",
+    "IncidentCorrelationRequest",
+    "IncidentCorrelationRule",
+    "IncidentCorrelationRun",
+    "IncidentCreateRequest",
+    "IncidentQuery",
+    "IncidentRecord",
+    "IncidentSignal",
+    "IncidentSignalCreateRequest",
+    "BrokenReference",
+    "OrphanedResource",
+    "ResourceDescriptor",
+    "ResourceIndexRecord",
+    "ResourceIndexUpsertRequest",
+    "ResourceReferenceCreateRequest",
+    "ResourceReferenceLink",
+    "ReferenceValidationRequest",
+    "ReferenceValidationRun",
+    "RegistryRebuildRequest",
+    "RegistryRebuildRun",
+    "RegistrySnapshot",
+    "ResourceRegistryQuery",
+    "ResourceRegistryQueryResult",
     "IntentFrame",
     "LearningSignal",
     "LearningPattern",
@@ -695,6 +751,10 @@ __all__ = [
     "ReferenceLinkCreateRequest",
     "RiskAssessment",
     "RiskAssessmentRequest",
+    "RecoveryReview",
+    "RecoveryReviewRequest",
+    "RootCauseCandidate",
+    "RootCauseCandidateRequest",
     "RunControlRequest",
     "RunControlRequestCreateRequest",
     "RunStatusSample",

@@ -75,6 +75,16 @@ from aion_brain.contracts.guardrails import (
     RiskGuardrailEvaluationRequest,
 )
 from aion_brain.contracts.identity import ActorRecord, WorkspaceRecord
+from aion_brain.contracts.incidents import (
+    IncidentCorrelationRequest,
+    IncidentCorrelationRule,
+    IncidentCorrelationRun,
+    IncidentCreateRequest,
+    IncidentQuery,
+    IncidentRecord,
+    IncidentSignal,
+    IncidentSignalCreateRequest,
+)
 from aion_brain.contracts.instructions import (
     ConstraintRecord,
     InstructionConflict,
@@ -194,8 +204,32 @@ from aion_brain.contracts.release_package import (
 )
 from aion_brain.contracts.reminders import ReminderCreateRequest, ReminderRecord
 from aion_brain.contracts.replay import ReplayRequest
+from aion_brain.contracts.resource_references import (
+    BrokenReference,
+    OrphanedResource,
+    ResourceReferenceCreateRequest,
+    ResourceReferenceLink,
+)
+from aion_brain.contracts.resource_registry import (
+    ReferenceValidationRequest,
+    ReferenceValidationRun,
+    RegistryRebuildRequest,
+    RegistryRebuildRun,
+    RegistrySnapshot,
+    ResourceDescriptor,
+    ResourceIndexRecord,
+    ResourceIndexUpsertRequest,
+    ResourceRegistryQuery,
+    ResourceRegistryQueryResult,
+)
 from aion_brain.contracts.retrieval import RetrievalRequest
 from aion_brain.contracts.risk import RiskAssessment, RiskAssessmentRequest
+from aion_brain.contracts.root_cause import (
+    RecoveryReview,
+    RecoveryReviewRequest,
+    RootCauseCandidate,
+    RootCauseCandidateRequest,
+)
 from aion_brain.contracts.run_control import RunControlRequest, RunControlRequestCreateRequest
 from aion_brain.contracts.run_supervision import (
     RunStatusSample,
@@ -358,6 +392,32 @@ CORE_CONTRACTS: tuple[type[BaseModel], ...] = (
     NotificationDigest,
     NotificationQuery,
     AlertQuery,
+    IncidentSignal,
+    IncidentSignalCreateRequest,
+    IncidentRecord,
+    IncidentCreateRequest,
+    IncidentQuery,
+    IncidentCorrelationRule,
+    IncidentCorrelationRequest,
+    IncidentCorrelationRun,
+    RootCauseCandidate,
+    RootCauseCandidateRequest,
+    RecoveryReview,
+    RecoveryReviewRequest,
+    ResourceDescriptor,
+    ResourceIndexRecord,
+    ResourceIndexUpsertRequest,
+    ResourceReferenceLink,
+    ResourceReferenceCreateRequest,
+    BrokenReference,
+    OrphanedResource,
+    ReferenceValidationRequest,
+    ReferenceValidationRun,
+    RegistryRebuildRequest,
+    RegistryRebuildRun,
+    RegistrySnapshot,
+    ResourceRegistryQuery,
+    ResourceRegistryQueryResult,
     RecurrenceRule,
     ScheduleRecord,
     ScheduleCreateRequest,

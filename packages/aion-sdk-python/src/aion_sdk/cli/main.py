@@ -22,6 +22,7 @@ from aion_sdk.cli.commands.dialogue import install_dialogue_commands
 from aion_sdk.cli.commands.entities import install_entity_commands
 from aion_sdk.cli.commands.explanations import install_explanation_commands
 from aion_sdk.cli.commands.grounding import install_grounding_commands
+from aion_sdk.cli.commands.incidents import install_incident_commands
 from aion_sdk.cli.commands.instructions import install_instruction_commands
 from aion_sdk.cli.commands.learning import install_learning_commands
 from aion_sdk.cli.commands.model_outputs import install_model_output_commands
@@ -32,6 +33,7 @@ from aion_sdk.cli.commands.outcomes import install_outcome_commands
 from aion_sdk.cli.commands.performance import install_performance_commands
 from aion_sdk.cli.commands.policy import install_policy_commands
 from aion_sdk.cli.commands.prompts import install_prompt_commands
+from aion_sdk.cli.commands.registry import install_registry_commands
 from aion_sdk.cli.commands.release import install_release_commands
 from aion_sdk.cli.commands.resilience import install_resilience_commands
 from aion_sdk.cli.commands.run_supervision import install_run_supervision_commands
@@ -568,6 +570,8 @@ install_action_proposal_commands(app, get_client=_client, get_scope=_scope, rend
 install_run_supervision_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_notification_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_scheduler_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_incident_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_registry_commands(app, get_client=_client, get_scope=_scope, render=_render)
 
 
 if __name__ == "__main__":

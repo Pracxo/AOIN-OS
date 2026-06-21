@@ -533,3 +533,62 @@ clients, frontend code, or external delivery services.
 The SDK calls public Brain APIs only. It does not import `aion_brain`,
 external calendar clients, notification provider SDKs, workflow engines,
 database clients, frontend code, or external delivery services.
+
+## IncidentsResource
+
+`client.incidents` supports:
+
+- `create_signal(payload)`
+- `list_signals(scope, status=None, source_type=None, signal_type=None, severity=None, limit=100)`
+- `dismiss_signal(incident_signal_id, reason, actor_id=None)`
+- `create_incident(payload)`
+- `get_incident(incident_id, scope)`
+- `query(payload)`
+- `acknowledge(incident_id, reason, actor_id=None)`
+- `resolve(incident_id, reason, actor_id=None)`
+- `dismiss(incident_id, reason, actor_id=None)`
+- `archive(incident_id, reason, actor_id=None)`
+- `create_rule(payload)`
+- `list_rules(scope, status=None, rule_type=None, limit=100)`
+- `seed_rules(scope, dry_run=True)`
+- `correlate(payload)`
+- `get_correlation_run(correlation_run_id)`
+- `generate_root_causes(incident_id, scope, created_by=None)`
+- `create_root_cause(payload)`
+- `list_root_causes(incident_id=None, status=None, candidate_type=None, limit=100)`
+- `confirm_root_cause(root_cause_candidate_id, reason, actor_id=None)`
+- `dismiss_root_cause(root_cause_candidate_id, reason, actor_id=None)`
+- `create_recovery_review(payload)`
+- `get_recovery_review(recovery_review_id, scope)`
+- `list_recovery_reviews(scope, incident_id=None, status=None, limit=100)`
+
+The SDK calls public Brain APIs only. It does not import `aion_brain`,
+external incident-management clients, notification provider SDKs, database
+clients, frontend code, shell tools, or remediation systems.
+
+## RegistryResource
+
+`client.registry` supports:
+
+- `upsert_resource(payload)`
+- `get_resource(resource_type, resource_id, scope)`
+- `get_by_uri(resource_uri, scope)`
+- `query(payload)`
+- `create_link(payload, scope)`
+- `list_links(scope, source_uri=None, target_uri=None, relation_type=None, status=None, limit=100)`
+- `list_backlinks(resource_uri, scope, limit=100)`
+- `validate(payload)`
+- `get_validation_run(validation_run_id, scope)`
+- `list_broken_references(scope, status=None, severity=None, validation_run_id=None, limit=100)`
+- `dismiss_broken_reference(broken_reference_id, reason, scope)`
+- `list_orphaned_resources(scope, status=None, severity=None, validation_run_id=None, limit=100)`
+- `dismiss_orphaned_resource(orphaned_resource_id, reason, scope)`
+- `rebuild(payload)`
+- `get_rebuild_run(rebuild_run_id, scope)`
+- `create_snapshot(payload)`
+- `get_snapshot(registry_snapshot_id, scope)`
+- `list_snapshots(scope, snapshot_type=None, status=None, limit=50)`
+
+The SDK calls public Brain APIs only. It does not import `aion_brain`,
+database clients, search clients, graph clients, source-system internals,
+frontend code, shell tools, or repair systems.

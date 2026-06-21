@@ -1225,3 +1225,69 @@ Public scheduler contracts may use compatibility aliases such as
 `schedule_policy_id` for `policy_id`, and `rule` for policy `conditions`.
 The Brain keeps the scheduler local, deterministic, and non-executing in
 v0.1.
+
+## Incident Contracts
+
+AION Brain owns these incident correlation contracts:
+
+- `IncidentSignal`
+- `IncidentSignalCreateRequest`
+- `IncidentRecord`
+- `IncidentCreateRequest`
+- `IncidentQuery`
+- `IncidentCorrelationRule`
+- `IncidentCorrelationRequest`
+- `IncidentCorrelationRun`
+- `RootCauseCandidate`
+- `RootCauseCandidateRequest`
+- `RecoveryReview`
+- `RecoveryReviewRequest`
+
+Incident contracts are local, generic, and Brain-owned. `IncidentSignal`
+normalizes a local AION signal without changing the source record.
+`IncidentRecord` is an AION-owned grouping record and is not remediation.
+`IncidentCorrelationRun` records deterministic grouping results. Root cause
+candidates are hypotheses, not truth. Recovery reviews are operator review
+artifacts, not execution plans.
+
+Incident contracts must not expose external incident system payloads, raw
+headers, hidden reasoning, raw prompts, provider payloads, secrets, SQLAlchemy
+rows, source-system internals, or domain-specific incident logic.
+
+## Global Resource Registry Contracts
+
+AION Brain owns these registry and link-integrity contracts:
+
+- `ResourceDescriptor`
+- `ResourceIndexRecord`
+- `ResourceIndexUpsertRequest`
+- `ResourceReferenceLink`
+- `ResourceReferenceCreateRequest`
+- `BrokenReference`
+- `OrphanedResource`
+- `ReferenceValidationRequest`
+- `ReferenceValidationRun`
+- `RegistryRebuildRequest`
+- `RegistryRebuildRun`
+- `RegistrySnapshot`
+- `ResourceRegistryQuery`
+- `ResourceRegistryQueryResult`
+
+`ResourceDescriptor` is a safe descriptor for a source-system record. It uses
+the canonical URI form `aion://{resource_type}/{resource_id}` with optional
+`?trace_id={trace_id}`. Descriptors contain metadata, summary, scope, status,
+visibility, sensitivity, references, and hashes; they do not make the registry
+the source of truth.
+
+`ResourceReferenceLink` is a registry-owned directed link between two resource
+URIs. `BrokenReference` and `OrphanedResource` are integrity findings only.
+They do not repair, acknowledge, delete, or mutate source records.
+
+`ReferenceValidationRun` records deterministic link checks. `RegistryRebuildRun`
+records deterministic index rebuilds from local safe descriptors.
+`RegistrySnapshot` records a deterministic snapshot of registry-owned index and
+link metadata.
+
+Registry contracts must not expose raw headers, hidden reasoning, raw prompts,
+provider payloads, secrets, SQLAlchemy rows, source-system internals, or
+domain-specific resource logic.

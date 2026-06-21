@@ -122,6 +122,59 @@ class Settings(BaseSettings):
         default="local",
         validation_alias=AliasChoices("AION_OBSERVABILITY_ADAPTER", "observability_adapter"),
     )
+    resource_registry_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_RESOURCE_REGISTRY_ENABLED",
+            "resource_registry_enabled",
+        ),
+    )
+    resource_reference_validation_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_RESOURCE_REFERENCE_VALIDATION_ENABLED",
+            "resource_reference_validation_enabled",
+        ),
+    )
+    registry_rebuild_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_REGISTRY_REBUILD_ENABLED", "registry_rebuild_enabled"),
+    )
+    registry_snapshots_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_REGISTRY_SNAPSHOTS_ENABLED",
+            "registry_snapshots_enabled",
+        ),
+    )
+    registry_auto_index_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_REGISTRY_AUTO_INDEX_ENABLED",
+            "registry_auto_index_enabled",
+        ),
+    )
+    registry_create_notifications_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_REGISTRY_CREATE_NOTIFICATIONS_DEFAULT",
+            "registry_create_notifications_default",
+        ),
+    )
+    registry_create_incident_signals_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_REGISTRY_CREATE_INCIDENT_SIGNALS_DEFAULT",
+            "registry_create_incident_signals_default",
+        ),
+    )
+    registry_max_resources_per_rebuild: int = Field(
+        default=5000,
+        validation_alias=AliasChoices(
+            "AION_REGISTRY_MAX_RESOURCES_PER_REBUILD",
+            "registry_max_resources_per_rebuild",
+        ),
+    )
     run_supervision_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices(
@@ -220,6 +273,66 @@ class Settings(BaseSettings):
         validation_alias=AliasChoices(
             "AION_NOTIFICATION_AUTO_CREATE_OPERATOR_ITEMS",
             "notification_auto_create_operator_items",
+        ),
+    )
+    incidents_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_INCIDENTS_ENABLED", "incidents_enabled"),
+    )
+    incident_signal_ingestion_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_INCIDENT_SIGNAL_INGESTION_ENABLED",
+            "incident_signal_ingestion_enabled",
+        ),
+    )
+    incident_correlation_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_INCIDENT_CORRELATION_ENABLED",
+            "incident_correlation_enabled",
+        ),
+    )
+    root_cause_candidates_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_ROOT_CAUSE_CANDIDATES_ENABLED",
+            "root_cause_candidates_enabled",
+        ),
+    )
+    recovery_review_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_RECOVERY_REVIEW_ENABLED",
+            "recovery_review_enabled",
+        ),
+    )
+    incident_auto_create_from_alerts: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_INCIDENT_AUTO_CREATE_FROM_ALERTS",
+            "incident_auto_create_from_alerts",
+        ),
+    )
+    incident_correlation_default_window_minutes: int = Field(
+        default=60,
+        validation_alias=AliasChoices(
+            "AION_INCIDENT_CORRELATION_DEFAULT_WINDOW_MINUTES",
+            "incident_correlation_default_window_minutes",
+        ),
+    )
+    incident_max_signals_per_run: int = Field(
+        default=1000,
+        validation_alias=AliasChoices(
+            "AION_INCIDENT_MAX_SIGNALS_PER_RUN",
+            "incident_max_signals_per_run",
+        ),
+    )
+    recovery_review_create_actions_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_RECOVERY_REVIEW_CREATE_ACTIONS_DEFAULT",
+            "recovery_review_create_actions_default",
         ),
     )
     scheduler_enabled: bool = Field(

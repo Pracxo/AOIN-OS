@@ -347,6 +347,38 @@ allowed_actions := {
 	"escalation.update",
 	"notification.digest.create",
 	"notification.digest.read",
+	"incident.signal.create",
+	"incident.signal.read",
+	"incident.signal.update",
+	"incident.rule.create",
+	"incident.rule.read",
+	"incident.rule.update",
+	"incident.create",
+	"incident.read",
+	"incident.update",
+	"incident.delete",
+	"incident.correlate",
+	"incident.root_cause.create",
+	"incident.root_cause.read",
+	"incident.root_cause.update",
+	"incident.recovery_review.create",
+	"incident.recovery_review.read",
+	"registry.resource.create",
+	"registry.resource.read",
+	"registry.resource.update",
+	"registry.link.create",
+	"registry.link.read",
+	"registry.link.update",
+	"registry.link.delete",
+	"registry.backlink.read",
+	"registry.validate",
+	"registry.rebuild",
+	"registry.snapshot.create",
+	"registry.snapshot.read",
+	"registry.broken_reference.read",
+	"registry.broken_reference.update",
+	"registry.orphaned_resource.read",
+	"registry.orphaned_resource.update",
 	"response.draft",
 	"response.evaluate",
 	"response.verify",
@@ -702,6 +734,17 @@ low_allowed_actions := {
 	"escalation.policy.read",
 	"escalation.read",
 	"notification.digest.read",
+	"incident.signal.read",
+	"incident.rule.read",
+	"incident.read",
+	"incident.root_cause.read",
+	"incident.recovery_review.read",
+	"registry.resource.read",
+	"registry.link.read",
+	"registry.backlink.read",
+	"registry.snapshot.read",
+	"registry.broken_reference.read",
+	"registry.orphaned_resource.read",
 	"response.draft",
 	"response.evaluate",
 	"response.verify",
@@ -960,6 +1003,27 @@ medium_approval_actions := {
 	"escalation.evaluate",
 	"escalation.update",
 	"notification.digest.create",
+	"incident.signal.create",
+	"incident.signal.update",
+	"incident.rule.create",
+	"incident.rule.update",
+	"incident.create",
+	"incident.update",
+	"incident.delete",
+	"incident.correlate",
+	"incident.root_cause.create",
+	"incident.root_cause.update",
+	"incident.recovery_review.create",
+	"registry.resource.create",
+	"registry.resource.update",
+	"registry.link.create",
+	"registry.link.update",
+	"registry.link.delete",
+	"registry.validate",
+	"registry.rebuild",
+	"registry.snapshot.create",
+	"registry.broken_reference.update",
+	"registry.orphaned_resource.update",
 }
 
 default decision := {
@@ -2316,6 +2380,75 @@ decision := {
 decision := {
 	"allow": true,
 	"approval_required": false,
+	"reason": "incident_read_allowed",
+	"constraints": ["local_only"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	incident_read_action
+	incident_reader
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "incident_write_allowed",
+	"constraints": ["local_only", "no_source_mutation", "no_remediation_execution"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	incident_write_action
+	incident_operator
+	not incident_external_action
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "incident_correlate_dry_run_allowed",
+	"constraints": ["dry_run", "local_only", "no_source_mutation"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "incident.correlate"
+	input.context.mode == "dry_run"
+	incident_operator
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "incident_correlate_controlled_allowed",
+	"constraints": ["incident_owned_records_only", "no_source_mutation", "no_remediation_execution"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "incident.correlate"
+	input.context.mode == "controlled"
+	incident_operator
+	not incident_external_action
+}
+
+decision := {
+	"allow": false,
+	"approval_required": false,
+	"reason": "incident_remediation_denied",
+	"constraints": ["source_mutation_denied", "remediation_execution_denied"],
+	"audit_level": "high",
+} if {
+	valid_action
+	valid_risk
+	incident_action
+	incident_external_action
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
 	"reason": "evidence_link_allowed",
 	"constraints": [],
 	"audit_level": "elevated",
@@ -2644,6 +2777,7 @@ decision := {
 	not belief_action
 	not registry_action
 	not scheduler_action
+	not incident_action
 }
 
 decision := {
@@ -2857,6 +2991,7 @@ decision := {
 	not dialogue_action
 	not belief_action
 	not scheduler_action
+	not incident_action
 }
 
 decision := {
@@ -2991,6 +3126,114 @@ scheduler_external_action if {
 
 scheduler_external_action if {
 	input.context.external_calendar == true
+}
+
+incident_action if {
+	startswith(input.action_type, "incident.")
+}
+
+incident_read_action if {
+	input.action_type == "incident.signal.read"
+}
+
+incident_read_action if {
+	input.action_type == "incident.rule.read"
+}
+
+incident_read_action if {
+	input.action_type == "incident.read"
+}
+
+incident_read_action if {
+	input.action_type == "incident.root_cause.read"
+}
+
+incident_read_action if {
+	input.action_type == "incident.recovery_review.read"
+}
+
+incident_write_action if {
+	input.action_type == "incident.signal.create"
+}
+
+incident_write_action if {
+	input.action_type == "incident.signal.update"
+}
+
+incident_write_action if {
+	input.action_type == "incident.rule.create"
+}
+
+incident_write_action if {
+	input.action_type == "incident.rule.update"
+}
+
+incident_write_action if {
+	input.action_type == "incident.create"
+}
+
+incident_write_action if {
+	input.action_type == "incident.update"
+}
+
+incident_write_action if {
+	input.action_type == "incident.delete"
+}
+
+incident_write_action if {
+	input.action_type == "incident.root_cause.create"
+}
+
+incident_write_action if {
+	input.action_type == "incident.root_cause.update"
+}
+
+incident_write_action if {
+	input.action_type == "incident.recovery_review.create"
+}
+
+incident_operator if {
+	input.context.actor_context.roles[_] == "owner"
+}
+
+incident_operator if {
+	input.context.actor_context.roles[_] == "admin"
+}
+
+incident_operator if {
+	input.context.actor_context.roles[_] == "operator"
+}
+
+incident_operator if {
+	input.context.actor_context.permissions[_] == input.action_type
+}
+
+incident_reader if {
+	incident_operator
+}
+
+incident_reader if {
+	input.context.actor_context.roles[_] == "auditor"
+}
+
+incident_reader if {
+	input.context.actor_context.permissions[_] == "incident.read"
+}
+
+incident_reader if {
+	input.context.actor_context.permissions[_] == "incident.signal.read"
+}
+
+incident_external_action if {
+	input.context.source_records_mutated == true
+}
+
+incident_external_action if {
+	input.context.remediation_execution == true
+}
+
+incident_external_action if {
+	input.context.execute_remediation == true
 }
 
 valid_action if {
@@ -3166,6 +3409,10 @@ registry_action if {
 
 registry_action if {
 	startswith(input.action_type, "outcome.")
+}
+
+registry_action if {
+	startswith(input.action_type, "registry.")
 }
 
 registry_approval_action if {

@@ -6,6 +6,7 @@ from datetime import UTC, datetime
 from uuid import uuid4
 
 from aion_brain.contracts.alerts import AlertCreateRequest, AlertQuery, AlertRecord
+from aion_brain.contracts.incidents import IncidentSignalType
 from aion_brain.contracts.scopes import ActorContext
 from aion_brain.dialogue._shared import authorize, emit_telemetry
 
@@ -19,11 +20,15 @@ class AlertService:
         policy_adapter: object | None,
         *,
         telemetry_service: object | None = None,
+        incident_signal_service: object | None = None,
+        settings: object | None = None,
         actor_context: ActorContext | None = None,
     ) -> None:
         self._repository = repository
         self._policy_adapter = policy_adapter
         self._telemetry_service = telemetry_service
+        self._incident_signal_service = incident_signal_service
+        self._settings = settings
         self._actor_context = actor_context or ActorContext()
 
     def with_actor_context(self, actor_context: ActorContext) -> AlertService:
@@ -31,6 +36,8 @@ class AlertService:
             self._repository,
             self._policy_adapter,
             telemetry_service=self._telemetry_service,
+            incident_signal_service=self._incident_signal_service,
+            settings=self._settings,
             actor_context=actor_context,
         )
 
@@ -78,6 +85,7 @@ class AlertService:
             trace_id=stored.trace_id,
             payload={"alert_type": stored.alert_type, "severity": stored.severity},
         )
+        self._maybe_create_incident_signal(stored)
         return stored
 
     def get_alert(self, alert_id: str, scope: list[str]) -> AlertRecord | None:
@@ -157,6 +165,40 @@ class AlertService:
         )
         return stored
 
+    def _maybe_create_incident_signal(self, alert: AlertRecord) -> None:
+        if self._incident_signal_service is None:
+            return
+        should_create = bool(alert.metadata.get("create_incident_signal")) or bool(
+            getattr(self._settings, "incident_auto_create_from_alerts", False)
+        )
+        if not should_create:
+            return
+        create_signal = getattr(self._incident_signal_service, "create_signal", None)
+        if not callable(create_signal):
+            return
+        try:
+            from aion_brain.contracts.incidents import IncidentSignalCreateRequest
+
+            create_signal(
+                IncidentSignalCreateRequest(
+                    trace_id=alert.trace_id,
+                    actor_id=alert.actor_id,
+                    workspace_id=alert.workspace_id,
+                    source_type="alert",
+                    source_id=alert.alert_id,
+                    signal_type=_signal_type_for_alert(alert.alert_type),
+                    severity=alert.severity,
+                    title=alert.title,
+                    summary=alert.description,
+                    owner_scope=alert.owner_scope,
+                    refs=[alert.alert_id],
+                    metadata={"created_from_alert": True},
+                    created_by=alert.created_by,
+                )
+            )
+        except Exception:
+            return
+
 
 def _save_alert(repository: object, alert: AlertRecord) -> AlertRecord:
     save = getattr(repository, "save_alert", None)
@@ -182,6 +224,20 @@ def _intensity(severity: str) -> float:
     if severity == "high":
         return 0.8
     return 0.5
+
+
+def _signal_type_for_alert(alert_type: str) -> IncidentSignalType:
+    if "stalled" in alert_type:
+        return "stalled"
+    if "timeout" in alert_type:
+        return "timed_out"
+    if "blocked" in alert_type:
+        return "blocked"
+    if "failed" in alert_type:
+        return "failed"
+    if "prompt_injection" in alert_type:
+        return "high_risk"
+    return "generic"
 
 
 __all__ = ["AlertService"]

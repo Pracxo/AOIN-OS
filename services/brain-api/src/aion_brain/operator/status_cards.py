@@ -39,6 +39,8 @@ _CARD_SPECS: tuple[tuple[str, str, OperatorCategory, str], ...] = (
     ("instructions", "Instruction Hierarchy", "operator", "instruction_service"),
     ("prompts", "Prompt Governance", "operator", "prompt_service"),
     ("scheduler", "Temporal Scheduler", "scheduler", "scheduler_service"),
+    ("incidents", "Open Incidents", "incidents", "incident_service"),
+    ("registry", "Resource Registry", "registry", "registry_service"),
 )
 
 

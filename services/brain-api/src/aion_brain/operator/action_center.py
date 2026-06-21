@@ -81,6 +81,7 @@ class ActionCenterService:
         generated.extend(self._scheduler_due_item_items(scope))
         generated.extend(self._scheduler_reminder_items(scope))
         generated.extend(self._scheduler_failed_tick_items(scope))
+        generated.extend(self._high_critical_incident_items(scope))
         stored: list[OperatorActionItem] = []
         for item in generated[:limit]:
             saved = self._repository.save_action_item(item)
@@ -734,6 +735,37 @@ class ActionCenterService:
                 metadata={
                     "alert_type": getattr(item, "alert_type", None),
                     "severity": getattr(item, "severity", None),
+                },
+            )
+            for item in items
+            if getattr(item, "severity", None) in {"high", "critical"}
+        ]
+
+    def _high_critical_incident_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("incident_service")
+        list_incidents = getattr(source, "list_incidents", None)
+        if not callable(list_incidents):
+            return []
+        try:
+            items = list_incidents(scope=scope, status="open", limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="incident",
+                source_id=_id_for(item, "incident_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="incidents",
+                severity="critical" if getattr(item, "severity", None) == "critical" else "high",
+                title="Incident requires operator review.",
+                description="A local AION incident is open and requires review.",
+                recommended_action="review_incident",
+                runbook_ref="docs/adr/0062-incident-correlation-root-cause-review.md",
+                scope=getattr(item, "owner_scope", scope) or scope,
+                metadata={
+                    "incident_type": getattr(item, "incident_type", None),
+                    "severity": getattr(item, "severity", None),
+                    "source_records_mutated": False,
                 },
             )
             for item in items

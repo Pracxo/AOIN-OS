@@ -49,6 +49,19 @@ class KernelDiagnostics:
         ("alert_service_present", "alert_service", "high"),
         ("escalation_service_present", "escalation_service", "medium"),
         ("notification_digest_service_present", "notification_digest_service", "medium"),
+        ("incident_signal_service_present", "incident_signal_service", "high"),
+        ("incident_service_present", "incident_service", "high"),
+        ("incident_correlation_engine_present", "incident_correlation_engine", "high"),
+        ("root_cause_candidate_service_present", "root_cause_candidate_service", "medium"),
+        ("recovery_review_service_present", "recovery_review_service", "medium"),
+        ("resource_registry_repository_present", "resource_registry_repository", "high"),
+        ("resource_registry_service_present", "resource_registry_service", "high"),
+        ("resource_link_service_present", "resource_link_service", "high"),
+        ("backlink_service_present", "backlink_service", "medium"),
+        ("registry_query_service_present", "registry_query_service", "medium"),
+        ("reference_validator_present", "reference_validator", "high"),
+        ("registry_rebuilder_present", "registry_rebuilder", "medium"),
+        ("registry_snapshot_service_present", "registry_snapshot_service", "medium"),
         ("scheduler_repository_present", "scheduler_repository", "high"),
         ("scheduler_schedule_service_present", "scheduler_schedule_service", "high"),
         ("scheduler_due_item_service_present", "scheduler_due_item_service", "medium"),
@@ -318,6 +331,7 @@ class KernelDiagnostics:
         checks.extend(self._action_proposal_checks(settings))
         checks.extend(self._run_supervision_checks(settings))
         checks.extend(self._notification_checks(settings))
+        checks.extend(self._incident_checks(settings))
         checks.extend(self._scheduler_checks(settings))
         checks.extend(self._entity_checks(settings))
         checks.extend(self._situation_checks(settings))
@@ -835,6 +849,91 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Scheduler services are assembled.",
+            ),
+        ]
+
+    def _incident_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "incident_signal_service",
+                "incident_rule_service",
+                "incident_service",
+                "incident_correlation_engine",
+                "root_cause_candidate_service",
+                "recovery_review_service",
+                "incident_query_service",
+            )
+        )
+        return [
+            self._result(
+                "incidents_enabled",
+                "incidents",
+                "passed" if bool(getattr(settings, "incidents_enabled", True)) else "warning",
+                "medium",
+                "Incident correlation APIs are enabled.",
+            ),
+            self._result(
+                "incident_signal_ingestion_enabled",
+                "incidents",
+                (
+                    "passed"
+                    if bool(getattr(settings, "incident_signal_ingestion_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Incident signal ingestion is enabled.",
+            ),
+            self._result(
+                "incident_correlation_enabled",
+                "incidents",
+                (
+                    "passed"
+                    if bool(getattr(settings, "incident_correlation_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Incident correlation is enabled.",
+            ),
+            self._result(
+                "root_cause_candidates_enabled",
+                "incidents",
+                (
+                    "passed"
+                    if bool(getattr(settings, "root_cause_candidates_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Root cause candidate generation is enabled.",
+            ),
+            self._result(
+                "recovery_review_enabled",
+                "incidents",
+                (
+                    "passed"
+                    if bool(getattr(settings, "recovery_review_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Recovery reviews are enabled.",
+            ),
+            self._result(
+                "incident_auto_create_from_alerts",
+                "incidents",
+                (
+                    "passed"
+                    if not bool(getattr(settings, "incident_auto_create_from_alerts", False))
+                    else "warning"
+                ),
+                "critical",
+                "Automatic incident creation from alerts is disabled by default.",
+            ),
+            self._result(
+                "incident_services_present",
+                "incidents",
+                "passed" if services_present else "failed",
+                "high",
+                "Incident services are assembled.",
             ),
         ]
 

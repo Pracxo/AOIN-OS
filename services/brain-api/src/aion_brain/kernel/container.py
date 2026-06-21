@@ -135,6 +135,14 @@ from aion_brain.identity.repository import IdentityRepository
 from aion_brain.identity.service import IdentityService
 from aion_brain.inbox.repository import InboxRepository
 from aion_brain.inbox.service import InboxService
+from aion_brain.incidents.correlation import IncidentCorrelationEngine
+from aion_brain.incidents.query import IncidentQueryService
+from aion_brain.incidents.recovery import RecoveryReviewService
+from aion_brain.incidents.repository import IncidentRepository
+from aion_brain.incidents.root_cause import RootCauseCandidateService
+from aion_brain.incidents.rules import CorrelationRuleService
+from aion_brain.incidents.service import IncidentService
+from aion_brain.incidents.signals import IncidentSignalService
 from aion_brain.instructions.conflicts import InstructionConflictDetector
 from aion_brain.instructions.constraints import ConstraintService
 from aion_brain.instructions.learning import PreferenceLearningService
@@ -299,6 +307,18 @@ from aion_brain.resilience.fault_injection import FaultInjectionService
 from aion_brain.resilience.repository import ResilienceRepository
 from aion_brain.resilience.retry_policies import RetryPolicyService
 from aion_brain.resilience.test_runner import ResilienceTestRunner
+from aion_brain.resource_registry import (
+    BacklinkService,
+    ReferenceValidator,
+    RegistryQueryService,
+    RegistryRebuilder,
+    RegistrySnapshotService,
+    ResourceDescriptorFactory,
+    ResourceLinkService,
+    ResourceRegistryRepository,
+    ResourceRegistryService,
+    ResourceScanner,
+)
 from aion_brain.responses.composer import ResponseComposer
 from aion_brain.responses.delivery import ResponseDeliveryService
 from aion_brain.responses.feedback import DialogueFeedbackService
@@ -1962,6 +1982,7 @@ class KernelContainer:
             self.notification_repository,
             self.policy_adapter,
             telemetry_service=self.telemetry_service,
+            settings=self.settings,
         )
         self.notification_router = NotificationRouter(
             self.notification_repository,
@@ -1994,6 +2015,52 @@ class KernelContainer:
             telemetry_service=self.telemetry_service,
         )
         self.notification_query_service = NotificationQueryService(self.notification_router)
+        self.incident_repository = IncidentRepository(self.settings.database_url)
+        self.incident_signal_service = IncidentSignalService(
+            self.incident_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+        )
+        self.alert_service._incident_signal_service = self.incident_signal_service
+        self.incident_rule_service = CorrelationRuleService(
+            self.incident_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.incident_service = IncidentService(
+            self.incident_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.incident_query_service = IncidentQueryService(
+            self.incident_repository,
+            self.policy_adapter,
+        )
+        self.incident_correlation_engine = IncidentCorrelationEngine(
+            self.incident_repository,
+            self.policy_adapter,
+            incident_service=self.incident_service,
+            autonomy_governor=self.autonomy_governor,
+            notification_router=self.notification_router,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.root_cause_candidate_service = RootCauseCandidateService(
+            self.incident_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.recovery_review_service = RecoveryReviewService(
+            self.incident_repository,
+            self.policy_adapter,
+            root_cause_service=self.root_cause_candidate_service,
+            action_proposal_service=self.action_proposal_service,
+            compensation_planner=self.compensation_planner,
+            notification_router=self.notification_router,
+            telemetry_service=self.telemetry_service,
+        )
         self.scheduler_repository = SchedulerRepository(self.settings.database_url)
         self.scheduler_recurrence_evaluator = RecurrenceEvaluator()
         self.scheduler_schedule_service = LocalSchedulerScheduleService(
@@ -2398,6 +2465,58 @@ class KernelContainer:
             settings=self.settings,
             root_dir=root_dir,
         )
+        self.resource_registry_repository = ResourceRegistryRepository(self.settings.database_url)
+        self.resource_descriptor_factory = ResourceDescriptorFactory()
+        self.resource_scanner = ResourceScanner(
+            self.resource_descriptor_factory,
+            notification=self.notification_repository,
+            incident=self.incident_repository,
+            release_package=self.release_package_repository,
+            backup=self.backup_repository,
+            freeze_gate=self.freeze_gate_service,
+        )
+        self.resource_registry_service = ResourceRegistryService(
+            self.resource_registry_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.resource_link_service = ResourceLinkService(
+            self.resource_registry_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.backlink_service = BacklinkService(
+            self.resource_registry_repository,
+            self.policy_adapter,
+        )
+        self.registry_query_service = RegistryQueryService(
+            self.resource_registry_repository,
+            self.policy_adapter,
+        )
+        self.reference_validator = ReferenceValidator(
+            self.resource_registry_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            notification_router=self.notification_router,
+            incident_signal_service=self.incident_signal_service,
+            settings=self.settings,
+        )
+        self.registry_snapshot_service = RegistrySnapshotService(
+            self.resource_registry_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.registry_rebuilder = RegistryRebuilder(
+            self.resource_registry_repository,
+            self.policy_adapter,
+            scanner=self.resource_scanner,
+            registry_service=self.resource_registry_service,
+            link_service=self.resource_link_service,
+            snapshot_service=self.registry_snapshot_service,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
         self.operator_repository = OperatorRepository(self.settings.database_url)
         self.scheduler_tick_orchestrator._operator_repository = self.operator_repository
         self.operator_status_card_builder = StatusCardBuilder(
@@ -2431,6 +2550,8 @@ class KernelContainer:
             instruction_service=self.instruction_query_service,
             prompt_service=self.prompt_compiler,
             scheduler_service=self.scheduler_query_service,
+            incident_service=self.incident_service,
+            registry_service=self.registry_query_service,
         )
         self.operator_queue_summary_builder = QueueSummaryBuilder(
             approval_service=self.approval_repository,
@@ -2484,6 +2605,11 @@ class KernelContainer:
             escalation_service=self.escalation_service,
             notification_digest_service=self.notification_digest_service,
             scheduler_service=self.scheduler_query_service,
+            incident_service=self.incident_service,
+            root_cause_service=self.root_cause_candidate_service,
+            recovery_review_service=self.recovery_review_service,
+            reference_validator=self.reference_validator,
+            registry_rebuilder=self.registry_rebuilder,
         )
         self.operator_action_center_service = ActionCenterService(
             self.operator_repository,
@@ -2529,6 +2655,7 @@ class KernelContainer:
             escalation_service=self.escalation_service,
             notification_digest_service=self.notification_digest_service,
             scheduler_service=self.scheduler_query_service,
+            incident_service=self.incident_service,
         )
         self.operator_readiness_aggregator = ReadinessAggregator(
             self.operator_status_card_builder,
@@ -2960,6 +3087,39 @@ class KernelContainer:
             (
                 "notification_query_service",
                 self.notification_query_service,
+                "service",
+                "local",
+            ),
+            ("incident_repository", self.incident_repository, "repository", "postgres"),
+            (
+                "incident_signal_service",
+                self.incident_signal_service,
+                "service",
+                "local",
+            ),
+            (
+                "incident_rule_service",
+                self.incident_rule_service,
+                "service",
+                "local",
+            ),
+            ("incident_service", self.incident_service, "service", "local"),
+            (
+                "incident_correlation_engine",
+                self.incident_correlation_engine,
+                "service",
+                "deterministic",
+            ),
+            ("incident_query_service", self.incident_query_service, "service", "local"),
+            (
+                "root_cause_candidate_service",
+                self.root_cause_candidate_service,
+                "service",
+                "deterministic",
+            ),
+            (
+                "recovery_review_service",
+                self.recovery_review_service,
                 "service",
                 "local",
             ),
@@ -3401,6 +3561,36 @@ class KernelContainer:
             ("restore_preview_service", self.restore_preview_service, "service", "local"),
             ("restore_service", self.restore_service, "service", "local"),
             ("backup_validator", self.backup_validator, "service", "local"),
+            (
+                "resource_registry_repository",
+                self.resource_registry_repository,
+                "repository",
+                "postgres",
+            ),
+            (
+                "resource_descriptor_factory",
+                self.resource_descriptor_factory,
+                "service",
+                "deterministic",
+            ),
+            ("resource_scanner", self.resource_scanner, "service", "local"),
+            (
+                "resource_registry_service",
+                self.resource_registry_service,
+                "service",
+                "local",
+            ),
+            ("resource_link_service", self.resource_link_service, "service", "local"),
+            ("backlink_service", self.backlink_service, "service", "local"),
+            ("registry_query_service", self.registry_query_service, "service", "local"),
+            ("reference_validator", self.reference_validator, "service", "deterministic"),
+            (
+                "registry_snapshot_service",
+                self.registry_snapshot_service,
+                "service",
+                "deterministic",
+            ),
+            ("registry_rebuilder", self.registry_rebuilder, "service", "deterministic"),
             ("operator_repository", self.operator_repository, "repository", "postgres"),
             (
                 "operator_status_card_builder",

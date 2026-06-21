@@ -1238,3 +1238,67 @@ scheduler-owned records only. Scheduler policy does not authorize scheduled
 target execution, external calendar integration, external delivery, approval
 bypass, source mutation, or domain-specific scheduling. Unknown scheduler
 actions fail closed.
+
+## Incident Policy
+
+Generic incident actions:
+
+- `incident.signal.create`
+- `incident.signal.read`
+- `incident.signal.update`
+- `incident.create`
+- `incident.read`
+- `incident.update`
+- `incident.correlate`
+- `incident.rule.create`
+- `incident.rule.read`
+- `incident.rule.update`
+- `incident.root_cause.create`
+- `incident.root_cause.read`
+- `incident.root_cause.update`
+- `incident.recovery_review.create`
+- `incident.recovery_review.read`
+- `incident.recovery_review.update`
+
+Incident reads are scope-gated. Signal creation, incident creation,
+correlation, root cause candidate creation, and recovery review creation
+require scoped actors, operators, admins, or internal Brain services allowed by
+policy. Dry-run correlation is the default safe posture. Controlled
+correlation requires policy and autonomy gates.
+
+Incident policy does not authorize external incident system calls, automatic
+remediation, source record mutation, source acknowledgement, source
+resolution, command execution, workflow execution, approval bypass, raw prompt
+disclosure, hidden reasoning disclosure, raw header export, secret export, or
+domain-specific incident logic. Unknown incident actions fail closed.
+
+## Resource Registry Policy
+
+Generic registry actions:
+
+- `registry.resource.index`
+- `registry.resource.read`
+- `registry.resource.query`
+- `registry.link.create`
+- `registry.link.read`
+- `registry.backlink.read`
+- `registry.validation.run`
+- `registry.validation.read`
+- `registry.broken_reference.read`
+- `registry.broken_reference.update`
+- `registry.orphaned_resource.read`
+- `registry.orphaned_resource.update`
+- `registry.rebuild.run`
+- `registry.rebuild.read`
+- `registry.snapshot.create`
+- `registry.snapshot.read`
+
+Registry reads are scope-gated. Indexing, link creation, validation, rebuilds,
+snapshot creation, and integrity finding updates require scoped actors,
+operators, admins, or internal Brain services allowed by policy.
+
+Registry policy does not authorize source record mutation, source repair,
+source acknowledgement, source deletion, external calls, command execution,
+workflow execution, approval bypass, raw prompt disclosure, hidden reasoning
+disclosure, raw header export, secret export, or domain-specific resource
+logic. Unknown registry actions fail closed.

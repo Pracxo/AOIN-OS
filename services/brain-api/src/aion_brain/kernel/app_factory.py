@@ -33,6 +33,7 @@ from aion_brain.api.health import router as health_router
 from aion_brain.api.idempotency import router as idempotency_router
 from aion_brain.api.identity import router as identity_router
 from aion_brain.api.inbox import router as inbox_router
+from aion_brain.api.incidents import router as incidents_router
 from aion_brain.api.instructions import router as instructions_router
 from aion_brain.api.kernel import api_router as api_support_router
 from aion_brain.api.kernel import router as kernel_router
@@ -61,6 +62,7 @@ from aion_brain.api.release_baseline import router as release_baseline_router
 from aion_brain.api.release_package import router as release_package_router
 from aion_brain.api.replay import router as replay_router
 from aion_brain.api.resilience import router as resilience_router
+from aion_brain.api.resource_registry import router as resource_registry_router
 from aion_brain.api.responses import router as responses_router
 from aion_brain.api.retrieval import router as retrieval_router
 from aion_brain.api.risk import router as risk_router
@@ -128,6 +130,8 @@ ROUTERS = (
     action_proposals_router,
     run_supervision_router,
     notifications_router,
+    incidents_router,
+    resource_registry_router,
     prompts_router,
     module_developer_router,
     retrieval_router,

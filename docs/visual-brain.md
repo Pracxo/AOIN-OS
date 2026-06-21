@@ -622,3 +622,39 @@ Scheduler nodes represent local scheduler records, not target execution.
 The projection remains backend-only and frontend-agnostic, and must not expose
 external calendar objects, external delivery metadata, secrets, or
 domain-specific scheduling logic.
+
+## Incident Projection
+
+Incident telemetry projects local incident correlation records into the Visual
+Brain Projection. Generic event types include:
+
+- `incident_signal_created`
+- `incident_created`
+- `incident_acknowledged`
+- `incident_resolved`
+- `incident_correlation_rule_created`
+- `incident_correlation_started`
+- `incident_correlation_completed`
+- `root_cause_candidate_created`
+- `root_cause_candidate_confirmed`
+- `recovery_review_created`
+
+Generic visual node types include:
+
+- `incident_signal`
+- `incident`
+- `correlation_rule`
+- `correlation_run`
+- `root_cause`
+- `recovery_review`
+
+The generic projection path is:
+
+`signal -> correlation run -> incident -> root cause candidate -> recovery review`
+
+High and critical incident signals should project with higher intensity than
+informational signals. Root cause nodes represent candidates, not established
+truth. Recovery review nodes represent local review artifacts, not executed
+remediation. The projection remains backend-only and frontend-agnostic, and
+must not expose external incident-system payloads, raw headers, secrets, source
+internals, or domain-specific incident logic.

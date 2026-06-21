@@ -1358,3 +1358,59 @@ reminders, or mutate source records outside scheduler-owned state.
 Schedule Policies are metadata and deterministic checks around scheduler
 behavior. Violations produce report findings or local records only. They do
 not authorize execution.
+
+## Incident Correlation
+
+Incident Correlation is the Brain-owned local layer for grouping AION signals
+that may require operator attention. It consumes normalized local signals from
+Brain systems, stores incident-owned records, and runs deterministic grouping
+by trace, source, fingerprint, correlation key, and time window.
+
+The incident path is:
+
+`signal -> correlation run -> incident -> root cause candidate -> recovery review -> operator review`
+
+Dry-run correlation previews grouped incidents without persistence side
+effects beyond the correlation run record. Controlled correlation may create
+incident records only through policy and autonomy gates. It must not mutate
+source alerts, notifications, runs, prompts, grounding records, audit records,
+scheduler records, or learning records.
+
+Root cause candidates are hypotheses with supporting references and missing
+evidence. They are never stored as truth. Recovery reviews summarize local
+findings and may propose local records, but they never execute remediation.
+
+The incident layer remains generic, local, policy-gated, and frontend-agnostic.
+It does not call external incident-management services, external notification
+services, model providers, shell commands, or domain-specific tooling.
+
+## Global Resource Registry
+
+The Global Resource Registry is the Brain-owned index and link-integrity layer
+for AION resources. It stores safe descriptors and registry-owned metadata for
+resource references, backlinks, broken references, orphaned resources,
+validation runs, rebuild runs, and snapshots.
+
+The registry is not authoritative for the source records it indexes. Source
+systems keep ownership of their records and lifecycle state. Registry rebuilds
+read safe descriptors from local adapters and update the registry index only.
+Reference validation reports integrity findings only. Neither path repairs
+source records, mutates source lifecycle state, hard-deletes source records, or
+calls external services.
+
+Resource identity is normalized through AION-owned URIs:
+
+`aion://{resource_type}/{resource_id}` with optional
+`?trace_id={trace_id}`.
+
+The registry joins existing Brain layers without becoming a graph database or
+search index. It provides a consistent reference spine for audit, provenance,
+evidence, memory, reasoning, model governance, action proposals, supervision,
+notifications, scheduler records, incident records, release records, backups,
+and operator surfaces while preserving each layer's ownership boundary.
+
+Registry actions are policy-gated. Operator cards and queues can surface broken
+references, orphaned resources, and rebuild runs for review, but the registry
+does not execute repairs. Visual telemetry receives generic resource and
+integrity events so future projection layers can show the reference spine
+without coupling registry contracts to UI code.

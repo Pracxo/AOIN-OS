@@ -414,3 +414,44 @@ Scheduler commands call the SDK and public Brain APIs only. Tick defaults to
 `dry_run`. Commands do not start background workers, execute target actions,
 call external calendars, send external reminders, mutate source records, or add
 domain-specific scheduling behavior.
+
+## Incident Commands
+
+- `aionctl incidents signals create`
+- `aionctl incidents signals list`
+- `aionctl incidents create`
+- `aionctl incidents query`
+- `aionctl incidents acknowledge`
+- `aionctl incidents resolve`
+- `aionctl incidents rules list`
+- `aionctl incidents rules seed-defaults`
+- `aionctl incidents correlate`
+- `aionctl incidents root-causes generate`
+- `aionctl incidents recovery-review`
+
+Incident commands call the SDK and public Brain APIs only. Correlation defaults
+to `dry_run`. Commands do not call external incident systems, execute
+remediation, mutate source records, acknowledge source records, resolve source
+records, expose hidden reasoning, print raw prompts, or add domain-specific
+incident behavior.
+
+## Resource Registry Commands
+
+- `aionctl registry query`
+- `aionctl registry get`
+- `aionctl registry upsert`
+- `aionctl registry links`
+- `aionctl registry link`
+- `aionctl registry backlinks`
+- `aionctl registry validate`
+- `aionctl registry broken`
+- `aionctl registry orphaned`
+- `aionctl registry rebuild`
+- `aionctl registry snapshot`
+- `aionctl registry snapshots`
+
+Registry commands call the SDK and public Brain APIs only. Validation and
+rebuild commands default to dry-run. Commands do not repair source records,
+mutate source lifecycle state, hard-delete source records, call external
+services, expose hidden reasoning, print raw prompts, or add domain-specific
+resource behavior.

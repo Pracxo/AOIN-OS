@@ -228,6 +228,17 @@ _QUEUE_SPECS: tuple[tuple[OperatorQueueType, str, str, tuple[str, ...]], ...] = 
     ("scheduler", "Due Items", "scheduler_service", ("list_due_items",)),
     ("scheduler", "Open Reminders", "scheduler_service", ("list_reminders",)),
     ("scheduler", "Failed Tick Runs", "scheduler_service", ("list_tick_runs",)),
+    ("incidents", "Open Incidents", "incident_service", ("list_incidents",)),
+    ("root_causes", "Root Cause Candidates", "root_cause_service", ("list_candidates",)),
+    ("recovery_reviews", "Recovery Reviews", "recovery_review_service", ("list_reviews",)),
+    ("broken_references", "Broken References", "reference_validator", ("list_broken_references",)),
+    (
+        "orphaned_resources",
+        "Orphaned Resources",
+        "reference_validator",
+        ("list_orphaned_resources",),
+    ),
+    ("registry_rebuilds", "Registry Rebuild Runs", "registry_rebuilder", ("list_runs",)),
 )
 
 _RUNNING_STATUSES = {"running", "processing", "sending", "in_progress", "active"}
@@ -240,6 +251,11 @@ _PENDING_STATUSES = {
     "proposed",
     "under_review",
     "approved_for_handoff",
+}
+_OPEN_AS_PENDING_QUEUE_TYPES: set[OperatorQueueType] = {
+    "broken_references",
+    "incidents",
+    "orphaned_resources",
 }
 _BLOCKED_STATUSES = {"blocked", "blocked_by_policy", "blocked_by_autonomy", "dead_lettered"}
 _FAILED_STATUSES = {"failed", "error", "critical"}
@@ -293,7 +309,10 @@ class QueueSummaryBuilder:
                 "medium",
                 metadata={"available": True, "error": exc.__class__.__name__},
             )
-        pending, running, blocked, failed = _count_statuses(items)
+        pending, running, blocked, failed = _count_statuses(
+            items,
+            open_as_pending=queue_type in _OPEN_AS_PENDING_QUEUE_TYPES,
+        )
         status = _queue_status(pending, running, blocked, failed)
         return _summary(
             queue_type,
@@ -409,11 +428,15 @@ def _call_list(method: object, scope: list[str]) -> list[object]:
     return []
 
 
-def _count_statuses(items: list[object]) -> tuple[int, int, int, int]:
+def _count_statuses(
+    items: list[object],
+    *,
+    open_as_pending: bool = False,
+) -> tuple[int, int, int, int]:
     pending = running = blocked = failed = 0
     for item in items:
         status = str(getattr(item, "status", "") or "").lower()
-        if status in _PENDING_STATUSES:
+        if status in _PENDING_STATUSES or (open_as_pending and status == "open"):
             pending += 1
         elif status in _RUNNING_STATUSES:
             running += 1

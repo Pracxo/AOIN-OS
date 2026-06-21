@@ -225,3 +225,11 @@ Instructions for future Codex runs in this repository:
 - Tick runs must be deterministic and local.
 - Reminders must not send external messages.
 - Do not add external calendar integrations in Brain core.
+- Incident correlation must remain local and generic.
+- Incident signals may reference source records but must not mutate them.
+- Dry-run correlation is the default posture.
+- Root cause candidates are hypotheses, not truth.
+- Recovery reviews must not execute remediation.
+- Do not add external incident-management integrations in Brain core.
+- Do not add domain-specific incident rules, runbooks, or remediation logic in
+  Brain core.

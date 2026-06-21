@@ -2978,3 +2978,104 @@ CLI examples:
 ```
 
 See `docs/adr/0061-temporal-scheduler-local-tick.md`.
+
+## Incident Correlation and Recovery Review
+
+AION v0.1 incident correlation is a local Brain layer. It normalizes internal
+signals, groups related signals into AION-owned incident records, proposes
+root cause candidates, and creates recovery reviews for operator assessment.
+It does not call external incident systems, execute remediation, mutate source
+records, or add domain-specific runbooks.
+
+Incident correlation defaults to dry-run. Controlled correlation may create
+incident records only after policy and autonomy gates allow it.
+
+Incident endpoints:
+
+- `POST /brain/incidents/signals`
+- `GET /brain/incidents/signals`
+- `POST /brain/incidents/signals/{incident_signal_id}/dismiss`
+- `POST /brain/incidents`
+- `GET /brain/incidents/{incident_id}`
+- `POST /brain/incidents/query`
+- `POST /brain/incidents/{incident_id}/acknowledge`
+- `POST /brain/incidents/{incident_id}/resolve`
+- `POST /brain/incidents/{incident_id}/dismiss`
+- `POST /brain/incidents/{incident_id}/archive`
+- `POST /brain/incidents/rules`
+- `GET /brain/incidents/rules`
+- `POST /brain/incidents/rules/seed-defaults`
+- `POST /brain/incidents/correlate`
+- `GET /brain/incidents/correlation-runs/{correlation_run_id}`
+- `POST /brain/incidents/{incident_id}/root-cause-candidates/generate`
+- `POST /brain/incidents/root-cause-candidates`
+- `GET /brain/incidents/root-cause-candidates`
+- `POST /brain/incidents/root-cause-candidates/{root_cause_candidate_id}/confirm`
+- `POST /brain/incidents/root-cause-candidates/{root_cause_candidate_id}/dismiss`
+- `POST /brain/incidents/recovery-reviews`
+- `GET /brain/incidents/recovery-reviews/{recovery_review_id}`
+- `GET /brain/incidents/recovery-reviews`
+
+CLI examples:
+
+```bash
+./scripts/aionctl.sh incidents query
+./scripts/aionctl.sh incidents correlate --dry-run
+./scripts/aionctl.sh incidents root-causes generate --incident-id incident-id
+./scripts/aionctl.sh incidents recovery-review --incident-id incident-id
+```
+
+See `docs/adr/0062-incident-correlation-root-cause-review.md`.
+
+## Global Resource Registry and Link Integrity
+
+AION v0.1 Global Resource Registry is the Brain-owned index and integrity
+layer for AION resources. It records safe descriptors, directed links,
+backlinks, broken references, orphaned resources, validation runs, rebuild
+runs, and registry snapshots. It is not the source of truth for the resources
+it indexes.
+
+Canonical resource URIs use:
+
+```text
+aion://{resource_type}/{resource_id}
+aion://{resource_type}/{resource_id}?trace_id={trace_id}
+```
+
+Registry validation and rebuilds are deterministic, local, policy-gated, and
+non-repairing. They do not mutate source records, hard-delete source records,
+call external services, or infer domain-specific meaning.
+
+Registry endpoints:
+
+- `POST /brain/registry/resources`
+- `GET /brain/registry/resources/by-uri`
+- `GET /brain/registry/resources/{resource_type}/{resource_id}`
+- `POST /brain/registry/query`
+- `POST /brain/registry/links`
+- `GET /brain/registry/links`
+- `GET /brain/registry/backlinks`
+- `POST /brain/registry/validate`
+- `GET /brain/registry/validation-runs/{validation_run_id}`
+- `GET /brain/registry/broken-references`
+- `POST /brain/registry/broken-references/{broken_reference_id}/dismiss`
+- `GET /brain/registry/orphaned-resources`
+- `POST /brain/registry/orphaned-resources/{orphaned_resource_id}/dismiss`
+- `POST /brain/registry/rebuild`
+- `GET /brain/registry/rebuild-runs/{rebuild_run_id}`
+- `POST /brain/registry/snapshots`
+- `GET /brain/registry/snapshots/{registry_snapshot_id}`
+- `GET /brain/registry/snapshots`
+
+CLI examples:
+
+```bash
+./scripts/aionctl.sh registry query
+./scripts/aionctl.sh registry validate --dry-run
+./scripts/aionctl.sh registry rebuild --dry-run
+./scripts/aionctl.sh registry broken
+./scripts/aionctl.sh registry snapshot
+```
+
+See `docs/resource-registry.md` and
+`docs/adr/0063-global-resource-registry-link-integrity.md`.
