@@ -55,6 +55,7 @@ class LearningSynthesizer:
         telemetry_service: object | None = None,
         audit_sink: object | None = None,
         settings: object | None = None,
+        preference_learning_service: object | None = None,
     ) -> None:
         self._repository = repository
         self._policy_adapter = policy_adapter
@@ -68,6 +69,7 @@ class LearningSynthesizer:
         self._telemetry_service = telemetry_service
         self._audit_sink = audit_sink
         self._settings = settings
+        self._preference_learning_service = preference_learning_service
 
     def synthesize(self, request: LearningSynthesisRequest) -> LearningSynthesisRun:
         """Run deterministic learning synthesis."""
@@ -137,6 +139,7 @@ class LearningSynthesizer:
             completed_at=now,
         )
         stored = self._repository.save_synthesis_run(run)
+        self._preference_candidate_if_requested(request, stored)
         audit_optional(
             self._audit_sink,
             "learning_synthesis_completed",
@@ -152,6 +155,35 @@ class LearningSynthesizer:
             payload={"lesson_count": len(stored.lessons), "mode": stored.mode},
         )
         return stored
+
+    def _preference_candidate_if_requested(
+        self,
+        request: LearningSynthesisRequest,
+        run: LearningSynthesisRun,
+    ) -> None:
+        if request.metadata.get("create_preference_candidate") is not True:
+            return
+        propose = getattr(self._preference_learning_service, "propose_from_feedback", None)
+        if not callable(propose):
+            return
+        try:
+            propose(
+                {
+                    **request.metadata,
+                    "trace_id": run.trace_id,
+                    "actor_id": run.actor_id,
+                    "workspace_id": run.workspace_id,
+                    "feedback_id": run.synthesis_run_id,
+                    "preference_key": request.metadata.get(
+                        "preference_key",
+                        "interaction.learning_feedback",
+                    ),
+                },
+                explicit=True,
+                owner_scope=run.owner_scope,
+            )
+        except Exception:
+            return
 
     def get(self, synthesis_run_id: str) -> LearningSynthesisRun | None:
         """Return one synthesis run."""

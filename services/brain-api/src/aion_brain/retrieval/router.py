@@ -187,6 +187,13 @@ class RetrievalRouter:
                 evidence_ref=record.content_ref,
                 metadata={
                     **record.metadata,
+                    "source_type": "memory",
+                    "source_id": record.memory_id,
+                    "memory_refs": [record.memory_id],
+                    "evidence_refs": [record.content_ref] if record.content_ref else [],
+                    "belief_refs": record.metadata.get("belief_refs", []),
+                    "entity_refs": record.metadata.get("entity_refs", []),
+                    "trust_level": "memory_recall",
                     "created_at": record.created_at.isoformat(),
                     "expires_at": record.expires_at.isoformat() if record.expires_at else None,
                     "source_event_id": record.source_event_id,
@@ -229,6 +236,15 @@ class RetrievalRouter:
                 metadata={
                     **result.memory.metadata,
                     **result.metadata,
+                    "source_type": "memory",
+                    "source_id": result.memory.memory_id,
+                    "memory_refs": [result.memory.memory_id],
+                    "evidence_refs": (
+                        [result.memory.content_ref] if result.memory.content_ref else []
+                    ),
+                    "belief_refs": result.memory.metadata.get("belief_refs", []),
+                    "entity_refs": result.memory.metadata.get("entity_refs", []),
+                    "trust_level": "memory_recall",
                     "adapter_name": result.adapter_name,
                     "retrieval_source": result.retrieval_source,
                     "created_at": result.memory.created_at.isoformat(),
@@ -471,6 +487,13 @@ class RetrievalRouter:
                     evidence_ref=result.evidence.evidence_id,
                     metadata={
                         **result.metadata,
+                        "source_type": "evidence",
+                        "source_id": result.evidence.evidence_id,
+                        "evidence_refs": [result.evidence.evidence_id],
+                        "belief_refs": result.evidence.metadata.get("belief_refs", []),
+                        "memory_refs": result.evidence.metadata.get("memory_refs", []),
+                        "entity_refs": result.evidence.metadata.get("entity_refs", []),
+                        "trust_level": "primary",
                         "chunk_id": chunk_id,
                         "content_hash": result.evidence.content_hash,
                         "matched_terms": result.matched_terms,
@@ -568,8 +591,14 @@ class RetrievalRouter:
                     evidence_ref=claim.evidence_refs[0] if claim.evidence_refs else None,
                     metadata={
                         **claim.metadata,
+                        "source_type": "belief_claim",
+                        "source_id": claim.claim_id,
                         "status": claim.status,
                         "claim_type": claim.claim_type,
+                        "evidence_refs": claim.evidence_refs,
+                        "belief_refs": [claim.claim_id],
+                        "memory_refs": claim.memory_refs,
+                        "trust_level": _trust_level_for_belief_status(claim.status),
                         "belief_state_is_not_absolute_truth": True,
                     },
                 )
@@ -612,11 +641,16 @@ class RetrievalRouter:
                     evidence_ref=entity.evidence_refs[0] if entity.evidence_refs else None,
                     metadata={
                         **entity.metadata,
+                        "source_type": "entity",
+                        "source_id": entity.entity_id,
                         "status": entity.status,
                         "entity_type": entity.entity_type,
                         "concept_refs": entity.concept_refs,
                         "memory_refs": entity.memory_refs,
                         "belief_refs": entity.belief_refs,
+                        "evidence_refs": entity.evidence_refs,
+                        "entity_refs": [entity.entity_id],
+                        "trust_level": "derived",
                         "base_relevance": entity.confidence,
                     },
                 )
@@ -1232,6 +1266,16 @@ def _node_content(label: str, properties: dict[str, Any]) -> str:
     if not properties:
         return label
     return f"{label} {json.dumps(properties, sort_keys=True)}"
+
+
+def _trust_level_for_belief_status(status: str) -> str:
+    if status == "supported":
+        return "belief_supported"
+    if status == "uncertain":
+        return "belief_uncertain"
+    if status == "contradicted":
+        return "unverified"
+    return "unknown"
 
 
 def _capability_dict(value: object) -> dict[str, Any]:

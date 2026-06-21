@@ -111,6 +111,15 @@ from aion_brain.explanations.why_not import WhyNotService
 from aion_brain.freeze.gate import FreezeGateService
 from aion_brain.goals.repository import GoalRepository
 from aion_brain.goals.service import GoalService
+from aion_brain.grounding.citation_mapper import CitationMapper
+from aion_brain.grounding.citations import CitationService
+from aion_brain.grounding.coverage import SourceCoverageService
+from aion_brain.grounding.query import GroundingQueryService
+from aion_brain.grounding.repository import GroundingRepository
+from aion_brain.grounding.sources import GroundingSourceService
+from aion_brain.grounding.statement_splitter import StatementSplitter
+from aion_brain.grounding.support_checker import SupportChecker
+from aion_brain.grounding.verifier import GroundingVerifier
 from aion_brain.guardrails.engine import GuardrailEngine
 from aion_brain.guardrails.repository import GuardrailRepository
 from aion_brain.idempotency.repository import IdempotencyRepository
@@ -119,6 +128,15 @@ from aion_brain.identity.repository import IdentityRepository
 from aion_brain.identity.service import IdentityService
 from aion_brain.inbox.repository import InboxRepository
 from aion_brain.inbox.service import InboxService
+from aion_brain.instructions.conflicts import InstructionConflictDetector
+from aion_brain.instructions.constraints import ConstraintService
+from aion_brain.instructions.learning import PreferenceLearningService
+from aion_brain.instructions.preferences import PreferenceService
+from aion_brain.instructions.query import InstructionQueryService
+from aion_brain.instructions.repository import InstructionRepository
+from aion_brain.instructions.resolver import InstructionResolver
+from aion_brain.instructions.service import InstructionService
+from aion_brain.instructions.styles import StyleProfileService
 from aion_brain.intent.engine import IntentEngine
 from aion_brain.kernel.boot import KernelBootService
 from aion_brain.kernel.bootstrap import build_dev_bootstrap
@@ -217,6 +235,16 @@ from aion_brain.policy_catalog.permissions import PermissionMatrixService
 from aion_brain.policy_catalog.repository import PolicyCatalogRepository
 from aion_brain.policy_catalog.simulation import PolicySimulationService
 from aion_brain.policy_catalog.test_harness import PolicyTestHarness
+from aion_brain.prompts.boundary import PromptBoundaryChecker
+from aion_brain.prompts.compiler import PromptPacketCompiler
+from aion_brain.prompts.fragments import PromptFragmentService
+from aion_brain.prompts.injection_detector import PromptInjectionDetector
+from aion_brain.prompts.manifest import ModelInputManifestService
+from aion_brain.prompts.preview import PromptPreviewService
+from aion_brain.prompts.repository import PromptRepository
+from aion_brain.prompts.sectioner import PromptSectioner
+from aion_brain.prompts.service import PromptGovernanceService
+from aion_brain.prompts.templates import PromptTemplateService
 from aion_brain.reasoning.deterministic_adapter import DeterministicReasoningAdapter
 from aion_brain.reasoning.litellm_adapter import LiteLLMHTTPAdapter
 from aion_brain.reasoning.mesh import ReasoningMesh
@@ -429,6 +457,55 @@ class KernelContainer:
         self.observability_service = LocalObservabilityRecorder(
             self.observability_repository,
             self.visual_repository,
+        )
+        self.instruction_repository = InstructionRepository(self.settings.database_url)
+        self.instruction_query_service = InstructionQueryService(self.instruction_repository)
+        self.instruction_service = InstructionService(
+            self.instruction_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            settings=self.settings,
+        )
+        self.preference_service = PreferenceService(
+            self.instruction_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.constraint_service = ConstraintService(
+            self.instruction_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.style_profile_service = StyleProfileService(
+            self.instruction_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.instruction_conflict_detector = InstructionConflictDetector(
+            self.instruction_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.instruction_service.set_conflict_detector(self.instruction_conflict_detector)
+        self.instruction_resolver = InstructionResolver(
+            self.instruction_repository,
+            self.policy_adapter,
+            conflict_detector=self.instruction_conflict_detector,
+            style_service=self.style_profile_service,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.preference_learning_service = PreferenceLearningService(
+            self.instruction_repository,
+            self.policy_adapter,
+            preference_service=self.preference_service,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
         )
         self.api_request_audit_service = APIRequestAuditService(self.settings.database_url)
         self.openapi_hygiene_checker = OpenAPIHygieneChecker()
@@ -704,6 +781,7 @@ class KernelContainer:
             regression_suggestion_service=self.regression_suggestion_service,
             outcome_repository=self.outcome_repository,
             autonomy_governor=self.autonomy_governor,
+            preference_learning_service=self.preference_learning_service,
             telemetry_service=self.telemetry_service,
             audit_sink=self.audit_integrity_ledger,
             settings=self.settings,
@@ -841,6 +919,25 @@ class KernelContainer:
             self.policy_adapter,
             governance_engine=self.memory_governance_engine,
         )
+        self.grounding_repository = GroundingRepository(self.settings.database_url)
+        self.grounding_source_service = GroundingSourceService(
+            self.grounding_repository,
+            self.policy_adapter,
+            evidence_service=self.evidence_service,
+            belief_service=self.belief_service,
+            memory_service=self.memory_service,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+        )
+        self.citation_service = CitationService(
+            self.grounding_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+        )
+        self.statement_splitter = StatementSplitter()
+        self.support_checker = SupportChecker()
         self.attention_repository = AttentionRepository(self.settings.database_url)
         self.working_memory_repository = WorkingMemoryRepository(self.settings.database_url)
         self.focus_service = FocusService(
@@ -935,10 +1032,12 @@ class KernelContainer:
             belief_query_service=self.belief_query_service,
             attention_controller=self.attention_controller,
             context_budgeter=self.context_budgeter,
+            instruction_resolver=self.instruction_resolver,
             settings=self.settings,
         )
         self.reasoning_repository = ReasoningRepository(self.settings.database_url)
         self.model_gateway_repository = ModelGatewayRepository(self.settings.database_url)
+        self.prompt_repository = PromptRepository(self.settings.database_url)
         self.model_provider_registry = ModelProviderRegistry(
             self.model_gateway_repository,
             self.policy_adapter,
@@ -954,6 +1053,52 @@ class KernelContainer:
         )
         self.prompt_redactor = PromptRedactor(
             block_on_secret=self.settings.prompt_redaction_block_on_secret,
+        )
+        self.prompt_injection_detector = PromptInjectionDetector()
+        self.prompt_sectioner = PromptSectioner()
+        self.prompt_template_service = PromptTemplateService(
+            self.prompt_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+        )
+        self.prompt_fragment_service = PromptFragmentService(
+            self.prompt_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+        )
+        self.prompt_boundary_checker = PromptBoundaryChecker(
+            self.prompt_repository,
+            self.policy_adapter,
+            detector=self.prompt_injection_detector,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            settings=self.settings,
+        )
+        self.model_input_manifest_service = ModelInputManifestService(
+            self.prompt_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+        )
+        self.prompt_compiler = PromptPacketCompiler(
+            self.prompt_repository,
+            self.policy_adapter,
+            sectioner=self.prompt_sectioner,
+            boundary_checker=self.prompt_boundary_checker,
+            manifest_service=self.model_input_manifest_service,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            autonomy_governor=self.autonomy_governor,
+            settings=self.settings,
+        )
+        self.prompt_governance_service = PromptGovernanceService(self.prompt_compiler)
+        self.prompt_preview_service = PromptPreviewService(
+            self.prompt_compiler,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
         )
         self.model_budget_guard = ModelBudgetGuard(
             self.model_gateway_repository,
@@ -987,6 +1132,7 @@ class KernelContainer:
             approval_service=self.approval_service,
             autonomy_governor=self.autonomy_governor,
             audit_sink=self.audit_integrity_ledger,
+            prompt_governance_service=self.prompt_governance_service,
         )
         self.reasoning_mesh = ReasoningMesh(
             model_router=ModelRouter(),
@@ -1249,6 +1395,7 @@ class KernelContainer:
             telemetry_service=self.telemetry_service,
             settings=self.settings,
             confidence_calibrator=self.confidence_calibrator,
+            prompt_compiler=self.prompt_governance_service,
         )
         self.response_verifier = ResponseVerifier(
             self.dialogue_repository,
@@ -1265,6 +1412,49 @@ class KernelContainer:
             self.policy_adapter,
             telemetry_service=self.telemetry_service,
         )
+        self.citation_mapper = CitationMapper(
+            self.grounding_repository,
+            self.policy_adapter,
+            citation_service=self.citation_service,
+            source_service=self.grounding_source_service,
+            response_service=self.response_composer,
+            splitter=self.statement_splitter,
+            support_checker=self.support_checker,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            settings=self.settings,
+        )
+        self.source_coverage_service = SourceCoverageService(
+            self.grounding_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+        )
+        self.grounding_verifier = GroundingVerifier(
+            self.grounding_repository,
+            self.policy_adapter,
+            citation_mapper=self.citation_mapper,
+            coverage_service=self.source_coverage_service,
+            source_service=self.grounding_source_service,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            settings=self.settings,
+        )
+        self.grounding_query_service = GroundingQueryService(
+            self.grounding_repository,
+            self.policy_adapter,
+        )
+        set_grounding_services = getattr(self.response_composer, "set_grounding_services", None)
+        if callable(set_grounding_services):
+            set_grounding_services(self.citation_mapper, self.grounding_verifier)
+        set_response_prompt_compiler = getattr(self.response_composer, "set_prompt_compiler", None)
+        if callable(set_response_prompt_compiler):
+            set_response_prompt_compiler(self.prompt_governance_service)
+        set_response_grounding = getattr(self.response_verifier, "set_grounding_verifier", None)
+        if callable(set_response_grounding):
+            set_response_grounding(self.grounding_verifier)
         self.explanation_repository = ExplanationRepository(self.settings.database_url)
         self.explanation_verifier = ExplanationVerifier(self.telemetry_service)
         self.explanation_builder = ExplanationBuilder(
@@ -1286,6 +1476,8 @@ class KernelContainer:
             telemetry_service=self.telemetry_service,
             settings=self.settings,
             verifier=self.explanation_verifier,
+            citation_mapper=self.citation_mapper,
+            grounding_verifier=self.grounding_verifier,
         )
         self.why_not_service = WhyNotService(
             self.explanation_repository,
@@ -1366,6 +1558,8 @@ class KernelContainer:
             self_description_service=self.self_description_service,
             explanation_builder=self.explanation_builder,
             why_not_service=self.why_not_service,
+            instruction_resolver=self.instruction_resolver,
+            preference_learning_service=self.preference_learning_service,
         )
         set_response_composer = getattr(self.brain_loop_service, "set_response_composer", None)
         if callable(set_response_composer):
@@ -1907,6 +2101,8 @@ class KernelContainer:
             self_model_service=self.self_model_profile_service,
             capability_awareness_service=self.capability_awareness_service,
             limitation_service=self.limitation_ledger_service,
+            instruction_service=self.instruction_query_service,
+            prompt_service=self.prompt_compiler,
         )
         self.operator_queue_summary_builder = QueueSummaryBuilder(
             approval_service=self.approval_repository,
@@ -1939,6 +2135,11 @@ class KernelContainer:
             regression_suggestion_service=self.regression_suggestion_service,
             limitation_service=self.limitation_ledger_service,
             self_assessment_service=self.self_assessment_service,
+            instruction_conflict_service=self.instruction_conflict_detector,
+            preference_learning_service=self.preference_learning_service,
+            grounding_repository=self.grounding_repository,
+            grounding_verifier=self.grounding_verifier,
+            prompt_repository=self.prompt_repository,
         )
         self.operator_action_center_service = ActionCenterService(
             self.operator_repository,
@@ -1964,6 +2165,11 @@ class KernelContainer:
             skill_suggestion_service=self.skill_suggestion_service,
             regression_suggestion_service=self.regression_suggestion_service,
             explanation_service=self.explanation_builder,
+            instruction_conflict_service=self.instruction_conflict_detector,
+            preference_learning_service=self.preference_learning_service,
+            prompt_repository=self.prompt_repository,
+            grounding_verifier=self.grounding_verifier,
+            source_coverage_service=self.source_coverage_service,
         )
         self.operator_readiness_aggregator = ReadinessAggregator(
             self.operator_status_card_builder,
@@ -2239,6 +2445,26 @@ class KernelContainer:
                 "local",
             ),
             ("prompt_redactor", self.prompt_redactor, "service", "local"),
+            ("prompt_repository", self.prompt_repository, "repository", "postgres"),
+            ("prompt_template_service", self.prompt_template_service, "service", "local"),
+            ("prompt_fragment_service", self.prompt_fragment_service, "service", "local"),
+            ("prompt_sectioner", self.prompt_sectioner, "service", "deterministic"),
+            (
+                "prompt_injection_detector",
+                self.prompt_injection_detector,
+                "service",
+                "deterministic",
+            ),
+            ("prompt_boundary_checker", self.prompt_boundary_checker, "service", "deterministic"),
+            ("prompt_compiler", self.prompt_compiler, "service", "deterministic"),
+            (
+                "model_input_manifest_service",
+                self.model_input_manifest_service,
+                "service",
+                "local",
+            ),
+            ("prompt_preview_service", self.prompt_preview_service, "service", "local"),
+            ("prompt_governance_service", self.prompt_governance_service, "service", "local"),
             ("model_budget_guard", self.model_budget_guard, "service", "local"),
             ("model_usage_ledger", self.model_usage_ledger, "service", "local"),
             (
@@ -2413,6 +2639,15 @@ class KernelContainer:
                 "deterministic",
             ),
             ("evidence_service", self.evidence_service, "service", "local"),
+            ("grounding_repository", self.grounding_repository, "repository", "postgres"),
+            ("grounding_source_service", self.grounding_source_service, "service", "local"),
+            ("citation_service", self.citation_service, "service", "local"),
+            ("statement_splitter", self.statement_splitter, "service", "deterministic"),
+            ("support_checker", self.support_checker, "service", "deterministic"),
+            ("citation_mapper", self.citation_mapper, "service", "deterministic"),
+            ("grounding_verifier", self.grounding_verifier, "service", "deterministic"),
+            ("source_coverage_service", self.source_coverage_service, "service", "local"),
+            ("grounding_query_service", self.grounding_query_service, "service", "local"),
             ("module_runtime_gateway", self.module_runtime_gateway, "service", "local"),
             ("goal_service", self.goal_service, "service", "local"),
             ("task_service", self.task_service, "service", "local"),
@@ -2584,6 +2819,24 @@ class KernelContainer:
             ("release_handoff_service", self.release_handoff_service, "service", "local"),
             ("release_packager", self.release_packager, "service", "local"),
             ("backup_repository", self.backup_repository, "repository", "postgres"),
+            ("instruction_repository", self.instruction_repository, "repository", "postgres"),
+            ("instruction_service", self.instruction_service, "service", "local"),
+            ("instruction_resolver", self.instruction_resolver, "service", "local"),
+            (
+                "instruction_conflict_detector",
+                self.instruction_conflict_detector,
+                "service",
+                "local",
+            ),
+            ("preference_service", self.preference_service, "service", "local"),
+            (
+                "preference_learning_service",
+                self.preference_learning_service,
+                "service",
+                "local",
+            ),
+            ("constraint_service", self.constraint_service, "service", "local"),
+            ("style_profile_service", self.style_profile_service, "service", "local"),
             ("backup_resource_readers", self.backup_resource_readers, "service", "local"),
             ("backup_exporter", self.backup_exporter, "service", "local"),
             ("restore_preview_service", self.restore_preview_service, "service", "local"),

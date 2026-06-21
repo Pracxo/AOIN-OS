@@ -57,6 +57,16 @@ from aion_brain.contracts.guardrails import (
     RiskGuardrailEvaluationRequest,
 )
 from aion_brain.contracts.identity import ActorRecord, WorkspaceRecord
+from aion_brain.contracts.instructions import (
+    ConstraintRecord,
+    InstructionConflict,
+    InstructionCreateRequest,
+    InstructionRecord,
+    InstructionResolutionRequest,
+    InstructionResolutionResult,
+    StyleProfile,
+    StyleProfileCreateRequest,
+)
 from aion_brain.contracts.intent import IntentFrame
 from aion_brain.contracts.kernel import ContractExport, KernelStatus
 from aion_brain.contracts.mcp import (
@@ -102,8 +112,28 @@ from aion_brain.contracts.model_gateway import (
     ModelUsageRecord,
     PromptRedactionRecord,
 )
+from aion_brain.contracts.model_inputs import ModelInputManifest
 from aion_brain.contracts.modules import ModuleRuntime
 from aion_brain.contracts.planning import PlanGraph
+from aion_brain.contracts.preferences import (
+    PreferenceCreateRequest,
+    PreferenceLearningCandidate,
+    PreferenceRecord,
+)
+from aion_brain.contracts.prompts import (
+    PromptBoundaryCheck,
+    PromptCompileRequest,
+    PromptCompileResult,
+    PromptFragment,
+    PromptFragmentCreateRequest,
+    PromptInjectionFinding,
+    PromptPacket,
+    PromptPreview,
+    PromptPreviewRequest,
+    PromptSection,
+    PromptTemplate,
+    PromptTemplateCreateRequest,
+)
 from aion_brain.contracts.reasoning import ReasoningRequest
 from aion_brain.contracts.reflection import ReflectionRecord
 from aion_brain.contracts.regression import RegressionCase
@@ -208,6 +238,19 @@ CORE_CONTRACTS: tuple[type[BaseModel], ...] = (
     ModelGatewayRequest,
     ModelGatewayResponse,
     PromptRedactionRecord,
+    PromptSection,
+    PromptTemplate,
+    PromptTemplateCreateRequest,
+    PromptFragment,
+    PromptFragmentCreateRequest,
+    PromptPacket,
+    PromptCompileRequest,
+    PromptCompileResult,
+    PromptBoundaryCheck,
+    PromptInjectionFinding,
+    PromptPreviewRequest,
+    PromptPreview,
+    ModelInputManifest,
     ModelBudgetRecord,
     ModelUsageRecord,
     ModelProviderHealth,
@@ -221,6 +264,17 @@ CORE_CONTRACTS: tuple[type[BaseModel], ...] = (
     SkillRecord,
     ActorRecord,
     WorkspaceRecord,
+    InstructionCreateRequest,
+    InstructionRecord,
+    ConstraintRecord,
+    StyleProfileCreateRequest,
+    StyleProfile,
+    InstructionConflict,
+    InstructionResolutionRequest,
+    InstructionResolutionResult,
+    PreferenceCreateRequest,
+    PreferenceRecord,
+    PreferenceLearningCandidate,
     BrainMap,
     WorkflowDefinition,
     WorkflowRun,

@@ -377,6 +377,16 @@ allowed_actions := {
 	"evidence.link",
 	"evidence.ground",
 	"evidence.delete",
+	"grounding.source.create",
+	"grounding.source.read",
+	"grounding.citation.create",
+	"grounding.citation.read",
+	"grounding.citation.delete",
+	"grounding.map",
+	"grounding.verify",
+	"grounding.coverage.read",
+	"grounding.query",
+	"grounding.unsupported.read",
 	"visual.map.read",
 	"visual.telemetry.read",
 	"visual.stream.read",
@@ -385,6 +395,38 @@ allowed_actions := {
 	"visual.timeline.read",
 	"observability.read",
 	"observability.event.create",
+	"prompt.template.create",
+	"prompt.template.read",
+	"prompt.template.update",
+	"prompt.fragment.create",
+	"prompt.fragment.read",
+	"prompt.fragment.update",
+	"prompt.compile",
+	"prompt.packet.read",
+	"prompt.packet.delete",
+	"prompt.boundary.check",
+	"prompt.injection.read",
+	"prompt.preview",
+	"prompt.manifest.create",
+	"prompt.manifest.read",
+	"instruction.create",
+	"instruction.read",
+	"instruction.update",
+	"instruction.resolve",
+	"instruction.conflict.read",
+	"instruction.conflict.update",
+	"instruction.constraint.create",
+	"instruction.constraint.read",
+	"instruction.constraint.update",
+	"instruction.style_profile.create",
+	"instruction.style_profile.read",
+	"instruction.style_profile.update",
+	"preference.create",
+	"preference.read",
+	"preference.update",
+	"preference.candidate.create",
+	"preference.candidate.read",
+	"preference.candidate.update",
 	"explanation.create",
 	"explanation.read",
 	"explanation.verify",
@@ -614,11 +656,42 @@ low_allowed_actions := {
 	"evidence.read",
 	"evidence.search",
 	"evidence.ground",
+	"grounding.source.read",
+	"grounding.citation.read",
+	"grounding.map",
+	"grounding.verify",
+	"grounding.coverage.read",
+	"grounding.query",
+	"grounding.unsupported.read",
 	"visual.map.read",
 	"visual.telemetry.read",
 	"visual.snapshot.read",
 	"visual.timeline.read",
 	"observability.read",
+	"prompt.template.read",
+	"prompt.fragment.read",
+	"prompt.packet.read",
+	"prompt.injection.read",
+	"prompt.preview",
+	"prompt.manifest.read",
+	"instruction.read",
+	"instruction.create",
+	"instruction.update",
+	"instruction.resolve",
+	"instruction.conflict.read",
+	"instruction.conflict.update",
+	"instruction.constraint.read",
+	"instruction.constraint.create",
+	"instruction.constraint.update",
+	"instruction.style_profile.read",
+	"instruction.style_profile.create",
+	"instruction.style_profile.update",
+	"preference.create",
+	"preference.read",
+	"preference.update",
+	"preference.candidate.create",
+	"preference.candidate.read",
+	"preference.candidate.update",
 	"explanation.create",
 	"explanation.read",
 	"explanation.verify",
@@ -912,6 +985,45 @@ decision := {
 decision := {
 	"allow": true,
 	"approval_required": false,
+	"reason": "grounding_read_allowed",
+	"constraints": ["within_scope"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	grounding_read_action
+	grounding_read_permission
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "grounding_write_allowed",
+	"constraints": ["soft_delete_only"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	grounding_write_action
+	grounding_writer
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "grounding_verify_allowed",
+	"constraints": ["deterministic_only"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "grounding.verify"
+	grounding_verifier
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
 	"reason": "visual_stream_allowed",
 	"constraints": [],
 	"audit_level": "standard",
@@ -946,6 +1058,45 @@ decision := {
 	valid_risk
 	input.action_type == "observability.event.create"
 	observability_writer
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "prompt_read_allowed",
+	"constraints": ["provider_neutral_contracts_only"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	prompt_read_action
+	prompt_read_permission
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "prompt_write_allowed",
+	"constraints": ["no_rendered_prompt_persistence"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	prompt_write_action
+	prompt_writer
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "prompt_compile_allowed",
+	"constraints": ["boundary_check_required", "model_input_manifest_required"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "prompt.compile"
+	prompt_writer
 }
 
 decision := {
@@ -2272,6 +2423,7 @@ decision := {
 	not mcp_action
 	not api_support_action
 	not dialogue_action
+	not prompt_action
 	not belief_action
 	not registry_action
 }
@@ -2977,6 +3129,78 @@ visual_read_action if {
 	input.action_type == "observability.read"
 }
 
+grounding_read_action if {
+	input.action_type == "grounding.source.read"
+}
+
+grounding_read_action if {
+	input.action_type == "grounding.citation.read"
+}
+
+grounding_read_action if {
+	input.action_type == "grounding.coverage.read"
+}
+
+grounding_read_action if {
+	input.action_type == "grounding.query"
+}
+
+grounding_read_action if {
+	input.action_type == "grounding.unsupported.read"
+}
+
+grounding_read_action if {
+	input.action_type == "grounding.map"
+}
+
+grounding_write_action if {
+	input.action_type == "grounding.source.create"
+}
+
+grounding_write_action if {
+	input.action_type == "grounding.citation.create"
+}
+
+grounding_write_action if {
+	input.action_type == "grounding.citation.delete"
+}
+
+grounding_read_permission if {
+	dev_owner
+}
+
+grounding_read_permission if {
+	input.context.actor_context.permissions[_] == "trace.read"
+}
+
+grounding_read_permission if {
+	input.context.actor_context.permissions[_] == "grounding.read"
+}
+
+grounding_writer if {
+	dev_owner
+}
+
+grounding_writer if {
+	input.context.actor_context.actor_type == "system"
+}
+
+grounding_writer if {
+	input.context.actor_context.permissions[_] == "grounding.write"
+}
+
+grounding_verifier if {
+	dev_owner
+}
+
+grounding_verifier if {
+	input.context.actor_context.permissions[_] == "grounding.verify"
+}
+
+grounding_verifier if {
+	input.context.actor_context.permissions[_] == "operator"
+}
+
 visual_read_permission if {
 	input.context.actor_context.permissions[_] == "trace.read"
 }
@@ -2995,6 +3219,86 @@ visual_snapshot_create_permission if {
 
 observability_writer if {
 	dev_owner
+}
+
+prompt_action if {
+	startswith(input.action_type, "prompt.")
+}
+
+prompt_read_action if {
+	input.action_type == "prompt.template.read"
+}
+
+prompt_read_action if {
+	input.action_type == "prompt.fragment.read"
+}
+
+prompt_read_action if {
+	input.action_type == "prompt.packet.read"
+}
+
+prompt_read_action if {
+	input.action_type == "prompt.injection.read"
+}
+
+prompt_read_action if {
+	input.action_type == "prompt.preview"
+}
+
+prompt_read_action if {
+	input.action_type == "prompt.manifest.read"
+}
+
+prompt_write_action if {
+	input.action_type == "prompt.template.create"
+}
+
+prompt_write_action if {
+	input.action_type == "prompt.template.update"
+}
+
+prompt_write_action if {
+	input.action_type == "prompt.fragment.create"
+}
+
+prompt_write_action if {
+	input.action_type == "prompt.fragment.update"
+}
+
+prompt_write_action if {
+	input.action_type == "prompt.packet.delete"
+}
+
+prompt_write_action if {
+	input.action_type == "prompt.boundary.check"
+}
+
+prompt_write_action if {
+	input.action_type == "prompt.manifest.create"
+}
+
+prompt_read_permission if {
+	dev_owner
+}
+
+prompt_read_permission if {
+	input.context.actor_context.permissions[_] == input.action_type
+}
+
+prompt_read_permission if {
+	input.context.actor_context.permissions[_] == "trace.read"
+}
+
+prompt_writer if {
+	dev_owner
+}
+
+prompt_writer if {
+	input.context.actor_context.actor_type == "system"
+}
+
+prompt_writer if {
+	input.context.actor_context.permissions[_] == input.action_type
 }
 
 security_read_action if {

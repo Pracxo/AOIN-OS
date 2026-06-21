@@ -26,11 +26,13 @@ from aion_brain.api.explanations import router as explanations_router
 from aion_brain.api.freeze import router as freeze_router
 from aion_brain.api.goals import router as goals_router
 from aion_brain.api.graph_memory import router as graph_memory_router
+from aion_brain.api.grounding import router as grounding_router
 from aion_brain.api.guardrails import router as guardrails_router
 from aion_brain.api.health import router as health_router
 from aion_brain.api.idempotency import router as idempotency_router
 from aion_brain.api.identity import router as identity_router
 from aion_brain.api.inbox import router as inbox_router
+from aion_brain.api.instructions import router as instructions_router
 from aion_brain.api.kernel import api_router as api_support_router
 from aion_brain.api.kernel import router as kernel_router
 from aion_brain.api.learning import router as learning_router
@@ -48,6 +50,7 @@ from aion_brain.api.outcomes import router as outcomes_router
 from aion_brain.api.performance import router as performance_router
 from aion_brain.api.policy import router as policy_router
 from aion_brain.api.policy_catalog import router as policy_catalog_router
+from aion_brain.api.prompts import router as prompts_router
 from aion_brain.api.reasoning import router as reasoning_router
 from aion_brain.api.reflection import router as reflection_router
 from aion_brain.api.regression import router as regression_router
@@ -86,6 +89,7 @@ ROUTERS = (
     identity_router,
     workspaces_router,
     scopes_router,
+    instructions_router,
     events_router,
     event_reactions_router,
     commands_router,
@@ -108,11 +112,13 @@ ROUTERS = (
     concepts_router,
     entities_router,
     evidence_router,
+    grounding_router,
     memory_router,
     memory_governance_router,
     mcp_router,
     graph_memory_router,
     model_gateway_router,
+    prompts_router,
     module_developer_router,
     retrieval_router,
     reasoning_router,

@@ -1006,3 +1006,77 @@ SQLAlchemy rows, secrets, or domain-specific workflow internals.
 Why-not answers expose generic blockers and next possible steps. Trace
 narratives expose ordered public timeline events, key decisions, blockers,
 approvals, outcomes, evidence refs, and audit refs.
+
+## Instruction and Preference Contracts
+
+AION Brain owns these instruction and preference contracts:
+
+- `InstructionRecord`
+- `InstructionCreateRequest`
+- `PreferenceRecord`
+- `PreferenceCreateRequest`
+- `ConstraintRecord`
+- `StyleProfile`
+- `StyleProfileCreateRequest`
+- `InstructionConflict`
+- `InstructionResolutionRequest`
+- `InstructionResolutionResult`
+- `PreferenceLearningCandidate`
+
+Instruction contracts must not store hidden prompts, chain-of-thought, raw
+secrets, raw headers, provider payloads, SQLAlchemy rows, or domain-specific
+workflow internals. Preferences are not policy. Style preferences and learned
+preference candidates cannot override policy, autonomy, approval requirements,
+runtime configuration, sandbox limits, capability limits, or grounding rules.
+
+## Grounding and Citation Contracts
+
+AION Brain owns these grounding contracts:
+
+- `GroundingSource`
+- `GroundingSourceCreateRequest`
+- `CitationRecord`
+- `CitationCreateRequest`
+- `UnsupportedStatement`
+- `ResponseCitationMap`
+- `GroundingVerificationRequest`
+- `GroundingVerificationRun`
+- `SourceCoverageReport`
+- `GroundingQuery`
+- `GroundingQueryResult`
+
+Grounding contracts must not include hidden reasoning, chain-of-thought, raw
+prompts, raw headers, provider payloads, raw third-party client objects,
+SQLAlchemy rows, secrets, or domain-specific citation internals.
+
+Grounding validates support. It does not create truth. Memory recall remains
+weak support unless backed by evidence or supported belief, and contradicted
+beliefs cannot strongly ground a response.
+
+## Prompt and Model Input Contracts
+
+AION Brain owns these prompt governance contracts:
+
+- `PromptSection`
+- `PromptTemplate`
+- `PromptTemplateCreateRequest`
+- `PromptFragment`
+- `PromptFragmentCreateRequest`
+- `PromptPacket`
+- `PromptCompileRequest`
+- `PromptCompileResult`
+- `PromptBoundaryCheck`
+- `PromptInjectionFinding`
+- `PromptPreviewRequest`
+- `PromptPreview`
+- `ModelInputManifest`
+
+Prompt contracts are provider-neutral. They must not include provider SDK
+objects, provider-specific hidden prompt schemas, chain-of-thought, hidden
+reasoning, raw rendered prompts, raw headers, raw secrets, SQLAlchemy rows, or
+domain-specific prompt packs.
+
+Retrieved context is untrusted unless another governed AION contract says
+otherwise. Memory recall must be labeled `memory_recall`; memory recall is not
+truth. Model input manifests store hashes and metadata for the Model Gateway
+handoff, not raw provider payloads.

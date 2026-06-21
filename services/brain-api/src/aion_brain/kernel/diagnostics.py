@@ -30,6 +30,10 @@ class KernelDiagnostics:
         ("context_budgeter_present", "context_budgeter", "medium"),
         ("model_gateway_service_present", "model_gateway_service", "high"),
         ("prompt_redactor_present", "prompt_redactor", "high"),
+        ("prompt_repository_present", "prompt_repository", "high"),
+        ("prompt_compiler_present", "prompt_compiler", "high"),
+        ("prompt_boundary_checker_present", "prompt_boundary_checker", "high"),
+        ("model_input_manifest_service_present", "model_input_manifest_service", "high"),
         ("budget_guard_present", "model_budget_guard", "high"),
         ("visual_projection_present", "visual_projection_service", "medium"),
         ("replay_service_present", "replay_service", "medium"),
@@ -112,6 +116,9 @@ class KernelDiagnostics:
         ("clarification_manager_present", "clarification_manager", "medium"),
         ("response_composer_present", "response_composer", "medium"),
         ("response_verifier_present", "response_verifier", "medium"),
+        ("instruction_services_present", "instruction_resolver", "medium"),
+        ("preference_service_present", "preference_service", "medium"),
+        ("style_profile_service_present", "style_profile_service", "medium"),
         ("explanation_builder_present", "explanation_builder", "medium"),
         ("trace_narrative_builder_present", "trace_narrative_builder", "medium"),
         ("why_not_service_present", "why_not_service", "medium"),
@@ -130,6 +137,12 @@ class KernelDiagnostics:
         ("belief_contradiction_service_present", "belief_contradiction_service", "medium"),
         ("truth_maintenance_service_present", "truth_maintenance_service", "medium"),
         ("claim_extractor_present", "claim_extractor", "medium"),
+        ("grounding_source_service_present", "grounding_source_service", "medium"),
+        ("citation_service_present", "citation_service", "medium"),
+        ("citation_mapper_present", "citation_mapper", "medium"),
+        ("grounding_verifier_present", "grounding_verifier", "medium"),
+        ("source_coverage_service_present", "source_coverage_service", "medium"),
+        ("grounding_query_service_present", "grounding_query_service", "medium"),
         ("concept_service_present", "concept_service", "medium"),
         ("entity_service_present", "entity_service", "medium"),
         ("entity_query_service_present", "entity_query_service", "medium"),
@@ -208,6 +221,27 @@ class KernelDiagnostics:
                 "critical",
             )
         )
+        for field in (
+            "instructions_enabled",
+            "preferences_enabled",
+            "constraint_resolver_enabled",
+            "style_profiles_enabled",
+            "instruction_conflict_detection_enabled",
+            "preference_learning_enabled",
+            "preference_auto_confirm_enabled",
+            "instruction_resolution_store_runs",
+        ):
+            value = bool(getattr(settings, field, False))
+            passed = not value if field == "preference_auto_confirm_enabled" else value
+            checks.append(
+                self._result(
+                    field,
+                    "instructions",
+                    "passed" if passed else "warning",
+                    "medium",
+                    f"{field}={value}",
+                )
+            )
         checks.append(
             self._result(
                 "external_model_gateway_disabled_by_default",
@@ -251,6 +285,8 @@ class KernelDiagnostics:
         checks.extend(self._explanation_checks(settings))
         checks.extend(self._self_model_checks(settings))
         checks.extend(self._belief_checks(settings))
+        checks.extend(self._grounding_checks(settings))
+        checks.extend(self._prompt_checks(settings))
         checks.extend(self._entity_checks(settings))
         checks.extend(self._situation_checks(settings))
         checks.extend(self._decision_checks(settings))
@@ -258,6 +294,129 @@ class KernelDiagnostics:
         checks.extend(self._learning_synthesis_checks(settings))
         checks.extend(self._repo_quality_checks())
         return checks
+
+    def _grounding_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "grounding_source_service",
+                "citation_service",
+                "citation_mapper",
+                "grounding_verifier",
+                "source_coverage_service",
+                "grounding_query_service",
+            )
+        )
+        return [
+            self._result(
+                "grounding_enabled",
+                "grounding",
+                "passed" if bool(getattr(settings, "grounding_enabled", True)) else "warning",
+                "medium",
+                "Grounding Manager is enabled.",
+            ),
+            self._result(
+                "citation_mapper_enabled",
+                "grounding",
+                (
+                    "passed"
+                    if bool(getattr(settings, "citation_mapper_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Citation Mapper is enabled.",
+            ),
+            self._result(
+                "grounding_verification_enabled",
+                "grounding",
+                (
+                    "passed"
+                    if bool(getattr(settings, "grounding_verification_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Grounding verification is enabled.",
+            ),
+            self._result(
+                "source_coverage_enabled",
+                "grounding",
+                (
+                    "passed"
+                    if bool(getattr(settings, "source_coverage_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Source coverage reporting is enabled.",
+            ),
+            self._result(
+                "grounding_services_present",
+                "grounding",
+                "passed" if services_present else "failed",
+                "high",
+                "Grounding services are assembled.",
+            ),
+        ]
+
+    def _prompt_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "prompt_template_service",
+                "prompt_fragment_service",
+                "prompt_boundary_checker",
+                "prompt_compiler",
+                "model_input_manifest_service",
+                "prompt_preview_service",
+            )
+        )
+        return [
+            self._result(
+                "prompts_enabled",
+                "prompts",
+                "passed" if bool(getattr(settings, "prompts_enabled", True)) else "warning",
+                "high",
+                "Prompt governance is enabled.",
+            ),
+            self._result(
+                "prompt_compiler_enabled",
+                "prompts",
+                "passed" if bool(getattr(settings, "prompt_compiler_enabled", True)) else "warning",
+                "high",
+                "Prompt compiler is enabled.",
+            ),
+            self._result(
+                "prompt_boundary_enabled",
+                "prompts",
+                "passed" if bool(getattr(settings, "prompt_boundary_enabled", True)) else "warning",
+                "high",
+                "Prompt boundary guard is enabled.",
+            ),
+            self._result(
+                "prompt_preview_enabled",
+                "prompts",
+                "passed" if bool(getattr(settings, "prompt_preview_enabled", True)) else "warning",
+                "medium",
+                "Prompt preview is enabled.",
+            ),
+            self._result(
+                "prompt_store_rendered_text_disabled",
+                "prompts",
+                (
+                    "passed"
+                    if not bool(getattr(settings, "prompt_store_rendered_text", False))
+                    else "warning"
+                ),
+                "high",
+                "Rendered prompt text persistence is disabled by default.",
+            ),
+            self._result(
+                "prompt_services_present",
+                "prompts",
+                "passed" if services_present else "failed",
+                "high",
+                "Prompt governance services are assembled.",
+            ),
+        ]
 
     def _entity_checks(self, settings: object) -> list[DiagnosticCheck]:
         services_present = all(

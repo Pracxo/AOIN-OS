@@ -13,6 +13,7 @@ from aion_brain.contracts.attention import (
 )
 from aion_brain.contracts.context import ContextPacket
 from aion_brain.contracts.events import AIONEvent
+from aion_brain.contracts.instructions import InstructionResolutionRequest
 from aion_brain.contracts.intent import IntentFrame
 from aion_brain.contracts.policy import PolicyDecision, PolicyRequest
 from aion_brain.contracts.retrieval import (
@@ -59,6 +60,7 @@ class ContextCompiler:
         fusion_engine: ContextFusionEngine | None = None,
         attention_controller: AttentionController | None = None,
         context_budgeter: ContextBudgeter | None = None,
+        instruction_resolver: object | None = None,
         settings: Settings | None = None,
     ) -> None:
         self._policy_adapter = policy_adapter
@@ -70,6 +72,7 @@ class ContextCompiler:
         self._fusion_engine = fusion_engine or ContextFusionEngine()
         self._attention_controller = attention_controller
         self._context_budgeter = context_budgeter
+        self._instruction_resolver = instruction_resolver
         self._settings = settings
 
     def compile(
@@ -197,6 +200,7 @@ class ContextCompiler:
                 _append_entity_constraints(item.metadata, constraints)
             if item.source == "situation_model":
                 _append_situation_constraints(item.metadata, constraints)
+            _append_grounding_constraints(item.metadata, constraints)
             known_context.append(
                 {
                     "source": item.source,
@@ -211,6 +215,13 @@ class ContextCompiler:
                 }
             )
         constraints.extend(context_bundle.constraints)
+        instruction_context, instruction_constraints = self._instruction_resolution_context(
+            event,
+            scope,
+        )
+        if instruction_context is not None:
+            known_context.append(instruction_context)
+        constraints.extend(instruction_constraints)
 
         return _packet(
             event,
@@ -221,6 +232,40 @@ class ContextCompiler:
             context_bundle.graph_edge_refs,
             context_bundle.capability_refs,
             constraints,
+        )
+
+    def _instruction_resolution_context(
+        self,
+        event: AIONEvent,
+        scope: list[str],
+    ) -> tuple[dict[str, Any] | None, list[str]]:
+        resolve = getattr(self._instruction_resolver, "resolve", None)
+        if not callable(resolve):
+            return None, []
+        try:
+            resolution = resolve(
+                InstructionResolutionRequest(
+                    trace_id=event.trace_id,
+                    actor_id=event.actor_id,
+                    workspace_id=event.workspace_id,
+                    owner_scope=scope,
+                    metadata={"source": "context_compiler", "event_id": event.event_id},
+                )
+            )
+        except PermissionError as exc:
+            return None, [f"policy:instruction_resolution_denied:{exc}"]
+        except Exception:
+            return None, ["instruction_resolution_unavailable"]
+        return (
+            {
+                "source": "instruction_resolution",
+                "resolution_id": resolution.resolution_id,
+                "instruction_ids": resolution.applied_instruction_ids,
+                "preference_ids": resolution.applied_preference_ids,
+                "constraint_ids": resolution.applied_constraint_ids,
+                "effective_style": resolution.effective_style,
+            },
+            [f"instruction_constraint:{item}" for item in resolution.constraints],
         )
 
     def _router(self) -> RetrievalRouter:
@@ -508,3 +553,16 @@ def _append_situation_constraints(metadata: dict[str, Any], constraints: list[st
     if isinstance(situation_id, str) and situation_id:
         constraints.append(f"active_situation_id:{situation_id}")
     constraints.append("state_atoms_are_recall_not_truth")
+
+
+def _append_grounding_constraints(metadata: dict[str, Any], constraints: list[str]) -> None:
+    trust_level = str(metadata.get("trust_level", ""))
+    if trust_level == "memory_recall":
+        constraints.append("memory_only_support")
+    if trust_level in {"belief_uncertain", "unverified", "unknown"}:
+        constraints.append("weak_source_support")
+    if metadata.get("belief_status") == "contradicted" or metadata.get("status") == "contradicted":
+        constraints.append("contradicted_source_support")
+    evidence_refs = metadata.get("evidence_refs")
+    if metadata.get("require_evidence") is True and not evidence_refs:
+        constraints.append("missing_required_evidence")

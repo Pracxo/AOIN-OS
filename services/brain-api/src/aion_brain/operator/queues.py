@@ -104,6 +104,36 @@ _QUEUE_SPECS: tuple[tuple[OperatorQueueType, str, str, tuple[str, ...]], ...] = 
         "regression_suggestion_service",
         ("list_suggestions",),
     ),
+    (
+        "generic",
+        "Instruction Conflicts",
+        "instruction_conflict_service",
+        ("list_conflicts",),
+    ),
+    (
+        "generic",
+        "Preference Candidates",
+        "preference_learning_service",
+        ("list_candidates",),
+    ),
+    (
+        "generic",
+        "Unsupported Statements",
+        "grounding_repository",
+        ("list_unsupported",),
+    ),
+    (
+        "generic",
+        "Grounding Verifications",
+        "grounding_verifier",
+        ("list_verification_runs",),
+    ),
+    (
+        "generic",
+        "Prompt Injection Findings",
+        "prompt_repository",
+        ("list_injection_findings",),
+    ),
 )
 
 _RUNNING_STATUSES = {"running", "processing", "sending", "in_progress", "active"}

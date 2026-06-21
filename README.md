@@ -2664,3 +2664,116 @@ import Brain internals, database clients, frontend code, provider SDKs, or
 external observability clients.
 
 See `docs/adr/0053-explanation-engine-trace-narratives.md`.
+
+## Instruction Hierarchy and Preference Ledger
+
+AION Brain v0.1 includes a generic Instruction Hierarchy, Preference Ledger,
+Constraint Resolver, Style Profile Manager, and Instruction Conflict Detector.
+AION v0.1 preferences shape responses and context. They do not override
+policy, autonomy, approvals, runtime config, or capability limits.
+
+Instruction and preference endpoints:
+
+- `POST /brain/instructions`
+- `GET /brain/instructions/{instruction_id}`
+- `GET /brain/instructions`
+- `POST /brain/instructions/{instruction_id}/disable`
+- `POST /brain/instructions/resolve`
+- `GET /brain/instructions/conflicts`
+- `POST /brain/instructions/conflicts/{conflict_id}/resolve`
+- `POST /brain/preferences`
+- `GET /brain/preferences`
+- `POST /brain/preferences/{preference_id}/confirm`
+- `POST /brain/preferences/{preference_id}/reject`
+- `POST /brain/preferences/{preference_id}/disable`
+- `POST /brain/preferences/candidates`
+- `GET /brain/preferences/candidates`
+- `POST /brain/preferences/candidates/{candidate_id}/confirm`
+- `POST /brain/preferences/candidates/{candidate_id}/reject`
+- `POST /brain/style-profiles`
+- `GET /brain/style-profiles`
+- `GET /brain/style-profiles/effective`
+- `POST /brain/style-profiles/{style_profile_id}/disable`
+
+CLI examples:
+
+```bash
+./scripts/aionctl.sh instructions create --text "Keep responses concise."
+./scripts/aionctl.sh instructions resolve
+./scripts/aionctl.sh preferences confirm --id preference-id --reason explicit
+./scripts/aionctl.sh style-profiles effective
+```
+
+See `docs/instruction-hierarchy.md` and
+`docs/adr/0054-instruction-hierarchy-preference-ledger.md`.
+
+## Grounding Manager and Source Attribution
+
+AION v0.1 grounding is deterministic. It does not invent citations, call web
+search, or treat memory recall as truth. The Grounding Manager maps public
+response and explanation statements to local source records, citations,
+unsupported statements, verification runs, and source coverage reports.
+
+Grounding endpoints:
+
+- `POST /brain/grounding/sources`
+- `GET /brain/grounding/sources/{grounding_source_id}`
+- `POST /brain/grounding/citations`
+- `GET /brain/grounding/citations`
+- `POST /brain/grounding/map-response/{response_id}`
+- `POST /brain/grounding/map-text`
+- `POST /brain/grounding/verify`
+- `GET /brain/grounding/verifications/{grounding_verification_id}`
+- `POST /brain/grounding/coverage`
+- `POST /brain/grounding/query`
+- `GET /brain/grounding/unsupported`
+
+CLI examples:
+
+```bash
+./scripts/aionctl.sh grounding verify --response-id response-id
+./scripts/aionctl.sh grounding unsupported --response-id response-id
+```
+
+See `docs/grounding-model.md` and
+`docs/adr/0055-grounding-citation-source-attribution.md`.
+
+## Prompt Packet and Model Input Governance
+
+AION Brain v0.1 includes a provider-neutral Prompt Packet Compiler, Prompt
+Boundary Guard, deterministic Prompt Injection Detector, safe Prompt Preview,
+and Model Input Manifest service. This layer prepares governed model input for
+the Model Gateway only. It does not call external model providers, optimize
+prompts with an LLM, execute tools, approve actions, or create truth.
+
+Prompt endpoints:
+
+- `POST /brain/prompts/templates`
+- `GET /brain/prompts/templates`
+- `GET /brain/prompts/templates/{prompt_template_id}`
+- `POST /brain/prompts/templates/{prompt_template_id}/disable`
+- `POST /brain/prompts/templates/seed-defaults`
+- `POST /brain/prompts/fragments`
+- `GET /brain/prompts/fragments`
+- `POST /brain/prompts/compile`
+- `GET /brain/prompts/packets/{prompt_packet_id}`
+- `GET /brain/prompts/packets`
+- `POST /brain/prompts/preview`
+- `POST /brain/prompts/boundary-check`
+- `GET /brain/prompts/injection-findings`
+- `GET /brain/prompts/model-input-manifests/{model_input_manifest_id}`
+- `GET /brain/prompts/model-input-manifests`
+
+CLI examples:
+
+```bash
+./scripts/aionctl.sh prompts compile --user-message "Answer generically."
+./scripts/aionctl.sh prompts preview --prompt-packet-id prompt-packet-id
+./scripts/aionctl.sh prompts injection-findings
+```
+
+AION v0.1 prompt packets are provider-neutral and governed. Raw rendered
+prompts are not persisted by default.
+
+See `docs/prompt-governance.md` and
+`docs/adr/0056-prompt-packet-model-input-governance.md`.

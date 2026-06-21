@@ -12,6 +12,7 @@ from aion_brain.contracts.explanations import (
     ExplanationRequest,
     ExplanationStep,
 )
+from aion_brain.contracts.grounding import GroundingVerificationRequest
 from aion_brain.explanations._shared import (
     authorize,
     clamp,
@@ -59,6 +60,8 @@ class ExplanationBuilder:
         telemetry_service: object | None = None,
         settings: object | None = None,
         verifier: ExplanationVerifier | None = None,
+        citation_mapper: object | None = None,
+        grounding_verifier: object | None = None,
     ) -> None:
         self._repository = explanation_repository
         self._policy_adapter = policy_adapter
@@ -78,6 +81,18 @@ class ExplanationBuilder:
         self._telemetry_service = telemetry_service
         self._settings = settings
         self._verifier = verifier or ExplanationVerifier(telemetry_service)
+        self._citation_mapper = citation_mapper
+        self._grounding_verifier = grounding_verifier
+
+    def set_grounding_services(
+        self,
+        citation_mapper: object | None,
+        grounding_verifier: object | None,
+    ) -> None:
+        """Attach grounding services after kernel assembly."""
+
+        self._citation_mapper = citation_mapper
+        self._grounding_verifier = grounding_verifier
 
     def explain(self, request: ExplanationRequest) -> ExplanationRecord:
         """Build, verify, optionally store, audit, and return an explanation."""
@@ -150,6 +165,7 @@ class ExplanationBuilder:
             if bool(getattr(self._settings, "explanation_store_records", True))
             else explanation
         )
+        stored = self._apply_grounding_if_requested(request, stored)
         self._audit(request, stored, verification.status)
         self._provenance(request, stored)
         emit_explanation_telemetry(
@@ -167,6 +183,53 @@ class ExplanationBuilder:
             },
         )
         return stored
+
+    def _apply_grounding_if_requested(
+        self,
+        request: ExplanationRequest,
+        explanation: ExplanationRecord,
+    ) -> ExplanationRecord:
+        if not request.include_evidence and not request.require_grounding:
+            return explanation
+        metadata = dict(explanation.metadata)
+        try:
+            map_text = getattr(self._citation_mapper, "map_text", None)
+            if callable(map_text):
+                citation_map = map_text(
+                    text=explanation.summary,
+                    trace_id=explanation.trace_id,
+                    owner_scope=request.owner_scope,
+                    sources=[],
+                    target_type="explanation",
+                    target_id=explanation.explanation_id,
+                    required_source_types=["evidence"] if request.include_evidence else [],
+                    metadata={"source": "explanation_builder"},
+                )
+                metadata["citation_map_id"] = citation_map.citation_map_id
+            verify = getattr(self._grounding_verifier, "verify", None)
+            if callable(verify) and request.require_grounding:
+                run = verify(
+                    GroundingVerificationRequest(
+                        trace_id=explanation.trace_id,
+                        explanation_id=explanation.explanation_id,
+                        target_type="explanation",
+                        target_id=explanation.explanation_id,
+                        owner_scope=request.owner_scope,
+                        text=explanation.summary,
+                        required_source_types=["evidence"] if request.include_evidence else [],
+                        require_evidence=request.include_evidence,
+                        metadata={"source": "explanation_builder"},
+                        created_by=request.created_by,
+                    )
+                )
+                metadata["grounding_verification_id"] = run.grounding_verification_id
+                metadata["grounding_status"] = run.status
+        except Exception:
+            metadata["grounding_status"] = "unavailable"
+        updated = explanation.model_copy(update={"metadata": metadata})
+        if bool(getattr(self._settings, "explanation_store_records", True)):
+            return self._repository.save_explanation(updated)
+        return updated
 
     def get(self, explanation_id: str, scope: list[str]) -> ExplanationRecord | None:
         """Return one explanation after policy authorization."""

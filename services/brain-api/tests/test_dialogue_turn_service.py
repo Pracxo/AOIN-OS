@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 from aion_brain.contracts.dialogue import DialogueTurnRequest
 from tests.dialogue_helpers import FakeBrainLoop, service_bundle
 
@@ -45,3 +47,32 @@ def test_dialogue_turn_service_creates_clarification_when_brain_loop_requires_it
     assert result.clarification is not None
     assert result.response is not None
     assert result.response.response_type == "clarification"
+
+
+def test_dialogue_turn_result_includes_grounding_status_when_present(
+    monkeypatch: Any,
+) -> None:
+    bundle = service_bundle(brain_loop=FakeBrainLoop())
+    original_compose = bundle.response_composer.compose
+
+    def compose_with_grounding(request: object) -> object:
+        response = original_compose(request)
+        return response.model_copy(
+            update={
+                "metadata": {
+                    **response.metadata,
+                    "citation_map_id": "citation-map-1",
+                    "grounding_verification_id": "grounding-verification-1",
+                    "grounding_status": "passed",
+                }
+            }
+        )
+
+    monkeypatch.setattr(bundle.response_composer, "compose", compose_with_grounding)
+
+    result = bundle.turn_service.turn(
+        DialogueTurnRequest(message="Hello", owner_scope=["workspace:main"])
+    )
+
+    assert result.metadata["citation_map_id"] == "citation-map-1"
+    assert result.metadata["grounding_status"] == "passed"

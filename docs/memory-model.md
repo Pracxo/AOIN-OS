@@ -271,3 +271,39 @@ Entity merge and split lifecycle state must be visible to memory consumers.
 Merged, archived, or unresolved entity references should be surfaced as
 constraints during retrieval and context compilation instead of being silently
 trusted.
+
+## Preferences and Memory Governance
+
+Preferences are not automatically memory. The Preference Ledger is the
+canonical store for preferences, and learned preferences remain candidates
+until confirmed.
+
+Any future handoff from preference records into long-term memory must pass
+through memory governance, store summaries and references only, and preserve
+the rule that preferences cannot override policy, autonomy, approvals, runtime
+configuration, capability limits, sandbox limits, or grounding requirements.
+
+## Grounding and Memory Recall
+
+Memory recall is weak support unless it is backed by primary evidence or a
+supported belief claim. A memory record can explain why AION recalled context,
+but it cannot become primary evidence by itself.
+
+Evidence records are the primary grounding source. Supported beliefs may ground
+a response when their support references are preserved and visible. Contradicted
+beliefs cannot strongly ground a response and must surface a grounding
+constraint instead.
+
+Context packets preserve source attribution metadata from retrieval:
+
+- `source_type`
+- `source_id`
+- `evidence_refs`
+- `belief_refs`
+- `memory_refs`
+- `entity_refs`
+- `trust_level`
+
+The Context Compiler uses these hints to add constraints such as
+`memory_only_support`, `weak_source_support`,
+`contradicted_source_support`, and `missing_required_evidence`.

@@ -1027,3 +1027,58 @@ verification, and feedback operation. Policy failures fail closed.
 Explanation policy does not authorize hidden reasoning disclosure, raw prompt
 export, secret exposure, provider payload disclosure, or domain-specific
 business rules in Brain core.
+
+## Grounding Policy
+
+Generic grounding actions:
+
+- `grounding.source.create`
+- `grounding.source.read`
+- `grounding.citation.create`
+- `grounding.citation.read`
+- `grounding.citation.delete`
+- `grounding.map`
+- `grounding.verify`
+- `grounding.coverage.read`
+- `grounding.query`
+- `grounding.unsupported.read`
+
+Grounding read and query actions are scope-gated. Source and citation creation
+is allowed only for internal Brain services or actors with grounding write
+permission in scope. Citation delete is soft-delete only and requires owner or
+admin context. Grounding verification is allowed for internal Brain services,
+owners, admins, and operators. Unknown grounding actions fail closed.
+
+Grounding policy does not authorize invented citations, web search, LLM
+citation extraction, hidden reasoning disclosure, raw prompt export, secret
+exposure, or domain-specific citation rules.
+
+## Prompt Governance Policy
+
+Generic prompt actions:
+
+- `prompt.template.create`
+- `prompt.template.read`
+- `prompt.template.update`
+- `prompt.fragment.create`
+- `prompt.fragment.read`
+- `prompt.fragment.update`
+- `prompt.compile`
+- `prompt.packet.read`
+- `prompt.packet.delete`
+- `prompt.boundary.check`
+- `prompt.injection.read`
+- `prompt.preview`
+- `prompt.manifest.create`
+- `prompt.manifest.read`
+
+Prompt template and fragment reads are scope-gated. Template and fragment
+create/update operations require owner or admin context. Prompt compilation is
+allowed only for internal Brain services or actors in scope. Prompt previews
+must remain redacted, metadata-only, or hashes-only. Prompt packet reads return
+metadata and redacted preview only. Prompt injection reads are owner, admin,
+operator, or auditor operations. Unknown prompt actions fail closed.
+
+Prompt policy does not authorize hidden reasoning disclosure, raw prompt
+export, raw rendered prompt persistence, provider-specific prompt contracts,
+external model calls, or domain-specific prompt packs.

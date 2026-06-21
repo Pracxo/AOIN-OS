@@ -20,12 +20,15 @@ from aion_sdk.cli.commands.decisions import install_decision_commands
 from aion_sdk.cli.commands.dialogue import install_dialogue_commands
 from aion_sdk.cli.commands.entities import install_entity_commands
 from aion_sdk.cli.commands.explanations import install_explanation_commands
+from aion_sdk.cli.commands.grounding import install_grounding_commands
+from aion_sdk.cli.commands.instructions import install_instruction_commands
 from aion_sdk.cli.commands.learning import install_learning_commands
 from aion_sdk.cli.commands.modules import install_modules_commands
 from aion_sdk.cli.commands.operator import install_operator_commands
 from aion_sdk.cli.commands.outcomes import install_outcome_commands
 from aion_sdk.cli.commands.performance import install_performance_commands
 from aion_sdk.cli.commands.policy import install_policy_commands
+from aion_sdk.cli.commands.prompts import install_prompt_commands
 from aion_sdk.cli.commands.release import install_release_commands
 from aion_sdk.cli.commands.resilience import install_resilience_commands
 from aion_sdk.cli.commands.sandbox import install_sandbox_commands
@@ -552,6 +555,9 @@ install_outcome_commands(app, get_client=_client, get_scope=_scope, render=_rend
 install_learning_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_self_model_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_explanation_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_instruction_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_grounding_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_prompt_commands(app, get_client=_client, get_scope=_scope, render=_render)
 
 
 if __name__ == "__main__":

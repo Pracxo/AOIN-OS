@@ -78,6 +78,18 @@ ProvenanceResourceType = Literal[
     "entity_resolution",
     "entity_merge",
     "entity_split",
+    "grounding_source",
+    "citation",
+    "citation_map",
+    "unsupported_statement",
+    "grounding_verification",
+    "source_coverage",
+    "prompt_template",
+    "prompt_fragment",
+    "prompt_packet",
+    "prompt_boundary",
+    "prompt_injection",
+    "model_input_manifest",
 ]
 ProvenanceRelationType = Literal[
     "caused",

@@ -353,3 +353,93 @@ and a why-not path such as:
 
 These are frontend-agnostic records. They do not expose hidden reasoning,
 raw prompts, raw secrets, or renderer-specific state.
+
+## Instruction Projection
+
+Instruction telemetry projects instruction records, preferences, constraints,
+style profiles, conflicts, and instruction resolution runs into the Visual
+Brain Projection.
+
+Generic visual nodes include:
+
+- `instruction`
+- `preference`
+- `constraint`
+- `style_profile`
+- `instruction_conflict`
+- `instruction_resolution`
+
+The generic projection path is:
+
+`instruction/preference/constraint -> conflict detector -> resolver -> context/response`
+
+The projection remains backend-only and frontend-agnostic. It does not expose
+hidden prompts, chain-of-thought, raw secrets, policy internals, or renderer
+state.
+
+## Grounding Projection
+
+Grounding telemetry projects source attribution activity into the Visual Brain
+Projection. Generic event types include:
+
+- `grounding_source_created`
+- `citation_record_created`
+- `citation_map_created`
+- `unsupported_statement_detected`
+- `grounding_verification_started`
+- `grounding_verification_completed`
+- `source_coverage_report_created`
+
+Generic visual node types include:
+
+- `grounding`
+- `citation`
+- `citation_map`
+- `unsupported_statement`
+- `source_coverage`
+
+The generic grounding path is:
+
+`response statement -> citation -> source -> evidence/belief/memory -> verification`
+
+Memory nodes in this path represent recall only. A future renderer may dim
+memory-only support, highlight unsupported statements, and show source coverage
+warnings, but it must consume AION-owned visual contracts rather than reaching
+into grounding repositories directly.
+
+Grounding projection remains deterministic and frontend-agnostic. It does not
+invent citations, call web search, expose raw prompts, expose hidden reasoning,
+or apply domain-specific citation rules.
+
+## Prompt Governance Projection
+
+Prompt telemetry projects prompt governance records into the Visual Brain
+Projection. Generic event types include:
+
+- `prompt_template_created`
+- `prompt_fragment_created`
+- `prompt_packet_compiled`
+- `prompt_boundary_checked`
+- `prompt_injection_detected`
+- `model_input_manifest_created`
+- `prompt_preview_created`
+
+Generic visual node types include:
+
+- `prompt`
+- `prompt_template`
+- `prompt_fragment`
+- `prompt_packet`
+- `prompt_boundary`
+- `prompt_injection`
+- `model_input`
+
+The generic prompt path is:
+
+`instruction/context/grounding -> prompt packet -> boundary check -> model input manifest`
+
+Blocked prompt packets and high severity injection findings should project with
+higher intensity than normal compiled packets. The projection remains
+backend-only and frontend-agnostic. It does not expose raw rendered prompts,
+hidden reasoning, provider payloads, raw secrets, or domain-specific prompt
+logic.

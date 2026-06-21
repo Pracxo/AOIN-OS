@@ -6,6 +6,8 @@ from datetime import UTC, datetime
 from typing import Any, cast
 from uuid import uuid4
 
+from aion_brain.contracts.grounding import GroundingVerificationRequest
+from aion_brain.contracts.prompts import PromptCompileRequest
 from aion_brain.contracts.responses import ResponseComposeRequest, ResponseDraft, ResponseType
 from aion_brain.dialogue._shared import authorize, emit_telemetry
 from aion_brain.dialogue.hashing import hash_message_content
@@ -24,6 +26,9 @@ class ResponseComposer:
         settings: object | None = None,
         confidence_calibrator: object | None = None,
         explanation_builder: object | None = None,
+        citation_mapper: object | None = None,
+        grounding_verifier: object | None = None,
+        prompt_compiler: object | None = None,
     ) -> None:
         self._repository = repository
         self._policy_adapter = policy_adapter
@@ -31,11 +36,29 @@ class ResponseComposer:
         self._settings = settings
         self._confidence_calibrator = confidence_calibrator
         self._explanation_builder = explanation_builder
+        self._citation_mapper = citation_mapper
+        self._grounding_verifier = grounding_verifier
+        self._prompt_compiler = prompt_compiler
 
     def set_explanation_builder(self, explanation_builder: object | None) -> None:
         """Attach the explanation builder after kernel assembly."""
 
         self._explanation_builder = explanation_builder
+
+    def set_grounding_services(
+        self,
+        citation_mapper: object | None,
+        grounding_verifier: object | None,
+    ) -> None:
+        """Attach grounding services after kernel assembly."""
+
+        self._citation_mapper = citation_mapper
+        self._grounding_verifier = grounding_verifier
+
+    def set_prompt_compiler(self, prompt_compiler: object | None) -> None:
+        """Attach prompt compiler after kernel assembly."""
+
+        self._prompt_compiler = prompt_compiler
 
     def compose(self, request: ResponseComposeRequest) -> ResponseDraft:
         """Compose and persist one deterministic response draft."""
@@ -55,15 +78,32 @@ class ResponseComposer:
         require_grounding = request.require_grounding or bool(
             getattr(self._settings, "response_require_grounding_default", False)
         )
-        evidence_refs = _string_refs(request.context, "evidence_refs") + _string_refs(
-            request.reasoning_result,
-            "evidence_refs",
+        evidence_refs = (
+            _string_refs(request.context, "evidence_refs")
+            + _string_refs(
+                request.reasoning_result,
+                "evidence_refs",
+            )
+            + _string_refs(request.metadata, "evidence_refs")
         )
-        memory_refs = _string_refs(request.context, "retrieved_memory_ids") + _string_refs(
-            request.reasoning_result,
-            "memory_refs",
+        memory_refs = (
+            _string_refs(request.context, "retrieved_memory_ids")
+            + _string_refs(
+                request.reasoning_result,
+                "memory_refs",
+            )
+            + _string_refs(request.metadata, "memory_refs")
         )
-        grounding_refs = _string_refs(request.context, "grounding_refs")
+        belief_refs = _string_refs(request.metadata, "belief_refs")
+        entity_refs = _string_refs(request.metadata, "entity_refs")
+        grounding_refs = _unique(
+            _string_refs(request.context, "grounding_refs")
+            + _string_refs(request.metadata, "grounding_refs")
+            + evidence_refs
+            + belief_refs
+            + memory_refs
+            + entity_refs
+        )
         clarification_question = _clarification_question(request)
         constraints = _constraints(request)
         response_type: ResponseType = request.response_type
@@ -74,6 +114,14 @@ class ResponseComposer:
             "require_grounding": require_grounding,
             "deterministic_composer": True,
         }
+        if belief_refs:
+            metadata["belief_refs"] = _unique(belief_refs)
+        if entity_refs:
+            metadata["entity_refs"] = _unique(entity_refs)
+        effective_style = request.metadata.get("effective_style")
+        if isinstance(effective_style, dict):
+            metadata["style_profile_applied"] = effective_style.get("style_profile_id")
+            metadata["style_constraints_preserved"] = True
         if clarification_question:
             response_type = "clarification"
             content = f"I need one clarification before continuing: {clarification_question}"
@@ -94,6 +142,15 @@ class ResponseComposer:
             metadata["explanation_included"] = True
         else:
             content = _response_content(request)
+        metadata.update(
+            _compile_response_prompt(
+                self._prompt_compiler,
+                request,
+                response_id=response_id,
+                content=content,
+                scope=scope,
+            )
+        )
         now = datetime.now(UTC)
         if bool(getattr(self._settings, "confidence_calibration_enabled", True)):
             calibration = _calibrate_response(
@@ -133,6 +190,7 @@ class ResponseComposer:
             updated_at=now,
         )
         stored = self._repository.save_response(draft)
+        stored = self._apply_grounding_if_required(stored, require_grounding, scope)
         emit_telemetry(
             self._telemetry_service,
             event_type="response_composed",
@@ -159,6 +217,72 @@ class ResponseComposer:
                 payload={"owner_scope": scope, "constraints": stored.constraints},
             )
         return stored
+
+    def _apply_grounding_if_required(
+        self,
+        response: ResponseDraft,
+        require_grounding: bool,
+        scope: list[str],
+    ) -> ResponseDraft:
+        if not require_grounding or response.status == "blocked":
+            return response
+        metadata = dict(response.metadata)
+        required_source_types = _string_refs(metadata, "required_source_types")
+        try:
+            map_response = getattr(self._citation_mapper, "map_response", None)
+            if callable(map_response):
+                citation_map = map_response(
+                    response.response_id,
+                    scope,
+                    required_source_types,
+                )
+                metadata["citation_map_id"] = citation_map.citation_map_id
+                metadata["grounding_coverage_score"] = citation_map.coverage_score
+            verify = getattr(self._grounding_verifier, "verify", None)
+            if callable(verify):
+                verification = verify(
+                    GroundingVerificationRequest(
+                        trace_id=response.trace_id,
+                        response_id=response.response_id,
+                        target_type="response",
+                        target_id=response.response_id,
+                        owner_scope=scope,
+                        required_source_types=cast(Any, required_source_types),
+                        require_evidence=bool(
+                            metadata.get("require_evidence")
+                            or getattr(
+                                self._settings,
+                                "grounding_require_evidence_default",
+                                False,
+                            )
+                        ),
+                        allow_memory_only=bool(
+                            getattr(
+                                self._settings,
+                                "grounding_allow_memory_only_default",
+                                False,
+                            )
+                        ),
+                        metadata={"source": "response_composer"},
+                    )
+                )
+                metadata["grounding_verification_id"] = verification.grounding_verification_id
+                metadata["grounding_status"] = verification.status
+                response = response.model_copy(
+                    update={
+                        "grounded": verification.grounded,
+                        "metadata": metadata,
+                        "updated_at": datetime.now(UTC),
+                    }
+                )
+                return self._repository.save_response(response)
+        except Exception:
+            metadata["grounding_status"] = "unavailable"
+            response = response.model_copy(
+                update={"metadata": metadata, "updated_at": datetime.now(UTC)}
+            )
+            return self._repository.save_response(response)
+        return response
 
     def get_response(self, response_id: str) -> ResponseDraft | None:
         """Return one stored response draft."""
@@ -295,6 +419,61 @@ def _first_text(payload: dict[str, Any], keys: tuple[str, ...]) -> str | None:
 
 def _unique(values: list[str]) -> list[str]:
     return list(dict.fromkeys(value for value in values if value))
+
+
+def _compile_response_prompt(
+    prompt_compiler: object | None,
+    request: ResponseComposeRequest,
+    *,
+    response_id: str,
+    content: str,
+    scope: list[str],
+) -> dict[str, Any]:
+    compile_prompt = getattr(prompt_compiler, "compile", None)
+    if not callable(compile_prompt):
+        return {}
+    try:
+        result = compile_prompt(
+            PromptCompileRequest(
+                trace_id=request.trace_id,
+                packet_type="response",
+                response_id=response_id,
+                instruction_resolution_id=_metadata_str(
+                    request.metadata, "instruction_resolution_id"
+                ),
+                grounding_verification_id=_metadata_str(
+                    request.metadata, "grounding_verification_id"
+                ),
+                owner_scope=scope,
+                user_message=content,
+                max_chars=int(request.metadata.get("prompt_max_chars", 12000)),
+                include_redacted_preview=True,
+                store_packet=True,
+                metadata={
+                    "source": "response_composer",
+                    "context": request.context,
+                    "reasoning_refs": _string_refs(request.reasoning_result, "reasoning_refs"),
+                    "evidence_refs": _string_refs(request.metadata, "evidence_refs"),
+                    "memory_refs": _string_refs(request.metadata, "memory_refs"),
+                },
+                created_by=_metadata_str(request.metadata, "created_by"),
+            )
+        )
+    except Exception:
+        return {"prompt_governance_status": "unavailable"}
+    packet = getattr(result, "prompt_packet", None)
+    manifest = getattr(result, "model_input_manifest", None)
+    return {
+        "prompt_governance_status": getattr(packet, "status", "unknown"),
+        "prompt_packet_id": getattr(packet, "prompt_packet_id", None),
+        "prompt_boundary_check_id": getattr(packet, "boundary_check_id", None),
+        "model_input_manifest_id": getattr(manifest, "model_input_manifest_id", None),
+    }
+
+
+def _metadata_str(metadata: dict[str, Any], key: str) -> str | None:
+    value = metadata.get(key)
+    return value if isinstance(value, str) and value else None
 
 
 def _calibrate_response(

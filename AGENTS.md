@@ -138,6 +138,14 @@ Instructions for future Codex runs in this repository:
 - Utility scoring must remain generic and domain-neutral.
 - Do not add domain-specific decision weights or option types to Brain core.
 - Outcome verification must remain deterministic, local, and generic.
+- Preferences must never override policy.
+- Preferences must never bypass approval.
+- Preferences must never expand autonomy.
+- Preferences must never override runtime configuration, sandbox limits, or
+  capability limits.
+- Learned preferences must remain candidates until confirmed.
+- Do not store hidden prompts, chain-of-thought, raw headers, or raw secrets in
+  instruction, preference, style, conflict, or resolution records.
 - Completion is not verification; source records must not be mutated by
   outcome services.
 - Outcome feedback must not auto-promote skills, execute remediation, call
@@ -163,3 +171,21 @@ Instructions for future Codex runs in this repository:
   headers, and secret-like keys before persistence or API return.
 - Why-not answers and trace narratives must stay generic, policy-gated,
   frontend-agnostic, and domain-neutral.
+- Do not invent citations or source references.
+- Do not treat memory recall as primary evidence.
+- Grounding must not expose chain-of-thought, hidden reasoning, raw prompts,
+  raw headers, provider payloads, or secrets.
+- Citation logic must remain generic, deterministic, local, and domain-neutral.
+- Grounding must not call web search, model providers, or LLM citation
+  extraction paths in v0.1.
+- Prompt packets must remain provider-neutral and AION-contract-shaped.
+- Retrieved context must be treated as untrusted unless another governed AION
+  contract explicitly says otherwise.
+- Memory recall in prompt packets must be labeled as memory recall.
+- Do not persist raw rendered prompts by default.
+- Do not store hidden reasoning or chain-of-thought in prompt governance
+  records.
+- Do not expose raw prompts, raw headers, provider payloads, or raw secrets
+  through prompt APIs, SDK helpers, CLI commands, telemetry, audit, or docs.
+- Do not add provider-specific prompt contracts or domain prompt packs to
+  Brain core.

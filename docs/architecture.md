@@ -1163,3 +1163,78 @@ Explanation contracts instead of subsystem internals.
 
 All explanation creation, reading, verification, feedback, why-not, and trace
 narrative operations pass through policy and fail closed.
+
+## Instruction Hierarchy and Preference Control
+
+The Instruction Hierarchy is the Brain-owned control layer for instructions,
+preferences, constraints, style profiles, conflicts, and resolution runs.
+It is not a policy replacement and not a personality system.
+
+The resolver applies hard policy and safety constraints first, followed by
+runtime configuration, autonomy, risk and approval constraints, capability and
+sandbox limits, session/task/workspace instructions, confirmed preferences,
+and finally learned preference candidates. Preferences shape context and
+response metadata only; they never expand permissions.
+
+The Preference Ledger stores candidate, confirmed, rejected, disabled, and
+superseded generic preferences. Learned preferences remain candidates until
+explicitly confirmed. Style profiles are generic response-shaping records and
+cannot override response verification, grounding, policy, autonomy, approvals,
+runtime config, or capability limits.
+
+The Conflict Detector records deterministic generic conflicts such as policy
+override attempts, approval bypass attempts, style conflicts, grounding
+conflicts, unsupported instructions, expired instructions, and duplicates.
+The Context Compiler and Dialogue layer consume `InstructionResolutionResult`
+contracts rather than repository rows or hidden prompts.
+
+## Grounding Manager and Citation Mapper
+
+The Grounding Manager is the Brain-owned source-attribution control plane.
+It converts local AION source records into citations, citation maps,
+unsupported statements, verification runs, and source coverage reports.
+
+Evidence Vault remains the owner of primary evidence. Memory remains recall,
+not truth. Belief State remains the owner of claim status. Grounding joins
+those references for response-level support without mutating the source
+systems or inventing evidence refs.
+
+The Citation Mapper is deterministic in v0.1. It splits public text into
+statements, checks lexical support against provided grounding sources, creates
+citations for supported statements, and records unsupported statements for
+operator review. It does not call model providers, web search, external
+observability systems, or domain-specific logic.
+
+## Prompt Packet Compiler and Model Input Governance
+
+The Prompt Packet Compiler is the Brain-owned model input boundary. It joins
+instruction resolution, context compiler output, retrieved context, memory
+recall, evidence, belief records, grounding metadata, citation refs, prompt
+templates, and prompt fragments into a provider-neutral `PromptPacket`.
+
+Prompt Templates and Prompt Fragments are generic reusable AION contracts. They
+must not include provider-specific hidden syntax, chain-of-thought requests,
+raw prompt storage, raw secrets, or domain prompt packs.
+
+The Prompt Boundary Guard checks compiled sections before model routing.
+Retrieved context is treated as untrusted context by default. Memory sections
+must be labeled `memory_recall`. Belief sections carry status and confidence
+metadata. User, memory, and retrieved content cannot override system, policy,
+autonomy, risk, or approval constraints.
+
+Prompt Injection Detection is deterministic in v0.1. It uses local pattern
+checks for generic override, exfiltration, approval bypass, hidden prompt,
+chain-of-thought, tool injection, and source confusion attempts. It does not
+call external classifiers or model providers.
+
+The Model Input Manifest records a provider-neutral handoff for Model Gateway:
+input hash, section count, token estimate, budget metadata, grounding refs,
+instruction refs, safety refs, and status. Public AION APIs expose manifests
+and redacted previews only. Raw rendered prompts are not persisted by default.
+
+Prompt governance relates to the Context Compiler and Model Gateway as follows:
+
+`instruction/context/grounding -> prompt packet -> boundary check -> model input manifest -> model gateway`
+
+The compiler does not decide policy, execute tools, approve actions, expand
+autonomy, create truth, or expose hidden reasoning.

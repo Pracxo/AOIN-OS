@@ -23,6 +23,10 @@ from aion_brain.contracts.dialogue import (
 from aion_brain.contracts.entities import EntityResolutionRequest
 from aion_brain.contracts.events import AIONEvent
 from aion_brain.contracts.explanations import ExplanationRequest, WhyNotRequest
+from aion_brain.contracts.instructions import (
+    InstructionResolutionRequest,
+    InstructionResolutionResult,
+)
 from aion_brain.contracts.responses import ResponseComposeRequest, ResponseDraft
 from aion_brain.contracts.self_model import SelfDescriptionRequest
 from aion_brain.contracts.situations import ContextContinuityRequest
@@ -69,6 +73,8 @@ class DialogueTurnService:
         self_description_service: object | None = None,
         explanation_builder: object | None = None,
         why_not_service: object | None = None,
+        instruction_resolver: object | None = None,
+        preference_learning_service: object | None = None,
     ) -> None:
         self._session_service = session_service
         self._message_service = message_service
@@ -93,6 +99,8 @@ class DialogueTurnService:
         self._self_description_service = self_description_service
         self._explanation_builder = explanation_builder
         self._why_not_service = why_not_service
+        self._instruction_resolver = instruction_resolver
+        self._preference_learning_service = preference_learning_service
 
     def turn(self, request: DialogueTurnRequest) -> DialogueTurnResult:
         """Run one bounded dialogue turn."""
@@ -146,7 +154,15 @@ class DialogueTurnService:
             session,
             user_message,
         )
+        instruction_resolution = self._resolve_instructions(request, session, user_message)
+        self._learn_preference_if_requested(request, session, user_message)
         constraints: list[str] = []
+        if instruction_resolution is not None:
+            constraints.extend(instruction_resolution.constraints)
+            constraints.extend(
+                f"instruction_conflict:{item.conflict_type}"
+                for item in instruction_resolution.conflicts
+            )
         trace: DecisionTrace | None = None
         clarification: ClarificationRequest | None = None
         if autonomy is not None and not autonomy.allow:
@@ -172,6 +188,7 @@ class DialogueTurnService:
             trace,
             clarification,
             constraints,
+            instruction_resolution,
         )
         verification = self._response_verifier.verify(response.response_id)
         self._response_delivery.deliver_api_return(
@@ -215,6 +232,12 @@ class DialogueTurnService:
                 "external_delivery": False,
                 "extracted_claim_ids": extracted_claim_ids,
                 "entity_resolution_run_ids": entity_resolution_run_ids,
+                "instruction_resolution_id": (
+                    instruction_resolution.resolution_id if instruction_resolution else None
+                ),
+                "citation_map_id": response.metadata.get("citation_map_id"),
+                "grounding_verification_id": response.metadata.get("grounding_verification_id"),
+                "grounding_status": response.metadata.get("grounding_status"),
             },
             created_at=datetime.now(UTC),
         )
@@ -434,6 +457,7 @@ class DialogueTurnService:
         trace: DecisionTrace | None,
         clarification: ClarificationRequest | None,
         constraints: list[str],
+        instruction_resolution: InstructionResolutionResult | None = None,
     ) -> ResponseDraft:
         context: dict[str, Any] = {
             "owner_scope": session.owner_scope,
@@ -447,6 +471,11 @@ class DialogueTurnService:
             "dialogue_turn": True,
             "requires_clarification": clarification is not None,
         }
+        if instruction_resolution is not None:
+            metadata["instruction_resolution_id"] = instruction_resolution.resolution_id
+            metadata["effective_style"] = instruction_resolution.effective_style or None
+            context["instruction_resolution_id"] = instruction_resolution.resolution_id
+            context["instruction_constraints"] = instruction_resolution.constraints
         if clarification is not None:
             metadata["clarification_question"] = clarification.question
         outcome = trace.outcome if trace is not None else {"constraints": constraints}
@@ -482,6 +511,65 @@ class DialogueTurnService:
                 metadata=metadata,
             )
         )
+
+    def _resolve_instructions(
+        self,
+        request: DialogueTurnRequest,
+        session: DialogueSession,
+        message: DialogueMessage,
+    ) -> InstructionResolutionResult | None:
+        resolve = getattr(self._instruction_resolver, "resolve", None)
+        if not callable(resolve):
+            return None
+        raw_instructions = request.metadata.get("instructions")
+        session_instructions = (
+            [str(item) for item in raw_instructions if isinstance(item, str)]
+            if isinstance(raw_instructions, list)
+            else []
+        )
+        try:
+            result = resolve(
+                InstructionResolutionRequest(
+                    trace_id=message.trace_id,
+                    actor_id=message.actor_id,
+                    workspace_id=message.workspace_id,
+                    owner_scope=session.owner_scope,
+                    current_session_instructions=session_instructions,
+                    metadata={
+                        "source": "dialogue_turn",
+                        "dialogue_session_id": session.dialogue_session_id,
+                        "message_id": message.message_id,
+                    },
+                )
+            )
+            return result if isinstance(result, InstructionResolutionResult) else None
+        except Exception:
+            return None
+
+    def _learn_preference_if_requested(
+        self,
+        request: DialogueTurnRequest,
+        session: DialogueSession,
+        message: DialogueMessage,
+    ) -> None:
+        propose = getattr(self._preference_learning_service, "propose_from_dialogue", None)
+        if not callable(propose):
+            return
+        explicit = request.metadata.get("create_preference_candidate") is True
+        try:
+            propose(
+                {
+                    **request.metadata,
+                    "trace_id": message.trace_id,
+                    "actor_id": message.actor_id,
+                    "workspace_id": message.workspace_id,
+                    "message_id": message.message_id,
+                },
+                explicit=explicit,
+                owner_scope=session.owner_scope,
+            )
+        except Exception:
+            return
 
     def _explanation_result(
         self,

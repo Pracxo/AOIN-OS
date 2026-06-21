@@ -57,3 +57,6 @@ Every architecture-changing Codex task must add or update an ADR.
 - [0051: Experience Ledger and Learning Synthesis](0051-experience-ledger-learning-synthesis.md) - Defines generic experience records, pattern mining, lessons, and review-only suggestions.
 - [0052: Self Model and Capability Awareness](0052-self-model-capability-awareness.md) - Defines descriptive self-model, capability awareness, limitations, confidence calibration, and introspection.
 - [0053: Explanation Engine and Trace Narratives](0053-explanation-engine-trace-narratives.md) - Defines deterministic public explanations, why-not answers, trace narratives, verification, and feedback.
+- [0054: Instruction Hierarchy and Preference Ledger](0054-instruction-hierarchy-preference-ledger.md) - Defines instruction precedence, preference confirmation, style profiles, and deterministic conflict resolution.
+- [0055: Grounding Citation and Source Attribution](0055-grounding-citation-source-attribution.md) - Defines deterministic source attribution, citations, verification, and coverage.
+- [0056: Prompt Packet and Model Input Governance](0056-prompt-packet-model-input-governance.md) - Defines provider-neutral prompt packets, boundary checks, injection detection, and model input manifests.

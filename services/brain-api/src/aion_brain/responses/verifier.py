@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 from datetime import UTC, datetime
+from typing import Any
 from uuid import uuid4
 
+from aion_brain.contracts.grounding import GroundingVerificationRequest
 from aion_brain.contracts.responses import (
     ResponseDraft,
     ResponseVerification,
@@ -32,6 +34,7 @@ class ResponseVerifier:
         capability_awareness_service: object | None = None,
         explanation_verifier: object | None = None,
         explanation_builder: object | None = None,
+        grounding_verifier: object | None = None,
     ) -> None:
         self._repository = repository
         self._policy_adapter = policy_adapter
@@ -43,6 +46,7 @@ class ResponseVerifier:
         self._capability_awareness_service = capability_awareness_service
         self._explanation_verifier = explanation_verifier
         self._explanation_builder = explanation_builder
+        self._grounding_verifier = grounding_verifier
 
     def set_explanation_services(
         self,
@@ -53,6 +57,11 @@ class ResponseVerifier:
 
         self._explanation_verifier = explanation_verifier
         self._explanation_builder = explanation_builder
+
+    def set_grounding_verifier(self, grounding_verifier: object | None) -> None:
+        """Attach the grounding verifier after kernel assembly."""
+
+        self._grounding_verifier = grounding_verifier
 
     def verify(self, response_id: str) -> ResponseVerification:
         """Verify and persist one response verification record."""
@@ -79,6 +88,7 @@ class ResponseVerifier:
                 *self._situation_issues(response, scope),
                 *self._self_model_issues(response, scope),
                 *self._explanation_issues(response, scope),
+                *self._grounding_issues(response, scope),
             ],
         )
         score = max(0.0, 1.0 - (0.25 * len(issues)))
@@ -149,6 +159,49 @@ class ResponseVerifier:
                 [],
             ):
                 issues.append({"code": "belief_ungrounded", "severity": "medium"})
+        return issues
+
+    def _grounding_issues(
+        self,
+        response: ResponseDraft,
+        scope: list[str],
+    ) -> list[dict[str, object]]:
+        if response.metadata.get("require_grounding") is not True:
+            return []
+        verify = getattr(self._grounding_verifier, "verify", None)
+        if not callable(verify):
+            return [{"code": "grounding_verifier_unavailable", "severity": "medium"}]
+        try:
+            result = verify(
+                GroundingVerificationRequest(
+                    trace_id=response.trace_id,
+                    response_id=response.response_id,
+                    target_type="response",
+                    target_id=response.response_id,
+                    owner_scope=scope,
+                    required_source_types=_required_source_types(response),
+                    require_evidence=bool(response.metadata.get("require_evidence", False)),
+                    allow_memory_only=bool(response.metadata.get("allow_memory_only", False)),
+                    metadata={"source": "response_verifier"},
+                )
+            )
+        except Exception:
+            return [{"code": "grounding_verification_unavailable", "severity": "medium"}]
+        issues: list[dict[str, object]] = []
+        if result.status in {"failed", "insufficient_sources", "blocked_by_policy"}:
+            issues.append({"code": f"grounding_{result.status}", "severity": "high"})
+        elif result.status == "warning":
+            issues.append({"code": "grounding_warning", "severity": "medium"})
+        for issue in result.issues:
+            code = str(issue.get("code", "grounding_issue"))
+            if "memory_not_truth" in code or "memory_only" in code:
+                issues.append({"code": "memory_only_support_not_allowed", "severity": "medium"})
+            if "contradicted" in code:
+                issues.append({"code": "contradicted_belief_support", "severity": "high"})
+            if "missing_evidence" in code or "missing_source_type:evidence" in code:
+                issues.append({"code": "missing_evidence", "severity": "high"})
+            if "unsupported" in code:
+                issues.append({"code": "unsupported_statement", "severity": "high"})
         return issues
 
     def _explanation_issues(
@@ -363,6 +416,13 @@ def _scope_from_response(response: ResponseDraft) -> list[str]:
         if values:
             return values
     return ["workspace:main"]
+
+
+def _required_source_types(response: ResponseDraft) -> list[Any]:
+    raw = response.metadata.get("required_source_types")
+    if isinstance(raw, list):
+        return [str(item) for item in raw if item]
+    return []
 
 
 def _belief_ids_from_response(response: ResponseDraft) -> list[str]:

@@ -335,3 +335,72 @@ providers, frontend code, database clients, or external observability SDKs.
 The SDK calls public Brain APIs only. It does not import `aion_brain`,
 database clients, provider SDKs, frontend code, or external observability
 clients.
+
+## InstructionsResource
+
+`client.instructions` supports:
+
+- `create_instruction(payload)`
+- `get_instruction(instruction_id, scope)`
+- `list_instructions(scope, status=None, instruction_type=None, scope_type=None, limit=100)`
+- `disable_instruction(instruction_id, reason)`
+- `resolve(payload)`
+- `list_conflicts(scope, status=None, severity=None, limit=100)`
+- `resolve_conflict(conflict_id, resolution, reason)`
+- `create_preference(payload)`
+- `list_preferences(scope, actor_id=None, workspace_id=None, status=None, preference_type=None, limit=100)`
+- `confirm_preference(preference_id, reason)`
+- `reject_preference(preference_id, reason)`
+- `list_candidates(scope, status=None, preference_type=None, limit=100)`
+- `confirm_candidate(candidate_id, reason)`
+- `reject_candidate(candidate_id, reason)`
+- `create_style_profile(payload)`
+- `list_style_profiles(scope, actor_id=None, workspace_id=None, status=None, limit=100)`
+- `effective_style(scope, actor_id=None, workspace_id=None)`
+
+The SDK calls public Brain APIs only. It does not import `aion_brain`,
+database clients, provider SDKs, frontend code, or external observability
+clients.
+
+## GroundingResource
+
+`client.grounding` supports:
+
+- `create_source(payload)`
+- `get_source(grounding_source_id, scope)`
+- `create_citation(payload)`
+- `list_citations(response_id=None, explanation_id=None, source_id=None, limit=100)`
+- `map_response(response_id, owner_scope, required_source_types=None)`
+- `map_text(payload)`
+- `verify(payload)`
+- `get_verification(grounding_verification_id)`
+- `coverage(payload)`
+- `query(payload)`
+- `unsupported(response_id=None, explanation_id=None, trace_id=None, limit=100)`
+
+The SDK calls public Brain APIs only. It does not import `aion_brain`, web
+search clients, model providers, citation extraction services, database
+clients, or frontend code.
+
+## PromptsResource
+
+`client.prompts` supports:
+
+- `create_template(payload)`
+- `list_templates(scope, status=None, template_type=None, limit=100)`
+- `get_template(prompt_template_id, scope)`
+- `seed_templates(scope, dry_run=True)`
+- `create_fragment(payload)`
+- `list_fragments(scope, status=None, fragment_type=None, limit=100)`
+- `compile(payload)`
+- `get_packet(prompt_packet_id, scope)`
+- `list_packets(scope, trace_id=None, status=None, packet_type=None, limit=50)`
+- `preview(payload)`
+- `boundary_check(prompt_packet_id, scope)`
+- `injection_findings(trace_id=None, prompt_packet_id=None, severity=None, status=None, limit=100)`
+- `get_manifest(model_input_manifest_id, scope)`
+- `list_manifests(scope, trace_id=None, prompt_packet_id=None, limit=50)`
+
+The SDK calls public Brain APIs only. It does not import `aion_brain`, model
+providers, provider prompt SDKs, database clients, frontend code, or external
+prompt optimization services.

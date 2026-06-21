@@ -271,3 +271,50 @@ Explanation commands call the SDK and public Brain APIs only. They build
 deterministic public explanations and trace narratives from observable records.
 They do not reveal chain-of-thought, raw prompts, raw headers, secrets, or
 provider payloads.
+
+## Instruction and Preference Commands
+
+- `aionctl instructions create`
+- `aionctl instructions list`
+- `aionctl instructions resolve`
+- `aionctl instructions conflicts`
+- `aionctl preferences create`
+- `aionctl preferences list`
+- `aionctl preferences confirm`
+- `aionctl preferences candidates`
+- `aionctl style-profiles create`
+- `aionctl style-profiles list`
+- `aionctl style-profiles effective`
+
+Instruction and preference commands call the SDK only. Preferences shape
+responses and context; they do not override policy, autonomy, approvals,
+runtime configuration, capability limits, sandbox limits, or grounding
+requirements.
+
+## Grounding Commands
+
+- `aionctl grounding verify`
+- `aionctl grounding map-response`
+- `aionctl grounding map-text`
+- `aionctl grounding citations`
+- `aionctl grounding unsupported`
+- `aionctl grounding coverage`
+
+Grounding commands call the SDK and public Brain APIs only. They do not perform
+web search, call model providers, extract citations with an LLM, invent
+sources, expose raw prompts, or expose chain-of-thought.
+
+## Prompt Governance Commands
+
+- `aionctl prompts templates list`
+- `aionctl prompts templates seed`
+- `aionctl prompts fragments list`
+- `aionctl prompts compile`
+- `aionctl prompts preview`
+- `aionctl prompts boundary-check`
+- `aionctl prompts injection-findings`
+- `aionctl prompts manifests`
+
+Prompt commands call the SDK and public Brain APIs only. Preview defaults to
+safe redaction. Commands do not print raw rendered prompts, hidden reasoning,
+provider payloads, raw secrets, or domain prompt packs.

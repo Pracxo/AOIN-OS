@@ -55,6 +55,9 @@ class ActionCenterService:
         generated.extend(self._failed_counterfactual_items())
         generated.extend(self._failed_outcome_items(scope))
         generated.extend(self._failed_effect_verification_items())
+        generated.extend(self._failed_grounding_items(scope))
+        generated.extend(self._low_source_coverage_items(scope))
+        generated.extend(self._prompt_injection_items(scope))
         generated.extend(self._high_severity_outcome_feedback_items())
         generated.extend(self._high_severity_learning_pattern_items(scope))
         generated.extend(self._open_skill_suggestion_items(scope))
@@ -62,6 +65,8 @@ class ActionCenterService:
         generated.extend(self._failed_learning_synthesis_items(scope))
         generated.extend(self._critical_limitation_items(scope))
         generated.extend(self._failed_explanation_items(scope))
+        generated.extend(self._instruction_conflict_items(scope))
+        generated.extend(self._preference_candidate_items(scope))
         stored: list[OperatorActionItem] = []
         for item in generated[:limit]:
             saved = self._repository.save_action_item(item)
@@ -222,6 +227,157 @@ class ActionCenterService:
             )
             for item in items
             if str(getattr(item, "status", "")).lower() in _FAILED_STATUSES
+        ]
+
+    def _failed_grounding_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("grounding_verifier")
+        list_runs = getattr(source, "list_verification_runs", None)
+        if not callable(list_runs):
+            return []
+        try:
+            items = list_runs(limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "grounding_verification_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity="high",
+                title="Grounding verification requires review.",
+                description="A deterministic grounding verification failed or lacks sources.",
+                recommended_action="review_grounding_verification",
+                runbook_ref="docs/grounding-model.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={
+                    "status": getattr(item, "status", "failed"),
+                    "coverage_score": getattr(item, "coverage_score", 0.0),
+                },
+            )
+            for item in items
+            if str(getattr(item, "status", "")).lower()
+            in {"failed", "insufficient_sources", "blocked_by_policy"}
+        ]
+
+    def _low_source_coverage_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("source_coverage_service")
+        repository = getattr(source, "_repository", None)
+        list_reports = getattr(repository, "list_coverage_reports", None)
+        if not callable(list_reports):
+            return []
+        try:
+            items = list_reports(limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "source_coverage_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity="medium",
+                title="Low source coverage requires review.",
+                description="A response or explanation has weak source coverage.",
+                recommended_action="improve_source_coverage",
+                runbook_ref="docs/grounding-model.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={
+                    "status": getattr(item, "status", "warning"),
+                    "coverage_score": getattr(item, "coverage_score", 0.0),
+                },
+            )
+            for item in items
+            if float(getattr(item, "coverage_score", 1.0)) < 0.65
+        ]
+
+    def _instruction_conflict_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("instruction_conflict_service")
+        list_conflicts = getattr(source, "list_conflicts", None)
+        if not callable(list_conflicts):
+            return []
+        try:
+            items = list_conflicts(scope, status="open", limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "conflict_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity=cast(OperatorSeverity, getattr(item, "severity", "medium")),
+                title="Instruction conflict requires review.",
+                description="A high-severity instruction conflict is open.",
+                recommended_action="review_instruction_conflict",
+                runbook_ref="docs/instruction-hierarchy.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={
+                    "conflict_type": getattr(item, "conflict_type", None),
+                    "status": getattr(item, "status", "open"),
+                },
+            )
+            for item in items
+            if str(getattr(item, "severity", "")).lower() in {"high", "critical"}
+        ]
+
+    def _prompt_injection_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("prompt_repository")
+        list_findings = getattr(source, "list_injection_findings", None)
+        if not callable(list_findings):
+            return []
+        try:
+            items = list_findings(status="open", limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "injection_finding_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity=cast(OperatorSeverity, getattr(item, "severity", "medium")),
+                title="Prompt injection finding requires review.",
+                description="A high-severity prompt boundary finding is open.",
+                recommended_action="review_prompt_injection_finding",
+                runbook_ref="docs/prompt-governance.md",
+                scope=scope or ["workspace:main"],
+                metadata={
+                    "finding_type": getattr(item, "finding_type", None),
+                    "prompt_packet_id": getattr(item, "prompt_packet_id", None),
+                },
+            )
+            for item in items
+            if str(getattr(item, "severity", "")).lower() in {"high", "critical"}
+        ]
+
+    def _preference_candidate_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("preference_learning_service")
+        list_candidates = getattr(source, "list_candidates", None)
+        if not callable(list_candidates):
+            return []
+        try:
+            items = list_candidates(scope, status="proposed", limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "candidate_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity="medium",
+                title="Preference candidate requires confirmation.",
+                description="A learned preference candidate is awaiting explicit review.",
+                recommended_action="review_preference_candidate",
+                runbook_ref="docs/instruction-hierarchy.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={
+                    "preference_key": getattr(item, "preference_key", None),
+                    "status": getattr(item, "status", "proposed"),
+                },
+            )
+            for item in items
         ]
 
     def _failed_outcome_items(self, scope: list[str]) -> list[OperatorActionItem]:

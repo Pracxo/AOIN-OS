@@ -19,6 +19,7 @@ from aion_brain.contracts.model_gateway import (
 )
 from aion_brain.contracts.observability import ObservabilityEvent, ObservabilityLevel
 from aion_brain.contracts.policy import PolicyRequest
+from aion_brain.contracts.prompts import PromptCompileRequest, PromptSection
 from aion_brain.contracts.reasoning import ModelCallRecord, ModelRouteDecision
 from aion_brain.contracts.scopes import ActorContext
 from aion_brain.contracts.telemetry import (
@@ -66,6 +67,7 @@ class ModelGatewayService:
         autonomy_governor: object | None = None,
         circuit_breaker_service: object | None = None,
         audit_sink: object | None = None,
+        prompt_governance_service: object | None = None,
     ) -> None:
         self._provider_registry = provider_registry
         self._profile_registry = profile_registry
@@ -82,6 +84,7 @@ class ModelGatewayService:
         self._autonomy_governor = autonomy_governor
         self._circuit_breaker_service = circuit_breaker_service
         self._audit_sink = audit_sink
+        self._prompt_governance_service = prompt_governance_service
 
     def set_circuit_breaker_service(self, circuit_breaker_service: object | None) -> None:
         """Attach circuit breaker service after kernel assembly."""
@@ -90,6 +93,10 @@ class ModelGatewayService:
     def set_audit_sink(self, audit_sink: object | None) -> None:
         """Attach audit sink after kernel assembly."""
         self._audit_sink = audit_sink
+
+    def set_prompt_governance_service(self, prompt_governance_service: object | None) -> None:
+        """Attach prompt governance after kernel assembly."""
+        self._prompt_governance_service = prompt_governance_service
 
     def complete(self, request: ModelGatewayRequest) -> ModelGatewayResponse:
         """Complete a prompt through the selected provider boundary."""
@@ -103,6 +110,18 @@ class ModelGatewayService:
         )
         if not gateway_decision:
             return self._blocked_response(request, "blocked_by_policy", "model_gateway_denied")
+
+        prompt_allowed, prompt_reason, prompt_metadata = _compile_gateway_prompt(
+            self._prompt_governance_service,
+            request,
+        )
+        request.metadata.update(prompt_metadata)
+        if not prompt_allowed:
+            return self._blocked_response(
+                request,
+                "blocked_by_policy",
+                prompt_reason or "prompt_governance_blocked",
+            )
 
         try:
             route, provider, profile = self._route(request)
@@ -645,6 +664,116 @@ def _policy_context(
 
 def _observability_level(response: ModelGatewayResponse) -> ObservabilityLevel:
     return "info" if response.status in {"completed", "fallback_used"} else "warning"
+
+
+def _compile_gateway_prompt(
+    prompt_governance_service: object | None,
+    request: ModelGatewayRequest,
+) -> tuple[bool, str | None, dict[str, object]]:
+    compile_prompt = getattr(prompt_governance_service, "compile", None)
+    if not callable(compile_prompt):
+        return True, None, {}
+    try:
+        sections = _sections_from_reasoning_prompt(request)
+        result = compile_prompt(
+            PromptCompileRequest(
+                trace_id=request.trace_id,
+                actor_id=request.actor_id,
+                workspace_id=request.workspace_id,
+                packet_type="model_gateway",
+                target_model_route=request.preferred_profile_id,
+                owner_scope=request.scope or ["workspace:main"],
+                user_message=request.prompt.goal,
+                context_packet_id=request.prompt.context_id,
+                sections=sections,
+                max_chars=int(request.metadata.get("prompt_max_chars", 12000)),
+                include_redacted_preview=False,
+                store_packet=True,
+                metadata={
+                    "source": "model_gateway",
+                    "reasoning_id": request.reasoning_id,
+                    "legacy_prompt_id": request.prompt.prompt_id,
+                    "mode": request.mode,
+                    "provider_specific_content": False,
+                },
+            )
+        )
+    except Exception as exc:
+        return False, f"prompt_governance_failed:{exc}", {}
+    packet = getattr(result, "prompt_packet", None)
+    manifest = getattr(result, "model_input_manifest", None)
+    if bool(getattr(result, "blocked", False)):
+        return (
+            False,
+            "prompt_boundary_blocked",
+            {
+                "prompt_packet_id": getattr(packet, "prompt_packet_id", None),
+                "model_input_manifest_id": getattr(manifest, "model_input_manifest_id", None),
+            },
+        )
+    return (
+        True,
+        None,
+        {
+            "prompt_packet_id": getattr(packet, "prompt_packet_id", None),
+            "prompt_boundary_check_id": getattr(packet, "boundary_check_id", None),
+            "model_input_manifest_id": getattr(manifest, "model_input_manifest_id", None),
+        },
+    )
+
+
+def _sections_from_reasoning_prompt(request: ModelGatewayRequest) -> list[PromptSection]:
+    sections: list[PromptSection] = []
+    for index, instruction in enumerate(request.prompt.system_instructions):
+        sections.append(
+            PromptSection(
+                section_id=f"gateway-system-{request.request_id}-{index}",
+                section_type="system_boundary",
+                title="Reasoning boundary",
+                content=instruction,
+                priority=index,
+                source_type="reasoning_prompt",
+                source_id=request.prompt.prompt_id,
+                trust_level="system",
+                required=True,
+                redacted=False,
+                metadata={"source": "model_gateway"},
+            )
+        )
+    for index, item in enumerate(request.prompt.context_items):
+        item_type = str(item.get("type", "context"))
+        sections.append(
+            PromptSection(
+                section_id=f"gateway-context-{request.request_id}-{index}",
+                section_type="retrieved_context",
+                title=item_type,
+                content=str(item.get("value", "")),
+                priority=100 + index,
+                source_type="reasoning_context",
+                source_id=item_type,
+                trust_level="retrieved_context",
+                required=False,
+                redacted=False,
+                metadata={"context_item_type": item_type},
+            )
+        )
+    if request.prompt.constraints:
+        sections.append(
+            PromptSection(
+                section_id=f"gateway-constraints-{request.request_id}",
+                section_type="policy_constraints",
+                title="Constraints",
+                content="\n".join(request.prompt.constraints),
+                priority=50,
+                source_type="reasoning_prompt",
+                source_id=request.prompt.prompt_id,
+                trust_level="policy",
+                required=False,
+                redacted=False,
+                metadata={"source": "model_gateway"},
+            )
+        )
+    return sections
 
 
 def _actor_context(request: ModelGatewayRequest) -> ActorContext:

@@ -168,6 +168,59 @@ class Settings(BaseSettings):
             "response_require_grounding_default",
         ),
     )
+    grounding_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_GROUNDING_ENABLED", "grounding_enabled"),
+    )
+    citation_mapper_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CITATION_MAPPER_ENABLED",
+            "citation_mapper_enabled",
+        ),
+    )
+    grounding_verification_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_GROUNDING_VERIFICATION_ENABLED",
+            "grounding_verification_enabled",
+        ),
+    )
+    source_coverage_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_SOURCE_COVERAGE_ENABLED",
+            "source_coverage_enabled",
+        ),
+    )
+    grounding_require_evidence_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_GROUNDING_REQUIRE_EVIDENCE_DEFAULT",
+            "grounding_require_evidence_default",
+        ),
+    )
+    grounding_allow_memory_only_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_GROUNDING_ALLOW_MEMORY_ONLY_DEFAULT",
+            "grounding_allow_memory_only_default",
+        ),
+    )
+    grounding_statement_split_max: int = Field(
+        default=100,
+        validation_alias=AliasChoices(
+            "AION_GROUNDING_STATEMENT_SPLIT_MAX",
+            "grounding_statement_split_max",
+        ),
+    )
+    grounding_min_coverage_score: float = Field(
+        default=0.65,
+        validation_alias=AliasChoices(
+            "AION_GROUNDING_MIN_COVERAGE_SCORE",
+            "grounding_min_coverage_score",
+        ),
+    )
     explanations_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices("AION_EXPLANATIONS_ENABLED", "explanations_enabled"),
@@ -216,6 +269,56 @@ class Settings(BaseSettings):
         validation_alias=AliasChoices(
             "AION_EXPLANATION_FORBID_HIDDEN_REASONING",
             "explanation_forbid_hidden_reasoning",
+        ),
+    )
+    instructions_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_INSTRUCTIONS_ENABLED", "instructions_enabled"),
+    )
+    preferences_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_PREFERENCES_ENABLED", "preferences_enabled"),
+    )
+    constraint_resolver_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CONSTRAINT_RESOLVER_ENABLED",
+            "constraint_resolver_enabled",
+        ),
+    )
+    style_profiles_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_STYLE_PROFILES_ENABLED",
+            "style_profiles_enabled",
+        ),
+    )
+    instruction_conflict_detection_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_INSTRUCTION_CONFLICT_DETECTION_ENABLED",
+            "instruction_conflict_detection_enabled",
+        ),
+    )
+    preference_learning_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_PREFERENCE_LEARNING_ENABLED",
+            "preference_learning_enabled",
+        ),
+    )
+    preference_auto_confirm_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_PREFERENCE_AUTO_CONFIRM_ENABLED",
+            "preference_auto_confirm_enabled",
+        ),
+    )
+    instruction_resolution_store_runs: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_INSTRUCTION_RESOLUTION_STORE_RUNS",
+            "instruction_resolution_store_runs",
         ),
     )
     self_model_enabled: bool = Field(
@@ -876,6 +979,80 @@ class Settings(BaseSettings):
         validation_alias=AliasChoices(
             "AION_PROMPT_REDACTION_BLOCK_ON_SECRET",
             "prompt_redaction_block_on_secret",
+        ),
+    )
+    prompts_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_PROMPTS_ENABLED", "prompts_enabled"),
+    )
+    prompt_compiler_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_PROMPT_PACKET_COMPILER_ENABLED",
+            "AION_PROMPT_COMPILER_ENABLED",
+            "prompt_compiler_enabled",
+        ),
+    )
+    prompt_boundary_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_PROMPT_BOUNDARY_GUARD_ENABLED",
+            "AION_PROMPT_BOUNDARY_ENABLED",
+            "prompt_boundary_enabled",
+        ),
+    )
+    prompt_store_packets: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_PROMPT_STORE_PACKETS", "prompt_store_packets"),
+    )
+    prompt_store_rendered_text: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_PROMPT_STORE_RENDERED_TEXT",
+            "prompt_store_rendered_text",
+        ),
+    )
+    prompt_preview_default_redaction_level: str = Field(
+        default="safe",
+        validation_alias=AliasChoices(
+            "AION_PROMPT_PREVIEW_DEFAULT_REDACTION_LEVEL",
+            "prompt_preview_default_redaction_level",
+        ),
+    )
+    prompt_preview_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_PROMPT_PREVIEW_ENABLED", "prompt_preview_enabled"),
+    )
+    prompt_default_max_chars: int = Field(
+        default=12000,
+        validation_alias=AliasChoices("AION_PROMPT_DEFAULT_MAX_CHARS", "prompt_default_max_chars"),
+    )
+    prompt_injection_detection_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_PROMPT_INJECTION_DETECTION_ENABLED",
+            "prompt_injection_detection_enabled",
+        ),
+    )
+    prompt_injection_block_high_severity: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_PROMPT_INJECTION_BLOCK_HIGH_SEVERITY",
+            "prompt_injection_block_high_severity",
+        ),
+    )
+    model_input_manifest_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODEL_INPUT_MANIFEST_ENABLED",
+            "model_input_manifest_enabled",
+        ),
+    )
+    model_input_manifest_store_hashes_only: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODEL_INPUT_MANIFEST_STORE_HASHES_ONLY",
+            "model_input_manifest_store_hashes_only",
         ),
     )
     turbovec_enabled: bool = Field(
