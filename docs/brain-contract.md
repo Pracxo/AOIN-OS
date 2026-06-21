@@ -1106,3 +1106,31 @@ not stored by default. `ModelOutputSegment` represents deterministic parsed
 output only. `StructuredOutputValidation` validates generic JSON-like output.
 `ResponseCandidate` is a local proposal, not delivery. `ToolIntentCandidate`
 captures model-suggested tool or capability intents without executing them.
+
+## Action Proposal and Handoff Contracts
+
+AION Brain owns these action proposal contracts:
+
+- `ActionProposal`
+- `ActionProposalCreateRequest`
+- `ActionBlocker`
+- `ActionProposalReview`
+- `ActionProposalReviewRequest`
+- `ExecutionHandoffRequest`
+- `ExecutionHandoff`
+- `ToolIntentReview`
+- `ToolIntentReviewRequest`
+- `ActionProposalQuery`
+- `ActionProposalQueryResult`
+
+Action proposal contracts are provider-neutral, target-neutral, and
+domain-neutral. They describe proposed actions, blockers, reviews, and handoff
+metadata only. They must not execute actions, approve actions automatically,
+dispatch commands, run workflows, invoke capabilities, call MCP tools, run
+sandboxes, call external services, expose hidden reasoning, expose raw prompts,
+store raw secrets, or include domain-specific action types.
+
+`ToolIntentReview` converts captured tool-intent candidates into review
+records and, only when explicitly requested and safe, action proposals.
+`ExecutionHandoffRequest` is the explicit gate for handoff to governed AION
+systems. Dry-run handoff builds the target request without dispatching it.

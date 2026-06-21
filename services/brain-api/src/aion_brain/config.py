@@ -1023,6 +1023,55 @@ class Settings(BaseSettings):
             "output_governance_block_tool_intents_default",
         ),
     )
+    action_proposals_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_ACTION_PROPOSALS_ENABLED",
+            "action_proposals_enabled",
+        ),
+    )
+    tool_intent_review_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_TOOL_INTENT_REVIEW_ENABLED",
+            "tool_intent_review_enabled",
+        ),
+    )
+    execution_handoff_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_EXECUTION_HANDOFF_ENABLED",
+            "execution_handoff_enabled",
+        ),
+    )
+    action_proposal_auto_create_from_tool_intent: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_ACTION_PROPOSAL_AUTO_CREATE_FROM_TOOL_INTENT",
+            "action_proposal_auto_create_from_tool_intent",
+        ),
+    )
+    action_handoff_controlled_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_ACTION_HANDOFF_CONTROLLED_ENABLED",
+            "action_handoff_controlled_enabled",
+        ),
+    )
+    action_handoff_requires_approval_default: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_ACTION_HANDOFF_REQUIRES_APPROVAL_DEFAULT",
+            "action_handoff_requires_approval_default",
+        ),
+    )
+    action_proposal_external_targets_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_ACTION_PROPOSAL_EXTERNAL_TARGETS_ENABLED",
+            "action_proposal_external_targets_enabled",
+        ),
+    )
     litellm_base_url: str = Field(
         default="http://litellm:4000",
         validation_alias=AliasChoices("AION_LITELLM_BASE_URL", "litellm_base_url"),

@@ -2810,3 +2810,41 @@ Model output endpoints:
 
 See `docs/model-output-governance.md` and
 `docs/adr/0057-model-output-governance.md`.
+
+## Action Proposal Broker and Execution Handoff Gate
+
+AION v0.1 action proposals do not execute themselves. Model-generated tool
+intents are captured, reviewed, and blocked by default.
+
+The Action Proposal Broker turns reviewed generic intent into
+`ActionProposal` records. Tool Intent Review handles captured model tool
+intent candidates without executing them. The Execution Handoff Gate builds an
+explicit handoff record to governed AION target systems and defaults to dry-run.
+Controlled handoff is disabled by default.
+
+Action proposal endpoints:
+
+- `POST /brain/action-proposals`
+- `GET /brain/action-proposals/{action_proposal_id}`
+- `POST /brain/action-proposals/query`
+- `POST /brain/action-proposals/{action_proposal_id}/archive`
+- `DELETE /brain/action-proposals/{action_proposal_id}`
+- `POST /brain/action-proposals/tool-intents/{tool_intent_id}/review`
+- `GET /brain/action-proposals/tool-intent-reviews`
+- `POST /brain/action-proposals/{action_proposal_id}/review`
+- `GET /brain/action-proposals/{action_proposal_id}/reviews`
+- `GET /brain/action-proposals/blockers`
+- `POST /brain/action-proposals/blockers/{action_blocker_id}/resolve`
+- `POST /brain/action-proposals/handoff`
+- `GET /brain/action-proposals/handoffs/{execution_handoff_id}`
+- `GET /brain/action-proposals/handoffs`
+
+CLI examples:
+
+```bash
+./scripts/aionctl.sh action-proposals query
+./scripts/aionctl.sh action-proposals review --action-proposal-id action-proposal-id
+./scripts/aionctl.sh action-proposals handoff --action-proposal-id action-proposal-id --mode dry_run
+```
+
+See `docs/adr/0058-action-proposal-broker-execution-handoff.md`.

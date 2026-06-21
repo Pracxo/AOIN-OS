@@ -1,5 +1,8 @@
 """Deterministic AION planner."""
 
+from typing import cast
+
+from aion_brain.contracts.action_proposals import ActionProposalCreateRequest, ActionRiskLevel
 from aion_brain.contracts.context import ContextPacket
 from aion_brain.contracts.decisions import DecisionFrameCreateRequest
 from aion_brain.contracts.effects import ExpectedEffectCreateRequest
@@ -56,9 +59,11 @@ class Planner:
         self,
         decision_frame_service: object | None = None,
         expected_effect_service: object | None = None,
+        action_proposal_service: object | None = None,
     ) -> None:
         self._decision_frame_service = decision_frame_service
         self._expected_effect_service = expected_effect_service
+        self._action_proposal_service = action_proposal_service
 
     def create_plan(
         self,
@@ -103,7 +108,14 @@ class Planner:
         )
         if context.execution_limits.get("create_expected_effects") is True:
             _maybe_create_expected_effects(self._expected_effect_service, plan, context)
+        if context.execution_limits.get("create_action_proposals") is True:
+            _maybe_create_action_proposals(self._action_proposal_service, plan, context)
         return plan
+
+    def set_action_proposal_service(self, service: object | None) -> None:
+        """Attach optional action proposal service after kernel assembly."""
+
+        self._action_proposal_service = service
 
 
 def _intent_type(context: ContextPacket) -> str:
@@ -186,6 +198,36 @@ def _maybe_create_expected_effects(
                         "action_type": step.action_type,
                         "capability_required": step.capability_required,
                     },
+                )
+            )
+        except Exception:
+            continue
+
+
+def _maybe_create_action_proposals(
+    service: object | None,
+    plan: PlanGraph,
+    context: ContextPacket,
+) -> None:
+    create = getattr(service, "create_proposal", None)
+    if not callable(create):
+        return
+    for step in plan.steps:
+        try:
+            create(
+                ActionProposalCreateRequest(
+                    trace_id=_trace_id(context),
+                    source_type="plan",
+                    source_id=plan.plan_id,
+                    proposal_type="generic",
+                    title=f"Review plan step {step.step_id}",
+                    description="Action proposal created from an explicit planner request.",
+                    action_type=step.action_type,
+                    target_type=step.capability_required or "noop",
+                    owner_scope=_scope(context),
+                    proposed_payload={"step_id": step.step_id},
+                    risk_level=cast(ActionRiskLevel, step.risk_level),
+                    metadata={"source": "planner", "no_execution": True},
                 )
             )
         except Exception:

@@ -198,3 +198,8 @@ Instructions for future Codex runs in this repository:
   in v0.1.
 - Response candidates from model outputs are proposals only until policy and
   response verification allow promotion.
+- Action proposals must never execute themselves.
+- Tool intents from model output must never execute directly.
+- Controlled action handoff must remain disabled by default.
+- Action handoff targets must be governed AION systems only.
+- Do not add external target systems in Brain core.

@@ -175,6 +175,23 @@ external messages, expose hidden reasoning, or trigger controlled execution.
 `aionctl model-outputs` calls `client.model_outputs`. It does not expose raw
 provider payloads, execute model-suggested tools, or bypass policy.
 
+## Action Proposal Commands
+
+```bash
+./scripts/aionctl.sh action-proposals create --payload-file proposal.json
+./scripts/aionctl.sh action-proposals query
+./scripts/aionctl.sh action-proposals review --action-proposal-id action-proposal-id --decision approve_for_handoff --approval-present
+./scripts/aionctl.sh action-proposals handoff --action-proposal-id action-proposal-id --mode dry_run
+./scripts/aionctl.sh action-proposals blockers
+./scripts/aionctl.sh action-proposals handoffs
+./scripts/aionctl.sh action-proposals tool-intent review --tool-intent-id tool-intent-id
+```
+
+`aionctl action-proposals` calls `client.action_proposals`. It does not
+execute proposals, dispatch commands, run workflows, invoke capabilities, call
+MCP tools, run sandboxes, approve actions, or call external systems. Handoff
+defaults to `dry_run`.
+
 ## Belief Commands
 
 ```bash

@@ -477,3 +477,35 @@ than passing governance runs. The projection remains backend-only and
 frontend-agnostic. It does not expose raw model output, provider payloads,
 hidden reasoning, raw prompts, raw headers, raw secrets, or domain-specific
 output logic.
+
+## Action Proposal Projection
+
+Action proposal telemetry projects reviewed action intent into the Visual Brain
+Projection. Generic event types include:
+
+- `action_proposal_created`
+- `action_proposal_reviewed`
+- `action_proposal_blocked`
+- `action_blocker_created`
+- `action_blocker_resolved`
+- `tool_intent_reviewed`
+- `execution_handoff_created`
+- `execution_handoff_blocked`
+
+Generic visual node types include:
+
+- `action_proposal`
+- `action_blocker`
+- `action_review`
+- `execution_handoff`
+- `tool_intent_review`
+
+The generic action path is:
+
+`tool intent / decision / plan -> proposal -> review -> handoff -> governed target system`
+
+Blocked proposals, open blockers, and blocked handoffs should project with
+higher intensity than normal dry-run handoffs. Handoff nodes represent
+handoff records, not completed target execution. The projection remains
+backend-only and frontend-agnostic, and must not expose raw payloads, hidden
+reasoning, secrets, target service internals, or domain-specific action logic.

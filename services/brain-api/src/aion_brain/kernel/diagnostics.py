@@ -37,6 +37,10 @@ class KernelDiagnostics:
         ("unsafe_output_detector_present", "unsafe_output_detector", "medium"),
         ("response_candidate_service_present", "response_candidate_service", "medium"),
         ("tool_intent_capture_service_present", "tool_intent_capture_service", "medium"),
+        ("action_proposal_repository_present", "action_proposal_repository", "high"),
+        ("action_proposal_service_present", "action_proposal_service", "high"),
+        ("tool_intent_review_service_present", "tool_intent_review_service", "medium"),
+        ("execution_handoff_service_present", "execution_handoff_service", "high"),
         ("prompt_redactor_present", "prompt_redactor", "high"),
         ("prompt_repository_present", "prompt_repository", "high"),
         ("prompt_compiler_present", "prompt_compiler", "high"),
@@ -296,6 +300,7 @@ class KernelDiagnostics:
         checks.extend(self._grounding_checks(settings))
         checks.extend(self._prompt_checks(settings))
         checks.extend(self._model_output_checks(settings))
+        checks.extend(self._action_proposal_checks(settings))
         checks.extend(self._entity_checks(settings))
         checks.extend(self._situation_checks(settings))
         checks.extend(self._decision_checks(settings))
@@ -499,6 +504,86 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Model output governance services are assembled.",
+            ),
+        ]
+
+    def _action_proposal_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "action_proposal_repository",
+                "action_blocker_service",
+                "action_proposal_service",
+                "tool_intent_review_service",
+                "action_review_service",
+                "execution_handoff_service",
+                "action_proposal_query_service",
+            )
+        )
+        return [
+            self._result(
+                "action_proposals_enabled",
+                "action_proposals",
+                (
+                    "passed"
+                    if bool(getattr(settings, "action_proposals_enabled", True))
+                    else "warning"
+                ),
+                "high",
+                "Action proposal broker is enabled.",
+            ),
+            self._result(
+                "tool_intent_review_enabled",
+                "action_proposals",
+                (
+                    "passed"
+                    if bool(getattr(settings, "tool_intent_review_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Tool intent review is enabled.",
+            ),
+            self._result(
+                "execution_handoff_enabled",
+                "action_proposals",
+                (
+                    "passed"
+                    if bool(getattr(settings, "execution_handoff_enabled", True))
+                    else "warning"
+                ),
+                "high",
+                "Execution handoff gate is enabled.",
+            ),
+            self._result(
+                "action_proposal_auto_create_from_tool_intent",
+                "action_proposals",
+                (
+                    "passed"
+                    if not bool(
+                        getattr(settings, "action_proposal_auto_create_from_tool_intent", False)
+                    )
+                    else "warning"
+                ),
+                "critical",
+                "Tool intents do not auto-create proposals by default.",
+            ),
+            self._result(
+                "action_handoff_controlled_enabled",
+                "action_proposals",
+                (
+                    "passed"
+                    if not bool(getattr(settings, "action_handoff_controlled_enabled", False))
+                    else "warning"
+                ),
+                "critical",
+                "Controlled handoff is disabled by default.",
+            ),
+            self._result(
+                "action_proposal_services_present",
+                "action_proposals",
+                "passed" if services_present else "failed",
+                "high",
+                "Action proposal broker services are assembled.",
             ),
         ]
 

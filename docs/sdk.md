@@ -50,6 +50,30 @@ print(client.kernel.contracts())
 The SDK calls public Brain APIs only. It does not import `aion_brain`, access
 databases, execute model-suggested tools, or expose raw provider payloads.
 
+## Action Proposals Resource
+
+`client.action_proposals` supports:
+
+- `create(payload)`
+- `get(action_proposal_id, scope)`
+- `query(payload)`
+- `archive(action_proposal_id, reason, actor_id=None)`
+- `delete(action_proposal_id, reason, actor_id=None)`
+- `review_tool_intent(tool_intent_id, payload)`
+- `list_tool_intent_reviews(tool_intent_id=None, status=None, limit=100)`
+- `review(action_proposal_id, payload)`
+- `list_reviews(action_proposal_id)`
+- `list_blockers(action_proposal_id=None, status=None, severity=None, limit=100)`
+- `resolve_blocker(action_blocker_id, reason, actor_id=None)`
+- `handoff(payload)`
+- `get_handoff(execution_handoff_id, scope)`
+- `list_handoffs(action_proposal_id=None, status=None, target_system=None, limit=100)`
+
+The SDK calls public Brain APIs only. It does not import `aion_brain`, dispatch
+commands, run workflows, invoke capabilities, call MCP tools, execute sandbox
+runs, approve actions, or call external systems. Handoff payloads default to
+dry-run.
+
 ## Error Handling
 
 AION public API errors map to SDK exceptions:

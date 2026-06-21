@@ -2,6 +2,7 @@
 
 from fastapi import FastAPI, Request
 
+from aion_brain.api.action_proposals import router as action_proposals_router
 from aion_brain.api.approvals import router as approvals_router
 from aion_brain.api.attention import router as attention_router
 from aion_brain.api.audit_integrity import router as audit_integrity_router
@@ -120,6 +121,7 @@ ROUTERS = (
     graph_memory_router,
     model_gateway_router,
     model_outputs_router,
+    action_proposals_router,
     prompts_router,
     module_developer_router,
     retrieval_router,

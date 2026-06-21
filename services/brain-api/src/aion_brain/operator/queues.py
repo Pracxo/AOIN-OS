@@ -152,10 +152,49 @@ _QUEUE_SPECS: tuple[tuple[OperatorQueueType, str, str, tuple[str, ...]], ...] = 
         "tool_intent_service",
         ("list_tool_intents",),
     ),
+    (
+        "generic",
+        "Action Proposals",
+        "action_proposal_service",
+        ("query",),
+    ),
+    (
+        "generic",
+        "Action Blockers",
+        "action_blocker_service",
+        ("list_blockers",),
+    ),
+    (
+        "generic",
+        "Action Proposal Reviews",
+        "action_review_service",
+        ("list_reviews",),
+    ),
+    (
+        "generic",
+        "Execution Handoffs",
+        "execution_handoff_service",
+        ("list_handoffs",),
+    ),
+    (
+        "generic",
+        "Tool Intent Reviews",
+        "tool_intent_review_service",
+        ("list_reviews",),
+    ),
 )
 
 _RUNNING_STATUSES = {"running", "processing", "sending", "in_progress", "active"}
-_PENDING_STATUSES = {"pending", "waiting_for_approval", "queued", "scheduled", "created"}
+_PENDING_STATUSES = {
+    "pending",
+    "waiting_for_approval",
+    "queued",
+    "scheduled",
+    "created",
+    "proposed",
+    "under_review",
+    "approved_for_handoff",
+}
 _BLOCKED_STATUSES = {"blocked", "blocked_by_policy", "blocked_by_autonomy", "dead_lettered"}
 _FAILED_STATUSES = {"failed", "error", "critical"}
 
@@ -285,6 +324,16 @@ def _list_items(provider: object, methods: tuple[str, ...], scope: list[str]) ->
                         )
                         or []
                     )
+                except (ImportError, TypeError):
+                    pass
+            if name == "query":
+                try:
+                    from aion_brain.contracts.action_proposals import ActionProposalQuery
+
+                    result = cast(Any, method)(
+                        ActionProposalQuery(scope=scope or ["workspace:main"], limit=100)
+                    )
+                    return list(getattr(result, "proposals", []) or [])
                 except (ImportError, TypeError):
                     pass
             return _call_list(method, scope)

@@ -5,6 +5,7 @@ from __future__ import annotations
 from datetime import UTC, datetime
 from uuid import uuid4
 
+from aion_brain.contracts.action_proposals import ToolIntentReviewRequest
 from aion_brain.contracts.model_outputs import ModelOutputCreateRequest, ModelOutputRecord
 from aion_brain.contracts.output_governance import (
     ModelOutputQuery,
@@ -33,6 +34,7 @@ class OutputGovernanceService:
         structured_validator: object | None = None,
         response_candidate_service: object | None = None,
         tool_intent_service: object | None = None,
+        tool_intent_review_service: object | None = None,
         telemetry_service: object | None = None,
         audit_sink: object | None = None,
         provenance_service: object | None = None,
@@ -46,6 +48,7 @@ class OutputGovernanceService:
         self._structured_validator = structured_validator
         self._response_candidate_service = response_candidate_service
         self._tool_intent_service = tool_intent_service
+        self._tool_intent_review_service = tool_intent_review_service
         self._telemetry_service = telemetry_service
         self._audit_sink = audit_sink
         self._provenance_service = provenance_service
@@ -61,12 +64,18 @@ class OutputGovernanceService:
             structured_validator=self._structured_validator,
             response_candidate_service=self._response_candidate_service,
             tool_intent_service=self._tool_intent_service,
+            tool_intent_review_service=self._tool_intent_review_service,
             telemetry_service=self._telemetry_service,
             audit_sink=self._audit_sink,
             provenance_service=self._provenance_service,
             settings=self._settings,
             actor_context=actor_context,
         )
+
+    def set_tool_intent_review_service(self, service: object | None) -> None:
+        """Attach the optional action proposal tool-intent review service."""
+
+        self._tool_intent_review_service = service
 
     def receive_output(self, request: ModelOutputCreateRequest) -> ModelOutputRecord:
         """Receive and persist a redacted model output record."""
@@ -196,6 +205,22 @@ class OutputGovernanceService:
             capture = getattr(self._tool_intent_service, "capture_from_segments", None)
             if callable(capture):
                 intents = capture(output.model_output_id, segments)
+        if request.metadata.get("review_tool_intents") is True and bool(
+            getattr(self._settings, "action_proposal_auto_create_from_tool_intent", False)
+        ):
+            review = getattr(self._tool_intent_review_service, "review", None)
+            if callable(review):
+                for intent in intents:
+                    review(
+                        ToolIntentReviewRequest(
+                            tool_intent_id=intent.tool_intent_id,
+                            decision="create_proposal",
+                            actor_id=output.actor_id,
+                            workspace_id=output.workspace_id,
+                            owner_scope=request.owner_scope,
+                            created_by=request.created_by,
+                        )
+                    )
         block_tool_intents = bool(
             getattr(self._settings, "output_governance_block_tool_intents_default", True)
         )

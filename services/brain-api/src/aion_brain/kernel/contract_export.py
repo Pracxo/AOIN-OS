@@ -6,6 +6,17 @@ from uuid import uuid4
 from fastapi import FastAPI
 from pydantic import BaseModel
 
+from aion_brain.contracts.action_proposals import (
+    ActionBlocker,
+    ActionProposal,
+    ActionProposalCreateRequest,
+    ActionProposalQuery,
+    ActionProposalQueryResult,
+    ActionProposalReview,
+    ActionProposalReviewRequest,
+    ToolIntentReview,
+    ToolIntentReviewRequest,
+)
 from aion_brain.contracts.api import (
     AIONError,
     AIONErrorResponse,
@@ -38,6 +49,7 @@ from aion_brain.contracts.context import ContextPacket
 from aion_brain.contracts.events import AIONEvent
 from aion_brain.contracts.evidence import EvidenceRecord
 from aion_brain.contracts.execution import ExecutionRequest
+from aion_brain.contracts.execution_handoffs import ExecutionHandoff, ExecutionHandoffRequest
 from aion_brain.contracts.freeze import FreezeGateCheck, FreezeGateRun, FreezeGateRunRequest
 from aion_brain.contracts.goals import GoalRecord
 from aion_brain.contracts.graph import (
@@ -275,6 +287,17 @@ CORE_CONTRACTS: tuple[type[BaseModel], ...] = (
     OutputGovernanceRun,
     ModelOutputQuery,
     ModelOutputQueryResult,
+    ActionProposal,
+    ActionProposalCreateRequest,
+    ActionBlocker,
+    ActionProposalReview,
+    ActionProposalReviewRequest,
+    ToolIntentReview,
+    ToolIntentReviewRequest,
+    ActionProposalQuery,
+    ActionProposalQueryResult,
+    ExecutionHandoffRequest,
+    ExecutionHandoff,
     ModelBudgetRecord,
     ModelUsageRecord,
     ModelProviderHealth,

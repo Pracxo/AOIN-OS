@@ -1256,3 +1256,41 @@ v0.1. Response candidates are proposals only until policy and response
 verification allow local promotion. Public APIs return only AION-owned
 contracts and never provider SDK objects, hidden reasoning, raw prompts, raw
 headers, raw secrets, or domain-specific output internals.
+
+## Action Proposal Broker and Execution Handoff Gate
+
+The Action Proposal Broker is the Brain-owned boundary between intent and
+execution. It converts reviewed generic intent from user requests, model tool
+intent candidates, decision records, planner steps, operators, and internal
+systems into `ActionProposal` records.
+
+An action proposal is not execution. It stores redacted proposed payload,
+scope, risk, required permissions, required approvals, blockers, references,
+and metadata. It must not create command runs, workflow runs, capability
+invocations, MCP calls, sandbox runs, or external side effects by itself.
+
+Tool Intent Review is a separate policy-gated path for blocked
+`ToolIntentCandidate` records from Model Output Governance. Review can create
+an action proposal only when explicitly requested and safe. The default
+runtime posture does not auto-create proposals from model output.
+
+Action blockers are metadata-only records describing policy, autonomy,
+approval, risk, sandbox, runtime configuration, grounding, capability, or
+unsupported target constraints. Resolving a blocker does not execute an action.
+
+Proposal Review updates proposal state and records review metadata. Approval
+for handoff is not execution. A separate `ExecutionHandoffRequest` is required
+before any governed target receives a request.
+
+The Execution Handoff Gate builds target requests for governed AION systems:
+Command Bus, Workflow Engine, Execution Orchestrator, Capability Runtime
+Gateway, MCP Adapter, Cognitive Cycle Orchestrator, and Sandbox Control Plane.
+Handoff defaults to dry-run and controlled handoff is disabled by default.
+
+The action path is:
+
+`tool intent / decision / plan / user request -> proposal -> review -> handoff -> governed target system`
+
+All public APIs return AION-owned contracts and never expose target service
+internals, raw provider output, hidden reasoning, raw prompts, raw headers,
+secrets, SQLAlchemy rows, or domain-specific action logic.

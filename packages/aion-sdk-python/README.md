@@ -46,7 +46,8 @@ print(client.kernel.status())
 ```
 
 Resources include `health`, `kernel`, `events`, `memory`, `reasoning`,
-`commands`, `workflows`, `autonomy`, `approvals`, `visual`, and `modules`.
+`commands`, `workflows`, `autonomy`, `approvals`, `visual`, `modules`,
+`model_outputs`, and `action_proposals`.
 
 ## aionctl
 
@@ -57,6 +58,8 @@ Resources include `health`, `kernel`, `events`, `memory`, `reasoning`,
 ./scripts/aionctl.sh --scope workspace:main smoke run
 ./scripts/aionctl.sh modules scaffold --module-id generic.example --package-name generic-example --output examples/generic-module
 ./scripts/aionctl.sh modules certify --module-package-id module-package-id
+./scripts/aionctl.sh action-proposals query
+./scripts/aionctl.sh action-proposals handoff --action-proposal-id action-proposal-id --mode dry_run
 ```
 
 `aionctl` uses development identity headers only. It does not send bearer tokens
@@ -78,3 +81,5 @@ or production auth secrets.
   models, external tools, workers, or schedulers.
 - Smoke tests use dry-run/noop requests and idempotency keys.
 - Module commands are contract-only and never execute module code.
+- Action proposal commands do not execute proposals. Handoff defaults to dry-run
+  and controlled handoff remains disabled by default.

@@ -1109,3 +1109,32 @@ operator, or internal Brain context. Unknown model output actions fail closed.
 Policy does not authorize raw provider payload exposure, hidden reasoning
 disclosure, raw prompt export, direct tool execution from model output, external
 observability calls, or domain-specific output rules.
+
+## Action Proposal Policy
+
+Generic action proposal actions:
+
+- `action_proposal.create`
+- `action_proposal.read`
+- `action_proposal.update`
+- `action_proposal.delete`
+- `action_proposal.review`
+- `action_proposal.handoff`
+- `action_proposal.blocker.read`
+- `action_proposal.blocker.update`
+- `action_proposal.tool_intent.review`
+- `action_proposal.handoff.read`
+
+Action proposal reads are scope-gated. Create is allowed for actors in scope or
+internal Brain services. Update, archive, and delete require owner, admin, or
+creator context. Review and dry-run handoff require owner, admin, or operator
+context. Tool intent review requires owner, admin, or operator context.
+
+Controlled handoff remains denied unless runtime configuration explicitly
+enables controlled handoff and policy, risk, autonomy, sandbox, target, and
+approval gates allow it. External target systems are denied. Unknown action
+proposal actions fail closed.
+
+Policy does not authorize model-generated tool execution, proposal
+self-execution, external targets, approval bypass, autonomy bypass, or
+domain-specific action rules.

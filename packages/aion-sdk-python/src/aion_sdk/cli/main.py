@@ -11,6 +11,7 @@ from uuid import uuid4
 import typer
 from rich.console import Console
 
+from aion_sdk.cli.commands.action_proposals import install_action_proposal_commands
 from aion_sdk.cli.commands.audit import install_audit_commands
 from aion_sdk.cli.commands.backups import install_backup_commands
 from aion_sdk.cli.commands.beliefs import install_belief_commands
@@ -560,6 +561,7 @@ install_instruction_commands(app, get_client=_client, get_scope=_scope, render=_
 install_grounding_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_prompt_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_model_output_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_action_proposal_commands(app, get_client=_client, get_scope=_scope, render=_render)
 
 
 if __name__ == "__main__":

@@ -5,6 +5,7 @@ from __future__ import annotations
 from datetime import UTC, datetime
 from uuid import uuid4
 
+from aion_brain.contracts.action_proposals import ActionProposalCreateRequest
 from aion_brain.contracts.decisions import DecisionRecord, DecisionRecordRequest
 from aion_brain.decisions._shared import (
     audit_optional,
@@ -27,12 +28,19 @@ class DecisionJournalService:
         telemetry_service: object | None = None,
         audit_sink: object | None = None,
         provenance_service: object | None = None,
+        action_proposal_service: object | None = None,
     ) -> None:
         self._repository = repository
         self._policy_adapter = policy_adapter
         self._telemetry_service = telemetry_service
         self._audit_sink = audit_sink
         self._provenance_service = provenance_service
+        self._action_proposal_service = action_proposal_service
+
+    def set_action_proposal_service(self, service: object | None) -> None:
+        """Attach the optional action proposal broker after kernel assembly."""
+
+        self._action_proposal_service = service
 
     def record_decision(self, request: DecisionRecordRequest) -> DecisionRecord:
         frame = self._repository.get_frame(request.decision_frame_id)
@@ -91,6 +99,32 @@ class DecisionJournalService:
                 stored.selected_option_id,
                 "records_selected_option",
             )
+        if option is not None and option.metadata.get("create_action_proposal") is True:
+            create_proposal = getattr(self._action_proposal_service, "create_proposal", None)
+            if callable(create_proposal):
+                create_proposal(
+                    ActionProposalCreateRequest(
+                        trace_id=stored.trace_id,
+                        actor_id=stored.actor_id,
+                        workspace_id=stored.workspace_id,
+                        source_type="decision",
+                        source_id=stored.decision_record_id,
+                        proposal_type="generic",
+                        title=option.title,
+                        description=option.description,
+                        action_type=option.action_type or "generic",
+                        target_type=option.target_type or "noop",
+                        target_id=option.target_id,
+                        owner_scope=frame.owner_scope,
+                        proposed_payload={"decision_option_id": option.decision_option_id},
+                        required_permissions=option.required_permissions,
+                        required_approvals=option.required_approvals,
+                        risk_level=option.risk_level,
+                        decision_refs=[stored.decision_record_id],
+                        metadata={"source": "decision_journal", "no_execution": True},
+                        created_by=stored.created_by,
+                    )
+                )
         emit_telemetry(
             self._telemetry_service,
             event_type="decision_recorded",

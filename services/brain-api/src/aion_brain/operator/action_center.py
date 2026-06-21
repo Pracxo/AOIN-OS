@@ -70,6 +70,9 @@ class ActionCenterService:
         generated.extend(self._blocked_model_output_items(scope))
         generated.extend(self._response_candidate_items(scope))
         generated.extend(self._tool_intent_items(scope))
+        generated.extend(self._high_risk_action_proposal_items(scope))
+        generated.extend(self._approval_waiting_action_proposal_items(scope))
+        generated.extend(self._blocked_handoff_items())
         stored: list[OperatorActionItem] = []
         for item in generated[:limit]:
             saved = self._repository.save_action_item(item)
@@ -468,6 +471,104 @@ class ActionCenterService:
                     "status": getattr(item, "status", "blocked"),
                     "intent_type": getattr(item, "intent_type", None),
                     "tool_name": getattr(item, "tool_name", None),
+                },
+            )
+            for item in items
+        ]
+
+    def _high_risk_action_proposal_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("action_proposal_service")
+        query = getattr(source, "query", None)
+        if not callable(query):
+            return []
+        try:
+            from aion_brain.contracts.action_proposals import ActionProposalQuery
+
+            result = query(ActionProposalQuery(scope=scope, risk_level="high", limit=100))
+            items = getattr(result, "proposals", [])
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "action_proposal_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity="high",
+                title="High-risk action proposal requires review.",
+                description="A proposed action is waiting behind review and handoff gates.",
+                recommended_action="review_action_proposal",
+                runbook_ref="docs/adr/0058-action-proposal-broker-execution-handoff.md",
+                scope=getattr(item, "owner_scope", scope) or scope,
+                metadata={
+                    "status": getattr(item, "status", "proposed"),
+                    "proposal_type": getattr(item, "proposal_type", None),
+                    "risk_level": getattr(item, "risk_level", None),
+                },
+            )
+            for item in items
+            if getattr(item, "status", None) in {"proposed", "under_review", "blocked"}
+        ]
+
+    def _approval_waiting_action_proposal_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("action_proposal_service")
+        query = getattr(source, "query", None)
+        if not callable(query):
+            return []
+        try:
+            from aion_brain.contracts.action_proposals import ActionProposalQuery
+
+            result = query(
+                ActionProposalQuery(scope=scope, status="approved_for_handoff", limit=100)
+            )
+            items = getattr(result, "proposals", [])
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "action_proposal_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity="medium",
+                title="Action proposal approved for explicit handoff.",
+                description="A reviewed proposal is ready for a separate handoff request.",
+                recommended_action="create_execution_handoff_dry_run",
+                runbook_ref="docs/adr/0058-action-proposal-broker-execution-handoff.md",
+                scope=getattr(item, "owner_scope", scope) or scope,
+                metadata={
+                    "status": getattr(item, "status", "approved_for_handoff"),
+                    "proposal_type": getattr(item, "proposal_type", None),
+                },
+            )
+            for item in items
+        ]
+
+    def _blocked_handoff_items(self) -> list[OperatorActionItem]:
+        source = self._sources.get("execution_handoff_service")
+        list_handoffs = getattr(source, "list_handoffs", None)
+        if not callable(list_handoffs):
+            return []
+        try:
+            items = list_handoffs(status="blocked", limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "execution_handoff_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity="high",
+                title="Execution handoff was blocked.",
+                description="A handoff request failed one of the required gates.",
+                recommended_action="review_execution_handoff_blocker",
+                runbook_ref="docs/adr/0058-action-proposal-broker-execution-handoff.md",
+                scope=["workspace:main"],
+                metadata={
+                    "status": getattr(item, "status", "blocked"),
+                    "target_system": getattr(item, "target_system", None),
+                    "blocker_refs": getattr(item, "blocker_refs", []),
                 },
             )
             for item in items

@@ -4,6 +4,13 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import TypeVar, cast
 
+from aion_brain.action_proposals.blockers import ActionBlockerService
+from aion_brain.action_proposals.handoffs import ExecutionHandoffService
+from aion_brain.action_proposals.proposals import ActionProposalService
+from aion_brain.action_proposals.query import ActionProposalQueryService
+from aion_brain.action_proposals.repository import ActionProposalRepository
+from aion_brain.action_proposals.reviews import ActionReviewService
+from aion_brain.action_proposals.tool_intent_review import ToolIntentReviewService
 from aion_brain.api_support.openapi_hygiene import OpenAPIHygieneChecker
 from aion_brain.api_support.request_audit import APIRequestAuditService
 from aion_brain.approvals.repository import ApprovalRepository
@@ -1805,6 +1812,88 @@ class KernelContainer:
             observed_effect_collector=self.observed_effect_collector,
             outcome_service=self.outcome_service,
         )
+        self.action_proposal_repository = ActionProposalRepository(self.settings.database_url)
+        self.action_blocker_service = ActionBlockerService(
+            self.action_proposal_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.action_proposal_service = ActionProposalService(
+            self.action_proposal_repository,
+            self.policy_adapter,
+            blocker_service=self.action_blocker_service,
+            tool_intent_repository=self.model_output_repository,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            settings=self.settings,
+        )
+        self.tool_intent_review_service = ToolIntentReviewService(
+            self.action_proposal_repository,
+            self.model_output_repository,
+            self.policy_adapter,
+            action_proposal_service=self.action_proposal_service,
+            blocker_service=self.action_blocker_service,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            settings=self.settings,
+        )
+        self.action_review_service = ActionReviewService(
+            self.action_proposal_repository,
+            self.policy_adapter,
+            blocker_service=self.action_blocker_service,
+            risk_engine=self.risk_engine,
+            autonomy_governor=self.autonomy_governor,
+            approval_service=self.approval_service,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+        )
+        self.execution_handoff_service = ExecutionHandoffService(
+            self.action_proposal_repository,
+            self.policy_adapter,
+            blocker_service=self.action_blocker_service,
+            command_bus=self.command_bus,
+            workflow_service=self.workflow_service,
+            execution_orchestrator=self.execution_orchestrator,
+            capability_runtime=self.module_runtime_gateway,
+            mcp_service=self.mcp_service,
+            cycle_orchestrator=self.cognitive_cycle_orchestrator,
+            sandbox_service=self.sandbox_service,
+            risk_engine=self.risk_engine,
+            autonomy_governor=self.autonomy_governor,
+            approval_service=self.approval_service,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            settings=self.settings,
+        )
+        self.action_proposal_query_service = ActionProposalQueryService(
+            self.action_proposal_repository,
+            self.policy_adapter,
+        )
+        set_tool_intent_review = getattr(
+            self.output_governance_service,
+            "set_tool_intent_review_service",
+            None,
+        )
+        if callable(set_tool_intent_review):
+            set_tool_intent_review(self.tool_intent_review_service)
+        set_decision_action_proposals = getattr(
+            self.decision_journal_service,
+            "set_action_proposal_service",
+            None,
+        )
+        if callable(set_decision_action_proposals):
+            set_decision_action_proposals(self.action_proposal_service)
+        set_planner_action_proposals = getattr(
+            self.planner,
+            "set_action_proposal_service",
+            None,
+        )
+        if callable(set_planner_action_proposals):
+            set_planner_action_proposals(self.action_proposal_service)
         self.contract_export_service = ContractExportService(self.settings.version)
         self.boundary_checker = ArchitectureBoundaryChecker(Path(__file__).parents[1])
         self.consistency_checker = ConsistencyChecker(
@@ -2195,6 +2284,11 @@ class KernelContainer:
             model_output_repository=self.model_output_repository,
             response_candidate_service=self.response_candidate_service,
             tool_intent_service=self.tool_intent_capture_service,
+            action_proposal_service=self.action_proposal_service,
+            action_blocker_service=self.action_blocker_service,
+            action_review_service=self.action_review_service,
+            execution_handoff_service=self.execution_handoff_service,
+            tool_intent_review_service=self.tool_intent_review_service,
         )
         self.operator_action_center_service = ActionCenterService(
             self.operator_repository,
@@ -2228,6 +2322,10 @@ class KernelContainer:
             model_output_repository=self.model_output_repository,
             response_candidate_service=self.response_candidate_service,
             tool_intent_service=self.tool_intent_capture_service,
+            action_proposal_service=self.action_proposal_service,
+            action_blocker_service=self.action_blocker_service,
+            execution_handoff_service=self.execution_handoff_service,
+            tool_intent_review_service=self.tool_intent_review_service,
         )
         self.operator_readiness_aggregator = ReadinessAggregator(
             self.operator_status_card_builder,
@@ -2515,6 +2613,48 @@ class KernelContainer:
             (
                 "tool_intent_capture_service",
                 self.tool_intent_capture_service,
+                "service",
+                "local",
+            ),
+            (
+                "action_proposal_repository",
+                self.action_proposal_repository,
+                "repository",
+                "postgres",
+            ),
+            (
+                "action_blocker_service",
+                self.action_blocker_service,
+                "service",
+                "local",
+            ),
+            (
+                "action_proposal_service",
+                self.action_proposal_service,
+                "service",
+                "local",
+            ),
+            (
+                "tool_intent_review_service",
+                self.tool_intent_review_service,
+                "service",
+                "local",
+            ),
+            (
+                "action_review_service",
+                self.action_review_service,
+                "service",
+                "local",
+            ),
+            (
+                "execution_handoff_service",
+                self.execution_handoff_service,
+                "service",
+                "local",
+            ),
+            (
+                "action_proposal_query_service",
+                self.action_proposal_query_service,
                 "service",
                 "local",
             ),
