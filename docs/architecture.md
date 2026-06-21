@@ -1337,3 +1337,24 @@ Control requests are dry-run by default. Timeout policies create blockers or
 operator action items only. Compensation plans may be converted to action
 proposals through an explicit API, but the plans and steps do not execute
 themselves.
+
+## Temporal Scheduler
+
+The Temporal Scheduler is the Brain-owned local time coordination layer. It
+stores schedules, recurrence rules, due items, reminders, tick runs, schedule
+policies, and scheduler reports. It is distinct from execution, workflows,
+cron, Celery, Temporal, and external calendars.
+
+Recurrence rules are deterministic and evaluated locally in UTC. The Due Item
+Ledger records due or missed schedule occurrences. The Reminder Queue stores
+local reminder records only. The Local Tick Orchestrator runs only when called
+through an explicit API, CLI, SDK, or governed internal service.
+
+Scheduler tick can create scheduler-owned due items, reminders, notifications,
+action proposals, and operator items. It cannot execute target actions, run
+workflows, process outbox records, call external APIs, send external
+reminders, or mutate source records outside scheduler-owned state.
+
+Schedule Policies are metadata and deterministic checks around scheduler
+behavior. Violations produce report findings or local records only. They do
+not authorize execution.

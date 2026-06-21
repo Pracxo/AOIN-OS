@@ -35,6 +35,7 @@ NotificationCategory = Literal[
     "performance",
     "runtime_config",
     "explanation",
+    "scheduler",
     "generic",
 ]
 NotificationSubscriberType = Literal[
@@ -78,6 +79,10 @@ NotificationSourceType = Literal[
     "performance",
     "runtime_config",
     "explanation",
+    "schedule",
+    "due_item",
+    "reminder",
+    "scheduler_tick",
     "system",
     "generic",
 ]

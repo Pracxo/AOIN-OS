@@ -49,6 +49,13 @@ class KernelDiagnostics:
         ("alert_service_present", "alert_service", "high"),
         ("escalation_service_present", "escalation_service", "medium"),
         ("notification_digest_service_present", "notification_digest_service", "medium"),
+        ("scheduler_repository_present", "scheduler_repository", "high"),
+        ("scheduler_schedule_service_present", "scheduler_schedule_service", "high"),
+        ("scheduler_due_item_service_present", "scheduler_due_item_service", "medium"),
+        ("scheduler_reminder_service_present", "scheduler_reminder_service", "medium"),
+        ("scheduler_tick_orchestrator_present", "scheduler_tick_orchestrator", "high"),
+        ("schedule_policy_service_present", "schedule_policy_service", "medium"),
+        ("scheduler_report_service_present", "scheduler_report_service", "medium"),
         ("prompt_redactor_present", "prompt_redactor", "high"),
         ("prompt_repository_present", "prompt_repository", "high"),
         ("prompt_compiler_present", "prompt_compiler", "high"),
@@ -311,6 +318,7 @@ class KernelDiagnostics:
         checks.extend(self._action_proposal_checks(settings))
         checks.extend(self._run_supervision_checks(settings))
         checks.extend(self._notification_checks(settings))
+        checks.extend(self._scheduler_checks(settings))
         checks.extend(self._entity_checks(settings))
         checks.extend(self._situation_checks(settings))
         checks.extend(self._decision_checks(settings))
@@ -779,6 +787,54 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Notification services are assembled.",
+            ),
+        ]
+
+    def _scheduler_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "scheduler_repository",
+                "scheduler_schedule_service",
+                "scheduler_due_item_service",
+                "scheduler_reminder_service",
+                "scheduler_tick_orchestrator",
+                "schedule_policy_service",
+                "scheduler_report_service",
+            )
+        )
+        return [
+            self._result(
+                "scheduler_enabled",
+                "scheduler",
+                "passed" if bool(getattr(settings, "scheduler_enabled", True)) else "warning",
+                "medium",
+                "Local scheduler APIs are enabled.",
+            ),
+            self._result(
+                "scheduler_tick_enabled",
+                "scheduler",
+                "passed" if bool(getattr(settings, "scheduler_tick_enabled", True)) else "warning",
+                "medium",
+                "Explicit scheduler ticks are enabled.",
+            ),
+            self._result(
+                "scheduler_background_disabled",
+                "scheduler",
+                (
+                    "passed"
+                    if not bool(getattr(settings, "scheduler_background_enabled", False))
+                    else "failed"
+                ),
+                "critical",
+                "Scheduler background loops are disabled in v0.1.",
+            ),
+            self._result(
+                "scheduler_services_present",
+                "scheduler",
+                "passed" if services_present else "failed",
+                "high",
+                "Scheduler services are assembled.",
             ),
         ]
 

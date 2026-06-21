@@ -396,3 +396,21 @@ local notifications, alerts, escalation records, and digests. They do not send
 external notifications, call webhooks, send email/SMS/chat messages, mutate
 source systems, auto-resolve source records, or expose hidden reasoning,
 raw prompts, raw headers, provider payloads, or secrets.
+
+## Scheduler Commands
+
+- `aionctl scheduler schedules create`
+- `aionctl scheduler schedules list`
+- `aionctl scheduler schedules pause`
+- `aionctl scheduler schedules resume`
+- `aionctl scheduler due-items`
+- `aionctl scheduler reminders create`
+- `aionctl scheduler reminders list`
+- `aionctl scheduler reminders acknowledge`
+- `aionctl scheduler tick`
+- `aionctl scheduler report`
+
+Scheduler commands call the SDK and public Brain APIs only. Tick defaults to
+`dry_run`. Commands do not start background workers, execute target actions,
+call external calendars, send external reminders, mutate source records, or add
+domain-specific scheduling behavior.

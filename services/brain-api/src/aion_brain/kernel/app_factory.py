@@ -68,6 +68,7 @@ from aion_brain.api.run_supervision import router as run_supervision_router
 from aion_brain.api.runtime_config import router as runtime_config_router
 from aion_brain.api.sandbox import router as sandbox_router
 from aion_brain.api.scenarios import router as scenarios_router
+from aion_brain.api.scheduler import router as scheduler_router
 from aion_brain.api.schedules import router as schedules_router
 from aion_brain.api.scopes import router as scopes_router
 from aion_brain.api.secrets import router as secrets_router
@@ -109,6 +110,7 @@ ROUTERS = (
     goals_router,
     tasks_router,
     schedules_router,
+    scheduler_router,
     workflows_router,
     cycles_router,
     execution_router,

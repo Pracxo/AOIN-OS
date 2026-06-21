@@ -222,6 +222,60 @@ class Settings(BaseSettings):
             "notification_auto_create_operator_items",
         ),
     )
+    scheduler_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_SCHEDULER_ENABLED", "scheduler_enabled"),
+    )
+    scheduler_tick_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_SCHEDULER_TICK_ENABLED", "scheduler_tick_enabled"),
+    )
+    scheduler_background_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_SCHEDULER_BACKGROUND_ENABLED",
+            "scheduler_background_enabled",
+        ),
+    )
+    reminders_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_REMINDERS_ENABLED", "reminders_enabled"),
+    )
+    scheduler_create_notifications_default: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_SCHEDULER_CREATE_NOTIFICATIONS_DEFAULT",
+            "scheduler_create_notifications_default",
+        ),
+    )
+    scheduler_create_action_proposals_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_SCHEDULER_CREATE_ACTION_PROPOSALS_DEFAULT",
+            "scheduler_create_action_proposals_default",
+        ),
+    )
+    scheduler_create_operator_items_default: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_SCHEDULER_CREATE_OPERATOR_ITEMS_DEFAULT",
+            "scheduler_create_operator_items_default",
+        ),
+    )
+    scheduler_max_due_items_per_tick: int = Field(
+        default=1000,
+        validation_alias=AliasChoices(
+            "AION_SCHEDULER_MAX_DUE_ITEMS_PER_TICK",
+            "scheduler_max_due_items_per_tick",
+        ),
+    )
+    scheduler_default_timezone: str = Field(
+        default="UTC",
+        validation_alias=AliasChoices(
+            "AION_SCHEDULER_DEFAULT_TIMEZONE",
+            "scheduler_default_timezone",
+        ),
+    )
     dialogue_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices("AION_DIALOGUE_ENABLED", "dialogue_enabled"),

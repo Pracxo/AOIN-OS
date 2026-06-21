@@ -224,6 +224,10 @@ _QUEUE_SPECS: tuple[tuple[OperatorQueueType, str, str, tuple[str, ...]], ...] = 
         "notification_digest_service",
         ("list_digests",),
     ),
+    ("scheduler", "Active Schedules", "scheduler_service", ("list_schedules",)),
+    ("scheduler", "Due Items", "scheduler_service", ("list_due_items",)),
+    ("scheduler", "Open Reminders", "scheduler_service", ("list_reminders",)),
+    ("scheduler", "Failed Tick Runs", "scheduler_service", ("list_tick_runs",)),
 )
 
 _RUNNING_STATUSES = {"running", "processing", "sending", "in_progress", "active"}

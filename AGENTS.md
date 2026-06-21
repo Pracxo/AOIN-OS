@@ -220,3 +220,8 @@ Instructions for future Codex runs in this repository:
   raw headers, provider payloads, or secrets.
 - Do not add domain-specific notification topics, alert types, escalation
   logic, digest recommendations, or operator runbooks in Brain core.
+- Scheduler tasks must not start background workers.
+- Schedules must not execute target actions directly.
+- Tick runs must be deterministic and local.
+- Reminders must not send external messages.
+- Do not add external calendar integrations in Brain core.

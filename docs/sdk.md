@@ -504,3 +504,32 @@ external orchestration clients.
 The SDK calls public Brain APIs only. It does not import `aion_brain`,
 notification provider SDKs, email/SMS clients, webhook clients, database
 clients, frontend code, or external delivery services.
+
+## SchedulerResource
+
+`client.scheduler` supports:
+
+- `create_schedule(payload)`
+- `get_schedule(schedule_id, scope)`
+- `list_schedules(scope, status=None, schedule_type=None, target_type=None, limit=100)`
+- `pause_schedule(schedule_id, scope, reason=None)`
+- `resume_schedule(schedule_id, scope, reason=None)`
+- `disable_schedule(schedule_id, scope, reason=None)`
+- `delete_schedule(schedule_id, scope, reason=None)`
+- `list_due_items(scope, schedule_id=None, status=None, missed=None, limit=100)`
+- `create_reminder(payload)`
+- `list_reminders(scope, status=None, reminder_type=None, actor_id=None, workspace_id=None, limit=100)`
+- `acknowledge_reminder(reminder_id, scope, reason=None)`
+- `snooze_reminder(reminder_id, scope, snoozed_until, reason=None)`
+- `dismiss_reminder(reminder_id, scope, reason=None)`
+- `tick(payload)`
+- `run_tick(payload)`
+- `get_tick_run(tick_run_id, scope)`
+- `create_policy(payload)`
+- `list_policies(scope, status=None, policy_type=None, limit=100)`
+- `report(scope, trace_id=None)`
+- `create_report(scope, trace_id=None)`
+
+The SDK calls public Brain APIs only. It does not import `aion_brain`,
+external calendar clients, notification provider SDKs, workflow engines,
+database clients, frontend code, or external delivery services.

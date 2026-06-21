@@ -1207,3 +1207,34 @@ delivery, source-system remediation, automatic source resolution, raw prompt
 disclosure, hidden reasoning disclosure, raw header export, secret export, or
 domain-specific alert rules. Unknown notification and alert actions fail
 closed.
+
+## Scheduler Policy
+
+Generic scheduler actions:
+
+- `scheduler.schedule.create`
+- `scheduler.schedule.read`
+- `scheduler.schedule.update`
+- `scheduler.schedule.delete`
+- `scheduler.due_item.read`
+- `scheduler.due_item.update`
+- `scheduler.reminder.create`
+- `scheduler.reminder.read`
+- `scheduler.reminder.update`
+- `scheduler.tick`
+- `scheduler.policy.create`
+- `scheduler.policy.read`
+- `scheduler.policy.update`
+- `scheduler.report.create`
+- `scheduler.report.read`
+
+Schedule reads, due item reads, reminder reads, and scheduler reports are
+scope-gated. Schedule create, update, delete, reminder mutation, controlled
+ticks, and schedule policy mutation require the scoped owner, admin, operator,
+creator, or internal Brain context permitted by policy.
+
+Tick dry-run is allowed only for scoped operators. Controlled tick may create
+scheduler-owned records only. Scheduler policy does not authorize scheduled
+target execution, external calendar integration, external delivery, approval
+bypass, source mutation, or domain-specific scheduling. Unknown scheduler
+actions fail closed.

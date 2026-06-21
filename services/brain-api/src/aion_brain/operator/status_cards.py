@@ -38,6 +38,7 @@ _CARD_SPECS: tuple[tuple[str, str, OperatorCategory, str], ...] = (
     ("limitations", "Limitation Ledger", "self_model", "limitation_service"),
     ("instructions", "Instruction Hierarchy", "operator", "instruction_service"),
     ("prompts", "Prompt Governance", "operator", "prompt_service"),
+    ("scheduler", "Temporal Scheduler", "scheduler", "scheduler_service"),
 )
 
 

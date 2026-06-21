@@ -392,6 +392,21 @@ allowed_actions := {
 	"schedule.create",
 	"schedule.read",
 	"schedule.update",
+	"scheduler.schedule.create",
+	"scheduler.schedule.read",
+	"scheduler.schedule.update",
+	"scheduler.schedule.delete",
+	"scheduler.due_item.read",
+	"scheduler.due_item.update",
+	"scheduler.reminder.create",
+	"scheduler.reminder.read",
+	"scheduler.reminder.update",
+	"scheduler.tick",
+	"scheduler.policy.create",
+	"scheduler.policy.read",
+	"scheduler.policy.update",
+	"scheduler.report.create",
+	"scheduler.report.read",
 	"workflow.create",
 	"workflow.read",
 	"workflow.activate",
@@ -712,6 +727,11 @@ low_allowed_actions := {
 	"schedule.create",
 	"schedule.read",
 	"schedule.update",
+	"scheduler.schedule.read",
+	"scheduler.due_item.read",
+	"scheduler.reminder.read",
+	"scheduler.policy.read",
+	"scheduler.report.read",
 	"workflow.read",
 	"workflow.engine.status",
 	"workflow.temporal.status",
@@ -884,6 +904,16 @@ medium_approval_actions := {
 	"workflow.scheduler.tick",
 	"workflow.worker.start_once",
 	"workflow.heartbeat.write",
+	"scheduler.schedule.create",
+	"scheduler.schedule.update",
+	"scheduler.schedule.delete",
+	"scheduler.due_item.update",
+	"scheduler.reminder.create",
+	"scheduler.reminder.update",
+	"scheduler.tick",
+	"scheduler.policy.create",
+	"scheduler.policy.update",
+	"scheduler.report.create",
 	"command.cancel",
 	"outbox.process",
 	"outbox.cancel",
@@ -2217,6 +2247,75 @@ decision := {
 decision := {
 	"allow": true,
 	"approval_required": false,
+	"reason": "scheduler_read_allowed",
+	"constraints": ["local_only"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	scheduler_read_action
+	scheduler_reader
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "scheduler_write_allowed",
+	"constraints": ["local_only", "no_target_execution"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	scheduler_write_action
+	scheduler_writer
+	not scheduler_external_action
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "scheduler_tick_dry_run_allowed",
+	"constraints": ["dry_run", "local_only", "no_target_execution"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "scheduler.tick"
+	input.context.mode == "dry_run"
+	scheduler_operator
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "scheduler_tick_controlled_allowed",
+	"constraints": ["controlled_local_records_only", "no_target_execution"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "scheduler.tick"
+	input.context.mode == "controlled"
+	scheduler_operator
+	not scheduler_external_action
+}
+
+decision := {
+	"allow": false,
+	"approval_required": false,
+	"reason": "scheduled_target_execution_denied",
+	"constraints": ["scheduled_execution_disabled", "external_calendar_disabled"],
+	"audit_level": "high",
+} if {
+	valid_action
+	valid_risk
+	scheduler_action
+	scheduler_external_action
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
 	"reason": "evidence_link_allowed",
 	"constraints": [],
 	"audit_level": "elevated",
@@ -2544,6 +2643,7 @@ decision := {
 	not prompt_action
 	not belief_action
 	not registry_action
+	not scheduler_action
 }
 
 decision := {
@@ -2756,6 +2856,7 @@ decision := {
 	not mcp_action
 	not dialogue_action
 	not belief_action
+	not scheduler_action
 }
 
 decision := {
@@ -2786,6 +2887,110 @@ decision := {
 	not mcp_action
 	input.action_type != "memory.forget.request"
 	input.approval_present
+}
+
+scheduler_action if {
+	startswith(input.action_type, "scheduler.")
+}
+
+scheduler_read_action if {
+	input.action_type == "scheduler.schedule.read"
+}
+
+scheduler_read_action if {
+	input.action_type == "scheduler.due_item.read"
+}
+
+scheduler_read_action if {
+	input.action_type == "scheduler.reminder.read"
+}
+
+scheduler_read_action if {
+	input.action_type == "scheduler.policy.read"
+}
+
+scheduler_read_action if {
+	input.action_type == "scheduler.report.read"
+}
+
+scheduler_write_action if {
+	input.action_type == "scheduler.schedule.create"
+}
+
+scheduler_write_action if {
+	input.action_type == "scheduler.schedule.update"
+}
+
+scheduler_write_action if {
+	input.action_type == "scheduler.schedule.delete"
+}
+
+scheduler_write_action if {
+	input.action_type == "scheduler.due_item.update"
+}
+
+scheduler_write_action if {
+	input.action_type == "scheduler.reminder.create"
+}
+
+scheduler_write_action if {
+	input.action_type == "scheduler.reminder.update"
+}
+
+scheduler_write_action if {
+	input.action_type == "scheduler.policy.create"
+}
+
+scheduler_write_action if {
+	input.action_type == "scheduler.policy.update"
+}
+
+scheduler_write_action if {
+	input.action_type == "scheduler.report.create"
+}
+
+scheduler_operator if {
+	input.context.actor_context.roles[_] == "owner"
+}
+
+scheduler_operator if {
+	input.context.actor_context.roles[_] == "admin"
+}
+
+scheduler_operator if {
+	input.context.actor_context.roles[_] == "operator"
+}
+
+scheduler_operator if {
+	input.context.actor_context.permissions[_] == input.action_type
+}
+
+scheduler_reader if {
+	scheduler_operator
+}
+
+scheduler_reader if {
+	input.context.actor_context.roles[_] == "auditor"
+}
+
+scheduler_reader if {
+	input.context.actor_context.permissions[_] == "scheduler.schedule.read"
+}
+
+scheduler_reader if {
+	input.context.actor_context.permissions[_] == "scheduler.reminder.read"
+}
+
+scheduler_writer if {
+	scheduler_operator
+}
+
+scheduler_external_action if {
+	input.context.execute_target == true
+}
+
+scheduler_external_action if {
+	input.context.external_calendar == true
 }
 
 valid_action if {

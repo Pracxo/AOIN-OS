@@ -1195,3 +1195,33 @@ delivery. `AlertRecord` is a local review signal and does not mutate source
 systems. `EscalationRecord` is a local queue record with `local_only=true`.
 `NotificationDigest` summarizes local notifications and alerts
 deterministically.
+
+## Temporal Scheduler Contracts
+
+AION Brain owns these local scheduler contracts:
+
+- `RecurrenceRule`
+- `ScheduleRecord`
+- `ScheduleCreateRequest`
+- `ScheduleDueItem`
+- `ReminderRecord`
+- `ReminderCreateRequest`
+- `SchedulerTickRequest`
+- `SchedulerTickRun`
+- `SchedulePolicy`
+- `SchedulerReport`
+
+Scheduler contracts are generic and domain-neutral. `RecurrenceRule` defines
+local recurrence semantics. `ScheduleRecord` stores scheduler metadata and
+the next due boundary. `ScheduleDueItem` records a due occurrence and does not
+execute a target. `ReminderRecord` is local-only and does not send external
+messages. `SchedulerTickRequest` is the explicit entry point for dry-run or
+controlled local tick evaluation. `SchedulerTickRun` is the audit record for
+one tick. `SchedulePolicy` and `SchedulerReport` describe scheduler posture
+without running target actions.
+
+Public scheduler contracts may use compatibility aliases such as
+`recurrence_rule` for `recurrence`, `owner_scope` for tick `scope`,
+`schedule_policy_id` for `policy_id`, and `rule` for policy `conditions`.
+The Brain keeps the scheduler local, deterministic, and non-executing in
+v0.1.

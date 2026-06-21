@@ -332,6 +332,15 @@ from aion_brain.scenarios.comparator import ScenarioComparator
 from aion_brain.scenarios.fixtures import DemoFixtureService
 from aion_brain.scenarios.repository import ScenarioRepository
 from aion_brain.scenarios.runner import ScenarioRunner
+from aion_brain.scheduler.due_items import DueItemService
+from aion_brain.scheduler.policies import SchedulePolicyService
+from aion_brain.scheduler.query import SchedulerQueryService
+from aion_brain.scheduler.recurrence import RecurrenceEvaluator
+from aion_brain.scheduler.reminders import ReminderService
+from aion_brain.scheduler.reports import SchedulerReportService
+from aion_brain.scheduler.repository import SchedulerRepository
+from aion_brain.scheduler.service import ScheduleService as LocalSchedulerScheduleService
+from aion_brain.scheduler.tick import SchedulerTickOrchestrator
 from aion_brain.schedules.repository import ScheduleRepository
 from aion_brain.schedules.service import ScheduleService
 from aion_brain.scopes.repository import ScopeRepository
@@ -1985,6 +1994,52 @@ class KernelContainer:
             telemetry_service=self.telemetry_service,
         )
         self.notification_query_service = NotificationQueryService(self.notification_router)
+        self.scheduler_repository = SchedulerRepository(self.settings.database_url)
+        self.scheduler_recurrence_evaluator = RecurrenceEvaluator()
+        self.scheduler_schedule_service = LocalSchedulerScheduleService(
+            self.scheduler_repository,
+            self.policy_adapter,
+            recurrence_evaluator=self.scheduler_recurrence_evaluator,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            settings=self.settings,
+        )
+        self.scheduler_due_item_service = DueItemService(
+            self.scheduler_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.scheduler_reminder_service = ReminderService(
+            self.scheduler_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.schedule_policy_service = SchedulePolicyService(
+            self.scheduler_repository,
+            self.policy_adapter,
+        )
+        self.scheduler_report_service = SchedulerReportService(
+            self.scheduler_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.scheduler_query_service = SchedulerQueryService(self.scheduler_repository)
+        self.scheduler_tick_orchestrator = SchedulerTickOrchestrator(
+            self.scheduler_repository,
+            self.policy_adapter,
+            due_item_service=self.scheduler_due_item_service,
+            reminder_service=self.scheduler_reminder_service,
+            recurrence_evaluator=self.scheduler_recurrence_evaluator,
+            notification_router=self.notification_router,
+            action_proposal_service=self.action_proposal_service,
+            operator_repository=None,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            settings=self.settings,
+        )
         for supervised_service in (
             self.execution_handoff_service,
             self.command_bus,
@@ -2344,6 +2399,7 @@ class KernelContainer:
             root_dir=root_dir,
         )
         self.operator_repository = OperatorRepository(self.settings.database_url)
+        self.scheduler_tick_orchestrator._operator_repository = self.operator_repository
         self.operator_status_card_builder = StatusCardBuilder(
             kernel_service=self.diagnostics,
             resilience_service=self.resilience_test_runner,
@@ -2374,6 +2430,7 @@ class KernelContainer:
             limitation_service=self.limitation_ledger_service,
             instruction_service=self.instruction_query_service,
             prompt_service=self.prompt_compiler,
+            scheduler_service=self.scheduler_query_service,
         )
         self.operator_queue_summary_builder = QueueSummaryBuilder(
             approval_service=self.approval_repository,
@@ -2426,6 +2483,7 @@ class KernelContainer:
             alert_service=self.alert_service,
             escalation_service=self.escalation_service,
             notification_digest_service=self.notification_digest_service,
+            scheduler_service=self.scheduler_query_service,
         )
         self.operator_action_center_service = ActionCenterService(
             self.operator_repository,
@@ -2470,6 +2528,7 @@ class KernelContainer:
             alert_service=self.alert_service,
             escalation_service=self.escalation_service,
             notification_digest_service=self.notification_digest_service,
+            scheduler_service=self.scheduler_query_service,
         )
         self.operator_readiness_aggregator = ReadinessAggregator(
             self.operator_status_card_builder,
@@ -2904,6 +2963,34 @@ class KernelContainer:
                 "service",
                 "local",
             ),
+            ("scheduler_repository", self.scheduler_repository, "repository", "postgres"),
+            (
+                "scheduler_schedule_service",
+                self.scheduler_schedule_service,
+                "service",
+                "local",
+            ),
+            (
+                "scheduler_due_item_service",
+                self.scheduler_due_item_service,
+                "service",
+                "local",
+            ),
+            (
+                "scheduler_reminder_service",
+                self.scheduler_reminder_service,
+                "service",
+                "local",
+            ),
+            (
+                "scheduler_tick_orchestrator",
+                self.scheduler_tick_orchestrator,
+                "service",
+                "local",
+            ),
+            ("schedule_policy_service", self.schedule_policy_service, "service", "local"),
+            ("scheduler_report_service", self.scheduler_report_service, "service", "local"),
+            ("scheduler_query_service", self.scheduler_query_service, "service", "local"),
             (
                 "model_provider_registry",
                 self.model_provider_registry,

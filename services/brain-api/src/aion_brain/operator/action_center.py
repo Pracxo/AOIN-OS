@@ -78,6 +78,9 @@ class ActionCenterService:
         generated.extend(self._pending_run_control_items())
         generated.extend(self._compensation_plan_items(scope))
         generated.extend(self._critical_alert_items(scope))
+        generated.extend(self._scheduler_due_item_items(scope))
+        generated.extend(self._scheduler_reminder_items(scope))
+        generated.extend(self._scheduler_failed_tick_items(scope))
         stored: list[OperatorActionItem] = []
         for item in generated[:limit]:
             saved = self._repository.save_action_item(item)
@@ -735,6 +738,72 @@ class ActionCenterService:
             )
             for item in items
             if getattr(item, "severity", None) in {"high", "critical"}
+        ]
+
+    def _scheduler_due_item_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("scheduler_service")
+        items = _list_from(source, ("list_due_items",), scope)
+        return [
+            _action_item(
+                source_type="due_item",
+                source_id=_id_for(item, "due_item_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="scheduler",
+                severity="high" if str(getattr(item, "status", "")) == "missed" else "medium",
+                title="Scheduler due item requires review.",
+                description="A local schedule occurrence is due and waiting for review.",
+                recommended_action="review_scheduler_due_item",
+                runbook_ref="docs/temporal-scheduler.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={
+                    "schedule_id": getattr(item, "schedule_id", None),
+                    "status": getattr(item, "status", None),
+                },
+            )
+            for item in items
+            if str(getattr(item, "status", "")) in {"due", "missed", "failed"}
+        ]
+
+    def _scheduler_reminder_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("scheduler_service")
+        items = _list_from(source, ("list_reminders",), scope)
+        return [
+            _action_item(
+                source_type="reminder",
+                source_id=_id_for(item, "reminder_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="scheduler",
+                severity="medium",
+                title="Reminder is due.",
+                description="A local scheduler reminder is ready for review.",
+                recommended_action="review_scheduler_reminder",
+                runbook_ref="docs/temporal-scheduler.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={"status": getattr(item, "status", None)},
+            )
+            for item in items
+            if str(getattr(item, "status", "")) == "due"
+        ]
+
+    def _scheduler_failed_tick_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("scheduler_service")
+        items = _list_from(source, ("list_tick_runs",), scope)
+        return [
+            _action_item(
+                source_type="scheduler_tick",
+                source_id=_id_for(item, "tick_run_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="scheduler",
+                severity="high",
+                title="Scheduler tick failed.",
+                description="A local scheduler tick recorded a failed state.",
+                recommended_action="inspect_scheduler_tick",
+                runbook_ref="docs/temporal-scheduler.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={"status": getattr(item, "status", None)},
+            )
+            for item in items
+            if str(getattr(item, "status", "")) in {"failed", "blocked_by_policy"}
         ]
 
     def _failed_outcome_items(self, scope: list[str]) -> list[OperatorActionItem]:

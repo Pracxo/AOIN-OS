@@ -22,6 +22,7 @@ ActionProposalSourceType = Literal[
     "plan",
     "workflow",
     "operator",
+    "scheduler",
     "command",
     "system",
     "generic",

@@ -583,3 +583,42 @@ external paging or remediation. Digest nodes represent deterministic summaries.
 The projection remains backend-only and frontend-agnostic, and must not expose
 hidden reasoning, raw prompts, raw headers, provider payloads, secrets,
 external delivery metadata, or domain-specific alert logic.
+
+## Scheduler Projection
+
+Temporal scheduler telemetry projects local time coordination into the Visual
+Brain Projection. Generic event types include:
+
+- `schedule_created`
+- `schedule_paused`
+- `schedule_resumed`
+- `schedule_disabled`
+- `schedule_due_item_created`
+- `schedule_due_item_processed`
+- `reminder_created`
+- `reminder_acknowledged`
+- `reminder_snoozed`
+- `reminder_dismissed`
+- `scheduler_tick_started`
+- `scheduler_tick_completed`
+- `schedule_missed_detected`
+- `scheduler_report_created`
+
+Generic visual node types include:
+
+- `schedule`
+- `due_item`
+- `reminder`
+- `scheduler_tick`
+- `schedule_policy`
+- `scheduler_report`
+
+The generic scheduler path is:
+
+`schedule -> tick -> due item -> notification / action proposal / operator item`
+
+Missed schedules project with higher intensity than ordinary due items.
+Scheduler nodes represent local scheduler records, not target execution.
+The projection remains backend-only and frontend-agnostic, and must not expose
+external calendar objects, external delivery metadata, secrets, or
+domain-specific scheduling logic.

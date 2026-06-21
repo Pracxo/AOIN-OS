@@ -2934,3 +2934,47 @@ CLI examples:
 ```
 
 See `docs/adr/0059-run-supervision-cancellation-compensation.md`.
+
+## Temporal Scheduler, Reminder Queue, and Local Tick
+
+AION v0.1 scheduler is local and tick-driven. It does not start background
+workers or execute scheduled target actions.
+
+The Temporal Scheduler stores generic schedules, recurrence rules, due items,
+reminders, tick runs, schedule policies, and scheduler reports. A tick may
+create scheduler-owned due items, local reminders, local notifications,
+operator items, or action proposals when both the schedule and tick request
+explicitly allow it. It must not run commands, workflows, backups, release
+gates, freeze gates, security checks, resilience tests, external calendars, or
+external reminders.
+
+Scheduler endpoints:
+
+- `POST /brain/scheduler/schedules`
+- `GET /brain/scheduler/schedules/{schedule_id}`
+- `GET /brain/scheduler/schedules`
+- `POST /brain/scheduler/schedules/{schedule_id}/pause`
+- `POST /brain/scheduler/schedules/{schedule_id}/resume`
+- `POST /brain/scheduler/schedules/{schedule_id}/disable`
+- `DELETE /brain/scheduler/schedules/{schedule_id}`
+- `GET /brain/scheduler/due-items`
+- `POST /brain/scheduler/reminders`
+- `GET /brain/scheduler/reminders`
+- `POST /brain/scheduler/reminders/{reminder_id}/acknowledge`
+- `POST /brain/scheduler/reminders/{reminder_id}/snooze`
+- `POST /brain/scheduler/reminders/{reminder_id}/dismiss`
+- `POST /brain/scheduler/tick`
+- `GET /brain/scheduler/tick-runs/{tick_run_id}`
+- `POST /brain/scheduler/policies`
+- `GET /brain/scheduler/policies`
+- `POST /brain/scheduler/report`
+
+CLI examples:
+
+```bash
+./scripts/aionctl.sh scheduler tick --dry-run
+./scripts/aionctl.sh scheduler reminders list
+./scripts/aionctl.sh scheduler report
+```
+
+See `docs/adr/0061-temporal-scheduler-local-tick.md`.

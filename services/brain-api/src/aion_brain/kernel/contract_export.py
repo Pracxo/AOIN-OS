@@ -192,6 +192,7 @@ from aion_brain.contracts.release_package import (
     ReleasePackageValidation,
     SBOMPlaceholder,
 )
+from aion_brain.contracts.reminders import ReminderCreateRequest, ReminderRecord
 from aion_brain.contracts.replay import ReplayRequest
 from aion_brain.contracts.retrieval import RetrievalRequest
 from aion_brain.contracts.risk import RiskAssessment, RiskAssessmentRequest
@@ -215,6 +216,16 @@ from aion_brain.contracts.scenarios import (
     ScenarioRunRequest,
     ScenarioStep,
     ScenarioStepRun,
+)
+from aion_brain.contracts.scheduler import (
+    RecurrenceRule,
+    ScheduleCreateRequest,
+    ScheduleDueItem,
+    SchedulePolicy,
+    ScheduleRecord,
+    SchedulerReport,
+    SchedulerTickRequest,
+    SchedulerTickRun,
 )
 from aion_brain.contracts.skills import SkillRecord
 from aion_brain.contracts.tasks import CognitiveTask
@@ -347,6 +358,16 @@ CORE_CONTRACTS: tuple[type[BaseModel], ...] = (
     NotificationDigest,
     NotificationQuery,
     AlertQuery,
+    RecurrenceRule,
+    ScheduleRecord,
+    ScheduleCreateRequest,
+    ScheduleDueItem,
+    ReminderRecord,
+    ReminderCreateRequest,
+    SchedulerTickRequest,
+    SchedulerTickRun,
+    SchedulePolicy,
+    SchedulerReport,
     ModelBudgetRecord,
     ModelUsageRecord,
     ModelProviderHealth,
