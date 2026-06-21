@@ -175,6 +175,74 @@ class Settings(BaseSettings):
             "registry_max_resources_per_rebuild",
         ),
     )
+    lifecycle_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_LIFECYCLE_ENABLED", "lifecycle_enabled"),
+    )
+    retention_policy_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_RETENTION_POLICY_ENABLED",
+            "retention_policy_enabled",
+        ),
+    )
+    archive_planner_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_ARCHIVE_PLANNER_ENABLED", "archive_planner_enabled"),
+    )
+    redaction_planner_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_REDACTION_PLANNER_ENABLED",
+            "redaction_planner_enabled",
+        ),
+    )
+    purge_preview_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_PURGE_PREVIEW_ENABLED", "purge_preview_enabled"),
+    )
+    lifecycle_controlled_actions_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_LIFECYCLE_CONTROLLED_ACTIONS_ENABLED",
+            "lifecycle_controlled_actions_enabled",
+        ),
+    )
+    lifecycle_hard_delete_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_LIFECYCLE_HARD_DELETE_ENABLED",
+            "lifecycle_hard_delete_enabled",
+        ),
+    )
+    lifecycle_default_retention_days: int = Field(
+        default=365,
+        validation_alias=AliasChoices(
+            "AION_LIFECYCLE_DEFAULT_RETENTION_DAYS",
+            "lifecycle_default_retention_days",
+        ),
+    )
+    lifecycle_require_backup_before_archive: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_LIFECYCLE_REQUIRE_BACKUP_BEFORE_ARCHIVE",
+            "lifecycle_require_backup_before_archive",
+        ),
+    )
+    lifecycle_create_notifications_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_LIFECYCLE_CREATE_NOTIFICATIONS_DEFAULT",
+            "lifecycle_create_notifications_default",
+        ),
+    )
+    lifecycle_create_incident_signals_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_LIFECYCLE_CREATE_INCIDENT_SIGNALS_DEFAULT",
+            "lifecycle_create_incident_signals_default",
+        ),
+    )
     run_supervision_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices(

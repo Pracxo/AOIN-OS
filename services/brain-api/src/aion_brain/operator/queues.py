@@ -239,6 +239,15 @@ _QUEUE_SPECS: tuple[tuple[OperatorQueueType, str, str, tuple[str, ...]], ...] = 
         ("list_orphaned_resources",),
     ),
     ("registry_rebuilds", "Registry Rebuild Runs", "registry_rebuilder", ("list_runs",)),
+    ("archive_candidates", "Archive Candidates", "archive_planner", ("list_candidates",)),
+    (
+        "redaction_candidates",
+        "Redaction Candidates",
+        "redaction_planner",
+        ("list_candidates",),
+    ),
+    ("purge_previews", "Purge Previews", "purge_preview_service", ("list_previews",)),
+    ("lifecycle_reviews", "Lifecycle Reviews", "lifecycle_review_service", ("list_reviews",)),
 )
 
 _RUNNING_STATUSES = {"running", "processing", "sending", "in_progress", "active"}
@@ -255,7 +264,10 @@ _PENDING_STATUSES = {
 _OPEN_AS_PENDING_QUEUE_TYPES: set[OperatorQueueType] = {
     "broken_references",
     "incidents",
+    "lifecycle_reviews",
     "orphaned_resources",
+    "purge_previews",
+    "redaction_candidates",
 }
 _BLOCKED_STATUSES = {"blocked", "blocked_by_policy", "blocked_by_autonomy", "dead_lettered"}
 _FAILED_STATUSES = {"failed", "error", "critical"}

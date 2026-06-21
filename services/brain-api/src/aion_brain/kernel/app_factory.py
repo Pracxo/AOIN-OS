@@ -39,6 +39,7 @@ from aion_brain.api.kernel import api_router as api_support_router
 from aion_brain.api.kernel import router as kernel_router
 from aion_brain.api.learning import router as learning_router
 from aion_brain.api.learning_synthesis import router as learning_synthesis_router
+from aion_brain.api.lifecycle import router as lifecycle_router
 from aion_brain.api.mcp import router as mcp_router
 from aion_brain.api.memory import router as memory_router
 from aion_brain.api.memory_governance import router as memory_governance_router
@@ -132,6 +133,7 @@ ROUTERS = (
     notifications_router,
     incidents_router,
     resource_registry_router,
+    lifecycle_router,
     prompts_router,
     module_developer_router,
     retrieval_router,

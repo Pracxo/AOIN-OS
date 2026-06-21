@@ -455,3 +455,23 @@ rebuild commands default to dry-run. Commands do not repair source records,
 mutate source lifecycle state, hard-delete source records, call external
 services, expose hidden reasoning, print raw prompts, or add domain-specific
 resource behavior.
+
+## Data Lifecycle Commands
+
+- `aionctl lifecycle seed-defaults`
+- `aionctl lifecycle policies`
+- `aionctl lifecycle create-policy`
+- `aionctl lifecycle evaluate`
+- `aionctl lifecycle classifications`
+- `aionctl lifecycle archive-candidates`
+- `aionctl lifecycle redaction-candidates`
+- `aionctl lifecycle purge-preview`
+- `aionctl lifecycle reviews`
+- `aionctl lifecycle report`
+
+Lifecycle commands call the SDK and public Brain APIs only. Evaluation defaults
+to `dry_run`. Commands create policies, advisory classifications, candidates,
+previews, reviews, and reports. They do not mutate source records, execute
+archive, execute redaction, purge records, call object storage, call external
+services, expose hidden reasoning, print raw prompts, or add domain-specific
+retention behavior.

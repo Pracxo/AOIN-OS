@@ -82,6 +82,9 @@ class ActionCenterService:
         generated.extend(self._scheduler_reminder_items(scope))
         generated.extend(self._scheduler_failed_tick_items(scope))
         generated.extend(self._high_critical_incident_items(scope))
+        generated.extend(self._critical_redaction_candidate_items(scope))
+        generated.extend(self._blocked_purge_preview_items(scope))
+        generated.extend(self._overdue_lifecycle_review_items(scope))
         stored: list[OperatorActionItem] = []
         for item in generated[:limit]:
             saved = self._repository.save_action_item(item)
@@ -188,6 +191,84 @@ class ActionCenterService:
                     "limitation_key": getattr(item, "limitation_key", None),
                     "status": getattr(item, "status", "active"),
                 },
+            )
+            for item in items
+        ]
+
+    def _critical_redaction_candidate_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("redaction_planner")
+        list_candidates = getattr(source, "list_candidates", None)
+        if not callable(list_candidates):
+            return []
+        try:
+            items = list_candidates(scope, severity="critical")
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="redaction_candidate",
+                source_id=_id_for(item, "redaction_candidate_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="lifecycle",
+                severity="critical",
+                title="Critical redaction candidate requires review.",
+                description="A lifecycle redaction candidate is marked critical.",
+                recommended_action="review_lifecycle_redaction_candidate",
+                runbook_ref="docs/resource-registry.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={"status": getattr(item, "status", "proposed")},
+            )
+            for item in items
+        ]
+
+    def _blocked_purge_preview_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("purge_preview_service")
+        list_previews = getattr(source, "list_previews", None)
+        if not callable(list_previews):
+            return []
+        try:
+            items = list_previews(scope, status="blocked")
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="purge_preview",
+                source_id=_id_for(item, "purge_preview_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="lifecycle",
+                severity="high",
+                title="Purge preview has blockers.",
+                description="A lifecycle purge preview is blocked and requires inspection.",
+                recommended_action="inspect_purge_preview_blockers",
+                runbook_ref="docs/resource-registry.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={"blocked_count": getattr(item, "blocked_count", 0)},
+            )
+            for item in items
+        ]
+
+    def _overdue_lifecycle_review_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("lifecycle_review_service")
+        list_reviews = getattr(source, "list_reviews", None)
+        if not callable(list_reviews):
+            return []
+        try:
+            items = list_reviews(scope, decision="manual_review")
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="lifecycle_review",
+                source_id=_id_for(item, "lifecycle_review_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="lifecycle",
+                severity="medium",
+                title="Lifecycle review requires operator attention.",
+                description="A lifecycle review record is waiting for manual review.",
+                recommended_action="review_lifecycle_record",
+                runbook_ref="docs/resource-registry.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={"candidate_type": getattr(item, "candidate_type", "generic")},
             )
             for item in items
         ]

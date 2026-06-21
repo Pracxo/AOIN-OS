@@ -67,3 +67,4 @@ Every architecture-changing Codex task must add or update an ADR.
 - [0061: Temporal Scheduler, Reminder Queue, Due Item Ledger, and Local Tick Orchestrator](0061-temporal-scheduler-local-tick.md) - Defines local tick-driven scheduler records without background execution.
 - [0062: Incident Correlation, Root Cause Candidates, and Recovery Review](0062-incident-correlation-root-cause-review.md) - Defines local incident grouping, candidates, and review boundaries.
 - [0063: Global Resource Registry and Link Integrity](0063-global-resource-registry-link-integrity.md) - Defines the registry index, resource URI spine, and non-repairing integrity checks.
+- [0064: Data Lifecycle Retention and Archive Preview](0064-data-lifecycle-retention-archive-preview.md) - Defines advisory retention classification, candidates, previews, and reports without source mutation.

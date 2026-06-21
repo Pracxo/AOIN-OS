@@ -658,3 +658,40 @@ truth. Recovery review nodes represent local review artifacts, not executed
 remediation. The projection remains backend-only and frontend-agnostic, and
 must not expose external incident-system payloads, raw headers, secrets, source
 internals, or domain-specific incident logic.
+
+## Lifecycle Projection
+
+Data lifecycle telemetry projects retention and review activity into the Visual
+Brain Projection. Generic event types include:
+
+- `lifecycle_policy_created`
+- `lifecycle_evaluation_started`
+- `lifecycle_evaluation_completed`
+- `resource_lifecycle_classified`
+- `archive_candidate_created`
+- `archive_candidate_converted`
+- `redaction_candidate_created`
+- `redaction_candidate_converted`
+- `purge_preview_created`
+- `lifecycle_review_recorded`
+- `lifecycle_report_created`
+
+Generic visual node types include:
+
+- `lifecycle`
+- `retention_classification`
+- `archive_candidate`
+- `redaction_candidate`
+- `purge_preview`
+- `lifecycle_review`
+- `lifecycle_report`
+
+The generic projection path is:
+
+`resource -> classification -> archive / redaction / purge preview -> review -> report`
+
+Archive and redaction nodes represent advisory candidates, not executed
+actions. Purge preview nodes represent blocked or warning impact previews, not
+deletion. Lifecycle projection remains backend-only and frontend-agnostic, and
+must not expose raw headers, hidden reasoning, raw prompts, secrets,
+source-system internals, or domain-specific retention logic.

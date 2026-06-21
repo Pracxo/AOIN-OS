@@ -97,6 +97,15 @@ from aion_brain.contracts.instructions import (
 )
 from aion_brain.contracts.intent import IntentFrame
 from aion_brain.contracts.kernel import ContractExport, KernelStatus
+from aion_brain.contracts.lifecycle import (
+    ArchiveCandidate,
+    LifecycleEvaluationRequest,
+    LifecycleEvaluationRun,
+    LifecycleReport,
+    LifecycleReviewRecord,
+    PurgePreview,
+    RedactionCandidate,
+)
 from aion_brain.contracts.mcp import (
     MCPAdapterStatus,
     MCPCapabilityMapping,
@@ -221,6 +230,11 @@ from aion_brain.contracts.resource_registry import (
     ResourceIndexUpsertRequest,
     ResourceRegistryQuery,
     ResourceRegistryQueryResult,
+)
+from aion_brain.contracts.retention import (
+    LifecyclePolicy,
+    LifecyclePolicyCreateRequest,
+    RetentionClassification,
 )
 from aion_brain.contracts.retrieval import RetrievalRequest
 from aion_brain.contracts.risk import RiskAssessment, RiskAssessmentRequest
@@ -418,6 +432,16 @@ CORE_CONTRACTS: tuple[type[BaseModel], ...] = (
     RegistrySnapshot,
     ResourceRegistryQuery,
     ResourceRegistryQueryResult,
+    LifecyclePolicy,
+    LifecyclePolicyCreateRequest,
+    RetentionClassification,
+    LifecycleEvaluationRequest,
+    LifecycleEvaluationRun,
+    ArchiveCandidate,
+    RedactionCandidate,
+    PurgePreview,
+    LifecycleReviewRecord,
+    LifecycleReport,
     RecurrenceRule,
     ScheduleRecord,
     ScheduleCreateRequest,

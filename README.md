@@ -3079,3 +3079,50 @@ CLI examples:
 
 See `docs/resource-registry.md` and
 `docs/adr/0063-global-resource-registry-link-integrity.md`.
+
+## Data Lifecycle Manager
+
+AION v0.1 Data Lifecycle Manager is a Brain-owned advisory layer for generic
+retention policy, lifecycle classification, archive candidates, redaction
+candidates, purge previews, lifecycle reviews, and lifecycle reports. It reads
+safe resource descriptors from the Global Resource Registry and writes
+lifecycle-owned records only.
+
+The lifecycle layer does not mutate source records, execute archive, execute
+redaction, purge records, hard-delete records, call object storage, call
+external services, or add domain-specific retention rules. Purge previews
+always return `hard_delete_allowed=false` in v0.1. Archive and redaction
+candidate conversion creates action proposals only; it does not perform the
+action.
+
+Lifecycle endpoints:
+
+- `POST /brain/lifecycle/policies`
+- `POST /brain/lifecycle/policies/seed-defaults`
+- `GET /brain/lifecycle/policies`
+- `GET /brain/lifecycle/policies/{lifecycle_policy_id}`
+- `POST /brain/lifecycle/evaluate`
+- `GET /brain/lifecycle/evaluations/{lifecycle_evaluation_id}`
+- `GET /brain/lifecycle/classifications`
+- `GET /brain/lifecycle/archive-candidates`
+- `POST /brain/lifecycle/archive-candidates/{archive_candidate_id}/dismiss`
+- `POST /brain/lifecycle/archive-candidates/{archive_candidate_id}/convert-to-action-proposal`
+- `GET /brain/lifecycle/redaction-candidates`
+- `POST /brain/lifecycle/redaction-candidates/{redaction_candidate_id}/dismiss`
+- `POST /brain/lifecycle/redaction-candidates/{redaction_candidate_id}/convert-to-action-proposal`
+- `POST /brain/lifecycle/purge-preview`
+- `GET /brain/lifecycle/purge-previews`
+- `POST /brain/lifecycle/reviews`
+- `GET /brain/lifecycle/reviews`
+- `POST /brain/lifecycle/report`
+
+CLI examples:
+
+```bash
+./scripts/aionctl.sh lifecycle seed-defaults
+./scripts/aionctl.sh lifecycle evaluate
+./scripts/aionctl.sh lifecycle purge-preview --resource-uri aion://generic/res-1
+./scripts/aionctl.sh lifecycle report
+```
+
+See `docs/adr/0064-data-lifecycle-retention-archive-preview.md`.

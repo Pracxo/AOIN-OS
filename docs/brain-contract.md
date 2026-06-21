@@ -1291,3 +1291,32 @@ link metadata.
 Registry contracts must not expose raw headers, hidden reasoning, raw prompts,
 provider payloads, secrets, SQLAlchemy rows, source-system internals, or
 domain-specific resource logic.
+
+## Data Lifecycle Contracts
+
+AION Brain owns these lifecycle contracts:
+
+- `LifecyclePolicy`
+- `LifecyclePolicyCreateRequest`
+- `RetentionClassification`
+- `LifecycleEvaluationRequest`
+- `LifecycleEvaluationRun`
+- `ArchiveCandidate`
+- `RedactionCandidate`
+- `PurgePreview`
+- `LifecycleReviewRecord`
+- `LifecycleReport`
+
+Lifecycle contracts are advisory and generic. `LifecyclePolicy` describes
+retention class, timing, backup, approval, and action-on-match metadata.
+`RetentionClassification` records how a registry resource is classified for
+review. `LifecycleEvaluationRun` records deterministic evaluation output and
+explicit created counts. `ArchiveCandidate` and `RedactionCandidate` are review
+candidates only. `PurgePreview` is an impact report and must keep
+`hard_delete_allowed=false`. `LifecycleReviewRecord` records manual review
+decisions. `LifecycleReport` summarizes local lifecycle posture.
+
+Lifecycle contracts must not mutate source records, execute archive, execute
+redaction, execute purge, call object stores, call external services, expose
+raw headers, hidden reasoning, raw prompts, provider payloads, secrets,
+SQLAlchemy rows, source-system internals, or domain-specific retention logic.

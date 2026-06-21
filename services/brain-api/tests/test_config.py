@@ -89,6 +89,17 @@ def test_settings_defaults_match_env_example(monkeypatch) -> None:
         "AION_LEARNING_MIN_PATTERN_FREQUENCY",
         "AION_LEARNING_MIN_PATTERN_CONFIDENCE",
         "AION_LEARNING_SKILL_SUGGESTIONS_PROMOTION_ALLOWED_DEFAULT",
+        "AION_LIFECYCLE_ENABLED",
+        "AION_RETENTION_POLICY_ENABLED",
+        "AION_ARCHIVE_PLANNER_ENABLED",
+        "AION_REDACTION_PLANNER_ENABLED",
+        "AION_PURGE_PREVIEW_ENABLED",
+        "AION_LIFECYCLE_CONTROLLED_ACTIONS_ENABLED",
+        "AION_LIFECYCLE_HARD_DELETE_ENABLED",
+        "AION_LIFECYCLE_DEFAULT_RETENTION_DAYS",
+        "AION_LIFECYCLE_REQUIRE_BACKUP_BEFORE_ARCHIVE",
+        "AION_LIFECYCLE_CREATE_NOTIFICATIONS_DEFAULT",
+        "AION_LIFECYCLE_CREATE_INCIDENT_SIGNALS_DEFAULT",
         "AION_NOTIFICATIONS_ENABLED",
         "AION_ALERT_ROUTER_ENABLED",
         "AION_NOTIFICATION_SUBSCRIPTIONS_ENABLED",
@@ -194,6 +205,17 @@ def test_settings_defaults_match_env_example(monkeypatch) -> None:
     assert settings.memory_compaction_requires_approval is False
     assert settings.memory_forgetting_requires_approval is True
     assert settings.memory_retention_sweep_limit_default == 1000
+    assert settings.lifecycle_enabled is True
+    assert settings.retention_policy_enabled is True
+    assert settings.archive_planner_enabled is True
+    assert settings.redaction_planner_enabled is True
+    assert settings.purge_preview_enabled is True
+    assert settings.lifecycle_controlled_actions_enabled is False
+    assert settings.lifecycle_hard_delete_enabled is False
+    assert settings.lifecycle_default_retention_days == 365
+    assert settings.lifecycle_require_backup_before_archive is True
+    assert settings.lifecycle_create_notifications_default is False
+    assert settings.lifecycle_create_incident_signals_default is False
     assert settings.notifications_enabled is True
     assert settings.alert_router_enabled is True
     assert settings.notification_subscriptions_enabled is True
@@ -281,6 +303,17 @@ def test_settings_read_environment_variables(monkeypatch) -> None:
         "AION_LEARNING_SKILL_SUGGESTIONS_PROMOTION_ALLOWED_DEFAULT",
         "true",
     )
+    monkeypatch.setenv("AION_LIFECYCLE_ENABLED", "false")
+    monkeypatch.setenv("AION_RETENTION_POLICY_ENABLED", "false")
+    monkeypatch.setenv("AION_ARCHIVE_PLANNER_ENABLED", "false")
+    monkeypatch.setenv("AION_REDACTION_PLANNER_ENABLED", "false")
+    monkeypatch.setenv("AION_PURGE_PREVIEW_ENABLED", "false")
+    monkeypatch.setenv("AION_LIFECYCLE_CONTROLLED_ACTIONS_ENABLED", "true")
+    monkeypatch.setenv("AION_LIFECYCLE_HARD_DELETE_ENABLED", "false")
+    monkeypatch.setenv("AION_LIFECYCLE_DEFAULT_RETENTION_DAYS", "180")
+    monkeypatch.setenv("AION_LIFECYCLE_REQUIRE_BACKUP_BEFORE_ARCHIVE", "false")
+    monkeypatch.setenv("AION_LIFECYCLE_CREATE_NOTIFICATIONS_DEFAULT", "true")
+    monkeypatch.setenv("AION_LIFECYCLE_CREATE_INCIDENT_SIGNALS_DEFAULT", "true")
     monkeypatch.setenv("AION_NOTIFICATIONS_ENABLED", "false")
     monkeypatch.setenv("AION_ALERT_ROUTER_ENABLED", "false")
     monkeypatch.setenv("AION_NOTIFICATION_SUBSCRIPTIONS_ENABLED", "false")
@@ -364,6 +397,17 @@ def test_settings_read_environment_variables(monkeypatch) -> None:
     assert settings.learning_min_pattern_frequency == 5
     assert settings.learning_min_pattern_confidence == 0.85
     assert settings.learning_skill_suggestions_promotion_allowed_default is True
+    assert settings.lifecycle_enabled is False
+    assert settings.retention_policy_enabled is False
+    assert settings.archive_planner_enabled is False
+    assert settings.redaction_planner_enabled is False
+    assert settings.purge_preview_enabled is False
+    assert settings.lifecycle_controlled_actions_enabled is True
+    assert settings.lifecycle_hard_delete_enabled is False
+    assert settings.lifecycle_default_retention_days == 180
+    assert settings.lifecycle_require_backup_before_archive is False
+    assert settings.lifecycle_create_notifications_default is True
+    assert settings.lifecycle_create_incident_signals_default is True
     assert settings.notifications_enabled is False
     assert settings.alert_router_enabled is False
     assert settings.notification_subscriptions_enabled is False

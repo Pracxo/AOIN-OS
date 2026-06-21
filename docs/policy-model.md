@@ -1302,3 +1302,38 @@ source acknowledgement, source deletion, external calls, command execution,
 workflow execution, approval bypass, raw prompt disclosure, hidden reasoning
 disclosure, raw header export, secret export, or domain-specific resource
 logic. Unknown registry actions fail closed.
+
+## Data Lifecycle Policy
+
+Generic lifecycle actions:
+
+- `lifecycle.policy.create`
+- `lifecycle.policy.read`
+- `lifecycle.policy.update`
+- `lifecycle.classify`
+- `lifecycle.classification.read`
+- `lifecycle.evaluate`
+- `lifecycle.archive_candidate.create`
+- `lifecycle.archive_candidate.read`
+- `lifecycle.archive_candidate.update`
+- `lifecycle.redaction_candidate.create`
+- `lifecycle.redaction_candidate.read`
+- `lifecycle.redaction_candidate.update`
+- `lifecycle.purge_preview.create`
+- `lifecycle.purge_preview.read`
+- `lifecycle.review.create`
+- `lifecycle.review.read`
+- `lifecycle.report.create`
+- `lifecycle.report.read`
+
+Lifecycle reads are scope-gated. Lifecycle writes require scoped actors,
+operators, admins, or internal Brain services allowed by policy. Policy
+constraints require advisory-only behavior, source records not mutated, and
+hard delete disabled.
+
+Lifecycle policy does not authorize source record mutation, automatic archive,
+automatic redaction, automatic purge, hard delete, external archive storage,
+external service calls, command execution, workflow execution, approval bypass,
+raw prompt disclosure, hidden reasoning disclosure, raw header export, secret
+export, or domain-specific retention logic. Unknown lifecycle actions fail
+closed.

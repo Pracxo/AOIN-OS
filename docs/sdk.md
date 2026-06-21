@@ -592,3 +592,30 @@ clients, frontend code, shell tools, or remediation systems.
 The SDK calls public Brain APIs only. It does not import `aion_brain`,
 database clients, search clients, graph clients, source-system internals,
 frontend code, shell tools, or repair systems.
+
+## LifecycleResource
+
+`client.lifecycle` supports:
+
+- `create_policy(payload)`
+- `seed_default_policies(scope, dry_run=True)`
+- `list_policies(scope, status=None, policy_type=None, retention_class=None, limit=100)`
+- `get_policy(lifecycle_policy_id, scope)`
+- `evaluate(payload)`
+- `get_evaluation(lifecycle_evaluation_id, scope)`
+- `list_classifications(scope, retention_class=None, lifecycle_state=None, limit=100)`
+- `list_archive_candidates(scope, status=None, severity=None, limit=100)`
+- `dismiss_archive_candidate(archive_candidate_id, reason, actor_id=None)`
+- `convert_archive_candidate(archive_candidate_id, reason, actor_id=None, approval_present=False)`
+- `list_redaction_candidates(scope, status=None, severity=None, limit=100)`
+- `dismiss_redaction_candidate(redaction_candidate_id, reason, actor_id=None)`
+- `convert_redaction_candidate(redaction_candidate_id, reason, actor_id=None, approval_present=False)`
+- `create_purge_preview(resource_uris, scope, trace_id=None, created_by=None)`
+- `list_purge_previews(scope, status=None, limit=100)`
+- `review_candidate(payload)`
+- `list_reviews(scope, candidate_type=None, decision=None, limit=100)`
+- `report(scope, trace_id=None, created_by=None)`
+
+The SDK calls public Brain APIs only. It does not import `aion_brain`,
+database clients, object storage clients, source-system internals, frontend
+code, shell tools, or external archive services.

@@ -170,6 +170,18 @@ from aion_brain.learning_synthesis.regression_suggestions import RegressionSugge
 from aion_brain.learning_synthesis.repository import LearningSynthesisRepository
 from aion_brain.learning_synthesis.skill_suggestions import SkillSuggestionService
 from aion_brain.learning_synthesis.synthesizer import LearningSynthesizer
+from aion_brain.lifecycle import (
+    ArchivePlanner,
+    LifecycleEvaluator,
+    LifecyclePolicyService,
+    LifecycleQueryService,
+    LifecycleReportService,
+    LifecycleRepository,
+    LifecycleReviewService,
+    PurgePreviewService,
+    RedactionPlanner,
+    RetentionClassifier,
+)
 from aion_brain.logging import configure_logging
 from aion_brain.mcp.compat import MCPCompat
 from aion_brain.mcp.repository import MCPRepository
@@ -2517,6 +2529,67 @@ class KernelContainer:
             telemetry_service=self.telemetry_service,
             settings=self.settings,
         )
+        self.lifecycle_repository = LifecycleRepository(self.settings.database_url)
+        self.lifecycle_policy_service = LifecyclePolicyService(
+            self.lifecycle_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.retention_classifier = RetentionClassifier(
+            self.lifecycle_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.archive_planner = ArchivePlanner(
+            self.lifecycle_repository,
+            self.policy_adapter,
+            action_proposal_service=self.action_proposal_service,
+            settings=self.settings,
+            telemetry_service=self.telemetry_service,
+        )
+        self.redaction_planner = RedactionPlanner(
+            self.lifecycle_repository,
+            self.policy_adapter,
+            action_proposal_service=self.action_proposal_service,
+            telemetry_service=self.telemetry_service,
+        )
+        self.purge_preview_service = PurgePreviewService(
+            self.lifecycle_repository,
+            self.policy_adapter,
+            registry_repository=self.resource_registry_repository,
+            settings=self.settings,
+            telemetry_service=self.telemetry_service,
+        )
+        self.lifecycle_review_service = LifecycleReviewService(
+            self.lifecycle_repository,
+            self.policy_adapter,
+            archive_planner=self.archive_planner,
+            redaction_planner=self.redaction_planner,
+            telemetry_service=self.telemetry_service,
+        )
+        self.lifecycle_report_service = LifecycleReportService(
+            self.lifecycle_repository,
+            self.policy_adapter,
+            registry_repository=self.resource_registry_repository,
+            telemetry_service=self.telemetry_service,
+        )
+        self.lifecycle_query_service = LifecycleQueryService(self.lifecycle_repository)
+        self.lifecycle_evaluator = LifecycleEvaluator(
+            self.lifecycle_repository,
+            self.policy_adapter,
+            registry_repository=self.resource_registry_repository,
+            policy_service=self.lifecycle_policy_service,
+            classifier=self.retention_classifier,
+            archive_planner=self.archive_planner,
+            redaction_planner=self.redaction_planner,
+            purge_preview_service=self.purge_preview_service,
+            notification_router=self.notification_router,
+            incident_signal_service=self.incident_signal_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
         self.operator_repository = OperatorRepository(self.settings.database_url)
         self.scheduler_tick_orchestrator._operator_repository = self.operator_repository
         self.operator_status_card_builder = StatusCardBuilder(
@@ -2552,6 +2625,7 @@ class KernelContainer:
             scheduler_service=self.scheduler_query_service,
             incident_service=self.incident_service,
             registry_service=self.registry_query_service,
+            lifecycle_service=self.lifecycle_report_service,
         )
         self.operator_queue_summary_builder = QueueSummaryBuilder(
             approval_service=self.approval_repository,
@@ -2610,6 +2684,10 @@ class KernelContainer:
             recovery_review_service=self.recovery_review_service,
             reference_validator=self.reference_validator,
             registry_rebuilder=self.registry_rebuilder,
+            archive_planner=self.archive_planner,
+            redaction_planner=self.redaction_planner,
+            purge_preview_service=self.purge_preview_service,
+            lifecycle_review_service=self.lifecycle_review_service,
         )
         self.operator_action_center_service = ActionCenterService(
             self.operator_repository,
@@ -2656,6 +2734,10 @@ class KernelContainer:
             notification_digest_service=self.notification_digest_service,
             scheduler_service=self.scheduler_query_service,
             incident_service=self.incident_service,
+            archive_planner=self.archive_planner,
+            redaction_planner=self.redaction_planner,
+            purge_preview_service=self.purge_preview_service,
+            lifecycle_review_service=self.lifecycle_review_service,
         )
         self.operator_readiness_aggregator = ReadinessAggregator(
             self.operator_status_card_builder,
@@ -3591,6 +3673,16 @@ class KernelContainer:
                 "deterministic",
             ),
             ("registry_rebuilder", self.registry_rebuilder, "service", "deterministic"),
+            ("lifecycle_repository", self.lifecycle_repository, "repository", "postgres"),
+            ("lifecycle_policy_service", self.lifecycle_policy_service, "service", "local"),
+            ("retention_classifier", self.retention_classifier, "service", "deterministic"),
+            ("lifecycle_evaluator", self.lifecycle_evaluator, "service", "deterministic"),
+            ("archive_planner", self.archive_planner, "service", "local"),
+            ("redaction_planner", self.redaction_planner, "service", "local"),
+            ("purge_preview_service", self.purge_preview_service, "service", "local"),
+            ("lifecycle_review_service", self.lifecycle_review_service, "service", "local"),
+            ("lifecycle_report_service", self.lifecycle_report_service, "service", "local"),
+            ("lifecycle_query_service", self.lifecycle_query_service, "service", "local"),
             ("operator_repository", self.operator_repository, "repository", "postgres"),
             (
                 "operator_status_card_builder",

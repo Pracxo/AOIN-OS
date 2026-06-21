@@ -229,6 +229,15 @@ from aion_brain.contracts.learning_synthesis import (
     RegressionCandidateSuggestion,
     SkillCandidateSuggestion,
 )
+from aion_brain.contracts.lifecycle import (
+    ArchiveCandidate,
+    LifecycleEvaluationRequest,
+    LifecycleEvaluationRun,
+    LifecycleReport,
+    LifecycleReviewRecord,
+    PurgePreview,
+    RedactionCandidate,
+)
 from aion_brain.contracts.mcp import (
     MCPAdapterStatus,
     MCPCapabilityMapping,
@@ -345,6 +354,11 @@ from aion_brain.contracts.resource_registry import (
     ResourceIndexUpsertRequest,
     ResourceRegistryQuery,
     ResourceRegistryQueryResult,
+)
+from aion_brain.contracts.retention import (
+    LifecyclePolicy,
+    LifecyclePolicyCreateRequest,
+    RetentionClassification,
 )
 from aion_brain.contracts.retrieval import (
     ContextBundle,
@@ -644,6 +658,16 @@ __all__ = [
     "IncidentRecord",
     "IncidentSignal",
     "IncidentSignalCreateRequest",
+    "ArchiveCandidate",
+    "LifecycleEvaluationRequest",
+    "LifecycleEvaluationRun",
+    "LifecyclePolicy",
+    "LifecyclePolicyCreateRequest",
+    "LifecycleReport",
+    "LifecycleReviewRecord",
+    "PurgePreview",
+    "RedactionCandidate",
+    "RetentionClassification",
     "BrokenReference",
     "OrphanedResource",
     "ResourceDescriptor",

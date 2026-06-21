@@ -1414,3 +1414,31 @@ references, orphaned resources, and rebuild runs for review, but the registry
 does not execute repairs. Visual telemetry receives generic resource and
 integrity events so future projection layers can show the reference spine
 without coupling registry contracts to UI code.
+
+## Data Lifecycle Manager
+
+The Data Lifecycle Manager is the Brain-owned advisory layer for retention
+policy, lifecycle classification, archive candidates, redaction candidates,
+purge previews, lifecycle reviews, and lifecycle reports.
+
+The lifecycle path is:
+
+`registry resource -> retention classification -> candidate / preview -> review -> optional action proposal`
+
+Source systems remain authoritative for their records. Lifecycle evaluation
+reads safe descriptors from the Global Resource Registry, applies generic
+retention policies, and writes lifecycle-owned records only. It does not
+mutate source records, hard-delete records, execute archive, execute redaction,
+call object storage, call external services, or add domain-specific retention
+logic.
+
+Archive candidates and redaction candidates are review records. Converting one
+to an action proposal creates another review artifact only; it does not execute
+archive or redaction. Purge previews are impact reports and always keep
+`hard_delete_allowed=false` in v0.1. Backup verification is required before an
+archive candidate can be converted for proposal review.
+
+Lifecycle records feed operator cards, queues, action center items, visual
+telemetry, audit, provenance, SDK, and CLI surfaces through AION contracts. No
+surface may expose SQLAlchemy rows, raw headers, hidden reasoning, raw prompts,
+secrets, source-system internals, or domain-specific lifecycle behavior.

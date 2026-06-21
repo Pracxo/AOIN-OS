@@ -70,6 +70,7 @@ class AIONClient:
         self.scheduler = _import_resource("scheduler").SchedulerResource(self)
         self.incidents = _import_resource("incidents").IncidentsResource(self)
         self.registry = _import_resource("registry").RegistryResource(self)
+        self.lifecycle = _import_resource("lifecycle").LifecycleResource(self)
         self.runtime_config = cast(
             "ConfigResource",
             _import_resource("config").ConfigResource(self),

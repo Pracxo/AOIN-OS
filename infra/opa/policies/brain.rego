@@ -501,6 +501,24 @@ allowed_actions := {
 	"visual.timeline.read",
 	"observability.read",
 	"observability.event.create",
+	"lifecycle.policy.create",
+	"lifecycle.policy.read",
+	"lifecycle.policy.update",
+	"lifecycle.classify",
+	"lifecycle.classification.read",
+	"lifecycle.evaluate",
+	"lifecycle.archive_candidate.create",
+	"lifecycle.archive_candidate.read",
+	"lifecycle.archive_candidate.update",
+	"lifecycle.redaction_candidate.create",
+	"lifecycle.redaction_candidate.read",
+	"lifecycle.redaction_candidate.update",
+	"lifecycle.purge_preview.create",
+	"lifecycle.purge_preview.read",
+	"lifecycle.review.create",
+	"lifecycle.review.read",
+	"lifecycle.report.create",
+	"lifecycle.report.read",
 	"prompt.template.create",
 	"prompt.template.read",
 	"prompt.template.update",
@@ -811,6 +829,15 @@ low_allowed_actions := {
 	"visual.snapshot.read",
 	"visual.timeline.read",
 	"observability.read",
+	"lifecycle.policy.read",
+	"lifecycle.classify",
+	"lifecycle.classification.read",
+	"lifecycle.archive_candidate.read",
+	"lifecycle.redaction_candidate.read",
+	"lifecycle.purge_preview.read",
+	"lifecycle.review.read",
+	"lifecycle.report.create",
+	"lifecycle.report.read",
 	"prompt.template.read",
 	"prompt.fragment.read",
 	"prompt.packet.read",
@@ -1270,6 +1297,33 @@ decision := {
 	valid_risk
 	input.action_type == "observability.event.create"
 	observability_writer
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "lifecycle_read_allowed",
+	"constraints": ["advisory_only", "source_records_not_mutated"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	lifecycle_read_action
+	lifecycle_permission
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "lifecycle_advisory_action_allowed",
+	"constraints": ["advisory_only", "source_records_not_mutated", "hard_delete_disabled"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	lifecycle_advisory_action
+	lifecycle_permission
+	not lifecycle_hard_delete_requested
 }
 
 decision := {
@@ -2778,6 +2832,7 @@ decision := {
 	not registry_action
 	not scheduler_action
 	not incident_action
+	not lifecycle_action
 }
 
 decision := {
@@ -3378,6 +3433,90 @@ visual_or_observability_action if {
 	startswith(input.action_type, "observability.")
 }
 
+lifecycle_action if {
+	startswith(input.action_type, "lifecycle.")
+}
+
+lifecycle_read_action if {
+	input.action_type == "lifecycle.policy.read"
+}
+
+lifecycle_read_action if {
+	input.action_type == "lifecycle.classification.read"
+}
+
+lifecycle_read_action if {
+	input.action_type == "lifecycle.archive_candidate.read"
+}
+
+lifecycle_read_action if {
+	input.action_type == "lifecycle.redaction_candidate.read"
+}
+
+lifecycle_read_action if {
+	input.action_type == "lifecycle.purge_preview.read"
+}
+
+lifecycle_read_action if {
+	input.action_type == "lifecycle.review.read"
+}
+
+lifecycle_read_action if {
+	input.action_type == "lifecycle.report.read"
+}
+
+lifecycle_advisory_action if {
+	input.action_type == "lifecycle.policy.create"
+}
+
+lifecycle_advisory_action if {
+	input.action_type == "lifecycle.policy.update"
+}
+
+lifecycle_advisory_action if {
+	input.action_type == "lifecycle.classify"
+}
+
+lifecycle_advisory_action if {
+	input.action_type == "lifecycle.evaluate"
+}
+
+lifecycle_advisory_action if {
+	input.action_type == "lifecycle.archive_candidate.create"
+}
+
+lifecycle_advisory_action if {
+	input.action_type == "lifecycle.archive_candidate.update"
+}
+
+lifecycle_advisory_action if {
+	input.action_type == "lifecycle.redaction_candidate.create"
+}
+
+lifecycle_advisory_action if {
+	input.action_type == "lifecycle.redaction_candidate.update"
+}
+
+lifecycle_advisory_action if {
+	input.action_type == "lifecycle.purge_preview.create"
+}
+
+lifecycle_advisory_action if {
+	input.action_type == "lifecycle.review.create"
+}
+
+lifecycle_advisory_action if {
+	input.action_type == "lifecycle.report.create"
+}
+
+lifecycle_hard_delete_requested if {
+	input.context.hard_delete_allowed == true
+}
+
+lifecycle_hard_delete_requested if {
+	input.context.hard_delete_enabled == true
+}
+
 dialogue_action if {
 	startswith(input.action_type, "dialogue.")
 }
@@ -3789,6 +3928,28 @@ visual_snapshot_create_permission if {
 
 observability_writer if {
 	dev_owner
+}
+
+lifecycle_permission if {
+	dev_owner
+}
+
+lifecycle_permission if {
+	input.context.actor_context.permissions[_] == input.action_type
+}
+
+lifecycle_permission if {
+	input.context.permissions[_] == input.action_type
+}
+
+lifecycle_permission if {
+	input.context.actor_context.permissions[_] == "lifecycle.read"
+	lifecycle_read_action
+}
+
+lifecycle_permission if {
+	input.context.actor_context.permissions[_] == "lifecycle.write"
+	lifecycle_advisory_action
 }
 
 prompt_action if {

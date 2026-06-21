@@ -62,6 +62,16 @@ class KernelDiagnostics:
         ("reference_validator_present", "reference_validator", "high"),
         ("registry_rebuilder_present", "registry_rebuilder", "medium"),
         ("registry_snapshot_service_present", "registry_snapshot_service", "medium"),
+        ("lifecycle_repository_present", "lifecycle_repository", "high"),
+        ("lifecycle_policy_service_present", "lifecycle_policy_service", "high"),
+        ("retention_classifier_present", "retention_classifier", "high"),
+        ("lifecycle_evaluator_present", "lifecycle_evaluator", "high"),
+        ("archive_planner_present", "archive_planner", "medium"),
+        ("redaction_planner_present", "redaction_planner", "medium"),
+        ("purge_preview_service_present", "purge_preview_service", "medium"),
+        ("lifecycle_review_service_present", "lifecycle_review_service", "medium"),
+        ("lifecycle_report_service_present", "lifecycle_report_service", "medium"),
+        ("lifecycle_query_service_present", "lifecycle_query_service", "medium"),
         ("scheduler_repository_present", "scheduler_repository", "high"),
         ("scheduler_schedule_service_present", "scheduler_schedule_service", "high"),
         ("scheduler_due_item_service_present", "scheduler_due_item_service", "medium"),
@@ -332,6 +342,7 @@ class KernelDiagnostics:
         checks.extend(self._run_supervision_checks(settings))
         checks.extend(self._notification_checks(settings))
         checks.extend(self._incident_checks(settings))
+        checks.extend(self._lifecycle_checks(settings))
         checks.extend(self._scheduler_checks(settings))
         checks.extend(self._entity_checks(settings))
         checks.extend(self._situation_checks(settings))
@@ -934,6 +945,72 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Incident services are assembled.",
+            ),
+        ]
+
+    def _lifecycle_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "lifecycle_repository",
+                "lifecycle_policy_service",
+                "retention_classifier",
+                "lifecycle_evaluator",
+                "archive_planner",
+                "redaction_planner",
+                "purge_preview_service",
+                "lifecycle_review_service",
+                "lifecycle_report_service",
+                "lifecycle_query_service",
+            )
+        )
+        return [
+            self._result(
+                "lifecycle_enabled",
+                "lifecycle",
+                "passed" if bool(getattr(settings, "lifecycle_enabled", True)) else "warning",
+                "medium",
+                "Data lifecycle APIs are enabled.",
+            ),
+            self._result(
+                "retention_policy_enabled",
+                "lifecycle",
+                (
+                    "passed"
+                    if bool(getattr(settings, "retention_policy_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Retention policy management is enabled.",
+            ),
+            self._result(
+                "lifecycle_controlled_actions_disabled_by_default",
+                "lifecycle",
+                (
+                    "passed"
+                    if not bool(getattr(settings, "lifecycle_controlled_actions_enabled", False))
+                    else "warning"
+                ),
+                "critical",
+                "Lifecycle controlled actions are disabled by default.",
+            ),
+            self._result(
+                "lifecycle_hard_delete_disabled",
+                "lifecycle",
+                (
+                    "passed"
+                    if not bool(getattr(settings, "lifecycle_hard_delete_enabled", False))
+                    else "failed"
+                ),
+                "critical",
+                "Lifecycle hard delete is disabled in v0.1.",
+            ),
+            self._result(
+                "lifecycle_services_present",
+                "lifecycle",
+                "passed" if services_present else "failed",
+                "high",
+                "Lifecycle services are assembled.",
             ),
         ]
 

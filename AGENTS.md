@@ -233,3 +233,12 @@ Instructions for future Codex runs in this repository:
 - Do not add external incident-management integrations in Brain core.
 - Do not add domain-specific incident rules, runbooks, or remediation logic in
   Brain core.
+- Data lifecycle management is advisory in v0.1.
+- Lifecycle evaluation must not mutate source records.
+- Lifecycle services must not execute archive, execute redaction, purge
+  records, hard-delete records, call object storage, or call external services.
+- Purge previews must keep `hard_delete_allowed=false`.
+- Archive and redaction conversion may create action proposals only; it must
+  not perform the action.
+- Do not add domain-specific lifecycle policy, classification, retention,
+  archive, redaction, or purge logic in Brain core.
