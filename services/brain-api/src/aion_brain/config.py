@@ -963,6 +963,66 @@ class Settings(BaseSettings):
             "model_gateway_daily_budget_default",
         ),
     )
+    model_outputs_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_MODEL_OUTPUTS_ENABLED", "model_outputs_enabled"),
+    )
+    output_governance_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_OUTPUT_GOVERNANCE_ENABLED",
+            "output_governance_enabled",
+        ),
+    )
+    structured_output_validation_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_STRUCTURED_OUTPUT_VALIDATION_ENABLED",
+            "structured_output_validation_enabled",
+        ),
+    )
+    model_output_store_raw: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_MODEL_OUTPUT_STORE_RAW",
+            "model_output_store_raw",
+        ),
+    )
+    model_output_redaction_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODEL_OUTPUT_REDACTION_ENABLED",
+            "model_output_redaction_enabled",
+        ),
+    )
+    tool_intent_capture_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_TOOL_INTENT_CAPTURE_ENABLED",
+            "tool_intent_capture_enabled",
+        ),
+    )
+    tool_intent_execution_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_TOOL_INTENT_EXECUTION_ENABLED",
+            "tool_intent_execution_enabled",
+        ),
+    )
+    output_governance_require_grounding_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_OUTPUT_GOVERNANCE_REQUIRE_GROUNDING_DEFAULT",
+            "output_governance_require_grounding_default",
+        ),
+    )
+    output_governance_block_tool_intents_default: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_OUTPUT_GOVERNANCE_BLOCK_TOOL_INTENTS_DEFAULT",
+            "output_governance_block_tool_intents_default",
+        ),
+    )
     litellm_base_url: str = Field(
         default="http://litellm:4000",
         validation_alias=AliasChoices("AION_LITELLM_BASE_URL", "litellm_base_url"),

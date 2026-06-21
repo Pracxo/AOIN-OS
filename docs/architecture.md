@@ -1238,3 +1238,21 @@ Prompt governance relates to the Context Compiler and Model Gateway as follows:
 
 The compiler does not decide policy, execute tools, approve actions, expand
 autonomy, create truth, or expose hidden reasoning.
+
+## Model Output Governance
+
+Model Output Governance is the Brain-owned output boundary after Model Gateway
+completion. It receives provider-neutral output, stores a raw-output hash,
+persists redacted output, parses deterministic generic segments, validates
+structured JSON, creates local response candidates, and captures tool intents
+for review.
+
+The governance path is:
+
+`model gateway -> model output record -> segments -> validation -> response candidate/tool intent -> operator review`
+
+Raw model output is not stored by default. Tool intents are not executed in
+v0.1. Response candidates are proposals only until policy and response
+verification allow local promotion. Public APIs return only AION-owned
+contracts and never provider SDK objects, hidden reasoning, raw prompts, raw
+headers, raw secrets, or domain-specific output internals.

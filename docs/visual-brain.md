@@ -443,3 +443,37 @@ higher intensity than normal compiled packets. The projection remains
 backend-only and frontend-agnostic. It does not expose raw rendered prompts,
 hidden reasoning, provider payloads, raw secrets, or domain-specific prompt
 logic.
+
+## Model Output Governance Projection
+
+Model output governance telemetry projects provider-neutral output handling into
+the Visual Brain Projection. Generic event types include:
+
+- `model_output_received`
+- `model_output_parsed`
+- `model_output_governed`
+- `model_output_blocked`
+- `structured_output_validated`
+- `response_candidate_created`
+- `response_candidate_promoted`
+- `tool_intent_captured`
+- `tool_intent_blocked`
+
+Generic visual node types include:
+
+- `model_output`
+- `output_segment`
+- `structured_validation`
+- `response_candidate`
+- `tool_intent`
+- `output_governance`
+
+The generic projection path is:
+
+`model output -> parsed segment -> structured validation -> governance -> response candidate/tool intent`
+
+Blocked outputs and blocked tool intents should project with higher intensity
+than passing governance runs. The projection remains backend-only and
+frontend-agnostic. It does not expose raw model output, provider payloads,
+hidden reasoning, raw prompts, raw headers, raw secrets, or domain-specific
+output logic.

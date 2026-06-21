@@ -1082,3 +1082,30 @@ operator, or auditor operations. Unknown prompt actions fail closed.
 Prompt policy does not authorize hidden reasoning disclosure, raw prompt
 export, raw rendered prompt persistence, provider-specific prompt contracts,
 external model calls, or domain-specific prompt packs.
+
+## Model Output Governance Policy
+
+Generic model output actions:
+
+- `model_output.create`
+- `model_output.read`
+- `model_output.delete`
+- `model_output.parse`
+- `model_output.govern`
+- `model_output.structured_validate`
+- `model_output.response_candidate.create`
+- `model_output.response_candidate.read`
+- `model_output.response_candidate.update`
+- `model_output.tool_intent.create`
+- `model_output.tool_intent.read`
+- `model_output.tool_intent.update`
+
+Model output reads, segment reads, structured validation, response candidate
+reads, and tool-intent reads are scope-gated. Creating model output records,
+running governance, deleting records, creating or promoting response
+candidates, and creating or rejecting tool intents require owner, admin,
+operator, or internal Brain context. Unknown model output actions fail closed.
+
+Policy does not authorize raw provider payload exposure, hidden reasoning
+disclosure, raw prompt export, direct tool execution from model output, external
+observability calls, or domain-specific output rules.

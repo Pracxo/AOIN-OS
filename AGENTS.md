@@ -189,3 +189,12 @@ Instructions for future Codex runs in this repository:
   through prompt APIs, SDK helpers, CLI commands, telemetry, audit, or docs.
 - Do not add provider-specific prompt contracts or domain prompt packs to
   Brain core.
+- Model output governance must store raw output hashes and redacted output
+  contracts, not raw provider payloads by default.
+- Model output records, segments, candidates, tool intents, telemetry, SDK
+  helpers, CLI commands, and operator items must not expose hidden reasoning,
+  chain-of-thought, raw prompts, raw headers, or secrets.
+- Model-suggested tool intents must be captured for review and must not execute
+  in v0.1.
+- Response candidates from model outputs are proposals only until policy and
+  response verification allow promotion.

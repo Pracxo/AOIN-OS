@@ -113,7 +113,21 @@ from aion_brain.contracts.model_gateway import (
     PromptRedactionRecord,
 )
 from aion_brain.contracts.model_inputs import ModelInputManifest
+from aion_brain.contracts.model_outputs import (
+    ModelOutputCreateRequest,
+    ModelOutputRecord,
+    ModelOutputSegment,
+    ResponseCandidate,
+    StructuredOutputValidation,
+    ToolIntentCandidate,
+)
 from aion_brain.contracts.modules import ModuleRuntime
+from aion_brain.contracts.output_governance import (
+    ModelOutputQuery,
+    ModelOutputQueryResult,
+    OutputGovernanceRequest,
+    OutputGovernanceRun,
+)
 from aion_brain.contracts.planning import PlanGraph
 from aion_brain.contracts.preferences import (
     PreferenceCreateRequest,
@@ -251,6 +265,16 @@ CORE_CONTRACTS: tuple[type[BaseModel], ...] = (
     PromptPreviewRequest,
     PromptPreview,
     ModelInputManifest,
+    ModelOutputCreateRequest,
+    ModelOutputRecord,
+    ModelOutputSegment,
+    StructuredOutputValidation,
+    ResponseCandidate,
+    ToolIntentCandidate,
+    OutputGovernanceRequest,
+    OutputGovernanceRun,
+    ModelOutputQuery,
+    ModelOutputQueryResult,
     ModelBudgetRecord,
     ModelUsageRecord,
     ModelProviderHealth,

@@ -29,6 +29,14 @@ class KernelDiagnostics:
         ("working_memory_service_present", "working_memory_service", "medium"),
         ("context_budgeter_present", "context_budgeter", "medium"),
         ("model_gateway_service_present", "model_gateway_service", "high"),
+        ("model_output_repository_present", "model_output_repository", "high"),
+        ("output_governance_service_present", "output_governance_service", "high"),
+        ("model_output_query_service_present", "model_output_query_service", "medium"),
+        ("output_parser_present", "output_parser", "medium"),
+        ("structured_output_validator_present", "structured_output_validator", "medium"),
+        ("unsafe_output_detector_present", "unsafe_output_detector", "medium"),
+        ("response_candidate_service_present", "response_candidate_service", "medium"),
+        ("tool_intent_capture_service_present", "tool_intent_capture_service", "medium"),
         ("prompt_redactor_present", "prompt_redactor", "high"),
         ("prompt_repository_present", "prompt_repository", "high"),
         ("prompt_compiler_present", "prompt_compiler", "high"),
@@ -287,6 +295,7 @@ class KernelDiagnostics:
         checks.extend(self._belief_checks(settings))
         checks.extend(self._grounding_checks(settings))
         checks.extend(self._prompt_checks(settings))
+        checks.extend(self._model_output_checks(settings))
         checks.extend(self._entity_checks(settings))
         checks.extend(self._situation_checks(settings))
         checks.extend(self._decision_checks(settings))
@@ -415,6 +424,81 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Prompt governance services are assembled.",
+            ),
+        ]
+
+    def _model_output_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "model_output_repository",
+                "output_governance_service",
+                "model_output_query_service",
+                "output_parser",
+                "structured_output_validator",
+                "unsafe_output_detector",
+                "response_candidate_service",
+                "tool_intent_capture_service",
+            )
+        )
+        return [
+            self._result(
+                "model_outputs_enabled",
+                "model_outputs",
+                ("passed" if bool(getattr(settings, "model_outputs_enabled", True)) else "warning"),
+                "high",
+                "Model output governance intake is enabled.",
+            ),
+            self._result(
+                "output_governance_enabled",
+                "model_outputs",
+                (
+                    "passed"
+                    if bool(getattr(settings, "output_governance_enabled", True))
+                    else "warning"
+                ),
+                "high",
+                "Output governance is enabled.",
+            ),
+            self._result(
+                "structured_output_validation_enabled",
+                "model_outputs",
+                (
+                    "passed"
+                    if bool(getattr(settings, "structured_output_validation_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Structured output validation is enabled.",
+            ),
+            self._result(
+                "raw_model_output_storage_disabled",
+                "model_outputs",
+                (
+                    "passed"
+                    if not bool(getattr(settings, "model_output_store_raw", False))
+                    else "failed"
+                ),
+                "critical",
+                "Raw model output storage is disabled by default.",
+            ),
+            self._result(
+                "tool_intent_execution_disabled",
+                "model_outputs",
+                (
+                    "passed"
+                    if not bool(getattr(settings, "tool_intent_execution_enabled", False))
+                    else "failed"
+                ),
+                "critical",
+                "Tool intent execution is disabled.",
+            ),
+            self._result(
+                "model_output_services_present",
+                "model_outputs",
+                "passed" if services_present else "failed",
+                "high",
+                "Model output governance services are assembled.",
             ),
         ]
 

@@ -67,6 +67,9 @@ class ActionCenterService:
         generated.extend(self._failed_explanation_items(scope))
         generated.extend(self._instruction_conflict_items(scope))
         generated.extend(self._preference_candidate_items(scope))
+        generated.extend(self._blocked_model_output_items(scope))
+        generated.extend(self._response_candidate_items(scope))
+        generated.extend(self._tool_intent_items(scope))
         stored: list[OperatorActionItem] = []
         for item in generated[:limit]:
             saved = self._repository.save_action_item(item)
@@ -375,6 +378,96 @@ class ActionCenterService:
                 metadata={
                     "preference_key": getattr(item, "preference_key", None),
                     "status": getattr(item, "status", "proposed"),
+                },
+            )
+            for item in items
+        ]
+
+    def _blocked_model_output_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("model_output_repository")
+        list_outputs = getattr(source, "list_outputs", None)
+        if not callable(list_outputs):
+            return []
+        try:
+            from aion_brain.contracts.output_governance import ModelOutputQuery
+
+            items = list_outputs(ModelOutputQuery(scope=scope, status="blocked", limit=100))
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "model_output_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity="high",
+                title="Model output governance blocked output.",
+                description="A redacted model output was blocked by local output governance.",
+                recommended_action="review_model_output_governance",
+                runbook_ref="docs/model-output-governance.md",
+                scope=_metadata_scope(item, scope),
+                metadata={
+                    "status": getattr(item, "status", "blocked"),
+                    "output_type": getattr(item, "output_type", None),
+                },
+            )
+            for item in items
+        ]
+
+    def _response_candidate_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("response_candidate_service")
+        list_candidates = getattr(source, "list_candidates", None)
+        if not callable(list_candidates):
+            return []
+        try:
+            items = list_candidates(scope, status="proposed", limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "response_candidate_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity="medium",
+                title="Response candidate requires review.",
+                description="A governed response candidate is waiting for operator review.",
+                recommended_action="review_response_candidate",
+                runbook_ref="docs/model-output-governance.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={
+                    "status": getattr(item, "status", "proposed"),
+                    "model_output_id": getattr(item, "model_output_id", None),
+                },
+            )
+            for item in items
+        ]
+
+    def _tool_intent_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("tool_intent_service")
+        list_intents = getattr(source, "list_tool_intents", None)
+        if not callable(list_intents):
+            return []
+        try:
+            items = list_intents(scope, status="blocked", limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "tool_intent_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity="high",
+                title="Model output proposed a blocked tool intent.",
+                description="A model-suggested tool intent was captured but not executed.",
+                recommended_action="review_blocked_tool_intent",
+                runbook_ref="docs/model-output-governance.md",
+                scope=scope or ["workspace:main"],
+                metadata={
+                    "status": getattr(item, "status", "blocked"),
+                    "intent_type": getattr(item, "intent_type", None),
+                    "tool_name": getattr(item, "tool_name", None),
                 },
             )
             for item in items
@@ -1031,6 +1124,15 @@ def _scope_for(item: object, fallback: list[str], attr: str) -> list[str]:
     value = getattr(item, attr, None)
     if isinstance(value, list) and value:
         return [str(entry) for entry in value]
+    return fallback or ["workspace:main"]
+
+
+def _metadata_scope(item: object, fallback: list[str]) -> list[str]:
+    metadata = getattr(item, "metadata", None)
+    if isinstance(metadata, dict):
+        value = metadata.get("owner_scope")
+        if isinstance(value, list) and value:
+            return [str(entry) for entry in value]
     return fallback or ["workspace:main"]
 
 

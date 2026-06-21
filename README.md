@@ -2777,3 +2777,36 @@ prompts are not persisted by default.
 
 See `docs/prompt-governance.md` and
 `docs/adr/0056-prompt-packet-model-input-governance.md`.
+
+### Model Output Governance
+
+AION v0.1 receives model outputs through a provider-neutral governance layer.
+The Brain stores raw output hashes and redacted output records, parses generic
+segments, validates structured JSON, creates local response candidates, and
+captures model-suggested tool intents for review. Raw model outputs are not
+stored by default, and tool intents are blocked by default.
+
+Model output endpoints:
+
+- `POST /brain/model-outputs`
+- `GET /brain/model-outputs/{model_output_id}`
+- `POST /brain/model-outputs/query`
+- `DELETE /brain/model-outputs/{model_output_id}`
+- `POST /brain/model-outputs/{model_output_id}/govern`
+- `GET /brain/model-outputs/governance/{output_governance_id}`
+- `GET /brain/model-outputs/{model_output_id}/segments`
+- `POST /brain/model-outputs/{model_output_id}/validate-structured`
+- `GET /brain/model-outputs/response-candidates`
+- `POST /brain/model-outputs/response-candidates/{response_candidate_id}/promote`
+- `GET /brain/model-outputs/tool-intents`
+- `POST /brain/model-outputs/tool-intents/{tool_intent_id}/reject`
+
+```bash
+./scripts/aionctl.sh model-outputs create --raw-output "Generic answer"
+./scripts/aionctl.sh model-outputs query
+./scripts/aionctl.sh model-outputs candidates list
+./scripts/aionctl.sh model-outputs tool-intents list
+```
+
+See `docs/model-output-governance.md` and
+`docs/adr/0057-model-output-governance.md`.

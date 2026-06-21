@@ -63,6 +63,7 @@ class AIONClient:
         self.instructions = _import_resource("instructions").InstructionsResource(self)
         self.grounding = _import_resource("grounding").GroundingResource(self)
         self.prompts = _import_resource("prompts").PromptsResource(self)
+        self.model_outputs = _import_resource("model_outputs").ModelOutputsResource(self)
         self.runtime_config = cast(
             "ConfigResource",
             _import_resource("config").ConfigResource(self),

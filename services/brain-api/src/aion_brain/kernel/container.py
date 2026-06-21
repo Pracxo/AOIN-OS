@@ -188,6 +188,14 @@ from aion_brain.model_gateway.repository import ModelGatewayRepository
 from aion_brain.model_gateway.router import ModelGatewayRouter
 from aion_brain.model_gateway.service import ModelGatewayService
 from aion_brain.model_gateway.usage import ModelUsageLedger
+from aion_brain.model_outputs.governance import OutputGovernanceService
+from aion_brain.model_outputs.parser import OutputParser
+from aion_brain.model_outputs.query import ModelOutputQueryService
+from aion_brain.model_outputs.repository import ModelOutputRepository
+from aion_brain.model_outputs.response_candidates import ResponseCandidateService
+from aion_brain.model_outputs.structured_validator import StructuredOutputValidator
+from aion_brain.model_outputs.tool_intents import ToolIntentCaptureService
+from aion_brain.model_outputs.unsafe_detector import UnsafeOutputDetector
 from aion_brain.module_developer.certifier import ModuleCertifier
 from aion_brain.module_developer.compatibility import ModuleCompatibilityChecker
 from aion_brain.module_developer.contract_tests import ModuleContractTestHarness
@@ -1038,6 +1046,14 @@ class KernelContainer:
         self.reasoning_repository = ReasoningRepository(self.settings.database_url)
         self.model_gateway_repository = ModelGatewayRepository(self.settings.database_url)
         self.prompt_repository = PromptRepository(self.settings.database_url)
+        self.model_output_repository = ModelOutputRepository(self.settings.database_url)
+        self.unsafe_output_detector = UnsafeOutputDetector()
+        self.output_parser = OutputParser(self.unsafe_output_detector)
+        self.structured_output_validator = StructuredOutputValidator(
+            self.model_output_repository,
+            self.unsafe_output_detector,
+            telemetry_service=self.telemetry_service,
+        )
         self.model_provider_registry = ModelProviderRegistry(
             self.model_gateway_repository,
             self.policy_adapter,
@@ -1455,6 +1471,42 @@ class KernelContainer:
         set_response_grounding = getattr(self.response_verifier, "set_grounding_verifier", None)
         if callable(set_response_grounding):
             set_response_grounding(self.grounding_verifier)
+        self.response_candidate_service = ResponseCandidateService(
+            self.model_output_repository,
+            self.policy_adapter,
+            response_repository=self.dialogue_repository,
+            response_verifier=self.response_verifier,
+            grounding_verifier=self.grounding_verifier,
+            telemetry_service=self.telemetry_service,
+        )
+        self.tool_intent_capture_service = ToolIntentCaptureService(
+            self.model_output_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.model_output_query_service = ModelOutputQueryService(
+            self.model_output_repository,
+            self.policy_adapter,
+        )
+        self.output_governance_service = OutputGovernanceService(
+            self.model_output_repository,
+            self.policy_adapter,
+            parser=self.output_parser,
+            unsafe_detector=self.unsafe_output_detector,
+            structured_validator=self.structured_output_validator,
+            response_candidate_service=self.response_candidate_service,
+            tool_intent_service=self.tool_intent_capture_service,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            settings=self.settings,
+        )
+        set_output_governance = getattr(
+            self.model_gateway_service, "set_output_governance_service", None
+        )
+        if callable(set_output_governance):
+            set_output_governance(self.output_governance_service)
         self.explanation_repository = ExplanationRepository(self.settings.database_url)
         self.explanation_verifier = ExplanationVerifier(self.telemetry_service)
         self.explanation_builder = ExplanationBuilder(
@@ -2140,6 +2192,9 @@ class KernelContainer:
             grounding_repository=self.grounding_repository,
             grounding_verifier=self.grounding_verifier,
             prompt_repository=self.prompt_repository,
+            model_output_repository=self.model_output_repository,
+            response_candidate_service=self.response_candidate_service,
+            tool_intent_service=self.tool_intent_capture_service,
         )
         self.operator_action_center_service = ActionCenterService(
             self.operator_repository,
@@ -2170,6 +2225,9 @@ class KernelContainer:
             prompt_repository=self.prompt_repository,
             grounding_verifier=self.grounding_verifier,
             source_coverage_service=self.source_coverage_service,
+            model_output_repository=self.model_output_repository,
+            response_candidate_service=self.response_candidate_service,
+            tool_intent_service=self.tool_intent_capture_service,
         )
         self.operator_readiness_aggregator = ReadinessAggregator(
             self.operator_status_card_builder,
@@ -2431,6 +2489,34 @@ class KernelContainer:
                 self.model_gateway_service,
                 "service",
                 self.adapter_config.model_gateway_adapter,
+            ),
+            ("model_output_repository", self.model_output_repository, "repository", "postgres"),
+            (
+                "output_governance_service",
+                self.output_governance_service,
+                "service",
+                "local",
+            ),
+            ("model_output_query_service", self.model_output_query_service, "service", "local"),
+            ("output_parser", self.output_parser, "service", "deterministic"),
+            (
+                "structured_output_validator",
+                self.structured_output_validator,
+                "service",
+                "deterministic",
+            ),
+            ("unsafe_output_detector", self.unsafe_output_detector, "service", "deterministic"),
+            (
+                "response_candidate_service",
+                self.response_candidate_service,
+                "service",
+                "local",
+            ),
+            (
+                "tool_intent_capture_service",
+                self.tool_intent_capture_service,
+                "service",
+                "local",
             ),
             (
                 "model_provider_registry",

@@ -60,3 +60,4 @@ Every architecture-changing Codex task must add or update an ADR.
 - [0054: Instruction Hierarchy and Preference Ledger](0054-instruction-hierarchy-preference-ledger.md) - Defines instruction precedence, preference confirmation, style profiles, and deterministic conflict resolution.
 - [0055: Grounding Citation and Source Attribution](0055-grounding-citation-source-attribution.md) - Defines deterministic source attribution, citations, verification, and coverage.
 - [0056: Prompt Packet and Model Input Governance](0056-prompt-packet-model-input-governance.md) - Defines provider-neutral prompt packets, boundary checks, injection detection, and model input manifests.
+- [0057: Model Output Governance](0057-model-output-governance.md) - Defines redacted model output intake, parsing, response candidates, and tool-intent capture.

@@ -30,6 +30,26 @@ print(client.health.ready())
 print(client.kernel.contracts())
 ```
 
+## Model Outputs Resource
+
+`client.model_outputs` supports:
+
+- `create(payload)`
+- `get(model_output_id, scope)`
+- `query(payload)`
+- `delete(model_output_id, reason, actor_id=None)`
+- `govern(model_output_id, payload)`
+- `get_governance(output_governance_id)`
+- `segments(model_output_id, scope)`
+- `validate_structured(model_output_id, scope, schema_name=None)`
+- `response_candidates(scope, status=None, trace_id=None, limit=100)`
+- `promote_candidate(response_candidate_id, approval_present=False, reason="operator_requested")`
+- `tool_intents(scope, status=None, trace_id=None, limit=100)`
+- `reject_tool_intent(tool_intent_id, reason, actor_id=None)`
+
+The SDK calls public Brain APIs only. It does not import `aion_brain`, access
+databases, execute model-suggested tools, or expose raw provider payloads.
+
 ## Error Handling
 
 AION public API errors map to SDK exceptions:

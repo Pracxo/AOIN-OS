@@ -157,6 +157,24 @@ execute Docker, or enable domain modules.
 the SDK. They do not render a frontend chat UI, call provider chat APIs, send
 external messages, expose hidden reasoning, or trigger controlled execution.
 
+## Model Output Commands
+
+```bash
+./scripts/aionctl.sh model-outputs create --raw-output "Generic answer"
+./scripts/aionctl.sh model-outputs get --model-output-id model-output-id
+./scripts/aionctl.sh model-outputs query
+./scripts/aionctl.sh model-outputs govern --model-output-id model-output-id
+./scripts/aionctl.sh model-outputs segments --model-output-id model-output-id
+./scripts/aionctl.sh model-outputs validate-structured --model-output-id model-output-id
+./scripts/aionctl.sh model-outputs candidates list
+./scripts/aionctl.sh model-outputs candidates promote --response-candidate-id response-candidate-id
+./scripts/aionctl.sh model-outputs tool-intents list
+./scripts/aionctl.sh model-outputs tool-intents reject --tool-intent-id tool-intent-id
+```
+
+`aionctl model-outputs` calls `client.model_outputs`. It does not expose raw
+provider payloads, execute model-suggested tools, or bypass policy.
+
 ## Belief Commands
 
 ```bash

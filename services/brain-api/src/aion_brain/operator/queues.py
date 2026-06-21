@@ -134,6 +134,24 @@ _QUEUE_SPECS: tuple[tuple[OperatorQueueType, str, str, tuple[str, ...]], ...] = 
         "prompt_repository",
         ("list_injection_findings",),
     ),
+    (
+        "generic",
+        "Blocked Model Outputs",
+        "model_output_repository",
+        ("list_outputs",),
+    ),
+    (
+        "generic",
+        "Response Candidates",
+        "response_candidate_service",
+        ("list_candidates",),
+    ),
+    (
+        "generic",
+        "Tool Intents",
+        "tool_intent_service",
+        ("list_tool_intents",),
+    ),
 )
 
 _RUNNING_STATUSES = {"running", "processing", "sending", "in_progress", "active"}
@@ -248,6 +266,22 @@ def _list_items(provider: object, methods: tuple[str, ...], scope: list[str]) ->
                     return list(
                         cast(Any, method)(
                             ApprovalInboxQuery(scope=scope or ["workspace:main"], limit=100)
+                        )
+                        or []
+                    )
+                except (ImportError, TypeError):
+                    pass
+            if name == "list_outputs":
+                try:
+                    from aion_brain.contracts.output_governance import ModelOutputQuery
+
+                    return list(
+                        cast(Any, method)(
+                            ModelOutputQuery(
+                                scope=scope or ["workspace:main"],
+                                status="blocked",
+                                limit=100,
+                            )
                         )
                         or []
                     )

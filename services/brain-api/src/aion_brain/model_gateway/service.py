@@ -1,5 +1,6 @@
 """AION Model Gateway service."""
 
+import json
 from datetime import UTC, datetime
 from typing import cast
 from uuid import uuid4
@@ -17,7 +18,9 @@ from aion_brain.contracts.model_gateway import (
     ModelUsageRecord,
     PromptRedactionRecord,
 )
+from aion_brain.contracts.model_outputs import ModelOutputCreateRequest
 from aion_brain.contracts.observability import ObservabilityEvent, ObservabilityLevel
+from aion_brain.contracts.output_governance import OutputGovernanceRequest
 from aion_brain.contracts.policy import PolicyRequest
 from aion_brain.contracts.prompts import PromptCompileRequest, PromptSection
 from aion_brain.contracts.reasoning import ModelCallRecord, ModelRouteDecision
@@ -68,6 +71,7 @@ class ModelGatewayService:
         circuit_breaker_service: object | None = None,
         audit_sink: object | None = None,
         prompt_governance_service: object | None = None,
+        output_governance_service: object | None = None,
     ) -> None:
         self._provider_registry = provider_registry
         self._profile_registry = profile_registry
@@ -85,6 +89,7 @@ class ModelGatewayService:
         self._circuit_breaker_service = circuit_breaker_service
         self._audit_sink = audit_sink
         self._prompt_governance_service = prompt_governance_service
+        self._output_governance_service = output_governance_service
 
     def set_circuit_breaker_service(self, circuit_breaker_service: object | None) -> None:
         """Attach circuit breaker service after kernel assembly."""
@@ -97,6 +102,10 @@ class ModelGatewayService:
     def set_prompt_governance_service(self, prompt_governance_service: object | None) -> None:
         """Attach prompt governance after kernel assembly."""
         self._prompt_governance_service = prompt_governance_service
+
+    def set_output_governance_service(self, output_governance_service: object | None) -> None:
+        """Attach model output governance after kernel assembly."""
+        self._output_governance_service = output_governance_service
 
     def complete(self, request: ModelGatewayRequest) -> ModelGatewayResponse:
         """Complete a prompt through the selected provider boundary."""
@@ -346,13 +355,20 @@ class ModelGatewayService:
                 "usage_id": usage.usage_id,
             },
         )
+        output_metadata = _govern_model_output(
+            self._output_governance_service,
+            request,
+            model_call,
+            route,
+            provider,
+        )
         response = ModelGatewayResponse(
             request_id=request.request_id,
             model_call=model_call,
             usage=usage,
             redaction=redaction if redaction.redaction_count else None,
             route_decision=route,
-            output=model_call.response,
+            output={**model_call.response, **output_metadata},
             status=status,
             reason=reason,
             created_at=datetime.now(UTC),
@@ -774,6 +790,75 @@ def _sections_from_reasoning_prompt(request: ModelGatewayRequest) -> list[Prompt
             )
         )
     return sections
+
+
+def _govern_model_output(
+    output_governance_service: object | None,
+    request: ModelGatewayRequest,
+    model_call: ModelCallRecord,
+    route: ModelRouteDecision,
+    provider: ModelProvider,
+) -> dict[str, object]:
+    receive_output = getattr(output_governance_service, "receive_output", None)
+    govern = getattr(output_governance_service, "govern", None)
+    if not callable(receive_output) or not callable(govern):
+        return {}
+    service = output_governance_service
+    with_actor_context = getattr(output_governance_service, "with_actor_context", None)
+    if callable(with_actor_context):
+        service = with_actor_context(_actor_context(request))
+        receive_output = getattr(service, "receive_output", None)
+        govern = getattr(service, "govern", None)
+    if not callable(receive_output) or not callable(govern):
+        return {}
+    try:
+        raw_output = json.dumps(model_call.response, sort_keys=True, default=str)
+        output = receive_output(
+            ModelOutputCreateRequest(
+                trace_id=request.trace_id,
+                actor_id=request.actor_id,
+                workspace_id=request.workspace_id,
+                prompt_packet_id=request.metadata.get("prompt_packet_id")
+                if isinstance(request.metadata.get("prompt_packet_id"), str)
+                else request.prompt.prompt_id,
+                model_input_manifest_id=_metadata_str(
+                    request.metadata,
+                    "model_input_manifest_id",
+                ),
+                model_route=route.route_id,
+                provider_type=provider.provider_type,
+                output_type="json",
+                raw_output=raw_output,
+                owner_scope=request.scope,
+                metadata={
+                    "source": "model_gateway",
+                    "model_call_id": model_call.model_call_id,
+                    "route_id": route.route_id,
+                    "provider_id": provider.provider_id,
+                    "dialogue_session_id": request.metadata.get("dialogue_session_id"),
+                    "grounding_refs": request.metadata.get("grounding_refs", []),
+                    "citation_refs": request.metadata.get("citation_refs", []),
+                },
+                created_by=request.actor_id,
+            )
+        )
+        governance = govern(
+            OutputGovernanceRequest(
+                trace_id=request.trace_id,
+                model_output_id=output.model_output_id,
+                owner_scope=request.scope,
+                require_grounding=False,
+                created_by=request.actor_id,
+            )
+        )
+        return {
+            "model_output_id": output.model_output_id,
+            "output_governance_id": getattr(governance, "output_governance_id", None),
+            "output_governance_status": getattr(governance, "status", "unknown"),
+            "output_governance_blocked": bool(getattr(governance, "blocked", False)),
+        }
+    except Exception:
+        return {"output_governance_status": "unavailable"}
 
 
 def _actor_context(request: ModelGatewayRequest) -> ActorContext:

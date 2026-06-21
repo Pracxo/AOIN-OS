@@ -1080,3 +1080,29 @@ Retrieved context is untrusted unless another governed AION contract says
 otherwise. Memory recall must be labeled `memory_recall`; memory recall is not
 truth. Model input manifests store hashes and metadata for the Model Gateway
 handoff, not raw provider payloads.
+
+## Model Output Governance Contracts
+
+AION Brain owns these model output governance contracts:
+
+- `ModelOutputCreateRequest`
+- `ModelOutputRecord`
+- `ModelOutputSegment`
+- `StructuredOutputValidation`
+- `ResponseCandidate`
+- `ToolIntentCandidate`
+- `OutputGovernanceRequest`
+- `OutputGovernanceRun`
+- `ModelOutputQuery`
+- `ModelOutputQueryResult`
+
+Model output contracts are provider-neutral. They must not expose provider SDK
+objects, provider chat objects, raw provider payloads, raw prompts, raw
+headers, hidden reasoning, chain-of-thought, raw secrets, SQLAlchemy rows, or
+domain-specific output internals.
+
+`ModelOutputRecord` stores a raw-output hash and redacted output. Raw output is
+not stored by default. `ModelOutputSegment` represents deterministic parsed
+output only. `StructuredOutputValidation` validates generic JSON-like output.
+`ResponseCandidate` is a local proposal, not delivery. `ToolIntentCandidate`
+captures model-suggested tool or capability intents without executing them.

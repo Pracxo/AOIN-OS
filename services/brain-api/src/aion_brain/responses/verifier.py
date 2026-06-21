@@ -63,6 +63,18 @@ class ResponseVerifier:
 
         self._grounding_verifier = grounding_verifier
 
+    def verify_candidate(self, candidate: object) -> bool:
+        """Return whether a response candidate is safe enough to promote locally."""
+
+        content = str(getattr(candidate, "content", ""))
+        if not content:
+            return False
+        if text_has_hidden_markers(content) or text_has_secret_markers(content):
+            return False
+        if getattr(candidate, "status", None) in {"blocked", "rejected", "archived"}:
+            return False
+        return True
+
     def verify(self, response_id: str) -> ResponseVerification:
         """Verify and persist one response verification record."""
 
