@@ -630,9 +630,7 @@ def _contains_secret_key(value: Any) -> bool:
     return False
 
 
-def _status(
-    mode: str, breaking_count: int, warning_count: int
-) -> CompatibilityScanStatus:
+def _status(mode: str, breaking_count: int, warning_count: int) -> CompatibilityScanStatus:
     if mode == "dry_run":
         return "dry_run"
     if breaking_count:

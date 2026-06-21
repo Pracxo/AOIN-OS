@@ -73,6 +73,7 @@ class AIONClient:
         self.contracts = _import_resource("contracts").ContractsResource(self)
         self.lifecycle = _import_resource("lifecycle").LifecycleResource(self)
         self.extensions = _import_resource("extensions").ExtensionsResource(self)
+        self.module_bindings = _import_resource("module_bindings").ModuleBindingsResource(self)
         self.runtime_config = cast(
             "ConfigResource",
             _import_resource("config").ConfigResource(self),

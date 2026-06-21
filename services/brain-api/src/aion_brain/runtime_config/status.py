@@ -121,9 +121,7 @@ def _contract_registry_flags(settings: object) -> dict[str, bool]:
 def _extension_flags(settings: object) -> dict[str, bool]:
     return {
         "extensions.enabled": bool(getattr(settings, "extensions_enabled", True)),
-        "extension_registry.enabled": bool(
-            getattr(settings, "extension_registry_enabled", True)
-        ),
+        "extension_registry.enabled": bool(getattr(settings, "extension_registry_enabled", True)),
         "extension_manifest_validation.enabled": bool(
             getattr(settings, "extension_manifest_validation_enabled", True)
         ),

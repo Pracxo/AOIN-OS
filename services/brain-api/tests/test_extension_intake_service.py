@@ -38,12 +38,14 @@ def test_extension_intake_controlled_persists_metadata_and_install_plan() -> Non
     assert run.extension_package is not None
     assert run.install_plan_created is True
     assert len(repository.list_packages()) == 1
-    assert len(
-        repository.list_capability_declarations(run.extension_package.extension_package_id)
-    ) == 1
-    assert len(
-        repository.list_dependency_declarations(run.extension_package.extension_package_id)
-    ) == 1
+    assert (
+        len(repository.list_capability_declarations(run.extension_package.extension_package_id))
+        == 1
+    )
+    assert (
+        len(repository.list_dependency_declarations(run.extension_package.extension_package_id))
+        == 1
+    )
     assert len(repository.list_install_plans()) == 1
 
 

@@ -36,6 +36,7 @@ CRITICAL_FAILURE_CHECKS = {
     "config_snapshot_created",
     "config_hash_available",
     "extension_registry_safe",
+    "module_binding_registry_safe",
     "resilience_status_healthy_or_only_optional_degraded",
     "audit_integrity_status_available",
     "audit_verification_passed_or_not_required",
@@ -116,6 +117,7 @@ class FreezeGateService:
         self._operator_readiness_service = operator_readiness_service
         self._contract_registry_repository = contract_registry_repository
         self._extension_registry_repository = extension_registry_repository
+        self._module_binding_repository: object | None = None
         self._audit_sink = audit_sink
         self._telemetry_service = telemetry_service
         self._root_dir = root_dir or Path(__file__).parents[5]
@@ -130,6 +132,11 @@ class FreezeGateService:
         """Attach Extension Registry after kernel assembly."""
 
         self._extension_registry_repository = repository
+
+    def set_module_binding_repository(self, repository: object | None) -> None:
+        """Attach module binding registry after kernel assembly."""
+
+        self._module_binding_repository = repository
 
     def run(self, request: FreezeGateRunRequest, *, app: object | None = None) -> FreezeGateRun:
         """Run the local freeze gate and persist the result."""
@@ -211,6 +218,14 @@ class FreezeGateService:
                 "extension_registry_safe",
                 "extensions",
                 self._check_extension_registry_safe,
+                severity="critical",
+            )
+        )
+        checks.append(
+            self._run_check(
+                "module_binding_registry_safe",
+                "module_bindings",
+                self._check_module_binding_registry_safe,
                 severity="critical",
             )
         )
@@ -645,6 +660,36 @@ class FreezeGateService:
             "details": {
                 "package_count": len(packages),
                 "blocked_count": len(blocked),
+                "unsafe_flags": unsafe,
+            },
+        }
+
+    def _check_module_binding_registry_safe(self) -> dict[str, Any]:
+        list_bindings = getattr(self._module_binding_repository, "list_bindings", None)
+        list_conflicts = getattr(self._module_binding_repository, "list_conflicts", None)
+        bindings = list_bindings(limit=1000) if callable(list_bindings) else []
+        conflicts = list_conflicts(status="open", limit=1000) if callable(list_conflicts) else []
+        unsafe_flags = {
+            "module_slot_activation_enabled": bool(
+                getattr(self._settings, "module_slot_activation_enabled", False)
+            ),
+            "capability_binding_activation_enabled": bool(
+                getattr(self._settings, "capability_binding_activation_enabled", False)
+            ),
+            "dynamic_route_registration_enabled": bool(
+                getattr(self._settings, "dynamic_route_registration_enabled", False)
+            ),
+        }
+        unsafe = [key for key, value in unsafe_flags.items() if value]
+        blocked = [item for item in bindings if getattr(item, "status", None) == "blocked"]
+        status = "failed" if blocked or conflicts or unsafe else "passed"
+        return {
+            "status": status,
+            "message": "Module binding registry remains metadata-only and inactive.",
+            "details": {
+                "binding_count": len(bindings),
+                "blocked_binding_count": len(blocked),
+                "open_conflict_count": len(conflicts),
                 "unsafe_flags": unsafe,
             },
         }

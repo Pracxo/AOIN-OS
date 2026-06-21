@@ -40,6 +40,7 @@ class ExtensionIntakeService:
         telemetry_service: object | None = None,
         audit_sink: object | None = None,
         notification_router: object | None = None,
+        module_slot_service: object | None = None,
         settings: Settings | None = None,
     ) -> None:
         self._repository = repository
@@ -53,6 +54,7 @@ class ExtensionIntakeService:
         self._telemetry_service = telemetry_service
         self._audit_sink = audit_sink
         self._notification_router = notification_router
+        self._module_slot_service = module_slot_service
         self._settings = settings or get_settings()
 
     def intake(self, request: ExtensionIntakeRequest) -> ExtensionIntakeRun:
@@ -107,6 +109,13 @@ class ExtensionIntakeService:
             saved_package = self._package_service.save_package(package)
             self._capability_service.persist_declarations(saved_package, capabilities)
             self._dependency_service.persist_declarations(saved_package, dependencies)
+            module_slot_created = False
+            if bool(request.metadata.get("create_module_slot")):
+                module_slot_created = self._maybe_create_module_slot(
+                    saved_package,
+                    request.owner_scope,
+                    request.created_by,
+                )
             if request.run_compatibility:
                 compatibility = self._compatibility_gate.check_package(
                     saved_package,
@@ -136,6 +145,7 @@ class ExtensionIntakeService:
                 install_plan_created = True
         else:
             compatibility_status = "blocked" if blockers else "unknown"
+            module_slot_created = False
         status = _intake_status(request.mode, blockers, warnings)
         run = ExtensionIntakeRun(
             extension_intake_id=intake_id,
@@ -160,6 +170,7 @@ class ExtensionIntakeService:
                 "metadata_only": True,
                 "dry_run_persisted_package": False,
                 "package_persisted": saved_package is not None,
+                "module_slot_created": module_slot_created,
                 "capability_count": len(capabilities),
                 "dependency_count": len(dependencies),
             },
@@ -257,6 +268,25 @@ class ExtensionIntakeService:
             )
         except Exception:
             return
+
+    def _maybe_create_module_slot(
+        self,
+        package: object,
+        scope: list[str],
+        created_by: str | None,
+    ) -> bool:
+        create_from_extension = getattr(self._module_slot_service, "create_from_extension", None)
+        if not callable(create_from_extension):
+            return False
+        try:
+            create_from_extension(
+                cast(Any, package).extension_package_id,
+                scope=scope,
+                created_by=created_by,
+            )
+            return True
+        except Exception:
+            return False
 
 
 def _intake_status(

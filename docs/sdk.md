@@ -642,3 +642,32 @@ code, shell tools, or external archive services.
 The SDK calls public Contract Registry APIs only. It does not import
 `aion_brain`, read source files, mutate source contracts, generate code,
 execute migration steps, call external services, or expose raw secrets.
+
+## ModuleBindingsResource
+
+`client.module_bindings` supports:
+
+- `create_slot(payload)`
+- `get_slot(module_slot_id, scope)`
+- `list_slots(scope, status=None, slot_type=None, extension_package_id=None, limit=100)`
+- `archive_slot(module_slot_id, reason)`
+- `delete_slot(module_slot_id, reason=None)`
+- `create_binding(payload)`
+- `get_binding(capability_binding_id, scope)`
+- `list_bindings(scope, module_slot_id=None, status=None, capability_type=None, risk_level=None, limit=100)`
+- `disable_binding(capability_binding_id, reason)`
+- `validate(payload)`
+- `get_validation(binding_validation_id)`
+- `conflicts(scope, status=None, severity=None, limit=100)`
+- `dismiss_conflict(binding_conflict_id, reason)`
+- `create_mount_plan(module_slot_id, scope)`
+- `get_mount_plan(mount_plan_id, scope)`
+- `list_mount_plans(scope, status=None, module_slot_id=None, limit=100)`
+- `create_route_preview(capability_binding_id, scope)`
+- `list_route_previews(scope, module_slot_id=None, capability_binding_id=None, status=None, limit=100)`
+- `query(payload)`
+
+The SDK calls public Module Binding APIs only. It does not import
+`aion_brain`, load extension code, install packages, activate capabilities,
+register routes, mutate runtime configuration, execute mount plans, call
+external services, or expose raw secrets.

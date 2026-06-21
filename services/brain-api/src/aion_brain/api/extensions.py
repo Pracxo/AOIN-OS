@@ -103,9 +103,9 @@ def get_package(
     actor_context: Annotated[ActorContext, Depends(get_actor_context)],
     scope: Annotated[list[str] | None, Query()] = None,
 ) -> ExtensionPackage:
-    package = container.extension_package_service.with_actor_context(
-        actor_context
-    ).get_package(extension_package_id, _scope(scope, actor_context))
+    package = container.extension_package_service.with_actor_context(actor_context).get_package(
+        extension_package_id, _scope(scope, actor_context)
+    )
     if package is None:
         raise HTTPException(status_code=404, detail="extension_package_not_found")
     return package
@@ -260,9 +260,9 @@ def create_install_plan(
     container: Annotated[KernelContainer, Depends(get_kernel_container)],
     actor_context: Annotated[ActorContext, Depends(get_actor_context)],
 ) -> ExtensionInstallPlan:
-    package = container.extension_package_service.with_actor_context(
-        actor_context
-    ).require_package(extension_package_id, body.scope or actor_context.security_scope)
+    package = container.extension_package_service.with_actor_context(actor_context).require_package(
+        extension_package_id, body.scope or actor_context.security_scope
+    )
     return container.extension_install_plan_service.create_plan(
         package,
         scope=body.scope or actor_context.security_scope,
@@ -302,4 +302,3 @@ def list_install_plans(
 
 def _scope(scope: list[str] | None, actor_context: ActorContext) -> list[str]:
     return scope or actor_context.security_scope or ["workspace:main"]
-

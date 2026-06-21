@@ -1390,3 +1390,36 @@ policy action activation from manifests, command execution, workflow
 execution, approval bypass, raw prompt disclosure, hidden reasoning disclosure,
 raw header export, secret export, or domain-specific extension behavior.
 Unknown extension actions fail closed.
+
+## Module Binding Policy
+
+Generic module binding actions:
+
+- `module_slot.create`
+- `module_slot.read`
+- `module_slot.update`
+- `module_slot.delete`
+- `capability_binding.create`
+- `capability_binding.read`
+- `capability_binding.update`
+- `module_binding.validate`
+- `module_binding.conflict.read`
+- `module_binding.conflict.update`
+- `module_mount_plan.create`
+- `module_mount_plan.read`
+- `module_mount_plan.update`
+- `route_binding_preview.create`
+- `route_binding_preview.read`
+- `module_binding.query`
+
+Module slot and capability binding reads are scope-gated. Creation, mutation,
+validation, mount-plan creation, route-preview creation, and conflict updates
+require scoped actors, operators, admins, or internal Brain services allowed by
+policy.
+
+Module binding policy authorizes metadata operations only. It does not
+authorize code loading, package installation, capability activation, dynamic
+route registration, runtime configuration mutation, shell commands, external
+calls, approval bypass, raw prompt disclosure, hidden reasoning disclosure,
+raw header export, secret export, or domain-specific module logic. Unknown
+module binding actions fail closed.

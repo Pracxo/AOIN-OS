@@ -3218,3 +3218,52 @@ The Python SDK exposes the same surface through `client.extensions`.
 
 See `docs/extensions.md` and
 `docs/adr/0066-extension-registry-module-intake.md`.
+
+## Module Slots and Capability Bindings
+
+The Module Slot Manager and Capability Binding Registry provide AION's staging
+layer between metadata-only extension intake and any future runtime activation.
+Module slots record inactive future module positions. Capability bindings
+record inactive mappings from module slots to declared capability metadata.
+
+Binding validation checks contracts, policy actions, runtime settings, sandbox
+requirements, activation flags, and route-registration flags. Mount plans are
+non-executable future records. Route binding previews describe future route
+metadata without registering routes.
+
+AION v0.1 module slots and capability bindings are metadata-only. They do not
+load code, install packages, activate capabilities, or register routes.
+
+Module binding endpoints:
+
+- `POST /brain/module-slots`
+- `GET /brain/module-slots/{module_slot_id}`
+- `GET /brain/module-slots`
+- `POST /brain/module-slots/{module_slot_id}/archive`
+- `DELETE /brain/module-slots/{module_slot_id}`
+- `POST /brain/capability-bindings`
+- `GET /brain/capability-bindings/{capability_binding_id}`
+- `GET /brain/capability-bindings`
+- `POST /brain/capability-bindings/{capability_binding_id}/disable`
+- `POST /brain/module-bindings/validate`
+- `GET /brain/module-bindings/validations/{binding_validation_id}`
+- `GET /brain/module-bindings/conflicts`
+- `POST /brain/module-bindings/conflicts/{binding_conflict_id}/dismiss`
+- `POST /brain/module-bindings/mount-plans`
+- `GET /brain/module-bindings/mount-plans/{mount_plan_id}`
+- `GET /brain/module-bindings/mount-plans`
+- `POST /brain/module-bindings/route-previews`
+- `GET /brain/module-bindings/route-previews`
+- `POST /brain/module-bindings/query`
+
+CLI examples:
+
+```bash
+./scripts/aionctl.sh module-slots list
+./scripts/aionctl.sh capability-bindings list
+./scripts/aionctl.sh module-bindings validate --dry-run
+```
+
+The Python SDK exposes the same surface through `client.module_bindings`.
+
+See `docs/adr/0067-capability-binding-module-slot-manager.md`.

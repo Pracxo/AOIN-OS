@@ -68,6 +68,37 @@ _QUEUE_SPECS: tuple[tuple[OperatorQueueType, str, str, tuple[str, ...]], ...] = 
         "extension_registry_repository",
         ("list_install_plans",),
     ),
+    ("module_slots", "Module Slots", "module_binding_repository", ("list_slots",)),
+    (
+        "capability_bindings",
+        "Capability Bindings",
+        "module_binding_repository",
+        ("list_bindings",),
+    ),
+    (
+        "binding_validations",
+        "Binding Validations",
+        "module_binding_repository",
+        ("list_validation_runs",),
+    ),
+    (
+        "binding_conflicts",
+        "Binding Conflicts",
+        "module_binding_repository",
+        ("list_conflicts",),
+    ),
+    (
+        "module_mount_plans",
+        "Module Mount Plans",
+        "module_binding_repository",
+        ("list_mount_plans",),
+    ),
+    (
+        "route_binding_previews",
+        "Route Binding Previews",
+        "module_binding_repository",
+        ("list_route_previews",),
+    ),
     ("generic", "Dialogue Clarifications", "dialogue_service", ("list_pending",)),
     (
         "generic",

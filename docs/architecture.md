@@ -1489,3 +1489,40 @@ and policy-gated.
 
 Install plans are advisory records only in v0.1. They always keep
 `executable=false` and `execution_allowed=false`.
+
+## Capability Binding and Module Slot Layer
+
+The Module Slot Manager creates inactive module slot records for future module
+positions. A slot may reference an extension package, declared capabilities,
+contracts, policy actions, settings, sandbox profile metadata, and future mount
+plans, but it never loads code or activates a runtime.
+
+The Capability Binding Registry creates inactive binding records under module
+slots. A binding describes a generic capability key, schemas, required policy
+actions, required settings, required contracts, sandbox requirements, risk, and
+target runtime metadata. It does not register an active capability and does not
+invoke a module runtime.
+
+Binding Validation checks staged slots and bindings against local AION records:
+contract registry entries, policy catalog actions, runtime configuration flags,
+sandbox requirements, activation flags, route-registration flags, and duplicate
+capability keys. Dry-run validation stores only the validation run. Controlled
+validation may store binding-owned conflict records, but it still does not
+mutate source registries or activate anything.
+
+Mount Plans are metadata-only future plans. They summarize required contracts,
+settings, policy actions, sandbox profiles, and binding ids, and must keep
+`executable=false` and `execution_allowed=false`.
+
+Route Binding Preview records future route shapes for review. It must keep
+`registration_allowed=false` and must not register FastAPI routes, SDK methods,
+CLI commands, or runtime routes dynamically.
+
+The binding path is:
+
+`extension package -> module slot -> capability binding -> validation -> mount plan -> route preview`
+
+Bindings differ from active capabilities and modules because they are staged
+records only. Active capability registration, module loading, package
+installation, route registration, runtime configuration mutation, and execution
+remain outside this layer.

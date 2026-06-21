@@ -29,6 +29,7 @@ from aion_sdk.cli.commands.instructions import install_instruction_commands
 from aion_sdk.cli.commands.learning import install_learning_commands
 from aion_sdk.cli.commands.lifecycle import install_lifecycle_commands
 from aion_sdk.cli.commands.model_outputs import install_model_output_commands
+from aion_sdk.cli.commands.module_bindings import install_module_binding_commands
 from aion_sdk.cli.commands.modules import install_modules_commands
 from aion_sdk.cli.commands.notifications import install_notification_commands
 from aion_sdk.cli.commands.operator import install_operator_commands
@@ -578,6 +579,7 @@ install_registry_commands(app, get_client=_client, get_scope=_scope, render=_ren
 install_contract_commands(contracts_app, get_client=_client, get_scope=_scope, render=_render)
 install_lifecycle_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_extension_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_module_binding_commands(app, get_client=_client, get_scope=_scope, render=_render)
 
 
 if __name__ == "__main__":

@@ -417,9 +417,7 @@ class ExtensionRegistryRepository:
             limit,
         )
 
-    def save_compatibility_run(
-        self, run: ExtensionCompatibilityRun
-    ) -> ExtensionCompatibilityRun:
+    def save_compatibility_run(self, run: ExtensionCompatibilityRun) -> ExtensionCompatibilityRun:
         stored = run.model_copy(
             update={
                 "created_at": run.created_at or datetime.now(UTC),
@@ -487,9 +485,7 @@ class ExtensionRegistryRepository:
         )
 
     def list_intake_runs(self, *, limit: int = 100) -> list[ExtensionIntakeRun]:
-        return self._list(
-            aion_extension_intake_runs, ExtensionIntakeRun, {}, "created_at", limit
-        )
+        return self._list(aion_extension_intake_runs, ExtensionIntakeRun, {}, "created_at", limit)
 
     def save_review(self, review: ExtensionReview) -> ExtensionReview:
         stored = review.model_copy(update={"created_at": review.created_at or datetime.now(UTC)})

@@ -537,8 +537,7 @@ def _reject_domain_text(value: str) -> None:
 def _contains_domain_term(value: object) -> bool:
     if isinstance(value, dict):
         return any(
-            _contains_domain_term(key) or _contains_domain_term(item)
-            for key, item in value.items()
+            _contains_domain_term(key) or _contains_domain_term(item) for key, item in value.items()
         )
     if isinstance(value, list):
         return any(_contains_domain_term(item) for item in value)

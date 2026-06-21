@@ -60,6 +60,7 @@ class ReleasePackager:
         contract_registry_repository: object | None = None,
         contract_registry_report_service: object | None = None,
         extension_registry_repository: object | None = None,
+        module_binding_repository: object | None = None,
         telemetry_service: object | None = None,
         root_dir: Path | None = None,
         settings: Settings | None = None,
@@ -89,6 +90,7 @@ class ReleasePackager:
         self._contract_registry_repository = contract_registry_repository
         self._contract_registry_report_service = contract_registry_report_service
         self._extension_registry_repository = extension_registry_repository
+        self._module_binding_repository = module_binding_repository
         self._telemetry_service = telemetry_service
         self._audit_sink = audit_sink
 
@@ -111,6 +113,14 @@ class ReleasePackager:
         """Attach Extension Registry summaries after kernel assembly."""
 
         self._extension_registry_repository = repository
+
+    def set_module_binding_registry(
+        self,
+        repository: object | None = None,
+    ) -> None:
+        """Attach module binding summaries after kernel assembly."""
+
+        self._module_binding_repository = repository
 
     def package(
         self,
@@ -278,6 +288,7 @@ class ReleasePackager:
             )
             reports["contract_registry"] = self._contract_registry_summary(request.owner_scope)
             reports["extension_registry"] = self._extension_registry_summary(request.owner_scope)
+            reports["module_binding_registry"] = self._module_binding_summary(request.owner_scope)
         if request.include_policy_bundle:
             reports["policy_bundle"] = self._policy_bundle_report()
         if request.include_migration_baseline:
@@ -382,6 +393,37 @@ class ReleasePackager:
             "metadata_only": True,
             "code_loading_allowed": False,
             "activation_allowed": False,
+            "source_code_is_source_of_truth": True,
+        }
+
+    def _module_binding_summary(self, scope: builtins.list[str]) -> dict[str, Any]:
+        status = _try_call(self._module_binding_repository, "status", scope)
+        slots = _try_call(self._module_binding_repository, "list_slots", limit=500)
+        bindings = _try_call(self._module_binding_repository, "list_bindings", limit=500)
+        plans = _try_call(self._module_binding_repository, "list_mount_plans", limit=500)
+        conflicts = _try_call(self._module_binding_repository, "list_conflicts", limit=500)
+        slots = slots if isinstance(slots, list) else []
+        bindings = bindings if isinstance(bindings, list) else []
+        plans = plans if isinstance(plans, list) else []
+        conflicts = conflicts if isinstance(conflicts, list) else []
+        open_conflicts = [item for item in conflicts if getattr(item, "status", None) == "open"]
+        return {
+            "available": self._module_binding_repository is not None,
+            "status": (
+                "blocked"
+                if open_conflicts
+                else _jsonable(status).get("status", "warning")
+                if isinstance(_jsonable(status), dict)
+                else "warning"
+            ),
+            "module_slot_count": len(slots),
+            "capability_binding_count": len(bindings),
+            "module_mount_plan_count": len(plans),
+            "open_conflict_count": len(open_conflicts),
+            "metadata_only": True,
+            "activation_allowed": False,
+            "execution_allowed": False,
+            "dynamic_route_registration_allowed": False,
             "source_code_is_source_of_truth": True,
         }
 

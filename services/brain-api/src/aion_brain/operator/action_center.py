@@ -89,6 +89,9 @@ class ActionCenterService:
         generated.extend(self._blocked_extension_package_items(scope))
         generated.extend(self._pending_extension_review_items(scope))
         generated.extend(self._high_risk_extension_declaration_items(scope))
+        generated.extend(self._blocked_capability_binding_items(scope))
+        generated.extend(self._high_risk_capability_binding_items(scope))
+        generated.extend(self._blocked_module_mount_plan_items(scope))
         stored: list[OperatorActionItem] = []
         for item in generated[:limit]:
             saved = self._repository.save_action_item(item)
@@ -393,13 +396,9 @@ class ActionCenterService:
                 source_id=_id_for(item, "capability_declaration_id"),
                 trace_id=None,
                 category="registry",
-                severity="critical"
-                if getattr(item, "risk_level", None) == "critical"
-                else "high",
+                severity="critical" if getattr(item, "risk_level", None) == "critical" else "high",
                 title="High-risk extension capability declaration.",
-                description=(
-                    "A declared extension capability is high risk and remains inactive."
-                ),
+                description=("A declared extension capability is high risk and remains inactive."),
                 recommended_action="review_extension_capability_declaration",
                 runbook_ref="docs/extensions.md",
                 scope=scope or ["workspace:main"],
@@ -412,6 +411,100 @@ class ActionCenterService:
             )
             for item in items
             if str(getattr(item, "risk_level", "")).lower() in {"high", "critical"}
+        ]
+
+    def _blocked_capability_binding_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("module_binding_repository")
+        list_bindings = getattr(source, "list_bindings", None)
+        if not callable(list_bindings):
+            return []
+        try:
+            items = list_bindings(status="blocked", limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="capability_binding",
+                source_id=_id_for(item, "capability_binding_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="registry",
+                severity="high",
+                title="Capability binding is blocked.",
+                description="A capability binding has blockers and remains inactive.",
+                recommended_action="review_capability_binding_metadata",
+                runbook_ref="docs/capability-binding-model.md",
+                scope=scope or ["workspace:main"],
+                metadata={
+                    "capability_key": getattr(item, "capability_key", None),
+                    "risk_level": getattr(item, "risk_level", None),
+                    "metadata_only": True,
+                },
+            )
+            for item in items
+        ]
+
+    def _high_risk_capability_binding_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("module_binding_repository")
+        list_bindings = getattr(source, "list_bindings", None)
+        if not callable(list_bindings):
+            return []
+        try:
+            items = [
+                *list_bindings(risk_level="high", limit=100),
+                *list_bindings(risk_level="critical", limit=100),
+            ]
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="capability_binding",
+                source_id=_id_for(item, "capability_binding_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="registry",
+                severity="critical" if getattr(item, "risk_level", None) == "critical" else "high",
+                title="High-risk capability binding is staged.",
+                description="A high-risk capability binding is metadata-only and needs review.",
+                recommended_action="review_capability_binding_risk",
+                runbook_ref="docs/capability-binding-model.md",
+                scope=scope or ["workspace:main"],
+                metadata={
+                    "capability_key": getattr(item, "capability_key", None),
+                    "risk_level": getattr(item, "risk_level", None),
+                    "requires_approval": getattr(item, "requires_approval", None),
+                    "requires_sandbox": getattr(item, "requires_sandbox", None),
+                },
+            )
+            for item in items
+        ]
+
+    def _blocked_module_mount_plan_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("module_binding_repository")
+        list_plans = getattr(source, "list_mount_plans", None)
+        if not callable(list_plans):
+            return []
+        try:
+            items = list_plans(status="blocked", limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="module_mount_plan",
+                source_id=_id_for(item, "mount_plan_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="registry",
+                severity="high",
+                title="Module mount plan is blocked.",
+                description="A future mount plan is blocked and cannot execute.",
+                recommended_action="review_module_mount_plan",
+                runbook_ref="docs/capability-binding-model.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={
+                    "module_slot_id": getattr(item, "module_slot_id", None),
+                    "blocked": getattr(item, "blocked", True),
+                    "execution_allowed": getattr(item, "execution_allowed", False),
+                },
+            )
+            for item in items
         ]
 
     def _failed_explanation_items(self, scope: list[str]) -> list[OperatorActionItem]:

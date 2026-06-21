@@ -72,9 +72,7 @@ class CapabilityDeclarationService:
                     output_schema=dict(item.get("output_schema") or {}),
                     constraints=list(item.get("constraints") or []),
                     metadata={
-                        k: v
-                        for k, v in item.items()
-                        if k not in {"input_schema", "output_schema"}
+                        k: v for k, v in item.items() if k not in {"input_schema", "output_schema"}
                     },
                     created_at=datetime.now(UTC),
                 )

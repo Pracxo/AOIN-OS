@@ -1372,3 +1372,39 @@ install record and must keep `executable=false` and
 Extension Registry contracts must not expose raw headers, hidden reasoning,
 raw prompts, provider payloads, secrets, SQLAlchemy rows, third-party module
 internals, source code payloads, or domain-specific module behavior.
+
+## Module Binding Contracts
+
+AION Brain owns these module slot and capability binding contracts:
+
+- `ModuleSlot`
+- `ModuleSlotCreateRequest`
+- `CapabilityBinding`
+- `CapabilityBindingCreateRequest`
+- `BindingValidationRequest`
+- `BindingValidationRun`
+- `ModuleMountPlan`
+- `RouteBindingPreview`
+- `BindingConflict`
+- `ModuleBindingQuery`
+- `ModuleBindingQueryResult`
+
+`ModuleSlot` is an inactive metadata record for a future module position. It
+may reference extension packages, declared capabilities, contracts, policy
+actions, settings, sandbox profiles, mount plans, and owner scope. It is not a
+loaded module.
+
+`CapabilityBinding` is an inactive metadata record for a future capability
+mapping. It may declare schemas, required policy actions, required settings,
+required contracts, risk level, sandbox requirements, and target runtime
+metadata. It is not an active capability and must not register itself.
+
+`BindingValidationRun` records deterministic local checks. `BindingConflict`
+records binding-owned findings only. `ModuleMountPlan` is non-executable and
+must keep `executable=false` and `execution_allowed=false`. `RouteBindingPreview`
+is preview-only and must keep `registration_allowed=false`.
+
+Module binding contracts must not expose raw headers, hidden reasoning, raw
+prompts, provider payloads, secrets, SQLAlchemy rows, source code payloads,
+runtime client objects, third-party module internals, or domain-specific module
+logic.

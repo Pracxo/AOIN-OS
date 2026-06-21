@@ -257,3 +257,14 @@ Instructions for future Codex runs in this repository:
 - Extension manifests, package records, compatibility checks, reviews, and
   install plans must stay redacted, generic, and non-executing. Install plans
   must keep `executable=false` and `execution_allowed=false` in v0.1.
+- Module slots must remain metadata-only. Do not load extension code, install
+  packages, activate modules, register dynamic routes, mutate runtime config,
+  call external services, or run shell commands from module slot services, SDK
+  helpers, CLI commands, telemetry, reports, or docs.
+- Capability bindings must not activate capabilities, register active
+  capability records, invoke module runtimes, bypass policy, bypass sandbox, or
+  introduce domain-specific module logic.
+- Mount plans must not execute. They must keep `executable=false` and
+  `execution_allowed=false` in v0.1.
+- Route previews must not register routes. They must keep
+  `registration_allowed=false` in v0.1.

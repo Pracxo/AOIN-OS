@@ -494,3 +494,23 @@ Contract commands call the SDK and public Brain APIs only. Scans default to
 CLI methods, execute migration steps, call external services, print raw
 prompts, expose hidden reasoning, expose raw headers, or add domain-specific
 compatibility logic.
+
+## Module Binding Commands
+
+- `aionctl module-slots create`
+- `aionctl module-slots list`
+- `aionctl capability-bindings create`
+- `aionctl capability-bindings list`
+- `aionctl module-bindings validate`
+- `aionctl module-bindings conflicts`
+- `aionctl module-bindings mount-plan`
+- `aionctl module-bindings route-preview`
+- `aionctl module-bindings query`
+
+Module binding commands call the SDK and public Brain APIs only. Validation
+defaults to `dry_run` and also accepts `--dry-run` explicitly. Commands create
+metadata records, conflict records, non-executable mount plans, and route
+previews only. They do not load extension code, install packages, activate
+capabilities, register routes, mutate runtime configuration, execute mount
+plans, call external services, print raw prompts, expose hidden reasoning, or
+add domain-specific module behavior.

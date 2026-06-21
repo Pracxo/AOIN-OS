@@ -748,3 +748,41 @@ records only, not executable installation. Extension projection remains
 backend-only and frontend-agnostic, and must not expose source code payloads,
 package bytes, raw headers, hidden reasoning, raw prompts, provider payloads,
 secrets, external source metadata, or domain-specific module logic.
+
+## Module Binding Projection
+
+Capability Binding Registry telemetry projects staged module readiness into the
+Visual Brain Projection. Generic event types include:
+
+- `module_slot_created`
+- `module_slot_archived`
+- `capability_binding_created`
+- `capability_binding_disabled`
+- `binding_conflict_detected`
+- `binding_validation_started`
+- `binding_validation_completed`
+- `module_mount_plan_created`
+- `route_binding_preview_created`
+
+Generic visual node types include:
+
+- `module_slot`
+- `capability_binding`
+- `binding_conflict`
+- `binding_validation`
+- `module_mount_plan`
+- `route_binding_preview`
+
+The generic projection path is:
+
+`extension package -> module slot -> capability binding -> validation -> mount plan`
+
+Route preview nodes may attach after validation or mount planning. Binding
+conflict nodes represent review findings, not runtime failures. Mount-plan
+nodes represent non-executable future records. Route-preview nodes represent
+preview metadata and must not imply registered routes.
+
+Module binding projection remains backend-only and frontend-agnostic, and must
+not expose source code payloads, package bytes, raw headers, hidden reasoning,
+raw prompts, provider payloads, secrets, runtime internals, or
+domain-specific module logic.

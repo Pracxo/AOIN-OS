@@ -21,10 +21,12 @@ class ExtensionReviewService:
         policy_adapter: object,
         *,
         telemetry_service: object | None = None,
+        module_slot_service: object | None = None,
     ) -> None:
         self._repository = repository
         self._policy_adapter = policy_adapter
         self._telemetry_service = telemetry_service
+        self._module_slot_service = module_slot_service
 
     def review(self, request: ExtensionReviewRequest, scope: list[str]) -> ExtensionReview:
         authorize_extension_action(
@@ -71,6 +73,8 @@ class ExtensionReviewService:
                 }
             )
         )
+        if request.decision == "approve" and bool(request.metadata.get("create_module_slot")):
+            self._maybe_create_module_slot(package, scope, request.actor_id)
         emit_extension_telemetry(
             self._telemetry_service,
             event_type="extension_review_recorded",
@@ -105,6 +109,24 @@ class ExtensionReviewService:
             decision=decision,
             limit=limit,
         )
+
+    def _maybe_create_module_slot(
+        self,
+        package: object,
+        scope: list[str],
+        created_by: str | None,
+    ) -> None:
+        create_from_extension = getattr(self._module_slot_service, "create_from_extension", None)
+        if not callable(create_from_extension):
+            return
+        try:
+            create_from_extension(
+                cast(Any, package).extension_package_id,
+                scope=scope,
+                created_by=created_by,
+            )
+        except Exception:
+            return
 
 
 def _review_status(decision: str) -> Any:

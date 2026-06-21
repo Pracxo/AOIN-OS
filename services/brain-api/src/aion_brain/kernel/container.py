@@ -248,6 +248,16 @@ from aion_brain.model_outputs.response_candidates import ResponseCandidateServic
 from aion_brain.model_outputs.structured_validator import StructuredOutputValidator
 from aion_brain.model_outputs.tool_intents import ToolIntentCaptureService
 from aion_brain.model_outputs.unsafe_detector import UnsafeOutputDetector
+from aion_brain.module_bindings import (
+    BindingConflictService,
+    BindingValidator,
+    CapabilityBindingService,
+    ModuleBindingQueryService,
+    ModuleBindingRepository,
+    ModuleMountPlanService,
+    ModuleSlotService,
+    RouteBindingPreviewService,
+)
 from aion_brain.module_developer.certifier import ModuleCertifier
 from aion_brain.module_developer.compatibility import ModuleCompatibilityChecker
 from aion_brain.module_developer.contract_tests import ModuleContractTestHarness
@@ -2637,6 +2647,58 @@ class KernelContainer:
             telemetry_service=self.telemetry_service,
             settings=self.settings,
         )
+        self.module_binding_repository = ModuleBindingRepository(self.settings.database_url)
+        self.module_slot_service = ModuleSlotService(
+            self.module_binding_repository,
+            self.policy_adapter,
+            extension_registry_repository=self.extension_registry_repository,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            settings=self.settings,
+        )
+        self.capability_binding_service = CapabilityBindingService(
+            self.module_binding_repository,
+            self.policy_adapter,
+            extension_registry_repository=self.extension_registry_repository,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            settings=self.settings,
+        )
+        self.binding_conflict_service = BindingConflictService(
+            self.module_binding_repository,
+            self.policy_adapter,
+            contract_repository=self.contract_registry_repository,
+            policy_catalog_repository=self.policy_catalog_repository,
+            settings=self.settings,
+            telemetry_service=self.telemetry_service,
+        )
+        self.binding_validator = BindingValidator(
+            self.module_binding_repository,
+            self.policy_adapter,
+            conflict_service=self.binding_conflict_service,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            notification_router=self.notification_router,
+            settings=self.settings,
+        )
+        self.module_mount_plan_service = ModuleMountPlanService(
+            self.module_binding_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            settings=self.settings,
+        )
+        self.route_binding_preview_service = RouteBindingPreviewService(
+            self.module_binding_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            settings=self.settings,
+        )
+        self.module_binding_query_service = ModuleBindingQueryService(
+            self.module_binding_repository,
+            self.policy_adapter,
+        )
         self.extension_intake_service = ExtensionIntakeService(
             self.extension_registry_repository,
             self.policy_adapter,
@@ -2649,12 +2711,14 @@ class KernelContainer:
             telemetry_service=self.telemetry_service,
             audit_sink=self.audit_integrity_ledger,
             notification_router=self.notification_router,
+            module_slot_service=self.module_slot_service,
             settings=self.settings,
         )
         self.extension_review_service = ExtensionReviewService(
             self.extension_registry_repository,
             self.policy_adapter,
             telemetry_service=self.telemetry_service,
+            module_slot_service=self.module_slot_service,
         )
         self.extension_query_service = ExtensionQueryService(
             self.extension_registry_repository,
@@ -2684,6 +2748,13 @@ class KernelContainer:
         )
         if callable(set_extension_registry_services):
             set_extension_registry_services(repository=self.extension_registry_repository)
+        set_module_binding_registry = getattr(
+            self.release_packager,
+            "set_module_binding_registry",
+            None,
+        )
+        if callable(set_module_binding_registry):
+            set_module_binding_registry(repository=self.module_binding_repository)
         set_freeze_extension_registry = getattr(
             self.freeze_gate_service,
             "set_extension_registry_repository",
@@ -2691,6 +2762,13 @@ class KernelContainer:
         )
         if callable(set_freeze_extension_registry):
             set_freeze_extension_registry(self.extension_registry_repository)
+        set_freeze_module_binding_registry = getattr(
+            self.freeze_gate_service,
+            "set_module_binding_repository",
+            None,
+        )
+        if callable(set_freeze_module_binding_registry):
+            set_freeze_module_binding_registry(self.module_binding_repository)
         set_hardening_extension_registry = getattr(
             self.hardening_gate_service,
             "set_extension_registry_repository",
@@ -2698,10 +2776,18 @@ class KernelContainer:
         )
         if callable(set_hardening_extension_registry):
             set_hardening_extension_registry(self.extension_registry_repository)
+        set_hardening_module_binding_registry = getattr(
+            self.hardening_gate_service,
+            "set_module_binding_repository",
+            None,
+        )
+        if callable(set_hardening_module_binding_registry):
+            set_hardening_module_binding_registry(self.module_binding_repository)
         set_resource_provider = getattr(self.resource_scanner, "set_provider", None)
         if callable(set_resource_provider):
             set_resource_provider("contract_registry", self.contract_registry_repository)
             set_resource_provider("extension_registry", self.extension_registry_repository)
+            set_resource_provider("module_binding_registry", self.module_binding_repository)
         self.lifecycle_repository = LifecycleRepository(self.settings.database_url)
         self.lifecycle_policy_service = LifecyclePolicyService(
             self.lifecycle_repository,
@@ -2800,6 +2886,7 @@ class KernelContainer:
             registry_service=self.registry_query_service,
             contract_registry_service=self.contract_registry_report_service,
             extension_registry_service=self.extension_registry_repository,
+            module_binding_service=self.module_binding_repository,
             lifecycle_service=self.lifecycle_report_service,
         )
         self.operator_queue_summary_builder = QueueSummaryBuilder(
@@ -2861,6 +2948,7 @@ class KernelContainer:
             registry_rebuilder=self.registry_rebuilder,
             contract_registry_repository=self.contract_registry_repository,
             extension_registry_repository=self.extension_registry_repository,
+            module_binding_repository=self.module_binding_repository,
             archive_planner=self.archive_planner,
             redaction_planner=self.redaction_planner,
             purge_preview_service=self.purge_preview_service,
@@ -2913,6 +3001,7 @@ class KernelContainer:
             incident_service=self.incident_service,
             contract_registry_repository=self.contract_registry_repository,
             extension_registry_repository=self.extension_registry_repository,
+            module_binding_repository=self.module_binding_repository,
             archive_planner=self.archive_planner,
             redaction_planner=self.redaction_planner,
             purge_preview_service=self.purge_preview_service,
@@ -3931,6 +4020,44 @@ class KernelContainer:
                 "local",
             ),
             ("extension_query_service", self.extension_query_service, "service", "local"),
+            (
+                "module_binding_repository",
+                self.module_binding_repository,
+                "repository",
+                "postgres",
+            ),
+            ("module_slot_service", self.module_slot_service, "service", "local"),
+            (
+                "capability_binding_service",
+                self.capability_binding_service,
+                "service",
+                "local",
+            ),
+            (
+                "binding_conflict_service",
+                self.binding_conflict_service,
+                "service",
+                "deterministic",
+            ),
+            ("binding_validator", self.binding_validator, "service", "deterministic"),
+            (
+                "module_mount_plan_service",
+                self.module_mount_plan_service,
+                "service",
+                "local",
+            ),
+            (
+                "route_binding_preview_service",
+                self.route_binding_preview_service,
+                "service",
+                "local",
+            ),
+            (
+                "module_binding_query_service",
+                self.module_binding_query_service,
+                "service",
+                "local",
+            ),
             ("lifecycle_repository", self.lifecycle_repository, "repository", "postgres"),
             ("lifecycle_policy_service", self.lifecycle_policy_service, "service", "local"),
             ("retention_classifier", self.retention_classifier, "service", "deterministic"),

@@ -117,6 +117,15 @@ def test_settings_defaults_match_env_example(monkeypatch) -> None:
         "AION_EXTENSION_ACTIVATION_ENABLED",
         "AION_EXTENSION_EXTERNAL_SOURCES_ENABLED",
         "AION_EXTENSION_CREATE_NOTIFICATIONS_DEFAULT",
+        "AION_MODULE_SLOTS_ENABLED",
+        "AION_CAPABILITY_BINDINGS_ENABLED",
+        "AION_BINDING_VALIDATION_ENABLED",
+        "AION_MODULE_MOUNT_PLANS_ENABLED",
+        "AION_ROUTE_BINDING_PREVIEW_ENABLED",
+        "AION_MODULE_SLOT_ACTIVATION_ENABLED",
+        "AION_CAPABILITY_BINDING_ACTIVATION_ENABLED",
+        "AION_DYNAMIC_ROUTE_REGISTRATION_ENABLED",
+        "AION_MODULE_BINDING_CREATE_NOTIFICATIONS_DEFAULT",
     ]:
         monkeypatch.delenv(key, raising=False)
 
@@ -138,6 +147,15 @@ def test_settings_defaults_match_env_example(monkeypatch) -> None:
     assert settings.visual_stream_poll_interval_seconds == 1.0
     assert settings.visual_stream_max_events_default == 100
     assert settings.observability_adapter == "local"
+    assert settings.module_slots_enabled is True
+    assert settings.capability_bindings_enabled is True
+    assert settings.binding_validation_enabled is True
+    assert settings.module_mount_plans_enabled is True
+    assert settings.route_binding_preview_enabled is True
+    assert settings.module_slot_activation_enabled is False
+    assert settings.capability_binding_activation_enabled is False
+    assert settings.dynamic_route_registration_enabled is False
+    assert settings.module_binding_create_notifications_default is False
     assert settings.api_version == "v0.1"
     assert settings.api_request_audit_enabled is True
     assert settings.api_error_detail_enabled is True

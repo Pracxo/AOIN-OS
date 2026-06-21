@@ -304,6 +304,7 @@ aion_contract_registry_reports = Table(
     Index("ix_aion_contract_reports_created_at", "created_at"),
 )
 
+
 class ContractRegistryRepository:
     """Store contract registry records without owning source code contracts."""
 

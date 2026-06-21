@@ -60,11 +60,17 @@ class HardeningGateService:
         self._settings = settings or get_settings()
         self._audit_sink = audit_sink
         self._extension_registry_repository: object | None = None
+        self._module_binding_repository: object | None = None
 
     def set_extension_registry_repository(self, repository: object | None) -> None:
         """Attach Extension Registry after kernel assembly."""
 
         self._extension_registry_repository = repository
+
+    def set_module_binding_repository(self, repository: object | None) -> None:
+        """Attach module binding registry after kernel assembly."""
+
+        self._module_binding_repository = repository
 
     def run(self, request: HardeningGateRequest, *, app: object | None = None) -> HardeningGateRun:
         """Run the local security hardening gate."""
@@ -123,6 +129,7 @@ class HardeningGateService:
         if request.include_release_package_check:
             checks.append(self._release_package_check())
         checks.extend(self._extension_registry_checks())
+        checks.extend(self._module_binding_checks())
         checks.extend(self._audit_integrity_checks())
         checks.append(self._control_catalog_check())
 
@@ -330,31 +337,19 @@ class HardeningGateService:
         return [
             _check(
                 "extension_code_loading_disabled",
-                (
-                    "failed"
-                    if self._settings.extension_code_loading_enabled
-                    else "passed"
-                ),
+                ("failed" if self._settings.extension_code_loading_enabled else "passed"),
                 "Extension code loading is disabled.",
                 "extensions",
             ),
             _check(
                 "extension_activation_disabled",
-                (
-                    "failed"
-                    if self._settings.extension_activation_enabled
-                    else "passed"
-                ),
+                ("failed" if self._settings.extension_activation_enabled else "passed"),
                 "Extension activation is disabled.",
                 "extensions",
             ),
             _check(
                 "extension_external_sources_disabled",
-                (
-                    "failed"
-                    if self._settings.extension_external_sources_enabled
-                    else "passed"
-                ),
+                ("failed" if self._settings.extension_external_sources_enabled else "passed"),
                 "Extension external sources are disabled.",
                 "extensions",
             ),
@@ -364,6 +359,63 @@ class HardeningGateService:
                 "Extension registry has no blocked package metadata.",
                 "extensions",
                 {"blocked_count": len(blocked), "package_count": len(packages)},
+            ),
+        ]
+
+    def _module_binding_checks(self) -> builtins.list[dict[str, Any]]:
+        list_bindings = getattr(self._module_binding_repository, "list_bindings", None)
+        list_validations = getattr(
+            self._module_binding_repository,
+            "list_validation_runs",
+            None,
+        )
+        bindings = list_bindings(limit=1000) if callable(list_bindings) else []
+        validations = list_validations(limit=1000) if callable(list_validations) else []
+        validated_binding_ids = {
+            binding_id
+            for run in validations
+            if getattr(run, "status", None) in {"passed", "warning", "dry_run"}
+            for binding_id in getattr(run, "capability_binding_ids", [])
+        }
+        active_unvalidated = [
+            item
+            for item in bindings
+            if getattr(item, "status", None) in {"proposed", "validated"}
+            and getattr(item, "capability_binding_id", None) not in validated_binding_ids
+        ]
+        blocked = [item for item in bindings if getattr(item, "status", None) == "blocked"]
+        return [
+            _check(
+                "module_slot_activation_disabled",
+                "failed" if self._settings.module_slot_activation_enabled else "passed",
+                "Module slot activation is disabled.",
+                "module_bindings",
+            ),
+            _check(
+                "capability_binding_activation_disabled",
+                "failed" if self._settings.capability_binding_activation_enabled else "passed",
+                "Capability binding activation is disabled.",
+                "module_bindings",
+            ),
+            _check(
+                "dynamic_route_registration_disabled",
+                "failed" if self._settings.dynamic_route_registration_enabled else "passed",
+                "Dynamic route registration is disabled.",
+                "module_bindings",
+            ),
+            _check(
+                "no_active_unvalidated_capability_bindings",
+                "failed" if active_unvalidated else "passed",
+                "No active capability bindings are missing validation records.",
+                "module_bindings",
+                details={"count": len(active_unvalidated)},
+            ),
+            _check(
+                "no_blocked_capability_bindings",
+                "failed" if blocked else "passed",
+                "No blocked capability binding metadata is present.",
+                "module_bindings",
+                details={"count": len(blocked)},
             ),
         ]
 

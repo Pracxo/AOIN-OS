@@ -291,6 +291,66 @@ class Settings(BaseSettings):
             "extension_create_notifications_default",
         ),
     )
+    module_slots_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_MODULE_SLOTS_ENABLED", "module_slots_enabled"),
+    )
+    capability_bindings_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CAPABILITY_BINDINGS_ENABLED",
+            "capability_bindings_enabled",
+        ),
+    )
+    binding_validation_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_BINDING_VALIDATION_ENABLED",
+            "binding_validation_enabled",
+        ),
+    )
+    module_mount_plans_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODULE_MOUNT_PLANS_ENABLED",
+            "module_mount_plans_enabled",
+        ),
+    )
+    route_binding_preview_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_ROUTE_BINDING_PREVIEW_ENABLED",
+            "route_binding_preview_enabled",
+        ),
+    )
+    module_slot_activation_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_MODULE_SLOT_ACTIVATION_ENABLED",
+            "module_slot_activation_enabled",
+        ),
+    )
+    capability_binding_activation_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CAPABILITY_BINDING_ACTIVATION_ENABLED",
+            "capability_binding_activation_enabled",
+        ),
+    )
+    dynamic_route_registration_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_DYNAMIC_ROUTE_REGISTRATION_ENABLED",
+            "dynamic_route_registration_enabled",
+        ),
+    )
+    module_binding_create_notifications_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_MODULE_BINDING_CREATE_NOTIFICATIONS_DEFAULT",
+            "module_binding_create_notifications_default",
+        ),
+    )
     lifecycle_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices("AION_LIFECYCLE_ENABLED", "lifecycle_enabled"),

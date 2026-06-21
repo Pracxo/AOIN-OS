@@ -410,6 +410,22 @@ allowed_actions := {
 	"extension.install_plan.read",
 	"extension.install_plan.update",
 	"extension.query",
+	"module_slot.create",
+	"module_slot.read",
+	"module_slot.update",
+	"module_slot.delete",
+	"capability_binding.create",
+	"capability_binding.read",
+	"capability_binding.update",
+	"module_binding.validate",
+	"module_binding.conflict.read",
+	"module_binding.conflict.update",
+	"module_mount_plan.create",
+	"module_mount_plan.read",
+	"module_mount_plan.update",
+	"route_binding_preview.create",
+	"route_binding_preview.read",
+	"module_binding.query",
 	"response.draft",
 	"response.evaluate",
 	"response.verify",
@@ -873,6 +889,12 @@ low_allowed_actions := {
 	"extension.capability_declaration.read",
 	"extension.install_plan.read",
 	"extension.query",
+	"module_slot.read",
+	"capability_binding.read",
+	"module_binding.conflict.read",
+	"module_mount_plan.read",
+	"route_binding_preview.read",
+	"module_binding.query",
 	"lifecycle.policy.read",
 	"lifecycle.classify",
 	"lifecycle.classification.read",
@@ -1396,6 +1418,34 @@ decision := {
 	extension_registry_metadata_action
 	extension_registry_permission
 	not extension_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "module_binding_read_allowed",
+	"constraints": ["metadata_only", "no_module_activation", "no_capability_execution", "no_dynamic_route_registration"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	module_binding_read_action
+	module_binding_permission
+	not module_binding_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "module_binding_metadata_action_allowed",
+	"constraints": ["metadata_only", "no_module_activation", "no_capability_execution", "no_dynamic_route_registration", "no_source_mutation"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	module_binding_metadata_action
+	module_binding_permission
+	not module_binding_unsafe_request
 }
 
 decision := {
@@ -2931,6 +2981,7 @@ decision := {
 	not registry_action
 	not contract_registry_action
 	not extension_registry_action
+	not module_binding_action
 	not scheduler_action
 	not incident_action
 	not lifecycle_action
@@ -3663,6 +3714,26 @@ extension_registry_action if {
 	startswith(input.action_type, "extension.")
 }
 
+module_binding_action if {
+	startswith(input.action_type, "module_slot.")
+}
+
+module_binding_action if {
+	startswith(input.action_type, "capability_binding.")
+}
+
+module_binding_action if {
+	startswith(input.action_type, "module_binding.")
+}
+
+module_binding_action if {
+	startswith(input.action_type, "module_mount_plan.")
+}
+
+module_binding_action if {
+	startswith(input.action_type, "route_binding_preview.")
+}
+
 contract_registry_read_action if {
 	input.action_type == "contract_registry.resource.read"
 }
@@ -3820,6 +3891,106 @@ extension_unsafe_request if {
 }
 
 extension_unsafe_request if {
+	input.context.code_generated == true
+}
+
+module_binding_read_action if {
+	input.action_type == "module_slot.read"
+}
+
+module_binding_read_action if {
+	input.action_type == "capability_binding.read"
+}
+
+module_binding_read_action if {
+	input.action_type == "module_binding.conflict.read"
+}
+
+module_binding_read_action if {
+	input.action_type == "module_mount_plan.read"
+}
+
+module_binding_read_action if {
+	input.action_type == "route_binding_preview.read"
+}
+
+module_binding_read_action if {
+	input.action_type == "module_binding.query"
+}
+
+module_binding_metadata_action if {
+	input.action_type == "module_slot.create"
+}
+
+module_binding_metadata_action if {
+	input.action_type == "module_slot.update"
+}
+
+module_binding_metadata_action if {
+	input.action_type == "module_slot.delete"
+}
+
+module_binding_metadata_action if {
+	input.action_type == "capability_binding.create"
+}
+
+module_binding_metadata_action if {
+	input.action_type == "capability_binding.update"
+}
+
+module_binding_metadata_action if {
+	input.action_type == "module_binding.validate"
+}
+
+module_binding_metadata_action if {
+	input.action_type == "module_binding.conflict.update"
+}
+
+module_binding_metadata_action if {
+	input.action_type == "module_mount_plan.create"
+}
+
+module_binding_metadata_action if {
+	input.action_type == "module_mount_plan.update"
+}
+
+module_binding_metadata_action if {
+	input.action_type == "route_binding_preview.create"
+}
+
+module_binding_unsafe_request if {
+	input.context.source_mutated == true
+}
+
+module_binding_unsafe_request if {
+	input.context.source_mutation_requested == true
+}
+
+module_binding_unsafe_request if {
+	input.context.code_loading_requested == true
+}
+
+module_binding_unsafe_request if {
+	input.context.activation_requested == true
+}
+
+module_binding_unsafe_request if {
+	input.context.capability_execution_requested == true
+}
+
+module_binding_unsafe_request if {
+	input.context.dynamic_route_registration_requested == true
+}
+
+module_binding_unsafe_request if {
+	input.context.external_source_requested == true
+}
+
+module_binding_unsafe_request if {
+	input.context.shell_command_requested == true
+}
+
+module_binding_unsafe_request if {
 	input.context.code_generated == true
 }
 
@@ -4254,6 +4425,38 @@ extension_registry_permission if {
 }
 
 extension_registry_permission if {
+	input.context.actor_context.permissions[_] == "operator"
+}
+
+module_binding_permission if {
+	dev_owner
+}
+
+module_binding_permission if {
+	input.context.actor_context.permissions[_] == input.action_type
+}
+
+module_binding_permission if {
+	input.context.permissions[_] == input.action_type
+}
+
+module_binding_permission if {
+	input.actor_id
+	input.requested_permissions[_] == input.action_type
+	input.security_scope[_] == sprintf("workspace:%s", [input.workspace_id])
+}
+
+module_binding_permission if {
+	input.context.actor_context.permissions[_] == "module_binding.read"
+	module_binding_read_action
+}
+
+module_binding_permission if {
+	input.context.actor_context.permissions[_] == "module_binding.write"
+	module_binding_metadata_action
+}
+
+module_binding_permission if {
 	input.context.actor_context.permissions[_] == "operator"
 }
 

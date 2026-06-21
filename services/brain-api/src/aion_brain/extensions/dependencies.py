@@ -150,15 +150,23 @@ class DependencyDeclarationService:
         if callable(status):
             try:
                 flags = status(scope).effective_feature_flags
-                return ("available", "feature_flag_present") if key in flags else (
-                    "missing",
-                    "feature_flag_not_found",
+                return (
+                    ("available", "feature_flag_present")
+                    if key in flags
+                    else (
+                        "missing",
+                        "feature_flag_not_found",
+                    )
                 )
             except Exception:
                 return "warning", "runtime_config_status_unavailable"
-        return ("available", "known_feature_flag") if key in _KNOWN_FEATURE_FLAGS else (
-            "missing",
-            "feature_flag_not_found",
+        return (
+            ("available", "known_feature_flag")
+            if key in _KNOWN_FEATURE_FLAGS
+            else (
+                "missing",
+                "feature_flag_not_found",
+            )
         )
 
     def _check_setting(self, key: str) -> tuple[str, str]:
@@ -172,9 +180,13 @@ class DependencyDeclarationService:
         get_action = getattr(repository, "get_action", None)
         if callable(get_action):
             try:
-                return ("available", "policy_action_present") if get_action(key) else (
-                    "missing",
-                    "policy_action_not_found",
+                return (
+                    ("available", "policy_action_present")
+                    if get_action(key)
+                    else (
+                        "missing",
+                        "policy_action_not_found",
+                    )
                 )
             except Exception:
                 return "warning", "policy_catalog_unavailable"
