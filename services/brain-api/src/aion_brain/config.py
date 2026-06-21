@@ -175,6 +175,53 @@ class Settings(BaseSettings):
             "run_supervision_default_stall_seconds",
         ),
     )
+    notifications_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_NOTIFICATIONS_ENABLED", "notifications_enabled"),
+    )
+    alert_router_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_ALERT_ROUTER_ENABLED", "alert_router_enabled"),
+    )
+    notification_subscriptions_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_NOTIFICATION_SUBSCRIPTIONS_ENABLED",
+            "notification_subscriptions_enabled",
+        ),
+    )
+    escalation_queue_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_ESCALATION_QUEUE_ENABLED", "escalation_queue_enabled"),
+    )
+    notification_digests_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_NOTIFICATION_DIGESTS_ENABLED",
+            "notification_digests_enabled",
+        ),
+    )
+    external_notifications_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_EXTERNAL_NOTIFICATIONS_ENABLED",
+            "external_notifications_enabled",
+        ),
+    )
+    notification_local_delivery_only: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_NOTIFICATION_LOCAL_DELIVERY_ONLY",
+            "notification_local_delivery_only",
+        ),
+    )
+    notification_auto_create_operator_items: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_NOTIFICATION_AUTO_CREATE_OPERATOR_ITEMS",
+            "notification_auto_create_operator_items",
+        ),
+    )
     dialogue_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices("AION_DIALOGUE_ENABLED", "dialogue_enabled"),

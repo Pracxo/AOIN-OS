@@ -475,3 +475,32 @@ prompt optimization services.
 The SDK calls public Brain APIs only. It does not import `aion_brain`, target
 subsystem internals, database clients, provider SDKs, frontend code, or
 external orchestration clients.
+
+## NotificationsResource
+
+`client.notifications` supports:
+
+- `create_topic(payload)`
+- `list_topics(scope, status=None, category=None, limit=100)`
+- `seed_default_topics(scope, dry_run=True)`
+- `create_subscription(payload)`
+- `list_subscriptions(scope, topic_key=None, actor_id=None, workspace_id=None, status=None, limit=100)`
+- `publish(payload)`
+- `query(payload)`
+- `mark_read(notification_id, reason, actor_id=None)`
+- `acknowledge(notification_id, reason, actor_id=None)`
+- `resolve(notification_id, reason, actor_id=None)`
+- `create_alert(payload)`
+- `query_alerts(payload)`
+- `acknowledge_alert(alert_id, reason, actor_id=None)`
+- `resolve_alert(alert_id, reason, actor_id=None)`
+- `create_escalation_policy(payload)`
+- `list_escalation_policies(scope, status=None, topic_key=None, alert_type=None, limit=100)`
+- `evaluate_escalations(scope, alert_id=None, notification_id=None)`
+- `list_escalations(scope, status=None, severity=None, limit=100)`
+- `create_digest(scope, digest_type="operator", actor_id=None, workspace_id=None, created_by=None)`
+- `list_digests(scope, digest_type=None, limit=50)`
+
+The SDK calls public Brain APIs only. It does not import `aion_brain`,
+notification provider SDKs, email/SMS clients, webhook clients, database
+clients, frontend code, or external delivery services.

@@ -63,3 +63,4 @@ Every architecture-changing Codex task must add or update an ADR.
 - [0057: Model Output Governance](0057-model-output-governance.md) - Defines redacted model output intake, parsing, response candidates, and tool-intent capture.
 - [0058: Action Proposal Broker and Execution Handoff Gate](0058-action-proposal-broker-execution-handoff.md) - Defines reviewed action proposals and explicit dry-run handoff gates.
 - [0059: Run Supervision, Cancellation Gate, Timeout Policy, and Compensation Planner](0059-run-supervision-cancellation-compensation.md) - Defines generic run observation, manual control requests, timeout detection, and non-executing compensation plans.
+- [0060: Internal Notification and Alert Routing](0060-internal-notification-alert-routing.md) - Defines local notification, alert, escalation, and digest boundaries.

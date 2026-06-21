@@ -45,6 +45,10 @@ class KernelDiagnostics:
         ("run_status_sampler_present", "run_status_sampler", "high"),
         ("run_control_service_present", "run_control_service", "high"),
         ("compensation_planner_present", "compensation_planner", "high"),
+        ("notification_router_present", "notification_router", "high"),
+        ("alert_service_present", "alert_service", "high"),
+        ("escalation_service_present", "escalation_service", "medium"),
+        ("notification_digest_service_present", "notification_digest_service", "medium"),
         ("prompt_redactor_present", "prompt_redactor", "high"),
         ("prompt_repository_present", "prompt_repository", "high"),
         ("prompt_compiler_present", "prompt_compiler", "high"),
@@ -306,6 +310,7 @@ class KernelDiagnostics:
         checks.extend(self._model_output_checks(settings))
         checks.extend(self._action_proposal_checks(settings))
         checks.extend(self._run_supervision_checks(settings))
+        checks.extend(self._notification_checks(settings))
         checks.extend(self._entity_checks(settings))
         checks.extend(self._situation_checks(settings))
         checks.extend(self._decision_checks(settings))
@@ -683,6 +688,97 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Run supervision services are assembled.",
+            ),
+        ]
+
+    def _notification_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "notification_repository",
+                "notification_topic_service",
+                "notification_subscription_service",
+                "notification_router",
+                "alert_service",
+                "escalation_service",
+                "notification_digest_service",
+                "notification_query_service",
+            )
+        )
+        return [
+            self._result(
+                "notifications_enabled",
+                "notifications",
+                "passed" if bool(getattr(settings, "notifications_enabled", True)) else "warning",
+                "high",
+                "Internal notifications are enabled.",
+            ),
+            self._result(
+                "alert_router_enabled",
+                "notifications",
+                "passed" if bool(getattr(settings, "alert_router_enabled", True)) else "warning",
+                "high",
+                "Alert router is enabled.",
+            ),
+            self._result(
+                "notification_subscriptions_enabled",
+                "notifications",
+                (
+                    "passed"
+                    if bool(getattr(settings, "notification_subscriptions_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Notification subscriptions are enabled.",
+            ),
+            self._result(
+                "escalation_queue_enabled",
+                "notifications",
+                "passed"
+                if bool(getattr(settings, "escalation_queue_enabled", True))
+                else "warning",
+                "medium",
+                "Local escalation queue is enabled.",
+            ),
+            self._result(
+                "notification_digests_enabled",
+                "notifications",
+                (
+                    "passed"
+                    if bool(getattr(settings, "notification_digests_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Notification digests are enabled.",
+            ),
+            self._result(
+                "external_notifications_enabled",
+                "notifications",
+                (
+                    "passed"
+                    if not bool(getattr(settings, "external_notifications_enabled", False))
+                    else "warning"
+                ),
+                "critical",
+                "External notifications are disabled in v0.1.",
+            ),
+            self._result(
+                "notification_local_delivery_only",
+                "notifications",
+                (
+                    "passed"
+                    if bool(getattr(settings, "notification_local_delivery_only", True))
+                    else "failed"
+                ),
+                "critical",
+                "Notification delivery is local-only.",
+            ),
+            self._result(
+                "notification_services_present",
+                "notifications",
+                "passed" if services_present else "failed",
+                "high",
+                "Notification services are assembled.",
             ),
         ]
 

@@ -210,3 +210,13 @@ Instructions for future Codex runs in this repository:
 - Timeout policies must not auto-cancel in v0.1.
 - Compensation plans must not execute themselves.
 - Do not add domain-specific compensation logic in Brain core.
+- Internal notifications must remain local-only in v0.1.
+- Do not add email, SMS, webhook, Slack, Teams, push, or other external
+  delivery paths to Brain core.
+- Alerts and escalations must not remediate, retry, cancel, resume,
+  acknowledge, resolve, or otherwise mutate their source records.
+- Notification payloads, alert metadata, digests, telemetry, SDK helpers, and
+  CLI commands must not expose hidden reasoning, chain-of-thought, raw prompts,
+  raw headers, provider payloads, or secrets.
+- Do not add domain-specific notification topics, alert types, escalation
+  logic, digest recommendations, or operator runbooks in Brain core.

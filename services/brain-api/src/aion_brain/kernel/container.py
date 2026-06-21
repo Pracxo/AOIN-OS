@@ -214,6 +214,14 @@ from aion_brain.modules.local_stub_runtime import LocalStubRuntimeAdapter
 from aion_brain.modules.mcp_runtime import MCPRuntimeAdapter
 from aion_brain.modules.repository import ModuleRuntimeRepository
 from aion_brain.modules.runtime_gateway import CapabilityRuntimeGateway
+from aion_brain.notifications.alerts import AlertService
+from aion_brain.notifications.digests import NotificationDigestService
+from aion_brain.notifications.escalations import EscalationService
+from aion_brain.notifications.query import NotificationQueryService
+from aion_brain.notifications.repository import NotificationRepository
+from aion_brain.notifications.router import NotificationRouter
+from aion_brain.notifications.subscriptions import NotificationSubscriptionService
+from aion_brain.notifications.topics import NotificationTopicService
 from aion_brain.observability.local_recorder import LocalObservabilityRecorder
 from aion_brain.observability.repository import ObservabilityRepository
 from aion_brain.operator.action_center import ActionCenterService
@@ -1940,6 +1948,43 @@ class KernelContainer:
         self.run_supervision_query_service = RunSupervisionQueryService(
             self.run_supervision_service
         )
+        self.notification_repository = NotificationRepository(self.settings.database_url)
+        self.alert_service = AlertService(
+            self.notification_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.notification_router = NotificationRouter(
+            self.notification_repository,
+            self.policy_adapter,
+            alert_service=self.alert_service,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.notification_topic_service = NotificationTopicService(
+            self.notification_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.notification_subscription_service = NotificationSubscriptionService(
+            self.notification_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.escalation_service = EscalationService(
+            self.notification_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.notification_digest_service = NotificationDigestService(
+            self.notification_repository,
+            self.policy_adapter,
+            notification_router=self.notification_router,
+            alert_service=self.alert_service,
+            telemetry_service=self.telemetry_service,
+        )
+        self.notification_query_service = NotificationQueryService(self.notification_router)
         for supervised_service in (
             self.execution_handoff_service,
             self.command_bus,
@@ -2377,6 +2422,10 @@ class KernelContainer:
             run_supervision_service=self.run_supervision_service,
             run_control_service=self.run_control_service,
             compensation_planner=self.compensation_planner,
+            notification_query_service=self.notification_query_service,
+            alert_service=self.alert_service,
+            escalation_service=self.escalation_service,
+            notification_digest_service=self.notification_digest_service,
         )
         self.operator_action_center_service = ActionCenterService(
             self.operator_repository,
@@ -2417,6 +2466,10 @@ class KernelContainer:
             run_supervision_service=self.run_supervision_service,
             run_control_service=self.run_control_service,
             compensation_planner=self.compensation_planner,
+            notification_query_service=self.notification_query_service,
+            alert_service=self.alert_service,
+            escalation_service=self.escalation_service,
+            notification_digest_service=self.notification_digest_service,
         )
         self.operator_readiness_aggregator = ReadinessAggregator(
             self.operator_status_card_builder,
@@ -2800,6 +2853,54 @@ class KernelContainer:
             (
                 "run_supervision_query_service",
                 self.run_supervision_query_service,
+                "service",
+                "local",
+            ),
+            (
+                "notification_repository",
+                self.notification_repository,
+                "repository",
+                "postgres",
+            ),
+            (
+                "notification_topic_service",
+                self.notification_topic_service,
+                "service",
+                "local",
+            ),
+            (
+                "notification_subscription_service",
+                self.notification_subscription_service,
+                "service",
+                "local",
+            ),
+            (
+                "notification_router",
+                self.notification_router,
+                "service",
+                "local",
+            ),
+            (
+                "alert_service",
+                self.alert_service,
+                "service",
+                "local",
+            ),
+            (
+                "escalation_service",
+                self.escalation_service,
+                "service",
+                "local",
+            ),
+            (
+                "notification_digest_service",
+                self.notification_digest_service,
+                "service",
+                "local",
+            ),
+            (
+                "notification_query_service",
+                self.notification_query_service,
                 "service",
                 "local",
             ),

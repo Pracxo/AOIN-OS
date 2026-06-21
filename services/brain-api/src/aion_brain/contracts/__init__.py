@@ -1,5 +1,6 @@
 """Public AION Brain contracts."""
 
+from aion_brain.contracts.alerts import AlertCreateRequest, AlertQuery, AlertRecord
 from aion_brain.contracts.api import (
     AIONError,
     AIONErrorResponse,
@@ -269,6 +270,16 @@ from aion_brain.contracts.modules import (
     ModuleRuntimeRegistrationRequest,
     ModuleRuntimeRegistrationResponse,
 )
+from aion_brain.contracts.notifications import (
+    EscalationPolicy,
+    EscalationRecord,
+    NotificationDigest,
+    NotificationPublishRequest,
+    NotificationQuery,
+    NotificationRecord,
+    NotificationSubscription,
+    NotificationTopic,
+)
 from aion_brain.contracts.observability import ObservabilityEvent, ObservabilitySummary
 from aion_brain.contracts.outbox import (
     OutboxMessage,
@@ -422,6 +433,9 @@ __all__ = [
     "ApprovalInboxQuery",
     "ApprovalLifecycleEvent",
     "ApprovalRequest",
+    "AlertCreateRequest",
+    "AlertQuery",
+    "AlertRecord",
     "AttentionDecision",
     "AttentionDecisionRequest",
     "AttentionSignal",
@@ -527,6 +541,8 @@ __all__ = [
     "EventSubscription",
     "EventSubscriptionCreateRequest",
     "EventTriggerRule",
+    "EscalationPolicy",
+    "EscalationRecord",
     "ExplanationFeedback",
     "ExplanationRecord",
     "ExplanationRequest",
@@ -619,6 +635,12 @@ __all__ = [
     "ObjectRef",
     "ObservabilityEvent",
     "ObservabilitySummary",
+    "NotificationDigest",
+    "NotificationPublishRequest",
+    "NotificationQuery",
+    "NotificationRecord",
+    "NotificationSubscription",
+    "NotificationTopic",
     "OpenAPIHygieneReport",
     "OutboxMessage",
     "OutboxProcessRequest",

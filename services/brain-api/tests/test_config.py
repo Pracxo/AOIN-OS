@@ -89,6 +89,14 @@ def test_settings_defaults_match_env_example(monkeypatch) -> None:
         "AION_LEARNING_MIN_PATTERN_FREQUENCY",
         "AION_LEARNING_MIN_PATTERN_CONFIDENCE",
         "AION_LEARNING_SKILL_SUGGESTIONS_PROMOTION_ALLOWED_DEFAULT",
+        "AION_NOTIFICATIONS_ENABLED",
+        "AION_ALERT_ROUTER_ENABLED",
+        "AION_NOTIFICATION_SUBSCRIPTIONS_ENABLED",
+        "AION_ESCALATION_QUEUE_ENABLED",
+        "AION_NOTIFICATION_DIGESTS_ENABLED",
+        "AION_EXTERNAL_NOTIFICATIONS_ENABLED",
+        "AION_NOTIFICATION_LOCAL_DELIVERY_ONLY",
+        "AION_NOTIFICATION_AUTO_CREATE_OPERATOR_ITEMS",
     ]:
         monkeypatch.delenv(key, raising=False)
 
@@ -186,6 +194,14 @@ def test_settings_defaults_match_env_example(monkeypatch) -> None:
     assert settings.memory_compaction_requires_approval is False
     assert settings.memory_forgetting_requires_approval is True
     assert settings.memory_retention_sweep_limit_default == 1000
+    assert settings.notifications_enabled is True
+    assert settings.alert_router_enabled is True
+    assert settings.notification_subscriptions_enabled is True
+    assert settings.escalation_queue_enabled is True
+    assert settings.notification_digests_enabled is True
+    assert settings.external_notifications_enabled is False
+    assert settings.notification_local_delivery_only is True
+    assert settings.notification_auto_create_operator_items is True
 
 
 def test_settings_read_environment_variables(monkeypatch) -> None:
@@ -265,6 +281,14 @@ def test_settings_read_environment_variables(monkeypatch) -> None:
         "AION_LEARNING_SKILL_SUGGESTIONS_PROMOTION_ALLOWED_DEFAULT",
         "true",
     )
+    monkeypatch.setenv("AION_NOTIFICATIONS_ENABLED", "false")
+    monkeypatch.setenv("AION_ALERT_ROUTER_ENABLED", "false")
+    monkeypatch.setenv("AION_NOTIFICATION_SUBSCRIPTIONS_ENABLED", "false")
+    monkeypatch.setenv("AION_ESCALATION_QUEUE_ENABLED", "false")
+    monkeypatch.setenv("AION_NOTIFICATION_DIGESTS_ENABLED", "false")
+    monkeypatch.setenv("AION_EXTERNAL_NOTIFICATIONS_ENABLED", "true")
+    monkeypatch.setenv("AION_NOTIFICATION_LOCAL_DELIVERY_ONLY", "false")
+    monkeypatch.setenv("AION_NOTIFICATION_AUTO_CREATE_OPERATOR_ITEMS", "false")
 
     settings = Settings(_env_file=None)
 
@@ -340,3 +364,11 @@ def test_settings_read_environment_variables(monkeypatch) -> None:
     assert settings.learning_min_pattern_frequency == 5
     assert settings.learning_min_pattern_confidence == 0.85
     assert settings.learning_skill_suggestions_promotion_allowed_default is True
+    assert settings.notifications_enabled is False
+    assert settings.alert_router_enabled is False
+    assert settings.notification_subscriptions_enabled is False
+    assert settings.escalation_queue_enabled is False
+    assert settings.notification_digests_enabled is False
+    assert settings.external_notifications_enabled is True
+    assert settings.notification_local_delivery_only is False
+    assert settings.notification_auto_create_operator_items is False

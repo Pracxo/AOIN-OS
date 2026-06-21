@@ -1165,3 +1165,33 @@ run. `RunStatusSample` captures deterministic local status polling.
 `RunTimeoutPolicy` detects stale or timed-out runs without auto-cancelling.
 `CompensationPlan` and `CompensationStep` are proposals only until explicitly
 converted into action proposals.
+
+## Notification and Alert Contracts
+
+AION Brain owns these internal notification contracts:
+
+- `NotificationTopic`
+- `NotificationSubscription`
+- `NotificationPublishRequest`
+- `NotificationRecord`
+- `NotificationQuery`
+- `AlertCreateRequest`
+- `AlertRecord`
+- `AlertQuery`
+- `EscalationPolicy`
+- `EscalationRecord`
+- `NotificationDigest`
+
+Notification contracts are generic, local-only, and operator-facing. They must
+not expose external notification provider objects, webhook payloads, email/SMS
+clients, raw headers, hidden reasoning, raw prompts, provider payloads, secrets,
+SQLAlchemy rows, or domain-specific alert logic.
+
+`NotificationTopic` defines local topic metadata. `NotificationSubscription`
+declares local channels such as `operator_inbox`, `actor_inbox`,
+`workspace_feed`, `audit_feed`, `visual_feed`, and `local_digest`.
+`NotificationRecord` is a delivered local record and does not imply external
+delivery. `AlertRecord` is a local review signal and does not mutate source
+systems. `EscalationRecord` is a local queue record with `local_only=true`.
+`NotificationDigest` summarizes local notifications and alerts
+deterministically.

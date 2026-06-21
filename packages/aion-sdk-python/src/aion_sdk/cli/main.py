@@ -26,6 +26,7 @@ from aion_sdk.cli.commands.instructions import install_instruction_commands
 from aion_sdk.cli.commands.learning import install_learning_commands
 from aion_sdk.cli.commands.model_outputs import install_model_output_commands
 from aion_sdk.cli.commands.modules import install_modules_commands
+from aion_sdk.cli.commands.notifications import install_notification_commands
 from aion_sdk.cli.commands.operator import install_operator_commands
 from aion_sdk.cli.commands.outcomes import install_outcome_commands
 from aion_sdk.cli.commands.performance import install_performance_commands
@@ -564,6 +565,7 @@ install_prompt_commands(app, get_client=_client, get_scope=_scope, render=_rende
 install_model_output_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_action_proposal_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_run_supervision_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_notification_commands(app, get_client=_client, get_scope=_scope, render=_render)
 
 
 if __name__ == "__main__":

@@ -1171,3 +1171,39 @@ Controlled control handoff remains denied unless runtime configuration,
 policy, risk, autonomy, target support, and approval gates allow it. Timeout
 policy evaluation does not authorize auto-cancel. Compensation policy does not
 authorize direct execution. Unknown run supervision actions fail closed.
+
+## Notification and Alert Policy
+
+Generic notification and alert actions:
+
+- `notification.topic.create`
+- `notification.topic.read`
+- `notification.topic.update`
+- `notification.subscription.create`
+- `notification.subscription.read`
+- `notification.subscription.update`
+- `notification.publish`
+- `notification.read`
+- `notification.update`
+- `alert.create`
+- `alert.read`
+- `alert.update`
+- `escalation.policy.create`
+- `escalation.policy.read`
+- `escalation.policy.update`
+- `escalation.evaluate`
+- `escalation.read`
+- `escalation.update`
+- `notification.digest.create`
+- `notification.digest.read`
+
+Notification topic, subscription, notification, alert, escalation, and digest
+reads are scope-gated. Publishing notifications, creating alerts, evaluating
+escalations, and mutating local acknowledgement/resolution state require the
+scoped actor, operator, admin, or internal Brain context allowed by policy.
+
+Policy does not authorize external delivery, webhooks, email, SMS, chat
+delivery, source-system remediation, automatic source resolution, raw prompt
+disclosure, hidden reasoning disclosure, raw header export, secret export, or
+domain-specific alert rules. Unknown notification and alert actions fail
+closed.

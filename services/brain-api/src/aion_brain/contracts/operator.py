@@ -86,6 +86,7 @@ OperatorActionSourceType = Literal[
     "performance",
     "scenario",
     "visual",
+    "alert",
     "outcome",
     "effect_verification",
     "outcome_feedback",

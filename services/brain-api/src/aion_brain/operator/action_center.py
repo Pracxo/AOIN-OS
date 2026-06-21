@@ -77,6 +77,7 @@ class ActionCenterService:
         generated.extend(self._failed_run_supervision_items(scope))
         generated.extend(self._pending_run_control_items())
         generated.extend(self._compensation_plan_items(scope))
+        generated.extend(self._critical_alert_items(scope))
         stored: list[OperatorActionItem] = []
         for item in generated[:limit]:
             saved = self._repository.save_action_item(item)
@@ -704,6 +705,36 @@ class ActionCenterService:
                 },
             )
             for item in items
+        ]
+
+    def _critical_alert_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("alert_service")
+        list_alerts = getattr(source, "list_alerts", None)
+        if not callable(list_alerts):
+            return []
+        try:
+            items = list_alerts(scope=scope, status="open", limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="alert",
+                source_id=_id_for(item, "alert_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity="critical" if getattr(item, "severity", None) == "critical" else "high",
+                title="Alert requires operator review.",
+                description="A local AION alert is open and requires review.",
+                recommended_action="review_alert",
+                runbook_ref="docs/adr/0060-internal-notification-alert-routing.md",
+                scope=getattr(item, "owner_scope", scope) or scope,
+                metadata={
+                    "alert_type": getattr(item, "alert_type", None),
+                    "severity": getattr(item, "severity", None),
+                },
+            )
+            for item in items
+            if getattr(item, "severity", None) in {"high", "critical"}
         ]
 
     def _failed_outcome_items(self, scope: list[str]) -> list[OperatorActionItem]:

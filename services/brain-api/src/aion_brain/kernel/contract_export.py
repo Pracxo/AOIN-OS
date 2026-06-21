@@ -17,6 +17,7 @@ from aion_brain.contracts.action_proposals import (
     ToolIntentReview,
     ToolIntentReviewRequest,
 )
+from aion_brain.contracts.alerts import AlertCreateRequest, AlertQuery, AlertRecord
 from aion_brain.contracts.api import (
     AIONError,
     AIONErrorResponse,
@@ -139,6 +140,16 @@ from aion_brain.contracts.model_outputs import (
     ToolIntentCandidate,
 )
 from aion_brain.contracts.modules import ModuleRuntime
+from aion_brain.contracts.notifications import (
+    EscalationPolicy,
+    EscalationRecord,
+    NotificationDigest,
+    NotificationPublishRequest,
+    NotificationQuery,
+    NotificationRecord,
+    NotificationSubscription,
+    NotificationTopic,
+)
 from aion_brain.contracts.output_governance import (
     ModelOutputQuery,
     ModelOutputQueryResult,
@@ -325,6 +336,17 @@ CORE_CONTRACTS: tuple[type[BaseModel], ...] = (
     CompensationPlanCreateRequest,
     RunSupervisionReport,
     RunSupervisionReportRequest,
+    NotificationTopic,
+    NotificationSubscription,
+    NotificationRecord,
+    NotificationPublishRequest,
+    AlertRecord,
+    AlertCreateRequest,
+    EscalationPolicy,
+    EscalationRecord,
+    NotificationDigest,
+    NotificationQuery,
+    AlertQuery,
     ModelBudgetRecord,
     ModelUsageRecord,
     ModelProviderHealth,

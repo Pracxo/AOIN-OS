@@ -248,6 +248,25 @@ Active skills may be supplied to the planner as matched procedural memory. The
 planner records matched skill IDs in plan metadata only. It does not execute
 skill steps, replace plan steps with skill steps, or treat skills as code.
 
+## Internal Notification Center
+
+The Internal Notification Center is the local operator-awareness layer for AION
+Brain. It stores notification topics, local subscriptions, delivered
+notifications, alerts, escalation records, and deterministic digests. It is
+backend-only and local-only in v0.1.
+
+Notifications are generated from AION contracts and source records. The alert
+router can create local `AlertRecord` objects for high and critical signals,
+but it does not remediate, acknowledge, resolve, retry, cancel, resume, or
+mutate the source subsystem. Escalation records are local queue items only and
+set `external_delivery=false`.
+
+The notification boundary is policy-gated and redacts hidden reasoning, raw
+prompts, raw headers, provider payload markers, and secret-like keys before
+persistence or display. It emits visual telemetry for future Brain Map
+projection while remaining independent of frontend rendering and external
+notification vendors.
+
 ## Reasoning Mesh
 
 The Reasoning Mesh is the only Brain core path for generic reasoning. It

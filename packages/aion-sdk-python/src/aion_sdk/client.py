@@ -66,6 +66,7 @@ class AIONClient:
         self.model_outputs = _import_resource("model_outputs").ModelOutputsResource(self)
         self.action_proposals = _import_resource("action_proposals").ActionProposalsResource(self)
         self.run_supervision = _import_resource("run_supervision").RunSupervisionResource(self)
+        self.notifications = _import_resource("notifications").NotificationsResource(self)
         self.runtime_config = cast(
             "ConfigResource",
             _import_resource("config").ConfigResource(self),

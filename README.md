@@ -51,6 +51,7 @@ AION Brain owns:
 - Skill candidates
 - Skill records, versions, and promotion gates
 - Visual telemetry events
+- Notification topics, subscriptions, alerts, escalations, and digests
 - Audit records
 
 ## Core Brain Loop
@@ -145,6 +146,8 @@ Clients / Future Modules
   requests, feedback, and policy-gated dialogue turns.
 - `responses`: deterministic response draft composition, verification, and
   local API delivery records.
+- `notifications`: local-only notification topics, subscriptions, alert
+  routing, escalation queue records, query helpers, and digests.
 
 ## Imported Infrastructure
 
@@ -206,6 +209,47 @@ Expected `/health` response:
   "version": "0.1.0"
 }
 ```
+
+## Internal Notifications and Alerts
+
+v0.1 provides a local-only Internal Notification Center. It records topics,
+subscriptions, notifications, alerts, escalation records, and digests for
+operator visibility. It does not send email, SMS, webhooks, Slack messages, or
+other external notifications. Alerts and escalations do not remediate or mutate
+source systems.
+
+Notification endpoints:
+
+- `POST /brain/notifications/topics`
+- `GET /brain/notifications/topics`
+- `POST /brain/notifications/topics/seed-defaults`
+- `POST /brain/notifications/subscriptions`
+- `GET /brain/notifications/subscriptions`
+- `POST /brain/notifications/publish`
+- `POST /brain/notifications/query`
+- `POST /brain/notifications/{notification_id}/read`
+- `POST /brain/notifications/{notification_id}/acknowledge`
+- `POST /brain/notifications/{notification_id}/resolve`
+- `POST /brain/alerts`
+- `POST /brain/alerts/query`
+- `POST /brain/alerts/{alert_id}/acknowledge`
+- `POST /brain/alerts/{alert_id}/resolve`
+- `POST /brain/escalations/policies`
+- `GET /brain/escalations/policies`
+- `POST /brain/escalations/evaluate`
+- `GET /brain/escalations`
+- `POST /brain/notifications/digests`
+- `GET /brain/notifications/digests`
+
+Notification center settings keep local delivery explicit:
+
+- `AION_NOTIFICATIONS_ENABLED`
+- `AION_ALERT_ROUTER_ENABLED`
+- `AION_NOTIFICATION_SUBSCRIPTIONS_ENABLED`
+- `AION_ESCALATION_QUEUE_ENABLED`
+- `AION_NOTIFICATION_DIGESTS_ENABLED`
+- `AION_EXTERNAL_NOTIFICATIONS_ENABLED=false`
+- `AION_NOTIFICATION_LOCAL_DELIVERY_ONLY=true`
 
 ## Dialogue and Responses
 

@@ -547,3 +547,39 @@ mutation. Compensation plan nodes represent proposed recovery paths, not
 execution. The projection remains backend-only and frontend-agnostic, and must
 not expose raw target internals, raw headers, secrets, or domain-specific
 remediation logic.
+
+## Notification Projection
+
+Internal notification telemetry projects local operator-awareness records into
+the Visual Brain Projection. Generic event types include:
+
+- `notification_topic_created`
+- `notification_subscription_created`
+- `notification_published`
+- `notification_delivered_local`
+- `notification_acknowledged`
+- `alert_created`
+- `alert_acknowledged`
+- `alert_resolved`
+- `escalation_record_created`
+- `notification_digest_created`
+
+Generic visual node types include:
+
+- `notification`
+- `notification_topic`
+- `notification_subscription`
+- `alert`
+- `escalation`
+- `digest`
+
+The generic projection path is:
+
+`source record -> notification -> local delivery -> alert / escalation -> digest`
+
+High and critical alerts should project with higher intensity than ordinary
+informational notifications. Escalation nodes represent local queue records, not
+external paging or remediation. Digest nodes represent deterministic summaries.
+The projection remains backend-only and frontend-agnostic, and must not expose
+hidden reasoning, raw prompts, raw headers, provider payloads, secrets,
+external delivery metadata, or domain-specific alert logic.

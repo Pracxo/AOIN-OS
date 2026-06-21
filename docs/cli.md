@@ -369,3 +369,30 @@ provider payloads, raw secrets, or domain prompt packs.
 Run supervision commands call the SDK and public Brain APIs only. Control
 handoff defaults to dry-run. Timeout policy evaluation does not auto-cancel.
 Compensation planning and conversion do not execute actions.
+
+## Notification Commands
+
+- `aionctl notifications topics create`
+- `aionctl notifications topics list`
+- `aionctl notifications topics seed-defaults`
+- `aionctl notifications subscriptions create`
+- `aionctl notifications subscriptions list`
+- `aionctl notifications publish`
+- `aionctl notifications query`
+- `aionctl notifications acknowledge`
+- `aionctl notifications alerts create`
+- `aionctl notifications alerts query`
+- `aionctl notifications alerts acknowledge`
+- `aionctl notifications alerts resolve`
+- `aionctl notifications escalations policies`
+- `aionctl notifications escalations policy-create`
+- `aionctl notifications escalations evaluate`
+- `aionctl notifications escalations list`
+- `aionctl notifications digests create`
+- `aionctl notifications digests list`
+
+Notification commands call the SDK and public Brain APIs only. They record
+local notifications, alerts, escalation records, and digests. They do not send
+external notifications, call webhooks, send email/SMS/chat messages, mutate
+source systems, auto-resolve source records, or expose hidden reasoning,
+raw prompts, raw headers, provider payloads, or secrets.

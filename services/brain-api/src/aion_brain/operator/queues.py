@@ -200,6 +200,30 @@ _QUEUE_SPECS: tuple[tuple[OperatorQueueType, str, str, tuple[str, ...]], ...] = 
         "compensation_planner",
         ("list_plans",),
     ),
+    (
+        "generic",
+        "Unread Notifications",
+        "notification_query_service",
+        ("list_notifications",),
+    ),
+    (
+        "generic",
+        "Open Alerts",
+        "alert_service",
+        ("list_alerts",),
+    ),
+    (
+        "generic",
+        "Escalation Records",
+        "escalation_service",
+        ("list_records",),
+    ),
+    (
+        "generic",
+        "Notification Digests",
+        "notification_digest_service",
+        ("list_digests",),
+    ),
 )
 
 _RUNNING_STATUSES = {"running", "processing", "sending", "in_progress", "active"}

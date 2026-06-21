@@ -45,6 +45,7 @@ from aion_brain.api.model_gateway import router as model_gateway_router
 from aion_brain.api.model_outputs import router as model_outputs_router
 from aion_brain.api.module_developer import router as module_developer_router
 from aion_brain.api.modules import router as modules_router
+from aion_brain.api.notifications import router as notifications_router
 from aion_brain.api.observability import router as observability_router
 from aion_brain.api.operator import router as operator_router
 from aion_brain.api.outbox import router as outbox_router
@@ -124,6 +125,7 @@ ROUTERS = (
     model_outputs_router,
     action_proposals_router,
     run_supervision_router,
+    notifications_router,
     prompts_router,
     module_developer_router,
     retrieval_router,
