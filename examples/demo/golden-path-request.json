@@ -1,0 +1,17 @@
+{
+  "workspace_id": "golden-path",
+  "mode": "dry_run",
+  "owner_scope": [
+    "workspace:main"
+  ],
+  "run_all_defaults": true,
+  "create_notifications": false,
+  "create_operator_items": true,
+  "include_release_smoke": true,
+  "metadata": {
+    "demo": "aion-v0.1",
+    "external_calls": false,
+    "tool_execution": false
+  },
+  "created_by": "local-demo"
+}

@@ -1,0 +1,22 @@
+{
+  "scenario_id": "memory_evidence_retrieval",
+  "name": "Memory Evidence Retrieval",
+  "description": "Generic memory, evidence, and retrieval scenario.",
+  "status": "active",
+  "scenario_type": "memory",
+  "owner_scope": ["workspace:dev-workspace"],
+  "steps": [
+    {"step_id": "01_create_evidence", "step_type": "create_evidence", "description": "Create evidence.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "02_create_memory", "step_type": "create_memory", "description": "Create memory.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "03_retrieve_memory", "step_type": "retrieve_memory", "description": "Retrieve memory.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "04_semantic_retrieve", "step_type": "semantic_retrieve", "description": "Run semantic retrieval fallback.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "05_visual_map", "step_type": "visual_map", "description": "Build visual map.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}}
+  ],
+  "expected": {"status": "passed", "min_count": 5},
+  "tags": ["memory", "evidence", "retrieval", "release_baseline"],
+  "metadata": {"dry_run": true, "external_services": false},
+  "created_by": null,
+  "created_at": null,
+  "updated_at": null,
+  "disabled_at": null
+}

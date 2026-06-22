@@ -1,0 +1,20 @@
+{
+  "workspace_id": "main",
+  "profile_key": "local.dev",
+  "mode": "dry_run",
+  "owner_scope": [
+    "workspace:main"
+  ],
+  "seed_defaults": true,
+  "run_setup_doctor": true,
+  "run_golden_path": false,
+  "run_release_smoke": false,
+  "create_notifications": false,
+  "create_operator_items": true,
+  "metadata": {
+    "demo": "aion-v0.1",
+    "enable_external_providers": false,
+    "enable_full_autonomy": false
+  },
+  "created_by": "local-demo"
+}

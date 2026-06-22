@@ -1,0 +1,13 @@
+{
+  "fixture_id": "generic_memory",
+  "name": "Generic Memory",
+  "description": "Safe generic memory fixture for deterministic local validation.",
+  "status": "active",
+  "fixture_type": "memory",
+  "owner_scope": ["workspace:dev-workspace"],
+  "content": {"label": "Generic Memory", "kind": "memory", "external_calls": false},
+  "loaded": false,
+  "result": {},
+  "created_at": null,
+  "loaded_at": null
+}

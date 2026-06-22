@@ -1,0 +1,13 @@
+{
+  "fixture_id": "generic_event",
+  "name": "Generic Event",
+  "description": "Safe generic event fixture for deterministic local validation.",
+  "status": "active",
+  "fixture_type": "event",
+  "owner_scope": ["workspace:dev-workspace"],
+  "content": {"label": "Generic Event", "kind": "event", "external_calls": false},
+  "loaded": false,
+  "result": {},
+  "created_at": null,
+  "loaded_at": null
+}

@@ -1,0 +1,68 @@
+{
+  "extension_key": "generic.echo",
+  "name": "Generic Echo Metadata Module",
+  "description": "Synthetic metadata-only module manifest for local AION demo review.",
+  "version": "0.1.0",
+  "package_type": "module",
+  "aion_min_version": "0.1.0",
+  "aion_max_version": null,
+  "declared_capabilities": [
+    {
+      "capability_key": "generic.echo",
+      "capability_type": "generic",
+      "risk_level": "low",
+      "dry_run_supported": true,
+      "controlled_supported": false,
+      "requires_policy": true,
+      "requires_approval": false,
+      "requires_sandbox": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      }
+    }
+  ],
+  "declared_contracts": [],
+  "declared_dependencies": [],
+  "declared_policy_actions": [
+    "capability.invoke"
+  ],
+  "declared_settings": [],
+  "declared_routes": [],
+  "declared_events": [],
+  "declared_resources": [],
+  "sandbox_requirements": {
+    "required": true,
+    "network_mode": "none"
+  },
+  "permissions": [
+    "capability.invoke"
+  ],
+  "metadata": {
+    "source_type_assumption": "local_manifest",
+    "remote_sources_allowed": false,
+    "code_loading_allowed": false,
+    "activation_allowed": false,
+    "route_registration_allowed": false,
+    "full_autonomy": false,
+    "payloads_included": false
+  }
+}

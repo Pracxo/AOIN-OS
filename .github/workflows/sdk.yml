@@ -1,0 +1,25 @@
+name: AION SDK
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  sdk-cli-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install SDK
+        run: python -m pip install -e "packages/aion-sdk-python[dev]"
+      - name: SDK tests
+        working-directory: packages/aion-sdk-python
+        run: pytest
+      - name: Import smoke
+        run: python -c "import aion_sdk; print(aion_sdk.__name__)"
+      - name: CLI help smoke
+        run: python -m aion_sdk.cli.main --help

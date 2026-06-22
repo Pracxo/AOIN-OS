@@ -1,0 +1,21 @@
+{
+  "scenario_id": "replay_regression_visual",
+  "name": "Replay Regression Visual",
+  "description": "Generic think, replay dry-run, regression dry-run, and visual map scenario.",
+  "status": "active",
+  "scenario_type": "replay",
+  "owner_scope": ["workspace:dev-workspace"],
+  "steps": [
+    {"step_id": "01_think", "step_type": "think", "description": "Run deterministic think.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "02_replay_dry_run", "step_type": "replay_dry_run", "description": "Dry-run replay.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "03_regression_dry_run", "step_type": "regression_dry_run", "description": "Dry-run regression.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}},
+    {"step_id": "04_visual_map", "step_type": "visual_map", "description": "Build visual map.", "request": {"mode": "dry_run"}, "expected": {"required_keys": ["status"]}}
+  ],
+  "expected": {"status": "passed", "min_count": 4},
+  "tags": ["replay", "regression", "visual", "release_baseline"],
+  "metadata": {"dry_run": true, "external_services": false},
+  "created_by": null,
+  "created_at": null,
+  "updated_at": null,
+  "disabled_at": null
+}

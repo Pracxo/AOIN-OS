@@ -1,0 +1,16 @@
+name: AION Docker
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  docker-build-core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compose config
+        run: docker compose config
+      - name: Build Brain API
+        run: docker compose build brain-api

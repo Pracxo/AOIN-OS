@@ -1,0 +1,25 @@
+[
+  {
+    "test_type": "schema_validation",
+    "name": "manifest schemas are objects",
+    "description": "The generic capability declares input and output schemas.",
+    "input": {
+      "capability_id": "generic.example.echo"
+    },
+    "expected": {
+      "valid": true
+    }
+  },
+  {
+    "test_type": "dry_run_invocation",
+    "name": "no executable module code",
+    "description": "The v0.1 module package is contract-only.",
+    "input": {
+      "mode": "dry_run"
+    },
+    "expected": {
+      "module_code_executed": false
+    }
+  }
+]
+

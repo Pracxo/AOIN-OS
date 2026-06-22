@@ -1,0 +1,31 @@
+name: AION Contracts
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  contract-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install Brain API
+        run: python -m pip install -e "services/brain-api[dev]"
+      - name: Contract export tests
+        working-directory: services/brain-api
+        run: pytest tests/test_contract_export.py tests/test_kernel_contracts.py
+      - name: OpenAPI hygiene tests
+        working-directory: services/brain-api
+        run: pytest tests/test_openapi_hygiene.py
+      - name: Boundary checker tests
+        working-directory: services/brain-api
+        run: pytest tests/test_no_direct_vendor_leakage.py tests/test_architecture_boundary_check.py
+      - name: Boundary script
+        run: scripts/boundary-check.sh
+      - name: OpenAPI hygiene script
+        run: scripts/openapi-hygiene.sh
