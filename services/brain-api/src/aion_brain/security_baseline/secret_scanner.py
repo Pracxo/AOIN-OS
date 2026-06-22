@@ -351,6 +351,8 @@ def _line_findings(
     ]
     for finding_type, severity, pattern in patterns:
         for match in pattern.finditer(line):
+            if finding_type == "private_key_like" and _is_detector_pattern_line(relative, line):
+                continue
             secret = match.group(match.lastindex or 0)
             if _placeholder(secret) or (file_name == ".env.example" and _placeholder(secret)):
                 continue
@@ -434,7 +436,19 @@ def _is_env_file(path: Path) -> bool:
 def _is_credential_named(path: Path) -> bool:
     lowered = path.name.lower()
     has_credential_name = any(name in lowered for name in ("credential", "credentials", "secret"))
-    return has_credential_name and path.name != ".env.example"
+    config_like_suffixes = {".env", ".json", ".yaml", ".yml", ".toml", ".ini", ".txt"}
+    return (
+        has_credential_name
+        and path.name != ".env.example"
+        and (path.suffix.lower() in config_like_suffixes or path.name.startswith(".env."))
+    )
+
+
+def _is_detector_pattern_line(relative: str, line: str) -> bool:
+    lowered_path = relative.lower()
+    if not lowered_path.endswith(("redaction.py", "secret_scanner.py")):
+        return False
+    return "private key" in line.lower() and ("re.compile" in line or ".*?" in line)
 
 
 def _placeholder(value: str) -> bool:

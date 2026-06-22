@@ -71,7 +71,8 @@ class ReleasePackageValidator:
         check("changelog_included", "CHANGELOG.md" in included_paths)
         check(
             "release_notes_included",
-            any(path.startswith("docs/release-notes/") for path in included_paths),
+            "RELEASE_NOTES.md" in included_paths
+            or any(path.startswith("docs/release-notes/") for path in included_paths),
         )
         if request.include_contracts:
             check(

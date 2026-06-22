@@ -10,9 +10,11 @@ from typing import Any, cast
 from uuid import uuid4
 
 from aion_brain.api_support.errors import AIONPolicyDeniedException
+from aion_brain.config import Settings, get_settings
 from aion_brain.contracts.compatibility import MigrationBaseline
 from aion_brain.contracts.policy import PolicyRequest
 from aion_brain.policy.base import PolicyAdapter
+from aion_brain.policy.enrichment import enrich_with_internal_dev_actor
 from aion_brain.versioning.compatibility import emit_versioning_telemetry
 from aion_brain.versioning.repository import VersioningRepository
 
@@ -41,11 +43,13 @@ class MigrationBaselineService:
         *,
         migrations_dir: Path,
         telemetry_service: object | None = None,
+        settings: Settings | None = None,
     ) -> None:
         self._repository = repository
         self._policy_adapter = policy_adapter
         self._migrations_dir = migrations_dir
         self._telemetry_service = telemetry_service
+        self._settings = settings or get_settings()
 
     def generate(self, schema_version: str, scope: list[str]) -> MigrationBaseline:
         """Generate and persist the migration baseline."""
@@ -96,22 +100,27 @@ class MigrationBaselineService:
         risk_level: str = "low",
         context: dict[str, Any] | None = None,
     ) -> None:
-        decision = self._policy_adapter.authorize(
-            PolicyRequest(
-                request_id=f"{action_type}-{uuid4().hex}",
-                trace_id=None,
-                actor_id=None,
-                workspace_id=None,
-                action_type=action_type,
-                resource_type="migration_baseline",
-                resource_id=None,
-                risk_level=risk_level,
-                approval_present=True,
-                requested_permissions=[action_type],
-                security_scope=scope,
-                context=context or {},
-            )
+        policy_request = PolicyRequest(
+            request_id=f"{action_type}-{uuid4().hex}",
+            trace_id=None,
+            actor_id=None,
+            workspace_id=None,
+            action_type=action_type,
+            resource_type="migration_baseline",
+            resource_id=None,
+            risk_level=risk_level,
+            approval_present=True,
+            requested_permissions=[action_type],
+            security_scope=scope,
+            context=context or {},
         )
+        policy_request = enrich_with_internal_dev_actor(
+            policy_request,
+            self._settings,
+            scope=scope,
+            permissions=[action_type],
+        )
+        decision = self._policy_adapter.authorize(policy_request)
         if not decision.allow:
             raise AIONPolicyDeniedException(decision.reason)
 

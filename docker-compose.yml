@@ -4,6 +4,8 @@ services:
       context: ./services/brain-api
     env_file:
       - .env.example
+    environment:
+      AION_REPO_ROOT: /workspace
     ports:
       - "8080:8080"
     depends_on:
@@ -12,6 +14,7 @@ services:
       - nats
       - opa
     volumes:
+      - ./:/workspace:ro
       - turbovec_indexes:/app/.aion_indexes/turbovec
 
   postgres:

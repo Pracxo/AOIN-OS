@@ -89,6 +89,10 @@ class Settings(BaseSettings):
         default="./.aion_objects",
         validation_alias=AliasChoices("AION_LOCAL_OBJECT_ROOT", "local_object_root"),
     )
+    repo_root: str | None = Field(
+        default=None,
+        validation_alias=AliasChoices("AION_REPO_ROOT", "repo_root"),
+    )
     default_object_store: str = Field(
         default="local",
         validation_alias=AliasChoices("AION_DEFAULT_OBJECT_STORE", "default_object_store"),

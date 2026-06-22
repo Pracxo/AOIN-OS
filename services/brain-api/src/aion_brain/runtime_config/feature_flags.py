@@ -11,9 +11,11 @@ from aion_brain.api_support.errors import (
     AIONNotFoundException,
     AIONPolicyDeniedException,
 )
+from aion_brain.config import Settings, get_settings
 from aion_brain.contracts.policy import PolicyRequest
 from aion_brain.contracts.runtime_config import FeatureFlagOverride, FeatureFlagOverrideRequest
 from aion_brain.policy.base import PolicyAdapter
+from aion_brain.policy.enrichment import enrich_with_internal_dev_actor
 from aion_brain.runtime_config.profiles import _emit_runtime_config_event
 from aion_brain.runtime_config.repository import RuntimeConfigRepository
 
@@ -37,11 +39,13 @@ class FeatureFlagOverrideService:
         *,
         feature_registry: object | None = None,
         telemetry_service: object | None = None,
+        settings: Settings | None = None,
     ) -> None:
         self._repository = repository
         self._policy_adapter = policy_adapter
         self._feature_registry = feature_registry
         self._telemetry_service = telemetry_service
+        self._settings = settings or get_settings()
 
     def create_override(self, request: FeatureFlagOverrideRequest) -> FeatureFlagOverride:
         """Create one feature override when safe."""
@@ -219,22 +223,27 @@ class FeatureFlagOverrideService:
         risk_level: str = "low",
         context: dict[str, Any] | None = None,
     ) -> None:
-        decision = self._policy_adapter.authorize(
-            PolicyRequest(
-                request_id=f"{action_type}-{uuid4().hex}",
-                trace_id=None,
-                actor_id=actor_id,
-                workspace_id=None,
-                action_type=action_type,
-                resource_type="feature_flag_override",
-                resource_id=resource_id,
-                risk_level=risk_level,
-                approval_present=True,
-                requested_permissions=[action_type],
-                security_scope=scope,
-                context=context or {},
-            )
+        policy_request = PolicyRequest(
+            request_id=f"{action_type}-{uuid4().hex}",
+            trace_id=None,
+            actor_id=actor_id,
+            workspace_id=None,
+            action_type=action_type,
+            resource_type="feature_flag_override",
+            resource_id=resource_id,
+            risk_level=risk_level,
+            approval_present=True,
+            requested_permissions=[action_type],
+            security_scope=scope,
+            context=context or {},
         )
+        policy_request = enrich_with_internal_dev_actor(
+            policy_request,
+            self._settings,
+            scope=scope,
+            permissions=[action_type],
+        )
+        decision = self._policy_adapter.authorize(policy_request)
         if not decision.allow:
             raise AIONPolicyDeniedException(decision.reason)
 

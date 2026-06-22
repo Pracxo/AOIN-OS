@@ -19,3 +19,19 @@ def test_openapi_hygiene_checker_catches_domain_route_prefix_in_fake_schema() ->
 
     assert report.status == "failed"
     assert any(violation["rule"] == "no_domain_route_prefix" for violation in report.violations)
+
+
+def test_openapi_hygiene_allows_aion_temporal_state_contract_names() -> None:
+    report = OpenAPIHygieneChecker().check(
+        {
+            "paths": {},
+            "components": {
+                "schemas": {
+                    "TemporalStateWindow": {},
+                    "TemporalStateWindowRequest": {},
+                }
+            },
+        }
+    )
+
+    assert report.status == "passed"

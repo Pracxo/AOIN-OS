@@ -71,6 +71,20 @@ def test_freeze_gate_get_returns_persisted_run(tmp_path: Path) -> None:
     assert fetched.freeze_gate_id == run.freeze_gate_id
 
 
+def test_freeze_gate_kernel_self_test_warning_does_not_embed_failed_status(
+    tmp_path: Path,
+) -> None:
+    write_minimal_release_docs(tmp_path)
+    service = _service(tmp_path, kernel_self_test=FakeFailingKernelSelfTest())
+
+    run = service.run(FreezeGateRunRequest(version="0.1.0", owner_scope=SCOPE), app=FakeApp())
+
+    check = next(check for check in run.checks if check.name == "kernel_self_test")
+    assert check.status == "warning"
+    assert "status" not in check.details
+    assert check.details["kernel_self_test_status"] == "failed"
+
+
 class FakeApp:
     """Minimal FastAPI-like app fake."""
 
@@ -78,7 +92,18 @@ class FakeApp:
         return {"openapi": "3.1.0", "paths": {"/health": {}}}
 
 
-def _service(tmp_path: Path, policy: object | None = None) -> FreezeGateService:
+class FakeFailingKernelSelfTest:
+    """Kernel self-test fake that returns a failed internal status."""
+
+    def run(self, request: object) -> object:
+        return type("KernelSelfTest", (), {"status": "failed"})()
+
+
+def _service(
+    tmp_path: Path,
+    policy: object | None = None,
+    kernel_self_test: object | None = None,
+) -> FreezeGateService:
     policy = policy or AllowPolicy()
     repo = repository()
     migrations = MigrationBaselineService(
@@ -97,7 +122,7 @@ def _service(tmp_path: Path, policy: object | None = None) -> FreezeGateService:
         release_artifact_service=FakeArtifactService(),
         sdk_compatibility_service=FakeSDKCompatibilityService(),
         release_baseline_service=FakeReleaseBaselineService(),
-        kernel_self_test=FakeKernelSelfTest(),
+        kernel_self_test=kernel_self_test or FakeKernelSelfTest(),
         policy_coverage=FakeSimpleCheckService(),
         openapi_hygiene=FakeSimpleCheckService(),
         boundary_checker=FakeSimpleCheckService(),

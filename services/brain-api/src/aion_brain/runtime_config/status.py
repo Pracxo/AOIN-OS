@@ -6,9 +6,11 @@ from datetime import UTC, datetime
 from uuid import uuid4
 
 from aion_brain.api_support.errors import AIONPolicyDeniedException
+from aion_brain.config import Settings, get_settings
 from aion_brain.contracts.policy import PolicyRequest
 from aion_brain.contracts.runtime_config import RuntimeConfigStatus
 from aion_brain.policy.base import PolicyAdapter
+from aion_brain.policy.enrichment import enrich_with_internal_dev_actor
 from aion_brain.runtime_config.profiles import _emit_runtime_config_event
 from aion_brain.runtime_config.repository import RuntimeConfigRepository
 
@@ -23,13 +25,13 @@ class RuntimeConfigStatusService:
         *,
         feature_override_service: object,
         telemetry_service: object | None = None,
-        settings: object | None = None,
+        settings: Settings | None = None,
     ) -> None:
         self._repository = repository
         self._policy_adapter = policy_adapter
         self._feature_override_service = feature_override_service
         self._telemetry_service = telemetry_service
-        self._settings = settings
+        self._settings = settings or get_settings()
 
     def status(self, scope: list[str]) -> RuntimeConfigStatus:
         """Return effective runtime configuration status without secrets."""
@@ -77,22 +79,27 @@ class RuntimeConfigStatusService:
         return flags
 
     def _authorize(self, action_type: str, scope: list[str]) -> None:
-        decision = self._policy_adapter.authorize(
-            PolicyRequest(
-                request_id=f"{action_type}-{uuid4().hex}",
-                trace_id=None,
-                actor_id=None,
-                workspace_id=None,
-                action_type=action_type,
-                resource_type="runtime_config_status",
-                resource_id=None,
-                risk_level="low",
-                approval_present=True,
-                requested_permissions=[action_type],
-                security_scope=scope,
-                context={},
-            )
+        policy_request = PolicyRequest(
+            request_id=f"{action_type}-{uuid4().hex}",
+            trace_id=None,
+            actor_id=None,
+            workspace_id=None,
+            action_type=action_type,
+            resource_type="runtime_config_status",
+            resource_id=None,
+            risk_level="low",
+            approval_present=True,
+            requested_permissions=[action_type],
+            security_scope=scope,
+            context={},
         )
+        policy_request = enrich_with_internal_dev_actor(
+            policy_request,
+            self._settings,
+            scope=scope,
+            permissions=[action_type],
+        )
+        decision = self._policy_adapter.authorize(policy_request)
         if not decision.allow:
             raise AIONPolicyDeniedException(decision.reason)
 

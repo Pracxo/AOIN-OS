@@ -14,7 +14,7 @@ def test_release_package_validator_passes_generic_package() -> None:
         _file("README.md", "docs"),
         _file("AGENTS.md", "docs"),
         _file("CHANGELOG.md", "changelog"),
-        _file("docs/release-notes/v0.1.0.md", "release_notes"),
+        _file("RELEASE_NOTES.md", "release_notes"),
         _file("generated/contract-export.json", "contract"),
         _file("generated/policy-bundle.json", "policy"),
         _file("generated/sbom.json", "sbom"),
@@ -43,7 +43,7 @@ def test_release_package_validator_fails_env_and_cache_files() -> None:
         _file("README.md", "docs"),
         _file("AGENTS.md", "docs"),
         _file("CHANGELOG.md", "changelog"),
-        _file("docs/release-notes/v0.1.0.md", "release_notes"),
+        _file("RELEASE_NOTES.md", "release_notes"),
         _file(".env", "config"),
         _file("services/brain-api/src/.pytest_cache/cache.py", "source"),
     ]

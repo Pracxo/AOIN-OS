@@ -66,6 +66,120 @@ def test_final_verify_supports_offline_mode() -> None:
     assert "./scripts/final-docs-audit.sh" in text
 
 
+def test_rc_check_supplies_service_checks_to_gate() -> None:
+    text = _text("scripts/rc-check.sh")
+    assert '"run_service_checks": true' in text
+    assert '"run_service_checks": false' not in text
+    assert 'run_check "policy_coverage"' in text
+    assert 'run_check "openapi_hygiene"' in text
+
+
+def test_release_policy_actions_do_not_conflict_with_generic_fallbacks() -> None:
+    text = _text("infra/opa/policies/brain.rego")
+    assert 'input.action_type != "scenario.read"' in text
+    assert 'input.action_type != "scenario.run"' in text
+    assert 'input.action_type != "release_baseline.run"' in text
+    assert "not scenario_admin_action" in text
+
+
+def test_policy_and_openapi_scripts_validate_api_payloads() -> None:
+    for relative in ["scripts/policy-coverage.sh", "scripts/openapi-hygiene.sh"]:
+        text = _text(relative)
+        assert "api-response-check.sh" in text
+        assert "aion_assert_api_response_ok" in text
+
+
+def test_api_response_checker_fails_failed_release_payload(tmp_path: Path) -> None:
+    response = tmp_path / "response.json"
+    response.write_text('{"status":"dry_run","validation":{"status":"failed"}}')
+
+    result = subprocess.run(
+        [
+            "bash",
+            "-c",
+            (
+                "source scripts/lib/api-response-check.sh; "
+                "aion_assert_api_response_ok release-package \"$1\""
+            ),
+            "bash",
+            str(response),
+        ],
+        cwd=ROOT,
+        check=False,
+        text=True,
+        capture_output=True,
+    )
+
+    assert result.returncode == 1
+    assert "validation.status=failed" in result.stderr
+
+
+def test_api_response_checker_accepts_warning_payload(tmp_path: Path) -> None:
+    response = tmp_path / "response.json"
+    response.write_text('{"status":"warning","release_ready":true,"blocker_count":0}')
+
+    result = subprocess.run(
+        [
+            "bash",
+            "-c",
+            (
+                "source scripts/lib/api-response-check.sh; "
+                "aion_assert_api_response_ok rc-gate \"$1\""
+            ),
+            "bash",
+            str(response),
+        ],
+        cwd=ROOT,
+        check=False,
+        text=True,
+        capture_output=True,
+    )
+
+    assert result.returncode == 0
+
+
+def test_api_response_checker_ignores_nested_evidence_status(tmp_path: Path) -> None:
+    response = tmp_path / "response.json"
+    response.write_text(
+        """
+        {
+          "status": "passed",
+          "release_ready": true,
+          "blocker_count": 0,
+          "verification_checks": [
+            {
+              "check_key": "operator_overview",
+              "status": "passed",
+              "evidence": {
+                "queues": [{"status": "failed"}],
+                "readiness": {"release_ready": false}
+              }
+            }
+          ]
+        }
+        """
+    )
+
+    result = subprocess.run(
+        [
+            "bash",
+            "-c",
+            (
+                "source scripts/lib/api-response-check.sh; "
+                "aion_assert_api_response_ok rc-gate \"$1\""
+            ),
+            "bash",
+            str(response),
+        ],
+        cwd=ROOT,
+        check=False,
+        text=True,
+        capture_output=True,
+    )
+
+    assert result.returncode == 0, result.stderr
+
+
 def test_readme_links_final_release_docs() -> None:
     readme = _text("README.md")
     for link in [

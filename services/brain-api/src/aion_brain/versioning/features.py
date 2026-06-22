@@ -5,10 +5,12 @@ from typing import Any, cast
 from uuid import uuid4
 
 from aion_brain.api_support.errors import AIONNotFoundException, AIONPolicyDeniedException
+from aion_brain.config import Settings, get_settings
 from aion_brain.contracts.policy import PolicyRequest
 from aion_brain.contracts.telemetry import VisualTelemetryEvent
 from aion_brain.contracts.versioning import FeatureCategory, FeatureRegistryEntry
 from aion_brain.policy.base import PolicyAdapter
+from aion_brain.policy.enrichment import enrich_with_internal_dev_actor
 from aion_brain.versioning.repository import VersioningRepository
 
 DEFAULT_FEATURE_SPECS: tuple[tuple[str, str, bool, bool], ...] = (
@@ -64,10 +66,12 @@ class FeatureRegistryService:
         policy_adapter: PolicyAdapter,
         *,
         telemetry_service: object | None = None,
+        settings: Settings | None = None,
     ) -> None:
         self._repository = repository
         self._policy_adapter = policy_adapter
         self._telemetry_service = telemetry_service
+        self._settings = settings or get_settings()
 
     def seed_defaults(self, scope: list[str], *, dry_run: bool = True) -> dict[str, Any]:
         """Seed default generic feature registry entries."""
@@ -192,22 +196,27 @@ class FeatureRegistryService:
         risk_level: str = "low",
         context: dict[str, Any] | None = None,
     ) -> None:
-        decision = self._policy_adapter.authorize(
-            PolicyRequest(
-                request_id=f"{action_type}-{uuid4().hex}",
-                trace_id=None,
-                actor_id=actor_id,
-                workspace_id=None,
-                action_type=action_type,
-                resource_type="feature",
-                resource_id=resource_id,
-                risk_level=risk_level,
-                approval_present=True,
-                requested_permissions=[action_type],
-                security_scope=scope,
-                context=context or {},
-            )
+        policy_request = PolicyRequest(
+            request_id=f"{action_type}-{uuid4().hex}",
+            trace_id=None,
+            actor_id=actor_id,
+            workspace_id=None,
+            action_type=action_type,
+            resource_type="feature",
+            resource_id=resource_id,
+            risk_level=risk_level,
+            approval_present=True,
+            requested_permissions=[action_type],
+            security_scope=scope,
+            context=context or {},
         )
+        policy_request = enrich_with_internal_dev_actor(
+            policy_request,
+            self._settings,
+            scope=scope,
+            permissions=[action_type],
+        )
+        decision = self._policy_adapter.authorize(policy_request)
         if not decision.allow:
             raise AIONPolicyDeniedException(decision.reason)
 

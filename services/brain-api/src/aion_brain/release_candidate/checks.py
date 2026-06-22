@@ -9,8 +9,10 @@ from uuid import uuid4
 from aion_brain.config import Settings, get_settings
 from aion_brain.contracts.freeze import FreezeGateRunRequest
 from aion_brain.contracts.golden_path import GoldenPathRunRequest
+from aion_brain.contracts.operator import OperatorOverviewRequest
 from aion_brain.contracts.release_candidate import RCGateRunRequest
 from aion_brain.contracts.release_package import ReleasePackageRequest
+from aion_brain.contracts.scopes import ActorContext
 from aion_brain.contracts.security_baseline import HardeningGateRequest
 from aion_brain.contracts.setup_doctor import SetupDoctorRequest
 from aion_brain.contracts.verification_matrix import (
@@ -295,7 +297,7 @@ class VerificationCheckCollector:
                 )
                 return self.build_check(
                     "freeze_gate",
-                    _status_from_result(result, pass_values={"passed", "dry_run"}),
+                    _freeze_gate_status_from_result(result),
                     _jsonable(result),
                     summary="Freeze gate dry-run contributed readiness.",
                 )
@@ -358,7 +360,10 @@ class VerificationCheckCollector:
                 )
             except Exception as exc:
                 return self._exception_check("resource_registry", exc)
-        evidence = _jsonable(result)
+        evidence = _jsonable(result) or {
+            "status": "not_configured",
+            "critical_markers_present": False,
+        }
         if _has_critical_marker(evidence):
             return self.build_check(
                 "resource_registry",
@@ -542,7 +547,19 @@ class VerificationCheckCollector:
         )
 
     def _operator_check(self, request: RCGateRunRequest) -> VerificationCheck:
-        overview = _safe_call(self._operator_service, "overview", request.owner_scope)
+        overview_request = OperatorOverviewRequest(
+            trace_id=request.trace_id,
+            actor_id=request.actor_id,
+            workspace_id=request.workspace_id,
+            owner_scope=request.owner_scope,
+        )
+        actor_context = _internal_actor_context(self._settings, request)
+        overview = _safe_call(
+            self._operator_service,
+            "overview",
+            overview_request,
+            actor_context=actor_context,
+        )
         if overview is None:
             overview = _safe_call(self._operator_service, "build_overview", request.owner_scope)
         return self.build_check(
@@ -625,12 +642,29 @@ def _status_from_result(result: object, *, pass_values: set[str] | None = None) 
     return "unknown"
 
 
-def _safe_call(source: object | None, method_name: str, *args: object) -> object | None:
+def _freeze_gate_status_from_result(result: object) -> str:
+    status = _status_from_result(result, pass_values={"passed", "dry_run"})
+    if status == "failed":
+        return "failed"
+    if isinstance(result, dict):
+        report = result.get("report")
+        failures = result.get("failures")
+    else:
+        report = getattr(result, "report", None)
+        failures = getattr(result, "failures", None)
+    if isinstance(report, dict) and report.get("release_ready") is True and not failures:
+        return "passed"
+    return status
+
+
+def _safe_call(
+    source: object | None, method_name: str, *args: object, **kwargs: object
+) -> object | None:
     method = getattr(source, method_name, None)
     if not callable(method):
         return None
     try:
-        return cast(object, method(*args))
+        return cast(object, method(*args, **kwargs))
     except TypeError:
         try:
             return cast(object, method())
@@ -651,6 +685,24 @@ def _jsonable(value: object) -> dict[str, Any]:
         if isinstance(dumped, dict):
             return safe_rc_summary(dumped)
     return safe_rc_summary({"value": str(value)})
+
+
+def _internal_actor_context(settings: Settings, request: RCGateRunRequest) -> ActorContext | None:
+    if settings.env != "development" or not settings.dev_auth_enabled:
+        return None
+    actor_id = request.actor_id or settings.default_dev_actor_id
+    workspace_id = request.workspace_id or settings.default_dev_workspace_id
+    return ActorContext(
+        actor_id=actor_id,
+        actor_type="system",
+        workspace_id=workspace_id,
+        roles=["owner"],
+        permissions=["operator.overview.read"],
+        security_scope=request.owner_scope,
+        correlation_id=None,
+        trace_id=request.trace_id,
+        dev_mode=True,
+    )
 
 
 def _has_breaking_finding(value: object) -> bool:

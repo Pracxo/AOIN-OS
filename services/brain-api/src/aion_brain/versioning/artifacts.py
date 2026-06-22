@@ -10,21 +10,30 @@ from typing import Any, cast
 from uuid import uuid4
 
 from aion_brain.api_support.errors import AIONPolicyDeniedException
+from aion_brain.config import Settings, get_settings
 from aion_brain.contracts.compatibility import ReleaseArtifactManifest
 from aion_brain.contracts.policy import PolicyRequest
 from aion_brain.policy.base import PolicyAdapter
+from aion_brain.policy.enrichment import enrich_with_internal_dev_actor
 from aion_brain.versioning.compatibility import emit_versioning_telemetry
 from aion_brain.versioning.manifest import stable_hash
 from aion_brain.versioning.repository import VersioningRepository
 
 RELEASE_ARTIFACT_FILES = (
+    "VERSION",
     "README.md",
     "AGENTS.md",
     "CHANGELOG.md",
-    "docs/versioning.md",
-    "docs/upgrade-policy.md",
-    "docs/deprecation-policy.md",
-    "docs/release-notes/v0.1.0.md",
+    "RELEASE_NOTES.md",
+    "docs/release/v0.1-final-evidence-summary.md",
+    "docs/release/v0.1-final-freeze.md",
+    "docs/release/v0.1-known-limitations.md",
+    "docs/release/v0.1-no-go-conditions.md",
+    "docs/release/v0.1-operator-acceptance.md",
+    "docs/release/v0.1-post-release-roadmap.md",
+    "docs/release/v0.1-release-baseline.md",
+    "docs/release/v0.1-tagging-guide.md",
+    "docs/adr/0072-v0.1-release-freeze-baseline.md",
     "docker-compose.yml",
     "packages/aion-sdk-python/pyproject.toml",
 )
@@ -41,12 +50,14 @@ class ReleaseArtifactService:
         root_dir: Path,
         contract_export_service: object | None = None,
         telemetry_service: object | None = None,
+        settings: Settings | None = None,
     ) -> None:
         self._repository = repository
         self._policy_adapter = policy_adapter
         self._root_dir = root_dir
         self._contract_export_service = contract_export_service
         self._telemetry_service = telemetry_service
+        self._settings = settings or get_settings()
 
     def generate(
         self,
@@ -115,22 +126,27 @@ class ReleaseArtifactService:
         risk_level: str = "low",
         context: dict[str, Any] | None = None,
     ) -> None:
-        decision = self._policy_adapter.authorize(
-            PolicyRequest(
-                request_id=f"{action_type}-{uuid4().hex}",
-                trace_id=None,
-                actor_id=actor_id,
-                workspace_id=None,
-                action_type=action_type,
-                resource_type="release_artifact",
-                resource_id=None,
-                risk_level=risk_level,
-                approval_present=True,
-                requested_permissions=[action_type],
-                security_scope=scope,
-                context=context or {},
-            )
+        policy_request = PolicyRequest(
+            request_id=f"{action_type}-{uuid4().hex}",
+            trace_id=None,
+            actor_id=actor_id,
+            workspace_id=None,
+            action_type=action_type,
+            resource_type="release_artifact",
+            resource_id=None,
+            risk_level=risk_level,
+            approval_present=True,
+            requested_permissions=[action_type],
+            security_scope=scope,
+            context=context or {},
         )
+        policy_request = enrich_with_internal_dev_actor(
+            policy_request,
+            self._settings,
+            scope=scope,
+            permissions=[action_type],
+        )
+        decision = self._policy_adapter.authorize(policy_request)
         if not decision.allow:
             raise AIONPolicyDeniedException(decision.reason)
 

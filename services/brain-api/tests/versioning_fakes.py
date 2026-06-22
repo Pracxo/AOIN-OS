@@ -271,22 +271,28 @@ def freeze_gate_run(status: str = "passed") -> FreezeGateRun:
 def write_minimal_release_docs(root: Path) -> None:
     """Create minimal release docs for freeze/artifact tests."""
     for relative in [
+        "VERSION",
         "README.md",
         "AGENTS.md",
         "CHANGELOG.md",
-        "docs/versioning.md",
-        "docs/upgrade-policy.md",
-        "docs/deprecation-policy.md",
-        "docs/release-notes/v0.1.0.md",
+        "RELEASE_NOTES.md",
+        "docs/release/v0.1-final-evidence-summary.md",
+        "docs/release/v0.1-final-freeze.md",
+        "docs/release/v0.1-known-limitations.md",
+        "docs/release/v0.1-no-go-conditions.md",
+        "docs/release/v0.1-operator-acceptance.md",
+        "docs/release/v0.1-post-release-roadmap.md",
+        "docs/release/v0.1-release-baseline.md",
+        "docs/release/v0.1-tagging-guide.md",
         "docker-compose.yml",
         "packages/aion-sdk-python/pyproject.toml",
-        "docs/adr/0036-version-manifest-compatibility-freeze-gate.md",
+        "docs/adr/0072-v0.1-release-freeze-baseline.md",
     ]:
         path = root / relative
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text("AION generic release artifact.\n", encoding="utf-8")
     (root / "docs/adr/README.md").write_text(
-        "0036-version-manifest-compatibility-freeze-gate\n",
+        "0072-v0.1-release-freeze-baseline\n",
         encoding="utf-8",
     )
     (root / "infra/postgres/migrations").mkdir(parents=True, exist_ok=True)

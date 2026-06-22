@@ -16,6 +16,8 @@ INCLUDE_PATHS = (
     "README.md",
     "AGENTS.md",
     "CHANGELOG.md",
+    "VERSION",
+    "RELEASE_NOTES.md",
     "docs",
     "scripts",
     "docker-compose.yml",
@@ -147,7 +149,7 @@ def _artifact_type(relative: str) -> str:
         return "source"
     if relative.startswith("packages/aion-sdk-python"):
         return "sdk"
-    if relative.startswith("docs/release-notes"):
+    if relative == "RELEASE_NOTES.md" or relative.startswith("docs/release-notes"):
         return "release_notes"
     if relative.startswith("docs"):
         return "docs"

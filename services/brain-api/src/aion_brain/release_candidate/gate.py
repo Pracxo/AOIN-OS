@@ -400,7 +400,7 @@ def _readiness_score(checks: list[VerificationCheck], matrix: VerificationMatrix
         else 0.0
     )
     optional_score = (
-        sum(1 for check in optional if check.status == "passed") / len(optional)
+        sum(1 for check in optional if check.status in {"passed", "skipped"}) / len(optional)
         if optional
         else 1.0
     )

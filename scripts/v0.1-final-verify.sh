@@ -61,6 +61,26 @@ run_api_ready_step() {
   fi
 }
 
+run_api_step_with_offline_flag() {
+  local name="$1"
+  shift
+  if [[ "$OFFLINE_OK" == "1" ]]; then
+    run_api_step "$name" "$@" --offline-ok
+  else
+    run_api_step "$name" "$@"
+  fi
+}
+
+run_step_with_offline_flag() {
+  local name="$1"
+  shift
+  if [[ "$OFFLINE_OK" == "1" ]]; then
+    run_step "$name" "$@" --offline-ok
+  else
+    run_step "$name" "$@"
+  fi
+}
+
 skip_step() {
   local name="$1"
   echo
@@ -83,10 +103,6 @@ run_repo_check() {
   fi
 }
 
-if [[ "$OFFLINE_OK" == "1" ]]; then
-  offline_arg=(--offline-ok)
-fi
-
 run_repo_check
 run_step "final docs audit" ./scripts/final-docs-audit.sh
 
@@ -97,11 +113,11 @@ if [[ "$SKIP_API" == "1" ]]; then
   skip_step "release smoke API run"
   skip_step "setup doctor API run"
 else
-  run_api_step "release candidate gate" ./scripts/rc-check.sh "${offline_arg[@]}"
-  run_api_step "release candidate evidence" ./scripts/rc-evidence.sh "${offline_arg[@]}"
-  run_api_step "golden path" ./scripts/golden-path.sh "${offline_arg[@]}"
-  run_api_step "release smoke" ./scripts/release-smoke.sh "${offline_arg[@]}"
-  run_api_step "setup doctor" ./scripts/setup-doctor.sh --fast "${offline_arg[@]}"
+  run_api_step_with_offline_flag "release candidate gate" ./scripts/rc-check.sh
+  run_api_step_with_offline_flag "release candidate evidence" ./scripts/rc-evidence.sh
+  run_api_step_with_offline_flag "golden path" ./scripts/golden-path.sh
+  run_api_step_with_offline_flag "release smoke" ./scripts/release-smoke.sh
+  run_api_step_with_offline_flag "setup doctor" ./scripts/setup-doctor.sh --fast
 fi
 
 if [[ "$SKIP_DOCKER" == "1" ]]; then
@@ -119,7 +135,7 @@ if [[ "$SKIP_API" == "1" ]]; then
 elif curl -fsS "${BASE_URL}/health" >/dev/null 2>&1; then
   run_api_ready_step "health endpoint" curl -fsS "${BASE_URL}/health"
   run_api_ready_step "readiness endpoint" curl -fsS "${BASE_URL}/health/ready"
-  run_step "local demo" ./scripts/demo-local.sh "${offline_arg[@]}"
+  run_step_with_offline_flag "local demo" ./scripts/demo-local.sh
 else
   echo
   echo "Brain API is not reachable at ${BASE_URL}."

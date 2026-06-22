@@ -7,6 +7,9 @@ SCOPE="${AION_SCOPE:-workspace:main}"
 KEEP_GOING=0
 OFFLINE_OK=0
 
+# shellcheck source=scripts/lib/api-response-check.sh
+source "$ROOT_DIR/scripts/lib/api-response-check.sh"
+
 for arg in "$@"; do
   case "$arg" in
     --keep-going) KEEP_GOING=1 ;;
@@ -16,7 +19,9 @@ for arg in "$@"; do
 done
 
 RESULTS_FILE="$(mktemp)"
-trap 'rm -f "$RESULTS_FILE"' EXIT
+SEED_RESPONSE_FILE="$(mktemp)"
+GATE_RESPONSE_FILE="$(mktemp)"
+trap 'rm -f "$RESULTS_FILE" "$SEED_RESPONSE_FILE" "$GATE_RESPONSE_FILE"' EXIT
 printf '[\n' >"$RESULTS_FILE"
 FIRST_RESULT=1
 OVERALL=0
@@ -65,6 +70,8 @@ run_check "lint" "scripts/lint.sh" "$ROOT_DIR/scripts/lint.sh" || exit 1
 run_check "tests.brain" "scripts/test-brain.sh" "$ROOT_DIR/scripts/test-brain.sh" || exit 1
 run_check "tests.sdk" "scripts/test-sdk.sh" "$ROOT_DIR/scripts/test-sdk.sh" || exit 1
 run_check "typecheck" "scripts/typecheck.sh" "$ROOT_DIR/scripts/typecheck.sh" || exit 1
+run_check "policy_coverage" "scripts/policy-coverage.sh" "$ROOT_DIR/scripts/policy-coverage.sh" || exit 1
+run_check "openapi_hygiene" "scripts/openapi-hygiene.sh" "$ROOT_DIR/scripts/openapi-hygiene.sh" || exit 1
 run_check "boundary_check" "scripts/boundary-check.sh" "$ROOT_DIR/scripts/boundary-check.sh" || exit 1
 run_check "repo_health" "scripts/repo-health.sh" "$ROOT_DIR/scripts/repo-health.sh" || exit 1
 run_check "docker_compose_config" "docker compose config --quiet" docker compose -f "$ROOT_DIR/docker-compose.yml" config --quiet || exit 1
@@ -77,27 +84,30 @@ if curl -fsS "${BASE_URL}/health" >/dev/null 2>&1; then
     -X POST \
     -H 'content-type: application/json' \
     "${BASE_URL}/brain/rc/matrices/seed-defaults" \
-    --data-binary @- <<JSON
+    --data-binary @- \
+    -o "$SEED_RESPONSE_FILE" <<JSON
 {"scope":["${SCOPE}"],"dry_run":true,"created_by":"rc-check.sh"}
 JSON
   then
-    if [[ "$OFFLINE_OK" == "1" ]]; then
-      echo "RC matrix endpoint is unavailable at ${BASE_URL}; local RC checks completed offline."
-      exit "$OVERALL"
-    fi
+    echo "RC matrix endpoint failed at ${BASE_URL} after API health succeeded." >&2
     exit 1
   fi
+  aion_assert_api_response_ok "RC matrix seed" "$SEED_RESPONSE_FILE"
+  cat "$SEED_RESPONSE_FILE"
+  echo
+
   CHECK_RESULTS="$(cat "$RESULTS_FILE")"
   if ! curl -fsS \
     -X POST \
     -H 'content-type: application/json' \
     "${BASE_URL}/brain/rc/gate/run" \
-    --data-binary @- <<JSON
+    --data-binary @- \
+    -o "$GATE_RESPONSE_FILE" <<JSON
 {
   "owner_scope": ["${SCOPE}"],
   "rc_key": "rc.local.script",
   "mode": "dry_run",
-  "run_service_checks": false,
+  "run_service_checks": true,
   "include_docker_smoke": false,
   "check_results": ${CHECK_RESULTS},
   "metadata": {
@@ -111,12 +121,12 @@ JSON
 }
 JSON
   then
-    if [[ "$OFFLINE_OK" == "1" ]]; then
-      echo "RC gate endpoint is unavailable at ${BASE_URL}; local RC checks completed offline."
-      exit "$OVERALL"
-    fi
+    echo "RC gate endpoint failed at ${BASE_URL} after API health succeeded." >&2
     exit 1
   fi
+  aion_assert_api_response_ok "RC gate" "$GATE_RESPONSE_FILE"
+  cat "$GATE_RESPONSE_FILE"
+  echo
 else
   if [[ "$OFFLINE_OK" == "1" ]]; then
     echo "Brain API is not reachable at ${BASE_URL}; local RC checks completed offline."

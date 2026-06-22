@@ -58,3 +58,48 @@ def test_secret_scanner_flags_env_file(tmp_path) -> None:  # type: ignore[no-unt
     )
 
     assert any(finding.finding_type == "env_file" for finding in run.findings)
+
+
+def test_secret_scanner_ignores_redaction_private_key_detector_pattern(tmp_path) -> None:  # type: ignore[no-untyped-def]
+    target = tmp_path / "src" / "aion_brain" / "prompts" / "redaction.py"
+    target.parent.mkdir(parents=True)
+    target.write_text(
+        "PRIVATE_KEY_PATTERN = re.compile("
+        'r"-----BEGIN PRIVATE KEY-----.*?-----END PRIVATE KEY-----")\n',
+        encoding="utf-8",
+    )
+    _, scanner, *_ = services(root_dir=tmp_path)
+
+    run = scanner.scan(
+        SecurityScanRequest(scan_type="secrets", owner_scope=SCOPE, paths=[str(target)])
+    )
+
+    assert not any(finding.finding_type == "private_key_like" for finding in run.findings)
+
+
+def test_secret_scanner_does_not_flag_python_secret_module_name(tmp_path) -> None:  # type: ignore[no-untyped-def]
+    target = tmp_path / "src" / "aion_brain" / "contracts" / "secrets.py"
+    target.parent.mkdir(parents=True)
+    target.write_text(
+        '"""Secret reference contracts without raw secret values."""\n',
+        encoding="utf-8",
+    )
+    _, scanner, *_ = services(root_dir=tmp_path)
+
+    run = scanner.scan(
+        SecurityScanRequest(scan_type="secrets", owner_scope=SCOPE, paths=[str(target)])
+    )
+
+    assert not any(finding.finding_type == "credential_file" for finding in run.findings)
+
+
+def test_secret_scanner_still_flags_credential_config_file(tmp_path) -> None:  # type: ignore[no-untyped-def]
+    target = tmp_path / "service-secrets.yaml"
+    target.write_text("enabled: true\n", encoding="utf-8")
+    _, scanner, *_ = services(root_dir=tmp_path)
+
+    run = scanner.scan(
+        SecurityScanRequest(scan_type="secrets", owner_scope=SCOPE, paths=[str(target)])
+    )
+
+    assert any(finding.finding_type == "credential_file" for finding in run.findings)

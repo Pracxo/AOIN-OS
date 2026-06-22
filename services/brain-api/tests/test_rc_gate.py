@@ -5,6 +5,7 @@ from __future__ import annotations
 from datetime import UTC, datetime
 
 from aion_brain.config import Settings
+from aion_brain.contracts.operator import OperatorOverviewRequest
 from aion_brain.contracts.policy import PolicyDecision, PolicyRequest
 from aion_brain.contracts.release_candidate import RCGateRunRequest
 from aion_brain.contracts.verification_matrix import (
@@ -45,6 +46,24 @@ class DenyPolicy:
             constraints=[],
             audit_level="standard",
         )
+
+
+class ReadyWarningFreezeGate:
+    def run(self, request: object) -> object:
+        return {
+            "status": "warning",
+            "failures": [],
+            "report": {"release_ready": True},
+            "request": request.__class__.__name__,
+        }
+
+
+class FakeOperatorService:
+    def overview(
+        self, request: OperatorOverviewRequest, *, actor_context: object | None = None
+    ) -> dict[str, object]:
+        assert actor_context is not None
+        return {"owner_scope": request.owner_scope, "overall_status": "ready"}
 
 
 def test_rc_gate_passes_when_required_checks_pass() -> None:
@@ -99,6 +118,92 @@ def test_rc_gate_creates_blocking_finding_for_failed_required_check() -> None:
     assert run.status == "blocked"
     assert run.release_ready is False
     assert run.findings[0].blocking is True
+
+
+def test_rc_gate_does_not_penalize_skipped_optional_checks() -> None:
+    services = _services(AllowPolicy())
+    matrix = services["matrix"].create_matrix(
+        VerificationMatrixCreateRequest(
+            matrix_key="rc.optional",
+            version="0.1.0",
+            owner_scope=["workspace:main"],
+            required_checks=["tests.brain"],
+            optional_checks=["docker_smoke_live"],
+            release_ready_threshold=0.95,
+        )
+    )
+
+    run = services["gate"].run(
+        RCGateRunRequest(
+            verification_matrix_id=matrix.verification_matrix_id,
+            owner_scope=["workspace:main"],
+            run_service_checks=False,
+            check_results=[_check("tests.brain", "passed")],
+        )
+    )
+
+    assert run.release_ready is True
+    assert run.status == "passed"
+
+
+def test_rc_collector_accepts_warning_freeze_gate_when_release_ready() -> None:
+    collector = VerificationCheckCollector(
+        freeze_gate_service=ReadyWarningFreezeGate(),
+        settings=Settings(_env_file=None, DATABASE_URL="sqlite+pysqlite:///:memory:"),
+    )
+
+    checks = collector.collect_service_checks(
+        RCGateRunRequest(
+            owner_scope=["workspace:main"],
+            include_bootstrap=False,
+            include_golden_path=False,
+            include_release_package=False,
+            include_freeze_gate=True,
+        )
+    )
+
+    freeze_check = next(check for check in checks if check.check_key == "freeze_gate")
+    assert freeze_check.status == "passed"
+
+
+def test_rc_collector_calls_operator_overview_with_request_contract() -> None:
+    collector = VerificationCheckCollector(
+        operator_service=FakeOperatorService(),
+        settings=Settings(_env_file=None, DATABASE_URL="sqlite+pysqlite:///:memory:"),
+    )
+
+    checks = collector.collect_service_checks(
+        RCGateRunRequest(
+            owner_scope=["workspace:main"],
+            include_bootstrap=False,
+            include_golden_path=False,
+            include_release_package=False,
+            include_freeze_gate=False,
+        )
+    )
+
+    operator_check = next(check for check in checks if check.check_key == "operator_overview")
+    assert operator_check.status == "passed"
+
+
+def test_rc_resource_registry_check_records_evidence_when_service_absent() -> None:
+    collector = VerificationCheckCollector(
+        settings=Settings(_env_file=None, DATABASE_URL="sqlite+pysqlite:///:memory:"),
+    )
+
+    checks = collector.collect_service_checks(
+        RCGateRunRequest(
+            owner_scope=["workspace:main"],
+            include_bootstrap=False,
+            include_golden_path=False,
+            include_release_package=False,
+            include_freeze_gate=False,
+        )
+    )
+
+    resource_check = next(check for check in checks if check.check_key == "resource_registry")
+    assert resource_check.status == "passed"
+    assert resource_check.evidence
 
 
 def test_rc_policy_denial_blocks_gate() -> None:

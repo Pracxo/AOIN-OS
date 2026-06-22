@@ -104,6 +104,8 @@ def _missing_error_response(responses: dict[str, Any]) -> bool:
 def _is_allowed_internal_marker(name: str, marker: str) -> bool:
     if marker == "MCP":
         return "MCP" in name
+    if marker == "Temporal" and "TemporalState" in name:
+        return True
     return any(
         allowed in name
         for allowed in (

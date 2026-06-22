@@ -17,6 +17,7 @@ from aion_brain.contracts.security_baseline import (
     SecurityScanRequest,
 )
 from aion_brain.policy.base import PolicyAdapter
+from aion_brain.policy.enrichment import enrich_with_internal_dev_actor
 from aion_brain.security_baseline.adapter_risk import AdapterRiskChecker
 from aion_brain.security_baseline.api_exposure import APIExposureChecker
 from aion_brain.security_baseline.config_checker import ConfigHardeningChecker
@@ -529,22 +530,27 @@ class HardeningGateService:
         risk_level: str = "low",
         context: dict[str, Any] | None = None,
     ) -> None:
-        decision = self._policy_adapter.authorize(
-            PolicyRequest(
-                request_id=f"{action_type}-{uuid4().hex}",
-                trace_id=None,
-                actor_id=actor_id,
-                workspace_id=None,
-                action_type=action_type,
-                resource_type="hardening_gate",
-                resource_id=resource_id,
-                risk_level=risk_level,
-                approval_present=True,
-                requested_permissions=[action_type],
-                security_scope=scope,
-                context=context or {},
-            )
+        policy_request = PolicyRequest(
+            request_id=f"{action_type}-{uuid4().hex}",
+            trace_id=None,
+            actor_id=actor_id,
+            workspace_id=None,
+            action_type=action_type,
+            resource_type="hardening_gate",
+            resource_id=resource_id,
+            risk_level=risk_level,
+            approval_present=True,
+            requested_permissions=[action_type],
+            security_scope=scope,
+            context=context or {},
         )
+        policy_request = enrich_with_internal_dev_actor(
+            policy_request,
+            self._settings,
+            scope=scope,
+            permissions=[action_type],
+        )
+        decision = self._policy_adapter.authorize(policy_request)
         if not decision.allow:
             raise AIONPolicyDeniedException(decision.reason)
 

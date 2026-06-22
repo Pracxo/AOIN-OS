@@ -18,6 +18,7 @@ from aion_brain.contracts.kernel import KernelSelfTestRequest
 from aion_brain.contracts.policy import PolicyRequest
 from aion_brain.contracts.release_baseline import ReleaseBaselineRequest
 from aion_brain.policy.base import PolicyAdapter
+from aion_brain.policy.enrichment import enrich_with_internal_dev_actor
 from aion_brain.versioning.compatibility import emit_versioning_telemetry
 from aion_brain.versioning.features import default_feature_entries
 from aion_brain.versioning.manifest import stable_hash
@@ -55,6 +56,20 @@ _BANNED_DOMAIN_TERMS = {
     "procurement",
     "security",
 }
+CURRENT_RELEASE_DOCS = (
+    "VERSION",
+    "CHANGELOG.md",
+    "RELEASE_NOTES.md",
+    "docs/release/v0.1-final-evidence-summary.md",
+    "docs/release/v0.1-final-freeze.md",
+    "docs/release/v0.1-known-limitations.md",
+    "docs/release/v0.1-no-go-conditions.md",
+    "docs/release/v0.1-operator-acceptance.md",
+    "docs/release/v0.1-post-release-roadmap.md",
+    "docs/release/v0.1-release-baseline.md",
+    "docs/release/v0.1-tagging-guide.md",
+    "docs/adr/0072-v0.1-release-freeze-baseline.md",
+)
 
 
 class FreezeGateService:
@@ -892,7 +907,7 @@ class FreezeGateService:
         return {
             "status": "passed" if result.status == "passed" else "warning",
             "message": "Kernel self-test completed.",
-            "details": {"status": result.status},
+            "details": {"kernel_self_test_status": result.status},
         }
 
     def _check_policy_coverage(self) -> dict[str, Any]:
@@ -1253,72 +1268,74 @@ class FreezeGateService:
         }
 
     def _check_docs_current(self) -> dict[str, Any]:
-        docs = [
-            "docs/versioning.md",
-            "docs/upgrade-policy.md",
-            "docs/deprecation-policy.md",
-            "docs/release-notes/v0.1.0.md",
-            "CHANGELOG.md",
-        ]
-        missing = [path for path in docs if not (self._root_dir / path).is_file()]
+        missing = [path for path in CURRENT_RELEASE_DOCS if not (self._root_dir / path).is_file()]
         return {
             "status": "failed" if missing else "passed",
-            "message": "Versioning and release docs are present.",
+            "message": "v0.1 release docs are present.",
             "details": {"missing": missing},
         }
 
     def _check_adr_index(self) -> dict[str, Any]:
-        adr = self._root_dir / "docs/adr/0036-version-manifest-compatibility-freeze-gate.md"
+        adr = self._root_dir / "docs/adr/0072-v0.1-release-freeze-baseline.md"
         index = self._root_dir / "docs/adr/README.md"
         indexed = (
             index.is_file()
-            and "0036-version-manifest-compatibility-freeze-gate"
-            in index.read_text(encoding="utf-8")
+            and "0072-v0.1-release-freeze-baseline" in index.read_text(encoding="utf-8")
         )
         status = "passed" if adr.is_file() and indexed else "failed"
         return {
             "status": status,
-            "message": "ADR 0036 exists and is indexed.",
+            "message": "ADR 0072 exists and is indexed.",
             "details": {"adr_exists": adr.is_file(), "indexed": indexed},
         }
 
     def _authorize(self, request: FreezeGateRunRequest) -> None:
-        decision = self._policy_adapter.authorize(
-            PolicyRequest(
-                request_id=f"freeze_gate.run-{uuid4().hex}",
-                trace_id=None,
-                actor_id=request.requested_by,
-                workspace_id=None,
-                action_type="freeze_gate.run",
-                resource_type="freeze_gate",
-                resource_id=request.freeze_gate_id,
-                risk_level="medium",
-                approval_present=True,
-                requested_permissions=["freeze_gate.run"],
-                security_scope=request.owner_scope,
-                context={"version": request.version, "dry_run": request.dry_run},
-            )
+        policy_request = PolicyRequest(
+            request_id=f"freeze_gate.run-{uuid4().hex}",
+            trace_id=None,
+            actor_id=request.requested_by,
+            workspace_id=None,
+            action_type="freeze_gate.run",
+            resource_type="freeze_gate",
+            resource_id=request.freeze_gate_id,
+            risk_level="medium",
+            approval_present=True,
+            requested_permissions=["freeze_gate.run"],
+            security_scope=request.owner_scope,
+            context={"version": request.version, "dry_run": request.dry_run},
         )
+        policy_request = enrich_with_internal_dev_actor(
+            policy_request,
+            self._settings,
+            scope=request.owner_scope,
+            permissions=["freeze_gate.run"],
+        )
+        decision = self._policy_adapter.authorize(policy_request)
         if not decision.allow:
             raise AIONPolicyDeniedException(decision.reason)
 
     def _authorize_read(self, scope: builtins.list[str], resource_id: str | None) -> None:
-        decision = self._policy_adapter.authorize(
-            PolicyRequest(
-                request_id=f"freeze_gate.read-{uuid4().hex}",
-                trace_id=None,
-                actor_id=None,
-                workspace_id=None,
-                action_type="freeze_gate.read",
-                resource_type="freeze_gate",
-                resource_id=resource_id,
-                risk_level="low",
-                approval_present=True,
-                requested_permissions=["freeze_gate.read"],
-                security_scope=scope,
-                context={},
-            )
+        policy_request = PolicyRequest(
+            request_id=f"freeze_gate.read-{uuid4().hex}",
+            trace_id=None,
+            actor_id=None,
+            workspace_id=None,
+            action_type="freeze_gate.read",
+            resource_type="freeze_gate",
+            resource_id=resource_id,
+            risk_level="low",
+            approval_present=True,
+            requested_permissions=["freeze_gate.read"],
+            security_scope=scope,
+            context={},
         )
+        policy_request = enrich_with_internal_dev_actor(
+            policy_request,
+            self._settings,
+            scope=scope,
+            permissions=["freeze_gate.read"],
+        )
+        decision = self._policy_adapter.authorize(policy_request)
         if not decision.allow:
             raise AIONPolicyDeniedException(decision.reason)
 

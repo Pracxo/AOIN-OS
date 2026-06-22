@@ -18,6 +18,7 @@ from aion_brain.contracts.policy import PolicyRequest
 from aion_brain.contracts.telemetry import VisualTelemetryEvent
 from aion_brain.contracts.versioning import ReleaseChannel, VersionManifest
 from aion_brain.policy.base import PolicyAdapter
+from aion_brain.policy.enrichment import enrich_with_internal_dev_actor
 from aion_brain.versioning.features import FeatureRegistryService, default_feature_entries
 from aion_brain.versioning.repository import VersioningRepository
 
@@ -210,22 +211,27 @@ class VersionManifestService:
         risk_level: str = "low",
         context: dict[str, Any] | None = None,
     ) -> None:
-        decision = self._policy_adapter.authorize(
-            PolicyRequest(
-                request_id=f"{action_type}-{uuid4().hex}",
-                trace_id=None,
-                actor_id=actor_id,
-                workspace_id=None,
-                action_type=action_type,
-                resource_type="version_manifest",
-                resource_id=resource_id,
-                risk_level=risk_level,
-                approval_present=True,
-                requested_permissions=[action_type],
-                security_scope=scope,
-                context=context or {},
-            )
+        policy_request = PolicyRequest(
+            request_id=f"{action_type}-{uuid4().hex}",
+            trace_id=None,
+            actor_id=actor_id,
+            workspace_id=None,
+            action_type=action_type,
+            resource_type="version_manifest",
+            resource_id=resource_id,
+            risk_level=risk_level,
+            approval_present=True,
+            requested_permissions=[action_type],
+            security_scope=scope,
+            context=context or {},
         )
+        policy_request = enrich_with_internal_dev_actor(
+            policy_request,
+            self._settings,
+            scope=scope,
+            permissions=[action_type],
+        )
+        decision = self._policy_adapter.authorize(policy_request)
         if not decision.allow:
             raise AIONPolicyDeniedException(decision.reason)
 

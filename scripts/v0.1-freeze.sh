@@ -4,6 +4,9 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT_DIR"
 
+# shellcheck source=scripts/lib/api-response-check.sh
+source "$ROOT_DIR/scripts/lib/api-response-check.sh"
+
 BASE_URL="${AION_BASE_URL:-${AION_BRAIN_API_URL:-http://localhost:8080}}"
 VERSION="$(tr -d '[:space:]' < VERSION)"
 SCOPE="${AION_SCOPE:-workspace:main}"
@@ -40,6 +43,22 @@ run_step() {
   return 0
 }
 
+run_api_json_step() {
+  local name="$1"
+  shift
+  local response_file
+  response_file="$(mktemp)"
+  if "$@" -o "$response_file"; then
+    if aion_assert_api_response_ok "$name" "$response_file"; then
+      cat "$response_file"
+      rm -f "$response_file"
+      return 0
+    fi
+  fi
+  rm -f "$response_file"
+  return 1
+}
+
 verify_args=()
 [[ "$KEEP_GOING" == "1" ]] && verify_args+=(--keep-going)
 [[ "$OFFLINE_OK" == "1" ]] && verify_args+=(--offline-ok)
@@ -56,7 +75,7 @@ if [[ "$SKIP_API" == "1" ]]; then
   freeze_status="skipped_by_flag"
   release_package_status="skipped_by_flag"
 elif curl -fsS "${BASE_URL}/health" >/dev/null 2>&1; then
-  run_step "release package dry-run" curl -fsS \
+  run_step "release package dry-run" run_api_json_step "release package dry-run" curl -fsS \
     -X POST \
     -H "Content-Type: application/json" \
     --data-binary @- \
@@ -70,7 +89,7 @@ elif curl -fsS "${BASE_URL}/health" >/dev/null 2>&1; then
 JSON
   release_package_status="dry_run_completed"
 
-  run_step "freeze gate dry-run" curl -fsS \
+  run_step "freeze gate dry-run" run_api_json_step "freeze gate dry-run" curl -fsS \
     -X POST \
     -H "Content-Type: application/json" \
     --data-binary @- \

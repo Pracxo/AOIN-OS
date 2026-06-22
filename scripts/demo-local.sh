@@ -26,6 +26,9 @@ done
 
 cd "$ROOT_DIR"
 
+# shellcheck source=scripts/lib/api-response-check.sh
+source "$ROOT_DIR/scripts/lib/api-response-check.sh"
+
 echo "AION v0.1 local demo"
 echo "API: ${API_URL}"
 
@@ -47,6 +50,22 @@ run_step() {
 
 api_reachable() {
   curl -fsS "${API_URL}/health" >/dev/null 2>&1
+}
+
+run_api_json_step() {
+  local name="$1"
+  shift
+  local response_file
+  response_file="$(mktemp)"
+  if "$@" -o "$response_file"; then
+    if aion_assert_api_response_ok "$name" "$response_file"; then
+      cat "$response_file"
+      rm -f "$response_file"
+      return 0
+    fi
+  fi
+  rm -f "$response_file"
+  return 1
 }
 
 if [[ "$SKIP_DOCKER" != "1" ]]; then
@@ -76,11 +95,11 @@ if [[ "$SKIP_RC" != "1" ]]; then
 fi
 
 if api_reachable; then
-  run_step "extension manifest validation" \
+  run_step "extension manifest validation" run_api_json_step "extension manifest validation" \
     curl -fsS -X POST -H 'content-type: application/json' \
       "${API_URL}/brain/extensions/manifests/validate" \
       --data-binary @examples/demo/generic-extension-manifest.json
-  run_step "release smoke" \
+  run_step "release smoke" run_api_json_step "release smoke" \
     curl -fsS -X POST "${API_URL}/brain/golden-path/release-smoke?scope=workspace:main"
   run_step "operator overview" \
     curl -fsS -X POST -H 'content-type: application/json' \

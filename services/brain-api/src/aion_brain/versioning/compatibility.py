@@ -15,6 +15,7 @@ from aion_brain.contracts.compatibility import CompatibilityMatrix, SDKCompatibi
 from aion_brain.contracts.policy import PolicyRequest
 from aion_brain.contracts.telemetry import VisualTelemetryEvent
 from aion_brain.policy.base import PolicyAdapter
+from aion_brain.policy.enrichment import enrich_with_internal_dev_actor
 from aion_brain.versioning.repository import VersioningRepository
 
 SDK_REQUIRED_RESOURCES = (
@@ -102,22 +103,27 @@ class CompatibilityMatrixService:
         risk_level: str = "low",
         context: dict[str, Any] | None = None,
     ) -> None:
-        decision = self._policy_adapter.authorize(
-            PolicyRequest(
-                request_id=f"{action_type}-{uuid4().hex}",
-                trace_id=None,
-                actor_id=None,
-                workspace_id=None,
-                action_type=action_type,
-                resource_type="compatibility_matrix",
-                resource_id=resource_id,
-                risk_level=risk_level,
-                approval_present=True,
-                requested_permissions=[action_type],
-                security_scope=scope,
-                context=context or {},
-            )
+        policy_request = PolicyRequest(
+            request_id=f"{action_type}-{uuid4().hex}",
+            trace_id=None,
+            actor_id=None,
+            workspace_id=None,
+            action_type=action_type,
+            resource_type="compatibility_matrix",
+            resource_id=resource_id,
+            risk_level=risk_level,
+            approval_present=True,
+            requested_permissions=[action_type],
+            security_scope=scope,
+            context=context or {},
         )
+        policy_request = enrich_with_internal_dev_actor(
+            policy_request,
+            self._settings,
+            scope=scope,
+            permissions=[action_type],
+        )
+        decision = self._policy_adapter.authorize(policy_request)
         if not decision.allow:
             raise AIONPolicyDeniedException(decision.reason)
 
@@ -149,17 +155,19 @@ class SDKCompatibilityService:
         telemetry_service: object | None = None,
         settings: Settings | None = None,
         sdk_resource_names: list[str] | None = None,
+        root_dir: Path | None = None,
     ) -> None:
         self._policy_adapter = policy_adapter
         self._telemetry_service = telemetry_service
         self._settings = settings or get_settings()
         self._sdk_resource_names = sdk_resource_names
+        self._root_dir = root_dir
 
     def check(self, scope: list[str]) -> SDKCompatibilityReport:
         """Return SDK compatibility status."""
         self._authorize("sdk.compatibility.check", scope)
         checked = list(SDK_REQUIRED_RESOURCES)
-        available = set(self._sdk_resource_names or _available_sdk_resources())
+        available = set(self._sdk_resource_names or _available_sdk_resources(self._root_dir))
         missing = [resource for resource in checked if resource not in available]
         report = SDKCompatibilityReport(
             report_id=f"sdk-compatibility-{uuid4().hex}",
@@ -191,22 +199,27 @@ class SDKCompatibilityService:
         return report
 
     def _authorize(self, action_type: str, scope: list[str]) -> None:
-        decision = self._policy_adapter.authorize(
-            PolicyRequest(
-                request_id=f"{action_type}-{uuid4().hex}",
-                trace_id=None,
-                actor_id=None,
-                workspace_id=None,
-                action_type=action_type,
-                resource_type="sdk_compatibility",
-                resource_id=None,
-                risk_level="low",
-                approval_present=True,
-                requested_permissions=[action_type],
-                security_scope=scope,
-                context={},
-            )
+        policy_request = PolicyRequest(
+            request_id=f"{action_type}-{uuid4().hex}",
+            trace_id=None,
+            actor_id=None,
+            workspace_id=None,
+            action_type=action_type,
+            resource_type="sdk_compatibility",
+            resource_id=None,
+            risk_level="low",
+            approval_present=True,
+            requested_permissions=[action_type],
+            security_scope=scope,
+            context={},
         )
+        policy_request = enrich_with_internal_dev_actor(
+            policy_request,
+            self._settings,
+            scope=scope,
+            permissions=[action_type],
+        )
+        decision = self._policy_adapter.authorize(policy_request)
         if not decision.allow:
             raise AIONPolicyDeniedException(decision.reason)
 
@@ -276,16 +289,21 @@ def _adapter_enabled(name: str, settings: Settings) -> bool:
     return False
 
 
-def _available_sdk_resources() -> list[str]:
+def _available_sdk_resources(root_dir: Path | None = None) -> list[str]:
     resources: list[str] = []
-    sdk_resource_dir = Path(__file__).parents[5] / "packages/aion-sdk-python/src/aion_sdk/resources"
+    repo_root = root_dir or Path(__file__).parents[5]
+    sdk_resource_dir = repo_root / "packages/aion-sdk-python/src/aion_sdk/resources"
     for name in SDK_REQUIRED_RESOURCES:
-        if (
-            find_spec(f"aion_sdk.resources.{name}") is not None
-            or (sdk_resource_dir / f"{name}.py").is_file()
-        ):
+        if (sdk_resource_dir / f"{name}.py").is_file() or _sdk_resource_importable(name):
             resources.append(name)
     return resources
+
+
+def _sdk_resource_importable(name: str) -> bool:
+    try:
+        return find_spec(f"aion_sdk.resources.{name}") is not None
+    except ModuleNotFoundError:
+        return False
 
 
 def _sdk_version() -> str:

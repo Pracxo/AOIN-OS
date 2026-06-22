@@ -9,7 +9,7 @@ from typing import Any
 from aion_brain.config import Settings, get_settings
 
 _RAW_SECRET_ASSIGNMENT = re.compile(
-    r"(?i)(api[_-]?key|password|secret|token)\s*[:=]\s*[\"']?[A-Za-z0-9._~+/=-]{12,}"
+    r"(?i)(api[_-]?key|password|secret|token)\s*[:=]\s*[\"']?([A-Za-z0-9._~+/=-]{12,})"
 )
 
 
@@ -157,7 +157,7 @@ def _check(
     return {
         "name": name,
         "category": category,
-        "status": "passed" if passed else "failed",
+        "status": "passed" if passed else ("warning" if severity == "warning" else "failed"),
         "severity": severity,
         "message": f"{name} {'passed' if passed else 'failed'}.",
         "details": details or {},
@@ -174,6 +174,24 @@ def _file_has_no_raw_secret(path: Path) -> bool:
     for line in text.splitlines():
         if "AION_SECRET_SCAN_IGNORE" in line:
             continue
-        if _RAW_SECRET_ASSIGNMENT.search(line):
+        match = _RAW_SECRET_ASSIGNMENT.search(line)
+        if match and not _placeholder_secret_value(match.group(2)):
             return False
     return True
+
+
+def _placeholder_secret_value(value: str) -> bool:
+    lowered = value.strip().strip("\"'").lower()
+    if lowered.startswith("${"):
+        return True
+    return any(
+        marker in lowered
+        for marker in (
+            "placeholder",
+            "changeme",
+            "replace_me",
+            "example",
+            "dev_password",
+            "development_password",
+        )
+    )

@@ -113,7 +113,7 @@ def _check(
     return {
         "name": name,
         "category": category,
-        "status": "passed" if passed else "failed",
+        "status": "passed" if passed else ("warning" if severity == "warning" else "failed"),
         "severity": severity,
         "message": f"{name} {'passed' if passed else 'failed'}.",
         "details": details or {},

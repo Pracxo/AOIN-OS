@@ -522,6 +522,13 @@ _PLACEHOLDER_ADAPTERS = {
 }
 
 
+def _resolve_repo_root(settings: Settings) -> Path:
+    configured = str(settings.repo_root or "").strip()
+    if configured:
+        return Path(configured).expanduser().resolve()
+    return Path(__file__).parents[5].resolve()
+
+
 class KernelContainer:
     """Central composition root that owns the assembled Brain service graph."""
 
@@ -536,6 +543,7 @@ class KernelContainer:
         self.settings = settings or get_settings()
         configure_logging(self.settings)
         self.started_at = datetime.now(UTC)
+        self.root_dir = _resolve_repo_root(self.settings)
         self.adapter_config = self._adapter_config()
         self.dev_bootstrap = build_dev_bootstrap(self.settings)
         self._reject_placeholder_selection()
@@ -567,7 +575,7 @@ class KernelContainer:
             audit_sink=self.audit_integrity_ledger,
         )
         self.policy_catalog_repository = PolicyCatalogRepository(self.settings.database_url)
-        policy_file = Path(__file__).parents[5] / "infra/opa/policies/brain.rego"
+        policy_file = self.root_dir / "infra/opa/policies/brain.rego"
         self.policy_catalog_service = PolicyCatalogService(
             repository=self.policy_catalog_repository,
             policy_adapter=self.policy_adapter,
@@ -2286,12 +2294,13 @@ class KernelContainer:
             regression_comparator=self.performance_regression_comparator,
             settings=self.settings,
         )
-        root_dir = Path(__file__).parents[5]
+        root_dir = self.root_dir
         self.versioning_repository = VersioningRepository(self.settings.database_url)
         self.feature_registry_service = FeatureRegistryService(
             self.versioning_repository,
             self.policy_adapter,
             telemetry_service=self.telemetry_service,
+            settings=self.settings,
         )
         self.runtime_config_repository = RuntimeConfigRepository(self.settings.database_url)
         self.config_profile_service = ConfigProfileService(
@@ -2304,6 +2313,7 @@ class KernelContainer:
             self.policy_adapter,
             feature_registry=self.feature_registry_service,
             telemetry_service=self.telemetry_service,
+            settings=self.settings,
         )
         self.config_snapshot_service = ConfigSnapshotService(
             self.runtime_config_repository,
@@ -2445,6 +2455,7 @@ class KernelContainer:
             self.policy_adapter,
             migrations_dir=root_dir / "infra/postgres/migrations",
             telemetry_service=self.telemetry_service,
+            settings=self.settings,
         )
         self.release_artifact_service = ReleaseArtifactService(
             self.versioning_repository,
@@ -2452,11 +2463,13 @@ class KernelContainer:
             root_dir=root_dir,
             contract_export_service=self.contract_export_service,
             telemetry_service=self.telemetry_service,
+            settings=self.settings,
         )
         self.sdk_compatibility_service = SDKCompatibilityService(
             self.policy_adapter,
             telemetry_service=self.telemetry_service,
             settings=self.settings,
+            root_dir=root_dir,
         )
         self.freeze_gate_service = FreezeGateService(
             self.versioning_repository,

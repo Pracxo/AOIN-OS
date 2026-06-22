@@ -3157,6 +3157,7 @@ decision := {
 	valid_risk
 	input.risk_level == "low"
 	low_allowed_actions[input.action_type]
+	input.action_type != "scenario.read"
 	not identity_or_scope_action
 	not evidence_action
 	not visual_or_observability_action
@@ -3380,6 +3381,10 @@ decision := {
 	valid_action
 	valid_risk
 	input.risk_level == "medium"
+	input.action_type != "scenario.run"
+	input.action_type != "demo_fixture.load"
+	input.action_type != "release_baseline.run"
+	not scenario_admin_action
 	not medium_approval_actions[input.action_type]
 	input.action_type != "module.runtime.register"
 	not model_action
@@ -3397,6 +3402,11 @@ decision := {
 	not golden_path_action
 	not bootstrap_action
 	not release_candidate_action
+	not security_read_action
+	not security_run_action
+	not security_admin_action
+	not runtime_config_action
+	not resilience_action
 }
 
 decision := {
