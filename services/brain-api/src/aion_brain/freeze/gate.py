@@ -38,6 +38,7 @@ CRITICAL_FAILURE_CHECKS = {
     "extension_registry_safe",
     "module_binding_registry_safe",
     "conformance_readiness_gate_safe",
+    "golden_path_passed",
     "resilience_status_healthy_or_only_optional_degraded",
     "audit_integrity_status_available",
     "audit_verification_passed_or_not_required",
@@ -120,6 +121,7 @@ class FreezeGateService:
         self._extension_registry_repository = extension_registry_repository
         self._module_binding_repository: object | None = None
         self._conformance_repository: object | None = None
+        self._golden_path_repository: object | None = None
         self._audit_sink = audit_sink
         self._telemetry_service = telemetry_service
         self._root_dir = root_dir or Path(__file__).parents[5]
@@ -144,6 +146,11 @@ class FreezeGateService:
         """Attach conformance readiness gate after kernel assembly."""
 
         self._conformance_repository = repository
+
+    def set_golden_path_repository(self, repository: object | None) -> None:
+        """Attach golden path readiness gate after kernel assembly."""
+
+        self._golden_path_repository = repository
 
     def run(self, request: FreezeGateRunRequest, *, app: object | None = None) -> FreezeGateRun:
         """Run the local freeze gate and persist the result."""
@@ -244,6 +251,15 @@ class FreezeGateService:
                 severity="critical",
             )
         )
+        if bool(request.metadata.get("require_golden_path_green")):
+            checks.append(
+                self._run_check(
+                    "golden_path_passed",
+                    "golden_path",
+                    self._check_golden_path_passed,
+                    severity="critical",
+                )
+            )
         if request.include_migration_baseline:
             checks.append(
                 self._run_check(
@@ -759,6 +775,32 @@ class FreezeGateService:
                 "readiness_assessment_count": len(readiness),
                 "blocked_readiness_count": len(blocked_readiness),
                 "unsafe_flags": unsafe,
+            },
+        }
+
+    def _check_golden_path_passed(self) -> dict[str, Any]:
+        latest_report = getattr(self._golden_path_repository, "latest_report", None)
+        report = latest_report() if callable(latest_report) else None
+        if report is None:
+            return {
+                "status": "failed",
+                "message": "No golden path report is available.",
+                "details": {"available": self._golden_path_repository is not None},
+            }
+        ready = bool(getattr(report, "release_candidate_ready", False))
+        return {
+            "status": "passed" if ready else "failed",
+            "message": (
+                "Latest golden path report is release ready."
+                if ready
+                else "Latest golden path report is not release ready."
+            ),
+            "details": {
+                "golden_path_report_id": getattr(report, "golden_path_report_id", None),
+                "golden_path_run_id": getattr(report, "golden_path_run_id", None),
+                "status": getattr(report, "status", None),
+                "readiness_score": getattr(report, "readiness_score", 0.0),
+                "release_candidate_ready": ready,
             },
         }
 

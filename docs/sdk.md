@@ -681,3 +681,27 @@ API internals.
 Useful methods include `create_profile`, `list_profiles`,
 `seed_default_profiles`, `create_test_vector`, `generate_test_vectors`, `run`,
 `list_findings`, `assess_readiness`, `list_readiness_assessments`, and `query`.
+
+## GoldenPathResource
+
+`client.golden_path` exposes the local Golden Path Scenario Harness.
+
+Useful methods include:
+
+- `create_scenario(payload)`
+- `get_scenario(scenario_key, scope)`
+- `list_scenarios(scope, status=None, scenario_type=None, limit=100)`
+- `seed_default_scenarios(scope, dry_run=True)`
+- `seed_default_fixtures(scope, dry_run=True)`
+- `list_fixtures(scope, status=None, limit=100)`
+- `run(payload)`
+- `get_run(golden_path_run_id, scope=None)`
+- `list_runs(scope, status=None, trace_id=None, limit=50)`
+- `release_smoke(scope)`
+- `get_report(golden_path_report_id, scope)`
+- `list_reports(scope, status=None, limit=50)`
+- `query(payload)`
+
+The SDK calls public Brain APIs only. It does not import `aion_brain`, execute
+tools, call external services, call model providers, mutate non-scenario
+records, run release packaging, or add frontend dependencies.

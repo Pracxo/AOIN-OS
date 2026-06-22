@@ -274,3 +274,17 @@ Instructions for future Codex runs in this repository:
   `execution_allowed=false` in v0.1.
 - Route previews must not register routes. They must keep
   `registration_allowed=false` in v0.1.
+- Golden Path Scenario Harness runs must remain local, deterministic, and
+  dry-run by default.
+- Golden path fixtures must be synthetic and scenario-owned. Do not use real
+  user data or production records as fixture payloads.
+- Golden path runs may create scenario records, fixture records, run results,
+  assertion results, reports, audit/provenance links, telemetry, notifications
+  when requested, and operator recommendations for failures.
+- Golden path runs must not bypass policy, autonomy, or approval gates.
+- Golden path runs must not call external services, call model providers,
+  execute tools, execute action proposals, execute handoffs in controlled mode
+  by default, run real backups, run release packaging, hard-delete fixtures, or
+  mutate non-scenario source records.
+- Golden path scenarios and assertions must stay generic and must not encode
+  domain-specific business workflows.

@@ -29,6 +29,7 @@ from aion_brain.api.explanations import router as explanations_router
 from aion_brain.api.extensions import router as extensions_router
 from aion_brain.api.freeze import router as freeze_router
 from aion_brain.api.goals import router as goals_router
+from aion_brain.api.golden_path import router as golden_path_router
 from aion_brain.api.graph_memory import router as graph_memory_router
 from aion_brain.api.grounding import router as grounding_router
 from aion_brain.api.guardrails import router as guardrails_router
@@ -140,6 +141,7 @@ ROUTERS = (
     extensions_router,
     module_bindings_router,
     conformance_router,
+    golden_path_router,
     resource_registry_router,
     lifecycle_router,
     prompts_router,

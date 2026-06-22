@@ -3321,3 +3321,47 @@ Developer commands:
 The Python SDK exposes the same surface through `client.conformance`.
 
 See `docs/adr/0068-capability-conformance-readiness-gate.md`.
+
+## Golden Path Scenario Harness
+
+AION v0.1 includes a local deterministic Golden Path Scenario Harness. It
+verifies core Brain integration through synthetic fixture packs, scenario-owned
+records, dry-run steps, assertion results, reports, and a release smoke matrix.
+
+The harness is not a frontend demo, production monitor, load test, model
+benchmark, or domain test suite. It does not call external services, call model
+providers, execute tools, execute action proposals, run handoffs in controlled
+mode by default, hard-delete fixtures, or mutate non-scenario source records.
+
+Golden path endpoints:
+
+- `POST /brain/golden-path/scenarios/seed-defaults`
+- `POST /brain/golden-path/scenarios`
+- `GET /brain/golden-path/scenarios`
+- `GET /brain/golden-path/scenarios/{scenario_key}`
+- `POST /brain/golden-path/fixtures/seed-defaults`
+- `GET /brain/golden-path/fixtures`
+- `POST /brain/golden-path/run`
+- `GET /brain/golden-path/runs`
+- `GET /brain/golden-path/runs/{golden_path_run_id}`
+- `POST /brain/golden-path/release-smoke`
+- `GET /brain/golden-path/reports`
+- `GET /brain/golden-path/reports/{golden_path_report_id}`
+- `POST /brain/golden-path/query`
+
+Developer commands:
+
+```bash
+./scripts/golden-path.sh
+./scripts/release-smoke.sh
+./scripts/aionctl.sh --scope workspace:main golden-path scenarios
+./scripts/aionctl.sh --scope workspace:main golden-path fixtures
+./scripts/aionctl.sh --scope workspace:main golden-path run
+./scripts/aionctl.sh --scope workspace:main golden-path reports
+./scripts/aionctl.sh --scope workspace:main golden-path release-smoke
+```
+
+The Python SDK exposes the same surface through `client.golden_path`.
+
+See `docs/operations/golden-path.md` and
+`docs/adr/0069-golden-path-scenario-harness.md`.

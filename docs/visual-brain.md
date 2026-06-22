@@ -812,3 +812,34 @@ Generic visual node types include:
 These nodes represent backend projection records only. They do not imply
 package installation, route registration, capability execution, sandbox
 execution, external calls, or activation.
+
+## Golden Path Projection
+
+Golden Path telemetry projects local end-to-end verification into the Visual
+Brain Projection. It is backend projection data only and does not implement a
+frontend renderer.
+
+Generic event types include:
+
+- `golden_path_scenario_created`
+- `golden_path_fixture_pack_created`
+- `golden_path_run_started`
+- `golden_path_step_completed`
+- `golden_path_run_completed`
+- `golden_path_run_failed`
+- `golden_path_run_blocked`
+- `golden_path_report_created`
+- `golden_path_release_smoke_completed`
+
+Generic visual node types include:
+
+- `golden_path_scenario`
+- `golden_path_step`
+- `golden_path_fixture`
+- `golden_path_run`
+- `golden_path_report`
+- `release_smoke`
+
+These nodes represent dry-run verification records and report readiness. They
+must not imply production workload execution, external service calls, frontend
+rendering behavior, source-record mutation, or automatic remediation.

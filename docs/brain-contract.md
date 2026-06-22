@@ -1434,3 +1434,32 @@ Conformance contracts must not expose raw headers, hidden reasoning, raw
 prompts, provider payloads, secrets, SQLAlchemy rows, source code payloads,
 runtime client objects, package bytes, third-party module internals,
 capability execution results, or domain-specific module logic.
+
+## Golden Path Contracts
+
+AION Brain owns these golden path contracts:
+
+- `GoldenPathScenario`
+- `GoldenPathFixturePack`
+- `GoldenPathRunRequest`
+- `GoldenPathStepResult`
+- `GoldenPathAssertionResult`
+- `GoldenPathRun`
+- `GoldenPathReport`
+- `GoldenPathQuery`
+
+`GoldenPathScenario` defines one deterministic local scenario. `GoldenPathFixturePack`
+contains synthetic scenario-owned fixtures only. `GoldenPathRunRequest` defaults
+to dry-run mode. `GoldenPathStepResult` records local service availability and
+dry-run output summaries. `GoldenPathAssertionResult` records deterministic
+assertion outcomes and fails closed for unknown assertion types.
+
+`GoldenPathRun` is the canonical run record. It must report no external calls,
+no tool execution, and no non-scenario source mutation. `GoldenPathReport`
+summarizes release readiness and blocks release readiness when critical
+assertions fail or a run is blocked.
+
+Golden path contracts must not expose raw headers, hidden reasoning, raw
+prompts, provider payloads, secrets, SQLAlchemy rows, source-system internals,
+external service clients, frontend framework objects, or domain-specific
+workflow logic.

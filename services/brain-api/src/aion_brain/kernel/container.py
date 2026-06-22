@@ -154,6 +154,16 @@ from aion_brain.extensions import (
 from aion_brain.freeze.gate import FreezeGateService
 from aion_brain.goals.repository import GoalRepository
 from aion_brain.goals.service import GoalService
+from aion_brain.golden_path import (
+    AssertionEngine,
+    FixturePackService,
+    GoldenPathQueryService,
+    GoldenPathReportService,
+    GoldenPathRepository,
+    GoldenPathRunner,
+    ReleaseSmokeMatrix,
+    ScenarioCatalogService,
+)
 from aion_brain.grounding.citation_mapper import CitationMapper
 from aion_brain.grounding.citations import CitationService
 from aion_brain.grounding.coverage import SourceCoverageService
@@ -2761,6 +2771,29 @@ class KernelContainer:
             self.conformance_repository,
             self.policy_adapter,
         )
+        self.golden_path_repository = GoldenPathRepository(self.settings.database_url)
+        self.golden_path_assertion_engine = AssertionEngine()
+        self.golden_path_scenario_catalog = ScenarioCatalogService(
+            self.golden_path_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.golden_path_fixture_service = FixturePackService(
+            self.golden_path_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.golden_path_report_service = GoldenPathReportService(
+            self.golden_path_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.golden_path_query_service = GoldenPathQueryService(
+            self.golden_path_repository,
+            self.policy_adapter,
+        )
         self.extension_intake_service = ExtensionIntakeService(
             self.extension_registry_repository,
             self.policy_adapter,
@@ -2972,6 +3005,7 @@ class KernelContainer:
             extension_registry_service=self.extension_registry_repository,
             module_binding_service=self.module_binding_repository,
             conformance_service=self.conformance_repository,
+            golden_path_service=self.golden_path_repository,
             lifecycle_service=self.lifecycle_report_service,
         )
         self.operator_queue_summary_builder = QueueSummaryBuilder(
@@ -3035,6 +3069,7 @@ class KernelContainer:
             extension_registry_repository=self.extension_registry_repository,
             module_binding_repository=self.module_binding_repository,
             conformance_repository=self.conformance_repository,
+            golden_path_repository=self.golden_path_repository,
             archive_planner=self.archive_planner,
             redaction_planner=self.redaction_planner,
             purge_preview_service=self.purge_preview_service,
@@ -3089,6 +3124,7 @@ class KernelContainer:
             extension_registry_repository=self.extension_registry_repository,
             module_binding_repository=self.module_binding_repository,
             conformance_repository=self.conformance_repository,
+            golden_path_repository=self.golden_path_repository,
             archive_planner=self.archive_planner,
             redaction_planner=self.redaction_planner,
             purge_preview_service=self.purge_preview_service,
@@ -3118,6 +3154,79 @@ class KernelContainer:
             self.policy_adapter,
             self.telemetry_service,
         )
+        self.golden_path_runner = GoldenPathRunner(
+            self.golden_path_repository,
+            self.golden_path_scenario_catalog,
+            self.golden_path_fixture_service,
+            self.golden_path_assertion_engine,
+            self.golden_path_report_service,
+            self.policy_adapter,
+            autonomy_governor=self.autonomy_governor,
+            notification_router=self.notification_router,
+            operator_repository=self.operator_repository,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            settings=self.settings,
+            service_dependencies={
+                "diagnostics": self.diagnostics,
+                "health": self.diagnostics,
+                "runtime_config": self.runtime_config_status_service,
+                "self_description": self.self_description_service,
+                "dialogue": self.dialogue_turn_service,
+                "responses": self.response_composer,
+                "instructions": self.instruction_resolver,
+                "policy": self.policy_adapter,
+                "autonomy": self.autonomy_governor,
+                "context": self.context_compiler,
+                "prompts": self.prompt_compiler,
+                "model_outputs": self.output_governance_service,
+                "grounding": self.grounding_verifier,
+                "evidence": self.evidence_service,
+                "action_proposals": self.action_proposal_service,
+                "execution_handoff": self.execution_handoff_service,
+                "run_supervision": self.run_supervision_service,
+                "notifications": self.notification_router,
+                "scheduler": self.scheduler_tick_orchestrator,
+                "incidents": self.incident_correlation_engine,
+                "resource_registry": self.resource_registry_service,
+                "lifecycle": self.lifecycle_evaluator,
+                "contract_registry": self.contract_registry_report_service,
+                "extensions": self.extension_intake_service,
+                "module_bindings": self.module_binding_query_service,
+                "conformance": self.conformance_repository,
+                "operator": self.operator_control_tower_service,
+            },
+        )
+        self.golden_path_release_smoke = ReleaseSmokeMatrix(
+            self.golden_path_repository,
+            self.policy_adapter,
+            diagnostics=self.diagnostics,
+            freeze_gate_service=self.freeze_gate_service,
+            release_packager=self.release_packager,
+            registry_service=self.resource_registry_service,
+            contract_registry=self.contract_registry_report_service,
+            operator_service=self.operator_control_tower_service,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        set_freeze_golden_path_repository = getattr(
+            self.freeze_gate_service,
+            "set_golden_path_repository",
+            None,
+        )
+        if callable(set_freeze_golden_path_repository):
+            set_freeze_golden_path_repository(self.golden_path_repository)
+        set_release_golden_path_repository = getattr(
+            self.release_packager,
+            "set_golden_path_repository",
+            None,
+        )
+        if callable(set_release_golden_path_repository):
+            set_release_golden_path_repository(self.golden_path_repository)
+        set_golden_resource_provider = getattr(self.resource_scanner, "set_provider", None)
+        if callable(set_golden_resource_provider):
+            set_golden_resource_provider("golden_path", self.golden_path_repository)
         set_operator_readiness = getattr(
             self.release_baseline_service,
             "set_operator_readiness_service",
@@ -4188,6 +4297,44 @@ class KernelContainer:
                 self.conformance_query_service,
                 "service",
                 "local",
+            ),
+            ("golden_path_repository", self.golden_path_repository, "repository", "postgres"),
+            (
+                "golden_path_assertion_engine",
+                self.golden_path_assertion_engine,
+                "service",
+                "deterministic",
+            ),
+            (
+                "golden_path_scenario_catalog",
+                self.golden_path_scenario_catalog,
+                "service",
+                "local",
+            ),
+            (
+                "golden_path_fixture_service",
+                self.golden_path_fixture_service,
+                "service",
+                "local",
+            ),
+            (
+                "golden_path_report_service",
+                self.golden_path_report_service,
+                "service",
+                "local",
+            ),
+            (
+                "golden_path_query_service",
+                self.golden_path_query_service,
+                "service",
+                "local",
+            ),
+            ("golden_path_runner", self.golden_path_runner, "service", "deterministic"),
+            (
+                "golden_path_release_smoke",
+                self.golden_path_release_smoke,
+                "service",
+                "deterministic",
             ),
             ("lifecycle_repository", self.lifecycle_repository, "repository", "postgres"),
             ("lifecycle_policy_service", self.lifecycle_policy_service, "service", "local"),

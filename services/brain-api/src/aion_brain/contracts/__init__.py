@@ -175,6 +175,16 @@ from aion_brain.contracts.explanations import (
 )
 from aion_brain.contracts.freeze import FreezeGateCheck, FreezeGateRun, FreezeGateRunRequest
 from aion_brain.contracts.goals import GoalCreateRequest, GoalRecord, GoalTransitionRequest
+from aion_brain.contracts.golden_path import (
+    GoldenPathAssertionResult,
+    GoldenPathFixturePack,
+    GoldenPathQuery,
+    GoldenPathReport,
+    GoldenPathRun,
+    GoldenPathRunRequest,
+    GoldenPathScenario,
+    GoldenPathStepResult,
+)
 from aion_brain.contracts.graph import (
     GraphEdge,
     GraphitiConfigStatus,
@@ -619,6 +629,14 @@ __all__ = [
     "FreezeGateCheck",
     "FreezeGateRun",
     "FreezeGateRunRequest",
+    "GoldenPathAssertionResult",
+    "GoldenPathFixturePack",
+    "GoldenPathQuery",
+    "GoldenPathReport",
+    "GoldenPathRun",
+    "GoldenPathRunRequest",
+    "GoldenPathScenario",
+    "GoldenPathStepResult",
     "GraphEdge",
     "GraphMemoryAdapterStatus",
     "GraphNode",

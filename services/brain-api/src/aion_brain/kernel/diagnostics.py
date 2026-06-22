@@ -97,6 +97,11 @@ class KernelDiagnostics:
         ("conformance_finding_service_present", "conformance_finding_service", "medium"),
         ("readiness_assessment_service_present", "readiness_assessment_service", "high"),
         ("conformance_query_service_present", "conformance_query_service", "medium"),
+        ("golden_path_repository_present", "golden_path_repository", "high"),
+        ("golden_path_scenario_catalog_present", "golden_path_scenario_catalog", "medium"),
+        ("golden_path_fixture_service_present", "golden_path_fixture_service", "medium"),
+        ("golden_path_runner_present", "golden_path_runner", "high"),
+        ("golden_path_release_smoke_present", "golden_path_release_smoke", "medium"),
         ("lifecycle_repository_present", "lifecycle_repository", "high"),
         ("lifecycle_policy_service_present", "lifecycle_policy_service", "high"),
         ("retention_classifier_present", "retention_classifier", "high"),
@@ -358,6 +363,7 @@ class KernelDiagnostics:
         checks.extend(self._sandbox_checks(settings))
         checks.extend(self._policy_catalog_checks(settings))
         checks.extend(self._scenario_checks(settings))
+        checks.extend(self._golden_path_checks(settings))
         checks.extend(self._versioning_checks(settings))
         checks.extend(self._backup_checks(settings))
         checks.extend(self._performance_checks(settings))
@@ -2183,6 +2189,35 @@ class KernelDiagnostics:
                 else "warning",
                 "medium",
                 "Release baseline service is enabled.",
+            ),
+        ]
+
+    def _golden_path_checks(self, settings: object) -> list[DiagnosticCheck]:
+        return [
+            self._result(
+                "golden_path_enabled",
+                "golden_path",
+                "passed" if bool(getattr(settings, "golden_path_enabled", True)) else "warning",
+                "medium",
+                "Golden path harness is enabled.",
+            ),
+            self._result(
+                "golden_path_dry_run_default",
+                "golden_path",
+                "passed"
+                if not bool(getattr(settings, "golden_path_controlled_mode_enabled", False))
+                else "warning",
+                "high",
+                "Golden path controlled mode is disabled by default.",
+            ),
+            self._result(
+                "golden_path_release_smoke_enabled",
+                "golden_path",
+                "passed"
+                if bool(getattr(settings, "golden_path_release_smoke_enabled", True))
+                else "warning",
+                "medium",
+                "Golden path release smoke matrix is enabled.",
             ),
         ]
 

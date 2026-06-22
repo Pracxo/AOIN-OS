@@ -62,6 +62,7 @@ class ReleasePackager:
         extension_registry_repository: object | None = None,
         module_binding_repository: object | None = None,
         conformance_repository: object | None = None,
+        golden_path_repository: object | None = None,
         telemetry_service: object | None = None,
         root_dir: Path | None = None,
         settings: Settings | None = None,
@@ -93,6 +94,7 @@ class ReleasePackager:
         self._extension_registry_repository = extension_registry_repository
         self._module_binding_repository = module_binding_repository
         self._conformance_repository = conformance_repository
+        self._golden_path_repository = golden_path_repository
         self._telemetry_service = telemetry_service
         self._audit_sink = audit_sink
 
@@ -128,6 +130,11 @@ class ReleasePackager:
         """Attach capability conformance summaries after kernel assembly."""
 
         self._conformance_repository = repository
+
+    def set_golden_path_repository(self, repository: object | None = None) -> None:
+        """Attach golden path summaries after kernel assembly."""
+
+        self._golden_path_repository = repository
 
     def package(
         self,
@@ -297,6 +304,7 @@ class ReleasePackager:
             reports["extension_registry"] = self._extension_registry_summary(request.owner_scope)
             reports["module_binding_registry"] = self._module_binding_summary(request.owner_scope)
             reports["capability_conformance"] = self._conformance_summary(request.owner_scope)
+            reports["golden_path"] = self._golden_path_summary(request.owner_scope)
         if request.include_policy_bundle:
             reports["policy_bundle"] = self._policy_bundle_report()
         if request.include_migration_baseline:
@@ -472,6 +480,29 @@ class ReleasePackager:
             "activation_allowed": False,
             "code_loading_allowed": False,
             "external_calls_allowed": False,
+            "source_code_is_source_of_truth": True,
+        }
+
+    def _golden_path_summary(self, scope: builtins.list[str]) -> dict[str, Any]:
+        status = _try_call(self._golden_path_repository, "status", scope)
+        latest_run = _try_call(self._golden_path_repository, "latest_run")
+        latest_report = _try_call(self._golden_path_repository, "latest_report")
+        return {
+            "available": self._golden_path_repository is not None,
+            "status": (
+                _jsonable(status).get("status", "warning")
+                if isinstance(_jsonable(status), dict)
+                else "warning"
+            ),
+            "latest_run_id": getattr(latest_run, "golden_path_run_id", None),
+            "latest_run_status": getattr(latest_run, "status", None),
+            "latest_report_id": getattr(latest_report, "golden_path_report_id", None),
+            "readiness_score": getattr(latest_report, "readiness_score", 0.0),
+            "release_candidate_ready": bool(
+                getattr(latest_report, "release_candidate_ready", False)
+            ),
+            "external_calls_allowed": False,
+            "execution_allowed": False,
             "source_code_is_source_of_truth": True,
         }
 

@@ -411,6 +411,61 @@ class Settings(BaseSettings):
             "conformance_create_notifications_default",
         ),
     )
+    golden_path_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_GOLDEN_PATH_ENABLED", "golden_path_enabled"),
+    )
+    golden_path_fixture_seeding_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_GOLDEN_PATH_FIXTURE_SEEDING_ENABLED",
+            "golden_path_fixture_seeding_enabled",
+        ),
+    )
+    golden_path_release_smoke_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_GOLDEN_PATH_RELEASE_SMOKE_ENABLED",
+            "golden_path_release_smoke_enabled",
+        ),
+    )
+    golden_path_controlled_mode_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_GOLDEN_PATH_CONTROLLED_MODE_ENABLED",
+            "golden_path_controlled_mode_enabled",
+        ),
+    )
+    golden_path_create_notifications_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_GOLDEN_PATH_CREATE_NOTIFICATIONS_DEFAULT",
+            "golden_path_create_notifications_default",
+        ),
+    )
+    golden_path_create_operator_items_default: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_GOLDEN_PATH_CREATE_OPERATOR_ITEMS_DEFAULT",
+            "golden_path_create_operator_items_default",
+        ),
+    )
+    golden_path_workspace_id_default: str = Field(
+        default="golden-path",
+        validation_alias=AliasChoices(
+            "AION_GOLDEN_PATH_WORKSPACE_ID_DEFAULT",
+            "golden_path_workspace_id_default",
+        ),
+    )
+    golden_path_release_ready_threshold: float = Field(
+        default=0.9,
+        ge=0.0,
+        le=1.0,
+        validation_alias=AliasChoices(
+            "AION_GOLDEN_PATH_RELEASE_READY_THRESHOLD",
+            "golden_path_release_ready_threshold",
+        ),
+    )
     lifecycle_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices("AION_LIFECYCLE_ENABLED", "lifecycle_enabled"),

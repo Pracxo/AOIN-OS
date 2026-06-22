@@ -438,6 +438,17 @@ allowed_actions := {
 	"conformance.readiness.assess",
 	"conformance.readiness.read",
 	"conformance.query",
+	"golden_path.scenario.create",
+	"golden_path.scenario.read",
+	"golden_path.fixture.create",
+	"golden_path.fixture.read",
+	"golden_path.run",
+	"golden_path.run.read",
+	"golden_path.assertion.evaluate",
+	"golden_path.report.create",
+	"golden_path.report.read",
+	"golden_path.release_smoke.run",
+	"golden_path.query",
 	"response.draft",
 	"response.evaluate",
 	"response.verify",
@@ -912,6 +923,12 @@ low_allowed_actions := {
 	"conformance.finding.read",
 	"conformance.readiness.read",
 	"conformance.query",
+	"golden_path.scenario.read",
+	"golden_path.fixture.read",
+	"golden_path.run.read",
+	"golden_path.report.read",
+	"golden_path.release_smoke.run",
+	"golden_path.query",
 	"lifecycle.policy.read",
 	"lifecycle.classify",
 	"lifecycle.classification.read",
@@ -1491,6 +1508,34 @@ decision := {
 	conformance_metadata_action
 	conformance_permission
 	not conformance_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "golden_path_read_allowed",
+	"constraints": ["local_only", "dry_run_default", "no_external_calls", "no_tool_execution"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	golden_path_read_action
+	golden_path_permission
+	not golden_path_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "golden_path_metadata_action_allowed",
+	"constraints": ["scenario_owned_records_only", "dry_run_default", "no_external_calls", "no_tool_execution", "no_shell_execution", "no_source_mutation"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	golden_path_metadata_action
+	golden_path_permission
+	not golden_path_unsafe_request
 }
 
 decision := {
@@ -3028,6 +3073,7 @@ decision := {
 	not extension_registry_action
 	not module_binding_action
 	not conformance_action
+	not golden_path_action
 	not scheduler_action
 	not incident_action
 	not lifecycle_action
@@ -3245,6 +3291,7 @@ decision := {
 	not belief_action
 	not scheduler_action
 	not incident_action
+	not golden_path_action
 }
 
 decision := {
@@ -4136,6 +4183,90 @@ conformance_unsafe_request if {
 	input.context.code_generated == true
 }
 
+golden_path_action if {
+	startswith(input.action_type, "golden_path.")
+}
+
+golden_path_read_action if {
+	input.action_type == "golden_path.scenario.read"
+}
+
+golden_path_read_action if {
+	input.action_type == "golden_path.fixture.read"
+}
+
+golden_path_read_action if {
+	input.action_type == "golden_path.run.read"
+}
+
+golden_path_read_action if {
+	input.action_type == "golden_path.report.read"
+}
+
+golden_path_read_action if {
+	input.action_type == "golden_path.query"
+}
+
+golden_path_metadata_action if {
+	input.action_type == "golden_path.scenario.create"
+}
+
+golden_path_metadata_action if {
+	input.action_type == "golden_path.fixture.create"
+}
+
+golden_path_metadata_action if {
+	input.action_type == "golden_path.run"
+}
+
+golden_path_metadata_action if {
+	input.action_type == "golden_path.assertion.evaluate"
+}
+
+golden_path_metadata_action if {
+	input.action_type == "golden_path.report.create"
+}
+
+golden_path_metadata_action if {
+	input.action_type == "golden_path.release_smoke.run"
+}
+
+golden_path_unsafe_request if {
+	input.context.external_calls == true
+}
+
+golden_path_unsafe_request if {
+	input.context.external_call_requested == true
+}
+
+golden_path_unsafe_request if {
+	input.context.tool_execution == true
+}
+
+golden_path_unsafe_request if {
+	input.context.tool_execution_requested == true
+}
+
+golden_path_unsafe_request if {
+	input.context.shell_execution == true
+}
+
+golden_path_unsafe_request if {
+	input.context.shell_command_requested == true
+}
+
+golden_path_unsafe_request if {
+	input.context.code_generated == true
+}
+
+golden_path_unsafe_request if {
+	input.context.source_records_mutated == true
+}
+
+golden_path_unsafe_request if {
+	input.context.source_mutation_requested == true
+}
+
 registry_approval_action if {
 	input.action_type == "entity.merge.approve"
 }
@@ -4637,6 +4768,37 @@ conformance_permission if {
 }
 
 conformance_permission if {
+	input.context.actor_context.permissions[_] == "operator"
+}
+
+golden_path_permission if {
+	dev_owner
+}
+
+golden_path_permission if {
+	input.context.actor_context.permissions[_] == input.action_type
+}
+
+golden_path_permission if {
+	input.context.permissions[_] == input.action_type
+}
+
+golden_path_permission if {
+	input.requested_permissions[_] == input.action_type
+	count(input.security_scope) > 0
+}
+
+golden_path_permission if {
+	input.context.actor_context.permissions[_] == "golden_path.read"
+	golden_path_read_action
+}
+
+golden_path_permission if {
+	input.context.actor_context.permissions[_] == "golden_path.write"
+	golden_path_metadata_action
+}
+
+golden_path_permission if {
 	input.context.actor_context.permissions[_] == "operator"
 }
 

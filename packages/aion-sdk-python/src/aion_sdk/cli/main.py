@@ -24,6 +24,7 @@ from aion_sdk.cli.commands.dialogue import install_dialogue_commands
 from aion_sdk.cli.commands.entities import install_entity_commands
 from aion_sdk.cli.commands.explanations import install_explanation_commands
 from aion_sdk.cli.commands.extensions import install_extension_commands
+from aion_sdk.cli.commands.golden_path import install_golden_path_commands
 from aion_sdk.cli.commands.grounding import install_grounding_commands
 from aion_sdk.cli.commands.incidents import install_incident_commands
 from aion_sdk.cli.commands.instructions import install_instruction_commands
@@ -582,6 +583,7 @@ install_lifecycle_commands(app, get_client=_client, get_scope=_scope, render=_re
 install_extension_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_module_binding_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_conformance_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_golden_path_commands(app, get_client=_client, get_scope=_scope, render=_render)
 
 
 if __name__ == "__main__":

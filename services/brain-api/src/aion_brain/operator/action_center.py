@@ -94,6 +94,8 @@ class ActionCenterService:
         generated.extend(self._blocked_module_mount_plan_items(scope))
         generated.extend(self._open_conformance_finding_items(scope))
         generated.extend(self._blocked_readiness_assessment_items(scope))
+        generated.extend(self._failed_golden_path_run_items(scope))
+        generated.extend(self._critical_golden_path_report_items(scope))
         stored: list[OperatorActionItem] = []
         for item in generated[:limit]:
             saved = self._repository.save_action_item(item)
@@ -570,6 +572,86 @@ class ActionCenterService:
             )
             for item in items
         ]
+
+    def _failed_golden_path_run_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("golden_path_repository")
+        list_runs = getattr(source, "list_runs", None)
+        if not callable(list_runs):
+            return []
+        try:
+            items = [
+                *list_runs(status="failed", limit=100),
+                *list_runs(status="blocked", limit=100),
+            ]
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="golden_path_run",
+                source_id=_id_for(item, "golden_path_run_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="release",
+                severity="critical" if getattr(item, "status", None) == "blocked" else "high",
+                title="Golden path run requires review.",
+                description="A local deterministic golden path run failed or was blocked.",
+                recommended_action="review_golden_path_report",
+                runbook_ref="docs/operations/golden-path.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={
+                    "status": getattr(item, "status", None),
+                    "failed_count": getattr(item, "failed_count", 0),
+                    "blocked_count": getattr(item, "blocked_count", 0),
+                    "report_id": getattr(item, "report_id", None),
+                },
+            )
+            for item in items
+        ]
+
+    def _critical_golden_path_report_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("golden_path_repository")
+        list_reports = getattr(source, "list_reports", None)
+        if not callable(list_reports):
+            return []
+        try:
+            reports = list_reports(status="failed", limit=100)
+        except Exception:
+            return []
+        items: list[OperatorActionItem] = []
+        for report in reports:
+            findings = getattr(report, "findings", [])
+            critical = [
+                finding
+                for finding in findings
+                if isinstance(finding, dict)
+                and str(finding.get("severity", "")).lower() == "critical"
+            ]
+            if not critical and bool(getattr(report, "release_candidate_ready", False)):
+                continue
+            items.append(
+                _action_item(
+                    source_type="golden_path_report",
+                    source_id=_id_for(report, "golden_path_report_id"),
+                    trace_id=getattr(report, "trace_id", None),
+                    category="release",
+                    severity="critical" if critical else "high",
+                    title="Golden path report is not release ready.",
+                    description="A golden path report has failed findings or readiness blockers.",
+                    recommended_action="review_golden_path_findings",
+                    runbook_ref="docs/operations/golden-path.md",
+                    scope=_scope_for(report, scope, "owner_scope"),
+                    metadata={
+                        "status": getattr(report, "status", None),
+                        "readiness_score": getattr(report, "readiness_score", 0.0),
+                        "critical_finding_count": len(critical),
+                        "release_candidate_ready": getattr(
+                            report,
+                            "release_candidate_ready",
+                            False,
+                        ),
+                    },
+                )
+            )
+        return items
 
     def _failed_explanation_items(self, scope: list[str]) -> list[OperatorActionItem]:
         source = self._sources.get("explanation_service") or self._sources.get(

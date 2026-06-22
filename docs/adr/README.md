@@ -72,3 +72,4 @@ Every architecture-changing Codex task must add or update an ADR.
 - [0066: Extension Registry and Module Intake](0066-extension-registry-module-intake.md) - Defines metadata-only extension manifests, compatibility gates, reviews, and future install plans.
 - [0067: Capability Binding Registry and Module Slot Manager](0067-capability-binding-module-slot-manager.md) - Defines inactive module slots, capability bindings, validation, mount plans, and route previews.
 - [0068: Capability Conformance Harness and Readiness Gate](0068-capability-conformance-readiness-gate.md) - Defines schema-only conformance runs, mock invocation records, findings, and readiness assessments.
+- [0069: Golden Path Scenario Harness](0069-golden-path-scenario-harness.md) - Defines local deterministic golden path runs, fixture packs, reports, and release smoke checks.

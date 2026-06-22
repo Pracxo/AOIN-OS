@@ -1445,3 +1445,30 @@ Conformance policy authorizes metadata and schema checks only. Requests that
 imply code loading, package installation, activation, dynamic route
 registration, capability execution, MCP calls, sandbox code execution, external
 calls, or source-record mutation fail closed.
+
+## Golden Path Policy
+
+Generic golden path actions:
+
+- `golden_path.scenario.create`
+- `golden_path.scenario.read`
+- `golden_path.fixture.create`
+- `golden_path.fixture.read`
+- `golden_path.run`
+- `golden_path.run.read`
+- `golden_path.assertion.evaluate`
+- `golden_path.report.create`
+- `golden_path.report.read`
+- `golden_path.release_smoke.run`
+- `golden_path.query`
+
+Golden path reads, queries, assertion evaluation, report reads, and release
+smoke are low-risk scoped actions. Scenario and fixture creation and scenario
+runs require scoped actors, operators, admins, or internal Brain services
+allowed by policy.
+
+Golden path policy authorizes local deterministic scenario work only. Requests
+that imply external calls, external model calls, tool execution, shell
+execution, code generation, source-record mutation, approval bypass, autonomy
+bypass, raw prompt disclosure, hidden reasoning disclosure, raw header export,
+secret export, or domain-specific scenario logic fail closed.

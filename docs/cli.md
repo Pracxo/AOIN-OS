@@ -533,3 +533,26 @@ aionctl conformance query
 
 These commands create or read conformance records only. They do not execute
 package code, invoke capabilities, activate modules, or call external systems.
+
+## Golden Path Commands
+
+The CLI exposes the local golden path harness through SDK calls:
+
+```bash
+aionctl golden-path scenarios
+aionctl golden-path scenarios seed
+aionctl golden-path fixtures
+aionctl golden-path fixtures seed
+aionctl golden-path run
+aionctl golden-path runs
+aionctl golden-path reports
+aionctl golden-path release-smoke
+aionctl golden-path query
+```
+
+Golden path commands default to dry-run scenario execution. They create or read
+scenario-owned records, fixture packs, runs, reports, and release smoke
+summaries only. They do not execute tools, execute action proposals, execute
+handoffs in controlled mode by default, call external services, call model
+providers, mutate non-scenario source records, print raw prompts, expose hidden
+reasoning, or add frontend behavior.

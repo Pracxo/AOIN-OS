@@ -1542,3 +1542,29 @@ calls external systems.
 
 Extension readiness assessments are local records that can block future
 activation. In v0.1 `activation_ready` is always false.
+
+## Golden Path Scenario Harness
+
+The Golden Path Scenario Harness is the Brain-owned local end-to-end
+verification layer for v0.1. It joins synthetic fixture packs, deterministic
+scenario runs, step results, assertion results, reports, release smoke checks,
+operator recommendations, audit/provenance links, and visual telemetry.
+
+The harness verifies integration; it does not replace pytest, the release gate,
+or the freeze gate. A scenario run may create scenario-owned records and call
+existing Brain services through public service interfaces, but it must not
+bypass policy, autonomy, or approval gates.
+
+The golden path flow is:
+
+`fixture pack -> scenario -> dry-run step -> assertion -> run report -> release smoke -> operator/freeze/release summary`
+
+The release smoke matrix reads local service availability and the latest golden
+path report. It does not spawn subprocesses, execute shell commands, call
+external services, run backups, or package releases.
+
+Golden path records feed Resource Registry indexing, Operator Control Tower
+cards, queues and action items, Freeze Gate optional checks, Release Package
+summaries, SDK, CLI, audit, provenance, and visual telemetry. All surfaces use
+AION-owned contracts and never expose SQLAlchemy rows, raw secrets, raw prompts,
+hidden reasoning, provider payloads, or frontend-specific data.

@@ -111,6 +111,18 @@ _QUEUE_SPECS: tuple[tuple[OperatorQueueType, str, str, tuple[str, ...]], ...] = 
         "conformance_repository",
         ("list_readiness",),
     ),
+    (
+        "golden_path_runs",
+        "Golden Path Runs",
+        "golden_path_repository",
+        ("list_runs",),
+    ),
+    (
+        "golden_path_reports",
+        "Golden Path Reports",
+        "golden_path_repository",
+        ("list_reports",),
+    ),
     ("generic", "Dialogue Clarifications", "dialogue_service", ("list_pending",)),
     (
         "generic",
