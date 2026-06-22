@@ -77,6 +77,9 @@ class AIONClient:
         self.module_activation = _import_resource(
             "module_activation"
         ).ModuleActivationResource(self)
+        self.module_mock_runtime = _import_resource(
+            "module_mock_runtime"
+        ).ModuleMockRuntimeResource(self)
         self.conformance = _import_resource("conformance").ConformanceResource(self)
         self.golden_path = _import_resource("golden_path").GoldenPathResource(self)
         self.bootstrap = _import_resource("bootstrap").BootstrapResource(self)

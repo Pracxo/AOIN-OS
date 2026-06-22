@@ -1,0 +1,52 @@
+{
+  "mock_invocation_request_id": "gki-mock-request-001",
+  "trace_id": "trace-gki-mock-001",
+  "actor_id": "operator",
+  "workspace_id": "main",
+  "mock_profile_id": "gki-mock-profile-001",
+  "extension_package_id": "generic-knowledge-intelligence",
+  "module_slot_id": "gki-module-slot-001",
+  "capability_binding_id": "gki-binding-retrieve-001",
+  "capability_key": "generic.knowledge.retrieve",
+  "invocation_type": "mock_knowledge",
+  "mode": "dry_run",
+  "owner_scope": [
+    "workspace:main"
+  ],
+  "input_payload": {
+    "query": "synthetic generic knowledge request",
+    "scope": [
+      "workspace:main"
+    ]
+  },
+  "expected_output_shape": {
+    "type": "object",
+    "synthetic": true,
+    "properties": {
+      "matches": {
+        "type": "array"
+      },
+      "constraints": {
+        "type": "array"
+      }
+    }
+  },
+  "evidence_refs": [
+    "resource://example/generic-knowledge/mock-evidence"
+  ],
+  "policy_refs": [
+    "module_mock.invoke"
+  ],
+  "sandbox_refs": [
+    "metadata-only-future-runtime"
+  ],
+  "create_notifications": false,
+  "metadata": {
+    "synthetic": true,
+    "activation_allowed": false,
+    "execution_allowed": false,
+    "external_calls_made": false,
+    "code_loaded": false
+  },
+  "created_by": "operator"
+}

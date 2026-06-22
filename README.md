@@ -3605,3 +3605,46 @@ The Python SDK exposes the same surface through `client.golden_path`.
 
 See `docs/operations/golden-path.md` and
 `docs/adr/0069-golden-path-scenario-harness.md`.
+
+## Deterministic Module Mock Runtime
+
+AION-085 adds a deterministic module mock runtime for post-v0.1 module
+readiness. It records mock profiles, dry-run invocation requests, synthetic
+outputs, run records, findings, and aggregate query results. It does not load
+code, install packages, activate modules, execute capabilities, register
+routes, mutate runtime configuration, call external services, or add
+domain-specific logic.
+
+Module mock runtime endpoints:
+
+- `POST /brain/module-mock/profiles`
+- `POST /brain/module-mock/profiles/seed-defaults`
+- `GET /brain/module-mock/profiles`
+- `GET /brain/module-mock/profiles/{mock_profile_id}`
+- `POST /brain/module-mock/invoke`
+- `GET /brain/module-mock/runs`
+- `GET /brain/module-mock/runs/{module_mock_run_id}`
+- `GET /brain/module-mock/outputs`
+- `GET /brain/module-mock/outputs/{module_mock_output_id}`
+- `GET /brain/module-mock/findings`
+- `POST /brain/module-mock/findings/{module_mock_finding_id}/dismiss`
+- `POST /brain/module-mock/query`
+
+The `/brain/module-mock-runtime/*` prefix remains a compatibility alias for
+local tooling created during the AION-085 implementation.
+
+Developer commands:
+
+```bash
+./scripts/aionctl.sh --scope workspace:main module-mock seed-profiles
+./scripts/aionctl.sh --scope workspace:main module-mock invoke <capability-binding-id> --capability-key generic.example
+./scripts/aionctl.sh --scope workspace:main module-mock runs
+./scripts/aionctl.sh --scope workspace:main module-mock outputs
+./scripts/aionctl.sh --scope workspace:main module-mock findings
+./scripts/aionctl.sh --scope workspace:main module-mock query
+```
+
+The Python SDK exposes the same surface through `client.module_mock_runtime`.
+
+Generic Knowledge Intelligence includes mock runtime fixtures and docs at
+`docs/modules/generic-knowledge-intelligence-mock-runtime.md`.

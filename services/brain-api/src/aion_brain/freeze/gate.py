@@ -38,6 +38,7 @@ CRITICAL_FAILURE_CHECKS = {
     "config_hash_available",
     "extension_registry_safe",
     "module_binding_registry_safe",
+    "module_mock_runtime_safe",
     "conformance_readiness_gate_safe",
     "golden_path_passed",
     "bootstrap_local_ready",
@@ -136,6 +137,7 @@ class FreezeGateService:
         self._contract_registry_repository = contract_registry_repository
         self._extension_registry_repository = extension_registry_repository
         self._module_binding_repository: object | None = None
+        self._module_mock_repository: object | None = None
         self._conformance_repository: object | None = None
         self._golden_path_repository: object | None = None
         self._bootstrap_repository: object | None = None
@@ -158,6 +160,11 @@ class FreezeGateService:
         """Attach module binding registry after kernel assembly."""
 
         self._module_binding_repository = repository
+
+    def set_module_mock_repository(self, repository: object | None) -> None:
+        """Attach module mock runtime after kernel assembly."""
+
+        self._module_mock_repository = repository
 
     def set_conformance_repository(self, repository: object | None) -> None:
         """Attach conformance readiness gate after kernel assembly."""
@@ -262,6 +269,14 @@ class FreezeGateService:
                 "module_binding_registry_safe",
                 "module_bindings",
                 self._check_module_binding_registry_safe,
+                severity="critical",
+            )
+        )
+        checks.append(
+            self._run_check(
+                "module_mock_runtime_safe",
+                "module_mock_runtime",
+                self._check_module_mock_runtime_safe,
                 severity="critical",
             )
         )
@@ -753,6 +768,46 @@ class FreezeGateService:
                 "blocked_binding_count": len(blocked),
                 "open_conflict_count": len(conflicts),
                 "unsafe_flags": unsafe,
+            },
+        }
+
+    def _check_module_mock_runtime_safe(self) -> dict[str, Any]:
+        list_runs = getattr(self._module_mock_repository, "list_runs", None)
+        list_findings = getattr(self._module_mock_repository, "list_findings", None)
+        runs = list_runs(limit=1000) if callable(list_runs) else []
+        findings = list_findings(status="open", limit=1000) if callable(list_findings) else []
+        blocked_runs = [
+            item for item in runs if getattr(item, "status", None) in {"failed", "blocked"}
+        ]
+        high_findings = [
+            item for item in findings if getattr(item, "severity", None) in {"high", "critical"}
+        ]
+        unsafe_flags = {
+            "module_mock_controlled_execution_enabled": bool(
+                getattr(self._settings, "module_mock_controlled_execution_enabled", False)
+            ),
+            "module_mock_code_loading_enabled": bool(
+                getattr(self._settings, "module_mock_code_loading_enabled", False)
+            ),
+            "module_mock_external_calls_enabled": bool(
+                getattr(self._settings, "module_mock_external_calls_enabled", False)
+            ),
+        }
+        unsafe = [key for key, value in unsafe_flags.items() if value]
+        status = "failed" if blocked_runs or high_findings or unsafe else "passed"
+        return {
+            "status": status,
+            "message": "Module mock runtime remains deterministic and dry-run only.",
+            "details": {
+                "module_mock_run_count": len(runs),
+                "blocked_run_count": len(blocked_runs),
+                "open_finding_count": len(findings),
+                "high_finding_count": len(high_findings),
+                "unsafe_flags": unsafe,
+                "activation_allowed": False,
+                "execution_allowed": False,
+                "external_calls_allowed": False,
+                "code_loading_allowed": False,
             },
         }
 

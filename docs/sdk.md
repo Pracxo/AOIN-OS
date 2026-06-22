@@ -798,3 +798,27 @@ The flow is setup doctor, golden path, RC gate, manifest validation, extension
 intake dry-run, module binding validation dry-run, conformance readiness
 assessment, and operator overview. It does not load code, activate bindings,
 call external services, or mutate source code.
+
+## ModuleMockRuntimeResource
+
+`client.module_mock_runtime` exposes deterministic module mock runtime APIs.
+
+Useful methods include:
+
+- `create_profile(payload)`
+- `seed_profiles(payload)`
+- `list_profiles(scope, status=None, profile_type=None, limit=100)`
+- `get_profile(mock_profile_id, scope)`
+- `invoke(payload)`
+- `list_runs(scope, status=None, capability_binding_id=None, limit=100)`
+- `get_run(module_mock_run_id, scope)`
+- `outputs(scope, module_mock_run_id=None, capability_binding_id=None, status=None, limit=100)`
+- `get_output(module_mock_output_id, scope)`
+- `list_findings(scope, status=None, severity=None, capability_binding_id=None, limit=100)`
+- `dismiss_finding(module_mock_finding_id, payload)`
+- `query(payload)`
+
+The SDK calls public Brain APIs only. It does not import `aion_brain`, load
+module code, install packages, activate modules, execute capabilities, register
+routes, mutate runtime configuration, call external services, or add
+domain-specific module behavior.

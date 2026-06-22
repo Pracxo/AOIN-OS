@@ -1,0 +1,28 @@
+{
+  "trail_id": "gki-mock-readiness-trail-001",
+  "status": "dry_run_only",
+  "module_slot_id": "gki-module-slot-001",
+  "mock_profile_id": "gki-mock-profile-001",
+  "mock_invocation_request_id": "gki-mock-request-001",
+  "capability_binding_id": "gki-binding-retrieve-001",
+  "required_policy_actions": [
+    "module_mock.profile.create",
+    "module_mock.invoke",
+    "module_mock.run.read",
+    "module_mock.output.read",
+    "module_mock.finding.read",
+    "module_mock.query"
+  ],
+  "expected": {
+    "activation_allowed": false,
+    "execution_allowed": false,
+    "external_calls_made": false,
+    "code_loaded": false,
+    "synthetic_output_only": true,
+    "source_records_mutated": false
+  },
+  "notes": [
+    "This trail completes the Generic Knowledge Intelligence demo with deterministic mock runtime evidence.",
+    "It does not activate, execute, load code, install packages, or make external calls."
+  ]
+}

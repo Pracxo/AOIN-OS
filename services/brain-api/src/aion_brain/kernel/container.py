@@ -305,6 +305,15 @@ from aion_brain.module_developer.contract_tests import ModuleContractTestHarness
 from aion_brain.module_developer.repository import ModuleDeveloperRepository
 from aion_brain.module_developer.scaffold import ModuleScaffoldGenerator
 from aion_brain.module_developer.validator import ModulePackageValidator
+from aion_brain.module_mock_runtime import (
+    ModuleMockFindingService,
+    ModuleMockPlanService,
+    ModuleMockProfileService,
+    ModuleMockQueryService,
+    ModuleMockRuntimeRepository,
+    ModuleMockSchemaAdapter,
+    ModuleMockSimulator,
+)
 from aion_brain.modules.local_internal_runtime import LocalInternalRuntimeAdapter
 from aion_brain.modules.local_stub_runtime import LocalStubRuntimeAdapter
 from aion_brain.modules.mcp_runtime import MCPRuntimeAdapter
@@ -2863,6 +2872,48 @@ class KernelContainer:
             self.module_activation_repository,
             self.policy_adapter,
         )
+        self.module_mock_repository = ModuleMockRuntimeRepository(self.settings.database_url)
+        self.module_mock_schema_adapter = ModuleMockSchemaAdapter()
+        self.module_mock_plan_service = ModuleMockPlanService()
+        self.module_mock_profile_service = ModuleMockProfileService(
+            self.module_mock_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.module_mock_simulator = ModuleMockSimulator(
+            self.module_mock_repository,
+            self.policy_adapter,
+            module_binding_repository=self.module_binding_repository,
+            schema_adapter=self.module_mock_schema_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            notification_router=self.notification_router,
+            settings=self.settings,
+        )
+        self.module_mock_finding_service = ModuleMockFindingService(
+            self.module_mock_repository,
+            self.policy_adapter,
+        )
+        self.module_mock_query_service = ModuleMockQueryService(
+            self.module_mock_repository,
+            self.policy_adapter,
+        )
+        set_activation_module_mock_repository = getattr(
+            self.activation_gate_service,
+            "set_module_mock_repository",
+            None,
+        )
+        if callable(set_activation_module_mock_repository):
+            set_activation_module_mock_repository(self.module_mock_repository)
+        set_conformance_module_mock_simulator = getattr(
+            self.conformance_runner,
+            "set_module_mock_simulator",
+            None,
+        )
+        if callable(set_conformance_module_mock_simulator):
+            set_conformance_module_mock_simulator(self.module_mock_simulator)
         self.golden_path_repository = GoldenPathRepository(self.settings.database_url)
         self.golden_path_assertion_engine = AssertionEngine()
         self.golden_path_scenario_catalog = ScenarioCatalogService(
@@ -2996,6 +3047,13 @@ class KernelContainer:
         )
         if callable(set_conformance_repository):
             set_conformance_repository(repository=self.conformance_repository)
+        set_module_mock_repository = getattr(
+            self.release_packager,
+            "set_module_mock_repository",
+            None,
+        )
+        if callable(set_module_mock_repository):
+            set_module_mock_repository(repository=self.module_mock_repository)
         set_freeze_extension_registry = getattr(
             self.freeze_gate_service,
             "set_extension_registry_repository",
@@ -3017,6 +3075,13 @@ class KernelContainer:
         )
         if callable(set_freeze_conformance_repository):
             set_freeze_conformance_repository(self.conformance_repository)
+        set_freeze_module_mock_repository = getattr(
+            self.freeze_gate_service,
+            "set_module_mock_repository",
+            None,
+        )
+        if callable(set_freeze_module_mock_repository):
+            set_freeze_module_mock_repository(self.module_mock_repository)
         set_hardening_extension_registry = getattr(
             self.hardening_gate_service,
             "set_extension_registry_repository",
@@ -3038,12 +3103,20 @@ class KernelContainer:
         )
         if callable(set_hardening_conformance_repository):
             set_hardening_conformance_repository(self.conformance_repository)
+        set_hardening_module_mock_repository = getattr(
+            self.hardening_gate_service,
+            "set_module_mock_repository",
+            None,
+        )
+        if callable(set_hardening_module_mock_repository):
+            set_hardening_module_mock_repository(self.module_mock_repository)
         set_resource_provider = getattr(self.resource_scanner, "set_provider", None)
         if callable(set_resource_provider):
             set_resource_provider("contract_registry", self.contract_registry_repository)
             set_resource_provider("extension_registry", self.extension_registry_repository)
             set_resource_provider("module_binding_registry", self.module_binding_repository)
             set_resource_provider("conformance", self.conformance_repository)
+            set_resource_provider("module_mock_runtime", self.module_mock_repository)
         self.lifecycle_repository = LifecycleRepository(self.settings.database_url)
         self.lifecycle_policy_service = LifecyclePolicyService(
             self.lifecycle_repository,
@@ -3144,6 +3217,7 @@ class KernelContainer:
             contract_registry_service=self.contract_registry_report_service,
             extension_registry_service=self.extension_registry_repository,
             module_binding_service=self.module_binding_repository,
+            module_mock_runtime_service=self.module_mock_repository,
             conformance_service=self.conformance_repository,
             golden_path_service=self.golden_path_repository,
             bootstrap_service=self.bootstrap_repository,
@@ -3210,6 +3284,7 @@ class KernelContainer:
             contract_registry_repository=self.contract_registry_repository,
             extension_registry_repository=self.extension_registry_repository,
             module_binding_repository=self.module_binding_repository,
+            module_mock_repository=self.module_mock_repository,
             conformance_repository=self.conformance_repository,
             module_activation_repository=self.module_activation_repository,
             golden_path_repository=self.golden_path_repository,
@@ -3268,6 +3343,7 @@ class KernelContainer:
             contract_registry_repository=self.contract_registry_repository,
             extension_registry_repository=self.extension_registry_repository,
             module_binding_repository=self.module_binding_repository,
+            module_mock_repository=self.module_mock_repository,
             conformance_repository=self.conformance_repository,
             golden_path_repository=self.golden_path_repository,
             bootstrap_repository=self.bootstrap_repository,
@@ -4549,6 +4625,48 @@ class KernelContainer:
             (
                 "module_activation_query_service",
                 self.module_activation_query_service,
+                "service",
+                "local",
+            ),
+            (
+                "module_mock_repository",
+                self.module_mock_repository,
+                "repository",
+                "postgres",
+            ),
+            (
+                "module_mock_schema_adapter",
+                self.module_mock_schema_adapter,
+                "service",
+                "deterministic",
+            ),
+            (
+                "module_mock_plan_service",
+                self.module_mock_plan_service,
+                "service",
+                "deterministic",
+            ),
+            (
+                "module_mock_profile_service",
+                self.module_mock_profile_service,
+                "service",
+                "local",
+            ),
+            (
+                "module_mock_simulator",
+                self.module_mock_simulator,
+                "service",
+                "deterministic",
+            ),
+            (
+                "module_mock_finding_service",
+                self.module_mock_finding_service,
+                "service",
+                "local",
+            ),
+            (
+                "module_mock_query_service",
+                self.module_mock_query_service,
                 "service",
                 "local",
             ),

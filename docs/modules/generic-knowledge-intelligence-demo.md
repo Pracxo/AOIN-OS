@@ -52,12 +52,14 @@ The demo rejects non-local API URLs.
 2. Run extension intake dry-run using `intake-request.json`.
 3. Create or inspect the module slot request fixture.
 4. Validate the capability binding fixture.
-5. Run conformance dry-run using `conformance-run-request.json`.
-6. Run readiness assessment dry-run using `readiness-assessment-request.json`.
-7. Create an activation request dry-run using `activation-request.json`.
-8. Run activation gate dry-run using `activation-gate-request.json`.
-9. Inspect expected blockers.
-10. Record or inspect operator review using `operator-review-request.json`.
+5. Create or inspect the module mock profile fixture.
+6. Run module mock invocation dry-run using `mock-invocation-request.json`.
+7. Run conformance dry-run using `conformance-run-request.json`.
+8. Run readiness assessment dry-run using `readiness-assessment-request.json`.
+9. Create an activation request dry-run using `activation-request.json`.
+10. Run activation gate dry-run using `activation-gate-request.json`.
+11. Inspect expected blockers.
+12. Record or inspect operator review using `operator-review-request.json`.
 
 ## Expected Output
 
@@ -68,6 +70,8 @@ Offline mode must report:
 - `activation_ready=false`.
 - `activation_allowed=false`.
 - `runtime_registration_allowed=false`.
+- module mock runtime output is synthetic.
+- module mock runtime execution flags remain false.
 - Expected blockers include activation disabled, runtime registration disabled,
   and code loading disabled.
 

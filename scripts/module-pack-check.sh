@@ -120,6 +120,49 @@ for blocker in {
     if blocker not in expected_blockers:
         raise SystemExit(f"activation gate expectation missing {blocker}")
 
+for required in {
+    "mock-profile.json",
+    "mock-invocation-request.json",
+    "mock-output-example.json",
+    "mock-readiness-trail.json",
+}:
+    if not (pack / required).exists():
+        raise SystemExit(f"missing module mock runtime fixture: {required}")
+
+mock_profile = json.loads((pack / "mock-profile.json").read_text())
+if mock_profile.get("profile_key") != "generic.knowledge.mock":
+    raise SystemExit("mock profile must use generic.knowledge.mock")
+if mock_profile.get("metadata", {}).get("activation_allowed") is not False:
+    raise SystemExit("mock profile must keep activation_allowed=false")
+
+mock_request = json.loads((pack / "mock-invocation-request.json").read_text())
+if mock_request.get("mode") != "dry_run":
+    raise SystemExit("mock invocation mode must be dry_run")
+for key in {
+    "activation_allowed",
+    "execution_allowed",
+    "external_calls_made",
+    "code_loaded",
+}:
+    if mock_request.get("metadata", {}).get(key) is not False:
+        raise SystemExit(f"mock invocation metadata must keep {key}=false")
+
+mock_output = json.loads((pack / "mock-output-example.json").read_text())
+if mock_output.get("redacted_output_payload", {}).get("synthetic") is not True:
+    raise SystemExit("mock output example must be synthetic")
+for key in {
+    "activation_allowed",
+    "execution_allowed",
+    "external_calls_made",
+    "code_loaded",
+}:
+    if mock_output.get("redacted_output_payload", {}).get(key) is not False:
+        raise SystemExit(f"mock output must keep {key}=false")
+
+mock_trail = json.loads((pack / "mock-readiness-trail.json").read_text())
+if mock_trail.get("expected", {}).get("synthetic_output_only") is not True:
+    raise SystemExit("mock readiness trail must expect synthetic_output_only=true")
+
 print("Generic Knowledge Intelligence JSON fixtures valid")
 PY
 

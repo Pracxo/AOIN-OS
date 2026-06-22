@@ -27,6 +27,9 @@ but it must not activate the module.
 - Readiness expects `activation_ready=false`.
 - Activation request expects `activation_allowed=false`.
 - Runtime registration preview expects `registration_allowed=false`.
+- Module mock invocation uses `mode=dry_run`.
+- Module mock output is synthetic and records `external_calls_made=false`.
+- Module mock output records `code_loaded=false`.
 
 ## What To Approve
 
@@ -35,6 +38,7 @@ Approval means:
 
 - fixture shape is acceptable
 - readiness evidence is understandable
+- module mock runtime evidence is synthetic and metadata-only
 - blockers are expected
 - future activation requires a later architecture-approved task
 

@@ -176,7 +176,10 @@ def test_generic_knowledge_docs_are_linked_and_state_blocked_boundaries() -> Non
         "docs/modules/generic-knowledge-intelligence-readiness-trail.md",
         "docs/modules/generic-knowledge-intelligence-operator-review.md",
         "docs/modules/generic-knowledge-intelligence-no-go.md",
+        "docs/modules/generic-knowledge-intelligence-mock-runtime.md",
+        "docs/modules/module-mock-runtime.md",
         "docs/adr/0075-generic-knowledge-intelligence-module-pack.md",
+        "docs/adr/0076-deterministic-module-mock-runtime.md",
     ]
     for relative in expected_docs:
         assert (ROOT / relative).exists(), relative
@@ -189,6 +192,8 @@ def test_generic_knowledge_docs_are_linked_and_state_blocked_boundaries() -> Non
             "AGENTS.md",
             "docs/architecture.md",
             "docs/modules/module-activation-state-machine.md",
+            "docs/modules/module-mock-runtime.md",
+            "docs/modules/generic-knowledge-intelligence-mock-runtime.md",
         ]
     )
     for phrase in [
@@ -196,10 +201,15 @@ def test_generic_knowledge_docs_are_linked_and_state_blocked_boundaries() -> Non
         "metadata-only",
         "does not activate",
         "registration_allowed=false",
+        "synthetic",
+        "no code loading",
         "Generic Knowledge Intelligence",
     ]:
         assert phrase in combined
 
+    assert "0076-deterministic-module-mock-runtime.md" in (
+        ROOT / "docs/adr/README.md"
+    ).read_text()
     assert "0075-generic-knowledge-intelligence-module-pack.md" in (
         ROOT / "docs/adr/README.md"
     ).read_text()

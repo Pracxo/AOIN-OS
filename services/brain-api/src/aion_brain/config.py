@@ -411,6 +411,55 @@ class Settings(BaseSettings):
             "module_binding_create_notifications_default",
         ),
     )
+    module_mock_runtime_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODULE_MOCK_RUNTIME_ENABLED",
+            "module_mock_runtime_enabled",
+        ),
+    )
+    module_mock_profiles_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODULE_MOCK_PROFILES_ENABLED",
+            "module_mock_profiles_enabled",
+        ),
+    )
+    module_mock_invocation_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODULE_MOCK_INVOCATION_ENABLED",
+            "module_mock_invocation_enabled",
+        ),
+    )
+    module_mock_controlled_execution_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_MODULE_MOCK_CONTROLLED_EXECUTION_ENABLED",
+            "module_mock_controlled_execution_enabled",
+        ),
+    )
+    module_mock_code_loading_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_MODULE_MOCK_CODE_LOADING_ENABLED",
+            "module_mock_code_loading_enabled",
+        ),
+    )
+    module_mock_external_calls_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_MODULE_MOCK_EXTERNAL_CALLS_ENABLED",
+            "module_mock_external_calls_enabled",
+        ),
+    )
+    module_mock_create_notifications_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_MODULE_MOCK_CREATE_NOTIFICATIONS_DEFAULT",
+            "module_mock_create_notifications_default",
+        ),
+    )
     conformance_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices("AION_CONFORMANCE_ENABLED", "conformance_enabled"),

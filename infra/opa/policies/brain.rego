@@ -442,6 +442,15 @@ allowed_actions := {
 	"module_activation.query.read",
 	"runtime.registration.preview.create",
 	"runtime.registration.preview.read",
+	"module_mock.profile.create",
+	"module_mock.profile.read",
+	"module_mock.profile.update",
+	"module_mock.invoke",
+	"module_mock.run.read",
+	"module_mock.output.read",
+	"module_mock.finding.read",
+	"module_mock.finding.update",
+	"module_mock.query",
 	"conformance.profile.create",
 	"conformance.profile.read",
 	"conformance.profile.update",
@@ -1567,6 +1576,34 @@ decision := {
 	module_activation_metadata_action
 	module_activation_permission
 	not module_activation_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "module_mock_read_allowed",
+	"constraints": ["metadata_only", "dry_run_only", "synthetic_output_only", "no_activation", "no_capability_execution", "no_external_calls"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	module_mock_read_action
+	module_mock_permission
+	not module_mock_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "module_mock_metadata_action_allowed",
+	"constraints": ["metadata_only", "dry_run_only", "synthetic_output_only", "no_code_loading", "no_package_install", "no_activation", "no_capability_execution", "no_external_calls", "no_source_mutation"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	module_mock_metadata_action
+	module_mock_permission
+	not module_mock_unsafe_request
 }
 
 decision := {
@@ -3219,6 +3256,7 @@ decision := {
 	not extension_registry_action
 	not module_binding_action
 	not module_activation_action
+	not module_mock_action
 	not conformance_action
 	not golden_path_action
 	not bootstrap_action
@@ -3444,6 +3482,10 @@ decision := {
 	not belief_action
 	not scheduler_action
 	not incident_action
+	not module_binding_action
+	not module_activation_action
+	not module_mock_action
+	not conformance_action
 	not golden_path_action
 	not bootstrap_action
 	not release_candidate_action
@@ -3995,6 +4037,10 @@ module_activation_action if {
 	startswith(input.action_type, "runtime.registration.preview.")
 }
 
+module_mock_action if {
+	startswith(input.action_type, "module_mock.")
+}
+
 contract_registry_read_action if {
 	input.action_type == "contract_registry.resource.read"
 }
@@ -4360,6 +4406,94 @@ module_activation_unsafe_request if {
 }
 
 module_activation_unsafe_request if {
+	input.context.code_generated == true
+}
+
+module_mock_read_action if {
+	input.action_type == "module_mock.profile.read"
+}
+
+module_mock_read_action if {
+	input.action_type == "module_mock.run.read"
+}
+
+module_mock_read_action if {
+	input.action_type == "module_mock.output.read"
+}
+
+module_mock_read_action if {
+	input.action_type == "module_mock.finding.read"
+}
+
+module_mock_read_action if {
+	input.action_type == "module_mock.query"
+}
+
+module_mock_metadata_action if {
+	input.action_type == "module_mock.profile.create"
+}
+
+module_mock_metadata_action if {
+	input.action_type == "module_mock.profile.update"
+}
+
+module_mock_metadata_action if {
+	input.action_type == "module_mock.invoke"
+}
+
+module_mock_metadata_action if {
+	input.action_type == "module_mock.finding.update"
+}
+
+module_mock_unsafe_request if {
+	input.context.source_mutated == true
+}
+
+module_mock_unsafe_request if {
+	input.context.source_mutation_requested == true
+}
+
+module_mock_unsafe_request if {
+	input.context.code_loading_requested == true
+}
+
+module_mock_unsafe_request if {
+	input.context.package_install_requested == true
+}
+
+module_mock_unsafe_request if {
+	input.context.activation_requested == true
+}
+
+module_mock_unsafe_request if {
+	input.context.activation_allowed == true
+}
+
+module_mock_unsafe_request if {
+	input.context.capability_execution_requested == true
+}
+
+module_mock_unsafe_request if {
+	input.context.execution_allowed == true
+}
+
+module_mock_unsafe_request if {
+	input.context.external_call_requested == true
+}
+
+module_mock_unsafe_request if {
+	input.context.external_calls_made == true
+}
+
+module_mock_unsafe_request if {
+	input.context.dynamic_route_registration_requested == true
+}
+
+module_mock_unsafe_request if {
+	input.context.shell_command_requested == true
+}
+
+module_mock_unsafe_request if {
 	input.context.code_generated == true
 }
 
@@ -5305,6 +5439,44 @@ module_activation_permission if {
 }
 
 module_activation_permission if {
+	input.context.actor_context.permissions[_] == "operator"
+}
+
+module_mock_permission if {
+	dev_owner
+}
+
+module_mock_permission if {
+	input.context.actor_context.permissions[_] == input.action_type
+}
+
+module_mock_permission if {
+	input.context.permissions[_] == input.action_type
+}
+
+module_mock_permission if {
+	module_mock_read_action
+	input.requested_permissions[_] == input.action_type
+	count(input.security_scope) > 0
+}
+
+module_mock_permission if {
+	input.actor_id
+	input.requested_permissions[_] == input.action_type
+	input.security_scope[_] == sprintf("workspace:%s", [input.workspace_id])
+}
+
+module_mock_permission if {
+	input.context.actor_context.permissions[_] == "module_mock.read"
+	module_mock_read_action
+}
+
+module_mock_permission if {
+	input.context.actor_context.permissions[_] == "module_mock.write"
+	module_mock_metadata_action
+}
+
+module_mock_permission if {
 	input.context.actor_context.permissions[_] == "operator"
 }
 

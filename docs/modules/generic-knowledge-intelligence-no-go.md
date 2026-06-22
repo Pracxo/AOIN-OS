@@ -15,6 +15,10 @@ review and reject the package if any no-go condition is present.
 - raw secret access requested
 - external model calls requested
 - tool execution requested
+- module mock output claims to be real module output
+- module mock invocation uses a mode other than `dry_run`
+- module mock evidence sets `external_calls_made=true`
+- module mock evidence sets `code_loaded=true`
 - domain workflow included
 - `activation_ready=true` in v0.1
 - code loading enabled
@@ -32,5 +36,6 @@ When a no-go condition appears:
 
 ## Expected v0.1 Result
 
-The correct v0.1 result is a readable readiness trail with activation blocked.
-Any path that produces active runtime behavior is outside AION-084.
+The correct v0.1 result is a readable readiness trail with activation blocked
+and AION-085 module mock evidence marked synthetic. Any path that produces
+active runtime behavior is outside the post-v0.1 metadata-only sequence.

@@ -336,3 +336,8 @@ Instructions for future Codex runs in this repository:
 - Activation blockers are expected in v0.1.
 - Do not add domain-specific workflow logic to module pack fixtures, demos, or
   docs.
+- Module mock runtime work must remain deterministic, metadata-only, and
+  synthetic-output-only.
+- Module mock runtime must not load code, install packages, activate modules,
+  execute capabilities, register routes, mutate runtime config, call external
+  services, or add domain-specific module logic.

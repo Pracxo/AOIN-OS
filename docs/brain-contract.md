@@ -1548,3 +1548,31 @@ AION-079 adds no new runtime contracts. It documents and validates existing
 release candidate, bootstrap, golden path, freeze, release package, operator,
 extension, module binding, conformance, SDK, and CLI interfaces for local
 handoff.
+
+## Module Mock Runtime Contracts
+
+AION Brain owns these module mock runtime contracts:
+
+- `ModuleMockProfile`
+- `ModuleMockProfileCreateRequest`
+- `ModuleMockInvocationRequest`
+- `ModuleMockInvocationCreateRequest`
+- `ModuleMockRun`
+- `ModuleMockOutput`
+- `ModuleMockFinding`
+- `ModuleMockQuery`
+- `ModuleMockQueryResult`
+
+`ModuleMockProfile` describes deterministic simulation rules and JSON-like
+shape hints. `ModuleMockInvocationRequest` stores redacted dry-run input and
+expected output shape metadata. `ModuleMockRun` is the canonical dry-run
+result. `ModuleMockOutput` stores synthetic output only. `ModuleMockFinding`
+stores reviewable metadata problems. `ModuleMockQuery` and
+`ModuleMockQueryResult` aggregate local records.
+
+Module mock runtime contracts must keep activation, execution, external-call,
+and code-loading flags false. They must not expose raw headers, hidden
+reasoning, raw prompts, provider payloads, secrets, SQLAlchemy rows, source
+code payloads, package bytes, third-party module internals, live runtime
+client objects, real capability execution results, or domain-specific module
+logic.

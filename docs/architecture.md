@@ -1712,3 +1712,22 @@ The pack must not register runtime routes, add SDK or CLI surface, add
 migrations, load code, install packages, execute tools, call external services,
 mutate runtime configuration, or activate capabilities. Activation blockers
 are the expected v0.1 result.
+
+## Deterministic Module Mock Runtime
+
+AION-085 adds a deterministic module mock runtime as a post-v0.1 readiness
+evidence layer. It belongs to Brain core governance, not to any module
+implementation. The runtime converts inactive capability binding metadata and a
+mock profile into synthetic dry-run records:
+
+`binding metadata -> mock profile -> redacted input -> shape checks -> synthetic output -> run record -> findings`
+
+The runtime is adapter-ready and metadata-only. It may provide evidence to the
+activation gate, conformance runner, resource registry, release packager,
+freeze gate, hardening gate, and operator surfaces. Those integrations read or
+create local records only.
+
+The runtime must not load module code, install packages, invoke real
+capabilities, activate modules, register dynamic routes, mutate runtime
+configuration, execute shell commands, call external services, expose secrets,
+or encode domain-specific workflows.

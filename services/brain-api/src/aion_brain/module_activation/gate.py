@@ -29,6 +29,7 @@ _CHECKS = [
     "policy_actions_present",
     "runtime_settings_safe",
     "sandbox_profiles_present",
+    "module_mock_runtime_evidence_present",
     "activation_disabled",
     "runtime_registration_disabled",
 ]
@@ -44,6 +45,7 @@ class ActivationGateService:
         *,
         module_binding_repository: object | None = None,
         conformance_repository: object | None = None,
+        module_mock_repository: object | None = None,
         telemetry_service: object | None = None,
         audit_sink: AuditSink | None = None,
         settings: Settings | None = None,
@@ -53,6 +55,7 @@ class ActivationGateService:
         self._policy_adapter = policy_adapter
         self._module_binding_repository = module_binding_repository
         self._conformance_repository = conformance_repository
+        self._module_mock_repository = module_mock_repository
         self._telemetry_service = telemetry_service
         self._audit_sink = audit_sink
         self._settings = settings or get_settings()
@@ -61,6 +64,11 @@ class ActivationGateService:
             policy_adapter,
             telemetry_service=telemetry_service,
         )
+
+    def set_module_mock_repository(self, repository: object | None) -> None:
+        """Attach module mock runtime evidence after kernel assembly."""
+
+        self._module_mock_repository = repository
 
     def run_gate(
         self,
@@ -119,6 +127,10 @@ class ActivationGateService:
                 "activation_allowed": False,
                 "execution_allowed": False,
                 "runtime_registration_allowed": False,
+                "module_mock_run_count": _module_mock_run_count(
+                    self._module_mock_repository,
+                    request.capability_binding_ids,
+                ),
                 "open_blocker_count": len(open_blockers),
             },
             metadata={"activation_gate_version": "0.1", "no_runtime_mutation": True},
@@ -289,6 +301,25 @@ class ActivationGateService:
                     )
                 )
 
+        for binding_id in request.capability_binding_ids:
+            if not _module_mock_evidence_ready(self._module_mock_repository, binding_id):
+                blockers.append(
+                    self._create_blocker(
+                        scope,
+                        activation_request_id,
+                        "generic",
+                        "No passing module mock runtime dry-run exists for this binding.",
+                        (
+                            "Run a deterministic module mock invocation before future "
+                            "activation review."
+                        ),
+                        severity="medium",
+                        capability_binding_id=binding_id,
+                        source_type="module_mock_runtime",
+                        source_id=binding_id,
+                    )
+                )
+
         if request.risk_level in {"high", "critical"}:
             blockers.append(
                 self._create_blocker(
@@ -442,6 +473,35 @@ def _readiness_ready(repository: object | None, readiness_ids: list[str]) -> boo
         if item is None or not bool(getattr(item, "activation_ready", False)):
             return False
     return True
+
+
+def _module_mock_run_count(repository: object | None, binding_ids: list[str]) -> int:
+    list_runs = getattr(repository, "list_runs", None)
+    if not callable(list_runs):
+        return 0
+    count = 0
+    for binding_id in binding_ids:
+        try:
+            count += len(list_runs(capability_binding_id=binding_id, limit=100))
+        except Exception:
+            return count
+    return count
+
+
+def _module_mock_evidence_ready(repository: object | None, capability_binding_id: str) -> bool:
+    list_runs = getattr(repository, "list_runs", None)
+    if not callable(list_runs):
+        return False
+    try:
+        runs = list_runs(capability_binding_id=capability_binding_id, limit=100)
+    except Exception:
+        return False
+    return any(
+        getattr(run, "status", None) in {"passed", "warning", "dry_run"}
+        and getattr(run, "execution_allowed", True) is False
+        and getattr(run, "activation_allowed", True) is False
+        for run in runs
+    )
 
 
 def _warnings_for(blockers: list[ActivationBlocker]) -> list[dict[str, Any]]:

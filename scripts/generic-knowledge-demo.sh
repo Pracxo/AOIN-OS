@@ -59,6 +59,40 @@ post_json() {
     --data-binary @"$file" >/dev/null
 }
 
+post_json_array() {
+  local endpoint="$1"
+  local file="$2"
+  python3 - "$endpoint" "$file" "$API_URL" <<'PY'
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+endpoint, file_name, api_url = sys.argv[1:4]
+items = json.loads(Path(file_name).read_text())
+if not isinstance(items, list):
+    raise SystemExit("expected JSON array")
+for item in items:
+    subprocess.run(
+        [
+            "curl",
+            "-fsS",
+            "-X",
+            "POST",
+            "-H",
+            "content-type: application/json",
+            f"{api_url}{endpoint}",
+            "--data-binary",
+            "@-",
+        ],
+        input=json.dumps(item),
+        text=True,
+        check=True,
+        stdout=subprocess.DEVNULL,
+    )
+PY
+}
+
 post_extracted_gate_request() {
   local tmp_file
   tmp_file="$(mktemp)"
@@ -102,9 +136,18 @@ else
     run_step "module slot dry-run metadata record" post_json \
       "/brain/module-slots" \
       "$PACK_DIR/module-slot-request.json"
+    run_step "capability binding metadata records" post_json_array \
+      "/brain/capability-bindings" \
+      "$PACK_DIR/capability-bindings.json"
     run_step "binding validation dry-run" post_json \
       "/brain/module-bindings/validate" \
       "$PACK_DIR/binding-validation-request.json"
+    run_step "module mock profile record" post_json \
+      "/brain/module-mock/profiles" \
+      "$PACK_DIR/mock-profile.json"
+    run_step "module mock invocation dry-run" post_json \
+      "/brain/module-mock/invoke" \
+      "$PACK_DIR/mock-invocation-request.json"
     run_step "conformance dry-run" post_json \
       "/brain/conformance/run" \
       "$PACK_DIR/conformance-run-request.json"
@@ -133,9 +176,12 @@ echo "  controlled_supported: false"
 echo "  activation_ready: false"
 echo "  activation_allowed: false"
 echo "  runtime_registration_allowed: false"
+echo "  module_mock_runtime: synthetic dry-run evidence only"
+echo "  module_mock_execution_allowed: false"
 echo "  expected blockers: activation_disabled, runtime_registration_disabled, code_loading_disabled"
 echo
 echo "Next evidence docs:"
 echo "  docs/modules/generic-knowledge-intelligence-demo.md"
 echo "  docs/modules/generic-knowledge-intelligence-readiness-trail.md"
 echo "  docs/modules/generic-knowledge-intelligence-operator-review.md"
+echo "  docs/modules/generic-knowledge-intelligence-mock-runtime.md"

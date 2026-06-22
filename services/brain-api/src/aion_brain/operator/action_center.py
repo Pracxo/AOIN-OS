@@ -108,6 +108,7 @@ class ActionCenterService:
         generated.extend(self._open_conformance_finding_items(scope))
         generated.extend(self._blocked_readiness_assessment_items(scope))
         generated.extend(self._module_activation_blocker_items(scope))
+        generated.extend(self._module_mock_runtime_items(scope))
         generated.extend(self._failed_golden_path_run_items(scope))
         generated.extend(self._critical_golden_path_report_items(scope))
         generated.extend(self._critical_setup_finding_items(scope))
@@ -619,6 +620,65 @@ class ActionCenterService:
             )
             for item in items
         ]
+
+    def _module_mock_runtime_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("module_mock_repository")
+        list_runs = getattr(source, "list_runs", None)
+        list_findings = getattr(source, "list_findings", None)
+        runs: list[object] = []
+        findings: list[object] = []
+        try:
+            if callable(list_runs):
+                runs = list_runs(limit=100)
+            if callable(list_findings):
+                findings = list_findings(status="open", limit=100)
+        except Exception:
+            return []
+        run_items = [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "module_mock_run_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="registry",
+                severity="high",
+                title="Module mock dry-run is blocked.",
+                description="A synthetic module mock invocation has blockers for review.",
+                recommended_action="review_module_mock_run",
+                runbook_ref="docs/modules/module-mock-runtime.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={
+                    "status": getattr(item, "status", None),
+                    "capability_binding_id": getattr(item, "capability_binding_id", None),
+                    "activation_allowed": False,
+                    "execution_allowed": False,
+                },
+            )
+            for item in runs
+            if getattr(item, "status", None) in {"failed", "blocked"}
+        ]
+        finding_items = [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "module_mock_finding_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="registry",
+                severity=cast(OperatorSeverity, str(getattr(item, "severity", "high"))),
+                title="Module mock finding is open.",
+                description="A module mock runtime finding requires metadata review.",
+                recommended_action="review_module_mock_finding",
+                runbook_ref="docs/modules/module-mock-runtime.md",
+                scope=scope or ["workspace:main"],
+                metadata={
+                    "finding_type": getattr(item, "finding_type", None),
+                    "status": getattr(item, "status", None),
+                    "capability_binding_id": getattr(item, "capability_binding_id", None),
+                    "metadata_only": True,
+                },
+            )
+            for item in findings
+            if str(getattr(item, "severity", "")).lower() in {"high", "critical"}
+        ]
+        return [*run_items, *finding_items]
 
     def _failed_golden_path_run_items(self, scope: list[str]) -> list[OperatorActionItem]:
         source = self._sources.get("golden_path_repository")

@@ -53,6 +53,7 @@ from aion_brain.api.model_outputs import router as model_outputs_router
 from aion_brain.api.module_activation import router as module_activation_router
 from aion_brain.api.module_bindings import router as module_bindings_router
 from aion_brain.api.module_developer import router as module_developer_router
+from aion_brain.api.module_mock_runtime import router as module_mock_runtime_router
 from aion_brain.api.modules import router as modules_router
 from aion_brain.api.notifications import router as notifications_router
 from aion_brain.api.observability import router as observability_router
@@ -144,6 +145,7 @@ ROUTERS = (
     extensions_router,
     module_bindings_router,
     module_activation_router,
+    module_mock_runtime_router,
     conformance_router,
     golden_path_router,
     bootstrap_router,

@@ -630,3 +630,24 @@ aionctl readiness assess --capability-binding-id <capability-binding-id>
 
 Use `./scripts/demo-local.sh --offline-ok` for the scripted local demo. The
 sequence stays dry-run and metadata-only where module paths are involved.
+
+## Module Mock Runtime Commands
+
+The CLI exposes deterministic module mock runtime APIs through SDK calls:
+
+```bash
+aionctl module-mock seed-profiles
+aionctl module-mock create-profile generic.example.mock
+aionctl module-mock profiles
+aionctl module-mock invoke <capability-binding-id> --capability-key generic.example
+aionctl module-mock runs
+aionctl module-mock outputs
+aionctl module-mock findings
+aionctl module-mock query
+```
+
+These commands create or read dry-run mock records only. They do not load code,
+install packages, activate modules, execute capabilities, register routes,
+mutate runtime configuration, call external services, print raw prompts, expose
+hidden reasoning, or add domain-specific module behavior. `module-mock-runtime`
+remains an alias for compatibility.

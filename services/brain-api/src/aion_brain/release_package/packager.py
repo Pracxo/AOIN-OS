@@ -62,6 +62,7 @@ class ReleasePackager:
         contract_registry_report_service: object | None = None,
         extension_registry_repository: object | None = None,
         module_binding_repository: object | None = None,
+        module_mock_repository: object | None = None,
         conformance_repository: object | None = None,
         golden_path_repository: object | None = None,
         bootstrap_repository: object | None = None,
@@ -96,6 +97,7 @@ class ReleasePackager:
         self._contract_registry_report_service = contract_registry_report_service
         self._extension_registry_repository = extension_registry_repository
         self._module_binding_repository = module_binding_repository
+        self._module_mock_repository = module_mock_repository
         self._conformance_repository = conformance_repository
         self._golden_path_repository = golden_path_repository
         self._bootstrap_repository = bootstrap_repository
@@ -130,6 +132,11 @@ class ReleasePackager:
         """Attach module binding summaries after kernel assembly."""
 
         self._module_binding_repository = repository
+
+    def set_module_mock_repository(self, repository: object | None = None) -> None:
+        """Attach module mock runtime summaries after kernel assembly."""
+
+        self._module_mock_repository = repository
 
     def set_conformance_repository(self, repository: object | None = None) -> None:
         """Attach capability conformance summaries after kernel assembly."""
@@ -318,6 +325,7 @@ class ReleasePackager:
             reports["contract_registry"] = self._contract_registry_summary(request.owner_scope)
             reports["extension_registry"] = self._extension_registry_summary(request.owner_scope)
             reports["module_binding_registry"] = self._module_binding_summary(request.owner_scope)
+            reports["module_mock_runtime"] = self._module_mock_summary(request.owner_scope)
             reports["capability_conformance"] = self._conformance_summary(request.owner_scope)
             reports["golden_path"] = self._golden_path_summary(request.owner_scope)
             reports["bootstrap"] = self._bootstrap_summary(request.owner_scope)
@@ -457,6 +465,48 @@ class ReleasePackager:
             "activation_allowed": False,
             "execution_allowed": False,
             "dynamic_route_registration_allowed": False,
+            "source_code_is_source_of_truth": True,
+        }
+
+    def _module_mock_summary(self, scope: builtins.list[str]) -> dict[str, Any]:
+        status = _try_call(self._module_mock_repository, "status", scope)
+        profiles = _try_call(self._module_mock_repository, "list_profiles", limit=500)
+        runs = _try_call(self._module_mock_repository, "list_runs", limit=500)
+        findings = _try_call(
+            self._module_mock_repository,
+            "list_findings",
+            status="open",
+            limit=500,
+        )
+        profiles = profiles if isinstance(profiles, list) else []
+        runs = runs if isinstance(runs, list) else []
+        findings = findings if isinstance(findings, list) else []
+        blocked_runs = [
+            item for item in runs if getattr(item, "status", None) in {"failed", "blocked"}
+        ]
+        high_findings = [
+            item for item in findings if getattr(item, "severity", None) in {"high", "critical"}
+        ]
+        return {
+            "available": self._module_mock_repository is not None,
+            "status": (
+                "blocked"
+                if blocked_runs or high_findings
+                else _jsonable(status).get("status", "warning")
+                if isinstance(_jsonable(status), dict)
+                else "warning"
+            ),
+            "profile_count": len(profiles),
+            "module_mock_run_count": len(runs),
+            "blocked_run_count": len(blocked_runs),
+            "open_finding_count": len(findings),
+            "high_finding_count": len(high_findings),
+            "metadata_only": True,
+            "synthetic_output_only": True,
+            "activation_allowed": False,
+            "execution_allowed": False,
+            "external_calls_allowed": False,
+            "code_loading_allowed": False,
             "source_code_is_source_of_truth": True,
         }
 

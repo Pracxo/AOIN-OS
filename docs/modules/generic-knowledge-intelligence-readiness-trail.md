@@ -81,6 +81,8 @@ Readiness remains not ready for activation in v0.1:
 - `require_passing_conformance=true`
 - `activation_ready=false`
 - operator review may be pending or recorded as future-only
+- module mock runtime evidence may exist, but it is synthetic dry-run evidence
+  only
 
 ## Activation Remains Blocked
 
@@ -100,6 +102,7 @@ The operator receives:
 
 - fixture list
 - demo command output
+- mock runtime dry-run summary
 - conformance expectations
 - readiness expectations
 - blocker summary
@@ -108,6 +111,7 @@ The operator receives:
 
 ## Release And Freeze Implications
 
-AION-084 does not alter the v0.1 release baseline. It does not move the
-`aion-v0.1.0` tag, add migrations, add API routes, add SDK resources, add CLI
-commands, add external dependencies, or enable runtime behavior.
+AION-085 adds deterministic mock runtime evidence after the metadata-only
+module pack. It does not move the `aion-v0.1.0` tag, add external
+dependencies, enable runtime activation, load code, install packages, execute
+capabilities, call external services, or add domain-specific logic.

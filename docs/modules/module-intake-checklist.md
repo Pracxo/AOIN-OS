@@ -17,6 +17,11 @@ activation design.
 - [ ] conformance passes
 - [ ] readiness assessment created
 - [ ] activation_ready=false
+- [ ] module mock profile is metadata-only if present
+- [ ] module mock invocation uses `mode=dry_run` if present
+- [ ] module mock output is synthetic if present
+- [ ] module mock evidence keeps external_calls_made=false
+- [ ] module mock evidence keeps code_loaded=false
 - [ ] operator review recorded
 - [ ] audit/provenance present
 - [ ] release/freeze gates remain green
@@ -42,5 +47,8 @@ For `generic.knowledge_intelligence`, verify:
 - [ ] test vectors are synthetic
 - [ ] readiness expects `activation_ready=false`
 - [ ] activation request expects `activation_allowed=false`
+- [ ] mock-profile.json contains no executable simulation rules
+- [ ] mock-invocation-request.json uses `mode=dry_run`
+- [ ] mock-output-example.json sets `synthetic=true`
 - [ ] runtime registration preview expectations keep `registration_allowed=false`
 - [ ] operator review states approval does not activate

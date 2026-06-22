@@ -85,6 +85,7 @@ The AION-084 module pack maps to the state machine as evidence only:
 - `slot_staged`: `module-slot-request.json`
 - `binding_created`: `capability-bindings.json`
 - `binding_validated`: `binding-validation-request.json`
+- `mock_runtime_evidence_recorded`: `mock-readiness-trail.json`
 - `conformance_passed`: `conformance-run-request.json`
 - `readiness_reviewed`: `readiness-assessment-request.json`
 - `activation_requested`: `activation-request.json`

@@ -80,6 +80,21 @@ node after soft delete.
 No UI implementation exists in v0.1. Visual telemetry is a Brain-owned data
 contract for future visualization work.
 
+## Module Mock Runtime Projection
+
+AION-085 adds frontend-agnostic visual telemetry for deterministic module mock
+runtime records. The projection uses:
+
+- `module_mock_profile_created` with node type `module_mock_profile`
+- `module_mock_invocation_started` with node type `module_mock_run`
+- `module_mock_invocation_completed` with node type `module_mock_run`
+- `module_mock_output` with node type `module_mock_output`
+- `module_mock_finding_dismissed` with node type `module_mock_finding`
+
+These events show dry-run readiness evidence only. They must not imply module
+activation, real output, route registration, code loading, external calls, MCP
+tool calls, model calls, or capability execution.
+
 ## Contract Registry Projection
 
 Contract Registry telemetry projects interface readiness into the visual brain

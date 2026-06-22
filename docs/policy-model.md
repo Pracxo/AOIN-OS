@@ -1482,6 +1482,31 @@ logic.
 Activation execution and runtime registration remain disabled in AION-083.
 Unsafe activation contexts fail closed.
 
+## Module Mock Runtime Policy
+
+Generic module mock runtime actions:
+
+- `module_mock.profile.create`
+- `module_mock.profile.read`
+- `module_mock.profile.update`
+- `module_mock.invoke`
+- `module_mock.run.read`
+- `module_mock.output.read`
+- `module_mock.finding.read`
+- `module_mock.finding.update`
+- `module_mock.query`
+
+Module mock runtime policy authorizes deterministic dry-run metadata only. It
+permits synthetic profile creation, dry-run invocation records, synthetic output
+reads, finding review, and aggregate queries. It does not authorize code
+loading, package installation, activation, capability execution, source-record
+mutation, dynamic route registration, shell commands, external calls, hidden
+reasoning disclosure, raw prompt disclosure, raw header export, secret export,
+or domain-specific module behavior.
+
+Mock invocation outputs must remain synthetic and all execution flags remain
+false. Unsafe mock runtime contexts fail closed.
+
 ## Capability Conformance Policy
 
 Generic conformance actions:
