@@ -368,6 +368,17 @@ from aion_brain.regression.repository import RegressionRepository
 from aion_brain.regression.service import RegressionService
 from aion_brain.release_baseline.repository import ReleaseBaselineRepository
 from aion_brain.release_baseline.service import ReleaseBaselineService
+from aion_brain.release_candidate import (
+    RCEvidencePackService,
+    RCFindingService,
+    RCGateService,
+    RCQueryService,
+    RCReportService,
+    ReleaseCandidateRepository,
+    ReleaseCandidateService,
+    VerificationCheckCollector,
+    VerificationMatrixService,
+)
 from aion_brain.release_package.handoff import ReleaseHandoffService
 from aion_brain.release_package.packager import ReleasePackager
 from aion_brain.release_package.repository import ReleasePackageRepository
@@ -2477,6 +2488,7 @@ class KernelContainer:
             audit_sink=self.audit_integrity_ledger,
         )
         self.release_package_repository = ReleasePackageRepository(self.settings.database_url)
+        self.release_candidate_repository = ReleaseCandidateRepository(self.settings.database_url)
         self.release_package_source_manifest_service = SourceManifestService(
             max_file_size_mb=self.settings.release_package_max_file_size_mb
         )
@@ -2501,6 +2513,7 @@ class KernelContainer:
             sbom_service=self.release_package_sbom_service,
             validator=self.release_package_validator,
             handoff_service=self.release_handoff_service,
+            release_candidate_repository=self.release_candidate_repository,
             telemetry_service=self.telemetry_service,
             root_dir=root_dir,
             settings=self.settings,
@@ -2551,6 +2564,7 @@ class KernelContainer:
             notification=self.notification_repository,
             incident=self.incident_repository,
             release_package=self.release_package_repository,
+            release_candidate=self.release_candidate_repository,
             backup=self.backup_repository,
             freeze_gate=self.freeze_gate_service,
         )
@@ -3065,6 +3079,7 @@ class KernelContainer:
             conformance_service=self.conformance_repository,
             golden_path_service=self.golden_path_repository,
             bootstrap_service=self.bootstrap_repository,
+            release_candidate_service=self.release_candidate_repository,
             lifecycle_service=self.lifecycle_report_service,
         )
         self.operator_queue_summary_builder = QueueSummaryBuilder(
@@ -3130,6 +3145,7 @@ class KernelContainer:
             conformance_repository=self.conformance_repository,
             golden_path_repository=self.golden_path_repository,
             bootstrap_repository=self.bootstrap_repository,
+            release_candidate_repository=self.release_candidate_repository,
             archive_planner=self.archive_planner,
             redaction_planner=self.redaction_planner,
             purge_preview_service=self.purge_preview_service,
@@ -3186,6 +3202,7 @@ class KernelContainer:
             conformance_repository=self.conformance_repository,
             golden_path_repository=self.golden_path_repository,
             bootstrap_repository=self.bootstrap_repository,
+            release_candidate_repository=self.release_candidate_repository,
             archive_planner=self.archive_planner,
             redaction_planner=self.redaction_planner,
             purge_preview_service=self.purge_preview_service,
@@ -3300,6 +3317,74 @@ class KernelContainer:
             provenance_service=self.provenance_service,
             settings=self.settings,
         )
+        self.release_candidate_service = ReleaseCandidateService(
+            self.release_candidate_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+        )
+        self.verification_matrix_service = VerificationMatrixService(
+            self.release_candidate_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            settings=self.settings,
+        )
+        self.rc_check_collector = VerificationCheckCollector(
+            setup_doctor=self.setup_doctor,
+            golden_path_runner=self.golden_path_runner,
+            release_smoke=self.golden_path_release_smoke,
+            freeze_gate_service=self.freeze_gate_service,
+            release_packager=self.release_packager,
+            contract_registry_repository=self.contract_registry_repository,
+            contract_registry_report_service=self.contract_registry_report_service,
+            resource_registry_validator=self.reference_validator,
+            lifecycle_service=self.lifecycle_query_service,
+            extension_registry_repository=self.extension_registry_repository,
+            module_binding_repository=self.module_binding_repository,
+            conformance_repository=self.conformance_repository,
+            hardening_gate_service=self.hardening_gate_service,
+            runtime_config_status_service=self.runtime_config_status_service,
+            operator_service=self.operator_control_tower_service,
+            settings=self.settings,
+        )
+        self.rc_finding_service = RCFindingService(
+            self.release_candidate_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.rc_evidence_pack_service = RCEvidencePackService(
+            self.release_candidate_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.rc_report_service = RCReportService(
+            self.release_candidate_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.rc_gate_service = RCGateService(
+            self.release_candidate_repository,
+            self.policy_adapter,
+            candidate_service=self.release_candidate_service,
+            matrix_service=self.verification_matrix_service,
+            check_collector=self.rc_check_collector,
+            finding_service=self.rc_finding_service,
+            evidence_pack_service=self.rc_evidence_pack_service,
+            report_service=self.rc_report_service,
+            autonomy_governor=self.autonomy_governor,
+            notification_router=self.notification_router,
+            operator_repository=self.operator_repository,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            settings=self.settings,
+        )
+        self.rc_query_service = RCQueryService(
+            self.release_candidate_repository,
+            self.policy_adapter,
+        )
         self.seed_executor.set_service_dependency("operator", self.operator_control_tower_service)
         set_freeze_golden_path_repository = getattr(
             self.freeze_gate_service,
@@ -3335,6 +3420,9 @@ class KernelContainer:
         set_bootstrap_resource_provider = getattr(self.resource_scanner, "set_provider", None)
         if callable(set_bootstrap_resource_provider):
             set_bootstrap_resource_provider("bootstrap", self.bootstrap_repository)
+        set_rc_resource_provider = getattr(self.resource_scanner, "set_provider", None)
+        if callable(set_rc_resource_provider):
+            set_rc_resource_provider("release_candidate", self.release_candidate_repository)
         set_operator_readiness = getattr(
             self.release_baseline_service,
             "set_operator_readiness_service",

@@ -727,3 +727,29 @@ Useful methods include:
 The SDK calls public Brain APIs only. It does not import `aion_brain`, execute
 tools, call external services, call model providers, mutate non-scenario
 records, run release packaging, or add frontend dependencies.
+
+## ReleaseCandidateResource
+
+`client.release_candidate` exposes the Release Candidate Gate APIs.
+
+Useful methods include:
+
+- `create_candidate(payload)`
+- `list_candidates(scope, status=None, version=None, release_ready=None, limit=100)`
+- `get_candidate(release_candidate_id, scope)`
+- `create_matrix(payload)`
+- `list_matrices(scope, status=None, limit=100)`
+- `seed_default_matrices(scope, dry_run=True)`
+- `run_gate(payload)`
+- `get_run(rc_run_id, scope)`
+- `list_findings(scope, status=None, severity=None, blocking=None, limit=100)`
+- `dismiss_finding(rc_finding_id, scope, reason="dismissed")`
+- `list_evidence_packs(scope, status=None, limit=50)`
+- `get_evidence_pack(evidence_pack_id, scope)`
+- `list_reports(scope, status=None, version=None, limit=50)`
+- `get_report(rc_report_id, scope)`
+- `query(payload)`
+
+The SDK calls public Brain APIs only. It does not import `aion_brain`, deploy,
+publish, mutate source code, enable runtime features, call external services,
+or add domain-specific release behavior.

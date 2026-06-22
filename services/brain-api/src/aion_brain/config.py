@@ -522,6 +522,65 @@ class Settings(BaseSettings):
             "bootstrap_enable_external_features",
         ),
     )
+    release_candidate_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_RELEASE_CANDIDATE_ENABLED",
+            "release_candidate_enabled",
+        ),
+    )
+    rc_gate_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_RC_GATE_ENABLED", "rc_gate_enabled"),
+    )
+    rc_evidence_pack_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_RC_EVIDENCE_PACK_ENABLED",
+            "rc_evidence_pack_enabled",
+        ),
+    )
+    rc_controlled_mode_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_RC_CONTROLLED_MODE_ENABLED",
+            "rc_controlled_mode_enabled",
+        ),
+    )
+    rc_create_notifications_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_RC_CREATE_NOTIFICATIONS_DEFAULT",
+            "rc_create_notifications_default",
+        ),
+    )
+    rc_create_operator_items_default: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_RC_CREATE_OPERATOR_ITEMS_DEFAULT",
+            "rc_create_operator_items_default",
+        ),
+    )
+    rc_release_ready_threshold: float = Field(
+        default=0.95,
+        ge=0.0,
+        le=1.0,
+        validation_alias=AliasChoices(
+            "AION_RC_RELEASE_READY_THRESHOLD",
+            "rc_release_ready_threshold",
+        ),
+    )
+    rc_fail_on_critical: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_RC_FAIL_ON_CRITICAL", "rc_fail_on_critical"),
+    )
+    rc_fail_on_missing_required: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_RC_FAIL_ON_MISSING_REQUIRED",
+            "rc_fail_on_missing_required",
+        ),
+    )
     lifecycle_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices("AION_LIFECYCLE_ENABLED", "lifecycle_enabled"),

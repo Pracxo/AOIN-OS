@@ -573,3 +573,27 @@ summaries only. They do not execute tools, execute action proposals, execute
 handoffs in controlled mode by default, call external services, call model
 providers, mutate non-scenario source records, print raw prompts, expose hidden
 reasoning, or add frontend behavior.
+
+## Release Candidate Commands
+
+The CLI exposes the Release Candidate Gate through SDK calls:
+
+```bash
+aionctl rc create --rc-key rc.v0_1
+aionctl rc candidates
+aionctl rc matrices
+aionctl rc matrices seed
+aionctl rc run --no-service-checks
+aionctl rc run-get --id <rc-run-id>
+aionctl rc findings
+aionctl rc dismiss-finding --id <finding-id>
+aionctl rc reports
+aionctl rc evidence
+aionctl rc query
+```
+
+RC commands create or read release candidate records, verification matrices,
+gate runs, findings, evidence packs, and reports only. They do not deploy,
+publish, tag releases, mutate source code, enable runtime features, call
+external services, print raw prompts, expose hidden reasoning, or add
+domain-specific release behavior.

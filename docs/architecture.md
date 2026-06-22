@@ -1586,3 +1586,26 @@ cards, queues and action items, Freeze Gate optional checks, Release Package
 summaries, SDK, CLI, audit, provenance, and visual telemetry. All surfaces use
 AION-owned contracts and never expose SQLAlchemy rows, raw secrets, raw prompts,
 hidden reasoning, provider payloads, or frontend-specific data.
+
+## Release Candidate Gate
+
+The Release Candidate Gate is the v0.1 final local readiness aggregator. It
+joins script-supplied checks, safe service checks, verification matrices,
+findings, evidence packs, reports, operator queues, resource registry records,
+visual telemetry, audit, provenance, SDK, and CLI surfaces.
+
+The RC flow is:
+
+`candidate -> verification matrix -> gate run -> findings -> evidence pack -> report`
+
+RC-owned records are release metadata and evidence only. The gate does not
+deploy, publish, tag, mutate source code, enable external features, execute
+release packaging in controlled mode, call external services, or create
+domain-specific readiness logic. Controlled mode is disabled by default and is
+limited to RC-owned records when explicitly enabled.
+
+Release readiness is computed from normalized `VerificationCheck` records.
+Required missing, failed, blocked, or unknown checks fail closed. Critical
+findings block readiness when the matrix requires it. Evidence packs and
+reports are redacted before persistence and must not include raw prompts,
+hidden reasoning, raw headers, provider payloads, secrets, or SQLAlchemy rows.

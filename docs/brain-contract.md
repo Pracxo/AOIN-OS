@@ -1479,3 +1479,32 @@ Golden path contracts must not expose raw headers, hidden reasoning, raw
 prompts, provider payloads, secrets, SQLAlchemy rows, source-system internals,
 external service clients, frontend framework objects, or domain-specific
 workflow logic.
+
+## Release Candidate Contracts
+
+AION Brain owns these release candidate contracts:
+
+- `ReleaseCandidate`
+- `ReleaseCandidateCreateRequest`
+- `VerificationCheck`
+- `VerificationMatrix`
+- `VerificationMatrixCreateRequest`
+- `RCGateRunRequest`
+- `RCGateRun`
+- `RCFinding`
+- `RCEvidencePack`
+- `RCReport`
+- `RCQuery`
+
+`ReleaseCandidate` is a local readiness shell for one version or candidate key.
+`VerificationMatrix` defines required and optional generic checks.
+`VerificationCheck` normalizes local script and service evidence.
+`RCGateRun` aggregates checks into readiness score, blockers, warnings, and
+release-ready status. `RCFinding` stores reviewable blockers and warnings.
+`RCEvidencePack` and `RCReport` store redacted evidence and operator-facing
+summaries only.
+
+Release candidate contracts must not expose raw headers, hidden reasoning, raw
+prompts, provider payloads, secrets, SQLAlchemy rows, deployment credentials,
+external service clients, source-code patches, or domain-specific release
+logic.

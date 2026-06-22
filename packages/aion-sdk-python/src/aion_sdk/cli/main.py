@@ -42,6 +42,7 @@ from aion_sdk.cli.commands.policy import install_policy_commands
 from aion_sdk.cli.commands.prompts import install_prompt_commands
 from aion_sdk.cli.commands.registry import install_registry_commands
 from aion_sdk.cli.commands.release import install_release_commands
+from aion_sdk.cli.commands.release_candidate import install_release_candidate_commands
 from aion_sdk.cli.commands.resilience import install_resilience_commands
 from aion_sdk.cli.commands.run_supervision import install_run_supervision_commands
 from aion_sdk.cli.commands.sandbox import install_sandbox_commands
@@ -552,6 +553,7 @@ install_policy_commands(app, get_client=_client, get_scope=_scope, render=_rende
 install_scenarios_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_versioning_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_release_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_release_candidate_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_backup_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_performance_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_security_commands(app, get_client=_client, get_scope=_scope, render=_render)

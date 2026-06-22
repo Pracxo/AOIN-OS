@@ -858,3 +858,35 @@ Generic visual node types include:
 These nodes represent dry-run verification records and report readiness. They
 must not imply production workload execution, external service calls, frontend
 rendering behavior, source-record mutation, or automatic remediation.
+
+## Release Candidate Projection
+
+Release Candidate telemetry projects final readiness into the Visual Brain
+Projection. It is backend projection data only and does not implement a
+frontend renderer.
+
+Generic event types include:
+
+- `release_candidate_created`
+- `verification_matrix_created`
+- `rc_gate_started`
+- `rc_gate_completed`
+- `rc_gate_blocked`
+- `rc_finding_created`
+- `rc_finding_dismissed`
+- `rc_evidence_pack_created`
+- `rc_report_created`
+
+Generic visual node types include:
+
+- `release_candidate`
+- `verification_matrix`
+- `verification_check`
+- `rc_gate`
+- `rc_finding`
+- `rc_report`
+- `rc_evidence_pack`
+
+These nodes represent local release-readiness evidence and review records.
+They must not imply deployment, publishing, source mutation, external service
+calls, or domain-specific release behavior.

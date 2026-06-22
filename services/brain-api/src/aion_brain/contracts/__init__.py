@@ -347,6 +347,16 @@ from aion_brain.contracts.release_baseline import (
     ReleaseBaselineReport,
     ReleaseBaselineRequest,
 )
+from aion_brain.contracts.release_candidate import (
+    RCEvidencePack,
+    RCFinding,
+    RCGateRun,
+    RCGateRunRequest,
+    RCQuery,
+    RCReport,
+    ReleaseCandidate,
+    ReleaseCandidateCreateRequest,
+)
 from aion_brain.contracts.reminders import ReminderCreateRequest, ReminderRecord
 from aion_brain.contracts.replay import (
     BrainSnapshot,
@@ -460,6 +470,11 @@ from aion_brain.contracts.tasks import (
 from aion_brain.contracts.telemetry import VisualTelemetryEvent
 from aion_brain.contracts.trace_narratives import TraceNarrative, TraceNarrativeRequest
 from aion_brain.contracts.traces import DecisionTrace
+from aion_brain.contracts.verification_matrix import (
+    VerificationCheck,
+    VerificationMatrix,
+    VerificationMatrixCreateRequest,
+)
 from aion_brain.contracts.versioning import (
     DeprecationPolicy,
     FeatureRegistryEntry,
@@ -805,6 +820,14 @@ __all__ = [
     "ReminderRecord",
     "ReleaseBaselineReport",
     "ReleaseBaselineRequest",
+    "ReleaseCandidate",
+    "ReleaseCandidateCreateRequest",
+    "RCEvidencePack",
+    "RCFinding",
+    "RCGateRun",
+    "RCGateRunRequest",
+    "RCQuery",
+    "RCReport",
     "ReleaseArtifactManifest",
     "ReferenceLink",
     "ReferenceLinkCreateRequest",
@@ -894,6 +917,9 @@ __all__ = [
     "VisualTelemetryEvent",
     "VisualTelemetryQuery",
     "VersionManifest",
+    "VerificationCheck",
+    "VerificationMatrix",
+    "VerificationMatrixCreateRequest",
     "TemporalAdapterStatus",
     "WorkflowCreateRequest",
     "WorkflowDefinition",

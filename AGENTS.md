@@ -294,3 +294,13 @@ Instructions for future Codex runs in this repository:
   mutate non-scenario source records.
 - Golden path scenarios and assertions must stay generic and must not encode
   domain-specific business workflows.
+- Release Candidate Gate work must remain local and records-first. It may
+  create release candidate records, verification matrices, gate runs,
+  findings, redacted evidence packs, reports, audit/provenance links,
+  telemetry, SDK calls, CLI commands, operator queues, and resource registry
+  descriptors.
+- Release Candidate Gate work must not deploy, publish, tag releases
+  automatically, mutate source code, enable disabled runtime features, call
+  external services, execute uncontrolled release packaging, expose raw
+  prompts, expose hidden reasoning, expose secrets, or add domain-specific
+  release logic.

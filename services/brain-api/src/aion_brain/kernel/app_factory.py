@@ -66,6 +66,7 @@ from aion_brain.api.reasoning import router as reasoning_router
 from aion_brain.api.reflection import router as reflection_router
 from aion_brain.api.regression import router as regression_router
 from aion_brain.api.release_baseline import router as release_baseline_router
+from aion_brain.api.release_candidate import router as release_candidate_router
 from aion_brain.api.release_package import router as release_package_router
 from aion_brain.api.replay import router as replay_router
 from aion_brain.api.resilience import router as resilience_router
@@ -173,6 +174,7 @@ ROUTERS = (
     telemetry_router,
     scenarios_router,
     release_baseline_router,
+    release_candidate_router,
     release_package_router,
     backups_router,
     performance_router,

@@ -464,6 +464,21 @@ allowed_actions := {
 	"bootstrap.report.create",
 	"bootstrap.report.read",
 	"bootstrap.query",
+	"release_candidate.create",
+	"release_candidate.read",
+	"release_candidate.update",
+	"release_candidate.matrix.create",
+	"release_candidate.matrix.read",
+	"release_candidate.matrix.update",
+	"release_candidate.gate.run",
+	"release_candidate.run.read",
+	"release_candidate.finding.read",
+	"release_candidate.finding.update",
+	"release_candidate.evidence_pack.create",
+	"release_candidate.evidence_pack.read",
+	"release_candidate.report.create",
+	"release_candidate.report.read",
+	"release_candidate.query",
 	"response.draft",
 	"response.evaluate",
 	"response.verify",
@@ -950,6 +965,13 @@ low_allowed_actions := {
 	"bootstrap.run.read",
 	"bootstrap.report.read",
 	"bootstrap.query",
+	"release_candidate.read",
+	"release_candidate.matrix.read",
+	"release_candidate.run.read",
+	"release_candidate.finding.read",
+	"release_candidate.evidence_pack.read",
+	"release_candidate.report.read",
+	"release_candidate.query",
 	"lifecycle.policy.read",
 	"lifecycle.classify",
 	"lifecycle.classification.read",
@@ -1586,6 +1608,35 @@ decision := {
 	bootstrap_permission
 	bootstrap_mode_allowed
 	not bootstrap_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "release_candidate_read_allowed",
+	"constraints": ["local_only", "rc_owned_records_only", "no_external_calls"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	release_candidate_read_action
+	release_candidate_permission
+	not release_candidate_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "release_candidate_metadata_action_allowed",
+	"constraints": ["local_only", "rc_owned_records_only", "no_external_calls", "no_deploy", "no_publish", "no_source_mutation"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	release_candidate_metadata_action
+	release_candidate_permission
+	release_candidate_mode_allowed
+	not release_candidate_unsafe_request
 }
 
 decision := {
@@ -3125,6 +3176,7 @@ decision := {
 	not conformance_action
 	not golden_path_action
 	not bootstrap_action
+	not release_candidate_action
 	not scheduler_action
 	not incident_action
 	not lifecycle_action
@@ -3344,6 +3396,7 @@ decision := {
 	not incident_action
 	not golden_path_action
 	not bootstrap_action
+	not release_candidate_action
 }
 
 decision := {
@@ -4461,6 +4514,131 @@ bootstrap_unsafe_request if {
 	input.context.hard_delete_enabled == true
 }
 
+release_candidate_action if {
+	startswith(input.action_type, "release_candidate.")
+}
+
+release_candidate_read_action if {
+	input.action_type == "release_candidate.read"
+}
+
+release_candidate_read_action if {
+	input.action_type == "release_candidate.matrix.read"
+}
+
+release_candidate_read_action if {
+	input.action_type == "release_candidate.run.read"
+}
+
+release_candidate_read_action if {
+	input.action_type == "release_candidate.finding.read"
+}
+
+release_candidate_read_action if {
+	input.action_type == "release_candidate.evidence_pack.read"
+}
+
+release_candidate_read_action if {
+	input.action_type == "release_candidate.report.read"
+}
+
+release_candidate_read_action if {
+	input.action_type == "release_candidate.query"
+}
+
+release_candidate_metadata_action if {
+	input.action_type == "release_candidate.create"
+}
+
+release_candidate_metadata_action if {
+	input.action_type == "release_candidate.update"
+}
+
+release_candidate_metadata_action if {
+	input.action_type == "release_candidate.matrix.create"
+}
+
+release_candidate_metadata_action if {
+	input.action_type == "release_candidate.matrix.update"
+}
+
+release_candidate_metadata_action if {
+	input.action_type == "release_candidate.gate.run"
+}
+
+release_candidate_metadata_action if {
+	input.action_type == "release_candidate.finding.update"
+}
+
+release_candidate_metadata_action if {
+	input.action_type == "release_candidate.evidence_pack.create"
+}
+
+release_candidate_metadata_action if {
+	input.action_type == "release_candidate.report.create"
+}
+
+release_candidate_mode_allowed if {
+	not input.context.mode
+}
+
+release_candidate_mode_allowed if {
+	input.context.mode == "dry_run"
+}
+
+release_candidate_mode_allowed if {
+	input.context.mode == "controlled"
+	input.context.controlled_records == "rc_owned_only"
+}
+
+release_candidate_unsafe_request if {
+	input.context.external_calls == true
+}
+
+release_candidate_unsafe_request if {
+	input.context.external_call_requested == true
+}
+
+release_candidate_unsafe_request if {
+	input.context.deployment == true
+}
+
+release_candidate_unsafe_request if {
+	input.context.deploy_requested == true
+}
+
+release_candidate_unsafe_request if {
+	input.context.publish == true
+}
+
+release_candidate_unsafe_request if {
+	input.context.publish_requested == true
+}
+
+release_candidate_unsafe_request if {
+	input.context.source_mutation == true
+}
+
+release_candidate_unsafe_request if {
+	input.context.source_mutation_requested == true
+}
+
+release_candidate_unsafe_request if {
+	input.context.source_records_mutated == true
+}
+
+release_candidate_unsafe_request if {
+	input.context.enable_disabled_features == true
+}
+
+release_candidate_unsafe_request if {
+	input.context.code_loading_enabled == true
+}
+
+release_candidate_unsafe_request if {
+	input.context.full_autonomy_enabled == true
+}
+
 registry_approval_action if {
 	input.action_type == "entity.merge.approve"
 }
@@ -5030,6 +5208,46 @@ bootstrap_permission if {
 bootstrap_permission if {
 	input.context.actor_context.roles[_] == "auditor"
 	bootstrap_read_action
+}
+
+release_candidate_permission if {
+	dev_owner
+}
+
+release_candidate_permission if {
+	admin_or_owner
+}
+
+release_candidate_permission if {
+	input.context.actor_context.permissions[_] == input.action_type
+}
+
+release_candidate_permission if {
+	input.context.permissions[_] == input.action_type
+}
+
+release_candidate_permission if {
+	input.requested_permissions[_] == input.action_type
+	count(input.security_scope) > 0
+}
+
+release_candidate_permission if {
+	input.context.actor_context.permissions[_] == "release_candidate.read"
+	release_candidate_read_action
+}
+
+release_candidate_permission if {
+	input.context.actor_context.permissions[_] == "release_candidate.write"
+	release_candidate_metadata_action
+}
+
+release_candidate_permission if {
+	input.context.actor_context.permissions[_] == "operator"
+}
+
+release_candidate_permission if {
+	input.context.actor_context.roles[_] == "auditor"
+	release_candidate_read_action
 }
 
 lifecycle_permission if {

@@ -97,6 +97,7 @@ class ActionCenterService:
         generated.extend(self._failed_golden_path_run_items(scope))
         generated.extend(self._critical_golden_path_report_items(scope))
         generated.extend(self._critical_setup_finding_items(scope))
+        generated.extend(self._open_rc_finding_items(scope))
         stored: list[OperatorActionItem] = []
         for item in generated[:limit]:
             saved = self._repository.save_action_item(item)
@@ -680,6 +681,37 @@ class ActionCenterService:
                     "category": getattr(finding, "category", None),
                     "check_key": getattr(finding, "check_key", None),
                     "status": getattr(finding, "status", None),
+                },
+            )
+            for finding in findings
+        ]
+
+    def _open_rc_finding_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("release_candidate_repository")
+        list_findings = getattr(source, "list_findings", None)
+        if not callable(list_findings):
+            return []
+        try:
+            findings = list_findings(status="open", blocking=True, limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="rc_finding",
+                source_id=_id_for(finding, "rc_finding_id"),
+                trace_id=getattr(finding, "trace_id", None),
+                category="release",
+                severity=_finding_severity(finding),
+                title="Release candidate finding requires review.",
+                description="The local RC gate reported a blocking verification finding.",
+                recommended_action="fix_failed_required_check",
+                runbook_ref="docs/operations/release-candidate.md",
+                scope=scope or ["workspace:main"],
+                metadata={
+                    "finding_type": getattr(finding, "finding_type", None),
+                    "check_key": getattr(finding, "check_key", None),
+                    "status": getattr(finding, "status", None),
+                    "blocking": getattr(finding, "blocking", False),
                 },
             )
             for finding in findings

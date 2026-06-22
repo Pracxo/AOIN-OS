@@ -1499,3 +1499,35 @@ that imply external calls, external model calls, tool execution, shell
 execution, code generation, source-record mutation, approval bypass, autonomy
 bypass, raw prompt disclosure, hidden reasoning disclosure, raw header export,
 secret export, or domain-specific scenario logic fail closed.
+
+## Release Candidate Policy
+
+Generic release candidate actions:
+
+- `release_candidate.create`
+- `release_candidate.read`
+- `release_candidate.update`
+- `release_candidate.query`
+- `release_candidate.matrix.create`
+- `release_candidate.matrix.read`
+- `release_candidate.matrix.update`
+- `release_candidate.gate.run`
+- `release_candidate.run.read`
+- `release_candidate.finding.read`
+- `release_candidate.finding.update`
+- `release_candidate.evidence_pack.create`
+- `release_candidate.evidence_pack.read`
+- `release_candidate.report.create`
+- `release_candidate.report.read`
+
+Release candidate reads and queries are low-risk scoped actions. Matrix
+creation, candidate creation, finding dismissal, evidence-pack creation,
+report creation, and gate runs require scoped actors, operators, admins, or
+internal Brain services allowed by policy.
+
+RC policy authorizes local metadata and evidence aggregation only. Requests
+that imply deployment, publishing, external calls, source mutation, source
+record mutation outside RC-owned records, enabling disabled features, code
+loading, full autonomy, raw prompt disclosure, hidden reasoning disclosure,
+raw header export, secret export, or domain-specific release behavior fail
+closed.

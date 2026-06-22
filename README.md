@@ -216,6 +216,37 @@ curl http://localhost:8080/health/live
 curl http://localhost:8080/health/ready
 ```
 
+Release candidate gate:
+
+```bash
+./scripts/rc-check.sh --offline-ok
+./scripts/rc-evidence.sh --offline-ok
+```
+
+RC API endpoints:
+
+- `POST /brain/rc/candidates`
+- `GET /brain/rc/candidates`
+- `GET /brain/rc/candidates/{release_candidate_id}`
+- `POST /brain/rc/matrices`
+- `GET /brain/rc/matrices`
+- `POST /brain/rc/matrices/seed-defaults`
+- `POST /brain/rc/gate/run`
+- `GET /brain/rc/gate/runs/{rc_run_id}`
+- `GET /brain/rc/findings`
+- `POST /brain/rc/findings/{rc_finding_id}/dismiss`
+- `GET /brain/rc/evidence-packs`
+- `GET /brain/rc/evidence-packs/{evidence_pack_id}`
+- `GET /brain/rc/reports`
+- `GET /brain/rc/reports/{rc_report_id}`
+- `POST /brain/rc/query`
+
+The RC gate aggregates local verification evidence into Brain-owned release
+candidate records, verification matrices, gate runs, findings, evidence packs,
+and reports. It is a local release-readiness control plane only. It does not
+deploy, publish, mutate source code, enable disabled runtime features, call
+external services, or add domain-specific release logic.
+
 Bootstrap endpoints:
 
 ```bash

@@ -47,6 +47,7 @@ _CARD_SPECS: tuple[tuple[str, str, OperatorCategory, str], ...] = (
     ("conformance", "Capability Conformance", "registry", "conformance_service"),
     ("golden_path", "Golden Path", "release", "golden_path_service"),
     ("bootstrap", "First-Run Bootstrap", "bootstrap", "bootstrap_service"),
+    ("release_candidate", "Release Candidate Gate", "release", "release_candidate_service"),
     ("lifecycle", "Data Lifecycle", "lifecycle", "lifecycle_service"),
 )
 

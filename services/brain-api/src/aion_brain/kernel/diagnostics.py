@@ -167,6 +167,15 @@ class KernelDiagnostics:
         ("freeze_gate_service_present", "freeze_gate_service", "medium"),
         ("release_packager_present", "release_packager", "medium"),
         ("release_package_validator_present", "release_package_validator", "medium"),
+        ("release_candidate_repository_present", "release_candidate_repository", "medium"),
+        ("release_candidate_service_present", "release_candidate_service", "medium"),
+        ("verification_matrix_service_present", "verification_matrix_service", "medium"),
+        ("rc_check_collector_present", "rc_check_collector", "medium"),
+        ("rc_gate_service_present", "rc_gate_service", "medium"),
+        ("rc_finding_service_present", "rc_finding_service", "medium"),
+        ("rc_evidence_pack_service_present", "rc_evidence_pack_service", "medium"),
+        ("rc_report_service_present", "rc_report_service", "medium"),
+        ("rc_query_service_present", "rc_query_service", "medium"),
         ("backup_exporter_present", "backup_exporter", "medium"),
         ("restore_preview_service_present", "restore_preview_service", "medium"),
         ("restore_service_present", "restore_service", "medium"),
@@ -373,6 +382,7 @@ class KernelDiagnostics:
         checks.extend(self._scenario_checks(settings))
         checks.extend(self._golden_path_checks(settings))
         checks.extend(self._bootstrap_checks(settings))
+        checks.extend(self._release_candidate_checks(settings))
         checks.extend(self._versioning_checks(settings))
         checks.extend(self._backup_checks(settings))
         checks.extend(self._performance_checks(settings))
@@ -2290,6 +2300,74 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Bootstrap services are assembled.",
+            ),
+        ]
+
+    def _release_candidate_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "release_candidate_repository",
+                "release_candidate_service",
+                "verification_matrix_service",
+                "rc_check_collector",
+                "rc_gate_service",
+                "rc_finding_service",
+                "rc_evidence_pack_service",
+                "rc_report_service",
+                "rc_query_service",
+            )
+        )
+        return [
+            self._result(
+                "release_candidate_enabled",
+                "release_candidate",
+                "passed"
+                if bool(getattr(settings, "release_candidate_enabled", True))
+                else "warning",
+                "medium",
+                "Release candidate records are enabled.",
+            ),
+            self._result(
+                "rc_gate_enabled",
+                "release_candidate",
+                "passed" if bool(getattr(settings, "rc_gate_enabled", True)) else "warning",
+                "medium",
+                "Release candidate gate is enabled.",
+            ),
+            self._result(
+                "rc_evidence_pack_enabled",
+                "release_candidate",
+                "passed"
+                if bool(getattr(settings, "rc_evidence_pack_enabled", True))
+                else "warning",
+                "medium",
+                "Release candidate evidence pack generation is enabled.",
+            ),
+            self._result(
+                "rc_controlled_mode_disabled_by_default",
+                "release_candidate",
+                "passed"
+                if not bool(getattr(settings, "rc_controlled_mode_enabled", False))
+                else "warning",
+                "high",
+                "Controlled RC gate mode is disabled by default.",
+            ),
+            self._result(
+                "rc_release_ready_threshold_configured",
+                "release_candidate",
+                "passed"
+                if float(getattr(settings, "rc_release_ready_threshold", 0.0)) > 0.0
+                else "failed",
+                "high",
+                "Release candidate readiness threshold is configured.",
+            ),
+            self._result(
+                "release_candidate_services_present",
+                "release_candidate",
+                "passed" if services_present else "failed",
+                "high",
+                "Release candidate gate services are assembled.",
             ),
         ]
 
