@@ -252,6 +252,41 @@ Release handoff docs:
 - [No-go conditions](docs/release/v0.1-no-go-conditions.md)
 - [Post-v0.1 roadmap](docs/release/v0.1-post-release-roadmap.md)
 
+## Post-v0.1 Module Ecosystem Strategy
+
+AION Brain v0.1.0 is released as the local-first baseline. The next phase is
+module ecosystem strategy, not runtime activation.
+
+The first selected module class is Generic Knowledge Intelligence. It remains
+metadata-only and uses existing Brain gates for extension intake, module slots,
+capability bindings, conformance, readiness, policy, audit, and operator
+review.
+
+Activation remains disabled. Code loading remains disabled. Package
+installation, dynamic routes, external calls, full autonomy, and controlled
+handoff remain disabled.
+
+Module strategy docs:
+
+- [Module ecosystem roadmap](docs/roadmap/module-ecosystem.md)
+- [Module activation design](docs/architecture/module-activation-design.md)
+- [Module activation threat model](docs/security/module-activation-threat-model.md)
+- [First module selection](docs/modules/first-module-selection.md)
+- [Generic Knowledge Intelligence module](docs/modules/generic-knowledge-intelligence-module.md)
+- [Module intake checklist](docs/modules/module-intake-checklist.md)
+- [Module activation state machine](docs/modules/module-activation-state-machine.md)
+- [Module risk classification](docs/modules/module-risk-classification.md)
+- [Module branching and release discipline](docs/modules/module-branching-and-release-discipline.md)
+- [ADR 0073](docs/adr/0073-post-v0.1-module-ecosystem-strategy.md)
+
+Recommended branch command:
+
+```bash
+git switch main
+git pull --ff-only origin main
+git switch -c phase/post-v0.1-module-strategy
+```
+
 ## v0.1 Final Local Release Path
 
 AION Brain v0.1.0 is a local release baseline. The final scripts aggregate

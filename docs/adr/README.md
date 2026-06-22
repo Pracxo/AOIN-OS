@@ -82,3 +82,4 @@ closure decision in ADR 0072.
 - [0070: First-Run Bootstrap and Setup Doctor](0070-first-run-bootstrap-setup-doctor.md) - Defines local first-run bootstrap, seed bundles, setup findings, and onboarding reports.
 - [0071: Release Candidate Gate](0071-release-candidate-gate.md) - Defines local RC readiness matrices, gate runs, findings, evidence packs, and reports.
 - [0072: v0.1 Release Freeze Baseline](0072-v0.1-release-freeze-baseline.md) - Freezes the local v0.1 release baseline and final release-closure gates.
+- [0073: Post-v0.1 Module Ecosystem Strategy](0073-post-v0.1-module-ecosystem-strategy.md) - Defines post-v0.1 module strategy, activation design posture, and first metadata-only module selection.

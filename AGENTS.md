@@ -321,3 +321,11 @@ Instructions for future Codex runs in this repository:
 - Release scripts must not install packages.
 - Release scripts must not publish or deploy.
 - AION v0.1 tag must not be created unless final verification is green.
+- After AION-080/AION-081, do not add Brain core subsystems without
+  architecture review.
+- Modules must not modify Brain core.
+- Module activation remains disabled.
+- Module code loading remains disabled.
+- Module examples must be metadata-only.
+- Do not add domain-specific module implementation to Brain core.
+- Do not move aion-v0.1.0 tag during post-v0.1 planning.

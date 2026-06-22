@@ -1637,3 +1637,29 @@ The freeze layer is operational closure, not runtime architecture. It does not
 add database tables, API routes, policy actions, new services, model calls,
 external connectors, extension loading, capability activation, dynamic route
 registration, hard delete, deployment, publishing, or domain module logic.
+
+## Post-v0.1 Module Ecosystem
+
+AION-082 starts module ecosystem strategy after the v0.1 release freeze. It is
+docs, roadmap, activation design, threat model, selection matrix, checklist,
+and metadata-only example work. It does not add a runtime subsystem.
+
+Future modules must enter through the existing Brain gates:
+
+`extension manifest -> extension intake -> module slot -> capability binding -> binding validation -> conformance -> readiness assessment -> operator review -> action proposal where needed -> policy/risk/approval/autonomy/sandbox -> future activation gate`
+
+Activation remains disabled. Code loading remains disabled. Package
+installation, dynamic route registration, external calls, full autonomy, and
+controlled handoff remain disabled.
+
+The first selected governed module class is Generic Knowledge Intelligence. It
+is low-risk because it does not need tool execution, external actions,
+controlled handoff, dynamic routes, package installation, or runtime
+activation. It remains metadata-only until future activation design gates pass.
+
+Modules must not modify Brain core. Domain modules plug into Brain through
+metadata, contracts, bindings, conformance, readiness, policy, audit,
+provenance, and operator review rather than Brain core code changes.
+
+See `docs/roadmap/module-ecosystem.md` and
+`docs/architecture/module-activation-design.md`.

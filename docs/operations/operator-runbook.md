@@ -42,6 +42,18 @@ AION OS = Adaptive Intelligence Orchestration Nexus Operating System.
 - v0.1 does not send external notifications.
 - v0.1 does not hard-delete records.
 
+## Post-v0.1 Module Strategy
+
+AION-082 is planning only. The first selected module class is Generic
+Knowledge Intelligence, and it remains metadata-only. Operators may review
+manifests, module slots, capability bindings, conformance, readiness,
+policy/risk posture, audit/provenance, and release evidence.
+
+Activation remains disabled. Code loading remains disabled. Modules must not
+modify Brain core. Operators must treat any activation request, package
+install, dynamic route, external call, full autonomy request, or controlled
+handoff request as blocked until a future activation gate exists.
+
 ## Local Startup Sequence
 
 ```bash
