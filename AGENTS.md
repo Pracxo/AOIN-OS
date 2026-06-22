@@ -311,3 +311,13 @@ Instructions for future Codex runs in this repository:
 - Runbooks must state disabled v0.1 boundaries.
 - No domain-specific demo flows.
 - No raw secrets in examples.
+- AION-080 closes the v0.1 release baseline. Do not add a new core subsystem
+  after AION-080 without explicit architecture review.
+- v0.1 release closure must protect existing tests, lint, typecheck,
+  no-domain-drift, boundary, policy, OpenAPI, docs, Docker config, RC, freeze,
+  and release package gates.
+- Release docs must not claim production readiness.
+- Release scripts must not call external services.
+- Release scripts must not install packages.
+- Release scripts must not publish or deploy.
+- AION v0.1 tag must not be created unless final verification is green.

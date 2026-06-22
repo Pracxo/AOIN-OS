@@ -13,6 +13,7 @@ from aion_brain.contracts.operator import (
     OperatorSeverity,
 )
 from aion_brain.contracts.policy import PolicyRequest
+from aion_brain.contracts.scopes import ActorContext
 from aion_brain.contracts.telemetry import VisualTelemetryEvent
 from aion_brain.operator.repository import OperatorRepository
 
@@ -36,9 +37,21 @@ class ActionCenterService:
         self._telemetry_service = telemetry_service
         self._sources = sources
 
-    def build_action_items(self, scope: list[str], limit: int = 100) -> list[OperatorActionItem]:
+    def build_action_items(
+        self,
+        scope: list[str],
+        limit: int = 100,
+        *,
+        actor_context: ActorContext | None = None,
+    ) -> list[OperatorActionItem]:
         """Build and persist action recommendations from read-only local state."""
-        self._authorize("operator.actions.read", scope, "operator_action_items", None)
+        self._authorize(
+            "operator.actions.read",
+            scope,
+            "operator_action_items",
+            None,
+            actor_context=actor_context,
+        )
         generated: list[OperatorActionItem] = []
         generated.extend(self._pending_approval_items(scope))
         generated.extend(self._failed_command_items())
@@ -1880,16 +1893,21 @@ class ActionCenterService:
         scope: list[str],
         resource_type: str,
         resource_id: str | None,
+        *,
+        actor_context: ActorContext | None = None,
     ) -> None:
         authorize = getattr(self._policy_adapter, "authorize", None)
         if not callable(authorize):
             return
+        context: dict[str, Any] = {"source": "operator_action_center"}
+        if actor_context is not None:
+            context["actor_context"] = actor_context.model_dump(mode="json")
         decision = authorize(
             PolicyRequest(
                 request_id=f"operator-{uuid4().hex}",
                 trace_id=None,
-                actor_id=None,
-                workspace_id=None,
+                actor_id=actor_context.actor_id if actor_context is not None else None,
+                workspace_id=actor_context.workspace_id if actor_context is not None else None,
                 action_type=action_type,
                 resource_type=resource_type,
                 resource_id=resource_id,
@@ -1897,7 +1915,7 @@ class ActionCenterService:
                 approval_present=False,
                 requested_permissions=[action_type],
                 security_scope=scope,
-                context={"source": "operator_action_center"},
+                context=context,
             )
         )
         if not decision.allow:

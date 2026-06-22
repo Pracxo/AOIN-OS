@@ -5,6 +5,9 @@ Every architecture-changing Codex task must add or update an ADR.
 AION-079 is a release handoff and documentation audit task. It adds no new
 runtime architecture decision and therefore has no dedicated ADR.
 
+AION-080 freezes the local v0.1 release baseline and records that release
+closure decision in ADR 0072.
+
 ## Index
 
 - [0001: Brain-Only Scope](0001-brain-only-scope.md) - Defines Brain core scope and exclusions.
@@ -78,3 +81,4 @@ runtime architecture decision and therefore has no dedicated ADR.
 - [0069: Golden Path Scenario Harness](0069-golden-path-scenario-harness.md) - Defines local deterministic golden path runs, fixture packs, reports, and release smoke checks.
 - [0070: First-Run Bootstrap and Setup Doctor](0070-first-run-bootstrap-setup-doctor.md) - Defines local first-run bootstrap, seed bundles, setup findings, and onboarding reports.
 - [0071: Release Candidate Gate](0071-release-candidate-gate.md) - Defines local RC readiness matrices, gate runs, findings, evidence packs, and reports.
+- [0072: v0.1 Release Freeze Baseline](0072-v0.1-release-freeze-baseline.md) - Freezes the local v0.1 release baseline and final release-closure gates.

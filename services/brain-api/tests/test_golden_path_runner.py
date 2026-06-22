@@ -78,6 +78,18 @@ def test_golden_path_runner_runs_default_scenarios_without_execution() -> None:
     assert report.release_candidate_ready is True
 
 
+def test_golden_path_runner_can_rerun_after_results_exist() -> None:
+    runner, repository = _runner()
+
+    first_run = runner.run(GoldenPathRunRequest(owner_scope=["workspace:main"]))
+    second_run = runner.run(GoldenPathRunRequest(owner_scope=["workspace:main"]))
+
+    assert first_run.status == "dry_run"
+    assert second_run.status == "dry_run"
+    assert len(repository.list_runs(limit=10)) == 2
+    assert repository.get_scenario("golden.operator.overview") is not None
+
+
 def test_golden_path_runner_blocks_when_required_service_missing() -> None:
     runner, _repository = _runner(service_dependencies={"diagnostics": None})
 

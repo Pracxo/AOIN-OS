@@ -236,12 +236,44 @@ Release handoff docs:
 
 - [Operator runbook](docs/operations/operator-runbook.md)
 - [Local demo pack](docs/operations/local-demo-pack.md)
+- [Bootstrap](docs/operations/bootstrap.md)
+- [Golden path](docs/operations/golden-path.md)
+- [Release candidate](docs/operations/release-candidate.md)
 - [Troubleshooting](docs/operations/troubleshooting.md)
 - [v0.1 release handoff](docs/operations/v0.1-release-handoff.md)
+- [Final freeze](docs/release/v0.1-final-freeze.md)
+- [Final evidence summary](docs/release/v0.1-final-evidence-summary.md)
+- [Tagging guide](docs/release/v0.1-tagging-guide.md)
+- [Release baseline](docs/release/v0.1-release-baseline.md)
+- [Operator acceptance](docs/release/v0.1-operator-acceptance.md)
+- [Known limitations](docs/release/v0.1-known-limitations.md)
 - [Release candidate checklist](docs/release/v0.1-release-candidate-checklist.md)
 - [Demo script](docs/release/v0.1-demo-script.md)
 - [No-go conditions](docs/release/v0.1-no-go-conditions.md)
 - [Post-v0.1 roadmap](docs/release/v0.1-post-release-roadmap.md)
+
+## v0.1 Final Local Release Path
+
+AION Brain v0.1.0 is a local release baseline. The final scripts aggregate
+existing gates; they do not deploy, publish, push tags, install packages, call
+external services, enable production auth, enable full autonomy, load extension
+code, activate capabilities, or add domain modules to Brain core.
+
+```bash
+./scripts/v0.1-tag-preview.sh
+./scripts/v0.1-final-verify.sh --offline-ok
+./scripts/v0.1-freeze.sh --offline-ok
+```
+
+For Docker-local validation:
+
+```bash
+docker compose up --build -d brain-api postgres redis nats opa
+curl -fsS http://localhost:8080/health
+curl -fsS http://localhost:8080/health/ready
+./scripts/demo-local.sh --offline-ok
+docker compose down
+```
 
 Local demo:
 

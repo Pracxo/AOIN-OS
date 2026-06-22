@@ -48,3 +48,15 @@ For v0.1 release handoff, run:
 ```
 
 Any RC blocker is a no-go condition.
+
+## Final Freeze Usage
+
+AION-080 wraps the RC gate into the final local verification flow:
+
+```bash
+./scripts/v0.1-final-verify.sh --offline-ok
+./scripts/v0.1-freeze.sh --offline-ok
+```
+
+The final freeze flow does not tag, push, publish, deploy, or enable disabled
+features. Tagging remains a manual local operator step after all gates pass.

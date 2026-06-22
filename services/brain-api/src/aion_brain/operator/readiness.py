@@ -6,6 +6,7 @@ from datetime import UTC, datetime
 from uuid import uuid4
 
 from aion_brain.contracts.operator import OperatorReadinessReport
+from aion_brain.contracts.scopes import ActorContext
 from aion_brain.operator.action_center import ActionCenterService
 from aion_brain.operator.status_cards import StatusCardBuilder
 
@@ -25,10 +26,15 @@ class ReadinessAggregator:
         self._action_center = action_center
         self._telemetry_service = telemetry_service
 
-    def build_report(self, scope: list[str]) -> OperatorReadinessReport:
+    def build_report(
+        self,
+        scope: list[str],
+        *,
+        actor_context: ActorContext | None = None,
+    ) -> OperatorReadinessReport:
         """Build readiness report without external calls or remediation."""
         cards = self._status_cards.build_cards(scope)
-        actions = self._action_center.build_action_items(scope)
+        actions = self._action_center.build_action_items(scope, actor_context=actor_context)
         blockers = [
             item for item in actions if item.severity == "critical" and item.status == "open"
         ]

@@ -113,6 +113,23 @@ docker compose down
 ./scripts/demo-local.sh --offline-ok
 ```
 
+## Final Release Demo Sequence
+
+```bash
+./scripts/v0.1-tag-preview.sh
+./scripts/v0.1-final-verify.sh --offline-ok --skip-docker --skip-api
+./scripts/v0.1-freeze.sh --offline-ok --skip-docker --skip-api
+```
+
+Use the full Docker-local sequence before tagging when Docker is available:
+
+```bash
+docker compose up --build -d brain-api postgres redis nats opa
+./scripts/demo-local.sh --offline-ok
+./scripts/v0.1-final-verify.sh --offline-ok
+docker compose down
+```
+
 ## Expected Outputs
 
 - `/health` returns `status=ok`.

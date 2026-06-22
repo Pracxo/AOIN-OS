@@ -1625,3 +1625,15 @@ Release-closure docs and scripts differ from Brain runtime services:
 - They do not add policy actions.
 - They do not deploy, provision, publish, or enable disabled features.
 - They do not introduce domain-specific workflows.
+
+## v0.1 Release Freeze
+
+AION-080 freezes the AION Brain v0.1.0 local release baseline. It adds release
+notes, a changelog, final freeze docs, final evidence summary, tagging guide,
+operator acceptance checklist, known limitations, release baseline docs, and
+scripts that aggregate existing gates.
+
+The freeze layer is operational closure, not runtime architecture. It does not
+add database tables, API routes, policy actions, new services, model calls,
+external connectors, extension loading, capability activation, dynamic route
+registration, hard delete, deployment, publishing, or domain module logic.

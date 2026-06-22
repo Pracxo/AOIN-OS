@@ -71,7 +71,8 @@ def operator_overview(
                     "workspace_id": body.workspace_id or actor_context.workspace_id,
                     "owner_scope": body.owner_scope or actor_context.security_scope,
                 }
-            )
+            ),
+            actor_context=actor_context,
         )
     except PermissionError as exc:
         raise AIONPolicyDeniedException(str(exc)) from exc
@@ -85,7 +86,7 @@ def operator_status_cards(
 ) -> list[OperatorStatusCard]:
     """Return local operator status cards."""
     try:
-        return service.status_cards(_scope(scope, actor_context))
+        return service.status_cards(_scope(scope, actor_context), actor_context=actor_context)
     except PermissionError as exc:
         raise AIONPolicyDeniedException(str(exc)) from exc
 
@@ -98,7 +99,7 @@ def operator_queues(
 ) -> list[OperatorQueueSummary]:
     """Return local queue summaries."""
     try:
-        return service.queues(_scope(scope, actor_context))
+        return service.queues(_scope(scope, actor_context), actor_context=actor_context)
     except PermissionError as exc:
         raise AIONPolicyDeniedException(str(exc)) from exc
 
@@ -112,7 +113,7 @@ def operator_actions(
 ) -> list[OperatorActionItem]:
     """Return local action-center recommendations."""
     try:
-        return service.actions(_scope(scope, actor_context), limit)
+        return service.actions(_scope(scope, actor_context), limit, actor_context=actor_context)
     except PermissionError as exc:
         raise AIONPolicyDeniedException(str(exc)) from exc
 
@@ -159,7 +160,7 @@ def operator_readiness(
 ) -> OperatorReadinessReport:
     """Return local operator readiness."""
     try:
-        return service.readiness(_scope(scope, actor_context))
+        return service.readiness(_scope(scope, actor_context), actor_context=actor_context)
     except PermissionError as exc:
         raise AIONPolicyDeniedException(str(exc)) from exc
 

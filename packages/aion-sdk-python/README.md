@@ -96,3 +96,18 @@ cd ../..
 Relevant SDK-backed CLI surfaces are `bootstrap`, `golden-path`, `rc`,
 `extensions`, `module-bindings`, `conformance`, `readiness`, and `operator`.
 They call public Brain APIs only and keep demo module paths metadata-only.
+
+## v0.1 Release Closure
+
+The final release scripts live at the repo root and aggregate SDK-backed CLI
+surfaces with Brain API checks:
+
+```bash
+cd ../..
+./scripts/v0.1-tag-preview.sh
+./scripts/v0.1-final-verify.sh --offline-ok --skip-docker --skip-api
+./scripts/v0.1-freeze.sh --offline-ok --skip-docker --skip-api
+```
+
+The SDK does not create tags, push artifacts, deploy, install packages, call
+external services, or bypass Brain policy for v0.1 release closure.

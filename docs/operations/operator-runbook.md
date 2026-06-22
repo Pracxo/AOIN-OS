@@ -177,3 +177,14 @@ curl -fsS http://localhost:8080/health/ready
 ./scripts/demo-local.sh --offline-ok
 docker compose down
 ```
+
+## AION-080 Final Freeze Commands
+
+```bash
+./scripts/v0.1-tag-preview.sh
+./scripts/v0.1-final-verify.sh --offline-ok
+./scripts/v0.1-freeze.sh --offline-ok
+```
+
+Do not create `aion-v0.1.0` until final verification, freeze dry-run, release
+package dry-run, final docs audit, and operator acceptance are green.

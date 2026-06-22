@@ -23,6 +23,7 @@ from sqlalchemy import (
     delete,
     insert,
     select,
+    update,
 )
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.engine import Engine, RowMapping
@@ -268,7 +269,7 @@ class GoldenPathRepository:
         stored = scenario.model_copy(
             update={"created_at": scenario.created_at or now, "updated_at": now}
         )
-        self._replace(
+        self._upsert(
             aion_golden_path_scenarios,
             "golden_path_scenario_id",
             stored.golden_path_scenario_id,
@@ -570,6 +571,22 @@ class GoldenPathRepository:
         with self._engine.begin() as connection:
             connection.execute(delete(table).where(getattr(table.c, key) == value))
             connection.execute(insert(table).values(**values))
+
+    def _upsert(
+        self,
+        table: Table,
+        key: str,
+        value: str,
+        values: dict[str, Any],
+    ) -> None:
+        self._ensure_schema()
+        key_column = getattr(table.c, key)
+        with self._engine.begin() as connection:
+            existing = connection.execute(select(key_column).where(key_column == value)).first()
+            if existing is None:
+                connection.execute(insert(table).values(**values))
+                return
+            connection.execute(update(table).where(key_column == value).values(**values))
 
     def _get(
         self,
