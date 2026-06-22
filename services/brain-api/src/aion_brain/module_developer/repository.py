@@ -22,7 +22,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.engine import Engine, RowMapping
-from sqlalchemy.pool import QueuePool
+from sqlalchemy.pool import QueuePool, StaticPool
 
 from aion_brain.contracts.capabilities import CapabilityManifest
 from aion_brain.contracts.module_developer import (
@@ -157,7 +157,7 @@ class ModuleDeveloperRepository:
         if engine is None:
             if database_url is None:
                 raise ValueError("database_url or engine is required")
-            self._engine = create_engine(database_url, poolclass=QueuePool, pool_pre_ping=True)
+            self._engine = _create_engine(database_url)
         else:
             self._engine = engine
         self._auto_create = auto_create
@@ -371,6 +371,21 @@ def _optional_datetime(value: Any) -> datetime | None:
     if isinstance(value, str):
         return datetime.fromisoformat(value)
     raise TypeError(f"expected datetime-compatible value, got {type(value)!r}")
+
+
+def _create_engine(database_url: str) -> Engine:
+    """Create a repository engine with SQLite-safe settings for local tests."""
+    if database_url.startswith("sqlite"):
+        engine_kwargs: dict[str, Any] = {"connect_args": {"check_same_thread": False}}
+        if database_url in {
+            "sqlite://",
+            "sqlite:///:memory:",
+            "sqlite+pysqlite://",
+            "sqlite+pysqlite:///:memory:",
+        } or ":memory:" in database_url:
+            engine_kwargs["poolclass"] = StaticPool
+        return create_engine(database_url, **engine_kwargs)
+    return create_engine(database_url, poolclass=QueuePool, pool_pre_ping=True)
 
 
 __all__ = [

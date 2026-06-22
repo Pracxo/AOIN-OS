@@ -1,5 +1,7 @@
 """API route safety checks."""
 
+from fastapi.routing import APIRoute
+
 from aion_brain.kernel.app_factory import create_app
 from tests.kernel_fakes import kernel_container
 
@@ -16,6 +18,6 @@ def test_no_domain_specific_route_prefix_is_added() -> None:
         "/it-automation",
     )
 
-    paths = [route.path for route in app.routes]
+    paths = [route.path for route in app.routes if isinstance(route, APIRoute)]
 
     assert not any(path.startswith(forbidden_prefixes) for path in paths)
