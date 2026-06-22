@@ -62,6 +62,14 @@ from aion_brain.contracts.beliefs import (
     TruthMaintenanceRequest,
     TruthMaintenanceRun,
 )
+from aion_brain.contracts.bootstrap import (
+    BootstrapProfile,
+    BootstrapRun,
+    BootstrapRunRequest,
+    SeedBundle,
+    SeedExecutionRecord,
+    SeedExecutionRequest,
+)
 from aion_brain.contracts.capabilities import CapabilityManifest
 from aion_brain.contracts.capability_awareness import CapabilityAwarenessRecord
 from aion_brain.contracts.commands import (
@@ -422,6 +430,12 @@ from aion_brain.contracts.self_model import (
     SelfDescriptionRequest,
     SelfModelProfile,
 )
+from aion_brain.contracts.setup_doctor import (
+    SetupDoctorRequest,
+    SetupDoctorResult,
+    SetupFinding,
+    SetupReport,
+)
 from aion_brain.contracts.skills import (
     SkillActivationEvent,
     SkillActivationRequest,
@@ -533,6 +547,9 @@ __all__ = [
     "BrainVisualEdge",
     "BrainVisualNode",
     "BrainSnapshot",
+    "BootstrapProfile",
+    "BootstrapRun",
+    "BootstrapRunRequest",
     "CapabilityAwarenessRecord",
     "CapabilityManifest",
     "CapabilityBindingRequest",
@@ -824,6 +841,9 @@ __all__ = [
     "ScenarioRunRequest",
     "ScenarioStep",
     "ScenarioStepRun",
+    "SeedBundle",
+    "SeedExecutionRecord",
+    "SeedExecutionRequest",
     "SetRunLevelRequest",
     "ScopeResolution",
     "ScopeResolutionRequest",
@@ -832,6 +852,10 @@ __all__ = [
     "SelfDescription",
     "SelfDescriptionRequest",
     "SelfModelProfile",
+    "SetupDoctorRequest",
+    "SetupDoctorResult",
+    "SetupFinding",
+    "SetupReport",
     "SkillActivationEvent",
     "SkillActivationRequest",
     "SkillCandidate",

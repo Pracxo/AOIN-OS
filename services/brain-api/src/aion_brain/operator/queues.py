@@ -123,6 +123,18 @@ _QUEUE_SPECS: tuple[tuple[OperatorQueueType, str, str, tuple[str, ...]], ...] = 
         "golden_path_repository",
         ("list_reports",),
     ),
+    (
+        "bootstrap_runs",
+        "Bootstrap Runs",
+        "bootstrap_repository",
+        ("list_runs",),
+    ),
+    (
+        "setup_findings",
+        "Setup Findings",
+        "bootstrap_repository",
+        ("list_findings",),
+    ),
     ("generic", "Dialogue Clarifications", "dialogue_service", ("list_pending",)),
     (
         "generic",
@@ -358,6 +370,7 @@ _OPEN_AS_PENDING_QUEUE_TYPES: set[OperatorQueueType] = {
     "drift_findings",
     "incidents",
     "conformance_findings",
+    "setup_findings",
     "lifecycle_reviews",
     "migration_notes",
     "orphaned_resources",

@@ -131,6 +131,21 @@ AION core policy vocabulary stays generic:
 - `contract_registry.finding.dismiss`
 - `contract_registry.migration_note.read`
 - `contract_registry.report.read`
+- `bootstrap.profile.create`
+- `bootstrap.profile.read`
+- `bootstrap.profile.update`
+- `bootstrap.seed_bundle.create`
+- `bootstrap.seed_bundle.read`
+- `bootstrap.seed_bundle.update`
+- `bootstrap.seed.execute`
+- `bootstrap.doctor.run`
+- `bootstrap.finding.read`
+- `bootstrap.finding.update`
+- `bootstrap.run`
+- `bootstrap.run.read`
+- `bootstrap.report.create`
+- `bootstrap.report.read`
+- `bootstrap.query`
 
 Semantic adapter status reads and TurboVec status checks use the generic
 `memory.retrieve` action. Semantic indexing, TurboVec rebuild, and TurboVec
@@ -152,6 +167,18 @@ informational.
 Policy must fail closed. The registry must not self-authorize, generate source,
 execute migration steps, repair SDK or CLI methods, call external services, or
 add domain-specific compatibility rules.
+
+## Bootstrap Policy
+
+Bootstrap actions are generic local-readiness actions. Reads are low risk.
+Profile, seed-bundle, seed-execution, doctor, report, and run writes are medium
+risk because they create local metadata records. Bootstrap policy requires
+local scope, denies unsafe context flags, and fails closed.
+
+Bootstrap policy must deny external calls, package installation, production
+secret creation, production authentication, full-autonomy enablement, code
+loading, tool or shell execution, hard delete, and source mutation. Controlled
+seed execution is blocked unless explicitly enabled for safe local defaults.
 
 ## Fail Closed
 

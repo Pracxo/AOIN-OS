@@ -197,6 +197,24 @@ operator queues, release-package summaries, and freeze-gate checks. It never
 mutates source records, generates code, repairs interfaces, executes migration
 steps, or calls external systems. Source code remains the source of truth.
 
+## First-Run Bootstrap and Setup Doctor
+
+The First-Run Bootstrap layer prepares local Brain readiness only. It owns
+bootstrap profiles, seed bundles, seed execution records, setup findings,
+bootstrap runs, and setup reports. It uses existing services to seed local
+default metadata idempotently and remains dry-run by default.
+
+The Setup Doctor inspects local configuration, service assembly, policy
+availability, SDK/CLI availability, scripts, golden path readiness, release
+smoke readiness, and unsafe feature flags. It creates setup findings and setup
+reports but does not install packages, create credentials, call external
+services, execute tools, mutate source code, or provision production resources.
+
+Bootstrap integrates with Operator Control Tower, Visual Brain telemetry,
+audit/provenance, release-package summaries, and optional freeze-gate checks.
+Freeze gates only require bootstrap readiness when the request metadata
+explicitly asks for it.
+
 ## Module Bus and Runtime Gateway
 
 The Module Bus adds the controlled runtime boundary that sits after the

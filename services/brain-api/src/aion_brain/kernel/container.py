@@ -45,6 +45,16 @@ from aion_brain.beliefs.repository import BeliefRepository
 from aion_brain.beliefs.service import BeliefService
 from aion_brain.beliefs.supports import BeliefSupportService
 from aion_brain.beliefs.truth_maintenance import TruthMaintenanceService
+from aion_brain.bootstrap import (
+    BootstrapProfileService,
+    BootstrapQueryService,
+    BootstrapRepository,
+    BootstrapRunner,
+    SeedBundleService,
+    SeedExecutor,
+    SetupDoctor,
+    SetupReportService,
+)
 from aion_brain.capabilities.mcp_adapter import MCPAdapter
 from aion_brain.capabilities.registry import CapabilityRegistry
 from aion_brain.capabilities.service import CapabilityService
@@ -2794,6 +2804,52 @@ class KernelContainer:
             self.golden_path_repository,
             self.policy_adapter,
         )
+        self.bootstrap_repository = BootstrapRepository(self.settings.database_url)
+        self.bootstrap_profile_service = BootstrapProfileService(
+            self.bootstrap_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.seed_bundle_service = SeedBundleService(
+            self.bootstrap_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.seed_executor = SeedExecutor(
+            self.bootstrap_repository,
+            self.seed_bundle_service,
+            self.policy_adapter,
+            service_dependencies={
+                "kernel": self.diagnostics,
+                "policy": self.policy_catalog_service,
+                "operator": getattr(self, "operator_readiness_aggregator", self.policy_adapter),
+                "notifications": self.notification_topic_service,
+                "registry": self.resource_registry_service,
+                "contract_registry": self.contract_registry_report_service,
+                "lifecycle": getattr(self, "lifecycle_report_service", self.policy_adapter),
+                "extensions": getattr(
+                    self, "extension_query_service", self.extension_registry_repository
+                ),
+                "conformance": self.conformance_query_service,
+                "golden_path_scenarios": self.golden_path_scenario_catalog,
+                "golden_path_fixtures": self.golden_path_fixture_service,
+                "self_model": self.self_model_profile_service,
+                "limitations": self.limitation_ledger_service,
+            },
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            settings=self.settings,
+        )
+        self.setup_report_service = SetupReportService(
+            self.bootstrap_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.bootstrap_query_service = BootstrapQueryService(
+            self.bootstrap_repository,
+            self.policy_adapter,
+        )
         self.extension_intake_service = ExtensionIntakeService(
             self.extension_registry_repository,
             self.policy_adapter,
@@ -2819,6 +2875,7 @@ class KernelContainer:
             self.extension_registry_repository,
             self.policy_adapter,
         )
+        self.seed_executor.set_service_dependency("extensions", self.extension_query_service)
         set_contract_registry_services = getattr(
             self.release_packager,
             "set_contract_registry_services",
@@ -2950,6 +3007,7 @@ class KernelContainer:
             telemetry_service=self.telemetry_service,
         )
         self.lifecycle_query_service = LifecycleQueryService(self.lifecycle_repository)
+        self.seed_executor.set_service_dependency("lifecycle", self.lifecycle_report_service)
         self.lifecycle_evaluator = LifecycleEvaluator(
             self.lifecycle_repository,
             self.policy_adapter,
@@ -3006,6 +3064,7 @@ class KernelContainer:
             module_binding_service=self.module_binding_repository,
             conformance_service=self.conformance_repository,
             golden_path_service=self.golden_path_repository,
+            bootstrap_service=self.bootstrap_repository,
             lifecycle_service=self.lifecycle_report_service,
         )
         self.operator_queue_summary_builder = QueueSummaryBuilder(
@@ -3070,6 +3129,7 @@ class KernelContainer:
             module_binding_repository=self.module_binding_repository,
             conformance_repository=self.conformance_repository,
             golden_path_repository=self.golden_path_repository,
+            bootstrap_repository=self.bootstrap_repository,
             archive_planner=self.archive_planner,
             redaction_planner=self.redaction_planner,
             purge_preview_service=self.purge_preview_service,
@@ -3125,6 +3185,7 @@ class KernelContainer:
             module_binding_repository=self.module_binding_repository,
             conformance_repository=self.conformance_repository,
             golden_path_repository=self.golden_path_repository,
+            bootstrap_repository=self.bootstrap_repository,
             archive_planner=self.archive_planner,
             redaction_planner=self.redaction_planner,
             purge_preview_service=self.purge_preview_service,
@@ -3210,6 +3271,36 @@ class KernelContainer:
             telemetry_service=self.telemetry_service,
             settings=self.settings,
         )
+        self.setup_doctor = SetupDoctor(
+            self.bootstrap_repository,
+            self.policy_adapter,
+            diagnostics=self.diagnostics,
+            golden_path_repository=self.golden_path_repository,
+            release_smoke=self.golden_path_release_smoke,
+            operator_service=self.operator_control_tower_service,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+            root_dir=root_dir,
+        )
+        self.bootstrap_runner = BootstrapRunner(
+            self.bootstrap_repository,
+            self.bootstrap_profile_service,
+            self.seed_bundle_service,
+            self.seed_executor,
+            self.setup_doctor,
+            self.setup_report_service,
+            self.policy_adapter,
+            golden_path_runner=self.golden_path_runner,
+            release_smoke=self.golden_path_release_smoke,
+            autonomy_governor=self.autonomy_governor,
+            notification_router=self.notification_router,
+            operator_repository=self.operator_repository,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            settings=self.settings,
+        )
+        self.seed_executor.set_service_dependency("operator", self.operator_control_tower_service)
         set_freeze_golden_path_repository = getattr(
             self.freeze_gate_service,
             "set_golden_path_repository",
@@ -3224,9 +3315,26 @@ class KernelContainer:
         )
         if callable(set_release_golden_path_repository):
             set_release_golden_path_repository(self.golden_path_repository)
+        set_freeze_bootstrap_repository = getattr(
+            self.freeze_gate_service,
+            "set_bootstrap_repository",
+            None,
+        )
+        if callable(set_freeze_bootstrap_repository):
+            set_freeze_bootstrap_repository(self.bootstrap_repository)
+        set_release_bootstrap_repository = getattr(
+            self.release_packager,
+            "set_bootstrap_repository",
+            None,
+        )
+        if callable(set_release_bootstrap_repository):
+            set_release_bootstrap_repository(self.bootstrap_repository)
         set_golden_resource_provider = getattr(self.resource_scanner, "set_provider", None)
         if callable(set_golden_resource_provider):
             set_golden_resource_provider("golden_path", self.golden_path_repository)
+        set_bootstrap_resource_provider = getattr(self.resource_scanner, "set_provider", None)
+        if callable(set_bootstrap_resource_provider):
+            set_bootstrap_resource_provider("bootstrap", self.bootstrap_repository)
         set_operator_readiness = getattr(
             self.release_baseline_service,
             "set_operator_readiness_service",
@@ -4336,6 +4444,19 @@ class KernelContainer:
                 "service",
                 "deterministic",
             ),
+            ("bootstrap_repository", self.bootstrap_repository, "repository", "postgres"),
+            (
+                "bootstrap_profile_service",
+                self.bootstrap_profile_service,
+                "service",
+                "local",
+            ),
+            ("seed_bundle_service", self.seed_bundle_service, "service", "local"),
+            ("seed_executor", self.seed_executor, "service", "deterministic"),
+            ("setup_doctor", self.setup_doctor, "service", "deterministic"),
+            ("setup_report_service", self.setup_report_service, "service", "local"),
+            ("bootstrap_runner", self.bootstrap_runner, "service", "deterministic"),
+            ("bootstrap_query_service", self.bootstrap_query_service, "service", "local"),
             ("lifecycle_repository", self.lifecycle_repository, "repository", "postgres"),
             ("lifecycle_policy_service", self.lifecycle_policy_service, "service", "local"),
             ("retention_classifier", self.retention_classifier, "service", "deterministic"),

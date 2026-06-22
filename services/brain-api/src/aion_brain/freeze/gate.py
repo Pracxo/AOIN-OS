@@ -39,6 +39,7 @@ CRITICAL_FAILURE_CHECKS = {
     "module_binding_registry_safe",
     "conformance_readiness_gate_safe",
     "golden_path_passed",
+    "bootstrap_local_ready",
     "resilience_status_healthy_or_only_optional_degraded",
     "audit_integrity_status_available",
     "audit_verification_passed_or_not_required",
@@ -122,6 +123,7 @@ class FreezeGateService:
         self._module_binding_repository: object | None = None
         self._conformance_repository: object | None = None
         self._golden_path_repository: object | None = None
+        self._bootstrap_repository: object | None = None
         self._audit_sink = audit_sink
         self._telemetry_service = telemetry_service
         self._root_dir = root_dir or Path(__file__).parents[5]
@@ -151,6 +153,11 @@ class FreezeGateService:
         """Attach golden path readiness gate after kernel assembly."""
 
         self._golden_path_repository = repository
+
+    def set_bootstrap_repository(self, repository: object | None) -> None:
+        """Attach bootstrap readiness gate after kernel assembly."""
+
+        self._bootstrap_repository = repository
 
     def run(self, request: FreezeGateRunRequest, *, app: object | None = None) -> FreezeGateRun:
         """Run the local freeze gate and persist the result."""
@@ -257,6 +264,15 @@ class FreezeGateService:
                     "golden_path_passed",
                     "golden_path",
                     self._check_golden_path_passed,
+                    severity="critical",
+                )
+            )
+        if bool(request.metadata.get("require_bootstrap_ready")):
+            checks.append(
+                self._run_check(
+                    "bootstrap_local_ready",
+                    "bootstrap",
+                    self._check_bootstrap_local_ready,
                     severity="critical",
                 )
             )
@@ -801,6 +817,34 @@ class FreezeGateService:
                 "status": getattr(report, "status", None),
                 "readiness_score": getattr(report, "readiness_score", 0.0),
                 "release_candidate_ready": ready,
+            },
+        }
+
+    def _check_bootstrap_local_ready(self) -> dict[str, Any]:
+        latest_report = getattr(self._bootstrap_repository, "latest_report", None)
+        report = latest_report() if callable(latest_report) else None
+        if report is None:
+            return {
+                "status": "warning",
+                "message": "No setup report is available.",
+                "details": {"available": self._bootstrap_repository is not None},
+            }
+        ready = bool(getattr(report, "local_ready", False))
+        return {
+            "status": "passed" if ready else "failed",
+            "message": (
+                "Latest setup report is local-ready."
+                if ready
+                else "Latest setup report is not local-ready."
+            ),
+            "details": {
+                "setup_report_id": getattr(report, "setup_report_id", None),
+                "setup_doctor_result_id": getattr(report, "setup_doctor_result_id", None),
+                "status": getattr(report, "status", None),
+                "readiness_score": getattr(report, "readiness_score", 0.0),
+                "critical_count": getattr(report, "critical_count", 0),
+                "warning_count": getattr(report, "warning_count", 0),
+                "local_ready": ready,
             },
         }
 

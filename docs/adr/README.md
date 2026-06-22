@@ -73,3 +73,4 @@ Every architecture-changing Codex task must add or update an ADR.
 - [0067: Capability Binding Registry and Module Slot Manager](0067-capability-binding-module-slot-manager.md) - Defines inactive module slots, capability bindings, validation, mount plans, and route previews.
 - [0068: Capability Conformance Harness and Readiness Gate](0068-capability-conformance-readiness-gate.md) - Defines schema-only conformance runs, mock invocation records, findings, and readiness assessments.
 - [0069: Golden Path Scenario Harness](0069-golden-path-scenario-harness.md) - Defines local deterministic golden path runs, fixture packs, reports, and release smoke checks.
+- [0070: First-Run Bootstrap and Setup Doctor](0070-first-run-bootstrap-setup-doctor.md) - Defines local first-run bootstrap, seed bundles, setup findings, and onboarding reports.

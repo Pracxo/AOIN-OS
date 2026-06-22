@@ -197,6 +197,28 @@ The SDK calls public release package APIs only. It does not read local files,
 compute checksums, upload artifacts, call registries, or import Brain API
 internals.
 
+## Bootstrap Resource
+
+`client.bootstrap` supports:
+
+- `seed_profiles(scope, dry_run=True)`
+- `list_profiles(scope, status=None, profile_type=None, limit=100)`
+- `seed_bundles(scope, dry_run=True)`
+- `list_seed_bundles(scope, status=None, bundle_type=None, limit=100)`
+- `seed(payload)`
+- `doctor(payload)`
+- `run(payload)`
+- `list_runs(scope, status=None, profile_key=None, limit=50)`
+- `get_run(bootstrap_run_id, scope)`
+- `list_findings(scope, status=None, severity=None, category=None, limit=100)`
+- `dismiss_finding(setup_finding_id, scope, reason="dismissed")`
+- `list_reports(scope, status=None, limit=50)`
+- `get_report(setup_report_id, scope)`
+
+The SDK calls public Brain APIs only. Bootstrap helpers do not install
+packages, create credentials, mutate source code, call external systems, enable
+full autonomy, or access server internals.
+
 ## Dialogue and Responses Resources
 
 `client.dialogue` supports:

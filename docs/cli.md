@@ -25,6 +25,16 @@ through the SDK.
 ./scripts/aionctl.sh kernel contracts
 ./scripts/aionctl.sh kernel boundary-check
 ./scripts/aionctl.sh bootstrap dev
+./scripts/aionctl.sh bootstrap profiles
+./scripts/aionctl.sh bootstrap profiles seed
+./scripts/aionctl.sh bootstrap seed-bundles
+./scripts/aionctl.sh bootstrap seed-bundles seed
+./scripts/aionctl.sh bootstrap seed --seed-bundle-key core.defaults
+./scripts/aionctl.sh bootstrap doctor
+./scripts/aionctl.sh bootstrap run
+./scripts/aionctl.sh bootstrap runs
+./scripts/aionctl.sh bootstrap findings
+./scripts/aionctl.sh bootstrap reports
 ./scripts/aionctl.sh events send --event-json '{...}'
 ./scripts/aionctl.sh memory retrieve "remember this"
 ./scripts/aionctl.sh commands dispatch --command-type noop
@@ -45,6 +55,13 @@ through the SDK.
 dry kernel self-test, and can plan or apply a bounded dry-run autonomy level.
 It does not enable full autonomy, external models, external tools, workers, or
 schedulers.
+
+`bootstrap profiles`, `bootstrap seed-bundles`, `bootstrap seed`,
+`bootstrap doctor`, `bootstrap run`, `bootstrap runs`, `bootstrap findings`,
+and `bootstrap reports` call `client.bootstrap`. These commands are local-only
+and dry-run by default. They do not install dependencies, create production
+credentials, call external providers, execute tools, mutate source code, or
+provision cloud resources.
 
 ## Smoke Run
 

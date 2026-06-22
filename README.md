@@ -194,12 +194,36 @@ MCP never defines AION permissions or self-authorizes execution.
 ./scripts/sdk-test.sh
 ```
 
+First-run local bootstrap and setup inspection:
+
+```bash
+./scripts/setup-doctor.sh --fast
+./scripts/seed-defaults.sh
+./scripts/bootstrap-local.sh --fast
+```
+
+Bootstrap is local developer readiness only. It seeds AION-owned default
+records through public services, runs dry-run readiness checks, creates setup
+reports, and surfaces operator action items for missing setup. It does not
+install packages, create production credentials, enable external providers,
+mutate source code, execute tools, or provision cloud resources.
+
 Brain API health check:
 
 ```bash
 curl http://localhost:8080/health
 curl http://localhost:8080/health/live
 curl http://localhost:8080/health/ready
+```
+
+Bootstrap endpoints:
+
+```bash
+curl -X POST http://localhost:8080/brain/bootstrap/doctor
+curl -X POST http://localhost:8080/brain/bootstrap/run
+curl http://localhost:8080/brain/bootstrap/runs
+curl http://localhost:8080/brain/bootstrap/findings
+curl http://localhost:8080/brain/bootstrap/reports
 ```
 
 Expected `/health` response:

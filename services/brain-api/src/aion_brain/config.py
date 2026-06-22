@@ -466,6 +466,62 @@ class Settings(BaseSettings):
             "golden_path_release_ready_threshold",
         ),
     )
+    bootstrap_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_BOOTSTRAP_ENABLED", "bootstrap_enabled"),
+    )
+    setup_doctor_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_SETUP_DOCTOR_ENABLED", "setup_doctor_enabled"),
+    )
+    seed_bundles_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_SEED_BUNDLES_ENABLED", "seed_bundles_enabled"),
+    )
+    bootstrap_controlled_mode_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_BOOTSTRAP_CONTROLLED_MODE_ENABLED",
+            "bootstrap_controlled_mode_enabled",
+        ),
+    )
+    bootstrap_create_notifications_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_BOOTSTRAP_CREATE_NOTIFICATIONS_DEFAULT",
+            "bootstrap_create_notifications_default",
+        ),
+    )
+    bootstrap_create_operator_items_default: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_BOOTSTRAP_CREATE_OPERATOR_ITEMS_DEFAULT",
+            "bootstrap_create_operator_items_default",
+        ),
+    )
+    bootstrap_local_profile_default: str = Field(
+        default="local.dev",
+        validation_alias=AliasChoices(
+            "AION_BOOTSTRAP_LOCAL_PROFILE_DEFAULT",
+            "bootstrap_local_profile_default",
+        ),
+    )
+    bootstrap_readiness_threshold: float = Field(
+        default=0.9,
+        ge=0.0,
+        le=1.0,
+        validation_alias=AliasChoices(
+            "AION_BOOTSTRAP_READINESS_THRESHOLD",
+            "bootstrap_readiness_threshold",
+        ),
+    )
+    bootstrap_enable_external_features: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_BOOTSTRAP_ENABLE_EXTERNAL_FEATURES",
+            "bootstrap_enable_external_features",
+        ),
+    )
     lifecycle_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices("AION_LIFECYCLE_ENABLED", "lifecycle_enabled"),

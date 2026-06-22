@@ -76,6 +76,7 @@ class AIONClient:
         self.module_bindings = _import_resource("module_bindings").ModuleBindingsResource(self)
         self.conformance = _import_resource("conformance").ConformanceResource(self)
         self.golden_path = _import_resource("golden_path").GoldenPathResource(self)
+        self.bootstrap = _import_resource("bootstrap").BootstrapResource(self)
         self.runtime_config = cast(
             "ConfigResource",
             _import_resource("config").ConfigResource(self),

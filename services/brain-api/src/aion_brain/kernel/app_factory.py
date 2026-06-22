@@ -9,6 +9,7 @@ from aion_brain.api.audit_integrity import router as audit_integrity_router
 from aion_brain.api.autonomy import router as autonomy_router
 from aion_brain.api.backups import router as backups_router
 from aion_brain.api.beliefs import router as beliefs_router
+from aion_brain.api.bootstrap import router as bootstrap_router
 from aion_brain.api.brain import router as brain_router
 from aion_brain.api.capabilities import router as capabilities_router
 from aion_brain.api.commands import router as commands_router
@@ -142,6 +143,7 @@ ROUTERS = (
     module_bindings_router,
     conformance_router,
     golden_path_router,
+    bootstrap_router,
     resource_registry_router,
     lifecycle_router,
     prompts_router,

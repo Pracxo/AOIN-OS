@@ -96,6 +96,7 @@ class ActionCenterService:
         generated.extend(self._blocked_readiness_assessment_items(scope))
         generated.extend(self._failed_golden_path_run_items(scope))
         generated.extend(self._critical_golden_path_report_items(scope))
+        generated.extend(self._critical_setup_finding_items(scope))
         stored: list[OperatorActionItem] = []
         for item in generated[:limit]:
             saved = self._repository.save_action_item(item)
@@ -652,6 +653,37 @@ class ActionCenterService:
                 )
             )
         return items
+
+    def _critical_setup_finding_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("bootstrap_repository")
+        list_findings = getattr(source, "list_findings", None)
+        if not callable(list_findings):
+            return []
+        try:
+            findings = list_findings(status="open", severity="critical", limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="setup_finding",
+                source_id=_id_for(finding, "setup_finding_id"),
+                trace_id=getattr(finding, "trace_id", None),
+                category="bootstrap",
+                severity="critical",
+                title="Critical setup finding requires review.",
+                description="The local first-run setup doctor reported a critical blocker.",
+                recommended_action="run_setup_doctor",
+                runbook_ref="docs/operations/bootstrap.md",
+                scope=_scope_for(finding, scope, "owner_scope"),
+                metadata={
+                    "finding_type": getattr(finding, "finding_type", None),
+                    "category": getattr(finding, "category", None),
+                    "check_key": getattr(finding, "check_key", None),
+                    "status": getattr(finding, "status", None),
+                },
+            )
+            for finding in findings
+        ]
 
     def _failed_explanation_items(self, scope: list[str]) -> list[OperatorActionItem]:
         source = self._sources.get("explanation_service") or self._sources.get(

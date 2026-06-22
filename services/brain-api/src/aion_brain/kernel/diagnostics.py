@@ -102,6 +102,14 @@ class KernelDiagnostics:
         ("golden_path_fixture_service_present", "golden_path_fixture_service", "medium"),
         ("golden_path_runner_present", "golden_path_runner", "high"),
         ("golden_path_release_smoke_present", "golden_path_release_smoke", "medium"),
+        ("bootstrap_repository_present", "bootstrap_repository", "high"),
+        ("bootstrap_profile_service_present", "bootstrap_profile_service", "medium"),
+        ("seed_bundle_service_present", "seed_bundle_service", "medium"),
+        ("seed_executor_present", "seed_executor", "high"),
+        ("setup_doctor_present", "setup_doctor", "high"),
+        ("setup_report_service_present", "setup_report_service", "medium"),
+        ("bootstrap_runner_present", "bootstrap_runner", "high"),
+        ("bootstrap_query_service_present", "bootstrap_query_service", "medium"),
         ("lifecycle_repository_present", "lifecycle_repository", "high"),
         ("lifecycle_policy_service_present", "lifecycle_policy_service", "high"),
         ("retention_classifier_present", "retention_classifier", "high"),
@@ -364,6 +372,7 @@ class KernelDiagnostics:
         checks.extend(self._policy_catalog_checks(settings))
         checks.extend(self._scenario_checks(settings))
         checks.extend(self._golden_path_checks(settings))
+        checks.extend(self._bootstrap_checks(settings))
         checks.extend(self._versioning_checks(settings))
         checks.extend(self._backup_checks(settings))
         checks.extend(self._performance_checks(settings))
@@ -2218,6 +2227,69 @@ class KernelDiagnostics:
                 else "warning",
                 "medium",
                 "Golden path release smoke matrix is enabled.",
+            ),
+        ]
+
+    def _bootstrap_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "bootstrap_repository",
+                "bootstrap_profile_service",
+                "seed_bundle_service",
+                "seed_executor",
+                "setup_doctor",
+                "setup_report_service",
+                "bootstrap_runner",
+                "bootstrap_query_service",
+            )
+        )
+        return [
+            self._result(
+                "bootstrap_enabled",
+                "bootstrap",
+                "passed" if bool(getattr(settings, "bootstrap_enabled", True)) else "warning",
+                "medium",
+                "First-run bootstrap is enabled.",
+            ),
+            self._result(
+                "setup_doctor_enabled",
+                "bootstrap",
+                "passed" if bool(getattr(settings, "setup_doctor_enabled", True)) else "warning",
+                "medium",
+                "Local setup doctor is enabled.",
+            ),
+            self._result(
+                "seed_bundles_enabled",
+                "bootstrap",
+                "passed" if bool(getattr(settings, "seed_bundles_enabled", True)) else "warning",
+                "medium",
+                "Local seed bundle manager is enabled.",
+            ),
+            self._result(
+                "bootstrap_controlled_mode_disabled_by_default",
+                "bootstrap",
+                "passed"
+                if not bool(getattr(settings, "bootstrap_controlled_mode_enabled", False))
+                else "warning",
+                "high",
+                "Bootstrap controlled mode is disabled by default.",
+            ),
+            self._result(
+                "bootstrap_external_features_disabled",
+                "bootstrap",
+                "passed"
+                if not bool(getattr(settings, "bootstrap_enable_external_features", False))
+                else "failed",
+                "critical",
+                "Bootstrap external features are disabled.",
+            ),
+            self._result(
+                "bootstrap_services_present",
+                "bootstrap",
+                "passed" if services_present else "failed",
+                "high",
+                "Bootstrap services are assembled.",
             ),
         ]
 

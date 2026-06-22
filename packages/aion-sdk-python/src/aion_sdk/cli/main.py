@@ -15,6 +15,7 @@ from aion_sdk.cli.commands.action_proposals import install_action_proposal_comma
 from aion_sdk.cli.commands.audit import install_audit_commands
 from aion_sdk.cli.commands.backups import install_backup_commands
 from aion_sdk.cli.commands.beliefs import install_belief_commands
+from aion_sdk.cli.commands.bootstrap import install_bootstrap_commands
 from aion_sdk.cli.commands.concepts import install_concept_commands
 from aion_sdk.cli.commands.config import install_config_commands
 from aion_sdk.cli.commands.conformance import install_conformance_commands
@@ -584,6 +585,7 @@ install_extension_commands(app, get_client=_client, get_scope=_scope, render=_re
 install_module_binding_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_conformance_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_golden_path_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_bootstrap_commands(bootstrap_app, get_client=_client, get_scope=_scope, render=_render)
 
 
 if __name__ == "__main__":

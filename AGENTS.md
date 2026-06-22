@@ -45,6 +45,12 @@ Instructions for future Codex runs in this repository:
   dynamic routes, or call external services.
 - Readiness assessments may block future activation, but must not activate
   anything in v0.1.
+- Bootstrap work must remain local first-run readiness only.
+- Bootstrap and setup doctor code must never install packages, create
+  production credentials, provision cloud resources, call external services,
+  enable external providers, enable full autonomy, load code, execute tools,
+  hard-delete records, mutate source code, or add domain-specific setup logic.
+- Setup findings are operator-visible records, not automatic remediation.
 - Before completing any task, run the narrow tests for the changed area.
 - For architecture tasks, run boundary check and no-domain-drift.
 - For API tasks, run OpenAPI hygiene.

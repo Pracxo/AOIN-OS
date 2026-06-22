@@ -63,6 +63,7 @@ class ReleasePackager:
         module_binding_repository: object | None = None,
         conformance_repository: object | None = None,
         golden_path_repository: object | None = None,
+        bootstrap_repository: object | None = None,
         telemetry_service: object | None = None,
         root_dir: Path | None = None,
         settings: Settings | None = None,
@@ -95,6 +96,7 @@ class ReleasePackager:
         self._module_binding_repository = module_binding_repository
         self._conformance_repository = conformance_repository
         self._golden_path_repository = golden_path_repository
+        self._bootstrap_repository = bootstrap_repository
         self._telemetry_service = telemetry_service
         self._audit_sink = audit_sink
 
@@ -135,6 +137,11 @@ class ReleasePackager:
         """Attach golden path summaries after kernel assembly."""
 
         self._golden_path_repository = repository
+
+    def set_bootstrap_repository(self, repository: object | None = None) -> None:
+        """Attach bootstrap setup summaries after kernel assembly."""
+
+        self._bootstrap_repository = repository
 
     def package(
         self,
@@ -305,6 +312,7 @@ class ReleasePackager:
             reports["module_binding_registry"] = self._module_binding_summary(request.owner_scope)
             reports["capability_conformance"] = self._conformance_summary(request.owner_scope)
             reports["golden_path"] = self._golden_path_summary(request.owner_scope)
+            reports["bootstrap"] = self._bootstrap_summary(request.owner_scope)
         if request.include_policy_bundle:
             reports["policy_bundle"] = self._policy_bundle_report()
         if request.include_migration_baseline:
@@ -503,6 +511,27 @@ class ReleasePackager:
             ),
             "external_calls_allowed": False,
             "execution_allowed": False,
+            "source_code_is_source_of_truth": True,
+        }
+
+    def _bootstrap_summary(self, scope: builtins.list[str]) -> dict[str, Any]:
+        status = _try_call(self._bootstrap_repository, "status", scope)
+        latest_run = _try_call(self._bootstrap_repository, "latest_run")
+        latest_report = _try_call(self._bootstrap_repository, "latest_report")
+        return {
+            "available": self._bootstrap_repository is not None,
+            "status": (
+                _jsonable(status).get("status", "warning")
+                if isinstance(_jsonable(status), dict)
+                else "warning"
+            ),
+            "latest_run_id": getattr(latest_run, "bootstrap_run_id", None),
+            "latest_run_status": getattr(latest_run, "status", None),
+            "latest_report_id": getattr(latest_report, "setup_report_id", None),
+            "readiness_score": getattr(latest_report, "readiness_score", 0.0),
+            "local_ready": bool(getattr(latest_report, "local_ready", False)),
+            "external_calls_allowed": False,
+            "package_install_allowed": False,
             "source_code_is_source_of_truth": True,
         }
 

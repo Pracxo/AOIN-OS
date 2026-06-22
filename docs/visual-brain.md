@@ -98,6 +98,21 @@ Projection payloads must remain redacted and generic. They must not include raw
 prompts, hidden reasoning, raw headers, provider payloads, secrets, generated
 source, or domain-specific interface logic.
 
+## Bootstrap Projection
+
+First-run bootstrap emits frontend-agnostic visual telemetry for bootstrap
+profiles, seed bundles, seed executions, setup doctor runs, setup findings,
+bootstrap runs, and setup reports. The projection uses node types such as
+`bootstrap`, `bootstrap_profile`, `seed_bundle`, `seed_execution`,
+`setup_doctor`, `setup_finding`, and `setup_report`.
+
+Critical setup findings should appear as blocked or failed readiness pulses.
+Dry-run seed executions should appear as local metadata activity, not as
+external provisioning. Bootstrap projection payloads must remain redacted and
+must not include raw secrets, raw headers, production credentials, external
+provider payloads, package installation records, source mutation details, or
+domain-specific setup logic.
+
 ## AION Brain Map
 
 The AION Brain Map is a backend projection of cognitive telemetry. It is

@@ -449,6 +449,21 @@ allowed_actions := {
 	"golden_path.report.read",
 	"golden_path.release_smoke.run",
 	"golden_path.query",
+	"bootstrap.profile.create",
+	"bootstrap.profile.read",
+	"bootstrap.profile.update",
+	"bootstrap.seed_bundle.create",
+	"bootstrap.seed_bundle.read",
+	"bootstrap.seed_bundle.update",
+	"bootstrap.seed.execute",
+	"bootstrap.doctor.run",
+	"bootstrap.finding.read",
+	"bootstrap.finding.update",
+	"bootstrap.run",
+	"bootstrap.run.read",
+	"bootstrap.report.create",
+	"bootstrap.report.read",
+	"bootstrap.query",
 	"response.draft",
 	"response.evaluate",
 	"response.verify",
@@ -929,6 +944,12 @@ low_allowed_actions := {
 	"golden_path.report.read",
 	"golden_path.release_smoke.run",
 	"golden_path.query",
+	"bootstrap.profile.read",
+	"bootstrap.seed_bundle.read",
+	"bootstrap.finding.read",
+	"bootstrap.run.read",
+	"bootstrap.report.read",
+	"bootstrap.query",
 	"lifecycle.policy.read",
 	"lifecycle.classify",
 	"lifecycle.classification.read",
@@ -1536,6 +1557,35 @@ decision := {
 	golden_path_metadata_action
 	golden_path_permission
 	not golden_path_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "bootstrap_read_allowed",
+	"constraints": ["local_only", "scope_required", "no_external_calls"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	bootstrap_read_action
+	bootstrap_permission
+	not bootstrap_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "bootstrap_metadata_action_allowed",
+	"constraints": ["local_only", "dry_run_default", "idempotent_defaults_only", "no_external_calls", "no_package_install", "no_production_secrets", "no_source_mutation"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	bootstrap_metadata_action
+	bootstrap_permission
+	bootstrap_mode_allowed
+	not bootstrap_unsafe_request
 }
 
 decision := {
@@ -3074,6 +3124,7 @@ decision := {
 	not module_binding_action
 	not conformance_action
 	not golden_path_action
+	not bootstrap_action
 	not scheduler_action
 	not incident_action
 	not lifecycle_action
@@ -3292,6 +3343,7 @@ decision := {
 	not scheduler_action
 	not incident_action
 	not golden_path_action
+	not bootstrap_action
 }
 
 decision := {
@@ -4267,6 +4319,148 @@ golden_path_unsafe_request if {
 	input.context.source_mutation_requested == true
 }
 
+bootstrap_action if {
+	startswith(input.action_type, "bootstrap.")
+}
+
+bootstrap_read_action if {
+	input.action_type == "bootstrap.profile.read"
+}
+
+bootstrap_read_action if {
+	input.action_type == "bootstrap.seed_bundle.read"
+}
+
+bootstrap_read_action if {
+	input.action_type == "bootstrap.finding.read"
+}
+
+bootstrap_read_action if {
+	input.action_type == "bootstrap.run.read"
+}
+
+bootstrap_read_action if {
+	input.action_type == "bootstrap.report.read"
+}
+
+bootstrap_read_action if {
+	input.action_type == "bootstrap.query"
+}
+
+bootstrap_metadata_action if {
+	input.action_type == "bootstrap.profile.create"
+}
+
+bootstrap_metadata_action if {
+	input.action_type == "bootstrap.profile.update"
+}
+
+bootstrap_metadata_action if {
+	input.action_type == "bootstrap.seed_bundle.create"
+}
+
+bootstrap_metadata_action if {
+	input.action_type == "bootstrap.seed_bundle.update"
+}
+
+bootstrap_metadata_action if {
+	input.action_type == "bootstrap.seed.execute"
+}
+
+bootstrap_metadata_action if {
+	input.action_type == "bootstrap.doctor.run"
+}
+
+bootstrap_metadata_action if {
+	input.action_type == "bootstrap.finding.update"
+}
+
+bootstrap_metadata_action if {
+	input.action_type == "bootstrap.run"
+}
+
+bootstrap_metadata_action if {
+	input.action_type == "bootstrap.report.create"
+}
+
+bootstrap_mode_allowed if {
+	not input.context.mode
+}
+
+bootstrap_mode_allowed if {
+	input.context.mode == "dry_run"
+}
+
+bootstrap_mode_allowed if {
+	input.context.mode == "controlled"
+	input.context.safe_local_defaults == true
+}
+
+bootstrap_mode_allowed if {
+	input.context.mode == "controlled"
+	input.context.allow_local_defaults == true
+}
+
+bootstrap_unsafe_request if {
+	input.context.external_calls == true
+}
+
+bootstrap_unsafe_request if {
+	input.context.external_call_requested == true
+}
+
+bootstrap_unsafe_request if {
+	input.context.external_provider_enabled == true
+}
+
+bootstrap_unsafe_request if {
+	input.context.external_features_enabled == true
+}
+
+bootstrap_unsafe_request if {
+	input.context.package_install == true
+}
+
+bootstrap_unsafe_request if {
+	input.context.package_install_requested == true
+}
+
+bootstrap_unsafe_request if {
+	input.context.production_secret_created == true
+}
+
+bootstrap_unsafe_request if {
+	input.context.production_auth_enabled == true
+}
+
+bootstrap_unsafe_request if {
+	input.context.full_autonomy_enabled == true
+}
+
+bootstrap_unsafe_request if {
+	input.context.code_loading_enabled == true
+}
+
+bootstrap_unsafe_request if {
+	input.context.tool_execution == true
+}
+
+bootstrap_unsafe_request if {
+	input.context.shell_execution == true
+}
+
+bootstrap_unsafe_request if {
+	input.context.source_records_mutated == true
+}
+
+bootstrap_unsafe_request if {
+	input.context.source_mutation_requested == true
+}
+
+bootstrap_unsafe_request if {
+	input.context.hard_delete_enabled == true
+}
+
 registry_approval_action if {
 	input.action_type == "entity.merge.approve"
 }
@@ -4800,6 +4994,42 @@ golden_path_permission if {
 
 golden_path_permission if {
 	input.context.actor_context.permissions[_] == "operator"
+}
+
+bootstrap_permission if {
+	dev_owner
+}
+
+bootstrap_permission if {
+	input.context.actor_context.permissions[_] == input.action_type
+}
+
+bootstrap_permission if {
+	input.context.permissions[_] == input.action_type
+}
+
+bootstrap_permission if {
+	input.requested_permissions[_] == input.action_type
+	count(input.security_scope) > 0
+}
+
+bootstrap_permission if {
+	input.context.actor_context.permissions[_] == "bootstrap.read"
+	bootstrap_read_action
+}
+
+bootstrap_permission if {
+	input.context.actor_context.permissions[_] == "bootstrap.write"
+	bootstrap_metadata_action
+}
+
+bootstrap_permission if {
+	input.context.actor_context.permissions[_] == "operator"
+}
+
+bootstrap_permission if {
+	input.context.actor_context.roles[_] == "auditor"
+	bootstrap_read_action
 }
 
 lifecycle_permission if {

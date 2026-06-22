@@ -151,6 +151,16 @@ The contract includes:
 - `InterfaceDriftFinding`: detected interface drift record.
 - `MigrationNote`: informational migration guidance that does not execute.
 - `ContractRegistryReport`: deterministic contract readiness summary.
+- `BootstrapProfile`: local first-run profile defining required services, settings, checks, seed bundles, and constraints.
+- `SeedBundle`: idempotent local seed bundle metadata with explicit idempotency keys.
+- `SeedExecutionRequest`: request to dry-run or controlled-run one local seed bundle.
+- `SeedExecutionRecord`: persisted result for one seed execution.
+- `SetupFinding`: local setup doctor finding with severity, category, expected state, actual state, and recommended action.
+- `SetupDoctorRequest`: request to inspect local setup readiness.
+- `SetupDoctorResult`: deterministic setup doctor result with readiness booleans and score.
+- `SetupReport`: persisted local readiness report.
+- `BootstrapRunRequest`: request to run first-run bootstrap.
+- `BootstrapRun`: persisted bootstrap run containing profile, seed executions, findings, readiness score, and result metadata.
 
 Public APIs must return AION contracts or plain JSON derived from them. They
 must not expose framework-specific objects from external engines.
@@ -161,6 +171,12 @@ execute migrations, expose raw prompts, expose hidden reasoning, expose raw
 headers, expose provider payloads, or carry secrets. Compatibility scans and
 migration notes are advisory records until another governed AION gate consumes
 them.
+
+Bootstrap contracts are local readiness contracts only. They may describe local
+profiles, seed bundles, setup findings, setup reports, and first-run bootstrap
+runs. They must not represent production provisioning, package installation,
+secret management, external provider setup, source mutation, tool execution,
+or domain-specific setup logic.
 
 Reasoning contracts are Brain-owned. Model providers receive inference inputs
 only through `ModelGatewayAdapter` and return `ModelCallRecord`. Public APIs
