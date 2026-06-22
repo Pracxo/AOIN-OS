@@ -802,6 +802,42 @@ not expose source code payloads, package bytes, raw headers, hidden reasoning,
 raw prompts, provider payloads, secrets, runtime internals, or
 domain-specific module logic.
 
+## Module Activation Projection
+
+Module Activation telemetry projects future activation review without
+activation. Generic event types include:
+
+- `module_activation_request_created`
+- `module_activation_blocker_created`
+- `module_activation_blocker_dismissed`
+- `module_activation_gate_started`
+- `module_activation_gate_completed`
+- `module_activation_plan_created`
+- `runtime_registration_preview_created`
+- `module_activation_review_recorded`
+
+Generic visual node types include:
+
+- `module_activation_request`
+- `module_activation_blocker`
+- `module_activation_gate`
+- `module_activation_plan`
+- `runtime_registration_preview`
+- `module_activation_review`
+
+The generic projection path is:
+
+`module slot -> activation request -> gate -> blocker/review -> plan -> runtime registration preview`
+
+Activation blocker nodes should appear blocked. Activation plan and runtime
+registration preview nodes are metadata-only review artifacts and must not
+imply execution, activation, or route registration.
+
+Module activation projection remains backend-only and frontend-agnostic, and
+must not expose source code payloads, package bytes, raw headers, hidden
+reasoning, raw prompts, provider payloads, secrets, runtime internals, or
+domain-specific module logic.
+
 ## Capability Conformance Projection
 
 Capability Conformance telemetry projects schema-only conformance work into the

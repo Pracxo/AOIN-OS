@@ -132,7 +132,7 @@ and rollback plan.
 
 ## Future Activation Milestones
 
-- AION-083: activation request design, still disabled.
+- AION-083: metadata-only activation request gate, still disabled.
 - AION-084: Generic Knowledge Intelligence metadata package.
 - AION-085: non-executing deterministic module mock runtime.
 - AION-086: model provider adapter hardening.
@@ -140,7 +140,7 @@ and rollback plan.
 
 ## No-Go Rules
 
-- No activation in AION-082.
+- No activation in AION-082 or AION-083.
 - No code loading.
 - No package installation.
 - No dynamic route registration.

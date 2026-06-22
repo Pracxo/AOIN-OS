@@ -1451,6 +1451,37 @@ calls, approval bypass, raw prompt disclosure, hidden reasoning disclosure,
 raw header export, secret export, or domain-specific module logic. Unknown
 module binding actions fail closed.
 
+## Module Activation Policy
+
+Generic module activation actions:
+
+- `module_activation.request.create`
+- `module_activation.request.read`
+- `module_activation.request.update`
+- `module_activation.request.delete`
+- `module_activation.gate.run`
+- `module_activation.gate.read`
+- `module_activation.blocker.read`
+- `module_activation.blocker.update`
+- `module_activation.review.create`
+- `module_activation.review.read`
+- `module_activation.plan.create`
+- `module_activation.plan.read`
+- `module_activation.plan.update`
+- `module_activation.query.read`
+- `runtime.registration.preview.create`
+- `runtime.registration.preview.read`
+
+Module activation policy authorizes metadata operations only. It does not
+authorize code loading, package installation, capability execution, runtime
+route registration, runtime configuration mutation, shell commands, external
+calls, approval bypass, source mutation, hidden reasoning disclosure, raw
+prompt disclosure, raw header export, secret export, or domain-specific module
+logic.
+
+Activation execution and runtime registration remain disabled in AION-083.
+Unsafe activation contexts fail closed.
+
 ## Capability Conformance Policy
 
 Generic conformance actions:

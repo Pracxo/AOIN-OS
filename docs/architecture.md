@@ -1561,6 +1561,36 @@ calls external systems.
 Extension readiness assessments are local records that can block future
 activation. In v0.1 `activation_ready` is always false.
 
+## Module Activation Request Gate
+
+The Module Activation Request Gate sits after module slots, capability
+bindings, conformance, and readiness. It creates explicit future activation
+request records and runs deterministic blockers before any activation design is
+allowed to proceed.
+
+The activation request path is:
+
+`module slot -> capability binding -> conformance/readiness evidence -> activation request -> gate run -> blockers -> review -> non-executable plan -> runtime registration preview`
+
+The gate owns these boundaries:
+
+- `ModuleActivationRequest` records the intent to evaluate future activation.
+- `ActivationGateRun` records deterministic checks and blockers.
+- `ActivationBlocker` records open requirements or explicit disabled gates.
+- `ActivationReview` records operator review without activating anything.
+- `ActivationPlan` is non-executable and keeps `executable=false`.
+- `RuntimeRegistrationPreview` previews route/capability/policy/setting shape
+  and keeps `registration_allowed=false`.
+
+AION-083 is records-first. It must not load extension code, install packages,
+activate capabilities, register runtime routes, mutate runtime configuration,
+call external systems, invoke MCP or sandbox runtimes, approve itself, or add
+domain-specific module logic.
+
+The gate reports to operator action items through open
+`module_activation_blocker` records and emits visual telemetry for activation
+request, blocker, gate, review, plan, and registration-preview nodes.
+
 ## Golden Path Scenario Harness
 
 The Golden Path Scenario Harness is the Brain-owned local end-to-end

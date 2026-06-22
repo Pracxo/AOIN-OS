@@ -426,6 +426,22 @@ allowed_actions := {
 	"route_binding_preview.create",
 	"route_binding_preview.read",
 	"module_binding.query",
+	"module_activation.request.create",
+	"module_activation.request.read",
+	"module_activation.request.update",
+	"module_activation.request.delete",
+	"module_activation.gate.run",
+	"module_activation.gate.read",
+	"module_activation.blocker.read",
+	"module_activation.blocker.update",
+	"module_activation.review.create",
+	"module_activation.review.read",
+	"module_activation.plan.create",
+	"module_activation.plan.read",
+	"module_activation.plan.update",
+	"module_activation.query.read",
+	"runtime.registration.preview.create",
+	"runtime.registration.preview.read",
 	"conformance.profile.create",
 	"conformance.profile.read",
 	"conformance.profile.update",
@@ -1523,6 +1539,34 @@ decision := {
 	module_binding_metadata_action
 	module_binding_permission
 	not module_binding_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "module_activation_read_allowed",
+	"constraints": ["metadata_only", "activation_disabled", "no_capability_execution", "no_runtime_registration"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	module_activation_read_action
+	module_activation_permission
+	not module_activation_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "module_activation_metadata_action_allowed",
+	"constraints": ["metadata_only", "activation_disabled", "no_capability_execution", "no_runtime_registration", "no_source_mutation"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	module_activation_metadata_action
+	module_activation_permission
+	not module_activation_unsafe_request
 }
 
 decision := {
@@ -3174,6 +3218,7 @@ decision := {
 	not contract_registry_action
 	not extension_registry_action
 	not module_binding_action
+	not module_activation_action
 	not conformance_action
 	not golden_path_action
 	not bootstrap_action
@@ -3942,6 +3987,14 @@ module_binding_action if {
 	startswith(input.action_type, "route_binding_preview.")
 }
 
+module_activation_action if {
+	startswith(input.action_type, "module_activation.")
+}
+
+module_activation_action if {
+	startswith(input.action_type, "runtime.registration.preview.")
+}
+
 contract_registry_read_action if {
 	input.action_type == "contract_registry.resource.read"
 }
@@ -4199,6 +4252,114 @@ module_binding_unsafe_request if {
 }
 
 module_binding_unsafe_request if {
+	input.context.code_generated == true
+}
+
+module_activation_read_action if {
+	input.action_type == "module_activation.request.read"
+}
+
+module_activation_read_action if {
+	input.action_type == "module_activation.gate.read"
+}
+
+module_activation_read_action if {
+	input.action_type == "module_activation.blocker.read"
+}
+
+module_activation_read_action if {
+	input.action_type == "module_activation.review.read"
+}
+
+module_activation_read_action if {
+	input.action_type == "module_activation.plan.read"
+}
+
+module_activation_read_action if {
+	input.action_type == "module_activation.query.read"
+}
+
+module_activation_read_action if {
+	input.action_type == "runtime.registration.preview.read"
+}
+
+module_activation_metadata_action if {
+	input.action_type == "module_activation.request.create"
+}
+
+module_activation_metadata_action if {
+	input.action_type == "module_activation.request.update"
+}
+
+module_activation_metadata_action if {
+	input.action_type == "module_activation.request.delete"
+}
+
+module_activation_metadata_action if {
+	input.action_type == "module_activation.gate.run"
+}
+
+module_activation_metadata_action if {
+	input.action_type == "module_activation.blocker.update"
+}
+
+module_activation_metadata_action if {
+	input.action_type == "module_activation.review.create"
+}
+
+module_activation_metadata_action if {
+	input.action_type == "module_activation.plan.create"
+}
+
+module_activation_metadata_action if {
+	input.action_type == "module_activation.plan.update"
+}
+
+module_activation_metadata_action if {
+	input.action_type == "runtime.registration.preview.create"
+}
+
+module_activation_unsafe_request if {
+	input.context.source_mutated == true
+}
+
+module_activation_unsafe_request if {
+	input.context.source_mutation_requested == true
+}
+
+module_activation_unsafe_request if {
+	input.context.code_loading_requested == true
+}
+
+module_activation_unsafe_request if {
+	input.context.activation_requested == true
+}
+
+module_activation_unsafe_request if {
+	input.context.activation_performed == true
+}
+
+module_activation_unsafe_request if {
+	input.context.capability_execution_requested == true
+}
+
+module_activation_unsafe_request if {
+	input.context.runtime_registration_requested == true
+}
+
+module_activation_unsafe_request if {
+	input.context.dynamic_route_registration_requested == true
+}
+
+module_activation_unsafe_request if {
+	input.context.external_call_requested == true
+}
+
+module_activation_unsafe_request if {
+	input.context.shell_command_requested == true
+}
+
+module_activation_unsafe_request if {
 	input.context.code_generated == true
 }
 
@@ -5112,6 +5273,38 @@ module_binding_permission if {
 }
 
 module_binding_permission if {
+	input.context.actor_context.permissions[_] == "operator"
+}
+
+module_activation_permission if {
+	dev_owner
+}
+
+module_activation_permission if {
+	input.context.actor_context.permissions[_] == input.action_type
+}
+
+module_activation_permission if {
+	input.context.permissions[_] == input.action_type
+}
+
+module_activation_permission if {
+	input.actor_id
+	input.requested_permissions[_] == input.action_type
+	input.security_scope[_] == sprintf("workspace:%s", [input.workspace_id])
+}
+
+module_activation_permission if {
+	input.context.actor_context.permissions[_] == "module_activation.read"
+	module_activation_read_action
+}
+
+module_activation_permission if {
+	input.context.actor_context.permissions[_] == "module_activation.write"
+	module_activation_metadata_action
+}
+
+module_activation_permission if {
 	input.context.actor_context.permissions[_] == "operator"
 }
 

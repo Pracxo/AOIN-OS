@@ -71,4 +71,7 @@ Future activation requires activation request design, approval semantics,
 sandbox execution, runtime adapter boundaries, rollback, disable, policy
 coverage, audit/provenance coverage, RC gate, freeze gate, and operator review.
 
-In AION-082, activation remains disabled and code loading remains disabled.
+In AION-083, `activation_requested` can be represented by a persisted
+`ModuleActivationRequest`, but the only allowed next runtime state remains
+`activation_blocked_by_default`. Activation, execution, code loading, package
+installation, and runtime registration remain disabled.

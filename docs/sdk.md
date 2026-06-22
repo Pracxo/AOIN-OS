@@ -694,6 +694,34 @@ The SDK calls public Module Binding APIs only. It does not import
 register routes, mutate runtime configuration, execute mount plans, call
 external services, or expose raw secrets.
 
+## ModuleActivationResource
+
+`client.module_activation` supports:
+
+- `create_request(payload)`
+- `list_requests(scope, status=None, module_slot_id=None, limit=100)`
+- `get_request(activation_request_id, scope)`
+- `archive_request(activation_request_id, payload)`
+- `delete_request(activation_request_id, payload)`
+- `run_gate(activation_request_id, payload)`
+- `list_gate_runs(activation_request_id, scope, status=None, limit=100)`
+- `list_blockers(scope, activation_request_id=None, status=None, severity=None, limit=100)`
+- `dismiss_blocker(activation_blocker_id, payload)`
+- `create_review(payload, scope=())`
+- `list_reviews(scope, activation_request_id=None, decision=None, limit=100)`
+- `create_plan(activation_request_id, payload)`
+- `list_plans(scope, status=None, module_slot_id=None, limit=100)`
+- `get_plan(activation_plan_id, scope)`
+- `create_runtime_registration_preview(activation_request_id, payload)`
+- `list_runtime_registration_previews(scope, activation_request_id=None, module_slot_id=None, status=None, limit=100)`
+- `get_runtime_registration_preview(registration_preview_id, scope)`
+- `query(payload)`
+
+The SDK calls public Module Activation APIs only. It does not import
+`aion_brain`, activate modules, register runtime routes, mutate runtime
+configuration, invoke capabilities, call external services, or expose raw
+secrets.
+
 ## Conformance Resource
 
 `client.conformance` exposes the Capability Conformance Harness and readiness

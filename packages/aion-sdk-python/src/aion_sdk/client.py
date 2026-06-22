@@ -74,6 +74,9 @@ class AIONClient:
         self.lifecycle = _import_resource("lifecycle").LifecycleResource(self)
         self.extensions = _import_resource("extensions").ExtensionsResource(self)
         self.module_bindings = _import_resource("module_bindings").ModuleBindingsResource(self)
+        self.module_activation = _import_resource(
+            "module_activation"
+        ).ModuleActivationResource(self)
         self.conformance = _import_resource("conformance").ConformanceResource(self)
         self.golden_path = _import_resource("golden_path").GoldenPathResource(self)
         self.bootstrap = _import_resource("bootstrap").BootstrapResource(self)

@@ -532,6 +532,24 @@ capabilities, register routes, mutate runtime configuration, execute mount
 plans, call external services, print raw prompts, expose hidden reasoning, or
 add domain-specific module behavior.
 
+## Module Activation Commands
+
+- `aionctl module-activation request <module-slot-id>`
+- `aionctl module-activation list`
+- `aionctl module-activation gate <activation-request-id>`
+- `aionctl module-activation blockers`
+- `aionctl module-activation review <activation-request-id>`
+- `aionctl module-activation plan <activation-request-id>`
+- `aionctl module-activation runtime-preview <activation-request-id>`
+- `aionctl module-activation query`
+
+Module activation commands call the SDK and public Brain APIs only. They create
+metadata-only activation requests, gate runs, blocker queries, reviews,
+non-executable plans, and runtime registration previews. They do not activate
+modules, load extension code, install packages, register routes, mutate runtime
+configuration, execute capabilities, call external systems, or add
+domain-specific module behavior.
+
 ## Conformance Commands
 
 The CLI exposes the local conformance harness through SDK calls:

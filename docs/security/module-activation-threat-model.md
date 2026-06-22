@@ -3,8 +3,10 @@
 ## Purpose
 
 This threat model records the risks that must be controlled before any future
-module activation path can exist. AION-082 adds no activation, code loading,
-package installation, dynamic route registration, or external calls.
+module activation path can exist. AION-082 and AION-083 add no activation, code
+loading, package installation, dynamic route registration, or external calls.
+AION-083 adds metadata-only activation requests, blockers, reviews, plans, and
+runtime registration previews.
 
 | Threat category | Likely entry point | Current v0.1 control | Future required control | No-go condition |
 | --- | --- | --- | --- | --- |

@@ -270,6 +270,7 @@ Module strategy docs:
 
 - [Module ecosystem roadmap](docs/roadmap/module-ecosystem.md)
 - [Module activation design](docs/architecture/module-activation-design.md)
+- [Module activation request gate](docs/module-activation-gate.md)
 - [Module activation threat model](docs/security/module-activation-threat-model.md)
 - [First module selection](docs/modules/first-module-selection.md)
 - [Generic Knowledge Intelligence module](docs/modules/generic-knowledge-intelligence-module.md)
@@ -3430,6 +3431,55 @@ CLI examples:
 The Python SDK exposes the same surface through `client.module_bindings`.
 
 See `docs/adr/0067-capability-binding-module-slot-manager.md`.
+
+## Module Activation Request Gate
+
+AION-083 adds a metadata-only Module Activation Request Gate. It lets
+operators create future activation requests, run deterministic blockers, record
+reviews, create non-executable activation plans, and generate runtime
+registration previews.
+
+The gate is not an activation layer. It does not load code, install packages,
+register routes, mutate runtime configuration, invoke capabilities, call
+external services, enable full autonomy, or activate modules. All public
+records keep activation, execution, and runtime registration disabled.
+
+Module activation endpoints:
+
+- `POST /brain/module-activation/requests`
+- `GET /brain/module-activation/requests`
+- `GET /brain/module-activation/requests/{activation_request_id}`
+- `POST /brain/module-activation/requests/{activation_request_id}/archive`
+- `DELETE /brain/module-activation/requests/{activation_request_id}`
+- `POST /brain/module-activation/requests/{activation_request_id}/gate`
+- `GET /brain/module-activation/requests/{activation_request_id}/gate-runs`
+- `GET /brain/module-activation/blockers`
+- `POST /brain/module-activation/blockers/{activation_blocker_id}/dismiss`
+- `POST /brain/module-activation/reviews`
+- `GET /brain/module-activation/reviews`
+- `POST /brain/module-activation/requests/{activation_request_id}/plans`
+- `GET /brain/module-activation/plans`
+- `GET /brain/module-activation/plans/{activation_plan_id}`
+- `POST /brain/module-activation/requests/{activation_request_id}/runtime-registration-preview`
+- `GET /brain/module-activation/runtime-registration-previews`
+- `GET /brain/module-activation/runtime-registration-previews/{registration_preview_id}`
+- `POST /brain/module-activation/query`
+
+CLI examples:
+
+```bash
+./scripts/aionctl.sh module-activation request <module-slot-id>
+./scripts/aionctl.sh module-activation gate <activation-request-id>
+./scripts/aionctl.sh module-activation blockers
+./scripts/aionctl.sh module-activation plan <activation-request-id>
+./scripts/aionctl.sh module-activation runtime-preview <activation-request-id>
+./scripts/aionctl.sh module-activation query
+```
+
+The Python SDK exposes the same surface through `client.module_activation`.
+
+See `docs/module-activation-gate.md` and
+`docs/adr/0074-module-activation-request-gate.md`.
 
 ## Capability Conformance Harness
 

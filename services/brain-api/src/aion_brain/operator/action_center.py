@@ -107,6 +107,7 @@ class ActionCenterService:
         generated.extend(self._blocked_module_mount_plan_items(scope))
         generated.extend(self._open_conformance_finding_items(scope))
         generated.extend(self._blocked_readiness_assessment_items(scope))
+        generated.extend(self._module_activation_blocker_items(scope))
         generated.extend(self._failed_golden_path_run_items(scope))
         generated.extend(self._critical_golden_path_report_items(scope))
         generated.extend(self._critical_setup_finding_items(scope))
@@ -583,6 +584,37 @@ class ActionCenterService:
                     "activation_ready": getattr(item, "activation_ready", False),
                     "blocker_refs": getattr(item, "blocker_refs", []),
                     "metadata_only": True,
+                },
+            )
+            for item in items
+        ]
+
+    def _module_activation_blocker_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("module_activation_repository")
+        list_blockers = getattr(source, "list_blockers", None)
+        if not callable(list_blockers):
+            return []
+        try:
+            items = list_blockers(status="open", limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="module_activation_blocker",
+                source_id=_id_for(item, "activation_blocker_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="registry",
+                severity=cast(OperatorSeverity, str(getattr(item, "severity", "high"))),
+                title="Module activation request has blockers.",
+                description="A metadata-only activation request is blocked and requires review.",
+                recommended_action="review_module_activation_blockers",
+                runbook_ref="docs/module-activation-gate.md",
+                scope=scope or ["workspace:main"],
+                metadata={
+                    "blocker_type": getattr(item, "blocker_type", None),
+                    "activation_request_id": getattr(item, "activation_request_id", None),
+                    "activation_allowed": False,
+                    "execution_allowed": False,
                 },
             )
             for item in items

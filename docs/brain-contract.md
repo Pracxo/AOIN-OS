@@ -1425,6 +1425,39 @@ prompts, provider payloads, secrets, SQLAlchemy rows, source code payloads,
 runtime client objects, third-party module internals, or domain-specific module
 logic.
 
+## Module Activation Contracts
+
+AION Brain owns these module activation request gate contracts:
+
+- `ModuleActivationRequest`
+- `ModuleActivationCreateRequest`
+- `ActivationBlocker`
+- `ActivationGateRun`
+- `ActivationReviewRequest`
+- `ActivationReview`
+- `ActivationPlan`
+- `RuntimeRegistrationPreview`
+- `ModuleActivationQuery`
+- `ModuleActivationQueryResult`
+
+`ModuleActivationRequest` is a metadata-only request to evaluate future
+activation. It must keep `activation_allowed=false` and
+`execution_allowed=false`.
+
+`ActivationGateRun` records deterministic checks and blockers. Gate runs may
+report blocked status, but they must not mutate module runtime state.
+
+`ActivationPlan` is a non-executable plan and must keep `executable=false` and
+`execution_allowed=false`.
+
+`RuntimeRegistrationPreview` previews possible runtime registration metadata
+and must keep `registration_allowed=false`.
+
+Module activation contracts must not expose raw headers, hidden reasoning, raw
+prompts, provider payloads, secrets, SQLAlchemy rows, runtime client objects,
+package internals, source code payloads, capability execution results, or
+domain-specific module logic.
+
 ## Capability Conformance Contracts
 
 AION Brain owns these generic conformance contracts:

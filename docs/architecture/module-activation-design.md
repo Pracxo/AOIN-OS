@@ -45,7 +45,7 @@ manifest_submitted
 -> archived
 ```
 
-In v0.1 and AION-082, all activation paths stop at
+In v0.1, AION-082, and AION-083, all activation paths stop at
 `activation_blocked_by_default`.
 
 ## Required Records Before Activation
@@ -85,6 +85,12 @@ A future activation request is a request to move a reviewed module from staged
 metadata into a controlled runtime boundary. It is not a package install, code
 load, route registration, or execution command by itself.
 
+AION-083 implements the first activation request records, deterministic gate
+runs, blockers, reviews, non-executable plans, and runtime registration
+previews. The implementation still stops before activation and keeps
+`activation_allowed=false`, `execution_allowed=false`, and
+`registration_allowed=false`.
+
 ## Activation Approval Semantics
 
 Approval must be explicit, scoped, revocable, and audit-backed. Approval cannot
@@ -97,7 +103,7 @@ Runtime registration must remain behind a Brain-owned adapter. Public AION
 contracts must not expose runtime-specific objects, package internals, or
 framework-specific handles.
 
-No runtime route registration exists in AION-082.
+No runtime route registration exists in AION-082 or AION-083.
 
 ## Sandbox Requirements
 

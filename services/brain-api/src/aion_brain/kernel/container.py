@@ -279,6 +279,16 @@ from aion_brain.model_outputs.response_candidates import ResponseCandidateServic
 from aion_brain.model_outputs.structured_validator import StructuredOutputValidator
 from aion_brain.model_outputs.tool_intents import ToolIntentCaptureService
 from aion_brain.model_outputs.unsafe_detector import UnsafeOutputDetector
+from aion_brain.module_activation import (
+    ActivationBlockerService,
+    ActivationGateService,
+    ActivationPlanService,
+    ActivationReviewService,
+    ModuleActivationQueryService,
+    ModuleActivationRepository,
+    ModuleActivationRequestService,
+    RuntimeRegistrationPreviewService,
+)
 from aion_brain.module_bindings import (
     BindingConflictService,
     BindingValidator,
@@ -2808,6 +2818,51 @@ class KernelContainer:
             self.conformance_repository,
             self.policy_adapter,
         )
+        self.module_activation_repository = ModuleActivationRepository(self.settings.database_url)
+        self.module_activation_request_service = ModuleActivationRequestService(
+            self.module_activation_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            settings=self.settings,
+        )
+        self.activation_blocker_service = ActivationBlockerService(
+            self.module_activation_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.activation_gate_service = ActivationGateService(
+            self.module_activation_repository,
+            self.policy_adapter,
+            module_binding_repository=self.module_binding_repository,
+            conformance_repository=self.conformance_repository,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            settings=self.settings,
+            blocker_service=self.activation_blocker_service,
+        )
+        self.activation_review_service = ActivationReviewService(
+            self.module_activation_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.activation_plan_service = ActivationPlanService(
+            self.module_activation_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.runtime_registration_preview_service = RuntimeRegistrationPreviewService(
+            self.module_activation_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.module_activation_query_service = ModuleActivationQueryService(
+            self.module_activation_repository,
+            self.policy_adapter,
+        )
         self.golden_path_repository = GoldenPathRepository(self.settings.database_url)
         self.golden_path_assertion_engine = AssertionEngine()
         self.golden_path_scenario_catalog = ScenarioCatalogService(
@@ -3156,6 +3211,7 @@ class KernelContainer:
             extension_registry_repository=self.extension_registry_repository,
             module_binding_repository=self.module_binding_repository,
             conformance_repository=self.conformance_repository,
+            module_activation_repository=self.module_activation_repository,
             golden_path_repository=self.golden_path_repository,
             bootstrap_repository=self.bootstrap_repository,
             release_candidate_repository=self.release_candidate_repository,
@@ -4460,6 +4516,39 @@ class KernelContainer:
             (
                 "module_binding_query_service",
                 self.module_binding_query_service,
+                "service",
+                "local",
+            ),
+            (
+                "module_activation_repository",
+                self.module_activation_repository,
+                "repository",
+                "postgres",
+            ),
+            (
+                "module_activation_request_service",
+                self.module_activation_request_service,
+                "service",
+                "local",
+            ),
+            ("activation_blocker_service", self.activation_blocker_service, "service", "local"),
+            (
+                "activation_gate_service",
+                self.activation_gate_service,
+                "service",
+                "deterministic",
+            ),
+            ("activation_review_service", self.activation_review_service, "service", "local"),
+            ("activation_plan_service", self.activation_plan_service, "service", "local"),
+            (
+                "runtime_registration_preview_service",
+                self.runtime_registration_preview_service,
+                "service",
+                "local",
+            ),
+            (
+                "module_activation_query_service",
+                self.module_activation_query_service,
                 "service",
                 "local",
             ),

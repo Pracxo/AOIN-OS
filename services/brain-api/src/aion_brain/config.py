@@ -348,6 +348,62 @@ class Settings(BaseSettings):
             "dynamic_route_registration_enabled",
         ),
     )
+    module_activation_requests_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODULE_ACTIVATION_REQUESTS_ENABLED",
+            "module_activation_requests_enabled",
+        ),
+    )
+    module_activation_gate_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODULE_ACTIVATION_GATE_ENABLED",
+            "module_activation_gate_enabled",
+        ),
+    )
+    module_activation_reviews_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODULE_ACTIVATION_REVIEWS_ENABLED",
+            "module_activation_reviews_enabled",
+        ),
+    )
+    module_activation_plans_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODULE_ACTIVATION_PLANS_ENABLED",
+            "module_activation_plans_enabled",
+        ),
+    )
+    runtime_registration_preview_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_RUNTIME_REGISTRATION_PREVIEW_ENABLED",
+            "runtime_registration_preview_enabled",
+        ),
+    )
+    module_activation_execution_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_MODULE_ACTIVATION_EXECUTION_ENABLED",
+            "module_activation_execution_enabled",
+        ),
+    )
+    runtime_registration_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_RUNTIME_REGISTRATION_ENABLED",
+            "runtime_registration_enabled",
+        ),
+    )
+    module_activation_create_notifications_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_MODULE_ACTIVATION_CREATE_NOTIFICATIONS_DEFAULT",
+            "module_activation_create_notifications_default",
+        ),
+    )
     module_binding_create_notifications_default: bool = Field(
         default=False,
         validation_alias=AliasChoices(

@@ -32,6 +32,7 @@ from aion_sdk.cli.commands.instructions import install_instruction_commands
 from aion_sdk.cli.commands.learning import install_learning_commands
 from aion_sdk.cli.commands.lifecycle import install_lifecycle_commands
 from aion_sdk.cli.commands.model_outputs import install_model_output_commands
+from aion_sdk.cli.commands.module_activation import install_module_activation_commands
 from aion_sdk.cli.commands.module_bindings import install_module_binding_commands
 from aion_sdk.cli.commands.modules import install_modules_commands
 from aion_sdk.cli.commands.notifications import install_notification_commands
@@ -585,6 +586,7 @@ install_contract_commands(contracts_app, get_client=_client, get_scope=_scope, r
 install_lifecycle_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_extension_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_module_binding_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_module_activation_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_conformance_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_golden_path_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_bootstrap_commands(bootstrap_app, get_client=_client, get_scope=_scope, render=_render)
