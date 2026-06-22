@@ -10,6 +10,9 @@ OFFLINE_OK=0
 SKIP_DOCKER=0
 SKIP_API=0
 OVERALL=0
+declare -a offline_arg=()
+declare -a api_command=()
+declare -a api_ready_command=()
 
 for arg in "$@"; do
   case "$arg" in
@@ -38,23 +41,68 @@ run_step() {
   return 0
 }
 
-offline_arg=()
+run_api_step() {
+  local name="$1"
+  shift
+  if (( ${#api_command[@]} > 0 )); then
+    run_step "$name" "${api_command[@]}" "$@"
+  else
+    run_step "$name" "$@"
+  fi
+}
+
+run_api_ready_step() {
+  local name="$1"
+  shift
+  if (( ${#api_ready_command[@]} > 0 )); then
+    run_step "$name" "${api_ready_command[@]}" "$@"
+  else
+    run_step "$name" "$@"
+  fi
+}
+
+skip_step() {
+  local name="$1"
+  echo
+  echo "SKIP: ${name}"
+}
+
+run_repo_check() {
+  if [[ "$SKIP_API" == "1" ]]; then
+    run_step "no-domain drift" ./scripts/verify-no-domain-drift.sh
+    run_step "lint" ./scripts/lint.sh
+    run_step "brain tests" ./scripts/test-brain.sh
+    run_step "sdk tests" ./scripts/test-sdk.sh
+    run_step "typecheck" ./scripts/typecheck.sh
+    run_step "boundary check local tests" ./scripts/test-brain.sh \
+      tests/test_no_direct_vendor_leakage.py \
+      tests/test_architecture_boundary_check.py
+    run_step "repo health" ./scripts/repo-health.sh
+  else
+    run_step "repo check" ./scripts/check.sh
+  fi
+}
+
 if [[ "$OFFLINE_OK" == "1" ]]; then
   offline_arg=(--offline-ok)
 fi
 
-api_command=()
-if [[ "$SKIP_API" == "1" ]]; then
-  api_command=(env AION_BASE_URL=http://127.0.0.1:9 AION_BRAIN_API_URL=http://127.0.0.1:9)
-fi
-
-run_step "repo check" ./scripts/check.sh
+run_repo_check
 run_step "final docs audit" ./scripts/final-docs-audit.sh
-run_step "release candidate gate" "${api_command[@]}" ./scripts/rc-check.sh "${offline_arg[@]}"
-run_step "release candidate evidence" "${api_command[@]}" ./scripts/rc-evidence.sh "${offline_arg[@]}"
-run_step "golden path" "${api_command[@]}" ./scripts/golden-path.sh "${offline_arg[@]}"
-run_step "release smoke" "${api_command[@]}" ./scripts/release-smoke.sh "${offline_arg[@]}"
-run_step "setup doctor" "${api_command[@]}" ./scripts/setup-doctor.sh --fast "${offline_arg[@]}"
+
+if [[ "$SKIP_API" == "1" ]]; then
+  skip_step "release candidate gate API phase"
+  skip_step "release candidate evidence"
+  skip_step "golden path API run"
+  skip_step "release smoke API run"
+  skip_step "setup doctor API run"
+else
+  run_api_step "release candidate gate" ./scripts/rc-check.sh "${offline_arg[@]}"
+  run_api_step "release candidate evidence" ./scripts/rc-evidence.sh "${offline_arg[@]}"
+  run_api_step "golden path" ./scripts/golden-path.sh "${offline_arg[@]}"
+  run_api_step "release smoke" ./scripts/release-smoke.sh "${offline_arg[@]}"
+  run_api_step "setup doctor" ./scripts/setup-doctor.sh --fast "${offline_arg[@]}"
+fi
 
 if [[ "$SKIP_DOCKER" == "1" ]]; then
   echo
@@ -69,8 +117,8 @@ if [[ "$SKIP_API" == "1" ]]; then
   echo
   echo "SKIP: API health, readiness, and demo-local"
 elif curl -fsS "${BASE_URL}/health" >/dev/null 2>&1; then
-  run_step "health endpoint" curl -fsS "${BASE_URL}/health"
-  run_step "readiness endpoint" curl -fsS "${BASE_URL}/health/ready"
+  run_api_ready_step "health endpoint" curl -fsS "${BASE_URL}/health"
+  run_api_ready_step "readiness endpoint" curl -fsS "${BASE_URL}/health/ready"
   run_step "local demo" ./scripts/demo-local.sh "${offline_arg[@]}"
 else
   echo
