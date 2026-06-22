@@ -1,0 +1,39 @@
+{
+  "module_slot_id": "gki-module-slot-001",
+  "slot_key": "generic.knowledge_intelligence",
+  "name": "Generic Knowledge Intelligence",
+  "description": "Inactive metadata slot for the Generic Knowledge Intelligence module pack.",
+  "version": "0.1.0-preview",
+  "slot_type": "module",
+  "owner_scope": [
+    "workspace:main"
+  ],
+  "allowed_modes": [
+    "dry_run"
+  ],
+  "declared_capability_refs": [
+    "generic.knowledge.retrieve",
+    "generic.knowledge.summarize",
+    "generic.knowledge.ground",
+    "generic.knowledge.explain",
+    "generic.knowledge.answer"
+  ],
+  "contract_refs": [],
+  "policy_action_refs": [
+    "capability.list",
+    "capability.invoke",
+    "memory.retrieve",
+    "context.compile",
+    "trace.read"
+  ],
+  "setting_refs": [],
+  "sandbox_profile_id": "metadata-only-future-runtime",
+  "metadata": {
+    "metadata_only": true,
+    "lifecycle_state": "metadata_only",
+    "activation_requested": false,
+    "runtime_registration_requested": false,
+    "code_loading_requested": false
+  },
+  "created_by": "operator"
+}

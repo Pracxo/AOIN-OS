@@ -279,6 +279,7 @@ Module strategy docs:
 - [Module risk classification](docs/modules/module-risk-classification.md)
 - [Module branching and release discipline](docs/modules/module-branching-and-release-discipline.md)
 - [ADR 0073](docs/adr/0073-post-v0.1-module-ecosystem-strategy.md)
+- [ADR 0075](docs/adr/0075-generic-knowledge-intelligence-module-pack.md)
 
 Recommended branch command:
 
@@ -287,6 +288,34 @@ git switch main
 git pull --ff-only origin main
 git switch -c phase/post-v0.1-module-strategy
 ```
+
+## Generic Knowledge Intelligence Module Pack
+
+AION-084 adds the first post-v0.1 governed module package as metadata only.
+The pack lives at `examples/modules/generic-knowledge-intelligence/` and
+proves the module path without activation:
+
+`manifest -> intake -> slot -> binding -> conformance -> readiness -> activation request -> blocker -> operator review`
+
+The pack does not add Brain runtime code, migrations, API routes, SDK
+resources, CLI commands, external dependencies, package installation, route
+registration, runtime registration, code loading, tool execution, or external
+calls.
+
+Run the local checks:
+
+```bash
+./scripts/module-pack-check.sh
+./scripts/generic-knowledge-demo.sh --offline-ok --skip-api
+```
+
+Read the module pack docs:
+
+- [Module pack README](examples/modules/generic-knowledge-intelligence/README.md)
+- [Demo walkthrough](docs/modules/generic-knowledge-intelligence-demo.md)
+- [Readiness trail](docs/modules/generic-knowledge-intelligence-readiness-trail.md)
+- [Operator review](docs/modules/generic-knowledge-intelligence-operator-review.md)
+- [No-go conditions](docs/modules/generic-knowledge-intelligence-no-go.md)
 
 ## v0.1 Final Local Release Path
 

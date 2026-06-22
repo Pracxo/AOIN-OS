@@ -36,3 +36,15 @@ High or critical modules require future activation design and explicit
 operator approval.
 
 High-side-effect modules are post-design only.
+
+## Generic Knowledge Intelligence Classification
+
+Generic Knowledge Intelligence is low-to-medium risk in metadata-only form.
+The selected capabilities are read, summarize, ground, explain, and answer
+contracts. They do not execute tools, call external services, register routes,
+mutate runtime configuration, request controlled handoff, or load code.
+
+`generic.knowledge.retrieve`, `generic.knowledge.summarize`, and
+`generic.knowledge.explain` are low risk. `generic.knowledge.ground` and
+`generic.knowledge.answer` are medium risk because they depend on reviewable
+context, grounding, and uncertainty constraints.

@@ -1,0 +1,33 @@
+{
+  "conformance_profile_id": "gki-conformance-profile-001",
+  "name": "Generic Capability Binding Profile",
+  "description": "Dry-run conformance profile for the Generic Knowledge Intelligence module pack.",
+  "profile_type": "capability_binding",
+  "owner_scope": [
+    "workspace:main"
+  ],
+  "required_checks": [
+    "manifest_valid",
+    "required_policy_actions_present",
+    "sandbox_declared",
+    "input_schema_valid",
+    "output_schema_valid",
+    "mock_invocation_valid",
+    "no_activation_enabled",
+    "no_code_loading",
+    "no_external_source",
+    "no_secret_schema",
+    "no_domain_logic"
+  ],
+  "optional_checks": [],
+  "minimum_score": 0.9,
+  "fail_on_critical": true,
+  "fail_on_missing_contract": true,
+  "fail_on_missing_policy_action": true,
+  "fail_on_missing_sandbox": true,
+  "metadata": {
+    "metadata_only": true,
+    "expected_activation_ready": false
+  },
+  "created_by": "operator"
+}

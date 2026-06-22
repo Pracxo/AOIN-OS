@@ -329,3 +329,10 @@ Instructions for future Codex runs in this repository:
 - Module examples must be metadata-only.
 - Do not add domain-specific module implementation to Brain core.
 - Do not move aion-v0.1.0 tag during post-v0.1 planning.
+- First module pack work must remain metadata-only.
+- Generic Knowledge Intelligence examples must not execute code.
+- Module pack demos must not call external services.
+- Module pack fixtures must stay synthetic.
+- Activation blockers are expected in v0.1.
+- Do not add domain-specific workflow logic to module pack fixtures, demos, or
+  docs.

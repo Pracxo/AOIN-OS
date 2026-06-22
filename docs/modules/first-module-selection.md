@@ -42,3 +42,15 @@ Select the first governed module as Generic Knowledge Intelligence Module.
 - Demonstrates value without runtime activation risk.
 
 The selected module remains metadata-only in AION-082.
+
+## AION-084 Package Confirmation
+
+AION-084 keeps the selection unchanged and creates the first governed module
+package for Generic Knowledge Intelligence. The package is metadata-only and
+uses the existing gates for intake, slot staging, capability binding,
+conformance, readiness, activation request, blocker review, and operator
+review.
+
+No Brain core code, migration, API route, SDK resource, CLI command, runtime
+registration, code loading, package installation, or external call is added by
+the module pack.

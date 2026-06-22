@@ -1,0 +1,208 @@
+[
+  {
+    "capability_binding_id": "gki-binding-retrieve-001",
+    "module_slot_id": "gki-module-slot-001",
+    "capability_key": "generic.knowledge.retrieve",
+    "capability_type": "retrieval",
+    "binding_type": "declared",
+    "target_runtime": "metadata_only",
+    "risk_level": "low",
+    "allowed_modes": [
+      "dry_run"
+    ],
+    "input_schema": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "output_schema": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "required_policy_actions": [
+      "memory.retrieve",
+      "capability.list"
+    ],
+    "required_settings": [],
+    "required_contracts": [],
+    "requires_approval": false,
+    "requires_sandbox": true,
+    "sandbox_profile_id": "metadata-only-future-runtime",
+    "dry_run_supported": true,
+    "controlled_supported": false,
+    "constraints": [
+      "metadata_only",
+      "no_external_source",
+      "no_runtime_registration"
+    ],
+    "metadata": {
+      "activation_requested": false,
+      "execution_requested": false
+    },
+    "created_by": "operator"
+  },
+  {
+    "capability_binding_id": "gki-binding-summarize-001",
+    "module_slot_id": "gki-module-slot-001",
+    "capability_key": "generic.knowledge.summarize",
+    "capability_type": "reasoning",
+    "binding_type": "declared",
+    "target_runtime": "metadata_only",
+    "risk_level": "low",
+    "allowed_modes": [
+      "dry_run"
+    ],
+    "input_schema": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "output_schema": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "required_policy_actions": [
+      "context.compile",
+      "trace.read"
+    ],
+    "required_settings": [],
+    "required_contracts": [],
+    "requires_approval": false,
+    "requires_sandbox": true,
+    "sandbox_profile_id": "metadata-only-future-runtime",
+    "dry_run_supported": true,
+    "controlled_supported": false,
+    "constraints": [
+      "metadata_only",
+      "no_external_source",
+      "no_runtime_registration"
+    ],
+    "metadata": {
+      "activation_requested": false,
+      "execution_requested": false
+    },
+    "created_by": "operator"
+  },
+  {
+    "capability_binding_id": "gki-binding-ground-001",
+    "module_slot_id": "gki-module-slot-001",
+    "capability_key": "generic.knowledge.ground",
+    "capability_type": "evidence",
+    "binding_type": "declared",
+    "target_runtime": "metadata_only",
+    "risk_level": "medium",
+    "allowed_modes": [
+      "dry_run"
+    ],
+    "input_schema": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "output_schema": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "required_policy_actions": [
+      "context.compile",
+      "trace.read"
+    ],
+    "required_settings": [],
+    "required_contracts": [],
+    "requires_approval": false,
+    "requires_sandbox": true,
+    "sandbox_profile_id": "metadata-only-future-runtime",
+    "dry_run_supported": true,
+    "controlled_supported": false,
+    "constraints": [
+      "metadata_only",
+      "no_external_source",
+      "no_runtime_registration"
+    ],
+    "metadata": {
+      "activation_requested": false,
+      "execution_requested": false
+    },
+    "created_by": "operator"
+  },
+  {
+    "capability_binding_id": "gki-binding-explain-001",
+    "module_slot_id": "gki-module-slot-001",
+    "capability_key": "generic.knowledge.explain",
+    "capability_type": "reasoning",
+    "binding_type": "declared",
+    "target_runtime": "metadata_only",
+    "risk_level": "low",
+    "allowed_modes": [
+      "dry_run"
+    ],
+    "input_schema": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "output_schema": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "required_policy_actions": [
+      "trace.read",
+      "context.compile"
+    ],
+    "required_settings": [],
+    "required_contracts": [],
+    "requires_approval": false,
+    "requires_sandbox": true,
+    "sandbox_profile_id": "metadata-only-future-runtime",
+    "dry_run_supported": true,
+    "controlled_supported": false,
+    "constraints": [
+      "metadata_only",
+      "no_external_source",
+      "no_runtime_registration"
+    ],
+    "metadata": {
+      "activation_requested": false,
+      "execution_requested": false
+    },
+    "created_by": "operator"
+  },
+  {
+    "capability_binding_id": "gki-binding-answer-001",
+    "module_slot_id": "gki-module-slot-001",
+    "capability_key": "generic.knowledge.answer",
+    "capability_type": "reasoning",
+    "binding_type": "declared",
+    "target_runtime": "metadata_only",
+    "risk_level": "medium",
+    "allowed_modes": [
+      "dry_run"
+    ],
+    "input_schema": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "output_schema": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "required_policy_actions": [
+      "capability.invoke",
+      "context.compile",
+      "trace.read"
+    ],
+    "required_settings": [],
+    "required_contracts": [],
+    "requires_approval": false,
+    "requires_sandbox": true,
+    "sandbox_profile_id": "metadata-only-future-runtime",
+    "dry_run_supported": true,
+    "controlled_supported": false,
+    "constraints": [
+      "metadata_only",
+      "no_external_source",
+      "no_runtime_registration"
+    ],
+    "metadata": {
+      "activation_requested": false,
+      "execution_requested": false
+    },
+    "created_by": "operator"
+  }
+]

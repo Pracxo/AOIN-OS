@@ -88,6 +88,29 @@ disable plan. Review does not activate the module.
 
 Activation remains disabled. `activation_ready` remains false for AION-082.
 
+## AION-084 Metadata Pack
+
+AION-084 turns this selected module class into the first concrete metadata-only
+module pack under `examples/modules/generic-knowledge-intelligence/`.
+
+The pack contains:
+
+- extension manifest
+- intake dry-run request
+- inactive module slot request
+- five inactive capability binding requests
+- binding validation request
+- conformance profile
+- synthetic test vectors
+- conformance run request
+- readiness assessment request
+- activation request
+- activation gate expectation fixture
+- operator review request
+
+It remains a module package and readiness trail, not a runtime module.
+Activation blockers are expected and successful in v0.1.
+
 ## Future Runtime Design
 
 Future runtime design must add activation request semantics, approval

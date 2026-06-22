@@ -1,0 +1,20 @@
+{
+  "request": {
+    "scope": [
+      "workspace:main"
+    ],
+    "mode": "dry_run",
+    "created_by": "operator"
+  },
+  "expect": {
+    "activation_allowed": false,
+    "blockers": [
+      "activation_disabled",
+      "runtime_registration_disabled",
+      "code_loading_disabled",
+      "dynamic_route_registration_disabled"
+    ],
+    "safe_blocker_only": true,
+    "execution_performed": false
+  }
+}

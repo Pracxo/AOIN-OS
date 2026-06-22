@@ -93,6 +93,19 @@ selected because it demonstrates useful module review without tool execution,
 external actions, controlled handoff, dynamic routes, package installation, or
 runtime activation.
 
+AION-084 creates the concrete metadata-only pack at
+`examples/modules/generic-knowledge-intelligence/`. It includes fixture
+requests for manifest intake, slot staging, capability bindings, binding
+validation, conformance, readiness, activation request, activation gate
+blockers, runtime registration preview expectations, and operator review.
+
+Validate the pack with:
+
+```bash
+./scripts/module-pack-check.sh
+./scripts/generic-knowledge-demo.sh --offline-ok --skip-api
+```
+
 ## Risk Ordering
 
 1. Knowledge Intelligence.
@@ -140,7 +153,7 @@ and rollback plan.
 
 ## No-Go Rules
 
-- No activation in AION-082 or AION-083.
+- No activation in post-v0.1 metadata package work.
 - No code loading.
 - No package installation.
 - No dynamic route registration.

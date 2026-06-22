@@ -26,3 +26,21 @@ Activation remains disabled until a future activation gate exists.
 Code loading remains disabled for all metadata examples and intake records.
 
 Modules must not modify Brain core.
+
+## First Module Pack Checklist
+
+For `generic.knowledge_intelligence`, verify:
+
+- [ ] `examples/modules/generic-knowledge-intelligence/manifest.json` exists
+- [ ] `./scripts/module-pack-check.sh` passes
+- [ ] `./scripts/generic-knowledge-demo.sh --offline-ok --skip-api` passes
+- [ ] all five capabilities begin with `generic.`
+- [ ] declared routes are empty
+- [ ] declared dependencies are empty
+- [ ] capability bindings use `target_runtime=metadata_only`
+- [ ] capability bindings keep `controlled_supported=false`
+- [ ] test vectors are synthetic
+- [ ] readiness expects `activation_ready=false`
+- [ ] activation request expects `activation_allowed=false`
+- [ ] runtime registration preview expectations keep `registration_allowed=false`
+- [ ] operator review states approval does not activate

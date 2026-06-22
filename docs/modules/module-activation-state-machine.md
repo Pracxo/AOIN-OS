@@ -75,3 +75,21 @@ In AION-083, `activation_requested` can be represented by a persisted
 `ModuleActivationRequest`, but the only allowed next runtime state remains
 `activation_blocked_by_default`. Activation, execution, code loading, package
 installation, and runtime registration remain disabled.
+
+## Generic Knowledge Intelligence Mapping
+
+The AION-084 module pack maps to the state machine as evidence only:
+
+- `manifest_submitted`: `manifest.json`
+- `intake_validated`: `intake-request.json`
+- `slot_staged`: `module-slot-request.json`
+- `binding_created`: `capability-bindings.json`
+- `binding_validated`: `binding-validation-request.json`
+- `conformance_passed`: `conformance-run-request.json`
+- `readiness_reviewed`: `readiness-assessment-request.json`
+- `activation_requested`: `activation-request.json`
+- `activation_blocked_by_default`: `activation-gate-request.json`
+- `operator_approved`: `operator-review-request.json`
+
+The expected terminal state for v0.1 is still
+`activation_blocked_by_default`.

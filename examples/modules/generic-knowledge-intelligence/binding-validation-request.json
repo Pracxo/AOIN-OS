@@ -1,0 +1,27 @@
+{
+  "binding_validation_id": "gki-binding-validation-001",
+  "mode": "dry_run",
+  "owner_scope": [
+    "workspace:main"
+  ],
+  "module_slot_id": "gki-module-slot-001",
+  "capability_binding_ids": [
+    "gki-binding-retrieve-001",
+    "gki-binding-summarize-001",
+    "gki-binding-ground-001",
+    "gki-binding-explain-001",
+    "gki-binding-answer-001"
+  ],
+  "include_contract_checks": true,
+  "include_policy_checks": true,
+  "include_setting_checks": true,
+  "include_sandbox_checks": true,
+  "include_security_checks": true,
+  "create_notifications": false,
+  "metadata": {
+    "metadata_only": true,
+    "expected_activation_allowed": false,
+    "expected_dynamic_route_registration_allowed": false
+  },
+  "created_by": "operator"
+}

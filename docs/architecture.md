@@ -1693,3 +1693,22 @@ provenance, and operator review rather than Brain core code changes.
 
 See `docs/roadmap/module-ecosystem.md` and
 `docs/architecture/module-activation-design.md`.
+
+## Generic Knowledge Intelligence Module Pack
+
+AION-084 adds the first concrete post-v0.1 module package as metadata only.
+This is a package example and readiness trail, not a runtime module and not a
+new Brain subsystem.
+
+The example path is:
+
+`manifest -> intake -> slot -> binding -> conformance -> readiness -> activation request -> activation blocker`
+
+The pack is stored under `examples/modules/generic-knowledge-intelligence/`.
+It declares five generic capabilities, synthetic test vectors, dry-run request
+fixtures, expected activation blockers, and operator review evidence.
+
+The pack must not register runtime routes, add SDK or CLI surface, add
+migrations, load code, install packages, execute tools, call external services,
+mutate runtime configuration, or activate capabilities. Activation blockers
+are the expected v0.1 result.
