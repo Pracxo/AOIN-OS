@@ -597,3 +597,18 @@ gate runs, findings, evidence packs, and reports only. They do not deploy,
 publish, tag releases, mutate source code, enable runtime features, call
 external services, print raw prompts, expose hidden reasoning, or add
 domain-specific release behavior.
+
+## Local Demo Command Sequence
+
+```bash
+aionctl bootstrap doctor
+aionctl golden-path run
+aionctl rc run
+aionctl extensions validate --manifest-file examples/demo/generic-extension-manifest.json
+aionctl module-bindings validate --dry-run
+aionctl conformance run --capability-binding-id <capability-binding-id>
+aionctl readiness assess --capability-binding-id <capability-binding-id>
+```
+
+Use `./scripts/demo-local.sh --offline-ok` for the scripted local demo. The
+sequence stays dry-run and metadata-only where module paths are involved.

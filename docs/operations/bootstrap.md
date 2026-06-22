@@ -34,3 +34,13 @@ controlled handoffs, hard-delete records, or mutate source code.
 
 Setup findings are records for operator review. They do not remediate the
 source condition automatically.
+
+## Release Handoff Usage
+
+For v0.1 release handoff, run:
+
+```bash
+./scripts/setup-doctor.sh --fast --offline-ok
+```
+
+Critical setup findings are no-go conditions for the release candidate.

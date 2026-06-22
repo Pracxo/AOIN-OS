@@ -753,3 +753,20 @@ Useful methods include:
 The SDK calls public Brain APIs only. It does not import `aion_brain`, deploy,
 publish, mutate source code, enable runtime features, call external services,
 or add domain-specific release behavior.
+
+## Local Demo SDK Flow
+
+The local demo uses existing SDK resources only:
+
+- `client.bootstrap`
+- `client.golden_path`
+- `client.release_candidate`
+- `client.extensions`
+- `client.module_bindings`
+- `client.conformance`
+- `client.operator`
+
+The flow is setup doctor, golden path, RC gate, manifest validation, extension
+intake dry-run, module binding validation dry-run, conformance readiness
+assessment, and operator overview. It does not load code, activate bindings,
+call external services, or mutate source code.

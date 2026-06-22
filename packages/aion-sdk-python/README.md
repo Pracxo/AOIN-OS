@@ -83,3 +83,16 @@ or production auth secrets.
 - Module commands are contract-only and never execute module code.
 - Action proposal commands do not execute proposals. Handoff defaults to dry-run
   and controlled handoff remains disabled by default.
+
+## v0.1 Local Demo
+
+Use the repo-level demo script for release-candidate verification:
+
+```bash
+cd ../..
+./scripts/demo-local.sh --offline-ok
+```
+
+Relevant SDK-backed CLI surfaces are `bootstrap`, `golden-path`, `rc`,
+`extensions`, `module-bindings`, `conformance`, `readiness`, and `operator`.
+They call public Brain APIs only and keep demo module paths metadata-only.

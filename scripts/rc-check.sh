@@ -68,7 +68,7 @@ run_check "typecheck" "scripts/typecheck.sh" "$ROOT_DIR/scripts/typecheck.sh" ||
 run_check "boundary_check" "scripts/boundary-check.sh" "$ROOT_DIR/scripts/boundary-check.sh" || exit 1
 run_check "repo_health" "scripts/repo-health.sh" "$ROOT_DIR/scripts/repo-health.sh" || exit 1
 run_check "docker_compose_config" "docker compose config --quiet" docker compose -f "$ROOT_DIR/docker-compose.yml" config --quiet || exit 1
-run_check "bootstrap_doctor" "scripts/setup-doctor.sh --fast" "$ROOT_DIR/scripts/setup-doctor.sh" --fast || exit 1
+run_check "bootstrap_doctor" "scripts/setup-doctor.sh --fast --offline-ok" "$ROOT_DIR/scripts/setup-doctor.sh" --fast --offline-ok || exit 1
 
 printf '\n]\n' >>"$RESULTS_FILE"
 

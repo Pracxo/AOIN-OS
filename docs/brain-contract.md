@@ -1508,3 +1508,10 @@ Release candidate contracts must not expose raw headers, hidden reasoning, raw
 prompts, provider payloads, secrets, SQLAlchemy rows, deployment credentials,
 external service clients, source-code patches, or domain-specific release
 logic.
+
+## Release Handoff Contract Note
+
+AION-079 adds no new runtime contracts. It documents and validates existing
+release candidate, bootstrap, golden path, freeze, release package, operator,
+extension, module binding, conformance, SDK, and CLI interfaces for local
+handoff.

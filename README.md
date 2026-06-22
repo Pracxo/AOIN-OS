@@ -216,6 +216,45 @@ curl http://localhost:8080/health/live
 curl http://localhost:8080/health/ready
 ```
 
+## v0.1 Release Candidate Quick Start
+
+Use this command set for local release-candidate verification:
+
+```bash
+docker compose config --quiet
+docker compose up --build -d brain-api postgres redis nats opa
+curl -fsS http://localhost:8080/health
+curl -fsS http://localhost:8080/health/ready
+./scripts/setup-doctor.sh --fast --offline-ok
+./scripts/golden-path.sh --offline-ok
+./scripts/rc-check.sh --offline-ok
+./scripts/demo-local.sh --offline-ok
+docker compose down
+```
+
+Release handoff docs:
+
+- [Operator runbook](docs/operations/operator-runbook.md)
+- [Local demo pack](docs/operations/local-demo-pack.md)
+- [Troubleshooting](docs/operations/troubleshooting.md)
+- [v0.1 release handoff](docs/operations/v0.1-release-handoff.md)
+- [Release candidate checklist](docs/release/v0.1-release-candidate-checklist.md)
+- [Demo script](docs/release/v0.1-demo-script.md)
+- [No-go conditions](docs/release/v0.1-no-go-conditions.md)
+- [Post-v0.1 roadmap](docs/release/v0.1-post-release-roadmap.md)
+
+Local demo:
+
+```bash
+./scripts/demo-local.sh --offline-ok
+```
+
+First-run bootstrap and setup doctor remain local setup checks. Golden path
+proves deterministic synthetic scenario wiring. The RC gate aggregates local
+verification evidence into release-candidate records. No-go conditions block
+the v0.1 tag until fixed. The post-v0.1 roadmap starts module activation
+design after Brain freeze.
+
 Release candidate gate:
 
 ```bash

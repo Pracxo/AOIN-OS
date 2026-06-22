@@ -890,3 +890,9 @@ Generic visual node types include:
 These nodes represent local release-readiness evidence and review records.
 They must not imply deployment, publishing, source mutation, external service
 calls, or domain-specific release behavior.
+
+## Release Handoff Projection Note
+
+AION-079 adds no new visual node types. Demo and runbook scripts visualize
+through existing setup, golden path, release smoke, release candidate, freeze,
+operator, extension, module binding, and conformance telemetry.

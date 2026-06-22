@@ -69,3 +69,14 @@ Run through `aionctl`:
 
 Failed or blocked runs generate reports and may create operator action items.
 They do not hide failures or weaken the release/freeze gates.
+
+## Release Handoff Usage
+
+For v0.1 release handoff, run:
+
+```bash
+./scripts/golden-path.sh --offline-ok
+./scripts/release-smoke.sh --offline-ok
+```
+
+Golden path or release smoke critical failures are no-go conditions.

@@ -1609,3 +1609,19 @@ Required missing, failed, blocked, or unknown checks fail closed. Critical
 findings block readiness when the matrix requires it. Evidence packs and
 reports are redacted before persistence and must not include raw prompts,
 hidden reasoning, raw headers, provider payloads, secrets, or SQLAlchemy rows.
+
+## Final Release Closure
+
+AION-079 adds the operator runbook, local demo pack, troubleshooting guide,
+release candidate checklist, final documentation audit, local demo script, and
+release handoff summary. These files explain and validate the existing v0.1
+runtime; they do not create a new Brain subsystem.
+
+Release-closure docs and scripts differ from Brain runtime services:
+
+- They call existing local APIs and scripts.
+- They do not add database tables.
+- They do not add API routes.
+- They do not add policy actions.
+- They do not deploy, provision, publish, or enable disabled features.
+- They do not introduce domain-specific workflows.

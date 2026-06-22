@@ -1531,3 +1531,10 @@ record mutation outside RC-owned records, enabling disabled features, code
 loading, full autonomy, raw prompt disclosure, hidden reasoning disclosure,
 raw header export, secret export, or domain-specific release behavior fail
 closed.
+
+## Release Handoff Policy Note
+
+AION-079 adds no new policy actions. Existing RC, bootstrap, golden path,
+release, freeze, operator, contract registry, resource registry, extension,
+module binding, and conformance actions remain authoritative for local release
+handoff.

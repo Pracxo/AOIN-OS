@@ -37,3 +37,14 @@ The RC gate is local-only. It does not deploy, publish, tag releases
 automatically, mutate source code, enable disabled features, call external
 services, expose raw prompts, expose hidden reasoning, or add domain-specific
 release logic.
+
+## Release Handoff Usage
+
+For v0.1 release handoff, run:
+
+```bash
+./scripts/rc-check.sh --offline-ok
+./scripts/rc-evidence.sh --offline-ok
+```
+
+Any RC blocker is a no-go condition.

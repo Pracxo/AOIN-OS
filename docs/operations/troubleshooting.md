@@ -1,60 +1,29 @@
-# Troubleshooting
+# AION v0.1 Troubleshooting
 
-## Brain API Does Not Start
+Use this table for local release-candidate failures. Fix the underlying local
+condition; do not bypass gates or enable disabled features.
 
-Run `docker compose logs brain-api` and confirm `.env.example` or `.env` is
-available. Rebuild with `scripts/docker-build.sh`.
-
-## Postgres Unavailable
-
-Check `docker compose ps postgres` and confirm port `5432` is free. Recreate
-local volumes only when local data can be discarded.
-
-## Redis Unavailable
-
-Check `docker compose ps redis` and confirm port `6379` is free.
-
-## NATS Unavailable
-
-Check `docker compose ps nats` and confirm JetStream config is mounted from
-`infra/nats/nats.conf`.
-
-## OPA Unavailable
-
-Check `docker compose ps opa` and confirm `infra/opa/policies` is mounted.
-Policy failures must fail closed.
-
-## Health Ready Degraded
-
-`/health/ready` reports each dependency status. Use the failing check name to
-inspect the matching compose service.
-
-## Migrations Failed
-
-Run `scripts/migration-check.sh` first. Inspect the latest file in
-`infra/postgres/migrations` for duplicate tables or destructive operations.
-
-## SDK Cannot Connect
-
-Confirm `AION_BASE_URL` or the CLI `--base-url` points to
-`http://localhost:8080`.
-
-## Docker Build Failed
-
-Run `docker compose config` and then `scripts/docker-build.sh`. Rebuild after
-dependency changes.
-
-## Policy Denied Request
-
-Inspect the returned policy reason and constraints. Run
-`scripts/policy-coverage.sh` to verify catalog coverage.
-
-## Autonomy Blocked Request
-
-Autonomy defaults are bounded. Check the active run level and approval
-requirements before retrying.
-
-## Boundary Check Failed
-
-Run `scripts/boundary-check.sh`. Fix direct vendor leakage, forbidden source
-directories, or raw infrastructure access outside adapter boundaries.
+| Symptom | Likely cause | Exact check command | Safe fix | Unsafe fix to avoid |
+| --- | --- | --- | --- | --- |
+| Docker service not starting | Invalid compose config or stale local container | `docker compose config --quiet && docker compose ps` | Rebuild the local stack and inspect service logs. | Editing compose to skip required services. |
+| Health endpoint failing | Brain API is not booted or wrong port is used | `curl -fsS http://localhost:8080/health` | Check `docker compose logs brain-api`. | Claiming release readiness without health. |
+| Readiness dependency unavailable | Postgres, Redis, NATS, or OPA is unavailable | `curl -fsS http://localhost:8080/health/ready` | Restart the named dependency. | Disabling readiness checks. |
+| OPA policy unknown action | Policy vocabulary missing an action | `./scripts/policy-coverage.sh` | Add generic policy coverage and rerun. | Broad allow rules. |
+| 403 from local smoke | Policy context or OPA bridge mismatch | `docker compose logs opa` | Restart OPA and verify the action family. | Bypassing policy. |
+| SDK venv missing typer | SDK tests are running in the wrong venv | `packages/aion-sdk-python/.venv/bin/python -m pytest packages/aion-sdk-python/tests -q` | Use the SDK venv. | Installing packages globally. |
+| Brain venv import mismatch | Brain tests are running in the wrong venv | `services/brain-api/.venv/bin/python -m pytest services/brain-api/tests -q` | Use the Brain venv. | Editing imports to match a system Python path. |
+| Postgres migration mismatch | Migration files or local DB schema drifted | `./scripts/migration-check.sh` | Recreate local dev data only when acceptable. | Manual production-style DB edits. |
+| Redis/NATS unavailable | Local service is down or port is occupied | `docker compose ps redis nats` | Restart the service or free the port. | Removing Redis or NATS from compose. |
+| Golden path warning | Synthetic scenario produced a warning | `./scripts/golden-path.sh --offline-ok` | Inspect the golden path report. | Marking warnings as pass without review. |
+| RC gate missing required check | Script or matrix did not supply a required check | `./scripts/rc-check.sh --offline-ok` | Add or rerun the missing local check. | Lowering the matrix threshold. |
+| Freeze gate blocked | Freeze prerequisite failed | `./scripts/aionctl.sh --scope workspace:main freeze run --version 0.1.0` | Fix the named freeze check. | Freezing with an unresolved blocker. |
+| Release package dry-run failed | Handoff or package metadata is incomplete | `./scripts/package-release.sh --dry-run` | Fix package metadata and rerun dry-run. | Publishing a package manually. |
+| No-domain-drift failure | Domain terms entered Brain core or examples | `./scripts/verify-no-domain-drift.sh` | Remove vertical workflow logic. | Adding exceptions for demos. |
+| Boundary check failure | Vendor or infra object leaked through Brain public API | `./scripts/boundary-check.sh` | Move implementation behind an adapter. | Exposing raw client objects. |
+| Typecheck failure | Contract or literal typing drifted | `./scripts/typecheck.sh` | Tighten public types and rerun. | Adding broad `Any` at public boundaries. |
+| Ruff failure | Formatting or lint drift | `./scripts/lint.sh` | Run format and fix lint. | Ignoring lint for release. |
+| OpenAPI hygiene failure | API schema drifted | `./scripts/openapi-hygiene.sh` | Fix route or contract shape. | Hiding endpoints from schema. |
+| Policy coverage failure | Policy catalog and OPA coverage diverged | `./scripts/policy-coverage.sh` | Add missing generic action coverage. | Wildcard allow. |
+| Extension intake blocked | Manifest requests unsafe behavior or policy denies it | `./scripts/aionctl.sh --scope workspace:main extensions validate --manifest-file examples/demo/generic-extension-manifest.json` | Keep manifest metadata-only. | Enabling code loading. |
+| Module binding validation blocked | Binding references missing contracts or unsafe flags | `./scripts/aionctl.sh --scope workspace:main module-bindings validate --dry-run` | Fix metadata and rerun dry-run. | Activating the binding. |
+| Conformance readiness blocked | Required schema or readiness checks are missing | `./scripts/aionctl.sh --scope workspace:main readiness assess --capability-binding-id <capability-binding-id>` | Create required metadata and rerun. | Treating readiness as activation. |

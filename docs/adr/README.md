@@ -2,6 +2,9 @@
 
 Every architecture-changing Codex task must add or update an ADR.
 
+AION-079 is a release handoff and documentation audit task. It adds no new
+runtime architecture decision and therefore has no dedicated ADR.
+
 ## Index
 
 - [0001: Brain-Only Scope](0001-brain-only-scope.md) - Defines Brain core scope and exclusions.

@@ -304,3 +304,10 @@ Instructions for future Codex runs in this repository:
   external services, execute uncontrolled release packaging, expose raw
   prompts, expose hidden reasoning, expose secrets, or add domain-specific
   release logic.
+- Release handoff docs must not claim production readiness.
+- Demo fixtures must be synthetic.
+- Demo scripts must not call external services.
+- Demo scripts must not install packages.
+- Runbooks must state disabled v0.1 boundaries.
+- No domain-specific demo flows.
+- No raw secrets in examples.

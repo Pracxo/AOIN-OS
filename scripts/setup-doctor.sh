@@ -5,10 +5,12 @@ ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 BASE_URL="${AION_BASE_URL:-http://localhost:8080}"
 SCOPE="${AION_SCOPE:-workspace:main}"
 RUN_CHECKS=1
+OFFLINE_OK=0
 
 for arg in "$@"; do
   case "$arg" in
     --fast) RUN_CHECKS=0 ;;
+    --offline-ok) OFFLINE_OK=1 ;;
     *) echo "unknown argument: $arg" >&2; exit 2 ;;
   esac
 done
@@ -45,4 +47,7 @@ if curl -fsS "${BASE_URL}/health" >/dev/null 2>&1; then
 JSON
 else
   echo "Brain API is not reachable at ${BASE_URL}; local file and compose checks passed."
+  if [[ "$OFFLINE_OK" != "1" ]]; then
+    echo "Pass --offline-ok to make offline setup checks explicit."
+  fi
 fi
