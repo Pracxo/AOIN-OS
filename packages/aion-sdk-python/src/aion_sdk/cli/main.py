@@ -32,6 +32,9 @@ from aion_sdk.cli.commands.instructions import install_instruction_commands
 from aion_sdk.cli.commands.learning import install_learning_commands
 from aion_sdk.cli.commands.lifecycle import install_lifecycle_commands
 from aion_sdk.cli.commands.model_outputs import install_model_output_commands
+from aion_sdk.cli.commands.model_provider_hardening import (
+    install_model_provider_hardening_commands,
+)
 from aion_sdk.cli.commands.module_activation import install_module_activation_commands
 from aion_sdk.cli.commands.module_bindings import install_module_binding_commands
 from aion_sdk.cli.commands.module_mock_runtime import install_module_mock_runtime_commands
@@ -577,6 +580,7 @@ install_instruction_commands(app, get_client=_client, get_scope=_scope, render=_
 install_grounding_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_prompt_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_model_output_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_model_provider_hardening_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_action_proposal_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_run_supervision_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_notification_commands(app, get_client=_client, get_scope=_scope, render=_render)

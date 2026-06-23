@@ -86,3 +86,4 @@ closure decision in ADR 0072.
 - [0074: Module Activation Request Gate](0074-module-activation-request-gate.md) - Defines metadata-only activation requests, blockers, reviews, plans, and runtime registration previews.
 - [0075: Generic Knowledge Intelligence Module Pack](0075-generic-knowledge-intelligence-module-pack.md) - Defines the first metadata-only governed module package and readiness trail.
 - [0076: Deterministic Module Mock Runtime](0076-deterministic-module-mock-runtime.md) - Defines synthetic dry-run module invocation evidence and readiness boundaries.
+- [0077: Model Provider Adapter Hardening](0077-model-provider-adapter-hardening.md) - Defines provider-readiness metadata, prompt egress previews, and dry-run provider simulation boundaries.

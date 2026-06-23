@@ -822,3 +822,22 @@ The SDK calls public Brain APIs only. It does not import `aion_brain`, load
 module code, install packages, activate modules, execute capabilities, register
 routes, mutate runtime configuration, call external services, or add
 domain-specific module behavior.
+
+## ModelProviderHardeningResource
+
+`client.model_provider_hardening` exposes provider hardening APIs.
+
+Useful methods include:
+
+- `create_profile(payload)`
+- `seed_profiles(payload)`
+- `list_profiles(scope, provider_key=None, status=None, risk_level=None, limit=100)`
+- `get_profile(provider_profile_id, scope)`
+- `egress_preview(payload)`
+- `simulate(payload)`
+- `assess_readiness(payload)`
+- `blockers(scope, provider_key=None, status="open", severity=None, limit=100)`
+- `dismiss_blocker(provider_blocker_id, payload)`
+- `query(payload)`
+
+The SDK does not expose provider-call or credential commands.

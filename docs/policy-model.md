@@ -1594,3 +1594,19 @@ AION-079 adds no new policy actions. Existing RC, bootstrap, golden path,
 release, freeze, operator, contract registry, resource registry, extension,
 module binding, and conformance actions remain authoritative for local release
 handoff.
+
+## Model Provider Hardening Actions
+
+- `model_provider.profile.create`
+- `model_provider.profile.read`
+- `model_provider.profile.update`
+- `model_provider.egress.preview`
+- `model_provider.simulate`
+- `model_provider.readiness.assess`
+- `model_provider.blocker.read`
+- `model_provider.blocker.update`
+- `model_provider.query`
+
+Provider hardening actions are generic. External provider calls, credential
+storage, prompt transmission, model invocation, and tool execution remain
+denied in AION-086.

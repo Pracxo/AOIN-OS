@@ -451,6 +451,15 @@ allowed_actions := {
 	"module_mock.finding.read",
 	"module_mock.finding.update",
 	"module_mock.query",
+	"model_provider.profile.create",
+	"model_provider.profile.read",
+	"model_provider.profile.update",
+	"model_provider.egress.preview",
+	"model_provider.simulate",
+	"model_provider.readiness.assess",
+	"model_provider.blocker.read",
+	"model_provider.blocker.update",
+	"model_provider.query",
 	"conformance.profile.create",
 	"conformance.profile.read",
 	"conformance.profile.update",
@@ -1604,6 +1613,34 @@ decision := {
 	module_mock_metadata_action
 	module_mock_permission
 	not module_mock_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "model_provider_hardening_read_allowed",
+	"constraints": ["metadata_only", "provider_disabled", "no_external_model_calls", "no_credentials"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	model_provider_read_action
+	model_provider_permission
+	not model_provider_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "model_provider_hardening_action_allowed",
+	"constraints": ["metadata_only", "dry_run_only", "provider_disabled", "no_prompt_transmission", "no_external_model_calls", "no_credentials", "no_tool_execution"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	model_provider_metadata_action
+	model_provider_permission
+	not model_provider_unsafe_request
 }
 
 decision := {
@@ -3257,6 +3294,7 @@ decision := {
 	not module_binding_action
 	not module_activation_action
 	not module_mock_action
+	not model_provider_hardening_action
 	not conformance_action
 	not golden_path_action
 	not bootstrap_action
@@ -3485,6 +3523,7 @@ decision := {
 	not module_binding_action
 	not module_activation_action
 	not module_mock_action
+	not model_provider_hardening_action
 	not conformance_action
 	not golden_path_action
 	not bootstrap_action
@@ -4041,6 +4080,10 @@ module_mock_action if {
 	startswith(input.action_type, "module_mock.")
 }
 
+model_provider_hardening_action if {
+	startswith(input.action_type, "model_provider.")
+}
+
 contract_registry_read_action if {
 	input.action_type == "contract_registry.resource.read"
 }
@@ -4495,6 +4538,78 @@ module_mock_unsafe_request if {
 
 module_mock_unsafe_request if {
 	input.context.code_generated == true
+}
+
+model_provider_read_action if {
+	input.action_type == "model_provider.profile.read"
+}
+
+model_provider_read_action if {
+	input.action_type == "model_provider.blocker.read"
+}
+
+model_provider_read_action if {
+	input.action_type == "model_provider.query"
+}
+
+model_provider_metadata_action if {
+	input.action_type == "model_provider.profile.create"
+}
+
+model_provider_metadata_action if {
+	input.action_type == "model_provider.profile.update"
+}
+
+model_provider_metadata_action if {
+	input.action_type == "model_provider.egress.preview"
+}
+
+model_provider_metadata_action if {
+	input.action_type == "model_provider.simulate"
+}
+
+model_provider_metadata_action if {
+	input.action_type == "model_provider.readiness.assess"
+}
+
+model_provider_metadata_action if {
+	input.action_type == "model_provider.blocker.update"
+}
+
+model_provider_unsafe_request if {
+	input.context.external_call_requested == true
+}
+
+model_provider_unsafe_request if {
+	input.context.external_calls_made == true
+}
+
+model_provider_unsafe_request if {
+	input.context.external_model_calls_enabled == true
+}
+
+model_provider_unsafe_request if {
+	input.context.credentials_used == true
+}
+
+model_provider_unsafe_request if {
+	input.context.credentials_enabled == true
+}
+
+model_provider_unsafe_request if {
+	input.context.model_invoked == true
+}
+
+model_provider_unsafe_request if {
+	input.context.provider_enabled == true
+}
+
+model_provider_unsafe_request if {
+	input.context.tool_execution_requested == true
+}
+
+model_provider_unsafe_request if {
+	input.context.raw_prompt_included == true
 }
 
 conformance_action if {
@@ -5477,6 +5592,44 @@ module_mock_permission if {
 }
 
 module_mock_permission if {
+	input.context.actor_context.permissions[_] == "operator"
+}
+
+model_provider_permission if {
+	dev_owner
+}
+
+model_provider_permission if {
+	input.context.actor_context.permissions[_] == input.action_type
+}
+
+model_provider_permission if {
+	input.context.permissions[_] == input.action_type
+}
+
+model_provider_permission if {
+	model_provider_read_action
+	input.requested_permissions[_] == input.action_type
+	count(input.security_scope) > 0
+}
+
+model_provider_permission if {
+	input.actor_id
+	input.requested_permissions[_] == input.action_type
+	input.security_scope[_] == sprintf("workspace:%s", [input.workspace_id])
+}
+
+model_provider_permission if {
+	input.context.actor_context.permissions[_] == "model_provider.read"
+	model_provider_read_action
+}
+
+model_provider_permission if {
+	input.context.actor_context.permissions[_] == "model_provider.write"
+	model_provider_metadata_action
+}
+
+model_provider_permission if {
 	input.context.actor_context.permissions[_] == "operator"
 }
 

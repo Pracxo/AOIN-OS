@@ -77,6 +77,22 @@ class OutputGovernanceService:
 
         self._tool_intent_review_service = service
 
+    def provider_simulation_requirements(self) -> dict[str, object]:
+        """Return provider-simulation output governance requirements."""
+
+        return {
+            "output_governance_required": True,
+            "tool_intent_blocking_required": bool(
+                getattr(self._settings, "output_governance_block_tool_intents_default", True)
+            ),
+            "grounding_required": bool(
+                getattr(self._settings, "output_governance_require_grounding_default", False)
+            ),
+            "raw_output_storage_allowed": bool(
+                getattr(self._settings, "model_output_store_raw", False)
+            ),
+        }
+
     def receive_output(self, request: ModelOutputCreateRequest) -> ModelOutputRecord:
         """Receive and persist a redacted model output record."""
 

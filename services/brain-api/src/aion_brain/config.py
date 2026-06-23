@@ -460,6 +460,62 @@ class Settings(BaseSettings):
             "module_mock_create_notifications_default",
         ),
     )
+    model_provider_hardening_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODEL_PROVIDER_HARDENING_ENABLED",
+            "model_provider_hardening_enabled",
+        ),
+    )
+    model_provider_profiles_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODEL_PROVIDER_PROFILES_ENABLED",
+            "model_provider_profiles_enabled",
+        ),
+    )
+    prompt_egress_guard_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_PROMPT_EGRESS_GUARD_ENABLED",
+            "prompt_egress_guard_enabled",
+        ),
+    )
+    model_provider_simulation_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODEL_PROVIDER_SIMULATION_ENABLED",
+            "model_provider_simulation_enabled",
+        ),
+    )
+    model_provider_readiness_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODEL_PROVIDER_READINESS_ENABLED",
+            "model_provider_readiness_enabled",
+        ),
+    )
+    external_model_calls_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_EXTERNAL_MODEL_CALLS_ENABLED",
+            "external_model_calls_enabled",
+        ),
+    )
+    model_provider_credentials_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_MODEL_PROVIDER_CREDENTIALS_ENABLED",
+            "model_provider_credentials_enabled",
+        ),
+    )
+    model_provider_create_notifications_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_MODEL_PROVIDER_CREATE_NOTIFICATIONS_DEFAULT",
+            "model_provider_create_notifications_default",
+        ),
+    )
     conformance_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices("AION_CONFORMANCE_ENABLED", "conformance_enabled"),

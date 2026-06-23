@@ -947,3 +947,18 @@ calls, or domain-specific release behavior.
 AION-079 adds no new visual node types. Demo and runbook scripts visualize
 through existing setup, golden path, release smoke, release candidate, freeze,
 operator, extension, module binding, and conformance telemetry.
+
+## Model Provider Hardening Projection
+
+AION-086 emits provider-hardening telemetry:
+
+- `model_provider_profile_created`
+- `prompt_egress_preview_created`
+- `model_provider_simulation_completed`
+- `model_provider_readiness_assessed`
+- `model_provider_blocker_created`
+- `model_provider_blocker_dismissed`
+
+Node types include provider profiles, egress previews, simulations, readiness
+records, and blockers. These visual records represent readiness and blockers
+only; they do not represent provider activation or model calls.

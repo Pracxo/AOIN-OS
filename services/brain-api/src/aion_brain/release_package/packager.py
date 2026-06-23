@@ -63,6 +63,7 @@ class ReleasePackager:
         extension_registry_repository: object | None = None,
         module_binding_repository: object | None = None,
         module_mock_repository: object | None = None,
+        model_provider_hardening_repository: object | None = None,
         conformance_repository: object | None = None,
         golden_path_repository: object | None = None,
         bootstrap_repository: object | None = None,
@@ -98,6 +99,7 @@ class ReleasePackager:
         self._extension_registry_repository = extension_registry_repository
         self._module_binding_repository = module_binding_repository
         self._module_mock_repository = module_mock_repository
+        self._model_provider_hardening_repository = model_provider_hardening_repository
         self._conformance_repository = conformance_repository
         self._golden_path_repository = golden_path_repository
         self._bootstrap_repository = bootstrap_repository
@@ -137,6 +139,14 @@ class ReleasePackager:
         """Attach module mock runtime summaries after kernel assembly."""
 
         self._module_mock_repository = repository
+
+    def set_model_provider_hardening_repository(
+        self,
+        repository: object | None = None,
+    ) -> None:
+        """Attach model provider hardening summaries after kernel assembly."""
+
+        self._model_provider_hardening_repository = repository
 
     def set_conformance_repository(self, repository: object | None = None) -> None:
         """Attach capability conformance summaries after kernel assembly."""
@@ -326,6 +336,9 @@ class ReleasePackager:
             reports["extension_registry"] = self._extension_registry_summary(request.owner_scope)
             reports["module_binding_registry"] = self._module_binding_summary(request.owner_scope)
             reports["module_mock_runtime"] = self._module_mock_summary(request.owner_scope)
+            reports["model_provider_hardening"] = self._model_provider_hardening_summary(
+                request.owner_scope
+            )
             reports["capability_conformance"] = self._conformance_summary(request.owner_scope)
             reports["golden_path"] = self._golden_path_summary(request.owner_scope)
             reports["bootstrap"] = self._bootstrap_summary(request.owner_scope)
@@ -508,6 +521,46 @@ class ReleasePackager:
             "external_calls_allowed": False,
             "code_loading_allowed": False,
             "source_code_is_source_of_truth": True,
+        }
+
+    def _model_provider_hardening_summary(self, scope: builtins.list[str]) -> dict[str, Any]:
+        status = _try_call(self._model_provider_hardening_repository, "status", scope)
+        profiles = _try_call(self._model_provider_hardening_repository, "list_profiles", limit=500)
+        simulations = _try_call(
+            self._model_provider_hardening_repository,
+            "list_simulations",
+            limit=500,
+        )
+        blockers = _try_call(
+            self._model_provider_hardening_repository,
+            "list_blockers",
+            status="open",
+            limit=500,
+        )
+        profiles = profiles if isinstance(profiles, list) else []
+        simulations = simulations if isinstance(simulations, list) else []
+        blockers = blockers if isinstance(blockers, list) else []
+        critical_blockers = [
+            item for item in blockers if getattr(item, "severity", None) in {"high", "critical"}
+        ]
+        return {
+            "available": self._model_provider_hardening_repository is not None,
+            "status": (
+                "warning"
+                if critical_blockers
+                else _jsonable(status).get("status", "warning")
+                if isinstance(_jsonable(status), dict)
+                else "warning"
+            ),
+            "profile_count": len(profiles),
+            "simulation_count": len(simulations),
+            "open_blocker_count": len(blockers),
+            "critical_blocker_count": len(critical_blockers),
+            "metadata_only": True,
+            "prompt_transmission_allowed": False,
+            "external_model_calls_enabled": False,
+            "credentials_enabled": False,
+            "model_invocation_enabled": False,
         }
 
     def _conformance_summary(self, scope: builtins.list[str]) -> dict[str, Any]:

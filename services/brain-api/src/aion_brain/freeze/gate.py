@@ -138,6 +138,7 @@ class FreezeGateService:
         self._extension_registry_repository = extension_registry_repository
         self._module_binding_repository: object | None = None
         self._module_mock_repository: object | None = None
+        self._model_provider_hardening_repository: object | None = None
         self._conformance_repository: object | None = None
         self._golden_path_repository: object | None = None
         self._bootstrap_repository: object | None = None
@@ -165,6 +166,11 @@ class FreezeGateService:
         """Attach module mock runtime after kernel assembly."""
 
         self._module_mock_repository = repository
+
+    def set_model_provider_hardening_repository(self, repository: object | None) -> None:
+        """Attach model provider hardening after kernel assembly."""
+
+        self._model_provider_hardening_repository = repository
 
     def set_conformance_repository(self, repository: object | None) -> None:
         """Attach conformance readiness gate after kernel assembly."""
@@ -278,6 +284,14 @@ class FreezeGateService:
                 "module_mock_runtime",
                 self._check_module_mock_runtime_safe,
                 severity="critical",
+            )
+        )
+        checks.append(
+            self._run_check(
+                "provider_hardening_safe",
+                "model_provider_hardening",
+                self._check_model_provider_hardening_safe,
+                severity="medium",
             )
         )
         checks.append(
@@ -808,6 +822,42 @@ class FreezeGateService:
                 "execution_allowed": False,
                 "external_calls_allowed": False,
                 "code_loading_allowed": False,
+            },
+        }
+
+    def _check_model_provider_hardening_safe(self) -> dict[str, Any]:
+        list_blockers = getattr(self._model_provider_hardening_repository, "list_blockers", None)
+        list_simulations = getattr(
+            self._model_provider_hardening_repository,
+            "list_simulations",
+            None,
+        )
+        blockers = list_blockers(status="open", limit=1000) if callable(list_blockers) else []
+        simulations = list_simulations(limit=1000) if callable(list_simulations) else []
+        critical_blockers = [
+            item for item in blockers if getattr(item, "severity", None) in {"high", "critical"}
+        ]
+        unsafe_flags = {
+            "external_model_calls_enabled": bool(
+                getattr(self._settings, "external_model_calls_enabled", False)
+            ),
+            "provider_auth_material_enabled": bool(
+                getattr(self._settings, "model_provider_credentials_enabled", False)
+            ),
+        }
+        unsafe = [key for key, value in unsafe_flags.items() if value]
+        status = "failed" if unsafe else "warning" if critical_blockers else "passed"
+        return {
+            "status": status,
+            "message": "Model provider hardening remains preview-only and local.",
+            "details": {
+                "simulation_count": len(simulations),
+                "open_blocker_count": len(blockers),
+                "critical_blocker_count": len(critical_blockers),
+                "unsafe_flags": unsafe,
+                "external_model_calls_enabled": False,
+                "provider_auth_material_enabled": False,
+                "provider_enabled": False,
             },
         }
 

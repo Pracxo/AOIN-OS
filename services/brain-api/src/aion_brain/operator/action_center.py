@@ -109,6 +109,7 @@ class ActionCenterService:
         generated.extend(self._blocked_readiness_assessment_items(scope))
         generated.extend(self._module_activation_blocker_items(scope))
         generated.extend(self._module_mock_runtime_items(scope))
+        generated.extend(self._model_provider_hardening_items(scope))
         generated.extend(self._failed_golden_path_run_items(scope))
         generated.extend(self._critical_golden_path_report_items(scope))
         generated.extend(self._critical_setup_finding_items(scope))
@@ -679,6 +680,62 @@ class ActionCenterService:
             if str(getattr(item, "severity", "")).lower() in {"high", "critical"}
         ]
         return [*run_items, *finding_items]
+
+    def _model_provider_hardening_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("model_provider_hardening_repository")
+        list_blockers = getattr(source, "list_blockers", None)
+        list_readiness = getattr(source, "list_readiness", None)
+        blockers: list[object] = []
+        readiness: list[object] = []
+        try:
+            if callable(list_blockers):
+                blockers = list_blockers(status="open", limit=100)
+            if callable(list_readiness):
+                readiness = list_readiness(status="blocked", limit=100)
+        except Exception:
+            return []
+        blocker_items = [
+            _action_item(
+                source_type="model_provider_blocker",
+                source_id=_id_for(item, "provider_blocker_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity=cast(OperatorSeverity, str(getattr(item, "severity", "high"))),
+                title="Model provider hardening blocker requires review.",
+                description="A provider readiness blocker is open for operator review.",
+                recommended_action="review_model_provider_blocker",
+                runbook_ref="docs/model-providers/provider-hardening.md",
+                scope=scope or ["workspace:main"],
+                metadata={
+                    "blocker_type": getattr(item, "blocker_type", None),
+                    "provider_key": getattr(item, "provider_key", None),
+                    "provider_enabled": False,
+                },
+            )
+            for item in blockers
+            if str(getattr(item, "severity", "")).lower() in {"high", "critical"}
+        ]
+        readiness_items = [
+            _action_item(
+                source_type="model_provider_readiness",
+                source_id=_id_for(item, "provider_readiness_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity="high",
+                title="Model provider readiness is blocked.",
+                description="A provider readiness assessment is blocked and needs review.",
+                recommended_action="review_model_provider_readiness",
+                runbook_ref="docs/model-providers/provider-readiness-gate.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={
+                    "provider_key": getattr(item, "provider_key", None),
+                    "external_call_ready": False,
+                    "credentials_ready": False,
+                },
+            )
+            for item in readiness
+        ]
+        return [*blocker_items, *readiness_items]
 
     def _failed_golden_path_run_items(self, scope: list[str]) -> list[OperatorActionItem]:
         source = self._sources.get("golden_path_repository")

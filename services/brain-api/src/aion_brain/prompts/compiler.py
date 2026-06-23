@@ -71,6 +71,19 @@ class PromptPacketCompiler:
             actor_context=actor_context,
         )
 
+    def build_egress_preview_metadata(self, packet: PromptPacket) -> dict[str, Any]:
+        """Return redacted prompt metadata for provider egress previews only."""
+
+        return {
+            "prompt_packet_ref": packet.prompt_packet_id,
+            "section_count": len(packet.sections),
+            "token_estimate": packet.token_estimate,
+            "char_count": packet.char_count,
+            "rendered_hash": packet.rendered_hash,
+            "raw_prompt_included": False,
+            "hidden_reasoning_included": False,
+        }
+
     def compile(self, request: PromptCompileRequest) -> PromptCompileResult:
         """Compile a prompt packet without provider-specific rendering."""
 

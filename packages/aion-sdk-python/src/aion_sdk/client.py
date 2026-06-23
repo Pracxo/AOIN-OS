@@ -64,6 +64,9 @@ class AIONClient:
         self.grounding = _import_resource("grounding").GroundingResource(self)
         self.prompts = _import_resource("prompts").PromptsResource(self)
         self.model_outputs = _import_resource("model_outputs").ModelOutputsResource(self)
+        self.model_provider_hardening = _import_resource(
+            "model_provider_hardening"
+        ).ModelProviderHardeningResource(self)
         self.action_proposals = _import_resource("action_proposals").ActionProposalsResource(self)
         self.run_supervision = _import_resource("run_supervision").RunSupervisionResource(self)
         self.notifications = _import_resource("notifications").NotificationsResource(self)

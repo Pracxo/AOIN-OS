@@ -651,3 +651,21 @@ install packages, activate modules, execute capabilities, register routes,
 mutate runtime configuration, call external services, print raw prompts, expose
 hidden reasoning, or add domain-specific module behavior. `module-mock-runtime`
 remains an alias for compatibility.
+
+## Model Provider Hardening Commands
+
+The CLI exposes provider hardening APIs through SDK calls:
+
+```bash
+aionctl model-providers profiles seed
+aionctl model-providers profiles create generic.metadata_only
+aionctl model-providers profiles list
+aionctl model-providers egress-preview generic.metadata_only
+aionctl model-providers simulate generic.metadata_only
+aionctl model-providers readiness generic.metadata_only
+aionctl model-providers blockers
+aionctl model-providers query
+```
+
+These commands do not call model providers, transmit prompts, store
+credentials, invoke models, or execute tools.

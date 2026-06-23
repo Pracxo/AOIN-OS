@@ -279,6 +279,15 @@ from aion_brain.model_outputs.response_candidates import ResponseCandidateServic
 from aion_brain.model_outputs.structured_validator import StructuredOutputValidator
 from aion_brain.model_outputs.tool_intents import ToolIntentCaptureService
 from aion_brain.model_outputs.unsafe_detector import UnsafeOutputDetector
+from aion_brain.model_provider_hardening import (
+    ModelProviderBlockerService,
+    ModelProviderHardeningRepository,
+    ModelProviderProfileService,
+    ModelProviderReadinessService,
+    ModelProviderSimulator,
+    PromptEgressGuard,
+    ProviderHardeningQueryService,
+)
 from aion_brain.module_activation import (
     ActivationBlockerService,
     ActivationGateService,
@@ -2900,6 +2909,49 @@ class KernelContainer:
             self.module_mock_repository,
             self.policy_adapter,
         )
+        self.model_provider_hardening_repository = ModelProviderHardeningRepository(
+            self.settings.database_url
+        )
+        self.model_provider_profile_service = ModelProviderProfileService(
+            self.model_provider_hardening_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.prompt_egress_guard = PromptEgressGuard(
+            self.model_provider_hardening_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            notification_router=self.notification_router,
+            settings=self.settings,
+        )
+        self.model_provider_simulator = ModelProviderSimulator(
+            self.model_provider_hardening_repository,
+            self.policy_adapter,
+            output_governance_service=self.output_governance_service,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            notification_router=self.notification_router,
+            settings=self.settings,
+        )
+        self.model_provider_readiness_service = ModelProviderReadinessService(
+            self.model_provider_hardening_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            settings=self.settings,
+        )
+        self.model_provider_blocker_service = ModelProviderBlockerService(
+            self.model_provider_hardening_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.model_provider_query_service = ProviderHardeningQueryService(
+            self.model_provider_hardening_repository,
+            self.policy_adapter,
+        )
         set_activation_module_mock_repository = getattr(
             self.activation_gate_service,
             "set_module_mock_repository",
@@ -2914,6 +2966,13 @@ class KernelContainer:
         )
         if callable(set_conformance_module_mock_simulator):
             set_conformance_module_mock_simulator(self.module_mock_simulator)
+        set_gateway_provider_hardening = getattr(
+            self.model_gateway_service,
+            "set_provider_hardening_repository",
+            None,
+        )
+        if callable(set_gateway_provider_hardening):
+            set_gateway_provider_hardening(self.model_provider_hardening_repository)
         self.golden_path_repository = GoldenPathRepository(self.settings.database_url)
         self.golden_path_assertion_engine = AssertionEngine()
         self.golden_path_scenario_catalog = ScenarioCatalogService(
@@ -3054,6 +3113,15 @@ class KernelContainer:
         )
         if callable(set_module_mock_repository):
             set_module_mock_repository(repository=self.module_mock_repository)
+        set_model_provider_hardening_repository = getattr(
+            self.release_packager,
+            "set_model_provider_hardening_repository",
+            None,
+        )
+        if callable(set_model_provider_hardening_repository):
+            set_model_provider_hardening_repository(
+                repository=self.model_provider_hardening_repository
+            )
         set_freeze_extension_registry = getattr(
             self.freeze_gate_service,
             "set_extension_registry_repository",
@@ -3082,6 +3150,13 @@ class KernelContainer:
         )
         if callable(set_freeze_module_mock_repository):
             set_freeze_module_mock_repository(self.module_mock_repository)
+        set_freeze_model_provider_hardening = getattr(
+            self.freeze_gate_service,
+            "set_model_provider_hardening_repository",
+            None,
+        )
+        if callable(set_freeze_model_provider_hardening):
+            set_freeze_model_provider_hardening(self.model_provider_hardening_repository)
         set_hardening_extension_registry = getattr(
             self.hardening_gate_service,
             "set_extension_registry_repository",
@@ -3110,6 +3185,13 @@ class KernelContainer:
         )
         if callable(set_hardening_module_mock_repository):
             set_hardening_module_mock_repository(self.module_mock_repository)
+        set_hardening_model_provider_hardening = getattr(
+            self.hardening_gate_service,
+            "set_model_provider_hardening_repository",
+            None,
+        )
+        if callable(set_hardening_model_provider_hardening):
+            set_hardening_model_provider_hardening(self.model_provider_hardening_repository)
         set_resource_provider = getattr(self.resource_scanner, "set_provider", None)
         if callable(set_resource_provider):
             set_resource_provider("contract_registry", self.contract_registry_repository)
@@ -3117,6 +3199,10 @@ class KernelContainer:
             set_resource_provider("module_binding_registry", self.module_binding_repository)
             set_resource_provider("conformance", self.conformance_repository)
             set_resource_provider("module_mock_runtime", self.module_mock_repository)
+            set_resource_provider(
+                "model_provider_hardening",
+                self.model_provider_hardening_repository,
+            )
         self.lifecycle_repository = LifecycleRepository(self.settings.database_url)
         self.lifecycle_policy_service = LifecyclePolicyService(
             self.lifecycle_repository,
@@ -3218,6 +3304,7 @@ class KernelContainer:
             extension_registry_service=self.extension_registry_repository,
             module_binding_service=self.module_binding_repository,
             module_mock_runtime_service=self.module_mock_repository,
+            model_provider_hardening_service=self.model_provider_hardening_repository,
             conformance_service=self.conformance_repository,
             golden_path_service=self.golden_path_repository,
             bootstrap_service=self.bootstrap_repository,
@@ -3285,6 +3372,7 @@ class KernelContainer:
             extension_registry_repository=self.extension_registry_repository,
             module_binding_repository=self.module_binding_repository,
             module_mock_repository=self.module_mock_repository,
+            model_provider_hardening_repository=self.model_provider_hardening_repository,
             conformance_repository=self.conformance_repository,
             module_activation_repository=self.module_activation_repository,
             golden_path_repository=self.golden_path_repository,
@@ -4667,6 +4755,48 @@ class KernelContainer:
             (
                 "module_mock_query_service",
                 self.module_mock_query_service,
+                "service",
+                "local",
+            ),
+            (
+                "model_provider_hardening_repository",
+                self.model_provider_hardening_repository,
+                "repository",
+                "postgres",
+            ),
+            (
+                "model_provider_profile_service",
+                self.model_provider_profile_service,
+                "service",
+                "local",
+            ),
+            (
+                "prompt_egress_guard",
+                self.prompt_egress_guard,
+                "service",
+                "deterministic",
+            ),
+            (
+                "model_provider_simulator",
+                self.model_provider_simulator,
+                "service",
+                "deterministic",
+            ),
+            (
+                "model_provider_readiness_service",
+                self.model_provider_readiness_service,
+                "service",
+                "local",
+            ),
+            (
+                "model_provider_blocker_service",
+                self.model_provider_blocker_service,
+                "service",
+                "local",
+            ),
+            (
+                "model_provider_query_service",
+                self.model_provider_query_service,
                 "service",
                 "local",
             ),

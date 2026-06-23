@@ -1,0 +1,19 @@
+{
+  "provider_key": "generic.metadata_only",
+  "preview_type": "dry_run",
+  "owner_scope": ["workspace:main"],
+  "prompt_packet_ref": "prompt-packet-example",
+  "input_manifest_ref": "model-input-manifest-example",
+  "prompt_summary": {
+    "section_count": 3,
+    "token_estimate": 120,
+    "rendered_hash": "example-rendered-hash",
+    "raw_prompt_included": false,
+    "hidden_reasoning_included": false
+  },
+  "create_notifications": false,
+  "metadata": {
+    "prompt_transmitted": false,
+    "external_call_allowed": false
+  }
+}

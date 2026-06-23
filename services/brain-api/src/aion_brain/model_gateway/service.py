@@ -72,6 +72,7 @@ class ModelGatewayService:
         audit_sink: object | None = None,
         prompt_governance_service: object | None = None,
         output_governance_service: object | None = None,
+        provider_hardening_repository: object | None = None,
     ) -> None:
         self._provider_registry = provider_registry
         self._profile_registry = profile_registry
@@ -90,6 +91,7 @@ class ModelGatewayService:
         self._audit_sink = audit_sink
         self._prompt_governance_service = prompt_governance_service
         self._output_governance_service = output_governance_service
+        self._provider_hardening_repository = provider_hardening_repository
 
     def set_circuit_breaker_service(self, circuit_breaker_service: object | None) -> None:
         """Attach circuit breaker service after kernel assembly."""
@@ -106,6 +108,30 @@ class ModelGatewayService:
     def set_output_governance_service(self, output_governance_service: object | None) -> None:
         """Attach model output governance after kernel assembly."""
         self._output_governance_service = output_governance_service
+
+    def set_provider_hardening_repository(self, repository: object | None) -> None:
+        """Attach provider hardening readiness metadata after kernel assembly."""
+
+        self._provider_hardening_repository = repository
+
+    def provider_hardening_status(self) -> dict[str, object]:
+        """Expose provider readiness metadata without enabling provider invocation."""
+
+        status = getattr(self._provider_hardening_repository, "status", None)
+        if callable(status):
+            result = status(["workspace:main"])
+            if isinstance(result, dict):
+                return {
+                    **result,
+                    "readiness_is_not_enablement": True,
+                    "external_model_calls_enabled": False,
+                }
+        return {
+            "status": "warning",
+            "available": False,
+            "readiness_is_not_enablement": True,
+            "external_model_calls_enabled": False,
+        }
 
     def complete(self, request: ModelGatewayRequest) -> ModelGatewayResponse:
         """Complete a prompt through the selected provider boundary."""

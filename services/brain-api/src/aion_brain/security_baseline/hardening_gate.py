@@ -63,6 +63,7 @@ class HardeningGateService:
         self._extension_registry_repository: object | None = None
         self._module_binding_repository: object | None = None
         self._module_mock_repository: object | None = None
+        self._model_provider_hardening_repository: object | None = None
         self._conformance_repository: object | None = None
 
     def set_extension_registry_repository(self, repository: object | None) -> None:
@@ -79,6 +80,11 @@ class HardeningGateService:
         """Attach module mock runtime after kernel assembly."""
 
         self._module_mock_repository = repository
+
+    def set_model_provider_hardening_repository(self, repository: object | None) -> None:
+        """Attach model provider hardening after kernel assembly."""
+
+        self._model_provider_hardening_repository = repository
 
     def set_conformance_repository(self, repository: object | None) -> None:
         """Attach conformance readiness metadata after kernel assembly."""
@@ -144,6 +150,7 @@ class HardeningGateService:
         checks.extend(self._extension_registry_checks())
         checks.extend(self._module_binding_checks())
         checks.extend(self._module_mock_checks())
+        checks.extend(self._model_provider_hardening_checks())
         checks.extend(self._conformance_checks())
         checks.extend(self._audit_integrity_checks())
         checks.append(self._control_catalog_check())
@@ -481,6 +488,34 @@ class HardeningGateService:
                 "No high-severity module mock findings are open.",
                 "module_mock_runtime",
                 details={"count": len(high_findings), "finding_count": len(findings)},
+            ),
+        ]
+
+    def _model_provider_hardening_checks(self) -> builtins.list[dict[str, Any]]:
+        list_blockers = getattr(self._model_provider_hardening_repository, "list_blockers", None)
+        blockers = list_blockers(status="open", limit=1000) if callable(list_blockers) else []
+        high_blockers = [
+            item for item in blockers if getattr(item, "severity", None) in {"high", "critical"}
+        ]
+        return [
+            _check(
+                "external_model_calls_disabled",
+                "failed" if self._settings.external_model_calls_enabled else "passed",
+                "External model calls are disabled.",
+                "model_provider_hardening",
+            ),
+            _check(
+                "model_provider_credentials_disabled",
+                "failed" if self._settings.model_provider_credentials_enabled else "passed",
+                "Model provider credentials are disabled.",
+                "model_provider_hardening",
+            ),
+            _check(
+                "no_high_provider_hardening_blockers",
+                "warning" if high_blockers else "passed",
+                "No high-severity provider hardening blockers are open.",
+                "model_provider_hardening",
+                details={"count": len(high_blockers), "blocker_count": len(blockers)},
             ),
         ]
 

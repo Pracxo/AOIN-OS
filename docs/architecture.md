@@ -1731,3 +1731,15 @@ The runtime must not load module code, install packages, invoke real
 capabilities, activate modules, register dynamic routes, mutate runtime
 configuration, execute shell commands, call external services, expose secrets,
 or encode domain-specific workflows.
+
+## Model Provider Hardening
+
+AION-086 adds a provider-readiness layer before real provider enablement. It
+connects prompt packets, model input manifests, provider profiles, prompt
+egress previews, dry-run provider simulations, output governance, tool intent
+blocking, grounding requirements, audit/provenance, and operator review.
+
+The layer is local and metadata-only. Provider readiness is not provider
+enablement, prompt egress preview is not prompt transmission, and provider
+simulation is not a model call. Public contracts stay AION-owned and do not
+depend on provider SDKs.

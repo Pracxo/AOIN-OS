@@ -153,6 +153,8 @@ OperatorActionSourceType = Literal[
     "golden_path_run",
     "golden_path_report",
     "golden_path_assertion",
+    "model_provider_blocker",
+    "model_provider_readiness",
     "bootstrap_run",
     "setup_finding",
     "setup_report",

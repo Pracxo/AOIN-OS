@@ -3648,3 +3648,37 @@ The Python SDK exposes the same surface through `client.module_mock_runtime`.
 
 Generic Knowledge Intelligence includes mock runtime fixtures and docs at
 `docs/modules/generic-knowledge-intelligence-mock-runtime.md`.
+
+## Model Provider Hardening
+
+AION-086 adds model provider hardening before any real provider can be enabled.
+It creates provider profiles, prompt egress previews, dry-run simulations,
+readiness assessments, blockers, and aggregate queries. It does not call model
+providers, transmit prompts, store provider credentials, invoke models, execute
+tools, or enable external model calls.
+
+Model provider endpoints:
+
+- `POST /brain/model-providers/profiles`
+- `GET /brain/model-providers/profiles`
+- `GET /brain/model-providers/profiles/{provider_profile_id}`
+- `POST /brain/model-providers/profiles/seed-defaults`
+- `POST /brain/model-providers/egress-preview`
+- `POST /brain/model-providers/simulate`
+- `POST /brain/model-providers/readiness`
+- `GET /brain/model-providers/blockers`
+- `POST /brain/model-providers/blockers/{provider_blocker_id}/dismiss`
+- `POST /brain/model-providers/query`
+
+Developer commands:
+
+```bash
+./scripts/model-provider-check.sh --offline-ok --skip-api
+./scripts/aionctl.sh --scope workspace:main model-providers profiles seed
+./scripts/aionctl.sh --scope workspace:main model-providers simulate generic.metadata_only
+./scripts/aionctl.sh --scope workspace:main model-providers readiness generic.metadata_only
+./scripts/aionctl.sh --scope workspace:main model-providers blockers
+```
+
+The Python SDK exposes the same surface through
+`client.model_provider_hardening`.

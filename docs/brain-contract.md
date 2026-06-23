@@ -1576,3 +1576,18 @@ reasoning, raw prompts, provider payloads, secrets, SQLAlchemy rows, source
 code payloads, package bytes, third-party module internals, live runtime
 client objects, real capability execution results, or domain-specific module
 logic.
+
+## Model Provider Hardening Contracts
+
+AION-086 adds provider-readiness contracts:
+
+- `ModelProviderProfile`
+- `PromptEgressPreview`
+- `ModelProviderSimulation`
+- `ModelProviderReadiness`
+- `ModelProviderBlocker`
+- `ProviderHardeningQuery`
+
+These contracts describe readiness metadata only. They must not include API
+keys, provider SDK objects, provider endpoints, raw prompts, hidden reasoning,
+credential payloads, model invocation results, or tool execution records.

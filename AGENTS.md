@@ -341,3 +341,10 @@ Instructions for future Codex runs in this repository:
 - Module mock runtime must not load code, install packages, activate modules,
   execute capabilities, register routes, mutate runtime config, call external
   services, or add domain-specific module logic.
+- Model provider hardening work must remain readiness-only. Provider profiles
+  are not activation, prompt egress previews are not prompt transmission,
+  provider simulations are not model calls, and readiness assessments are not
+  provider enablement.
+- Do not add provider SDKs, provider endpoints, API keys, credential commands,
+  raw prompt storage, external model calls, model invocation, or tool execution
+  to provider hardening work.
