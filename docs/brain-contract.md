@@ -1615,3 +1615,22 @@ Operator Console contracts must preserve no runtime UI, no raw prompt exposure,
 no hidden reasoning exposure, no secret exposure, no activation, no execution,
 no external calls, no package installation, no code loading, and no privileged
 policy bypass.
+
+## Governed Operator Action Contracts
+
+AION-092 adds:
+
+- `OperatorActionRequest`
+- `OperatorActionCreateRequest`
+- `OperatorActionPreview`
+- `OperatorActionBlocker`
+- `OperatorActionReviewRequest`
+- `OperatorActionReview`
+- `OperatorActionQuery`
+- `OperatorActionQueryResult`
+
+These contracts are dry-run governance records. `mode` must be `dry_run`.
+`execution_allowed`, `external_calls_allowed`, and `activation_allowed` must
+remain `false`. Reviews record decisions only; approval does not execute.
+Payloads are redacted before storage and contracts reject protected prompt,
+hidden reasoning, and secret-like content.

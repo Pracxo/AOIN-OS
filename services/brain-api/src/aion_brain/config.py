@@ -1684,6 +1684,55 @@ class Settings(BaseSettings):
             "operator_console_create_notifications_default",
         ),
     )
+    operator_actions_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_ACTIONS_ENABLED",
+            "operator_actions_enabled",
+        ),
+    )
+    operator_action_previews_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_ACTION_PREVIEWS_ENABLED",
+            "operator_action_previews_enabled",
+        ),
+    )
+    operator_action_reviews_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_ACTION_REVIEWS_ENABLED",
+            "operator_action_reviews_enabled",
+        ),
+    )
+    operator_action_execution_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_ACTION_EXECUTION_ENABLED",
+            "operator_action_execution_enabled",
+        ),
+    )
+    operator_action_external_calls_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_ACTION_EXTERNAL_CALLS_ENABLED",
+            "operator_action_external_calls_enabled",
+        ),
+    )
+    operator_action_activation_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_ACTION_ACTIVATION_ENABLED",
+            "operator_action_activation_enabled",
+        ),
+    )
+    operator_action_create_notifications_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_ACTION_CREATE_NOTIFICATIONS_DEFAULT",
+            "operator_action_create_notifications_default",
+        ),
+    )
     security_scan_max_file_size_mb: int = Field(
         default=5,
         ge=1,

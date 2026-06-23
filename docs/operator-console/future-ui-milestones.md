@@ -35,6 +35,10 @@ Read-only provider hardening dashboard.
 
 Governed operator actions, dry-run only.
 
+Status: implemented as backend dry-run request records, preview records,
+blocker records, review records, SDK and CLI dry-run access, and a static
+console preview panel. It remains no-execution and no-activation.
+
 ## AION-093
 
 Local auth design.

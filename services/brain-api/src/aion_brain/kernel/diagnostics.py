@@ -41,6 +41,10 @@ class KernelDiagnostics:
         ("action_proposal_service_present", "action_proposal_service", "high"),
         ("tool_intent_review_service_present", "tool_intent_review_service", "medium"),
         ("execution_handoff_service_present", "execution_handoff_service", "high"),
+        ("operator_action_repository_present", "operator_action_repository", "high"),
+        ("operator_action_request_service_present", "operator_action_request_service", "high"),
+        ("operator_action_preview_service_present", "operator_action_preview_service", "high"),
+        ("operator_action_review_service_present", "operator_action_review_service", "high"),
         ("run_supervision_service_present", "run_supervision_service", "high"),
         ("run_status_sampler_present", "run_status_sampler", "high"),
         ("run_control_service_present", "run_control_service", "high"),
@@ -418,6 +422,7 @@ class KernelDiagnostics:
         checks.extend(self._prompt_checks(settings))
         checks.extend(self._model_output_checks(settings))
         checks.extend(self._action_proposal_checks(settings))
+        checks.extend(self._operator_action_checks(settings))
         checks.extend(self._run_supervision_checks(settings))
         checks.extend(self._notification_checks(settings))
         checks.extend(self._incident_checks(settings))
@@ -707,6 +712,94 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Action proposal broker services are assembled.",
+            ),
+        ]
+
+    def _operator_action_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "operator_action_repository",
+                "operator_action_blocker_service",
+                "operator_action_preview_service",
+                "operator_action_request_service",
+                "operator_action_review_service",
+                "operator_action_query_service",
+            )
+        )
+        return [
+            self._result(
+                "operator_actions_enabled",
+                "operator_actions",
+                (
+                    "passed"
+                    if bool(getattr(settings, "operator_actions_enabled", True))
+                    else "warning"
+                ),
+                "high",
+                "Governed operator action requests are enabled.",
+            ),
+            self._result(
+                "operator_action_previews_enabled",
+                "operator_actions",
+                (
+                    "passed"
+                    if bool(getattr(settings, "operator_action_previews_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Operator action dry-run previews are enabled.",
+            ),
+            self._result(
+                "operator_action_reviews_enabled",
+                "operator_actions",
+                (
+                    "passed"
+                    if bool(getattr(settings, "operator_action_reviews_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Operator action reviews are enabled.",
+            ),
+            self._result(
+                "operator_action_execution_enabled",
+                "operator_actions",
+                (
+                    "failed"
+                    if bool(getattr(settings, "operator_action_execution_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Operator action execution remains disabled.",
+            ),
+            self._result(
+                "operator_action_external_calls_enabled",
+                "operator_actions",
+                (
+                    "failed"
+                    if bool(getattr(settings, "operator_action_external_calls_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Operator action external calls remain disabled.",
+            ),
+            self._result(
+                "operator_action_activation_enabled",
+                "operator_actions",
+                (
+                    "failed"
+                    if bool(getattr(settings, "operator_action_activation_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Operator action activation remains disabled.",
+            ),
+            self._result(
+                "operator_action_services_present",
+                "operator_actions",
+                "passed" if services_present else "failed",
+                "high",
+                "Governed operator action services are assembled.",
             ),
         ]
 

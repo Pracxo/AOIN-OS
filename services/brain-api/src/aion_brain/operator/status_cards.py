@@ -51,6 +51,7 @@ _CARD_SPECS: tuple[tuple[str, str, OperatorCategory, str], ...] = (
         "operator",
         "model_provider_hardening_service",
     ),
+    ("operator_actions", "Operator Actions", "operator", "operator_action_service"),
     ("conformance", "Capability Conformance", "registry", "conformance_service"),
     ("golden_path", "Golden Path", "release", "golden_path_service"),
     ("bootstrap", "First-Run Bootstrap", "bootstrap", "bootstrap_service"),

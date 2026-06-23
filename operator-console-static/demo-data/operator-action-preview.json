@@ -1,0 +1,62 @@
+{
+  "view": "operator_actions",
+  "title": "Operator Actions",
+  "status": "blocked",
+  "summary": "Dry-run operator action preview. The preview records intent and blockers only.",
+  "read_only": true,
+  "redaction_applied": true,
+  "action_key": "operator.review",
+  "mode": "dry_run",
+  "execution_allowed": false,
+  "external_calls_allowed": false,
+  "activation_allowed": false,
+  "would_execute": false,
+  "sections": [
+    {
+      "section_key": "preview",
+      "title": "Dry-Run Preview",
+      "status": "blocked",
+      "severity": "high",
+      "summary": "The request can be reviewed, but no action can run from this panel.",
+      "blockers": [
+        {"blocker_key": "execution_disabled", "message": "Execution is disabled for governed operator actions.", "bypassable": false},
+        {"blocker_key": "external_calls_disabled", "message": "External calls are disabled.", "bypassable": false},
+        {"blocker_key": "activation_disabled", "message": "Activation is disabled.", "bypassable": false}
+      ],
+      "warnings": [
+        {"warning_key": "preview_only", "message": "Preview output is descriptive only."}
+      ],
+      "refs": ["docs/operator-console/action-preview-panel.md"]
+    }
+  ],
+  "expected_effects": [
+    {"effect": "record_operator_action_request", "would_execute": false}
+  ],
+  "blocked_effects": [
+    {"effect": "execute_action", "blocked": true},
+    {"effect": "external_call", "blocked": true},
+    {"effect": "activation", "blocked": true}
+  ],
+  "blockers": [
+    {"blocker_key": "execution_disabled", "message": "Execution remains disabled.", "bypassable": false},
+    {"blocker_key": "external_calls_disabled", "message": "External calls remain disabled.", "bypassable": false},
+    {"blocker_key": "activation_disabled", "message": "Activation remains disabled.", "bypassable": false}
+  ],
+  "warnings": [
+    {"warning_key": "review_only", "message": "Review records do not execute."}
+  ],
+  "refs": ["docs/adr/0083-governed-operator-actions-dry-run-only.md"],
+  "review": {
+    "decision": "approve_preview_only",
+    "approval_present": false,
+    "execution_allowed": false
+  },
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Activation remains disabled."},
+    {"action_key": "activate_capability", "reason": "Capability activation remains disabled."},
+    {"action_key": "load_code", "reason": "Code loading is unavailable."},
+    {"action_key": "execute_tool", "reason": "Tool execution is unavailable."},
+    {"action_key": "enable_external_model_calls", "reason": "External calls are unavailable."},
+    {"action_key": "hard_delete", "reason": "Hard delete is unavailable."}
+  ]
+}

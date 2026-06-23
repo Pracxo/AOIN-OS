@@ -50,3 +50,12 @@ execute them.
 
 The read-only action model keeps no runtime UI, no raw prompt exposure, no
 hidden reasoning exposure, no secret exposure, no activation, and no execution.
+
+## AION-092 governed action boundary
+
+AION-092 adds governed operator action request records. They are still bounded:
+requests are dry-run only, previews are descriptive only, reviews are records
+only, and blocker dismissal does not unlock execution.
+
+The action boundary matrix is defined in
+`docs/operator-console/action-boundary-matrix.md`.

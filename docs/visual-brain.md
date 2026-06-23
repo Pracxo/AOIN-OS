@@ -975,3 +975,17 @@ AION-088 adds backend visual telemetry vocabulary for
 `operator_console_audit`. It adds no renderer, no runtime UI, no frontend
 dependencies, no activation, and no execution. Console telemetry must preserve
 no raw prompt exposure, no hidden reasoning exposure, and no secret exposure.
+
+## Operator Actions Projection Note
+
+AION-092 emits visual telemetry for:
+
+- `operator_action_request_created`
+- `operator_action_preview_created`
+- `operator_action_blocker_created`
+- `operator_action_blocker_dismissed`
+- `operator_action_review_recorded`
+
+Visual node types are `operator_action_request`, `operator_action_preview`,
+`operator_action_blocker`, and `operator_action_review`. The projection remains
+frontend-agnostic and represents dry-run governance records only.

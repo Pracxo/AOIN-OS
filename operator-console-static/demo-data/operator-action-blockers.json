@@ -1,0 +1,42 @@
+{
+  "view": "operator_actions",
+  "title": "Operator Action Blockers",
+  "status": "blocked",
+  "summary": "Open blockers for dry-run operator action requests.",
+  "read_only": true,
+  "redaction_applied": true,
+  "execution_allowed": false,
+  "external_calls_allowed": false,
+  "activation_allowed": false,
+  "sections": [
+    {
+      "section_key": "blockers",
+      "title": "Blockers",
+      "status": "blocked",
+      "severity": "critical",
+      "summary": "Blockers preserve review boundaries and do not unlock execution.",
+      "blockers": [
+        {"blocker_key": "execution_disabled", "message": "No operator action execution path exists.", "bypassable": false},
+        {"blocker_key": "external_calls_disabled", "message": "No external call path exists.", "bypassable": false},
+        {"blocker_key": "activation_disabled", "message": "No activation path exists.", "bypassable": false}
+      ],
+      "warnings": [],
+      "refs": ["docs/operator-console/action-boundary-matrix.md"]
+    }
+  ],
+  "blockers": [
+    {"blocker_key": "execution_disabled", "message": "No operator action execution path exists.", "bypassable": false},
+    {"blocker_key": "external_calls_disabled", "message": "No external call path exists.", "bypassable": false},
+    {"blocker_key": "activation_disabled", "message": "No activation path exists.", "bypassable": false}
+  ],
+  "warnings": [],
+  "refs": ["docs/operator-console/governed-operator-actions.md"],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Activation remains disabled."},
+    {"action_key": "activate_capability", "reason": "Capability activation remains disabled."},
+    {"action_key": "load_code", "reason": "Code loading is unavailable."},
+    {"action_key": "execute_tool", "reason": "Tool execution is unavailable."},
+    {"action_key": "enable_external_model_calls", "reason": "External calls are unavailable."},
+    {"action_key": "hard_delete", "reason": "Hard delete is unavailable."}
+  ]
+}

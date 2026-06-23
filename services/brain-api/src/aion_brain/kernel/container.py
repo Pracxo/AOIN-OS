@@ -346,6 +346,14 @@ from aion_brain.operator.repository import OperatorRepository
 from aion_brain.operator.runbooks import RunbookRegistry
 from aion_brain.operator.snapshots import OperatorSnapshotService
 from aion_brain.operator.status_cards import StatusCardBuilder
+from aion_brain.operator_actions import (
+    OperatorActionBlockerService,
+    OperatorActionPreviewService,
+    OperatorActionQueryService,
+    OperatorActionRepository,
+    OperatorActionRequestService,
+    OperatorActionReviewService,
+)
 from aion_brain.operator_console import (
     ConsoleContractAuditService,
     ConsoleViewModelService,
@@ -2048,6 +2056,40 @@ class KernelContainer:
             self.action_proposal_repository,
             self.policy_adapter,
         )
+        self.operator_action_repository = OperatorActionRepository(self.settings.database_url)
+        self.operator_action_blocker_service = OperatorActionBlockerService(
+            self.operator_action_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.operator_action_preview_service = OperatorActionPreviewService(
+            self.operator_action_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.operator_action_request_service = OperatorActionRequestService(
+            self.operator_action_repository,
+            self.policy_adapter,
+            blocker_service=self.operator_action_blocker_service,
+            preview_service=self.operator_action_preview_service,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            settings=self.settings,
+        )
+        self.operator_action_review_service = OperatorActionReviewService(
+            self.operator_action_repository,
+            self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+            provenance_service=self.provenance_service,
+            settings=self.settings,
+        )
+        self.operator_action_query_service = OperatorActionQueryService(
+            self.operator_action_repository,
+            self.policy_adapter,
+        )
         self.run_supervision_repository = RunSupervisionRepository(self.settings.database_url)
         self.run_target_status_adapter = RunTargetStatusAdapter(
             command_bus=self.command_bus,
@@ -2119,6 +2161,9 @@ class KernelContainer:
             alert_service=self.alert_service,
             telemetry_service=self.telemetry_service,
             settings=self.settings,
+        )
+        self.operator_action_request_service.set_notification_router(
+            self.notification_router
         )
         self.notification_topic_service = NotificationTopicService(
             self.notification_repository,
@@ -3309,6 +3354,7 @@ class KernelContainer:
             module_binding_service=self.module_binding_repository,
             module_mock_runtime_service=self.module_mock_repository,
             model_provider_hardening_service=self.model_provider_hardening_repository,
+            operator_action_service=self.operator_action_query_service,
             conformance_service=self.conformance_repository,
             golden_path_service=self.golden_path_repository,
             bootstrap_service=self.bootstrap_repository,
@@ -3357,6 +3403,10 @@ class KernelContainer:
             action_proposal_service=self.action_proposal_service,
             action_blocker_service=self.action_blocker_service,
             action_review_service=self.action_review_service,
+            operator_action_query_service=self.operator_action_query_service,
+            operator_action_request_service=self.operator_action_request_service,
+            operator_action_blocker_service=self.operator_action_blocker_service,
+            operator_action_review_service=self.operator_action_review_service,
             execution_handoff_service=self.execution_handoff_service,
             tool_intent_review_service=self.tool_intent_review_service,
             run_supervision_service=self.run_supervision_service,
@@ -3421,6 +3471,7 @@ class KernelContainer:
             tool_intent_service=self.tool_intent_capture_service,
             action_proposal_service=self.action_proposal_service,
             action_blocker_service=self.action_blocker_service,
+            operator_action_blocker_service=self.operator_action_blocker_service,
             execution_handoff_service=self.execution_handoff_service,
             tool_intent_review_service=self.tool_intent_review_service,
             run_supervision_service=self.run_supervision_service,
@@ -3973,6 +4024,42 @@ class KernelContainer:
             (
                 "action_proposal_query_service",
                 self.action_proposal_query_service,
+                "service",
+                "local",
+            ),
+            (
+                "operator_action_repository",
+                self.operator_action_repository,
+                "repository",
+                "postgres",
+            ),
+            (
+                "operator_action_blocker_service",
+                self.operator_action_blocker_service,
+                "service",
+                "local",
+            ),
+            (
+                "operator_action_preview_service",
+                self.operator_action_preview_service,
+                "service",
+                "local",
+            ),
+            (
+                "operator_action_request_service",
+                self.operator_action_request_service,
+                "service",
+                "local",
+            ),
+            (
+                "operator_action_review_service",
+                self.operator_action_review_service,
+                "service",
+                "local",
+            ),
+            (
+                "operator_action_query_service",
+                self.operator_action_query_service,
                 "service",
                 "local",
             ),

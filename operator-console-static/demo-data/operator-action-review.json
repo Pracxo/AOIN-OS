@@ -1,0 +1,48 @@
+{
+  "view": "operator_actions",
+  "title": "Operator Action Review",
+  "status": "reviewed",
+  "summary": "Review records capture operator decisions without permitting execution.",
+  "read_only": true,
+  "redaction_applied": true,
+  "execution_allowed": false,
+  "external_calls_allowed": false,
+  "activation_allowed": false,
+  "sections": [
+    {
+      "section_key": "review",
+      "title": "Review Record",
+      "status": "reviewed",
+      "severity": "medium",
+      "summary": "The decision is preview-only and cannot run the requested action.",
+      "blockers": [
+        {"blocker_key": "approval_does_not_execute", "message": "Approval is recorded as review context only.", "bypassable": false}
+      ],
+      "warnings": [
+        {"warning_key": "future_write_support", "message": "Future write support must pass a separate task and gate."}
+      ],
+      "refs": ["docs/operator-console/action-review-flow.md"]
+    }
+  ],
+  "review": {
+    "decision": "approve_preview_only",
+    "reason": "operator_review",
+    "approval_present": true,
+    "execution_allowed": false
+  },
+  "blockers": [
+    {"blocker_key": "approval_does_not_execute", "message": "Approval is recorded as review context only.", "bypassable": false}
+  ],
+  "warnings": [
+    {"warning_key": "review_only", "message": "Review does not execute."}
+  ],
+  "refs": ["docs/operator-console/action-review-flow.md"],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Activation remains disabled."},
+    {"action_key": "activate_capability", "reason": "Capability activation remains disabled."},
+    {"action_key": "load_code", "reason": "Code loading is unavailable."},
+    {"action_key": "execute_tool", "reason": "Tool execution is unavailable."},
+    {"action_key": "enable_external_model_calls", "reason": "External calls are unavailable."},
+    {"action_key": "hard_delete", "reason": "Hard delete is unavailable."}
+  ]
+}

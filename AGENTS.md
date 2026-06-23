@@ -377,3 +377,8 @@ Instructions for future Codex runs in this repository:
 - Operator console must not expose raw prompts, hidden reasoning, or secrets.
 - Operator console must not activate modules or capabilities.
 - Operator console must not enable external model calls.
+- Governed operator actions remain dry-run request, preview, blocker, and
+  review records only.
+- Operator action reviews must not execute.
+- Operator action previews must keep execution, external calls, and activation
+  disabled.

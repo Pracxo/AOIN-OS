@@ -27,6 +27,7 @@
         <button class="view-tab" data-view="model_provider_hardening">
           Model Provider Hardening
         </button>
+        <button class="view-tab" data-view="operator_actions">Operator Actions</button>
         <button class="view-tab" data-view="incidents">Incidents</button>
         <button class="view-tab" data-view="registry_integrity">Registry and Lifecycle</button>
         <button class="view-tab" data-view="settings_safety">Settings Safety</button>
@@ -101,6 +102,48 @@
           </div>
         </section>
 
+        <section class="operator-actions-panel" id="operator-actions-panel" aria-label="Operator action preview panel">
+          <div class="no-activation-banner">
+            Operator action requests are dry-run records. Execution is disabled by design.
+          </div>
+          <div class="module-dashboard-heading">
+            <div>
+              <p class="eyebrow">Operator Actions</p>
+              <h3>Dry-Run Action Preview</h3>
+            </div>
+            <button class="disabled-action" type="button" disabled>
+              Preview only
+            </button>
+          </div>
+          <p id="operator-actions-summary" class="panel-summary">
+            Select Operator Actions to inspect preview and review records.
+          </p>
+          <div class="safety-boundary-grid" id="operator-action-safety">
+            <div class="safety-card">execution_allowed=false</div>
+            <div class="safety-card">external_calls_allowed=false</div>
+            <div class="safety-card">activation_allowed=false</div>
+            <div class="safety-card">would_execute=false</div>
+          </div>
+          <div class="module-subpanels">
+            <section class="module-subpanel" aria-label="Expected effects">
+              <h3>Expected Effects</h3>
+              <div class="review-checklist" id="operator-action-effects"></div>
+            </section>
+            <section class="module-subpanel" aria-label="Blocked effects">
+              <h3>Blocked Effects</h3>
+              <div class="blocker-list" id="operator-action-blocked-effects"></div>
+            </section>
+            <section class="module-subpanel" aria-label="Operator action blockers">
+              <h3>Blockers</h3>
+              <div class="blocker-list" id="operator-action-blockers"></div>
+            </section>
+            <section class="module-subpanel" aria-label="Operator action review">
+              <h3>Review</h3>
+              <div class="review-checklist" id="operator-action-review"></div>
+            </section>
+          </div>
+        </section>
+
         <section class="section-grid" id="sections" aria-label="Console sections"></section>
 
         <section class="action-panel" aria-label="Forbidden actions">
@@ -112,6 +155,7 @@
           <h3>Local Commands</h3>
           <pre><code>./scripts/operator-console-static-check.sh
 ./scripts/module-lifecycle-dashboard-check.sh
+./scripts/operator-actions-check.sh
 ./scripts/operator-console-static-demo.sh --offline-ok --skip-api
 python3 -m http.server 8090 --directory operator-console-static</code></pre>
         </section>

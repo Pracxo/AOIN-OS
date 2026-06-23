@@ -81,3 +81,10 @@ Safety labels must remain visible:
 - `external_calls_made=false`
 
 The dashboard adds no new API route and no write action.
+
+## AION-092 operator action view
+
+The Operator Actions view shows dry-run request metadata, expected effects,
+blocked effects, blockers, review decisions, and safety flags. It must render
+`execution_allowed=false`, `external_calls_allowed=false`,
+`activation_allowed=false`, and `would_execute=false`.

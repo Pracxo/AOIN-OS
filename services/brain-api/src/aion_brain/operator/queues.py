@@ -306,6 +306,24 @@ _QUEUE_SPECS: tuple[tuple[OperatorQueueType, str, str, tuple[str, ...]], ...] = 
     ),
     (
         "generic",
+        "Operator Action Requests",
+        "operator_action_request_service",
+        ("list_requests",),
+    ),
+    (
+        "generic",
+        "Operator Action Blockers",
+        "operator_action_blocker_service",
+        ("list_blockers",),
+    ),
+    (
+        "generic",
+        "Operator Action Reviews",
+        "operator_action_review_service",
+        ("list_reviews",),
+    ),
+    (
+        "generic",
         "Execution Handoffs",
         "execution_handoff_service",
         ("list_handoffs",),
@@ -553,6 +571,13 @@ def _list_items(
                             ActionProposalQuery(scope=scope or ["workspace:main"], limit=100)
                         )
                         return list(getattr(result, "proposals", []) or [])
+                    if provider_key == "operator_action_query_service":
+                        from aion_brain.contracts.operator_actions import OperatorActionQuery
+
+                        result = cast(Any, method)(
+                            OperatorActionQuery(scope=scope or ["workspace:main"], limit=100)
+                        )
+                        return list(getattr(result, "requests", []) or [])
                     return list(
                         cast(Any, method)(scope=scope or ["workspace:main"], limit=100) or []
                     )
