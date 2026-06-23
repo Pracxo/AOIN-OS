@@ -1766,3 +1766,12 @@ AION-088 adds no runtime UI, no frontend dependencies, no migrations, no module
 activation, no code loading, no package installation, no external calls, no
 execution, and no runtime registration. It also preserves no raw prompt
 exposure, no hidden reasoning exposure, and no secret exposure.
+
+AION-089 adds a static local Operator Console prototype as a no-build preview
+over the same read-only view-model contracts. The prototype is plain HTML,
+CSS, and JavaScript only. It can call the localhost Brain API, can fall back to
+local demo JSON, and must block non-local API origins. It adds no backend API
+routes, SDK resources, CLI commands, migrations, package files, activation
+controls, execution path, external calls, production auth claim, or runtime
+registration. The prototype remains an experience-validation artifact, not a
+new Brain subsystem.

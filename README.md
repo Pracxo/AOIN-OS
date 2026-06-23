@@ -383,6 +383,34 @@ Contract docs:
 - [View redaction rules](docs/operator-console/view-redaction-rules.md)
 - [Console API examples](docs/operator-console/console-api-examples.md)
 
+## Static Operator Console Prototype
+
+AION-089 adds a static local Operator Console prototype. It is plain HTML,
+CSS, and JavaScript under `operator-console-static/`. It has no build step, no
+frontend dependency, no production auth claim, no write actions, no activation,
+and no external calls.
+
+The prototype consumes the existing read-only
+`POST /brain/operator-console/view-model` API when a local Brain API is
+available. When the API is offline, it renders synthetic demo JSON from
+`operator-console-static/demo-data/`. API overrides are accepted only for
+`localhost` or `127.0.0.1`.
+
+Run the static checks:
+
+```bash
+./scripts/operator-console-static-check.sh
+./scripts/operator-console-static-demo.sh --offline-ok
+python3 -m http.server 8090 --directory operator-console-static
+```
+
+Read the prototype docs:
+
+- [Static console prototype](docs/operator-console/static-console-prototype.md)
+- [Static console runbook](docs/operator-console/static-console-runbook.md)
+- [Static console safety review](docs/operator-console/static-console-safety-review.md)
+- [Static console test plan](docs/operator-console/static-console-test-plan.md)
+
 ## v0.1 Final Local Release Path
 
 AION Brain v0.1.0 is a local release baseline. The final scripts aggregate

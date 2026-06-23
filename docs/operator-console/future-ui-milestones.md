@@ -15,9 +15,13 @@ reasoning exposure, and no secret exposure.
 
 Static local console prototype, no auth claim, no writes by default.
 
+Status: implemented as a local static prototype over existing read-only
+view-model contracts. It uses no frontend dependency, no build step, no
+production auth claim, no activation, no execution, and no external calls.
+
 ## AION-090
 
-Read-only module lifecycle dashboard.
+Read-only module lifecycle dashboard after UI architecture approval.
 
 ## AION-091
 

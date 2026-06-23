@@ -1,0 +1,46 @@
+{
+  "console_view_model_id": "static-overview-demo",
+  "view": "overview",
+  "status": "ready",
+  "read_only": true,
+  "owner_scope": ["workspace:main"],
+  "title": "Overview",
+  "summary": "Static read-only overview using synthetic local data.",
+  "blockers": [{"message": "write actions disabled"}],
+  "warnings": [{"message": "offline demo data is synthetic"}],
+  "refs": ["/brain/operator-console/view-model"],
+  "sections": [
+    {
+      "section_key": "system_posture",
+      "title": "System Posture",
+      "status": "ready",
+      "severity": "low",
+      "summary": "Local prototype can render status, blockers, warnings, and refs.",
+      "items": [{"label": "local prototype", "status": "ready"}],
+      "blockers": [],
+      "warnings": [{"message": "offline demo data is synthetic"}],
+      "refs": ["/brain/operator-console/view-model"]
+    },
+    {
+      "section_key": "operator_queue",
+      "title": "Operator Queue",
+      "status": "warning",
+      "severity": "medium",
+      "summary": "Action controls remain disabled; descriptors are visible only.",
+      "items": [{"label": "descriptor queue", "status": "read_only"}],
+      "blockers": [{"message": "write actions disabled"}],
+      "warnings": [],
+      "refs": ["docs/operator-console/static-console-prototype.md"]
+    }
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Module activation is disabled."},
+    {"action_key": "activate_capability", "reason": "Capability activation is disabled."},
+    {"action_key": "load_code", "reason": "Code loading is disabled."},
+    {"action_key": "execute_tool", "reason": "Tool execution is disabled."},
+    {"action_key": "enable_external_model_calls", "reason": "External model calls are disabled."},
+    {"action_key": "hard_delete", "reason": "Hard delete is disabled."}
+  ],
+  "redaction_applied": true,
+  "metadata": {"static_demo": true, "frontend_dependency": false}
+}

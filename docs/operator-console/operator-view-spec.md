@@ -32,3 +32,25 @@ and refs.
 It adds no runtime UI, no frontend state, no activation, and no execution. It
 must preserve no raw prompt exposure, no hidden reasoning exposure, and no
 secret exposure.
+
+## AION-089 static prototype path
+
+The static prototype consumes the same view names and data shape from
+`POST /brain/operator-console/view-model` when the local API is reachable. It
+does not add routes or contracts. Offline mode renders synthetic JSON examples
+from `operator-console-static/demo-data/`.
+
+The static prototype includes these sections:
+
+- Overview
+- Readiness
+- Release Candidate
+- Module Lifecycle
+- Model Provider Hardening
+- Incidents
+- Registry and Lifecycle
+- Settings Safety
+- Audit and Provenance
+
+All action entries remain descriptors. Buttons are disabled and are not wired
+to mutation endpoints.

@@ -156,3 +156,19 @@ redacted, policy-gated, and frontend-agnostic.
 
 The contract preserves no raw prompt exposure, no hidden reasoning exposure, no
 secret exposure, no activation, and no execution. Actions are descriptors only.
+
+## AION-089 static local prototype
+
+AION-089 adds the first local static prototype over the AION-088 view-model
+contract. The prototype is plain HTML, CSS, and JavaScript in
+`operator-console-static/`. It is a local read-only preview with no frontend
+dependency, no build step, no production auth claim, no write actions, no
+activation, no execution, and no external calls.
+
+The prototype may call `POST /brain/operator-console/view-model` on a local
+Brain API and otherwise falls back to local synthetic demo JSON. It must reject
+non-local API origins, redact dangerous fields before rendering, and show
+forbidden actions as disabled descriptors only.
+
+This does not change the CLI/API-first architecture. It proves layout and
+operator review ergonomics before any governed UI architecture is approved.

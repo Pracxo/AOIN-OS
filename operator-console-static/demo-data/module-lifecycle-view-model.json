@@ -1,0 +1,46 @@
+{
+  "console_view_model_id": "static-module-lifecycle-demo",
+  "view": "module_lifecycle",
+  "status": "blocked",
+  "read_only": true,
+  "owner_scope": ["workspace:main"],
+  "title": "Module Lifecycle",
+  "summary": "Static module lifecycle preview showing activation blockers only.",
+  "blockers": [{"message": "activation disabled by milestone boundary"}],
+  "warnings": [{"message": "metadata review only"}],
+  "refs": ["/brain/operator-console/view-model"],
+  "sections": [
+    {
+      "section_key": "activation_gate",
+      "title": "Activation Gate",
+      "status": "blocked",
+      "severity": "high",
+      "summary": "Activation remains unavailable in the static prototype.",
+      "items": [{"label": "activation_allowed", "status": "false"}],
+      "blockers": [{"message": "activation disabled by milestone boundary"}],
+      "warnings": [{"message": "metadata review only"}],
+      "refs": ["/brain/operator-console/view-model"]
+    },
+    {
+      "section_key": "mock_runtime",
+      "title": "Mock Runtime",
+      "status": "ready",
+      "severity": "low",
+      "summary": "Synthetic records can be displayed without execution.",
+      "items": [{"label": "synthetic output", "status": "display_only"}],
+      "blockers": [],
+      "warnings": [{"message": "execution unavailable"}],
+      "refs": ["docs/operator-console/read-only-action-model.md"]
+    }
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Module activation is disabled."},
+    {"action_key": "activate_capability", "reason": "Capability activation is disabled."},
+    {"action_key": "load_code", "reason": "Code loading is disabled."},
+    {"action_key": "execute_tool", "reason": "Tool execution is disabled."},
+    {"action_key": "enable_external_model_calls", "reason": "External model calls are disabled."},
+    {"action_key": "hard_delete", "reason": "Hard delete is disabled."}
+  ],
+  "redaction_applied": true,
+  "metadata": {"static_demo": true, "activation_allowed": false}
+}

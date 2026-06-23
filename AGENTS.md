@@ -128,6 +128,15 @@ Instructions for future Codex runs in this repository:
   config files appear in the scanned tree.
 - Future UI work must consume Operator contracts rather than querying subsystem
   internals directly.
+- Static Operator Console prototype work must remain dependency-free until UI
+  architecture is explicitly approved.
+- Static console work must not add package manager files, external scripts,
+  external stylesheets, framework assets, or a build step.
+- Static console work must remain read-only and must not activate modules,
+  activate capabilities, execute tools, enable external calls, mutate runtime
+  config, or imply production auth.
+- Static console rendering must not expose raw prompts, hidden reasoning,
+  chain-of-thought, raw headers, provider payloads, credentials, or secrets.
 - Dialogue work must remain backend contract work unless a future task
   explicitly asks for UI.
 - Dialogue APIs must not expose provider-specific chat objects, frontend state,

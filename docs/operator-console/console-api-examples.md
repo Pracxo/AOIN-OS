@@ -21,3 +21,13 @@ read-only contract shape for future consumers.
 
 All examples preserve no runtime UI, no raw prompt exposure, no hidden reasoning
 exposure, no secret exposure, no activation, and no execution.
+
+## Static Prototype Demo Data
+
+AION-089 adds local demo JSON under `operator-console-static/demo-data/`.
+Those files mirror the read-only view-model shape for offline rendering. They
+are synthetic, redacted, and include forbidden action descriptors only.
+
+The static prototype uses the existing
+`POST /brain/operator-console/view-model` API when the API base is local and
+reachable. It does not introduce a new API path.

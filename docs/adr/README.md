@@ -89,3 +89,4 @@ closure decision in ADR 0072.
 - [0077: Model Provider Adapter Hardening](0077-model-provider-adapter-hardening.md) - Defines provider-readiness metadata, prompt egress previews, and dry-run provider simulation boundaries.
 - [0078: Operator Console CLI/API-First Decision](0078-operator-console-cli-api-first-decision.md) - Defines operator console strategy before runtime UI work.
 - [0079: Operator Console Read-Only View Models](0079-operator-console-read-only-view-models.md) - Defines redacted read-only console view models and contract audit before runtime UI work.
+- [0080: Static Local Operator Console Prototype](0080-static-local-operator-console-prototype.md) - Defines the no-build local static console preview and safety constraints.
