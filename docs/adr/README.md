@@ -82,3 +82,12 @@ closure decision in ADR 0072.
 - [0070: First-Run Bootstrap and Setup Doctor](0070-first-run-bootstrap-setup-doctor.md) - Defines local first-run bootstrap, seed bundles, setup findings, and onboarding reports.
 - [0071: Release Candidate Gate](0071-release-candidate-gate.md) - Defines local RC readiness matrices, gate runs, findings, evidence packs, and reports.
 - [0072: v0.1 Release Freeze Baseline](0072-v0.1-release-freeze-baseline.md) - Freezes the local v0.1 release baseline and final release-closure gates.
+- [0073: Post-v0.1 Module Ecosystem Strategy](0073-post-v0.1-module-ecosystem-strategy.md) - Defines post-v0.1 module strategy, activation design posture, and first metadata-only module selection.
+- [0074: Module Activation Request Gate](0074-module-activation-request-gate.md) - Defines metadata-only activation requests, blockers, reviews, plans, and runtime registration previews.
+- [0075: Generic Knowledge Intelligence Module Pack](0075-generic-knowledge-intelligence-module-pack.md) - Defines the first metadata-only governed module package and readiness trail.
+- [0076: Deterministic Module Mock Runtime](0076-deterministic-module-mock-runtime.md) - Defines synthetic dry-run module invocation evidence and readiness boundaries.
+- [0077: Model Provider Adapter Hardening](0077-model-provider-adapter-hardening.md) - Defines provider-readiness metadata, prompt egress previews, and dry-run provider simulation boundaries.
+- [0078: Operator Console CLI/API-First Decision](0078-operator-console-cli-api-first-decision.md) - Defines operator console strategy before runtime UI work.
+- [0079: Operator Console Read-Only View Models](0079-operator-console-read-only-view-models.md) - Defines redacted read-only console view models and contract audit before runtime UI work.
+- [0080: Static Local Operator Console Prototype](0080-static-local-operator-console-prototype.md) - Defines the no-build local static console preview and safety constraints.
+- [0081: Read-Only Module Lifecycle Dashboard](0081-read-only-module-lifecycle-dashboard.md) - Defines the static Generic Knowledge module lifecycle trail dashboard.

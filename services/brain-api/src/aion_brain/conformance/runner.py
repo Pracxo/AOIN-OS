@@ -19,6 +19,7 @@ from aion_brain.contracts.conformance import (
     ConformanceRun,
     ConformanceRunRequest,
 )
+from aion_brain.contracts.module_mock_runtime import ModuleMockInvocationCreateRequest
 from aion_brain.contracts.notifications import NotificationPublishRequest
 from aion_brain.module_bindings.repository import ModuleBindingRepository
 from aion_brain.policy_catalog.defaults import DEFAULT_ACTION_SPECS
@@ -34,6 +35,7 @@ class ConformanceRunner:
         *,
         schema_checker: SchemaConformanceChecker,
         mock_simulator: MockInvocationSimulator,
+        module_mock_simulator: object | None = None,
         module_binding_repository: ModuleBindingRepository | None = None,
         contract_repository: object | None = None,
         policy_catalog_repository: object | None = None,
@@ -47,6 +49,7 @@ class ConformanceRunner:
         self._policy_adapter = policy_adapter
         self._schema_checker = schema_checker
         self._mock_simulator = mock_simulator
+        self._module_mock_simulator = module_mock_simulator
         self._module_binding_repository = module_binding_repository
         self._contract_repository = contract_repository
         self._policy_catalog_repository = policy_catalog_repository
@@ -55,6 +58,11 @@ class ConformanceRunner:
         self._telemetry_service = telemetry_service
         self._audit_sink = audit_sink
         self._settings = settings or get_settings()
+
+    def set_module_mock_simulator(self, simulator: object | None) -> None:
+        """Attach optional module mock runtime evidence generator."""
+
+        self._module_mock_simulator = simulator
 
     def run(self, request: ConformanceRunRequest) -> ConformanceRun:
         if not self._settings.conformance_enabled:
@@ -92,6 +100,7 @@ class ConformanceRunner:
         mock_invocations = [
             self._mock_simulator.simulate(vector, binding, request.created_by) for vector in vectors
         ]
+        module_mock_runs = self._run_module_mock_evidence(request, binding, vectors)
         for mock in mock_invocations:
             if mock.status in {"failed", "blocked"}:
                 findings.append(
@@ -159,6 +168,9 @@ class ConformanceRunner:
                 "extension_code_loaded": False,
                 "activation_ready": False,
                 "conformance_records_persisted": True,
+                "module_mock_run_ids": [
+                    getattr(item, "module_mock_run_id", None) for item in module_mock_runs
+                ],
             },
             metadata={**request.metadata, "source_mutated": False},
             created_by=request.created_by,
@@ -178,6 +190,46 @@ class ConformanceRunner:
             payload={"status": saved.status, "score": saved.score},
         )
         return saved
+
+    def _run_module_mock_evidence(
+        self,
+        request: ConformanceRunRequest,
+        binding: CapabilityBinding | None,
+        vectors: list[object],
+    ) -> list[object]:
+        if (
+            not bool(request.metadata.get("use_module_mock_runtime", False))
+            or self._module_mock_simulator is None
+            or binding is None
+        ):
+            return []
+        invoke = getattr(self._module_mock_simulator, "invoke", None)
+        if not callable(invoke):
+            return []
+        vector = vectors[0] if vectors else None
+        payload = getattr(vector, "input_payload", {}) if vector is not None else {}
+        try:
+            run = invoke(
+                ModuleMockInvocationCreateRequest(
+                    trace_id=request.trace_id,
+                    actor_id=request.actor_id,
+                    workspace_id=request.workspace_id,
+                    extension_package_id=request.extension_package_id
+                    or binding.extension_package_id,
+                    module_slot_id=request.module_slot_id or binding.module_slot_id,
+                    capability_binding_id=binding.capability_binding_id,
+                    capability_key=binding.capability_key,
+                    invocation_type="schema_simulation",
+                    owner_scope=request.owner_scope,
+                    input_payload=payload if isinstance(payload, dict) else {},
+                    expected_output_shape=binding.output_schema,
+                    metadata={"origin": "conformance", "metadata_only": True},
+                    created_by=request.created_by,
+                )
+            )
+        except Exception:
+            return []
+        return [run]
 
     def get_run(self, conformance_run_id: str) -> ConformanceRun | None:
         return self._repository.get_run(conformance_run_id)

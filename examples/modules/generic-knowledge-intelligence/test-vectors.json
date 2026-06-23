@@ -1,0 +1,70 @@
+[
+  {
+    "test_vector_id": "gki-vector-schema-001",
+    "module_slot_id": "gki-module-slot-001",
+    "capability_binding_id": "gki-binding-retrieve-001",
+    "name": "Schema-only retrieval vector",
+    "description": "Synthetic schema-only vector for generic retrieval metadata.",
+    "vector_type": "schema_only",
+    "input_payload": {
+      "query": "generic concept lookup",
+      "scope": [
+        "workspace:main"
+      ],
+      "limit": 3
+    },
+    "expected_output_shape": {
+      "type": "object",
+      "required": [
+        "matches",
+        "constraints"
+      ]
+    },
+    "expected_constraints": [
+      "metadata_only",
+      "no_external_source"
+    ],
+    "owner_scope": [
+      "workspace:main"
+    ],
+    "metadata": {
+      "synthetic": true,
+      "contains_user_data": false
+    },
+    "created_by": "operator"
+  },
+  {
+    "test_vector_id": "gki-vector-mock-input-001",
+    "module_slot_id": "gki-module-slot-001",
+    "capability_binding_id": "gki-binding-answer-001",
+    "name": "Mock input answer vector",
+    "description": "Synthetic mock-input vector for generic answer metadata.",
+    "vector_type": "mock_input",
+    "input_payload": {
+      "question": "What generic records are available?",
+      "context_refs": [
+        "content:generic-record-001"
+      ]
+    },
+    "expected_output_shape": {
+      "type": "object",
+      "required": [
+        "answer",
+        "grounding_refs",
+        "uncertainty"
+      ]
+    },
+    "expected_constraints": [
+      "metadata_only",
+      "no_tool_execution"
+    ],
+    "owner_scope": [
+      "workspace:main"
+    ],
+    "metadata": {
+      "synthetic": true,
+      "contains_user_data": false
+    },
+    "created_by": "operator"
+  }
+]

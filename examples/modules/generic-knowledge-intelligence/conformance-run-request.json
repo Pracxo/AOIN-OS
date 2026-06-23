@@ -1,0 +1,20 @@
+{
+  "conformance_run_id": "gki-conformance-run-001",
+  "mode": "dry_run",
+  "owner_scope": [
+    "workspace:main"
+  ],
+  "conformance_profile_id": "gki-conformance-profile-001",
+  "module_slot_id": "gki-module-slot-001",
+  "test_vector_ids": [
+    "gki-vector-schema-001",
+    "gki-vector-mock-input-001"
+  ],
+  "create_notifications": false,
+  "metadata": {
+    "metadata_only": true,
+    "target": "module_slot_metadata",
+    "expected_activation_ready": false
+  },
+  "created_by": "operator"
+}

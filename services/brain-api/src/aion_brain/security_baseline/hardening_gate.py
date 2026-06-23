@@ -62,6 +62,8 @@ class HardeningGateService:
         self._audit_sink = audit_sink
         self._extension_registry_repository: object | None = None
         self._module_binding_repository: object | None = None
+        self._module_mock_repository: object | None = None
+        self._model_provider_hardening_repository: object | None = None
         self._conformance_repository: object | None = None
 
     def set_extension_registry_repository(self, repository: object | None) -> None:
@@ -73,6 +75,16 @@ class HardeningGateService:
         """Attach module binding registry after kernel assembly."""
 
         self._module_binding_repository = repository
+
+    def set_module_mock_repository(self, repository: object | None) -> None:
+        """Attach module mock runtime after kernel assembly."""
+
+        self._module_mock_repository = repository
+
+    def set_model_provider_hardening_repository(self, repository: object | None) -> None:
+        """Attach model provider hardening after kernel assembly."""
+
+        self._model_provider_hardening_repository = repository
 
     def set_conformance_repository(self, repository: object | None) -> None:
         """Attach conformance readiness metadata after kernel assembly."""
@@ -137,6 +149,8 @@ class HardeningGateService:
             checks.append(self._release_package_check())
         checks.extend(self._extension_registry_checks())
         checks.extend(self._module_binding_checks())
+        checks.extend(self._module_mock_checks())
+        checks.extend(self._model_provider_hardening_checks())
         checks.extend(self._conformance_checks())
         checks.extend(self._audit_integrity_checks())
         checks.append(self._control_catalog_check())
@@ -424,6 +438,84 @@ class HardeningGateService:
                 "No blocked capability binding metadata is present.",
                 "module_bindings",
                 details={"count": len(blocked)},
+            ),
+        ]
+
+    def _module_mock_checks(self) -> builtins.list[dict[str, Any]]:
+        list_runs = getattr(self._module_mock_repository, "list_runs", None)
+        list_findings = getattr(self._module_mock_repository, "list_findings", None)
+        runs = list_runs(limit=1000) if callable(list_runs) else []
+        findings = list_findings(status="open", limit=1000) if callable(list_findings) else []
+        blocked_runs = [
+            item for item in runs if getattr(item, "status", None) in {"failed", "blocked"}
+        ]
+        high_findings = [
+            item for item in findings if getattr(item, "severity", None) in {"high", "critical"}
+        ]
+        return [
+            _check(
+                "module_mock_controlled_execution_disabled",
+                (
+                    "failed"
+                    if self._settings.module_mock_controlled_execution_enabled
+                    else "passed"
+                ),
+                "Module mock controlled execution is disabled.",
+                "module_mock_runtime",
+            ),
+            _check(
+                "module_mock_code_loading_disabled",
+                "failed" if self._settings.module_mock_code_loading_enabled else "passed",
+                "Module mock code loading is disabled.",
+                "module_mock_runtime",
+            ),
+            _check(
+                "module_mock_external_calls_disabled",
+                "failed" if self._settings.module_mock_external_calls_enabled else "passed",
+                "Module mock external calls are disabled.",
+                "module_mock_runtime",
+            ),
+            _check(
+                "no_blocked_module_mock_runs",
+                "failed" if blocked_runs else "passed",
+                "No blocked module mock runtime records are present.",
+                "module_mock_runtime",
+                details={"count": len(blocked_runs), "run_count": len(runs)},
+            ),
+            _check(
+                "no_high_module_mock_findings",
+                "failed" if high_findings else "passed",
+                "No high-severity module mock findings are open.",
+                "module_mock_runtime",
+                details={"count": len(high_findings), "finding_count": len(findings)},
+            ),
+        ]
+
+    def _model_provider_hardening_checks(self) -> builtins.list[dict[str, Any]]:
+        list_blockers = getattr(self._model_provider_hardening_repository, "list_blockers", None)
+        blockers = list_blockers(status="open", limit=1000) if callable(list_blockers) else []
+        high_blockers = [
+            item for item in blockers if getattr(item, "severity", None) in {"high", "critical"}
+        ]
+        return [
+            _check(
+                "external_model_calls_disabled",
+                "failed" if self._settings.external_model_calls_enabled else "passed",
+                "External model calls are disabled.",
+                "model_provider_hardening",
+            ),
+            _check(
+                "model_provider_credentials_disabled",
+                "failed" if self._settings.model_provider_credentials_enabled else "passed",
+                "Model provider credentials are disabled.",
+                "model_provider_hardening",
+            ),
+            _check(
+                "no_high_provider_hardening_blockers",
+                "warning" if high_blockers else "passed",
+                "No high-severity provider hardening blockers are open.",
+                "model_provider_hardening",
+                details={"count": len(high_blockers), "blocker_count": len(blockers)},
             ),
         ]
 

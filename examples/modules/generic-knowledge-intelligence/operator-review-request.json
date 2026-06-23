@@ -1,0 +1,13 @@
+{
+  "activation_request_id": "gki-activation-request-001",
+  "decision": "approve_for_future_activation",
+  "reviewer_id": "operator",
+  "reason": "Metadata-only package review; approval records future consideration and does not activate the module.",
+  "approval_present": false,
+  "metadata": {
+    "metadata_only": true,
+    "approval_does_not_activate": true,
+    "expected_activation_allowed": false,
+    "operator_review_scope": "future_activation_only"
+  }
+}

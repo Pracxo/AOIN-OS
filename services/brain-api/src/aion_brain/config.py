@@ -348,11 +348,172 @@ class Settings(BaseSettings):
             "dynamic_route_registration_enabled",
         ),
     )
+    module_activation_requests_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODULE_ACTIVATION_REQUESTS_ENABLED",
+            "module_activation_requests_enabled",
+        ),
+    )
+    module_activation_gate_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODULE_ACTIVATION_GATE_ENABLED",
+            "module_activation_gate_enabled",
+        ),
+    )
+    module_activation_reviews_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODULE_ACTIVATION_REVIEWS_ENABLED",
+            "module_activation_reviews_enabled",
+        ),
+    )
+    module_activation_plans_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODULE_ACTIVATION_PLANS_ENABLED",
+            "module_activation_plans_enabled",
+        ),
+    )
+    runtime_registration_preview_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_RUNTIME_REGISTRATION_PREVIEW_ENABLED",
+            "runtime_registration_preview_enabled",
+        ),
+    )
+    module_activation_execution_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_MODULE_ACTIVATION_EXECUTION_ENABLED",
+            "module_activation_execution_enabled",
+        ),
+    )
+    runtime_registration_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_RUNTIME_REGISTRATION_ENABLED",
+            "runtime_registration_enabled",
+        ),
+    )
+    module_activation_create_notifications_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_MODULE_ACTIVATION_CREATE_NOTIFICATIONS_DEFAULT",
+            "module_activation_create_notifications_default",
+        ),
+    )
     module_binding_create_notifications_default: bool = Field(
         default=False,
         validation_alias=AliasChoices(
             "AION_MODULE_BINDING_CREATE_NOTIFICATIONS_DEFAULT",
             "module_binding_create_notifications_default",
+        ),
+    )
+    module_mock_runtime_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODULE_MOCK_RUNTIME_ENABLED",
+            "module_mock_runtime_enabled",
+        ),
+    )
+    module_mock_profiles_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODULE_MOCK_PROFILES_ENABLED",
+            "module_mock_profiles_enabled",
+        ),
+    )
+    module_mock_invocation_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODULE_MOCK_INVOCATION_ENABLED",
+            "module_mock_invocation_enabled",
+        ),
+    )
+    module_mock_controlled_execution_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_MODULE_MOCK_CONTROLLED_EXECUTION_ENABLED",
+            "module_mock_controlled_execution_enabled",
+        ),
+    )
+    module_mock_code_loading_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_MODULE_MOCK_CODE_LOADING_ENABLED",
+            "module_mock_code_loading_enabled",
+        ),
+    )
+    module_mock_external_calls_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_MODULE_MOCK_EXTERNAL_CALLS_ENABLED",
+            "module_mock_external_calls_enabled",
+        ),
+    )
+    module_mock_create_notifications_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_MODULE_MOCK_CREATE_NOTIFICATIONS_DEFAULT",
+            "module_mock_create_notifications_default",
+        ),
+    )
+    model_provider_hardening_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODEL_PROVIDER_HARDENING_ENABLED",
+            "model_provider_hardening_enabled",
+        ),
+    )
+    model_provider_profiles_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODEL_PROVIDER_PROFILES_ENABLED",
+            "model_provider_profiles_enabled",
+        ),
+    )
+    prompt_egress_guard_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_PROMPT_EGRESS_GUARD_ENABLED",
+            "prompt_egress_guard_enabled",
+        ),
+    )
+    model_provider_simulation_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODEL_PROVIDER_SIMULATION_ENABLED",
+            "model_provider_simulation_enabled",
+        ),
+    )
+    model_provider_readiness_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_MODEL_PROVIDER_READINESS_ENABLED",
+            "model_provider_readiness_enabled",
+        ),
+    )
+    external_model_calls_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_EXTERNAL_MODEL_CALLS_ENABLED",
+            "external_model_calls_enabled",
+        ),
+    )
+    model_provider_credentials_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_MODEL_PROVIDER_CREDENTIALS_ENABLED",
+            "model_provider_credentials_enabled",
+        ),
+    )
+    model_provider_create_notifications_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_MODEL_PROVIDER_CREATE_NOTIFICATIONS_DEFAULT",
+            "model_provider_create_notifications_default",
         ),
     )
     conformance_enabled: bool = Field(
@@ -1472,6 +1633,55 @@ class Settings(BaseSettings):
         validation_alias=AliasChoices(
             "AION_OPERATOR_MAX_QUEUE_ITEMS_DEFAULT",
             "operator_max_queue_items_default",
+        ),
+    )
+    operator_console_view_models_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_CONSOLE_VIEW_MODELS_ENABLED",
+            "operator_console_view_models_enabled",
+        ),
+    )
+    operator_console_contract_audit_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_CONSOLE_CONTRACT_AUDIT_ENABLED",
+            "operator_console_contract_audit_enabled",
+        ),
+    )
+    operator_console_read_only: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_CONSOLE_READ_ONLY",
+            "operator_console_read_only",
+        ),
+    )
+    operator_console_write_actions_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_CONSOLE_WRITE_ACTIONS_ENABLED",
+            "operator_console_write_actions_enabled",
+        ),
+    )
+    operator_console_frontend_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_CONSOLE_FRONTEND_ENABLED",
+            "operator_console_frontend_enabled",
+        ),
+    )
+    operator_console_redaction_required: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_CONSOLE_REDACTION_REQUIRED",
+            "operator_console_redaction_required",
+        ),
+    )
+    operator_console_create_notifications_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_CONSOLE_CREATE_NOTIFICATIONS_DEFAULT",
+            "operator_console_create_notifications_default",
         ),
     )
     security_scan_max_file_size_mb: int = Field(

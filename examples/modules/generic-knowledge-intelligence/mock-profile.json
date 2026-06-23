@@ -1,0 +1,51 @@
+{
+  "mock_profile_id": "gki-mock-profile-001",
+  "profile_key": "generic.knowledge.mock",
+  "name": "Generic Knowledge Mock Profile",
+  "description": "Deterministic synthetic profile for Generic Knowledge Intelligence dry-runs.",
+  "profile_type": "knowledge_stub",
+  "owner_scope": [
+    "workspace:main"
+  ],
+  "supported_capability_types": [
+    "retrieval",
+    "reasoning",
+    "evidence",
+    "generic"
+  ],
+  "supported_capability_keys": [
+    "generic.knowledge.retrieve",
+    "generic.knowledge.summarize",
+    "generic.knowledge.ground",
+    "generic.knowledge.explain",
+    "generic.knowledge.answer"
+  ],
+  "input_schema_hints": {
+    "type": "object",
+    "synthetic": true
+  },
+  "output_schema_hints": {
+    "type": "object",
+    "synthetic": true
+  },
+  "simulation_rules": [
+    {
+      "rule": "shape_only",
+      "synthetic": true,
+      "external_calls": false
+    }
+  ],
+  "constraints": [
+    "metadata_only",
+    "dry_run_only",
+    "no_external_calls",
+    "no_code_loading",
+    "no_activation"
+  ],
+  "metadata": {
+    "synthetic": true,
+    "activation_allowed": false,
+    "execution_allowed": false
+  },
+  "created_by": "operator"
+}

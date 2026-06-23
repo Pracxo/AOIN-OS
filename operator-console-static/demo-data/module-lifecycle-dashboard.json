@@ -1,0 +1,170 @@
+{
+  "console_view_model_id": "static-module-lifecycle-dashboard-demo",
+  "view": "module_lifecycle",
+  "status": "metadata_only",
+  "read_only": true,
+  "redaction_applied": true,
+  "module_key": "generic.knowledge_intelligence",
+  "module_name": "Generic Knowledge Intelligence",
+  "owner_scope": ["workspace:main"],
+  "title": "Module Lifecycle Dashboard",
+  "summary": "Read-only module lifecycle trail for Generic Knowledge Intelligence. This dashboard is read-only. Activation is blocked by design.",
+  "activation_allowed": false,
+  "execution_allowed": false,
+  "registration_allowed": false,
+  "code_loaded": false,
+  "external_calls_made": false,
+  "blockers": [
+    {"blocker_key": "activation_disabled", "message": "Activation remains disabled by milestone boundary.", "bypassable": false},
+    {"blocker_key": "code_loading_disabled", "message": "Module code loading remains disabled.", "bypassable": false}
+  ],
+  "warnings": [
+    {"message": "Metadata review only; no runtime module is active."}
+  ],
+  "refs": [
+    "docs/modules/generic-knowledge-intelligence-readiness-trail.md",
+    "docs/operator-console/module-lifecycle-dashboard.md"
+  ],
+  "safety_labels": {
+    "activation_allowed": false,
+    "execution_allowed": false,
+    "registration_allowed": false,
+    "code_loaded": false,
+    "external_calls_made": false
+  },
+  "stages": [
+    {
+      "stage_key": "manifest",
+      "title": "Extension Manifest",
+      "status": "reviewable",
+      "evidence_refs": ["examples/modules/generic-knowledge-intelligence/manifest.json"],
+      "blockers": [],
+      "warnings": [{"message": "Manifest is metadata only."}],
+      "allowed_actions": ["inspect_manifest_metadata", "inspect_schema_refs"],
+      "forbidden_actions": ["load_code", "activate_module", "activate_capability"]
+    },
+    {
+      "stage_key": "intake",
+      "title": "Extension Intake",
+      "status": "reviewable",
+      "evidence_refs": ["docs/modules/generic-knowledge-intelligence-readiness-trail.md"],
+      "blockers": [],
+      "warnings": [{"message": "Intake evidence is static demo evidence."}],
+      "allowed_actions": ["inspect_intake_summary"],
+      "forbidden_actions": ["load_code", "execute_tool"]
+    },
+    {
+      "stage_key": "module_slot",
+      "title": "Module Slot",
+      "status": "inactive",
+      "evidence_refs": ["docs/modules/module-activation-state-machine.md"],
+      "blockers": [{"blocker_key": "activation_disabled", "message": "Slot remains inactive.", "bypassable": false}],
+      "warnings": [],
+      "allowed_actions": ["inspect_slot_metadata"],
+      "forbidden_actions": ["activate_module", "register_runtime_route"]
+    },
+    {
+      "stage_key": "capability_bindings",
+      "title": "Capability Bindings",
+      "status": "validated",
+      "evidence_refs": ["docs/modules/generic-knowledge-intelligence-demo.md"],
+      "blockers": [],
+      "warnings": [{"message": "Bindings are inactive metadata."}],
+      "allowed_actions": ["inspect_binding_shapes"],
+      "forbidden_actions": ["activate_capability", "execute_tool"]
+    },
+    {
+      "stage_key": "binding_validation",
+      "title": "Binding Validation",
+      "status": "passed",
+      "evidence_refs": ["docs/modules/generic-knowledge-intelligence-readiness-trail.md"],
+      "blockers": [],
+      "warnings": [],
+      "allowed_actions": ["inspect_validation_result"],
+      "forbidden_actions": ["bypass_policy", "mutate_runtime_config"]
+    },
+    {
+      "stage_key": "conformance",
+      "title": "Conformance",
+      "status": "passed",
+      "evidence_refs": ["docs/modules/generic-knowledge-intelligence-readiness-trail.md"],
+      "blockers": [],
+      "warnings": [{"message": "Conformance is dry-run evidence."}],
+      "allowed_actions": ["inspect_conformance_summary"],
+      "forbidden_actions": ["execute_tool", "call_external_service"]
+    },
+    {
+      "stage_key": "readiness",
+      "title": "Readiness",
+      "status": "created",
+      "evidence_refs": ["docs/modules/generic-knowledge-intelligence-readiness-trail.md"],
+      "blockers": [{"blocker_key": "activation_disabled", "message": "Readiness does not enable activation.", "bypassable": false}],
+      "warnings": [{"message": "Readiness is review evidence only."}],
+      "allowed_actions": ["inspect_readiness_summary"],
+      "forbidden_actions": ["activate_module", "enable_external_model_calls"]
+    },
+    {
+      "stage_key": "activation_request",
+      "title": "Activation Request",
+      "status": "blocked",
+      "evidence_refs": ["docs/modules/module-activation-state-machine.md"],
+      "blockers": [{"blocker_key": "activation_disabled", "message": "Activation request cannot proceed.", "bypassable": false}],
+      "warnings": [{"message": "Request exists only as metadata."}],
+      "allowed_actions": ["inspect_blockers"],
+      "forbidden_actions": ["activate_module", "approve_activation"]
+    },
+    {
+      "stage_key": "activation_gate",
+      "title": "Activation Gate",
+      "status": "blocked",
+      "evidence_refs": ["docs/modules/module-activation-state-machine.md"],
+      "blockers": [
+        {"blocker_key": "activation_disabled", "message": "Activation gate is closed.", "bypassable": false},
+        {"blocker_key": "code_loading_disabled", "message": "Code loading is disabled.", "bypassable": false}
+      ],
+      "warnings": [{"message": "Blockers are expected and safe."}],
+      "allowed_actions": ["inspect_gate_result"],
+      "forbidden_actions": ["activate_module", "load_code", "register_runtime_route"]
+    },
+    {
+      "stage_key": "module_mock_runtime",
+      "title": "Module Mock Runtime",
+      "status": "synthetic_only",
+      "evidence_refs": ["docs/modules/module-mock-runtime.md"],
+      "blockers": [{"blocker_key": "execution_disabled", "message": "Only synthetic dry-run records are shown.", "bypassable": false}],
+      "warnings": [{"message": "No capability execution occurred."}],
+      "allowed_actions": ["inspect_mock_output"],
+      "forbidden_actions": ["execute_tool", "load_code", "call_external_service"]
+    },
+    {
+      "stage_key": "operator_review",
+      "title": "Operator Review",
+      "status": "review_only",
+      "evidence_refs": ["docs/modules/generic-knowledge-intelligence-operator-review.md"],
+      "blockers": [{"blocker_key": "activation_disabled", "message": "Operator review cannot activate the module.", "bypassable": false}],
+      "warnings": [{"message": "Review can only record interpretation in a future governed flow."}],
+      "allowed_actions": ["inspect_review_checklist"],
+      "forbidden_actions": ["approve_activation", "activate_module", "execute_tool"]
+    }
+  ],
+  "sections": [
+    {
+      "section_key": "module_lifecycle_dashboard",
+      "title": "Generic Knowledge Intelligence Trail",
+      "status": "metadata_only",
+      "severity": "medium",
+      "summary": "The full module lifecycle path is visible without activation, execution, or registration.",
+      "blockers": [{"message": "activation_allowed=false"}],
+      "warnings": [{"message": "execution_allowed=false"}],
+      "refs": ["docs/operator-console/module-lifecycle-dashboard.md"]
+    }
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Module activation is disabled."},
+    {"action_key": "activate_capability", "reason": "Capability activation is disabled."},
+    {"action_key": "load_code", "reason": "Code loading is disabled."},
+    {"action_key": "execute_tool", "reason": "Tool execution is disabled."},
+    {"action_key": "enable_external_model_calls", "reason": "External model calls are disabled."},
+    {"action_key": "hard_delete", "reason": "Hard delete is disabled."}
+  ]
+}

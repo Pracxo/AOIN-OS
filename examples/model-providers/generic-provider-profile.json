@@ -1,0 +1,32 @@
+{
+  "provider_key": "generic.metadata_only",
+  "name": "Generic Metadata Only Provider",
+  "description": "Metadata-only provider profile for dry-run readiness checks.",
+  "provider_type": "metadata_only",
+  "owner_scope": ["workspace:main"],
+  "supported_model_families": ["generic"],
+  "supported_modes": ["dry_run"],
+  "declared_capabilities": ["metadata_preview", "dry_run_simulation"],
+  "required_settings": [
+    "external_model_calls_enabled=false",
+    "model_provider_credentials_enabled=false"
+  ],
+  "required_policy_actions": [
+    "model_provider.egress.preview",
+    "model_provider.simulate",
+    "model_provider.readiness.assess"
+  ],
+  "egress_requirements": ["prompt_summary_only", "redacted_metadata_only"],
+  "output_governance_requirements": ["model_output_governance_required"],
+  "grounding_requirements": ["grounding_required_for_claims"],
+  "tool_use_policy": {
+    "tool_execution_allowed": false
+  },
+  "risk_level": "medium",
+  "external_calls_allowed": false,
+  "credentials_required": false,
+  "metadata": {
+    "provider_activation_enabled": false,
+    "provider_endpoint_present": false
+  }
+}

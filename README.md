@@ -252,6 +252,190 @@ Release handoff docs:
 - [No-go conditions](docs/release/v0.1-no-go-conditions.md)
 - [Post-v0.1 roadmap](docs/release/v0.1-post-release-roadmap.md)
 
+## Post-v0.1 Module Ecosystem Strategy
+
+AION Brain v0.1.0 is released as the local-first baseline. The next phase is
+module ecosystem strategy, not runtime activation.
+
+The first selected module class is Generic Knowledge Intelligence. It remains
+metadata-only and uses existing Brain gates for extension intake, module slots,
+capability bindings, conformance, readiness, policy, audit, and operator
+review.
+
+Activation remains disabled. Code loading remains disabled. Package
+installation, dynamic routes, external calls, full autonomy, and controlled
+handoff remain disabled.
+
+Module strategy docs:
+
+- [Module ecosystem roadmap](docs/roadmap/module-ecosystem.md)
+- [Module activation design](docs/architecture/module-activation-design.md)
+- [Module activation request gate](docs/module-activation-gate.md)
+- [Module activation threat model](docs/security/module-activation-threat-model.md)
+- [First module selection](docs/modules/first-module-selection.md)
+- [Generic Knowledge Intelligence module](docs/modules/generic-knowledge-intelligence-module.md)
+- [Module intake checklist](docs/modules/module-intake-checklist.md)
+- [Module activation state machine](docs/modules/module-activation-state-machine.md)
+- [Module risk classification](docs/modules/module-risk-classification.md)
+- [Module branching and release discipline](docs/modules/module-branching-and-release-discipline.md)
+- [ADR 0073](docs/adr/0073-post-v0.1-module-ecosystem-strategy.md)
+- [ADR 0075](docs/adr/0075-generic-knowledge-intelligence-module-pack.md)
+
+Recommended branch command:
+
+```bash
+git switch main
+git pull --ff-only origin main
+git switch -c phase/post-v0.1-module-strategy
+```
+
+## Generic Knowledge Intelligence Module Pack
+
+AION-084 adds the first post-v0.1 governed module package as metadata only.
+The pack lives at `examples/modules/generic-knowledge-intelligence/` and
+proves the module path without activation:
+
+`manifest -> intake -> slot -> binding -> conformance -> readiness -> activation request -> blocker -> operator review`
+
+The pack does not add Brain runtime code, migrations, API routes, SDK
+resources, CLI commands, external dependencies, package installation, route
+registration, runtime registration, code loading, tool execution, or external
+calls.
+
+Run the local checks:
+
+```bash
+./scripts/module-pack-check.sh
+./scripts/generic-knowledge-demo.sh --offline-ok --skip-api
+```
+
+Read the module pack docs:
+
+- [Module pack README](examples/modules/generic-knowledge-intelligence/README.md)
+- [Demo walkthrough](docs/modules/generic-knowledge-intelligence-demo.md)
+- [Readiness trail](docs/modules/generic-knowledge-intelligence-readiness-trail.md)
+- [Operator review](docs/modules/generic-knowledge-intelligence-operator-review.md)
+- [No-go conditions](docs/modules/generic-knowledge-intelligence-no-go.md)
+
+## Operator Console Strategy
+
+AION-087 keeps post-v0.1 operator work CLI/API-first. It creates the local
+dashboard blueprint and workflow map only; it does not add runtime UI,
+frontend dependencies, API routes, SDK resources, CLI commands, module
+activation, code loading, package installation, external model calls, or
+external services.
+
+The future Operator Console must consume existing Brain APIs and CLI-backed
+dry-run workflows. It must preserve policy, audit, approval, redaction, module
+activation, and provider-hardening gates.
+
+Operator console docs:
+
+- [Operator console strategy](docs/operator-console/operator-console-strategy.md)
+- [Operator view spec](docs/operator-console/operator-view-spec.md)
+- [Operator demo map](docs/operator-console/operator-demo-map.md)
+- [Operator data safety](docs/operator-console/operator-data-safety.md)
+- [Operator no-go conditions](docs/operator-console/operator-console-no-go.md)
+
+Validate the strategy artifacts:
+
+```bash
+./scripts/operator-console-check.sh
+```
+
+## Operator Console Read-Only View Models
+
+AION-088 adds a backend-only Operator Console view-model and audit contract.
+It is read-only and adds no runtime UI, no frontend dependencies, no activation,
+no execution, no package installation, no route registration, and no external
+calls.
+
+The view model APIs summarize existing Brain state, redact unsafe values, return
+unavailable sections when optional services are missing, and expose actions as
+descriptors only. The contract preserves no raw prompt exposure, no hidden
+reasoning exposure, and no secret exposure.
+
+Endpoints:
+
+- `GET /brain/operator-console/views`
+- `POST /brain/operator-console/view-model`
+- `POST /brain/operator-console/audit`
+- `GET /brain/operator-console/workflows`
+- `GET /brain/operator-console/demo-map`
+
+SDK/CLI access:
+
+```bash
+aionctl operator-console views
+aionctl operator-console view-model --view overview
+aionctl operator-console audit
+aionctl operator-console workflows
+aionctl operator-console demo-map
+./scripts/operator-console-contract-check.sh
+```
+
+Contract docs:
+
+- [View model contract](docs/operator-console/view-model-contract.md)
+- [Data source map](docs/operator-console/data-source-map.md)
+- [API contract audit](docs/operator-console/api-contract-audit.md)
+- [Read-only action model](docs/operator-console/read-only-action-model.md)
+- [View redaction rules](docs/operator-console/view-redaction-rules.md)
+- [Console API examples](docs/operator-console/console-api-examples.md)
+
+## Static Operator Console Prototype
+
+AION-089 adds a static local Operator Console prototype. It is plain HTML,
+CSS, and JavaScript under `operator-console-static/`. It has no build step, no
+frontend dependency, no production auth claim, no write actions, no activation,
+and no external calls.
+
+The prototype consumes the existing read-only
+`POST /brain/operator-console/view-model` API when a local Brain API is
+available. When the API is offline, it renders synthetic demo JSON from
+`operator-console-static/demo-data/`. API overrides are accepted only for
+`localhost` or `127.0.0.1`.
+
+Run the static checks:
+
+```bash
+./scripts/operator-console-static-check.sh
+./scripts/operator-console-static-demo.sh --offline-ok
+python3 -m http.server 8090 --directory operator-console-static
+```
+
+Read the prototype docs:
+
+- [Static console prototype](docs/operator-console/static-console-prototype.md)
+- [Static console runbook](docs/operator-console/static-console-runbook.md)
+- [Static console safety review](docs/operator-console/static-console-safety-review.md)
+- [Static console test plan](docs/operator-console/static-console-test-plan.md)
+
+## Read-Only Module Lifecycle Dashboard
+
+AION-090 extends the static Operator Console with a read-only Module Lifecycle
+Dashboard for Generic Knowledge Intelligence. It renders the metadata-only path
+from manifest through intake, inactive slot, inactive bindings, validation,
+conformance, readiness, activation request, activation gate, safe blockers,
+synthetic mock runtime output, and operator review.
+
+The dashboard adds no API routes, SDK resources, CLI commands, migrations,
+frontend dependencies, build step, activation, execution, code loading,
+runtime registration, external calls, or write actions.
+
+Run the module dashboard check:
+
+```bash
+./scripts/module-lifecycle-dashboard-check.sh
+```
+
+Read the module dashboard docs:
+
+- [Module lifecycle dashboard](docs/operator-console/module-lifecycle-dashboard.md)
+- [Generic Knowledge trail view](docs/operator-console/generic-knowledge-trail-view.md)
+- [Module review panel](docs/operator-console/module-review-panel.md)
+- [Module dashboard safety review](docs/operator-console/module-dashboard-safety-review.md)
+
 ## v0.1 Final Local Release Path
 
 AION Brain v0.1.0 is a local release baseline. The final scripts aggregate
@@ -3396,6 +3580,55 @@ The Python SDK exposes the same surface through `client.module_bindings`.
 
 See `docs/adr/0067-capability-binding-module-slot-manager.md`.
 
+## Module Activation Request Gate
+
+AION-083 adds a metadata-only Module Activation Request Gate. It lets
+operators create future activation requests, run deterministic blockers, record
+reviews, create non-executable activation plans, and generate runtime
+registration previews.
+
+The gate is not an activation layer. It does not load code, install packages,
+register routes, mutate runtime configuration, invoke capabilities, call
+external services, enable full autonomy, or activate modules. All public
+records keep activation, execution, and runtime registration disabled.
+
+Module activation endpoints:
+
+- `POST /brain/module-activation/requests`
+- `GET /brain/module-activation/requests`
+- `GET /brain/module-activation/requests/{activation_request_id}`
+- `POST /brain/module-activation/requests/{activation_request_id}/archive`
+- `DELETE /brain/module-activation/requests/{activation_request_id}`
+- `POST /brain/module-activation/requests/{activation_request_id}/gate`
+- `GET /brain/module-activation/requests/{activation_request_id}/gate-runs`
+- `GET /brain/module-activation/blockers`
+- `POST /brain/module-activation/blockers/{activation_blocker_id}/dismiss`
+- `POST /brain/module-activation/reviews`
+- `GET /brain/module-activation/reviews`
+- `POST /brain/module-activation/requests/{activation_request_id}/plans`
+- `GET /brain/module-activation/plans`
+- `GET /brain/module-activation/plans/{activation_plan_id}`
+- `POST /brain/module-activation/requests/{activation_request_id}/runtime-registration-preview`
+- `GET /brain/module-activation/runtime-registration-previews`
+- `GET /brain/module-activation/runtime-registration-previews/{registration_preview_id}`
+- `POST /brain/module-activation/query`
+
+CLI examples:
+
+```bash
+./scripts/aionctl.sh module-activation request <module-slot-id>
+./scripts/aionctl.sh module-activation gate <activation-request-id>
+./scripts/aionctl.sh module-activation blockers
+./scripts/aionctl.sh module-activation plan <activation-request-id>
+./scripts/aionctl.sh module-activation runtime-preview <activation-request-id>
+./scripts/aionctl.sh module-activation query
+```
+
+The Python SDK exposes the same surface through `client.module_activation`.
+
+See `docs/module-activation-gate.md` and
+`docs/adr/0074-module-activation-request-gate.md`.
+
 ## Capability Conformance Harness
 
 AION v0.1 includes a Capability Conformance Harness for staged module and
@@ -3491,3 +3724,80 @@ The Python SDK exposes the same surface through `client.golden_path`.
 
 See `docs/operations/golden-path.md` and
 `docs/adr/0069-golden-path-scenario-harness.md`.
+
+## Deterministic Module Mock Runtime
+
+AION-085 adds a deterministic module mock runtime for post-v0.1 module
+readiness. It records mock profiles, dry-run invocation requests, synthetic
+outputs, run records, findings, and aggregate query results. It does not load
+code, install packages, activate modules, execute capabilities, register
+routes, mutate runtime configuration, call external services, or add
+domain-specific logic.
+
+Module mock runtime endpoints:
+
+- `POST /brain/module-mock/profiles`
+- `POST /brain/module-mock/profiles/seed-defaults`
+- `GET /brain/module-mock/profiles`
+- `GET /brain/module-mock/profiles/{mock_profile_id}`
+- `POST /brain/module-mock/invoke`
+- `GET /brain/module-mock/runs`
+- `GET /brain/module-mock/runs/{module_mock_run_id}`
+- `GET /brain/module-mock/outputs`
+- `GET /brain/module-mock/outputs/{module_mock_output_id}`
+- `GET /brain/module-mock/findings`
+- `POST /brain/module-mock/findings/{module_mock_finding_id}/dismiss`
+- `POST /brain/module-mock/query`
+
+The `/brain/module-mock-runtime/*` prefix remains a compatibility alias for
+local tooling created during the AION-085 implementation.
+
+Developer commands:
+
+```bash
+./scripts/aionctl.sh --scope workspace:main module-mock seed-profiles
+./scripts/aionctl.sh --scope workspace:main module-mock invoke <capability-binding-id> --capability-key generic.example
+./scripts/aionctl.sh --scope workspace:main module-mock runs
+./scripts/aionctl.sh --scope workspace:main module-mock outputs
+./scripts/aionctl.sh --scope workspace:main module-mock findings
+./scripts/aionctl.sh --scope workspace:main module-mock query
+```
+
+The Python SDK exposes the same surface through `client.module_mock_runtime`.
+
+Generic Knowledge Intelligence includes mock runtime fixtures and docs at
+`docs/modules/generic-knowledge-intelligence-mock-runtime.md`.
+
+## Model Provider Hardening
+
+AION-086 adds model provider hardening before any real provider can be enabled.
+It creates provider profiles, prompt egress previews, dry-run simulations,
+readiness assessments, blockers, and aggregate queries. It does not call model
+providers, transmit prompts, store provider credentials, invoke models, execute
+tools, or enable external model calls.
+
+Model provider endpoints:
+
+- `POST /brain/model-providers/profiles`
+- `GET /brain/model-providers/profiles`
+- `GET /brain/model-providers/profiles/{provider_profile_id}`
+- `POST /brain/model-providers/profiles/seed-defaults`
+- `POST /brain/model-providers/egress-preview`
+- `POST /brain/model-providers/simulate`
+- `POST /brain/model-providers/readiness`
+- `GET /brain/model-providers/blockers`
+- `POST /brain/model-providers/blockers/{provider_blocker_id}/dismiss`
+- `POST /brain/model-providers/query`
+
+Developer commands:
+
+```bash
+./scripts/model-provider-check.sh --offline-ok --skip-api
+./scripts/aionctl.sh --scope workspace:main model-providers profiles seed
+./scripts/aionctl.sh --scope workspace:main model-providers simulate generic.metadata_only
+./scripts/aionctl.sh --scope workspace:main model-providers readiness generic.metadata_only
+./scripts/aionctl.sh --scope workspace:main model-providers blockers
+```
+
+The Python SDK exposes the same surface through
+`client.model_provider_hardening`.

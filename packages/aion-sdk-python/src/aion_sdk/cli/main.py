@@ -32,10 +32,16 @@ from aion_sdk.cli.commands.instructions import install_instruction_commands
 from aion_sdk.cli.commands.learning import install_learning_commands
 from aion_sdk.cli.commands.lifecycle import install_lifecycle_commands
 from aion_sdk.cli.commands.model_outputs import install_model_output_commands
+from aion_sdk.cli.commands.model_provider_hardening import (
+    install_model_provider_hardening_commands,
+)
+from aion_sdk.cli.commands.module_activation import install_module_activation_commands
 from aion_sdk.cli.commands.module_bindings import install_module_binding_commands
+from aion_sdk.cli.commands.module_mock_runtime import install_module_mock_runtime_commands
 from aion_sdk.cli.commands.modules import install_modules_commands
 from aion_sdk.cli.commands.notifications import install_notification_commands
 from aion_sdk.cli.commands.operator import install_operator_commands
+from aion_sdk.cli.commands.operator_console import install_operator_console_commands
 from aion_sdk.cli.commands.outcomes import install_outcome_commands
 from aion_sdk.cli.commands.performance import install_performance_commands
 from aion_sdk.cli.commands.policy import install_policy_commands
@@ -561,6 +567,7 @@ install_config_commands(app, get_client=_client, get_scope=_scope, render=_rende
 install_resilience_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_audit_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_operator_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_operator_console_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_dialogue_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_belief_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_concept_commands(app, get_client=_client, get_scope=_scope, render=_render)
@@ -575,6 +582,7 @@ install_instruction_commands(app, get_client=_client, get_scope=_scope, render=_
 install_grounding_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_prompt_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_model_output_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_model_provider_hardening_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_action_proposal_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_run_supervision_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_notification_commands(app, get_client=_client, get_scope=_scope, render=_render)
@@ -585,6 +593,8 @@ install_contract_commands(contracts_app, get_client=_client, get_scope=_scope, r
 install_lifecycle_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_extension_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_module_binding_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_module_activation_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_module_mock_runtime_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_conformance_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_golden_path_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_bootstrap_commands(bootstrap_app, get_client=_client, get_scope=_scope, render=_render)

@@ -1,0 +1,19 @@
+{
+  "readiness_assessment_id": "gki-readiness-assessment-001",
+  "owner_scope": [
+    "workspace:main"
+  ],
+  "module_slot_id": "gki-module-slot-001",
+  "conformance_profile_id": "gki-conformance-profile-001",
+  "require_approved_review": true,
+  "require_passing_conformance": true,
+  "require_no_blockers": true,
+  "create_notifications": false,
+  "metadata": {
+    "metadata_only": true,
+    "operator_review_status": "pending",
+    "expected_activation_ready": false,
+    "documented_pending_review": true
+  },
+  "created_by": "operator"
+}

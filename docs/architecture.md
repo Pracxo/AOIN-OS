@@ -1561,6 +1561,36 @@ calls external systems.
 Extension readiness assessments are local records that can block future
 activation. In v0.1 `activation_ready` is always false.
 
+## Module Activation Request Gate
+
+The Module Activation Request Gate sits after module slots, capability
+bindings, conformance, and readiness. It creates explicit future activation
+request records and runs deterministic blockers before any activation design is
+allowed to proceed.
+
+The activation request path is:
+
+`module slot -> capability binding -> conformance/readiness evidence -> activation request -> gate run -> blockers -> review -> non-executable plan -> runtime registration preview`
+
+The gate owns these boundaries:
+
+- `ModuleActivationRequest` records the intent to evaluate future activation.
+- `ActivationGateRun` records deterministic checks and blockers.
+- `ActivationBlocker` records open requirements or explicit disabled gates.
+- `ActivationReview` records operator review without activating anything.
+- `ActivationPlan` is non-executable and keeps `executable=false`.
+- `RuntimeRegistrationPreview` previews route/capability/policy/setting shape
+  and keeps `registration_allowed=false`.
+
+AION-083 is records-first. It must not load extension code, install packages,
+activate capabilities, register runtime routes, mutate runtime configuration,
+call external systems, invoke MCP or sandbox runtimes, approve itself, or add
+domain-specific module logic.
+
+The gate reports to operator action items through open
+`module_activation_blocker` records and emits visual telemetry for activation
+request, blocker, gate, review, plan, and registration-preview nodes.
+
 ## Golden Path Scenario Harness
 
 The Golden Path Scenario Harness is the Brain-owned local end-to-end
@@ -1637,3 +1667,119 @@ The freeze layer is operational closure, not runtime architecture. It does not
 add database tables, API routes, policy actions, new services, model calls,
 external connectors, extension loading, capability activation, dynamic route
 registration, hard delete, deployment, publishing, or domain module logic.
+
+## Post-v0.1 Module Ecosystem
+
+AION-082 starts module ecosystem strategy after the v0.1 release freeze. It is
+docs, roadmap, activation design, threat model, selection matrix, checklist,
+and metadata-only example work. It does not add a runtime subsystem.
+
+Future modules must enter through the existing Brain gates:
+
+`extension manifest -> extension intake -> module slot -> capability binding -> binding validation -> conformance -> readiness assessment -> operator review -> action proposal where needed -> policy/risk/approval/autonomy/sandbox -> future activation gate`
+
+Activation remains disabled. Code loading remains disabled. Package
+installation, dynamic route registration, external calls, full autonomy, and
+controlled handoff remain disabled.
+
+The first selected governed module class is Generic Knowledge Intelligence. It
+is low-risk because it does not need tool execution, external actions,
+controlled handoff, dynamic routes, package installation, or runtime
+activation. It remains metadata-only until future activation design gates pass.
+
+Modules must not modify Brain core. Domain modules plug into Brain through
+metadata, contracts, bindings, conformance, readiness, policy, audit,
+provenance, and operator review rather than Brain core code changes.
+
+See `docs/roadmap/module-ecosystem.md` and
+`docs/architecture/module-activation-design.md`.
+
+## Generic Knowledge Intelligence Module Pack
+
+AION-084 adds the first concrete post-v0.1 module package as metadata only.
+This is a package example and readiness trail, not a runtime module and not a
+new Brain subsystem.
+
+The example path is:
+
+`manifest -> intake -> slot -> binding -> conformance -> readiness -> activation request -> activation blocker`
+
+The pack is stored under `examples/modules/generic-knowledge-intelligence/`.
+It declares five generic capabilities, synthetic test vectors, dry-run request
+fixtures, expected activation blockers, and operator review evidence.
+
+The pack must not register runtime routes, add SDK or CLI surface, add
+migrations, load code, install packages, execute tools, call external services,
+mutate runtime configuration, or activate capabilities. Activation blockers
+are the expected v0.1 result.
+
+## Deterministic Module Mock Runtime
+
+AION-085 adds a deterministic module mock runtime as a post-v0.1 readiness
+evidence layer. It belongs to Brain core governance, not to any module
+implementation. The runtime converts inactive capability binding metadata and a
+mock profile into synthetic dry-run records:
+
+`binding metadata -> mock profile -> redacted input -> shape checks -> synthetic output -> run record -> findings`
+
+The runtime is adapter-ready and metadata-only. It may provide evidence to the
+activation gate, conformance runner, resource registry, release packager,
+freeze gate, hardening gate, and operator surfaces. Those integrations read or
+create local records only.
+
+The runtime must not load module code, install packages, invoke real
+capabilities, activate modules, register dynamic routes, mutate runtime
+configuration, execute shell commands, call external services, expose secrets,
+or encode domain-specific workflows.
+
+## Model Provider Hardening
+
+AION-086 adds a provider-readiness layer before real provider enablement. It
+connects prompt packets, model input manifests, provider profiles, prompt
+egress previews, dry-run provider simulations, output governance, tool intent
+blocking, grounding requirements, audit/provenance, and operator review.
+
+The layer is local and metadata-only. Provider readiness is not provider
+enablement, prompt egress preview is not prompt transmission, and provider
+simulation is not a model call. Public contracts stay AION-owned and do not
+depend on provider SDKs.
+
+## Operator Console Planning
+
+AION-087 keeps the post-v0.1 operator experience CLI/API-first. It adds a
+local dashboard blueprint, workflow map, view spec, action boundary, data
+safety model, demo map, no-go list, and future milestone sequence without
+adding runtime UI.
+
+AION-088 adds that audited view-model layer. Operator Console view models are
+read-only backend contracts that summarize existing Brain state, map source
+services into redacted sections, expose descriptor-only actions, and return
+unavailable sections when optional services are missing. The API, SDK, and CLI
+surface is read-only and frontend-agnostic.
+
+Future UI consumes these existing APIs and CLI-backed dry-run workflows. The
+console must not create privileged bypasses around policy, audit, approval,
+redaction, module activation, provider hardening, runtime config, or release
+gates.
+
+AION-088 adds no runtime UI, no frontend dependencies, no migrations, no module
+activation, no code loading, no package installation, no external calls, no
+execution, and no runtime registration. It also preserves no raw prompt
+exposure, no hidden reasoning exposure, and no secret exposure.
+
+AION-089 adds a static local Operator Console prototype as a no-build preview
+over the same read-only view-model contracts. The prototype is plain HTML,
+CSS, and JavaScript only. It can call the localhost Brain API, can fall back to
+local demo JSON, and must block non-local API origins. It adds no backend API
+routes, SDK resources, CLI commands, migrations, package files, activation
+controls, execution path, external calls, production auth claim, or runtime
+registration. The prototype remains an experience-validation artifact, not a
+new Brain subsystem.
+
+AION-090 extends that static prototype with a read-only Module Lifecycle
+Dashboard. The dashboard renders the Generic Knowledge Intelligence metadata
+trail, expected blockers, synthetic mock runtime output, and operator review
+checklist from static JSON or the existing read-only view-model API. It adds no
+new backend route, no runtime module activation, no code loading, no runtime
+registration, no write action, no external call, and no frontend dependency.
+Expected blockers are shown as safety evidence rather than hidden.

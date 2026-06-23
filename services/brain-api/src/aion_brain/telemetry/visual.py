@@ -322,6 +322,35 @@ def build_graph_memory_activation_event(
     )
 
 
+def build_operator_console_telemetry_event(
+    *,
+    telemetry_id: str,
+    event_type: str,
+    node_type: str,
+    node_id: str,
+    scope: list[str],
+    payload: dict[str, object] | None = None,
+) -> VisualTelemetryEvent:
+    """Create visual telemetry for read-only Operator Console projections."""
+    return VisualTelemetryEvent(
+        telemetry_id=telemetry_id,
+        trace_id=telemetry_id,
+        event_type=cast(VisualTelemetryEventType, event_type),
+        node_type=cast(VisualNodeType, node_type),
+        node_id=node_id,
+        edge_from=None,
+        edge_to=None,
+        intensity=0.5,
+        payload={
+            "owner_scope": scope,
+            "read_only": True,
+            "frontend_enabled": False,
+            **(payload or {}),
+        },
+        created_at=datetime.now(UTC),
+    )
+
+
 def _event(
     trace: DecisionTrace,
     event_type: str,

@@ -50,12 +50,16 @@ from aion_brain.api.memory import router as memory_router
 from aion_brain.api.memory_governance import router as memory_governance_router
 from aion_brain.api.model_gateway import router as model_gateway_router
 from aion_brain.api.model_outputs import router as model_outputs_router
+from aion_brain.api.model_provider_hardening import router as model_provider_hardening_router
+from aion_brain.api.module_activation import router as module_activation_router
 from aion_brain.api.module_bindings import router as module_bindings_router
 from aion_brain.api.module_developer import router as module_developer_router
+from aion_brain.api.module_mock_runtime import router as module_mock_runtime_router
 from aion_brain.api.modules import router as modules_router
 from aion_brain.api.notifications import router as notifications_router
 from aion_brain.api.observability import router as observability_router
 from aion_brain.api.operator import router as operator_router
+from aion_brain.api.operator_console import router as operator_console_router
 from aion_brain.api.outbox import router as outbox_router
 from aion_brain.api.outcomes import router as outcomes_router
 from aion_brain.api.performance import router as performance_router
@@ -133,6 +137,7 @@ ROUTERS = (
     memory_governance_router,
     mcp_router,
     graph_memory_router,
+    model_provider_hardening_router,
     model_gateway_router,
     model_outputs_router,
     action_proposals_router,
@@ -142,6 +147,8 @@ ROUTERS = (
     contract_registry_router,
     extensions_router,
     module_bindings_router,
+    module_activation_router,
+    module_mock_runtime_router,
     conformance_router,
     golden_path_router,
     bootstrap_router,
@@ -187,6 +194,7 @@ ROUTERS = (
     visual_router,
     observability_router,
     operator_router,
+    operator_console_router,
     replay_router,
     regression_router,
     api_support_router,

@@ -1,0 +1,57 @@
+{
+  "console_view_model_id": "static-settings-safety-demo",
+  "view": "settings_safety",
+  "status": "ready",
+  "read_only": true,
+  "owner_scope": ["workspace:main"],
+  "title": "Settings Safety",
+  "summary": "Static settings, registry, lifecycle, audit, and provenance preview.",
+  "blockers": [],
+  "warnings": [{"message": "prototype has no write path"}],
+  "refs": ["docs/operator-console/data-source-map.md"],
+  "sections": [
+    {
+      "section_key": "registry_lifecycle",
+      "title": "Registry and Lifecycle",
+      "status": "ready",
+      "severity": "low",
+      "summary": "Static refs can be inspected without mutation.",
+      "items": [{"label": "registry", "status": "display_only"}],
+      "blockers": [],
+      "warnings": [{"message": "source records unchanged"}],
+      "refs": ["docs/operator-console/data-source-map.md"]
+    },
+    {
+      "section_key": "audit_provenance",
+      "title": "Audit and Provenance",
+      "status": "ready",
+      "severity": "low",
+      "summary": "Audit ids and refs are display-only.",
+      "items": [{"label": "audit refs", "status": "display_only"}],
+      "blockers": [],
+      "warnings": [],
+      "refs": ["docs/operator-console/api-contract-audit.md"]
+    },
+    {
+      "section_key": "settings_safety",
+      "title": "Settings Safety",
+      "status": "ready",
+      "severity": "low",
+      "summary": "Runtime config is not mutated by the static prototype.",
+      "items": [{"label": "runtime config", "status": "not_mutated"}],
+      "blockers": [],
+      "warnings": [{"message": "prototype has no write path"}],
+      "refs": ["AGENTS.md"]
+    }
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Module activation is disabled."},
+    {"action_key": "activate_capability", "reason": "Capability activation is disabled."},
+    {"action_key": "load_code", "reason": "Code loading is disabled."},
+    {"action_key": "execute_tool", "reason": "Tool execution is disabled."},
+    {"action_key": "enable_external_model_calls", "reason": "External model calls are disabled."},
+    {"action_key": "hard_delete", "reason": "Hard delete is disabled."}
+  ],
+  "redaction_applied": true,
+  "metadata": {"static_demo": true, "runtime_config_mutated": false}
+}

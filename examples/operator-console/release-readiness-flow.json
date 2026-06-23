@@ -1,0 +1,37 @@
+{
+  "flow_key": "operator.release_readiness",
+  "title": "Release readiness",
+  "scope": ["workspace:main"],
+  "external_calls_allowed": false,
+  "steps": [
+    {
+      "step_key": "setup_doctor",
+      "source": "./scripts/setup-doctor.sh --fast --offline-ok",
+      "action_mode": "dry_run"
+    },
+    {
+      "step_key": "golden_path",
+      "source": "./scripts/golden-path.sh --offline-ok",
+      "action_mode": "dry_run"
+    },
+    {
+      "step_key": "rc_gate",
+      "source": "./scripts/rc-check.sh --offline-ok",
+      "action_mode": "dry_run"
+    },
+    {
+      "step_key": "freeze_gate",
+      "source": "./scripts/v0.1-freeze.sh --offline-ok --skip-docker --skip-api",
+      "action_mode": "dry_run"
+    },
+    {
+      "step_key": "release_package_dry_run",
+      "source": "./scripts/package-release.sh --dry-run",
+      "action_mode": "dry_run"
+    }
+  ],
+  "expected": {
+    "release_ready_for_review": true,
+    "tag_mutation_allowed": false
+  }
+}

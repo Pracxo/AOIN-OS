@@ -1,0 +1,36 @@
+{
+  "module_mock_output_id": "gki-mock-output-example-001",
+  "trace_id": "trace-gki-mock-001",
+  "module_mock_run_id": "gki-mock-run-example-001",
+  "capability_binding_id": "gki-binding-retrieve-001",
+  "capability_key": "generic.knowledge.retrieve",
+  "output_type": "synthetic_knowledge",
+  "status": "created",
+  "output_payload_hash": "sha256:example",
+  "redacted_output_payload": {
+    "synthetic": true,
+    "output_kind": "module_mock_runtime",
+    "capability_binding_id": "gki-binding-retrieve-001",
+    "capability_key": "generic.knowledge.retrieve",
+    "matches": [],
+    "constraints": [
+      "metadata_only",
+      "dry_run_only",
+      "no_external_calls"
+    ],
+    "activation_allowed": false,
+    "execution_allowed": false,
+    "external_calls_made": false,
+    "code_loaded": false
+  },
+  "output_summary": "Synthetic deterministic Generic Knowledge dry-run output.",
+  "confidence": 0.9,
+  "evidence_refs": [
+    "resource://example/generic-knowledge/mock-evidence"
+  ],
+  "metadata": {
+    "synthetic": true,
+    "metadata_only": true
+  },
+  "created_by": "operator"
+}

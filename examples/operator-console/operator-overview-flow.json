@@ -1,0 +1,43 @@
+{
+  "flow_key": "operator.overview",
+  "title": "Operator overview",
+  "scope": ["workspace:main"],
+  "external_calls_allowed": false,
+  "steps": [
+    {
+      "step_key": "health",
+      "source": "GET /health",
+      "display": ["status", "service", "version"],
+      "action_mode": "read_only"
+    },
+    {
+      "step_key": "readiness",
+      "source": "GET /health/ready",
+      "display": ["status", "checks"],
+      "action_mode": "read_only"
+    },
+    {
+      "step_key": "operator_overview",
+      "source": "./scripts/operator-overview.sh",
+      "display": ["queue_counts", "blockers", "latest_findings"],
+      "action_mode": "read_only"
+    },
+    {
+      "step_key": "notifications",
+      "source": "aionctl notifications alerts",
+      "display": ["notification_id", "severity", "status"],
+      "action_mode": "dry_run"
+    },
+    {
+      "step_key": "incidents",
+      "source": "aionctl incidents list",
+      "display": ["incident_id", "status", "candidate_count"],
+      "action_mode": "read_only"
+    }
+  ],
+  "safety": {
+    "source_text_included": false,
+    "private_trace_included": false,
+    "protected_values_included": false
+  }
+}

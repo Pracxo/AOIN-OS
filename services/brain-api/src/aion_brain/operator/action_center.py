@@ -107,6 +107,9 @@ class ActionCenterService:
         generated.extend(self._blocked_module_mount_plan_items(scope))
         generated.extend(self._open_conformance_finding_items(scope))
         generated.extend(self._blocked_readiness_assessment_items(scope))
+        generated.extend(self._module_activation_blocker_items(scope))
+        generated.extend(self._module_mock_runtime_items(scope))
+        generated.extend(self._model_provider_hardening_items(scope))
         generated.extend(self._failed_golden_path_run_items(scope))
         generated.extend(self._critical_golden_path_report_items(scope))
         generated.extend(self._critical_setup_finding_items(scope))
@@ -587,6 +590,152 @@ class ActionCenterService:
             )
             for item in items
         ]
+
+    def _module_activation_blocker_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("module_activation_repository")
+        list_blockers = getattr(source, "list_blockers", None)
+        if not callable(list_blockers):
+            return []
+        try:
+            items = list_blockers(status="open", limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="module_activation_blocker",
+                source_id=_id_for(item, "activation_blocker_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="registry",
+                severity=cast(OperatorSeverity, str(getattr(item, "severity", "high"))),
+                title="Module activation request has blockers.",
+                description="A metadata-only activation request is blocked and requires review.",
+                recommended_action="review_module_activation_blockers",
+                runbook_ref="docs/module-activation-gate.md",
+                scope=scope or ["workspace:main"],
+                metadata={
+                    "blocker_type": getattr(item, "blocker_type", None),
+                    "activation_request_id": getattr(item, "activation_request_id", None),
+                    "activation_allowed": False,
+                    "execution_allowed": False,
+                },
+            )
+            for item in items
+        ]
+
+    def _module_mock_runtime_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("module_mock_repository")
+        list_runs = getattr(source, "list_runs", None)
+        list_findings = getattr(source, "list_findings", None)
+        runs: list[object] = []
+        findings: list[object] = []
+        try:
+            if callable(list_runs):
+                runs = list_runs(limit=100)
+            if callable(list_findings):
+                findings = list_findings(status="open", limit=100)
+        except Exception:
+            return []
+        run_items = [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "module_mock_run_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="registry",
+                severity="high",
+                title="Module mock dry-run is blocked.",
+                description="A synthetic module mock invocation has blockers for review.",
+                recommended_action="review_module_mock_run",
+                runbook_ref="docs/modules/module-mock-runtime.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={
+                    "status": getattr(item, "status", None),
+                    "capability_binding_id": getattr(item, "capability_binding_id", None),
+                    "activation_allowed": False,
+                    "execution_allowed": False,
+                },
+            )
+            for item in runs
+            if getattr(item, "status", None) in {"failed", "blocked"}
+        ]
+        finding_items = [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "module_mock_finding_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="registry",
+                severity=cast(OperatorSeverity, str(getattr(item, "severity", "high"))),
+                title="Module mock finding is open.",
+                description="A module mock runtime finding requires metadata review.",
+                recommended_action="review_module_mock_finding",
+                runbook_ref="docs/modules/module-mock-runtime.md",
+                scope=scope or ["workspace:main"],
+                metadata={
+                    "finding_type": getattr(item, "finding_type", None),
+                    "status": getattr(item, "status", None),
+                    "capability_binding_id": getattr(item, "capability_binding_id", None),
+                    "metadata_only": True,
+                },
+            )
+            for item in findings
+            if str(getattr(item, "severity", "")).lower() in {"high", "critical"}
+        ]
+        return [*run_items, *finding_items]
+
+    def _model_provider_hardening_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("model_provider_hardening_repository")
+        list_blockers = getattr(source, "list_blockers", None)
+        list_readiness = getattr(source, "list_readiness", None)
+        blockers: list[object] = []
+        readiness: list[object] = []
+        try:
+            if callable(list_blockers):
+                blockers = list_blockers(status="open", limit=100)
+            if callable(list_readiness):
+                readiness = list_readiness(status="blocked", limit=100)
+        except Exception:
+            return []
+        blocker_items = [
+            _action_item(
+                source_type="model_provider_blocker",
+                source_id=_id_for(item, "provider_blocker_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity=cast(OperatorSeverity, str(getattr(item, "severity", "high"))),
+                title="Model provider hardening blocker requires review.",
+                description="A provider readiness blocker is open for operator review.",
+                recommended_action="review_model_provider_blocker",
+                runbook_ref="docs/model-providers/provider-hardening.md",
+                scope=scope or ["workspace:main"],
+                metadata={
+                    "blocker_type": getattr(item, "blocker_type", None),
+                    "provider_key": getattr(item, "provider_key", None),
+                    "provider_enabled": False,
+                },
+            )
+            for item in blockers
+            if str(getattr(item, "severity", "")).lower() in {"high", "critical"}
+        ]
+        readiness_items = [
+            _action_item(
+                source_type="model_provider_readiness",
+                source_id=_id_for(item, "provider_readiness_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity="high",
+                title="Model provider readiness is blocked.",
+                description="A provider readiness assessment is blocked and needs review.",
+                recommended_action="review_model_provider_readiness",
+                runbook_ref="docs/model-providers/provider-readiness-gate.md",
+                scope=_scope_for(item, scope, "owner_scope"),
+                metadata={
+                    "provider_key": getattr(item, "provider_key", None),
+                    "external_call_ready": False,
+                    "credentials_ready": False,
+                },
+            )
+            for item in readiness
+        ]
+        return [*blocker_items, *readiness_items]
 
     def _failed_golden_path_run_items(self, scope: list[str]) -> list[OperatorActionItem]:
         source = self._sources.get("golden_path_repository")

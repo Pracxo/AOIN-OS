@@ -1,0 +1,38 @@
+{
+  "flow_key": "operator.provider_hardening",
+  "title": "Provider hardening",
+  "scope": ["workspace:main"],
+  "external_calls_allowed": false,
+  "steps": [
+    {
+      "step_key": "provider_profile",
+      "source": "provider profile metadata",
+      "action_mode": "read_only"
+    },
+    {
+      "step_key": "egress_preview",
+      "source": "egress preview",
+      "action_mode": "dry_run"
+    },
+    {
+      "step_key": "simulation",
+      "source": "provider simulation",
+      "action_mode": "dry_run"
+    },
+    {
+      "step_key": "readiness",
+      "source": "provider readiness",
+      "action_mode": "dry_run"
+    },
+    {
+      "step_key": "blockers",
+      "source": "provider blocker list",
+      "action_mode": "read_only"
+    }
+  ],
+  "expected": {
+    "external_call_ready": false,
+    "private_fields_ready": false,
+    "model_invocation_allowed": false
+  }
+}

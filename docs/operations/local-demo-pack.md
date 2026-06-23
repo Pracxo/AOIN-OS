@@ -147,3 +147,23 @@ docker compose down
 Do not bypass policy or enable disabled features to make the demo pass. Capture
 the failing command, inspect `docs/operations/troubleshooting.md`, then rerun
 the smallest failed check.
+
+## Operator Console Demo Map
+
+AION-087 maps the future console demo without adding runtime UI. The demo uses
+existing local checks:
+
+```bash
+./scripts/setup-doctor.sh --fast --offline-ok
+./scripts/golden-path.sh --offline-ok
+./scripts/rc-check.sh --offline-ok
+./scripts/module-pack-check.sh
+./scripts/generic-knowledge-demo.sh --offline-ok --skip-api
+./scripts/model-provider-check.sh --offline-ok --skip-api
+./scripts/demo-local.sh --offline-ok
+```
+
+See `docs/operator-console/operator-demo-map.md`. The path remains local-first
+and must not activate modules, load code, install packages, register routes,
+call external services, enable external model calls, or reveal prompt bodies,
+private reasoning traces, or secrets.

@@ -1,0 +1,281 @@
+{
+  "extension_key": "generic.knowledge_intelligence",
+  "name": "Generic Knowledge Intelligence",
+  "description": "Metadata-only module manifest for the first post-v0.1 AION module pack.",
+  "version": "0.1.0-preview",
+  "package_type": "module",
+  "aion_min_version": "0.1.0",
+  "aion_max_version": null,
+  "declared_capabilities": [
+    {
+      "capability_key": "generic.knowledge.retrieve",
+      "capability_type": "retrieval",
+      "risk_level": "low",
+      "dry_run_supported": true,
+      "controlled_supported": false,
+      "requires_policy": true,
+      "requires_approval": false,
+      "requires_sandbox": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "query",
+          "scope"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "matches": {
+            "type": "array"
+          },
+          "constraints": {
+            "type": "array"
+          }
+        },
+        "required": [
+          "matches",
+          "constraints"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "capability_key": "generic.knowledge.summarize",
+      "capability_type": "reasoning",
+      "risk_level": "low",
+      "dry_run_supported": true,
+      "controlled_supported": false,
+      "requires_policy": true,
+      "requires_approval": false,
+      "requires_sandbox": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "content_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "summary_goal": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "content_refs",
+          "summary_goal"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "string"
+          },
+          "source_refs": {
+            "type": "array"
+          }
+        },
+        "required": [
+          "summary",
+          "source_refs"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "capability_key": "generic.knowledge.ground",
+      "capability_type": "evidence",
+      "risk_level": "medium",
+      "dry_run_supported": true,
+      "controlled_supported": false,
+      "requires_policy": true,
+      "requires_approval": false,
+      "requires_sandbox": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "claim_ref": {
+            "type": "string"
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "claim_ref",
+          "evidence_refs"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "grounded": {
+            "type": "boolean"
+          },
+          "evidence_map": {
+            "type": "array"
+          }
+        },
+        "required": [
+          "grounded",
+          "evidence_map"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "capability_key": "generic.knowledge.explain",
+      "capability_type": "reasoning",
+      "risk_level": "low",
+      "dry_run_supported": true,
+      "controlled_supported": false,
+      "requires_policy": true,
+      "requires_approval": false,
+      "requires_sandbox": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "trace_ref": {
+            "type": "string"
+          },
+          "audience": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "trace_ref",
+          "audience"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "explanation": {
+            "type": "string"
+          },
+          "limits": {
+            "type": "array"
+          }
+        },
+        "required": [
+          "explanation",
+          "limits"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "capability_key": "generic.knowledge.answer",
+      "capability_type": "reasoning",
+      "risk_level": "medium",
+      "dry_run_supported": true,
+      "controlled_supported": false,
+      "requires_policy": true,
+      "requires_approval": false,
+      "requires_sandbox": true,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string"
+          },
+          "context_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "question",
+          "context_refs"
+        ],
+        "additionalProperties": false
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "answer": {
+            "type": "string"
+          },
+          "grounding_refs": {
+            "type": "array"
+          },
+          "uncertainty": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "answer",
+          "grounding_refs",
+          "uncertainty"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ],
+  "declared_contracts": [],
+  "declared_dependencies": [],
+  "declared_policy_actions": [
+    "capability.list",
+    "capability.invoke",
+    "memory.retrieve",
+    "context.compile",
+    "trace.read",
+    "module_activation.request.create",
+    "module_activation.gate.run",
+    "module_activation.blocker.read",
+    "runtime_registration.preview.create"
+  ],
+  "declared_settings": [],
+  "declared_routes": [],
+  "declared_events": [],
+  "declared_resources": [],
+  "sandbox_requirements": {
+    "required": true,
+    "profile": "metadata_only_future_runtime",
+    "network_mode": "none",
+    "file_system": "read_only_metadata",
+    "notes": "Declared only for future runtime review; no sandbox is started by this module pack."
+  },
+  "permissions": [
+    "capability.list",
+    "capability.invoke",
+    "memory.retrieve",
+    "context.compile",
+    "trace.read"
+  ],
+  "metadata": {
+    "metadata_only": true,
+    "remote_sources_allowed": false,
+    "code_loading_allowed": false,
+    "activation_allowed": false,
+    "route_registration_allowed": false,
+    "runtime_registration_allowed": false,
+    "payloads_included": false,
+    "external_model_calls_allowed": false,
+    "tool_execution_allowed": false,
+    "controlled_handoff_allowed": false,
+    "dynamic_policy_registration_allowed": false
+  }
+}

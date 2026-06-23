@@ -1,0 +1,15 @@
+{
+  "provider_key": "generic.metadata_only",
+  "owner_scope": ["workspace:main"],
+  "simulation_refs": [],
+  "require_egress_guard": true,
+  "require_output_governance": true,
+  "require_tool_intent_guard": true,
+  "require_grounding": true,
+  "create_notifications": false,
+  "metadata": {
+    "expected_external_call_ready": false,
+    "expected_credentials_ready": false,
+    "provider_enabled": false
+  }
+}

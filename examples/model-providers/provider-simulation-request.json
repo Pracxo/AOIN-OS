@@ -1,0 +1,22 @@
+{
+  "provider_key": "generic.metadata_only",
+  "simulation_type": "dry_run",
+  "owner_scope": ["workspace:main"],
+  "input_manifest_ref": "model-input-manifest-example",
+  "simulated_request": {
+    "input_manifest_ref": "model-input-manifest-example",
+    "prompt_packet_ref": "prompt-packet-example",
+    "prompt_summary_ref": "prompt-summary-example"
+  },
+  "expected_response_shape": {
+    "type": "object",
+    "synthetic": true,
+    "grounded": true,
+    "evidence_refs": []
+  },
+  "create_notifications": false,
+  "metadata": {
+    "external_calls_made": false,
+    "model_invoked": false
+  }
+}

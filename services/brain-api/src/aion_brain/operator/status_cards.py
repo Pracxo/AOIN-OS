@@ -44,6 +44,13 @@ _CARD_SPECS: tuple[tuple[str, str, OperatorCategory, str], ...] = (
     ("contract_registry", "Contract Registry", "registry", "contract_registry_service"),
     ("extension_registry", "Extension Registry", "registry", "extension_registry_service"),
     ("module_bindings", "Module Bindings", "registry", "module_binding_service"),
+    ("module_mock_runtime", "Module Mock Runtime", "registry", "module_mock_runtime_service"),
+    (
+        "model_provider_hardening",
+        "Model Provider Hardening",
+        "operator",
+        "model_provider_hardening_service",
+    ),
     ("conformance", "Capability Conformance", "registry", "conformance_service"),
     ("golden_path", "Golden Path", "release", "golden_path_service"),
     ("bootstrap", "First-Run Bootstrap", "bootstrap", "bootstrap_service"),

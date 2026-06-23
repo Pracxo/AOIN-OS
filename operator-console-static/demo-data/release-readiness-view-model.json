@@ -1,0 +1,46 @@
+{
+  "console_view_model_id": "static-release-readiness-demo",
+  "view": "release_candidate",
+  "status": "warning",
+  "read_only": true,
+  "owner_scope": ["workspace:main"],
+  "title": "Readiness and Release Candidate",
+  "summary": "Static readiness preview showing local checks and release review refs.",
+  "blockers": [{"message": "live API not connected"}],
+  "warnings": [{"message": "release baseline remains frozen"}],
+  "refs": ["/health/ready"],
+  "sections": [
+    {
+      "section_key": "readiness",
+      "title": "Readiness",
+      "status": "warning",
+      "severity": "medium",
+      "summary": "Offline demo mode cannot prove live readiness.",
+      "items": [{"label": "local checks", "status": "demo_only"}],
+      "blockers": [{"message": "live API not connected"}],
+      "warnings": [{"message": "serve locally to test API fallback"}],
+      "refs": ["/health/ready"]
+    },
+    {
+      "section_key": "release_candidate",
+      "title": "Release Candidate",
+      "status": "ready",
+      "severity": "low",
+      "summary": "Release review state is display-only in this prototype.",
+      "items": [{"label": "candidate review", "status": "display_only"}],
+      "blockers": [],
+      "warnings": [{"message": "release baseline remains frozen"}],
+      "refs": ["docs/release/v0.1-release-baseline.md"]
+    }
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Module activation is disabled."},
+    {"action_key": "activate_capability", "reason": "Capability activation is disabled."},
+    {"action_key": "load_code", "reason": "Code loading is disabled."},
+    {"action_key": "execute_tool", "reason": "Tool execution is disabled."},
+    {"action_key": "enable_external_model_calls", "reason": "External model calls are disabled."},
+    {"action_key": "hard_delete", "reason": "Hard delete is disabled."}
+  ],
+  "redaction_applied": true,
+  "metadata": {"static_demo": true, "release_baseline_mutated": false}
+}

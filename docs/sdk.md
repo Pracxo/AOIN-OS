@@ -694,6 +694,34 @@ The SDK calls public Module Binding APIs only. It does not import
 register routes, mutate runtime configuration, execute mount plans, call
 external services, or expose raw secrets.
 
+## ModuleActivationResource
+
+`client.module_activation` supports:
+
+- `create_request(payload)`
+- `list_requests(scope, status=None, module_slot_id=None, limit=100)`
+- `get_request(activation_request_id, scope)`
+- `archive_request(activation_request_id, payload)`
+- `delete_request(activation_request_id, payload)`
+- `run_gate(activation_request_id, payload)`
+- `list_gate_runs(activation_request_id, scope, status=None, limit=100)`
+- `list_blockers(scope, activation_request_id=None, status=None, severity=None, limit=100)`
+- `dismiss_blocker(activation_blocker_id, payload)`
+- `create_review(payload, scope=())`
+- `list_reviews(scope, activation_request_id=None, decision=None, limit=100)`
+- `create_plan(activation_request_id, payload)`
+- `list_plans(scope, status=None, module_slot_id=None, limit=100)`
+- `get_plan(activation_plan_id, scope)`
+- `create_runtime_registration_preview(activation_request_id, payload)`
+- `list_runtime_registration_previews(scope, activation_request_id=None, module_slot_id=None, status=None, limit=100)`
+- `get_runtime_registration_preview(registration_preview_id, scope)`
+- `query(payload)`
+
+The SDK calls public Module Activation APIs only. It does not import
+`aion_brain`, activate modules, register runtime routes, mutate runtime
+configuration, invoke capabilities, call external services, or expose raw
+secrets.
+
 ## Conformance Resource
 
 `client.conformance` exposes the Capability Conformance Harness and readiness
@@ -770,3 +798,64 @@ The flow is setup doctor, golden path, RC gate, manifest validation, extension
 intake dry-run, module binding validation dry-run, conformance readiness
 assessment, and operator overview. It does not load code, activate bindings,
 call external services, or mutate source code.
+
+## ModuleMockRuntimeResource
+
+`client.module_mock_runtime` exposes deterministic module mock runtime APIs.
+
+Useful methods include:
+
+- `create_profile(payload)`
+- `seed_profiles(payload)`
+- `list_profiles(scope, status=None, profile_type=None, limit=100)`
+- `get_profile(mock_profile_id, scope)`
+- `invoke(payload)`
+- `list_runs(scope, status=None, capability_binding_id=None, limit=100)`
+- `get_run(module_mock_run_id, scope)`
+- `outputs(scope, module_mock_run_id=None, capability_binding_id=None, status=None, limit=100)`
+- `get_output(module_mock_output_id, scope)`
+- `list_findings(scope, status=None, severity=None, capability_binding_id=None, limit=100)`
+- `dismiss_finding(module_mock_finding_id, payload)`
+- `query(payload)`
+
+The SDK calls public Brain APIs only. It does not import `aion_brain`, load
+module code, install packages, activate modules, execute capabilities, register
+routes, mutate runtime configuration, call external services, or add
+domain-specific module behavior.
+
+## ModelProviderHardeningResource
+
+`client.model_provider_hardening` exposes provider hardening APIs.
+
+Useful methods include:
+
+- `create_profile(payload)`
+- `seed_profiles(payload)`
+- `list_profiles(scope, provider_key=None, status=None, risk_level=None, limit=100)`
+- `get_profile(provider_profile_id, scope)`
+- `egress_preview(payload)`
+- `simulate(payload)`
+- `assess_readiness(payload)`
+- `blockers(scope, provider_key=None, status="open", severity=None, limit=100)`
+- `dismiss_blocker(provider_blocker_id, payload)`
+- `query(payload)`
+
+The SDK does not expose provider-call or credential commands.
+
+## Operator Console Strategy
+
+AION-088 adds `client.operator_console` for read-only console view models and
+contract audit access.
+
+Methods:
+
+- `list_views(scope)`
+- `view_model(payload)`
+- `audit(payload)`
+- `workflows(scope)`
+- `demo_map(scope)`
+
+The SDK boundary remains unchanged: no frontend state, no runtime UI, no
+privileged bypass, no module activation, no execution, no provider credentials,
+no raw prompt exposure, no hidden reasoning exposure, no secret exposure, and
+no external model calls.

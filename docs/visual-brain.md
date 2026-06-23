@@ -80,6 +80,21 @@ node after soft delete.
 No UI implementation exists in v0.1. Visual telemetry is a Brain-owned data
 contract for future visualization work.
 
+## Module Mock Runtime Projection
+
+AION-085 adds frontend-agnostic visual telemetry for deterministic module mock
+runtime records. The projection uses:
+
+- `module_mock_profile_created` with node type `module_mock_profile`
+- `module_mock_invocation_started` with node type `module_mock_run`
+- `module_mock_invocation_completed` with node type `module_mock_run`
+- `module_mock_output` with node type `module_mock_output`
+- `module_mock_finding_dismissed` with node type `module_mock_finding`
+
+These events show dry-run readiness evidence only. They must not imply module
+activation, real output, route registration, code loading, external calls, MCP
+tool calls, model calls, or capability execution.
+
 ## Contract Registry Projection
 
 Contract Registry telemetry projects interface readiness into the visual brain
@@ -802,6 +817,42 @@ not expose source code payloads, package bytes, raw headers, hidden reasoning,
 raw prompts, provider payloads, secrets, runtime internals, or
 domain-specific module logic.
 
+## Module Activation Projection
+
+Module Activation telemetry projects future activation review without
+activation. Generic event types include:
+
+- `module_activation_request_created`
+- `module_activation_blocker_created`
+- `module_activation_blocker_dismissed`
+- `module_activation_gate_started`
+- `module_activation_gate_completed`
+- `module_activation_plan_created`
+- `runtime_registration_preview_created`
+- `module_activation_review_recorded`
+
+Generic visual node types include:
+
+- `module_activation_request`
+- `module_activation_blocker`
+- `module_activation_gate`
+- `module_activation_plan`
+- `runtime_registration_preview`
+- `module_activation_review`
+
+The generic projection path is:
+
+`module slot -> activation request -> gate -> blocker/review -> plan -> runtime registration preview`
+
+Activation blocker nodes should appear blocked. Activation plan and runtime
+registration preview nodes are metadata-only review artifacts and must not
+imply execution, activation, or route registration.
+
+Module activation projection remains backend-only and frontend-agnostic, and
+must not expose source code payloads, package bytes, raw headers, hidden
+reasoning, raw prompts, provider payloads, secrets, runtime internals, or
+domain-specific module logic.
+
 ## Capability Conformance Projection
 
 Capability Conformance telemetry projects schema-only conformance work into the
@@ -896,3 +947,31 @@ calls, or domain-specific release behavior.
 AION-079 adds no new visual node types. Demo and runbook scripts visualize
 through existing setup, golden path, release smoke, release candidate, freeze,
 operator, extension, module binding, and conformance telemetry.
+
+## Model Provider Hardening Projection
+
+AION-086 emits provider-hardening telemetry:
+
+- `model_provider_profile_created`
+- `prompt_egress_preview_created`
+- `model_provider_simulation_completed`
+- `model_provider_readiness_assessed`
+- `model_provider_blocker_created`
+- `model_provider_blocker_dismissed`
+
+Node types include provider profiles, egress previews, simulations, readiness
+records, and blockers. These visual records represent readiness and blockers
+only; they do not represent provider activation or model calls.
+
+## Operator Console Projection Note
+
+Future console visualizations use read-only console view models, existing
+visual telemetry nodes, and existing operator, release, module, provider,
+notification, incident, registry, lifecycle, audit, and provenance records.
+
+AION-088 adds backend visual telemetry vocabulary for
+`operator_console_view_model_created`,
+`operator_console_contract_audit_completed`, `operator_console_view`, and
+`operator_console_audit`. It adds no renderer, no runtime UI, no frontend
+dependencies, no activation, and no execution. Console telemetry must preserve
+no raw prompt exposure, no hidden reasoning exposure, and no secret exposure.

@@ -1,0 +1,35 @@
+{
+  "console_view_model_id": "static-incidents-demo",
+  "view": "incidents",
+  "status": "empty",
+  "read_only": true,
+  "owner_scope": ["workspace:main"],
+  "title": "Incidents",
+  "summary": "Static incident preview using synthetic review metadata.",
+  "blockers": [],
+  "warnings": [{"message": "external notifications unavailable"}],
+  "refs": ["/brain/operator-console/view-model"],
+  "sections": [
+    {
+      "section_key": "incident_queue",
+      "title": "Incident Queue",
+      "status": "empty",
+      "severity": "low",
+      "summary": "No synthetic incidents are active.",
+      "items": [{"label": "incident count", "status": "0"}],
+      "blockers": [],
+      "warnings": [{"message": "external notifications unavailable"}],
+      "refs": ["/brain/operator-console/view-model"]
+    }
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Module activation is disabled."},
+    {"action_key": "activate_capability", "reason": "Capability activation is disabled."},
+    {"action_key": "load_code", "reason": "Code loading is disabled."},
+    {"action_key": "execute_tool", "reason": "Tool execution is disabled."},
+    {"action_key": "enable_external_model_calls", "reason": "External model calls are disabled."},
+    {"action_key": "hard_delete", "reason": "Hard delete is disabled."}
+  ],
+  "redaction_applied": true,
+  "metadata": {"static_demo": true, "external_notifications": false}
+}

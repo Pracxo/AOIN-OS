@@ -106,6 +106,18 @@ _QUEUE_SPECS: tuple[tuple[OperatorQueueType, str, str, tuple[str, ...]], ...] = 
         ("list_findings",),
     ),
     (
+        "generic",
+        "Module Mock Runtime",
+        "module_mock_repository",
+        ("list_runs", "list_findings", "list_profiles"),
+    ),
+    (
+        "generic",
+        "Model Provider Hardening",
+        "model_provider_hardening_repository",
+        ("list_blockers", "list_readiness", "list_simulations", "list_profiles"),
+    ),
+    (
         "readiness_assessments",
         "Readiness Assessments",
         "conformance_repository",

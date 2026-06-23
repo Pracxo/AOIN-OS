@@ -1,0 +1,63 @@
+{
+  "console_view_model_id": "console-view-example-overview",
+  "trace_id": "trace-console-example",
+  "view": "overview",
+  "status": "ready",
+  "read_only": true,
+  "owner_scope": ["workspace:main"],
+  "title": "Overview",
+  "summary": "Read-only overview console view model.",
+  "sections": [
+    {
+      "section_key": "operator_overview",
+      "title": "Operator Overview",
+      "status": "ready",
+      "severity": "low",
+      "summary": "Operator overview is available for redacted inspection.",
+      "items": [
+        {
+          "source_key": "operator_overview",
+          "status": "available",
+          "read_only": true
+        }
+      ],
+      "data_sources": [],
+      "allowed_actions": [],
+      "forbidden_actions": [
+        {
+          "action_key": "activate_module",
+          "label": "Activate Module",
+          "action_type": "forbidden",
+          "status": "forbidden",
+          "dry_run_only": false,
+          "forbidden": true,
+          "requires_policy": true,
+          "requires_approval": true,
+          "endpoint_hint": null,
+          "cli_hint": null,
+          "reason": "Module activation remains disabled.",
+          "metadata": {
+            "descriptor_only": true
+          }
+        }
+      ],
+      "blockers": [],
+      "warnings": [],
+      "refs": ["/brain/operator/overview"],
+      "metadata": {
+        "read_only": true
+      }
+    }
+  ],
+  "global_actions": [],
+  "forbidden_actions": [],
+  "data_sources": [],
+  "generated_at": "2026-06-23T00:00:00Z",
+  "redaction_applied": true,
+  "safety_findings": [],
+  "metadata": {
+    "write_actions_enabled": false,
+    "frontend_enabled": false,
+    "descriptor_only_actions": true
+  }
+}

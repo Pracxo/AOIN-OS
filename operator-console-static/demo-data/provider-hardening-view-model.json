@@ -1,0 +1,46 @@
+{
+  "console_view_model_id": "static-provider-hardening-demo",
+  "view": "model_provider_hardening",
+  "status": "warning",
+  "read_only": true,
+  "owner_scope": ["workspace:main"],
+  "title": "Model Provider Hardening",
+  "summary": "Static provider hardening preview with local readiness metadata only.",
+  "blockers": [{"message": "provider enablement unavailable"}],
+  "warnings": [{"message": "local preview only"}],
+  "refs": ["/brain/operator-console/view-model"],
+  "sections": [
+    {
+      "section_key": "provider_posture",
+      "title": "Provider Posture",
+      "status": "warning",
+      "severity": "medium",
+      "summary": "External calls are unavailable in the prototype.",
+      "items": [{"label": "external_call_ready", "status": "false"}],
+      "blockers": [{"message": "provider enablement unavailable"}],
+      "warnings": [{"message": "local preview only"}],
+      "refs": ["/brain/operator-console/view-model"]
+    },
+    {
+      "section_key": "egress_preview",
+      "title": "Egress Preview",
+      "status": "ready",
+      "severity": "low",
+      "summary": "Only redacted summaries and refs are shown.",
+      "items": [{"label": "preview", "status": "redacted"}],
+      "blockers": [],
+      "warnings": [],
+      "refs": ["docs/operator-console/view-redaction-rules.md"]
+    }
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Module activation is disabled."},
+    {"action_key": "activate_capability", "reason": "Capability activation is disabled."},
+    {"action_key": "load_code", "reason": "Code loading is disabled."},
+    {"action_key": "execute_tool", "reason": "Tool execution is disabled."},
+    {"action_key": "enable_external_model_calls", "reason": "External model calls are disabled."},
+    {"action_key": "hard_delete", "reason": "Hard delete is disabled."}
+  ],
+  "redaction_applied": true,
+  "metadata": {"static_demo": true, "external_calls_allowed": false}
+}

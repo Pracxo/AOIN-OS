@@ -532,6 +532,24 @@ capabilities, register routes, mutate runtime configuration, execute mount
 plans, call external services, print raw prompts, expose hidden reasoning, or
 add domain-specific module behavior.
 
+## Module Activation Commands
+
+- `aionctl module-activation request <module-slot-id>`
+- `aionctl module-activation list`
+- `aionctl module-activation gate <activation-request-id>`
+- `aionctl module-activation blockers`
+- `aionctl module-activation review <activation-request-id>`
+- `aionctl module-activation plan <activation-request-id>`
+- `aionctl module-activation runtime-preview <activation-request-id>`
+- `aionctl module-activation query`
+
+Module activation commands call the SDK and public Brain APIs only. They create
+metadata-only activation requests, gate runs, blocker queries, reviews,
+non-executable plans, and runtime registration previews. They do not activate
+modules, load extension code, install packages, register routes, mutate runtime
+configuration, execute capabilities, call external systems, or add
+domain-specific module behavior.
+
 ## Conformance Commands
 
 The CLI exposes the local conformance harness through SDK calls:
@@ -612,3 +630,79 @@ aionctl readiness assess --capability-binding-id <capability-binding-id>
 
 Use `./scripts/demo-local.sh --offline-ok` for the scripted local demo. The
 sequence stays dry-run and metadata-only where module paths are involved.
+
+## Module Mock Runtime Commands
+
+The CLI exposes deterministic module mock runtime APIs through SDK calls:
+
+```bash
+aionctl module-mock seed-profiles
+aionctl module-mock create-profile generic.example.mock
+aionctl module-mock profiles
+aionctl module-mock invoke <capability-binding-id> --capability-key generic.example
+aionctl module-mock runs
+aionctl module-mock outputs
+aionctl module-mock findings
+aionctl module-mock query
+```
+
+These commands create or read dry-run mock records only. They do not load code,
+install packages, activate modules, execute capabilities, register routes,
+mutate runtime configuration, call external services, print raw prompts, expose
+hidden reasoning, or add domain-specific module behavior. `module-mock-runtime`
+remains an alias for compatibility.
+
+## Model Provider Hardening Commands
+
+The CLI exposes provider hardening APIs through SDK calls:
+
+```bash
+aionctl model-providers profiles seed
+aionctl model-providers profiles create generic.metadata_only
+aionctl model-providers profiles list
+aionctl model-providers egress-preview generic.metadata_only
+aionctl model-providers simulate generic.metadata_only
+aionctl model-providers readiness generic.metadata_only
+aionctl model-providers blockers
+aionctl model-providers query
+```
+
+These commands do not call model providers, transmit prompts, store
+credentials, invoke models, or execute tools.
+
+## Operator Console Strategy Commands
+
+AION-087 did not add CLI commands. The strategy workflow map still reuses
+existing CLI/API paths:
+
+```bash
+./scripts/operator-console-check.sh
+./scripts/setup-doctor.sh --fast --offline-ok
+./scripts/golden-path.sh --offline-ok
+./scripts/rc-check.sh --offline-ok
+./scripts/module-pack-check.sh
+./scripts/generic-knowledge-demo.sh --offline-ok --skip-api
+./scripts/model-provider-check.sh --offline-ok --skip-api
+./scripts/demo-local.sh --offline-ok
+```
+
+Operator console work remains CLI/API-first. It must not expose raw prompts,
+hidden reasoning, secrets, provider credentials, or raw provider payloads. It
+must not activate modules, activate capabilities, load code, install packages,
+register routes, enable external model calls, or bypass policy.
+
+## Operator Console Read-Only Commands
+
+AION-088 adds read-only CLI access to the Operator Console view-model contract:
+
+```bash
+aionctl operator-console views
+aionctl operator-console view-model --view overview
+aionctl operator-console audit
+aionctl operator-console workflows
+aionctl operator-console demo-map
+```
+
+These commands call the SDK resource only. They add no runtime UI, no raw prompt
+exposure, no hidden reasoning exposure, no secret exposure, no activation, and
+no execution.

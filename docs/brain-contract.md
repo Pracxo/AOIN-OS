@@ -1425,6 +1425,39 @@ prompts, provider payloads, secrets, SQLAlchemy rows, source code payloads,
 runtime client objects, third-party module internals, or domain-specific module
 logic.
 
+## Module Activation Contracts
+
+AION Brain owns these module activation request gate contracts:
+
+- `ModuleActivationRequest`
+- `ModuleActivationCreateRequest`
+- `ActivationBlocker`
+- `ActivationGateRun`
+- `ActivationReviewRequest`
+- `ActivationReview`
+- `ActivationPlan`
+- `RuntimeRegistrationPreview`
+- `ModuleActivationQuery`
+- `ModuleActivationQueryResult`
+
+`ModuleActivationRequest` is a metadata-only request to evaluate future
+activation. It must keep `activation_allowed=false` and
+`execution_allowed=false`.
+
+`ActivationGateRun` records deterministic checks and blockers. Gate runs may
+report blocked status, but they must not mutate module runtime state.
+
+`ActivationPlan` is a non-executable plan and must keep `executable=false` and
+`execution_allowed=false`.
+
+`RuntimeRegistrationPreview` previews possible runtime registration metadata
+and must keep `registration_allowed=false`.
+
+Module activation contracts must not expose raw headers, hidden reasoning, raw
+prompts, provider payloads, secrets, SQLAlchemy rows, runtime client objects,
+package internals, source code payloads, capability execution results, or
+domain-specific module logic.
+
 ## Capability Conformance Contracts
 
 AION Brain owns these generic conformance contracts:
@@ -1515,3 +1548,70 @@ AION-079 adds no new runtime contracts. It documents and validates existing
 release candidate, bootstrap, golden path, freeze, release package, operator,
 extension, module binding, conformance, SDK, and CLI interfaces for local
 handoff.
+
+## Module Mock Runtime Contracts
+
+AION Brain owns these module mock runtime contracts:
+
+- `ModuleMockProfile`
+- `ModuleMockProfileCreateRequest`
+- `ModuleMockInvocationRequest`
+- `ModuleMockInvocationCreateRequest`
+- `ModuleMockRun`
+- `ModuleMockOutput`
+- `ModuleMockFinding`
+- `ModuleMockQuery`
+- `ModuleMockQueryResult`
+
+`ModuleMockProfile` describes deterministic simulation rules and JSON-like
+shape hints. `ModuleMockInvocationRequest` stores redacted dry-run input and
+expected output shape metadata. `ModuleMockRun` is the canonical dry-run
+result. `ModuleMockOutput` stores synthetic output only. `ModuleMockFinding`
+stores reviewable metadata problems. `ModuleMockQuery` and
+`ModuleMockQueryResult` aggregate local records.
+
+Module mock runtime contracts must keep activation, execution, external-call,
+and code-loading flags false. They must not expose raw headers, hidden
+reasoning, raw prompts, provider payloads, secrets, SQLAlchemy rows, source
+code payloads, package bytes, third-party module internals, live runtime
+client objects, real capability execution results, or domain-specific module
+logic.
+
+## Model Provider Hardening Contracts
+
+AION-086 adds provider-readiness contracts:
+
+- `ModelProviderProfile`
+- `PromptEgressPreview`
+- `ModelProviderSimulation`
+- `ModelProviderReadiness`
+- `ModelProviderBlocker`
+- `ProviderHardeningQuery`
+
+These contracts describe readiness metadata only. They must not include API
+keys, provider SDK objects, provider endpoints, raw prompts, hidden reasoning,
+credential payloads, model invocation results, or tool execution records.
+
+## Operator Console Contracts
+
+AION-088 adds read-only Operator Console contracts:
+
+- `ConsoleView`
+- `ConsoleDataSource`
+- `ConsoleActionDescriptor`
+- `ConsoleViewSection`
+- `ConsoleViewModelRequest`
+- `ConsoleViewModel`
+- `ConsoleAuditRequest`
+- `ConsoleAuditResult`
+- `ConsoleWorkflowStep`
+- `ConsoleWorkflowMap`
+
+These contracts summarize existing Brain state for future UI consumers. They
+are redacted and read-only, expose actions as descriptors only, and return
+unavailable sections when optional source services are missing.
+
+Operator Console contracts must preserve no runtime UI, no raw prompt exposure,
+no hidden reasoning exposure, no secret exposure, no activation, no execution,
+no external calls, no package installation, no code loading, and no privileged
+policy bypass.

@@ -1451,6 +1451,62 @@ calls, approval bypass, raw prompt disclosure, hidden reasoning disclosure,
 raw header export, secret export, or domain-specific module logic. Unknown
 module binding actions fail closed.
 
+## Module Activation Policy
+
+Generic module activation actions:
+
+- `module_activation.request.create`
+- `module_activation.request.read`
+- `module_activation.request.update`
+- `module_activation.request.delete`
+- `module_activation.gate.run`
+- `module_activation.gate.read`
+- `module_activation.blocker.read`
+- `module_activation.blocker.update`
+- `module_activation.review.create`
+- `module_activation.review.read`
+- `module_activation.plan.create`
+- `module_activation.plan.read`
+- `module_activation.plan.update`
+- `module_activation.query.read`
+- `runtime.registration.preview.create`
+- `runtime.registration.preview.read`
+
+Module activation policy authorizes metadata operations only. It does not
+authorize code loading, package installation, capability execution, runtime
+route registration, runtime configuration mutation, shell commands, external
+calls, approval bypass, source mutation, hidden reasoning disclosure, raw
+prompt disclosure, raw header export, secret export, or domain-specific module
+logic.
+
+Activation execution and runtime registration remain disabled in AION-083.
+Unsafe activation contexts fail closed.
+
+## Module Mock Runtime Policy
+
+Generic module mock runtime actions:
+
+- `module_mock.profile.create`
+- `module_mock.profile.read`
+- `module_mock.profile.update`
+- `module_mock.invoke`
+- `module_mock.run.read`
+- `module_mock.output.read`
+- `module_mock.finding.read`
+- `module_mock.finding.update`
+- `module_mock.query`
+
+Module mock runtime policy authorizes deterministic dry-run metadata only. It
+permits synthetic profile creation, dry-run invocation records, synthetic output
+reads, finding review, and aggregate queries. It does not authorize code
+loading, package installation, activation, capability execution, source-record
+mutation, dynamic route registration, shell commands, external calls, hidden
+reasoning disclosure, raw prompt disclosure, raw header export, secret export,
+or domain-specific module behavior.
+
+Mock invocation outputs must remain synthetic and all execution flags remain
+false. Unsafe mock runtime contexts fail closed.
+
 ## Capability Conformance Policy
 
 Generic conformance actions:
@@ -1538,3 +1594,38 @@ AION-079 adds no new policy actions. Existing RC, bootstrap, golden path,
 release, freeze, operator, contract registry, resource registry, extension,
 module binding, and conformance actions remain authoritative for local release
 handoff.
+
+## Model Provider Hardening Actions
+
+- `model_provider.profile.create`
+- `model_provider.profile.read`
+- `model_provider.profile.update`
+- `model_provider.egress.preview`
+- `model_provider.simulate`
+- `model_provider.readiness.assess`
+- `model_provider.blocker.read`
+- `model_provider.blocker.update`
+- `model_provider.query`
+
+Provider hardening actions are generic. External provider calls, credential
+storage, prompt transmission, model invocation, and tool execution remain
+denied in AION-086.
+
+## Operator Console Policy
+
+AION-088 adds read-only Operator Console actions:
+
+- `operator_console.view.read`
+- `operator_console.workflow.read`
+- `operator_console.audit.run`
+- `operator_console.action.describe`
+- `operator_console.query`
+
+View, workflow, action-descriptor, and query actions are low-risk scoped reads.
+The contract audit is a read-only local verification action for owners, admins,
+operators, auditors, or actors with the explicit permission.
+
+Policy must fail closed. Operator Console policy does not authorize runtime UI
+creation, frontend package files, activation, execution, code loading, package
+installation, dynamic route registration, external calls, raw prompt exposure,
+hidden reasoning exposure, secret exposure, or policy bypass.

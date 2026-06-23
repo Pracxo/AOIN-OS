@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AION Operator Console Prototype</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="shell-header">
+      <p class="eyebrow">AION Operator Console Prototype</p>
+      <h1>AION Operator Console Prototype — local, read-only, no activation</h1>
+      <p class="summary">
+        Static local dashboard preview for read-only AION Brain view models.
+      </p>
+      <div class="status-strip" id="connection-status" aria-live="polite">
+        Loading local prototype data.
+      </div>
+    </header>
+
+    <main class="layout">
+      <nav class="view-rail" aria-label="Console views">
+        <button class="view-tab is-active" data-view="overview">Overview</button>
+        <button class="view-tab" data-view="readiness">Readiness</button>
+        <button class="view-tab" data-view="release_candidate">Release Candidate</button>
+        <button class="view-tab" data-view="module_lifecycle">Module Lifecycle</button>
+        <button class="view-tab" data-view="model_provider_hardening">
+          Model Provider Hardening
+        </button>
+        <button class="view-tab" data-view="incidents">Incidents</button>
+        <button class="view-tab" data-view="registry_integrity">Registry and Lifecycle</button>
+        <button class="view-tab" data-view="settings_safety">Settings Safety</button>
+        <button class="view-tab" data-view="audit_provenance">Audit and Provenance</button>
+      </nav>
+
+      <section class="console-panel" aria-labelledby="view-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow" id="view-status">read-only</p>
+            <h2 id="view-title">Overview</h2>
+          </div>
+          <button class="disabled-action" type="button" disabled>
+            Actions disabled
+          </button>
+        </div>
+
+        <p id="view-summary" class="panel-summary">
+          Read-only view model will render here.
+        </p>
+
+        <section class="module-dashboard" id="module-dashboard" aria-label="Module lifecycle dashboard">
+          <div class="no-activation-banner">
+            This dashboard is read-only. Activation is blocked by design.
+          </div>
+          <div class="module-dashboard-heading">
+            <div>
+              <p class="eyebrow">Module Lifecycle</p>
+              <h3>Generic Knowledge Intelligence Trail</h3>
+            </div>
+            <button class="disabled-action" type="button" disabled>
+              No activation
+            </button>
+          </div>
+          <p id="module-dashboard-summary" class="panel-summary">
+            Select Module Lifecycle to inspect metadata-only review evidence.
+          </p>
+
+          <div class="safety-boundary-grid" id="module-safety-labels" aria-label="Module safety labels">
+            <div class="safety-card">activation_allowed=false</div>
+            <div class="safety-card">execution_allowed=false</div>
+            <div class="safety-card">registration_allowed=false</div>
+            <div class="safety-card">code_loaded=false</div>
+            <div class="safety-card">external_calls_made=false</div>
+          </div>
+
+          <div class="module-subpanels">
+            <section class="module-subpanel" aria-label="Lifecycle stages">
+              <h3>Lifecycle Stages</h3>
+              <div class="lifecycle-timeline" id="module-lifecycle-stages"></div>
+            </section>
+
+            <section class="module-subpanel" aria-label="Capability trail">
+              <h3>Capability Trail</h3>
+              <div class="capability-grid" id="module-capability-trail"></div>
+            </section>
+
+            <section class="module-subpanel" aria-label="Activation blockers">
+              <h3>Activation Blockers</h3>
+              <div class="blocker-list" id="module-blockers"></div>
+            </section>
+
+            <section class="module-subpanel" aria-label="Mock runtime trail">
+              <h3>Mock Runtime</h3>
+              <div class="mock-runtime-list" id="module-mock-runtime"></div>
+            </section>
+
+            <section class="module-subpanel" aria-label="Operator review checklist">
+              <h3>Operator Review</h3>
+              <div class="review-checklist" id="module-review-checklist"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="section-grid" id="sections" aria-label="Console sections"></section>
+
+        <section class="action-panel" aria-label="Forbidden actions">
+          <h3>Forbidden Action Descriptors</h3>
+          <div id="forbidden-actions" class="descriptor-list"></div>
+        </section>
+
+        <section class="command-panel" aria-label="Local commands">
+          <h3>Local Commands</h3>
+          <pre><code>./scripts/operator-console-static-check.sh
+./scripts/module-lifecycle-dashboard-check.sh
+./scripts/operator-console-static-demo.sh --offline-ok --skip-api
+python3 -m http.server 8090 --directory operator-console-static</code></pre>
+        </section>
+      </section>
+    </main>
+
+    <footer class="safety-footer">
+      <span>read-only prototype</span>
+      <span>no module activation</span>
+      <span>no external calls</span>
+      <span>no secrets</span>
+      <span>no raw prompts</span>
+      <span>no hidden reasoning</span>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

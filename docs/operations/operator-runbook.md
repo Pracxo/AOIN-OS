@@ -42,6 +42,18 @@ AION OS = Adaptive Intelligence Orchestration Nexus Operating System.
 - v0.1 does not send external notifications.
 - v0.1 does not hard-delete records.
 
+## Post-v0.1 Module Strategy
+
+AION-082 is planning only. The first selected module class is Generic
+Knowledge Intelligence, and it remains metadata-only. Operators may review
+manifests, module slots, capability bindings, conformance, readiness,
+policy/risk posture, audit/provenance, and release evidence.
+
+Activation remains disabled. Code loading remains disabled. Modules must not
+modify Brain core. Operators must treat any activation request, package
+install, dynamic route, external call, full autonomy request, or controlled
+handoff request as blocked until a future activation gate exists.
+
 ## Local Startup Sequence
 
 ```bash
@@ -188,3 +200,21 @@ docker compose down
 
 Do not create `aion-v0.1.0` until final verification, freeze dry-run, release
 package dry-run, final docs audit, and operator acceptance are green.
+
+## Post-v0.1 Operator Console Strategy
+
+AION-087 keeps operator work CLI/API-first and adds no runtime UI. Operators
+should use the strategy and workflow map before any future dashboard build:
+
+```bash
+./scripts/operator-console-check.sh
+```
+
+See `docs/operator-console/operator-console-strategy.md`,
+`docs/operator-console/operator-console-workflows.md`, and
+`docs/operator-console/operator-view-spec.md`.
+
+Future console work must preserve policy, audit, approval, redaction, module
+activation, provider hardening, release, freeze, and runtime-config gates. It
+must not expose prompt bodies, private reasoning traces, secrets, provider
+credentials, or raw provider payloads.

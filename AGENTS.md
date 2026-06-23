@@ -118,8 +118,32 @@ Instructions for future Codex runs in this repository:
   mutate memory, invoke capabilities, change runtime config, or remediate issues.
 - Operator action recommendations must stay generic and domain-neutral.
 - Operator acknowledgements must not resolve source issues.
+- Operator Console view models are read-only backend contracts; they are not a
+  runtime UI.
+- Operator Console work must preserve no raw prompt exposure, no hidden
+  reasoning exposure, no secret exposure, no activation, and no execution.
+- Operator Console actions are descriptors only unless a later explicit
+  milestone adds governed write behavior.
+- Operator Console contract audits must fail closed when frontend package or
+  config files appear in the scanned tree.
 - Future UI work must consume Operator contracts rather than querying subsystem
   internals directly.
+- Static Operator Console prototype work must remain dependency-free until UI
+  architecture is explicitly approved.
+- Static console work must not add package manager files, external scripts,
+  external stylesheets, framework assets, or a build step.
+- Static console work must remain read-only and must not activate modules,
+  activate capabilities, execute tools, enable external calls, mutate runtime
+  config, or imply production auth.
+- Static console rendering must not expose raw prompts, hidden reasoning,
+  chain-of-thought, raw headers, provider payloads, credentials, or secrets.
+- Module lifecycle dashboard work must remain read-only.
+- Do not add activation buttons or activation actions to the module dashboard.
+- Expected module blockers must remain visible and must not be hidden.
+- Generic Knowledge trail data must remain synthetic and metadata-only.
+- Module dashboard work must not add frontend dependencies, package manager
+  files, API routes, SDK resources, CLI commands, migrations, code loading,
+  runtime registration, external calls, or domain-specific module logic.
 - Dialogue work must remain backend contract work unless a future task
   explicitly asks for UI.
 - Dialogue APIs must not expose provider-specific chat objects, frontend state,
@@ -321,3 +345,35 @@ Instructions for future Codex runs in this repository:
 - Release scripts must not install packages.
 - Release scripts must not publish or deploy.
 - AION v0.1 tag must not be created unless final verification is green.
+- After AION-080/AION-081, do not add Brain core subsystems without
+  architecture review.
+- Modules must not modify Brain core.
+- Module activation remains disabled.
+- Module code loading remains disabled.
+- Module examples must be metadata-only.
+- Do not add domain-specific module implementation to Brain core.
+- Do not move aion-v0.1.0 tag during post-v0.1 planning.
+- First module pack work must remain metadata-only.
+- Generic Knowledge Intelligence examples must not execute code.
+- Module pack demos must not call external services.
+- Module pack fixtures must stay synthetic.
+- Activation blockers are expected in v0.1.
+- Do not add domain-specific workflow logic to module pack fixtures, demos, or
+  docs.
+- Module mock runtime work must remain deterministic, metadata-only, and
+  synthetic-output-only.
+- Module mock runtime must not load code, install packages, activate modules,
+  execute capabilities, register routes, mutate runtime config, call external
+  services, or add domain-specific module logic.
+- Model provider hardening work must remain readiness-only. Provider profiles
+  are not activation, prompt egress previews are not prompt transmission,
+  provider simulations are not model calls, and readiness assessments are not
+  provider enablement.
+- Do not add provider SDKs, provider endpoints, API keys, credential commands,
+  raw prompt storage, external model calls, model invocation, or tool execution
+  to provider hardening work.
+- Do not add frontend dependencies without explicit UI architecture approval.
+- Operator console work must preserve policy, audit, and approval gates.
+- Operator console must not expose raw prompts, hidden reasoning, or secrets.
+- Operator console must not activate modules or capabilities.
+- Operator console must not enable external model calls.

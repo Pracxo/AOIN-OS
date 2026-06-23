@@ -49,6 +49,9 @@ class AIONClient:
         self.resilience = _import_resource("resilience").ResilienceResource(self)
         self.audit = _import_resource("audit").AuditResource(self)
         self.operator = _import_resource("operator").OperatorResource(self)
+        self.operator_console = _import_resource(
+            "operator_console"
+        ).OperatorConsoleResource(self)
         self.dialogue = _import_resource("dialogue").DialogueResource(self)
         self.responses = _import_resource("responses").ResponsesResource(self)
         self.beliefs = _import_resource("beliefs").BeliefsResource(self)
@@ -64,6 +67,9 @@ class AIONClient:
         self.grounding = _import_resource("grounding").GroundingResource(self)
         self.prompts = _import_resource("prompts").PromptsResource(self)
         self.model_outputs = _import_resource("model_outputs").ModelOutputsResource(self)
+        self.model_provider_hardening = _import_resource(
+            "model_provider_hardening"
+        ).ModelProviderHardeningResource(self)
         self.action_proposals = _import_resource("action_proposals").ActionProposalsResource(self)
         self.run_supervision = _import_resource("run_supervision").RunSupervisionResource(self)
         self.notifications = _import_resource("notifications").NotificationsResource(self)
@@ -74,6 +80,12 @@ class AIONClient:
         self.lifecycle = _import_resource("lifecycle").LifecycleResource(self)
         self.extensions = _import_resource("extensions").ExtensionsResource(self)
         self.module_bindings = _import_resource("module_bindings").ModuleBindingsResource(self)
+        self.module_activation = _import_resource(
+            "module_activation"
+        ).ModuleActivationResource(self)
+        self.module_mock_runtime = _import_resource(
+            "module_mock_runtime"
+        ).ModuleMockRuntimeResource(self)
         self.conformance = _import_resource("conformance").ConformanceResource(self)
         self.golden_path = _import_resource("golden_path").GoldenPathResource(self)
         self.bootstrap = _import_resource("bootstrap").BootstrapResource(self)
