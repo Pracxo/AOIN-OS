@@ -1,0 +1,33 @@
+{
+  "synthetic_policy_mapping": true,
+  "real_credentials": false,
+  "external_provider": false,
+  "production_claim": false,
+  "actor_context_required": true,
+  "policy_authoritative": true,
+  "role_permissions": {
+    "viewer": ["operator_console.view.read"],
+    "operator": [
+      "operator_console.view.read",
+      "operator_action.request.create",
+      "operator_action.preview.create"
+    ],
+    "reviewer": [
+      "operator_console.view.read",
+      "operator_action.review"
+    ],
+    "auditor": [
+      "operator_console.view.read",
+      "audit.read"
+    ]
+  },
+  "forbidden_for_all": [
+    "execute",
+    "activate",
+    "load_code",
+    "register_route",
+    "enable_provider",
+    "hard_delete",
+    "bypass_policy"
+  ]
+}

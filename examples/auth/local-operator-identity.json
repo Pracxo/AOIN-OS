@@ -1,0 +1,11 @@
+{
+  "synthetic_only": true,
+  "actor_id": "local.operator",
+  "workspace_id": "local",
+  "roles": ["operator"],
+  "owner_scope": ["workspace:main"],
+  "identity_source": "local_design_fixture",
+  "production_identity": false,
+  "external_provider": false,
+  "sensitive_values_present": false
+}

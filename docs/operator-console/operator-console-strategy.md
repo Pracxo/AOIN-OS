@@ -184,3 +184,14 @@ The dashboard is still static and local. It adds no backend route, no SDK
 resource, no CLI command, no migration, no frontend dependency, no activation,
 no code loading, no execution, no runtime registration, and no external calls.
 Blockers must remain visible because they are expected safety evidence.
+
+## AION-093 local auth design
+
+AION-093 adds the Operator Console local auth design only. It defines local
+operator identities, role labels, session boundaries, access matrices, threat
+model, production prerequisites, and no-go conditions.
+
+The console still has no production auth claim. No credentials are stored. No
+external identity provider is integrated. No login endpoint is added. Future
+auth must preserve ActorContext, policy, audit, approval, autonomy, and
+redaction gates.

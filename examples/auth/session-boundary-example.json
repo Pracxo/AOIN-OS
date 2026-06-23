@@ -1,0 +1,14 @@
+{
+  "synthetic_only": true,
+  "session_state": "design_only",
+  "real_session_created": false,
+  "browser_storage_used": false,
+  "cookie_values_present": false,
+  "credential_material_present": false,
+  "timeout_model": {
+    "idle_timeout_required": true,
+    "absolute_timeout_required": true,
+    "secure_logout_required": true
+  },
+  "audit_correlation_required": true
+}

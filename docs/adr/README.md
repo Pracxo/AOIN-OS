@@ -93,3 +93,4 @@ closure decision in ADR 0072.
 - [0081: Read-Only Module Lifecycle Dashboard](0081-read-only-module-lifecycle-dashboard.md) - Defines the static Generic Knowledge module lifecycle trail dashboard.
 
 - [0083: Governed Operator Actions Dry-Run Only](0083-governed-operator-actions-dry-run-only.md) - Defines dry-run operator action requests, previews, blockers, and reviews without execution.
+- [0084: Local Auth Design For Operator Console](0084-local-auth-design-for-operator-console.md) - Defines local identity, session, role, access, threat, and no-go conditions without auth runtime.
