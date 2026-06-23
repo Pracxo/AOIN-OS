@@ -1,0 +1,29 @@
+{
+  "synthetic_only": true,
+  "roles": {
+    "viewer": {
+      "allowed_actions": ["read", "export_redacted_summary"],
+      "forbidden_actions": ["execute", "activate", "load_code", "register_route"]
+    },
+    "operator": {
+      "allowed_actions": ["read", "dry_run_request", "preview", "dismiss_finding"],
+      "forbidden_actions": ["execute", "activate", "enable_provider", "hard_delete"]
+    },
+    "reviewer": {
+      "allowed_actions": ["read", "dry_run_request", "preview", "review"],
+      "forbidden_actions": ["execute", "activate", "store_credentials", "bypass_policy"]
+    },
+    "admin": {
+      "allowed_actions": ["read", "dry_run_request", "preview", "review"],
+      "forbidden_actions": ["execute", "activate", "load_code", "register_route"]
+    },
+    "auditor": {
+      "allowed_actions": ["read", "export_redacted_summary"],
+      "forbidden_actions": ["execute", "activate", "dismiss_finding", "hard_delete"]
+    }
+  },
+  "execution": false,
+  "activation": false,
+  "provider_enablement": false,
+  "hard_delete": false
+}

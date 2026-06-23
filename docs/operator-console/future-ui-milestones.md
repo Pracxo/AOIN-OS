@@ -43,6 +43,31 @@ console preview panel. It remains no-execution and no-activation.
 
 Local auth design.
 
+Status: implemented as design docs, examples, threat model, access matrix,
+and auth no-go conditions only. It adds no production auth, no credentials, no
+external identity provider, no login endpoint, no real sessions, and no
+runtime auth code.
+
 ## AION-094
 
-UI release gate.
+Local auth contract and dev-only identity simulation.
+
+## AION-095
+
+Read-only local session prototype.
+
+## AION-096
+
+Role-aware console view filtering.
+
+## AION-097
+
+Dry-run action authorization enforcement.
+
+## AION-098
+
+Production auth architecture decision.
+
+## AION-099
+
+Production auth prototype behind disabled flag.

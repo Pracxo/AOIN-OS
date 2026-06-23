@@ -59,3 +59,12 @@ only, and blocker dismissal does not unlock execution.
 
 The action boundary matrix is defined in
 `docs/operator-console/action-boundary-matrix.md`.
+
+## AION-093 auth boundary
+
+AION-093 does not authorize new runtime actions. The local auth design may
+describe which roles can read, request dry-runs, preview, review, dismiss
+findings, and export redacted summaries, but policy remains authoritative.
+
+No role may execute, activate, load code, register routes, enable providers,
+store credentials, hard delete, or bypass policy in this phase.

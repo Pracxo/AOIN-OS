@@ -1789,3 +1789,14 @@ It creates request records, previews, blockers, and reviews behind policy,
 audit, provenance, and telemetry boundaries. It does not add an execution
 adapter, external-call adapter, activation path, runtime config write path, or
 frontend build system.
+
+## Local Auth Design
+
+AION-093 defines the Operator Console local auth design before any auth
+runtime exists. It documents local identity, session boundaries, roles, access
+matrices, threat model, production prerequisites, and no-go conditions.
+
+No production auth is implemented. No credentials are stored. No external
+identity provider is integrated. No login endpoint is added. ActorContext
+remains the current internal context mechanism, and policy remains
+authoritative for backend access.

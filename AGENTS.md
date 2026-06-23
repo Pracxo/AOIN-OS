@@ -382,3 +382,9 @@ Instructions for future Codex runs in this repository:
 - Operator action reviews must not execute.
 - Operator action previews must keep execution, external calls, and activation
   disabled.
+- Do not implement production auth without architecture approval.
+- Do not add login endpoints in design-only tasks.
+- Do not store credentials or session tokens.
+- Do not integrate external identity providers without threat model and
+  release gate.
+- Static console remains local/read-only until auth implementation is approved.

@@ -1648,3 +1648,14 @@ Read and query actions require scoped operator read access. Request creation,
 preview creation, blocker updates, and review records require scoped operator
 write access. Policy constraints remain `dry_run_only`, `no_execution`,
 `no_external_calls`, and `no_activation`.
+
+## Local Auth Design Policy
+
+AION-093 adds no new policy action. It documents the future Operator Console
+role model and access matrix only. ActorContext remains the current internal
+context mechanism, and policy remains authoritative for backend access.
+
+No production auth is implemented. No credentials are stored. No external
+identity provider is integrated. No login endpoint is added. Future auth work
+must bind role decisions to policy, audit, approval, autonomy, and redaction
+gates before any runtime session or production identity integration exists.
