@@ -26,6 +26,7 @@ curl -fsS http://localhost:8080/health/ready
 ./scripts/rc-check.sh --offline-ok
 ./scripts/module-pack-check.sh
 ./scripts/generic-knowledge-demo.sh --offline-ok --skip-api
+./scripts/module-lifecycle-dashboard-check.sh
 ./scripts/model-provider-check.sh --offline-ok --skip-api
 ./scripts/demo-local.sh --offline-ok
 docker compose down
@@ -37,3 +38,10 @@ The demo remains local-first. It does not activate modules, load code, install
 packages, register routes, call external services, enable external model calls,
 store credentials, expose raw prompts, expose hidden reasoning, or reveal
 secrets.
+
+## Static module lifecycle panel
+
+AION-090 adds the static Module Lifecycle panel to the demo map. It uses local
+demo JSON when the API is offline and renders the Generic Knowledge
+Intelligence trail as review-only evidence. Expected activation blockers must
+remain visible.

@@ -212,6 +212,133 @@ h1 {
   padding: 16px;
 }
 
+.module-dashboard {
+  margin-top: 22px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgb(7 10 15 / 68%);
+}
+
+.module-dashboard.is-muted {
+  border-style: dashed;
+}
+
+.no-activation-banner {
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--blocked);
+  border-radius: 8px;
+  background: rgb(255 122 122 / 10%);
+  color: var(--blocked);
+  font-weight: 700;
+}
+
+.module-dashboard-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.safety-boundary-grid,
+.module-subpanels,
+.capability-grid,
+.blocker-list,
+.mock-runtime-list,
+.review-checklist {
+  display: grid;
+  gap: 12px;
+}
+
+.safety-boundary-grid {
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  margin: 16px 0;
+}
+
+.safety-card,
+.blocker-badge,
+.checklist-row {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.safety-card {
+  padding: 10px 12px;
+  color: var(--ready);
+  font-size: 0.9rem;
+}
+
+.module-subpanels {
+  grid-template-columns: 1fr;
+}
+
+.module-subpanel {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgb(21 27 36 / 58%);
+}
+
+.lifecycle-timeline {
+  display: grid;
+  gap: 12px;
+}
+
+.lifecycle-stage,
+.capability-card,
+.mock-run-card {
+  position: relative;
+  padding: 14px 14px 14px 54px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgb(11 15 20 / 82%);
+}
+
+.stage-index {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: inline-grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.blocker-badge {
+  display: grid;
+  gap: 5px;
+  padding: 12px;
+  border-color: var(--blocked);
+}
+
+.blocker-badge strong {
+  color: var(--blocked);
+}
+
+.blocker-badge span,
+.blocker-badge small,
+.empty-note {
+  color: var(--muted);
+}
+
+.checklist-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+}
+
+.checklist-row strong {
+  color: var(--accent);
+}
+
 .descriptor-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

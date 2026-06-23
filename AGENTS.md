@@ -137,6 +137,13 @@ Instructions for future Codex runs in this repository:
   config, or imply production auth.
 - Static console rendering must not expose raw prompts, hidden reasoning,
   chain-of-thought, raw headers, provider payloads, credentials, or secrets.
+- Module lifecycle dashboard work must remain read-only.
+- Do not add activation buttons or activation actions to the module dashboard.
+- Expected module blockers must remain visible and must not be hidden.
+- Generic Knowledge trail data must remain synthetic and metadata-only.
+- Module dashboard work must not add frontend dependencies, package manager
+  files, API routes, SDK resources, CLI commands, migrations, code loading,
+  runtime registration, external calls, or domain-specific module logic.
 - Dialogue work must remain backend contract work unless a future task
   explicitly asks for UI.
 - Dialogue APIs must not expose provider-specific chat objects, frontend state,

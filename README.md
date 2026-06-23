@@ -411,6 +411,31 @@ Read the prototype docs:
 - [Static console safety review](docs/operator-console/static-console-safety-review.md)
 - [Static console test plan](docs/operator-console/static-console-test-plan.md)
 
+## Read-Only Module Lifecycle Dashboard
+
+AION-090 extends the static Operator Console with a read-only Module Lifecycle
+Dashboard for Generic Knowledge Intelligence. It renders the metadata-only path
+from manifest through intake, inactive slot, inactive bindings, validation,
+conformance, readiness, activation request, activation gate, safe blockers,
+synthetic mock runtime output, and operator review.
+
+The dashboard adds no API routes, SDK resources, CLI commands, migrations,
+frontend dependencies, build step, activation, execution, code loading,
+runtime registration, external calls, or write actions.
+
+Run the module dashboard check:
+
+```bash
+./scripts/module-lifecycle-dashboard-check.sh
+```
+
+Read the module dashboard docs:
+
+- [Module lifecycle dashboard](docs/operator-console/module-lifecycle-dashboard.md)
+- [Generic Knowledge trail view](docs/operator-console/generic-knowledge-trail-view.md)
+- [Module review panel](docs/operator-console/module-review-panel.md)
+- [Module dashboard safety review](docs/operator-console/module-dashboard-safety-review.md)
+
 ## v0.1 Final Local Release Path
 
 AION Brain v0.1.0 is a local release baseline. The final scripts aggregate

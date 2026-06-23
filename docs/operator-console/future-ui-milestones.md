@@ -23,6 +23,10 @@ production auth claim, no activation, no execution, and no external calls.
 
 Read-only module lifecycle dashboard after UI architecture approval.
 
+Status: implemented as a static local Module Lifecycle Dashboard inside the
+AION-089 prototype. It remains no-build, read-only, metadata-only,
+activation-blocked, execution-blocked, and offline-demo capable.
+
 ## AION-091
 
 Read-only provider hardening dashboard.

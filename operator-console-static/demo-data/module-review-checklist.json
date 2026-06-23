@@ -1,0 +1,46 @@
+{
+  "console_view_model_id": "static-module-review-checklist-demo",
+  "view": "module_lifecycle",
+  "status": "review_only",
+  "read_only": true,
+  "redaction_applied": true,
+  "title": "Module Review Checklist",
+  "summary": "Operator checklist for reviewing module lifecycle evidence without approving activation.",
+  "approval_scope": "review_only",
+  "blockers": [{"blocker_key": "activation_disabled", "message": "Review is not activation.", "bypassable": false}],
+  "warnings": [{"message": "No approval-to-activate action exists."}],
+  "refs": ["docs/operator-console/module-review-panel.md"],
+  "checklist": [
+    {"check_key": "manifest_valid", "label": "manifest valid", "status": "passed"},
+    {"check_key": "no_executable_payload", "label": "no executable payload", "status": "passed"},
+    {"check_key": "no_external_source", "label": "no external source", "status": "passed"},
+    {"check_key": "no_dynamic_route", "label": "no dynamic route", "status": "passed"},
+    {"check_key": "no_full_autonomy", "label": "no full autonomy", "status": "passed"},
+    {"check_key": "bindings_validated", "label": "bindings validated", "status": "passed"},
+    {"check_key": "conformance_dry_run_passed", "label": "conformance dry-run passed", "status": "passed"},
+    {"check_key": "readiness_created", "label": "readiness created", "status": "passed"},
+    {"check_key": "activation_blocked", "label": "activation blocked", "status": "blocked"},
+    {"check_key": "mock_runtime_synthetic", "label": "mock runtime synthetic", "status": "passed"},
+    {"check_key": "audit_provenance_expected", "label": "audit/provenance expected", "status": "expected"}
+  ],
+  "sections": [
+    {
+      "section_key": "module_review_checklist",
+      "title": "Operator Review Checklist",
+      "status": "review_only",
+      "severity": "medium",
+      "summary": "The checklist supports interpretation only and cannot approve activation.",
+      "blockers": [{"message": "activation blocked"}],
+      "warnings": [{"message": "review_only"}],
+      "refs": ["docs/modules/generic-knowledge-intelligence-operator-review.md"]
+    }
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Module activation is disabled."},
+    {"action_key": "activate_capability", "reason": "Capability activation is disabled."},
+    {"action_key": "load_code", "reason": "Code loading is disabled."},
+    {"action_key": "execute_tool", "reason": "Tool execution is disabled."},
+    {"action_key": "enable_external_model_calls", "reason": "External model calls are disabled."},
+    {"action_key": "hard_delete", "reason": "Hard delete is disabled."}
+  ]
+}

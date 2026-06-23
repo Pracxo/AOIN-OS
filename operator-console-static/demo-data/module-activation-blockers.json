@@ -1,0 +1,41 @@
+{
+  "console_view_model_id": "static-module-activation-blockers-demo",
+  "view": "module_lifecycle",
+  "status": "blocked",
+  "read_only": true,
+  "redaction_applied": true,
+  "title": "Module Activation Blockers",
+  "summary": "Expected blockers are visible and none are bypassable.",
+  "activation_allowed": false,
+  "execution_allowed": false,
+  "registration_allowed": false,
+  "blockers": [
+    {"blocker_key": "activation_disabled", "message": "Module activation is disabled.", "bypassable": false},
+    {"blocker_key": "code_loading_disabled", "message": "Code loading is disabled.", "bypassable": false},
+    {"blocker_key": "package_install_disabled", "message": "Package installation is disabled.", "bypassable": false},
+    {"blocker_key": "dynamic_route_registration_disabled", "message": "Dynamic route registration is disabled.", "bypassable": false},
+    {"blocker_key": "runtime_registration_disabled", "message": "Runtime registration is disabled.", "bypassable": false}
+  ],
+  "warnings": [{"message": "Blockers are expected and safe."}],
+  "refs": ["docs/modules/module-activation-state-machine.md"],
+  "sections": [
+    {
+      "section_key": "activation_blockers",
+      "title": "Expected Activation Blockers",
+      "status": "blocked",
+      "severity": "high",
+      "summary": "The module lifecycle remains review-only because activation blockers are intentionally present.",
+      "blockers": [{"message": "activation_disabled"}, {"message": "code_loading_disabled"}],
+      "warnings": [{"message": "No blocker is bypassable."}],
+      "refs": ["docs/operator-console/module-review-panel.md"]
+    }
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Module activation is disabled."},
+    {"action_key": "activate_capability", "reason": "Capability activation is disabled."},
+    {"action_key": "load_code", "reason": "Code loading is disabled."},
+    {"action_key": "execute_tool", "reason": "Tool execution is disabled."},
+    {"action_key": "enable_external_model_calls", "reason": "External model calls are disabled."},
+    {"action_key": "hard_delete", "reason": "Hard delete is disabled."}
+  ]
+}

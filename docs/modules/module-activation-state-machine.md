@@ -94,3 +94,10 @@ The AION-084 module pack maps to the state machine as evidence only:
 
 The expected terminal state for v0.1 is still
 `activation_blocked_by_default`.
+
+## Static Dashboard Representation
+
+AION-090 represents the v0.1 path in a static local dashboard. The dashboard
+shows `activation_blocked_by_default` through visible blockers and safety
+labels. It does not create a transition to future activation and does not
+change the state machine.

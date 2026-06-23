@@ -81,3 +81,10 @@ Future activation requires a separate task with architecture review, explicit
 policy coverage, approval semantics, sandbox execution design, rollback and
 disable paths, runtime adapter boundaries, conformance evidence, readiness
 evidence, operator acceptance, and release discipline.
+
+## Static Review Panel
+
+AION-090 renders the review checklist in the static Operator Console Module
+Review panel. The panel can show whether evidence is understandable, but it
+cannot approve activation, execute code, enable a runtime, call providers, or
+hide expected blockers.

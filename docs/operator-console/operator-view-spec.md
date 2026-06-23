@@ -54,3 +54,30 @@ The static prototype includes these sections:
 
 All action entries remain descriptors. Buttons are disabled and are not wired
 to mutation endpoints.
+
+## AION-090 module dashboard path
+
+The static Module Lifecycle dashboard reuses the Module Lifecycle view and adds
+local JSON for the Generic Knowledge Intelligence trail. It shows:
+
+- Manifest
+- Intake
+- Slot
+- Bindings
+- Validation
+- Conformance
+- Readiness
+- Activation Request
+- Activation Gate
+- Mock Runtime
+- Operator Review
+
+Safety labels must remain visible:
+
+- `activation_allowed=false`
+- `execution_allowed=false`
+- `registration_allowed=false`
+- `code_loaded=false`
+- `external_calls_made=false`
+
+The dashboard adds no new API route and no write action.

@@ -48,6 +48,59 @@
           Read-only view model will render here.
         </p>
 
+        <section class="module-dashboard" id="module-dashboard" aria-label="Module lifecycle dashboard">
+          <div class="no-activation-banner">
+            This dashboard is read-only. Activation is blocked by design.
+          </div>
+          <div class="module-dashboard-heading">
+            <div>
+              <p class="eyebrow">Module Lifecycle</p>
+              <h3>Generic Knowledge Intelligence Trail</h3>
+            </div>
+            <button class="disabled-action" type="button" disabled>
+              No activation
+            </button>
+          </div>
+          <p id="module-dashboard-summary" class="panel-summary">
+            Select Module Lifecycle to inspect metadata-only review evidence.
+          </p>
+
+          <div class="safety-boundary-grid" id="module-safety-labels" aria-label="Module safety labels">
+            <div class="safety-card">activation_allowed=false</div>
+            <div class="safety-card">execution_allowed=false</div>
+            <div class="safety-card">registration_allowed=false</div>
+            <div class="safety-card">code_loaded=false</div>
+            <div class="safety-card">external_calls_made=false</div>
+          </div>
+
+          <div class="module-subpanels">
+            <section class="module-subpanel" aria-label="Lifecycle stages">
+              <h3>Lifecycle Stages</h3>
+              <div class="lifecycle-timeline" id="module-lifecycle-stages"></div>
+            </section>
+
+            <section class="module-subpanel" aria-label="Capability trail">
+              <h3>Capability Trail</h3>
+              <div class="capability-grid" id="module-capability-trail"></div>
+            </section>
+
+            <section class="module-subpanel" aria-label="Activation blockers">
+              <h3>Activation Blockers</h3>
+              <div class="blocker-list" id="module-blockers"></div>
+            </section>
+
+            <section class="module-subpanel" aria-label="Mock runtime trail">
+              <h3>Mock Runtime</h3>
+              <div class="mock-runtime-list" id="module-mock-runtime"></div>
+            </section>
+
+            <section class="module-subpanel" aria-label="Operator review checklist">
+              <h3>Operator Review</h3>
+              <div class="review-checklist" id="module-review-checklist"></div>
+            </section>
+          </div>
+        </section>
+
         <section class="section-grid" id="sections" aria-label="Console sections"></section>
 
         <section class="action-panel" aria-label="Forbidden actions">
@@ -58,6 +111,7 @@
         <section class="command-panel" aria-label="Local commands">
           <h3>Local Commands</h3>
           <pre><code>./scripts/operator-console-static-check.sh
+./scripts/module-lifecycle-dashboard-check.sh
 ./scripts/operator-console-static-demo.sh --offline-ok --skip-api
 python3 -m http.server 8090 --directory operator-console-static</code></pre>
         </section>

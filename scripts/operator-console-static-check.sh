@@ -15,11 +15,21 @@ required_files=(
   operator-console-static/demo-data/release-readiness-view-model.json
   operator-console-static/demo-data/incidents-view-model.json
   operator-console-static/demo-data/settings-safety-view-model.json
+  operator-console-static/demo-data/module-lifecycle-dashboard.json
+  operator-console-static/demo-data/generic-knowledge-trail.json
+  operator-console-static/demo-data/module-activation-blockers.json
+  operator-console-static/demo-data/module-mock-runtime-trail.json
+  operator-console-static/demo-data/module-review-checklist.json
   docs/operator-console/static-console-prototype.md
   docs/operator-console/static-console-runbook.md
   docs/operator-console/static-console-safety-review.md
   docs/operator-console/static-console-test-plan.md
+  docs/operator-console/module-lifecycle-dashboard.md
+  docs/operator-console/generic-knowledge-trail-view.md
+  docs/operator-console/module-review-panel.md
+  docs/operator-console/module-dashboard-safety-review.md
   docs/adr/0080-static-local-operator-console-prototype.md
+  docs/adr/0081-read-only-module-lifecycle-dashboard.md
 )
 
 for file in "${required_files[@]}"; do
@@ -88,6 +98,11 @@ done
 
 grep -q "0080-static-local-operator-console-prototype.md" docs/adr/README.md || {
   echo "ADR 0080 is not indexed" >&2
+  exit 1
+}
+
+grep -q "0081-read-only-module-lifecycle-dashboard.md" docs/adr/README.md || {
+  echo "ADR 0081 is not indexed" >&2
   exit 1
 }
 

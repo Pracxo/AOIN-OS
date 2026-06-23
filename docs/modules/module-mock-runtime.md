@@ -88,3 +88,9 @@ external calls, no activation, and no capability execution.
 
 These integrations read records only. They do not enable activation or
 execution.
+
+## Static Console Trail
+
+AION-090 renders a synthetic mock runtime trail in the static Operator Console.
+The trail displays `synthetic=true`, confidence, output summary, and disabled
+execution flags. It remains display-only and does not invoke module code.

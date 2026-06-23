@@ -104,3 +104,14 @@ operator review, and mock-runtime evidence without enabling activation.
 The future view must not load code, install packages, register routes,
 activate modules, activate capabilities, execute tools, call external
 services, expose raw prompts, expose hidden reasoning, or reveal secrets.
+
+## Static Module Dashboard Mapping
+
+AION-090 renders this demo path in the static Operator Console Module
+Lifecycle Dashboard. The dashboard uses local demo JSON to show the same
+manifest, intake, slot, binding, validation, conformance, readiness, activation
+request, activation gate, blocker, mock runtime, and operator review path.
+
+The dashboard is read-only. It does not activate modules, load code, register
+routes, execute capabilities, call external services, mutate Brain records, or
+change the v0.1 release baseline.

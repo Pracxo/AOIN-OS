@@ -1,0 +1,86 @@
+{
+  "console_view_model_id": "static-generic-knowledge-trail-demo",
+  "view": "module_lifecycle",
+  "status": "metadata_only",
+  "read_only": true,
+  "redaction_applied": true,
+  "module_key": "generic.knowledge_intelligence",
+  "module_name": "Generic Knowledge Intelligence",
+  "title": "Generic Knowledge Intelligence Trail",
+  "summary": "Five generic capabilities are visible as inactive metadata with dry-run support only.",
+  "blockers": [{"blocker_key": "activation_disabled", "message": "Activation remains blocked.", "bypassable": false}],
+  "warnings": [{"message": "Capabilities are not executable."}],
+  "refs": ["docs/operator-console/generic-knowledge-trail-view.md"],
+  "capabilities": [
+    {
+      "capability_key": "generic.knowledge.retrieve",
+      "label": "Retrieve Generic Knowledge",
+      "controlled_supported": false,
+      "dry_run_supported": true,
+      "activation_allowed": false,
+      "external_calls_made": false,
+      "code_loaded": false,
+      "evidence_refs": ["docs/modules/generic-knowledge-intelligence-demo.md"]
+    },
+    {
+      "capability_key": "generic.knowledge.summarize",
+      "label": "Summarize Generic Knowledge",
+      "controlled_supported": false,
+      "dry_run_supported": true,
+      "activation_allowed": false,
+      "external_calls_made": false,
+      "code_loaded": false,
+      "evidence_refs": ["docs/modules/generic-knowledge-intelligence-demo.md"]
+    },
+    {
+      "capability_key": "generic.knowledge.ground",
+      "label": "Ground Generic Knowledge",
+      "controlled_supported": false,
+      "dry_run_supported": true,
+      "activation_allowed": false,
+      "external_calls_made": false,
+      "code_loaded": false,
+      "evidence_refs": ["docs/modules/generic-knowledge-intelligence-readiness-trail.md"]
+    },
+    {
+      "capability_key": "generic.knowledge.explain",
+      "label": "Explain Generic Knowledge",
+      "controlled_supported": false,
+      "dry_run_supported": true,
+      "activation_allowed": false,
+      "external_calls_made": false,
+      "code_loaded": false,
+      "evidence_refs": ["docs/modules/generic-knowledge-intelligence-operator-review.md"]
+    },
+    {
+      "capability_key": "generic.knowledge.answer",
+      "label": "Answer Generic Knowledge",
+      "controlled_supported": false,
+      "dry_run_supported": true,
+      "activation_allowed": false,
+      "external_calls_made": false,
+      "code_loaded": false,
+      "evidence_refs": ["docs/modules/generic-knowledge-intelligence-demo.md"]
+    }
+  ],
+  "sections": [
+    {
+      "section_key": "generic_knowledge_capabilities",
+      "title": "Capability Metadata",
+      "status": "metadata_only",
+      "severity": "medium",
+      "summary": "All five capabilities are visible as inactive dry-run metadata.",
+      "blockers": [{"message": "controlled_supported=false"}],
+      "warnings": [{"message": "activation_allowed=false"}],
+      "refs": ["docs/operator-console/generic-knowledge-trail-view.md"]
+    }
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Module activation is disabled."},
+    {"action_key": "activate_capability", "reason": "Capability activation is disabled."},
+    {"action_key": "load_code", "reason": "Code loading is disabled."},
+    {"action_key": "execute_tool", "reason": "Tool execution is disabled."},
+    {"action_key": "enable_external_model_calls", "reason": "External model calls are disabled."},
+    {"action_key": "hard_delete", "reason": "Hard delete is disabled."}
+  ]
+}

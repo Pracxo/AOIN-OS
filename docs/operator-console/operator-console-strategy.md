@@ -172,3 +172,15 @@ forbidden actions as disabled descriptors only.
 
 This does not change the CLI/API-first architecture. It proves layout and
 operator review ergonomics before any governed UI architecture is approved.
+
+## AION-090 module lifecycle dashboard
+
+AION-090 extends the static local prototype with a read-only Module Lifecycle
+Dashboard. It shows the Generic Knowledge Intelligence trail from extension
+manifest through operator review, including activation gate blockers and
+synthetic mock runtime evidence.
+
+The dashboard is still static and local. It adds no backend route, no SDK
+resource, no CLI command, no migration, no frontend dependency, no activation,
+no code loading, no execution, no runtime registration, and no external calls.
+Blockers must remain visible because they are expected safety evidence.

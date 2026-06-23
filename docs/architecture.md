@@ -1775,3 +1775,11 @@ routes, SDK resources, CLI commands, migrations, package files, activation
 controls, execution path, external calls, production auth claim, or runtime
 registration. The prototype remains an experience-validation artifact, not a
 new Brain subsystem.
+
+AION-090 extends that static prototype with a read-only Module Lifecycle
+Dashboard. The dashboard renders the Generic Knowledge Intelligence metadata
+trail, expected blockers, synthetic mock runtime output, and operator review
+checklist from static JSON or the existing read-only view-model API. It adds no
+new backend route, no runtime module activation, no code loading, no runtime
+registration, no write action, no external call, and no frontend dependency.
+Expected blockers are shown as safety evidence rather than hidden.

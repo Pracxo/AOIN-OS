@@ -1,0 +1,52 @@
+{
+  "console_view_model_id": "static-module-mock-runtime-trail-demo",
+  "view": "module_lifecycle",
+  "status": "synthetic_only",
+  "read_only": true,
+  "redaction_applied": true,
+  "title": "Module Mock Runtime Trail",
+  "summary": "Synthetic mock runtime output is visible without code loading, execution, activation, or external calls.",
+  "synthetic": true,
+  "external_calls_made": false,
+  "code_loaded": false,
+  "activation_allowed": false,
+  "execution_allowed": false,
+  "confidence": 0.91,
+  "blockers": [{"blocker_key": "execution_disabled", "message": "No real capability execution occurred.", "bypassable": false}],
+  "warnings": [{"message": "Mock runtime output is synthetic."}],
+  "refs": ["docs/modules/module-mock-runtime.md"],
+  "mock_runs": [
+    {
+      "mock_run_id": "mock-gki-static-001",
+      "capability_key": "generic.knowledge.summarize",
+      "status": "completed",
+      "synthetic": true,
+      "confidence": 0.91,
+      "external_calls_made": false,
+      "code_loaded": false,
+      "activation_allowed": false,
+      "execution_allowed": false,
+      "output_summary": "Synthetic output shape validated for static review."
+    }
+  ],
+  "sections": [
+    {
+      "section_key": "module_mock_runtime_trail",
+      "title": "Synthetic Mock Runtime",
+      "status": "synthetic_only",
+      "severity": "medium",
+      "summary": "The trail proves output shape only. It does not execute module code.",
+      "blockers": [{"message": "execution_allowed=false"}],
+      "warnings": [{"message": "synthetic=true"}],
+      "refs": ["docs/operator-console/module-lifecycle-dashboard.md"]
+    }
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Module activation is disabled."},
+    {"action_key": "activate_capability", "reason": "Capability activation is disabled."},
+    {"action_key": "load_code", "reason": "Code loading is disabled."},
+    {"action_key": "execute_tool", "reason": "Tool execution is disabled."},
+    {"action_key": "enable_external_model_calls", "reason": "External model calls are disabled."},
+    {"action_key": "hard_delete", "reason": "Hard delete is disabled."}
+  ]
+}

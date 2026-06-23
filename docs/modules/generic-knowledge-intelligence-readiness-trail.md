@@ -115,3 +115,10 @@ AION-085 adds deterministic mock runtime evidence after the metadata-only
 module pack. It does not move the `aion-v0.1.0` tag, add external
 dependencies, enable runtime activation, load code, install packages, execute
 capabilities, call external services, or add domain-specific logic.
+
+## Static Dashboard Trail
+
+AION-090 projects this readiness trail into the static Operator Console. The
+view keeps the same expected blockers and displays them as successful safety
+evidence. It does not change readiness semantics, activation state, runtime
+registration state, or module execution state.

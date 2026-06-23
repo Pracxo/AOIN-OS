@@ -182,3 +182,18 @@ execution, and no external calls.
 
 Workflow sections must keep no raw prompt exposure, no hidden reasoning
 exposure, and no secret exposure.
+
+## AION-090 static module dashboard workflow
+
+AION-090 makes the Module Lifecycle workflow visible in the static local
+console. The workflow remains read-only:
+
+```text
+manifest -> intake -> slot -> bindings -> validation -> conformance
+  -> readiness -> activation request -> activation gate -> blockers
+  -> mock runtime -> operator review
+```
+
+The static panel shows safe blockers, synthetic mock runtime output, evidence
+refs, and review checklist status. It does not add activation, execution,
+runtime registration, write actions, external calls, or new API routes.
