@@ -93,3 +93,14 @@ Stop the demo if any of these appear:
 
 If the local API is unavailable and `--offline-ok` is set, the demo reports the
 API as unavailable and completes offline validation only.
+
+## Operator Console Mapping
+
+AION-087 maps the module demo into a future Operator Console view. The view is
+read/review/dry-run only and uses existing fixtures plus existing API/CLI
+paths. It must show activation blockers, conformance state, readiness state,
+operator review, and mock-runtime evidence without enabling activation.
+
+The future view must not load code, install packages, register routes,
+activate modules, activate capabilities, execute tools, call external
+services, expose raw prompts, expose hidden reasoning, or reveal secrets.

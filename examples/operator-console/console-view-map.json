@@ -1,0 +1,89 @@
+{
+  "flow_key": "operator.console_view_map",
+  "title": "Console view map",
+  "scope": ["workspace:main"],
+  "external_calls_allowed": false,
+  "views": [
+    {
+      "view": "Overview",
+      "source": "GET /health, GET /health/ready, ./scripts/operator-overview.sh",
+      "write_actions": "dry_run"
+    },
+    {
+      "view": "Readiness",
+      "source": "./scripts/setup-doctor.sh --fast --offline-ok",
+      "write_actions": "dry_run"
+    },
+    {
+      "view": "Release Candidate",
+      "source": "./scripts/rc-check.sh --offline-ok",
+      "write_actions": "dry_run"
+    },
+    {
+      "view": "Freeze/Release",
+      "source": "./scripts/v0.1-final-verify.sh --offline-ok --skip-docker --skip-api",
+      "write_actions": "forbidden"
+    },
+    {
+      "view": "Golden Path",
+      "source": "./scripts/golden-path.sh --offline-ok",
+      "write_actions": "dry_run"
+    },
+    {
+      "view": "Module Lifecycle",
+      "source": "./scripts/module-pack-check.sh, ./scripts/generic-knowledge-demo.sh --offline-ok --skip-api",
+      "write_actions": "dry_run"
+    },
+    {
+      "view": "Module Activation",
+      "source": "activation gate dry-run records",
+      "write_actions": "forbidden"
+    },
+    {
+      "view": "Module Mock Runtime",
+      "source": "module mock invocation records",
+      "write_actions": "dry_run"
+    },
+    {
+      "view": "Model Provider Hardening",
+      "source": "./scripts/model-provider-check.sh --offline-ok --skip-api",
+      "write_actions": "dry_run"
+    },
+    {
+      "view": "Notifications",
+      "source": "aionctl notifications alerts",
+      "write_actions": "dry_run"
+    },
+    {
+      "view": "Incidents",
+      "source": "aionctl incidents list",
+      "write_actions": "dry_run"
+    },
+    {
+      "view": "Registry Integrity",
+      "source": "aionctl resources validate",
+      "write_actions": "dry_run"
+    },
+    {
+      "view": "Lifecycle Review",
+      "source": "aionctl lifecycle evaluate",
+      "write_actions": "dry_run"
+    },
+    {
+      "view": "Audit/Provenance",
+      "source": "./scripts/audit-verify.sh",
+      "write_actions": "forbidden"
+    },
+    {
+      "view": "Settings Safety",
+      "source": "./scripts/config-validate.sh",
+      "write_actions": "forbidden"
+    }
+  ],
+  "safety": {
+    "raw_prompts_included": false,
+    "hidden_reasoning_included": false,
+    "secrets_included": false,
+    "module_activation_allowed": false
+  }
+}

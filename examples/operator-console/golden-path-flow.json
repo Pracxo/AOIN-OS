@@ -1,0 +1,27 @@
+{
+  "flow_key": "operator.golden_path",
+  "title": "Golden path",
+  "scope": ["workspace:main"],
+  "external_calls_allowed": false,
+  "steps": [
+    {
+      "step_key": "seed_scenarios",
+      "source": "local scenario fixtures",
+      "action_mode": "dry_run"
+    },
+    {
+      "step_key": "run_golden_path",
+      "source": "./scripts/golden-path.sh --offline-ok",
+      "action_mode": "dry_run"
+    },
+    {
+      "step_key": "inspect_report",
+      "source": "golden path report",
+      "action_mode": "read_only"
+    }
+  ],
+  "expected": {
+    "scenario_pack_domain_neutral": true,
+    "external_calls_made": false
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "flow_key": "operator.module_lifecycle",
+  "title": "Module lifecycle",
+  "scope": ["workspace:main"],
+  "external_calls_allowed": false,
+  "steps": [
+    {
+      "step_key": "extension_intake",
+      "source": "aionctl extensions intake",
+      "action_mode": "dry_run"
+    },
+    {
+      "step_key": "module_slot",
+      "source": "aionctl module-slots preview",
+      "action_mode": "dry_run"
+    },
+    {
+      "step_key": "binding",
+      "source": "aionctl module-bindings validate --dry-run",
+      "action_mode": "dry_run"
+    },
+    {
+      "step_key": "conformance",
+      "source": "aionctl conformance run",
+      "action_mode": "dry_run"
+    },
+    {
+      "step_key": "readiness",
+      "source": "aionctl readiness assess",
+      "action_mode": "dry_run"
+    },
+    {
+      "step_key": "activation_gate",
+      "source": "./scripts/generic-knowledge-demo.sh --offline-ok --skip-api",
+      "action_mode": "dry_run"
+    },
+    {
+      "step_key": "mock_runtime",
+      "source": "module mock invocation fixture",
+      "action_mode": "dry_run"
+    }
+  ],
+  "expected": {
+    "activation_allowed": false,
+    "runtime_registration_allowed": false,
+    "code_loading_allowed": false
+  }
+}

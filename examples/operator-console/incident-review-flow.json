@@ -1,0 +1,42 @@
+{
+  "flow_key": "operator.incident_review",
+  "title": "Incident review",
+  "scope": ["workspace:main"],
+  "external_calls_allowed": false,
+  "steps": [
+    {
+      "step_key": "notification",
+      "source": "local notification ledger",
+      "action_mode": "read_only"
+    },
+    {
+      "step_key": "alert",
+      "source": "local alert queue",
+      "action_mode": "read_only"
+    },
+    {
+      "step_key": "signal",
+      "source": "incident signal record",
+      "action_mode": "read_only"
+    },
+    {
+      "step_key": "incident",
+      "source": "incident correlation record",
+      "action_mode": "read_only"
+    },
+    {
+      "step_key": "root_cause_candidate",
+      "source": "root cause candidate list",
+      "action_mode": "read_only"
+    },
+    {
+      "step_key": "recovery_review",
+      "source": "recovery review record",
+      "action_mode": "dry_run"
+    }
+  ],
+  "expected": {
+    "external_notification_sent": false,
+    "auto_remediation_allowed": false
+  }
+}

@@ -841,3 +841,13 @@ Useful methods include:
 - `query(payload)`
 
 The SDK does not expose provider-call or credential commands.
+
+## Operator Console Strategy
+
+AION-087 does not add SDK resources. Future Operator Console work must consume
+existing public Brain APIs through the SDK after a dedicated API contract audit
+and view-model extraction milestone.
+
+The SDK boundary remains unchanged: no frontend state, no privileged bypass,
+no module activation, no provider credentials, no raw prompts, no hidden
+reasoning, no secrets, and no external model calls.

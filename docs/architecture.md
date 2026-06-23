@@ -1743,3 +1743,19 @@ The layer is local and metadata-only. Provider readiness is not provider
 enablement, prompt egress preview is not prompt transmission, and provider
 simulation is not a model call. Public contracts stay AION-owned and do not
 depend on provider SDKs.
+
+## Operator Console Planning
+
+AION-087 keeps the post-v0.1 operator experience CLI/API-first. It adds a
+local dashboard blueprint, workflow map, view spec, action boundary, data
+safety model, demo map, no-go list, and future milestone sequence without
+adding runtime UI.
+
+Future UI consumes existing APIs and CLI-backed dry-run workflows. A view-model
+layer must be audited before any UI runtime is added. The console must not
+create privileged bypasses around policy, audit, approval, redaction, module
+activation, provider hardening, runtime config, or release gates.
+
+No frontend dependencies, API routes, SDK resources, CLI commands, migrations,
+module activation, code loading, package installation, external calls, or
+runtime registration are part of AION-087.

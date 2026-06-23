@@ -317,6 +317,32 @@ Read the module pack docs:
 - [Operator review](docs/modules/generic-knowledge-intelligence-operator-review.md)
 - [No-go conditions](docs/modules/generic-knowledge-intelligence-no-go.md)
 
+## Operator Console Strategy
+
+AION-087 keeps post-v0.1 operator work CLI/API-first. It creates the local
+dashboard blueprint and workflow map only; it does not add runtime UI,
+frontend dependencies, API routes, SDK resources, CLI commands, module
+activation, code loading, package installation, external model calls, or
+external services.
+
+The future Operator Console must consume existing Brain APIs and CLI-backed
+dry-run workflows. It must preserve policy, audit, approval, redaction, module
+activation, and provider-hardening gates.
+
+Operator console docs:
+
+- [Operator console strategy](docs/operator-console/operator-console-strategy.md)
+- [Operator view spec](docs/operator-console/operator-view-spec.md)
+- [Operator demo map](docs/operator-console/operator-demo-map.md)
+- [Operator data safety](docs/operator-console/operator-data-safety.md)
+- [Operator no-go conditions](docs/operator-console/operator-console-no-go.md)
+
+Validate the strategy artifacts:
+
+```bash
+./scripts/operator-console-check.sh
+```
+
 ## v0.1 Final Local Release Path
 
 AION Brain v0.1.0 is a local release baseline. The final scripts aggregate

@@ -962,3 +962,12 @@ AION-086 emits provider-hardening telemetry:
 Node types include provider profiles, egress previews, simulations, readiness
 records, and blockers. These visual records represent readiness and blockers
 only; they do not represent provider activation or model calls.
+
+## Operator Console Projection Note
+
+Future console visualizations use existing visual telemetry nodes and existing
+operator, release, module, provider, notification, incident, registry,
+lifecycle, audit, and provenance records.
+
+AION-087 adds no new visual node types, no renderer, no runtime UI, and no
+frontend dependencies.

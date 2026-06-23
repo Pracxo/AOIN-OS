@@ -39,3 +39,12 @@ egress preview is not prompt transmission.
 The default settings keep `AION_EXTERNAL_MODEL_CALLS_ENABLED=false` and
 `AION_MODEL_PROVIDER_CREDENTIALS_ENABLED=false`.
 
+## Operator Console Mapping
+
+AION-087 maps provider hardening into a future Operator Console view. The view
+may show provider profiles, prompt egress preview summaries, dry-run
+simulations, readiness state, and blockers.
+
+The view must not transmit prompts, store provider credentials, call model
+providers, enable external model calls, reveal raw prompts, expose hidden
+reasoning, reveal secrets, expose raw provider payloads, or enable providers.

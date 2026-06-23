@@ -669,3 +669,24 @@ aionctl model-providers query
 
 These commands do not call model providers, transmit prompts, store
 credentials, invoke models, or execute tools.
+
+## Operator Console Strategy Commands
+
+AION-087 does not add CLI commands. The future Operator Console workflow map
+reuses existing CLI/API paths:
+
+```bash
+./scripts/operator-console-check.sh
+./scripts/setup-doctor.sh --fast --offline-ok
+./scripts/golden-path.sh --offline-ok
+./scripts/rc-check.sh --offline-ok
+./scripts/module-pack-check.sh
+./scripts/generic-knowledge-demo.sh --offline-ok --skip-api
+./scripts/model-provider-check.sh --offline-ok --skip-api
+./scripts/demo-local.sh --offline-ok
+```
+
+Operator console work remains CLI/API-first. It must not expose raw prompts,
+hidden reasoning, secrets, provider credentials, or raw provider payloads. It
+must not activate modules, activate capabilities, load code, install packages,
+register routes, enable external model calls, or bypass policy.

@@ -348,3 +348,8 @@ Instructions for future Codex runs in this repository:
 - Do not add provider SDKs, provider endpoints, API keys, credential commands,
   raw prompt storage, external model calls, model invocation, or tool execution
   to provider hardening work.
+- Do not add frontend dependencies without explicit UI architecture approval.
+- Operator console work must preserve policy, audit, and approval gates.
+- Operator console must not expose raw prompts, hidden reasoning, or secrets.
+- Operator console must not activate modules or capabilities.
+- Operator console must not enable external model calls.
