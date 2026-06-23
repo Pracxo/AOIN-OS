@@ -339,6 +339,7 @@ class ReleasePackager:
             reports["model_provider_hardening"] = self._model_provider_hardening_summary(
                 request.owner_scope
             )
+            reports["local_auth"] = self._local_auth_summary()
             reports["capability_conformance"] = self._conformance_summary(request.owner_scope)
             reports["golden_path"] = self._golden_path_summary(request.owner_scope)
             reports["bootstrap"] = self._bootstrap_summary(request.owner_scope)
@@ -561,6 +562,45 @@ class ReleasePackager:
             "external_model_calls_enabled": False,
             "credentials_enabled": False,
             "model_invocation_enabled": False,
+        }
+
+    def _local_auth_summary(self) -> dict[str, Any]:
+        unsafe_flags = {
+            "production_auth_enabled": bool(
+                getattr(self._settings, "production_auth_enabled", False)
+            ),
+            "auth_material_enabled": bool(
+                getattr(self._settings, "auth_credentials_enabled", False)
+            ),
+            "auth_session_state_enabled": bool(
+                getattr(self._settings, "auth_sessions_enabled", False)
+            ),
+            "external_idp_enabled": bool(
+                getattr(self._settings, "external_identity_provider_enabled", False)
+            ),
+            "local_auth_write_actions_enabled": bool(
+                getattr(self._settings, "local_auth_write_actions_enabled", False)
+            ),
+        }
+        unsafe = [key for key, value in unsafe_flags.items() if value]
+        return {
+            "available": bool(getattr(self._settings, "local_auth_enabled", True)),
+            "status": "blocked" if unsafe else "ready",
+            "dev_only": True,
+            "synthetic_identity_only": True,
+            "role_filtering_enabled": bool(
+                getattr(self._settings, "local_auth_role_filtering_enabled", True)
+            ),
+            "audit_enabled": bool(getattr(self._settings, "local_auth_audit_enabled", True)),
+            "production_auth_enabled": False,
+            "auth_material_enabled": False,
+            "auth_session_state_enabled": False,
+            "external_idp_enabled": False,
+            "write_actions_enabled": False,
+            "execution_allowed": False,
+            "activation_allowed": False,
+            "external_calls_allowed": False,
+            "unsafe_flags": unsafe,
         }
 
     def _conformance_summary(self, scope: builtins.list[str]) -> dict[str, Any]:

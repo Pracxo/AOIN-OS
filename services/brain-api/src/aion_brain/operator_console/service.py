@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from aion_brain.contracts.local_auth import ConsoleRoleFilterRequest, LocalAuthContext
 from aion_brain.contracts.operator_console import (
     ConsoleAuditRequest,
     ConsoleAuditResult,
@@ -25,10 +26,12 @@ class ConsoleViewModelService:
         container: object | None = None,
         policy_adapter: object | None = None,
         telemetry_service: object | None = None,
+        local_role_filter: object | None = None,
     ) -> None:
         self._container = container
         self._policy_adapter = policy_adapter
         self._telemetry_service = telemetry_service
+        self._local_role_filter = local_role_filter
 
     def list_views(self, scope: list[str]) -> list[dict[str, object]]:
         """List available console views."""
@@ -51,6 +54,7 @@ class ConsoleViewModelService:
         )
         sections = extract_sections(request, sources, container=self._container)
         model = build_view_model(request, sections=sections, data_sources=sources)
+        model = self._apply_local_role_filter(model, request)
         _emit(
             self._telemetry_service,
             "operator_console_view_model_created",
@@ -70,6 +74,32 @@ class ConsoleViewModelService:
         """Return the local console demo map."""
         _authorize(self._policy_adapter, "operator_console.query", scope)
         return console_demo_map(scope)
+
+    def _apply_local_role_filter(
+        self,
+        model: ConsoleViewModel,
+        request: ConsoleViewModelRequest,
+    ) -> ConsoleViewModel:
+        if self._local_role_filter is None:
+            return model
+        raw_context = request.metadata.get("local_auth_context") or request.metadata.get(
+            "auth_context"
+        )
+        if not isinstance(raw_context, dict):
+            return model
+        auth_context = LocalAuthContext.model_validate(raw_context)
+        filter_call = getattr(self._local_role_filter, "filter", None)
+        if not callable(filter_call):
+            return model
+        result = filter_call(
+            ConsoleRoleFilterRequest(
+                trace_id=request.trace_id,
+                view_model=model.model_dump(mode="json"),
+                auth_context=auth_context,
+                metadata={"source": "operator_console_view_model_service"},
+            )
+        )
+        return ConsoleViewModel.model_validate(result.filtered_view_model)
 
 
 class OperatorConsoleQueryService:

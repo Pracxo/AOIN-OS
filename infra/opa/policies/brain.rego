@@ -132,6 +132,11 @@ allowed_actions := {
 	"operator_console.audit.run",
 	"operator_console.action.describe",
 	"operator_console.query",
+	"local_auth.roles.read",
+	"local_auth.identity.simulate",
+	"local_auth.console.filter",
+	"local_auth.audit.run",
+	"local_auth.status.read",
 	"operator_action.request.create",
 	"operator_action.request.read",
 	"operator_action.request.update",
@@ -454,6 +459,8 @@ allowed_actions := {
 	"module_activation.plan.read",
 	"module_activation.plan.update",
 	"module_activation.query.read",
+	"local_auth.roles.read",
+	"local_auth.status.read",
 	"runtime.registration.preview.create",
 	"runtime.registration.preview.read",
 	"module_mock.profile.create",
@@ -2031,6 +2038,63 @@ decision := {
 	valid_risk
 	input.action_type == "operator_console.audit.run"
 	operator_console_auditor
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "local_auth_read_allowed",
+	"constraints": ["dev_only", "read_only", "no_production_auth", "no_credentials", "no_sessions", "no_external_identity"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	local_auth_read_action
+	local_auth_actor
+	not local_auth_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "local_auth_simulation_allowed",
+	"constraints": ["dev_only", "synthetic_identity_only", "no_production_auth", "no_credentials", "no_sessions", "no_execution_grant", "no_activation_grant"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "local_auth.identity.simulate"
+	local_auth_dev_context
+	local_auth_operator
+	not local_auth_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "local_auth_console_filter_allowed",
+	"constraints": ["dev_only", "read_only", "redaction_required", "no_write_actions", "no_execution_grant", "no_activation_grant"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "local_auth.console.filter"
+	local_auth_actor
+	not local_auth_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "local_auth_audit_allowed",
+	"constraints": ["dev_only", "read_only", "no_production_auth", "no_credentials", "no_sessions", "no_external_identity"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "local_auth.audit.run"
+	local_auth_actor
+	not local_auth_unsafe_request
 }
 
 decision := {
@@ -6209,6 +6273,14 @@ operator_read_action if {
 	input.action_type == "operator_console.query"
 }
 
+local_auth_read_action if {
+	input.action_type == "local_auth.roles.read"
+}
+
+local_auth_read_action if {
+	input.action_type == "local_auth.status.read"
+}
+
 operator_action_read if {
 	input.action_type == "operator_action.request.read"
 }
@@ -6267,6 +6339,94 @@ operator_console_auditor if {
 
 operator_console_auditor if {
 	input.context.permissions[_] == input.action_type
+}
+
+local_auth_actor if {
+	dev_owner
+}
+
+local_auth_actor if {
+	admin_or_owner
+}
+
+local_auth_actor if {
+	input.context.actor_context.roles[_] == "operator"
+}
+
+local_auth_actor if {
+	input.context.actor_context.roles[_] == "auditor"
+}
+
+local_auth_actor if {
+	input.context.actor_context.roles[_] == "reviewer"
+}
+
+local_auth_actor if {
+	input.context.actor_context.permissions[_] == input.action_type
+}
+
+local_auth_actor if {
+	input.context.permissions[_] == input.action_type
+}
+
+local_auth_operator if {
+	local_auth_actor
+}
+
+local_auth_operator if {
+	input.context.actor_context.roles[_] == "operator"
+}
+
+local_auth_dev_context if {
+	input.context.actor_context.dev_mode == true
+}
+
+local_auth_dev_context if {
+	development_env
+}
+
+local_auth_dev_context if {
+	dev_owner
+}
+
+local_auth_unsafe_request if {
+	input.context.production_auth == true
+}
+
+local_auth_unsafe_request if {
+	input.context.production_auth_enabled == true
+}
+
+local_auth_unsafe_request if {
+	input.context.credentials_present == true
+}
+
+local_auth_unsafe_request if {
+	input.context.auth_credentials_enabled == true
+}
+
+local_auth_unsafe_request if {
+	input.context.session_present == true
+}
+
+local_auth_unsafe_request if {
+	input.context.auth_sessions_enabled == true
+}
+
+local_auth_unsafe_request if {
+	input.context.external_identity_provider_enabled == true
+}
+
+local_auth_unsafe_request if {
+	input.context.write_actions_enabled == true
+}
+
+local_auth_unsafe_request if {
+	input.context.execute_allowed == true
+}
+
+local_auth_unsafe_request if {
+	input.context.activation_allowed == true
 }
 
 operator_reader if {

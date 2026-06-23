@@ -53,6 +53,7 @@ class AIONClient:
         self.operator_console = _import_resource(
             "operator_console"
         ).OperatorConsoleResource(self)
+        self.local_auth = _import_resource("local_auth").LocalAuthResource(self)
         self.dialogue = _import_resource("dialogue").DialogueResource(self)
         self.responses = _import_resource("responses").ResponsesResource(self)
         self.beliefs = _import_resource("beliefs").BeliefsResource(self)

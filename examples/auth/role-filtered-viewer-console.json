@@ -1,0 +1,36 @@
+{
+  "status": "filtered",
+  "read_only": true,
+  "redaction_applied": true,
+  "actor_id": "local.viewer",
+  "roles": ["viewer"],
+  "filtered_view_model": {
+    "view": "overview",
+    "status": "ready",
+    "read_only": true,
+    "redaction_applied": true,
+    "sections": [
+      {
+        "section_key": "overview",
+        "title": "Overview",
+        "status": "ready",
+        "severity": "info",
+        "summary": "Read-only local viewer console.",
+        "items": [],
+        "blockers": [],
+        "warnings": [],
+        "refs": []
+      }
+    ],
+    "global_actions": [],
+    "forbidden_actions": [
+      {"action_key": "activate_module", "reason": "Activation is disabled."}
+    ],
+    "metadata": {"local_auth_role_filter_applied": true}
+  },
+  "removed_sections": [],
+  "removed_actions": ["run_dry_run_check"],
+  "forbidden_actions": ["activate_module"],
+  "safety_findings": [],
+  "metadata": {"no_write_actions_added": true}
+}

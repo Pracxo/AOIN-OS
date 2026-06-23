@@ -109,3 +109,13 @@ No production auth may be implemented before AION-098.
 - No database migration is added.
 - No frontend dependency is added.
 - No policy, audit, approval, autonomy, or ActorContext bypass is allowed.
+
+## AION-094 Contract Follow-Up
+
+AION-094 implements a dev-only local auth contract and synthetic identity
+simulation layer from this design. It adds local role permissions, local auth
+contexts, role-aware console filtering, status, and audit checks.
+
+It remains non-production: no login endpoint, no credential storage, no session
+storage, no external identity provider integration, no write grant, no
+execution grant, and no activation grant.

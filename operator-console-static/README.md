@@ -39,6 +39,14 @@ Validate the static contract:
 ./scripts/operator-console-static-demo.sh --offline-ok --skip-api
 ```
 
+## Local Auth Panel
+
+AION-094 adds a Local Auth Status panel backed by
+`demo-data/local-auth-status.json` and `demo-data/role-filtered-view-model.json`.
+The panel shows that production auth, credentials, sessions, external identity
+provider integration, and write actions are disabled. It has no login form, no
+credential input, no token input, and no session persistence.
+
 ## Module Lifecycle Dashboard
 
 AION-090 adds a read-only Module Lifecycle Dashboard to the static console.

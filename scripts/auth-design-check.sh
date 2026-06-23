@@ -6,6 +6,11 @@ cd "$ROOT_DIR"
 
 required_docs=(
   docs/auth/local-auth-design.md
+  docs/auth/local-auth-contract.md
+  docs/auth/dev-identity-simulation.md
+  docs/auth/role-aware-console-filtering.md
+  docs/auth/local-auth-audit.md
+  docs/auth/local-auth-runtime-boundaries.md
   docs/auth/operator-identity-model.md
   docs/auth/operator-session-boundary.md
   docs/auth/operator-role-model.md
@@ -15,6 +20,7 @@ required_docs=(
   docs/auth/auth-no-go-conditions.md
   docs/auth/future-auth-implementation-plan.md
   docs/adr/0084-local-auth-design-for-operator-console.md
+  docs/adr/0085-local-auth-contract-dev-identity-simulation.md
 )
 
 required_examples=(
@@ -22,6 +28,11 @@ required_examples=(
   examples/auth/operator-role-matrix.json
   examples/auth/session-boundary-example.json
   examples/auth/console-access-policy-example.json
+  examples/auth/local-auth-status.json
+  examples/auth/dev-identity-simulation-request.json
+  examples/auth/role-filtered-viewer-console.json
+  examples/auth/role-filtered-operator-console.json
+  examples/auth/local-auth-audit-request.json
 )
 
 for file in "${required_docs[@]}"; do
@@ -34,6 +45,11 @@ done
 
 grep -q "0084-local-auth-design-for-operator-console.md" docs/adr/README.md || {
   echo "ADR 0084 is not indexed" >&2
+  exit 1
+}
+
+grep -q "0085-local-auth-contract-dev-identity-simulation.md" docs/adr/README.md || {
+  echo "ADR 0085 is not indexed" >&2
   exit 1
 }
 
@@ -111,6 +127,11 @@ untracked = subprocess.run(
 
 allowed_auth_paths = {
     "docs/auth/local-auth-design.md",
+    "docs/auth/local-auth-contract.md",
+    "docs/auth/dev-identity-simulation.md",
+    "docs/auth/role-aware-console-filtering.md",
+    "docs/auth/local-auth-audit.md",
+    "docs/auth/local-auth-runtime-boundaries.md",
     "docs/auth/operator-identity-model.md",
     "docs/auth/operator-session-boundary.md",
     "docs/auth/operator-role-model.md",
@@ -120,12 +141,49 @@ allowed_auth_paths = {
     "docs/auth/auth-no-go-conditions.md",
     "docs/auth/future-auth-implementation-plan.md",
     "docs/adr/0084-local-auth-design-for-operator-console.md",
+    "docs/adr/0085-local-auth-contract-dev-identity-simulation.md",
     "examples/auth/local-operator-identity.json",
     "examples/auth/operator-role-matrix.json",
     "examples/auth/session-boundary-example.json",
     "examples/auth/console-access-policy-example.json",
+    "examples/auth/local-auth-status.json",
+    "examples/auth/dev-identity-simulation-request.json",
+    "examples/auth/role-filtered-viewer-console.json",
+    "examples/auth/role-filtered-operator-console.json",
+    "examples/auth/local-auth-audit-request.json",
+    "operator-console-static/demo-data/local-auth-status.json",
+    "operator-console-static/demo-data/role-filtered-view-model.json",
     "scripts/auth-design-check.sh",
+    "scripts/local-auth-check.sh",
+    "services/brain-api/src/aion_brain/contracts/local_auth.py",
+    "services/brain-api/src/aion_brain/local_auth/__init__.py",
+    "services/brain-api/src/aion_brain/local_auth/redaction.py",
+    "services/brain-api/src/aion_brain/local_auth/roles.py",
+    "services/brain-api/src/aion_brain/local_auth/identity.py",
+    "services/brain-api/src/aion_brain/local_auth/context.py",
+    "services/brain-api/src/aion_brain/local_auth/simulator.py",
+    "services/brain-api/src/aion_brain/local_auth/access_matrix.py",
+    "services/brain-api/src/aion_brain/local_auth/audit.py",
+    "services/brain-api/src/aion_brain/local_auth/query.py",
+    "services/brain-api/src/aion_brain/api/local_auth.py",
+    "services/brain-api/src/aion_brain/identity/dev_auth.py",
+    "packages/aion-sdk-python/src/aion_sdk/resources/local_auth.py",
+    "packages/aion-sdk-python/src/aion_sdk/cli/commands/local_auth.py",
+    "packages/aion-sdk-python/tests/test_local_auth_resource.py",
+    "packages/aion-sdk-python/tests/test_cli_local_auth.py",
     "services/brain-api/tests/test_auth_design_docs.py",
+    "services/brain-api/tests/test_local_auth_contracts.py",
+    "services/brain-api/tests/test_local_auth_redaction.py",
+    "services/brain-api/tests/test_local_auth_roles.py",
+    "services/brain-api/tests/test_local_auth_identity.py",
+    "services/brain-api/tests/test_local_auth_context.py",
+    "services/brain-api/tests/test_local_auth_simulator.py",
+    "services/brain-api/tests/test_local_auth_access_matrix.py",
+    "services/brain-api/tests/test_local_auth_audit.py",
+    "services/brain-api/tests/test_local_auth_api.py",
+    "services/brain-api/tests/test_operator_console_role_filtering.py",
+    "services/brain-api/tests/test_kernel_local_auth_wiring.py",
+    "services/brain-api/tests/test_visual_telemetry_local_auth.py",
 }
 
 blocked_package_names = {

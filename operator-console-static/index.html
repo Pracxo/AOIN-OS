@@ -49,6 +49,38 @@
           Read-only view model will render here.
         </p>
 
+        <section class="local-auth-panel" id="local-auth-panel" aria-label="Local auth status">
+          <div class="no-activation-banner">
+            Local auth is dev-only. Production auth, credentials, sessions, and write grants are disabled.
+          </div>
+          <div class="module-dashboard-heading">
+            <div>
+              <p class="eyebrow">Local Auth</p>
+              <h3>Role-Aware Console Filtering</h3>
+            </div>
+            <button class="disabled-action" type="button" disabled>
+              No login
+            </button>
+          </div>
+          <div class="safety-boundary-grid" id="local-auth-status-grid">
+            <div class="safety-card">production_auth_enabled=false</div>
+            <div class="safety-card">credentials_enabled=false</div>
+            <div class="safety-card">sessions_enabled=false</div>
+            <div class="safety-card">external_identity_provider_enabled=false</div>
+            <div class="safety-card">write_actions_enabled=false</div>
+          </div>
+          <div class="module-subpanels">
+            <section class="module-subpanel" aria-label="Role filter result">
+              <h3>Role Filter</h3>
+              <div class="review-checklist" id="local-auth-role-filter"></div>
+            </section>
+            <section class="module-subpanel" aria-label="Local auth warnings">
+              <h3>No-Go Warnings</h3>
+              <div class="blocker-list" id="local-auth-warnings"></div>
+            </section>
+          </div>
+        </section>
+
         <section class="module-dashboard" id="module-dashboard" aria-label="Module lifecycle dashboard">
           <div class="no-activation-banner">
             This dashboard is read-only. Activation is blocked by design.

@@ -68,3 +68,10 @@ bounded until production auth is designed.
 
 Dry-run request creation, review, and audit inspection are separate concerns.
 No role may convert a review into execution in AION-093.
+
+## AION-094 Role Contract
+
+AION-094 makes the local roles concrete for development simulation:
+`viewer`, `operator`, `reviewer`, `admin`, `auditor`, and `system_service`.
+No role allows execution, activation, external calls, hard delete, production
+auth, credential storage, or session creation.

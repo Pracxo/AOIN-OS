@@ -238,6 +238,13 @@ from aion_brain.lifecycle import (
     RedactionPlanner,
     RetentionClassifier,
 )
+from aion_brain.local_auth import (
+    ConsoleRoleFilter,
+    DevIdentitySimulator,
+    LocalAuthAuditService,
+    LocalAuthQueryService,
+    LocalRoleService,
+)
 from aion_brain.logging import configure_logging
 from aion_brain.mcp.compat import MCPCompat
 from aion_brain.mcp.repository import MCPRepository
@@ -3520,10 +3527,26 @@ class KernelContainer:
             self.policy_adapter,
             self.telemetry_service,
         )
+        self.local_role_service = LocalRoleService()
+        self.dev_identity_simulator = DevIdentitySimulator(
+            role_service=self.local_role_service,
+            telemetry_service=self.telemetry_service,
+        )
+        self.console_role_filter = ConsoleRoleFilter(
+            role_service=self.local_role_service,
+            telemetry_service=self.telemetry_service,
+        )
+        self.local_auth_audit_service = LocalAuthAuditService(
+            settings=self.settings,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+        )
+        self.local_auth_query_service = LocalAuthQueryService(settings=self.settings)
         self.operator_console_view_model_service = ConsoleViewModelService(
             container=self,
             policy_adapter=self.policy_adapter,
             telemetry_service=self.telemetry_service,
+            local_role_filter=self.console_role_filter,
         )
         self.operator_console_contract_audit_service = ConsoleContractAuditService(
             policy_adapter=self.policy_adapter,
@@ -5038,6 +5061,16 @@ class KernelContainer:
                 "local",
             ),
             ("operator_snapshot_service", self.operator_snapshot_service, "service", "local"),
+            ("local_role_service", self.local_role_service, "service", "local"),
+            (
+                "dev_identity_simulator",
+                self.dev_identity_simulator,
+                "service",
+                "deterministic",
+            ),
+            ("console_role_filter", self.console_role_filter, "service", "local"),
+            ("local_auth_audit_service", self.local_auth_audit_service, "service", "local"),
+            ("local_auth_query_service", self.local_auth_query_service, "service", "local"),
             (
                 "operator_console_view_model_service",
                 self.operator_console_view_model_service,

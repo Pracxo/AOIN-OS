@@ -31,6 +31,7 @@ from aion_sdk.cli.commands.incidents import install_incident_commands
 from aion_sdk.cli.commands.instructions import install_instruction_commands
 from aion_sdk.cli.commands.learning import install_learning_commands
 from aion_sdk.cli.commands.lifecycle import install_lifecycle_commands
+from aion_sdk.cli.commands.local_auth import install_local_auth_commands
 from aion_sdk.cli.commands.model_outputs import install_model_output_commands
 from aion_sdk.cli.commands.model_provider_hardening import (
     install_model_provider_hardening_commands,
@@ -570,6 +571,7 @@ install_audit_commands(app, get_client=_client, get_scope=_scope, render=_render
 install_operator_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_operator_action_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_operator_console_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_local_auth_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_dialogue_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_belief_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_concept_commands(app, get_client=_client, get_scope=_scope, render=_render)

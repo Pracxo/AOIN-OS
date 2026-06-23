@@ -878,3 +878,18 @@ Useful methods include:
 - `query(payload)`
 
 The SDK does not expose an execution command for operator actions.
+
+## LocalAuthResource
+
+`client.local_auth` exposes read-only/dev-only local auth APIs.
+
+Useful methods include:
+
+- `roles(scope)`
+- `simulate(payload)`
+- `filter_console(payload)`
+- `audit(payload)`
+- `status(scope)`
+
+The SDK does not expose login, token, credential, session, production auth, or
+external identity commands.

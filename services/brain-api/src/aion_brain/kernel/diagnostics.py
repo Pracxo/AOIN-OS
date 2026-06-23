@@ -239,6 +239,11 @@ class KernelDiagnostics:
         ("firecracker_sandbox_adapter_present", "firecracker_sandbox_adapter", "medium"),
         ("operator_control_tower_present", "operator_control_tower_service", "medium"),
         ("operator_snapshot_service_present", "operator_snapshot_service", "medium"),
+        ("local_role_service_present", "local_role_service", "medium"),
+        ("dev_identity_simulator_present", "dev_identity_simulator", "medium"),
+        ("console_role_filter_present", "console_role_filter", "medium"),
+        ("local_auth_audit_service_present", "local_auth_audit_service", "medium"),
+        ("local_auth_query_service_present", "local_auth_query_service", "medium"),
         ("operator_action_center_present", "operator_action_center_service", "medium"),
         ("operator_readiness_aggregator_present", "operator_readiness_aggregator", "medium"),
         ("dialogue_session_service_present", "dialogue_session_service", "medium"),
@@ -1975,6 +1980,118 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Operator Console services are assembled.",
+            ),
+            self._result(
+                "local_auth_enabled",
+                "local_auth",
+                (
+                    "passed"
+                    if bool(getattr(settings, "local_auth_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Dev-only local auth contract is enabled.",
+            ),
+            self._result(
+                "local_auth_dev_identity_simulation_enabled",
+                "local_auth",
+                (
+                    "passed"
+                    if bool(
+                        getattr(
+                            settings,
+                            "local_auth_dev_identity_simulation_enabled",
+                            True,
+                        )
+                    )
+                    else "warning"
+                ),
+                "medium",
+                "Dev identity simulation is enabled.",
+            ),
+            self._result(
+                "local_auth_role_filtering_enabled",
+                "local_auth",
+                (
+                    "passed"
+                    if bool(getattr(settings, "local_auth_role_filtering_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Role-aware console filtering is enabled.",
+            ),
+            self._result(
+                "local_auth_audit_enabled",
+                "local_auth",
+                (
+                    "passed"
+                    if bool(getattr(settings, "local_auth_audit_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Local auth safety audit is enabled.",
+            ),
+            self._result(
+                "production_auth_enabled",
+                "local_auth",
+                (
+                    "failed"
+                    if bool(getattr(settings, "production_auth_enabled", False))
+                    else "passed"
+                ),
+                "high",
+                "Production auth remains disabled.",
+            ),
+            self._result(
+                "auth_credentials_enabled",
+                "local_auth",
+                (
+                    "failed"
+                    if bool(getattr(settings, "auth_credentials_enabled", False))
+                    else "passed"
+                ),
+                "high",
+                "Credential handling remains disabled.",
+            ),
+            self._result(
+                "auth_sessions_enabled",
+                "local_auth",
+                (
+                    "failed"
+                    if bool(getattr(settings, "auth_sessions_enabled", False))
+                    else "passed"
+                ),
+                "high",
+                "Session handling remains disabled.",
+            ),
+            self._result(
+                "external_identity_provider_enabled",
+                "local_auth",
+                (
+                    "failed"
+                    if bool(getattr(settings, "external_identity_provider_enabled", False))
+                    else "passed"
+                ),
+                "high",
+                "External identity provider integration remains disabled.",
+            ),
+            self._result(
+                "local_auth_write_actions_enabled",
+                "local_auth",
+                (
+                    "failed"
+                    if bool(getattr(settings, "local_auth_write_actions_enabled", False))
+                    else "passed"
+                ),
+                "high",
+                "Local auth cannot grant write actions.",
+            ),
+            self._result(
+                "local_auth_services_present",
+                "local_auth",
+                "passed" if services_present else "failed",
+                "high",
+                "Local auth services are assembled.",
             ),
         ]
 

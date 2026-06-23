@@ -1800,3 +1800,13 @@ No production auth is implemented. No credentials are stored. No external
 identity provider is integrated. No login endpoint is added. ActorContext
 remains the current internal context mechanism, and policy remains
 authoritative for backend access.
+
+## Local Auth Contract
+
+AION-094 adds a dev-only local auth contract and synthetic identity simulation
+layer. It may create local operator contexts, map roles to read/dry-run/review
+permissions, filter read-only console view models, and run local auth audits.
+
+It does not add production authentication, login, credential storage, session
+storage, external identity provider integration, execution, activation, runtime
+registration, code loading, or provider enablement.

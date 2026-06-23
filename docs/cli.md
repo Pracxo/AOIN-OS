@@ -722,3 +722,17 @@ aionctl operator-actions query
 
 These commands create or read local governance records only. They do not add a
 runtime action command, provider call, activation path, or external call path.
+
+## Local Auth Commands
+
+AION-094 adds dev-only local auth commands through the SDK:
+
+```bash
+aionctl local-auth roles
+aionctl local-auth simulate
+aionctl local-auth audit
+aionctl local-auth status
+```
+
+These commands do not log in, issue tokens, store credentials, create sessions,
+enable production auth, or integrate external identity providers.

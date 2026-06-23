@@ -388,3 +388,7 @@ Instructions for future Codex runs in this repository:
 - Do not integrate external identity providers without threat model and
   release gate.
 - Static console remains local/read-only until auth implementation is approved.
+- AION-094 local auth is dev-only simulation. It may shape ActorContext and
+  console filtering for local development, but it must not authenticate real
+  users, store credentials, create sessions, issue tokens, bypass policy, grant
+  execution, grant activation, or enable external identity providers.

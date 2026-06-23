@@ -237,3 +237,37 @@ def record_audit_event(
         return cast(AuditEntry, result)
     except Exception:
         return None
+
+
+def record_local_auth_audit_event(
+    audit_sink: object | None,
+    *,
+    audit_id: str,
+    trace_id: str | None,
+    actor_id: str | None,
+    owner_scope: list[str],
+    status: str,
+) -> AuditEntry | None:
+    """Record a local-auth safety audit without storing auth material."""
+    return record_audit_event(
+        audit_sink,
+        action_type="local_auth.audit.run",
+        resource_type="local_auth_audit",
+        resource_id=audit_id,
+        event_type="local_auth_audit_completed",
+        outcome="completed" if status == "passed" else "failed",
+        source_component="local_auth_audit_service",
+        trace_id=trace_id,
+        actor_id=actor_id,
+        risk_level="medium",
+        payload={
+            "status": status,
+            "owner_scope": owner_scope,
+            "production_auth_enabled": False,
+            "auth_material_enabled": False,
+            "auth_session_state_enabled": False,
+            "external_idp_enabled": False,
+            "write_actions_enabled": False,
+        },
+        metadata={"dev_only": True},
+    )

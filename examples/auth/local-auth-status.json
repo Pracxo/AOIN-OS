@@ -1,0 +1,20 @@
+{
+  "scope": ["workspace:main"],
+  "local_auth_enabled": true,
+  "dev_identity_simulation_enabled": true,
+  "role_filtering_enabled": true,
+  "local_auth_audit_enabled": true,
+  "production_auth_enabled": false,
+  "credentials_enabled": false,
+  "sessions_enabled": false,
+  "external_identity_provider_enabled": false,
+  "write_actions_enabled": false,
+  "no_go_warnings": [
+    "no_login_endpoint",
+    "no_credentials",
+    "no_sessions",
+    "no_external_identity_provider",
+    "no_execution_grant",
+    "no_activation_grant"
+  ]
+}

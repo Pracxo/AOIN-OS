@@ -55,3 +55,9 @@ workspace, under which scope, and through which policy decision.
 - No audit correlation.
 - Browser state treated as authoritative.
 - Policy bypass through a console session.
+
+## AION-094 Session Boundary
+
+AION-094 does not create sessions. `LocalAuthContext.session_present` must be
+false, and the static console must not persist auth state in browser storage.
+The simulation context is request data for local filtering only.

@@ -550,6 +550,11 @@ DEV_PERMISSIONS = [
     "resilience.fault_rule.update",
     "resilience.test.run",
     "resilience.test.read",
+    "local_auth.roles.read",
+    "local_auth.identity.simulate",
+    "local_auth.console.filter",
+    "local_auth.audit.run",
+    "local_auth.status.read",
 ]
 
 

@@ -54,3 +54,10 @@ Future production identity requires:
 - break-glass design,
 - security review,
 - release gate approval.
+
+## AION-094 Local Identity Contract
+
+AION-094 may create `LocalOperatorIdentity` records only as synthetic local
+development identities. They must carry `production_identity=false` and
+`credentials_present=false`. They do not authenticate real users and do not
+store account material.
