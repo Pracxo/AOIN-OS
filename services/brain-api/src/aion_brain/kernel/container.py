@@ -346,6 +346,10 @@ from aion_brain.operator.repository import OperatorRepository
 from aion_brain.operator.runbooks import RunbookRegistry
 from aion_brain.operator.snapshots import OperatorSnapshotService
 from aion_brain.operator.status_cards import StatusCardBuilder
+from aion_brain.operator_console import (
+    ConsoleContractAuditService,
+    ConsoleViewModelService,
+)
 from aion_brain.outbox.repository import OutboxRepository
 from aion_brain.outbox.service import OutboxService
 from aion_brain.outcomes.attribution import CausalAttributionService
@@ -3465,6 +3469,15 @@ class KernelContainer:
             self.policy_adapter,
             self.telemetry_service,
         )
+        self.operator_console_view_model_service = ConsoleViewModelService(
+            container=self,
+            policy_adapter=self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
+        self.operator_console_contract_audit_service = ConsoleContractAuditService(
+            policy_adapter=self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+        )
         self.golden_path_runner = GoldenPathRunner(
             self.golden_path_repository,
             self.golden_path_scenario_catalog,
@@ -4938,6 +4951,18 @@ class KernelContainer:
                 "local",
             ),
             ("operator_snapshot_service", self.operator_snapshot_service, "service", "local"),
+            (
+                "operator_console_view_model_service",
+                self.operator_console_view_model_service,
+                "service",
+                "local",
+            ),
+            (
+                "operator_console_contract_audit_service",
+                self.operator_console_contract_audit_service,
+                "service",
+                "local",
+            ),
             ("reflection_service", self.reflection_service, "service", "local"),
             ("skill_service", self.skill_service, "service", "local"),
             ("snapshot_service", self.snapshot_service, "service", "local"),

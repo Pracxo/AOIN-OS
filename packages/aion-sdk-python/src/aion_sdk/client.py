@@ -49,6 +49,9 @@ class AIONClient:
         self.resilience = _import_resource("resilience").ResilienceResource(self)
         self.audit = _import_resource("audit").AuditResource(self)
         self.operator = _import_resource("operator").OperatorResource(self)
+        self.operator_console = _import_resource(
+            "operator_console"
+        ).OperatorConsoleResource(self)
         self.dialogue = _import_resource("dialogue").DialogueResource(self)
         self.responses = _import_resource("responses").ResponsesResource(self)
         self.beliefs = _import_resource("beliefs").BeliefsResource(self)

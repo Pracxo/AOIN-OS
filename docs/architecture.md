@@ -1751,11 +1751,18 @@ local dashboard blueprint, workflow map, view spec, action boundary, data
 safety model, demo map, no-go list, and future milestone sequence without
 adding runtime UI.
 
-Future UI consumes existing APIs and CLI-backed dry-run workflows. A view-model
-layer must be audited before any UI runtime is added. The console must not
-create privileged bypasses around policy, audit, approval, redaction, module
-activation, provider hardening, runtime config, or release gates.
+AION-088 adds that audited view-model layer. Operator Console view models are
+read-only backend contracts that summarize existing Brain state, map source
+services into redacted sections, expose descriptor-only actions, and return
+unavailable sections when optional services are missing. The API, SDK, and CLI
+surface is read-only and frontend-agnostic.
 
-No frontend dependencies, API routes, SDK resources, CLI commands, migrations,
-module activation, code loading, package installation, external calls, or
-runtime registration are part of AION-087.
+Future UI consumes these existing APIs and CLI-backed dry-run workflows. The
+console must not create privileged bypasses around policy, audit, approval,
+redaction, module activation, provider hardening, runtime config, or release
+gates.
+
+AION-088 adds no runtime UI, no frontend dependencies, no migrations, no module
+activation, no code loading, no package installation, no external calls, no
+execution, and no runtime registration. It also preserves no raw prompt
+exposure, no hidden reasoning exposure, and no secret exposure.

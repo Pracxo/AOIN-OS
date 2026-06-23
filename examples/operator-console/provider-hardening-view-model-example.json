@@ -1,0 +1,46 @@
+{
+  "console_view_model_id": "console-view-example-provider-hardening",
+  "trace_id": "trace-console-provider-example",
+  "view": "model_provider_hardening",
+  "status": "ready",
+  "read_only": true,
+  "owner_scope": ["workspace:main"],
+  "title": "Model Provider Hardening",
+  "summary": "Read-only model provider hardening console view model.",
+  "sections": [
+    {
+      "section_key": "provider_readiness",
+      "title": "Provider Readiness",
+      "status": "ready",
+      "severity": "low",
+      "summary": "Provider readiness metadata is visible without external calls.",
+      "items": [
+        {
+          "source_key": "provider_readiness",
+          "external_calls_allowed": false,
+          "private_fields_displayed": false
+        }
+      ],
+      "data_sources": [],
+      "allowed_actions": [],
+      "forbidden_actions": [],
+      "blockers": [],
+      "warnings": [],
+      "refs": ["/brain/model-providers/readiness"],
+      "metadata": {
+        "read_only": true
+      }
+    }
+  ],
+  "global_actions": [],
+  "forbidden_actions": [],
+  "data_sources": [],
+  "generated_at": "2026-06-23T00:00:00Z",
+  "redaction_applied": true,
+  "safety_findings": [],
+  "metadata": {
+    "write_actions_enabled": false,
+    "frontend_enabled": false,
+    "descriptor_only_actions": true
+  }
+}

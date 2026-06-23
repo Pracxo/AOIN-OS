@@ -7,6 +7,10 @@ explicit milestones.
 
 Operator Console API contract audit and view-model extraction.
 
+Status: implemented as a backend-only read-only contract layer. It adds no
+runtime UI, no activation, no execution, no raw prompt exposure, no hidden
+reasoning exposure, and no secret exposure.
+
 ## AION-089
 
 Static local console prototype, no auth claim, no writes by default.

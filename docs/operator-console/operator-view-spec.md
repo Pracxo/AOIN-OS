@@ -21,3 +21,14 @@ runtime UI.
 | Lifecycle Review | retention and purge preview | `./scripts/aionctl.sh --scope workspace:main lifecycle evaluate` | candidate id, retention class, preview status | secret-like values | run lifecycle evaluation, run purge preview | hard delete records | What can be reviewed safely? |
 | Audit/Provenance | audit ledger and provenance hashes | `./scripts/audit-verify.sh` | audit id, hash, actor, timestamp, refs | raw prompts, hidden reasoning, raw headers, secrets | verify audit integrity | alter audit history | Is evidence traceable? |
 | Settings Safety | runtime config and feature flags | `./scripts/config-validate.sh` | feature key, default, override status, risk | env values, credentials | validate config snapshot | mutate production config | Are unsafe toggles disabled? |
+
+## AION-088 view model path
+
+The view spec now has a read-only API contract:
+`POST /brain/operator-console/view-model`. This endpoint returns redacted
+sections, data sources, descriptor-only actions, forbidden action descriptors,
+and refs.
+
+It adds no runtime UI, no frontend state, no activation, and no execution. It
+must preserve no raw prompt exposure, no hidden reasoning exposure, and no
+secret exposure.

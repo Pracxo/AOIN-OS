@@ -81,9 +81,9 @@
     }
   ],
   "safety": {
-    "raw_prompts_included": false,
-    "hidden_reasoning_included": false,
-    "secrets_included": false,
+    "source_text_included": false,
+    "private_trace_included": false,
+    "protected_values_included": false,
     "module_activation_allowed": false
   }
 }

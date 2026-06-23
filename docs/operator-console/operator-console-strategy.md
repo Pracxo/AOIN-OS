@@ -147,3 +147,12 @@ hidden reasoning, raw prompts, raw headers, raw provider payloads, or secrets.
 - Policy and audit gates are preserved end to end.
 - No-go conditions are accepted.
 - Frontend architecture is explicitly approved in a later milestone.
+
+## AION-088 read-only contract layer
+
+AION-088 adds the backend view-model extraction and API contract audit layer.
+It remains CLI/API-first and adds no runtime UI. View models are read-only,
+redacted, policy-gated, and frontend-agnostic.
+
+The contract preserves no raw prompt exposure, no hidden reasoning exposure, no
+secret exposure, no activation, and no execution. Actions are descriptors only.

@@ -1635,6 +1635,55 @@ class Settings(BaseSettings):
             "operator_max_queue_items_default",
         ),
     )
+    operator_console_view_models_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_CONSOLE_VIEW_MODELS_ENABLED",
+            "operator_console_view_models_enabled",
+        ),
+    )
+    operator_console_contract_audit_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_CONSOLE_CONTRACT_AUDIT_ENABLED",
+            "operator_console_contract_audit_enabled",
+        ),
+    )
+    operator_console_read_only: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_CONSOLE_READ_ONLY",
+            "operator_console_read_only",
+        ),
+    )
+    operator_console_write_actions_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_CONSOLE_WRITE_ACTIONS_ENABLED",
+            "operator_console_write_actions_enabled",
+        ),
+    )
+    operator_console_frontend_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_CONSOLE_FRONTEND_ENABLED",
+            "operator_console_frontend_enabled",
+        ),
+    )
+    operator_console_redaction_required: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_CONSOLE_REDACTION_REQUIRED",
+            "operator_console_redaction_required",
+        ),
+    )
+    operator_console_create_notifications_default: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_OPERATOR_CONSOLE_CREATE_NOTIFICATIONS_DEFAULT",
+            "operator_console_create_notifications_default",
+        ),
+    )
     security_scan_max_file_size_mb: int = Field(
         default=5,
         ge=1,

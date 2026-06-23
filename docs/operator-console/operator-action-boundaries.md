@@ -41,3 +41,12 @@ Future console actions must call existing governed APIs or CLI-backed dry-run
 paths. The console must not become a privileged backdoor around policy,
 approval, audit, module activation, provider hardening, or runtime config
 governance.
+
+## AION-088 descriptor boundary
+
+AION-088 exposes action descriptors only. The API and CLI can describe safe
+dry-run or review paths and can describe forbidden actions, but they do not
+execute them.
+
+The read-only action model keeps no runtime UI, no raw prompt exposure, no
+hidden reasoning exposure, no secret exposure, no activation, and no execution.

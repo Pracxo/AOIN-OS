@@ -1765,6 +1765,8 @@ class KernelDiagnostics:
                 "operator_runbook_registry",
                 "operator_control_tower_service",
                 "operator_snapshot_service",
+                "operator_console_view_model_service",
+                "operator_console_contract_audit_service",
             )
         )
         return [
@@ -1807,6 +1809,79 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Operator services are assembled.",
+            ),
+            self._result(
+                "operator_console_view_models_enabled",
+                "operator_console",
+                (
+                    "passed"
+                    if bool(getattr(settings, "operator_console_view_models_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Operator Console view models are enabled.",
+            ),
+            self._result(
+                "operator_console_contract_audit_enabled",
+                "operator_console",
+                (
+                    "passed"
+                    if bool(getattr(settings, "operator_console_contract_audit_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Operator Console contract audit is enabled.",
+            ),
+            self._result(
+                "operator_console_read_only",
+                "operator_console",
+                (
+                    "passed"
+                    if bool(getattr(settings, "operator_console_read_only", True))
+                    else "failed"
+                ),
+                "high",
+                "Operator Console remains read-only.",
+            ),
+            self._result(
+                "operator_console_write_actions_enabled",
+                "operator_console",
+                (
+                    "failed"
+                    if bool(getattr(settings, "operator_console_write_actions_enabled", False))
+                    else "passed"
+                ),
+                "high",
+                "Operator Console write actions remain disabled.",
+            ),
+            self._result(
+                "operator_console_frontend_enabled",
+                "operator_console",
+                (
+                    "failed"
+                    if bool(getattr(settings, "operator_console_frontend_enabled", False))
+                    else "passed"
+                ),
+                "high",
+                "Operator Console frontend remains disabled.",
+            ),
+            self._result(
+                "operator_console_redaction_required",
+                "operator_console",
+                (
+                    "passed"
+                    if bool(getattr(settings, "operator_console_redaction_required", True))
+                    else "failed"
+                ),
+                "high",
+                "Operator Console redaction is required.",
+            ),
+            self._result(
+                "operator_console_services_present",
+                "operator_console",
+                "passed" if services_present else "failed",
+                "high",
+                "Operator Console services are assembled.",
             ),
         ]
 

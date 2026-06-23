@@ -34,3 +34,11 @@ add a runtime UI.
 If a future view cannot prove redaction, it must show a blocker instead of the
 unsafe field. Operators should see enough context to decide what gate failed,
 not enough context to recover a secret or private reasoning trace.
+
+## AION-088 API contract safety
+
+AION-088 enforces redaction at the contract layer before any runtime UI exists.
+The console audit checks examples and docs for no raw prompt exposure, no
+hidden reasoning exposure, and no secret exposure.
+
+View models remain read-only. They allow no activation and no execution.

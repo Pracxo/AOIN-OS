@@ -1,0 +1,46 @@
+{
+  "console_view_model_id": "console-view-example-module-lifecycle",
+  "trace_id": "trace-console-module-example",
+  "view": "module_lifecycle",
+  "status": "warning",
+  "read_only": true,
+  "owner_scope": ["workspace:main"],
+  "title": "Module Lifecycle",
+  "summary": "Read-only module lifecycle console view model.",
+  "sections": [
+    {
+      "section_key": "module_activation",
+      "title": "Module Activation",
+      "status": "unavailable",
+      "severity": "medium",
+      "summary": "Module activation metadata is visible only as a blocked read path.",
+      "items": [],
+      "data_sources": [],
+      "allowed_actions": [],
+      "forbidden_actions": [],
+      "blockers": [
+        {
+          "source_key": "module_activation",
+          "status": "activation_disabled"
+        }
+      ],
+      "warnings": [],
+      "refs": ["/brain/module-activation/gates"],
+      "metadata": {
+        "read_only": true,
+        "activation_allowed": false
+      }
+    }
+  ],
+  "global_actions": [],
+  "forbidden_actions": [],
+  "data_sources": [],
+  "generated_at": "2026-06-23T00:00:00Z",
+  "redaction_applied": true,
+  "safety_findings": [],
+  "metadata": {
+    "write_actions_enabled": false,
+    "frontend_enabled": false,
+    "descriptor_only_actions": true
+  }
+}

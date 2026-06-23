@@ -172,3 +172,13 @@ policy, hide audit refs.
 
 No-go conditions: hard delete enabled, lifecycle states unclear, policy bypass
 risk, missing audit trail.
+
+## AION-088 workflow extraction
+
+AION-088 exposes workflow maps through
+`GET /brain/operator-console/workflows`. The maps are read-only and describe
+safe inspection order only. They add no runtime UI, no activation, no
+execution, and no external calls.
+
+Workflow sections must keep no raw prompt exposure, no hidden reasoning
+exposure, and no secret exposure.

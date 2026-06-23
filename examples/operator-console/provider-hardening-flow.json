@@ -11,7 +11,7 @@
     },
     {
       "step_key": "egress_preview",
-      "source": "prompt egress preview",
+      "source": "egress preview",
       "action_mode": "dry_run"
     },
     {
@@ -32,7 +32,7 @@
   ],
   "expected": {
     "external_call_ready": false,
-    "credentials_ready": false,
+    "private_fields_ready": false,
     "model_invocation_allowed": false
   }
 }

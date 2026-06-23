@@ -127,6 +127,11 @@ allowed_actions := {
 	"operator.snapshot.read",
 	"operator.readiness.read",
 	"operator.runbooks.read",
+	"operator_console.view.read",
+	"operator_console.workflow.read",
+	"operator_console.audit.run",
+	"operator_console.action.describe",
+	"operator_console.query",
 	"dialogue.session.create",
 	"dialogue.session.read",
 	"dialogue.session.update",
@@ -2004,6 +2009,19 @@ decision := {
 	valid_risk
 	operator_read_action
 	operator_reader
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "operator_console_audit_allowed",
+	"constraints": ["read_only", "redacted", "no_frontend_runtime"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "operator_console.audit.run"
+	operator_console_auditor
 }
 
 decision := {
@@ -6138,6 +6156,46 @@ operator_read_action if {
 
 operator_read_action if {
 	input.action_type == "operator.runbooks.read"
+}
+
+operator_read_action if {
+	input.action_type == "operator_console.view.read"
+}
+
+operator_read_action if {
+	input.action_type == "operator_console.workflow.read"
+}
+
+operator_read_action if {
+	input.action_type == "operator_console.action.describe"
+}
+
+operator_read_action if {
+	input.action_type == "operator_console.query"
+}
+
+operator_console_auditor if {
+	dev_owner
+}
+
+operator_console_auditor if {
+	admin_or_owner
+}
+
+operator_console_auditor if {
+	input.context.actor_context.roles[_] == "operator"
+}
+
+operator_console_auditor if {
+	input.context.actor_context.roles[_] == "auditor"
+}
+
+operator_console_auditor if {
+	input.context.actor_context.permissions[_] == input.action_type
+}
+
+operator_console_auditor if {
+	input.context.permissions[_] == input.action_type
 }
 
 operator_reader if {

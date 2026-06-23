@@ -965,9 +965,13 @@ only; they do not represent provider activation or model calls.
 
 ## Operator Console Projection Note
 
-Future console visualizations use existing visual telemetry nodes and existing
-operator, release, module, provider, notification, incident, registry,
-lifecycle, audit, and provenance records.
+Future console visualizations use read-only console view models, existing
+visual telemetry nodes, and existing operator, release, module, provider,
+notification, incident, registry, lifecycle, audit, and provenance records.
 
-AION-087 adds no new visual node types, no renderer, no runtime UI, and no
-frontend dependencies.
+AION-088 adds backend visual telemetry vocabulary for
+`operator_console_view_model_created`,
+`operator_console_contract_audit_completed`, `operator_console_view`, and
+`operator_console_audit`. It adds no renderer, no runtime UI, no frontend
+dependencies, no activation, and no execution. Console telemetry must preserve
+no raw prompt exposure, no hidden reasoning exposure, and no secret exposure.

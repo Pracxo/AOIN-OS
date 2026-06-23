@@ -106,16 +106,23 @@ def test_operator_console_docs_state_required_boundaries() -> None:
         assert statement.lower() in combined.lower()
 
 
-def test_operator_console_does_not_change_runtime_surfaces() -> None:
+def test_operator_console_does_not_add_frontend_or_write_surfaces() -> None:
     changed = _changed_files()
-    assert not any(path.startswith("services/brain-api/src/aion_brain/api/") for path in changed)
-    assert not any(
-        path.startswith("packages/aion-sdk-python/aion_sdk/resources/") for path in changed
-    )
-    assert not any(
-        path.startswith("packages/aion-sdk-python/aionctl/commands/") for path in changed
-    )
     assert not any(Path(path).name in _FRONTEND_FILES for path in changed)
+    changed_text = "\n".join(
+        (ROOT / path).read_text(errors="ignore")
+        for path in changed
+        if (ROOT / path).is_file() and Path(path).suffix in {".py", ".md", ".json", ".sh"}
+        and Path(path).name != "test_operator_console_strategy_docs.py"
+    ).lower()
+    for forbidden in [
+        "activate-module",
+        "execute-tool",
+        "npm install",
+        "create vite",
+        "tailwindcss",
+    ]:
+        assert forbidden not in changed_text
 
 
 _FRONTEND_FILES = {

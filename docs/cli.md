@@ -672,8 +672,8 @@ credentials, invoke models, or execute tools.
 
 ## Operator Console Strategy Commands
 
-AION-087 does not add CLI commands. The future Operator Console workflow map
-reuses existing CLI/API paths:
+AION-087 did not add CLI commands. The strategy workflow map still reuses
+existing CLI/API paths:
 
 ```bash
 ./scripts/operator-console-check.sh
@@ -690,3 +690,19 @@ Operator console work remains CLI/API-first. It must not expose raw prompts,
 hidden reasoning, secrets, provider credentials, or raw provider payloads. It
 must not activate modules, activate capabilities, load code, install packages,
 register routes, enable external model calls, or bypass policy.
+
+## Operator Console Read-Only Commands
+
+AION-088 adds read-only CLI access to the Operator Console view-model contract:
+
+```bash
+aionctl operator-console views
+aionctl operator-console view-model --view overview
+aionctl operator-console audit
+aionctl operator-console workflows
+aionctl operator-console demo-map
+```
+
+These commands call the SDK resource only. They add no runtime UI, no raw prompt
+exposure, no hidden reasoning exposure, no secret exposure, no activation, and
+no execution.

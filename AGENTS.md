@@ -118,6 +118,14 @@ Instructions for future Codex runs in this repository:
   mutate memory, invoke capabilities, change runtime config, or remediate issues.
 - Operator action recommendations must stay generic and domain-neutral.
 - Operator acknowledgements must not resolve source issues.
+- Operator Console view models are read-only backend contracts; they are not a
+  runtime UI.
+- Operator Console work must preserve no raw prompt exposure, no hidden
+  reasoning exposure, no secret exposure, no activation, and no execution.
+- Operator Console actions are descriptors only unless a later explicit
+  milestone adds governed write behavior.
+- Operator Console contract audits must fail closed when frontend package or
+  config files appear in the scanned tree.
 - Future UI work must consume Operator contracts rather than querying subsystem
   internals directly.
 - Dialogue work must remain backend contract work unless a future task

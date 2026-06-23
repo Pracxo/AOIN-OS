@@ -1,0 +1,15 @@
+{
+  "trace_id": "trace-console-example",
+  "actor_id": "dev-user",
+  "workspace_id": "dev-workspace",
+  "view": "overview",
+  "owner_scope": ["workspace:main"],
+  "include_actions": true,
+  "include_forbidden_actions": true,
+  "include_refs": true,
+  "metadata": {
+    "example": true,
+    "read_only": true
+  },
+  "created_by": "dev-user"
+}

@@ -1610,3 +1610,22 @@ handoff.
 Provider hardening actions are generic. External provider calls, credential
 storage, prompt transmission, model invocation, and tool execution remain
 denied in AION-086.
+
+## Operator Console Policy
+
+AION-088 adds read-only Operator Console actions:
+
+- `operator_console.view.read`
+- `operator_console.workflow.read`
+- `operator_console.audit.run`
+- `operator_console.action.describe`
+- `operator_console.query`
+
+View, workflow, action-descriptor, and query actions are low-risk scoped reads.
+The contract audit is a read-only local verification action for owners, admins,
+operators, auditors, or actors with the explicit permission.
+
+Policy must fail closed. Operator Console policy does not authorize runtime UI
+creation, frontend package files, activation, execution, code loading, package
+installation, dynamic route registration, external calls, raw prompt exposure,
+hidden reasoning exposure, secret exposure, or policy bypass.

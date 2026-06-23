@@ -343,6 +343,46 @@ Validate the strategy artifacts:
 ./scripts/operator-console-check.sh
 ```
 
+## Operator Console Read-Only View Models
+
+AION-088 adds a backend-only Operator Console view-model and audit contract.
+It is read-only and adds no runtime UI, no frontend dependencies, no activation,
+no execution, no package installation, no route registration, and no external
+calls.
+
+The view model APIs summarize existing Brain state, redact unsafe values, return
+unavailable sections when optional services are missing, and expose actions as
+descriptors only. The contract preserves no raw prompt exposure, no hidden
+reasoning exposure, and no secret exposure.
+
+Endpoints:
+
+- `GET /brain/operator-console/views`
+- `POST /brain/operator-console/view-model`
+- `POST /brain/operator-console/audit`
+- `GET /brain/operator-console/workflows`
+- `GET /brain/operator-console/demo-map`
+
+SDK/CLI access:
+
+```bash
+aionctl operator-console views
+aionctl operator-console view-model --view overview
+aionctl operator-console audit
+aionctl operator-console workflows
+aionctl operator-console demo-map
+./scripts/operator-console-contract-check.sh
+```
+
+Contract docs:
+
+- [View model contract](docs/operator-console/view-model-contract.md)
+- [Data source map](docs/operator-console/data-source-map.md)
+- [API contract audit](docs/operator-console/api-contract-audit.md)
+- [Read-only action model](docs/operator-console/read-only-action-model.md)
+- [View redaction rules](docs/operator-console/view-redaction-rules.md)
+- [Console API examples](docs/operator-console/console-api-examples.md)
+
 ## v0.1 Final Local Release Path
 
 AION Brain v0.1.0 is a local release baseline. The final scripts aggregate

@@ -1,0 +1,11 @@
+{
+  "trace_id": "trace-console-audit-example",
+  "owner_scope": ["workspace:main"],
+  "views": ["overview", "module_lifecycle", "model_provider_hardening"],
+  "include_examples": true,
+  "metadata": {
+    "example": true,
+    "read_only": true
+  },
+  "created_by": "dev-user"
+}

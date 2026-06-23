@@ -1591,3 +1591,27 @@ AION-086 adds provider-readiness contracts:
 These contracts describe readiness metadata only. They must not include API
 keys, provider SDK objects, provider endpoints, raw prompts, hidden reasoning,
 credential payloads, model invocation results, or tool execution records.
+
+## Operator Console Contracts
+
+AION-088 adds read-only Operator Console contracts:
+
+- `ConsoleView`
+- `ConsoleDataSource`
+- `ConsoleActionDescriptor`
+- `ConsoleViewSection`
+- `ConsoleViewModelRequest`
+- `ConsoleViewModel`
+- `ConsoleAuditRequest`
+- `ConsoleAuditResult`
+- `ConsoleWorkflowStep`
+- `ConsoleWorkflowMap`
+
+These contracts summarize existing Brain state for future UI consumers. They
+are redacted and read-only, expose actions as descriptors only, and return
+unavailable sections when optional source services are missing.
+
+Operator Console contracts must preserve no runtime UI, no raw prompt exposure,
+no hidden reasoning exposure, no secret exposure, no activation, no execution,
+no external calls, no package installation, no code loading, and no privileged
+policy bypass.
