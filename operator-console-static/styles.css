@@ -212,7 +212,8 @@ h1 {
   padding: 16px;
 }
 
-.module-dashboard {
+.module-dashboard,
+.operator-actions-panel {
   margin-top: 22px;
   padding: 18px;
   border: 1px solid var(--border);
@@ -220,7 +221,8 @@ h1 {
   background: rgb(7 10 15 / 68%);
 }
 
-.module-dashboard.is-muted {
+.module-dashboard.is-muted,
+.operator-actions-panel.is-muted {
   border-style: dashed;
 }
 

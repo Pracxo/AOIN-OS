@@ -132,6 +132,15 @@ allowed_actions := {
 	"operator_console.audit.run",
 	"operator_console.action.describe",
 	"operator_console.query",
+	"operator_action.request.create",
+	"operator_action.request.read",
+	"operator_action.request.update",
+	"operator_action.preview.create",
+	"operator_action.preview.read",
+	"operator_action.blocker.read",
+	"operator_action.blocker.update",
+	"operator_action.review",
+	"operator_action.query",
 	"dialogue.session.create",
 	"dialogue.session.read",
 	"dialogue.session.update",
@@ -2048,6 +2057,32 @@ decision := {
 	valid_risk
 	input.action_type == "operator.snapshot.create"
 	operator_snapshot_writer
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "operator_action_read_allowed",
+	"constraints": ["dry_run_only", "read_only", "no_execution"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	operator_action_read
+	operator_reader
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "operator_action_write_allowed",
+	"constraints": ["dry_run_only", "record_only", "no_execution", "no_external_calls", "no_activation"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	operator_action_write
+	operator_writer
 }
 
 decision := {
@@ -6172,6 +6207,42 @@ operator_read_action if {
 
 operator_read_action if {
 	input.action_type == "operator_console.query"
+}
+
+operator_action_read if {
+	input.action_type == "operator_action.request.read"
+}
+
+operator_action_read if {
+	input.action_type == "operator_action.preview.read"
+}
+
+operator_action_read if {
+	input.action_type == "operator_action.blocker.read"
+}
+
+operator_action_read if {
+	input.action_type == "operator_action.query"
+}
+
+operator_action_write if {
+	input.action_type == "operator_action.request.create"
+}
+
+operator_action_write if {
+	input.action_type == "operator_action.request.update"
+}
+
+operator_action_write if {
+	input.action_type == "operator_action.preview.create"
+}
+
+operator_action_write if {
+	input.action_type == "operator_action.blocker.update"
+}
+
+operator_action_write if {
+	input.action_type == "operator_action.review"
 }
 
 operator_console_auditor if {

@@ -83,6 +83,13 @@ localhost guard, redaction list, unavailable-state rendering, and descriptor
 model. That future work still requires explicit architecture approval before
 adding a framework, auth model, write path, or governed action flow.
 
+## AION-092 operator actions panel
+
+The static console includes an Operator Actions panel backed by local demo
+JSON. The panel renders dry-run request previews, blocked effects, blockers,
+and review state. It does not add package files, build tooling, activation,
+external calls, or an execution path.
+
 ## No-go conditions
 
 - A frontend dependency or build tool is introduced.

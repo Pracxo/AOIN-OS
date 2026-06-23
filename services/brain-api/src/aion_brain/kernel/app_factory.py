@@ -59,6 +59,7 @@ from aion_brain.api.modules import router as modules_router
 from aion_brain.api.notifications import router as notifications_router
 from aion_brain.api.observability import router as observability_router
 from aion_brain.api.operator import router as operator_router
+from aion_brain.api.operator_actions import router as operator_actions_router
 from aion_brain.api.operator_console import router as operator_console_router
 from aion_brain.api.outbox import router as outbox_router
 from aion_brain.api.outcomes import router as outcomes_router
@@ -194,6 +195,7 @@ ROUTERS = (
     visual_router,
     observability_router,
     operator_router,
+    operator_actions_router,
     operator_console_router,
     replay_router,
     regression_router,

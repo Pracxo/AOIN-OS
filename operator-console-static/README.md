@@ -64,3 +64,25 @@ Validate the module dashboard:
 ./scripts/module-lifecycle-dashboard-check.sh
 ./scripts/operator-console-static-demo.sh --offline-ok --skip-api
 ```
+
+## Operator Actions Panel
+
+AION-092 adds a static Operator Actions panel for dry-run request previews,
+blocked effects, blockers, and review records.
+
+Offline demo files:
+
+- `demo-data/operator-action-preview.json`
+- `demo-data/operator-action-blockers.json`
+- `demo-data/operator-action-review.json`
+
+The panel does not run actions. It renders `execution_allowed=false`,
+`external_calls_allowed=false`, `activation_allowed=false`, and
+`would_execute=false`.
+
+Validate the panel:
+
+```bash
+./scripts/operator-actions-check.sh
+./scripts/operator-console-static-check.sh
+```

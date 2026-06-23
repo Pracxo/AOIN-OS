@@ -83,6 +83,7 @@ class ActionCenterService:
         generated.extend(self._blocked_model_output_items(scope))
         generated.extend(self._response_candidate_items(scope))
         generated.extend(self._tool_intent_items(scope))
+        generated.extend(self._operator_action_blocker_items(scope))
         generated.extend(self._high_risk_action_proposal_items(scope))
         generated.extend(self._approval_waiting_action_proposal_items(scope))
         generated.extend(self._blocked_handoff_items())
@@ -1204,6 +1205,39 @@ class ActionCenterService:
             )
             for item in items
             if getattr(item, "status", None) in {"proposed", "under_review", "blocked"}
+        ]
+
+    def _operator_action_blocker_items(self, scope: list[str]) -> list[OperatorActionItem]:
+        source = self._sources.get("operator_action_blocker_service")
+        list_blockers = getattr(source, "list_blockers", None)
+        if not callable(list_blockers):
+            return []
+        try:
+            items = list_blockers(scope, status="open", limit=100)
+        except Exception:
+            return []
+        return [
+            _action_item(
+                source_type="generic",
+                source_id=_id_for(item, "operator_action_blocker_id"),
+                trace_id=getattr(item, "trace_id", None),
+                category="operator",
+                severity=getattr(item, "severity", "high"),
+                title="Operator action request is blocked.",
+                description="A dry-run operator action request has a blocker to review.",
+                recommended_action="review_operator_action_preview",
+                runbook_ref="docs/operator-console/governed-operator-actions.md",
+                scope=scope or ["workspace:main"],
+                metadata={
+                    "status": getattr(item, "status", "open"),
+                    "blocker_type": getattr(item, "blocker_type", None),
+                    "operator_action_request_id": getattr(
+                        item, "operator_action_request_id", None
+                    ),
+                    "execution_allowed": False,
+                },
+            )
+            for item in items
         ]
 
     def _approval_waiting_action_proposal_items(self, scope: list[str]) -> list[OperatorActionItem]:

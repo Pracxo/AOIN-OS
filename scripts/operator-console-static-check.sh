@@ -20,6 +20,9 @@ required_files=(
   operator-console-static/demo-data/module-activation-blockers.json
   operator-console-static/demo-data/module-mock-runtime-trail.json
   operator-console-static/demo-data/module-review-checklist.json
+  operator-console-static/demo-data/operator-action-preview.json
+  operator-console-static/demo-data/operator-action-blockers.json
+  operator-console-static/demo-data/operator-action-review.json
   docs/operator-console/static-console-prototype.md
   docs/operator-console/static-console-runbook.md
   docs/operator-console/static-console-safety-review.md
@@ -28,8 +31,13 @@ required_files=(
   docs/operator-console/generic-knowledge-trail-view.md
   docs/operator-console/module-review-panel.md
   docs/operator-console/module-dashboard-safety-review.md
+  docs/operator-console/governed-operator-actions.md
+  docs/operator-console/action-preview-panel.md
+  docs/operator-console/action-review-flow.md
+  docs/operator-console/action-boundary-matrix.md
   docs/adr/0080-static-local-operator-console-prototype.md
   docs/adr/0081-read-only-module-lifecycle-dashboard.md
+  docs/adr/0083-governed-operator-actions-dry-run-only.md
 )
 
 for file in "${required_files[@]}"; do
@@ -103,6 +111,11 @@ grep -q "0080-static-local-operator-console-prototype.md" docs/adr/README.md || 
 
 grep -q "0081-read-only-module-lifecycle-dashboard.md" docs/adr/README.md || {
   echo "ADR 0081 is not indexed" >&2
+  exit 1
+}
+
+grep -q "0083-governed-operator-actions-dry-run-only.md" docs/adr/README.md || {
+  echo "ADR 0083 is not indexed" >&2
   exit 1
 }
 

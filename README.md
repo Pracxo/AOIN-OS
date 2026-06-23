@@ -3801,3 +3801,31 @@ Developer commands:
 
 The Python SDK exposes the same surface through
 `client.model_provider_hardening`.
+
+## Governed Operator Actions
+
+AION-092 adds dry-run governed operator action records:
+
+- `POST /brain/operator-actions/requests`
+- `GET /brain/operator-actions/requests/{operator_action_request_id}`
+- `GET /brain/operator-actions/requests`
+- `POST /brain/operator-actions/requests/{operator_action_request_id}/preview`
+- `GET /brain/operator-actions/previews`
+- `GET /brain/operator-actions/blockers`
+- `POST /brain/operator-actions/blockers/{operator_action_blocker_id}/dismiss`
+- `POST /brain/operator-actions/requests/{operator_action_request_id}/review`
+- `GET /brain/operator-actions/reviews`
+- `POST /brain/operator-actions/query`
+
+Requests, previews, blockers, and reviews are local governance records only.
+They keep `mode=dry_run`, `execution_allowed=false`,
+`external_calls_allowed=false`, and `activation_allowed=false`.
+
+Developer commands:
+
+```bash
+./scripts/operator-actions-check.sh
+./scripts/aionctl.sh --scope workspace:main operator-actions request --action-key operator.review
+./scripts/aionctl.sh --scope workspace:main operator-actions requests
+./scripts/aionctl.sh --scope workspace:main operator-actions blockers
+```

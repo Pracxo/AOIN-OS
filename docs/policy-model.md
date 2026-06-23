@@ -1629,3 +1629,22 @@ Policy must fail closed. Operator Console policy does not authorize runtime UI
 creation, frontend package files, activation, execution, code loading, package
 installation, dynamic route registration, external calls, raw prompt exposure,
 hidden reasoning exposure, secret exposure, or policy bypass.
+
+## Governed Operator Action Policy
+
+AION-092 adds generic operator action policy verbs:
+
+- `operator_action.request.create`
+- `operator_action.request.read`
+- `operator_action.request.update`
+- `operator_action.preview.create`
+- `operator_action.preview.read`
+- `operator_action.blocker.read`
+- `operator_action.blocker.update`
+- `operator_action.review`
+- `operator_action.query`
+
+Read and query actions require scoped operator read access. Request creation,
+preview creation, blocker updates, and review records require scoped operator
+write access. Policy constraints remain `dry_run_only`, `no_execution`,
+`no_external_calls`, and `no_activation`.

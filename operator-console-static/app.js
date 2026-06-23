@@ -21,6 +21,7 @@
     release_candidate: "demo-data/release-readiness-view-model.json",
     module_lifecycle: "demo-data/module-lifecycle-dashboard.json",
     model_provider_hardening: "demo-data/provider-hardening-view-model.json",
+    operator_actions: "demo-data/operator-action-preview.json",
     incidents: "demo-data/incidents-view-model.json",
     registry_integrity: "demo-data/settings-safety-view-model.json",
     settings_safety: "demo-data/settings-safety-view-model.json",
@@ -31,6 +32,11 @@
     module_activation_blockers: "demo-data/module-activation-blockers.json",
     module_mock_runtime_trail: "demo-data/module-mock-runtime-trail.json",
     module_review_checklist: "demo-data/module-review-checklist.json"
+  };
+  var OPERATOR_ACTION_DEMOS = {
+    preview: "demo-data/operator-action-preview.json",
+    blockers: "demo-data/operator-action-blockers.json",
+    review: "demo-data/operator-action-review.json"
   };
   var apiConfig = resolveApiBase();
   var state = {
@@ -125,6 +131,10 @@
       loadModuleLifecycleDemo();
       return;
     }
+    if (view === "operator_actions") {
+      loadOperatorActionsDemo();
+      return;
+    }
     var demoPath = VIEW_DEMOS[view] || VIEW_DEMOS.overview;
     fetchJson(demoPath)
       .then(function (model) {
@@ -153,6 +163,23 @@
       })
       .catch(function () {
         renderUnavailable("module_lifecycle");
+      });
+  }
+
+  function loadOperatorActionsDemo() {
+    Promise.all([
+      fetchJson(OPERATOR_ACTION_DEMOS.preview),
+      fetchJson(OPERATOR_ACTION_DEMOS.blockers),
+      fetchJson(OPERATOR_ACTION_DEMOS.review)
+    ])
+      .then(function (payloads) {
+        var model = payloads[0];
+        model.operator_action_blockers = payloads[1];
+        model.operator_action_review = payloads[2];
+        renderView(redact(model));
+      })
+      .catch(function () {
+        renderUnavailable("operator_actions");
       });
   }
 
@@ -208,6 +235,7 @@
       Array.isArray(model.forbidden_actions) ? model.forbidden_actions : collectActions(model)
     );
     renderModuleLifecycleDashboard(model);
+    renderOperatorActionsPanel(model);
   }
 
   function renderUnavailable(view) {
@@ -428,6 +456,137 @@
       row.appendChild(status);
       container.appendChild(row);
     });
+  }
+
+  function renderOperatorActionsPanel(model) {
+    var isOperatorActionView = model && model.view === "operator_actions";
+    var panel = document.getElementById("operator-actions-panel");
+    if (!panel) {
+      return;
+    }
+    panel.classList.toggle("is-muted", !isOperatorActionView);
+    document.getElementById("operator-actions-summary").textContent = isOperatorActionView
+      ? safeText(model.summary || "Dry-run operator action preview is visible.")
+      : "Select Operator Actions to inspect dry-run request records.";
+    renderOperatorActionSafety(isOperatorActionView ? model : defaultOperatorActionSafety());
+    renderOperatorActionEffects(
+      "operator-action-effects",
+      isOperatorActionView && Array.isArray(model.expected_effects) ? model.expected_effects : [],
+      "Expected effects render here."
+    );
+    renderOperatorActionEffects(
+      "operator-action-blocked-effects",
+      isOperatorActionView && Array.isArray(model.blocked_effects) ? model.blocked_effects : [],
+      "Blocked effects render here."
+    );
+    renderOperatorActionBlockers(isOperatorActionView ? operatorActionBlockers(model) : []);
+    renderOperatorActionReview(isOperatorActionView ? model.operator_action_review || model : null);
+  }
+
+  function defaultOperatorActionSafety() {
+    return {
+      execution_allowed: false,
+      external_calls_allowed: false,
+      activation_allowed: false,
+      would_execute: false
+    };
+  }
+
+  function renderOperatorActionSafety(labels) {
+    var container = document.getElementById("operator-action-safety");
+    container.textContent = "";
+    [
+      "execution_allowed",
+      "external_calls_allowed",
+      "activation_allowed",
+      "would_execute"
+    ].forEach(function (key) {
+      var card = document.createElement("div");
+      card.className = "safety-card";
+      card.textContent = key + "=" + String(Boolean(labels && labels[key]));
+      container.appendChild(card);
+    });
+  }
+
+  function renderOperatorActionEffects(containerId, effects, emptyMessage) {
+    var container = document.getElementById(containerId);
+    container.textContent = "";
+    if (!effects.length) {
+      container.appendChild(emptyNote(emptyMessage));
+      return;
+    }
+    effects.forEach(function (effect) {
+      var row = document.createElement("div");
+      row.className = "checklist-row";
+      var label = document.createElement("span");
+      label.textContent = safeText(effect.effect || "effect");
+      var status = document.createElement("strong");
+      status.textContent = safeText(
+        effect.blocked ? "blocked" : "would_execute=" + String(Boolean(effect.would_execute))
+      );
+      row.appendChild(label);
+      row.appendChild(status);
+      container.appendChild(row);
+    });
+  }
+
+  function renderOperatorActionBlockers(blockers) {
+    var container = document.getElementById("operator-action-blockers");
+    container.textContent = "";
+    if (!blockers.length) {
+      container.appendChild(emptyNote("Operator action blockers render here."));
+      return;
+    }
+    blockers.forEach(function (blocker) {
+      var card = document.createElement("div");
+      card.className = "blocker-badge";
+      var key = document.createElement("strong");
+      key.textContent = safeText(blocker.blocker_key || blocker.blocker_type || "blocker");
+      var message = document.createElement("span");
+      message.textContent = safeText(blocker.message || blocker.reason || "Blocked by design.");
+      var bypass = document.createElement("small");
+      bypass.textContent = "bypassable=" + String(Boolean(blocker.bypassable));
+      card.appendChild(key);
+      card.appendChild(message);
+      card.appendChild(bypass);
+      container.appendChild(card);
+    });
+  }
+
+  function renderOperatorActionReview(panel) {
+    var container = document.getElementById("operator-action-review");
+    container.textContent = "";
+    var review = panel && panel.review ? panel.review : panel;
+    if (!review || !review.decision) {
+      container.appendChild(emptyNote("Operator action review records render here."));
+      return;
+    }
+    [
+      ["decision", review.decision],
+      ["approval_present", String(Boolean(review.approval_present))],
+      ["execution_allowed", String(Boolean(review.execution_allowed))]
+    ].forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "checklist-row";
+      var label = document.createElement("span");
+      label.textContent = item[0];
+      var value = document.createElement("strong");
+      value.textContent = safeText(item[1]);
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
+    });
+  }
+
+  function operatorActionBlockers(model) {
+    var blockers = [];
+    if (Array.isArray(model.blockers)) {
+      blockers = blockers.concat(model.blockers);
+    }
+    if (model.operator_action_blockers && Array.isArray(model.operator_action_blockers.blockers)) {
+      blockers = blockers.concat(model.operator_action_blockers.blockers);
+    }
+    return blockers;
   }
 
   function lifecycleBlockers(model) {

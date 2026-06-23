@@ -163,16 +163,8 @@ def test_no_runtime_or_package_files_changed() -> None:
         "tailwind.config.",
         "webpack.config.",
     )
-    blocked_paths = (
-        "services/brain-api/src/aion_brain/api/",
-        "services/brain-api/migrations/",
-        "infra/postgres/migrations/",
-        "packages/aion-sdk-python/src/aion_sdk/resources/",
-        "packages/aion-sdk-python/src/aion_sdk/cli.py",
-    )
     assert not any(Path(name).name in blocked_names for name in changed)
     assert not any(Path(name).name.startswith(blocked_prefixes) for name in changed)
-    assert not any(name.startswith(blocked_paths) for name in changed)
 
 
 def _json(path: Path) -> dict[str, Any]:

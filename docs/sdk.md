@@ -859,3 +859,22 @@ The SDK boundary remains unchanged: no frontend state, no runtime UI, no
 privileged bypass, no module activation, no execution, no provider credentials,
 no raw prompt exposure, no hidden reasoning exposure, no secret exposure, and
 no external model calls.
+
+## OperatorActionsResource
+
+`client.operator_actions` exposes dry-run governed operator action APIs.
+
+Useful methods include:
+
+- `create_request(payload)`
+- `get_request(operator_action_request_id, scope)`
+- `list_requests(scope, status=None, action_type=None, target_type=None, limit=100)`
+- `create_preview(operator_action_request_id, scope)`
+- `previews(scope, status=None, limit=100)`
+- `blockers(scope, operator_action_request_id=None, status=None, severity=None, limit=100)`
+- `dismiss_blocker(operator_action_blocker_id, reason)`
+- `review(operator_action_request_id, payload)`
+- `reviews(scope, operator_action_request_id=None, decision=None, limit=100)`
+- `query(payload)`
+
+The SDK does not expose an execution command for operator actions.

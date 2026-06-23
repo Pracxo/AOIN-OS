@@ -197,3 +197,13 @@ manifest -> intake -> slot -> bindings -> validation -> conformance
 The static panel shows safe blockers, synthetic mock runtime output, evidence
 refs, and review checklist status. It does not add activation, execution,
 runtime registration, write actions, external calls, or new API routes.
+
+## AION-092 operator action workflow
+
+The governed operator action workflow is:
+
+```text
+request -> redaction -> policy gate -> blockers -> preview -> review -> query
+```
+
+The workflow creates records only. It does not add an execution step.

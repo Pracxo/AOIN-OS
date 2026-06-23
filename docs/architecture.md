@@ -1783,3 +1783,9 @@ checklist from static JSON or the existing read-only view-model API. It adds no
 new backend route, no runtime module activation, no code loading, no runtime
 registration, no write action, no external call, and no frontend dependency.
 Expected blockers are shown as safety evidence rather than hidden.
+
+AION-092 adds governed operator actions as a dry-run request-and-review layer.
+It creates request records, previews, blockers, and reviews behind policy,
+audit, provenance, and telemetry boundaries. It does not add an execution
+adapter, external-call adapter, activation path, runtime config write path, or
+frontend build system.

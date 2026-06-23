@@ -706,3 +706,19 @@ aionctl operator-console demo-map
 These commands call the SDK resource only. They add no runtime UI, no raw prompt
 exposure, no hidden reasoning exposure, no secret exposure, no activation, and
 no execution.
+
+## Governed Operator Action Commands
+
+AION-092 adds dry-run operator action commands through the SDK:
+
+```bash
+aionctl operator-actions request --action-key operator.review
+aionctl operator-actions requests
+aionctl operator-actions preview --request-id <operator-action-request-id>
+aionctl operator-actions blockers
+aionctl operator-actions review --request-id <operator-action-request-id>
+aionctl operator-actions query
+```
+
+These commands create or read local governance records only. They do not add a
+runtime action command, provider call, activation path, or external call path.

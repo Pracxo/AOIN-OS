@@ -41,6 +41,7 @@ from aion_sdk.cli.commands.module_mock_runtime import install_module_mock_runtim
 from aion_sdk.cli.commands.modules import install_modules_commands
 from aion_sdk.cli.commands.notifications import install_notification_commands
 from aion_sdk.cli.commands.operator import install_operator_commands
+from aion_sdk.cli.commands.operator_actions import install_operator_action_commands
 from aion_sdk.cli.commands.operator_console import install_operator_console_commands
 from aion_sdk.cli.commands.outcomes import install_outcome_commands
 from aion_sdk.cli.commands.performance import install_performance_commands
@@ -567,6 +568,7 @@ install_config_commands(app, get_client=_client, get_scope=_scope, render=_rende
 install_resilience_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_audit_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_operator_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_operator_action_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_operator_console_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_dialogue_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_belief_commands(app, get_client=_client, get_scope=_scope, render=_render)
