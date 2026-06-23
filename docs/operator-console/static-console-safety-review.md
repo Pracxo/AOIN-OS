@@ -43,3 +43,10 @@ The static console remains unauthenticated and local-only in AION-093. Local
 auth docs are design artifacts, not login implementation. No credentials are
 stored, no session material is created, no external identity provider is
 integrated, and no login endpoint is added.
+
+## AION-094 local auth panel review
+
+The Local Auth panel uses static demo JSON or localhost API status only. It has
+no login form, no credential field, no token field, no browser auth storage,
+and no write action. It displays role-filtered read-only output and blocked
+auth no-go warnings.

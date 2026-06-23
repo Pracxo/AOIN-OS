@@ -1,0 +1,36 @@
+{
+  "view": "local_auth_status",
+  "title": "Local Auth Status",
+  "status": "ready",
+  "summary": "Dev-only local auth simulation is enabled for read-only console filtering.",
+  "read_only": true,
+  "redaction_applied": true,
+  "production_auth_enabled": false,
+  "credentials_enabled": false,
+  "sessions_enabled": false,
+  "external_identity_provider_enabled": false,
+  "write_actions_enabled": false,
+  "sections": [
+    {
+      "section_key": "local_auth_boundaries",
+      "title": "Local Auth Boundaries",
+      "status": "ready",
+      "severity": "info",
+      "summary": "Production auth and write grants remain disabled.",
+      "blockers": [],
+      "warnings": [],
+      "refs": ["docs/auth/local-auth-runtime-boundaries.md"]
+    }
+  ],
+  "blockers": [],
+  "warnings": [],
+  "refs": ["docs/auth/local-auth-contract.md"],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Disabled in static prototype."},
+    {"action_key": "activate_capability", "reason": "Disabled in static prototype."},
+    {"action_key": "load_code", "reason": "Code loading is unavailable."},
+    {"action_key": "execute_tool", "reason": "Tool execution is unavailable."},
+    {"action_key": "enable_external_model_calls", "reason": "External calls are unavailable."},
+    {"action_key": "hard_delete", "reason": "Hard delete is unavailable."}
+  ]
+}

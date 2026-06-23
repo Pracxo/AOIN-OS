@@ -1684,6 +1684,60 @@ class Settings(BaseSettings):
             "operator_console_create_notifications_default",
         ),
     )
+    local_auth_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_LOCAL_AUTH_ENABLED", "local_auth_enabled"),
+    )
+    local_auth_dev_identity_simulation_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_LOCAL_AUTH_DEV_IDENTITY_SIMULATION_ENABLED",
+            "local_auth_dev_identity_simulation_enabled",
+        ),
+    )
+    local_auth_role_filtering_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_LOCAL_AUTH_ROLE_FILTERING_ENABLED",
+            "local_auth_role_filtering_enabled",
+        ),
+    )
+    local_auth_audit_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_LOCAL_AUTH_AUDIT_ENABLED",
+            "local_auth_audit_enabled",
+        ),
+    )
+    production_auth_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices("AION_PRODUCTION_AUTH_ENABLED", "production_auth_enabled"),
+    )
+    auth_credentials_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_AUTH_CREDENTIALS_ENABLED",
+            "auth_credentials_enabled",
+        ),
+    )
+    auth_sessions_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices("AION_AUTH_SESSIONS_ENABLED", "auth_sessions_enabled"),
+    )
+    external_identity_provider_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_EXTERNAL_IDENTITY_PROVIDER_ENABLED",
+            "external_identity_provider_enabled",
+        ),
+    )
+    local_auth_write_actions_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_LOCAL_AUTH_WRITE_ACTIONS_ENABLED",
+            "local_auth_write_actions_enabled",
+        ),
+    )
     operator_actions_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices(

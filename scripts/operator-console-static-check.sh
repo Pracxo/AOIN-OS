@@ -23,6 +23,8 @@ required_files=(
   operator-console-static/demo-data/operator-action-preview.json
   operator-console-static/demo-data/operator-action-blockers.json
   operator-console-static/demo-data/operator-action-review.json
+  operator-console-static/demo-data/local-auth-status.json
+  operator-console-static/demo-data/role-filtered-view-model.json
   docs/operator-console/static-console-prototype.md
   docs/operator-console/static-console-runbook.md
   docs/operator-console/static-console-safety-review.md

@@ -1659,3 +1659,18 @@ No production auth is implemented. No credentials are stored. No external
 identity provider is integrated. No login endpoint is added. Future auth work
 must bind role decisions to policy, audit, approval, autonomy, and redaction
 gates before any runtime session or production identity integration exists.
+
+## Local Auth Runtime Policy
+
+AION-094 adds generic policy actions:
+
+- `local_auth.roles.read`
+- `local_auth.identity.simulate`
+- `local_auth.console.filter`
+- `local_auth.audit.run`
+- `local_auth.status.read`
+
+These actions are scoped to dev-only local auth simulation, read-only status,
+role-aware console filtering, and local audit. Login, credential storage,
+session creation, production auth, external identity integration, execution,
+activation, and unknown local auth actions remain denied by default.

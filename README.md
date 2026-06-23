@@ -3830,12 +3830,15 @@ Developer commands:
 ./scripts/aionctl.sh --scope workspace:main operator-actions blockers
 ```
 
-## Local Auth Design
+## Local Auth
 
-AION-093 adds the local auth design for the future Operator Console. This is
-design-only. No production auth is implemented. No credentials are stored. No
-external identity provider is integrated. No login endpoint is added.
-ActorContext remains the current internal context mechanism, and policy
+AION-093 adds the local auth design for the future Operator Console. AION-094
+adds the dev-only local auth contract, synthetic identity simulation,
+role-aware console filtering, status, and audit surfaces.
+
+No production auth is implemented. No credentials are stored. No sessions are
+created. No external identity provider is integrated. No login endpoint is
+added. ActorContext remains the current internal context mechanism, and policy
 remains authoritative for backend access.
 
 Primary docs:
@@ -3849,9 +3852,15 @@ Primary docs:
 - `docs/auth/production-auth-prerequisites.md`
 - `docs/auth/auth-no-go-conditions.md`
 - `docs/auth/future-auth-implementation-plan.md`
+- `docs/auth/local-auth-contract.md`
+- `docs/auth/dev-identity-simulation.md`
+- `docs/auth/role-aware-console-filtering.md`
+- `docs/auth/local-auth-audit.md`
+- `docs/auth/local-auth-runtime-boundaries.md`
 
 Developer command:
 
 ```bash
 ./scripts/auth-design-check.sh
+./scripts/local-auth-check.sh
 ```

@@ -88,3 +88,10 @@ The Operator Actions view shows dry-run request metadata, expected effects,
 blocked effects, blockers, review decisions, and safety flags. It must render
 `execution_allowed=false`, `external_calls_allowed=false`,
 `activation_allowed=false`, and `would_execute=false`.
+
+## AION-094 local auth view
+
+The static console includes a Local Auth Status panel showing
+`production_auth_enabled=false`, `credentials_enabled=false`,
+`sessions_enabled=false`, `external_identity_provider_enabled=false`, and
+`write_actions_enabled=false`. The role filter demo is read-only and redacted.

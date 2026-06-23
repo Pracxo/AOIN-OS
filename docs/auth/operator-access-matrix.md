@@ -43,3 +43,10 @@
 
 Every allowed action remains subject to policy, audit, approval, autonomy, and
 redaction gates.
+
+## AION-094 Local Access Matrix
+
+AION-094 implements the local access matrix as role permissions. Viewer remains
+read-only, operator may request descriptor-only dry-runs, reviewer may create
+review records, admin remains future design-level only, and auditor may read
+audit/provenance views. All outputs remain redacted and read-only.

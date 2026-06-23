@@ -1,0 +1,12 @@
+{
+  "trace_id": "trace-local-auth-example",
+  "actor_id": "local.operator",
+  "workspace_id": "local",
+  "roles": ["operator"],
+  "owner_scope": ["workspace:main"],
+  "metadata": {
+    "example": true,
+    "synthetic": true
+  },
+  "created_by": "local.operator"
+}

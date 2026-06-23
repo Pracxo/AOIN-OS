@@ -38,6 +38,10 @@
     blockers: "demo-data/operator-action-blockers.json",
     review: "demo-data/operator-action-review.json"
   };
+  var LOCAL_AUTH_DEMOS = {
+    status: "demo-data/local-auth-status.json",
+    role_filter: "demo-data/role-filtered-view-model.json"
+  };
   var apiConfig = resolveApiBase();
   var state = {
     apiBase: apiConfig.apiBase,
@@ -47,6 +51,7 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     bindTabs();
+    loadLocalAuthPanels();
     loadView(state.activeView);
   });
 
@@ -121,6 +126,43 @@
     }).then(function (response) {
       if (!response.ok) {
         throw new Error("view model unavailable");
+      }
+      return response.json();
+    });
+  }
+
+  function loadLocalAuthPanels() {
+    var statusPromise = state.apiAllowed
+      ? fetchLocalAuthStatus().catch(function () {
+        return fetchJson(LOCAL_AUTH_DEMOS.status);
+      })
+      : fetchJson(LOCAL_AUTH_DEMOS.status);
+    Promise.all([
+      statusPromise,
+      fetchJson(LOCAL_AUTH_DEMOS.role_filter)
+    ])
+      .then(function (payloads) {
+        renderLocalAuthStatus(redact(payloads[0]));
+        renderLocalAuthRoleFilter(redact(payloads[1]));
+      })
+      .catch(function () {
+        renderLocalAuthStatus({
+          production_auth_enabled: false,
+          credentials_enabled: false,
+          sessions_enabled: false,
+          external_identity_provider_enabled: false,
+          write_actions_enabled: false,
+          no_go_warnings: ["local_auth_demo_unavailable"]
+        });
+        renderLocalAuthRoleFilter({ roles: [], removed_actions: [] });
+      });
+  }
+
+  function fetchLocalAuthStatus() {
+    var endpoint = state.apiBase + "/brain/local-auth/status?scope=workspace:main";
+    return fetch(endpoint).then(function (response) {
+      if (!response.ok) {
+        throw new Error("local auth status unavailable");
       }
       return response.json();
     });
@@ -572,6 +614,71 @@
       label.textContent = item[0];
       var value = document.createElement("strong");
       value.textContent = safeText(item[1]);
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
+    });
+  }
+
+  function renderLocalAuthStatus(status) {
+    var grid = document.getElementById("local-auth-status-grid");
+    var warnings = document.getElementById("local-auth-warnings");
+    if (!grid || !warnings) {
+      return;
+    }
+    grid.textContent = "";
+    [
+      "production_auth_enabled",
+      "credentials_enabled",
+      "sessions_enabled",
+      "external_identity_provider_enabled",
+      "write_actions_enabled"
+    ].forEach(function (key) {
+      var card = document.createElement("div");
+      card.className = "safety-card";
+      card.textContent = key + "=" + String(Boolean(status && status[key]));
+      grid.appendChild(card);
+    });
+    warnings.textContent = "";
+    var items = status && Array.isArray(status.no_go_warnings) ? status.no_go_warnings : [];
+    if (!items.length) {
+      warnings.appendChild(emptyNote("No-go warnings render here."));
+      return;
+    }
+    items.forEach(function (item) {
+      var badge = document.createElement("div");
+      badge.className = "blocker-badge";
+      var label = document.createElement("strong");
+      label.textContent = safeText(item);
+      var value = document.createElement("span");
+      value.textContent = "blocked by design";
+      badge.appendChild(label);
+      badge.appendChild(value);
+      warnings.appendChild(badge);
+    });
+  }
+
+  function renderLocalAuthRoleFilter(model) {
+    var container = document.getElementById("local-auth-role-filter");
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    [
+      ["roles", Array.isArray(model.roles) ? model.roles.join(", ") : "viewer"],
+      [
+        "removed_actions",
+        Array.isArray(model.removed_actions) ? model.removed_actions.join(", ") : ""
+      ],
+      ["read_only", String(Boolean(model.read_only !== false))],
+      ["redaction_applied", String(Boolean(model.redaction_applied !== false))]
+    ].forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "checklist-row";
+      var label = document.createElement("span");
+      label.textContent = item[0];
+      var value = document.createElement("strong");
+      value.textContent = safeText(item[1] || "none");
       row.appendChild(label);
       row.appendChild(value);
       container.appendChild(row);

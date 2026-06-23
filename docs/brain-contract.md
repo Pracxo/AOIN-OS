@@ -1634,3 +1634,15 @@ These contracts are dry-run governance records. `mode` must be `dry_run`.
 remain `false`. Reviews record decisions only; approval does not execute.
 Payloads are redacted before storage and contracts reject protected prompt,
 hidden reasoning, and secret-like content.
+
+## Local Auth Contracts
+
+AION-094 adds `LocalOperatorIdentity`, `LocalAuthContext`,
+`DevIdentitySimulationRequest`, `RolePermission`, `ConsoleRoleFilterRequest`,
+`ConsoleRoleFilterResult`, `LocalAuthAuditRequest`, and
+`LocalAuthAuditResult`.
+
+These contracts are dev-only and non-privileged. They require
+`production_auth=false`, `credentials_present=false`, `session_present=false`,
+`write_allowed=false`, `execute_allowed=false`, `activation_allowed=false`, and
+`external_calls_allowed=false` where applicable.

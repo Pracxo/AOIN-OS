@@ -152,6 +152,7 @@ class HardeningGateService:
         checks.extend(self._module_mock_checks())
         checks.extend(self._model_provider_hardening_checks())
         checks.extend(self._conformance_checks())
+        checks.extend(self._local_auth_checks())
         checks.extend(self._audit_integrity_checks())
         checks.append(self._control_catalog_check())
 
@@ -516,6 +517,40 @@ class HardeningGateService:
                 "No high-severity provider hardening blockers are open.",
                 "model_provider_hardening",
                 details={"count": len(high_blockers), "blocker_count": len(blockers)},
+            ),
+        ]
+
+    def _local_auth_checks(self) -> builtins.list[dict[str, Any]]:
+        return [
+            _check(
+                "production_auth_disabled",
+                "failed" if self._settings.production_auth_enabled else "passed",
+                "Production auth is disabled.",
+                "local_auth",
+            ),
+            _check(
+                "local_auth_material_disabled",
+                "failed" if self._settings.auth_credentials_enabled else "passed",
+                "Auth material handling is disabled.",
+                "local_auth",
+            ),
+            _check(
+                "auth_session_state_disabled",
+                "failed" if self._settings.auth_sessions_enabled else "passed",
+                "Auth session state is disabled.",
+                "local_auth",
+            ),
+            _check(
+                "external_identity_provider_disabled",
+                "failed" if self._settings.external_identity_provider_enabled else "passed",
+                "External identity provider integration is disabled.",
+                "local_auth",
+            ),
+            _check(
+                "local_auth_write_actions_disabled",
+                "failed" if self._settings.local_auth_write_actions_enabled else "passed",
+                "Local auth cannot grant write actions.",
+                "local_auth",
             ),
         ]
 

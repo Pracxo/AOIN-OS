@@ -32,3 +32,9 @@ Every stage must preserve ActorContext, policy, audit, approval, autonomy, and
 redaction boundaries. Any implementation that stores credentials, creates
 production sessions, integrates an external identity provider, or exposes
 login endpoints before its designated stage is blocked.
+
+## AION-094 Completed Scope
+
+AION-094 completes the safe local contract and simulation step only. It does
+not move production auth forward. Production authentication remains blocked
+until the later architecture decision and gated prototype milestones.

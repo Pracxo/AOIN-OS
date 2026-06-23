@@ -1,0 +1,35 @@
+{
+  "view": "role_filter_demo",
+  "title": "Role Filter Demo",
+  "status": "ready",
+  "summary": "Viewer role keeps read-only sections and removes dry-run action descriptors.",
+  "read_only": true,
+  "redaction_applied": true,
+  "actor_id": "local.viewer",
+  "roles": ["viewer"],
+  "sections": [
+    {
+      "section_key": "overview",
+      "title": "Filtered Overview",
+      "status": "ready",
+      "severity": "info",
+      "summary": "The viewer sees read-only console data.",
+      "blockers": [],
+      "warnings": [],
+      "refs": ["docs/auth/role-aware-console-filtering.md"]
+    }
+  ],
+  "removed_sections": [],
+  "removed_actions": ["run_dry_run_check", "create_review_record"],
+  "blockers": [],
+  "warnings": [],
+  "refs": ["docs/auth/role-aware-console-filtering.md"],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Disabled in static prototype."},
+    {"action_key": "activate_capability", "reason": "Disabled in static prototype."},
+    {"action_key": "load_code", "reason": "Code loading is unavailable."},
+    {"action_key": "execute_tool", "reason": "Tool execution is unavailable."},
+    {"action_key": "enable_external_model_calls", "reason": "External calls are unavailable."},
+    {"action_key": "hard_delete", "reason": "Hard delete is unavailable."}
+  ]
+}

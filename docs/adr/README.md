@@ -94,3 +94,4 @@ closure decision in ADR 0072.
 
 - [0083: Governed Operator Actions Dry-Run Only](0083-governed-operator-actions-dry-run-only.md) - Defines dry-run operator action requests, previews, blockers, and reviews without execution.
 - [0084: Local Auth Design For Operator Console](0084-local-auth-design-for-operator-console.md) - Defines local identity, session, role, access, threat, and no-go conditions without auth runtime.
+- [0085: Local Auth Contract and Dev Identity Simulation](0085-local-auth-contract-dev-identity-simulation.md) - Defines dev-only local auth contracts, identity simulation, role filtering, and audit boundaries.

@@ -68,3 +68,9 @@ findings, and export redacted summaries, but policy remains authoritative.
 
 No role may execute, activate, load code, register routes, enable providers,
 store credentials, hard delete, or bypass policy in this phase.
+
+## AION-094 local auth action filtering
+
+Role filtering may remove allowed action descriptors from a read-only view
+model when a local role cannot request them. It never adds write actions and
+keeps forbidden descriptors visible as safety evidence.

@@ -213,7 +213,8 @@ h1 {
 }
 
 .module-dashboard,
-.operator-actions-panel {
+.operator-actions-panel,
+.local-auth-panel {
   margin-top: 22px;
   padding: 18px;
   border: 1px solid var(--border);

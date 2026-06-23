@@ -189,7 +189,7 @@ class ConsoleViewModelRequest(BaseModel):
     @field_validator("metadata")
     @classmethod
     def metadata_must_be_safe(cls, value: dict[str, Any]) -> dict[str, Any]:
-        reject_secret_like_payload(value, "console view request metadata")
+        reject_console_view_request_metadata(value, "console view request metadata")
         return value
 
 
@@ -362,6 +362,46 @@ def reject_secret_like_payload(value: object, field_name: str) -> None:
     elif isinstance(value, list):
         for item in value:
             reject_secret_like_payload(item, field_name)
+    elif isinstance(value, str):
+        lowered = value.lower()
+        if any(marker in lowered for marker in _SECRET_VALUE_MARKERS):
+            raise ValueError(f"{field_name} must not contain unsafe text")
+
+
+def reject_console_view_request_metadata(value: dict[str, Any], field_name: str) -> None:
+    """Allow safe local-auth context metadata while preserving secret rejection."""
+    payload: dict[str, Any] = {}
+    for key, nested in value.items():
+        if key in {"local_auth_context", "auth_context"} and isinstance(nested, dict):
+            _validate_local_auth_context_metadata(nested, field_name)
+            continue
+        payload[key] = nested
+    reject_secret_like_payload(payload, field_name)
+
+
+def _validate_local_auth_context_metadata(value: dict[str, Any], field_name: str) -> None:
+    false_only = {
+        "write_allowed",
+        "execute_allowed",
+        "activation_allowed",
+        "external_calls_allowed",
+        "production_auth",
+        "session_present",
+        "credentials_present",
+    }
+    for key in false_only:
+        if value.get(key) is not False:
+            raise ValueError(f"{field_name} contains unsafe local auth context")
+    _reject_unsafe_values(value, field_name)
+
+
+def _reject_unsafe_values(value: object, field_name: str) -> None:
+    if isinstance(value, dict):
+        for nested in value.values():
+            _reject_unsafe_values(nested, field_name)
+    elif isinstance(value, list):
+        for item in value:
+            _reject_unsafe_values(item, field_name)
     elif isinstance(value, str):
         lowered = value.lower()
         if any(marker in lowered for marker in _SECRET_VALUE_MARKERS):

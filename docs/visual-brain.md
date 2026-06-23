@@ -989,3 +989,13 @@ AION-092 emits visual telemetry for:
 Visual node types are `operator_action_request`, `operator_action_preview`,
 `operator_action_blocker`, and `operator_action_review`. The projection remains
 frontend-agnostic and represents dry-run governance records only.
+
+## Local Auth Projection Note
+
+AION-094 emits visual telemetry for `local_auth_context_simulated`,
+`local_auth_console_filtered`, and `local_auth_audit_completed`.
+
+Node types are `local_auth_context` and `local_auth_audit`. These records
+represent dev-only simulation, read-only console filtering, and safety audit
+evidence. They do not represent login, production identity, sessions,
+credentials, execution, activation, or external identity provider integration.

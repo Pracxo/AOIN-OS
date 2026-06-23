@@ -195,3 +195,10 @@ The console still has no production auth claim. No credentials are stored. No
 external identity provider is integrated. No login endpoint is added. Future
 auth must preserve ActorContext, policy, audit, approval, autonomy, and
 redaction gates.
+
+## AION-094 local auth contract
+
+AION-094 adds dev-only identity simulation and role-aware console filtering.
+The console can preview how local roles affect read-only view models, but it
+still has no login UI, no credential input, no session persistence, no
+production auth, no execution, and no activation.
