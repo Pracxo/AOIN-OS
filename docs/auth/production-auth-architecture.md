@@ -6,6 +6,10 @@ AION-098 decides the future production auth architecture before any runtime auth
 is built. This is design only. No production auth is implemented in AION-098.
 No provider integration is added in AION-098. No credentials, tokens, sessions,
 or cookies are created, stored, issued, or accepted.
+
+AION-099 adds a disabled production auth prototype for status, mock claims
+preview, and audit only. It does not enable runtime auth or change the AION-098
+architecture decision.
 `production_auth_enabled` remains false.
 
 ## Current Local Auth State

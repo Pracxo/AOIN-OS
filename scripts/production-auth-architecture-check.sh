@@ -91,12 +91,16 @@ if git diff --name-only --diff-filter=ACMRT HEAD -- pyproject.toml services pack
   fi
 fi
 
-if git diff --name-only --diff-filter=ACMRT HEAD -- services/brain-api/src/aion_brain/api | rg -n 'auth|login|logout|session|token|cookie'; then
+if git diff --name-only --diff-filter=ACMRT HEAD -- services/brain-api/src/aion_brain/api \
+  | rg -v '^services/brain-api/src/aion_brain/api/auth_runtime.py$' \
+  | rg -n 'auth|login|logout|session|token|cookie'; then
   echo "AION-098 must not change auth runtime API routes" >&2
   exit 1
 fi
 
-if git ls-files --others --exclude-standard services/brain-api/src/aion_brain/api | rg -n 'auth|login|logout|session|token|cookie'; then
+if git ls-files --others --exclude-standard services/brain-api/src/aion_brain/api \
+  | rg -v '^services/brain-api/src/aion_brain/api/auth_runtime.py$' \
+  | rg -n 'auth|login|logout|session|token|cookie'; then
   echo "AION-098 must not add auth runtime API routes" >&2
   exit 1
 fi
@@ -193,8 +197,27 @@ runtime_prefixes = (
 allowed_runtime_tests = (
     "services/brain-api/tests/test_production_auth_architecture_docs.py",
 )
+allowed_aion_099_runtime = {
+    "services/brain-api/src/aion_brain/api/auth_runtime.py",
+    "services/brain-api/src/aion_brain/contracts/auth_runtime.py",
+    "services/brain-api/src/aion_brain/contracts/telemetry.py",
+    "services/brain-api/src/aion_brain/local_auth/audit.py",
+    "packages/aion-sdk-python/src/aion_sdk/resources/auth_runtime.py",
+    "packages/aion-sdk-python/src/aion_sdk/cli/commands/auth_runtime.py",
+    "packages/aion-sdk-python/tests/test_auth_runtime_resource.py",
+    "packages/aion-sdk-python/tests/test_cli_auth_runtime.py",
+    "services/brain-api/tests/test_auth_runtime_contracts.py",
+    "services/brain-api/tests/test_auth_runtime_redaction.py",
+    "services/brain-api/tests/test_auth_runtime_services.py",
+    "services/brain-api/tests/test_auth_runtime_audit.py",
+    "services/brain-api/tests/test_auth_runtime_api.py",
+    "services/brain-api/tests/test_kernel_auth_runtime_wiring.py",
+    "services/brain-api/tests/test_visual_telemetry_auth_runtime.py",
+}
 for name in [*changed, *untracked]:
     if name in allowed_runtime_tests:
+        continue
+    if name in allowed_aion_099_runtime:
         continue
     if name.startswith(runtime_prefixes):
         raise SystemExit(f"production auth architecture must not change runtime file: {name}")

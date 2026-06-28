@@ -1,5 +1,10 @@
 # Operator Auth Threat Model
 
+AION-099 adds one new reviewed boundary: mock claims preview. The primary threat
+is treating preview claims as authenticated identity. The mitigation is contract
+validation, visible disabled flags, policy checks, and audit proof that no
+credential, token, cookie, or persistent session is created.
+
 | Threat | Current v0.1/AION-093 Control | Future Required Control | No-Go Condition |
 | --- | --- | --- | --- |
 | unauthenticated console access | static console is local and design-only | local session gate and origin checks | hosted console without auth |

@@ -3876,6 +3876,11 @@ Primary docs:
 - `docs/auth/production-auth-threat-model.md`
 - `docs/auth/production-auth-release-gates.md`
 - `docs/auth/disabled-auth-prototype-plan.md`
+- `docs/auth/disabled-production-auth-prototype.md`
+- `docs/auth/mock-claims-adapter.md`
+- `docs/auth/auth-runtime-gate.md`
+- `docs/auth/auth-runtime-audit.md`
+- `docs/auth/auth-runtime-no-go.md`
 
 Developer command:
 
@@ -3918,3 +3923,17 @@ No production auth is implemented in AION-098. No provider integration is added
 in AION-098. No credentials, tokens, sessions, or cookies are created, stored,
 issued, or accepted. `production_auth_enabled` remains false. AION-099 may add
 a disabled mock-only prototype behind flags only.
+
+### AION-099 Disabled Production Auth Prototype
+
+AION-099 adds disabled auth runtime status, mock-claims preview, and audit
+contracts. It remains mock-only and disabled by default. It does not add
+production auth, login/logout, provider callbacks, credential storage, token or
+cookie issuance, persistent sessions, frontend dependencies, migrations,
+external identity calls, execution, activation, or hard delete.
+
+Developer command:
+
+```bash
+./scripts/auth-runtime-check.sh
+```

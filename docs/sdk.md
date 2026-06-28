@@ -923,3 +923,17 @@ authorization decision. `client.action_authorization.audit(payload)` runs the
 boundary audit, and `client.action_authorization.status(scope)` reads disabled
 privileged-path flags. The SDK exposes no execute, activation, or external-call
 method for action authorization.
+
+## AuthRuntimeResource
+
+`client.auth_runtime` exposes disabled auth-runtime status and mock-only preview
+APIs.
+
+Useful methods include:
+
+- `status(scope)`
+- `mock_claims_preview(payload)`
+- `audit(payload)`
+
+The SDK does not expose login, logout, token, cookie, session, credential,
+provider, production auth, execution, activation, or external identity methods.

@@ -1727,6 +1727,73 @@ class Settings(BaseSettings):
         default=False,
         validation_alias=AliasChoices("AION_PRODUCTION_AUTH_ENABLED", "production_auth_enabled"),
     )
+    auth_runtime_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices("AION_AUTH_RUNTIME_ENABLED", "auth_runtime_enabled"),
+    )
+    auth_runtime_mock_claims_preview_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_AUTH_RUNTIME_MOCK_CLAIMS_PREVIEW_ENABLED",
+            "auth_runtime_mock_claims_preview_enabled",
+        ),
+    )
+    auth_runtime_actor_mapping_preview_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_AUTH_RUNTIME_ACTOR_MAPPING_PREVIEW_ENABLED",
+            "auth_runtime_actor_mapping_preview_enabled",
+        ),
+    )
+    auth_runtime_external_identity_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_AUTH_RUNTIME_EXTERNAL_IDENTITY_ENABLED",
+            "auth_runtime_external_identity_enabled",
+        ),
+    )
+    auth_runtime_credentials_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_AUTH_RUNTIME_CREDENTIALS_ENABLED",
+            "auth_runtime_credentials_enabled",
+        ),
+    )
+    auth_runtime_token_issuance_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_AUTH_RUNTIME_TOKEN_ISSUANCE_ENABLED",
+            "auth_runtime_token_issuance_enabled",
+        ),
+    )
+    auth_runtime_cookie_issuance_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_AUTH_RUNTIME_COOKIE_ISSUANCE_ENABLED",
+            "auth_runtime_cookie_issuance_enabled",
+        ),
+    )
+    auth_runtime_session_persistence_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_AUTH_RUNTIME_SESSION_PERSISTENCE_ENABLED",
+            "auth_runtime_session_persistence_enabled",
+        ),
+    )
+    auth_runtime_login_endpoint_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_AUTH_RUNTIME_LOGIN_ENDPOINT_ENABLED",
+            "auth_runtime_login_endpoint_enabled",
+        ),
+    )
+    auth_runtime_logout_endpoint_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_AUTH_RUNTIME_LOGOUT_ENDPOINT_ENABLED",
+            "auth_runtime_logout_endpoint_enabled",
+        ),
+    )
     auth_credentials_enabled: bool = Field(
         default=False,
         validation_alias=AliasChoices(

@@ -2,6 +2,11 @@
 
 AION-094 introduces local auth contracts without production auth runtime behavior.
 
+AION-099 keeps local auth separate from the disabled production auth runtime
+prototype. Mock claims preview may reuse the local role matrix for preview-only
+role decisions, but it does not authenticate, authorize production access, or
+create session state.
+
 Runtime no-go boundaries:
 
 - no production auth claim

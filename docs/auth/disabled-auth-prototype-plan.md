@@ -3,6 +3,11 @@
 AION-099 may create a disabled production auth prototype only. The prototype is
 not production auth and must not be enabled by default.
 
+The implemented AION-099 surface is documented in
+`disabled-production-auth-prototype.md`, `auth-runtime-gate.md`,
+`mock-claims-adapter.md`, `auth-runtime-audit.md`, and
+`auth-runtime-no-go.md`.
+
 ## Required Prototype Boundaries
 
 - disabled runtime flags

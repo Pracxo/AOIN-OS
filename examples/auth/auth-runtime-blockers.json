@@ -1,0 +1,28 @@
+{
+  "blockers": [
+    {
+      "auth_runtime_blocker_id": "auth-runtime-blocker-production-disabled",
+      "blocker_type": "production_auth_disabled",
+      "severity": "critical",
+      "status": "open",
+      "reason": "production_auth_disabled_by_default",
+      "recommended_action": "complete_release_gates_before_enablement",
+      "source_type": "settings",
+      "source_id": null,
+      "metadata": {},
+      "created_at": "2026-06-28T00:00:00Z"
+    },
+    {
+      "auth_runtime_blocker_id": "auth-runtime-blocker-login-disabled",
+      "blocker_type": "login_endpoint_disabled",
+      "severity": "high",
+      "status": "open",
+      "reason": "login_endpoint_disabled",
+      "recommended_action": "do_not_add_login_until_future_release_gate_passes",
+      "source_type": "api",
+      "source_id": null,
+      "metadata": {},
+      "created_at": "2026-06-28T00:00:00Z"
+    }
+  ]
+}

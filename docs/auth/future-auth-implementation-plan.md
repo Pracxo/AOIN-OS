@@ -2,6 +2,9 @@
 
 No production auth may be implemented before AION-098.
 
+AION-099 does not start production auth implementation. It only adds disabled
+auth runtime status, mock claims preview, and audit proof for future review.
+
 ## AION-094
 
 Local auth contract and dev-only identity simulation.

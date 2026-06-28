@@ -1,0 +1,92 @@
+{
+  "mock_claims_preview_id": "mock-claims-preview-demo",
+  "trace_id": "trace-mock-claims-demo",
+  "status": "preview",
+  "issuer": "mock.local",
+  "subject": "local.operator",
+  "audience": "aion.local",
+  "roles": [
+    "operator"
+  ],
+  "workspace_id": "local",
+  "owner_scope": [
+    "workspace:main"
+  ],
+  "production_identity": false,
+  "credentials_present": false,
+  "token_present": false,
+  "cookie_present": false,
+  "session_persisted": false,
+  "actor_context_preview": {
+    "actor_id": "mock.local.operator",
+    "subject": "local.operator",
+    "issuer": "mock.local",
+    "audience": "aion.local",
+    "workspace_id": "local",
+    "roles": [
+      "operator"
+    ],
+    "owner_scope": [
+      "workspace:main"
+    ],
+    "preview_only": true,
+    "authenticated": false,
+    "auth_source": "mock_claims_preview",
+    "policy_authoritative": false,
+    "read_allowed": true,
+    "dry_run_allowed": true,
+    "review_allowed": false,
+    "write_allowed": false,
+    "execute_allowed": false,
+    "activation_allowed": false,
+    "external_calls_allowed": false
+  },
+  "role_decisions": {
+    "roles": [
+      "operator"
+    ],
+    "read_views": [
+      "overview",
+      "operator_actions"
+    ],
+    "dry_run_actions": [
+      "run_dry_run_check"
+    ],
+    "review_actions": [],
+    "forbidden_actions": [
+      "execute_tool",
+      "activate_module",
+      "hard_delete"
+    ],
+    "constraints": [
+      "dev_only",
+      "read_only_console",
+      "no_execute",
+      "no_activation",
+      "no_external_calls"
+    ],
+    "write_allowed": false,
+    "execute_allowed": false,
+    "activation_allowed": false,
+    "external_calls_allowed": false,
+    "matrix_version": "aion-099-preview"
+  },
+  "blockers": [],
+  "warnings": [
+    {
+      "code": "mock_claims_not_authentication",
+      "status": "open"
+    }
+  ],
+  "metadata": {
+    "mock_only": true,
+    "mode": "preview",
+    "claims_preview": {
+      "claim_set": "local_demo"
+    },
+    "redaction_findings": []
+  },
+  "created_at": "2026-06-28T00:00:00Z",
+  "read_only": true,
+  "redaction_applied": true
+}

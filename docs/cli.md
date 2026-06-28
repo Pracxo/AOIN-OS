@@ -774,3 +774,15 @@ aionctl action-authorization status
 
 These commands call the SDK only. They do not expose execute, activation,
 external-call, login, logout, credential, token, or cookie commands.
+
+## Auth Runtime Commands
+
+```bash
+aionctl auth-runtime status
+aionctl auth-runtime mock-claims-preview
+aionctl auth-runtime audit
+```
+
+These commands call disabled auth-runtime preview APIs only. They do not expose
+login, logout, token, cookie, session, credential, provider, production auth,
+execution, activation, or external-call commands.

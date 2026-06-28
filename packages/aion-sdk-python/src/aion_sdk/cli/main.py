@@ -16,6 +16,7 @@ from aion_sdk.cli.commands.action_authorization import (
 )
 from aion_sdk.cli.commands.action_proposals import install_action_proposal_commands
 from aion_sdk.cli.commands.audit import install_audit_commands
+from aion_sdk.cli.commands.auth_runtime import install_auth_runtime_commands
 from aion_sdk.cli.commands.backups import install_backup_commands
 from aion_sdk.cli.commands.beliefs import install_belief_commands
 from aion_sdk.cli.commands.bootstrap import install_bootstrap_commands
@@ -575,6 +576,7 @@ install_audit_commands(app, get_client=_client, get_scope=_scope, render=_render
 install_operator_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_operator_action_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_action_authorization_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_auth_runtime_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_operator_console_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_local_auth_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_local_session_commands(app, get_client=_client, get_scope=_scope, render=_render)

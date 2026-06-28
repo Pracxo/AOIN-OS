@@ -1,0 +1,22 @@
+{
+  "trace_id": "trace-mock-claims-example",
+  "issuer": "mock.local",
+  "subject": "local.operator",
+  "audience": "aion.local",
+  "roles": [
+    "operator"
+  ],
+  "workspace_id": "local",
+  "owner_scope": [
+    "workspace:main"
+  ],
+  "claims": {
+    "claim_set": "local_demo",
+    "role_source": "static_fixture"
+  },
+  "mode": "preview",
+  "metadata": {
+    "source": "example"
+  },
+  "created_by": "local.operator"
+}

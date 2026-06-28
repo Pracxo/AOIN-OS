@@ -25,6 +25,8 @@ required_files=(
   operator-console-static/demo-data/operator-action-review.json
   operator-console-static/demo-data/action-authorization-preview.json
   operator-console-static/demo-data/action-authorization-deny-matrix.json
+  operator-console-static/demo-data/auth-runtime-status.json
+  operator-console-static/demo-data/mock-claims-preview.json
   operator-console-static/demo-data/local-auth-status.json
   operator-console-static/demo-data/role-filtered-view-model.json
   docs/operator-console/static-console-prototype.md
@@ -175,6 +177,34 @@ for path in sorted(demo_dir.glob("*.json")):
         ):
             if payload.get(key) is not False:
                 raise SystemExit(f"local session demo flag must be false: {key}: {path}")
+        continue
+    if path.name.startswith("auth-runtime-") or path.name.startswith("mock-claims-"):
+        if payload.get("read_only") is not True:
+            raise SystemExit(f"auth runtime demo must be read_only: {path}")
+        if payload.get("redaction_applied") is not True:
+            raise SystemExit(f"auth runtime demo must be redacted: {path}")
+        for key in (
+            "production_auth_enabled",
+            "auth_runtime_enabled",
+            "external_identity_provider_enabled",
+            "credentials_enabled",
+            "token_issuance_enabled",
+            "cookie_issuance_enabled",
+            "session_persistence_enabled",
+            "login_endpoint_enabled",
+            "logout_endpoint_enabled",
+            "production_identity",
+            "credentials_present",
+            "token_present",
+            "cookie_present",
+            "session_persisted",
+            "write_allowed",
+            "execute_allowed",
+            "activation_allowed",
+            "external_calls_allowed",
+        ):
+            if key in payload and payload.get(key) is not False:
+                raise SystemExit(f"auth runtime demo flag must be false: {key}: {path}")
         continue
     if payload.get("read_only") is not True:
         raise SystemExit(f"read_only must be true: {path}")

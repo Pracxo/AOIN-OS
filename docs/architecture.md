@@ -178,6 +178,15 @@ Future modules register capability manifests. AION Brain reads capability IDs,
 schemas, permissions, memory scopes, events, risk, and execution modes. It does
 not inspect or embed module internals.
 
+## Disabled Auth Runtime Gate
+
+AION-099 adds a disabled production auth runtime boundary for future Operator
+Console auth work. It can report hard-off auth status, validate synthetic mock
+claims in preview mode, map those claims to a preview ActorContext, and run a
+local audit. It does not authenticate users, trust browser credentials, issue
+tokens or cookies, persist sessions, call external identity providers, or
+authorize execution or activation.
+
 ## Contract Registry and Interface Drift
 
 The Contract Registry is the local index of AION public and operator-facing

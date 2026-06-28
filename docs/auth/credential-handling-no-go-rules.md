@@ -2,6 +2,10 @@
 
 These rules block production auth implementation or release.
 
+AION-099 follows these no-go rules. Mock claims are synthetic preview fixtures,
+not credentials, and must never be stored or accepted as production identity
+material.
+
 - No plain text credentials.
 - No API keys in repo.
 - No provider secrets in examples.

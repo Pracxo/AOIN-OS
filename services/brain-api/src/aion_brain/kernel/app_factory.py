@@ -7,6 +7,7 @@ from aion_brain.api.action_proposals import router as action_proposals_router
 from aion_brain.api.approvals import router as approvals_router
 from aion_brain.api.attention import router as attention_router
 from aion_brain.api.audit_integrity import router as audit_integrity_router
+from aion_brain.api.auth_runtime import router as auth_runtime_router
 from aion_brain.api.autonomy import router as autonomy_router
 from aion_brain.api.backups import router as backups_router
 from aion_brain.api.beliefs import router as beliefs_router
@@ -200,6 +201,7 @@ ROUTERS = (
     operator_router,
     operator_actions_router,
     action_authorization_router,
+    auth_runtime_router,
     local_auth_router,
     local_session_router,
     operator_console_router,

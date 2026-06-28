@@ -127,3 +127,14 @@ AION-097 adds a static Action Authorization panel backed by:
 The panel displays dry-run authorization decisions and denied cases. It does
 not expose execute, activation, external-call, login, credential, token,
 cookie, or browser storage behavior.
+
+## Auth Runtime Panel
+
+AION-099 adds a disabled Auth Runtime panel backed by:
+
+- `demo-data/auth-runtime-status.json`
+- `demo-data/mock-claims-preview.json`
+
+The panel displays disabled production auth status and a mock claims preview.
+It has no login form, no logout control, no credential input, no token input,
+and no session persistence.

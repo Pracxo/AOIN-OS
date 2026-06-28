@@ -99,3 +99,4 @@ closure decision in ADR 0072.
 - [0087: Role-Aware Console View Filtering](0087-role-aware-console-view-filtering.md) - Defines read-only role matrix filtering, forbidden-action visibility, and role access audit boundaries.
 - [0088: Dry-Run Action Authorization Enforcement](0088-dry-run-action-authorization-enforcement.md) - Defines dry-run authorization enforcement for operator previews and reviews without execution.
 - [0089: Production Auth Architecture Decision](0089-production-auth-architecture-decision.md) - Selects future OIDC-compatible production auth architecture while adding no runtime auth.
+- [0090: Disabled Production Auth Prototype](0090-disabled-production-auth-prototype.md) - Defines disabled auth runtime status, mock claims preview, and audit contracts without enabling production auth.
