@@ -1,0 +1,39 @@
+{
+  "authorization_decision_id": "authz-decision-local-001",
+  "trace_id": "trace-action-authz-local-001",
+  "actor_id": "local.operator",
+  "workspace_id": "local",
+  "roles": ["operator"],
+  "owner_scope": ["workspace:main"],
+  "action_key": "operator.review",
+  "action_type": "generic",
+  "target_type": "generic",
+  "target_id": "operator-action-request-demo",
+  "mode": "dry_run",
+  "requested_operation": "preview",
+  "status": "allowed",
+  "decision": "allow_dry_run_preview",
+  "reason": "dry_run_authorization_allowed",
+  "policy_allowed": true,
+  "role_allowed": true,
+  "session_allowed": true,
+  "dry_run_only": true,
+  "write_allowed": false,
+  "execution_allowed": false,
+  "activation_allowed": false,
+  "external_calls_allowed": false,
+  "blockers": [],
+  "warnings": [
+    {
+      "code": "preview_only",
+      "message": "Authorization allows dry-run preview only."
+    }
+  ],
+  "required_policy_actions": ["action_authorization.dry_run.authorize"],
+  "audit_refs": ["policy-decision-demo"],
+  "metadata": {
+    "synthetic": true,
+    "role_matrix_version": "aion-097"
+  },
+  "created_at": "2026-06-28T00:00:00Z"
+}

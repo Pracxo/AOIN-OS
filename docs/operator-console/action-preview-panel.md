@@ -22,3 +22,10 @@ explicitly unavailable.
 
 The panel uses disabled descriptor controls only. It has no runtime write
 control and no external fetch target outside localhost.
+
+## AION-097 Authorization Preview
+
+The preview panel is paired with the Action Authorization panel. Authorization
+decides whether dry-run preview creation is allowed, then the preview still
+renders `would_execute=false`, `execution_allowed=false`,
+`activation_allowed=false`, and `external_calls_allowed=false`.

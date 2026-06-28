@@ -256,6 +256,38 @@
           </div>
         </section>
 
+        <section class="action-authorization-panel" id="action-authorization-panel" aria-label="Action authorization preview panel">
+          <div class="no-activation-banner">
+            Dry-run authorization can allow previews or review records only. It never allows writes, execution, activation, or external calls.
+          </div>
+          <div class="module-dashboard-heading">
+            <div>
+              <p class="eyebrow">Action Authorization</p>
+              <h3>Dry-Run Authorization Preview</h3>
+            </div>
+            <button class="disabled-action" type="button" disabled>
+              No execute
+            </button>
+          </div>
+          <div class="safety-boundary-grid" id="action-authz-safety">
+            <div class="safety-card">dry_run_only=true</div>
+            <div class="safety-card">write_allowed=false</div>
+            <div class="safety-card">execution_allowed=false</div>
+            <div class="safety-card">activation_allowed=false</div>
+            <div class="safety-card">external_calls_allowed=false</div>
+          </div>
+          <div class="module-subpanels">
+            <section class="module-subpanel" aria-label="Authorization decision">
+              <h3>Decision</h3>
+              <div class="review-checklist" id="action-authz-decision"></div>
+            </section>
+            <section class="module-subpanel" aria-label="Authorization denials">
+              <h3>Deny Matrix</h3>
+              <div class="blocker-list" id="action-authz-deny-matrix"></div>
+            </section>
+          </div>
+        </section>
+
         <section class="section-grid" id="sections" aria-label="Console sections"></section>
 
         <section class="action-panel" aria-label="Forbidden actions">

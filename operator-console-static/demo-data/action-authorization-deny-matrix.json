@@ -1,0 +1,47 @@
+{
+  "read_only": true,
+  "redaction_applied": true,
+  "dry_run_only": true,
+  "write_allowed": false,
+  "execution_allowed": false,
+  "activation_allowed": false,
+  "external_calls_allowed": false,
+  "denials": [
+    {
+      "role": "viewer",
+      "decision": "block",
+      "reason": "role_denied",
+      "write_allowed": false,
+      "execution_allowed": false,
+      "activation_allowed": false,
+      "external_calls_allowed": false
+    },
+    {
+      "role": "auditor",
+      "decision": "block",
+      "reason": "role_denied",
+      "write_allowed": false,
+      "execution_allowed": false,
+      "activation_allowed": false,
+      "external_calls_allowed": false
+    },
+    {
+      "role": "operator",
+      "decision": "block",
+      "reason": "session_denied",
+      "write_allowed": false,
+      "execution_allowed": false,
+      "activation_allowed": false,
+      "external_calls_allowed": false
+    },
+    {
+      "role": "operator",
+      "decision": "unsupported",
+      "reason": "unsupported_action_type",
+      "write_allowed": false,
+      "execution_allowed": false,
+      "activation_allowed": false,
+      "external_calls_allowed": false
+    }
+  ]
+}

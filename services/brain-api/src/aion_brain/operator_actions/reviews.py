@@ -3,8 +3,13 @@
 from __future__ import annotations
 
 from datetime import UTC, datetime
+from typing import Any
 from uuid import uuid4
 
+from aion_brain.contracts.action_authorization import (
+    DryRunActionAuthorizationDecision,
+    DryRunActionAuthorizationRequest,
+)
 from aion_brain.contracts.operator_actions import (
     OperatorActionBlocker,
     OperatorActionRequest,
@@ -23,6 +28,7 @@ class OperatorActionReviewService:
         repository: object,
         policy_adapter: object | None,
         *,
+        authorization_service: object | None = None,
         telemetry_service: object | None = None,
         audit_sink: object | None = None,
         provenance_service: object | None = None,
@@ -31,6 +37,7 @@ class OperatorActionReviewService:
     ) -> None:
         self._repository = repository
         self._policy_adapter = policy_adapter
+        self._authorization_service = authorization_service
         self._telemetry_service = telemetry_service
         self._audit_sink = audit_sink
         self._provenance_service = provenance_service
@@ -41,6 +48,7 @@ class OperatorActionReviewService:
         return OperatorActionReviewService(
             self._repository,
             self._policy_adapter,
+            authorization_service=self._authorization_service,
             telemetry_service=self._telemetry_service,
             audit_sink=self._audit_sink,
             provenance_service=self._provenance_service,
@@ -54,6 +62,9 @@ class OperatorActionReviewService:
         ):
             raise RuntimeError("operator_action_reviews_disabled")
         action_request = _require_request(self._repository, request.operator_action_request_id)
+        authorization_decision = self._authorize_review(action_request, request)
+        if authorization_decision is not None and authorization_decision.status != "allowed":
+            raise PermissionError(authorization_decision.reason)
         authorize(
             self._policy_adapter,
             action_type="operator_action.review",
@@ -83,6 +94,7 @@ class OperatorActionReviewService:
             blocker_refs=blocker_refs,
             metadata={
                 **request.metadata,
+                "dry_run_authz_decision": _decision_summary(authorization_decision),
                 "approval_does_not_execute": True,
                 "dry_run_only": True,
             },
@@ -124,6 +136,50 @@ class OperatorActionReviewService:
             },
         )
         return stored
+
+    def _authorize_review(
+        self,
+        action_request: OperatorActionRequest,
+        review_request: OperatorActionReviewRequest,
+    ) -> DryRunActionAuthorizationDecision | None:
+        authorize_action = getattr(self._authorization_service, "authorize", None)
+        if not callable(authorize_action):
+            return None
+        decision = authorize_action(
+            DryRunActionAuthorizationRequest(
+                authorization_request_id=f"authorization-review-{action_request.operator_action_request_id}",
+                trace_id=action_request.trace_id or self._actor_context.trace_id,
+                actor_id=(
+                    review_request.actor_id
+                    or self._actor_context.actor_id
+                    or "local.reviewer"
+                ),
+                workspace_id=review_request.workspace_id
+                or action_request.workspace_id
+                or self._actor_context.workspace_id
+                or "local",
+                roles=_authorization_roles(review_request.metadata, default=["reviewer"]),
+                owner_scope=action_request.owner_scope,
+                action_key=action_request.action_key,
+                action_type=action_request.action_type,
+                target_type=action_request.target_type,
+                target_id=action_request.target_id,
+                mode=action_request.mode,
+                requested_operation="review",
+                local_auth_context_ref=_metadata_text(
+                    review_request.metadata,
+                    "local_auth_context_ref",
+                ),
+                local_session_preview_id=_metadata_text(
+                    review_request.metadata,
+                    "local_session_preview_id",
+                ),
+                operator_action_request_id=action_request.operator_action_request_id,
+                metadata=review_request.metadata,
+                created_by=review_request.actor_id or self._actor_context.actor_id,
+            )
+        )
+        return decision if isinstance(decision, DryRunActionAuthorizationDecision) else None
 
     def list_reviews(
         self,
@@ -196,6 +252,42 @@ def _blocker_refs(repository: object, request: OperatorActionRequest) -> list[st
         if isinstance(item, OperatorActionBlocker) and item.status == "open"
     ]
     return sorted(set([*request.blocker_refs, *refs]))
+
+
+def _authorization_roles(metadata: dict[str, Any], *, default: list[str]) -> list[str]:
+    for key in ("roles", "local_roles", "local_auth_roles"):
+        roles = metadata.get(key)
+        if isinstance(roles, list):
+            cleaned = [str(role) for role in roles if str(role).strip()]
+            if cleaned:
+                return cleaned
+    return default
+
+
+def _metadata_text(metadata: dict[str, Any], key: str) -> str | None:
+    value = metadata.get(key)
+    return str(value) if isinstance(value, str) and value else None
+
+
+def _decision_summary(
+    decision: DryRunActionAuthorizationDecision | None,
+) -> dict[str, Any] | None:
+    if decision is None:
+        return None
+    return {
+        "authz_decision_id": decision.authorization_decision_id,
+        "status": decision.status,
+        "decision": decision.decision,
+        "reason": decision.reason,
+        "policy_allowed": decision.policy_allowed,
+        "role_allowed": decision.role_allowed,
+        "session_allowed": decision.session_allowed,
+        "dry_run_only": decision.dry_run_only,
+        "write_allowed": False,
+        "execution_allowed": False,
+        "activation_allowed": False,
+        "external_calls_allowed": False,
+    }
 
 
 __all__ = ["OperatorActionReviewService"]

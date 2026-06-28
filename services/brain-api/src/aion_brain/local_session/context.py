@@ -43,6 +43,7 @@ class LocalSessionContextService:
                 "synthetic": True,
                 "dev_only": True,
                 "role_matrix_version": "aion-096",
+                "action_authz_boundary": "dry_run_preview_and_review_only",
                 "role_constraints": merged.get("constraints", []),
             },
             created_at=utc_now(),

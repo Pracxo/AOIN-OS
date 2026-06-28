@@ -109,3 +109,10 @@ disabled, activation disabled, and external calls disabled.
 View models may include role-filter metadata such as removed sections, removed
 actions, visible forbidden descriptors, and role matrix version. The response
 shape remains read-only and redacted.
+
+## AION-097 Action Authorization Metadata
+
+View models may advertise `dry_run_action_authz_supported=true` as a read-only
+capability note. This indicates preview/review authorization evidence is
+available, not that execution, activation, writes, or external calls are
+available.

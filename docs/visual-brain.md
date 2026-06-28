@@ -1015,3 +1015,10 @@ AION-096 emits `local_auth_role_access_audited` for role matrix audit reports.
 The node type is `local_auth_role_matrix`. The payload is read-only and carries
 no raw prompts, hidden reasoning, credentials, production auth state, or
 privileged grants.
+
+## Action Authorization Telemetry
+
+AION-097 emits `dry_run_action_authorization_decided` and
+`action_authorization_audit_completed`. Node types are
+`action_authorization_decision` and `action_authorization_audit`. Payloads keep
+write, execution, activation, and external-call flags false.

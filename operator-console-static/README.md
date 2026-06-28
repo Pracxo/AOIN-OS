@@ -116,3 +116,14 @@ Validate the panel:
 The AION-096 role preview switcher is local demo data only. It exposes viewer,
 operator, reviewer, admin, and auditor views while keeping `system_service`
 internal and all privileged actions disabled.
+
+## Action Authorization Panel
+
+AION-097 adds a static Action Authorization panel backed by:
+
+- `demo-data/action-authorization-preview.json`
+- `demo-data/action-authorization-deny-matrix.json`
+
+The panel displays dry-run authorization decisions and denied cases. It does
+not expose execute, activation, external-call, login, credential, token,
+cookie, or browser storage behavior.

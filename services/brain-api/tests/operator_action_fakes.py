@@ -5,6 +5,7 @@ from __future__ import annotations
 from sqlalchemy import create_engine
 from sqlalchemy.pool import StaticPool
 
+from aion_brain.action_authorization import DryRunActionAuthorizationService
 from aion_brain.config import Settings
 from aion_brain.contracts.operator_actions import OperatorActionCreateRequest
 from aion_brain.contracts.policy import PolicyDecision, PolicyRequest
@@ -69,7 +70,12 @@ class FakeProvenance:
 
 
 class OperatorActionFixture:
-    def __init__(self, policy: object | None = None) -> None:
+    def __init__(
+        self,
+        policy: object | None = None,
+        *,
+        enable_authorization: bool = False,
+    ) -> None:
         self.settings = Settings(
             _env_file=None,
             DATABASE_URL="sqlite+pysqlite:///:memory:",
@@ -89,9 +95,19 @@ class OperatorActionFixture:
             self.policy,
             telemetry_service=self.telemetry,
         )
+        self.authorization = (
+            DryRunActionAuthorizationService(
+                policy_adapter=self.policy,
+                telemetry_service=self.telemetry,
+                settings=self.settings,
+            )
+            if enable_authorization
+            else None
+        )
         self.previews = OperatorActionPreviewService(
             self.repository,
             self.policy,
+            authorization_service=self.authorization,
             telemetry_service=self.telemetry,
             settings=self.settings,
         )
@@ -103,11 +119,13 @@ class OperatorActionFixture:
             telemetry_service=self.telemetry,
             audit_sink=self.audit,
             provenance_service=self.provenance,
+            authorization_service=self.authorization,
             settings=self.settings,
         )
         self.reviews = OperatorActionReviewService(
             self.repository,
             self.policy,
+            authorization_service=self.authorization,
             telemetry_service=self.telemetry,
             audit_sink=self.audit,
             provenance_service=self.provenance,

@@ -23,9 +23,12 @@ required_docs=(
   docs/auth/console-view-access-filtering.md
   docs/auth/role-aware-action-descriptors.md
   docs/auth/role-access-audit.md
+  docs/auth/dry-run-action-permission-model.md
+  docs/auth/action-authorization-audit.md
   docs/adr/0084-local-auth-design-for-operator-console.md
   docs/adr/0085-local-auth-contract-dev-identity-simulation.md
   docs/adr/0087-role-aware-console-view-filtering.md
+  docs/adr/0088-dry-run-action-authorization-enforcement.md
 )
 
 required_examples=(
@@ -45,6 +48,10 @@ required_examples=(
   examples/auth/auditor-access-filter-result.json
   examples/auth/admin-access-filter-result.json
   examples/auth/role-access-audit-result.json
+  examples/auth/dry-run-action-authorization-request.json
+  examples/auth/dry-run-action-authorization-decision.json
+  examples/auth/action-authorization-deny-examples.json
+  examples/auth/action-authorization-audit-result.json
 )
 
 for file in "${required_docs[@]}"; do
@@ -107,6 +114,8 @@ root = Path(sys.argv[1])
 for path in sorted((root / "examples" / "auth").glob("*.json")):
     if path.name.startswith("local-session") or path.name == "role-aware-session-context.json":
         continue
+    if "authorization" in path.name:
+        continue
     payload = json.loads(path.read_text())
     serialized = json.dumps(payload, sort_keys=True).lower()
     blocked = (
@@ -158,8 +167,14 @@ allowed_auth_paths = {
     "docs/auth/console-view-access-filtering.md",
     "docs/auth/role-aware-action-descriptors.md",
     "docs/auth/role-access-audit.md",
+    "docs/auth/dry-run-action-permission-model.md",
+    "docs/auth/action-authorization-audit.md",
+    "docs/operator-console/dry-run-action-authorization.md",
+    "docs/operator-console/action-authorization-preview.md",
+    "docs/operator-console/action-authorization-deny-matrix.md",
     "docs/adr/0084-local-auth-design-for-operator-console.md",
     "docs/adr/0085-local-auth-contract-dev-identity-simulation.md",
+    "docs/adr/0088-dry-run-action-authorization-enforcement.md",
     "examples/auth/local-operator-identity.json",
     "examples/auth/operator-role-matrix.json",
     "examples/auth/session-boundary-example.json",
@@ -176,6 +191,41 @@ allowed_auth_paths = {
     "examples/auth/auditor-access-filter-result.json",
     "examples/auth/admin-access-filter-result.json",
     "examples/auth/role-access-audit-result.json",
+    "examples/auth/dry-run-action-authorization-request.json",
+    "examples/auth/dry-run-action-authorization-decision.json",
+    "examples/auth/action-authorization-deny-examples.json",
+    "examples/auth/action-authorization-audit-result.json",
+    "operator-console-static/demo-data/action-authorization-preview.json",
+    "operator-console-static/demo-data/action-authorization-deny-matrix.json",
+    "scripts/action-authorization-check.sh",
+    "services/brain-api/src/aion_brain/contracts/action_authorization.py",
+    "services/brain-api/src/aion_brain/action_authorization/__init__.py",
+    "services/brain-api/src/aion_brain/action_authorization/redaction.py",
+    "services/brain-api/src/aion_brain/action_authorization/policy.py",
+    "services/brain-api/src/aion_brain/action_authorization/decisions.py",
+    "services/brain-api/src/aion_brain/action_authorization/evaluator.py",
+    "services/brain-api/src/aion_brain/action_authorization/blockers.py",
+    "services/brain-api/src/aion_brain/action_authorization/audit.py",
+    "services/brain-api/src/aion_brain/action_authorization/query.py",
+    "services/brain-api/src/aion_brain/api/action_authorization.py",
+    "packages/aion-sdk-python/src/aion_sdk/resources/action_authorization.py",
+    "packages/aion-sdk-python/src/aion_sdk/cli/commands/action_authorization.py",
+    "packages/aion-sdk-python/tests/test_action_authorization_resource.py",
+    "packages/aion-sdk-python/tests/test_cli_action_authorization.py",
+    "services/brain-api/tests/test_action_authorization_contracts.py",
+    "services/brain-api/tests/test_action_authorization_redaction.py",
+    "services/brain-api/tests/test_action_authorization_decisions.py",
+    "services/brain-api/tests/test_action_authorization_evaluator.py",
+    "services/brain-api/tests/test_action_authorization_blockers.py",
+    "services/brain-api/tests/test_action_authorization_audit.py",
+    "services/brain-api/tests/test_action_authorization_api.py",
+    "services/brain-api/tests/test_operator_actions_authorization_integration.py",
+    "services/brain-api/tests/test_local_auth_action_authorization_integration.py",
+    "services/brain-api/tests/test_local_session_action_authorization_integration.py",
+    "services/brain-api/tests/test_role_matrix_action_authorization_integration.py",
+    "services/brain-api/tests/test_operator_console_authorization_preview_static.py",
+    "services/brain-api/tests/test_kernel_action_authorization_wiring.py",
+    "services/brain-api/tests/test_visual_telemetry_action_authorization.py",
     "operator-console-static/demo-data/local-auth-status.json",
     "operator-console-static/demo-data/role-filtered-view-model.json",
     "scripts/auth-design-check.sh",

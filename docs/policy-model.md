@@ -1699,3 +1699,13 @@ unknown local session actions remain denied by default.
 These actions are local/dev read-only controls. Unknown local auth actions,
 production auth enablement, credential storage, session persistence, execution,
 activation, and external calls remain denied by default.
+
+## AION-097 Action Authorization Policy Actions
+
+- `action_authorization.dry_run.authorize`
+- `action_authorization.audit.run`
+- `action_authorization.decision.read`
+
+The authorize action is dry-run only and record-only. Policy denies any context
+that requests writes, execution, activation, external calls, or non-dry-run
+authorization.

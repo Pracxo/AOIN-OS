@@ -1,0 +1,43 @@
+{
+  "action_authorization_audit_id": "action-authz-audit-local-001",
+  "trace_id": "trace-action-authz-audit-local-001",
+  "status": "passed",
+  "owner_scope": ["workspace:main"],
+  "checks_run": [
+    "dry_run_only_enforced",
+    "write_blocked",
+    "execution_blocked",
+    "activation_blocked",
+    "external_calls_blocked",
+    "role_matrix_enforced",
+    "policy_enforced",
+    "session_boundary_enforced",
+    "static_examples_safe",
+    "no_execution_endpoint_added"
+  ],
+  "findings": [
+    {
+      "code": "dry_run_only",
+      "status": "passed"
+    }
+  ],
+  "dry_run_only_enforced": true,
+  "write_blocked": true,
+  "execution_blocked": true,
+  "activation_blocked": true,
+  "external_calls_blocked": true,
+  "role_matrix_enforced": true,
+  "policy_enforced": true,
+  "session_boundary_enforced": true,
+  "recommendations": [
+    "Keep authorization scoped to dry-run previews and review records."
+  ],
+  "metadata": {
+    "synthetic": true,
+    "write_allowed": false,
+    "execution_allowed": false,
+    "activation_allowed": false,
+    "external_calls_allowed": false
+  },
+  "created_at": "2026-06-28T00:00:00Z"
+}

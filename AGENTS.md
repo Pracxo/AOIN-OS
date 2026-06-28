@@ -401,3 +401,7 @@ Instructions for future Codex runs in this repository:
   and safety blockers must remain visible and no role may grant writes,
   execution, activation, hard delete, external calls, production auth, or
   credential storage.
+- AION-097 dry-run action authorization may allow request, preview, or review
+  records only. It must fail closed for unknown roles/actions, denied sessions,
+  and policy denials, and it must not execute actions, activate modules, write
+  target systems, call external services, or add auth credentials/sessions.

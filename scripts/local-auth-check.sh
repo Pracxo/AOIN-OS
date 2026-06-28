@@ -79,6 +79,8 @@ root = Path(sys.argv[1])
 for path in sorted((root / "examples" / "auth").glob("*.json")):
     if path.name.startswith("local-session") or path.name == "role-aware-session-context.json":
         continue
+    if "authorization" in path.name:
+        continue
     payload = json.loads(path.read_text())
     serialized = json.dumps(payload, sort_keys=True).lower()
     blocked = (

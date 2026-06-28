@@ -153,6 +153,9 @@ allowed_actions := {
 	"operator_action.blocker.update",
 	"operator_action.review",
 	"operator_action.query",
+	"action_authorization.dry_run.authorize",
+	"action_authorization.audit.run",
+	"action_authorization.decision.read",
 	"dialogue.session.create",
 	"dialogue.session.read",
 	"dialogue.session.update",
@@ -470,6 +473,7 @@ allowed_actions := {
 	"local_auth.role_matrix.read",
 	"local_auth.status.read",
 	"local_session.status.read",
+	"action_authorization.decision.read",
 	"runtime.registration.preview.create",
 	"runtime.registration.preview.read",
 	"module_mock.profile.create",
@@ -2187,6 +2191,62 @@ decision := {
 	valid_risk
 	input.action_type == "operator.snapshot.create"
 	operator_snapshot_writer
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "action_authorization_dry_run_allowed",
+	"constraints": ["dry_run_only", "preview_or_review_only", "no_write", "no_execution", "no_activation", "no_external_calls"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "action_authorization.dry_run.authorize"
+	input.context.dry_run_only == true
+	not action_authorization_unsafe_request
+	operator_writer
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "action_authorization_audit_allowed",
+	"constraints": ["dry_run_only", "read_only", "no_write", "no_execution", "no_activation", "no_external_calls"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "action_authorization.audit.run"
+	not action_authorization_unsafe_request
+	action_authorization_auditor
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "action_authorization_decision_read_allowed",
+	"constraints": ["dry_run_only", "read_only", "no_execution"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "action_authorization.decision.read"
+	not action_authorization_unsafe_request
+	operator_reader
+}
+
+decision := {
+	"allow": false,
+	"approval_required": false,
+	"reason": "action_authorization_privileged_boundary_denied",
+	"constraints": ["dry_run_only", "write_denied", "execution_denied", "activation_denied", "external_calls_denied"],
+	"audit_level": "high",
+} if {
+	valid_action
+	valid_risk
+	action_authorization_action
+	action_authorization_unsafe_request
 }
 
 decision := {
@@ -6367,6 +6427,18 @@ local_session_boundary_action if {
 	input.action_type == "local_session.audit.run"
 }
 
+action_authorization_action if {
+	input.action_type == "action_authorization.dry_run.authorize"
+}
+
+action_authorization_action if {
+	input.action_type == "action_authorization.audit.run"
+}
+
+action_authorization_action if {
+	input.action_type == "action_authorization.decision.read"
+}
+
 operator_action_read if {
 	input.action_type == "operator_action.request.read"
 }
@@ -6537,6 +6609,46 @@ local_session_unsafe_request if {
 
 local_session_unsafe_request if {
 	input.context.external_calls_allowed == true
+}
+
+action_authorization_unsafe_request if {
+	input.context.write_allowed == true
+}
+
+action_authorization_unsafe_request if {
+	input.context.execution_allowed == true
+}
+
+action_authorization_unsafe_request if {
+	input.context.activation_allowed == true
+}
+
+action_authorization_unsafe_request if {
+	input.context.external_calls_allowed == true
+}
+
+action_authorization_unsafe_request if {
+	input.context.dry_run_only == false
+}
+
+action_authorization_auditor if {
+	dev_owner
+}
+
+action_authorization_auditor if {
+	admin_or_owner
+}
+
+action_authorization_auditor if {
+	input.context.actor_context.roles[_] == "operator"
+}
+
+action_authorization_auditor if {
+	input.context.actor_context.roles[_] == "auditor"
+}
+
+action_authorization_auditor if {
+	input.context.actor_context.roles[_] == "admin"
 }
 
 operator_reader if {

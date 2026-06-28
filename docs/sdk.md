@@ -915,3 +915,11 @@ auth, persistent session, or external identity commands.
 proof matrix. `client.local_auth.role_access_audit(payload)` returns a role
 access audit report. Neither method authorizes writes, execution, activation,
 external calls, production auth, or session persistence.
+
+## Action Authorization
+
+`client.action_authorization.authorize(payload)` requests a dry-run
+authorization decision. `client.action_authorization.audit(payload)` runs the
+boundary audit, and `client.action_authorization.status(scope)` reads disabled
+privileged-path flags. The SDK exposes no execute, activation, or external-call
+method for action authorization.

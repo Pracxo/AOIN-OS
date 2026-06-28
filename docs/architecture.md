@@ -1827,3 +1827,11 @@ role-aware context for local console filtering, but they cannot authenticate
 users, issue tokens or cookies, store credentials, create production sessions,
 grant writes, execute capabilities, activate modules, register runtimes, or call
 external services.
+
+## Dry-Run Action Authorization
+
+AION-097 places a dry-run authorization service in front of governed operator
+action requests, previews, and reviews. The service evaluates local role
+permission, local session boundary, policy, action type, target type, dry-run
+mode, and safety findings. It stores no new table and grants no execution,
+activation, external call, or write capability.

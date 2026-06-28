@@ -97,3 +97,4 @@ closure decision in ADR 0072.
 - [0085: Local Auth Contract and Dev Identity Simulation](0085-local-auth-contract-dev-identity-simulation.md) - Defines dev-only local auth contracts, identity simulation, role filtering, and audit boundaries.
 - [0086: Read-Only Local Session Prototype](0086-read-only-local-session-prototype.md) - Defines synthetic local session previews, read-only session context, and session safety boundaries.
 - [0087: Role-Aware Console View Filtering](0087-role-aware-console-view-filtering.md) - Defines read-only role matrix filtering, forbidden-action visibility, and role access audit boundaries.
+- [0088: Dry-Run Action Authorization Enforcement](0088-dry-run-action-authorization-enforcement.md) - Defines dry-run authorization enforcement for operator previews and reviews without execution.

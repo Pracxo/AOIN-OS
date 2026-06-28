@@ -30,3 +30,10 @@ Local auth now includes role access decisions and role access audits. These
 contracts prove view, section, and descriptor visibility without granting
 write, execution, activation, external-call, production-auth, or credential
 capability.
+
+## AION-097 Action Authorization Link
+
+Dry-run action authorization consumes local auth roles as input. It accepts the
+role context only for dry-run previews and review records, and it still keeps
+write, execution, activation, external-call, production-auth, and credential
+capabilities disabled.

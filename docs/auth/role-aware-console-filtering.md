@@ -27,3 +27,10 @@ Role-aware filtering now has a permission proof matrix, fail-closed decisions,
 section-level filtering, action descriptor filtering, and role access audit
 reports. Forbidden action descriptors and safety blockers remain visible after
 filtering.
+
+## AION-097 Action Authorization Use
+
+Role filtering remains visibility-only. Dry-run action authorization uses the
+same role proof matrix for request, preview, and review authorization, but it
+does not grant execute, activation, write, external-call, login, or credential
+capability.

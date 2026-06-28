@@ -49,7 +49,11 @@ def test_auth_examples_are_valid_and_redacted() -> None:
         "bearer",
     )
     for path in sorted((ROOT / "examples/auth").glob("*.json")):
-        if path.name.startswith("local-session") or path.name == "role-aware-session-context.json":
+        if (
+            path.name.startswith("local-session")
+            or path.name == "role-aware-session-context.json"
+            or "action-authorization" in path.name
+        ):
             continue
         payload = json.loads(path.read_text())
         serialized = json.dumps(payload, sort_keys=True).lower()

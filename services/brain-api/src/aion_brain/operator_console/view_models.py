@@ -51,6 +51,7 @@ def build_view_model(
             "descriptor_only_actions": True,
             "local_session_preview_supported": True,
             "role_access_filtering_supported": True,
+            "dry_run_action_authz_supported": True,
             "role_matrix_version": "aion-096",
         },
     )

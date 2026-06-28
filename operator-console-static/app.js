@@ -38,6 +38,10 @@
     blockers: "demo-data/operator-action-blockers.json",
     review: "demo-data/operator-action-review.json"
   };
+  var ACTION_AUTHORIZATION_DEMOS = {
+    preview: "demo-data/action-authorization-preview.json",
+    deny_matrix: "demo-data/action-authorization-deny-matrix.json"
+  };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
     role_filter: "demo-data/role-filtered-view-model.json"
@@ -68,6 +72,7 @@
     loadLocalAuthPanels();
     loadRoleAccessPreview();
     loadLocalSessionPanels();
+    loadActionAuthorizationPanel();
     loadView(state.activeView);
   });
 
@@ -281,6 +286,32 @@
       })
       .catch(function () {
         renderUnavailable("operator_actions");
+      });
+  }
+
+  function loadActionAuthorizationPanel() {
+    Promise.all([
+      fetchJson(ACTION_AUTHORIZATION_DEMOS.preview),
+      fetchJson(ACTION_AUTHORIZATION_DEMOS.deny_matrix)
+    ])
+      .then(function (payloads) {
+        renderActionAuthorizationPanel(redact(payloads[0]), redact(payloads[1]));
+      })
+      .catch(function () {
+        renderActionAuthorizationPanel(
+          {
+            decision: "unavailable",
+            policy_allowed: false,
+            role_allowed: false,
+            session_allowed: false,
+            dry_run_only: true,
+            write_allowed: false,
+            execution_allowed: false,
+            activation_allowed: false,
+            external_calls_allowed: false
+          },
+          { denials: [] }
+        );
       });
   }
 
@@ -686,6 +717,81 @@
       row.appendChild(label);
       row.appendChild(value);
       container.appendChild(row);
+    });
+  }
+
+  function renderActionAuthorizationPanel(preview, denyMatrix) {
+    renderActionAuthorizationSafety(preview);
+    renderActionAuthorizationDecision(preview);
+    renderActionAuthorizationDenials(denyMatrix);
+  }
+
+  function renderActionAuthorizationSafety(preview) {
+    var grid = document.getElementById("action-authz-safety");
+    if (!grid) {
+      return;
+    }
+    grid.textContent = "";
+    [
+      "dry_run_only",
+      "write_allowed",
+      "execution_allowed",
+      "activation_allowed",
+      "external_calls_allowed"
+    ].forEach(function (key) {
+      var card = document.createElement("div");
+      card.className = "safety-card";
+      card.textContent = key + "=" + String(Boolean(preview && preview[key]));
+      grid.appendChild(card);
+    });
+  }
+
+  function renderActionAuthorizationDecision(preview) {
+    var container = document.getElementById("action-authz-decision");
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    [
+      ["decision", preview.decision || "deny"],
+      ["status", preview.status || "blocked"],
+      ["role_allowed", String(Boolean(preview.role_allowed))],
+      ["policy_allowed", String(Boolean(preview.policy_allowed))],
+      ["session_allowed", String(Boolean(preview.session_allowed))]
+    ].forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "checklist-row";
+      var label = document.createElement("span");
+      label.textContent = item[0];
+      var value = document.createElement("strong");
+      value.textContent = safeText(item[1]);
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
+    });
+  }
+
+  function renderActionAuthorizationDenials(matrix) {
+    var container = document.getElementById("action-authz-deny-matrix");
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    var denials = matrix && Array.isArray(matrix.denials) ? matrix.denials : [];
+    if (!denials.length) {
+      container.appendChild(emptyNote("Authorization denials render here."));
+      return;
+    }
+    denials.forEach(function (denial) {
+      var card = document.createElement("div");
+      card.className = "blocker-badge";
+      var role = document.createElement("strong");
+      role.textContent = safeText(denial.role || denial.reason || "denied");
+      var reason = document.createElement("span");
+      reason.textContent = safeText(denial.reason || "blocked by dry-run boundary");
+      card.appendChild(role);
+      card.appendChild(reason);
+      container.appendChild(card);
     });
   }
 

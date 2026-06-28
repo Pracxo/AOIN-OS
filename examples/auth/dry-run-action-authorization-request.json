@@ -1,0 +1,26 @@
+{
+  "authorization_request_id": "authz-request-local-001",
+  "trace_id": "trace-action-authz-local-001",
+  "actor_id": "local.operator",
+  "workspace_id": "local",
+  "roles": ["operator"],
+  "owner_scope": ["workspace:main"],
+  "action_key": "operator.review",
+  "action_type": "generic",
+  "target_type": "generic",
+  "target_id": "operator-action-request-demo",
+  "mode": "dry_run",
+  "requested_operation": "preview",
+  "local_auth_context_ref": "local-auth-context-demo",
+  "local_session_preview_id": "local-session-preview-demo",
+  "operator_action_request_id": "operator-action-request-demo",
+  "metadata": {
+    "synthetic": true,
+    "dry_run_only": true,
+    "write_allowed": false,
+    "execution_allowed": false,
+    "activation_allowed": false,
+    "external_calls_allowed": false
+  },
+  "created_by": "local.operator"
+}

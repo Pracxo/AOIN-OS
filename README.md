@@ -3884,3 +3884,17 @@ AION-096 adds a read-only role permission proof matrix, role-aware console view
 filtering, access audit reports, and static role preview data. It does not add
 production auth, login/logout, credential storage, session persistence,
 execution, activation, or external calls.
+
+### AION-097 Dry-Run Action Authorization
+
+AION-097 adds dry-run authorization enforcement for governed operator action
+requests, previews, and reviews. It connects local auth roles, local session
+context, the role permission matrix, policy, action type, target type, and
+safety blockers. It remains dry-run only and does not add writes, execution,
+activation, external calls, production auth, or frontend dependencies.
+
+Developer command:
+
+```bash
+./scripts/action-authorization-check.sh
+```

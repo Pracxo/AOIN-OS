@@ -19,3 +19,9 @@ The audit checks for:
 The audit records only metadata and safety status. It does not store passwords,
 credentials, bearer material, cookies, raw prompts, hidden reasoning, or session
 state.
+
+## AION-097 Authorization Audit
+
+Action authorization audit reuses the session boundary proof. It confirms that
+dry-run authorization blocks writes, execution, activation, external calls, and
+unsafe session contexts before any preview or review record is allowed.

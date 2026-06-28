@@ -207,8 +207,10 @@ blocked_paths = (
 allowed_runtime_paths = {
     "services/brain-api/src/aion_brain/api/local_auth.py",
     "services/brain-api/src/aion_brain/api/local_session.py",
+    "services/brain-api/src/aion_brain/api/action_authorization.py",
     "packages/aion-sdk-python/src/aion_sdk/resources/local_auth.py",
     "packages/aion-sdk-python/src/aion_sdk/resources/local_session.py",
+    "packages/aion-sdk-python/src/aion_sdk/resources/action_authorization.py",
 }
 for name in [*changed, *untracked]:
     basename = Path(name).name

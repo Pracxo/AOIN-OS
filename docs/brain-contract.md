@@ -1665,3 +1665,12 @@ AION-096 extends local auth contracts with `RoleAccessDecision` and
 `RoleAccessAudit`. Decisions fail closed for unknown roles or views and carry
 hard-false write, execution, activation, and external-call flags. Audits pass
 only when forbidden actions remain visible and redaction is applied.
+
+## Action Authorization Contracts
+
+AION-097 adds `DryRunActionAuthorizationRequest`,
+`DryRunActionAuthorizationDecision`, `ActionAuthorizationBlocker`,
+`ActionAuthorizationAuditRequest`, and `ActionAuthorizationAuditResult`.
+Decisions can allow dry-run preview or review records only. Contract invariants
+keep `write_allowed=false`, `execution_allowed=false`,
+`activation_allowed=false`, and `external_calls_allowed=false`.

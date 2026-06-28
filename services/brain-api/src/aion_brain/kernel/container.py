@@ -4,6 +4,11 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import TypeVar, cast
 
+from aion_brain.action_authorization import (
+    ActionAuthorizationAuditService,
+    ActionAuthorizationQueryService,
+    DryRunActionAuthorizationService,
+)
 from aion_brain.action_proposals.blockers import ActionBlockerService
 from aion_brain.action_proposals.handoffs import ExecutionHandoffService
 from aion_brain.action_proposals.proposals import ActionProposalService
@@ -2078,9 +2083,26 @@ class KernelContainer:
             self.policy_adapter,
             telemetry_service=self.telemetry_service,
         )
+        if not hasattr(self, "role_permission_matrix_service"):
+            self.role_permission_matrix_service = RolePermissionMatrixService()
+        self.dry_run_action_authorization_service = DryRunActionAuthorizationService(
+            matrix_service=self.role_permission_matrix_service,
+            policy_adapter=self.policy_adapter,
+            telemetry_service=self.telemetry_service,
+            settings=self.settings,
+        )
+        self.action_authorization_audit_service = ActionAuthorizationAuditService(
+            settings=self.settings,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+        )
+        self.action_authorization_query_service = ActionAuthorizationQueryService(
+            settings=self.settings,
+        )
         self.operator_action_preview_service = OperatorActionPreviewService(
             self.operator_action_repository,
             self.policy_adapter,
+            authorization_service=self.dry_run_action_authorization_service,
             telemetry_service=self.telemetry_service,
             settings=self.settings,
         )
@@ -2092,11 +2114,13 @@ class KernelContainer:
             telemetry_service=self.telemetry_service,
             audit_sink=self.audit_integrity_ledger,
             provenance_service=self.provenance_service,
+            authorization_service=self.dry_run_action_authorization_service,
             settings=self.settings,
         )
         self.operator_action_review_service = OperatorActionReviewService(
             self.operator_action_repository,
             self.policy_adapter,
+            authorization_service=self.dry_run_action_authorization_service,
             telemetry_service=self.telemetry_service,
             audit_sink=self.audit_integrity_ledger,
             provenance_service=self.provenance_service,
@@ -3536,7 +3560,8 @@ class KernelContainer:
             self.policy_adapter,
             self.telemetry_service,
         )
-        self.role_permission_matrix_service = RolePermissionMatrixService()
+        if not hasattr(self, "role_permission_matrix_service"):
+            self.role_permission_matrix_service = RolePermissionMatrixService()
         self.local_role_service = LocalRoleService(
             matrix_service=self.role_permission_matrix_service,
         )
@@ -4091,6 +4116,24 @@ class KernelContainer:
             (
                 "operator_action_blocker_service",
                 self.operator_action_blocker_service,
+                "service",
+                "local",
+            ),
+            (
+                "dry_run_action_authorization_service",
+                self.dry_run_action_authorization_service,
+                "service",
+                "local",
+            ),
+            (
+                "action_authorization_audit_service",
+                self.action_authorization_audit_service,
+                "service",
+                "local",
+            ),
+            (
+                "action_authorization_query_service",
+                self.action_authorization_query_service,
                 "service",
                 "local",
             ),

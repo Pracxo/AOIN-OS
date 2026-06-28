@@ -21,3 +21,9 @@ Review semantics:
 - Future write support must pass a separate architecture and policy gate.
 
 The review API is scoped and policy-gated by `operator_action.review`.
+
+## AION-097 Review Authorization
+
+Review creation must pass dry-run action authorization for a reviewer role.
+Review records remain record-only evidence; approval context does not execute,
+activate, write, or call external systems.

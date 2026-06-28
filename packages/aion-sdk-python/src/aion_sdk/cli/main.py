@@ -11,6 +11,9 @@ from uuid import uuid4
 import typer
 from rich.console import Console
 
+from aion_sdk.cli.commands.action_authorization import (
+    install_action_authorization_commands,
+)
 from aion_sdk.cli.commands.action_proposals import install_action_proposal_commands
 from aion_sdk.cli.commands.audit import install_audit_commands
 from aion_sdk.cli.commands.backups import install_backup_commands
@@ -571,6 +574,7 @@ install_resilience_commands(app, get_client=_client, get_scope=_scope, render=_r
 install_audit_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_operator_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_operator_action_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_action_authorization_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_operator_console_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_local_auth_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_local_session_commands(app, get_client=_client, get_scope=_scope, render=_render)
