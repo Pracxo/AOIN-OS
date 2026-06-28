@@ -2,6 +2,10 @@
 
 The following conditions block auth implementation or release:
 
+AION-099 inherits these no-go conditions. The disabled auth runtime prototype is
+not a production auth implementation and must keep login, logout, providers,
+credentials, tokens, cookies, and persistent sessions disabled.
+
 - password storage added without design,
 - external identity provider added without threat model,
 - login endpoint added without policy integration,

@@ -4,6 +4,9 @@ Production auth runtime cannot be enabled until every gate below is satisfied.
 AION-098 adds no runtime implementation and keeps `production_auth_enabled`
 false.
 
+AION-099 does not satisfy or bypass these gates. It adds disabled status,
+mock-claims preview, and audit proof only; production auth remains disabled.
+
 | Gate | Required Evidence | Blocker Behavior |
 | --- | --- | --- |
 | threat model approved | reviewed `docs/auth/production-auth-threat-model.md` | block runtime auth |

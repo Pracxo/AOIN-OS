@@ -42,6 +42,10 @@
     preview: "demo-data/action-authorization-preview.json",
     deny_matrix: "demo-data/action-authorization-deny-matrix.json"
   };
+  var AUTH_RUNTIME_DEMOS = {
+    status: "demo-data/auth-runtime-status.json",
+    preview: "demo-data/mock-claims-preview.json"
+  };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
     role_filter: "demo-data/role-filtered-view-model.json"
@@ -73,6 +77,7 @@
     loadRoleAccessPreview();
     loadLocalSessionPanels();
     loadActionAuthorizationPanel();
+    loadAuthRuntimePanel();
     loadView(state.activeView);
   });
 
@@ -348,11 +353,25 @@
     var normalized = key.toLowerCase().replace(/-/g, "_");
     if ([
       "token_issued",
+      "token_present",
+      "token_issuance_enabled",
       "cookie_issued",
+      "cookie_present",
+      "cookie_issuance_enabled",
       "credential_backed",
+      "credentials_present",
       "credentials_enabled",
       "tokens_enabled",
-      "cookies_enabled"
+      "cookies_enabled",
+      "session_persisted",
+      "session_persistence_enabled",
+      "production_auth_enabled",
+      "auth_runtime_enabled",
+      "external_identity_provider_enabled",
+      "login_endpoint_enabled",
+      "logout_endpoint_enabled",
+      "mock_claims_preview_enabled",
+      "actor_mapping_preview_enabled"
     ].indexOf(normalized) !== -1) {
       return false;
     }
@@ -972,6 +991,118 @@
       badge.appendChild(label);
       badge.appendChild(value);
       container.appendChild(badge);
+    });
+  }
+
+  function loadAuthRuntimePanel() {
+    var statusPromise = state.apiAllowed
+      ? fetchAuthRuntimeStatus().catch(function () {
+        return fetchJson(AUTH_RUNTIME_DEMOS.status);
+      })
+      : fetchJson(AUTH_RUNTIME_DEMOS.status);
+    Promise.all([
+      statusPromise,
+      fetchJson(AUTH_RUNTIME_DEMOS.preview)
+    ])
+      .then(function (payloads) {
+        renderAuthRuntimeStatus(redact(payloads[0]));
+        renderMockClaimsPreview(redact(payloads[1]));
+      })
+      .catch(function () {
+        renderAuthRuntimeStatus({
+          production_auth_enabled: false,
+          auth_runtime_enabled: false,
+          external_identity_provider_enabled: false,
+          credentials_enabled: false,
+          token_issuance_enabled: false,
+          cookie_issuance_enabled: false,
+          session_persistence_enabled: false,
+          login_endpoint_enabled: false,
+          logout_endpoint_enabled: false,
+          blockers: [{ blocker_type: "generic", reason: "auth_runtime_demo_unavailable" }]
+        });
+        renderMockClaimsPreview({ status: "unavailable", roles: [] });
+      });
+  }
+
+  function fetchAuthRuntimeStatus() {
+    var endpoint = state.apiBase + "/brain/auth-runtime/status?scope=workspace:main";
+    return fetch(endpoint).then(function (response) {
+      if (!response.ok) {
+        throw new Error("auth runtime status unavailable");
+      }
+      return response.json();
+    });
+  }
+
+  function renderAuthRuntimeStatus(status) {
+    var grid = document.getElementById("auth-runtime-status-grid");
+    var blockers = document.getElementById("auth-runtime-blockers");
+    if (!grid || !blockers) {
+      return;
+    }
+    grid.textContent = "";
+    [
+      "production_auth_enabled",
+      "auth_runtime_enabled",
+      "external_identity_provider_enabled",
+      "credentials_enabled",
+      "token_issuance_enabled",
+      "cookie_issuance_enabled",
+      "session_persistence_enabled",
+      "login_endpoint_enabled",
+      "logout_endpoint_enabled"
+    ].forEach(function (key) {
+      var card = document.createElement("div");
+      card.className = "safety-card";
+      card.textContent = key + "=" + String(Boolean(status && status[key]));
+      grid.appendChild(card);
+    });
+    blockers.textContent = "";
+    var items = status && Array.isArray(status.blockers) ? status.blockers : [];
+    if (!items.length) {
+      blockers.appendChild(emptyNote("Auth runtime blockers render here."));
+      return;
+    }
+    items.forEach(function (item) {
+      var badge = document.createElement("div");
+      badge.className = "blocker-badge";
+      var label = document.createElement("strong");
+      label.textContent = safeText(item.blocker_type || item.reason || "disabled");
+      var value = document.createElement("span");
+      value.textContent = safeText(item.reason || "blocked by design");
+      badge.appendChild(label);
+      badge.appendChild(value);
+      blockers.appendChild(badge);
+    });
+  }
+
+  function renderMockClaimsPreview(preview) {
+    var container = document.getElementById("mock-claims-preview");
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    [
+      ["status", preview.status || "preview"],
+      ["issuer", preview.issuer || "mock.local"],
+      ["subject", preview.subject || "local.operator"],
+      ["roles", Array.isArray(preview.roles) ? preview.roles.join(", ") : "operator"],
+      ["production_identity", String(Boolean(preview.production_identity))],
+      ["credentials_present", String(Boolean(preview.credentials_present))],
+      ["token_present", String(Boolean(preview.token_present))],
+      ["cookie_present", String(Boolean(preview.cookie_present))],
+      ["session_persisted", String(Boolean(preview.session_persisted))]
+    ].forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "checklist-row";
+      var label = document.createElement("span");
+      label.textContent = item[0];
+      var value = document.createElement("strong");
+      value.textContent = safeText(item[1] || "none");
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
     });
   }
 

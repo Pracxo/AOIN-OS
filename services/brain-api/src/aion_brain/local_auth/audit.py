@@ -151,6 +151,8 @@ class LocalAuthAuditService:
                 path.name.startswith("local-session")
                 or path.name == "role-aware-session-context.json"
                 or "action-authorization" in path.name
+                or "auth-runtime" in path.name
+                or "mock-claims" in path.name
             ):
                 continue
             try:

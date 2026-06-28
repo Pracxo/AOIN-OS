@@ -261,6 +261,10 @@ class KernelDiagnostics:
         ("role_access_audit_service_present", "role_access_audit_service", "medium"),
         ("local_auth_audit_service_present", "local_auth_audit_service", "medium"),
         ("local_auth_query_service_present", "local_auth_query_service", "medium"),
+        ("auth_runtime_gate_service_present", "auth_runtime_gate_service", "medium"),
+        ("mock_claims_preview_service_present", "mock_claims_preview_service", "medium"),
+        ("auth_runtime_audit_service_present", "auth_runtime_audit_service", "medium"),
+        ("auth_runtime_query_service_present", "auth_runtime_query_service", "medium"),
         ("local_session_preview_service_present", "local_session_preview_service", "medium"),
         ("local_session_context_service_present", "local_session_context_service", "medium"),
         ("local_session_boundary_service_present", "local_session_boundary_service", "medium"),
@@ -450,6 +454,7 @@ class KernelDiagnostics:
         checks.extend(self._model_output_checks(settings))
         checks.extend(self._action_proposal_checks(settings))
         checks.extend(self._action_authorization_checks(settings))
+        checks.extend(self._auth_runtime_checks(settings))
         checks.extend(self._operator_action_checks(settings))
         checks.extend(self._run_supervision_checks(settings))
         checks.extend(self._notification_checks(settings))
@@ -928,6 +933,118 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Action authorization services are assembled.",
+            ),
+        ]
+
+    def _auth_runtime_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "auth_runtime_gate_service",
+                "mock_claims_preview_service",
+                "auth_runtime_audit_service",
+                "auth_runtime_query_service",
+                "local_role_service",
+            )
+        )
+        return [
+            self._result(
+                "auth_runtime_enabled",
+                "auth_runtime",
+                (
+                    "failed"
+                    if bool(getattr(settings, "auth_runtime_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Production auth runtime remains disabled.",
+            ),
+            self._result(
+                "auth_runtime_mock_claims_preview_enabled",
+                "auth_runtime",
+                (
+                    "passed"
+                    if bool(
+                        getattr(settings, "auth_runtime_mock_claims_preview_enabled", True)
+                    )
+                    else "warning"
+                ),
+                "medium",
+                "Mock claims preview is available for local design proof.",
+            ),
+            self._result(
+                "auth_runtime_external_identity_enabled",
+                "auth_runtime",
+                (
+                    "failed"
+                    if bool(getattr(settings, "auth_runtime_external_identity_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "External identity providers remain disabled.",
+            ),
+            self._result(
+                "auth_runtime_credentials_enabled",
+                "auth_runtime",
+                (
+                    "failed"
+                    if bool(getattr(settings, "auth_runtime_credentials_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Credential handling remains disabled.",
+            ),
+            self._result(
+                "auth_runtime_token_issuance_enabled",
+                "auth_runtime",
+                (
+                    "failed"
+                    if bool(getattr(settings, "auth_runtime_token_issuance_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Token issuance remains disabled.",
+            ),
+            self._result(
+                "auth_runtime_cookie_issuance_enabled",
+                "auth_runtime",
+                (
+                    "failed"
+                    if bool(getattr(settings, "auth_runtime_cookie_issuance_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Cookie issuance remains disabled.",
+            ),
+            self._result(
+                "auth_runtime_session_persistence_enabled",
+                "auth_runtime",
+                (
+                    "failed"
+                    if bool(getattr(settings, "auth_runtime_session_persistence_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Session persistence remains disabled.",
+            ),
+            self._result(
+                "auth_runtime_login_logout_disabled",
+                "auth_runtime",
+                (
+                    "failed"
+                    if bool(getattr(settings, "auth_runtime_login_endpoint_enabled", False))
+                    or bool(getattr(settings, "auth_runtime_logout_endpoint_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Login and logout endpoints remain disabled.",
+            ),
+            self._result(
+                "auth_runtime_services_present",
+                "auth_runtime",
+                "passed" if services_present else "failed",
+                "high",
+                "Disabled auth-runtime services are assembled.",
             ),
         ]
 

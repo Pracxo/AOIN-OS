@@ -1022,3 +1022,12 @@ AION-097 emits `dry_run_action_authorization_decided` and
 `action_authorization_audit_completed`. Node types are
 `action_authorization_decision` and `action_authorization_audit`. Payloads keep
 write, execution, activation, and external-call flags false.
+
+## Auth Runtime Telemetry
+
+AION-099 emits `auth_runtime_status_checked`,
+`mock_claims_preview_created`, and `auth_runtime_audit_completed`. Node types
+are `auth_runtime_status`, `mock_claims_preview`, and `auth_runtime_audit`.
+Payloads represent disabled runtime status and synthetic preview evidence only;
+they do not represent production auth, login, credentials, tokens, cookies,
+sessions, external identity calls, execution, or activation.

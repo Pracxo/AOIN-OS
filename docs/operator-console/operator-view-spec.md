@@ -116,3 +116,12 @@ View models may advertise `dry_run_action_authz_supported=true` as a read-only
 capability note. This indicates preview/review authorization evidence is
 available, not that execution, activation, writes, or external calls are
 available.
+
+## AION-099 Auth Runtime Metadata
+
+Static console demo data may include disabled auth runtime status and mock
+claims preview metadata. Required false flags include production auth, auth
+runtime enablement, external identity provider, credentials, token issuance,
+cookie issuance, session persistence, login endpoint, and logout endpoint. Mock
+claims preview metadata is synthetic and must not imply authentication,
+execution authorization, activation authorization, or production identity.

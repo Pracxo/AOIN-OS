@@ -129,6 +129,8 @@ for path in sorted((root / "examples" / "auth").glob("*.json")):
         continue
     if "authorization" in path.name:
         continue
+    if "auth-runtime" in path.name or "mock-claims" in path.name:
+        continue
     if "production-auth" in path.name or path.name == "disabled-auth-prototype-plan.json":
         continue
     payload = json.loads(path.read_text())
@@ -192,6 +194,11 @@ allowed_auth_paths = {
     "docs/auth/production-auth-threat-model.md",
     "docs/auth/production-auth-release-gates.md",
     "docs/auth/disabled-auth-prototype-plan.md",
+    "docs/auth/disabled-production-auth-prototype.md",
+    "docs/auth/mock-claims-adapter.md",
+    "docs/auth/auth-runtime-gate.md",
+    "docs/auth/auth-runtime-audit.md",
+    "docs/auth/auth-runtime-no-go.md",
     "docs/operator-console/dry-run-action-authorization.md",
     "docs/operator-console/action-authorization-preview.md",
     "docs/operator-console/action-authorization-deny-matrix.md",
@@ -199,6 +206,7 @@ allowed_auth_paths = {
     "docs/adr/0085-local-auth-contract-dev-identity-simulation.md",
     "docs/adr/0088-dry-run-action-authorization-enforcement.md",
     "docs/adr/0089-production-auth-architecture-decision.md",
+    "docs/adr/0090-disabled-production-auth-prototype.md",
     "examples/auth/local-operator-identity.json",
     "examples/auth/operator-role-matrix.json",
     "examples/auth/session-boundary-example.json",
@@ -223,10 +231,18 @@ allowed_auth_paths = {
     "examples/auth/production-auth-threat-model.json",
     "examples/auth/disabled-auth-prototype-plan.json",
     "examples/auth/production-auth-release-gates.json",
+    "examples/auth/auth-runtime-status.json",
+    "examples/auth/mock-claims-preview-request.json",
+    "examples/auth/mock-claims-preview-result.json",
+    "examples/auth/auth-runtime-audit-request.json",
+    "examples/auth/auth-runtime-blockers.json",
     "operator-console-static/demo-data/action-authorization-preview.json",
     "operator-console-static/demo-data/action-authorization-deny-matrix.json",
+    "operator-console-static/demo-data/auth-runtime-status.json",
+    "operator-console-static/demo-data/mock-claims-preview.json",
     "scripts/action-authorization-check.sh",
     "scripts/production-auth-architecture-check.sh",
+    "scripts/auth-runtime-check.sh",
     "services/brain-api/src/aion_brain/contracts/action_authorization.py",
     "services/brain-api/src/aion_brain/action_authorization/__init__.py",
     "services/brain-api/src/aion_brain/action_authorization/redaction.py",
@@ -256,6 +272,27 @@ allowed_auth_paths = {
     "services/brain-api/tests/test_kernel_action_authorization_wiring.py",
     "services/brain-api/tests/test_visual_telemetry_action_authorization.py",
     "services/brain-api/tests/test_production_auth_architecture_docs.py",
+    "services/brain-api/src/aion_brain/contracts/auth_runtime.py",
+    "services/brain-api/src/aion_brain/auth_runtime/__init__.py",
+    "services/brain-api/src/aion_brain/auth_runtime/actor_mapping.py",
+    "services/brain-api/src/aion_brain/auth_runtime/audit.py",
+    "services/brain-api/src/aion_brain/auth_runtime/blockers.py",
+    "services/brain-api/src/aion_brain/auth_runtime/gate.py",
+    "services/brain-api/src/aion_brain/auth_runtime/mock_claims.py",
+    "services/brain-api/src/aion_brain/auth_runtime/query.py",
+    "services/brain-api/src/aion_brain/auth_runtime/redaction.py",
+    "services/brain-api/src/aion_brain/api/auth_runtime.py",
+    "packages/aion-sdk-python/src/aion_sdk/resources/auth_runtime.py",
+    "packages/aion-sdk-python/src/aion_sdk/cli/commands/auth_runtime.py",
+    "packages/aion-sdk-python/tests/test_auth_runtime_resource.py",
+    "packages/aion-sdk-python/tests/test_cli_auth_runtime.py",
+    "services/brain-api/tests/test_auth_runtime_contracts.py",
+    "services/brain-api/tests/test_auth_runtime_redaction.py",
+    "services/brain-api/tests/test_auth_runtime_services.py",
+    "services/brain-api/tests/test_auth_runtime_audit.py",
+    "services/brain-api/tests/test_auth_runtime_api.py",
+    "services/brain-api/tests/test_kernel_auth_runtime_wiring.py",
+    "services/brain-api/tests/test_visual_telemetry_auth_runtime.py",
     "operator-console-static/demo-data/local-auth-status.json",
     "operator-console-static/demo-data/role-filtered-view-model.json",
     "scripts/auth-design-check.sh",
@@ -354,7 +391,7 @@ for name in [*changed, *untracked]:
         raise SystemExit(f"frontend package or build file changed: {name}")
     if name.startswith("infra/postgres/migrations/"):
         raise SystemExit(f"AION-093 must not add a migration: {name}")
-    if name.startswith("services/brain-api/src/aion_brain/api/auth"):
+    if name.startswith("services/brain-api/src/aion_brain/api/auth") and name not in allowed_auth_paths:
         raise SystemExit(f"AION-093 must not add an auth API route: {name}")
     if "auth" in name.lower() and name not in allowed_auth_paths:
         raise SystemExit(f"unexpected auth runtime or artifact path: {name}")

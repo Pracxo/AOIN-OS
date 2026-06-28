@@ -132,6 +132,9 @@ allowed_actions := {
 	"operator_console.audit.run",
 	"operator_console.action.describe",
 	"operator_console.query",
+	"auth_runtime.status.read",
+	"auth_runtime.mock_claims.preview",
+	"auth_runtime.audit.run",
 	"local_auth.roles.read",
 	"local_auth.identity.simulate",
 	"local_auth.console.filter",
@@ -473,6 +476,7 @@ allowed_actions := {
 	"local_auth.role_matrix.read",
 	"local_auth.status.read",
 	"local_session.status.read",
+	"auth_runtime.status.read",
 	"action_authorization.decision.read",
 	"runtime.registration.preview.create",
 	"runtime.registration.preview.read",
@@ -2234,6 +2238,63 @@ decision := {
 	input.action_type == "action_authorization.decision.read"
 	not action_authorization_unsafe_request
 	operator_reader
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "auth_runtime_status_read_allowed",
+	"constraints": ["disabled_auth_runtime", "read_only", "no_production_auth", "no_external_identity", "no_credentials", "no_tokens", "no_cookies", "no_persistence"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "auth_runtime.status.read"
+	not auth_runtime_unsafe_request
+	local_auth_actor
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "auth_runtime_mock_claims_preview_allowed",
+	"constraints": ["mock_only", "preview_only", "no_production_auth", "no_external_identity", "no_credentials", "no_tokens", "no_cookies", "no_persistence"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "auth_runtime.mock_claims.preview"
+	input.context.mock_only == true
+	local_auth_dev_context
+	local_auth_actor
+	not auth_runtime_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "auth_runtime_audit_allowed",
+	"constraints": ["disabled_auth_runtime", "read_only", "mock_only", "no_production_auth", "no_external_identity", "no_credentials", "no_tokens", "no_cookies", "no_persistence"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "auth_runtime.audit.run"
+	auth_runtime_auditor
+	not auth_runtime_unsafe_request
+}
+
+decision := {
+	"allow": false,
+	"approval_required": false,
+	"reason": "auth_runtime_privileged_boundary_denied",
+	"constraints": ["production_auth_denied", "external_identity_denied", "credential_denied", "token_denied", "cookie_denied", "persistence_denied"],
+	"audit_level": "high",
+} if {
+	valid_action
+	valid_risk
+	auth_runtime_action
+	auth_runtime_unsafe_request
 }
 
 decision := {
@@ -6439,6 +6500,18 @@ action_authorization_action if {
 	input.action_type == "action_authorization.decision.read"
 }
 
+auth_runtime_action if {
+	input.action_type == "auth_runtime.status.read"
+}
+
+auth_runtime_action if {
+	input.action_type == "auth_runtime.mock_claims.preview"
+}
+
+auth_runtime_action if {
+	input.action_type == "auth_runtime.audit.run"
+}
+
 operator_action_read if {
 	input.action_type == "operator_action.request.read"
 }
@@ -6649,6 +6722,62 @@ action_authorization_auditor if {
 
 action_authorization_auditor if {
 	input.context.actor_context.roles[_] == "admin"
+}
+
+auth_runtime_auditor if {
+	dev_owner
+}
+
+auth_runtime_auditor if {
+	admin_or_owner
+}
+
+auth_runtime_auditor if {
+	input.context.actor_context.roles[_] == "operator"
+}
+
+auth_runtime_auditor if {
+	input.context.actor_context.roles[_] == "auditor"
+}
+
+auth_runtime_auditor if {
+	input.context.actor_context.roles[_] == "admin"
+}
+
+auth_runtime_unsafe_request if {
+	local_auth_unsafe_request
+}
+
+auth_runtime_unsafe_request if {
+	input.context.auth_runtime_enabled == true
+}
+
+auth_runtime_unsafe_request if {
+	input.context.token_issued == true
+}
+
+auth_runtime_unsafe_request if {
+	input.context.cookie_issued == true
+}
+
+auth_runtime_unsafe_request if {
+	input.context.persistent == true
+}
+
+auth_runtime_unsafe_request if {
+	input.context.external_calls_allowed == true
+}
+
+auth_runtime_unsafe_request if {
+	input.context.write_allowed == true
+}
+
+auth_runtime_unsafe_request if {
+	input.context.execute_allowed == true
+}
+
+auth_runtime_unsafe_request if {
+	input.context.activation_allowed == true
 }
 
 operator_reader if {

@@ -288,6 +288,42 @@
           </div>
         </section>
 
+        <section class="auth-runtime-panel" id="auth-runtime-panel" aria-label="Disabled auth runtime panel">
+          <div class="no-activation-banner">
+            Production auth runtime is disabled. Mock claims are preview-only and never create identity, credentials, tokens, cookies, or persisted session state.
+          </div>
+          <div class="module-dashboard-heading">
+            <div>
+              <p class="eyebrow">Auth Runtime</p>
+              <h3>Disabled Production Auth Prototype</h3>
+            </div>
+            <button class="disabled-action" type="button" disabled>
+              No login
+            </button>
+          </div>
+          <div class="safety-boundary-grid" id="auth-runtime-status-grid">
+            <div class="safety-card">production_auth_enabled=false</div>
+            <div class="safety-card">auth_runtime_enabled=false</div>
+            <div class="safety-card">external_identity_provider_enabled=false</div>
+            <div class="safety-card">credentials_enabled=false</div>
+            <div class="safety-card">token_issuance_enabled=false</div>
+            <div class="safety-card">cookie_issuance_enabled=false</div>
+            <div class="safety-card">session_persistence_enabled=false</div>
+            <div class="safety-card">login_endpoint_enabled=false</div>
+            <div class="safety-card">logout_endpoint_enabled=false</div>
+          </div>
+          <div class="module-subpanels">
+            <section class="module-subpanel" aria-label="Mock claims preview">
+              <h3>Mock Claims Preview</h3>
+              <div class="review-checklist" id="mock-claims-preview"></div>
+            </section>
+            <section class="module-subpanel" aria-label="Auth runtime blockers">
+              <h3>Blockers</h3>
+              <div class="blocker-list" id="auth-runtime-blockers"></div>
+            </section>
+          </div>
+        </section>
+
         <section class="section-grid" id="sections" aria-label="Console sections"></section>
 
         <section class="action-panel" aria-label="Forbidden actions">
@@ -300,6 +336,7 @@
           <pre><code>./scripts/operator-console-static-check.sh
 ./scripts/role-filter-check.sh
 ./scripts/local-session-check.sh
+./scripts/auth-runtime-check.sh
 ./scripts/module-lifecycle-dashboard-check.sh
 ./scripts/operator-actions-check.sh
 ./scripts/operator-console-static-demo.sh --offline-ok --skip-api

@@ -6,6 +6,9 @@ AION-098 does not implement token storage, session storage, cookies, login
 routes, logout routes, provider SDKs, or credential storage. The design
 decision is to keep future token handling inside a dedicated production auth
 boundary and to require a separate release gate before any runtime storage
+is added. AION-099 does not change this decision; the disabled auth runtime
+prototype reports token issuance, cookie issuance, and session persistence as
+disabled.
 exists.
 
 ## Token Handling Rules

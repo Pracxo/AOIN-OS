@@ -410,3 +410,8 @@ Instructions for future Codex runs in this repository:
   Passkey/WebAuthn options, but it must not add provider SDKs, login/logout
   routes, credentials, tokens, cookies, sessions, migrations, external identity
   calls, frontend package files, or production auth enablement.
+- AION-099 disabled auth runtime is mock-only. It may add disabled status,
+  mock-claims preview, and audit proof, but it must not add production auth,
+  login/logout, provider callbacks, credential handling, token issuance, cookie
+  issuance, persistent sessions, provider SDKs, migrations, external identity
+  calls, frontend package files, execution, activation, or hard delete.

@@ -71,3 +71,11 @@ The static action authorization panel loads local JSON files only. It displays
 dry-run decisions, denial reasons, and hard-false boundary flags. It has no
 execute button, activation button, external-call button, credential input, or
 browser storage.
+
+## AION-099 Auth Runtime Panel Safety
+
+The static auth runtime panel loads local JSON files or localhost status only.
+It displays disabled production auth flags and mock claims preview evidence. It
+has no login form, logout button, password field, token field, cookie field,
+credential input, browser storage, provider endpoint, write action, execution
+path, activation control, package dependency, or external API target.

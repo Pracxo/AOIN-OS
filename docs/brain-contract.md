@@ -1674,3 +1674,15 @@ AION-097 adds `DryRunActionAuthorizationRequest`,
 Decisions can allow dry-run preview or review records only. Contract invariants
 keep `write_allowed=false`, `execution_allowed=false`,
 `activation_allowed=false`, and `external_calls_allowed=false`.
+
+## Auth Runtime Contracts
+
+AION-099 adds `AuthRuntimeStatus`, `MockClaimsPreviewRequest`,
+`MockClaimsPreviewResult`, `AuthRuntimeBlocker`, `AuthRuntimeAuditRequest`, and
+`AuthRuntimeAuditResult`.
+
+These contracts are disabled-auth and mock-only. Production auth, external
+identity, credentials, token issuance, cookie issuance, session persistence,
+login endpoints, and logout endpoints must remain false. Mock claims preview
+maps synthetic claims to a preview ActorContext only and does not authenticate,
+authorize execution, or bypass the local role matrix.

@@ -1722,3 +1722,16 @@ AION-098. No credentials, tokens, sessions, or cookies are created, stored,
 issued, or accepted. Future production identity must not self-authorize Brain
 actions; policy, audit, ActorContext, role mapping, and dry-run action
 authorization remain authoritative.
+
+## AION-099 Disabled Auth Runtime Policy
+
+AION-099 adds auth runtime preview policy actions:
+
+- `auth_runtime.status.read`
+- `auth_runtime.mock_claims.preview`
+- `auth_runtime.audit.run`
+
+These actions are local/dev, read-only or preview-only controls. Policy denies
+production auth enablement, login, logout, token issuance, cookie issuance,
+session persistence, credential handling, external identity providers,
+execution, activation, external calls, and unknown auth runtime actions.

@@ -227,3 +227,11 @@ optional deployment pattern.
 No production auth is implemented in AION-098. No provider integration is added
 in AION-098. No credentials, tokens, sessions, or cookies are created, stored,
 issued, or accepted. `production_auth_enabled` remains false.
+
+## AION-099 Disabled Auth Runtime Prototype
+
+AION-099 adds a disabled auth runtime status and mock claims preview panel to
+the local static console. The panel shows hard-off production auth flags and
+synthetic preview evidence only. It adds no login form, logout button,
+credential field, token field, cookie/session persistence, provider runtime,
+execution, activation, package dependency, or external call.

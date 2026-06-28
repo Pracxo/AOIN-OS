@@ -1,0 +1,57 @@
+{
+  "status_id": "auth-runtime-status-demo",
+  "production_auth_enabled": false,
+  "auth_runtime_enabled": false,
+  "mock_claims_preview_enabled": true,
+  "external_identity_provider_enabled": false,
+  "credentials_enabled": false,
+  "token_issuance_enabled": false,
+  "cookie_issuance_enabled": false,
+  "session_persistence_enabled": false,
+  "login_endpoint_enabled": false,
+  "logout_endpoint_enabled": false,
+  "actor_mapping_preview_enabled": true,
+  "blockers": [
+    {
+      "auth_runtime_blocker_id": "auth-runtime-blocker-production-disabled",
+      "blocker_type": "production_auth_disabled",
+      "severity": "critical",
+      "status": "open",
+      "reason": "production_auth_disabled_by_default",
+      "recommended_action": "complete_release_gates_before_enablement",
+      "source_type": "settings",
+      "source_id": null,
+      "metadata": {},
+      "created_at": "2026-06-28T00:00:00Z"
+    },
+    {
+      "auth_runtime_blocker_id": "auth-runtime-blocker-external-disabled",
+      "blocker_type": "external_identity_disabled",
+      "severity": "high",
+      "status": "open",
+      "reason": "external_identity_provider_disabled",
+      "recommended_action": "keep_provider_integration_absent",
+      "source_type": "settings",
+      "source_id": null,
+      "metadata": {},
+      "created_at": "2026-06-28T00:00:00Z"
+    }
+  ],
+  "warnings": [
+    {
+      "code": "prototype_disabled",
+      "status": "open"
+    }
+  ],
+  "metadata": {
+    "disabled_by_default": true,
+    "owner_scope": [
+      "workspace:main"
+    ],
+    "mock_only": true,
+    "runtime_activation_allowed": false
+  },
+  "created_at": "2026-06-28T00:00:00Z",
+  "read_only": true,
+  "redaction_applied": true
+}
