@@ -19,3 +19,8 @@ accepted as proof of identity outside the preview endpoint.
 Any future production auth implementation must start from a new explicit
 milestone and pass the production auth release gates before any runtime auth is
 enabled.
+
+AION-100 adds a static UI release gate that must also remain green before
+future UI auth work. The gate blocks login forms, credential fields, token or
+cookie fields, session storage, provider-call controls, production auth claims,
+frontend dependencies, and external URLs in the static console.

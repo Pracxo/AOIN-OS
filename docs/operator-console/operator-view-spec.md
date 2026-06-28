@@ -125,3 +125,13 @@ runtime enablement, external identity provider, credentials, token issuance,
 cookie issuance, session persistence, login endpoint, and logout endpoint. Mock
 claims preview metadata is synthetic and must not imply authentication,
 execution authorization, activation authorization, or production identity.
+
+## AION-100 UI Release Gate Metadata
+
+Static console metadata may include UI release gate evidence from
+`examples/operator-console/ui-release-gate-result.json`,
+`examples/operator-console/ui-safety-matrix.json`, and
+`examples/operator-console/static-console-artifact-manifest.json`. This evidence
+is release-check metadata only and must not add UI runtime state, write
+controls, auth runtime enablement, provider calls, activation, execution, or
+frontend dependencies.

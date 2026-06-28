@@ -1,0 +1,52 @@
+{
+  "artifact_manifest_id": "static-console-artifact-manifest-aion-100",
+  "synthetic": true,
+  "static_files": [
+    "operator-console-static/index.html",
+    "operator-console-static/styles.css",
+    "operator-console-static/app.js",
+    "operator-console-static/README.md"
+  ],
+  "demo_data": [
+    "operator-console-static/demo-data/overview-view-model.json",
+    "operator-console-static/demo-data/module-lifecycle-dashboard.json",
+    "operator-console-static/demo-data/provider-hardening-view-model.json",
+    "operator-console-static/demo-data/operator-action-preview.json",
+    "operator-console-static/demo-data/local-auth-status.json",
+    "operator-console-static/demo-data/local-session-preview.json",
+    "operator-console-static/demo-data/action-authorization-preview.json",
+    "operator-console-static/demo-data/auth-runtime-status.json",
+    "operator-console-static/demo-data/mock-claims-preview.json"
+  ],
+  "scripts": [
+    "scripts/static-console-safety-check.sh",
+    "scripts/ui-release-gate.sh",
+    "scripts/operator-console-static-check.sh",
+    "scripts/provider-dashboard-check.sh"
+  ],
+  "docs": [
+    "docs/operator-console/ui-release-gate.md",
+    "docs/operator-console/static-console-safety-matrix.md",
+    "docs/operator-console/operator-platform-checkpoint.md",
+    "docs/operator-console/post-v0.1-ui-no-go-conditions.md",
+    "docs/operator-console/static-console-artifact-manifest.md",
+    "docs/operator-console/ui-release-evidence-summary.md",
+    "docs/adr/0091-static-console-ui-release-gate.md"
+  ],
+  "tests": [
+    "services/brain-api/tests/test_static_console_ui_release_gate.py"
+  ],
+  "safety_flags": {
+    "frontend_dependencies_present": false,
+    "build_system_present": false,
+    "write_controls_present": false,
+    "activation_controls_present": false,
+    "execution_controls_present": false,
+    "provider_call_controls_present": false,
+    "login_controls_present": false,
+    "credential_inputs_present": false,
+    "token_cookie_session_storage_present": false,
+    "external_calls_present": false,
+    "production_ui_claim_present": false
+  }
+}

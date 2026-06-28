@@ -3937,3 +3937,26 @@ Developer command:
 ```bash
 ./scripts/auth-runtime-check.sh
 ```
+
+### AION-100 Static Console UI Release Gate
+
+AION-100 adds the static console UI release gate and post-v0.1 operator
+platform checkpoint. It keeps the Operator Console local, read-only,
+dependency-free, build-free, login-free, provider-call-free, activation-free,
+and execution-free.
+
+Primary docs:
+
+- `docs/operator-console/ui-release-gate.md`
+- `docs/operator-console/static-console-safety-matrix.md`
+- `docs/operator-console/operator-platform-checkpoint.md`
+- `docs/operator-console/post-v0.1-ui-no-go-conditions.md`
+- `docs/operator-console/static-console-artifact-manifest.md`
+- `docs/operator-console/ui-release-evidence-summary.md`
+
+Developer command:
+
+```bash
+./scripts/static-console-safety-check.sh
+./scripts/ui-release-gate.sh
+```

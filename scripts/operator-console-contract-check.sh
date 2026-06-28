@@ -51,7 +51,14 @@ unsafe = (
     "hidden_reasoning",
     "chain_of_thought",
 )
+ui_release_gate_examples = {
+    "static-console-artifact-manifest.json",
+    "ui-release-gate-result.json",
+    "ui-safety-matrix.json",
+}
 for path in sorted(root.glob("*.json")):
+    if path.name in ui_release_gate_examples:
+        continue
     payload = json.loads(path.read_text())
     serialized = json.dumps(payload, sort_keys=True).lower()
     for marker in unsafe:

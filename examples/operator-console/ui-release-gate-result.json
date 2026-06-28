@@ -1,0 +1,39 @@
+{
+  "ui_release_gate_result_id": "ui-release-gate-result-aion-100",
+  "status": "passed",
+  "synthetic": true,
+  "checks_run": [
+    "operator_console_static_check",
+    "module_lifecycle_dashboard_check",
+    "provider_dashboard_check",
+    "operator_actions_check",
+    "local_auth_check",
+    "local_session_check",
+    "role_filter_check",
+    "action_authorization_check",
+    "auth_runtime_check",
+    "static_console_safety_check"
+  ],
+  "safety_flags": {
+    "no_frontend_dependencies": true,
+    "no_build_system": true,
+    "no_external_scripts": true,
+    "no_write_verbs": true,
+    "no_activation_controls": true,
+    "no_execution_controls": true,
+    "no_provider_call_controls": true,
+    "no_login_controls": true,
+    "no_credential_inputs": true,
+    "no_token_cookie_session_storage": true,
+    "no_external_calls": true,
+    "production_auth_enabled": false,
+    "auth_runtime_enabled": false,
+    "execution_allowed": false,
+    "activation_allowed": false,
+    "external_calls_allowed": false
+  },
+  "result": {
+    "release_blocked": false,
+    "ready_for_static_checkpoint": true
+  }
+}

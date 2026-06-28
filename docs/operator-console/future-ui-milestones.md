@@ -71,3 +71,15 @@ Production auth architecture decision.
 ## AION-099
 
 Production auth prototype behind disabled flag.
+
+Status: implemented as disabled auth runtime status, mock claims preview, and
+audit proof without production auth, login/logout, credentials, tokens, cookies,
+sessions, provider calls, activation, or execution.
+
+## AION-100
+
+Static console UI release gate and post-v0.1 operator platform checkpoint.
+
+Status: implemented as docs, examples, and local scripts. It keeps the static
+console dependency-free, read-only, local-only, login-free,
+provider-call-free, activation-free, and execution-free before future UI work.

@@ -19,6 +19,16 @@
 demo JSON shape, redaction list, localhost guard, absence of write methods, and
 absence of frontend build artifacts.
 
+`./scripts/static-console-safety-check.sh` verifies the narrower static-only UI
+release boundary: no external scripts, no CSS imports, no non-local fetch
+targets, no write verbs, no credential inputs, redaction keys, demo fallback,
+and no production UI claim.
+
+`./scripts/ui-release-gate.sh` composes the static console, module lifecycle,
+provider dashboard, operator action, local auth, local session, role filter,
+action authorization, auth runtime, and static safety checks into one UI
+release checkpoint.
+
 `./scripts/operator-console-static-demo.sh --offline-ok --skip-api` verifies the
 offline demo path without calling the API.
 

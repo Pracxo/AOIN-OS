@@ -415,3 +415,8 @@ Instructions for future Codex runs in this repository:
   login/logout, provider callbacks, credential handling, token issuance, cookie
   issuance, persistent sessions, provider SDKs, migrations, external identity
   calls, frontend package files, execution, activation, or hard delete.
+- AION-100 static console UI release gate is docs/scripts/static-checks only.
+  It must not add frontend dependencies, build tooling, API routes, SDK
+  resources, CLI commands, production auth, login/logout, credential fields,
+  token or cookie storage, session persistence, provider calls, writes,
+  execution, activation, external calls, or runtime registration.

@@ -333,11 +333,14 @@
 
         <section class="command-panel" aria-label="Local commands">
           <h3>Local Commands</h3>
-          <pre><code>./scripts/operator-console-static-check.sh
+          <pre><code>./scripts/static-console-safety-check.sh
+./scripts/ui-release-gate.sh
+./scripts/operator-console-static-check.sh
 ./scripts/role-filter-check.sh
 ./scripts/local-session-check.sh
 ./scripts/auth-runtime-check.sh
 ./scripts/module-lifecycle-dashboard-check.sh
+./scripts/provider-dashboard-check.sh
 ./scripts/operator-actions-check.sh
 ./scripts/operator-console-static-demo.sh --offline-ok --skip-api
 python3 -m http.server 8090 --directory operator-console-static</code></pre>
@@ -346,8 +349,13 @@ python3 -m http.server 8090 --directory operator-console-static</code></pre>
     </main>
 
     <footer class="safety-footer">
+      <span>UI Release Gate: read-only, local, dependency-free</span>
       <span>read-only prototype</span>
-      <span>no module activation</span>
+      <span>no activation</span>
+      <span>no execution</span>
+      <span>no provider calls</span>
+      <span>no login</span>
+      <span>no credentials</span>
       <span>no external calls</span>
       <span>no secrets</span>
       <span>no raw prompts</span>
