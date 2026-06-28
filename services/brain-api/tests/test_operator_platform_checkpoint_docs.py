@@ -183,19 +183,57 @@ def _git_lines(*args: str) -> list[str]:
     return [line for line in result.stdout.splitlines() if line]
 
 
-def _changed_files() -> list[str]:
+def _git_ref_exists(ref: str) -> bool:
+    return (
+        subprocess.run(
+            ["git", "rev-parse", "--verify", "--quiet", ref],
+            cwd=ROOT,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            check=False,
+        ).returncode
+        == 0
+    )
+
+
+def _merge_base(ref: str) -> str | None:
+    result = subprocess.run(
+        ["git", "merge-base", "HEAD", ref],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if result.returncode != 0:
+        return None
+    return result.stdout.strip() or None
+
+
+def _comparison_base() -> str | None:
+    candidates = ["origin/main", "main"]
+    github_base_ref = os.environ.get("GITHUB_BASE_REF")
+    if github_base_ref:
+        candidates.extend([f"origin/{github_base_ref}", github_base_ref])
+
+    for candidate in candidates:
+        if _git_ref_exists(candidate):
+            merge_base = _merge_base(candidate)
+            if merge_base:
+                return merge_base
+
+    if _git_ref_exists("HEAD~1"):
+        return _merge_base("HEAD~1") or "HEAD~1"
+
+    return None
+
+
+def _changed_files() -> set[str]:
     changed = set(_git_lines("diff", "--name-only", "--diff-filter=ACMRT", "HEAD", "--"))
     changed.update(_git_lines("diff", "--cached", "--name-only", "--diff-filter=ACMRT", "--"))
     changed.update(_git_lines("ls-files", "--others", "--exclude-standard"))
-    merge_base = subprocess.run(
-        ["git", "merge-base", "HEAD", "main"],
-        cwd=ROOT,
-        check=True,
-        capture_output=True,
-        text=True,
-    ).stdout.strip()
-    if merge_base:
+    merge_base = _comparison_base()
+    if merge_base is not None:
         changed.update(
             _git_lines("diff", "--name-only", "--diff-filter=ACMRT", f"{merge_base}..HEAD", "--")
         )
-    return sorted(changed)
+    return changed
