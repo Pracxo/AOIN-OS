@@ -83,3 +83,14 @@ Static console UI release gate and post-v0.1 operator platform checkpoint.
 Status: implemented as docs, examples, and local scripts. It keeps the static
 console dependency-free, read-only, local-only, login-free,
 provider-call-free, activation-free, and execution-free before future UI work.
+
+## AION-101
+
+Operator Platform Checkpoint, static console evidence pack, and phase closure
+gate.
+
+Status: implemented as checkpoint docs, evidence JSON, a local checkpoint
+script, and regression tests. It closes AION-089 through AION-100 as a safe
+baseline for AION-102 without adding production UI, frontend dependencies,
+production auth, writes, activation, execution, provider calls, or external
+calls.

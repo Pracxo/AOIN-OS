@@ -47,6 +47,14 @@ redaction boundaries. Any implementation that stores credentials, creates
 production sessions, integrates an external identity provider, or exposes
 login endpoints before its designated stage is blocked.
 
+## AION-101 Operator Platform Checkpoint
+
+AION-101 is not an auth implementation stage. It adds a checkpoint evidence
+pack proving the static Operator Platform remains read-only and that production
+auth, auth runtime enablement, login/logout, token issuance, cookie issuance,
+credential storage, persisted sessions, and external identity provider runtime
+remain blocked before AION-102 planning begins.
+
 ## AION-094 Completed Scope
 
 AION-094 completes the safe local contract and simulation step only. It does

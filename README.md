@@ -3960,3 +3960,25 @@ Developer command:
 ./scripts/static-console-safety-check.sh
 ./scripts/ui-release-gate.sh
 ```
+
+### AION-101 Operator Platform Checkpoint
+
+AION-101 closes the post-v0.1 Operator Platform phase with a checkpoint
+evidence pack. It proves the static console remains safe, read-only,
+local-only, dependency-free, auth-disabled or mock-only, and not production UI
+before AION-102 planning.
+
+Primary docs:
+
+- `docs/operator-console/operator-platform-phase-checkpoint.md`
+- `docs/operator-console/operator-platform-evidence-pack.md`
+- `docs/operator-console/operator-platform-risk-register.md`
+- `docs/operator-console/operator-platform-next-phase.md`
+- `docs/operator-console/operator-platform-release-readiness.md`
+- `docs/adr/0092-operator-platform-checkpoint.md`
+
+Developer command:
+
+```bash
+./scripts/operator-platform-checkpoint.sh
+```

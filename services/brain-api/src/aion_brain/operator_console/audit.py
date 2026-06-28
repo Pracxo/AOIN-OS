@@ -26,6 +26,9 @@ _UI_RELEASE_GATE_EXAMPLES = {
     "static-console-artifact-manifest.json",
     "ui-release-gate-result.json",
     "ui-safety-matrix.json",
+    "operator-platform-checkpoint.json",
+    "operator-platform-evidence-pack.json",
+    "operator-platform-risk-register.json",
 }
 
 
