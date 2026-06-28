@@ -40,3 +40,11 @@ be treated as authoritative.
 Auth events must correlate with ActorContext, policy decisions, audit records,
 and provenance refs. Production auth requires security review and release gate
 approval.
+
+## AION-098 Architecture Decision
+
+AION-098 recommends OIDC-compatible production auth as the future primary path
+and reverse proxy auth as an optional deployment pattern. This is design only.
+No production auth is implemented in AION-098. No provider integration is added
+in AION-098. No credentials, tokens, sessions, or cookies are created, stored,
+issued, or accepted. `production_auth_enabled` remains false.

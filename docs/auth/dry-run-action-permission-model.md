@@ -19,3 +19,10 @@ Every authorization decision keeps:
 - `execution_allowed=false`
 - `activation_allowed=false`
 - `external_calls_allowed=false`
+
+## AION-098 Future Production Auth Relationship
+
+Future OIDC-compatible production auth may identify an operator only after a
+later gated implementation. It must not bypass dry-run action authorization.
+No production auth is implemented in AION-098, no provider integration is added
+in AION-098, and `production_auth_enabled` remains false.

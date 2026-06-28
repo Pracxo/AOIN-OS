@@ -53,6 +53,8 @@ def test_auth_examples_are_valid_and_redacted() -> None:
             path.name.startswith("local-session")
             or path.name == "role-aware-session-context.json"
             or "action-authorization" in path.name
+            or "production-auth" in path.name
+            or path.name == "disabled-auth-prototype-plan.json"
         ):
             continue
         payload = json.loads(path.read_text())

@@ -88,3 +88,15 @@ Dry-run action authorization sits before operator action request, preview, and
 review creation. It can allow dry-run previews and review records only. Any
 write, execution, activation, external-call, unknown-action, denied-role,
 denied-policy, or denied-session path remains blocked.
+
+## AION-098 Production Auth Boundary
+
+Production auth architecture does not authorize new operator actions. Future
+OIDC-compatible identity or reverse proxy deployment patterns may identify an
+operator only after a later gated implementation. Policy, audit, role mapping,
+local/session boundaries, and dry-run action authorization still decide whether
+request, preview, or review records may be created.
+
+No production auth runtime, login/logout route, credentials, tokens, cookies,
+sessions, provider SDKs, migrations, external calls, execution, activation, or
+privileged bypass is added in AION-098.

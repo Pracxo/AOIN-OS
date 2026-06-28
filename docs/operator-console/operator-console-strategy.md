@@ -216,3 +216,14 @@ The Operator Console can render role-filtered local previews for viewer,
 operator, reviewer, admin, and auditor roles. The preview changes visibility
 only; it does not authenticate users, create sessions, grant writes, execute
 actions, activate modules, or call external services.
+
+## AION-098 Production Auth Architecture
+
+AION-098 documents future production auth for the Operator Console before a
+login UI or provider runtime exists. The recommended future path is
+OIDC-compatible production auth, with reverse proxy auth allowed later as an
+optional deployment pattern.
+
+No production auth is implemented in AION-098. No provider integration is added
+in AION-098. No credentials, tokens, sessions, or cookies are created, stored,
+issued, or accepted. `production_auth_enabled` remains false.

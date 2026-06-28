@@ -25,3 +25,11 @@ state.
 Action authorization audit reuses the session boundary proof. It confirms that
 dry-run authorization blocks writes, execution, activation, external calls, and
 unsafe session contexts before any preview or review record is allowed.
+
+## AION-098 Production Auth Session Boundary
+
+The production auth architecture decision does not create sessions. Future
+session storage requires token/session design approval, CSRF/CORS plan,
+revocation tests, timeout tests, audit correlation, and release gate approval.
+No production auth is implemented in AION-098, and `production_auth_enabled`
+remains false.

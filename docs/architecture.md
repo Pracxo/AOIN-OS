@@ -1835,3 +1835,17 @@ action requests, previews, and reviews. The service evaluates local role
 permission, local session boundary, policy, action type, target type, dry-run
 mode, and safety findings. It stores no new table and grants no execution,
 activation, external call, or write capability.
+
+## Production Auth Architecture Decision
+
+AION-098 chooses an OIDC-compatible production auth architecture as the future
+primary path and allows reverse proxy auth later as an optional deployment
+pattern. This is architecture only. No production auth is implemented in
+AION-098. No provider integration is added in AION-098. No credentials, tokens,
+sessions, or cookies are created, stored, issued, or accepted.
+`production_auth_enabled` remains false.
+
+Future runtime auth must enter through an explicit identity provider boundary,
+map verified identity into ActorContext-compatible records, preserve policy and
+audit as authoritative gates, and keep dry-run action authorization in front of
+operator request, preview, and review records.

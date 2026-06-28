@@ -1709,3 +1709,16 @@ activation, and external calls remain denied by default.
 The authorize action is dry-run only and record-only. Policy denies any context
 that requests writes, execution, activation, external calls, or non-dry-run
 authorization.
+
+## AION-098 Production Auth Architecture Policy
+
+AION-098 adds no production auth runtime and no new policy action. It documents
+the future provider boundary only. The recommended future path is
+OIDC-compatible production auth, with reverse proxy auth as an optional
+deployment pattern later.
+
+`production_auth_enabled` remains false. No provider integration is added in
+AION-098. No credentials, tokens, sessions, or cookies are created, stored,
+issued, or accepted. Future production identity must not self-authorize Brain
+actions; policy, audit, ActorContext, role mapping, and dry-run action
+authorization remain authoritative.

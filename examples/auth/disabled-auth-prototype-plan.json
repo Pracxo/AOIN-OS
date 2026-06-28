@@ -1,0 +1,18 @@
+{
+  "synthetic": true,
+  "aion_task": "AION-099",
+  "flags": {
+    "production_auth_enabled": false,
+    "prototype_enabled": false,
+    "external_provider_calls_enabled": false,
+    "real_login_enabled": false,
+    "real_protected_value_enabled": false
+  },
+  "mock_only": true,
+  "no_external_provider": true,
+  "protected_values_absent": true,
+  "synthetic_claims_only": true,
+  "backend_policy_integration_required": true,
+  "audit_capture_required": true,
+  "release_gate_before_enablement": true
+}

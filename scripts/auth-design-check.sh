@@ -25,10 +25,19 @@ required_docs=(
   docs/auth/role-access-audit.md
   docs/auth/dry-run-action-permission-model.md
   docs/auth/action-authorization-audit.md
+  docs/auth/production-auth-architecture.md
+  docs/auth/auth-provider-evaluation-matrix.md
+  docs/auth/identity-provider-boundary-model.md
+  docs/auth/token-session-storage-decision.md
+  docs/auth/credential-handling-no-go-rules.md
+  docs/auth/production-auth-threat-model.md
+  docs/auth/production-auth-release-gates.md
+  docs/auth/disabled-auth-prototype-plan.md
   docs/adr/0084-local-auth-design-for-operator-console.md
   docs/adr/0085-local-auth-contract-dev-identity-simulation.md
   docs/adr/0087-role-aware-console-view-filtering.md
   docs/adr/0088-dry-run-action-authorization-enforcement.md
+  docs/adr/0089-production-auth-architecture-decision.md
 )
 
 required_examples=(
@@ -52,6 +61,10 @@ required_examples=(
   examples/auth/dry-run-action-authorization-decision.json
   examples/auth/action-authorization-deny-examples.json
   examples/auth/action-authorization-audit-result.json
+  examples/auth/production-auth-provider-matrix.json
+  examples/auth/production-auth-threat-model.json
+  examples/auth/disabled-auth-prototype-plan.json
+  examples/auth/production-auth-release-gates.json
 )
 
 for file in "${required_docs[@]}"; do
@@ -116,6 +129,8 @@ for path in sorted((root / "examples" / "auth").glob("*.json")):
         continue
     if "authorization" in path.name:
         continue
+    if "production-auth" in path.name or path.name == "disabled-auth-prototype-plan.json":
+        continue
     payload = json.loads(path.read_text())
     serialized = json.dumps(payload, sort_keys=True).lower()
     blocked = (
@@ -169,12 +184,21 @@ allowed_auth_paths = {
     "docs/auth/role-access-audit.md",
     "docs/auth/dry-run-action-permission-model.md",
     "docs/auth/action-authorization-audit.md",
+    "docs/auth/production-auth-architecture.md",
+    "docs/auth/auth-provider-evaluation-matrix.md",
+    "docs/auth/identity-provider-boundary-model.md",
+    "docs/auth/token-session-storage-decision.md",
+    "docs/auth/credential-handling-no-go-rules.md",
+    "docs/auth/production-auth-threat-model.md",
+    "docs/auth/production-auth-release-gates.md",
+    "docs/auth/disabled-auth-prototype-plan.md",
     "docs/operator-console/dry-run-action-authorization.md",
     "docs/operator-console/action-authorization-preview.md",
     "docs/operator-console/action-authorization-deny-matrix.md",
     "docs/adr/0084-local-auth-design-for-operator-console.md",
     "docs/adr/0085-local-auth-contract-dev-identity-simulation.md",
     "docs/adr/0088-dry-run-action-authorization-enforcement.md",
+    "docs/adr/0089-production-auth-architecture-decision.md",
     "examples/auth/local-operator-identity.json",
     "examples/auth/operator-role-matrix.json",
     "examples/auth/session-boundary-example.json",
@@ -195,9 +219,14 @@ allowed_auth_paths = {
     "examples/auth/dry-run-action-authorization-decision.json",
     "examples/auth/action-authorization-deny-examples.json",
     "examples/auth/action-authorization-audit-result.json",
+    "examples/auth/production-auth-provider-matrix.json",
+    "examples/auth/production-auth-threat-model.json",
+    "examples/auth/disabled-auth-prototype-plan.json",
+    "examples/auth/production-auth-release-gates.json",
     "operator-console-static/demo-data/action-authorization-preview.json",
     "operator-console-static/demo-data/action-authorization-deny-matrix.json",
     "scripts/action-authorization-check.sh",
+    "scripts/production-auth-architecture-check.sh",
     "services/brain-api/src/aion_brain/contracts/action_authorization.py",
     "services/brain-api/src/aion_brain/action_authorization/__init__.py",
     "services/brain-api/src/aion_brain/action_authorization/redaction.py",
@@ -226,6 +255,7 @@ allowed_auth_paths = {
     "services/brain-api/tests/test_operator_console_authorization_preview_static.py",
     "services/brain-api/tests/test_kernel_action_authorization_wiring.py",
     "services/brain-api/tests/test_visual_telemetry_action_authorization.py",
+    "services/brain-api/tests/test_production_auth_architecture_docs.py",
     "operator-console-static/demo-data/local-auth-status.json",
     "operator-console-static/demo-data/role-filtered-view-model.json",
     "scripts/auth-design-check.sh",

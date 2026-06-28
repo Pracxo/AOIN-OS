@@ -22,9 +22,20 @@ Dry-run action authorization enforcement.
 
 Production auth architecture decision.
 
+The decision selects OIDC-compatible production auth as the future primary path
+and reverse proxy auth as an optional later deployment pattern. No production
+auth is implemented in AION-098. No provider integration is added in AION-098.
+No credentials, tokens, sessions, or cookies are created, stored, issued, or
+accepted. `production_auth_enabled` remains false.
+
 ## AION-099
 
 Production auth prototype behind disabled flag.
+
+The AION-099 prototype may be mock-only and disabled by default. It must use
+synthetic claims only, make no external provider call, issue no real token,
+create no real login, and pass the AION-098 release gates before any future
+enablement.
 
 ## Gates
 
