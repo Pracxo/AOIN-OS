@@ -1810,3 +1810,12 @@ permissions, filter read-only console view models, and run local auth audits.
 It does not add production authentication, login, credential storage, session
 storage, external identity provider integration, execution, activation, runtime
 registration, code loading, or provider enablement.
+
+## Read-Only Local Session Prototype
+
+AION-095 adds read-only local session previews for the Operator Console. These
+previews are synthetic and non-persistent. They may expose expiry metadata and
+role-aware context for local console filtering, but they cannot authenticate
+users, issue tokens or cookies, store credentials, create production sessions,
+grant writes, execute capabilities, activate modules, register runtimes, or call
+external services.

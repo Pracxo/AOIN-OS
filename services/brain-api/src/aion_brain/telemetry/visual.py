@@ -345,6 +345,7 @@ def build_operator_console_telemetry_event(
             "owner_scope": scope,
             "read_only": True,
             "frontend_enabled": False,
+            "production_auth": False,
             **(payload or {}),
         },
         created_at=datetime.now(UTC),

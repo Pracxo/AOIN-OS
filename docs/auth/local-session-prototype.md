@@ -1,0 +1,21 @@
+# Local Session Prototype
+
+AION-095 introduces a local session prototype for Operator Console previews.
+It is local-only, read-only, dev/test-only, and synthetic.
+
+The prototype exposes:
+
+- `POST /brain/local-session/preview`
+- `POST /brain/local-session/context`
+- `GET /brain/local-session/status`
+- `POST /brain/local-session/boundary-check`
+- `POST /brain/local-session/audit`
+
+Local session previews may show actor id, workspace id, roles, owner scope,
+expiry metadata, and role-aware filtering context. They do not authenticate
+users, store credentials, issue tokens or cookies, create browser sessions, or
+persist production session state.
+
+Privileged flags are hard false: `write_allowed=false`,
+`execute_allowed=false`, `activation_allowed=false`, and
+`external_calls_allowed=false`.

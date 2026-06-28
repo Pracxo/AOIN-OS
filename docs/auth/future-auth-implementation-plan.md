@@ -38,3 +38,10 @@ login endpoints before its designated stage is blocked.
 AION-094 completes the safe local contract and simulation step only. It does
 not move production auth forward. Production authentication remains blocked
 until the later architecture decision and gated prototype milestones.
+
+## AION-095 Future Session Prerequisites
+
+Read-only local session previews do not unlock production auth. Any future
+production session implementation still requires a separate ADR, threat model,
+policy update, credential and token handling decision, browser-state security
+review, and migration approval.

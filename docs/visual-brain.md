@@ -999,3 +999,12 @@ Node types are `local_auth_context` and `local_auth_audit`. These records
 represent dev-only simulation, read-only console filtering, and safety audit
 evidence. They do not represent login, production identity, sessions,
 credentials, execution, activation, or external identity provider integration.
+
+## Local Session Projection Note
+
+AION-095 emits visual telemetry for `local_session_preview_created`,
+`local_session_boundary_checked`, and `local_session_audit_completed`.
+
+Node types are `local_session_preview` and `local_session_audit`. These records
+are local-only and carry no credentials, tokens, cookies, raw prompts, hidden
+reasoning, production auth state, or persisted browser session state.

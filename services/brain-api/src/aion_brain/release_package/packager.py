@@ -340,6 +340,7 @@ class ReleasePackager:
                 request.owner_scope
             )
             reports["local_auth"] = self._local_auth_summary()
+            reports["local_session"] = self._local_session_summary()
             reports["capability_conformance"] = self._conformance_summary(request.owner_scope)
             reports["golden_path"] = self._golden_path_summary(request.owner_scope)
             reports["bootstrap"] = self._bootstrap_summary(request.owner_scope)
@@ -596,6 +597,55 @@ class ReleasePackager:
             "auth_material_enabled": False,
             "auth_session_state_enabled": False,
             "external_idp_enabled": False,
+            "write_actions_enabled": False,
+            "execution_allowed": False,
+            "activation_allowed": False,
+            "external_calls_allowed": False,
+            "unsafe_flags": unsafe,
+        }
+
+    def _local_session_summary(self) -> dict[str, Any]:
+        unsafe_flags = {
+            "production_auth_enabled": bool(
+                getattr(self._settings, "production_auth_enabled", False)
+            ),
+            "local_session_credentials_enabled": bool(
+                getattr(self._settings, "local_session_credentials_enabled", False)
+            ),
+            "local_session_tokens_enabled": bool(
+                getattr(self._settings, "local_session_tokens_enabled", False)
+            ),
+            "local_session_cookies_enabled": bool(
+                getattr(self._settings, "local_session_cookies_enabled", False)
+            ),
+            "local_session_persistence_enabled": bool(
+                getattr(self._settings, "local_session_persistence_enabled", False)
+            ),
+            "local_session_write_actions_enabled": bool(
+                getattr(self._settings, "local_session_write_actions_enabled", False)
+            ),
+            "local_session_execution_enabled": bool(
+                getattr(self._settings, "local_session_execution_enabled", False)
+            ),
+            "local_session_activation_enabled": bool(
+                getattr(self._settings, "local_session_activation_enabled", False)
+            ),
+            "local_session_external_calls_enabled": bool(
+                getattr(self._settings, "local_session_external_calls_enabled", False)
+            ),
+        }
+        unsafe = [key for key, value in unsafe_flags.items() if value]
+        return {
+            "available": bool(getattr(self._settings, "local_session_preview_enabled", True)),
+            "status": "blocked" if unsafe else "ready",
+            "dev_only": bool(getattr(self._settings, "local_session_dev_only", True)),
+            "read_only": bool(getattr(self._settings, "local_session_read_only", True)),
+            "synthetic_preview_only": True,
+            "production_auth_enabled": False,
+            "auth_material_enabled": False,
+            "token_issuance_enabled": False,
+            "cookie_issuance_enabled": False,
+            "state_storage_enabled": False,
             "write_actions_enabled": False,
             "execution_allowed": False,
             "activation_allowed": False,

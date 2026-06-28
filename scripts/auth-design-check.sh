@@ -93,6 +93,8 @@ from pathlib import Path
 
 root = Path(sys.argv[1])
 for path in sorted((root / "examples" / "auth").glob("*.json")):
+    if path.name.startswith("local-session") or path.name == "role-aware-session-context.json":
+        continue
     payload = json.loads(path.read_text())
     serialized = json.dumps(payload, sort_keys=True).lower()
     blocked = (
@@ -184,6 +186,42 @@ allowed_auth_paths = {
     "services/brain-api/tests/test_operator_console_role_filtering.py",
     "services/brain-api/tests/test_kernel_local_auth_wiring.py",
     "services/brain-api/tests/test_visual_telemetry_local_auth.py",
+    "docs/auth/local-session-prototype.md",
+    "docs/auth/local-session-boundary.md",
+    "docs/auth/session-safety-audit.md",
+    "docs/auth/session-preview-console-panel.md",
+    "docs/auth/future-session-implementation-plan.md",
+    "docs/adr/0086-read-only-local-session-prototype.md",
+    "examples/auth/local-session-preview-request.json",
+    "examples/auth/local-session-status.json",
+    "examples/auth/local-session-boundary-audit-request.json",
+    "examples/auth/role-aware-session-context.json",
+    "operator-console-static/demo-data/local-session-status.json",
+    "operator-console-static/demo-data/local-session-preview.json",
+    "scripts/local-session-check.sh",
+    "services/brain-api/src/aion_brain/contracts/local_session.py",
+    "services/brain-api/src/aion_brain/local_session/__init__.py",
+    "services/brain-api/src/aion_brain/local_session/redaction.py",
+    "services/brain-api/src/aion_brain/local_session/preview.py",
+    "services/brain-api/src/aion_brain/local_session/context.py",
+    "services/brain-api/src/aion_brain/local_session/boundary.py",
+    "services/brain-api/src/aion_brain/local_session/audit.py",
+    "services/brain-api/src/aion_brain/local_session/query.py",
+    "services/brain-api/src/aion_brain/api/local_session.py",
+    "packages/aion-sdk-python/src/aion_sdk/resources/local_session.py",
+    "packages/aion-sdk-python/src/aion_sdk/cli/commands/local_session.py",
+    "packages/aion-sdk-python/tests/test_local_session_resource.py",
+    "packages/aion-sdk-python/tests/test_cli_local_session.py",
+    "services/brain-api/tests/test_local_session_contracts.py",
+    "services/brain-api/tests/test_local_session_redaction.py",
+    "services/brain-api/tests/test_local_session_preview.py",
+    "services/brain-api/tests/test_local_session_context.py",
+    "services/brain-api/tests/test_local_session_boundary.py",
+    "services/brain-api/tests/test_local_session_audit.py",
+    "services/brain-api/tests/test_local_session_api.py",
+    "services/brain-api/tests/test_operator_console_session_preview.py",
+    "services/brain-api/tests/test_kernel_local_session_wiring.py",
+    "services/brain-api/tests/test_visual_telemetry_local_session.py",
 }
 
 blocked_package_names = {

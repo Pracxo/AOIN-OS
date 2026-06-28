@@ -49,6 +49,7 @@ def build_view_model(
             "write_actions_enabled": False,
             "frontend_enabled": False,
             "descriptor_only_actions": True,
+            "local_session_preview_supported": True,
         },
     )
 

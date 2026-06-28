@@ -1674,3 +1674,18 @@ These actions are scoped to dev-only local auth simulation, read-only status,
 role-aware console filtering, and local audit. Login, credential storage,
 session creation, production auth, external identity integration, execution,
 activation, and unknown local auth actions remain denied by default.
+
+## Local Session Runtime Policy
+
+AION-095 adds local session policy actions:
+
+- `local_session.preview.create`
+- `local_session.context.read`
+- `local_session.status.read`
+- `local_session.boundary.check`
+- `local_session.audit.run`
+
+These actions are scoped to dev-only read-only session previews. Production
+auth, credential backing, token issuance, cookie issuance, persistence,
+external identity integration, execution, activation, external calls, and
+unknown local session actions remain denied by default.

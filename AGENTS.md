@@ -392,3 +392,7 @@ Instructions for future Codex runs in this repository:
   console filtering for local development, but it must not authenticate real
   users, store credentials, create sessions, issue tokens, bypass policy, grant
   execution, grant activation, or enable external identity providers.
+- AION-095 local sessions are read-only dev previews. They may carry synthetic
+  identity context for console filtering, but they must not add login/logout,
+  credentials, tokens, cookies, persistent sessions, writes, execution,
+  activation, runtime registration, or external calls.

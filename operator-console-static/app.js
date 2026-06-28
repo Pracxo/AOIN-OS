@@ -42,6 +42,10 @@
     status: "demo-data/local-auth-status.json",
     role_filter: "demo-data/role-filtered-view-model.json"
   };
+  var LOCAL_SESSION_DEMOS = {
+    status: "demo-data/local-session-status.json",
+    preview: "demo-data/local-session-preview.json"
+  };
   var apiConfig = resolveApiBase();
   var state = {
     apiBase: apiConfig.apiBase,
@@ -52,6 +56,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     bindTabs();
     loadLocalAuthPanels();
+    loadLocalSessionPanels();
     loadView(state.activeView);
   });
 
@@ -256,6 +261,16 @@
 
   function isSensitiveKey(key) {
     var normalized = key.toLowerCase().replace(/-/g, "_");
+    if ([
+      "token_issued",
+      "cookie_issued",
+      "credential_backed",
+      "credentials_enabled",
+      "tokens_enabled",
+      "cookies_enabled"
+    ].indexOf(normalized) !== -1) {
+      return false;
+    }
     return SENSITIVE_KEYS.some(function (part) {
       return normalized.indexOf(part) !== -1;
     });
@@ -672,6 +687,122 @@
       ],
       ["read_only", String(Boolean(model.read_only !== false))],
       ["redaction_applied", String(Boolean(model.redaction_applied !== false))]
+    ].forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "checklist-row";
+      var label = document.createElement("span");
+      label.textContent = item[0];
+      var value = document.createElement("strong");
+      value.textContent = safeText(item[1] || "none");
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
+    });
+  }
+
+  function loadLocalSessionPanels() {
+    var statusPromise = state.apiAllowed
+      ? fetchLocalSessionStatus().catch(function () {
+        return fetchJson(LOCAL_SESSION_DEMOS.status);
+      })
+      : fetchJson(LOCAL_SESSION_DEMOS.status);
+    Promise.all([
+      statusPromise,
+      fetchJson(LOCAL_SESSION_DEMOS.preview)
+    ])
+      .then(function (payloads) {
+        renderLocalSessionStatus(redact(payloads[0]));
+        renderLocalSessionPreview(redact(payloads[1]));
+      })
+      .catch(function () {
+        renderLocalSessionStatus({
+          dev_only: true,
+          read_only: true,
+          production_session: false,
+          credential_backed: false,
+          token_issued: false,
+          cookie_issued: false,
+          persistent: false,
+          write_allowed: false,
+          execute_allowed: false,
+          activation_allowed: false,
+          external_calls_allowed: false,
+          no_go_warnings: ["local_session_demo_unavailable"]
+        });
+        renderLocalSessionPreview({ roles: [], owner_scope: [] });
+      });
+  }
+
+  function fetchLocalSessionStatus() {
+    var endpoint = state.apiBase + "/brain/local-session/status?scope=workspace:main";
+    return fetch(endpoint).then(function (response) {
+      if (!response.ok) {
+        throw new Error("local session status unavailable");
+      }
+      return response.json();
+    });
+  }
+
+  function renderLocalSessionStatus(status) {
+    var grid = document.getElementById("local-session-status-grid");
+    var boundary = document.getElementById("local-session-boundary");
+    if (!grid || !boundary) {
+      return;
+    }
+    grid.textContent = "";
+    [
+      "dev_only",
+      "read_only",
+      "production_session",
+      "credential_backed",
+      "token_issued",
+      "cookie_issued",
+      "persistent",
+      "write_allowed",
+      "execute_allowed",
+      "activation_allowed",
+      "external_calls_allowed"
+    ].forEach(function (key) {
+      var card = document.createElement("div");
+      card.className = "safety-card";
+      card.textContent = key + "=" + String(Boolean(status && status[key]));
+      grid.appendChild(card);
+    });
+    boundary.textContent = "";
+    var items = status && Array.isArray(status.no_go_warnings) ? status.no_go_warnings : [];
+    if (!items.length) {
+      boundary.appendChild(emptyNote("Local session boundary warnings render here."));
+      return;
+    }
+    items.forEach(function (item) {
+      var badge = document.createElement("div");
+      badge.className = "blocker-badge";
+      var label = document.createElement("strong");
+      label.textContent = safeText(item);
+      var value = document.createElement("span");
+      value.textContent = "blocked by design";
+      badge.appendChild(label);
+      badge.appendChild(value);
+      boundary.appendChild(badge);
+    });
+  }
+
+  function renderLocalSessionPreview(preview) {
+    var container = document.getElementById("local-session-preview");
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    [
+      ["status", preview.status || "active_local_preview"],
+      ["session_type", preview.session_type || "local_preview"],
+      ["actor_id", preview.actor_id || "local.operator"],
+      ["roles", Array.isArray(preview.roles) ? preview.roles.join(", ") : "operator"],
+      [
+        "owner_scope",
+        Array.isArray(preview.owner_scope) ? preview.owner_scope.join(", ") : "workspace:main"
+      ],
+      ["expires_at", preview.expires_at || "synthetic expiry"]
     ].forEach(function (item) {
       var row = document.createElement("div");
       row.className = "checklist-row";

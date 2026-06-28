@@ -137,6 +137,11 @@ allowed_actions := {
 	"local_auth.console.filter",
 	"local_auth.audit.run",
 	"local_auth.status.read",
+	"local_session.preview.create",
+	"local_session.context.read",
+	"local_session.status.read",
+	"local_session.boundary.check",
+	"local_session.audit.run",
 	"operator_action.request.create",
 	"operator_action.request.read",
 	"operator_action.request.update",
@@ -461,6 +466,7 @@ allowed_actions := {
 	"module_activation.query.read",
 	"local_auth.roles.read",
 	"local_auth.status.read",
+	"local_session.status.read",
 	"runtime.registration.preview.create",
 	"runtime.registration.preview.read",
 	"module_mock.profile.create",
@@ -2095,6 +2101,49 @@ decision := {
 	input.action_type == "local_auth.audit.run"
 	local_auth_actor
 	not local_auth_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "local_session_read_allowed",
+	"constraints": ["dev_only", "read_only", "no_production_auth", "no_credentials", "no_tokens", "no_cookies", "no_persistence", "no_external_identity"],
+	"audit_level": "standard",
+} if {
+	valid_action
+	valid_risk
+	local_session_read_action
+	local_auth_actor
+	not local_session_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "local_session_preview_allowed",
+	"constraints": ["dev_only", "synthetic_session_preview_only", "read_only", "no_login", "no_logout", "no_credentials", "no_tokens", "no_cookies", "no_persistence"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "local_session.preview.create"
+	local_auth_dev_context
+	local_auth_operator
+	not local_session_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "local_session_boundary_allowed",
+	"constraints": ["dev_only", "read_only", "no_credentials", "no_tokens", "no_cookies", "no_persistence", "no_execution_grant", "no_activation_grant", "no_external_calls"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	local_session_boundary_action
+	local_auth_actor
+	not local_session_unsafe_request
 }
 
 decision := {
@@ -6281,6 +6330,22 @@ local_auth_read_action if {
 	input.action_type == "local_auth.status.read"
 }
 
+local_session_read_action if {
+	input.action_type == "local_session.status.read"
+}
+
+local_session_read_action if {
+	input.action_type == "local_session.context.read"
+}
+
+local_session_boundary_action if {
+	input.action_type == "local_session.boundary.check"
+}
+
+local_session_boundary_action if {
+	input.action_type == "local_session.audit.run"
+}
+
 operator_action_read if {
 	input.action_type == "operator_action.request.read"
 }
@@ -6427,6 +6492,30 @@ local_auth_unsafe_request if {
 
 local_auth_unsafe_request if {
 	input.context.activation_allowed == true
+}
+
+local_session_unsafe_request if {
+	local_auth_unsafe_request
+}
+
+local_session_unsafe_request if {
+	input.context.production_session == true
+}
+
+local_session_unsafe_request if {
+	input.context.token_issued == true
+}
+
+local_session_unsafe_request if {
+	input.context.cookie_issued == true
+}
+
+local_session_unsafe_request if {
+	input.context.persistent == true
+}
+
+local_session_unsafe_request if {
+	input.context.external_calls_allowed == true
 }
 
 operator_reader if {

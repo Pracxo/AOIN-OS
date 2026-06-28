@@ -1,0 +1,14 @@
+{
+  "trace_id": "trace-local-session-preview-example",
+  "actor_id": "local.operator",
+  "workspace_id": "local",
+  "roles": ["operator"],
+  "owner_scope": ["workspace:main"],
+  "session_type": "local_preview",
+  "ttl_seconds": 1800,
+  "metadata": {
+    "synthetic": true,
+    "source": "local_example"
+  },
+  "created_by": "local.operator"
+}

@@ -40,6 +40,7 @@ def build_local_auth_context(
             "synthetic": True,
             "role_constraints": merged.get("constraints", []),
             "local_identity_id": identity.local_identity_id,
+            "local_session_preview_compatible": True,
         },
         created_at=utc_now(),
     )

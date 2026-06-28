@@ -1,0 +1,32 @@
+{
+  "local_session_preview_id": "local-session-preview-static-demo",
+  "trace_id": "trace-local-session-static-demo",
+  "actor_id": "local.operator",
+  "workspace_id": "local",
+  "roles": ["operator"],
+  "owner_scope": ["workspace:main"],
+  "status": "active_local_preview",
+  "session_type": "static_demo",
+  "read_only": true,
+  "dev_only": true,
+  "production_session": false,
+  "credential_backed": false,
+  "token_issued": false,
+  "cookie_issued": false,
+  "persistent": false,
+  "write_allowed": false,
+  "execute_allowed": false,
+  "activation_allowed": false,
+  "external_calls_allowed": false,
+  "expires_at": "2026-01-01T00:30:00Z",
+  "warnings": [
+    {"code": "static_demo", "message": "synthetic local preview only"}
+  ],
+  "blockers": [],
+  "metadata": {
+    "synthetic": true,
+    "static_demo": true,
+    "source": "operator-console-static"
+  },
+  "created_at": "2026-01-01T00:00:00Z"
+}

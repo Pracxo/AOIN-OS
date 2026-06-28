@@ -47,6 +47,21 @@ The panel shows that production auth, credentials, sessions, external identity
 provider integration, and write actions are disabled. It has no login form, no
 credential input, no token input, and no session persistence.
 
+## Local Session Panel
+
+AION-095 adds a Local Session Preview panel backed by
+`demo-data/local-session-status.json` and `demo-data/local-session-preview.json`.
+The panel renders a synthetic dev-only session preview for role-aware console
+filtering. It is not production auth, does not authenticate users, does not
+issue tokens or cookies, and does not persist browser session state.
+
+Validate the local session panel:
+
+```bash
+./scripts/local-session-check.sh
+./scripts/operator-console-static-check.sh
+```
+
 ## Module Lifecycle Dashboard
 
 AION-090 adds a read-only Module Lifecycle Dashboard to the static console.

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from aion_brain.contracts.local_auth import ConsoleRoleFilterRequest, LocalAuthContext
+from aion_brain.contracts.local_session import LocalSessionContext
 from aion_brain.contracts.operator_console import (
     ConsoleAuditRequest,
     ConsoleAuditResult,
@@ -85,6 +86,9 @@ class ConsoleViewModelService:
         raw_context = request.metadata.get("local_auth_context") or request.metadata.get(
             "auth_context"
         )
+        raw_session_context = request.metadata.get("local_session_context")
+        if raw_context is None and isinstance(raw_session_context, dict):
+            raw_context = _auth_context_from_local_session(raw_session_context)
         if not isinstance(raw_context, dict):
             return model
         auth_context = LocalAuthContext.model_validate(raw_context)
@@ -100,6 +104,35 @@ class ConsoleViewModelService:
             )
         )
         return ConsoleViewModel.model_validate(result.filtered_view_model)
+
+
+def _auth_context_from_local_session(raw: dict[str, object]) -> dict[str, object]:
+    session_context = LocalSessionContext.model_validate(raw)
+    return {
+        "local_auth_context_id": session_context.auth_context_id
+        or f"local-auth-from-{session_context.local_session_preview_id}",
+        "trace_id": None,
+        "actor_id": session_context.actor_id,
+        "workspace_id": session_context.workspace_id,
+        "roles": session_context.roles,
+        "owner_scope": session_context.owner_scope,
+        "read_allowed": session_context.read_allowed,
+        "dry_run_allowed": session_context.dry_run_allowed,
+        "review_allowed": session_context.review_allowed,
+        "write_allowed": False,
+        "execute_allowed": False,
+        "activation_allowed": False,
+        "external_calls_allowed": False,
+        "production_auth": False,
+        "session_present": False,
+        "credentials_present": False,
+        "metadata": {
+            "synthetic": True,
+            "source": "local_session_context",
+            "local_session_preview_id": session_context.local_session_preview_id,
+        },
+        "created_at": session_context.created_at,
+    }
 
 
 class OperatorConsoleQueryService:

@@ -81,6 +81,44 @@
           </div>
         </section>
 
+        <section class="local-session-panel" id="local-session-panel" aria-label="Local session preview">
+          <div class="no-activation-banner">
+            Local session is a dev-only read-only preview. It is not login, production auth, a token, a cookie, or persisted session state.
+          </div>
+          <div class="module-dashboard-heading">
+            <div>
+              <p class="eyebrow">Local Session</p>
+              <h3>Session Preview Boundary</h3>
+            </div>
+            <button class="disabled-action" type="button" disabled>
+              Preview only
+            </button>
+          </div>
+          <div class="safety-boundary-grid" id="local-session-status-grid">
+            <div class="safety-card">dev_only=true</div>
+            <div class="safety-card">read_only=true</div>
+            <div class="safety-card">production_session=false</div>
+            <div class="safety-card">credential_backed=false</div>
+            <div class="safety-card">token_issued=false</div>
+            <div class="safety-card">cookie_issued=false</div>
+            <div class="safety-card">persistent=false</div>
+            <div class="safety-card">write_allowed=false</div>
+            <div class="safety-card">execute_allowed=false</div>
+            <div class="safety-card">activation_allowed=false</div>
+            <div class="safety-card">external_calls_allowed=false</div>
+          </div>
+          <div class="module-subpanels">
+            <section class="module-subpanel" aria-label="Local session preview record">
+              <h3>Preview</h3>
+              <div class="review-checklist" id="local-session-preview"></div>
+            </section>
+            <section class="module-subpanel" aria-label="Local session boundary warnings">
+              <h3>Boundary</h3>
+              <div class="blocker-list" id="local-session-boundary"></div>
+            </section>
+          </div>
+        </section>
+
         <section class="module-dashboard" id="module-dashboard" aria-label="Module lifecycle dashboard">
           <div class="no-activation-banner">
             This dashboard is read-only. Activation is blocked by design.
@@ -186,6 +224,7 @@
         <section class="command-panel" aria-label="Local commands">
           <h3>Local Commands</h3>
           <pre><code>./scripts/operator-console-static-check.sh
+./scripts/local-session-check.sh
 ./scripts/module-lifecycle-dashboard-check.sh
 ./scripts/operator-actions-check.sh
 ./scripts/operator-console-static-demo.sh --offline-ok --skip-api
