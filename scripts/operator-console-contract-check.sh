@@ -55,6 +55,9 @@ ui_release_gate_examples = {
     "static-console-artifact-manifest.json",
     "ui-release-gate-result.json",
     "ui-safety-matrix.json",
+    "operator-platform-checkpoint.json",
+    "operator-platform-evidence-pack.json",
+    "operator-platform-risk-register.json",
 }
 for path in sorted(root.glob("*.json")):
     if path.name in ui_release_gate_examples:

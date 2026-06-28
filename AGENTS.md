@@ -420,3 +420,8 @@ Instructions for future Codex runs in this repository:
   resources, CLI commands, production auth, login/logout, credential fields,
   token or cookie storage, session persistence, provider calls, writes,
   execution, activation, external calls, or runtime registration.
+- AION-101 operator platform checkpoint is evidence-only. It must pass
+  `./scripts/operator-platform-checkpoint.sh` and must not add API routers, SDK
+  resources, CLI commands, migrations, frontend dependencies, production auth,
+  write controls, activation controls, execution controls, provider-call
+  controls, external-call controls, or runtime registration.

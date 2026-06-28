@@ -39,6 +39,7 @@
 
 ## Scripts
 
+- `scripts/operator-platform-checkpoint.sh`
 - `scripts/static-console-safety-check.sh`
 - `scripts/ui-release-gate.sh`
 - `scripts/operator-console-static-check.sh`
@@ -54,6 +55,11 @@
 
 ## Docs
 
+- `docs/operator-console/operator-platform-phase-checkpoint.md`
+- `docs/operator-console/operator-platform-evidence-pack.md`
+- `docs/operator-console/operator-platform-risk-register.md`
+- `docs/operator-console/operator-platform-next-phase.md`
+- `docs/operator-console/operator-platform-release-readiness.md`
 - `docs/operator-console/ui-release-gate.md`
 - `docs/operator-console/static-console-safety-matrix.md`
 - `docs/operator-console/operator-platform-checkpoint.md`
@@ -64,6 +70,7 @@
 
 ## Tests
 
+- `services/brain-api/tests/test_operator_platform_checkpoint_docs.py`
 - `services/brain-api/tests/test_static_console_ui_release_gate.py`
 
 ## Expected safety boundaries

@@ -1,0 +1,66 @@
+{
+  "risk_register_id": "aion-101-operator-platform-risk-register",
+  "status": "passed",
+  "risks": [
+    {
+      "risk": "frontend dependency creep",
+      "control": "dependency-free static console and package file checks",
+      "no_go_condition": "package file, lockfile, frontend config, build step, or install instruction appears"
+    },
+    {
+      "risk": "hidden write action",
+      "control": "dry-run operator action previews and write verb checks",
+      "no_go_condition": "enabled write control, mutating HTTP verb, or action execution path appears"
+    },
+    {
+      "risk": "activation leakage",
+      "control": "module lifecycle blockers and activation false checks",
+      "no_go_condition": "activation, capability activation, runtime registration, or code loading appears"
+    },
+    {
+      "risk": "auth runtime enablement",
+      "control": "disabled auth runtime status and mock-only claims preview",
+      "no_go_condition": "production auth, login/logout, token issuance, cookie issuance, or external IdP runtime appears"
+    },
+    {
+      "risk": "credential/session storage",
+      "control": "synthetic local auth and read-only session preview checks",
+      "no_go_condition": "credential store, persisted browser session, token store, cookie store, or session writer appears"
+    },
+    {
+      "risk": "raw prompt exposure",
+      "control": "static console redaction checks",
+      "no_go_condition": "raw prompt field or source prompt rendering appears"
+    },
+    {
+      "risk": "hidden reasoning exposure",
+      "control": "static console protected-output checks",
+      "no_go_condition": "hidden reasoning or chain-of-thought rendering appears"
+    },
+    {
+      "risk": "provider call leakage",
+      "control": "provider dashboard dry-run checks",
+      "no_go_condition": "provider invocation, model call, provider credential flow, or external model call appears"
+    },
+    {
+      "risk": "external URL call",
+      "control": "local-only URL and external asset checks",
+      "no_go_condition": "non-local URL, external script, external stylesheet, external notification, or web call appears"
+    },
+    {
+      "risk": "stale demo data",
+      "control": "checkpoint evidence JSON validation",
+      "no_go_condition": "evidence examples are invalid, incomplete, or not marked passed"
+    },
+    {
+      "risk": "policy bypass",
+      "control": "dry-run authorization and role filter checks",
+      "no_go_condition": "role path grants execution, activation, external calls, or privileged bypass"
+    },
+    {
+      "risk": "audit bypass",
+      "control": "legacy contract audit plus AION-101 checkpoint validation",
+      "no_go_condition": "evidence file is not covered by either legacy checks or the checkpoint script"
+    }
+  ]
+}

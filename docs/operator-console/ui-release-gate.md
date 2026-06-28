@@ -91,3 +91,11 @@ production-ready UI claim.
 Future UI work must start from this gate, keep the static checkpoint passing,
 and add a new architecture decision before introducing a framework, production
 auth, governed write paths, runtime UI state, or provider-backed identity.
+
+## AION-101 checkpoint relationship
+
+AION-101 composes this gate into `./scripts/operator-platform-checkpoint.sh`.
+The checkpoint does not loosen the UI release gate. It adds docs, examples, and
+evidence validation that prove the AION-089 through AION-100 Operator Platform
+phase is closed while the static console remains local, read-only,
+dependency-free, and not production UI.

@@ -64,3 +64,14 @@ Evidence: `scripts/ui-release-gate.sh`,
 `scripts/static-console-safety-check.sh`, and the examples under
 `examples/operator-console/`. The gate composes all static console safety checks
 into one local release checkpoint.
+
+## AION-101 operator platform checkpoint
+
+Evidence: `scripts/operator-platform-checkpoint.sh`,
+`docs/operator-console/operator-platform-phase-checkpoint.md`,
+`docs/operator-console/operator-platform-evidence-pack.md`,
+`docs/operator-console/operator-platform-risk-register.md`, and
+`examples/operator-console/operator-platform-*.json`. The checkpoint closes the
+AION-089 through AION-100 phase as evidence-only work and keeps production auth,
+writes, activation, execution, provider calls, external calls, frontend
+dependencies, migrations, and API router expansion absent.

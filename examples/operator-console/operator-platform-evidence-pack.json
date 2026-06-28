@@ -1,0 +1,76 @@
+{
+  "evidence_pack_id": "aion-101-operator-platform-evidence-pack",
+  "status": "passed",
+  "evidence": [
+    {
+      "area": "Static console safety",
+      "script": "./scripts/static-console-safety-check.sh",
+      "expected_status": "passed"
+    },
+    {
+      "area": "Module lifecycle dashboard",
+      "script": "./scripts/module-lifecycle-dashboard-check.sh",
+      "expected_status": "passed"
+    },
+    {
+      "area": "Provider dashboard",
+      "script": "./scripts/provider-dashboard-check.sh",
+      "expected_status": "passed"
+    },
+    {
+      "area": "Operator actions",
+      "script": "./scripts/operator-actions-check.sh",
+      "expected_status": "passed"
+    },
+    {
+      "area": "Local auth",
+      "script": "./scripts/local-auth-check.sh",
+      "expected_status": "passed"
+    },
+    {
+      "area": "Local session",
+      "script": "./scripts/local-session-check.sh",
+      "expected_status": "passed"
+    },
+    {
+      "area": "Role filtering",
+      "script": "./scripts/role-filter-check.sh",
+      "expected_status": "passed"
+    },
+    {
+      "area": "Action authorization",
+      "script": "./scripts/action-authorization-check.sh",
+      "expected_status": "passed"
+    },
+    {
+      "area": "Production auth architecture",
+      "script": "./scripts/auth-runtime-check.sh",
+      "expected_status": "passed"
+    },
+    {
+      "area": "Disabled auth prototype",
+      "script": "./scripts/auth-runtime-check.sh",
+      "expected_status": "passed"
+    },
+    {
+      "area": "UI release gate",
+      "script": "./scripts/ui-release-gate.sh",
+      "expected_status": "passed"
+    },
+    {
+      "area": "Docs audit",
+      "script": "./scripts/docs-check.sh",
+      "expected_status": "passed"
+    },
+    {
+      "area": "Boundary check",
+      "script": "./scripts/boundary-check.sh",
+      "expected_status": "passed"
+    },
+    {
+      "area": "Repository health",
+      "script": "./scripts/check.sh",
+      "expected_status": "passed"
+    }
+  ]
+}

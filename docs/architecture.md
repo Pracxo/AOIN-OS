@@ -196,6 +196,16 @@ It is a release checkpoint only and adds no API route, SDK resource, CLI
 resource, frontend framework, build system, production auth, write path,
 activation path, execution path, provider call, or external service call.
 
+## Operator Platform Checkpoint
+
+AION-101 closes the post-v0.1 Operator Platform phase with a documentation and
+evidence checkpoint. It composes the UI release gate, static console safety
+check, auth runtime check, action authorization check, role filtering check,
+local auth and session checks, docs audits, domain drift check, and boundary
+check. It adds no runtime subsystem, migration, API router, SDK resource, CLI
+command, frontend dependency, production auth, write control, activation
+control, execution control, provider-call control, or external-call control.
+
 ## Contract Registry and Interface Drift
 
 The Contract Registry is the local index of AION public and operator-facing
