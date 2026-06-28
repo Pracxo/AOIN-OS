@@ -202,3 +202,10 @@ AION-094 adds dev-only identity simulation and role-aware console filtering.
 The console can preview how local roles affect read-only view models, but it
 still has no login UI, no credential input, no session persistence, no
 production auth, no execution, and no activation.
+
+## AION-095 Local Session Preview
+
+The Operator Console may display local session preview status as a read-only
+section. The preview is synthetic, local-only, and dev/test-only. It has no
+login, logout, credentials, tokens, cookies, persistence, production auth,
+execution, activation, runtime registration, or external calls.

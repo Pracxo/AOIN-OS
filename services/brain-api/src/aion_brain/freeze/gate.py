@@ -40,6 +40,7 @@ CRITICAL_FAILURE_CHECKS = {
     "module_binding_registry_safe",
     "module_mock_runtime_safe",
     "local_auth_safe",
+    "local_session_safe",
     "conformance_readiness_gate_safe",
     "golden_path_passed",
     "bootstrap_local_ready",
@@ -300,6 +301,14 @@ class FreezeGateService:
                 "local_auth_safe",
                 "local_auth",
                 self._check_local_auth_safe,
+                severity="critical",
+            )
+        )
+        checks.append(
+            self._run_check(
+                "local_session_safe",
+                "local_session",
+                self._check_local_session_safe,
                 severity="critical",
             )
         )
@@ -906,6 +915,60 @@ class FreezeGateService:
                     getattr(self._settings, "local_auth_role_filtering_enabled", True)
                 ),
                 "audit_enabled": bool(getattr(self._settings, "local_auth_audit_enabled", True)),
+                "write_actions_allowed": False,
+                "execution_allowed": False,
+                "activation_allowed": False,
+                "external_calls_allowed": False,
+            },
+        }
+
+    def _check_local_session_safe(self) -> dict[str, Any]:
+        unsafe_flags = {
+            "production_auth_enabled": bool(
+                getattr(self._settings, "production_auth_enabled", False)
+            ),
+            "local_session_credentials_enabled": bool(
+                getattr(self._settings, "local_session_credentials_enabled", False)
+            ),
+            "local_session_tokens_enabled": bool(
+                getattr(self._settings, "local_session_tokens_enabled", False)
+            ),
+            "local_session_cookies_enabled": bool(
+                getattr(self._settings, "local_session_cookies_enabled", False)
+            ),
+            "local_session_persistence_enabled": bool(
+                getattr(self._settings, "local_session_persistence_enabled", False)
+            ),
+            "local_session_write_actions_enabled": bool(
+                getattr(self._settings, "local_session_write_actions_enabled", False)
+            ),
+            "local_session_execution_enabled": bool(
+                getattr(self._settings, "local_session_execution_enabled", False)
+            ),
+            "local_session_activation_enabled": bool(
+                getattr(self._settings, "local_session_activation_enabled", False)
+            ),
+            "local_session_external_calls_enabled": bool(
+                getattr(self._settings, "local_session_external_calls_enabled", False)
+            ),
+        }
+        unsafe = [key for key, value in unsafe_flags.items() if value]
+        return {
+            "status": "failed" if unsafe else "passed",
+            "message": "Local sessions remain read-only dev previews.",
+            "details": {
+                "unsafe_flags": unsafe,
+                "preview_enabled": bool(
+                    getattr(self._settings, "local_session_preview_enabled", True)
+                ),
+                "context_enabled": bool(
+                    getattr(self._settings, "local_session_context_enabled", True)
+                ),
+                "audit_enabled": bool(
+                    getattr(self._settings, "local_session_audit_enabled", True)
+                ),
+                "dev_only": bool(getattr(self._settings, "local_session_dev_only", True)),
+                "read_only": bool(getattr(self._settings, "local_session_read_only", True)),
                 "write_actions_allowed": False,
                 "execution_allowed": False,
                 "activation_allowed": False,

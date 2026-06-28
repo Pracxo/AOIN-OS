@@ -14,3 +14,9 @@ Simulation rules:
 - policy and audit boundaries still apply
 
 This is not login. It does not prove user identity and must not be represented as production auth.
+
+## AION-095 Session Preview Compatibility
+
+Dev identity simulation may feed a local session preview for Operator Console
+filtering. The preview stays synthetic and read-only; it does not authenticate
+users, issue browser state, persist sessions, or grant privileged actions.

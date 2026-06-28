@@ -95,3 +95,11 @@ The static console includes a Local Auth Status panel showing
 `production_auth_enabled=false`, `credentials_enabled=false`,
 `sessions_enabled=false`, `external_identity_provider_enabled=false`, and
 `write_actions_enabled=false`. The role filter demo is read-only and redacted.
+
+## Local Session Preview Section
+
+Operator view models may include or be filtered by local session preview
+metadata. The section must render read-only status and boundary flags only:
+dev-only, read-only, production-session disabled, auth material disabled,
+browser-state disabled, persistence disabled, writes disabled, execution
+disabled, activation disabled, and external calls disabled.

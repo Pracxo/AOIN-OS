@@ -15,3 +15,11 @@ The API surface is limited to:
 - `GET /brain/local-auth/status`
 
 These endpoints shape local development view filtering only. They do not authenticate real users, issue tokens, set cookies, persist sessions, bypass policy, grant execution, or activate modules.
+
+## AION-095 Local Session Relationship
+
+AION-095 builds on local auth by deriving read-only session context from
+synthetic local identity. The session preview is not a credential, not a token,
+not a cookie, not production auth, and not persisted state. Local auth remains
+the role source for console filtering, while local session contracts keep write,
+execution, activation, and external calls disabled.

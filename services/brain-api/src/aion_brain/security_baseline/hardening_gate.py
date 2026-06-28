@@ -153,6 +153,7 @@ class HardeningGateService:
         checks.extend(self._model_provider_hardening_checks())
         checks.extend(self._conformance_checks())
         checks.extend(self._local_auth_checks())
+        checks.extend(self._local_session_checks())
         checks.extend(self._audit_integrity_checks())
         checks.append(self._control_catalog_check())
 
@@ -551,6 +552,70 @@ class HardeningGateService:
                 "failed" if self._settings.local_auth_write_actions_enabled else "passed",
                 "Local auth cannot grant write actions.",
                 "local_auth",
+            ),
+        ]
+
+    def _local_session_checks(self) -> builtins.list[dict[str, Any]]:
+        return [
+            _check(
+                "local_session_preview_dev_only",
+                "passed" if self._settings.local_session_dev_only else "failed",
+                "Local session previews are dev-only.",
+                "local_session",
+            ),
+            _check(
+                "local_session_preview_read_only",
+                "passed" if self._settings.local_session_read_only else "failed",
+                "Local session previews are read-only.",
+                "local_session",
+            ),
+            _check(
+                "local_session_auth_material_disabled",
+                "failed" if self._settings.local_session_credentials_enabled else "passed",
+                "Local session auth material backing is disabled.",
+                "local_session",
+            ),
+            _check(
+                "local_session_token_issuance_disabled",
+                "failed" if self._settings.local_session_tokens_enabled else "passed",
+                "Local session token issuance is disabled.",
+                "local_session",
+            ),
+            _check(
+                "local_session_cookie_issuance_disabled",
+                "failed" if self._settings.local_session_cookies_enabled else "passed",
+                "Local session cookie issuance is disabled.",
+                "local_session",
+            ),
+            _check(
+                "local_session_persistence_disabled",
+                "failed" if self._settings.local_session_persistence_enabled else "passed",
+                "Local session persistence is disabled.",
+                "local_session",
+            ),
+            _check(
+                "local_session_write_actions_disabled",
+                "failed" if self._settings.local_session_write_actions_enabled else "passed",
+                "Local session cannot grant write actions.",
+                "local_session",
+            ),
+            _check(
+                "local_session_execution_disabled",
+                "failed" if self._settings.local_session_execution_enabled else "passed",
+                "Local session cannot grant execution.",
+                "local_session",
+            ),
+            _check(
+                "local_session_activation_disabled",
+                "failed" if self._settings.local_session_activation_enabled else "passed",
+                "Local session cannot grant activation.",
+                "local_session",
+            ),
+            _check(
+                "local_session_external_calls_disabled",
+                "failed" if self._settings.local_session_external_calls_enabled else "passed",
+                "Local session cannot grant external calls.",
+                "local_session",
             ),
         ]
 

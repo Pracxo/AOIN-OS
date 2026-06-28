@@ -1,0 +1,10 @@
+{
+  "trace_id": "trace-local-session-audit-example",
+  "owner_scope": ["workspace:main"],
+  "include_examples": true,
+  "metadata": {
+    "synthetic": true,
+    "source": "local_example"
+  },
+  "created_by": "local.operator"
+}

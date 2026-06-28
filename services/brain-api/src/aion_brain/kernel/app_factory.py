@@ -46,6 +46,7 @@ from aion_brain.api.learning import router as learning_router
 from aion_brain.api.learning_synthesis import router as learning_synthesis_router
 from aion_brain.api.lifecycle import router as lifecycle_router
 from aion_brain.api.local_auth import router as local_auth_router
+from aion_brain.api.local_session import router as local_session_router
 from aion_brain.api.mcp import router as mcp_router
 from aion_brain.api.memory import router as memory_router
 from aion_brain.api.memory_governance import router as memory_governance_router
@@ -198,6 +199,7 @@ ROUTERS = (
     operator_router,
     operator_actions_router,
     local_auth_router,
+    local_session_router,
     operator_console_router,
     replay_router,
     regression_router,

@@ -141,6 +141,23 @@ required_actions = {
 }
 for path in sorted(demo_dir.glob("*.json")):
     payload = json.loads(path.read_text())
+    if path.name.startswith("local-session-"):
+        if payload.get("read_only") is not True:
+            raise SystemExit(f"local session demo must be read_only: {path}")
+        for key in (
+            "production_session",
+            "credential_backed",
+            "token_issued",
+            "cookie_issued",
+            "persistent",
+            "write_allowed",
+            "execute_allowed",
+            "activation_allowed",
+            "external_calls_allowed",
+        ):
+            if payload.get(key) is not False:
+                raise SystemExit(f"local session demo flag must be false: {key}: {path}")
+        continue
     if payload.get("read_only") is not True:
         raise SystemExit(f"read_only must be true: {path}")
     if payload.get("redaction_applied") is not True:

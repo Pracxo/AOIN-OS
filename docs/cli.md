@@ -736,3 +736,19 @@ aionctl local-auth status
 
 These commands do not log in, issue tokens, store credentials, create sessions,
 enable production auth, or integrate external identity providers.
+
+## Local Session Commands
+
+AION-095 adds read-only local session commands through the SDK:
+
+```bash
+aionctl local-session preview
+aionctl local-session context
+aionctl local-session status
+aionctl local-session boundary-check
+aionctl local-session audit
+```
+
+The CLI does not add login, logout, credential, token, cookie, browser session,
+production auth, persistent session, execution, activation, or external-call
+commands.

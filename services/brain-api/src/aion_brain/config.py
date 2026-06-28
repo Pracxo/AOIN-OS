@@ -1738,6 +1738,91 @@ class Settings(BaseSettings):
             "local_auth_write_actions_enabled",
         ),
     )
+    local_session_preview_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_LOCAL_SESSION_PREVIEW_ENABLED",
+            "local_session_preview_enabled",
+        ),
+    )
+    local_session_context_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_LOCAL_SESSION_CONTEXT_ENABLED",
+            "local_session_context_enabled",
+        ),
+    )
+    local_session_audit_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_LOCAL_SESSION_AUDIT_ENABLED",
+            "local_session_audit_enabled",
+        ),
+    )
+    local_session_dev_only: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_LOCAL_SESSION_DEV_ONLY", "local_session_dev_only"),
+    )
+    local_session_read_only: bool = Field(
+        default=True,
+        validation_alias=AliasChoices("AION_LOCAL_SESSION_READ_ONLY", "local_session_read_only"),
+    )
+    local_session_credentials_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_LOCAL_SESSION_CREDENTIALS_ENABLED",
+            "local_session_credentials_enabled",
+        ),
+    )
+    local_session_tokens_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_LOCAL_SESSION_TOKENS_ENABLED",
+            "local_session_tokens_enabled",
+        ),
+    )
+    local_session_cookies_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_LOCAL_SESSION_COOKIES_ENABLED",
+            "local_session_cookies_enabled",
+        ),
+    )
+    local_session_persistence_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_LOCAL_SESSION_PERSISTENCE_ENABLED",
+            "local_session_persistence_enabled",
+        ),
+    )
+    local_session_write_actions_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_LOCAL_SESSION_WRITE_ACTIONS_ENABLED",
+            "local_session_write_actions_enabled",
+        ),
+    )
+    local_session_execution_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_LOCAL_SESSION_EXECUTION_ENABLED",
+            "local_session_execution_enabled",
+        ),
+    )
+    local_session_activation_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_LOCAL_SESSION_ACTIVATION_ENABLED",
+            "local_session_activation_enabled",
+        ),
+    )
+    local_session_external_calls_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_LOCAL_SESSION_EXTERNAL_CALLS_ENABLED",
+            "local_session_external_calls_enabled",
+        ),
+    )
     operator_actions_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices(

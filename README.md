@@ -3841,6 +3841,12 @@ created. No external identity provider is integrated. No login endpoint is
 added. ActorContext remains the current internal context mechanism, and policy
 remains authoritative for backend access.
 
+AION-095 adds a read-only local session prototype for the Operator Console. It
+creates synthetic session previews and role-aware session context only. It does
+not add production auth, login/logout, credential storage, token or cookie
+issuance, browser session storage, persistent session tables, writes,
+execution, activation, runtime registration, or external calls.
+
 Primary docs:
 
 - `docs/auth/local-auth-design.md`
@@ -3857,10 +3863,16 @@ Primary docs:
 - `docs/auth/role-aware-console-filtering.md`
 - `docs/auth/local-auth-audit.md`
 - `docs/auth/local-auth-runtime-boundaries.md`
+- `docs/auth/local-session-prototype.md`
+- `docs/auth/local-session-boundary.md`
+- `docs/auth/session-safety-audit.md`
+- `docs/auth/session-preview-console-panel.md`
+- `docs/auth/future-session-implementation-plan.md`
 
 Developer command:
 
 ```bash
 ./scripts/auth-design-check.sh
 ./scripts/local-auth-check.sh
+./scripts/local-session-check.sh
 ```

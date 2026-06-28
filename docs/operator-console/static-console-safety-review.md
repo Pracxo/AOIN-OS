@@ -50,3 +50,11 @@ The Local Auth panel uses static demo JSON or localhost API status only. It has
 no login form, no credential field, no token field, no browser auth storage,
 and no write action. It displays role-filtered read-only output and blocked
 auth no-go warnings.
+
+## AION-095 Local Session Static Panel
+
+The static console may render `local-session-status.json` and
+`local-session-preview.json`. The panel remains dependency-free and contains no
+login form, password field, token field, cookie field, local storage, session
+storage, credential input, external API target, write action, execution path, or
+activation control.

@@ -1,0 +1,33 @@
+{
+  "scope": ["workspace:main"],
+  "local_session_preview_enabled": true,
+  "local_session_context_enabled": true,
+  "local_session_audit_enabled": true,
+  "dev_only": true,
+  "read_only": true,
+  "production_session": false,
+  "credential_backed": false,
+  "token_issued": false,
+  "cookie_issued": false,
+  "persistent": false,
+  "write_allowed": false,
+  "execute_allowed": false,
+  "activation_allowed": false,
+  "external_calls_allowed": false,
+  "credentials_enabled": false,
+  "tokens_enabled": false,
+  "cookies_enabled": false,
+  "persistence_enabled": false,
+  "production_auth_enabled": false,
+  "no_go_warnings": [
+    "no_login_endpoint",
+    "no_logout_endpoint",
+    "no_credentials",
+    "no_tokens",
+    "no_cookies",
+    "no_persistence",
+    "no_execution_grant",
+    "no_activation_grant",
+    "no_external_calls"
+  ]
+}

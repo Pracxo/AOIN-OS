@@ -244,6 +244,11 @@ class KernelDiagnostics:
         ("console_role_filter_present", "console_role_filter", "medium"),
         ("local_auth_audit_service_present", "local_auth_audit_service", "medium"),
         ("local_auth_query_service_present", "local_auth_query_service", "medium"),
+        ("local_session_preview_service_present", "local_session_preview_service", "medium"),
+        ("local_session_context_service_present", "local_session_context_service", "medium"),
+        ("local_session_boundary_service_present", "local_session_boundary_service", "medium"),
+        ("local_session_audit_service_present", "local_session_audit_service", "medium"),
+        ("local_session_query_service_present", "local_session_query_service", "medium"),
         ("operator_action_center_present", "operator_action_center_service", "medium"),
         ("operator_readiness_aggregator_present", "operator_readiness_aggregator", "medium"),
         ("dialogue_session_service_present", "dialogue_session_service", "medium"),
@@ -2092,6 +2097,167 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Local auth services are assembled.",
+            ),
+            self._result(
+                "local_session_preview_enabled",
+                "local_session",
+                (
+                    "passed"
+                    if bool(getattr(settings, "local_session_preview_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Local session preview is enabled.",
+            ),
+            self._result(
+                "local_session_context_enabled",
+                "local_session",
+                (
+                    "passed"
+                    if bool(getattr(settings, "local_session_context_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Local session context preview is enabled.",
+            ),
+            self._result(
+                "local_session_audit_enabled",
+                "local_session",
+                (
+                    "passed"
+                    if bool(getattr(settings, "local_session_audit_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Local session audit is enabled.",
+            ),
+            self._result(
+                "local_session_dev_only",
+                "local_session",
+                (
+                    "passed"
+                    if bool(getattr(settings, "local_session_dev_only", True))
+                    else "failed"
+                ),
+                "high",
+                "Local sessions remain dev-only.",
+            ),
+            self._result(
+                "local_session_read_only",
+                "local_session",
+                (
+                    "passed"
+                    if bool(getattr(settings, "local_session_read_only", True))
+                    else "failed"
+                ),
+                "high",
+                "Local sessions remain read-only.",
+            ),
+            self._result(
+                "local_session_credentials_enabled",
+                "local_session",
+                (
+                    "failed"
+                    if bool(getattr(settings, "local_session_credentials_enabled", False))
+                    else "passed"
+                ),
+                "high",
+                "Local session credential backing remains disabled.",
+            ),
+            self._result(
+                "local_session_tokens_enabled",
+                "local_session",
+                (
+                    "failed"
+                    if bool(getattr(settings, "local_session_tokens_enabled", False))
+                    else "passed"
+                ),
+                "high",
+                "Local session token issuance remains disabled.",
+            ),
+            self._result(
+                "local_session_cookies_enabled",
+                "local_session",
+                (
+                    "failed"
+                    if bool(getattr(settings, "local_session_cookies_enabled", False))
+                    else "passed"
+                ),
+                "high",
+                "Local session cookie issuance remains disabled.",
+            ),
+            self._result(
+                "local_session_persistence_enabled",
+                "local_session",
+                (
+                    "failed"
+                    if bool(getattr(settings, "local_session_persistence_enabled", False))
+                    else "passed"
+                ),
+                "high",
+                "Local session persistence remains disabled.",
+            ),
+            self._result(
+                "local_session_write_actions_enabled",
+                "local_session",
+                (
+                    "failed"
+                    if bool(getattr(settings, "local_session_write_actions_enabled", False))
+                    else "passed"
+                ),
+                "high",
+                "Local session write grants remain disabled.",
+            ),
+            self._result(
+                "local_session_execution_enabled",
+                "local_session",
+                (
+                    "failed"
+                    if bool(getattr(settings, "local_session_execution_enabled", False))
+                    else "passed"
+                ),
+                "high",
+                "Local session execution remains disabled.",
+            ),
+            self._result(
+                "local_session_activation_enabled",
+                "local_session",
+                (
+                    "failed"
+                    if bool(getattr(settings, "local_session_activation_enabled", False))
+                    else "passed"
+                ),
+                "high",
+                "Local session activation remains disabled.",
+            ),
+            self._result(
+                "local_session_external_calls_enabled",
+                "local_session",
+                (
+                    "failed"
+                    if bool(getattr(settings, "local_session_external_calls_enabled", False))
+                    else "passed"
+                ),
+                "high",
+                "Local session external calls remain disabled.",
+            ),
+            self._result(
+                "local_session_services_present",
+                "local_session",
+                "passed"
+                if all(
+                    hasattr(self._container, name)
+                    for name in (
+                        "local_session_preview_service",
+                        "local_session_context_service",
+                        "local_session_boundary_service",
+                        "local_session_audit_service",
+                        "local_session_query_service",
+                    )
+                )
+                else "failed",
+                "high",
+                "Local session services are assembled.",
             ),
         ]
 

@@ -14,3 +14,9 @@ Role behavior:
 - `system_service` is synthetic and non-privileged
 
 The filter always applies redaction and returns `read_only=true`.
+
+## AION-095 Session Context
+
+Role-aware console filtering may accept `LocalSessionContext` metadata and map
+it back to the same non-privileged local auth role matrix. Session context never
+adds write, execution, activation, or external-call grants.

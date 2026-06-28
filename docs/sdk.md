@@ -893,3 +893,18 @@ Useful methods include:
 
 The SDK does not expose login, token, credential, session, production auth, or
 external identity commands.
+
+## LocalSessionResource
+
+`client.local_session` exposes read-only/dev-only local session APIs.
+
+Useful methods include:
+
+- `preview(payload)`
+- `context(payload)`
+- `status(scope)`
+- `boundary_check(scope)`
+- `audit(payload)`
+
+The SDK does not expose login, logout, token, cookie, credential, production
+auth, persistent session, or external identity commands.

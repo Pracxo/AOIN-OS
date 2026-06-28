@@ -61,3 +61,10 @@ workspace, under which scope, and through which policy decision.
 AION-094 does not create sessions. `LocalAuthContext.session_present` must be
 false, and the static console must not persist auth state in browser storage.
 The simulation context is request data for local filtering only.
+
+## AION-095 Local Session Prototype
+
+AION-095 implements only the read-only local prototype side of this boundary.
+The prototype makes future session semantics visible without production auth,
+credential storage, token issuance, cookie issuance, browser sessions, or
+database persistence.

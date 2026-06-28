@@ -9,6 +9,14 @@ from aion_brain.audit_integrity.repository import AuditIntegrityRepository
 from aion_brain.contracts.audit_integrity import ProvenanceLink
 from aion_brain.contracts.policy import PolicyRequest
 
+LOCAL_SESSION_PROVENANCE_BOUNDARY = {
+    "source_component": "local_session",
+    "local_only": True,
+    "read_only": True,
+    "auth_material_stored": False,
+    "session_state_stored": False,
+}
+
 
 class ProvenanceService:
     """Create, query, and soft-delete provenance links."""

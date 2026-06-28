@@ -271,3 +271,42 @@ def record_local_auth_audit_event(
         },
         metadata={"dev_only": True},
     )
+
+
+def record_local_session_audit_event(
+    audit_sink: object | None,
+    *,
+    audit_id: str,
+    trace_id: str | None,
+    actor_id: str | None,
+    owner_scope: list[str],
+    status: str,
+) -> AuditEntry | None:
+    """Record a local-session safety audit without storing session material."""
+    return record_audit_event(
+        audit_sink,
+        action_type="local_session.audit.run",
+        resource_type="local_session_audit",
+        resource_id=audit_id,
+        event_type="local_session_audit_completed",
+        outcome="completed" if status == "passed" else "failed",
+        source_component="local_session_audit_service",
+        trace_id=trace_id,
+        actor_id=actor_id,
+        risk_level="medium",
+        payload={
+            "status": status,
+            "owner_scope": owner_scope,
+            "dev_only": True,
+            "read_only": True,
+            "auth_material_enabled": False,
+            "browser_state_enabled": False,
+            "session_state_storage_enabled": False,
+            "production_auth_enabled": False,
+            "write_actions_enabled": False,
+            "execution_enabled": False,
+            "activation_enabled": False,
+            "external_calls_enabled": False,
+        },
+        metadata={"local_only": True},
+    )

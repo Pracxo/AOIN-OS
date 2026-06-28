@@ -20,3 +20,10 @@ Checks cover:
 - no frontend dependency files
 
 Audit results are local records and can be read through the API, SDK, and CLI. They do not create accounts or grant permissions.
+
+## AION-095 Session Audit
+
+Local auth audit remains separate from local session audit. The session audit
+checks that session previews are dev-only and read-only, with no credential
+backing, token issuance, cookie issuance, persistence, production auth,
+execution, activation, or external calls.

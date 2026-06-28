@@ -1646,3 +1646,15 @@ These contracts are dev-only and non-privileged. They require
 `production_auth=false`, `credentials_present=false`, `session_present=false`,
 `write_allowed=false`, `execute_allowed=false`, `activation_allowed=false`, and
 `external_calls_allowed=false` where applicable.
+
+## Local Session Contracts
+
+AION-095 adds `LocalSessionPreview`, `LocalSessionPreviewRequest`,
+`LocalSessionContext`, `LocalSessionBoundaryCheck`,
+`LocalSessionAuditRequest`, and `LocalSessionAuditResult`.
+
+Local session contracts are synthetic and read-only. `production_session=false`,
+`credential_backed=false`, `token_issued=false`, `cookie_issued=false`,
+`persistent=false`, `write_allowed=false`, `execute_allowed=false`,
+`activation_allowed=false`, and `external_calls_allowed=false` are contract
+invariants.

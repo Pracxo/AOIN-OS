@@ -147,6 +147,11 @@ class LocalAuthAuditService:
     def _examples_safe(self, findings: list[dict[str, object]]) -> bool:
         ok = True
         for path in sorted((self._repo_root / "examples/auth").glob("*.json")):
+            if (
+                path.name.startswith("local-session")
+                or path.name == "role-aware-session-context.json"
+            ):
+                continue
             try:
                 payload = json.loads(path.read_text())
             except json.JSONDecodeError:

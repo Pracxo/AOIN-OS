@@ -35,7 +35,11 @@ class DevIdentitySimulator:
             "local_auth_context",
             context.local_auth_context_id,
             context.owner_scope,
-            {"roles": context.roles, "production_auth": False},
+            {
+                "roles": context.roles,
+                "production_auth": False,
+                "local_session_preview_compatible": True,
+            },
         )
         return context
 
