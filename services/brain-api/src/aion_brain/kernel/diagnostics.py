@@ -239,9 +239,11 @@ class KernelDiagnostics:
         ("firecracker_sandbox_adapter_present", "firecracker_sandbox_adapter", "medium"),
         ("operator_control_tower_present", "operator_control_tower_service", "medium"),
         ("operator_snapshot_service_present", "operator_snapshot_service", "medium"),
+        ("role_permission_matrix_service_present", "role_permission_matrix_service", "medium"),
         ("local_role_service_present", "local_role_service", "medium"),
         ("dev_identity_simulator_present", "dev_identity_simulator", "medium"),
         ("console_role_filter_present", "console_role_filter", "medium"),
+        ("role_access_audit_service_present", "role_access_audit_service", "medium"),
         ("local_auth_audit_service_present", "local_auth_audit_service", "medium"),
         ("local_auth_query_service_present", "local_auth_query_service", "medium"),
         ("local_session_preview_service_present", "local_session_preview_service", "medium"),
@@ -1872,6 +1874,18 @@ class KernelDiagnostics:
                 "operator_console_contract_audit_service",
             )
         )
+        local_auth_services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "role_permission_matrix_service",
+                "local_role_service",
+                "dev_identity_simulator",
+                "console_role_filter",
+                "role_access_audit_service",
+                "local_auth_audit_service",
+                "local_auth_query_service",
+            )
+        )
         return [
             self._result(
                 "operator_control_tower_enabled",
@@ -2037,6 +2051,30 @@ class KernelDiagnostics:
                 "Local auth safety audit is enabled.",
             ),
             self._result(
+                "local_auth_role_matrix_enabled",
+                "local_auth",
+                (
+                    "passed"
+                    if bool(getattr(settings, "local_auth_role_matrix_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Role permission proof matrix is enabled.",
+            ),
+            self._result(
+                "local_auth_role_access_audit_enabled",
+                "local_auth",
+                (
+                    "passed"
+                    if bool(
+                        getattr(settings, "local_auth_role_access_audit_enabled", True)
+                    )
+                    else "warning"
+                ),
+                "medium",
+                "Role access audit is enabled.",
+            ),
+            self._result(
                 "production_auth_enabled",
                 "local_auth",
                 (
@@ -2092,9 +2130,33 @@ class KernelDiagnostics:
                 "Local auth cannot grant write actions.",
             ),
             self._result(
+                "local_auth_role_matrix_present",
+                "local_auth",
+                (
+                    "passed"
+                    if getattr(self._container, "role_permission_matrix_service", None)
+                    is not None
+                    else "failed"
+                ),
+                "high",
+                "Role permission proof matrix service is assembled.",
+            ),
+            self._result(
+                "local_auth_role_access_audit_present",
+                "local_auth",
+                (
+                    "passed"
+                    if getattr(self._container, "role_access_audit_service", None)
+                    is not None
+                    else "failed"
+                ),
+                "medium",
+                "Role access audit service is assembled.",
+            ),
+            self._result(
                 "local_auth_services_present",
                 "local_auth",
-                "passed" if services_present else "failed",
+                "passed" if local_auth_services_present else "failed",
                 "high",
                 "Local auth services are assembled.",
             ),

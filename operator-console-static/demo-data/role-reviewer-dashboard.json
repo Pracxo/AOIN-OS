@@ -1,0 +1,40 @@
+{
+  "role": "reviewer",
+  "view": "operator_actions",
+  "title": "Reviewer Role Preview",
+  "status": "filtered",
+  "summary": "Reviewer can see review descriptors and cannot run dry-run descriptors or execute actions.",
+  "read_only": true,
+  "redaction_applied": true,
+  "visible_views": ["overview", "release_candidate", "module_lifecycle", "module_activation", "module_mock_runtime", "model_provider_hardening", "operator_actions", "lifecycle_review"],
+  "removed_sections": ["operator_dry_run"],
+  "removed_actions": ["run_dry_run_check", "acknowledge_notification"],
+  "allowed_descriptors": ["create_review_record"],
+  "forbidden_actions_visible": true,
+  "write_allowed": false,
+  "execute_allowed": false,
+  "activation_allowed": false,
+  "external_calls_allowed": false,
+  "blockers": [{"blocker_key": "execution_disabled", "message": "Review records do not execute actions.", "bypassable": false}],
+  "warnings": [],
+  "refs": ["docs/auth/role-aware-action-descriptors.md"],
+  "sections": [
+    {
+      "section_key": "review_descriptors",
+      "title": "Review Descriptors",
+      "status": "ready",
+      "summary": "Review-only descriptors are visible for local preview.",
+      "blockers": [{"blocker_key": "activate_module", "message": "Activation remains forbidden.", "bypassable": false}],
+      "warnings": [],
+      "refs": ["docs/operator-console/action-review-flow.md"]
+    }
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Module activation remains disabled."},
+    {"action_key": "activate_capability", "reason": "Capability activation remains disabled."},
+    {"action_key": "load_code", "reason": "Code loading is disabled."},
+    {"action_key": "execute_tool", "reason": "Tool execution is disabled."},
+    {"action_key": "enable_external_model_calls", "reason": "External model calls remain disabled."},
+    {"action_key": "hard_delete", "reason": "Hard delete remains disabled."}
+  ]
+}

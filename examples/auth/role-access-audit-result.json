@@ -1,0 +1,50 @@
+{
+  "role_access_audit_id": "role-access-audit-example",
+  "status": "passed",
+  "roles_checked": ["viewer", "operator", "reviewer", "admin", "auditor", "system_service"],
+  "views_checked": ["overview", "module_activation", "operator_actions", "audit_provenance", "settings_safety"],
+  "decisions": [
+    {
+      "role": "viewer",
+      "view": "module_activation",
+      "action_key": "activate_module",
+      "decision": "visible_forbidden",
+      "reason": "forbidden_action_descriptor_visible",
+      "read_allowed": true,
+      "dry_run_allowed": false,
+      "review_allowed": false,
+      "write_allowed": false,
+      "execute_allowed": false,
+      "activation_allowed": false,
+      "external_calls_allowed": false,
+      "metadata": {"matrix_version": "aion-096"}
+    },
+    {
+      "role": "operator",
+      "view": "operator_actions",
+      "action_key": "run_dry_run_check",
+      "decision": "allowed",
+      "reason": "dry_run_descriptor_allowed",
+      "read_allowed": true,
+      "dry_run_allowed": true,
+      "review_allowed": false,
+      "write_allowed": false,
+      "execute_allowed": false,
+      "activation_allowed": false,
+      "external_calls_allowed": false,
+      "metadata": {"matrix_version": "aion-096"}
+    }
+  ],
+  "forbidden_actions_visible": true,
+  "write_actions_absent": true,
+  "execution_absent": true,
+  "activation_absent": true,
+  "external_calls_absent": true,
+  "redaction_applied": true,
+  "findings": [],
+  "metadata": {
+    "matrix_version": "aion-096",
+    "system_service_exposed_in_static_console": false
+  },
+  "created_at": "2026-06-28T00:00:00Z"
+}

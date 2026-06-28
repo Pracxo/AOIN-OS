@@ -1008,3 +1008,10 @@ AION-095 emits visual telemetry for `local_session_preview_created`,
 Node types are `local_session_preview` and `local_session_audit`. These records
 are local-only and carry no credentials, tokens, cookies, raw prompts, hidden
 reasoning, production auth state, or persisted browser session state.
+
+## Role Access Projection Note
+
+AION-096 emits `local_auth_role_access_audited` for role matrix audit reports.
+The node type is `local_auth_role_matrix`. The payload is read-only and carries
+no raw prompts, hidden reasoning, credentials, production auth state, or
+privileged grants.

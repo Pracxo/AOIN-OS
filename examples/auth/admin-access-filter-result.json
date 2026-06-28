@@ -1,0 +1,16 @@
+{
+  "role": "admin",
+  "status": "filtered",
+  "read_only": true,
+  "redaction_applied": true,
+  "visible_views": ["overview", "readiness", "release_candidate", "freeze_release", "golden_path", "module_lifecycle", "module_activation", "module_mock_runtime", "model_provider_hardening", "operator_actions", "local_auth", "local_session", "notifications", "incidents", "registry_integrity", "lifecycle_review", "audit_provenance", "settings_safety"],
+  "removed_sections": [],
+  "removed_actions": ["run_dry_run_check", "create_review_record"],
+  "allowed_descriptors": ["inspect_refs", "export_redacted_summary"],
+  "forbidden_actions_visible": true,
+  "write_allowed": false,
+  "execute_allowed": false,
+  "activation_allowed": false,
+  "external_calls_allowed": false,
+  "production_auth": false
+}

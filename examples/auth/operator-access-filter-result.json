@@ -1,0 +1,15 @@
+{
+  "role": "operator",
+  "status": "filtered",
+  "read_only": true,
+  "redaction_applied": true,
+  "visible_views": ["overview", "readiness", "release_candidate", "freeze_release", "golden_path", "module_lifecycle", "module_activation", "module_mock_runtime", "model_provider_hardening", "operator_actions", "local_auth", "local_session", "notifications", "incidents", "registry_integrity", "lifecycle_review"],
+  "removed_sections": ["settings_safety"],
+  "removed_actions": ["create_review_record"],
+  "allowed_descriptors": ["run_dry_run_check", "acknowledge_notification", "dismiss_non_blocking_finding_with_reason"],
+  "forbidden_actions_visible": true,
+  "write_allowed": false,
+  "execute_allowed": false,
+  "activation_allowed": false,
+  "external_calls_allowed": false
+}

@@ -244,6 +244,8 @@ from aion_brain.local_auth import (
     LocalAuthAuditService,
     LocalAuthQueryService,
     LocalRoleService,
+    RoleAccessAuditService,
+    RolePermissionMatrixService,
 )
 from aion_brain.local_session import (
     LocalSessionAuditService,
@@ -3534,13 +3536,21 @@ class KernelContainer:
             self.policy_adapter,
             self.telemetry_service,
         )
-        self.local_role_service = LocalRoleService()
+        self.role_permission_matrix_service = RolePermissionMatrixService()
+        self.local_role_service = LocalRoleService(
+            matrix_service=self.role_permission_matrix_service,
+        )
         self.dev_identity_simulator = DevIdentitySimulator(
             role_service=self.local_role_service,
             telemetry_service=self.telemetry_service,
         )
         self.console_role_filter = ConsoleRoleFilter(
+            matrix_service=self.role_permission_matrix_service,
             role_service=self.local_role_service,
+            telemetry_service=self.telemetry_service,
+        )
+        self.role_access_audit_service = RoleAccessAuditService(
+            matrix_service=self.role_permission_matrix_service,
             telemetry_service=self.telemetry_service,
         )
         self.local_auth_audit_service = LocalAuthAuditService(
@@ -5083,6 +5093,12 @@ class KernelContainer:
                 "local",
             ),
             ("operator_snapshot_service", self.operator_snapshot_service, "service", "local"),
+            (
+                "role_permission_matrix_service",
+                self.role_permission_matrix_service,
+                "service",
+                "local",
+            ),
             ("local_role_service", self.local_role_service, "service", "local"),
             (
                 "dev_identity_simulator",
@@ -5091,6 +5107,7 @@ class KernelContainer:
                 "deterministic",
             ),
             ("console_role_filter", self.console_role_filter, "service", "local"),
+            ("role_access_audit_service", self.role_access_audit_service, "service", "local"),
             ("local_auth_audit_service", self.local_auth_audit_service, "service", "local"),
             ("local_auth_query_service", self.local_auth_query_service, "service", "local"),
             (

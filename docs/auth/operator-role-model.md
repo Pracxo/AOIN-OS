@@ -75,3 +75,9 @@ AION-094 makes the local roles concrete for development simulation:
 `viewer`, `operator`, `reviewer`, `admin`, `auditor`, and `system_service`.
 No role allows execution, activation, external calls, hard delete, production
 auth, credential storage, or session creation.
+
+## AION-096 Role Visibility
+
+The static console exposes `viewer`, `operator`, `reviewer`, `admin`, and
+`auditor` as demo roles. `system_service` remains internal and is not exposed
+as a static UI role.

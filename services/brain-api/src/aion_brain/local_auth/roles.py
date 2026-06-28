@@ -2,90 +2,25 @@
 
 from __future__ import annotations
 
-from aion_brain.contracts.local_auth import RolePermission
-from aion_brain.operator_console.action_boundaries import forbidden_action_descriptors
-from aion_brain.operator_console.data_sources import list_console_views
+from typing import Any
 
-_COMMON_CONSTRAINTS = [
-    "dev_only",
-    "read_only_console",
-    "no_execute",
-    "no_activation",
-    "no_external_calls",
-    "no_hard_delete",
-]
-_DRY_RUN_ACTIONS = [
-    "run_dry_run_check",
-    "acknowledge_notification",
-    "dismiss_non_blocking_finding_with_reason",
-]
-_REVIEW_ACTIONS = ["create_review_record"]
+from aion_brain.contracts.local_auth import RoleAccessAudit, RoleAccessDecision, RolePermission
+from aion_brain.local_auth.permission_matrix import RolePermissionMatrixService
 
 
 class LocalRoleService:
     """Return deterministic dev-only local role permissions."""
 
+    def __init__(
+        self,
+        *,
+        matrix_service: RolePermissionMatrixService | None = None,
+    ) -> None:
+        self.matrix_service = matrix_service or RolePermissionMatrixService()
+
     def default_permissions(self) -> list[RolePermission]:
         """Return the full local auth role matrix."""
-        views = [str(view) for view in list_console_views()]
-        audit_views = ["audit_provenance", "settings_safety", "overview"]
-        forbidden = [item.action_key for item in forbidden_action_descriptors()]
-        return [
-            RolePermission(
-                role="viewer",
-                read_views=views,
-                dry_run_actions=[],
-                review_actions=[],
-                forbidden_actions=forbidden,
-                constraints=[*_COMMON_CONSTRAINTS, "read_only"],
-                metadata={"production_auth": False},
-            ),
-            RolePermission(
-                role="operator",
-                read_views=views,
-                dry_run_actions=_DRY_RUN_ACTIONS,
-                review_actions=[],
-                forbidden_actions=forbidden,
-                constraints=[*_COMMON_CONSTRAINTS, "dry_run_only"],
-                metadata={"production_auth": False},
-            ),
-            RolePermission(
-                role="reviewer",
-                read_views=views,
-                dry_run_actions=[],
-                review_actions=_REVIEW_ACTIONS,
-                forbidden_actions=forbidden,
-                constraints=[*_COMMON_CONSTRAINTS, "review_record_only"],
-                metadata={"production_auth": False},
-            ),
-            RolePermission(
-                role="admin",
-                read_views=views,
-                dry_run_actions=[],
-                review_actions=[],
-                forbidden_actions=forbidden,
-                constraints=[*_COMMON_CONSTRAINTS, "future_design_settings_only"],
-                metadata={"settings_mutation_enabled": False},
-            ),
-            RolePermission(
-                role="auditor",
-                read_views=audit_views,
-                dry_run_actions=[],
-                review_actions=[],
-                forbidden_actions=forbidden,
-                constraints=[*_COMMON_CONSTRAINTS, "audit_read_only"],
-                metadata={"production_auth": False},
-            ),
-            RolePermission(
-                role="system_service",
-                read_views=["overview", "settings_safety"],
-                dry_run_actions=[],
-                review_actions=[],
-                forbidden_actions=forbidden,
-                constraints=[*_COMMON_CONSTRAINTS, "synthetic_system_context"],
-                metadata={"production_auth": False},
-            ),
-        ]
+        return self.matrix_service.role_permissions()
 
     def permissions_for_roles(self, roles: list[str]) -> dict[str, object]:
         """Return merged permissions for one or more local auth roles."""
@@ -110,6 +45,37 @@ class LocalRoleService:
             "external_calls_allowed": False,
             "hard_delete_allowed": False,
         }
+
+    def build_permission_matrix(self) -> dict[str, Any]:
+        """Return the AION-096 role permission proof matrix."""
+        return self.matrix_service.build_permission_matrix()
+
+    def decide(
+        self,
+        role: str,
+        view: str,
+        section_key: str | None = None,
+        action_key: str | None = None,
+    ) -> RoleAccessDecision:
+        """Return one fail-closed role access decision."""
+        return self.matrix_service.decide(
+            role,
+            view,
+            section_key=section_key,
+            action_key=action_key,
+        )
+
+    def filter_view_for_roles(
+        self,
+        view_model: dict[str, Any],
+        roles: list[str],
+    ) -> dict[str, Any]:
+        """Return a role-filtered read-only console view model."""
+        return self.matrix_service.filter_view_for_roles(view_model, roles)
+
+    def audit_matrix(self, trace_id: str | None = None) -> RoleAccessAudit:
+        """Audit the role matrix safety invariants."""
+        return self.matrix_service.audit_matrix(trace_id=trace_id)
 
     def role_allows_view(self, role: str, view: str) -> bool:
         """Return whether a role can read a console view."""

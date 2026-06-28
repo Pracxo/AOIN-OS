@@ -11,7 +11,7 @@
     },
     "reviewer": {
       "allowed_actions": ["read", "dry_run_request", "preview", "review"],
-      "forbidden_actions": ["execute", "activate", "store_credentials", "bypass_policy"]
+      "forbidden_actions": ["execute", "activate", "protected_value_write", "bypass_policy"]
     },
     "admin": {
       "allowed_actions": ["read", "dry_run_request", "preview", "review"],

@@ -28,3 +28,10 @@ Local session preview runtime is stateless. It may generate synthetic preview
 records and expiry metadata, but it must not create login/logout routes, store
 credentials, issue tokens or cookies, persist browser session state, bypass
 policy, bypass ActorContext, or grant privileged actions.
+
+## AION-096 Role Filter Runtime Boundary
+
+Role filtering is an in-process read-only projection over console view models.
+It may remove allowed descriptors or restrict sections, but it must not create
+runtime auth, mutate source records, add browser state, or grant privileged
+actions.

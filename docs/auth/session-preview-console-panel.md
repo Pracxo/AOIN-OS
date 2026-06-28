@@ -17,3 +17,9 @@ The panel displays:
 The static panel has no login form, logout form, password field, token field,
 credential field, cookie field, local storage, session storage, or package
 dependency.
+
+## AION-096 Role Preview
+
+The session preview panel can sit beside the role-aware console preview. Role
+switching is demo-only and uses static JSON; it does not create login state or
+persist browser state.

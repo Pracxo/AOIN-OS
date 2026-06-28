@@ -215,6 +215,7 @@ h1 {
 .module-dashboard,
 .operator-actions-panel,
 .local-auth-panel,
+.role-access-panel,
 .local-session-panel {
   margin-top: 22px;
   padding: 18px;
@@ -225,6 +226,7 @@ h1 {
 
 .module-dashboard.is-muted,
 .operator-actions-panel.is-muted,
+.role-access-panel.is-muted,
 .local-session-panel.is-muted {
   border-style: dashed;
 }
@@ -244,6 +246,31 @@ h1 {
   align-items: start;
   justify-content: space-between;
   gap: 16px;
+}
+
+.role-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.role-tab {
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.role-tab:hover,
+.role-tab:focus-visible,
+.role-tab.is-active {
+  border-color: var(--accent);
+  background: var(--panel-strong);
+  outline: none;
 }
 
 .safety-boundary-grid,

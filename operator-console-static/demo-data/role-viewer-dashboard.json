@@ -1,0 +1,39 @@
+{
+  "role": "viewer",
+  "view": "overview",
+  "title": "Viewer Role Preview",
+  "status": "filtered",
+  "summary": "Viewer can inspect read-only summaries and cannot request dry-run or review descriptors.",
+  "read_only": true,
+  "redaction_applied": true,
+  "visible_views": ["overview", "readiness", "golden_path", "module_lifecycle", "model_provider_hardening"],
+  "removed_sections": ["admin_settings", "operator_dry_run"],
+  "removed_actions": ["run_dry_run_check", "create_review_record"],
+  "forbidden_actions_visible": true,
+  "write_allowed": false,
+  "execute_allowed": false,
+  "activation_allowed": false,
+  "external_calls_allowed": false,
+  "blockers": [{"blocker_key": "write_disabled", "message": "Write controls are not available.", "bypassable": false}],
+  "warnings": [],
+  "refs": ["docs/auth/console-view-access-filtering.md"],
+  "sections": [
+    {
+      "section_key": "viewer_visible_views",
+      "title": "Visible Views",
+      "status": "ready",
+      "summary": "Read-only operational summaries remain visible.",
+      "blockers": [],
+      "warnings": [],
+      "refs": ["docs/auth/role-permission-proof-matrix.md"]
+    }
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Module activation remains disabled."},
+    {"action_key": "activate_capability", "reason": "Capability activation remains disabled."},
+    {"action_key": "load_code", "reason": "Code loading is disabled."},
+    {"action_key": "execute_tool", "reason": "Tool execution is disabled."},
+    {"action_key": "enable_external_model_calls", "reason": "External model calls remain disabled."},
+    {"action_key": "hard_delete", "reason": "Hard delete remains disabled."}
+  ]
+}

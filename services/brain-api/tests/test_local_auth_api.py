@@ -44,6 +44,21 @@ def test_local_auth_api_exposes_dev_only_contracts() -> None:
     assert filtered.status_code == 200
     assert filtered.json()["read_only"] is True
 
+    role_matrix = client.get(
+        "/brain/local-auth/role-matrix",
+        params={"scope": "workspace:main"},
+    )
+    assert role_matrix.status_code == 200
+    assert "viewer" in role_matrix.json()["roles"]
+    assert role_matrix.json()["write_allowed"] is False
+
+    role_access_audit = client.post(
+        "/brain/local-auth/role-access-audit",
+        json={"owner_scope": ["workspace:main"], "include_examples": True},
+    )
+    assert role_access_audit.status_code == 200
+    assert role_access_audit.json()["forbidden_actions_visible"] is True
+
     audit = client.post(
         "/brain/local-auth/audit",
         json={"owner_scope": ["workspace:main"], "include_examples": True},

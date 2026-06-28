@@ -81,6 +81,48 @@
           </div>
         </section>
 
+        <section class="role-access-panel" id="role-access-panel" aria-label="Role-aware access preview">
+          <div class="no-activation-banner">
+            Role filtering only changes read-only visibility. Forbidden actions and safety blockers remain visible.
+          </div>
+          <div class="module-dashboard-heading">
+            <div>
+              <p class="eyebrow">Role Access</p>
+              <h3>Console View Filtering Preview</h3>
+            </div>
+            <button class="disabled-action" type="button" disabled>
+              Demo only
+            </button>
+          </div>
+          <div class="role-switcher" aria-label="Demo role switcher">
+            <button class="role-tab is-active" type="button" data-role="viewer">Viewer</button>
+            <button class="role-tab" type="button" data-role="operator">Operator</button>
+            <button class="role-tab" type="button" data-role="reviewer">Reviewer</button>
+            <button class="role-tab" type="button" data-role="admin">Admin</button>
+            <button class="role-tab" type="button" data-role="auditor">Auditor</button>
+          </div>
+          <div class="safety-boundary-grid" id="role-access-safety">
+            <div class="safety-card">write_allowed=false</div>
+            <div class="safety-card">execute_allowed=false</div>
+            <div class="safety-card">activation_allowed=false</div>
+            <div class="safety-card">external_calls_allowed=false</div>
+          </div>
+          <div class="module-subpanels">
+            <section class="module-subpanel" aria-label="Visible views">
+              <h3>Visible Views</h3>
+              <div class="review-checklist" id="role-visible-views"></div>
+            </section>
+            <section class="module-subpanel" aria-label="Removed sections and actions">
+              <h3>Filtered Surface</h3>
+              <div class="review-checklist" id="role-filtered-surface"></div>
+            </section>
+            <section class="module-subpanel" aria-label="Forbidden actions remain visible">
+              <h3>Forbidden Visibility</h3>
+              <div class="blocker-list" id="role-forbidden-visibility"></div>
+            </section>
+          </div>
+        </section>
+
         <section class="local-session-panel" id="local-session-panel" aria-label="Local session preview">
           <div class="no-activation-banner">
             Local session is a dev-only read-only preview. It is not login, production auth, a token, a cookie, or persisted session state.
@@ -224,6 +266,7 @@
         <section class="command-panel" aria-label="Local commands">
           <h3>Local Commands</h3>
           <pre><code>./scripts/operator-console-static-check.sh
+./scripts/role-filter-check.sh
 ./scripts/local-session-check.sh
 ./scripts/module-lifecycle-dashboard-check.sh
 ./scripts/operator-actions-check.sh

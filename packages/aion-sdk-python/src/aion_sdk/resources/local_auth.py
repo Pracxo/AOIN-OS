@@ -26,6 +26,12 @@ class LocalAuthResource:
     def filter_console(self, payload: JSONDict) -> JSONValue:
         return self._client.post("/brain/local-auth/filter-console", json=payload)
 
+    def role_matrix(self, scope: Sequence[str]) -> JSONValue:
+        return self._client.get("/brain/local-auth/role-matrix", params={"scope": list(scope)})
+
+    def role_access_audit(self, payload: JSONDict) -> JSONValue:
+        return self._client.post("/brain/local-auth/role-access-audit", json=payload)
+
     def audit(self, payload: JSONDict) -> JSONValue:
         return self._client.post("/brain/local-auth/audit", json=payload)
 

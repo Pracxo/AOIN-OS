@@ -45,3 +45,9 @@ Read-only local session previews do not unlock production auth. Any future
 production session implementation still requires a separate ADR, threat model,
 policy update, credential and token handling decision, browser-state security
 review, and migration approval.
+
+## AION-096 Future Role Filtering Prerequisites
+
+Role-aware filtering is still not production authorization. Future auth work
+must decide how real identities map into the proof matrix without bypassing
+policy, audit, redaction, or the forbidden-action guarantees.

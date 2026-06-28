@@ -42,6 +42,7 @@ class LocalSessionContextService:
             metadata={
                 "synthetic": True,
                 "dev_only": True,
+                "role_matrix_version": "aion-096",
                 "role_constraints": merged.get("constraints", []),
             },
             created_at=utc_now(),

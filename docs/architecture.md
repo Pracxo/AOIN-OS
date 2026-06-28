@@ -1135,6 +1135,14 @@ records and candidate learning metadata, but it never promotes skills,
 auto-remediates failures, writes source code, executes commands, or calls
 external services.
 
+## Role-Aware Console Filtering
+
+AION-096 adds a role permission proof matrix for read-only Operator Console
+visibility. The matrix can filter views, sections, and descriptor-only actions
+for local roles while preserving safety blockers and forbidden action
+descriptors. It cannot grant writes, execution, activation, hard delete,
+external calls, production auth, or credential storage.
+
 ## Experience Ledger and Learning Synthesis
 
 The Experience Ledger is the canonical generic store for observed Brain

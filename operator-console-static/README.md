@@ -108,4 +108,11 @@ Validate the panel:
 ```bash
 ./scripts/operator-actions-check.sh
 ./scripts/operator-console-static-check.sh
+./scripts/role-filter-check.sh
 ```
+
+## Role Preview
+
+The AION-096 role preview switcher is local demo data only. It exposes viewer,
+operator, reviewer, admin, and auditor views while keeping `system_service`
+internal and all privileged actions disabled.

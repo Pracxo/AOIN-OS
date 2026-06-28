@@ -73,6 +73,21 @@ DATA_SOURCE_MAP: Final[dict[ConsoleView, tuple[ConsoleSourceSpec, ...]]] = {
         ConsoleSourceSpec("provider_readiness", "provider", "model_provider_readiness_service", "/brain/model-providers/readiness", "aionctl model-providers readiness"),
         ConsoleSourceSpec("provider_blockers", "provider", "model_provider_blocker_service", "/brain/model-providers/blockers", "aionctl model-providers blockers"),
     ),
+    "operator_actions": (
+        ConsoleSourceSpec("operator_action_requests", "operator_action", "operator_action_request_service", "/brain/operator-actions/requests", "aionctl operator-actions requests"),
+        ConsoleSourceSpec("operator_action_blockers", "operator_action", "operator_action_blocker_service", "/brain/operator-actions/blockers", "aionctl operator-actions blockers"),
+        ConsoleSourceSpec("operator_action_reviews", "operator_action", "operator_action_review_service", "/brain/operator-actions/reviews", "aionctl operator-actions reviews"),
+    ),
+    "local_auth": (
+        ConsoleSourceSpec("local_auth_status", "local_auth", "local_auth_query_service", "/brain/local-auth/status", "aionctl local-auth status"),
+        ConsoleSourceSpec("local_auth_roles", "local_auth", "local_role_service", "/brain/local-auth/roles", "aionctl local-auth roles"),
+        ConsoleSourceSpec("local_auth_role_matrix", "local_auth", "role_permission_matrix_service", "/brain/local-auth/role-matrix", "aionctl local-auth role-matrix"),
+    ),
+    "local_session": (
+        ConsoleSourceSpec("local_session_status", "local_session", "local_session_query_service", "/brain/local-session/status", "aionctl local-session status"),
+        ConsoleSourceSpec("local_session_preview", "local_session", "local_session_preview_service", "/brain/local-session/preview", "aionctl local-session preview"),
+        ConsoleSourceSpec("local_session_boundary", "local_session", "local_session_boundary_service", "/brain/local-session/boundary-check", "aionctl local-session boundary-check"),
+    ),
     "notifications": (
         ConsoleSourceSpec("notifications", "notifications", "notification_query_service", "/brain/notifications/query", "aionctl notifications alerts"),
         ConsoleSourceSpec("alerts", "notifications", "alert_service", "/brain/alerts/query", "aionctl notifications alerts"),

@@ -99,3 +99,9 @@ external calls, or an execution path.
 - External calls are made.
 - Raw prompts, hidden reasoning, credentials, or secret-like fields are shown.
 - The prototype claims production readiness or production auth.
+
+## AION-096 Static Role Preview
+
+The prototype includes a role switcher for local demo roles only. It renders
+visible views, filtered sections, filtered descriptors, and disabled safety
+flags from static JSON without storing browser state.

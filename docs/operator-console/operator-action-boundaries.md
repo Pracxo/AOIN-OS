@@ -74,3 +74,10 @@ store credentials, hard delete, or bypass policy in this phase.
 Role filtering may remove allowed action descriptors from a read-only view
 model when a local role cannot request them. It never adds write actions and
 keeps forbidden descriptors visible as safety evidence.
+
+## AION-096 Descriptor Filtering
+
+The permission matrix differentiates read, dry-run descriptor, and review
+descriptor visibility. Even when allowed descriptors are removed, forbidden
+activation, execution, external-call, code-loading, and hard-delete
+descriptors remain visible.

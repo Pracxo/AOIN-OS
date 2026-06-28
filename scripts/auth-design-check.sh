@@ -19,8 +19,13 @@ required_docs=(
   docs/auth/production-auth-prerequisites.md
   docs/auth/auth-no-go-conditions.md
   docs/auth/future-auth-implementation-plan.md
+  docs/auth/role-permission-proof-matrix.md
+  docs/auth/console-view-access-filtering.md
+  docs/auth/role-aware-action-descriptors.md
+  docs/auth/role-access-audit.md
   docs/adr/0084-local-auth-design-for-operator-console.md
   docs/adr/0085-local-auth-contract-dev-identity-simulation.md
+  docs/adr/0087-role-aware-console-view-filtering.md
 )
 
 required_examples=(
@@ -33,6 +38,13 @@ required_examples=(
   examples/auth/role-filtered-viewer-console.json
   examples/auth/role-filtered-operator-console.json
   examples/auth/local-auth-audit-request.json
+  examples/auth/role-permission-proof-matrix.json
+  examples/auth/viewer-access-filter-result.json
+  examples/auth/operator-access-filter-result.json
+  examples/auth/reviewer-access-filter-result.json
+  examples/auth/auditor-access-filter-result.json
+  examples/auth/admin-access-filter-result.json
+  examples/auth/role-access-audit-result.json
 )
 
 for file in "${required_docs[@]}"; do
@@ -142,6 +154,10 @@ allowed_auth_paths = {
     "docs/auth/production-auth-prerequisites.md",
     "docs/auth/auth-no-go-conditions.md",
     "docs/auth/future-auth-implementation-plan.md",
+    "docs/auth/role-permission-proof-matrix.md",
+    "docs/auth/console-view-access-filtering.md",
+    "docs/auth/role-aware-action-descriptors.md",
+    "docs/auth/role-access-audit.md",
     "docs/adr/0084-local-auth-design-for-operator-console.md",
     "docs/adr/0085-local-auth-contract-dev-identity-simulation.md",
     "examples/auth/local-operator-identity.json",
@@ -153,6 +169,13 @@ allowed_auth_paths = {
     "examples/auth/role-filtered-viewer-console.json",
     "examples/auth/role-filtered-operator-console.json",
     "examples/auth/local-auth-audit-request.json",
+    "examples/auth/role-permission-proof-matrix.json",
+    "examples/auth/viewer-access-filter-result.json",
+    "examples/auth/operator-access-filter-result.json",
+    "examples/auth/reviewer-access-filter-result.json",
+    "examples/auth/auditor-access-filter-result.json",
+    "examples/auth/admin-access-filter-result.json",
+    "examples/auth/role-access-audit-result.json",
     "operator-console-static/demo-data/local-auth-status.json",
     "operator-console-static/demo-data/role-filtered-view-model.json",
     "scripts/auth-design-check.sh",
@@ -165,6 +188,9 @@ allowed_auth_paths = {
     "services/brain-api/src/aion_brain/local_auth/context.py",
     "services/brain-api/src/aion_brain/local_auth/simulator.py",
     "services/brain-api/src/aion_brain/local_auth/access_matrix.py",
+    "services/brain-api/src/aion_brain/local_auth/permission_matrix.py",
+    "services/brain-api/src/aion_brain/local_auth/console_filter.py",
+    "services/brain-api/src/aion_brain/local_auth/access_audit.py",
     "services/brain-api/src/aion_brain/local_auth/audit.py",
     "services/brain-api/src/aion_brain/local_auth/query.py",
     "services/brain-api/src/aion_brain/api/local_auth.py",
@@ -181,6 +207,7 @@ allowed_auth_paths = {
     "services/brain-api/tests/test_local_auth_context.py",
     "services/brain-api/tests/test_local_auth_simulator.py",
     "services/brain-api/tests/test_local_auth_access_matrix.py",
+    "services/brain-api/tests/test_local_auth_access_audit.py",
     "services/brain-api/tests/test_local_auth_audit.py",
     "services/brain-api/tests/test_local_auth_api.py",
     "services/brain-api/tests/test_operator_console_role_filtering.py",

@@ -20,3 +20,10 @@ The filter always applies redaction and returns `read_only=true`.
 Role-aware console filtering may accept `LocalSessionContext` metadata and map
 it back to the same non-privileged local auth role matrix. Session context never
 adds write, execution, activation, or external-call grants.
+
+## AION-096 Strengthening
+
+Role-aware filtering now has a permission proof matrix, fail-closed decisions,
+section-level filtering, action descriptor filtering, and role access audit
+reports. Forbidden action descriptors and safety blockers remain visible after
+filtering.

@@ -96,3 +96,4 @@ closure decision in ADR 0072.
 - [0084: Local Auth Design For Operator Console](0084-local-auth-design-for-operator-console.md) - Defines local identity, session, role, access, threat, and no-go conditions without auth runtime.
 - [0085: Local Auth Contract and Dev Identity Simulation](0085-local-auth-contract-dev-identity-simulation.md) - Defines dev-only local auth contracts, identity simulation, role filtering, and audit boundaries.
 - [0086: Read-Only Local Session Prototype](0086-read-only-local-session-prototype.md) - Defines synthetic local session previews, read-only session context, and session safety boundaries.
+- [0087: Role-Aware Console View Filtering](0087-role-aware-console-view-filtering.md) - Defines read-only role matrix filtering, forbidden-action visibility, and role access audit boundaries.

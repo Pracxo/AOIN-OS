@@ -135,6 +135,8 @@ allowed_actions := {
 	"local_auth.roles.read",
 	"local_auth.identity.simulate",
 	"local_auth.console.filter",
+	"local_auth.role_matrix.read",
+	"local_auth.role_matrix.audit",
 	"local_auth.audit.run",
 	"local_auth.status.read",
 	"local_session.preview.create",
@@ -465,6 +467,7 @@ allowed_actions := {
 	"module_activation.plan.update",
 	"module_activation.query.read",
 	"local_auth.roles.read",
+	"local_auth.role_matrix.read",
 	"local_auth.status.read",
 	"local_session.status.read",
 	"runtime.registration.preview.create",
@@ -2099,6 +2102,20 @@ decision := {
 	valid_action
 	valid_risk
 	input.action_type == "local_auth.audit.run"
+	local_auth_actor
+	not local_auth_unsafe_request
+}
+
+decision := {
+	"allow": true,
+	"approval_required": false,
+	"reason": "local_auth_role_matrix_audit_allowed",
+	"constraints": ["dev_only", "read_only", "redaction_required", "no_write_actions", "no_execution_grant", "no_activation_grant"],
+	"audit_level": "elevated",
+} if {
+	valid_action
+	valid_risk
+	input.action_type == "local_auth.role_matrix.audit"
 	local_auth_actor
 	not local_auth_unsafe_request
 }
@@ -6324,6 +6341,10 @@ operator_read_action if {
 
 local_auth_read_action if {
 	input.action_type == "local_auth.roles.read"
+}
+
+local_auth_read_action if {
+	input.action_type == "local_auth.role_matrix.read"
 }
 
 local_auth_read_action if {

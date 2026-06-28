@@ -752,3 +752,14 @@ aionctl local-session audit
 The CLI does not add login, logout, credential, token, cookie, browser session,
 production auth, persistent session, execution, activation, or external-call
 commands.
+
+## Local Auth Role Matrix Commands
+
+```bash
+aionctl local-auth role-matrix
+aionctl local-auth role-access-audit
+```
+
+These commands read local role-filtering evidence only. They do not add login,
+logout, browser state, write authorization, execution, activation, or external
+calls.

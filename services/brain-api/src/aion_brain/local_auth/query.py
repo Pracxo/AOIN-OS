@@ -21,6 +21,10 @@ class LocalAuthQueryService:
             ),
             "role_filtering_enabled": self._settings.local_auth_role_filtering_enabled,
             "local_auth_audit_enabled": self._settings.local_auth_audit_enabled,
+            "role_permission_matrix_enabled": self._settings.local_auth_role_matrix_enabled,
+            "role_access_audit_enabled": (
+                self._settings.local_auth_role_access_audit_enabled
+            ),
             "production_auth_enabled": False,
             "credentials_enabled": False,
             "sessions_enabled": False,
