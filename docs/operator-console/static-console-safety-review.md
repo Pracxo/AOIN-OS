@@ -79,3 +79,12 @@ It displays disabled production auth flags and mock claims preview evidence. It
 has no login form, logout button, password field, token field, cookie field,
 credential input, browser storage, provider endpoint, write action, execution
 path, activation control, package dependency, or external API target.
+
+## AION-100 UI Release Gate Safety
+
+`scripts/static-console-safety-check.sh` and `scripts/ui-release-gate.sh`
+freeze the static console safety checkpoint. They block frontend dependencies,
+build tooling, external scripts, non-local URLs, write verbs, activation
+controls, execution controls, provider-call controls, login forms, credential
+fields, token/cookie/session storage, protected output display, and production
+UI claims.

@@ -83,6 +83,19 @@ localhost guard, redaction list, unavailable-state rendering, and descriptor
 model. That future work still requires explicit architecture approval before
 adding a framework, auth model, write path, or governed action flow.
 
+## AION-100 UI Release Gate
+
+The static prototype now has a release gate:
+
+```bash
+./scripts/static-console-safety-check.sh
+./scripts/ui-release-gate.sh
+```
+
+The gate keeps the prototype read-only, local-only, dependency-free,
+framework-free, build-free, login-free, provider-call-free, activation-free,
+and execution-free before future UI work can proceed.
+
 ## AION-092 operator actions panel
 
 The static console includes an Operator Actions panel backed by local demo

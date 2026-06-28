@@ -100,3 +100,10 @@ request, preview, or review records may be created.
 No production auth runtime, login/logout route, credentials, tokens, cookies,
 sessions, provider SDKs, migrations, external calls, execution, activation, or
 privileged bypass is added in AION-098.
+
+## AION-100 UI Release Gate Boundary
+
+The UI release gate does not authorize any operator action. It is a local static
+checkpoint that proves no write, activation, execution, provider-call, login,
+credential, token, cookie, session, or external-call control has been added to
+the static console.

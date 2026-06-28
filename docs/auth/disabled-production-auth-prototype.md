@@ -26,3 +26,8 @@ decision that production auth remains disabled.
 
 No external identity provider is integrated. No credentials are stored. No login
 endpoint is added.
+
+AION-100 links this disabled auth runtime panel into the static UI release
+gate. The UI gate verifies the panel remains no-login, no-credentials,
+no-token, no-cookie, no-session, no-provider-call, no-execution, and
+no-activation.

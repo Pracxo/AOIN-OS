@@ -25,3 +25,11 @@ condition remains unresolved.
 Any no-go condition blocks runtime UI implementation. The next acceptable step
 is a contract, docs, or dry-run validation task that removes the blocker
 without creating a privileged UI path.
+
+## AION-100 UI release no-go conditions
+
+The static UI release gate also blocks frontend dependencies, build tools,
+external scripts, non-local fetch targets, write verbs, activation controls,
+execution controls, provider-call controls, login forms, credential fields,
+token/cookie/session storage, protected output display, and production UI
+claims.

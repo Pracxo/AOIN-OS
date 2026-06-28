@@ -22,6 +22,11 @@ _FRONTEND_FILES = {
     "package-lock.json",
 }
 _FRONTEND_PREFIXES = ("vite.config.", "next.config.", "tailwind.config.")
+_UI_RELEASE_GATE_EXAMPLES = {
+    "static-console-artifact-manifest.json",
+    "ui-release-gate-result.json",
+    "ui-safety-matrix.json",
+}
 
 
 class ConsoleContractAuditService:
@@ -106,6 +111,8 @@ class ConsoleContractAuditService:
         example_dir = self._repo_root / "examples/operator-console"
         ok = True
         for path in sorted(example_dir.glob("*.json")):
+            if path.name in _UI_RELEASE_GATE_EXAMPLES:
+                continue
             try:
                 payload = json.loads(path.read_text())
             except json.JSONDecodeError:

@@ -419,6 +419,11 @@ pre {
   border-radius: 8px;
 }
 
+.safety-footer span:first-child {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 @media (max-width: 820px) {
   .layout {
     grid-template-columns: 1fr;

@@ -1,0 +1,102 @@
+{
+  "ui_safety_matrix_id": "ui-safety-matrix-aion-100",
+  "synthetic": true,
+  "controls": [
+    {
+      "control": "no frontend dependencies",
+      "checked_by_script": true,
+      "evidence": "package and lock files absent",
+      "release_blocker_if_failed": true
+    },
+    {
+      "control": "no build step",
+      "checked_by_script": true,
+      "evidence": "Vite, Next, Tailwind, and webpack configs absent",
+      "release_blocker_if_failed": true
+    },
+    {
+      "control": "no external scripts",
+      "checked_by_script": true,
+      "evidence": "index.html script source is local",
+      "release_blocker_if_failed": true
+    },
+    {
+      "control": "localhost-only API",
+      "checked_by_script": true,
+      "evidence": "isLocalApiOrigin blocks non-local origins",
+      "release_blocker_if_failed": true
+    },
+    {
+      "control": "read-only view models",
+      "checked_by_script": true,
+      "evidence": "demo data read_only true",
+      "release_blocker_if_failed": true
+    },
+    {
+      "control": "no write verbs",
+      "checked_by_script": true,
+      "evidence": "no PUT, PATCH, or DELETE methods",
+      "release_blocker_if_failed": true
+    },
+    {
+      "control": "no activation controls",
+      "checked_by_script": true,
+      "evidence": "activation controls absent or disabled no-go labels",
+      "release_blocker_if_failed": true
+    },
+    {
+      "control": "no execution controls",
+      "checked_by_script": true,
+      "evidence": "execution controls absent or disabled no-go labels",
+      "release_blocker_if_failed": true
+    },
+    {
+      "control": "no provider call controls",
+      "checked_by_script": true,
+      "evidence": "provider call controls and external URLs absent",
+      "release_blocker_if_failed": true
+    },
+    {
+      "control": "no login form",
+      "checked_by_script": true,
+      "evidence": "form and login inputs absent",
+      "release_blocker_if_failed": true
+    },
+    {
+      "control": "no credential inputs",
+      "checked_by_script": true,
+      "evidence": "credential, token, and cookie fields absent",
+      "release_blocker_if_failed": true
+    },
+    {
+      "control": "no token/cookie/session persistence",
+      "checked_by_script": true,
+      "evidence": "auth and session flags remain false",
+      "release_blocker_if_failed": true
+    },
+    {
+      "control": "no raw prompt display",
+      "checked_by_script": true,
+      "evidence": "protected prompt fields are redacted",
+      "release_blocker_if_failed": true
+    },
+    {
+      "control": "no hidden reasoning display",
+      "checked_by_script": true,
+      "evidence": "hidden reasoning fields are redacted",
+      "release_blocker_if_failed": true
+    },
+    {
+      "control": "no secret display",
+      "checked_by_script": true,
+      "evidence": "secret-like demo markers are blocked",
+      "release_blocker_if_failed": true
+    },
+    {
+      "control": "demo fallback",
+      "checked_by_script": true,
+      "evidence": "loadDemo and demo-data fallback remain present",
+      "release_blocker_if_failed": true
+    }
+  ]
+}

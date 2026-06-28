@@ -187,6 +187,15 @@ local audit. It does not authenticate users, trust browser credentials, issue
 tokens or cookies, persist sessions, call external identity providers, or
 authorize execution or activation.
 
+## Static Console UI Release Gate
+
+AION-100 adds a static UI release gate for the local Operator Console. The gate
+composes existing console, module, provider, operator action, local auth,
+session, role-filtering, action authorization, and disabled auth runtime checks.
+It is a release checkpoint only and adds no API route, SDK resource, CLI
+resource, frontend framework, build system, production auth, write path,
+activation path, execution path, provider call, or external service call.
+
 ## Contract Registry and Interface Drift
 
 The Contract Registry is the local index of AION public and operator-facing

@@ -35,6 +35,8 @@ open "http://localhost:8090?api=http://localhost:8080"
 Validate the static contract:
 
 ```bash
+./scripts/static-console-safety-check.sh
+./scripts/ui-release-gate.sh
 ./scripts/operator-console-static-check.sh
 ./scripts/operator-console-static-demo.sh --offline-ok --skip-api
 ```
@@ -138,3 +140,14 @@ AION-099 adds a disabled Auth Runtime panel backed by:
 The panel displays disabled production auth status and a mock claims preview.
 It has no login form, no logout control, no credential input, no token input,
 and no session persistence.
+
+## UI Release Gate
+
+AION-100 adds the static UI release gate:
+
+- `scripts/static-console-safety-check.sh`
+- `scripts/ui-release-gate.sh`
+
+The gate proves the static console remains read-only, local, dependency-free,
+build-free, login-free, provider-call-free, activation-free, and
+execution-free.
