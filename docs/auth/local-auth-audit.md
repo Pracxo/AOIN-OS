@@ -27,3 +27,10 @@ Local auth audit remains separate from local session audit. The session audit
 checks that session previews are dev-only and read-only, with no credential
 backing, token issuance, cookie issuance, persistence, production auth,
 execution, activation, or external calls.
+
+## AION-096 Role Access Audit
+
+Role access audit validates the permission matrix separately from the local
+auth safety audit. It verifies forbidden-action visibility, redaction,
+write-action absence, execution absence, activation absence, and external-call
+absence.

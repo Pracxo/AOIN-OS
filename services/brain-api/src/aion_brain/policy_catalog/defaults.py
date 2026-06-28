@@ -121,6 +121,8 @@ DEFAULT_ACTION_SPECS: tuple[tuple[str, str, str, PolicyRiskLevel], ...] = (
     ("local_auth.roles.read", "operator", "local_auth_role", "low"),
     ("local_auth.identity.simulate", "operator", "local_auth_context", "medium"),
     ("local_auth.console.filter", "operator", "operator_console_view", "medium"),
+    ("local_auth.role_matrix.read", "operator", "local_auth_role_matrix", "low"),
+    ("local_auth.role_matrix.audit", "operator", "local_auth_role_matrix", "medium"),
     ("local_auth.audit.run", "operator", "local_auth_audit", "medium"),
     ("local_auth.status.read", "operator", "local_auth_status", "low"),
     ("local_session.preview.create", "operator", "local_session_preview", "medium"),

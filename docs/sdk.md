@@ -908,3 +908,10 @@ Useful methods include:
 
 The SDK does not expose login, logout, token, cookie, credential, production
 auth, persistent session, or external identity commands.
+
+## Local Auth Role Matrix
+
+`client.local_auth.role_matrix(scope)` returns the read-only role permission
+proof matrix. `client.local_auth.role_access_audit(payload)` returns a role
+access audit report. Neither method authorizes writes, execution, activation,
+external calls, production auth, or session persistence.

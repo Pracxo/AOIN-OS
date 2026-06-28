@@ -1658,3 +1658,10 @@ Local session contracts are synthetic and read-only. `production_session=false`,
 `persistent=false`, `write_allowed=false`, `execute_allowed=false`,
 `activation_allowed=false`, and `external_calls_allowed=false` are contract
 invariants.
+
+## Role Access Contracts
+
+AION-096 extends local auth contracts with `RoleAccessDecision` and
+`RoleAccessAudit`. Decisions fail closed for unknown roles or views and carry
+hard-false write, execution, activation, and external-call flags. Audits pass
+only when forbidden actions remain visible and redaction is applied.

@@ -1,0 +1,15 @@
+{
+  "role": "reviewer",
+  "status": "filtered",
+  "read_only": true,
+  "redaction_applied": true,
+  "visible_views": ["overview", "release_candidate", "module_lifecycle", "module_activation", "module_mock_runtime", "model_provider_hardening", "operator_actions", "lifecycle_review"],
+  "removed_sections": ["operator_dry_run"],
+  "removed_actions": ["run_dry_run_check", "acknowledge_notification"],
+  "allowed_descriptors": ["create_review_record"],
+  "forbidden_actions_visible": true,
+  "write_allowed": false,
+  "execute_allowed": false,
+  "activation_allowed": false,
+  "external_calls_allowed": false
+}

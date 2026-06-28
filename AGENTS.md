@@ -396,3 +396,8 @@ Instructions for future Codex runs in this repository:
   identity context for console filtering, but they must not add login/logout,
   credentials, tokens, cookies, persistent sessions, writes, execution,
   activation, runtime registration, or external calls.
+- AION-096 role filtering is visibility-only. It may hide or mark unavailable
+  console views, sections, and descriptor-only actions, but forbidden actions
+  and safety blockers must remain visible and no role may grant writes,
+  execution, activation, hard delete, external calls, production auth, or
+  credential storage.

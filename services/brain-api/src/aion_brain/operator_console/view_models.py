@@ -50,6 +50,8 @@ def build_view_model(
             "frontend_enabled": False,
             "descriptor_only_actions": True,
             "local_session_preview_supported": True,
+            "role_access_filtering_supported": True,
+            "role_matrix_version": "aion-096",
         },
     )
 

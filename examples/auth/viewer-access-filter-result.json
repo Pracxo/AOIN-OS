@@ -1,0 +1,14 @@
+{
+  "role": "viewer",
+  "status": "filtered",
+  "read_only": true,
+  "redaction_applied": true,
+  "visible_views": ["overview", "readiness", "golden_path", "module_lifecycle", "model_provider_hardening"],
+  "removed_sections": ["admin_settings", "operator_dry_run"],
+  "removed_actions": ["run_dry_run_check", "create_review_record"],
+  "forbidden_actions_visible": true,
+  "write_allowed": false,
+  "execute_allowed": false,
+  "activation_allowed": false,
+  "external_calls_allowed": false
+}

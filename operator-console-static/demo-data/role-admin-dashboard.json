@@ -1,0 +1,41 @@
+{
+  "role": "admin",
+  "view": "settings_safety",
+  "title": "Admin Role Preview",
+  "status": "filtered",
+  "summary": "Admin can see all local views, but settings remain read-only and production auth is not enabled.",
+  "read_only": true,
+  "redaction_applied": true,
+  "visible_views": ["overview", "readiness", "release_candidate", "freeze_release", "golden_path", "module_lifecycle", "module_activation", "module_mock_runtime", "model_provider_hardening", "operator_actions", "local_auth", "local_session", "notifications", "incidents", "registry_integrity", "lifecycle_review", "audit_provenance", "settings_safety"],
+  "removed_sections": [],
+  "removed_actions": ["run_dry_run_check", "create_review_record"],
+  "allowed_descriptors": ["inspect_refs", "export_redacted_summary"],
+  "forbidden_actions_visible": true,
+  "production_auth": false,
+  "write_allowed": false,
+  "execute_allowed": false,
+  "activation_allowed": false,
+  "external_calls_allowed": false,
+  "blockers": [{"blocker_key": "settings_read_only", "message": "Settings controls are visibility-only.", "bypassable": false}],
+  "warnings": [],
+  "refs": ["docs/auth/role-permission-proof-matrix.md"],
+  "sections": [
+    {
+      "section_key": "settings_safety",
+      "title": "Settings Safety",
+      "status": "ready",
+      "summary": "Local settings visibility does not grant mutation.",
+      "blockers": [{"blocker_key": "production_auth", "message": "Production auth remains absent.", "bypassable": false}],
+      "warnings": [],
+      "refs": ["docs/auth/future-auth-implementation-plan.md"]
+    }
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Module activation remains disabled."},
+    {"action_key": "activate_capability", "reason": "Capability activation remains disabled."},
+    {"action_key": "load_code", "reason": "Code loading is disabled."},
+    {"action_key": "execute_tool", "reason": "Tool execution is disabled."},
+    {"action_key": "enable_external_model_calls", "reason": "External model calls remain disabled."},
+    {"action_key": "hard_delete", "reason": "Hard delete remains disabled."}
+  ]
+}

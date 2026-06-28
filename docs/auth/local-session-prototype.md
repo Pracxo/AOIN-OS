@@ -19,3 +19,9 @@ persist production session state.
 Privileged flags are hard false: `write_allowed=false`,
 `execute_allowed=false`, `activation_allowed=false`, and
 `external_calls_allowed=false`.
+
+## AION-096 Role Filtering
+
+Local session context can be used as input to role-aware console filtering.
+The session context remains read-only and cannot expand the permissions that
+the local role matrix denies.

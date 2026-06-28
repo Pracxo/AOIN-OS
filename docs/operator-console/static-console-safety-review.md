@@ -58,3 +58,9 @@ The static console may render `local-session-status.json` and
 login form, password field, token field, cookie field, local storage, session
 storage, credential input, external API target, write action, execution path, or
 activation control.
+
+## AION-096 Role Switcher Safety
+
+The static role switcher is demo-only and loads local JSON files. It must not
+offer `system_service`, persist role state, create login UI, or hide forbidden
+actions and safety blockers.

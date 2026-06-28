@@ -209,3 +209,10 @@ The Operator Console may display local session preview status as a read-only
 section. The preview is synthetic, local-only, and dev/test-only. It has no
 login, logout, credentials, tokens, cookies, persistence, production auth,
 execution, activation, runtime registration, or external calls.
+
+## AION-096 Role-Aware Preview
+
+The Operator Console can render role-filtered local previews for viewer,
+operator, reviewer, admin, and auditor roles. The preview changes visibility
+only; it does not authenticate users, create sessions, grant writes, execute
+actions, activate modules, or call external services.

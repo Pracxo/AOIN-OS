@@ -1702,6 +1702,20 @@ class Settings(BaseSettings):
             "local_auth_role_filtering_enabled",
         ),
     )
+    local_auth_role_matrix_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_LOCAL_AUTH_ROLE_MATRIX_ENABLED",
+            "local_auth_role_matrix_enabled",
+        ),
+    )
+    local_auth_role_access_audit_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_LOCAL_AUTH_ROLE_ACCESS_AUDIT_ENABLED",
+            "local_auth_role_access_audit_enabled",
+        ),
+    )
     local_auth_audit_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices(

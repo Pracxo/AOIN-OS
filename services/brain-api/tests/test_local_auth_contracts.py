@@ -9,6 +9,8 @@ from aion_brain.contracts.local_auth import (
     LocalAuthAuditResult,
     LocalAuthContext,
     LocalOperatorIdentity,
+    RoleAccessAudit,
+    RoleAccessDecision,
 )
 
 
@@ -64,5 +66,37 @@ def test_local_auth_audit_result_requires_safe_booleans() -> None:
             write_actions_disabled=True,
             execution_disabled=True,
             activation_disabled=True,
+            created_at=datetime.now(UTC),
+        )
+
+
+def test_role_access_audit_requires_forbidden_visibility() -> None:
+    with pytest.raises(ValidationError):
+        RoleAccessAudit(
+            role_access_audit_id="role-access-audit-1",
+            status="failed",
+            roles_checked=["viewer"],
+            views_checked=["overview"],
+            decisions=[
+                RoleAccessDecision(
+                    role="viewer",
+                    view="overview",
+                    decision="allowed",
+                    reason="read_only_view_allowed",
+                    read_allowed=True,
+                    dry_run_allowed=False,
+                    review_allowed=False,
+                    write_allowed=False,
+                    execute_allowed=False,
+                    activation_allowed=False,
+                    external_calls_allowed=False,
+                )
+            ],
+            forbidden_actions_visible=False,
+            write_actions_absent=True,
+            execution_absent=True,
+            activation_absent=True,
+            external_calls_absent=True,
+            redaction_applied=True,
             created_at=datetime.now(UTC),
         )

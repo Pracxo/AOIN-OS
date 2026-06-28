@@ -58,6 +58,19 @@ def install_local_auth_commands(
             ),
         )
 
+    @local_auth_app.command("role-matrix")
+    def role_matrix(ctx: typer.Context) -> None:
+        render(ctx, _client(get_client(ctx)).local_auth.role_matrix(get_scope(ctx)))
+
+    @local_auth_app.command("role-access-audit")
+    def role_access_audit(ctx: typer.Context) -> None:
+        render(
+            ctx,
+            _client(get_client(ctx)).local_auth.role_access_audit(
+                {"owner_scope": get_scope(ctx), "include_examples": True}
+            ),
+        )
+
     @local_auth_app.command("status")
     def status(ctx: typer.Context) -> None:
         render(ctx, _client(get_client(ctx)).local_auth.status(get_scope(ctx)))

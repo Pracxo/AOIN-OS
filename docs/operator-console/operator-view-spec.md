@@ -103,3 +103,9 @@ metadata. The section must render read-only status and boundary flags only:
 dev-only, read-only, production-session disabled, auth material disabled,
 browser-state disabled, persistence disabled, writes disabled, execution
 disabled, activation disabled, and external calls disabled.
+
+## AION-096 Role Filter Metadata
+
+View models may include role-filter metadata such as removed sections, removed
+actions, visible forbidden descriptors, and role matrix version. The response
+shape remains read-only and redacted.

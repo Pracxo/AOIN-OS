@@ -23,3 +23,10 @@ synthetic local identity. The session preview is not a credential, not a token,
 not a cookie, not production auth, and not persisted state. Local auth remains
 the role source for console filtering, while local session contracts keep write,
 execution, activation, and external calls disabled.
+
+## AION-096 Role Access Contracts
+
+Local auth now includes role access decisions and role access audits. These
+contracts prove view, section, and descriptor visibility without granting
+write, execution, activation, external-call, production-auth, or credential
+capability.

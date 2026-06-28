@@ -206,18 +206,103 @@ class RolePermission(BaseModel):
     constraints: list[str] = Field(default_factory=list)
     metadata: dict[str, Any] = Field(default_factory=dict)
 
-    @field_validator("role")
+    @field_validator("metadata")
     @classmethod
-    def role_must_be_allowed(cls, value: str) -> str:
-        if value not in ALLOWED_LOCAL_AUTH_ROLES:
-            raise ValueError(f"unknown local auth role: {value}")
+    def metadata_must_be_safe(cls, value: dict[str, Any]) -> dict[str, Any]:
+        reject_secret_like_payload(value)
         return value
+
+
+class RoleAccessDecision(BaseModel):
+    """One read-only console access decision for a local role."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    role: str = Field(min_length=1)
+    view: str = Field(min_length=1)
+    section_key: str | None = None
+    action_key: str | None = None
+    decision: str = Field(min_length=1)
+    reason: str = Field(min_length=1)
+    read_allowed: bool
+    dry_run_allowed: bool
+    review_allowed: bool
+    write_allowed: bool
+    execute_allowed: bool
+    activation_allowed: bool
+    external_calls_allowed: bool
+    metadata: dict[str, Any] = Field(default_factory=dict)
 
     @field_validator("metadata")
     @classmethod
     def metadata_must_be_safe(cls, value: dict[str, Any]) -> dict[str, Any]:
         reject_secret_like_payload(value)
         return value
+
+    @model_validator(mode="after")
+    def decision_must_remain_read_only(self) -> RoleAccessDecision:
+        if self.write_allowed:
+            raise ValueError("write_allowed must be false")
+        if self.execute_allowed:
+            raise ValueError("execute_allowed must be false")
+        if self.activation_allowed:
+            raise ValueError("activation_allowed must be false")
+        if self.external_calls_allowed:
+            raise ValueError("external_calls_allowed must be false")
+        return self
+
+
+class RoleAccessAudit(BaseModel):
+    """Read-only audit of role-aware console filtering decisions."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    role_access_audit_id: str = Field(min_length=1)
+    trace_id: str | None = None
+    status: str = Field(min_length=1)
+    roles_checked: list[str] = Field(min_length=1)
+    views_checked: list[str] = Field(min_length=1)
+    decisions: list[RoleAccessDecision] = Field(default_factory=list)
+    forbidden_actions_visible: bool
+    write_actions_absent: bool
+    execution_absent: bool
+    activation_absent: bool
+    external_calls_absent: bool
+    redaction_applied: bool
+    findings: list[dict[str, Any]] = Field(default_factory=list)
+    metadata: dict[str, Any] = Field(default_factory=dict)
+    created_at: datetime
+
+    @field_validator("roles_checked")
+    @classmethod
+    def roles_must_be_allowed(cls, value: list[str]) -> list[str]:
+        roles = _clean_non_empty(value, "roles_checked")
+        unknown = sorted(set(roles) - ALLOWED_LOCAL_AUTH_ROLES)
+        if unknown:
+            raise ValueError(f"unknown local auth roles: {unknown}")
+        return roles
+
+    @field_validator("findings", "metadata")
+    @classmethod
+    def payload_must_be_safe(cls, value: Any) -> Any:
+        reject_secret_like_payload(value)
+        return value
+
+    @model_validator(mode="after")
+    def audit_must_pass_safety_booleans(self) -> RoleAccessAudit:
+        if not self.forbidden_actions_visible:
+            raise ValueError("forbidden_actions_visible must be true")
+        if not self.write_actions_absent:
+            raise ValueError("write_actions_absent must be true")
+        if not self.execution_absent:
+            raise ValueError("execution_absent must be true")
+        if not self.activation_absent:
+            raise ValueError("activation_absent must be true")
+        if not self.external_calls_absent:
+            raise ValueError("external_calls_absent must be true")
+        if not self.redaction_applied:
+            raise ValueError("redaction_applied must be true")
+        return self
 
 
 class ConsoleRoleFilterRequest(BaseModel):
@@ -413,6 +498,8 @@ __all__ = [
     "LocalAuthContext",
     "LocalAuthRole",
     "LocalOperatorIdentity",
+    "RoleAccessAudit",
+    "RoleAccessDecision",
     "RolePermission",
     "utc_now",
 ]

@@ -1689,3 +1689,13 @@ These actions are scoped to dev-only read-only session previews. Production
 auth, credential backing, token issuance, cookie issuance, persistence,
 external identity integration, execution, activation, external calls, and
 unknown local session actions remain denied by default.
+
+## AION-096 Role Matrix Policy Actions
+
+- `local_auth.role_matrix.read`
+- `local_auth.role_matrix.audit`
+- `local_auth.console.filter`
+
+These actions are local/dev read-only controls. Unknown local auth actions,
+production auth enablement, credential storage, session persistence, execution,
+activation, and external calls remain denied by default.

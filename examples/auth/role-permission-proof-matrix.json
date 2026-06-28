@@ -1,0 +1,45 @@
+{
+  "matrix_version": "aion-096",
+  "read_only": true,
+  "redaction_applied": true,
+  "static_console_roles": ["viewer", "operator", "reviewer", "admin", "auditor"],
+  "system_service_exposed_in_static_console": false,
+  "forbidden_actions_visible": true,
+  "write_allowed": false,
+  "execute_allowed": false,
+  "activation_allowed": false,
+  "external_calls_allowed": false,
+  "roles": {
+    "viewer": {
+      "read_views": ["overview", "readiness", "golden_path", "module_lifecycle", "model_provider_hardening"],
+      "dry_run_actions": [],
+      "review_actions": []
+    },
+    "operator": {
+      "read_views": ["overview", "readiness", "release_candidate", "freeze_release", "golden_path", "module_lifecycle", "module_activation", "module_mock_runtime", "model_provider_hardening", "operator_actions", "local_auth", "local_session", "notifications", "incidents", "registry_integrity", "lifecycle_review"],
+      "dry_run_actions": ["run_dry_run_check", "acknowledge_notification", "dismiss_non_blocking_finding_with_reason"],
+      "review_actions": []
+    },
+    "reviewer": {
+      "read_views": ["overview", "release_candidate", "module_lifecycle", "module_activation", "module_mock_runtime", "model_provider_hardening", "operator_actions", "lifecycle_review"],
+      "dry_run_actions": [],
+      "review_actions": ["create_review_record"]
+    },
+    "admin": {
+      "read_views": ["overview", "readiness", "release_candidate", "freeze_release", "golden_path", "module_lifecycle", "module_activation", "module_mock_runtime", "model_provider_hardening", "operator_actions", "local_auth", "local_session", "notifications", "incidents", "registry_integrity", "lifecycle_review", "audit_provenance", "settings_safety"],
+      "dry_run_actions": [],
+      "review_actions": []
+    },
+    "auditor": {
+      "read_views": ["overview", "local_auth", "local_session", "audit_provenance", "registry_integrity", "lifecycle_review", "settings_safety"],
+      "dry_run_actions": [],
+      "review_actions": []
+    },
+    "system_service": {
+      "read_views": ["overview", "settings_safety"],
+      "dry_run_actions": [],
+      "review_actions": [],
+      "ui_role": false
+    }
+  }
+}

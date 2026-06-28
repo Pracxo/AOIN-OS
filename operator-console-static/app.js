@@ -46,16 +46,27 @@
     status: "demo-data/local-session-status.json",
     preview: "demo-data/local-session-preview.json"
   };
+  var ROLE_ACCESS_DEMOS = {
+    matrix: "demo-data/role-access-matrix.json",
+    viewer: "demo-data/role-viewer-dashboard.json",
+    operator: "demo-data/role-operator-dashboard.json",
+    reviewer: "demo-data/role-reviewer-dashboard.json",
+    admin: "demo-data/role-admin-dashboard.json",
+    auditor: "demo-data/role-auditor-dashboard.json"
+  };
   var apiConfig = resolveApiBase();
   var state = {
     apiBase: apiConfig.apiBase,
     activeView: "overview",
+    activeRole: "viewer",
     apiAllowed: apiConfig.apiAllowed
   };
 
   document.addEventListener("DOMContentLoaded", function () {
     bindTabs();
+    bindRoleSwitcher();
     loadLocalAuthPanels();
+    loadRoleAccessPreview();
     loadLocalSessionPanels();
     loadView(state.activeView);
   });
@@ -93,6 +104,20 @@
         tab.classList.add("is-active");
         state.activeView = tab.getAttribute("data-view") || "overview";
         loadView(state.activeView);
+      });
+    });
+  }
+
+  function bindRoleSwitcher() {
+    var tabs = document.querySelectorAll(".role-tab");
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        tabs.forEach(function (item) {
+          item.classList.remove("is-active");
+        });
+        tab.classList.add("is-active");
+        state.activeRole = tab.getAttribute("data-role") || "viewer";
+        loadRoleAccessPreview();
       });
     });
   }
@@ -160,6 +185,35 @@
           no_go_warnings: ["local_auth_demo_unavailable"]
         });
         renderLocalAuthRoleFilter({ roles: [], removed_actions: [] });
+      });
+  }
+
+  function loadRoleAccessPreview() {
+    Promise.all([
+      fetchJson(ROLE_ACCESS_DEMOS.matrix),
+      fetchJson(ROLE_ACCESS_DEMOS[state.activeRole] || ROLE_ACCESS_DEMOS.viewer)
+    ])
+      .then(function (payloads) {
+        renderRoleAccessPreview(redact(payloads[0]), redact(payloads[1]));
+      })
+      .catch(function () {
+        renderRoleAccessPreview(
+          {
+            static_console_roles: ["viewer", "operator", "reviewer", "admin", "auditor"],
+            system_service_exposed_in_static_console: false
+          },
+          {
+            role: state.activeRole,
+            visible_views: [],
+            removed_sections: [],
+            removed_actions: [],
+            forbidden_actions_visible: true,
+            write_allowed: false,
+            execute_allowed: false,
+            activation_allowed: false,
+            external_calls_allowed: false
+          }
+        );
       });
   }
 
@@ -697,6 +751,121 @@
       row.appendChild(label);
       row.appendChild(value);
       container.appendChild(row);
+    });
+  }
+
+  function renderRoleAccessPreview(matrix, preview) {
+    renderRoleSafety(preview);
+    renderRoleVisibleViews(preview);
+    renderRoleFilteredSurface(preview);
+    renderRoleForbiddenVisibility(matrix, preview);
+  }
+
+  function renderRoleSafety(preview) {
+    var grid = document.getElementById("role-access-safety");
+    if (!grid) {
+      return;
+    }
+    grid.textContent = "";
+    [
+      "write_allowed",
+      "execute_allowed",
+      "activation_allowed",
+      "external_calls_allowed"
+    ].forEach(function (key) {
+      var card = document.createElement("div");
+      card.className = "safety-card";
+      card.textContent = key + "=" + String(Boolean(preview && preview[key]));
+      grid.appendChild(card);
+    });
+  }
+
+  function renderRoleVisibleViews(preview) {
+    var container = document.getElementById("role-visible-views");
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    var views = preview && Array.isArray(preview.visible_views) ? preview.visible_views : [];
+    if (!views.length) {
+      container.appendChild(emptyNote("Visible views render here."));
+      return;
+    }
+    views.forEach(function (view) {
+      var row = document.createElement("div");
+      row.className = "checklist-row";
+      var label = document.createElement("span");
+      label.textContent = safeText(view);
+      var value = document.createElement("strong");
+      value.textContent = "read-only";
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
+    });
+  }
+
+  function renderRoleFilteredSurface(preview) {
+    var container = document.getElementById("role-filtered-surface");
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    [
+      ["role", preview.role || state.activeRole],
+      [
+        "removed_sections",
+        Array.isArray(preview.removed_sections) ? preview.removed_sections.join(", ") : "none"
+      ],
+      [
+        "removed_actions",
+        Array.isArray(preview.removed_actions) ? preview.removed_actions.join(", ") : "none"
+      ],
+      ["redaction_applied", String(Boolean(preview.redaction_applied !== false))]
+    ].forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "checklist-row";
+      var label = document.createElement("span");
+      label.textContent = item[0];
+      var value = document.createElement("strong");
+      value.textContent = safeText(item[1] || "none");
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
+    });
+  }
+
+  function renderRoleForbiddenVisibility(matrix, preview) {
+    var container = document.getElementById("role-forbidden-visibility");
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    var visible = preview && preview.forbidden_actions_visible === true;
+    var roles = matrix && Array.isArray(matrix.static_console_roles)
+      ? matrix.static_console_roles
+      : ["viewer", "operator", "reviewer", "admin", "auditor"];
+    [
+      ["forbidden_actions_visible", String(visible)],
+      [
+        "static_roles",
+        roles.filter(function (role) {
+          return role !== "system_service";
+        }).join(", ")
+      ],
+      [
+        "system_service_exposed",
+        String(Boolean(matrix && matrix.system_service_exposed_in_static_console))
+      ]
+    ].forEach(function (item) {
+      var badge = document.createElement("div");
+      badge.className = "blocker-badge";
+      var label = document.createElement("strong");
+      label.textContent = safeText(item[0]);
+      var value = document.createElement("span");
+      value.textContent = safeText(item[1]);
+      badge.appendChild(label);
+      badge.appendChild(value);
+      container.appendChild(badge);
     });
   }
 

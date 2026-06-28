@@ -1,0 +1,35 @@
+{
+  "matrix_version": "aion-096",
+  "read_only": true,
+  "redaction_applied": true,
+  "status": "ready",
+  "static_console_roles": ["viewer", "operator", "reviewer", "admin", "auditor"],
+  "system_service_exposed_in_static_console": false,
+  "forbidden_actions_visible": true,
+  "write_allowed": false,
+  "execute_allowed": false,
+  "activation_allowed": false,
+  "external_calls_allowed": false,
+  "blockers": [],
+  "warnings": [],
+  "refs": ["docs/auth/role-permission-proof-matrix.md"],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Module activation remains disabled."},
+    {"action_key": "activate_capability", "reason": "Capability activation remains disabled."},
+    {"action_key": "load_code", "reason": "Code loading is disabled."},
+    {"action_key": "execute_tool", "reason": "Tool execution is disabled."},
+    {"action_key": "enable_external_model_calls", "reason": "External model calls remain disabled."},
+    {"action_key": "hard_delete", "reason": "Hard delete remains disabled."}
+  ],
+  "sections": [
+    {
+      "section_key": "role_matrix",
+      "title": "Role Matrix",
+      "status": "ready",
+      "summary": "Static role switcher uses demo-only role data.",
+      "blockers": [],
+      "warnings": [],
+      "refs": ["docs/operator-console/role-aware-console-preview.md"]
+    }
+  ]
+}

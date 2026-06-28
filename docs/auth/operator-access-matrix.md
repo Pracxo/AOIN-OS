@@ -50,3 +50,9 @@ AION-094 implements the local access matrix as role permissions. Viewer remains
 read-only, operator may request descriptor-only dry-runs, reviewer may create
 review records, admin remains future design-level only, and auditor may read
 audit/provenance views. All outputs remain redacted and read-only.
+
+## AION-096 Proof Matrix
+
+AION-096 formalizes the matrix as machine-readable proof data and
+`RoleAccessDecision` records. Unknown roles and views fail closed, while
+forbidden action descriptors stay visible for safety review.

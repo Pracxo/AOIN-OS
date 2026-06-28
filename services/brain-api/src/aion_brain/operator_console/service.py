@@ -89,6 +89,17 @@ class ConsoleViewModelService:
         raw_session_context = request.metadata.get("local_session_context")
         if raw_context is None and isinstance(raw_session_context, dict):
             raw_context = _auth_context_from_local_session(raw_session_context)
+        if raw_context is None:
+            raw_roles = (
+                request.metadata.get("roles")
+                or request.metadata.get("local_roles")
+                or request.metadata.get("local_auth_roles")
+            )
+            if isinstance(raw_roles, list):
+                raw_context = _auth_context_from_roles(
+                    [str(role) for role in raw_roles],
+                    request,
+                )
         if not isinstance(raw_context, dict):
             return model
         auth_context = LocalAuthContext.model_validate(raw_context)
@@ -132,6 +143,37 @@ def _auth_context_from_local_session(raw: dict[str, object]) -> dict[str, object
             "local_session_preview_id": session_context.local_session_preview_id,
         },
         "created_at": session_context.created_at,
+    }
+
+
+def _auth_context_from_roles(
+    roles: list[str],
+    request: ConsoleViewModelRequest,
+) -> dict[str, object]:
+    owner_scope = request.owner_scope or ["workspace:main"]
+    return {
+        "local_auth_context_id": f"local-auth-roles-{request.view}",
+        "trace_id": request.trace_id,
+        "actor_id": request.actor_id or request.created_by or "local.operator",
+        "workspace_id": request.workspace_id or "local",
+        "roles": roles,
+        "owner_scope": owner_scope,
+        "read_allowed": True,
+        "dry_run_allowed": "operator" in roles,
+        "review_allowed": "reviewer" in roles,
+        "write_allowed": False,
+        "execute_allowed": False,
+        "activation_allowed": False,
+        "external_calls_allowed": False,
+        "production_auth": False,
+        "session_present": False,
+        "credentials_present": False,
+        "metadata": {
+            "synthetic": True,
+            "source": "roles_metadata",
+            "role_matrix_version": "aion-096",
+        },
+        "created_at": None,
     }
 
 

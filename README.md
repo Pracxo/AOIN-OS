@@ -3875,4 +3875,12 @@ Developer command:
 ./scripts/auth-design-check.sh
 ./scripts/local-auth-check.sh
 ./scripts/local-session-check.sh
+./scripts/role-filter-check.sh
 ```
+
+### AION-096 Role-Aware Console Filtering
+
+AION-096 adds a read-only role permission proof matrix, role-aware console view
+filtering, access audit reports, and static role preview data. It does not add
+production auth, login/logout, credential storage, session persistence,
+execution, activation, or external calls.

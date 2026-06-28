@@ -16,6 +16,7 @@ from aion_brain.contracts.local_auth import (
     LocalAuthAuditRequest,
     LocalAuthAuditResult,
     LocalAuthContext,
+    RoleAccessAudit,
     RolePermission,
 )
 from aion_brain.contracts.policy import PolicyRequest
@@ -92,6 +93,46 @@ def filter_console_view_model(
     )
     request = body.model_copy(update={"trace_id": body.trace_id or actor_context.trace_id})
     return container.console_role_filter.filter(request)
+
+
+@router.get("/brain/local-auth/role-matrix")
+def role_permission_matrix(
+    container: Annotated[KernelContainer, Depends(get_kernel_container)],
+    actor_context: Annotated[ActorContext, Depends(get_actor_context)],
+    scope: Annotated[list[str] | None, Query()] = None,
+) -> dict[str, Any]:
+    """Return the read-only local role permission proof matrix."""
+    resolved_scope = _scope(scope, actor_context)
+    _authorize(
+        container.policy_adapter,
+        "local_auth.role_matrix.read",
+        resolved_scope,
+        actor_context,
+        resource_type="local_auth_role_matrix",
+        context={"read_only": True},
+    )
+    return container.role_permission_matrix_service.build_permission_matrix()
+
+
+@router.post("/brain/local-auth/role-access-audit", response_model=RoleAccessAudit)
+def audit_role_access(
+    body: LocalAuthAuditRequest,
+    container: Annotated[KernelContainer, Depends(get_kernel_container)],
+    actor_context: Annotated[ActorContext, Depends(get_actor_context)],
+) -> RoleAccessAudit:
+    """Audit role-aware console view filtering decisions."""
+    _authorize(
+        container.policy_adapter,
+        "local_auth.role_matrix.audit",
+        body.owner_scope or actor_context.security_scope,
+        actor_context,
+        resource_type="local_auth_role_matrix",
+        risk_level="medium",
+        context={"read_only": True, "role_access_audit": True},
+    )
+    return container.role_access_audit_service.audit(
+        trace_id=body.trace_id or actor_context.trace_id,
+    )
 
 
 @router.post("/brain/local-auth/audit", response_model=LocalAuthAuditResult)
