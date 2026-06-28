@@ -98,3 +98,4 @@ closure decision in ADR 0072.
 - [0086: Read-Only Local Session Prototype](0086-read-only-local-session-prototype.md) - Defines synthetic local session previews, read-only session context, and session safety boundaries.
 - [0087: Role-Aware Console View Filtering](0087-role-aware-console-view-filtering.md) - Defines read-only role matrix filtering, forbidden-action visibility, and role access audit boundaries.
 - [0088: Dry-Run Action Authorization Enforcement](0088-dry-run-action-authorization-enforcement.md) - Defines dry-run authorization enforcement for operator previews and reviews without execution.
+- [0089: Production Auth Architecture Decision](0089-production-auth-architecture-decision.md) - Selects future OIDC-compatible production auth architecture while adding no runtime auth.

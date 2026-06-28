@@ -1,0 +1,64 @@
+{
+  "synthetic": true,
+  "auth_material_absent": true,
+  "no_provider_endpoints": true,
+  "recommended_option": "oidc_compatible_provider",
+  "options": [
+    {
+      "option": "oidc_compatible_provider",
+      "score": 55,
+      "primary_path": true,
+      "notes": "future primary architecture, no runtime integration in AION-098"
+    },
+    {
+      "option": "saml_provider",
+      "score": 44,
+      "primary_path": false,
+      "notes": "enterprise option, not selected as primary path"
+    },
+    {
+      "option": "reverse_proxy_auth",
+      "score": 43,
+      "primary_path": false,
+      "optional_deployment_pattern": true,
+      "notes": "allowed later only with spoofing controls"
+    },
+    {
+      "option": "local_enterprise_sso_bridge",
+      "score": 39,
+      "primary_path": false,
+      "notes": "too deployment-specific for first production architecture"
+    },
+    {
+      "option": "passkey_webauthn_future_option",
+      "score": 44,
+      "primary_path": false,
+      "notes": "future option after provider architecture is stable"
+    },
+    {
+      "option": "dev_only_local_auth",
+      "score": 32,
+      "primary_path": false,
+      "production_suitable": false,
+      "notes": "explicitly not production auth"
+    }
+  ],
+  "scores": {
+    "scale": "1_to_5",
+    "criteria": [
+      "security_boundary_clarity",
+      "protected_value_lifecycle",
+      "browser_state_lifecycle",
+      "audit_correlation",
+      "role_provisioning",
+      "group_mapping",
+      "revocation",
+      "mfa_support",
+      "local_development_parity",
+      "deployment_complexity",
+      "vendor_lock_in",
+      "operational_burden",
+      "operator_console_suitability"
+    ]
+  }
+}

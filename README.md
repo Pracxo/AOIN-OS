@@ -3868,6 +3868,14 @@ Primary docs:
 - `docs/auth/session-safety-audit.md`
 - `docs/auth/session-preview-console-panel.md`
 - `docs/auth/future-session-implementation-plan.md`
+- `docs/auth/production-auth-architecture.md`
+- `docs/auth/auth-provider-evaluation-matrix.md`
+- `docs/auth/identity-provider-boundary-model.md`
+- `docs/auth/token-session-storage-decision.md`
+- `docs/auth/credential-handling-no-go-rules.md`
+- `docs/auth/production-auth-threat-model.md`
+- `docs/auth/production-auth-release-gates.md`
+- `docs/auth/disabled-auth-prototype-plan.md`
 
 Developer command:
 
@@ -3876,6 +3884,7 @@ Developer command:
 ./scripts/local-auth-check.sh
 ./scripts/local-session-check.sh
 ./scripts/role-filter-check.sh
+./scripts/production-auth-architecture-check.sh
 ```
 
 ### AION-096 Role-Aware Console Filtering
@@ -3898,3 +3907,14 @@ Developer command:
 ```bash
 ./scripts/action-authorization-check.sh
 ```
+
+### AION-098 Production Auth Architecture
+
+AION-098 decides the future production auth architecture without implementing
+it. The recommended future path is OIDC-compatible production auth, with
+reverse proxy auth allowed later as an optional deployment pattern.
+
+No production auth is implemented in AION-098. No provider integration is added
+in AION-098. No credentials, tokens, sessions, or cookies are created, stored,
+issued, or accepted. `production_auth_enabled` remains false. AION-099 may add
+a disabled mock-only prototype behind flags only.

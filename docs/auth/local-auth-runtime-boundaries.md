@@ -35,3 +35,11 @@ Role filtering is an in-process read-only projection over console view models.
 It may remove allowed descriptors or restrict sections, but it must not create
 runtime auth, mutate source records, add browser state, or grant privileged
 actions.
+
+## AION-098 Production Auth Architecture Boundary
+
+AION-098 documents future production auth architecture only. It does not add
+production auth runtime, provider SDKs, login/logout routes, credential
+storage, token issuance, cookie issuance, session persistence, migrations,
+external identity calls, frontend package files, or privileged bypass.
+`production_auth_enabled` remains false.

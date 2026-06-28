@@ -1,0 +1,37 @@
+{
+  "synthetic": true,
+  "auth_material_absent": true,
+  "protected_values_absent": true,
+  "threats": [
+    {
+      "threat": "token_theft",
+      "control": "protected_values_stay_inside_future_auth_boundary",
+      "required_future_test": "redaction_and_log_scan",
+      "no_go_condition": "protected_value_visible_outside_auth_boundary"
+    },
+    {
+      "threat": "session_fixation",
+      "control": "future_session_rotation_after_validated_identity",
+      "required_future_test": "rotation_negative_test",
+      "no_go_condition": "pre_auth_session_reused"
+    },
+    {
+      "threat": "csrf",
+      "control": "approved_browser_protection_plan",
+      "required_future_test": "csrf_negative_test",
+      "no_go_condition": "state_change_without_csrf_control"
+    },
+    {
+      "threat": "reverse_proxy_spoofing",
+      "control": "strip_untrusted_identity_headers",
+      "required_future_test": "spoofed_header_test",
+      "no_go_condition": "client_header_trusted_as_identity"
+    },
+    {
+      "threat": "stale_role_mapping",
+      "control": "fail_closed_role_mapping_and_revocation",
+      "required_future_test": "revoked_group_test",
+      "no_go_condition": "revoked_group_keeps_operator_access"
+    }
+  ]
+}

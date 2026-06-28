@@ -405,3 +405,8 @@ Instructions for future Codex runs in this repository:
   records only. It must fail closed for unknown roles/actions, denied sessions,
   and policy denials, and it must not execute actions, activate modules, write
   target systems, call external services, or add auth credentials/sessions.
+- AION-098 production auth architecture is design-only. It may document OIDC,
+  SAML, reverse proxy auth, local enterprise SSO bridge, and future
+  Passkey/WebAuthn options, but it must not add provider SDKs, login/logout
+  routes, credentials, tokens, cookies, sessions, migrations, external identity
+  calls, frontend package files, or production auth enablement.

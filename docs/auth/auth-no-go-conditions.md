@@ -17,3 +17,11 @@ The following conditions block auth implementation or release:
 
 AION-093 is explicitly design-only. If any no-go condition appears in a later
 implementation, the work must stop until the control is redesigned and gated.
+
+## AION-098 Production Auth No-Go Conditions
+
+AION-098 is architecture-only. It blocks runtime work if any task adds provider
+SDKs, login/logout routes, credentials, tokens, cookies, session persistence,
+provider calls, migrations, frontend package files, production auth enablement,
+ActorContext bypass, policy bypass, audit bypass, or dry-run action
+authorization bypass.

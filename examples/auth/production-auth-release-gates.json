@@ -1,0 +1,37 @@
+{
+  "synthetic": true,
+  "production_auth_enabled": false,
+  "gates": [
+    {
+      "gate": "threat_model_approved",
+      "required_evidence": "reviewed_production_auth_threat_model",
+      "blocker_behavior": "block_runtime_auth"
+    },
+    {
+      "gate": "provider_selected",
+      "required_evidence": "approved_provider_decision",
+      "blocker_behavior": "block_provider_integration"
+    },
+    {
+      "gate": "token_session_storage_design_approved",
+      "required_evidence": "approved_storage_decision",
+      "blocker_behavior": "block_storage_implementation"
+    },
+    {
+      "gate": "audit_correlation_tested",
+      "required_evidence": "subject_actor_policy_trace_correlation_test",
+      "blocker_behavior": "block_release"
+    },
+    {
+      "gate": "revocation_tested",
+      "required_evidence": "provider_and_local_revocation_proof",
+      "blocker_behavior": "block_release"
+    },
+    {
+      "gate": "rollback_plan",
+      "required_evidence": "documented_disablement_and_recovery_path",
+      "blocker_behavior": "block_release"
+    }
+  ],
+  "protected_material_leakage_check_required": true
+}

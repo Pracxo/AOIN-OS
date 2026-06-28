@@ -81,6 +81,8 @@ for path in sorted((root / "examples" / "auth").glob("*.json")):
         continue
     if "authorization" in path.name:
         continue
+    if "production-auth" in path.name or path.name == "disabled-auth-prototype-plan.json":
+        continue
     payload = json.loads(path.read_text())
     serialized = json.dumps(payload, sort_keys=True).lower()
     blocked = (
