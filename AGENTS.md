@@ -425,3 +425,10 @@ Instructions for future Codex runs in this repository:
   resources, CLI commands, migrations, frontend dependencies, production auth,
   write controls, activation controls, execution controls, provider-call
   controls, external-call controls, or runtime registration.
+- AION-102 operator platform stabilization is regression evidence only. It must
+  pass `./scripts/operator-platform-regression.sh` and
+  `./scripts/operator-platform-freeze-gate.sh`, and it must not add runtime
+  subsystems, API routers, SDK resources, CLI commands, migrations, frontend
+  dependencies, package installation, production auth, write controls,
+  activation controls, execution controls, provider-call controls,
+  external-call controls, or runtime registration.

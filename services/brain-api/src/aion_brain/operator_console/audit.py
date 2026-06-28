@@ -29,6 +29,9 @@ _UI_RELEASE_GATE_EXAMPLES = {
     "operator-platform-checkpoint.json",
     "operator-platform-evidence-pack.json",
     "operator-platform-risk-register.json",
+    "operator-platform-regression-matrix.json",
+    "operator-platform-freeze-gate-result.json",
+    "operator-platform-regression-evidence.json",
 }
 
 

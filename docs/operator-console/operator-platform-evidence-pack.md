@@ -20,6 +20,8 @@ evidence script fails.
 | Docs audit | `./scripts/docs-check.sh` and `./scripts/final-docs-audit.sh` | `Docs check PASS` and `Final docs audit PASS` | Yes | Confirms release docs remain coherent and free of blocked markers. |
 | Boundary check | `./scripts/boundary-check.sh` | Local boundary tests pass | Yes | Confirms vendor and architecture boundaries remain intact. |
 | Repository health | `./scripts/check.sh` | Full local check succeeds | Yes | Confirms lint, tests, type checks, architecture checks, and repo health. |
+| Stabilization regression | `./scripts/operator-platform-regression.sh` | `Operator platform regression PASS` | Yes | Runs the AION-102 long-running regression matrix. |
+| Checkpoint freeze gate | `./scripts/operator-platform-freeze-gate.sh` | `Operator platform freeze gate PASS` | Yes | Freezes the checkpoint only when regression, tag, whitespace, and no-go checks pass. |
 
 ## Checkpoint command
 
@@ -27,4 +29,11 @@ Use the composed checkpoint command for AION-101:
 
 ```bash
 ./scripts/operator-platform-checkpoint.sh
+```
+
+Use the stabilization commands for AION-102:
+
+```bash
+./scripts/operator-platform-regression.sh
+./scripts/operator-platform-freeze-gate.sh
 ```

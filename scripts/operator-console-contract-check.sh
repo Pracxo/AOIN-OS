@@ -58,6 +58,9 @@ ui_release_gate_examples = {
     "operator-platform-checkpoint.json",
     "operator-platform-evidence-pack.json",
     "operator-platform-risk-register.json",
+    "operator-platform-regression-matrix.json",
+    "operator-platform-freeze-gate-result.json",
+    "operator-platform-regression-evidence.json",
 }
 for path in sorted(root.glob("*.json")):
     if path.name in ui_release_gate_examples:

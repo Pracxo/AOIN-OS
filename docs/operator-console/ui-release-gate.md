@@ -99,3 +99,10 @@ The checkpoint does not loosen the UI release gate. It adds docs, examples, and
 evidence validation that prove the AION-089 through AION-100 Operator Platform
 phase is closed while the static console remains local, read-only,
 dependency-free, and not production UI.
+
+## AION-102 stabilization relationship
+
+AION-102 composes this gate into `./scripts/operator-platform-regression.sh`
+and `./scripts/operator-platform-freeze-gate.sh`. The stabilization layer keeps
+the UI release gate mandatory and adds long-running regression evidence before
+future UI, auth, activation, provider, connector, or write-path planning.

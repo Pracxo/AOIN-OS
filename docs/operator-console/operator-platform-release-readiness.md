@@ -7,11 +7,12 @@
 - Operator Platform risk register exists.
 - Operator Platform next-phase plan exists.
 - ADR 0092 exists and is indexed.
+- ADR 0093 exists and is indexed.
 - JSON evidence examples are valid.
 - Static console remains local-only, read-only, and dependency-free.
 - Auth remains disabled or mock-only.
 - Write, activation, execution, provider-call, and external-call controls are absent.
-- No package manager file, lockfile, frontend config, build tool, migration, or AION-101 API router file is added.
+- No package manager file, lockfile, frontend config, build tool, migration, or AION-101/AION-102 API router file is added.
 
 ## Required scripts
 
@@ -19,6 +20,8 @@ Run these commands before merge:
 
 ```bash
 ./scripts/operator-platform-checkpoint.sh
+./scripts/operator-platform-regression.sh
+./scripts/operator-platform-freeze-gate.sh
 ./scripts/ui-release-gate.sh
 ./scripts/static-console-safety-check.sh
 ./scripts/docs-check.sh
@@ -38,8 +41,8 @@ health checks blocks merge.
 ## Required branch hygiene
 
 The branch must be based on current `main`, must not push directly to `main`,
-must preserve the `aion-v0.1.0` tag, and must contain only AION-101 checkpoint
-docs, examples, scripts, and tests.
+must preserve the `aion-v0.1.0` tag, and must contain only checkpoint or
+stabilization docs, examples, scripts, and tests.
 
 ## Required PR review
 
