@@ -150,6 +150,7 @@ class LocalAuthAuditService:
             if (
                 path.name.startswith("local-session")
                 or path.name == "role-aware-session-context.json"
+                or "action-authorization" in path.name
             ):
                 continue
             try:

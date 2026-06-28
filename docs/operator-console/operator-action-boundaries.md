@@ -81,3 +81,10 @@ The permission matrix differentiates read, dry-run descriptor, and review
 descriptor visibility. Even when allowed descriptors are removed, forbidden
 activation, execution, external-call, code-loading, and hard-delete
 descriptors remain visible.
+
+## AION-097 Authorization Boundary
+
+Dry-run action authorization sits before operator action request, preview, and
+review creation. It can allow dry-run previews and review records only. Any
+write, execution, activation, external-call, unknown-action, denied-role,
+denied-policy, or denied-session path remains blocked.

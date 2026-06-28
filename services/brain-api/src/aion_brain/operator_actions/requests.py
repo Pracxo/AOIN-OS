@@ -8,6 +8,10 @@ from datetime import UTC, datetime
 from typing import Any
 from uuid import uuid4
 
+from aion_brain.contracts.action_authorization import (
+    DryRunActionAuthorizationDecision,
+    DryRunActionAuthorizationRequest,
+)
 from aion_brain.contracts.operator_actions import (
     OperatorActionBlocker,
     OperatorActionCreateRequest,
@@ -31,6 +35,7 @@ class OperatorActionRequestService:
         telemetry_service: object | None = None,
         audit_sink: object | None = None,
         provenance_service: object | None = None,
+        authorization_service: object | None = None,
         notification_router: object | None = None,
         settings: object | None = None,
         actor_context: ActorContext | None = None,
@@ -42,6 +47,7 @@ class OperatorActionRequestService:
         self._telemetry_service = telemetry_service
         self._audit_sink = audit_sink
         self._provenance_service = provenance_service
+        self._authorization_service = authorization_service
         self._notification_router = notification_router
         self._settings = settings
         self._actor_context = actor_context or ActorContext()
@@ -61,6 +67,7 @@ class OperatorActionRequestService:
             telemetry_service=self._telemetry_service,
             audit_sink=self._audit_sink,
             provenance_service=self._provenance_service,
+            authorization_service=self._authorization_service,
             notification_router=self._notification_router,
             settings=self._settings,
             actor_context=actor_context,
@@ -73,11 +80,26 @@ class OperatorActionRequestService:
             raise RuntimeError("operator_actions_disabled")
         if request.mode != "dry_run":
             raise ValueError("operator_actions_are_dry_run_only")
+        redacted_payload, findings = redact_operator_action_payload(request.request_payload)
+        request_id = request.operator_action_request_id or f"operator-action-request-{uuid4().hex}"
+        authorization_decision = self._authorize_dry_run_request(
+            request,
+            request_id,
+            findings,
+        )
+        if authorization_decision is not None and authorization_decision.status != "allowed":
+            return self._create_blocked_authorization_request(
+                request,
+                request_id,
+                redacted_payload,
+                findings,
+                authorization_decision,
+            )
         authorize(
             self._policy_adapter,
             action_type="operator_action.request.create",
             resource_type="operator_action_request",
-            resource_id=request.operator_action_request_id,
+            resource_id=request_id,
             scope=request.owner_scope,
             trace_id=request.trace_id or self._actor_context.trace_id,
             actor_id=request.actor_id or self._actor_context.actor_id,
@@ -85,8 +107,6 @@ class OperatorActionRequestService:
             risk_level=request.risk_level,
             context={"mode": request.mode, "action_key": request.action_key},
         )
-        redacted_payload, findings = redact_operator_action_payload(request.request_payload)
-        request_id = request.operator_action_request_id or f"operator-action-request-{uuid4().hex}"
         blockers = self._create_initial_blockers(request_id, request, findings)
         now = datetime.now(UTC)
         stored = _save_request(
@@ -118,6 +138,7 @@ class OperatorActionRequestService:
                 metadata={
                     **request.metadata,
                     "redaction_findings": findings,
+                    "dry_run_authz_decision": _decision_summary(authorization_decision),
                     "create_notifications_requested": request.create_notifications,
                     "dry_run_only": True,
                 },
@@ -162,6 +183,123 @@ class OperatorActionRequestService:
             },
         )
         return stored
+
+    def _authorize_dry_run_request(
+        self,
+        request: OperatorActionCreateRequest,
+        request_id: str,
+        findings: list[dict[str, Any]],
+    ) -> DryRunActionAuthorizationDecision | None:
+        authorize_action = getattr(self._authorization_service, "authorize", None)
+        if not callable(authorize_action):
+            return None
+        decision = authorize_action(
+            DryRunActionAuthorizationRequest(
+                authorization_request_id=f"authorization-{request_id}",
+                trace_id=request.trace_id or self._actor_context.trace_id,
+                actor_id=request.actor_id or self._actor_context.actor_id or "local.operator",
+                workspace_id=request.workspace_id
+                or self._actor_context.workspace_id
+                or "local",
+                roles=_authorization_roles(request.metadata, default=["operator"]),
+                owner_scope=request.owner_scope,
+                action_key=request.action_key,
+                action_type=request.action_type,
+                target_type=request.target_type,
+                target_id=request.target_id,
+                mode=request.mode,
+                requested_operation="preview",
+                local_auth_context_ref=_metadata_text(request.metadata, "local_auth_context_ref"),
+                local_session_preview_id=_metadata_text(
+                    request.metadata,
+                    "local_session_preview_id",
+                ),
+                operator_action_request_id=request_id,
+                metadata={
+                    **request.metadata,
+                    "request_payload_findings": findings,
+                    "operator_action_request_id": request_id,
+                },
+                created_by=request.created_by or self._actor_context.actor_id,
+            )
+        )
+        return decision if isinstance(decision, DryRunActionAuthorizationDecision) else None
+
+    def _create_blocked_authorization_request(
+        self,
+        request: OperatorActionCreateRequest,
+        request_id: str,
+        redacted_payload: dict[str, Any],
+        findings: list[dict[str, Any]],
+        decision: DryRunActionAuthorizationDecision,
+    ) -> OperatorActionRequest:
+        blockers = self._create_initial_blockers(request_id, request, findings)
+        blockers.extend(self._authorization_blockers(request_id, request, decision))
+        stored = _save_request(
+            self._repository,
+            OperatorActionRequest(
+                operator_action_request_id=request_id,
+                trace_id=request.trace_id or self._actor_context.trace_id,
+                actor_id=request.actor_id or self._actor_context.actor_id,
+                workspace_id=request.workspace_id or self._actor_context.workspace_id,
+                action_key=request.action_key,
+                action_type=request.action_type,
+                target_type=request.target_type,
+                target_id=request.target_id,
+                status="blocked",
+                mode="dry_run",
+                risk_level=request.risk_level,
+                owner_scope=request.owner_scope,
+                request_payload_hash=_payload_hash(redacted_payload),
+                redacted_request_payload=redacted_payload,
+                required_policy_actions=sorted(
+                    set([*request.required_policy_actions, *decision.required_policy_actions])
+                ),
+                required_approvals=request.required_approvals,
+                required_evidence_refs=request.required_evidence_refs,
+                blocker_refs=[blocker.operator_action_blocker_id for blocker in blockers],
+                preview_id=None,
+                review_id=None,
+                execution_allowed=False,
+                external_calls_allowed=False,
+                activation_allowed=False,
+                metadata={
+                    **request.metadata,
+                    "redaction_findings": findings,
+                    "dry_run_authz_decision": _decision_summary(decision),
+                    "dry_run_only": True,
+                },
+                created_by=request.created_by or self._actor_context.actor_id,
+                created_at=datetime.now(UTC),
+            ),
+        )
+        self._record_audit(
+            "operator_action_request_authorization_blocked",
+            stored.operator_action_request_id,
+        )
+        return stored
+
+    def _authorization_blockers(
+        self,
+        request_id: str,
+        request: OperatorActionCreateRequest,
+        decision: DryRunActionAuthorizationDecision,
+    ) -> list[OperatorActionBlocker]:
+        blockers: list[OperatorActionBlocker] = []
+        for item in decision.blockers:
+            blocker_type = _operator_blocker_type(str(item.get("blocker_type") or "generic"))
+            blocker_record = self._create_blocker(
+                request_id=request_id,
+                request=request,
+                blocker_type=blocker_type,
+                severity=str(item.get("severity") or "high"),
+                reason=str(item.get("reason") or "authorization_denied"),
+                recommended_action="Resolve dry-run authorization blockers before preview.",
+                metadata={"authz_blocker_type": item.get("blocker_type")},
+            )
+            if isinstance(blocker_record, OperatorActionBlocker):
+                blockers.append(blocker_record)
+        return blockers
 
     def get_request(
         self,
@@ -395,6 +533,60 @@ def _blocker_type_for_finding(finding: dict[str, Any]) -> str:
     if "secret" in code:
         return "secret_detected"
     return "unsafe_payload"
+
+
+def _operator_blocker_type(blocker_type: str) -> str:
+    if blocker_type in {
+        "unsupported_action",
+        "unsafe_payload",
+        "raw_prompt_detected",
+        "hidden_reasoning_detected",
+        "secret_detected",
+    }:
+        return blocker_type
+    if blocker_type in {"write_blocked", "execution_blocked"}:
+        return "execution_disabled"
+    if blocker_type == "activation_blocked":
+        return "activation_disabled"
+    if blocker_type == "external_calls_blocked":
+        return "external_calls_disabled"
+    return "policy_required"
+
+
+def _authorization_roles(metadata: dict[str, Any], *, default: list[str]) -> list[str]:
+    for key in ("roles", "local_roles", "local_auth_roles"):
+        roles = metadata.get(key)
+        if isinstance(roles, list):
+            cleaned = [str(role) for role in roles if str(role).strip()]
+            if cleaned:
+                return cleaned
+    return default
+
+
+def _metadata_text(metadata: dict[str, Any], key: str) -> str | None:
+    value = metadata.get(key)
+    return str(value) if isinstance(value, str) and value else None
+
+
+def _decision_summary(
+    decision: DryRunActionAuthorizationDecision | None,
+) -> dict[str, Any] | None:
+    if decision is None:
+        return None
+    return {
+        "authz_decision_id": decision.authorization_decision_id,
+        "status": decision.status,
+        "decision": decision.decision,
+        "reason": decision.reason,
+        "policy_allowed": decision.policy_allowed,
+        "role_allowed": decision.role_allowed,
+        "session_allowed": decision.session_allowed,
+        "dry_run_only": decision.dry_run_only,
+        "write_allowed": False,
+        "execution_allowed": False,
+        "activation_allowed": False,
+        "external_calls_allowed": False,
+    }
 
 
 def _require_request(repository: object, operator_action_request_id: str) -> OperatorActionRequest:

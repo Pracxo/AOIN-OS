@@ -763,3 +763,14 @@ aionctl local-auth role-access-audit
 These commands read local role-filtering evidence only. They do not add login,
 logout, browser state, write authorization, execution, activation, or external
 calls.
+
+## Action Authorization Commands
+
+```bash
+aionctl action-authorization authorize
+aionctl action-authorization audit
+aionctl action-authorization status
+```
+
+These commands call the SDK only. They do not expose execute, activation,
+external-call, login, logout, credential, token, or cookie commands.

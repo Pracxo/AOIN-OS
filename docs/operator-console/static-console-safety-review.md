@@ -64,3 +64,10 @@ activation control.
 The static role switcher is demo-only and loads local JSON files. It must not
 offer `system_service`, persist role state, create login UI, or hide forbidden
 actions and safety blockers.
+
+## AION-097 Action Authorization Panel Safety
+
+The static action authorization panel loads local JSON files only. It displays
+dry-run decisions, denial reasons, and hard-false boundary flags. It has no
+execute button, activation button, external-call button, credential input, or
+browser storage.

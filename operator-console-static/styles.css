@@ -214,6 +214,7 @@ h1 {
 
 .module-dashboard,
 .operator-actions-panel,
+.action-authorization-panel,
 .local-auth-panel,
 .role-access-panel,
 .local-session-panel {
@@ -226,6 +227,7 @@ h1 {
 
 .module-dashboard.is-muted,
 .operator-actions-panel.is-muted,
+.action-authorization-panel.is-muted,
 .role-access-panel.is-muted,
 .local-session-panel.is-muted {
   border-style: dashed;

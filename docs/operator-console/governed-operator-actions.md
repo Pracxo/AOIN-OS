@@ -40,3 +40,10 @@ Public APIs:
 
 The Operator Console may render these records, but it must not convert them
 into runtime writes.
+
+## AION-097 Authorization Integration
+
+Operator action request creation now calls dry-run action authorization before
+records are created. Denied decisions produce blocked request metadata or
+blockers. Preview and review services verify authorization again and still
+never execute actions.

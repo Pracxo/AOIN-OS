@@ -2,6 +2,7 @@
 
 from fastapi import FastAPI, Request
 
+from aion_brain.api.action_authorization import router as action_authorization_router
 from aion_brain.api.action_proposals import router as action_proposals_router
 from aion_brain.api.approvals import router as approvals_router
 from aion_brain.api.attention import router as attention_router
@@ -198,6 +199,7 @@ ROUTERS = (
     observability_router,
     operator_router,
     operator_actions_router,
+    action_authorization_router,
     local_auth_router,
     local_session_router,
     operator_console_router,

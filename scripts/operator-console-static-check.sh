@@ -23,6 +23,8 @@ required_files=(
   operator-console-static/demo-data/operator-action-preview.json
   operator-console-static/demo-data/operator-action-blockers.json
   operator-console-static/demo-data/operator-action-review.json
+  operator-console-static/demo-data/action-authorization-preview.json
+  operator-console-static/demo-data/action-authorization-deny-matrix.json
   operator-console-static/demo-data/local-auth-status.json
   operator-console-static/demo-data/role-filtered-view-model.json
   docs/operator-console/static-console-prototype.md
@@ -141,6 +143,22 @@ required_actions = {
 }
 for path in sorted(demo_dir.glob("*.json")):
     payload = json.loads(path.read_text())
+    if path.name.startswith("action-authorization-"):
+        if payload.get("read_only") is not True:
+            raise SystemExit(f"action authorization demo must be read_only: {path}")
+        if payload.get("redaction_applied") is not True:
+            raise SystemExit(f"action authorization demo must be redacted: {path}")
+        for key in (
+            "write_allowed",
+            "execution_allowed",
+            "activation_allowed",
+            "external_calls_allowed",
+        ):
+            if payload.get(key) is not False:
+                raise SystemExit(f"action authorization demo flag must be false: {key}: {path}")
+        if payload.get("dry_run_only") is not True:
+            raise SystemExit(f"action authorization demo must be dry_run_only: {path}")
+        continue
     if path.name.startswith("local-session-"):
         if payload.get("read_only") is not True:
             raise SystemExit(f"local session demo must be read_only: {path}")

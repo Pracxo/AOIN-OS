@@ -7,3 +7,11 @@ The static console exposes only `viewer`, `operator`, `reviewer`, `admin`, and `
 Every matrix decision keeps these flags false: `write_allowed`, `execute_allowed`, `activation_allowed`, and `external_calls_allowed`. Forbidden actions stay visible as descriptors so the console can prove what remains blocked.
 
 The matrix is available through the local-auth service and SDK as read-only data. It is not login, not session persistence, and not production authorization.
+
+## AION-097 Dry-Run Action Proof
+
+AION-097 uses the matrix as authorization proof input. The operator role has
+dry-run preview permission, the reviewer role has review-record permission, and
+viewer, auditor, and unknown roles are denied for dry-run operator action
+requests. The matrix still cannot grant writes, execution, activation, or
+external calls.

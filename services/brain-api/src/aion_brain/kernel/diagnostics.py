@@ -42,6 +42,21 @@ class KernelDiagnostics:
         ("tool_intent_review_service_present", "tool_intent_review_service", "medium"),
         ("execution_handoff_service_present", "execution_handoff_service", "high"),
         ("operator_action_repository_present", "operator_action_repository", "high"),
+        (
+            "dry_run_action_authorization_service_present",
+            "dry_run_action_authorization_service",
+            "high",
+        ),
+        (
+            "action_authorization_audit_service_present",
+            "action_authorization_audit_service",
+            "medium",
+        ),
+        (
+            "action_authorization_query_service_present",
+            "action_authorization_query_service",
+            "medium",
+        ),
         ("operator_action_request_service_present", "operator_action_request_service", "high"),
         ("operator_action_preview_service_present", "operator_action_preview_service", "high"),
         ("operator_action_review_service_present", "operator_action_review_service", "high"),
@@ -434,6 +449,7 @@ class KernelDiagnostics:
         checks.extend(self._prompt_checks(settings))
         checks.extend(self._model_output_checks(settings))
         checks.extend(self._action_proposal_checks(settings))
+        checks.extend(self._action_authorization_checks(settings))
         checks.extend(self._operator_action_checks(settings))
         checks.extend(self._run_supervision_checks(settings))
         checks.extend(self._notification_checks(settings))
@@ -812,6 +828,106 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Governed operator action services are assembled.",
+            ),
+        ]
+
+    def _action_authorization_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "dry_run_action_authorization_service",
+                "action_authorization_audit_service",
+                "action_authorization_query_service",
+                "role_permission_matrix_service",
+                "local_session_context_service",
+            )
+        )
+        return [
+            self._result(
+                "action_authorization_enabled",
+                "action_authorization",
+                (
+                    "passed"
+                    if bool(getattr(settings, "action_authorization_enabled", True))
+                    else "warning"
+                ),
+                "high",
+                "Dry-run action authorization is enabled.",
+            ),
+            self._result(
+                "dry_run_action_authorization_enabled",
+                "action_authorization",
+                (
+                    "passed"
+                    if bool(getattr(settings, "dry_run_action_authorization_enabled", True))
+                    else "warning"
+                ),
+                "high",
+                "Dry-run authorization enforcement is enabled.",
+            ),
+            self._result(
+                "action_authorization_audit_enabled",
+                "action_authorization",
+                (
+                    "passed"
+                    if bool(getattr(settings, "action_authorization_audit_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Action authorization audits are enabled.",
+            ),
+            self._result(
+                "action_authorization_write_allowed",
+                "action_authorization",
+                (
+                    "failed"
+                    if bool(getattr(settings, "action_authorization_write_allowed", False))
+                    else "passed"
+                ),
+                "critical",
+                "Action authorization does not grant writes.",
+            ),
+            self._result(
+                "action_authorization_execution_allowed",
+                "action_authorization",
+                (
+                    "failed"
+                    if bool(getattr(settings, "action_authorization_execution_allowed", False))
+                    else "passed"
+                ),
+                "critical",
+                "Action authorization does not grant execution.",
+            ),
+            self._result(
+                "action_authorization_activation_allowed",
+                "action_authorization",
+                (
+                    "failed"
+                    if bool(getattr(settings, "action_authorization_activation_allowed", False))
+                    else "passed"
+                ),
+                "critical",
+                "Action authorization does not grant activation.",
+            ),
+            self._result(
+                "action_authorization_external_calls_allowed",
+                "action_authorization",
+                (
+                    "failed"
+                    if bool(
+                        getattr(settings, "action_authorization_external_calls_allowed", False)
+                    )
+                    else "passed"
+                ),
+                "critical",
+                "Action authorization does not grant external calls.",
+            ),
+            self._result(
+                "action_authorization_services_present",
+                "action_authorization",
+                "passed" if services_present else "failed",
+                "high",
+                "Action authorization services are assembled.",
             ),
         ]
 

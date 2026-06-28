@@ -25,3 +25,10 @@ Privileged flags are hard false: `write_allowed=false`,
 Local session context can be used as input to role-aware console filtering.
 The session context remains read-only and cannot expand the permissions that
 the local role matrix denies.
+
+## AION-097 Action Authorization Boundary
+
+Dry-run action authorization can consume local session context metadata. A
+denied, invalid, non-read-only, write-capable, execution-capable,
+activation-capable, or external-call-capable session context blocks the
+authorization decision.

@@ -15,3 +15,9 @@
 
 Every public contract keeps execution, external calls, and activation flags
 false. The dry-run flow is a governance surface, not a command surface.
+
+## AION-097 Authorization Matrix
+
+Action authorization adds role, policy, and session gates to the matrix. An
+allowed decision can only create dry-run preview or review evidence. Denied
+decisions remain visible and do not create an execution path.

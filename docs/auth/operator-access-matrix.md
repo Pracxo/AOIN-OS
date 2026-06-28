@@ -56,3 +56,10 @@ audit/provenance views. All outputs remain redacted and read-only.
 AION-096 formalizes the matrix as machine-readable proof data and
 `RoleAccessDecision` records. Unknown roles and views fail closed, while
 forbidden action descriptors stay visible for safety review.
+
+## AION-097 Dry-Run Authorization Use
+
+The matrix now informs dry-run operator action authorization: operator can
+request preview authorization, reviewer can request review authorization, and
+viewer, auditor, and unknown roles fail closed for dry-run operator action
+requests.

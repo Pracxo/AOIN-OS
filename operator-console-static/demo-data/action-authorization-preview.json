@@ -1,0 +1,23 @@
+{
+  "read_only": true,
+  "redaction_applied": true,
+  "authz_decision_id": "authz-decision-static-001",
+  "status": "allowed",
+  "decision": "allow_dry_run_preview",
+  "reason": "dry_run_authz_allowed",
+  "role_allowed": true,
+  "policy_allowed": true,
+  "session_allowed": true,
+  "dry_run_only": true,
+  "write_allowed": false,
+  "execution_allowed": false,
+  "activation_allowed": false,
+  "external_calls_allowed": false,
+  "blockers": [],
+  "warnings": [
+    {
+      "code": "preview_only",
+      "message": "Dry-run preview only."
+    }
+  ]
+}

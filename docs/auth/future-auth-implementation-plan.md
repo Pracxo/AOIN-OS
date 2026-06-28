@@ -51,3 +51,10 @@ review, and migration approval.
 Role-aware filtering is still not production authorization. Future auth work
 must decide how real identities map into the proof matrix without bypassing
 policy, audit, redaction, or the forbidden-action guarantees.
+
+## AION-097 Future Write Authorization Prerequisite
+
+Future production or write authorization must extend the AION-097 dry-run model
+instead of bypassing it. Real identity, session, and policy decisions must keep
+denied decisions visible and must not weaken no-execution, no-activation,
+no-external-call, and no-credential-storage guarantees.

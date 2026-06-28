@@ -1837,6 +1837,55 @@ class Settings(BaseSettings):
             "local_session_external_calls_enabled",
         ),
     )
+    action_authorization_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_ACTION_AUTHORIZATION_ENABLED",
+            "action_authorization_enabled",
+        ),
+    )
+    dry_run_action_authorization_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_DRY_RUN_ACTION_AUTHORIZATION_ENABLED",
+            "dry_run_action_authorization_enabled",
+        ),
+    )
+    action_authorization_audit_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_ACTION_AUTHORIZATION_AUDIT_ENABLED",
+            "action_authorization_audit_enabled",
+        ),
+    )
+    action_authorization_write_allowed: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_ACTION_AUTHORIZATION_WRITE_ALLOWED",
+            "action_authorization_write_allowed",
+        ),
+    )
+    action_authorization_execution_allowed: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_ACTION_AUTHORIZATION_EXECUTION_ALLOWED",
+            "action_authorization_execution_allowed",
+        ),
+    )
+    action_authorization_activation_allowed: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_ACTION_AUTHORIZATION_ACTIVATION_ALLOWED",
+            "action_authorization_activation_allowed",
+        ),
+    )
+    action_authorization_external_calls_allowed: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_ACTION_AUTHORIZATION_EXTERNAL_CALLS_ALLOWED",
+            "action_authorization_external_calls_allowed",
+        ),
+    )
     operator_actions_enabled: bool = Field(
         default=True,
         validation_alias=AliasChoices(
