@@ -94,3 +94,24 @@ script, and regression tests. It closes AION-089 through AION-100 as a safe
 baseline for AION-102 without adding production UI, frontend dependencies,
 production auth, writes, activation, execution, provider calls, or external
 calls.
+
+## AION-102
+
+Operator Platform Stabilization and Long-Running Regression Matrix.
+
+Status: implemented as regression matrix docs, evidence JSON, local regression
+script, freeze gate, and regression tests. It adds no runtime subsystem,
+frontend dependencies, production auth, writes, activation, execution,
+provider calls, external calls, package installation, or migration.
+
+## AION-103
+
+Static Console UX Refinement, Read-Only Navigation Polish, and Accessibility
+Pass.
+
+Status: implemented as static HTML/CSS/JS polish, docs, examples, and a local
+UX check. It adds navigation groups, skip link, section shortcuts, focus
+states, a safety blocker view, and safe command copy for read-only local checks
+only. It adds no framework, package file, build tooling, production UI claim,
+production auth, writes, activation, execution, provider calls, external
+calls, or runtime subsystem.

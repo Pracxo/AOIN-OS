@@ -151,3 +151,37 @@ AION-100 adds the static UI release gate:
 The gate proves the static console remains read-only, local, dependency-free,
 build-free, login-free, provider-call-free, activation-free, and
 execution-free.
+
+## Static Console UX Refinement
+
+AION-103 adds dependency-free navigation groups, a skip link, section
+shortcuts, visible focus states, a safety blocker view, and safe local command
+copy cards.
+
+Navigation groups:
+
+- Platform
+- Modules
+- Providers
+- Actions
+- Auth and Sessions
+- Evidence
+- Safety
+
+Copy support is limited to:
+
+- `./scripts/ui-release-gate.sh`
+- `./scripts/static-console-safety-check.sh`
+- `./scripts/operator-platform-regression.sh`
+- `./scripts/operator-platform-freeze-gate.sh`
+- `./scripts/docs-check.sh`
+
+The UX refinement adds no framework, package file, build step, login/logout
+behavior, credential control, token or cookie issuance, session persistence,
+provider call, write control, activation control, or execution control.
+
+Validate the UX refinement:
+
+```bash
+./scripts/static-console-ux-check.sh
+```

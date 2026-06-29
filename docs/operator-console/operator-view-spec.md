@@ -135,3 +135,13 @@ Static console metadata may include UI release gate evidence from
 is release-check metadata only and must not add UI runtime state, write
 controls, auth runtime enablement, provider calls, activation, execution, or
 frontend dependencies.
+
+## AION-103 Static UX Metadata
+
+Static console metadata may include navigation and accessibility evidence from
+`examples/operator-console/static-console-navigation-map.json` and
+`examples/operator-console/static-console-accessibility-check-result.json`.
+This metadata describes group membership, section shortcuts, safe local command
+copy, and accessibility checks only. It must not add UI runtime state, write
+controls, auth runtime enablement, provider calls, activation, execution,
+external calls, browser storage, or frontend dependencies.

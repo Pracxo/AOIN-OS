@@ -20,6 +20,7 @@ operator-facing command.
 ## Required checks
 
 - `./scripts/operator-platform-regression.sh`
+- `./scripts/static-console-ux-check.sh`
 - `git diff --check`
 - `./scripts/static-console-safety-check.sh`
 - `./scripts/auth-runtime-check.sh`
@@ -31,7 +32,7 @@ operator-facing command.
 ## No-go conditions
 
 The freeze gate fails for any frontend dependency, package file, lockfile,
-build tool, migration, AION-102 API router, production auth enablement,
+build tool, migration, AION-102 or AION-103 API router, production auth enablement,
 login/logout behavior, session persistence, credential storage, write control,
 activation control, execution control, provider-call control, external-call
 control, package installation, external service call, privileged bypass, hard

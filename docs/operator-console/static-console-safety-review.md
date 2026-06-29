@@ -88,3 +88,13 @@ build tooling, external scripts, non-local URLs, write verbs, activation
 controls, execution controls, provider-call controls, login forms, credential
 fields, token/cookie/session storage, protected output display, and production
 UI claims.
+
+## AION-103 UX Refinement Safety
+
+The AION-103 UX pass improves navigation and accessibility only. Group tabs,
+section shortcuts, the safety blocker view, and command cards remain static and
+local. Command copy is allowlisted to read-only verification commands and does
+not store state. The pass adds no package file, frontend dependency, build
+tooling, external URL, form, input, login/logout behavior, credential field,
+token or cookie issuance, session persistence, write method, activation
+control, execution control, provider-call control, or production UI claim.

@@ -217,6 +217,16 @@ API router, SDK resource, CLI command, frontend dependency, production auth,
 write control, activation control, execution control, provider-call control,
 external-call control, package installation, or privileged bypass.
 
+## Static Console UX Refinement
+
+AION-103 refines the static local Operator Console navigation, readability, and
+accessibility. It adds static navigation groups, a skip link, section
+shortcuts, visible focus states, a safety blocker view, and safe command copy
+for local read-only checks. It adds no runtime subsystem, migration, API
+router, SDK resource, CLI command, frontend dependency, production auth, write
+control, activation control, execution control, provider-call control,
+external-call control, package installation, or production UI claim.
+
 ## Contract Registry and Interface Drift
 
 The Contract Registry is the local index of AION public and operator-facing

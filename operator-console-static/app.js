@@ -27,6 +27,22 @@
     settings_safety: "demo-data/settings-safety-view-model.json",
     audit_provenance: "demo-data/settings-safety-view-model.json"
   };
+  var VIEW_GROUPS = {
+    platform: ["overview", "readiness", "release_candidate"],
+    modules: ["module_lifecycle"],
+    providers: ["model_provider_hardening"],
+    actions: ["operator_actions"],
+    auth: ["overview"],
+    evidence: ["registry_integrity", "audit_provenance"],
+    safety: ["settings_safety", "incidents"]
+  };
+  var SAFE_COPY_COMMANDS = [
+    "./scripts/ui-release-gate.sh",
+    "./scripts/static-console-safety-check.sh",
+    "./scripts/operator-platform-regression.sh",
+    "./scripts/operator-platform-freeze-gate.sh",
+    "./scripts/docs-check.sh"
+  ];
   var MODULE_LIFECYCLE_DEMOS = {
     generic_knowledge_trail: "demo-data/generic-knowledge-trail.json",
     module_activation_blockers: "demo-data/module-activation-blockers.json",
@@ -66,13 +82,18 @@
   var state = {
     apiBase: apiConfig.apiBase,
     activeView: "overview",
+    activeGroup: "all",
     activeRole: "viewer",
     apiAllowed: apiConfig.apiAllowed
   };
 
   document.addEventListener("DOMContentLoaded", function () {
+    bindGroupTabs();
     bindTabs();
     bindRoleSwitcher();
+    bindSectionNavigation();
+    bindSafetyBlockers();
+    bindCommandCopy();
     loadLocalAuthPanels();
     loadRoleAccessPreview();
     loadLocalSessionPanels();
@@ -108,12 +129,22 @@
     var tabs = document.querySelectorAll(".view-tab");
     tabs.forEach(function (tab) {
       tab.addEventListener("click", function () {
-        tabs.forEach(function (item) {
-          item.classList.remove("is-active");
-        });
-        tab.classList.add("is-active");
-        state.activeView = tab.getAttribute("data-view") || "overview";
-        loadView(state.activeView);
+        setActiveView(tab.getAttribute("data-view") || "overview");
+      });
+      tab.addEventListener("keydown", function (event) {
+        moveTabFocus(event, ".view-tab:not([hidden])");
+      });
+    });
+  }
+
+  function bindGroupTabs() {
+    var tabs = document.querySelectorAll(".group-tab");
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        setActiveGroup(tab.getAttribute("data-group") || "all");
+      });
+      tab.addEventListener("keydown", function (event) {
+        moveTabFocus(event, ".group-tab");
       });
     });
   }
@@ -124,15 +155,161 @@
       tab.addEventListener("click", function () {
         tabs.forEach(function (item) {
           item.classList.remove("is-active");
+          item.setAttribute("aria-pressed", "false");
         });
         tab.classList.add("is-active");
+        tab.setAttribute("aria-pressed", "true");
         state.activeRole = tab.getAttribute("data-role") || "viewer";
         loadRoleAccessPreview();
+      });
+      tab.addEventListener("keydown", function (event) {
+        moveTabFocus(event, ".role-tab");
       });
     });
   }
 
+  function bindSectionNavigation() {
+    var links = document.querySelectorAll(".section-link[href]");
+    links.forEach(function (link) {
+      link.addEventListener("click", function () {
+        var target = document.querySelector(link.getAttribute("href"));
+        if (target && typeof target.focus === "function") {
+          window.setTimeout(function () {
+            target.focus();
+          }, 0);
+        }
+      });
+    });
+  }
+
+  function bindSafetyBlockers() {
+    var control = document.getElementById("safety-blockers-control");
+    if (!control) {
+      return;
+    }
+    control.addEventListener("click", function () {
+      setActiveGroup("safety", { keepView: true });
+      renderSafetyBlockerView();
+      var target = document.getElementById("forbidden-actions");
+      if (target && typeof target.focus === "function") {
+        target.focus();
+      }
+    });
+  }
+
+  function bindCommandCopy() {
+    var buttons = document.querySelectorAll(".copy-command");
+    buttons.forEach(function (button) {
+      var command = button.getAttribute("data-command") || "";
+      if (SAFE_COPY_COMMANDS.indexOf(command) === -1) {
+        button.disabled = true;
+        button.textContent = "Unavailable";
+        return;
+      }
+      button.addEventListener("click", function () {
+        copyLocalCommand(command);
+      });
+    });
+  }
+
+  function setActiveGroup(group, options) {
+    var nextGroup = VIEW_GROUPS[group] || group === "all" ? group : "all";
+    state.activeGroup = nextGroup;
+    document.querySelectorAll(".group-tab").forEach(function (tab) {
+      var active = tab.getAttribute("data-group") === nextGroup;
+      tab.classList.toggle("is-active", active);
+      tab.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+    filterViewsForGroup(nextGroup);
+    if (options && options.keepView) {
+      return;
+    }
+    var firstView = firstViewForGroup(nextGroup);
+    if (firstView && firstView !== state.activeView) {
+      setActiveView(firstView);
+    }
+  }
+
+  function filterViewsForGroup(group) {
+    document.querySelectorAll(".view-tab").forEach(function (tab) {
+      var tabGroup = tab.getAttribute("data-group") || "platform";
+      var visible = group === "all" || tabGroup === group;
+      tab.hidden = !visible;
+      tab.setAttribute("aria-hidden", visible ? "false" : "true");
+    });
+  }
+
+  function firstViewForGroup(group) {
+    if (group === "all") {
+      return state.activeView || "overview";
+    }
+    var views = VIEW_GROUPS[group] || [];
+    return views[0] || "overview";
+  }
+
+  function setActiveView(view) {
+    state.activeView = view;
+    document.querySelectorAll(".view-tab").forEach(function (item) {
+      var active = item.getAttribute("data-view") === view;
+      item.classList.toggle("is-active", active);
+      item.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+    loadView(state.activeView);
+  }
+
+  function moveTabFocus(event, selector) {
+    if (["ArrowDown", "ArrowRight", "ArrowUp", "ArrowLeft", "Home", "End"].indexOf(event.key) === -1) {
+      return;
+    }
+    var tabs = Array.prototype.slice.call(document.querySelectorAll(selector));
+    var current = tabs.indexOf(event.currentTarget);
+    if (current === -1 || !tabs.length) {
+      return;
+    }
+    event.preventDefault();
+    var next = current;
+    if (event.key === "Home") {
+      next = 0;
+    } else if (event.key === "End") {
+      next = tabs.length - 1;
+    } else if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+      next = (current + 1) % tabs.length;
+    } else {
+      next = (current - 1 + tabs.length) % tabs.length;
+    }
+    tabs[next].focus();
+  }
+
+  function copyLocalCommand(command) {
+    if (SAFE_COPY_COMMANDS.indexOf(command) === -1) {
+      setCopyStatus("Command copy blocked.");
+      return;
+    }
+    if (!navigator.clipboard || typeof navigator.clipboard.writeText !== "function") {
+      setCopyStatus("Clipboard unavailable. Use the visible local command text.");
+      return;
+    }
+    navigator.clipboard.writeText(command)
+      .then(function () {
+        setCopyStatus("Copied local check command.");
+      })
+      .catch(function () {
+        setCopyStatus("Clipboard unavailable. Use the visible local command text.");
+      });
+  }
+
+  function setCopyStatus(message) {
+    var status = document.getElementById("copy-status");
+    if (status) {
+      status.textContent = message;
+    }
+  }
+
   function loadView(view) {
+    if (view === "safety_blockers") {
+      renderSafetyBlockerView();
+      return;
+    }
     setStatus("Loading " + labelFor(view) + ".");
     if (!state.apiAllowed) {
       setStatus("Blocked non-local API. Loading offline demo data.");
@@ -413,6 +590,53 @@
           blockers: [{ message: "local data unavailable" }],
           warnings: [],
           refs: []
+        }
+      ],
+      forbidden_actions: forbiddenFallback()
+    });
+  }
+
+  function renderSafetyBlockerView() {
+    setStatus("Showing static safety blockers. No action was performed.");
+    renderView({
+      view: "safety_blockers",
+      title: "Safety Blockers",
+      status: "blocked",
+      summary: "Read-only no-go controls and forbidden descriptors are visible for review.",
+      sections: [
+        {
+          title: "Static Console Boundary",
+          status: "blocked",
+          severity: "release blocker",
+          summary: "Any write, activation, execution, provider call, login, credential input, or external call remains blocked.",
+          blockers: [
+            { message: "write controls remain absent" },
+            { message: "activation controls remain absent" },
+            { message: "execution controls remain absent" },
+            { message: "provider call controls remain absent" }
+          ],
+          warnings: [
+            "safe command copy is limited to local verification commands"
+          ],
+          refs: [
+            "docs/operator-console/static-console-safety-review.md",
+            "docs/operator-console/static-console-ux-refinement.md"
+          ]
+        },
+        {
+          title: "Auth and Session Boundary",
+          status: "blocked",
+          severity: "release blocker",
+          summary: "Production auth, login, protected material input, browser storage, and persistent sessions remain unavailable.",
+          blockers: [
+            { message: "production auth remains disabled" },
+            { message: "login and logout controls remain absent" },
+            { message: "browser storage remains unused" }
+          ],
+          warnings: [],
+          refs: [
+            "docs/operator-console/static-console-accessibility-checklist.md"
+          ]
         }
       ],
       forbidden_actions: forbiddenFallback()

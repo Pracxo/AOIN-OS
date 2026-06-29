@@ -1,0 +1,50 @@
+{
+  "artifact": "static_console_accessibility_check_result",
+  "task": "AION-103",
+  "expected_status": "passed",
+  "checks": [
+    {
+      "check": "skip_link",
+      "expected_status": "passed",
+      "evidence": "index.html exposes a skip link targeting console-main"
+    },
+    {
+      "check": "heading_structure",
+      "expected_status": "passed",
+      "evidence": "navigation rail and content panels keep explicit headings"
+    },
+    {
+      "check": "keyboard_navigation",
+      "expected_status": "passed",
+      "evidence": "group, view, role, safety, and copy controls are native keyboard controls"
+    },
+    {
+      "check": "focus_states",
+      "expected_status": "passed",
+      "evidence": "styles.css defines visible focus treatment"
+    },
+    {
+      "check": "contrast_and_status",
+      "expected_status": "passed",
+      "evidence": "status chips and cards use readable labels plus visual treatment"
+    },
+    {
+      "check": "responsive_layout",
+      "expected_status": "passed",
+      "evidence": "narrow viewport rules stack navigation and controls"
+    },
+    {
+      "check": "static_fallback",
+      "expected_status": "passed",
+      "evidence": "offline demo JSON and localhost API guard remain in app.js"
+    },
+    {
+      "check": "dependency_boundary",
+      "expected_status": "passed",
+      "evidence": "no package files, build tools, external scripts, or external CSS imports"
+    }
+  ],
+  "protected_output_absent": true,
+  "write_actions_present": false,
+  "external_calls_present": false
+}

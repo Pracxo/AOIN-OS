@@ -1,0 +1,60 @@
+{
+  "artifact": "static_console_navigation_map",
+  "task": "AION-103",
+  "status": "passed",
+  "groups": [
+    {
+      "name": "Platform",
+      "views": ["overview", "readiness", "release_candidate"],
+      "default_view": "overview"
+    },
+    {
+      "name": "Modules",
+      "views": ["module_lifecycle"],
+      "default_view": "module_lifecycle"
+    },
+    {
+      "name": "Providers",
+      "views": ["model_provider_hardening"],
+      "default_view": "model_provider_hardening"
+    },
+    {
+      "name": "Actions",
+      "views": ["operator_actions"],
+      "default_view": "operator_actions"
+    },
+    {
+      "name": "Auth and Sessions",
+      "views": ["overview"],
+      "panels": ["local_auth", "role_access", "local_session", "auth_runtime"],
+      "default_view": "overview"
+    },
+    {
+      "name": "Evidence",
+      "views": ["registry_integrity", "audit_provenance"],
+      "panels": ["command_cards"],
+      "default_view": "registry_integrity"
+    },
+    {
+      "name": "Safety",
+      "views": ["settings_safety", "incidents"],
+      "panels": ["forbidden_descriptors", "safety_blockers"],
+      "default_view": "settings_safety"
+    }
+  ],
+  "safe_copy_commands": [
+    "./scripts/ui-release-gate.sh",
+    "./scripts/static-console-safety-check.sh",
+    "./scripts/operator-platform-regression.sh",
+    "./scripts/operator-platform-freeze-gate.sh",
+    "./scripts/docs-check.sh"
+  ],
+  "forbidden_surface": {
+    "write_controls_present": false,
+    "activation_controls_present": false,
+    "execution_controls_present": false,
+    "provider_call_controls_present": false,
+    "login_controls_present": false,
+    "protected_material_storage_present": false
+  }
+}
