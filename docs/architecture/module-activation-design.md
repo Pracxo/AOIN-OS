@@ -144,3 +144,24 @@ policy coverage, rollback, and release discipline before code can run.
 5. Runtime adapter implementation behind AION contracts.
 6. Operator activation review.
 7. Release candidate and freeze gates for activation.
+
+## AION-105 Design Review Gate
+
+AION-105 freezes this design before implementation. The design review lives in
+`docs/modules/module-activation-design-review.md` and is backed by:
+
+- `docs/modules/plugin-boundary-evidence-pack.md`
+- `docs/modules/module-activation-pre-gate.md`
+- `docs/modules/code-loading-disabled-proof.md`
+- `docs/modules/runtime-registration-disabled-proof.md`
+- `docs/modules/capability-activation-disabled-proof.md`
+- `docs/modules/module-lifecycle-traceability-matrix.md`
+- `docs/modules/future-activation-implementation-prerequisites.md`
+- `docs/modules/module-activation-no-go-regression-pack.md`
+
+After AION-105, activation remains disabled. No plugin loader, package
+installer, dynamic import path, runtime registration path, active capability
+path, controlled execution path, or module write path is approved.
+
+Future activation work must pass `./scripts/module-activation-design-review.sh`
+and `./scripts/module-activation-no-go-regression.sh` before implementation.

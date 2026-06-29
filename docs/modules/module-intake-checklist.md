@@ -52,3 +52,19 @@ For `generic.knowledge_intelligence`, verify:
 - [ ] mock-output-example.json sets `synthetic=true`
 - [ ] runtime registration preview expectations keep `registration_allowed=false`
 - [ ] operator review states approval does not activate
+
+## AION-105 Pre-Gate Checklist
+
+Before any future activation implementation, verify:
+
+- [ ] `./scripts/module-activation-design-review.sh` passes
+- [ ] `./scripts/module-activation-no-go-regression.sh` passes
+- [ ] plugin boundary evidence pack is current
+- [ ] code loading disabled proof is current
+- [ ] runtime registration disabled proof is current
+- [ ] capability activation disabled proof is current
+- [ ] lifecycle traceability matrix is current
+- [ ] threat model, sandbox design, package trust model, rollback design,
+      operator approval model, audit/provenance design, and release gate are
+      approved by ADR
+- [ ] activation, execution, registration, and module writes remain disabled

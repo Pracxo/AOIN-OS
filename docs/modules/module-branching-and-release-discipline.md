@@ -47,3 +47,20 @@ review.
 
 The Generic Knowledge Intelligence pack is examples, docs, scripts, and tests
 only. It must not move the `aion-v0.1.0` tag.
+
+## AION-105 Branch Rule
+
+AION-105 runs on `phase/module-activation-design-review` as a review and
+evidence branch only. It may add docs, examples, scripts, and regression tests.
+It must not add migrations, API routes, SDK resources, CLI command
+implementations, package manager files, package installation, code loading,
+runtime registration, capability activation, controlled execution, module
+writes, or domain module logic.
+
+The branch must pass:
+
+```bash
+./scripts/module-activation-design-review.sh
+./scripts/module-activation-no-go-regression.sh
+./scripts/check.sh
+```

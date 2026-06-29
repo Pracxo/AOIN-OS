@@ -101,3 +101,17 @@ AION-090 represents the v0.1 path in a static local dashboard. The dashboard
 shows `activation_blocked_by_default` through visible blockers and safety
 labels. It does not create a transition to future activation and does not
 change the state machine.
+
+## AION-105 Review Gate
+
+AION-105 reviews this state machine without adding a new runtime transition.
+The expected terminal state remains `activation_blocked_by_default`.
+
+Future movement from `activation_blocked_by_default` to
+`future_activation_ready` requires the module activation pre-gate, a threat
+model, sandbox design, package trust model, rollback design, operator approval
+model, audit/provenance design, production auth dependency review, and release
+gate. The AION-105 no-go regression fails if code loading, package
+installation, dynamic route registration, runtime registration, capability
+activation, controlled execution, module writes, policy bypass, or audit bypass
+appears before that future review.
