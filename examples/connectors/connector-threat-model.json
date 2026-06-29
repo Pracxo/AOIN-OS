@@ -1,0 +1,107 @@
+{
+  "task": "AION-106",
+  "artifact": "connector_threat_model",
+  "status": "passed",
+  "contains_real_endpoints": false,
+  "contains_secrets": false,
+  "threats": [
+    {
+      "threat": "credential exfiltration",
+      "entry_point": "credential reference metadata",
+      "current_control": "credentials absent",
+      "future_required_control": "secret store with rotation revocation and audit",
+      "no_go_condition": "credential value appears in repo examples logs or static console"
+    },
+    {
+      "threat": "prompt injection through connector response",
+      "entry_point": "future connector ingress",
+      "current_control": "no live connector responses accepted",
+      "future_required_control": "prompt injection scan provenance and operator review",
+      "no_go_condition": "connector response trusted without scan"
+    },
+    {
+      "threat": "malicious connector metadata",
+      "entry_point": "connector manifest",
+      "current_control": "metadata-only registry",
+      "future_required_control": "manifest validation trust classification and policy review",
+      "no_go_condition": "metadata activates runtime behavior"
+    },
+    {
+      "threat": "overbroad scopes",
+      "entry_point": "connector declaration",
+      "current_control": "scope declarations are design only",
+      "future_required_control": "least privilege policy and operator review",
+      "no_go_condition": "broad scope accepted without review"
+    },
+    {
+      "threat": "SSRF-style egress abuse",
+      "entry_point": "future connector destination",
+      "current_control": "external calls disabled",
+      "future_required_control": "destination allowlist and egress preview",
+      "no_go_condition": "unreviewed destination accepted"
+    },
+    {
+      "threat": "data exfiltration",
+      "entry_point": "future connector payload",
+      "current_control": "external calls disabled",
+      "future_required_control": "payload classification redaction policy and approval",
+      "no_go_condition": "protected data leaves without preview"
+    },
+    {
+      "threat": "stale response trust",
+      "entry_point": "future connector result",
+      "current_control": "no live connector data",
+      "future_required_control": "freshness labels and stale-data controls",
+      "no_go_condition": "stale data treated as authoritative"
+    },
+    {
+      "threat": "rate limit exhaustion",
+      "entry_point": "future connector call",
+      "current_control": "no runtime call path",
+      "future_required_control": "rate-limit enforcement and audit",
+      "no_go_condition": "rate limit absent or bypassed"
+    },
+    {
+      "threat": "audit tampering",
+      "entry_point": "connector event records",
+      "current_control": "append-only audit posture",
+      "future_required_control": "tamper-evident provenance and review",
+      "no_go_condition": "connector record can bypass audit"
+    },
+    {
+      "threat": "policy bypass",
+      "entry_point": "connector action request",
+      "current_control": "no connector action runtime",
+      "future_required_control": "fail-closed policy gate",
+      "no_go_condition": "connector self-authorizes"
+    },
+    {
+      "threat": "action authorization bypass",
+      "entry_point": "connector action proposal",
+      "current_control": "dry-run action authorization remains separate",
+      "future_required_control": "dry-run action authorization integration",
+      "no_go_condition": "connector executes without action authorization"
+    },
+    {
+      "threat": "hidden external calls",
+      "entry_point": "future connector runtime",
+      "current_control": "runtime absent",
+      "future_required_control": "no-external-call gate and release check",
+      "no_go_condition": "network client calls outside gate"
+    },
+    {
+      "threat": "provider impersonation",
+      "entry_point": "connector metadata or responses",
+      "current_control": "no provider SDK or credential runtime",
+      "future_required_control": "provider identity validation and provenance",
+      "no_go_condition": "connector claims provider identity without validation"
+    },
+    {
+      "threat": "dependency confusion",
+      "entry_point": "future connector package or SDK",
+      "current_control": "no SDK dependency or package install",
+      "future_required_control": "package trust and signed dependency model",
+      "no_go_condition": "connector SDK dependency added before gate"
+    }
+  ]
+}

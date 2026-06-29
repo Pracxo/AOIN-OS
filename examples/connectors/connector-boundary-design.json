@@ -1,0 +1,28 @@
+{
+  "task": "AION-106",
+  "artifact": "connector_boundary_design",
+  "status": "passed",
+  "connector_runtime_enabled": false,
+  "external_calls_enabled": false,
+  "credentials_present": false,
+  "token_storage_enabled": false,
+  "dynamic_routes_enabled": false,
+  "activation_enabled": false,
+  "connector_sdk_dependency_present": false,
+  "provider_sdk_dependency_present": false,
+  "network_client_present": false,
+  "policy_bypass_enabled": false,
+  "audit_bypass_enabled": false,
+  "reviewed_areas": [
+    "trust boundary",
+    "credential boundary",
+    "egress guard",
+    "ingress guard",
+    "capability declaration",
+    "policy integration",
+    "action authorization integration",
+    "audit provenance",
+    "operator review",
+    "release gates"
+  ]
+}

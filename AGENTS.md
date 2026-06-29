@@ -454,3 +454,17 @@ Instructions for future Codex runs in this repository:
   SDKs, package files, build tooling, API routers, SDK resources, CLI command
   implementations, migrations, writes, activation, execution, external calls,
   privileged bypass, or runtime registration.
+- AION-105 module activation design review is evidence-only. It must pass
+  `./scripts/module-activation-design-review.sh` and
+  `./scripts/module-activation-no-go-regression.sh`, and it must not add a
+  plugin loader, package installer, dynamic module import, runtime route
+  registration, capability activation, controlled execution, module writes,
+  policy bypass, audit bypass, or privileged bypass.
+- AION-106 external connector boundary design is evidence-only. It must pass
+  `./scripts/connector-boundary-design-check.sh` and
+  `./scripts/connector-no-go-regression.sh`, and it must not add connector
+  runtime, network clients, connector SDKs, provider SDKs, credentials, token
+  storage, external calls, dynamic routes, production auth, login/logout,
+  package files, migrations, API routers, SDK resources, CLI command
+  implementations, activation, execution, policy bypass, audit bypass, or
+  privileged bypass.

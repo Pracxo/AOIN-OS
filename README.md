@@ -2319,6 +2319,11 @@ material must live outside AION Brain and is referenced through `external_ref`.
 The Connector Registry stores connector metadata only. Connector validation
 checks local metadata and secret references without making network calls.
 
+AION-106 adds the external connector boundary design before any connector
+runtime exists. Connectors are untrusted by default, external calls remain
+disabled, credentials and tokens remain absent, and future connector work must
+pass connector boundary and no-go regression gates.
+
 Sandbox endpoints:
 
 - `POST /brain/sandbox/profiles`
@@ -4083,4 +4088,35 @@ Developer command:
 ```bash
 ./scripts/auth-prototype-review.sh
 ./scripts/auth-no-go-regression.sh
+```
+
+### AION-106 External Connector Boundary Design
+
+AION-106 designs the external connector boundary before connector runtime
+exists. It adds connector trust, credential, egress, ingress, capability
+declaration, threat model, release gate, no-go regression, and future
+implementation prerequisite docs. It remains evidence-only: no connector
+runtime, network client, connector SDK, provider SDK, credential, token,
+external call, dynamic route, migration, API router, SDK resource, CLI command,
+activation, execution, or package file is added.
+
+Primary docs:
+
+- `docs/connectors/external-connector-boundary-design.md`
+- `docs/connectors/connector-trust-model.md`
+- `docs/connectors/connector-credential-boundary.md`
+- `docs/connectors/connector-egress-guard.md`
+- `docs/connectors/connector-ingress-guard.md`
+- `docs/connectors/connector-capability-declaration.md`
+- `docs/connectors/connector-threat-model.md`
+- `docs/connectors/connector-release-gates.md`
+- `docs/connectors/connector-no-go-regression-pack.md`
+- `docs/connectors/future-connector-implementation-prerequisites.md`
+- `docs/adr/0097-external-connector-boundary-design.md`
+
+Developer command:
+
+```bash
+./scripts/connector-boundary-design-check.sh
+./scripts/connector-no-go-regression.sh
 ```

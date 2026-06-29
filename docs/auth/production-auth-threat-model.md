@@ -22,3 +22,12 @@ Each threat has a control, required future test, and no-go condition.
 
 AION-098 implements none of these runtime controls. They are future release
 requirements.
+
+## Connector Relationship
+
+AION-106 does not add production auth or external identity runtime. Connector
+credential boundaries must depend on future approved auth and secret-store
+architecture before any external connector can access credentials or tokens.
+
+No OAuth, SAML, OIDC, LDAP, Active Directory, Passkey, WebAuthn, cloud IAM, or
+external identity runtime is added for connectors in AION-106.

@@ -1,0 +1,134 @@
+# External Connector Boundary Design
+
+## Purpose
+
+AION-106 defines the external connector boundary before any connector runtime
+exists. It records the trust, credential, egress, ingress, policy, action
+authorization, audit, and operator review requirements that future connector
+implementation work must satisfy.
+
+This is design and evidence only. It does not add connector runtime code,
+network clients, connector SDKs, provider SDKs, credentials, tokens, external
+calls, activation, tool execution, API routes, SDK resources, CLI commands, or
+migrations.
+
+## Current State
+
+AION currently stores connector metadata only. Connector validation is local and
+does not call external systems. Model provider hardening and prompt egress
+guards produce preview evidence only. Local auth, disabled auth runtime, module
+activation review, dry-run action authorization, the Operator Platform freeze
+gate, and the static console release gate all keep external calls disabled.
+
+## Why No Connector Runtime Exists Yet
+
+External connectors cross an untrusted integration boundary. AION needs a
+reviewed connector trust model, credential boundary, egress guard, ingress
+guard, policy model, action authorization integration, audit/provenance model,
+operator review path, sandbox posture, rollback plan, and release gate before
+any connector can call a remote system.
+
+## Connector Lifecycle Proposal
+
+Future connector work should follow this lifecycle:
+
+```text
+connector manifest
+-> metadata validation
+-> trust classification
+-> credential boundary review
+-> egress preview
+-> ingress guard review
+-> capability declaration review
+-> policy and action authorization review
+-> sandbox posture review
+-> operator review
+-> disabled prototype
+-> release gate
+-> future runtime activation review
+```
+
+The AION-106 terminal state is `runtime_absent`.
+
+## Trust Boundary
+
+Connectors are untrusted by default. Connector manifests, metadata, capability
+claims, returned data, status reports, rate-limit claims, and error payloads
+must be treated as untrusted until AION validates and normalizes them.
+
+## Credential Boundary
+
+No connector credential is stored in this repository, examples, docs, logs,
+static console data, browser storage, or test fixtures. Future credential work
+requires a secret-store design, rotation model, revocation model, audit model,
+and release gate.
+
+## Egress Boundary
+
+External calls remain disabled by default. Future egress must first produce a
+preview that records destination class, scope, payload classification, redaction
+state, policy decision, rate-limit posture, operator approval requirement, and
+provenance reference. Raw prompts, hidden reasoning, secrets, credentials,
+tokens, and protected values must never leave through connector egress.
+
+## Ingress Boundary
+
+Connector responses are untrusted. Future ingress must normalize responses,
+classify source trust, scan for secrets, scan for prompt injection, apply
+redaction, tag provenance, mark stale data, and route risky results to operator
+review before any Brain subsystem trusts the data.
+
+## Policy Integration
+
+Future connector actions must use generic policy actions and fail closed. A
+connector cannot self-authorize, create policy bypasses, grant scopes, or turn
+metadata claims into active permissions.
+
+## Action Authorization Integration
+
+Connector actions must pass dry-run action authorization before any future
+controlled behavior. Connector review cannot execute tools, action proposals,
+notifications, external calls, or handoffs.
+
+## Audit/Provenance Requirements
+
+Future connector records must include actor, workspace, connector reference,
+scope, policy decision, action authorization decision, egress preview hash,
+ingress normalization hash, credential reference metadata, operator decision,
+and redacted provenance references.
+
+## Operator Review Requirements
+
+Operators must be able to review connector purpose, declared capabilities,
+required scopes, credential needs, egress patterns, ingress risks, rate limits,
+policy requirements, sandbox requirements, audit requirements, and rollback
+plan before a future connector can be enabled.
+
+## Future Implementation Phases
+
+Future phases should remain disabled by default:
+
+1. Connector ADR and threat model.
+2. Credential store and secret reference design.
+3. Egress preview and ingress normalization prototype.
+4. Dry-run connector simulator.
+5. Disabled connector runtime prototype.
+6. Operator review and release gate.
+7. Future runtime enablement review.
+
+## No-Go Conditions
+
+- connector runtime added without gate
+- network call added
+- connector SDK dependency added
+- provider SDK dependency added
+- credentials added
+- token storage added
+- dynamic route added
+- connector activation enabled
+- external calls enabled by default
+- raw prompt egress allowed
+- hidden reasoning egress allowed
+- secret egress allowed
+- policy bypass
+- audit bypass

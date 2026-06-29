@@ -178,6 +178,15 @@ runs. They must not represent production provisioning, package installation,
 secret management, external provider setup, source mutation, tool execution,
 or domain-specific setup logic.
 
+AION-106 connector boundary contracts remain design-only. Future connector
+contracts must treat connector metadata, capability claims, egress previews,
+ingress responses, credential references, and returned data as untrusted until
+validated. Public Brain contracts must not expose connector SDK objects,
+provider SDK objects, HTTP client objects, raw headers, raw responses, raw
+prompts, hidden reasoning, credentials, tokens, or secrets. Connector runtime,
+external calls, credential storage, token storage, dynamic routes, activation,
+and execution remain absent.
+
 Reasoning contracts are Brain-owned. Model providers receive inference inputs
 only through `ModelGatewayAdapter` and return `ModelCallRecord`. Public APIs
 must not expose provider SDK objects, LangGraph objects, LiteLLM objects, OpenAI

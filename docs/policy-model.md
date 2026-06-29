@@ -224,6 +224,24 @@ Production authentication policies will be introduced outside Brain core later.
 The current policy vocabulary remains generic and does not include OAuth, SSO,
 tenant billing, or vertical-domain permission names.
 
+## External Connector Policy
+
+AION-106 adds connector boundary design only. No connector policy action grants
+runtime access, egress, ingress promotion, credential access, activation, or
+execution.
+
+Future connector operations must use generic policy actions, fail closed, and
+remain subordinate to dry-run action authorization, operator review,
+audit/provenance, prompt/output governance, secret handling, sandbox posture,
+and release gates. Connector metadata must not create policy actions
+dynamically, grant scopes, self-authorize, bypass policy, or turn capability
+claims into active permissions.
+
+Connector egress remains disabled by default. Future egress requires policy
+approval before any call preview can become a runtime call. Connector ingress
+must also be policy-aware before external data can be promoted into trusted
+Brain records.
+
 ## Evidence Policy
 
 Evidence access uses generic `evidence.*` actions. `evidence.read` and

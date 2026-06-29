@@ -61,6 +61,16 @@ Future activation must depend on a production auth architecture that is already
 approved and implemented. Local auth prototypes and mock claims are not enough
 to authorize real module activation.
 
+## Connector Boundary Dependency
+
+Future module activation that depends on external connectors must also pass the
+AION-106 connector boundary gate. Connector runtime, external calls, connector
+SDK dependencies, provider SDK dependencies, credentials, token storage,
+dynamic routes, and connector activation must remain disabled until a future
+connector ADR, threat model, credential boundary, egress guard, ingress guard,
+policy catalogue, dry-run simulator, disabled prototype, release gate, and
+rollback plan are approved.
+
 ## Release Gate Dependency
 
 Future activation must have release and freeze gates that fail closed on code

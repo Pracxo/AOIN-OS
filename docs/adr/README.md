@@ -106,3 +106,4 @@ closure decision in ADR 0072.
 - [0094: Static Console UX Refinement](0094-static-console-ux-refinement.md) - Defines dependency-free static console navigation, accessibility, and safe local command-copy rules.
 - [0095: Local Auth Prototype Review Gate](0095-local-auth-prototype-review-gate.md) - Defines the disabled/mock-only auth safety evidence gate before future implementation work.
 - [0096: Module Activation Design Review Gate](0096-module-activation-design-review-gate.md) - Defines the module/plugin activation design review, pre-gate, and no-go regression baseline before future implementation work.
+- [0097: External Connector Boundary Design](0097-external-connector-boundary-design.md) - Defines the untrusted connector boundary, credential boundary, egress/ingress guards, release gates, and no-go regression baseline before future connector runtime work.

@@ -1,0 +1,297 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT_DIR"
+
+required_docs=(
+  docs/connectors/external-connector-boundary-design.md
+  docs/connectors/connector-trust-model.md
+  docs/connectors/connector-credential-boundary.md
+  docs/connectors/connector-egress-guard.md
+  docs/connectors/connector-ingress-guard.md
+  docs/connectors/connector-capability-declaration.md
+  docs/connectors/connector-threat-model.md
+  docs/connectors/connector-release-gates.md
+  docs/connectors/connector-no-go-regression-pack.md
+  docs/connectors/future-connector-implementation-prerequisites.md
+  docs/adr/0097-external-connector-boundary-design.md
+)
+
+required_examples=(
+  examples/connectors/connector-boundary-design.json
+  examples/connectors/connector-trust-model.json
+  examples/connectors/connector-threat-model.json
+  examples/connectors/connector-release-gates.json
+  examples/connectors/connector-no-go-regression-result.json
+)
+
+for file in "${required_docs[@]}" "${required_examples[@]}"; do
+  test -f "$file" || {
+    echo "missing AION-106 connector boundary artifact: $file" >&2
+    exit 1
+  }
+done
+
+for file in \
+  package.json \
+  package-lock.json \
+  pnpm-lock.yaml \
+  yarn.lock \
+  bun.lockb; do
+  if find . -path './.git' -prune -o -type f -name "$file" -print | rg -n '.'; then
+    echo "package manager file is not allowed for AION-106: $file" >&2
+    exit 1
+  fi
+done
+
+if git diff --name-only --diff-filter=ACMRT HEAD -- infra/postgres/migrations services/brain-api/migrations | rg -n '.'; then
+  echo "AION-106 must not add or change migrations" >&2
+  exit 1
+fi
+
+if git ls-files --others --exclude-standard infra/postgres/migrations services/brain-api/migrations | rg -n '.'; then
+  echo "AION-106 must not add untracked migrations" >&2
+  exit 1
+fi
+
+if git diff --name-only --diff-filter=ACMRT HEAD -- services/brain-api/src/aion_brain/api | rg -n '.'; then
+  echo "AION-106 must not change API router files" >&2
+  exit 1
+fi
+
+if git ls-files --others --exclude-standard services/brain-api/src/aion_brain/api | rg -n '.'; then
+  echo "AION-106 must not add API router files" >&2
+  exit 1
+fi
+
+if git diff --name-only --diff-filter=ACMRT HEAD -- packages/aion-sdk-python/src/aion_sdk/resources packages/aion-sdk-python/src/aion_sdk/cli.py packages/aion-sdk-python/src/aion_sdk/cli | rg -n '.'; then
+  echo "AION-106 must not add SDK resources or CLI command implementations" >&2
+  exit 1
+fi
+
+if git ls-files --others --exclude-standard packages/aion-sdk-python/src/aion_sdk/resources packages/aion-sdk-python/src/aion_sdk/cli.py packages/aion-sdk-python/src/aion_sdk/cli | rg -n '.'; then
+  echo "AION-106 must not add untracked SDK resources or CLI command implementations" >&2
+  exit 1
+fi
+
+if rg -n 'https?://' "${required_docs[@]}" "${required_examples[@]}"; then
+  echo "external URL or endpoint found in AION-106 connector artifacts" >&2
+  exit 1
+fi
+
+if rg -n 'npm[[:space:]]+install|pnpm[[:space:]]+install|yarn[[:space:]]+add|bun[[:space:]]+add|pip[[:space:]]+install' \
+  "${required_docs[@]}" "${required_examples[@]}"; then
+  echo "package install instruction found in AION-106 connector artifacts" >&2
+  exit 1
+fi
+
+python3 - "$ROOT_DIR" <<'PY'
+from __future__ import annotations
+
+import json
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+root = Path(sys.argv[1])
+
+required_docs = [
+    Path("docs/connectors/external-connector-boundary-design.md"),
+    Path("docs/connectors/connector-trust-model.md"),
+    Path("docs/connectors/connector-credential-boundary.md"),
+    Path("docs/connectors/connector-egress-guard.md"),
+    Path("docs/connectors/connector-ingress-guard.md"),
+    Path("docs/connectors/connector-capability-declaration.md"),
+    Path("docs/connectors/connector-threat-model.md"),
+    Path("docs/connectors/connector-release-gates.md"),
+    Path("docs/connectors/connector-no-go-regression-pack.md"),
+    Path("docs/connectors/future-connector-implementation-prerequisites.md"),
+    Path("docs/adr/0097-external-connector-boundary-design.md"),
+]
+required_examples = [
+    Path("examples/connectors/connector-boundary-design.json"),
+    Path("examples/connectors/connector-trust-model.json"),
+    Path("examples/connectors/connector-threat-model.json"),
+    Path("examples/connectors/connector-release-gates.json"),
+    Path("examples/connectors/connector-no-go-regression-result.json"),
+]
+
+
+def run_git(args: list[str]) -> list[str]:
+    completed = subprocess.run(
+        ["git", *args],
+        cwd=root,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return [line.strip() for line in completed.stdout.splitlines() if line.strip()]
+
+
+changed = set(run_git(["diff", "--name-only", "--diff-filter=ACMRT", "HEAD", "--"]))
+changed.update(run_git(["ls-files", "--others", "--exclude-standard"]))
+
+allowed_review_prefixes = (
+    "docs/",
+    "examples/",
+    "services/brain-api/tests/",
+)
+allowed_review_files = {
+    "scripts/connector-boundary-design-check.sh",
+    "scripts/connector-no-go-regression.sh",
+}
+runtime_prefixes = (
+    "services/brain-api/src/",
+    "packages/aion-sdk-python/src/",
+    "operator-console-static/",
+)
+
+runtime_patterns = {
+    "connector runtime": re.compile(r"\bConnector(Runtime|Client|Adapter|Transport)\b|\bconnector[_\-\s]*runtime\b", re.I),
+    "network client": re.compile(r"\b(requests\.(get|post|put|patch|delete)|httpx\.(get|post|put|patch|delete)|aiohttp\.ClientSession|urllib\.request)\b", re.I),
+    "connector sdk dependency": re.compile(r"\b(connector[_\-\s]*sdk|provider[_\-\s]*sdk|external[_\-\s]*sdk)\b", re.I),
+    "credential storage": re.compile(r"\b(credential|secret|password)[_\-\s]*(store|storage|vault|value)\b", re.I),
+    "token storage": re.compile(r"\b(access[_\-\s]*token|refresh[_\-\s]*token|id[_\-\s]*token|token[_\-\s]*(store|storage|issuer))\b", re.I),
+    "dynamic route registration": re.compile(r"\b(add_api_route|include_router|dynamic[_\-\s]*(api[_\-\s]*)?route)\b", re.I),
+    "connector activation enabled": re.compile(r"\b(connector_runtime_enabled|connector_activation_enabled|activation_enabled)\s*[:=]\s*true\b", re.I),
+    "external calls enabled": re.compile(r"\b(external_calls_enabled|network_calls_enabled|egress_enabled)\s*[:=]\s*true\b", re.I),
+    "raw prompt egress": re.compile(r"\braw_prompt[_\-\s]*egress[_\-\s]*allowed\s*[:=]\s*true\b", re.I),
+    "hidden reasoning egress": re.compile(r"\bhidden_reasoning[_\-\s]*egress[_\-\s]*allowed\s*[:=]\s*true\b", re.I),
+    "secret egress": re.compile(r"\bsecret[_\-\s]*egress[_\-\s]*allowed\s*[:=]\s*true\b", re.I),
+    "policy bypass": re.compile(r"\bpolicy_bypass(_enabled)?\s*[:=]\s*true\b", re.I),
+    "audit bypass": re.compile(r"\baudit_bypass(_enabled)?\s*[:=]\s*true\b", re.I),
+}
+
+for relative in sorted(changed):
+    path = root / relative
+    if not path.is_file():
+        continue
+    if relative in allowed_review_files or relative.startswith(allowed_review_prefixes):
+        continue
+    if not relative.startswith(runtime_prefixes):
+        continue
+    text = path.read_text(errors="ignore")
+    for label, pattern in runtime_patterns.items():
+        if pattern.search(text):
+            raise SystemExit(f"connector runtime pattern found in {relative}: {label}")
+
+for doc in required_docs:
+    text = (root / doc).read_text().lower()
+    if not any(marker in text for marker in ("disabled", "no-go", "absent", "untrusted", "runtime")):
+        raise SystemExit(f"AION-106 doc must state disabled/no-go/absent/untrusted posture: {doc}")
+
+examples = {path.name: json.loads((root / path).read_text()) for path in required_examples}
+serialized = json.dumps(examples, sort_keys=True).lower()
+for marker in (
+    "sk-",
+    "ghp_",
+    "xoxb-",
+    "-----begin private key-----",
+    "bearer ",
+    "basic ",
+    "api_key",
+    "private_key",
+    "access_token",
+    "refresh_token",
+    "id_token",
+    "client_secret",
+    "raw_prompt",
+    "hidden_reasoning",
+    "chain_of_thought",
+    "http://",
+    "https://",
+):
+    if marker in serialized:
+        raise SystemExit(f"blocked marker found in AION-106 examples: {marker}")
+
+false_keys = {
+    "connector_runtime_enabled",
+    "external_calls_enabled",
+    "credentials_present",
+    "token_storage_enabled",
+    "dynamic_routes_enabled",
+    "activation_enabled",
+    "connector_sdk_dependency_present",
+    "provider_sdk_dependency_present",
+    "network_client_present",
+    "policy_bypass_enabled",
+    "audit_bypass_enabled",
+    "contains_real_endpoints",
+    "contains_secrets",
+}
+
+
+def assert_false_keys(value: object, context: str) -> None:
+    if isinstance(value, dict):
+        for key, nested in value.items():
+            if key in false_keys and nested is not False:
+                raise SystemExit(f"{context}.{key} must be false")
+            assert_false_keys(nested, f"{context}.{key}")
+    elif isinstance(value, list):
+        for index, item in enumerate(value):
+            assert_false_keys(item, f"{context}[{index}]")
+
+
+for name, payload in examples.items():
+    if payload.get("status") != "passed":
+        raise SystemExit(f"{name}.status must be passed")
+    assert_false_keys(payload, name)
+
+trust = examples["connector-trust-model.json"]
+for key in (
+    "untrusted_by_default",
+    "metadata_untrusted",
+    "returned_data_untrusted",
+    "capability_claims_require_validation",
+    "provenance_required",
+    "policy_required",
+    "audit_required",
+    "redaction_required",
+):
+    if trust.get(key) is not True:
+        raise SystemExit(f"connector trust model must set {key}=true")
+
+threats = examples["connector-threat-model.json"].get("threats", [])
+required_threats = {
+    "credential exfiltration",
+    "prompt injection through connector response",
+    "malicious connector metadata",
+    "overbroad scopes",
+    "SSRF-style egress abuse",
+    "data exfiltration",
+    "stale response trust",
+    "rate limit exhaustion",
+    "audit tampering",
+    "policy bypass",
+    "action authorization bypass",
+    "hidden external calls",
+    "provider impersonation",
+    "dependency confusion",
+}
+threat_names = {item.get("threat") for item in threats}
+missing = required_threats - threat_names
+if missing:
+    raise SystemExit(f"connector threat model missing threats: {sorted(missing)}")
+for item in threats:
+    for key in ("threat", "entry_point", "current_control", "future_required_control", "no_go_condition"):
+        if not item.get(key):
+            raise SystemExit(f"connector threat row missing {key}: {item}")
+
+no_go = examples["connector-no-go-regression-result.json"]
+for item in no_go.get("checks", []):
+    if item.get("expected_status") != "passed" or item.get("present") is not False:
+        raise SystemExit(f"connector no-go row must be passed and absent: {item}")
+
+print("AION-106 connector no-go JSON and changed-file checks PASS")
+PY
+
+echo "Connector no-go regression result:"
+echo "- connector_runtime: absent"
+echo "- external_calls: absent"
+echo "- credentials_tokens: absent"
+echo "- connector_sdk_dependencies: absent"
+echo "- dynamic_routes: absent"
+echo "- policy_audit_bypass: absent"
+echo "Connector no-go regression PASS"
