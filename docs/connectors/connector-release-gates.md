@@ -43,3 +43,10 @@ be bypassed.
 The disabled connector prototype adds `scripts/connector-runtime-check.sh` as a
 local release-gate input. Passing the gate proves runtime, external calls,
 credentials, token storage, activation, and route registration remain disabled.
+
+## AION-109 Review Gate Relationship
+
+AION-109 adds `scripts/connector-runtime-review.sh` and
+`scripts/connector-runtime-no-external-call-regression.sh` as release-gate
+inputs. Future connector tasks must keep these gates green before any runtime
+implementation is considered.

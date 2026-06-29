@@ -45,3 +45,11 @@ The no-go regression pack now allows the scoped AION-108 disabled connector
 prototype files while continuing to block network clients, external service
 calls, connector/provider SDKs, credentials, token storage, route registration,
 activation, and execution paths.
+
+## AION-109 Review Gate Relationship
+
+AION-109 adds the connector runtime review no-go pack and a no-external-call
+regression script. The pack remains release blocking for runtime enablement,
+external calls, network client usage, SDK dependencies, credential storage,
+token storage, dynamic routes, activation, raw prompt egress, hidden reasoning
+egress, secret egress, policy bypass, and audit bypass.

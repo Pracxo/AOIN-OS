@@ -1,0 +1,101 @@
+{
+  "synthetic": true,
+  "status": "passed",
+  "evidence_pack_id": "no-external-call-evidence-pack-aion-109",
+  "external_calls_found": false,
+  "network_clients_present": false,
+  "external_destination_present": false,
+  "evidence": [
+    {
+      "area": "connector boundary design",
+      "script": "./scripts/connector-boundary-design-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "Boundary remains untrusted and disabled."
+    },
+    {
+      "area": "connector trust model",
+      "script": "./scripts/connector-boundary-design-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "Connector data remains untrusted by default."
+    },
+    {
+      "area": "credential boundary",
+      "script": "./scripts/connector-runtime-no-external-call-regression.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "Credential storage remains absent."
+    },
+    {
+      "area": "egress guard",
+      "script": "./scripts/connector-runtime-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "Egress remains blocked."
+    },
+    {
+      "area": "ingress guard",
+      "script": "./scripts/connector-runtime-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "Ingress remains untrusted and redacted."
+    },
+    {
+      "area": "disabled connector runtime gate",
+      "script": "./scripts/connector-runtime-review.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "Review gate remains passed."
+    },
+    {
+      "area": "mock manifest validation",
+      "script": "./scripts/connector-runtime-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "Mock manifest remains local and preview-only."
+    },
+    {
+      "area": "egress preview",
+      "script": "./scripts/connector-runtime-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "Preview remains blocked."
+    },
+    {
+      "area": "ingress preview",
+      "script": "./scripts/connector-runtime-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "Preview remains untrusted."
+    },
+    {
+      "area": "connector runtime audit",
+      "script": "./scripts/connector-runtime-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "Audit proof remains disabled."
+    },
+    {
+      "area": "static console connector panel",
+      "script": "./scripts/ui-release-gate.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "Static panel remains read-only."
+    },
+    {
+      "area": "policy checks",
+      "script": "./scripts/connector-runtime-review.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "Policy review remains required before implementation."
+    },
+    {
+      "area": "boundary checks",
+      "script": "./scripts/boundary-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "Architecture boundary checks remain passed."
+    }
+  ]
+}

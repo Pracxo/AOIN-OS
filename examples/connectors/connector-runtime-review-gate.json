@@ -1,0 +1,23 @@
+{
+  "synthetic": true,
+  "status": "passed",
+  "review_id": "connector-runtime-review-gate-aion-109",
+  "connector_runtime_enabled": false,
+  "external_calls_enabled": false,
+  "credentials_enabled": false,
+  "token_storage_enabled": false,
+  "activation_enabled": false,
+  "route_registration_enabled": false,
+  "network_clients_present": false,
+  "connector_sdk_dependency_present": false,
+  "provider_sdk_dependency_present": false,
+  "api_router_added": false,
+  "migration_added": false,
+  "package_files_present": false,
+  "review_decision": "disabled_runtime_baseline_frozen",
+  "evidence_refs": [
+    "docs/connectors/connector-runtime-review-gate.md",
+    "docs/connectors/connector-runtime-disabled-proof.md",
+    "docs/adr/0100-connector-runtime-review-gate.md"
+  ]
+}

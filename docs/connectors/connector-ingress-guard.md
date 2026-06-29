@@ -67,3 +67,9 @@ data is promoted.
 AION-108 adds a mock ingress preview that always marks connector data
 `trusted=false`, requires provenance, applies redaction, and requires prompt
 injection scanning before future review.
+
+## AION-109 Review Gate Relationship
+
+AION-109 adds egress/ingress traceability evidence. Ingress remains untrusted,
+redacted, provenance-bound, and preview-only until a future implementation gate
+approves a stronger ingress design.

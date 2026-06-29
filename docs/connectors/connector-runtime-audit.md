@@ -21,3 +21,9 @@ The audit checks:
 - static console has no connector credential input or call surface
 
 Passed audits require every safety boolean to be true.
+
+## AION-109 Review Gate Relationship
+
+AION-109 treats connector runtime audit as review evidence. Audit remains
+proof-only and does not authorize runtime activation, external calls,
+credential storage, token storage, or route registration.

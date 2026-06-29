@@ -1997,3 +1997,11 @@ audit results.
 The prototype does not perform connector runtime behavior. It does not add
 network clients, connector/provider SDKs, external service calls, credentials,
 token storage, dynamic routes, activation, code loading, or tool execution.
+
+## AION-109 Connector Runtime Review Gate
+
+AION-109 freezes the disabled connector runtime path as an evidence-only review
+gate. The architecture remains unchanged at runtime: connector runtime,
+external calls, credentials, token storage, route registration, activation,
+SDK/CLI expansion, migrations, and domain module logic remain absent for this
+task.

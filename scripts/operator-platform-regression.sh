@@ -22,8 +22,11 @@ checks=(
   ./scripts/final-docs-audit.sh
   ./scripts/verify-no-domain-drift.sh
   ./scripts/boundary-check.sh
-  ./scripts/check.sh
 )
+
+if [[ "${AION_OPERATOR_PLATFORM_SKIP_FULL_CHECK:-0}" != "1" ]]; then
+  checks+=(./scripts/check.sh)
+fi
 
 for check in "${checks[@]}"; do
   "$check"
@@ -229,6 +232,11 @@ Operator platform regression summary:
 - auth_safety_regression: passed
 - operator_action_regression: passed
 - module_provider_dashboard_regression: passed
-- full_repository_check: passed
-Operator platform regression PASS
 SUMMARY
+
+if [[ "${AION_OPERATOR_PLATFORM_SKIP_FULL_CHECK:-0}" == "1" ]]; then
+  echo "- full_repository_check: deferred_to_outer_gate"
+else
+  echo "- full_repository_check: passed"
+fi
+echo "Operator platform regression PASS"

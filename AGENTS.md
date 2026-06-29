@@ -481,3 +481,13 @@ Instructions for future Codex runs in this repository:
   sessions, package files, migrations, API routers, SDK resources, CLI command
   implementations, activation, policy bypass, audit bypass, approval bypass,
   hard delete, or privileged bypass.
+- AION-109 connector runtime review is evidence-only. It must pass
+  `./scripts/connector-runtime-review.sh` and
+  `./scripts/connector-runtime-no-external-call-regression.sh`, and it must not
+  add connector runtime implementation, external calls, network clients,
+  connector/provider SDKs, credentials, token storage, OAuth/OIDC/SAML runtime,
+  production auth, external model calls, notifications, module activation,
+  capability activation, code loading, runtime registration, tool execution,
+  action proposal execution, write paths, hard delete, frontend dependencies,
+  package files, lockfiles, migrations, API routers, SDK resources, CLI command
+  implementations, runtime config defaults, or domain module logic.

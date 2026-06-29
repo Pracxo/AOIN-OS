@@ -23,3 +23,11 @@ AION-108 remains blocked if any of these are introduced:
 
 These no-go conditions are enforced by local tests and
 `scripts/connector-runtime-check.sh`.
+
+## AION-109 Review Gate Relationship
+
+AION-109 extends the no-go posture with
+`scripts/connector-runtime-no-external-call-regression.sh`. The new regression
+keeps runtime source, API routers, SDK/CLI source, migrations, package files,
+external call paths, credentials, tokens, dynamic routes, activation, policy
+bypass, and audit bypass blocked for the review task.

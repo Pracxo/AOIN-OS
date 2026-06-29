@@ -4165,3 +4165,19 @@ Developer command:
 ./scripts/operator-action-write-path-design-check.sh
 ./scripts/operator-action-write-path-no-go-regression.sh
 ```
+
+## AION-109 Connector Runtime Review Gate
+
+AION-109 reviews and freezes the disabled connector runtime path before any
+future connector implementation. It adds the connector runtime review gate,
+no-external-call evidence pack, credential/token absence proof,
+egress/ingress traceability matrix, disabled runtime proof,
+pre-implementation gate, no-go review pack, future implementation plan, ADR
+0100, and local review scripts.
+
+Developer command:
+
+```bash
+./scripts/connector-runtime-review.sh
+./scripts/connector-runtime-no-external-call-regression.sh
+```

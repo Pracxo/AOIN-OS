@@ -1,0 +1,54 @@
+{
+  "synthetic": true,
+  "status": "passed",
+  "matrix_id": "connector-egress-ingress-traceability-aion-109",
+  "no_external_call": true,
+  "external_calls_found": false,
+  "lifecycle_stages": [
+    {
+      "stage": "manifest",
+      "evidence_ref": "docs/connectors/mock-connector-manifest.md",
+      "blocker": "unsafe declarations blocked",
+      "external_call": false
+    },
+    {
+      "stage": "egress preview",
+      "evidence_ref": "docs/connectors/connector-egress-preview.md",
+      "blocker": "egress blocked",
+      "external_call": false
+    },
+    {
+      "stage": "ingress preview",
+      "evidence_ref": "docs/connectors/connector-ingress-preview.md",
+      "blocker": "ingress untrusted",
+      "external_call": false
+    },
+    {
+      "stage": "audit",
+      "evidence_ref": "docs/connectors/connector-runtime-audit.md",
+      "blocker": "disabled proof required",
+      "external_call": false
+    },
+    {
+      "stage": "review gate",
+      "evidence_ref": "docs/connectors/connector-runtime-review-gate.md",
+      "blocker": "pre-implementation review required",
+      "external_call": false
+    }
+  ],
+  "evidence_refs": [
+    "docs/connectors/connector-trust-model.md",
+    "docs/connectors/connector-credential-boundary.md",
+    "docs/connectors/connector-egress-guard.md",
+    "docs/connectors/connector-ingress-guard.md",
+    "docs/connectors/connector-runtime-review-no-go-pack.md"
+  ],
+  "blockers": [
+    "runtime disabled",
+    "external calls disabled",
+    "credential storage absent",
+    "token storage absent",
+    "activation disabled",
+    "route registration disabled"
+  ]
+}

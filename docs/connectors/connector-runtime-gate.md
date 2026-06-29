@@ -24,3 +24,9 @@ It also emits disabled-runtime blockers and visual telemetry event
 The gate uses policy action `connector_runtime.status.read`. Preview and audit
 actions use scoped policy actions but do not grant execution, write paths,
 external calls, or activation.
+
+## AION-109 Review Gate Relationship
+
+AION-109 adds a higher-level review gate around this runtime gate. Passing the
+review gate proves disabled flags, no-external-call evidence, credential/token
+absence proof, and pre-implementation blockers remain intact.

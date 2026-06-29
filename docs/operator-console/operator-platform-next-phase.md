@@ -78,3 +78,9 @@ The next-phase operator platform includes a static disabled connector runtime
 panel. It displays hard-off status, blockers, and mock boundary preview data
 without connector registration forms, credential inputs, external URL inputs,
 connect controls, call controls, or activation controls.
+
+## AION-109 Connector Review Gate
+
+The next connector phase is review-only. The operator platform must treat the
+AION-109 connector runtime review gate as a blocker before any future connector
+implementation, simulator hardening, or release-gate planning proceeds.

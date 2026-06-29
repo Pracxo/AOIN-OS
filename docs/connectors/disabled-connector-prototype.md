@@ -34,3 +34,9 @@ preview, and audit evidence.
 
 These endpoints produce preview evidence only. They never create connector
 runtime state or perform external egress.
+
+## AION-109 Review Gate Relationship
+
+AION-109 reviews this disabled prototype and freezes it as the current safe
+state. The prototype remains preview-only and non-executing; future work must
+pass the review gate before changing runtime behavior.

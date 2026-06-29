@@ -1,0 +1,73 @@
+{
+  "synthetic": true,
+  "status": "passed",
+  "result_id": "connector-runtime-review-no-go-aion-109",
+  "external_calls_found": false,
+  "checks": [
+    {
+      "check": "connector runtime enabled",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "external call path added",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "network client connector runtime usage",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "connector SDK dependency added",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "credentials stored",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "tokens stored",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "dynamic route registration added",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "connector activation enabled",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "source prompt egress allowed",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "private reasoning egress allowed",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "secret egress allowed",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "policy bypass",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "audit bypass",
+      "expected_status": "passed",
+      "present": false
+    }
+  ]
+}

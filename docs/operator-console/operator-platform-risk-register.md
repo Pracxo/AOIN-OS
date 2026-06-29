@@ -65,3 +65,11 @@ The connector runtime risk remains blocked by default. AION-108 adds local
 evidence that runtime, external calls, credentials, token storage, activation,
 and route registration are disabled, but it does not reduce the future review
 required before connector implementation.
+
+## AION-109 Connector Review Risk
+
+AION-109 reduces drift risk by adding explicit no-external-call evidence,
+credential/token absence proof, egress/ingress traceability, and a
+pre-implementation freeze. The residual risk remains future implementation
+scope creep; the mitigation is to keep the review gate and no-go regression
+release blocking.
