@@ -4029,3 +4029,30 @@ Developer command:
 ```bash
 ./scripts/static-console-ux-check.sh
 ```
+
+### AION-104 Local Auth Prototype Review Gate
+
+AION-104 reviews and freezes the local auth and disabled auth prototype path
+before future auth implementation work. It adds auth safety evidence, disabled
+runtime proof, traceability, no-go regression evidence, and a
+pre-implementation gate. It remains evidence-only: no production auth,
+login/logout, credentials, tokens, cookies, persisted sessions, external
+identity runtime, provider SDK, migration, API router, package file, write
+path, activation path, execution path, or external call is added.
+
+Primary docs:
+
+- `docs/auth/local-auth-prototype-review.md`
+- `docs/auth/auth-safety-evidence-pack.md`
+- `docs/auth/auth-runtime-disabled-proof.md`
+- `docs/auth/auth-traceability-matrix.md`
+- `docs/auth/auth-no-go-regression-pack.md`
+- `docs/auth/pre-implementation-auth-gate.md`
+- `docs/adr/0095-local-auth-prototype-review-gate.md`
+
+Developer command:
+
+```bash
+./scripts/auth-prototype-review.sh
+./scripts/auth-no-go-regression.sh
+```

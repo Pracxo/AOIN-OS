@@ -119,3 +119,11 @@ contexts, role-aware console filtering, status, and audit checks.
 It remains non-production: no login endpoint, no credential storage, no session
 storage, no external identity provider integration, no write grant, no
 execution grant, and no activation grant.
+## AION-104 Prototype Review Gate
+
+AION-104 keeps the local auth design disabled and evidence-only. Future auth
+work must pass `./scripts/auth-prototype-review.sh` and
+`./scripts/auth-no-go-regression.sh` before changing implementation boundaries.
+The review adds no production auth, login/logout, credentials, tokens, cookies,
+persisted sessions, external identity provider runtime, provider SDK, migration,
+API router, write path, activation path, execution path, or privileged bypass.

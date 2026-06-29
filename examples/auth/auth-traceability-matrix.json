@@ -1,0 +1,72 @@
+{
+  "artifact": "auth_traceability_matrix",
+  "task": "AION-104",
+  "status": "passed",
+  "rows": [
+    {
+      "surface": "role",
+      "trace": "visibility filter only",
+      "script": "./scripts/role-filter-check.sh",
+      "write_allowed": false,
+      "execute_allowed": false,
+      "activation_allowed": false,
+      "external_calls_allowed": false
+    },
+    {
+      "surface": "session",
+      "trace": "read-only local preview",
+      "script": "./scripts/local-session-check.sh",
+      "write_allowed": false,
+      "execute_allowed": false,
+      "activation_allowed": false,
+      "external_calls_allowed": false
+    },
+    {
+      "surface": "action authorization",
+      "trace": "dry-run preview and review only",
+      "script": "./scripts/action-authorization-check.sh",
+      "write_allowed": false,
+      "execute_allowed": false,
+      "activation_allowed": false,
+      "external_calls_allowed": false
+    },
+    {
+      "surface": "policy",
+      "trace": "policy remains authoritative",
+      "script": "./scripts/auth-design-check.sh",
+      "write_allowed": false,
+      "execute_allowed": false,
+      "activation_allowed": false,
+      "external_calls_allowed": false
+    },
+    {
+      "surface": "static console",
+      "trace": "read-only panels and forbidden descriptors",
+      "script": "./scripts/static-console-safety-check.sh",
+      "write_allowed": false,
+      "execute_allowed": false,
+      "activation_allowed": false,
+      "external_calls_allowed": false
+    },
+    {
+      "surface": "audit",
+      "trace": "local evidence and review records only",
+      "script": "./scripts/auth-prototype-review.sh",
+      "write_allowed": false,
+      "execute_allowed": false,
+      "activation_allowed": false,
+      "external_calls_allowed": false
+    },
+    {
+      "surface": "forbidden action",
+      "trace": "descriptors remain visible and disabled",
+      "script": "./scripts/role-filter-check.sh",
+      "write_allowed": false,
+      "execute_allowed": false,
+      "activation_allowed": false,
+      "external_calls_allowed": false
+    }
+  ],
+  "production_auth_enabled": false,
+  "runtime_auth_added": false
+}

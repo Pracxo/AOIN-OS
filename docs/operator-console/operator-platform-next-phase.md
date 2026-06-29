@@ -20,8 +20,11 @@ external call.
 
 Recommended next phase:
 
-- AION-103 static console UX refinement, still no framework.
-- AION-104 local auth disabled prototype review.
+- AION-103 static console UX refinement, still no framework. Status:
+  implemented.
+- AION-104 local auth disabled prototype review. Status: implemented as
+  evidence, no-go regression, disabled runtime proof, and pre-implementation
+  gate.
 - AION-105 module/plugin activation design review.
 - AION-106 external connector boundary design.
 - AION-107 operator action write-path architecture, design only.
@@ -41,6 +44,8 @@ Every next-phase branch should start by running:
 ```bash
 ./scripts/operator-platform-regression.sh
 ./scripts/operator-platform-freeze-gate.sh
+./scripts/auth-prototype-review.sh
+./scripts/auth-no-go-regression.sh
 ```
 
 The regression and freeze gates must pass before any future UI, auth,

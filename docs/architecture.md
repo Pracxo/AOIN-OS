@@ -227,6 +227,18 @@ router, SDK resource, CLI command, frontend dependency, production auth, write
 control, activation control, execution control, provider-call control,
 external-call control, package installation, or production UI claim.
 
+## Local Auth Prototype Review Gate
+
+AION-104 freezes the local auth and disabled auth prototype path before any
+future implementation phase. It adds auth safety evidence, disabled runtime
+proof, traceability, no-go regression evidence, and a pre-implementation gate.
+It adds no runtime subsystem, migration, API router, SDK resource, CLI command
+implementation, frontend dependency, production auth, login/logout behavior,
+credential store, token issuance, cookie issuance, session persistence,
+external identity provider runtime, provider SDK, write control, activation
+control, execution control, external-call control, package installation, or
+privileged bypass.
+
 ## Contract Registry and Interface Drift
 
 The Contract Registry is the local index of AION public and operator-facing

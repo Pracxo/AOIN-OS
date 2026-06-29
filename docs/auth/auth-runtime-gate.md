@@ -22,3 +22,10 @@ create persistent state.
 If a future task attempts to turn any production auth flag on, the contract
 validation and diagnostics are expected to fail closed before the runtime can be
 treated as ready.
+## AION-104 Prototype Review Gate
+
+AION-104 adds `./scripts/auth-prototype-review.sh` and
+`./scripts/auth-no-go-regression.sh` as pre-implementation auth gates. These
+scripts compose the existing local auth, local session, role, action
+authorization, production auth architecture, disabled auth runtime, static
+console, docs, and no-go checks before any future auth implementation work.

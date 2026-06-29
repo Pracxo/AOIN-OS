@@ -439,3 +439,11 @@ Instructions for future Codex runs in this repository:
   credential controls, token or cookie issuance, session persistence, writes,
   activation, execution, provider-call controls, external-call controls, or
   runtime registration.
+- AION-104 local auth prototype review is evidence-only. It must pass
+  `./scripts/auth-prototype-review.sh` and
+  `./scripts/auth-no-go-regression.sh`, and it must not add production auth,
+  auth runtime enablement, login/logout, credentials, token issuance, cookie
+  issuance, session persistence, external identity provider runtime, provider
+  SDKs, package files, build tooling, API routers, SDK resources, CLI command
+  implementations, migrations, writes, activation, execution, external calls,
+  privileged bypass, or runtime registration.

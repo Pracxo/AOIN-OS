@@ -32,3 +32,9 @@ Dry-run action authorization can consume local session context metadata. A
 denied, invalid, non-read-only, write-capable, execution-capable,
 activation-capable, or external-call-capable session context blocks the
 authorization decision.
+## AION-104 Prototype Review Gate
+
+AION-104 keeps local sessions as read-only previews. The review gate records
+that local session context remains synthetic and cannot persist browser state,
+issue tokens or cookies, store credentials, authenticate users, grant writes,
+grant activation, grant execution, or call external identity providers.

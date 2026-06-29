@@ -89,3 +89,10 @@ Future production or write authorization must extend the AION-097 dry-run model
 instead of bypassing it. Real identity, session, and policy decisions must keep
 denied decisions visible and must not weaken no-execution, no-activation,
 no-external-call, and no-credential-storage guarantees.
+## AION-104 Pre-Implementation Gate
+
+Future auth implementation work must start from
+`docs/auth/pre-implementation-auth-gate.md`. AION-104 requires the auth
+prototype review and auth no-go regression scripts to pass before any later ADR
+can approve runtime auth, protected material lifecycle, provider integration,
+browser session lifecycle, migration design, or rollback implementation.
