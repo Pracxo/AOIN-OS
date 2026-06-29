@@ -3,6 +3,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
+source "$ROOT_DIR/scripts/lib/portable-search.sh"
 
 simulator_source=(
   services/brain-api/src/aion_brain/contracts/connector_simulator.py
