@@ -107,3 +107,14 @@ The UI release gate does not authorize any operator action. It is a local static
 checkpoint that proves no write, activation, execution, provider-call, login,
 credential, token, cookie, session, or external-call control has been added to
 the static console.
+
+## AION-107 Write-Path Architecture Boundary
+
+AION-107 designs the future write path but does not implement it. Operator
+action requests, previews, blockers, and reviews remain dry-run evidence only.
+Approval cannot execute, approval cannot bypass policy, and the current
+lifecycle stops at previewed/reviewed/blocked.
+
+The write-path design is recorded under `docs/operator-actions/` and is guarded
+by `./scripts/operator-action-write-path-design-check.sh` plus
+`./scripts/operator-action-write-path-no-go-regression.sh`.

@@ -107,3 +107,4 @@ closure decision in ADR 0072.
 - [0095: Local Auth Prototype Review Gate](0095-local-auth-prototype-review-gate.md) - Defines the disabled/mock-only auth safety evidence gate before future implementation work.
 - [0096: Module Activation Design Review Gate](0096-module-activation-design-review-gate.md) - Defines the module/plugin activation design review, pre-gate, and no-go regression baseline before future implementation work.
 - [0097: External Connector Boundary Design](0097-external-connector-boundary-design.md) - Defines the untrusted connector boundary, credential boundary, egress/ingress guards, release gates, and no-go regression baseline before future connector runtime work.
+- [0098: Operator Action Write-Path Architecture](0098-operator-action-write-path-architecture.md) - Defines the design-only future write path, approval boundary, execution boundary, rollback model, release gates, and no-go regression baseline before write execution work.

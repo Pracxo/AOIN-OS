@@ -17,6 +17,7 @@
 | Auth prototype drift | AION-104 freezes the local auth prototype review and no-go regression pack. | `./scripts/auth-prototype-review.sh` and `./scripts/auth-no-go-regression.sh` | Future auth work could skip the disabled/mock-only baseline. | Any production auth, login/logout, credential, token, cookie, session persistence, provider SDK, external identity runtime, migration, API router, or bypass appears before a later implementation ADR. |
 | Module activation drift | AION-105 freezes the module/plugin activation design review and no-go regression pack. | `./scripts/module-activation-design-review.sh` and `./scripts/module-activation-no-go-regression.sh` | Future module work could treat review evidence as activation permission. | Any code loader, package installer, dynamic import, runtime route registration, capability activation, controlled execution, module write path, policy bypass, or audit bypass appears before a later implementation ADR. |
 | Connector runtime drift | AION-106 freezes the external connector boundary design and no-go regression pack. | `./scripts/connector-boundary-design-check.sh` and `./scripts/connector-no-go-regression.sh` | Future connector work could treat metadata or review evidence as permission to call external systems. | Any connector runtime, network client, connector SDK, provider SDK, credential, token storage, dynamic route, external call enablement, policy bypass, or audit bypass appears before a later implementation ADR. |
+| Write-path drift | AION-107 freezes write-path architecture and no-go regression before implementation. | `./scripts/operator-action-write-path-design-check.sh` and `./scripts/operator-action-write-path-no-go-regression.sh` | Future action work could treat preview, review, approval, or connector evidence as execution permission. | Any write execution, tool execution, action proposal execution, controlled handoff execution, external call, activation, approval bypass, policy bypass, audit bypass, hard delete, rollback-free execution, or connector-boundary bypass appears before a later implementation ADR. |
 
 ## AION-102 stabilization control
 
@@ -48,4 +49,13 @@ a module activation pre-implementation gate.
 `./scripts/connector-no-go-regression.sh` now aggregate connector trust,
 credential, egress, ingress, capability declaration, threat model, release gate,
 future prerequisite, docs, and no-go controls into an external connector
+pre-implementation gate.
+
+## AION-107 write-path architecture control
+
+`./scripts/operator-action-write-path-design-check.sh` and
+`./scripts/operator-action-write-path-no-go-regression.sh` now aggregate
+write-path architecture, approval boundary, execution boundary, action intent
+lifecycle, rollback, separation of duties, threat model, release gates, docs,
+examples, and no-go controls into an operator action write-path
 pre-implementation gate.

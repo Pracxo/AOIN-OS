@@ -29,3 +29,10 @@ The preview panel is paired with the Action Authorization panel. Authorization
 decides whether dry-run preview creation is allowed, then the preview still
 renders `would_execute=false`, `execution_allowed=false`,
 `activation_allowed=false`, and `external_calls_allowed=false`.
+
+## AION-107 Write-Path Preview Boundary
+
+AION-107 keeps preview evidence as the input to future design only. A preview
+does not become future_execution_ready, does not execute tools, does not call
+connectors, does not mutate targets, and does not bypass approval, policy,
+audit, or rollback gates.

@@ -132,3 +132,12 @@ Future phases should remain disabled by default:
 - secret egress allowed
 - policy bypass
 - audit bypass
+
+## AION-107 Write-Path Relationship
+
+The future operator action write path depends on this connector boundary before
+any target call can exist. AION-107 does not add connector runtime, network
+clients, external calls, credentials, token storage, dynamic routes, activation,
+execution, or write target calls. Future execution requires connector or target
+boundary evidence, policy, action authorization, approval, audit/provenance,
+rollback, and release gates.

@@ -242,6 +242,19 @@ approval before any call preview can become a runtime call. Connector ingress
 must also be policy-aware before external data can be promoted into trusted
 Brain records.
 
+## Operator Action Write-Path Policy
+
+AION-107 adds write-path architecture design only. No policy action grants
+write execution, tool execution, controlled handoff execution, external calls,
+activation, approval bypass, policy bypass, audit bypass, or hard delete.
+
+Future write-path operations must obtain a current policy decision and a
+current dry-run action authorization decision after production auth, role
+mapping, approval workflow, connector/target boundary, rollback design,
+audit/provenance, and release gates are complete. Approval records, local
+roles, static console controls, connector metadata, and model output cannot
+self-authorize writes.
+
 ## Evidence Policy
 
 Evidence access uses generic `evidence.*` actions. `evidence.read` and

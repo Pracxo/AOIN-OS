@@ -18,3 +18,10 @@ Checks include:
 
 The audit result is read-only. It does not approve, execute, activate, or call
 external systems.
+
+## AION-107 Write-Path Audit Boundary
+
+AION-107 requires future write-path work to keep action authorization and
+audit/provenance separate from execution. Audit evidence must prove that write
+execution, tool execution, external calls, activation, approval bypass, policy
+bypass, and hard delete remain absent in the current system.

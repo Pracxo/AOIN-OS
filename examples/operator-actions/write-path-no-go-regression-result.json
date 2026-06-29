@@ -1,0 +1,77 @@
+{
+  "artifact": "operator_action_write_path_no_go_regression_result",
+  "task_id": "AION-107",
+  "status": "passed",
+  "execution_enabled": false,
+  "external_calls_enabled": false,
+  "activation_enabled": false,
+  "write_execution_enabled": false,
+  "contains_secrets": false,
+  "contains_credentials": false,
+  "contains_tokens": false,
+  "contains_external_endpoints": false,
+  "contains_unredacted_prompts": false,
+  "contains_private_reasoning": false,
+  "checks": [
+    {
+      "check": "write action execution added",
+      "present": false,
+      "expected_status": "passed"
+    },
+    {
+      "check": "tool execution added",
+      "present": false,
+      "expected_status": "passed"
+    },
+    {
+      "check": "model-generated tool execution added",
+      "present": false,
+      "expected_status": "passed"
+    },
+    {
+      "check": "external calls enabled",
+      "present": false,
+      "expected_status": "passed"
+    },
+    {
+      "check": "module activation enabled",
+      "present": false,
+      "expected_status": "passed"
+    },
+    {
+      "check": "capability activation enabled",
+      "present": false,
+      "expected_status": "passed"
+    },
+    {
+      "check": "approval bypass",
+      "present": false,
+      "expected_status": "passed"
+    },
+    {
+      "check": "policy bypass",
+      "present": false,
+      "expected_status": "passed"
+    },
+    {
+      "check": "audit bypass",
+      "present": false,
+      "expected_status": "passed"
+    },
+    {
+      "check": "hard delete enabled",
+      "present": false,
+      "expected_status": "passed"
+    },
+    {
+      "check": "rollback absent",
+      "present": false,
+      "expected_status": "passed"
+    },
+    {
+      "check": "connector boundary absent",
+      "present": false,
+      "expected_status": "passed"
+    }
+  ]
+}

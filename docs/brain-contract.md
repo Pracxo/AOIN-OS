@@ -187,6 +187,16 @@ prompts, hidden reasoning, credentials, tokens, or secrets. Connector runtime,
 external calls, credential storage, token storage, dynamic routes, activation,
 and execution remain absent.
 
+AION-107 operator action write-path contracts remain design-only. Future write
+contracts must preserve separate action intent, dry-run preview, approval,
+policy decision, action authorization, connector/target boundary, rollback,
+audit/provenance, and release-gate evidence. Public Brain contracts must not
+expose tool runners, connector runtimes, provider SDKs, HTTP clients, raw
+headers, raw responses, raw prompts, hidden reasoning, credentials, tokens,
+cookies, or secrets. Write execution, tool execution, action proposal
+execution, controlled handoff execution, external calls, activation, hard
+delete, and privileged bypass remain absent.
+
 Reasoning contracts are Brain-owned. Model providers receive inference inputs
 only through `ModelGatewayAdapter` and return `ModelCallRecord`. Public APIs
 must not expose provider SDK objects, LangGraph objects, LiteLLM objects, OpenAI

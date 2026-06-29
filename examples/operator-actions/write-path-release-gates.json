@@ -1,0 +1,57 @@
+{
+  "artifact": "operator_action_write_path_release_gates",
+  "task_id": "AION-107",
+  "status": "passed",
+  "execution_enabled": false,
+  "external_calls_enabled": false,
+  "activation_enabled": false,
+  "write_execution_enabled": false,
+  "contains_secrets": false,
+  "contains_credentials": false,
+  "contains_tokens": false,
+  "contains_external_endpoints": false,
+  "contains_unredacted_prompts": false,
+  "contains_private_reasoning": false,
+  "gates": [
+    {
+      "gate": "write-path ADR approved",
+      "release_blocker": true
+    },
+    {
+      "gate": "threat model approved",
+      "release_blocker": true
+    },
+    {
+      "gate": "production auth ready",
+      "release_blocker": true
+    },
+    {
+      "gate": "connector boundary ready",
+      "release_blocker": true
+    },
+    {
+      "gate": "approval workflow tested",
+      "release_blocker": true
+    },
+    {
+      "gate": "rollback tested",
+      "release_blocker": true
+    },
+    {
+      "gate": "policy enforcement tested",
+      "release_blocker": true
+    },
+    {
+      "gate": "audit/provenance tested",
+      "release_blocker": true
+    },
+    {
+      "gate": "dry-run parity tested",
+      "release_blocker": true
+    },
+    {
+      "gate": "release/freeze gate green",
+      "release_blocker": true
+    }
+  ]
+}

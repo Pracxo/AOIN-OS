@@ -27,3 +27,10 @@ The review API is scoped and policy-gated by `operator_action.review`.
 Review creation must pass dry-run action authorization for a reviewer role.
 Review records remain record-only evidence; approval context does not execute,
 activate, write, or call external systems.
+
+## AION-107 Future Approval Boundary
+
+AION-107 separates review evidence from future approval. Approval does not
+execute and cannot bypass policy. Any later write path must add explicit
+approval expiry, revocation, reviewer separation, rollback, audit/provenance,
+and release-gate checks before execution can be considered.

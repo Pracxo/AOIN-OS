@@ -47,3 +47,10 @@ Operator action request creation now calls dry-run action authorization before
 records are created. Denied decisions produce blocked request metadata or
 blockers. Preview and review services verify authorization again and still
 never execute actions.
+
+## AION-107 Write-Path Design Relationship
+
+AION-107 defines future write-path architecture around the existing governed
+action records. The current system remains dry-run/request/review only: review
+records do not execute, approval context does not execute, and previews cannot
+mutate targets or call external systems.
