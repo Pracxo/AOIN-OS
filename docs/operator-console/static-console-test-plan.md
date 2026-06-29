@@ -38,6 +38,25 @@ offline demo path without calling the API.
 the same boundary from the Brain API test suite. It intentionally inspects
 static artifacts only and does not start a frontend server.
 
+`services/brain-api/tests/test_static_console_ux_refinement.py` verifies the
+AION-103 UX refinement docs, examples, skip link, navigation groups, safe
+command allowlist, focus styles, localhost guard, and no-write JavaScript
+boundary.
+
+## UX Refinement Coverage
+
+`./scripts/static-console-ux-check.sh` verifies:
+
+- AION-103 docs and ADR 0094 are present and indexed.
+- Navigation and accessibility examples are valid JSON.
+- The skip link and navigation groups exist.
+- Required safety banners remain visible.
+- Safe command copy is restricted to approved local checks.
+- `app.js` keeps the localhost guard, redaction path, no write verbs, no
+  browser storage, and no external URL fetch.
+- `styles.css` keeps focus styles and no external imports.
+- Package files and frontend build tooling remain absent.
+
 ## Manual Smoke
 
 ```bash

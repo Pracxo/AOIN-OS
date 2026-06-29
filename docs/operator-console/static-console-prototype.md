@@ -118,3 +118,17 @@ external calls, or an execution path.
 The prototype includes a role switcher for local demo roles only. It renders
 visible views, filtered sections, filtered descriptors, and disabled safety
 flags from static JSON without storing browser state.
+
+## AION-103 UX Refinement
+
+The prototype now includes static navigation groups, a skip link, section
+shortcuts, visible focus states, a safety blocker view, and local command cards
+for approved read-only checks. The refinement stays in HTML, CSS, and
+JavaScript only and adds no framework, build step, package file, auth behavior,
+provider call, write path, activation path, execution path, or external call.
+
+Validate the UX boundary with:
+
+```bash
+./scripts/static-console-ux-check.sh
+```

@@ -432,3 +432,10 @@ Instructions for future Codex runs in this repository:
   dependencies, package installation, production auth, write controls,
   activation controls, execution controls, provider-call controls,
   external-call controls, or runtime registration.
+- AION-103 static console UX refinement is static HTML/CSS/JS polish only. It
+  must pass `./scripts/static-console-ux-check.sh` and must not add frontend
+  dependencies, package files, build tooling, runtime subsystems, API routers,
+  SDK resources, CLI commands, migrations, production auth, login/logout,
+  credential controls, token or cookie issuance, session persistence, writes,
+  activation, execution, provider-call controls, external-call controls, or
+  runtime registration.

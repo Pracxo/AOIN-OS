@@ -34,6 +34,18 @@ This command reruns the regression matrix, checks whitespace, reports working
 tree status, verifies the `aion-v0.1.0` tag relationship, and validates freeze
 gate safety flags.
 
+## Run static console UX check
+
+For AION-103 and later static-console polish, also run:
+
+```bash
+./scripts/static-console-ux-check.sh
+```
+
+This command verifies the navigation groups, skip link, accessibility evidence,
+safe local command copy allowlist, CSS focus styles, localhost guard, and
+absence of frontend package files or build tooling.
+
 ## Interpret failures
 
 Use the first failing script as the owner of the failure. Fix the boundary

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <a class="skip-link" href="#console-main">Skip to console content</a>
     <header class="shell-header">
       <p class="eyebrow">AION Operator Console Prototype</p>
       <h1>AION Operator Console Prototype — local, read-only, no activation</h1>
@@ -18,20 +19,39 @@
       </div>
     </header>
 
-    <main class="layout">
+    <main class="layout" id="console-main" tabindex="-1">
       <nav class="view-rail" aria-label="Console views">
-        <button class="view-tab is-active" data-view="overview">Overview</button>
-        <button class="view-tab" data-view="readiness">Readiness</button>
-        <button class="view-tab" data-view="release_candidate">Release Candidate</button>
-        <button class="view-tab" data-view="module_lifecycle">Module Lifecycle</button>
-        <button class="view-tab" data-view="model_provider_hardening">
-          Model Provider Hardening
-        </button>
-        <button class="view-tab" data-view="operator_actions">Operator Actions</button>
-        <button class="view-tab" data-view="incidents">Incidents</button>
-        <button class="view-tab" data-view="registry_integrity">Registry and Lifecycle</button>
-        <button class="view-tab" data-view="settings_safety">Settings Safety</button>
-        <button class="view-tab" data-view="audit_provenance">Audit and Provenance</button>
+        <section class="rail-section" aria-labelledby="group-nav-title">
+          <h2 class="rail-heading" id="group-nav-title">Navigation Groups</h2>
+          <div class="group-tabs" role="list" aria-label="View groups">
+            <button class="group-tab is-active" type="button" data-group="all" aria-pressed="true">All</button>
+            <button class="group-tab" type="button" data-group="platform" aria-pressed="false">Platform</button>
+            <button class="group-tab" type="button" data-group="modules" aria-pressed="false">Modules</button>
+            <button class="group-tab" type="button" data-group="providers" aria-pressed="false">Providers</button>
+            <button class="group-tab" type="button" data-group="actions" aria-pressed="false">Actions</button>
+            <button class="group-tab" type="button" data-group="auth" aria-pressed="false">Auth and Sessions</button>
+            <button class="group-tab" type="button" data-group="evidence" aria-pressed="false">Evidence</button>
+            <button class="group-tab" type="button" data-group="safety" aria-pressed="false">Safety</button>
+          </div>
+        </section>
+
+        <section class="rail-section" aria-labelledby="view-nav-title">
+          <h2 class="rail-heading" id="view-nav-title">Views</h2>
+          <div class="view-tabs" role="list" aria-label="Console view tabs">
+            <button class="view-tab is-active" type="button" data-view="overview" data-group="platform" aria-pressed="true">Overview</button>
+            <button class="view-tab" type="button" data-view="readiness" data-group="platform" aria-pressed="false">Readiness</button>
+            <button class="view-tab" type="button" data-view="release_candidate" data-group="platform" aria-pressed="false">Release Candidate</button>
+            <button class="view-tab" type="button" data-view="module_lifecycle" data-group="modules" aria-pressed="false">Module Lifecycle</button>
+            <button class="view-tab" type="button" data-view="model_provider_hardening" data-group="providers" aria-pressed="false">
+              Model Provider Hardening
+            </button>
+            <button class="view-tab" type="button" data-view="operator_actions" data-group="actions" aria-pressed="false">Operator Actions</button>
+            <button class="view-tab" type="button" data-view="incidents" data-group="safety" aria-pressed="false">Incidents</button>
+            <button class="view-tab" type="button" data-view="registry_integrity" data-group="evidence" aria-pressed="false">Registry and Lifecycle</button>
+            <button class="view-tab" type="button" data-view="settings_safety" data-group="safety" aria-pressed="false">Settings Safety</button>
+            <button class="view-tab" type="button" data-view="audit_provenance" data-group="evidence" aria-pressed="false">Audit and Provenance</button>
+          </div>
+        </section>
       </nav>
 
       <section class="console-panel" aria-labelledby="view-title">
@@ -49,7 +69,18 @@
           Read-only view model will render here.
         </p>
 
-        <section class="local-auth-panel" id="local-auth-panel" aria-label="Local auth status">
+        <nav class="section-jump-nav" aria-label="Console section shortcuts">
+          <a href="#module-dashboard" class="section-link">Modules</a>
+          <a href="#operator-actions-panel" class="section-link">Actions</a>
+          <a href="#local-auth-panel" class="section-link">Auth</a>
+          <a href="#sections" class="section-link">Evidence</a>
+          <a href="#forbidden-actions" class="section-link">Safety</a>
+          <button id="safety-blockers-control" class="section-link section-button" type="button">
+            Show all safety blockers
+          </button>
+        </nav>
+
+        <section class="local-auth-panel" id="local-auth-panel" data-section-group="auth" aria-label="Local auth status" tabindex="-1">
           <div class="no-activation-banner">
             Local auth is dev-only. Production auth, credentials, sessions, and write grants are disabled.
           </div>
@@ -81,7 +112,7 @@
           </div>
         </section>
 
-        <section class="role-access-panel" id="role-access-panel" aria-label="Role-aware access preview">
+        <section class="role-access-panel" id="role-access-panel" data-section-group="auth" aria-label="Role-aware access preview" tabindex="-1">
           <div class="no-activation-banner">
             Role filtering only changes read-only visibility. Forbidden actions and safety blockers remain visible.
           </div>
@@ -123,7 +154,7 @@
           </div>
         </section>
 
-        <section class="local-session-panel" id="local-session-panel" aria-label="Local session preview">
+        <section class="local-session-panel" id="local-session-panel" data-section-group="auth" aria-label="Local session preview" tabindex="-1">
           <div class="no-activation-banner">
             Local session is a dev-only read-only preview. It is not login, production auth, a token, a cookie, or persisted session state.
           </div>
@@ -161,7 +192,7 @@
           </div>
         </section>
 
-        <section class="module-dashboard" id="module-dashboard" aria-label="Module lifecycle dashboard">
+        <section class="module-dashboard" id="module-dashboard" data-section-group="modules" aria-label="Module lifecycle dashboard" tabindex="-1">
           <div class="no-activation-banner">
             This dashboard is read-only. Activation is blocked by design.
           </div>
@@ -214,7 +245,7 @@
           </div>
         </section>
 
-        <section class="operator-actions-panel" id="operator-actions-panel" aria-label="Operator action preview panel">
+        <section class="operator-actions-panel" id="operator-actions-panel" data-section-group="actions" aria-label="Operator action preview panel" tabindex="-1">
           <div class="no-activation-banner">
             Operator action requests are dry-run records. Execution is disabled by design.
           </div>
@@ -256,7 +287,7 @@
           </div>
         </section>
 
-        <section class="action-authorization-panel" id="action-authorization-panel" aria-label="Action authorization preview panel">
+        <section class="action-authorization-panel" id="action-authorization-panel" data-section-group="actions" aria-label="Action authorization preview panel" tabindex="-1">
           <div class="no-activation-banner">
             Dry-run authorization can allow previews or review records only. It never allows writes, execution, activation, or external calls.
           </div>
@@ -288,7 +319,7 @@
           </div>
         </section>
 
-        <section class="auth-runtime-panel" id="auth-runtime-panel" aria-label="Disabled auth runtime panel">
+        <section class="auth-runtime-panel" id="auth-runtime-panel" data-section-group="auth" aria-label="Disabled auth runtime panel" tabindex="-1">
           <div class="no-activation-banner">
             Production auth runtime is disabled. Mock claims are preview-only and never create identity, credentials, tokens, cookies, or persisted session state.
           </div>
@@ -324,26 +355,51 @@
           </div>
         </section>
 
-        <section class="section-grid" id="sections" aria-label="Console sections"></section>
+        <section class="section-grid" id="sections" data-section-group="evidence" aria-label="Console sections" tabindex="-1"></section>
 
-        <section class="action-panel" aria-label="Forbidden actions">
+        <section class="action-panel" data-section-group="safety" aria-label="Forbidden actions">
           <h3>Forbidden Action Descriptors</h3>
-          <div id="forbidden-actions" class="descriptor-list"></div>
+          <div id="forbidden-actions" class="descriptor-list" tabindex="-1"></div>
         </section>
 
-        <section class="command-panel" aria-label="Local commands">
-          <h3>Local Commands</h3>
-          <pre><code>./scripts/static-console-safety-check.sh
-./scripts/ui-release-gate.sh
-./scripts/operator-console-static-check.sh
-./scripts/role-filter-check.sh
-./scripts/local-session-check.sh
-./scripts/auth-runtime-check.sh
-./scripts/module-lifecycle-dashboard-check.sh
-./scripts/provider-dashboard-check.sh
-./scripts/operator-actions-check.sh
-./scripts/operator-console-static-demo.sh --offline-ok --skip-api
-python3 -m http.server 8090 --directory operator-console-static</code></pre>
+        <section class="command-panel" data-section-group="evidence" aria-labelledby="local-command-title">
+          <div class="module-dashboard-heading">
+            <div>
+              <p class="eyebrow">Local Checks</p>
+              <h3 id="local-command-title">Safe Command Cards</h3>
+            </div>
+            <button class="disabled-action" type="button" disabled>
+              Read-only checks
+            </button>
+          </div>
+          <p class="panel-summary">
+            Copy support is limited to local read-only verification commands.
+          </p>
+          <div class="command-card-grid" aria-label="Copyable local commands">
+            <article class="command-card">
+              <code>./scripts/ui-release-gate.sh</code>
+              <button class="copy-command" type="button" data-command="./scripts/ui-release-gate.sh">Copy local check</button>
+            </article>
+            <article class="command-card">
+              <code>./scripts/static-console-safety-check.sh</code>
+              <button class="copy-command" type="button" data-command="./scripts/static-console-safety-check.sh">Copy local check</button>
+            </article>
+            <article class="command-card">
+              <code>./scripts/operator-platform-regression.sh</code>
+              <button class="copy-command" type="button" data-command="./scripts/operator-platform-regression.sh">Copy local check</button>
+            </article>
+            <article class="command-card">
+              <code>./scripts/operator-platform-freeze-gate.sh</code>
+              <button class="copy-command" type="button" data-command="./scripts/operator-platform-freeze-gate.sh">Copy local check</button>
+            </article>
+            <article class="command-card">
+              <code>./scripts/docs-check.sh</code>
+              <button class="copy-command" type="button" data-command="./scripts/docs-check.sh">Copy local check</button>
+            </article>
+          </div>
+          <p class="copy-status" id="copy-status" aria-live="polite">
+            Safe local check commands are available for copy.
+          </p>
         </section>
       </section>
     </main>

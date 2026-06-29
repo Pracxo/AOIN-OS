@@ -4006,3 +4006,26 @@ Developer command:
 ./scripts/operator-platform-regression.sh
 ./scripts/operator-platform-freeze-gate.sh
 ```
+
+### AION-103 Static Console UX Refinement
+
+AION-103 refines the static local Operator Console UX. It adds navigation
+groups, a skip link, section shortcuts, visible focus states, a safety blocker
+view, and safe copy support for approved local read-only checks only. It keeps
+the console static, dependency-free, build-free, login-free,
+credential-control-free, provider-call-free, activation-free, execution-free,
+write-free, and external-call-free.
+
+Primary docs:
+
+- `docs/operator-console/static-console-ux-refinement.md`
+- `docs/operator-console/static-console-accessibility-checklist.md`
+- `docs/operator-console/static-console-navigation-model.md`
+- `docs/operator-console/static-console-information-architecture.md`
+- `docs/adr/0094-static-console-ux-refinement.md`
+
+Developer command:
+
+```bash
+./scripts/static-console-ux-check.sh
+```

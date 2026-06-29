@@ -103,3 +103,4 @@ closure decision in ADR 0072.
 - [0091: Static Console UI Release Gate](0091-static-console-ui-release-gate.md) - Defines the dependency-free static console release gate and post-v0.1 operator platform checkpoint.
 - [0092: Operator Platform Checkpoint](0092-operator-platform-checkpoint.md) - Defines the post-AION-100 checkpoint evidence pack and next-phase baseline.
 - [0093: Operator Platform Stabilization Gate](0093-operator-platform-stabilization-gate.md) - Defines the long-running regression matrix and checkpoint freeze gate.
+- [0094: Static Console UX Refinement](0094-static-console-ux-refinement.md) - Defines dependency-free static console navigation, accessibility, and safe local command-copy rules.
