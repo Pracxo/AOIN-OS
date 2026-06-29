@@ -122,3 +122,11 @@ AION-090 projects this readiness trail into the static Operator Console. The
 view keeps the same expected blockers and displays them as successful safety
 evidence. It does not change readiness semantics, activation state, runtime
 registration state, or module execution state.
+
+## AION-105 Design Review
+
+AION-105 uses this readiness trail as input to the module activation design
+review gate. The trail remains metadata-only and keeps `activation_ready=false`.
+The review gate adds no runtime transition; it only proves code loading,
+package installation, runtime registration, capability activation, controlled
+execution, external calls, and module writes remain disabled.

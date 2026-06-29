@@ -350,6 +350,13 @@ Instructions for future Codex runs in this repository:
 - Modules must not modify Brain core.
 - Module activation remains disabled.
 - Module code loading remains disabled.
+- AION-105 module activation design review is evidence-only. It must not add a
+  plugin loader, package installer, dynamic module import, runtime route
+  registration, capability activation, controlled execution, module writes, or
+  privileged bypass.
+- Future module activation work must pass
+  `./scripts/module-activation-design-review.sh` and
+  `./scripts/module-activation-no-go-regression.sh` before implementation.
 - Module examples must be metadata-only.
 - Do not add domain-specific module implementation to Brain core.
 - Do not move aion-v0.1.0 tag during post-v0.1 planning.

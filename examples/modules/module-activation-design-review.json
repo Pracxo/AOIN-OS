@@ -1,0 +1,65 @@
+{
+  "task": "AION-105",
+  "artifact": "module_activation_design_review",
+  "status": "passed",
+  "reviewed_areas": [
+    {
+      "area": "extension manifest validation",
+      "status": "reviewed",
+      "evidence": "./scripts/module-pack-check.sh"
+    },
+    {
+      "area": "extension intake",
+      "status": "reviewed",
+      "evidence": "./scripts/module-pack-check.sh"
+    },
+    {
+      "area": "module slot",
+      "status": "reviewed",
+      "evidence": "./scripts/module-pack-check.sh"
+    },
+    {
+      "area": "capability binding",
+      "status": "reviewed",
+      "evidence": "./scripts/module-pack-check.sh"
+    },
+    {
+      "area": "conformance",
+      "status": "reviewed",
+      "evidence": "./scripts/module-pack-check.sh"
+    },
+    {
+      "area": "readiness",
+      "status": "reviewed",
+      "evidence": "./scripts/module-pack-check.sh"
+    },
+    {
+      "area": "activation gate",
+      "status": "reviewed",
+      "evidence": "./scripts/module-activation-no-go-regression.sh"
+    },
+    {
+      "area": "runtime registration preview",
+      "status": "reviewed",
+      "evidence": "./scripts/module-activation-no-go-regression.sh"
+    },
+    {
+      "area": "module mock runtime",
+      "status": "reviewed",
+      "evidence": "./scripts/module-lifecycle-dashboard-check.sh"
+    },
+    {
+      "area": "operator review",
+      "status": "reviewed",
+      "evidence": "./scripts/module-lifecycle-dashboard-check.sh"
+    }
+  ],
+  "activation_enabled": false,
+  "code_loading_enabled": false,
+  "runtime_registration_enabled": false,
+  "capability_activation_enabled": false,
+  "controlled_execution_enabled": false,
+  "package_installation_enabled": false,
+  "external_calls_enabled": false,
+  "module_writes_enabled": false
+}

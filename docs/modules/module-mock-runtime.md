@@ -94,3 +94,11 @@ execution.
 AION-090 renders a synthetic mock runtime trail in the static Operator Console.
 The trail displays `synthetic=true`, confidence, output summary, and disabled
 execution flags. It remains display-only and does not invoke module code.
+
+## AION-105 Review Boundary
+
+AION-105 treats the mock runtime as evidence only. Mock runtime output may
+support the activation design review, plugin boundary evidence pack, lifecycle
+traceability matrix, and no-go regression pack, but it still cannot load code,
+install packages, register routes, activate capabilities, execute controlled
+handoffs, call external services, or write module records.

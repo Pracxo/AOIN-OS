@@ -278,8 +278,18 @@ Module strategy docs:
 - [Module activation state machine](docs/modules/module-activation-state-machine.md)
 - [Module risk classification](docs/modules/module-risk-classification.md)
 - [Module branching and release discipline](docs/modules/module-branching-and-release-discipline.md)
+- [Module activation design review](docs/modules/module-activation-design-review.md)
+- [Plugin boundary evidence pack](docs/modules/plugin-boundary-evidence-pack.md)
+- [Module activation pre-gate](docs/modules/module-activation-pre-gate.md)
+- [Code loading disabled proof](docs/modules/code-loading-disabled-proof.md)
+- [Runtime registration disabled proof](docs/modules/runtime-registration-disabled-proof.md)
+- [Capability activation disabled proof](docs/modules/capability-activation-disabled-proof.md)
+- [Module lifecycle traceability matrix](docs/modules/module-lifecycle-traceability-matrix.md)
+- [Future activation implementation prerequisites](docs/modules/future-activation-implementation-prerequisites.md)
+- [Module activation no-go regression pack](docs/modules/module-activation-no-go-regression-pack.md)
 - [ADR 0073](docs/adr/0073-post-v0.1-module-ecosystem-strategy.md)
 - [ADR 0075](docs/adr/0075-generic-knowledge-intelligence-module-pack.md)
+- [ADR 0096](docs/adr/0096-module-activation-design-review-gate.md)
 
 Recommended branch command:
 
@@ -316,6 +326,24 @@ Read the module pack docs:
 - [Readiness trail](docs/modules/generic-knowledge-intelligence-readiness-trail.md)
 - [Operator review](docs/modules/generic-knowledge-intelligence-operator-review.md)
 - [No-go conditions](docs/modules/generic-knowledge-intelligence-no-go.md)
+
+## Module Activation Design Review Gate
+
+AION-105 freezes the module/plugin activation design before any future
+activation implementation work. It adds a review gate, plugin boundary evidence
+pack, pre-gate, disabled proofs, traceability matrix, and no-go regression
+pack.
+
+Run the local review gates:
+
+```bash
+./scripts/module-activation-design-review.sh
+./scripts/module-activation-no-go-regression.sh
+```
+
+The gate preserves the current safe state: no module activation, no capability
+activation, no code loading, no package installation, no runtime registration,
+no controlled execution, no external calls, and no domain module logic.
 
 ## Operator Console Strategy
 

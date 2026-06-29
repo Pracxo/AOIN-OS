@@ -117,6 +117,13 @@ Future runtime design must add activation request semantics, approval
 semantics, sandbox execution, runtime adapter boundaries, rollback, disable,
 and release gates before this module can run.
 
+AION-105 adds a module activation design review gate before that future runtime
+design. The gate keeps Generic Knowledge Intelligence metadata-only and
+requires plugin boundary evidence, disabled code-loading proof, disabled
+runtime-registration proof, disabled capability-activation proof, lifecycle
+traceability, and no-go regression evidence before any later implementation
+task can proceed.
+
 ## Metadata-Only Capabilities
 
 | Capability | Risk level | dry_run_supported | controlled_supported | requires_policy | requires_approval | requires_sandbox | External source | Code payload | Dynamic route |

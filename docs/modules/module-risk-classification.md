@@ -48,3 +48,14 @@ mutate runtime configuration, request controlled handoff, or load code.
 `generic.knowledge.explain` are low risk. `generic.knowledge.ground` and
 `generic.knowledge.answer` are medium risk because they depend on reviewable
 context, grounding, and uncertainty constraints.
+
+## AION-105 Review Control
+
+AION-105 treats any future code loading, package installation, dynamic route
+registration, runtime registration, capability activation, controlled
+execution, module write path, policy bypass, or audit bypass as at least high
+risk until a future ADR proves the sandbox, policy, audit, rollback, and
+operator approval model.
+
+The current risk state remains metadata-only. The review gate does not lower
+activation risk or approve runtime behavior.

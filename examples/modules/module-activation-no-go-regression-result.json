@@ -1,0 +1,75 @@
+{
+  "task": "AION-105",
+  "artifact": "module_activation_no_go_regression_result",
+  "status": "passed",
+  "checks": [
+    {
+      "check": "code loader added",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "package installer added",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "dynamic import added",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "runtime route registration added",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "capability activation enabled",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "external dependency download added",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "executable payload accepted",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "controlled execution enabled",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "module writes enabled",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "activation_ready true by default",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "policy bypass",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "audit bypass",
+      "expected_status": "passed",
+      "present": false
+    }
+  ],
+  "activation_enabled": false,
+  "code_loading_enabled": false,
+  "runtime_registration_enabled": false,
+  "capability_activation_enabled": false,
+  "controlled_execution_enabled": false,
+  "package_installation_enabled": false,
+  "external_dependency_download_enabled": false,
+  "module_writes_enabled": false
+}
