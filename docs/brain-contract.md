@@ -1714,3 +1714,10 @@ and audit requests/results.
 
 Contract validation keeps runtime-enabling fields false: external calls,
 credentials, token storage, activation, and route registration remain disabled.
+
+## AION-109 Connector Review Contract Boundary
+
+AION-109 adds no new runtime contracts. It documents the review gate and
+regression evidence that prove the AION-108 connector contracts remain
+disabled, preview-only, synthetic, and non-executing before future connector
+implementation phases.

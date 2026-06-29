@@ -1779,3 +1779,10 @@ AION-108 adds scoped policy actions for disabled connector preview evidence:
 These actions do not grant connector execution, external calls, credential
 storage, token storage, route registration, module activation, or capability
 activation. Unknown connector runtime actions fail closed.
+
+## AION-109 Connector Review Policy Boundary
+
+AION-109 does not add policy actions. It reviews the existing disabled
+connector preview actions and freezes the requirement that future connector
+implementation must pass policy review, no-external-call regression, operator
+review, audit/provenance proof, and the connector pre-implementation gate.

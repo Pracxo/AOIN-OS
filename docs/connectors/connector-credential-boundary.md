@@ -61,3 +61,10 @@ passwords, provider secrets, raw headers, or raw provider payloads.
 AION-108 keeps connector credential handling disabled. Mock manifests must set
 `credentials_required=false`, examples contain no credential material, and the
 static console exposes no connector credential input.
+
+## AION-109 Review Gate Relationship
+
+AION-109 adds the credential/token absence proof. It confirms connector
+credentials, token storage, provider SDKs, secret storage, migrations, and
+external identity runtime remain absent before future design-only credential
+architecture work.

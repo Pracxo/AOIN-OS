@@ -53,3 +53,9 @@ The disabled connector prototype treats every mock connector declaration and
 ingress preview as untrusted. A valid mock manifest is preview evidence only;
 it does not become trusted runtime state, policy authority, or an activation
 record.
+
+## AION-109 Review Gate Relationship
+
+AION-109 keeps connector trust frozen at untrusted by default. Future connector
+work must satisfy the traceability matrix, ingress redaction proof,
+provenance proof, and operator review before any trust elevation is considered.

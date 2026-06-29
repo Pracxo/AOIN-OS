@@ -149,3 +149,10 @@ mock-only manifest validation, egress preview, ingress preview, blockers, API,
 SDK/CLI preview access, audit evidence, and static console status. It still
 keeps connector runtime, external calls, credentials, token storage, route
 registration, activation, execution, and write target calls disabled.
+
+## AION-109 Review Gate Relationship
+
+AION-109 freezes this boundary as review evidence. It adds no runtime
+implementation and requires the connector runtime review gate and
+no-external-call regression to pass before future connector implementation
+planning can proceed.

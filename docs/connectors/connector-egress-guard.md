@@ -78,3 +78,9 @@ scoped, revocable, audit-backed, and subordinate to policy.
 AION-108 adds a mock egress preview that always returns `egress_allowed=false`
 and `external_call_allowed=false`. It is evidence for a future guard, not a
 network path.
+
+## AION-109 Review Gate Relationship
+
+AION-109 adds the no-external-call evidence pack and regression script. The
+egress guard remains blocked, no network client is added, and no external
+endpoint is introduced.

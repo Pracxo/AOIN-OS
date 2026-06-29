@@ -75,3 +75,9 @@ AION-108 satisfies only the disabled prototype prerequisite. Future connector
 implementation still requires credential-store design, runtime threat review,
 egress/ingress enforcement, operator approval, policy/action-authorization
 proof, audit/provenance proof, rollback, and a release gate.
+
+## AION-109 Review Gate Relationship
+
+AION-109 adds the pre-implementation gate and future connector runtime
+implementation plan. AION-110 may only harden the disabled dry-run simulator;
+external calls remain blocked until the later connector release gate passes.
