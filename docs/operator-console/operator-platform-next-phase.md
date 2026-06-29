@@ -1,6 +1,6 @@
 # Operator Platform Next Phase
 
-## Recommended next phase
+## AION-102 stabilization phase
 
 AION-102: Operator Platform Stabilization and Long-Running Regression Matrix.
 
@@ -10,7 +10,15 @@ long-running safety matrix review. It should remain local, read-only, and
 dependency-free unless a later architecture decision explicitly changes that
 boundary.
 
+Status: implemented as `./scripts/operator-platform-regression.sh`,
+`./scripts/operator-platform-freeze-gate.sh`, ADR 0093, regression examples,
+and stabilization docs. It adds no runtime subsystem, frontend dependency,
+production auth, write path, activation path, execution path, provider call, or
+external call.
+
 ## Follow-on milestones
+
+Recommended next phase:
 
 - AION-103 static console UX refinement, still no framework.
 - AION-104 local auth disabled prototype review.
@@ -31,8 +39,9 @@ action proposal execution, hard deletes, or domain module logic.
 Every next-phase branch should start by running:
 
 ```bash
-./scripts/operator-platform-checkpoint.sh
+./scripts/operator-platform-regression.sh
+./scripts/operator-platform-freeze-gate.sh
 ```
 
-The checkpoint must pass before any future UI, auth, activation, connector, or
-write-path planning can proceed.
+The regression and freeze gates must pass before any future UI, auth,
+activation, connector, or write-path planning can proceed.

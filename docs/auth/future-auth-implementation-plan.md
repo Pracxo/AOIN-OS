@@ -55,6 +55,15 @@ auth, auth runtime enablement, login/logout, token issuance, cookie issuance,
 credential storage, persisted sessions, and external identity provider runtime
 remain blocked before AION-102 planning begins.
 
+## AION-102 Operator Platform Stabilization
+
+AION-102 is also not an auth implementation stage. It adds long-running
+regression and freeze gates that rerun `production-auth-architecture-check.sh`,
+`auth-runtime-check.sh`, `local-auth-check.sh`, and `local-session-check.sh`.
+Production auth, auth runtime enablement, login/logout, token issuance, cookie
+issuance, credential storage, persisted sessions, and external identity
+provider runtime remain blocked.
+
 ## AION-094 Completed Scope
 
 AION-094 completes the safe local contract and simulation step only. It does

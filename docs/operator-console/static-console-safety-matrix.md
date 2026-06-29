@@ -18,3 +18,4 @@
 | no hidden reasoning display | `static-console-safety-check.sh` | hidden reasoning is redacted before rendering | yes |
 | no secret display | `static-console-safety-check.sh` | secret-like demo markers are blocked | yes |
 | demo fallback | `static-console-safety-check.sh` | `loadDemo` and `demo-data` fallback references remain present | yes |
+| stabilization freeze gate | `operator-platform-freeze-gate.sh` | AION-102 regression and freeze evidence remain passed | yes |

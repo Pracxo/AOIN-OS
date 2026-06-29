@@ -206,6 +206,17 @@ check. It adds no runtime subsystem, migration, API router, SDK resource, CLI
 command, frontend dependency, production auth, write control, activation
 control, execution control, provider-call control, or external-call control.
 
+## Operator Platform Stabilization Gate
+
+AION-102 adds a long-running regression matrix and checkpoint freeze gate for
+the Operator Platform. The gate aggregates existing local checks, including the
+AION-101 checkpoint, UI release gate, static console safety, auth safety,
+operator action safety, module/provider dashboards, docs audits, boundary
+checks, and full repository health. It adds no runtime subsystem, migration,
+API router, SDK resource, CLI command, frontend dependency, production auth,
+write control, activation control, execution control, provider-call control,
+external-call control, package installation, or privileged bypass.
+
 ## Contract Registry and Interface Drift
 
 The Contract Registry is the local index of AION public and operator-facing

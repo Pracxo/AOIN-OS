@@ -1,0 +1,46 @@
+{
+  "evidence_id": "aion-102-operator-platform-regression-evidence",
+  "status": "passed",
+  "evidence": [
+    {
+      "area": "operator platform checkpoint",
+      "script": "./scripts/operator-platform-checkpoint.sh",
+      "expected_status": "passed"
+    },
+    {
+      "area": "static console safety",
+      "script": "./scripts/static-console-safety-check.sh",
+      "expected_status": "passed"
+    },
+    {
+      "area": "UI release gate",
+      "script": "./scripts/ui-release-gate.sh",
+      "expected_status": "passed"
+    },
+    {
+      "area": "auth safety",
+      "script": "./scripts/auth-runtime-check.sh",
+      "expected_status": "passed"
+    },
+    {
+      "area": "operator action safety",
+      "script": "./scripts/operator-actions-check.sh",
+      "expected_status": "passed"
+    },
+    {
+      "area": "module and provider dashboards",
+      "script": "./scripts/provider-dashboard-check.sh",
+      "expected_status": "passed"
+    },
+    {
+      "area": "docs and boundaries",
+      "script": "./scripts/boundary-check.sh",
+      "expected_status": "passed"
+    },
+    {
+      "area": "repository health",
+      "script": "./scripts/check.sh",
+      "expected_status": "passed"
+    }
+  ]
+}

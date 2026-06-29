@@ -14,3 +14,11 @@
 | Stale demo data | Evidence examples and demo JSON are checked locally. | `./scripts/operator-platform-checkpoint.sh` | Demo data can lag behind docs if not checked together. | Evidence examples are invalid, missing required areas, or claim a passing status without scripts. |
 | Policy bypass | Dry-run authorization keeps denials visible. | `./scripts/action-authorization-check.sh` and `./scripts/role-filter-check.sh` | Role filtering could be mistaken for production authorization. | Any role path grants execution, activation, external calls, or privileged bypass. |
 | Audit bypass | Operator console contract audits fail closed on unsafe files. | `./scripts/operator-console-contract-check.sh` | New evidence files need explicit checkpoint validation. | Any evidence file escapes both legacy contract checks and the AION-101 checkpoint script. |
+
+## AION-102 stabilization control
+
+`./scripts/operator-platform-regression.sh` and
+`./scripts/operator-platform-freeze-gate.sh` now aggregate these controls into
+one long-running regression matrix and one checkpoint freeze gate. Any failed
+row remains a release blocker and must be fixed forward without bypassing the
+underlying local check.

@@ -3982,3 +3982,27 @@ Developer command:
 ```bash
 ./scripts/operator-platform-checkpoint.sh
 ```
+
+### AION-102 Operator Platform Stabilization Gate
+
+AION-102 converts the Operator Platform checkpoint into a long-running
+regression matrix and checkpoint freeze gate. It is stabilization evidence only:
+no runtime subsystem, frontend dependency, production auth, write path,
+activation path, execution path, provider call, external call, package
+installation, or migration is added.
+
+Primary docs:
+
+- `docs/operator-console/operator-platform-regression-matrix.md`
+- `docs/operator-console/operator-platform-freeze-gate.md`
+- `docs/operator-console/operator-platform-long-running-checks.md`
+- `docs/operator-console/operator-platform-stabilization-runbook.md`
+- `docs/operator-console/operator-platform-regression-evidence.md`
+- `docs/adr/0093-operator-platform-stabilization-gate.md`
+
+Developer command:
+
+```bash
+./scripts/operator-platform-regression.sh
+./scripts/operator-platform-freeze-gate.sh
+```

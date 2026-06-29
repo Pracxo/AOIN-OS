@@ -54,6 +54,13 @@ Run the checkpoint command from the repository root:
 ./scripts/operator-platform-checkpoint.sh
 ```
 
+Run the AION-102 stabilization gates with:
+
+```bash
+./scripts/operator-platform-regression.sh
+./scripts/operator-platform-freeze-gate.sh
+```
+
 The checkpoint composes:
 
 - `./scripts/ui-release-gate.sh`
@@ -74,9 +81,9 @@ The checkpoint composes:
 Before merge, the branch must pass the checkpoint command, the UI release gate,
 the static console safety check, docs checks, domain drift check, boundary
 check, `./scripts/check.sh`, and `git diff --check`. The branch must not add
-frontend package files, migrations, AION-101 API router files, production auth,
-write controls, activation controls, execution controls, provider-call
-controls, or external-call controls.
+frontend package files, migrations, AION-101 or AION-102 API router files,
+production auth, write controls, activation controls, execution controls,
+provider-call controls, or external-call controls.
 
 ## No-go conditions
 
@@ -88,7 +95,7 @@ domain module logic, or production UI claim is also a no-go condition.
 
 ## Next recommended phase
 
-AION-102 should start Operator Platform Stabilization and Long-Running
-Regression Matrix work. That phase should keep the static checkpoint mandatory
-while expanding repeated local verification coverage before any future UI,
-auth, connector, activation, or write-path design work.
+AION-102 starts Operator Platform Stabilization and Long-Running Regression
+Matrix work. After that gate is green, the next recommended phase is AION-103
+static console UX refinement, still with no frontend framework and no runtime
+auth, activation, execution, provider-call, or external-call controls.

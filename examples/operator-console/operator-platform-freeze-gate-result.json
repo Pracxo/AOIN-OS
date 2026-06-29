@@ -1,0 +1,19 @@
+{
+  "freeze_gate_id": "aion-102-operator-platform-freeze-gate",
+  "status": "passed",
+  "regression_script": "./scripts/operator-platform-regression.sh",
+  "freeze_script": "./scripts/operator-platform-freeze-gate.sh",
+  "safety_flags": {
+    "static_console_read_only": true,
+    "auth_runtime_enabled": false,
+    "production_auth_enabled": false,
+    "write_controls_present": false,
+    "activation_controls_present": false,
+    "execution_controls_present": false,
+    "provider_call_controls_present": false,
+    "external_calls_enabled": false,
+    "frontend_dependencies_present": false,
+    "package_install_allowed": false
+  },
+  "expected_final_line": "Operator platform freeze gate PASS"
+}
