@@ -147,10 +147,17 @@ AION-108 adds a disabled Connector Runtime panel backed by:
 
 - `demo-data/connector-runtime-status.json`
 - `demo-data/connector-boundary-preview.json`
+- `demo-data/connector-simulation-preview.json`
+- `demo-data/connector-policy-readiness.json`
 
 The panel displays hard-off connector runtime flags, blockers, and mock-only
 boundary preview evidence. It has no connector registration form, no credential
 input, no token input, no route activation, and no external service egress.
+
+AION-110 adds static connector simulator evidence to the same panel. The
+simulator data is synthetic-only and never represents connector execution,
+route registration, trusted ingress, credential use, token use, or external
+egress.
 
 ## UI Release Gate
 

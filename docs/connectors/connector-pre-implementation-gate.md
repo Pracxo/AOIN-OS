@@ -38,3 +38,9 @@ The pre-implementation gate defines the evidence required before any future conn
 ## Decision
 
 No connector implementation phase can start until this gate is complete and the no-external-call regression remains passed.
+
+## AION-110 Gate Evidence
+
+The dry-run simulator row is satisfied only when simulator contracts, replay
+fixtures, policy readiness, no-go regression, SDK/CLI wrappers, docs, examples,
+and static console evidence remain synthetic-only and runtime-disabled.

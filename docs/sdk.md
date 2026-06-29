@@ -152,6 +152,20 @@ The resource calls public Brain APIs only. It does not import `aion_brain`,
 add connector/provider SDKs, store credentials, store tokens, activate
 connectors, or call external systems.
 
+## Connector Simulator Resource
+
+`client.connector_simulator` supports synthetic dry-run evidence:
+
+- `simulate(payload)`
+- `replay(payload)`
+- `policy_readiness(payload)`
+- `status(scope)`
+- `query(payload)`
+
+The resource calls public Brain APIs only. It does not import `aion_brain`, add
+connector/provider SDKs, execute connectors, store credentials, store tokens,
+activate runtime, register routes, or call external systems.
+
 ## Scenarios Resource
 
 `client.scenarios` supports the end-to-end validation harness:

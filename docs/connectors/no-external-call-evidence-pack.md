@@ -25,3 +25,11 @@ This pack records the evidence required to prove AION-109 did not add external c
 ## Review Result
 
 The review result is passed when every evidence row reports the expected result and `external_calls_found=false` in the example evidence pack.
+
+## AION-110 Addendum
+
+AION-110 adds `./scripts/connector-simulator-no-go-regression.sh` and
+`./scripts/connector-simulator-check.sh`. These checks prove simulator,
+replay, policy readiness, SDK/CLI, and static console additions remain
+synthetic-only with `external_calls_made=false` and no connector runtime
+enablement.

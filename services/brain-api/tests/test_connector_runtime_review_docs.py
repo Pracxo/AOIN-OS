@@ -31,6 +31,15 @@ EXAMPLES = [
     "examples/connectors/connector-runtime-review-no-go-result.json",
 ]
 
+AION110_ALLOWED_CHANGED_FILES = {
+    ".env.example",
+    "services/brain-api/src/aion_brain/api/connector_simulator.py",
+    "packages/aion-sdk-python/src/aion_sdk/client.py",
+    "packages/aion-sdk-python/src/aion_sdk/cli/main.py",
+    "packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_simulator.py",
+    "packages/aion-sdk-python/src/aion_sdk/resources/connector_simulator.py",
+}
+
 
 def test_connector_runtime_review_docs_exist_and_are_indexed() -> None:
     for relative in DOCS:
@@ -146,7 +155,7 @@ def test_connector_runtime_review_scripts_exist_and_pass() -> None:
 
 
 def test_connector_runtime_review_keeps_blocked_files_absent() -> None:
-    changed = _changed_files()
+    changed = _changed_files() - AION110_ALLOWED_CHANGED_FILES
     blocked_names = {
         "package.json",
         "package-lock.json",

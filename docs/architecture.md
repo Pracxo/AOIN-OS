@@ -47,6 +47,15 @@ objects. This keeps AION in control of its contract surface.
 AION Brain public contracts must not depend on vendor-specific infrastructure
 clients.
 
+## Connector Simulation Boundary
+
+The AION-110 connector simulator is a local synthetic validation surface. It
+validates request and response shapes, replays local fixture data, records safe
+audit/provenance evidence, and exposes SDK/CLI helpers while keeping connector
+runtime execution disabled. It does not call external services, store
+credentials, store tokens, activate connectors, register routes, execute tools,
+or execute write paths.
+
 ## Infrastructure Boundaries
 
 Postgres, Redis, NATS, and Open Policy Agent are checked through

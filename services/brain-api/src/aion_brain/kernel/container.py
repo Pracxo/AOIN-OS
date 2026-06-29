@@ -94,6 +94,16 @@ from aion_brain.connector_runtime import (
     ConnectorRuntimeQueryService,
     MockConnectorManifestService,
 )
+from aion_brain.connector_simulator import (
+    ConnectorDryRunSimulator,
+    ConnectorPolicyReadinessService,
+    ConnectorReplayService,
+    ConnectorResponseShapeValidator,
+    ConnectorShapeValidator,
+    ConnectorSimulatorAuditService,
+    ConnectorSimulatorFindingService,
+    ConnectorSimulatorQueryService,
+)
 from aion_brain.connectors.repository import ConnectorRepository
 from aion_brain.connectors.service import ConnectorService
 from aion_brain.consistency.checker import ConsistencyChecker
@@ -3635,6 +3645,31 @@ class KernelContainer:
         self.connector_runtime_query_service = ConnectorRuntimeQueryService(
             self.connector_runtime_gate_service
         )
+        self.connector_simulator_finding_service = ConnectorSimulatorFindingService()
+        self.connector_request_shape_validator = ConnectorShapeValidator(
+            self.connector_simulator_finding_service
+        )
+        self.connector_response_shape_validator = ConnectorResponseShapeValidator(
+            self.connector_simulator_finding_service
+        )
+        self.connector_simulator_audit_service = ConnectorSimulatorAuditService(
+            audit_sink=self.audit_integrity_ledger
+        )
+        self.connector_dry_run_simulator = ConnectorDryRunSimulator(
+            request_validator=self.connector_request_shape_validator,
+            response_validator=self.connector_response_shape_validator,
+            audit_service=self.connector_simulator_audit_service,
+            settings=self.settings,
+            telemetry_service=self.telemetry_service,
+        )
+        self.connector_replay_service = ConnectorReplayService(self.connector_dry_run_simulator)
+        self.connector_policy_readiness_service = ConnectorPolicyReadinessService(
+            settings=self.settings,
+            telemetry_service=self.telemetry_service,
+        )
+        self.connector_simulator_query_service = ConnectorSimulatorQueryService(
+            settings=self.settings
+        )
         self.local_session_preview_service = LocalSessionPreviewService(
             telemetry_service=self.telemetry_service,
         )
@@ -5241,6 +5276,54 @@ class KernelContainer:
             (
                 "connector_runtime_query_service",
                 self.connector_runtime_query_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_simulator_finding_service",
+                self.connector_simulator_finding_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_request_shape_validator",
+                self.connector_request_shape_validator,
+                "service",
+                "local",
+            ),
+            (
+                "connector_response_shape_validator",
+                self.connector_response_shape_validator,
+                "service",
+                "local",
+            ),
+            (
+                "connector_simulator_audit_service",
+                self.connector_simulator_audit_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_dry_run_simulator",
+                self.connector_dry_run_simulator,
+                "service",
+                "deterministic",
+            ),
+            (
+                "connector_replay_service",
+                self.connector_replay_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_policy_readiness_service",
+                self.connector_policy_readiness_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_simulator_query_service",
+                self.connector_simulator_query_service,
                 "service",
                 "local",
             ),

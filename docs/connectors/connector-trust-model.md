@@ -59,3 +59,9 @@ record.
 AION-109 keeps connector trust frozen at untrusted by default. Future connector
 work must satisfy the traceability matrix, ingress redaction proof,
 provenance proof, and operator review before any trust elevation is considered.
+
+## AION-110 Simulator Relationship
+
+Synthetic simulator responses remain untrusted. A replay fixture or dry-run
+result is evidence about shape readiness only; it is not external data, not
+trusted connector output, not policy authority, and not runtime approval.

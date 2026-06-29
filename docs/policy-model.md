@@ -118,6 +118,20 @@ AION core policy vocabulary stays generic:
 - `evidence.read`
 - `evidence.search`
 - `evidence.link`
+
+## Connector Simulator Policy Actions
+
+AION-110 adds policy actions for synthetic connector simulator evidence:
+
+- `connector_simulator.simulate`
+- `connector_simulator.replay`
+- `connector_simulator.policy_readiness`
+- `connector_simulator.status.read`
+- `connector_simulator.query`
+
+These actions authorize local dry-run simulation surfaces only. They do not
+approve connector runtime, external calls, credential use, token use, route
+registration, tool execution, or write execution.
 - `evidence.ground`
 - `evidence.delete`
 - `contract_registry.contract.read`

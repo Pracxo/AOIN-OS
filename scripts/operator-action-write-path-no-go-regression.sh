@@ -3,6 +3,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
+source "$ROOT_DIR/scripts/lib/portable-search.sh"
 
 required_docs=(
   docs/operator-actions/write-path-architecture.md
@@ -55,28 +56,28 @@ if git ls-files --others --exclude-standard infra/postgres/migrations services/b
 fi
 
 if git diff --name-only --diff-filter=ACMRT HEAD -- services/brain-api/src/aion_brain/api \
-  | rg -v '^services/brain-api/src/aion_brain/api/connector_runtime\.py$' \
+  | rg -v '^services/brain-api/src/aion_brain/api/connector_runtime\.py$|^services/brain-api/src/aion_brain/api/connector_simulator\.py$' \
   | rg -n '.'; then
   echo "AION-107 must not change API router files" >&2
   exit 1
 fi
 
 if git ls-files --others --exclude-standard services/brain-api/src/aion_brain/api \
-  | rg -v '^services/brain-api/src/aion_brain/api/connector_runtime\.py$' \
+  | rg -v '^services/brain-api/src/aion_brain/api/connector_runtime\.py$|^services/brain-api/src/aion_brain/api/connector_simulator\.py$' \
   | rg -n '.'; then
   echo "AION-107 must not add API router files" >&2
   exit 1
 fi
 
 if git diff --name-only --diff-filter=ACMRT HEAD -- packages/aion-sdk-python/src/aion_sdk/resources packages/aion-sdk-python/src/aion_sdk/cli.py packages/aion-sdk-python/src/aion_sdk/cli \
-  | rg -v '^packages/aion-sdk-python/src/aion_sdk/resources/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/main\.py$' \
+  | rg -v '^packages/aion-sdk-python/src/aion_sdk/resources/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/main\.py$' \
   | rg -n '.'; then
   echo "AION-107 must not add SDK resources or CLI command implementations" >&2
   exit 1
 fi
 
 if git ls-files --others --exclude-standard packages/aion-sdk-python/src/aion_sdk/resources packages/aion-sdk-python/src/aion_sdk/cli.py packages/aion-sdk-python/src/aion_sdk/cli \
-  | rg -v '^packages/aion-sdk-python/src/aion_sdk/resources/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/main\.py$' \
+  | rg -v '^packages/aion-sdk-python/src/aion_sdk/resources/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/main\.py$' \
   | rg -n '.'; then
   echo "AION-107 must not add untracked SDK resources or CLI command implementations" >&2
   exit 1
@@ -196,6 +197,9 @@ allowed_review_files = {
 allowed_aion108_prefixes = (
     "services/brain-api/src/aion_brain/connector_runtime/",
 )
+allowed_aion110_prefixes = (
+    "services/brain-api/src/aion_brain/connector_simulator/",
+)
 allowed_aion108_files = {
     ".env.example",
     "AGENTS.md",
@@ -228,6 +232,16 @@ allowed_aion108_files = {
     "services/brain-api/src/aion_brain/security_baseline/hardening_gate.py",
     "services/brain-api/src/aion_brain/telemetry/visual.py",
 }
+allowed_aion110_files = {
+    "operator-console-static/demo-data/connector-policy-readiness.json",
+    "operator-console-static/demo-data/connector-simulation-preview.json",
+    "packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_simulator.py",
+    "packages/aion-sdk-python/src/aion_sdk/resources/connector_simulator.py",
+    "packages/aion-sdk-python/tests/test_cli_connector_simulator.py",
+    "packages/aion-sdk-python/tests/test_connector_simulator_resource.py",
+    "services/brain-api/src/aion_brain/api/connector_simulator.py",
+    "services/brain-api/src/aion_brain/contracts/connector_simulator.py",
+}
 runtime_prefixes = (
     "services/brain-api/src/",
     "packages/aion-sdk-python/src/",
@@ -255,8 +269,10 @@ for relative in sorted(changed):
     if (
         relative in allowed_review_files
         or relative in allowed_aion108_files
+        or relative in allowed_aion110_files
         or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)
+        or relative.startswith(allowed_aion110_prefixes)
     ):
         continue
     if not relative.startswith(runtime_prefixes):

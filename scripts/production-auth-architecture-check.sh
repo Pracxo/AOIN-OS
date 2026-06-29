@@ -220,12 +220,20 @@ allowed_aion_108_runtime = {
     "packages/aion-sdk-python/src/aion_sdk/resources/connector_runtime.py",
     "packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_runtime.py",
 }
+allowed_aion_110_runtime = {
+    "services/brain-api/src/aion_brain/api/connector_simulator.py",
+    "services/brain-api/src/aion_brain/contracts/connector_simulator.py",
+    "packages/aion-sdk-python/src/aion_sdk/resources/connector_simulator.py",
+    "packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_simulator.py",
+}
 for name in [*changed, *untracked]:
     if name in allowed_runtime_tests:
         continue
     if name in allowed_aion_099_runtime:
         continue
     if name in allowed_aion_108_runtime:
+        continue
+    if name in allowed_aion_110_runtime:
         continue
     if name.startswith(runtime_prefixes):
         raise SystemExit(f"production auth architecture must not change runtime file: {name}")

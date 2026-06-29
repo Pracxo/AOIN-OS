@@ -1,0 +1,18 @@
+{
+  "connector_key": "mock.local.preview",
+  "owner_scope": ["workspace:main"],
+  "simulation_type": "dry_run",
+  "request_shape": {
+    "object": "synthetic_request",
+    "fields": ["record_id", "summary"]
+  },
+  "expected_response_shape": {
+    "object": "synthetic_response",
+    "fields": ["status", "summary"]
+  },
+  "evidence_refs": ["docs/connectors/connector-dry-run-simulator.md"],
+  "metadata": {
+    "local_only": true,
+    "synthetic_only": true
+  }
+}

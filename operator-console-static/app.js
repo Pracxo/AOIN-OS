@@ -66,6 +66,10 @@
     status: "demo-data/connector-runtime-status.json",
     preview: "demo-data/connector-boundary-preview.json"
   };
+  var CONNECTOR_SIMULATOR_DEMOS = {
+    preview: "demo-data/connector-simulation-preview.json",
+    readiness: "demo-data/connector-policy-readiness.json"
+  };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
     role_filter: "demo-data/role-filtered-view-model.json"
@@ -562,7 +566,18 @@
       "connector_credentials_enabled",
       "connector_token_storage_enabled",
       "connector_activation_enabled",
-      "connector_route_registration_enabled"
+      "connector_route_registration_enabled",
+      "connector_simulator_enabled",
+      "connector_dry_run_simulation_enabled",
+      "connector_replay_fixtures_enabled",
+      "connector_policy_readiness_enabled",
+      "connector_simulator_external_calls_enabled",
+      "connector_simulator_credentials_enabled",
+      "connector_simulator_tokens_enabled",
+      "connector_simulator_runtime_activation_enabled",
+      "external_calls_made",
+      "credentials_used",
+      "tokens_used"
     ].indexOf(normalized) !== -1) {
       return false;
     }
@@ -1352,11 +1367,15 @@
       : fetchJson(CONNECTOR_RUNTIME_DEMOS.status);
     Promise.all([
       statusPromise,
-      fetchJson(CONNECTOR_RUNTIME_DEMOS.preview)
+      fetchJson(CONNECTOR_RUNTIME_DEMOS.preview),
+      fetchJson(CONNECTOR_SIMULATOR_DEMOS.preview),
+      fetchJson(CONNECTOR_SIMULATOR_DEMOS.readiness)
     ])
       .then(function (payloads) {
         renderConnectorRuntimeStatus(redact(payloads[0]));
         renderConnectorBoundaryPreview(redact(payloads[1]));
+        renderConnectorSimulationPreview(redact(payloads[2]));
+        renderConnectorPolicyReadiness(redact(payloads[3]));
       })
       .catch(function () {
         renderConnectorRuntimeStatus({
@@ -1369,6 +1388,8 @@
           blockers: [{ blocker_type: "generic", reason: "connector_runtime_demo_unavailable" }]
         });
         renderConnectorBoundaryPreview({ status: "unavailable", checks: [] });
+        renderConnectorSimulationPreview({ status: "unavailable", findings: [] });
+        renderConnectorPolicyReadiness({ status: "unavailable", blockers: [] });
       });
   }
 
@@ -1436,6 +1457,62 @@
       ["trusted_ingress", String(Boolean(preview.trusted_ingress))],
       ["provenance_required", String(Boolean(preview.provenance_required))],
       ["redaction_applied", String(Boolean(preview.redaction_applied))]
+    ].forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "checklist-row";
+      var label = document.createElement("span");
+      label.textContent = item[0];
+      var value = document.createElement("strong");
+      value.textContent = safeText(item[1] || "none");
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
+    });
+  }
+
+  function renderConnectorSimulationPreview(preview) {
+    var container = document.getElementById("connector-simulation-preview");
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    [
+      ["status", preview.status || "preview"],
+      ["synthetic", String(Boolean(preview.synthetic))],
+      ["trusted", String(Boolean(preview.trusted))],
+      ["external_calls_made", String(Boolean(preview.external_calls_made))],
+      ["credentials_used", String(Boolean(preview.credentials_used))],
+      ["tokens_used", String(Boolean(preview.tokens_used))],
+      ["connector_runtime_enabled", String(Boolean(preview.connector_runtime_enabled))],
+      ["redaction_applied", String(Boolean(preview.redaction_applied))]
+    ].forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "checklist-row";
+      var label = document.createElement("span");
+      label.textContent = item[0];
+      var value = document.createElement("strong");
+      value.textContent = safeText(item[1] || "none");
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
+    });
+  }
+
+  function renderConnectorPolicyReadiness(readiness) {
+    var container = document.getElementById("connector-policy-readiness");
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    [
+      ["status", readiness.status || "preview"],
+      ["policy_ready", String(Boolean(readiness.policy_ready))],
+      ["sandbox_ready", String(Boolean(readiness.sandbox_ready))],
+      ["audit_ready", String(Boolean(readiness.audit_ready))],
+      ["provenance_ready", String(Boolean(readiness.provenance_ready))],
+      ["external_calls_allowed", String(Boolean(readiness.external_calls_allowed))],
+      ["credentials_allowed", String(Boolean(readiness.credentials_allowed))],
+      ["activation_allowed", String(Boolean(readiness.activation_allowed))]
     ].forEach(function (item) {
       var row = document.createElement("div");
       row.className = "checklist-row";

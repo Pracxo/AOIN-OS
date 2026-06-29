@@ -116,6 +116,14 @@ Future phases should remain disabled by default:
 6. Operator review and release gate.
 7. Future runtime enablement review.
 
+## AION-110 Simulator Relationship
+
+AION-110 implements the dry-run connector simulator as local synthetic evidence
+only. It validates shapes and replays local fixtures before runtime
+implementation. It does not change the AION-106 terminal state for real
+connectors: runtime remains absent for external calls, credential use, token
+use, route registration, activation, tool execution, and write execution.
+
 ## No-Go Conditions
 
 - connector runtime added without gate

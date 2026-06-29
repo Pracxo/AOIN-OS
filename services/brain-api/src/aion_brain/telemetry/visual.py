@@ -21,6 +21,11 @@ CONNECTOR_RUNTIME_TELEMETRY_EVENTS = (
     "connector_runtime_audit_completed",
 )
 
+CONNECTOR_SIMULATOR_TELEMETRY_EVENTS = (
+    "connector_simulation_completed",
+    "connector_policy_readiness_checked",
+)
+
 
 class VisualTelemetryBuilder:
     """Build visual telemetry events for future Brain graph animation."""

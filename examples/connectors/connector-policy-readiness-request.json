@@ -1,0 +1,17 @@
+{
+  "connector_key": "mock.local.preview",
+  "owner_scope": ["workspace:main"],
+  "declared_policy_actions": [
+    "connector_simulator.simulate",
+    "connector_simulator.replay",
+    "connector_simulator.policy_readiness"
+  ],
+  "declared_scopes": ["workspace:main"],
+  "sandbox_required": true,
+  "audit_required": true,
+  "provenance_required": true,
+  "metadata": {
+    "local_only": true,
+    "runtime_approval": false
+  }
+}

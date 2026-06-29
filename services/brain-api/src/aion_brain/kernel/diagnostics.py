@@ -286,7 +286,23 @@ class KernelDiagnostics:
             "connector_runtime_audit_service",
             "medium",
         ),
-        ("connector_runtime_query_service_present", "connector_runtime_query_service", "medium"),
+        (
+            "connector_runtime_query_service_present",
+            "connector_runtime_query_service",
+            "medium",
+        ),
+        ("connector_dry_run_simulator_present", "connector_dry_run_simulator", "medium"),
+        ("connector_replay_service_present", "connector_replay_service", "medium"),
+        (
+            "connector_policy_readiness_service_present",
+            "connector_policy_readiness_service",
+            "medium",
+        ),
+        (
+            "connector_simulator_query_service_present",
+            "connector_simulator_query_service",
+            "medium",
+        ),
         ("local_session_preview_service_present", "local_session_preview_service", "medium"),
         ("local_session_context_service_present", "local_session_context_service", "medium"),
         ("local_session_boundary_service_present", "local_session_boundary_service", "medium"),
@@ -478,6 +494,7 @@ class KernelDiagnostics:
         checks.extend(self._action_authorization_checks(settings))
         checks.extend(self._auth_runtime_checks(settings))
         checks.extend(self._connector_runtime_checks(settings))
+        checks.extend(self._connector_simulator_checks(settings))
         checks.extend(self._operator_action_checks(settings))
         checks.extend(self._run_supervision_checks(settings))
         checks.extend(self._notification_checks(settings))
@@ -1189,6 +1206,98 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Disabled connector-runtime services are assembled.",
+            ),
+        ]
+
+    def _connector_simulator_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "connector_dry_run_simulator",
+                "connector_replay_service",
+                "connector_policy_readiness_service",
+                "connector_simulator_query_service",
+            )
+        )
+        return [
+            self._result(
+                "connector_simulator_enabled",
+                "connector_simulator",
+                (
+                    "passed"
+                    if bool(getattr(settings, "connector_simulator_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Connector simulator is available for synthetic local dry runs.",
+            ),
+            self._result(
+                "connector_dry_run_simulation_enabled",
+                "connector_simulator",
+                (
+                    "passed"
+                    if bool(getattr(settings, "connector_dry_run_simulation_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Dry-run connector simulation remains synthetic-only.",
+            ),
+            self._result(
+                "connector_simulator_external_calls_enabled",
+                "connector_simulator",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_simulator_external_calls_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector simulator external calls remain disabled.",
+            ),
+            self._result(
+                "connector_simulator_credentials_enabled",
+                "connector_simulator",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_simulator_credentials_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector simulator credential handling remains disabled.",
+            ),
+            self._result(
+                "connector_simulator_tokens_enabled",
+                "connector_simulator",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_simulator_tokens_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector simulator token handling remains disabled.",
+            ),
+            self._result(
+                "connector_simulator_runtime_activation_enabled",
+                "connector_simulator",
+                (
+                    "failed"
+                    if bool(
+                        getattr(
+                            settings,
+                            "connector_simulator_runtime_activation_enabled",
+                            False,
+                        )
+                    )
+                    else "passed"
+                ),
+                "critical",
+                "Connector simulator cannot activate connector runtime.",
+            ),
+            self._result(
+                "connector_simulator_services_present",
+                "connector_simulator",
+                "passed" if services_present else "failed",
+                "high",
+                "Connector simulator services are assembled.",
             ),
         ]
 

@@ -116,6 +116,20 @@ These commands expose status, mock validation, preview, and audit evidence only.
 There is no connect command, call command, credential command, token command, or
 activation command.
 
+## Connector Simulator Commands
+
+```bash
+./scripts/aionctl.sh connector-simulator status
+./scripts/aionctl.sh connector-simulator simulate
+./scripts/aionctl.sh connector-simulator replay
+./scripts/aionctl.sh connector-simulator policy-readiness
+```
+
+These commands expose synthetic local dry-run simulation, fixture replay, and
+policy readiness evidence only. They do not execute connectors, call external
+services, accept credential material, accept token material, activate runtime,
+register routes, or execute writes.
+
 ## Scenario, Demo Fixture, and Release Baseline Commands
 
 ```bash

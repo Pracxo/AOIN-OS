@@ -1,0 +1,18 @@
+{
+  "findings": [
+    {
+      "connector_simulator_finding_id": "connector-simulator-finding-example",
+      "connector_key": "mock.local.preview",
+      "finding_type": "untrusted_ingress",
+      "severity": "medium",
+      "status": "open",
+      "title": "Synthetic response remains untrusted",
+      "description": "Synthetic response shape is local fixture data only.",
+      "recommended_action": "Keep connector simulation synthetic and review before runtime work.",
+      "refs": ["docs/connectors/connector-simulation-safety.md"],
+      "metadata": {
+        "source": "response_shape"
+      }
+    }
+  ]
+}

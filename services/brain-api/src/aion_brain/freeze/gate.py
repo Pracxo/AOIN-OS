@@ -41,6 +41,7 @@ CRITICAL_FAILURE_CHECKS = {
     "module_mock_runtime_safe",
     "local_auth_safe",
     "local_session_safe",
+    "connector_simulator_safe",
     "conformance_readiness_gate_safe",
     "golden_path_passed",
     "bootstrap_local_ready",
@@ -317,6 +318,14 @@ class FreezeGateService:
                 "connector_runtime_safe",
                 "connector_runtime",
                 self._check_connector_runtime_safe,
+                severity="critical",
+            )
+        )
+        checks.append(
+            self._run_check(
+                "connector_simulator_safe",
+                "connector_simulator",
+                self._check_connector_simulator_safe,
                 severity="critical",
             )
         )
@@ -1026,6 +1035,51 @@ class FreezeGateService:
                 "storage_material_allowed": False,
                 "activation_allowed": False,
                 "route_registration_allowed": False,
+            },
+        }
+
+    def _check_connector_simulator_safe(self) -> dict[str, Any]:
+        unsafe_flags = {
+            "connector_simulator_external_calls_enabled": bool(
+                getattr(self._settings, "connector_simulator_external_calls_enabled", False)
+            ),
+            "connector_simulator_credentials_enabled": bool(
+                getattr(self._settings, "connector_simulator_credentials_enabled", False)
+            ),
+            "connector_simulator_tokens_enabled": bool(
+                getattr(self._settings, "connector_simulator_tokens_enabled", False)
+            ),
+            "connector_simulator_runtime_activation_enabled": bool(
+                getattr(
+                    self._settings,
+                    "connector_simulator_runtime_activation_enabled",
+                    False,
+                )
+            ),
+        }
+        unsafe = [key for key, value in unsafe_flags.items() if value]
+        return {
+            "status": "failed" if unsafe else "passed",
+            "message": "Connector simulator remains synthetic-only and runtime-disabled.",
+            "details": {
+                "unsafe_flags": unsafe,
+                "connector_simulator_enabled": bool(
+                    getattr(self._settings, "connector_simulator_enabled", True)
+                ),
+                "dry_run_enabled": bool(
+                    getattr(self._settings, "connector_dry_run_simulation_enabled", True)
+                ),
+                "replay_enabled": bool(
+                    getattr(self._settings, "connector_replay_fixtures_enabled", True)
+                ),
+                "policy_readiness_enabled": bool(
+                    getattr(self._settings, "connector_policy_readiness_enabled", True)
+                ),
+                "runtime_allowed": False,
+                "external_calls_allowed": False,
+                "auth_material_allowed": False,
+                "stored_auth_artifact_allowed": False,
+                "activation_allowed": False,
             },
         }
 

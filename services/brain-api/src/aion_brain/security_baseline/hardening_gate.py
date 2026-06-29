@@ -155,6 +155,7 @@ class HardeningGateService:
         checks.extend(self._local_auth_checks())
         checks.extend(self._local_session_checks())
         checks.extend(self._connector_runtime_checks())
+        checks.extend(self._connector_simulator_checks())
         checks.extend(self._audit_integrity_checks())
         checks.append(self._control_catalog_check())
 
@@ -657,6 +658,62 @@ class HardeningGateService:
                 "failed" if self._settings.connector_route_registration_enabled else "passed",
                 "Connector route registration is disabled.",
                 "connector_runtime",
+            ),
+        ]
+
+    def _connector_simulator_checks(self) -> builtins.list[dict[str, Any]]:
+        return [
+            _check(
+                "connector_simulator_available",
+                "passed" if self._settings.connector_simulator_enabled else "warning",
+                "Connector simulator is available for synthetic dry runs.",
+                "connector_simulator",
+            ),
+            _check(
+                "connector_dry_run_simulation_available",
+                (
+                    "passed"
+                    if self._settings.connector_dry_run_simulation_enabled
+                    else "warning"
+                ),
+                "Connector dry-run simulation is local and synthetic.",
+                "connector_simulator",
+            ),
+            _check(
+                "connector_simulator_external_calls_disabled",
+                (
+                    "failed"
+                    if self._settings.connector_simulator_external_calls_enabled
+                    else "passed"
+                ),
+                "Connector simulator external calls are disabled.",
+                "connector_simulator",
+            ),
+            _check(
+                "connector_simulator_credentials_disabled",
+                (
+                    "failed"
+                    if self._settings.connector_simulator_credentials_enabled
+                    else "passed"
+                ),
+                "Connector simulator credential handling is disabled.",
+                "connector_simulator",
+            ),
+            _check(
+                "connector_simulator_tokens_disabled",
+                "failed" if self._settings.connector_simulator_tokens_enabled else "passed",
+                "Connector simulator token handling is disabled.",
+                "connector_simulator",
+            ),
+            _check(
+                "connector_simulator_runtime_activation_disabled",
+                (
+                    "failed"
+                    if self._settings.connector_simulator_runtime_activation_enabled
+                    else "passed"
+                ),
+                "Connector simulator runtime activation is disabled.",
+                "connector_simulator",
             ),
         ]
 

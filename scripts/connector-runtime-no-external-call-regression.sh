@@ -3,6 +3,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
+source "$ROOT_DIR/scripts/lib/portable-search.sh"
 
 required_docs=(
   docs/connectors/connector-runtime-review-gate.md
@@ -53,22 +54,30 @@ if git ls-files --others --exclude-standard infra/postgres/migrations services/b
   exit 1
 fi
 
-if git diff --name-only --diff-filter=ACMRT HEAD -- services/brain-api/src/aion_brain/api | rg -n '.'; then
+if git diff --name-only --diff-filter=ACMRT HEAD -- services/brain-api/src/aion_brain/api \
+  | rg -v '^services/brain-api/src/aion_brain/api/connector_simulator\.py$' \
+  | rg -n '.'; then
   echo "AION-109 must not change API router files" >&2
   exit 1
 fi
 
-if git ls-files --others --exclude-standard services/brain-api/src/aion_brain/api | rg -n '.'; then
+if git ls-files --others --exclude-standard services/brain-api/src/aion_brain/api \
+  | rg -v '^services/brain-api/src/aion_brain/api/connector_simulator\.py$' \
+  | rg -n '.'; then
   echo "AION-109 must not add API router files" >&2
   exit 1
 fi
 
-if git diff --name-only --diff-filter=ACMRT HEAD -- services/brain-api/src packages/aion-sdk-python/src .env.example | rg -n '.'; then
+if git diff --name-only --diff-filter=ACMRT HEAD -- services/brain-api/src packages/aion-sdk-python/src .env.example \
+  | rg -v '^services/brain-api/src/aion_brain/api/connector_simulator\.py$|^services/brain-api/src/aion_brain/connector_simulator/|^services/brain-api/src/aion_brain/contracts/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/client\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/main\.py$|^services/brain-api/src/aion_brain/config\.py$|^services/brain-api/src/aion_brain/policy_catalog/defaults\.py$|^services/brain-api/src/aion_brain/kernel/app_factory\.py$|^services/brain-api/src/aion_brain/kernel/container\.py$|^services/brain-api/src/aion_brain/kernel/diagnostics\.py$|^services/brain-api/src/aion_brain/audit_integrity/ledger\.py$|^services/brain-api/src/aion_brain/audit_integrity/provenance\.py$|^services/brain-api/src/aion_brain/contracts/telemetry\.py$|^services/brain-api/src/aion_brain/telemetry/visual\.py$|^services/brain-api/src/aion_brain/freeze/gate\.py$|^services/brain-api/src/aion_brain/security_baseline/hardening_gate\.py$|^services/brain-api/src/aion_brain/release_package/packager\.py$|^\.env\.example$' \
+  | rg -n '.'; then
   echo "AION-109 must not change runtime, SDK, CLI, or config source files" >&2
   exit 1
 fi
 
-if git ls-files --others --exclude-standard services/brain-api/src packages/aion-sdk-python/src | rg -n '.'; then
+if git ls-files --others --exclude-standard services/brain-api/src packages/aion-sdk-python/src \
+  | rg -v '^services/brain-api/src/aion_brain/api/connector_simulator\.py$|^services/brain-api/src/aion_brain/connector_simulator/|^services/brain-api/src/aion_brain/contracts/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_simulator\.py$' \
+  | rg -n '.'; then
   echo "AION-109 must not add runtime, SDK, or CLI source files" >&2
   exit 1
 fi

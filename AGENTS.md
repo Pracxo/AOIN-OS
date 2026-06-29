@@ -39,6 +39,11 @@ Instructions for future Codex runs in this repository:
   validation, preview, blocker, and audit evidence, but it must keep runtime,
   external calls, credentials, token storage, activation, and route registration
   disabled by default.
+- Connector simulator work may add deterministic synthetic dry-run, replay,
+  policy readiness, audit, SDK, CLI, docs, examples, and static console
+  evidence only. It must not enable runtime, external calls, credentials,
+  tokens, activation, route registration, tool execution, write execution, or
+  trusted connector ingress.
 - Do not add domain-specific connectors in Brain core.
 - Policy actions and permissions must remain generic dotted lowercase names.
 - Keep policy simulations side-effect-free; they must never execute target actions.

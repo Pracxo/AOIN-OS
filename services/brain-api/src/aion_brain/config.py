@@ -1857,6 +1857,62 @@ class Settings(BaseSettings):
             "connector_route_registration_enabled",
         ),
     )
+    connector_simulator_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_SIMULATOR_ENABLED",
+            "connector_simulator_enabled",
+        ),
+    )
+    connector_dry_run_simulation_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_DRY_RUN_SIMULATION_ENABLED",
+            "connector_dry_run_simulation_enabled",
+        ),
+    )
+    connector_replay_fixtures_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_REPLAY_FIXTURES_ENABLED",
+            "connector_replay_fixtures_enabled",
+        ),
+    )
+    connector_policy_readiness_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_POLICY_READINESS_ENABLED",
+            "connector_policy_readiness_enabled",
+        ),
+    )
+    connector_simulator_external_calls_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_SIMULATOR_EXTERNAL_CALLS_ENABLED",
+            "connector_simulator_external_calls_enabled",
+        ),
+    )
+    connector_simulator_credentials_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_SIMULATOR_CREDENTIALS_ENABLED",
+            "connector_simulator_credentials_enabled",
+        ),
+    )
+    connector_simulator_tokens_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_SIMULATOR_TOKENS_ENABLED",
+            "connector_simulator_tokens_enabled",
+        ),
+    )
+    connector_simulator_runtime_activation_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_SIMULATOR_RUNTIME_ACTIVATION_ENABLED",
+            "connector_simulator_runtime_activation_enabled",
+        ),
+    )
     auth_credentials_enabled: bool = Field(
         default=False,
         validation_alias=AliasChoices(

@@ -31,3 +31,10 @@ This proof records the disabled connector runtime state after AION-109.
 ## Review Decision
 
 AION-109 keeps the disabled connector prototype frozen. The disabled proof is a release blocker for every later connector task.
+
+## AION-110 Addendum
+
+The connector simulator does not weaken this proof. Simulator status and
+results still report connector runtime disabled, external calls disabled,
+credential use disabled, token use disabled, activation disabled, and route
+registration disabled.
