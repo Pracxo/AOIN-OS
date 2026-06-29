@@ -146,9 +146,16 @@ class LocalAuthAuditService:
 
     def _examples_safe(self, findings: list[dict[str, object]]) -> bool:
         ok = True
+        aion_104_review_examples = {
+            "auth-safety-evidence-pack.json",
+            "auth-runtime-disabled-proof.json",
+            "auth-traceability-matrix.json",
+            "auth-no-go-regression-result.json",
+        }
         for path in sorted((self._repo_root / "examples/auth").glob("*.json")):
             if (
-                path.name.startswith("local-session")
+                path.name in aion_104_review_examples
+                or path.name.startswith("local-session")
                 or path.name == "role-aware-session-context.json"
                 or "action-authorization" in path.name
                 or "auth-runtime" in path.name

@@ -14,6 +14,7 @@
 | Stale demo data | Evidence examples and demo JSON are checked locally. | `./scripts/operator-platform-checkpoint.sh` | Demo data can lag behind docs if not checked together. | Evidence examples are invalid, missing required areas, or claim a passing status without scripts. |
 | Policy bypass | Dry-run authorization keeps denials visible. | `./scripts/action-authorization-check.sh` and `./scripts/role-filter-check.sh` | Role filtering could be mistaken for production authorization. | Any role path grants execution, activation, external calls, or privileged bypass. |
 | Audit bypass | Operator console contract audits fail closed on unsafe files. | `./scripts/operator-console-contract-check.sh` | New evidence files need explicit checkpoint validation. | Any evidence file escapes both legacy contract checks and the AION-101 checkpoint script. |
+| Auth prototype drift | AION-104 freezes the local auth prototype review and no-go regression pack. | `./scripts/auth-prototype-review.sh` and `./scripts/auth-no-go-regression.sh` | Future auth work could skip the disabled/mock-only baseline. | Any production auth, login/logout, credential, token, cookie, session persistence, provider SDK, external identity runtime, migration, API router, or bypass appears before a later implementation ADR. |
 
 ## AION-102 stabilization control
 
@@ -22,3 +23,11 @@
 one long-running regression matrix and one checkpoint freeze gate. Any failed
 row remains a release blocker and must be fixed forward without bypassing the
 underlying local check.
+
+## AION-104 auth review control
+
+`./scripts/auth-prototype-review.sh` and
+`./scripts/auth-no-go-regression.sh` now aggregate the local auth, session,
+role, action authorization, production auth architecture, disabled auth
+runtime, static console, docs, and no-go controls into an auth-specific
+pre-implementation gate.

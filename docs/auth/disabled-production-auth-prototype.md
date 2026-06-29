@@ -31,3 +31,10 @@ AION-100 links this disabled auth runtime panel into the static UI release
 gate. The UI gate verifies the panel remains no-login, no-credentials,
 no-token, no-cookie, no-session, no-provider-call, no-execution, and
 no-activation.
+## AION-104 Prototype Review Gate
+
+AION-104 freezes the disabled production auth prototype as mock-only evidence.
+The disabled auth runtime proof requires production auth, auth runtime
+enablement, credentials, token issuance, cookie issuance, session persistence,
+login/logout endpoints, external identity provider runtime, provider SDKs,
+package files, migrations, and real protected values to remain absent.

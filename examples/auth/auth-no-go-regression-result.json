@@ -1,0 +1,24 @@
+{
+  "artifact": "auth_no_go_regression_result",
+  "task": "AION-104",
+  "status": "passed",
+  "checks": [
+    {"name": "login route", "expected_status": "passed"},
+    {"name": "logout route", "expected_status": "passed"},
+    {"name": "token route", "expected_status": "passed"},
+    {"name": "callback route", "expected_status": "passed"},
+    {"name": "session storage", "expected_status": "passed"},
+    {"name": "cookie issuance", "expected_status": "passed"},
+    {"name": "password field", "expected_status": "passed"},
+    {"name": "token field", "expected_status": "passed"},
+    {"name": "credential field", "expected_status": "passed"},
+    {"name": "provider SDK", "expected_status": "passed"},
+    {"name": "package file", "expected_status": "passed"},
+    {"name": "external identity call", "expected_status": "passed"},
+    {"name": "production auth enabled", "expected_status": "passed"},
+    {"name": "auth bypass", "expected_status": "passed"}
+  ],
+  "production_auth_enabled": false,
+  "protected_material_present": false,
+  "external_identity_provider_enabled": false
+}

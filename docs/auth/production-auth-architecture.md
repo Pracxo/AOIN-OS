@@ -136,3 +136,10 @@ default.
 - unreviewed role mapping
 - reverse proxy header spoofing risk unresolved
 - `production_auth_enabled` set true before approval
+## AION-104 Prototype Review Gate
+
+AION-104 does not implement the production auth architecture. It adds the
+pre-implementation evidence gate that future auth tasks must satisfy before
+changing runtime boundaries. Production auth remains disabled, and no provider
+SDK, provider route, login/logout flow, credential store, token issuance, cookie
+issuance, session persistence, migration, package file, or API router is added.

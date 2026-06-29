@@ -76,7 +76,15 @@ import sys
 from pathlib import Path
 
 root = Path(sys.argv[1])
+aion_104_review_examples = {
+    "auth-safety-evidence-pack.json",
+    "auth-runtime-disabled-proof.json",
+    "auth-traceability-matrix.json",
+    "auth-no-go-regression-result.json",
+}
 for path in sorted((root / "examples" / "auth").glob("*.json")):
+    if path.name in aion_104_review_examples:
+        continue
     if path.name.startswith("local-session") or path.name == "role-aware-session-context.json":
         continue
     if "authorization" in path.name:

@@ -104,3 +104,4 @@ closure decision in ADR 0072.
 - [0092: Operator Platform Checkpoint](0092-operator-platform-checkpoint.md) - Defines the post-AION-100 checkpoint evidence pack and next-phase baseline.
 - [0093: Operator Platform Stabilization Gate](0093-operator-platform-stabilization-gate.md) - Defines the long-running regression matrix and checkpoint freeze gate.
 - [0094: Static Console UX Refinement](0094-static-console-ux-refinement.md) - Defines dependency-free static console navigation, accessibility, and safe local command-copy rules.
+- [0095: Local Auth Prototype Review Gate](0095-local-auth-prototype-review-gate.md) - Defines the disabled/mock-only auth safety evidence gate before future implementation work.

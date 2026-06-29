@@ -1,0 +1,75 @@
+{
+  "artifact": "auth_safety_evidence_pack",
+  "task": "AION-104",
+  "status": "passed",
+  "evidence": [
+    {
+      "area": "local auth design",
+      "script": "./scripts/auth-design-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "local auth contract",
+      "script": "./scripts/local-auth-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "dev identity simulation",
+      "script": "./scripts/local-auth-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "local session preview",
+      "script": "./scripts/local-session-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "role filtering",
+      "script": "./scripts/role-filter-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "dry-run action authorization",
+      "script": "./scripts/action-authorization-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "production auth architecture",
+      "script": "./scripts/production-auth-architecture-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "disabled auth runtime",
+      "script": "./scripts/auth-runtime-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "static console auth panels",
+      "script": "./scripts/static-console-safety-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "docs audit",
+      "script": "./scripts/docs-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "boundary checks",
+      "script": "./scripts/boundary-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    }
+  ],
+  "protected_material_present": false,
+  "runtime_auth_added": false
+}

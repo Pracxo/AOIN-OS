@@ -34,3 +34,10 @@ Role filtering remains visibility-only. Dry-run action authorization uses the
 same role proof matrix for request, preview, and review authorization, but it
 does not grant execute, activation, write, external-call, login, or credential
 capability.
+## AION-104 Prototype Review Gate
+
+AION-104 keeps role-aware console filtering as visibility-only. Role filtering
+may hide or mark read-only sections, but forbidden actions and safety blockers
+remain visible. No role grants production auth, writes, activation, execution,
+external calls, credential handling, token issuance, cookie issuance, session
+persistence, or privileged bypass.

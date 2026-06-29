@@ -124,7 +124,15 @@ import sys
 from pathlib import Path
 
 root = Path(sys.argv[1])
+aion_104_review_examples = {
+    "auth-safety-evidence-pack.json",
+    "auth-runtime-disabled-proof.json",
+    "auth-traceability-matrix.json",
+    "auth-no-go-regression-result.json",
+}
 for path in sorted((root / "examples" / "auth").glob("*.json")):
+    if path.name in aion_104_review_examples:
+        continue
     if path.name.startswith("local-session") or path.name == "role-aware-session-context.json":
         continue
     if "authorization" in path.name:
@@ -199,6 +207,12 @@ allowed_auth_paths = {
     "docs/auth/auth-runtime-gate.md",
     "docs/auth/auth-runtime-audit.md",
     "docs/auth/auth-runtime-no-go.md",
+    "docs/auth/local-auth-prototype-review.md",
+    "docs/auth/auth-safety-evidence-pack.md",
+    "docs/auth/auth-runtime-disabled-proof.md",
+    "docs/auth/auth-traceability-matrix.md",
+    "docs/auth/auth-no-go-regression-pack.md",
+    "docs/auth/pre-implementation-auth-gate.md",
     "docs/operator-console/dry-run-action-authorization.md",
     "docs/operator-console/action-authorization-preview.md",
     "docs/operator-console/action-authorization-deny-matrix.md",
@@ -207,6 +221,7 @@ allowed_auth_paths = {
     "docs/adr/0088-dry-run-action-authorization-enforcement.md",
     "docs/adr/0089-production-auth-architecture-decision.md",
     "docs/adr/0090-disabled-production-auth-prototype.md",
+    "docs/adr/0095-local-auth-prototype-review-gate.md",
     "examples/auth/local-operator-identity.json",
     "examples/auth/operator-role-matrix.json",
     "examples/auth/session-boundary-example.json",
@@ -236,6 +251,10 @@ allowed_auth_paths = {
     "examples/auth/mock-claims-preview-result.json",
     "examples/auth/auth-runtime-audit-request.json",
     "examples/auth/auth-runtime-blockers.json",
+    "examples/auth/auth-safety-evidence-pack.json",
+    "examples/auth/auth-runtime-disabled-proof.json",
+    "examples/auth/auth-traceability-matrix.json",
+    "examples/auth/auth-no-go-regression-result.json",
     "operator-console-static/demo-data/action-authorization-preview.json",
     "operator-console-static/demo-data/action-authorization-deny-matrix.json",
     "operator-console-static/demo-data/auth-runtime-status.json",
@@ -297,6 +316,8 @@ allowed_auth_paths = {
     "operator-console-static/demo-data/role-filtered-view-model.json",
     "scripts/auth-design-check.sh",
     "scripts/local-auth-check.sh",
+    "scripts/auth-prototype-review.sh",
+    "scripts/auth-no-go-regression.sh",
     "services/brain-api/src/aion_brain/contracts/local_auth.py",
     "services/brain-api/src/aion_brain/local_auth/__init__.py",
     "services/brain-api/src/aion_brain/local_auth/redaction.py",
@@ -317,6 +338,7 @@ allowed_auth_paths = {
     "packages/aion-sdk-python/tests/test_local_auth_resource.py",
     "packages/aion-sdk-python/tests/test_cli_local_auth.py",
     "services/brain-api/tests/test_auth_design_docs.py",
+    "services/brain-api/tests/test_auth_prototype_review_docs.py",
     "services/brain-api/tests/test_local_auth_contracts.py",
     "services/brain-api/tests/test_local_auth_redaction.py",
     "services/brain-api/tests/test_local_auth_roles.py",

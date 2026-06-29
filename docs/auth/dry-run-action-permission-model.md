@@ -26,3 +26,9 @@ Future OIDC-compatible production auth may identify an operator only after a
 later gated implementation. It must not bypass dry-run action authorization.
 No production auth is implemented in AION-098, no provider integration is added
 in AION-098, and `production_auth_enabled` remains false.
+## AION-104 Prototype Review Gate
+
+AION-104 keeps action authorization dry-run only. Authorization evidence may
+allow request, preview, or review records, but it does not execute actions,
+activate modules, write target systems, call external services, add auth
+credentials, issue tokens or cookies, persist sessions, or bypass policy.

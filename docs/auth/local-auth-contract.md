@@ -37,3 +37,11 @@ Dry-run action authorization consumes local auth roles as input. It accepts the
 role context only for dry-run previews and review records, and it still keeps
 write, execution, activation, external-call, production-auth, and credential
 capabilities disabled.
+## AION-104 Prototype Review Gate
+
+The local auth contract remains dev-only after AION-104. The new review gate
+requires local auth, session, role filtering, dry-run action authorization,
+disabled runtime, static console, docs, and boundary evidence before any later
+auth implementation planning. The contract still does not authenticate users,
+store credentials, issue tokens or cookies, persist sessions, call identity
+providers, grant writes, grant activation, or grant execution.
