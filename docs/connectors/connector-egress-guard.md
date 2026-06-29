@@ -73,3 +73,8 @@ scoped, revocable, audit-backed, and subordinate to policy.
 - rate limits absent
 - policy bypass
 - operator review bypass
+## AION-108 Disabled Prototype Relationship
+
+AION-108 adds a mock egress preview that always returns `egress_allowed=false`
+and `external_call_allowed=false`. It is evidence for a future guard, not a
+network path.

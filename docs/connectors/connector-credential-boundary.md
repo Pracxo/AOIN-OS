@@ -56,3 +56,8 @@ passwords, provider secrets, raw headers, or raw provider payloads.
 - credential values appear in audit records
 - external identity runtime is added
 - login/logout behavior is added
+## AION-108 Disabled Prototype Relationship
+
+AION-108 keeps connector credential handling disabled. Mock manifests must set
+`credentials_required=false`, examples contain no credential material, and the
+static console exposes no connector credential input.

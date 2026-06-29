@@ -330,6 +330,7 @@ h1 {
 .operator-actions-panel,
 .action-authorization-panel,
 .auth-runtime-panel,
+.connector-runtime-panel,
 .local-auth-panel,
 .role-access-panel,
 .local-session-panel {
@@ -344,6 +345,7 @@ h1 {
 .operator-actions-panel.is-muted,
 .action-authorization-panel.is-muted,
 .auth-runtime-panel.is-muted,
+.connector-runtime-panel.is-muted,
 .role-access-panel.is-muted,
 .local-session-panel.is-muted {
   border-style: dashed;

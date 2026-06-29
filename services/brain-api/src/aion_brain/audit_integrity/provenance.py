@@ -17,6 +17,19 @@ LOCAL_SESSION_PROVENANCE_BOUNDARY = {
     "session_state_stored": False,
 }
 
+CONNECTOR_RUNTIME_PROVENANCE_BOUNDARY = {
+    "source_component": "connector_runtime",
+    "local_only": True,
+    "read_only": True,
+    "mock_only": True,
+    "connector_runtime_enabled": False,
+    "external_calls_enabled": False,
+    "credentials_stored": False,
+    "token_storage_enabled": False,
+    "activation_enabled": False,
+    "route_registration_enabled": False,
+}
+
 
 class ProvenanceService:
     """Create, query, and soft-delete provenance links."""

@@ -1,0 +1,18 @@
+{
+  "trace_id": "trace-connector-egress-preview-example",
+  "connector_key": "mock.local.preview",
+  "owner_scope": [
+    "workspace:main"
+  ],
+  "preview_type": "dry_run",
+  "payload_summary": {
+    "fields": [
+      "record_id"
+    ],
+    "external_call_allowed": false
+  },
+  "metadata": {
+    "mock_only": true
+  },
+  "created_by": "local.operator"
+}

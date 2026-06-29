@@ -154,6 +154,7 @@ class HardeningGateService:
         checks.extend(self._conformance_checks())
         checks.extend(self._local_auth_checks())
         checks.extend(self._local_session_checks())
+        checks.extend(self._connector_runtime_checks())
         checks.extend(self._audit_integrity_checks())
         checks.append(self._control_catalog_check())
 
@@ -616,6 +617,46 @@ class HardeningGateService:
                 "failed" if self._settings.local_session_external_calls_enabled else "passed",
                 "Local session cannot grant external calls.",
                 "local_session",
+            ),
+        ]
+
+    def _connector_runtime_checks(self) -> builtins.list[dict[str, Any]]:
+        return [
+            _check(
+                "connector_runtime_disabled",
+                "failed" if self._settings.connector_runtime_enabled else "passed",
+                "Connector runtime is disabled.",
+                "connector_runtime",
+            ),
+            _check(
+                "connector_external_calls_disabled",
+                "failed" if self._settings.connector_external_calls_enabled else "passed",
+                "Connector external calls are disabled.",
+                "connector_runtime",
+            ),
+            _check(
+                "connector_credentials_disabled",
+                "failed" if self._settings.connector_credentials_enabled else "passed",
+                "Connector credential handling is disabled.",
+                "connector_runtime",
+            ),
+            _check(
+                "connector_token_storage_disabled",
+                "failed" if self._settings.connector_token_storage_enabled else "passed",
+                "Connector token storage is disabled.",
+                "connector_runtime",
+            ),
+            _check(
+                "connector_activation_disabled",
+                "failed" if self._settings.connector_activation_enabled else "passed",
+                "Connector activation is disabled.",
+                "connector_runtime",
+            ),
+            _check(
+                "connector_route_registration_disabled",
+                "failed" if self._settings.connector_route_registration_enabled else "passed",
+                "Connector route registration is disabled.",
+                "connector_runtime",
             ),
         ]
 

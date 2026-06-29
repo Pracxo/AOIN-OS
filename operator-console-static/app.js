@@ -62,6 +62,10 @@
     status: "demo-data/auth-runtime-status.json",
     preview: "demo-data/mock-claims-preview.json"
   };
+  var CONNECTOR_RUNTIME_DEMOS = {
+    status: "demo-data/connector-runtime-status.json",
+    preview: "demo-data/connector-boundary-preview.json"
+  };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
     role_filter: "demo-data/role-filtered-view-model.json"
@@ -99,6 +103,7 @@
     loadLocalSessionPanels();
     loadActionAuthorizationPanel();
     loadAuthRuntimePanel();
+    loadConnectorRuntimePanels();
     loadView(state.activeView);
   });
 
@@ -548,7 +553,16 @@
       "login_endpoint_enabled",
       "logout_endpoint_enabled",
       "mock_claims_preview_enabled",
-      "actor_mapping_preview_enabled"
+      "actor_mapping_preview_enabled",
+      "connector_runtime_enabled",
+      "connector_mock_preview_enabled",
+      "connector_egress_preview_enabled",
+      "connector_ingress_preview_enabled",
+      "connector_external_calls_enabled",
+      "connector_credentials_enabled",
+      "connector_token_storage_enabled",
+      "connector_activation_enabled",
+      "connector_route_registration_enabled"
     ].indexOf(normalized) !== -1) {
       return false;
     }
@@ -1317,6 +1331,111 @@
       ["token_present", String(Boolean(preview.token_present))],
       ["cookie_present", String(Boolean(preview.cookie_present))],
       ["session_persisted", String(Boolean(preview.session_persisted))]
+    ].forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "checklist-row";
+      var label = document.createElement("span");
+      label.textContent = item[0];
+      var value = document.createElement("strong");
+      value.textContent = safeText(item[1] || "none");
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
+    });
+  }
+
+  function loadConnectorRuntimePanels() {
+    var statusPromise = state.apiAllowed
+      ? fetchConnectorRuntimeStatus().catch(function () {
+        return fetchJson(CONNECTOR_RUNTIME_DEMOS.status);
+      })
+      : fetchJson(CONNECTOR_RUNTIME_DEMOS.status);
+    Promise.all([
+      statusPromise,
+      fetchJson(CONNECTOR_RUNTIME_DEMOS.preview)
+    ])
+      .then(function (payloads) {
+        renderConnectorRuntimeStatus(redact(payloads[0]));
+        renderConnectorBoundaryPreview(redact(payloads[1]));
+      })
+      .catch(function () {
+        renderConnectorRuntimeStatus({
+          connector_runtime_enabled: false,
+          connector_external_calls_enabled: false,
+          connector_credentials_enabled: false,
+          connector_token_storage_enabled: false,
+          connector_activation_enabled: false,
+          connector_route_registration_enabled: false,
+          blockers: [{ blocker_type: "generic", reason: "connector_runtime_demo_unavailable" }]
+        });
+        renderConnectorBoundaryPreview({ status: "unavailable", checks: [] });
+      });
+  }
+
+  function fetchConnectorRuntimeStatus() {
+    var endpoint = state.apiBase + "/brain/connector-runtime/status?scope=workspace:main";
+    return fetch(endpoint).then(function (response) {
+      if (!response.ok) {
+        throw new Error("connector runtime status unavailable");
+      }
+      return response.json();
+    });
+  }
+
+  function renderConnectorRuntimeStatus(status) {
+    var grid = document.getElementById("connector-runtime-status-grid");
+    var blockers = document.getElementById("connector-runtime-blockers");
+    if (!grid || !blockers) {
+      return;
+    }
+    grid.textContent = "";
+    [
+      "connector_runtime_enabled",
+      "connector_external_calls_enabled",
+      "connector_credentials_enabled",
+      "connector_token_storage_enabled",
+      "connector_activation_enabled",
+      "connector_route_registration_enabled"
+    ].forEach(function (key) {
+      var card = document.createElement("div");
+      card.className = "safety-card";
+      card.textContent = key + "=" + String(Boolean(status && status[key]));
+      grid.appendChild(card);
+    });
+    blockers.textContent = "";
+    var items = status && Array.isArray(status.blockers) ? status.blockers : [];
+    if (!items.length) {
+      blockers.appendChild(emptyNote("Connector runtime blockers render here."));
+      return;
+    }
+    items.forEach(function (item) {
+      var badge = document.createElement("div");
+      badge.className = "blocker-badge";
+      var label = document.createElement("strong");
+      label.textContent = safeText(item.blocker_type || item.reason || "disabled");
+      var value = document.createElement("span");
+      value.textContent = safeText(item.reason || "blocked by design");
+      badge.appendChild(label);
+      badge.appendChild(value);
+      blockers.appendChild(badge);
+    });
+  }
+
+  function renderConnectorBoundaryPreview(preview) {
+    var container = document.getElementById("connector-boundary-preview");
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    [
+      ["status", preview.status || "preview"],
+      ["manifest_valid", String(Boolean(preview.manifest_valid))],
+      ["egress_allowed", String(Boolean(preview.egress_allowed))],
+      ["external_call_allowed", String(Boolean(preview.external_call_allowed))],
+      ["credentials_present", String(Boolean(preview.credentials_present))],
+      ["trusted_ingress", String(Boolean(preview.trusted_ingress))],
+      ["provenance_required", String(Boolean(preview.provenance_required))],
+      ["redaction_applied", String(Boolean(preview.redaction_applied))]
     ].forEach(function (item) {
       var row = document.createElement("div");
       row.className = "checklist-row";

@@ -72,3 +72,9 @@ Every next-phase branch should start by running:
 
 The regression and freeze gates must pass before any future UI, auth,
 activation, connector, or write-path implementation planning can proceed.
+## AION-108 Connector Runtime Status
+
+The next-phase operator platform includes a static disabled connector runtime
+panel. It displays hard-off status, blockers, and mock boundary preview data
+without connector registration forms, credential inputs, external URL inputs,
+connect controls, call controls, or activation controls.

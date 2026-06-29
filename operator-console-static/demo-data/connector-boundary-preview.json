@@ -1,0 +1,108 @@
+{
+  "preview_id": "connector-boundary-preview-demo",
+  "connector_key": "mock.local.preview",
+  "status": "preview",
+  "manifest_valid": true,
+  "read_only": true,
+  "egress_allowed": false,
+  "external_call_allowed": false,
+  "credentials_present": false,
+  "trusted_ingress": false,
+  "provenance_required": true,
+  "redaction_applied": true,
+  "prompt_injection_scan_required": true,
+  "sections": [
+    {
+      "section_key": "runtime_gate",
+      "title": "Runtime gate",
+      "status": "passed"
+    },
+    {
+      "section_key": "egress_preview",
+      "title": "Egress preview",
+      "status": "blocked"
+    },
+    {
+      "section_key": "ingress_preview",
+      "title": "Ingress preview",
+      "status": "untrusted"
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_key": "connector_runtime_disabled",
+      "status": "active",
+      "bypassable": false
+    },
+    {
+      "blocker_key": "external_calls_disabled",
+      "status": "active",
+      "bypassable": false
+    },
+    {
+      "blocker_key": "route_registration_disabled",
+      "status": "active",
+      "bypassable": false
+    }
+  ],
+  "warnings": [
+    {
+      "warning_key": "preview_only",
+      "status": "acknowledged"
+    }
+  ],
+  "refs": [
+    "docs/connectors/disabled-connector-prototype.md",
+    "docs/connectors/connector-runtime-gate.md",
+    "docs/adr/0099-disabled-external-connector-prototype.md"
+  ],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
+  ],
+  "checks": [
+    {
+      "name": "runtime_disabled",
+      "passed": true
+    },
+    {
+      "name": "egress_blocked",
+      "passed": true
+    },
+    {
+      "name": "ingress_untrusted",
+      "passed": true
+    }
+  ],
+  "metadata": {
+    "mock_only": true,
+    "owner_scope": [
+      "workspace:main"
+    ],
+    "route_registration_allowed": false,
+    "activation_allowed": false
+  },
+  "created_at": "2026-06-29T00:00:00Z"
+}

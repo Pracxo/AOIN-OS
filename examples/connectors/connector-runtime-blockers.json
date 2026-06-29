@@ -1,0 +1,16 @@
+{
+  "blockers": [
+    {
+      "connector_runtime_blocker_id": "connector-runtime-blocker-example",
+      "blocker_type": "connector_runtime_disabled",
+      "severity": "critical",
+      "status": "open",
+      "reason": "connector_runtime_disabled_by_default",
+      "recommended_action": "keep_runtime_disabled_until_release_gate",
+      "source_type": "settings",
+      "source_id": null,
+      "metadata": {},
+      "created_at": "2026-06-29T00:00:00Z"
+    }
+  ]
+}

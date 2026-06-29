@@ -35,6 +35,10 @@ Instructions for future Codex runs in this repository:
 - Never add Docker execution without an explicit future task.
 - Never add subprocess execution in sandbox code.
 - Connectors are metadata-only in v0.1 and must not call external systems.
+- Disabled connector runtime work may add mock-only status, manifest
+  validation, preview, blocker, and audit evidence, but it must keep runtime,
+  external calls, credentials, token storage, activation, and route registration
+  disabled by default.
 - Do not add domain-specific connectors in Brain core.
 - Policy actions and permissions must remain generic dotted lowercase names.
 - Keep policy simulations side-effect-free; they must never execute target actions.

@@ -138,6 +138,20 @@ The SDK sends metadata-only requests to the public Brain API. It does not
 import `aion_brain`, access databases, execute containers, accept raw secrets,
 or call external connector systems.
 
+## Connector Runtime Resource
+
+`client.connector_runtime` supports disabled connector prototype evidence:
+
+- `status(scope)`
+- `validate_manifest(payload)`
+- `egress_preview(payload)`
+- `ingress_preview(payload)`
+- `audit(payload)`
+
+The resource calls public Brain APIs only. It does not import `aion_brain`,
+add connector/provider SDKs, store credentials, store tokens, activate
+connectors, or call external systems.
+
 ## Scenarios Resource
 
 `client.scenarios` supports the end-to-end validation harness:

@@ -1766,3 +1766,16 @@ These actions are local/dev, read-only or preview-only controls. Policy denies
 production auth enablement, login, logout, token issuance, cookie issuance,
 session persistence, credential handling, external identity providers,
 execution, activation, external calls, and unknown auth runtime actions.
+## Connector Runtime Preview Actions
+
+AION-108 adds scoped policy actions for disabled connector preview evidence:
+
+- `connector_runtime.status.read`
+- `connector_runtime.mock_manifest.validate`
+- `connector_runtime.egress.preview`
+- `connector_runtime.ingress.preview`
+- `connector_runtime.audit.run`
+
+These actions do not grant connector execution, external calls, credential
+storage, token storage, route registration, module activation, or capability
+activation. Unknown connector runtime actions fail closed.

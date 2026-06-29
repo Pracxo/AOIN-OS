@@ -1987,3 +1987,13 @@ Future runtime auth must enter through an explicit identity provider boundary,
 map verified identity into ActorContext-compatible records, preserve policy and
 audit as authoritative gates, and keep dry-run action authorization in front of
 operator request, preview, and review records.
+## AION-108 Disabled Connector Prototype
+
+AION-108 adds a disabled external connector prototype behind hard-off settings.
+It sits inside the connector boundary and produces local mock evidence only:
+status, manifest validation, egress preview, ingress preview, blockers, and
+audit results.
+
+The prototype does not perform connector runtime behavior. It does not add
+network clients, connector/provider SDKs, external service calls, credentials,
+token storage, dynamic routes, activation, code loading, or tool execution.

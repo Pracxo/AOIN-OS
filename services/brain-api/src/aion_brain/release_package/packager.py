@@ -341,6 +341,7 @@ class ReleasePackager:
             )
             reports["local_auth"] = self._local_auth_summary()
             reports["local_session"] = self._local_session_summary()
+            reports["connector_runtime"] = self._connector_runtime_summary()
             reports["capability_conformance"] = self._conformance_summary(request.owner_scope)
             reports["golden_path"] = self._golden_path_summary(request.owner_scope)
             reports["bootstrap"] = self._bootstrap_summary(request.owner_scope)
@@ -650,6 +651,41 @@ class ReleasePackager:
             "execution_allowed": False,
             "activation_allowed": False,
             "external_calls_allowed": False,
+            "unsafe_flags": unsafe,
+        }
+
+    def _connector_runtime_summary(self) -> dict[str, Any]:
+        unsafe_flags = {
+            "connector_runtime_enabled": bool(
+                getattr(self._settings, "connector_runtime_enabled", False)
+            ),
+            "connector_external_calls_enabled": bool(
+                getattr(self._settings, "connector_external_calls_enabled", False)
+            ),
+            "connector_credentials_enabled": bool(
+                getattr(self._settings, "connector_credentials_enabled", False)
+            ),
+            "connector_token_storage_enabled": bool(
+                getattr(self._settings, "connector_token_storage_enabled", False)
+            ),
+            "connector_activation_enabled": bool(
+                getattr(self._settings, "connector_activation_enabled", False)
+            ),
+            "connector_route_registration_enabled": bool(
+                getattr(self._settings, "connector_route_registration_enabled", False)
+            ),
+        }
+        unsafe = [key for key, value in unsafe_flags.items() if value]
+        return {
+            "available": bool(getattr(self._settings, "connector_mock_preview_enabled", True)),
+            "status": "blocked" if unsafe else "ready",
+            "mock_only": True,
+            "runtime_enabled": False,
+            "external_calls_enabled": False,
+            "credentials_enabled": False,
+            "token_storage_enabled": False,
+            "activation_enabled": False,
+            "route_registration_enabled": False,
             "unsafe_flags": unsafe,
         }
 

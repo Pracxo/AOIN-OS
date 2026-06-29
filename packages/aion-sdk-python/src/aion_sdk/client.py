@@ -54,6 +54,9 @@ class AIONClient:
             "action_authorization"
         ).ActionAuthorizationResource(self)
         self.auth_runtime = _import_resource("auth_runtime").AuthRuntimeResource(self)
+        self.connector_runtime = _import_resource(
+            "connector_runtime"
+        ).ConnectorRuntimeResource(self)
         self.operator_console = _import_resource(
             "operator_console"
         ).OperatorConsoleResource(self)

@@ -310,3 +310,39 @@ def record_local_session_audit_event(
         },
         metadata={"local_only": True},
     )
+
+
+def record_connector_runtime_audit(
+    audit_sink: object | None,
+    *,
+    audit_id: str,
+    trace_id: str | None,
+    actor_id: str | None,
+    owner_scope: list[str],
+    status: str,
+) -> AuditEntry | None:
+    """Record a disabled connector-runtime audit without storing connector material."""
+    return record_audit_event(
+        audit_sink,
+        action_type="connector_runtime.audit.run",
+        resource_type="connector_runtime_audit",
+        resource_id=audit_id,
+        event_type="connector_runtime_audit_completed",
+        outcome="completed" if status == "passed" else "failed",
+        source_component="connector_runtime_audit_service",
+        trace_id=trace_id,
+        actor_id=actor_id,
+        risk_level="medium",
+        payload={
+            "status": status,
+            "owner_scope": owner_scope,
+            "mock_only": True,
+            "connector_runtime_enabled": False,
+            "external_calls_enabled": False,
+            "credentials_enabled": False,
+            "token_storage_enabled": False,
+            "activation_enabled": False,
+            "route_registration_enabled": False,
+        },
+        metadata={"local_only": True, "read_only": True},
+    )

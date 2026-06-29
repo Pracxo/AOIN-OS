@@ -62,3 +62,8 @@ data is promoted.
 - provenance missing
 - stale data trusted as current
 - operator review bypassed
+## AION-108 Disabled Prototype Relationship
+
+AION-108 adds a mock ingress preview that always marks connector data
+`trusted=false`, requires provenance, applies redaction, and requires prompt
+injection scanning before future review.

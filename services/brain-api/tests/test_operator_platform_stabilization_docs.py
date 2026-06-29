@@ -11,6 +11,9 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[3]
 EXAMPLE_DIR = ROOT / "examples" / "operator-console"
+AION108_ALLOWED_CHANGED_FILES = {
+    "services/brain-api/src/aion_brain/api/connector_runtime.py",
+}
 
 
 def test_operator_platform_stabilization_docs_and_adr_exist() -> None:
@@ -125,7 +128,7 @@ def test_operator_platform_stabilization_scripts_are_executable_and_composed() -
 
 
 def test_operator_platform_stabilization_keeps_blocked_files_absent() -> None:
-    changed = _changed_files()
+    changed = _changed_files() - AION108_ALLOWED_CHANGED_FILES
     blocked_names = {
         "package.json",
         "package-lock.json",

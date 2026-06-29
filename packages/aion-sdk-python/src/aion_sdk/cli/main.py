@@ -23,6 +23,7 @@ from aion_sdk.cli.commands.bootstrap import install_bootstrap_commands
 from aion_sdk.cli.commands.concepts import install_concept_commands
 from aion_sdk.cli.commands.config import install_config_commands
 from aion_sdk.cli.commands.conformance import install_conformance_commands
+from aion_sdk.cli.commands.connector_runtime import install_connector_runtime_commands
 from aion_sdk.cli.commands.contracts import install_contract_commands
 from aion_sdk.cli.commands.decisions import install_decision_commands
 from aion_sdk.cli.commands.dialogue import install_dialogue_commands
@@ -577,6 +578,7 @@ install_operator_commands(app, get_client=_client, get_scope=_scope, render=_ren
 install_operator_action_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_action_authorization_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_auth_runtime_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_connector_runtime_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_operator_console_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_local_auth_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_local_session_commands(app, get_client=_client, get_scope=_scope, render=_render)
