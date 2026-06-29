@@ -4120,3 +4120,36 @@ Developer command:
 ./scripts/connector-boundary-design-check.sh
 ./scripts/connector-no-go-regression.sh
 ```
+
+### AION-107 Operator Action Write-Path Architecture
+
+AION-107 designs the future operator action write path before any execution
+capability exists. It adds write-path architecture, approval boundary,
+execution boundary, lifecycle, rollback, separation-of-duties, threat model,
+release gates, no-go regression docs, synthetic examples, and local gate
+scripts. It remains design-only: no write execution, tool execution, action
+proposal execution, controlled handoff execution, connector runtime, external
+call, module activation, capability activation, production auth, login/logout,
+session persistence, migration, API router, SDK resource, CLI command, package
+file, or frontend dependency is added.
+
+Primary docs:
+
+- `docs/operator-actions/write-path-architecture.md`
+- `docs/operator-actions/approval-boundary-design.md`
+- `docs/operator-actions/execution-boundary-design.md`
+- `docs/operator-actions/action-intent-lifecycle.md`
+- `docs/operator-actions/controlled-execution-prerequisites.md`
+- `docs/operator-actions/rollback-and-undo-model.md`
+- `docs/operator-actions/separation-of-duties.md`
+- `docs/operator-actions/write-path-threat-model.md`
+- `docs/operator-actions/write-path-release-gates.md`
+- `docs/operator-actions/write-path-no-go-regression-pack.md`
+- `docs/adr/0098-operator-action-write-path-architecture.md`
+
+Developer command:
+
+```bash
+./scripts/operator-action-write-path-design-check.sh
+./scripts/operator-action-write-path-no-go-regression.sh
+```

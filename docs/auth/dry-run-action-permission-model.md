@@ -32,3 +32,11 @@ AION-104 keeps action authorization dry-run only. Authorization evidence may
 allow request, preview, or review records, but it does not execute actions,
 activate modules, write target systems, call external services, add auth
 credentials, issue tokens or cookies, persist sessions, or bypass policy.
+
+## AION-107 Future Write-Path Relationship
+
+AION-107 keeps dry-run authorization as a prerequisite for future design only.
+Authorization may allow request, preview, and review evidence today. It does
+not grant write execution, tool execution, controlled handoff execution,
+external calls, activation, approval bypass, policy bypass, audit bypass, or
+hard delete.

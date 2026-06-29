@@ -468,3 +468,12 @@ Instructions for future Codex runs in this repository:
   package files, migrations, API routers, SDK resources, CLI command
   implementations, activation, execution, policy bypass, audit bypass, or
   privileged bypass.
+- AION-107 operator action write-path architecture is design-only. It must pass
+  `./scripts/operator-action-write-path-design-check.sh` and
+  `./scripts/operator-action-write-path-no-go-regression.sh`, and it must not
+  add write execution, tool execution, action proposal execution, controlled
+  handoff execution, connector runtime, network clients, external calls,
+  production auth, login/logout, credentials, tokens, cookies, persisted
+  sessions, package files, migrations, API routers, SDK resources, CLI command
+  implementations, activation, policy bypass, audit bypass, approval bypass,
+  hard delete, or privileged bypass.

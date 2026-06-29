@@ -1813,6 +1813,33 @@ The gate is not connector implementation. Connector runtime, network clients,
 connector SDKs, provider SDKs, credentials, token storage, external calls,
 dynamic routes, activation, execution, and runtime registration remain absent.
 
+## AION-107 Operator Action Write-Path Architecture
+
+AION-107 adds design-only architecture for a future operator action write path.
+It defines action intent lifecycle, approval boundary, execution boundary,
+policy boundary, connector boundary, audit/provenance requirements, rollback
+and undo model, separation of duties, threat model, release gates, and no-go
+regression.
+
+The write-path docs live under `docs/operator-actions/`:
+
+- `write-path-architecture.md`
+- `approval-boundary-design.md`
+- `execution-boundary-design.md`
+- `action-intent-lifecycle.md`
+- `controlled-execution-prerequisites.md`
+- `rollback-and-undo-model.md`
+- `separation-of-duties.md`
+- `write-path-threat-model.md`
+- `write-path-release-gates.md`
+- `write-path-no-go-regression-pack.md`
+
+The gate is not write implementation. Write execution, tool execution, action
+proposal execution, controlled handoff execution, connector runtime, production
+auth, external calls, module activation, capability activation, migrations,
+API routers, SDK resources, CLI command implementations, package files, and
+frontend dependencies remain absent.
+
 ## Generic Knowledge Intelligence Module Pack
 
 AION-084 adds the first concrete post-v0.1 module package as metadata only.

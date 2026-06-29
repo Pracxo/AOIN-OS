@@ -33,7 +33,10 @@ Recommended next phase:
   evidence, no-go regression, trust model, credential boundary, egress/ingress
   guards, threat model, release gates, and future implementation
   prerequisites.
-- AION-107 operator action write-path architecture, design only.
+- AION-107 operator action write-path architecture. Status: implemented as
+  design-only architecture, approval boundary, execution boundary, lifecycle,
+  rollback, separation-of-duties, threat model, release gates, no-go
+  regression, examples, and local scripts.
 
 ## Boundaries for the next phase
 
@@ -45,6 +48,10 @@ action proposal execution, hard deletes, or domain module logic.
 It also must not introduce connector runtime, connector SDKs, provider SDKs,
 network clients, credentials, token storage, dynamic connector routes, or
 external-call enablement.
+Write-path follow-on work also must not introduce write execution, tool
+execution, action proposal execution, controlled handoff execution, approval
+bypass, policy bypass, audit bypass, hard delete, or rollback-free execution
+without a later implementation ADR and green release gates.
 
 ## Required starting point
 
@@ -59,7 +66,9 @@ Every next-phase branch should start by running:
 ./scripts/module-activation-no-go-regression.sh
 ./scripts/connector-boundary-design-check.sh
 ./scripts/connector-no-go-regression.sh
+./scripts/operator-action-write-path-design-check.sh
+./scripts/operator-action-write-path-no-go-regression.sh
 ```
 
 The regression and freeze gates must pass before any future UI, auth,
-activation, connector, or write-path planning can proceed.
+activation, connector, or write-path implementation planning can proceed.

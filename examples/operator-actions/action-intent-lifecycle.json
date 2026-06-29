@@ -1,0 +1,44 @@
+{
+  "artifact": "operator_action_intent_lifecycle",
+  "task_id": "AION-107",
+  "status": "passed",
+  "execution_enabled": false,
+  "external_calls_enabled": false,
+  "activation_enabled": false,
+  "write_execution_enabled": false,
+  "contains_secrets": false,
+  "contains_credentials": false,
+  "contains_tokens": false,
+  "contains_external_endpoints": false,
+  "contains_unredacted_prompts": false,
+  "contains_private_reasoning": false,
+  "current_terminal_states": [
+    "previewed",
+    "reviewed",
+    "blocked"
+  ],
+  "unreachable_today": [
+    "approved_for_future_execution",
+    "future_execution_ready",
+    "future_executed",
+    "rollback_requested",
+    "rollback_completed"
+  ],
+  "states": [
+    "drafted",
+    "requested",
+    "dry_run_authorized",
+    "previewed",
+    "reviewed",
+    "approval_required",
+    "approved_for_future_execution",
+    "blocked",
+    "expired",
+    "cancelled",
+    "future_execution_ready",
+    "future_executed",
+    "rollback_requested",
+    "rollback_completed",
+    "archived"
+  ]
+}
