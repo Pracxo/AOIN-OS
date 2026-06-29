@@ -69,3 +69,9 @@ evidence.
 Future implementation needs a rollback plan that disables connector routing,
 revokes credential references, stops future egress, preserves audit/provenance,
 marks connector capabilities unavailable, and avoids hard delete.
+## AION-108 Disabled Prototype Relationship
+
+AION-108 satisfies only the disabled prototype prerequisite. Future connector
+implementation still requires credential-store design, runtime threat review,
+egress/ingress enforcement, operator approval, policy/action-authorization
+proof, audit/provenance proof, rollback, and a release gate.

@@ -141,3 +141,11 @@ clients, external calls, credentials, token storage, dynamic routes, activation,
 execution, or write target calls. Future execution requires connector or target
 boundary evidence, policy, action authorization, approval, audit/provenance,
 rollback, and release gates.
+
+## AION-108 Disabled Prototype Relationship
+
+AION-108 adds the disabled prototype step from this lifecycle. It introduces
+mock-only manifest validation, egress preview, ingress preview, blockers, API,
+SDK/CLI preview access, audit evidence, and static console status. It still
+keeps connector runtime, external calls, credentials, token storage, route
+registration, activation, execution, and write target calls disabled.

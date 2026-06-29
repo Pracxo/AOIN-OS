@@ -59,3 +59,9 @@ write-path architecture, approval boundary, execution boundary, action intent
 lifecycle, rollback, separation of duties, threat model, release gates, docs,
 examples, and no-go controls into an operator action write-path
 pre-implementation gate.
+## AION-108 Connector Runtime Risk
+
+The connector runtime risk remains blocked by default. AION-108 adds local
+evidence that runtime, external calls, credentials, token storage, activation,
+and route registration are disabled, but it does not reduce the future review
+required before connector implementation.

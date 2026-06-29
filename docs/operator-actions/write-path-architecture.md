@@ -138,3 +138,9 @@ Review records remain record-only in the current system.
 - rollback absent
 - hard delete enabled
 - current lifecycle reaches future_execution_ready or future_executed
+## AION-108 Connector Boundary Relationship
+
+The disabled connector prototype does not add write execution targets. Future
+operator write paths still require connector runtime gates, action
+authorization, approval, audit/provenance, rollback, and release readiness
+before any external target can be considered.

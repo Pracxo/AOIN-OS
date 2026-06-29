@@ -102,6 +102,20 @@ v0.1; YAML is included as a static human-readable example.
 `aionctl` calls these APIs through `client.sandbox`. It does not accept raw
 secret values, execute code, start containers, or connect to external systems.
 
+## Disabled Connector Runtime Commands
+
+```bash
+./scripts/aionctl.sh connector-runtime status
+./scripts/aionctl.sh connector-runtime validate-manifest
+./scripts/aionctl.sh connector-runtime egress-preview
+./scripts/aionctl.sh connector-runtime ingress-preview
+./scripts/aionctl.sh connector-runtime audit
+```
+
+These commands expose status, mock validation, preview, and audit evidence only.
+There is no connect command, call command, credential command, token command, or
+activation command.
+
 ## Scenario, Demo Fixture, and Release Baseline Commands
 
 ```bash

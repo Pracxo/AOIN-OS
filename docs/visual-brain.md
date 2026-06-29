@@ -1031,3 +1031,12 @@ are `auth_runtime_status`, `mock_claims_preview`, and `auth_runtime_audit`.
 Payloads represent disabled runtime status and synthetic preview evidence only;
 they do not represent production auth, login, credentials, tokens, cookies,
 sessions, external identity calls, execution, or activation.
+## Connector Runtime Telemetry
+
+AION-108 adds visual telemetry event types for disabled connector prototype
+evidence: `connector_runtime_status_checked`, `connector_manifest_validated`,
+`connector_egress_preview_created`, `connector_ingress_preview_created`, and
+`connector_runtime_audit_completed`.
+
+The corresponding node types are preview/audit evidence nodes only. They do not
+represent external connector calls or activation.

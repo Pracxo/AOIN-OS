@@ -1705,3 +1705,12 @@ identity, credentials, token issuance, cookie issuance, session persistence,
 login endpoints, and logout endpoints must remain false. Mock claims preview
 maps synthetic claims to a preview ActorContext only and does not authenticate,
 authorize execution, or bypass the local role matrix.
+## Connector Runtime Contracts
+
+AION-108 adds `aion_brain.contracts.connector_runtime` for disabled connector
+runtime evidence. The contracts cover hard-off status, mock connector manifests,
+egress preview requests/results, ingress preview requests/results, blockers,
+and audit requests/results.
+
+Contract validation keeps runtime-enabling fields false: external calls,
+credentials, token storage, activation, and route registration remain disabled.

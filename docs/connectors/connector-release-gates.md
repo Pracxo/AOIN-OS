@@ -38,3 +38,8 @@ Future connector work must fail closed if any gate is missing, if external calls
 are enabled by default, if credentials or tokens are present, if connector SDK
 dependencies appear before review, or if policy/action authorization/audit can
 be bypassed.
+## AION-108 Disabled Prototype Relationship
+
+The disabled connector prototype adds `scripts/connector-runtime-check.sh` as a
+local release-gate input. Passing the gate proves runtime, external calls,
+credentials, token storage, activation, and route registration remain disabled.

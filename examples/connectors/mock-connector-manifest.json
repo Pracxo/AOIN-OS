@@ -1,0 +1,24 @@
+{
+  "connector_key": "mock.local.preview",
+  "name": "Mock Local Preview",
+  "description": "Synthetic preview-only connector manifest.",
+  "version": "0.0.0-preview",
+  "owner_scope": [
+    "workspace:main"
+  ],
+  "connector_type": "mock",
+  "supported_modes": [
+    "dry_run"
+  ],
+  "declared_capabilities": [],
+  "required_policy_actions": [],
+  "required_scopes": [],
+  "sandbox_required": true,
+  "dry_run_supported": true,
+  "external_calls_required": false,
+  "credentials_required": false,
+  "routes_declared": [],
+  "metadata": {
+    "mock_only": true
+  }
+}

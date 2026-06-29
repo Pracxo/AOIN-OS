@@ -1,0 +1,21 @@
+{
+  "connector_ingress_preview_id": "connector-ingress-preview-example",
+  "trace_id": "trace-connector-ingress-preview-example",
+  "connector_key": "mock.local.preview",
+  "status": "preview",
+  "trusted": false,
+  "provenance_required": true,
+  "redaction_applied": true,
+  "prompt_injection_scan_required": true,
+  "normalized_response_summary": {
+    "fields": [
+      "record_id"
+    ]
+  },
+  "blockers": [],
+  "warnings": [],
+  "metadata": {
+    "mock_only": true
+  },
+  "created_at": "2026-06-29T00:00:00Z"
+}

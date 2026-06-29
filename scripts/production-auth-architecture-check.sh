@@ -214,10 +214,18 @@ allowed_aion_099_runtime = {
     "services/brain-api/tests/test_kernel_auth_runtime_wiring.py",
     "services/brain-api/tests/test_visual_telemetry_auth_runtime.py",
 }
+allowed_aion_108_runtime = {
+    "services/brain-api/src/aion_brain/api/connector_runtime.py",
+    "services/brain-api/src/aion_brain/contracts/connector_runtime.py",
+    "packages/aion-sdk-python/src/aion_sdk/resources/connector_runtime.py",
+    "packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_runtime.py",
+}
 for name in [*changed, *untracked]:
     if name in allowed_runtime_tests:
         continue
     if name in allowed_aion_099_runtime:
+        continue
+    if name in allowed_aion_108_runtime:
         continue
     if name.startswith(runtime_prefixes):
         raise SystemExit(f"production auth architecture must not change runtime file: {name}")

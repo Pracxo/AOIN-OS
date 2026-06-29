@@ -17,6 +17,7 @@ from aion_brain.api.capabilities import router as capabilities_router
 from aion_brain.api.commands import router as commands_router
 from aion_brain.api.concepts import router as concepts_router
 from aion_brain.api.conformance import router as conformance_router
+from aion_brain.api.connector_runtime import router as connector_runtime_router
 from aion_brain.api.connectors import router as connectors_router
 from aion_brain.api.consistency import router as consistency_router
 from aion_brain.api.contract_registry import router as contract_registry_router
@@ -126,6 +127,7 @@ ROUTERS = (
     sandbox_router,
     secrets_router,
     connectors_router,
+    connector_runtime_router,
     goals_router,
     tasks_router,
     schedules_router,

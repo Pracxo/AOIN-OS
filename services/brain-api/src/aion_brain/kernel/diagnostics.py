@@ -265,6 +265,28 @@ class KernelDiagnostics:
         ("mock_claims_preview_service_present", "mock_claims_preview_service", "medium"),
         ("auth_runtime_audit_service_present", "auth_runtime_audit_service", "medium"),
         ("auth_runtime_query_service_present", "auth_runtime_query_service", "medium"),
+        ("connector_runtime_gate_service_present", "connector_runtime_gate_service", "medium"),
+        (
+            "mock_connector_manifest_service_present",
+            "mock_connector_manifest_service",
+            "medium",
+        ),
+        (
+            "connector_egress_preview_service_present",
+            "connector_egress_preview_service",
+            "medium",
+        ),
+        (
+            "connector_ingress_preview_service_present",
+            "connector_ingress_preview_service",
+            "medium",
+        ),
+        (
+            "connector_runtime_audit_service_present",
+            "connector_runtime_audit_service",
+            "medium",
+        ),
+        ("connector_runtime_query_service_present", "connector_runtime_query_service", "medium"),
         ("local_session_preview_service_present", "local_session_preview_service", "medium"),
         ("local_session_context_service_present", "local_session_context_service", "medium"),
         ("local_session_boundary_service_present", "local_session_boundary_service", "medium"),
@@ -455,6 +477,7 @@ class KernelDiagnostics:
         checks.extend(self._action_proposal_checks(settings))
         checks.extend(self._action_authorization_checks(settings))
         checks.extend(self._auth_runtime_checks(settings))
+        checks.extend(self._connector_runtime_checks(settings))
         checks.extend(self._operator_action_checks(settings))
         checks.extend(self._run_supervision_checks(settings))
         checks.extend(self._notification_checks(settings))
@@ -1045,6 +1068,127 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Disabled auth-runtime services are assembled.",
+            ),
+        ]
+
+    def _connector_runtime_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "connector_runtime_gate_service",
+                "mock_connector_manifest_service",
+                "connector_egress_preview_service",
+                "connector_ingress_preview_service",
+                "connector_runtime_audit_service",
+                "connector_runtime_query_service",
+            )
+        )
+        return [
+            self._result(
+                "connector_runtime_enabled",
+                "connector_runtime",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_runtime_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "External connector runtime remains disabled.",
+            ),
+            self._result(
+                "connector_mock_preview_enabled",
+                "connector_runtime",
+                (
+                    "passed"
+                    if bool(getattr(settings, "connector_mock_preview_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Mock connector preview is available for local design proof.",
+            ),
+            self._result(
+                "connector_egress_preview_enabled",
+                "connector_runtime",
+                (
+                    "passed"
+                    if bool(getattr(settings, "connector_egress_preview_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Connector egress preview is available but remains blocked.",
+            ),
+            self._result(
+                "connector_ingress_preview_enabled",
+                "connector_runtime",
+                (
+                    "passed"
+                    if bool(getattr(settings, "connector_ingress_preview_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Connector ingress preview is available but remains untrusted.",
+            ),
+            self._result(
+                "connector_external_calls_enabled",
+                "connector_runtime",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_external_calls_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "External connector calls remain disabled.",
+            ),
+            self._result(
+                "connector_credentials_enabled",
+                "connector_runtime",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_credentials_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector credential handling remains disabled.",
+            ),
+            self._result(
+                "connector_token_storage_enabled",
+                "connector_runtime",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_token_storage_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector token storage remains disabled.",
+            ),
+            self._result(
+                "connector_activation_enabled",
+                "connector_runtime",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_activation_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector activation remains disabled.",
+            ),
+            self._result(
+                "connector_route_registration_enabled",
+                "connector_runtime",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_route_registration_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector route registration remains disabled.",
+            ),
+            self._result(
+                "connector_runtime_services_present",
+                "connector_runtime",
+                "passed" if services_present else "failed",
+                "high",
+                "Disabled connector-runtime services are assembled.",
             ),
         ]
 

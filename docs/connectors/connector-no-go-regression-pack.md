@@ -39,3 +39,9 @@ Expected result:
 ```text
 Connector no-go regression PASS
 ```
+## AION-108 Disabled Prototype Relationship
+
+The no-go regression pack now allows the scoped AION-108 disabled connector
+prototype files while continuing to block network clients, external service
+calls, connector/provider SDKs, credentials, token storage, route registration,
+activation, and execution paths.

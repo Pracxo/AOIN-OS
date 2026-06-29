@@ -86,6 +86,14 @@ from aion_brain.conformance import (
     ReadinessAssessmentService,
     SchemaConformanceChecker,
 )
+from aion_brain.connector_runtime import (
+    ConnectorEgressPreviewService,
+    ConnectorIngressPreviewService,
+    ConnectorRuntimeAuditService,
+    ConnectorRuntimeGateService,
+    ConnectorRuntimeQueryService,
+    MockConnectorManifestService,
+)
 from aion_brain.connectors.repository import ConnectorRepository
 from aion_brain.connectors.service import ConnectorService
 from aion_brain.consistency.checker import ConsistencyChecker
@@ -3605,6 +3613,28 @@ class KernelContainer:
             audit_sink=self.audit_integrity_ledger,
         )
         self.auth_runtime_query_service = AuthRuntimeQueryService(self.auth_runtime_gate_service)
+        self.connector_runtime_gate_service = ConnectorRuntimeGateService(
+            settings=self.settings,
+            telemetry_service=self.telemetry_service,
+        )
+        self.mock_connector_manifest_service = MockConnectorManifestService(
+            telemetry_service=self.telemetry_service,
+        )
+        self.connector_egress_preview_service = ConnectorEgressPreviewService(
+            settings=self.settings,
+            telemetry_service=self.telemetry_service,
+        )
+        self.connector_ingress_preview_service = ConnectorIngressPreviewService(
+            telemetry_service=self.telemetry_service,
+        )
+        self.connector_runtime_audit_service = ConnectorRuntimeAuditService(
+            settings=self.settings,
+            telemetry_service=self.telemetry_service,
+            audit_sink=self.audit_integrity_ledger,
+        )
+        self.connector_runtime_query_service = ConnectorRuntimeQueryService(
+            self.connector_runtime_gate_service
+        )
         self.local_session_preview_service = LocalSessionPreviewService(
             telemetry_service=self.telemetry_service,
         )
@@ -5178,6 +5208,42 @@ class KernelContainer:
             ("mock_claims_preview_service", self.mock_claims_preview_service, "service", "local"),
             ("auth_runtime_audit_service", self.auth_runtime_audit_service, "service", "local"),
             ("auth_runtime_query_service", self.auth_runtime_query_service, "service", "local"),
+            (
+                "connector_runtime_gate_service",
+                self.connector_runtime_gate_service,
+                "service",
+                "local",
+            ),
+            (
+                "mock_connector_manifest_service",
+                self.mock_connector_manifest_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_egress_preview_service",
+                self.connector_egress_preview_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_ingress_preview_service",
+                self.connector_ingress_preview_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_runtime_audit_service",
+                self.connector_runtime_audit_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_runtime_query_service",
+                self.connector_runtime_query_service,
+                "service",
+                "local",
+            ),
             (
                 "local_session_preview_service",
                 self.local_session_preview_service,

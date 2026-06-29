@@ -1794,6 +1794,69 @@ class Settings(BaseSettings):
             "auth_runtime_logout_endpoint_enabled",
         ),
     )
+    connector_runtime_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_RUNTIME_ENABLED",
+            "connector_runtime_enabled",
+        ),
+    )
+    connector_mock_preview_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_MOCK_PREVIEW_ENABLED",
+            "connector_mock_preview_enabled",
+        ),
+    )
+    connector_egress_preview_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_EGRESS_PREVIEW_ENABLED",
+            "connector_egress_preview_enabled",
+        ),
+    )
+    connector_ingress_preview_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_INGRESS_PREVIEW_ENABLED",
+            "connector_ingress_preview_enabled",
+        ),
+    )
+    connector_external_calls_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_EXTERNAL_CALLS_ENABLED",
+            "connector_external_calls_enabled",
+        ),
+    )
+    connector_credentials_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_CREDENTIALS_ENABLED",
+            "connector_credentials_enabled",
+        ),
+    )
+    connector_token_storage_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_TOKEN_STORAGE_ENABLED",
+            "connector_token_storage_enabled",
+        ),
+    )
+    connector_activation_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_ACTIVATION_ENABLED",
+            "connector_activation_enabled",
+        ),
+    )
+    connector_route_registration_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_ROUTE_REGISTRATION_ENABLED",
+            "connector_route_registration_enabled",
+        ),
+    )
     auth_credentials_enabled: bool = Field(
         default=False,
         validation_alias=AliasChoices(

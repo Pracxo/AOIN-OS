@@ -141,6 +141,17 @@ The panel displays disabled production auth status and a mock claims preview.
 It has no login form, no logout control, no credential input, no token input,
 and no session persistence.
 
+## Connector Runtime Panel
+
+AION-108 adds a disabled Connector Runtime panel backed by:
+
+- `demo-data/connector-runtime-status.json`
+- `demo-data/connector-boundary-preview.json`
+
+The panel displays hard-off connector runtime flags, blockers, and mock-only
+boundary preview evidence. It has no connector registration form, no credential
+input, no token input, no route activation, and no external service egress.
+
 ## UI Release Gate
 
 AION-100 adds the static UI release gate:

@@ -314,6 +314,14 @@ class FreezeGateService:
         )
         checks.append(
             self._run_check(
+                "connector_runtime_safe",
+                "connector_runtime",
+                self._check_connector_runtime_safe,
+                severity="critical",
+            )
+        )
+        checks.append(
+            self._run_check(
                 "conformance_readiness_gate_safe",
                 "conformance",
                 self._check_conformance_readiness_gate_safe,
@@ -973,6 +981,51 @@ class FreezeGateService:
                 "execution_allowed": False,
                 "activation_allowed": False,
                 "external_calls_allowed": False,
+            },
+        }
+
+    def _check_connector_runtime_safe(self) -> dict[str, Any]:
+        unsafe_flags = {
+            "connector_runtime_enabled": bool(
+                getattr(self._settings, "connector_runtime_enabled", False)
+            ),
+            "connector_external_calls_enabled": bool(
+                getattr(self._settings, "connector_external_calls_enabled", False)
+            ),
+            "connector_credentials_enabled": bool(
+                getattr(self._settings, "connector_credentials_enabled", False)
+            ),
+            "connector_token_storage_enabled": bool(
+                getattr(self._settings, "connector_token_storage_enabled", False)
+            ),
+            "connector_activation_enabled": bool(
+                getattr(self._settings, "connector_activation_enabled", False)
+            ),
+            "connector_route_registration_enabled": bool(
+                getattr(self._settings, "connector_route_registration_enabled", False)
+            ),
+        }
+        unsafe = [key for key, value in unsafe_flags.items() if value]
+        return {
+            "status": "failed" if unsafe else "passed",
+            "message": "Connector runtime remains disabled and preview-only.",
+            "details": {
+                "unsafe_flags": unsafe,
+                "mock_preview_enabled": bool(
+                    getattr(self._settings, "connector_mock_preview_enabled", True)
+                ),
+                "egress_preview_enabled": bool(
+                    getattr(self._settings, "connector_egress_preview_enabled", True)
+                ),
+                "ingress_preview_enabled": bool(
+                    getattr(self._settings, "connector_ingress_preview_enabled", True)
+                ),
+                "runtime_allowed": False,
+                "external_calls_allowed": False,
+                "auth_material_allowed": False,
+                "storage_material_allowed": False,
+                "activation_allowed": False,
+                "route_registration_allowed": False,
             },
         }
 

@@ -1,0 +1,18 @@
+{
+  "trace_id": "trace-connector-ingress-preview-example",
+  "connector_key": "mock.local.preview",
+  "owner_scope": [
+    "workspace:main"
+  ],
+  "preview_type": "dry_run",
+  "response_summary": {
+    "fields": [
+      "record_id"
+    ],
+    "trusted": false
+  },
+  "metadata": {
+    "mock_only": true
+  },
+  "created_by": "local.operator"
+}

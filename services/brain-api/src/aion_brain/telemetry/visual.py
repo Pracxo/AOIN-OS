@@ -13,6 +13,14 @@ from aion_brain.contracts.telemetry import (
 )
 from aion_brain.contracts.traces import DecisionTrace
 
+CONNECTOR_RUNTIME_TELEMETRY_EVENTS = (
+    "connector_runtime_status_checked",
+    "connector_manifest_validated",
+    "connector_egress_preview_created",
+    "connector_ingress_preview_created",
+    "connector_runtime_audit_completed",
+)
+
 
 class VisualTelemetryBuilder:
     """Build visual telemetry events for future Brain graph animation."""

@@ -54,6 +54,18 @@ AION Brain owns:
 - Notification topics, subscriptions, alerts, escalations, and digests
 - Audit records
 
+## Disabled External Connector Prototype
+
+AION-108 adds a hard-off external connector prototype for local preview and
+audit evidence only. It exposes connector runtime status, mock manifest
+validation, egress preview, ingress preview, blockers, SDK/CLI preview access,
+and static console demo data.
+
+The connector runtime remains disabled. The prototype does not call external
+services, add connector/provider SDKs, store credentials, store tokens, register
+routes, activate capabilities, execute tools, execute write paths, or bypass
+policy/audit gates.
+
 ## Core Brain Loop
 
 ```text

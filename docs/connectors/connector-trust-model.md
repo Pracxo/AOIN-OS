@@ -47,3 +47,9 @@ ingress promotion, or controlled behavior.
 Connector outputs must be normalized, redacted, and provenance-tagged before
 they enter Brain records. Raw responses, raw headers, provider payloads,
 secrets, tokens, raw prompts, and hidden reasoning must not be persisted.
+## AION-108 Disabled Prototype Relationship
+
+The disabled connector prototype treats every mock connector declaration and
+ingress preview as untrusted. A valid mock manifest is preview evidence only;
+it does not become trusted runtime state, policy authority, or an activation
+record.

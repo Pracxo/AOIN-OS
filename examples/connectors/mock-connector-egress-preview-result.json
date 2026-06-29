@@ -1,0 +1,21 @@
+{
+  "connector_egress_preview_id": "connector-egress-preview-example",
+  "trace_id": "trace-connector-egress-preview-example",
+  "connector_key": "mock.local.preview",
+  "status": "blocked",
+  "egress_allowed": false,
+  "external_call_allowed": false,
+  "credentials_present": false,
+  "blocked_fields": [],
+  "blockers": [],
+  "warnings": [],
+  "redacted_payload_summary": {
+    "fields": [
+      "record_id"
+    ]
+  },
+  "metadata": {
+    "mock_only": true
+  },
+  "created_at": "2026-06-29T00:00:00Z"
+}

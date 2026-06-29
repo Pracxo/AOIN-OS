@@ -1,0 +1,21 @@
+{
+  "status_id": "connector-runtime-status-example",
+  "connector_runtime_enabled": false,
+  "connector_mock_preview_enabled": true,
+  "connector_egress_preview_enabled": true,
+  "connector_ingress_preview_enabled": true,
+  "connector_external_calls_enabled": false,
+  "connector_credentials_enabled": false,
+  "connector_token_storage_enabled": false,
+  "connector_activation_enabled": false,
+  "connector_route_registration_enabled": false,
+  "blockers": [],
+  "warnings": [],
+  "metadata": {
+    "mock_only": true,
+    "owner_scope": [
+      "workspace:main"
+    ]
+  },
+  "created_at": "2026-06-29T00:00:00Z"
+}

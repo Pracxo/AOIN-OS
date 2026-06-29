@@ -54,22 +54,30 @@ if git ls-files --others --exclude-standard infra/postgres/migrations services/b
   exit 1
 fi
 
-if git diff --name-only --diff-filter=ACMRT HEAD -- services/brain-api/src/aion_brain/api | rg -n '.'; then
+if git diff --name-only --diff-filter=ACMRT HEAD -- services/brain-api/src/aion_brain/api \
+  | rg -v '^services/brain-api/src/aion_brain/api/connector_runtime\.py$' \
+  | rg -n '.'; then
   echo "AION-107 must not change API router files" >&2
   exit 1
 fi
 
-if git ls-files --others --exclude-standard services/brain-api/src/aion_brain/api | rg -n '.'; then
+if git ls-files --others --exclude-standard services/brain-api/src/aion_brain/api \
+  | rg -v '^services/brain-api/src/aion_brain/api/connector_runtime\.py$' \
+  | rg -n '.'; then
   echo "AION-107 must not add API router files" >&2
   exit 1
 fi
 
-if git diff --name-only --diff-filter=ACMRT HEAD -- packages/aion-sdk-python/src/aion_sdk/resources packages/aion-sdk-python/src/aion_sdk/cli.py packages/aion-sdk-python/src/aion_sdk/cli | rg -n '.'; then
+if git diff --name-only --diff-filter=ACMRT HEAD -- packages/aion-sdk-python/src/aion_sdk/resources packages/aion-sdk-python/src/aion_sdk/cli.py packages/aion-sdk-python/src/aion_sdk/cli \
+  | rg -v '^packages/aion-sdk-python/src/aion_sdk/resources/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/main\.py$' \
+  | rg -n '.'; then
   echo "AION-107 must not add SDK resources or CLI command implementations" >&2
   exit 1
 fi
 
-if git ls-files --others --exclude-standard packages/aion-sdk-python/src/aion_sdk/resources packages/aion-sdk-python/src/aion_sdk/cli.py packages/aion-sdk-python/src/aion_sdk/cli | rg -n '.'; then
+if git ls-files --others --exclude-standard packages/aion-sdk-python/src/aion_sdk/resources packages/aion-sdk-python/src/aion_sdk/cli.py packages/aion-sdk-python/src/aion_sdk/cli \
+  | rg -v '^packages/aion-sdk-python/src/aion_sdk/resources/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/main\.py$' \
+  | rg -n '.'; then
   echo "AION-107 must not add untracked SDK resources or CLI command implementations" >&2
   exit 1
 fi
@@ -181,6 +189,44 @@ allowed_review_prefixes = (
 allowed_review_files = {
     "scripts/operator-action-write-path-design-check.sh",
     "scripts/operator-action-write-path-no-go-regression.sh",
+    "scripts/connector-runtime-check.sh",
+    "scripts/connector-boundary-design-check.sh",
+    "scripts/connector-no-go-regression.sh",
+}
+allowed_aion108_prefixes = (
+    "services/brain-api/src/aion_brain/connector_runtime/",
+)
+allowed_aion108_files = {
+    ".env.example",
+    "AGENTS.md",
+    "README.md",
+    "operator-console-static/README.md",
+    "operator-console-static/app.js",
+    "operator-console-static/index.html",
+    "operator-console-static/styles.css",
+    "operator-console-static/demo-data/connector-boundary-preview.json",
+    "operator-console-static/demo-data/connector-runtime-status.json",
+    "packages/aion-sdk-python/src/aion_sdk/client.py",
+    "packages/aion-sdk-python/src/aion_sdk/cli/main.py",
+    "packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_runtime.py",
+    "packages/aion-sdk-python/src/aion_sdk/resources/connector_runtime.py",
+    "packages/aion-sdk-python/tests/test_cli_connector_runtime.py",
+    "packages/aion-sdk-python/tests/test_connector_runtime_resource.py",
+    "services/brain-api/src/aion_brain/api/connector_runtime.py",
+    "services/brain-api/src/aion_brain/audit_integrity/ledger.py",
+    "services/brain-api/src/aion_brain/audit_integrity/provenance.py",
+    "services/brain-api/src/aion_brain/config.py",
+    "services/brain-api/src/aion_brain/contracts/connector_runtime.py",
+    "services/brain-api/src/aion_brain/contracts/telemetry.py",
+    "services/brain-api/src/aion_brain/freeze/gate.py",
+    "services/brain-api/src/aion_brain/kernel/app_factory.py",
+    "services/brain-api/src/aion_brain/kernel/container.py",
+    "services/brain-api/src/aion_brain/kernel/diagnostics.py",
+    "services/brain-api/src/aion_brain/main.py",
+    "services/brain-api/src/aion_brain/policy_catalog/defaults.py",
+    "services/brain-api/src/aion_brain/release_package/packager.py",
+    "services/brain-api/src/aion_brain/security_baseline/hardening_gate.py",
+    "services/brain-api/src/aion_brain/telemetry/visual.py",
 }
 runtime_prefixes = (
     "services/brain-api/src/",
@@ -206,7 +252,12 @@ for relative in sorted(changed):
     path = root / relative
     if not path.is_file():
         continue
-    if relative in allowed_review_files or relative.startswith(allowed_review_prefixes):
+    if (
+        relative in allowed_review_files
+        or relative in allowed_aion108_files
+        or relative.startswith(allowed_review_prefixes)
+        or relative.startswith(allowed_aion108_prefixes)
+    ):
         continue
     if not relative.startswith(runtime_prefixes):
         continue
