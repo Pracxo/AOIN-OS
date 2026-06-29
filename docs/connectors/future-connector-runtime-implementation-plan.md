@@ -17,3 +17,10 @@ This plan sequences future connector work after the AION-109 review gate. It is 
 ## Release Rule
 
 No external calls are allowed until the connector release gate passes. The release gate must include approved threat model, credential design, egress allowlist, ingress redaction, provenance, policy, operator review, sandbox, and no-go regression evidence.
+
+## AION-110 Completion Criteria
+
+AION-110 completes only the disabled dry-run simulator hardening phase. The
+next phases must still preserve no external calls, no credentials, no tokens,
+no runtime activation, no route registration, no tool execution, and no write
+execution until a later release gate explicitly changes scope.

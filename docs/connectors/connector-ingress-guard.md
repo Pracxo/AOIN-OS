@@ -73,3 +73,9 @@ injection scanning before future review.
 AION-109 adds egress/ingress traceability evidence. Ingress remains untrusted,
 redacted, provenance-bound, and preview-only until a future implementation gate
 approves a stronger ingress design.
+
+## AION-110 Simulator Relationship
+
+Synthetic replay responses are ingress-shape evidence only. They remain
+`trusted=false`, are redacted when unsafe material is detected, and cannot be
+promoted into trusted connector data.

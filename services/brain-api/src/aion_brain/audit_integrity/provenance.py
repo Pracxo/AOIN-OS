@@ -30,6 +30,20 @@ CONNECTOR_RUNTIME_PROVENANCE_BOUNDARY = {
     "route_registration_enabled": False,
 }
 
+CONNECTOR_SIMULATOR_PROVENANCE_BOUNDARY = {
+    "source_component": "connector_simulator",
+    "local_only": True,
+    "read_only": True,
+    "synthetic_only": True,
+    "dry_run_only": True,
+    "connector_runtime_enabled": False,
+    "external_calls_made": False,
+    "credentials_used": False,
+    "tokens_used": False,
+    "activation_enabled": False,
+    "route_registration_enabled": False,
+}
+
 
 class ProvenanceService:
     """Create, query, and soft-delete provenance links."""

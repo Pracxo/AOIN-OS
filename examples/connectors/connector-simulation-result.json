@@ -1,0 +1,51 @@
+{
+  "connector_simulation_result_id": "connector-simulation-example",
+  "connector_key": "mock.local.preview",
+  "status": "warning",
+  "simulation_type": "dry_run",
+  "synthetic": true,
+  "trusted": false,
+  "external_calls_made": false,
+  "credentials_used": false,
+  "tokens_used": false,
+  "connector_runtime_enabled": false,
+  "request_hash": "sha256-demo-request",
+  "response_hash": "sha256-demo-response",
+  "redacted_request_shape": {
+    "object": "synthetic_request",
+    "fields": ["record_id", "summary"]
+  },
+  "synthetic_response": {
+    "connector_key": "mock.local.preview",
+    "simulation_type": "dry_run",
+    "synthetic": true,
+    "trusted": false,
+    "external_calls_made": false
+  },
+  "blockers": [
+    {
+      "blocker_key": "connector_runtime_disabled",
+      "status": "active",
+      "bypassable": false
+    }
+  ],
+  "warnings": [
+    {
+      "code": "connector_response_untrusted",
+      "status": "open"
+    }
+  ],
+  "findings": [
+    {
+      "finding_type": "untrusted_ingress",
+      "severity": "medium",
+      "status": "open"
+    }
+  ],
+  "score": 0.75,
+  "metadata": {
+    "local_only": true,
+    "synthetic_only": true
+  },
+  "created_at": "2026-06-29T00:00:00Z"
+}

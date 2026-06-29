@@ -88,6 +88,7 @@ fi
 
 if git diff --name-only --diff-filter=ACMRT HEAD -- services/brain-api/src/aion_brain/api \
   | rg -v '^services/brain-api/src/aion_brain/api/connector_runtime\.py$' \
+  | rg -v '^services/brain-api/src/aion_brain/api/connector_simulator\.py$' \
   | rg -n '.'; then
   echo "AION-104 must not change API router files" >&2
   exit 1
@@ -95,6 +96,7 @@ fi
 
 if git ls-files --others --exclude-standard services/brain-api/src/aion_brain/api \
   | rg -v '^services/brain-api/src/aion_brain/api/connector_runtime\.py$' \
+  | rg -v '^services/brain-api/src/aion_brain/api/connector_simulator\.py$' \
   | rg -n '.'; then
   echo "AION-104 must not add API router files" >&2
   exit 1

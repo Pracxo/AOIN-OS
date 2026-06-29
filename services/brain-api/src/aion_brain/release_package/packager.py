@@ -342,6 +342,7 @@ class ReleasePackager:
             reports["local_auth"] = self._local_auth_summary()
             reports["local_session"] = self._local_session_summary()
             reports["connector_runtime"] = self._connector_runtime_summary()
+            reports["connector_simulator"] = self._connector_simulator_summary()
             reports["capability_conformance"] = self._conformance_summary(request.owner_scope)
             reports["golden_path"] = self._golden_path_summary(request.owner_scope)
             reports["bootstrap"] = self._bootstrap_summary(request.owner_scope)
@@ -684,6 +685,48 @@ class ReleasePackager:
             "external_calls_enabled": False,
             "credentials_enabled": False,
             "token_storage_enabled": False,
+            "activation_enabled": False,
+            "route_registration_enabled": False,
+            "unsafe_flags": unsafe,
+        }
+
+    def _connector_simulator_summary(self) -> dict[str, Any]:
+        unsafe_flags = {
+            "connector_simulator_external_calls_enabled": bool(
+                getattr(self._settings, "connector_simulator_external_calls_enabled", False)
+            ),
+            "connector_simulator_credentials_enabled": bool(
+                getattr(self._settings, "connector_simulator_credentials_enabled", False)
+            ),
+            "connector_simulator_tokens_enabled": bool(
+                getattr(self._settings, "connector_simulator_tokens_enabled", False)
+            ),
+            "connector_simulator_runtime_activation_enabled": bool(
+                getattr(
+                    self._settings,
+                    "connector_simulator_runtime_activation_enabled",
+                    False,
+                )
+            ),
+        }
+        unsafe = [key for key, value in unsafe_flags.items() if value]
+        return {
+            "available": bool(getattr(self._settings, "connector_simulator_enabled", True)),
+            "status": "blocked" if unsafe else "ready",
+            "synthetic_only": True,
+            "dry_run_enabled": bool(
+                getattr(self._settings, "connector_dry_run_simulation_enabled", True)
+            ),
+            "replay_enabled": bool(
+                getattr(self._settings, "connector_replay_fixtures_enabled", True)
+            ),
+            "policy_readiness_enabled": bool(
+                getattr(self._settings, "connector_policy_readiness_enabled", True)
+            ),
+            "runtime_enabled": False,
+            "external_calls_enabled": False,
+            "credentials_enabled": False,
+            "tokens_enabled": False,
             "activation_enabled": False,
             "route_registration_enabled": False,
             "unsafe_flags": unsafe,

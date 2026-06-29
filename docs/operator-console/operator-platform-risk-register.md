@@ -73,3 +73,11 @@ credential/token absence proof, egress/ingress traceability, and a
 pre-implementation freeze. The residual risk remains future implementation
 scope creep; the mitigation is to keep the review gate and no-go regression
 release blocking.
+
+## AION-110 Connector Simulator Risk
+
+AION-110 reduces design ambiguity by adding synthetic dry-run and replay
+evidence. Residual risk is treating simulator output as real connector data or
+runtime approval. The mitigation is explicit `trusted=false`, hard-off runtime
+flags, policy readiness wording, static console no-go evidence, and the
+connector simulator no-go regression.

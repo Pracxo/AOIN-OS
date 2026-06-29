@@ -84,3 +84,10 @@ connect controls, call controls, or activation controls.
 The next connector phase is review-only. The operator platform must treat the
 AION-109 connector runtime review gate as a blocker before any future connector
 implementation, simulator hardening, or release-gate planning proceeds.
+
+## AION-110 Connector Simulator Panel
+
+The operator platform now includes static connector simulator evidence inside
+the connector panel. It displays synthetic dry-run and policy readiness state
+only, with no connector input, no credential input, no token input, no route
+registration, no external egress, no activation, and no execution control.

@@ -80,6 +80,18 @@ node after soft delete.
 No UI implementation exists in v0.1. Visual telemetry is a Brain-owned data
 contract for future visualization work.
 
+## Connector Simulator Projection
+
+AION-110 adds frontend-agnostic telemetry for synthetic connector simulator
+evidence:
+
+- `connector_simulation_completed` with node type `connector_simulation`
+- `connector_policy_readiness_checked` with node type `connector_policy_readiness`
+
+These events show local dry-run and readiness evidence only. They must not
+imply connector execution, trusted ingress, route registration, activation,
+external calls, credential use, token use, tool execution, or write execution.
+
 ## Module Mock Runtime Projection
 
 AION-085 adds frontend-agnostic visual telemetry for deterministic module mock

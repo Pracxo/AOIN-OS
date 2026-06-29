@@ -212,7 +212,14 @@ for ref in ("origin/main", "main"):
         )
         break
 
+allowed_connector_api_files = {
+    "services/brain-api/src/aion_brain/api/connector_runtime.py",
+    "services/brain-api/src/aion_brain/api/connector_simulator.py",
+}
+
 for relative in sorted(changed):
+    if relative in allowed_connector_api_files:
+        continue
     parts = set(Path(relative).parts)
     if "migrations" in parts:
         raise SystemExit(f"AION-102 must not add a migration: {relative}")

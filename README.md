@@ -66,6 +66,14 @@ services, add connector/provider SDKs, store credentials, store tokens, register
 routes, activate capabilities, execute tools, execute write paths, or bypass
 policy/audit gates.
 
+## Connector Dry-Run Simulator
+
+AION-110 adds a synthetic connector dry-run simulator, replay fixture path, and
+policy readiness gate. These surfaces validate local request and response
+shapes only. They do not execute connectors, call external services, store
+credentials, store tokens, register routes, activate capabilities, execute
+tools, or execute write paths.
+
 ## Core Brain Loop
 
 ```text

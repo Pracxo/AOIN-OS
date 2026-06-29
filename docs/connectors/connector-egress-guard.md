@@ -84,3 +84,9 @@ network path.
 AION-109 adds the no-external-call evidence pack and regression script. The
 egress guard remains blocked, no network client is added, and no external
 endpoint is introduced.
+
+## AION-110 Simulator Relationship
+
+The connector simulator validates synthetic request and response shapes only.
+It must not become an egress path, resolve destinations, introduce external
+addresses, or allow connector calls.

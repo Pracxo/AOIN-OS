@@ -1,0 +1,94 @@
+{
+  "status": "warning",
+  "title": "Connector dry-run simulation preview",
+  "summary": "Synthetic connector simulation preview for local shape validation only.",
+  "connector_key": "mock.local.preview",
+  "simulation_type": "dry_run",
+  "synthetic": true,
+  "trusted": false,
+  "external_calls_made": false,
+  "credentials_used": false,
+  "tokens_used": false,
+  "connector_runtime_enabled": false,
+  "connector_simulator_enabled": true,
+  "connector_dry_run_simulation_enabled": true,
+  "connector_simulator_external_calls_enabled": false,
+  "connector_simulator_credentials_enabled": false,
+  "connector_simulator_tokens_enabled": false,
+  "connector_simulator_runtime_activation_enabled": false,
+  "request_hash": "sha256-demo-request",
+  "response_hash": "sha256-demo-response",
+  "findings": [
+    {
+      "finding_type": "untrusted_ingress",
+      "severity": "medium",
+      "status": "open",
+      "title": "Synthetic response remains untrusted"
+    }
+  ],
+  "sections": [
+    {
+      "section_key": "synthetic_shape_validation",
+      "title": "Synthetic shape validation",
+      "status": "warning"
+    },
+    {
+      "section_key": "runtime_disabled",
+      "title": "Runtime disabled",
+      "status": "passed"
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_type": "connector_runtime_disabled",
+      "severity": "critical",
+      "status": "open",
+      "reason": "runtime_disabled_by_design"
+    },
+    {
+      "blocker_type": "external_calls_disabled",
+      "severity": "critical",
+      "status": "open",
+      "reason": "external_egress_disabled_by_design"
+    }
+  ],
+  "warnings": [
+    {
+      "code": "synthetic_response_untrusted",
+      "status": "open"
+    }
+  ],
+  "refs": [
+    "docs/connectors/connector-dry-run-simulator.md",
+    "docs/connectors/connector-simulation-safety.md"
+  ],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
+  ],
+  "read_only": true,
+  "redaction_applied": true,
+  "created_at": "2026-06-29T00:00:00Z"
+}

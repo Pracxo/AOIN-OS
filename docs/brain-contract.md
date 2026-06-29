@@ -7,6 +7,19 @@ The contract includes:
 
 - `AIONEvent`: normalized incoming activity and the only accepted event input contract.
 - `EventTriggerRule`: deterministic predicate for event subscription matching.
+- `ConnectorSimulationRequest`: request to validate a synthetic connector
+  request/response shape in dry-run mode.
+- `ConnectorSimulationResult`: synthetic connector simulation result that is
+  never trusted connector data and always reports runtime, external calls,
+  credentials, and tokens disabled.
+- `ConnectorReplayFixture`: local fixture used to replay synthetic connector
+  shapes through the dry-run simulator.
+- `ConnectorPolicyReadinessRequest`: request to check simulator policy action,
+  sandbox, audit, and provenance readiness without runtime approval.
+- `ConnectorPolicyReadinessResult`: readiness result that never permits
+  external calls, credential use, or activation.
+- `ConnectorSimulatorFinding`: safe connector simulator finding summary without
+  blocked material values.
 - `EventSubscription`: generic event reaction subscription.
 - `EventSubscriptionCreateRequest`: request to create a subscription.
 - `EventDispatchRequest`: request to dispatch an event through subscriptions.

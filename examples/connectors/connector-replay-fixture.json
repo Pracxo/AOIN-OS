@@ -1,0 +1,22 @@
+{
+  "replay_fixture_id": "connector-replay-fixture-local",
+  "connector_key": "mock.local.preview",
+  "name": "Local Synthetic Replay",
+  "description": "Local fixture replay for connector simulator.",
+  "owner_scope": ["workspace:main"],
+  "fixture_type": "synthetic_replay",
+  "request_shape": {
+    "object": "synthetic_request",
+    "fields": ["record_id", "summary"]
+  },
+  "response_shape": {
+    "object": "synthetic_response",
+    "fields": ["status", "summary"]
+  },
+  "expected_findings": ["untrusted_ingress"],
+  "synthetic": true,
+  "trusted": false,
+  "metadata": {
+    "local_only": true
+  }
+}
