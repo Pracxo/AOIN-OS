@@ -1,0 +1,83 @@
+{
+  "task": "AION-106",
+  "artifact": "connector_no_go_regression_result",
+  "status": "passed",
+  "connector_runtime_enabled": false,
+  "external_calls_enabled": false,
+  "credentials_present": false,
+  "token_storage_enabled": false,
+  "dynamic_routes_enabled": false,
+  "activation_enabled": false,
+  "connector_sdk_dependency_present": false,
+  "provider_sdk_dependency_present": false,
+  "network_client_present": false,
+  "policy_bypass_enabled": false,
+  "audit_bypass_enabled": false,
+  "checks": [
+    {
+      "check": "connector runtime added without gate",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "network call added",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "SDK dependency added",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "credentials added",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "token storage added",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "dynamic route added",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "connector activation enabled",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "external calls enabled by default",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "raw prompt egress allowed",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "hidden reasoning egress allowed",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "secret egress allowed",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "policy bypass",
+      "expected_status": "passed",
+      "present": false
+    },
+    {
+      "check": "audit bypass",
+      "expected_status": "passed",
+      "present": false
+    }
+  ]
+}

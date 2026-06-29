@@ -1,0 +1,68 @@
+{
+  "task": "AION-106",
+  "artifact": "connector_release_gates",
+  "status": "passed",
+  "connector_runtime_enabled": false,
+  "external_calls_enabled": false,
+  "credentials_present": false,
+  "token_storage_enabled": false,
+  "dynamic_routes_enabled": false,
+  "activation_enabled": false,
+  "gates": [
+    {
+      "gate": "threat model approved",
+      "expected_evidence": "docs/connectors/connector-threat-model.md",
+      "release_blocker": true
+    },
+    {
+      "gate": "credential boundary approved",
+      "expected_evidence": "docs/connectors/connector-credential-boundary.md",
+      "release_blocker": true
+    },
+    {
+      "gate": "egress guard approved",
+      "expected_evidence": "docs/connectors/connector-egress-guard.md",
+      "release_blocker": true
+    },
+    {
+      "gate": "ingress guard approved",
+      "expected_evidence": "docs/connectors/connector-ingress-guard.md",
+      "release_blocker": true
+    },
+    {
+      "gate": "policy model approved",
+      "expected_evidence": "docs/policy-model.md",
+      "release_blocker": true
+    },
+    {
+      "gate": "action authorization integration tested",
+      "expected_evidence": "./scripts/action-authorization-check.sh",
+      "release_blocker": true
+    },
+    {
+      "gate": "audit provenance tested",
+      "expected_evidence": "docs/connectors/external-connector-boundary-design.md",
+      "release_blocker": true
+    },
+    {
+      "gate": "operator review tested",
+      "expected_evidence": "operator platform connector review evidence",
+      "release_blocker": true
+    },
+    {
+      "gate": "sandbox requirements approved",
+      "expected_evidence": "docs/connectors/connector-capability-declaration.md",
+      "release_blocker": true
+    },
+    {
+      "gate": "disabled-by-default prototype green",
+      "expected_evidence": "future disabled connector prototype",
+      "release_blocker": true
+    },
+    {
+      "gate": "release freeze gate green",
+      "expected_evidence": "./scripts/connector-boundary-design-check.sh",
+      "release_blocker": true
+    }
+  ]
+}

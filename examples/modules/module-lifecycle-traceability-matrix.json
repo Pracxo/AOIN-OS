@@ -1,0 +1,113 @@
+{
+  "task": "AION-105",
+  "artifact": "module_lifecycle_traceability_matrix",
+  "status": "passed",
+  "activation_enabled": false,
+  "rows": [
+    {
+      "stage": "manifest",
+      "evidence_ref": "examples/modules/generic-knowledge-intelligence/manifest.json",
+      "blocker": "payload must be non-executable",
+      "activation_allowed": false,
+      "evidence_script": "./scripts/module-pack-check.sh"
+    },
+    {
+      "stage": "intake",
+      "evidence_ref": "examples/modules/generic-knowledge-intelligence/intake-request.json",
+      "blocker": "metadata-only intake required",
+      "activation_allowed": false,
+      "evidence_script": "./scripts/module-pack-check.sh"
+    },
+    {
+      "stage": "slot",
+      "evidence_ref": "examples/modules/generic-knowledge-intelligence/module-slot-request.json",
+      "blocker": "inactive slot required",
+      "activation_allowed": false,
+      "evidence_script": "./scripts/module-pack-check.sh"
+    },
+    {
+      "stage": "binding",
+      "evidence_ref": "examples/modules/generic-knowledge-intelligence/capability-bindings.json",
+      "blocker": "metadata-only target required",
+      "activation_allowed": false,
+      "evidence_script": "./scripts/module-pack-check.sh"
+    },
+    {
+      "stage": "validation",
+      "evidence_ref": "examples/modules/generic-knowledge-intelligence/binding-validation-request.json",
+      "blocker": "validation cannot invoke runtime",
+      "activation_allowed": false,
+      "evidence_script": "./scripts/module-pack-check.sh"
+    },
+    {
+      "stage": "conformance",
+      "evidence_ref": "examples/modules/generic-knowledge-intelligence/conformance-run-request.json",
+      "blocker": "schema-only conformance required",
+      "activation_allowed": false,
+      "evidence_script": "./scripts/module-pack-check.sh"
+    },
+    {
+      "stage": "readiness",
+      "evidence_ref": "examples/modules/generic-knowledge-intelligence/readiness-assessment-request.json",
+      "blocker": "activation_ready must be false",
+      "activation_allowed": false,
+      "evidence_script": "./scripts/module-pack-check.sh"
+    },
+    {
+      "stage": "activation request",
+      "evidence_ref": "examples/modules/generic-knowledge-intelligence/activation-request.json",
+      "blocker": "activation request is denied",
+      "activation_allowed": false,
+      "evidence_script": "./scripts/module-pack-check.sh"
+    },
+    {
+      "stage": "activation gate",
+      "evidence_ref": "examples/modules/generic-knowledge-intelligence/activation-gate-request.json",
+      "blocker": "activation disabled",
+      "activation_allowed": false,
+      "evidence_script": "./scripts/module-activation-no-go-regression.sh"
+    },
+    {
+      "stage": "blockers",
+      "evidence_ref": "operator-console-static/demo-data/module-activation-blockers.json",
+      "blocker": "blockers must remain visible",
+      "activation_allowed": false,
+      "evidence_script": "./scripts/module-lifecycle-dashboard-check.sh"
+    },
+    {
+      "stage": "registration preview",
+      "evidence_ref": "docs/modules/runtime-registration-disabled-proof.md",
+      "blocker": "registration preview is preview-only",
+      "activation_allowed": false,
+      "evidence_script": "./scripts/module-activation-no-go-regression.sh"
+    },
+    {
+      "stage": "mock runtime",
+      "evidence_ref": "examples/modules/generic-knowledge-intelligence/mock-output-example.json",
+      "blocker": "mock runtime is synthetic only",
+      "activation_allowed": false,
+      "evidence_script": "./scripts/module-lifecycle-dashboard-check.sh"
+    },
+    {
+      "stage": "operator review",
+      "evidence_ref": "examples/modules/generic-knowledge-intelligence/operator-review-request.json",
+      "blocker": "review cannot activate",
+      "activation_allowed": false,
+      "evidence_script": "./scripts/module-lifecycle-dashboard-check.sh"
+    },
+    {
+      "stage": "audit/provenance",
+      "evidence_ref": "docs/modules/module-lifecycle-traceability-matrix.md",
+      "blocker": "audit bypass blocked",
+      "activation_allowed": false,
+      "evidence_script": "./scripts/operator-platform-freeze-gate.sh"
+    },
+    {
+      "stage": "evidence script",
+      "evidence_ref": "scripts/module-activation-design-review.sh",
+      "blocker": "failed review blocks release",
+      "activation_allowed": false,
+      "evidence_script": "./scripts/module-activation-design-review.sh"
+    }
+  ]
+}

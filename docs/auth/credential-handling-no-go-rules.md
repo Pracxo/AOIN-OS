@@ -25,3 +25,15 @@ material.
 
 AION-098 adds these rules only. It adds no production auth runtime, no provider
 integration, no credentials, no tokens, no sessions, and no cookies.
+
+## Connector Credential Boundary
+
+AION-106 extends the credential no-go posture to future external connectors.
+Connector credentials and tokens remain absent from the repository, examples,
+static console data, logs, telemetry, audit records, and public Brain
+contracts.
+
+Future connector credential work requires a secret-store design, rotation
+model, revocation model, audit model, policy gate, operator review, and release
+gate. Connector metadata must not contain credential values, browser storage
+must not hold connector secrets, and connector examples must remain synthetic.

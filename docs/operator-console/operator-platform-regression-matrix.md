@@ -22,6 +22,7 @@ forward.
 | Role filtering | `./scripts/role-filter-check.sh` | `Role filter check PASS` | Role visibility filtering hides forbidden actions or grants execution authority. | Every PR | Policy reviewer | `examples/operator-console/operator-platform-regression-matrix.json` |
 | Production auth architecture | `./scripts/production-auth-architecture-check.sh` | `Production auth architecture check PASS` | Future auth design is treated as implemented runtime auth. | Every PR touching auth docs | Auth reviewer | `examples/operator-console/operator-platform-regression-matrix.json` |
 | Disabled auth runtime | `./scripts/auth-runtime-check.sh` | `Auth runtime check PASS` | Auth runtime, external identity, login/logout, or session persistence is enabled. | Every PR | Auth reviewer | `examples/operator-console/operator-platform-freeze-gate-result.json` |
+| External connector boundary | `./scripts/connector-boundary-design-check.sh` | `Connector boundary design check PASS` | Connector runtime, network client, connector SDK, provider SDK, credential, token storage, dynamic route, external call enablement, policy bypass, or audit bypass appears. | Every PR touching connector docs | Connector boundary reviewer | `examples/connectors/connector-release-gates.json` |
 | Docs audit | `./scripts/docs-check.sh` and `./scripts/final-docs-audit.sh` | Docs checks pass | Release docs drift, blocked markers appear, or production UI claims appear. | Every PR | Release reviewer | `examples/operator-console/operator-platform-regression-evidence.json` |
 | Boundary check | `./scripts/boundary-check.sh` | Boundary tests pass | Vendor leakage, architecture boundary drift, or external adapter exposure appears. | Every PR | Architecture reviewer | `examples/operator-console/operator-platform-regression-evidence.json` |
 | Repository health | `./scripts/check.sh` | Full check succeeds | Backend tests, SDK tests, type checks, lint, architecture checks, or repo health fail. | Before merge and phase handoff | Release reviewer | `examples/operator-console/operator-platform-freeze-gate-result.json` |
@@ -38,3 +39,5 @@ The regression matrix is intentionally composed from existing local checks. It
 does not add runtime capability, frontend dependencies, production auth,
 activation, execution, provider calls, external calls, package installation, or
 privileged bypass.
+Connector review remains design-only and does not add connector runtime,
+network clients, credentials, tokens, SDK dependencies, or external calls.

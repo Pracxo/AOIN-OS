@@ -1763,6 +1763,56 @@ provenance, and operator review rather than Brain core code changes.
 See `docs/roadmap/module-ecosystem.md` and
 `docs/architecture/module-activation-design.md`.
 
+## AION-105 Module Activation Design Review Gate
+
+AION-105 adds a review-only module/plugin activation gate. The gate composes
+the existing manifest, intake, module slot, capability binding, conformance,
+readiness, activation request, activation gate, runtime registration preview,
+module mock runtime, operator review, release/freeze, and boundary checks into
+one pre-implementation evidence pack.
+
+The new review docs live under `docs/modules/`:
+
+- `module-activation-design-review.md`
+- `plugin-boundary-evidence-pack.md`
+- `module-activation-pre-gate.md`
+- `code-loading-disabled-proof.md`
+- `runtime-registration-disabled-proof.md`
+- `capability-activation-disabled-proof.md`
+- `module-lifecycle-traceability-matrix.md`
+- `future-activation-implementation-prerequisites.md`
+- `module-activation-no-go-regression-pack.md`
+
+The gate is not activation. Code loading, package installation, runtime
+registration, capability activation, controlled execution, module writes,
+external calls, and domain module logic remain disabled.
+
+## AION-106 External Connector Boundary Design
+
+AION-106 adds a design-only external connector boundary before any connector
+runtime exists. Connectors are untrusted by default. Connector metadata,
+capability claims, credential needs, egress patterns, ingress responses, and
+returned data are declarations or untrusted inputs until AION validates,
+normalizes, redacts, policy-gates, action-authorizes, audits, and tags them
+with provenance.
+
+The connector boundary docs live under `docs/connectors/`:
+
+- `external-connector-boundary-design.md`
+- `connector-trust-model.md`
+- `connector-credential-boundary.md`
+- `connector-egress-guard.md`
+- `connector-ingress-guard.md`
+- `connector-capability-declaration.md`
+- `connector-threat-model.md`
+- `connector-release-gates.md`
+- `connector-no-go-regression-pack.md`
+- `future-connector-implementation-prerequisites.md`
+
+The gate is not connector implementation. Connector runtime, network clients,
+connector SDKs, provider SDKs, credentials, token storage, external calls,
+dynamic routes, activation, execution, and runtime registration remain absent.
+
 ## Generic Knowledge Intelligence Module Pack
 
 AION-084 adds the first concrete post-v0.1 module package as metadata only.

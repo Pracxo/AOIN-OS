@@ -1,0 +1,17 @@
+{
+  "task": "AION-106",
+  "artifact": "connector_trust_model",
+  "status": "passed",
+  "untrusted_by_default": true,
+  "metadata_untrusted": true,
+  "returned_data_untrusted": true,
+  "capability_claims_require_validation": true,
+  "provenance_required": true,
+  "policy_required": true,
+  "audit_required": true,
+  "redaction_required": true,
+  "connector_runtime_enabled": false,
+  "external_calls_enabled": false,
+  "credentials_present": false,
+  "token_storage_enabled": false
+}

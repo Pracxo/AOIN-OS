@@ -15,6 +15,8 @@
 | Policy bypass | Dry-run authorization keeps denials visible. | `./scripts/action-authorization-check.sh` and `./scripts/role-filter-check.sh` | Role filtering could be mistaken for production authorization. | Any role path grants execution, activation, external calls, or privileged bypass. |
 | Audit bypass | Operator console contract audits fail closed on unsafe files. | `./scripts/operator-console-contract-check.sh` | New evidence files need explicit checkpoint validation. | Any evidence file escapes both legacy contract checks and the AION-101 checkpoint script. |
 | Auth prototype drift | AION-104 freezes the local auth prototype review and no-go regression pack. | `./scripts/auth-prototype-review.sh` and `./scripts/auth-no-go-regression.sh` | Future auth work could skip the disabled/mock-only baseline. | Any production auth, login/logout, credential, token, cookie, session persistence, provider SDK, external identity runtime, migration, API router, or bypass appears before a later implementation ADR. |
+| Module activation drift | AION-105 freezes the module/plugin activation design review and no-go regression pack. | `./scripts/module-activation-design-review.sh` and `./scripts/module-activation-no-go-regression.sh` | Future module work could treat review evidence as activation permission. | Any code loader, package installer, dynamic import, runtime route registration, capability activation, controlled execution, module write path, policy bypass, or audit bypass appears before a later implementation ADR. |
+| Connector runtime drift | AION-106 freezes the external connector boundary design and no-go regression pack. | `./scripts/connector-boundary-design-check.sh` and `./scripts/connector-no-go-regression.sh` | Future connector work could treat metadata or review evidence as permission to call external systems. | Any connector runtime, network client, connector SDK, provider SDK, credential, token storage, dynamic route, external call enablement, policy bypass, or audit bypass appears before a later implementation ADR. |
 
 ## AION-102 stabilization control
 
@@ -30,4 +32,20 @@ underlying local check.
 `./scripts/auth-no-go-regression.sh` now aggregate the local auth, session,
 role, action authorization, production auth architecture, disabled auth
 runtime, static console, docs, and no-go controls into an auth-specific
+pre-implementation gate.
+
+## AION-105 module activation review control
+
+`./scripts/module-activation-design-review.sh` and
+`./scripts/module-activation-no-go-regression.sh` now aggregate the module pack,
+Generic Knowledge demo, module lifecycle dashboard, operator platform freeze
+gate, UI release gate, docs, boundary, plugin evidence, and no-go controls into
+a module activation pre-implementation gate.
+
+## AION-106 connector boundary review control
+
+`./scripts/connector-boundary-design-check.sh` and
+`./scripts/connector-no-go-regression.sh` now aggregate connector trust,
+credential, egress, ingress, capability declaration, threat model, release gate,
+future prerequisite, docs, and no-go controls into an external connector
 pre-implementation gate.

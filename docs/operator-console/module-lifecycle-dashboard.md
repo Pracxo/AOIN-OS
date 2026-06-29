@@ -106,3 +106,12 @@ python3 -m http.server 8090 --directory operator-console-static
 - Code loading appears.
 - Raw prompts, hidden reasoning, credentials, or protected values render.
 - A frontend dependency or build system is added.
+
+## AION-105 Review Gate
+
+AION-105 uses the dashboard as operator-visible evidence for the module
+activation design review. The dashboard remains read-only. It may show the
+plugin boundary evidence pack, lifecycle traceability matrix, and no-go
+regression status, but it must not add activation controls, capability
+activation controls, runtime registration controls, code loading controls, or
+module write controls.

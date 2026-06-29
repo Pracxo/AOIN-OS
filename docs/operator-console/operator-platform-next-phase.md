@@ -25,8 +25,14 @@ Recommended next phase:
 - AION-104 local auth disabled prototype review. Status: implemented as
   evidence, no-go regression, disabled runtime proof, and pre-implementation
   gate.
-- AION-105 module/plugin activation design review.
-- AION-106 external connector boundary design.
+- AION-105 module/plugin activation design review. Status: implemented as
+  evidence, no-go regression, disabled code-loading proof, disabled runtime
+  registration proof, disabled capability activation proof, traceability
+  matrix, and pre-gate.
+- AION-106 external connector boundary design. Status: implemented as
+  evidence, no-go regression, trust model, credential boundary, egress/ingress
+  guards, threat model, release gates, and future implementation
+  prerequisites.
 - AION-107 operator action write-path architecture, design only.
 
 ## Boundaries for the next phase
@@ -36,6 +42,9 @@ cookies, persisted sessions, external identity provider runtime, frontend
 dependencies, build tooling, external provider calls, external notifications,
 module activation, capability activation, runtime registration, tool execution,
 action proposal execution, hard deletes, or domain module logic.
+It also must not introduce connector runtime, connector SDKs, provider SDKs,
+network clients, credentials, token storage, dynamic connector routes, or
+external-call enablement.
 
 ## Required starting point
 
@@ -46,6 +55,10 @@ Every next-phase branch should start by running:
 ./scripts/operator-platform-freeze-gate.sh
 ./scripts/auth-prototype-review.sh
 ./scripts/auth-no-go-regression.sh
+./scripts/module-activation-design-review.sh
+./scripts/module-activation-no-go-regression.sh
+./scripts/connector-boundary-design-check.sh
+./scripts/connector-no-go-regression.sh
 ```
 
 The regression and freeze gates must pass before any future UI, auth,

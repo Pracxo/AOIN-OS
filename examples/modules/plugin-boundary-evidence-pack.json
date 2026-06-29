@@ -1,0 +1,107 @@
+{
+  "task": "AION-105",
+  "artifact": "plugin_boundary_evidence_pack",
+  "status": "passed",
+  "payload_executable": false,
+  "external_dependency_fetch_allowed": false,
+  "evidence": [
+    {
+      "area": "extension manifest validation",
+      "script": "./scripts/module-pack-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "manifest remains metadata only"
+    },
+    {
+      "area": "extension intake",
+      "script": "./scripts/module-pack-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "intake accepts metadata only"
+    },
+    {
+      "area": "module slot",
+      "script": "./scripts/module-pack-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "slot remains inactive"
+    },
+    {
+      "area": "capability binding",
+      "script": "./scripts/module-pack-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "binding remains metadata only"
+    },
+    {
+      "area": "binding validation",
+      "script": "./scripts/module-pack-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "validation does not invoke capability runtime"
+    },
+    {
+      "area": "conformance",
+      "script": "./scripts/module-pack-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "conformance remains schema based"
+    },
+    {
+      "area": "readiness",
+      "script": "./scripts/module-pack-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "readiness expects activation_ready false"
+    },
+    {
+      "area": "activation request",
+      "script": "./scripts/module-pack-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "request remains blocked by default"
+    },
+    {
+      "area": "activation gate",
+      "script": "./scripts/module-activation-no-go-regression.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "gate keeps activation disabled"
+    },
+    {
+      "area": "runtime registration preview",
+      "script": "./scripts/module-activation-no-go-regression.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "preview keeps registration denied"
+    },
+    {
+      "area": "module mock runtime",
+      "script": "./scripts/module-lifecycle-dashboard-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "mock runtime remains synthetic"
+    },
+    {
+      "area": "operator review",
+      "script": "./scripts/module-lifecycle-dashboard-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "operator review is not activation"
+    },
+    {
+      "area": "release and freeze checks",
+      "script": "./scripts/operator-platform-freeze-gate.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "freeze gate remains blocking"
+    },
+    {
+      "area": "boundary checks",
+      "script": "./scripts/boundary-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true,
+      "notes": "Brain boundaries remain generic"
+    }
+  ]
+}
