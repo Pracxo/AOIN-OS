@@ -25,6 +25,7 @@ from aion_sdk.cli.commands.config import install_config_commands
 from aion_sdk.cli.commands.conformance import install_conformance_commands
 from aion_sdk.cli.commands.connector_policy import install_connector_policy_commands
 from aion_sdk.cli.commands.connector_runtime import install_connector_runtime_commands
+from aion_sdk.cli.commands.connector_sandbox import install_connector_sandbox_commands
 from aion_sdk.cli.commands.connector_simulator import install_connector_simulator_commands
 from aion_sdk.cli.commands.contracts import install_contract_commands
 from aion_sdk.cli.commands.decisions import install_decision_commands
@@ -583,6 +584,7 @@ install_auth_runtime_commands(app, get_client=_client, get_scope=_scope, render=
 install_connector_runtime_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_connector_simulator_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_connector_policy_commands(app, get_client=_client, get_scope=_scope, render=_render)
+install_connector_sandbox_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_operator_console_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_local_auth_commands(app, get_client=_client, get_scope=_scope, render=_render)
 install_local_session_commands(app, get_client=_client, get_scope=_scope, render=_render)

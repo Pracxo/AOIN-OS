@@ -328,6 +328,31 @@ class KernelDiagnostics:
             "connector_policy_query_service",
             "medium",
         ),
+        (
+            "connector_sandbox_design_service_present",
+            "connector_sandbox_design_service",
+            "medium",
+        ),
+        (
+            "connector_isolation_boundary_service_present",
+            "connector_isolation_boundary_service",
+            "medium",
+        ),
+        (
+            "connector_sandbox_capability_rule_service_present",
+            "connector_sandbox_capability_rule_service",
+            "medium",
+        ),
+        (
+            "connector_sandbox_readiness_service_present",
+            "connector_sandbox_readiness_service",
+            "medium",
+        ),
+        (
+            "connector_sandbox_query_service_present",
+            "connector_sandbox_query_service",
+            "medium",
+        ),
         ("local_session_preview_service_present", "local_session_preview_service", "medium"),
         ("local_session_context_service_present", "local_session_context_service", "medium"),
         ("local_session_boundary_service_present", "local_session_boundary_service", "medium"),
@@ -521,6 +546,7 @@ class KernelDiagnostics:
         checks.extend(self._connector_runtime_checks(settings))
         checks.extend(self._connector_simulator_checks(settings))
         checks.extend(self._connector_policy_checks(settings))
+        checks.extend(self._connector_sandbox_checks(settings))
         checks.extend(self._operator_action_checks(settings))
         checks.extend(self._run_supervision_checks(settings))
         checks.extend(self._notification_checks(settings))
@@ -1424,6 +1450,152 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Connector policy preview services are assembled.",
+            ),
+        ]
+
+    def _connector_sandbox_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "connector_sandbox_design_service",
+                "connector_isolation_boundary_service",
+                "connector_sandbox_capability_rule_service",
+                "connector_sandbox_denial_service",
+                "connector_sandbox_audit_service",
+                "connector_sandbox_readiness_service",
+                "connector_sandbox_query_service",
+            )
+        )
+        return [
+            self._result(
+                "connector_sandbox_design_enabled",
+                "connector_sandbox",
+                (
+                    "passed"
+                    if bool(getattr(settings, "connector_sandbox_design_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Connector sandbox design boundary is available for read-only preview.",
+            ),
+            self._result(
+                "connector_sandbox_readiness_enabled",
+                "connector_sandbox",
+                (
+                    "passed"
+                    if bool(getattr(settings, "connector_sandbox_readiness_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Connector sandbox readiness gate is available without execution.",
+            ),
+            self._result(
+                "connector_sandbox_runtime_execution_enabled",
+                "connector_sandbox",
+                (
+                    "failed"
+                    if bool(
+                        getattr(settings, "connector_sandbox_runtime_execution_enabled", False)
+                    )
+                    else "passed"
+                ),
+                "critical",
+                "Connector sandbox runtime execution remains disabled.",
+            ),
+            self._result(
+                "connector_sandbox_filesystem_enabled",
+                "connector_sandbox",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_sandbox_filesystem_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector sandbox filesystem access remains disabled.",
+            ),
+            self._result(
+                "connector_sandbox_network_enabled",
+                "connector_sandbox",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_sandbox_network_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector sandbox network access remains disabled.",
+            ),
+            self._result(
+                "connector_sandbox_credentials_enabled",
+                "connector_sandbox",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_sandbox_credentials_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector sandbox credential access remains disabled.",
+            ),
+            self._result(
+                "connector_sandbox_tokens_enabled",
+                "connector_sandbox",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_sandbox_tokens_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector sandbox token access remains disabled.",
+            ),
+            self._result(
+                "connector_sandbox_process_spawn_enabled",
+                "connector_sandbox",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_sandbox_process_spawn_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector sandbox process spawn remains disabled.",
+            ),
+            self._result(
+                "connector_sandbox_dynamic_import_enabled",
+                "connector_sandbox",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_sandbox_dynamic_import_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector sandbox dynamic import remains disabled.",
+            ),
+            self._result(
+                "connector_sandbox_package_install_enabled",
+                "connector_sandbox",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_sandbox_package_install_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector sandbox package install remains disabled.",
+            ),
+            self._result(
+                "connector_sandbox_activation_enabled",
+                "connector_sandbox",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_sandbox_activation_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector sandbox activation remains disabled.",
+            ),
+            self._result(
+                "connector_sandbox_services_present",
+                "connector_sandbox",
+                "passed" if services_present else "failed",
+                "high",
+                "Connector sandbox design and readiness services are assembled.",
             ),
         ]
 

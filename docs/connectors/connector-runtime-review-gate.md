@@ -71,3 +71,13 @@ access, static console policy preview data, and policy no-go regression. The
 runtime review gate still blocks runtime allow paths, external calls,
 credential use, token use, activation, route registration, tool execution, and
 write execution.
+
+## AION-112 Outcome
+
+AION-112 adds the connector sandbox design boundary, isolation model,
+capability rules, readiness preview, denials, audit/provenance records,
+SDK/CLI preview access, static console sandbox preview data, and sandbox
+no-go regression. The runtime review gate still blocks real sandbox execution,
+filesystem access, network access, credential use, token use, process
+spawning, dynamic imports, package installation, activation, route
+registration, tool execution, and write execution.

@@ -419,3 +419,43 @@ def record_connector_policy_audit(
         },
         metadata={"local_only": True, "read_only": True},
     )
+
+
+def record_connector_sandbox_audit(
+    audit_sink: object | None,
+    *,
+    readiness_id: str,
+    trace_id: str | None,
+    actor_id: str | None,
+    owner_scope: list[str],
+    status: str,
+) -> AuditEntry | None:
+    """Record a connector sandbox readiness audit without sandbox execution."""
+    return record_audit_event(
+        audit_sink,
+        action_type="connector_sandbox.readiness.preview",
+        resource_type="connector_sandbox_readiness",
+        resource_id=readiness_id,
+        event_type="connector_sandbox_readiness_checked",
+        outcome="completed" if status == "passed" else "failed",
+        source_component="connector_sandbox",
+        trace_id=trace_id,
+        actor_id=actor_id,
+        risk_level="medium",
+        payload={
+            "status": status,
+            "owner_scope": owner_scope,
+            "design_only": True,
+            "connector_runtime_enabled": False,
+            "runtime_execution_allowed": False,
+            "filesystem_access_allowed": False,
+            "network_access_allowed": False,
+            "credential_access_allowed": False,
+            "token_access_allowed": False,
+            "process_spawn_allowed": False,
+            "dynamic_import_allowed": False,
+            "package_install_allowed": False,
+            "connector_activation_allowed": False,
+        },
+        metadata={"local_only": True, "read_only": True},
+    )

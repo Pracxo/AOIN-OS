@@ -32,3 +32,13 @@ phase. It defines action metadata, matrix decisions, denial rules, and
 traceability evidence while preserving no connector runtime, no external calls,
 no credentials, no tokens, no runtime activation, no route registration, no
 tool execution, and no write execution.
+
+## AION-112 Completion Criteria
+
+AION-112 completes only the connector sandbox design phase. It defines the
+sandbox boundary, isolation model, capability rules, readiness preview,
+denials, audit/provenance evidence, SDK/CLI preview access, static console
+evidence, and no-go regression checks while preserving no real sandbox
+execution, no filesystem access, no network access, no credentials, no tokens,
+no process spawning, no dynamic imports, no package installation, no runtime
+activation, no route registration, no tool execution, and no write execution.

@@ -57,28 +57,28 @@ if git ls-files --others --exclude-standard infra/postgres/migrations services/b
 fi
 
 if git diff --name-only --diff-filter=ACMRT HEAD -- services/brain-api/src/aion_brain/api \
-  | rg -v '^services/brain-api/src/aion_brain/api/connector_runtime\.py$|^services/brain-api/src/aion_brain/api/connector_simulator\.py$|^services/brain-api/src/aion_brain/api/connector_policy\.py$' \
+  | rg -v '^services/brain-api/src/aion_brain/api/connector_runtime\.py$|^services/brain-api/src/aion_brain/api/connector_simulator\.py$|^services/brain-api/src/aion_brain/api/connector_policy\.py$|^services/brain-api/src/aion_brain/api/connector_sandbox\.py$' \
   | rg -n '.'; then
   echo "AION-106 must not change API router files" >&2
   exit 1
 fi
 
 if git ls-files --others --exclude-standard services/brain-api/src/aion_brain/api \
-  | rg -v '^services/brain-api/src/aion_brain/api/connector_runtime\.py$|^services/brain-api/src/aion_brain/api/connector_simulator\.py$|^services/brain-api/src/aion_brain/api/connector_policy\.py$' \
+  | rg -v '^services/brain-api/src/aion_brain/api/connector_runtime\.py$|^services/brain-api/src/aion_brain/api/connector_simulator\.py$|^services/brain-api/src/aion_brain/api/connector_policy\.py$|^services/brain-api/src/aion_brain/api/connector_sandbox\.py$' \
   | rg -n '.'; then
   echo "AION-106 must not add API router files" >&2
   exit 1
 fi
 
 if git diff --name-only --diff-filter=ACMRT HEAD -- packages/aion-sdk-python/src/aion_sdk/resources packages/aion-sdk-python/src/aion_sdk/cli.py packages/aion-sdk-python/src/aion_sdk/cli \
-  | rg -v '^packages/aion-sdk-python/src/aion_sdk/resources/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_policy\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_policy\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/main\.py$' \
+  | rg -v '^packages/aion-sdk-python/src/aion_sdk/resources/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_policy\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_sandbox\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_policy\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_sandbox\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/main\.py$' \
   | rg -n '.'; then
   echo "AION-106 must not add SDK resources or CLI command implementations" >&2
   exit 1
 fi
 
 if git ls-files --others --exclude-standard packages/aion-sdk-python/src/aion_sdk/resources packages/aion-sdk-python/src/aion_sdk/cli.py packages/aion-sdk-python/src/aion_sdk/cli \
-  | rg -v '^packages/aion-sdk-python/src/aion_sdk/resources/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_policy\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_policy\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/main\.py$' \
+  | rg -v '^packages/aion-sdk-python/src/aion_sdk/resources/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_policy\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_sandbox\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_policy\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_sandbox\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/main\.py$' \
   | rg -n '.'; then
   echo "AION-106 must not add untracked SDK resources or CLI command implementations" >&2
   exit 1
@@ -161,6 +161,9 @@ allowed_aion110_prefixes = (
 allowed_aion111_prefixes = (
     "services/brain-api/src/aion_brain/connector_policy/",
 )
+allowed_aion112_prefixes = (
+    "services/brain-api/src/aion_brain/connector_sandbox/",
+)
 allowed_aion108_files = {
     ".env.example",
     "AGENTS.md",
@@ -214,6 +217,16 @@ allowed_aion111_files = {
     "services/brain-api/src/aion_brain/api/connector_policy.py",
     "services/brain-api/src/aion_brain/contracts/connector_policy.py",
 }
+allowed_aion112_files = {
+    "operator-console-static/demo-data/connector-sandbox-status.json",
+    "operator-console-static/demo-data/connector-sandbox-readiness.json",
+    "packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_sandbox.py",
+    "packages/aion-sdk-python/src/aion_sdk/resources/connector_sandbox.py",
+    "packages/aion-sdk-python/tests/test_cli_connector_sandbox.py",
+    "packages/aion-sdk-python/tests/test_connector_sandbox_resource.py",
+    "services/brain-api/src/aion_brain/api/connector_sandbox.py",
+    "services/brain-api/src/aion_brain/contracts/connector_sandbox.py",
+}
 runtime_prefixes = (
     "services/brain-api/src/",
     "packages/aion-sdk-python/src/",
@@ -245,10 +258,12 @@ for relative in sorted(changed):
         or relative in allowed_aion108_files
         or relative in allowed_aion110_files
         or relative in allowed_aion111_files
+        or relative in allowed_aion112_files
         or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)
         or relative.startswith(allowed_aion110_prefixes)
         or relative.startswith(allowed_aion111_prefixes)
+        or relative.startswith(allowed_aion112_prefixes)
     ):
         continue
     if not relative.startswith(runtime_prefixes):

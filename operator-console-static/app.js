@@ -74,6 +74,10 @@
     catalog: "demo-data/connector-policy-catalog.json",
     dry_run: "demo-data/connector-policy-dry-run.json"
   };
+  var CONNECTOR_SANDBOX_DEMOS = {
+    status: "demo-data/connector-sandbox-status.json",
+    readiness: "demo-data/connector-sandbox-readiness.json"
+  };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
     role_filter: "demo-data/role-filtered-view-model.json"
@@ -1378,13 +1382,20 @@
         return fetchJson(CONNECTOR_RUNTIME_DEMOS.status);
       })
       : fetchJson(CONNECTOR_RUNTIME_DEMOS.status);
+    var sandboxStatusPromise = state.apiAllowed
+      ? fetchConnectorSandboxStatus().catch(function () {
+        return fetchJson(CONNECTOR_SANDBOX_DEMOS.status);
+      })
+      : fetchJson(CONNECTOR_SANDBOX_DEMOS.status);
     Promise.all([
       statusPromise,
       fetchJson(CONNECTOR_RUNTIME_DEMOS.preview),
       fetchJson(CONNECTOR_SIMULATOR_DEMOS.preview),
       fetchJson(CONNECTOR_SIMULATOR_DEMOS.readiness),
       fetchJson(CONNECTOR_POLICY_DEMOS.catalog),
-      fetchJson(CONNECTOR_POLICY_DEMOS.dry_run)
+      fetchJson(CONNECTOR_POLICY_DEMOS.dry_run),
+      sandboxStatusPromise,
+      fetchJson(CONNECTOR_SANDBOX_DEMOS.readiness)
     ])
       .then(function (payloads) {
         renderConnectorRuntimeStatus(redact(payloads[0]));
@@ -1393,6 +1404,8 @@
         renderConnectorPolicyReadiness(redact(payloads[3]));
         renderConnectorPolicyCatalog(redact(payloads[4]));
         renderConnectorPolicyDryRun(redact(payloads[5]));
+        renderConnectorSandboxStatus(redact(payloads[6]));
+        renderConnectorSandboxReadiness(redact(payloads[7]));
       })
       .catch(function () {
         renderConnectorRuntimeStatus({
@@ -1409,6 +1422,8 @@
         renderConnectorPolicyReadiness({ status: "unavailable", blockers: [] });
         renderConnectorPolicyCatalog({ status: "unavailable", actions: [] });
         renderConnectorPolicyDryRun({ status: "unavailable", blockers: [] });
+        renderConnectorSandboxStatus({ status: "unavailable", blockers: [] });
+        renderConnectorSandboxReadiness({ status: "unavailable", denied_capabilities: [] });
       });
   }
 
@@ -1417,6 +1432,16 @@
     return fetch(endpoint).then(function (response) {
       if (!response.ok) {
         throw new Error("connector runtime status unavailable");
+      }
+      return response.json();
+    });
+  }
+
+  function fetchConnectorSandboxStatus() {
+    var endpoint = state.apiBase + "/brain/connector-sandbox/status?scope=workspace:main";
+    return fetch(endpoint).then(function (response) {
+      if (!response.ok) {
+        throw new Error("connector sandbox status unavailable");
       }
       return response.json();
     });
@@ -1627,6 +1652,84 @@
       row.appendChild(value);
       container.appendChild(row);
     });
+  }
+
+  function renderConnectorSandboxStatus(status) {
+    var container = document.getElementById("connector-sandbox-status");
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    [
+      ["status", status.status || "preview"],
+      ["read_only", String(Boolean(status.read_only))],
+      ["design_only", String(Boolean(status.design_only))],
+      ["readiness_preview_only", String(Boolean(status.readiness_preview_only))],
+      [
+        "connector_sandbox_runtime_execution_enabled",
+        String(Boolean(status.connector_sandbox_runtime_execution_enabled))
+      ],
+      ["connector_sandbox_filesystem_enabled", String(Boolean(status.connector_sandbox_filesystem_enabled))],
+      ["connector_sandbox_network_enabled", String(Boolean(status.connector_sandbox_network_enabled))],
+      ["connector_sandbox_credentials_enabled", String(Boolean(status.connector_sandbox_credentials_enabled))],
+      ["connector_sandbox_tokens_enabled", String(Boolean(status.connector_sandbox_tokens_enabled))],
+      ["connector_sandbox_activation_enabled", String(Boolean(status.connector_sandbox_activation_enabled))]
+    ].forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "checklist-row";
+      var label = document.createElement("span");
+      label.textContent = item[0];
+      var value = document.createElement("strong");
+      value.textContent = safeText(item[1] || "none");
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
+    });
+  }
+
+  function renderConnectorSandboxReadiness(readiness) {
+    var container = document.getElementById("connector-sandbox-readiness");
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    [
+      ["status", readiness.status || "preview"],
+      ["connector_key", readiness.connector_key || "mock.local.preview"],
+      ["sandbox_ready", String(Boolean(readiness.sandbox_ready))],
+      ["runtime_execution_allowed", String(Boolean(readiness.runtime_execution_allowed))],
+      ["filesystem_access_allowed", String(Boolean(readiness.filesystem_access_allowed))],
+      ["network_access_allowed", String(Boolean(readiness.network_access_allowed))],
+      ["credential_access_allowed", String(Boolean(readiness.credential_access_allowed))],
+      ["token_access_allowed", String(Boolean(readiness.token_access_allowed))],
+      ["process_spawn_allowed", String(Boolean(readiness.process_spawn_allowed))],
+      ["dynamic_import_allowed", String(Boolean(readiness.dynamic_import_allowed))],
+      ["package_install_allowed", String(Boolean(readiness.package_install_allowed))],
+      ["connector_activation_allowed", String(Boolean(readiness.connector_activation_allowed))]
+    ].forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "checklist-row";
+      var label = document.createElement("span");
+      label.textContent = item[0];
+      var value = document.createElement("strong");
+      value.textContent = safeText(item[1] || "none");
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
+    });
+    (Array.isArray(readiness.denied_capabilities) ? readiness.denied_capabilities : [])
+      .slice(0, 4)
+      .forEach(function (capability) {
+        var row = document.createElement("div");
+        row.className = "checklist-row";
+        var label = document.createElement("span");
+        label.textContent = safeText(capability);
+        var value = document.createElement("strong");
+        value.textContent = "denied";
+        row.appendChild(label);
+        row.appendChild(value);
+        container.appendChild(row);
+      });
   }
 
   function loadLocalSessionPanels() {

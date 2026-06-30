@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "synthetic": true,
+  "read_only": true,
+  "design_only": true,
+  "readiness_preview_only": true,
+  "connector_sandbox_design_enabled": true,
+  "connector_sandbox_readiness_enabled": true,
+  "connector_sandbox_runtime_execution_enabled": false,
+  "connector_sandbox_filesystem_enabled": false,
+  "connector_sandbox_network_enabled": false,
+  "connector_sandbox_credentials_enabled": false,
+  "connector_sandbox_tokens_enabled": false,
+  "connector_sandbox_process_spawn_enabled": false,
+  "connector_sandbox_dynamic_import_enabled": false,
+  "connector_sandbox_package_install_enabled": false,
+  "connector_sandbox_activation_enabled": false,
+  "connector_runtime_enabled": false,
+  "rule_count": 12,
+  "denied_capability_count": 11
+}

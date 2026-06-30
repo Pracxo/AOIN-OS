@@ -15,6 +15,7 @@ AION108_ALLOWED_CHANGED_FILES = {
     "services/brain-api/src/aion_brain/api/connector_runtime.py",
     "services/brain-api/src/aion_brain/api/connector_simulator.py",
     "services/brain-api/src/aion_brain/api/connector_policy.py",
+    "services/brain-api/src/aion_brain/api/connector_sandbox.py",
 }
 
 

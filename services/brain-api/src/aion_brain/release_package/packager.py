@@ -344,6 +344,7 @@ class ReleasePackager:
             reports["connector_runtime"] = self._connector_runtime_summary()
             reports["connector_simulator"] = self._connector_simulator_summary()
             reports["connector_policy"] = self._connector_policy_summary()
+            reports["connector_sandbox"] = self._connector_sandbox_summary()
             reports["capability_conformance"] = self._conformance_summary(request.owner_scope)
             reports["golden_path"] = self._golden_path_summary(request.owner_scope)
             reports["bootstrap"] = self._bootstrap_summary(request.owner_scope)
@@ -769,6 +770,57 @@ class ReleasePackager:
             "tokens_enabled": False,
             "activation_enabled": False,
             "route_registration_enabled": False,
+            "unsafe_flags": unsafe,
+        }
+
+    def _connector_sandbox_summary(self) -> dict[str, Any]:
+        unsafe_flags = {
+            "connector_sandbox_runtime_execution_enabled": bool(
+                getattr(self._settings, "connector_sandbox_runtime_execution_enabled", False)
+            ),
+            "connector_sandbox_filesystem_enabled": bool(
+                getattr(self._settings, "connector_sandbox_filesystem_enabled", False)
+            ),
+            "connector_sandbox_network_enabled": bool(
+                getattr(self._settings, "connector_sandbox_network_enabled", False)
+            ),
+            "connector_sandbox_credentials_enabled": bool(
+                getattr(self._settings, "connector_sandbox_credentials_enabled", False)
+            ),
+            "connector_sandbox_tokens_enabled": bool(
+                getattr(self._settings, "connector_sandbox_tokens_enabled", False)
+            ),
+            "connector_sandbox_process_spawn_enabled": bool(
+                getattr(self._settings, "connector_sandbox_process_spawn_enabled", False)
+            ),
+            "connector_sandbox_dynamic_import_enabled": bool(
+                getattr(self._settings, "connector_sandbox_dynamic_import_enabled", False)
+            ),
+            "connector_sandbox_package_install_enabled": bool(
+                getattr(self._settings, "connector_sandbox_package_install_enabled", False)
+            ),
+            "connector_sandbox_activation_enabled": bool(
+                getattr(self._settings, "connector_sandbox_activation_enabled", False)
+            ),
+        }
+        unsafe = [key for key, value in unsafe_flags.items() if value]
+        return {
+            "available": bool(getattr(self._settings, "connector_sandbox_design_enabled", True)),
+            "status": "blocked" if unsafe else "ready",
+            "read_only": True,
+            "design_only": True,
+            "readiness_enabled": bool(
+                getattr(self._settings, "connector_sandbox_readiness_enabled", True)
+            ),
+            "runtime_execution_enabled": False,
+            "filesystem_enabled": False,
+            "network_enabled": False,
+            "credentials_enabled": False,
+            "tokens_enabled": False,
+            "process_spawn_enabled": False,
+            "dynamic_import_enabled": False,
+            "package_install_enabled": False,
+            "activation_enabled": False,
             "unsafe_flags": unsafe,
         }
 

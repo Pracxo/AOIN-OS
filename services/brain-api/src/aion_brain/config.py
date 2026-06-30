@@ -1962,6 +1962,83 @@ class Settings(BaseSettings):
             "connector_policy_activation_enabled",
         ),
     )
+    connector_sandbox_design_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_SANDBOX_DESIGN_ENABLED",
+            "connector_sandbox_design_enabled",
+        ),
+    )
+    connector_sandbox_readiness_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_SANDBOX_READINESS_ENABLED",
+            "connector_sandbox_readiness_enabled",
+        ),
+    )
+    connector_sandbox_runtime_execution_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_SANDBOX_RUNTIME_EXECUTION_ENABLED",
+            "connector_sandbox_runtime_execution_enabled",
+        ),
+    )
+    connector_sandbox_filesystem_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_SANDBOX_FILESYSTEM_ENABLED",
+            "connector_sandbox_filesystem_enabled",
+        ),
+    )
+    connector_sandbox_network_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_SANDBOX_NETWORK_ENABLED",
+            "connector_sandbox_network_enabled",
+        ),
+    )
+    connector_sandbox_credentials_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_SANDBOX_CREDENTIALS_ENABLED",
+            "connector_sandbox_credentials_enabled",
+        ),
+    )
+    connector_sandbox_tokens_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_SANDBOX_TOKENS_ENABLED",
+            "connector_sandbox_tokens_enabled",
+        ),
+    )
+    connector_sandbox_process_spawn_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_SANDBOX_PROCESS_SPAWN_ENABLED",
+            "connector_sandbox_process_spawn_enabled",
+        ),
+    )
+    connector_sandbox_dynamic_import_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_SANDBOX_DYNAMIC_IMPORT_ENABLED",
+            "connector_sandbox_dynamic_import_enabled",
+        ),
+    )
+    connector_sandbox_package_install_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_SANDBOX_PACKAGE_INSTALL_ENABLED",
+            "connector_sandbox_package_install_enabled",
+        ),
+    )
+    connector_sandbox_activation_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_SANDBOX_ACTIVATION_ENABLED",
+            "connector_sandbox_activation_enabled",
+        ),
+    )
     auth_credentials_enabled: bool = Field(
         default=False,
         validation_alias=AliasChoices(

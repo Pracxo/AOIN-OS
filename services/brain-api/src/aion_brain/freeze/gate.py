@@ -43,6 +43,7 @@ CRITICAL_FAILURE_CHECKS = {
     "local_session_safe",
     "connector_simulator_safe",
     "connector_policy_safe",
+    "connector_sandbox_safe",
     "conformance_readiness_gate_safe",
     "golden_path_passed",
     "bootstrap_local_ready",
@@ -335,6 +336,14 @@ class FreezeGateService:
                 "connector_policy_safe",
                 "connector_policy",
                 self._check_connector_policy_safe,
+                severity="critical",
+            )
+        )
+        checks.append(
+            self._run_check(
+                "connector_sandbox_safe",
+                "connector_sandbox",
+                self._check_connector_sandbox_safe,
                 severity="critical",
             )
         )
@@ -1126,6 +1135,60 @@ class FreezeGateService:
                 "external_calls_allowed": False,
                 "auth_material_allowed": False,
                 "stored_auth_artifact_allowed": False,
+                "activation_allowed": False,
+            },
+        }
+
+    def _check_connector_sandbox_safe(self) -> dict[str, Any]:
+        unsafe_flags = {
+            "connector_sandbox_runtime_execution_enabled": bool(
+                getattr(self._settings, "connector_sandbox_runtime_execution_enabled", False)
+            ),
+            "connector_sandbox_filesystem_enabled": bool(
+                getattr(self._settings, "connector_sandbox_filesystem_enabled", False)
+            ),
+            "connector_sandbox_network_enabled": bool(
+                getattr(self._settings, "connector_sandbox_network_enabled", False)
+            ),
+            "connector_sandbox_credentials_enabled": bool(
+                getattr(self._settings, "connector_sandbox_credentials_enabled", False)
+            ),
+            "connector_sandbox_tokens_enabled": bool(
+                getattr(self._settings, "connector_sandbox_tokens_enabled", False)
+            ),
+            "connector_sandbox_process_spawn_enabled": bool(
+                getattr(self._settings, "connector_sandbox_process_spawn_enabled", False)
+            ),
+            "connector_sandbox_dynamic_import_enabled": bool(
+                getattr(self._settings, "connector_sandbox_dynamic_import_enabled", False)
+            ),
+            "connector_sandbox_package_install_enabled": bool(
+                getattr(self._settings, "connector_sandbox_package_install_enabled", False)
+            ),
+            "connector_sandbox_activation_enabled": bool(
+                getattr(self._settings, "connector_sandbox_activation_enabled", False)
+            ),
+        }
+        unsafe = [key for key, value in unsafe_flags.items() if value]
+        return {
+            "status": "failed" if unsafe else "passed",
+            "message": "Connector sandbox remains design-only with no execution path.",
+            "details": {
+                "unsafe_flags": unsafe,
+                "design_enabled": bool(
+                    getattr(self._settings, "connector_sandbox_design_enabled", True)
+                ),
+                "readiness_enabled": bool(
+                    getattr(self._settings, "connector_sandbox_readiness_enabled", True)
+                ),
+                "runtime_execution_allowed": False,
+                "filesystem_access_allowed": False,
+                "network_access_allowed": False,
+                "auth_material_allowed": False,
+                "stored_auth_artifact_allowed": False,
+                "process_spawn_allowed": False,
+                "dynamic_import_allowed": False,
+                "package_install_allowed": False,
                 "activation_allowed": False,
             },
         }
