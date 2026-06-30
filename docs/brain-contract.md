@@ -1763,3 +1763,11 @@ AION-114 adds connector release gate evidence documents and JSON examples only.
 It does not add Brain API routers, SDK resources, CLI command implementations,
 runtime config defaults, migrations, connector execution, external calls,
 credential/token storage, or sandbox execution.
+
+## AION-115 Connector Platform Checkpoint Contracts
+
+AION-115 adds no Brain API contract, router, SDK resource, or CLI command
+implementation. It adds connector checkpoint documents, JSON examples, static
+console demo data, ADR 0106, and local scripts only. Connector implementation
+remains unapproved, and runtime, external calls, credentials/tokens, sandbox
+execution, activation, and route registration remain disabled.

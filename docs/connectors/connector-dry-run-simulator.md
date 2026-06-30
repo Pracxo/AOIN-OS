@@ -45,3 +45,9 @@ tokens, activate connectors, or grant runtime permission.
 The dry-run simulator remains synthetic-only and is validated by the connector
 release gate. Simulator output must not become connector execution, network
 access, provider access, activation, or route registration.
+
+## AION-115 Checkpoint Input
+
+The dry-run simulator is included in the connector phase evidence pack. It
+remains synthetic-only and does not approve trusted connector ingress or runtime
+execution.

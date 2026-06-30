@@ -536,3 +536,11 @@ Instructions for future Codex runs in this repository:
   OAuth/OIDC/SAML runtime, sandbox execution, package files, lockfiles,
   migrations, activation, route registration, code loading, tool execution, or
   privileged bypass.
+- AION-115 connector platform checkpoint is closeout evidence only. It must
+  pass `./scripts/connector-platform-checkpoint.sh` and
+  `./scripts/connector-platform-freeze-check.sh`, and it must not add API
+  routers, SDK resources, CLI command implementations, runtime config defaults,
+  connector runtime enablement, external calls, credential or token storage,
+  OAuth/OIDC/SAML runtime, sandbox execution, package files, lockfiles,
+  migrations, activation, route registration, code loading, tool execution, or
+  privileged bypass.

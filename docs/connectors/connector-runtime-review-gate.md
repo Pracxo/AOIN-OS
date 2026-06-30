@@ -86,3 +86,10 @@ registration, tool execution, and write execution.
 The runtime review gate is a required input to
 `./scripts/connector-release-gate.sh`. A failed runtime review blocks connector
 release readiness and future implementation review.
+
+## AION-115 Checkpoint Input
+
+The runtime review gate is required evidence for
+`./scripts/connector-platform-checkpoint.sh`. The AION-115 checkpoint keeps the
+runtime disabled and keeps future implementation review blocked until a new ADR
+exists.

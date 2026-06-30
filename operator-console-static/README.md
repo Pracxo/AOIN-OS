@@ -226,3 +226,10 @@ The static console includes connector release gate and safety freeze panels.
 They load bundled JSON only, keep implementation approval false, and expose no
 runtime, external-call, credential/token, sandbox execution, activation, route
 registration, input, or write controls.
+
+## AION-115 Connector Platform Checkpoint Panels
+
+The static console includes connector platform checkpoint and phase closeout
+panels. They load bundled JSON only, keep connector implementation unapproved,
+and expose no runtime, external-call, credential/token, sandbox execution,
+activation, route registration, input, package, migration, or write controls.

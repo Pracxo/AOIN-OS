@@ -1,0 +1,76 @@
+{
+  "synthetic": true,
+  "status": "passed",
+  "evidence_pack_id": "connector-phase-evidence-pack-aion-115",
+  "read_only": true,
+  "design_only": true,
+  "redaction_applied": true,
+  "connector_runtime_enabled": false,
+  "external_calls_enabled": false,
+  "credentials_present": false,
+  "token_storage_enabled": false,
+  "sandbox_execution_enabled": false,
+  "connector_activation_enabled": false,
+  "route_registration_enabled": false,
+  "implementation_approved": false,
+  "release_gate_passed": true,
+  "safety_freeze_passed": true,
+  "package_files_added": false,
+  "migrations_added": false,
+  "provider_sdk_dependency_added": false,
+  "api_runtime_execution_route_added": false,
+  "endpoint_references_present": false,
+  "secret_material_present": false,
+  "credential_values_present": false,
+  "token_values_present": false,
+  "private_prompt_material_present": false,
+  "private_reasoning_present": false,
+  "evidence": [
+    {
+      "area": "boundary_design",
+      "artifact": "docs/connectors/external-connector-boundary-design.md",
+      "status": "complete"
+    },
+    {
+      "area": "disabled_runtime",
+      "artifact": "docs/connectors/disabled-connector-prototype.md",
+      "status": "complete"
+    },
+    {
+      "area": "runtime_review",
+      "artifact": "docs/connectors/connector-runtime-review-gate.md",
+      "status": "complete"
+    },
+    {
+      "area": "dry_run_simulator",
+      "artifact": "docs/connectors/connector-dry-run-simulator.md",
+      "status": "complete"
+    },
+    {
+      "area": "policy_catalog",
+      "artifact": "docs/connectors/connector-policy-action-catalog.md",
+      "status": "complete"
+    },
+    {
+      "area": "sandbox_design",
+      "artifact": "docs/connectors/connector-sandbox-design.md",
+      "status": "complete"
+    },
+    {
+      "area": "credential_architecture",
+      "artifact": "docs/connectors/connector-credential-store-architecture.md",
+      "status": "complete"
+    },
+    {
+      "area": "release_gate",
+      "artifact": "docs/connectors/connector-release-gate.md",
+      "status": "complete"
+    },
+    {
+      "area": "safety_freeze",
+      "artifact": "docs/connectors/connector-safety-freeze.md",
+      "status": "complete"
+    }
+  ],
+  "created_at": "2026-06-30T00:00:00Z"
+}

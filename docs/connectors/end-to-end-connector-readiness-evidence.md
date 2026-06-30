@@ -37,3 +37,9 @@ audit design.
 ./scripts/connector-safety-freeze.sh
 ./scripts/connector-release-no-go-regression.sh
 ```
+
+## AION-115 Checkpoint Evidence
+
+AION-115 adds `docs/connectors/connector-phase-evidence-pack.md` and
+`docs/connectors/connector-platform-checkpoint.md` as the phase closeout layer.
+The readiness evidence remains disabled, synthetic, and review-only.

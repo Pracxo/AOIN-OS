@@ -106,3 +106,12 @@ Risk: treating release evidence as implementation approval.
 Mitigation: AION-114 keeps `implementation_approved=false` in examples and
 static console data. Future connector implementation requires a new ADR and
 green release gate evidence.
+
+## AION-115 Connector Checkpoint Risk
+
+Risk: treating the platform checkpoint as permission to start connector
+implementation.
+
+Mitigation: AION-115 keeps `implementation_approved=false`, adds an unresolved
+risk register, freezes the implementation roadmap, and requires a new explicit
+ADR plus gate evidence before any runtime connector work.

@@ -45,3 +45,8 @@ connector runtime credential access.
 The connector policy catalog is required release evidence. Runtime allow paths,
 external calls, credential/token access, sandbox execution, activation, and
 route registration remain denied until a future ADR changes the boundary.
+
+## AION-115 Checkpoint Input
+
+The connector policy catalog is required checkpoint evidence. It keeps runtime
+allow paths denied and remains a no-go control for future implementation work.

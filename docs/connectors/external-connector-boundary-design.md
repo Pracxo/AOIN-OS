@@ -185,3 +185,9 @@ The external connector boundary is now one input to
 `./scripts/connector-release-gate.sh`. The boundary remains design-only and
 does not approve runtime execution, external calls, credential/token storage,
 sandbox execution, activation, or route registration.
+
+## AION-115 Checkpoint Relationship
+
+The external connector boundary is part of the AION-115 connector platform
+checkpoint. The checkpoint freezes this boundary as evidence only and does not
+approve connector implementation.

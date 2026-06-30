@@ -1826,3 +1826,10 @@ until a future ADR explicitly approves runtime scope and the release gate
 evidence remains green. Policy runtime allow paths, external calls, storage
 material access, sandbox execution, activation, and route registration are
 release blockers.
+
+## AION-115 Connector Platform Checkpoint Policy
+
+AION-115 adds no new policy allow path. The connector platform checkpoint
+keeps runtime allow paths, external calls, credential/token access, sandbox
+execution, activation, route registration, tool execution, and write execution
+denied until a future ADR and gate evidence explicitly change scope.

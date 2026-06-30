@@ -92,6 +92,15 @@ filesystem access, network access, credentials, tokens, process spawning,
 dynamic imports, package installation, connector activation, routes, external
 calls, frontend dependencies, package files, or migrations.
 
+## Connector Platform Checkpoint
+
+AION-115 freezes the connector platform checkpoint after AION-106 through
+AION-114. It adds closeout docs, evidence examples, static console checkpoint
+data, and repository-local checkpoint scripts only. Connector implementation
+remains unapproved, connector runtime remains disabled, external calls remain
+absent, credentials and tokens remain absent, sandbox execution remains absent,
+and activation and route registration remain disabled.
+
 ## Core Brain Loop
 
 ```text
