@@ -96,7 +96,11 @@ def test_connector_release_scripts_are_executable_and_pass() -> None:
         ("scripts/connector-safety-freeze.sh", "Connector safety freeze PASS"),
     ]
     env = os.environ.copy()
-    env["AION_CONNECTOR_SAFETY_FREEZE_SKIP_FULL_CHECK"] = "1"
+    env.pop("AION_CONNECTOR_SAFETY_FREEZE_SKIP_FULL_CHECK", None)
+    env["PYTEST_CURRENT_TEST"] = env.get(
+        "PYTEST_CURRENT_TEST",
+        "test_connector_release_scripts_are_executable_and_pass (call)",
+    )
 
     for relative, expected in scripts:
         script = ROOT / relative
@@ -112,6 +116,8 @@ def test_connector_release_scripts_are_executable_and_pass() -> None:
             env=env,
         )
         assert expected in result.stdout
+        if relative == "scripts/connector-safety-freeze.sh":
+            assert "PASS: full repository check deferred to outer gate" in result.stdout
 
 
 def test_connector_release_gate_keeps_blocked_files_absent() -> None:

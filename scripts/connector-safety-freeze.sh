@@ -4,12 +4,24 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
+git_ref_exists() {
+  git rev-parse --verify --quiet "$1" >/dev/null 2>&1
+}
+
+is_nested_gate_context() {
+  [[ -n "${PYTEST_CURRENT_TEST:-}" ]] && return 0
+  [[ "${AION_CONNECTOR_SAFETY_FREEZE_SKIP_FULL_CHECK:-}" == "1" ]] && return 0
+  [[ "${AION_AGGREGATE_GATE_RUNNING:-}" == "1" ]] && return 0
+  [[ "${AION_CHECK_RUNNING:-}" == "1" ]] && return 0
+  return 1
+}
+
 ./scripts/connector-release-gate.sh
 
-if [[ "${AION_CONNECTOR_SAFETY_FREEZE_SKIP_FULL_CHECK:-0}" != "1" ]]; then
-  ./scripts/check.sh
+if is_nested_gate_context; then
+  echo "PASS: full repository check deferred to outer gate"
 else
-  echo "Connector safety freeze full check skipped by aggregate gate"
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/check.sh
 fi
 
 echo "Connector safety freeze working tree summary:"
@@ -20,20 +32,20 @@ tag_ref="$(git rev-parse aion-v0.1.0 2>/dev/null)" || {
   exit 1
 }
 
-if git rev-parse --verify --quiet origin/main >/dev/null 2>&1; then
+if git_ref_exists origin/main; then
   if git merge-base --is-ancestor aion-v0.1.0 origin/main; then
     echo "aion-v0.1.0 is in origin/main history"
   else
-    echo "aion-v0.1.0 ancestry could not be confirmed against origin/main" >&2
+    echo "WARN: aion-v0.1.0 ancestry could not be confirmed against origin/main" >&2
   fi
-elif git rev-parse --verify --quiet main >/dev/null 2>&1; then
+elif git_ref_exists main; then
   if git merge-base --is-ancestor aion-v0.1.0 main; then
     echo "aion-v0.1.0 is in main history"
   else
-    echo "aion-v0.1.0 ancestry could not be confirmed against main" >&2
+    echo "WARN: aion-v0.1.0 ancestry could not be confirmed against main" >&2
   fi
 else
-  echo "main comparison ref unavailable; tag ancestry check skipped"
+  echo "WARN: origin/main unavailable in this checkout; skipping non-release tag ancestry confirmation"
 fi
 
 cat <<SUMMARY
