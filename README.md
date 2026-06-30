@@ -74,6 +74,15 @@ shapes only. They do not execute connectors, call external services, store
 credentials, store tokens, register routes, activate capabilities, execute
 tools, or execute write paths.
 
+## Connector Policy Action Catalog
+
+AION-111 adds a connector policy action catalog, role-aware authorization
+matrix, dry-run gate, denial rules, traceability evidence, SDK/CLI preview
+access, and static console demo data. It keeps connector runtime disabled and
+adds no external calls, credentials, tokens, activation, routes, tool
+execution, write execution, frontend dependencies, package files, or
+migrations.
+
 ## Core Brain Loop
 
 ```text
@@ -4188,4 +4197,20 @@ Developer command:
 ```bash
 ./scripts/connector-runtime-review.sh
 ./scripts/connector-runtime-no-external-call-regression.sh
+```
+
+## AION-111 Connector Policy Action Catalog
+
+AION-111 adds policy action catalog proof before any future connector runtime
+work. It introduces `GET /brain/connector-policy/catalog`,
+`GET /brain/connector-policy/matrix`, `POST /brain/connector-policy/dry-run`,
+`POST /brain/connector-policy/traceability/query`, and
+`GET /brain/connector-policy/status`. The SDK and CLI expose catalog, matrix,
+dry-run, traceability query, and status preview helpers only.
+
+Developer command:
+
+```bash
+./scripts/connector-policy-check.sh
+./scripts/connector-policy-no-go-regression.sh
 ```

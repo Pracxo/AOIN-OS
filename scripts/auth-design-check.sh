@@ -213,6 +213,7 @@ allowed_auth_paths = {
     "docs/auth/auth-traceability-matrix.md",
     "docs/auth/auth-no-go-regression-pack.md",
     "docs/auth/pre-implementation-auth-gate.md",
+    "docs/connectors/connector-authorization-matrix.md",
     "docs/operator-console/dry-run-action-authorization.md",
     "docs/operator-console/action-authorization-preview.md",
     "docs/operator-console/action-authorization-deny-matrix.md",
@@ -255,6 +256,7 @@ allowed_auth_paths = {
     "examples/auth/auth-runtime-disabled-proof.json",
     "examples/auth/auth-traceability-matrix.json",
     "examples/auth/auth-no-go-regression-result.json",
+    "examples/connectors/connector-authorization-matrix.json",
     "operator-console-static/demo-data/action-authorization-preview.json",
     "operator-console-static/demo-data/action-authorization-deny-matrix.json",
     "operator-console-static/demo-data/auth-runtime-status.json",
@@ -388,6 +390,7 @@ allowed_auth_paths = {
     "services/brain-api/tests/test_operator_console_session_preview.py",
     "services/brain-api/tests/test_kernel_local_session_wiring.py",
     "services/brain-api/tests/test_visual_telemetry_local_session.py",
+    "services/brain-api/tests/test_connector_authorization_matrix.py",
 }
 
 blocked_package_names = {

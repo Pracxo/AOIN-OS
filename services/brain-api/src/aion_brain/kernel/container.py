@@ -86,6 +86,15 @@ from aion_brain.conformance import (
     ReadinessAssessmentService,
     SchemaConformanceChecker,
 )
+from aion_brain.connector_policy import (
+    ConnectorAuthorizationMatrixService,
+    ConnectorPolicyAuditService,
+    ConnectorPolicyCatalogService,
+    ConnectorPolicyDenialService,
+    ConnectorPolicyDryRunService,
+    ConnectorPolicyQueryService,
+    ConnectorPolicyTraceabilityService,
+)
 from aion_brain.connector_runtime import (
     ConnectorEgressPreviewService,
     ConnectorIngressPreviewService,
@@ -3670,6 +3679,33 @@ class KernelContainer:
         self.connector_simulator_query_service = ConnectorSimulatorQueryService(
             settings=self.settings
         )
+        self.connector_policy_catalog_service = ConnectorPolicyCatalogService(
+            telemetry_service=self.telemetry_service,
+        )
+        self.connector_authorization_matrix_service = ConnectorAuthorizationMatrixService(
+            telemetry_service=self.telemetry_service,
+        )
+        self.connector_policy_denial_service = ConnectorPolicyDenialService()
+        self.connector_policy_audit_service = ConnectorPolicyAuditService(
+            audit_sink=self.audit_integrity_ledger
+        )
+        self.connector_policy_dry_run_service = ConnectorPolicyDryRunService(
+            catalog_service=self.connector_policy_catalog_service,
+            matrix_service=self.connector_authorization_matrix_service,
+            denial_service=self.connector_policy_denial_service,
+            audit_service=self.connector_policy_audit_service,
+            settings=self.settings,
+            telemetry_service=self.telemetry_service,
+        )
+        self.connector_policy_traceability_service = ConnectorPolicyTraceabilityService(
+            telemetry_service=self.telemetry_service,
+        )
+        self.connector_policy_query_service = ConnectorPolicyQueryService(
+            catalog_service=self.connector_policy_catalog_service,
+            matrix_service=self.connector_authorization_matrix_service,
+            denial_service=self.connector_policy_denial_service,
+            settings=self.settings,
+        )
         self.local_session_preview_service = LocalSessionPreviewService(
             telemetry_service=self.telemetry_service,
         )
@@ -5324,6 +5360,48 @@ class KernelContainer:
             (
                 "connector_simulator_query_service",
                 self.connector_simulator_query_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_policy_catalog_service",
+                self.connector_policy_catalog_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_authorization_matrix_service",
+                self.connector_authorization_matrix_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_policy_denial_service",
+                self.connector_policy_denial_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_policy_audit_service",
+                self.connector_policy_audit_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_policy_dry_run_service",
+                self.connector_policy_dry_run_service,
+                "service",
+                "deterministic",
+            ),
+            (
+                "connector_policy_traceability_service",
+                self.connector_policy_traceability_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_policy_query_service",
+                self.connector_policy_query_service,
                 "service",
                 "local",
             ),

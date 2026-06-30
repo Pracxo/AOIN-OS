@@ -303,6 +303,31 @@ class KernelDiagnostics:
             "connector_simulator_query_service",
             "medium",
         ),
+        (
+            "connector_policy_catalog_service_present",
+            "connector_policy_catalog_service",
+            "medium",
+        ),
+        (
+            "connector_authorization_matrix_service_present",
+            "connector_authorization_matrix_service",
+            "medium",
+        ),
+        (
+            "connector_policy_dry_run_service_present",
+            "connector_policy_dry_run_service",
+            "medium",
+        ),
+        (
+            "connector_policy_traceability_service_present",
+            "connector_policy_traceability_service",
+            "medium",
+        ),
+        (
+            "connector_policy_query_service_present",
+            "connector_policy_query_service",
+            "medium",
+        ),
         ("local_session_preview_service_present", "local_session_preview_service", "medium"),
         ("local_session_context_service_present", "local_session_context_service", "medium"),
         ("local_session_boundary_service_present", "local_session_boundary_service", "medium"),
@@ -495,6 +520,7 @@ class KernelDiagnostics:
         checks.extend(self._auth_runtime_checks(settings))
         checks.extend(self._connector_runtime_checks(settings))
         checks.extend(self._connector_simulator_checks(settings))
+        checks.extend(self._connector_policy_checks(settings))
         checks.extend(self._operator_action_checks(settings))
         checks.extend(self._run_supervision_checks(settings))
         checks.extend(self._notification_checks(settings))
@@ -1298,6 +1324,106 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Connector simulator services are assembled.",
+            ),
+        ]
+
+    def _connector_policy_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "connector_policy_catalog_service",
+                "connector_authorization_matrix_service",
+                "connector_policy_denial_service",
+                "connector_policy_audit_service",
+                "connector_policy_dry_run_service",
+                "connector_policy_traceability_service",
+                "connector_policy_query_service",
+            )
+        )
+        return [
+            self._result(
+                "connector_policy_catalog_enabled",
+                "connector_policy",
+                (
+                    "passed"
+                    if bool(getattr(settings, "connector_policy_catalog_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Connector policy action catalog is available for read-only preview.",
+            ),
+            self._result(
+                "connector_policy_dry_run_enabled",
+                "connector_policy",
+                (
+                    "passed"
+                    if bool(getattr(settings, "connector_policy_dry_run_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Connector policy dry-run gate is available without execution.",
+            ),
+            self._result(
+                "connector_policy_runtime_allow_enabled",
+                "connector_policy",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_policy_runtime_allow_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector policy runtime allow paths remain disabled.",
+            ),
+            self._result(
+                "connector_policy_external_calls_enabled",
+                "connector_policy",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_policy_external_calls_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector policy external calls remain disabled.",
+            ),
+            self._result(
+                "connector_policy_credentials_enabled",
+                "connector_policy",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_policy_credentials_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector policy credential access remains disabled.",
+            ),
+            self._result(
+                "connector_policy_tokens_enabled",
+                "connector_policy",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_policy_tokens_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector policy token access remains disabled.",
+            ),
+            self._result(
+                "connector_policy_activation_enabled",
+                "connector_policy",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_policy_activation_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector policy activation remains disabled.",
+            ),
+            self._result(
+                "connector_policy_services_present",
+                "connector_policy",
+                "passed" if services_present else "failed",
+                "high",
+                "Connector policy preview services are assembled.",
             ),
         ]
 

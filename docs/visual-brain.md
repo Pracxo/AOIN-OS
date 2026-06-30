@@ -1052,3 +1052,16 @@ evidence: `connector_runtime_status_checked`, `connector_manifest_validated`,
 
 The corresponding node types are preview/audit evidence nodes only. They do not
 represent external connector calls or activation.
+
+## Connector Policy Telemetry
+
+AION-111 adds connector policy telemetry events for catalog reads, matrix
+reads, dry-run completion, and traceability queries:
+
+- `connector_policy_catalog_read`
+- `connector_authorization_matrix_read`
+- `connector_policy_dry_run_completed`
+- `connector_policy_traceability_queried`
+
+These events carry read-only policy evidence and keep runtime and external
+call fields false.

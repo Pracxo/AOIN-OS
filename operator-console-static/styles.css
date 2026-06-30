@@ -434,6 +434,14 @@ h1 {
   background: rgb(21 27 36 / 58%);
 }
 
+.connector-runtime-panel .module-subpanel h3 {
+  margin-bottom: 8px;
+}
+
+.connector-runtime-panel .review-checklist .checklist-row {
+  align-items: start;
+}
+
 .lifecycle-timeline {
   display: grid;
   gap: 12px;

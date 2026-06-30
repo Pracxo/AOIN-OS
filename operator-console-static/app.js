@@ -70,6 +70,10 @@
     preview: "demo-data/connector-simulation-preview.json",
     readiness: "demo-data/connector-policy-readiness.json"
   };
+  var CONNECTOR_POLICY_DEMOS = {
+    catalog: "demo-data/connector-policy-catalog.json",
+    dry_run: "demo-data/connector-policy-dry-run.json"
+  };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
     role_filter: "demo-data/role-filtered-view-model.json"
@@ -575,9 +579,18 @@
       "connector_simulator_credentials_enabled",
       "connector_simulator_tokens_enabled",
       "connector_simulator_runtime_activation_enabled",
+      "connector_policy_catalog_enabled",
+      "connector_policy_dry_run_enabled",
+      "connector_policy_runtime_allow_enabled",
+      "connector_policy_external_calls_enabled",
+      "connector_policy_credentials_enabled",
+      "connector_policy_tokens_enabled",
+      "connector_policy_activation_enabled",
       "external_calls_made",
       "credentials_used",
-      "tokens_used"
+      "tokens_used",
+      "credential_access_allowed",
+      "token_access_allowed"
     ].indexOf(normalized) !== -1) {
       return false;
     }
@@ -1369,13 +1382,17 @@
       statusPromise,
       fetchJson(CONNECTOR_RUNTIME_DEMOS.preview),
       fetchJson(CONNECTOR_SIMULATOR_DEMOS.preview),
-      fetchJson(CONNECTOR_SIMULATOR_DEMOS.readiness)
+      fetchJson(CONNECTOR_SIMULATOR_DEMOS.readiness),
+      fetchJson(CONNECTOR_POLICY_DEMOS.catalog),
+      fetchJson(CONNECTOR_POLICY_DEMOS.dry_run)
     ])
       .then(function (payloads) {
         renderConnectorRuntimeStatus(redact(payloads[0]));
         renderConnectorBoundaryPreview(redact(payloads[1]));
         renderConnectorSimulationPreview(redact(payloads[2]));
         renderConnectorPolicyReadiness(redact(payloads[3]));
+        renderConnectorPolicyCatalog(redact(payloads[4]));
+        renderConnectorPolicyDryRun(redact(payloads[5]));
       })
       .catch(function () {
         renderConnectorRuntimeStatus({
@@ -1390,6 +1407,8 @@
         renderConnectorBoundaryPreview({ status: "unavailable", checks: [] });
         renderConnectorSimulationPreview({ status: "unavailable", findings: [] });
         renderConnectorPolicyReadiness({ status: "unavailable", blockers: [] });
+        renderConnectorPolicyCatalog({ status: "unavailable", actions: [] });
+        renderConnectorPolicyDryRun({ status: "unavailable", blockers: [] });
       });
   }
 
@@ -1513,6 +1532,90 @@
       ["external_calls_allowed", String(Boolean(readiness.external_calls_allowed))],
       ["credentials_allowed", String(Boolean(readiness.credentials_allowed))],
       ["activation_allowed", String(Boolean(readiness.activation_allowed))]
+    ].forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "checklist-row";
+      var label = document.createElement("span");
+      label.textContent = item[0];
+      var value = document.createElement("strong");
+      value.textContent = safeText(item[1] || "none");
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
+    });
+  }
+
+  function renderConnectorPolicyCatalog(catalog) {
+    var container = document.getElementById("connector-policy-catalog");
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    [
+      ["status", catalog.status || "preview"],
+      ["read_only", String(Boolean(catalog.read_only))],
+      ["dry_run_only", String(Boolean(catalog.dry_run_only))],
+      [
+        "connector_policy_runtime_allow_enabled",
+        String(Boolean(catalog.connector_policy_runtime_allow_enabled))
+      ],
+      [
+        "connector_policy_external_calls_enabled",
+        String(Boolean(catalog.connector_policy_external_calls_enabled))
+      ],
+      [
+        "connector_policy_credentials_enabled",
+        String(Boolean(catalog.connector_policy_credentials_enabled))
+      ],
+      [
+        "connector_policy_tokens_enabled",
+        String(Boolean(catalog.connector_policy_tokens_enabled))
+      ],
+      [
+        "connector_policy_activation_enabled",
+        String(Boolean(catalog.connector_policy_activation_enabled))
+      ]
+    ].forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "checklist-row";
+      var label = document.createElement("span");
+      label.textContent = item[0];
+      var value = document.createElement("strong");
+      value.textContent = safeText(item[1] || "none");
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
+    });
+    (Array.isArray(catalog.actions) ? catalog.actions : []).slice(0, 5).forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "checklist-row";
+      var label = document.createElement("span");
+      label.textContent = safeText(item.action_key || "connector_policy.action");
+      var value = document.createElement("strong");
+      value.textContent = safeText(item.decision || "preview");
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
+    });
+  }
+
+  function renderConnectorPolicyDryRun(result) {
+    var container = document.getElementById("connector-policy-dry-run");
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    [
+      ["status", result.status || "preview"],
+      ["requested_action_key", result.requested_action_key || "connector_policy.dry_run"],
+      ["role", result.role || "operator"],
+      ["dry_run_allowed", String(Boolean(result.dry_run_allowed))],
+      ["runtime_allowed", String(Boolean(result.runtime_allowed))],
+      ["external_call_allowed", String(Boolean(result.external_call_allowed))],
+      ["credential_access_allowed", String(Boolean(result.credential_access_allowed))],
+      ["token_access_allowed", String(Boolean(result.token_access_allowed))],
+      ["activation_allowed", String(Boolean(result.activation_allowed))],
+      ["review_required", String(Boolean(result.review_required))]
     ].forEach(function (item) {
       var row = document.createElement("div");
       row.className = "checklist-row";

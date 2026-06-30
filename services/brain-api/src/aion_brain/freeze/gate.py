@@ -42,6 +42,7 @@ CRITICAL_FAILURE_CHECKS = {
     "local_auth_safe",
     "local_session_safe",
     "connector_simulator_safe",
+    "connector_policy_safe",
     "conformance_readiness_gate_safe",
     "golden_path_passed",
     "bootstrap_local_ready",
@@ -326,6 +327,14 @@ class FreezeGateService:
                 "connector_simulator_safe",
                 "connector_simulator",
                 self._check_connector_simulator_safe,
+                severity="critical",
+            )
+        )
+        checks.append(
+            self._run_check(
+                "connector_policy_safe",
+                "connector_policy",
+                self._check_connector_policy_safe,
                 severity="critical",
             )
         )
@@ -1074,6 +1083,44 @@ class FreezeGateService:
                 ),
                 "policy_readiness_enabled": bool(
                     getattr(self._settings, "connector_policy_readiness_enabled", True)
+                ),
+                "runtime_allowed": False,
+                "external_calls_allowed": False,
+                "auth_material_allowed": False,
+                "stored_auth_artifact_allowed": False,
+                "activation_allowed": False,
+            },
+        }
+
+    def _check_connector_policy_safe(self) -> dict[str, Any]:
+        unsafe_flags = {
+            "connector_policy_runtime_allow_enabled": bool(
+                getattr(self._settings, "connector_policy_runtime_allow_enabled", False)
+            ),
+            "connector_policy_external_calls_enabled": bool(
+                getattr(self._settings, "connector_policy_external_calls_enabled", False)
+            ),
+            "connector_policy_credentials_enabled": bool(
+                getattr(self._settings, "connector_policy_credentials_enabled", False)
+            ),
+            "connector_policy_tokens_enabled": bool(
+                getattr(self._settings, "connector_policy_tokens_enabled", False)
+            ),
+            "connector_policy_activation_enabled": bool(
+                getattr(self._settings, "connector_policy_activation_enabled", False)
+            ),
+        }
+        unsafe = [key for key, value in unsafe_flags.items() if value]
+        return {
+            "status": "failed" if unsafe else "passed",
+            "message": "Connector policy remains read-only and dry-run-only.",
+            "details": {
+                "unsafe_flags": unsafe,
+                "catalog_enabled": bool(
+                    getattr(self._settings, "connector_policy_catalog_enabled", True)
+                ),
+                "dry_run_enabled": bool(
+                    getattr(self._settings, "connector_policy_dry_run_enabled", True)
                 ),
                 "runtime_allowed": False,
                 "external_calls_allowed": False,

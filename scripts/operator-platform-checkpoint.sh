@@ -199,6 +199,7 @@ if base:
 aion108_allowed_files = {
     "services/brain-api/src/aion_brain/api/connector_runtime.py",
     "services/brain-api/src/aion_brain/api/connector_simulator.py",
+    "services/brain-api/src/aion_brain/api/connector_policy.py",
 }
 for relative in sorted(changed):
     if relative in aion108_allowed_files:

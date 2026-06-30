@@ -343,6 +343,7 @@ class ReleasePackager:
             reports["local_session"] = self._local_session_summary()
             reports["connector_runtime"] = self._connector_runtime_summary()
             reports["connector_simulator"] = self._connector_simulator_summary()
+            reports["connector_policy"] = self._connector_policy_summary()
             reports["capability_conformance"] = self._conformance_summary(request.owner_scope)
             reports["golden_path"] = self._golden_path_summary(request.owner_scope)
             reports["bootstrap"] = self._bootstrap_summary(request.owner_scope)
@@ -722,6 +723,45 @@ class ReleasePackager:
             ),
             "policy_readiness_enabled": bool(
                 getattr(self._settings, "connector_policy_readiness_enabled", True)
+            ),
+            "runtime_enabled": False,
+            "external_calls_enabled": False,
+            "credentials_enabled": False,
+            "tokens_enabled": False,
+            "activation_enabled": False,
+            "route_registration_enabled": False,
+            "unsafe_flags": unsafe,
+        }
+
+    def _connector_policy_summary(self) -> dict[str, Any]:
+        unsafe_flags = {
+            "connector_policy_runtime_allow_enabled": bool(
+                getattr(self._settings, "connector_policy_runtime_allow_enabled", False)
+            ),
+            "connector_policy_external_calls_enabled": bool(
+                getattr(self._settings, "connector_policy_external_calls_enabled", False)
+            ),
+            "connector_policy_credentials_enabled": bool(
+                getattr(self._settings, "connector_policy_credentials_enabled", False)
+            ),
+            "connector_policy_tokens_enabled": bool(
+                getattr(self._settings, "connector_policy_tokens_enabled", False)
+            ),
+            "connector_policy_activation_enabled": bool(
+                getattr(self._settings, "connector_policy_activation_enabled", False)
+            ),
+        }
+        unsafe = [key for key, value in unsafe_flags.items() if value]
+        return {
+            "available": bool(getattr(self._settings, "connector_policy_catalog_enabled", True)),
+            "status": "blocked" if unsafe else "ready",
+            "read_only": True,
+            "dry_run_only": True,
+            "catalog_enabled": bool(
+                getattr(self._settings, "connector_policy_catalog_enabled", True)
+            ),
+            "dry_run_enabled": bool(
+                getattr(self._settings, "connector_policy_dry_run_enabled", True)
             ),
             "runtime_enabled": False,
             "external_calls_enabled": False,

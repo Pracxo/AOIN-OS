@@ -60,6 +60,9 @@ class AIONClient:
         self.connector_simulator = _import_resource(
             "connector_simulator"
         ).ConnectorSimulatorResource(self)
+        self.connector_policy = _import_resource(
+            "connector_policy"
+        ).ConnectorPolicyResource(self)
         self.operator_console = _import_resource(
             "operator_console"
         ).OperatorConsoleResource(self)

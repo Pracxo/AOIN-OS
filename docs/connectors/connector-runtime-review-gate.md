@@ -62,3 +62,12 @@ SDK/CLI access, static console evidence, and no-go regression checks. The
 runtime review gate still blocks connector runtime enablement, external calls,
 credential use, token use, route registration, activation, tool execution, and
 write execution.
+
+## AION-111 Outcome
+
+AION-111 adds the connector policy action catalog, authorization matrix,
+policy dry-run gate, denial rules, traceability records, SDK/CLI preview
+access, static console policy preview data, and policy no-go regression. The
+runtime review gate still blocks runtime allow paths, external calls,
+credential use, token use, activation, route registration, tool execution, and
+write execution.

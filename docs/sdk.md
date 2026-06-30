@@ -965,3 +965,20 @@ Useful methods include:
 
 The SDK does not expose login, logout, token, cookie, session, credential,
 provider, production auth, execution, activation, or external identity methods.
+
+## ConnectorPolicyResource
+
+`client.connector_policy` exposes connector policy catalog, matrix, dry-run,
+traceability query, and status preview APIs.
+
+Useful methods include:
+
+- `catalog()`
+- `matrix()`
+- `dry_run(payload)`
+- `query_traceability(payload)`
+- `status(scope)`
+
+The SDK does not expose connector runtime, external-call, credential, token,
+provider, activation, route-registration, tool-execution, or write-execution
+helpers for connector policy.

@@ -17,6 +17,7 @@
 | Auth prototype drift | AION-104 freezes the local auth prototype review and no-go regression pack. | `./scripts/auth-prototype-review.sh` and `./scripts/auth-no-go-regression.sh` | Future auth work could skip the disabled/mock-only baseline. | Any production auth, login/logout, credential, token, cookie, session persistence, provider SDK, external identity runtime, migration, API router, or bypass appears before a later implementation ADR. |
 | Module activation drift | AION-105 freezes the module/plugin activation design review and no-go regression pack. | `./scripts/module-activation-design-review.sh` and `./scripts/module-activation-no-go-regression.sh` | Future module work could treat review evidence as activation permission. | Any code loader, package installer, dynamic import, runtime route registration, capability activation, controlled execution, module write path, policy bypass, or audit bypass appears before a later implementation ADR. |
 | Connector runtime drift | AION-106 freezes the external connector boundary design and no-go regression pack. | `./scripts/connector-boundary-design-check.sh` and `./scripts/connector-no-go-regression.sh` | Future connector work could treat metadata or review evidence as permission to call external systems. | Any connector runtime, network client, connector SDK, provider SDK, credential, token storage, dynamic route, external call enablement, policy bypass, or audit bypass appears before a later implementation ADR. |
+| Connector policy drift | AION-111 freezes the connector policy action catalog, authorization matrix, dry-run gate, denial rules, and traceability pack. | `./scripts/connector-policy-check.sh` and `./scripts/connector-policy-no-go-regression.sh` | Future connector work could treat policy dry-run evidence as runtime approval. | Any runtime allow path, external call, credential access, token access, activation, route registration, tool execution, write execution, allow command, grant command, or policy bypass appears before a later implementation ADR. |
 | Write-path drift | AION-107 freezes write-path architecture and no-go regression before implementation. | `./scripts/operator-action-write-path-design-check.sh` and `./scripts/operator-action-write-path-no-go-regression.sh` | Future action work could treat preview, review, approval, or connector evidence as execution permission. | Any write execution, tool execution, action proposal execution, controlled handoff execution, external call, activation, approval bypass, policy bypass, audit bypass, hard delete, rollback-free execution, or connector-boundary bypass appears before a later implementation ADR. |
 
 ## AION-102 stabilization control
@@ -81,3 +82,13 @@ evidence. Residual risk is treating simulator output as real connector data or
 runtime approval. The mitigation is explicit `trusted=false`, hard-off runtime
 flags, policy readiness wording, static console no-go evidence, and the
 connector simulator no-go regression.
+
+## AION-111 Connector Policy Risk
+
+AION-111 reduces connector authorization ambiguity by adding a read-only policy
+catalog, authorization matrix, policy dry-run gate, denial rules, traceability
+evidence, SDK/CLI preview access, and static console policy preview data.
+Residual risk is treating policy dry-run output as runtime approval. The
+mitigation is explicit runtime/external/credential/token/activation denial,
+no allow or grant commands, no connector SDK dependency, and the connector
+policy no-go regression.

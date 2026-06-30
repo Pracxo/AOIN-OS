@@ -34,10 +34,13 @@ EXAMPLES = [
 AION110_ALLOWED_CHANGED_FILES = {
     ".env.example",
     "services/brain-api/src/aion_brain/api/connector_simulator.py",
+    "services/brain-api/src/aion_brain/api/connector_policy.py",
     "packages/aion-sdk-python/src/aion_sdk/client.py",
     "packages/aion-sdk-python/src/aion_sdk/cli/main.py",
     "packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_simulator.py",
+    "packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_policy.py",
     "packages/aion-sdk-python/src/aion_sdk/resources/connector_simulator.py",
+    "packages/aion-sdk-python/src/aion_sdk/resources/connector_policy.py",
 }
 
 

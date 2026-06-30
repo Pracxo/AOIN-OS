@@ -79,6 +79,13 @@ panel. It displays hard-off status, blockers, and mock boundary preview data
 without connector registration forms, credential inputs, external URL inputs,
 connect controls, call controls, or activation controls.
 
+## AION-111 Connector Policy Status
+
+The operator platform now includes static connector policy catalog and policy
+dry-run preview data. It displays read-only policy evidence and blocked runtime
+flags without allow, enable, grant, connect, call, credential, token,
+activation, route registration, tool execution, or write execution controls.
+
 ## AION-109 Connector Review Gate
 
 The next connector phase is review-only. The operator platform must treat the

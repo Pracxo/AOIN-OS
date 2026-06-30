@@ -132,6 +132,20 @@ AION-110 adds policy actions for synthetic connector simulator evidence:
 These actions authorize local dry-run simulation surfaces only. They do not
 approve connector runtime, external calls, credential use, token use, route
 registration, tool execution, or write execution.
+
+## Connector Policy Action Catalog
+
+AION-111 adds policy actions for connector policy preview:
+
+- `connector_policy.catalog.read`
+- `connector_policy.matrix.read`
+- `connector_policy.dry_run`
+- `connector_policy.traceability.read`
+
+These actions authorize catalog reads, matrix reads, dry-run policy decisions,
+and traceability reads only. They do not approve connector runtime, external
+calls, credential access, token access, route registration, activation, tool
+execution, or write execution.
 - `evidence.ground`
 - `evidence.delete`
 - `contract_registry.contract.read`

@@ -1913,6 +1913,55 @@ class Settings(BaseSettings):
             "connector_simulator_runtime_activation_enabled",
         ),
     )
+    connector_policy_catalog_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_POLICY_CATALOG_ENABLED",
+            "connector_policy_catalog_enabled",
+        ),
+    )
+    connector_policy_dry_run_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_POLICY_DRY_RUN_ENABLED",
+            "connector_policy_dry_run_enabled",
+        ),
+    )
+    connector_policy_runtime_allow_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_POLICY_RUNTIME_ALLOW_ENABLED",
+            "connector_policy_runtime_allow_enabled",
+        ),
+    )
+    connector_policy_external_calls_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_POLICY_EXTERNAL_CALLS_ENABLED",
+            "connector_policy_external_calls_enabled",
+        ),
+    )
+    connector_policy_credentials_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_POLICY_CREDENTIALS_ENABLED",
+            "connector_policy_credentials_enabled",
+        ),
+    )
+    connector_policy_tokens_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_POLICY_TOKENS_ENABLED",
+            "connector_policy_tokens_enabled",
+        ),
+    )
+    connector_policy_activation_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_POLICY_ACTIVATION_ENABLED",
+            "connector_policy_activation_enabled",
+        ),
+    )
     auth_credentials_enabled: bool = Field(
         default=False,
         validation_alias=AliasChoices(

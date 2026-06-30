@@ -382,3 +382,40 @@ def record_connector_simulator_audit(
         },
         metadata={"local_only": True, "read_only": True},
     )
+
+
+def record_connector_policy_audit(
+    audit_sink: object | None,
+    *,
+    dry_run_id: str,
+    trace_id: str | None,
+    actor_id: str | None,
+    owner_scope: list[str],
+    status: str,
+) -> AuditEntry | None:
+    """Record a connector policy dry-run audit without connector material."""
+    return record_audit_event(
+        audit_sink,
+        action_type="connector_policy.dry_run",
+        resource_type="connector_policy_dry_run",
+        resource_id=dry_run_id,
+        event_type="connector_policy_dry_run_completed",
+        outcome="completed" if status == "passed" else "failed",
+        source_component="connector_policy",
+        trace_id=trace_id,
+        actor_id=actor_id,
+        risk_level="medium",
+        payload={
+            "status": status,
+            "owner_scope": owner_scope,
+            "dry_run_only": True,
+            "connector_runtime_enabled": False,
+            "runtime_allowed": False,
+            "external_call_allowed": False,
+            "credential_access_allowed": False,
+            "token_access_allowed": False,
+            "activation_allowed": False,
+            "route_registration_allowed": False,
+        },
+        metadata={"local_only": True, "read_only": True},
+    )
