@@ -72,3 +72,15 @@ gate, required local checks, and CI are green. Do not push directly to `main`.
 After merge, verify `main` contains the stabilization commit, verify
 `aion-v0.1.0` remains reachable from `main`, then delete the branch only after
 the PR and CI are closed cleanly.
+
+## AION-117 Integration Checkpoint
+
+The operator platform stabilization gate is now part of the AION-117
+post-v0.1 platform integration checkpoint. Run
+`./scripts/platform-integration-checkpoint.sh` and
+`./scripts/platform-integration-freeze-check.sh` for cross-phase closeout.
+The integration gate preserves the same no-runtime boundary: no production
+auth, operator write execution, connector runtime implementation, module
+activation, external calls, credential storage, token storage, sandbox
+execution, package files, migrations, API routes, SDK resources, or CLI
+implementations.

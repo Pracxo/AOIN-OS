@@ -76,3 +76,15 @@ until a new explicit ADR passes `./scripts/connector-platform-regression.sh`,
 no-go regressions while preserving runtime disabled, external calls absent,
 credentials/tokens absent, sandbox execution absent, activation disabled, and
 route registration disabled.
+
+## AION-117 Completion Criteria
+
+AION-117 completes only the post-v0.1 platform integration checkpoint. Future
+connector implementation remains frozen until a new explicit ADR also passes
+`./scripts/platform-integration-checkpoint.sh`,
+`./scripts/platform-integration-freeze-check.sh`, and
+`./scripts/platform-integration-no-go-regression.sh` while preserving operator
+write execution unapproved, production auth unapproved, module activation
+unapproved, runtime disabled, external calls absent, credentials/tokens
+absent, sandbox execution absent, activation disabled, and route registration
+disabled.

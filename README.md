@@ -4292,3 +4292,24 @@ Developer command:
 ./scripts/connector-platform-regression.sh
 ./scripts/connector-platform-stabilization-gate.sh
 ```
+
+## AION-117 Post-v0.1 Platform Integration Checkpoint
+
+AION-117 adds the cross-phase platform integration checkpoint, evidence pack,
+operator/connector boundary matrix, future runtime boundary freeze, platform
+risk register, approval state summary, closeout checklist, static console
+integration panels, ADR 0108, and repository-local platform scripts. It is
+checkpoint-only: operator write execution remains unapproved, connector
+implementation remains unapproved, production auth remains unapproved, module
+activation remains unapproved, external calls remain absent, credentials/tokens
+remain absent, sandbox execution remains absent, and no API routes, SDK/CLI
+implementations, package files, lockfiles, migrations, or frontend dependencies
+are added.
+
+Developer command:
+
+```bash
+./scripts/platform-integration-checkpoint.sh
+./scripts/platform-integration-freeze-check.sh
+./scripts/platform-integration-no-go-regression.sh
+```

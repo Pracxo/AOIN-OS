@@ -127,3 +127,13 @@ ADR 0107, and stabilization scripts. The checkpoint remains the baseline, but
 future connector work must also pass `./scripts/connector-platform-regression.sh`
 and `./scripts/connector-platform-stabilization-gate.sh` before any
 implementation ADR is reviewed.
+
+## AION-117 Platform Integration Follow-Up
+
+AION-117 adds the cross-phase platform integration checkpoint above the
+connector checkpoint and stabilization gates. Future connector implementation
+must also pass `./scripts/platform-integration-checkpoint.sh` and
+`./scripts/platform-integration-freeze-check.sh` before an implementation ADR
+can be reviewed. Connector runtime, external calls, credentials/tokens,
+sandbox execution, activation, route registration, package files, migrations,
+tool execution, and write execution remain disabled or absent.

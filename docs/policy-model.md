@@ -1842,3 +1842,12 @@ false. Runtime allow paths, external calls, credential/token access, sandbox
 execution, activation, route registration, tool execution, write execution,
 hard delete, and privileged bypass remain denied until a future ADR and
 stabilization evidence explicitly change scope.
+
+## AION-117 Platform Integration Policy
+
+AION-117 adds no new policy allow path. The platform integration checkpoint
+keeps operator write execution, connector implementation, production auth,
+module activation, external calls, credential/token access, sandbox execution,
+runtime route registration, tool execution, write execution, hard delete, and
+privileged bypass denied until future ADRs and release gates explicitly change
+scope.

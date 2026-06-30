@@ -5,7 +5,11 @@ ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
 
-./scripts/operator-platform-regression.sh
+if [[ "${AION_OPERATOR_PLATFORM_FREEZE_SKIP_REGRESSION:-}" == "1" ]]; then
+  echo "PASS: operator platform regression deferred to outer aggregate gate"
+else
+  ./scripts/operator-platform-regression.sh
+fi
 git diff --check
 
 git_ref_exists() {

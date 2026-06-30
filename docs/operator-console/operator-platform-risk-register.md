@@ -124,3 +124,13 @@ runtime approval.
 Mitigation: AION-116 keeps `implementation_approved=false`, locks the safety
 baseline, and requires future connector implementation to add a new explicit
 ADR that passes the stabilization gate before runtime work begins.
+
+## AION-117 Platform Integration Risk
+
+Risk: treating cross-phase checkpoint evidence as approval for production auth,
+operator writes, connector implementation, module activation, external calls,
+credential storage, token storage, or sandbox execution.
+
+Mitigation: AION-117 keeps all implementation approval booleans false, adds
+`./scripts/platform-integration-no-go-regression.sh`, and requires future
+runtime work to add explicit ADRs and release gates before implementation.

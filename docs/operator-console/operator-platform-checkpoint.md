@@ -62,3 +62,13 @@ The next phase is AION-102: Operator Platform Stabilization and Long-Running
 Regression Matrix. It should keep `./scripts/operator-platform-checkpoint.sh`
 mandatory before any UI architecture, auth runtime, activation, connector, or
 write-path design work.
+
+## AION-117 Platform Integration Follow-Up
+
+AION-117 keeps the operator checkpoint as a required input to the cross-phase
+platform integration checkpoint. Future operator work must pass
+`./scripts/platform-integration-checkpoint.sh` and
+`./scripts/platform-integration-freeze-check.sh` before any implementation ADR
+can propose production auth, write execution, module activation, connector
+runtime work, external calls, credential storage, token storage, or sandbox
+execution.

@@ -80,3 +80,12 @@ required input to any future connector implementation ADR. Future implementation
 work must pass `./scripts/connector-platform-regression.sh` and
 `./scripts/connector-platform-stabilization-gate.sh` before runtime scope can be
 reviewed.
+
+## AION-117 Platform Integration Requirement
+
+AION-117 adds the platform integration checkpoint as another required input to
+any future connector implementation ADR. Future implementation work must pass
+`./scripts/platform-integration-checkpoint.sh`,
+`./scripts/platform-integration-freeze-check.sh`, and
+`./scripts/platform-integration-no-go-regression.sh` before runtime scope can
+be reviewed.

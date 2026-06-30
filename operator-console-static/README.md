@@ -248,3 +248,20 @@ Validate the stabilization evidence:
 ./scripts/connector-platform-regression.sh
 ./scripts/connector-platform-stabilization-gate.sh
 ```
+
+## AION-117 Platform Integration Checkpoint Panels
+
+The static console includes post-v0.1 platform integration checkpoint and
+future runtime boundary freeze panels. They load bundled JSON only, keep
+operator write execution, connector implementation, production auth, module
+activation, external calls, credential storage, token storage, and sandbox
+execution unapproved, and expose no input, package, migration, runtime, or
+write controls.
+
+Validate the integration evidence:
+
+```bash
+./scripts/platform-integration-checkpoint.sh
+./scripts/platform-integration-freeze-check.sh
+./scripts/platform-integration-no-go-regression.sh
+```

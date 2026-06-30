@@ -2054,3 +2054,14 @@ execution remains absent, activation and route registration remain disabled,
 and no API routers, SDK resources, CLI implementations, migrations, package
 files, runtime config defaults, network clients, or domain module logic are
 added.
+
+## AION-117 Post-v0.1 Platform Integration Checkpoint
+
+AION-117 adds a cross-phase platform integration checkpoint across the operator
+platform, local auth review, module activation design review, connector
+platform checkpoint, connector stabilization gate, static console evidence,
+docs audits, and boundary checks. The architecture remains unchanged at
+runtime: operator write execution, connector implementation, production auth,
+module activation, external calls, credential storage, token storage, sandbox
+execution, code loading, runtime registration, and capability activation remain
+unapproved or disabled.

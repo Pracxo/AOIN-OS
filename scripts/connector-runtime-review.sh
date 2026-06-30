@@ -42,7 +42,11 @@ grep -q "0100-connector-runtime-review-gate.md" docs/adr/README.md || {
 ./scripts/connector-no-go-regression.sh
 ./scripts/connector-runtime-no-external-call-regression.sh
 ./scripts/operator-action-write-path-design-check.sh
-AION_OPERATOR_PLATFORM_SKIP_FULL_CHECK=1 ./scripts/operator-platform-freeze-gate.sh
+if [[ "${AION_CONNECTOR_RUNTIME_REVIEW_SKIP_OPERATOR_FREEZE:-}" == "1" ]]; then
+  echo "PASS: operator platform freeze gate deferred to outer aggregate gate"
+else
+  AION_OPERATOR_PLATFORM_SKIP_FULL_CHECK=1 ./scripts/operator-platform-freeze-gate.sh
+fi
 ./scripts/ui-release-gate.sh
 ./scripts/docs-check.sh
 ./scripts/final-docs-audit.sh

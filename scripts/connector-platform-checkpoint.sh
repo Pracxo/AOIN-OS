@@ -67,9 +67,13 @@ grep -q "0106-connector-platform-checkpoint.md" docs/adr/README.md || {
   exit 1
 }
 
-./scripts/connector-release-gate.sh
-./scripts/connector-safety-freeze.sh
-./scripts/connector-release-no-go-regression.sh
+if [[ "${AION_CONNECTOR_PLATFORM_CHECKPOINT_SKIP_RELEASE_GATES:-}" == "1" ]]; then
+  echo "PASS: connector release gates deferred to outer aggregate gate"
+else
+  ./scripts/connector-release-gate.sh
+  ./scripts/connector-safety-freeze.sh
+  ./scripts/connector-release-no-go-regression.sh
+fi
 ./scripts/connector-runtime-review.sh
 ./scripts/connector-simulator-check.sh
 ./scripts/connector-policy-check.sh

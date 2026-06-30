@@ -1012,3 +1012,12 @@ examples only. SDK connector surfaces remain preview-only and do not execute
 connectors, call external systems, store credentials, store tokens, enable
 sandbox execution, activate connectors, register routes, execute tools, or
 execute write paths.
+
+## AION-117 Platform Integration Checkpoint
+
+AION-117 adds no SDK resource, client method, or SDK command implementation.
+Platform integration evidence is validated by repository scripts and bundled
+examples only. SDK surfaces remain preview-only and do not execute operator
+writes, execute connectors, enable production auth, activate modules, call
+external systems, store credentials, store tokens, enable sandbox execution, or
+register routes.

@@ -68,11 +68,15 @@ grep -q "0107-connector-platform-stabilization-gate.md" docs/adr/README.md || {
   exit 1
 }
 
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/connector-platform-checkpoint.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/connector-platform-freeze-check.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/connector-release-gate.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/connector-safety-freeze.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/connector-release-no-go-regression.sh
+if [[ "${AION_CONNECTOR_PLATFORM_REGRESSION_SKIP_NESTED_GATES:-}" == "1" ]]; then
+  echo "PASS: connector platform checkpoint and release gates deferred to outer aggregate gate"
+else
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/connector-platform-checkpoint.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/connector-platform-freeze-check.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/connector-release-gate.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/connector-safety-freeze.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/connector-release-no-go-regression.sh
+fi
 AION_AGGREGATE_GATE_RUNNING=1 ./scripts/connector-runtime-review.sh
 AION_AGGREGATE_GATE_RUNNING=1 ./scripts/connector-runtime-no-external-call-regression.sh
 AION_AGGREGATE_GATE_RUNNING=1 ./scripts/connector-simulator-check.sh

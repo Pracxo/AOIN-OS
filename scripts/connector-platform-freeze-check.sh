@@ -16,7 +16,11 @@ is_nested_gate_context() {
   return 1
 }
 
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/connector-platform-checkpoint.sh
+if [[ "${AION_CONNECTOR_PLATFORM_FREEZE_SKIP_CHECKPOINT:-}" == "1" ]]; then
+  echo "PASS: connector platform checkpoint deferred to outer aggregate gate"
+else
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/connector-platform-checkpoint.sh
+fi
 
 if is_nested_gate_context; then
   echo "PASS: full repository check deferred to outer gate"

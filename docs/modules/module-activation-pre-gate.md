@@ -113,3 +113,14 @@ the required ADR and pre-gate evidence:
 - `activation_ready=true` by default
 - policy bypass
 - audit bypass
+
+## AION-117 Platform Integration Requirement
+
+AION-117 adds `./scripts/platform-integration-checkpoint.sh`,
+`./scripts/platform-integration-freeze-check.sh`, and
+`./scripts/platform-integration-no-go-regression.sh` as required cross-phase
+evidence before any module activation implementation ADR can be reviewed.
+Module activation, code loading, runtime registration, capability activation,
+controlled execution, package installation, external dependency downloads,
+package files, migrations, API routes, SDK resources, and CLI implementations
+remain blocked.

@@ -59,3 +59,12 @@ The freeze gate fails for connector runtime enablement, external calls,
 credential or token storage, sandbox execution, activation, route registration,
 package files, migrations, API execution routes, SDK/CLI implementation drift,
 implementation approval, or privileged bypass.
+
+## AION-117 Cross-Phase Freeze
+
+AION-117 adds a cross-phase freeze on top of this connector phase freeze. The
+platform freeze fails for connector implementation approval, operator write
+execution approval, production auth approval, module activation approval,
+external calls, credential storage, token storage, sandbox execution, package
+files, migrations, API execution routes, SDK/CLI implementation drift, or
+privileged bypass.

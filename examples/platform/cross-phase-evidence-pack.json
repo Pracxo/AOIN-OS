@@ -1,0 +1,79 @@
+{
+  "task_id": "AION-117",
+  "synthetic": true,
+  "status": "passed",
+  "checkpoint_passed": true,
+  "integration_gate_passed": true,
+  "evidence": [
+    {
+      "area": "operator platform checkpoint",
+      "script": "./scripts/operator-platform-checkpoint.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "operator platform stabilization",
+      "script": "./scripts/operator-platform-regression.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "static console UX and safety",
+      "script": "./scripts/static-console-ux-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "local auth prototype review",
+      "script": "./scripts/auth-prototype-review.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "module activation design review",
+      "script": "./scripts/module-activation-design-review.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "connector platform checkpoint",
+      "script": "./scripts/connector-platform-checkpoint.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "connector platform stabilization",
+      "script": "./scripts/connector-platform-stabilization-gate.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "connector release gate",
+      "script": "./scripts/connector-release-gate.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "connector safety freeze",
+      "script": "./scripts/connector-safety-freeze.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "docs and boundary checks",
+      "script": "./scripts/boundary-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    }
+  ],
+  "operator_write_execution_approved": false,
+  "connector_implementation_approved": false,
+  "production_auth_approved": false,
+  "module_activation_approved": false,
+  "external_calls_approved": false,
+  "credential_storage_approved": false,
+  "token_storage_approved": false,
+  "sandbox_execution_approved": false,
+  "package_files_added": false,
+  "migrations_added": false
+}
