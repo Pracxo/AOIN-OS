@@ -1,0 +1,85 @@
+{
+  "status": "passed",
+  "title": "Connector safety freeze",
+  "summary": "Release freeze evidence for the disabled connector safe state.",
+  "read_only": true,
+  "design_only": true,
+  "redaction_applied": true,
+  "connector_runtime_enabled": false,
+  "external_calls_enabled": false,
+  "credentials_present": false,
+  "token_storage_enabled": false,
+  "sandbox_execution_enabled": false,
+  "connector_activation_enabled": false,
+  "route_registration_enabled": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "implementation_approved": false,
+  "provider_sdk_dependency_added": false,
+  "api_runtime_execution_route_added": false,
+  "endpoint_references_present": false,
+  "tag_name": "aion-v0.1.0",
+  "tag_unchanged": true,
+  "sections": [
+    {
+      "section_key": "safe_state_frozen",
+      "title": "Safe state frozen",
+      "status": "passed"
+    },
+    {
+      "section_key": "future_adr_required",
+      "title": "Future ADR required",
+      "status": "passed"
+    },
+    {
+      "section_key": "baseline_untouched",
+      "title": "Baseline untouched",
+      "status": "passed"
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_type": "implementation_approval_missing",
+      "severity": "critical",
+      "status": "open",
+      "reason": "connector_implementation_not_approved"
+    }
+  ],
+  "warnings": [
+    {
+      "code": "safety_freeze_is_not_implementation",
+      "status": "open"
+    }
+  ],
+  "refs": [
+    "docs/connectors/connector-safety-freeze.md",
+    "docs/connectors/connector-implementation-readiness-decision.md"
+  ],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
+  ],
+  "created_at": "2026-06-30T00:00:00Z"
+}

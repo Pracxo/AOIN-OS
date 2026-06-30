@@ -179,3 +179,9 @@ AION-113 adds connector credential architecture and readiness evidence without
 adding credential storage, token storage, secret material, external identity
 runtime, or connector runtime credential access. This boundary remains a
 blocker before any future connector implementation can request material.
+## AION-114 Release Gate Relationship
+
+The external connector boundary is now one input to
+`./scripts/connector-release-gate.sh`. The boundary remains design-only and
+does not approve runtime execution, external calls, credential/token storage,
+sandbox execution, activation, or route registration.

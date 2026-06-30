@@ -40,3 +40,8 @@ AION-111 uses simulator actions as catalog inputs and policy dry-run evidence.
 The simulator remains synthetic only; connector policy dry-run results do not
 execute simulator work, call external services, access credentials, access
 tokens, activate connectors, or grant runtime permission.
+## AION-114 Release Gate Input
+
+The dry-run simulator remains synthetic-only and is validated by the connector
+release gate. Simulator output must not become connector execution, network
+access, provider access, activation, or route registration.

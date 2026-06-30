@@ -1071,3 +1071,7 @@ call fields false.
 AION-113 registers connector credential boundary, lifecycle, authorization,
 readiness, and redaction-preview telemetry events. Payloads contain disabled
 boundary facts only and never include credential or token material.
+AION-114 static connector release evidence is represented by bundled JSON demo
+data for the connector release gate and safety freeze. These static panels are
+read-only and do not add runtime calls, browser storage, inputs, or activation
+controls.

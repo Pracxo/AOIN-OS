@@ -62,3 +62,8 @@ readiness gate, redaction preview, audit/provenance requirements, SDK/CLI
 preview commands, docs, examples, static console data, and no-go regression
 keep credential storage, token storage, secret material, external identity
 runtime, and connector runtime credential access disabled.
+## AION-114 Release Gate Requirement
+
+The connector pre-implementation gate now requires the AION-114 release gate and
+safety freeze to pass before any future implementation ADR can be considered.
+Passing the release gate does not approve implementation.

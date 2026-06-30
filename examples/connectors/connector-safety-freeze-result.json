@@ -1,0 +1,27 @@
+{
+  "synthetic": true,
+  "status": "passed",
+  "freeze_id": "connector-safety-freeze-aion-114",
+  "connector_runtime_enabled": false,
+  "external_calls_enabled": false,
+  "credentials_present": false,
+  "token_storage_enabled": false,
+  "sandbox_execution_enabled": false,
+  "connector_activation_enabled": false,
+  "route_registration_enabled": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "implementation_approved": false,
+  "provider_sdk_dependency_added": false,
+  "api_runtime_execution_route_added": false,
+  "endpoint_references_present": false,
+  "tag_name": "aion-v0.1.0",
+  "tag_unchanged": true,
+  "freeze_decision": "connector implementation remains blocked",
+  "rollback_required_if_failed": true,
+  "refs": [
+    "docs/connectors/connector-safety-freeze.md",
+    "docs/connectors/connector-implementation-readiness-decision.md"
+  ],
+  "created_at": "2026-06-30T00:00:00Z"
+}

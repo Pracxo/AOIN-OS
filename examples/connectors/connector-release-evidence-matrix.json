@@ -1,0 +1,53 @@
+{
+  "synthetic": true,
+  "status": "passed",
+  "matrix_id": "connector-release-evidence-matrix-aion-114",
+  "connector_runtime_enabled": false,
+  "external_calls_enabled": false,
+  "credentials_present": false,
+  "token_storage_enabled": false,
+  "sandbox_execution_enabled": false,
+  "connector_activation_enabled": false,
+  "route_registration_enabled": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "implementation_approved": false,
+  "provider_sdk_dependency_added": false,
+  "api_runtime_execution_route_added": false,
+  "endpoint_references_present": false,
+  "rows": [
+    {
+      "area": "runtime disabled",
+      "gate_script": "./scripts/connector-runtime-review.sh",
+      "required_evidence": "runtime review result",
+      "expected_safe_value": "false",
+      "release_blocker": true,
+      "notes": "runtime remains disabled"
+    },
+    {
+      "area": "external calls",
+      "gate_script": "./scripts/connector-runtime-no-external-call-regression.sh",
+      "required_evidence": "no external call result",
+      "expected_safe_value": "false",
+      "release_blocker": true,
+      "notes": "network clients remain absent"
+    },
+    {
+      "area": "sandbox execution",
+      "gate_script": "./scripts/connector-sandbox-check.sh",
+      "required_evidence": "sandbox readiness result",
+      "expected_safe_value": "false",
+      "release_blocker": true,
+      "notes": "sandbox remains design-only"
+    },
+    {
+      "area": "implementation approval",
+      "gate_script": "./scripts/connector-release-gate.sh",
+      "required_evidence": "implementation decision",
+      "expected_safe_value": "false",
+      "release_blocker": true,
+      "notes": "future ADR required"
+    }
+  ],
+  "created_at": "2026-06-30T00:00:00Z"
+}

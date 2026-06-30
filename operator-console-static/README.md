@@ -219,3 +219,10 @@ The static console includes connector credential boundary, readiness, and
 redaction preview panels. The panels load bundled JSON only, contain no
 credential/token/password/key/OAuth inputs, and expose no
 store/read/rotate/revoke/login/connect/call controls.
+
+## AION-114 Connector Release Gate Panels
+
+The static console includes connector release gate and safety freeze panels.
+They load bundled JSON only, keep implementation approval false, and expose no
+runtime, external-call, credential/token, sandbox execution, activation, route
+registration, input, or write controls.

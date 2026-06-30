@@ -43,6 +43,9 @@
     "./scripts/operator-platform-freeze-gate.sh",
     "./scripts/connector-credential-check.sh",
     "./scripts/connector-credential-no-go-regression.sh",
+    "./scripts/connector-release-gate.sh",
+    "./scripts/connector-safety-freeze.sh",
+    "./scripts/connector-release-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -84,6 +87,10 @@
     boundary: "demo-data/connector-credential-boundary.json",
     readiness: "demo-data/connector-credential-readiness.json"
   };
+  var CONNECTOR_RELEASE_DEMOS = {
+    gate: "demo-data/connector-release-gate.json",
+    freeze: "demo-data/connector-safety-freeze.json"
+  };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
     role_filter: "demo-data/role-filtered-view-model.json"
@@ -123,6 +130,7 @@
     loadAuthRuntimePanel();
     loadConnectorRuntimePanels();
     loadConnectorCredentialPanels();
+    loadConnectorReleasePanels();
     loadView(state.activeView);
   });
 
@@ -1470,6 +1478,64 @@
         renderConnectorCredentialBoundary({ status: "unavailable" });
         renderConnectorCredentialReadiness({ status: "unavailable" });
         renderConnectorSecretRedaction({ redaction_applied: false });
+      });
+  }
+
+  function loadConnectorReleasePanels() {
+    Promise.all([
+      fetchJson(CONNECTOR_RELEASE_DEMOS.gate),
+      fetchJson(CONNECTOR_RELEASE_DEMOS.freeze)
+    ])
+      .then(function (payloads) {
+        renderConnectorReleaseEvidence("connector-release-gate", redact(payloads[0]));
+        renderConnectorReleaseEvidence("connector-safety-freeze", redact(payloads[1]));
+      })
+      .catch(function () {
+        renderConnectorReleaseEvidence("connector-release-gate", { status: "unavailable" });
+        renderConnectorReleaseEvidence("connector-safety-freeze", { status: "unavailable" });
+      });
+  }
+
+  function renderConnectorReleaseEvidence(containerId, payload) {
+    var container = document.getElementById(containerId);
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    [
+      ["status", payload.status || "preview"],
+      ["read_only", String(Boolean(payload.read_only))],
+      ["connector_runtime_enabled", String(Boolean(payload.connector_runtime_enabled))],
+      ["external_calls_enabled", String(Boolean(payload.external_calls_enabled))],
+      ["credentials_present", String(Boolean(payload.credentials_present))],
+      ["token_storage_enabled", String(Boolean(payload.token_storage_enabled))],
+      ["sandbox_execution_enabled", String(Boolean(payload.sandbox_execution_enabled))],
+      ["connector_activation_enabled", String(Boolean(payload.connector_activation_enabled))],
+      ["route_registration_enabled", String(Boolean(payload.route_registration_enabled))],
+      ["implementation_approved", String(Boolean(payload.implementation_approved))]
+    ].forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "checklist-row connector-release-row";
+      var label = document.createElement("span");
+      label.textContent = item[0];
+      var value = document.createElement("strong");
+      value.textContent = safeText(item[1] || "none");
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
+    });
+    (Array.isArray(payload.sections) ? payload.sections : [])
+      .slice(0, 4)
+      .forEach(function (section) {
+        var row = document.createElement("div");
+        row.className = "checklist-row connector-release-row";
+        var label = document.createElement("span");
+        label.textContent = safeText(section.title || section.section_key || "section");
+        var value = document.createElement("strong");
+        value.textContent = safeText(section.status || "pending");
+        row.appendChild(label);
+        row.appendChild(value);
+        container.appendChild(row);
       });
   }
 

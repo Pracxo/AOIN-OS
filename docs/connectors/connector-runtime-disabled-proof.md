@@ -38,3 +38,7 @@ The connector simulator does not weaken this proof. Simulator status and
 results still report connector runtime disabled, external calls disabled,
 credential use disabled, token use disabled, activation disabled, and route
 registration disabled.
+## AION-114 Release Gate Input
+
+The disabled runtime proof is carried into AION-114 as release evidence. The
+expected release value remains `connector_runtime_enabled=false`.

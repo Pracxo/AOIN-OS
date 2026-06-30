@@ -81,3 +81,8 @@ no-go regression. The runtime review gate still blocks real sandbox execution,
 filesystem access, network access, credential use, token use, process
 spawning, dynamic imports, package installation, activation, route
 registration, tool execution, and write execution.
+## AION-114 Release Gate Input
+
+The runtime review gate is a required input to
+`./scripts/connector-release-gate.sh`. A failed runtime review blocks connector
+release readiness and future implementation review.

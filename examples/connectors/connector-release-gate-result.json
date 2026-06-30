@@ -1,0 +1,50 @@
+{
+  "synthetic": true,
+  "status": "passed",
+  "gate_id": "connector-release-gate-aion-114",
+  "connector_runtime_enabled": false,
+  "external_calls_enabled": false,
+  "credentials_present": false,
+  "token_storage_enabled": false,
+  "sandbox_execution_enabled": false,
+  "connector_activation_enabled": false,
+  "route_registration_enabled": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "implementation_approved": false,
+  "provider_sdk_dependency_added": false,
+  "api_runtime_execution_route_added": false,
+  "endpoint_references_present": false,
+  "checks": [
+    {
+      "area": "runtime disabled",
+      "script": "./scripts/connector-runtime-review.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "external call absence",
+      "script": "./scripts/connector-runtime-no-external-call-regression.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "credential and token absence",
+      "script": "./scripts/connector-credential-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    },
+    {
+      "area": "sandbox execution absence",
+      "script": "./scripts/connector-sandbox-check.sh",
+      "expected_status": "passed",
+      "release_blocker": true
+    }
+  ],
+  "refs": [
+    "docs/connectors/connector-release-gate.md",
+    "docs/connectors/connector-release-no-go.md",
+    "docs/adr/0105-connector-release-gate.md"
+  ],
+  "created_at": "2026-06-30T00:00:00Z"
+}

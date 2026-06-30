@@ -51,3 +51,10 @@ authorization, readiness, redaction, audit/provenance, static console preview,
 SDK/CLI preview access, and no-go regression checks while preserving no
 credential storage, no token storage, no secret material, no external identity
 runtime, no connector runtime credential access, and no external calls.
+
+## AION-114 Completion Criteria
+
+AION-114 completes only the connector release gate and safety freeze phase. It
+consolidates prior connector evidence and keeps connector implementation
+unapproved, runtime disabled, external calls absent, credentials/tokens absent,
+sandbox execution absent, activation absent, and route registration absent.

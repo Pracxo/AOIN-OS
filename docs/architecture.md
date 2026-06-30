@@ -2029,3 +2029,8 @@ AION-113 adds connector credential contracts and services for future credential
 store design. The architecture remains read-only and preview-only: credential
 storage, token storage, secret material, external identity runtime, connector
 runtime credential access, and external calls stay disabled.
+AION-114 connector release gate: the connector architecture now has a
+consolidated release evidence gate in `docs/connectors/connector-release-gate.md`
+and `docs/connectors/connector-safety-freeze.md`. This gate is evidence-only
+and keeps connector runtime, external calls, credential/token storage, sandbox
+execution, activation, and route registration disabled.

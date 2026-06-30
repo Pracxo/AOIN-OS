@@ -14,3 +14,9 @@ Future implementation prerequisites:
 - connector runtime credential access must pass a separate release gate
 
 This document is not an implementation plan for storing material. It is a no-go boundary for later design review.
+
+## AION-114 Release Gate Input
+
+The credential architecture is required release evidence for AION-114. The
+release gate keeps credential storage, token storage, raw material persistence,
+external identity runtime, and connector runtime credential access disabled.
