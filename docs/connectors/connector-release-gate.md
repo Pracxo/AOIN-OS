@@ -120,3 +120,9 @@ The gate passes only when all prior gates pass, release examples remain
 synthetic, all safe-state booleans are false, implementation approval is false,
 ADR 0105 is indexed, static demo data is present, and repository boundary checks
 remain green.
+
+## AION-115 Checkpoint Input
+
+The connector release gate is a prerequisite for the connector platform
+checkpoint. AION-115 uses this gate as evidence and keeps implementation
+approval false.

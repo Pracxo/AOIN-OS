@@ -1075,3 +1075,10 @@ AION-114 static connector release evidence is represented by bundled JSON demo
 data for the connector release gate and safety freeze. These static panels are
 read-only and do not add runtime calls, browser storage, inputs, or activation
 controls.
+
+## AION-115 Connector Checkpoint Projection
+
+AION-115 adds bundled static connector platform checkpoint and phase closeout
+demo data. These panels are read-only evidence projections only; they do not
+emit runtime connector events, call external systems, store credentials or
+tokens, enable sandbox execution, or add activation controls.

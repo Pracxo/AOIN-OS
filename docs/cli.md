@@ -853,3 +853,13 @@ release evidence:
 ./scripts/connector-safety-freeze.sh
 ./scripts/connector-release-no-go-regression.sh
 ```
+
+## AION-115 Connector Platform Checkpoint
+
+AION-115 adds no CLI command implementation. Use repository-local scripts for
+checkpoint evidence:
+
+```bash
+./scripts/connector-platform-checkpoint.sh
+./scripts/connector-platform-freeze-check.sh
+```

@@ -2034,3 +2034,12 @@ consolidated release evidence gate in `docs/connectors/connector-release-gate.md
 and `docs/connectors/connector-safety-freeze.md`. This gate is evidence-only
 and keeps connector runtime, external calls, credential/token storage, sandbox
 execution, activation, and route registration disabled.
+
+## AION-115 Connector Platform Checkpoint
+
+AION-115 freezes the connector platform checkpoint after the connector release
+gate. The architecture remains unchanged at runtime: connector implementation
+is not approved, runtime remains disabled, external calls remain absent,
+credentials and tokens remain absent, sandbox execution remains absent, and
+activation and route registration remain disabled. The checkpoint adds docs,
+examples, static console demo data, ADR 0106, and local scripts only.

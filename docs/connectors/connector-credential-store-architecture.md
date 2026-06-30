@@ -20,3 +20,10 @@ This document is not an implementation plan for storing material. It is a no-go 
 The credential architecture is required release evidence for AION-114. The
 release gate keeps credential storage, token storage, raw material persistence,
 external identity runtime, and connector runtime credential access disabled.
+
+## AION-115 Checkpoint Input
+
+The credential architecture is required checkpoint evidence. AION-115 keeps
+credential storage, token storage, secret material, external identity runtime,
+and runtime credential access disabled until a future implementation ADR and
+gate package approve a narrower scope.

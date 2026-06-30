@@ -46,6 +46,8 @@
     "./scripts/connector-release-gate.sh",
     "./scripts/connector-safety-freeze.sh",
     "./scripts/connector-release-no-go-regression.sh",
+    "./scripts/connector-platform-checkpoint.sh",
+    "./scripts/connector-platform-freeze-check.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -91,6 +93,10 @@
     gate: "demo-data/connector-release-gate.json",
     freeze: "demo-data/connector-safety-freeze.json"
   };
+  var CONNECTOR_PLATFORM_DEMOS = {
+    checkpoint: "demo-data/connector-platform-checkpoint.json",
+    closeout: "demo-data/connector-phase-closeout.json"
+  };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
     role_filter: "demo-data/role-filtered-view-model.json"
@@ -131,6 +137,7 @@
     loadConnectorRuntimePanels();
     loadConnectorCredentialPanels();
     loadConnectorReleasePanels();
+    loadConnectorPlatformPanels();
     loadView(state.activeView);
   });
 
@@ -1496,6 +1503,21 @@
       });
   }
 
+  function loadConnectorPlatformPanels() {
+    Promise.all([
+      fetchJson(CONNECTOR_PLATFORM_DEMOS.checkpoint),
+      fetchJson(CONNECTOR_PLATFORM_DEMOS.closeout)
+    ])
+      .then(function (payloads) {
+        renderConnectorReleaseEvidence("connector-platform-checkpoint", redact(payloads[0]));
+        renderConnectorReleaseEvidence("connector-phase-closeout", redact(payloads[1]));
+      })
+      .catch(function () {
+        renderConnectorReleaseEvidence("connector-platform-checkpoint", { status: "unavailable" });
+        renderConnectorReleaseEvidence("connector-phase-closeout", { status: "unavailable" });
+      });
+  }
+
   function renderConnectorReleaseEvidence(containerId, payload) {
     var container = document.getElementById(containerId);
     if (!container) {
@@ -1515,7 +1537,7 @@
       ["implementation_approved", String(Boolean(payload.implementation_approved))]
     ].forEach(function (item) {
       var row = document.createElement("div");
-      row.className = "checklist-row connector-release-row";
+      row.className = "checklist-row connector-release-row connector-platform-row";
       var label = document.createElement("span");
       label.textContent = item[0];
       var value = document.createElement("strong");
@@ -1528,7 +1550,7 @@
       .slice(0, 4)
       .forEach(function (section) {
         var row = document.createElement("div");
-        row.className = "checklist-row connector-release-row";
+        row.className = "checklist-row connector-release-row connector-platform-row";
         var label = document.createElement("span");
         label.textContent = safeText(section.title || section.section_key || "section");
         var value = document.createElement("strong");

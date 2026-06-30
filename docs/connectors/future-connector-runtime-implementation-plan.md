@@ -58,3 +58,11 @@ AION-114 completes only the connector release gate and safety freeze phase. It
 consolidates prior connector evidence and keeps connector implementation
 unapproved, runtime disabled, external calls absent, credentials/tokens absent,
 sandbox execution absent, activation absent, and route registration absent.
+
+## AION-115 Completion Criteria
+
+AION-115 completes only the connector platform checkpoint and phase closeout.
+Future connector implementation remains frozen until a new explicit ADR,
+production auth decision, credential store implementation approval, sandbox
+implementation approval, external-call release gate, rollback/audit plan,
+operator review, and policy enforcement evidence exist.

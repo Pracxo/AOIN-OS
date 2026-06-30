@@ -60,3 +60,9 @@ v0.1 release tag untouched.
 Evidence requires the connector release gate result, safety freeze result,
 end-to-end readiness pack, release evidence matrix, implementation readiness
 decision, ADR 0105, and green no-go regressions.
+
+## AION-115 Checkpoint Input
+
+The safety freeze is a prerequisite for the connector platform checkpoint and
+platform freeze check. AION-115 preserves the frozen safe state and does not
+move, delete, or recreate the v0.1 release tag.

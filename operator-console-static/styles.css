@@ -443,7 +443,9 @@ h1 {
 }
 
 .connector-release-row span,
-.connector-release-row strong {
+.connector-release-row strong,
+.connector-platform-row span,
+.connector-platform-row strong {
   min-width: 0;
 }
 

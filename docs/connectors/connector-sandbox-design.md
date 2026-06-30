@@ -12,3 +12,9 @@ access disabled.
 The connector sandbox design is a release-gate input only. AION-114 keeps real
 sandbox execution, filesystem access, network access, process spawning, dynamic
 imports, package installation, and activation disabled.
+
+## AION-115 Checkpoint Input
+
+The connector sandbox design is checkpoint evidence only. AION-115 keeps real
+sandbox execution disabled and requires future sandbox implementation approval
+before runtime connector work.

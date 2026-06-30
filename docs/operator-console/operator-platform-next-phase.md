@@ -111,3 +111,12 @@ connect button, or call button.
 The next connector phase is gated by `./scripts/connector-release-gate.sh` and
 `./scripts/connector-safety-freeze.sh`. Static operator evidence remains
 read-only and bundled; connector implementation is still unapproved.
+
+## AION-115 Connector Platform Checkpoint
+
+The connector phase is now closed out by
+`./scripts/connector-platform-checkpoint.sh` and
+`./scripts/connector-platform-freeze-check.sh`. Static operator evidence
+remains read-only and bundled; connector implementation remains unapproved, and
+runtime, external calls, credentials/tokens, sandbox execution, activation, and
+route registration remain disabled.

@@ -995,3 +995,11 @@ external-call, activation, or write helpers.
 AION-114 adds no SDK resource and no SDK command implementation. Connector
 release gate evidence is validated by repository scripts and bundled examples
 only.
+
+## AION-115 Connector Platform Checkpoint
+
+AION-115 adds no SDK resource, client method, or SDK command implementation.
+Connector checkpoint evidence is validated by repository scripts and bundled
+examples only. SDK connector surfaces remain preview-only and do not execute
+connectors, call external systems, store credentials, store tokens, enable
+sandbox execution, activate connectors, or register routes.
