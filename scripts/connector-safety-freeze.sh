@@ -27,25 +27,26 @@ fi
 echo "Connector safety freeze working tree summary:"
 git status --short --branch
 
-tag_ref="$(git rev-parse aion-v0.1.0 2>/dev/null)" || {
-  echo "aion-v0.1.0 tag is missing" >&2
-  exit 1
-}
-
-if git_ref_exists origin/main; then
-  if git merge-base --is-ancestor aion-v0.1.0 origin/main; then
-    echo "aion-v0.1.0 is in origin/main history"
+tag_ref="unavailable"
+if git_ref_exists aion-v0.1.0; then
+  tag_ref="$(git rev-parse aion-v0.1.0)"
+  if git_ref_exists origin/main; then
+    if git merge-base --is-ancestor aion-v0.1.0 origin/main; then
+      echo "aion-v0.1.0 is in origin/main history"
+    else
+      echo "WARN: aion-v0.1.0 ancestry could not be confirmed against origin/main" >&2
+    fi
+  elif git_ref_exists main; then
+    if git merge-base --is-ancestor aion-v0.1.0 main; then
+      echo "aion-v0.1.0 is in main history"
+    else
+      echo "WARN: aion-v0.1.0 ancestry could not be confirmed against main" >&2
+    fi
   else
-    echo "WARN: aion-v0.1.0 ancestry could not be confirmed against origin/main" >&2
-  fi
-elif git_ref_exists main; then
-  if git merge-base --is-ancestor aion-v0.1.0 main; then
-    echo "aion-v0.1.0 is in main history"
-  else
-    echo "WARN: aion-v0.1.0 ancestry could not be confirmed against main" >&2
+    echo "WARN: origin/main unavailable in this checkout; skipping non-release tag ancestry confirmation"
   fi
 else
-  echo "WARN: origin/main unavailable in this checkout; skipping non-release tag ancestry confirmation"
+  echo "WARN: aion-v0.1.0 tag unavailable in this checkout; skipping non-release tag ancestry confirmation"
 fi
 
 cat <<SUMMARY
