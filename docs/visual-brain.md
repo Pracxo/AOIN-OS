@@ -1082,3 +1082,11 @@ AION-115 adds bundled static connector platform checkpoint and phase closeout
 demo data. These panels are read-only evidence projections only; they do not
 emit runtime connector events, call external systems, store credentials or
 tokens, enable sandbox execution, or add activation controls.
+
+## AION-116 Connector Stabilization Projection
+
+AION-116 adds bundled static connector platform stabilization and phase freeze
+gate demo data. These panels are read-only evidence projections only; they do
+not emit runtime connector events, call external systems, store credentials or
+tokens, enable sandbox execution, add activation controls, register routes, or
+execute tools.

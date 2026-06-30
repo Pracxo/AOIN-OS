@@ -115,3 +115,12 @@ implementation.
 Mitigation: AION-115 keeps `implementation_approved=false`, adds an unresolved
 risk register, freezes the implementation roadmap, and requires a new explicit
 ADR plus gate evidence before any runtime connector work.
+
+## AION-116 Connector Stabilization Risk
+
+Risk: treating the stabilization gate or long-running regression matrix as
+runtime approval.
+
+Mitigation: AION-116 keeps `implementation_approved=false`, locks the safety
+baseline, and requires future connector implementation to add a new explicit
+ADR that passes the stabilization gate before runtime work begins.

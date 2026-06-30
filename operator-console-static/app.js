@@ -48,6 +48,8 @@
     "./scripts/connector-release-no-go-regression.sh",
     "./scripts/connector-platform-checkpoint.sh",
     "./scripts/connector-platform-freeze-check.sh",
+    "./scripts/connector-platform-regression.sh",
+    "./scripts/connector-platform-stabilization-gate.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -95,7 +97,9 @@
   };
   var CONNECTOR_PLATFORM_DEMOS = {
     checkpoint: "demo-data/connector-platform-checkpoint.json",
-    closeout: "demo-data/connector-phase-closeout.json"
+    closeout: "demo-data/connector-phase-closeout.json",
+    stabilization: "demo-data/connector-platform-stabilization.json",
+    phase_freeze: "demo-data/connector-phase-freeze-gate.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1506,15 +1510,21 @@
   function loadConnectorPlatformPanels() {
     Promise.all([
       fetchJson(CONNECTOR_PLATFORM_DEMOS.checkpoint),
-      fetchJson(CONNECTOR_PLATFORM_DEMOS.closeout)
+      fetchJson(CONNECTOR_PLATFORM_DEMOS.closeout),
+      fetchJson(CONNECTOR_PLATFORM_DEMOS.stabilization),
+      fetchJson(CONNECTOR_PLATFORM_DEMOS.phase_freeze)
     ])
       .then(function (payloads) {
         renderConnectorReleaseEvidence("connector-platform-checkpoint", redact(payloads[0]));
         renderConnectorReleaseEvidence("connector-phase-closeout", redact(payloads[1]));
+        renderConnectorReleaseEvidence("connector-platform-stabilization", redact(payloads[2]));
+        renderConnectorReleaseEvidence("connector-phase-freeze-gate", redact(payloads[3]));
       })
       .catch(function () {
         renderConnectorReleaseEvidence("connector-platform-checkpoint", { status: "unavailable" });
         renderConnectorReleaseEvidence("connector-phase-closeout", { status: "unavailable" });
+        renderConnectorReleaseEvidence("connector-platform-stabilization", { status: "unavailable" });
+        renderConnectorReleaseEvidence("connector-phase-freeze-gate", { status: "unavailable" });
       });
   }
 

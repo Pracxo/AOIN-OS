@@ -544,3 +544,12 @@ Instructions for future Codex runs in this repository:
   OAuth/OIDC/SAML runtime, sandbox execution, package files, lockfiles,
   migrations, activation, route registration, code loading, tool execution, or
   privileged bypass.
+- AION-116 connector platform stabilization is regression/freeze evidence only.
+  It must pass `./scripts/connector-platform-regression.sh` and
+  `./scripts/connector-platform-stabilization-gate.sh`, and it must not add API
+  routers, SDK resources, CLI command implementations, runtime config defaults,
+  connector runtime enablement, external calls, network clients, connector or
+  provider SDK dependencies, credential or token storage, OAuth/OIDC/SAML
+  runtime, sandbox execution, package files, lockfiles, migrations, activation,
+  route registration, code loading, tool execution, write execution, hard
+  delete, implementation approval, or privileged bypass.

@@ -1003,3 +1003,12 @@ Connector checkpoint evidence is validated by repository scripts and bundled
 examples only. SDK connector surfaces remain preview-only and do not execute
 connectors, call external systems, store credentials, store tokens, enable
 sandbox execution, activate connectors, or register routes.
+
+## AION-116 Connector Platform Stabilization
+
+AION-116 adds no SDK resource, client method, or SDK command implementation.
+Connector stabilization evidence is validated by repository scripts and bundled
+examples only. SDK connector surfaces remain preview-only and do not execute
+connectors, call external systems, store credentials, store tokens, enable
+sandbox execution, activate connectors, register routes, execute tools, or
+execute write paths.

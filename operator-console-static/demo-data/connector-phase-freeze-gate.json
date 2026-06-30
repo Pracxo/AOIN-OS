@@ -1,0 +1,102 @@
+{
+  "status": "passed",
+  "title": "Connector phase freeze gate",
+  "summary": "AION-116 phase freeze evidence for connector implementation blockers.",
+  "read_only": true,
+  "design_only": true,
+  "redaction_applied": true,
+  "connector_runtime_enabled": false,
+  "external_calls_enabled": false,
+  "credentials_present": false,
+  "token_storage_enabled": false,
+  "sandbox_execution_enabled": false,
+  "connector_activation_enabled": false,
+  "route_registration_enabled": false,
+  "implementation_approved": false,
+  "release_gate_passed": true,
+  "checkpoint_passed": true,
+  "stabilization_gate_passed": true,
+  "package_files_added": false,
+  "migrations_added": false,
+  "provider_sdk_dependency_added": false,
+  "api_runtime_execution_route_added": false,
+  "endpoint_references_present": false,
+  "secret_material_present": false,
+  "credential_values_present": false,
+  "token_values_present": false,
+  "private_prompt_material_present": false,
+  "private_reasoning_present": false,
+  "sections": [
+    {
+      "section_key": "release_gate_required",
+      "title": "Release gate required",
+      "status": "passed"
+    },
+    {
+      "section_key": "checkpoint_required",
+      "title": "Checkpoint required",
+      "status": "passed"
+    },
+    {
+      "section_key": "stabilization_gate_required",
+      "title": "Stabilization gate required",
+      "status": "passed"
+    },
+    {
+      "section_key": "future_adr_required",
+      "title": "Future ADR required",
+      "status": "blocked"
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_type": "future_adr_required",
+      "severity": "critical",
+      "status": "open",
+      "reason": "connector_implementation_requires_new_adr"
+    },
+    {
+      "blocker_type": "implementation_not_approved",
+      "severity": "critical",
+      "status": "open",
+      "reason": "phase_freeze_keeps_approval_false"
+    }
+  ],
+  "warnings": [
+    {
+      "code": "freeze_gate_is_not_runtime_approval",
+      "status": "open"
+    }
+  ],
+  "refs": [
+    "docs/connectors/connector-phase-freeze-gate.md",
+    "scripts/connector-platform-stabilization-gate.sh"
+  ],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
+  ],
+  "created_at": "2026-06-30T00:00:00Z"
+}

@@ -66,3 +66,10 @@ decision, ADR 0105, and green no-go regressions.
 The safety freeze is a prerequisite for the connector platform checkpoint and
 platform freeze check. AION-115 preserves the frozen safe state and does not
 move, delete, or recreate the v0.1 release tag.
+
+## AION-116 Stabilization Input
+
+The safety freeze is a prerequisite for the connector platform stabilization
+gate. AION-116 preserves the frozen safe state, runs the safety freeze from the
+long-running regression matrix, and does not move, delete, or recreate the
+v0.1 release tag.

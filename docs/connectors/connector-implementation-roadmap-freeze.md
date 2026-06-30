@@ -72,3 +72,11 @@ Implementation remains frozen if any of these are missing:
 AION-115 freezes the roadmap at checkpoint status. Future connector
 implementation starts only after a new ADR and updated gate package prove the
 next boundary.
+
+## AION-116 Stabilization Requirement
+
+AION-116 adds a long-running regression matrix and phase freeze gate as a
+required input to any future connector implementation ADR. Future implementation
+work must pass `./scripts/connector-platform-regression.sh` and
+`./scripts/connector-platform-stabilization-gate.sh` before runtime scope can be
+reviewed.

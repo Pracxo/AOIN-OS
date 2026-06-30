@@ -52,3 +52,12 @@ write execution, and hard-delete flows remain disabled.
 
 The connector safe state is unchanged from AION-114 and is now recorded as the
 AION-115 checkpoint baseline.
+
+## AION-116 Safety Baseline Lock
+
+AION-116 locks the AION-115 checkpoint baseline with
+`docs/connectors/connector-safety-baseline-lock.md` and
+`./scripts/connector-platform-stabilization-gate.sh`. The safe state remains:
+runtime disabled, external calls absent, credentials/tokens absent, sandbox
+execution absent, activation disabled, route registration disabled,
+implementation approval false, package files absent, and migrations absent.

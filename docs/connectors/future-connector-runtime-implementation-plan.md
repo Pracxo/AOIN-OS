@@ -66,3 +66,13 @@ Future connector implementation remains frozen until a new explicit ADR,
 production auth decision, credential store implementation approval, sandbox
 implementation approval, external-call release gate, rollback/audit plan,
 operator review, and policy enforcement evidence exist.
+
+## AION-116 Completion Criteria
+
+AION-116 completes only the connector platform stabilization gate and
+long-running regression matrix. Future connector implementation remains frozen
+until a new explicit ADR passes `./scripts/connector-platform-regression.sh`,
+`./scripts/connector-platform-stabilization-gate.sh`, the release gate, and all
+no-go regressions while preserving runtime disabled, external calls absent,
+credentials/tokens absent, sandbox execution absent, activation disabled, and
+route registration disabled.

@@ -62,6 +62,8 @@ def test_navigation_map_and_accessibility_result_are_valid() -> None:
         "./scripts/static-console-safety-check.sh",
         "./scripts/operator-platform-regression.sh",
         "./scripts/operator-platform-freeze-gate.sh",
+        "./scripts/connector-platform-regression.sh",
+        "./scripts/connector-platform-stabilization-gate.sh",
         "./scripts/docs-check.sh",
     }
     assert set(nav["safe_copy_commands"]) == allowed_commands
@@ -107,6 +109,8 @@ def test_static_console_has_navigation_accessibility_and_safe_command_copy() -> 
         "./scripts/static-console-safety-check.sh",
         "./scripts/operator-platform-regression.sh",
         "./scripts/operator-platform-freeze-gate.sh",
+        "./scripts/connector-platform-regression.sh",
+        "./scripts/connector-platform-stabilization-gate.sh",
         "./scripts/docs-check.sh",
     }
 
