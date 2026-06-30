@@ -72,3 +72,10 @@ platform integration checkpoint. Future operator work must pass
 can propose production auth, write execution, module activation, connector
 runtime work, external calls, credential storage, token storage, or sandbox
 execution.
+
+## AION-118 Release Candidate Follow-Up
+
+AION-118 keeps the operator checkpoint as required release candidate evidence.
+The release candidate gate does not approve operator write execution, production
+auth, module activation, external calls, credential storage, token storage,
+sandbox execution, v0.2 release, or v0.2 tag creation.

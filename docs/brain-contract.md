@@ -1791,3 +1791,13 @@ connector implementation, production auth, module activation, external calls,
 credential storage, token storage, sandbox execution, runtime route
 registration, package files, and migrations remain unapproved, disabled, or
 absent.
+
+## AION-118 Release Candidate Contracts
+
+AION-118 adds no Brain API contract, router, SDK resource, or CLI command
+implementation. It adds release candidate documents, JSON examples, static
+console demo data, ADR 0109, and local scripts only. Operator write execution,
+connector implementation, production auth, module activation, external calls,
+credential storage, token storage, sandbox execution, v0.2 release approval,
+v0.2 tag creation, runtime route registration, package files, and migrations
+remain unapproved, false, disabled, or absent.

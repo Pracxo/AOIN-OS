@@ -1851,3 +1851,13 @@ module activation, external calls, credential/token access, sandbox execution,
 runtime route registration, tool execution, write execution, hard delete, and
 privileged bypass denied until future ADRs and release gates explicitly change
 scope.
+
+## AION-118 Release Candidate Policy
+
+AION-118 adds no new policy allow path. The release candidate gate records that
+v0.2 planning remains blocked from runtime implementation until a future ADR
+and implementation gate explicitly approve a narrower scope. Policy bypass,
+audit bypass, privileged bypass, connector runtime execution, operator write
+execution, production auth, module activation, external calls,
+credential/token access, sandbox execution, and v0.2 release approval remain
+no-go conditions.

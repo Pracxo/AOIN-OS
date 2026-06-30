@@ -57,6 +57,13 @@ Instructions for future Codex runs in this repository:
   process spawning, dynamic imports, package installation, connector
   activation, route registration, tool execution, write execution, production
   auth, package files, lockfiles, migrations, or frontend dependencies.
+- Post-v0.1 release candidate work is evidence-only. It may add release docs,
+  examples, static console demo data, tests, and local gate scripts, but it must
+  not create a release, create a v0.2 tag, move `aion-v0.1.0`, enable runtime
+  implementation, approve connector implementation, approve production auth,
+  approve module activation, approve operator write execution, call external
+  services, store credentials or tokens, enable sandbox execution, add package
+  files, add migrations, add API runtime routes, or add SDK/CLI implementations.
 - Do not add domain-specific connectors in Brain core.
 - Policy actions and permissions must remain generic dotted lowercase names.
 - Keep policy simulations side-effect-free; they must never execute target actions.

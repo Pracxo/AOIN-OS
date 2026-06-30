@@ -46,3 +46,11 @@ or evidence artifact may be interpreted as approval to enable production auth,
 connectors, writes, module activation, external calls, credential storage,
 token storage, sandbox execution, package dependencies, migrations, or runtime
 execution routes.
+
+## AION-118 v0.2 Planning Boundary
+
+AION-118 keeps this freeze active for v0.2 planning. Planning may describe
+future ADRs and gates, but implementation remains unapproved. No v0.2 tag,
+release, runtime enablement, external call path, credential/token storage,
+sandbox execution path, package file, migration, API route, SDK resource, or
+CLI command implementation is created by the release candidate gate.

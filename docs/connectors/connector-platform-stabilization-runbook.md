@@ -162,3 +162,15 @@ not approve connector implementation, production auth, operator writes, module
 activation, external calls, credential storage, token storage, sandbox
 execution, package files, migrations, API routes, SDK resources, or CLI
 implementations.
+
+## AION-118 Release Candidate Gate
+
+AION-118 composes this connector stabilization gate into the post-v0.1 release
+candidate gate. Future connector implementation work must also pass
+`./scripts/post-v01-release-candidate-gate.sh`,
+`./scripts/post-v01-release-candidate-freeze.sh`, and
+`./scripts/post-v01-release-candidate-no-go-regression.sh`. The release
+candidate does not approve connector runtime, external calls, credential/token
+storage, sandbox execution, activation, route registration, package files,
+migrations, API routes, SDK resources, CLI commands, v0.2 release, or v0.2 tag
+creation.
