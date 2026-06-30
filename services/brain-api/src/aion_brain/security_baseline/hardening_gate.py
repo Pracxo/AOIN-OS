@@ -156,6 +156,7 @@ class HardeningGateService:
         checks.extend(self._local_session_checks())
         checks.extend(self._connector_runtime_checks())
         checks.extend(self._connector_simulator_checks())
+        checks.extend(self._connector_policy_checks())
         checks.extend(self._audit_integrity_checks())
         checks.append(self._control_catalog_check())
 
@@ -714,6 +715,64 @@ class HardeningGateService:
                 ),
                 "Connector simulator runtime activation is disabled.",
                 "connector_simulator",
+            ),
+        ]
+
+    def _connector_policy_checks(self) -> builtins.list[dict[str, Any]]:
+        return [
+            _check(
+                "connector_policy_catalog_available",
+                "passed" if self._settings.connector_policy_catalog_enabled else "warning",
+                "Connector policy action catalog is available for read-only preview.",
+                "connector_policy",
+            ),
+            _check(
+                "connector_policy_dry_run_available",
+                "passed" if self._settings.connector_policy_dry_run_enabled else "warning",
+                "Connector policy dry-run gate is available without execution.",
+                "connector_policy",
+            ),
+            _check(
+                "connector_policy_runtime_allow_disabled",
+                (
+                    "failed"
+                    if self._settings.connector_policy_runtime_allow_enabled
+                    else "passed"
+                ),
+                "Connector policy runtime allow paths are disabled.",
+                "connector_policy",
+            ),
+            _check(
+                "connector_policy_external_calls_disabled",
+                (
+                    "failed"
+                    if self._settings.connector_policy_external_calls_enabled
+                    else "passed"
+                ),
+                "Connector policy external calls are disabled.",
+                "connector_policy",
+            ),
+            _check(
+                "connector_policy_credentials_disabled",
+                (
+                    "failed"
+                    if self._settings.connector_policy_credentials_enabled
+                    else "passed"
+                ),
+                "Connector policy credential access is disabled.",
+                "connector_policy",
+            ),
+            _check(
+                "connector_policy_tokens_disabled",
+                "failed" if self._settings.connector_policy_tokens_enabled else "passed",
+                "Connector policy token access is disabled.",
+                "connector_policy",
+            ),
+            _check(
+                "connector_policy_activation_disabled",
+                "failed" if self._settings.connector_policy_activation_enabled else "passed",
+                "Connector policy activation is disabled.",
+                "connector_policy",
             ),
         ]
 

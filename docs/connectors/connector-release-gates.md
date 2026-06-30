@@ -50,3 +50,10 @@ AION-109 adds `scripts/connector-runtime-review.sh` and
 `scripts/connector-runtime-no-external-call-regression.sh` as release-gate
 inputs. Future connector tasks must keep these gates green before any runtime
 implementation is considered.
+
+## AION-111 Policy Catalog Gate
+
+AION-111 adds `scripts/connector-policy-check.sh` and
+`scripts/connector-policy-no-go-regression.sh` as release-gate inputs. Future
+connector runtime tasks must keep these gates green and must not bypass the
+catalog denial rows.

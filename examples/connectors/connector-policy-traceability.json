@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "synthetic": true,
+  "traceability": [
+    {
+      "connector_key": "mock.local.preview",
+      "action_key": "connector_policy.dry_run",
+      "policy_refs": [
+        "docs/connectors/connector-policy-action-catalog.md"
+      ],
+      "matrix_refs": [
+        "docs/connectors/connector-authorization-matrix.md"
+      ],
+      "evidence_refs": [
+        "docs/connectors/connector-policy-traceability.md"
+      ],
+      "dry_run_refs": [
+        "docs/connectors/connector-policy-dry-run-gate.md"
+      ],
+      "denial_refs": [],
+      "audit_refs": [
+        "docs/connectors/connector-runtime-audit.md"
+      ],
+      "runtime_allowed": false,
+      "external_call_allowed": false
+    }
+  ]
+}

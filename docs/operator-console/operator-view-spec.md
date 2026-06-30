@@ -145,3 +145,10 @@ This metadata describes group membership, section shortcuts, safe local command
 copy, and accessibility checks only. It must not add UI runtime state, write
 controls, auth runtime enablement, provider calls, activation, execution,
 external calls, browser storage, or frontend dependencies.
+
+## AION-111 Connector Policy Preview
+
+The static connector panel includes connector policy catalog and dry-run demo
+data. It displays false runtime, external call, credential, token, activation,
+route, tool, and write indicators. It has no connector form and no runtime
+control.

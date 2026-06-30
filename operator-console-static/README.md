@@ -159,6 +159,15 @@ simulator data is synthetic-only and never represents connector execution,
 route registration, trusted ingress, credential use, token use, or external
 egress.
 
+AION-111 adds connector policy catalog and dry-run preview data:
+
+- `demo-data/connector-policy-catalog.json`
+- `demo-data/connector-policy-dry-run.json`
+
+The panel remains static and informational. It has no connector allow control,
+no enable control, no call control, no credential input, no token input, and no
+runtime activation path.
+
 ## UI Release Gate
 
 AION-100 adds the static UI release gate:

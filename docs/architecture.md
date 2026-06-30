@@ -2014,3 +2014,11 @@ gate. The architecture remains unchanged at runtime: connector runtime,
 external calls, credentials, token storage, route registration, activation,
 SDK/CLI expansion, migrations, and domain module logic remain absent for this
 task.
+
+## AION-111 Connector Policy Action Catalog
+
+AION-111 adds read-only connector action catalog, authorization matrix,
+dry-run decision, denial, and traceability services. It is policy evidence
+only: no connector runtime, no external call, no credential or token access,
+no activation, no route registration, no tool execution, and no write
+execution.

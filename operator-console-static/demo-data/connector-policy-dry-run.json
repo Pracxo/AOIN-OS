@@ -1,0 +1,86 @@
+{
+  "status": "blocked_runtime_allowed_dry_run",
+  "title": "Connector policy dry-run preview",
+  "summary": "Dry-run connector policy decision evidence with runtime paths blocked.",
+  "connector_key": "mock.local.preview",
+  "requested_action_key": "connector_policy.dry_run",
+  "role": "operator",
+  "redaction_applied": true,
+  "dry_run_allowed": true,
+  "runtime_allowed": false,
+  "external_call_allowed": false,
+  "credential_access_allowed": false,
+  "token_access_allowed": false,
+  "activation_allowed": false,
+  "review_required": true,
+  "audit_required": true,
+  "provenance_required": true,
+  "blockers": [
+    {
+      "blocker_key": "connector_runtime_disabled",
+      "bypassable": false
+    },
+    {
+      "blocker_key": "external_calls_disabled",
+      "bypassable": false
+    },
+    {
+      "blocker_key": "credentials_tokens_disabled",
+      "bypassable": false
+    },
+    {
+      "blocker_key": "activation_disabled",
+      "bypassable": false
+    }
+  ],
+  "sections": [
+    {
+      "section_key": "dry_run_allowed",
+      "title": "Dry-run allowed",
+      "status": "passed"
+    },
+    {
+      "section_key": "runtime_blocked",
+      "title": "Runtime blocked",
+      "status": "passed"
+    }
+  ],
+  "warnings": [
+    {
+      "code": "dry_run_is_not_execution",
+      "status": "open"
+    }
+  ],
+  "refs": [
+    "docs/connectors/connector-policy-dry-run-gate.md",
+    "docs/connectors/connector-policy-denial-rules.md"
+  ],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
+  ],
+  "read_only": true,
+  "created_at": "2026-06-30T00:00:00Z"
+}

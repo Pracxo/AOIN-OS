@@ -1,0 +1,17 @@
+{
+  "connector_key": "mock.local.preview",
+  "role": "operator",
+  "requested_action_key": "connector_policy.dry_run",
+  "owner_scope": [
+    "workspace:main"
+  ],
+  "declared_scopes": [
+    "workspace:main"
+  ],
+  "evidence_refs": [
+    "docs/connectors/connector-policy-dry-run-gate.md"
+  ],
+  "metadata": {
+    "dry_run_only": true
+  }
+}

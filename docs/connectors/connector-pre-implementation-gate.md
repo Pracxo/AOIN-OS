@@ -44,3 +44,12 @@ No connector implementation phase can start until this gate is complete and the 
 The dry-run simulator row is satisfied only when simulator contracts, replay
 fixtures, policy readiness, no-go regression, SDK/CLI wrappers, docs, examples,
 and static console evidence remain synthetic-only and runtime-disabled.
+
+## AION-111 Gate Evidence
+
+The policy actions row is satisfied only when the connector policy action
+catalog, authorization matrix, dry-run gate, denial rules, traceability
+records, SDK/CLI preview commands, docs, examples, and static console policy
+preview remain read-only and fail closed for runtime, external calls,
+credentials, tokens, activation, route registration, tool execution, and write
+execution.

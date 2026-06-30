@@ -124,6 +124,14 @@ implementation. It does not change the AION-106 terminal state for real
 connectors: runtime remains absent for external calls, credential use, token
 use, route registration, activation, tool execution, and write execution.
 
+## AION-111 Policy Catalog Relationship
+
+AION-111 adds a connector policy action catalog, authorization matrix, policy
+dry-run gate, denial rules, and traceability evidence. These artifacts classify
+future connector actions but do not grant runtime permission, external calls,
+credential access, token access, route registration, activation, tool
+execution, or write execution.
+
 ## No-Go Conditions
 
 - connector runtime added without gate

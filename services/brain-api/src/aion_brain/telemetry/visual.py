@@ -26,6 +26,13 @@ CONNECTOR_SIMULATOR_TELEMETRY_EVENTS = (
     "connector_policy_readiness_checked",
 )
 
+CONNECTOR_POLICY_TELEMETRY_EVENTS = (
+    "connector_policy_catalog_read",
+    "connector_authorization_matrix_read",
+    "connector_policy_dry_run_completed",
+    "connector_policy_traceability_queried",
+)
+
 
 class VisualTelemetryBuilder:
     """Build visual telemetry events for future Brain graph animation."""

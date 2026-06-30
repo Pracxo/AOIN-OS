@@ -44,6 +44,12 @@ Instructions for future Codex runs in this repository:
   evidence only. It must not enable runtime, external calls, credentials,
   tokens, activation, route registration, tool execution, write execution, or
   trusted connector ingress.
+- Connector policy catalog work may add read-only catalog, role matrix, dry-run
+  gate, denial rules, traceability, audit, SDK, CLI, docs, examples, and static
+  console evidence only. It must not enable runtime allow paths, external
+  calls, credentials, tokens, activation, route registration, tool execution,
+  write execution, production auth, package files, lockfiles, migrations, or
+  frontend dependencies.
 - Do not add domain-specific connectors in Brain core.
 - Policy actions and permissions must remain generic dotted lowercase names.
 - Keep policy simulations side-effect-free; they must never execute target actions.
@@ -496,3 +502,13 @@ Instructions for future Codex runs in this repository:
   action proposal execution, write paths, hard delete, frontend dependencies,
   package files, lockfiles, migrations, API routers, SDK resources, CLI command
   implementations, runtime config defaults, or domain module logic.
+- AION-111 connector policy action catalog is preview-only. It must pass
+  `./scripts/connector-policy-check.sh` and
+  `./scripts/connector-policy-no-go-regression.sh`, and it must not add
+  connector runtime enablement, external calls, network clients,
+  connector/provider SDKs, credentials, token storage, OAuth/OIDC/SAML runtime,
+  production auth, external model calls, notifications, module activation,
+  capability activation, code loading, runtime registration, tool execution,
+  write paths, hard delete, frontend dependencies, package files, lockfiles,
+  migrations, runtime policy allow paths, policy bypass, audit bypass, or
+  privileged bypass.

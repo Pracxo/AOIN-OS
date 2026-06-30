@@ -65,3 +65,10 @@ provenance proof, and operator review before any trust elevation is considered.
 Synthetic simulator responses remain untrusted. A replay fixture or dry-run
 result is evidence about shape readiness only; it is not external data, not
 trusted connector output, not policy authority, and not runtime approval.
+
+## AION-111 Policy Catalog Relationship
+
+Connector policy catalog rows, matrix rows, and dry-run results are governance
+evidence only. They do not make connector metadata trusted, do not authorize a
+connector to call an external system, and do not allow credentials, tokens,
+activation, route registration, tool execution, or write execution.

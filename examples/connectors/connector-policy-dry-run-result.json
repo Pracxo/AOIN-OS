@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "synthetic": true,
+  "connector_key": "mock.local.preview",
+  "requested_action_key": "connector_policy.dry_run",
+  "role": "operator",
+  "redaction_applied": true,
+  "decision": "allow_dry_run",
+  "dry_run_allowed": true,
+  "runtime_allowed": false,
+  "external_call_allowed": false,
+  "credential_access_allowed": false,
+  "token_access_allowed": false,
+  "activation_allowed": false,
+  "review_required": true,
+  "audit_required": true,
+  "provenance_required": true
+}

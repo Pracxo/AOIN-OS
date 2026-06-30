@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "synthetic": true,
+  "read_only": true,
+  "dry_run_only": true,
+  "redaction_applied": true,
+  "connector_policy_catalog_enabled": true,
+  "connector_policy_runtime_allow_enabled": false,
+  "connector_policy_external_calls_enabled": false,
+  "connector_policy_credentials_enabled": false,
+  "connector_policy_tokens_enabled": false,
+  "connector_policy_activation_enabled": false,
+  "actions": [
+    {
+      "action_key": "connector_policy.catalog.read",
+      "allowed_in_dry_run": true,
+      "allowed_in_runtime": false,
+      "requires_external_call": false
+    },
+    {
+      "action_key": "connector_policy.matrix.read",
+      "allowed_in_dry_run": true,
+      "allowed_in_runtime": false,
+      "requires_external_call": false
+    },
+    {
+      "action_key": "connector_policy.dry_run",
+      "allowed_in_dry_run": true,
+      "allowed_in_runtime": false,
+      "requires_external_call": false
+    },
+    {
+      "action_key": "connector_policy.traceability.read",
+      "allowed_in_dry_run": true,
+      "allowed_in_runtime": false,
+      "requires_external_call": false
+    }
+  ]
+}

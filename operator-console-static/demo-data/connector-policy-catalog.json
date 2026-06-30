@@ -1,0 +1,103 @@
+{
+  "status": "preview",
+  "title": "Connector policy action catalog preview",
+  "summary": "Read-only connector policy catalog evidence for local review.",
+  "read_only": true,
+  "dry_run_only": true,
+  "redaction_applied": true,
+  "connector_policy_catalog_enabled": true,
+  "connector_policy_runtime_allow_enabled": false,
+  "connector_policy_external_calls_enabled": false,
+  "connector_policy_credentials_enabled": false,
+  "connector_policy_tokens_enabled": false,
+  "connector_policy_activation_enabled": false,
+  "actions": [
+    {
+      "action_key": "connector_policy.catalog.read",
+      "decision": "allow_read",
+      "allowed_in_runtime": false,
+      "requires_external_call": false
+    },
+    {
+      "action_key": "connector_policy.matrix.read",
+      "decision": "allow_read",
+      "allowed_in_runtime": false,
+      "requires_external_call": false
+    },
+    {
+      "action_key": "connector_policy.dry_run",
+      "decision": "allow_dry_run",
+      "allowed_in_runtime": false,
+      "requires_external_call": false
+    },
+    {
+      "action_key": "connector.external.call",
+      "decision": "deny",
+      "allowed_in_runtime": false,
+      "requires_external_call": false
+    }
+  ],
+  "sections": [
+    {
+      "section_key": "catalog_present",
+      "title": "Catalog present",
+      "status": "passed"
+    },
+    {
+      "section_key": "runtime_permissions_absent",
+      "title": "Runtime permissions absent",
+      "status": "passed"
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_type": "connector_runtime_disabled",
+      "severity": "critical",
+      "status": "open",
+      "reason": "runtime_disabled_by_design"
+    },
+    {
+      "blocker_type": "external_calls_disabled",
+      "severity": "critical",
+      "status": "open",
+      "reason": "external_egress_disabled_by_design"
+    }
+  ],
+  "warnings": [
+    {
+      "code": "catalog_is_not_runtime_approval",
+      "status": "open"
+    }
+  ],
+  "refs": [
+    "docs/connectors/connector-policy-action-catalog.md",
+    "docs/connectors/connector-policy-no-go.md"
+  ],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
+  ],
+  "created_at": "2026-06-30T00:00:00Z"
+}

@@ -814,3 +814,16 @@ aionctl auth-runtime audit
 These commands call disabled auth-runtime preview APIs only. They do not expose
 login, logout, token, cookie, session, credential, provider, production auth,
 execution, activation, or external-call commands.
+
+## Connector Policy Commands
+
+```bash
+aionctl connector-policy catalog
+aionctl connector-policy matrix
+aionctl connector-policy dry-run
+aionctl connector-policy status
+```
+
+These commands call connector policy preview APIs only. They do not expose
+runtime allow, runtime enable, credential grant, provider connect, provider
+call, tool execute, or write execute commands.

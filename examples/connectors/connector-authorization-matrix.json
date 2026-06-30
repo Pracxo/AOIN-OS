@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "synthetic": true,
+  "entries": [
+    {
+      "role": "operator",
+      "action_key": "connector_policy.dry_run",
+      "decision": "allow_dry_run",
+      "dry_run_allowed": true,
+      "runtime_allowed": false,
+      "external_call_allowed": false,
+      "credential_access_allowed": false,
+      "token_access_allowed": false,
+      "activation_allowed": false,
+      "review_required": true
+    },
+    {
+      "role": "viewer",
+      "action_key": "connector_policy.catalog.read",
+      "decision": "allow_read",
+      "dry_run_allowed": true,
+      "runtime_allowed": false,
+      "external_call_allowed": false,
+      "credential_access_allowed": false,
+      "token_access_allowed": false,
+      "activation_allowed": false,
+      "review_required": false
+    },
+    {
+      "role": "admin",
+      "action_key": "connector.external.call",
+      "decision": "deny",
+      "dry_run_allowed": false,
+      "runtime_allowed": false,
+      "external_call_allowed": false,
+      "credential_access_allowed": false,
+      "token_access_allowed": false,
+      "activation_allowed": false,
+      "review_required": true
+    }
+  ]
+}

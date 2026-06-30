@@ -24,3 +24,11 @@ AION-110 completes only the disabled dry-run simulator hardening phase. The
 next phases must still preserve no external calls, no credentials, no tokens,
 no runtime activation, no route registration, no tool execution, and no write
 execution until a later release gate explicitly changes scope.
+
+## AION-111 Completion Criteria
+
+AION-111 completes only the connector policy action catalog and policy dry-run
+phase. It defines action metadata, matrix decisions, denial rules, and
+traceability evidence while preserving no connector runtime, no external calls,
+no credentials, no tokens, no runtime activation, no route registration, no
+tool execution, and no write execution.

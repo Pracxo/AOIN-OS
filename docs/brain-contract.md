@@ -1734,3 +1734,19 @@ AION-109 adds no new runtime contracts. It documents the review gate and
 regression evidence that prove the AION-108 connector contracts remain
 disabled, preview-only, synthetic, and non-executing before future connector
 implementation phases.
+
+## AION-111 Connector Policy Contracts
+
+AION-111 adds `ConnectorPolicyAction`,
+`ConnectorAuthorizationMatrixEntry`, `ConnectorPolicyDryRunRequest`,
+`ConnectorPolicyDryRunResult`, and `ConnectorPolicyTraceabilityRecord`.
+Every contract keeps runtime, external calls, credential access, token access,
+activation, and route registration false.
+
+Public routes:
+
+- `GET /brain/connector-policy/catalog`
+- `GET /brain/connector-policy/matrix`
+- `POST /brain/connector-policy/dry-run`
+- `POST /brain/connector-policy/traceability/query`
+- `GET /brain/connector-policy/status`

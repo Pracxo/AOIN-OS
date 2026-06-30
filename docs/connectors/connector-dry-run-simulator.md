@@ -33,3 +33,10 @@ Policy actions:
 The result always marks `synthetic=true`, `trusted=false`,
 `external_calls_made=false`, `credentials_used=false`, `tokens_used=false`, and
 `connector_runtime_enabled=false`.
+
+## AION-111 Policy Catalog Relationship
+
+AION-111 uses simulator actions as catalog inputs and policy dry-run evidence.
+The simulator remains synthetic only; connector policy dry-run results do not
+execute simulator work, call external services, access credentials, access
+tokens, activate connectors, or grant runtime permission.
