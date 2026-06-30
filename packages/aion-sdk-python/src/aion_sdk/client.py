@@ -66,6 +66,9 @@ class AIONClient:
         self.connector_sandbox = _import_resource(
             "connector_sandbox"
         ).ConnectorSandboxResource(self)
+        self.connector_credentials = _import_resource(
+            "connector_credentials"
+        ).ConnectorCredentialsResource(self)
         self.operator_console = _import_resource(
             "operator_console"
         ).OperatorConsoleResource(self)

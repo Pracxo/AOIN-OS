@@ -158,6 +158,7 @@ class HardeningGateService:
         checks.extend(self._connector_simulator_checks())
         checks.extend(self._connector_policy_checks())
         checks.extend(self._connector_sandbox_checks())
+        checks.extend(self._connector_credential_checks())
         checks.extend(self._audit_integrity_checks())
         checks.append(self._control_catalog_check())
 
@@ -852,6 +853,64 @@ class HardeningGateService:
                 "failed" if self._settings.connector_sandbox_activation_enabled else "passed",
                 "Connector sandbox activation is disabled.",
                 "connector_sandbox",
+            ),
+        ]
+
+    def _connector_credential_checks(self) -> builtins.list[dict[str, Any]]:
+        return [
+            _check(
+                "connector_credentials_architecture_available",
+                (
+                    "passed"
+                    if self._settings.connector_credentials_architecture_enabled
+                    else "warning"
+                ),
+                "Connector credential architecture is available for read-only preview.",
+                "connector_credentials",
+            ),
+            _check(
+                "connector_credentials_readiness_available",
+                "passed" if self._settings.connector_credentials_readiness_enabled else "warning",
+                "Connector credential readiness gate is available without storage.",
+                "connector_credentials",
+            ),
+            _check(
+                "connector_credentials_storage_disabled",
+                "failed" if self._settings.connector_credentials_storage_enabled else "passed",
+                "Connector credential storage is disabled.",
+                "connector_credentials",
+            ),
+            _check(
+                "connector_tokens_storage_disabled",
+                "failed" if self._settings.connector_tokens_storage_enabled else "passed",
+                "Connector token storage is disabled.",
+                "connector_credentials",
+            ),
+            _check(
+                "connector_secret_material_disabled",
+                "failed" if self._settings.connector_secret_material_enabled else "passed",
+                "Connector secret material is disabled.",
+                "connector_credentials",
+            ),
+            _check(
+                "connector_external_identity_runtime_disabled",
+                (
+                    "failed"
+                    if self._settings.connector_external_identity_runtime_enabled
+                    else "passed"
+                ),
+                "Connector external identity runtime is disabled.",
+                "connector_credentials",
+            ),
+            _check(
+                "connector_runtime_credential_access_disabled",
+                (
+                    "failed"
+                    if self._settings.connector_runtime_credential_access_enabled
+                    else "passed"
+                ),
+                "Connector runtime credential access is disabled.",
+                "connector_credentials",
             ),
         ]
 

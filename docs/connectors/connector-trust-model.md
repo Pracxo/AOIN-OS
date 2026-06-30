@@ -72,3 +72,9 @@ Connector policy catalog rows, matrix rows, and dry-run results are governance
 evidence only. They do not make connector metadata trusted, do not authorize a
 connector to call an external system, and do not allow credentials, tokens,
 activation, route registration, tool execution, or write execution.
+
+## AION-113 Credential Trust Relationship
+
+Connector credentials remain unavailable material. AION-113 trust is limited to
+metadata-only boundary, readiness, authorization, and redaction-preview
+evidence. No connector receives credential access or token access.

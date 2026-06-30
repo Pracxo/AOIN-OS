@@ -24,3 +24,9 @@ These denial rows are not hidden skips. They are positive evidence that future
 runtime work must pass a new implementation brief, operator review, audit and
 provenance review, and no-go regression gates before any connector runtime can
 exist.
+
+## AION-113 Credential Denials
+
+AION-113 adds explicit denials for future credential store/read/rotate/revoke,
+token store/read, secret materialization, OAuth callback/exchange, OIDC login,
+SAML assertion, and external identity bind actions.

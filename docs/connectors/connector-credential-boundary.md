@@ -68,3 +68,10 @@ AION-109 adds the credential/token absence proof. It confirms connector
 credentials, token storage, provider SDKs, secret storage, migrations, and
 external identity runtime remain absent before future design-only credential
 architecture work.
+
+## AION-113 Architecture Boundary
+
+AION-113 adds the design-only credential store architecture while preserving
+the absence proof. The current state remains credential storage disabled, token
+storage disabled, secret material absent, external identity runtime disabled,
+and connector runtime credential access disabled.

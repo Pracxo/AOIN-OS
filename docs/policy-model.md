@@ -1814,3 +1814,10 @@ AION-109 does not add policy actions. It reviews the existing disabled
 connector preview actions and freezes the requirement that future connector
 implementation must pass policy review, no-external-call regression, operator
 review, audit/provenance proof, and the connector pre-implementation gate.
+
+## AION-113 Connector Credential Policy Actions
+
+AION-113 registers only connector credential read/preview actions: boundary
+read, lifecycle read, authorization read, readiness preview, redaction preview,
+and status read. Future credential, token, OAuth/OIDC/SAML, and external
+identity actions remain denied by the connector credential denial service.

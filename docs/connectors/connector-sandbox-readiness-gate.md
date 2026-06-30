@@ -22,3 +22,9 @@ Every readiness result keeps these values false:
 
 The gate requires audit and provenance evidence. It is not a runtime approval
 and cannot bypass connector policy, release gates, or operator review.
+
+## AION-113 Credential Boundary Link
+
+AION-113 adds connector credential readiness as a separate blocker gate.
+Sandbox readiness remains blocked for any requested credential, token, or
+secret material access.

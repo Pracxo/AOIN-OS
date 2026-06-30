@@ -92,3 +92,10 @@ Residual risk is treating policy dry-run output as runtime approval. The
 mitigation is explicit runtime/external/credential/token/activation denial,
 no allow or grant commands, no connector SDK dependency, and the connector
 policy no-go regression.
+
+## AION-113 Connector Credential Risk
+
+Credential storage, token storage, secret material, external identity runtime,
+and runtime credential access remain critical no-go risks. AION-113 adds
+checks and static evidence so these risks stay visible before any future
+implementation.

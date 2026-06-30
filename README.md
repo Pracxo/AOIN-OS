@@ -4223,3 +4223,18 @@ Developer command:
 ./scripts/connector-policy-check.sh
 ./scripts/connector-policy-no-go-regression.sh
 ```
+
+## AION-113 Connector Credential Store Architecture
+
+AION-113 adds the design-only connector credential store architecture,
+readiness gate, redaction preview, SDK/CLI preview surface, static console
+panels, and no-go regressions. Credential storage, token storage, secret
+material, external identity runtime, connector runtime credential access,
+external calls, package dependencies, and migrations remain absent.
+
+Developer command:
+
+```bash
+./scripts/connector-credential-check.sh
+./scripts/connector-credential-no-go-regression.sh
+```

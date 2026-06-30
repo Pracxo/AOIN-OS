@@ -238,6 +238,12 @@ allowed_aion_112_runtime = {
     "packages/aion-sdk-python/src/aion_sdk/resources/connector_sandbox.py",
     "packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_sandbox.py",
 }
+allowed_aion_113_runtime = {
+    "services/brain-api/src/aion_brain/api/connector_credentials.py",
+    "services/brain-api/src/aion_brain/contracts/connector_credentials.py",
+    "packages/aion-sdk-python/src/aion_sdk/resources/connector_credentials.py",
+    "packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_credentials.py",
+}
 for name in [*changed, *untracked]:
     if name in allowed_runtime_tests:
         continue
@@ -250,6 +256,8 @@ for name in [*changed, *untracked]:
     if name in allowed_aion_111_runtime:
         continue
     if name in allowed_aion_112_runtime:
+        continue
+    if name in allowed_aion_113_runtime:
         continue
     if name.startswith(runtime_prefixes):
         raise SystemExit(f"production auth architecture must not change runtime file: {name}")

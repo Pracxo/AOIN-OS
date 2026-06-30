@@ -42,3 +42,12 @@ evidence, and no-go regression checks while preserving no real sandbox
 execution, no filesystem access, no network access, no credentials, no tokens,
 no process spawning, no dynamic imports, no package installation, no runtime
 activation, no route registration, no tool execution, and no write execution.
+
+## AION-113 Completion Criteria
+
+AION-113 completes only the connector credential architecture phase. It defines
+credential store architecture, secret handling, credential/token lifecycle,
+authorization, readiness, redaction, audit/provenance, static console preview,
+SDK/CLI preview access, and no-go regression checks while preserving no
+credential storage, no token storage, no secret material, no external identity
+runtime, no connector runtime credential access, and no external calls.

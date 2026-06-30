@@ -26,3 +26,9 @@ Audit and provenance remain required for any readiness preview. A future
 milestone may replace this design boundary only by adding a new release gate,
 new threat model evidence, new no-go regression coverage, and explicit
 operator approval requirements.
+
+## AION-113 Credential Boundary Link
+
+AION-113 keeps sandbox credential and token access disabled and adds a separate
+connector credential readiness gate. The sandbox must not bypass credential
+no-go rules or expose material access.

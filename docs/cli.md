@@ -827,3 +827,18 @@ aionctl connector-policy status
 These commands call connector policy preview APIs only. They do not expose
 runtime allow, runtime enable, credential grant, provider connect, provider
 call, tool execute, or write execute commands.
+
+## Connector Credential Commands
+
+```bash
+aionctl connector-credentials boundary
+aionctl connector-credentials lifecycle
+aionctl connector-credentials authorization
+aionctl connector-credentials readiness
+aionctl connector-credentials redaction-preview
+aionctl connector-credentials status
+```
+
+These commands call connector credential preview APIs only. They do not expose
+credential store/read/rotate/revoke, token, OAuth, OIDC, SAML, login, bind,
+provider call, tool execute, or write execute commands.

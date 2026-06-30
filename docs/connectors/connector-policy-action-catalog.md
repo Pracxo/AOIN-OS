@@ -32,3 +32,11 @@ Explicit denied future actions:
 The catalog is not a runtime grant. It cannot enable external calls,
 credential access, token access, activation, route registration, tool
 execution, or write execution.
+
+## AION-113 Credential Preview Actions
+
+AION-113 adds connector credential read/preview actions to the platform policy
+catalog. These actions expose boundary, lifecycle, authorization, readiness,
+redaction-preview, and status evidence only. They do not grant credential
+storage, token storage, secret material access, external identity runtime, or
+connector runtime credential access.

@@ -44,6 +44,7 @@ CRITICAL_FAILURE_CHECKS = {
     "connector_simulator_safe",
     "connector_policy_safe",
     "connector_sandbox_safe",
+    "connector_credential_safe",
     "conformance_readiness_gate_safe",
     "golden_path_passed",
     "bootstrap_local_ready",
@@ -344,6 +345,14 @@ class FreezeGateService:
                 "connector_sandbox_safe",
                 "connector_sandbox",
                 self._check_connector_sandbox_safe,
+                severity="critical",
+            )
+        )
+        checks.append(
+            self._run_check(
+                "connector_credential_safe",
+                "connector_credentials",
+                self._check_connector_credential_safe,
                 severity="critical",
             )
         )
@@ -1190,6 +1199,53 @@ class FreezeGateService:
                 "dynamic_import_allowed": False,
                 "package_install_allowed": False,
                 "activation_allowed": False,
+            },
+        }
+
+    def _check_connector_credential_safe(self) -> dict[str, Any]:
+        unsafe_flags = {
+            "store_path_enabled": bool(
+                getattr(self._settings, "connector_credentials_storage_enabled", False)
+            ),
+            "persistence_path_enabled": bool(
+                getattr(self._settings, "connector_tokens_storage_enabled", False)
+            ),
+            "raw_material_path_enabled": bool(
+                getattr(self._settings, "connector_secret_material_enabled", False)
+            ),
+            "connector_external_identity_runtime_enabled": bool(
+                getattr(self._settings, "connector_external_identity_runtime_enabled", False)
+            ),
+            "runtime_material_access_enabled": bool(
+                getattr(self._settings, "connector_runtime_credential_access_enabled", False)
+            ),
+        }
+        unsafe = [key for key, value in unsafe_flags.items() if value]
+        return {
+            "status": "failed" if unsafe else "passed",
+            "message": (
+                "Connector credential architecture remains design-only with no storage path."
+            ),
+            "details": {
+                "unsafe_flags": unsafe,
+                "architecture_enabled": bool(
+                    getattr(self._settings, "connector_credentials_architecture_enabled", True)
+                ),
+                "readiness_enabled": bool(
+                    getattr(self._settings, "connector_credentials_readiness_enabled", True)
+                ),
+                "redaction_preview_enabled": bool(
+                    getattr(
+                        self._settings,
+                        "connector_credentials_redaction_preview_enabled",
+                        True,
+                    )
+                ),
+                "storage_allowed": False,
+                "persistence_allowed": False,
+                "raw_material_present": False,
+                "external_identity_runtime_allowed": False,
+                "runtime_material_access_allowed": False,
             },
         }
 

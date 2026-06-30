@@ -41,6 +41,8 @@
     "./scripts/static-console-safety-check.sh",
     "./scripts/operator-platform-regression.sh",
     "./scripts/operator-platform-freeze-gate.sh",
+    "./scripts/connector-credential-check.sh",
+    "./scripts/connector-credential-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -77,6 +79,10 @@
   var CONNECTOR_SANDBOX_DEMOS = {
     status: "demo-data/connector-sandbox-status.json",
     readiness: "demo-data/connector-sandbox-readiness.json"
+  };
+  var CONNECTOR_CREDENTIAL_DEMOS = {
+    boundary: "demo-data/connector-credential-boundary.json",
+    readiness: "demo-data/connector-credential-readiness.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -116,6 +122,7 @@
     loadActionAuthorizationPanel();
     loadAuthRuntimePanel();
     loadConnectorRuntimePanels();
+    loadConnectorCredentialPanels();
     loadView(state.activeView);
   });
 
@@ -1447,6 +1454,25 @@
     });
   }
 
+  function loadConnectorCredentialPanels() {
+    Promise.all([
+      fetchJson(CONNECTOR_CREDENTIAL_DEMOS.boundary),
+      fetchJson(CONNECTOR_CREDENTIAL_DEMOS.readiness)
+    ])
+      .then(function (payloads) {
+        var boundary = redact(payloads[0]);
+        var readiness = redact(payloads[1]);
+        renderConnectorCredentialBoundary(boundary);
+        renderConnectorCredentialReadiness(readiness);
+        renderConnectorSecretRedaction(readiness.redaction_preview || {});
+      })
+      .catch(function () {
+        renderConnectorCredentialBoundary({ status: "unavailable" });
+        renderConnectorCredentialReadiness({ status: "unavailable" });
+        renderConnectorSecretRedaction({ redaction_applied: false });
+      });
+  }
+
   function renderConnectorRuntimeStatus(status) {
     var grid = document.getElementById("connector-runtime-status-grid");
     var blockers = document.getElementById("connector-runtime-blockers");
@@ -1730,6 +1756,103 @@
         row.appendChild(value);
         container.appendChild(row);
       });
+  }
+
+  function renderConnectorCredentialBoundary(boundary) {
+    var container = document.getElementById("connector-credential-boundary");
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    [
+      ["status", boundary.status || "preview"],
+      ["credential_storage_enabled", String(Boolean(boundary.credential_storage_enabled))],
+      ["token_storage_enabled", String(Boolean(boundary.token_storage_enabled))],
+      ["secret_material_present", String(Boolean(boundary.secret_material_present))],
+      ["plaintext_secret_allowed", String(Boolean(boundary.plaintext_secret_allowed))],
+      ["browser_secret_storage_allowed", String(Boolean(boundary.browser_secret_storage_allowed))],
+      ["log_secret_allowed", String(Boolean(boundary.log_secret_allowed))],
+      ["external_identity_runtime_enabled", String(Boolean(boundary.external_identity_runtime_enabled))],
+      [
+        "connector_runtime_credential_access_enabled",
+        String(Boolean(boundary.connector_runtime_credential_access_enabled))
+      ],
+      ["rotation_required", String(Boolean(boundary.rotation_required))],
+      ["revocation_required", String(Boolean(boundary.revocation_required))]
+    ].forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "checklist-row";
+      var label = document.createElement("span");
+      label.textContent = item[0];
+      var value = document.createElement("strong");
+      value.textContent = safeText(item[1] || "none");
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
+    });
+  }
+
+  function renderConnectorCredentialReadiness(readiness) {
+    var container = document.getElementById("connector-credential-readiness");
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    [
+      ["status", readiness.status || "blocked"],
+      ["connector_key", readiness.connector_key || "mock.local.preview"],
+      ["credential_ready", String(Boolean(readiness.credential_ready))],
+      ["credential_storage_allowed", String(Boolean(readiness.credential_storage_allowed))],
+      ["token_storage_allowed", String(Boolean(readiness.token_storage_allowed))],
+      ["credential_access_allowed", String(Boolean(readiness.credential_access_allowed))],
+      ["token_access_allowed", String(Boolean(readiness.token_access_allowed))],
+      ["secret_material_present", String(Boolean(readiness.secret_material_present))],
+      [
+        "external_identity_runtime_allowed",
+        String(Boolean(readiness.external_identity_runtime_allowed))
+      ],
+      [
+        "connector_runtime_credential_access_enabled",
+        String(Boolean(readiness.connector_runtime_credential_access_enabled))
+      ],
+      ["audit_required", String(Boolean(readiness.audit_required))],
+      ["provenance_required", String(Boolean(readiness.provenance_required))]
+    ].forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "checklist-row";
+      var label = document.createElement("span");
+      label.textContent = item[0];
+      var value = document.createElement("strong");
+      value.textContent = safeText(item[1] || "none");
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
+    });
+  }
+
+  function renderConnectorSecretRedaction(redaction) {
+    var container = document.getElementById("connector-secret-redaction");
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    [
+      ["redaction_applied", String(Boolean(redaction.redaction_applied))],
+      ["secret_detected", String(Boolean(redaction.secret_detected))],
+      ["token_detected", String(Boolean(redaction.token_detected))],
+      ["credential_field_detected", String(Boolean(redaction.credential_field_detected))],
+      ["storage_allowed", String(Boolean(redaction.storage_allowed))]
+    ].forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "checklist-row";
+      var label = document.createElement("span");
+      label.textContent = item[0];
+      var value = document.createElement("strong");
+      value.textContent = safeText(item[1] || "none");
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
+    });
   }
 
   function loadLocalSessionPanels() {

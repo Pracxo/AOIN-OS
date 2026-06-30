@@ -459,3 +459,40 @@ def record_connector_sandbox_audit(
         },
         metadata={"local_only": True, "read_only": True},
     )
+
+
+def record_connector_credential_readiness_audit(
+    audit_sink: object | None,
+    *,
+    readiness_id: str,
+    trace_id: str | None,
+    actor_id: str | None,
+    owner_scope: list[str],
+    status: str,
+) -> AuditEntry | None:
+    """Record a connector credential readiness audit without credential material."""
+    return record_audit_event(
+        audit_sink,
+        action_type="connector_credentials.readiness.preview",
+        resource_type="connector_credential_readiness",
+        resource_id=readiness_id,
+        event_type="connector_credential_readiness_checked",
+        outcome="failed" if status == "blocked" else "completed",
+        source_component="connector_credentials",
+        trace_id=trace_id,
+        actor_id=actor_id,
+        risk_level="medium",
+        payload={
+            "status": status,
+            "owner_scope": owner_scope,
+            "design_only": True,
+            "credential_storage_allowed": False,
+            "token_storage_allowed": False,
+            "credential_access_allowed": False,
+            "token_access_allowed": False,
+            "secret_material_present": False,
+            "external_identity_runtime_allowed": False,
+            "connector_runtime_credential_access_allowed": False,
+        },
+        metadata={"local_only": True, "read_only": True},
+    )

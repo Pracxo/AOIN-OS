@@ -172,3 +172,10 @@ AION-109 freezes this boundary as review evidence. It adds no runtime
 implementation and requires the connector runtime review gate and
 no-external-call regression to pass before future connector implementation
 planning can proceed.
+
+## AION-113 Credential Boundary Relationship
+
+AION-113 adds connector credential architecture and readiness evidence without
+adding credential storage, token storage, secret material, external identity
+runtime, or connector runtime credential access. This boundary remains a
+blocker before any future connector implementation can request material.

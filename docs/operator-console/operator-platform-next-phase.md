@@ -98,3 +98,11 @@ The operator platform now includes static connector simulator evidence inside
 the connector panel. It displays synthetic dry-run and policy readiness state
 only, with no connector input, no credential input, no token input, no route
 registration, no external egress, no activation, and no execution control.
+
+## AION-113 Connector Credential Panels
+
+The operator platform now includes static connector credential boundary,
+readiness, and redaction preview panels. They display disabled state only and
+provide no credential input, token input, password input, key input, OAuth
+input, store button, read button, rotate button, revoke button, login button,
+connect button, or call button.
