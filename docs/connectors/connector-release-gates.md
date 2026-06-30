@@ -57,3 +57,13 @@ AION-111 adds `scripts/connector-policy-check.sh` and
 `scripts/connector-policy-no-go-regression.sh` as release-gate inputs. Future
 connector runtime tasks must keep these gates green and must not bypass the
 catalog denial rows.
+
+## AION-112 Sandbox Design Gate
+
+AION-112 adds `scripts/connector-sandbox-check.sh` and
+`scripts/connector-sandbox-no-go-regression.sh` as release-gate inputs. Future
+connector runtime tasks must keep the sandbox boundary green and must not add
+real sandbox execution, filesystem access, network access, credentials,
+tokens, process spawning, dynamic imports, package installation, activation,
+or runtime route registration before a later release gate explicitly changes
+scope.

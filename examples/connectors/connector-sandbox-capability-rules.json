@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "synthetic": true,
+  "read_only": true,
+  "design_only": true,
+  "rules": [
+    {
+      "rule_key": "connector.sandbox.readiness.preview",
+      "allowed": true,
+      "dry_run_allowed": true,
+      "runtime_allowed": false,
+      "requires_policy": true,
+      "requires_audit": true
+    },
+    {
+      "rule_key": "connector.sandbox.filesystem.read",
+      "allowed": false,
+      "dry_run_allowed": false,
+      "runtime_allowed": false,
+      "requires_policy": true,
+      "requires_audit": true
+    },
+    {
+      "rule_key": "connector.sandbox.network.egress",
+      "allowed": false,
+      "dry_run_allowed": false,
+      "runtime_allowed": false,
+      "requires_policy": true,
+      "requires_audit": true
+    },
+    {
+      "rule_key": "connector.sandbox.runtime.execute",
+      "allowed": false,
+      "dry_run_allowed": false,
+      "runtime_allowed": false,
+      "requires_policy": true,
+      "requires_audit": true
+    }
+  ]
+}

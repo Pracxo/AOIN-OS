@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "synthetic": true,
+  "checks": [
+    {
+      "check_key": "real_sandbox_runtime",
+      "present": false,
+      "expected_status": "passed"
+    },
+    {
+      "check_key": "filesystem_access",
+      "present": false,
+      "expected_status": "passed"
+    },
+    {
+      "check_key": "network_access",
+      "present": false,
+      "expected_status": "passed"
+    },
+    {
+      "check_key": "credential_token_access",
+      "present": false,
+      "expected_status": "passed"
+    },
+    {
+      "check_key": "process_or_import_or_package_install",
+      "present": false,
+      "expected_status": "passed"
+    },
+    {
+      "check_key": "activation_or_route_registration",
+      "present": false,
+      "expected_status": "passed"
+    }
+  ]
+}

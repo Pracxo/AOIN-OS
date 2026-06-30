@@ -1,0 +1,92 @@
+{
+  "status": "preview",
+  "title": "Connector sandbox readiness preview",
+  "connector_key": "mock.local.preview",
+  "read_only": true,
+  "design_only": true,
+  "readiness_preview_only": true,
+  "redaction_applied": true,
+  "sandbox_ready": true,
+  "runtime_execution_allowed": false,
+  "filesystem_access_allowed": false,
+  "network_access_allowed": false,
+  "credential_access_allowed": false,
+  "token_access_allowed": false,
+  "process_spawn_allowed": false,
+  "dynamic_import_allowed": false,
+  "package_install_allowed": false,
+  "connector_activation_allowed": false,
+  "audit_required": true,
+  "provenance_required": true,
+  "requested_capabilities": [
+    "connector.sandbox.readiness.preview"
+  ],
+  "denied_capabilities": [
+    "connector.sandbox.filesystem.read",
+    "connector.sandbox.network.egress",
+    "connector.sandbox.runtime.execute"
+  ],
+  "sections": [
+    {
+      "section_key": "readiness_preview_present",
+      "title": "Readiness preview present",
+      "status": "passed"
+    },
+    {
+      "section_key": "sandbox_execution_absent",
+      "title": "Sandbox execution absent",
+      "status": "passed"
+    }
+  ],
+  "warnings": [
+    {
+      "code": "connector_sandbox_readiness_is_not_execution",
+      "status": "open"
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_type": "real_sandbox_runtime_absent",
+      "severity": "critical",
+      "status": "open",
+      "reason": "sandbox_runtime_absent_by_design"
+    },
+    {
+      "blocker_type": "runtime_execution_disabled",
+      "severity": "critical",
+      "status": "open",
+      "reason": "runtime_execution_disabled_by_design"
+    }
+  ],
+  "refs": [
+    "docs/connectors/connector-sandbox-readiness-gate.md",
+    "docs/connectors/connector-sandbox-no-go.md"
+  ],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
+  ],
+  "created_at": "2026-06-30T00:00:00Z"
+}

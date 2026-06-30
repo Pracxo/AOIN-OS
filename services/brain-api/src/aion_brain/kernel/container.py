@@ -103,6 +103,15 @@ from aion_brain.connector_runtime import (
     ConnectorRuntimeQueryService,
     MockConnectorManifestService,
 )
+from aion_brain.connector_sandbox import (
+    ConnectorIsolationBoundaryService,
+    ConnectorSandboxAuditService,
+    ConnectorSandboxCapabilityRuleService,
+    ConnectorSandboxDenialService,
+    ConnectorSandboxDesignService,
+    ConnectorSandboxQueryService,
+    ConnectorSandboxReadinessService,
+)
 from aion_brain.connector_simulator import (
     ConnectorDryRunSimulator,
     ConnectorPolicyReadinessService,
@@ -3706,6 +3715,32 @@ class KernelContainer:
             denial_service=self.connector_policy_denial_service,
             settings=self.settings,
         )
+        self.connector_sandbox_design_service = ConnectorSandboxDesignService()
+        self.connector_isolation_boundary_service = ConnectorIsolationBoundaryService(
+            self.connector_sandbox_design_service,
+            telemetry_service=self.telemetry_service,
+        )
+        self.connector_sandbox_capability_rule_service = ConnectorSandboxCapabilityRuleService(
+            telemetry_service=self.telemetry_service,
+        )
+        self.connector_sandbox_denial_service = ConnectorSandboxDenialService()
+        self.connector_sandbox_audit_service = ConnectorSandboxAuditService(
+            audit_sink=self.audit_integrity_ledger
+        )
+        self.connector_sandbox_readiness_service = ConnectorSandboxReadinessService(
+            boundary_service=self.connector_isolation_boundary_service,
+            capability_service=self.connector_sandbox_capability_rule_service,
+            denial_service=self.connector_sandbox_denial_service,
+            audit_service=self.connector_sandbox_audit_service,
+            settings=self.settings,
+            telemetry_service=self.telemetry_service,
+        )
+        self.connector_sandbox_query_service = ConnectorSandboxQueryService(
+            boundary_service=self.connector_isolation_boundary_service,
+            capability_service=self.connector_sandbox_capability_rule_service,
+            denial_service=self.connector_sandbox_denial_service,
+            settings=self.settings,
+        )
         self.local_session_preview_service = LocalSessionPreviewService(
             telemetry_service=self.telemetry_service,
         )
@@ -5402,6 +5437,48 @@ class KernelContainer:
             (
                 "connector_policy_query_service",
                 self.connector_policy_query_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_sandbox_design_service",
+                self.connector_sandbox_design_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_isolation_boundary_service",
+                self.connector_isolation_boundary_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_sandbox_capability_rule_service",
+                self.connector_sandbox_capability_rule_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_sandbox_denial_service",
+                self.connector_sandbox_denial_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_sandbox_audit_service",
+                self.connector_sandbox_audit_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_sandbox_readiness_service",
+                self.connector_sandbox_readiness_service,
+                "service",
+                "deterministic",
+            ),
+            (
+                "connector_sandbox_query_service",
+                self.connector_sandbox_query_service,
                 "service",
                 "local",
             ),

@@ -1,0 +1,28 @@
+{
+  "connector_key": "mock.local.preview",
+  "owner_scope": [
+    "workspace:main"
+  ],
+  "requested_capabilities": [
+    "connector.sandbox.readiness.preview"
+  ],
+  "declared_policy_actions": [
+    "connector_sandbox.readiness.preview"
+  ],
+  "evidence_refs": [
+    "docs/connectors/connector-sandbox-readiness-gate.md",
+    "docs/connectors/connector-sandbox-boundary.md"
+  ],
+  "metadata": {
+    "design_only": true,
+    "runtime_execution_allowed": false,
+    "filesystem_access_allowed": false,
+    "network_access_allowed": false,
+    "credential_access_allowed": false,
+    "token_access_allowed": false,
+    "process_spawn_allowed": false,
+    "dynamic_import_allowed": false,
+    "package_install_allowed": false,
+    "connector_activation_allowed": false
+  }
+}

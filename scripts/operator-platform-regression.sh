@@ -217,6 +217,7 @@ allowed_connector_api_files = {
     "services/brain-api/src/aion_brain/api/connector_runtime.py",
     "services/brain-api/src/aion_brain/api/connector_simulator.py",
     "services/brain-api/src/aion_brain/api/connector_policy.py",
+    "services/brain-api/src/aion_brain/api/connector_sandbox.py",
 }
 
 for relative in sorted(changed):

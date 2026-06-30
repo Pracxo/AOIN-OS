@@ -157,6 +157,7 @@ class HardeningGateService:
         checks.extend(self._connector_runtime_checks())
         checks.extend(self._connector_simulator_checks())
         checks.extend(self._connector_policy_checks())
+        checks.extend(self._connector_sandbox_checks())
         checks.extend(self._audit_integrity_checks())
         checks.append(self._control_catalog_check())
 
@@ -773,6 +774,84 @@ class HardeningGateService:
                 "failed" if self._settings.connector_policy_activation_enabled else "passed",
                 "Connector policy activation is disabled.",
                 "connector_policy",
+            ),
+        ]
+
+    def _connector_sandbox_checks(self) -> builtins.list[dict[str, Any]]:
+        return [
+            _check(
+                "connector_sandbox_design_available",
+                "passed" if self._settings.connector_sandbox_design_enabled else "warning",
+                "Connector sandbox design boundary is available for read-only preview.",
+                "connector_sandbox",
+            ),
+            _check(
+                "connector_sandbox_readiness_available",
+                "passed" if self._settings.connector_sandbox_readiness_enabled else "warning",
+                "Connector sandbox readiness gate is available without execution.",
+                "connector_sandbox",
+            ),
+            _check(
+                "connector_sandbox_runtime_execution_disabled",
+                (
+                    "failed"
+                    if self._settings.connector_sandbox_runtime_execution_enabled
+                    else "passed"
+                ),
+                "Connector sandbox runtime execution is disabled.",
+                "connector_sandbox",
+            ),
+            _check(
+                "connector_sandbox_filesystem_disabled",
+                "failed" if self._settings.connector_sandbox_filesystem_enabled else "passed",
+                "Connector sandbox filesystem access is disabled.",
+                "connector_sandbox",
+            ),
+            _check(
+                "connector_sandbox_network_disabled",
+                "failed" if self._settings.connector_sandbox_network_enabled else "passed",
+                "Connector sandbox network access is disabled.",
+                "connector_sandbox",
+            ),
+            _check(
+                "connector_sandbox_credentials_disabled",
+                "failed" if self._settings.connector_sandbox_credentials_enabled else "passed",
+                "Connector sandbox credential access is disabled.",
+                "connector_sandbox",
+            ),
+            _check(
+                "connector_sandbox_tokens_disabled",
+                "failed" if self._settings.connector_sandbox_tokens_enabled else "passed",
+                "Connector sandbox token access is disabled.",
+                "connector_sandbox",
+            ),
+            _check(
+                "connector_sandbox_process_spawn_disabled",
+                "failed" if self._settings.connector_sandbox_process_spawn_enabled else "passed",
+                "Connector sandbox process spawn is disabled.",
+                "connector_sandbox",
+            ),
+            _check(
+                "connector_sandbox_dynamic_import_disabled",
+                "failed" if self._settings.connector_sandbox_dynamic_import_enabled else "passed",
+                "Connector sandbox dynamic import is disabled.",
+                "connector_sandbox",
+            ),
+            _check(
+                "connector_sandbox_package_install_disabled",
+                (
+                    "failed"
+                    if self._settings.connector_sandbox_package_install_enabled
+                    else "passed"
+                ),
+                "Connector sandbox package install is disabled.",
+                "connector_sandbox",
+            ),
+            _check(
+                "connector_sandbox_activation_disabled",
+                "failed" if self._settings.connector_sandbox_activation_enabled else "passed",
+                "Connector sandbox activation is disabled.",
+                "connector_sandbox",
             ),
         ]
 

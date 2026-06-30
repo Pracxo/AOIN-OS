@@ -24,6 +24,8 @@ operator could inspect state.
   candidates, purge previews
 - `audit_provenance`: audit entries and provenance links
 - `settings_safety`: runtime config, security baseline, feature flags
+- `connector_sandbox`: connector sandbox boundary, capability rules, readiness
+  preview, and no-go evidence
 
 ## Safety
 

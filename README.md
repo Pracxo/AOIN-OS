@@ -83,6 +83,15 @@ adds no external calls, credentials, tokens, activation, routes, tool
 execution, write execution, frontend dependencies, package files, or
 migrations.
 
+## Connector Sandbox Design
+
+AION-112 adds a connector sandbox design boundary, isolation model, capability
+rules, readiness preview, audit/provenance evidence, SDK/CLI preview access,
+and static console demo data. It does not add real sandbox execution,
+filesystem access, network access, credentials, tokens, process spawning,
+dynamic imports, package installation, connector activation, routes, external
+calls, frontend dependencies, package files, or migrations.
+
 ## Core Brain Loop
 
 ```text

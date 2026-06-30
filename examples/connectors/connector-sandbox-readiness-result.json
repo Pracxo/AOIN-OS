@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "synthetic": true,
+  "connector_sandbox_readiness_id": "connector-sandbox-readiness-example",
+  "connector_key": "mock.local.preview",
+  "sandbox_ready": true,
+  "runtime_execution_allowed": false,
+  "filesystem_access_allowed": false,
+  "network_access_allowed": false,
+  "credential_access_allowed": false,
+  "token_access_allowed": false,
+  "process_spawn_allowed": false,
+  "dynamic_import_allowed": false,
+  "package_install_allowed": false,
+  "connector_activation_allowed": false,
+  "audit_required": true,
+  "provenance_required": true,
+  "blockers": [
+    {
+      "blocker_key": "real_sandbox_runtime_absent",
+      "bypassable": false
+    },
+    {
+      "blocker_key": "runtime_execution_disabled",
+      "bypassable": false
+    }
+  ],
+  "warnings": [
+    {
+      "code": "connector_sandbox_readiness_is_not_execution",
+      "status": "open"
+    }
+  ]
+}

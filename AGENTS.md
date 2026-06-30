@@ -50,6 +50,13 @@ Instructions for future Codex runs in this repository:
   calls, credentials, tokens, activation, route registration, tool execution,
   write execution, production auth, package files, lockfiles, migrations, or
   frontend dependencies.
+- Connector sandbox design work may add design boundary, isolation model,
+  capability rules, readiness preview, denials, audit, provenance, SDK, CLI,
+  docs, examples, and static console evidence only. It must not enable real
+  sandbox execution, filesystem access, network access, credentials, tokens,
+  process spawning, dynamic imports, package installation, connector
+  activation, route registration, tool execution, write execution, production
+  auth, package files, lockfiles, migrations, or frontend dependencies.
 - Do not add domain-specific connectors in Brain core.
 - Policy actions and permissions must remain generic dotted lowercase names.
 - Keep policy simulations side-effect-free; they must never execute target actions.

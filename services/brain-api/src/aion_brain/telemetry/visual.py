@@ -33,6 +33,12 @@ CONNECTOR_POLICY_TELEMETRY_EVENTS = (
     "connector_policy_traceability_queried",
 )
 
+CONNECTOR_SANDBOX_TELEMETRY_EVENTS = (
+    "connector_sandbox_boundary_read",
+    "connector_sandbox_capability_rules_read",
+    "connector_sandbox_readiness_checked",
+)
+
 
 class VisualTelemetryBuilder:
     """Build visual telemetry events for future Brain graph animation."""

@@ -58,6 +58,23 @@ CONNECTOR_POLICY_PROVENANCE_BOUNDARY = {
     "route_registration_allowed": False,
 }
 
+CONNECTOR_SANDBOX_PROVENANCE_BOUNDARY = {
+    "source_component": "connector_sandbox",
+    "local_only": True,
+    "read_only": True,
+    "design_only": True,
+    "connector_runtime_enabled": False,
+    "runtime_execution_allowed": False,
+    "filesystem_access_allowed": False,
+    "network_access_allowed": False,
+    "credential_access_allowed": False,
+    "token_access_allowed": False,
+    "process_spawn_allowed": False,
+    "dynamic_import_allowed": False,
+    "package_install_allowed": False,
+    "connector_activation_allowed": False,
+}
+
 
 class ProvenanceService:
     """Create, query, and soft-delete provenance links."""
