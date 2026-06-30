@@ -519,3 +519,11 @@ Instructions for future Codex runs in this repository:
   write paths, hard delete, frontend dependencies, package files, lockfiles,
   migrations, runtime policy allow paths, policy bypass, audit bypass, or
   privileged bypass.
+- AION-113 connector credential store architecture is design/readiness only.
+  It must pass `./scripts/connector-credential-check.sh` and
+  `./scripts/connector-credential-no-go-regression.sh`, and it must not add
+  credential storage, token storage, secret material persistence,
+  OAuth/OIDC/SAML runtime, external identity binding, connector runtime
+  credential access, external calls, frontend dependencies, package files,
+  lockfiles, migrations, runtime registration, tool execution, write paths, or
+  privileged bypass.

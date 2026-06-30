@@ -212,3 +212,10 @@ Validate the UX refinement:
 ```bash
 ./scripts/static-console-ux-check.sh
 ```
+
+## AION-113 Connector Credential Panels
+
+The static console includes connector credential boundary, readiness, and
+redaction preview panels. The panels load bundled JSON only, contain no
+credential/token/password/key/OAuth inputs, and expose no
+store/read/rotate/revoke/login/connect/call controls.

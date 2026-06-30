@@ -53,3 +53,12 @@ records, SDK/CLI preview commands, docs, examples, and static console policy
 preview remain read-only and fail closed for runtime, external calls,
 credentials, tokens, activation, route registration, tool execution, and write
 execution.
+
+## AION-113 Gate Evidence
+
+The credential row is satisfied only when the connector credential store
+architecture, secret handling design, lifecycle model, authorization matrix,
+readiness gate, redaction preview, audit/provenance requirements, SDK/CLI
+preview commands, docs, examples, static console data, and no-go regression
+keep credential storage, token storage, secret material, external identity
+runtime, and connector runtime credential access disabled.

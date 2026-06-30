@@ -345,6 +345,7 @@ class ReleasePackager:
             reports["connector_simulator"] = self._connector_simulator_summary()
             reports["connector_policy"] = self._connector_policy_summary()
             reports["connector_sandbox"] = self._connector_sandbox_summary()
+            reports["connector_material_boundary"] = self._connector_credential_summary()
             reports["capability_conformance"] = self._conformance_summary(request.owner_scope)
             reports["golden_path"] = self._golden_path_summary(request.owner_scope)
             reports["bootstrap"] = self._bootstrap_summary(request.owner_scope)
@@ -821,6 +822,46 @@ class ReleasePackager:
             "dynamic_import_enabled": False,
             "package_install_enabled": False,
             "activation_enabled": False,
+            "unsafe_flags": unsafe,
+        }
+
+    def _connector_credential_summary(self) -> dict[str, Any]:
+        unsafe_flags = {
+            "store_path_enabled": bool(
+                getattr(self._settings, "connector_credentials_storage_enabled", False)
+            ),
+            "persistence_path_enabled": bool(
+                getattr(self._settings, "connector_tokens_storage_enabled", False)
+            ),
+            "raw_material_path_enabled": bool(
+                getattr(self._settings, "connector_secret_material_enabled", False)
+            ),
+            "connector_external_identity_runtime_enabled": bool(
+                getattr(self._settings, "connector_external_identity_runtime_enabled", False)
+            ),
+            "runtime_material_access_enabled": bool(
+                getattr(self._settings, "connector_runtime_credential_access_enabled", False)
+            ),
+        }
+        unsafe = [key for key, value in unsafe_flags.items() if value]
+        return {
+            "available": bool(
+                getattr(self._settings, "connector_credentials_architecture_enabled", True)
+            ),
+            "status": "blocked" if unsafe else "ready",
+            "read_only": True,
+            "design_only": True,
+            "readiness_enabled": bool(
+                getattr(self._settings, "connector_credentials_readiness_enabled", True)
+            ),
+            "redaction_preview_enabled": bool(
+                getattr(self._settings, "connector_credentials_redaction_preview_enabled", True)
+            ),
+            "storage_enabled": False,
+            "persistence_enabled": False,
+            "raw_material_present": False,
+            "external_identity_runtime_enabled": False,
+            "runtime_material_access_enabled": False,
             "unsafe_flags": unsafe,
         }
 

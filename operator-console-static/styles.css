@@ -494,10 +494,12 @@ h1 {
   justify-content: space-between;
   gap: 12px;
   padding: 10px 12px;
+  overflow-wrap: anywhere;
 }
 
 .checklist-row strong {
   color: var(--accent);
+  text-align: right;
 }
 
 .descriptor-list {

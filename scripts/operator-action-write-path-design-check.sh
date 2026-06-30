@@ -88,28 +88,28 @@ if git ls-files --others --exclude-standard infra/postgres/migrations services/b
 fi
 
 if git diff --name-only --diff-filter=ACMRT HEAD -- services/brain-api/src/aion_brain/api \
-  | rg -v '^services/brain-api/src/aion_brain/api/connector_runtime\.py$|^services/brain-api/src/aion_brain/api/connector_simulator\.py$|^services/brain-api/src/aion_brain/api/connector_policy\.py$|^services/brain-api/src/aion_brain/api/connector_sandbox\.py$' \
+  | rg -v '^services/brain-api/src/aion_brain/api/connector_runtime\.py$|^services/brain-api/src/aion_brain/api/connector_simulator\.py$|^services/brain-api/src/aion_brain/api/connector_policy\.py$|^services/brain-api/src/aion_brain/api/connector_sandbox\.py$|^services/brain-api/src/aion_brain/api/connector_credentials\.py$' \
   | rg -n '.'; then
   echo "AION-107 must not change API router files" >&2
   exit 1
 fi
 
 if git ls-files --others --exclude-standard services/brain-api/src/aion_brain/api \
-  | rg -v '^services/brain-api/src/aion_brain/api/connector_runtime\.py$|^services/brain-api/src/aion_brain/api/connector_simulator\.py$|^services/brain-api/src/aion_brain/api/connector_policy\.py$|^services/brain-api/src/aion_brain/api/connector_sandbox\.py$' \
+  | rg -v '^services/brain-api/src/aion_brain/api/connector_runtime\.py$|^services/brain-api/src/aion_brain/api/connector_simulator\.py$|^services/brain-api/src/aion_brain/api/connector_policy\.py$|^services/brain-api/src/aion_brain/api/connector_sandbox\.py$|^services/brain-api/src/aion_brain/api/connector_credentials\.py$' \
   | rg -n '.'; then
   echo "AION-107 must not add API router files" >&2
   exit 1
 fi
 
 if git diff --name-only --diff-filter=ACMRT HEAD -- packages/aion-sdk-python/src/aion_sdk/resources packages/aion-sdk-python/src/aion_sdk/cli.py packages/aion-sdk-python/src/aion_sdk/cli \
-  | rg -v '^packages/aion-sdk-python/src/aion_sdk/resources/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_policy\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_sandbox\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_policy\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_sandbox\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/main\.py$' \
+  | rg -v '^packages/aion-sdk-python/src/aion_sdk/resources/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_policy\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_sandbox\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_credentials\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_policy\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_sandbox\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_credentials\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/main\.py$' \
   | rg -n '.'; then
   echo "AION-107 must not add SDK resources or CLI command implementations" >&2
   exit 1
 fi
 
 if git ls-files --others --exclude-standard packages/aion-sdk-python/src/aion_sdk/resources packages/aion-sdk-python/src/aion_sdk/cli.py packages/aion-sdk-python/src/aion_sdk/cli \
-  | rg -v '^packages/aion-sdk-python/src/aion_sdk/resources/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_policy\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_sandbox\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_policy\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_sandbox\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/main\.py$' \
+  | rg -v '^packages/aion-sdk-python/src/aion_sdk/resources/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_policy\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_sandbox\.py$|^packages/aion-sdk-python/src/aion_sdk/resources/connector_credentials\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_runtime\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_simulator\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_policy\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_sandbox\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_credentials\.py$|^packages/aion-sdk-python/src/aion_sdk/cli/main\.py$' \
   | rg -n '.'; then
   echo "AION-107 must not add untracked SDK resources or CLI command implementations" >&2
   exit 1

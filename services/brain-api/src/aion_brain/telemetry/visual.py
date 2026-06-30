@@ -39,6 +39,14 @@ CONNECTOR_SANDBOX_TELEMETRY_EVENTS = (
     "connector_sandbox_readiness_checked",
 )
 
+CONNECTOR_CREDENTIAL_TELEMETRY_EVENTS = (
+    "connector_credential_boundary_read",
+    "connector_credential_lifecycle_read",
+    "connector_credential_authorization_read",
+    "connector_credential_readiness_checked",
+    "connector_secret_redaction_previewed",
+)
+
 
 class VisualTelemetryBuilder:
     """Build visual telemetry events for future Brain graph animation."""

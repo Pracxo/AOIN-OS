@@ -1750,3 +1750,12 @@ Public routes:
 - `POST /brain/connector-policy/dry-run`
 - `POST /brain/connector-policy/traceability/query`
 - `GET /brain/connector-policy/status`
+
+## AION-113 Connector Credential Contracts
+
+AION-113 adds `ConnectorCredentialBoundary`,
+`ConnectorCredentialLifecycleState`, `ConnectorCredentialAuthorizationEntry`,
+`ConnectorCredentialReadinessRequest`, `ConnectorCredentialReadinessResult`,
+and `ConnectorSecretRedactionResult`. The public routes expose boundary,
+lifecycle, authorization, readiness, redaction preview, query, and status
+evidence only.

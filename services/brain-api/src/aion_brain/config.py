@@ -2039,6 +2039,62 @@ class Settings(BaseSettings):
             "connector_sandbox_activation_enabled",
         ),
     )
+    connector_credentials_architecture_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_CREDENTIALS_ARCHITECTURE_ENABLED",
+            "connector_credentials_architecture_enabled",
+        ),
+    )
+    connector_credentials_readiness_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_CREDENTIALS_READINESS_ENABLED",
+            "connector_credentials_readiness_enabled",
+        ),
+    )
+    connector_credentials_redaction_preview_enabled: bool = Field(
+        default=True,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_CREDENTIALS_REDACTION_PREVIEW_ENABLED",
+            "connector_credentials_redaction_preview_enabled",
+        ),
+    )
+    connector_credentials_storage_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_CREDENTIALS_STORAGE_ENABLED",
+            "connector_credentials_storage_enabled",
+        ),
+    )
+    connector_tokens_storage_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_TOKENS_STORAGE_ENABLED",
+            "connector_tokens_storage_enabled",
+        ),
+    )
+    connector_secret_material_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_SECRET_MATERIAL_ENABLED",
+            "connector_secret_material_enabled",
+        ),
+    )
+    connector_external_identity_runtime_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_EXTERNAL_IDENTITY_RUNTIME_ENABLED",
+            "connector_external_identity_runtime_enabled",
+        ),
+    )
+    connector_runtime_credential_access_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_CONNECTOR_RUNTIME_CREDENTIAL_ACCESS_ENABLED",
+            "connector_runtime_credential_access_enabled",
+        ),
+    )
     auth_credentials_enabled: bool = Field(
         default=False,
         validation_alias=AliasChoices(

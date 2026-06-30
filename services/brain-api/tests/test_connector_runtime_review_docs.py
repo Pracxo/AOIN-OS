@@ -36,14 +36,17 @@ AION110_ALLOWED_CHANGED_FILES = {
     "services/brain-api/src/aion_brain/api/connector_simulator.py",
     "services/brain-api/src/aion_brain/api/connector_policy.py",
     "services/brain-api/src/aion_brain/api/connector_sandbox.py",
+    "services/brain-api/src/aion_brain/api/connector_credentials.py",
     "packages/aion-sdk-python/src/aion_sdk/client.py",
     "packages/aion-sdk-python/src/aion_sdk/cli/main.py",
     "packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_simulator.py",
     "packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_policy.py",
     "packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_sandbox.py",
+    "packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_credentials.py",
     "packages/aion-sdk-python/src/aion_sdk/resources/connector_simulator.py",
     "packages/aion-sdk-python/src/aion_sdk/resources/connector_policy.py",
     "packages/aion-sdk-python/src/aion_sdk/resources/connector_sandbox.py",
+    "packages/aion-sdk-python/src/aion_sdk/resources/connector_credentials.py",
 }
 
 

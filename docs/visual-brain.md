@@ -1065,3 +1065,9 @@ reads, dry-run completion, and traceability queries:
 
 These events carry read-only policy evidence and keep runtime and external
 call fields false.
+
+## Connector Credential Telemetry
+
+AION-113 registers connector credential boundary, lifecycle, authorization,
+readiness, and redaction-preview telemetry events. Payloads contain disabled
+boundary facts only and never include credential or token material.

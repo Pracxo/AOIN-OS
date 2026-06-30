@@ -75,6 +75,22 @@ CONNECTOR_SANDBOX_PROVENANCE_BOUNDARY = {
     "connector_activation_allowed": False,
 }
 
+CONNECTOR_CREDENTIAL_PROVENANCE_BOUNDARY = {
+    "source_component": "connector_credentials",
+    "local_only": True,
+    "read_only": True,
+    "design_only": True,
+    "credential_storage_allowed": False,
+    "token_storage_allowed": False,
+    "credential_access_allowed": False,
+    "token_access_allowed": False,
+    "secret_material_present": False,
+    "external_identity_runtime_allowed": False,
+    "connector_runtime_credential_access_allowed": False,
+    "rotation_required": True,
+    "revocation_required": True,
+}
+
 
 class ProvenanceService:
     """Create, query, and soft-delete provenance links."""

@@ -213,6 +213,7 @@ allowed_runtime_paths = {
     "services/brain-api/src/aion_brain/api/connector_simulator.py",
     "services/brain-api/src/aion_brain/api/connector_policy.py",
     "services/brain-api/src/aion_brain/api/connector_sandbox.py",
+    "services/brain-api/src/aion_brain/api/connector_credentials.py",
     "packages/aion-sdk-python/src/aion_sdk/resources/local_auth.py",
     "packages/aion-sdk-python/src/aion_sdk/resources/local_session.py",
     "packages/aion-sdk-python/src/aion_sdk/resources/action_authorization.py",
@@ -221,6 +222,7 @@ allowed_runtime_paths = {
     "packages/aion-sdk-python/src/aion_sdk/resources/connector_simulator.py",
     "packages/aion-sdk-python/src/aion_sdk/resources/connector_policy.py",
     "packages/aion-sdk-python/src/aion_sdk/resources/connector_sandbox.py",
+    "packages/aion-sdk-python/src/aion_sdk/resources/connector_credentials.py",
 }
 for name in [*changed, *untracked]:
     basename = Path(name).name

@@ -353,6 +353,36 @@ class KernelDiagnostics:
             "connector_sandbox_query_service",
             "medium",
         ),
+        (
+            "connector_credential_architecture_service_present",
+            "connector_credential_architecture_service",
+            "medium",
+        ),
+        (
+            "connector_credential_lifecycle_service_present",
+            "connector_credential_lifecycle_service",
+            "medium",
+        ),
+        (
+            "connector_credential_authorization_service_present",
+            "connector_credential_authorization_service",
+            "medium",
+        ),
+        (
+            "connector_credential_readiness_service_present",
+            "connector_credential_readiness_service",
+            "medium",
+        ),
+        (
+            "connector_secret_redaction_service_present",
+            "connector_secret_redaction_service",
+            "medium",
+        ),
+        (
+            "connector_credential_query_service_present",
+            "connector_credential_query_service",
+            "medium",
+        ),
         ("local_session_preview_service_present", "local_session_preview_service", "medium"),
         ("local_session_context_service_present", "local_session_context_service", "medium"),
         ("local_session_boundary_service_present", "local_session_boundary_service", "medium"),
@@ -547,6 +577,7 @@ class KernelDiagnostics:
         checks.extend(self._connector_simulator_checks(settings))
         checks.extend(self._connector_policy_checks(settings))
         checks.extend(self._connector_sandbox_checks(settings))
+        checks.extend(self._connector_credential_checks(settings))
         checks.extend(self._operator_action_checks(settings))
         checks.extend(self._run_supervision_checks(settings))
         checks.extend(self._notification_checks(settings))
@@ -1596,6 +1627,128 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Connector sandbox design and readiness services are assembled.",
+            ),
+        ]
+
+    def _connector_credential_checks(self, settings: object) -> list[DiagnosticCheck]:
+        services_present = all(
+            getattr(self._container, name, None) is not None
+            for name in (
+                "connector_credential_architecture_service",
+                "connector_credential_lifecycle_service",
+                "connector_credential_authorization_service",
+                "connector_credential_denial_service",
+                "connector_credential_audit_service",
+                "connector_credential_readiness_service",
+                "connector_secret_redaction_service",
+                "connector_credential_query_service",
+            )
+        )
+        return [
+            self._result(
+                "connector_credentials_architecture_enabled",
+                "connector_credentials",
+                (
+                    "passed"
+                    if bool(getattr(settings, "connector_credentials_architecture_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Connector credential store architecture is available for read-only preview.",
+            ),
+            self._result(
+                "connector_credentials_readiness_enabled",
+                "connector_credentials",
+                (
+                    "passed"
+                    if bool(getattr(settings, "connector_credentials_readiness_enabled", True))
+                    else "warning"
+                ),
+                "medium",
+                "Connector credential readiness gate is available without storage.",
+            ),
+            self._result(
+                "connector_credentials_redaction_preview_enabled",
+                "connector_credentials",
+                (
+                    "passed"
+                    if bool(
+                        getattr(
+                            settings,
+                            "connector_credentials_redaction_preview_enabled",
+                            True,
+                        )
+                    )
+                    else "warning"
+                ),
+                "medium",
+                "Connector credential redaction preview is available without persistence.",
+            ),
+            self._result(
+                "connector_credentials_storage_enabled",
+                "connector_credentials",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_credentials_storage_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector credential storage remains disabled.",
+            ),
+            self._result(
+                "connector_tokens_storage_enabled",
+                "connector_credentials",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_tokens_storage_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector token storage remains disabled.",
+            ),
+            self._result(
+                "connector_secret_material_enabled",
+                "connector_credentials",
+                (
+                    "failed"
+                    if bool(getattr(settings, "connector_secret_material_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Connector secret material remains absent.",
+            ),
+            self._result(
+                "connector_external_identity_runtime_enabled",
+                "connector_credentials",
+                (
+                    "failed"
+                    if bool(
+                        getattr(settings, "connector_external_identity_runtime_enabled", False)
+                    )
+                    else "passed"
+                ),
+                "critical",
+                "Connector external identity runtime remains disabled.",
+            ),
+            self._result(
+                "connector_runtime_credential_access_enabled",
+                "connector_credentials",
+                (
+                    "failed"
+                    if bool(
+                        getattr(settings, "connector_runtime_credential_access_enabled", False)
+                    )
+                    else "passed"
+                ),
+                "critical",
+                "Connector runtime credential access remains disabled.",
+            ),
+            self._result(
+                "connector_credential_services_present",
+                "connector_credentials",
+                "passed" if services_present else "failed",
+                "high",
+                "Connector credential architecture and readiness services are assembled.",
             ),
         ]
 

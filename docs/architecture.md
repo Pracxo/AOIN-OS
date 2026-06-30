@@ -2022,3 +2022,10 @@ dry-run decision, denial, and traceability services. It is policy evidence
 only: no connector runtime, no external call, no credential or token access,
 no activation, no route registration, no tool execution, and no write
 execution.
+
+## AION-113 Connector Credential Architecture
+
+AION-113 adds connector credential contracts and services for future credential
+store design. The architecture remains read-only and preview-only: credential
+storage, token storage, secret material, external identity runtime, connector
+runtime credential access, and external calls stay disabled.

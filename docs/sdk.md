@@ -982,3 +982,10 @@ Useful methods include:
 The SDK does not expose connector runtime, external-call, credential, token,
 provider, activation, route-registration, tool-execution, or write-execution
 helpers for connector policy.
+
+## ConnectorCredentialsResource
+
+`client.connector_credentials` exposes boundary, lifecycle, authorization,
+readiness, redaction preview, query, and status preview APIs. The SDK does not
+expose credential store/read/rotate/revoke, token, OAuth, login, bind,
+external-call, activation, or write helpers.

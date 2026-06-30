@@ -86,6 +86,16 @@ from aion_brain.conformance import (
     ReadinessAssessmentService,
     SchemaConformanceChecker,
 )
+from aion_brain.connector_credentials import (
+    ConnectorCredentialArchitectureService,
+    ConnectorCredentialAuditService,
+    ConnectorCredentialAuthorizationService,
+    ConnectorCredentialDenialService,
+    ConnectorCredentialLifecycleService,
+    ConnectorCredentialQueryService,
+    ConnectorCredentialReadinessService,
+    ConnectorSecretRedactionService,
+)
 from aion_brain.connector_policy import (
     ConnectorAuthorizationMatrixService,
     ConnectorPolicyAuditService,
@@ -3741,6 +3751,37 @@ class KernelContainer:
             denial_service=self.connector_sandbox_denial_service,
             settings=self.settings,
         )
+        self.connector_credential_architecture_service = ConnectorCredentialArchitectureService(
+            telemetry_service=self.telemetry_service,
+        )
+        self.connector_credential_lifecycle_service = ConnectorCredentialLifecycleService(
+            telemetry_service=self.telemetry_service,
+        )
+        self.connector_credential_authorization_service = ConnectorCredentialAuthorizationService(
+            telemetry_service=self.telemetry_service,
+        )
+        self.connector_credential_denial_service = ConnectorCredentialDenialService()
+        self.connector_credential_audit_service = ConnectorCredentialAuditService(
+            audit_sink=self.audit_integrity_ledger
+        )
+        self.connector_credential_readiness_service = ConnectorCredentialReadinessService(
+            architecture_service=self.connector_credential_architecture_service,
+            authorization_service=self.connector_credential_authorization_service,
+            denial_service=self.connector_credential_denial_service,
+            audit_service=self.connector_credential_audit_service,
+            settings=self.settings,
+            telemetry_service=self.telemetry_service,
+        )
+        self.connector_secret_redaction_service = ConnectorSecretRedactionService(
+            telemetry_service=self.telemetry_service,
+        )
+        self.connector_credential_query_service = ConnectorCredentialQueryService(
+            architecture_service=self.connector_credential_architecture_service,
+            lifecycle_service=self.connector_credential_lifecycle_service,
+            authorization_service=self.connector_credential_authorization_service,
+            denial_service=self.connector_credential_denial_service,
+            settings=self.settings,
+        )
         self.local_session_preview_service = LocalSessionPreviewService(
             telemetry_service=self.telemetry_service,
         )
@@ -5479,6 +5520,54 @@ class KernelContainer:
             (
                 "connector_sandbox_query_service",
                 self.connector_sandbox_query_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_credential_architecture_service",
+                self.connector_credential_architecture_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_credential_lifecycle_service",
+                self.connector_credential_lifecycle_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_credential_authorization_service",
+                self.connector_credential_authorization_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_credential_denial_service",
+                self.connector_credential_denial_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_credential_audit_service",
+                self.connector_credential_audit_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_credential_readiness_service",
+                self.connector_credential_readiness_service,
+                "service",
+                "deterministic",
+            ),
+            (
+                "connector_secret_redaction_service",
+                self.connector_secret_redaction_service,
+                "service",
+                "local",
+            ),
+            (
+                "connector_credential_query_service",
+                self.connector_credential_query_service,
                 "service",
                 "local",
             ),
