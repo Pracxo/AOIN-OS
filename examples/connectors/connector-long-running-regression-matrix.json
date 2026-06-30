@@ -1,0 +1,61 @@
+{
+  "synthetic": true,
+  "status": "passed",
+  "matrix_id": "connector-long-running-regression-matrix-aion-116",
+  "milestone": "AION-116",
+  "read_only": true,
+  "design_only": true,
+  "redaction_applied": true,
+  "connector_runtime_enabled": false,
+  "external_calls_enabled": false,
+  "credentials_present": false,
+  "token_storage_enabled": false,
+  "sandbox_execution_enabled": false,
+  "connector_activation_enabled": false,
+  "route_registration_enabled": false,
+  "implementation_approved": false,
+  "release_gate_passed": true,
+  "checkpoint_passed": true,
+  "stabilization_gate_passed": true,
+  "safety_freeze_passed": true,
+  "package_files_added": false,
+  "migrations_added": false,
+  "provider_sdk_dependency_added": false,
+  "api_runtime_execution_route_added": false,
+  "endpoint_references_present": false,
+  "secret_material_present": false,
+  "credential_values_present": false,
+  "token_values_present": false,
+  "private_prompt_material_present": false,
+  "private_reasoning_present": false,
+  "checks": [
+    {
+      "check_key": "runtime_disabled",
+      "command": "./scripts/connector-runtime-review.sh",
+      "expected_safe_value": "connector_runtime_enabled=false",
+      "release_blocker_if_failed": true
+    },
+    {
+      "check_key": "external_calls_absent",
+      "command": "./scripts/connector-runtime-no-external-call-regression.sh",
+      "expected_safe_value": "external_calls_enabled=false",
+      "release_blocker_if_failed": true
+    },
+    {
+      "check_key": "credential_token_absent",
+      "command": "./scripts/connector-credential-check.sh",
+      "expected_safe_value": "credentials_present=false; token_storage_enabled=false",
+      "release_blocker_if_failed": true
+    },
+    {
+      "check_key": "sandbox_absent",
+      "command": "./scripts/connector-sandbox-check.sh",
+      "expected_safe_value": "sandbox_execution_enabled=false",
+      "release_blocker_if_failed": true
+    }
+  ],
+  "refs": [
+    "docs/connectors/connector-long-running-regression-matrix.md"
+  ],
+  "created_at": "2026-06-30T00:00:00Z"
+}

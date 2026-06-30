@@ -863,3 +863,18 @@ checkpoint evidence:
 ./scripts/connector-platform-checkpoint.sh
 ./scripts/connector-platform-freeze-check.sh
 ```
+
+## AION-116 Connector Platform Stabilization
+
+AION-116 adds no CLI command implementation. Use repository-local scripts for
+long-running regression and phase freeze evidence:
+
+```bash
+./scripts/connector-platform-regression.sh
+./scripts/connector-platform-stabilization-gate.sh
+```
+
+The CLI connector surface remains preview-only. The stabilization gate does not
+execute connectors, call external systems, store credentials, store tokens,
+enable sandbox execution, activate connectors, register routes, execute tools,
+or execute write paths.

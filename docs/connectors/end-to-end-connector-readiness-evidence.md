@@ -43,3 +43,11 @@ audit design.
 AION-115 adds `docs/connectors/connector-phase-evidence-pack.md` and
 `docs/connectors/connector-platform-checkpoint.md` as the phase closeout layer.
 The readiness evidence remains disabled, synthetic, and review-only.
+
+## AION-116 Stabilization Evidence
+
+AION-116 adds `docs/connectors/connector-platform-stabilization-runbook.md`,
+`docs/connectors/connector-long-running-regression-matrix.md`, and
+`docs/connectors/connector-phase-freeze-gate.md` as the stabilization layer.
+The readiness evidence remains disabled, synthetic, review-only, and blocked
+from connector implementation until a future ADR passes the stabilization gate.

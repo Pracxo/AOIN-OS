@@ -118,3 +118,12 @@ ADR and a fresh gate package. Future work must start from this checkpoint and
 must keep runtime, external calls, credential/token storage, sandbox execution,
 activation, and route registration disabled until the new ADR and gate evidence
 approve a narrower boundary.
+
+## AION-116 Stabilization Follow-Up
+
+AION-116 adds the connector platform stabilization runbook, long-running
+regression matrix, phase freeze gate, safety baseline lock, evidence pack,
+ADR 0107, and stabilization scripts. The checkpoint remains the baseline, but
+future connector work must also pass `./scripts/connector-platform-regression.sh`
+and `./scripts/connector-platform-stabilization-gate.sh` before any
+implementation ADR is reviewed.

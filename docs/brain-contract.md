@@ -1771,3 +1771,13 @@ implementation. It adds connector checkpoint documents, JSON examples, static
 console demo data, ADR 0106, and local scripts only. Connector implementation
 remains unapproved, and runtime, external calls, credentials/tokens, sandbox
 execution, activation, and route registration remain disabled.
+
+## AION-116 Connector Platform Stabilization Contracts
+
+AION-116 adds no Brain API contract, router, SDK resource, or CLI command
+implementation. It adds connector stabilization documents, JSON examples,
+static console demo data, ADR 0107, and local scripts only. Connector
+implementation remains unapproved, and runtime, external calls,
+credentials/tokens, sandbox execution, activation, route registration, tool
+execution, write execution, package files, and migrations remain disabled or
+absent.

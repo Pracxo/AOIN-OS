@@ -101,6 +101,16 @@ remains unapproved, connector runtime remains disabled, external calls remain
 absent, credentials and tokens remain absent, sandbox execution remains absent,
 and activation and route registration remain disabled.
 
+## Connector Platform Stabilization
+
+AION-116 adds the connector platform stabilization runbook, long-running
+regression matrix, phase freeze gate, evidence pack, safety baseline lock,
+regression evidence, static console stabilization data, ADR 0107, and
+repository-local stabilization scripts only. Connector implementation remains
+unapproved, connector runtime remains disabled, external calls remain absent,
+credentials and tokens remain absent, sandbox execution remains absent, and
+activation and route registration remain disabled.
+
 ## Core Brain Loop
 
 ```text
@@ -4263,4 +4273,22 @@ Developer command:
 ./scripts/connector-release-gate.sh
 ./scripts/connector-safety-freeze.sh
 ./scripts/connector-release-no-go-regression.sh
+```
+
+## AION-116 Connector Platform Stabilization Gate
+
+AION-116 adds the connector platform stabilization runbook, long-running
+regression matrix, connector phase freeze gate, stabilization evidence pack,
+safety baseline lock, regression evidence examples, static console
+stabilization panels, ADR 0107, and stabilization scripts. It is
+stabilization-only: connector implementation remains unapproved, runtime
+remains disabled, external calls remain absent, credentials/tokens remain
+absent, sandbox execution remains absent, activation and route registration
+remain disabled, and no package files or migrations are added.
+
+Developer command:
+
+```bash
+./scripts/connector-platform-regression.sh
+./scripts/connector-platform-stabilization-gate.sh
 ```

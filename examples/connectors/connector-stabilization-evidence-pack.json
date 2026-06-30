@@ -1,0 +1,57 @@
+{
+  "synthetic": true,
+  "status": "passed",
+  "evidence_pack_id": "connector-stabilization-evidence-pack-aion-116",
+  "milestone": "AION-116",
+  "read_only": true,
+  "design_only": true,
+  "redaction_applied": true,
+  "connector_runtime_enabled": false,
+  "external_calls_enabled": false,
+  "credentials_present": false,
+  "token_storage_enabled": false,
+  "sandbox_execution_enabled": false,
+  "connector_activation_enabled": false,
+  "route_registration_enabled": false,
+  "implementation_approved": false,
+  "release_gate_passed": true,
+  "checkpoint_passed": true,
+  "stabilization_gate_passed": true,
+  "safety_freeze_passed": true,
+  "package_files_added": false,
+  "migrations_added": false,
+  "provider_sdk_dependency_added": false,
+  "api_runtime_execution_route_added": false,
+  "endpoint_references_present": false,
+  "secret_material_present": false,
+  "credential_values_present": false,
+  "token_values_present": false,
+  "private_prompt_material_present": false,
+  "private_reasoning_present": false,
+  "evidence": [
+    {
+      "evidence_key": "runbook",
+      "artifact": "docs/connectors/connector-platform-stabilization-runbook.md",
+      "release_blocker": true
+    },
+    {
+      "evidence_key": "regression_matrix",
+      "artifact": "docs/connectors/connector-long-running-regression-matrix.md",
+      "release_blocker": true
+    },
+    {
+      "evidence_key": "phase_freeze_gate",
+      "artifact": "docs/connectors/connector-phase-freeze-gate.md",
+      "release_blocker": true
+    },
+    {
+      "evidence_key": "adr_0107",
+      "artifact": "docs/adr/0107-connector-platform-stabilization-gate.md",
+      "release_blocker": true
+    }
+  ],
+  "refs": [
+    "docs/connectors/connector-stabilization-evidence-pack.md"
+  ],
+  "created_at": "2026-06-30T00:00:00Z"
+}

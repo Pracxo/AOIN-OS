@@ -60,3 +60,17 @@ method, runtime route, or package dependency.
 
 The connector phase is closed only when the checkpoint and freeze scripts pass
 and the safe-state flags remain disabled.
+
+## AION-116 Stabilization Closeout
+
+After AION-116, connector closeout also requires:
+
+```bash
+./scripts/connector-platform-regression.sh
+./scripts/connector-platform-stabilization-gate.sh
+```
+
+The stabilization scripts must pass with connector implementation unapproved,
+runtime disabled, external calls absent, credentials/tokens absent, sandbox
+execution absent, activation disabled, route registration disabled, package
+files absent, and migrations absent.

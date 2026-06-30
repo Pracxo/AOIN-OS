@@ -233,3 +233,18 @@ The static console includes connector platform checkpoint and phase closeout
 panels. They load bundled JSON only, keep connector implementation unapproved,
 and expose no runtime, external-call, credential/token, sandbox execution,
 activation, route registration, input, package, migration, or write controls.
+
+## AION-116 Connector Platform Stabilization Panels
+
+The static console includes connector platform stabilization and phase freeze
+gate panels. They load bundled JSON only, keep connector implementation
+unapproved, and expose no runtime, external-call, credential/token, sandbox
+execution, activation, route registration, input, package, migration, or write
+controls.
+
+Validate the stabilization evidence:
+
+```bash
+./scripts/connector-platform-regression.sh
+./scripts/connector-platform-stabilization-gate.sh
+```

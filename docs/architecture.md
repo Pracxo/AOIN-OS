@@ -2043,3 +2043,14 @@ is not approved, runtime remains disabled, external calls remain absent,
 credentials and tokens remain absent, sandbox execution remains absent, and
 activation and route registration remain disabled. The checkpoint adds docs,
 examples, static console demo data, ADR 0106, and local scripts only.
+
+## AION-116 Connector Platform Stabilization Gate
+
+AION-116 stabilizes the connector platform checkpoint with a long-running
+regression matrix and phase freeze gate. The architecture remains unchanged at
+runtime: connector implementation is not approved, runtime remains disabled,
+external calls remain absent, credentials and tokens remain absent, sandbox
+execution remains absent, activation and route registration remain disabled,
+and no API routers, SDK resources, CLI implementations, migrations, package
+files, runtime config defaults, network clients, or domain module logic are
+added.

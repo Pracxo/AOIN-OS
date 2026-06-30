@@ -126,3 +126,9 @@ remain green.
 The connector release gate is a prerequisite for the connector platform
 checkpoint. AION-115 uses this gate as evidence and keeps implementation
 approval false.
+
+## AION-116 Stabilization Input
+
+The connector release gate remains a prerequisite for the connector platform
+stabilization gate. AION-116 calls this gate from the long-running regression
+matrix and keeps implementation approval false.

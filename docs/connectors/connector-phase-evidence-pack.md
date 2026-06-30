@@ -89,3 +89,22 @@ AION-115 evidence consists of:
 
 The connector phase evidence is complete for checkpoint purposes. It is not
 complete for implementation approval.
+
+## AION-116 Stabilization Evidence
+
+AION-116 extends the evidence pack with:
+
+- connector platform stabilization runbook
+- long-running regression matrix
+- connector phase freeze gate
+- stabilization evidence pack
+- safety baseline lock
+- regression evidence
+- ADR 0107
+- JSON stabilization examples
+- static console stabilization data
+- `connector-platform-regression.sh`
+- `connector-platform-stabilization-gate.sh`
+
+The added evidence is stabilization-only and does not approve connector
+implementation.

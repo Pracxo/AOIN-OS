@@ -120,3 +120,13 @@ The connector phase is now closed out by
 remains read-only and bundled; connector implementation remains unapproved, and
 runtime, external calls, credentials/tokens, sandbox execution, activation, and
 route registration remain disabled.
+
+## AION-116 Connector Platform Stabilization
+
+The connector phase is now stabilized by
+`./scripts/connector-platform-regression.sh` and
+`./scripts/connector-platform-stabilization-gate.sh`. Static operator evidence
+remains read-only and bundled; connector implementation remains unapproved, and
+runtime, external calls, credentials/tokens, sandbox execution, activation,
+route registration, package files, migrations, tool execution, and write
+execution remain disabled or absent.

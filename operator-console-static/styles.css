@@ -442,6 +442,11 @@ h1 {
   align-items: start;
 }
 
+.connector-runtime-panel .module-subpanel[aria-label="Connector platform stabilization"],
+.connector-runtime-panel .module-subpanel[aria-label="Connector phase freeze gate"] {
+  border-color: rgb(122 209 255 / 35%);
+}
+
 .connector-release-row span,
 .connector-release-row strong,
 .connector-platform-row span,

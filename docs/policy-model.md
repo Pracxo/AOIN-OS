@@ -1833,3 +1833,12 @@ AION-115 adds no new policy allow path. The connector platform checkpoint
 keeps runtime allow paths, external calls, credential/token access, sandbox
 execution, activation, route registration, tool execution, and write execution
 denied until a future ADR and gate evidence explicitly change scope.
+
+## AION-116 Connector Platform Stabilization Policy
+
+AION-116 adds no new policy allow path. The connector platform stabilization
+gate preserves the frozen connector baseline and keeps implementation approval
+false. Runtime allow paths, external calls, credential/token access, sandbox
+execution, activation, route registration, tool execution, write execution,
+hard delete, and privileged bypass remain denied until a future ADR and
+stabilization evidence explicitly change scope.
