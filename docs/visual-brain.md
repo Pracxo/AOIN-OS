@@ -1090,3 +1090,11 @@ gate demo data. These panels are read-only evidence projections only; they do
 not emit runtime connector events, call external systems, store credentials or
 tokens, enable sandbox execution, add activation controls, register routes, or
 execute tools.
+
+## AION-117 Platform Integration Projection
+
+AION-117 adds bundled static platform integration checkpoint and future runtime
+boundary freeze demo data. These panels are read-only evidence projections
+only; they do not emit runtime events, call external systems, store credentials
+or tokens, enable production auth, enable module activation, enable sandbox
+execution, register routes, or execute tools.

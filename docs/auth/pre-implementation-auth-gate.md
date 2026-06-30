@@ -59,3 +59,13 @@ Allowed next work types are design review, threat model refinement, connector
 boundary review, credential lifecycle design, migration design, CI gate design,
 and rollback design. Runtime auth remains blocked until a later ADR changes
 that boundary.
+
+## AION-117 Platform Integration Requirement
+
+AION-117 adds `./scripts/platform-integration-checkpoint.sh`,
+`./scripts/platform-integration-freeze-check.sh`, and
+`./scripts/platform-integration-no-go-regression.sh` as required cross-phase
+evidence before any production auth implementation ADR can be reviewed.
+Production auth, login/logout behavior, session persistence, credential
+storage, token storage, external identity runtime, package files, migrations,
+and API runtime execution routes remain blocked.

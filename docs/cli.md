@@ -878,3 +878,19 @@ The CLI connector surface remains preview-only. The stabilization gate does not
 execute connectors, call external systems, store credentials, store tokens,
 enable sandbox execution, activate connectors, register routes, execute tools,
 or execute write paths.
+
+## AION-117 Platform Integration Checkpoint
+
+AION-117 adds no CLI command implementation. Use repository-local scripts for
+post-v0.1 platform integration evidence:
+
+```bash
+./scripts/platform-integration-checkpoint.sh
+./scripts/platform-integration-freeze-check.sh
+./scripts/platform-integration-no-go-regression.sh
+```
+
+The CLI surface remains preview-only. The integration checkpoint does not
+execute operator writes, execute connectors, enable production auth, activate
+modules, call external systems, store credentials, store tokens, enable sandbox
+execution, register routes, execute tools, or execute write paths.

@@ -1,0 +1,96 @@
+{
+  "task_id": "AION-117",
+  "synthetic": true,
+  "status": "passed",
+  "checkpoint_passed": true,
+  "integration_gate_passed": true,
+  "rows": [
+    {
+      "area": "static console",
+      "operator_state": "read-only local preview",
+      "connector_state": "evidence only",
+      "runtime_state": "disabled",
+      "allowed_today": "bundled JSON preview",
+      "future_only": "runtime console actions",
+      "gate_script": "./scripts/static-console-safety-check.sh",
+      "release_blocker_if_failed": true,
+      "notes": "no frontend package files"
+    },
+    {
+      "area": "operator actions",
+      "operator_state": "dry-run descriptors",
+      "connector_state": "denied",
+      "runtime_state": "no write execution",
+      "allowed_today": "review evidence",
+      "future_only": "governed write execution",
+      "gate_script": "./scripts/action-authorization-check.sh",
+      "release_blocker_if_failed": true,
+      "notes": "approval bypass blocked"
+    },
+    {
+      "area": "local auth",
+      "operator_state": "mock actor context",
+      "connector_state": "no identity runtime",
+      "runtime_state": "production auth disabled",
+      "allowed_today": "synthetic role preview",
+      "future_only": "production auth runtime",
+      "gate_script": "./scripts/auth-prototype-review.sh",
+      "release_blocker_if_failed": true,
+      "notes": "no login or token issuance"
+    },
+    {
+      "area": "module lifecycle",
+      "operator_state": "read-only lifecycle dashboard",
+      "connector_state": "activation denied",
+      "runtime_state": "activation disabled",
+      "allowed_today": "metadata review",
+      "future_only": "module activation",
+      "gate_script": "./scripts/module-activation-design-review.sh",
+      "release_blocker_if_failed": true,
+      "notes": "no code loading"
+    },
+    {
+      "area": "connector runtime",
+      "operator_state": "disabled status visible",
+      "connector_state": "runtime disabled",
+      "runtime_state": "no connector execution",
+      "allowed_today": "status and boundary evidence",
+      "future_only": "connector runtime implementation",
+      "gate_script": "./scripts/connector-runtime-review.sh",
+      "release_blocker_if_failed": true,
+      "notes": "no route registration"
+    },
+    {
+      "area": "connector credentials",
+      "operator_state": "readiness evidence visible",
+      "connector_state": "no stored values",
+      "runtime_state": "storage disabled",
+      "allowed_today": "architecture evidence",
+      "future_only": "credential storage",
+      "gate_script": "./scripts/connector-credential-check.sh",
+      "release_blocker_if_failed": true,
+      "notes": "no token storage"
+    },
+    {
+      "area": "connector sandbox",
+      "operator_state": "isolation evidence visible",
+      "connector_state": "no sandbox process",
+      "runtime_state": "execution disabled",
+      "allowed_today": "design readiness",
+      "future_only": "sandbox execution",
+      "gate_script": "./scripts/connector-sandbox-check.sh",
+      "release_blocker_if_failed": true,
+      "notes": "no filesystem, network, process, import, or package execution"
+    }
+  ],
+  "operator_write_execution_approved": false,
+  "connector_implementation_approved": false,
+  "production_auth_approved": false,
+  "module_activation_approved": false,
+  "external_calls_approved": false,
+  "credential_storage_approved": false,
+  "token_storage_approved": false,
+  "sandbox_execution_approved": false,
+  "package_files_added": false,
+  "migrations_added": false
+}

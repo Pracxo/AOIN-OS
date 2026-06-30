@@ -50,6 +50,9 @@
     "./scripts/connector-platform-freeze-check.sh",
     "./scripts/connector-platform-regression.sh",
     "./scripts/connector-platform-stabilization-gate.sh",
+    "./scripts/platform-integration-checkpoint.sh",
+    "./scripts/platform-integration-freeze-check.sh",
+    "./scripts/platform-integration-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -101,6 +104,10 @@
     stabilization: "demo-data/connector-platform-stabilization.json",
     phase_freeze: "demo-data/connector-phase-freeze-gate.json"
   };
+  var PLATFORM_INTEGRATION_DEMOS = {
+    checkpoint: "demo-data/platform-integration-checkpoint.json",
+    freeze: "demo-data/future-runtime-boundary-freeze.json"
+  };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
     role_filter: "demo-data/role-filtered-view-model.json"
@@ -142,6 +149,7 @@
     loadConnectorCredentialPanels();
     loadConnectorReleasePanels();
     loadConnectorPlatformPanels();
+    loadPlatformIntegrationPanels();
     loadView(state.activeView);
   });
 
@@ -1526,6 +1534,53 @@
         renderConnectorReleaseEvidence("connector-platform-stabilization", { status: "unavailable" });
         renderConnectorReleaseEvidence("connector-phase-freeze-gate", { status: "unavailable" });
       });
+  }
+
+  function loadPlatformIntegrationPanels() {
+    Promise.all([
+      fetchJson(PLATFORM_INTEGRATION_DEMOS.checkpoint),
+      fetchJson(PLATFORM_INTEGRATION_DEMOS.freeze)
+    ])
+      .then(function (payloads) {
+        renderPlatformIntegrationEvidence("platform-integration-checkpoint", redact(payloads[0]));
+        renderPlatformIntegrationEvidence("future-runtime-boundary-freeze", redact(payloads[1]));
+      })
+      .catch(function () {
+        renderPlatformIntegrationEvidence("platform-integration-checkpoint", { status: "unavailable" });
+        renderPlatformIntegrationEvidence("future-runtime-boundary-freeze", { status: "unavailable" });
+      });
+  }
+
+  function renderPlatformIntegrationEvidence(containerId, payload) {
+    var container = document.getElementById(containerId);
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    [
+      ["status", payload.status || "preview"],
+      ["read_only", String(Boolean(payload.read_only))],
+      ["operator_write_execution_approved", String(Boolean(payload.operator_write_execution_approved))],
+      ["connector_implementation_approved", String(Boolean(payload.connector_implementation_approved))],
+      ["production_auth_approved", String(Boolean(payload.production_auth_approved))],
+      ["module_activation_approved", String(Boolean(payload.module_activation_approved))],
+      ["external_calls_approved", String(Boolean(payload.external_calls_approved))],
+      ["credential_storage_approved", String(Boolean(payload.credential_storage_approved))],
+      ["token_storage_approved", String(Boolean(payload.token_storage_approved))],
+      ["sandbox_execution_approved", String(Boolean(payload.sandbox_execution_approved))],
+      ["package_files_added", String(Boolean(payload.package_files_added))],
+      ["migrations_added", String(Boolean(payload.migrations_added))]
+    ].forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "checklist-row connector-release-row connector-platform-row";
+      var label = document.createElement("span");
+      label.textContent = item[0];
+      var value = document.createElement("strong");
+      value.textContent = safeText(item[1] || "none");
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
+    });
   }
 
   function renderConnectorReleaseEvidence(containerId, payload) {

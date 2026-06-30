@@ -1781,3 +1781,13 @@ implementation remains unapproved, and runtime, external calls,
 credentials/tokens, sandbox execution, activation, route registration, tool
 execution, write execution, package files, and migrations remain disabled or
 absent.
+
+## AION-117 Platform Integration Contracts
+
+AION-117 adds no Brain API contract, router, SDK resource, or CLI command
+implementation. It adds platform checkpoint documents, JSON examples, static
+console demo data, ADR 0108, and local scripts only. Operator write execution,
+connector implementation, production auth, module activation, external calls,
+credential storage, token storage, sandbox execution, runtime route
+registration, package files, and migrations remain unapproved, disabled, or
+absent.

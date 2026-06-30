@@ -1,0 +1,76 @@
+{
+  "task_id": "AION-117",
+  "status": "passed",
+  "redaction_applied": true,
+  "sections": [
+    {
+      "section_key": "operator_platform",
+      "status": "passed"
+    },
+    {
+      "section_key": "connector_platform",
+      "status": "passed"
+    },
+    {
+      "section_key": "future_runtime_boundary",
+      "status": "frozen"
+    }
+  ],
+  "blockers": [
+    "future ADR required before runtime implementation",
+    "release gate required before approval booleans can change"
+  ],
+  "warnings": [
+    "checkpoint evidence is not runtime approval"
+  ],
+  "refs": [
+    "docs/platform/post-v01-platform-integration-checkpoint.md",
+    "docs/adr/0108-post-v01-platform-integration-checkpoint.md"
+  ],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "reason": "Disabled in the platform checkpoint."
+    },
+    {
+      "action_key": "activate_capability",
+      "reason": "Disabled in the platform checkpoint."
+    },
+    {
+      "action_key": "load_code",
+      "reason": "Disabled in the platform checkpoint."
+    },
+    {
+      "action_key": "execute_tool",
+      "reason": "Disabled in the platform checkpoint."
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "reason": "Disabled in the platform checkpoint."
+    },
+    {
+      "action_key": "hard_delete",
+      "reason": "Disabled in the platform checkpoint."
+    }
+  ],
+  "checkpoint_passed": true,
+  "integration_gate_passed": true,
+  "read_only": true,
+  "operator_platform_passed": true,
+  "connector_platform_passed": true,
+  "auth_prototype_review_passed": true,
+  "module_activation_design_review_passed": true,
+  "operator_write_execution_approved": false,
+  "connector_implementation_approved": false,
+  "production_auth_approved": false,
+  "module_activation_approved": false,
+  "external_calls_approved": false,
+  "credential_storage_approved": false,
+  "token_storage_approved": false,
+  "sandbox_execution_approved": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "api_runtime_execution_route_added": false,
+  "frontend_dependencies_added": false,
+  "aion_v0_1_0_touched": false
+}

@@ -117,3 +117,4 @@ closure decision in ADR 0072.
 - [0105: Connector Release Gate](0105-connector-release-gate.md) - Defines the consolidated connector release gate and safety freeze without enabling connector runtime, external calls, credential storage, or sandbox execution.
 - [0106: Connector Platform Checkpoint](0106-connector-platform-checkpoint.md) - Freezes the connector phase checkpoint after AION-115 while keeping implementation unapproved and runtime capabilities disabled.
 - [0107: Connector Platform Stabilization Gate](0107-connector-platform-stabilization-gate.md) - Adds the long-running connector regression matrix and phase freeze gate while keeping implementation unapproved.
+- [0108: Post-v0.1 Platform Integration Checkpoint](0108-post-v01-platform-integration-checkpoint.md) - Adds the operator and connector platform integration checkpoint while keeping future runtime implementation unapproved.

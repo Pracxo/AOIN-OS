@@ -130,3 +130,14 @@ remains read-only and bundled; connector implementation remains unapproved, and
 runtime, external calls, credentials/tokens, sandbox execution, activation,
 route registration, package files, migrations, tool execution, and write
 execution remain disabled or absent.
+
+## AION-117 Platform Integration Checkpoint
+
+The next platform-wide gate is now
+`./scripts/platform-integration-checkpoint.sh` with
+`./scripts/platform-integration-freeze-check.sh`. Static operator evidence
+remains read-only and bundled; production auth, operator write execution,
+connector implementation, module activation, external calls, credential
+storage, token storage, sandbox execution, package files, migrations, API
+routes, SDK resources, and CLI implementations remain unapproved, disabled, or
+absent.

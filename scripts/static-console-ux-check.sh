@@ -193,6 +193,9 @@ allowed = {
     "./scripts/operator-platform-freeze-gate.sh",
     "./scripts/connector-platform-regression.sh",
     "./scripts/connector-platform-stabilization-gate.sh",
+    "./scripts/platform-integration-checkpoint.sh",
+    "./scripts/platform-integration-freeze-check.sh",
+    "./scripts/platform-integration-no-go-regression.sh",
     "./scripts/docs-check.sh",
 }
 listed = set(nav.get("safe_copy_commands", []))

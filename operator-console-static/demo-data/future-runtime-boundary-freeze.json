@@ -1,0 +1,75 @@
+{
+  "task_id": "AION-117",
+  "status": "passed",
+  "redaction_applied": true,
+  "sections": [
+    {
+      "section_key": "production_auth",
+      "status": "not_approved"
+    },
+    {
+      "section_key": "connector_boundary",
+      "status": "not_approved"
+    },
+    {
+      "section_key": "sandbox_execution",
+      "status": "not_approved"
+    }
+  ],
+  "blockers": [
+    "future ADR required",
+    "release gate required",
+    "no-go regression required"
+  ],
+  "warnings": [
+    "boundary freeze is not runtime approval"
+  ],
+  "refs": [
+    "docs/platform/future-runtime-boundary-freeze.md",
+    "docs/platform/implementation-approval-state-summary.md"
+  ],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "reason": "Disabled by the future runtime boundary freeze."
+    },
+    {
+      "action_key": "activate_capability",
+      "reason": "Disabled by the future runtime boundary freeze."
+    },
+    {
+      "action_key": "load_code",
+      "reason": "Disabled by the future runtime boundary freeze."
+    },
+    {
+      "action_key": "execute_tool",
+      "reason": "Disabled by the future runtime boundary freeze."
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "reason": "Disabled by the future runtime boundary freeze."
+    },
+    {
+      "action_key": "hard_delete",
+      "reason": "Disabled by the future runtime boundary freeze."
+    }
+  ],
+  "checkpoint_passed": true,
+  "integration_gate_passed": true,
+  "future_runtime_boundary_frozen": true,
+  "read_only": true,
+  "operator_write_execution_approved": false,
+  "connector_implementation_approved": false,
+  "production_auth_approved": false,
+  "module_activation_approved": false,
+  "external_calls_approved": false,
+  "credential_storage_approved": false,
+  "token_storage_approved": false,
+  "sandbox_execution_approved": false,
+  "oauth_oidc_saml_runtime_approved": false,
+  "code_loading_approved": false,
+  "runtime_registration_approved": false,
+  "capability_activation_approved": false,
+  "package_files_added": false,
+  "migrations_added": false
+}

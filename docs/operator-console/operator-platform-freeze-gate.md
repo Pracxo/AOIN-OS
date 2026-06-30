@@ -59,3 +59,12 @@ Merge only from a PR branch. Do not push directly to `main`. The branch must
 preserve `aion-v0.1.0`, keep the static console read-only, keep auth disabled
 or mock-only, and keep all write, activation, execution, provider-call, and
 external-call controls absent.
+
+## AION-117 Platform Freeze
+
+AION-117 composes this freeze gate into
+`./scripts/platform-integration-freeze-check.sh`. The platform freeze remains
+strict for operator write execution, production auth, module activation,
+connector runtime implementation, external calls, credential storage, token
+storage, sandbox execution, package files, migrations, API routes, SDK
+resources, CLI implementations, and `aion-v0.1.0` tag movement.

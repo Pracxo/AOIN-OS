@@ -150,3 +150,15 @@ as approval to implement runtime connectors, call external systems, store
 credentials or tokens, execute sandbox code, activate modules, register
 connector routes, execute tools, execute action proposals, or perform write
 paths.
+
+## AION-117 Platform Integration Gate
+
+AION-117 composes this connector stabilization gate into the post-v0.1 platform
+integration checkpoint. Future connector runtime work must also pass
+`./scripts/platform-integration-checkpoint.sh`,
+`./scripts/platform-integration-freeze-check.sh`, and
+`./scripts/platform-integration-no-go-regression.sh`. The platform gate does
+not approve connector implementation, production auth, operator writes, module
+activation, external calls, credential storage, token storage, sandbox
+execution, package files, migrations, API routes, SDK resources, or CLI
+implementations.

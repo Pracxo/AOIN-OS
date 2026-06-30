@@ -553,3 +553,14 @@ Instructions for future Codex runs in this repository:
   runtime, sandbox execution, package files, lockfiles, migrations, activation,
   route registration, code loading, tool execution, write execution, hard
   delete, implementation approval, or privileged bypass.
+- AION-117 post-v0.1 platform integration checkpoint is cross-phase evidence
+  only. It must pass `./scripts/platform-integration-checkpoint.sh`,
+  `./scripts/platform-integration-freeze-check.sh`, and
+  `./scripts/platform-integration-no-go-regression.sh`, and it must not add API
+  routers, SDK resources, CLI command implementations, runtime config defaults,
+  connector runtime enablement, operator write execution, production auth,
+  module activation, external calls, network clients, connector/provider/auth
+  SDK dependencies, credential or token storage, OAuth/OIDC/SAML runtime,
+  sandbox execution, package files, lockfiles, migrations, route registration,
+  code loading, tool execution, hard delete, implementation approval, or
+  privileged bypass.

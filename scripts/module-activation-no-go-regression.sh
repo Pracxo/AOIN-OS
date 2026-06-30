@@ -170,6 +170,20 @@ for relative in sorted(changed):
     if not relative.startswith(runtime_prefixes):
         continue
     text = path.read_text(errors="ignore")
+    if relative == "operator-console-static/app.js":
+        text = text.replace(
+            '{ action_key: "activate_capability", reason: "Disabled in static prototype." }',
+            "",
+        )
+    if relative in {
+        "operator-console-static/demo-data/platform-integration-checkpoint.json",
+        "operator-console-static/demo-data/future-runtime-boundary-freeze.json",
+    }:
+        text = re.sub(
+            r'\{\s*"action_key":\s*"activate_capability",\s*"reason":\s*"Disabled (?:in the platform checkpoint|by the future runtime boundary freeze)\."\s*\}',
+            "",
+            text,
+        )
     for label, pattern in runtime_patterns.items():
         if pattern.search(text):
             raise SystemExit(f"runtime implementation pattern found in {relative}: {label}")

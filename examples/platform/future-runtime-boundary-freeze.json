@@ -1,0 +1,29 @@
+{
+  "task_id": "AION-117",
+  "synthetic": true,
+  "status": "passed",
+  "checkpoint_passed": true,
+  "integration_gate_passed": true,
+  "future_runtime_boundary_frozen": true,
+  "operator_write_execution_approved": false,
+  "connector_implementation_approved": false,
+  "production_auth_approved": false,
+  "module_activation_approved": false,
+  "external_calls_approved": false,
+  "credential_storage_approved": false,
+  "token_storage_approved": false,
+  "sandbox_execution_approved": false,
+  "oauth_oidc_saml_runtime_approved": false,
+  "code_loading_approved": false,
+  "runtime_registration_approved": false,
+  "capability_activation_approved": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "future_requirements": [
+    "explicit ADR",
+    "release gate",
+    "no-go regression",
+    "rollback guidance",
+    "safety evidence"
+  ]
+}

@@ -35,3 +35,13 @@ sandbox, credential, docs, domain drift, and boundary gates.
 Connector implementation remains unapproved. Runtime enablement, external
 calls, credential/token storage, sandbox execution, activation, route
 registration, package files, and migrations are release blockers.
+
+## AION-117 Platform Lock
+
+AION-117 extends the lock to the integrated platform approval state:
+`operator_write_execution_approved=false`,
+`connector_implementation_approved=false`,
+`production_auth_approved=false`, `module_activation_approved=false`,
+`external_calls_approved=false`, `credential_storage_approved=false`,
+`token_storage_approved=false`, and `sandbox_execution_approved=false`.
+The lock is enforced by `./scripts/platform-integration-no-go-regression.sh`.
