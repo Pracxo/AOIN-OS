@@ -40,3 +40,8 @@ catalog. These actions expose boundary, lifecycle, authorization, readiness,
 redaction-preview, and status evidence only. They do not grant credential
 storage, token storage, secret material access, external identity runtime, or
 connector runtime credential access.
+## AION-114 Release Gate Input
+
+The connector policy catalog is required release evidence. Runtime allow paths,
+external calls, credential/token access, sandbox execution, activation, and
+route registration remain denied until a future ADR changes the boundary.

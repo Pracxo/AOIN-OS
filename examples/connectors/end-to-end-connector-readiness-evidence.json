@@ -1,0 +1,63 @@
+{
+  "synthetic": true,
+  "status": "passed",
+  "evidence_id": "end-to-end-connector-readiness-aion-114",
+  "connector_runtime_enabled": false,
+  "external_calls_enabled": false,
+  "credentials_present": false,
+  "token_storage_enabled": false,
+  "sandbox_execution_enabled": false,
+  "connector_activation_enabled": false,
+  "route_registration_enabled": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "implementation_approved": false,
+  "provider_sdk_dependency_added": false,
+  "api_runtime_execution_route_added": false,
+  "endpoint_references_present": false,
+  "evidence": [
+    {
+      "area": "connector boundary",
+      "artifact": "docs/connectors/external-connector-boundary-design.md",
+      "expected_safe_value": "design-only",
+      "release_blocker": true
+    },
+    {
+      "area": "disabled runtime",
+      "artifact": "docs/connectors/connector-runtime-disabled-proof.md",
+      "expected_safe_value": "runtime disabled",
+      "release_blocker": true
+    },
+    {
+      "area": "runtime review",
+      "artifact": "docs/connectors/connector-runtime-review-gate.md",
+      "expected_safe_value": "review gate passed",
+      "release_blocker": true
+    },
+    {
+      "area": "dry-run simulator",
+      "artifact": "docs/connectors/connector-dry-run-simulator.md",
+      "expected_safe_value": "synthetic only",
+      "release_blocker": true
+    },
+    {
+      "area": "policy catalog",
+      "artifact": "docs/connectors/connector-policy-action-catalog.md",
+      "expected_safe_value": "runtime paths denied",
+      "release_blocker": true
+    },
+    {
+      "area": "sandbox design",
+      "artifact": "docs/connectors/connector-sandbox-design.md",
+      "expected_safe_value": "execution absent",
+      "release_blocker": true
+    },
+    {
+      "area": "credential architecture",
+      "artifact": "docs/connectors/connector-credential-store-architecture.md",
+      "expected_safe_value": "storage absent",
+      "release_blocker": true
+    }
+  ],
+  "created_at": "2026-06-30T00:00:00Z"
+}

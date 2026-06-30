@@ -1821,3 +1821,8 @@ AION-113 registers only connector credential read/preview actions: boundary
 read, lifecycle read, authorization read, readiness preview, redaction preview,
 and status read. Future credential, token, OAuth/OIDC/SAML, and external
 identity actions remain denied by the connector credential denial service.
+AION-114 connector release gate policy: connector implementation remains denied
+until a future ADR explicitly approves runtime scope and the release gate
+evidence remains green. Policy runtime allow paths, external calls, storage
+material access, sandbox execution, activation, and route registration are
+release blockers.

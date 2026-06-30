@@ -1759,3 +1759,7 @@ AION-113 adds `ConnectorCredentialBoundary`,
 and `ConnectorSecretRedactionResult`. The public routes expose boundary,
 lifecycle, authorization, readiness, redaction preview, query, and status
 evidence only.
+AION-114 adds connector release gate evidence documents and JSON examples only.
+It does not add Brain API routers, SDK resources, CLI command implementations,
+runtime config defaults, migrations, connector execution, external calls,
+credential/token storage, or sandbox execution.

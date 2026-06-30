@@ -99,3 +99,10 @@ Credential storage, token storage, secret material, external identity runtime,
 and runtime credential access remain critical no-go risks. AION-113 adds
 checks and static evidence so these risks stay visible before any future
 implementation.
+## AION-114 Connector Release Risk
+
+Risk: treating release evidence as implementation approval.
+
+Mitigation: AION-114 keeps `implementation_approved=false` in examples and
+static console data. Future connector implementation requires a new ADR and
+green release gate evidence.

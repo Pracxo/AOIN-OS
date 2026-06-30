@@ -842,3 +842,14 @@ aionctl connector-credentials status
 These commands call connector credential preview APIs only. They do not expose
 credential store/read/rotate/revoke, token, OAuth, OIDC, SAML, login, bind,
 provider call, tool execute, or write execute commands.
+
+## AION-114 Connector Release Gate
+
+AION-114 adds no CLI command implementation. Use repository-local scripts for
+release evidence:
+
+```bash
+./scripts/connector-release-gate.sh
+./scripts/connector-safety-freeze.sh
+./scripts/connector-release-no-go-regression.sh
+```

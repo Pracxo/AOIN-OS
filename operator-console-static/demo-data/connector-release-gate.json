@@ -1,0 +1,95 @@
+{
+  "status": "passed",
+  "title": "Connector release gate",
+  "summary": "Consolidated connector release gate for AION-114 safe-state evidence.",
+  "read_only": true,
+  "design_only": true,
+  "redaction_applied": true,
+  "connector_runtime_enabled": false,
+  "external_calls_enabled": false,
+  "credentials_present": false,
+  "token_storage_enabled": false,
+  "sandbox_execution_enabled": false,
+  "connector_activation_enabled": false,
+  "route_registration_enabled": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "implementation_approved": false,
+  "provider_sdk_dependency_added": false,
+  "api_runtime_execution_route_added": false,
+  "endpoint_references_present": false,
+  "sections": [
+    {
+      "section_key": "runtime_disabled",
+      "title": "Runtime disabled",
+      "status": "passed"
+    },
+    {
+      "section_key": "external_calls_absent",
+      "title": "External calls absent",
+      "status": "passed"
+    },
+    {
+      "section_key": "storage_absent",
+      "title": "Storage absent",
+      "status": "passed"
+    },
+    {
+      "section_key": "sandbox_execution_absent",
+      "title": "Sandbox execution absent",
+      "status": "passed"
+    }
+  ],
+  "blockers": [
+    {
+      "blocker_type": "implementation_not_approved",
+      "severity": "critical",
+      "status": "open",
+      "reason": "future_adr_required"
+    },
+    {
+      "blocker_type": "runtime_disabled",
+      "severity": "critical",
+      "status": "open",
+      "reason": "runtime_disabled_by_design"
+    }
+  ],
+  "warnings": [
+    {
+      "code": "release_gate_is_not_runtime_enablement",
+      "status": "open"
+    }
+  ],
+  "refs": [
+    "docs/connectors/connector-release-gate.md",
+    "docs/connectors/connector-release-no-go.md",
+    "docs/adr/0105-connector-release-gate.md"
+  ],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
+  ],
+  "created_at": "2026-06-30T00:00:00Z"
+}

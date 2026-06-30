@@ -281,6 +281,10 @@ allowed_aion113_files = {
     "services/brain-api/src/aion_brain/api/connector_credentials.py",
     "services/brain-api/src/aion_brain/contracts/connector_credentials.py",
 }
+allowed_aion114_files = {
+    "operator-console-static/demo-data/connector-release-gate.json",
+    "operator-console-static/demo-data/connector-safety-freeze.json",
+}
 runtime_prefixes = (
     "services/brain-api/src/",
     "packages/aion-sdk-python/src/",
@@ -312,6 +316,7 @@ for relative in sorted(changed):
         or relative in allowed_aion111_files
         or relative in allowed_aion112_files
         or relative in allowed_aion113_files
+        or relative in allowed_aion114_files
         or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)
         or relative.startswith(allowed_aion110_prefixes)

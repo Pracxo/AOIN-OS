@@ -4238,3 +4238,20 @@ Developer command:
 ./scripts/connector-credential-check.sh
 ./scripts/connector-credential-no-go-regression.sh
 ```
+
+## AION-114 Connector Release Gate
+
+AION-114 adds the connector release gate, safety freeze, end-to-end readiness
+evidence, implementation readiness decision, static console release panels, and
+release no-go regression. Connector implementation remains unapproved:
+runtime, external calls, credentials, tokens, sandbox execution, activation,
+route registration, package files, migrations, API routes, SDK resources, and
+CLI implementations remain unchanged.
+
+Developer command:
+
+```bash
+./scripts/connector-release-gate.sh
+./scripts/connector-safety-freeze.sh
+./scripts/connector-release-no-go-regression.sh
+```

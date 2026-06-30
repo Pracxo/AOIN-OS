@@ -67,3 +67,13 @@ real sandbox execution, filesystem access, network access, credentials,
 tokens, process spawning, dynamic imports, package installation, activation,
 or runtime route registration before a later release gate explicitly changes
 scope.
+
+## AION-114 Consolidated Release Gate
+
+AION-114 adds `scripts/connector-release-gate.sh`,
+`scripts/connector-safety-freeze.sh`, and
+`scripts/connector-release-no-go-regression.sh` as the consolidated connector
+release gate. The gate keeps implementation approval false and blocks runtime
+execution, external calls, credential/token storage, sandbox execution,
+activation, route registration, package files, migrations, API routes, SDK
+resources, and CLI command implementations.

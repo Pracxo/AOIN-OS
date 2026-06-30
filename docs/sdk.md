@@ -989,3 +989,9 @@ helpers for connector policy.
 readiness, redaction preview, query, and status preview APIs. The SDK does not
 expose credential store/read/rotate/revoke, token, OAuth, login, bind,
 external-call, activation, or write helpers.
+
+## AION-114 Connector Release Gate
+
+AION-114 adds no SDK resource and no SDK command implementation. Connector
+release gate evidence is validated by repository scripts and bundled examples
+only.

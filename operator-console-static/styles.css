@@ -442,6 +442,11 @@ h1 {
   align-items: start;
 }
 
+.connector-release-row span,
+.connector-release-row strong {
+  min-width: 0;
+}
+
 .lifecycle-timeline {
   display: grid;
   gap: 12px;

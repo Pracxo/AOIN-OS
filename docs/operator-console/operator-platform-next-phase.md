@@ -106,3 +106,8 @@ readiness, and redaction preview panels. They display disabled state only and
 provide no credential input, token input, password input, key input, OAuth
 input, store button, read button, rotate button, revoke button, login button,
 connect button, or call button.
+## AION-114 Connector Release Gate
+
+The next connector phase is gated by `./scripts/connector-release-gate.sh` and
+`./scripts/connector-safety-freeze.sh`. Static operator evidence remains
+read-only and bundled; connector implementation is still unapproved.

@@ -527,3 +527,12 @@ Instructions for future Codex runs in this repository:
   credential access, external calls, frontend dependencies, package files,
   lockfiles, migrations, runtime registration, tool execution, write paths, or
   privileged bypass.
+- AION-114 connector release gate is release evidence only. It must pass
+  `./scripts/connector-release-gate.sh`,
+  `./scripts/connector-safety-freeze.sh`, and
+  `./scripts/connector-release-no-go-regression.sh`, and it must not add API
+  routers, SDK resources, CLI command implementations, runtime config defaults,
+  connector runtime enablement, external calls, credential or token storage,
+  OAuth/OIDC/SAML runtime, sandbox execution, package files, lockfiles,
+  migrations, activation, route registration, code loading, tool execution, or
+  privileged bypass.
