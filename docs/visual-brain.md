@@ -1098,3 +1098,12 @@ boundary freeze demo data. These panels are read-only evidence projections
 only; they do not emit runtime events, call external systems, store credentials
 or tokens, enable production auth, enable module activation, enable sandbox
 execution, register routes, or execute tools.
+
+## AION-118 Release Candidate Projection
+
+AION-118 adds bundled static post-v0.1 release candidate and v0.2 planning
+boundary demo data. These panels are read-only evidence projections only; they
+do not emit runtime events, create a release, create a v0.2 tag, move
+`aion-v0.1.0`, call external systems, store credentials or tokens, enable
+production auth, enable module activation, enable sandbox execution, register
+routes, execute tools, or execute write paths.

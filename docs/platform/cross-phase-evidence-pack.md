@@ -41,3 +41,11 @@ This evidence pack is a checkpoint and freeze record. It does not create
 runtime approval, does not replace future ADRs, and does not authorize any
 write path, connector path, auth path, activation path, external-call path, or
 sandbox execution path.
+
+## AION-118 Release Candidate Evidence
+
+AION-118 promotes this pack into the post-v0.1 release candidate evidence
+baseline. The baseline also requires `./scripts/post-v01-release-candidate-gate.sh`,
+`./scripts/post-v01-release-candidate-freeze.sh`, and
+`./scripts/post-v01-release-candidate-no-go-regression.sh`. The release
+candidate is not a v0.2 release and does not approve runtime implementation.

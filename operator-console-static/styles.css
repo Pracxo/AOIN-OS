@@ -450,7 +450,9 @@ h1 {
 .connector-release-row span,
 .connector-release-row strong,
 .connector-platform-row span,
-.connector-platform-row strong {
+.connector-platform-row strong,
+.release-candidate-row span,
+.release-candidate-row strong {
   min-width: 0;
 }
 

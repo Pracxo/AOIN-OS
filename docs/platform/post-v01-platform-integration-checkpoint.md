@@ -115,3 +115,12 @@ release gates. This checkpoint is not approval to implement runtime auth,
 connectors, write execution, module activation, external calls, credential
 storage, token storage, sandbox execution, package dependencies, migrations, or
 API execution routes.
+
+## AION-118 Release Candidate Follow-Up
+
+AION-118 uses this checkpoint as a required input to the post-v0.1 release
+candidate gate. The release candidate remains evidence-only: it creates no
+release, creates no v0.2 tag, does not move `aion-v0.1.0`, and keeps runtime
+implementation, external calls, credential storage, token storage, sandbox
+execution, package files, migrations, API runtime routes, SDK resources, and
+CLI implementations unapproved or absent.

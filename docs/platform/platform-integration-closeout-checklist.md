@@ -41,3 +41,16 @@ git diff --check
 
 AION-117 can close only when every item is true and all implementation approval
 booleans remain false.
+
+## AION-118 Release Candidate Closeout
+
+AION-118 adds release candidate closeout on top of this checklist:
+
+- post-v0.1 release candidate gate passed
+- release candidate freeze passed
+- release candidate no-go regression passed
+- v0.2 tag not created
+- v0.2 release not approved
+- `aion-v0.1.0` tag untouched
+
+These checks do not approve runtime implementation.

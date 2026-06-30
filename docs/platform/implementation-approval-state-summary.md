@@ -34,3 +34,9 @@ frontend_dependencies_added=false
 All implementation approvals remain false. Future implementation requires a
 separate ADR, a release gate, no-go regressions, docs, examples, tests, and
 explicit approval.
+
+## AION-118 Release Candidate Lock
+
+The AION-118 release candidate adds `v02_release_approved=false` and
+`v02_tag_created=false` to the approval lock. The release candidate gate is
+evidence only and does not change any implementation approval state.

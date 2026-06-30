@@ -265,3 +265,20 @@ Validate the integration evidence:
 ./scripts/platform-integration-freeze-check.sh
 ./scripts/platform-integration-no-go-regression.sh
 ```
+
+## AION-118 Release Candidate Panels
+
+The static console includes post-v0.1 release candidate and v0.2 planning
+boundary panels. They load bundled JSON only, keep operator write execution,
+connector implementation, production auth, module activation, external calls,
+credential storage, token storage, sandbox execution, v0.2 release approval,
+and v0.2 tag creation unapproved or false, and expose no input, package,
+migration, runtime, release, or write controls.
+
+Validate the release candidate evidence:
+
+```bash
+./scripts/post-v01-release-candidate-gate.sh
+./scripts/post-v01-release-candidate-freeze.sh
+./scripts/post-v01-release-candidate-no-go-regression.sh
+```

@@ -67,6 +67,9 @@ def test_navigation_map_and_accessibility_result_are_valid() -> None:
         "./scripts/platform-integration-checkpoint.sh",
         "./scripts/platform-integration-freeze-check.sh",
         "./scripts/platform-integration-no-go-regression.sh",
+        "./scripts/post-v01-release-candidate-gate.sh",
+        "./scripts/post-v01-release-candidate-freeze.sh",
+        "./scripts/post-v01-release-candidate-no-go-regression.sh",
         "./scripts/docs-check.sh",
     }
     assert set(nav["safe_copy_commands"]) == allowed_commands
@@ -117,6 +120,9 @@ def test_static_console_has_navigation_accessibility_and_safe_command_copy() -> 
         "./scripts/platform-integration-checkpoint.sh",
         "./scripts/platform-integration-freeze-check.sh",
         "./scripts/platform-integration-no-go-regression.sh",
+        "./scripts/post-v01-release-candidate-gate.sh",
+        "./scripts/post-v01-release-candidate-freeze.sh",
+        "./scripts/post-v01-release-candidate-no-go-regression.sh",
         "./scripts/docs-check.sh",
     }
 

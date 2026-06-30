@@ -4313,3 +4313,23 @@ Developer command:
 ./scripts/platform-integration-freeze-check.sh
 ./scripts/platform-integration-no-go-regression.sh
 ```
+
+## AION-118 Post-v0.1 Release Candidate Gate
+
+AION-118 adds the post-v0.1 release candidate gate, cross-phase freeze
+evidence, release candidate checklist, v0.2 planning boundary, implementation
+approval lock, release no-go regression, static console release candidate
+panels, ADR 0109, and repository-local release candidate scripts. It is
+release-candidate evidence only: no release is created, no v0.2 tag is
+created, `aion-v0.1.0` is not moved, runtime implementation remains
+unapproved, external calls remain absent, credentials/tokens remain absent,
+sandbox execution remains absent, and no API routes, SDK/CLI implementations,
+package files, lockfiles, migrations, or frontend dependencies are added.
+
+Developer command:
+
+```bash
+./scripts/post-v01-release-candidate-gate.sh
+./scripts/post-v01-release-candidate-freeze.sh
+./scripts/post-v01-release-candidate-no-go-regression.sh
+```

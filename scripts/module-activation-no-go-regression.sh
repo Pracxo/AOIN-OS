@@ -178,9 +178,11 @@ for relative in sorted(changed):
     if relative in {
         "operator-console-static/demo-data/platform-integration-checkpoint.json",
         "operator-console-static/demo-data/future-runtime-boundary-freeze.json",
+        "operator-console-static/demo-data/post-v01-release-candidate.json",
+        "operator-console-static/demo-data/v02-planning-boundary.json",
     }:
         text = re.sub(
-            r'\{\s*"action_key":\s*"activate_capability",\s*"reason":\s*"Disabled (?:in the platform checkpoint|by the future runtime boundary freeze)\."\s*\}',
+            r'\{\s*"action_key":\s*"activate_capability",\s*"reason":\s*"Disabled (?:in the platform checkpoint|by the future runtime boundary freeze|in the release candidate gate|by the v0\.2 planning boundary)\."\s*\}',
             "",
             text,
         )

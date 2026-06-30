@@ -894,3 +894,20 @@ The CLI surface remains preview-only. The integration checkpoint does not
 execute operator writes, execute connectors, enable production auth, activate
 modules, call external systems, store credentials, store tokens, enable sandbox
 execution, register routes, execute tools, or execute write paths.
+
+## AION-118 Release Candidate Gate
+
+AION-118 adds no CLI command implementation. Use repository-local scripts for
+post-v0.1 release candidate evidence:
+
+```bash
+./scripts/post-v01-release-candidate-gate.sh
+./scripts/post-v01-release-candidate-freeze.sh
+./scripts/post-v01-release-candidate-no-go-regression.sh
+```
+
+The CLI surface remains preview-only. The release candidate gate does not
+create releases, create v0.2 tags, execute operator writes, execute connectors,
+enable production auth, activate modules, call external systems, store
+credentials, store tokens, enable sandbox execution, register routes, execute
+tools, or execute write paths.

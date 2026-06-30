@@ -1021,3 +1021,12 @@ examples only. SDK surfaces remain preview-only and do not execute operator
 writes, execute connectors, enable production auth, activate modules, call
 external systems, store credentials, store tokens, enable sandbox execution, or
 register routes.
+
+## AION-118 Release Candidate Gate
+
+AION-118 adds no SDK resource, client method, or SDK command implementation.
+Release candidate evidence is validated by repository scripts and bundled
+examples only. SDK surfaces remain preview-only and do not create releases,
+create v0.2 tags, execute operator writes, execute connectors, enable
+production auth, activate modules, call external systems, store credentials,
+store tokens, enable sandbox execution, or register routes.

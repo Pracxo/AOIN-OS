@@ -84,3 +84,12 @@ auth, operator write execution, connector runtime implementation, module
 activation, external calls, credential storage, token storage, sandbox
 execution, package files, migrations, API routes, SDK resources, or CLI
 implementations.
+
+## AION-118 Release Candidate Gate
+
+AION-118 composes this operator stabilization runbook into the post-v0.1
+release candidate gate. Future operator implementation work must pass the
+release candidate gate and a future scoped ADR before any write execution,
+production auth, external call path, credential/token storage, sandbox
+execution, package file, migration, API route, SDK resource, CLI command, v0.2
+release, or v0.2 tag can be approved.

@@ -52,6 +52,9 @@
     "./scripts/platform-integration-checkpoint.sh",
     "./scripts/platform-integration-freeze-check.sh",
     "./scripts/platform-integration-no-go-regression.sh",
+    "./scripts/post-v01-release-candidate-gate.sh",
+    "./scripts/post-v01-release-candidate-freeze.sh",
+    "./scripts/post-v01-release-candidate-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ],
   "forbidden_surface": {

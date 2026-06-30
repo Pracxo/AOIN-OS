@@ -18,7 +18,7 @@
   var VIEW_DEMOS = {
     overview: "demo-data/overview-view-model.json",
     readiness: "demo-data/release-readiness-view-model.json",
-    release_candidate: "demo-data/release-readiness-view-model.json",
+    release_candidate: "demo-data/post-v01-release-candidate.json",
     module_lifecycle: "demo-data/module-lifecycle-dashboard.json",
     model_provider_hardening: "demo-data/provider-hardening-view-model.json",
     operator_actions: "demo-data/operator-action-preview.json",
@@ -53,6 +53,9 @@
     "./scripts/platform-integration-checkpoint.sh",
     "./scripts/platform-integration-freeze-check.sh",
     "./scripts/platform-integration-no-go-regression.sh",
+    "./scripts/post-v01-release-candidate-gate.sh",
+    "./scripts/post-v01-release-candidate-freeze.sh",
+    "./scripts/post-v01-release-candidate-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -108,6 +111,10 @@
     checkpoint: "demo-data/platform-integration-checkpoint.json",
     freeze: "demo-data/future-runtime-boundary-freeze.json"
   };
+  var RELEASE_CANDIDATE_DEMOS = {
+    candidate: "demo-data/post-v01-release-candidate.json",
+    planning_boundary: "demo-data/v02-planning-boundary.json"
+  };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
     role_filter: "demo-data/role-filtered-view-model.json"
@@ -150,6 +157,7 @@
     loadConnectorReleasePanels();
     loadConnectorPlatformPanels();
     loadPlatformIntegrationPanels();
+    loadReleaseCandidatePanels();
     loadView(state.activeView);
   });
 
@@ -628,7 +636,19 @@
       "credentials_used",
       "tokens_used",
       "credential_access_allowed",
-      "token_access_allowed"
+      "token_access_allowed",
+      "credential_storage_approved",
+      "token_storage_approved",
+      "operator_write_execution_approved",
+      "connector_implementation_approved",
+      "production_auth_approved",
+      "module_activation_approved",
+      "external_calls_approved",
+      "sandbox_execution_approved",
+      "v02_release_approved",
+      "v02_tag_created",
+      "credential_values_present",
+      "token_values_present"
     ].indexOf(normalized) !== -1) {
       return false;
     }
@@ -1548,6 +1568,66 @@
       .catch(function () {
         renderPlatformIntegrationEvidence("platform-integration-checkpoint", { status: "unavailable" });
         renderPlatformIntegrationEvidence("future-runtime-boundary-freeze", { status: "unavailable" });
+      });
+  }
+
+  function loadReleaseCandidatePanels() {
+    Promise.all([
+      fetchJson(RELEASE_CANDIDATE_DEMOS.candidate),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.planning_boundary)
+    ])
+      .then(function (payloads) {
+        renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
+        renderReleaseCandidateEvidence("v02-planning-boundary", redact(payloads[1]));
+      })
+      .catch(function () {
+        renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-planning-boundary", { status: "unavailable" });
+      });
+  }
+
+  function renderReleaseCandidateEvidence(containerId, payload) {
+    var container = document.getElementById(containerId);
+    if (!container) {
+      return;
+    }
+    container.textContent = "";
+    [
+      ["status", payload.status || "preview"],
+      ["post_v01_release_candidate_passed", String(Boolean(payload.post_v01_release_candidate_passed))],
+      ["v02_tag_created", String(Boolean(payload.v02_tag_created))],
+      ["v02_release_approved", String(Boolean(payload.v02_release_approved))],
+      ["operator_write_execution_approved", String(Boolean(payload.operator_write_execution_approved))],
+      ["connector_implementation_approved", String(Boolean(payload.connector_implementation_approved))],
+      ["production_auth_approved", String(Boolean(payload.production_auth_approved))],
+      ["module_activation_approved", String(Boolean(payload.module_activation_approved))],
+      ["external_calls_approved", String(Boolean(payload.external_calls_approved))],
+      ["credential_storage_approved", String(Boolean(payload.credential_storage_approved))],
+      ["token_storage_approved", String(Boolean(payload.token_storage_approved))],
+      ["sandbox_execution_approved", String(Boolean(payload.sandbox_execution_approved))]
+    ].forEach(function (item) {
+      var row = document.createElement("div");
+      row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row";
+      var label = document.createElement("span");
+      label.textContent = item[0];
+      var value = document.createElement("strong");
+      value.textContent = safeText(item[1] || "none");
+      row.appendChild(label);
+      row.appendChild(value);
+      container.appendChild(row);
+    });
+    (Array.isArray(payload.sections) ? payload.sections : [])
+      .slice(0, 4)
+      .forEach(function (section) {
+        var row = document.createElement("div");
+        row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row";
+        var label = document.createElement("span");
+        label.textContent = safeText(section.title || section.section_key || "section");
+        var value = document.createElement("strong");
+        value.textContent = safeText(section.status || "pending");
+        row.appendChild(label);
+        row.appendChild(value);
+        container.appendChild(row);
       });
   }
 

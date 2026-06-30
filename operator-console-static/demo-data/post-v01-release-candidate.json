@@ -1,0 +1,111 @@
+{
+  "task_id": "AION-118",
+  "view": "release_candidate",
+  "title": "Post-v0.1 Release Candidate",
+  "status": "passed",
+  "read_only": true,
+  "summary": "Release candidate evidence is frozen without creating a release, creating a v0.2 tag, or approving runtime implementation.",
+  "redaction_applied": true,
+  "post_v01_release_candidate_passed": true,
+  "release_candidate_gate_passed": true,
+  "cross_phase_freeze_evidence_passed": true,
+  "v02_tag_created": false,
+  "v02_release_approved": false,
+  "operator_write_execution_approved": false,
+  "connector_implementation_approved": false,
+  "production_auth_approved": false,
+  "module_activation_approved": false,
+  "external_calls_approved": false,
+  "credential_storage_approved": false,
+  "token_storage_approved": false,
+  "sandbox_execution_approved": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "api_runtime_execution_route_added": false,
+  "frontend_dependencies_added": false,
+  "aion_v0_1_0_touched": false,
+  "secrets_present": false,
+  "credential_values_present": false,
+  "token_values_present": false,
+  "endpoints_present": false,
+  "prompt_payloads_present": false,
+  "private_reasoning_present": false,
+  "sections": [
+    {
+      "title": "Operator Platform",
+      "status": "passed",
+      "severity": "release blocker",
+      "summary": "Operator regression and freeze evidence remain read-only.",
+      "blockers": [
+        {
+          "message": "operator write execution remains unapproved"
+        }
+      ],
+      "warnings": [],
+      "refs": [
+        "docs/operator-console/operator-platform-checkpoint.md",
+        "docs/operator-console/operator-platform-stabilization-runbook.md"
+      ]
+    },
+    {
+      "title": "Connector Platform",
+      "status": "passed",
+      "severity": "release blocker",
+      "summary": "Connector checkpoint and stabilization evidence keep runtime disabled.",
+      "blockers": [
+        {
+          "message": "connector implementation remains unapproved"
+        }
+      ],
+      "warnings": [],
+      "refs": [
+        "docs/connectors/connector-platform-checkpoint.md",
+        "docs/connectors/connector-platform-stabilization-runbook.md"
+      ]
+    },
+    {
+      "title": "v0.2 Boundary",
+      "status": "frozen",
+      "severity": "release blocker",
+      "summary": "Planning is allowed only through future ADRs and gates.",
+      "blockers": [
+        {
+          "message": "v0.2 tag creation remains blocked"
+        }
+      ],
+      "warnings": [
+        "release candidate evidence is not a release"
+      ],
+      "refs": [
+        "docs/release/v02-planning-boundary.md",
+        "docs/adr/0109-post-v01-release-candidate-gate.md"
+      ]
+    }
+  ],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "reason": "Disabled in the release candidate gate."
+    },
+    {
+      "action_key": "activate_capability",
+      "reason": "Disabled in the release candidate gate."
+    },
+    {
+      "action_key": "load_code",
+      "reason": "Disabled in the release candidate gate."
+    },
+    {
+      "action_key": "execute_tool",
+      "reason": "Disabled in the release candidate gate."
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "reason": "Disabled in the release candidate gate."
+    },
+    {
+      "action_key": "hard_delete",
+      "reason": "Disabled in the release candidate gate."
+    }
+  ]
+}

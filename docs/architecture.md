@@ -2065,3 +2065,14 @@ runtime: operator write execution, connector implementation, production auth,
 module activation, external calls, credential storage, token storage, sandbox
 execution, code loading, runtime registration, and capability activation remain
 unapproved or disabled.
+
+## AION-118 Post-v0.1 Release Candidate Boundary
+
+AION-118 adds a release candidate evidence gate above the operator, connector,
+auth, module, static console, docs, and boundary checks. The gate freezes the
+post-v0.1 evidence baseline for future v0.2 planning only. It does not create a
+release, create a v0.2 tag, move `aion-v0.1.0`, enable runtime execution,
+approve connector implementation, approve production auth, approve module
+activation, approve operator write execution, add external calls, store
+credentials or tokens, enable sandbox execution, add migrations, or add
+runtime API, SDK, or CLI implementation surfaces.

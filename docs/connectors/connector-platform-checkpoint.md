@@ -137,3 +137,11 @@ must also pass `./scripts/platform-integration-checkpoint.sh` and
 can be reviewed. Connector runtime, external calls, credentials/tokens,
 sandbox execution, activation, route registration, package files, migrations,
 tool execution, and write execution remain disabled or absent.
+
+## AION-118 Release Candidate Follow-Up
+
+AION-118 composes the connector checkpoint into the post-v0.1 release candidate
+gate. The release candidate does not approve connector implementation, external
+calls, credential/token storage, sandbox execution, activation, route
+registration, package files, migrations, API routes, SDK resources, CLI
+commands, v0.2 release, or v0.2 tag creation.
