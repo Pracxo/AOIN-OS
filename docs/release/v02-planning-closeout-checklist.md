@@ -55,3 +55,26 @@ Required scripts:
 ./scripts/v02-planning-freeze-check.sh
 ./scripts/v02-planning-stabilization-no-go-regression.sh
 ```
+
+## AION-121 Final Readiness Closeout Additions
+
+AION-121 closeout also requires:
+
+- readiness final review passing
+- readiness final freeze passing
+- readiness final no-go regression passing
+- implementation approval guard passing
+- planning phase closeout report complete
+- blocked implementation summary complete
+- ADR 0112 indexed
+- backlog implementation approval remains false
+- no v0.2 tag
+- no v0.2 release
+
+Required scripts:
+
+```bash
+./scripts/v02-readiness-final-review.sh
+./scripts/v02-readiness-final-freeze.sh
+./scripts/v02-readiness-final-no-go-regression.sh
+```

@@ -67,3 +67,10 @@ AION-119 formalizes this boundary with the v0.2 planning charter, runtime
 implementation decision framework, candidate workstream map, ADR requirements,
 gate dependency matrix, backlog intake criteria, and planning no-go regression.
 The boundary remains planning-only and implementation-unapproved.
+
+## AION-121 Final Review Boundary
+
+AION-121 closes planning review without changing this boundary. Future
+implementation remains blocked until a scoped ADR, scoped gate, security
+evidence, rollback evidence, audit/provenance evidence, operator review, and
+no-go regression explicitly approve a narrower change.

@@ -1060,3 +1060,19 @@ bundled examples only:
 SDK surfaces remain unchanged until a future explicit ADR, planning review,
 scoped gate, no-go regression, and full repository verification approve a
 narrow implementation scope.
+
+## AION-121 v0.2 Readiness Final Review
+
+AION-121 adds no SDK resource, client method, or SDK command implementation.
+v0.2 readiness final evidence is validated by repository scripts and bundled
+examples only:
+
+```bash
+./scripts/v02-readiness-final-review.sh
+./scripts/v02-readiness-final-freeze.sh
+./scripts/v02-readiness-final-no-go-regression.sh
+```
+
+SDK surfaces remain unchanged until a future explicit ADR, planning review,
+scoped gate, no-go regression, and full repository verification approve a
+narrow implementation scope.

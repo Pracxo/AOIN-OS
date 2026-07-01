@@ -1,0 +1,88 @@
+{
+  "task_id": "AION-121",
+  "view": "release_candidate",
+  "title": "v0.2 Implementation Approval Guard",
+  "status": "passed",
+  "read_only": true,
+  "summary": "Implementation approval remains locked after v0.2 planning closeout.",
+  "redaction_applied": true,
+  "v02_readiness_final_review_passed": true,
+  "v02_planning_phase_closed": true,
+  "v02_planning_stabilized": true,
+  "runtime_implementation_approved": false,
+  "backlog_implementation_items_approved": false,
+  "operator_write_execution_approved": false,
+  "connector_implementation_approved": false,
+  "production_auth_approved": false,
+  "module_activation_approved": false,
+  "external_calls_approved": false,
+  "credential_storage_approved": false,
+  "token_storage_approved": false,
+  "sandbox_execution_approved": false,
+  "v02_release_approved": false,
+  "v02_release_created": false,
+  "v02_tag_created": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "api_runtime_execution_route_added": false,
+  "frontend_dependencies_added": false,
+  "secrets_present": false,
+  "credential_values_present": false,
+  "token_values_present": false,
+  "endpoints_present": false,
+  "prompt_payloads_present": false,
+  "private_reasoning_present": false,
+  "sections": [
+    {
+      "title": "Approval Booleans",
+      "status": "all_false"
+    },
+    {
+      "title": "Backlog Items",
+      "status": "implementation_unapproved"
+    },
+    {
+      "title": "Runtime Areas",
+      "status": "blocked"
+    }
+  ],
+  "warnings": [
+    "approval guard is fail-closed"
+  ],
+  "blockers": [
+    "scoped ADR required before approval change",
+    "scoped implementation gate required before approval change",
+    "security review required before approval change"
+  ],
+  "refs": [
+    "docs/release/v02-implementation-approval-guard.md",
+    "docs/release/implementation-approval-lock.md",
+    "docs/platform/implementation-approval-state-summary.md"
+  ],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "reason": "Disabled by the v0.2 implementation approval guard."
+    },
+    {
+      "action_key": "activate_capability",
+      "reason": "Disabled by the v0.2 implementation approval guard."
+    },
+    {
+      "action_key": "load_code",
+      "reason": "Disabled by the v0.2 implementation approval guard."
+    },
+    {
+      "action_key": "execute_tool",
+      "reason": "Disabled by the v0.2 implementation approval guard."
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "reason": "Disabled by the v0.2 implementation approval guard."
+    },
+    {
+      "action_key": "hard_delete",
+      "reason": "Disabled by the v0.2 implementation approval guard."
+    }
+  ]
+}

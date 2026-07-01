@@ -13,3 +13,10 @@
 | package dependency additions | frontend dependencies, provider SDKs, connector SDKs, and package manager files are blocked | dependency approval ADR | dependency drift gate | dependency risk review, rollback, license/security review | platform owner | scoped ADR and gate pass with approval update |
 | migrations | schema changes are blocked during planning stabilization | migration ADR | migration readiness gate | migration plan, rollback plan, data safety review | data owner | scoped ADR and gate pass with approval update |
 | production UI implementation | static console remains dependency-free and read-only | production UI decision ADR | production UI gate | UI boundary, build posture, security review, rollback | UI owner | scoped ADR and gate pass with approval update |
+
+## AION-121 Final Review
+
+AION-121 keeps every blocked work item blocked during planning closeout. The
+blocked implementation summary in `docs/release/v02-blocked-implementation-summary.md`
+is the final planning review snapshot and does not approve any unblock
+condition.

@@ -184,9 +184,11 @@ for relative in sorted(changed):
         "operator-console-static/demo-data/v02-gate-dependency-matrix.json",
         "operator-console-static/demo-data/v02-planning-stabilization.json",
         "operator-console-static/demo-data/v02-implementation-readiness-scorecard.json",
+        "operator-console-static/demo-data/v02-readiness-final-review.json",
+        "operator-console-static/demo-data/v02-implementation-approval-guard.json",
     }:
         text = re.sub(
-            r'\{\s*"action_key":\s*"activate_capability",\s*"reason":\s*"Disabled (?:in the platform checkpoint|by the future runtime boundary freeze|in the release candidate gate|by the v0\.2 planning boundary|by the v0\.2 planning charter|by the v0\.2 gate dependency matrix|by the v0\.2 planning stabilization gate|by the v0\.2 readiness scorecard)\."\s*\}',
+            r'\{\s*"action_key":\s*"activate_capability",\s*"reason":\s*"Disabled (?:in the platform checkpoint|by the future runtime boundary freeze|in the release candidate gate|by the v0\.2 planning boundary|by the v0\.2 planning charter|by the v0\.2 gate dependency matrix|by the v0\.2 planning stabilization gate|by the v0\.2 readiness scorecard|by the v0\.2 readiness final review|by the v0\.2 implementation approval guard)\."\s*\}',
             "",
             text,
         )

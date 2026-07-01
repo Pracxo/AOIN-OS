@@ -115,3 +115,11 @@ governance freeze, implementation readiness scorecard, decision review
 calendar, blocked work register, and planning no-go stabilization checks.
 The stabilization layer does not approve implementation, create a v0.2 tag,
 create a release, or change any runtime boundary.
+
+## AION-121 Readiness Final Review
+
+AION-121 closes this charter for planning review purposes only with a final
+readiness review, closeout report, implementation approval guard, evidence
+matrix, blocked implementation summary, final no-go review, and final
+checklist. The final review does not approve implementation, create a v0.2 tag,
+create a release, or change any runtime boundary.

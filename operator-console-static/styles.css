@@ -454,8 +454,14 @@ h1 {
 .release-candidate-row span,
 .release-candidate-row strong,
 .v02-planning-row span,
-.v02-planning-row strong {
+.v02-planning-row strong,
+.readiness-final-row span,
+.readiness-final-row strong {
   min-width: 0;
+}
+
+.readiness-final-row strong {
+  color: var(--focus);
 }
 
 .lifecycle-timeline {

@@ -940,3 +940,18 @@ v0.2 planning stabilization evidence:
 The CLI surface remains preview-only. Future CLI implementation still requires
 planning review, an explicit ADR, scoped gate, no-go regression, and full
 repository verification.
+
+## AION-121 v0.2 Readiness Final Review
+
+AION-121 adds no CLI command implementation. Use repository-local scripts for
+v0.2 readiness final evidence:
+
+```bash
+./scripts/v02-readiness-final-review.sh
+./scripts/v02-readiness-final-freeze.sh
+./scripts/v02-readiness-final-no-go-regression.sh
+```
+
+The CLI surface remains preview-only. Future CLI implementation still requires
+planning review, an explicit ADR, scoped gate, no-go regression, and full
+repository verification.

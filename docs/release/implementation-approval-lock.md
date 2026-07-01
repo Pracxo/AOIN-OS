@@ -31,3 +31,10 @@ AION-119 adds `runtime_implementation_approved=false` and
 `v02_release_created=false` to the planning evidence. Future v0.2 backlog
 items must reference this lock and cannot change approval state without a
 future explicit ADR and gate evidence.
+
+## AION-121 Final Readiness Lock
+
+AION-121 adds `backlog_implementation_items_approved=false` to the final
+readiness guard and reaffirms every implementation approval value as false.
+The final readiness review is evidence-only and cannot be used to approve
+runtime work, a v0.2 tag, or a v0.2 release.

@@ -113,3 +113,13 @@ additional prerequisites before any module activation implementation proposal.
 Code loading, runtime registration, capability activation, package
 installation, controlled execution, external dependency download, module
 writes, and backlog implementation approval remain blocked.
+
+## AION-121 Readiness Final Review Dependency
+
+AION-121 adds the v0.2 readiness final review and blocked implementation
+summary as additional prerequisites before any module activation implementation
+proposal. Code loading, runtime registration, capability activation, package
+installation, controlled execution, external dependency download, module
+writes, and backlog implementation approval remain blocked until future scoped
+ADR, gate, security, rollback, audit/provenance, operator review, and no-go
+evidence pass.

@@ -156,3 +156,11 @@ The operator console remains static and read-only while AION-120 adds v0.2
 planning stabilization and implementation readiness scorecard panels. No
 production UI implementation, login control, write control, runtime route,
 frontend dependency, package file, or release action is added.
+
+## AION-121 v0.2 Readiness Final Review
+
+The operator console remains static and read-only while AION-121 adds v0.2
+readiness final review and implementation approval guard panels. No production
+UI implementation, login control, write control, runtime route, frontend
+dependency, package file, release action, tag action, or implementation
+approval control is added.

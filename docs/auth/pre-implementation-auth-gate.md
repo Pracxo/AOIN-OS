@@ -85,3 +85,12 @@ freeze as additional prerequisites before production auth implementation can be
 proposed. Production auth, credential storage, token storage, session
 persistence, external identity runtime, migrations, package files, and runtime
 API routes remain blocked.
+
+## AION-121 Readiness Final Review Dependency
+
+AION-121 adds the v0.2 readiness final review as an additional prerequisite
+before production auth implementation can be proposed. Production auth,
+credential storage, token storage, session persistence, external identity
+runtime, migrations, package files, and runtime API routes remain blocked until
+future scoped ADR, gate, security, rollback, audit/provenance, operator review,
+and no-go evidence pass.
