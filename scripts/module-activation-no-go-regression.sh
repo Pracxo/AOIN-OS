@@ -180,9 +180,11 @@ for relative in sorted(changed):
         "operator-console-static/demo-data/future-runtime-boundary-freeze.json",
         "operator-console-static/demo-data/post-v01-release-candidate.json",
         "operator-console-static/demo-data/v02-planning-boundary.json",
+        "operator-console-static/demo-data/v02-planning-charter.json",
+        "operator-console-static/demo-data/v02-gate-dependency-matrix.json",
     }:
         text = re.sub(
-            r'\{\s*"action_key":\s*"activate_capability",\s*"reason":\s*"Disabled (?:in the platform checkpoint|by the future runtime boundary freeze|in the release candidate gate|by the v0\.2 planning boundary)\."\s*\}',
+            r'\{\s*"action_key":\s*"activate_capability",\s*"reason":\s*"Disabled (?:in the platform checkpoint|by the future runtime boundary freeze|in the release candidate gate|by the v0\.2 planning boundary|by the v0\.2 planning charter|by the v0\.2 gate dependency matrix)\."\s*\}',
             "",
             text,
         )

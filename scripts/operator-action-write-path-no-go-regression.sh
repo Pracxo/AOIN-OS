@@ -300,6 +300,8 @@ allowed_aion117_files = {
 allowed_aion118_files = {
     "operator-console-static/demo-data/post-v01-release-candidate.json",
     "operator-console-static/demo-data/v02-planning-boundary.json",
+    "operator-console-static/demo-data/v02-planning-charter.json",
+    "operator-console-static/demo-data/v02-gate-dependency-matrix.json",
 }
 runtime_prefixes = (
     "services/brain-api/src/",

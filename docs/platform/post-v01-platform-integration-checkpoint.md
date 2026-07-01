@@ -124,3 +124,11 @@ release, creates no v0.2 tag, does not move `aion-v0.1.0`, and keeps runtime
 implementation, external calls, credential storage, token storage, sandbox
 execution, package files, migrations, API runtime routes, SDK resources, and
 CLI implementations unapproved or absent.
+
+## AION-119 Planning Charter Follow-Up
+
+AION-119 uses this checkpoint as a required prior gate for v0.2 planning. The
+planning charter does not approve production auth, operator write execution,
+connector implementation, module activation, external calls, credential
+storage, token storage, sandbox execution, package files, migrations, API
+runtime execution routes, SDK resources, or CLI implementations.

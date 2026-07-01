@@ -17,7 +17,11 @@ is_nested_gate_context() {
   return 1
 }
 
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/platform-integration-checkpoint.sh
+if is_nested_gate_context; then
+  echo "PASS: platform integration checkpoint deferred to outer aggregate gate"
+else
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/platform-integration-checkpoint.sh
+fi
 git diff --check
 
 if is_nested_gate_context; then

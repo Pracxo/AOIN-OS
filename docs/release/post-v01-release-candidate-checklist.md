@@ -34,3 +34,11 @@ git diff --check
 The release candidate can be treated as passing only when every checklist item
 is satisfied. Passing this checklist does not create a release and does not
 approve v0.2 implementation.
+
+## AION-119 Planning Closeout
+
+AION-119 extends this checklist with v0.2 planning charter evidence, runtime
+decision framework evidence, workstream mapping, ADR requirements, gate
+dependency mapping, backlog intake criteria, and planning no-go regression.
+The added planning evidence does not approve implementation or create a v0.2
+release or tag.

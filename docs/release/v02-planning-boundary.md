@@ -60,3 +60,10 @@ Planning fails closed if it changes an approval boolean to true, adds runtime
 implementation, adds external call paths, stores credentials or tokens, enables
 sandbox execution, adds package or migration drift, creates a v0.2 tag, or
 mutates `aion-v0.1.0`.
+
+## AION-119 Planning Charter
+
+AION-119 formalizes this boundary with the v0.2 planning charter, runtime
+implementation decision framework, candidate workstream map, ADR requirements,
+gate dependency matrix, backlog intake criteria, and planning no-go regression.
+The boundary remains planning-only and implementation-unapproved.

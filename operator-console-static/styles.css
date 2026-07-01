@@ -452,7 +452,9 @@ h1 {
 .connector-platform-row span,
 .connector-platform-row strong,
 .release-candidate-row span,
-.release-candidate-row strong {
+.release-candidate-row strong,
+.v02-planning-row span,
+.v02-planning-row strong {
   min-width: 0;
 }
 

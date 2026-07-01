@@ -96,3 +96,12 @@ The minimum test matrix must include:
 - no-domain-drift
 - boundary check
 - full repository health check
+
+## AION-119 Planning Charter Requirement
+
+AION-119 adds the v0.2 planning charter before any module activation
+implementation proposal. Future activation remains planning-only until a
+scoped ADR, activation gate, sandbox dependency, package trust model,
+rollback/audit evidence, operator review model, and no-go regression pass.
+Code loading, runtime registration, capability activation, package
+installation, external dependency download, and module writes remain disabled.

@@ -17,7 +17,11 @@ is_nested_gate_context() {
   return 1
 }
 
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/post-v01-release-candidate-gate.sh
+if is_nested_gate_context; then
+  echo "PASS: post-v0.1 release candidate gate deferred to outer aggregate gate"
+else
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/post-v01-release-candidate-gate.sh
+fi
 git diff --check
 
 if is_nested_gate_context; then

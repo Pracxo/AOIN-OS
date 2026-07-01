@@ -911,3 +911,17 @@ create releases, create v0.2 tags, execute operator writes, execute connectors,
 enable production auth, activate modules, call external systems, store
 credentials, store tokens, enable sandbox execution, register routes, execute
 tools, or execute write paths.
+
+## AION-119 v0.2 Planning Charter
+
+AION-119 adds no CLI command implementation. Use repository-local scripts for
+v0.2 planning evidence:
+
+```bash
+./scripts/v02-planning-charter-check.sh
+./scripts/v02-planning-no-go-regression.sh
+```
+
+The CLI surface remains preview-only. Future CLI implementation still requires
+an explicit ADR, scoped gate, no-go regression, and full repository
+verification.

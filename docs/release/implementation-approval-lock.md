@@ -24,3 +24,10 @@ ADR, implementation gate, no-go regression, and full verification evidence.
 
 The lock is evidence-only. It does not create a v0.2 tag, does not create a
 release, and does not move, delete, or recreate `aion-v0.1.0`.
+
+## AION-119 Planning Lock
+
+AION-119 adds `runtime_implementation_approved=false` and
+`v02_release_created=false` to the planning evidence. Future v0.2 backlog
+items must reference this lock and cannot change approval state without a
+future explicit ADR and gate evidence.

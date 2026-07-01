@@ -199,6 +199,8 @@ allowed = {
     "./scripts/post-v01-release-candidate-gate.sh",
     "./scripts/post-v01-release-candidate-freeze.sh",
     "./scripts/post-v01-release-candidate-no-go-regression.sh",
+    "./scripts/v02-planning-charter-check.sh",
+    "./scripts/v02-planning-no-go-regression.sh",
     "./scripts/docs-check.sh",
 }
 listed = set(nav.get("safe_copy_commands", []))

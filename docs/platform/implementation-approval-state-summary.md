@@ -40,3 +40,10 @@ explicit approval.
 The AION-118 release candidate adds `v02_release_approved=false` and
 `v02_tag_created=false` to the approval lock. The release candidate gate is
 evidence only and does not change any implementation approval state.
+
+## AION-119 Planning Approval State
+
+AION-119 adds `runtime_implementation_approved=false` and
+`v02_release_created=false` to the planning evidence. All scoped approvals
+remain false until a future ADR and implementation gate explicitly change
+scope.

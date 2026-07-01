@@ -41,3 +41,9 @@ The evidence is valid only while these values stay false:
 The freeze evidence is a release candidate baseline, not a runtime approval.
 Future v0.2 work may use this baseline for planning, but any implementation
 requires new ADRs, explicit gates, and a narrowed scope.
+
+## AION-119 Planning Freeze Dependency
+
+AION-119 treats this cross-phase freeze evidence as a prerequisite for planning
+only. Future v0.2 implementation work must add explicit ADRs and scoped gates
+before any approval state can change.

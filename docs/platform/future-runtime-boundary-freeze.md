@@ -54,3 +54,10 @@ future ADRs and gates, but implementation remains unapproved. No v0.2 tag,
 release, runtime enablement, external call path, credential/token storage,
 sandbox execution path, package file, migration, API route, SDK resource, or
 CLI command implementation is created by the release candidate gate.
+
+## AION-119 v0.2 Planning Charter
+
+AION-119 keeps this freeze active while planning future v0.2 work. The
+planning charter may define ADR and gate requirements, but it does not approve
+runtime implementation, create a release, create a v0.2 tag, or change any
+approval boolean to true.

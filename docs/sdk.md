@@ -1030,3 +1030,17 @@ examples only. SDK surfaces remain preview-only and do not create releases,
 create v0.2 tags, execute operator writes, execute connectors, enable
 production auth, activate modules, call external systems, store credentials,
 store tokens, enable sandbox execution, or register routes.
+
+## AION-119 v0.2 Planning Charter
+
+AION-119 adds no SDK resource, client method, or SDK command implementation.
+v0.2 planning evidence is validated by repository scripts and bundled examples
+only:
+
+```bash
+./scripts/v02-planning-charter-check.sh
+./scripts/v02-planning-no-go-regression.sh
+```
+
+SDK surfaces remain unchanged until a future explicit ADR and scoped gate
+approve implementation.

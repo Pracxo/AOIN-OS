@@ -88,3 +88,12 @@ write execution unapproved, production auth unapproved, module activation
 unapproved, runtime disabled, external calls absent, credentials/tokens
 absent, sandbox execution absent, activation disabled, and route registration
 disabled.
+
+## AION-119 Planning Charter Requirement
+
+AION-119 adds a v0.2 planning charter before connector implementation work.
+Future connector runtime, credential store, sandbox runtime, and external-call
+workstreams remain planning-only until scoped ADRs and implementation gates
+pass. Connector runtime, external calls, credentials/tokens, sandbox execution,
+activation, route registration, package files, and migrations remain disabled
+or absent.
