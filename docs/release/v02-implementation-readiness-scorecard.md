@@ -22,3 +22,9 @@ scores only and do not approve implementation.
 Readiness scores are advisory. A score never changes approval state. A future
 task must add an explicit ADR, scoped gate evidence, security review, rollback
 evidence, and operator review before any approval field can change.
+
+## AION-121 Readiness Final Review
+
+AION-121 carries this scorecard into planning closeout as advisory evidence
+only. The final review does not raise any readiness score into approval and
+does not approve runtime implementation or backlog implementation items.

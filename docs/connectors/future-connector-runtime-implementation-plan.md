@@ -105,3 +105,12 @@ freeze evidence. Connector runtime, external calls, connector SDK
 dependencies, credential storage, token storage, sandbox execution, activation,
 route registration, package files, migrations, and backlog implementation
 approval remain blocked until future scoped ADR and gate evidence pass.
+
+## AION-121 Readiness Final Review Dependency
+
+AION-121 keeps connector implementation unapproved at planning closeout.
+Connector runtime, external calls, connector SDK dependencies, credential
+storage, token storage, sandbox execution, activation, route registration,
+package files, migrations, and backlog implementation approval remain blocked
+until future scoped ADR, gate, security, rollback, audit/provenance, operator
+review, and no-go evidence pass.

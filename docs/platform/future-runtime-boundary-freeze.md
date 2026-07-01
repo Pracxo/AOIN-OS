@@ -69,3 +69,11 @@ governance. The stabilization gate requires platform integration freeze
 evidence and records runtime implementation, backlog implementation approval,
 external calls, credential storage, token storage, sandbox execution, v0.2 tag
 creation, and v0.2 release creation as false or absent.
+
+## AION-121 v0.2 Readiness Final Review
+
+AION-121 keeps this freeze active during planning closeout. Readiness evidence
+may describe future unblock conditions, but it does not approve runtime
+implementation, create a release, create a v0.2 tag, change any approval
+boolean to true, or add package, migration, API, SDK, or CLI implementation
+surfaces.

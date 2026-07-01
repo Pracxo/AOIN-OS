@@ -316,3 +316,21 @@ Validate the v0.2 planning stabilization evidence:
 ./scripts/v02-planning-freeze-check.sh
 ./scripts/v02-planning-stabilization-no-go-regression.sh
 ```
+
+## AION-121 v0.2 Readiness Final Review Panels
+
+The static console includes v0.2 readiness final review and implementation
+approval guard panels. They load bundled JSON only, keep runtime
+implementation, backlog implementation approval, operator write execution,
+connector implementation, production auth, module activation, external calls,
+credential storage, token storage, sandbox execution, v0.2 release creation,
+and v0.2 tag creation unapproved or false, and expose no input, package,
+migration, runtime, release, tag, approval, or write controls.
+
+Validate the v0.2 readiness final evidence:
+
+```bash
+./scripts/v02-readiness-final-review.sh
+./scripts/v02-readiness-final-freeze.sh
+./scripts/v02-readiness-final-no-go-regression.sh
+```

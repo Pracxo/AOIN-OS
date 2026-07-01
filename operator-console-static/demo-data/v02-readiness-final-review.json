@@ -1,0 +1,88 @@
+{
+  "task_id": "AION-121",
+  "view": "release_candidate",
+  "title": "v0.2 Readiness Final Review",
+  "status": "passed",
+  "read_only": true,
+  "summary": "v0.2 planning readiness review is complete without creating a tag, creating a release, or approving implementation.",
+  "redaction_applied": true,
+  "v02_readiness_final_review_passed": true,
+  "v02_planning_phase_closed": true,
+  "v02_planning_stabilized": true,
+  "v02_tag_created": false,
+  "v02_release_created": false,
+  "v02_release_approved": false,
+  "runtime_implementation_approved": false,
+  "backlog_implementation_items_approved": false,
+  "operator_write_execution_approved": false,
+  "connector_implementation_approved": false,
+  "production_auth_approved": false,
+  "module_activation_approved": false,
+  "external_calls_approved": false,
+  "credential_storage_approved": false,
+  "token_storage_approved": false,
+  "sandbox_execution_approved": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "api_runtime_execution_route_added": false,
+  "frontend_dependencies_added": false,
+  "secrets_present": false,
+  "credential_values_present": false,
+  "token_values_present": false,
+  "endpoints_present": false,
+  "prompt_payloads_present": false,
+  "private_reasoning_present": false,
+  "sections": [
+    {
+      "title": "Planning Closeout",
+      "status": "review_passed"
+    },
+    {
+      "title": "Implementation Guard",
+      "status": "locked"
+    },
+    {
+      "title": "Release Boundary",
+      "status": "tag_and_release_blocked"
+    }
+  ],
+  "warnings": [
+    "readiness review is not implementation approval"
+  ],
+  "blockers": [
+    "future scoped ADR required before runtime implementation",
+    "future scoped gate required before backlog implementation approval",
+    "v0.2 tag and release creation remain blocked"
+  ],
+  "refs": [
+    "docs/release/v02-readiness-final-review.md",
+    "docs/release/v02-readiness-evidence-matrix.md",
+    "docs/adr/0112-v02-readiness-final-review.md"
+  ],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "reason": "Disabled by the v0.2 readiness final review."
+    },
+    {
+      "action_key": "activate_capability",
+      "reason": "Disabled by the v0.2 readiness final review."
+    },
+    {
+      "action_key": "load_code",
+      "reason": "Disabled by the v0.2 readiness final review."
+    },
+    {
+      "action_key": "execute_tool",
+      "reason": "Disabled by the v0.2 readiness final review."
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "reason": "Disabled by the v0.2 readiness final review."
+    },
+    {
+      "action_key": "hard_delete",
+      "reason": "Disabled by the v0.2 readiness final review."
+    }
+  ]
+}

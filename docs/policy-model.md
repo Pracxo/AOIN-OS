@@ -1881,3 +1881,15 @@ backlog implementation approval false.
 Future v0.2 implementation work remains blocked until planning review, a scoped
 ADR, scoped gate evidence, security review, rollback evidence, audit/provenance
 evidence, operator review evidence, and no-go regression all pass.
+
+## AION-121 v0.2 Readiness Final Review Policy
+
+AION-121 adds no new policy allow path. The final readiness review closes
+planning evidence while keeping runtime implementation, backlog implementation,
+operator write execution, connector implementation, production auth, module
+activation, external calls, credential/token access, sandbox execution,
+release creation, tag creation, and privileged bypass denied.
+
+Future v0.2 implementation work remains blocked until a scoped ADR, scoped
+gate evidence, security review, rollback evidence, audit/provenance evidence,
+operator review evidence, and no-go regression all pass.

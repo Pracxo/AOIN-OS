@@ -76,3 +76,10 @@ enabled, operator write execution enabled, module activation enabled, external
 calls enabled, credential/token storage enabled, sandbox execution enabled,
 package files added, migrations added, runtime API execution routes added, or
 backlog items marked implementation-approved.
+
+## AION-121 Closeout Dependency
+
+AION-121 keeps this backlog freeze active during planning closeout. Backlog
+items remain planning-only and cannot be treated as implementation-approved
+without a future scoped ADR, scoped gate, security review, rollback evidence,
+audit/provenance evidence, operator review, and no-go regression.

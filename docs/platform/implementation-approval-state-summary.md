@@ -55,3 +55,11 @@ AION-120 adds `v02_planning_stabilized=true` and
 stabilization gate does not approve runtime implementation, external calls,
 protected-material storage, sandbox execution, v0.2 tag creation, or v0.2
 release creation.
+
+## AION-121 Final Readiness State
+
+AION-121 adds `v02_readiness_final_review_passed=true` and
+`v02_planning_phase_closed=true` to planning evidence while every
+implementation approval remains false. The final review does not approve
+runtime implementation, external calls, protected-material storage, sandbox
+execution, v0.2 tag creation, or v0.2 release creation.
