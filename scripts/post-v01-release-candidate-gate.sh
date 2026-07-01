@@ -42,19 +42,30 @@ if git tag --list | rg -n '^(v0\.2|v0\.2\.0|aion-v0\.2\.0)$'; then
   exit 1
 fi
 
+skip_downstream_gates() {
+  [[ -n "${PYTEST_CURRENT_TEST:-}" ]] && return 0
+  [[ "${AION_POST_V01_RELEASE_CANDIDATE_SKIP_DOWNSTREAM_GATES:-}" == "1" ]] && return 0
+  [[ "${AION_CHECK_RUNNING:-}" == "1" ]] && return 0
+  return 1
+}
+
 ./scripts/post-v01-release-candidate-no-go-regression.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/platform-integration-checkpoint.sh
-AION_AGGREGATE_GATE_RUNNING=1 AION_PLATFORM_INTEGRATION_FREEZE_SKIP_FULL_CHECK=1 ./scripts/platform-integration-freeze-check.sh
-./scripts/platform-integration-no-go-regression.sh
-AION_OPERATOR_PLATFORM_SKIP_FULL_CHECK=1 ./scripts/operator-platform-regression.sh
-AION_OPERATOR_PLATFORM_SKIP_FULL_CHECK=1 AION_OPERATOR_PLATFORM_FREEZE_SKIP_REGRESSION=1 ./scripts/operator-platform-freeze-gate.sh
-export AION_CONNECTOR_RUNTIME_REVIEW_SKIP_OPERATOR_FREEZE=1
-AION_AGGREGATE_GATE_RUNNING=1 AION_CONNECTOR_PLATFORM_REGRESSION_SKIP_NESTED_GATES=1 ./scripts/connector-platform-regression.sh
-AION_AGGREGATE_GATE_RUNNING=1 AION_CONNECTOR_PLATFORM_REGRESSION_SKIP_NESTED_GATES=1 ./scripts/connector-platform-stabilization-gate.sh
-./scripts/auth-prototype-review.sh
-AION_OPERATOR_PLATFORM_SKIP_FULL_CHECK=1 ./scripts/module-activation-design-review.sh
-./scripts/ui-release-gate.sh
-./scripts/static-console-safety-check.sh
+if skip_downstream_gates; then
+  echo "PASS: post-v0.1 downstream platform and runtime gates deferred to outer aggregate gate"
+else
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/platform-integration-checkpoint.sh
+  AION_AGGREGATE_GATE_RUNNING=1 AION_PLATFORM_INTEGRATION_FREEZE_SKIP_FULL_CHECK=1 ./scripts/platform-integration-freeze-check.sh
+  ./scripts/platform-integration-no-go-regression.sh
+  AION_OPERATOR_PLATFORM_SKIP_FULL_CHECK=1 ./scripts/operator-platform-regression.sh
+  AION_OPERATOR_PLATFORM_SKIP_FULL_CHECK=1 AION_OPERATOR_PLATFORM_FREEZE_SKIP_REGRESSION=1 ./scripts/operator-platform-freeze-gate.sh
+  export AION_CONNECTOR_RUNTIME_REVIEW_SKIP_OPERATOR_FREEZE=1
+  AION_AGGREGATE_GATE_RUNNING=1 AION_CONNECTOR_PLATFORM_REGRESSION_SKIP_NESTED_GATES=1 ./scripts/connector-platform-regression.sh
+  AION_AGGREGATE_GATE_RUNNING=1 AION_CONNECTOR_PLATFORM_REGRESSION_SKIP_NESTED_GATES=1 ./scripts/connector-platform-stabilization-gate.sh
+  ./scripts/auth-prototype-review.sh
+  AION_OPERATOR_PLATFORM_SKIP_FULL_CHECK=1 ./scripts/module-activation-design-review.sh
+  ./scripts/ui-release-gate.sh
+  ./scripts/static-console-safety-check.sh
+fi
 ./scripts/docs-check.sh
 ./scripts/final-docs-audit.sh
 ./scripts/verify-no-domain-drift.sh

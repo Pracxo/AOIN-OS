@@ -36,3 +36,11 @@ and policy enforcement details, it remains backlog planning only.
 
 AION-119 keeps `runtime_implementation_approved=false` and keeps all scoped
 implementation approvals false. This framework is not implementation approval.
+
+## AION-120 Stabilization Requirement
+
+After AION-120, implementation proposals must also pass the v0.2 planning
+stabilization gate and backlog governance freeze. Readiness scores remain
+planning evidence only until a scoped ADR, scoped implementation gate,
+security review, rollback evidence, audit/provenance evidence, operator review,
+and no-go regression pass.

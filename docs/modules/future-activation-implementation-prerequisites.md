@@ -105,3 +105,11 @@ scoped ADR, activation gate, sandbox dependency, package trust model,
 rollback/audit evidence, operator review model, and no-go regression pass.
 Code loading, runtime registration, capability activation, package
 installation, external dependency download, and module writes remain disabled.
+
+## AION-120 Planning Stabilization Dependency
+
+AION-120 adds the v0.2 planning stabilization gate and blocked work register as
+additional prerequisites before any module activation implementation proposal.
+Code loading, runtime registration, capability activation, package
+installation, controlled execution, external dependency download, module
+writes, and backlog implementation approval remain blocked.

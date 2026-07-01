@@ -1871,3 +1871,13 @@ approval false.
 Any future v0.2 implementation work must add a scoped ADR, policy enforcement
 model, no-go regression, audit/provenance evidence, rollback evidence, and
 operator review evidence before an allow path can be considered.
+
+## AION-120 v0.2 Planning Stabilization Policy
+
+AION-120 adds no new policy allow path. The stabilization gate freezes backlog
+governance and readiness scoring while keeping runtime implementation and
+backlog implementation approval false.
+
+Future v0.2 implementation work remains blocked until planning review, a scoped
+ADR, scoped gate evidence, security review, rollback evidence, audit/provenance
+evidence, operator review evidence, and no-go regression all pass.

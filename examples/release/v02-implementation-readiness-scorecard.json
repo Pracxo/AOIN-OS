@@ -1,0 +1,100 @@
+{
+  "task_id": "AION-120",
+  "artifact": "v02_implementation_readiness_scorecard",
+  "synthetic": true,
+  "status": "passed",
+  "v02_planning_stabilized": true,
+  "v02_tag_created": false,
+  "v02_release_created": false,
+  "v02_release_approved": false,
+  "runtime_implementation_approved": false,
+  "operator_write_execution_approved": false,
+  "connector_implementation_approved": false,
+  "production_auth_approved": false,
+  "module_activation_approved": false,
+  "external_calls_approved": false,
+  "credential_storage_approved": false,
+  "token_storage_approved": false,
+  "sandbox_execution_approved": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "backlog_implementation_items_approved": false,
+  "api_runtime_execution_route_added": false,
+  "sdk_resource_implementation_added": false,
+  "cli_command_implementation_added": false,
+  "frontend_dependencies_added": false,
+  "secrets_present": false,
+  "credential_values_present": false,
+  "token_values_present": false,
+  "endpoints_present": false,
+  "prompt_payloads_present": false,
+  "private_reasoning_present": false,
+  "scorecard": [
+    {
+      "area": "production auth",
+      "approval_state": false,
+      "readiness_score": 2,
+      "blocker": "scoped ADR and gate evidence absent"
+    },
+    {
+      "area": "operator write execution",
+      "approval_state": false,
+      "readiness_score": 2,
+      "blocker": "write execution gate absent"
+    },
+    {
+      "area": "connector runtime",
+      "approval_state": false,
+      "readiness_score": 2,
+      "blocker": "connector runtime gate absent"
+    },
+    {
+      "area": "credential store",
+      "approval_state": false,
+      "readiness_score": 1,
+      "blocker": "protected material gate absent"
+    },
+    {
+      "area": "sandbox runtime",
+      "approval_state": false,
+      "readiness_score": 1,
+      "blocker": "sandbox isolation gate absent"
+    },
+    {
+      "area": "module activation",
+      "approval_state": false,
+      "readiness_score": 2,
+      "blocker": "activation gate absent"
+    },
+    {
+      "area": "external calls",
+      "approval_state": false,
+      "readiness_score": 1,
+      "blocker": "egress gate absent"
+    },
+    {
+      "area": "runtime route registration",
+      "approval_state": false,
+      "readiness_score": 1,
+      "blocker": "route registration gate absent"
+    },
+    {
+      "area": "audit/provenance",
+      "approval_state": false,
+      "readiness_score": 3,
+      "blocker": "scoped event evidence absent"
+    },
+    {
+      "area": "rollback",
+      "approval_state": false,
+      "readiness_score": 2,
+      "blocker": "scoped rollback evidence absent"
+    },
+    {
+      "area": "production UI decision",
+      "approval_state": false,
+      "readiness_score": 2,
+      "blocker": "production UI ADR absent"
+    }
+  ]
+}

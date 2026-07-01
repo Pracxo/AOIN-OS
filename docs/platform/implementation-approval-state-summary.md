@@ -47,3 +47,11 @@ AION-119 adds `runtime_implementation_approved=false` and
 `v02_release_created=false` to the planning evidence. All scoped approvals
 remain false until a future ADR and implementation gate explicitly change
 scope.
+
+## AION-120 Planning Stabilization State
+
+AION-120 adds `v02_planning_stabilized=true` and
+`backlog_implementation_items_approved=false` to the planning evidence. The
+stabilization gate does not approve runtime implementation, external calls,
+protected-material storage, sandbox execution, v0.2 tag creation, or v0.2
+release creation.

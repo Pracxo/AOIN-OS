@@ -925,3 +925,18 @@ v0.2 planning evidence:
 The CLI surface remains preview-only. Future CLI implementation still requires
 an explicit ADR, scoped gate, no-go regression, and full repository
 verification.
+
+## AION-120 v0.2 Planning Stabilization Gate
+
+AION-120 adds no CLI command implementation. Use repository-local scripts for
+v0.2 planning stabilization evidence:
+
+```bash
+./scripts/v02-planning-stabilization-gate.sh
+./scripts/v02-planning-freeze-check.sh
+./scripts/v02-planning-stabilization-no-go-regression.sh
+```
+
+The CLI surface remains preview-only. Future CLI implementation still requires
+planning review, an explicit ADR, scoped gate, no-go regression, and full
+repository verification.

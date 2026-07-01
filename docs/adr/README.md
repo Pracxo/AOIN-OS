@@ -120,3 +120,4 @@ closure decision in ADR 0072.
 - [0108: Post-v0.1 Platform Integration Checkpoint](0108-post-v01-platform-integration-checkpoint.md) - Adds the operator and connector platform integration checkpoint while keeping future runtime implementation unapproved.
 - [0109: Post-v0.1 Release Candidate Gate](0109-post-v01-release-candidate-gate.md) - Adds the post-v0.1 release candidate evidence gate, v0.2 planning boundary, and approval lock without creating a v0.2 release or tag.
 - [0110: v0.2 Planning Charter](0110-v02-planning-charter.md) - Adds the v0.2 planning charter, runtime implementation decision framework, workstream map, ADR requirements, and gate dependency matrix without approving implementation.
+- [0111: v0.2 Planning Stabilization Gate](0111-v02-planning-stabilization-gate.md) - Freezes v0.2 planning governance, backlog intake, readiness scoring, blocked work, and planning no-go checks without approving implementation.

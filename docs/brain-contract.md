@@ -1813,3 +1813,17 @@ It adds no Brain API contract, router, SDK resource, CLI command
 implementation, runtime config default, migration, connector runtime,
 production auth runtime, operator write execution, module activation, external
 call path, credential storage, token storage, or sandbox execution.
+
+## AION-120 v0.2 Planning Stabilization Contracts
+
+AION-120 adds planning stabilization evidence contracts only: stabilization
+gate examples, backlog governance freeze examples, implementation readiness
+scorecard examples, planning evidence pack examples, blocked work register
+examples, static console planning stabilization data, and local planning freeze
+scripts.
+
+It adds no Brain API contract, router, SDK resource, CLI command
+implementation, runtime config default, migration, connector runtime,
+production auth runtime, operator write execution, module activation, external
+call path, credential storage, token storage, sandbox execution, backlog
+implementation approval, v0.2 tag, or v0.2 release.

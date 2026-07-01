@@ -298,3 +298,21 @@ Validate the v0.2 planning evidence:
 ./scripts/v02-planning-charter-check.sh
 ./scripts/v02-planning-no-go-regression.sh
 ```
+
+## AION-120 v0.2 Planning Stabilization Panels
+
+The static console includes v0.2 planning stabilization and implementation
+readiness scorecard panels. They load bundled JSON only, keep runtime
+implementation, backlog implementation approval, operator write execution,
+connector implementation, production auth, module activation, external calls,
+credential storage, token storage, sandbox execution, v0.2 release creation,
+and v0.2 tag creation unapproved or false, and expose no input, package,
+migration, runtime, release, or write controls.
+
+Validate the v0.2 planning stabilization evidence:
+
+```bash
+./scripts/v02-planning-stabilization-gate.sh
+./scripts/v02-planning-freeze-check.sh
+./scripts/v02-planning-stabilization-no-go-regression.sh
+```

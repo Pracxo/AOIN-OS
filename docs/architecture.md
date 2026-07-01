@@ -2089,3 +2089,17 @@ execution, connector runtime, module activation, external calls, credential
 storage, token storage, sandbox execution, API runtime execution routes, SDK
 resources, CLI implementations, package files, and migrations remain
 unapproved, disabled, or absent.
+
+## AION-120 v0.2 Planning Stabilization Boundary
+
+AION-120 adds a planning stabilization gate above the AION-119 planning
+charter. It freezes backlog governance, readiness scoring, decision review,
+blocked work registration, and no-go stabilization before any v0.2
+implementation proposal can be accepted.
+
+The architecture remains unchanged at runtime: implementation approval,
+backlog implementation approval, production auth, operator write execution,
+connector runtime, module activation, external calls, credential storage,
+token storage, sandbox execution, API runtime execution routes, SDK resources,
+CLI implementations, package files, migrations, v0.2 tag creation, and v0.2
+release creation remain false, disabled, or absent.

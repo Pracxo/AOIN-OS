@@ -97,3 +97,11 @@ workstreams remain planning-only until scoped ADRs and implementation gates
 pass. Connector runtime, external calls, credentials/tokens, sandbox execution,
 activation, route registration, package files, and migrations remain disabled
 or absent.
+
+## AION-120 Planning Stabilization Dependency
+
+AION-120 keeps connector implementation unapproved and adds backlog governance
+freeze evidence. Connector runtime, external calls, connector SDK
+dependencies, credential storage, token storage, sandbox execution, activation,
+route registration, package files, migrations, and backlog implementation
+approval remain blocked until future scoped ADR and gate evidence pass.

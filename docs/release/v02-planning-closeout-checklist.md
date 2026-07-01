@@ -32,3 +32,26 @@ This checklist defines the AION-119 planning closeout state.
 AION-119 can close only when all checklist items are true and
 `./scripts/v02-planning-charter-check.sh` plus
 `./scripts/v02-planning-no-go-regression.sh` pass.
+
+## AION-120 Stabilization Closeout Additions
+
+AION-120 closeout also requires:
+
+- planning stabilization gate passing
+- planning freeze check passing
+- planning stabilization no-go regression passing
+- backlog governance freeze complete
+- implementation readiness scorecard complete
+- blocked work register complete
+- ADR 0111 indexed
+- backlog implementation approval remains false
+- no v0.2 tag
+- no v0.2 release
+
+Required scripts:
+
+```bash
+./scripts/v02-planning-stabilization-gate.sh
+./scripts/v02-planning-freeze-check.sh
+./scripts/v02-planning-stabilization-no-go-regression.sh
+```

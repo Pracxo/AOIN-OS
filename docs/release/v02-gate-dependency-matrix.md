@@ -22,3 +22,10 @@ new gates, ADR dependencies, approval state, blockers, and release blockers.
 
 If any workstream changes from planning-only to implementation without its ADR
 and gates passing, the release is blocked.
+
+## AION-120 Stabilization Gate Dependency
+
+The v0.2 planning stabilization gate becomes a required prior gate for every
+future v0.2 implementation proposal. The backlog governance freeze and
+planning stabilization no-go regression must pass before any scoped
+implementation gate can be considered.

@@ -31,3 +31,10 @@ rollback evidence, policy enforcement evidence, and full repository checks.
 This map does not create a v0.2 tag, create a release, enable runtime code,
 approve implementation, call external services, store protected material, or
 enable sandbox execution.
+
+## AION-120 Stabilization Overlay
+
+AION-120 freezes this map as backlog planning evidence. Each workstream must
+appear in the blocked work register, have a decision review path, and keep
+implementation approval false until future scoped ADR and gate evidence
+explicitly changes the state.

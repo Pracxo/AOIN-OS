@@ -42,3 +42,10 @@ implementation remains unapproved.
 If a no-go condition is detected, remove the implementation drift, restore the
 planning-only boundary, rerun `./scripts/v02-planning-no-go-regression.sh`, and
 rerun `./scripts/v02-planning-charter-check.sh`.
+
+## AION-120 Stabilization No-Go Additions
+
+AION-120 adds backlog implementation approval set true as an explicit no-go
+condition and adds `./scripts/v02-planning-stabilization-no-go-regression.sh`
+as the stabilization regression check. Backlog implementation approval remains
+false until a future scoped ADR and gate explicitly approve a narrower change.

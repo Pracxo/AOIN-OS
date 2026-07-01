@@ -580,3 +580,15 @@ Instructions for future Codex runs in this repository:
   sandbox execution, package files, lockfiles, migrations, route registration,
   code loading, tool execution, hard delete, implementation approval, or
   privileged bypass.
+- AION-120 v0.2 planning stabilization is governance/freeze evidence only. It
+  must pass `./scripts/v02-planning-stabilization-gate.sh`,
+  `./scripts/v02-planning-freeze-check.sh`, and
+  `./scripts/v02-planning-stabilization-no-go-regression.sh`, and it must not
+  add API routers, SDK resources, CLI command implementations, runtime config
+  defaults, connector runtime enablement, operator write execution, production
+  auth, module activation, external calls, network clients, connector/provider
+  SDK dependencies, credential or token storage, OAuth/OIDC/SAML runtime,
+  sandbox execution, package files, lockfiles, migrations, runtime route
+  registration, code loading, tool execution, hard delete, backlog
+  implementation approval, v0.2 tag creation, v0.2 release creation, or
+  privileged bypass.

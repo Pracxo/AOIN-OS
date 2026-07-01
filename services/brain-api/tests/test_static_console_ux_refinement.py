@@ -72,6 +72,9 @@ def test_navigation_map_and_accessibility_result_are_valid() -> None:
         "./scripts/post-v01-release-candidate-no-go-regression.sh",
         "./scripts/v02-planning-charter-check.sh",
         "./scripts/v02-planning-no-go-regression.sh",
+        "./scripts/v02-planning-stabilization-gate.sh",
+        "./scripts/v02-planning-freeze-check.sh",
+        "./scripts/v02-planning-stabilization-no-go-regression.sh",
         "./scripts/docs-check.sh",
     }
     assert set(nav["safe_copy_commands"]) == allowed_commands
@@ -127,6 +130,9 @@ def test_static_console_has_navigation_accessibility_and_safe_command_copy() -> 
         "./scripts/post-v01-release-candidate-no-go-regression.sh",
         "./scripts/v02-planning-charter-check.sh",
         "./scripts/v02-planning-no-go-regression.sh",
+        "./scripts/v02-planning-stabilization-gate.sh",
+        "./scripts/v02-planning-freeze-check.sh",
+        "./scripts/v02-planning-stabilization-no-go-regression.sh",
         "./scripts/docs-check.sh",
     }
 
