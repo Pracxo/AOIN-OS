@@ -58,6 +58,9 @@
     "./scripts/post-v01-release-candidate-no-go-regression.sh",
     "./scripts/v02-planning-charter-check.sh",
     "./scripts/v02-planning-no-go-regression.sh",
+    "./scripts/v02-planning-stabilization-gate.sh",
+    "./scripts/v02-planning-freeze-check.sh",
+    "./scripts/v02-planning-stabilization-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -117,7 +120,9 @@
     candidate: "demo-data/post-v01-release-candidate.json",
     planning_boundary: "demo-data/v02-planning-boundary.json",
     planning_charter: "demo-data/v02-planning-charter.json",
-    gate_dependency_matrix: "demo-data/v02-gate-dependency-matrix.json"
+    gate_dependency_matrix: "demo-data/v02-gate-dependency-matrix.json",
+    planning_stabilization: "demo-data/v02-planning-stabilization.json",
+    implementation_readiness_scorecard: "demo-data/v02-implementation-readiness-scorecard.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1582,19 +1587,25 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.candidate),
       fetchJson(RELEASE_CANDIDATE_DEMOS.planning_boundary),
       fetchJson(RELEASE_CANDIDATE_DEMOS.planning_charter),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.gate_dependency_matrix)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.gate_dependency_matrix),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.planning_stabilization),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_readiness_scorecard)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
         renderReleaseCandidateEvidence("v02-planning-boundary", redact(payloads[1]));
         renderReleaseCandidateEvidence("v02-planning-charter", redact(payloads[2]));
         renderReleaseCandidateEvidence("v02-gate-dependency-matrix", redact(payloads[3]));
+        renderReleaseCandidateEvidence("v02-planning-stabilization", redact(payloads[4]));
+        renderReleaseCandidateEvidence("v02-implementation-readiness-scorecard", redact(payloads[5]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-planning-boundary", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-planning-charter", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-gate-dependency-matrix", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-planning-stabilization", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-implementation-readiness-scorecard", { status: "unavailable" });
       });
   }
 
@@ -1608,10 +1619,12 @@
       ["status", payload.status || "preview"],
       ["post_v01_release_candidate_passed", String(Boolean(payload.post_v01_release_candidate_passed))],
       ["v02_planning_charter_created", String(Boolean(payload.v02_planning_charter_created))],
+      ["v02_planning_stabilized", String(Boolean(payload.v02_planning_stabilized))],
       ["v02_tag_created", String(Boolean(payload.v02_tag_created))],
       ["v02_release_created", String(Boolean(payload.v02_release_created))],
       ["v02_release_approved", String(Boolean(payload.v02_release_approved))],
       ["runtime_implementation_approved", String(Boolean(payload.runtime_implementation_approved))],
+      ["backlog_implementation_items_approved", String(Boolean(payload.backlog_implementation_items_approved))],
       ["operator_write_execution_approved", String(Boolean(payload.operator_write_execution_approved))],
       ["connector_implementation_approved", String(Boolean(payload.connector_implementation_approved))],
       ["production_auth_approved", String(Boolean(payload.production_auth_approved))],

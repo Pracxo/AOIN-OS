@@ -61,3 +61,11 @@ AION-119 keeps this freeze active while planning future v0.2 work. The
 planning charter may define ADR and gate requirements, but it does not approve
 runtime implementation, create a release, create a v0.2 tag, or change any
 approval boolean to true.
+
+## AION-120 v0.2 Planning Stabilization
+
+AION-120 keeps this freeze active while stabilizing planning and backlog
+governance. The stabilization gate requires platform integration freeze
+evidence and records runtime implementation, backlog implementation approval,
+external calls, credential storage, token storage, sandbox execution, v0.2 tag
+creation, and v0.2 release creation as false or absent.

@@ -1044,3 +1044,19 @@ only:
 
 SDK surfaces remain unchanged until a future explicit ADR and scoped gate
 approve implementation.
+
+## AION-120 v0.2 Planning Stabilization Gate
+
+AION-120 adds no SDK resource, client method, or SDK command implementation.
+v0.2 planning stabilization evidence is validated by repository scripts and
+bundled examples only:
+
+```bash
+./scripts/v02-planning-stabilization-gate.sh
+./scripts/v02-planning-freeze-check.sh
+./scripts/v02-planning-stabilization-no-go-regression.sh
+```
+
+SDK surfaces remain unchanged until a future explicit ADR, planning review,
+scoped gate, no-go regression, and full repository verification approve a
+narrow implementation scope.

@@ -201,6 +201,9 @@ allowed = {
     "./scripts/post-v01-release-candidate-no-go-regression.sh",
     "./scripts/v02-planning-charter-check.sh",
     "./scripts/v02-planning-no-go-regression.sh",
+    "./scripts/v02-planning-stabilization-gate.sh",
+    "./scripts/v02-planning-freeze-check.sh",
+    "./scripts/v02-planning-stabilization-no-go-regression.sh",
     "./scripts/docs-check.sh",
 }
 listed = set(nav.get("safe_copy_commands", []))

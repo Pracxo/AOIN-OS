@@ -48,3 +48,11 @@ isolation evidence, or creates a v0.2 tag or release before release approval.
 
 All v0.2 implementation ADRs are required in the future and none is approved by
 AION-119.
+
+## AION-120 ADR Stabilization Requirement
+
+AION-120 adds ADR 0111 for the planning stabilization gate. Future
+implementation ADRs must reference the stabilization gate, backlog governance
+freeze, blocked work register, readiness scorecard, security review,
+rollback/audit requirements, operator review, and no-go regression evidence
+before any approval field can change.

@@ -107,3 +107,11 @@ planning gates pass.
 
 AION-119 explicitly creates no v0.2 tag. It creates no release and does not
 mutate the v0.1 release baseline.
+
+## AION-120 Stabilization
+
+AION-120 stabilizes this charter with a planning stabilization gate, backlog
+governance freeze, implementation readiness scorecard, decision review
+calendar, blocked work register, and planning no-go stabilization checks.
+The stabilization layer does not approve implementation, create a v0.2 tag,
+create a release, or change any runtime boundary.

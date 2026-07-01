@@ -141,3 +141,11 @@ and backlog intake criteria, but it does not create a v0.2 tag, create a
 release, approve runtime implementation, enable external calls, store
 credentials or tokens, enable sandbox execution, add package files, or add
 migrations.
+
+## AION-120 Planning Stabilization Follow-Up
+
+AION-120 uses this release candidate gate as required evidence for the v0.2
+planning stabilization gate and freeze check. The stabilization layer still
+does not create a v0.2 tag, create a release, approve runtime implementation,
+approve backlog implementation, enable external calls, store credentials or
+tokens, enable sandbox execution, add package files, or add migrations.

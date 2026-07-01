@@ -1116,3 +1116,12 @@ emit runtime events, create a release, create a v0.2 tag, call external
 systems, store credentials or tokens, enable production auth, enable module
 activation, enable sandbox execution, register routes, execute tools, or
 execute write paths.
+
+## AION-120 v0.2 Planning Stabilization Projection
+
+AION-120 adds bundled static v0.2 planning stabilization and implementation
+readiness scorecard demo data. These panels are read-only evidence projections
+only; they do not emit runtime events, approve backlog implementation, create a
+release, create a v0.2 tag, call external systems, store credentials or tokens,
+enable production auth, enable module activation, enable sandbox execution,
+register routes, execute tools, or execute write paths.

@@ -1,0 +1,89 @@
+{
+  "task_id": "AION-120",
+  "view": "release_candidate",
+  "title": "v0.2 Implementation Readiness Scorecard",
+  "status": "passed",
+  "read_only": true,
+  "summary": "Implementation readiness is scored for planning only. All approval states remain false.",
+  "redaction_applied": true,
+  "v02_planning_stabilized": true,
+  "v02_tag_created": false,
+  "v02_release_created": false,
+  "v02_release_approved": false,
+  "runtime_implementation_approved": false,
+  "operator_write_execution_approved": false,
+  "connector_implementation_approved": false,
+  "production_auth_approved": false,
+  "module_activation_approved": false,
+  "external_calls_approved": false,
+  "credential_storage_approved": false,
+  "token_storage_approved": false,
+  "sandbox_execution_approved": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "backlog_implementation_items_approved": false,
+  "api_runtime_execution_route_added": false,
+  "frontend_dependencies_added": false,
+  "secrets_present": false,
+  "credential_values_present": false,
+  "token_values_present": false,
+  "endpoints_present": false,
+  "prompt_payloads_present": false,
+  "private_reasoning_present": false,
+  "sections": [
+    {
+      "title": "Production Auth",
+      "status": "unapproved"
+    },
+    {
+      "title": "Connector Runtime",
+      "status": "unapproved"
+    },
+    {
+      "title": "Operator Write Execution",
+      "status": "unapproved"
+    },
+    {
+      "title": "Sandbox Runtime",
+      "status": "unapproved"
+    }
+  ],
+  "warnings": [
+    "readiness score is advisory planning evidence only"
+  ],
+  "blockers": [
+    "future scoped ADR required before implementation",
+    "future scoped gate required before approval booleans can change",
+    "backlog implementation approval remains false"
+  ],
+  "refs": [
+    "docs/release/v02-implementation-readiness-scorecard.md",
+    "docs/release/v02-blocked-work-register.md"
+  ],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "reason": "Disabled by the v0.2 readiness scorecard."
+    },
+    {
+      "action_key": "activate_capability",
+      "reason": "Disabled by the v0.2 readiness scorecard."
+    },
+    {
+      "action_key": "load_code",
+      "reason": "Disabled by the v0.2 readiness scorecard."
+    },
+    {
+      "action_key": "execute_tool",
+      "reason": "Disabled by the v0.2 readiness scorecard."
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "reason": "Disabled by the v0.2 readiness scorecard."
+    },
+    {
+      "action_key": "hard_delete",
+      "reason": "Disabled by the v0.2 readiness scorecard."
+    }
+  ]
+}

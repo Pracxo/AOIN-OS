@@ -4351,3 +4351,24 @@ Developer command:
 ./scripts/v02-planning-charter-check.sh
 ./scripts/v02-planning-no-go-regression.sh
 ```
+
+## AION-120 v0.2 Planning Stabilization Gate
+
+AION-120 stabilizes the v0.2 planning charter and freezes backlog governance
+before implementation work can be accepted. It adds the planning stabilization
+gate, backlog governance freeze, implementation readiness scorecard, evidence
+pack, decision review calendar, blocked work register, ADR 0111, static console
+planning stabilization panels, and repository-local planning freeze checks. It
+is planning stabilization only: runtime implementation and backlog
+implementation approval remain false, no v0.2 release or tag is created,
+external calls remain absent, credentials and tokens remain absent, sandbox
+execution remains absent, package files remain absent, and migrations remain
+absent.
+
+Developer command:
+
+```bash
+./scripts/v02-planning-stabilization-gate.sh
+./scripts/v02-planning-freeze-check.sh
+./scripts/v02-planning-stabilization-no-go-regression.sh
+```

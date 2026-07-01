@@ -71,3 +71,11 @@ enable runtime behavior, add package or migration drift, add runtime API
 execution routes, store protected material, call external services, omit ADR or
 gate dependencies, omit rollback/audit considerations, omit security review, or
 lack an owner.
+
+## AION-120 Backlog Governance Freeze
+
+AION-120 freezes backlog intake as planning-only. Accepted items must include
+ADR mapping, gate mapping, security review requirement, rollback/audit
+requirement, owner placeholder, and no-go statement. Backlog items marked
+implementation-approved are rejected until a future scoped ADR and gate change
+the approval state.

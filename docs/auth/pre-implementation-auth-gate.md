@@ -77,3 +77,11 @@ production auth implementation can be proposed. Planning may define an ADR,
 gate, rollback, audit/provenance, operator review, and security review model,
 but production auth runtime, credentials, tokens, sessions, external identity
 runtime, package files, migrations, and runtime API routes remain blocked.
+
+## AION-120 Planning Stabilization Dependency
+
+AION-120 adds the v0.2 planning stabilization gate and backlog governance
+freeze as additional prerequisites before production auth implementation can be
+proposed. Production auth, credential storage, token storage, session
+persistence, external identity runtime, migrations, package files, and runtime
+API routes remain blocked.
