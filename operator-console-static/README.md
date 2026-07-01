@@ -282,3 +282,19 @@ Validate the release candidate evidence:
 ./scripts/post-v01-release-candidate-freeze.sh
 ./scripts/post-v01-release-candidate-no-go-regression.sh
 ```
+
+## AION-119 v0.2 Planning Panels
+
+The static console includes v0.2 planning charter and gate dependency matrix
+panels. They load bundled JSON only, keep runtime implementation, operator
+write execution, connector implementation, production auth, module activation,
+external calls, credential storage, token storage, sandbox execution, v0.2
+release creation, and v0.2 tag creation unapproved or false, and expose no
+input, package, migration, runtime, release, or write controls.
+
+Validate the v0.2 planning evidence:
+
+```bash
+./scripts/v02-planning-charter-check.sh
+./scripts/v02-planning-no-go-regression.sh
+```

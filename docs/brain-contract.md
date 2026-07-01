@@ -1801,3 +1801,15 @@ connector implementation, production auth, module activation, external calls,
 credential storage, token storage, sandbox execution, v0.2 release approval,
 v0.2 tag creation, runtime route registration, package files, and migrations
 remain unapproved, false, disabled, or absent.
+
+## AION-119 v0.2 Planning Contracts
+
+AION-119 adds planning evidence contracts only: v0.2 planning charter examples,
+runtime decision framework examples, candidate workstream map examples, gate
+dependency matrix examples, backlog intake result examples, static console
+planning data, and local planning check scripts.
+
+It adds no Brain API contract, router, SDK resource, CLI command
+implementation, runtime config default, migration, connector runtime,
+production auth runtime, operator write execution, module activation, external
+call path, credential storage, token storage, or sandbox execution.

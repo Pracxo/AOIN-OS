@@ -1,0 +1,88 @@
+{
+  "task_id": "AION-119",
+  "view": "release_candidate",
+  "title": "v0.2 Planning Charter",
+  "status": "passed",
+  "read_only": true,
+  "summary": "v0.2 planning is chartered without creating a release, creating a v0.2 tag, or approving runtime implementation.",
+  "redaction_applied": true,
+  "v02_planning_charter_created": true,
+  "v02_tag_created": false,
+  "v02_release_created": false,
+  "v02_release_approved": false,
+  "runtime_implementation_approved": false,
+  "operator_write_execution_approved": false,
+  "connector_implementation_approved": false,
+  "production_auth_approved": false,
+  "module_activation_approved": false,
+  "external_calls_approved": false,
+  "credential_storage_approved": false,
+  "token_storage_approved": false,
+  "sandbox_execution_approved": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "api_runtime_execution_route_added": false,
+  "frontend_dependencies_added": false,
+  "secrets_present": false,
+  "credential_values_present": false,
+  "token_values_present": false,
+  "endpoints_present": false,
+  "prompt_payloads_present": false,
+  "private_reasoning_present": false,
+  "sections": [
+    {
+      "title": "Planning Charter",
+      "status": "planning_only",
+      "summary": "The v0.2 planning charter is present and indexed."
+    },
+    {
+      "title": "Implementation Boundary",
+      "status": "unapproved",
+      "summary": "Runtime implementation remains blocked pending future ADRs and gates."
+    },
+    {
+      "title": "Release Boundary",
+      "status": "blocked",
+      "summary": "v0.2 tag and release creation remain blocked."
+    }
+  ],
+  "blockers": [
+    "future ADR required before runtime implementation",
+    "future gate evidence required before approval booleans can change",
+    "v0.2 release and tag creation remain blocked"
+  ],
+  "warnings": [
+    "planning charter is not implementation approval"
+  ],
+  "refs": [
+    "docs/release/v02-planning-charter.md",
+    "docs/release/v02-runtime-implementation-decision-framework.md",
+    "docs/adr/0110-v02-planning-charter.md"
+  ],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "reason": "Disabled by the v0.2 planning charter."
+    },
+    {
+      "action_key": "activate_capability",
+      "reason": "Disabled by the v0.2 planning charter."
+    },
+    {
+      "action_key": "load_code",
+      "reason": "Disabled by the v0.2 planning charter."
+    },
+    {
+      "action_key": "execute_tool",
+      "reason": "Disabled by the v0.2 planning charter."
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "reason": "Disabled by the v0.2 planning charter."
+    },
+    {
+      "action_key": "hard_delete",
+      "reason": "Disabled by the v0.2 planning charter."
+    }
+  ]
+}

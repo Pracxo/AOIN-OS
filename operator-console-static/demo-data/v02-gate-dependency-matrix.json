@@ -1,0 +1,89 @@
+{
+  "task_id": "AION-119",
+  "view": "release_candidate",
+  "title": "v0.2 Gate Dependency Matrix",
+  "status": "passed",
+  "read_only": true,
+  "summary": "Candidate v0.2 workstreams are mapped to future ADRs and gates while all implementation approvals remain false.",
+  "redaction_applied": true,
+  "v02_planning_charter_created": true,
+  "v02_tag_created": false,
+  "v02_release_created": false,
+  "v02_release_approved": false,
+  "runtime_implementation_approved": false,
+  "operator_write_execution_approved": false,
+  "connector_implementation_approved": false,
+  "production_auth_approved": false,
+  "module_activation_approved": false,
+  "external_calls_approved": false,
+  "credential_storage_approved": false,
+  "token_storage_approved": false,
+  "sandbox_execution_approved": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "api_runtime_execution_route_added": false,
+  "frontend_dependencies_added": false,
+  "secrets_present": false,
+  "credential_values_present": false,
+  "token_values_present": false,
+  "endpoints_present": false,
+  "prompt_payloads_present": false,
+  "private_reasoning_present": false,
+  "sections": [
+    {
+      "title": "Production Auth",
+      "status": "blocked_until_future_adr"
+    },
+    {
+      "title": "Connector Workstream",
+      "status": "blocked_until_future_adr"
+    },
+    {
+      "title": "Operator Write Execution",
+      "status": "blocked_until_future_adr"
+    },
+    {
+      "title": "Module Activation",
+      "status": "blocked_until_future_adr"
+    }
+  ],
+  "blockers": [
+    "scoped ADR required before workstream implementation",
+    "scoped implementation gate required before approval booleans can change",
+    "v0.2 release and tag creation remain blocked"
+  ],
+  "warnings": [
+    "gate dependency matrix is planning evidence only"
+  ],
+  "refs": [
+    "docs/release/v02-gate-dependency-matrix.md",
+    "docs/release/v02-adr-requirements.md",
+    "docs/release/v02-no-go-planning-boundary.md"
+  ],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "reason": "Disabled by the v0.2 gate dependency matrix."
+    },
+    {
+      "action_key": "activate_capability",
+      "reason": "Disabled by the v0.2 gate dependency matrix."
+    },
+    {
+      "action_key": "load_code",
+      "reason": "Disabled by the v0.2 gate dependency matrix."
+    },
+    {
+      "action_key": "execute_tool",
+      "reason": "Disabled by the v0.2 gate dependency matrix."
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "reason": "Disabled by the v0.2 gate dependency matrix."
+    },
+    {
+      "action_key": "hard_delete",
+      "reason": "Disabled by the v0.2 gate dependency matrix."
+    }
+  ]
+}

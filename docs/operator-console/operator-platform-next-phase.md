@@ -141,3 +141,11 @@ connector implementation, module activation, external calls, credential
 storage, token storage, sandbox execution, package files, migrations, API
 routes, SDK resources, and CLI implementations remain unapproved, disabled, or
 absent.
+
+## AION-119 v0.2 Planning Charter
+
+The next operator phase may enter v0.2 planning only through
+`./scripts/v02-planning-charter-check.sh` and
+`./scripts/v02-planning-no-go-regression.sh`. Operator write execution remains
+unapproved until a future ADR, write-execution gate, policy enforcement model,
+operator review model, rollback model, and audit/provenance evidence pass.

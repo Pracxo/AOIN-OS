@@ -2076,3 +2076,16 @@ approve connector implementation, approve production auth, approve module
 activation, approve operator write execution, add external calls, store
 credentials or tokens, enable sandbox execution, add migrations, or add
 runtime API, SDK, or CLI implementation surfaces.
+
+## AION-119 v0.2 Planning Charter Boundary
+
+AION-119 adds a planning-only charter above the post-v0.1 release candidate
+baseline. It defines candidate workstreams, ADR requirements, gate
+dependencies, backlog intake criteria, and no-go planning boundaries before
+any v0.2 runtime implementation can be proposed.
+
+The architecture remains unchanged at runtime: production auth, operator write
+execution, connector runtime, module activation, external calls, credential
+storage, token storage, sandbox execution, API runtime execution routes, SDK
+resources, CLI implementations, package files, and migrations remain
+unapproved, disabled, or absent.

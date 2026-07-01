@@ -132,3 +132,12 @@ implementation drift, or release approval drift.
 
 AION-118 explicitly creates no v0.2 tag. It does not create a release and does
 not mutate the v0.1 release baseline.
+
+## AION-119 Planning Charter Follow-Up
+
+AION-119 uses this release candidate gate as the required baseline for v0.2
+planning. The planning charter may describe future ADRs, gates, workstreams,
+and backlog intake criteria, but it does not create a v0.2 tag, create a
+release, approve runtime implementation, enable external calls, store
+credentials or tokens, enable sandbox execution, add package files, or add
+migrations.

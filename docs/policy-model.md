@@ -1861,3 +1861,13 @@ audit bypass, privileged bypass, connector runtime execution, operator write
 execution, production auth, module activation, external calls,
 credential/token access, sandbox execution, and v0.2 release approval remain
 no-go conditions.
+
+## AION-119 v0.2 Planning Policy
+
+AION-119 adds no new policy allow path. The v0.2 planning charter defines
+future decision criteria and gate dependencies while keeping every runtime
+approval false.
+
+Any future v0.2 implementation work must add a scoped ADR, policy enforcement
+model, no-go regression, audit/provenance evidence, rollback evidence, and
+operator review evidence before an allow path can be considered.

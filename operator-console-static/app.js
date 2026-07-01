@@ -56,6 +56,8 @@
     "./scripts/post-v01-release-candidate-gate.sh",
     "./scripts/post-v01-release-candidate-freeze.sh",
     "./scripts/post-v01-release-candidate-no-go-regression.sh",
+    "./scripts/v02-planning-charter-check.sh",
+    "./scripts/v02-planning-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -113,7 +115,9 @@
   };
   var RELEASE_CANDIDATE_DEMOS = {
     candidate: "demo-data/post-v01-release-candidate.json",
-    planning_boundary: "demo-data/v02-planning-boundary.json"
+    planning_boundary: "demo-data/v02-planning-boundary.json",
+    planning_charter: "demo-data/v02-planning-charter.json",
+    gate_dependency_matrix: "demo-data/v02-gate-dependency-matrix.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -646,7 +650,9 @@
       "external_calls_approved",
       "sandbox_execution_approved",
       "v02_release_approved",
+      "v02_release_created",
       "v02_tag_created",
+      "runtime_implementation_approved",
       "credential_values_present",
       "token_values_present"
     ].indexOf(normalized) !== -1) {
@@ -1574,15 +1580,21 @@
   function loadReleaseCandidatePanels() {
     Promise.all([
       fetchJson(RELEASE_CANDIDATE_DEMOS.candidate),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.planning_boundary)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.planning_boundary),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.planning_charter),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.gate_dependency_matrix)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
         renderReleaseCandidateEvidence("v02-planning-boundary", redact(payloads[1]));
+        renderReleaseCandidateEvidence("v02-planning-charter", redact(payloads[2]));
+        renderReleaseCandidateEvidence("v02-gate-dependency-matrix", redact(payloads[3]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-planning-boundary", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-planning-charter", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-gate-dependency-matrix", { status: "unavailable" });
       });
   }
 
@@ -1595,8 +1607,11 @@
     [
       ["status", payload.status || "preview"],
       ["post_v01_release_candidate_passed", String(Boolean(payload.post_v01_release_candidate_passed))],
+      ["v02_planning_charter_created", String(Boolean(payload.v02_planning_charter_created))],
       ["v02_tag_created", String(Boolean(payload.v02_tag_created))],
+      ["v02_release_created", String(Boolean(payload.v02_release_created))],
       ["v02_release_approved", String(Boolean(payload.v02_release_approved))],
+      ["runtime_implementation_approved", String(Boolean(payload.runtime_implementation_approved))],
       ["operator_write_execution_approved", String(Boolean(payload.operator_write_execution_approved))],
       ["connector_implementation_approved", String(Boolean(payload.connector_implementation_approved))],
       ["production_auth_approved", String(Boolean(payload.production_auth_approved))],
@@ -1607,7 +1622,7 @@
       ["sandbox_execution_approved", String(Boolean(payload.sandbox_execution_approved))]
     ].forEach(function (item) {
       var row = document.createElement("div");
-      row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row";
+      row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row";
       var label = document.createElement("span");
       label.textContent = item[0];
       var value = document.createElement("strong");
@@ -1620,7 +1635,7 @@
       .slice(0, 4)
       .forEach(function (section) {
         var row = document.createElement("div");
-        row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row";
+        row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row";
         var label = document.createElement("span");
         label.textContent = safeText(section.title || section.section_key || "section");
         var value = document.createElement("strong");

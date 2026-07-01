@@ -4333,3 +4333,21 @@ Developer command:
 ./scripts/post-v01-release-candidate-freeze.sh
 ./scripts/post-v01-release-candidate-no-go-regression.sh
 ```
+
+## AION-119 v0.2 Planning Charter
+
+AION-119 adds the v0.2 planning charter, runtime implementation decision
+framework, candidate workstream map, ADR requirements, gate dependency matrix,
+backlog intake criteria, planning closeout checklist, static console planning
+panels, ADR 0110, and repository-local planning checks. It is planning-only:
+runtime implementation remains unapproved, no v0.2 release or tag is created,
+external calls remain absent, credentials and tokens remain absent, sandbox
+execution remains absent, package files remain absent, and migrations remain
+absent.
+
+Developer command:
+
+```bash
+./scripts/v02-planning-charter-check.sh
+./scripts/v02-planning-no-go-regression.sh
+```

@@ -64,6 +64,15 @@ Instructions for future Codex runs in this repository:
   approve module activation, approve operator write execution, call external
   services, store credentials or tokens, enable sandbox execution, add package
   files, add migrations, add API runtime routes, or add SDK/CLI implementations.
+- v0.2 planning charter work is planning-only. It may add charter docs,
+  decision frameworks, workstream maps, ADR requirements, gate dependency
+  matrices, synthetic examples, static console demo data, tests, and local
+  planning scripts, but it must not approve implementation, create a release,
+  create a v0.2 tag, move `aion-v0.1.0`, enable production auth, enable
+  connector runtime, enable operator write execution, enable module activation,
+  call external services, store credentials or tokens, enable sandbox
+  execution, add package files, add migrations, add API runtime routes, or add
+  SDK/CLI implementations.
 - Do not add domain-specific connectors in Brain core.
 - Policy actions and permissions must remain generic dotted lowercase names.
 - Keep policy simulations side-effect-free; they must never execute target actions.

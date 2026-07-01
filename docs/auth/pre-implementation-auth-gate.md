@@ -69,3 +69,11 @@ evidence before any production auth implementation ADR can be reviewed.
 Production auth, login/logout behavior, session persistence, credential
 storage, token storage, external identity runtime, package files, migrations,
 and API runtime execution routes remain blocked.
+
+## AION-119 Planning Charter Requirement
+
+AION-119 adds the v0.2 planning charter as an additional prerequisite before
+production auth implementation can be proposed. Planning may define an ADR,
+gate, rollback, audit/provenance, operator review, and security review model,
+but production auth runtime, credentials, tokens, sessions, external identity
+runtime, package files, migrations, and runtime API routes remain blocked.
