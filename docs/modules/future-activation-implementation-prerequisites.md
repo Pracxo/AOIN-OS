@@ -123,3 +123,14 @@ installation, controlled execution, external dependency download, module
 writes, and backlog implementation approval remain blocked until future scoped
 ADR, gate, security, rollback, audit/provenance, operator review, and no-go
 evidence pass.
+
+## AION-122 Implementation Kickoff Boundary Dependency
+
+AION-122 adds the v0.2 implementation kickoff boundary and runtime workstream
+lock as additional prerequisites before any module activation implementation
+proposal. Code loading, runtime registration, capability activation, package
+installation, controlled execution, external dependency download, module
+writes, approval workflow bypass, ADR dependency bypass, gate dependency
+bypass, and backlog implementation approval remain blocked until future scoped
+request, approval decision record, ADR, gate, security, rollback,
+audit/provenance, operator review, and no-go evidence pass.

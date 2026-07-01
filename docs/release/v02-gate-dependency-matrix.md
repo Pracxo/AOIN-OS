@@ -29,3 +29,10 @@ The v0.2 planning stabilization gate becomes a required prior gate for every
 future v0.2 implementation proposal. The backlog governance freeze and
 planning stabilization no-go regression must pass before any scoped
 implementation gate can be considered.
+
+## AION-122 Kickoff Gate Dependency
+
+The v0.2 implementation kickoff boundary check and no-go regression become
+required prior gates for future implementation proposals. Gate dependency
+bypass remains false, and no scoped implementation gate can be considered
+without an approval decision record.

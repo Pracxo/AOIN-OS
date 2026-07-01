@@ -114,3 +114,14 @@ storage, token storage, sandbox execution, activation, route registration,
 package files, migrations, and backlog implementation approval remain blocked
 until future scoped ADR, gate, security, rollback, audit/provenance, operator
 review, and no-go evidence pass.
+
+## AION-122 Implementation Kickoff Boundary Dependency
+
+AION-122 keeps connector implementation unapproved and adds the approval
+workflow boundary that future connector runtime work must satisfy. Connector
+runtime, external calls, connector SDK dependencies, credential storage, token
+storage, sandbox execution, activation, route registration, package files,
+migrations, approval workflow bypass, ADR dependency bypass, gate dependency
+bypass, and backlog implementation approval remain blocked until future scoped
+request, approval decision record, ADR, gate, security, rollback,
+audit/provenance, operator review, and no-go evidence pass.

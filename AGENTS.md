@@ -604,3 +604,16 @@ Instructions for future Codex runs in this repository:
   registration, code loading, tool execution, hard delete, backlog
   implementation approval, v0.2 tag creation, v0.2 release creation, or
   privileged bypass.
+- AION-122 v0.2 implementation kickoff boundary is approval-workflow design
+  only. It must pass `./scripts/v02-implementation-kickoff-boundary-check.sh`,
+  `./scripts/v02-implementation-kickoff-freeze.sh`, and
+  `./scripts/v02-implementation-kickoff-no-go-regression.sh`, and it must not
+  add API routers, SDK resources, CLI command implementations, runtime config
+  defaults, connector runtime enablement, operator write execution, production
+  auth, module activation, external calls, network clients, connector/provider
+  SDK dependencies, credential or token storage, OAuth/OIDC/SAML runtime,
+  sandbox execution, package files, lockfiles, migrations, runtime route
+  registration, code loading, tool execution, hard delete, backlog
+  implementation approval, approval workflow bypass, ADR dependency bypass,
+  gate dependency bypass, v0.2 tag creation, v0.2 release creation, or
+  privileged bypass.

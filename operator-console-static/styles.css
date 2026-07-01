@@ -456,12 +456,18 @@ h1 {
 .v02-planning-row span,
 .v02-planning-row strong,
 .readiness-final-row span,
-.readiness-final-row strong {
+.readiness-final-row strong,
+.implementation-kickoff-row span,
+.implementation-kickoff-row strong {
   min-width: 0;
 }
 
 .readiness-final-row strong {
   color: var(--focus);
+}
+
+.implementation-kickoff-row strong {
+  color: var(--success);
 }
 
 .lifecycle-timeline {

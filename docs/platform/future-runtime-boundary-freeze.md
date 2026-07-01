@@ -77,3 +77,11 @@ may describe future unblock conditions, but it does not approve runtime
 implementation, create a release, create a v0.2 tag, change any approval
 boolean to true, or add package, migration, API, SDK, or CLI implementation
 surfaces.
+
+## AION-122 Implementation Kickoff Boundary
+
+AION-122 keeps this freeze active while defining future request and approval
+workflow requirements. Runtime workstream locks remain true, and implementation
+approval, backlog implementation approval, approval workflow bypass, ADR
+dependency bypass, gate dependency bypass, v0.2 tag creation, and v0.2 release
+creation remain false.

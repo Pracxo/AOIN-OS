@@ -1134,3 +1134,13 @@ they do not emit runtime events, approve backlog implementation, create a
 release, create a v0.2 tag, call external systems, store credentials or tokens,
 enable production auth, enable module activation, enable sandbox execution,
 register routes, execute tools, or execute write paths.
+
+## AION-122 v0.2 Implementation Kickoff Projection
+
+AION-122 adds bundled static v0.2 implementation kickoff boundary and runtime
+workstream lock demo data. These panels are read-only evidence projections
+only; they do not emit runtime events, approve backlog implementation, bypass
+approval workflow, bypass ADR dependency, bypass gate dependency, create a
+release, create a v0.2 tag, call external systems, store credentials or tokens,
+enable production auth, enable module activation, enable sandbox execution,
+register routes, execute tools, or execute write paths.

@@ -1893,3 +1893,18 @@ release creation, tag creation, and privileged bypass denied.
 Future v0.2 implementation work remains blocked until a scoped ADR, scoped
 gate evidence, security review, rollback evidence, audit/provenance evidence,
 operator review evidence, and no-go regression all pass.
+
+## AION-122 v0.2 Implementation Kickoff Policy
+
+AION-122 adds no new policy allow path. It defines the approval workflow that a
+future implementation task must satisfy while keeping runtime implementation,
+backlog implementation, approval workflow bypass, ADR dependency bypass, gate
+dependency bypass, operator write execution, connector implementation,
+production auth, module activation, external calls, credential/token access,
+sandbox execution, release creation, tag creation, and privileged bypass
+denied.
+
+Future v0.2 implementation work remains blocked until a scoped request,
+approval decision record, scoped ADR, scoped gate evidence, security review,
+rollback evidence, audit/provenance evidence, operator review evidence, and
+no-go regression all pass.

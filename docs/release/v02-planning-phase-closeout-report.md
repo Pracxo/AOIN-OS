@@ -66,3 +66,11 @@ Decision: planning closeout is complete for review purposes only.
 
 Decision: implementation remains blocked until a future scoped task explicitly
 widens scope with ADRs, gates, and verification.
+
+## AION-122 Kickoff Boundary Follow-Up
+
+AION-122 follows this closeout with an approval workflow blueprint and runtime
+workstream lock. The follow-up is design-only and keeps planning closeout
+intact: implementation remains unapproved, backlog implementation approval
+remains false, approval workflow bypass remains false, and no v0.2 tag or
+release is created.

@@ -94,3 +94,13 @@ credential storage, token storage, session persistence, external identity
 runtime, migrations, package files, and runtime API routes remain blocked until
 future scoped ADR, gate, security, rollback, audit/provenance, operator review,
 and no-go evidence pass.
+
+## AION-122 Implementation Kickoff Boundary Dependency
+
+AION-122 adds the v0.2 implementation kickoff boundary as an additional
+prerequisite before production auth implementation can be proposed. Production
+auth, credential storage, token storage, session persistence, external identity
+runtime, migrations, package files, runtime API routes, approval workflow
+bypass, ADR dependency bypass, and gate dependency bypass remain blocked until
+future scoped request, approval decision record, ADR, gate, security, rollback,
+audit/provenance, operator review, and no-go evidence pass.

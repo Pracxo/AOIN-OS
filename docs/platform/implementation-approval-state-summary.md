@@ -63,3 +63,12 @@ AION-121 adds `v02_readiness_final_review_passed=true` and
 implementation approval remains false. The final review does not approve
 runtime implementation, external calls, protected-material storage, sandbox
 execution, v0.2 tag creation, or v0.2 release creation.
+
+## AION-122 Implementation Kickoff State
+
+AION-122 adds implementation kickoff boundary evidence while every
+implementation approval remains false. Approval workflow bypass, ADR
+dependency bypass, and gate dependency bypass remain false. The kickoff
+boundary does not approve runtime implementation, external calls,
+protected-material storage, sandbox execution, v0.2 tag creation, or v0.2
+release creation.

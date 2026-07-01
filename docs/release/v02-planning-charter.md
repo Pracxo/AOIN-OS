@@ -123,3 +123,10 @@ readiness review, closeout report, implementation approval guard, evidence
 matrix, blocked implementation summary, final no-go review, and final
 checklist. The final review does not approve implementation, create a v0.2 tag,
 create a release, or change any runtime boundary.
+
+## AION-122 Implementation Kickoff Boundary
+
+AION-122 adds the future implementation request and approval workflow boundary
+after planning closeout. It does not approve implementation, create a v0.2 tag,
+create a release, bypass approval workflow, bypass ADR dependency, bypass gate
+dependency, or change any runtime boundary.

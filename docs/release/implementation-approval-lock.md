@@ -38,3 +38,11 @@ AION-121 adds `backlog_implementation_items_approved=false` to the final
 readiness guard and reaffirms every implementation approval value as false.
 The final readiness review is evidence-only and cannot be used to approve
 runtime work, a v0.2 tag, or a v0.2 release.
+
+## AION-122 Implementation Kickoff Lock
+
+AION-122 adds approval workflow boundary evidence while preserving every lock.
+`approval_workflow_bypassed=false`, `adr_dependency_bypassed=false`, and
+`gate_dependency_bypassed=false` must remain false. The kickoff boundary
+cannot approve runtime work, backlog implementation items, a v0.2 tag, or a
+v0.2 release.
