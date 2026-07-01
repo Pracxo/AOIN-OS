@@ -29,3 +29,21 @@
 
 AION-121 can close only when the checklist remains true, all final scripts
 pass, `aion-v0.1.0` remains untouched, and no v0.2 tag or release exists.
+
+## AION-122 Kickoff Boundary Checklist
+
+- implementation kickoff boundary exists
+- approval workflow blueprint exists
+- runtime workstream lock exists
+- implementation request template exists
+- approval decision record exists
+- workstream sequencing plan exists
+- implementation kickoff no-go review exists
+- ADR 0113 exists and is indexed
+- implementation approval remains false
+- backlog implementation approval remains false
+- approval workflow bypass remains false
+- ADR dependency bypass remains false
+- gate dependency bypass remains false
+- no v0.2 tag
+- no v0.2 release

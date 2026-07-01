@@ -1,0 +1,100 @@
+{
+  "task_id": "AION-122",
+  "view": "release_candidate",
+  "title": "v0.2 Runtime Workstream Lock",
+  "status": "passed",
+  "read_only": true,
+  "summary": "Runtime workstreams remain locked until future explicit approval records and gate evidence exist.",
+  "redaction_applied": true,
+  "v02_implementation_kickoff_boundary_created": true,
+  "v02_tag_created": false,
+  "v02_release_created": false,
+  "v02_release_approved": false,
+  "runtime_implementation_approved": false,
+  "backlog_implementation_items_approved": false,
+  "approval_workflow_bypassed": false,
+  "adr_dependency_bypassed": false,
+  "gate_dependency_bypassed": false,
+  "operator_write_execution_approved": false,
+  "connector_implementation_approved": false,
+  "production_auth_approved": false,
+  "module_activation_approved": false,
+  "external_calls_approved": false,
+  "credential_storage_approved": false,
+  "token_storage_approved": false,
+  "sandbox_execution_approved": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "api_runtime_execution_route_added": false,
+  "frontend_dependencies_added": false,
+  "secrets_present": false,
+  "credential_values_present": false,
+  "token_values_present": false,
+  "endpoints_present": false,
+  "prompt_payloads_present": false,
+  "private_reasoning_present": false,
+  "production_auth_implementation_locked": true,
+  "connector_runtime_implementation_locked": true,
+  "operator_write_execution_locked": true,
+  "module_activation_locked": true,
+  "external_calls_locked": true,
+  "credential_storage_locked": true,
+  "token_storage_locked": true,
+  "sandbox_execution_locked": true,
+  "runtime_route_registration_locked": true,
+  "package_dependency_additions_locked": true,
+  "migrations_locked": true,
+  "sections": [
+    {
+      "title": "Runtime Workstreams",
+      "status": "locked"
+    },
+    {
+      "title": "Implementation Approval",
+      "status": "false"
+    },
+    {
+      "title": "Bypass Checks",
+      "status": "false"
+    }
+  ],
+  "warnings": [
+    "locked workstream evidence is not implementation approval"
+  ],
+  "blockers": [
+    "runtime workstreams require future scoped ADRs",
+    "runtime workstreams require future approval decision records",
+    "runtime workstreams require future gate evidence"
+  ],
+  "refs": [
+    "docs/release/v02-runtime-workstream-lock.md",
+    "docs/release/v02-implementation-kickoff-no-go.md",
+    "docs/adr/0113-v02-implementation-kickoff-boundary.md"
+  ],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "reason": "Disabled by the v0.2 runtime workstream lock."
+    },
+    {
+      "action_key": "activate_capability",
+      "reason": "Disabled by the v0.2 runtime workstream lock."
+    },
+    {
+      "action_key": "load_code",
+      "reason": "Disabled by the v0.2 runtime workstream lock."
+    },
+    {
+      "action_key": "execute_tool",
+      "reason": "Disabled by the v0.2 runtime workstream lock."
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "reason": "Disabled by the v0.2 runtime workstream lock."
+    },
+    {
+      "action_key": "hard_delete",
+      "reason": "Disabled by the v0.2 runtime workstream lock."
+    }
+  ]
+}

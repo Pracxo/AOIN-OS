@@ -164,3 +164,11 @@ readiness final review and implementation approval guard panels. No production
 UI implementation, login control, write control, runtime route, frontend
 dependency, package file, release action, tag action, or implementation
 approval control is added.
+
+## AION-122 v0.2 Implementation Kickoff Boundary
+
+The operator console remains static and read-only while AION-122 adds v0.2
+implementation kickoff boundary and runtime workstream lock panels. No
+production UI implementation, login control, write control, runtime route,
+frontend dependency, package file, release action, tag action, approval bypass,
+ADR bypass, gate bypass, or implementation approval control is added.

@@ -32,3 +32,10 @@ operator review evidence.
 ## Release Boundary
 
 No v0.2 tag or release is created by this review.
+
+## AION-122 Kickoff No-Go Extension
+
+AION-122 extends this no-go posture with approval workflow bypass, ADR
+dependency bypass, and gate dependency bypass checks. All remain false. The
+kickoff workflow does not approve implementation, create a v0.2 tag, create a
+release, or unlock runtime work.

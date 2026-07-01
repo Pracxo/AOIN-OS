@@ -10,3 +10,5 @@
 | static console evidence | `operator-console-static/demo-data/v02-readiness-final-review.json` | `./scripts/static-console-ux-check.sh` | read-only bundled data | unapproved | yes | No input, write, release, or activation controls. |
 | release boundary | `docs/release/v02-final-no-go-review.md` | `./scripts/v02-readiness-final-freeze.sh` | no tag and no release | unapproved | yes | `aion-v0.1.0` remains untouched. |
 | repository boundary | `docs/release/v02-readiness-final-checklist.md` | `./scripts/check.sh` | no package, migration, API, SDK, or CLI drift | unapproved | yes | Full repository checks remain required. |
+| implementation kickoff boundary | `docs/release/v02-implementation-kickoff-boundary.md` | `./scripts/v02-implementation-kickoff-boundary-check.sh` | approval workflow defined, approvals false | unapproved | yes | AION-122 defines request workflow only. |
+| runtime workstream lock | `docs/release/v02-runtime-workstream-lock.md` | `./scripts/v02-implementation-kickoff-no-go-regression.sh` | workstreams locked | unapproved | yes | Locked workstreams still need future scoped approval. |

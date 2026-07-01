@@ -79,3 +79,11 @@ ADR mapping, gate mapping, security review requirement, rollback/audit
 requirement, owner placeholder, and no-go statement. Backlog items marked
 implementation-approved are rejected until a future scoped ADR and gate change
 the approval state.
+
+## AION-122 Request Intake Requirement
+
+After AION-122, future implementation backlog items must use the implementation
+request template and approval decision record. Items that bypass approval
+workflow, ADR dependency, gate dependency, security review, architecture
+review, operator review, rollback evidence, or no-go acknowledgement remain
+rejected.

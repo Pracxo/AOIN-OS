@@ -1828,6 +1828,21 @@ production auth runtime, operator write execution, module activation, external
 call path, credential storage, token storage, sandbox execution, backlog
 implementation approval, v0.2 tag, or v0.2 release.
 
+## AION-122 v0.2 Implementation Kickoff Boundary Contracts
+
+AION-122 adds approval-workflow evidence contracts only: implementation
+kickoff boundary examples, approval workflow blueprint examples, runtime
+workstream lock examples, implementation request template examples, approval
+decision record examples, static console kickoff data, and local kickoff
+scripts.
+
+It adds no Brain API contract, router, SDK resource, CLI command
+implementation, runtime config default, migration, connector runtime,
+production auth runtime, operator write execution, module activation, external
+call path, credential storage, token storage, sandbox execution, approval
+workflow bypass, ADR dependency bypass, gate dependency bypass, backlog
+implementation approval, v0.2 tag, or v0.2 release.
+
 ## AION-121 v0.2 Readiness Final Review Contracts
 
 AION-121 adds final planning evidence contracts only: readiness final review

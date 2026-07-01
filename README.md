@@ -4392,3 +4392,23 @@ Developer command:
 ./scripts/v02-readiness-final-freeze.sh
 ./scripts/v02-readiness-final-no-go-regression.sh
 ```
+
+## AION-122 v0.2 Implementation Kickoff Boundary
+
+AION-122 adds the implementation kickoff boundary, approval workflow
+blueprint, runtime workstream lock, implementation request template, approval
+decision record, workstream sequencing plan, kickoff no-go review, ADR 0113,
+static console kickoff panels, and repository-local kickoff checks. It does not
+approve implementation: runtime implementation remains unapproved, backlog
+implementation approval remains false, approval workflow bypass remains false,
+external calls remain absent, credentials and tokens remain absent, sandbox
+execution remains absent, no v0.2 release or tag is created, package files
+remain absent, and migrations remain absent.
+
+Developer command:
+
+```bash
+./scripts/v02-implementation-kickoff-boundary-check.sh
+./scripts/v02-implementation-kickoff-freeze.sh
+./scripts/v02-implementation-kickoff-no-go-regression.sh
+```

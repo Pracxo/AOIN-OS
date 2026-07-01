@@ -1,0 +1,58 @@
+{
+  "task_id": "AION-122",
+  "artifact": "v02_approval_workflow_blueprint",
+  "synthetic": true,
+  "status": "passed",
+  "v02_implementation_kickoff_boundary_created": true,
+  "v02_tag_created": false,
+  "v02_release_created": false,
+  "v02_release_approved": false,
+  "runtime_implementation_approved": false,
+  "backlog_implementation_items_approved": false,
+  "approval_workflow_bypassed": false,
+  "adr_dependency_bypassed": false,
+  "gate_dependency_bypassed": false,
+  "operator_write_execution_approved": false,
+  "connector_implementation_approved": false,
+  "production_auth_approved": false,
+  "module_activation_approved": false,
+  "external_calls_approved": false,
+  "credential_storage_approved": false,
+  "token_storage_approved": false,
+  "sandbox_execution_approved": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "api_runtime_execution_route_added": false,
+  "secrets_present": false,
+  "credential_values_present": false,
+  "token_values_present": false,
+  "endpoints_present": false,
+  "prompt_payloads_present": false,
+  "private_reasoning_present": false,
+  "roles": [
+    {
+      "role": "requester",
+      "approval_authority": false
+    },
+    {
+      "role": "reviewer",
+      "approval_authority": false
+    },
+    {
+      "role": "approver",
+      "approval_authority": false
+    },
+    {
+      "role": "security_reviewer",
+      "approval_authority": false
+    },
+    {
+      "role": "architecture_reviewer",
+      "approval_authority": false
+    },
+    {
+      "role": "operator_reviewer",
+      "approval_authority": false
+    }
+  ]
+}

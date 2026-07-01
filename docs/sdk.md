@@ -1061,6 +1061,21 @@ SDK surfaces remain unchanged until a future explicit ADR, planning review,
 scoped gate, no-go regression, and full repository verification approve a
 narrow implementation scope.
 
+## AION-122 v0.2 Implementation Kickoff Boundary
+
+AION-122 adds no SDK resource or CLI implementation. Use repository-local
+scripts for v0.2 implementation kickoff evidence:
+
+```bash
+./scripts/v02-implementation-kickoff-boundary-check.sh
+./scripts/v02-implementation-kickoff-freeze.sh
+./scripts/v02-implementation-kickoff-no-go-regression.sh
+```
+
+SDK surfaces remain unchanged until a future explicit approval decision record,
+scoped ADR, scoped gate, no-go regression, and full repository verification
+approve a narrow implementation scope.
+
 ## AION-121 v0.2 Readiness Final Review
 
 AION-121 adds no SDK resource, client method, or SDK command implementation.

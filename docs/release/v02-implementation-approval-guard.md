@@ -33,3 +33,11 @@ full repository verification.
 
 This guard does not create a v0.2 tag, does not create a release, and does not
 mutate `aion-v0.1.0`.
+
+## AION-122 Approval Workflow Guard
+
+AION-122 adds a future approval workflow blueprint while keeping this guard
+locked. It also adds `approval_workflow_bypassed=false`,
+`adr_dependency_bypassed=false`, and `gate_dependency_bypassed=false` as
+kickoff boundary evidence. The workflow definition cannot change any approval
+value to true.

@@ -13,3 +13,10 @@
 | package dependency additions | frontend dependencies, provider SDKs, connector SDKs, and package manager files remain blocked | dependency approval ADR | dependency drift gate | dependency risk review, license/security review, rollback | scoped ADR and gate pass with approval update |
 | migrations | schema changes remain blocked during readiness closeout | migration ADR | migration readiness gate | migration plan, rollback plan, data safety review | scoped ADR and gate pass with approval update |
 | production UI implementation | static console remains dependency-free and read-only | production UI decision ADR | production UI gate | UI threat model, build posture, authz review, rollback | scoped ADR and gate pass with approval update |
+
+## AION-122 Kickoff Boundary
+
+AION-122 keeps every blocked implementation area blocked. It adds request,
+approval, ADR, gate, security, rollback, audit/provenance, and operator review
+requirements that future tasks must satisfy before any unblock condition can be
+considered.

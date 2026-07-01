@@ -44,3 +44,11 @@ stabilization gate and backlog governance freeze. Readiness scores remain
 planning evidence only until a scoped ADR, scoped implementation gate,
 security review, rollback evidence, audit/provenance evidence, operator review,
 and no-go regression pass.
+
+## AION-122 Kickoff Boundary Requirement
+
+After AION-122, implementation proposals must also include an implementation
+request record, approval decision record, approval expiry, revocation path,
+security reviewer, architecture reviewer, operator reviewer, ADR dependency,
+gate dependency, and no-go acknowledgement. This framework remains
+implementation-unapproved.

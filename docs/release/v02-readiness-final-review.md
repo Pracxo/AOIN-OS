@@ -102,3 +102,10 @@ operator review, and no-go regressions pass.
 
 AION-121 explicitly creates no v0.2 tag and no release. It does not mutate,
 move, delete, or recreate `aion-v0.1.0`.
+
+## AION-122 Kickoff Boundary Dependency
+
+AION-122 builds on this final review by defining the future implementation
+request and approval workflow boundary. It does not reopen planning closeout,
+approve implementation, approve backlog implementation items, create a v0.2
+tag, create a release, or unlock any runtime workstream.

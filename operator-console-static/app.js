@@ -64,6 +64,9 @@
     "./scripts/v02-readiness-final-review.sh",
     "./scripts/v02-readiness-final-freeze.sh",
     "./scripts/v02-readiness-final-no-go-regression.sh",
+    "./scripts/v02-implementation-kickoff-boundary-check.sh",
+    "./scripts/v02-implementation-kickoff-freeze.sh",
+    "./scripts/v02-implementation-kickoff-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -127,7 +130,9 @@
     planning_stabilization: "demo-data/v02-planning-stabilization.json",
     implementation_readiness_scorecard: "demo-data/v02-implementation-readiness-scorecard.json",
     readiness_final_review: "demo-data/v02-readiness-final-review.json",
-    implementation_approval_guard: "demo-data/v02-implementation-approval-guard.json"
+    implementation_approval_guard: "demo-data/v02-implementation-approval-guard.json",
+    implementation_kickoff_boundary: "demo-data/v02-implementation-kickoff-boundary.json",
+    runtime_workstream_lock: "demo-data/v02-runtime-workstream-lock.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1596,7 +1601,9 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.planning_stabilization),
       fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_readiness_scorecard),
       fetchJson(RELEASE_CANDIDATE_DEMOS.readiness_final_review),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_approval_guard)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_approval_guard),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_kickoff_boundary),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.runtime_workstream_lock)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
@@ -1607,6 +1614,8 @@
         renderReleaseCandidateEvidence("v02-implementation-readiness-scorecard", redact(payloads[5]));
         renderReleaseCandidateEvidence("v02-readiness-final-review", redact(payloads[6]));
         renderReleaseCandidateEvidence("v02-implementation-approval-guard", redact(payloads[7]));
+        renderReleaseCandidateEvidence("v02-implementation-kickoff-boundary", redact(payloads[8]));
+        renderReleaseCandidateEvidence("v02-runtime-workstream-lock", redact(payloads[9]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
@@ -1617,6 +1626,8 @@
         renderReleaseCandidateEvidence("v02-implementation-readiness-scorecard", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-readiness-final-review", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-implementation-approval-guard", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-implementation-kickoff-boundary", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-runtime-workstream-lock", { status: "unavailable" });
       });
   }
 
@@ -1632,11 +1643,15 @@
       ["v02_planning_charter_created", String(Boolean(payload.v02_planning_charter_created))],
       ["v02_planning_stabilized", String(Boolean(payload.v02_planning_stabilized))],
       ["v02_readiness_final_review_passed", String(Boolean(payload.v02_readiness_final_review_passed))],
+      ["v02_implementation_kickoff_boundary_created", String(Boolean(payload.v02_implementation_kickoff_boundary_created))],
       ["v02_tag_created", String(Boolean(payload.v02_tag_created))],
       ["v02_release_created", String(Boolean(payload.v02_release_created))],
       ["v02_release_approved", String(Boolean(payload.v02_release_approved))],
       ["runtime_implementation_approved", String(Boolean(payload.runtime_implementation_approved))],
       ["backlog_implementation_items_approved", String(Boolean(payload.backlog_implementation_items_approved))],
+      ["approval_workflow_bypassed", String(Boolean(payload.approval_workflow_bypassed))],
+      ["adr_dependency_bypassed", String(Boolean(payload.adr_dependency_bypassed))],
+      ["gate_dependency_bypassed", String(Boolean(payload.gate_dependency_bypassed))],
       ["operator_write_execution_approved", String(Boolean(payload.operator_write_execution_approved))],
       ["connector_implementation_approved", String(Boolean(payload.connector_implementation_approved))],
       ["production_auth_approved", String(Boolean(payload.production_auth_approved))],
@@ -1647,7 +1662,7 @@
       ["sandbox_execution_approved", String(Boolean(payload.sandbox_execution_approved))]
     ].forEach(function (item) {
       var row = document.createElement("div");
-      row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row";
+      row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row";
       var label = document.createElement("span");
       label.textContent = item[0];
       var value = document.createElement("strong");
@@ -1660,7 +1675,7 @@
       .slice(0, 4)
       .forEach(function (section) {
         var row = document.createElement("div");
-        row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row";
+        row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row";
         var label = document.createElement("span");
         label.textContent = safeText(section.title || section.section_key || "section");
         var value = document.createElement("strong");

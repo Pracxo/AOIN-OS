@@ -2104,6 +2104,22 @@ token storage, sandbox execution, API runtime execution routes, SDK resources,
 CLI implementations, package files, migrations, v0.2 tag creation, and v0.2
 release creation remain false, disabled, or absent.
 
+## AION-122 v0.2 Implementation Kickoff Boundary
+
+AION-122 adds an implementation kickoff boundary above the AION-121 readiness
+review. The architecture change is procedural only: future runtime work must
+provide an approval workflow record, scoped ADR, scoped gate evidence, security
+review, architecture review, operator review, rollback evidence, and no-go
+regression before implementation can be considered.
+
+Runtime architecture remains unchanged. Implementation approval, backlog
+implementation approval, approval workflow bypass, ADR dependency bypass, gate
+dependency bypass, production auth, operator write execution, connector
+runtime, module activation, external calls, credential storage, token storage,
+sandbox execution, API runtime execution routes, SDK resources, CLI
+implementations, package files, migrations, v0.2 tag creation, and v0.2 release
+creation remain false, disabled, or absent.
+
 ## AION-121 v0.2 Readiness Final Review Boundary
 
 AION-121 adds the final v0.2 readiness review above the planning stabilization
