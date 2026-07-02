@@ -82,3 +82,13 @@ revocation bypass, and dual-control bypass remain false. The stabilization
 gate does not approve runtime implementation, external calls,
 protected-material storage, sandbox execution, v0.2 tag creation, or v0.2
 release creation.
+
+## AION-124 Workstream Intake Readiness State
+
+AION-124 adds `v02_workstream_intake_ready=true` while every implementation
+approval remains false. Workstream implementation approval, approval workflow
+bypass, approval record missing, ADR dependency bypass, gate dependency
+bypass, approval expiry bypass, approval revocation bypass, and dual-control
+bypass remain false. The intake gate does not approve runtime implementation,
+external calls, protected-material storage, sandbox execution, v0.2 tag
+creation, or v0.2 release creation.

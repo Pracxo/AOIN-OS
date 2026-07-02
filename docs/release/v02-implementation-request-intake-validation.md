@@ -99,3 +99,11 @@ Default approval status: false.
 - `approval_expiry_bypassed=false`
 - `approval_revocation_bypassed=false`
 - `dual_control_bypassed=false`
+
+## AION-124 Workstream Intake Readiness
+
+AION-124 extends this request intake validation into workstream intake
+readiness. Candidate workstreams must include approval record evidence,
+sequencing evidence, rejection evidence, and no-go results before planning
+review. Default runtime implementation, backlog implementation, and workstream
+implementation approval remain false.

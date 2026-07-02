@@ -373,3 +373,24 @@ Validate the v0.2 approval workflow evidence:
 ./scripts/v02-approval-workflow-freeze.sh
 ./scripts/v02-approval-workflow-no-go-regression.sh
 ```
+
+## AION-124 v0.2 Workstream Intake Panels
+
+The static console includes v0.2 workstream intake readiness and implementation
+sequencing freeze panels. They load bundled JSON only, keep runtime
+implementation, backlog implementation approval, workstream implementation
+approval, approval workflow bypass, approval record missing, ADR dependency
+bypass, gate dependency bypass, approval expiry bypass, approval revocation
+bypass, dual-control bypass, operator write execution, connector
+implementation, production auth, module activation, external calls, credential
+storage, token storage, sandbox execution, v0.2 release creation, and v0.2 tag
+creation unapproved or false, and expose no input, package, migration,
+runtime, release, tag, approval, bypass, or write controls.
+
+Validate the v0.2 workstream intake evidence:
+
+```bash
+./scripts/v02-workstream-intake-readiness-gate.sh
+./scripts/v02-workstream-intake-freeze.sh
+./scripts/v02-workstream-intake-no-go-regression.sh
+```

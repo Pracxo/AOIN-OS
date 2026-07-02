@@ -40,3 +40,12 @@ AION-123 adds intake validation, approval decision evidence, expiry and
 revocation evidence, and dual-control review to the sequencing requirements.
 Workstreams remain `implementation-unapproved` until those checks pass in a
 future scoped implementation task.
+
+## AION-124 Sequencing Freeze
+
+AION-124 freezes sequencing as planning-only. Production auth remains the first
+candidate planning dependency, audit/provenance hardening and rollback/recovery
+remain planning-only, connector runtime remains locked, credential store
+remains locked, sandbox runtime remains locked, operator write execution
+remains locked, module activation remains locked, and production UI remains
+undecided.

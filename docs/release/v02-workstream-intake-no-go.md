@@ -1,10 +1,16 @@
-# v0.2 Approval Workflow No-Go
+# v0.2 Workstream Intake No-Go
 
-The approval workflow is blocked when any of the following are detected:
+## Purpose
+
+This no-go list blocks AION-124 if workstream intake readiness turns into implementation approval, runtime enablement, a tag, a release, or dependency drift.
+
+## No-Go Checks
 
 - implementation approval set true
 - backlog implementation approval set true
+- workstream marked implementation approved
 - approval workflow bypassed
+- approval record missing
 - ADR dependency bypassed
 - gate dependency bypassed
 - approval expiry bypassed
@@ -23,12 +29,6 @@ The approval workflow is blocked when any of the following are detected:
 - migrations added
 - runtime API execution routes added
 
-No-go findings fail closed. They must be resolved through a future scoped
-request, ADR, gate, no-go regression, reviewer evidence, and explicit approval
-record before implementation can be considered.
+## Enforcement
 
-## AION-124 Workstream Intake No-Go
-
-AION-124 extends the no-go surface with `workstream_implementation_approved`
-and `approval_record_missing`. A workstream cannot enter planning review if it
-is marked implementation approved or lacks approval record evidence.
+`./scripts/v02-workstream-intake-no-go-regression.sh` enforces the no-go checks using CI-safe Git reference handling and portable search.

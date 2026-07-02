@@ -1156,3 +1156,15 @@ dual-control review, create a release, create a v0.2 tag, call external
 systems, store credentials or tokens, enable production auth, enable module
 activation, enable sandbox execution, register routes, execute tools, or
 execute write paths.
+
+## AION-124 v0.2 Workstream Intake Projection
+
+AION-124 adds bundled static v0.2 workstream intake readiness and implementation
+sequencing freeze demo data. These panels are read-only evidence projections
+only; they do not emit runtime events, approve backlog implementation, approve
+workstream implementation, bypass approval workflow, mark approval records
+missing, bypass ADR dependency, bypass gate dependency, bypass approval expiry,
+bypass approval revocation, bypass dual-control review, create a release,
+create a v0.2 tag, call external systems, store credentials or tokens, enable
+production auth, enable module activation, enable sandbox execution, register
+routes, execute tools, or execute write paths.

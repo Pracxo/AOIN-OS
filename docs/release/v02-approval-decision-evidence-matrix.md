@@ -12,3 +12,10 @@
 
 All rows require expiry, revocation, ADR dependency, gate dependency, no-go
 acknowledgement, and refreshed evidence before approval can be considered.
+
+## AION-124 Workstream Intake Evidence
+
+AION-124 requires every future row to be backed by workstream intake evidence,
+approval record evidence, sequencing evidence, rejection rules, and no-go
+results before planning review. Approval status and runtime approval status
+remain false.

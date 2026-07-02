@@ -51,3 +51,10 @@ execution.
 Approval does not enable runtime by itself. Runtime still requires a future
 scoped implementation task, explicit approval record, scoped ADR, scoped gate,
 no-go regression, local checks, and release review.
+
+## AION-124 Intake Requirement
+
+AION-124 requires workstream intake records to include approval expiry status
+and revocation path evidence before planning review. Missing expiry or
+revocation evidence rejects the workstream and keeps implementation approval
+false.

@@ -104,3 +104,14 @@ runtime, migrations, package files, runtime API routes, approval workflow
 bypass, ADR dependency bypass, and gate dependency bypass remain blocked until
 future scoped request, approval decision record, ADR, gate, security, rollback,
 audit/provenance, operator review, and no-go evidence pass.
+
+## AION-124 Workstream Intake Readiness Dependency
+
+AION-124 adds the v0.2 workstream intake readiness gate as an additional
+prerequisite before production auth implementation can be proposed. Production
+auth, credential storage, token storage, session persistence, external identity
+runtime, migrations, package files, runtime API routes, workstream
+implementation approval, approval record missing, approval workflow bypass, ADR
+dependency bypass, and gate dependency bypass remain blocked until future
+scoped intake, approval record, ADR, gate, security, rollback,
+audit/provenance, operator review, sequencing, and no-go evidence pass.

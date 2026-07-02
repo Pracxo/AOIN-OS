@@ -1858,6 +1858,23 @@ workflow bypass, ADR dependency bypass, gate dependency bypass, approval expiry
 bypass, approval revocation bypass, dual-control bypass, backlog implementation
 approval, v0.2 tag, or v0.2 release.
 
+## AION-124 v0.2 Workstream Intake Readiness Contracts
+
+AION-124 adds workstream intake evidence contracts only: readiness gate
+examples, workstream intake evidence examples, approval record evidence
+examples, implementation sequencing freeze examples, workstream readiness
+scorecard examples, static console workstream intake data, and local workstream
+intake scripts.
+
+It adds no Brain API contract, router, SDK resource, CLI command
+implementation, runtime config default, migration, connector runtime,
+production auth runtime, operator write execution, module activation, external
+call path, credential storage, token storage, sandbox execution, workstream
+implementation approval, approval workflow bypass, approval record missing,
+ADR dependency bypass, gate dependency bypass, approval expiry bypass, approval
+revocation bypass, dual-control bypass, backlog implementation approval, v0.2
+tag, or v0.2 release.
+
 ## AION-121 v0.2 Readiness Final Review Contracts
 
 AION-121 adds final planning evidence contracts only: readiness final review

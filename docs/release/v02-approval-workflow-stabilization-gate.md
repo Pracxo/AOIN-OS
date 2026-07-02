@@ -117,3 +117,10 @@ release is created.
 
 AION-123 explicitly creates no v0.2 tag and no release. It does not mutate,
 move, delete, or recreate `aion-v0.1.0`.
+
+## AION-124 Workstream Intake Dependency
+
+AION-124 builds on this stabilization gate by requiring candidate workstreams
+to cite approval record evidence, sequencing evidence, rejection rules, and
+workstream intake no-go results before planning review. It does not approve
+implementation, create a v0.2 tag, create a release, or enable runtime.

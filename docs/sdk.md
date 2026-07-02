@@ -1092,6 +1092,22 @@ scoped ADR, scoped gate, expiry and revocation evidence, dual-control evidence
 where required, no-go regression, and full repository verification approve a
 narrow implementation scope.
 
+## AION-124 v0.2 Workstream Intake Readiness
+
+AION-124 adds no SDK resource, client method, or SDK command implementation.
+Use repository-local scripts for v0.2 workstream intake evidence:
+
+```bash
+./scripts/v02-workstream-intake-readiness-gate.sh
+./scripts/v02-workstream-intake-freeze.sh
+./scripts/v02-workstream-intake-no-go-regression.sh
+```
+
+SDK surfaces remain unchanged until a future explicit workstream intake record,
+approval record, scoped ADR, scoped gate, expiry and revocation evidence,
+dual-control evidence where required, no-go regression, and full repository
+verification approve a narrow implementation scope.
+
 ## AION-121 v0.2 Readiness Final Review
 
 AION-121 adds no SDK resource, client method, or SDK command implementation.

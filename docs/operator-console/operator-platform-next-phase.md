@@ -172,3 +172,12 @@ implementation kickoff boundary and runtime workstream lock panels. No
 production UI implementation, login control, write control, runtime route,
 frontend dependency, package file, release action, tag action, approval bypass,
 ADR bypass, gate bypass, or implementation approval control is added.
+
+## AION-124 v0.2 Workstream Intake Readiness
+
+The operator console remains static and read-only while AION-124 adds v0.2
+workstream intake readiness and implementation sequencing freeze panels. No
+production UI implementation, login control, write control, runtime route,
+frontend dependency, package file, release action, tag action, approval bypass,
+approval record mutation, ADR bypass, gate bypass, workstream implementation
+approval control, or implementation approval control is added.

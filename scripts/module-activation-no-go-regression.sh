@@ -190,10 +190,14 @@ for relative in sorted(changed):
         "operator-console-static/demo-data/v02-runtime-workstream-lock.json",
         "operator-console-static/demo-data/v02-approval-workflow-stabilization.json",
         "operator-console-static/demo-data/v02-implementation-request-intake.json",
+        "operator-console-static/demo-data/v02-workstream-intake-readiness.json",
+        "operator-console-static/demo-data/v02-implementation-sequencing-freeze.json",
     }:
         if relative in {
             "operator-console-static/demo-data/v02-approval-workflow-stabilization.json",
             "operator-console-static/demo-data/v02-implementation-request-intake.json",
+            "operator-console-static/demo-data/v02-workstream-intake-readiness.json",
+            "operator-console-static/demo-data/v02-implementation-sequencing-freeze.json",
         }:
             text = text.replace('"action_key": "activate_capability"', "")
         text = re.sub(
