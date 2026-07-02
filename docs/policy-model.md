@@ -1925,3 +1925,20 @@ approval decision record, scoped ADR, scoped gate evidence, security review,
 rollback evidence, audit/provenance evidence, operator review evidence,
 expiry and revocation evidence, dual-control evidence where required, and
 no-go regression all pass.
+
+## AION-124 v0.2 Workstream Intake Readiness Policy
+
+AION-124 adds no new policy allow path. It stabilizes workstream intake,
+approval record evidence, sequencing, readiness scoring, and rejection rules
+while keeping runtime implementation, backlog implementation, workstream
+implementation approval, approval workflow bypass, approval record missing,
+ADR dependency bypass, gate dependency bypass, approval expiry bypass,
+approval revocation bypass, dual-control bypass, operator write execution,
+connector implementation, production auth, module activation, external calls,
+credential/token access, sandbox execution, release creation, tag creation, and
+privileged bypass denied.
+
+Future v0.2 implementation work remains blocked until a scoped workstream
+intake record, approval record, ADR, gate evidence, security review,
+architecture review, operator review, rollback/audit evidence, expiry and
+revocation status, sequencing evidence, and no-go regression all pass.

@@ -49,3 +49,11 @@ expiry, revocation, and dual-control checks. Runtime implementation approval,
 backlog implementation approval, approval workflow bypass, ADR dependency
 bypass, gate dependency bypass, approval expiry bypass, approval revocation
 bypass, and dual-control bypass remain false.
+
+## AION-124 Workstream Intake Guard
+
+AION-124 extends the guard to workstream intake readiness. Runtime
+implementation approval, backlog implementation approval, workstream
+implementation approval, approval workflow bypass, approval record missing,
+ADR dependency bypass, gate dependency bypass, approval expiry bypass,
+approval revocation bypass, and dual-control bypass remain false.

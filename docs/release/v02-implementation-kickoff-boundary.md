@@ -129,3 +129,10 @@ AION-123 stabilizes this kickoff boundary by adding approval intake validation,
 decision evidence, expiry and revocation rules, dual-control review, and a
 dedicated no-go regression. The kickoff boundary still does not approve
 implementation, create a v0.2 tag, create a release, or enable runtime.
+
+## AION-124 Workstream Intake Dependency
+
+AION-124 adds the workstream intake readiness gate above this kickoff boundary.
+It accepts candidate workstreams into planning only when intake evidence,
+approval record evidence, sequencing evidence, and rejection evidence are
+present. Workstream implementation approval remains false.

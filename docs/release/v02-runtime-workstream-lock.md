@@ -41,3 +41,12 @@ AION-123 adds workflow-level locks for approval expiry, approval revocation,
 and dual-control review. Locked workstreams remain blocked when approval
 workflow bypass, ADR dependency bypass, gate dependency bypass, approval expiry
 bypass, approval revocation bypass, or dual-control bypass is detected.
+
+## AION-124 Workstream Intake Lock
+
+AION-124 keeps every runtime workstream locked during intake readiness.
+Production auth, audit/provenance hardening, rollback/recovery, external call
+release gate, connector runtime, credential store, sandbox runtime, operator
+write execution, module activation, and production UI decision workstreams are
+planning-only until future explicit approval records, ADRs, gates, and no-go
+checks pass.

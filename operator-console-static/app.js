@@ -70,6 +70,9 @@
     "./scripts/v02-approval-workflow-stabilization-gate.sh",
     "./scripts/v02-approval-workflow-freeze.sh",
     "./scripts/v02-approval-workflow-no-go-regression.sh",
+    "./scripts/v02-workstream-intake-readiness-gate.sh",
+    "./scripts/v02-workstream-intake-freeze.sh",
+    "./scripts/v02-workstream-intake-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -137,7 +140,9 @@
     implementation_kickoff_boundary: "demo-data/v02-implementation-kickoff-boundary.json",
     runtime_workstream_lock: "demo-data/v02-runtime-workstream-lock.json",
     approval_workflow_stabilization: "demo-data/v02-approval-workflow-stabilization.json",
-    implementation_request_intake: "demo-data/v02-implementation-request-intake.json"
+    implementation_request_intake: "demo-data/v02-implementation-request-intake.json",
+    workstream_intake_readiness: "demo-data/v02-workstream-intake-readiness.json",
+    implementation_sequencing_freeze: "demo-data/v02-implementation-sequencing-freeze.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1610,7 +1615,9 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_kickoff_boundary),
       fetchJson(RELEASE_CANDIDATE_DEMOS.runtime_workstream_lock),
       fetchJson(RELEASE_CANDIDATE_DEMOS.approval_workflow_stabilization),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_request_intake)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_request_intake),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.workstream_intake_readiness),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_sequencing_freeze)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
@@ -1625,6 +1632,8 @@
         renderReleaseCandidateEvidence("v02-runtime-workstream-lock", redact(payloads[9]));
         renderReleaseCandidateEvidence("v02-approval-workflow-stabilization", redact(payloads[10]));
         renderReleaseCandidateEvidence("v02-implementation-request-intake", redact(payloads[11]));
+        renderReleaseCandidateEvidence("v02-workstream-intake-readiness", redact(payloads[12]));
+        renderReleaseCandidateEvidence("v02-implementation-sequencing-freeze", redact(payloads[13]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
@@ -1639,6 +1648,8 @@
         renderReleaseCandidateEvidence("v02-runtime-workstream-lock", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-approval-workflow-stabilization", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-implementation-request-intake", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-workstream-intake-readiness", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-implementation-sequencing-freeze", { status: "unavailable" });
       });
   }
 
@@ -1656,12 +1667,15 @@
       ["v02_readiness_final_review_passed", String(Boolean(payload.v02_readiness_final_review_passed))],
       ["v02_implementation_kickoff_boundary_created", String(Boolean(payload.v02_implementation_kickoff_boundary_created))],
       ["v02_approval_workflow_stabilized", String(Boolean(payload.v02_approval_workflow_stabilized))],
+      ["v02_workstream_intake_ready", String(Boolean(payload.v02_workstream_intake_ready))],
       ["v02_tag_created", String(Boolean(payload.v02_tag_created))],
       ["v02_release_created", String(Boolean(payload.v02_release_created))],
       ["v02_release_approved", String(Boolean(payload.v02_release_approved))],
       ["runtime_implementation_approved", String(Boolean(payload.runtime_implementation_approved))],
       ["backlog_implementation_items_approved", String(Boolean(payload.backlog_implementation_items_approved))],
+      ["workstream_implementation_approved", String(Boolean(payload.workstream_implementation_approved))],
       ["approval_workflow_bypassed", String(Boolean(payload.approval_workflow_bypassed))],
+      ["approval_record_missing", String(Boolean(payload.approval_record_missing))],
       ["adr_dependency_bypassed", String(Boolean(payload.adr_dependency_bypassed))],
       ["gate_dependency_bypassed", String(Boolean(payload.gate_dependency_bypassed))],
       ["approval_expiry_bypassed", String(Boolean(payload.approval_expiry_bypassed))],
@@ -1677,7 +1691,7 @@
       ["sandbox_execution_approved", String(Boolean(payload.sandbox_execution_approved))]
     ].forEach(function (item) {
       var row = document.createElement("div");
-      row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row";
+      row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row";
       var label = document.createElement("span");
       label.textContent = item[0];
       var value = document.createElement("strong");
@@ -1690,7 +1704,7 @@
       .slice(0, 4)
       .forEach(function (section) {
         var row = document.createElement("div");
-        row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row";
+        row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row";
         var label = document.createElement("span");
         label.textContent = safeText(section.title || section.section_key || "section");
         var value = document.createElement("strong");

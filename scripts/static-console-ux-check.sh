@@ -213,6 +213,9 @@ allowed = {
     "./scripts/v02-approval-workflow-stabilization-gate.sh",
     "./scripts/v02-approval-workflow-freeze.sh",
     "./scripts/v02-approval-workflow-no-go-regression.sh",
+    "./scripts/v02-workstream-intake-readiness-gate.sh",
+    "./scripts/v02-workstream-intake-freeze.sh",
+    "./scripts/v02-workstream-intake-no-go-regression.sh",
     "./scripts/docs-check.sh",
 }
 listed = set(nav.get("safe_copy_commands", []))

@@ -117,3 +117,11 @@ stabilizing approval intake, decision evidence, expiry, revocation, and
 dual-control review. It does not reopen planning closeout, approve
 implementation, create a v0.2 tag, create a release, or unlock any runtime
 workstream.
+
+## AION-124 Workstream Intake Dependency
+
+AION-124 builds on this final review by defining the workstream intake
+readiness gate, approval evidence pack, implementation sequencing freeze, and
+workstream rejection rules. It does not reopen planning closeout, approve
+implementation, approve any workstream implementation, create a v0.2 tag,
+create a release, or unlock any runtime workstream.

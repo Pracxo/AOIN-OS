@@ -4435,3 +4435,25 @@ Developer command:
 ./scripts/v02-approval-workflow-freeze.sh
 ./scripts/v02-approval-workflow-no-go-regression.sh
 ```
+
+## AION-124 v0.2 Workstream Intake Readiness
+
+AION-124 defines the v0.2 workstream intake readiness gate, workstream intake
+evidence pack, approval record evidence pack, implementation sequencing freeze,
+workstream readiness scorecard, rejection rules, intake no-go review, ADR 0115,
+static console workstream intake panels, and repository-local workstream intake
+checks. It does not approve implementation: runtime implementation remains
+unapproved, backlog implementation approval remains false, workstream
+implementation approval remains false, approval workflow bypass remains false,
+approval record missing remains false, external calls remain absent,
+credentials and tokens remain absent, sandbox execution remains absent, no v0.2
+release or tag is created, package files remain absent, and migrations remain
+absent.
+
+Developer command:
+
+```bash
+./scripts/v02-workstream-intake-readiness-gate.sh
+./scripts/v02-workstream-intake-freeze.sh
+./scripts/v02-workstream-intake-no-go-regression.sh
+```

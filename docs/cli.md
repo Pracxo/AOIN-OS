@@ -972,6 +972,22 @@ an explicit approval decision record, scoped ADR, scoped gate, expiry and
 revocation evidence, dual-control evidence where required, no-go regression,
 and full repository verification.
 
+## AION-124 v0.2 Workstream Intake Readiness
+
+AION-124 adds no CLI command implementation. Use repository-local scripts for
+v0.2 workstream intake evidence:
+
+```bash
+./scripts/v02-workstream-intake-readiness-gate.sh
+./scripts/v02-workstream-intake-freeze.sh
+./scripts/v02-workstream-intake-no-go-regression.sh
+```
+
+The CLI surface remains preview-only. Future CLI implementation still requires
+a scoped workstream intake record, approval record, scoped ADR, scoped gate,
+expiry and revocation evidence, dual-control evidence where required, no-go
+regression, and full repository verification.
+
 ## AION-121 v0.2 Readiness Final Review
 
 AION-121 adds no CLI command implementation. Use repository-local scripts for

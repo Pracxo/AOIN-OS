@@ -85,3 +85,11 @@ workflow requirements. Runtime workstream locks remain true, and implementation
 approval, backlog implementation approval, approval workflow bypass, ADR
 dependency bypass, gate dependency bypass, v0.2 tag creation, and v0.2 release
 creation remain false.
+
+## AION-124 Workstream Intake Readiness
+
+AION-124 keeps this freeze active while defining candidate workstream intake
+requirements. Runtime workstream locks remain true, and implementation
+approval, backlog implementation approval, workstream implementation approval,
+approval workflow bypass, approval record missing, ADR dependency bypass, gate
+dependency bypass, v0.2 tag creation, and v0.2 release creation remain false.

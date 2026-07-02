@@ -124,3 +124,4 @@ closure decision in ADR 0072.
 - [0112: v0.2 Readiness Final Review](0112-v02-readiness-final-review.md) - Closes v0.2 planning review and freezes the implementation approval guard without approving implementation.
 - [0113: v0.2 Implementation Kickoff Boundary](0113-v02-implementation-kickoff-boundary.md) - Defines the future implementation request and approval workflow boundary without approving implementation.
 - [0114: v0.2 Approval Workflow Stabilization](0114-v02-approval-workflow-stabilization.md) - Stabilizes approval intake, decision evidence, expiry, revocation, and dual-control review without approving implementation.
+- [0115: v0.2 Workstream Intake Readiness](0115-v02-workstream-intake-readiness.md) - Defines workstream intake evidence, approval record evidence, sequencing freeze, and rejection rules without approving implementation.

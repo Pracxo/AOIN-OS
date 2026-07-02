@@ -55,3 +55,9 @@ approver. Dual-control approval still remains a record only.
 Break-glass remains future-only and unapproved. No AION-123 artifact enables a
 break-glass bypass, privileged bypass, approval bypass, runtime execution, or
 release bypass.
+
+## AION-124 Intake Requirement
+
+AION-124 requires future workstream intake records to declare whether
+dual-control review is required. Missing dual-control evidence rejects the
+workstream and does not approve implementation.
