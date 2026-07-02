@@ -109,3 +109,11 @@ AION-122 builds on this final review by defining the future implementation
 request and approval workflow boundary. It does not reopen planning closeout,
 approve implementation, approve backlog implementation items, create a v0.2
 tag, create a release, or unlock any runtime workstream.
+
+## AION-123 Approval Workflow Dependency
+
+AION-123 builds on this final review and the AION-122 kickoff boundary by
+stabilizing approval intake, decision evidence, expiry, revocation, and
+dual-control review. It does not reopen planning closeout, approve
+implementation, create a v0.2 tag, create a release, or unlock any runtime
+workstream.

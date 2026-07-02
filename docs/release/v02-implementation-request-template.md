@@ -64,3 +64,11 @@ Default approval status: false.
 - `approval_workflow_bypassed=false`
 - `adr_dependency_bypassed=false`
 - `gate_dependency_bypassed=false`
+
+## AION-123 Intake Stabilization
+
+AION-123 requires each future implementation request to include risk statement,
+security impact, policy impact, audit/provenance impact, rollback plan, ADR
+dependency, gate dependency, test evidence, expiry handling, revocation
+handling, and dual-control status where required. Missing fields reject the
+request by default.

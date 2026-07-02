@@ -1,0 +1,63 @@
+{
+  "artifact": "v02_approval_decision_evidence_matrix",
+  "task_id": "AION-123",
+  "synthetic": true,
+  "status": "passed",
+  "v02_approval_workflow_stabilized": true,
+  "matrix": [
+    {
+      "workstream": "production_auth",
+      "required_adr": "future_scoped_adr",
+      "required_gate": "future_auth_implementation_gate",
+      "required_reviewers": ["security", "architecture", "operator", "approver"],
+      "approval_status": false,
+      "runtime_approval_status": false,
+      "release_blocker_if_violated": true
+    },
+    {
+      "workstream": "connector_runtime",
+      "required_adr": "future_scoped_adr",
+      "required_gate": "future_connector_implementation_gate",
+      "required_reviewers": ["security", "architecture", "operator", "approver"],
+      "approval_status": false,
+      "runtime_approval_status": false,
+      "release_blocker_if_violated": true
+    },
+    {
+      "workstream": "operator_write_execution",
+      "required_adr": "future_scoped_adr",
+      "required_gate": "future_operator_write_gate",
+      "required_reviewers": ["security", "architecture", "operator", "approver"],
+      "approval_status": false,
+      "runtime_approval_status": false,
+      "release_blocker_if_violated": true
+    }
+  ],
+  "v02_tag_created": false,
+  "v02_release_created": false,
+  "v02_release_approved": false,
+  "runtime_implementation_approved": false,
+  "backlog_implementation_items_approved": false,
+  "approval_workflow_bypassed": false,
+  "adr_dependency_bypassed": false,
+  "gate_dependency_bypassed": false,
+  "approval_expiry_bypassed": false,
+  "approval_revocation_bypassed": false,
+  "dual_control_bypassed": false,
+  "operator_write_execution_approved": false,
+  "connector_implementation_approved": false,
+  "production_auth_approved": false,
+  "module_activation_approved": false,
+  "external_calls_approved": false,
+  "credential_storage_approved": false,
+  "token_storage_approved": false,
+  "sandbox_execution_approved": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "secrets_present": false,
+  "credential_values_present": false,
+  "token_values_present": false,
+  "endpoints_present": false,
+  "prompt_payloads_present": false,
+  "private_reasoning_present": false
+}

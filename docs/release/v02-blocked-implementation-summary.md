@@ -20,3 +20,10 @@ AION-122 keeps every blocked implementation area blocked. It adds request,
 approval, ADR, gate, security, rollback, audit/provenance, and operator review
 requirements that future tasks must satisfy before any unblock condition can be
 considered.
+
+## AION-123 Approval Workflow Stabilization
+
+AION-123 keeps every blocked implementation area blocked. It adds stabilized
+intake validation, approval decision evidence, expiry and revocation rules,
+dual-control review, and approval workflow no-go regression before any future
+implementation can be considered.

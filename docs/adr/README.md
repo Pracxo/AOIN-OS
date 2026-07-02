@@ -123,3 +123,4 @@ closure decision in ADR 0072.
 - [0111: v0.2 Planning Stabilization Gate](0111-v02-planning-stabilization-gate.md) - Freezes v0.2 planning governance, backlog intake, readiness scoring, blocked work, and planning no-go checks without approving implementation.
 - [0112: v0.2 Readiness Final Review](0112-v02-readiness-final-review.md) - Closes v0.2 planning review and freezes the implementation approval guard without approving implementation.
 - [0113: v0.2 Implementation Kickoff Boundary](0113-v02-implementation-kickoff-boundary.md) - Defines the future implementation request and approval workflow boundary without approving implementation.
+- [0114: v0.2 Approval Workflow Stabilization](0114-v02-approval-workflow-stabilization.md) - Stabilizes approval intake, decision evidence, expiry, revocation, and dual-control review without approving implementation.

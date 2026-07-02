@@ -210,6 +210,9 @@ allowed = {
     "./scripts/v02-implementation-kickoff-boundary-check.sh",
     "./scripts/v02-implementation-kickoff-freeze.sh",
     "./scripts/v02-implementation-kickoff-no-go-regression.sh",
+    "./scripts/v02-approval-workflow-stabilization-gate.sh",
+    "./scripts/v02-approval-workflow-freeze.sh",
+    "./scripts/v02-approval-workflow-no-go-regression.sh",
     "./scripts/docs-check.sh",
 }
 listed = set(nav.get("safe_copy_commands", []))

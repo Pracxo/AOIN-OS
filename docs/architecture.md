@@ -2120,6 +2120,21 @@ sandbox execution, API runtime execution routes, SDK resources, CLI
 implementations, package files, migrations, v0.2 tag creation, and v0.2 release
 creation remain false, disabled, or absent.
 
+## AION-123 v0.2 Approval Workflow Stabilization Boundary
+
+AION-123 stabilizes the procedural approval layer above the AION-122 kickoff
+boundary. It adds intake validation, decision evidence, expiry and revocation
+rules, dual-control review, no-go regression, and static console preview data.
+
+Runtime architecture remains unchanged. Implementation approval, backlog
+implementation approval, approval workflow bypass, ADR dependency bypass, gate
+dependency bypass, approval expiry bypass, approval revocation bypass,
+dual-control bypass, production auth, operator write execution, connector
+runtime, module activation, external calls, credential storage, token storage,
+sandbox execution, API runtime execution routes, SDK resources, CLI
+implementations, package files, migrations, v0.2 tag creation, and v0.2 release
+creation remain false, disabled, or absent.
+
 ## AION-121 v0.2 Readiness Final Review Boundary
 
 AION-121 adds the final v0.2 readiness review above the planning stabilization

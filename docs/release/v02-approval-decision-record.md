@@ -61,3 +61,11 @@ Approval does not execute work and does not enable runtime by itself.
 ## Default Decision
 
 Default decision: not approved.
+
+## AION-123 Decision Evidence
+
+AION-123 requires every future decision record to map workstream, required ADR,
+required gate, required evidence, required reviewers, approval status, runtime
+approval status, release blocker status, expiry, revocation path, and
+dual-control status where required. Missing evidence keeps the decision not
+approved.

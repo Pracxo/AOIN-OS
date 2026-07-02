@@ -254,6 +254,10 @@ h1 {
   background: rgb(11 15 20 / 72%);
 }
 
+.approval-workflow-row strong {
+  color: var(--focus);
+}
+
 .section-card {
   padding: 16px;
 }

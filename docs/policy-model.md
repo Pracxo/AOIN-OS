@@ -1908,3 +1908,20 @@ Future v0.2 implementation work remains blocked until a scoped request,
 approval decision record, scoped ADR, scoped gate evidence, security review,
 rollback evidence, audit/provenance evidence, operator review evidence, and
 no-go regression all pass.
+
+## AION-123 v0.2 Approval Workflow Stabilization Policy
+
+AION-123 adds no new policy allow path. It stabilizes approval intake,
+decision evidence, expiry, revocation, and dual-control review while keeping
+runtime implementation, backlog implementation, approval workflow bypass, ADR
+dependency bypass, gate dependency bypass, approval expiry bypass, approval
+revocation bypass, dual-control bypass, operator write execution, connector
+implementation, production auth, module activation, external calls,
+credential/token access, sandbox execution, release creation, tag creation, and
+privileged bypass denied.
+
+Future v0.2 implementation work remains blocked until a scoped request,
+approval decision record, scoped ADR, scoped gate evidence, security review,
+rollback evidence, audit/provenance evidence, operator review evidence,
+expiry and revocation evidence, dual-control evidence where required, and
+no-go regression all pass.

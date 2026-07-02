@@ -122,3 +122,10 @@ or introduces external calls.
 
 AION-122 explicitly creates no v0.2 tag and no release. It does not mutate,
 move, delete, or recreate `aion-v0.1.0`.
+
+## AION-123 Stabilization Dependency
+
+AION-123 stabilizes this kickoff boundary by adding approval intake validation,
+decision evidence, expiry and revocation rules, dual-control review, and a
+dedicated no-go regression. The kickoff boundary still does not approve
+implementation, create a v0.2 tag, create a release, or enable runtime.

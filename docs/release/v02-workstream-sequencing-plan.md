@@ -33,3 +33,10 @@ It does not approve any implementation workstream.
 No workstream can move from planning to implementation until it has a scoped
 ADR, approval decision record, gate evidence, security review, architecture
 review, operator review, rollback evidence, and no-go regression.
+
+## AION-123 Sequencing Stabilization
+
+AION-123 adds intake validation, approval decision evidence, expiry and
+revocation evidence, and dual-control review to the sequencing requirements.
+Workstreams remain `implementation-unapproved` until those checks pass in a
+future scoped implementation task.
