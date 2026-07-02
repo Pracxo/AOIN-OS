@@ -29,3 +29,9 @@ kickoff.
 
 AION-122 keeps all no-go checks absent or false. Future implementation kickoff
 must fail closed if any no-go condition is present.
+
+## AION-123 Additional No-Go Checks
+
+AION-123 adds approval expiry bypass, approval revocation bypass, and
+dual-control bypass as release blockers. These checks remain false and do not
+approve implementation.

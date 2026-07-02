@@ -41,3 +41,11 @@ locked. It also adds `approval_workflow_bypassed=false`,
 `adr_dependency_bypassed=false`, and `gate_dependency_bypassed=false` as
 kickoff boundary evidence. The workflow definition cannot change any approval
 value to true.
+
+## AION-123 Approval Workflow Guard
+
+AION-123 stabilizes the guard with intake validation, decision evidence,
+expiry, revocation, and dual-control checks. Runtime implementation approval,
+backlog implementation approval, approval workflow bypass, ADR dependency
+bypass, gate dependency bypass, approval expiry bypass, approval revocation
+bypass, and dual-control bypass remain false.

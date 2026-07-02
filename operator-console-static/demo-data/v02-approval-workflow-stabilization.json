@@ -1,0 +1,82 @@
+{
+  "artifact": "v02_approval_workflow_stabilization_static_preview",
+  "task_id": "AION-123",
+  "status": "passed",
+  "read_only": true,
+  "redaction_applied": true,
+  "v02_approval_workflow_stabilized": true,
+  "summary": "Approval workflow stabilization preview only. No runtime implementation is approved.",
+  "sections": [
+    {
+      "title": "Approval Workflow Stabilization",
+      "status": "passed",
+      "summary": "Intake, decision evidence, expiry, revocation, and dual-control checks are documented for future requests.",
+      "blockers": [
+        {"message": "runtime implementation remains unapproved"},
+        {"message": "approval bypass remains false"}
+      ],
+      "warnings": [
+        "approval workflow evidence is not runtime approval"
+      ],
+      "refs": [
+        "docs/release/v02-approval-workflow-stabilization-gate.md",
+        "docs/adr/0114-v02-approval-workflow-stabilization.md"
+      ]
+    }
+  ],
+  "checks": [
+    {"label": "approval workflow guard", "passed": true},
+    {"label": "implementation request intake", "passed": true},
+    {"label": "decision evidence matrix", "passed": true},
+    {"label": "expiry and revocation model", "passed": true},
+    {"label": "dual-control review model", "passed": true}
+  ],
+  "blockers": [
+    "runtime implementation remains unapproved",
+    "backlog implementation approval remains false",
+    "approval workflow bypass remains false",
+    "v0.2 tag and release remain absent"
+  ],
+  "warnings": [
+    "static preview data is read-only and cannot approve implementation"
+  ],
+  "refs": [
+    "docs/release/v02-approval-workflow-stabilization-gate.md",
+    "docs/release/v02-approval-workflow-no-go.md"
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Disabled by the v0.2 approval workflow stabilization gate."},
+    {"action_key": "activate_capability", "reason": "Disabled by the v0.2 approval workflow stabilization gate."},
+    {"action_key": "load_code", "reason": "Disabled by the v0.2 approval workflow stabilization gate."},
+    {"action_key": "execute_tool", "reason": "Disabled by the v0.2 approval workflow stabilization gate."},
+    {"action_key": "enable_external_model_calls", "reason": "Disabled by the v0.2 approval workflow stabilization gate."},
+    {"action_key": "hard_delete", "reason": "Disabled by the v0.2 approval workflow stabilization gate."}
+  ],
+  "v02_tag_created": false,
+  "v02_release_created": false,
+  "v02_release_approved": false,
+  "runtime_implementation_approved": false,
+  "backlog_implementation_items_approved": false,
+  "approval_workflow_bypassed": false,
+  "adr_dependency_bypassed": false,
+  "gate_dependency_bypassed": false,
+  "approval_expiry_bypassed": false,
+  "approval_revocation_bypassed": false,
+  "dual_control_bypassed": false,
+  "operator_write_execution_approved": false,
+  "connector_implementation_approved": false,
+  "production_auth_approved": false,
+  "module_activation_approved": false,
+  "external_calls_approved": false,
+  "credential_storage_approved": false,
+  "token_storage_approved": false,
+  "sandbox_execution_approved": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "secrets_present": false,
+  "credential_values_present": false,
+  "token_values_present": false,
+  "endpoints_present": false,
+  "prompt_payloads_present": false,
+  "private_reasoning_present": false
+}

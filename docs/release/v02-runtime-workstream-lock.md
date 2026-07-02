@@ -34,3 +34,10 @@ record that unlocks implementation.
 
 If any locked workstream is enabled before explicit future approval, the
 implementation kickoff no-go regression must fail.
+
+## AION-123 Approval Workflow Lock
+
+AION-123 adds workflow-level locks for approval expiry, approval revocation,
+and dual-control review. Locked workstreams remain blocked when approval
+workflow bypass, ADR dependency bypass, gate dependency bypass, approval expiry
+bypass, approval revocation bypass, or dual-control bypass is detected.

@@ -353,3 +353,23 @@ Validate the v0.2 implementation kickoff evidence:
 ./scripts/v02-implementation-kickoff-freeze.sh
 ./scripts/v02-implementation-kickoff-no-go-regression.sh
 ```
+
+## AION-123 v0.2 Approval Workflow Panels
+
+The static console includes v0.2 approval workflow stabilization and
+implementation request intake panels. They load bundled JSON only, keep runtime
+implementation, backlog implementation approval, approval workflow bypass, ADR
+dependency bypass, gate dependency bypass, approval expiry bypass, approval
+revocation bypass, dual-control bypass, operator write execution, connector
+implementation, production auth, module activation, external calls, credential
+storage, token storage, sandbox execution, v0.2 release creation, and v0.2 tag
+creation unapproved or false, and expose no input, package, migration,
+runtime, release, tag, approval, bypass, or write controls.
+
+Validate the v0.2 approval workflow evidence:
+
+```bash
+./scripts/v02-approval-workflow-stabilization-gate.sh
+./scripts/v02-approval-workflow-freeze.sh
+./scripts/v02-approval-workflow-no-go-regression.sh
+```

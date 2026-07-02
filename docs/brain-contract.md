@@ -1843,6 +1843,21 @@ call path, credential storage, token storage, sandbox execution, approval
 workflow bypass, ADR dependency bypass, gate dependency bypass, backlog
 implementation approval, v0.2 tag, or v0.2 release.
 
+## AION-123 v0.2 Approval Workflow Stabilization Contracts
+
+AION-123 adds approval workflow evidence contracts only: stabilization gate
+examples, implementation request intake examples, approval decision evidence
+matrix examples, expiry and revocation examples, dual-control review examples,
+static console approval workflow data, and local approval workflow scripts.
+
+It adds no Brain API contract, router, SDK resource, CLI command
+implementation, runtime config default, migration, connector runtime,
+production auth runtime, operator write execution, module activation, external
+call path, credential storage, token storage, sandbox execution, approval
+workflow bypass, ADR dependency bypass, gate dependency bypass, approval expiry
+bypass, approval revocation bypass, dual-control bypass, backlog implementation
+approval, v0.2 tag, or v0.2 release.
+
 ## AION-121 v0.2 Readiness Final Review Contracts
 
 AION-121 adds final planning evidence contracts only: readiness final review

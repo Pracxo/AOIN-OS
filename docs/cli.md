@@ -956,6 +956,22 @@ The CLI surface remains preview-only. Future CLI implementation still requires
 an explicit approval decision record, scoped ADR, scoped gate, no-go
 regression, and full repository verification.
 
+## AION-123 v0.2 Approval Workflow Stabilization
+
+AION-123 adds no CLI command implementation. Use repository-local scripts for
+v0.2 approval workflow evidence:
+
+```bash
+./scripts/v02-approval-workflow-stabilization-gate.sh
+./scripts/v02-approval-workflow-freeze.sh
+./scripts/v02-approval-workflow-no-go-regression.sh
+```
+
+The CLI surface remains preview-only. Future CLI implementation still requires
+an explicit approval decision record, scoped ADR, scoped gate, expiry and
+revocation evidence, dual-control evidence where required, no-go regression,
+and full repository verification.
+
 ## AION-121 v0.2 Readiness Final Review
 
 AION-121 adds no CLI command implementation. Use repository-local scripts for

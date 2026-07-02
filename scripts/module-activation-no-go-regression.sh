@@ -188,7 +188,14 @@ for relative in sorted(changed):
         "operator-console-static/demo-data/v02-implementation-approval-guard.json",
         "operator-console-static/demo-data/v02-implementation-kickoff-boundary.json",
         "operator-console-static/demo-data/v02-runtime-workstream-lock.json",
+        "operator-console-static/demo-data/v02-approval-workflow-stabilization.json",
+        "operator-console-static/demo-data/v02-implementation-request-intake.json",
     }:
+        if relative in {
+            "operator-console-static/demo-data/v02-approval-workflow-stabilization.json",
+            "operator-console-static/demo-data/v02-implementation-request-intake.json",
+        }:
+            text = text.replace('"action_key": "activate_capability"', "")
         text = re.sub(
             r'\{\s*"action_key":\s*"activate_capability",\s*"reason":\s*"Disabled (?:in the platform checkpoint|by the future runtime boundary freeze|in the release candidate gate|by the v0\.2 planning boundary|by the v0\.2 planning charter|by the v0\.2 gate dependency matrix|by the v0\.2 planning stabilization gate|by the v0\.2 readiness scorecard|by the v0\.2 readiness final review|by the v0\.2 implementation approval guard|by the v0\.2 implementation kickoff boundary|by the v0\.2 runtime workstream lock)\."\s*\}',
             "",

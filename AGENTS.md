@@ -617,3 +617,18 @@ Instructions for future Codex runs in this repository:
   implementation approval, approval workflow bypass, ADR dependency bypass,
   gate dependency bypass, v0.2 tag creation, v0.2 release creation, or
   privileged bypass.
+- AION-123 v0.2 approval workflow stabilization is approval-intake evidence
+  only. It must pass
+  `./scripts/v02-approval-workflow-stabilization-gate.sh`,
+  `./scripts/v02-approval-workflow-freeze.sh`, and
+  `./scripts/v02-approval-workflow-no-go-regression.sh`, and it must not add
+  API routers, SDK resources, CLI command implementations, runtime config
+  defaults, connector runtime enablement, operator write execution, production
+  auth, module activation, external calls, network clients, connector/provider
+  SDK dependencies, credential or token storage, OAuth/OIDC/SAML runtime,
+  sandbox execution, package files, lockfiles, migrations, runtime route
+  registration, code loading, tool execution, hard delete, backlog
+  implementation approval, approval workflow bypass, ADR dependency bypass,
+  gate dependency bypass, approval expiry bypass, approval revocation bypass,
+  dual-control bypass, v0.2 tag creation, v0.2 release creation, or privileged
+  bypass.

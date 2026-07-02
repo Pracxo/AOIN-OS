@@ -1,0 +1,94 @@
+{
+  "artifact": "v02_implementation_request_intake_static_preview",
+  "task_id": "AION-123",
+  "status": "passed",
+  "read_only": true,
+  "redaction_applied": true,
+  "v02_approval_workflow_stabilized": true,
+  "summary": "Synthetic intake validation preview with default approval status false.",
+  "sections": [
+    {
+      "title": "Implementation Request Intake",
+      "status": "passed",
+      "summary": "Required fields, rejection conditions, and false default approval status are visible for review.",
+      "blockers": [
+        {"message": "missing approval evidence rejects the request"},
+        {"message": "runtime enabled before approval rejects the request"}
+      ],
+      "warnings": [
+        "intake validation is not runtime approval"
+      ],
+      "refs": [
+        "docs/release/v02-implementation-request-intake-validation.md",
+        "docs/release/v02-approval-decision-evidence-matrix.md"
+      ]
+    }
+  ],
+  "required_fields": [
+    "workstream",
+    "runtime_capability_requested",
+    "risk_statement",
+    "security_impact",
+    "policy_impact",
+    "audit_provenance_impact",
+    "rollback_plan",
+    "adr_dependency",
+    "gate_dependency",
+    "test_evidence"
+  ],
+  "rejection_conditions": [
+    "missing required field",
+    "approval workflow bypass",
+    "ADR dependency bypass",
+    "gate dependency bypass",
+    "expiry or revocation bypass",
+    "runtime enabled before approval"
+  ],
+  "blockers": [
+    "default approval status remains false",
+    "runtime implementation remains unapproved",
+    "bypass attempts remain release blockers"
+  ],
+  "warnings": [
+    "static intake preview data is read-only and cannot approve implementation"
+  ],
+  "refs": [
+    "docs/release/v02-implementation-request-intake-validation.md",
+    "docs/release/v02-dual-control-review-model.md"
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Disabled by the v0.2 implementation request intake boundary."},
+    {"action_key": "activate_capability", "reason": "Disabled by the v0.2 implementation request intake boundary."},
+    {"action_key": "load_code", "reason": "Disabled by the v0.2 implementation request intake boundary."},
+    {"action_key": "execute_tool", "reason": "Disabled by the v0.2 implementation request intake boundary."},
+    {"action_key": "enable_external_model_calls", "reason": "Disabled by the v0.2 implementation request intake boundary."},
+    {"action_key": "hard_delete", "reason": "Disabled by the v0.2 implementation request intake boundary."}
+  ],
+  "v02_tag_created": false,
+  "v02_release_created": false,
+  "v02_release_approved": false,
+  "runtime_implementation_approved": false,
+  "backlog_implementation_items_approved": false,
+  "approval_workflow_bypassed": false,
+  "adr_dependency_bypassed": false,
+  "gate_dependency_bypassed": false,
+  "approval_expiry_bypassed": false,
+  "approval_revocation_bypassed": false,
+  "dual_control_bypassed": false,
+  "operator_write_execution_approved": false,
+  "connector_implementation_approved": false,
+  "production_auth_approved": false,
+  "module_activation_approved": false,
+  "external_calls_approved": false,
+  "credential_storage_approved": false,
+  "token_storage_approved": false,
+  "sandbox_execution_approved": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "secrets_present": false,
+  "credential_values_present": false,
+  "token_values_present": false,
+  "endpoints_present": false,
+  "prompt_payloads_present": false,
+  "private_reasoning_present": false
+}

@@ -1,0 +1,26 @@
+# v0.2 Approval Workflow Stabilization Checklist
+
+- docs complete
+- examples valid
+- scripts executable
+- kickoff boundary passing
+- readiness final review passing
+- planning stabilization passing
+- post-v0.1 release candidate passing
+- platform integration passing
+- approval workflow guard passing
+- no runtime implementation
+- no v0.2 tag
+- no v0.2 release
+- no external calls
+- no credentials/tokens
+- no sandbox execution
+- no package files
+- no migrations
+- implementation approval remains false
+- backlog implementation approval remains false
+- approval workflow bypass remains false
+- approval expiry bypass remains false
+- approval revocation bypass remains false
+- dual-control bypass remains false
+- `aion-v0.1.0` remains untouched

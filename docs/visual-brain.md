@@ -1144,3 +1144,15 @@ approval workflow, bypass ADR dependency, bypass gate dependency, create a
 release, create a v0.2 tag, call external systems, store credentials or tokens,
 enable production auth, enable module activation, enable sandbox execution,
 register routes, execute tools, or execute write paths.
+
+## AION-123 v0.2 Approval Workflow Projection
+
+AION-123 adds bundled static v0.2 approval workflow stabilization and
+implementation request intake demo data. These panels are read-only evidence
+projections only; they do not emit runtime events, approve backlog
+implementation, bypass approval workflow, bypass ADR dependency, bypass gate
+dependency, bypass approval expiry, bypass approval revocation, bypass
+dual-control review, create a release, create a v0.2 tag, call external
+systems, store credentials or tokens, enable production auth, enable module
+activation, enable sandbox execution, register routes, execute tools, or
+execute write paths.

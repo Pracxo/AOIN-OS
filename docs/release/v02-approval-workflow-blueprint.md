@@ -91,3 +91,11 @@ The workflow blocks approval when evidence is missing, approval workflow is
 bypassed, ADR dependency is bypassed, gate dependency is bypassed, any
 implementation approval is already true without a valid decision record, or any
 runtime capability is enabled before explicit future implementation approval.
+
+## AION-123 Stabilization
+
+AION-123 freezes the blueprint into a stabilization gate. Future requests must
+also prove intake validation, decision evidence, expiry and revocation
+evidence, dual-control evidence where required, and no-go regression evidence.
+Approval remains false by default and still does not execute work or enable
+runtime by itself.

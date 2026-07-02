@@ -4412,3 +4412,26 @@ Developer command:
 ./scripts/v02-implementation-kickoff-freeze.sh
 ./scripts/v02-implementation-kickoff-no-go-regression.sh
 ```
+
+## AION-123 v0.2 Approval Workflow Stabilization
+
+AION-123 stabilizes the approval workflow created in AION-122. It adds the
+approval workflow stabilization gate, implementation request intake validation,
+approval decision evidence matrix, expiry and revocation model, dual-control
+review model, approval workflow no-go review, stabilization checklist, ADR
+0114, static console approval workflow panels, and repository-local approval
+workflow checks. It does not approve implementation: runtime implementation
+remains unapproved, backlog implementation approval remains false, approval
+workflow bypass remains false, approval expiry and revocation bypass remain
+false, dual-control bypass remains false, external calls remain absent,
+credentials and tokens remain absent, sandbox execution remains absent, no v0.2
+release or tag is created, package files remain absent, and migrations remain
+absent.
+
+Developer command:
+
+```bash
+./scripts/v02-approval-workflow-stabilization-gate.sh
+./scripts/v02-approval-workflow-freeze.sh
+./scripts/v02-approval-workflow-no-go-regression.sh
+```

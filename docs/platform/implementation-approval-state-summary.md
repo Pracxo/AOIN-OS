@@ -72,3 +72,13 @@ dependency bypass, and gate dependency bypass remain false. The kickoff
 boundary does not approve runtime implementation, external calls,
 protected-material storage, sandbox execution, v0.2 tag creation, or v0.2
 release creation.
+
+## AION-123 Approval Workflow Stabilization State
+
+AION-123 adds `v02_approval_workflow_stabilized=true` while every
+implementation approval remains false. Approval workflow bypass, ADR
+dependency bypass, gate dependency bypass, approval expiry bypass, approval
+revocation bypass, and dual-control bypass remain false. The stabilization
+gate does not approve runtime implementation, external calls,
+protected-material storage, sandbox execution, v0.2 tag creation, or v0.2
+release creation.
