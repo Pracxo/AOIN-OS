@@ -136,3 +136,7 @@ AION-124 adds the workstream intake readiness gate above this kickoff boundary.
 It accepts candidate workstreams into planning only when intake evidence,
 approval record evidence, sequencing evidence, and rejection evidence are
 present. Workstream implementation approval remains false.
+AION-125 consumes the kickoff boundary as prior evidence for the final planning
+baseline. The kickoff boundary remains planning-only and does not approve
+runtime implementation, backlog implementation items, workstream
+implementation, a v0.2 tag, or a v0.2 release.

@@ -115,3 +115,7 @@ implementation approval, approval record missing, approval workflow bypass, ADR
 dependency bypass, and gate dependency bypass remain blocked until future
 scoped intake, approval record, ADR, gate, security, rollback,
 audit/provenance, operator review, sequencing, and no-go evidence pass.
+AION-125 keeps production auth behind the pre-implementation master freeze.
+Production auth approval and runtime enablement remain false, and future auth
+implementation still requires approval records, ADR evidence, release gate
+evidence, no-go regression evidence, and full verification.

@@ -47,3 +47,10 @@ Module activation remains locked. Code loading, runtime registration, capability
 ## Production UI Undecided
 
 Production UI remains undecided and planning-only. Static console previews remain dependency-free and read-only.
+
+## AION-125 Final Planning Baseline
+
+AION-125 freezes this sequencing as final planning baseline evidence. The
+sequence does not approve implementation, runtime enablement, external calls,
+credential/token storage, sandbox execution, operator write execution, module
+activation, connector runtime, a v0.2 tag, or a v0.2 release.

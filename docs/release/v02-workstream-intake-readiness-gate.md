@@ -60,3 +60,10 @@ The gate fails if implementation approval is set true, backlog implementation ap
 ## No v0.2 Tag Or Release
 
 AION-124 explicitly creates no v0.2 tag and no release. `aion-v0.1.0` remains the frozen release baseline.
+
+## AION-125 Master Freeze Dependency
+
+AION-125 consumes this intake gate as a required prior gate for the final
+pre-implementation master freeze. Intake readiness remains planning-only and
+does not approve runtime implementation, workstream implementation, a v0.2 tag,
+or a v0.2 release.

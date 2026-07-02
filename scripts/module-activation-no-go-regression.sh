@@ -192,6 +192,8 @@ for relative in sorted(changed):
         "operator-console-static/demo-data/v02-implementation-request-intake.json",
         "operator-console-static/demo-data/v02-workstream-intake-readiness.json",
         "operator-console-static/demo-data/v02-implementation-sequencing-freeze.json",
+        "operator-console-static/demo-data/v02-preimplementation-master-freeze.json",
+        "operator-console-static/demo-data/v02-final-planning-baseline.json",
     }:
         if relative in {
             "operator-console-static/demo-data/v02-approval-workflow-stabilization.json",
@@ -201,7 +203,7 @@ for relative in sorted(changed):
         }:
             text = text.replace('"action_key": "activate_capability"', "")
         text = re.sub(
-            r'\{\s*"action_key":\s*"activate_capability",\s*"reason":\s*"Disabled (?:in the platform checkpoint|by the future runtime boundary freeze|in the release candidate gate|by the v0\.2 planning boundary|by the v0\.2 planning charter|by the v0\.2 gate dependency matrix|by the v0\.2 planning stabilization gate|by the v0\.2 readiness scorecard|by the v0\.2 readiness final review|by the v0\.2 implementation approval guard|by the v0\.2 implementation kickoff boundary|by the v0\.2 runtime workstream lock)\."\s*\}',
+            r'\{\s*"action_key":\s*"activate_capability",\s*"reason":\s*"Disabled (?:in the platform checkpoint|by the future runtime boundary freeze|in the release candidate gate|by the v0\.2 planning boundary|by the v0\.2 planning charter|by the v0\.2 gate dependency matrix|by the v0\.2 planning stabilization gate|by the v0\.2 readiness scorecard|by the v0\.2 readiness final review|by the v0\.2 implementation approval guard|by the v0\.2 implementation kickoff boundary|by the v0\.2 runtime workstream lock|by the v0\.2 pre-implementation master freeze|by the v0\.2 final planning baseline)\."\s*\}',
             "",
             text,
         )

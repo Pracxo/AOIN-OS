@@ -1168,3 +1168,9 @@ bypass approval revocation, bypass dual-control review, create a release,
 create a v0.2 tag, call external systems, store credentials or tokens, enable
 production auth, enable module activation, enable sandbox execution, register
 routes, execute tools, or execute write paths.
+AION-125 adds static preview data for the v0.2 pre-implementation master freeze
+and final planning baseline. The visual surface remains read-only and local:
+it displays bundled JSON evidence only, exposes no input controls, and keeps
+runtime implementation approval, workstream implementation approval, approval
+workflow bypass, external calls, credential/token storage, sandbox execution,
+v0.2 tag creation, and v0.2 release creation false.

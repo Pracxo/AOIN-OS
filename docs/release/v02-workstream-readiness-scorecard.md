@@ -20,3 +20,6 @@ This scorecard ranks candidate v0.2 workstreams for planning intake only. Implem
 ## Guardrail
 
 Readiness scores are planning signals only. They are not approval records, runtime approvals, or release approvals.
+AION-125 closes this scorecard into the final pre-implementation planning
+baseline. Each listed workstream remains planning-only with implementation
+allowed today: false.

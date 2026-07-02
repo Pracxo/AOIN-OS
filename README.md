@@ -4457,3 +4457,25 @@ Developer command:
 ./scripts/v02-workstream-intake-freeze.sh
 ./scripts/v02-workstream-intake-no-go-regression.sh
 ```
+
+## AION-125 v0.2 Pre-Implementation Master Freeze
+
+AION-125 creates the v0.2 pre-implementation master freeze, final planning
+baseline, workstream governance closeout, approval workflow closeout evidence,
+implementation lock summary, master no-go regression, final checklist, ADR
+0116, static console master freeze panels, and repository-local master freeze
+checks. It does not approve implementation: runtime implementation remains
+unapproved, backlog implementation approval remains false, workstream
+implementation approval remains false, approval workflow bypass remains false,
+approval record missing remains false, external calls remain absent,
+credentials and tokens remain absent, sandbox execution remains absent, no v0.2
+release or tag is created, package files remain absent, and migrations remain
+absent.
+
+Developer command:
+
+```bash
+./scripts/v02-preimplementation-master-freeze.sh
+./scripts/v02-preimplementation-final-baseline-check.sh
+./scripts/v02-preimplementation-master-no-go-regression.sh
+```

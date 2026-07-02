@@ -1123,3 +1123,8 @@ examples only:
 SDK surfaces remain unchanged until a future explicit ADR, planning review,
 scoped gate, no-go regression, and full repository verification approve a
 narrow implementation scope.
+AION-125 does not add SDK resources or CLI command implementations. The v0.2
+pre-implementation master freeze remains a documentation, example,
+static-console, script, and test baseline. Future SDK runtime work requires a
+separate approval record, ADR, gate evidence, no-go regression, and explicit
+scope change.

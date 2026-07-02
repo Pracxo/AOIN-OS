@@ -46,3 +46,13 @@ AION-122 adds approval workflow boundary evidence while preserving every lock.
 `gate_dependency_bypassed=false` must remain false. The kickoff boundary
 cannot approve runtime work, backlog implementation items, a v0.2 tag, or a
 v0.2 release.
+
+## AION-125 Pre-Implementation Master Lock
+
+AION-125 adds the final master-freeze lock while preserving every approval
+value. `workstream_implementation_approved=false`,
+`approval_record_missing=false`, `approval_expiry_bypassed=false`,
+`approval_revocation_bypassed=false`, and `dual_control_bypassed=false` must
+remain false. The master freeze cannot approve runtime work, backlog
+implementation items, workstream implementation items, a v0.2 tag, or a v0.2
+release.

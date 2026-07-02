@@ -130,3 +130,11 @@ AION-122 adds the future implementation request and approval workflow boundary
 after planning closeout. It does not approve implementation, create a v0.2 tag,
 create a release, bypass approval workflow, bypass ADR dependency, bypass gate
 dependency, or change any runtime boundary.
+
+## AION-125 Pre-Implementation Master Freeze
+
+AION-125 freezes the final v0.2 planning baseline above the workstream intake
+readiness layer. The charter remains planning-only after AION-125: all
+implementation approval states remain false, approval records remain required,
+no v0.2 tag is created, no release is created, and the v0.1 release baseline is
+not mutated.

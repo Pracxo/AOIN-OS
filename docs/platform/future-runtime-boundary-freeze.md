@@ -93,3 +93,13 @@ requirements. Runtime workstream locks remain true, and implementation
 approval, backlog implementation approval, workstream implementation approval,
 approval workflow bypass, approval record missing, ADR dependency bypass, gate
 dependency bypass, v0.2 tag creation, and v0.2 release creation remain false.
+
+## AION-125 Pre-Implementation Master Freeze
+
+AION-125 keeps this freeze active as part of the final pre-implementation
+planning baseline. Runtime workstream locks remain true, and implementation
+approval, backlog implementation approval, workstream implementation approval,
+approval workflow bypass, approval record missing, ADR dependency bypass, gate
+dependency bypass, approval expiry bypass, approval revocation bypass,
+dual-control bypass, v0.2 tag creation, and v0.2 release creation remain
+false.

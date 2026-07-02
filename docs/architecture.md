@@ -2152,6 +2152,22 @@ execution, API runtime execution routes, SDK resources, CLI implementations,
 package files, migrations, v0.2 tag creation, and v0.2 release creation remain
 false, disabled, or absent.
 
+## AION-125 v0.2 Pre-Implementation Master Freeze Boundary
+
+AION-125 adds the final planning-only master freeze above the workstream intake
+layer. It closes planning, approval workflow, workstream intake, governance,
+and implementation lock evidence into a final pre-implementation baseline.
+
+Runtime architecture remains unchanged. Implementation approval, backlog
+implementation approval, workstream implementation approval, approval workflow
+bypass, approval record missing, ADR dependency bypass, gate dependency bypass,
+approval expiry bypass, approval revocation bypass, dual-control bypass,
+production auth, operator write execution, connector runtime, module
+activation, external calls, credential storage, token storage, sandbox
+execution, API runtime execution routes, SDK resources, CLI implementations,
+package files, migrations, v0.2 tag creation, and v0.2 release creation remain
+false, disabled, or absent.
+
 ## AION-121 v0.2 Readiness Final Review Boundary
 
 AION-121 adds the final v0.2 readiness review above the planning stabilization

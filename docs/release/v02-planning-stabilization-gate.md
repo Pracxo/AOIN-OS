@@ -118,3 +118,6 @@ v0.1 release baseline.
 AION-121 consumes this stabilization gate as required prior evidence. The final
 review does not change the AION-120 pass/fail criteria, does not approve
 implementation, does not create a v0.2 tag, and does not create a release.
+AION-125 consumes the planning stabilization gate as required prior evidence.
+Planning stabilization remains governance-only and does not approve backlog
+implementation items, runtime implementation, a v0.2 tag, or a v0.2 release.

@@ -216,6 +216,9 @@ allowed = {
     "./scripts/v02-workstream-intake-readiness-gate.sh",
     "./scripts/v02-workstream-intake-freeze.sh",
     "./scripts/v02-workstream-intake-no-go-regression.sh",
+    "./scripts/v02-preimplementation-master-freeze.sh",
+    "./scripts/v02-preimplementation-final-baseline-check.sh",
+    "./scripts/v02-preimplementation-master-no-go-regression.sh",
     "./scripts/docs-check.sh",
 }
 listed = set(nav.get("safe_copy_commands", []))
