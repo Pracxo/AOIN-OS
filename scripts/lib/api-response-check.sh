@@ -28,10 +28,10 @@ except json.JSONDecodeError as exc:
     print(f"{label}: invalid JSON response: {exc}", file=sys.stderr)
     sys.exit(1)
 
-failures: list[str] = []
+failures = []
 
 
-def _as_int(value: object) -> int | None:
+def _as_int(value):
     if isinstance(value, bool):
         return None
     if isinstance(value, int):
@@ -41,7 +41,7 @@ def _as_int(value: object) -> int | None:
     return None
 
 
-def visit(value: object, trail: str) -> None:
+def visit(value, trail):
     if isinstance(value, dict):
         status = value.get("status")
         if isinstance(status, str) and status.lower() == "failed":

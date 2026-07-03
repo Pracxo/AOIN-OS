@@ -39,3 +39,10 @@ Every candidate must name a future release or safety gate before implementation 
 ## No-Go Conditions
 
 The freeze fails on approval queue item approved true, proposal implementation approval true, implementation approval true, workstream implementation approval true, backlog implementation approval true, approval workflow bypass, missing approval record, ADR dependency bypass, gate dependency bypass, approval expiry bypass, approval revocation bypass, dual-control bypass, v0.2 tag or release creation, production auth enablement, connector runtime enablement, operator write execution enablement, module activation enablement, external calls, credential/token storage, sandbox execution, package files, migrations, or runtime API execution routes.
+
+## AION-128 Planning Master Checkpoint
+
+AION-128 consumes this approval queue freeze as an inherited planning baseline.
+The queue remains preview-only, queue placement remains non-approval, approval
+queue item approval remains false, proposal implementation approval remains
+false, and no runtime or release behavior is enabled.

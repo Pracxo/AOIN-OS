@@ -52,15 +52,15 @@ is_nested_gate_context() {
 }
 
 ./scripts/v02-readiness-final-no-go-regression.sh
-AION_V02_PLANNING_STABILIZATION_SKIP_NESTED_GATES=1 ./scripts/v02-planning-stabilization-gate.sh
-AION_V02_PLANNING_FREEZE_SKIP_FULL_CHECK=1 ./scripts/v02-planning-freeze-check.sh
-./scripts/v02-planning-stabilization-no-go-regression.sh
-AION_V02_PLANNING_CHARTER_SKIP_NESTED_GATES=1 ./scripts/v02-planning-charter-check.sh
-./scripts/v02-planning-no-go-regression.sh
 
 if is_nested_gate_context; then
   echo "PASS: v0.2 readiness final downstream release gates deferred to outer aggregate gate"
 else
+  AION_V02_PLANNING_STABILIZATION_SKIP_NESTED_GATES=1 ./scripts/v02-planning-stabilization-gate.sh
+  AION_V02_PLANNING_FREEZE_SKIP_FULL_CHECK=1 ./scripts/v02-planning-freeze-check.sh
+  ./scripts/v02-planning-stabilization-no-go-regression.sh
+  AION_V02_PLANNING_CHARTER_SKIP_NESTED_GATES=1 ./scripts/v02-planning-charter-check.sh
+  ./scripts/v02-planning-no-go-regression.sh
   AION_AGGREGATE_GATE_RUNNING=1 AION_POST_V01_RELEASE_CANDIDATE_SKIP_DOWNSTREAM_GATES=1 ./scripts/post-v01-release-candidate-gate.sh
   AION_AGGREGATE_GATE_RUNNING=1 AION_POST_V01_RELEASE_CANDIDATE_FREEZE_SKIP_FULL_CHECK=1 ./scripts/post-v01-release-candidate-freeze.sh
   ./scripts/post-v01-release-candidate-no-go-regression.sh

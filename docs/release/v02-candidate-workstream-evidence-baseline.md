@@ -14,3 +14,10 @@ Each candidate remains blocked with approval status false and implementation sta
 | operator write execution proposal | queued_for_future_decision | false | false | operator write execution ADR | operator write execution gate | dry-run evidence, approval model, rollback plan | write execution remains disabled | draft write-path approval plan |
 | module activation proposal | queued_for_future_decision | false | false | module activation ADR | module activation gate | capability review, package denial, activation policy | module activation remains disabled | draft activation prerequisite plan |
 | production UI decision proposal | queued_for_future_decision | false | false | production UI decision ADR | production UI release gate | UI scope, access model, no-write proof | production UI approval remains false | draft UI decision record |
+
+## AION-128 Planning Master Use
+
+AION-128 carries this candidate workstream evidence into the planning master
+checkpoint. Every candidate remains blocked with approval status false,
+implementation status false, approval queue item approval false, proposal
+implementation approval false, and runtime implementation approval false.

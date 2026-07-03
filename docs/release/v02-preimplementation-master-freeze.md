@@ -77,3 +77,13 @@ approve proposal implementation, approve queue items, create a v0.2 tag, create
 a release, enable runtime, enable external calls, store credentials or tokens,
 enable sandbox execution, add package files, add migrations, or add runtime
 API, SDK, or CLI implementation.
+
+## AION-128 Planning Master Checkpoint Layer
+
+AION-128 consolidates this freeze into the planning master checkpoint. The
+planning master checkpoint, proposal governance baseline, approval queue
+baseline, and implementation lock freeze remain planning-only; they do not
+approve implementation, approve queue items, create a v0.2 tag, create a
+release, enable runtime, enable external calls, store credentials or tokens,
+enable sandbox execution, add package files, add migrations, or add runtime
+API, SDK, or CLI implementation.

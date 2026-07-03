@@ -11,3 +11,9 @@
 - v02_release_created=false
 
 AION-127 stabilizes the proposal registry and approval queue preview without approving implementation, enabling runtime, creating a v0.2 tag, creating a release, or changing the frozen `aion-v0.1.0` baseline.
+
+AION-128 carries this summary into the planning master checkpoint. Proposal
+registry preview-only, approval queue preview-only, approval queue item
+approval false, proposal implementation approval false, runtime
+implementation approval false, v0.2 tag creation false, and v0.2 release
+creation false remain locked.

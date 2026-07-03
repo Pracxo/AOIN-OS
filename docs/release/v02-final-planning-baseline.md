@@ -75,3 +75,12 @@ approval queue item approval false, proposal implementation approval false,
 runtime implementation approval false, workstream implementation approval
 false, v0.2 tag creation false, and v0.2 release creation false remain part of
 the final planning baseline.
+
+## AION-128 Planning Master Baseline
+
+AION-128 consolidates AION-119 through AION-127 into the planning master
+baseline. Proposal registry preview-only, approval queue preview-only,
+approval queue item approval false, proposal implementation approval false,
+runtime implementation approval false, backlog implementation approval false,
+workstream implementation approval false, v0.2 tag creation false, and v0.2
+release creation false remain part of the final planning baseline.

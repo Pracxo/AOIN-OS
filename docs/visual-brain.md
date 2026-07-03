@@ -1192,3 +1192,13 @@ queue item approval false, proposal implementation approval false, runtime
 implementation approval false, workstream implementation approval false,
 external calls false, credential/token storage false, sandbox execution false,
 v0.2 tag creation false, and v0.2 release creation false.
+
+AION-128 adds static preview data for the planning master checkpoint and
+implementation lock freeze. The visual surface remains read-only and local: it
+displays bundled JSON evidence only, exposes no input controls, and keeps the
+proposal registry preview-only, the approval queue preview-only, approval
+queue item approval false, proposal implementation approval false, runtime
+implementation approval false, backlog implementation approval false,
+workstream implementation approval false, external calls false,
+credential/token storage false, sandbox execution false, v0.2 tag creation
+false, and v0.2 release creation false.

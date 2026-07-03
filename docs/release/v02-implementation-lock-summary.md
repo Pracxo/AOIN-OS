@@ -44,3 +44,18 @@ approval record missing false, ADR dependency bypass false, gate dependency
 bypass false, approval expiry bypass false, approval revocation bypass false,
 dual-control bypass false, v0.2 tag creation false, and v0.2 release creation
 false.
+
+## AION-128 Planning Master Lock Extension
+
+AION-128 extends the lock summary to the planning master checkpoint:
+proposal registry preview-only true, approval queue preview-only true,
+approval queue item approval false, proposal implementation approval false,
+runtime implementation approval false, backlog implementation approval false,
+workstream implementation approval false, approval workflow bypass false,
+approval record missing false, ADR dependency bypass false, gate dependency
+bypass false, operator write execution approval false, connector
+implementation approval false, production auth approval false, module
+activation approval false, external calls approval false, credential storage
+approval false, token storage approval false, sandbox execution approval
+false, v0.2 tag creation false, v0.2 release creation false, and v0.2 release
+approval false.

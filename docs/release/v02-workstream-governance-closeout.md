@@ -56,3 +56,12 @@ workstreams remain blocked with proposal implementation approval false,
 workstream implementation approval false, approval queue item approval false,
 runtime implementation approval false, no v0.2 tag, and no v0.2 release until
 a later scoped approval task changes the boundary.
+
+## AION-128 Planning Master Follow-Up
+
+AION-128 consolidates this closeout into the planning master checkpoint.
+Future workstreams remain blocked with proposal registry preview-only true,
+approval queue preview-only true, proposal implementation approval false,
+workstream implementation approval false, approval queue item approval false,
+runtime implementation approval false, no v0.2 tag, and no v0.2 release until
+a later scoped approval task changes the boundary.

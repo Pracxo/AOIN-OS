@@ -84,3 +84,12 @@ approval status false, implementation status false, approval queue item
 approval false, proposal implementation approval false, required ADR
 dependency, required gate dependency, required evidence, and no-go
 acknowledgement.
+
+## AION-128 Planning Master Dependency
+
+AION-128 consumes this intake readiness gate as prior evidence for the
+planning master checkpoint. Candidate workstreams remain planning-only with
+approval status false, implementation status false, approval queue item
+approval false, proposal implementation approval false, required ADR
+dependency, required gate dependency, required evidence, and no-go
+acknowledgement.

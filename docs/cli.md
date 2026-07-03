@@ -1019,3 +1019,9 @@ surface is local verification through proposal registry stabilization scripts:
 `./scripts/v02-proposal-registry-stabilization-gate.sh`,
 `./scripts/v02-approval-queue-freeze.sh`, and
 `./scripts/v02-approval-queue-no-go-regression.sh`.
+
+AION-128 adds no CLI runtime command implementation. The only CLI-adjacent
+surface is local verification through planning master scripts:
+`./scripts/v02-planning-master-checkpoint.sh`,
+`./scripts/v02-planning-master-freeze.sh`, and
+`./scripts/v02-planning-master-no-go-regression.sh`.

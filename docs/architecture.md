@@ -2104,6 +2104,21 @@ token storage, sandbox execution, API runtime execution routes, SDK resources,
 CLI implementations, package files, migrations, v0.2 tag creation, and v0.2
 release creation remain false, disabled, or absent.
 
+## AION-128 v0.2 Planning Master Checkpoint Boundary
+
+AION-128 consolidates the v0.2 planning charter, stabilization, readiness,
+approval workflow, workstream intake, pre-implementation master freeze,
+proposal registry, and approval queue freeze into one planning master
+checkpoint. The architecture remains unchanged at runtime: proposal registry
+preview-only, approval queue preview-only, approval queue item approval,
+proposal implementation approval, runtime implementation approval, backlog
+implementation approval, workstream implementation approval, production auth,
+operator write execution, connector runtime, module activation, external
+calls, credential storage, token storage, sandbox execution, API runtime
+execution routes, SDK resources, CLI implementations, package files,
+migrations, v0.2 tag creation, and v0.2 release creation remain false,
+disabled, or absent.
+
 ## AION-127 v0.2 Proposal Registry Stabilization Boundary
 
 AION-127 stabilizes the proposal registry and approval queue preview above the

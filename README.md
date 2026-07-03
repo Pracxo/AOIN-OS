@@ -123,6 +123,19 @@ workstream implementation approval false remain locked. It creates no v0.2 tag
 or release and adds no runtime, external call, credential/token, sandbox,
 package, migration, API, SDK, CLI, or domain module implementation.
 
+## v0.2 Planning Master Checkpoint
+
+AION-128 consolidates AION-119 through AION-127 into a planning master
+checkpoint, proposal governance baseline, approval queue baseline, and
+implementation lock freeze. It adds planning docs, ADR 0119, synthetic
+examples, static console preview data, and local verification scripts only.
+Proposal registry preview-only, approval queue preview-only, approval queue
+item approval false, proposal implementation approval false, runtime
+implementation approval false, backlog implementation approval false, and
+workstream implementation approval false remain locked. It creates no v0.2
+tag or release and adds no runtime, external call, credential/token, sandbox,
+package, migration, API, SDK, CLI, or domain module implementation.
+
 ## Core Brain Loop
 
 ```text
