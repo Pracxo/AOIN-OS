@@ -2104,6 +2104,19 @@ token storage, sandbox execution, API runtime execution routes, SDK resources,
 CLI implementations, package files, migrations, v0.2 tag creation, and v0.2
 release creation remain false, disabled, or absent.
 
+## AION-126 Proposal Registry Layer
+
+AION-126 adds a planning-only proposal registry layer above the frozen
+AION-125 baseline. The layer catalogs future workstream proposals,
+implementation request types, required ADRs, required gates, evidence
+requirements, and queue preview state. It changes no runtime architecture:
+implementation approvals, approval queue approvals, approval workflow bypass,
+approval record absence, ADR or gate dependency bypass, production auth,
+connector runtime, operator write execution, module activation, external
+calls, credential or token storage, sandbox execution, package files,
+migrations, runtime API routes, SDK resources, CLI commands, v0.2 tag
+creation, and v0.2 release creation remain false, disabled, or absent.
+
 ## AION-122 v0.2 Implementation Kickoff Boundary
 
 AION-122 adds an implementation kickoff boundary above the AION-121 readiness
@@ -2141,6 +2154,22 @@ AION-124 adds the planning-only workstream intake readiness layer above the
 approval workflow. It defines intake evidence, approval record evidence,
 sequencing evidence, rejection rules, no-go regression, and static console
 preview data for candidate v0.2 workstreams.
+
+Runtime architecture remains unchanged. Implementation approval, backlog
+implementation approval, workstream implementation approval, approval workflow
+bypass, approval record missing, ADR dependency bypass, gate dependency bypass,
+approval expiry bypass, approval revocation bypass, dual-control bypass,
+production auth, operator write execution, connector runtime, module
+activation, external calls, credential storage, token storage, sandbox
+execution, API runtime execution routes, SDK resources, CLI implementations,
+package files, migrations, v0.2 tag creation, and v0.2 release creation remain
+false, disabled, or absent.
+
+## AION-125 v0.2 Pre-Implementation Master Freeze Boundary
+
+AION-125 adds the final planning-only master freeze above the workstream intake
+layer. It closes planning, approval workflow, workstream intake, governance,
+and implementation lock evidence into a final pre-implementation baseline.
 
 Runtime architecture remains unchanged. Implementation approval, backlog
 implementation approval, workstream implementation approval, approval workflow

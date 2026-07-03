@@ -1002,3 +1002,14 @@ v0.2 readiness final evidence:
 The CLI surface remains preview-only. Future CLI implementation still requires
 planning review, an explicit ADR, scoped gate, no-go regression, and full
 repository verification.
+AION-125 adds no CLI runtime command implementation. The only CLI-adjacent
+surface is local verification through existing shell scripts:
+`./scripts/v02-preimplementation-master-freeze.sh`,
+`./scripts/v02-preimplementation-final-baseline-check.sh`, and
+`./scripts/v02-preimplementation-master-no-go-regression.sh`.
+
+AION-126 adds no CLI runtime command implementation. The only CLI-adjacent
+surface is local verification through proposal registry scripts:
+`./scripts/v02-workstream-proposal-registry-check.sh`,
+`./scripts/v02-proposal-registry-freeze.sh`, and
+`./scripts/v02-proposal-registry-no-go-regression.sh`.

@@ -468,7 +468,11 @@ h1 {
 .implementation-kickoff-row span,
 .implementation-kickoff-row strong,
 .workstream-intake-row span,
-.workstream-intake-row strong {
+.workstream-intake-row strong,
+.preimplementation-master-row span,
+.preimplementation-master-row strong,
+.proposal-registry-row span,
+.proposal-registry-row strong {
   min-width: 0;
 }
 

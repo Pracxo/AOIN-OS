@@ -394,3 +394,46 @@ Validate the v0.2 workstream intake evidence:
 ./scripts/v02-workstream-intake-freeze.sh
 ./scripts/v02-workstream-intake-no-go-regression.sh
 ```
+
+## AION-125 v0.2 Pre-Implementation Master Freeze Panels
+
+The static console includes v0.2 pre-implementation master freeze and final
+planning baseline panels. They load bundled JSON only, keep runtime
+implementation, backlog implementation approval, workstream implementation
+approval, approval workflow bypass, approval record missing, ADR dependency
+bypass, gate dependency bypass, approval expiry bypass, approval revocation
+bypass, dual-control bypass, operator write execution, connector
+implementation, production auth, module activation, external calls, credential
+storage, token storage, sandbox execution, v0.2 release creation, and v0.2 tag
+creation unapproved or false, and expose no input, package, migration,
+runtime, release, tag, approval, bypass, or write controls.
+
+Validate the v0.2 pre-implementation master freeze evidence:
+
+```bash
+./scripts/v02-preimplementation-master-freeze.sh
+./scripts/v02-preimplementation-final-baseline-check.sh
+./scripts/v02-preimplementation-master-no-go-regression.sh
+```
+
+## AION-126 v0.2 Workstream Proposal Registry Panels
+
+The static console includes v0.2 workstream proposal registry and approval
+queue preview panels. They load bundled JSON only, keep the proposal registry
+preview-only, keep the approval queue preview-only, keep approval queue item
+approval false, keep runtime implementation, backlog implementation approval,
+workstream implementation approval, approval workflow bypass, approval record
+missing, ADR dependency bypass, gate dependency bypass, operator write
+execution, connector implementation, production auth, module activation,
+external calls, credential storage, token storage, sandbox execution, v0.2
+release creation, and v0.2 tag creation unapproved or false, and expose no
+input, package, migration, runtime, release, tag, approval, bypass, or write
+controls.
+
+Validate the v0.2 proposal registry evidence:
+
+```bash
+./scripts/v02-workstream-proposal-registry-check.sh
+./scripts/v02-proposal-registry-freeze.sh
+./scripts/v02-proposal-registry-no-go-regression.sh
+```

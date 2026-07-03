@@ -1887,3 +1887,24 @@ implementation, runtime config default, migration, connector runtime,
 production auth runtime, operator write execution, module activation, external
 call path, credential storage, token storage, sandbox execution, backlog
 implementation approval, v0.2 tag, or v0.2 release.
+AION-125 freezes the final v0.2 pre-implementation planning baseline. It adds
+no runtime contract. Future runtime contract changes still require explicit
+approval records, ADRs, gate evidence, no-go regression evidence, and full
+verification. Runtime implementation approval, backlog implementation approval,
+workstream implementation approval, approval workflow bypass, approval record
+missing, external calls, credential storage, token storage, sandbox execution,
+operator write execution, connector runtime, production auth, module
+activation, package files, migrations, v0.2 tag creation, and v0.2 release
+creation remain false, disabled, or absent.
+
+## AION-126 Proposal Registry Contract
+
+AION-126 adds no runtime Brain contract. It defines a planning-only proposal
+registry contract for future request metadata: request ID, workstream, status,
+required ADR, required gate, required evidence, blocker, next planning action,
+approval status default false, and implementation status default false.
+Approval queue preview records are not approval records. The proposal registry
+does not enable runtime implementation, external calls, protected-material
+storage, sandbox execution, operator write execution, connector runtime,
+production auth, module activation, package files, migrations, v0.2 tag
+creation, or v0.2 release creation.

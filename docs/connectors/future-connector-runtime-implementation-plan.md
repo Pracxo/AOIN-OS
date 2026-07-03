@@ -137,3 +137,22 @@ missing, approval workflow bypass, ADR dependency bypass, gate dependency
 bypass, and backlog implementation approval remain blocked until future scoped
 intake, approval record, ADR, gate, security, rollback, audit/provenance,
 operator review, sequencing, and no-go evidence pass.
+
+## AION-125 Pre-Implementation Master Freeze Dependency
+
+AION-125 keeps connector implementation unapproved and freezes the final
+planning baseline that future connector runtime work must satisfy. Connector
+runtime, external calls, connector SDK dependencies, credential storage, token
+storage, sandbox execution, activation, route registration, package files,
+migrations, workstream implementation approval, approval record missing,
+approval workflow bypass, ADR dependency bypass, gate dependency bypass,
+approval expiry bypass, approval revocation bypass, dual-control bypass, and
+backlog implementation approval remain blocked until future scoped evidence
+passes.
+
+AION-126 indexes connector runtime, credential store, and sandbox runtime as
+future implementation proposals only. Connector implementation approval,
+connector runtime, external calls, connector SDK dependencies, credential
+storage, token storage, sandbox execution, activation, route registration,
+package files, migrations, and approval queue item approval remain false or
+absent.

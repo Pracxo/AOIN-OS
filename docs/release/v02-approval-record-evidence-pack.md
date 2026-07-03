@@ -43,3 +43,7 @@ Every approval record must define a revocation path. Missing revocation evidence
 ## No-Go Result
 
 Every approval record must include the latest no-go result. The no-go result must show implementation approval false, workstream implementation approval false, approval workflow bypass false, approval record missing false, v0.2 tag false, v0.2 release false, and all runtime/external/credential/token/sandbox/package/migration/runtime-route flags false.
+AION-125 preserves this approval record evidence pack as a required future
+implementation dependency. Approval records remain required, default approval
+status remains false, and no implementation approval is granted by the final
+planning baseline.

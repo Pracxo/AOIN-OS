@@ -65,3 +65,8 @@ Candidates must pass `./scripts/docs-check.sh`, `./scripts/final-docs-audit.sh`,
 ## Locked Outcome
 
 This evidence pack accepts workstreams into planning only. Runtime implementation, workstream implementation approval, external calls, credentials/tokens, sandbox execution, package files, migrations, and runtime routes remain absent.
+AION-125 closes this workstream intake evidence pack into the final
+pre-implementation planning baseline. The evidence remains planning-only:
+implementation approval, workstream implementation approval, approval workflow
+bypass, approval record missing, external calls, credential/token storage,
+sandbox execution, v0.2 tag creation, and v0.2 release creation remain false.

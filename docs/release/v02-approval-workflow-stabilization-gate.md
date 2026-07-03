@@ -124,3 +124,13 @@ AION-124 builds on this stabilization gate by requiring candidate workstreams
 to cite approval record evidence, sequencing evidence, rejection rules, and
 workstream intake no-go results before planning review. It does not approve
 implementation, create a v0.2 tag, create a release, or enable runtime.
+AION-125 consumes the approval workflow stabilization gate as prior evidence
+for the pre-implementation master freeze. The workflow remains evidence-only:
+approval workflow bypass, expiry bypass, revocation bypass, dual-control bypass,
+and every implementation approval remain false.
+
+AION-126 uses this workflow for proposal registry preview only. Approval queue
+preview entries do not approve implementation. Approval queue item approval,
+runtime implementation approval, backlog implementation approval, workstream
+implementation approval, approval workflow bypass, approval record missing,
+ADR dependency bypass, and gate dependency bypass remain false.

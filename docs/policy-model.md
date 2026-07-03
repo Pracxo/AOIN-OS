@@ -1942,3 +1942,21 @@ Future v0.2 implementation work remains blocked until a scoped workstream
 intake record, approval record, ADR, gate evidence, security review,
 architecture review, operator review, rollback/audit evidence, expiry and
 revocation status, sequencing evidence, and no-go regression all pass.
+AION-125 preserves the policy model as a planning-only master freeze. The
+policy posture is fail-closed for implementation approval, workstream
+implementation approval, approval workflow bypass, missing approval records,
+ADR or gate dependency bypass, expiry or revocation bypass, dual-control
+bypass, external calls, credential/token storage, sandbox execution, operator
+write execution, connector runtime, production auth, module activation,
+package files, migrations, v0.2 tag creation, and v0.2 release creation.
+
+## AION-126 Proposal Registry Policy
+
+AION-126 keeps policy fail-closed while adding proposal registry review rules.
+Policy treats proposal registry records and approval queue preview records as
+planning evidence only. Missing evidence, duplicate unresolved proposals,
+unsupported runtime capability requests, missing security review, missing
+architecture review, missing operator review, missing rollback/audit evidence,
+ADR dependency bypass, gate dependency bypass, approval workflow bypass,
+approval record missing, and approval queue item approval are no-go conditions.
+All implementation and runtime approvals remain false.

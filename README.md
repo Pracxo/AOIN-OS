@@ -4457,3 +4457,43 @@ Developer command:
 ./scripts/v02-workstream-intake-freeze.sh
 ./scripts/v02-workstream-intake-no-go-regression.sh
 ```
+
+## AION-125 v0.2 Pre-Implementation Master Freeze
+
+AION-125 creates the v0.2 pre-implementation master freeze, final planning
+baseline, workstream governance closeout, approval workflow closeout evidence,
+implementation lock summary, master no-go regression, final checklist, ADR
+0116, static console master freeze panels, and repository-local master freeze
+checks. It does not approve implementation: runtime implementation remains
+unapproved, backlog implementation approval remains false, workstream
+implementation approval remains false, approval workflow bypass remains false,
+approval record missing remains false, external calls remain absent,
+credentials and tokens remain absent, sandbox execution remains absent, no v0.2
+release or tag is created, package files remain absent, and migrations remain
+absent.
+
+Developer command:
+
+```bash
+./scripts/v02-preimplementation-master-freeze.sh
+./scripts/v02-preimplementation-final-baseline-check.sh
+./scripts/v02-preimplementation-master-no-go-regression.sh
+```
+
+## AION-126 v0.2 Workstream Proposal Registry
+
+AION-126 adds the v0.2 workstream proposal registry, implementation request
+index, proposal state machine, proposal evidence requirements, and approval
+queue preview on top of the AION-125 master freeze. This is proposal registry
+and queue preview only. It does not approve implementation, create a v0.2 tag,
+create a release, enable runtime, enable external calls, store credentials or
+tokens, enable sandbox execution, add package files, add migrations, or add
+runtime API, SDK, or CLI implementation.
+
+Developer command:
+
+```bash
+./scripts/v02-workstream-proposal-registry-check.sh
+./scripts/v02-proposal-registry-freeze.sh
+./scripts/v02-proposal-registry-no-go-regression.sh
+```

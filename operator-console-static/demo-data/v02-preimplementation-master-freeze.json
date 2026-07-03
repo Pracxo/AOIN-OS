@@ -1,0 +1,65 @@
+{
+  "task_id": "AION-125",
+  "status": "passed",
+  "read_only": true,
+  "redaction_applied": true,
+  "v02_preimplementation_master_freeze_passed": true,
+  "v02_tag_created": false,
+  "v02_release_created": false,
+  "v02_release_approved": false,
+  "runtime_implementation_approved": false,
+  "backlog_implementation_items_approved": false,
+  "workstream_implementation_approved": false,
+  "approval_workflow_bypassed": false,
+  "approval_record_missing": false,
+  "adr_dependency_bypassed": false,
+  "gate_dependency_bypassed": false,
+  "approval_expiry_bypassed": false,
+  "approval_revocation_bypassed": false,
+  "dual_control_bypassed": false,
+  "operator_write_execution_approved": false,
+  "connector_implementation_approved": false,
+  "production_auth_approved": false,
+  "module_activation_approved": false,
+  "external_calls_approved": false,
+  "credential_storage_approved": false,
+  "token_storage_approved": false,
+  "sandbox_execution_approved": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "api_runtime_execution_route_added": false,
+  "sdk_resource_implementation_added": false,
+  "cli_command_implementation_added": false,
+  "frontend_dependencies_added": false,
+  "secrets_present": false,
+  "credential_values_present": false,
+  "token_values_present": false,
+  "endpoints_present": false,
+  "prompt_payloads_present": false,
+  "private_reasoning_present": false,
+  "sections": [
+    {"section_key": "planning_charter", "title": "Planning Charter", "status": "passed"},
+    {"section_key": "approval_workflow", "title": "Approval Workflow", "status": "passed"},
+    {"section_key": "workstream_intake", "title": "Workstream Intake", "status": "passed"},
+    {"section_key": "implementation_lock", "title": "Implementation Lock", "status": "locked"}
+  ],
+  "blockers": [
+    {"blocker_key": "runtime_implementation", "status": "locked"},
+    {"blocker_key": "release_creation", "status": "blocked"}
+  ],
+  "warnings": [
+    {"warning_key": "planning_only", "status": "active"}
+  ],
+  "refs": [
+    "docs/release/v02-preimplementation-master-freeze.md",
+    "docs/adr/0116-v02-preimplementation-master-freeze.md"
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Disabled by the v0.2 pre-implementation master freeze."},
+    {"action_key": "activate_capability", "reason": "Disabled by the v0.2 pre-implementation master freeze."},
+    {"action_key": "load_code", "reason": "Disabled by the v0.2 pre-implementation master freeze."},
+    {"action_key": "execute_tool", "reason": "Disabled by the v0.2 pre-implementation master freeze."},
+    {"action_key": "enable_external_model_calls", "reason": "Disabled by the v0.2 pre-implementation master freeze."},
+    {"action_key": "hard_delete", "reason": "Disabled by the v0.2 pre-implementation master freeze."}
+  ]
+}

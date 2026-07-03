@@ -181,3 +181,21 @@ production UI implementation, login control, write control, runtime route,
 frontend dependency, package file, release action, tag action, approval bypass,
 approval record mutation, ADR bypass, gate bypass, workstream implementation
 approval control, or implementation approval control is added.
+
+## AION-125 v0.2 Pre-Implementation Master Freeze
+
+The operator console remains static and read-only while AION-125 adds v0.2
+pre-implementation master freeze and final planning baseline panels. No
+production UI implementation, login control, write control, runtime route,
+frontend dependency, package file, release action, tag action, approval bypass,
+approval record mutation, ADR bypass, gate bypass, workstream implementation
+approval control, runtime implementation approval control, or release approval
+control is added.
+
+AION-126 adds static proposal registry and approval queue preview panels. They
+show registry and queue evidence only, with proposal registry preview-only
+true, approval queue preview-only true, approval queue item approval false, and
+all implementation/runtime approvals false. The console still adds no input
+control, login control, write control, runtime route, package file, migration,
+release action, tag action, approval bypass, ADR bypass, gate bypass, or
+runtime implementation approval control.

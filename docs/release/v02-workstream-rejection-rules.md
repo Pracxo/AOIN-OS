@@ -22,3 +22,7 @@ These rules reject candidate workstreams before planning if required evidence or
 ## Result
 
 Rejected workstreams remain unapproved. The reviewer records the rejected condition, the missing evidence, and the next planning action. No runtime, external call, credential/token, sandbox, package, migration, or runtime route change is allowed.
+AION-125 preserves these rejection rules as master-freeze policy. Future
+workstream proposals that bypass problem, risk, ADR, gate, rollback/audit,
+security, architecture, operator, approval record, or no-go evidence remain
+rejected before implementation.
