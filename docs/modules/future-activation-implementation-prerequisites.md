@@ -150,3 +150,9 @@ AION-125 keeps module activation behind the final pre-implementation planning
 baseline. Module activation approval, code loading, runtime registration,
 capability activation, package installation, controlled execution, v0.2 tag
 creation, and v0.2 release creation remain false, disabled, or absent.
+
+AION-126 indexes module activation as a future implementation proposal only.
+Module activation approval, code loading, runtime registration, capability
+activation, package installation, controlled execution, external dependency
+download, approval queue item approval, v0.2 tag creation, and v0.2 release
+creation remain false, disabled, or absent.

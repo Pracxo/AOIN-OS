@@ -60,3 +60,11 @@ The master freeze fails if a v0.2 tag or release exists, implementation approval
 ## No v0.2 Tag Or Release
 
 AION-125 explicitly creates no v0.2 tag and no release. `aion-v0.1.0` remains the frozen release baseline.
+
+## AION-126 Proposal Registry Layer
+
+AION-126 adds a proposal registry layer on top of this freeze. The layer is
+proposal registry and queue preview only; it does not approve implementation,
+create a v0.2 tag, create a release, enable runtime, enable external calls,
+store credentials or tokens, enable sandbox execution, add package files, add
+migrations, or add runtime API, SDK, or CLI implementation.

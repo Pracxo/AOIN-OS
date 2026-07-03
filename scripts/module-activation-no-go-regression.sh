@@ -194,12 +194,16 @@ for relative in sorted(changed):
         "operator-console-static/demo-data/v02-implementation-sequencing-freeze.json",
         "operator-console-static/demo-data/v02-preimplementation-master-freeze.json",
         "operator-console-static/demo-data/v02-final-planning-baseline.json",
+        "operator-console-static/demo-data/v02-workstream-proposal-registry.json",
+        "operator-console-static/demo-data/v02-approval-queue-preview.json",
     }:
         if relative in {
             "operator-console-static/demo-data/v02-approval-workflow-stabilization.json",
             "operator-console-static/demo-data/v02-implementation-request-intake.json",
             "operator-console-static/demo-data/v02-workstream-intake-readiness.json",
             "operator-console-static/demo-data/v02-implementation-sequencing-freeze.json",
+            "operator-console-static/demo-data/v02-workstream-proposal-registry.json",
+            "operator-console-static/demo-data/v02-approval-queue-preview.json",
         }:
             text = text.replace('"action_key": "activate_capability"', "")
         text = re.sub(

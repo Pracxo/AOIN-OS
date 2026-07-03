@@ -1896,3 +1896,15 @@ missing, external calls, credential storage, token storage, sandbox execution,
 operator write execution, connector runtime, production auth, module
 activation, package files, migrations, v0.2 tag creation, and v0.2 release
 creation remain false, disabled, or absent.
+
+## AION-126 Proposal Registry Contract
+
+AION-126 adds no runtime Brain contract. It defines a planning-only proposal
+registry contract for future request metadata: request ID, workstream, status,
+required ADR, required gate, required evidence, blocker, next planning action,
+approval status default false, and implementation status default false.
+Approval queue preview records are not approval records. The proposal registry
+does not enable runtime implementation, external calls, protected-material
+storage, sandbox execution, operator write execution, connector runtime,
+production auth, module activation, package files, migrations, v0.2 tag
+creation, or v0.2 release creation.

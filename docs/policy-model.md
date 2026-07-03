@@ -1949,3 +1949,14 @@ ADR or gate dependency bypass, expiry or revocation bypass, dual-control
 bypass, external calls, credential/token storage, sandbox execution, operator
 write execution, connector runtime, production auth, module activation,
 package files, migrations, v0.2 tag creation, and v0.2 release creation.
+
+## AION-126 Proposal Registry Policy
+
+AION-126 keeps policy fail-closed while adding proposal registry review rules.
+Policy treats proposal registry records and approval queue preview records as
+planning evidence only. Missing evidence, duplicate unresolved proposals,
+unsupported runtime capability requests, missing security review, missing
+architecture review, missing operator review, missing rollback/audit evidence,
+ADR dependency bypass, gate dependency bypass, approval workflow bypass,
+approval record missing, and approval queue item approval are no-go conditions.
+All implementation and runtime approvals remain false.

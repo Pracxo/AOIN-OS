@@ -22,3 +22,13 @@ Any future change that sets one of these values true is implementation approval 
 ## Final Lock Decision
 
 AION-125 keeps every implementation approval locked to false and creates no v0.2 tag or release.
+
+## AION-126 Registry Lock Extension
+
+AION-126 extends the lock summary to proposal registry records: proposal
+registry preview-only true, approval queue preview-only true, approval queue
+item approval false, runtime implementation approval false, backlog
+implementation approval false, workstream implementation approval false,
+approval workflow bypass false, approval record missing false, ADR dependency
+bypass false, gate dependency bypass false, v0.2 tag creation false, and v0.2
+release creation false.

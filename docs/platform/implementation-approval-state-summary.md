@@ -102,3 +102,11 @@ dependency bypass, approval expiry bypass, approval revocation bypass, and
 dual-control bypass remain false. The master freeze does not approve runtime
 implementation, external calls, protected-material storage, sandbox execution,
 v0.2 tag creation, or v0.2 release creation.
+
+AION-126 adds `v02_workstream_proposal_registry_created=true` while keeping
+proposal registry preview-only true, approval queue preview-only true,
+approval queue item approval false, runtime implementation approval false,
+backlog implementation approval false, workstream implementation approval
+false, approval workflow bypass false, approval record missing false, ADR
+dependency bypass false, gate dependency bypass false, v0.2 tag creation
+false, and v0.2 release creation false.

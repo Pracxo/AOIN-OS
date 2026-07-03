@@ -32,3 +32,13 @@ The master no-go regression protects the final v0.2 pre-implementation planning 
 ## Expected Result
 
 Every master no-go check remains false, disabled, absent, or blocked. The regression passes only when the planning baseline is complete and implementation remains unapproved.
+
+## AION-126 Proposal Registry No-Go Extension
+
+AION-126 adds proposal registry no-go coverage for implementation approval set
+true, workstream implementation approval set true, proposal state implying
+implementation approved, approval queue item marked approved, approval workflow
+bypass, approval record missing, ADR dependency bypass, gate dependency bypass,
+v0.2 tag creation, v0.2 release creation, runtime enablement, external calls,
+credential/token storage, sandbox execution, package files, migrations, and
+runtime API execution routes.

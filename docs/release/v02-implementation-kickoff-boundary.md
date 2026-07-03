@@ -140,3 +140,10 @@ AION-125 consumes the kickoff boundary as prior evidence for the final planning
 baseline. The kickoff boundary remains planning-only and does not approve
 runtime implementation, backlog implementation items, workstream
 implementation, a v0.2 tag, or a v0.2 release.
+
+AION-126 keeps the kickoff boundary intact while adding proposal registry
+intake. Future kickoff requests must be catalogued in the registry first and
+remain implementation unapproved until a later scoped task supplies approval
+records, ADR dependencies, gate dependencies, security review, architecture
+review, operator review, rollback/audit evidence, and no-go regression
+evidence.

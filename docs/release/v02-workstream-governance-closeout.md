@@ -39,3 +39,11 @@ The closeout preserves the AION-124 rejection rules: missing problem statement, 
 ## Closeout Decision
 
 Workstream governance is closed for planning baseline purposes. Future implementation proposals must start from this closeout and still remain unapproved until explicit approval records, ADRs, and gate evidence are added.
+
+## AION-126 Proposal Registry Follow-Up
+
+AION-126 turns this closeout into a proposal registry entry point. Future
+workstreams must enter through the registry, cite required ADR and gate
+dependencies, provide evidence, and remain blocked with workstream
+implementation approval false and approval queue item approval false until a
+later scoped approval task changes the boundary.

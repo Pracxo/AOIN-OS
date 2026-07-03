@@ -119,3 +119,9 @@ AION-125 keeps production auth behind the pre-implementation master freeze.
 Production auth approval and runtime enablement remain false, and future auth
 implementation still requires approval records, ADR evidence, release gate
 evidence, no-go regression evidence, and full verification.
+
+AION-126 indexes production auth implementation as a future proposal only.
+Production auth approval, runtime auth enablement, external identity runtime,
+credential storage, token storage, approval queue item approval, v0.2 tag
+creation, and v0.2 release creation remain false or absent until a later
+scoped approval task changes the boundary.

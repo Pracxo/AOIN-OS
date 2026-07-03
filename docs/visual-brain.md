@@ -1174,3 +1174,12 @@ it displays bundled JSON evidence only, exposes no input controls, and keeps
 runtime implementation approval, workstream implementation approval, approval
 workflow bypass, external calls, credential/token storage, sandbox execution,
 v0.2 tag creation, and v0.2 release creation false.
+
+AION-126 adds static preview data for the v0.2 workstream proposal registry and
+approval queue preview. The visual surface remains read-only and local: it
+displays bundled JSON evidence only, exposes no input controls, and keeps the
+proposal registry preview-only, the approval queue preview-only, approval
+queue item approval false, runtime implementation approval false, workstream
+implementation approval false, external calls false, credential/token storage
+false, sandbox execution false, v0.2 tag creation false, and v0.2 release
+creation false.

@@ -67,3 +67,11 @@ AION-125 consumes this intake gate as a required prior gate for the final
 pre-implementation master freeze. Intake readiness remains planning-only and
 does not approve runtime implementation, workstream implementation, a v0.2 tag,
 or a v0.2 release.
+
+## AION-126 Proposal Registry Intake
+
+AION-126 consumes this intake readiness gate as prior evidence for the
+proposal registry. The registry keeps every future workstream proposal in a
+planning-only state with implementation approval false, approval queue item
+approval false, required ADR dependency, required gate dependency, required
+evidence, and no-go acknowledgement.

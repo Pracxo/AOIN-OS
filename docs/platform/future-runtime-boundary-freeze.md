@@ -103,3 +103,10 @@ approval workflow bypass, approval record missing, ADR dependency bypass, gate
 dependency bypass, approval expiry bypass, approval revocation bypass,
 dual-control bypass, v0.2 tag creation, and v0.2 release creation remain
 false.
+
+AION-126 keeps this runtime boundary frozen for proposal registry intake.
+Proposal registry entries and approval queue preview entries are planning-only
+records; they do not enable production auth, connector runtime, operator write
+execution, module activation, external calls, credential/token storage, sandbox
+execution, code loading, runtime registration, capability activation, package
+files, migrations, a v0.2 tag, or a v0.2 release.

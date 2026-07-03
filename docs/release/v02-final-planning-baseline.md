@@ -57,3 +57,11 @@ Future implementation requires scoped gates, no-go regressions, security review,
 ## Final Planning Baseline Decision
 
 AION-125 freezes the final v0.2 planning baseline. The baseline is ready for future proposal intake, but it does not approve implementation, create a v0.2 tag, create a release, or mutate the v0.1 release baseline.
+
+## AION-126 Proposal Registry Intake
+
+AION-126 is the first registry layer above this baseline. It catalogs future
+workstream proposals and implementation request types, but approval status and
+implementation status default false. Approval queue preview records do not
+approve implementation, enable runtime, create a tag, create a release, or
+mutate the v0.1 release baseline.

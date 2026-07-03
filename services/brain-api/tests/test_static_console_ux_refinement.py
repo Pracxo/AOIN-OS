@@ -90,6 +90,9 @@ def test_navigation_map_and_accessibility_result_are_valid() -> None:
         "./scripts/v02-preimplementation-master-freeze.sh",
         "./scripts/v02-preimplementation-final-baseline-check.sh",
         "./scripts/v02-preimplementation-master-no-go-regression.sh",
+        "./scripts/v02-workstream-proposal-registry-check.sh",
+        "./scripts/v02-proposal-registry-freeze.sh",
+        "./scripts/v02-proposal-registry-no-go-regression.sh",
         "./scripts/docs-check.sh",
     }
     assert set(nav["safe_copy_commands"]) == allowed_commands
@@ -163,6 +166,9 @@ def test_static_console_has_navigation_accessibility_and_safe_command_copy() -> 
         "./scripts/v02-preimplementation-master-freeze.sh",
         "./scripts/v02-preimplementation-final-baseline-check.sh",
         "./scripts/v02-preimplementation-master-no-go-regression.sh",
+        "./scripts/v02-workstream-proposal-registry-check.sh",
+        "./scripts/v02-proposal-registry-freeze.sh",
+        "./scripts/v02-proposal-registry-no-go-regression.sh",
         "./scripts/docs-check.sh",
     }
 

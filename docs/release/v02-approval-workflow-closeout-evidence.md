@@ -31,3 +31,11 @@ The master no-go regression checks v0.2 tag and release creation, implementation
 ## Approval Remains False
 
 Runtime implementation approval, backlog implementation approval, workstream implementation approval, operator write execution approval, connector implementation approval, production auth approval, module activation approval, external call approval, credential storage approval, token storage approval, sandbox execution approval, and v0.2 release approval remain false.
+
+## AION-126 Approval Queue Preview
+
+AION-126 adds an approval queue preview that remains preview-only. Queue
+placement is not an approval record, and approval queue item approval remains
+false. Future implementation still requires explicit approval records, ADRs,
+gate evidence, security review, architecture review, operator review,
+rollback/audit evidence, dual-control review, and no-go regression evidence.

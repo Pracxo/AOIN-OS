@@ -4479,3 +4479,21 @@ Developer command:
 ./scripts/v02-preimplementation-final-baseline-check.sh
 ./scripts/v02-preimplementation-master-no-go-regression.sh
 ```
+
+## AION-126 v0.2 Workstream Proposal Registry
+
+AION-126 adds the v0.2 workstream proposal registry, implementation request
+index, proposal state machine, proposal evidence requirements, and approval
+queue preview on top of the AION-125 master freeze. This is proposal registry
+and queue preview only. It does not approve implementation, create a v0.2 tag,
+create a release, enable runtime, enable external calls, store credentials or
+tokens, enable sandbox execution, add package files, add migrations, or add
+runtime API, SDK, or CLI implementation.
+
+Developer command:
+
+```bash
+./scripts/v02-workstream-proposal-registry-check.sh
+./scripts/v02-proposal-registry-freeze.sh
+./scripts/v02-proposal-registry-no-go-regression.sh
+```

@@ -191,3 +191,11 @@ frontend dependency, package file, release action, tag action, approval bypass,
 approval record mutation, ADR bypass, gate bypass, workstream implementation
 approval control, runtime implementation approval control, or release approval
 control is added.
+
+AION-126 adds static proposal registry and approval queue preview panels. They
+show registry and queue evidence only, with proposal registry preview-only
+true, approval queue preview-only true, approval queue item approval false, and
+all implementation/runtime approvals false. The console still adds no input
+control, login control, write control, runtime route, package file, migration,
+release action, tag action, approval bypass, ADR bypass, gate bypass, or
+runtime implementation approval control.

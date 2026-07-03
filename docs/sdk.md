@@ -1128,3 +1128,9 @@ pre-implementation master freeze remains a documentation, example,
 static-console, script, and test baseline. Future SDK runtime work requires a
 separate approval record, ADR, gate evidence, no-go regression, and explicit
 scope change.
+
+AION-126 adds no SDK resources, generated clients, SDK dependencies, or CLI
+command implementations. Future SDK-facing implementation proposals must enter
+the proposal registry with implementation approval false, required ADR
+evidence, required gate evidence, no-go acknowledgement, and approval queue
+item approval false.
