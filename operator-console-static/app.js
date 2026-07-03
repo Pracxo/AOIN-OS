@@ -79,6 +79,9 @@
     "./scripts/v02-workstream-proposal-registry-check.sh",
     "./scripts/v02-proposal-registry-freeze.sh",
     "./scripts/v02-proposal-registry-no-go-regression.sh",
+    "./scripts/v02-proposal-registry-stabilization-gate.sh",
+    "./scripts/v02-approval-queue-freeze.sh",
+    "./scripts/v02-approval-queue-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -152,7 +155,9 @@
     preimplementation_master_freeze: "demo-data/v02-preimplementation-master-freeze.json",
     final_planning_baseline: "demo-data/v02-final-planning-baseline.json",
     workstream_proposal_registry: "demo-data/v02-workstream-proposal-registry.json",
-    approval_queue_preview: "demo-data/v02-approval-queue-preview.json"
+    approval_queue_preview: "demo-data/v02-approval-queue-preview.json",
+    proposal_registry_stabilization: "demo-data/v02-proposal-registry-stabilization.json",
+    approval_queue_freeze: "demo-data/v02-approval-queue-freeze.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1631,7 +1636,9 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.preimplementation_master_freeze),
       fetchJson(RELEASE_CANDIDATE_DEMOS.final_planning_baseline),
       fetchJson(RELEASE_CANDIDATE_DEMOS.workstream_proposal_registry),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.approval_queue_preview)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.approval_queue_preview),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.proposal_registry_stabilization),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.approval_queue_freeze)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
@@ -1652,6 +1659,8 @@
         renderReleaseCandidateEvidence("v02-final-planning-baseline", redact(payloads[15]));
         renderReleaseCandidateEvidence("v02-workstream-proposal-registry", redact(payloads[16]));
         renderReleaseCandidateEvidence("v02-approval-queue-preview", redact(payloads[17]));
+        renderReleaseCandidateEvidence("v02-proposal-registry-stabilization", redact(payloads[18]));
+        renderReleaseCandidateEvidence("v02-approval-queue-freeze", redact(payloads[19]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
@@ -1672,6 +1681,8 @@
         renderReleaseCandidateEvidence("v02-final-planning-baseline", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-workstream-proposal-registry", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-approval-queue-preview", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-proposal-registry-stabilization", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-approval-queue-freeze", { status: "unavailable" });
       });
   }
 
@@ -1718,7 +1729,7 @@
       ["sandbox_execution_approved", String(Boolean(payload.sandbox_execution_approved))]
     ].forEach(function (item) {
       var row = document.createElement("div");
-      row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row preimplementation-master-row proposal-registry-row";
+      row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row preimplementation-master-row proposal-registry-row proposal-registry-stabilization-row";
       var label = document.createElement("span");
       label.textContent = item[0];
       var value = document.createElement("strong");
@@ -1731,7 +1742,7 @@
       .slice(0, 4)
       .forEach(function (section) {
         var row = document.createElement("div");
-        row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row preimplementation-master-row proposal-registry-row";
+        row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row preimplementation-master-row proposal-registry-row proposal-registry-stabilization-row";
         var label = document.createElement("span");
         label.textContent = safeText(section.title || section.section_key || "section");
         var value = document.createElement("strong");

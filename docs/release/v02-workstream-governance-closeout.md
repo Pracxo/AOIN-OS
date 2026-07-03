@@ -47,3 +47,12 @@ workstreams must enter through the registry, cite required ADR and gate
 dependencies, provide evidence, and remain blocked with workstream
 implementation approval false and approval queue item approval false until a
 later scoped approval task changes the boundary.
+
+## AION-127 Stabilization Follow-Up
+
+AION-127 stabilizes that entry point with candidate workstream evidence,
+lifecycle evidence, queue freeze evidence, and closeout checks. Future
+workstreams remain blocked with proposal implementation approval false,
+workstream implementation approval false, approval queue item approval false,
+runtime implementation approval false, no v0.2 tag, and no v0.2 release until
+a later scoped approval task changes the boundary.

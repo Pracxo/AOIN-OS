@@ -30,3 +30,14 @@ The AION-126 no-go list keeps the workstream proposal registry as planning-only 
 ## Expected Result
 
 Every proposal registry no-go check remains false, disabled, absent, or blocked. The regression passes only when the registry exists, the queue remains preview-only, and implementation remains unapproved.
+
+## AION-127 Stabilization Additions
+
+AION-127 adds no-go checks for proposal implementation approval true, approval
+expiry bypassed, approval revocation bypassed, and dual-control bypassed. It
+also preserves the existing checks for approval queue item approval,
+implementation approval, workstream implementation approval, backlog
+implementation approval, approval workflow bypass, approval record missing,
+ADR dependency bypass, gate dependency bypass, v0.2 tag creation, v0.2 release
+creation, runtime enablement, external calls, credential/token storage,
+sandbox execution, package files, migrations, and runtime API execution routes.

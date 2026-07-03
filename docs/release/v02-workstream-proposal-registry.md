@@ -80,3 +80,13 @@ The registry fails if implementation approval is set true, workstream implementa
 ## No v0.2 Tag Or Release
 
 AION-126 explicitly creates no v0.2 tag and no release. `aion-v0.1.0` remains the frozen release baseline.
+
+## AION-127 Stabilization
+
+AION-127 stabilizes this registry with a proposal registry stabilization gate,
+approval queue freeze, candidate workstream evidence baseline, lifecycle
+evidence matrix, closeout checklist, and approval queue no-go regression.
+Proposal registry preview-only, approval queue preview-only, approval queue
+item approval false, proposal implementation approval false, runtime
+implementation approval false, workstream implementation approval false, no
+v0.2 tag, and no v0.2 release remain locked.

@@ -1960,3 +1960,15 @@ architecture review, missing operator review, missing rollback/audit evidence,
 ADR dependency bypass, gate dependency bypass, approval workflow bypass,
 approval record missing, and approval queue item approval are no-go conditions.
 All implementation and runtime approvals remain false.
+
+## AION-127 Proposal Registry Stabilization Policy
+
+AION-127 keeps policy fail-closed while freezing the approval queue preview.
+Policy treats stabilization records, candidate workstream evidence, lifecycle
+matrix entries, and queue freeze entries as planning evidence only. Approval
+queue item approval, proposal implementation approval, implementation approval,
+workstream implementation approval, backlog implementation approval, approval
+workflow bypass, missing approval records, ADR dependency bypass, gate
+dependency bypass, approval expiry bypass, approval revocation bypass, and
+dual-control bypass remain no-go conditions. All implementation and runtime
+approvals remain false.

@@ -39,3 +39,12 @@ Every proposal must cite a future ADR and a future gate. ADR dependency bypass a
 ## No Direct Implementation Approval
 
 The registry, index, and queue preview cannot approve implementation directly. Runtime implementation approval, backlog implementation approval, workstream implementation approval, approval queue item approval, and v0.2 release approval remain false.
+
+## AION-127 Stabilization Rules
+
+AION-127 adds stabilization review for candidate workstream evidence,
+lifecycle evidence, closeout evidence, expiry, revocation, and dual-control
+status. The review still cannot approve implementation. Proposal
+implementation approval, approval queue item approval, runtime implementation
+approval, backlog implementation approval, workstream implementation approval,
+and v0.2 release approval remain false.

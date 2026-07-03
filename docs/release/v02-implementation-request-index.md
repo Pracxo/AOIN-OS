@@ -22,3 +22,12 @@ AION-126 indexes future implementation request types as planning-only registry e
 ## Approval Boundary
 
 Every indexed request has implementation approved: false. The index does not approve runtime implementation, backlog implementation items, workstream implementation items, production auth, connector implementation, operator write execution, module activation, external calls, credential storage, token storage, sandbox execution, a v0.2 tag, or a v0.2 release.
+
+## AION-127 Stabilization
+
+AION-127 keeps every indexed request queued for future decision with approval
+status false and implementation status false. The stabilized candidate
+baseline adds no new implementation approval and keeps approval queue item
+approval false, proposal implementation approval false, runtime implementation
+approval false, workstream implementation approval false, no v0.2 tag, and no
+v0.2 release.

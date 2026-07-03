@@ -437,3 +437,25 @@ Validate the v0.2 proposal registry evidence:
 ./scripts/v02-proposal-registry-freeze.sh
 ./scripts/v02-proposal-registry-no-go-regression.sh
 ```
+
+## AION-127 v0.2 Proposal Registry Stabilization Panels
+
+The static console includes v0.2 proposal registry stabilization and approval
+queue freeze panels. They load bundled JSON only, keep the proposal registry
+preview-only, keep the approval queue preview-only, keep approval queue item
+approval false, keep proposal implementation approval false, keep runtime
+implementation approval false, keep backlog and workstream implementation
+approval false, keep approval workflow bypass, approval record missing, ADR
+dependency bypass, gate dependency bypass, approval expiry bypass, approval
+revocation bypass, and dual-control bypass false, and keep external calls,
+credential storage, token storage, sandbox execution, v0.2 release creation,
+and v0.2 tag creation unapproved or false. They expose no input, package,
+migration, runtime, release, tag, approval, bypass, or write controls.
+
+Validate the v0.2 proposal registry stabilization evidence:
+
+```bash
+./scripts/v02-proposal-registry-stabilization-gate.sh
+./scripts/v02-approval-queue-freeze.sh
+./scripts/v02-approval-queue-no-go-regression.sh
+```

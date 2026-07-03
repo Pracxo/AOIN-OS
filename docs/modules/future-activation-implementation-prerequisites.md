@@ -156,3 +156,10 @@ Module activation approval, code loading, runtime registration, capability
 activation, package installation, controlled execution, external dependency
 download, approval queue item approval, v0.2 tag creation, and v0.2 release
 creation remain false, disabled, or absent.
+
+AION-127 keeps module activation in the stabilized proposal registry only.
+Module proposal implementation approval, approval queue item approval, module
+activation approval, code loading, runtime registration, capability
+activation, package installation, controlled execution, external dependency
+download, v0.2 tag creation, and v0.2 release creation remain false, disabled,
+or absent.

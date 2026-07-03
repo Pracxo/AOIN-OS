@@ -65,3 +65,13 @@ workstream proposals and implementation request types, but approval status and
 implementation status default false. Approval queue preview records do not
 approve implementation, enable runtime, create a tag, create a release, or
 mutate the v0.1 release baseline.
+
+## AION-127 Stabilized Registry Baseline
+
+AION-127 stabilizes this registry layer with queue freeze, candidate
+workstream evidence, lifecycle evidence, no-go evidence, and closeout
+evidence. Proposal registry preview-only, approval queue preview-only,
+approval queue item approval false, proposal implementation approval false,
+runtime implementation approval false, workstream implementation approval
+false, v0.2 tag creation false, and v0.2 release creation false remain part of
+the final planning baseline.

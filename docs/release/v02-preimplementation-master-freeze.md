@@ -68,3 +68,12 @@ proposal registry and queue preview only; it does not approve implementation,
 create a v0.2 tag, create a release, enable runtime, enable external calls,
 store credentials or tokens, enable sandbox execution, add package files, add
 migrations, or add runtime API, SDK, or CLI implementation.
+
+## AION-127 Proposal Registry Stabilization Layer
+
+AION-127 stabilizes the proposal registry layer on top of this freeze. The
+stabilization gate and approval queue freeze remain planning-only; they do not
+approve proposal implementation, approve queue items, create a v0.2 tag, create
+a release, enable runtime, enable external calls, store credentials or tokens,
+enable sandbox execution, add package files, add migrations, or add runtime
+API, SDK, or CLI implementation.

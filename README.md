@@ -111,6 +111,18 @@ unapproved, connector runtime remains disabled, external calls remain absent,
 credentials and tokens remain absent, sandbox execution remains absent, and
 activation and route registration remain disabled.
 
+## v0.2 Proposal Registry Stabilization
+
+AION-127 stabilizes the v0.2 proposal registry and approval queue preview
+created in AION-126. It adds stabilization docs, ADR 0118, candidate
+workstream evidence, lifecycle evidence, closeout checks, static console
+preview data, and local scripts only. Proposal registry preview-only,
+approval queue preview-only, approval queue item approval false, proposal
+implementation approval false, runtime implementation approval false, and
+workstream implementation approval false remain locked. It creates no v0.2 tag
+or release and adds no runtime, external call, credential/token, sandbox,
+package, migration, API, SDK, CLI, or domain module implementation.
+
 ## Core Brain Loop
 
 ```text

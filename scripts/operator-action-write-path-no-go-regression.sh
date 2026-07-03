@@ -330,6 +330,8 @@ allowed_aion125_files = {
 allowed_aion126_files = {
     "operator-console-static/demo-data/v02-workstream-proposal-registry.json",
     "operator-console-static/demo-data/v02-approval-queue-preview.json",
+    "operator-console-static/demo-data/v02-proposal-registry-stabilization.json",
+    "operator-console-static/demo-data/v02-approval-queue-freeze.json",
 }
 runtime_prefixes = (
     "services/brain-api/src/",

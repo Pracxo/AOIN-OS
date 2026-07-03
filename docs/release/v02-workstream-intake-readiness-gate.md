@@ -75,3 +75,12 @@ proposal registry. The registry keeps every future workstream proposal in a
 planning-only state with implementation approval false, approval queue item
 approval false, required ADR dependency, required gate dependency, required
 evidence, and no-go acknowledgement.
+
+## AION-127 Stabilization Dependency
+
+AION-127 consumes this intake readiness gate as prior evidence for proposal
+registry stabilization. Candidate workstreams remain planning-only with
+approval status false, implementation status false, approval queue item
+approval false, proposal implementation approval false, required ADR
+dependency, required gate dependency, required evidence, and no-go
+acknowledgement.

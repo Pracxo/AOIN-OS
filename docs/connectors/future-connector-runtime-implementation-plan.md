@@ -156,3 +156,11 @@ connector runtime, external calls, connector SDK dependencies, credential
 storage, token storage, sandbox execution, activation, route registration,
 package files, migrations, and approval queue item approval remain false or
 absent.
+
+AION-127 keeps connector runtime, credential store, and sandbox runtime in the
+stabilized proposal registry only. Connector proposal implementation approval,
+approval queue item approval, connector implementation approval, connector
+runtime, external calls, connector SDK dependencies, credential storage, token
+storage, sandbox execution, activation, route registration, package files,
+migrations, v0.2 tag creation, and v0.2 release creation remain false or
+absent.

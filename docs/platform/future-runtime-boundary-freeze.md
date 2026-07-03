@@ -110,3 +110,12 @@ records; they do not enable production auth, connector runtime, operator write
 execution, module activation, external calls, credential/token storage, sandbox
 execution, code loading, runtime registration, capability activation, package
 files, migrations, a v0.2 tag, or a v0.2 release.
+
+AION-127 keeps this runtime boundary frozen while stabilizing the proposal
+registry and approval queue preview. Candidate workstream evidence and queue
+freeze entries remain planning-only records; they do not approve proposal
+implementation, approve approval queue items, enable production auth, enable
+connector runtime, enable operator write execution, enable module activation,
+call external services, store credentials/tokens, enable sandbox execution,
+load code, register runtime routes, activate capabilities, add package files,
+add migrations, create a v0.2 tag, or create a v0.2 release.

@@ -2104,6 +2104,21 @@ token storage, sandbox execution, API runtime execution routes, SDK resources,
 CLI implementations, package files, migrations, v0.2 tag creation, and v0.2
 release creation remain false, disabled, or absent.
 
+## AION-127 v0.2 Proposal Registry Stabilization Boundary
+
+AION-127 stabilizes the proposal registry and approval queue preview above the
+AION-126 registry layer. It records candidate workstream evidence, lifecycle
+evidence, queue freeze evidence, and closeout status without changing runtime
+architecture.
+
+Proposal registry preview-only, approval queue preview-only, approval queue
+item approval, proposal implementation approval, runtime implementation
+approval, backlog implementation approval, workstream implementation approval,
+external calls, credential storage, token storage, sandbox execution, API
+runtime execution routes, SDK resources, CLI implementations, package files,
+migrations, v0.2 tag creation, and v0.2 release creation remain false,
+disabled, or absent.
+
 ## AION-126 Proposal Registry Layer
 
 AION-126 adds a planning-only proposal registry layer above the frozen
