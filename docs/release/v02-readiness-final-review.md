@@ -128,3 +128,10 @@ create a release, or unlock any runtime workstream.
 AION-125 treats the readiness final review as a completed prior gate for the
 pre-implementation master freeze. The review remains planning closeout evidence
 only and does not approve implementation or release creation.
+
+## AION-128 Planning Master Dependency
+
+AION-128 treats the readiness final review as a completed prior gate for the
+planning master checkpoint. The review remains planning closeout evidence only
+and does not approve implementation, approve proposal queue items, create a
+v0.2 tag, create a release, or unlock runtime work.

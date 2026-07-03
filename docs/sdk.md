@@ -1140,3 +1140,9 @@ command implementations. Future SDK-facing implementation proposals remain
 blocked by the stabilized proposal registry and approval queue freeze until a
 later scoped approval record, ADR, gate evidence, no-go regression, and full
 repository verification explicitly approve implementation.
+
+AION-128 adds no SDK resources, generated clients, SDK dependencies, or CLI
+command implementations. Future SDK-facing implementation proposals remain
+blocked by the planning master checkpoint until a later scoped approval
+record, ADR, gate evidence, no-go regression, and full repository verification
+explicitly approve implementation.

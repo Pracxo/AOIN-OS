@@ -1920,3 +1920,16 @@ protected-material storage, sandbox execution, operator write execution,
 connector runtime, production auth, module activation, package files,
 migrations, v0.2 tag creation, and v0.2 release creation remain false,
 disabled, or absent.
+
+## AION-128 Planning Master Checkpoint Contract
+
+AION-128 adds no runtime Brain contract. It records the planning master
+checkpoint, proposal governance baseline, approval queue baseline, and
+implementation lock freeze as static planning evidence. Proposal registry
+preview-only, approval queue preview-only, approval queue item approval,
+proposal implementation approval, runtime implementation approval, backlog
+implementation approval, workstream implementation approval, external calls,
+protected-material storage, sandbox execution, operator write execution,
+connector runtime, production auth, module activation, package files,
+migrations, v0.2 tag creation, and v0.2 release creation remain false,
+disabled, or absent.

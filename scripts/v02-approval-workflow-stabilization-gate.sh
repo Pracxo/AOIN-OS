@@ -52,16 +52,16 @@ is_nested_gate_context() {
 }
 
 ./scripts/v02-approval-workflow-no-go-regression.sh
-AION_V02_IMPLEMENTATION_KICKOFF_SKIP_NESTED_GATES=1 ./scripts/v02-implementation-kickoff-boundary-check.sh
-AION_V02_IMPLEMENTATION_KICKOFF_FREEZE_SKIP_FULL_CHECK=1 ./scripts/v02-implementation-kickoff-freeze.sh
-./scripts/v02-implementation-kickoff-no-go-regression.sh
-AION_V02_READINESS_FINAL_REVIEW_SKIP_NESTED_GATES=1 ./scripts/v02-readiness-final-review.sh
-AION_V02_PLANNING_STABILIZATION_SKIP_NESTED_GATES=1 ./scripts/v02-planning-stabilization-gate.sh
-AION_V02_PLANNING_CHARTER_SKIP_NESTED_GATES=1 ./scripts/v02-planning-charter-check.sh
 
 if is_nested_gate_context; then
   echo "PASS: v0.2 approval workflow downstream release gates deferred to outer aggregate gate"
 else
+  AION_V02_IMPLEMENTATION_KICKOFF_SKIP_NESTED_GATES=1 ./scripts/v02-implementation-kickoff-boundary-check.sh
+  AION_V02_IMPLEMENTATION_KICKOFF_FREEZE_SKIP_FULL_CHECK=1 ./scripts/v02-implementation-kickoff-freeze.sh
+  ./scripts/v02-implementation-kickoff-no-go-regression.sh
+  AION_V02_READINESS_FINAL_REVIEW_SKIP_NESTED_GATES=1 ./scripts/v02-readiness-final-review.sh
+  AION_V02_PLANNING_STABILIZATION_SKIP_NESTED_GATES=1 ./scripts/v02-planning-stabilization-gate.sh
+  AION_V02_PLANNING_CHARTER_SKIP_NESTED_GATES=1 ./scripts/v02-planning-charter-check.sh
   AION_AGGREGATE_GATE_RUNNING=1 AION_POST_V01_RELEASE_CANDIDATE_SKIP_DOWNSTREAM_GATES=1 ./scripts/post-v01-release-candidate-gate.sh
   AION_AGGREGATE_GATE_RUNNING=1 ./scripts/platform-integration-checkpoint.sh
 fi

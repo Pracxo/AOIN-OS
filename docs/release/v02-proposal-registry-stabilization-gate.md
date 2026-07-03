@@ -47,3 +47,11 @@ No-go conditions include approval queue item approved true, proposal state impli
 ## No v0.2 Tag Or Release
 
 AION-127 explicitly creates no v0.2 tag and no release. The `aion-v0.1.0` tag remains the frozen release baseline.
+
+## AION-128 Planning Master Checkpoint
+
+AION-128 consumes this stabilization gate as an inherited planning baseline.
+The proposal registry remains preview-only, the approval queue remains
+preview-only, approval queue item approval remains false, proposal
+implementation approval remains false, runtime implementation approval remains
+false, and no v0.2 tag or release is created.

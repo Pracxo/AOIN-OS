@@ -90,3 +90,12 @@ Proposal registry preview-only, approval queue preview-only, approval queue
 item approval false, proposal implementation approval false, runtime
 implementation approval false, workstream implementation approval false, no
 v0.2 tag, and no v0.2 release remain locked.
+
+## AION-128 Planning Master Checkpoint
+
+AION-128 consolidates this registry into the planning master checkpoint.
+Proposal registry preview-only, approval queue preview-only, approval queue
+item approval false, proposal implementation approval false, runtime
+implementation approval false, workstream implementation approval false,
+backlog implementation approval false, no v0.2 tag, and no v0.2 release remain
+locked.

@@ -1,0 +1,73 @@
+{
+  "task_id": "AION-128",
+  "artifact": "v02-implementation-lock-freeze",
+  "status": "passed",
+  "synthetic": true,
+  "read_only": true,
+  "redaction_applied": true,
+  "v02_planning_master_checkpoint_passed": true,
+  "v02_implementation_lock_freeze_passed": true,
+  "proposal_registry_preview_only": true,
+  "approval_queue_preview_only": true,
+  "v02_tag_created": false,
+  "v02_release_created": false,
+  "v02_release_approved": false,
+  "runtime_implementation_approved": false,
+  "backlog_implementation_items_approved": false,
+  "workstream_implementation_approved": false,
+  "proposal_implementation_approved": false,
+  "approval_queue_item_approved": false,
+  "approval_workflow_bypassed": false,
+  "approval_record_missing": false,
+  "adr_dependency_bypassed": false,
+  "gate_dependency_bypassed": false,
+  "operator_write_execution_approved": false,
+  "connector_implementation_approved": false,
+  "production_auth_approved": false,
+  "module_activation_approved": false,
+  "external_calls_approved": false,
+  "credential_storage_approved": false,
+  "token_storage_approved": false,
+  "sandbox_execution_approved": false,
+  "package_files_added": false,
+  "migrations_added": false,
+  "api_runtime_execution_route_added": false,
+  "sdk_resource_implementation_added": false,
+  "cli_command_implementation_added": false,
+  "frontend_dependencies_added": false,
+  "secrets_present": false,
+  "tokens_present": false,
+  "credentials_present": false,
+  "credential_values_present": false,
+  "token_values_present": false,
+  "endpoints_present": false,
+  "prompt_payloads_present": false,
+  "private_reasoning_present": false,
+  "sections": [
+    {"section_key": "implementation_approval_locks", "status": "passed"},
+    {"section_key": "runtime_enablement_absent", "status": "passed"},
+    {"section_key": "package_and_migration_drift_absent", "status": "passed"},
+    {"section_key": "tag_and_release_absent", "status": "passed"}
+  ],
+  "blockers": [
+    "implementation approvals remain false",
+    "external calls remain absent",
+    "credentials and tokens remain absent",
+    "sandbox execution remains absent"
+  ],
+  "warnings": [
+    "implementation lock freeze data is a static planning preview"
+  ],
+  "refs": [
+    "docs/release/v02-implementation-lock-freeze.md",
+    "docs/release/v02-planning-master-no-go.md"
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module", "reason": "Disabled by the v0.2 implementation lock freeze."},
+    {"action_key": "activate_capability", "reason": "Disabled by the v0.2 implementation lock freeze."},
+    {"action_key": "load_code", "reason": "Disabled by the v0.2 implementation lock freeze."},
+    {"action_key": "execute_tool", "reason": "Disabled by the v0.2 implementation lock freeze."},
+    {"action_key": "enable_external_model_calls", "reason": "Disabled by the v0.2 implementation lock freeze."},
+    {"action_key": "hard_delete", "reason": "Disabled by the v0.2 implementation lock freeze."}
+  ]
+}

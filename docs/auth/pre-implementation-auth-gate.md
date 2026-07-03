@@ -132,3 +132,11 @@ queue item approval, runtime auth enablement, external identity runtime,
 credential storage, token storage, approval workflow bypass, approval record
 missing, v0.2 tag creation, and v0.2 release creation remain false or absent
 until a later scoped approval task changes the boundary.
+
+AION-128 keeps production auth implementation inside the planning master
+checkpoint only. Production auth proposal implementation approval, approval
+queue item approval, production auth approval, runtime auth enablement,
+external identity runtime, credential storage, token storage, approval
+workflow bypass, approval record missing, v0.2 tag creation, and v0.2 release
+creation remain false or absent until a later scoped approval task changes the
+boundary.

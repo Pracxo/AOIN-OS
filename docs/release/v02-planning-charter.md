@@ -138,3 +138,13 @@ readiness layer. The charter remains planning-only after AION-125: all
 implementation approval states remain false, approval records remain required,
 no v0.2 tag is created, no release is created, and the v0.1 release baseline is
 not mutated.
+
+## AION-128 Planning Master Checkpoint
+
+AION-128 consolidates the planning charter into the planning master checkpoint.
+The charter remains planning-only after AION-128: proposal registry preview
+remains true, approval queue preview remains true, approval queue item approval
+remains false, proposal implementation approval remains false, all
+implementation approval states remain false, approval records remain required,
+no v0.2 tag is created, no release is created, and the v0.1 release baseline is
+not mutated.

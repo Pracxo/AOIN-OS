@@ -128,3 +128,4 @@ closure decision in ADR 0072.
 - [0116: v0.2 Pre-Implementation Master Freeze](0116-v02-preimplementation-master-freeze.md) - Freezes the final v0.2 planning baseline, workstream governance closeout, approval workflow closeout, and implementation locks without approving implementation.
 - [0117: v0.2 Workstream Proposal Registry](0117-v02-workstream-proposal-registry.md) - Adds the proposal registry, implementation request index, and approval queue preview without approving implementation.
 - [0118: v0.2 Proposal Registry Stabilization](0118-v02-proposal-registry-stabilization.md) - Stabilizes the proposal registry, freezes the approval queue preview, and records candidate workstream evidence while keeping all implementation approvals false.
+- [0119: v0.2 Planning Master Checkpoint](0119-v02-planning-master-checkpoint.md) - Consolidates AION-119 through AION-127 into a planning master checkpoint while keeping implementation approvals false.

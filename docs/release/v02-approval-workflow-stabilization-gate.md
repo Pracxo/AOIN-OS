@@ -141,3 +141,10 @@ approval, runtime implementation approval, backlog implementation approval,
 workstream implementation approval, approval workflow bypass, approval record
 missing, ADR dependency bypass, gate dependency bypass, approval expiry
 bypass, approval revocation bypass, and dual-control bypass remain false.
+
+AION-128 freezes this workflow for the planning master checkpoint. Approval
+queue item approval, proposal implementation approval, runtime implementation
+approval, backlog implementation approval, workstream implementation approval,
+approval workflow bypass, approval record missing, ADR dependency bypass, gate
+dependency bypass, approval expiry bypass, approval revocation bypass, and
+dual-control bypass remain false.

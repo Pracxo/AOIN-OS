@@ -1972,3 +1972,17 @@ workflow bypass, missing approval records, ADR dependency bypass, gate
 dependency bypass, approval expiry bypass, approval revocation bypass, and
 dual-control bypass remain no-go conditions. All implementation and runtime
 approvals remain false.
+
+## AION-128 Planning Master Checkpoint Policy
+
+AION-128 keeps policy fail-closed while consolidating AION-119 through
+AION-127 into the planning master checkpoint. Policy treats planning master
+checkpoint records, proposal governance baseline records, implementation lock
+freeze records, approval queue baseline records, and evidence matrix entries
+as planning evidence only. v0.2 tag creation, v0.2 release creation, approval
+queue item approval, proposal implementation approval, implementation
+approval, workstream implementation approval, backlog implementation approval,
+approval workflow bypass, missing approval records, ADR dependency bypass,
+gate dependency bypass, runtime enablement, external calls, credential/token
+storage, sandbox execution, package files, migrations, and runtime API
+execution routes remain no-go conditions.

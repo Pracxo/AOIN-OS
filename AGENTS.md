@@ -674,6 +674,19 @@ Instructions for future Codex runs in this repository:
   enablement, no external calls, no credentials/tokens, no sandbox execution,
   no package files, no lockfiles, no migrations, and no runtime route, SDK, or
   CLI implementation.
+- AION-128 v0.2 planning master checkpoint is planning governance evidence
+  only. It must pass `./scripts/v02-planning-master-checkpoint.sh`,
+  `./scripts/v02-planning-master-freeze.sh`, and
+  `./scripts/v02-planning-master-no-go-regression.sh`, and it must keep
+  proposal registry preview-only true, approval queue preview-only true,
+  approval queue item approval false, proposal implementation approval false,
+  runtime implementation approval false, backlog implementation approval
+  false, workstream implementation approval false, approval workflow bypass
+  false, approval record missing false, ADR dependency bypass false, gate
+  dependency bypass false, no v0.2 tag, no v0.2 release, no runtime
+  enablement, no external calls, no credentials/tokens, no sandbox execution,
+  no package files, no lockfiles, no migrations, and no runtime route, SDK, or
+  CLI implementation.
 - AION-125 v0.2 pre-implementation master freeze is final planning baseline
   evidence only. It must pass `./scripts/v02-preimplementation-master-freeze.sh`,
   `./scripts/v02-preimplementation-final-baseline-check.sh`, and
