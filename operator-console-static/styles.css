@@ -476,8 +476,14 @@ h1 {
 .proposal-registry-row span,
 .proposal-registry-row strong,
 .proposal-registry-stabilization-row span,
-.proposal-registry-stabilization-row strong {
+.proposal-registry-stabilization-row strong,
+.final-planning-row span,
+.final-planning-row strong {
   min-width: 0;
+}
+
+.final-planning-row strong {
+  color: var(--ready);
 }
 
 .readiness-final-row strong {

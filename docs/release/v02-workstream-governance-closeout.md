@@ -65,3 +65,11 @@ approval queue preview-only true, proposal implementation approval false,
 workstream implementation approval false, approval queue item approval false,
 runtime implementation approval false, no v0.2 tag, and no v0.2 release until
 a later scoped approval task changes the boundary.
+
+## AION-129 Final Planning Release Gate
+
+AION-129 keeps this workstream governance closeout as planning evidence. Future
+workstreams remain blocked from implementation until a later scoped approval
+task provides explicit approval records, ADR dependencies, gate dependencies,
+security review, architecture review, operator review, rollback evidence, and
+no-go regression evidence.

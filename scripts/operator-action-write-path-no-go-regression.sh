@@ -337,6 +337,10 @@ allowed_aion128_files = {
     "operator-console-static/demo-data/v02-planning-master-checkpoint.json",
     "operator-console-static/demo-data/v02-implementation-lock-freeze.json",
 }
+allowed_aion129_files = {
+    "operator-console-static/demo-data/v02-final-planning-release-gate.json",
+    "operator-console-static/demo-data/v02-no-implementation-freeze.json",
+}
 runtime_prefixes = (
     "services/brain-api/src/",
     "packages/aion-sdk-python/src/",
@@ -381,6 +385,7 @@ for relative in sorted(changed):
         or relative in allowed_aion125_files
         or relative in allowed_aion126_files
         or relative in allowed_aion128_files
+        or relative in allowed_aion129_files
         or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)
         or relative.startswith(allowed_aion110_prefixes)

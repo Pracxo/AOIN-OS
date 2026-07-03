@@ -647,6 +647,18 @@ Instructions for future Codex runs in this repository:
   dependency bypass, approval expiry bypass, approval revocation bypass,
   dual-control bypass, v0.2 tag creation, v0.2 release creation, or privileged
   bypass.
+
+- AION-129 is the v0.2 final planning release gate. Treat
+  `docs/release/v02-final-planning-release-gate.md`,
+  `docs/release/v02-governance-baseline-evidence.md`,
+  `docs/release/v02-no-implementation-freeze.md`,
+  `docs/release/v02-final-approval-lock-evidence.md`,
+  `docs/release/v02-planning-release-gate-matrix.md`, and
+  `docs/adr/0120-v02-final-planning-release-gate.md` as planning evidence
+  only. Do not create a v0.2 tag or release, do not move `aion-v0.1.0`, and do
+  not approve runtime, backlog, workstream, proposal, queue, connector, auth,
+  module, external-call, credential/token, sandbox, write-path, package,
+  migration, SDK, CLI, or API runtime implementation scope.
 - AION-126 v0.2 workstream proposal registry is proposal registry and queue
   preview only. It must pass
   `./scripts/v02-workstream-proposal-registry-check.sh`,

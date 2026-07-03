@@ -1025,3 +1025,11 @@ surface is local verification through planning master scripts:
 `./scripts/v02-planning-master-checkpoint.sh`,
 `./scripts/v02-planning-master-freeze.sh`, and
 `./scripts/v02-planning-master-no-go-regression.sh`.
+
+## AION-129 CLI Boundary
+
+AION-129 adds no CLI runtime command implementation. The only CLI-adjacent
+surface is local verification through final planning scripts:
+`./scripts/v02-final-planning-release-gate.sh`,
+`./scripts/v02-final-planning-freeze.sh`, and
+`./scripts/v02-final-planning-no-go-regression.sh`.

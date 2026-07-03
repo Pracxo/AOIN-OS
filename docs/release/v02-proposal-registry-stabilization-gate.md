@@ -55,3 +55,7 @@ The proposal registry remains preview-only, the approval queue remains
 preview-only, approval queue item approval remains false, proposal
 implementation approval remains false, runtime implementation approval remains
 false, and no v0.2 tag or release is created.
+
+AION-129 consumes this stabilization gate as required prior evidence for the
+final planning release gate. The proposal registry and approval queue remain
+preview-only, and no proposal or queue record approves implementation.

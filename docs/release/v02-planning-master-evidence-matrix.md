@@ -12,3 +12,4 @@
 | Proposal registry | `docs/release/v02-workstream-proposal-registry.md` | `./scripts/v02-workstream-proposal-registry-check.sh` | preview-only registry | false | yes | Proposal implementation approval remains false. |
 | Approval queue | `docs/release/v02-approval-queue-freeze.md` | `./scripts/v02-approval-queue-freeze.sh` | preview-only queue | false | yes | Approval queue item approval remains false. |
 | Planning master checkpoint | `docs/release/v02-planning-master-checkpoint.md` | `./scripts/v02-planning-master-checkpoint.sh` | checkpoint passed | false | yes | No v0.2 tag or release is created. |
+| Final planning release gate | `docs/release/v02-final-planning-release-gate.md` | `./scripts/v02-final-planning-release-gate.sh` | final planning gate passed | false | yes | AION-129 creates no v0.2 tag or release. |

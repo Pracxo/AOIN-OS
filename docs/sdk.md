@@ -1146,3 +1146,10 @@ command implementations. Future SDK-facing implementation proposals remain
 blocked by the planning master checkpoint until a later scoped approval
 record, ADR, gate evidence, no-go regression, and full repository verification
 explicitly approve implementation.
+
+## AION-129 SDK Boundary
+
+AION-129 adds no SDK resources, generated clients, provider SDKs, SDK
+dependencies, SDK package changes, or CLI command implementations. SDK-facing
+implementation remains blocked by the final planning release gate until a
+later scoped approval task explicitly widens the boundary.

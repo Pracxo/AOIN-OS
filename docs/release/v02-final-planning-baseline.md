@@ -84,3 +84,9 @@ approval queue item approval false, proposal implementation approval false,
 runtime implementation approval false, backlog implementation approval false,
 workstream implementation approval false, v0.2 tag creation false, and v0.2
 release creation false remain part of the final planning baseline.
+
+## AION-129 Final Planning Release Gate
+
+AION-129 freezes this baseline as the final planning release-gate baseline.
+The final baseline remains planning-only and does not create a v0.2 tag,
+create a v0.2 release, or approve implementation.

@@ -228,6 +228,9 @@ allowed = {
     "./scripts/v02-planning-master-checkpoint.sh",
     "./scripts/v02-planning-master-freeze.sh",
     "./scripts/v02-planning-master-no-go-regression.sh",
+    "./scripts/v02-final-planning-release-gate.sh",
+    "./scripts/v02-final-planning-freeze.sh",
+    "./scripts/v02-final-planning-no-go-regression.sh",
     "./scripts/docs-check.sh",
 }
 listed = set(nav.get("safe_copy_commands", []))

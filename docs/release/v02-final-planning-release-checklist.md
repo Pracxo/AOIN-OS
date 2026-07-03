@@ -1,0 +1,23 @@
+# v0.2 Final Planning Release Checklist
+
+- docs complete
+- examples valid
+- scripts executable
+- planning master checkpoint passing
+- proposal registry stabilization passing
+- preimplementation master freeze passing
+- approval workflow stabilization passing
+- workstream intake readiness passing
+- no runtime implementation
+- no v0.2 tag
+- no v0.2 release
+- no external calls
+- no credentials/tokens
+- no sandbox execution
+- no package files
+- no migrations
+- proposal registry preview-only
+- approval queue preview-only
+- approval queue item approval false
+- proposal implementation approval false
+- aion-v0.1.0 tag untouched

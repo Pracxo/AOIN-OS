@@ -25,3 +25,11 @@ The planning master checkpoint fails if any master no-go condition appears:
 - runtime API execution routes added
 
 Allowed planning files may describe denied, disabled, no-go, future, planning, unapproved, template, or preview states only. They must not create runtime behavior or implementation approval.
+
+## AION-129 Final Planning Extension
+
+The final planning no-go regression in
+`docs/release/v02-final-planning-no-go.md` inherits these no-go checks and adds
+final release-gate evidence. The same implementation, queue, proposal,
+bypass, external-call, credential/token, sandbox, package, migration, API
+route, v0.2 tag, and v0.2 release blockers remain active.

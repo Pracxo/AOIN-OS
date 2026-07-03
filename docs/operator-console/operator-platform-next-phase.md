@@ -209,6 +209,14 @@ control, login control, write control, runtime route, package file, migration,
 release action, tag action, approval bypass, ADR bypass, gate bypass, or
 runtime implementation approval control.
 
+## AION-129 Final Planning Release Preview
+
+The operator console static preview now includes final planning release gate
+and no-implementation freeze panels. They are bundled JSON previews only and
+add no input controls, write controls, release controls, tag controls,
+approval controls, runtime routes, external calls, credentials/tokens, sandbox
+execution, package files, or migrations.
+
 AION-127 adds static proposal registry stabilization and approval queue freeze
 panels. They show stabilization and queue freeze evidence only, with proposal
 registry preview-only true, approval queue preview-only true, approval queue

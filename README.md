@@ -4522,3 +4522,20 @@ Developer command:
 ./scripts/v02-proposal-registry-freeze.sh
 ./scripts/v02-proposal-registry-no-go-regression.sh
 ```
+
+### AION-129 v0.2 Final Planning Release Gate
+
+AION-129 adds the final v0.2 planning release gate, governance baseline
+evidence, no-implementation freeze, final approval lock evidence, planning
+release gate matrix, final planning no-go regression, ADR 0120, and static
+console preview data. It does not create a v0.2 tag or release and keeps
+runtime implementation, backlog implementation, workstream implementation,
+proposal implementation, approval queue item approval, connector
+implementation, production auth, module activation, external calls,
+credential storage, token storage, and sandbox execution unapproved.
+
+```bash
+./scripts/v02-final-planning-release-gate.sh
+./scripts/v02-final-planning-freeze.sh
+./scripts/v02-final-planning-no-go-regression.sh
+```

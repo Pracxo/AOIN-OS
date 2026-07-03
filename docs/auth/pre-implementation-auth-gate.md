@@ -140,3 +140,10 @@ external identity runtime, credential storage, token storage, approval
 workflow bypass, approval record missing, v0.2 tag creation, and v0.2 release
 creation remain false or absent until a later scoped approval task changes the
 boundary.
+
+## AION-129 Final Planning Release Gate
+
+AION-129 keeps production auth implementation unapproved. OAuth/OIDC/SAML
+runtime, external identity runtime, credential storage, token storage, login,
+logout, session persistence, v0.2 tag creation, and v0.2 release creation
+remain false or absent.
