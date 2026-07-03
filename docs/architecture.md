@@ -2104,6 +2104,16 @@ token storage, sandbox execution, API runtime execution routes, SDK resources,
 CLI implementations, package files, migrations, v0.2 tag creation, and v0.2
 release creation remain false, disabled, or absent.
 
+## AION-129 Final Planning Release Gate
+
+AION-129 adds a final planning release gate above the AION-128 planning master
+checkpoint. The architecture boundary remains documentation, synthetic
+examples, static console preview data, and shell verification only. No API
+router, SDK resource, CLI implementation, runtime config default, package
+manager file, migration, connector runtime, production auth runtime, operator
+write path, module activation path, external call path, credential/token
+storage path, sandbox path, v0.2 tag, or v0.2 release is added.
+
 ## AION-128 v0.2 Planning Master Checkpoint Boundary
 
 AION-128 consolidates the v0.2 planning charter, stabilization, readiness,

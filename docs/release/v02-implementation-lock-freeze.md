@@ -24,3 +24,13 @@ AION-128 records the lock state only. It does not add runtime implementation, ap
 ## Enforcement
 
 `./scripts/v02-planning-master-checkpoint.sh`, `./scripts/v02-planning-master-freeze.sh`, and `./scripts/v02-planning-master-no-go-regression.sh` enforce this lock with inherited gates and AION-128-specific checks.
+
+## AION-129 Final Planning Release Gate
+
+`./scripts/v02-final-planning-release-gate.sh`,
+`./scripts/v02-final-planning-freeze.sh`, and
+`./scripts/v02-final-planning-no-go-regression.sh` consume this lock as final
+planning release-gate evidence. They do not approve runtime, backlog,
+workstream, proposal, queue, connector, auth, module, external-call,
+credential/token, sandbox, write-path, package, migration, SDK, CLI, or API
+runtime implementation scope.

@@ -480,3 +480,25 @@ Validate the v0.2 planning master checkpoint evidence:
 ./scripts/v02-planning-master-freeze.sh
 ./scripts/v02-planning-master-no-go-regression.sh
 ```
+
+## AION-129 v0.2 Final Planning Release Gate Panels
+
+The static console includes v0.2 final planning release gate and
+no-implementation freeze panels. They load bundled JSON only, keep the proposal
+registry preview-only, keep the approval queue preview-only, keep approval queue
+item approval false, keep proposal implementation approval false, keep runtime,
+backlog, and workstream implementation approval false, keep approval workflow
+bypass, approval record missing, ADR dependency bypass, gate dependency bypass,
+approval expiry bypass, approval revocation bypass, and dual-control bypass
+false, and keep external calls, credential storage, token storage, sandbox
+execution, v0.2 release creation, and v0.2 tag creation unapproved or false.
+They expose no input, package, migration, runtime, release, tag, approval,
+bypass, or write controls.
+
+Validate the v0.2 final planning release gate evidence:
+
+```bash
+./scripts/v02-final-planning-release-gate.sh
+./scripts/v02-final-planning-freeze.sh
+./scripts/v02-final-planning-no-go-regression.sh
+```

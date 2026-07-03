@@ -1986,3 +1986,14 @@ approval workflow bypass, missing approval records, ADR dependency bypass,
 gate dependency bypass, runtime enablement, external calls, credential/token
 storage, sandbox execution, package files, migrations, and runtime API
 execution routes remain no-go conditions.
+
+## AION-129 Policy Gate
+
+AION-129 promotes the v0.2 planning baseline into a final planning release gate
+without changing policy enforcement. The no-go policy still blocks v0.2 tag
+creation, v0.2 release creation, runtime implementation approval, proposal
+implementation approval, approval queue item approval, approval workflow
+bypass, missing approval records, ADR dependency bypass, gate dependency
+bypass, production auth, connector runtime, operator write execution, module
+activation, external calls, credential/token storage, sandbox execution,
+package files, migrations, and runtime API execution routes.

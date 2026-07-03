@@ -59,3 +59,14 @@ activation approval false, external calls approval false, credential storage
 approval false, token storage approval false, sandbox execution approval
 false, v0.2 tag creation false, v0.2 release creation false, and v0.2 release
 approval false.
+
+## AION-129 Final Planning Release Gate
+
+AION-129 keeps this implementation lock summary unchanged and adds final
+planning release-gate evidence on top. Runtime implementation approval,
+backlog implementation approval, workstream implementation approval, proposal
+implementation approval, approval queue item approval, connector
+implementation approval, production auth approval, module activation approval,
+external calls approval, credential storage approval, token storage approval,
+sandbox execution approval, v0.2 tag creation, v0.2 release creation, and
+v0.2 release approval remain false.

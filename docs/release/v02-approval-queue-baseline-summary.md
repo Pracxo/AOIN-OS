@@ -35,3 +35,10 @@ Future implementation proposals require dual-control evidence before approval ca
 ## No-Go Conditions
 
 The queue baseline fails on approval item approval true, proposal implementation approval true, implementation approval true, approval workflow bypass, missing approval record, ADR dependency bypass, gate dependency bypass, expiry bypass, revocation bypass, dual-control bypass, v0.2 tag creation, v0.2 release creation, runtime enablement, external calls, credential/token storage, sandbox execution, package files, migrations, or runtime API execution routes.
+
+## AION-129 Final Planning Release Gate
+
+AION-129 keeps this queue baseline preview-only. Queue placement remains
+review ordering and cannot approve implementation. `approval_queue_item_approved=false`
+and `proposal_implementation_approved=false` remain required for the final
+planning release gate.

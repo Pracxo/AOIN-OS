@@ -87,3 +87,11 @@ approve implementation, approve queue items, create a v0.2 tag, create a
 release, enable runtime, enable external calls, store credentials or tokens,
 enable sandbox execution, add package files, add migrations, or add runtime
 API, SDK, or CLI implementation.
+
+## AION-129 Final Planning Release Gate
+
+AION-129 uses this pre-implementation master freeze as inherited release-gate
+evidence. The final planning gate keeps all implementation approvals false and
+does not approve runtime, backlog, workstream, proposal, queue, connector,
+auth, module, external-call, credential/token, sandbox, package, migration,
+SDK, CLI, or API runtime implementation scope.

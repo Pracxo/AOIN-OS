@@ -1202,3 +1202,11 @@ implementation approval false, backlog implementation approval false,
 workstream implementation approval false, external calls false,
 credential/token storage false, sandbox execution false, v0.2 tag creation
 false, and v0.2 release creation false.
+
+## AION-129 Static Console Preview
+
+The static console now includes final planning release gate and
+no-implementation freeze preview data. The panels are read-only, redacted,
+synthetic, and local. They expose no inputs, no write controls, no release
+controls, no tag controls, no approval controls, no runtime controls, no
+external calls, no credentials/tokens, and no sandbox execution.

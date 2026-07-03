@@ -51,3 +51,12 @@ The checkpoint fails on v0.2 tag creation, v0.2 release creation, runtime implem
 ## No v0.2 Tag Or Release
 
 AION-128 explicitly creates no v0.2 tag and no release. The `aion-v0.1.0` tag remains the frozen release baseline.
+
+## AION-129 Final Planning Release Gate
+
+AION-129 consumes this planning master checkpoint as a required prior gate for
+the final v0.2 planning release gate. The final gate preserves this checkpoint
+as planning evidence only and keeps proposal registry preview-only, approval
+queue preview-only, approval queue item approval false, proposal
+implementation approval false, runtime implementation approval false, no v0.2
+tag, and no v0.2 release.

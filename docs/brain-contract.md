@@ -1933,3 +1933,13 @@ protected-material storage, sandbox execution, operator write execution,
 connector runtime, production auth, module activation, package files,
 migrations, v0.2 tag creation, and v0.2 release creation remain false,
 disabled, or absent.
+
+## AION-129 Contract Boundary
+
+The v0.2 final planning release gate is not a Brain API contract expansion. It
+adds release-gate evidence and examples only. Contract resources remain
+unchanged, proposal registry and approval queue data remain preview-only, and
+runtime implementation approval, proposal implementation approval, approval
+queue item approval, external calls, credentials/tokens, sandbox execution,
+operator write execution, connector runtime, production auth, and module
+activation remain false or absent.

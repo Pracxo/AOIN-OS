@@ -31,3 +31,11 @@ Every future implementation proposal must include rollback/audit evidence before
 ## No Direct Implementation Approval
 
 No proposal registry entry, approval queue preview, reviewer note, static console panel, or planning checklist can directly approve implementation. Future implementation requires explicit scoped approval records, ADRs, gate evidence, security review, architecture review, operator review, and rollback/audit evidence.
+
+## AION-129 Final Planning Release Gate
+
+AION-129 promotes this governance baseline into the final planning release
+gate. Proposal registry entries remain preview-only, approval queue entries
+remain preview-only, proposal implementation approval remains false, approval
+queue item approval remains false, and future implementation still requires a
+separate scoped approval task.
