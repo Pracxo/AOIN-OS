@@ -125,3 +125,10 @@ Production auth approval, runtime auth enablement, external identity runtime,
 credential storage, token storage, approval queue item approval, v0.2 tag
 creation, and v0.2 release creation remain false or absent until a later
 scoped approval task changes the boundary.
+
+AION-127 keeps production auth implementation in the stabilized proposal
+registry only. Production auth proposal implementation approval, approval
+queue item approval, runtime auth enablement, external identity runtime,
+credential storage, token storage, approval workflow bypass, approval record
+missing, v0.2 tag creation, and v0.2 release creation remain false or absent
+until a later scoped approval task changes the boundary.

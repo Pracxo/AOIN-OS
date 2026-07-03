@@ -199,3 +199,12 @@ all implementation/runtime approvals false. The console still adds no input
 control, login control, write control, runtime route, package file, migration,
 release action, tag action, approval bypass, ADR bypass, gate bypass, or
 runtime implementation approval control.
+
+AION-127 adds static proposal registry stabilization and approval queue freeze
+panels. They show stabilization and queue freeze evidence only, with proposal
+registry preview-only true, approval queue preview-only true, approval queue
+item approval false, proposal implementation approval false, and all
+implementation/runtime approvals false. The console still adds no input
+control, login control, write control, runtime route, package file, migration,
+release action, tag action, approval bypass, ADR bypass, gate bypass, or
+runtime implementation approval control.

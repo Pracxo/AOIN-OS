@@ -127,3 +127,4 @@ closure decision in ADR 0072.
 - [0115: v0.2 Workstream Intake Readiness](0115-v02-workstream-intake-readiness.md) - Defines workstream intake evidence, approval record evidence, sequencing freeze, and rejection rules without approving implementation.
 - [0116: v0.2 Pre-Implementation Master Freeze](0116-v02-preimplementation-master-freeze.md) - Freezes the final v0.2 planning baseline, workstream governance closeout, approval workflow closeout, and implementation locks without approving implementation.
 - [0117: v0.2 Workstream Proposal Registry](0117-v02-workstream-proposal-registry.md) - Adds the proposal registry, implementation request index, and approval queue preview without approving implementation.
+- [0118: v0.2 Proposal Registry Stabilization](0118-v02-proposal-registry-stabilization.md) - Stabilizes the proposal registry, freezes the approval queue preview, and records candidate workstream evidence while keeping all implementation approvals false.

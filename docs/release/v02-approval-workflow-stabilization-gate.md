@@ -134,3 +134,10 @@ preview entries do not approve implementation. Approval queue item approval,
 runtime implementation approval, backlog implementation approval, workstream
 implementation approval, approval workflow bypass, approval record missing,
 ADR dependency bypass, and gate dependency bypass remain false.
+
+AION-127 freezes this workflow for proposal registry stabilization and approval
+queue preview only. Approval queue item approval, proposal implementation
+approval, runtime implementation approval, backlog implementation approval,
+workstream implementation approval, approval workflow bypass, approval record
+missing, ADR dependency bypass, gate dependency bypass, approval expiry
+bypass, approval revocation bypass, and dual-control bypass remain false.

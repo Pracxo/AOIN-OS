@@ -1908,3 +1908,15 @@ does not enable runtime implementation, external calls, protected-material
 storage, sandbox execution, operator write execution, connector runtime,
 production auth, module activation, package files, migrations, v0.2 tag
 creation, or v0.2 release creation.
+
+## AION-127 Proposal Registry Stabilization Contract
+
+AION-127 adds no runtime Brain contract. It stabilizes proposal registry and
+approval queue preview evidence for candidate workstreams. Queue freeze records
+remain static planning evidence and are not approval records. Proposal
+implementation approval, approval queue item approval, runtime implementation
+approval, workstream implementation approval, external calls,
+protected-material storage, sandbox execution, operator write execution,
+connector runtime, production auth, module activation, package files,
+migrations, v0.2 tag creation, and v0.2 release creation remain false,
+disabled, or absent.

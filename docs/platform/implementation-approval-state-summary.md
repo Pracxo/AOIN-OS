@@ -110,3 +110,13 @@ backlog implementation approval false, workstream implementation approval
 false, approval workflow bypass false, approval record missing false, ADR
 dependency bypass false, gate dependency bypass false, v0.2 tag creation
 false, and v0.2 release creation false.
+
+AION-127 adds `v02_proposal_registry_stabilized=true` while keeping proposal
+registry preview-only true, approval queue preview-only true, approval queue
+item approval false, proposal implementation approval false, runtime
+implementation approval false, backlog implementation approval false,
+workstream implementation approval false, approval workflow bypass false,
+approval record missing false, ADR dependency bypass false, gate dependency
+bypass false, approval expiry bypass false, approval revocation bypass false,
+dual-control bypass false, v0.2 tag creation false, and v0.2 release creation
+false.

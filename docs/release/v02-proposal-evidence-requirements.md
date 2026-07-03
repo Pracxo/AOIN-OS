@@ -47,3 +47,12 @@ Each proposal must define focused tests, no-go regression tests, full-check expe
 ## No-Go Acknowledgement
 
 Each proposal must acknowledge that implementation approval, workstream implementation approval, approval queue item approval, approval workflow bypass, missing approval records, ADR dependency bypass, gate dependency bypass, v0.2 tag creation, v0.2 release creation, runtime enablement, external calls, credential or token storage, sandbox execution, package files, migrations, and runtime API execution routes are blocked until a later scoped approval task.
+
+## AION-127 Stabilized Evidence Baseline
+
+AION-127 requires candidate workstream evidence, lifecycle evidence, queue
+freeze evidence, expiry evidence, revocation evidence, dual-control evidence,
+and closeout evidence before any later approval discussion. Proposal
+implementation approval, approval queue item approval, runtime implementation
+approval, workstream implementation approval, v0.2 tag creation, and v0.2
+release creation remain false.

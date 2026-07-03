@@ -1134,3 +1134,9 @@ command implementations. Future SDK-facing implementation proposals must enter
 the proposal registry with implementation approval false, required ADR
 evidence, required gate evidence, no-go acknowledgement, and approval queue
 item approval false.
+
+AION-127 adds no SDK resources, generated clients, SDK dependencies, or CLI
+command implementations. Future SDK-facing implementation proposals remain
+blocked by the stabilized proposal registry and approval queue freeze until a
+later scoped approval record, ADR, gate evidence, no-go regression, and full
+repository verification explicitly approve implementation.

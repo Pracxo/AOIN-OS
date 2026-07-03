@@ -472,7 +472,9 @@ h1 {
 .preimplementation-master-row span,
 .preimplementation-master-row strong,
 .proposal-registry-row span,
-.proposal-registry-row strong {
+.proposal-registry-row strong,
+.proposal-registry-stabilization-row span,
+.proposal-registry-stabilization-row strong {
   min-width: 0;
 }
 

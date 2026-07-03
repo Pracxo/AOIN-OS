@@ -39,3 +39,12 @@ Approval status remains false for every queue item. The queue may show `queued_f
 ## No-Go Conditions
 
 The queue fails if a queue item is marked approved, implementation approval is set true, workstream implementation approval is set true, approval workflow bypass is true, an approval record is missing, ADR dependency is bypassed, gate dependency is bypassed, production auth is enabled, connector runtime is enabled, operator write execution is enabled, module activation is enabled, external calls are enabled, credential or token storage is enabled, sandbox execution is enabled, package files are added, migrations are added, runtime API execution routes are added, a v0.2 tag is created, or a v0.2 release is created.
+
+## AION-127 Approval Queue Freeze
+
+AION-127 freezes this queue as preview-only evidence. Queue item approval,
+proposal implementation approval, implementation approval, workstream
+implementation approval, backlog implementation approval, approval workflow
+bypass, approval record missing, ADR dependency bypass, gate dependency
+bypass, approval expiry bypass, approval revocation bypass, dual-control
+bypass, v0.2 tag creation, and v0.2 release creation remain false.

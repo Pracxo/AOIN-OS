@@ -28,3 +28,11 @@ No state enables runtime or approves implementation. `queued_for_future_decision
 ## Forbidden State Transitions
 
 The state machine forbids any transition that marks implementation approved, marks an approval queue item approved, bypasses the approval workflow, bypasses ADR dependency, bypasses gate dependency, creates a v0.2 tag, creates a release, enables production auth, enables connector runtime, enables operator write execution, enables module activation, enables external calls, stores credentials or tokens, enables sandbox execution, adds package files, adds migrations, or adds runtime API execution routes.
+
+## AION-127 Stabilized Lifecycle
+
+AION-127 keeps every proposal state planning-only. Stabilization adds evidence
+for required reviewers, allowed-today status, implementation approved false,
+runtime enabled false, and release blockers. No state can approve proposal
+implementation, approve queue items, enable runtime, create a v0.2 tag, or
+create a release.
