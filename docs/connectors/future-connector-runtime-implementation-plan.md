@@ -179,3 +179,11 @@ AION-129 keeps connector implementation unapproved. The connector runtime,
 external calls, connector SDK dependencies, credential storage, token storage,
 sandbox execution, activation, route registration, package files, migrations,
 v0.2 tag creation, and v0.2 release creation remain false or absent.
+
+## AION-130 Planning Track Closeout
+
+AION-130 keeps connector implementation unapproved in the governance handoff
+pack. The connector runtime, external calls, connector SDK dependencies,
+credential storage, token storage, sandbox execution, activation, route
+registration, package files, migrations, v0.2 tag creation, and v0.2 release
+creation remain false or absent.

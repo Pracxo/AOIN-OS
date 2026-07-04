@@ -136,3 +136,10 @@ The final planning release gate keeps this future runtime boundary frozen. It
 adds no runtime config defaults, route registration, capability activation,
 external calls, credentials/tokens, sandbox execution, package files,
 migrations, v0.2 tag, or v0.2 release.
+
+## AION-130 Planning Track Closeout
+
+The planning track closeout keeps this future runtime boundary frozen. It adds
+no runtime config defaults, route registration, capability activation,
+external calls, credentials/tokens, sandbox execution, package files,
+migrations, v0.2 tag, or v0.2 release.

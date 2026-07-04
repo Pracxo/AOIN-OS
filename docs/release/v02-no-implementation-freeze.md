@@ -28,3 +28,10 @@ This freeze is not implementation. It does not enable connector runtime, operato
 ## Release Baseline
 
 No v0.2 tag or release is created. The `aion-v0.1.0` tag remains the frozen v0.1 release baseline.
+
+## AION-130 Planning Track Closeout
+
+AION-130 inherits this no-implementation freeze for the planning track
+closeout. All implementation approval states remain false, the proposal
+registry remains preview-only, the approval queue remains preview-only, and no
+v0.2 tag or release is created.

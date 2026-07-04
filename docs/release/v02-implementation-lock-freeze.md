@@ -34,3 +34,13 @@ planning release-gate evidence. They do not approve runtime, backlog,
 workstream, proposal, queue, connector, auth, module, external-call,
 credential/token, sandbox, write-path, package, migration, SDK, CLI, or API
 runtime implementation scope.
+
+## AION-130 Planning Track Closeout
+
+`./scripts/v02-planning-track-closeout.sh`,
+`./scripts/v02-planning-track-handoff-freeze.sh`, and
+`./scripts/v02-planning-track-closeout-no-go-regression.sh` consume this lock
+as planning track closeout evidence. They do not approve runtime, backlog,
+workstream, proposal, queue, connector, auth, module, external-call,
+credential/token, sandbox, write-path, package, migration, SDK, CLI, or API
+runtime implementation scope.

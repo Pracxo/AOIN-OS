@@ -231,6 +231,9 @@ allowed = {
     "./scripts/v02-final-planning-release-gate.sh",
     "./scripts/v02-final-planning-freeze.sh",
     "./scripts/v02-final-planning-no-go-regression.sh",
+    "./scripts/v02-planning-track-closeout.sh",
+    "./scripts/v02-planning-track-handoff-freeze.sh",
+    "./scripts/v02-planning-track-closeout-no-go-regression.sh",
     "./scripts/docs-check.sh",
 }
 listed = set(nav.get("safe_copy_commands", []))

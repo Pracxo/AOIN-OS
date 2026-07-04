@@ -1997,3 +1997,14 @@ bypass, missing approval records, ADR dependency bypass, gate dependency
 bypass, production auth, connector runtime, operator write execution, module
 activation, external calls, credential/token storage, sandbox execution,
 package files, migrations, and runtime API execution routes.
+
+## AION-130 Policy Handoff
+
+AION-130 closes the v0.2 planning track without changing policy enforcement.
+Policy still treats the proposal registry and approval queue as preview-only
+evidence and blocks v0.2 tag creation, v0.2 release creation, runtime
+implementation approval, proposal implementation approval, approval queue item
+approval, approval workflow bypass, missing approval records, ADR dependency
+bypass, gate dependency bypass, production auth, connector runtime, operator
+write execution, module activation, external calls, credential/token storage,
+sandbox execution, package files, migrations, and runtime API execution routes.

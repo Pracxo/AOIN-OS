@@ -200,6 +200,17 @@ control, login control, write control, runtime route, package file, migration,
 release action, tag action, approval bypass, ADR bypass, gate bypass, or
 runtime implementation approval control.
 
+## AION-130 v0.2 Planning Track Closeout
+
+AION-130 adds static planning track closeout and governance handoff panels.
+They show closeout and handoff evidence only, with proposal registry
+preview-only true, approval queue preview-only true, approval queue item
+approval false, proposal implementation approval false, and all
+implementation/runtime approvals false. The console still adds no input
+control, login control, write control, runtime route, package file, migration,
+release action, tag action, approval bypass, ADR bypass, gate bypass, or
+runtime implementation approval control.
+
 AION-128 adds static planning master checkpoint and implementation lock freeze
 panels. They show planning master and lock evidence only, with proposal
 registry preview-only true, approval queue preview-only true, approval queue

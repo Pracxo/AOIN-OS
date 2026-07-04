@@ -1153,3 +1153,12 @@ AION-129 adds no SDK resources, generated clients, provider SDKs, SDK
 dependencies, SDK package changes, or CLI command implementations. SDK-facing
 implementation remains blocked by the final planning release gate until a
 later scoped approval task explicitly widens the boundary.
+
+## AION-130 SDK Boundary
+
+AION-130 adds no SDK resources, generated clients, provider SDKs, SDK
+dependencies, SDK package changes, or CLI command implementations. SDK-facing
+implementation remains blocked by the planning track closeout until a later
+scoped approval task supplies approval records, ADRs, gate evidence, security
+review, architecture review, operator review, rollback/audit evidence, and
+no-go regression evidence.
