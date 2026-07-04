@@ -2104,6 +2104,19 @@ token storage, sandbox execution, API runtime execution routes, SDK resources,
 CLI implementations, package files, migrations, v0.2 tag creation, and v0.2
 release creation remain false, disabled, or absent.
 
+## AION-131 v0.2 Implementation Request Pack Boundary
+
+AION-131 adds request-pack documents, proposal submission templates, approval
+evidence boundaries, examples, static console preview data, and local checks
+only. Architecture runtime remains unchanged: request package implementation
+approval, proposal template implementation approval, approval evidence
+approval, approval queue item approval, proposal implementation approval,
+runtime implementation approval, backlog implementation approval, workstream
+implementation approval, external calls, credential storage, token storage,
+sandbox execution, operator write execution, connector runtime, production
+auth, module activation, package files, migrations, v0.2 tag creation, and
+v0.2 release creation remain false, disabled, or absent.
+
 ## AION-130 v0.2 Planning Track Closeout Boundary
 
 AION-130 closes the v0.2 planning track as governance handoff evidence only.

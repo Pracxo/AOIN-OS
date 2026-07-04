@@ -2008,3 +2008,15 @@ approval, approval workflow bypass, missing approval records, ADR dependency
 bypass, gate dependency bypass, production auth, connector runtime, operator
 write execution, module activation, external calls, credential/token storage,
 sandbox execution, package files, migrations, and runtime API execution routes.
+
+## AION-131 Request Pack Policy Boundary
+
+AION-131 adds request-package review policy evidence without changing policy
+enforcement. Policy still treats request packs, proposal templates, proposal
+registry entries, and approval queue entries as preview-only unless a later
+scoped task supplies explicit approval records, ADRs, gate evidence, security
+review, architecture review, operator review, rollback/audit evidence, and
+no-go regression evidence. Request package implementation approval, proposal
+template implementation approval, approval evidence approval, proposal
+implementation approval, approval queue item approval, runtime implementation
+approval, v0.2 tag creation, and v0.2 release creation remain false.

@@ -1955,3 +1955,16 @@ implementation approval, proposal implementation approval, approval queue item
 approval, external calls, credentials/tokens, sandbox execution, operator write
 execution, connector runtime, production auth, and module activation remain
 false or absent.
+
+## AION-131 Contract Boundary
+
+AION-131 adds no runtime Brain contract. It records the implementation request
+pack, proposal submission templates, approval evidence boundary, evidence
+checklist, request template catalog, review rules, and no-go evidence as
+static planning/request artifacts. Contract resources remain unchanged,
+proposal registry and approval queue data remain preview-only, and request
+package implementation approval, proposal template implementation approval,
+approval evidence approval, runtime implementation approval, proposal
+implementation approval, approval queue item approval, external calls,
+credentials/tokens, sandbox execution, operator write execution, connector
+runtime, production auth, and module activation remain false or absent.

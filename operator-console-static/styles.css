@@ -480,12 +480,15 @@ h1 {
 .final-planning-row span,
 .final-planning-row strong,
 .planning-track-row span,
-.planning-track-row strong {
+.planning-track-row strong,
+.request-pack-row span,
+.request-pack-row strong {
   min-width: 0;
 }
 
 .final-planning-row strong,
-.planning-track-row strong {
+.planning-track-row strong,
+.request-pack-row strong {
   color: var(--ready);
 }
 

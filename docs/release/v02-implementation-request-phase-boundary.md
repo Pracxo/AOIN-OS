@@ -31,3 +31,13 @@ Future implementation requires explicit approval records, ADRs, and gate evidenc
 ## Phase Decision
 
 AION-130 opens the future request phase only as a governed proposal path. It does not open implementation scope.
+
+## AION-131 Request Pack Boundary
+
+AION-131 defines the request package used inside this phase. It keeps the
+proposal registry preview-only, keeps the approval queue preview-only, and
+keeps request package implementation approval, proposal template
+implementation approval, approval evidence approval, approval queue item
+approval, proposal implementation approval, workstream implementation
+approval, backlog implementation approval, and runtime implementation
+approval false.

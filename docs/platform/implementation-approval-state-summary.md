@@ -153,3 +153,14 @@ operator write execution, connector implementation, production auth, module
 activation, external calls, credential storage, token storage, sandbox
 execution, v0.2 tag creation, v0.2 release creation, and v0.2 release approval
 remain false.
+
+## AION-131 Implementation Request Pack
+
+AION-131 adds request package and proposal template evidence on top of this
+approval state summary. Request package implementation approval, proposal
+template implementation approval, approval evidence approval, runtime
+implementation, backlog implementation, workstream implementation, proposal
+implementation, approval queue item approval, operator write execution,
+connector implementation, production auth, module activation, external calls,
+credential storage, token storage, sandbox execution, v0.2 tag creation,
+v0.2 release creation, and v0.2 release approval remain false.

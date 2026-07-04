@@ -48,3 +48,12 @@ entries remain preview-only, proposal implementation approval remains false,
 approval queue item approval remains false, and future implementation still
 requires separate approval records, ADRs, gate evidence, review evidence, and
 rollback/audit evidence.
+
+## AION-131 Request Pack Governance
+
+AION-131 adds proposal submission templates and request package review rules
+on top of this governance baseline. Proposal registry entries remain
+preview-only, approval queue entries remain preview-only, proposal
+implementation approval remains false, approval queue item approval remains
+false, and future implementation still requires separate approval records,
+ADRs, gate evidence, review evidence, and rollback/audit evidence.

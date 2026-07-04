@@ -78,3 +78,12 @@ the planning track closeout. The closeout keeps proposal registry preview-only,
 approval queue preview-only, approval queue item approval false, proposal
 implementation approval false, runtime implementation approval false, no v0.2
 tag, and no v0.2 release.
+
+## AION-131 Request Pack Dependency
+
+AION-131 inherits this final planning release gate as a prerequisite for the
+request pack. Passing the request pack still cannot approve implementation:
+request package implementation approval, proposal template implementation
+approval, approval evidence approval, approval queue item approval, proposal
+implementation approval, runtime implementation approval, v0.2 tag creation,
+and v0.2 release creation remain false.

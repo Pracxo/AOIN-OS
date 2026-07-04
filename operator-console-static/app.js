@@ -91,6 +91,9 @@
     "./scripts/v02-planning-track-closeout.sh",
     "./scripts/v02-planning-track-handoff-freeze.sh",
     "./scripts/v02-planning-track-closeout-no-go-regression.sh",
+    "./scripts/v02-implementation-request-pack-check.sh",
+    "./scripts/v02-request-pack-freeze.sh",
+    "./scripts/v02-request-pack-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -172,7 +175,9 @@
     final_planning_release_gate: "demo-data/v02-final-planning-release-gate.json",
     no_implementation_freeze: "demo-data/v02-no-implementation-freeze.json",
     planning_track_closeout: "demo-data/v02-planning-track-closeout.json",
-    governance_handoff_pack: "demo-data/v02-governance-handoff-pack.json"
+    governance_handoff_pack: "demo-data/v02-governance-handoff-pack.json",
+    implementation_request_pack: "demo-data/v02-implementation-request-pack.json",
+    proposal_submission_templates: "demo-data/v02-proposal-submission-templates.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1659,7 +1664,9 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.final_planning_release_gate),
       fetchJson(RELEASE_CANDIDATE_DEMOS.no_implementation_freeze),
       fetchJson(RELEASE_CANDIDATE_DEMOS.planning_track_closeout),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.governance_handoff_pack)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.governance_handoff_pack),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_request_pack),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.proposal_submission_templates)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
@@ -1688,6 +1695,8 @@
         renderReleaseCandidateEvidence("v02-no-implementation-freeze", redact(payloads[23]));
         renderReleaseCandidateEvidence("v02-planning-track-closeout", redact(payloads[24]));
         renderReleaseCandidateEvidence("v02-governance-handoff-pack", redact(payloads[25]));
+        renderReleaseCandidateEvidence("v02-implementation-request-pack", redact(payloads[26]));
+        renderReleaseCandidateEvidence("v02-proposal-submission-templates", redact(payloads[27]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
@@ -1716,6 +1725,8 @@
         renderReleaseCandidateEvidence("v02-no-implementation-freeze", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-planning-track-closeout", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-governance-handoff-pack", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-implementation-request-pack", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-proposal-submission-templates", { status: "unavailable" });
       });
   }
 
@@ -1743,8 +1754,15 @@
       ["v02_planning_track_closeout_passed", String(Boolean(payload.v02_planning_track_closeout_passed))],
       ["governance_handoff_ready", String(Boolean(payload.governance_handoff_ready))],
       ["implementation_request_phase_boundary_created", String(Boolean(payload.implementation_request_phase_boundary_created))],
+      ["v02_implementation_request_pack_created", String(Boolean(payload.v02_implementation_request_pack_created))],
+      ["proposal_templates_created", String(Boolean(payload.proposal_templates_created))],
+      ["approval_evidence_boundary_created", String(Boolean(payload.approval_evidence_boundary_created))],
+      ["request_pack_preview_only", String(Boolean(payload.request_pack_preview_only))],
       ["proposal_registry_preview_only", String(Boolean(payload.proposal_registry_preview_only))],
       ["approval_queue_preview_only", String(Boolean(payload.approval_queue_preview_only))],
+      ["request_package_implementation_approved", String(Boolean(payload.request_package_implementation_approved))],
+      ["proposal_template_implementation_approved", String(Boolean(payload.proposal_template_implementation_approved))],
+      ["approval_evidence_approval_true", String(Boolean(payload.approval_evidence_approval_true))],
       ["v02_tag_created", String(Boolean(payload.v02_tag_created))],
       ["v02_release_created", String(Boolean(payload.v02_release_created))],
       ["v02_release_approved", String(Boolean(payload.v02_release_approved))],
@@ -1769,7 +1787,7 @@
       ["sandbox_execution_approved", String(Boolean(payload.sandbox_execution_approved))]
     ].forEach(function (item) {
       var row = document.createElement("div");
-      row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row preimplementation-master-row proposal-registry-row proposal-registry-stabilization-row planning-master-row final-planning-row planning-track-row";
+      row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row preimplementation-master-row proposal-registry-row proposal-registry-stabilization-row planning-master-row final-planning-row planning-track-row request-pack-row";
       var label = document.createElement("span");
       label.textContent = item[0];
       var value = document.createElement("strong");
@@ -1782,7 +1800,7 @@
       .slice(0, 4)
       .forEach(function (section) {
         var row = document.createElement("div");
-        row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row preimplementation-master-row proposal-registry-row proposal-registry-stabilization-row planning-master-row planning-track-row";
+        row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row preimplementation-master-row proposal-registry-row proposal-registry-stabilization-row planning-master-row final-planning-row planning-track-row request-pack-row";
         var label = document.createElement("span");
         label.textContent = safeText(section.title || section.section_key || "section");
         var value = document.createElement("strong");

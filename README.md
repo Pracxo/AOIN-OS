@@ -4554,3 +4554,20 @@ remain false, no v0.2 tag is created, and no v0.2 release is created.
 ./scripts/v02-planning-track-handoff-freeze.sh
 ./scripts/v02-planning-track-closeout-no-go-regression.sh
 ```
+
+### AION-131 v0.2 Implementation Request Pack
+
+AION-131 adds the v0.2 implementation request pack, proposal submission
+templates, approval evidence boundary, evidence checklist, workstream template
+catalog, request review rules, request no-go regression, ADR 0122, and static
+console preview data. It remains request-pack evidence only: request pack,
+proposal registry, and approval queue previews are read-only; request package,
+proposal template, approval evidence, queue item, proposal, workstream,
+backlog, and runtime implementation approvals remain false; no v0.2 tag or
+release is created.
+
+```bash
+./scripts/v02-implementation-request-pack-check.sh
+./scripts/v02-request-pack-freeze.sh
+./scripts/v02-request-pack-no-go-regression.sh
+```

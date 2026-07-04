@@ -164,6 +164,14 @@ activation, package installation, controlled execution, external dependency
 download, v0.2 tag creation, and v0.2 release creation remain false, disabled,
 or absent.
 
+## AION-131 Implementation Request Pack
+
+AION-131 adds module activation request templates only. Module activation
+remains unapproved. Code loading, runtime registration, capability activation,
+package installation, controlled execution, external dependency download,
+v0.2 tag creation, and v0.2 release creation remain false, disabled, or
+absent.
+
 ## AION-130 Planning Track Closeout
 
 AION-130 keeps module activation unapproved in the governance handoff pack.

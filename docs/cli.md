@@ -1041,3 +1041,11 @@ surface is local verification through planning track closeout scripts:
 `./scripts/v02-planning-track-closeout.sh`,
 `./scripts/v02-planning-track-handoff-freeze.sh`, and
 `./scripts/v02-planning-track-closeout-no-go-regression.sh`.
+
+## AION-131 CLI Boundary
+
+AION-131 adds no CLI runtime command implementation. The only CLI-adjacent
+surface is local verification through request-pack scripts:
+`./scripts/v02-implementation-request-pack-check.sh`,
+`./scripts/v02-request-pack-freeze.sh`, and
+`./scripts/v02-request-pack-no-go-regression.sh`.

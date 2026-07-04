@@ -154,3 +154,11 @@ AION-130 keeps production auth implementation unapproved in the governance
 handoff pack. OAuth/OIDC/SAML runtime, external identity runtime, credential
 storage, token storage, login, logout, session persistence, v0.2 tag creation,
 and v0.2 release creation remain false or absent.
+
+## AION-131 Implementation Request Pack
+
+AION-131 adds production auth implementation request templates only.
+Production auth implementation remains unapproved. OAuth/OIDC/SAML runtime,
+external identity runtime, credential storage, token storage, login, logout,
+session persistence, v0.2 tag creation, and v0.2 release creation remain
+false or absent.

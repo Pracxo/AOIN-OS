@@ -17,3 +17,11 @@
 ## Closeout Use
 
 AION-130 uses this index as the handoff map for future implementation requests. Every future request must cite the relevant planning evidence and then add explicit approval records, ADRs, gate evidence, security review, architecture review, operator review, and rollback/audit evidence.
+
+## AION-131 Request Pack Evidence
+
+AION-131 adds the implementation request pack, proposal submission templates,
+approval evidence boundary, evidence checklist, request template catalog,
+review rules, and request-package no-go regression to this handoff map. These
+artifacts organize future evidence only; they do not approve implementation,
+queue items, proposal execution, v0.2 tag creation, or v0.2 release creation.

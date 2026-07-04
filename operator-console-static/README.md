@@ -524,3 +524,22 @@ Validate the v0.2 planning track closeout evidence:
 ./scripts/v02-planning-track-handoff-freeze.sh
 ./scripts/v02-planning-track-closeout-no-go-regression.sh
 ```
+
+## AION-131 v0.2 Implementation Request Pack Panels
+
+The static console includes v0.2 implementation request pack and proposal
+template panels. They load bundled JSON only, keep the request pack
+preview-only, keep the proposal registry preview-only, keep the approval queue
+preview-only, keep request package implementation approval false, keep proposal
+template implementation approval false, keep approval evidence approval false,
+and keep runtime, workstream, proposal, and approval queue item implementation
+states false. They expose no input, package, migration, runtime, release, tag,
+approval, bypass, or write controls.
+
+Validate the v0.2 implementation request pack evidence:
+
+```bash
+./scripts/v02-implementation-request-pack-check.sh
+./scripts/v02-request-pack-freeze.sh
+./scripts/v02-request-pack-no-go-regression.sh
+```
