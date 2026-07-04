@@ -12,3 +12,9 @@
 | Operator write execution | `docs/release/v02-proposal-submission-templates.md#operator-write-execution-request` | Operator write execution ADR | Operator write execution gate | Security review, architecture review, operator review, rollback/audit plan, no-go regression | false | false | yes |
 | Module activation | `docs/release/v02-proposal-submission-templates.md#module-activation-request` | Module activation implementation ADR | Module activation implementation gate | Security review, architecture review, operator review, rollback/audit plan, no-go regression | false | false | yes |
 | Production UI decision | `docs/release/v02-proposal-submission-templates.md#production-ui-decision-request` | Production UI decision ADR | Production UI decision gate | Security review, architecture review, operator review, rollback/audit plan, no-go regression | false | false | yes |
+
+## AION-132 Stabilization
+
+AION-132 requires each catalog row to pass evidence completeness and submission
+freeze checks before review can begin. Implementation allowed today remains
+false for every row.

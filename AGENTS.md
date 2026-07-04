@@ -643,6 +643,17 @@ Instructions for future Codex runs in this repository:
   files, no lockfiles, no migrations, and no runtime route, SDK, CLI,
   connector, auth, module, sandbox, external-call, credential, token, or write
   execution implementation.
+- AION-132 v0.2 request pack stabilization is evidence completeness and
+  submission freeze work only. It must pass
+  `./scripts/v02-request-pack-stabilization-gate.sh`,
+  `./scripts/v02-request-pack-submission-freeze.sh`, and
+  `./scripts/v02-request-pack-stabilization-no-go-regression.sh`, and it must
+  keep request pack approval false, evidence completeness bypass false,
+  submission freeze bypass false, approval queue item approval false, proposal
+  implementation approval false, runtime implementation approval false, no
+  v0.2 tag, no v0.2 release, no package files, no lockfiles, no migrations,
+  and no runtime route, SDK, CLI, connector, auth, module, sandbox,
+  external-call, credential, token, or write execution implementation.
 - AION-124 v0.2 workstream intake readiness is workstream planning evidence
   only. It must pass `./scripts/v02-workstream-intake-readiness-gate.sh`,
   `./scripts/v02-workstream-intake-freeze.sh`, and

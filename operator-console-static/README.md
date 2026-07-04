@@ -543,3 +543,22 @@ Validate the v0.2 implementation request pack evidence:
 ./scripts/v02-request-pack-freeze.sh
 ./scripts/v02-request-pack-no-go-regression.sh
 ```
+
+## AION-132 v0.2 Request Pack Stabilization Panels
+
+The static console includes v0.2 request pack stabilization and evidence
+completeness gate panels. They load bundled JSON only, keep the request pack
+preview-only, keep the proposal registry preview-only, keep the approval queue
+preview-only, keep request pack approval false, keep evidence completeness
+bypass false, keep submission freeze bypass false, keep approval queue item
+approval false, keep proposal implementation approval false, and keep runtime
+implementation approval false. They expose no input, package, migration,
+runtime, release, tag, approval, bypass, or write controls.
+
+Validate the v0.2 request pack stabilization evidence:
+
+```bash
+./scripts/v02-request-pack-stabilization-gate.sh
+./scripts/v02-request-pack-submission-freeze.sh
+./scripts/v02-request-pack-stabilization-no-go-regression.sh
+```

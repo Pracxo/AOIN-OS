@@ -4571,3 +4571,20 @@ release is created.
 ./scripts/v02-request-pack-freeze.sh
 ./scripts/v02-request-pack-no-go-regression.sh
 ```
+
+### AION-132 v0.2 Request Pack Stabilization
+
+AION-132 adds the v0.2 request pack stabilization gate, evidence completeness
+gate, submission freeze, request pack closeout checklist, evidence deficiency
+register, submission review matrix, stabilization no-go regression, ADR 0123,
+and static console preview data. It remains request-pack stabilization only:
+request pack approval, evidence completeness bypass, submission freeze bypass,
+approval queue item approval, proposal implementation approval, workstream
+implementation approval, backlog implementation approval, and runtime
+implementation approval remain false; no v0.2 tag or release is created.
+
+```bash
+./scripts/v02-request-pack-stabilization-gate.sh
+./scripts/v02-request-pack-submission-freeze.sh
+./scripts/v02-request-pack-stabilization-no-go-regression.sh
+```

@@ -1968,3 +1968,16 @@ approval evidence approval, runtime implementation approval, proposal
 implementation approval, approval queue item approval, external calls,
 credentials/tokens, sandbox execution, operator write execution, connector
 runtime, production auth, and module activation remain false or absent.
+
+## AION-132 Contract Boundary
+
+AION-132 adds no runtime Brain contract. It records the request pack
+stabilization gate, evidence completeness gate, submission freeze, deficiency
+register, submission review matrix, closeout checklist, and no-go evidence as
+static planning/request artifacts. Contract resources remain unchanged,
+proposal registry and approval queue data remain preview-only, and request
+pack approval, evidence completeness bypass, submission freeze bypass, runtime
+implementation approval, proposal implementation approval, approval queue item
+approval, external calls, credentials/tokens, sandbox execution, operator
+write execution, connector runtime, production auth, and module activation
+remain false or absent.

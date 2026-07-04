@@ -152,3 +152,11 @@ external calls, credentials/tokens, sandbox execution, package files,
 migrations, v0.2 tag, or v0.2 release. Request pack evidence can start future
 review only after explicit approval records, ADRs, gates, and rollback/audit
 evidence are supplied in a later scoped task.
+
+## AION-132 Request Pack Stabilization Boundary
+
+Request pack stabilization keeps this future runtime boundary frozen. It adds
+no runtime config defaults, route registration, capability activation,
+external calls, credentials/tokens, sandbox execution, package files,
+migrations, v0.2 tag, or v0.2 release. Evidence completeness and submission
+freeze remain review prerequisites only.

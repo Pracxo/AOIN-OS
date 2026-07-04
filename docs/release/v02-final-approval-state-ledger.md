@@ -32,3 +32,10 @@ implementation approval, and approval evidence approval to the false-state
 boundary. Evidence completeness can start review only; it cannot approve
 runtime implementation, proposal implementation, approval queue items, release
 creation, or tag creation.
+
+## AION-132 Stabilization Ledger Extension
+
+AION-132 adds request pack approval, evidence completeness bypass, and
+submission freeze bypass to the false-state boundary. Completed evidence and a
+frozen submission still cannot approve runtime implementation, proposal
+implementation, approval queue items, release creation, or tag creation.

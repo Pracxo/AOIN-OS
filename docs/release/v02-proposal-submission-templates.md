@@ -157,3 +157,10 @@ Each template must include workstream, problem statement, proposed change, runti
 - policy impact: UI policy and operator policy
 - rollback/audit plan: rollback steps and retained audit evidence required
 - default approval status false
+
+## AION-132 Submission Freeze
+
+AION-132 freezes these templates as planning-only submissions. Template
+completion can satisfy evidence completeness but cannot approve implementation,
+queue items, proposal implementation, runtime capability, v0.2 tag creation,
+or v0.2 release creation.

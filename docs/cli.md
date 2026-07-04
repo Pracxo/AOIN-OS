@@ -1049,3 +1049,11 @@ surface is local verification through request-pack scripts:
 `./scripts/v02-implementation-request-pack-check.sh`,
 `./scripts/v02-request-pack-freeze.sh`, and
 `./scripts/v02-request-pack-no-go-regression.sh`.
+
+## AION-132 CLI Boundary
+
+AION-132 adds no CLI runtime command implementation. The only CLI-adjacent
+surface is local verification through request-pack stabilization scripts:
+`./scripts/v02-request-pack-stabilization-gate.sh`,
+`./scripts/v02-request-pack-submission-freeze.sh`, and
+`./scripts/v02-request-pack-stabilization-no-go-regression.sh`.

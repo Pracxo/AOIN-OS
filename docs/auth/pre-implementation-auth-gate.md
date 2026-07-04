@@ -162,3 +162,11 @@ Production auth implementation remains unapproved. OAuth/OIDC/SAML runtime,
 external identity runtime, credential storage, token storage, login, logout,
 session persistence, v0.2 tag creation, and v0.2 release creation remain
 false or absent.
+
+## AION-132 Request Pack Stabilization
+
+AION-132 adds production auth request evidence completeness and submission
+freeze checks only. Production auth implementation remains unapproved.
+OAuth/OIDC/SAML runtime, external identity runtime, credential storage, token
+storage, login, logout, session persistence, v0.2 tag creation, and v0.2
+release creation remain false or absent.

@@ -195,3 +195,12 @@ Connector implementation remains unapproved. The connector runtime, external
 calls, connector SDK dependencies, credential storage, token storage, sandbox
 execution, activation, route registration, package files, migrations, v0.2 tag
 creation, and v0.2 release creation remain false or absent.
+
+## AION-132 Request Pack Stabilization
+
+AION-132 adds connector request evidence completeness and submission freeze
+checks only. Connector implementation remains unapproved. The connector
+runtime, external calls, connector SDK dependencies, credential storage, token
+storage, sandbox execution, activation, route registration, package files,
+migrations, v0.2 tag creation, and v0.2 release creation remain false or
+absent.
