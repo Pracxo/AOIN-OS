@@ -208,6 +208,8 @@ for relative in sorted(changed):
         "operator-console-static/demo-data/v02-proposal-submission-templates.json",
         "operator-console-static/demo-data/v02-request-pack-stabilization.json",
         "operator-console-static/demo-data/v02-evidence-completeness-gate.json",
+        "operator-console-static/demo-data/v02-request-pack-final-review.json",
+        "operator-console-static/demo-data/v02-preapproval-submission-gate.json",
     }:
         if relative in {
             "operator-console-static/demo-data/v02-approval-workflow-stabilization.json",
@@ -228,6 +230,8 @@ for relative in sorted(changed):
             "operator-console-static/demo-data/v02-proposal-submission-templates.json",
             "operator-console-static/demo-data/v02-request-pack-stabilization.json",
             "operator-console-static/demo-data/v02-evidence-completeness-gate.json",
+            "operator-console-static/demo-data/v02-request-pack-final-review.json",
+            "operator-console-static/demo-data/v02-preapproval-submission-gate.json",
         }:
             text = text.replace('"action_key": "activate_capability"', "")
         text = re.sub(

@@ -14,3 +14,10 @@
 | missing test evidence | Scope and safety cannot be verified. | Add required test evidence. | yes | yes |
 | missing no-go acknowledgement | The request does not accept blocker conditions. | Add explicit no-go acknowledgement. | yes | yes |
 | approval status not false | The request attempts approval without authority. | Reset all approval states to false. | yes | yes |
+
+## AION-133 Final Review Dependency
+
+AION-133 uses this deficiency register as inherited evidence. Any missing final
+review evidence, pre-approval submission evidence, request approval guard
+evidence, ADR dependency, gate dependency, or no-go acknowledgement remains a
+release blocker and approval blocker.

@@ -44,3 +44,12 @@ implementation; `request_pack_approval=false`,
 `evidence_completeness_bypassed=false`, `submission_freeze_bypassed=false`,
 `approval_queue_item_approved=false`, and
 `proposal_implementation_approved=false` remain required.
+
+## AION-133 Pre-Approval Queue Boundary
+
+AION-133 requires request pack final review and pre-approval submission freeze
+before future queue approval consideration. Queue placement remains
+preview-only and cannot approve implementation; `request_pack_approval=false`,
+`submission_approval=false`, `preapproval_gate_bypassed=false`,
+`approval_queue_item_approved=false`, and
+`proposal_implementation_approved=false` remain required.

@@ -23,3 +23,10 @@ blocked.
 
 No v0.2 tag or release is created. The `aion-v0.1.0` tag remains the frozen
 release baseline.
+
+## AION-133 Final Review Dependency
+
+AION-133 inherits this submission freeze for pre-approval submission review.
+Submission approval remains false, preapproval gate bypass remains false, and
+the freeze still creates no v0.2 tag, no v0.2 release, and no runtime
+implementation approval.

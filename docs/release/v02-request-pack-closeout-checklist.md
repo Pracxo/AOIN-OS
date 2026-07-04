@@ -25,3 +25,10 @@
 The request pack can close only when all checklist items pass and all approval,
 runtime, release, tag, external-call, protected-material, sandbox, package, and
 migration no-go states remain false or absent.
+
+## AION-133 Final Review Dependency
+
+AION-133 extends this checklist with request pack final review, pre-approval
+submission gate, and submission no-go evidence. The extension remains
+planning-only and keeps request pack approval, submission approval, runtime
+implementation approval, v0.2 tag creation, and v0.2 release creation false.

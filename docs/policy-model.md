@@ -2032,3 +2032,16 @@ rollback/audit evidence, and no-go regression evidence. Request pack approval,
 evidence completeness bypass, submission freeze bypass, proposal
 implementation approval, approval queue item approval, runtime implementation
 approval, v0.2 tag creation, and v0.2 release creation remain false.
+
+## AION-133 Request Pack Final Review Policy
+
+AION-133 adds request pack final review, evidence boundary closeout,
+pre-approval submission, and request approval guard policy evidence without
+changing policy enforcement. Policy still treats request packs, submissions,
+proposal registry entries, approval queue entries, and reviewer evidence as
+preview-only unless a later scoped task supplies explicit approval records,
+ADRs, gate evidence, review evidence, rollback/audit evidence, and no-go
+regression evidence. Request pack approval, submission approval, preapproval
+gate bypass, proposal implementation approval, approval queue item approval,
+runtime implementation approval, v0.2 tag creation, and v0.2 release creation
+remain false.

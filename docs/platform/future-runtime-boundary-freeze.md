@@ -160,3 +160,11 @@ no runtime config defaults, route registration, capability activation,
 external calls, credentials/tokens, sandbox execution, package files,
 migrations, v0.2 tag, or v0.2 release. Evidence completeness and submission
 freeze remain review prerequisites only.
+
+## AION-133 Request Pack Final Review Boundary
+
+Request pack final review keeps this future runtime boundary frozen. It adds
+no runtime config defaults, route registration, capability activation,
+external calls, credentials/tokens, sandbox execution, package files,
+migrations, v0.2 tag, or v0.2 release. Final review and pre-approval
+submission evidence remain approval prerequisites only.

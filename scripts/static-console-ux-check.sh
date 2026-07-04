@@ -240,6 +240,9 @@ allowed = {
     "./scripts/v02-request-pack-stabilization-gate.sh",
     "./scripts/v02-request-pack-submission-freeze.sh",
     "./scripts/v02-request-pack-stabilization-no-go-regression.sh",
+    "./scripts/v02-request-pack-final-review.sh",
+    "./scripts/v02-preapproval-submission-freeze.sh",
+    "./scripts/v02-request-pack-final-no-go-regression.sh",
     "./scripts/docs-check.sh",
 }
 listed = set(nav.get("safe_copy_commands", []))

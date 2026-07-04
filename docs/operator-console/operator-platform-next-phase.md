@@ -244,6 +244,15 @@ add no input controls, write controls, release controls, tag controls,
 approval controls, runtime routes, external calls, credentials/tokens, sandbox
 execution, package files, or migrations.
 
+## AION-133 Request Pack Final Review Preview
+
+The operator console static preview now includes request pack final review and
+pre-approval submission gate panels. They are bundled JSON previews only and
+add no input controls, write controls, release controls, tag controls, approval
+controls, runtime routes, external calls, credentials/tokens, sandbox execution,
+package files, migrations, request pack approval, submission approval, or
+preapproval gate bypass.
+
 AION-127 adds static proposal registry stabilization and approval queue freeze
 panels. They show stabilization and queue freeze evidence only, with proposal
 registry preview-only true, approval queue preview-only true, approval queue

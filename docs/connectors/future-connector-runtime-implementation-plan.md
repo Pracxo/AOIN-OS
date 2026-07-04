@@ -204,3 +204,12 @@ runtime, external calls, connector SDK dependencies, credential storage, token
 storage, sandbox execution, activation, route registration, package files,
 migrations, v0.2 tag creation, and v0.2 release creation remain false or
 absent.
+
+## AION-133 Request Pack Final Review
+
+AION-133 adds connector request final review and pre-approval submission
+evidence only. Connector implementation remains unapproved. The connector
+runtime, external calls, connector SDK dependencies, credential storage, token
+storage, sandbox execution, activation, route registration, package files,
+migrations, v0.2 tag creation, and v0.2 release creation remain false or
+absent.

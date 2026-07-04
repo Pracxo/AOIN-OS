@@ -4588,3 +4588,20 @@ implementation approval remain false; no v0.2 tag or release is created.
 ./scripts/v02-request-pack-submission-freeze.sh
 ./scripts/v02-request-pack-stabilization-no-go-regression.sh
 ```
+
+### AION-133 v0.2 Request Pack Final Review
+
+AION-133 adds the v0.2 request pack final review, evidence boundary closeout,
+pre-approval submission gate, request approval guard, final submission evidence
+matrix, submission no-go review, final checklist, ADR 0124, local gates, and
+static console preview data. It remains pre-approval planning evidence only:
+request pack approval, submission approval, preapproval gate bypass, approval
+queue item approval, proposal implementation approval, workstream
+implementation approval, backlog implementation approval, runtime implementation
+approval, v0.2 tag creation, and v0.2 release creation remain false.
+
+```bash
+./scripts/v02-request-pack-final-review.sh
+./scripts/v02-preapproval-submission-freeze.sh
+./scripts/v02-request-pack-final-no-go-regression.sh
+```

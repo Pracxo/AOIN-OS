@@ -68,3 +68,11 @@ submission freeze. The request pack remains preview-only and keeps
 `submission_freeze_bypassed=false`, `approval_queue_item_approved=false`,
 `proposal_implementation_approved=false`, and
 `runtime_implementation_approved=false`.
+
+## AION-133 Final Review
+
+AION-133 performs the final pre-approval request-pack review on top of this
+pack and the AION-132 stabilization gate. The request pack remains
+preview-only, submission approval remains false, preapproval gate bypass remains
+false, and no v0.2 tag, v0.2 release, runtime implementation, API route, SDK
+resource, CLI command, package file, or migration is added.

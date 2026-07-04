@@ -654,6 +654,16 @@ Instructions for future Codex runs in this repository:
   v0.2 tag, no v0.2 release, no package files, no lockfiles, no migrations,
   and no runtime route, SDK, CLI, connector, auth, module, sandbox,
   external-call, credential, token, or write execution implementation.
+- AION-133 v0.2 request pack final review is pre-approval submission evidence
+  only. It must pass `./scripts/v02-request-pack-final-review.sh`,
+  `./scripts/v02-preapproval-submission-freeze.sh`, and
+  `./scripts/v02-request-pack-final-no-go-regression.sh`, and it must keep
+  request pack approval false, submission approval false, preapproval gate
+  bypass false, approval queue item approval false, proposal implementation
+  approval false, runtime implementation approval false, no v0.2 tag, no v0.2
+  release, no package files, no lockfiles, no migrations, and no runtime route,
+  SDK, CLI, connector, auth, module, sandbox, external-call, credential, token,
+  or write execution implementation.
 - AION-124 v0.2 workstream intake readiness is workstream planning evidence
   only. It must pass `./scripts/v02-workstream-intake-readiness-gate.sh`,
   `./scripts/v02-workstream-intake-freeze.sh`, and
