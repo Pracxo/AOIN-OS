@@ -37,3 +37,11 @@ implementation, proposal implementation, approval queue items, request pack
 items, release creation, tag creation, external calls, protected-material
 persistence, sandbox execution, package changes, migrations, or runtime API
 execution routes.
+
+## AION-133 Final Review Dependency
+
+AION-133 extends these no-go checks with submission approval true and
+preapproval gate bypassed while preserving every AION-132 blocker. Final review
+evidence remains preview/planning-only and cannot approve runtime
+implementation, request pack approval, submission approval, release creation,
+tag creation, or privileged bypass.

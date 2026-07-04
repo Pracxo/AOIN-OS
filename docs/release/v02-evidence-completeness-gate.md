@@ -64,3 +64,11 @@ implementation approval, approval queue item approval, workstream
 implementation approval, backlog implementation approval, and runtime
 implementation approval false until a later scoped approval task explicitly
 changes that state.
+
+## AION-133 Final Review Dependency
+
+AION-133 treats this evidence completeness gate as required inherited evidence
+for final request-pack review. Evidence completeness remains non-approval
+evidence, and request pack approval, submission approval, preapproval gate
+bypass, runtime implementation approval, v0.2 tag creation, and v0.2 release
+creation remain false.

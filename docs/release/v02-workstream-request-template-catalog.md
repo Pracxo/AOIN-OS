@@ -18,3 +18,10 @@
 AION-132 requires each catalog row to pass evidence completeness and submission
 freeze checks before review can begin. Implementation allowed today remains
 false for every row.
+
+## AION-133 Final Review
+
+AION-133 requires each catalog row to pass request pack final review,
+pre-approval submission freeze, and final no-go regression before approval
+consideration. Implementation allowed today, request pack approval, submission
+approval, and approval queue item approval remain false for every row.

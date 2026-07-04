@@ -164,3 +164,11 @@ AION-132 freezes these templates as planning-only submissions. Template
 completion can satisfy evidence completeness but cannot approve implementation,
 queue items, proposal implementation, runtime capability, v0.2 tag creation,
 or v0.2 release creation.
+
+## AION-133 Final Review
+
+AION-133 requires future template submissions to pass request pack final review,
+pre-approval submission freeze, and final no-go regression before approval
+consideration. Template completion remains planning-only and cannot approve
+submission, implementation, queue items, runtime capability, v0.2 tag creation,
+or v0.2 release creation.

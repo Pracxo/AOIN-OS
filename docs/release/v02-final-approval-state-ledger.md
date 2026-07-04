@@ -39,3 +39,10 @@ AION-132 adds request pack approval, evidence completeness bypass, and
 submission freeze bypass to the false-state boundary. Completed evidence and a
 frozen submission still cannot approve runtime implementation, proposal
 implementation, approval queue items, release creation, or tag creation.
+
+## AION-133 Final Review Ledger Extension
+
+AION-133 adds submission approval and preapproval gate bypass to the false-state
+boundary. Final review evidence and pre-approval submission evidence still
+cannot approve runtime implementation, proposal implementation, approval queue
+items, request pack approval, release creation, or tag creation.

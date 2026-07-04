@@ -26,3 +26,11 @@ checklist evidence is a release blocker and approval blocker; completed
 checklist evidence still keeps request pack approval, proposal implementation
 approval, approval queue item approval, and runtime implementation approval
 false.
+
+## AION-133 Final Review Checklist
+
+AION-133 requires this checklist to be complete before request pack final
+review and pre-approval submission review. Completed checklist evidence still
+keeps request pack approval, submission approval, proposal implementation
+approval, approval queue item approval, and runtime implementation approval
+false.

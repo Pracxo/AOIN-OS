@@ -455,6 +455,11 @@ h1 {
   border-color: rgb(122 209 255 / 35%);
 }
 
+.module-subpanel[aria-label="v0.2 request pack final review"],
+.module-subpanel[aria-label="v0.2 pre-approval submission gate"] {
+  border-color: rgb(142 207 178 / 35%);
+}
+
 .connector-release-row span,
 .connector-release-row strong,
 .connector-platform-row span,

@@ -88,3 +88,11 @@ execution, package files, migrations, or runtime API execution routes.
 
 AION-132 explicitly creates no v0.2 tag and no v0.2 release. The
 `aion-v0.1.0` tag remains the frozen release baseline.
+
+## AION-133 Final Review Dependency
+
+AION-133 consumes this stabilization gate as inherited evidence for the request
+pack final review. The final review adds pre-approval submission evidence only
+and keeps request pack approval, submission approval, preapproval gate bypass,
+runtime implementation approval, v0.2 tag creation, and v0.2 release creation
+false.

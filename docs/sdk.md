@@ -1178,3 +1178,12 @@ dependencies, SDK package changes, or CLI command implementations. SDK-facing
 implementation remains blocked by request pack stabilization until a later
 scoped approval task supplies explicit approval records, ADRs, gate evidence,
 review evidence, rollback/audit evidence, and no-go regression evidence.
+
+## AION-133 SDK Boundary
+
+AION-133 adds no SDK resources, generated clients, provider SDKs, SDK
+dependencies, SDK package changes, or CLI command implementations. SDK-facing
+implementation remains blocked by request pack final review and pre-approval
+submission gates until a later scoped approval task supplies explicit approval
+records, ADRs, gate evidence, review evidence, rollback/audit evidence, and
+no-go regression evidence.
