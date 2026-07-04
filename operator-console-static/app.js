@@ -88,6 +88,9 @@
     "./scripts/v02-final-planning-release-gate.sh",
     "./scripts/v02-final-planning-freeze.sh",
     "./scripts/v02-final-planning-no-go-regression.sh",
+    "./scripts/v02-planning-track-closeout.sh",
+    "./scripts/v02-planning-track-handoff-freeze.sh",
+    "./scripts/v02-planning-track-closeout-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -167,7 +170,9 @@
     planning_master_checkpoint: "demo-data/v02-planning-master-checkpoint.json",
     implementation_lock_freeze: "demo-data/v02-implementation-lock-freeze.json",
     final_planning_release_gate: "demo-data/v02-final-planning-release-gate.json",
-    no_implementation_freeze: "demo-data/v02-no-implementation-freeze.json"
+    no_implementation_freeze: "demo-data/v02-no-implementation-freeze.json",
+    planning_track_closeout: "demo-data/v02-planning-track-closeout.json",
+    governance_handoff_pack: "demo-data/v02-governance-handoff-pack.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1652,7 +1657,9 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.planning_master_checkpoint),
       fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_lock_freeze),
       fetchJson(RELEASE_CANDIDATE_DEMOS.final_planning_release_gate),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.no_implementation_freeze)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.no_implementation_freeze),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.planning_track_closeout),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.governance_handoff_pack)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
@@ -1679,6 +1686,8 @@
         renderReleaseCandidateEvidence("v02-implementation-lock-freeze", redact(payloads[21]));
         renderReleaseCandidateEvidence("v02-final-planning-release-gate", redact(payloads[22]));
         renderReleaseCandidateEvidence("v02-no-implementation-freeze", redact(payloads[23]));
+        renderReleaseCandidateEvidence("v02-planning-track-closeout", redact(payloads[24]));
+        renderReleaseCandidateEvidence("v02-governance-handoff-pack", redact(payloads[25]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
@@ -1705,6 +1714,8 @@
         renderReleaseCandidateEvidence("v02-implementation-lock-freeze", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-final-planning-release-gate", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-no-implementation-freeze", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-planning-track-closeout", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-governance-handoff-pack", { status: "unavailable" });
       });
   }
 
@@ -1729,6 +1740,9 @@
       ["v02_implementation_lock_freeze_passed", String(Boolean(payload.v02_implementation_lock_freeze_passed))],
       ["v02_final_planning_release_gate_passed", String(Boolean(payload.v02_final_planning_release_gate_passed))],
       ["v02_no_implementation_freeze_passed", String(Boolean(payload.v02_no_implementation_freeze_passed))],
+      ["v02_planning_track_closeout_passed", String(Boolean(payload.v02_planning_track_closeout_passed))],
+      ["governance_handoff_ready", String(Boolean(payload.governance_handoff_ready))],
+      ["implementation_request_phase_boundary_created", String(Boolean(payload.implementation_request_phase_boundary_created))],
       ["proposal_registry_preview_only", String(Boolean(payload.proposal_registry_preview_only))],
       ["approval_queue_preview_only", String(Boolean(payload.approval_queue_preview_only))],
       ["v02_tag_created", String(Boolean(payload.v02_tag_created))],
@@ -1755,7 +1769,7 @@
       ["sandbox_execution_approved", String(Boolean(payload.sandbox_execution_approved))]
     ].forEach(function (item) {
       var row = document.createElement("div");
-      row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row preimplementation-master-row proposal-registry-row proposal-registry-stabilization-row planning-master-row final-planning-row";
+      row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row preimplementation-master-row proposal-registry-row proposal-registry-stabilization-row planning-master-row final-planning-row planning-track-row";
       var label = document.createElement("span");
       label.textContent = item[0];
       var value = document.createElement("strong");
@@ -1768,7 +1782,7 @@
       .slice(0, 4)
       .forEach(function (section) {
         var row = document.createElement("div");
-        row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row preimplementation-master-row proposal-registry-row proposal-registry-stabilization-row planning-master-row";
+        row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row preimplementation-master-row proposal-registry-row proposal-registry-stabilization-row planning-master-row planning-track-row";
         var label = document.createElement("span");
         label.textContent = safeText(section.title || section.section_key || "section");
         var value = document.createElement("strong");

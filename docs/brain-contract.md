@@ -1943,3 +1943,15 @@ runtime implementation approval, proposal implementation approval, approval
 queue item approval, external calls, credentials/tokens, sandbox execution,
 operator write execution, connector runtime, production auth, and module
 activation remain false or absent.
+
+## AION-130 Contract Boundary
+
+AION-130 adds no runtime Brain contract. It records the planning track
+closeout, governance handoff pack, implementation request phase boundary,
+final approval-state ledger, final proposal queue summary, and evidence index
+as static planning evidence. Contract resources remain unchanged, proposal
+registry and approval queue data remain preview-only, and runtime
+implementation approval, proposal implementation approval, approval queue item
+approval, external calls, credentials/tokens, sandbox execution, operator write
+execution, connector runtime, production auth, and module activation remain
+false or absent.

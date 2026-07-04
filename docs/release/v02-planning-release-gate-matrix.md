@@ -14,3 +14,5 @@
 | Planning master checkpoint | `./scripts/v02-planning-master-checkpoint.sh` | `docs/release/v02-planning-master-checkpoint.md` | AION-119 through AION-128 evidence consolidated | false | yes | No v0.2 tag or release. |
 | Final planning release gate | `./scripts/v02-final-planning-release-gate.sh` | `docs/release/v02-final-planning-release-gate.md` | Final planning gate passed | false | yes | AION-129 is not implementation. |
 | Final planning freeze | `./scripts/v02-final-planning-freeze.sh` | `docs/release/v02-no-implementation-freeze.md` | Full repository check passed with no implementation approvals | false | yes | Direct execution remains strict. |
+| Planning track closeout | `./scripts/v02-planning-track-closeout.sh` | `docs/release/v02-planning-track-closeout-report.md` | Planning track closeout passed | false | yes | AION-130 is governance handoff only. |
+| Planning handoff freeze | `./scripts/v02-planning-track-handoff-freeze.sh` | `docs/release/v02-governance-handoff-pack.md` | Full repository check passed with no implementation approvals | false | yes | No v0.2 tag or release. |

@@ -164,6 +164,15 @@ activation, package installation, controlled execution, external dependency
 download, v0.2 tag creation, and v0.2 release creation remain false, disabled,
 or absent.
 
+## AION-130 Planning Track Closeout
+
+AION-130 keeps module activation unapproved in the governance handoff pack.
+Module proposal implementation approval, approval queue item approval, module
+activation approval, code loading, runtime registration, capability
+activation, package installation, controlled execution, external dependency
+download, v0.2 tag creation, and v0.2 release creation remain false, disabled,
+or absent.
+
 ## AION-129 Final Planning Release Gate
 
 AION-129 keeps module activation unapproved. Code loading, runtime

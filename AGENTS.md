@@ -647,6 +647,19 @@ Instructions for future Codex runs in this repository:
   dependency bypass, approval expiry bypass, approval revocation bypass,
   dual-control bypass, v0.2 tag creation, v0.2 release creation, or privileged
   bypass.
+- AION-130 v0.2 planning track closeout is governance handoff evidence only.
+  It must pass `./scripts/v02-planning-track-closeout.sh`,
+  `./scripts/v02-planning-track-handoff-freeze.sh`, and
+  `./scripts/v02-planning-track-closeout-no-go-regression.sh`, and it must
+  keep proposal registry preview-only true, approval queue preview-only true,
+  approval queue item approval false, proposal implementation approval false,
+  runtime implementation approval false, backlog implementation approval
+  false, workstream implementation approval false, approval workflow bypass
+  false, approval record missing false, ADR dependency bypass false, gate
+  dependency bypass false, no v0.2 tag, no v0.2 release, no runtime
+  enablement, no external calls, no credentials/tokens, no sandbox execution,
+  no package files, no lockfiles, no migrations, and no runtime route, SDK, or
+  CLI implementation.
 
 - AION-129 is the v0.2 final planning release gate. Treat
   `docs/release/v02-final-planning-release-gate.md`,

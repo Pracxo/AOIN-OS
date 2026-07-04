@@ -202,6 +202,8 @@ for relative in sorted(changed):
         "operator-console-static/demo-data/v02-implementation-lock-freeze.json",
         "operator-console-static/demo-data/v02-final-planning-release-gate.json",
         "operator-console-static/demo-data/v02-no-implementation-freeze.json",
+        "operator-console-static/demo-data/v02-planning-track-closeout.json",
+        "operator-console-static/demo-data/v02-governance-handoff-pack.json",
     }:
         if relative in {
             "operator-console-static/demo-data/v02-approval-workflow-stabilization.json",
@@ -216,6 +218,8 @@ for relative in sorted(changed):
             "operator-console-static/demo-data/v02-implementation-lock-freeze.json",
             "operator-console-static/demo-data/v02-final-planning-release-gate.json",
             "operator-console-static/demo-data/v02-no-implementation-freeze.json",
+            "operator-console-static/demo-data/v02-planning-track-closeout.json",
+            "operator-console-static/demo-data/v02-governance-handoff-pack.json",
         }:
             text = text.replace('"action_key": "activate_capability"', "")
         text = re.sub(

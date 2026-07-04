@@ -39,3 +39,12 @@ gate. Proposal registry entries remain preview-only, approval queue entries
 remain preview-only, proposal implementation approval remains false, approval
 queue item approval remains false, and future implementation still requires a
 separate scoped approval task.
+
+## AION-130 Planning Track Closeout
+
+AION-130 carries this proposal governance baseline into the final governance
+handoff pack. Proposal registry entries remain preview-only, approval queue
+entries remain preview-only, proposal implementation approval remains false,
+approval queue item approval remains false, and future implementation still
+requires separate approval records, ADRs, gate evidence, review evidence, and
+rollback/audit evidence.

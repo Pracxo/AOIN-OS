@@ -502,3 +502,25 @@ Validate the v0.2 final planning release gate evidence:
 ./scripts/v02-final-planning-freeze.sh
 ./scripts/v02-final-planning-no-go-regression.sh
 ```
+
+## AION-130 v0.2 Planning Track Closeout Panels
+
+The static console includes v0.2 planning track closeout and governance handoff
+pack panels. They load bundled JSON only, keep the proposal registry
+preview-only, keep the approval queue preview-only, keep approval queue item
+approval false, keep proposal implementation approval false, keep runtime,
+backlog, and workstream implementation approval false, keep approval workflow
+bypass, approval record missing, ADR dependency bypass, gate dependency bypass,
+approval expiry bypass, approval revocation bypass, and dual-control bypass
+false, and keep external calls, credential storage, token storage, sandbox
+execution, v0.2 release creation, and v0.2 tag creation unapproved or false.
+They expose no input, package, migration, runtime, release, tag, approval,
+bypass, or write controls.
+
+Validate the v0.2 planning track closeout evidence:
+
+```bash
+./scripts/v02-planning-track-closeout.sh
+./scripts/v02-planning-track-handoff-freeze.sh
+./scripts/v02-planning-track-closeout-no-go-regression.sh
+```

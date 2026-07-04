@@ -4539,3 +4539,18 @@ credential storage, token storage, and sandbox execution unapproved.
 ./scripts/v02-final-planning-freeze.sh
 ./scripts/v02-final-planning-no-go-regression.sh
 ```
+
+### AION-130 v0.2 Planning Track Closeout
+
+AION-130 adds the v0.2 planning track closeout report, governance handoff
+pack, implementation request phase boundary, final approval-state ledger,
+proposal queue status summary, evidence index, no-go regression, ADR 0121, and
+static console preview data. It closes planning only: proposal registry remains
+preview-only, approval queue remains preview-only, implementation approvals
+remain false, no v0.2 tag is created, and no v0.2 release is created.
+
+```bash
+./scripts/v02-planning-track-closeout.sh
+./scripts/v02-planning-track-handoff-freeze.sh
+./scripts/v02-planning-track-closeout-no-go-regression.sh
+```

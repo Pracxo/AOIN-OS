@@ -42,3 +42,11 @@ AION-129 keeps this queue baseline preview-only. Queue placement remains
 review ordering and cannot approve implementation. `approval_queue_item_approved=false`
 and `proposal_implementation_approved=false` remain required for the final
 planning release gate.
+
+## AION-130 Planning Track Closeout
+
+AION-130 carries this approval queue baseline into the final proposal queue
+status summary. Queue placement remains preview-only and cannot approve
+implementation. `approval_queue_item_approved=false` and
+`proposal_implementation_approved=false` remain required for the planning track
+closeout.

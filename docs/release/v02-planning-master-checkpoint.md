@@ -60,3 +60,11 @@ as planning evidence only and keeps proposal registry preview-only, approval
 queue preview-only, approval queue item approval false, proposal
 implementation approval false, runtime implementation approval false, no v0.2
 tag, and no v0.2 release.
+
+## AION-130 Planning Track Closeout
+
+AION-130 consumes this planning master checkpoint in the final planning track
+evidence index. The closeout preserves the checkpoint as planning evidence
+only and keeps proposal registry preview-only, approval queue preview-only,
+approval queue item approval false, proposal implementation approval false,
+runtime implementation approval false, no v0.2 tag, and no v0.2 release.

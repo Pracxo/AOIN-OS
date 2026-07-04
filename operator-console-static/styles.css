@@ -478,11 +478,14 @@ h1 {
 .proposal-registry-stabilization-row span,
 .proposal-registry-stabilization-row strong,
 .final-planning-row span,
-.final-planning-row strong {
+.final-planning-row strong,
+.planning-track-row span,
+.planning-track-row strong {
   min-width: 0;
 }
 
-.final-planning-row strong {
+.final-planning-row strong,
+.planning-track-row strong {
   color: var(--ready);
 }
 

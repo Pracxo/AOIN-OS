@@ -31,3 +31,11 @@ The baseline keeps `runtime_implementation_approved=false`, `backlog_implementat
 ## No Release Artifact
 
 This evidence does not create a v0.2 tag or release. The `aion-v0.1.0` tag remains untouched.
+
+## AION-130 Planning Track Closeout
+
+AION-130 promotes this governance baseline into the planning track closeout
+and governance handoff pack. It keeps proposal registry preview-only, approval
+queue preview-only, approval queue item approval false, proposal
+implementation approval false, runtime implementation approval false, no v0.2
+tag, and no v0.2 release.
