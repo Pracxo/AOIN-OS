@@ -63,3 +63,12 @@ proposal template implementation approval, approval evidence approval,
 approval queue item approval, proposal implementation approval, runtime
 implementation approval, v0.2 tag creation, and v0.2 release creation remain
 false.
+
+## AION-132 Request Pack Stabilization
+
+AION-132 consumes this closeout and AION-131 request pack as inherited
+evidence for stabilization. It adds evidence completeness and submission
+freeze checks only; request pack approval, evidence completeness bypass,
+submission freeze bypass, approval queue item approval, proposal
+implementation approval, runtime implementation approval, v0.2 tag creation,
+and v0.2 release creation remain false.

@@ -132,3 +132,4 @@ closure decision in ADR 0072.
 - [0120: v0.2 Final Planning Release Gate](0120-v02-final-planning-release-gate.md) - Adds the final v0.2 planning release gate, governance baseline evidence, and no-implementation freeze while keeping implementation approvals false.
 - [0121: v0.2 Planning Track Closeout](0121-v02-planning-track-closeout.md) - Closes the v0.2 planning track, adds the governance handoff pack, and keeps implementation approvals false.
 - [0122: v0.2 Implementation Request Pack](0122-v02-implementation-request-pack.md) - Adds the request pack, proposal templates, approval evidence boundary, and request-pack no-go checks while keeping implementation approvals false.
+- [0123: v0.2 Request Pack Stabilization](0123-v02-request-pack-stabilization.md) - Adds the request pack stabilization gate, evidence completeness gate, submission freeze, and stabilization no-go checks while keeping implementation approvals false.

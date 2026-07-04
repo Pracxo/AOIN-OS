@@ -35,3 +35,12 @@ preview-only. Request package completion, proposal template completion, and
 approval evidence completion do not approve queue items or proposal
 implementation; `approval_queue_item_approved=false` and
 `proposal_implementation_approved=false` remain required.
+
+## AION-132 Submission Freeze Queue Boundary
+
+AION-132 requires evidence completeness and submission freeze before future
+queue review. Queue placement remains preview-only and cannot approve
+implementation; `request_pack_approval=false`,
+`evidence_completeness_bypassed=false`, `submission_freeze_bypassed=false`,
+`approval_queue_item_approved=false`, and
+`proposal_implementation_approved=false` remain required.

@@ -2020,3 +2020,15 @@ no-go regression evidence. Request package implementation approval, proposal
 template implementation approval, approval evidence approval, proposal
 implementation approval, approval queue item approval, runtime implementation
 approval, v0.2 tag creation, and v0.2 release creation remain false.
+
+## AION-132 Request Pack Stabilization Policy
+
+AION-132 adds evidence completeness and submission freeze policy evidence
+without changing policy enforcement. Policy still treats request packs,
+proposal templates, proposal registry entries, approval queue entries, and
+evidence completeness results as preview-only unless a later scoped task
+supplies explicit approval records, ADRs, gate evidence, review evidence,
+rollback/audit evidence, and no-go regression evidence. Request pack approval,
+evidence completeness bypass, submission freeze bypass, proposal
+implementation approval, approval queue item approval, runtime implementation
+approval, v0.2 tag creation, and v0.2 release creation remain false.

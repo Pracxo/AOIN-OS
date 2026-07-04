@@ -31,3 +31,9 @@ The approval queue remains preview-only. Approval item status remains false. `ap
 ## No-Go Conditions
 
 No-go conditions include request package implementation approval true, proposal template implementation approval true, approval evidence approval true, implementation approval true, workstream implementation approval true, proposal implementation approval true, approval queue item approved true, approval workflow bypass, missing approval record, ADR dependency bypass, gate dependency bypass, v0.2 tag creation, v0.2 release creation, production auth enablement, connector runtime enablement, operator write execution enablement, module activation enablement, external calls, credential/token storage, sandbox execution, package files, migrations, or runtime API execution routes.
+
+## AION-132 Evidence Completeness Boundary
+
+AION-132 adds evidence completeness as a required pre-review gate. Evidence
+completeness does not approve implementation by itself, and
+`evidence_completeness_bypassed=false` remains mandatory for future requests.

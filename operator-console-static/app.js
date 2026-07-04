@@ -94,6 +94,9 @@
     "./scripts/v02-implementation-request-pack-check.sh",
     "./scripts/v02-request-pack-freeze.sh",
     "./scripts/v02-request-pack-no-go-regression.sh",
+    "./scripts/v02-request-pack-stabilization-gate.sh",
+    "./scripts/v02-request-pack-submission-freeze.sh",
+    "./scripts/v02-request-pack-stabilization-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -177,7 +180,9 @@
     planning_track_closeout: "demo-data/v02-planning-track-closeout.json",
     governance_handoff_pack: "demo-data/v02-governance-handoff-pack.json",
     implementation_request_pack: "demo-data/v02-implementation-request-pack.json",
-    proposal_submission_templates: "demo-data/v02-proposal-submission-templates.json"
+    proposal_submission_templates: "demo-data/v02-proposal-submission-templates.json",
+    request_pack_stabilization: "demo-data/v02-request-pack-stabilization.json",
+    evidence_completeness_gate: "demo-data/v02-evidence-completeness-gate.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1666,7 +1671,9 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.planning_track_closeout),
       fetchJson(RELEASE_CANDIDATE_DEMOS.governance_handoff_pack),
       fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_request_pack),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.proposal_submission_templates)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.proposal_submission_templates),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.request_pack_stabilization),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.evidence_completeness_gate)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
@@ -1697,6 +1704,8 @@
         renderReleaseCandidateEvidence("v02-governance-handoff-pack", redact(payloads[25]));
         renderReleaseCandidateEvidence("v02-implementation-request-pack", redact(payloads[26]));
         renderReleaseCandidateEvidence("v02-proposal-submission-templates", redact(payloads[27]));
+        renderReleaseCandidateEvidence("v02-request-pack-stabilization", redact(payloads[28]));
+        renderReleaseCandidateEvidence("v02-evidence-completeness-gate", redact(payloads[29]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
@@ -1727,6 +1736,8 @@
         renderReleaseCandidateEvidence("v02-governance-handoff-pack", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-implementation-request-pack", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-proposal-submission-templates", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-request-pack-stabilization", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-evidence-completeness-gate", { status: "unavailable" });
       });
   }
 
@@ -1757,18 +1768,25 @@
       ["v02_implementation_request_pack_created", String(Boolean(payload.v02_implementation_request_pack_created))],
       ["proposal_templates_created", String(Boolean(payload.proposal_templates_created))],
       ["approval_evidence_boundary_created", String(Boolean(payload.approval_evidence_boundary_created))],
+      ["v02_request_pack_stabilized", String(Boolean(payload.v02_request_pack_stabilized))],
+      ["evidence_completeness_gate_created", String(Boolean(payload.evidence_completeness_gate_created))],
+      ["submission_freeze_created", String(Boolean(payload.submission_freeze_created))],
       ["request_pack_preview_only", String(Boolean(payload.request_pack_preview_only))],
       ["proposal_registry_preview_only", String(Boolean(payload.proposal_registry_preview_only))],
       ["approval_queue_preview_only", String(Boolean(payload.approval_queue_preview_only))],
+      ["request_pack_approval", String(Boolean(payload.request_pack_approval))],
       ["request_package_implementation_approved", String(Boolean(payload.request_package_implementation_approved))],
       ["proposal_template_implementation_approved", String(Boolean(payload.proposal_template_implementation_approved))],
       ["approval_evidence_approval_true", String(Boolean(payload.approval_evidence_approval_true))],
+      ["evidence_completeness_bypassed", String(Boolean(payload.evidence_completeness_bypassed))],
+      ["submission_freeze_bypassed", String(Boolean(payload.submission_freeze_bypassed))],
       ["v02_tag_created", String(Boolean(payload.v02_tag_created))],
       ["v02_release_created", String(Boolean(payload.v02_release_created))],
       ["v02_release_approved", String(Boolean(payload.v02_release_approved))],
       ["runtime_implementation_approved", String(Boolean(payload.runtime_implementation_approved))],
       ["backlog_implementation_items_approved", String(Boolean(payload.backlog_implementation_items_approved))],
       ["workstream_implementation_approved", String(Boolean(payload.workstream_implementation_approved))],
+      ["proposal_implementation_approved", String(Boolean(payload.proposal_implementation_approved))],
       ["approval_queue_item_approved", String(Boolean(payload.approval_queue_item_approved))],
       ["approval_workflow_bypassed", String(Boolean(payload.approval_workflow_bypassed))],
       ["approval_record_missing", String(Boolean(payload.approval_record_missing))],

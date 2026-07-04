@@ -29,3 +29,10 @@
 ## Regression Decision
 
 AION-131 fails if any no-go condition is present. The request pack is preview/planning-only and cannot approve runtime implementation, workstream implementation, proposal implementation, approval queue items, release creation, tag creation, external calls, protected-material persistence, sandbox execution, package changes, migrations, or runtime API execution routes.
+
+## AION-132 Stabilization No-Go Additions
+
+AION-132 additionally fails on request pack approval true, evidence
+completeness bypassed, submission freeze bypassed, request pack stabilization
+drift, evidence deficiency bypass, or any attempt to treat evidence
+completeness as implementation approval.

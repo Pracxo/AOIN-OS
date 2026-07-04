@@ -39,3 +39,11 @@ Requests are rejected if required evidence is missing, approval records are miss
 ## No Direct Implementation Approval
 
 The request package does not directly approve implementation. Future implementation still requires explicit approval records, ADRs, gate evidence, security review, architecture review, operator review, rollback/audit evidence, and no-go regression evidence.
+
+## AION-132 Stabilization Review
+
+AION-132 adds evidence completeness and submission freeze checks to request
+package review. Reviewers must reject any request with request pack approval
+true, evidence completeness bypass true, submission freeze bypass true,
+proposal implementation approval true, approval queue item approval true, or
+runtime implementation approval true.

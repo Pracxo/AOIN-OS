@@ -41,3 +41,10 @@ implementation approval, approval evidence approval, approval queue item
 approval, proposal implementation approval, workstream implementation
 approval, backlog implementation approval, and runtime implementation
 approval false.
+
+## AION-132 Submission Freeze Boundary
+
+AION-132 freezes request submissions as template-only records. Evidence
+completeness can start review, but it cannot bypass approval records, ADR
+dependencies, gate dependencies, proposal queue state, or runtime
+implementation approval.

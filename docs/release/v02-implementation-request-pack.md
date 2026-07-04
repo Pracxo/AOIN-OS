@@ -59,3 +59,12 @@ Every request pack and proposal template defaults to `runtime_implementation_app
 ## No v0.2 Tag Or Release
 
 AION-131 explicitly creates no v0.2 tag and no v0.2 release. The `aion-v0.1.0` tag remains the frozen release baseline.
+
+## AION-132 Stabilization
+
+AION-132 stabilizes this request pack with an evidence completeness gate and
+submission freeze. The request pack remains preview-only and keeps
+`request_pack_approval=false`, `evidence_completeness_bypassed=false`,
+`submission_freeze_bypassed=false`, `approval_queue_item_approved=false`,
+`proposal_implementation_approved=false`, and
+`runtime_implementation_approved=false`.
