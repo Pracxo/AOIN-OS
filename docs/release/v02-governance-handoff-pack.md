@@ -43,3 +43,12 @@ The handoff remains blocked by any v0.2 tag or release creation, runtime approva
 ## Handoff Decision
 
 The governance handoff is ready as a planning baseline only. It authorizes future request intake and review, but it does not authorize implementation, runtime enablement, release creation, or tag creation.
+
+## AION-131 Request Pack Handoff
+
+AION-131 turns this handoff into a standardized request package and proposal
+submission template set. The handoff still does not authorize implementation:
+request package implementation approval, proposal template implementation
+approval, approval evidence approval, proposal implementation approval,
+approval queue item approval, runtime implementation approval, v0.2 tag
+creation, and v0.2 release creation remain false.

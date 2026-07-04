@@ -53,3 +53,13 @@ AION-130 closes the v0.2 planning track and hands off a frozen governance baseli
 ## No v0.2 Tag Or Release
 
 AION-130 explicitly creates no v0.2 tag and no v0.2 release. The `aion-v0.1.0` tag remains the frozen release baseline.
+
+## AION-131 Request Pack Handoff
+
+AION-131 consumes this planning track closeout as inherited evidence for the
+implementation request pack. The request pack adds proposal templates and an
+approval evidence boundary only; request package implementation approval,
+proposal template implementation approval, approval evidence approval,
+approval queue item approval, proposal implementation approval, runtime
+implementation approval, v0.2 tag creation, and v0.2 release creation remain
+false.

@@ -632,6 +632,17 @@ Instructions for future Codex runs in this repository:
   gate dependency bypass, approval expiry bypass, approval revocation bypass,
   dual-control bypass, v0.2 tag creation, v0.2 release creation, or privileged
   bypass.
+- AION-131 v0.2 implementation request pack is request/evidence-boundary work
+  only. It must pass `./scripts/v02-implementation-request-pack-check.sh`,
+  `./scripts/v02-request-pack-freeze.sh`, and
+  `./scripts/v02-request-pack-no-go-regression.sh`, and it must keep request
+  package implementation approval false, proposal template implementation
+  approval false, approval evidence approval false, approval queue item
+  approval false, proposal implementation approval false, runtime
+  implementation approval false, no v0.2 tag, no v0.2 release, no package
+  files, no lockfiles, no migrations, and no runtime route, SDK, CLI,
+  connector, auth, module, sandbox, external-call, credential, token, or write
+  execution implementation.
 - AION-124 v0.2 workstream intake readiness is workstream planning evidence
   only. It must pass `./scripts/v02-workstream-intake-readiness-gate.sh`,
   `./scripts/v02-workstream-intake-freeze.sh`, and

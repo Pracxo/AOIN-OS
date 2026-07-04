@@ -50,3 +50,13 @@ status summary. Queue placement remains preview-only and cannot approve
 implementation. `approval_queue_item_approved=false` and
 `proposal_implementation_approved=false` remain required for the planning track
 closeout.
+
+## AION-131 Request Pack Queue Baseline
+
+AION-131 adds request package evidence before future queue review, but queue
+placement remains preview-only and cannot approve implementation.
+`request_package_implementation_approved=false`,
+`proposal_template_implementation_approved=false`,
+`approval_evidence_approval_true=false`,
+`approval_queue_item_approved=false`, and
+`proposal_implementation_approved=false` remain required.

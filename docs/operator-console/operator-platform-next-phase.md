@@ -200,6 +200,14 @@ control, login control, write control, runtime route, package file, migration,
 release action, tag action, approval bypass, ADR bypass, gate bypass, or
 runtime implementation approval control.
 
+## AION-131 v0.2 Request Pack Preview
+
+The operator console static preview now includes implementation request pack
+and proposal template panels. They are bundled JSON previews only and add no
+input controls, write controls, approval controls, release controls, tag
+controls, runtime routes, external calls, credentials/tokens, sandbox
+execution, package files, or migrations.
+
 ## AION-130 v0.2 Planning Track Closeout
 
 AION-130 adds static planning track closeout and governance handoff panels.

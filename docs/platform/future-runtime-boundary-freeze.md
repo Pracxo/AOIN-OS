@@ -143,3 +143,12 @@ The planning track closeout keeps this future runtime boundary frozen. It adds
 no runtime config defaults, route registration, capability activation,
 external calls, credentials/tokens, sandbox execution, package files,
 migrations, v0.2 tag, or v0.2 release.
+
+## AION-131 Request Pack Boundary
+
+The implementation request pack keeps this future runtime boundary frozen. It
+adds no runtime config defaults, route registration, capability activation,
+external calls, credentials/tokens, sandbox execution, package files,
+migrations, v0.2 tag, or v0.2 release. Request pack evidence can start future
+review only after explicit approval records, ADRs, gates, and rollback/audit
+evidence are supplied in a later scoped task.

@@ -1162,3 +1162,11 @@ implementation remains blocked by the planning track closeout until a later
 scoped approval task supplies approval records, ADRs, gate evidence, security
 review, architecture review, operator review, rollback/audit evidence, and
 no-go regression evidence.
+
+## AION-131 SDK Boundary
+
+AION-131 adds no SDK resources, generated clients, provider SDKs, SDK
+dependencies, SDK package changes, or CLI command implementations. SDK-facing
+implementation remains blocked by the request pack until a later scoped
+approval task supplies explicit approval records, ADRs, gate evidence, review
+evidence, rollback/audit evidence, and no-go regression evidence.

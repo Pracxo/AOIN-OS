@@ -24,3 +24,11 @@ The final ledger records a planning-only closeout. No ledger value approves impl
 ## Release Blocker
 
 Any future change that sets one of these values to true without explicit approval records, ADR evidence, gate evidence, security review, architecture review, operator review, and rollback/audit evidence blocks the v0.2 implementation request path.
+
+## AION-131 Request Pack Ledger Extension
+
+AION-131 adds request package implementation approval, proposal template
+implementation approval, and approval evidence approval to the false-state
+boundary. Evidence completeness can start review only; it cannot approve
+runtime implementation, proposal implementation, approval queue items, release
+creation, or tag creation.

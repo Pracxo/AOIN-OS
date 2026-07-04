@@ -234,6 +234,9 @@ allowed = {
     "./scripts/v02-planning-track-closeout.sh",
     "./scripts/v02-planning-track-handoff-freeze.sh",
     "./scripts/v02-planning-track-closeout-no-go-regression.sh",
+    "./scripts/v02-implementation-request-pack-check.sh",
+    "./scripts/v02-request-pack-freeze.sh",
+    "./scripts/v02-request-pack-no-go-regression.sh",
     "./scripts/docs-check.sh",
 }
 listed = set(nav.get("safe_copy_commands", []))
