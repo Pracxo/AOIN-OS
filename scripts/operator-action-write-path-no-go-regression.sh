@@ -361,6 +361,10 @@ allowed_aion134_files = {
     "operator-console-static/demo-data/v02-submission-registry-preview.json",
     "operator-console-static/demo-data/v02-preapproval-queue-boundary.json",
 }
+allowed_aion135_files = {
+    "operator-console-static/demo-data/v02-submission-registry-stabilization.json",
+    "operator-console-static/demo-data/v02-preapproval-queue-freeze.json",
+}
 runtime_prefixes = (
     "services/brain-api/src/",
     "packages/aion-sdk-python/src/",
@@ -411,6 +415,7 @@ for relative in sorted(changed):
         or relative in allowed_aion132_files
         or relative in allowed_aion133_files
         or relative in allowed_aion134_files
+        or relative in allowed_aion135_files
         or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)
         or relative.startswith(allowed_aion110_prefixes)

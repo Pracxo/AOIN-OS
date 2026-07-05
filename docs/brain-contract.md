@@ -2007,3 +2007,13 @@ runtime implementation approval, proposal implementation approval, approval
 queue item approval, external calls, credentials/tokens, sandbox execution,
 operator write execution, connector runtime, production auth, and module
 activation remain false or absent.
+
+## AION-135 Submission Registry Stabilization Contract
+
+The AION-135 contract is read-only and evidence-only. Submission registry
+records and pre-approval queue entries may describe candidates, required ADRs,
+required gates, blockers, reviewers, expiry, revocation, and next planning
+actions. They must not approve submissions, approve request packs, approve
+pre-approval queue items, approve implementation, enable runtime, execute
+tools, execute write paths, call external services, store credentials or
+tokens, create a v0.2 tag, or create a v0.2 release.

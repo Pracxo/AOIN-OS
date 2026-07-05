@@ -773,3 +773,18 @@ Instructions for future Codex runs in this repository:
   false, no v0.2 tag, no v0.2 release, no runtime enablement, no external
   calls, no credentials/tokens, no sandbox execution, no package files, no
   lockfiles, no migrations, and no runtime route, SDK, or CLI implementation.
+- AION-135 v0.2 submission registry stabilization is stabilization evidence
+  only. It must pass `./scripts/v02-submission-registry-stabilization-gate.sh`,
+  `./scripts/v02-submission-registry-freeze.sh`, and
+  `./scripts/v02-submission-registry-stabilization-no-go-regression.sh`, and it
+  must keep submission registry stabilized as preview-only evidence,
+  pre-approval queue preview-only true, preapproval queue item approval false,
+  request pack approval false, submission approval false, proposal registry
+  preview-only true, approval queue preview-only true, runtime implementation
+  approval false, backlog implementation approval false, workstream
+  implementation approval false, proposal implementation approval false,
+  approval workflow bypass false, approval record missing false, ADR dependency
+  bypass false, gate dependency bypass false, no v0.2 tag, no v0.2 release, no
+  runtime enablement, no external calls, no credentials/tokens, no sandbox
+  execution, no package files, no lockfiles, no migrations, and no runtime
+  route, SDK, or CLI implementation.

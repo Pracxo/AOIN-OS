@@ -4623,3 +4623,22 @@ release is created.
 ./scripts/v02-preapproval-queue-freeze.sh
 ./scripts/v02-preapproval-queue-no-go-regression.sh
 ```
+
+### AION-135 v0.2 Submission Registry Stabilization
+
+AION-135 stabilizes the v0.2 submission registry preview, freezes the
+pre-approval queue baseline, closes out request candidates, adds ADR 0126,
+local gates, no-go regression, static console panels, and synthetic evidence
+examples. It remains stabilization evidence only: the submission registry and
+pre-approval queue stay preview-only, preapproval queue item approval remains
+false, request pack approval remains false, submission approval remains false,
+proposal implementation approval remains false, workstream implementation
+approval remains false, backlog implementation approval remains false, runtime
+implementation approval remains false, no v0.2 tag is created, and no v0.2
+release is created.
+
+```bash
+./scripts/v02-submission-registry-stabilization-gate.sh
+./scripts/v02-submission-registry-freeze.sh
+./scripts/v02-submission-registry-stabilization-no-go-regression.sh
+```

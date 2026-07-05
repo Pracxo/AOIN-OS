@@ -88,3 +88,11 @@ submission registry preview. Submission registry and pre-approval queue records
 remain preview-only, with submission approval, preapproval queue item approval,
 request pack approval, runtime implementation approval, v0.2 tag creation, and
 v0.2 release creation false.
+
+## AION-135 Submission Registry Stabilization Dependency
+
+AION-135 extends the planning-track closeout with submission registry
+stabilization evidence. Planning remains closed to implementation: runtime
+implementation approval, backlog implementation approval, workstream
+implementation approval, proposal implementation approval, request approval,
+submission approval, and preapproval queue item approval remain false.

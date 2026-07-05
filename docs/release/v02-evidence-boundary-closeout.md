@@ -52,3 +52,11 @@ AION-134 consumes this closeout as request candidate evidence baseline input.
 Evidence remains review material only and cannot approve submissions,
 pre-approval queue items, request packs, implementations, v0.2 tag creation, or
 v0.2 release creation.
+
+## AION-135 Submission Registry Stabilization Dependency
+
+AION-135 uses this evidence boundary closeout as an inherited pre-approval
+dependency. Evidence closeout remains non-executing and does not approve
+submissions, request packs, pre-approval queue items, implementation, runtime,
+tags, releases, external calls, credential storage, token storage, or sandbox
+execution.

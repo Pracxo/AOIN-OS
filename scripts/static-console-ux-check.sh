@@ -246,6 +246,9 @@ allowed = {
     "./scripts/v02-submission-registry-preview-check.sh",
     "./scripts/v02-preapproval-queue-freeze.sh",
     "./scripts/v02-preapproval-queue-no-go-regression.sh",
+    "./scripts/v02-submission-registry-stabilization-gate.sh",
+    "./scripts/v02-submission-registry-freeze.sh",
+    "./scripts/v02-submission-registry-stabilization-no-go-regression.sh",
     "./scripts/docs-check.sh",
 }
 listed = set(nav.get("safe_copy_commands", []))

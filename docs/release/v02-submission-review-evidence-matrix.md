@@ -10,3 +10,10 @@
 | Credential store | secret handling, redaction, rotation, storage evidence | security and audit/provenance | future credential store implementation ADR | credential store implementation gate | false | false | true | credentials and tokens remain absent |
 | Sandbox runtime | isolation, filesystem, network, process denial evidence | security and architecture | future sandbox runtime implementation ADR | sandbox runtime implementation gate | false | false | true | sandbox execution remains disabled |
 | Production UI decision | static console, auth/session, accessibility evidence | operator/platform and release governance | future production UI decision ADR | production UI release gate | false | false | true | frontend dependencies remain absent |
+
+## AION-135 Stabilization Handoff
+
+AION-135 keeps this review evidence matrix as pre-approval planning evidence
+and requires explicit ADR and gate dependencies before future implementation
+review. Evidence completeness does not approve submissions, request packs,
+pre-approval queue items, implementations, runtime, tags, or releases.

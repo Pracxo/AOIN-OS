@@ -81,3 +81,11 @@ implementation approval, and release approval remain false.
 AION-134 explicitly creates no v0.2 tag and no v0.2 release. The
 `aion-v0.1.0` tag remains frozen and must not be moved, deleted, recreated, or
 retagged.
+
+## AION-135 Stabilization Handoff
+
+AION-135 stabilizes this preview into a controlled pre-approval queue baseline.
+The handoff keeps the submission registry preview-only, keeps preapproval
+queue item approval false, keeps request pack approval false, keeps submission
+approval false, keeps implementation approvals false, and creates no v0.2 tag
+or release.

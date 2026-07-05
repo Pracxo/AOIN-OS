@@ -458,7 +458,9 @@ h1 {
 .module-subpanel[aria-label="v0.2 request pack final review"],
 .module-subpanel[aria-label="v0.2 pre-approval submission gate"],
 .module-subpanel[aria-label="v0.2 submission registry preview"],
-.module-subpanel[aria-label="v0.2 pre-approval queue boundary"] {
+.module-subpanel[aria-label="v0.2 pre-approval queue boundary"],
+.module-subpanel[aria-label="v0.2 submission registry stabilization"],
+.module-subpanel[aria-label="v0.2 pre-approval queue freeze"] {
   border-color: rgb(142 207 178 / 35%);
 }
 

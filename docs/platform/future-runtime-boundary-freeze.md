@@ -176,3 +176,12 @@ future runtime boundary frozen. They add no runtime config defaults, route
 registration, capability activation, external calls, credentials/tokens,
 sandbox execution, package files, migrations, v0.2 tag, or v0.2 release.
 Registry and queue evidence remain approval prerequisites only.
+
+## AION-135 Submission Registry Stabilization Boundary
+
+AION-135 preserves the future runtime boundary freeze. Stabilizing the
+submission registry and pre-approval queue does not enable runtime, connector
+runtime, operator write execution, production auth runtime, module activation,
+sandbox execution, external calls, credential storage, token storage, package
+files, migrations, API runtime execution routes, SDK resources, CLI
+implementations, tags, or releases.

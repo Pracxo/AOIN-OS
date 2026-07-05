@@ -1,6 +1,6 @@
-# v0.2 Pre-Approval Queue No-Go
+# v0.2 Pre-Approval Queue Stabilization No-Go
 
-The AION-134 pre-approval queue no-go regression fails on:
+The AION-135 stabilization no-go regression fails on:
 
 - preapproval queue item approved true
 - submission approval true
@@ -32,15 +32,6 @@ The AION-134 pre-approval queue no-go regression fails on:
 - migrations added
 - runtime API execution routes added
 
-All no-go findings block release readiness. Preview records are allowed only
-when they remain disabled, denied, no-go, future, planning, unapproved,
-template, or preview artifacts.
-
-## AION-135 Stabilization Handoff
-
-AION-135 carries these no-go conditions forward in
-`docs/release/v02-preapproval-queue-stabilization-no-go.md`. The stabilization
-gate still fails on approval enablement, dependency bypass, runtime enablement,
-external calls, credential/token storage, sandbox execution, package files,
-migrations, runtime API execution routes, v0.2 tag creation, or v0.2 release
-creation.
+The regression permits docs and examples only when they state disabled, denied,
+no-go, future, planning, unapproved, template, preview, absent, or false
+contexts.
