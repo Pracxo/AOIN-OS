@@ -236,3 +236,11 @@ false, review board decision approval remains false, and capability activation,
 code loading, runtime registration, controlled execution, package installation,
 external dependency download, module writes, policy bypass, audit bypass, and
 privileged bypass remain disabled or absent.
+
+AION-137 may stabilize module activation review routing as future
+decision-readiness evidence, but stabilization is not approval. Module
+activation implementation approval remains false, routing decision approval
+remains false, reviewer sign-off implementation approval remains false, and
+capability activation, code loading, runtime registration, controlled
+execution, package installation, external dependency download, module writes,
+policy bypass, audit bypass, and privileged bypass remain disabled or absent.

@@ -21,3 +21,11 @@ AION-135 uses this matrix as inherited evidence for candidate closeout. The
 matrix remains a review artifact only and does not approve submissions,
 requests, proposals, workstreams, backlog items, runtime implementation,
 external calls, credentials, tokens, sandbox execution, tags, or releases.
+
+## AION-137 Review Board Stabilization Dependency
+
+AION-137 uses this matrix as inherited evidence for decision-readiness
+baseline rows. The matrix remains a review artifact only and does not approve
+submissions, routing decisions, review board decisions, reviewer sign-off,
+requests, proposals, workstreams, backlog items, runtime implementation,
+external calls, credentials, tokens, sandbox execution, tags, or releases.

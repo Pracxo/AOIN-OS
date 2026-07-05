@@ -16,3 +16,11 @@ Submission review routing assigns future implementation candidates to planning r
 | production UI decision candidate | Operator reviewer, architecture reviewer, policy reviewer, auditor | production UI ADR update | static console release gate | accessibility evidence, read-only proof, no frontend dependency proof | routed_for_review | false | false |
 
 Routing readiness is not approval. Every row remains implementation approval false and runtime enabled false.
+
+## AION-137 Routing Freeze Handoff
+
+AION-137 freezes these routing rows as planning-only decision-readiness
+evidence. Routing decision approval remains false, reviewer sign-off
+implementation approval remains false, and no route enables runtime,
+implementation, submission, request pack, preapproval queue, tag, or release
+approval.

@@ -1268,3 +1268,12 @@ read-only, redacted, and non-executing. They expose reviewer routing,
 decision-readiness blockers, and false approval states only; they do not expose
 inputs, write controls, activation controls, external-call controls,
 credential/token storage, sandbox execution, a v0.2 tag, or a v0.2 release.
+
+## AION-137 Review Board Stabilization Panels
+
+The static visual brain includes AION-137 review board stabilization and review
+routing freeze panels backed by bundled JSON. The panels remain read-only,
+redacted, and non-executing. They expose routing freeze evidence, quorum
+evidence, decision-readiness blockers, and false approval states only; they do
+not expose inputs, write controls, activation controls, external-call controls,
+credential/token storage, sandbox execution, a v0.2 tag, or a v0.2 release.

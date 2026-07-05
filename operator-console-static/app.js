@@ -109,6 +109,9 @@
     "./scripts/v02-preapproval-review-board-check.sh",
     "./scripts/v02-review-board-freeze.sh",
     "./scripts/v02-review-board-no-go-regression.sh",
+    "./scripts/v02-review-board-stabilization-gate.sh",
+    "./scripts/v02-review-routing-freeze.sh",
+    "./scripts/v02-review-board-stabilization-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -202,7 +205,9 @@
     submission_registry_stabilization: "demo-data/v02-submission-registry-stabilization.json",
     preapproval_queue_freeze: "demo-data/v02-preapproval-queue-freeze.json",
     preapproval_review_board: "demo-data/v02-preapproval-review-board.json",
-    submission_review_routing: "demo-data/v02-submission-review-routing.json"
+    submission_review_routing: "demo-data/v02-submission-review-routing.json",
+    review_board_stabilization: "demo-data/v02-review-board-stabilization.json",
+    review_routing_freeze: "demo-data/v02-review-routing-freeze.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1701,7 +1706,9 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.submission_registry_stabilization),
       fetchJson(RELEASE_CANDIDATE_DEMOS.preapproval_queue_freeze),
       fetchJson(RELEASE_CANDIDATE_DEMOS.preapproval_review_board),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.submission_review_routing)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.submission_review_routing),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.review_board_stabilization),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.review_routing_freeze)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
@@ -1742,6 +1749,8 @@
         renderReleaseCandidateEvidence("v02-preapproval-queue-freeze", redact(payloads[35]));
         renderReleaseCandidateEvidence("v02-preapproval-review-board", redact(payloads[36]));
         renderReleaseCandidateEvidence("v02-submission-review-routing", redact(payloads[37]));
+        renderReleaseCandidateEvidence("v02-review-board-stabilization", redact(payloads[38]));
+        renderReleaseCandidateEvidence("v02-review-routing-freeze", redact(payloads[39]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
@@ -1782,6 +1791,8 @@
         renderReleaseCandidateEvidence("v02-preapproval-queue-freeze", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-preapproval-review-board", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-submission-review-routing", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-review-board-stabilization", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-review-routing-freeze", { status: "unavailable" });
       });
   }
 

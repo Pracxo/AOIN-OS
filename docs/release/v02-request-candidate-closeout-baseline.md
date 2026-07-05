@@ -24,3 +24,10 @@ runtime behavior.
 These candidates now have review-board routing paths in
 `docs/release/v02-submission-review-routing.md`. The routing paths do not
 approve implementation and do not enable runtime.
+
+## AION-137 Decision-Readiness Handoff
+
+These candidates now have decision-readiness baseline rows in
+`docs/release/v02-decision-readiness-evidence-baseline.md`. The baseline rows
+do not approve review board decisions, routing decisions, reviewer sign-off,
+implementation, runtime, tags, or releases.

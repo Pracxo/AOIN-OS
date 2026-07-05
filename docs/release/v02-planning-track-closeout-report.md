@@ -96,3 +96,12 @@ stabilization evidence. Planning remains closed to implementation: runtime
 implementation approval, backlog implementation approval, workstream
 implementation approval, proposal implementation approval, request approval,
 submission approval, and preapproval queue item approval remain false.
+
+## AION-137 Review Board Stabilization Dependency
+
+AION-137 extends the planning-track closeout with review board stabilization
+evidence. Planning remains closed to implementation: runtime implementation
+approval, backlog implementation approval, workstream implementation approval,
+proposal implementation approval, request approval, submission approval,
+preapproval queue item approval, routing decision approval, reviewer sign-off
+implementation approval, and review board decision approval remain false.

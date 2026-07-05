@@ -62,3 +62,11 @@ Every routed submission must acknowledge the review-board no-go list before futu
 ## No Tag Or Release
 
 AION-136 creates no v0.2 tag and no v0.2 release. AION Brain v0.1.0 remains frozen and untouched.
+
+## AION-137 Stabilization Handoff
+
+AION-137 stabilizes this review board into a routing freeze and
+decision-readiness evidence baseline. The handoff remains planning-only:
+review board decision approval, routing decision approval, reviewer sign-off
+implementation approval, submission approval, preapproval queue approval,
+request pack approval, and runtime implementation approval remain false.

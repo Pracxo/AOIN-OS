@@ -462,7 +462,9 @@ h1 {
 .module-subpanel[aria-label="v0.2 submission registry stabilization"],
 .module-subpanel[aria-label="v0.2 pre-approval queue freeze"],
 .module-subpanel[aria-label="v0.2 pre-approval review board"],
-.module-subpanel[aria-label="v0.2 submission review routing"] {
+.module-subpanel[aria-label="v0.2 submission review routing"],
+.module-subpanel[aria-label="v0.2 review board stabilization"],
+.module-subpanel[aria-label="v0.2 review routing freeze"] {
   border-color: rgb(142 207 178 / 35%);
 }
 

@@ -202,3 +202,11 @@ board decision approval remains false, and login/logout endpoints, session
 persistence, cookie issuance, token issuance, external identity provider
 runtime, OAuth/OIDC/SAML runtime, credential storage, and token storage remain
 disabled or absent.
+
+AION-137 may stabilize production auth review routing as future
+decision-readiness evidence, but stabilization is not approval. Production auth
+implementation approval remains false, routing decision approval remains false,
+reviewer sign-off implementation approval remains false, and login/logout
+endpoints, session persistence, cookie issuance, token issuance, external
+identity provider runtime, OAuth/OIDC/SAML runtime, credential storage, and
+token storage remain disabled or absent.

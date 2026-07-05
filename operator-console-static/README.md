@@ -639,3 +639,23 @@ Validate the v0.2 pre-approval review board evidence:
 ./scripts/v02-review-board-freeze.sh
 ./scripts/v02-review-board-no-go-regression.sh
 ```
+
+## AION-137 v0.2 Review Board Stabilization Panels
+
+The static console includes v0.2 review board stabilization and review routing
+freeze panels. They load bundled JSON only, keep the review board planning-only,
+keep review board decision approval false, keep routing decision approval
+false, keep reviewer sign-off implementation approval false, keep preapproval
+queue item approval false, keep request pack approval false, keep submission
+approval false, keep approval queue item approval false, keep proposal
+implementation approval false, keep workstream implementation approval false,
+and keep runtime implementation approval false. They expose no input, package,
+migration, runtime, release, tag, approval, bypass, or write controls.
+
+Validate the v0.2 review board stabilization evidence:
+
+```bash
+./scripts/v02-review-board-stabilization-gate.sh
+./scripts/v02-review-routing-freeze.sh
+./scripts/v02-review-board-stabilization-no-go-regression.sh
+```

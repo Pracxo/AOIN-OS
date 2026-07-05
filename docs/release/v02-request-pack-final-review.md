@@ -121,3 +121,8 @@ and v0.2 release creation remain false or absent.
 AION-136 uses the final request-pack review as evidence for review-board
 routing only. Review board decision approval remains false, and routing
 readiness is not request pack approval or implementation approval.
+
+AION-137 uses the final request-pack review as inherited evidence for review
+board stabilization only. Review board decision approval, routing decision
+approval, reviewer sign-off implementation approval, request pack approval,
+submission approval, and implementation approval remain false.
