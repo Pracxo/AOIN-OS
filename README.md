@@ -4605,3 +4605,21 @@ approval, v0.2 tag creation, and v0.2 release creation remain false.
 ./scripts/v02-preapproval-submission-freeze.sh
 ./scripts/v02-request-pack-final-no-go-regression.sh
 ```
+
+### AION-134 v0.2 Submission Registry Preview
+
+AION-134 adds the v0.2 submission registry preview, pre-approval queue
+boundary, request candidate evidence baseline, submission lifecycle state
+model, submission review evidence matrix, pre-approval queue no-go regression,
+ADR 0125, local gates, and static console preview data. It remains registry
+preview evidence only: submission registry and pre-approval queue are
+preview-only, preapproval queue item approval remains false, request pack
+approval remains false, submission approval remains false, runtime
+implementation approval remains false, no v0.2 tag is created, and no v0.2
+release is created.
+
+```bash
+./scripts/v02-submission-registry-preview-check.sh
+./scripts/v02-preapproval-queue-freeze.sh
+./scripts/v02-preapproval-queue-no-go-regression.sh
+```

@@ -1994,3 +1994,16 @@ implementation approval, proposal implementation approval, approval queue item
 approval, external calls, credentials/tokens, sandbox execution, operator write
 execution, connector runtime, production auth, and module activation remain
 false or absent.
+
+## AION-134 Contract Boundary
+
+AION-134 adds no runtime Brain contract. It records the submission registry
+preview, pre-approval queue boundary, request candidate evidence baseline,
+submission lifecycle state model, evidence matrix, checklist, and no-go
+evidence as static planning/request artifacts. Contract resources remain
+unchanged, submission registry and pre-approval queue data remain preview-only,
+and preapproval queue item approval, request pack approval, submission approval,
+runtime implementation approval, proposal implementation approval, approval
+queue item approval, external calls, credentials/tokens, sandbox execution,
+operator write execution, connector runtime, production auth, and module
+activation remain false or absent.

@@ -80,3 +80,11 @@ stabilization as inherited evidence for final review. It adds pre-approval
 submission evidence only; request pack approval, submission approval,
 preapproval gate bypass, runtime implementation approval, v0.2 tag creation,
 and v0.2 release creation remain false.
+
+## AION-134 Submission Registry Preview
+
+AION-134 consumes this closeout as inherited planning evidence for the
+submission registry preview. Submission registry and pre-approval queue records
+remain preview-only, with submission approval, preapproval queue item approval,
+request pack approval, runtime implementation approval, v0.2 tag creation, and
+v0.2 release creation false.

@@ -45,3 +45,10 @@ connector implementation, operator write execution, module activation, external
 calls, credential storage, token storage, sandbox execution, v0.2 tag creation,
 v0.2 release creation, package files, migrations, or runtime API execution
 routes are enabled.
+
+## AION-134 Evidence Boundary Handoff
+
+AION-134 consumes this closeout as request candidate evidence baseline input.
+Evidence remains review material only and cannot approve submissions,
+pre-approval queue items, request packs, implementations, v0.2 tag creation, or
+v0.2 release creation.

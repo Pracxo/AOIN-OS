@@ -165,6 +165,15 @@ storage, sandbox execution, activation, route registration, package files,
 migrations, v0.2 tag creation, and v0.2 release creation remain false or
 absent.
 
+## AION-134 Submission Registry Preview
+
+AION-134 catalogs connector runtime, credential store, sandbox runtime, and
+external call release gate candidates as submission registry preview records
+only. Connector implementation remains unapproved. The connector runtime,
+external calls, connector SDK dependencies, credential storage, token storage,
+sandbox execution, activation, route registration, package files, migrations,
+v0.2 tag creation, and v0.2 release creation remain false or absent.
+
 AION-128 keeps connector runtime, credential store, and sandbox runtime inside
 the planning master checkpoint only. Connector proposal implementation
 approval, approval queue item approval, connector implementation approval,

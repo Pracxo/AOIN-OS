@@ -1065,3 +1065,11 @@ surface is local verification through request-pack final review scripts:
 `./scripts/v02-request-pack-final-review.sh`,
 `./scripts/v02-preapproval-submission-freeze.sh`, and
 `./scripts/v02-request-pack-final-no-go-regression.sh`.
+
+## AION-134 CLI Boundary
+
+AION-134 adds no CLI runtime command implementation. The only CLI-adjacent
+surface is local verification through submission registry preview scripts:
+`./scripts/v02-submission-registry-preview-check.sh`,
+`./scripts/v02-preapproval-queue-freeze.sh`, and
+`./scripts/v02-preapproval-queue-no-go-regression.sh`.

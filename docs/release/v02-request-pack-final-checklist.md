@@ -27,3 +27,10 @@
 All checklist items are required before future approval consideration. Passing
 this checklist does not approve implementation, runtime behavior, release
 creation, tag creation, or privileged bypass.
+
+## AION-134 Checklist Handoff
+
+AION-134 requires this checklist to remain passing before submission registry
+preview evidence can be accepted. The registry handoff keeps request approval,
+submission approval, preapproval queue approval, implementation approval,
+runtime enablement, v0.2 tag creation, and v0.2 release creation false.

@@ -171,6 +171,14 @@ OAuth/OIDC/SAML runtime, external identity runtime, credential storage, token
 storage, login, logout, session persistence, v0.2 tag creation, and v0.2
 release creation remain false or absent.
 
+## AION-134 Submission Registry Preview
+
+AION-134 catalogs the production auth implementation candidate as a submission
+registry preview record only. Production auth implementation remains
+unapproved. OAuth/OIDC/SAML runtime, external identity runtime, credential
+storage, token storage, login, logout, session persistence, v0.2 tag creation,
+and v0.2 release creation remain false or absent.
+
 ## AION-133 Request Pack Final Review
 
 AION-133 adds production auth request final review and pre-approval submission

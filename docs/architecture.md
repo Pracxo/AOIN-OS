@@ -2104,6 +2104,21 @@ token storage, sandbox execution, API runtime execution routes, SDK resources,
 CLI implementations, package files, migrations, v0.2 tag creation, and v0.2
 release creation remain false, disabled, or absent.
 
+## AION-134 v0.2 Submission Registry Preview Boundary
+
+AION-134 adds the planning-only submission registry preview and pre-approval
+queue boundary above the request-pack final review. It catalogs future request
+candidates, evidence requirements, lifecycle states, reviewer evidence, ADR
+dependencies, and gate dependencies without adding runtime architecture.
+
+Runtime architecture remains unchanged. Submission registry preview-only,
+pre-approval queue preview-only, request pack approval false, submission
+approval false, preapproval queue item approval false, runtime implementation
+approval false, proposal implementation approval false, approval queue item
+approval false, external calls absent, credentials/tokens absent, sandbox
+execution absent, package files absent, migrations absent, v0.2 tag creation
+false, and v0.2 release creation false remain required.
+
 ## AION-132 v0.2 Request Pack Stabilization Boundary
 
 AION-132 adds request-pack stabilization, evidence completeness, submission

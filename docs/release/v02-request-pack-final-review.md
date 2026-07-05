@@ -101,3 +101,11 @@ migrations, or runtime API execution routes.
 AION-133 explicitly creates no v0.2 tag and no v0.2 release. The
 `aion-v0.1.0` tag remains the frozen release baseline and must not be moved,
 deleted, recreated, or retagged.
+
+## AION-134 Submission Registry Handoff
+
+AION-134 consumes this final review as inherited evidence for the submission
+registry preview and pre-approval queue boundary. The handoff catalogs request
+candidates only and keeps request pack approval, submission approval,
+preapproval queue item approval, runtime implementation approval, v0.2 tag
+creation, and v0.2 release creation false.

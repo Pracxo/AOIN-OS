@@ -186,3 +186,14 @@ implementation, approval queue item approval, operator write execution,
 connector implementation, production auth, module activation, external calls,
 credential storage, token storage, sandbox execution, v0.2 tag creation, v0.2
 release creation, and v0.2 release approval remain false.
+
+## AION-134 Submission Registry Preview State
+
+AION-134 adds submission registry preview-only and pre-approval queue
+preview-only state evidence. Preapproval queue item approval, request pack
+approval, submission approval, runtime implementation, backlog implementation,
+workstream implementation, proposal implementation, approval queue item
+approval, operator write execution, connector implementation, production auth,
+module activation, external calls, credential storage, token storage, sandbox
+execution, v0.2 tag creation, v0.2 release creation, and v0.2 release approval
+remain false.

@@ -39,3 +39,10 @@ runtime implementation, workstream implementation, proposal implementation,
 approval queue items, request pack items, submissions, release creation, tag
 creation, external calls, protected-material persistence, sandbox execution,
 package changes, migrations, or runtime API execution routes.
+
+## AION-134 No-Go Handoff
+
+AION-134 inherits these no-go conditions and adds preapproval queue item
+approval true as an explicit blocker. The submission registry preview and
+pre-approval queue boundary remain disabled, denied, no-go, future, planning,
+unapproved, template, or preview artifacts only.

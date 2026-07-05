@@ -200,6 +200,15 @@ control, login control, write control, runtime route, package file, migration,
 release action, tag action, approval bypass, ADR bypass, gate bypass, or
 runtime implementation approval control.
 
+AION-134 adds static submission registry preview and pre-approval queue
+boundary panels. They show registry and queue preview evidence only, with
+submission registry preview-only true, pre-approval queue preview-only true,
+preapproval queue item approval false, request pack approval false, submission
+approval false, and all implementation/runtime approvals false. The console
+still adds no input control, login control, write control, runtime route,
+package file, migration, release action, tag action, approval bypass, ADR
+bypass, gate bypass, or runtime implementation approval control.
+
 ## AION-132 v0.2 Request Pack Stabilization Preview
 
 The operator console static preview now includes request pack stabilization
