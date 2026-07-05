@@ -93,3 +93,13 @@ SDK resource, CLI command, or domain implementation condition is present.
 
 AION-138 creates no v0.2 tag and no v0.2 release. The frozen `aion-v0.1.0`
 baseline remains untouched.
+
+## AION-139 Stabilization Handoff
+
+AION-139 stabilizes this preview into a decision package baseline and approval
+readiness freeze. The handoff remains preview-only: decision package approval,
+approval readiness approval, runtime decision readiness approval, review board
+decision approval, routing decision approval, reviewer sign-off implementation
+approval, submission approval, request pack approval, runtime implementation
+approval, v0.2 tag creation, and v0.2 release creation all remain false or
+absent.

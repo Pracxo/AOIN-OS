@@ -100,3 +100,9 @@ decision approval, reviewer sign-off implementation approval, submission
 approval, request pack approval, preapproval queue approval, implementation
 approval, runtime enablement, v0.2 tag creation, and v0.2 release creation all
 remain false or absent.
+
+AION-139 consumes the same review board stabilization evidence as decision
+package stabilization input only. Runtime decision readiness approval, decision
+package approval, approval readiness approval, review board decision approval,
+routing decision approval, reviewer sign-off implementation approval, and
+runtime implementation approval remain false.

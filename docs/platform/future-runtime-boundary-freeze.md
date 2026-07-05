@@ -209,3 +209,10 @@ evidence, matrix evidence, checklist evidence, ADR dependency evidence, and
 gate dependency evidence do not enable connector runtime, operator write
 execution, production auth runtime, module activation, sandbox execution,
 external calls, credential storage, token storage, tags, or releases.
+
+AION-139 keeps the future runtime boundary frozen. Decision package
+stabilization, approval readiness freeze, runtime decision closeout, evidence
+baseline completion, status summary completion, ADR dependency evidence, and
+gate dependency evidence do not enable connector runtime, operator write
+execution, production auth runtime, module activation, sandbox execution,
+external calls, credential storage, token storage, tags, or releases.

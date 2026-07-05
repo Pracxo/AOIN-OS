@@ -29,3 +29,10 @@
 
 The state model is deliberately non-executing. It records readiness posture and
 keeps every approval false.
+
+## AION-139 Stabilized State Boundary
+
+AION-139 adds stabilization and approval readiness freeze evidence around this
+state model. No state in the stabilized model approves runtime decision
+readiness, approves implementation, enables runtime, creates a tag, or creates
+a release.

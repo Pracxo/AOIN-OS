@@ -1105,3 +1105,12 @@ validation only. It adds no CLI command implementation, no runtime execution
 command, no write path, no connector runtime command, no sandbox command, no
 external-call command, no credential/token command, no package command, no
 migration command, and no release or tag command.
+
+## AION-139 CLI Boundary
+
+AION-139 adds local shell gates for decision package stabilization and approval
+readiness freeze validation only. It adds no CLI command implementation, no
+runtime execution command, no runtime decision approval command, no write path,
+no connector runtime command, no sandbox command, no external-call command, no
+credential/token command, no package command, no migration command, and no
+release or tag command.

@@ -815,3 +815,13 @@ Instructions for future Codex runs in this repository:
   package completeness, evidence matrix completeness, checklist completion,
   ADR dependency, gate dependency, static console evidence, or freeze evidence
   as implementation approval.
+- AION-139 stabilizes the v0.2 decision package and freezes approval readiness
+  as planning artifacts only. Decision package approval, approval readiness
+  approval, runtime decision readiness approval, review board decision
+  approval, routing decision approval, reviewer sign-off implementation
+  approval, preapproval queue approval, request pack approval, submission
+  approval, approval queue approval, proposal approval, workstream approval,
+  backlog approval, and runtime implementation approval must all remain false.
+  Do not treat stabilization, closeout, readiness freeze, ADR dependency, gate
+  dependency, static console evidence, or no-go evidence as runtime decision
+  approval, implementation approval, tag creation, or release creation.

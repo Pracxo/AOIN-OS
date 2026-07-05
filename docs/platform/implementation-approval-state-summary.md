@@ -230,3 +230,9 @@ approval, submission approval, preapproval queue item approval, request pack
 approval, approval queue item approval, proposal implementation approval,
 workstream implementation approval, backlog implementation approval, and
 runtime implementation approval remain false.
+
+AION-139 adds runtime decision readiness approval false and freezes decision
+package stabilization as planning evidence only. Runtime decision closeout,
+approval readiness freeze, ADR dependency evidence, and gate dependency
+evidence do not approve decision packages, approval readiness, implementation,
+runtime, tags, or releases.

@@ -30,3 +30,12 @@ approval subjects, not outcomes of this package.
   rollback, and audit evidence.
 - AION-138 cannot bypass missing evidence.
 - AION-138 cannot create a release or tag.
+
+## AION-139 Runtime Decision Closeout
+
+AION-139 closes this boundary as evidence only. Runtime decision readiness
+approval remains false, runtime implementation approval remains false, decision
+package approval remains false, approval readiness approval remains false, and
+gate success remains insufficient to enable connector runtime, operator write
+execution, production auth, module activation, sandbox execution, external
+calls, credential storage, token storage, tags, or releases.

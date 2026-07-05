@@ -1231,3 +1231,14 @@ decision boundary, state model, and evidence matrix examples are synthetic
 planning artifacts only and must not be interpreted as SDK runtime contracts,
 decision package approval, approval readiness approval, implementation
 approval, submission approval, or release approval.
+
+## AION-139 SDK Boundary
+
+AION-139 adds no SDK resources, no SDK clients, no CLI-backed SDK commands, no
+network clients, no provider SDK dependencies, and no connector SDK
+dependencies. Decision package stabilization, approval readiness freeze,
+runtime decision closeout boundary, evidence baseline, and status summary
+examples are synthetic planning artifacts only and must not be interpreted as
+SDK runtime contracts, runtime decision readiness approval, decision package
+approval, approval readiness approval, implementation approval, submission
+approval, or release approval.

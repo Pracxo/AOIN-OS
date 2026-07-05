@@ -252,3 +252,10 @@ approval remains false, and capability activation, code loading, runtime
 registration, controlled execution, package installation, external dependency
 download, module writes, policy bypass, audit bypass, and privileged bypass
 remain disabled or absent.
+
+AION-139 stabilizes module activation candidate evidence in the decision
+package baseline only. Runtime decision readiness approval remains false,
+module activation implementation approval remains false, and capability
+activation, code loading, runtime registration, controlled execution, package
+installation, external dependency download, module writes, policy bypass,
+audit bypass, and privileged bypass remain disabled or absent.

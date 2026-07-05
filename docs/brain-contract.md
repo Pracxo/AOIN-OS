@@ -2045,3 +2045,15 @@ readiness, approve review board decisions, approve routing decisions, approve
 submissions, approve request packs, approve preapproval queue items, approve
 implementation, enable runtime, execute tools, call external services, store
 credentials or tokens, create a v0.2 tag, or create a v0.2 release.
+
+## AION-139 Decision Package Stabilization Contract
+
+The AION-139 contract freezes decision package stabilization records as
+read-only planning metadata. Stabilization status, approval-readiness freeze
+status, runtime decision closeout status, evidence baseline rows, status
+summary values, ADR dependencies, and gate dependencies must not approve
+runtime decision readiness, approve the package, approve readiness, approve
+review board decisions, approve routing decisions, approve submissions,
+approve request packs, approve preapproval queue items, approve
+implementation, enable runtime, execute tools, call external services, store
+credentials or tokens, create a v0.2 tag, or create a v0.2 release.

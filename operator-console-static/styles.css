@@ -60,6 +60,11 @@ a {
   transform: translateY(0);
 }
 
+.module-subpanel[aria-label*="decision package stabilization"],
+.module-subpanel[aria-label*="approval readiness freeze"] {
+  border-color: var(--focus);
+}
+
 .shell-header {
   padding: 32px clamp(20px, 4vw, 56px) 20px;
   border-bottom: 1px solid var(--border);

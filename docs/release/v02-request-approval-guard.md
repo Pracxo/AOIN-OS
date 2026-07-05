@@ -63,3 +63,8 @@ guard. Decision package approval, approval readiness approval, review board
 decision approval, routing decision approval, reviewer sign-off as
 implementation approval, preapproval queue approval, request pack approval,
 submission approval, and implementation approval remain blocked conditions.
+
+AION-139 adds runtime decision readiness approval to the same blocked
+conditions. Stabilization, approval readiness freeze, runtime decision
+closeout, ADR dependency presence, and gate dependency success cannot bypass
+request approval guard requirements.

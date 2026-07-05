@@ -47,3 +47,11 @@ evaluate a v0.2 runtime decision. It is not an approval record.
 The bundle is complete only when every referenced prior gate still passes and
 the AION-138 preview, freeze, and no-go regression scripts pass locally.
 Completeness does not convert the package into approval.
+
+## AION-139 Approval Readiness Freeze Handoff
+
+AION-139 freezes this bundle as approval readiness evidence only. Freeze status
+does not approve approval readiness, runtime decision readiness, review board
+decisions, routing decisions, reviewer sign-off as implementation approval,
+submission approval, request pack approval, implementation approval, tag
+creation, or release creation.

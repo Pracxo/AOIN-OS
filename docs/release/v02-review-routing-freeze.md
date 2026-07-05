@@ -68,3 +68,8 @@ approval remains false, decision package approval remains false, approval
 readiness approved remains false, and no routing record enables runtime,
 implementation, submission, request pack, preapproval queue, tag, or release
 approval.
+
+AION-139 freezes this routing evidence as inherited stabilization evidence
+only. Runtime decision readiness approval remains false, and routing freeze
+completion still does not approve implementation, decision packages, approval
+readiness, tags, or releases.

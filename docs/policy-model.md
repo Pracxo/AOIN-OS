@@ -2102,3 +2102,17 @@ preapproval queue item approval, request pack approval, submission approval,
 approval queue item approval, proposal implementation approval, workstream
 implementation approval, backlog implementation approval, or runtime
 implementation approval as true is a release blocker.
+
+## AION-139 Decision Package Stabilization Policy
+
+AION-139 extends the policy lock to decision package stabilization and runtime
+decision closeout. Stabilization, approval-readiness freeze, runtime decision
+closeout, evidence baseline, status summary, ADR dependency evidence, and gate
+dependency evidence are policy inputs only. Any attempt to mark runtime
+decision readiness approval, decision package approval, approval readiness
+approval, review board decision approval, routing decision approval, reviewer
+sign-off implementation approval, preapproval queue item approval, request pack
+approval, submission approval, approval queue item approval, proposal
+implementation approval, workstream implementation approval, backlog
+implementation approval, or runtime implementation approval as true is a
+release blocker.

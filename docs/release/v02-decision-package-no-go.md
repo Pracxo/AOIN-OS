@@ -43,3 +43,10 @@ AION-138 fails if any of these conditions are present:
 
 These conditions remain blockers even when every evidence document exists. The
 decision package preview cannot approve implementation or enable runtime.
+
+## AION-139 Additional No-Go
+
+AION-139 adds runtime decision readiness approval true as a no-go condition.
+Decision package stabilization, approval readiness freeze, evidence baseline
+completion, status summary completion, and runtime closeout evidence cannot
+bypass any AION-138 no-go condition.
