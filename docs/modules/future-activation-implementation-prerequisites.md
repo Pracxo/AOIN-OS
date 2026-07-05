@@ -244,3 +244,11 @@ remains false, reviewer sign-off implementation approval remains false, and
 capability activation, code loading, runtime registration, controlled
 execution, package installation, external dependency download, module writes,
 policy bypass, audit bypass, and privileged bypass remain disabled or absent.
+
+AION-138 may include module activation in the decision package preview, but
+package completeness is not approval. Decision package approval remains false,
+approval readiness approved remains false, module activation implementation
+approval remains false, and capability activation, code loading, runtime
+registration, controlled execution, package installation, external dependency
+download, module writes, policy bypass, audit bypass, and privileged bypass
+remain disabled or absent.

@@ -2329,3 +2329,16 @@ remain false. No API route, SDK resource, CLI implementation, migration,
 connector runtime, operator write execution, production auth runtime, module
 activation, sandbox execution, external call path, credential storage, token
 storage, v0.2 tag, or v0.2 release is added.
+
+## AION-138 Decision Package Preview Boundary
+
+AION-138 adds a decision package preview and approval-readiness evidence
+bundle without changing runtime architecture. Decision package approval,
+approval readiness approval, review board decision approval, routing decision
+approval, reviewer sign-off implementation approval, submission approval,
+preapproval queue approval, request pack approval, proposal approval,
+workstream approval, backlog approval, and runtime implementation approval
+remain false. No API route, SDK resource, CLI implementation, migration,
+connector runtime, operator write execution, production auth runtime, module
+activation, sandbox execution, external call path, credential storage, token
+storage, v0.2 tag, or v0.2 release is added.

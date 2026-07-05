@@ -70,3 +70,11 @@ decision-readiness evidence baseline. The handoff remains planning-only:
 review board decision approval, routing decision approval, reviewer sign-off
 implementation approval, submission approval, preapproval queue approval,
 request pack approval, and runtime implementation approval remain false.
+
+## AION-138 Decision Package Handoff
+
+AION-138 consumes this review board as decision package evidence only.
+Decision package approval, approval readiness approval, review board decision
+approval, routing decision approval, reviewer sign-off implementation
+approval, submission approval, preapproval queue approval, request pack
+approval, and runtime implementation approval remain false.

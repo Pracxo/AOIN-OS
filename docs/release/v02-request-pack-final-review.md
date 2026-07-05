@@ -126,3 +126,9 @@ AION-137 uses the final request-pack review as inherited evidence for review
 board stabilization only. Review board decision approval, routing decision
 approval, reviewer sign-off implementation approval, request pack approval,
 submission approval, and implementation approval remain false.
+
+AION-138 uses the final request-pack review as inherited evidence for the
+decision package preview only. Decision package approval, approval readiness
+approval, review board decision approval, routing decision approval, reviewer
+sign-off implementation approval, request pack approval, submission approval,
+and implementation approval remain false.

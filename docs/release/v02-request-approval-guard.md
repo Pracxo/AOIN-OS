@@ -57,3 +57,9 @@ AION-137 adds review routing freeze and quorum evidence to the guard. Review
 board decision approval, routing decision approval, reviewer sign-off as
 implementation approval, preapproval queue approval, request pack approval,
 submission approval, and implementation approval remain blocked conditions.
+
+AION-138 adds decision package preview and approval-readiness evidence to the
+guard. Decision package approval, approval readiness approval, review board
+decision approval, routing decision approval, reviewer sign-off as
+implementation approval, preapproval queue approval, request pack approval,
+submission approval, and implementation approval remain blocked conditions.

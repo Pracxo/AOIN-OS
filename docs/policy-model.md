@@ -2089,3 +2089,16 @@ approval, submission approval, approval queue item approval, proposal
 implementation approval, workstream implementation approval, backlog
 implementation approval, or runtime implementation approval as true is a
 release blocker.
+
+## AION-138 Decision Package Policy
+
+AION-138 extends the policy lock to the decision package preview. Decision
+package completeness, approval-readiness evidence, runtime decision boundary
+state, evidence matrix rows, checklist evidence, ADR dependency evidence, and
+gate dependency evidence are policy inputs only. Any attempt to mark decision
+package approval, approval readiness approval, review board decision approval,
+routing decision approval, reviewer sign-off implementation approval,
+preapproval queue item approval, request pack approval, submission approval,
+approval queue item approval, proposal implementation approval, workstream
+implementation approval, backlog implementation approval, or runtime
+implementation approval as true is a release blocker.

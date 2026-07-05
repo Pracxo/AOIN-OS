@@ -26,3 +26,10 @@
 - no migrations
 
 This checklist is a closeout baseline only. It does not approve implementation, release, runtime execution, external calls, credential storage, token storage, sandbox execution, operator write execution, connector runtime, module activation, or production auth.
+
+## AION-138 Decision Package Checklist Handoff
+
+AION-138 consumes this checklist as inherited closeout evidence. Checklist
+completion remains evidence only and cannot approve the decision package,
+approve readiness, approve implementation, enable runtime, create a tag, or
+create a release.

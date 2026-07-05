@@ -246,3 +246,11 @@ remains disabled, routing decision approval remains false, reviewer sign-off
 implementation approval remains false, and external calls, credential/token
 storage, sandbox execution, provider SDK dependencies, connector SDK
 dependencies, and runtime route registration remain disabled or absent.
+
+AION-138 may include connector runtime, credential store, and sandbox runtime
+in the decision package preview, but package completeness is not approval.
+Decision package approval remains false, approval readiness approved remains
+false, connector implementation approval remains false, connector runtime
+remains disabled, and external calls, credential/token storage, sandbox
+execution, provider SDK dependencies, connector SDK dependencies, and runtime
+route registration remain disabled or absent.

@@ -24,3 +24,12 @@ evidence. Routing decision approval remains false, reviewer sign-off
 implementation approval remains false, and no route enables runtime,
 implementation, submission, request pack, preapproval queue, tag, or release
 approval.
+
+## AION-138 Decision Package Routing Handoff
+
+AION-138 packages these routing rows as approval-readiness evidence only.
+Decision package approval remains false, approval readiness approved remains
+false, routing decision approval remains false, reviewer sign-off
+implementation approval remains false, and no route enables runtime,
+implementation, submission, request pack, preapproval queue, tag, or release
+approval.

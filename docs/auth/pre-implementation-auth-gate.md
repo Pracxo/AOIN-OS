@@ -210,3 +210,11 @@ reviewer sign-off implementation approval remains false, and login/logout
 endpoints, session persistence, cookie issuance, token issuance, external
 identity provider runtime, OAuth/OIDC/SAML runtime, credential storage, and
 token storage remain disabled or absent.
+
+AION-138 may include production auth in the decision package preview, but
+package completeness is not approval. Decision package approval remains false,
+approval readiness approved remains false, production auth implementation
+approval remains false, and login/logout endpoints, session persistence,
+cookie issuance, token issuance, external identity provider runtime,
+OAuth/OIDC/SAML runtime, credential storage, and token storage remain disabled
+or absent.

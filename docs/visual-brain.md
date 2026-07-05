@@ -1277,3 +1277,13 @@ redacted, and non-executing. They expose routing freeze evidence, quorum
 evidence, decision-readiness blockers, and false approval states only; they do
 not expose inputs, write controls, activation controls, external-call controls,
 credential/token storage, sandbox execution, a v0.2 tag, or a v0.2 release.
+
+## AION-138 Decision Package Panels
+
+The static visual brain includes AION-138 decision package preview and approval
+readiness evidence panels backed by bundled JSON. The panels remain read-only,
+redacted, and non-executing. They expose decision package completeness,
+approval-readiness evidence, runtime boundary blockers, and false approval
+states only; they do not expose inputs, write controls, approval controls,
+activation controls, external-call controls, credential/token storage, sandbox
+execution, a v0.2 tag, or a v0.2 release.

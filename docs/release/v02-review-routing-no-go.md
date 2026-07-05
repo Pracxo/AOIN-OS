@@ -34,3 +34,10 @@
 - runtime API execution routes added
 
 These conditions remain no-go outcomes for AION-137. A routing record that encounters any condition must stay blocked and cannot become an implementation approval.
+
+## AION-138 Decision Package No-Go Extension
+
+AION-138 inherits these no-go outcomes and adds decision package approval true
+and approval readiness approved true as blockers. A decision package record
+that encounters any condition must stay blocked and cannot become an
+implementation approval.

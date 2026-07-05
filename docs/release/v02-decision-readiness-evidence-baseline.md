@@ -20,3 +20,10 @@ Decision readiness is not approval. Routing status is not approval. Reviewer evi
 ## Next Planning Action
 
 The next planning action is to keep collecting explicit approval records, ADRs, gate evidence, blocker status, rollback evidence, and no-go confirmations before any implementation approval can be considered.
+
+## AION-138 Decision Package Handoff
+
+AION-138 packages this baseline into approval-readiness evidence. The package
+does not approve readiness, implementation, review-board decisions, routing
+decisions, submissions, request packs, preapproval queue items, approval queue
+items, tags, or releases.

@@ -2034,3 +2034,14 @@ approve review board decisions, approve routing decisions, approve
 submissions, approve request packs, approve preapproval queue items, approve
 implementation, enable runtime, execute tools, call external services, store
 credentials or tokens, create a v0.2 tag, or create a v0.2 release.
+
+## AION-138 Decision Package Contract
+
+The AION-138 contract freezes decision package records as read-only planning
+metadata. Decision package completeness, approval-readiness evidence, runtime
+decision boundary state, evidence matrix rows, checklist entries, ADR
+dependencies, and gate dependencies must not approve the package, approve
+readiness, approve review board decisions, approve routing decisions, approve
+submissions, approve request packs, approve preapproval queue items, approve
+implementation, enable runtime, execute tools, call external services, store
+credentials or tokens, create a v0.2 tag, or create a v0.2 release.
