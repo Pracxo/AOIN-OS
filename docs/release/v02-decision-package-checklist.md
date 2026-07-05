@@ -1,0 +1,46 @@
+# v0.2 Decision Package Checklist
+
+- decision package preview docs complete
+- approval readiness evidence bundle complete
+- runtime decision boundary complete
+- decision package state model complete
+- evidence matrix complete
+- no-go register complete
+- ADR 0129 indexed
+- examples valid
+- static console demo data read-only
+- preview script executable and passing
+- freeze script executable and passing
+- no-go regression executable and passing
+- review board stabilization gate passing
+- review routing freeze passing
+- pre-approval review board check passing
+- submission registry stabilization passing
+- submission registry preview passing
+- request pack final review passing
+- request pack stabilization passing
+- implementation request pack check passing
+- planning track closeout passing
+- final planning release gate passing
+- docs check passing
+- final docs audit passing
+- no domain drift passing
+- boundary check passing
+- no decision package approval
+- no approval readiness approval
+- no review board approval
+- no routing approval
+- no reviewer sign-off implementation approval
+- no submission approval
+- no preapproval queue approval
+- no request approval
+- no approval queue approval
+- no runtime implementation
+- no v0.2 tag
+- no v0.2 release
+- no external calls
+- no credentials/tokens
+- no sandbox execution
+- no package files
+- no migrations
+- no runtime API execution routes

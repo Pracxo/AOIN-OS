@@ -220,3 +220,13 @@ submission approval, preapproval queue item approval, request pack approval,
 approval queue item approval, proposal implementation approval, workstream
 implementation approval, backlog implementation approval, and runtime
 implementation approval remain false.
+
+## AION-138 Decision Package Preview State
+
+AION-138 preserves the same approval state while packaging decision readiness
+evidence. Decision package approval, approval readiness approval, review board
+decision approval, routing decision approval, reviewer sign-off implementation
+approval, submission approval, preapproval queue item approval, request pack
+approval, approval queue item approval, proposal implementation approval,
+workstream implementation approval, backlog implementation approval, and
+runtime implementation approval remain false.

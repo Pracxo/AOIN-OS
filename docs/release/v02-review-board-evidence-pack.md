@@ -22,3 +22,11 @@ AION-137 consumes this pack as inherited evidence for the review board
 stabilization gate. Evidence readiness still does not approve implementation,
 submissions, request packs, pre-approval queue items, routing decisions,
 review board decisions, approval queue items, tags, or releases.
+
+## AION-138 Decision Package Evidence
+
+AION-138 consumes this pack as inherited evidence for the decision package
+preview. Evidence readiness still does not approve the decision package,
+approval readiness, implementation, submissions, request packs, pre-approval
+queue items, routing decisions, review board decisions, approval queue items,
+tags, or releases.

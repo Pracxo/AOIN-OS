@@ -464,7 +464,9 @@ h1 {
 .module-subpanel[aria-label="v0.2 pre-approval review board"],
 .module-subpanel[aria-label="v0.2 submission review routing"],
 .module-subpanel[aria-label="v0.2 review board stabilization"],
-.module-subpanel[aria-label="v0.2 review routing freeze"] {
+.module-subpanel[aria-label="v0.2 review routing freeze"],
+.module-subpanel[aria-label="v0.2 decision package preview"],
+.module-subpanel[aria-label="v0.2 approval readiness evidence bundle"] {
   border-color: rgb(142 207 178 / 35%);
 }
 

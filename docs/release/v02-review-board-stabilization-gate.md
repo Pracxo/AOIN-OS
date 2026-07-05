@@ -90,3 +90,13 @@ The gate also fails on approval bypasses, missing approval records, ADR dependen
 ## Release Boundary
 
 AION-137 creates no v0.2 tag and no v0.2 release.
+
+## AION-138 Decision Package Handoff
+
+AION-138 consumes this stabilization gate as inherited evidence for the
+decision package preview. The handoff remains planning-only: decision package
+approval, approval readiness approval, review board decision approval, routing
+decision approval, reviewer sign-off implementation approval, submission
+approval, request pack approval, preapproval queue approval, implementation
+approval, runtime enablement, v0.2 tag creation, and v0.2 release creation all
+remain false or absent.

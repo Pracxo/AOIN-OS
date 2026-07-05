@@ -294,3 +294,12 @@ only and no inputs, write controls, activation controls, external-call
 controls, credential/token storage, sandbox execution, runtime registration,
 review board approval, routing approval, reviewer sign-off implementation
 approval, v0.2 tag creation, or v0.2 release creation.
+
+## AION-138 Static Console Handoff
+
+AION-138 adds read-only static console panels for decision package preview and
+approval readiness evidence. The panels expose bundled, redacted JSON evidence
+only and no inputs, write controls, approval controls, activation controls,
+external-call controls, credential/token storage, sandbox execution, runtime
+registration, decision package approval, approval readiness approval, v0.2 tag
+creation, or v0.2 release creation.

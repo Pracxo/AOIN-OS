@@ -1221,3 +1221,13 @@ dependencies. Review board stabilization, routing freeze, quorum model, and
 decision-readiness examples are synthetic planning artifacts only and must not
 be interpreted as SDK runtime contracts, implementation approval, routing
 approval, submission approval, or release approval.
+
+## AION-138 SDK Boundary
+
+AION-138 adds no SDK resources, no SDK clients, no CLI-backed SDK commands, no
+network clients, no provider SDK dependencies, and no connector SDK
+dependencies. Decision package preview, approval-readiness evidence, runtime
+decision boundary, state model, and evidence matrix examples are synthetic
+planning artifacts only and must not be interpreted as SDK runtime contracts,
+decision package approval, approval readiness approval, implementation
+approval, submission approval, or release approval.

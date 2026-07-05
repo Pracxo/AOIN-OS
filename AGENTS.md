@@ -805,3 +805,13 @@ Instructions for future Codex runs in this repository:
   approval must all remain false. Do not treat quorum, routing freeze, reviewer
   sign-off, ADR dependency, gate dependency, or closeout evidence as
   implementation approval.
+- AION-138 creates the v0.2 decision package preview and approval-readiness
+  evidence bundle as planning artifacts only. Decision package approval,
+  approval readiness approval, review board decision approval, routing decision
+  approval, reviewer sign-off implementation approval, preapproval queue
+  approval, request pack approval, submission approval, approval queue
+  approval, proposal approval, workstream approval, backlog approval, and
+  runtime implementation approval must all remain false. Do not treat decision
+  package completeness, evidence matrix completeness, checklist completion,
+  ADR dependency, gate dependency, static console evidence, or freeze evidence
+  as implementation approval.

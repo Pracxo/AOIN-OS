@@ -32,3 +32,10 @@ High-risk candidates may require dual-control review from security plus architec
 No reviewer can approve implementation alone.
 
 No reviewer can enable runtime.
+
+## AION-138 Decision Package Quorum Handoff
+
+AION-138 uses this quorum model as evidence for the decision package preview.
+Quorum evidence remains advisory: it cannot approve the package, approve
+readiness, approve implementation, approve a route, approve a submission, or
+enable runtime.

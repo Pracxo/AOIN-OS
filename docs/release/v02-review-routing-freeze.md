@@ -59,3 +59,12 @@ The gate dependency is evidence only. It cannot replace an explicit future imple
 - package files added
 - migrations added
 - runtime API execution routes added
+
+## AION-138 Decision Package Dependency
+
+AION-138 consumes this routing freeze as decision package evidence only.
+Routing decision approval remains false, reviewer sign-off implementation
+approval remains false, decision package approval remains false, approval
+readiness approved remains false, and no routing record enables runtime,
+implementation, submission, request pack, preapproval queue, tag, or release
+approval.

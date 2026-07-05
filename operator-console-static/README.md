@@ -659,3 +659,22 @@ Validate the v0.2 review board stabilization evidence:
 ./scripts/v02-review-routing-freeze.sh
 ./scripts/v02-review-board-stabilization-no-go-regression.sh
 ```
+
+## AION-138 v0.2 Decision Package Panels
+
+The static console includes v0.2 decision package preview and approval
+readiness evidence bundle panels. They load bundled JSON only, keep the
+decision package preview-only, keep decision package approval false, keep
+approval readiness approved false, keep review board decision approval false,
+keep routing decision approval false, keep reviewer sign-off implementation
+approval false, keep submission approval false, keep request pack approval
+false, and keep runtime implementation approval false. They expose no input,
+package, migration, runtime, release, tag, approval, bypass, or write controls.
+
+Validate the v0.2 decision package evidence:
+
+```bash
+./scripts/v02-decision-package-preview-check.sh
+./scripts/v02-decision-package-freeze.sh
+./scripts/v02-decision-package-no-go-regression.sh
+```

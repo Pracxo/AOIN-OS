@@ -200,3 +200,12 @@ evidence, ADR dependency evidence, and gate dependency evidence do not enable
 connector runtime, operator write execution, production auth runtime, module
 activation, sandbox execution, external calls, credential storage, token
 storage, tags, or releases.
+
+## AION-138 Decision Package Boundary
+
+AION-138 does not thaw the runtime boundary. Decision package preview,
+approval-readiness evidence, runtime decision boundary evidence, state model
+evidence, matrix evidence, checklist evidence, ADR dependency evidence, and
+gate dependency evidence do not enable connector runtime, operator write
+execution, production auth runtime, module activation, sandbox execution,
+external calls, credential storage, token storage, tags, or releases.

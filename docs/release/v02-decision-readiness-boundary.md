@@ -26,3 +26,11 @@ AION-137 expands this boundary into a candidate evidence baseline. Decision
 readiness remains evidence only and does not approve review board decisions,
 routing decisions, reviewer sign-off, submissions, request packs,
 preapproval queue items, implementation, runtime, tags, or releases.
+
+## AION-138 Decision Package Boundary
+
+AION-138 packages this boundary into approval-readiness evidence. Package
+readiness remains evidence only and does not approve the decision package,
+approval readiness, review board decisions, routing decisions, reviewer
+sign-off, submissions, request packs, preapproval queue items, implementation,
+runtime, tags, or releases.

@@ -67,3 +67,12 @@ AION-137 stabilizes review routing without unfreezing this queue. Queue
 placement remains preview-only, preapproval queue item approval remains false,
 routing decision approval remains false, reviewer sign-off implementation
 approval remains false, and review board decision approval remains false.
+
+## AION-138 Decision Package Handoff
+
+AION-138 packages this queue freeze as approval-readiness evidence only. Queue
+placement remains preview-only, preapproval queue item approval remains false,
+decision package approval remains false, approval readiness approved remains
+false, routing decision approval remains false, reviewer sign-off
+implementation approval remains false, and review board decision approval
+remains false.

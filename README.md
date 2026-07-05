@@ -4676,3 +4676,22 @@ is created, and no v0.2 release is created.
 ./scripts/v02-review-routing-freeze.sh
 ./scripts/v02-review-board-stabilization-no-go-regression.sh
 ```
+
+## AION-138 v0.2 Decision Package Preview
+
+AION-138 packages the stabilized v0.2 review, routing, submission, request,
+proposal, queue, and runtime-boundary evidence into an approval-readiness
+preview. The decision package is preview-only: decision package approval
+remains false, approval readiness approved remains false, review board
+decision approval remains false, routing decision approval remains false,
+reviewer sign-off implementation approval remains false, submission approval
+remains false, request pack approval remains false, runtime implementation
+approval remains false, no external calls are added, no credentials or tokens
+are stored, no sandbox execution is enabled, no v0.2 tag is created, and no
+v0.2 release is created.
+
+```bash
+./scripts/v02-decision-package-preview-check.sh
+./scripts/v02-decision-package-freeze.sh
+./scripts/v02-decision-package-no-go-regression.sh
+```
