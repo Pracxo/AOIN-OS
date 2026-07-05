@@ -236,3 +236,10 @@ package stabilization as planning evidence only. Runtime decision closeout,
 approval readiness freeze, ADR dependency evidence, and gate dependency
 evidence do not approve decision packages, approval readiness, implementation,
 runtime, tags, or releases.
+
+AION-140 adds runtime decision lock created true and runtime decision lock
+release approval false as planning evidence only. Decision package final
+review, approval readiness closeout, runtime decision lock, final evidence
+matrix, ADR dependency evidence, and gate dependency evidence do not approve
+decision packages, approval readiness, runtime decision readiness, runtime
+decision lock release, implementation, runtime, tags, or releases.

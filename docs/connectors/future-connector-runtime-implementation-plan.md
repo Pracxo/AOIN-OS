@@ -261,3 +261,11 @@ connector implementation approval remains false, connector runtime remains
 disabled, and external calls, credential/token storage, sandbox execution,
 provider SDK dependencies, connector SDK dependencies, and runtime route
 registration remain disabled or absent.
+
+AION-140 finalizes connector runtime candidate evidence in the decision
+package final review only. Runtime decision lock release approval remains
+false, runtime decision readiness approval remains false, connector
+implementation approval remains false, connector runtime remains disabled, and
+external calls, credential/token storage, sandbox execution, provider SDK
+dependencies, connector SDK dependencies, and runtime route registration
+remain disabled or absent.

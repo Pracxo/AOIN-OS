@@ -55,3 +55,11 @@ does not approve approval readiness, runtime decision readiness, review board
 decisions, routing decisions, reviewer sign-off as implementation approval,
 submission approval, request pack approval, implementation approval, tag
 creation, or release creation.
+
+## AION-140 Approval Readiness Closeout Handoff
+
+AION-140 closes this bundle as approval readiness evidence only. Closeout
+status does not approve approval readiness, runtime decision readiness, runtime
+decision lock release, review board decisions, routing decisions, reviewer
+sign-off as implementation approval, submissions, request packs,
+implementation, tags, or releases.

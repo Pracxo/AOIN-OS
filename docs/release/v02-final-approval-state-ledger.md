@@ -93,3 +93,11 @@ freeze preview-only true, decision package approval false, approval readiness
 approval false, review board decision approval false, routing decision approval
 false, reviewer sign-off implementation approval false, runtime implementation
 approval false, v0.2 tag absent, and v0.2 release absent.
+
+AION-140 extends the final ledger with runtime decision lock created true,
+runtime decision lock release approval false, runtime decision readiness
+approval false, decision package final review passed true, decision package
+preview-only true, decision package approval false, approval readiness approval
+false, review board decision approval false, routing decision approval false,
+reviewer sign-off implementation approval false, runtime implementation
+approval false, v0.2 tag absent, and v0.2 release absent.

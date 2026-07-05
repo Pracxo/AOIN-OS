@@ -2090,6 +2090,20 @@ implementation approval, workstream implementation approval, backlog
 implementation approval, or runtime implementation approval as true is a
 release blocker.
 
+## AION-140 Decision Package Final Review Policy
+
+AION-140 extends the policy lock to decision package final review and runtime
+decision lock. Final review, approval readiness closeout, runtime decision
+lock, final evidence matrix, approval guard, ADR dependency evidence, and gate
+dependency evidence are policy inputs only. Any attempt to mark runtime
+decision lock release approval, runtime decision readiness approval, decision
+package approval, approval readiness approval, review board decision approval,
+routing decision approval, reviewer sign-off implementation approval,
+preapproval queue item approval, request pack approval, submission approval,
+approval queue item approval, proposal implementation approval, workstream
+implementation approval, backlog implementation approval, or runtime
+implementation approval as true is a release blocker.
+
 ## AION-138 Decision Package Policy
 
 AION-138 extends the policy lock to the decision package preview. Decision

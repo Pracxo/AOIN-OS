@@ -675,6 +675,11 @@ pre {
   color: var(--accent);
 }
 
+#v02-decision-package-final-review,
+#v02-runtime-decision-lock {
+  border-color: rgba(47, 123, 110, 0.35);
+}
+
 @media (max-width: 820px) {
   .layout {
     grid-template-columns: 1fr;

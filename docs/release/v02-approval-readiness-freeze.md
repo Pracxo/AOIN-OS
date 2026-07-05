@@ -55,3 +55,11 @@ gate dependency bypassed, external call enablement, credential or token
 storage, sandbox execution, package files, migrations, runtime API execution
 routes, v0.2 tag creation, or v0.2 release creation.
 
+## AION-140 Approval Readiness Closeout Handoff
+
+AION-140 closes this freeze as approval readiness evidence only. Approval
+readiness approval, decision package approval, runtime decision readiness
+approval, runtime decision lock release approval, review board decision
+approval, routing decision approval, reviewer sign-off implementation
+approval, submission approval, request pack approval, implementation approval,
+v0.2 tag creation, and v0.2 release creation remain false or absent.

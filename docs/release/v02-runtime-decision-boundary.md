@@ -39,3 +39,13 @@ package approval remains false, approval readiness approval remains false, and
 gate success remains insufficient to enable connector runtime, operator write
 execution, production auth, module activation, sandbox execution, external
 calls, credential storage, token storage, tags, or releases.
+
+## AION-140 Runtime Decision Lock Handoff
+
+AION-140 creates a runtime decision lock from this boundary but does not
+approve lock release or runtime readiness. Runtime decision lock release
+approval remains false, runtime decision readiness approval remains false,
+runtime implementation approval remains false, and the lock remains
+insufficient to enable connector runtime, operator write execution, production
+auth, module activation, sandbox execution, external calls, credential storage,
+token storage, tags, or releases.

@@ -34,3 +34,11 @@ AION-139 stabilizes this baseline as decision package evidence only. Baseline
 completeness does not approve runtime decision readiness, decision packages,
 approval readiness, implementation, review-board decisions, routing decisions,
 submissions, request packs, preapproval queue items, tags, or releases.
+
+## AION-140 Runtime Decision Lock Handoff
+
+AION-140 closes this baseline into runtime decision lock evidence only.
+Baseline completeness does not approve runtime decision lock release, runtime
+decision readiness, decision packages, approval readiness, implementation,
+review-board decisions, routing decisions, submissions, request packs,
+preapproval queue items, tags, or releases.

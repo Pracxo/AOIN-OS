@@ -1,10 +1,11 @@
-# v0.2 Decision Package Stabilization No-Go
+# v0.2 Runtime Decision Final No-Go
 
-AION-139 fails if any of these conditions are present:
+The final no-go regression blocks these conditions:
 
+- runtime decision lock release approved true
+- runtime decision readiness approved true
 - decision package approval true
 - approval readiness approved true
-- runtime decision readiness approved true
 - review board decision approval true
 - routing decision approval true
 - reviewer sign-off marked implementation approval true
@@ -37,17 +38,3 @@ AION-139 fails if any of these conditions are present:
 - package files added
 - migrations added
 - runtime API execution routes added
-
-The no-go pack also rejects privileged bypass, package installation
-instructions, external endpoints, raw secret material, token material, and
-runtime execution markers.
-
-## AION-140 No-Go Handoff
-
-AION-140 extends this no-go pack with runtime decision lock release approval
-checks. Runtime decision lock release approval true, runtime decision
-readiness approval true, decision package approval true, approval readiness
-approved true, review board approval true, routing approval true, reviewer
-sign-off implementation approval true, implementation approval true, external
-calls, credentials or tokens, sandbox execution, v0.2 tag creation, and v0.2
-release creation remain blocked.

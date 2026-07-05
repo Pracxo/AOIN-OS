@@ -106,3 +106,9 @@ package stabilization input only. Runtime decision readiness approval, decision
 package approval, approval readiness approval, review board decision approval,
 routing decision approval, reviewer sign-off implementation approval, and
 runtime implementation approval remain false.
+
+AION-140 consumes this same review board stabilization evidence as final
+review input only. Runtime decision lock release approval, runtime decision
+readiness approval, decision package approval, approval readiness approval,
+review board decision approval, routing decision approval, reviewer sign-off
+implementation approval, and runtime implementation approval remain false.

@@ -118,6 +118,9 @@
     "./scripts/v02-decision-package-stabilization-gate.sh",
     "./scripts/v02-approval-readiness-freeze.sh",
     "./scripts/v02-decision-package-stabilization-no-go-regression.sh",
+    "./scripts/v02-decision-package-final-review.sh",
+    "./scripts/v02-runtime-decision-lock-freeze.sh",
+    "./scripts/v02-decision-package-final-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -217,7 +220,9 @@
     decision_package_preview: "demo-data/v02-decision-package-preview.json",
     approval_readiness_evidence_bundle: "demo-data/v02-approval-readiness-evidence-bundle.json",
     decision_package_stabilization: "demo-data/v02-decision-package-stabilization.json",
-    approval_readiness_freeze: "demo-data/v02-approval-readiness-freeze.json"
+    approval_readiness_freeze: "demo-data/v02-approval-readiness-freeze.json",
+    decision_package_final_review: "demo-data/v02-decision-package-final-review.json",
+    runtime_decision_lock: "demo-data/v02-runtime-decision-lock.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1722,7 +1727,9 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.decision_package_preview),
       fetchJson(RELEASE_CANDIDATE_DEMOS.approval_readiness_evidence_bundle),
       fetchJson(RELEASE_CANDIDATE_DEMOS.decision_package_stabilization),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.approval_readiness_freeze)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.approval_readiness_freeze),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.decision_package_final_review),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.runtime_decision_lock)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
@@ -1769,6 +1776,8 @@
         renderReleaseCandidateEvidence("v02-approval-readiness-evidence-bundle", redact(payloads[41]));
         renderReleaseCandidateEvidence("v02-decision-package-stabilization", redact(payloads[42]));
         renderReleaseCandidateEvidence("v02-approval-readiness-freeze", redact(payloads[43]));
+        renderReleaseCandidateEvidence("v02-decision-package-final-review", redact(payloads[44]));
+        renderReleaseCandidateEvidence("v02-runtime-decision-lock", redact(payloads[45]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
@@ -1815,6 +1824,8 @@
         renderReleaseCandidateEvidence("v02-approval-readiness-evidence-bundle", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-decision-package-stabilization", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-approval-readiness-freeze", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-decision-package-final-review", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-runtime-decision-lock", { status: "unavailable" });
       });
   }
 

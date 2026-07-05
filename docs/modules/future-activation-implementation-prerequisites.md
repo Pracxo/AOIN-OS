@@ -259,3 +259,11 @@ module activation implementation approval remains false, and capability
 activation, code loading, runtime registration, controlled execution, package
 installation, external dependency download, module writes, policy bypass,
 audit bypass, and privileged bypass remain disabled or absent.
+
+AION-140 finalizes module activation candidate evidence in the decision
+package final review only. Runtime decision lock release approval remains
+false, runtime decision readiness approval remains false, module activation
+implementation approval remains false, and capability activation, code loading,
+runtime registration, controlled execution, package installation, external
+dependency download, module writes, policy bypass, audit bypass, and privileged
+bypass remain disabled or absent.

@@ -4714,3 +4714,23 @@ is created, and no v0.2 release is created.
 ./scripts/v02-approval-readiness-freeze.sh
 ./scripts/v02-decision-package-stabilization-no-go-regression.sh
 ```
+
+## AION-140 v0.2 Decision Package Final Review
+
+AION-140 closes the v0.2 decision package layer into a final pre-approval
+baseline and creates the runtime decision lock. The decision package remains
+preview-only: decision package approval remains false, approval readiness
+approval remains false, runtime decision readiness approval remains false,
+runtime decision lock release approval remains false, review board decision
+approval remains false, routing decision approval remains false, reviewer
+sign-off implementation approval remains false, submission approval remains
+false, request pack approval remains false, runtime implementation approval
+remains false, no external calls are added, no credentials or tokens are
+stored, no sandbox execution is enabled, no v0.2 tag is created, and no v0.2
+release is created.
+
+```bash
+./scripts/v02-decision-package-final-review.sh
+./scripts/v02-runtime-decision-lock-freeze.sh
+./scripts/v02-decision-package-final-no-go-regression.sh
+```

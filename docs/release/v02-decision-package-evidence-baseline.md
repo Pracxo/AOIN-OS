@@ -16,3 +16,12 @@ implementation.
 | module activation candidate | stabilized preview | preview-only | module reviewer evidence | unapproved | false | false | false | future module activation ADR | future module activation gate | activation remains disabled | prepare activation blocker review |
 | production UI decision candidate | stabilized preview | preview-only | UI and accessibility reviewer evidence | unapproved | false | false | false | future production UI ADR | future UI release gate | no frontend dependencies approved | define UI implementation boundary |
 
+## AION-140 Final Evidence Matrix Handoff
+
+AION-140 consumes this baseline into the final evidence matrix. Candidate
+evidence remains advisory: decision package approval, approval readiness
+approval, runtime decision readiness approval, runtime decision lock release
+approval, review board decision approval, routing decision approval, reviewer
+sign-off implementation approval, request approval, submission approval,
+preapproval queue approval, implementation approval, tag creation, and release
+creation remain false or absent.

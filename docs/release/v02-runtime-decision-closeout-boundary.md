@@ -38,3 +38,11 @@ notifications, external calls, credentials, or tokens.
 No v0.2 tag is created. No v0.2 release is created. The aion-v0.1.0 release
 baseline remains untouched.
 
+## AION-140 Runtime Decision Lock Handoff
+
+AION-140 turns this closeout boundary into a runtime decision lock while
+keeping release approval false. Runtime decision lock release approval, runtime
+decision readiness approval, runtime implementation approval, decision package
+approval, approval readiness approval, review board decision approval, routing
+decision approval, reviewer sign-off implementation approval, v0.2 tag
+creation, and v0.2 release creation remain false or absent.

@@ -225,3 +225,11 @@ auth implementation approval remains false, and login/logout endpoints,
 session persistence, cookie issuance, token issuance, external identity
 provider runtime, OAuth/OIDC/SAML runtime, credential storage, and token
 storage remain disabled or absent.
+
+AION-140 finalizes production auth candidate evidence in the decision package
+final review only. Runtime decision lock release approval remains false,
+runtime decision readiness approval remains false, production auth
+implementation approval remains false, and login/logout endpoints, session
+persistence, cookie issuance, token issuance, external identity provider
+runtime, OAuth/OIDC/SAML runtime, credential storage, and token storage remain
+disabled or absent.

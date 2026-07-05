@@ -32,3 +32,11 @@
 Closeout remains evidence only. It is not implementation approval and not
 runtime enablement.
 
+## AION-140 Final Review Checklist Handoff
+
+AION-140 extends this closeout checklist into final review. The final checklist
+adds runtime decision lock release approval false, decision package approval
+false, approval readiness approval false, runtime decision readiness approval
+false, review board approval false, routing approval false, reviewer sign-off
+implementation approval false, no implementation approval, no v0.2 tag, and no
+v0.2 release.
