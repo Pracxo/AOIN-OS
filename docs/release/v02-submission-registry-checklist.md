@@ -22,3 +22,12 @@
 
 The checklist is evidence only. It does not approve implementation, queue
 items, request packs, submissions, or release creation.
+
+## AION-135 Stabilization Handoff
+
+AION-135 extends this checklist with
+`docs/release/v02-submission-registry-closeout-checklist.md`. The closeout
+requires the submission registry preview, pre-approval queue freeze,
+stabilization no-go regression, request pack gates, no runtime implementation,
+no submission approval, no preapproval queue approval, no request approval, no
+v0.2 tag, and no v0.2 release.

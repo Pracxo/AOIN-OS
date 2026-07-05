@@ -79,3 +79,10 @@ AION-134 adds a preview-only pre-approval queue boundary after this gate.
 Submission approval remains false, preapproval queue item approval remains
 false, request pack approval remains false, implementation approval remains
 false, and no v0.2 tag or release is created.
+
+## AION-135 Submission Registry Stabilization Dependency
+
+AION-135 inherits this pre-approval submission gate and freezes the queue as
+preview-only evidence. The gate does not create approval records, does not
+bypass ADR or gate dependencies, does not enable runtime, and does not create a
+v0.2 tag or release.

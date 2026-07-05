@@ -222,3 +222,12 @@ runtime, external calls, connector SDK dependencies, credential storage, token
 storage, sandbox execution, activation, route registration, package files,
 migrations, v0.2 tag creation, and v0.2 release creation remain false or
 absent.
+
+## AION-135 Submission Registry Stabilization Boundary
+
+AION-135 may list connector runtime, credential store, and sandbox runtime as
+future request candidates, but it does not approve connector implementation and
+does not enable connector runtime. External calls, connector activation,
+credential storage, token storage, OAuth/OIDC/SAML runtime, sandbox execution,
+provider SDK dependencies, connector SDK dependencies, and runtime route
+registration remain disabled or absent.

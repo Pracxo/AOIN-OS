@@ -1196,3 +1196,11 @@ implementation remains blocked by the submission registry preview and
 pre-approval queue boundary until a later scoped approval task supplies
 explicit approval records, ADRs, gate evidence, review evidence,
 rollback/audit evidence, and no-go regression evidence.
+
+## AION-135 SDK Boundary
+
+AION-135 adds no SDK resources, no SDK clients, no CLI-backed SDK commands, no
+network clients, no provider SDK dependencies, and no connector SDK
+dependencies. The submission registry stabilization examples are synthetic
+evidence artifacts only and must not be interpreted as an SDK runtime contract
+or implementation approval.

@@ -1073,3 +1073,11 @@ surface is local verification through submission registry preview scripts:
 `./scripts/v02-submission-registry-preview-check.sh`,
 `./scripts/v02-preapproval-queue-freeze.sh`, and
 `./scripts/v02-preapproval-queue-no-go-regression.sh`.
+
+## AION-135 CLI Boundary
+
+AION-135 adds local shell gates for documentation and evidence validation only.
+It adds no CLI command implementation, no runtime execution command, no write
+path, no connector runtime command, no sandbox command, no external-call
+command, no credential/token command, no package command, no migration command,
+and no release or tag command.

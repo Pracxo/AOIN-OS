@@ -600,3 +600,23 @@ Validate the v0.2 submission registry preview evidence:
 ./scripts/v02-preapproval-queue-freeze.sh
 ./scripts/v02-preapproval-queue-no-go-regression.sh
 ```
+
+## AION-135 v0.2 Submission Registry Stabilization Panels
+
+The static console includes v0.2 submission registry stabilization and
+pre-approval queue freeze panels. They load bundled JSON only, keep the
+submission registry stabilized as preview-only evidence, keep the pre-approval
+queue preview-only, keep preapproval queue item approval false, keep request
+pack approval false, keep submission approval false, keep approval queue item
+approval false, keep proposal implementation approval false, keep workstream
+implementation approval false, and keep runtime implementation approval false.
+They expose no input, package, migration, runtime, release, tag, approval,
+bypass, or write controls.
+
+Validate the v0.2 submission registry stabilization evidence:
+
+```bash
+./scripts/v02-submission-registry-stabilization-gate.sh
+./scripts/v02-submission-registry-freeze.sh
+./scripts/v02-submission-registry-stabilization-no-go-regression.sh
+```

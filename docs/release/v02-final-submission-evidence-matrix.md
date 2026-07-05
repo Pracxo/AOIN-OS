@@ -14,3 +14,10 @@ AION-134 adds a submission registry evidence matrix above this final submission
 matrix. The new matrix remains preview-only and keeps submission approval,
 preapproval queue item approval, request pack approval, implementation
 approval, v0.2 tag creation, and v0.2 release creation false.
+
+## AION-135 Submission Registry Stabilization Dependency
+
+AION-135 uses this matrix as inherited evidence for candidate closeout. The
+matrix remains a review artifact only and does not approve submissions,
+requests, proposals, workstreams, backlog items, runtime implementation,
+external calls, credentials, tokens, sandbox execution, tags, or releases.

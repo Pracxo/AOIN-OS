@@ -54,3 +54,12 @@ preview-only states to the ledger. Preapproval queue item approval, request
 pack approval, submission approval, runtime implementation approval, proposal
 implementation approval, approval queue item approval, release creation, and
 tag creation remain false.
+
+## AION-135 Submission Registry Stabilization Entry
+
+AION-135 records submission registry stabilization as preview-only evidence.
+The ledger state remains unchanged for approvals: submission approval false,
+request pack approval false, preapproval queue item approval false, approval
+queue item approval false, proposal implementation approval false, workstream
+implementation approval false, backlog implementation approval false, runtime
+implementation approval false, v0.2 tag absent, and v0.2 release absent.

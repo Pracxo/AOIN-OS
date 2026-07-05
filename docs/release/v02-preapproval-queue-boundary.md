@@ -46,3 +46,10 @@ creation, production auth enablement, connector runtime enablement, operator
 write execution enablement, module activation enablement, external calls,
 credential/token storage, sandbox execution, package files, migrations, or
 runtime API execution routes.
+
+## AION-135 Stabilization Handoff
+
+AION-135 freezes this boundary as a preview-only pre-approval queue baseline.
+Queue placement remains planning evidence only and does not approve
+implementation, enable runtime, bypass ADR dependencies, bypass gate
+dependencies, create a v0.2 tag, or create a v0.2 release.

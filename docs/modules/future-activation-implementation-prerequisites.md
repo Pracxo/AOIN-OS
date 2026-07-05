@@ -221,3 +221,11 @@ approval, module activation approval, code loading, runtime registration,
 capability activation, package installation, controlled execution, external
 dependency download, v0.2 tag creation, and v0.2 release creation remain
 false, disabled, or absent.
+
+## AION-135 Submission Registry Stabilization Boundary
+
+AION-135 may list module activation as a future request candidate, but it does
+not approve module activation implementation and does not enable activation.
+Capability activation, code loading, runtime registration, controlled
+execution, package installation, external dependency download, module writes,
+policy bypass, audit bypass, and privileged bypass remain disabled or absent.

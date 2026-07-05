@@ -197,3 +197,12 @@ approval, operator write execution, connector implementation, production auth,
 module activation, external calls, credential storage, token storage, sandbox
 execution, v0.2 tag creation, v0.2 release creation, and v0.2 release approval
 remain false.
+
+## AION-135 Submission Registry Stabilization State
+
+AION-135 does not change implementation approval state. Submission registry
+stabilization, pre-approval queue freeze, request candidate closeout, and
+lifecycle evidence remain planning artifacts only. Runtime implementation
+approval, backlog implementation approval, workstream implementation approval,
+proposal implementation approval, request approval, submission approval, and
+preapproval queue item approval remain false.

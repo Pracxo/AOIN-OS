@@ -31,3 +31,10 @@ queued for preapproval review state still keeps `submission_approval=false` and
 Rejected, expired, revoked, submission unapproved, and implementation
 unapproved states are blockers. They do not hard-delete records and do not
 grant bypass authority.
+
+## AION-135 Evidence Baseline Handoff
+
+AION-135 maps the lifecycle into
+`docs/release/v02-submission-lifecycle-evidence-baseline.md`. The lifecycle
+still allows planning states only; submission approved, implementation
+approved, and runtime enabled remain false in every state.

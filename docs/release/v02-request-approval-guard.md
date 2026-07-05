@@ -39,3 +39,11 @@ AION-134 extends this guard to submission registry and pre-approval queue
 records. Registry preview and queue preview records cannot approve submissions,
 preapproval queue items, request packs, implementations, releases, tags, or
 privileged bypass.
+
+## AION-135 Submission Registry Stabilization Dependency
+
+AION-135 keeps this request approval guard active for all stabilized request
+candidates. Request approval, submission approval, preapproval queue item
+approval, implementation approval, runtime approval, approval workflow bypass,
+approval record missing, ADR dependency bypass, and gate dependency bypass all
+remain blocked conditions.

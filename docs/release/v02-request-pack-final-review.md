@@ -109,3 +109,11 @@ registry preview and pre-approval queue boundary. The handoff catalogs request
 candidates only and keeps request pack approval, submission approval,
 preapproval queue item approval, runtime implementation approval, v0.2 tag
 creation, and v0.2 release creation false.
+
+## AION-135 Submission Registry Stabilization Dependency
+
+AION-135 depends on this final review remaining planning evidence only. Request
+pack approval, submission approval, preapproval queue item approval, proposal
+implementation approval, workstream implementation approval, backlog
+implementation approval, runtime implementation approval, v0.2 tag creation,
+and v0.2 release creation remain false or absent.

@@ -22,3 +22,11 @@ implementation approval false.
 No candidate status approves implementation or enables runtime. Candidates can
 advance only as planning records until explicit approval records, ADRs, and
 gate evidence exist in a future milestone.
+
+## AION-135 Closeout Handoff
+
+AION-135 closes out these request candidates into
+`docs/release/v02-request-candidate-closeout-baseline.md`. Each candidate keeps
+submission approval false, implementation approval false, pre-approval queue
+approval false, runtime approval false, and a blocker plus next planning
+action.

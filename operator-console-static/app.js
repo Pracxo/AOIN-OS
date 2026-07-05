@@ -103,6 +103,9 @@
     "./scripts/v02-submission-registry-preview-check.sh",
     "./scripts/v02-preapproval-queue-freeze.sh",
     "./scripts/v02-preapproval-queue-no-go-regression.sh",
+    "./scripts/v02-submission-registry-stabilization-gate.sh",
+    "./scripts/v02-submission-registry-freeze.sh",
+    "./scripts/v02-submission-registry-stabilization-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -192,7 +195,9 @@
     request_pack_final_review: "demo-data/v02-request-pack-final-review.json",
     preapproval_submission_gate: "demo-data/v02-preapproval-submission-gate.json",
     submission_registry_preview: "demo-data/v02-submission-registry-preview.json",
-    preapproval_queue_boundary: "demo-data/v02-preapproval-queue-boundary.json"
+    preapproval_queue_boundary: "demo-data/v02-preapproval-queue-boundary.json",
+    submission_registry_stabilization: "demo-data/v02-submission-registry-stabilization.json",
+    preapproval_queue_freeze: "demo-data/v02-preapproval-queue-freeze.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1687,7 +1692,9 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.request_pack_final_review),
       fetchJson(RELEASE_CANDIDATE_DEMOS.preapproval_submission_gate),
       fetchJson(RELEASE_CANDIDATE_DEMOS.submission_registry_preview),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.preapproval_queue_boundary)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.preapproval_queue_boundary),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.submission_registry_stabilization),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.preapproval_queue_freeze)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
@@ -1724,6 +1731,8 @@
         renderReleaseCandidateEvidence("v02-preapproval-submission-gate", redact(payloads[31]));
         renderReleaseCandidateEvidence("v02-submission-registry-preview", redact(payloads[32]));
         renderReleaseCandidateEvidence("v02-preapproval-queue-boundary", redact(payloads[33]));
+        renderReleaseCandidateEvidence("v02-submission-registry-stabilization", redact(payloads[34]));
+        renderReleaseCandidateEvidence("v02-preapproval-queue-freeze", redact(payloads[35]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
@@ -1760,6 +1769,8 @@
         renderReleaseCandidateEvidence("v02-preapproval-submission-gate", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-submission-registry-preview", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-preapproval-queue-boundary", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-submission-registry-stabilization", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-preapproval-queue-freeze", { status: "unavailable" });
       });
   }
 
@@ -1797,6 +1808,8 @@
       ["evidence_boundary_closed_out", String(Boolean(payload.evidence_boundary_closed_out))],
       ["preapproval_submission_gate_created", String(Boolean(payload.preapproval_submission_gate_created))],
       ["v02_submission_registry_preview_created", String(Boolean(payload.v02_submission_registry_preview_created))],
+      ["v02_submission_registry_stabilized", String(Boolean(payload.v02_submission_registry_stabilized))],
+      ["submission_registry_stabilized", String(Boolean(payload.submission_registry_stabilized))],
       ["submission_registry_preview_only", String(Boolean(payload.submission_registry_preview_only))],
       ["preapproval_queue_preview_only", String(Boolean(payload.preapproval_queue_preview_only))],
       ["preapproval_queue_item_approved", String(Boolean(payload.preapproval_queue_item_approved))],

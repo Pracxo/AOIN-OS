@@ -2058,3 +2058,13 @@ Preapproval queue item approval, request pack approval, submission approval,
 proposal implementation approval, approval queue item approval, runtime
 implementation approval, v0.2 tag creation, and v0.2 release creation remain
 false.
+
+## AION-135 Submission Registry Stabilization Policy
+
+AION-135 keeps the submission registry and pre-approval queue in a preview-only
+policy state. Policy evaluation must treat queue placement, reviewer evidence,
+ADR dependencies, and gate dependencies as planning evidence only. Any attempt
+to mark submission approval, request pack approval, preapproval queue item
+approval, proposal implementation approval, workstream implementation approval,
+backlog implementation approval, or runtime implementation approval as true is
+a release blocker.

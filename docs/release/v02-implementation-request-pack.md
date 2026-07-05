@@ -84,3 +84,10 @@ submission registry preview. Candidate records are planning-only and keep
 request pack approval, submission approval, preapproval queue item approval,
 implementation approval, runtime enablement, v0.2 tag creation, and v0.2
 release creation false.
+
+## AION-135 Submission Registry Stabilization Dependency
+
+AION-135 uses the implementation request pack as candidate context only. The
+pack does not approve implementation, does not approve request items, does not
+approve submissions, does not enable runtime, does not add API or SDK
+execution surfaces, and does not create a v0.2 tag or release.

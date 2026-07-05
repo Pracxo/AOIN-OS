@@ -1250,3 +1250,12 @@ queue boundary preview data. The panels are read-only, redacted, synthetic,
 and local. They expose no inputs, no write controls, no release controls, no
 tag controls, no approval controls, no runtime controls, no external calls, no
 credentials/tokens, and no sandbox execution.
+
+## AION-135 Static Evidence Panels
+
+The static visual brain includes AION-135 submission registry stabilization and
+pre-approval queue freeze panels backed by bundled JSON. The panels remain
+read-only, redacted, and non-executing. They present planning evidence,
+blockers, warnings, and false approval states only; they do not expose inputs,
+write controls, activation controls, external-call controls, credential
+storage, token storage, sandbox execution, a v0.2 tag, or a v0.2 release.

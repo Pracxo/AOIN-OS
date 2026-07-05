@@ -186,3 +186,12 @@ evidence only. Production auth implementation remains unapproved.
 OAuth/OIDC/SAML runtime, external identity runtime, credential storage, token
 storage, login, logout, session persistence, v0.2 tag creation, and v0.2
 release creation remain false or absent.
+
+## AION-135 Submission Registry Stabilization Boundary
+
+AION-135 may list production auth as a future request candidate, but it does
+not approve production auth implementation and does not enable production auth
+runtime. Login endpoints, logout endpoints, session persistence, cookie
+issuance, token issuance, external identity provider runtime,
+OAuth/OIDC/SAML runtime, credential storage, and token storage remain disabled
+or absent.

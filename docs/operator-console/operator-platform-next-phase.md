@@ -270,3 +270,11 @@ implementation/runtime approvals false. The console still adds no input
 control, login control, write control, runtime route, package file, migration,
 release action, tag action, approval bypass, ADR bypass, gate bypass, or
 runtime implementation approval control.
+
+## AION-135 Static Console Handoff
+
+AION-135 adds read-only static console panels for submission registry
+stabilization and pre-approval queue freeze. The panels expose bundled,
+redacted JSON evidence only and no inputs, write controls, activation controls,
+external-call controls, credential/token storage, sandbox execution, runtime
+registration, v0.2 tag creation, or v0.2 release creation.

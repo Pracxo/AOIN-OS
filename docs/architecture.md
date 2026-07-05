@@ -2301,3 +2301,13 @@ connector runtime, module activation, external calls, credential storage,
 token storage, sandbox execution, API runtime execution routes, SDK resources,
 CLI implementations, package files, migrations, v0.2 tag creation, and v0.2
 release creation remain false, disabled, or absent.
+
+## AION-135 Submission Registry Stabilization Boundary
+
+AION-135 stabilizes the v0.2 submission registry preview and freezes the
+pre-approval queue as planning evidence only. It adds no runtime architecture,
+API route, SDK resource, CLI implementation, migration, connector runtime,
+operator write execution, production auth runtime, module activation, sandbox
+execution, external call path, credential storage, token storage, v0.2 tag, or
+v0.2 release. All submission, request, proposal, queue, workstream, backlog,
+and runtime approvals remain false.
