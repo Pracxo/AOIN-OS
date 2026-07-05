@@ -620,3 +620,22 @@ Validate the v0.2 submission registry stabilization evidence:
 ./scripts/v02-submission-registry-freeze.sh
 ./scripts/v02-submission-registry-stabilization-no-go-regression.sh
 ```
+
+## AION-136 v0.2 Pre-Approval Review Board Panels
+
+The static console includes v0.2 pre-approval review board and submission
+review routing panels. They load bundled JSON only, keep the review board
+planning-only, keep review board decision approval false, keep preapproval
+queue item approval false, keep request pack approval false, keep submission
+approval false, keep approval queue item approval false, keep proposal
+implementation approval false, keep workstream implementation approval false,
+and keep runtime implementation approval false. They expose no input, package,
+migration, runtime, release, tag, approval, bypass, or write controls.
+
+Validate the v0.2 pre-approval review board evidence:
+
+```bash
+./scripts/v02-preapproval-review-board-check.sh
+./scripts/v02-review-board-freeze.sh
+./scripts/v02-review-board-no-go-regression.sh
+```

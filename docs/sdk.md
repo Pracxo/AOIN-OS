@@ -1204,3 +1204,11 @@ network clients, no provider SDK dependencies, and no connector SDK
 dependencies. The submission registry stabilization examples are synthetic
 evidence artifacts only and must not be interpreted as an SDK runtime contract
 or implementation approval.
+
+## AION-136 SDK Boundary
+
+AION-136 adds no SDK resources, no SDK clients, no CLI-backed SDK commands, no
+network clients, no provider SDK dependencies, and no connector SDK
+dependencies. Review board and submission routing examples are synthetic
+planning artifacts only and must not be interpreted as SDK runtime contracts,
+implementation approval, submission approval, or release approval.

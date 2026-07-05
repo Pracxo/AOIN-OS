@@ -4642,3 +4642,20 @@ release is created.
 ./scripts/v02-submission-registry-freeze.sh
 ./scripts/v02-submission-registry-stabilization-no-go-regression.sh
 ```
+
+## AION-136 v0.2 Pre-Approval Review Board
+
+AION-136 adds the pre-approval review board, submission review routing,
+reviewer role matrix, decision readiness boundary, and review-board evidence
+pack. The board is planning-only: review board decision approval remains false,
+preapproval queue approvals remain false, request pack approval remains false,
+submission approval remains false, runtime implementation approval remains
+false, no external calls are added, no credentials or tokens are stored, no
+sandbox execution is enabled, no v0.2 tag is created, and no v0.2 release is
+created.
+
+```bash
+./scripts/v02-preapproval-review-board-check.sh
+./scripts/v02-review-board-freeze.sh
+./scripts/v02-review-board-no-go-regression.sh
+```

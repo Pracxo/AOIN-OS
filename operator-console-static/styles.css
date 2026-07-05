@@ -460,7 +460,9 @@ h1 {
 .module-subpanel[aria-label="v0.2 submission registry preview"],
 .module-subpanel[aria-label="v0.2 pre-approval queue boundary"],
 .module-subpanel[aria-label="v0.2 submission registry stabilization"],
-.module-subpanel[aria-label="v0.2 pre-approval queue freeze"] {
+.module-subpanel[aria-label="v0.2 pre-approval queue freeze"],
+.module-subpanel[aria-label="v0.2 pre-approval review board"],
+.module-subpanel[aria-label="v0.2 submission review routing"] {
   border-color: rgb(142 207 178 / 35%);
 }
 
@@ -491,13 +493,16 @@ h1 {
 .planning-track-row span,
 .planning-track-row strong,
 .request-pack-row span,
-.request-pack-row strong {
+.request-pack-row strong,
+.review-board-row span,
+.review-board-row strong {
   min-width: 0;
 }
 
 .final-planning-row strong,
 .planning-track-row strong,
-.request-pack-row strong {
+.request-pack-row strong,
+.review-board-row strong {
   color: var(--ready);
 }
 

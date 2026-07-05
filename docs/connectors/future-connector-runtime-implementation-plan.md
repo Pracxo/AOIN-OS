@@ -231,3 +231,10 @@ does not enable connector runtime. External calls, connector activation,
 credential storage, token storage, OAuth/OIDC/SAML runtime, sandbox execution,
 provider SDK dependencies, connector SDK dependencies, and runtime route
 registration remain disabled or absent.
+
+AION-136 may route connector runtime, credential store, and sandbox runtime
+candidates to future reviewers, but routing is not approval. Connector
+implementation approval remains false, connector runtime remains disabled, and
+external calls, credential/token storage, sandbox execution, provider SDK
+dependencies, connector SDK dependencies, and runtime route registration remain
+disabled or absent.

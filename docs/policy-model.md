@@ -2068,3 +2068,11 @@ to mark submission approval, request pack approval, preapproval queue item
 approval, proposal implementation approval, workstream implementation approval,
 backlog implementation approval, or runtime implementation approval as true is
 a release blocker.
+
+AION-136 extends the policy lock to review-board routing. Review board decision
+approval, reviewer sign-off, routing readiness, ADR readiness, gate readiness,
+and evidence readiness are policy inputs only; any attempt to set review board
+decision approval, preapproval queue item approval, request pack approval,
+submission approval, approval queue approval, proposal implementation approval,
+workstream implementation approval, backlog implementation approval, or runtime
+implementation approval to true is a release blocker.

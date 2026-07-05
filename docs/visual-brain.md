@@ -1259,3 +1259,12 @@ read-only, redacted, and non-executing. They present planning evidence,
 blockers, warnings, and false approval states only; they do not expose inputs,
 write controls, activation controls, external-call controls, credential
 storage, token storage, sandbox execution, a v0.2 tag, or a v0.2 release.
+
+## AION-136 Review Board Panels
+
+The static visual brain now includes AION-136 pre-approval review board and
+submission review routing panels backed by bundled JSON. The panels remain
+read-only, redacted, and non-executing. They expose reviewer routing,
+decision-readiness blockers, and false approval states only; they do not expose
+inputs, write controls, activation controls, external-call controls,
+credential/token storage, sandbox execution, a v0.2 tag, or a v0.2 release.

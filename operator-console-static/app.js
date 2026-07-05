@@ -106,6 +106,9 @@
     "./scripts/v02-submission-registry-stabilization-gate.sh",
     "./scripts/v02-submission-registry-freeze.sh",
     "./scripts/v02-submission-registry-stabilization-no-go-regression.sh",
+    "./scripts/v02-preapproval-review-board-check.sh",
+    "./scripts/v02-review-board-freeze.sh",
+    "./scripts/v02-review-board-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -197,7 +200,9 @@
     submission_registry_preview: "demo-data/v02-submission-registry-preview.json",
     preapproval_queue_boundary: "demo-data/v02-preapproval-queue-boundary.json",
     submission_registry_stabilization: "demo-data/v02-submission-registry-stabilization.json",
-    preapproval_queue_freeze: "demo-data/v02-preapproval-queue-freeze.json"
+    preapproval_queue_freeze: "demo-data/v02-preapproval-queue-freeze.json",
+    preapproval_review_board: "demo-data/v02-preapproval-review-board.json",
+    submission_review_routing: "demo-data/v02-submission-review-routing.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1694,7 +1699,9 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.submission_registry_preview),
       fetchJson(RELEASE_CANDIDATE_DEMOS.preapproval_queue_boundary),
       fetchJson(RELEASE_CANDIDATE_DEMOS.submission_registry_stabilization),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.preapproval_queue_freeze)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.preapproval_queue_freeze),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.preapproval_review_board),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.submission_review_routing)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
@@ -1733,6 +1740,8 @@
         renderReleaseCandidateEvidence("v02-preapproval-queue-boundary", redact(payloads[33]));
         renderReleaseCandidateEvidence("v02-submission-registry-stabilization", redact(payloads[34]));
         renderReleaseCandidateEvidence("v02-preapproval-queue-freeze", redact(payloads[35]));
+        renderReleaseCandidateEvidence("v02-preapproval-review-board", redact(payloads[36]));
+        renderReleaseCandidateEvidence("v02-submission-review-routing", redact(payloads[37]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
@@ -1771,6 +1780,8 @@
         renderReleaseCandidateEvidence("v02-preapproval-queue-boundary", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-submission-registry-stabilization", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-preapproval-queue-freeze", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-preapproval-review-board", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-submission-review-routing", { status: "unavailable" });
       });
   }
 
@@ -1809,6 +1820,9 @@
       ["preapproval_submission_gate_created", String(Boolean(payload.preapproval_submission_gate_created))],
       ["v02_submission_registry_preview_created", String(Boolean(payload.v02_submission_registry_preview_created))],
       ["v02_submission_registry_stabilized", String(Boolean(payload.v02_submission_registry_stabilized))],
+      ["v02_preapproval_review_board_created", String(Boolean(payload.v02_preapproval_review_board_created))],
+      ["review_board_planning_only", String(Boolean(payload.review_board_planning_only))],
+      ["review_board_decision_approval", String(Boolean(payload.review_board_decision_approval))],
       ["submission_registry_stabilized", String(Boolean(payload.submission_registry_stabilized))],
       ["submission_registry_preview_only", String(Boolean(payload.submission_registry_preview_only))],
       ["preapproval_queue_preview_only", String(Boolean(payload.preapproval_queue_preview_only))],
@@ -1849,7 +1863,7 @@
       ["sandbox_execution_approved", String(Boolean(payload.sandbox_execution_approved))]
     ].forEach(function (item) {
       var row = document.createElement("div");
-      row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row preimplementation-master-row proposal-registry-row proposal-registry-stabilization-row planning-master-row final-planning-row planning-track-row request-pack-row submission-registry-row";
+      row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row preimplementation-master-row proposal-registry-row proposal-registry-stabilization-row planning-master-row final-planning-row planning-track-row request-pack-row submission-registry-row review-board-row";
       var label = document.createElement("span");
       label.textContent = item[0];
       var value = document.createElement("strong");
@@ -1862,7 +1876,7 @@
       .slice(0, 4)
       .forEach(function (section) {
         var row = document.createElement("div");
-        row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row preimplementation-master-row proposal-registry-row proposal-registry-stabilization-row planning-master-row final-planning-row planning-track-row request-pack-row submission-registry-row";
+        row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row preimplementation-master-row proposal-registry-row proposal-registry-stabilization-row planning-master-row final-planning-row planning-track-row request-pack-row submission-registry-row review-board-row";
         var label = document.createElement("span");
         label.textContent = safeText(section.title || section.section_key || "section");
         var value = document.createElement("strong");

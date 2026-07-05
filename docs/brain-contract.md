@@ -2017,3 +2017,10 @@ actions. They must not approve submissions, approve request packs, approve
 pre-approval queue items, approve implementation, enable runtime, execute
 tools, execute write paths, call external services, store credentials or
 tokens, create a v0.2 tag, or create a v0.2 release.
+
+The AION-136 contract adds review board routing records as read-only planning
+metadata. Review board decisions, reviewer sign-off, routing readiness, ADR
+readiness, and gate readiness must not approve submissions, approve request
+packs, approve preapproval queue items, approve implementation, enable runtime,
+execute tools, call external services, store credentials or tokens, create a
+v0.2 tag, or create a v0.2 release.

@@ -54,3 +54,9 @@ if approval record missing is present, if ADR or gate dependencies are
 bypassed, if external calls are enabled, if credentials or tokens are stored, if
 sandbox execution is enabled, if package files or migrations are added, or if a
 v0.2 tag or release is created.
+
+## AION-136 Review Board Handoff
+
+AION-136 routes future submissions through a pre-approval review board without
+unfreezing this queue. Queue placement remains preview-only, preapproval queue
+item approval remains false, and review board decision approval remains false.

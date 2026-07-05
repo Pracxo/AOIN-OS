@@ -89,3 +89,7 @@ The handoff keeps the submission registry preview-only, keeps preapproval
 queue item approval false, keeps request pack approval false, keeps submission
 approval false, keeps implementation approvals false, and creates no v0.2 tag
 or release.
+
+AION-136 preserves the same preview-only registry posture while adding
+review-board routing. Routing readiness is not submission approval,
+implementation approval, runtime enablement, tag creation, or release creation.

@@ -53,3 +53,8 @@ AION-135 freezes this boundary as a preview-only pre-approval queue baseline.
 Queue placement remains planning evidence only and does not approve
 implementation, enable runtime, bypass ADR dependencies, bypass gate
 dependencies, create a v0.2 tag, or create a v0.2 release.
+
+AION-136 keeps this boundary intact. Review-board routing may assign future
+reviewers, but it does not approve queue items, approve submissions, approve
+request packs, approve implementation, enable runtime, or create a tag or
+release.

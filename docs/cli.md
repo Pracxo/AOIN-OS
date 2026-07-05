@@ -1081,3 +1081,11 @@ It adds no CLI command implementation, no runtime execution command, no write
 path, no connector runtime command, no sandbox command, no external-call
 command, no credential/token command, no package command, no migration command,
 and no release or tag command.
+
+## AION-136 CLI Boundary
+
+AION-136 adds local shell gates for review-board documentation and evidence
+validation only. It adds no CLI command implementation, no runtime execution
+command, no write path, no connector runtime command, no sandbox command, no
+external-call command, no credential/token command, no package command, no
+migration command, and no release or tag command.

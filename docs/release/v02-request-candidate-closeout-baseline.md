@@ -18,3 +18,9 @@ runtime behavior.
 | V02-CAND-OP-WRITE | operator write execution candidate | operator_write_execution | closeout_recorded | queued_preview_only | false | false | future operator write ADR | operator write execution gate | approval, rollback, audit, and policy evidence | write execution approval absent | draft write-path approval record |
 | V02-CAND-MODULE-ACT | module activation candidate | module_activation | closeout_recorded | queued_preview_only | false | false | future module activation ADR | module activation implementation gate | module safety and activation boundary evidence | module activation approval absent | define capability activation review |
 | V02-CAND-PROD-UI | production UI decision candidate | production_ui_decision | closeout_recorded | queued_preview_only | false | false | future production UI ADR | production UI release gate | dependency, safety, and release readiness evidence | production UI approval absent | draft UI decision packet |
+
+## AION-136 Review Board Handoff
+
+These candidates now have review-board routing paths in
+`docs/release/v02-submission-review-routing.md`. The routing paths do not
+approve implementation and do not enable runtime.
