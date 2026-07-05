@@ -168,3 +168,11 @@ no runtime config defaults, route registration, capability activation,
 external calls, credentials/tokens, sandbox execution, package files,
 migrations, v0.2 tag, or v0.2 release. Final review and pre-approval
 submission evidence remain approval prerequisites only.
+
+## AION-134 Submission Registry Boundary
+
+Submission registry preview and pre-approval queue boundary records keep this
+future runtime boundary frozen. They add no runtime config defaults, route
+registration, capability activation, external calls, credentials/tokens,
+sandbox execution, package files, migrations, v0.2 tag, or v0.2 release.
+Registry and queue evidence remain approval prerequisites only.

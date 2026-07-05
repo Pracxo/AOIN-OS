@@ -100,6 +100,9 @@
     "./scripts/v02-request-pack-final-review.sh",
     "./scripts/v02-preapproval-submission-freeze.sh",
     "./scripts/v02-request-pack-final-no-go-regression.sh",
+    "./scripts/v02-submission-registry-preview-check.sh",
+    "./scripts/v02-preapproval-queue-freeze.sh",
+    "./scripts/v02-preapproval-queue-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -187,7 +190,9 @@
     request_pack_stabilization: "demo-data/v02-request-pack-stabilization.json",
     evidence_completeness_gate: "demo-data/v02-evidence-completeness-gate.json",
     request_pack_final_review: "demo-data/v02-request-pack-final-review.json",
-    preapproval_submission_gate: "demo-data/v02-preapproval-submission-gate.json"
+    preapproval_submission_gate: "demo-data/v02-preapproval-submission-gate.json",
+    submission_registry_preview: "demo-data/v02-submission-registry-preview.json",
+    preapproval_queue_boundary: "demo-data/v02-preapproval-queue-boundary.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1680,7 +1685,9 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.request_pack_stabilization),
       fetchJson(RELEASE_CANDIDATE_DEMOS.evidence_completeness_gate),
       fetchJson(RELEASE_CANDIDATE_DEMOS.request_pack_final_review),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.preapproval_submission_gate)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.preapproval_submission_gate),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.submission_registry_preview),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.preapproval_queue_boundary)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
@@ -1715,6 +1722,8 @@
         renderReleaseCandidateEvidence("v02-evidence-completeness-gate", redact(payloads[29]));
         renderReleaseCandidateEvidence("v02-request-pack-final-review", redact(payloads[30]));
         renderReleaseCandidateEvidence("v02-preapproval-submission-gate", redact(payloads[31]));
+        renderReleaseCandidateEvidence("v02-submission-registry-preview", redact(payloads[32]));
+        renderReleaseCandidateEvidence("v02-preapproval-queue-boundary", redact(payloads[33]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
@@ -1749,6 +1758,8 @@
         renderReleaseCandidateEvidence("v02-evidence-completeness-gate", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-request-pack-final-review", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-preapproval-submission-gate", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-submission-registry-preview", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-preapproval-queue-boundary", { status: "unavailable" });
       });
   }
 
@@ -1785,6 +1796,10 @@
       ["v02_request_pack_final_review_passed", String(Boolean(payload.v02_request_pack_final_review_passed))],
       ["evidence_boundary_closed_out", String(Boolean(payload.evidence_boundary_closed_out))],
       ["preapproval_submission_gate_created", String(Boolean(payload.preapproval_submission_gate_created))],
+      ["v02_submission_registry_preview_created", String(Boolean(payload.v02_submission_registry_preview_created))],
+      ["submission_registry_preview_only", String(Boolean(payload.submission_registry_preview_only))],
+      ["preapproval_queue_preview_only", String(Boolean(payload.preapproval_queue_preview_only))],
+      ["preapproval_queue_item_approved", String(Boolean(payload.preapproval_queue_item_approved))],
       ["request_pack_preview_only", String(Boolean(payload.request_pack_preview_only))],
       ["proposal_registry_preview_only", String(Boolean(payload.proposal_registry_preview_only))],
       ["approval_queue_preview_only", String(Boolean(payload.approval_queue_preview_only))],
@@ -1821,7 +1836,7 @@
       ["sandbox_execution_approved", String(Boolean(payload.sandbox_execution_approved))]
     ].forEach(function (item) {
       var row = document.createElement("div");
-      row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row preimplementation-master-row proposal-registry-row proposal-registry-stabilization-row planning-master-row final-planning-row planning-track-row request-pack-row";
+      row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row preimplementation-master-row proposal-registry-row proposal-registry-stabilization-row planning-master-row final-planning-row planning-track-row request-pack-row submission-registry-row";
       var label = document.createElement("span");
       label.textContent = item[0];
       var value = document.createElement("strong");
@@ -1834,7 +1849,7 @@
       .slice(0, 4)
       .forEach(function (section) {
         var row = document.createElement("div");
-        row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row preimplementation-master-row proposal-registry-row proposal-registry-stabilization-row planning-master-row final-planning-row planning-track-row request-pack-row";
+        row.className = "checklist-row connector-release-row connector-platform-row release-candidate-row v02-planning-row readiness-final-row implementation-kickoff-row approval-workflow-row workstream-intake-row preimplementation-master-row proposal-registry-row proposal-registry-stabilization-row planning-master-row final-planning-row planning-track-row request-pack-row submission-registry-row";
         var label = document.createElement("span");
         label.textContent = safeText(section.title || section.section_key || "section");
         var value = document.createElement("strong");

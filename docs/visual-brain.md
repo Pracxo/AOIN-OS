@@ -1242,3 +1242,11 @@ submission template preview data. The panels are read-only, redacted,
 synthetic, and local. They expose no inputs, no write controls, no release
 controls, no tag controls, no approval controls, no runtime controls, no
 external calls, no credentials/tokens, and no sandbox execution.
+
+## AION-134 Static Console Preview
+
+The static console now includes submission registry preview and pre-approval
+queue boundary preview data. The panels are read-only, redacted, synthetic,
+and local. They expose no inputs, no write controls, no release controls, no
+tag controls, no approval controls, no runtime controls, no external calls, no
+credentials/tokens, and no sandbox execution.

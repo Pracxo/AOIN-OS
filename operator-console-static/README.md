@@ -581,3 +581,22 @@ Validate the v0.2 request pack final review evidence:
 ./scripts/v02-preapproval-submission-freeze.sh
 ./scripts/v02-request-pack-final-no-go-regression.sh
 ```
+
+## AION-134 v0.2 Submission Registry Preview Panels
+
+The static console includes v0.2 submission registry preview and pre-approval
+queue boundary panels. They load bundled JSON only, keep the submission
+registry preview-only, keep the pre-approval queue preview-only, keep
+preapproval queue item approval false, keep request pack approval false, keep
+submission approval false, keep approval queue item approval false, keep
+proposal implementation approval false, and keep runtime implementation
+approval false. They expose no input, package, migration, runtime, release,
+tag, approval, bypass, or write controls.
+
+Validate the v0.2 submission registry preview evidence:
+
+```bash
+./scripts/v02-submission-registry-preview-check.sh
+./scripts/v02-preapproval-queue-freeze.sh
+./scripts/v02-preapproval-queue-no-go-regression.sh
+```

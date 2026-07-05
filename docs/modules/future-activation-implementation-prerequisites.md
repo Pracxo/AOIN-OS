@@ -211,3 +211,13 @@ implementation approval, approval queue item approval, module activation
 approval, code loading, runtime registration, capability activation, package
 installation, controlled execution, external dependency download, v0.2 tag
 creation, and v0.2 release creation remain false, disabled, or absent.
+
+## AION-134 Submission Registry Preview
+
+AION-134 catalogs the module activation candidate as a submission registry
+preview record only. Module activation remains unapproved. Module proposal
+implementation approval, preapproval queue item approval, approval queue item
+approval, module activation approval, code loading, runtime registration,
+capability activation, package installation, controlled execution, external
+dependency download, v0.2 tag creation, and v0.2 release creation remain
+false, disabled, or absent.

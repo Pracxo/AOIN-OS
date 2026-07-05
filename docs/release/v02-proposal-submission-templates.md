@@ -172,3 +172,11 @@ pre-approval submission freeze, and final no-go regression before approval
 consideration. Template completion remains planning-only and cannot approve
 submission, implementation, queue items, runtime capability, v0.2 tag creation,
 or v0.2 release creation.
+
+## AION-134 Submission Registry Preview
+
+AION-134 requires future proposal submissions to remain catalogued as
+submission registry preview records until explicit approval records, ADRs, and
+gate evidence exist. Template completion still cannot approve submissions,
+preapproval queue items, implementations, runtime capability, v0.2 tag
+creation, or v0.2 release creation.

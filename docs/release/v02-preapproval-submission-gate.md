@@ -72,3 +72,10 @@ runtime execution routes remain blocked.
 The default and required state is `submission_approval=false`,
 `request_pack_approval=false`, `runtime_implementation_approved=false`, and
 `v02_release_approved=false`.
+
+## AION-134 Pre-Approval Queue Handoff
+
+AION-134 adds a preview-only pre-approval queue boundary after this gate.
+Submission approval remains false, preapproval queue item approval remains
+false, request pack approval remains false, implementation approval remains
+false, and no v0.2 tag or release is created.

@@ -759,3 +759,17 @@ Instructions for future Codex runs in this repository:
   dependency bypass, approval expiry bypass, approval revocation bypass,
   dual-control bypass, v0.2 tag creation, v0.2 release creation, or privileged
   bypass.
+- AION-134 v0.2 submission registry preview is registry and pre-approval queue
+  boundary evidence only. It must pass
+  `./scripts/v02-submission-registry-preview-check.sh`,
+  `./scripts/v02-preapproval-queue-freeze.sh`, and
+  `./scripts/v02-preapproval-queue-no-go-regression.sh`, and it must keep
+  submission registry preview-only true, pre-approval queue preview-only true,
+  preapproval queue item approval false, request pack approval false,
+  submission approval false, proposal registry preview-only true, approval
+  queue preview-only true, runtime implementation approval false, proposal
+  implementation approval false, approval workflow bypass false, approval
+  record missing false, ADR dependency bypass false, gate dependency bypass
+  false, no v0.2 tag, no v0.2 release, no runtime enablement, no external
+  calls, no credentials/tokens, no sandbox execution, no package files, no
+  lockfiles, no migrations, and no runtime route, SDK, or CLI implementation.

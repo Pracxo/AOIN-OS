@@ -32,3 +32,10 @@ submissions, approve runtime implementation, approve backlog implementation
 items, approve workstream implementation, approve proposal implementation,
 approve approval queue items, approve release creation, approve tag creation,
 or approve privileged bypass.
+
+## AION-134 Registry Guard Extension
+
+AION-134 extends this guard to submission registry and pre-approval queue
+records. Registry preview and queue preview records cannot approve submissions,
+preapproval queue items, request packs, implementations, releases, tags, or
+privileged bypass.

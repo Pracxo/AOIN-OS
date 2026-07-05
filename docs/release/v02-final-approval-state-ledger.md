@@ -46,3 +46,11 @@ AION-133 adds submission approval and preapproval gate bypass to the false-state
 boundary. Final review evidence and pre-approval submission evidence still
 cannot approve runtime implementation, proposal implementation, approval queue
 items, request pack approval, release creation, or tag creation.
+
+## AION-134 Submission Registry Ledger Extension
+
+AION-134 adds submission registry preview-only and pre-approval queue
+preview-only states to the ledger. Preapproval queue item approval, request
+pack approval, submission approval, runtime implementation approval, proposal
+implementation approval, approval queue item approval, release creation, and
+tag creation remain false.

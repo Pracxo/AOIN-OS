@@ -2045,3 +2045,16 @@ regression evidence. Request pack approval, submission approval, preapproval
 gate bypass, proposal implementation approval, approval queue item approval,
 runtime implementation approval, v0.2 tag creation, and v0.2 release creation
 remain false.
+
+## AION-134 Submission Registry Policy Boundary
+
+AION-134 adds submission registry preview and pre-approval queue policy
+evidence without changing policy enforcement. Policy still treats submission
+registry records, pre-approval queue records, request packs, proposal registry
+entries, approval queue entries, and reviewer evidence as preview-only unless a
+later scoped task supplies explicit approval records, ADRs, gate evidence,
+review evidence, rollback/audit evidence, and no-go regression evidence.
+Preapproval queue item approval, request pack approval, submission approval,
+proposal implementation approval, approval queue item approval, runtime
+implementation approval, v0.2 tag creation, and v0.2 release creation remain
+false.

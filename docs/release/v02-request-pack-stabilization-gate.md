@@ -96,3 +96,11 @@ pack final review. The final review adds pre-approval submission evidence only
 and keeps request pack approval, submission approval, preapproval gate bypass,
 runtime implementation approval, v0.2 tag creation, and v0.2 release creation
 false.
+
+## AION-134 Submission Registry Dependency
+
+AION-134 consumes this stabilization gate through the request pack final review
+chain. Submission registry and pre-approval queue records remain preview-only
+and keep request pack approval, submission approval, preapproval queue item
+approval, runtime implementation approval, v0.2 tag creation, and v0.2 release
+creation false.

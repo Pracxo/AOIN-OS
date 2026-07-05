@@ -76,3 +76,11 @@ pack and the AION-132 stabilization gate. The request pack remains
 preview-only, submission approval remains false, preapproval gate bypass remains
 false, and no v0.2 tag, v0.2 release, runtime implementation, API route, SDK
 resource, CLI command, package file, or migration is added.
+
+## AION-134 Submission Registry Preview
+
+AION-134 catalogs future implementation request candidates from this pack in a
+submission registry preview. Candidate records are planning-only and keep
+request pack approval, submission approval, preapproval queue item approval,
+implementation approval, runtime enablement, v0.2 tag creation, and v0.2
+release creation false.
