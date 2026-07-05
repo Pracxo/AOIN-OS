@@ -21,3 +21,11 @@
 Every evidence item is advisory until a future approval workflow creates an
 explicit decision record. Missing evidence blocks future approval consideration.
 Complete evidence still keeps implementation approval false.
+
+## AION-139 Stabilization Matrix Handoff
+
+AION-139 turns this matrix into inherited baseline evidence only. Matrix
+completeness still keeps decision package approval false, approval readiness
+approval false, runtime decision readiness approval false, review board
+decision approval false, routing decision approval false, reviewer sign-off
+implementation approval false, and runtime implementation approval false.

@@ -254,3 +254,10 @@ false, connector implementation approval remains false, connector runtime
 remains disabled, and external calls, credential/token storage, sandbox
 execution, provider SDK dependencies, connector SDK dependencies, and runtime
 route registration remain disabled or absent.
+
+AION-139 stabilizes connector runtime candidate evidence in the decision
+package baseline only. Runtime decision readiness approval remains false,
+connector implementation approval remains false, connector runtime remains
+disabled, and external calls, credential/token storage, sandbox execution,
+provider SDK dependencies, connector SDK dependencies, and runtime route
+registration remain disabled or absent.

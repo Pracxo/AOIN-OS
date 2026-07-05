@@ -1287,3 +1287,14 @@ approval-readiness evidence, runtime boundary blockers, and false approval
 states only; they do not expose inputs, write controls, approval controls,
 activation controls, external-call controls, credential/token storage, sandbox
 execution, a v0.2 tag, or a v0.2 release.
+
+## AION-139 Decision Package Stabilization Panels
+
+The static visual brain includes AION-139 decision package stabilization and
+approval readiness freeze panels backed by bundled JSON. The panels remain
+read-only, redacted, and non-executing. They expose stabilization status,
+approval readiness freeze status, runtime decision readiness false, and
+closeout blockers only; they do not expose inputs, write controls, approval
+controls, activation controls, external-call controls, credential/token
+storage, sandbox execution, runtime decision approval, a v0.2 tag, or a v0.2
+release.

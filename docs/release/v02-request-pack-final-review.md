@@ -132,3 +132,8 @@ decision package preview only. Decision package approval, approval readiness
 approval, review board decision approval, routing decision approval, reviewer
 sign-off implementation approval, request pack approval, submission approval,
 and implementation approval remain false.
+
+AION-139 uses the final request-pack review as inherited stabilization
+evidence only. Runtime decision readiness approval, decision package approval,
+approval readiness approval, request pack approval, submission approval, and
+runtime implementation approval remain false.

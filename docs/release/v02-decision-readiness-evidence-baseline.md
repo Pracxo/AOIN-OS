@@ -27,3 +27,10 @@ AION-138 packages this baseline into approval-readiness evidence. The package
 does not approve readiness, implementation, review-board decisions, routing
 decisions, submissions, request packs, preapproval queue items, approval queue
 items, tags, or releases.
+
+## AION-139 Decision Readiness Freeze Handoff
+
+AION-139 stabilizes this baseline as decision package evidence only. Baseline
+completeness does not approve runtime decision readiness, decision packages,
+approval readiness, implementation, review-board decisions, routing decisions,
+submissions, request packs, preapproval queue items, tags, or releases.

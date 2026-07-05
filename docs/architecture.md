@@ -2342,3 +2342,16 @@ remain false. No API route, SDK resource, CLI implementation, migration,
 connector runtime, operator write execution, production auth runtime, module
 activation, sandbox execution, external call path, credential storage, token
 storage, v0.2 tag, or v0.2 release is added.
+
+## AION-139 Decision Package Stabilization Boundary
+
+AION-139 stabilizes the decision package layer and freezes approval readiness
+without changing runtime architecture. Runtime decision readiness approval,
+decision package approval, approval readiness approval, review board decision
+approval, routing decision approval, reviewer sign-off implementation
+approval, submission approval, preapproval queue approval, request pack
+approval, proposal approval, workstream approval, backlog approval, and runtime
+implementation approval remain false. No API route, SDK resource, CLI
+implementation, migration, connector runtime, operator write execution,
+production auth runtime, module activation, sandbox execution, external call
+path, credential storage, token storage, v0.2 tag, or v0.2 release is added.

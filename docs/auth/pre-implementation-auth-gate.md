@@ -218,3 +218,10 @@ approval remains false, and login/logout endpoints, session persistence,
 cookie issuance, token issuance, external identity provider runtime,
 OAuth/OIDC/SAML runtime, credential storage, and token storage remain disabled
 or absent.
+
+AION-139 stabilizes production auth candidate evidence in the decision package
+baseline only. Runtime decision readiness approval remains false, production
+auth implementation approval remains false, and login/logout endpoints,
+session persistence, cookie issuance, token issuance, external identity
+provider runtime, OAuth/OIDC/SAML runtime, credential storage, and token
+storage remain disabled or absent.

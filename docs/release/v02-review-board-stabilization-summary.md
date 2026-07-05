@@ -35,3 +35,9 @@ AION-137 stabilizes review board routing and decision-readiness evidence only. I
 AION-138 packages this summary as inherited evidence only. It keeps every
 approval false, every runtime path disabled, every release action absent, and
 the frozen `aion-v0.1.0` baseline untouched.
+
+AION-139 uses this summary as inherited decision package stabilization
+evidence only. Runtime decision readiness approval, decision package approval,
+approval readiness approval, review board decision approval, routing decision
+approval, reviewer sign-off implementation approval, and runtime
+implementation approval remain false.

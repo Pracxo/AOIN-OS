@@ -98,3 +98,9 @@ reviewer sign-off implementation approval, submission approval, request pack
 approval, preapproval queue item approval, implementation approval, runtime
 enablement, v0.2 tag creation, and v0.2 release creation all remain false or
 absent.
+
+AION-139 consumes submission registry stabilization as inherited evidence for
+decision package stabilization only. Runtime decision readiness approval,
+decision package approval, approval readiness approval, submission approval,
+request pack approval, preapproval queue item approval, and runtime
+implementation approval remain false.
