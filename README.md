@@ -4659,3 +4659,20 @@ created.
 ./scripts/v02-review-board-freeze.sh
 ./scripts/v02-review-board-no-go-regression.sh
 ```
+
+## AION-137 v0.2 Review Board Stabilization
+
+AION-137 stabilizes the pre-approval review board into a routing freeze and
+decision-readiness evidence baseline. Review board decision approval remains
+false, routing decision approval remains false, reviewer sign-off
+implementation approval remains false, preapproval queue approvals remain
+false, request pack approval remains false, submission approval remains false,
+runtime implementation approval remains false, no external calls are added, no
+credentials or tokens are stored, no sandbox execution is enabled, no v0.2 tag
+is created, and no v0.2 release is created.
+
+```bash
+./scripts/v02-review-board-stabilization-gate.sh
+./scripts/v02-review-routing-freeze.sh
+./scripts/v02-review-board-stabilization-no-go-regression.sh
+```

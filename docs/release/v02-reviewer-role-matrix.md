@@ -14,3 +14,9 @@
 | auditor | Confirms review records remain planning-only and approval false. | May flag drift or missing records. | yes | yes | final evidence pack, no-go result, tag/release absence proof | Must remain independent from requester and approver placeholder. |
 
 No role can approve implementation alone. No role can enable runtime.
+
+## AION-137 Quorum Handoff
+
+AION-137 stabilizes the reviewer role matrix into a quorum model. Quorum is
+evidence only: no reviewer, reviewer group, reviewer sign-off, approver
+placeholder, or auditor note can approve implementation or enable runtime.

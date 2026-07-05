@@ -2076,3 +2076,16 @@ decision approval, preapproval queue item approval, request pack approval,
 submission approval, approval queue approval, proposal implementation approval,
 workstream implementation approval, backlog implementation approval, or runtime
 implementation approval to true is a release blocker.
+
+## AION-137 Review Board Stabilization Policy
+
+AION-137 freezes the same policy lock for review routing. Review board
+stabilization, routing freeze, quorum evidence, reviewer sign-off, ADR
+dependency evidence, gate dependency evidence, closeout checklist evidence, and
+decision-readiness evidence are policy inputs only. Any attempt to mark review
+board decision approval, routing decision approval, reviewer sign-off
+implementation approval, preapproval queue item approval, request pack
+approval, submission approval, approval queue item approval, proposal
+implementation approval, workstream implementation approval, backlog
+implementation approval, or runtime implementation approval as true is a
+release blocker.

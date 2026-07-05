@@ -238,3 +238,11 @@ implementation approval remains false, connector runtime remains disabled, and
 external calls, credential/token storage, sandbox execution, provider SDK
 dependencies, connector SDK dependencies, and runtime route registration remain
 disabled or absent.
+
+AION-137 may stabilize connector runtime, credential store, and sandbox runtime
+review routing as future decision-readiness evidence, but stabilization is not
+approval. Connector implementation approval remains false, connector runtime
+remains disabled, routing decision approval remains false, reviewer sign-off
+implementation approval remains false, and external calls, credential/token
+storage, sandbox execution, provider SDK dependencies, connector SDK
+dependencies, and runtime route registration remain disabled or absent.

@@ -60,3 +60,10 @@ v0.2 tag or release is created.
 AION-136 routes future submissions through a pre-approval review board without
 unfreezing this queue. Queue placement remains preview-only, preapproval queue
 item approval remains false, and review board decision approval remains false.
+
+## AION-137 Review Routing Freeze Handoff
+
+AION-137 stabilizes review routing without unfreezing this queue. Queue
+placement remains preview-only, preapproval queue item approval remains false,
+routing decision approval remains false, reviewer sign-off implementation
+approval remains false, and review board decision approval remains false.

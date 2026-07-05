@@ -796,3 +796,12 @@ Instructions for future Codex runs in this repository:
   workstream approval, backlog approval, and runtime implementation approval all
   remain false. Do not treat reviewer routing, ADR readiness, gate readiness,
   or evidence readiness as implementation approval.
+- AION-137 stabilizes the v0.2 review board, freezes review routing, defines
+  reviewer quorum evidence, and records decision-readiness evidence as planning
+  artifacts only. Review board decision approval, routing decision approval,
+  reviewer sign-off implementation approval, preapproval queue approval, request
+  pack approval, submission approval, approval queue approval, proposal
+  approval, workstream approval, backlog approval, and runtime implementation
+  approval must all remain false. Do not treat quorum, routing freeze, reviewer
+  sign-off, ADR dependency, gate dependency, or closeout evidence as
+  implementation approval.

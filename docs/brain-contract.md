@@ -2024,3 +2024,13 @@ readiness, and gate readiness must not approve submissions, approve request
 packs, approve preapproval queue items, approve implementation, enable runtime,
 execute tools, call external services, store credentials or tokens, create a
 v0.2 tag, or create a v0.2 release.
+
+## AION-137 Review Board Stabilization Contract
+
+The AION-137 contract freezes review board stabilization records as read-only
+planning metadata. Quorum evidence, routing freeze status, reviewer sign-off,
+decision-readiness status, ADR dependencies, and gate dependencies must not
+approve review board decisions, approve routing decisions, approve
+submissions, approve request packs, approve preapproval queue items, approve
+implementation, enable runtime, execute tools, call external services, store
+credentials or tokens, create a v0.2 tag, or create a v0.2 release.

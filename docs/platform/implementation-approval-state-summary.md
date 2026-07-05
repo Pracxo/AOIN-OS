@@ -210,3 +210,13 @@ preapproval queue item approval remain false.
 AION-136 preserves the same approval state while adding review board routing.
 Review board decision approval remains false, reviewer routing remains
 planning-only, and decision readiness is not implementation approval.
+
+## AION-137 Review Board Stabilization State
+
+AION-137 preserves the same approval state while stabilizing review board
+routing and decision-readiness evidence. Review board decision approval,
+routing decision approval, reviewer sign-off implementation approval,
+submission approval, preapproval queue item approval, request pack approval,
+approval queue item approval, proposal implementation approval, workstream
+implementation approval, backlog implementation approval, and runtime
+implementation approval remain false.

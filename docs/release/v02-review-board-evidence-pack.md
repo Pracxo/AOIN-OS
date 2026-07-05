@@ -15,3 +15,10 @@ The review board evidence pack references prior planning gates and keeps every a
 | docs and boundary checks | `scripts/docs-check.sh`, `scripts/final-docs-audit.sh`, `scripts/verify-no-domain-drift.sh`, `scripts/boundary-check.sh` | Confirms documentation and boundary checks remain available. | none; approval false |
 
 Evidence readiness does not approve implementation, submissions, request packs, pre-approval queue items, approval queue items, or review board decisions.
+
+## AION-137 Stabilization Evidence
+
+AION-137 consumes this pack as inherited evidence for the review board
+stabilization gate. Evidence readiness still does not approve implementation,
+submissions, request packs, pre-approval queue items, routing decisions,
+review board decisions, approval queue items, tags, or releases.

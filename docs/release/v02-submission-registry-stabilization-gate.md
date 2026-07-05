@@ -79,3 +79,12 @@ board routing. Routing readiness remains planning-only: review board decision
 approval, submission approval, request pack approval, preapproval queue item
 approval, implementation approval, runtime enablement, v0.2 tag creation, and
 v0.2 release creation all remain false or absent.
+
+## AION-137 Review Board Stabilization Handoff
+
+AION-137 consumes this stabilized registry as inherited evidence for review
+board stabilization. Submission registry stabilization remains preview-only;
+routing decision approval, reviewer sign-off implementation approval,
+submission approval, request pack approval, preapproval queue item approval,
+implementation approval, runtime enablement, v0.2 tag creation, and v0.2
+release creation all remain false or absent.

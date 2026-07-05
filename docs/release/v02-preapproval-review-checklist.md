@@ -24,3 +24,11 @@
 - no migrations
 
 This checklist is a readiness checklist only. It does not approve implementation, submissions, request packs, queue items, or review board decisions.
+
+## AION-137 Closeout Handoff
+
+AION-137 adds review board stabilization, review routing freeze, reviewer
+quorum evidence, and decision-readiness evidence checks to the closeout path.
+The checklist remains evidence only and does not approve review board
+decisions, routing decisions, reviewer sign-off, submissions, request packs,
+queue items, implementation, runtime, tags, or releases.

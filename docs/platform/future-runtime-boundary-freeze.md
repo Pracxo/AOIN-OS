@@ -191,3 +191,12 @@ assignment, decision readiness, ADR readiness, gate readiness, and evidence
 readiness do not enable connector runtime, operator write execution, production
 auth runtime, module activation, sandbox execution, external calls, credential
 storage, token storage, tags, or releases.
+
+## AION-137 Review Routing Freeze Boundary
+
+AION-137 does not thaw the runtime boundary. Review board stabilization,
+routing freeze, quorum evidence, reviewer sign-off, decision-readiness
+evidence, ADR dependency evidence, and gate dependency evidence do not enable
+connector runtime, operator write execution, production auth runtime, module
+activation, sandbox execution, external calls, credential storage, token
+storage, tags, or releases.

@@ -285,3 +285,12 @@ evidence only and no inputs, write controls, activation controls,
 external-call controls, credential/token storage, sandbox execution, runtime
 registration, review board approval, v0.2 tag creation, or v0.2 release
 creation.
+
+## AION-137 Static Console Handoff
+
+AION-137 adds read-only static console panels for review board stabilization
+and review routing freeze. The panels expose bundled, redacted JSON evidence
+only and no inputs, write controls, activation controls, external-call
+controls, credential/token storage, sandbox execution, runtime registration,
+review board approval, routing approval, reviewer sign-off implementation
+approval, v0.2 tag creation, or v0.2 release creation.

@@ -31,3 +31,10 @@ AION-136 adds review-board routing states after this lifecycle baseline. The
 new routing states remain planning-only and do not approve submissions,
 preapproval queue items, request packs, implementation, runtime, tags, or
 releases.
+
+## AION-137 Routing Freeze Handoff
+
+AION-137 freezes review routing after this lifecycle baseline. The freeze
+remains planning-only and does not approve submissions, routing decisions,
+review board decisions, reviewer sign-off, preapproval queue items, request
+packs, implementation, runtime, tags, or releases.

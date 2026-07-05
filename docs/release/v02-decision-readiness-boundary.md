@@ -19,3 +19,10 @@ Preapproval queue approval remains false.
 Review board decision approval remains false.
 
 Decision readiness only means a future candidate has the minimum planning evidence needed to enter a future approval process. AION-136 creates no v0.2 tag, no v0.2 release, no runtime implementation, no external calls, no credentials/tokens, and no sandbox execution.
+
+## AION-137 Decision-Readiness Baseline
+
+AION-137 expands this boundary into a candidate evidence baseline. Decision
+readiness remains evidence only and does not approve review board decisions,
+routing decisions, reviewer sign-off, submissions, request packs,
+preapproval queue items, implementation, runtime, tags, or releases.

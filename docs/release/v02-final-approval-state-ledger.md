@@ -63,3 +63,14 @@ request pack approval false, preapproval queue item approval false, approval
 queue item approval false, proposal implementation approval false, workstream
 implementation approval false, backlog implementation approval false, runtime
 implementation approval false, v0.2 tag absent, and v0.2 release absent.
+
+## AION-137 Review Board Stabilization Entry
+
+AION-137 records review board stabilization as planning-only evidence. The
+ledger state remains unchanged for approvals: review board decision approval
+false, routing decision approval false, reviewer sign-off implementation
+approval false, submission approval false, request pack approval false,
+preapproval queue item approval false, approval queue item approval false,
+proposal implementation approval false, workstream implementation approval
+false, backlog implementation approval false, runtime implementation approval
+false, v0.2 tag absent, and v0.2 release absent.

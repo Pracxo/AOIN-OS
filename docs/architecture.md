@@ -2317,3 +2317,15 @@ boundary on top of that stabilized registry. The architecture remains
 planning-only: reviewer assignment, ADR dependency readiness, gate dependency
 readiness, evidence readiness, and no-go acknowledgement do not approve
 implementation and do not enable runtime.
+
+## AION-137 Review Board Stabilization Boundary
+
+AION-137 stabilizes review-board routing and decision-readiness evidence
+without changing runtime architecture. Review board decision approval, routing
+decision approval, reviewer sign-off implementation approval, submission
+approval, preapproval queue approval, request pack approval, proposal approval,
+workstream approval, backlog approval, and runtime implementation approval
+remain false. No API route, SDK resource, CLI implementation, migration,
+connector runtime, operator write execution, production auth runtime, module
+activation, sandbox execution, external call path, credential storage, token
+storage, v0.2 tag, or v0.2 release is added.

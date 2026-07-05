@@ -24,3 +24,9 @@ AION-136 builds on this summary by adding review-board routing and decision
 readiness boundaries. Review board decision approval remains false and no
 runtime, external call, credential/token, sandbox, package, migration, tag, or
 release capability is added.
+
+AION-137 builds on this summary by stabilizing review board routing and
+decision-readiness evidence. Routing decision approval and reviewer sign-off
+implementation approval remain false, and no runtime, external call,
+credential/token, sandbox, package, migration, tag, or release capability is
+added.

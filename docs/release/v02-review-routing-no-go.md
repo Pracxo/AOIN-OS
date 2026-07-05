@@ -1,8 +1,8 @@
-# v0.2 Review Board No-Go
-
-The review board must fail if any of these conditions appear:
+# v0.2 Review Routing No-Go Conditions
 
 - review board decision approval true
+- routing decision approval true
+- reviewer sign-off marked implementation approval true
 - preapproval queue item approved true
 - submission approval true
 - request pack approval true
@@ -33,12 +33,4 @@ The review board must fail if any of these conditions appear:
 - migrations added
 - runtime API execution routes added
 
-Disabled, denied, no-go, future, planning, unapproved, template, and preview references are allowed only when they preserve approval false and runtime disabled.
-
-## AION-137 No-Go Extension
-
-AION-137 also treats routing decision approval true and reviewer sign-off
-implementation approval true as no-go conditions. Review board stabilization
-must remain planning-only and must keep all runtime, release, approval, tag,
-external-call, credential/token, sandbox, package, migration, and API route
-paths absent.
+These conditions remain no-go outcomes for AION-137. A routing record that encounters any condition must stay blocked and cannot become an implementation approval.
