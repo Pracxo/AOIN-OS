@@ -788,3 +788,11 @@ Instructions for future Codex runs in this repository:
   runtime enablement, no external calls, no credentials/tokens, no sandbox
   execution, no package files, no lockfiles, no migrations, and no runtime
   route, SDK, or CLI implementation.
+- AION-136 adds the v0.2 pre-approval review board, submission review routing,
+  reviewer role matrix, decision readiness boundary, evidence pack, and
+  no-go/check/freeze scripts as planning artifacts only. Review board decision
+  approval remains false; preapproval queue item approval, request pack
+  approval, submission approval, approval queue approval, proposal approval,
+  workstream approval, backlog approval, and runtime implementation approval all
+  remain false. Do not treat reviewer routing, ADR readiness, gate readiness,
+  or evidence readiness as implementation approval.

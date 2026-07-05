@@ -206,3 +206,7 @@ lifecycle evidence remain planning artifacts only. Runtime implementation
 approval, backlog implementation approval, workstream implementation approval,
 proposal implementation approval, request approval, submission approval, and
 preapproval queue item approval remain false.
+
+AION-136 preserves the same approval state while adding review board routing.
+Review board decision approval remains false, reviewer routing remains
+planning-only, and decision readiness is not implementation approval.

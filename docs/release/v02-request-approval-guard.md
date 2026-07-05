@@ -47,3 +47,8 @@ candidates. Request approval, submission approval, preapproval queue item
 approval, implementation approval, runtime approval, approval workflow bypass,
 approval record missing, ADR dependency bypass, and gate dependency bypass all
 remain blocked conditions.
+
+AION-136 adds review-board routing to the guard. Review board decision
+approval, reviewer sign-off as approval, routing readiness as approval,
+preapproval queue approval, request pack approval, submission approval, and
+implementation approval remain blocked conditions.

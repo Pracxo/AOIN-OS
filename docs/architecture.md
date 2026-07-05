@@ -2311,3 +2311,9 @@ operator write execution, production auth runtime, module activation, sandbox
 execution, external call path, credential storage, token storage, v0.2 tag, or
 v0.2 release. All submission, request, proposal, queue, workstream, backlog,
 and runtime approvals remain false.
+
+AION-136 adds a pre-approval review board and submission review routing
+boundary on top of that stabilized registry. The architecture remains
+planning-only: reviewer assignment, ADR dependency readiness, gate dependency
+readiness, evidence readiness, and no-go acknowledgement do not approve
+implementation and do not enable runtime.

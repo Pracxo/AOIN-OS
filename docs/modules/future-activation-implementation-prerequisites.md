@@ -229,3 +229,10 @@ not approve module activation implementation and does not enable activation.
 Capability activation, code loading, runtime registration, controlled
 execution, package installation, external dependency download, module writes,
 policy bypass, audit bypass, and privileged bypass remain disabled or absent.
+
+AION-136 may route module activation candidates to future reviewers, but
+routing is not approval. Module activation implementation approval remains
+false, review board decision approval remains false, and capability activation,
+code loading, runtime registration, controlled execution, package installation,
+external dependency download, module writes, policy bypass, audit bypass, and
+privileged bypass remain disabled or absent.

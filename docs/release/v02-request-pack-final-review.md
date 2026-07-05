@@ -117,3 +117,7 @@ pack approval, submission approval, preapproval queue item approval, proposal
 implementation approval, workstream implementation approval, backlog
 implementation approval, runtime implementation approval, v0.2 tag creation,
 and v0.2 release creation remain false or absent.
+
+AION-136 uses the final request-pack review as evidence for review-board
+routing only. Review board decision approval remains false, and routing
+readiness is not request pack approval or implementation approval.

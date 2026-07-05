@@ -185,3 +185,9 @@ runtime, operator write execution, production auth runtime, module activation,
 sandbox execution, external calls, credential storage, token storage, package
 files, migrations, API runtime execution routes, SDK resources, CLI
 implementations, tags, or releases.
+
+AION-136 does not thaw the runtime boundary. Review board routing, reviewer
+assignment, decision readiness, ADR readiness, gate readiness, and evidence
+readiness do not enable connector runtime, operator write execution, production
+auth runtime, module activation, sandbox execution, external calls, credential
+storage, token storage, tags, or releases.

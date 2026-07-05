@@ -24,3 +24,10 @@ approved, implementation approved, and runtime enabled values remain false.
 | implementation_unapproved | explicit implementation absence | release governance | future ADR | future gate | true | false | false | false | true | runtime remains disabled |
 
 No lifecycle state approves implementation or enables runtime.
+
+## AION-136 Review Board Handoff
+
+AION-136 adds review-board routing states after this lifecycle baseline. The
+new routing states remain planning-only and do not approve submissions,
+preapproval queue items, request packs, implementation, runtime, tags, or
+releases.

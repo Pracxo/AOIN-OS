@@ -71,3 +71,11 @@ execution routes are added.
 
 AION-135 explicitly creates no v0.2 tag and no v0.2 release. The
 `aion-v0.1.0` baseline remains frozen and untouched.
+
+## AION-136 Review Board Handoff
+
+AION-136 consumes this stabilized registry as evidence for pre-approval review
+board routing. Routing readiness remains planning-only: review board decision
+approval, submission approval, request pack approval, preapproval queue item
+approval, implementation approval, runtime enablement, v0.2 tag creation, and
+v0.2 release creation all remain false or absent.
