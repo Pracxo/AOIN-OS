@@ -1265,3 +1265,17 @@ SDK runtime contracts, approval docket item approval, implementation decision
 record approval, runtime approval review approval, runtime decision lock
 release approval, decision package approval, approval readiness approval,
 implementation approval, submission approval, or release approval.
+
+## AION-142 SDK Boundary
+
+AION-142 adds no SDK resources, no SDK clients, no CLI-backed SDK commands, no
+network clients, no provider SDK dependencies, and no connector SDK
+dependencies. Approval docket stabilization, implementation decision record
+freeze, runtime approval review evidence baseline, lifecycle evidence matrix,
+and stabilization summary examples are synthetic planning artifacts only and
+must not be interpreted as SDK runtime contracts, approval docket
+stabilization approval, approval docket item approval, implementation decision
+record freeze approval, implementation decision record approval, runtime
+approval review approval, runtime decision lock release approval, decision
+package approval, approval readiness approval, implementation approval,
+submission approval, or release approval.

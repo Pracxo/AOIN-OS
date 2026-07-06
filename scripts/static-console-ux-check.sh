@@ -267,6 +267,9 @@ allowed = {
     "./scripts/v02-approval-docket-preview-check.sh",
     "./scripts/v02-runtime-approval-review-freeze.sh",
     "./scripts/v02-approval-docket-no-go-regression.sh",
+    "./scripts/v02-approval-docket-stabilization-gate.sh",
+    "./scripts/v02-implementation-decision-record-freeze.sh",
+    "./scripts/v02-approval-docket-stabilization-no-go-regression.sh",
     "./scripts/docs-check.sh",
 }
 listed = set(nav.get("safe_copy_commands", []))

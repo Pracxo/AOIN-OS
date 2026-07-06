@@ -2084,3 +2084,17 @@ decisions, approve routing, approve submissions, approve request packs,
 approve preapproval queue items, approve implementation, enable runtime,
 execute tools, call external services, store credentials or tokens, create a
 v0.2 tag, or create a v0.2 release.
+
+## AION-142 Approval Docket Stabilization Contract
+
+The AION-142 contract freezes approval docket stabilization records,
+implementation decision record freeze records, runtime approval review evidence
+baselines, and lifecycle evidence matrices as read-only planning metadata.
+Stabilization status, record freeze status, lifecycle rows, reviewer evidence,
+ADR dependencies, and gate dependencies must not approve docket stabilization,
+approve docket items, approve implementation decision records, approve runtime
+approval review, approve runtime decision lock release, approve decision
+packages, approve readiness, approve review board decisions, approve routing,
+approve submissions, approve request packs, approve preapproval queue items,
+approve implementation, enable runtime, execute tools, call external services,
+store credentials or tokens, create a v0.2 tag, or create a v0.2 release.

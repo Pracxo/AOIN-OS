@@ -30,3 +30,6 @@ Each implementation decision record must carry a decision package reference, app
 
 ## Non-Approval Statement
 Implementation decision records remain preview-only. A created record is not an approval record, not release approval, not runtime readiness approval, and not permission to implement.
+
+## AION-142 Stabilization Handoff
+AION-142 freezes implementation decision records as unapproved planning records. Implementation decision record freeze approval, implementation decision record approval, approval docket stabilization approval, approval docket item approval, runtime approval review approval, runtime decision lock release approval, and runtime implementation approval remain false.

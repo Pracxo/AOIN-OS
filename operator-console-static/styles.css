@@ -678,7 +678,9 @@ pre {
 #v02-decision-package-final-review,
 #v02-runtime-decision-lock,
 #v02-approval-docket-preview,
-#v02-implementation-decision-record-guard {
+#v02-implementation-decision-record-guard,
+#v02-approval-docket-stabilization,
+#v02-implementation-decision-record-freeze {
   border-color: rgba(47, 123, 110, 0.35);
 }
 

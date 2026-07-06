@@ -81,3 +81,6 @@ implementation, decision packages, approval readiness, tags, or releases.
 
 ## AION-141 Approval Docket Handoff
 AION-141 treats routing freeze evidence as docket input only. Routing decision approval, reviewer sign-off implementation approval, approval docket item approval, implementation decision record approval, runtime approval review approval, and runtime implementation approval remain false.
+
+## AION-142 Approval Docket Stabilization Handoff
+AION-142 treats routing freeze evidence as stabilized docket input only. Routing decision approval, reviewer sign-off implementation approval, approval docket stabilization approval, approval docket item approval, implementation decision record freeze approval, runtime approval review approval, and runtime implementation approval remain false.

@@ -65,3 +65,6 @@ No docket state approves implementation or enables runtime.
 
 ## Release Statement
 AION-141 creates no v0.2 tag and no v0.2 release. The v0.1 release baseline remains frozen and the `aion-v0.1.0` tag must not be moved, deleted, or recreated.
+
+## AION-142 Stabilization Handoff
+AION-142 stabilizes this approval docket preview as evidence only. Approval docket stabilization approval, approval docket item approval, implementation decision record freeze approval, implementation decision record approval, runtime approval review approval, runtime decision lock release approval, and runtime implementation approval remain false.

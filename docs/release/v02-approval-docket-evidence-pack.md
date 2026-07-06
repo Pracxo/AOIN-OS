@@ -14,3 +14,6 @@ The approval docket evidence pack ties AION-141 to prior v0.2 planning gates. Ea
 | planning track closeout | `./scripts/v02-planning-track-closeout.sh` | `runtime_implementation_approved=false` | `runtime_implementation_approved=false` | planning closeout failure | Planning track remains no-runtime. |
 | final planning release gate | `./scripts/v02-final-planning-release-gate.sh` | `v02_release_approved=false` | `v02_release_approved=false` | release gate failure | No v0.2 tag or release is created. |
 | docs and boundary checks | `./scripts/docs-check.sh`, `./scripts/final-docs-audit.sh`, `./scripts/verify-no-domain-drift.sh`, `./scripts/boundary-check.sh` | docs complete and domain boundary stable | no approval granted | docs or boundary failure | Checks prove documentation integrity only. |
+
+## AION-142 Stabilization Evidence
+AION-142 extends this pack with approval docket stabilization, implementation decision record freeze, runtime approval review evidence baseline, lifecycle evidence matrix, closeout checklist, and no-go regression evidence. Every added evidence source remains unapproved and cannot enable runtime, implementation, tags, or releases.

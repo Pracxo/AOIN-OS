@@ -124,6 +124,9 @@
     "./scripts/v02-approval-docket-preview-check.sh",
     "./scripts/v02-runtime-approval-review-freeze.sh",
     "./scripts/v02-approval-docket-no-go-regression.sh",
+    "./scripts/v02-approval-docket-stabilization-gate.sh",
+    "./scripts/v02-implementation-decision-record-freeze.sh",
+    "./scripts/v02-approval-docket-stabilization-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -227,7 +230,9 @@
     decision_package_final_review: "demo-data/v02-decision-package-final-review.json",
     runtime_decision_lock: "demo-data/v02-runtime-decision-lock.json",
     approval_docket_preview: "demo-data/v02-approval-docket-preview.json",
-    implementation_decision_record_guard: "demo-data/v02-implementation-decision-record-guard.json"
+    implementation_decision_record_guard: "demo-data/v02-implementation-decision-record-guard.json",
+    approval_docket_stabilization: "demo-data/v02-approval-docket-stabilization.json",
+    implementation_decision_record_freeze: "demo-data/v02-implementation-decision-record-freeze.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1736,7 +1741,9 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.decision_package_final_review),
       fetchJson(RELEASE_CANDIDATE_DEMOS.runtime_decision_lock),
       fetchJson(RELEASE_CANDIDATE_DEMOS.approval_docket_preview),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_decision_record_guard)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_decision_record_guard),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.approval_docket_stabilization),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_decision_record_freeze)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
@@ -1787,6 +1794,8 @@
         renderReleaseCandidateEvidence("v02-runtime-decision-lock", redact(payloads[45]));
         renderReleaseCandidateEvidence("v02-approval-docket-preview", redact(payloads[46]));
         renderReleaseCandidateEvidence("v02-implementation-decision-record-guard", redact(payloads[47]));
+        renderReleaseCandidateEvidence("v02-approval-docket-stabilization", redact(payloads[48]));
+        renderReleaseCandidateEvidence("v02-implementation-decision-record-freeze", redact(payloads[49]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
@@ -1837,6 +1846,8 @@
         renderReleaseCandidateEvidence("v02-runtime-decision-lock", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-approval-docket-preview", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-implementation-decision-record-guard", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-approval-docket-stabilization", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-implementation-decision-record-freeze", { status: "unavailable" });
       });
   }
 
@@ -1879,13 +1890,20 @@
       ["v02_decision_package_preview_created", String(Boolean(payload.v02_decision_package_preview_created))],
       ["v02_decision_package_stabilized", String(Boolean(payload.v02_decision_package_stabilized))],
       ["v02_approval_docket_preview_created", String(Boolean(payload.v02_approval_docket_preview_created))],
+      ["v02_approval_docket_stabilized", String(Boolean(payload.v02_approval_docket_stabilized))],
       ["decision_package_preview_only", String(Boolean(payload.decision_package_preview_only))],
       ["approval_readiness_preview_only", String(Boolean(payload.approval_readiness_preview_only))],
       ["approval_docket_preview_only", String(Boolean(payload.approval_docket_preview_only))],
       ["approval_docket_item_approved", String(Boolean(payload.approval_docket_item_approved))],
+      ["approval_docket_stabilization_approval", String(Boolean(payload.approval_docket_stabilization_approval))],
       ["implementation_decision_record_created", String(Boolean(payload.implementation_decision_record_created))],
+      ["implementation_decision_record_freeze_created", String(Boolean(payload.implementation_decision_record_freeze_created))],
       ["implementation_decision_record_approval", String(Boolean(payload.implementation_decision_record_approval))],
+      ["implementation_decision_record_freeze_approval", String(Boolean(payload.implementation_decision_record_freeze_approval))],
       ["runtime_approval_review_approved", String(Boolean(payload.runtime_approval_review_approved))],
+      ["runtime_approval_review_evidence_baseline_created", String(Boolean(payload.runtime_approval_review_evidence_baseline_created))],
+      ["runtime_approval_review_evidence_approved", String(Boolean(payload.runtime_approval_review_evidence_approved))],
+      ["approval_docket_lifecycle_matrix_created", String(Boolean(payload.approval_docket_lifecycle_matrix_created))],
       ["runtime_decision_readiness_approved", String(Boolean(payload.runtime_decision_readiness_approved))],
       ["review_board_planning_only", String(Boolean(payload.review_board_planning_only))],
       ["decision_package_approval", String(Boolean(payload.decision_package_approval))],

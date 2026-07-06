@@ -1,10 +1,13 @@
-# v0.2 Approval Docket No-Go
+# v0.2 Approval Docket Stabilization No-Go
 
-AION-141 fails if any preview boundary becomes an approval, release, runtime path, or implementation path.
+AION-142 fails if any stabilization artifact becomes an approval, release, runtime path, or implementation path.
 
 ## Approval No-Go Checks
+- approval docket stabilization approval true
 - approval docket item approved true
+- implementation decision record freeze approval true
 - implementation decision record approval true
+- runtime approval review evidence approved true
 - runtime approval review approved true
 - runtime decision lock release approved true
 - runtime decision readiness approved true
@@ -44,9 +47,8 @@ AION-141 fails if any preview boundary becomes an approval, release, runtime pat
 - package files added
 - migrations added
 - runtime API execution routes added
+- SDK resource implementation added
+- CLI command implementation added
 
 ## Allowed Surface
 Only docs, examples, static console read-only demo data, scripts, and tests are allowed. Docs and examples may discuss disabled, denied, no-go, future, planning, unapproved, template, or preview states, but must not set approval or runtime enablement true.
-
-## AION-142 Additional No-Go Checks
-AION-142 additionally fails on approval docket stabilization approval true, implementation decision record freeze approval true, runtime approval review evidence approved true, SDK resource implementation added, CLI command implementation added, package files added, migrations added, runtime API execution routes added, v0.2 tag creation, or v0.2 release creation.

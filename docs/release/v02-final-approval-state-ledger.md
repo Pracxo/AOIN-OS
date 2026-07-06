@@ -104,3 +104,6 @@ approval false, v0.2 tag absent, and v0.2 release absent.
 
 ## AION-141 Approval Docket Ledger
 AION-141 adds approval docket preview ledger entries with approval docket item approval false, implementation decision record approval false, runtime approval review approval false, runtime decision lock release approval false, runtime decision readiness approval false, decision package approval false, approval readiness approval false, review board decision approval false, routing decision approval false, reviewer sign-off implementation approval false, runtime implementation approval false, v0.2 tag absent, and v0.2 release absent.
+
+## AION-142 Approval Docket Stabilization Ledger
+AION-142 adds approval docket stabilization ledger entries with approval docket stabilization approval false, approval docket item approval false, implementation decision record freeze approval false, implementation decision record approval false, runtime approval review approval false, runtime decision lock release approval false, runtime decision readiness approval false, decision package approval false, approval readiness approval false, review board decision approval false, routing decision approval false, reviewer sign-off implementation approval false, runtime implementation approval false, v0.2 tag absent, and v0.2 release absent.

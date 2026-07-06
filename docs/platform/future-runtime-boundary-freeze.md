@@ -226,3 +226,6 @@ credential storage, token storage, tags, or releases.
 
 ## AION-141 Runtime Approval Review Freeze
 AION-141 adds a runtime approval review boundary, but the boundary is not runtime enablement. Runtime approval review approval, runtime decision lock release approval, runtime decision readiness approval, approval docket item approval, implementation decision record approval, runtime implementation approval, connector runtime, operator write execution, production auth runtime, module activation, sandbox execution, external calls, credential storage, token storage, tags, and releases remain false or absent.
+
+## AION-142 Approval Docket Stabilization Freeze
+AION-142 stabilizes approval docket and implementation decision record evidence, but stabilization is not runtime enablement. Approval docket stabilization approval, approval docket item approval, implementation decision record freeze approval, implementation decision record approval, runtime approval review approval, runtime decision lock release approval, runtime decision readiness approval, runtime implementation approval, connector runtime, operator write execution, production auth runtime, module activation, sandbox execution, external calls, credential storage, token storage, tags, and releases remain false or absent.

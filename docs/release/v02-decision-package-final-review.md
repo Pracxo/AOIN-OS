@@ -45,3 +45,6 @@ AION-140 creates no v0.2 tag and no v0.2 release. The v0.1 release baseline rema
 
 ## AION-141 Approval Docket Handoff
 AION-141 consumes this final review as approval docket evidence only. The docket remains preview-only: approval docket item approval, implementation decision record approval, runtime approval review approval, runtime decision lock release approval, decision package approval, approval readiness approval, and runtime implementation approval remain false.
+
+## AION-142 Approval Docket Stabilization Handoff
+AION-142 consumes this final review as stabilized docket evidence only. Approval docket stabilization approval, approval docket item approval, implementation decision record freeze approval, implementation decision record approval, runtime approval review approval, runtime decision lock release approval, decision package approval, approval readiness approval, and runtime implementation approval remain false.
