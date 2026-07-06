@@ -18,3 +18,6 @@ The approval docket state model defines preview-only states for future implement
 | `implementation_unapproved` | Implementation remains explicitly unapproved. | none | none |
 
 `approval_docket_item_approved=false`, `implementation_decision_record_approval=false`, `runtime_approval_review_approved=false`, `runtime_decision_lock_release_approved=false`, `runtime_decision_readiness_approved=false`, and `runtime_implementation_approved=false` in every state.
+
+## AION-142 Stabilized States
+AION-142 adds `stabilization_frozen` and `record_freeze_created` as evidence states only. `approval_docket_stabilization_approval=false`, `implementation_decision_record_freeze_approval=false`, `runtime_approval_review_evidence_approved=false`, and `runtime_implementation_approved=false` in every stabilized state.

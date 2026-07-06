@@ -29,3 +29,6 @@
 
 ## AION-141 Approval Docket Guard
 AION-141 extends this guard with `approval_docket_item_approved=false`, `implementation_decision_record_approval=false`, and `runtime_approval_review_approved=false`. Docket readiness, decision record completeness, reviewer evidence, ADR dependencies, and gate dependencies remain evidence only and do not approve implementation or runtime.
+
+## AION-142 Approval Docket Stabilization Guard
+AION-142 extends this guard with `approval_docket_stabilization_approval=false`, `implementation_decision_record_freeze_approval=false`, and `runtime_approval_review_evidence_approved=false`. Stabilization, record freeze, lifecycle evidence, ADR dependencies, and gate dependencies remain evidence only and do not approve implementation or runtime.

@@ -270,3 +270,6 @@ bypass remain disabled or absent.
 
 ## AION-141 Approval Docket Boundary
 Approval docket preview does not approve module activation. Module activation, capability activation, code loading, runtime registration, controlled execution, package installation, external dependency download, module writes, policy bypass, audit bypass, privileged bypass, approval docket item approval, implementation decision record approval, runtime approval review approval, and runtime implementation approval remain disabled, absent, or false.
+
+## AION-142 Approval Docket Stabilization Boundary
+Approval docket stabilization does not approve module activation. Module activation, capability activation, code loading, runtime registration, controlled execution, package installation, external dependency download, module writes, policy bypass, audit bypass, privileged bypass, approval docket stabilization approval, approval docket item approval, implementation decision record freeze approval, implementation decision record approval, runtime approval review approval, and runtime implementation approval remain disabled, absent, or false.

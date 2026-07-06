@@ -2146,3 +2146,19 @@ approval, submission approval, approval queue item approval, proposal
 implementation approval, workstream implementation approval, backlog
 implementation approval, or runtime implementation approval as true is a
 release blocker.
+
+## AION-142 Approval Docket Stabilization Policy
+
+AION-142 extends the policy lock to approval docket stabilization,
+implementation decision record freeze, runtime approval review evidence, and
+lifecycle evidence. Stabilization, record freeze, evidence matrix rows, ADR
+dependency evidence, and gate dependency evidence are policy inputs only. Any
+attempt to mark approval docket stabilization approval, approval docket item
+approval, implementation decision record freeze approval, implementation
+decision record approval, runtime approval review approval, runtime decision
+lock release approval, decision package approval, approval readiness approval,
+review board decision approval, routing decision approval, reviewer sign-off
+implementation approval, request pack approval, submission approval, approval
+queue item approval, proposal implementation approval, workstream
+implementation approval, backlog implementation approval, or runtime
+implementation approval as true is a release blocker.

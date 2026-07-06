@@ -30,3 +30,6 @@ No-go conditions include decision package approval true, approval readiness appr
 
 ## AION-141 Approval Docket Handoff
 AION-141 adds approval docket preview evidence after this closeout. The closeout remains preview-only and does not approve approval docket items, implementation decision records, runtime approval review, runtime decision lock release, decision packages, approval readiness, implementation, tags, or releases.
+
+## AION-142 Approval Docket Stabilization Handoff
+AION-142 adds stabilized docket and implementation decision record freeze evidence after this closeout. The closeout remains preview-only and does not approve approval docket stabilization, approval docket items, implementation decision record freeze, runtime approval review, runtime decision lock release, decision packages, approval readiness, implementation, tags, or releases.

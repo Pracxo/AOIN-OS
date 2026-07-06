@@ -115,3 +115,6 @@ implementation approval, and runtime implementation approval remain false.
 
 ## AION-141 Approval Docket Handoff
 AION-141 uses review board stabilization as docket evidence only. Review board decision approval, routing decision approval, reviewer sign-off implementation approval, approval docket item approval, implementation decision record approval, runtime approval review approval, and runtime implementation approval remain false.
+
+## AION-142 Approval Docket Stabilization Handoff
+AION-142 uses review board stabilization as stabilized docket evidence only. Review board decision approval, routing decision approval, reviewer sign-off implementation approval, approval docket stabilization approval, approval docket item approval, implementation decision record freeze approval, runtime approval review approval, and runtime implementation approval remain false.

@@ -93,3 +93,6 @@ approval, v0.2 tag creation, and v0.2 release creation remain false or absent.
 
 ## AION-141 Approval Docket Handoff
 AION-141 adds approval docket preview evidence downstream of this gate. Approval docket item approval, implementation decision record approval, runtime approval review approval, runtime decision lock release approval, decision package approval, approval readiness approval, and runtime implementation approval remain false.
+
+## AION-142 Approval Docket Stabilization Handoff
+AION-142 adds stabilized approval docket evidence downstream of this gate. Approval docket stabilization approval, approval docket item approval, implementation decision record freeze approval, implementation decision record approval, runtime approval review approval, runtime decision lock release approval, decision package approval, approval readiness approval, and runtime implementation approval remain false.

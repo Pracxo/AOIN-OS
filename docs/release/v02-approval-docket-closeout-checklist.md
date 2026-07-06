@@ -1,16 +1,25 @@
-# v0.2 Approval Docket Checklist
+# v0.2 Approval Docket Closeout Checklist
 
 - docs complete
 - examples valid
+- static console panels read-only
 - scripts executable
+- approval docket stabilization gate passing
+- implementation decision record freeze passing
+- approval docket stabilization no-go regression passing
+- approval docket preview gate passing
+- runtime approval review freeze passing
 - decision package final review passing
 - decision package stabilization passing
 - review board stabilization passing
 - submission registry stabilization passing
 - request pack final review passing
+- request pack stabilization passing
 - planning track closeout passing
 - final planning release gate passing
+- no approval docket stabilization approval
 - no approval docket item approval
+- no implementation decision record freeze approval
 - no implementation decision record approval
 - no runtime approval review approval
 - no runtime decision approval
@@ -29,8 +38,8 @@
 - no sandbox execution
 - no package files
 - no migrations
+- no runtime API execution routes
+- no SDK resource implementation
+- no CLI command implementation
 
 Every checklist item is evidence for future review only. The checklist does not approve implementation, release, runtime readiness, or any write path.
-
-## AION-142 Stabilization Checklist Handoff
-AION-142 adds approval docket stabilization gate passing, implementation decision record freeze passing, approval docket stabilization no-go regression passing, no approval docket stabilization approval, no implementation decision record freeze approval, no runtime approval review evidence approval, no SDK resource implementation, and no CLI command implementation as additional closeout checks.

@@ -1321,3 +1321,16 @@ decision record approval false, and release blockers only; they do not expose
 inputs, write controls, approval controls, activation controls,
 external-call controls, credential/token storage, sandbox execution, runtime
 enablement, a v0.2 tag, or a v0.2 release.
+
+## AION-142 Approval Docket Stabilization Panels
+
+The static visual brain includes AION-142 approval docket stabilization and
+implementation decision record freeze panels backed by bundled JSON. The
+panels remain read-only, redacted, and non-executing. They expose approval
+docket stabilization status, implementation decision record freeze status,
+runtime approval review evidence status, approval docket stabilization approval
+false, implementation decision record freeze approval false, runtime approval
+review approval false, and release blockers only; they do not expose inputs,
+write controls, approval controls, activation controls, external-call
+controls, credential/token storage, sandbox execution, runtime enablement, a
+v0.2 tag, or a v0.2 release.
