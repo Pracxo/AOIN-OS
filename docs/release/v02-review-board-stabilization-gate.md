@@ -112,3 +112,6 @@ review input only. Runtime decision lock release approval, runtime decision
 readiness approval, decision package approval, approval readiness approval,
 review board decision approval, routing decision approval, reviewer sign-off
 implementation approval, and runtime implementation approval remain false.
+
+## AION-141 Approval Docket Handoff
+AION-141 uses review board stabilization as docket evidence only. Review board decision approval, routing decision approval, reviewer sign-off implementation approval, approval docket item approval, implementation decision record approval, runtime approval review approval, and runtime implementation approval remain false.

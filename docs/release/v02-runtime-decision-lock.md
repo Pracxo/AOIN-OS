@@ -25,3 +25,6 @@ The runtime decision lock is a planning and release-readiness boundary. It does 
 
 ## Release Lock
 The lock blocks release and runtime movement until future explicit approval records exist. It creates no v0.2 tag and no v0.2 release.
+
+## AION-141 Approval Docket Handoff
+AION-141 references this runtime decision lock as docket evidence only. Runtime approval review approval, runtime decision lock release approval, runtime decision readiness approval, approval docket item approval, implementation decision record approval, and runtime implementation approval remain false.

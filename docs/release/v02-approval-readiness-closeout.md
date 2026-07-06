@@ -27,3 +27,6 @@ The closeout decision is to preserve the final pre-approval baseline. Future imp
 
 ## No-Go Conditions
 No-go conditions include decision package approval true, approval readiness approved true, runtime decision readiness approved true, runtime decision lock release approved true, review board decision approval true, routing decision approval true, reviewer sign-off marked implementation approval true, missing approval records, approval workflow bypass, evidence completeness bypass, submission freeze bypass, preapproval gate bypass, external calls enabled, credentials or tokens stored, sandbox execution enabled, v0.2 tag creation, or v0.2 release creation.
+
+## AION-141 Approval Docket Handoff
+AION-141 adds approval docket preview evidence after this closeout. The closeout remains preview-only and does not approve approval docket items, implementation decision records, runtime approval review, runtime decision lock release, decision packages, approval readiness, implementation, tags, or releases.

@@ -317,3 +317,6 @@ evidence only and no inputs, write controls, approval controls, runtime
 decision lock release controls, runtime decision approval controls, activation
 controls, external-call controls, credential/token storage, sandbox execution,
 runtime registration, v0.2 tag creation, or v0.2 release creation.
+
+## AION-141 Approval Docket Static Panels
+The static console adds approval docket preview and implementation decision record guard panels as read-only evidence only. They expose no approval docket item approval controls, implementation decision record approval controls, runtime approval review approval controls, runtime decision lock release controls, runtime decision approval controls, activation controls, external-call controls, credential/token storage, sandbox execution, runtime registration, v0.2 tag creation, or v0.2 release creation.

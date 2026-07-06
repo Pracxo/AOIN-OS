@@ -42,3 +42,6 @@ Baseline completeness does not approve runtime decision lock release, runtime
 decision readiness, decision packages, approval readiness, implementation,
 review-board decisions, routing decisions, submissions, request packs,
 preapproval queue items, tags, or releases.
+
+## AION-141 Approval Docket Evidence Baseline
+AION-141 extends this baseline with approval docket preview evidence. The evidence does not approve docket items, implementation decision records, runtime approval review, runtime decision lock release, decision packages, approval readiness, implementation, tags, or releases.

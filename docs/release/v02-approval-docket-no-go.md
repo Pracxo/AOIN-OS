@@ -1,7 +1,11 @@
-# v0.2 Runtime Decision Final No-Go
+# v0.2 Approval Docket No-Go
 
-The final no-go regression blocks these conditions:
+AION-141 fails if any preview boundary becomes an approval, release, runtime path, or implementation path.
 
+## Approval No-Go Checks
+- approval docket item approved true
+- implementation decision record approval true
+- runtime approval review approved true
 - runtime decision lock release approved true
 - runtime decision readiness approved true
 - decision package approval true
@@ -26,6 +30,8 @@ The final no-go regression blocks these conditions:
 - approval record missing
 - ADR dependency bypassed
 - gate dependency bypassed
+
+## Release And Runtime No-Go Checks
 - v0.2 tag created
 - v0.2 release created
 - production auth enabled
@@ -39,9 +45,5 @@ The final no-go regression blocks these conditions:
 - migrations added
 - runtime API execution routes added
 
-## AION-141 Additional No-Go Checks
-- approval docket item approved true
-- implementation decision record approval true
-- runtime approval review approved true
-- approval docket preview treated as implementation approval
-- implementation decision record treated as runtime enablement
+## Allowed Surface
+Only docs, examples, static console read-only demo data, scripts, and tests are allowed. Docs and examples may discuss disabled, denied, no-go, future, planning, unapproved, template, or preview states, but must not set approval or runtime enablement true.

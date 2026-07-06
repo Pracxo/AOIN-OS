@@ -223,3 +223,6 @@ matrix completion, approval guard completion, ADR dependency evidence, and gate
 dependency evidence do not enable connector runtime, operator write execution,
 production auth runtime, module activation, sandbox execution, external calls,
 credential storage, token storage, tags, or releases.
+
+## AION-141 Runtime Approval Review Freeze
+AION-141 adds a runtime approval review boundary, but the boundary is not runtime enablement. Runtime approval review approval, runtime decision lock release approval, runtime decision readiness approval, approval docket item approval, implementation decision record approval, runtime implementation approval, connector runtime, operator write execution, production auth runtime, module activation, sandbox execution, external calls, credential storage, token storage, tags, and releases remain false or absent.

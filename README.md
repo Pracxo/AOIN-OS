@@ -4734,3 +4734,23 @@ release is created.
 ./scripts/v02-runtime-decision-lock-freeze.sh
 ./scripts/v02-decision-package-final-no-go-regression.sh
 ```
+
+## AION-141 v0.2 Approval Docket Preview
+
+AION-141 creates the v0.2 approval docket preview, runtime approval review
+boundary, and implementation decision record guard. The approval docket remains
+preview-only: approval docket item approval remains false, implementation
+decision record approval remains false, runtime approval review approval
+remains false, runtime decision lock release approval remains false, decision
+package approval remains false, approval readiness approval remains false,
+review board decision approval remains false, routing decision approval remains
+false, reviewer sign-off implementation approval remains false, runtime
+implementation approval remains false, no external calls are added, no
+credentials or tokens are stored, no sandbox execution is enabled, no v0.2 tag
+is created, and no v0.2 release is created.
+
+```bash
+./scripts/v02-approval-docket-preview-check.sh
+./scripts/v02-runtime-approval-review-freeze.sh
+./scripts/v02-approval-docket-no-go-regression.sh
+```

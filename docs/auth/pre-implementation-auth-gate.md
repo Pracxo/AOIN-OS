@@ -203,6 +203,9 @@ persistence, cookie issuance, token issuance, external identity provider
 runtime, OAuth/OIDC/SAML runtime, credential storage, and token storage remain
 disabled or absent.
 
+## AION-141 Approval Docket Boundary
+Approval docket preview does not approve production auth implementation. Production auth runtime, login endpoints, logout endpoints, session persistence, cookie issuance, token issuance, external identity provider runtime, OAuth/OIDC/SAML runtime, credential storage, token storage, approval docket item approval, implementation decision record approval, runtime approval review approval, and runtime implementation approval remain disabled, absent, or false.
+
 AION-137 may stabilize production auth review routing as future
 decision-readiness evidence, but stabilization is not approval. Production auth
 implementation approval remains false, routing decision approval remains false,

@@ -2090,6 +2090,22 @@ implementation approval, workstream implementation approval, backlog
 implementation approval, or runtime implementation approval as true is a
 release blocker.
 
+## AION-141 Approval Docket Preview Policy
+
+AION-141 extends the policy lock to approval docket preview and implementation
+decision record guard evidence. Docket readiness, runtime approval review,
+implementation decision record creation, reviewer evidence, ADR dependency
+evidence, and gate dependency evidence are policy inputs only. Any attempt to
+mark approval docket item approval, implementation decision record approval,
+runtime approval review approval, runtime decision lock release approval,
+runtime decision readiness approval, decision package approval, approval
+readiness approval, review board decision approval, routing decision approval,
+reviewer sign-off implementation approval, preapproval queue item approval,
+request pack approval, submission approval, approval queue item approval,
+proposal implementation approval, workstream implementation approval, backlog
+implementation approval, or runtime implementation approval as true is a
+release blocker.
+
 ## AION-140 Decision Package Final Review Policy
 
 AION-140 extends the policy lock to decision package final review and runtime

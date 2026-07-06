@@ -243,3 +243,6 @@ review, approval readiness closeout, runtime decision lock, final evidence
 matrix, ADR dependency evidence, and gate dependency evidence do not approve
 decision packages, approval readiness, runtime decision readiness, runtime
 decision lock release, implementation, runtime, tags, or releases.
+
+## AION-141 Approval Docket Preview State
+AION-141 records approval docket preview and implementation decision record guard state without approval. Approval docket item approval, implementation decision record approval, runtime approval review approval, runtime decision lock release approval, runtime decision readiness approval, decision package approval, approval readiness approval, review board decision approval, routing decision approval, reviewer sign-off implementation approval, and runtime implementation approval remain false.

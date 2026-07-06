@@ -46,3 +46,6 @@ decision readiness approval, runtime implementation approval, decision package
 approval, approval readiness approval, review board decision approval, routing
 decision approval, reviewer sign-off implementation approval, v0.2 tag
 creation, and v0.2 release creation remain false or absent.
+
+## AION-141 Approval Docket Handoff
+AION-141 creates a runtime approval review boundary after this closeout. The boundary remains review-only: runtime approval review approval, runtime decision lock release approval, runtime decision readiness approval, approval docket item approval, implementation decision record approval, and runtime implementation approval remain false.

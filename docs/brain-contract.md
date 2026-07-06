@@ -2070,3 +2070,17 @@ decisions, approve submissions, approve request packs, approve preapproval
 queue items, approve implementation, enable runtime, execute tools, call
 external services, store credentials or tokens, create a v0.2 tag, or create a
 v0.2 release.
+
+## AION-141 Approval Docket Preview Contract
+
+The AION-141 contract freezes approval docket preview records and
+implementation decision records as read-only planning metadata. Docket
+readiness, runtime approval review boundary status, implementation decision
+record completeness, reviewer evidence, ADR dependencies, and gate
+dependencies must not approve docket items, approve implementation decision
+records, approve runtime approval review, approve runtime decision lock
+release, approve decision packages, approve readiness, approve review board
+decisions, approve routing, approve submissions, approve request packs,
+approve preapproval queue items, approve implementation, enable runtime,
+execute tools, call external services, store credentials or tokens, create a
+v0.2 tag, or create a v0.2 release.

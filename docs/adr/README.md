@@ -141,3 +141,4 @@ closure decision in ADR 0072.
 - [0129: v0.2 Decision Package Preview](0129-v02-decision-package-preview.md) - Adds the decision package preview, approval-readiness evidence bundle, runtime decision boundary, and no-go checks while keeping all approvals false.
 - [0130: v0.2 Decision Package Stabilization](0130-v02-decision-package-stabilization.md) - Stabilizes the decision package preview, freezes approval readiness, and closes the runtime decision boundary while keeping all approvals false.
 - [0131: v0.2 Decision Package Final Review](0131-v02-decision-package-final-review.md) - Finalizes the decision package review, closes approval readiness, and creates the runtime decision lock while keeping all approvals false.
+- [0132: v0.2 Approval Docket Preview](0132-v02-approval-docket-preview.md) - Adds the approval docket preview, runtime approval review boundary, and implementation decision record guard while keeping all approvals false.

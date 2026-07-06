@@ -1124,3 +1124,13 @@ command, no runtime decision approval command, no write path, no connector
 runtime command, no sandbox command, no external-call command, no
 credential/token command, no package command, no migration command, and no
 release or tag command.
+
+## AION-141 CLI Boundary
+
+AION-141 adds local shell gates for approval docket preview and runtime
+approval review freeze validation only. It adds no CLI command implementation,
+no runtime execution command, no approval docket approval command, no
+implementation decision record approval command, no runtime approval review
+approval command, no write path, no connector runtime command, no sandbox
+command, no external-call command, no credential/token command, no package
+command, no migration command, and no release or tag command.

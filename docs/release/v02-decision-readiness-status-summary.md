@@ -40,3 +40,6 @@ decision lock release, review board decisions, routing decisions, reviewer
 sign-off as implementation approval, implementation, tags, releases, external
 calls, credentials, tokens, sandbox execution, write execution, connector
 runtime, production auth, or module activation.
+
+## AION-141 Approval Docket Status
+AION-141 records docket readiness as preview status only. Docket readiness must not approve approval docket items, implementation decision records, runtime approval review, runtime decision lock release, decision packages, approval readiness, implementation, tags, or releases.

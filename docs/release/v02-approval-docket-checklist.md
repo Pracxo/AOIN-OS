@@ -1,16 +1,18 @@
-# v0.2 Decision Package Final Checklist
+# v0.2 Approval Docket Checklist
 
 - docs complete
 - examples valid
 - scripts executable
+- decision package final review passing
 - decision package stabilization passing
-- decision package preview passing
 - review board stabilization passing
-- pre-approval review board passing
 - submission registry stabilization passing
 - request pack final review passing
 - planning track closeout passing
 - final planning release gate passing
+- no approval docket item approval
+- no implementation decision record approval
+- no runtime approval review approval
 - no runtime decision approval
 - no decision package approval
 - no approval readiness approval
@@ -28,11 +30,4 @@
 - no package files
 - no migrations
 
-## AION-141 Handoff Checklist
-- approval docket preview created
-- runtime approval review boundary created
-- implementation decision record guard created
-- no approval docket item approval
-- no implementation decision record approval
-- no runtime approval review approval
-- no runtime decision lock release approval
+Every checklist item is evidence for future review only. The checklist does not approve implementation, release, runtime readiness, or any write path.
