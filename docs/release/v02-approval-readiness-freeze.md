@@ -63,3 +63,6 @@ approval, runtime decision lock release approval, review board decision
 approval, routing decision approval, reviewer sign-off implementation
 approval, submission approval, request pack approval, implementation approval,
 v0.2 tag creation, and v0.2 release creation remain false or absent.
+
+## AION-141 Approval Docket Handoff
+AION-141 uses approval readiness freeze evidence as a docket input only. Approval docket item approval, implementation decision record approval, runtime approval review approval, approval readiness approval, decision package approval, and runtime implementation approval remain false.

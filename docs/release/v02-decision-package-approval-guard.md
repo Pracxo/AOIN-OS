@@ -26,3 +26,6 @@
 - `workstream_implementation_approved=false`
 - `backlog_implementation_items_approved=false`
 - `runtime_implementation_approved=false`
+
+## AION-141 Approval Docket Guard
+AION-141 extends this guard with `approval_docket_item_approved=false`, `implementation_decision_record_approval=false`, and `runtime_approval_review_approved=false`. Docket readiness, decision record completeness, reviewer evidence, ADR dependencies, and gate dependencies remain evidence only and do not approve implementation or runtime.

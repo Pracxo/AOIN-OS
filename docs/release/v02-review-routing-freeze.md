@@ -78,3 +78,6 @@ AION-140 consumes this routing freeze as final review evidence only. Runtime
 decision lock release approval remains false, runtime decision readiness
 approval remains false, and routing freeze completion still does not approve
 implementation, decision packages, approval readiness, tags, or releases.
+
+## AION-141 Approval Docket Handoff
+AION-141 treats routing freeze evidence as docket input only. Routing decision approval, reviewer sign-off implementation approval, approval docket item approval, implementation decision record approval, runtime approval review approval, and runtime implementation approval remain false.

@@ -1253,3 +1253,15 @@ synthetic planning artifacts only and must not be interpreted as SDK runtime
 contracts, runtime decision lock release approval, runtime decision readiness
 approval, decision package approval, approval readiness approval,
 implementation approval, submission approval, or release approval.
+
+## AION-141 SDK Boundary
+
+AION-141 adds no SDK resources, no SDK clients, no CLI-backed SDK commands, no
+network clients, no provider SDK dependencies, and no connector SDK
+dependencies. Approval docket preview, runtime approval review boundary,
+implementation decision record guard, docket state model, and evidence pack
+examples are synthetic planning artifacts only and must not be interpreted as
+SDK runtime contracts, approval docket item approval, implementation decision
+record approval, runtime approval review approval, runtime decision lock
+release approval, decision package approval, approval readiness approval,
+implementation approval, submission approval, or release approval.

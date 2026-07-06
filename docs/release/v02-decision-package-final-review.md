@@ -42,3 +42,6 @@ The final review blocks any runtime decision lock release approval, runtime deci
 
 ## Release Statement
 AION-140 creates no v0.2 tag and no v0.2 release. The v0.1 release baseline remains frozen and the `aion-v0.1.0` tag must not be moved, deleted, or recreated.
+
+## AION-141 Approval Docket Handoff
+AION-141 consumes this final review as approval docket evidence only. The docket remains preview-only: approval docket item approval, implementation decision record approval, runtime approval review approval, runtime decision lock release approval, decision package approval, approval readiness approval, and runtime implementation approval remain false.

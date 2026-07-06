@@ -2356,6 +2356,21 @@ implementation, migration, connector runtime, operator write execution,
 production auth runtime, module activation, sandbox execution, external call
 path, credential storage, token storage, v0.2 tag, or v0.2 release is added.
 
+## AION-141 Approval Docket Preview Boundary
+
+AION-141 adds the approval docket preview, runtime approval review boundary,
+and implementation decision record guard without changing runtime
+architecture. Approval docket item approval, implementation decision record
+approval, runtime approval review approval, runtime decision lock release
+approval, decision package approval, approval readiness approval, review board
+decision approval, routing decision approval, reviewer sign-off implementation
+approval, submission approval, request pack approval, proposal approval,
+workstream approval, backlog approval, and runtime implementation approval
+remain false. No API route, SDK resource, CLI implementation, migration,
+connector runtime, operator write execution, production auth runtime, module
+activation, sandbox execution, external call path, credential storage, token
+storage, v0.2 tag, or v0.2 release is added.
+
 ## AION-140 Decision Package Final Review Boundary
 
 AION-140 closes the decision package layer into a final pre-approval baseline

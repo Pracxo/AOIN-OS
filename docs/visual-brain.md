@@ -1309,3 +1309,15 @@ false, runtime decision readiness approval false, and release blockers only;
 they do not expose inputs, write controls, approval controls, activation
 controls, external-call controls, credential/token storage, sandbox execution,
 runtime enablement, a v0.2 tag, or a v0.2 release.
+
+## AION-141 Approval Docket Preview Panels
+
+The static visual brain includes AION-141 approval docket preview and
+implementation decision record guard panels backed by bundled JSON. The panels
+remain read-only, redacted, and non-executing. They expose approval docket
+preview status, implementation decision record guard status, runtime approval
+review approval false, approval docket item approval false, implementation
+decision record approval false, and release blockers only; they do not expose
+inputs, write controls, approval controls, activation controls,
+external-call controls, credential/token storage, sandbox execution, runtime
+enablement, a v0.2 tag, or a v0.2 release.
