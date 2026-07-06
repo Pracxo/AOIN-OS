@@ -275,3 +275,6 @@ Approval docket preview does not approve connector implementation. Connector run
 
 ## AION-142 Approval Docket Stabilization Boundary
 Approval docket stabilization does not approve connector implementation. Connector runtime, external calls, credential/token storage, sandbox execution, provider SDK dependencies, connector SDK dependencies, runtime route registration, approval docket stabilization approval, approval docket item approval, implementation decision record freeze approval, implementation decision record approval, runtime approval review approval, and runtime implementation approval remain disabled, absent, or false.
+
+## AION-143 Approval Docket Final Review Boundary
+Approval docket final review and runtime approval lock do not approve connector implementation. Connector runtime, external calls, credential/token storage, sandbox execution, provider SDK dependencies, connector SDK dependencies, runtime route registration, approval docket final review approval, approval docket item approval, implementation decision record closeout approval, implementation decision record approval, runtime approval lock release approval, runtime approval review approval, and runtime implementation approval remain disabled, absent, or false.

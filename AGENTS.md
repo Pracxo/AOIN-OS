@@ -861,3 +861,16 @@ Instructions for future Codex runs in this repository:
   reviewer evidence, ADR dependency, gate dependency, static console evidence,
   or no-go evidence as runtime enablement, implementation approval, tag
   creation, or release creation.
+- AION-143 finalizes the v0.2 approval docket review and creates the runtime
+  approval lock as planning artifacts only. Approval docket final review
+  approval, approval docket item approval, implementation decision record
+  closeout approval, implementation decision record approval, runtime approval
+  lock release approval, runtime approval review approval, runtime decision
+  lock release approval, decision package approval, approval readiness approval,
+  review board decision approval, routing decision approval, reviewer sign-off
+  implementation approval, request pack approval, submission approval, approval
+  queue approval, proposal approval, workstream approval, backlog approval, and
+  runtime implementation approval must all remain false. Do not treat final
+  review, record closeout, runtime approval lock, ADR dependency, gate
+  dependency, static console evidence, or no-go evidence as runtime enablement,
+  implementation approval, tag creation, or release creation.

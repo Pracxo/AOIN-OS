@@ -61,7 +61,9 @@ a {
 }
 
 .module-subpanel[aria-label*="decision package stabilization"],
-.module-subpanel[aria-label*="approval readiness freeze"] {
+.module-subpanel[aria-label*="approval readiness freeze"],
+.module-subpanel[aria-label*="approval docket final review"],
+.module-subpanel[aria-label*="runtime approval lock"] {
   border-color: var(--focus);
 }
 

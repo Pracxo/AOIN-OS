@@ -1334,3 +1334,15 @@ review approval false, and release blockers only; they do not expose inputs,
 write controls, approval controls, activation controls, external-call
 controls, credential/token storage, sandbox execution, runtime enablement, a
 v0.2 tag, or a v0.2 release.
+
+## AION-143 Approval Docket Final Review Panels
+
+The static visual brain includes AION-143 approval docket final review and
+runtime approval lock panels backed by bundled JSON. The panels remain
+read-only, redacted, and non-executing. They expose final review status,
+implementation decision record closeout status, runtime approval lock release
+approval false, runtime approval review approval false, approval docket item
+approval false, and release blockers only; they do not expose inputs, write
+controls, approval controls, activation controls, external-call controls,
+credential/token storage, sandbox execution, runtime enablement, a v0.2 tag, or
+a v0.2 release.

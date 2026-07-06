@@ -37,3 +37,6 @@ The freeze fails if any approval, bypass, runtime, release, package, migration, 
 
 ## Non-Approval Statement
 Frozen implementation decision records are not approval records. The freeze creates no runtime readiness approval, no release approval, no decision approval, and no permission to implement.
+
+## AION-143 Closeout Handoff
+AION-143 closes implementation decision records as unapproved planning records only. Implementation decision record closeout approval, implementation decision record freeze approval, implementation decision record approval, approval docket final review approval, runtime approval lock release approval, runtime approval review approval, and runtime implementation approval remain false.

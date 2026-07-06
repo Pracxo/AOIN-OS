@@ -1,13 +1,14 @@
-# v0.2 Approval Docket Stabilization No-Go
+# v0.2 Approval Docket Final No-Go
 
-AION-142 fails if any stabilization artifact becomes an approval, release, runtime path, or implementation path.
+AION-143 fails if any final review artifact becomes an approval, release, runtime path, or implementation path.
 
 ## Approval No-Go Checks
-- approval docket stabilization approval true
+- approval docket final review approval true
 - approval docket item approved true
-- implementation decision record freeze approval true
+- approval docket stabilization approval true
 - implementation decision record approval true
-- runtime approval review evidence approved true
+- implementation decision record closeout approval true
+- runtime approval lock release approved true
 - runtime approval review approved true
 - runtime decision lock release approved true
 - runtime decision readiness approved true
@@ -47,11 +48,6 @@ AION-142 fails if any stabilization artifact becomes an approval, release, runti
 - package files added
 - migrations added
 - runtime API execution routes added
-- SDK resource implementation added
-- CLI command implementation added
 
 ## Allowed Surface
-Only docs, examples, static console read-only demo data, scripts, and tests are allowed. Docs and examples may discuss disabled, denied, no-go, future, planning, unapproved, template, or preview states, but must not set approval or runtime enablement true.
-
-## AION-143 Additional No-Go Coverage
-AION-143 adds approval docket final review approval, implementation decision record closeout approval, and runtime approval lock release approval to the no-go surface. These markers must remain false alongside every AION-142 approval, runtime, tag, release, package, migration, API, SDK, and CLI blocker.
+Only docs, examples, static console read-only demo data, scripts, and tests are allowed. Docs and examples may discuss disabled, denied, no-go, future, planning, unapproved, template, preview, final review, closeout, or lock states, but must not set approval or runtime enablement true.

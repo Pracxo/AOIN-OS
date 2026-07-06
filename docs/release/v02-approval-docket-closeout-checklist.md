@@ -43,3 +43,6 @@
 - no CLI command implementation
 
 Every checklist item is evidence for future review only. The checklist does not approve implementation, release, runtime readiness, or any write path.
+
+## AION-143 Final Checklist Handoff
+AION-143 extends this checklist with final review, implementation decision record closeout, runtime approval lock freeze, and final no-go evidence. The extended checklist remains evidence only and does not approve implementation, release, runtime readiness, runtime approval lock release, or any write path.

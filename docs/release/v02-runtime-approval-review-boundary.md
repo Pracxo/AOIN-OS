@@ -29,3 +29,6 @@ AION-141 creates no v0.2 tag and no v0.2 release. Runtime approval review can on
 
 ## AION-142 Stabilization Handoff
 AION-142 records runtime approval review evidence as a baseline only. Runtime approval review evidence approval, runtime approval review approval, approval docket stabilization approval, implementation decision record freeze approval, runtime decision lock release approval, runtime decision readiness approval, and runtime implementation approval remain false.
+
+## AION-143 Runtime Approval Lock Handoff
+AION-143 records the runtime approval lock as a final review lock only. Runtime approval lock release approval, runtime approval review approval, runtime decision lock release approval, runtime decision readiness approval, approval docket final review approval, implementation decision record closeout approval, and runtime implementation approval remain false.
