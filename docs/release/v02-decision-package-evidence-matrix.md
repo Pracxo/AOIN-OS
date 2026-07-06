@@ -29,3 +29,12 @@ completeness still keeps decision package approval false, approval readiness
 approval false, runtime decision readiness approval false, review board
 decision approval false, routing decision approval false, reviewer sign-off
 implementation approval false, and runtime implementation approval false.
+
+## AION-140 Final Matrix Handoff
+
+AION-140 consumes this matrix into the final evidence matrix and approval
+guard. Matrix completeness still keeps decision package approval false,
+approval readiness approval false, runtime decision readiness approval false,
+runtime decision lock release approval false, review board decision approval
+false, routing decision approval false, reviewer sign-off implementation
+approval false, and runtime implementation approval false.

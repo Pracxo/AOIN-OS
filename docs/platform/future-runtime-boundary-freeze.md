@@ -216,3 +216,10 @@ baseline completion, status summary completion, ADR dependency evidence, and
 gate dependency evidence do not enable connector runtime, operator write
 execution, production auth runtime, module activation, sandbox execution,
 external calls, credential storage, token storage, tags, or releases.
+
+AION-140 keeps the future runtime boundary frozen. Decision package final
+review, approval readiness closeout, runtime decision lock, final evidence
+matrix completion, approval guard completion, ADR dependency evidence, and gate
+dependency evidence do not enable connector runtime, operator write execution,
+production auth runtime, module activation, sandbox execution, external calls,
+credential storage, token storage, tags, or releases.

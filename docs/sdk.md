@@ -1242,3 +1242,14 @@ examples are synthetic planning artifacts only and must not be interpreted as
 SDK runtime contracts, runtime decision readiness approval, decision package
 approval, approval readiness approval, implementation approval, submission
 approval, or release approval.
+
+## AION-140 SDK Boundary
+
+AION-140 adds no SDK resources, no SDK clients, no CLI-backed SDK commands, no
+network clients, no provider SDK dependencies, and no connector SDK
+dependencies. Decision package final review, approval readiness closeout,
+runtime decision lock, final evidence matrix, and approval guard examples are
+synthetic planning artifacts only and must not be interpreted as SDK runtime
+contracts, runtime decision lock release approval, runtime decision readiness
+approval, decision package approval, approval readiness approval,
+implementation approval, submission approval, or release approval.

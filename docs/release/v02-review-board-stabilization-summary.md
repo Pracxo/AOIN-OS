@@ -41,3 +41,9 @@ evidence only. Runtime decision readiness approval, decision package approval,
 approval readiness approval, review board decision approval, routing decision
 approval, reviewer sign-off implementation approval, and runtime
 implementation approval remain false.
+
+AION-140 uses this summary as inherited decision package final review evidence
+only. Runtime decision lock release approval, runtime decision readiness
+approval, decision package approval, approval readiness approval, review board
+decision approval, routing decision approval, reviewer sign-off implementation
+approval, and runtime implementation approval remain false.

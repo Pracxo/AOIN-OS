@@ -31,3 +31,12 @@ decision readiness, releases, tags, external calls, credentials, tokens,
 sandbox execution, operator write execution, connector runtime, production
 auth, or module activation.
 
+## AION-140 Final Review Status Handoff
+
+AION-140 adds final review and runtime decision lock status on top of this
+summary. The inherited status remains evidence only and does not approve the
+decision package, approval readiness, runtime decision readiness, runtime
+decision lock release, review board decisions, routing decisions, reviewer
+sign-off as implementation approval, implementation, tags, releases, external
+calls, credentials, tokens, sandbox execution, write execution, connector
+runtime, production auth, or module activation.

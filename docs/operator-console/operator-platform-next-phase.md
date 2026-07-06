@@ -310,3 +310,10 @@ redacted JSON evidence only and no inputs, write controls, approval controls,
 runtime decision approval controls, activation controls, external-call
 controls, credential/token storage, sandbox execution, runtime registration,
 v0.2 tag creation, or v0.2 release creation.
+
+AION-140 adds read-only static console panels for decision package final
+review and runtime decision lock. The panels expose bundled, redacted JSON
+evidence only and no inputs, write controls, approval controls, runtime
+decision lock release controls, runtime decision approval controls, activation
+controls, external-call controls, credential/token storage, sandbox execution,
+runtime registration, v0.2 tag creation, or v0.2 release creation.

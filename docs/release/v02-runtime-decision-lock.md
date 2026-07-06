@@ -1,0 +1,27 @@
+# v0.2 Runtime Decision Lock
+
+## Lock State
+- `runtime_decision_lock_created=true`
+- `runtime_decision_lock_release_approved=false`
+- `runtime_decision_readiness_approved=false`
+- `runtime_implementation_approved=false`
+- `decision_package_approval=false`
+- `approval_readiness_approved=false`
+- `review_board_decision_approval=false`
+- `routing_decision_approval=false`
+- `reviewer_signoff_implementation_approval=false`
+- `operator_write_execution_approved=false`
+- `connector_implementation_approved=false`
+- `production_auth_approved=false`
+- `module_activation_approved=false`
+- `external_calls_approved=false`
+- `credential_storage_approved=false`
+- `token_storage_approved=false`
+- `sandbox_execution_approved=false`
+- `v02_release_approved=false`
+
+## Boundary
+The runtime decision lock is a planning and release-readiness boundary. It does not enable runtime implementation, connector runtime, production auth, module activation, external calls, credential storage, token storage, sandbox execution, operator write execution, capability activation, code loading, runtime registration, or release creation.
+
+## Release Lock
+The lock blocks release and runtime movement until future explicit approval records exist. It creates no v0.2 tag and no v0.2 release.

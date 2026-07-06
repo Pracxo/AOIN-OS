@@ -36,3 +36,11 @@ AION-139 adds stabilization and approval readiness freeze evidence around this
 state model. No state in the stabilized model approves runtime decision
 readiness, approves implementation, enables runtime, creates a tag, or creates
 a release.
+
+## AION-140 Final Review State Boundary
+
+AION-140 adds final review and runtime decision lock evidence around this state
+model. No state in the final review model approves runtime decision lock
+release, runtime decision readiness, implementation, decision packages,
+approval readiness, review board decisions, routing decisions, reviewer
+sign-off as implementation approval, tags, or releases.

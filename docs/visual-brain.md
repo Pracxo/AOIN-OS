@@ -1298,3 +1298,14 @@ closeout blockers only; they do not expose inputs, write controls, approval
 controls, activation controls, external-call controls, credential/token
 storage, sandbox execution, runtime decision approval, a v0.2 tag, or a v0.2
 release.
+
+## AION-140 Decision Package Final Review Panels
+
+The static visual brain includes AION-140 decision package final review and
+runtime decision lock panels backed by bundled JSON. The panels remain
+read-only, redacted, and non-executing. They expose final review status,
+approval readiness closeout status, runtime decision lock release approval
+false, runtime decision readiness approval false, and release blockers only;
+they do not expose inputs, write controls, approval controls, activation
+controls, external-call controls, credential/token storage, sandbox execution,
+runtime enablement, a v0.2 tag, or a v0.2 release.

@@ -1114,3 +1114,13 @@ runtime execution command, no runtime decision approval command, no write path,
 no connector runtime command, no sandbox command, no external-call command, no
 credential/token command, no package command, no migration command, and no
 release or tag command.
+
+## AION-140 CLI Boundary
+
+AION-140 adds local shell gates for decision package final review and runtime
+decision lock freeze validation only. It adds no CLI command implementation,
+no runtime execution command, no runtime decision lock release approval
+command, no runtime decision approval command, no write path, no connector
+runtime command, no sandbox command, no external-call command, no
+credential/token command, no package command, no migration command, and no
+release or tag command.

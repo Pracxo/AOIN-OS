@@ -2057,3 +2057,16 @@ review board decisions, approve routing decisions, approve submissions,
 approve request packs, approve preapproval queue items, approve
 implementation, enable runtime, execute tools, call external services, store
 credentials or tokens, create a v0.2 tag, or create a v0.2 release.
+
+## AION-140 Decision Package Final Review Contract
+
+The AION-140 contract freezes decision package final review records as
+read-only planning metadata. Final review status, approval readiness closeout
+status, runtime decision lock status, final evidence matrix rows, approval
+guard values, ADR dependencies, and gate dependencies must not approve runtime
+decision readiness, approve the package, approve readiness, approve runtime
+decision lock release, approve review board decisions, approve routing
+decisions, approve submissions, approve request packs, approve preapproval
+queue items, approve implementation, enable runtime, execute tools, call
+external services, store credentials or tokens, create a v0.2 tag, or create a
+v0.2 release.

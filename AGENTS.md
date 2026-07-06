@@ -825,3 +825,14 @@ Instructions for future Codex runs in this repository:
   Do not treat stabilization, closeout, readiness freeze, ADR dependency, gate
   dependency, static console evidence, or no-go evidence as runtime decision
   approval, implementation approval, tag creation, or release creation.
+- AION-140 finalizes the v0.2 decision package review and creates the runtime
+  decision lock as planning artifacts only. Runtime decision lock release
+  approval, decision package approval, approval readiness approval, runtime
+  decision readiness approval, review board decision approval, routing decision
+  approval, reviewer sign-off implementation approval, preapproval queue
+  approval, request pack approval, submission approval, approval queue
+  approval, proposal approval, workstream approval, backlog approval, and
+  runtime implementation approval must all remain false. Do not treat final
+  review, approval readiness closeout, runtime decision lock, ADR dependency,
+  gate dependency, static console evidence, or no-go evidence as runtime
+  enablement, implementation approval, tag creation, or release creation.

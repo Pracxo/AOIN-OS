@@ -132,6 +132,9 @@ def test_navigation_map_and_accessibility_result_are_valid() -> None:
         "./scripts/v02-decision-package-stabilization-gate.sh",
         "./scripts/v02-approval-readiness-freeze.sh",
         "./scripts/v02-decision-package-stabilization-no-go-regression.sh",
+        "./scripts/v02-decision-package-final-review.sh",
+        "./scripts/v02-runtime-decision-lock-freeze.sh",
+        "./scripts/v02-decision-package-final-no-go-regression.sh",
         "./scripts/docs-check.sh",
     }
     assert set(nav["safe_copy_commands"]) == allowed_commands
@@ -247,6 +250,9 @@ def test_static_console_has_navigation_accessibility_and_safe_command_copy() -> 
         "./scripts/v02-decision-package-stabilization-gate.sh",
         "./scripts/v02-approval-readiness-freeze.sh",
         "./scripts/v02-decision-package-stabilization-no-go-regression.sh",
+        "./scripts/v02-decision-package-final-review.sh",
+        "./scripts/v02-runtime-decision-lock-freeze.sh",
+        "./scripts/v02-decision-package-final-no-go-regression.sh",
         "./scripts/docs-check.sh",
     }
 

@@ -103,3 +103,13 @@ decision approval, routing decision approval, reviewer sign-off implementation
 approval, submission approval, request pack approval, runtime implementation
 approval, v0.2 tag creation, and v0.2 release creation all remain false or
 absent.
+
+## AION-140 Final Review Handoff
+
+AION-140 finalizes this preview lineage as a pre-approval baseline only.
+Decision package approval, approval readiness approval, runtime decision
+readiness approval, runtime decision lock release approval, review board
+decision approval, routing decision approval, reviewer sign-off implementation
+approval, submission approval, request pack approval, runtime implementation
+approval, v0.2 tag creation, and v0.2 release creation all remain false or
+absent.

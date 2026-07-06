@@ -73,3 +73,8 @@ AION-139 freezes this routing evidence as inherited stabilization evidence
 only. Runtime decision readiness approval remains false, and routing freeze
 completion still does not approve implementation, decision packages, approval
 readiness, tags, or releases.
+
+AION-140 consumes this routing freeze as final review evidence only. Runtime
+decision lock release approval remains false, runtime decision readiness
+approval remains false, and routing freeze completion still does not approve
+implementation, decision packages, approval readiness, tags, or releases.
