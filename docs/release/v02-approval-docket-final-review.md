@@ -49,3 +49,12 @@ The final review blocks any approval docket final review approval, approval dock
 
 ## Release Statement
 AION-143 creates no v0.2 tag and no v0.2 release. The v0.1 release baseline remains frozen and the `aion-v0.1.0` tag must not be moved, deleted, or recreated.
+
+## AION-144 Runtime Approval Board Handoff
+
+AION-144 consumes this final review as prior evidence only. Runtime approval
+board decision approval, approval vote record approval, approval vote record
+runtime effect, implementation go status, go/no-go ledger runtime effect,
+approval docket final review approval, implementation decision record closeout
+approval, runtime approval lock release approval, runtime approval review
+approval, and runtime implementation approval remain false.

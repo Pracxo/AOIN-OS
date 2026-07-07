@@ -848,6 +848,13 @@ Instructions for future Codex runs in this repository:
   decision record completeness, reviewer evidence, ADR dependency, gate
   dependency, static console evidence, or no-go evidence as runtime enablement,
   implementation approval, tag creation, or release creation.
+
+- AION-144 extends the boundary with a runtime approval board preview, approval
+  vote record guard, and implementation go/no-go ledger boundary. Runtime
+  approval board decision approval, approval vote record approval, approval vote
+  record runtime effect, implementation go status, go/no-go ledger runtime
+  effect, runtime approval lock release approval, and runtime implementation
+  approval must remain false.
 - AION-142 stabilizes the v0.2 approval docket and freezes implementation
   decision records as planning artifacts only. Approval docket stabilization
   approval, approval docket item approval, implementation decision record freeze

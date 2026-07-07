@@ -35,3 +35,12 @@ AION-142 extends this guard with `approval_docket_stabilization_approval=false`,
 
 ## AION-143 Approval Docket Final Guard
 AION-143 extends this guard with `approval_docket_final_review_approval=false`, `implementation_decision_record_closeout_approval=false`, and `runtime_approval_lock_release_approved=false`. Final review, record closeout, runtime approval lock, ADR dependencies, and gate dependencies remain evidence only and do not approve implementation or runtime.
+
+## AION-144 Runtime Approval Board Guard
+
+AION-144 extends this guard with `runtime_approval_board_decision_approved=false`,
+`approval_vote_record_approval=false`, `approval_vote_record_runtime_effect=false`,
+`implementation_go_status=false`, and `go_no_go_ledger_runtime_effect=false`.
+Board preview, vote records, go/no-go ledger evidence, ADR dependencies, and
+gate dependencies remain evidence only and do not approve implementation or
+runtime.

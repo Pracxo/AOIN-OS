@@ -14,3 +14,12 @@
 | final planning release gate | planning release evidence | release reviewer | ADR 0120 | `./scripts/v02-final-planning-release-gate.sh` | false | false | false | locked | false | v0.2 release created | No v0.2 release is created. |
 
 Every area remains non-runtime and unapproved. Runtime enabled is false for every row.
+
+## AION-144 Runtime Approval Board Evidence
+
+AION-144 extends this matrix with runtime approval board preview, approval vote
+record guard, and implementation go/no-go ledger boundary evidence. The new
+rows remain preview-only: runtime approval board decision approval, approval
+vote record approval, approval vote record runtime effect, implementation go
+status, go/no-go ledger runtime effect, and runtime implementation approval
+remain false.

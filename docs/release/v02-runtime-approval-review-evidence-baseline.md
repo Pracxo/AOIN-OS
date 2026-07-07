@@ -24,3 +24,11 @@ All baseline evidence must show no secrets, no tokens, no credentials, no endpoi
 
 ## AION-143 Runtime Approval Lock Handoff
 AION-143 consumes this runtime approval review evidence as final lock evidence only. Runtime approval lock release approval, runtime approval review approval, runtime approval review evidence approval, approval docket final review approval, implementation decision record closeout approval, runtime decision lock release approval, and runtime implementation approval remain false.
+
+## AION-144 Runtime Approval Board Handoff
+
+AION-144 consumes this evidence baseline as prior evidence only. Runtime approval
+review approval, runtime approval review evidence approval, runtime approval
+board decision approval, approval vote record approval, approval vote record
+runtime effect, implementation go status, and runtime implementation approval
+remain false.

@@ -1292,3 +1292,12 @@ approval docket item approval, implementation decision record closeout
 approval, implementation decision record approval, runtime approval lock release
 approval, runtime approval review approval, implementation approval, submission
 approval, or release approval.
+
+## AION-144 SDK Boundary
+
+AION-144 adds no SDK resource and no CLI implementation. Future SDKs may render
+runtime approval board preview, approval vote record, and go/no-go ledger
+metadata only after a later implementation approval. This task keeps runtime
+approval board decision approval, approval vote record approval, approval vote
+record runtime effect, implementation go status, and runtime implementation
+approval false.

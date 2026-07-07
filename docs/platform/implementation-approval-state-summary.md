@@ -252,3 +252,13 @@ AION-142 records approval docket stabilization, implementation decision record f
 
 ## AION-143 Approval Docket Final Review State
 AION-143 records approval docket final review, implementation decision record closeout, runtime approval lock, final evidence matrix, and final runtime approval guard state without approval. Approval docket final review approval, approval docket item approval, implementation decision record closeout approval, implementation decision record approval, runtime approval lock release approval, runtime approval review approval, runtime decision lock release approval, runtime decision readiness approval, decision package approval, approval readiness approval, review board decision approval, routing decision approval, reviewer sign-off implementation approval, and runtime implementation approval remain false.
+
+## AION-144 Runtime Approval Board State
+
+AION-144 records runtime approval board preview, approval vote record guard, and
+implementation go/no-go ledger boundary state without approval. Runtime approval
+board decision approval, approval vote record approval, approval vote record
+runtime effect, implementation go status, go/no-go ledger runtime effect,
+runtime approval lock release approval, approval docket item approval,
+implementation decision record approval, and runtime implementation approval
+remain false.

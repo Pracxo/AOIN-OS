@@ -242,3 +242,14 @@ Approval docket stabilization does not approve production auth implementation. P
 
 ## AION-143 Approval Docket Final Review Boundary
 Approval docket final review and runtime approval lock do not approve production auth implementation. Production auth runtime, login endpoints, logout endpoints, session persistence, cookie issuance, token issuance, external identity provider runtime, OAuth/OIDC/SAML runtime, credential storage, token storage, approval docket final review approval, approval docket item approval, implementation decision record closeout approval, implementation decision record approval, runtime approval lock release approval, runtime approval review approval, and runtime implementation approval remain disabled, absent, or false.
+
+## AION-144 Runtime Approval Board Boundary
+
+Runtime approval board preview, approval vote records, and go/no-go ledger
+entries do not approve production auth implementation. Production auth runtime,
+login endpoints, logout endpoints, session persistence, cookie issuance, token
+issuance, external identity provider runtime, OAuth/OIDC/SAML runtime,
+credential storage, token storage, runtime approval board decision approval,
+approval vote record approval, approval vote record runtime effect,
+implementation go status, and runtime implementation approval remain disabled,
+absent, or false.

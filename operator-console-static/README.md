@@ -789,3 +789,27 @@ Validate the v0.2 approval docket final review evidence:
 ./scripts/v02-runtime-approval-lock-freeze.sh
 ./scripts/v02-approval-docket-final-no-go-regression.sh
 ```
+
+## AION-144 v0.2 Runtime Approval Board Preview Panels
+
+The static console includes v0.2 runtime approval board preview and
+implementation go/no-go ledger boundary panels. They load bundled JSON only,
+keep the runtime approval board preview-only, keep runtime approval board
+decision approval false, keep approval vote record approval false, keep approval
+vote record runtime effect false, keep implementation go status false, keep
+implementation no-go status true, keep go/no-go ledger runtime effect false,
+keep approval docket item approval false, keep implementation decision record
+approval false, keep runtime approval lock release approval false, keep runtime
+approval review approval false, keep decision package approval false, keep
+review board decision approval false, keep routing decision approval false, keep
+submission approval false, keep request pack approval false, and keep runtime
+implementation approval false. They create no v0.2 tag or release and expose no
+input, package, migration, runtime, approval, bypass, or write controls.
+
+Validate the v0.2 runtime approval board preview evidence:
+
+```bash
+./scripts/v02-runtime-approval-board-preview-check.sh
+./scripts/v02-approval-vote-record-freeze.sh
+./scripts/v02-runtime-approval-board-no-go-regression.sh
+```

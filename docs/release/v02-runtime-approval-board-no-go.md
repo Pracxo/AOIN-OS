@@ -1,8 +1,12 @@
-# v0.2 Approval Docket Final No-Go
+# v0.2 Runtime Approval Board No-Go Checks
 
-AION-143 fails if any final review artifact becomes an approval, release, runtime path, or implementation path.
+AION-144 fails if any of these conditions appear:
 
-## Approval No-Go Checks
+- runtime approval board decision approved true
+- approval vote record approval true
+- approval vote record runtime effect true
+- go/no-go ledger implementation go true
+- go/no-go ledger runtime effect true
 - approval docket final review approval true
 - approval docket item approved true
 - approval docket stabilization approval true
@@ -34,8 +38,6 @@ AION-143 fails if any final review artifact becomes an approval, release, runtim
 - approval record missing
 - ADR dependency bypassed
 - gate dependency bypassed
-
-## Release And Runtime No-Go Checks
 - v0.2 tag created
 - v0.2 release created
 - production auth enabled
@@ -49,14 +51,7 @@ AION-143 fails if any final review artifact becomes an approval, release, runtim
 - migrations added
 - runtime API execution routes added
 
-## Allowed Surface
-Only docs, examples, static console read-only demo data, scripts, and tests are allowed. Docs and examples may discuss disabled, denied, no-go, future, planning, unapproved, template, preview, final review, closeout, or lock states, but must not set approval or runtime enablement true.
-
-## AION-144 Runtime Approval Board No-Go Extension
-
-AION-144 extends this no-go pack to block approved runtime approval board
-decisions, approved vote records, vote records with runtime effect, go ledger
-entries, go/no-go ledger runtime effect, runtime approval lock release,
-implementation approval, v0.2 tag creation, v0.2 release creation, runtime
-enablement, external calls, credential/token storage, sandbox execution,
-package files, migrations, and runtime API execution routes.
+The no-go regression script also blocks package install instructions, external
+call paths, credential markers, token markers, sandbox execution markers, API
+runtime execution routes, SDK resource implementation changes, and CLI command
+implementation changes.

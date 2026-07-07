@@ -34,3 +34,11 @@ AION-142 references this runtime decision lock as stabilized docket evidence onl
 
 ## AION-143 Runtime Approval Lock Handoff
 AION-143 references this runtime decision lock as prior evidence only while creating a separate runtime approval lock. Runtime approval lock release approval, runtime approval review approval, runtime decision lock release approval, runtime decision readiness approval, approval docket final review approval, implementation decision record closeout approval, and runtime implementation approval remain false.
+
+## AION-144 Runtime Approval Board Handoff
+
+AION-144 references this runtime decision lock as prior evidence only. Runtime
+decision lock release approval, runtime decision readiness approval, runtime
+approval board decision approval, approval vote record approval, approval vote
+record runtime effect, implementation go status, runtime approval lock release
+approval, and runtime implementation approval remain false.

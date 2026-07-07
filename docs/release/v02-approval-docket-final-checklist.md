@@ -32,3 +32,10 @@
 - no migrations
 
 Every checklist item is evidence for future review only. The checklist does not approve implementation, release, runtime readiness, runtime approval lock release, or any write path.
+
+## AION-144 Runtime Approval Board Checklist Handoff
+
+AION-144 adds runtime approval board preview, approval vote record freeze, and
+runtime approval board no-go checks to the checklist chain. Passing those checks
+does not approve board decisions, approve vote records, mark implementation go,
+release runtime locks, approve implementation, or create a v0.2 tag or release.

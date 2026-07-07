@@ -326,3 +326,13 @@ The static console adds approval docket stabilization and implementation decisio
 
 ## AION-143 Approval Docket Final Review Static Panels
 The static console adds approval docket final review and runtime approval lock panels as read-only evidence only. They expose no approval docket final review approval controls, approval docket item approval controls, implementation decision record closeout approval controls, implementation decision record approval controls, runtime approval lock release controls, runtime approval review approval controls, runtime decision lock release controls, runtime decision approval controls, activation controls, external-call controls, credential/token storage, sandbox execution, runtime registration, v0.2 tag creation, or v0.2 release creation.
+
+## AION-144 Runtime Approval Board Static Panels
+
+The static console adds runtime approval board preview and implementation
+go/no-go ledger boundary panels as read-only evidence only. They expose no
+runtime approval board decision approval controls, approval vote record approval
+controls, approval vote record runtime-effect controls, implementation go
+controls, runtime lock release controls, runtime decision approval controls,
+activation controls, external-call controls, credential/token storage, sandbox
+execution, runtime registration, v0.2 tag creation, or v0.2 release creation.

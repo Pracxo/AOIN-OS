@@ -232,3 +232,14 @@ AION-142 stabilizes approval docket and implementation decision record evidence,
 
 ## AION-143 Runtime Approval Lock Freeze
 AION-143 finalizes approval docket review and creates the runtime approval lock, but the lock is not runtime enablement. Approval docket final review approval, approval docket item approval, implementation decision record closeout approval, implementation decision record approval, runtime approval lock release approval, runtime approval review approval, runtime decision lock release approval, runtime decision readiness approval, runtime implementation approval, connector runtime, operator write execution, production auth runtime, module activation, sandbox execution, external calls, credential storage, token storage, tags, and releases remain false or absent.
+
+## AION-144 Runtime Approval Board Freeze
+
+AION-144 adds runtime approval board preview, approval vote record guard, and
+implementation go/no-go ledger evidence, but they are not runtime enablement.
+Runtime approval board decision approval, approval vote record approval,
+approval vote record runtime effect, implementation go status, go/no-go ledger
+runtime effect, runtime implementation approval, connector runtime, operator
+write execution, production auth runtime, module activation, sandbox execution,
+external calls, credential storage, token storage, tags, and releases remain
+false or absent.

@@ -2112,3 +2112,13 @@ packages, approve readiness, approve review board decisions, approve routing,
 approve submissions, approve request packs, approve implementation, enable
 runtime, execute tools, call external services, store credentials or tokens,
 create a v0.2 tag, or create a v0.2 release.
+
+## AION-144 Runtime Approval Board Contract
+
+The contract now exposes AION-144 board preview evidence only:
+`v02_runtime_approval_board_preview_created=true`,
+`runtime_approval_board_preview_only=true`, `approval_vote_record_created=true`,
+and `go_no_go_ledger_created=true`. It does not approve board decisions, vote
+records, ledger go status, implementation decision records, runtime approval
+locks, runtime approval reviews, runtime implementation, releases, tags,
+external calls, credentials, tokens, sandbox execution, or operator writes.

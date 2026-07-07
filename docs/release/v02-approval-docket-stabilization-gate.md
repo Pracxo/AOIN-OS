@@ -57,3 +57,11 @@ AION-142 creates no v0.2 tag and no v0.2 release. The v0.1 release baseline rema
 
 ## AION-143 Final Review Handoff
 AION-143 consumes this stabilization gate as prior evidence only. Approval docket final review approval, approval docket item approval, implementation decision record closeout approval, implementation decision record approval, runtime approval lock release approval, runtime approval review approval, runtime decision lock release approval, and runtime implementation approval remain false.
+
+## AION-144 Runtime Approval Board Handoff
+
+AION-144 consumes this stabilization gate as prior evidence only. Approval
+docket stabilization approval, approval docket item approval, implementation
+decision record approval, runtime approval board decision approval, approval
+vote record approval, approval vote record runtime effect, implementation go
+status, and runtime implementation approval remain false.
