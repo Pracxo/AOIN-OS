@@ -2213,3 +2213,13 @@ runtime effect, runtime approval lock release approval, runtime approval review
 approval, approval workflow bypass, missing approval record, ADR dependency
 bypass, gate dependency bypass, or runtime implementation approval as true
 remains a release blocker.
+
+## AION-147 Implementation Authorization Preview Policy
+
+AION-147 extends policy checks to implementation authorization preview,
+explicit approval record schema, and runtime enablement guard boundary. Any
+implementation authorization approval, explicit approval record approval,
+runtime enablement guard release approval, runtime approval board approval,
+approval vote record approval, implementation go status, approval workflow
+bypass, missing approval record, ADR dependency bypass, gate dependency bypass,
+or runtime implementation approval as true remains a release blocker.

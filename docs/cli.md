@@ -1188,3 +1188,14 @@ no runtime approval lock release approval command, no runtime approval review
 approval command, no write path, no connector runtime command, no sandbox
 command, no external-call command, no credential/token command, no package
 command, no migration command, and no release or tag command.
+
+## AION-147 CLI Boundary
+
+AION-147 adds local shell gates for implementation authorization preview,
+runtime enablement guard freeze, and authorization no-go validation only. It
+adds no CLI command implementation, no runtime execution command, no
+implementation authorization approval command, no explicit approval record
+approval command, no runtime enablement guard release command, no implementation
+go command, no write path, no connector runtime command, no sandbox command, no
+external-call command, no credential/token command, no package command, no
+migration command, and no release or tag command.

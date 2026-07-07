@@ -2456,3 +2456,15 @@ implementation approval remain false. No API route, SDK resource, CLI
 implementation, migration, connector runtime, operator write execution,
 production auth runtime, module activation, sandbox execution, external call
 path, credential storage, token storage, v0.2 tag, or v0.2 release is added.
+
+## AION-147 Implementation Authorization Preview Boundary
+
+AION-147 adds only planning artifacts for the implementation authorization
+preview, explicit approval record schema, and runtime enablement guard boundary.
+Implementation authorization approval, explicit approval record approval,
+runtime enablement guard release approval, runtime approval board approval,
+approval vote record approval, implementation go status, and runtime
+implementation approval remain false. No API route, SDK resource, CLI
+implementation, migration, connector runtime, operator write execution,
+production auth runtime, module activation, sandbox execution, external call
+path, credential storage, token storage, v0.2 tag, or v0.2 release is added.

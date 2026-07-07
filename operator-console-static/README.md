@@ -856,3 +856,22 @@ Validate the v0.2 runtime approval board final review evidence:
 ./scripts/v02-implementation-go-no-go-final-freeze.sh
 ./scripts/v02-runtime-approval-board-final-no-go-regression.sh
 ```
+
+## AION-147 v0.2 Implementation Authorization Preview Panels
+
+The static console adds read-only panels for v0.2 implementation authorization
+preview and runtime enablement guard boundary. They load bundled JSON only, keep
+implementation authorization preview-only, keep implementation authorization
+approval false, keep explicit approval record approval false, keep runtime
+enablement guard release approval false, keep runtime approval board approval
+false, keep implementation go status false, and keep runtime implementation
+approval false. They create no v0.2 tag or release and expose no input,
+package, migration, runtime, approval, bypass, or write controls.
+
+Validate the v0.2 implementation authorization preview evidence:
+
+```bash
+./scripts/v02-implementation-authorization-preview-check.sh
+./scripts/v02-runtime-enablement-guard-freeze.sh
+./scripts/v02-implementation-authorization-no-go-regression.sh
+```

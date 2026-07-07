@@ -4853,3 +4853,21 @@ non-approving: `runtime_approval_board_final_review_approval=false`,
 ./scripts/v02-implementation-go-no-go-final-freeze.sh
 ./scripts/v02-runtime-approval-board-final-no-go-regression.sh
 ```
+
+### AION-147 v0.2 Implementation Authorization Preview
+
+AION-147 defines the explicit approval record schema and runtime enablement
+guard boundary required before future implementation authorization can be
+considered. It remains preview-only:
+`implementation_authorization_preview_only=true`,
+`implementation_authorization_approved=false`,
+`explicit_approval_record_approval=false`,
+`runtime_enablement_guard_release_approved=false`,
+`implementation_go_status=false`, and `runtime_implementation_approved=false`.
+No v0.2 tag or release is created.
+
+```bash
+./scripts/v02-implementation-authorization-preview-check.sh
+./scripts/v02-runtime-enablement-guard-freeze.sh
+./scripts/v02-implementation-authorization-no-go-regression.sh
+```

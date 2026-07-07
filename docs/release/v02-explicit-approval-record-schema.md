@@ -1,0 +1,48 @@
+# v0.2 Explicit Approval Record Schema
+
+## Purpose
+
+AION-147 defines the explicit approval record shape required before future
+implementation authorization can be considered. This schema is preview-only and
+does not approve implementation.
+
+## Required Fields
+
+| Field | Required default | Notes |
+| --- | --- | --- |
+| `approval_record_id` | string | Stable identifier for the future approval record. |
+| `candidate_id` | string | Candidate implementation or runtime capability request. |
+| `workstream` | string | Owning v0.2 workstream. |
+| `requested_runtime_capability` | string | Capability requested for future runtime use. |
+| `approval_status` | `false` | Must remain false in AION-147. |
+| `implementation_authorization_status` | `false` | Must remain false in AION-147. |
+| `runtime_guard_release_status` | `false` | Must remain false in AION-147. |
+| `approved_by` | empty | No approver is assigned in this preview. |
+| `reviewers` | list | Reviewer identities may be planned but do not approve implementation. |
+| `required_adr` | string | Required ADR dependency for any future candidate. |
+| `required_gate` | string | Required gate dependency for any future candidate. |
+| `evidence_refs` | list | Evidence references for future review. |
+| `security_review_refs` | list | Security review evidence references. |
+| `architecture_review_refs` | list | Architecture review evidence references. |
+| `operator_review_refs` | list | Operator review evidence references. |
+| `rollback_plan_ref` | string | Rollback plan reference required before approval. |
+| `audit_provenance_ref` | string | Audit/provenance record reference. |
+| `expiry` | string | Expiry window for future authorization. |
+| `revocation_path` | string | Revocation process reference. |
+| `no_go_acknowledgement` | `true` | The current no-go state must be acknowledged. |
+| `created_at` | string | Synthetic creation timestamp in examples. |
+| `metadata` | object | Non-secret preview metadata only. |
+
+## Default Values
+
+- `approval_status=false`
+- `implementation_authorization_status=false`
+- `runtime_guard_release_status=false`
+
+## Boundary
+
+`explicit_approval_record_created=true` only confirms that a schema exists.
+`explicit_approval_record_approval=false` remains the controlling state. The
+schema does not enable runtime, release guards, operator write execution,
+connector runtime, production auth, module activation, external calls,
+credential storage, token storage, or sandbox execution.

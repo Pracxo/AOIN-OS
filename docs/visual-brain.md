@@ -1376,3 +1376,15 @@ created, implementation no-go status, implementation go final approval false,
 and approval/runtime flags locked false. They do not expose approval controls,
 runtime controls, activation controls, external-call controls,
 credential/token storage, sandbox execution, a v0.2 tag, or a v0.2 release.
+
+## AION-147 Static Implementation Authorization Preview
+
+The visual brain surface adds read-only panels for implementation authorization
+preview and runtime enablement guard boundary. These panels show authorization
+preview created, explicit approval record created, runtime guard created,
+implementation authorization approval false, explicit approval record approval
+false, runtime enablement guard release approval false, implementation go
+status false, and approval/runtime flags locked false. They do not expose
+approval controls, runtime controls, activation controls, external-call
+controls, credential/token storage, sandbox execution, a v0.2 tag, or a v0.2
+release.

@@ -875,6 +875,15 @@ Instructions for future Codex runs in this repository:
   record closeout, go/no-go ledger final lock, ADR dependency, gate dependency,
   static console evidence, or no-go evidence as runtime enablement,
   implementation approval, tag creation, or release creation.
+- AION-147 defines the implementation authorization preview, explicit approval
+  record schema, and runtime enablement guard boundary as evidence only.
+  Implementation authorization approval, explicit approval record approval,
+  runtime enablement guard release approval, runtime approval board approval,
+  approval vote record approval, implementation go status, and runtime
+  implementation approval must remain false. Do not treat authorization preview,
+  schema fields, guard evidence, ADR dependency, gate dependency, static console
+  evidence, or no-go evidence as runtime enablement, implementation approval,
+  tag creation, or release creation.
 - AION-142 stabilizes the v0.2 approval docket and freezes implementation
   decision records as planning artifacts only. Approval docket stabilization
   approval, approval docket item approval, implementation decision record freeze

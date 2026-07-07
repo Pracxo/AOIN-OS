@@ -138,6 +138,9 @@
         "./scripts/v02-runtime-approval-board-final-review.sh",
         "./scripts/v02-implementation-go-no-go-final-freeze.sh",
         "./scripts/v02-runtime-approval-board-final-no-go-regression.sh",
+        "./scripts/v02-implementation-authorization-preview-check.sh",
+        "./scripts/v02-runtime-enablement-guard-freeze.sh",
+        "./scripts/v02-implementation-authorization-no-go-regression.sh",
         "./scripts/docs-check.sh"
   ],
   "forbidden_surface": {

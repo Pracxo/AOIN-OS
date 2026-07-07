@@ -12,3 +12,16 @@
 | Submission and request evidence | submission registry and request-pack final review | Submission reviewer | ADR 0124 | `./scripts/v02-submission-registry-stabilization-gate.sh` | false | approval false | no-go true | false | false | submission or request approval true | request/submission evidence remains planning-only |
 
 All rows keep runtime disabled and implementation go false.
+
+## AION-147 Implementation Authorization Preview Handoff
+
+AION-147 adds the implementation authorization preview, explicit approval record
+schema, authorization state model, authorization evidence matrix, and runtime
+enablement guard boundary as planning evidence only.
+`implementation_authorization_preview_only=true`,
+`implementation_authorization_approved=false`,
+`explicit_approval_record_approval=false`,
+`runtime_enablement_guard_release_approved=false`,
+`implementation_go_status=false`, and `runtime_implementation_approved=false`.
+No runtime implementation, external calls, credentials, tokens, sandbox
+execution, package files, migrations, v0.2 tag, or v0.2 release are added.

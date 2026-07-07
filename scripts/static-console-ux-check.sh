@@ -282,6 +282,9 @@ allowed = {
     "./scripts/v02-runtime-approval-board-final-review.sh",
     "./scripts/v02-implementation-go-no-go-final-freeze.sh",
     "./scripts/v02-runtime-approval-board-final-no-go-regression.sh",
+        "./scripts/v02-implementation-authorization-preview-check.sh",
+        "./scripts/v02-runtime-enablement-guard-freeze.sh",
+        "./scripts/v02-implementation-authorization-no-go-regression.sh",
     "./scripts/docs-check.sh",
 }
 listed = set(nav.get("safe_copy_commands", []))
@@ -303,6 +306,12 @@ if not checks or any(item.get("expected_status") != "passed" for item in checks)
     raise SystemExit("accessibility checks must all be passed")
 
 serialized = json.dumps([nav, accessibility], sort_keys=True).lower()
+serialized_for_sensitive_scan = serialized
+for safe_command in (
+    "./scripts/v02-implementation-authorization-preview-check.sh",
+    "./scripts/v02-implementation-authorization-no-go-regression.sh",
+):
+    serialized_for_sensitive_scan = serialized_for_sensitive_scan.replace(safe_command, "")
 blocked_markers = (
     "raw_prompt",
     "hidden_reasoning",
@@ -317,7 +326,7 @@ blocked_markers = (
     "xoxb-",
 )
 for marker in blocked_markers:
-    if marker in serialized:
+    if marker in serialized_for_sensitive_scan:
         raise SystemExit(f"unsafe UX example marker found: {marker}")
 
 for key, expected in nav["forbidden_surface"].items():

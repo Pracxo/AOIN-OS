@@ -1,7 +1,11 @@
-# v0.2 Runtime Approval Board Final No-Go Checks
+# v0.2 Implementation Authorization No-Go Checks
 
-AION-146 fails if any of these no-go checks are violated:
+AION-147 fails if any of these conditions appears outside explicitly disabled,
+denied, no-go, future, planning, unapproved, template, or preview-only evidence:
 
+- implementation authorization approved true
+- explicit approval record approval true
+- runtime enablement guard release approved true
 - runtime approval board final review approval true
 - runtime approval board decision approved true
 - runtime approval board stabilization approval true
@@ -55,19 +59,9 @@ AION-146 fails if any of these no-go checks are violated:
 - migrations added
 - runtime API execution routes added
 
-The no-go checks are release blockers. They cannot be bypassed by final review,
-vote closeout, ledger final lock, reviewer evidence, ADR dependency evidence,
-gate dependency evidence, or static-console evidence.
-
-## AION-147 Implementation Authorization Preview Handoff
-
-AION-147 adds the implementation authorization preview, explicit approval record
-schema, authorization state model, authorization evidence matrix, and runtime
-enablement guard boundary as planning evidence only.
-`implementation_authorization_preview_only=true`,
-`implementation_authorization_approved=false`,
+The current required values are `implementation_authorization_approved=false`,
 `explicit_approval_record_approval=false`,
 `runtime_enablement_guard_release_approved=false`,
-`implementation_go_status=false`, and `runtime_implementation_approved=false`.
-No runtime implementation, external calls, credentials, tokens, sandbox
-execution, package files, migrations, v0.2 tag, or v0.2 release are added.
+`implementation_go_status=false`, `implementation_no_go_status=true`,
+`runtime_implementation_approved=false`, `v02_tag_created=false`, and
+`v02_release_created=false`.
