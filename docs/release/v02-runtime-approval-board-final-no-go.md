@@ -1,13 +1,16 @@
-# v0.2 Runtime Approval Board Stabilization No-Go
+# v0.2 Runtime Approval Board Final No-Go Checks
 
-AION-145 fails if any of these conditions appear:
+AION-146 fails if any of these no-go checks are violated:
 
+- runtime approval board final review approval true
 - runtime approval board decision approved true
 - runtime approval board stabilization approval true
 - approval vote record approval true
+- approval vote record closeout approval true
 - approval vote record runtime effect true
 - go/no-go ledger implementation go true
 - go/no-go ledger runtime effect true
+- implementation go final approval true
 - approval docket final review approval true
 - approval docket item approved true
 - approval docket stabilization approval true
@@ -52,17 +55,6 @@ AION-145 fails if any of these conditions appear:
 - migrations added
 - runtime API execution routes added
 
-## Allowed Evidence Context
-
-Docs, examples, tests, static console data, and scripts may describe disabled,
-denied, no-go, future, planning, unapproved, template, or preview-only states.
-They must not contain active runtime approval, implementation approval, runtime
-enablement, external-call enablement, credential storage, token storage, sandbox
-execution, package dependency, migration, or runtime API execution changes.
-
-## AION-146 Final No-Go Handoff
-
-AION-146 adds final-review no-go checks for runtime approval board final review
-approval, approval vote record closeout approval, implementation go final
-approval, and go/no-go ledger final lock runtime effect. All remain release
-blockers when true.
+The no-go checks are release blockers. They cannot be bypassed by final review,
+vote closeout, ledger final lock, reviewer evidence, ADR dependency evidence,
+gate dependency evidence, or static-console evidence.

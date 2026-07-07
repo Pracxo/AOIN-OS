@@ -41,3 +41,13 @@ records, runtime approval reviews, decision packages, approval readiness,
 review board decisions, routing decisions, request packs, submissions,
 proposal registry entries, workstream items, backlog items, and runtime
 implementation remain unapproved.
+
+## AION-146 Final Review Handoff
+
+AION-146 finalizes the board evidence after this stabilization summary. The
+handoff adds `v02_runtime_approval_board_final_review_passed=true` and
+`go_no_go_ledger_final_lock_created=true` while keeping
+`runtime_approval_board_final_review_approval=false`,
+`approval_vote_record_closeout_approval=false`,
+`implementation_go_final_approval=false`, and
+`runtime_implementation_approved=false`.

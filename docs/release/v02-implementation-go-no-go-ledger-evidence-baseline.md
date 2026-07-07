@@ -29,3 +29,11 @@ ADRs, gates, and evidence.
 
 The ledger records blockers only. It cannot approve implementation, create a
 release, create a tag, or enable runtime behavior.
+
+## AION-146 Final Lock Handoff
+
+AION-146 locks this ledger into a final no-go state. The handoff keeps
+`go_no_go_ledger_final_lock_created=true`,
+`implementation_go_status=false`, `implementation_go_final_approval=false`,
+`implementation_no_go_status=true`, and
+`go_no_go_ledger_runtime_effect=false`.

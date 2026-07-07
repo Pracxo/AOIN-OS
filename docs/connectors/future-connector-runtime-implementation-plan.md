@@ -299,3 +299,14 @@ registration, runtime approval board stabilization approval, runtime approval
 board decision approval, approval vote record approval, approval vote record
 runtime effect, implementation go status, and runtime implementation approval
 remain disabled, absent, or false.
+
+## AION-146 Runtime Approval Board Final Review Boundary
+
+Runtime approval board final review, approval vote record closeout, final
+evidence, and go/no-go ledger final lock do not approve connector
+implementation. Connector runtime, external calls, credential/token storage,
+sandbox execution, provider SDK dependencies, connector SDK dependencies,
+runtime route registration, runtime approval board final review approval,
+approval vote record closeout approval, implementation go status,
+implementation go final approval, and runtime implementation approval remain
+disabled, absent, or false.

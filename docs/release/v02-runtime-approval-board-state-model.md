@@ -39,3 +39,12 @@ states remain preview, blocked, rejected, expired, revoked, unapproved, or
 implementation-unapproved states unless a later task creates explicit approval
 records, ADRs, and gate evidence. Runtime approval board stabilization approval
 and runtime implementation approval remain false.
+
+## AION-146 Final State Extension
+
+AION-146 adds a final-review evidence state. That state may set
+`v02_runtime_approval_board_final_review_passed=true`, but it must keep
+`runtime_approval_board_final_review_approval=false`,
+`approval_vote_record_closeout_approval=false`,
+`implementation_go_final_approval=false`, and
+`runtime_implementation_approved=false`.

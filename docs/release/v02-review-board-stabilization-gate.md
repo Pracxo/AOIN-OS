@@ -127,3 +127,11 @@ implementation approval, runtime approval board stabilization approval, runtime
 approval board decision approval, approval vote record approval, approval vote
 record runtime effect, implementation go status, and runtime implementation
 approval remain false.
+
+## AION-146 Runtime Board Final Review Handoff
+
+AION-146 consumes review board stabilization as inherited evidence only. Review
+board decision approval, routing decision approval, reviewer sign-off
+implementation approval, runtime approval board final review approval,
+approval vote record closeout approval, implementation go final approval, and
+runtime implementation approval remain false.

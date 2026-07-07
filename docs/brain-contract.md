@@ -2133,3 +2133,17 @@ board decisions, vote records, ledger go status, implementation decision
 records, runtime approval locks, runtime approval reviews, runtime
 implementation, releases, tags, external calls, credentials, tokens, sandbox
 execution, or operator writes.
+
+
+## AION-146 Runtime Approval Board Final Review Contract
+
+The contract now exposes AION-146 final-review evidence only:
+`v02_runtime_approval_board_final_review_passed=true`,
+`runtime_approval_board_preview_only=true`, `approval_vote_record_created=true`,
+`go_no_go_ledger_created=true`, and
+`go_no_go_ledger_final_lock_created=true`. It does not approve board final
+review, board decisions, board stabilization, vote records, vote record
+closeout, ledger go status, implementation go final approval, implementation
+decision records, runtime approval locks, runtime approval reviews, runtime
+implementation, releases, tags, external calls, credentials, tokens, sandbox
+execution, or operator writes.

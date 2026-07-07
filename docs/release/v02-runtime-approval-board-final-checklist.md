@@ -1,14 +1,13 @@
-# v0.2 Runtime Approval Board Closeout Checklist
+# v0.2 Runtime Approval Board Final Checklist
 
 - docs complete
 - examples valid
 - scripts executable
-- runtime approval board preview passing
 - runtime approval board stabilization passing
+- runtime approval board preview passing
 - approval vote record freeze passing
-- runtime approval board no-go passing
+- go/no-go ledger final lock passing
 - approval docket final review passing
-- approval docket stabilization passing
 - decision package final review passing
 - review board stabilization passing
 - submission registry stabilization passing
@@ -16,10 +15,12 @@
 - planning track closeout passing
 - final planning release gate passing
 - no runtime approval board decision approval
-- no runtime approval board stabilization approval
+- no runtime approval board final review approval
 - no approval vote record approval
+- no approval vote record closeout approval
 - no approval vote record runtime effect
 - no implementation go ledger entry
+- no implementation go final approval
 - no approval docket item approval
 - no implementation decision record approval
 - no runtime approval review approval
@@ -33,15 +34,8 @@
 - no package files
 - no migrations
 
-Completion of this checklist confirms the AION-145 runtime approval board
-baseline is stable. It does not approve implementation and does not release
-the runtime approval lock.
+## Closeout Result
 
-## AION-146 Final Checklist Handoff
-
-AION-146 consumes this closeout checklist and adds final-review checks for
-runtime approval board final review, approval vote record closeout, final
-implementation go guard, and go/no-go ledger final lock. The final checklist
-still requires no runtime implementation, no v0.2 tag, no v0.2 release, no
-external calls, no credentials/tokens, no sandbox execution, no package files,
-and no migrations.
+AION-146 may be closed only when the final review, final freeze, no-go
+regression, inherited release gates, docs checks, boundary checks, and full
+repository check pass without creating implementation approval.

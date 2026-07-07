@@ -33,3 +33,9 @@ runtime approval board stabilization gate, approval vote record freeze,
 implementation go/no-go ledger evidence baseline, and lifecycle evidence
 matrix. Evidence completeness, reviewer evidence, ADR dependencies, and gate
 dependencies remain evidence only and do not approve implementation.
+
+## AION-146 Final Evidence Handoff
+
+AION-146 adds final review, vote record closeout, final evidence matrix, final
+implementation go guard, and go/no-go ledger final lock evidence. The evidence
+pack remains non-approving and cannot enable runtime behavior.

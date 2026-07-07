@@ -273,3 +273,15 @@ approval, approval vote record runtime effect, implementation go status,
 go/no-go ledger runtime effect, runtime approval lock release approval, runtime
 approval review approval, approval docket item approval, implementation
 decision record approval, and runtime implementation approval remain false.
+
+## AION-146 Runtime Approval Board Final Review State
+
+AION-146 records runtime approval board final review, approval vote record
+closeout, implementation go/no-go ledger final lock, final evidence matrix, and
+final implementation go guard state without approval. Runtime approval board
+final review approval, runtime approval board decision approval, approval vote
+record approval, approval vote record closeout approval, approval vote record
+runtime effect, implementation go status, implementation go final approval,
+runtime approval lock release approval, runtime approval review approval,
+approval docket item approval, implementation decision record approval, and
+runtime implementation approval remain false.

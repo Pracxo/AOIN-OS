@@ -834,3 +834,25 @@ Validate the v0.2 runtime approval board stabilization evidence:
 ./scripts/v02-approval-vote-record-stabilization-freeze.sh
 ./scripts/v02-runtime-approval-board-stabilization-no-go-regression.sh
 ```
+
+## AION-146 v0.2 Runtime Approval Board Final Review Panels
+
+The static console adds read-only panels for v0.2 runtime approval board final
+review and implementation go/no-go ledger final lock. They load bundled JSON
+only, keep the board preview-only, keep runtime approval board decision approval
+false, keep runtime approval board final review approval false, keep approval
+vote record approval false, keep approval vote record closeout approval false,
+keep approval vote record runtime effect false, keep implementation go status
+false, keep implementation go final approval false, keep implementation no-go
+status true, keep runtime approval lock release approval false, keep runtime
+approval review approval false, and keep runtime implementation approval false.
+They create no v0.2 tag or release and expose no input, package, migration,
+runtime, approval, bypass, or write controls.
+
+Validate the v0.2 runtime approval board final review evidence:
+
+```bash
+./scripts/v02-runtime-approval-board-final-review.sh
+./scripts/v02-implementation-go-no-go-final-freeze.sh
+./scripts/v02-runtime-approval-board-final-no-go-regression.sh
+```

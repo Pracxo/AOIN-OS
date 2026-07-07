@@ -43,3 +43,12 @@ AION-145 records the vote freeze alongside:
 
 Any future vote that attempts to set approval or runtime effect true is a
 release blocker.
+
+## AION-146 Vote Record Closeout Handoff
+
+AION-146 closes vote record evidence without approval. The closeout keeps
+`approval_vote_record_approval=false`,
+`approval_vote_record_closeout_approval=false`,
+`approval_vote_record_runtime_effect=false`,
+`runtime_approval_board_final_review_approval=false`, and
+`runtime_implementation_approved=false`.
