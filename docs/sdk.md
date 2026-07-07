@@ -1323,3 +1323,13 @@ approval board final review approval, runtime approval board decision approval,
 approval vote record approval, approval vote record closeout approval, approval
 vote record runtime effect, implementation go status, implementation go final
 approval, and runtime implementation approval false.
+
+## AION-147 SDK Boundary
+
+AION-147 adds no SDK resource and no CLI implementation. Future SDKs may render
+implementation authorization preview, explicit approval record schema,
+authorization state model, authorization evidence matrix, and runtime
+enablement guard metadata only after a later implementation approval. This task
+keeps implementation authorization approval, explicit approval record approval,
+runtime enablement guard release approval, implementation go status, and
+runtime implementation approval false.

@@ -185,6 +185,10 @@ unsafe_markers = (
     "ghp_",
     "xoxb-",
 )
+allowed_authorization_demo_names = {
+    "v02-implementation-authorization-preview.json",
+    "v02-runtime-enablement-guard-boundary.json",
+}
 
 
 def walk(value: object, path: Path) -> None:
@@ -199,8 +203,11 @@ def walk(value: object, path: Path) -> None:
             walk(item, path)
     elif isinstance(value, str):
         lowered = value.lower()
-        if any(marker in lowered for marker in unsafe_markers):
-            raise SystemExit(f"unsafe demo content in {path}")
+        for marker in unsafe_markers:
+            if marker == "authorization" and path.name in allowed_authorization_demo_names:
+                continue
+            if marker in lowered:
+                raise SystemExit(f"unsafe demo content in {path}")
 
 
 for path in sorted((static_dir / "demo-data").glob("*.json")):

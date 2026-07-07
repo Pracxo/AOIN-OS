@@ -150,3 +150,16 @@ keeps `runtime_approval_board_stabilization_approval=false`,
 `approval_vote_record_closeout_approval=false`,
 `implementation_go_final_approval=false`, and
 `runtime_implementation_approved=false`.
+
+## AION-147 Implementation Authorization Preview Handoff
+
+AION-147 adds the implementation authorization preview, explicit approval record
+schema, authorization state model, authorization evidence matrix, and runtime
+enablement guard boundary as planning evidence only.
+`implementation_authorization_preview_only=true`,
+`implementation_authorization_approved=false`,
+`explicit_approval_record_approval=false`,
+`runtime_enablement_guard_release_approved=false`,
+`implementation_go_status=false`, and `runtime_implementation_approved=false`.
+No runtime implementation, external calls, credentials, tokens, sandbox
+execution, package files, migrations, v0.2 tag, or v0.2 release are added.

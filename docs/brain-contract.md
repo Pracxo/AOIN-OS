@@ -2134,6 +2134,18 @@ records, runtime approval locks, runtime approval reviews, runtime
 implementation, releases, tags, external calls, credentials, tokens, sandbox
 execution, or operator writes.
 
+## AION-147 Implementation Authorization Preview Contract
+
+The contract now exposes AION-147 implementation authorization preview evidence
+only: `v02_implementation_authorization_preview_created=true`,
+`implementation_authorization_preview_only=true`,
+`explicit_approval_record_created=true`, and
+`runtime_enablement_guard_created=true`. It does not approve implementation
+authorization, explicit approval records, runtime enablement guard release,
+board decisions, vote records, ledger go status, runtime approval locks,
+runtime approval reviews, runtime implementation, releases, tags, external
+calls, credentials, tokens, sandbox execution, or operator writes.
+
 
 ## AION-146 Runtime Approval Board Final Review Contract
 

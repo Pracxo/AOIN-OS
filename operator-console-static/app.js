@@ -139,6 +139,9 @@
     "./scripts/v02-runtime-approval-board-final-review.sh",
     "./scripts/v02-implementation-go-no-go-final-freeze.sh",
     "./scripts/v02-runtime-approval-board-final-no-go-regression.sh",
+    "./scripts/v02-implementation-authorization-preview-check.sh",
+    "./scripts/v02-runtime-enablement-guard-freeze.sh",
+    "./scripts/v02-implementation-authorization-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -252,7 +255,9 @@
     runtime_approval_board_stabilization: "demo-data/v02-runtime-approval-board-stabilization.json",
     approval_vote_record_freeze: "demo-data/v02-approval-vote-record-freeze.json",
     runtime_approval_board_final_review: "demo-data/v02-runtime-approval-board-final-review.json",
-    implementation_go_no_go_ledger_final_lock: "demo-data/v02-implementation-go-no-go-ledger-final-lock.json"
+    implementation_go_no_go_ledger_final_lock: "demo-data/v02-implementation-go-no-go-ledger-final-lock.json",
+    implementation_authorization_preview: "demo-data/v02-implementation-authorization-preview.json",
+    runtime_enablement_guard_boundary: "demo-data/v02-runtime-enablement-guard-boundary.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1771,7 +1776,9 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.runtime_approval_board_stabilization),
       fetchJson(RELEASE_CANDIDATE_DEMOS.approval_vote_record_freeze),
       fetchJson(RELEASE_CANDIDATE_DEMOS.runtime_approval_board_final_review),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_go_no_go_ledger_final_lock)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_go_no_go_ledger_final_lock),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_authorization_preview),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.runtime_enablement_guard_boundary)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
@@ -1832,6 +1839,8 @@
         renderReleaseCandidateEvidence("v02-approval-vote-record-freeze", redact(payloads[55]));
         renderReleaseCandidateEvidence("v02-runtime-approval-board-final-review", redact(payloads[56]));
         renderReleaseCandidateEvidence("v02-implementation-go-no-go-ledger-final-lock", redact(payloads[57]));
+        renderReleaseCandidateEvidence("v02-implementation-authorization-preview", redact(payloads[58]));
+        renderReleaseCandidateEvidence("v02-runtime-enablement-guard-boundary", redact(payloads[59]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
@@ -1892,6 +1901,8 @@
         renderReleaseCandidateEvidence("v02-approval-vote-record-freeze", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-runtime-approval-board-final-review", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-implementation-go-no-go-ledger-final-lock", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-implementation-authorization-preview", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-runtime-enablement-guard-boundary", { status: "unavailable" });
       });
   }
 

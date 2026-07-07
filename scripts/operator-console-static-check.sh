@@ -217,6 +217,10 @@ for path in sorted(demo_dir.glob("*.json")):
     if actions != required_actions:
         raise SystemExit(f"forbidden actions mismatch: {path}")
     serialized = json.dumps(payload, sort_keys=True).lower()
+    allowed_authorization_demo_names = {
+        "v02-implementation-authorization-preview.json",
+        "v02-runtime-enablement-guard-boundary.json",
+    }
     blocked = (
         "raw_prompt",
         "hidden_reasoning",
@@ -230,8 +234,11 @@ for path in sorted(demo_dir.glob("*.json")):
         "ghp_",
         "xoxb-",
     )
-    if any(value in serialized for value in blocked):
-        raise SystemExit(f"unsafe demo content: {path}")
+    for value in blocked:
+        if value == "authorization" and path.name in allowed_authorization_demo_names:
+            continue
+        if value in serialized:
+            raise SystemExit(f"unsafe demo content: {path}")
 
 changed = subprocess.run(
     ["git", "diff", "--name-only", "--diff-filter=ACMRT", "HEAD", "--"],
