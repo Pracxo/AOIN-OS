@@ -68,3 +68,11 @@ stabilization approval, runtime approval board decision approval, approval vote
 record approval, approval vote record runtime effect, implementation go status,
 runtime approval lock release approval, runtime approval review approval, and
 runtime implementation approval remain false.
+
+## AION-146 Runtime Board Final Review Handoff
+
+AION-146 consumes decision package final review evidence without changing its
+locked state. Decision package approval, approval readiness approval, runtime
+decision readiness approval, runtime approval board final review approval,
+approval vote record closeout approval, implementation go final approval, and
+runtime implementation approval remain false.

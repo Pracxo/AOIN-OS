@@ -244,6 +244,19 @@ write execution, production auth runtime, module activation, sandbox execution,
 external calls, credential storage, token storage, tags, and releases remain
 false or absent.
 
+## AION-146 Runtime Approval Board Final Freeze
+
+AION-146 finalizes runtime approval board review, approval vote record closeout,
+implementation go/no-go ledger final lock, and final go guard evidence, but
+they are not runtime enablement. Runtime approval board final review approval,
+runtime approval board decision approval, approval vote record approval,
+approval vote record closeout approval, approval vote record runtime effect,
+implementation go status, implementation go final approval, runtime approval
+lock release approval, runtime approval review approval, runtime implementation
+approval, connector runtime, operator write execution, production auth runtime,
+module activation, sandbox execution, external calls, credential storage, token
+storage, tags, and releases remain false or absent.
+
 ## AION-145 Runtime Approval Board Stabilization Freeze
 
 AION-145 stabilizes runtime approval board preview, approval vote record freeze,

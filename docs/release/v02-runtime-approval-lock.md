@@ -45,3 +45,11 @@ stabilization approval, runtime approval board decision approval, approval vote
 record approval, approval vote record runtime effect, implementation go status,
 go/no-go ledger runtime effect, and runtime implementation approval remain
 false.
+
+## AION-146 Final Review Handoff
+
+AION-146 preserves this lock while closing runtime board evidence. Runtime
+approval lock release approval, runtime approval review approval, runtime
+approval board final review approval, approval vote record closeout approval,
+implementation go final approval, and runtime implementation approval remain
+false.

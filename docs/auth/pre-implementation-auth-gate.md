@@ -265,3 +265,14 @@ runtime approval board stabilization approval, runtime approval board decision
 approval, approval vote record approval, approval vote record runtime effect,
 implementation go status, and runtime implementation approval remain disabled,
 absent, or false.
+
+## AION-146 Runtime Approval Board Final Review Boundary
+
+Runtime approval board final review, approval vote record closeout, final
+evidence, and go/no-go ledger final lock do not approve production auth
+implementation. Production auth runtime, login endpoints, logout endpoints,
+session persistence, cookie issuance, token issuance, external identity provider
+runtime, OAuth/OIDC/SAML runtime, credential storage, token storage, runtime
+approval board final review approval, approval vote record closeout approval,
+implementation go status, implementation go final approval, and runtime
+implementation approval remain disabled, absent, or false.

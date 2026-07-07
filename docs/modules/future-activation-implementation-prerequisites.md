@@ -298,3 +298,14 @@ board stabilization approval, runtime approval board decision approval,
 approval vote record approval, approval vote record runtime effect,
 implementation go status, and runtime implementation approval remain disabled,
 absent, or false.
+
+## AION-146 Runtime Approval Board Final Review Boundary
+
+Runtime approval board final review, approval vote record closeout, final
+evidence, and go/no-go ledger final lock do not approve module activation.
+Module activation, capability activation, code loading, runtime registration,
+controlled execution, package installation, external dependency download, module
+writes, policy bypass, audit bypass, privileged bypass, runtime approval board
+final review approval, approval vote record closeout approval, implementation
+go status, implementation go final approval, and runtime implementation
+approval remain disabled, absent, or false.

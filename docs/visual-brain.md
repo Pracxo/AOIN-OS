@@ -1365,3 +1365,14 @@ implementation no-go status, and approval/runtime flags locked false. They do
 not expose approval controls, runtime controls, activation controls,
 external-call controls, credential/token storage, sandbox execution, a v0.2
 tag, or a v0.2 release.
+
+
+## AION-146 Static Runtime Approval Board Final Review
+
+The visual brain surface adds read-only panels for runtime approval board final
+review and implementation go/no-go ledger final lock. These panels show final
+review passed, board preview-only, vote record created, ledger final lock
+created, implementation no-go status, implementation go final approval false,
+and approval/runtime flags locked false. They do not expose approval controls,
+runtime controls, activation controls, external-call controls,
+credential/token storage, sandbox execution, a v0.2 tag, or a v0.2 release.

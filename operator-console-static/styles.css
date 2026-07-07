@@ -686,7 +686,9 @@ pre {
 #v02-runtime-approval-board-preview,
 #v02-implementation-go-no-go-ledger-boundary,
 #v02-runtime-approval-board-stabilization,
-#v02-approval-vote-record-freeze {
+#v02-approval-vote-record-freeze,
+#v02-runtime-approval-board-final-review,
+#v02-implementation-go-no-go-ledger-final-lock {
   border-color: rgba(47, 123, 110, 0.35);
 }
 

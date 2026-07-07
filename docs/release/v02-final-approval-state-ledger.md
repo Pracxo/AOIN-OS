@@ -132,3 +132,14 @@ false, approval vote record runtime effect false, implementation go status
 false, go/no-go ledger runtime effect false, runtime approval lock release
 approval false, runtime approval review approval false, runtime implementation
 approval false, v0.2 tag absent, and v0.2 release absent.
+
+## AION-146 Runtime Board Final Review Ledger
+
+AION-146 adds runtime approval board final review ledger entries with final
+review passed true, approval vote record closeout approval false, go/no-go
+ledger final lock created true, implementation go status false, implementation
+go final approval false, implementation no-go status true, runtime approval
+board decision approval false, runtime approval board final review approval
+false, runtime approval lock release approval false, runtime approval review
+approval false, runtime implementation approval false, v0.2 tag absent, and
+v0.2 release absent.

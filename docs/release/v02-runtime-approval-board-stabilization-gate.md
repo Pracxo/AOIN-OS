@@ -140,3 +140,13 @@ AION-145 creates no v0.2 tag and no v0.2 release.
 - `v02_release_approved=false`
 
 The frozen `aion-v0.1.0` baseline remains untouched.
+
+## AION-146 Final Review Handoff
+
+AION-146 consumes this stabilization gate as prior evidence and closes the
+runtime approval board layer into final review without approval. The handoff
+keeps `runtime_approval_board_stabilization_approval=false`,
+`runtime_approval_board_final_review_approval=false`,
+`approval_vote_record_closeout_approval=false`,
+`implementation_go_final_approval=false`, and
+`runtime_implementation_approved=false`.

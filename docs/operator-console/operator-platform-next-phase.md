@@ -347,3 +347,14 @@ runtime-effect controls, implementation go controls, runtime lock release
 controls, runtime approval review controls, activation controls, external-call
 controls, credential/token storage, sandbox execution, runtime registration,
 v0.2 tag creation, or v0.2 release creation.
+
+## AION-146 Runtime Approval Board Final Static Panels
+
+The static console adds runtime approval board final review and implementation
+go/no-go ledger final lock panels as read-only evidence only. They expose no
+runtime approval board final review approval controls, approval vote record
+closeout approval controls, implementation go controls, implementation go final
+approval controls, runtime lock release controls, runtime approval review
+controls, activation controls, external-call controls, credential/token storage,
+sandbox execution, runtime registration, v0.2 tag creation, or v0.2 release
+creation.

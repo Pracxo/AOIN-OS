@@ -4832,3 +4832,24 @@ AION-144. The board remains preview-only:
 ./scripts/v02-approval-vote-record-stabilization-freeze.sh
 ./scripts/v02-runtime-approval-board-stabilization-no-go-regression.sh
 ```
+
+
+### AION-146 v0.2 Runtime Approval Board Final Review
+
+AION-146 closes the runtime approval board layer into a final pre-implementation
+review baseline, closes approval vote records as evidence, and locks the
+implementation go/no-go ledger to no-go. The final review remains
+non-approving: `runtime_approval_board_final_review_approval=false`,
+`runtime_approval_board_decision_approved=false`,
+`approval_vote_record_approval=false`,
+`approval_vote_record_closeout_approval=false`,
+`approval_vote_record_runtime_effect=false`,
+`implementation_go_status=false`, `implementation_go_final_approval=false`,
+`implementation_no_go_status=true`, and
+`runtime_implementation_approved=false`. No v0.2 tag or release is created.
+
+```bash
+./scripts/v02-runtime-approval-board-final-review.sh
+./scripts/v02-implementation-go-no-go-final-freeze.sh
+./scripts/v02-runtime-approval-board-final-no-go-regression.sh
+```

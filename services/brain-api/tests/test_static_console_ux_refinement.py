@@ -150,6 +150,9 @@ def test_navigation_map_and_accessibility_result_are_valid() -> None:
         "./scripts/v02-runtime-approval-board-stabilization-gate.sh",
         "./scripts/v02-approval-vote-record-stabilization-freeze.sh",
         "./scripts/v02-runtime-approval-board-stabilization-no-go-regression.sh",
+        "./scripts/v02-runtime-approval-board-final-review.sh",
+        "./scripts/v02-implementation-go-no-go-final-freeze.sh",
+        "./scripts/v02-runtime-approval-board-final-no-go-regression.sh",
         "./scripts/docs-check.sh",
     }
     assert set(nav["safe_copy_commands"]) == allowed_commands
@@ -283,6 +286,9 @@ def test_static_console_has_navigation_accessibility_and_safe_command_copy() -> 
         "./scripts/v02-runtime-approval-board-stabilization-gate.sh",
         "./scripts/v02-approval-vote-record-stabilization-freeze.sh",
         "./scripts/v02-runtime-approval-board-stabilization-no-go-regression.sh",
+        "./scripts/v02-runtime-approval-board-final-review.sh",
+        "./scripts/v02-implementation-go-no-go-final-freeze.sh",
+        "./scripts/v02-runtime-approval-board-final-no-go-regression.sh",
         "./scripts/docs-check.sh",
     }
 

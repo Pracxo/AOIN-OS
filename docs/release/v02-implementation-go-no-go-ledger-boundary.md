@@ -48,3 +48,10 @@ baseline. The ledger remains blocking only: implementation go status, go/no-go
 ledger runtime effect, runtime approval board decision approval, runtime
 approval board stabilization approval, approval vote record approval, approval
 vote record runtime effect, and runtime implementation approval remain false.
+
+## AION-146 Final Lock Handoff
+
+AION-146 keeps this ledger locked to no-go. It adds
+`go_no_go_ledger_final_lock_created=true` while keeping
+`implementation_go_status=false`, `implementation_go_final_approval=false`,
+`implementation_no_go_status=true`, and `runtime_implementation_approved=false`.

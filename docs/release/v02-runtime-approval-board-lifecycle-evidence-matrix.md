@@ -31,3 +31,10 @@ granting implementation approval.
 - `implementation_go_status=false`
 - `go_no_go_ledger_runtime_effect=false`
 - `runtime_implementation_approved=false`
+
+## AION-146 Final Evidence Handoff
+
+AION-146 extends this lifecycle matrix with final-review evidence. The next
+matrix keeps runtime approval board final review approval, approval vote record
+closeout approval, implementation go final approval, runtime enablement, and
+release creation false.

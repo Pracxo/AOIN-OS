@@ -2199,3 +2199,17 @@ implementation go status, go/no-go ledger runtime effect, runtime approval lock
 release approval, runtime approval review approval, approval workflow bypass,
 missing approval record, ADR dependency bypass, gate dependency bypass, or
 runtime implementation approval as true remains a release blocker.
+
+
+## AION-146 Runtime Approval Board Final Review Policy
+
+AION-146 extends policy checks to runtime approval board final review, approval
+vote record closeout, and implementation go/no-go ledger final lock. Any runtime
+approval board final review approval, runtime approval board decision approval,
+runtime approval board stabilization approval, approval vote record approval,
+approval vote record closeout approval, approval vote record runtime effect,
+implementation go status, implementation go final approval, go/no-go ledger
+runtime effect, runtime approval lock release approval, runtime approval review
+approval, approval workflow bypass, missing approval record, ADR dependency
+bypass, gate dependency bypass, or runtime implementation approval as true
+remains a release blocker.

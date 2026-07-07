@@ -1311,3 +1311,15 @@ approval. This task keeps runtime approval board stabilization approval,
 runtime approval board decision approval, approval vote record approval,
 approval vote record runtime effect, implementation go status, and runtime
 implementation approval false.
+
+
+## AION-146 SDK Boundary
+
+AION-146 adds no SDK resource and no CLI implementation. Future SDKs may render
+runtime approval board final review, approval vote record closeout, final
+evidence matrix, final implementation go guard, and go/no-go ledger final lock
+metadata only after a later implementation approval. This task keeps runtime
+approval board final review approval, runtime approval board decision approval,
+approval vote record approval, approval vote record closeout approval, approval
+vote record runtime effect, implementation go status, implementation go final
+approval, and runtime implementation approval false.
