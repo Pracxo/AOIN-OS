@@ -33,3 +33,6 @@ Implementation decision records remain preview-only. A created record is not an 
 
 ## AION-142 Stabilization Handoff
 AION-142 freezes implementation decision records as unapproved planning records. Implementation decision record freeze approval, implementation decision record approval, approval docket stabilization approval, approval docket item approval, runtime approval review approval, runtime decision lock release approval, and runtime implementation approval remain false.
+
+## AION-143 Closeout Handoff
+AION-143 closes implementation decision records as unapproved planning records. Implementation decision record closeout approval, implementation decision record approval, approval docket final review approval, approval docket item approval, runtime approval lock release approval, runtime approval review approval, and runtime implementation approval remain false.

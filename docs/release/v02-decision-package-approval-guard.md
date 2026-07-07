@@ -32,3 +32,6 @@ AION-141 extends this guard with `approval_docket_item_approved=false`, `impleme
 
 ## AION-142 Approval Docket Stabilization Guard
 AION-142 extends this guard with `approval_docket_stabilization_approval=false`, `implementation_decision_record_freeze_approval=false`, and `runtime_approval_review_evidence_approved=false`. Stabilization, record freeze, lifecycle evidence, ADR dependencies, and gate dependencies remain evidence only and do not approve implementation or runtime.
+
+## AION-143 Approval Docket Final Guard
+AION-143 extends this guard with `approval_docket_final_review_approval=false`, `implementation_decision_record_closeout_approval=false`, and `runtime_approval_lock_release_approved=false`. Final review, record closeout, runtime approval lock, ADR dependencies, and gate dependencies remain evidence only and do not approve implementation or runtime.

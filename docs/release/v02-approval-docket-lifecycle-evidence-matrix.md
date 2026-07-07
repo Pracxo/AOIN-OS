@@ -27,3 +27,6 @@ No lifecycle state approves implementation or enables runtime.
 - Every row must preserve an explicit blocker.
 - Every row must reference synthetic, redacted, local evidence.
 - No row may create a tag, create a release, enable external calls, store credentials/tokens, enable sandbox execution, add packages, add migrations, or add runtime API execution routes.
+
+## AION-143 Final Lifecycle Handoff
+AION-143 adds final review and runtime approval lock evidence without changing lifecycle approval states. Every lifecycle row remains approval state false and runtime state disabled; approval docket final review approval, implementation decision record closeout approval, runtime approval lock release approval, and runtime implementation approval remain false.

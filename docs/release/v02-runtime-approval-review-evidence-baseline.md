@@ -21,3 +21,6 @@ Runtime approval review evidence is not runtime approval. Evidence completeness 
 
 ## Required Safe Content
 All baseline evidence must show no secrets, no tokens, no credentials, no endpoints, no raw prompts, and no hidden reasoning.
+
+## AION-143 Runtime Approval Lock Handoff
+AION-143 consumes this runtime approval review evidence as final lock evidence only. Runtime approval lock release approval, runtime approval review approval, runtime approval review evidence approval, approval docket final review approval, implementation decision record closeout approval, runtime decision lock release approval, and runtime implementation approval remain false.

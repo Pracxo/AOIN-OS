@@ -4775,3 +4775,25 @@ execution is enabled, no v0.2 tag is created, and no v0.2 release is created.
 ./scripts/v02-implementation-decision-record-freeze.sh
 ./scripts/v02-approval-docket-stabilization-no-go-regression.sh
 ```
+
+## AION-143 v0.2 Approval Docket Final Review
+
+AION-143 closes the v0.2 approval docket layer into final review and creates
+the runtime approval lock. The final review remains non-approving: approval
+docket final review approval remains false, approval docket item approval
+remains false, implementation decision record closeout approval remains false,
+implementation decision record approval remains false, runtime approval lock
+release approval remains false, runtime approval review approval remains false,
+runtime decision lock release approval remains false, decision package approval
+remains false, approval readiness approval remains false, review board decision
+approval remains false, routing decision approval remains false, reviewer
+sign-off implementation approval remains false, runtime implementation approval
+remains false, no external calls are added, no credentials or tokens are
+stored, no sandbox execution is enabled, no v0.2 tag is created, and no v0.2
+release is created.
+
+```bash
+./scripts/v02-approval-docket-final-review.sh
+./scripts/v02-runtime-approval-lock-freeze.sh
+./scripts/v02-approval-docket-final-no-go-regression.sh
+```

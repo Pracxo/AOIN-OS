@@ -2098,3 +2098,17 @@ packages, approve readiness, approve review board decisions, approve routing,
 approve submissions, approve request packs, approve preapproval queue items,
 approve implementation, enable runtime, execute tools, call external services,
 store credentials or tokens, create a v0.2 tag, or create a v0.2 release.
+
+## AION-143 Approval Docket Final Review Contract
+
+The AION-143 contract freezes approval docket final review records,
+implementation decision record closeout records, runtime approval lock records,
+and final evidence matrices as read-only planning metadata. Final review status,
+record closeout status, runtime approval lock status, ADR dependencies, and gate
+dependencies must not approve docket final review, approve docket items, approve
+implementation decision records, approve runtime approval lock release, approve
+runtime approval review, approve runtime decision lock release, approve decision
+packages, approve readiness, approve review board decisions, approve routing,
+approve submissions, approve request packs, approve implementation, enable
+runtime, execute tools, call external services, store credentials or tokens,
+create a v0.2 tag, or create a v0.2 release.

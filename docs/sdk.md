@@ -1279,3 +1279,16 @@ record freeze approval, implementation decision record approval, runtime
 approval review approval, runtime decision lock release approval, decision
 package approval, approval readiness approval, implementation approval,
 submission approval, or release approval.
+
+## AION-143 SDK Boundary
+
+AION-143 adds no SDK resources, no SDK clients, no CLI-backed SDK commands, no
+network clients, no provider SDK dependencies, and no connector SDK
+dependencies. Approval docket final review, implementation decision record
+closeout, runtime approval lock, final evidence matrix, and final runtime
+approval guard examples are synthetic planning artifacts only and must not be
+interpreted as SDK runtime contracts, approval docket final review approval,
+approval docket item approval, implementation decision record closeout
+approval, implementation decision record approval, runtime approval lock release
+approval, runtime approval review approval, implementation approval, submission
+approval, or release approval.

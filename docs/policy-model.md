@@ -2162,3 +2162,19 @@ implementation approval, request pack approval, submission approval, approval
 queue item approval, proposal implementation approval, workstream
 implementation approval, backlog implementation approval, or runtime
 implementation approval as true is a release blocker.
+
+## AION-143 Approval Docket Final Review Policy
+
+AION-143 extends the policy lock to approval docket final review,
+implementation decision record closeout, runtime approval lock, and final
+evidence. Final review, record closeout, runtime approval lock, ADR dependency
+evidence, and gate dependency evidence are policy inputs only. Any attempt to
+mark approval docket final review approval, approval docket item approval,
+implementation decision record closeout approval, implementation decision record
+approval, runtime approval lock release approval, runtime approval review
+approval, runtime decision lock release approval, decision package approval,
+approval readiness approval, review board decision approval, routing decision
+approval, reviewer sign-off implementation approval, request pack approval,
+submission approval, approval queue item approval, proposal implementation
+approval, workstream implementation approval, backlog implementation approval,
+or runtime implementation approval as true is a release blocker.

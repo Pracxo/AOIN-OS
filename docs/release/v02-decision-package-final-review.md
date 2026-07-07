@@ -48,3 +48,6 @@ AION-141 consumes this final review as approval docket evidence only. The docket
 
 ## AION-142 Approval Docket Stabilization Handoff
 AION-142 consumes this final review as stabilized docket evidence only. Approval docket stabilization approval, approval docket item approval, implementation decision record freeze approval, implementation decision record approval, runtime approval review approval, runtime decision lock release approval, decision package approval, approval readiness approval, and runtime implementation approval remain false.
+
+## AION-143 Approval Docket Final Review Handoff
+AION-143 consumes this final review as approval docket final review evidence only. Approval docket final review approval, approval docket item approval, implementation decision record closeout approval, runtime approval lock release approval, runtime approval review approval, runtime decision lock release approval, decision package approval, approval readiness approval, and runtime implementation approval remain false.
