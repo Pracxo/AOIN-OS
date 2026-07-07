@@ -4812,3 +4812,23 @@ are preview-only: `runtime_approval_board_decision_approved=false`,
 ./scripts/v02-approval-vote-record-freeze.sh
 ./scripts/v02-runtime-approval-board-no-go-regression.sh
 ```
+
+### AION-145 v0.2 Runtime Approval Board Stabilization
+
+AION-145 stabilizes the runtime approval board preview, approval vote record
+freeze, and implementation go/no-go ledger evidence baseline created in
+AION-144. The board remains preview-only:
+`v02_runtime_approval_board_stabilized=true`,
+`runtime_approval_board_preview_only=true`,
+`runtime_approval_board_decision_approved=false`,
+`runtime_approval_board_stabilization_approval=false`,
+`approval_vote_record_approval=false`,
+`approval_vote_record_runtime_effect=false`,
+`implementation_go_status=false`, and
+`runtime_implementation_approved=false`. No v0.2 tag or release is created.
+
+```bash
+./scripts/v02-runtime-approval-board-stabilization-gate.sh
+./scripts/v02-approval-vote-record-stabilization-freeze.sh
+./scripts/v02-runtime-approval-board-stabilization-no-go-regression.sh
+```

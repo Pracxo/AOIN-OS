@@ -40,3 +40,11 @@ no-go condition.
 
 The ledger creates no v0.2 tag and no v0.2 release. It does not mutate the
 frozen v0.1 release baseline.
+
+## AION-145 Ledger Evidence Handoff
+
+AION-145 converts this boundary into an implementation go/no-go ledger evidence
+baseline. The ledger remains blocking only: implementation go status, go/no-go
+ledger runtime effect, runtime approval board decision approval, runtime
+approval board stabilization approval, approval vote record approval, approval
+vote record runtime effect, and runtime implementation approval remain false.

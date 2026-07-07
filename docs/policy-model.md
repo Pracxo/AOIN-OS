@@ -2188,3 +2188,14 @@ implementation go status, go/no-go ledger runtime effect, runtime approval lock
 release approval, approval workflow bypass, missing approval record, ADR
 dependency bypass, gate dependency bypass, or runtime implementation approval
 as true remains a release blocker.
+
+## AION-145 Runtime Approval Board Stabilization Policy
+
+AION-145 extends policy checks to runtime approval board stabilization, approval
+vote record freeze, and implementation go/no-go ledger evidence. Any runtime
+approval board stabilization approval, runtime approval board decision approval,
+approval vote record approval, approval vote record runtime effect,
+implementation go status, go/no-go ledger runtime effect, runtime approval lock
+release approval, runtime approval review approval, approval workflow bypass,
+missing approval record, ADR dependency bypass, gate dependency bypass, or
+runtime implementation approval as true remains a release blocker.

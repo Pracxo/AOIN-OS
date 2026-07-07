@@ -31,3 +31,11 @@ tokens, enable sandbox execution, create a v0.2 tag, or create a v0.2 release.
 `approval_board_unapproved` and `implementation_unapproved` are terminal safe
 states for AION-144. Future implementation still requires explicit approval
 records, ADRs, and gate evidence.
+
+## AION-145 Lifecycle Handoff
+
+AION-145 stabilizes the state model into a lifecycle evidence matrix. All board
+states remain preview, blocked, rejected, expired, revoked, unapproved, or
+implementation-unapproved states unless a later task creates explicit approval
+records, ADRs, and gate evidence. Runtime approval board stabilization approval
+and runtime implementation approval remain false.

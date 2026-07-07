@@ -137,3 +137,11 @@ AION-139 uses the final request-pack review as inherited stabilization
 evidence only. Runtime decision readiness approval, decision package approval,
 approval readiness approval, request pack approval, submission approval, and
 runtime implementation approval remain false.
+
+## AION-145 Runtime Approval Board Stabilization Handoff
+
+AION-145 uses final request-pack review as inherited evidence only. Request
+pack approval, submission approval, runtime approval board stabilization
+approval, runtime approval board decision approval, approval vote record
+approval, approval vote record runtime effect, implementation go status, and
+runtime implementation approval remain false.

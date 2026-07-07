@@ -336,3 +336,14 @@ controls, approval vote record runtime-effect controls, implementation go
 controls, runtime lock release controls, runtime decision approval controls,
 activation controls, external-call controls, credential/token storage, sandbox
 execution, runtime registration, v0.2 tag creation, or v0.2 release creation.
+
+## AION-145 Runtime Approval Board Stabilization Static Panels
+
+The static console adds runtime approval board stabilization and approval vote
+record freeze panels as read-only evidence only. They expose no runtime
+approval board stabilization approval controls, runtime approval board decision
+approval controls, approval vote record approval controls, approval vote record
+runtime-effect controls, implementation go controls, runtime lock release
+controls, runtime approval review controls, activation controls, external-call
+controls, credential/token storage, sandbox execution, runtime registration,
+v0.2 tag creation, or v0.2 release creation.

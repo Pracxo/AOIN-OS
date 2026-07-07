@@ -39,3 +39,12 @@ missing evidence does not authorize bypass.
 The vote record guard does not enable connector runtime, operator write
 execution, production auth, module activation, external calls, credential
 storage, token storage, or sandbox execution.
+
+## AION-145 Vote Freeze Handoff
+
+AION-145 freezes this vote record guard as preview-only evidence. Approval vote
+record approval, approval vote record runtime effect, runtime approval board
+decision approval, runtime approval board stabilization approval,
+implementation go status, go/no-go ledger runtime effect, runtime approval lock
+release approval, runtime approval review approval, and runtime implementation
+approval remain false.

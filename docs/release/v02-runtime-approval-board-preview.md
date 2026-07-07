@@ -200,3 +200,12 @@ AION-144 creates no v0.2 tag and no v0.2 release.
 - `v02_release_approved=false`
 
 The frozen `aion-v0.1.0` tag remains untouched.
+
+## AION-145 Stabilization Handoff
+
+AION-145 consumes this preview as inherited evidence and stabilizes it without
+granting runtime authority. Runtime approval board decision approval, runtime
+approval board stabilization approval, approval vote record approval, approval
+vote record runtime effect, implementation go status, go/no-go ledger runtime
+effect, runtime approval lock release approval, runtime approval review
+approval, and runtime implementation approval remain false.

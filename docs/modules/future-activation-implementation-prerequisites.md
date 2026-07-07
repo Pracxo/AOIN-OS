@@ -286,3 +286,15 @@ installation, external dependency download, module writes, policy bypass, audit
 bypass, privileged bypass, runtime approval board decision approval, approval
 vote record approval, approval vote record runtime effect, implementation go
 status, and runtime implementation approval remain disabled, absent, or false.
+
+## AION-145 Runtime Approval Board Stabilization Boundary
+
+Runtime approval board stabilization, approval vote records, lifecycle
+evidence, and go/no-go ledger entries do not approve module activation. Module
+activation, capability activation, code loading, runtime registration,
+controlled execution, package installation, external dependency download,
+module writes, policy bypass, audit bypass, privileged bypass, runtime approval
+board stabilization approval, runtime approval board decision approval,
+approval vote record approval, approval vote record runtime effect,
+implementation go status, and runtime implementation approval remain disabled,
+absent, or false.

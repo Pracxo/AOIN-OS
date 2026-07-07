@@ -2122,3 +2122,14 @@ and `go_no_go_ledger_created=true`. It does not approve board decisions, vote
 records, ledger go status, implementation decision records, runtime approval
 locks, runtime approval reviews, runtime implementation, releases, tags,
 external calls, credentials, tokens, sandbox execution, or operator writes.
+
+## AION-145 Runtime Approval Board Stabilization Contract
+
+The contract now exposes AION-145 stabilization evidence only:
+`v02_runtime_approval_board_stabilized=true`,
+`runtime_approval_board_preview_only=true`, `approval_vote_record_created=true`,
+and `go_no_go_ledger_created=true`. It does not approve board stabilization,
+board decisions, vote records, ledger go status, implementation decision
+records, runtime approval locks, runtime approval reviews, runtime
+implementation, releases, tags, external calls, credentials, tokens, sandbox
+execution, or operator writes.

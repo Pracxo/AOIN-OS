@@ -104,3 +104,11 @@ decision package stabilization only. Runtime decision readiness approval,
 decision package approval, approval readiness approval, submission approval,
 request pack approval, preapproval queue item approval, and runtime
 implementation approval remain false.
+
+## AION-145 Runtime Approval Board Stabilization Handoff
+
+AION-145 consumes submission registry stabilization as inherited evidence only.
+Submission approval, request pack approval, preapproval queue item approval,
+runtime approval board stabilization approval, runtime approval board decision
+approval, approval vote record approval, approval vote record runtime effect,
+implementation go status, and runtime implementation approval remain false.

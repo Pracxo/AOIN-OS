@@ -855,6 +855,16 @@ Instructions for future Codex runs in this repository:
   record runtime effect, implementation go status, go/no-go ledger runtime
   effect, runtime approval lock release approval, and runtime implementation
   approval must remain false.
+- AION-145 stabilizes the runtime approval board layer as evidence only. Runtime
+  approval board stabilization approval, runtime approval board decision
+  approval, approval vote record approval, approval vote record runtime effect,
+  implementation go status, go/no-go ledger runtime effect, runtime approval
+  lock release approval, runtime approval review approval, and runtime
+  implementation approval must remain false. Do not treat stabilization,
+  approval vote record freeze, lifecycle evidence, go/no-go evidence, reviewer
+  evidence, ADR dependency, gate dependency, static console evidence, or no-go
+  evidence as runtime enablement, implementation approval, tag creation, or
+  release creation.
 - AION-142 stabilizes the v0.2 approval docket and freezes implementation
   decision records as planning artifacts only. Approval docket stabilization
   approval, approval docket item approval, implementation decision record freeze

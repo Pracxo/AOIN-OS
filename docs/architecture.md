@@ -2368,6 +2368,19 @@ operator write execution, production auth runtime, module activation, sandbox
 execution, external call path, credential storage, token storage, v0.2 tag, or
 v0.2 release.
 
+## AION-145 Runtime Approval Board Stabilization Boundary
+
+AION-145 stabilizes the runtime approval board, approval vote record, and
+implementation go/no-go ledger architecture as evidence only. Runtime approval
+board stabilization approval, runtime approval board decision approval,
+approval vote record approval, approval vote record runtime effect,
+implementation go status, go/no-go ledger runtime effect, runtime approval lock
+release approval, runtime approval review approval, and runtime implementation
+approval remain false. The architecture still adds no API route, SDK resource,
+CLI implementation, migration, connector runtime, operator write execution,
+production auth runtime, module activation, sandbox execution, external call
+path, credential storage, token storage, v0.2 tag, or v0.2 release.
+
 ## AION-141 Approval Docket Preview Boundary
 
 AION-141 adds the approval docket preview, runtime approval review boundary,

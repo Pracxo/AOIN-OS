@@ -253,3 +253,15 @@ credential storage, token storage, runtime approval board decision approval,
 approval vote record approval, approval vote record runtime effect,
 implementation go status, and runtime implementation approval remain disabled,
 absent, or false.
+
+## AION-145 Runtime Approval Board Stabilization Boundary
+
+Runtime approval board stabilization, approval vote records, lifecycle
+evidence, and go/no-go ledger entries do not approve production auth
+implementation. Production auth runtime, login endpoints, logout endpoints,
+session persistence, cookie issuance, token issuance, external identity
+provider runtime, OAuth/OIDC/SAML runtime, credential storage, token storage,
+runtime approval board stabilization approval, runtime approval board decision
+approval, approval vote record approval, approval vote record runtime effect,
+implementation go status, and runtime implementation approval remain disabled,
+absent, or false.
