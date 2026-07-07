@@ -36,3 +36,12 @@ release approval, runtime approval review approval, runtime approval board
 decision approval, approval vote record approval, approval vote record runtime
 effect, implementation go status, go/no-go ledger runtime effect, and runtime
 implementation approval remain false.
+
+## AION-145 Runtime Approval Board Stabilization Handoff
+
+AION-145 uses this lock as unreleased prior evidence only. Runtime approval
+lock release approval, runtime approval review approval, runtime approval board
+stabilization approval, runtime approval board decision approval, approval vote
+record approval, approval vote record runtime effect, implementation go status,
+go/no-go ledger runtime effect, and runtime implementation approval remain
+false.

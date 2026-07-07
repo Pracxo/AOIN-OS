@@ -1301,3 +1301,13 @@ metadata only after a later implementation approval. This task keeps runtime
 approval board decision approval, approval vote record approval, approval vote
 record runtime effect, implementation go status, and runtime implementation
 approval false.
+
+## AION-145 SDK Boundary
+
+AION-145 adds no SDK resource and no CLI implementation. Future SDKs may render
+runtime approval board stabilization, approval vote record freeze, lifecycle
+evidence, and go/no-go ledger metadata only after a later implementation
+approval. This task keeps runtime approval board stabilization approval,
+runtime approval board decision approval, approval vote record approval,
+approval vote record runtime effect, implementation go status, and runtime
+implementation approval false.

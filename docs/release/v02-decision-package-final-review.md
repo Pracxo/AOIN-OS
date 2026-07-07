@@ -59,3 +59,12 @@ Decision package approval, approval readiness approval, runtime approval board
 decision approval, approval vote record approval, approval vote record runtime
 effect, implementation go status, runtime approval lock release approval, and
 runtime implementation approval remain false.
+
+## AION-145 Runtime Approval Board Stabilization Handoff
+
+AION-145 consumes this decision package final review as prior evidence only.
+Decision package approval, approval readiness approval, runtime approval board
+stabilization approval, runtime approval board decision approval, approval vote
+record approval, approval vote record runtime effect, implementation go status,
+runtime approval lock release approval, runtime approval review approval, and
+runtime implementation approval remain false.

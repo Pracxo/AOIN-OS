@@ -288,3 +288,14 @@ connector SDK dependencies, runtime route registration, runtime approval board
 decision approval, approval vote record approval, approval vote record runtime
 effect, implementation go status, and runtime implementation approval remain
 disabled, absent, or false.
+
+## AION-145 Runtime Approval Board Stabilization Boundary
+
+Runtime approval board stabilization, approval vote records, lifecycle
+evidence, and go/no-go ledger entries do not approve connector implementation.
+Connector runtime, external calls, credential/token storage, sandbox execution,
+provider SDK dependencies, connector SDK dependencies, runtime route
+registration, runtime approval board stabilization approval, runtime approval
+board decision approval, approval vote record approval, approval vote record
+runtime effect, implementation go status, and runtime implementation approval
+remain disabled, absent, or false.

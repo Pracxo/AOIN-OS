@@ -25,3 +25,11 @@ tokens, no credentials, no endpoints, no raw prompts, and no hidden reasoning.
 
 Evidence completeness cannot bypass approval:
 `evidence_completeness_bypassed=false`.
+
+## AION-145 Evidence Baseline Handoff
+
+AION-145 consumes this evidence pack as inherited board evidence and adds the
+runtime approval board stabilization gate, approval vote record freeze,
+implementation go/no-go ledger evidence baseline, and lifecycle evidence
+matrix. Evidence completeness, reviewer evidence, ADR dependencies, and gate
+dependencies remain evidence only and do not approve implementation.

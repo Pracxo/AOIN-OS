@@ -58,3 +58,13 @@ runtime effect, implementation go status, go/no-go ledger runtime effect,
 approval docket final review approval, implementation decision record closeout
 approval, runtime approval lock release approval, runtime approval review
 approval, and runtime implementation approval remain false.
+
+## AION-145 Runtime Approval Board Stabilization Handoff
+
+AION-145 consumes this final review as prior evidence for stabilization only.
+Approval docket final review approval, approval docket item approval,
+implementation decision record closeout approval, runtime approval board
+stabilization approval, runtime approval board decision approval, approval vote
+record approval, approval vote record runtime effect, implementation go status,
+runtime approval lock release approval, runtime approval review approval, and
+runtime implementation approval remain false.

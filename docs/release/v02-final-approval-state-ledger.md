@@ -120,3 +120,15 @@ approval false, approval vote record approval false, approval vote record
 runtime effect false, implementation go status false, go/no-go ledger runtime
 effect false, runtime approval lock release approval false, runtime
 implementation approval false, v0.2 tag absent, and v0.2 release absent.
+
+## AION-145 Runtime Approval Board Stabilization Ledger
+
+AION-145 adds runtime approval board stabilization ledger entries with runtime
+approval board stabilized true, runtime approval board preview-only true,
+approval vote record created true, go/no-go ledger created true, implementation
+no-go status true, runtime approval board decision approval false, runtime
+approval board stabilization approval false, approval vote record approval
+false, approval vote record runtime effect false, implementation go status
+false, go/no-go ledger runtime effect false, runtime approval lock release
+approval false, runtime approval review approval false, runtime implementation
+approval false, v0.2 tag absent, and v0.2 release absent.

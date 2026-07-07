@@ -1145,6 +1145,17 @@ go, release runtime locks, execute writes, enable connectors, enable auth,
 activate modules, call external services, store credentials or tokens, create
 package files, create migrations, create a v0.2 tag, or create a v0.2 release.
 
+## AION-145 CLI Boundary
+
+AION-145 adds local shell gates for runtime approval board stabilization,
+approval vote record stabilization freeze, and stabilization no-go validation
+only. It adds no CLI command implementation, no runtime execution command, no
+runtime approval board stabilization approval command, no approval vote record
+approval command, no implementation go command, no write path, no connector
+runtime command, no sandbox command, no external-call command, no
+credential/token command, no package command, no migration command, and no
+release or tag command.
+
 ## AION-142 CLI Boundary
 
 AION-142 adds local shell gates for approval docket stabilization,

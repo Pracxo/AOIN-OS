@@ -1,8 +1,9 @@
-# v0.2 Runtime Approval Board No-Go Checks
+# v0.2 Runtime Approval Board Stabilization No-Go
 
-AION-144 fails if any of these conditions appear:
+AION-145 fails if any of these conditions appear:
 
 - runtime approval board decision approved true
+- runtime approval board stabilization approval true
 - approval vote record approval true
 - approval vote record runtime effect true
 - go/no-go ledger implementation go true
@@ -51,16 +52,10 @@ AION-144 fails if any of these conditions appear:
 - migrations added
 - runtime API execution routes added
 
-The no-go regression script also blocks package install instructions, external
-call paths, credential markers, token markers, sandbox execution markers, API
-runtime execution routes, SDK resource implementation changes, and CLI command
-implementation changes.
+## Allowed Evidence Context
 
-## AION-145 Stabilization No-Go Handoff
-
-AION-145 extends these no-go checks to runtime approval board stabilization
-approval, approval vote record freeze, lifecycle evidence, and the implementation
-go/no-go ledger evidence baseline. Any stabilization approval, vote approval,
-vote runtime effect, implementation go status, runtime effect, release, runtime
-enablement, bypass, package, migration, or runtime API execution route remains a
-release blocker.
+Docs, examples, tests, static console data, and scripts may describe disabled,
+denied, no-go, future, planning, unapproved, template, or preview-only states.
+They must not contain active runtime approval, implementation approval, runtime
+enablement, external-call enablement, credential storage, token storage, sandbox
+execution, package dependency, migration, or runtime API execution changes.

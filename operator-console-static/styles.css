@@ -684,7 +684,9 @@ pre {
 #v02-approval-docket-stabilization,
 #v02-implementation-decision-record-freeze,
 #v02-runtime-approval-board-preview,
-#v02-implementation-go-no-go-ledger-boundary {
+#v02-implementation-go-no-go-ledger-boundary,
+#v02-runtime-approval-board-stabilization,
+#v02-approval-vote-record-freeze {
   border-color: rgba(47, 123, 110, 0.35);
 }
 

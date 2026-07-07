@@ -1355,3 +1355,13 @@ preview created, vote record created, ledger created, and implementation no-go
 status only. They do not expose approval controls, runtime controls, activation
 controls, external-call controls, credential/token storage, sandbox execution,
 a v0.2 tag, or a v0.2 release.
+
+## AION-145 Static Runtime Approval Board Stabilization
+
+The visual brain surface adds read-only panels for runtime approval board
+stabilization and approval vote record freeze. These panels show board
+stabilized, board preview-only, vote record created, ledger created,
+implementation no-go status, and approval/runtime flags locked false. They do
+not expose approval controls, runtime controls, activation controls,
+external-call controls, credential/token storage, sandbox execution, a v0.2
+tag, or a v0.2 release.
