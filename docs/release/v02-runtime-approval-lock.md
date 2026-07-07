@@ -28,3 +28,11 @@ The lock does not enable connector runtime, operator write execution, production
 
 ## Release Boundary
 The lock creates no v0.2 tag and no v0.2 release. It keeps the protected `aion-v0.1.0` baseline untouched.
+
+## AION-144 Runtime Approval Board Handoff
+
+AION-144 uses this lock as unreleased prior evidence only. Runtime approval lock
+release approval, runtime approval review approval, runtime approval board
+decision approval, approval vote record approval, approval vote record runtime
+effect, implementation go status, go/no-go ledger runtime effect, and runtime
+implementation approval remain false.

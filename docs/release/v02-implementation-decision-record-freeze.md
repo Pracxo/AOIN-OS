@@ -40,3 +40,11 @@ Frozen implementation decision records are not approval records. The freeze crea
 
 ## AION-143 Closeout Handoff
 AION-143 closes implementation decision records as unapproved planning records only. Implementation decision record closeout approval, implementation decision record freeze approval, implementation decision record approval, approval docket final review approval, runtime approval lock release approval, runtime approval review approval, and runtime implementation approval remain false.
+
+## AION-144 Runtime Approval Board Handoff
+
+AION-144 consumes this freeze as prior evidence only. Implementation decision
+record freeze approval, implementation decision record approval, runtime
+approval board decision approval, approval vote record approval, approval vote
+record runtime effect, implementation go status, runtime approval lock release
+approval, and runtime implementation approval remain false.

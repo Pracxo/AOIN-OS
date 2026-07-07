@@ -25,3 +25,11 @@ The AION-142 stabilization baseline is ready for future review intake only. It d
 
 ## AION-143 Final Review Handoff
 AION-143 final review uses this stabilization summary as historical evidence only. Approval docket final review approval, approval docket item approval, implementation decision record closeout approval, runtime approval lock release approval, runtime approval review approval, and runtime implementation approval remain false.
+
+## AION-144 Runtime Approval Board Handoff
+
+AION-144 uses this stabilization summary as historical evidence only. Approval
+docket stabilization approval, approval docket item approval, runtime approval
+board decision approval, approval vote record approval, approval vote record
+runtime effect, implementation go status, and runtime implementation approval
+remain false.

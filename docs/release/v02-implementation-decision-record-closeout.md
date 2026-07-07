@@ -26,3 +26,12 @@ The closeout fails if any approval, bypass, runtime, release, package, migration
 
 ## Non-Approval Statement
 Implementation decision record closeout is not an approval record, not release approval, not runtime readiness approval, and not permission to implement.
+
+## AION-144 Runtime Approval Board Handoff
+
+AION-144 references this closeout as evidence for the runtime approval board
+preview only. Implementation decision record closeout approval, implementation
+decision record approval, runtime approval board decision approval, approval
+vote record approval, approval vote record runtime effect, implementation go
+status, runtime approval lock release approval, and runtime implementation
+approval remain false.

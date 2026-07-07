@@ -110,3 +110,13 @@ AION-142 adds approval docket stabilization ledger entries with approval docket 
 
 ## AION-143 Approval Docket Final Review Ledger
 AION-143 adds approval docket final review ledger entries with approval docket final review approval false, approval docket item approval false, implementation decision record closeout approval false, implementation decision record approval false, runtime approval lock created true, runtime approval lock release approval false, runtime approval review approval false, runtime decision lock release approval false, runtime decision readiness approval false, decision package approval false, approval readiness approval false, review board decision approval false, routing decision approval false, reviewer sign-off implementation approval false, runtime implementation approval false, v0.2 tag absent, and v0.2 release absent.
+
+## AION-144 Runtime Approval Board Ledger
+
+AION-144 adds runtime approval board preview ledger entries with runtime approval
+board preview created true, approval vote record created true, go/no-go ledger
+created true, implementation no-go status true, runtime approval board decision
+approval false, approval vote record approval false, approval vote record
+runtime effect false, implementation go status false, go/no-go ledger runtime
+effect false, runtime approval lock release approval false, runtime
+implementation approval false, v0.2 tag absent, and v0.2 release absent.

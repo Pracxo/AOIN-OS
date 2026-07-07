@@ -130,6 +130,9 @@
     "./scripts/v02-approval-docket-final-review.sh",
     "./scripts/v02-runtime-approval-lock-freeze.sh",
     "./scripts/v02-approval-docket-final-no-go-regression.sh",
+    "./scripts/v02-runtime-approval-board-preview-check.sh",
+    "./scripts/v02-approval-vote-record-freeze.sh",
+    "./scripts/v02-runtime-approval-board-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -237,7 +240,9 @@
     approval_docket_stabilization: "demo-data/v02-approval-docket-stabilization.json",
     implementation_decision_record_freeze: "demo-data/v02-implementation-decision-record-freeze.json",
     approval_docket_final_review: "demo-data/v02-approval-docket-final-review.json",
-    runtime_approval_lock: "demo-data/v02-runtime-approval-lock.json"
+    runtime_approval_lock: "demo-data/v02-runtime-approval-lock.json",
+    runtime_approval_board_preview: "demo-data/v02-runtime-approval-board-preview.json",
+    implementation_go_no_go_ledger_boundary: "demo-data/v02-implementation-go-no-go-ledger-boundary.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1750,7 +1755,9 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.approval_docket_stabilization),
       fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_decision_record_freeze),
       fetchJson(RELEASE_CANDIDATE_DEMOS.approval_docket_final_review),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.runtime_approval_lock)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.runtime_approval_lock),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.runtime_approval_board_preview),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_go_no_go_ledger_boundary)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
@@ -1805,6 +1812,8 @@
         renderReleaseCandidateEvidence("v02-implementation-decision-record-freeze", redact(payloads[49]));
         renderReleaseCandidateEvidence("v02-approval-docket-final-review", redact(payloads[50]));
         renderReleaseCandidateEvidence("v02-runtime-approval-lock", redact(payloads[51]));
+        renderReleaseCandidateEvidence("v02-runtime-approval-board-preview", redact(payloads[52]));
+        renderReleaseCandidateEvidence("v02-implementation-go-no-go-ledger-boundary", redact(payloads[53]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
@@ -1859,6 +1868,8 @@
         renderReleaseCandidateEvidence("v02-implementation-decision-record-freeze", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-approval-docket-final-review", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-runtime-approval-lock", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-runtime-approval-board-preview", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-implementation-go-no-go-ledger-boundary", { status: "unavailable" });
       });
   }
 
@@ -1903,6 +1914,16 @@
       ["v02_approval_docket_preview_created", String(Boolean(payload.v02_approval_docket_preview_created))],
       ["v02_approval_docket_stabilized", String(Boolean(payload.v02_approval_docket_stabilized))],
       ["v02_approval_docket_final_review_passed", String(Boolean(payload.v02_approval_docket_final_review_passed))],
+      ["v02_runtime_approval_board_preview_created", String(Boolean(payload.v02_runtime_approval_board_preview_created))],
+      ["runtime_approval_board_preview_only", String(Boolean(payload.runtime_approval_board_preview_only))],
+      ["runtime_approval_board_decision_approved", String(Boolean(payload.runtime_approval_board_decision_approved))],
+      ["approval_vote_record_created", String(Boolean(payload.approval_vote_record_created))],
+      ["approval_vote_record_approval", String(Boolean(payload.approval_vote_record_approval))],
+      ["approval_vote_record_runtime_effect", String(Boolean(payload.approval_vote_record_runtime_effect))],
+      ["go_no_go_ledger_created", String(Boolean(payload.go_no_go_ledger_created))],
+      ["implementation_go_status", String(Boolean(payload.implementation_go_status))],
+      ["implementation_no_go_status", String(Boolean(payload.implementation_no_go_status))],
+      ["go_no_go_ledger_runtime_effect", String(Boolean(payload.go_no_go_ledger_runtime_effect))],
       ["decision_package_preview_only", String(Boolean(payload.decision_package_preview_only))],
       ["approval_readiness_preview_only", String(Boolean(payload.approval_readiness_preview_only))],
       ["approval_docket_preview_only", String(Boolean(payload.approval_docket_preview_only))],

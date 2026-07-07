@@ -129,6 +129,9 @@
     "./scripts/v02-approval-docket-final-review.sh",
     "./scripts/v02-runtime-approval-lock-freeze.sh",
     "./scripts/v02-approval-docket-final-no-go-regression.sh",
+    "./scripts/v02-runtime-approval-board-preview-check.sh",
+    "./scripts/v02-approval-vote-record-freeze.sh",
+    "./scripts/v02-runtime-approval-board-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ],
   "forbidden_surface": {

@@ -2356,6 +2356,18 @@ implementation, migration, connector runtime, operator write execution,
 production auth runtime, module activation, sandbox execution, external call
 path, credential storage, token storage, v0.2 tag, or v0.2 release is added.
 
+## AION-144 Runtime Approval Board Boundary
+
+AION-144 adds approval board, vote record, and go/no-go ledger preview
+architecture only. Runtime approval board decision approval, approval vote
+record approval, approval vote record runtime effect, implementation go status,
+go/no-go ledger runtime effect, runtime approval lock release approval, and
+runtime implementation approval remain false. The architecture still adds no
+API route, SDK resource, CLI implementation, migration, connector runtime,
+operator write execution, production auth runtime, module activation, sandbox
+execution, external call path, credential storage, token storage, v0.2 tag, or
+v0.2 release.
+
 ## AION-141 Approval Docket Preview Boundary
 
 AION-141 adds the approval docket preview, runtime approval review boundary,

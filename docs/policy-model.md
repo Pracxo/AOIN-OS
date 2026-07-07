@@ -2178,3 +2178,13 @@ approval, reviewer sign-off implementation approval, request pack approval,
 submission approval, approval queue item approval, proposal implementation
 approval, workstream implementation approval, backlog implementation approval,
 or runtime implementation approval as true is a release blocker.
+
+## AION-144 Policy Boundary
+
+AION-144 adds policy checks for runtime approval board decisions, approval vote
+records, and go/no-go ledger entries. Any runtime approval board decision
+approval, approval vote record approval, approval vote record runtime effect,
+implementation go status, go/no-go ledger runtime effect, runtime approval lock
+release approval, approval workflow bypass, missing approval record, ADR
+dependency bypass, gate dependency bypass, or runtime implementation approval
+as true remains a release blocker.

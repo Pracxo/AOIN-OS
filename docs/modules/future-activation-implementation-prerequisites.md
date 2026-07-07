@@ -276,3 +276,13 @@ Approval docket stabilization does not approve module activation. Module activat
 
 ## AION-143 Approval Docket Final Review Boundary
 Approval docket final review and runtime approval lock do not approve module activation. Module activation, capability activation, code loading, runtime registration, controlled execution, package installation, external dependency download, module writes, policy bypass, audit bypass, privileged bypass, approval docket final review approval, approval docket item approval, implementation decision record closeout approval, implementation decision record approval, runtime approval lock release approval, runtime approval review approval, and runtime implementation approval remain disabled, absent, or false.
+
+## AION-144 Runtime Approval Board Boundary
+
+Runtime approval board preview, approval vote records, and go/no-go ledger
+entries do not approve module activation. Module activation, capability
+activation, code loading, runtime registration, controlled execution, package
+installation, external dependency download, module writes, policy bypass, audit
+bypass, privileged bypass, runtime approval board decision approval, approval
+vote record approval, approval vote record runtime effect, implementation go
+status, and runtime implementation approval remain disabled, absent, or false.

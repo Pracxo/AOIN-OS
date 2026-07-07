@@ -1346,3 +1346,12 @@ approval false, and release blockers only; they do not expose inputs, write
 controls, approval controls, activation controls, external-call controls,
 credential/token storage, sandbox execution, runtime enablement, a v0.2 tag, or
 a v0.2 release.
+
+## AION-144 Static Runtime Approval Board Preview
+
+The visual brain surface adds read-only panels for the runtime approval board
+preview and implementation go/no-go ledger boundary. These panels show board
+preview created, vote record created, ledger created, and implementation no-go
+status only. They do not expose approval controls, runtime controls, activation
+controls, external-call controls, credential/token storage, sandbox execution,
+a v0.2 tag, or a v0.2 release.

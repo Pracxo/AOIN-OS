@@ -4797,3 +4797,18 @@ release is created.
 ./scripts/v02-runtime-approval-lock-freeze.sh
 ./scripts/v02-approval-docket-final-no-go-regression.sh
 ```
+
+### AION-144 v0.2 Runtime Approval Board Preview
+
+AION-144 adds the runtime approval board preview, approval vote record guard,
+and implementation go/no-go ledger boundary. The board, vote record, and ledger
+are preview-only: `runtime_approval_board_decision_approved=false`,
+`approval_vote_record_approval=false`, `approval_vote_record_runtime_effect=false`,
+`implementation_go_status=false`, `go_no_go_ledger_runtime_effect=false`, and
+`runtime_implementation_approved=false`. No v0.2 tag or release is created.
+
+```bash
+./scripts/v02-runtime-approval-board-preview-check.sh
+./scripts/v02-approval-vote-record-freeze.sh
+./scripts/v02-runtime-approval-board-no-go-regression.sh
+```

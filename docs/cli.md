@@ -1135,6 +1135,16 @@ approval command, no write path, no connector runtime command, no sandbox
 command, no external-call command, no credential/token command, no package
 command, no migration command, and no release or tag command.
 
+## AION-144 CLI Boundary
+
+AION-144 adds no CLI command implementation. The only new CLI-adjacent surface
+is local verification scripts for the runtime approval board preview, approval
+vote record freeze, and runtime approval board no-go regression. There is no
+command to approve board decisions, approve vote records, mark implementation
+go, release runtime locks, execute writes, enable connectors, enable auth,
+activate modules, call external services, store credentials or tokens, create
+package files, create migrations, create a v0.2 tag, or create a v0.2 release.
+
 ## AION-142 CLI Boundary
 
 AION-142 adds local shell gates for approval docket stabilization,

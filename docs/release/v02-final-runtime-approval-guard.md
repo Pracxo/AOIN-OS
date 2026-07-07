@@ -35,3 +35,11 @@
 - `runtime_implementation_approved=false`
 
 The guard fails if any required false state becomes true or if any runtime, release, tag, external-call, credential, token, sandbox, package, migration, API, SDK, CLI, or privileged bypass path is added.
+
+## AION-144 Runtime Approval Board Guard
+
+AION-144 adds runtime approval board decision approval, approval vote record
+approval, approval vote record runtime effect, implementation go status, and
+go/no-go ledger runtime effect to the false-state guard. The guard still does
+not approve implementation, release the runtime approval lock, enable runtime,
+or create a v0.2 tag or release.
