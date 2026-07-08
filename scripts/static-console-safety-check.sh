@@ -188,6 +188,8 @@ unsafe_markers = (
 allowed_authorization_demo_names = {
     "v02-implementation-authorization-preview.json",
     "v02-runtime-enablement-guard-boundary.json",
+    "v02-implementation-authorization-stabilization.json",
+    "v02-explicit-approval-record-freeze.json",
 }
 
 

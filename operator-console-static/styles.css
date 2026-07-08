@@ -475,7 +475,9 @@ h1 {
 .module-subpanel[aria-label="v0.2 decision package preview"],
 .module-subpanel[aria-label="v0.2 approval readiness evidence bundle"],
 .module-subpanel[aria-label="v0.2 implementation authorization preview"],
-.module-subpanel[aria-label="v0.2 runtime enablement guard boundary"] {
+.module-subpanel[aria-label="v0.2 runtime enablement guard boundary"],
+.module-subpanel[aria-label="v0.2 implementation authorization stabilization"],
+.module-subpanel[aria-label="v0.2 explicit approval record freeze"] {
   border-color: rgb(142 207 178 / 35%);
 }
 

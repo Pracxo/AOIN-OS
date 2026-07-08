@@ -7,3 +7,16 @@
 | Approval vote record dependency | Vote record closeout evidence | Review board reviewer | ADR 0137 | `v02-runtime-approval-board-final-review.sh` | false | false | false | false | Yes | Vote records do not approve implementation. |
 | Go/no-go ledger dependency | Final no-go ledger lock | Operator reviewer | ADR 0137 | `v02-implementation-go-no-go-final-freeze.sh` | false | false | false | false | Yes | `implementation_go_status=false`. |
 | Release boundary | No tag and no release evidence | Release reviewer | ADR 0138 | `scripts/check.sh` | false | false | false | false | Yes | No v0.2 tag or release. |
+
+## AION-148 Implementation Authorization Stabilization
+
+AION-148 freezes the implementation authorization preview, explicit approval
+record schema, and runtime enablement guard boundary into a stable evidence
+baseline. It remains non-approving: `implementation_authorization_preview_only=true`,
+`implementation_authorization_approved=false`,
+`implementation_authorization_stabilization_approval=false`,
+`explicit_approval_record_approval=false`,
+`explicit_approval_record_freeze_approval=false`,
+`runtime_enablement_guard_release_approved=false`,
+`runtime_approval_board_decision_approved=false`, `implementation_go_status=false`,
+and `runtime_implementation_approved=false`. No v0.2 tag or release is created.

@@ -141,6 +141,9 @@
         "./scripts/v02-implementation-authorization-preview-check.sh",
         "./scripts/v02-runtime-enablement-guard-freeze.sh",
         "./scripts/v02-implementation-authorization-no-go-regression.sh",
+        "./scripts/v02-explicit-approval-record-freeze.sh",
+        "./scripts/v02-implementation-authorization-stabilization-no-go-regression.sh",
+        "./scripts/v02-implementation-authorization-stabilization-gate.sh",
         "./scripts/docs-check.sh"
   ],
   "forbidden_surface": {
