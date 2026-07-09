@@ -20,3 +20,10 @@ implementation or runtime approval.
 - `runtime_implementation_approved=false`
 - `v02_tag_created=false`
 - `v02_release_created=false`
+
+## AION-149 final review summary
+
+`v02_implementation_authorization_final_review_passed=true` records final review
+evidence only. `implementation_authorization_final_review_approval=false`,
+`explicit_approval_record_closeout_approval=false`, and
+`runtime_enablement_guard_final_lock_release_approved=false`.

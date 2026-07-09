@@ -384,3 +384,11 @@ baseline. It remains non-approving: `implementation_authorization_preview_only=t
 `runtime_enablement_guard_release_approved=false`,
 `runtime_approval_board_decision_approved=false`, `implementation_go_status=false`,
 and `runtime_implementation_approved=false`. No v0.2 tag or release is created.
+
+## AION-149 Implementation Authorization Final Review
+
+The operator console next phase may show AION-149 final authorization evidence
+as bundled, read-only JSON. It must not expose approval controls, write
+execution, runtime execution, connector execution, external-call controls,
+credential/token storage, sandbox controls, package installation, migrations,
+or tag/release controls.

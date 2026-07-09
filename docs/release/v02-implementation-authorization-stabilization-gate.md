@@ -103,3 +103,12 @@ or release marker is enabled.
 
 AION-148 creates no v0.2 tag and no v0.2 release. `v02_tag_created=false`.
 `v02_release_created=false`. `v02_release_approved=false`.
+
+## AION-149 final review handoff
+
+AION-149 consumes this stabilization gate as prior evidence and closes the
+authorization layer into final review. The handoff does not change AION-148
+approval locks: implementation authorization approval, stabilization approval,
+explicit approval record approval, explicit approval record freeze approval,
+runtime guard release approval, implementation go status, and runtime
+implementation approval remain false.

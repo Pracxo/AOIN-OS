@@ -295,3 +295,11 @@ baseline. It remains non-approving: `implementation_authorization_preview_only=t
 `runtime_enablement_guard_release_approved=false`,
 `runtime_approval_board_decision_approved=false`, `implementation_go_status=false`,
 and `runtime_implementation_approved=false`. No v0.2 tag or release is created.
+
+## AION-149 Implementation Authorization Final Review
+
+The future runtime boundary stays frozen after AION-149. Runtime enablement guard
+final lock release approval remains false, runtime implementation approval
+remains false, and no connector runtime, production auth, operator write,
+module activation, external call, credential/token storage, sandbox execution,
+runtime API route, v0.2 tag, or v0.2 release is added.
