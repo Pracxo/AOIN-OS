@@ -1,0 +1,174 @@
+{
+  "adr_dependency_bypassed": false,
+  "approval_docket_final_review_approval": false,
+  "approval_docket_item_approved": false,
+  "approval_docket_preview_only": true,
+  "approval_docket_stabilization_approval": false,
+  "approval_evidence_approval": false,
+  "approval_queue_item_approved": false,
+  "approval_queue_preview_only": true,
+  "approval_readiness_approved": false,
+  "approval_readiness_preview_only": true,
+  "approval_record_missing": false,
+  "approval_status": false,
+  "approval_vote_record_approval": false,
+  "approval_vote_record_closeout_approval": false,
+  "approval_vote_record_created": true,
+  "approval_vote_record_runtime_effect": false,
+  "approval_workflow_bypassed": false,
+  "artifact": "v02-explicit-approval-record-freeze",
+  "authorization_state": "authorization_unapproved",
+  "backlog_implementation_items_approved": false,
+  "blockers": [
+    "implementation_authorization_approved=false",
+    "implementation_authorization_stabilization_approval=false",
+    "explicit_approval_record_approval=false",
+    "explicit_approval_record_freeze_approval=false",
+    "runtime_enablement_guard_release_approved=false",
+    "implementation_go_status=false"
+  ],
+  "connector_implementation_approved": false,
+  "content_safety": [
+    "no secrets",
+    "no tokens",
+    "no credentials",
+    "no endpoints",
+    "no raw prompts",
+    "no hidden reasoning"
+  ],
+  "credential_storage_approved": false,
+  "credentials_present": false,
+  "decision_package_approval": false,
+  "decision_package_preview_only": true,
+  "endpoints_present": false,
+  "evidence_completeness_bypassed": false,
+  "explicit_approval_record_approval": false,
+  "explicit_approval_record_created": true,
+  "explicit_approval_record_freeze_approval": false,
+  "external_calls_approved": false,
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
+  ],
+  "gate_dependency_bypassed": false,
+  "go_no_go_ledger_created": true,
+  "go_no_go_ledger_runtime_effect": false,
+  "implementation_authorization_approved": false,
+  "implementation_authorization_preview_only": true,
+  "implementation_authorization_stabilization_approval": false,
+  "implementation_authorization_stabilized": true,
+  "implementation_authorization_status": false,
+  "implementation_decision_record_approval": false,
+  "implementation_decision_record_closeout_approval": false,
+  "implementation_decision_record_created": true,
+  "implementation_go_final_approval": false,
+  "implementation_go_status": false,
+  "implementation_no_go_status": true,
+  "migrations_added": false,
+  "module_activation_approved": false,
+  "operator_write_execution_approved": false,
+  "package_files_added": false,
+  "preapproval_gate_bypassed": false,
+  "preapproval_queue_item_approved": false,
+  "preapproval_queue_preview_only": true,
+  "private_reasoning_present": false,
+  "production_auth_approved": false,
+  "prompt_payloads_present": false,
+  "proposal_implementation_approved": false,
+  "proposal_registry_preview_only": true,
+  "proposal_template_implementation_approved": false,
+  "read_only": true,
+  "redaction_applied": true,
+  "refs": [
+    "docs/release/v02-implementation-authorization-stabilization-gate.md",
+    "docs/release/v02-explicit-approval-record-freeze.md",
+    "docs/release/v02-runtime-enablement-guard-evidence-baseline.md",
+    "docs/adr/0139-v02-implementation-authorization-stabilization.md"
+  ],
+  "request_pack_approval": false,
+  "request_package_implementation_approved": false,
+  "review_board_decision_approval": false,
+  "review_board_planning_only": true,
+  "reviewer_signoff_implementation_approval": false,
+  "routing_decision_approval": false,
+  "runtime_approval_board_decision_approved": false,
+  "runtime_approval_board_final_review_approval": false,
+  "runtime_approval_board_preview_only": true,
+  "runtime_approval_board_stabilization_approval": false,
+  "runtime_approval_lock_created": true,
+  "runtime_approval_lock_release_approved": false,
+  "runtime_approval_review_approved": false,
+  "runtime_decision_lock_created": true,
+  "runtime_decision_lock_release_approved": false,
+  "runtime_decision_readiness_approved": false,
+  "runtime_enablement_guard_created": true,
+  "runtime_enablement_guard_release_approved": false,
+  "runtime_enablement_guard_state": "release_locked",
+  "runtime_guard_release_status": false,
+  "runtime_implementation_approved": false,
+  "sandbox_execution_approved": false,
+  "secrets_present": false,
+  "sections": [
+    {
+      "status": "preview-only",
+      "summary": "Implementation authorization is stabilized but unapproved.",
+      "title": "Authorization stabilization"
+    },
+    {
+      "status": "locked",
+      "summary": "Approval record approval and freeze approval remain false.",
+      "title": "Explicit approval record freeze"
+    },
+    {
+      "status": "locked",
+      "summary": "Runtime guard release approval remains false.",
+      "title": "Runtime enablement guard"
+    },
+    {
+      "status": "no-go",
+      "summary": "Implementation go status remains false.",
+      "title": "Implementation go state"
+    }
+  ],
+  "status": "passed",
+  "submission_approval": false,
+  "submission_freeze_bypassed": false,
+  "submission_registry_preview_only": true,
+  "synthetic": true,
+  "task_id": "AION-148",
+  "token_storage_approved": false,
+  "tokens_present": false,
+  "v02_implementation_authorization_stabilized": true,
+  "v02_release_approved": false,
+  "v02_release_created": false,
+  "v02_runtime_approval_board_final_review_passed": true,
+  "v02_tag_created": false,
+  "warnings": [
+    "stabilization baseline only",
+    "not implementation approval",
+    "runtime guard release remains false"
+  ],
+  "workstream_implementation_approved": false
+}

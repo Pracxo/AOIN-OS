@@ -875,3 +875,21 @@ Validate the v0.2 implementation authorization preview evidence:
 ./scripts/v02-runtime-enablement-guard-freeze.sh
 ./scripts/v02-implementation-authorization-no-go-regression.sh
 ```
+
+## AION-148 v0.2 Implementation Authorization Stabilization
+
+The static console adds read-only panels for v0.2 implementation authorization
+stabilization and explicit approval record freeze. They load bundled JSON only,
+keep implementation authorization preview-only, keep implementation authorization
+approval false, keep implementation authorization stabilization approval false,
+keep explicit approval record approval false, keep explicit approval record
+freeze approval false, keep runtime enablement guard release approval false, and
+keep implementation go status false.
+
+Validate the v0.2 implementation authorization stabilization evidence:
+
+```bash
+./scripts/v02-implementation-authorization-stabilization-gate.sh
+./scripts/v02-explicit-approval-record-freeze.sh
+./scripts/v02-implementation-authorization-stabilization-no-go-regression.sh
+```
