@@ -191,3 +191,10 @@ baseline. It remains non-approving: `implementation_authorization_preview_only=t
 `runtime_enablement_guard_release_approved=false`,
 `runtime_approval_board_decision_approved=false`, `implementation_go_status=false`,
 and `runtime_implementation_approved=false`. No v0.2 tag or release is created.
+
+## AION-149 Implementation Authorization Final Review
+
+AION-149 depends on this final runtime approval board evidence but does not
+change its approvals. Runtime approval board decision approval, final review
+approval, approval vote record approval, implementation go status, and runtime
+implementation approval remain false.

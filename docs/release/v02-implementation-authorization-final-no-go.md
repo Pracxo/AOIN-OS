@@ -1,13 +1,15 @@
+# v0.2 Implementation Authorization Final No-Go
 
-# v0.2 Implementation Authorization Stabilization No-Go
-
-AION-148 remains blocked if any of the following checks are violated:
+The AION-149 final review fails on these conditions:
 
 - implementation authorization approved true
 - implementation authorization stabilization approval true
+- implementation authorization final review approval true
 - explicit approval record approval true
 - explicit approval record freeze approval true
+- explicit approval record closeout approval true
 - runtime enablement guard release approved true
+- runtime enablement guard final lock release approved true
 - runtime approval board final review approval true
 - runtime approval board decision approved true
 - runtime approval board stabilization approval true
@@ -60,9 +62,3 @@ AION-148 remains blocked if any of the following checks are violated:
 - package files added
 - migrations added
 - runtime API execution routes added
-
-## AION-149 inherited no-go additions
-
-- implementation authorization final review approval true
-- explicit approval record closeout approval true
-- runtime enablement guard final lock release approved true

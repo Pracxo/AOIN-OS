@@ -17,3 +17,9 @@ implementation authorization approval false, and implementation go status false.
 | OPERATOR-WRITE | operator write execution candidate | explicit_approval_record_approval=false | authorization_unapproved | runtime_enablement_guard_release_approved=false | false | false | false | ADR-OPERATOR-WRITE | operator-write-execution-gate | approval chain, rollback proof, separation-of-duties evidence | operator write execution remains disabled | collect dual-control evidence |
 | MODULE-ACTIVATION | module activation candidate | explicit_approval_record_approval=false | authorization_unapproved | runtime_enablement_guard_release_approved=false | false | false | false | ADR-MODULE-ACTIVATION | module-activation-gate | capability manifest review, code-loading denial proof, audit trail | module activation remains disabled | draft activation readiness proof |
 | PROD-UI | production UI decision candidate | explicit_approval_record_approval=false | authorization_unapproved | runtime_enablement_guard_release_approved=false | false | false | false | ADR-PROD-UI | production-ui-decision-gate | static-console safety proof, auth boundary, runtime route denial evidence | production UI remains unimplemented | prepare UI boundary decision packet |
+
+## AION-149 final lock handoff
+
+AION-149 promotes this evidence baseline into a runtime enablement guard final
+lock without releasing the guard. `runtime_enablement_guard_final_lock_created=true`
+and `runtime_enablement_guard_final_lock_release_approved=false`.

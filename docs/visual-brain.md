@@ -1401,3 +1401,11 @@ baseline. It remains non-approving: `implementation_authorization_preview_only=t
 `runtime_enablement_guard_release_approved=false`,
 `runtime_approval_board_decision_approved=false`, `implementation_go_status=false`,
 and `runtime_implementation_approved=false`. No v0.2 tag or release is created.
+
+## AION-149 Implementation Authorization Final Review
+
+Visual Brain surfaces AION-149 as read-only final authorization evidence. It may
+display final review, explicit approval record closeout, and runtime guard final
+lock status, but it must not expose runtime controls, approval controls, write
+execution, connector execution, credential/token storage, sandbox execution,
+external calls, package installation, migrations, or release/tag controls.

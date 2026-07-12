@@ -10,3 +10,10 @@
 | authorization_review_preview | review notes only | review board | candidate ADR | review gate | preview | unapproved | false | false | reviewer signoff is not approval | preview-only baseline |
 | authorization_pending | complete packet pending future decision | runtime board | candidate ADR | future approval gate | pending | unapproved | false | false | future decision required | preview-only baseline |
 | authorization_blocked | no-go evidence | release reviewer | candidate ADR | no-go regression | blocked | unapproved | false | false | no-go condition active | preview-only baseline |
+
+## AION-149 final review extension
+
+The lifecycle now includes final review closeout:
+`implementation_authorization_final_review_approval=false`,
+`explicit_approval_record_closeout_approval=false`, and
+`runtime_enablement_guard_final_lock_release_approved=false`.

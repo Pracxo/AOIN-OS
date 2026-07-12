@@ -923,3 +923,15 @@ baseline. It remains non-approving: `implementation_authorization_preview_only=t
 `runtime_enablement_guard_release_approved=false`,
 `runtime_approval_board_decision_approved=false`, `implementation_go_status=false`,
 and `runtime_implementation_approved=false`. No v0.2 tag or release is created.
+
+## AION-149 Implementation Authorization Final Review
+
+AION-149 closes implementation authorization into final review evidence only.
+Implementation authorization approval, implementation authorization final review
+approval, explicit approval record approval, explicit approval record closeout
+approval, runtime enablement guard release approval, runtime enablement guard
+final lock release approval, runtime approval board approval, implementation go
+status, and runtime implementation approval must remain false. Do not treat
+final review, explicit approval record closeout, runtime guard final lock, ADR
+dependency, gate dependency, static console evidence, or no-go evidence as
+runtime enablement, implementation approval, tag creation, or release creation.

@@ -74,3 +74,9 @@ baseline. It remains non-approving: `implementation_authorization_preview_only=t
 `runtime_enablement_guard_release_approved=false`,
 `runtime_approval_board_decision_approved=false`, `implementation_go_status=false`,
 and `runtime_implementation_approved=false`. No v0.2 tag or release is created.
+
+## AION-149 Implementation Authorization Final Review
+
+AION-149 consumes the no-go ledger final lock and keeps
+`implementation_go_status=false`, `implementation_go_final_approval=false`, and
+`go_no_go_ledger_runtime_effect=false`.

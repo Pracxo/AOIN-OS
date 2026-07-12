@@ -190,6 +190,8 @@ allowed_authorization_demo_names = {
     "v02-runtime-enablement-guard-boundary.json",
     "v02-implementation-authorization-stabilization.json",
     "v02-explicit-approval-record-freeze.json",
+    "v02-implementation-authorization-final-review.json",
+    "v02-runtime-enablement-guard-final-lock.json",
 }
 
 

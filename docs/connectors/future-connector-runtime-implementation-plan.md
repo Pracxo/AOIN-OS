@@ -336,3 +336,11 @@ baseline. It remains non-approving: `implementation_authorization_preview_only=t
 `runtime_enablement_guard_release_approved=false`,
 `runtime_approval_board_decision_approved=false`, `implementation_go_status=false`,
 and `runtime_implementation_approved=false`. No v0.2 tag or release is created.
+
+## AION-149 Implementation Authorization Final Review
+
+AION-149 does not authorize connector runtime implementation. Connector
+implementation approval, connector runtime enablement, runtime guard release,
+runtime guard final lock release, external calls, credential/token storage,
+sandbox execution, and implementation go status remain false until a future
+explicit approval record and runtime release gate approve them.

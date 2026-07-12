@@ -33,3 +33,12 @@ approval or runtime enablement is granted.
 - [ ] no sandbox execution
 - [ ] no package files
 - [ ] no migrations
+
+## AION-149 final checklist handoff
+
+- [ ] implementation authorization final review passing
+- [ ] explicit approval record closeout passing
+- [ ] runtime enablement guard final freeze passing
+- [ ] no implementation authorization final review approval
+- [ ] no explicit approval record closeout approval
+- [ ] no runtime enablement guard final lock release

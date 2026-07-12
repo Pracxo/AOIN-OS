@@ -302,3 +302,11 @@ baseline. It remains non-approving: `implementation_authorization_preview_only=t
 `runtime_enablement_guard_release_approved=false`,
 `runtime_approval_board_decision_approved=false`, `implementation_go_status=false`,
 and `runtime_implementation_approved=false`. No v0.2 tag or release is created.
+
+## AION-149 Implementation Authorization Final Review
+
+Production auth remains pre-implementation after AION-149. Explicit approval
+record closeout is evidence only and does not approve production auth, release
+runtime guards, store credentials or tokens, enable OAuth/OIDC/SAML runtime, or
+authorize implementation. All auth runtime approval and release fields remain
+false.
