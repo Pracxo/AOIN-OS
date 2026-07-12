@@ -1225,3 +1225,7 @@ locks.
 AION-150 does not add CLI command implementations or runtime execution affordances. Local validation remains script-based through the authorization closeout, runtime enablement master-lock freeze, and no-go regression gates.
 
 The CLI surface remains non-runtime while `implementation_authorization_approved=false`, `runtime_enablement_master_lock_release_approved=false`, and `implementation_go_status=false`.
+
+## AION-151 Scoped Production Auth Authorization
+
+AION-151 adds the canonical scoped authorization transaction `AION-151-PA-0001` for `production-auth-core` and future task `AION-152`. The authorization is limited to the `disabled-production-auth-core` implementation scope. Production-auth runtime remains disabled, runtime guard releases remain false, endpoint/storage/provider/external-call approvals remain false, package and migration changes remain false, and no v0.2 tag or release is created.

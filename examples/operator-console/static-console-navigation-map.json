@@ -150,6 +150,9 @@
         "./scripts/v02-authorization-track-closeout.sh",
         "./scripts/v02-runtime-enablement-master-lock-freeze.sh",
         "./scripts/v02-authorization-track-closeout-no-go-regression.sh",
+        "./scripts/v02-production-auth-authorization-check.sh",
+        "./scripts/v02-production-auth-runtime-guard-hold.sh",
+        "./scripts/v02-production-auth-authorization-no-go-regression.sh",
         "./scripts/docs-check.sh"
   ],
   "forbidden_surface": {

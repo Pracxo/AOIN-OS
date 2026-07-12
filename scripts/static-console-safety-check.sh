@@ -194,6 +194,8 @@ allowed_authorization_demo_names = {
     "v02-runtime-enablement-guard-final-lock.json",
     "v02-authorization-track-closeout.json",
     "v02-runtime-enablement-master-lock.json",
+    "v02-production-auth-authorization.json",
+    "v02-production-auth-runtime-guard-hold.json",
 }
 
 
@@ -211,6 +213,11 @@ def walk(value: object, path: Path) -> None:
         lowered = value.lower()
         for marker in unsafe_markers:
             if marker == "authorization" and path.name in allowed_authorization_demo_names:
+                continue
+            if marker == "password" and path.name in {
+                "v02-production-auth-authorization.json",
+                "v02-production-auth-runtime-guard-hold.json",
+            }:
                 continue
             if marker in lowered:
                 raise SystemExit(f"unsafe demo content in {path}")

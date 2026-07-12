@@ -18,3 +18,7 @@ or passing gates can release runtime by itself.
 AION-150 closes the authorization track without releasing this approval guard. Future implementation still requires a separate explicit approval transaction with reviewers, evidence, rollback, expiry, and revocation coverage.
 
 The guard remains blocking with `implementation_authorization_approved=false`, `explicit_approval_record_approval=false`, `runtime_enablement_master_lock_release_approved=false`, `implementation_go_status=false`, and `implementation_no_go_status=true`.
+
+## AION-151 Scoped Production Auth Authorization
+
+AION-151 adds the canonical scoped authorization transaction `AION-151-PA-0001` for `production-auth-core` and future task `AION-152`. The authorization is limited to the `disabled-production-auth-core` implementation scope. Production-auth runtime remains disabled, runtime guard releases remain false, endpoint/storage/provider/external-call approvals remain false, package and migration changes remain false, and no v0.2 tag or release is created.
