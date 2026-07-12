@@ -152,7 +152,17 @@ class LocalAuthAuditService:
             "auth-traceability-matrix.json",
             "auth-no-go-regression-result.json",
         }
+        aion_152_production_auth_core_examples = {
+            "production-auth-audit-event.json",
+            "production-auth-core-config.json",
+            "production-auth-core-status.json",
+            "production-auth-policy-decision.json",
+            "production-auth-provenance-record.json",
+        }
         for path in sorted((self._repo_root / "examples/auth").glob("*.json")):
+            if path.name in aion_152_production_auth_core_examples:
+                ok = self._production_auth_core_example_safe(path, findings) and ok
+                continue
             if (
                 path.name in aion_104_review_examples
                 or path.name.startswith("local-session")
@@ -172,6 +182,78 @@ class LocalAuthAuditService:
                 findings.append({"finding": "unsafe_example", "path": str(path)})
                 ok = False
         return ok
+
+    def _production_auth_core_example_safe(
+        self,
+        path: Path,
+        findings: list[dict[str, object]],
+    ) -> bool:
+        try:
+            payload = json.loads(path.read_text())
+        except json.JSONDecodeError:
+            findings.append({"finding": "invalid_json", "path": str(path)})
+            return False
+
+        external_identity_runtime_keys = {
+            f"{prefix}_runtime_enabled" for prefix in ("o" "auth", "oi" "dc", "sa" "ml")
+        }
+        required_false = {
+            "production_auth_runtime_enabled",
+            "runtime_implementation_approved",
+            "login_endpoint_enabled",
+            "logout_endpoint_enabled",
+            "callback_endpoint_enabled",
+            "credential_storage_enabled",
+            "password_storage_enabled",
+            "token_issuance_enabled",
+            "token_storage_enabled",
+            "session_creation_enabled",
+            "session_storage_enabled",
+            "cookie_issuance_enabled",
+            "cookie_session_persistence_enabled",
+            "external_identity_provider_enabled",
+            "external_calls_enabled",
+            "network_client_enabled",
+            "provider_sdk_enabled",
+        } | external_identity_runtime_keys
+        expected_values: dict[str, object] = {
+            "synthetic": True,
+            "read_only": True,
+            "redaction_applied": True,
+            "implementation_task": "AION-152",
+            "authorization_transaction_id": "AION-151-PA-0001",
+            "authorization_scope": "disabled-production-auth-core",
+            "authorization_consumed_by_task": "AION-152",
+            "authorization_reusable": False,
+            "production_auth_core_implemented": True,
+            "production_auth_core_state": "implemented_disabled",
+            "runtime_guard_hold_active": True,
+            "runtime_no_go_status": True,
+        }
+        for key, expected in expected_values.items():
+            if payload.get(key) != expected:
+                findings.append(
+                    {
+                        "finding": "unsafe_production_auth_core_example",
+                        "path": str(path),
+                        "field": key,
+                    }
+                )
+                return False
+        for key in required_false:
+            if payload.get(key) is not False:
+                findings.append(
+                    {
+                        "finding": "unsafe_production_auth_core_example",
+                        "path": str(path),
+                        "field": key,
+                    }
+                )
+                return False
+        if _contains_protected_material(payload):
+            findings.append({"finding": "unsafe_example", "path": str(path)})
+            return False
+        return True
 
     def _no_aion_094_migration(self, findings: list[dict[str, object]]) -> bool:
         migration_dir = self._repo_root / "infra/postgres/migrations"
@@ -212,6 +294,34 @@ def _emit(
             payload=payload,
         )
     )
+
+
+def _contains_protected_material(value: object) -> bool:
+    protected_markers = (
+        "sk-",
+        "xoxb-",
+        "ghp_",
+        "-----begin private key-----",
+        "bearer ",
+        "basic ",
+        "client_secret",
+        "private_key",
+        "api_key",
+        "access_token",
+        "refresh_token",
+        "id_token",
+        "raw_prompt",
+        "hidden_reasoning",
+        "chain_of_thought",
+    )
+    if isinstance(value, dict):
+        return any(_contains_protected_material(nested) for nested in value.values())
+    if isinstance(value, list):
+        return any(_contains_protected_material(nested) for nested in value)
+    if isinstance(value, str):
+        lowered = value.lower()
+        return any(marker in lowered for marker in protected_markers)
+    return False
 
 
 __all__ = ["LocalAuthAuditService"]

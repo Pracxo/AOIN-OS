@@ -268,6 +268,13 @@ allowed_aion151_files = {
     "operator-console-static/demo-data/v02-production-auth-authorization.json",
     "operator-console-static/demo-data/v02-production-auth-runtime-guard-hold.json",
 }
+allowed_aion152_prefixes = (
+    "services/brain-api/src/aion_brain/production_auth/",
+)
+allowed_aion152_files = {
+    "services/brain-api/src/aion_brain/local_auth/audit.py",
+    "services/brain-api/src/aion_brain/contracts/production_auth.py",
+}
 runtime_prefixes = (
     "services/brain-api/src/",
     "packages/aion-sdk-python/src/",
@@ -308,12 +315,14 @@ for relative in sorted(changed):
         or relative in allowed_aion124_files
         or relative in allowed_aion125_files
         or relative in allowed_aion151_files
+        or relative in allowed_aion152_files
         or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)
         or relative.startswith(allowed_aion110_prefixes)
         or relative.startswith(allowed_aion111_prefixes)
         or relative.startswith(allowed_aion112_prefixes)
         or relative.startswith(allowed_aion113_prefixes)
+        or relative.startswith(allowed_aion152_prefixes)
     ):
         continue
     if not relative.startswith(runtime_prefixes):

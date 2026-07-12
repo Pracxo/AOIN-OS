@@ -950,3 +950,26 @@ The preview may show `authorization_transaction_approved=true`,
 `runtime_no_go_status=true`, `runtime_implementation_approved=false`,
 `production_auth_runtime_enabled=false`, all storage/provider/external-call
 approvals false, and v0.2 tag or release creation false.
+
+## AION-152 Production Auth Core Evidence
+
+The static console includes bundled read-only AION-152 evidence files for the
+disabled production-auth core implementation and runtime hold:
+
+- `demo-data/production-auth-core-status.json`
+- `demo-data/production-auth-runtime-hold.json`
+
+The data is synthetic and local-only. It may show
+`production_auth_core_implemented=true` and
+`production_auth_core_state=implemented_disabled`; it must keep
+`production_auth_runtime_enabled=false`, `runtime_no_go_status=true`, all
+endpoint/storage/provider/external-call flags false, and v0.2 tag or release
+creation false.
+
+Safe local commands:
+
+```bash
+./scripts/production-auth-core-no-go-regression.sh
+./scripts/production-auth-core-check.sh
+./scripts/production-auth-core-runtime-hold.sh
+```

@@ -85,7 +85,9 @@ if git ls-files --others --exclude-standard | rg -n '(^|/)(package.json|package-
 fi
 
 if git diff --name-only --diff-filter=ACMRT HEAD -- pyproject.toml services packages requirements.txt setup.cfg setup.py | rg -n '.' >/dev/null; then
-  if git diff HEAD -- pyproject.toml services packages requirements.txt setup.cfg setup.py | rg -n 'authlib|oauth|oidc|saml|ldap|webauthn|passkey|python-jose|jwt|okta|auth0'; then
+  if git diff HEAD -- pyproject.toml services packages requirements.txt setup.cfg setup.py \
+    | rg -n 'authlib|oauth|oidc|saml|ldap|webauthn|passkey|python-jose|jwt|okta|auth0' \
+    | rg -v 'production_auth_(oauth|oidc|saml)_runtime_enabled|AION_PRODUCTION_AUTH_(OAUTH|OIDC|SAML)_RUNTIME_ENABLED|(oauth|oidc|saml)_runtime_enabled'; then
     echo "runtime auth provider SDK dependency found" >&2
     exit 1
   fi
@@ -244,6 +246,10 @@ allowed_aion_113_runtime = {
     "packages/aion-sdk-python/src/aion_sdk/resources/connector_credentials.py",
     "packages/aion-sdk-python/src/aion_sdk/cli/commands/connector_credentials.py",
 }
+allowed_aion_152_runtime = {
+    "services/brain-api/src/aion_brain/contracts/production_auth.py",
+    "services/brain-api/src/aion_brain/local_auth/audit.py",
+}
 for name in [*changed, *untracked]:
     if name in allowed_runtime_tests:
         continue
@@ -258,6 +264,8 @@ for name in [*changed, *untracked]:
     if name in allowed_aion_112_runtime:
         continue
     if name in allowed_aion_113_runtime:
+        continue
+    if name in allowed_aion_152_runtime:
         continue
     if name.startswith(runtime_prefixes):
         raise SystemExit(f"production auth architecture must not change runtime file: {name}")

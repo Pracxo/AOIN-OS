@@ -573,6 +573,7 @@ class KernelDiagnostics:
         checks.extend(self._action_proposal_checks(settings))
         checks.extend(self._action_authorization_checks(settings))
         checks.extend(self._auth_runtime_checks(settings))
+        checks.extend(self._production_auth_core_checks(settings))
         checks.extend(self._connector_runtime_checks(settings))
         checks.extend(self._connector_simulator_checks(settings))
         checks.extend(self._connector_policy_checks(settings))
@@ -1168,6 +1169,60 @@ class KernelDiagnostics:
                 "passed" if services_present else "failed",
                 "high",
                 "Disabled auth-runtime services are assembled.",
+            ),
+        ]
+
+    def _production_auth_core_checks(self, settings: object) -> list[DiagnosticCheck]:
+        service = getattr(self._container, "production_auth_core_service", None)
+        snapshot = None
+        if service is not None:
+            snapshot_method = getattr(service, "diagnostic_snapshot", None)
+            if callable(snapshot_method):
+                snapshot = snapshot_method()
+        return [
+            self._result(
+                "production_auth_core_implemented",
+                "production_auth_core",
+                "passed" if service is not None else "failed",
+                "high",
+                "Disabled production-auth core service is assembled.",
+            ),
+            self._result(
+                "production_auth_core_runtime_disabled",
+                "production_auth_core",
+                (
+                    "failed"
+                    if bool(getattr(settings, "production_auth_enabled", False))
+                    or bool(getattr(settings, "auth_runtime_enabled", False))
+                    or bool(getattr(settings, "production_auth_core_runtime_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Production-auth runtime remains disabled.",
+            ),
+            self._result(
+                "production_auth_core_guard_hold_active",
+                "production_auth_core",
+                (
+                    "passed"
+                    if snapshot is not None
+                    and bool(getattr(snapshot, "runtime_guard_hold_active", False))
+                    and bool(getattr(snapshot, "runtime_no_go_status", False))
+                    else "failed"
+                ),
+                "critical",
+                "Production-auth runtime guard hold remains active.",
+            ),
+            self._result(
+                "production_auth_core_diagnostics_redacted",
+                "production_auth_core",
+                (
+                    "passed"
+                    if snapshot is not None and bool(getattr(snapshot, "redacted", False))
+                    else "failed"
+                ),
+                "high",
+                "Production-auth diagnostics expose only redacted safety state.",
             ),
         ]
 

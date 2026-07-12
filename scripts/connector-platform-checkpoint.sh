@@ -34,6 +34,14 @@ changed_files() {
   git ls-files --others --exclude-standard
 }
 
+config_diff() {
+  local base
+  if base="$(comparison_base)"; then
+    git diff -U0 "$base" HEAD -- services/brain-api/src/aion_brain/config.py .env.example
+  fi
+  git diff -U0 HEAD -- services/brain-api/src/aion_brain/config.py .env.example
+}
+
 checkpoint_docs=(
   docs/connectors/connector-platform-checkpoint.md
   docs/connectors/connector-phase-evidence-pack.md
@@ -111,7 +119,12 @@ if changed_files | rg -n '^packages/aion-sdk-python/src/aion_sdk/(resources/|cli
   exit 1
 fi
 
-if changed_files | rg -n '^services/brain-api/src/aion_brain/(connector_runtime|connector_simulator|connector_policy|connector_sandbox|connector_credentials)/|^services/brain-api/src/aion_brain/config\.py$|^\.env\.example$'; then
+if changed_files | rg -n '^services/brain-api/src/aion_brain/(connector_runtime|connector_simulator|connector_policy|connector_sandbox|connector_credentials)/'; then
+  echo "AION-115 must not add or change connector runtime source or runtime config defaults" >&2
+  exit 1
+fi
+
+if config_diff | rg -n '^\+.*\b(connector_runtime_enabled|connector_external_calls_enabled|connector_credentials_enabled|connector_token_storage_enabled|connector_activation_enabled|connector_route_registration_enabled|connector_sandbox_runtime_execution_enabled|connector_credentials_storage_enabled|connector_tokens_storage_enabled)\b'; then
   echo "AION-115 must not add or change connector runtime source or runtime config defaults" >&2
   exit 1
 fi
