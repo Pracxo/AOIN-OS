@@ -392,3 +392,8 @@ as bundled, read-only JSON. It must not expose approval controls, write
 execution, runtime execution, connector execution, external-call controls,
 credential/token storage, sandbox controls, package installation, migrations,
 or tag/release controls.
+## AION-150 Authorization Track Closeout
+
+AION-150 adds static-console preview data for the authorization track closeout and runtime enablement master lock. The operator console remains read-only and must not expose runtime execution or write controls.
+
+The console preview may show the governance baseline complete, but it must keep `operator_write_execution_approved=false`, `implementation_authorization_approved=false`, `runtime_enablement_master_lock_release_approved=false`, `implementation_go_status=false`, and `implementation_no_go_status=true`.

@@ -479,7 +479,9 @@ h1 {
 .module-subpanel[aria-label="v0.2 implementation authorization stabilization"],
 .module-subpanel[aria-label="v0.2 explicit approval record freeze"],
 .module-subpanel[aria-label="v0.2 implementation authorization final review"],
-.module-subpanel[aria-label="v0.2 runtime enablement guard final lock"] {
+.module-subpanel[aria-label="v0.2 runtime enablement guard final lock"],
+.module-subpanel[aria-label="v0.2 authorization track closeout"],
+.module-subpanel[aria-label="v0.2 runtime enablement master lock"] {
   border-color: rgb(142 207 178 / 35%);
 }
 

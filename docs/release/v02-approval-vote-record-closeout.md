@@ -55,3 +55,8 @@ baseline. It remains non-approving: `implementation_authorization_preview_only=t
 `runtime_enablement_guard_release_approved=false`,
 `runtime_approval_board_decision_approved=false`, `implementation_go_status=false`,
 and `runtime_implementation_approved=false`. No v0.2 tag or release is created.
+## AION-150 Authorization Track Closeout
+
+AION-150 indexes this vote-record closeout in the approval-chain master evidence. Vote records still have no runtime effect and no implementation approval effect.
+
+The closeout preserves `approval_vote_record_approval=false`, `approval_vote_record_closeout_approval=false`, `approval_vote_record_runtime_effect=false`, `runtime_enablement_master_lock_release_approved=false`, and `implementation_go_status=false`.

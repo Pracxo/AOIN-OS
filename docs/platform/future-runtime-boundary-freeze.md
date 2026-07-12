@@ -303,3 +303,8 @@ final lock release approval remains false, runtime implementation approval
 remains false, and no connector runtime, production auth, operator write,
 module activation, external call, credential/token storage, sandbox execution,
 runtime API route, v0.2 tag, or v0.2 release is added.
+## AION-150 Authorization Track Closeout
+
+AION-150 adds the runtime enablement master lock to the future runtime boundary freeze. The freeze remains active and no runtime path is released.
+
+The boundary stays blocked with `runtime_enablement_master_lock_created=true`, `runtime_enablement_master_lock_release_approved=false`, `runtime_implementation_approved=false`, `operator_write_execution_approved=false`, `connector_implementation_approved=false`, and `sandbox_execution_approved=false`.

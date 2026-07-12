@@ -162,6 +162,9 @@ def test_navigation_map_and_accessibility_result_are_valid() -> None:
         "./scripts/v02-implementation-authorization-final-review.sh",
         "./scripts/v02-runtime-enablement-guard-final-freeze.sh",
         "./scripts/v02-implementation-authorization-final-no-go-regression.sh",
+        "./scripts/v02-authorization-track-closeout.sh",
+        "./scripts/v02-runtime-enablement-master-lock-freeze.sh",
+        "./scripts/v02-authorization-track-closeout-no-go-regression.sh",
         "./scripts/docs-check.sh",
     }
     assert set(nav["safe_copy_commands"]) == allowed_commands
@@ -307,6 +310,9 @@ def test_static_console_has_navigation_accessibility_and_safe_command_copy() -> 
         "./scripts/v02-implementation-authorization-final-review.sh",
         "./scripts/v02-runtime-enablement-guard-final-freeze.sh",
         "./scripts/v02-implementation-authorization-final-no-go-regression.sh",
+        "./scripts/v02-authorization-track-closeout.sh",
+        "./scripts/v02-runtime-enablement-master-lock-freeze.sh",
+        "./scripts/v02-authorization-track-closeout-no-go-regression.sh",
         "./scripts/docs-check.sh",
     }
 

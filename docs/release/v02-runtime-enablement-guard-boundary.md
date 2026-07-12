@@ -59,3 +59,8 @@ and `runtime_implementation_approved=false`. No v0.2 tag or release is created.
 AION-149 adds final lock evidence only. `runtime_enablement_guard_final_lock_created=true`
 and `runtime_enablement_guard_final_lock_release_approved=false`; runtime
 implementation remains unapproved.
+## AION-150 Authorization Track Closeout
+
+AION-150 extends this boundary into the runtime enablement master lock. The boundary remains locked and does not enable runtime routes, external calls, sandbox execution, connector runtime, or operator writes.
+
+The closeout keeps `runtime_enablement_guard_created=true`, `runtime_enablement_guard_release_approved=false`, `runtime_enablement_master_lock_created=true`, `runtime_enablement_master_lock_release_approved=false`, and `runtime_implementation_approved=false`.

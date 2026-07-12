@@ -914,3 +914,16 @@ Validate the v0.2 implementation authorization final review evidence:
 ./scripts/v02-runtime-enablement-guard-final-freeze.sh
 ./scripts/v02-implementation-authorization-final-no-go-regression.sh
 ```
+## AION-150 Authorization Track Closeout Preview
+
+The static console includes read-only AION-150 preview panels for the authorization track closeout and runtime enablement master lock. The data is synthetic and keeps all implementation and runtime approval states false.
+
+Safe local commands:
+
+```bash
+./scripts/v02-authorization-track-closeout.sh
+./scripts/v02-runtime-enablement-master-lock-freeze.sh
+./scripts/v02-authorization-track-closeout-no-go-regression.sh
+```
+
+The preview may show `authorization_governance_baseline_complete=true` and `runtime_enablement_master_lock_created=true`; it must keep `runtime_enablement_master_lock_release_approved=false`, `implementation_authorization_approved=false`, `runtime_implementation_approved=false`, `implementation_go_status=false`, and `implementation_no_go_status=true`.

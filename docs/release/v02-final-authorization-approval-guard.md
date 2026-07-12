@@ -13,3 +13,8 @@
 The guard preserves the final authorization baseline while blocking any
 interpretation that evidence completeness, reviewer sign-off, ADR availability,
 or passing gates can release runtime by itself.
+## AION-150 Authorization Track Closeout
+
+AION-150 closes the authorization track without releasing this approval guard. Future implementation still requires a separate explicit approval transaction with reviewers, evidence, rollback, expiry, and revocation coverage.
+
+The guard remains blocking with `implementation_authorization_approved=false`, `explicit_approval_record_approval=false`, `runtime_enablement_master_lock_release_approved=false`, `implementation_go_status=false`, and `implementation_no_go_status=true`.

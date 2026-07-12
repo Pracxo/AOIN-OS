@@ -28,3 +28,8 @@ after implementation authorization final review.
 
 The lock is evidence only. It does not release runtime guards, enable
 connectors, activate modules, allow operator writes, or authorize implementation.
+## AION-150 Authorization Track Closeout
+
+AION-150 adds the runtime enablement master lock above this final guard lock. The guard remains locked and release approval remains false.
+
+The master lock preserves `runtime_enablement_guard_created=true`, `runtime_enablement_guard_final_lock_created=true`, `runtime_enablement_guard_release_approved=false`, `runtime_enablement_guard_final_lock_release_approved=false`, `runtime_enablement_master_lock_created=true`, and `runtime_enablement_master_lock_release_approved=false`.

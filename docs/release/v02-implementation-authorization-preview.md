@@ -128,3 +128,8 @@ AION-149 keeps this preview source of record intact while closing final review
 evidence. `implementation_authorization_final_review_approval=false`,
 `explicit_approval_record_closeout_approval=false`, and
 `runtime_enablement_guard_final_lock_release_approved=false`.
+## AION-150 Authorization Track Closeout
+
+AION-150 closes the authorization governance track while this preview remains preview-only. It does not convert preview evidence into implementation approval.
+
+The closeout keeps `implementation_authorization_preview_only=true`, `implementation_authorization_approved=false`, `explicit_approval_record_approval=false`, `runtime_enablement_master_lock_release_approved=false`, and `implementation_go_status=false`.

@@ -175,3 +175,8 @@ and `runtime_implementation_approved=false`. No v0.2 tag or release is created.
 | State | Implementation authorization approved | Final review approval | Explicit approval record closeout approval | Runtime guard final lock release approved | Implementation go status | Runtime implementation approved |
 | --- | --- | --- | --- | --- | --- | --- |
 | v0.2 implementation authorization final review | false | false | false | false | false | false |
+## AION-150 Authorization Track Closeout
+
+AION-150 treats this ledger as inherited evidence for the final authorization-governance baseline. The final state remains no-go for implementation.
+
+The closeout preserves `authorization_governance_baseline_complete=true`, `implementation_authorization_approved=false`, `runtime_implementation_approved=false`, `implementation_go_status=false`, `implementation_no_go_status=true`, and no v0.2 tag or release.

@@ -23,3 +23,8 @@ implementation authorization approval false, and implementation go status false.
 AION-149 promotes this evidence baseline into a runtime enablement guard final
 lock without releasing the guard. `runtime_enablement_guard_final_lock_created=true`
 and `runtime_enablement_guard_final_lock_release_approved=false`.
+## AION-150 Authorization Track Closeout
+
+AION-150 promotes this evidence baseline into the runtime enablement master lock. Evidence is complete for governance closeout, but guard release remains blocked.
+
+The closeout keeps `runtime_enablement_guard_created=true`, `runtime_enablement_guard_release_approved=false`, `runtime_enablement_master_lock_created=true`, `runtime_enablement_master_lock_release_approved=false`, and `runtime_implementation_approved=false`.
