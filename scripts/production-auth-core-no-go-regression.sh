@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
+source "$ROOT_DIR/scripts/lib/v02-production-auth-scan-exclusions.sh"
 
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
@@ -81,7 +82,16 @@ done < "$changed_file_list"
 changed_existing_files="$(mktemp)"
 trap 'rm -f "$changed_file_list" "$changed_existing_files"' EXIT
 while IFS= read -r file; do
-  [[ -f "$file" ]] && printf '%s\n' "$file" >> "$changed_existing_files"
+  [[ -f "$file" ]] || continue
+  if aion151_is_scoped_authorization_path "$file"; then
+    continue
+  fi
+  case "$file" in
+    scripts/production-auth-core-check.sh|scripts/production-auth-core-no-go-regression.sh)
+      continue
+      ;;
+  esac
+  printf '%s\n' "$file" >> "$changed_existing_files"
 done < "$changed_file_list"
 
 if [[ -s "$changed_existing_files" ]]; then

@@ -19,6 +19,15 @@ Required state:
 - `runtime_implementation_approved=false`
 - `production_auth_runtime_enabled=false`
 
+AION-153 closes `AION-151-PA-0001` as approved historical evidence:
+`authorization_active=false`, `authorization_consumed=true`,
+`authorization_consumed_by_pr=62`, `authorization_expired=true`, and
+`authorization_reusable=false`.
+
+The next active authorization is `AION-153-PA-0002` for future AION-154
+`disabled-production-auth-core-stabilization` work only. AION-153 does not
+modify this production-auth core package.
+
 The implementation adds strict contracts, fail-closed configuration, blocked
 policy decisions, redacted audit/provenance builders, redacted diagnostics, and
 kernel wiring. It does not add login, logout, callback, credential, token,

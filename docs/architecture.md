@@ -2501,3 +2501,23 @@ The master lock records `runtime_enablement_master_lock_created=true` and `runti
 ## AION-151 Scoped Production Auth Authorization
 
 AION-151 adds the canonical scoped authorization transaction `AION-151-PA-0001` for `production-auth-core` and future task `AION-152`. The authorization is limited to the `disabled-production-auth-core` implementation scope. Production-auth runtime remains disabled, runtime guard releases remain false, endpoint/storage/provider/external-call approvals remain false, package and migration changes remain false, and no v0.2 tag or release is created.
+
+## AION-152 Disabled Production Auth Core
+
+AION-152 implements the internal disabled production-auth core under
+`authorization_transaction_id=AION-151-PA-0001`. The implementation remains
+disabled by default and creates no runtime auth endpoints, credential storage,
+token issuance, provider SDK integration, migrations, SDK resources, CLI
+commands, v0.2 tag, or release.
+
+## AION-153 Production Auth Stabilization Authorization
+
+AION-153 closes `AION-151-PA-0001` as approved historical evidence with
+`authorization_active=false`, `authorization_consumed=true`,
+`authorization_expired=true`, and `authorization_reusable=false`. It creates
+`authorization_transaction_id=AION-153-PA-0002` as the only active approved
+authorization for future AION-154
+`disabled-production-auth-core-stabilization` work. This authorization has no
+runtime effect in AION-153: production-auth runtime remains disabled, runtime
+guard release approvals remain false, and no implementation source, API route,
+SDK, CLI, package, lockfile, migration, tag, or release is added.

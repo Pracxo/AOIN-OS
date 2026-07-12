@@ -47,13 +47,17 @@ AION_AGGREGATE_GATE_RUNNING=1 ./scripts/v02-authorization-track-closeout.sh
 
 cat <<'SUMMARY'
 v0.2 production auth authorization check result:
-- authorization_transaction_id: AION-151-PA-0001
-- candidate_id: production-auth-core
-- workstream: production-auth-implementation
-- implementation_task: AION-152
-- authorization_scope: disabled-production-auth-core
-- implementation authorization: approved for the scoped record only
-- implementation go: true for the scoped record only
+- historical authorization_transaction_id: AION-151-PA-0001
+- historical candidate_id: production-auth-core
+- historical implementation_task: AION-152
+- historical authorization_scope: disabled-production-auth-core
+- historical lifecycle: inactive, consumed, expired, non-reusable
+- active authorization_transaction_id: AION-153-PA-0002
+- active candidate_id: production-auth-core-stabilization
+- active implementation_task: AION-154
+- active authorization_scope: disabled-production-auth-core-stabilization
+- implementation authorization: approved for the exact lifecycle records only
+- implementation go: true for the exact active lifecycle record only
 - runtime implementation approved: false
 - production auth runtime enabled: false
 - runtime guard release approved: false

@@ -5,6 +5,20 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
 
+python_bin() {
+  if [[ -n "${AION_BRAIN_PYTHON:-}" ]]; then
+    printf '%s\n' "$AION_BRAIN_PYTHON"
+  elif [[ -x services/brain-api/.venv/bin/python ]]; then
+    printf '%s\n' "services/brain-api/.venv/bin/python"
+  elif command -v python3 >/dev/null 2>&1; then
+    command -v python3
+  else
+    command -v python
+  fi
+}
+
+PYTHON_BIN="$(python_bin)"
+
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
 }
@@ -203,7 +217,7 @@ for relative in json_files:
     walk_values(payload, path)
 PY
 
-services/brain-api/.venv/bin/python -m pytest \
+"$PYTHON_BIN" -m pytest \
   services/brain-api/tests/test_production_auth_contracts.py \
   services/brain-api/tests/test_production_auth_config.py \
   services/brain-api/tests/test_production_auth_core.py \

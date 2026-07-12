@@ -153,6 +153,9 @@
         "./scripts/v02-production-auth-authorization-check.sh",
         "./scripts/v02-production-auth-runtime-guard-hold.sh",
         "./scripts/v02-production-auth-authorization-no-go-regression.sh",
+        "./scripts/v02-production-auth-stabilization-authorization-check.sh",
+        "./scripts/v02-production-auth-stabilization-runtime-guard-hold.sh",
+        "./scripts/v02-production-auth-stabilization-authorization-no-go-regression.sh",
         "./scripts/docs-check.sh"
   ],
   "forbidden_surface": {

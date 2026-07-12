@@ -10,6 +10,10 @@ aion151_is_scoped_authorization_path() {
     scripts/v02-production-auth-authorization-check.sh|\
     scripts/v02-production-auth-runtime-guard-hold.sh|\
     scripts/v02-production-auth-authorization-no-go-regression.sh|\
+    scripts/v02-production-auth-stabilization-authorization-check.sh|\
+    scripts/v02-production-auth-stabilization-runtime-guard-hold.sh|\
+    scripts/v02-production-auth-stabilization-authorization-no-go-regression.sh|\
+    services/brain-api/tests/test_v02_production_auth_stabilization_authorization_docs.py|\
     scripts/lib/v02_production_auth_authorization.py|\
     scripts/lib/v02-production-auth-scan-exclusions.sh)
       return 0

@@ -1,25 +1,25 @@
 {
-  "task_id": "AION-151",
+  "task_id": "AION-153",
   "record_kind": "static_console_authorization",
-  "artifact": "v02-production-auth-authorization",
+  "artifact": "v02-production-auth-stabilization-authorization",
   "synthetic": true,
   "read_only": true,
   "redaction_applied": true,
   "status": "passed",
-  "authorization_transaction_id": "AION-151-PA-0001",
-  "approval_record_id": "AION-151-PA-0001",
-  "candidate_id": "production-auth-core",
-  "workstream": "production-auth-implementation",
-  "implementation_task": "AION-152",
-  "authorization_scope": "disabled-production-auth-core",
-  "authorization_active": false,
-  "authorization_consumed": true,
-  "authorization_consumed_by_task": "AION-152",
-  "authorization_consumed_by_pr": 62,
-  "authorization_consumed_by_merge_commit": "bc0614bcde19448b2a423614836bee3c06728c98",
-  "authorization_expired": true,
+  "authorization_transaction_id": "AION-153-PA-0002",
+  "approval_record_id": "AION-153-PA-0002",
+  "parent_authorization_transaction_id": "AION-151-PA-0001",
+  "candidate_id": "production-auth-core-stabilization",
+  "workstream": "production-auth-hardening",
+  "implementation_task": "AION-154",
+  "authorization_scope": "disabled-production-auth-core-stabilization",
+  "authorization_active": true,
+  "authorization_consumed": false,
+  "authorization_consumed_by_task": null,
+  "authorization_consumed_by_pr": null,
+  "authorization_consumed_by_merge_commit": null,
+  "authorization_expired": false,
   "authorization_reusable": false,
-  "parent_authorization_transaction_id": null,
   "authorization_transaction_approved": true,
   "explicit_approval_record_approval": true,
   "implementation_authorization_approved": true,
@@ -60,14 +60,12 @@
   "v02_release_created": false,
   "v02_release_approved": false,
   "approved_scope": [
-    "internal production-auth contracts",
-    "internal production-auth configuration model",
-    "disabled-by-default feature flags",
-    "policy evaluation interfaces",
-    "audit and provenance events",
-    "redacted diagnostics",
-    "deterministic test fixtures",
-    "unit and integration tests",
+    "internal production-auth core stabilization",
+    "disabled-by-default configuration hardening",
+    "fail-closed policy stabilization",
+    "audit and provenance evidence stabilization",
+    "redacted diagnostics stabilization",
+    "deterministic stabilization tests",
     "documentation",
     "read-only static-console status evidence"
   ],
@@ -96,33 +94,34 @@
     "sandbox execution",
     "production release or tag creation"
   ],
-  "required_adr": "0142-v02-production-auth-implementation-authorization.md",
+  "required_adr": "0144-v02-production-auth-core-stabilization-authorization.md",
   "required_gates": [
-    "./scripts/v02-production-auth-authorization-check.sh",
-    "./scripts/v02-production-auth-runtime-guard-hold.sh",
-    "./scripts/v02-production-auth-authorization-no-go-regression.sh"
+    "./scripts/v02-production-auth-stabilization-authorization-check.sh",
+    "./scripts/v02-production-auth-stabilization-runtime-guard-hold.sh",
+    "./scripts/v02-production-auth-stabilization-authorization-no-go-regression.sh"
   ],
   "evidence_references": [
-    "docs/release/v02-production-auth-implementation-authorization-transaction.md",
-    "docs/release/v02-production-auth-explicit-approval-record.md"
+    "docs/release/v02-production-auth-stabilization-authorization-transaction.md",
+    "docs/release/v02-production-auth-stabilization-explicit-approval-record.md"
   ],
   "refs": [
-    "docs/release/v02-production-auth-implementation-authorization-transaction.md",
-    "docs/release/v02-production-auth-explicit-approval-record.md"
+    "docs/release/v02-production-auth-stabilization-authorization-transaction.md",
+    "docs/release/v02-production-auth-stabilization-explicit-approval-record.md"
   ],
   "sections": [
     {
-      "title": "Scoped authorization",
+      "title": "Active authorization",
       "status": "approved",
-      "summary": "AION-151-PA-0001 authorizes only disabled production-auth core implementation work for AION-152."
+      "summary": "AION-153-PA-0002 is the only active approved authorization and is limited to future AION-154 stabilization."
     }
   ],
   "blockers": [
     "runtime guard release remains false",
-    "production auth runtime remains disabled"
+    "production auth runtime remains disabled",
+    "AION-153 contains no production-auth implementation changes"
   ],
   "warnings": [
-    "Implementation authorization has no runtime effect."
+    "Implementation authorization has no runtime effect in AION-153."
   ],
   "forbidden_actions": [
     {"action_key": "activate_module", "allowed": false},
@@ -138,7 +137,7 @@
     "platform reviewer",
     "audit reviewer"
   ],
-  "expiry": "AION-152 merged; authorization consumed by PR 62",
-  "revocation_path": "Create a follow-up approval record referencing AION-151-PA-0001 with runtime guards still locked.",
+  "expiry": "AION-154 merged or authorization explicitly revoked",
+  "revocation_path": "Create a follow-up approval record referencing AION-153-PA-0002 with runtime guards still locked.",
   "content_safety": ["no live endpoints", "no secret values", "no credential values", "no private reasoning"]
 }

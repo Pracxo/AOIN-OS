@@ -154,6 +154,9 @@
     "./scripts/v02-production-auth-authorization-check.sh",
     "./scripts/v02-production-auth-runtime-guard-hold.sh",
     "./scripts/v02-production-auth-authorization-no-go-regression.sh",
+    "./scripts/v02-production-auth-stabilization-authorization-check.sh",
+    "./scripts/v02-production-auth-stabilization-runtime-guard-hold.sh",
+    "./scripts/v02-production-auth-stabilization-authorization-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -277,7 +280,9 @@
     authorization_track_closeout: "demo-data/v02-authorization-track-closeout.json",
     runtime_enablement_master_lock: "demo-data/v02-runtime-enablement-master-lock.json",
     production_auth_authorization: "demo-data/v02-production-auth-authorization.json",
-    production_auth_runtime_guard_hold: "demo-data/v02-production-auth-runtime-guard-hold.json"
+    production_auth_runtime_guard_hold: "demo-data/v02-production-auth-runtime-guard-hold.json",
+    production_auth_core_implementation_closeout: "demo-data/v02-production-auth-core-implementation-closeout.json",
+    production_auth_stabilization_authorization: "demo-data/v02-production-auth-stabilization-authorization.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1806,7 +1811,9 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.authorization_track_closeout),
       fetchJson(RELEASE_CANDIDATE_DEMOS.runtime_enablement_master_lock),
       fetchJson(RELEASE_CANDIDATE_DEMOS.production_auth_authorization),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.production_auth_runtime_guard_hold)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.production_auth_runtime_guard_hold),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.production_auth_core_implementation_closeout),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.production_auth_stabilization_authorization)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
@@ -1877,6 +1884,8 @@
         renderReleaseCandidateEvidence("v02-runtime-enablement-master-lock", redact(payloads[65]));
         renderReleaseCandidateEvidence("v02-production-auth-authorization", redact(payloads[66]));
         renderReleaseCandidateEvidence("v02-production-auth-runtime-guard-hold", redact(payloads[67]));
+        renderReleaseCandidateEvidence("v02-production-auth-core-implementation-closeout", redact(payloads[68]));
+        renderReleaseCandidateEvidence("v02-production-auth-stabilization-authorization", redact(payloads[69]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
@@ -1947,6 +1956,8 @@
         renderReleaseCandidateEvidence("v02-runtime-enablement-master-lock", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-production-auth-authorization", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-production-auth-runtime-guard-hold", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-production-auth-core-implementation-closeout", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-production-auth-stabilization-authorization", { status: "unavailable" });
       });
   }
 
