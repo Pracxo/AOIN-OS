@@ -228,6 +228,8 @@ for path in sorted(demo_dir.glob("*.json")):
         "v02-runtime-enablement-master-lock.json",
         "v02-production-auth-authorization.json",
         "v02-production-auth-runtime-guard-hold.json",
+        "production-auth-core-status.json",
+        "production-auth-runtime-hold.json",
     }
     blocked = (
         "raw_prompt",
@@ -248,6 +250,8 @@ for path in sorted(demo_dir.glob("*.json")):
         if value == "password" and path.name in {
             "v02-production-auth-authorization.json",
             "v02-production-auth-runtime-guard-hold.json",
+            "production-auth-core-status.json",
+            "production-auth-runtime-hold.json",
         }:
             continue
         if value in serialized:

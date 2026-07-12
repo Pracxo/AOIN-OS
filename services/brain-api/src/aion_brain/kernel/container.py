@@ -457,6 +457,10 @@ from aion_brain.policy_catalog.permissions import PermissionMatrixService
 from aion_brain.policy_catalog.repository import PolicyCatalogRepository
 from aion_brain.policy_catalog.simulation import PolicySimulationService
 from aion_brain.policy_catalog.test_harness import PolicyTestHarness
+from aion_brain.production_auth import (
+    ProductionAuthCoreService,
+    production_auth_core_config_from_settings,
+)
 from aion_brain.prompts.boundary import PromptBoundaryChecker
 from aion_brain.prompts.compiler import PromptPacketCompiler
 from aion_brain.prompts.fragments import PromptFragmentService
@@ -3651,6 +3655,12 @@ class KernelContainer:
             audit_sink=self.audit_integrity_ledger,
         )
         self.auth_runtime_query_service = AuthRuntimeQueryService(self.auth_runtime_gate_service)
+        self.production_auth_core_config = production_auth_core_config_from_settings(
+            self.settings
+        )
+        self.production_auth_core_service = ProductionAuthCoreService(
+            self.production_auth_core_config
+        )
         self.connector_runtime_gate_service = ConnectorRuntimeGateService(
             settings=self.settings,
             telemetry_service=self.telemetry_service,
@@ -5355,6 +5365,12 @@ class KernelContainer:
             ("mock_claims_preview_service", self.mock_claims_preview_service, "service", "local"),
             ("auth_runtime_audit_service", self.auth_runtime_audit_service, "service", "local"),
             ("auth_runtime_query_service", self.auth_runtime_query_service, "service", "local"),
+            (
+                "production_auth_core_service",
+                self.production_auth_core_service,
+                "service",
+                "local",
+            ),
             (
                 "connector_runtime_gate_service",
                 self.connector_runtime_gate_service,

@@ -1794,6 +1794,90 @@ class Settings(BaseSettings):
             "auth_runtime_logout_endpoint_enabled",
         ),
     )
+    production_auth_core_runtime_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_PRODUCTION_AUTH_CORE_RUNTIME_ENABLED",
+            "production_auth_core_runtime_enabled",
+        ),
+    )
+    production_auth_callback_endpoint_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_PRODUCTION_AUTH_CALLBACK_ENDPOINT_ENABLED",
+            "production_auth_callback_endpoint_enabled",
+        ),
+    )
+    production_auth_password_storage_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_PRODUCTION_AUTH_PASSWORD_STORAGE_ENABLED",
+            "production_auth_password_storage_enabled",
+        ),
+    )
+    production_auth_token_storage_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_PRODUCTION_AUTH_TOKEN_STORAGE_ENABLED",
+            "production_auth_token_storage_enabled",
+        ),
+    )
+    production_auth_session_creation_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_PRODUCTION_AUTH_SESSION_CREATION_ENABLED",
+            "production_auth_session_creation_enabled",
+        ),
+    )
+    production_auth_cookie_session_persistence_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_PRODUCTION_AUTH_COOKIE_SESSION_PERSISTENCE_ENABLED",
+            "production_auth_cookie_session_persistence_enabled",
+        ),
+    )
+    production_auth_oauth_runtime_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_PRODUCTION_AUTH_OAUTH_RUNTIME_ENABLED",
+            "production_auth_oauth_runtime_enabled",
+        ),
+    )
+    production_auth_oidc_runtime_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_PRODUCTION_AUTH_OIDC_RUNTIME_ENABLED",
+            "production_auth_oidc_runtime_enabled",
+        ),
+    )
+    production_auth_saml_runtime_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_PRODUCTION_AUTH_SAML_RUNTIME_ENABLED",
+            "production_auth_saml_runtime_enabled",
+        ),
+    )
+    production_auth_external_calls_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_PRODUCTION_AUTH_EXTERNAL_CALLS_ENABLED",
+            "production_auth_external_calls_enabled",
+        ),
+    )
+    production_auth_network_client_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_PRODUCTION_AUTH_NETWORK_CLIENT_ENABLED",
+            "production_auth_network_client_enabled",
+        ),
+    )
+    production_auth_provider_sdk_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_PRODUCTION_AUTH_PROVIDER_SDK_ENABLED",
+            "production_auth_provider_sdk_enabled",
+        ),
+    )
     connector_runtime_enabled: bool = Field(
         default=False,
         validation_alias=AliasChoices(
