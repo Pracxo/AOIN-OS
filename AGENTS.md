@@ -940,3 +940,7 @@ runtime enablement, implementation approval, tag creation, or release creation.
 AION-150 closes the v0.2 authorization governance track as documentation, examples, static-console preview data, scripts, and tests only. The baseline is complete for planning evidence, but runtime implementation remains unapproved and no implementation authorization is granted.
 
 Agents must keep `runtime_implementation_approved=false`, `implementation_authorization_approved=false`, `explicit_approval_record_approval=false`, `runtime_enablement_master_lock_release_approved=false`, `runtime_enablement_guard_release_approved=false`, `implementation_go_status=false`, and `implementation_no_go_status=true`. Do not create a v0.2 tag or release, and do not enable runtime, external calls, credentials, tokens, sandbox execution, operator writes, connector runtime, production auth, or module activation.
+
+## AION-151 Scoped Production Auth Authorization
+
+AION-151 adds the canonical scoped authorization transaction `AION-151-PA-0001` for `production-auth-core` and future task `AION-152`. The authorization is limited to the `disabled-production-auth-core` implementation scope. Production-auth runtime remains disabled, runtime guard releases remain false, endpoint/storage/provider/external-call approvals remain false, package and migration changes remain false, and no v0.2 tag or release is created.

@@ -1414,3 +1414,7 @@ external calls, package installation, migrations, or release/tag controls.
 AION-150 adds static-console preview data for the authorization track closeout and runtime enablement master lock. The visual layer remains read-only and synthetic, displaying blocked approval states and closeout evidence without interactive runtime controls.
 
 The console may show `authorization_governance_baseline_complete=true` and `runtime_enablement_master_lock_created=true`, but it must continue to show `runtime_enablement_master_lock_release_approved=false`, `runtime_enablement_guard_release_approved=false`, `implementation_go_status=false`, and `implementation_no_go_status=true`.
+
+## AION-151 Scoped Production Auth Authorization
+
+AION-151 adds the canonical scoped authorization transaction `AION-151-PA-0001` for `production-auth-core` and future task `AION-152`. The authorization is limited to the `disabled-production-auth-core` implementation scope. Production-auth runtime remains disabled, runtime guard releases remain false, endpoint/storage/provider/external-call approvals remain false, package and migration changes remain false, and no v0.2 tag or release is created.

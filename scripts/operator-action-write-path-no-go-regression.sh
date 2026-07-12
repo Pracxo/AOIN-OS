@@ -425,6 +425,10 @@ allowed_aion150_files = {
     "operator-console-static/demo-data/v02-authorization-track-closeout.json",
     "operator-console-static/demo-data/v02-runtime-enablement-master-lock.json",
 }
+allowed_aion151_files = {
+    "operator-console-static/demo-data/v02-production-auth-authorization.json",
+    "operator-console-static/demo-data/v02-production-auth-runtime-guard-hold.json",
+}
 runtime_prefixes = (
     "services/brain-api/src/",
     "packages/aion-sdk-python/src/",
@@ -491,6 +495,7 @@ for relative in sorted(changed):
         or relative in allowed_aion148_files
         or relative in allowed_aion149_files
         or relative in allowed_aion150_files
+        or relative in allowed_aion151_files
         or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)
         or relative.startswith(allowed_aion110_prefixes)

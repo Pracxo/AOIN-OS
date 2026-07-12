@@ -2497,3 +2497,7 @@ or v0.2 release are added.
 AION-150 consolidates the AION-141 through AION-149 authorization chain into a final pre-implementation baseline. It documents the approval docket, runtime approval board, explicit approval record, implementation authorization, and runtime enablement guard states without adding architecture for runtime execution.
 
 The master lock records `runtime_enablement_master_lock_created=true` and `runtime_enablement_master_lock_release_approved=false`. The architecture remains planning-only: `runtime_implementation_approved=false`, `implementation_authorization_approved=false`, `implementation_go_status=false`, and `implementation_no_go_status=true`.
+
+## AION-151 Scoped Production Auth Authorization
+
+AION-151 adds the canonical scoped authorization transaction `AION-151-PA-0001` for `production-auth-core` and future task `AION-152`. The authorization is limited to the `disabled-production-auth-core` implementation scope. Production-auth runtime remains disabled, runtime guard releases remain false, endpoint/storage/provider/external-call approvals remain false, package and migration changes remain false, and no v0.2 tag or release is created.

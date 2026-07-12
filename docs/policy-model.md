@@ -2250,3 +2250,7 @@ implementation go status, and runtime implementation approval remain false.
 AION-150 records the policy baseline for authorization closeout. Approval evidence is complete enough to close the governance track, but every implementation and runtime approval remains false.
 
 Policy enforcement must continue to treat `implementation_authorization_approved=false`, `explicit_approval_record_approval=false`, `runtime_enablement_master_lock_release_approved=false`, `runtime_enablement_guard_release_approved=false`, `review_board_decision_approval=false`, `routing_decision_approval=false`, and `implementation_go_status=false` as blocking states.
+
+## AION-151 Scoped Production Auth Authorization
+
+AION-151 adds the canonical scoped authorization transaction `AION-151-PA-0001` for `production-auth-core` and future task `AION-152`. The authorization is limited to the `disabled-production-auth-core` implementation scope. Production-auth runtime remains disabled, runtime guard releases remain false, endpoint/storage/provider/external-call approvals remain false, package and migration changes remain false, and no v0.2 tag or release is created.

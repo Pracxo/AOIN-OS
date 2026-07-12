@@ -106,3 +106,7 @@ AION-149 creates no v0.2 tag and no v0.2 release. `v02_tag_created=false`.
 AION-150 supersedes this final review as the consolidated authorization-governance closeout baseline. The final review remains evidence only and still grants no implementation approval.
 
 The closeout keeps `implementation_authorization_final_review_approval=false`, `implementation_authorization_approved=false`, `explicit_approval_record_approval=false`, `runtime_enablement_guard_release_approved=false`, `runtime_enablement_master_lock_release_approved=false`, `implementation_go_status=false`, and `implementation_no_go_status=true`.
+
+## AION-151 Scoped Production Auth Authorization
+
+AION-151 adds the canonical scoped authorization transaction `AION-151-PA-0001` for `production-auth-core` and future task `AION-152`. The authorization is limited to the `disabled-production-auth-core` implementation scope. Production-auth runtime remains disabled, runtime guard releases remain false, endpoint/storage/provider/external-call approvals remain false, package and migration changes remain false, and no v0.2 tag or release is created.

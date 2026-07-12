@@ -308,3 +308,7 @@ runtime API route, v0.2 tag, or v0.2 release is added.
 AION-150 adds the runtime enablement master lock to the future runtime boundary freeze. The freeze remains active and no runtime path is released.
 
 The boundary stays blocked with `runtime_enablement_master_lock_created=true`, `runtime_enablement_master_lock_release_approved=false`, `runtime_implementation_approved=false`, `operator_write_execution_approved=false`, `connector_implementation_approved=false`, and `sandbox_execution_approved=false`.
+
+## AION-151 Scoped Production Auth Authorization
+
+AION-151 adds the canonical scoped authorization transaction `AION-151-PA-0001` for `production-auth-core` and future task `AION-152`. The authorization is limited to the `disabled-production-auth-core` implementation scope. Production-auth runtime remains disabled, runtime guard releases remain false, endpoint/storage/provider/external-call approvals remain false, package and migration changes remain false, and no v0.2 tag or release is created.

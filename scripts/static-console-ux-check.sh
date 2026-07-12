@@ -294,6 +294,9 @@ allowed = {
     "./scripts/v02-authorization-track-closeout.sh",
     "./scripts/v02-runtime-enablement-master-lock-freeze.sh",
     "./scripts/v02-authorization-track-closeout-no-go-regression.sh",
+    "./scripts/v02-production-auth-authorization-check.sh",
+    "./scripts/v02-production-auth-runtime-guard-hold.sh",
+    "./scripts/v02-production-auth-authorization-no-go-regression.sh",
     "./scripts/docs-check.sh",
 }
 listed = set(nav.get("safe_copy_commands", []))
@@ -328,6 +331,9 @@ for safe_command in (
     "./scripts/v02-authorization-track-closeout.sh",
     "./scripts/v02-runtime-enablement-master-lock-freeze.sh",
     "./scripts/v02-authorization-track-closeout-no-go-regression.sh",
+    "./scripts/v02-production-auth-authorization-check.sh",
+    "./scripts/v02-production-auth-runtime-guard-hold.sh",
+    "./scripts/v02-production-auth-authorization-no-go-regression.sh",
 ):
     serialized_for_sensitive_scan = serialized_for_sensitive_scan.replace(safe_command, "")
 blocked_markers = (

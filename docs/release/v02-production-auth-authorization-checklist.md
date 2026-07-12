@@ -1,0 +1,27 @@
+# v0.2 Production Auth Authorization Checklist
+
+- AION-150 baseline merged
+- authorization record complete
+- exact transaction ID `AION-151-PA-0001`
+- exact approval record ID `AION-151-PA-0001`
+- exact candidate ID `production-auth-core`
+- exact scope `disabled-production-auth-core`
+- exactly one scoped authorization
+- implementation authorization true for `production-auth-core` only
+- implementation go true for `production-auth-core` only
+- implementation no-go false for the approved scope only
+- runtime no-go true
+- runtime implementation false
+- runtime guard release false
+- production auth runtime false
+- endpoint approvals false
+- storage approvals false
+- provider approvals false
+- external calls false
+- migrations false
+- package changes false
+- v0.2 tag absent
+- v0.2 release absent
+- scripts executable
+- focused tests passing
+- full check passing

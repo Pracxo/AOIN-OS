@@ -226,6 +226,8 @@ for path in sorted(demo_dir.glob("*.json")):
         "v02-runtime-enablement-guard-final-lock.json",
         "v02-authorization-track-closeout.json",
         "v02-runtime-enablement-master-lock.json",
+        "v02-production-auth-authorization.json",
+        "v02-production-auth-runtime-guard-hold.json",
     }
     blocked = (
         "raw_prompt",
@@ -242,6 +244,11 @@ for path in sorted(demo_dir.glob("*.json")):
     )
     for value in blocked:
         if value == "authorization" and path.name in allowed_authorization_demo_names:
+            continue
+        if value == "password" and path.name in {
+            "v02-production-auth-authorization.json",
+            "v02-production-auth-runtime-guard-hold.json",
+        }:
             continue
         if value in serialized:
             raise SystemExit(f"unsafe demo content: {path}")

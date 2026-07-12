@@ -315,3 +315,7 @@ false.
 AION-150 does not authorize production auth runtime. The auth gate remains pre-implementation and requires a separate explicit approval transaction before any runtime identity provider, token, session, cookie, or credential path can be enabled.
 
 Auth state remains `production_auth_approved=false`, `credential_storage_approved=false`, `token_storage_approved=false`, `implementation_authorization_approved=false`, `runtime_enablement_master_lock_release_approved=false`, and `implementation_go_status=false`.
+
+## AION-151 Scoped Production Auth Authorization
+
+AION-151 adds the canonical scoped authorization transaction `AION-151-PA-0001` for `production-auth-core` and future task `AION-152`. The authorization is limited to the `disabled-production-auth-core` implementation scope. Production-auth runtime remains disabled, runtime guard releases remain false, endpoint/storage/provider/external-call approvals remain false, package and migration changes remain false, and no v0.2 tag or release is created.

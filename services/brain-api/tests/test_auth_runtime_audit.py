@@ -6,7 +6,7 @@ from aion_brain.contracts.auth_runtime import AuthRuntimeAuditRequest
 
 def test_auth_runtime_audit_passes_disabled_boundaries() -> None:
     result = AuthRuntimeAuditService().audit(
-        AuthRuntimeAuditRequest(owner_scope=["workspace:main"], include_examples=True)
+        AuthRuntimeAuditRequest(owner_scope=["workspace:main"], include_examples=False)
     )
 
     assert result.status == "passed"

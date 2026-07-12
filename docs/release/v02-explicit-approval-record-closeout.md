@@ -30,3 +30,7 @@ regression evidence.
 AION-150 carries this closeout into the explicit approval record master ledger. Explicit approval records remain created for planning evidence only and remain unapproved.
 
 The master ledger preserves `explicit_approval_record_created=true`, `explicit_approval_record_approval=false`, `explicit_approval_record_freeze_approval=false`, `explicit_approval_record_closeout_approval=false`, `implementation_authorization_approved=false`, and `implementation_go_status=false`.
+
+## AION-151 Scoped Production Auth Authorization
+
+AION-151 adds the canonical scoped authorization transaction `AION-151-PA-0001` for `production-auth-core` and future task `AION-152`. The authorization is limited to the `disabled-production-auth-core` implementation scope. Production-auth runtime remains disabled, runtime guard releases remain false, endpoint/storage/provider/external-call approvals remain false, package and migration changes remain false, and no v0.2 tag or release is created.

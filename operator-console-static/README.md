@@ -927,3 +927,26 @@ Safe local commands:
 ```
 
 The preview may show `authorization_governance_baseline_complete=true` and `runtime_enablement_master_lock_created=true`; it must keep `runtime_enablement_master_lock_release_approved=false`, `implementation_authorization_approved=false`, `runtime_implementation_approved=false`, `implementation_go_status=false`, and `implementation_no_go_status=true`.
+
+## AION-151 Production Auth Authorization Preview
+
+The static console includes read-only AION-151 panels for the scoped
+production-auth-core authorization transaction and the runtime guard hold. The
+data is synthetic, authorizes only `AION-151-PA-0001` for future AION-152
+disabled-core implementation work, and keeps production-auth runtime disabled.
+
+Safe local commands:
+
+```bash
+./scripts/v02-production-auth-authorization-check.sh
+./scripts/v02-production-auth-runtime-guard-hold.sh
+./scripts/v02-production-auth-authorization-no-go-regression.sh
+```
+
+The preview may show `authorization_transaction_approved=true`,
+`explicit_approval_record_approval=true`,
+`implementation_authorization_approved=true`, and
+`implementation_go_status=true` only for `production-auth-core`. It must keep
+`runtime_no_go_status=true`, `runtime_implementation_approved=false`,
+`production_auth_runtime_enabled=false`, all storage/provider/external-call
+approvals false, and v0.2 tag or release creation false.

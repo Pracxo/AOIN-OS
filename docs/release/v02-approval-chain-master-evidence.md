@@ -15,3 +15,7 @@
 | boundary checks | AION-150 | `docs/release/v02-authorization-track-closeout-no-go.md` | ADR 0141 | `./scripts/boundary-check.sh` | none | `./scripts/v02-authorization-track-closeout-no-go-regression.sh` | runtime boundary intact | intact | runtime routes must remain absent |
 | repository health | AION-150 | repository health output | ADR 0141 | `./scripts/check.sh` | `./scripts/v02-runtime-enablement-master-lock-freeze.sh` | `./scripts/v02-authorization-track-closeout-no-go-regression.sh` | repository health PASS | pass expected | package, migration, cache, and env drift remain blocked |
 | aion-v0.1.0 ancestry | AION-150 | tag ancestry output | ADR 0141 | `git merge-base --is-ancestor` | `./scripts/v02-runtime-enablement-master-lock-freeze.sh` | none | aion-v0.1.0 unchanged | unchanged expected | tag must not move or be retargeted |
+
+## AION-151 Scoped Production Auth Authorization
+
+AION-151 adds the canonical scoped authorization transaction `AION-151-PA-0001` for `production-auth-core` and future task `AION-152`. The authorization is limited to the `disabled-production-auth-core` implementation scope. Production-auth runtime remains disabled, runtime guard releases remain false, endpoint/storage/provider/external-call approvals remain false, package and migration changes remain false, and no v0.2 tag or release is created.

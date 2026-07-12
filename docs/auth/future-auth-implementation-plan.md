@@ -96,3 +96,7 @@ Future auth implementation work must start from
 prototype review and auth no-go regression scripts to pass before any later ADR
 can approve runtime auth, protected material lifecycle, provider integration,
 browser session lifecycle, migration design, or rollback implementation.
+
+## AION-151 Scoped Production Auth Authorization
+
+AION-151 adds the canonical scoped authorization transaction `AION-151-PA-0001` for `production-auth-core` and future task `AION-152`. The authorization is limited to the `disabled-production-auth-core` implementation scope. Production-auth runtime remains disabled, runtime guard releases remain false, endpoint/storage/provider/external-call approvals remain false, package and migration changes remain false, and no v0.2 tag or release is created.

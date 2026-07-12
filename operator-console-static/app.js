@@ -151,6 +151,9 @@
     "./scripts/v02-authorization-track-closeout.sh",
     "./scripts/v02-runtime-enablement-master-lock-freeze.sh",
     "./scripts/v02-authorization-track-closeout-no-go-regression.sh",
+    "./scripts/v02-production-auth-authorization-check.sh",
+    "./scripts/v02-production-auth-runtime-guard-hold.sh",
+    "./scripts/v02-production-auth-authorization-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -272,7 +275,9 @@
     implementation_authorization_final_review: "demo-data/v02-implementation-authorization-final-review.json",
     runtime_enablement_guard_final_lock: "demo-data/v02-runtime-enablement-guard-final-lock.json",
     authorization_track_closeout: "demo-data/v02-authorization-track-closeout.json",
-    runtime_enablement_master_lock: "demo-data/v02-runtime-enablement-master-lock.json"
+    runtime_enablement_master_lock: "demo-data/v02-runtime-enablement-master-lock.json",
+    production_auth_authorization: "demo-data/v02-production-auth-authorization.json",
+    production_auth_runtime_guard_hold: "demo-data/v02-production-auth-runtime-guard-hold.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1799,7 +1804,9 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.implementation_authorization_final_review),
       fetchJson(RELEASE_CANDIDATE_DEMOS.runtime_enablement_guard_final_lock),
       fetchJson(RELEASE_CANDIDATE_DEMOS.authorization_track_closeout),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.runtime_enablement_master_lock)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.runtime_enablement_master_lock),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.production_auth_authorization),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.production_auth_runtime_guard_hold)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
@@ -1868,6 +1875,8 @@
         renderReleaseCandidateEvidence("v02-runtime-enablement-guard-final-lock", redact(payloads[63]));
         renderReleaseCandidateEvidence("v02-authorization-track-closeout", redact(payloads[64]));
         renderReleaseCandidateEvidence("v02-runtime-enablement-master-lock", redact(payloads[65]));
+        renderReleaseCandidateEvidence("v02-production-auth-authorization", redact(payloads[66]));
+        renderReleaseCandidateEvidence("v02-production-auth-runtime-guard-hold", redact(payloads[67]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
@@ -1936,6 +1945,8 @@
         renderReleaseCandidateEvidence("v02-runtime-enablement-guard-final-lock", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-authorization-track-closeout", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-runtime-enablement-master-lock", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-production-auth-authorization", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-production-auth-runtime-guard-hold", { status: "unavailable" });
       });
   }
 
@@ -1985,7 +1996,17 @@
       ["v02_implementation_authorization_stabilized", String(Boolean(payload.v02_implementation_authorization_stabilized))],
       ["v02_implementation_authorization_final_review_passed", String(Boolean(payload.v02_implementation_authorization_final_review_passed))],
       ["v02_authorization_track_closeout_passed", String(Boolean(payload.v02_authorization_track_closeout_passed))],
+      ["authorization_transaction_id", payload.authorization_transaction_id || "n/a"],
+      ["approval_record_id", payload.approval_record_id || "n/a"],
+      ["candidate_id", payload.candidate_id || "n/a"],
+      ["authorization_scope", payload.authorization_scope || "n/a"],
+      ["authorization_transaction_approved", String(Boolean(payload.authorization_transaction_approved))],
       ["authorization_governance_baseline_complete", String(Boolean(payload.authorization_governance_baseline_complete))],
+      ["explicit_approval_record_approval", String(Boolean(payload.explicit_approval_record_approval))],
+      ["implementation_authorization_approved", String(Boolean(payload.implementation_authorization_approved))],
+      ["runtime_guard_hold_active", String(Boolean(payload.runtime_guard_hold_active))],
+      ["runtime_no_go_status", String(Boolean(payload.runtime_no_go_status))],
+      ["production_auth_runtime_enabled", String(Boolean(payload.production_auth_runtime_enabled))],
       ["implementation_authorization_stabilization_approval", String(Boolean(payload.implementation_authorization_stabilization_approval))],
       ["implementation_authorization_final_review_approval", String(Boolean(payload.implementation_authorization_final_review_approval))],
       ["explicit_approval_record_freeze_approval", String(Boolean(payload.explicit_approval_record_freeze_approval))],
