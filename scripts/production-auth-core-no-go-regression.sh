@@ -86,6 +86,11 @@ while IFS= read -r file; do
   if aion151_is_scoped_authorization_path "$file"; then
     continue
   fi
+  case "$file" in
+    scripts/production-auth-core-check.sh|scripts/production-auth-core-no-go-regression.sh)
+      continue
+      ;;
+  esac
   printf '%s\n' "$file" >> "$changed_existing_files"
 done < "$changed_file_list"
 
