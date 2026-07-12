@@ -5,8 +5,19 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
 
+EXPECTED_AION_V01_SHA="105fe29348160a2218ac095cfffadcb6f234421f"
+
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
+}
+
+ensure_aion_v01_tag() {
+  if git_ref_exists "aion-v0.1.0^{commit}"; then
+    return 0
+  fi
+
+  git fetch --quiet --no-tags origin "refs/tags/aion-v0.1.0:refs/tags/aion-v0.1.0" >/dev/null 2>&1 || true
+  git_ref_exists "aion-v0.1.0^{commit}"
 }
 
 is_nested_gate_context() {
@@ -27,8 +38,13 @@ else
 fi
 
 tag_ref="unavailable"
-if git_ref_exists aion-v0.1.0; then
-  tag_ref="$(git rev-parse aion-v0.1.0)"
+if ensure_aion_v01_tag; then
+  tag_ref="$(git rev-list -n 1 aion-v0.1.0)"
+  if [[ "$tag_ref" != "$EXPECTED_AION_V01_SHA" ]]; then
+    echo "aion-v0.1.0 must remain at $EXPECTED_AION_V01_SHA" >&2
+    exit 1
+  fi
+
   if git_ref_exists origin/main; then
     git merge-base --is-ancestor aion-v0.1.0 origin/main || {
       echo "aion-v0.1.0 must remain in origin/main history" >&2
