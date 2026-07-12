@@ -87,23 +87,22 @@ grep -q "0144-v02-production-auth-core-stabilization-authorization.md" docs/adr/
   exit 1
 }
 
-git cat-file -e "${AION_152_MERGE_COMMIT}^{commit}" || {
-  echo "AION-152 merge commit is unavailable: $AION_152_MERGE_COMMIT" >&2
-  exit 1
-}
-
-if git_ref_exists origin/main; then
-  git merge-base --is-ancestor "$AION_152_MERGE_COMMIT" origin/main || {
-    echo "AION-152 merge commit is not in origin/main history" >&2
-    exit 1
-  }
-elif git_ref_exists main; then
-  git merge-base --is-ancestor "$AION_152_MERGE_COMMIT" main || {
-    echo "AION-152 merge commit is not in main history" >&2
-    exit 1
-  }
+if git cat-file -e "${AION_152_MERGE_COMMIT}^{commit}" 2>/dev/null; then
+  if git_ref_exists origin/main; then
+    git merge-base --is-ancestor "$AION_152_MERGE_COMMIT" origin/main || {
+      echo "AION-152 merge commit is not in origin/main history" >&2
+      exit 1
+    }
+  elif git_ref_exists main; then
+    git merge-base --is-ancestor "$AION_152_MERGE_COMMIT" main || {
+      echo "AION-152 merge commit is not in main history" >&2
+      exit 1
+    }
+  else
+    echo "WARN: origin/main unavailable in this checkout; skipping AION-152 main ancestry confirmation"
+  fi
 else
-  echo "WARN: origin/main unavailable in this checkout; skipping AION-152 main ancestry confirmation"
+  echo "WARN: AION-152 merge commit unavailable in this checkout; skipping shallow-checkout ancestry confirmation"
 fi
 
 python3 scripts/lib/v02_production_auth_authorization.py --repo-root "$ROOT_DIR" --mode check
