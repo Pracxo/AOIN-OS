@@ -80,3 +80,8 @@ and `runtime_implementation_approved=false`. No v0.2 tag or release is created.
 AION-149 consumes the no-go ledger final lock and keeps
 `implementation_go_status=false`, `implementation_go_final_approval=false`, and
 `go_no_go_ledger_runtime_effect=false`.
+## AION-150 Authorization Track Closeout
+
+AION-150 carries this final lock into the implementation authorization final status. The implementation state remains no-go.
+
+The closeout keeps `implementation_go_status=false`, `implementation_go_final_approval=false`, `implementation_no_go_status=true`, `go_no_go_ledger_runtime_effect=false`, `runtime_implementation_approved=false`, and `implementation_authorization_approved=false`.

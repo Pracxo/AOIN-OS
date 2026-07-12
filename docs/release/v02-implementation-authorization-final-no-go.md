@@ -62,3 +62,8 @@ The AION-149 final review fails on these conditions:
 - package files added
 - migrations added
 - runtime API execution routes added
+## AION-150 Authorization Track Closeout
+
+AION-150 extends this no-go baseline into the authorization track closeout no-go regression. Any runtime or implementation approval true value remains a release blocker.
+
+The closeout no-go regression preserves `runtime_implementation_approved=false`, `implementation_authorization_approved=false`, `explicit_approval_record_approval=false`, `runtime_enablement_guard_release_approved=false`, `runtime_enablement_master_lock_release_approved=false`, `implementation_go_status=false`, and `implementation_no_go_status=true`.

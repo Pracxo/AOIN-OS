@@ -2245,3 +2245,8 @@ evidence, and gate success do not become implementation approval or runtime
 enablement. Implementation authorization final review approval, explicit
 approval record closeout approval, runtime guard final lock release approval,
 implementation go status, and runtime implementation approval remain false.
+## AION-150 Authorization Track Closeout
+
+AION-150 records the policy baseline for authorization closeout. Approval evidence is complete enough to close the governance track, but every implementation and runtime approval remains false.
+
+Policy enforcement must continue to treat `implementation_authorization_approved=false`, `explicit_approval_record_approval=false`, `runtime_enablement_master_lock_release_approved=false`, `runtime_enablement_guard_release_approved=false`, `review_board_decision_approval=false`, `routing_decision_approval=false`, and `implementation_go_status=false` as blocking states.

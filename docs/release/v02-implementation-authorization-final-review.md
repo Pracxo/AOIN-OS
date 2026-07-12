@@ -101,3 +101,8 @@ is enabled.
 
 AION-149 creates no v0.2 tag and no v0.2 release. `v02_tag_created=false`.
 `v02_release_created=false`. `v02_release_approved=false`.
+## AION-150 Authorization Track Closeout
+
+AION-150 supersedes this final review as the consolidated authorization-governance closeout baseline. The final review remains evidence only and still grants no implementation approval.
+
+The closeout keeps `implementation_authorization_final_review_approval=false`, `implementation_authorization_approved=false`, `explicit_approval_record_approval=false`, `runtime_enablement_guard_release_approved=false`, `runtime_enablement_master_lock_release_approved=false`, `implementation_go_status=false`, and `implementation_no_go_status=true`.

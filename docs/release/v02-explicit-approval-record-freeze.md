@@ -32,3 +32,8 @@ AION-149 closes the explicit approval record evidence without approving
 implementation. `explicit_approval_record_closeout_approval=false` and
 `implementation_authorization_final_review_approval=false`; runtime guard
 release and runtime guard final lock release both remain false.
+## AION-150 Authorization Track Closeout
+
+AION-150 carries this freeze into the explicit approval record master ledger. The freeze remains in force and does not approve any implementation candidate.
+
+The master ledger keeps `explicit_approval_record_freeze_approval=false`, `explicit_approval_record_approval=false`, `explicit_approval_record_closeout_approval=false`, `runtime_enablement_master_lock_release_approved=false`, and `implementation_go_status=false`.

@@ -198,3 +198,8 @@ AION-149 depends on this final runtime approval board evidence but does not
 change its approvals. Runtime approval board decision approval, final review
 approval, approval vote record approval, implementation go status, and runtime
 implementation approval remain false.
+## AION-150 Authorization Track Closeout
+
+AION-150 indexes this runtime approval board final review in the approval-chain master evidence. The board remains a non-approval evidence source.
+
+The closeout preserves `runtime_approval_board_decision_approved=false`, `runtime_approval_board_final_review_approval=false`, `runtime_enablement_master_lock_release_approved=false`, `runtime_implementation_approved=false`, and `implementation_go_status=false`.

@@ -66,3 +66,8 @@ AION-149 closes schema evidence without making an approval record effective.
 `explicit_approval_record_approval=false`,
 `explicit_approval_record_closeout_approval=false`, and
 `implementation_authorization_final_review_approval=false`.
+## AION-150 Authorization Track Closeout
+
+AION-150 uses the explicit approval record schema in the master ledger without approving any record. Future implementation requires a separate explicit approval transaction using this schema.
+
+The schema remains non-runtime with `explicit_approval_record_created=true`, `explicit_approval_record_approval=false`, `explicit_approval_record_freeze_approval=false`, `explicit_approval_record_closeout_approval=false`, and `implementation_go_status=false`.

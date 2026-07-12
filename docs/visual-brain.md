@@ -1409,3 +1409,8 @@ display final review, explicit approval record closeout, and runtime guard final
 lock status, but it must not expose runtime controls, approval controls, write
 execution, connector execution, credential/token storage, sandbox execution,
 external calls, package installation, migrations, or release/tag controls.
+## AION-150 Authorization Track Closeout
+
+AION-150 adds static-console preview data for the authorization track closeout and runtime enablement master lock. The visual layer remains read-only and synthetic, displaying blocked approval states and closeout evidence without interactive runtime controls.
+
+The console may show `authorization_governance_baseline_complete=true` and `runtime_enablement_master_lock_created=true`, but it must continue to show `runtime_enablement_master_lock_release_approved=false`, `runtime_enablement_guard_release_approved=false`, `implementation_go_status=false`, and `implementation_no_go_status=true`.

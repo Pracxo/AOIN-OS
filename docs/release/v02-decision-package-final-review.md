@@ -109,3 +109,8 @@ AION-149 uses this decision package evidence while keeping decision package
 approval, approval readiness approval, runtime decision readiness, runtime
 decision lock release, implementation authorization, and runtime implementation
 approval false.
+## AION-150 Authorization Track Closeout
+
+AION-150 indexes this decision package final review in the approval-chain master evidence. Decision package readiness remains planning evidence and does not approve runtime implementation.
+
+The closeout keeps `decision_package_approval=false`, `approval_readiness_approved=false`, `runtime_decision_readiness_approved=false`, `runtime_decision_lock_release_approved=false`, and `implementation_go_status=false`.

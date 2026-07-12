@@ -27,3 +27,8 @@ implementation or runtime approval.
 evidence only. `implementation_authorization_final_review_approval=false`,
 `explicit_approval_record_closeout_approval=false`, and
 `runtime_enablement_guard_final_lock_release_approved=false`.
+## AION-150 Authorization Track Closeout
+
+AION-150 consolidates this stabilization summary into the authorization track closeout report. Stabilization remains evidence only and does not approve runtime work.
+
+The closeout preserves `authorization_governance_baseline_complete=true`, `implementation_authorization_stabilization_approval=false`, `implementation_authorization_approved=false`, `runtime_enablement_guard_release_approved=false`, and `implementation_go_status=false`.

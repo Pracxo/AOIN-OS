@@ -12,3 +12,8 @@
 | Operator writes | Approval chain, rollback proof, separation-of-duties evidence | Operations reviewer | ADR-OPERATOR-WRITE | operator-write-execution-gate | explicit_approval_record_approval=false | implementation_authorization_final_review_approval=false | runtime_enablement_guard_final_lock_release_approved=false | false | operator write execution disabled | Collect dual-control proof |
 | Module activation | Manifest review, code-loading denial proof, audit trail | Module reviewer | ADR-MODULE-ACTIVATION | module-activation-gate | explicit_approval_record_approval=false | implementation_authorization_final_review_approval=false | runtime_enablement_guard_final_lock_release_approved=false | false | module activation disabled | Draft readiness evidence |
 | Production UI | Static-console safety proof, auth boundary, route denial evidence | Product reviewer | ADR-PROD-UI | production-ui-decision-gate | explicit_approval_record_approval=false | implementation_authorization_final_review_approval=false | runtime_enablement_guard_final_lock_release_approved=false | false | production UI unimplemented | Prepare boundary packet |
+## AION-150 Authorization Track Closeout
+
+AION-150 consolidates this matrix into the approval-chain master evidence document. The matrix remains a non-approval evidence source and does not release runtime or implementation work.
+
+The master evidence keeps `authorization_governance_baseline_complete=true` while preserving `implementation_authorization_approved=false`, `runtime_implementation_approved=false`, `implementation_go_status=false`, and `implementation_no_go_status=true`.

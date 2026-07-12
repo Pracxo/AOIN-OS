@@ -112,3 +112,8 @@ approval locks: implementation authorization approval, stabilization approval,
 explicit approval record approval, explicit approval record freeze approval,
 runtime guard release approval, implementation go status, and runtime
 implementation approval remain false.
+## AION-150 Authorization Track Closeout
+
+AION-150 includes this stabilization gate as inherited evidence for the final authorization-governance baseline. The stabilization gate remains a validation dependency, not an approval transaction.
+
+The closeout keeps `implementation_authorization_stabilization_approval=false`, `implementation_authorization_approved=false`, `runtime_enablement_guard_release_approved=false`, `implementation_go_status=false`, and `implementation_no_go_status=true`.
