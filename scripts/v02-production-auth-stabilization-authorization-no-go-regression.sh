@@ -28,7 +28,7 @@ while IFS= read -r file; do
 done < <(aion151_scan_files_excluding_scoped_authorization "${scan_paths[@]}")
 
 if ((${#scan_files[@]})) && rg -n '\b(runtime_implementation_approved|production_auth_runtime_enabled|runtime_enablement_guard_release_approved|runtime_enablement_guard_final_lock_release_approved|runtime_enablement_master_lock_release_approved|login_endpoint_approved|logout_endpoint_approved|callback_endpoint_approved|credential_storage_approved|password_storage_approved|token_storage_approved|session_storage_approved|cookie_session_persistence_approved|external_identity_provider_approved|oauth_runtime_approved|oidc_runtime_approved|saml_runtime_approved|external_calls_approved|network_client_approved|provider_sdk_approved|operator_write_execution_approved|connector_implementation_approved|connector_runtime_enabled|module_activation_approved|sandbox_execution_approved|package_files_added|lockfiles_added|migrations_added|runtime_api_routes_added|api_runtime_execution_route_added|v02_tag_created|v02_release_created|v02_release_approved)\s*[:=]\s*true\b' "${scan_files[@]}"; then
-  echo "AION-151 runtime, storage, provider, package, migration, route, release, or execution approval was enabled" >&2
+  echo "AION-153 runtime, storage, provider, package, migration, route, release, or execution approval was enabled" >&2
   exit 1
 fi
 
@@ -40,26 +40,28 @@ fi
 
 for file in package.json package-lock.json pnpm-lock.yaml yarn.lock bun.lockb; do
   if find . -path './.git' -prune -o -type f -name "$file" -print | rg -n '.'; then
-    echo "package manager file is not allowed for AION-151: $file" >&2
+    echo "package manager file is not allowed for AION-153: $file" >&2
     exit 1
   fi
 done
 
 if git tag --list | rg -n '^(v0\.2|v0\.2\.0|aion-v0\.2\.0|aion-v0\.2)$'; then
-  echo "v0.2 tag must not exist for AION-151" >&2
+  echo "v0.2 tag must not exist for AION-153" >&2
   exit 1
 fi
 
 if gh release view v0.2 >/dev/null 2>&1 || gh release view aion-v0.2 >/dev/null 2>&1; then
-  echo "v0.2 release must not exist for AION-151" >&2
+  echo "v0.2 release must not exist for AION-153" >&2
   exit 1
 fi
 
 cat <<'SUMMARY'
-v0.2 production auth authorization no-go result:
+v0.2 production auth stabilization authorization no-go result:
 - exactly one active approved authorization tuple: present
 - AION-151 historical consumed record: present
-- duplicate approved authorization: absent
+- duplicate active approved authorization: absent
+- unknown approved authorization: absent
+- partial approval record: absent
 - scope expansion: absent
 - runtime enablement: absent
 - endpoint approvals: absent
@@ -71,5 +73,5 @@ v0.2 production auth authorization no-go result:
 - runtime API routes: absent
 - connector runtime, operator writes, module activation, and sandbox execution: absent
 - v0.2 tag or release: absent
-v0.2 production auth authorization no-go PASS
+v0.2 production auth stabilization authorization no-go PASS
 SUMMARY

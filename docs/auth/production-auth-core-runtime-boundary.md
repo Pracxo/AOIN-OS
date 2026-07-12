@@ -2,6 +2,10 @@
 
 AION-152 keeps the production-auth runtime boundary closed.
 
+AION-153 renews the same closed runtime boundary for the active
+`AION-153-PA-0002` stabilization authorization. The authorization permits only
+future disabled-core stabilization work and does not release runtime auth.
+
 Disabled states:
 
 - `login_endpoint_enabled=false`

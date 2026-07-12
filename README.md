@@ -136,6 +136,15 @@ workstream implementation approval false remain locked. It creates no v0.2
 tag or release and adds no runtime, external call, credential/token, sandbox,
 package, migration, API, SDK, CLI, or domain module implementation.
 
+## v0.2 Production Auth Stabilization Authorization
+
+AION-153 closes the consumed AION-151 production-auth authorization after
+AION-152 PR 62 and creates `AION-153-PA-0002` as the single active approval for
+future disabled production-auth core stabilization. It is governance-only: no
+runtime auth endpoints, credential or token storage, external identity
+providers, provider SDKs, package files, migrations, API routes, SDK resources,
+CLI commands, v0.2 tag, or release are added.
+
 ## Core Brain Loop
 
 ```text

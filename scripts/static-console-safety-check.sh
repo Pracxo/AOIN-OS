@@ -196,6 +196,8 @@ allowed_authorization_demo_names = {
     "v02-runtime-enablement-master-lock.json",
     "v02-production-auth-authorization.json",
     "v02-production-auth-runtime-guard-hold.json",
+    "v02-production-auth-core-implementation-closeout.json",
+    "v02-production-auth-stabilization-authorization.json",
     "production-auth-core-status.json",
     "production-auth-runtime-hold.json",
 }
@@ -219,6 +221,8 @@ def walk(value: object, path: Path) -> None:
             if marker == "password" and path.name in {
                 "v02-production-auth-authorization.json",
                 "v02-production-auth-runtime-guard-hold.json",
+                "v02-production-auth-core-implementation-closeout.json",
+                "v02-production-auth-stabilization-authorization.json",
                 "production-auth-core-status.json",
                 "production-auth-runtime-hold.json",
             }:

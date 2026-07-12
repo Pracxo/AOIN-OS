@@ -64,6 +64,11 @@ Instructions for future Codex runs in this repository:
   approve module activation, approve operator write execution, call external
   services, store credentials or tokens, enable sandbox execution, add package
   files, add migrations, add API runtime routes, or add SDK/CLI implementations.
+- Production-auth stabilization authorization work may create governance
+  transactions for future disabled-core hardening only. It must not modify
+  production-auth source, config, kernel wiring, API routes, SDK/CLI source,
+  package files, lockfiles, migrations, runtime auth enablement, credentials,
+  tokens, provider SDKs, external calls, v0.2 tags, or releases.
 - v0.2 planning charter work is planning-only. It may add charter docs,
   decision frameworks, workstream maps, ADR requirements, gate dependency
   matrices, synthetic examples, static console demo data, tests, and local

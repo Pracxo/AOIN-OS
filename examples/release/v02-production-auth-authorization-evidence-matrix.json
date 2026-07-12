@@ -10,6 +10,14 @@
   "workstream": "production-auth-implementation",
   "implementation_task": "AION-152",
   "authorization_scope": "disabled-production-auth-core",
+  "authorization_active": false,
+  "authorization_consumed": true,
+  "authorization_consumed_by_task": "AION-152",
+  "authorization_consumed_by_pr": 62,
+  "authorization_consumed_by_merge_commit": "bc0614bcde19448b2a423614836bee3c06728c98",
+  "authorization_expired": true,
+  "authorization_reusable": false,
+  "parent_authorization_transaction_id": null,
   "authorization_transaction_approved": true,
   "explicit_approval_record_approval": true,
   "implementation_authorization_approved": true,
@@ -102,7 +110,7 @@
     "platform reviewer",
     "audit reviewer"
   ],
-  "expiry": "AION-152 merged or authorization explicitly revoked",
+  "expiry": "AION-152 merged; authorization consumed by PR 62",
   "revocation_path": "Create a follow-up approval record referencing AION-151-PA-0001 with runtime guards still locked.",
   "content_safety": ["no live endpoints", "no secret values", "no credential values", "no private reasoning"]
 }

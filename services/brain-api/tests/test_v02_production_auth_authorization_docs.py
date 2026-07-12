@@ -147,6 +147,16 @@ def test_v02_production_auth_authorization_json_is_exactly_scoped() -> None:
         assert payload["workstream"] == "production-auth-implementation"
         assert payload["implementation_task"] == "AION-152"
         assert payload["authorization_scope"] == "disabled-production-auth-core"
+        assert payload["authorization_active"] is False
+        assert payload["authorization_consumed"] is True
+        assert payload["authorization_consumed_by_task"] == "AION-152"
+        assert payload["authorization_consumed_by_pr"] == 62
+        assert (
+            payload["authorization_consumed_by_merge_commit"]
+            == "bc0614bcde19448b2a423614836bee3c06728c98"
+        )
+        assert payload["authorization_expired"] is True
+        assert payload["authorization_reusable"] is False
         for key in TRUE_KEYS:
             assert payload.get(key) is True, f"{relative}: {key}"
         for key in FALSE_KEYS:
@@ -157,7 +167,7 @@ def test_v02_production_auth_authorization_json_is_exactly_scoped() -> None:
         assert payload["required_gates"]
         assert payload["evidence_references"]
         assert payload["reviewer_roles"]
-        assert payload["expiry"] == "AION-152 merged or authorization explicitly revoked"
+        assert payload["expiry"] == "AION-152 merged; authorization consumed by PR 62"
         assert payload["revocation_path"]
         approved_tuples.add(
             (

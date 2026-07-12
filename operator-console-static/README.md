@@ -973,3 +973,25 @@ Safe local commands:
 ./scripts/production-auth-core-check.sh
 ./scripts/production-auth-core-runtime-hold.sh
 ```
+
+## AION-153 Production Auth Stabilization Authorization
+
+The static console includes read-only AION-153 panels for the AION-152
+implementation closeout and the active AION-153 stabilization authorization:
+
+- `demo-data/v02-production-auth-core-implementation-closeout.json`
+- `demo-data/v02-production-auth-stabilization-authorization.json`
+
+The data is synthetic and local-only. It keeps `AION-151-PA-0001` approved as
+historical evidence while marking it inactive, consumed, expired, and
+non-reusable. It marks `AION-153-PA-0002` as the only active approved
+authorization for future AION-154 stabilization, with production-auth runtime
+still disabled.
+
+Safe local commands:
+
+```bash
+./scripts/v02-production-auth-stabilization-authorization-check.sh
+./scripts/v02-production-auth-stabilization-runtime-guard-hold.sh
+./scripts/v02-production-auth-stabilization-authorization-no-go-regression.sh
+```

@@ -228,6 +228,8 @@ for path in sorted(demo_dir.glob("*.json")):
         "v02-runtime-enablement-master-lock.json",
         "v02-production-auth-authorization.json",
         "v02-production-auth-runtime-guard-hold.json",
+        "v02-production-auth-core-implementation-closeout.json",
+        "v02-production-auth-stabilization-authorization.json",
         "production-auth-core-status.json",
         "production-auth-runtime-hold.json",
     }
@@ -250,6 +252,8 @@ for path in sorted(demo_dir.glob("*.json")):
         if value == "password" and path.name in {
             "v02-production-auth-authorization.json",
             "v02-production-auth-runtime-guard-hold.json",
+            "v02-production-auth-core-implementation-closeout.json",
+            "v02-production-auth-stabilization-authorization.json",
             "production-auth-core-status.json",
             "production-auth-runtime-hold.json",
         }:
