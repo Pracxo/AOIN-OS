@@ -1,0 +1,106 @@
+{
+  "synthetic": true,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "status": "passed",
+  "sections": [
+    {
+      "title": "Disabled core stabilization",
+      "status": "passed",
+      "summary": "Production auth core evidence is deterministic, read-only, and runtime disabled."
+    }
+  ],
+  "blockers": [],
+  "warnings": [],
+  "refs": [
+    "docs/auth/production-auth-core-stabilization.md",
+    "docs/release/v02-production-auth-core-stabilization.md"
+  ],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
+  ],
+  "record_kind": "production-auth-core-stabilization",
+  "task_id": "AION-154",
+  "schema_version": "production-auth-core/v1",
+  "canonicalization_version": "production-auth-canonical-json/v1",
+  "policy_version": "production-auth-policy/v1",
+  "reason_code_registry_version": "production-auth-reason-codes/v1",
+  "authorization_transaction_id": "AION-151-PA-0001",
+  "authorization_scope": "disabled-production-auth-core",
+  "implementation_authorization_transaction_id": "AION-151-PA-0001",
+  "implementation_authorization_task": "AION-152",
+  "implementation_authorization_scope": "disabled-production-auth-core",
+  "stabilization_authorization_transaction_id": "AION-153-PA-0002",
+  "stabilization_authorization_task": "AION-154",
+  "stabilization_authorization_scope": "disabled-production-auth-core-stabilization",
+  "stabilization_authorization_reusable": false,
+  "stabilization_authorization_expires_on_aion_154_merge": true,
+  "production_auth_core_implemented": true,
+  "production_auth_core_state": "implemented_disabled",
+  "production_auth_runtime_enabled": false,
+  "runtime_guard_hold_active": true,
+  "runtime_no_go_status": true,
+  "runtime_implementation_approved": false,
+  "runtime_enablement_guard_release_approved": false,
+  "login_endpoint_enabled": false,
+  "logout_endpoint_enabled": false,
+  "callback_endpoint_enabled": false,
+  "credential_storage_enabled": false,
+  "password_storage_enabled": false,
+  "token_issuance_enabled": false,
+  "token_storage_enabled": false,
+  "session_creation_enabled": false,
+  "session_storage_enabled": false,
+  "cookie_issuance_enabled": false,
+  "cookie_session_persistence_enabled": false,
+  "external_identity_provider_enabled": false,
+  "oauth_runtime_enabled": false,
+  "oidc_runtime_enabled": false,
+  "saml_runtime_enabled": false,
+  "external_calls_enabled": false,
+  "network_client_enabled": false,
+  "provider_sdk_enabled": false,
+  "operator_write_execution_enabled": false,
+  "connector_runtime_enabled": false,
+  "module_activation_enabled": false,
+  "sandbox_execution_enabled": false,
+  "package_files_added": false,
+  "lockfiles_added": false,
+  "migrations_added": false,
+  "runtime_api_routes_added": false,
+  "v02_tag_created": false,
+  "v02_release_created": false,
+  "fingerprint": "0af1c872acf8c362aa92cdc8537b9d5b1573b2b654e3fb6a16447979286dadb8",
+  "reason_codes": [
+    "production_auth_runtime_disabled",
+    "runtime_enablement_guard_locked",
+    "authorization_scope_implementation_only",
+    "endpoint_surface_absent",
+    "protected_material_storage_absent",
+    "external_identity_provider_absent"
+  ]
+}

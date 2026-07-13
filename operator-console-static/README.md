@@ -995,3 +995,25 @@ Safe local commands:
 ./scripts/v02-production-auth-stabilization-runtime-guard-hold.sh
 ./scripts/v02-production-auth-stabilization-authorization-no-go-regression.sh
 ```
+
+## AION-154 Production Auth Core Stabilization
+
+The static console includes read-only AION-154 panels for stabilized core status
+and runtime hold:
+
+- `demo-data/production-auth-core-stabilization.json`
+- `demo-data/production-auth-core-stabilization-runtime-hold.json`
+
+The data is synthetic and local-only. It may show schema versions,
+fingerprints, reason codes, and stabilization lineage, but it must keep
+`production_auth_runtime_enabled=false`, `runtime_no_go_status=true`,
+`runtime_implementation_approved=false`, all endpoint/storage/provider/
+external-call flags false, and v0.2 tag or release creation false.
+
+Safe local commands:
+
+```bash
+./scripts/production-auth-core-stabilization-no-go-regression.sh
+./scripts/production-auth-core-stabilization-check.sh
+./scripts/production-auth-core-stabilization-runtime-hold.sh
+```

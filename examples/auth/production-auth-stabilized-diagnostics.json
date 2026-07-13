@@ -1,0 +1,36 @@
+{
+  "authorization_scope": "disabled-production-auth-core",
+  "authorization_transaction_id": "AION-151-PA-0001",
+  "blocker_count": 6,
+  "canonicalization_version": "production-auth-canonical-json/v1",
+  "created_at": "2026-07-13T12:00:00Z",
+  "fingerprint": "95fd3713a60824df259d6ef752e65be666d9a765db875381392510086c422054",
+  "implementation_state": "implemented_disabled",
+  "metadata": {
+    "authorization_consumed_by_task": "AION-152",
+    "authorization_reusable": false,
+    "implementation_present": true,
+    "stabilization_authorization_task": "AION-154"
+  },
+  "policy_version": "production-auth-policy/v1",
+  "production_auth_core_implemented": true,
+  "production_auth_core_state": "implemented_disabled",
+  "reason_code_registry_version": "production-auth-reason-codes/v1",
+  "reason_codes": [
+    "production_auth_runtime_disabled",
+    "runtime_enablement_guard_locked",
+    "authorization_scope_implementation_only",
+    "endpoint_surface_absent",
+    "protected_material_storage_absent",
+    "external_identity_provider_absent"
+  ],
+  "redacted": true,
+  "runtime_enabled": false,
+  "runtime_guard_hold_active": true,
+  "runtime_no_go_status": true,
+  "schema_version": "production-auth-core/v1",
+  "snapshot_id": "prod-auth-diagnostic-example",
+  "stabilization_authorization_scope": "disabled-production-auth-core-stabilization",
+  "stabilization_authorization_task": "AION-154",
+  "stabilization_authorization_transaction_id": "AION-153-PA-0002"
+}

@@ -159,9 +159,19 @@ class LocalAuthAuditService:
             "production-auth-policy-decision.json",
             "production-auth-provenance-record.json",
         }
+        aion_154_production_auth_stabilization_examples = {
+            "production-auth-stabilized-audit-event.json",
+            "production-auth-stabilized-core-status.json",
+            "production-auth-stabilized-diagnostics.json",
+            "production-auth-stabilized-policy-decision.json",
+            "production-auth-stabilized-provenance-record.json",
+        }
         for path in sorted((self._repo_root / "examples/auth").glob("*.json")):
             if path.name in aion_152_production_auth_core_examples:
                 ok = self._production_auth_core_example_safe(path, findings) and ok
+                continue
+            if path.name in aion_154_production_auth_stabilization_examples:
+                ok = self._production_auth_stabilization_example_safe(path, findings) and ok
                 continue
             if (
                 path.name in aion_104_review_examples
@@ -250,6 +260,141 @@ class LocalAuthAuditService:
                     }
                 )
                 return False
+        if _contains_protected_material(payload):
+            findings.append({"finding": "unsafe_example", "path": str(path)})
+            return False
+        return True
+
+    def _production_auth_stabilization_example_safe(
+        self,
+        path: Path,
+        findings: list[dict[str, object]],
+    ) -> bool:
+        try:
+            payload = json.loads(path.read_text())
+        except json.JSONDecodeError:
+            findings.append({"finding": "invalid_json", "path": str(path)})
+            return False
+
+        expected_values: dict[str, object] = {
+            "schema_version": "production-auth-core/v1",
+            "canonicalization_version": "production-auth-canonical-json/v1",
+            "policy_version": "production-auth-policy/v1",
+            "reason_code_registry_version": "production-auth-reason-codes/v1",
+            "authorization_transaction_id": "AION-151-PA-0001",
+            "authorization_scope": "disabled-production-auth-core",
+            "stabilization_authorization_transaction_id": "AION-153-PA-0002",
+            "stabilization_authorization_task": "AION-154",
+            "stabilization_authorization_scope": (
+                "disabled-production-auth-core-stabilization"
+            ),
+        }
+        for key, expected in expected_values.items():
+            if payload.get(key) != expected:
+                findings.append(
+                    {
+                        "finding": "unsafe_production_auth_stabilization_example",
+                        "path": str(path),
+                        "field": key,
+                    }
+                )
+                return False
+
+        external_identity_runtime_keys = {
+            f"{prefix}_runtime_enabled" for prefix in ("o" "auth", "oi" "dc", "sa" "ml")
+        }
+        required_false_if_present = {
+            "callback_endpoint_enabled",
+            "connector_runtime_enabled",
+            "cookie_issuance_enabled",
+            "cookie_session_persistence_enabled",
+            "credential_storage_enabled",
+            "external_calls_enabled",
+            "external_identity_provider_enabled",
+            "lockfiles_added",
+            "login_endpoint_enabled",
+            "logout_endpoint_enabled",
+            "migrations_added",
+            "module_activation_enabled",
+            "network_client_enabled",
+            "operator_write_execution_enabled",
+            "package_files_added",
+            "password_storage_enabled",
+            "provider_sdk_enabled",
+            "runtime_api_routes_added",
+            "runtime_effect",
+            "runtime_enabled",
+            "runtime_enablement_guard_final_lock_release_approved",
+            "runtime_enablement_guard_release_approved",
+            "runtime_enablement_master_lock_release_approved",
+            "runtime_implementation_approved",
+            "sandbox_execution_enabled",
+            "session_creation_enabled",
+            "session_storage_enabled",
+            "stabilization_authorization_reusable",
+            "token_issuance_enabled",
+            "token_storage_enabled",
+            "v02_release_created",
+            "v02_tag_created",
+        } | external_identity_runtime_keys
+        for key in required_false_if_present:
+            if key in payload and payload.get(key) is not False:
+                findings.append(
+                    {
+                        "finding": "unsafe_production_auth_stabilization_example",
+                        "path": str(path),
+                        "field": key,
+                    }
+                )
+                return False
+
+        required_true_if_present = {
+            "implementation_present",
+            "production_auth_core_implemented",
+            "redacted",
+            "runtime_guard_hold_active",
+            "runtime_no_go_status",
+            "stabilization_authorization_expires_on_aion_154_merge",
+        }
+        for key in required_true_if_present:
+            if key in payload and payload.get(key) is not True:
+                findings.append(
+                    {
+                        "finding": "unsafe_production_auth_stabilization_example",
+                        "path": str(path),
+                        "field": key,
+                    }
+                )
+                return False
+
+        if payload.get("outcome") not in {None, "blocked"}:
+            findings.append(
+                {
+                    "finding": "unsafe_production_auth_stabilization_example",
+                    "path": str(path),
+                    "field": "outcome",
+                }
+            )
+            return False
+        if payload.get("production_auth_core_state") not in {None, "implemented_disabled"}:
+            findings.append(
+                {
+                    "finding": "unsafe_production_auth_stabilization_example",
+                    "path": str(path),
+                    "field": "production_auth_core_state",
+                }
+            )
+            return False
+        reason_codes = payload.get("reason_codes", payload.get("blocker_reason_codes", []))
+        if reason_codes and "production_auth_runtime_disabled" not in reason_codes:
+            findings.append(
+                {
+                    "finding": "unsafe_production_auth_stabilization_example",
+                    "path": str(path),
+                    "field": "reason_codes",
+                }
+            )
+            return False
         if _contains_protected_material(payload):
             findings.append({"finding": "unsafe_example", "path": str(path)})
             return False

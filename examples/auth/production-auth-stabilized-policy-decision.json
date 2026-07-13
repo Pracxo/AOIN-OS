@@ -1,0 +1,36 @@
+{
+  "authorization_scope": "disabled-production-auth-core",
+  "authorization_transaction_id": "AION-151-PA-0001",
+  "canonicalization_version": "production-auth-canonical-json/v1",
+  "created_at": "2026-07-13T12:00:00Z",
+  "decision_id": "prod-auth-decision-example",
+  "fingerprint": "9e2de1da194cbbc7054d3d02e6965c8d3ac4db70ad34cdca6ac04e4574e8c0f4",
+  "metadata": {
+    "authorization_scope": "disabled-production-auth-core",
+    "implementation_state": "implemented_disabled",
+    "owner_scope": [
+      "workspace:main"
+    ],
+    "requested_operation": "policy_evaluation_preview"
+  },
+  "outcome": "blocked",
+  "policy_version": "production-auth-policy/v1",
+  "reason_code_registry_version": "production-auth-reason-codes/v1",
+  "reason_codes": [
+    "production_auth_runtime_disabled",
+    "runtime_enablement_guard_locked",
+    "authorization_scope_implementation_only",
+    "endpoint_surface_absent",
+    "protected_material_storage_absent",
+    "external_identity_provider_absent"
+  ],
+  "request_id": "request-stabilized-example",
+  "requested_operation": "policy_evaluation_preview",
+  "runtime_effect": false,
+  "schema_version": "production-auth-core/v1",
+  "stabilization_authorization_expires_on_aion_154_merge": true,
+  "stabilization_authorization_reusable": false,
+  "stabilization_authorization_scope": "disabled-production-auth-core-stabilization",
+  "stabilization_authorization_task": "AION-154",
+  "stabilization_authorization_transaction_id": "AION-153-PA-0002"
+}

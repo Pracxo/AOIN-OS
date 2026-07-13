@@ -2521,3 +2521,13 @@ authorization for future AION-154
 runtime effect in AION-153: production-auth runtime remains disabled, runtime
 guard release approvals remain false, and no implementation source, API route,
 SDK, CLI, package, lockfile, migration, tag, or release is added.
+
+### AION-154 Production Auth Core Stabilization
+
+AION-154 keeps the existing package split: `aion_brain.auth_runtime` remains the
+preview/status/mock-claims boundary, while `aion_brain.production_auth` remains
+the internal disabled implementation. Stabilization adds schema versions,
+canonical JSON serialization, SHA-256 fingerprints, immutable reason codes,
+typed internal preview operations, frozen evidence, idempotency, concurrency,
+redaction hardening, diagnostics stability, and route absence checks without
+adding a public production-auth router or enabling runtime authentication.

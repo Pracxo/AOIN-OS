@@ -24,3 +24,17 @@ mock-claims preview, and audit proof only; production auth remains disabled.
 No gate can be waived by the Operator Console, local auth simulation,
 ActorContext headers, reverse proxy headers, policy shortcuts, or action
 authorization decisions.
+## AION-154 Stabilization Gates
+
+AION-154 adds:
+
+```bash
+./scripts/production-auth-core-stabilization-no-go-regression.sh
+./scripts/production-auth-core-stabilization-check.sh
+./scripts/production-auth-core-stabilization-runtime-hold.sh
+```
+
+These gates validate canonical evidence, fingerprints, reason codes,
+immutability, idempotency, concurrency, redaction, diagnostics, kernel
+stability, route absence, inherited production-auth authorization checks, and
+runtime/release no-go state.

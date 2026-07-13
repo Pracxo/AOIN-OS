@@ -949,3 +949,17 @@ Agents must keep `runtime_implementation_approved=false`, `implementation_author
 ## AION-151 Scoped Production Auth Authorization
 
 AION-151 adds the canonical scoped authorization transaction `AION-151-PA-0001` for `production-auth-core` and future task `AION-152`. The authorization is limited to the `disabled-production-auth-core` implementation scope. Production-auth runtime remains disabled, runtime guard releases remain false, endpoint/storage/provider/external-call approvals remain false, package and migration changes remain false, and no v0.2 tag or release is created.
+
+## AION-154 Production Auth Core Stabilization
+
+AION-154 may harden the internal disabled `aion_brain.production_auth` package
+only under `AION-153-PA-0002`. Preserve AION-151 implementation lineage and add
+AION-153 stabilization lineage as separate fields. Keep
+`aion_brain.auth_runtime` separate from `aion_brain.production_auth`.
+
+Agents must keep `production_auth_runtime_enabled=false`,
+`runtime_no_go_status=true`, `runtime_implementation_approved=false`,
+`runtime_enablement_guard_release_approved=false`, endpoint/storage/provider/
+external-call flags false, no production-auth API router, no package files, no
+lockfiles, no migrations, no SDK or CLI runtime surfaces, no v0.2 tag, and no
+v0.2 release.

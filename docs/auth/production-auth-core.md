@@ -28,6 +28,14 @@ The next active authorization is `AION-153-PA-0002` for future AION-154
 `disabled-production-auth-core-stabilization` work only. AION-153 does not
 modify this production-auth core package.
 
+## AION-154 Stabilized Core Evidence
+
+AION-154 adds canonical serialization, fingerprints, reason-code registry
+validation, typed internal operation checks, immutable evidence records,
+idempotency and concurrency tests, redaction hardening, and runtime-hold gates.
+The internal core remains `implemented_disabled`, and production-auth runtime
+remains disabled.
+
 The implementation adds strict contracts, fail-closed configuration, blocked
 policy decisions, redacted audit/provenance builders, redacted diagnostics, and
 kernel wiring. It does not add login, logout, callback, credential, token,

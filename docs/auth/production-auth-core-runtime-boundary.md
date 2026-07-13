@@ -6,6 +6,14 @@ AION-153 renews the same closed runtime boundary for the active
 `AION-153-PA-0002` stabilization authorization. The authorization permits only
 future disabled-core stabilization work and does not release runtime auth.
 
+## AION-154 Runtime Boundary
+
+AION-154 stabilization does not release the runtime guard. The runtime boundary
+continues to require `production_auth_runtime_enabled=false`,
+`runtime_no_go_status=true`, `runtime_implementation_approved=false`,
+`runtime_enablement_guard_release_approved=false`, and no login/logout/callback/
+OAuth/OIDC/SAML/token/session/credential/production-auth route.
+
 Disabled states:
 
 - `login_endpoint_enabled=false`

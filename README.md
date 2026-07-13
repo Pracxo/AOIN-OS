@@ -4930,3 +4930,21 @@ Local gates:
 ## AION-151 Scoped Production Auth Authorization
 
 AION-151 adds the canonical scoped authorization transaction `AION-151-PA-0001` for `production-auth-core` and future task `AION-152`. The authorization is limited to the `disabled-production-auth-core` implementation scope. Production-auth runtime remains disabled, runtime guard releases remain false, endpoint/storage/provider/external-call approvals remain false, package and migration changes remain false, and no v0.2 tag or release is created.
+
+## AION-154 Production Auth Core Stabilization
+
+AION-154 stabilizes the internal disabled production-auth core under the active
+AION-153 transaction `AION-153-PA-0002`. It adds schema versions, canonical
+JSON evidence, SHA-256 fingerprints, an immutable reason-code registry, typed
+preview operations, frozen evidence models, idempotency and concurrency
+coverage, fail-closed configuration matrix tests, redaction hardening,
+diagnostic stability, kernel stability, route absence checks, and
+dependency-free performance smoke tests.
+
+Runtime remains disabled:
+`production_auth_core_state=implemented_disabled`,
+`production_auth_runtime_enabled=false`, `runtime_no_go_status=true`,
+`runtime_implementation_approved=false`, and
+`runtime_enablement_guard_release_approved=false`. No production-auth API router,
+package file, lockfile, migration, SDK/CLI runtime surface, provider SDK,
+external call, v0.2 tag, or v0.2 release is added.

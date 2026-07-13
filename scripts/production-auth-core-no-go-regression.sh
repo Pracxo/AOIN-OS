@@ -85,6 +85,11 @@ while IFS= read -r file; do
       echo "migrations are forbidden for AION-152: $file" >&2
       exit 1
       ;;
+  esac
+  if aion154_is_scoped_stabilization_path "$file"; then
+    continue
+  fi
+  case "$file" in
     services/brain-api/src/aion_brain/production_auth/*|\
     services/brain-api/src/aion_brain/contracts/production_auth.py|\
     services/brain-api/src/aion_brain/config.py|\
@@ -101,6 +106,9 @@ trap 'rm -f "$changed_file_list" "$changed_existing_files"' EXIT
 while IFS= read -r file; do
   [[ -f "$file" ]] || continue
   if aion151_is_scoped_authorization_path "$file"; then
+    continue
+  fi
+  if aion154_is_scoped_stabilization_path "$file"; then
     continue
   fi
   case "$file" in

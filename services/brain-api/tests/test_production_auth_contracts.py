@@ -42,14 +42,14 @@ def test_production_auth_contracts_reject_protected_material_payloads() -> None:
     with pytest.raises(ValidationError):
         ProductionAuthPolicyRequest(
             request_id="request-unsafe",
-            requested_operation="status_preview",
+            requested_operation="core_status_read",
             metadata={"access_token": "redacted-demo"},
         )
 
     with pytest.raises(ValidationError):
         ProductionAuthPolicyRequest(
             request_id="request-claims",
-            requested_operation="status_preview",
+            requested_operation="core_status_read",
             metadata={"raw_claims": {"sub": "demo"}},
         )
 

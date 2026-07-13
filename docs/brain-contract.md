@@ -1679,6 +1679,17 @@ These contracts are dev-only and non-privileged. They require
 `write_allowed=false`, `execute_allowed=false`, `activation_allowed=false`, and
 `external_calls_allowed=false` where applicable.
 
+### AION-154 Production Auth Core Stabilization Contract
+
+Production-auth stabilization evidence uses
+`schema_version=production-auth-core/v1`,
+`canonicalization_version=production-auth-canonical-json/v1`,
+`policy_version=production-auth-policy/v1`, and
+`reason_code_registry_version=production-auth-reason-codes/v1`. Status,
+policy decision, audit event, provenance, and diagnostic contracts include
+SHA-256 fingerprints derived from canonical payloads. Runtime fields remain
+false and no production-auth API route is part of the public Brain contract.
+
 ## Local Session Contracts
 
 AION-095 adds `LocalSessionPreview`, `LocalSessionPreviewRequest`,

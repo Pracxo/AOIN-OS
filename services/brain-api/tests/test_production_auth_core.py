@@ -40,7 +40,7 @@ def test_production_auth_core_policy_is_blocked_with_required_reasons() -> None:
     decision = service.evaluate_policy(
         ProductionAuthPolicyRequest(
             request_id="request-core",
-            requested_operation="future_login",
+            requested_operation="policy_evaluation_preview",
         )
     )
 
