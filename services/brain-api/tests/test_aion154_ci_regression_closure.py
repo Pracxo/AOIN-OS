@@ -119,6 +119,7 @@ def test_production_auth_gate_uses_shared_python_selector() -> None:
 
 
 def test_missing_local_aion_v01_tag_is_recovered_by_exact_fetch(tmp_path: Path) -> None:
+    _ensure_root_aion_v01_tag_available()
     repo = _init_temp_repo(tmp_path / "repo")
     _git(repo, "remote", "add", "origin", str(ROOT))
 
@@ -143,6 +144,7 @@ def test_aion_v01_tag_sha_mismatch_fails_closed(tmp_path: Path) -> None:
 
 
 def test_detached_checkout_tag_confirmation_is_nonfatal(tmp_path: Path) -> None:
+    _ensure_root_aion_v01_tag_available()
     repo = _init_temp_repo(tmp_path / "repo")
     _git(repo, "remote", "add", "origin", str(ROOT))
     _git(repo, "checkout", "--detach", "HEAD")
@@ -282,6 +284,30 @@ def _init_temp_repo(path: Path) -> Path:
     _git(path, "add", "README.md")
     _git(path, "commit", "-m", "init")
     return path
+
+
+def _ensure_root_aion_v01_tag_available() -> None:
+    exists = subprocess.run(
+        ["git", "rev-parse", "--verify", "--quiet", "aion-v0.1.0^{commit}"],
+        cwd=ROOT,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+    if exists.returncode != 0:
+        subprocess.run(
+            [
+                "git",
+                "fetch",
+                "--no-tags",
+                "origin",
+                "refs/tags/aion-v0.1.0:refs/tags/aion-v0.1.0",
+            ],
+            cwd=ROOT,
+            check=True,
+        )
+    tag_ref = _git(ROOT, "rev-list", "-n", "1", "aion-v0.1.0").stdout.strip()
+    assert tag_ref == EXPECTED_AION_V01_SHA
 
 
 def _git(repo: Path, *args: str) -> subprocess.CompletedProcess[str]:
