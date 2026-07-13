@@ -4,21 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
-
-EXPECTED_AION_V01_SHA="105fe29348160a2218ac095cfffadcb6f234421f"
-
-git_ref_exists() {
-  git rev-parse --verify --quiet "$1" >/dev/null 2>&1
-}
-
-ensure_aion_v01_tag() {
-  if git_ref_exists "aion-v0.1.0^{commit}"; then
-    return 0
-  fi
-
-  git fetch --quiet --no-tags origin "refs/tags/aion-v0.1.0:refs/tags/aion-v0.1.0" >/dev/null 2>&1 || true
-  git_ref_exists "aion-v0.1.0^{commit}"
-}
+source "$ROOT_DIR/scripts/lib/immutable-tags.sh"
 
 is_nested_gate_context() {
   [[ -n "${PYTEST_CURRENT_TEST:-}" ]] && return 0
@@ -38,30 +24,8 @@ else
 fi
 
 tag_ref="unavailable"
-if ensure_aion_v01_tag; then
-  tag_ref="$(git rev-list -n 1 aion-v0.1.0)"
-  if [[ "$tag_ref" != "$EXPECTED_AION_V01_SHA" ]]; then
-    echo "aion-v0.1.0 must remain at $EXPECTED_AION_V01_SHA" >&2
-    exit 1
-  fi
-
-  if git_ref_exists origin/main; then
-    git merge-base --is-ancestor aion-v0.1.0 origin/main || {
-      echo "aion-v0.1.0 must remain in origin/main history" >&2
-      exit 1
-    }
-  elif git_ref_exists main; then
-    git merge-base --is-ancestor aion-v0.1.0 main || {
-      echo "aion-v0.1.0 must remain in main history" >&2
-      exit 1
-    }
-  else
-    echo "WARN: origin/main unavailable in this checkout; skipping non-release tag ancestry confirmation"
-  fi
-else
-  echo "aion-v0.1.0 tag is missing" >&2
-  exit 1
-fi
+# aion-v0.1.0 exact-fetch and immutable SHA verification live in scripts/lib/immutable-tags.sh.
+tag_ref="$(aion_confirm_immutable_v01_tag_history)"
 
 if git tag --list | rg -n '^(v0\.2|v0\.2\.0|aion-v0\.2\.0|aion-v0\.2)$'; then
   echo "v0.2 tag must not exist for AION-151" >&2

@@ -4,20 +4,10 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
+source "$ROOT_DIR/scripts/lib/python-selection.sh"
 
-python_bin() {
-  if [[ -n "${AION_BRAIN_PYTHON:-}" ]]; then
-    printf '%s\n' "$AION_BRAIN_PYTHON"
-  elif [[ -x services/brain-api/.venv/bin/python ]]; then
-    printf '%s\n' "services/brain-api/.venv/bin/python"
-  elif command -v python3 >/dev/null 2>&1; then
-    command -v python3
-  else
-    command -v python
-  fi
-}
-
-PYTHON_BIN="$(python_bin)"
+PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
+aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
@@ -106,7 +96,7 @@ grep -q "0143-v02-disabled-production-auth-core-implementation.md" docs/adr/READ
   exit 1
 }
 
-python3 - "$ROOT_DIR" <<'PY'
+"$PYTHON_BIN" - "$ROOT_DIR" <<'PY'
 from __future__ import annotations
 
 import json
@@ -229,7 +219,7 @@ PY
   -q
 
 ./scripts/v02-production-auth-authorization-check.sh
-python3 scripts/lib/v02_production_auth_authorization.py --repo-root "$ROOT_DIR" --mode no-go
+"$PYTHON_BIN" scripts/lib/v02_production_auth_authorization.py --repo-root "$ROOT_DIR" --mode no-go
 
 test ! -e services/brain-api/src/aion_brain/api/production_auth.py || {
   echo "production auth API router must not exist" >&2

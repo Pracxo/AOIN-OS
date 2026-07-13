@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
+source "$ROOT_DIR/scripts/lib/immutable-tags.sh"
 
 if [[ "${AION_OPERATOR_PLATFORM_FREEZE_SKIP_REGRESSION:-}" == "1" ]]; then
   echo "PASS: operator platform regression deferred to outer aggregate gate"
@@ -23,25 +24,8 @@ else
   echo "clean"
 fi
 
-if git_ref_exists aion-v0.1.0; then
-  if git_ref_exists origin/main; then
-    if git merge-base --is-ancestor aion-v0.1.0 origin/main; then
-      echo "aion-v0.1.0 is in main history"
-    else
-      echo "WARN: could not confirm aion-v0.1.0 ancestry against origin/main in this checkout"
-    fi
-  elif git_ref_exists main; then
-    if git merge-base --is-ancestor aion-v0.1.0 main; then
-      echo "aion-v0.1.0 is in main history"
-    else
-      echo "WARN: could not confirm aion-v0.1.0 ancestry against main in this checkout"
-    fi
-  else
-    echo "WARN: origin/main unavailable in this checkout; skipping non-release tag ancestry confirmation"
-  fi
-else
-  echo "WARN: aion-v0.1.0 tag unavailable in this checkout; skipping non-release tag ancestry confirmation"
-fi
+# aion-v0.1.0 exact-fetch and immutable SHA verification live in scripts/lib/immutable-tags.sh.
+aion_confirm_immutable_v01_tag_history >/dev/null
 
 ./scripts/static-console-safety-check.sh
 ./scripts/auth-runtime-check.sh
