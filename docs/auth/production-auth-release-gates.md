@@ -38,3 +38,17 @@ These gates validate canonical evidence, fingerprints, reason codes,
 immutability, idempotency, concurrency, redaction, diagnostics, kernel
 stability, route absence, inherited production-auth authorization checks, and
 runtime/release no-go state.
+
+## AION-155 Request Boundary Authorization Gates
+
+AION-155 adds:
+
+```bash
+./scripts/v02-production-auth-request-boundary-authorization-no-go-regression.sh
+./scripts/v02-production-auth-request-boundary-authorization-check.sh
+```
+
+The gates verify AION-153 is historical, `AION-155-PA-0003` is the only active
+authorization, the AION-156 scope is exact, and runtime authentication,
+protected-material handling, provider integration, package files, migrations,
+SDK/CLI runtime surfaces, v0.2 tags, and v0.2 releases remain blocked.

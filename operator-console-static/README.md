@@ -1017,3 +1017,25 @@ Safe local commands:
 ./scripts/production-auth-core-stabilization-check.sh
 ./scripts/production-auth-core-stabilization-runtime-hold.sh
 ```
+
+## AION-155 Production Auth Request Boundary Authorization
+
+The static console includes read-only AION-155 evidence for the request identity
+boundary authorization:
+
+- `demo-data/v02-production-auth-request-boundary-authorization.json`
+
+The data is synthetic and local-only. It marks `AION-153-PA-0002` as consumed
+by AION-154 and `AION-155-PA-0003` as the only active production-auth
+authorization for future AION-156 disabled request identity boundary work. It
+keeps `production_auth_runtime_enabled=false`,
+`identity_verification_enabled=false`, `authenticated_requests_enabled=false`,
+header and cookie parsing approvals false, all protected-material handling
+false, and v0.2 tag or release creation false.
+
+Safe local commands:
+
+```bash
+./scripts/v02-production-auth-request-boundary-authorization-no-go-regression.sh
+./scripts/v02-production-auth-request-boundary-authorization-check.sh
+```

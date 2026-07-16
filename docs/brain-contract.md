@@ -2200,3 +2200,12 @@ The contract-facing state remains locked: `runtime_implementation_approved=false
 ## AION-151 Scoped Production Auth Authorization
 
 AION-151 adds the canonical scoped authorization transaction `AION-151-PA-0001` for `production-auth-core` and future task `AION-152`. The authorization is limited to the `disabled-production-auth-core` implementation scope. Production-auth runtime remains disabled, runtime guard releases remain false, endpoint/storage/provider/external-call approvals remain false, package and migration changes remain false, and no v0.2 tag or release is created.
+
+## AION-155 Request Identity Boundary Authorization
+
+AION-155 authorizes future AION-156 request identity contracts and disabled
+request-state evidence only. It does not add a public Brain contract in this
+task. Future AION-156 contracts must keep the permitted request-state result at
+`authentication_state=disabled`, `authenticated=false`, `actor_id=null`,
+`subject=null`, `roles=[]`, and `runtime_effect=false` unless a later
+authorization changes the runtime guard.

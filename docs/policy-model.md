@@ -2262,3 +2262,12 @@ operations such as `core_status_read`, `policy_evaluation_preview`,
 `diagnostic_snapshot`, `audit_evidence_build`, and
 `provenance_evidence_build`. Unknown operations, runtime effects, unknown
 reason codes, duplicate reason codes, and protected material all fail closed.
+
+## AION-155 Request Boundary Authorization Policy
+
+AION-155 creates a narrow authorization for future disabled request identity
+boundary work. Policy remains fail-closed for identity verification,
+authenticated requests, Authorization header parsing, cookie parsing,
+credentials, tokens, sessions, providers, external calls, runtime API routes,
+SDK/CLI runtime surfaces, connector runtime, operator writes, module
+activation, sandbox execution, v0.2 tags, and v0.2 releases.

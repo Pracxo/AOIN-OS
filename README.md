@@ -4,9 +4,18 @@ AION OS is a brain-first AI operating architecture. Its first deliverable is
 AION Brain: a domain-neutral cognitive kernel that owns the system contracts,
 policies, traces, and learning signals that every future module must follow.
 
-This repository currently contains only the AION Brain v0.1 scaffold. It does
-not implement finance, trading, IT automation, legal, healthcare, HR,
-procurement, business workflows, or any vertical module logic.
+## Current Project State
+
+AION Brain v0.1.0 remains the frozen release baseline. v0.2 work is in
+progress on top of that baseline. The repository now contains a stabilized
+internal disabled production-auth core, but production authentication runtime
+remains disabled.
+
+External connectors remain disabled. Operator write execution remains disabled.
+Module activation remains disabled. No v0.2 tag or release exists.
+
+This repository does not implement finance, trading, IT automation, legal,
+healthcare, HR, procurement, business workflows, or any vertical module logic.
 
 ## AION Brain
 
@@ -144,6 +153,15 @@ future disabled production-auth core stabilization. It is governance-only: no
 runtime auth endpoints, credential or token storage, external identity
 providers, provider SDKs, package files, migrations, API routes, SDK resources,
 CLI commands, v0.2 tag, or release are added.
+
+## v0.2 Production Auth Request Boundary Authorization
+
+AION-155 closes `AION-153-PA-0002` after AION-154 PR 64 and creates
+`AION-155-PA-0003` as the single active authorization for future AION-156
+disabled request identity boundary work. It is governance, documentation,
+evidence, validation, and authorization only. It adds no production-auth
+implementation source, no kernel wiring, no API routes, no SDK or CLI runtime
+surfaces, no package files, no migrations, no v0.2 tag, and no release.
 
 ## Core Brain Loop
 

@@ -16,3 +16,14 @@
 ## AION-151 Scoped Production Auth Authorization
 
 AION-151 adds the canonical scoped authorization transaction `AION-151-PA-0001` for `production-auth-core` and future task `AION-152`. The authorization is limited to the `disabled-production-auth-core` implementation scope. Production-auth runtime remains disabled, runtime guard releases remain false, endpoint/storage/provider/external-call approvals remain false, package and migration changes remain false, and no v0.2 tag or release is created.
+
+## AION-155 Scoped Request Boundary Authorization
+
+AION-155 closes consumed `AION-153-PA-0002` evidence and creates
+`AION-155-PA-0003` for future AION-156 disabled request identity boundary work.
+The approval permits only disabled request identity contracts, verifier
+interfaces, observe-only anonymous context attachment, audit/provenance
+correlation, tests, docs, and read-only evidence. Runtime authentication,
+identity verification, authenticated requests, protected-material handling,
+provider integration, external calls, endpoints, package files, migrations,
+SDK/CLI runtime surfaces, v0.2 tags, and v0.2 releases remain blocked.

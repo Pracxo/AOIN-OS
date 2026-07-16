@@ -1,11 +1,12 @@
 # v0.2 Production Auth Stabilization Explicit Approval Record
 
-Status: `approved`
+Status: `consumed`
 
 ## Explicit approval
 
-AION-153 records an explicit approval for future AION-154 stabilization of the
-disabled production-auth core. The approval is narrow and has no runtime effect.
+AION-153 recorded an explicit approval for AION-154 stabilization of the
+disabled production-auth core. The approval remains approved historical
+evidence, but AION-154 PR 64 has consumed it.
 
 Required fields:
 
@@ -24,12 +25,17 @@ Required fields:
 
 ## Lifecycle requirements
 
-- `authorization_active=true`
-- `authorization_consumed=false`
-- `authorization_expired=false`
+- `authorization_active=false`
+- `authorization_consumed=true`
+- `authorization_consumed_by_task=AION-154`
+- `authorization_consumed_by_pr=64`
+- `authorization_consumed_by_feature_commit=f001632ed0566bcf7facfe8905a2781ff9fa6ce9`
+- `authorization_consumed_by_merge_commit=85584ea1976fd6f2cb73a641464b3caf87481618`
+- `authorization_expired=true`
 - `authorization_reusable=false`
 
-No other active production-auth authorization transaction may exist.
+No historical production-auth authorization may become active again. The active
+successor is `AION-155-PA-0003`.
 
 ## Prohibited approvals
 

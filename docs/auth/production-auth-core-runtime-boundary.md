@@ -40,3 +40,12 @@ The route table must not add `/production-auth`, `/auth/production`, login,
 logout, callback, token, credential, OAuth, OIDC, or SAML runtime routes.
 Existing local preview auth routes remain preview-only and are not converted
 into production behavior.
+
+## AION-155 Request Boundary Hold
+
+AION-155 keeps the production-auth runtime boundary closed. The new
+authorization permits future AION-156 observe-only disabled request-state
+integration only. Identity verification, authenticated requests, Authorization
+header parsing, cookie parsing, credential verification, token parsing, session
+creation, cookie issuance, external identity providers, external calls, runtime
+API routes, and runtime guard release remain prohibited.

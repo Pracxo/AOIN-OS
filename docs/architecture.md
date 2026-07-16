@@ -2531,3 +2531,12 @@ canonical JSON serialization, SHA-256 fingerprints, immutable reason codes,
 typed internal preview operations, frozen evidence, idempotency, concurrency,
 redaction hardening, diagnostics stability, and route absence checks without
 adding a public production-auth router or enabling runtime authentication.
+
+### AION-155 Production Auth Request Boundary Authorization
+
+AION-155 is governance and evidence only. It closes `AION-153-PA-0002` after
+AION-154 PR 64 and creates `AION-155-PA-0003` for future AION-156 disabled
+request identity boundary work. The architecture does not add request
+middleware, identity verification, authenticated requests, provider
+integration, API routes, SDK/CLI runtime surfaces, package files, migrations,
+or release artifacts in AION-155.

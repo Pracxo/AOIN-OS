@@ -1427,3 +1427,13 @@ reason codes, and stabilization lineage as evidence only. It must keep
 `production_auth_runtime_enabled=false`, `runtime_no_go_status=true`, no public
 production-auth routes, no external identity provider, no credentials or tokens,
 and no v0.2 tag or release.
+
+## AION-155 Request Boundary Authorization Evidence
+
+The visual brain may render read-only AION-155 authorization evidence for
+`AION-155-PA-0003`. The evidence is synthetic and local. It may show that
+future AION-156 request identity boundary work is authorized, but it must also
+show that identity verification, authenticated requests, header/cookie parsing,
+protected-material handling, provider integration, external calls, runtime API
+routes, SDK/CLI runtime surfaces, v0.2 tags, and v0.2 releases remain disabled
+or absent.

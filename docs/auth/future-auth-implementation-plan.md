@@ -100,3 +100,14 @@ browser session lifecycle, migration design, or rollback implementation.
 ## AION-151 Scoped Production Auth Authorization
 
 AION-151 adds the canonical scoped authorization transaction `AION-151-PA-0001` for `production-auth-core` and future task `AION-152`. The authorization is limited to the `disabled-production-auth-core` implementation scope. Production-auth runtime remains disabled, runtime guard releases remain false, endpoint/storage/provider/external-call approvals remain false, package and migration changes remain false, and no v0.2 tag or release is created.
+
+## AION-155 Request Identity Boundary Step
+
+AION-155 authorizes AION-156 as the next implementation step. AION-156 may
+implement only disabled request identity contracts, provider-agnostic verifier
+interfaces, disabled and deterministic test verifiers, anonymous disabled
+request-state attachment, audit/provenance correlation, read-only diagnostics,
+tests, docs, and static-console evidence. It must not authenticate users, parse
+headers or cookies, verify credentials, issue or store tokens, create sessions,
+contact providers, add endpoints, add packages, add migrations, or create a
+v0.2 tag or release.
