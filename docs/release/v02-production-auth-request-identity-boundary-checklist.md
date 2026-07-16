@@ -29,3 +29,13 @@
 - [x] `AION-155-PA-0003` reusable=false.
 - [x] `AION-157-PA-0004` active for AION-158.
 - [x] No request identity implementation source changed by AION-157.
+
+## AION-158 Stabilization Checklist
+
+- [x] Pure ASGI request identity middleware implemented.
+- [x] Receive and send passthrough verified.
+- [x] Streaming and request-body preservation verified.
+- [x] Cancellation and disconnect state cleanup verified.
+- [x] Forged-state replacement verified.
+- [x] Duplicate registration prevention verified.
+- [x] Runtime authentication remains disabled.

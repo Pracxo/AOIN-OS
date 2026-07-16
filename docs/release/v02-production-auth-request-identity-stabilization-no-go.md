@@ -2,14 +2,23 @@
 
 Status: `enforced`
 
-Reject the AION-157 branch if any of the following occur:
+Reject the AION-158 branch if any of the following occur:
 
 - `AION-155-PA-0003` reactivates.
 - A second active record appears.
 - An unknown approved record appears.
 - AION-157 scope widens beyond disabled request identity stabilization.
 - The implementation task is not `AION-158`.
-- AION-157 changes request identity implementation source.
+- `ProductionAuthRequestIdentityMiddleware` uses `BaseHTTPMiddleware`,
+  constructs Starlette `Request` or `Response`, inspects headers, cookies,
+  query strings, client/server data, or request bodies, wraps `receive` or
+  `send`, buffers responses, or trusts actor metadata.
+- Non-HTTP scopes mutate identity state.
+- Streaming responses or request-body events are buffered or reordered.
+- Cancellation is swallowed.
+- Client disconnects preserve identity evidence.
+- Forged identity state survives.
+- Duplicate middleware registration is allowed.
 - Runtime authentication, identity verification, authenticated requests,
   headers, cookies, credentials, passwords, tokens, sessions, protected
   material, providers, network calls, endpoints, OpenAPI security, package

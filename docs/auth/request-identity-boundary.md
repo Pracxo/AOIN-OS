@@ -63,3 +63,11 @@ and no CLI command.
 `disabled-request-identity-boundary-stabilization`. AION-158 may harden the
 disabled boundary mechanics, but real identity verification and authenticated
 requests remain out of scope.
+
+## AION-158 Stabilization
+
+AION-158 replaces the request identity middleware mechanics with pure ASGI while
+preserving this disabled boundary. The public middleware class name remains
+stable, `RequestContextMiddleware` remains the request-correlation owner, and
+the identity boundary still consumes only `request_id`, `trace_id`, and
+`correlation_id`.

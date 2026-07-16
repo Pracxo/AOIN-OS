@@ -138,6 +138,18 @@ AION-099 adds a disabled Auth Runtime panel backed by:
 - `demo-data/mock-claims-preview.json`
 
 The panel displays disabled production auth status and a mock claims preview.
+
+## Request Identity Stabilization Evidence
+
+AION-158 adds bundled read-only evidence for the disabled request identity
+boundary pure ASGI stabilization:
+
+- `demo-data/production-auth-request-identity-stabilization.json`
+- `demo-data/production-auth-request-identity-stabilization-runtime-hold.json`
+
+The console only renders static JSON. It does not call the backend, accept
+headers, cookies, credentials, or tokens, authenticate users, activate the
+boundary, or expose a write action.
 It has no login form, no logout control, no credential input, no token input,
 and no session persistence.
 

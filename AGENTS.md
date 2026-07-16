@@ -1003,3 +1003,20 @@ calls, auth endpoints, OpenAPI security, package files, lockfiles, migrations,
 SDK/CLI runtime surfaces, connector runtime, operator writes, module
 activation, sandbox execution, runtime guard release, v0.2 tags, and v0.2
 releases blocked.
+
+## AION-158 Request Identity Stabilization
+
+AION-158 may stabilize only the disabled request identity boundary under
+`AION-157-PA-0004`. Preserve original implementation lineage
+`AION-155-PA-0003` / `AION-156` separately from stabilization lineage
+`AION-157-PA-0004` / `AION-158`.
+
+Agents must keep `ProductionAuthRequestIdentityMiddleware` pure ASGI, with
+non-HTTP bypass, receive/send passthrough, streaming and request-body
+preservation, cancellation propagation, client-disconnect cleanup, forged-state
+replacement, duplicate-registration prevention, and anonymous disabled evidence
+only. Do not add authentication behavior, header/cookie/query/body identity
+parsing, credentials, tokens, sessions, providers, endpoints, OpenAPI security,
+packages, lockfiles, migrations, SDK/CLI runtime surfaces, connector runtime,
+operator writes, module activation, sandbox execution, runtime guard release,
+v0.2 tags, or v0.2 releases.

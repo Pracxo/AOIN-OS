@@ -143,6 +143,100 @@ aion157_is_scoped_request_identity_stabilization_path() {
       return 0
       ;;
     *)
+      if aion158_is_scoped_request_identity_stabilization_path "$1"; then
+        return 0
+      fi
+      return 1
+      ;;
+  esac
+}
+
+aion158_is_scoped_request_identity_stabilization_path() {
+  # Exact AION-158 disabled request-identity stabilization paths. This permits
+  # pure ASGI middleware hardening without exempting auth APIs, SDK runtime,
+  # migrations, package files, provider code, or broad source directories.
+  case "$1" in
+    README.md|\
+    AGENTS.md|\
+    docs/project-status.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/visual-brain.md|\
+    docs/auth/request-identity-boundary.md|\
+    docs/auth/request-identity-runtime-boundary.md|\
+    docs/auth/request-identity-stabilization.md|\
+    docs/auth/request-identity-asgi-middleware.md|\
+    docs/auth/future-auth-implementation-plan.md|\
+    docs/auth/production-auth-release-gates.md|\
+    docs/release/v02-production-auth-request-identity-boundary-implementation.md|\
+    docs/release/v02-production-auth-request-identity-boundary-runtime-hold.md|\
+    docs/release/v02-production-auth-request-identity-boundary-evidence-matrix.md|\
+    docs/release/v02-production-auth-request-identity-boundary-checklist.md|\
+    docs/release/v02-production-auth-request-identity-stabilization.md|\
+    docs/release/v02-production-auth-request-identity-stabilization-runtime-hold.md|\
+    docs/release/v02-production-auth-request-identity-stabilization-evidence-matrix.md|\
+    docs/release/v02-production-auth-request-identity-stabilization-no-go.md|\
+    docs/release/v02-production-auth-request-identity-stabilization-checklist.md|\
+    docs/release/v02-production-auth-request-identity-stabilization-authorization-transaction.md|\
+    docs/release/v02-production-auth-request-identity-stabilization-explicit-approval-record.md|\
+    docs/release/v02-production-auth-request-identity-stabilization-scope.md|\
+    docs/release/v02-production-auth-request-identity-stabilization-runtime-guard-renewal.md|\
+    docs/release/v02-release-readiness-delta.md|\
+    docs/adr/0149-v02-production-auth-request-identity-stabilization.md|\
+    docs/adr/README.md|\
+    services/brain-api/src/aion_brain/contracts/request_identity.py|\
+    services/brain-api/src/aion_brain/production_auth/__init__.py|\
+    services/brain-api/src/aion_brain/production_auth/verifier.py|\
+    services/brain-api/src/aion_brain/production_auth/request_boundary.py|\
+    services/brain-api/src/aion_brain/production_auth/request_middleware.py|\
+    services/brain-api/src/aion_brain/production_auth/request_evidence.py|\
+    services/brain-api/src/aion_brain/kernel/app_factory.py|\
+    services/brain-api/src/aion_brain/kernel/diagnostics.py|\
+    services/brain-api/tests/test_request_identity_contracts.py|\
+    services/brain-api/tests/test_request_identity_verifiers.py|\
+    services/brain-api/tests/test_request_identity_middleware.py|\
+    services/brain-api/tests/test_request_identity_app_factory.py|\
+    services/brain-api/tests/test_request_identity_config.py|\
+    services/brain-api/tests/test_request_identity_pure_asgi_middleware.py|\
+    services/brain-api/tests/test_request_identity_streaming_preservation.py|\
+    services/brain-api/tests/test_request_identity_request_body_preservation.py|\
+    services/brain-api/tests/test_request_identity_cancellation.py|\
+    services/brain-api/tests/test_request_identity_client_disconnect.py|\
+    services/brain-api/tests/test_request_identity_non_http_scopes.py|\
+    services/brain-api/tests/test_request_identity_state_integrity.py|\
+    services/brain-api/tests/test_request_identity_duplicate_registration.py|\
+    services/brain-api/tests/test_request_identity_stabilization_concurrency.py|\
+    services/brain-api/tests/test_request_identity_stabilization_idempotency.py|\
+    services/brain-api/tests/test_request_identity_stabilization_diagnostics.py|\
+    services/brain-api/tests/test_request_identity_stabilization_performance.py|\
+    examples/auth/request-identity-boundary-status.json|\
+    examples/auth/request-identity-disabled-context.json|\
+    examples/auth/request-identity-verification-result.json|\
+    examples/auth/request-identity-audit-event.json|\
+    examples/auth/request-identity-provenance-record.json|\
+    examples/auth/request-identity-stabilized-boundary-status.json|\
+    examples/auth/request-identity-stabilized-disabled-context.json|\
+    examples/auth/request-identity-stabilized-audit-event.json|\
+    examples/auth/request-identity-stabilized-provenance-record.json|\
+    examples/auth/request-identity-stabilized-diagnostics.json|\
+    operator-console-static/index.html|\
+    operator-console-static/app.js|\
+    operator-console-static/README.md|\
+    operator-console-static/demo-data/production-auth-request-identity-stabilization.json|\
+    operator-console-static/demo-data/production-auth-request-identity-stabilization-runtime-hold.json|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    scripts/production-auth-core-no-go-regression.sh|\
+    scripts/production-auth-core-stabilization-no-go-regression.sh|\
+    scripts/production-auth-request-identity-no-go-regression.sh|\
+    scripts/production-auth-request-identity-stabilization-check.sh|\
+    scripts/production-auth-request-identity-stabilization-runtime-hold.sh|\
+    scripts/production-auth-request-identity-stabilization-no-go-regression.sh|\
+    scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh|\
+    scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh)
+      return 0
+      ;;
+    *)
       return 1
       ;;
   esac

@@ -74,10 +74,16 @@ protected-material, credential, token, session, deployment, rollback,
 observability, threat-model, release-candidate, tag, and release authorization
 work is complete.
 
-## Next Implementation Task
+## Current Implementation Task
 
-The next critical-path task is AION-158 request identity boundary
-stabilization. Real identity verification, external provider integration,
+AION-158 stabilizes the disabled request identity boundary with pure ASGI
+middleware, receive/send passthrough, streaming and request-body preservation,
+cancellation and client-disconnect hardening, forged-state replacement,
+duplicate-registration prevention, concurrency isolation, deterministic
+evidence, diagnostics, static-console evidence, and local gates.
+
+Formal lifecycle closeout for `AION-157-PA-0004` is deferred to AION-159 after
+the AION-158 merge. Real identity verification, external provider integration,
 protected material lifecycle, and runtime guard release remain blocked.
 
 ## Implemented Code Versus Enabled Runtime

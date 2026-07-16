@@ -653,6 +653,53 @@ allowed_auth_paths = {
     "services/brain-api/tests/test_connector_credentials_authorization.py",
 }
 
+aion158_auth_paths = {
+    "docs/adr/0149-v02-production-auth-request-identity-stabilization.md",
+    "docs/auth/production-auth-release-gates.md",
+    "docs/auth/request-identity-asgi-middleware.md",
+    "docs/auth/request-identity-boundary.md",
+    "docs/auth/request-identity-runtime-boundary.md",
+    "docs/auth/request-identity-stabilization.md",
+    "docs/release/v02-production-auth-request-identity-boundary-checklist.md",
+    "docs/release/v02-production-auth-request-identity-boundary-evidence-matrix.md",
+    "docs/release/v02-production-auth-request-identity-boundary-implementation.md",
+    "docs/release/v02-production-auth-request-identity-boundary-runtime-hold.md",
+    "docs/release/v02-production-auth-request-identity-stabilization-authorization-transaction.md",
+    "docs/release/v02-production-auth-request-identity-stabilization-checklist.md",
+    "docs/release/v02-production-auth-request-identity-stabilization-evidence-matrix.md",
+    "docs/release/v02-production-auth-request-identity-stabilization-explicit-approval-record.md",
+    "docs/release/v02-production-auth-request-identity-stabilization-no-go.md",
+    "docs/release/v02-production-auth-request-identity-stabilization-runtime-guard-renewal.md",
+    "docs/release/v02-production-auth-request-identity-stabilization-runtime-hold.md",
+    "docs/release/v02-production-auth-request-identity-stabilization-scope.md",
+    "docs/release/v02-production-auth-request-identity-stabilization.md",
+    "examples/auth/request-identity-audit-event.json",
+    "examples/auth/request-identity-boundary-status.json",
+    "examples/auth/request-identity-disabled-context.json",
+    "examples/auth/request-identity-provenance-record.json",
+    "examples/auth/request-identity-stabilized-audit-event.json",
+    "examples/auth/request-identity-stabilized-boundary-status.json",
+    "examples/auth/request-identity-stabilized-diagnostics.json",
+    "examples/auth/request-identity-stabilized-disabled-context.json",
+    "examples/auth/request-identity-stabilized-provenance-record.json",
+    "examples/auth/request-identity-verification-result.json",
+    "operator-console-static/demo-data/production-auth-request-identity-stabilization-runtime-hold.json",
+    "operator-console-static/demo-data/production-auth-request-identity-stabilization.json",
+    "scripts/lib/v02-production-auth-scan-exclusions.sh",
+    "scripts/production-auth-core-no-go-regression.sh",
+    "scripts/production-auth-core-stabilization-no-go-regression.sh",
+    "scripts/production-auth-request-identity-no-go-regression.sh",
+    "scripts/production-auth-request-identity-stabilization-check.sh",
+    "scripts/production-auth-request-identity-stabilization-no-go-regression.sh",
+    "scripts/production-auth-request-identity-stabilization-runtime-hold.sh",
+    "scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh",
+    "scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh",
+    "services/brain-api/src/aion_brain/production_auth/__init__.py",
+    "services/brain-api/src/aion_brain/production_auth/request_boundary.py",
+    "services/brain-api/src/aion_brain/production_auth/request_evidence.py",
+    "services/brain-api/src/aion_brain/production_auth/request_middleware.py",
+}
+
 blocked_package_names = {
     "package.json",
     "package-lock.json",
@@ -678,7 +725,11 @@ for name in [*changed, *untracked]:
         raise SystemExit(f"AION-093 must not add a migration: {name}")
     if name.startswith("services/brain-api/src/aion_brain/api/auth") and name not in allowed_auth_paths:
         raise SystemExit(f"AION-093 must not add an auth API route: {name}")
-    if "auth" in name.lower() and name not in allowed_auth_paths:
+    if (
+        "auth" in name.lower()
+        and name not in allowed_auth_paths
+        and name not in aion158_auth_paths
+    ):
         raise SystemExit(f"unexpected auth runtime or artifact path: {name}")
 
 print("Auth examples valid and runtime boundaries clean")

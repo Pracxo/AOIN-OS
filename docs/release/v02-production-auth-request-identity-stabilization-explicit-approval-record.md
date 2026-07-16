@@ -40,3 +40,8 @@ Approved stabilization permissions:
 All runtime, parsing, endpoint, protected-material, provider, network, package,
 migration, SDK, CLI, connector, operator, module, sandbox, tag, and release
 permissions remain false.
+
+AION-158 consumes these stabilization permissions for pure ASGI middleware,
+state integrity, passthrough, cancellation, diagnostics, tests, docs, and
+read-only evidence only. It does not consume or create any runtime
+authentication permission.

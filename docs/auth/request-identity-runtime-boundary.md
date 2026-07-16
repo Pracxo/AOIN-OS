@@ -50,3 +50,9 @@ AION-157 does not approve header parsing, cookie parsing, credentials,
 passwords, tokens, sessions, external providers, network clients, auth
 endpoints, OpenAPI security schemes, SDK resources, CLI commands, packages,
 lockfiles, migrations, v0.2 tags, or v0.2 releases.
+
+AION-158 stabilizes only the disabled middleware mechanics. The pure ASGI
+middleware still authenticates nobody, passes receive and send unchanged,
+bypasses non-HTTP scopes, preserves streaming and request bodies, propagates
+cancellation, clears state on disconnect, replaces forged identity state, and
+prevents duplicate registration.

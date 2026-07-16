@@ -82,12 +82,17 @@ while IFS= read -r file; do
     services/brain-api/src/aion_brain/kernel/*|\
     services/brain-api/src/aion_brain/api/*|\
     packages/aion-sdk-python/src/*)
+      if aion158_is_scoped_request_identity_stabilization_path "$file"; then
+        continue
+      fi
       echo "implementation source changes are forbidden for AION-157: $file" >&2
       exit 1
       ;;
   esac
 
-  if [[ -f "$file" ]] && ! aion157_is_scoped_request_identity_stabilization_path "$file"; then
+  if [[ -f "$file" ]] \
+    && ! aion157_is_scoped_request_identity_stabilization_path "$file" \
+    && ! aion158_is_scoped_request_identity_stabilization_path "$file"; then
     printf '%s\n' "$file" >> "$scan_file_list"
   fi
 done < "$changed_file_list"

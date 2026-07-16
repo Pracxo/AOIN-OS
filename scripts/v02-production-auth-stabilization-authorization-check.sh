@@ -130,6 +130,9 @@ while IFS= read -r file; do
   if aion156_is_scoped_request_identity_path "$file"; then
     continue
   fi
+  if aion158_is_scoped_request_identity_stabilization_path "$file"; then
+    continue
+  fi
   echo "AION-153 must not modify production-auth source, config, or kernel wiring: $file" >&2
   exit 1
 done < <(

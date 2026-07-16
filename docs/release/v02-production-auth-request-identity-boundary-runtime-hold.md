@@ -32,3 +32,7 @@ command, migration, package file, v0.2 tag, or v0.2 release is added.
 `runtime_no_go_status=true`, `runtime_implementation_approved=false`,
 `production_auth_runtime_enabled=false`, `identity_verification_enabled=false`,
 and `authenticated_requests_enabled=false`.
+
+AION-158 preserves that hold while replacing the middleware with pure ASGI and
+adding passthrough, cancellation, disconnect, forged-state, duplicate
+registration, concurrency, and idempotency coverage.

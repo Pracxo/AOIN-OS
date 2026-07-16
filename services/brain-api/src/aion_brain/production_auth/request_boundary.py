@@ -55,20 +55,34 @@ class ProductionAuthRequestIdentityBoundary:
 
     async def build_bundle(
         self,
-        request_context: RequestContext,
+        request_context: RequestContext | None = None,
         *,
+        request_id: str | None = None,
+        trace_id: str | None = None,
+        correlation_id: str | None = None,
         registered: bool = True,
     ) -> RequestIdentityBoundaryBundle:
         """Build a correlated disabled request identity evidence bundle."""
 
+        if request_context is not None:
+            request_id = request_context.request_id
+            trace_id = request_context.trace_id
+            correlation_id = request_context.correlation_id
+        if request_id is None:
+            raise ValueError("request_id is required")
         verifier_type = _verifier_type(self._verifier)
         identity_source = _identity_source(self._verifier)
         verification_input = RequestIdentityVerificationInput(
-            request_id=request_context.request_id,
-            trace_id=request_context.trace_id,
-            correlation_id=request_context.correlation_id,
+            request_id=request_id,
+            trace_id=trace_id,
+            correlation_id=correlation_id,
             identity_source=identity_source,
-            metadata={"safe_correlation_only": True},
+            metadata={
+                "safe_correlation_only": True,
+                "middleware_implementation": "pure_asgi",
+                "streaming_passthrough": True,
+                "request_body_passthrough": True,
+            },
             created_at=self._clock(),
         )
         verification = await self._verifier.verify(verification_input)

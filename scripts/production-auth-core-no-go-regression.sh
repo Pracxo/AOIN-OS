@@ -92,6 +92,9 @@ while IFS= read -r file; do
   if aion156_is_scoped_request_identity_path "$file"; then
     continue
   fi
+  if aion158_is_scoped_request_identity_stabilization_path "$file"; then
+    continue
+  fi
   case "$file" in
     services/brain-api/src/aion_brain/production_auth/*|\
     services/brain-api/src/aion_brain/contracts/production_auth.py|\
@@ -117,10 +120,17 @@ while IFS= read -r file; do
   if aion156_is_scoped_request_identity_path "$file"; then
     continue
   fi
+  if aion158_is_scoped_request_identity_stabilization_path "$file"; then
+    continue
+  fi
   case "$file" in
     # Exact self-scan exemptions keep authorized validation-script edits from
     # failing on their own guard text while continuing to scan the rest of scripts/.
-    scripts/production-auth-core-check.sh|scripts/production-auth-core-no-go-regression.sh)
+    scripts/production-auth-core-check.sh|\
+    scripts/production-auth-core-no-go-regression.sh|\
+    scripts/production-auth-core-stabilization-no-go-regression.sh|\
+    scripts/production-auth-request-identity-no-go-regression.sh|\
+    scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh)
       continue
       ;;
   esac
