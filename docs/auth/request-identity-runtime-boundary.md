@@ -35,3 +35,18 @@ No login, logout, callback, token, session, credential, production-auth, or
 request-identity API route is added. The middleware does not read HTTP headers,
 cookies, query parameters, or request bodies. `X-AION-Actor-ID` remains request
 metadata only and is ignored as production identity.
+
+## AION-157 Runtime Guard Renewal
+
+`runtime_guard_hold_active=true` and `runtime_no_go_status=true` remain in force
+for AION-158. `runtime_implementation_approved=false`,
+`production_auth_runtime_enabled=false`, `identity_verification_enabled=false`,
+`authenticated_requests_enabled=false`,
+`runtime_enablement_guard_release_approved=false`,
+`runtime_enablement_guard_final_lock_release_approved=false`, and
+`runtime_enablement_master_lock_release_approved=false`.
+
+AION-157 does not approve header parsing, cookie parsing, credentials,
+passwords, tokens, sessions, external providers, network clients, auth
+endpoints, OpenAPI security schemes, SDK resources, CLI commands, packages,
+lockfiles, migrations, v0.2 tags, or v0.2 releases.

@@ -20,6 +20,7 @@ from v02_production_auth_authorization import (  # noqa: E402
     AION151_AUTHORIZATION,
     AION153_AUTHORIZATION,
     AION155_AUTHORIZATION,
+    AION157_AUTHORIZATION,
     APPROVAL_TRUE_KEYS,
     validate_authorization_lifecycle_payloads,
 )
@@ -141,12 +142,13 @@ def test_v02_production_auth_stabilization_json_is_historical() -> None:
         assert payload["expiry"] == AION153_AUTHORIZATION.expiry
 
 
-def test_v02_production_auth_stabilization_validator_accepts_three_record_lifecycle() -> None:
+def test_v02_production_auth_stabilization_validator_accepts_four_record_lifecycle() -> None:
     validate_authorization_lifecycle_payloads(
         [
             ("aion151.json", _payload_from_spec(AION151_AUTHORIZATION)),
             ("aion153.json", _payload_from_spec(AION153_AUTHORIZATION)),
             ("aion155.json", _payload_from_spec(AION155_AUTHORIZATION)),
+            ("aion157.json", _payload_from_spec(AION157_AUTHORIZATION)),
         ]
     )
 
@@ -163,13 +165,17 @@ def test_v02_production_auth_stabilization_validator_accepts_three_record_lifecy
             "authorization_reusable must be false",
         ),
         (
-            lambda records: records[2][1].__setitem__("authorization_consumed", True),
+            lambda records: records[2][1].__setitem__("authorization_active", True),
+            "authorization_active must be false",
+        ),
+        (
+            lambda records: records[3][1].__setitem__("authorization_consumed", True),
             "authorization_consumed must be false",
         ),
         (
-            lambda records: records[2][1].__setitem__(
+            lambda records: records[3][1].__setitem__(
                 "authorization_scope",
-                "disabled-request-identity-boundary-and-login",
+                "disabled-request-identity-boundary-stabilization-and-login",
             ),
             "authorization_scope mismatch",
         ),
@@ -183,6 +189,7 @@ def test_v02_production_auth_stabilization_validator_rejects_bad_lifecycle(
         ("aion151.json", _payload_from_spec(AION151_AUTHORIZATION)),
         ("aion153.json", _payload_from_spec(AION153_AUTHORIZATION)),
         ("aion155.json", _payload_from_spec(AION155_AUTHORIZATION)),
+        ("aion157.json", _payload_from_spec(AION157_AUTHORIZATION)),
     ]
     mutator(records)
     with pytest.raises(AssertionError, match=match):

@@ -49,3 +49,17 @@ evidence to request state.
 
 The boundary adds no public route, no OpenAPI security scheme, no SDK resource,
 and no CLI command.
+
+## AION-157 Closeout and Stabilization Authorization
+
+`AION-155-PA-0003` is now historical evidence: `authorization_active=false`,
+`authorization_consumed=true`, `authorization_consumed_by_task=AION-156`,
+`authorization_consumed_by_pr=66`,
+`authorization_consumed_by_feature_commit=2fbeb77bdc33772c46a679cbfa0bdafe327abb42`,
+`authorization_consumed_by_merge_commit=051f6f2e8b901863f8dc9cad405e5b5401db3695`,
+`authorization_expired=true`, and `authorization_reusable=false`.
+
+`AION-157-PA-0004` is active for AION-158
+`disabled-request-identity-boundary-stabilization`. AION-158 may harden the
+disabled boundary mechanics, but real identity verification and authenticated
+requests remain out of scope.

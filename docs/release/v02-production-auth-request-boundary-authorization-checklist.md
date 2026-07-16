@@ -32,3 +32,16 @@ Status: `passed`
 - [x] Disabled request identity boundary implemented
 - [x] Runtime authentication remains disabled
 - [x] Formal lifecycle closeout deferred
+
+## AION-157 Lifecycle Closeout Checklist
+
+- [x] `AION-155-PA-0003` is inactive.
+- [x] `AION-155-PA-0003` is consumed by `AION-156`.
+- [x] `authorization_consumed_by_pr=66`.
+- [x] `authorization_consumed_by_feature_commit=2fbeb77bdc33772c46a679cbfa0bdafe327abb42`.
+- [x] `authorization_consumed_by_merge_commit=051f6f2e8b901863f8dc9cad405e5b5401db3695`.
+- [x] `authorization_expired=true`.
+- [x] `authorization_reusable=false`.
+- [x] `AION-157-PA-0004` is the only active approved production-auth authorization.
+- [x] `implementation_task=AION-158`.
+- [x] `authorization_scope=disabled-request-identity-boundary-stabilization`.

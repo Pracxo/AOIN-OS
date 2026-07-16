@@ -52,6 +52,8 @@ class AuthorizationSpec:
 AION_152_MERGE_COMMIT = "bc0614bcde19448b2a423614836bee3c06728c98"
 AION_154_FEATURE_COMMIT = "f001632ed0566bcf7facfe8905a2781ff9fa6ce9"
 AION_154_MERGE_COMMIT = "85584ea1976fd6f2cb73a641464b3caf87481618"
+AION_156_FEATURE_COMMIT = "2fbeb77bdc33772c46a679cbfa0bdafe327abb42"
+AION_156_MERGE_COMMIT = "051f6f2e8b901863f8dc9cad405e5b5401db3695"
 
 APPROVAL_TRUE_KEYS = frozenset(
     {
@@ -107,17 +109,36 @@ REQUEST_BOUNDARY_FALSE_KEYS = LEGACY_FALSE_KEYS | frozenset(
         "authorization_header_parsing_approved",
         "cookie_parsing_approved",
         "credential_verification_approved",
+        "password_verification_approved",
         "token_parsing_approved",
         "token_issuance_approved",
         "token_refresh_approved",
         "session_creation_approved",
         "cookie_issuance_approved",
+        "token_endpoint_approved",
+        "session_endpoint_approved",
+        "credential_endpoint_approved",
+        "openapi_security_scheme_added",
+        "sdk_runtime_resource_added",
+        "cli_runtime_command_added",
     }
 )
 
-CANONICAL_FALSE_KEYS = REQUEST_BOUNDARY_FALSE_KEYS
+REQUEST_IDENTITY_STABILIZATION_FALSE_KEYS = REQUEST_BOUNDARY_FALSE_KEYS | frozenset(
+    {
+        "password_storage_approved",
+        "token_endpoint_approved",
+        "session_endpoint_approved",
+        "credential_endpoint_approved",
+        "openapi_security_scheme_added",
+        "sdk_runtime_resource_added",
+        "cli_runtime_command_added",
+    }
+)
 
-GLOBAL_FALSE_KEYS = (REQUEST_BOUNDARY_FALSE_KEYS - {"implementation_no_go_status"}) | {
+CANONICAL_FALSE_KEYS = REQUEST_IDENTITY_STABILIZATION_FALSE_KEYS
+
+GLOBAL_FALSE_KEYS = (REQUEST_IDENTITY_STABILIZATION_FALSE_KEYS - {"implementation_no_go_status"}) | {
     "runtime_enablement_guard_release_approved",
     "runtime_enablement_master_lock_release_approved",
     "runtime_enablement_guard_final_lock_release_approved",
@@ -130,6 +151,7 @@ GLOBAL_FALSE_KEYS = (REQUEST_BOUNDARY_FALSE_KEYS - {"implementation_no_go_status
     "authorization_header_parsing_approved",
     "cookie_parsing_approved",
     "credential_verification_approved",
+    "password_verification_approved",
     "token_parsing_approved",
     "external_calls_enabled",
     "network_client_enabled",
@@ -152,6 +174,7 @@ GLOBAL_FALSE_KEYS = (REQUEST_BOUNDARY_FALSE_KEYS - {"implementation_no_go_status
     "callback_endpoint_enabled",
     "credential_storage_enabled",
     "password_storage_enabled",
+    "password_verification_enabled",
     "token_issuance_enabled",
     "token_storage_enabled",
     "token_refresh_enabled",
@@ -203,6 +226,27 @@ REQUEST_BOUNDARY_APPROVED_SCOPE = frozenset(
         "observe_only_boundary_registration",
         "audit_provenance_correlation",
         "read_only_diagnostics",
+        "tests",
+        "documentation",
+    }
+)
+
+REQUEST_IDENTITY_STABILIZATION_APPROVED_SCOPE = frozenset(
+    {
+        "pure_asgi_middleware_migration",
+        "middleware_order_hardening",
+        "streaming_response_preservation",
+        "request_body_preservation",
+        "cancellation_propagation",
+        "client_disconnect_hardening",
+        "non_http_scope_bypass",
+        "request_state_integrity",
+        "duplicate_registration_guard",
+        "concurrency_reentrancy",
+        "state_leakage_regression",
+        "evidence_idempotency",
+        "diagnostic_schema_hardening",
+        "performance_smoke",
         "tests",
         "documentation",
     }
@@ -276,6 +320,51 @@ REQUEST_BOUNDARY_PROHIBITED_SCOPE = frozenset(
     }
 )
 
+REQUEST_IDENTITY_STABILIZATION_PROHIBITED_SCOPE = frozenset(
+    {
+        "identity_verification",
+        "authenticated_requests",
+        "authorization_header_parsing",
+        "cookie_parsing",
+        "credential_verification",
+        "password_verification",
+        "token_parsing",
+        "token_issuance",
+        "token_refresh",
+        "token_storage",
+        "session_creation",
+        "session_persistence",
+        "cookie_issuance",
+        "cookie_persistence",
+        "external_identity_provider",
+        "oauth_runtime",
+        "oidc_runtime",
+        "saml_runtime",
+        "external_calls",
+        "network_client",
+        "provider_sdk",
+        "login_endpoint",
+        "logout_endpoint",
+        "callback_endpoint",
+        "token_endpoint",
+        "session_endpoint",
+        "credential_endpoint",
+        "api_router",
+        "openapi_security_scheme",
+        "package_files",
+        "lockfiles",
+        "migrations",
+        "sdk_runtime_resource",
+        "cli_runtime_command",
+        "connector_runtime",
+        "operator_write_execution",
+        "module_activation",
+        "sandbox_execution",
+        "v02_tag",
+        "v02_release",
+    }
+)
+
 REQUEST_BOUNDARY_IMPLEMENTATION_TRUE_KEYS = frozenset(
     {
         "request_identity_boundary_implementation_approved",
@@ -284,6 +373,26 @@ REQUEST_BOUNDARY_IMPLEMENTATION_TRUE_KEYS = frozenset(
         "provider_agnostic_verifier_interface_approved",
         "deterministic_test_verifier_approved",
         "audit_provenance_correlation_approved",
+    }
+)
+
+REQUEST_IDENTITY_STABILIZATION_TRUE_KEYS = frozenset(
+    {
+        "request_identity_boundary_stabilization_approved",
+        "pure_asgi_middleware_migration_approved",
+        "middleware_order_hardening_approved",
+        "streaming_response_preservation_approved",
+        "request_body_preservation_approved",
+        "cancellation_propagation_hardening_approved",
+        "client_disconnect_hardening_approved",
+        "non_http_scope_bypass_approved",
+        "request_state_integrity_hardening_approved",
+        "duplicate_registration_guard_approved",
+        "concurrency_reentrancy_hardening_approved",
+        "state_leakage_regression_approved",
+        "evidence_idempotency_hardening_approved",
+        "diagnostic_schema_hardening_approved",
+        "performance_smoke_hardening_approved",
     }
 )
 
@@ -342,26 +451,56 @@ AION155_AUTHORIZATION = AuthorizationSpec(
     authorization_scope="disabled-request-identity-boundary",
     task_id="AION-155",
     required_adr="0146-v02-production-auth-request-boundary-authorization.md",
-    expiry="AION-156 merged or AION-155-PA-0003 explicitly revoked",
-    authorization_active=True,
-    authorization_consumed=False,
-    authorization_expired=False,
+    expiry="AION-156 merged; authorization consumed by PR 66",
+    authorization_active=False,
+    authorization_consumed=True,
+    authorization_expired=True,
     authorization_reusable=False,
     approved_scope=REQUEST_BOUNDARY_APPROVED_SCOPE,
     prohibited_scope=REQUEST_BOUNDARY_PROHIBITED_SCOPE,
     false_keys=REQUEST_BOUNDARY_FALSE_KEYS,
     parent_authorization_transaction_id="AION-153-PA-0002",
+    authorization_consumed_by_task="AION-156",
+    authorization_consumed_by_pr=66,
+    authorization_consumed_by_feature_commit=AION_156_FEATURE_COMMIT,
+    authorization_consumed_by_merge_commit=AION_156_MERGE_COMMIT,
     implementation_true_keys=REQUEST_BOUNDARY_IMPLEMENTATION_TRUE_KEYS,
+)
+
+AION157_AUTHORIZATION = AuthorizationSpec(
+    transaction_id="AION-157-PA-0004",
+    approval_record_id="AION-157-PA-0004",
+    candidate_id="production-auth-request-identity-boundary-stabilization",
+    workstream="production-auth-request-integration-hardening",
+    implementation_task="AION-158",
+    authorization_scope="disabled-request-identity-boundary-stabilization",
+    task_id="AION-157",
+    required_adr="0148-v02-production-auth-request-identity-stabilization-authorization.md",
+    expiry="AION-158 merged or AION-157-PA-0004 explicitly revoked",
+    authorization_active=True,
+    authorization_consumed=False,
+    authorization_expired=False,
+    authorization_reusable=False,
+    approved_scope=REQUEST_IDENTITY_STABILIZATION_APPROVED_SCOPE,
+    prohibited_scope=REQUEST_IDENTITY_STABILIZATION_PROHIBITED_SCOPE,
+    false_keys=REQUEST_IDENTITY_STABILIZATION_FALSE_KEYS,
+    parent_authorization_transaction_id="AION-155-PA-0003",
+    implementation_true_keys=REQUEST_IDENTITY_STABILIZATION_TRUE_KEYS,
 )
 
 HISTORICAL_AUTHORIZATION = AION151_AUTHORIZATION
 STABILIZATION_AUTHORIZATION = AION153_AUTHORIZATION
-ACTIVE_AUTHORIZATION = AION155_AUTHORIZATION
-ACTIVE_REQUIRED_SCOPE = REQUEST_BOUNDARY_APPROVED_SCOPE
+ACTIVE_AUTHORIZATION = AION157_AUTHORIZATION
+ACTIVE_REQUIRED_SCOPE = REQUEST_IDENTITY_STABILIZATION_APPROVED_SCOPE
 
 AUTHORIZATION_SPECS = {
     spec.transaction_id: spec
-    for spec in (AION151_AUTHORIZATION, AION153_AUTHORIZATION, AION155_AUTHORIZATION)
+    for spec in (
+        AION151_AUTHORIZATION,
+        AION153_AUTHORIZATION,
+        AION155_AUTHORIZATION,
+        AION157_AUTHORIZATION,
+    )
 }
 
 REQUIRED_DOCS_AION151 = [
@@ -430,6 +569,30 @@ REQUIRED_JSON_AION155 = [
     "operator-console-static/demo-data/v02-production-auth-request-boundary-authorization.json",
 ]
 
+REQUIRED_DOCS_AION157 = [
+    "docs/release/v02-production-auth-request-identity-boundary-closeout.md",
+    "docs/release/v02-production-auth-request-identity-stabilization-authorization-transaction.md",
+    "docs/release/v02-production-auth-request-identity-stabilization-explicit-approval-record.md",
+    "docs/release/v02-production-auth-request-identity-stabilization-scope.md",
+    "docs/release/v02-production-auth-request-identity-stabilization-runtime-guard-renewal.md",
+    "docs/release/v02-production-auth-request-identity-stabilization-evidence-matrix.md",
+    "docs/release/v02-production-auth-request-identity-stabilization-no-go.md",
+    "docs/release/v02-production-auth-request-identity-stabilization-checklist.md",
+    "docs/adr/0148-v02-production-auth-request-identity-stabilization-authorization.md",
+]
+
+REQUIRED_JSON_AION157_CLOSEOUT = [
+    "examples/release/v02-production-auth-request-identity-boundary-closeout.json",
+]
+
+REQUIRED_JSON_AION157 = [
+    "examples/release/v02-production-auth-request-identity-stabilization-authorization.json",
+    "examples/release/v02-production-auth-request-identity-stabilization-explicit-approval-record.json",
+    "examples/release/v02-production-auth-request-identity-stabilization-runtime-guard-renewal.json",
+    "examples/release/v02-production-auth-request-identity-stabilization-evidence-matrix.json",
+    "operator-console-static/demo-data/v02-production-auth-request-identity-stabilization-authorization.json",
+]
+
 BLOCKED_VALUE_MARKERS = (
     "http://",
     "https://",
@@ -476,6 +639,9 @@ def validate(root: Path, mode: str) -> None:
         + REQUIRED_DOCS_AION155
         + REQUIRED_JSON_AION155_CLOSEOUT
         + REQUIRED_JSON_AION155
+        + REQUIRED_DOCS_AION157
+        + REQUIRED_JSON_AION157_CLOSEOUT
+        + REQUIRED_JSON_AION157
     )
     for relative in required_paths:
         assert (root / relative).exists(), f"missing production-auth authorization artifact: {relative}"
@@ -490,6 +656,9 @@ def validate(root: Path, mode: str) -> None:
     assert "0146-v02-production-auth-request-boundary-authorization.md" in adr_index, (
         "ADR 0146 is not indexed"
     )
+    assert "0148-v02-production-auth-request-identity-stabilization-authorization.md" in adr_index, (
+        "ADR 0148 is not indexed"
+    )
 
     for relative in (
         REQUIRED_JSON_AION151
@@ -497,13 +666,20 @@ def validate(root: Path, mode: str) -> None:
         + REQUIRED_JSON_AION153_CLOSEOUT
         + REQUIRED_JSON_AION155_CLOSEOUT
         + REQUIRED_JSON_AION155
+        + REQUIRED_JSON_AION157_CLOSEOUT
+        + REQUIRED_JSON_AION157
     ):
         validate_required_payload(relative, load_json(root / relative))
 
     validate_authorization_lifecycle_payloads(iter_json_payloads(root))
 
     if mode == "guard":
-        for relative in REQUIRED_JSON_AION151 + REQUIRED_JSON_AION153 + REQUIRED_JSON_AION155:
+        for relative in (
+            REQUIRED_JSON_AION151
+            + REQUIRED_JSON_AION153
+            + REQUIRED_JSON_AION155
+            + REQUIRED_JSON_AION157
+        ):
             payload = load_json(root / relative)
             assert payload.get("runtime_guard_hold_active") is True, (
                 f"{relative}: runtime_guard_hold_active must be true"
@@ -538,6 +714,10 @@ def validate_required_payload(relative: str, payload: dict[str, Any]) -> None:
         validate_authorization_record(relative, payload, expected=AION153_AUTHORIZATION)
     elif relative in REQUIRED_JSON_AION155_CLOSEOUT:
         validate_aion154_closeout_payload(relative, payload)
+    elif relative in REQUIRED_JSON_AION157_CLOSEOUT:
+        validate_aion156_closeout_payload(relative, payload)
+    elif relative in REQUIRED_JSON_AION157:
+        validate_authorization_record(relative, payload, expected=AION157_AUTHORIZATION)
     else:
         validate_authorization_record(relative, payload, expected=AION155_AUTHORIZATION)
 
@@ -565,6 +745,36 @@ def validate_aion154_closeout_payload(relative: str, payload: dict[str, Any]) ->
         assert payload.get(key) == expected, f"{relative}: {key} mismatch"
 
 
+def validate_aion156_closeout_payload(relative: str, payload: dict[str, Any]) -> None:
+    assert payload.get("task_id") == "AION-157", f"{relative}: task_id must be AION-157"
+    assert payload.get("record_kind") == "request_identity_boundary_closeout", (
+        f"{relative}: record_kind mismatch"
+    )
+    required = {
+        "authorization_transaction_id": "AION-155-PA-0003",
+        "authorization_active": False,
+        "authorization_consumed": True,
+        "authorization_consumed_by_task": "AION-156",
+        "authorization_consumed_by_pr": 66,
+        "authorization_consumed_by_feature_commit": AION_156_FEATURE_COMMIT,
+        "authorization_consumed_by_merge_commit": AION_156_MERGE_COMMIT,
+        "authorization_expired": True,
+        "authorization_reusable": False,
+        "request_identity_boundary_implemented": True,
+        "request_identity_boundary_state": "implemented_disabled",
+        "request_identity_boundary_default_enabled": False,
+        "request_identity_boundary_mode": "observe_only_disabled",
+        "authentication_state": "disabled",
+        "authenticated": False,
+        "actor_id": None,
+        "subject": None,
+        "roles": [],
+        "runtime_effect": False,
+    }
+    for key, expected in required.items():
+        assert payload.get(key) == expected, f"{relative}: {key} mismatch"
+
+
 def validate_authorization_lifecycle_payloads(payloads: list[tuple[str, Any]]) -> None:
     approved_records: dict[tuple[str, str, str, str, str], set[str]] = {}
     active_records: dict[tuple[str, str, str, str, str], set[str]] = {}
@@ -579,10 +789,10 @@ def validate_authorization_lifecycle_payloads(payloads: list[tuple[str, Any]]) -
     assert set(approved_records) == expected_records, (
         f"unexpected approved authorization records: {sorted(approved_records)}"
     )
-    assert set(active_records) == {AION155_AUTHORIZATION.tuple_key}, (
+    assert set(active_records) == {AION157_AUTHORIZATION.tuple_key}, (
         f"unexpected active approved authorization records: {sorted(active_records)}"
     )
-    for spec in (AION151_AUTHORIZATION, AION153_AUTHORIZATION):
+    for spec in (AION151_AUTHORIZATION, AION153_AUTHORIZATION, AION155_AUTHORIZATION):
         assert spec.tuple_key in historical_records, (
             f"{spec.transaction_id} historical authorization record missing"
         )
@@ -619,6 +829,17 @@ def validate_authorization_record(
         assert payload.get(key) is False, f"{relative}: {key} must be false"
     for key in spec.implementation_true_keys:
         assert payload.get(key) is True, f"{relative}: {key} must be true"
+
+    allowed_true_permission_keys = APPROVAL_TRUE_KEYS | spec.implementation_true_keys
+    actual_true_permission_keys = {
+        key
+        for key, value in payload.items()
+        if value is True
+        and (key.endswith("_approved") or key.endswith("_approval") or key == "implementation_go_status")
+    }
+    assert actual_true_permission_keys == allowed_true_permission_keys, (
+        f"{relative}: approved permission set mismatch"
+    )
 
     assert payload.get("runtime_guard_hold_active") is True, (
         f"{relative}: runtime_guard_hold_active must be true"

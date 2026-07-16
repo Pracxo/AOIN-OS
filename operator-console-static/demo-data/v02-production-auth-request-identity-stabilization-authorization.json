@@ -1,37 +1,46 @@
 {
-  "task_id": "AION-155",
+  "task_id": "AION-157",
   "record_kind": "static_console_authorization",
-  "artifact": "v02-production-auth-request-boundary-authorization",
+  "artifact": "v02-production-auth-request-identity-stabilization-authorization",
   "synthetic": true,
   "read_only": true,
   "redaction_applied": true,
   "status": "passed",
-  "authorization_transaction_id": "AION-155-PA-0003",
-  "approval_record_id": "AION-155-PA-0003",
-  "parent_authorization_transaction_id": "AION-153-PA-0002",
-  "candidate_id": "production-auth-request-identity-boundary",
-  "workstream": "production-auth-request-integration",
-  "implementation_task": "AION-156",
-  "authorization_scope": "disabled-request-identity-boundary",
-  "authorization_active": false,
-  "authorization_consumed": true,
-  "authorization_consumed_by_task": "AION-156",
-  "authorization_consumed_by_pr": 66,
-  "authorization_consumed_by_feature_commit": "2fbeb77bdc33772c46a679cbfa0bdafe327abb42",
-  "authorization_consumed_by_merge_commit": "051f6f2e8b901863f8dc9cad405e5b5401db3695",
-  "authorization_expired": true,
-  "authorization_reusable": false,
+  "authorization_transaction_id": "AION-157-PA-0004",
+  "approval_record_id": "AION-157-PA-0004",
+  "parent_authorization_transaction_id": "AION-155-PA-0003",
+  "candidate_id": "production-auth-request-identity-boundary-stabilization",
+  "workstream": "production-auth-request-integration-hardening",
+  "implementation_task": "AION-158",
+  "authorization_scope": "disabled-request-identity-boundary-stabilization",
   "authorization_transaction_approved": true,
   "explicit_approval_record_approval": true,
   "implementation_authorization_approved": true,
   "implementation_go_status": true,
   "implementation_no_go_status": false,
-  "request_identity_boundary_implementation_approved": true,
-  "request_identity_boundary_registration_approved": true,
-  "anonymous_disabled_context_attachment_approved": true,
-  "provider_agnostic_verifier_interface_approved": true,
-  "deterministic_test_verifier_approved": true,
-  "audit_provenance_correlation_approved": true,
+  "authorization_active": true,
+  "authorization_consumed": false,
+  "authorization_consumed_by_task": null,
+  "authorization_consumed_by_pr": null,
+  "authorization_consumed_by_feature_commit": null,
+  "authorization_consumed_by_merge_commit": null,
+  "authorization_expired": false,
+  "authorization_reusable": false,
+  "request_identity_boundary_stabilization_approved": true,
+  "pure_asgi_middleware_migration_approved": true,
+  "middleware_order_hardening_approved": true,
+  "streaming_response_preservation_approved": true,
+  "request_body_preservation_approved": true,
+  "cancellation_propagation_hardening_approved": true,
+  "client_disconnect_hardening_approved": true,
+  "non_http_scope_bypass_approved": true,
+  "request_state_integrity_hardening_approved": true,
+  "duplicate_registration_guard_approved": true,
+  "concurrency_reentrancy_hardening_approved": true,
+  "state_leakage_regression_approved": true,
+  "evidence_idempotency_hardening_approved": true,
+  "diagnostic_schema_hardening_approved": true,
+  "performance_smoke_hardening_approved": true,
   "runtime_guard_hold_active": true,
   "runtime_no_go_status": true,
   "runtime_implementation_approved": false,
@@ -41,12 +50,6 @@
   "runtime_enablement_guard_release_approved": false,
   "runtime_enablement_guard_final_lock_release_approved": false,
   "runtime_enablement_master_lock_release_approved": false,
-  "login_endpoint_approved": false,
-  "logout_endpoint_approved": false,
-  "callback_endpoint_approved": false,
-  "token_endpoint_approved": false,
-  "session_endpoint_approved": false,
-  "credential_endpoint_approved": false,
   "authorization_header_parsing_approved": false,
   "cookie_parsing_approved": false,
   "credential_verification_approved": false,
@@ -68,6 +71,12 @@
   "external_calls_approved": false,
   "network_client_approved": false,
   "provider_sdk_approved": false,
+  "login_endpoint_approved": false,
+  "logout_endpoint_approved": false,
+  "callback_endpoint_approved": false,
+  "token_endpoint_approved": false,
+  "session_endpoint_approved": false,
+  "credential_endpoint_approved": false,
   "operator_write_execution_approved": false,
   "connector_implementation_approved": false,
   "connector_runtime_enabled": false,
@@ -84,18 +93,26 @@
   "v02_release_created": false,
   "v02_release_approved": false,
   "approved_scope": [
-    "request_identity_contracts",
-    "provider_agnostic_verifier_interface",
-    "disabled_verifier",
-    "deterministic_test_verifier",
-    "anonymous_disabled_context_attachment",
-    "observe_only_boundary_registration",
-    "audit_provenance_correlation",
-    "read_only_diagnostics",
+    "pure_asgi_middleware_migration",
+    "middleware_order_hardening",
+    "streaming_response_preservation",
+    "request_body_preservation",
+    "cancellation_propagation",
+    "client_disconnect_hardening",
+    "non_http_scope_bypass",
+    "request_state_integrity",
+    "duplicate_registration_guard",
+    "concurrency_reentrancy",
+    "state_leakage_regression",
+    "evidence_idempotency",
+    "diagnostic_schema_hardening",
+    "performance_smoke",
     "tests",
     "documentation"
   ],
   "prohibited_scope": [
+    "identity_verification",
+    "authenticated_requests",
     "authorization_header_parsing",
     "cookie_parsing",
     "credential_verification",
@@ -113,6 +130,7 @@
     "oidc_runtime",
     "saml_runtime",
     "external_calls",
+    "network_client",
     "provider_sdk",
     "login_endpoint",
     "logout_endpoint",
@@ -120,9 +138,11 @@
     "token_endpoint",
     "session_endpoint",
     "credential_endpoint",
-    "migrations",
+    "api_router",
+    "openapi_security_scheme",
     "package_files",
     "lockfiles",
+    "migrations",
     "sdk_runtime_resource",
     "cli_runtime_command",
     "connector_runtime",
@@ -132,25 +152,24 @@
     "v02_tag",
     "v02_release"
   ],
-  "required_adr": "0146-v02-production-auth-request-boundary-authorization.md",
+  "required_adr": "0148-v02-production-auth-request-identity-stabilization-authorization.md",
   "required_gates": [
-    "./scripts/v02-production-auth-request-boundary-authorization-check.sh",
-    "./scripts/v02-production-auth-request-boundary-authorization-no-go-regression.sh"
+    "./scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh",
+    "./scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh"
   ],
   "evidence_references": [
-    "docs/release/v02-production-auth-request-boundary-authorization-transaction.md",
-    "docs/release/v02-production-auth-request-boundary-scope.md",
-    "docs/release/v02-production-auth-request-boundary-runtime-hold.md"
+    "docs/release/v02-production-auth-request-identity-stabilization-authorization-transaction.md",
+    "docs/release/v02-production-auth-request-identity-stabilization-runtime-guard-renewal.md"
   ],
   "refs": [
-    "docs/release/v02-production-auth-request-boundary-authorization-transaction.md",
-    "docs/release/v02-production-auth-request-boundary-scope.md"
+    "docs/release/v02-production-auth-request-identity-stabilization-authorization-transaction.md",
+    "docs/release/v02-production-auth-request-identity-stabilization-scope.md"
   ],
   "sections": [
     {
       "title": "Active authorization",
       "status": "approved",
-      "summary": "AION-155-PA-0003 is historical, consumed by AION-156 PR 66, expired, and non-reusable."
+      "summary": "AION-157-PA-0004 is the only active production-auth authorization and is limited to future AION-158 disabled request identity stabilization."
     }
   ],
   "blockers": [
@@ -160,7 +179,7 @@
     "header and cookie parsing remain prohibited"
   ],
   "warnings": [
-    "AION-155 is authorization only and adds no request-boundary implementation."
+    "AION-157 is authorization only and changes no request identity implementation source."
   ],
   "forbidden_actions": [
     {
@@ -188,36 +207,12 @@
       "allowed": false
     }
   ],
-  "request_boundary_forbidden_actions": [
-    {
-      "action_key": "authenticate_user",
-      "allowed": false
-    },
-    {
-      "action_key": "parse_authorization_header",
-      "allowed": false
-    },
-    {
-      "action_key": "create_session",
-      "allowed": false
-    },
-    {
-      "action_key": "call_identity_provider",
-      "allowed": false
-    }
-  ],
   "reviewer_roles": [
     "security reviewer",
     "runtime governance reviewer",
     "platform reviewer",
     "audit reviewer"
   ],
-  "expiry": "AION-156 merged; authorization consumed by PR 66",
-  "revocation_path": "AION-155-PA-0003 is historical and non-reusable; create a new successor authorization if future scope is needed.",
-  "content_safety": [
-    "no live endpoints",
-    "no secret values",
-    "no credential values",
-    "no private reasoning"
-  ]
+  "expiry": "AION-158 merged or AION-157-PA-0004 explicitly revoked",
+  "revocation_path": "Create a follow-up approval record referencing AION-157-PA-0004 with stabilization permissions removed and runtime guards still locked."
 }

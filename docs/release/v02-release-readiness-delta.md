@@ -12,9 +12,11 @@ Status: `not-ready`
 - Internal production-auth core
 - Production-auth stabilization
 - Disabled request identity boundary
+- Request identity implementation evidence
 
 ## Remaining Blockers
 
+- Request identity stabilization
 - Real identity verification
 - External provider integration
 - Protected-material handling decision
@@ -48,6 +50,7 @@ Status: `not-ready`
 
 ## Next Critical Path
 
-`AION-156` implements the disabled request identity boundary authorized by
-`AION-155-PA-0003`. The implementation remains observe-only and disabled unless
-a future authorization explicitly changes the runtime guard state.
+`AION-158` is the next critical path. It may stabilize the disabled request
+identity boundary under `AION-157-PA-0004`; the implementation remains
+observe-only and disabled unless a future authorization explicitly changes the
+runtime guard state.

@@ -1442,3 +1442,18 @@ or absent.
 Static console evidence for the request identity boundary is bundled as JSON
 only. It is read-only and does not call the backend, accept credentials, accept
 tokens, parse headers, authenticate users, or expose an enable control.
+
+## AION-157 Static Stabilization Authorization Evidence
+
+The visual brain may render read-only AION-157 evidence for
+`AION-157-PA-0004`. The panel is synthetic and local-only. It may show future
+AION-158 stabilization permissions for pure ASGI migration, middleware order,
+streaming preservation, request-body preservation, cancellation and disconnect
+handling, non-HTTP bypass, request-state integrity, duplicate registration,
+concurrency, state-leakage regression, evidence idempotency, diagnostic
+hardening, and performance smoke tests.
+
+The visual surface must still show identity verification, authenticated
+requests, header and cookie parsing, protected-material handling, providers,
+external calls, runtime routes, OpenAPI security, SDK/CLI runtime surfaces,
+packages, lockfiles, migrations, tags, and releases as false or absent.

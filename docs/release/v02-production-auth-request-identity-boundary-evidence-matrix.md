@@ -16,3 +16,13 @@
 | No-go | `scripts/production-auth-request-identity-no-go-regression.sh` | prohibited-surface scan |
 
 Authorization lineage: `AION-155-PA-0003` consumed by `AION-156`.
+
+## AION-157 Closeout Evidence
+
+| Evidence | File | State |
+| --- | --- | --- |
+| AION-156 PR evidence | `examples/release/v02-production-auth-request-identity-boundary-closeout.json` | PR 66, feature commit, and merge commit recorded |
+| AION-155 lifecycle | `examples/release/v02-production-auth-request-boundary-authorization.json` | inactive, consumed, expired, non-reusable |
+| AION-157 authorization | `examples/release/v02-production-auth-request-identity-stabilization-authorization.json` | active for AION-158 only |
+| AION-157 gate | `scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh` | lifecycle and scope validation |
+| AION-157 no-go | `scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh` | runtime and protected-source scan |

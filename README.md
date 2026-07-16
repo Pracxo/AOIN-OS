@@ -1937,7 +1937,7 @@ curl -X POST http://localhost:8080/brain/scopes/resolve \
 
 v0.1 identity is local development metadata and header-based dev context.
 Production authentication is deferred. Dev context reads only `X-AION-*`
-headers and never cookies, bearer tokens, OAuth sessions, SSO, or external
+headers and never cookies, authorization-token material, OAuth sessions, SSO, or external
 identity provider state.
 
 The control plane owns `ActorRecord`, `WorkspaceRecord`,
@@ -4968,3 +4968,22 @@ Runtime remains disabled:
 `runtime_enablement_guard_release_approved=false`. No production-auth API router,
 package file, lockfile, migration, SDK/CLI runtime surface, provider SDK,
 external call, v0.2 tag, or v0.2 release is added.
+
+## AION-157 Request Identity Stabilization Authorization
+
+AION-157 closes `AION-155-PA-0003` as consumed by AION-156 PR 66 and creates
+`AION-157-PA-0004` as the only active authorization for future AION-158
+request identity boundary stabilization. It is governance, evidence,
+documentation, validation, and authorization work only. It changes no request
+identity implementation source and enables no authentication capability.
+
+Runtime remains disabled: `identity_verification_enabled=false`,
+`authenticated_requests_enabled=false`, `production_auth_runtime_enabled=false`,
+`runtime_no_go_status=true`, `authorization_header_parsing_approved=false`,
+`cookie_parsing_approved=false`, `credential_verification_approved=false`,
+`token_parsing_approved=false`, `session_creation_approved=false`,
+`external_identity_provider_approved=false`, `external_calls_approved=false`,
+`runtime_api_routes_added=false`, `openapi_security_scheme_added=false`,
+`package_files_added=false`, `lockfiles_added=false`, `migrations_added=false`,
+`sdk_runtime_resource_added=false`, `cli_runtime_command_added=false`,
+`v02_tag_created=false`, and `v02_release_created=false`.

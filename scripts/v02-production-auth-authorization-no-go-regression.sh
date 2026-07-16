@@ -60,7 +60,8 @@ v0.2 production auth authorization no-go result:
 - exactly one active approved authorization tuple: present
 - AION-151 historical consumed record: present
 - AION-153 historical consumed record: present
-- AION-155 active request-boundary record: present
+- AION-155 historical consumed record: present
+- AION-157 active request-identity stabilization record: present
 - duplicate approved authorization: absent
 - scope expansion: absent
 - runtime enablement: absent

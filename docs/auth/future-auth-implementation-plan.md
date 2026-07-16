@@ -118,3 +118,19 @@ layer. It is not real identity verification. Future work must separately
 authorize verifier activation, provider integration, protected-material
 lifecycle, runtime route surfaces, deployment, rollback, and runtime guard
 release.
+
+## AION-157 Next Step
+
+The next governed implementation task is AION-158 request identity boundary
+stabilization under `AION-157-PA-0004`. AION-158 may work on pure ASGI
+middleware migration, middleware ordering, streaming and request-body
+preservation, cancellation and disconnect handling, non-HTTP scope bypass,
+request-state integrity, duplicate registration, concurrency/reentrancy,
+evidence idempotency, diagnostics, performance smoke tests, docs, and read-only
+evidence.
+
+It still must not authenticate users, trust `X-AION-Actor-ID`, parse
+Authorization headers or cookies, verify or store credentials, issue or parse
+tokens, create sessions, contact providers, add routes, add OpenAPI security,
+add packages or lockfiles, add migrations, add SDK/CLI runtime surfaces, or
+create v0.2 tags or releases.

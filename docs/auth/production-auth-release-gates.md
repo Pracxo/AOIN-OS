@@ -63,3 +63,17 @@ AION-156 adds:
 These gates keep the request identity boundary implemented-disabled,
 default-off, anonymous, route-free, provider-free, package-free, migration-free,
 and v0.2-release-free.
+
+## AION-157 Request Identity Stabilization Authorization Gates
+
+AION-157 adds:
+
+```bash
+./scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh
+./scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh
+```
+
+These gates verify `AION-155-PA-0003` is historical consumed evidence,
+`AION-157-PA-0004` is the only active authorization, AION-158 scope is exact,
+runtime authentication remains disabled, implementation source remains
+unchanged in AION-157, and v0.2 tag or release creation remains absent.

@@ -2277,3 +2277,15 @@ The disabled request identity boundary changes no policy allow path. It creates
 no authenticated request, no runtime authorization effect, and no production
 auth route. All future real identity verification or runtime guard release
 requires separate approval beyond `AION-155-PA-0003`.
+
+## AION-157 Request Identity Stabilization Policy
+
+AION-157 closes `AION-155-PA-0003` and creates `AION-157-PA-0004` for future
+AION-158 stabilization only. Policy still fails closed for identity
+verification, authenticated requests, Authorization header parsing, Cookie
+parsing, credential verification, password verification, token parsing, token
+issuance, token storage, token refresh, session creation, session persistence,
+cookie issuance, provider runtime, external calls, network clients, endpoints,
+OpenAPI security, package files, lockfiles, migrations, SDK/CLI runtime
+surfaces, connector runtime, operator writes, module activation, sandbox
+execution, v0.2 tags, and v0.2 releases.

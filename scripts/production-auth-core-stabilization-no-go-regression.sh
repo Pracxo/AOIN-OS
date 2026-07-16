@@ -109,6 +109,8 @@ while IFS= read -r file; do
       scripts/production-auth-core-stabilization-no-go-regression.sh|\
       scripts/production-auth-core-no-go-regression.sh|\
       scripts/production-auth-request-identity-no-go-regression.sh|\
+      scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh|\
+      scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh|\
       scripts/lib/v02-production-auth-scan-exclusions.sh)
         ;;
       *)

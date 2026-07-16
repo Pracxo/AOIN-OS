@@ -32,3 +32,13 @@ Production authentication runtime, identity verification, authenticated
 requests, protected-material handling, provider integration, external calls,
 API runtime routes, SDK runtime resources, CLI commands, migrations, package
 files, v0.2 tags, and v0.2 releases remain absent or disabled.
+
+## AION-157 Closeout
+
+AION-157 records AION-156 PR 66 as the completion point for this implementation.
+`authorization_active=false`, `authorization_consumed=true`,
+`authorization_consumed_by_task=AION-156`, `authorization_consumed_by_pr=66`,
+`authorization_consumed_by_feature_commit=2fbeb77bdc33772c46a679cbfa0bdafe327abb42`,
+`authorization_consumed_by_merge_commit=051f6f2e8b901863f8dc9cad405e5b5401db3695`,
+`authorization_expired=true`, and `authorization_reusable=false` for
+`AION-155-PA-0003`.
