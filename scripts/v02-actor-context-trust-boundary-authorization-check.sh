@@ -11,6 +11,24 @@ AION158_MERGE_COMMIT="f792c92e1d8a73ec8e7377b5d59269dea359006d"
 PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 
+git_commit_exists() {
+  git cat-file -e "$1^{commit}" >/dev/null 2>&1
+}
+
+verify_aion158_commit_in_history() {
+  local commit="$1"
+  local label="$2"
+
+  if git_commit_exists "$commit"; then
+    git merge-base --is-ancestor "$commit" HEAD || {
+      echo "AION-158 $label commit is not in current history: $commit" >&2
+      exit 1
+    }
+  else
+    echo "WARN: AION-158 $label commit unavailable in this checkout; skipping shallow-checkout ancestry confirmation"
+  fi
+}
+
 required_files=(
   docs/release/v02-request-identity-stabilization-closeout.md
   docs/release/v02-actor-context-trust-boundary-authorization-transaction.md
@@ -70,8 +88,8 @@ grep -F 'dev_enabled = settings.env == "development" and settings.dev_auth_enabl
     exit 1
   }
 
-git merge-base --is-ancestor "$AION158_FEATURE_COMMIT" HEAD
-git merge-base --is-ancestor "$AION158_MERGE_COMMIT" HEAD
+verify_aion158_commit_in_history "$AION158_FEATURE_COMMIT" "feature"
+verify_aion158_commit_in_history "$AION158_MERGE_COMMIT" "merge"
 
 "$PYTHON_BIN" scripts/lib/v02_production_auth_authorization.py --repo-root "$ROOT_DIR" --mode check
 
