@@ -40,3 +40,14 @@ AION-156 disabled request identity boundary work. Production-auth runtime,
 identity verification, authenticated requests, endpoint creation, protected
 material handling, provider integration, package changes, migrations, tags, and
 releases remain blocked.
+
+## AION-157 Request Identity Stabilization Delta
+
+AION-157 keeps the implementation authorization master lock unreleased for
+runtime authentication. It closes `AION-155-PA-0003` after AION-156 PR 66 and
+creates one scoped successor authorization, `AION-157-PA-0004`, for future
+AION-158 disabled request identity boundary stabilization. Production-auth
+runtime, identity verification, authenticated requests, header parsing, cookie
+parsing, endpoint creation, protected material handling, provider integration,
+package changes, migrations, SDK/CLI runtime surfaces, tags, and releases
+remain blocked.

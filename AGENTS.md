@@ -989,3 +989,17 @@ must keep production-auth runtime disabled, identity verification disabled,
 authenticated requests disabled, header/cookie parsing prohibited, credential
 and token handling prohibited, sessions prohibited, provider integration
 prohibited, external calls prohibited, and v0.2 tag or release creation false.
+
+## AION-157 Request Identity Stabilization Authorization
+
+AION-157 marks `AION-155-PA-0003` inactive, consumed by AION-156 PR 66,
+expired, and non-reusable. It creates `AION-157-PA-0004` as the only active
+authorization for AION-158 request identity boundary stabilization.
+
+Agents must not modify request identity implementation source during AION-157.
+Keep identity verification, authenticated requests, Authorization or Cookie
+parsing, credentials, passwords, tokens, sessions, external providers, network
+calls, auth endpoints, OpenAPI security, package files, lockfiles, migrations,
+SDK/CLI runtime surfaces, connector runtime, operator writes, module
+activation, sandbox execution, runtime guard release, v0.2 tags, and v0.2
+releases blocked.

@@ -2215,3 +2215,16 @@ Request identity evidence uses strict Pydantic v2 contracts under
 `aion_brain.contracts.request_identity`. Evidence is canonical-fingerprinted,
 redacted, and locked to `authentication_state=disabled`, `authenticated=false`,
 `actor_id=null`, `subject=null`, `roles=[]`, and `runtime_effect=false`.
+
+## AION-157 Request Identity Stabilization Contract
+
+AION-157 creates no new Brain runtime contract. It authorizes AION-158 to
+stabilize the disabled request identity boundary while preserving
+`authentication_state=disabled`, `authenticated=false`, `actor_id=null`,
+`subject=null`, `roles=[]`, and `runtime_effect=false`.
+
+The contract boundary remains no headers, no cookies, no credentials, no
+passwords, no tokens, no sessions, no external providers, no network calls, no
+runtime API routes, no OpenAPI security scheme, no SDK resource, and no CLI
+command. `AION-157-PA-0004` is active only for
+`disabled-request-identity-boundary-stabilization`.

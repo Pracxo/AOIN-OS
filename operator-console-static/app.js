@@ -165,6 +165,8 @@
     "./scripts/production-auth-request-identity-no-go-regression.sh",
     "./scripts/production-auth-request-identity-check.sh",
     "./scripts/production-auth-request-identity-runtime-hold.sh",
+    "./scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh",
+    "./scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -295,7 +297,8 @@
     production_auth_core_stabilization_runtime_hold: "demo-data/production-auth-core-stabilization-runtime-hold.json",
     production_auth_request_boundary_authorization: "demo-data/v02-production-auth-request-boundary-authorization.json",
     production_auth_request_identity_boundary: "demo-data/production-auth-request-identity-boundary.json",
-    production_auth_request_identity_runtime_hold: "demo-data/production-auth-request-identity-runtime-hold.json"
+    production_auth_request_identity_runtime_hold: "demo-data/production-auth-request-identity-runtime-hold.json",
+    production_auth_request_identity_stabilization_authorization: "demo-data/v02-production-auth-request-identity-stabilization-authorization.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1909,6 +1912,7 @@
         renderReleaseCandidateEvidence("v02-production-auth-request-boundary-authorization", redact(payloads[72]));
         renderReleaseCandidateEvidence("production-auth-request-identity-boundary", redact(payloads[73]));
         renderReleaseCandidateEvidence("production-auth-request-identity-runtime-hold", redact(payloads[74]));
+        renderReleaseCandidateEvidence("v02-production-auth-request-identity-stabilization-authorization", redact(payloads[75]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
@@ -1984,6 +1988,9 @@
         renderReleaseCandidateEvidence("production-auth-core-stabilization", { status: "unavailable" });
         renderReleaseCandidateEvidence("production-auth-core-stabilization-runtime-hold", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-production-auth-request-boundary-authorization", { status: "unavailable" });
+        renderReleaseCandidateEvidence("production-auth-request-identity-boundary", { status: "unavailable" });
+        renderReleaseCandidateEvidence("production-auth-request-identity-runtime-hold", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-production-auth-request-identity-stabilization-authorization", { status: "unavailable" });
       });
   }
 

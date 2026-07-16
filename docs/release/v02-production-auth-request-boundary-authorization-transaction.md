@@ -104,3 +104,15 @@ The authorization expires when AION-156 merges or when
 `authorization_expires_on_aion_156_merge=true`. The implementation remains
 limited to the disabled request identity boundary and does not approve runtime
 authentication.
+
+## AION-157 Lifecycle Closeout
+
+`AION-155-PA-0003` is now a historical approved record:
+`authorization_active=false`, `authorization_consumed=true`,
+`authorization_consumed_by_task=AION-156`, `authorization_consumed_by_pr=66`,
+`authorization_consumed_by_feature_commit=2fbeb77bdc33772c46a679cbfa0bdafe327abb42`,
+`authorization_consumed_by_merge_commit=051f6f2e8b901863f8dc9cad405e5b5401db3695`,
+`authorization_expired=true`, and `authorization_reusable=false`.
+
+The only active successor is `AION-157-PA-0004` for future AION-158
+`disabled-request-identity-boundary-stabilization`.

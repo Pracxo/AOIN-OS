@@ -109,6 +109,8 @@ while IFS= read -r file; do
       scripts/production-auth-request-identity-check.sh|\
       scripts/production-auth-request-identity-runtime-hold.sh|\
       scripts/production-auth-request-identity-no-go-regression.sh|\
+      scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh|\
+      scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh|\
       scripts/production-auth-core-no-go-regression.sh|\
       scripts/production-auth-core-stabilization-no-go-regression.sh|\
       scripts/v02-production-auth-request-boundary-authorization-no-go-regression.sh|\
@@ -157,7 +159,10 @@ trap 'rm -f "$changed_file_list" "$scan_file_list" "$all_changed_text"' EXIT
 while IFS= read -r file; do
   [[ -f "$file" ]] || continue
   case "$file" in
-    services/brain-api/tests/*|scripts/production-auth-request-identity-no-go-regression.sh)
+    services/brain-api/tests/*|\
+    scripts/production-auth-request-identity-no-go-regression.sh|\
+    scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh|\
+    scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh)
       continue
       ;;
   esac

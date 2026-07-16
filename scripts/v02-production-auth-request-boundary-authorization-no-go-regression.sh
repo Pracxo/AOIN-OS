@@ -128,7 +128,8 @@ cat <<'SUMMARY'
 v0.2 production auth request boundary authorization no-go result:
 - AION-151 historical: present
 - AION-153 historical: present
-- AION-155 only active authorization: present
+- AION-155 historical consumed authorization: present
+- AION-157 only active authorization: present
 - unknown approved authorization: absent
 - duplicate active authorization: absent
 - historical reactivation: absent

@@ -67,6 +67,82 @@ aion151_is_scoped_authorization_path() {
       return 0
       ;;
     *)
+      if aion157_is_scoped_request_identity_stabilization_path "$1"; then
+        return 0
+      fi
+      return 1
+      ;;
+  esac
+}
+
+aion157_is_scoped_request_identity_stabilization_path() {
+  # Exact AION-157 authorization, evidence, and validator paths. This task is
+  # governance-only; no implementation source paths are exempted here.
+  case "$1" in
+    README.md|\
+    AGENTS.md|\
+    docs/project-status.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/visual-brain.md|\
+    docs/auth/request-identity-boundary.md|\
+    docs/auth/request-identity-runtime-boundary.md|\
+    docs/auth/future-auth-implementation-plan.md|\
+    docs/auth/production-auth-release-gates.md|\
+    docs/release/v02-production-auth-request-boundary-authorization-transaction.md|\
+    docs/release/v02-production-auth-request-boundary-authorization-checklist.md|\
+    docs/release/v02-production-auth-request-identity-boundary-implementation.md|\
+    docs/release/v02-production-auth-request-identity-boundary-runtime-hold.md|\
+    docs/release/v02-production-auth-request-identity-boundary-evidence-matrix.md|\
+    docs/release/v02-production-auth-request-identity-boundary-checklist.md|\
+    docs/release/v02-production-auth-request-identity-boundary-closeout.md|\
+    docs/release/v02-production-auth-request-identity-stabilization-authorization-transaction.md|\
+    docs/release/v02-production-auth-request-identity-stabilization-explicit-approval-record.md|\
+    docs/release/v02-production-auth-request-identity-stabilization-scope.md|\
+    docs/release/v02-production-auth-request-identity-stabilization-runtime-guard-renewal.md|\
+    docs/release/v02-production-auth-request-identity-stabilization-evidence-matrix.md|\
+    docs/release/v02-production-auth-request-identity-stabilization-no-go.md|\
+    docs/release/v02-production-auth-request-identity-stabilization-checklist.md|\
+    docs/release/v02-release-readiness-delta.md|\
+    docs/release/v02-explicit-approval-record-master-ledger.md|\
+    docs/release/v02-implementation-authorization-final-status.md|\
+    docs/adr/0148-v02-production-auth-request-identity-stabilization-authorization.md|\
+    docs/adr/README.md|\
+    examples/release/v02-production-auth-request-boundary-authorization.json|\
+    examples/release/v02-production-auth-request-boundary-runtime-hold.json|\
+    examples/release/v02-production-auth-request-identity-boundary-closeout.json|\
+    examples/release/v02-production-auth-request-identity-stabilization-authorization.json|\
+    examples/release/v02-production-auth-request-identity-stabilization-explicit-approval-record.json|\
+    examples/release/v02-production-auth-request-identity-stabilization-runtime-guard-renewal.json|\
+    examples/release/v02-production-auth-request-identity-stabilization-evidence-matrix.json|\
+    operator-console-static/index.html|\
+    operator-console-static/app.js|\
+    operator-console-static/README.md|\
+    operator-console-static/demo-data/production-auth-request-identity-boundary.json|\
+    operator-console-static/demo-data/production-auth-request-identity-runtime-hold.json|\
+    operator-console-static/demo-data/v02-production-auth-request-boundary-authorization.json|\
+    operator-console-static/demo-data/v02-production-auth-request-identity-stabilization-authorization.json|\
+    scripts/lib/v02_production_auth_authorization.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh|\
+    scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh|\
+    scripts/v02-production-auth-authorization-check.sh|\
+    scripts/v02-production-auth-authorization-no-go-regression.sh|\
+    scripts/v02-production-auth-stabilization-authorization-check.sh|\
+    scripts/v02-production-auth-stabilization-authorization-no-go-regression.sh|\
+    scripts/v02-production-auth-request-boundary-authorization-check.sh|\
+    scripts/v02-production-auth-request-boundary-authorization-no-go-regression.sh|\
+    scripts/production-auth-core-stabilization-no-go-regression.sh|\
+    scripts/production-auth-request-identity-check.sh|\
+    scripts/production-auth-request-identity-no-go-regression.sh|\
+    services/brain-api/tests/test_v02_production_auth_authorization_docs.py|\
+    services/brain-api/tests/test_v02_production_auth_stabilization_authorization_docs.py|\
+    services/brain-api/tests/test_v02_production_auth_request_boundary_authorization_docs.py|\
+    services/brain-api/tests/test_v02_production_auth_request_identity_stabilization_authorization_docs.py)
+      return 0
+      ;;
+    *)
       return 1
       ;;
   esac
@@ -210,6 +286,8 @@ aion156_is_scoped_request_identity_path() {
     scripts/production-auth-request-identity-check.sh|\
     scripts/production-auth-request-identity-runtime-hold.sh|\
     scripts/production-auth-request-identity-no-go-regression.sh|\
+    scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh|\
+    scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh|\
     scripts/auth-design-check.sh|\
     scripts/local-auth-check.sh|\
     scripts/production-auth-core-stabilization-check.sh|\
@@ -218,7 +296,8 @@ aion156_is_scoped_request_identity_path() {
     scripts/production-auth-core-no-go-regression.sh|\
     scripts/production-auth-core-stabilization-no-go-regression.sh|\
     scripts/v02-production-auth-request-boundary-authorization-no-go-regression.sh|\
-    scripts/lib/v02-production-auth-scan-exclusions.sh)
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    services/brain-api/tests/test_v02_production_auth_request_identity_stabilization_authorization_docs.py)
       return 0
       ;;
     *)

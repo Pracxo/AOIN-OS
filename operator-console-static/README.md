@@ -1051,3 +1051,27 @@ Safe local commands:
 ./scripts/v02-production-auth-request-boundary-authorization-no-go-regression.sh
 ./scripts/v02-production-auth-request-boundary-authorization-check.sh
 ```
+
+## AION-157 Request Identity Stabilization Authorization
+
+The static console includes read-only AION-157 evidence for the request
+identity stabilization authorization:
+
+- `demo-data/v02-production-auth-request-identity-stabilization-authorization.json`
+
+The data is synthetic and local-only. It marks `AION-155-PA-0003` as consumed
+by AION-156 PR 66 and `AION-157-PA-0004` as the only active production-auth
+authorization for future AION-158 request identity boundary stabilization. It
+keeps `production_auth_runtime_enabled=false`,
+`identity_verification_enabled=false`, `authenticated_requests_enabled=false`,
+header and cookie parsing approvals false, protected-material handling false,
+external providers false, external calls false, package files false,
+migrations false, SDK/CLI runtime surfaces false, v0.2 tag false, and v0.2
+release false.
+
+Safe local commands:
+
+```bash
+./scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh
+./scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh
+```

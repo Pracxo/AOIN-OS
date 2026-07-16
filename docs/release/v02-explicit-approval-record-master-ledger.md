@@ -27,3 +27,16 @@ correlation, tests, docs, and read-only evidence. Runtime authentication,
 identity verification, authenticated requests, protected-material handling,
 provider integration, external calls, endpoints, package files, migrations,
 SDK/CLI runtime surfaces, v0.2 tags, and v0.2 releases remain blocked.
+
+## AION-157 Request Identity Stabilization Authorization
+
+AION-157 closes `AION-155-PA-0003` as consumed by AION-156 PR 66 and creates
+`AION-157-PA-0004` for future AION-158 request identity boundary stabilization.
+The approval permits only pure ASGI migration, middleware-order hardening,
+streaming and request-body preservation, cancellation and disconnect handling,
+non-HTTP bypass, request-state integrity, duplicate-registration protection,
+concurrency/reentrancy hardening, state-leakage regression, evidence
+idempotency, diagnostic hardening, performance smoke tests, documentation, and
+read-only evidence. Runtime authentication, protected material, providers,
+network calls, endpoints, packages, migrations, SDK/CLI runtime surfaces, tags,
+and releases remain blocked.

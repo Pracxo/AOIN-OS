@@ -2549,3 +2549,19 @@ request-state evidence when explicitly registered, and adds no public auth
 route, provider integration, credential handling, token handling, session
 handling, SDK runtime surface, CLI runtime command, package, migration, v0.2 tag,
 or v0.2 release.
+
+## AION-157 Request Identity Stabilization Architecture
+
+AION-157 does not change architecture code. It records that AION-156 delivered
+the disabled request identity boundary and closes `AION-155-PA-0003` as
+historical consumed evidence. `AION-157-PA-0004` authorizes only future AION-158
+stabilization of the existing disabled boundary mechanics.
+
+AION-158 may migrate the middleware implementation toward pure ASGI to reduce
+BaseHTTPMiddleware risk around streaming, cancellation, receive/send
+invariants, and non-HTTP scope bypass. It must preserve
+RequestContextMiddleware ownership of request ID, trace ID, correlation ID, API
+audit, telemetry, and performance sampling. It must preserve anonymous disabled
+identity and may not add authentication, parsing, protected-material handling,
+providers, routes, SDK/CLI runtime surfaces, packages, migrations, tags, or
+releases.
