@@ -72,6 +72,23 @@ verify_aion154_commit_in_history() {
   fi
 }
 
+fetch_aion154_pr_evidence() {
+  local gh_command=(gh pr view 64 --json state,baseRefName,headRefOid,mergeCommit)
+  if ! command -v gh >/dev/null 2>&1; then
+    return 1
+  fi
+  if [[ -n "${CI:-}" || -n "${GITHUB_ACTIONS:-}" ]] && [[ -z "${GH_TOKEN:-}${GITHUB_TOKEN:-}" ]]; then
+    return 1
+  fi
+  if command -v timeout >/dev/null 2>&1; then
+    GH_PROMPT_DISABLED=1 timeout 20 "${gh_command[@]}" >/tmp/aion155-pr64.json 2>/dev/null
+  elif command -v gtimeout >/dev/null 2>&1; then
+    GH_PROMPT_DISABLED=1 gtimeout 20 "${gh_command[@]}" >/tmp/aion155-pr64.json 2>/dev/null
+  else
+    GH_PROMPT_DISABLED=1 "${gh_command[@]}" >/tmp/aion155-pr64.json 2>/dev/null
+  fi
+}
+
 required_docs=(
   docs/project-status.md
   docs/release/v02-production-auth-core-stabilization-closeout.md
@@ -116,7 +133,7 @@ AION154_GIT_HISTORY_VERIFIED=1
 verify_aion154_commit_in_history "$AION154_FEATURE_COMMIT" "feature"
 verify_aion154_commit_in_history "$AION154_MERGE_COMMIT" "merge"
 
-if command -v gh >/dev/null 2>&1 && gh pr view 64 --json state,baseRefName,headRefOid,mergeCommit >/tmp/aion155-pr64.json 2>/dev/null; then
+if fetch_aion154_pr_evidence; then
   "$PYTHON_BIN" - <<'PY'
 import json
 from pathlib import Path
