@@ -1437,3 +1437,8 @@ show that identity verification, authenticated requests, header/cookie parsing,
 protected-material handling, provider integration, external calls, runtime API
 routes, SDK/CLI runtime surfaces, v0.2 tags, and v0.2 releases remain disabled
 or absent.
+# AION-156 Static Evidence Note
+
+Static console evidence for the request identity boundary is bundled as JSON
+only. It is read-only and does not call the backend, accept credentials, accept
+tokens, parse headers, authenticate users, or expose an enable control.

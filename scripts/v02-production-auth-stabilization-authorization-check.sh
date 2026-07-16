@@ -108,19 +108,26 @@ fi
 
 python3 scripts/lib/v02_production_auth_authorization.py --repo-root "$ROOT_DIR" --mode check
 
-./scripts/production-auth-core-no-go-regression.sh
-AION_PRODUCTION_AUTH_CORE_RUNTIME_HOLD_SKIP_FULL_CHECK=1 ./scripts/production-auth-core-check.sh
-./scripts/v02-production-auth-authorization-no-go-regression.sh
-AION_V02_PRODUCTION_AUTH_RUNTIME_GUARD_HOLD_SKIP_FULL_CHECK=1 ./scripts/v02-production-auth-authorization-check.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/v02-authorization-track-closeout.sh
-./scripts/docs-check.sh
-./scripts/final-docs-audit.sh
-./scripts/verify-no-domain-drift.sh
-./scripts/boundary-check.sh
+if [[ "${AION_PRODUCTION_AUTH_REQUEST_IDENTITY_INHERITED_GATE:-}" = "1" ]]; then
+  echo "PASS: v0.2 production-auth stabilization downstream gates deferred to AION-156 outer gate"
+else
+  ./scripts/production-auth-core-no-go-regression.sh
+  AION_PRODUCTION_AUTH_CORE_RUNTIME_HOLD_SKIP_FULL_CHECK=1 ./scripts/production-auth-core-check.sh
+  ./scripts/v02-production-auth-authorization-no-go-regression.sh
+  AION_V02_PRODUCTION_AUTH_RUNTIME_GUARD_HOLD_SKIP_FULL_CHECK=1 ./scripts/v02-production-auth-authorization-check.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/v02-authorization-track-closeout.sh
+  ./scripts/docs-check.sh
+  ./scripts/final-docs-audit.sh
+  ./scripts/verify-no-domain-drift.sh
+  ./scripts/boundary-check.sh
+fi
 
 while IFS= read -r file; do
   [[ -n "$file" ]] || continue
   if aion154_is_scoped_stabilization_path "$file"; then
+    continue
+  fi
+  if aion156_is_scoped_request_identity_path "$file"; then
     continue
   fi
   echo "AION-153 must not modify production-auth source, config, or kernel wiring: $file" >&2

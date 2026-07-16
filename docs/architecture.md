@@ -2540,3 +2540,12 @@ request identity boundary work. The architecture does not add request
 middleware, identity verification, authenticated requests, provider
 integration, API routes, SDK/CLI runtime surfaces, package files, migrations,
 or release artifacts in AION-155.
+# AION-156 Request Identity Boundary Note
+
+The disabled production-auth request identity boundary is an internal
+`aion_brain.production_auth` layer. It consumes only request ID, trace ID, and
+correlation ID from `RequestContextMiddleware`, attaches anonymous disabled
+request-state evidence when explicitly registered, and adds no public auth
+route, provider integration, credential handling, token handling, session
+handling, SDK runtime surface, CLI runtime command, package, migration, v0.2 tag,
+or v0.2 release.

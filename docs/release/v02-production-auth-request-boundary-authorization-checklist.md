@@ -23,3 +23,12 @@ Status: `passed`
   prohibited.
 - [x] AION-155 changes no production-auth implementation source, kernel source,
   API route source, SDK resource source, or CLI command source.
+# AION-156 Authorization Consumption Checklist
+
+- [x] `authorization_transaction_id=AION-155-PA-0003`
+- [x] `authorization_consumed_by_task=AION-156`
+- [x] `authorization_reusable=false`
+- [x] `authorization_expires_on_aion_156_merge=true`
+- [x] Disabled request identity boundary implemented
+- [x] Runtime authentication remains disabled
+- [x] Formal lifecycle closeout deferred

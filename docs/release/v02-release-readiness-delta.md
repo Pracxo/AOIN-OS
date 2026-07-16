@@ -11,10 +11,10 @@ Status: `not-ready`
 - CI and regression infrastructure
 - Internal production-auth core
 - Production-auth stabilization
+- Disabled request identity boundary
 
 ## Remaining Blockers
 
-- Request identity boundary
 - Real identity verification
 - External provider integration
 - Protected-material handling decision
@@ -49,5 +49,5 @@ Status: `not-ready`
 ## Next Critical Path
 
 `AION-156` implements the disabled request identity boundary authorized by
-`AION-155-PA-0003`. It must remain observe-only and disabled unless a future
-authorization explicitly changes the runtime guard state.
+`AION-155-PA-0003`. The implementation remains observe-only and disabled unless
+a future authorization explicitly changes the runtime guard state.

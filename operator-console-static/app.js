@@ -162,6 +162,9 @@
     "./scripts/production-auth-core-stabilization-runtime-hold.sh",
     "./scripts/v02-production-auth-request-boundary-authorization-no-go-regression.sh",
     "./scripts/v02-production-auth-request-boundary-authorization-check.sh",
+    "./scripts/production-auth-request-identity-no-go-regression.sh",
+    "./scripts/production-auth-request-identity-check.sh",
+    "./scripts/production-auth-request-identity-runtime-hold.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -290,7 +293,9 @@
     production_auth_stabilization_authorization: "demo-data/v02-production-auth-stabilization-authorization.json",
     production_auth_core_stabilization: "demo-data/production-auth-core-stabilization.json",
     production_auth_core_stabilization_runtime_hold: "demo-data/production-auth-core-stabilization-runtime-hold.json",
-    production_auth_request_boundary_authorization: "demo-data/v02-production-auth-request-boundary-authorization.json"
+    production_auth_request_boundary_authorization: "demo-data/v02-production-auth-request-boundary-authorization.json",
+    production_auth_request_identity_boundary: "demo-data/production-auth-request-identity-boundary.json",
+    production_auth_request_identity_runtime_hold: "demo-data/production-auth-request-identity-runtime-hold.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1824,7 +1829,9 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.production_auth_stabilization_authorization),
       fetchJson(RELEASE_CANDIDATE_DEMOS.production_auth_core_stabilization),
       fetchJson(RELEASE_CANDIDATE_DEMOS.production_auth_core_stabilization_runtime_hold),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.production_auth_request_boundary_authorization)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.production_auth_request_boundary_authorization),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.production_auth_request_identity_boundary),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.production_auth_request_identity_runtime_hold)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
@@ -1900,6 +1907,8 @@
         renderReleaseCandidateEvidence("production-auth-core-stabilization", redact(payloads[70]));
         renderReleaseCandidateEvidence("production-auth-core-stabilization-runtime-hold", redact(payloads[71]));
         renderReleaseCandidateEvidence("v02-production-auth-request-boundary-authorization", redact(payloads[72]));
+        renderReleaseCandidateEvidence("production-auth-request-identity-boundary", redact(payloads[73]));
+        renderReleaseCandidateEvidence("production-auth-request-identity-runtime-hold", redact(payloads[74]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });

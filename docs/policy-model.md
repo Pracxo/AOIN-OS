@@ -2271,3 +2271,9 @@ authenticated requests, Authorization header parsing, cookie parsing,
 credentials, tokens, sessions, providers, external calls, runtime API routes,
 SDK/CLI runtime surfaces, connector runtime, operator writes, module
 activation, sandbox execution, v0.2 tags, and v0.2 releases.
+# AION-156 Policy Boundary Note
+
+The disabled request identity boundary changes no policy allow path. It creates
+no authenticated request, no runtime authorization effect, and no production
+auth route. All future real identity verification or runtime guard release
+requires separate approval beyond `AION-155-PA-0003`.

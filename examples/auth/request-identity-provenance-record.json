@@ -1,0 +1,45 @@
+{
+  "approval_record_id": "AION-155-PA-0003",
+  "authorization_scope": "disabled-request-identity-boundary",
+  "authorization_transaction_id": "AION-155-PA-0003",
+  "boundary_mode": "observe_only_disabled",
+  "boundary_version": "request-identity-boundary/v1",
+  "canonicalization_version": "production-auth-canonical-json/v1",
+  "correlation_id": "corr-example-001",
+  "created_at": "2026-07-16T10:00:00Z",
+  "fingerprint": "8aa7cbb6795142d9e956919554b9cbfdb7334927c6552c011ae9cf3377c8e65f",
+  "identity_source": "disabled_verifier",
+  "implementation_task": "AION-156",
+  "metadata": {
+    "evidence_kind": "disabled_request_identity_boundary",
+    "read_only": true,
+    "synthetic": true
+  },
+  "parent_authorization_transaction_id": "AION-153-PA-0002",
+  "provenance_id": "request-identity-provenance-example",
+  "reason_code_registry_version": "request-identity-reason-codes/v1",
+  "reason_codes": [
+    "request_identity_boundary_observe_only",
+    "production_auth_runtime_disabled",
+    "identity_verification_disabled",
+    "authenticated_requests_disabled",
+    "anonymous_disabled_context_attached",
+    "runtime_enablement_guard_locked",
+    "authorization_scope_implementation_only"
+  ],
+  "redacted": true,
+  "request_id": "request-example-001",
+  "runtime_effect": false,
+  "schema_version": "request-identity/v1",
+  "source_refs": [
+    "authorization_transaction:AION-155-PA-0003",
+    "implementation_task:AION-156",
+    "request_id:request-example-001",
+    "trace_id:trace-example-001",
+    "correlation_id:corr-example-001",
+    "boundary_version:request-identity-boundary/v1",
+    "verifier_type:disabled"
+  ],
+  "trace_id": "trace-example-001",
+  "verifier_type": "disabled"
+}

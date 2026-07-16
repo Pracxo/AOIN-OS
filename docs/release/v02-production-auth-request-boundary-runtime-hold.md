@@ -52,3 +52,8 @@ It authorizes future disabled request-state wiring only.
 - `v02_tag_created=false`
 - `v02_release_created=false`
 - `v02_release_approved=false`
+# AION-156 Runtime Hold Update
+
+AION-156 consumes `AION-155-PA-0003` without releasing runtime guards.
+`identity_verification_enabled=false`, `authenticated_requests_enabled=false`,
+`production_auth_runtime_enabled=false`, and `runtime_effect=false`.

@@ -50,3 +50,8 @@ identity verification, authenticated requests, endpoint creation, protected
 material handling, provider integration, external calls, package changes,
 migrations, SDK/CLI runtime surfaces, v0.2 tags, and v0.2 releases remain
 blocked.
+# AION-156 Request Identity Boundary Note
+
+The request identity boundary is separate from the disabled production-auth
+core. It is authorized by `AION-155-PA-0003`, implemented by `AION-156`, and
+remains observe-only, anonymous, default-off, and runtime-effect-free.

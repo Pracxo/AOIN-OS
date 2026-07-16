@@ -8,11 +8,13 @@ policies, traces, and learning signals that every future module must follow.
 
 AION Brain v0.1.0 remains the frozen release baseline. v0.2 work is in
 progress on top of that baseline. The repository now contains a stabilized
-internal disabled production-auth core, but production authentication runtime
-remains disabled.
+internal disabled production-auth core and an implemented-disabled request
+identity boundary, but production authentication runtime remains disabled.
 
 External connectors remain disabled. Operator write execution remains disabled.
 Module activation remains disabled. No v0.2 tag or release exists.
+The request identity boundary is default-off, observe-only, anonymous, and
+authorized by `AION-155-PA-0003` for `AION-156`.
 
 This repository does not implement finance, trading, IT automation, legal,
 healthcare, HR, procurement, business workflows, or any vertical module logic.

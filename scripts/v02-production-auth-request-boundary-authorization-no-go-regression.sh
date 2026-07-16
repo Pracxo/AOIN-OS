@@ -83,6 +83,9 @@ fi
 
 while IFS= read -r file; do
   [[ -n "$file" ]] || continue
+  if aion156_is_scoped_request_identity_path "$file"; then
+    continue
+  fi
   echo "AION-155 must not modify production-auth, kernel, API, SDK, or CLI implementation source: $file" >&2
   exit 1
 done < <(

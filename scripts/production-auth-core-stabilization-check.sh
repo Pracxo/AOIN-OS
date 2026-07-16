@@ -173,15 +173,19 @@ done
   services/brain-api/tests/test_production_auth_stabilization_performance.py \
   -q
 
-./scripts/production-auth-core-no-go-regression.sh
-./scripts/production-auth-core-check.sh
-./scripts/v02-production-auth-stabilization-authorization-no-go-regression.sh
-./scripts/v02-production-auth-stabilization-authorization-check.sh
-./scripts/v02-production-auth-authorization-check.sh
-./scripts/docs-check.sh
-./scripts/final-docs-audit.sh
-./scripts/verify-no-domain-drift.sh
-./scripts/boundary-check.sh
+if [[ "${AION_PRODUCTION_AUTH_REQUEST_IDENTITY_INHERITED_GATE:-}" = "1" ]]; then
+  echo "PASS: production-auth core stabilization downstream gates deferred to AION-156 outer gate"
+else
+  ./scripts/production-auth-core-no-go-regression.sh
+  ./scripts/production-auth-core-check.sh
+  ./scripts/v02-production-auth-stabilization-authorization-no-go-regression.sh
+  ./scripts/v02-production-auth-stabilization-authorization-check.sh
+  ./scripts/v02-production-auth-authorization-check.sh
+  ./scripts/docs-check.sh
+  ./scripts/final-docs-audit.sh
+  ./scripts/verify-no-domain-drift.sh
+  ./scripts/boundary-check.sh
+fi
 
 test ! -e services/brain-api/src/aion_brain/api/production_auth.py || {
   echo "production-auth API router must remain absent" >&2

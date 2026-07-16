@@ -8,10 +8,9 @@ v0.2 tag or release exists.
 
 ## Current Main Milestone
 
-The current main milestone is v0.2 production-auth stabilization closeout and
-request identity boundary authorization. AION-155 closes the consumed AION-153
-authorization and creates `AION-155-PA-0003` for the future AION-156 request
-identity boundary task.
+The current main milestone is v0.2 disabled production-auth request identity
+boundary implementation. AION-156 consumes `AION-155-PA-0003` and implements
+the request identity boundary as observe-only and disabled.
 
 ## Implemented Subsystems
 
@@ -22,6 +21,11 @@ identity boundary task.
   canonical serialization, SHA-256 fingerprints, reason-code registry,
   evidence immutability, idempotency, concurrency, redaction, diagnostic,
   kernel, route-absence, and performance-smoke coverage.
+- Disabled request identity boundary under `aion_brain.production_auth`:
+  strict contracts, provider-agnostic verifier protocol, disabled verifier,
+  deterministic disabled test verifier, anonymous request-state attachment,
+  audit/provenance correlation, diagnostics, middleware ordering coverage, and
+  runtime/no-go gates.
 
 ## Disabled Subsystems
 
@@ -34,9 +38,9 @@ identity boundary task.
 
 ## Current Authorization Transaction
 
-`AION-155-PA-0003` is the only active production-auth authorization. It is a
-single-use authorization for future `AION-156` work under
+`AION-155-PA-0003` is consumed by `AION-156` under
 `authorization_scope=disabled-request-identity-boundary`.
+`authorization_consumed_by_task=AION-156` and `authorization_reusable=false`.
 
 `AION-153-PA-0002` is historical, consumed by AION-154 PR 64, expired, inactive,
 and non-reusable. `AION-151-PA-0001` remains historical evidence consumed by
@@ -62,14 +66,16 @@ work is complete.
 
 ## Next Implementation Task
 
-The next critical-path task is `AION-156`: implement the disabled request
-identity boundary authorized by `AION-155-PA-0003`.
+The next critical-path task is formal lifecycle closeout after the AION-156
+merge. Real identity verification, external provider integration, protected
+material lifecycle, and runtime guard release remain blocked.
 
 ## Implemented Code Versus Enabled Runtime
 
 Implemented code can exist while runtime behavior remains disabled. The
 production-auth core is implemented internally and disabled. The request
-identity boundary is authorized for future implementation only. No user is
-authenticated, no headers or cookies are parsed, no credentials or tokens are
-verified or stored, no sessions are created, no providers are contacted, and no
-production-auth API route exists.
+identity boundary is implemented internally, observe-only, and disabled by
+default. No user is authenticated, no headers or cookies are parsed, no
+credentials or tokens are verified or stored, no sessions are created, no
+providers are contacted, and no production-auth or request-identity API route
+exists.

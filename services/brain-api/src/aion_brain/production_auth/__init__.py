@@ -5,11 +5,15 @@ from __future__ import annotations
 from typing import Any
 
 __all__ = [
+    "DisabledRequestIdentityVerifier",
+    "ProductionAuthRequestIdentityBoundary",
+    "ProductionAuthRequestIdentityMiddleware",
     "ProductionAuthAuditBuilder",
     "ProductionAuthCoreService",
     "ProductionAuthDiagnosticBuilder",
     "ProductionAuthPolicyEvaluator",
     "ProductionAuthProvenanceBuilder",
+    "RequestIdentityVerifier",
     "canonical_json_bytes",
     "canonical_json_text",
     "production_auth_core_config_from_settings",
@@ -27,6 +31,26 @@ def __getattr__(name: str) -> Any:
         from aion_brain.production_auth.core import ProductionAuthCoreService
 
         return ProductionAuthCoreService
+    if name == "DisabledRequestIdentityVerifier":
+        from aion_brain.production_auth.verifier import DisabledRequestIdentityVerifier
+
+        return DisabledRequestIdentityVerifier
+    if name == "ProductionAuthRequestIdentityBoundary":
+        from aion_brain.production_auth.request_boundary import (
+            ProductionAuthRequestIdentityBoundary,
+        )
+
+        return ProductionAuthRequestIdentityBoundary
+    if name == "ProductionAuthRequestIdentityMiddleware":
+        from aion_brain.production_auth.request_middleware import (
+            ProductionAuthRequestIdentityMiddleware,
+        )
+
+        return ProductionAuthRequestIdentityMiddleware
+    if name == "RequestIdentityVerifier":
+        from aion_brain.production_auth.verifier import RequestIdentityVerifier
+
+        return RequestIdentityVerifier
     if name == "ProductionAuthDiagnosticBuilder":
         from aion_brain.production_auth.diagnostics import ProductionAuthDiagnosticBuilder
 

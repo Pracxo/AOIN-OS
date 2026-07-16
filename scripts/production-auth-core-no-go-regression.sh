@@ -89,6 +89,9 @@ while IFS= read -r file; do
   if aion154_is_scoped_stabilization_path "$file"; then
     continue
   fi
+  if aion156_is_scoped_request_identity_path "$file"; then
+    continue
+  fi
   case "$file" in
     services/brain-api/src/aion_brain/production_auth/*|\
     services/brain-api/src/aion_brain/contracts/production_auth.py|\
@@ -109,6 +112,9 @@ while IFS= read -r file; do
     continue
   fi
   if aion154_is_scoped_stabilization_path "$file"; then
+    continue
+  fi
+  if aion156_is_scoped_request_identity_path "$file"; then
     continue
   fi
   case "$file" in

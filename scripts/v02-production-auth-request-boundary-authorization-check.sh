@@ -154,16 +154,23 @@ fi
 
 "$PYTHON_BIN" scripts/lib/v02_production_auth_authorization.py --repo-root "$ROOT_DIR" --mode check
 
-./scripts/production-auth-core-stabilization-check.sh
-./scripts/production-auth-core-stabilization-no-go-regression.sh
-./scripts/v02-production-auth-stabilization-authorization-check.sh
-./scripts/docs-check.sh
-./scripts/final-docs-audit.sh
-./scripts/verify-no-domain-drift.sh
-./scripts/boundary-check.sh
+if [[ "${AION_PRODUCTION_AUTH_REQUEST_IDENTITY_INHERITED_GATE:-}" = "1" ]]; then
+  echo "PASS: AION-155 request-boundary downstream gates deferred to AION-156 outer gate"
+else
+  ./scripts/production-auth-core-stabilization-check.sh
+  ./scripts/production-auth-core-stabilization-no-go-regression.sh
+  ./scripts/v02-production-auth-stabilization-authorization-check.sh
+  ./scripts/docs-check.sh
+  ./scripts/final-docs-audit.sh
+  ./scripts/verify-no-domain-drift.sh
+  ./scripts/boundary-check.sh
+fi
 
 while IFS= read -r file; do
   [[ -n "$file" ]] || continue
+  if aion156_is_scoped_request_identity_path "$file"; then
+    continue
+  fi
   echo "AION-155 must not modify production-auth, kernel, API, SDK, or CLI implementation source: $file" >&2
   exit 1
 done < <(

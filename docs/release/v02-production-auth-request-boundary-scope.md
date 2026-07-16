@@ -60,3 +60,11 @@ external services, add provider SDKs, create login/logout/callback/token/session
 or credential endpoints, add migrations, add package or lockfiles, add SDK or
 CLI runtime surfaces, enable connector runtime, enable operator writes, enable
 module activation, enable sandbox execution, or create a v0.2 tag or release.
+# AION-156 Scope Update
+
+The authorized scope is now implemented by AION-156 as
+`authorization_scope=disabled-request-identity-boundary`. The boundary is
+observe-only and disabled by default. Identity verification, authenticated
+requests, provider integration, protected-material lifecycle, runtime routes,
+SDK/CLI runtime surfaces, migrations, package files, v0.2 tags, and v0.2
+releases remain outside the scope.

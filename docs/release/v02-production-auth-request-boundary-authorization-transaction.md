@@ -97,3 +97,10 @@ No other active approved production-auth authorization may exist.
 
 The authorization expires when AION-156 merges or when
 `AION-155-PA-0003` is explicitly revoked.
+# AION-156 Consumption Note
+
+`AION-155-PA-0003` is consumed by `AION-156`.
+`authorization_consumed_by_task=AION-156`, `authorization_reusable=false`, and
+`authorization_expires_on_aion_156_merge=true`. The implementation remains
+limited to the disabled request identity boundary and does not approve runtime
+authentication.

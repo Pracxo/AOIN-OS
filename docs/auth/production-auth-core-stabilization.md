@@ -56,3 +56,9 @@ and merge commit `85584ea1976fd6f2cb73a641464b3caf87481618`. The stabilization
 authorization is now inactive, consumed, expired, and non-reusable. The
 successor authorization is `AION-155-PA-0003`, scoped only to future AION-156
 disabled request identity boundary implementation.
+# AION-156 Stabilization Carry-Forward
+
+AION-154 stabilization remains in force. AION-156 adds only the disabled
+request identity boundary and preserves canonical evidence, redaction,
+runtime-no-go, route absence, package absence, migration absence, and v0.2
+release absence.
