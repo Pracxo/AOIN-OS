@@ -89,6 +89,7 @@ while IFS= read -r file; do
 
   if ! aion154_is_scoped_stabilization_path "$file" \
     && ! aion156_is_scoped_request_identity_path "$file" \
+    && ! aion158_is_scoped_request_identity_stabilization_path "$file" \
     && ! aion151_is_scoped_authorization_path "$file"; then
     case "$file" in
       services/brain-api/src/aion_brain/production_auth/*|\
@@ -103,12 +104,18 @@ while IFS= read -r file; do
   fi
 
   if [[ -f "$file" ]]; then
+    if aion158_is_scoped_request_identity_stabilization_path "$file"; then
+      continue
+    fi
     case "$file" in
       services/brain-api/tests/*|docs/*|README.md|AGENTS.md)
         ;;
       scripts/production-auth-core-stabilization-no-go-regression.sh|\
       scripts/production-auth-core-no-go-regression.sh|\
       scripts/production-auth-request-identity-no-go-regression.sh|\
+      scripts/production-auth-request-identity-stabilization-check.sh|\
+      scripts/production-auth-request-identity-stabilization-runtime-hold.sh|\
+      scripts/production-auth-request-identity-stabilization-no-go-regression.sh|\
       scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh|\
       scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh|\
       scripts/lib/v02-production-auth-scan-exclusions.sh)

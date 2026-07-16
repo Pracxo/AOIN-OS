@@ -156,6 +156,9 @@ fi
 
 while IFS= read -r file; do
   [[ -n "$file" ]] || continue
+  if aion158_is_scoped_request_identity_stabilization_path "$file"; then
+    continue
+  fi
   echo "AION-157 must not modify request-identity, production-auth, config, kernel, API, SDK, or CLI implementation source: $file" >&2
   exit 1
 done < <(

@@ -58,3 +58,7 @@ OpenAPI security schemes, add migrations, package files, lockfiles, SDK
 runtime resources, CLI runtime commands, connector runtime, operator writes,
 module activation, sandbox execution, runtime guard release, or v0.2 tags or
 releases.
+
+AION-158 implements this scope as disabled stabilization only. The AION-157
+authorization expiry condition is satisfied by the AION-158 merge; formal
+closeout is deferred to AION-159.

@@ -18,3 +18,6 @@ Every parsing, endpoint, protected-material, provider, network, package,
 migration, SDK, CLI, connector, operator, module, sandbox, tag, and release
 value remains false. This renewal permits stabilization tests and documentation
 only; it does not release production authentication runtime behavior.
+
+AION-158 preserves this renewal while replacing the middleware with pure ASGI
+and adding runtime-hold validation.

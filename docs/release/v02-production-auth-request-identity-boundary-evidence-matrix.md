@@ -26,3 +26,12 @@ Authorization lineage: `AION-155-PA-0003` consumed by `AION-156`.
 | AION-157 authorization | `examples/release/v02-production-auth-request-identity-stabilization-authorization.json` | active for AION-158 only |
 | AION-157 gate | `scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh` | lifecycle and scope validation |
 | AION-157 no-go | `scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh` | runtime and protected-source scan |
+
+## AION-158 Stabilization Evidence
+
+| Evidence | File | State |
+| --- | --- | --- |
+| Pure ASGI middleware | `services/brain-api/src/aion_brain/production_auth/request_middleware.py` | `BaseHTTPMiddleware` removed; public class preserved |
+| Stabilization check | `scripts/production-auth-request-identity-stabilization-check.sh` | focused and inherited validation |
+| Runtime hold | `scripts/production-auth-request-identity-stabilization-runtime-hold.sh` | runtime auth remains disabled |
+| Static evidence | `operator-console-static/demo-data/production-auth-request-identity-stabilization.json` | read-only bundled JSON |

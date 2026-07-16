@@ -307,6 +307,9 @@ allowed = {
     "./scripts/v02-production-auth-request-boundary-authorization-check.sh",
     "./scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh",
     "./scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh",
+    "./scripts/production-auth-request-identity-stabilization-no-go-regression.sh",
+    "./scripts/production-auth-request-identity-stabilization-check.sh",
+    "./scripts/production-auth-request-identity-stabilization-runtime-hold.sh",
     "./scripts/docs-check.sh",
 }
 listed = set(nav.get("safe_copy_commands", []))

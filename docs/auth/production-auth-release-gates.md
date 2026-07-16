@@ -77,3 +77,20 @@ These gates verify `AION-155-PA-0003` is historical consumed evidence,
 `AION-157-PA-0004` is the only active authorization, AION-158 scope is exact,
 runtime authentication remains disabled, implementation source remains
 unchanged in AION-157, and v0.2 tag or release creation remains absent.
+
+## AION-158 Request Identity Stabilization Gates
+
+AION-158 adds:
+
+```bash
+./scripts/production-auth-request-identity-stabilization-no-go-regression.sh
+./scripts/production-auth-request-identity-stabilization-check.sh
+./scripts/production-auth-request-identity-stabilization-runtime-hold.sh
+```
+
+These gates verify the request identity middleware remains pure ASGI,
+receive/send passthrough and non-HTTP bypass are preserved, forged state is
+replaced, duplicate registration is rejected, runtime authentication remains
+disabled, public auth routes and OpenAPI security remain absent, and package
+files, lockfiles, migrations, SDK/CLI runtime surfaces, v0.2 tags, and v0.2
+releases remain absent.

@@ -1294,6 +1294,84 @@ class KernelDiagnostics:
                 "high",
                 "Request identity diagnostics expose only redacted disabled state.",
             ),
+            self._result(
+                "request_identity_middleware_pure_asgi",
+                "production_auth_request_identity",
+                (
+                    "passed"
+                    if snapshot is not None
+                    and getattr(
+                        snapshot,
+                        "request_identity_middleware_implementation",
+                        None,
+                    )
+                    == "pure_asgi"
+                    else "failed"
+                ),
+                "high",
+                "Request identity middleware uses the pure ASGI implementation.",
+            ),
+            self._result(
+                "request_identity_streaming_and_body_passthrough",
+                "production_auth_request_identity",
+                (
+                    "passed"
+                    if snapshot is not None
+                    and bool(getattr(snapshot, "streaming_passthrough", False))
+                    and bool(getattr(snapshot, "request_body_passthrough", False))
+                    else "failed"
+                ),
+                "high",
+                "Request identity middleware preserves streaming responses and bodies.",
+            ),
+            self._result(
+                "request_identity_cancellation_and_non_http_bypass",
+                "production_auth_request_identity",
+                (
+                    "passed"
+                    if snapshot is not None
+                    and bool(getattr(snapshot, "cancellation_propagation", False))
+                    and bool(getattr(snapshot, "non_http_scope_bypass", False))
+                    else "failed"
+                ),
+                "high",
+                "Request identity middleware propagates cancellation and bypasses non-HTTP scopes.",
+            ),
+            self._result(
+                "request_identity_duplicate_registration_prevented",
+                "production_auth_request_identity",
+                (
+                    "passed"
+                    if snapshot is not None
+                    and bool(getattr(snapshot, "duplicate_registration_prevented", False))
+                    else "failed"
+                ),
+                "high",
+                "Request identity middleware duplicate registration is prevented.",
+            ),
+            self._result(
+                "request_identity_stabilization_authorization",
+                "production_auth_request_identity",
+                (
+                    "passed"
+                    if snapshot is not None
+                    and getattr(
+                        snapshot,
+                        "implementation_authorization_transaction_id",
+                        None,
+                    )
+                    == "AION-155-PA-0003"
+                    and getattr(
+                        snapshot,
+                        "stabilization_authorization_transaction_id",
+                        None,
+                    )
+                    == "AION-157-PA-0004"
+                    else "failed"
+                ),
+                "high",
+                "Request identity diagnostics preserve implementation and stabilization lineage.",
+            ),
         ]
 
     def _connector_runtime_checks(self, settings: object) -> list[DiagnosticCheck]:

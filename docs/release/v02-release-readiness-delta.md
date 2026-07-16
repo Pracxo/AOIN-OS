@@ -50,7 +50,13 @@ Status: `not-ready`
 
 ## Next Critical Path
 
-`AION-158` is the next critical path. It may stabilize the disabled request
-identity boundary under `AION-157-PA-0004`; the implementation remains
-observe-only and disabled unless a future authorization explicitly changes the
-runtime guard state.
+`AION-158` is the next critical path and stabilizes the disabled request identity boundary under
+`AION-157-PA-0004` with pure ASGI middleware, receive/send passthrough,
+streaming and request-body preservation, cancellation and disconnect hardening,
+non-HTTP bypass, forged-state replacement, duplicate-registration prevention,
+concurrency isolation, deterministic evidence, diagnostics, and runtime-hold
+gates.
+
+Formal lifecycle closeout for `AION-157-PA-0004` is deferred to AION-159. The
+implementation remains observe-only and disabled unless a future authorization
+explicitly changes the runtime guard state.

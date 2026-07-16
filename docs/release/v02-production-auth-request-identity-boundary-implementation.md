@@ -42,3 +42,10 @@ AION-157 records AION-156 PR 66 as the completion point for this implementation.
 `authorization_consumed_by_merge_commit=051f6f2e8b901863f8dc9cad405e5b5401db3695`,
 `authorization_expired=true`, and `authorization_reusable=false` for
 `AION-155-PA-0003`.
+
+## AION-158 Stabilization
+
+AION-158 keeps this AION-156 implementation lineage and adds separate
+stabilization lineage from `AION-157-PA-0004`. The boundary middleware is pure
+ASGI, disabled, observe-only, and still adds no public auth route or runtime
+authentication behavior.

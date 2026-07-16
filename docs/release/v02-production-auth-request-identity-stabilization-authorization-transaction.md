@@ -60,3 +60,9 @@ v0.2 releases remain prohibited.
 
 This authorization expires when AION-158 merges or when
 `AION-157-PA-0004` is explicitly revoked.
+
+## AION-158 Implementation Note
+
+AION-158 implements the authorized stabilization scope with pure ASGI
+middleware and disabled runtime guard checks. Formal lifecycle closeout for
+`AION-157-PA-0004` remains deferred to AION-159 after merge.

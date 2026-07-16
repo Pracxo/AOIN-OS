@@ -4987,3 +4987,20 @@ Runtime remains disabled: `identity_verification_enabled=false`,
 `package_files_added=false`, `lockfiles_added=false`, `migrations_added=false`,
 `sdk_runtime_resource_added=false`, `cli_runtime_command_added=false`,
 `v02_tag_created=false`, and `v02_release_created=false`.
+
+## AION-158 Request Identity Boundary Stabilization
+
+AION-158 implements the AION-157-authorized request identity stabilization.
+`ProductionAuthRequestIdentityMiddleware` is now pure ASGI, preserves the
+public class name, passes `receive` and `send` unchanged, bypasses non-HTTP
+scopes, preserves streaming responses and request bodies, propagates
+cancellation, hardens client-disconnect state cleanup, replaces forged identity
+state, prevents duplicate registration, and keeps diagnostics redacted.
+
+Runtime remains disabled: `identity_verification_enabled=false`,
+`authenticated_requests_enabled=false`, `production_auth_runtime_enabled=false`,
+`runtime_no_go_status=true`, `runtime_implementation_approved=false`, no
+Authorization or Cookie parsing, no credentials, passwords, tokens, sessions,
+providers, external calls, auth endpoints, OpenAPI security, package files,
+lockfiles, migrations, SDK/CLI runtime surfaces, connector runtime, operator
+writes, module activation, sandbox execution, v0.2 tags, or v0.2 releases.

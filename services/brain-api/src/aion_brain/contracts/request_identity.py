@@ -21,6 +21,11 @@ APPROVAL_RECORD_ID = "AION-155-PA-0003"
 PARENT_AUTHORIZATION_TRANSACTION_ID = "AION-153-PA-0002"
 AUTHORIZATION_SCOPE = "disabled-request-identity-boundary"
 IMPLEMENTATION_TASK = "AION-156"
+STABILIZATION_AUTHORIZATION_TRANSACTION_ID = "AION-157-PA-0004"
+STABILIZATION_AUTHORIZATION_TASK = "AION-158"
+STABILIZATION_AUTHORIZATION_SCOPE = (
+    "disabled-request-identity-boundary-stabilization"
+)
 CANDIDATE_ID = "production-auth-request-identity-boundary"
 WORKSTREAM = "production-auth-request-integration"
 
@@ -112,6 +117,70 @@ class RequestIdentityVersionedModel(BaseModel):
     boundary_version: str = BOUNDARY_VERSION
     canonicalization_version: str = CANONICALIZATION_VERSION
     reason_code_registry_version: str = REASON_CODE_REGISTRY_VERSION
+    implementation_authorization_transaction_id: str = AUTHORIZATION_TRANSACTION_ID
+    implementation_authorization_task: str = IMPLEMENTATION_TASK
+    implementation_authorization_scope: str = AUTHORIZATION_SCOPE
+    stabilization_authorization_transaction_id: str = (
+        STABILIZATION_AUTHORIZATION_TRANSACTION_ID
+    )
+    stabilization_authorization_task: str = STABILIZATION_AUTHORIZATION_TASK
+    stabilization_authorization_scope: str = STABILIZATION_AUTHORIZATION_SCOPE
+    stabilization_authorization_reusable: bool = False
+    stabilization_authorization_expires_on_aion_158_merge: bool = True
+    request_identity_boundary_implemented: bool = True
+    request_identity_boundary_state: RequestIdentityBoundaryState = (
+        REQUEST_IDENTITY_BOUNDARY_STATE
+    )
+    request_identity_boundary_default_enabled: bool = False
+    request_identity_boundary_mode: RequestIdentityBoundaryMode = BOUNDARY_MODE
+    request_identity_middleware_implementation: str = "pure_asgi"
+    middleware_implementation: str = "pure_asgi"
+    streaming_passthrough: bool = True
+    request_body_passthrough: bool = True
+    cancellation_propagation: bool = True
+    non_http_scope_bypass: bool = True
+    duplicate_registration_prevented: bool = True
+    runtime_guard_hold_active: bool = True
+    runtime_no_go_status: bool = True
+    runtime_implementation_approved: bool = False
+    production_auth_runtime_enabled: bool = False
+    identity_verification_enabled: bool = False
+    authenticated_requests_enabled: bool = False
+    runtime_enablement_guard_release_approved: bool = False
+    authorization_header_parsing_enabled: bool = False
+    cookie_parsing_enabled: bool = False
+    credential_verification_enabled: bool = False
+    password_verification_enabled: bool = False
+    token_parsing_enabled: bool = False
+    token_issuance_enabled: bool = False
+    token_storage_enabled: bool = False
+    token_refresh_enabled: bool = False
+    session_creation_enabled: bool = False
+    session_storage_enabled: bool = False
+    cookie_issuance_enabled: bool = False
+    cookie_session_persistence_enabled: bool = False
+    external_identity_provider_enabled: bool = False
+    oauth_runtime_enabled: bool = False
+    oidc_runtime_enabled: bool = False
+    saml_runtime_enabled: bool = False
+    external_calls_enabled: bool = False
+    network_client_enabled: bool = False
+    provider_sdk_enabled: bool = False
+    login_endpoint_enabled: bool = False
+    logout_endpoint_enabled: bool = False
+    callback_endpoint_enabled: bool = False
+    token_endpoint_enabled: bool = False
+    session_endpoint_enabled: bool = False
+    credential_endpoint_enabled: bool = False
+    openapi_security_scheme_added: bool = False
+    runtime_api_routes_added: bool = False
+    sdk_runtime_resource_added: bool = False
+    cli_runtime_command_added: bool = False
+    package_files_added: bool = False
+    lockfiles_added: bool = False
+    migrations_added: bool = False
+    v02_tag_created: bool = False
+    v02_release_created: bool = False
 
     @field_validator("schema_version")
     @classmethod
@@ -636,6 +705,61 @@ def _require_boundary_status(model: object) -> None:
         raise ValueError("production_auth_runtime_enabled must be false")
     if not bool(getattr(model, "runtime_no_go_status", True)):
         raise ValueError("runtime_no_go_status must be true")
+    if getattr(model, "request_identity_middleware_implementation", "pure_asgi") != (
+        "pure_asgi"
+    ):
+        raise ValueError("request_identity_middleware_implementation must be pure_asgi")
+    if getattr(model, "middleware_implementation", "pure_asgi") != "pure_asgi":
+        raise ValueError("middleware_implementation must be pure_asgi")
+    for field_name in (
+        "streaming_passthrough",
+        "request_body_passthrough",
+        "cancellation_propagation",
+        "non_http_scope_bypass",
+        "duplicate_registration_prevented",
+    ):
+        if not bool(getattr(model, field_name, True)):
+            raise ValueError(f"{field_name} must be true")
+    for field_name in (
+        "runtime_implementation_approved",
+        "runtime_enablement_guard_release_approved",
+        "authorization_header_parsing_enabled",
+        "cookie_parsing_enabled",
+        "credential_verification_enabled",
+        "password_verification_enabled",
+        "token_parsing_enabled",
+        "token_issuance_enabled",
+        "token_storage_enabled",
+        "token_refresh_enabled",
+        "session_creation_enabled",
+        "session_storage_enabled",
+        "cookie_issuance_enabled",
+        "cookie_session_persistence_enabled",
+        "external_identity_provider_enabled",
+        "oauth_runtime_enabled",
+        "oidc_runtime_enabled",
+        "saml_runtime_enabled",
+        "external_calls_enabled",
+        "network_client_enabled",
+        "provider_sdk_enabled",
+        "login_endpoint_enabled",
+        "logout_endpoint_enabled",
+        "callback_endpoint_enabled",
+        "token_endpoint_enabled",
+        "session_endpoint_enabled",
+        "credential_endpoint_enabled",
+        "openapi_security_scheme_added",
+        "runtime_api_routes_added",
+        "sdk_runtime_resource_added",
+        "cli_runtime_command_added",
+        "package_files_added",
+        "lockfiles_added",
+        "migrations_added",
+        "v02_tag_created",
+        "v02_release_created",
+    ):
+        if bool(getattr(model, field_name, False)):
+            raise ValueError(f"{field_name} must be false")
 
 
 def _require_redacted_runtime_hold(model: object) -> None:
@@ -643,6 +767,10 @@ def _require_redacted_runtime_hold(model: object) -> None:
         raise ValueError("runtime_effect must be false")
     if not bool(getattr(model, "redacted", True)):
         raise ValueError("redacted must be true")
+    if not bool(getattr(model, "runtime_guard_hold_active", True)):
+        raise ValueError("runtime_guard_hold_active must be true")
+    if not bool(getattr(model, "runtime_no_go_status", True)):
+        raise ValueError("runtime_no_go_status must be true")
     if getattr(model, "authorization_transaction_id", AUTHORIZATION_TRANSACTION_ID) != (
         AUTHORIZATION_TRANSACTION_ID
     ):
@@ -659,6 +787,113 @@ def _require_redacted_runtime_hold(model: object) -> None:
         raise ValueError("implementation_task must be AION-156")
     if getattr(model, "authorization_scope", AUTHORIZATION_SCOPE) != AUTHORIZATION_SCOPE:
         raise ValueError("authorization_scope must be disabled-request-identity-boundary")
+    if getattr(
+        model,
+        "implementation_authorization_transaction_id",
+        AUTHORIZATION_TRANSACTION_ID,
+    ) != AUTHORIZATION_TRANSACTION_ID:
+        raise ValueError(
+            "implementation_authorization_transaction_id must be AION-155-PA-0003"
+        )
+    if getattr(model, "implementation_authorization_task", IMPLEMENTATION_TASK) != (
+        IMPLEMENTATION_TASK
+    ):
+        raise ValueError("implementation_authorization_task must be AION-156")
+    if getattr(model, "implementation_authorization_scope", AUTHORIZATION_SCOPE) != (
+        AUTHORIZATION_SCOPE
+    ):
+        raise ValueError(
+            "implementation_authorization_scope must be disabled-request-identity-boundary"
+        )
+    if getattr(
+        model,
+        "stabilization_authorization_transaction_id",
+        STABILIZATION_AUTHORIZATION_TRANSACTION_ID,
+    ) != STABILIZATION_AUTHORIZATION_TRANSACTION_ID:
+        raise ValueError(
+            "stabilization_authorization_transaction_id must be AION-157-PA-0004"
+        )
+    if getattr(
+        model,
+        "stabilization_authorization_task",
+        STABILIZATION_AUTHORIZATION_TASK,
+    ) != STABILIZATION_AUTHORIZATION_TASK:
+        raise ValueError("stabilization_authorization_task must be AION-158")
+    if getattr(
+        model,
+        "stabilization_authorization_scope",
+        STABILIZATION_AUTHORIZATION_SCOPE,
+    ) != STABILIZATION_AUTHORIZATION_SCOPE:
+        raise ValueError(
+            "stabilization_authorization_scope must be "
+            "disabled-request-identity-boundary-stabilization"
+        )
+    if bool(getattr(model, "stabilization_authorization_reusable", False)):
+        raise ValueError("stabilization_authorization_reusable must be false")
+    if not bool(
+        getattr(model, "stabilization_authorization_expires_on_aion_158_merge", True)
+    ):
+        raise ValueError(
+            "stabilization_authorization_expires_on_aion_158_merge must be true"
+        )
+    if getattr(model, "request_identity_middleware_implementation", "pure_asgi") != (
+        "pure_asgi"
+    ):
+        raise ValueError("request_identity_middleware_implementation must be pure_asgi")
+    if getattr(model, "middleware_implementation", "pure_asgi") != "pure_asgi":
+        raise ValueError("middleware_implementation must be pure_asgi")
+    for field_name in (
+        "streaming_passthrough",
+        "request_body_passthrough",
+        "cancellation_propagation",
+        "non_http_scope_bypass",
+        "duplicate_registration_prevented",
+    ):
+        if not bool(getattr(model, field_name, True)):
+            raise ValueError(f"{field_name} must be true")
+    for field_name in (
+        "runtime_implementation_approved",
+        "production_auth_runtime_enabled",
+        "identity_verification_enabled",
+        "authenticated_requests_enabled",
+        "runtime_enablement_guard_release_approved",
+        "authorization_header_parsing_enabled",
+        "cookie_parsing_enabled",
+        "credential_verification_enabled",
+        "password_verification_enabled",
+        "token_parsing_enabled",
+        "token_issuance_enabled",
+        "token_storage_enabled",
+        "token_refresh_enabled",
+        "session_creation_enabled",
+        "session_storage_enabled",
+        "cookie_issuance_enabled",
+        "cookie_session_persistence_enabled",
+        "external_identity_provider_enabled",
+        "oauth_runtime_enabled",
+        "oidc_runtime_enabled",
+        "saml_runtime_enabled",
+        "external_calls_enabled",
+        "network_client_enabled",
+        "provider_sdk_enabled",
+        "login_endpoint_enabled",
+        "logout_endpoint_enabled",
+        "callback_endpoint_enabled",
+        "token_endpoint_enabled",
+        "session_endpoint_enabled",
+        "credential_endpoint_enabled",
+        "openapi_security_scheme_added",
+        "runtime_api_routes_added",
+        "sdk_runtime_resource_added",
+        "cli_runtime_command_added",
+        "package_files_added",
+        "lockfiles_added",
+        "migrations_added",
+        "v02_tag_created",
+        "v02_release_created",
+    ):
+        if bool(getattr(model, field_name, False)):
+            raise ValueError(f"{field_name} must be false")
 
 
 def _reject_protected_material(value: object) -> None:
@@ -716,6 +951,9 @@ __all__ = [
     "REQUEST_IDENTITY_BOUNDARY_STATE",
     "REQUIRED_REASON_CODES",
     "SCHEMA_VERSION",
+    "STABILIZATION_AUTHORIZATION_SCOPE",
+    "STABILIZATION_AUTHORIZATION_TASK",
+    "STABILIZATION_AUTHORIZATION_TRANSACTION_ID",
     "WORKSTREAM",
     "RequestIdentityAuditEvent",
     "RequestIdentityAuditEventType",

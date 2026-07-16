@@ -178,6 +178,9 @@ def test_navigation_map_and_accessibility_result_are_valid() -> None:
         "./scripts/v02-production-auth-request-boundary-authorization-check.sh",
         "./scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh",
         "./scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh",
+        "./scripts/production-auth-request-identity-stabilization-no-go-regression.sh",
+        "./scripts/production-auth-request-identity-stabilization-check.sh",
+        "./scripts/production-auth-request-identity-stabilization-runtime-hold.sh",
         "./scripts/docs-check.sh",
     }
     assert set(nav["safe_copy_commands"]) == allowed_commands
@@ -339,6 +342,9 @@ def test_static_console_has_navigation_accessibility_and_safe_command_copy() -> 
             "./scripts/v02-production-auth-request-boundary-authorization-check.sh",
             "./scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh",
             "./scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh",
+            "./scripts/production-auth-request-identity-stabilization-no-go-regression.sh",
+            "./scripts/production-auth-request-identity-stabilization-check.sh",
+            "./scripts/production-auth-request-identity-stabilization-runtime-hold.sh",
             "./scripts/docs-check.sh",
         }
 

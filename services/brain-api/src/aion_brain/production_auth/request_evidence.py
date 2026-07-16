@@ -10,6 +10,8 @@ from aion_brain.contracts.request_identity import (
     BOUNDARY_VERSION,
     IMPLEMENTATION_TASK,
     REQUIRED_REASON_CODES,
+    STABILIZATION_AUTHORIZATION_TASK,
+    STABILIZATION_AUTHORIZATION_TRANSACTION_ID,
     RequestIdentityAuditEvent,
     RequestIdentityAuditEventType,
     RequestIdentityBoundaryStatus,
@@ -82,6 +84,8 @@ def build_request_identity_provenance_record(
     source_refs = [
         f"authorization_transaction:{AUTHORIZATION_TRANSACTION_ID}",
         f"implementation_task:{IMPLEMENTATION_TASK}",
+        f"stabilization_authorization_transaction:{STABILIZATION_AUTHORIZATION_TRANSACTION_ID}",
+        f"stabilization_authorization_task:{STABILIZATION_AUTHORIZATION_TASK}",
         f"request_id:{verification.request_id}",
         f"boundary_version:{BOUNDARY_VERSION}",
         f"verifier_type:{verifier_type}",
@@ -100,7 +104,11 @@ def build_request_identity_provenance_record(
         identity_source=verification.identity_source,
         reason_codes=tuple(REQUIRED_REASON_CODES),
         created_at=clock(),
-        metadata=metadata or {"evidence_kind": "disabled_request_identity_boundary"},
+        metadata=metadata
+        or {
+            "evidence_kind": "disabled_request_identity_boundary",
+            "middleware_implementation": "pure_asgi",
+        },
     )
 
 
@@ -118,7 +126,12 @@ def build_request_identity_status(
         request_identity_boundary_registered=registered,
         reason_codes=tuple(REQUIRED_REASON_CODES),
         created_at=clock(),
-        metadata=metadata or {"runtime_surface": "absent"},
+        metadata=metadata
+        or {
+            "runtime_surface": "absent",
+            "middleware_implementation": "pure_asgi",
+            "duplicate_registration_prevented": True,
+        },
     )
 
 
@@ -139,7 +152,16 @@ def build_request_identity_diagnostic_snapshot(
         reason_codes=tuple(REQUIRED_REASON_CODES),
         blocker_count=len(REQUIRED_REASON_CODES),
         created_at=clock(),
-        metadata=metadata or {"diagnostics": "redacted"},
+        metadata=metadata
+        or {
+            "diagnostics": "redacted",
+            "middleware_implementation": "pure_asgi",
+            "streaming_passthrough": True,
+            "request_body_passthrough": True,
+            "cancellation_propagation": True,
+            "non_http_scope_bypass": True,
+            "duplicate_registration_prevented": True,
+        },
     )
 
 

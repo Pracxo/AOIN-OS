@@ -18,6 +18,7 @@ __all__ = [
     "canonical_json_text",
     "production_auth_core_config_from_settings",
     "reason_code_registry_payload",
+    "register_production_auth_request_identity_middleware",
     "sha256_fingerprint",
 ]
 
@@ -47,6 +48,12 @@ def __getattr__(name: str) -> Any:
         )
 
         return ProductionAuthRequestIdentityMiddleware
+    if name == "register_production_auth_request_identity_middleware":
+        from aion_brain.production_auth.request_middleware import (
+            register_production_auth_request_identity_middleware,
+        )
+
+        return register_production_auth_request_identity_middleware
     if name == "RequestIdentityVerifier":
         from aion_brain.production_auth.verifier import RequestIdentityVerifier
 

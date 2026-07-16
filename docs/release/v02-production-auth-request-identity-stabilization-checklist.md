@@ -20,7 +20,18 @@ Status: `passed`
 - [x] Exactly one active authorization.
 - [x] Every stabilization permission present.
 - [x] Every runtime permission false.
-- [x] Implementation source unchanged.
+- [x] `BaseHTTPMiddleware` removed from request identity middleware.
+- [x] Pure ASGI public middleware class preserved.
+- [x] RequestContextMiddleware ownership preserved.
+- [x] Streaming passthrough verified.
+- [x] Request-body passthrough verified.
+- [x] Cancellation propagation verified.
+- [x] Client-disconnect hardening verified.
+- [x] Non-HTTP scope bypass verified.
+- [x] Forged-state replacement verified.
+- [x] Duplicate registration prevention verified.
+- [x] Concurrency isolation verified.
+- [x] Evidence idempotency verified.
 - [x] Scripts executable.
 - [x] Focused tests passing.
 - [x] Full repository check required before merge.
