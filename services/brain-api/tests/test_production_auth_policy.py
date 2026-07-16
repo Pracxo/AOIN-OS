@@ -19,7 +19,7 @@ def test_production_auth_policy_evaluator_is_deterministic_and_fail_closed() -> 
     )
     request = ProductionAuthPolicyRequest(
         request_id="request-fixed",
-        requested_operation="future_callback",
+        requested_operation="policy_evaluation_preview",
         owner_scope=["workspace:main"],
     )
 
@@ -36,6 +36,6 @@ def test_production_auth_policy_request_rejects_unsafe_metadata() -> None:
     with pytest.raises(ValidationError):
         ProductionAuthPolicyRequest(
             request_id="request-unsafe",
-            requested_operation="future_status",
+            requested_operation="core_status_read",
             metadata={"session_token": "demo"},
         )

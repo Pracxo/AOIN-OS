@@ -45,9 +45,18 @@ changed_file_list="$(mktemp)"
 trap 'rm -f "$changed_file_list"' EXIT
 
 if [[ -n "$base_ref" ]]; then
-  git diff --name-only --diff-filter=ACMRT "$base_ref" HEAD -- > "$changed_file_list"
+  {
+    git diff --name-only --diff-filter=ACMRT "$base_ref" HEAD --
+    git diff --name-only --diff-filter=ACMRT HEAD --
+    git diff --cached --name-only --diff-filter=ACMRT --
+    git ls-files --others --exclude-standard --
+  } | sort -u > "$changed_file_list"
 else
-  : > "$changed_file_list"
+  {
+    git diff --name-only --diff-filter=ACMRT HEAD --
+    git diff --cached --name-only --diff-filter=ACMRT --
+    git ls-files --others --exclude-standard --
+  } | sort -u > "$changed_file_list"
 fi
 
 test ! -e services/brain-api/src/aion_brain/api/production_auth.py || {
@@ -77,6 +86,19 @@ while IFS= read -r file; do
       exit 1
       ;;
   esac
+  if aion154_is_scoped_stabilization_path "$file"; then
+    continue
+  fi
+  case "$file" in
+    services/brain-api/src/aion_brain/production_auth/*|\
+    services/brain-api/src/aion_brain/contracts/production_auth.py|\
+    services/brain-api/src/aion_brain/config.py|\
+    services/brain-api/src/aion_brain/kernel/container.py|\
+    services/brain-api/src/aion_brain/kernel/diagnostics.py)
+      echo "production-auth source, config, or kernel changes are forbidden for AION-152: $file" >&2
+      exit 1
+      ;;
+  esac
 done < "$changed_file_list"
 
 changed_existing_files="$(mktemp)"
@@ -86,7 +108,12 @@ while IFS= read -r file; do
   if aion151_is_scoped_authorization_path "$file"; then
     continue
   fi
+  if aion154_is_scoped_stabilization_path "$file"; then
+    continue
+  fi
   case "$file" in
+    # Exact self-scan exemptions keep authorized validation-script edits from
+    # failing on their own guard text while continuing to scan the rest of scripts/.
     scripts/production-auth-core-check.sh|scripts/production-auth-core-no-go-regression.sh)
       continue
       ;;

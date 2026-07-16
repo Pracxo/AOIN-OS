@@ -7,7 +7,11 @@ from datetime import datetime
 from uuid import uuid4
 
 from aion_brain.contracts.production_auth import (
+    AUTHORIZATION_SCOPE,
     AUTHORIZATION_TRANSACTION_ID,
+    STABILIZATION_AUTHORIZATION_SCOPE,
+    STABILIZATION_AUTHORIZATION_TASK,
+    STABILIZATION_AUTHORIZATION_TRANSACTION_ID,
     ProductionAuthAuditEvent,
     ProductionAuthAuditEventType,
     ProductionAuthPolicyDecision,
@@ -45,9 +49,16 @@ class ProductionAuthAuditBuilder:
             runtime_effect=False,
             redacted=True,
             authorization_transaction_id=AUTHORIZATION_TRANSACTION_ID,
+            authorization_scope=AUTHORIZATION_SCOPE,
+            stabilization_authorization_transaction_id=(
+                STABILIZATION_AUTHORIZATION_TRANSACTION_ID
+            ),
+            stabilization_authorization_task=STABILIZATION_AUTHORIZATION_TASK,
+            stabilization_authorization_scope=STABILIZATION_AUTHORIZATION_SCOPE,
             created_at=self._clock(),
             metadata={
                 "policy_version": decision.policy_version,
+                "decision_fingerprint": decision.fingerprint or "",
                 **(metadata or {}),
             },
         )

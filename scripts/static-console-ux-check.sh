@@ -300,6 +300,9 @@ allowed = {
     "./scripts/v02-production-auth-stabilization-authorization-check.sh",
     "./scripts/v02-production-auth-stabilization-runtime-guard-hold.sh",
     "./scripts/v02-production-auth-stabilization-authorization-no-go-regression.sh",
+    "./scripts/production-auth-core-stabilization-no-go-regression.sh",
+    "./scripts/production-auth-core-stabilization-check.sh",
+    "./scripts/production-auth-core-stabilization-runtime-hold.sh",
     "./scripts/docs-check.sh",
 }
 listed = set(nav.get("safe_copy_commands", []))

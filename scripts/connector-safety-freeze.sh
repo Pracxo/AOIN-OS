@@ -3,6 +3,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
+source "$ROOT_DIR/scripts/lib/immutable-tags.sh"
 
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
@@ -32,26 +33,8 @@ echo "Connector safety freeze working tree summary:"
 git status --short --branch
 
 tag_ref="unavailable"
-if git_ref_exists aion-v0.1.0; then
-  tag_ref="$(git rev-parse aion-v0.1.0)"
-  if git_ref_exists origin/main; then
-    if git merge-base --is-ancestor aion-v0.1.0 origin/main; then
-      echo "aion-v0.1.0 is in origin/main history"
-    else
-      echo "WARN: aion-v0.1.0 ancestry could not be confirmed against origin/main" >&2
-    fi
-  elif git_ref_exists main; then
-    if git merge-base --is-ancestor aion-v0.1.0 main; then
-      echo "aion-v0.1.0 is in main history"
-    else
-      echo "WARN: aion-v0.1.0 ancestry could not be confirmed against main" >&2
-    fi
-  else
-    echo "WARN: origin/main unavailable in this checkout; skipping non-release tag ancestry confirmation"
-  fi
-else
-  echo "WARN: aion-v0.1.0 tag unavailable in this checkout; skipping non-release tag ancestry confirmation"
-fi
+# aion-v0.1.0 exact-fetch and immutable SHA verification live in scripts/lib/immutable-tags.sh.
+tag_ref="$(aion_confirm_immutable_v01_tag_history)"
 
 cat <<SUMMARY
 Connector safety freeze result:

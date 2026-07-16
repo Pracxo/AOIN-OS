@@ -7,8 +7,13 @@ from datetime import datetime
 from uuid import uuid4
 
 from aion_brain.contracts.production_auth import (
+    AUTHORIZATION_SCOPE,
     AUTHORIZATION_TRANSACTION_ID,
+    POLICY_VERSION,
     REQUIRED_REASON_CODES,
+    STABILIZATION_AUTHORIZATION_SCOPE,
+    STABILIZATION_AUTHORIZATION_TASK,
+    STABILIZATION_AUTHORIZATION_TRANSACTION_ID,
     ProductionAuthCoreConfig,
     ProductionAuthPolicyDecision,
     ProductionAuthPolicyRequest,
@@ -38,11 +43,20 @@ class ProductionAuthPolicyEvaluator:
         return ProductionAuthPolicyDecision(
             decision_id=self._id_factory(),
             request_id=request.request_id,
+            requested_operation=request.requested_operation,
             outcome="blocked",
-            reason_codes=list(REQUIRED_REASON_CODES),
+            reason_codes=tuple(REQUIRED_REASON_CODES),
             runtime_effect=False,
-            policy_version="production-auth-core-v0.2-disabled",
+            policy_version=POLICY_VERSION,
             authorization_transaction_id=AUTHORIZATION_TRANSACTION_ID,
+            authorization_scope=AUTHORIZATION_SCOPE,
+            stabilization_authorization_transaction_id=(
+                STABILIZATION_AUTHORIZATION_TRANSACTION_ID
+            ),
+            stabilization_authorization_task=STABILIZATION_AUTHORIZATION_TASK,
+            stabilization_authorization_scope=STABILIZATION_AUTHORIZATION_SCOPE,
+            stabilization_authorization_reusable=False,
+            stabilization_authorization_expires_on_aion_154_merge=True,
             created_at=self._clock(),
             metadata={
                 "owner_scope": request.owner_scope,

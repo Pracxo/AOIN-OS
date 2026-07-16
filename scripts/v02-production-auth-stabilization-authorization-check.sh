@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
+source "$ROOT_DIR/scripts/lib/v02-production-auth-scan-exclusions.sh"
 
 AION_152_MERGE_COMMIT="bc0614bcde19448b2a423614836bee3c06728c98"
 
@@ -117,15 +118,21 @@ AION_AGGREGATE_GATE_RUNNING=1 ./scripts/v02-authorization-track-closeout.sh
 ./scripts/verify-no-domain-drift.sh
 ./scripts/boundary-check.sh
 
-if changed_files \
-  services/brain-api/src/aion_brain/production_auth \
-  services/brain-api/src/aion_brain/contracts/production_auth.py \
-  services/brain-api/src/aion_brain/config.py \
-  services/brain-api/src/aion_brain/kernel/container.py \
-  services/brain-api/src/aion_brain/kernel/diagnostics.py | rg -n '.'; then
-  echo "AION-153 must not modify production-auth source, config, or kernel wiring" >&2
+while IFS= read -r file; do
+  [[ -n "$file" ]] || continue
+  if aion154_is_scoped_stabilization_path "$file"; then
+    continue
+  fi
+  echo "AION-153 must not modify production-auth source, config, or kernel wiring: $file" >&2
   exit 1
-fi
+done < <(
+  changed_files \
+    services/brain-api/src/aion_brain/production_auth \
+    services/brain-api/src/aion_brain/contracts/production_auth.py \
+    services/brain-api/src/aion_brain/config.py \
+    services/brain-api/src/aion_brain/kernel/container.py \
+    services/brain-api/src/aion_brain/kernel/diagnostics.py
+)
 
 if changed_files services/brain-api/src/aion_brain/api packages/aion-sdk-python/src | rg -n '.'; then
   echo "AION-153 must not modify API routes, SDK resources, or CLI source" >&2

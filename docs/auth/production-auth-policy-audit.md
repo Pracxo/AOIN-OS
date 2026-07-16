@@ -21,4 +21,11 @@ raw identity claims, provider payloads, raw prompts, or hidden reasoning.
 
 AION-153 leaves this audit behavior unchanged. `AION-151-PA-0001` is consumed
 historical evidence after PR 62, while `AION-153-PA-0002` authorizes only
+
+## AION-154 Policy Audit Stabilization
+
+Production-auth policy audit evidence now includes canonical schema versions,
+registered reason codes, deterministic fingerprints, immutable audit metadata,
+and stabilization authorization fields. Audit events remain redacted and
+runtime-effect-free.
 future disabled production-auth core stabilization.

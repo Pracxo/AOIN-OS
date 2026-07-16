@@ -232,6 +232,8 @@ for path in sorted(demo_dir.glob("*.json")):
         "v02-production-auth-stabilization-authorization.json",
         "production-auth-core-status.json",
         "production-auth-runtime-hold.json",
+        "production-auth-core-stabilization.json",
+        "production-auth-core-stabilization-runtime-hold.json",
     }
     blocked = (
         "raw_prompt",
@@ -256,6 +258,8 @@ for path in sorted(demo_dir.glob("*.json")):
             "v02-production-auth-stabilization-authorization.json",
             "production-auth-core-status.json",
             "production-auth-runtime-hold.json",
+            "production-auth-core-stabilization.json",
+            "production-auth-core-stabilization-runtime-hold.json",
         }:
             continue
         if value in serialized:

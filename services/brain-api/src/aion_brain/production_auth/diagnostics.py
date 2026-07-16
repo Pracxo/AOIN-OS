@@ -8,6 +8,9 @@ from uuid import uuid4
 
 from aion_brain.contracts.production_auth import (
     REQUIRED_REASON_CODES,
+    STABILIZATION_AUTHORIZATION_SCOPE,
+    STABILIZATION_AUTHORIZATION_TASK,
+    STABILIZATION_AUTHORIZATION_TRANSACTION_ID,
     ProductionAuthCoreConfig,
     ProductionAuthDiagnosticSnapshot,
     utc_now,
@@ -38,14 +41,20 @@ class ProductionAuthDiagnosticBuilder:
             runtime_no_go_status=config.runtime_no_go_status,
             runtime_enabled=config.runtime_enabled,
             blocker_count=len(REQUIRED_REASON_CODES),
-            reason_codes=list(REQUIRED_REASON_CODES),
+            reason_codes=tuple(REQUIRED_REASON_CODES),
             authorization_transaction_id=config.authorization_transaction_id,
             authorization_scope=config.authorization_scope,
+            stabilization_authorization_transaction_id=(
+                STABILIZATION_AUTHORIZATION_TRANSACTION_ID
+            ),
+            stabilization_authorization_task=STABILIZATION_AUTHORIZATION_TASK,
+            stabilization_authorization_scope=STABILIZATION_AUTHORIZATION_SCOPE,
             redacted=True,
             metadata={
                 "implementation_present": config.implementation_present,
                 "authorization_consumed_by_task": config.authorization_consumed_by_task,
                 "authorization_reusable": config.authorization_reusable,
+                "stabilization_authorization_task": config.stabilization_authorization_task,
             },
             created_at=self._clock(),
         )

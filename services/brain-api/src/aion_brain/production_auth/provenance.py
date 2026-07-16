@@ -10,6 +10,9 @@ from aion_brain.contracts.production_auth import (
     AUTHORIZATION_SCOPE,
     AUTHORIZATION_TRANSACTION_ID,
     IMPLEMENTATION_TASK,
+    STABILIZATION_AUTHORIZATION_SCOPE,
+    STABILIZATION_AUTHORIZATION_TASK,
+    STABILIZATION_AUTHORIZATION_TRANSACTION_ID,
     ProductionAuthProvenanceRecord,
     utc_now,
 )
@@ -40,7 +43,14 @@ class ProductionAuthProvenanceBuilder:
             authorization_transaction_id=AUTHORIZATION_TRANSACTION_ID,
             implementation_task=IMPLEMENTATION_TASK,
             authorization_scope=AUTHORIZATION_SCOPE,
-            source_refs=source_refs,
+            stabilization_authorization_transaction_id=(
+                STABILIZATION_AUTHORIZATION_TRANSACTION_ID
+            ),
+            stabilization_authorization_task=STABILIZATION_AUTHORIZATION_TASK,
+            stabilization_authorization_scope=STABILIZATION_AUTHORIZATION_SCOPE,
+            stabilization_authorization_reusable=False,
+            stabilization_authorization_expires_on_aion_154_merge=True,
+            source_refs=tuple(source_refs),
             runtime_effect=False,
             redacted=True,
             created_at=self._clock(),

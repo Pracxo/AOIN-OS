@@ -70,6 +70,18 @@ FORBIDDEN_CHANGED_PATHS = [
     "migrations",
 ]
 
+AION154_ALLOWED_STABILIZATION_SOURCE_PATHS = {
+    "services/brain-api/src/aion_brain/contracts/production_auth.py",
+    "services/brain-api/src/aion_brain/production_auth/__init__.py",
+    "services/brain-api/src/aion_brain/production_auth/audit.py",
+    "services/brain-api/src/aion_brain/production_auth/canonical.py",
+    "services/brain-api/src/aion_brain/production_auth/core.py",
+    "services/brain-api/src/aion_brain/production_auth/diagnostics.py",
+    "services/brain-api/src/aion_brain/production_auth/policy.py",
+    "services/brain-api/src/aion_brain/production_auth/provenance.py",
+    "services/brain-api/src/aion_brain/production_auth/reason_codes.py",
+}
+
 
 def test_v02_production_auth_stabilization_docs_exist_and_define_scope() -> None:
     for relative in DOCS:
@@ -270,7 +282,7 @@ def test_v02_production_auth_stabilization_scripts_are_executable_and_pass() -> 
 
 
 def test_v02_production_auth_stabilization_does_not_change_forbidden_sources() -> None:
-    changed = _changed_files()
+    changed = _changed_files() - AION154_ALLOWED_STABILIZATION_SOURCE_PATHS
     for forbidden in FORBIDDEN_CHANGED_PATHS:
         assert not any(path == forbidden or path.startswith(f"{forbidden}/") for path in changed)
     assert not any(path.endswith("package.json") for path in changed)

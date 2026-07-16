@@ -734,6 +734,14 @@
               <h3>v0.2 Auth Stabilization</h3>
               <div class="review-checklist" id="v02-production-auth-stabilization-authorization"></div>
             </section>
+            <section class="module-subpanel" aria-label="production auth core stabilization">
+              <h3>Auth Core Stable</h3>
+              <div class="review-checklist" id="production-auth-core-stabilization"></div>
+            </section>
+            <section class="module-subpanel" aria-label="production auth core stabilization runtime hold">
+              <h3>Auth Runtime Hold</h3>
+              <div class="review-checklist" id="production-auth-core-stabilization-runtime-hold"></div>
+            </section>
           </div>
         </section>
 
@@ -1213,6 +1221,18 @@
             <article class="command-card">
               <code>./scripts/v02-production-auth-stabilization-authorization-no-go-regression.sh</code>
               <button class="copy-command" type="button" data-command="./scripts/v02-production-auth-stabilization-authorization-no-go-regression.sh">Copy local check</button>
+            </article>
+            <article class="command-card">
+              <code>./scripts/production-auth-core-stabilization-no-go-regression.sh</code>
+              <button class="copy-command" type="button" data-command="./scripts/production-auth-core-stabilization-no-go-regression.sh">Copy local check</button>
+            </article>
+            <article class="command-card">
+              <code>./scripts/production-auth-core-stabilization-check.sh</code>
+              <button class="copy-command" type="button" data-command="./scripts/production-auth-core-stabilization-check.sh">Copy local check</button>
+            </article>
+            <article class="command-card">
+              <code>./scripts/production-auth-core-stabilization-runtime-hold.sh</code>
+              <button class="copy-command" type="button" data-command="./scripts/production-auth-core-stabilization-runtime-hold.sh">Copy local check</button>
             </article>
           </div>
           <p class="copy-status" id="copy-status" aria-live="polite">

@@ -272,6 +272,10 @@ allowed_aion153_files = {
     "operator-console-static/demo-data/v02-production-auth-core-implementation-closeout.json",
     "operator-console-static/demo-data/v02-production-auth-stabilization-authorization.json",
 }
+allowed_aion154_files = {
+    "operator-console-static/demo-data/production-auth-core-stabilization.json",
+    "operator-console-static/demo-data/production-auth-core-stabilization-runtime-hold.json",
+}
 allowed_aion152_prefixes = (
     "services/brain-api/src/aion_brain/production_auth/",
 )
@@ -320,6 +324,7 @@ for relative in sorted(changed):
         or relative in allowed_aion125_files
         or relative in allowed_aion151_files
         or relative in allowed_aion153_files
+        or relative in allowed_aion154_files
         or relative in allowed_aion152_files
         or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)

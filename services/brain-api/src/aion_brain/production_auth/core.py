@@ -39,16 +39,24 @@ class ProductionAuthCoreService:
         id_factory: Callable[[str], str] | None = None,
     ) -> None:
         self._config = config
-        self._policy_evaluator = policy_evaluator or ProductionAuthPolicyEvaluator(clock=clock)
-        self._audit_builder = audit_builder or ProductionAuthAuditBuilder(clock=clock)
-        self._provenance_builder = provenance_builder or ProductionAuthProvenanceBuilder(
-            clock=clock
-        )
-        self._diagnostic_builder = diagnostic_builder or ProductionAuthDiagnosticBuilder(
-            clock=clock
-        )
         self._clock = clock
         self._id_factory = id_factory or (lambda prefix: f"{prefix}-{uuid4().hex}")
+        self._policy_evaluator = policy_evaluator or ProductionAuthPolicyEvaluator(
+            clock=clock,
+            id_factory=lambda: self._id_factory("prod-auth-decision"),
+        )
+        self._audit_builder = audit_builder or ProductionAuthAuditBuilder(
+            clock=clock,
+            id_factory=lambda: self._id_factory("prod-auth-audit"),
+        )
+        self._provenance_builder = provenance_builder or ProductionAuthProvenanceBuilder(
+            clock=clock,
+            id_factory=lambda: self._id_factory("prod-auth-provenance"),
+        )
+        self._diagnostic_builder = diagnostic_builder or ProductionAuthDiagnosticBuilder(
+            clock=clock,
+            id_factory=lambda: self._id_factory("prod-auth-diagnostic"),
+        )
 
     @property
     def config(self) -> ProductionAuthCoreConfig:
@@ -67,6 +75,22 @@ class ProductionAuthCoreService:
             authorization_reusable=self._config.authorization_reusable,
             authorization_expires_on_aion_152_merge=(
                 self._config.authorization_expires_on_aion_152_merge
+            ),
+            implementation_authorization_transaction_id=(
+                self._config.implementation_authorization_transaction_id
+            ),
+            implementation_authorization_task=self._config.implementation_authorization_task,
+            implementation_authorization_scope=self._config.implementation_authorization_scope,
+            stabilization_authorization_transaction_id=(
+                self._config.stabilization_authorization_transaction_id
+            ),
+            stabilization_authorization_task=self._config.stabilization_authorization_task,
+            stabilization_authorization_scope=self._config.stabilization_authorization_scope,
+            stabilization_authorization_reusable=(
+                self._config.stabilization_authorization_reusable
+            ),
+            stabilization_authorization_expires_on_aion_154_merge=(
+                self._config.stabilization_authorization_expires_on_aion_154_merge
             ),
             production_auth_core_implemented=self._config.production_auth_core_implemented,
             production_auth_core_state=self._config.production_auth_core_state,
@@ -113,10 +137,14 @@ class ProductionAuthCoreService:
             runtime_api_routes_added=self._config.runtime_api_routes_added,
             v02_tag_created=self._config.v02_tag_created,
             v02_release_created=self._config.v02_release_created,
-            blocker_reason_codes=list(REQUIRED_REASON_CODES),
+            blocker_reason_codes=tuple(REQUIRED_REASON_CODES),
             blocker_count=len(REQUIRED_REASON_CODES),
             redacted=True,
-            metadata={"scope": "internal", "public_route_added": False},
+            metadata={
+                "scope": "internal",
+                "public_route_added": False,
+                "authorization_lineage": "AION-151 historical plus AION-153 stabilization",
+            },
             created_at=self._clock(),
         )
 

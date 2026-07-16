@@ -145,6 +145,10 @@ allowed_review_files = {
     "scripts/module-activation-design-review.sh",
     "scripts/module-activation-no-go-regression.sh",
 }
+allowed_aion154_static_demo_files = {
+    "operator-console-static/demo-data/production-auth-core-stabilization.json",
+    "operator-console-static/demo-data/production-auth-core-stabilization-runtime-hold.json",
+}
 
 runtime_patterns = {
     "code loader": re.compile(r"\b(plugin|extension|module)[_\-\s]*(code[_\-\s]*)?loader\b", re.I),
@@ -165,7 +169,11 @@ for relative in sorted(changed):
     path = root / relative
     if not path.is_file():
         continue
-    if relative in allowed_review_files or relative.startswith(allowed_review_prefixes):
+    if (
+        relative in allowed_review_files
+        or relative in allowed_aion154_static_demo_files
+        or relative.startswith(allowed_review_prefixes)
+    ):
         continue
     if not relative.startswith(runtime_prefixes):
         continue

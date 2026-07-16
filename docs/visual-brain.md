@@ -1418,3 +1418,12 @@ The console may show `authorization_governance_baseline_complete=true` and `runt
 ## AION-151 Scoped Production Auth Authorization
 
 AION-151 adds the canonical scoped authorization transaction `AION-151-PA-0001` for `production-auth-core` and future task `AION-152`. The authorization is limited to the `disabled-production-auth-core` implementation scope. Production-auth runtime remains disabled, runtime guard releases remain false, endpoint/storage/provider/external-call approvals remain false, package and migration changes remain false, and no v0.2 tag or release is created.
+
+## AION-154 Production Auth Stabilization Evidence
+
+The visual brain may render read-only AION-154 production-auth stabilization
+evidence from static demo data. It must treat fingerprints, schema versions,
+reason codes, and stabilization lineage as evidence only. It must keep
+`production_auth_runtime_enabled=false`, `runtime_no_go_status=true`, no public
+production-auth routes, no external identity provider, no credentials or tokens,
+and no v0.2 tag or release.
