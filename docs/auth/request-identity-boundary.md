@@ -59,7 +59,7 @@ and no CLI command.
 `authorization_consumed_by_merge_commit=051f6f2e8b901863f8dc9cad405e5b5401db3695`,
 `authorization_expired=true`, and `authorization_reusable=false`.
 
-`AION-157-PA-0004` is active for AION-158
+`AION-157-PA-0004` was active for AION-158 and is now consumed by PR 68
 `disabled-request-identity-boundary-stabilization`. AION-158 may harden the
 disabled boundary mechanics, but real identity verification and authenticated
 requests remain out of scope.
@@ -71,3 +71,10 @@ preserving this disabled boundary. The public middleware class name remains
 stable, `RequestContextMiddleware` remains the request-correlation owner, and
 the identity boundary still consumes only `request_id`, `trace_id`, and
 `correlation_id`.
+
+## AION-159 Closeout
+
+AION-159 closes the AION-157 stabilization authorization as consumed by
+AION-158. Request identity remains disabled, anonymous, observe-only, and
+runtime-effect-free. The next active authorization is AION-159-PA-0005 for
+AION-160 actor-context trust-boundary remediation.

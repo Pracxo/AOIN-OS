@@ -46,3 +46,8 @@ Status: `held`
 - `v02_release_created=false`
 
 The immutable `aion-v0.1.0` baseline remains unchanged.
+
+## AION-159 Closeout State
+
+The runtime hold remains active after AION-158 merge. AION-159 creates no
+runtime guard release and no v0.2 tag or release.

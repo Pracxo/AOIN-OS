@@ -56,3 +56,11 @@ middleware still authenticates nobody, passes receive and send unchanged,
 bypasses non-HTTP scopes, preserves streaming and request bodies, propagates
 cancellation, clears state on disconnect, replaces forged identity state, and
 prevents duplicate registration.
+
+## AION-159 Runtime Hold
+
+AION-159 keeps request identity runtime disabled and closes the consumed
+AION-157 stabilization authorization. The actor-context trust-boundary
+authorization for AION-160 does not enable identity verification,
+authenticated requests, header parsing, cookie parsing, credentials, tokens,
+sessions, providers, runtime routes, SDK/CLI resources, tags, or releases.

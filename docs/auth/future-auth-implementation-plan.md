@@ -134,3 +134,12 @@ Authorization headers or cookies, verify or store credentials, issue or parse
 tokens, create sessions, contact providers, add routes, add OpenAPI security,
 add packages or lockfiles, add migrations, add SDK/CLI runtime surfaces, or
 create v0.2 tags or releases.
+
+## AION-160 Authorized Next Step
+
+AION-159 authorizes only actor-context trust-boundary remediation for AION-160.
+That work must make non-development actor-context resolution fail closed while
+preserving explicit development simulation. It is not authorization for real
+identity verification, external provider integration, protected-material
+handling, credential lifecycle, token lifecycle, session lifecycle, runtime
+guard release, or v0.2 release work.

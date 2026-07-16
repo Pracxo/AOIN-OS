@@ -5,40 +5,68 @@
   "groups": [
     {
       "name": "Platform",
-      "views": ["overview", "readiness", "release_candidate"],
+      "views": [
+        "overview",
+        "readiness",
+        "release_candidate"
+      ],
       "default_view": "overview"
     },
     {
       "name": "Modules",
-      "views": ["module_lifecycle"],
+      "views": [
+        "module_lifecycle"
+      ],
       "default_view": "module_lifecycle"
     },
     {
       "name": "Providers",
-      "views": ["model_provider_hardening"],
+      "views": [
+        "model_provider_hardening"
+      ],
       "default_view": "model_provider_hardening"
     },
     {
       "name": "Actions",
-      "views": ["operator_actions"],
+      "views": [
+        "operator_actions"
+      ],
       "default_view": "operator_actions"
     },
     {
       "name": "Auth and Sessions",
-      "views": ["overview"],
-      "panels": ["local_auth", "role_access", "local_session", "auth_runtime"],
+      "views": [
+        "overview"
+      ],
+      "panels": [
+        "local_auth",
+        "role_access",
+        "local_session",
+        "auth_runtime"
+      ],
       "default_view": "overview"
     },
     {
       "name": "Evidence",
-      "views": ["registry_integrity", "audit_provenance"],
-      "panels": ["command_cards"],
+      "views": [
+        "registry_integrity",
+        "audit_provenance"
+      ],
+      "panels": [
+        "command_cards"
+      ],
       "default_view": "registry_integrity"
     },
     {
       "name": "Safety",
-      "views": ["settings_safety", "incidents"],
-      "panels": ["forbidden_descriptors", "safety_blockers"],
+      "views": [
+        "settings_safety",
+        "incidents"
+      ],
+      "panels": [
+        "forbidden_descriptors",
+        "safety_blockers"
+      ],
       "default_view": "settings_safety"
     }
   ],
@@ -129,44 +157,46 @@
     "./scripts/v02-approval-docket-final-review.sh",
     "./scripts/v02-runtime-approval-lock-freeze.sh",
     "./scripts/v02-approval-docket-final-no-go-regression.sh",
-        "./scripts/v02-runtime-approval-board-preview-check.sh",
-        "./scripts/v02-approval-vote-record-freeze.sh",
-        "./scripts/v02-runtime-approval-board-no-go-regression.sh",
-        "./scripts/v02-runtime-approval-board-stabilization-gate.sh",
-        "./scripts/v02-approval-vote-record-stabilization-freeze.sh",
-        "./scripts/v02-runtime-approval-board-stabilization-no-go-regression.sh",
-        "./scripts/v02-runtime-approval-board-final-review.sh",
-        "./scripts/v02-implementation-go-no-go-final-freeze.sh",
-        "./scripts/v02-runtime-approval-board-final-no-go-regression.sh",
-        "./scripts/v02-implementation-authorization-preview-check.sh",
-        "./scripts/v02-runtime-enablement-guard-freeze.sh",
-        "./scripts/v02-implementation-authorization-no-go-regression.sh",
-        "./scripts/v02-explicit-approval-record-freeze.sh",
-        "./scripts/v02-implementation-authorization-stabilization-no-go-regression.sh",
-        "./scripts/v02-implementation-authorization-stabilization-gate.sh",
-        "./scripts/v02-implementation-authorization-final-review.sh",
-        "./scripts/v02-runtime-enablement-guard-final-freeze.sh",
-        "./scripts/v02-implementation-authorization-final-no-go-regression.sh",
-        "./scripts/v02-authorization-track-closeout.sh",
-        "./scripts/v02-runtime-enablement-master-lock-freeze.sh",
-        "./scripts/v02-authorization-track-closeout-no-go-regression.sh",
-        "./scripts/v02-production-auth-authorization-check.sh",
-        "./scripts/v02-production-auth-runtime-guard-hold.sh",
-        "./scripts/v02-production-auth-authorization-no-go-regression.sh",
-        "./scripts/v02-production-auth-stabilization-authorization-check.sh",
-        "./scripts/v02-production-auth-stabilization-runtime-guard-hold.sh",
-        "./scripts/v02-production-auth-stabilization-authorization-no-go-regression.sh",
-        "./scripts/production-auth-core-stabilization-no-go-regression.sh",
-        "./scripts/production-auth-core-stabilization-check.sh",
-        "./scripts/production-auth-core-stabilization-runtime-hold.sh",
-        "./scripts/v02-production-auth-request-boundary-authorization-no-go-regression.sh",
-        "./scripts/v02-production-auth-request-boundary-authorization-check.sh",
-        "./scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh",
-        "./scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh",
-        "./scripts/production-auth-request-identity-stabilization-no-go-regression.sh",
-        "./scripts/production-auth-request-identity-stabilization-check.sh",
-        "./scripts/production-auth-request-identity-stabilization-runtime-hold.sh",
-        "./scripts/docs-check.sh"
+    "./scripts/v02-runtime-approval-board-preview-check.sh",
+    "./scripts/v02-approval-vote-record-freeze.sh",
+    "./scripts/v02-runtime-approval-board-no-go-regression.sh",
+    "./scripts/v02-runtime-approval-board-stabilization-gate.sh",
+    "./scripts/v02-approval-vote-record-stabilization-freeze.sh",
+    "./scripts/v02-runtime-approval-board-stabilization-no-go-regression.sh",
+    "./scripts/v02-runtime-approval-board-final-review.sh",
+    "./scripts/v02-implementation-go-no-go-final-freeze.sh",
+    "./scripts/v02-runtime-approval-board-final-no-go-regression.sh",
+    "./scripts/v02-implementation-authorization-preview-check.sh",
+    "./scripts/v02-runtime-enablement-guard-freeze.sh",
+    "./scripts/v02-implementation-authorization-no-go-regression.sh",
+    "./scripts/v02-explicit-approval-record-freeze.sh",
+    "./scripts/v02-implementation-authorization-stabilization-no-go-regression.sh",
+    "./scripts/v02-implementation-authorization-stabilization-gate.sh",
+    "./scripts/v02-implementation-authorization-final-review.sh",
+    "./scripts/v02-runtime-enablement-guard-final-freeze.sh",
+    "./scripts/v02-implementation-authorization-final-no-go-regression.sh",
+    "./scripts/v02-authorization-track-closeout.sh",
+    "./scripts/v02-runtime-enablement-master-lock-freeze.sh",
+    "./scripts/v02-authorization-track-closeout-no-go-regression.sh",
+    "./scripts/v02-production-auth-authorization-check.sh",
+    "./scripts/v02-production-auth-runtime-guard-hold.sh",
+    "./scripts/v02-production-auth-authorization-no-go-regression.sh",
+    "./scripts/v02-production-auth-stabilization-authorization-check.sh",
+    "./scripts/v02-production-auth-stabilization-runtime-guard-hold.sh",
+    "./scripts/v02-production-auth-stabilization-authorization-no-go-regression.sh",
+    "./scripts/production-auth-core-stabilization-no-go-regression.sh",
+    "./scripts/production-auth-core-stabilization-check.sh",
+    "./scripts/production-auth-core-stabilization-runtime-hold.sh",
+    "./scripts/v02-production-auth-request-boundary-authorization-no-go-regression.sh",
+    "./scripts/v02-production-auth-request-boundary-authorization-check.sh",
+    "./scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh",
+    "./scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh",
+    "./scripts/production-auth-request-identity-stabilization-no-go-regression.sh",
+    "./scripts/production-auth-request-identity-stabilization-check.sh",
+    "./scripts/production-auth-request-identity-stabilization-runtime-hold.sh",
+    "./scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh",
+    "./scripts/v02-actor-context-trust-boundary-authorization-check.sh",
+    "./scripts/docs-check.sh"
   ],
   "forbidden_surface": {
     "write_controls_present": false,

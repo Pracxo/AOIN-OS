@@ -153,6 +153,17 @@ boundary, or expose a write action.
 It has no login form, no logout control, no credential input, no token input,
 and no session persistence.
 
+## Actor Context Trust Boundary Evidence
+
+AION-159 adds bundled read-only authorization evidence for AION-160:
+
+- `demo-data/v02-actor-context-trust-boundary-authorization.json`
+
+The evidence shows `AION-157-PA-0004` is consumed by AION-158 and
+`AION-159-PA-0005` is active for fail-closed actor-context remediation. The
+console remains static. It does not accept actor headers, authenticate users,
+grant roles or permissions, enable production auth, or expose write controls.
+
 ## Production Auth Request Identity Evidence
 
 AION-156 adds read-only bundled evidence:
@@ -1072,7 +1083,7 @@ identity stabilization authorization:
 - `demo-data/v02-production-auth-request-identity-stabilization-authorization.json`
 
 The data is synthetic and local-only. It marks `AION-155-PA-0003` as consumed
-by AION-156 PR 66 and `AION-157-PA-0004` as the only active production-auth
+by AION-156 PR 66 and `AION-157-PA-0004` as historical production-auth
 authorization for future AION-158 request identity boundary stabilization. It
 keeps `production_auth_runtime_enabled=false`,
 `identity_verification_enabled=false`, `authenticated_requests_enabled=false`,

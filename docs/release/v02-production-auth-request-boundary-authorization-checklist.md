@@ -42,6 +42,6 @@ Status: `passed`
 - [x] `authorization_consumed_by_merge_commit=051f6f2e8b901863f8dc9cad405e5b5401db3695`.
 - [x] `authorization_expired=true`.
 - [x] `authorization_reusable=false`.
-- [x] `AION-157-PA-0004` is the only active approved production-auth authorization.
+- [x] `AION-157-PA-0004` was created as the AION-158 successor authorization and is now consumed by AION-158 PR 68.
 - [x] `implementation_task=AION-158`.
 - [x] `authorization_scope=disabled-request-identity-boundary-stabilization`.

@@ -62,7 +62,7 @@ v0.2 production auth authorization check result:
 - historical implementation_task: AION-156
 - historical authorization_scope: disabled-request-identity-boundary
 - historical lifecycle: inactive, consumed, expired, non-reusable
-- active authorization_transaction_id: AION-157-PA-0004
+- active authorization_transaction_id: AION-159-PA-0005
 - active candidate_id: production-auth-request-identity-boundary-stabilization
 - active implementation_task: AION-158
 - active authorization_scope: disabled-request-identity-boundary-stabilization

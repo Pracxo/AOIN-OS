@@ -14,7 +14,7 @@ disabled and no public auth route exists.
 ## Decision
 
 AION-157 marks `AION-155-PA-0003` consumed, inactive, expired, and
-non-reusable. It creates `AION-157-PA-0004` as the only active authorization
+non-reusable. It creates `AION-157-PA-0004` as the AION-158 authorization
 for AION-158 request identity boundary stabilization.
 
 AION-158 may migrate the middleware implementation to pure ASGI if that removes

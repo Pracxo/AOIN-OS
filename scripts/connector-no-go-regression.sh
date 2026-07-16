@@ -291,6 +291,9 @@ allowed_aion156_files = {
 allowed_aion157_files = {
     "operator-console-static/demo-data/v02-production-auth-request-identity-stabilization-authorization.json",
 }
+allowed_aion159_files = {
+    "operator-console-static/demo-data/v02-actor-context-trust-boundary-authorization.json",
+}
 allowed_aion152_prefixes = (
     "services/brain-api/src/aion_brain/production_auth/",
 )
@@ -343,6 +346,7 @@ for relative in sorted(changed):
         or relative in allowed_aion155_files
         or relative in allowed_aion156_files
         or relative in allowed_aion157_files
+        or relative in allowed_aion159_files
         or relative in allowed_aion152_files
         or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)

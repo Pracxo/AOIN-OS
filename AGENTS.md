@@ -993,8 +993,9 @@ prohibited, external calls prohibited, and v0.2 tag or release creation false.
 ## AION-157 Request Identity Stabilization Authorization
 
 AION-157 marks `AION-155-PA-0003` inactive, consumed by AION-156 PR 66,
-expired, and non-reusable. It creates `AION-157-PA-0004` as the only active
-authorization for AION-158 request identity boundary stabilization.
+expired, and non-reusable. It created `AION-157-PA-0004` for AION-158 request
+identity boundary stabilization; AION-159 now marks that authorization
+inactive, consumed by AION-158 PR 68, expired, and non-reusable.
 
 Agents must not modify request identity implementation source during AION-157.
 Keep identity verification, authenticated requests, Authorization or Cookie
@@ -1020,3 +1021,19 @@ parsing, credentials, tokens, sessions, providers, endpoints, OpenAPI security,
 packages, lockfiles, migrations, SDK/CLI runtime surfaces, connector runtime,
 operator writes, module activation, sandbox execution, runtime guard release,
 v0.2 tags, or v0.2 releases.
+
+## AION-159 Actor Context Trust Boundary Authorization
+
+AION-159 marks `AION-157-PA-0004` inactive, consumed by AION-158 PR 68,
+expired, and non-reusable. It creates `AION-159-PA-0005` as the only active
+authorization for AION-160 actor-context trust-boundary remediation.
+
+Agents must not modify actor-context implementation source during AION-159:
+`identity/dev_auth.py`, production-auth source, contracts, config, kernel, API,
+API support, SDK/CLI source, package files, lockfiles, and migrations are out
+of scope. Document the current non-development identity-header trust fallback
+only as observed behavior. AION-160 owns the fail-closed remediation and must
+keep runtime authentication, credential/token/session handling, providers,
+external calls, auth endpoints, OpenAPI security, connector runtime, operator
+writes, module activation, sandbox execution, runtime guard release, v0.2
+tags, and v0.2 releases blocked.

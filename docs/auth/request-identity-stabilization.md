@@ -51,3 +51,11 @@ password, token, session, provider, network client, route, OpenAPI security
 scheme, package, lockfile, migration, SDK runtime resource, CLI runtime command,
 connector runtime, operator write, module activation, sandbox execution, v0.2
 tag, or v0.2 release is introduced.
+
+## AION-159 Closeout
+
+AION-158 stabilization is merged and `AION-157-PA-0004` is consumed, expired,
+inactive, and non-reusable. AION-159 adds no request identity implementation
+source changes. It creates the next single-use authorization,
+`AION-159-PA-0005`, for fail-closed actor-context trust-boundary remediation
+in AION-160.

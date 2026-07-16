@@ -51,3 +51,12 @@ runtime, identity verification, authenticated requests, header parsing, cookie
 parsing, endpoint creation, protected material handling, provider integration,
 package changes, migrations, SDK/CLI runtime surfaces, tags, and releases
 remain blocked.
+
+## AION-159 Status
+
+AION-159 closes `AION-157-PA-0004` after AION-158 PR 68 and creates
+`AION-159-PA-0005` for AION-160 actor-context trust-boundary remediation.
+Implementation authorization remains scoped: AION-160 may remove
+non-development trust in identity-bearing actor headers and preserve
+development simulation, but it may not enable production auth runtime or real
+identity verification.

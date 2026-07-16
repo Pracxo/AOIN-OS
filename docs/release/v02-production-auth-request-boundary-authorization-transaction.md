@@ -114,5 +114,5 @@ authentication.
 `authorization_consumed_by_merge_commit=051f6f2e8b901863f8dc9cad405e5b5401db3695`,
 `authorization_expired=true`, and `authorization_reusable=false`.
 
-The only active successor is `AION-157-PA-0004` for future AION-158
+The consumed successor is `AION-157-PA-0004` for AION-158
 `disabled-request-identity-boundary-stabilization`.

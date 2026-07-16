@@ -1457,3 +1457,12 @@ The visual surface must still show identity verification, authenticated
 requests, header and cookie parsing, protected-material handling, providers,
 external calls, runtime routes, OpenAPI security, SDK/CLI runtime surfaces,
 packages, lockfiles, migrations, tags, and releases as false or absent.
+
+## AION-159 Actor Context Evidence
+
+Static and visual evidence may show `AION-159-PA-0005` as the active
+authorization for AION-160. It must also show `AION-157-PA-0004` as consumed
+by AION-158 PR 68 and keep actor-context remediation, runtime authentication,
+identity verification, authenticated requests, production header trust,
+protected-material handling, providers, external calls, packages, migrations,
+tags, and releases in a no-go state until AION-160 lands.

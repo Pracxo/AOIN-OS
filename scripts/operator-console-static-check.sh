@@ -250,6 +250,75 @@ for path in sorted(demo_dir.glob("*.json")):
             if payload.get(key) is not False:
                 raise SystemExit(f"request identity demo flag must be false: {key}: {path}")
         continue
+    if path.name in {
+        "v02-actor-context-trust-boundary-authorization.json",
+        "v02-production-auth-request-identity-stabilization-authorization.json",
+    }:
+        if payload.get("read_only") is not True:
+            raise SystemExit(f"authorization demo must be read_only: {path}")
+        if payload.get("redaction_applied") is not True:
+            raise SystemExit(f"authorization demo must be redacted: {path}")
+        false_keys = {
+            "authenticated_actor_context_enabled",
+            "authenticated_requests_enabled",
+            "authorization_header_parsing_approved",
+            "callback_endpoint_approved",
+            "cli_runtime_command_added",
+            "connector_implementation_approved",
+            "connector_runtime_enabled",
+            "cookie_issuance_approved",
+            "cookie_parsing_approved",
+            "cookie_session_persistence_approved",
+            "credential_endpoint_approved",
+            "credential_storage_approved",
+            "credential_verification_approved",
+            "external_calls_approved",
+            "external_identity_provider_approved",
+            "identity_verification_enabled",
+            "lockfiles_added",
+            "login_endpoint_approved",
+            "logout_endpoint_approved",
+            "migrations_added",
+            "module_activation_approved",
+            "network_client_approved",
+            "non_development_identity_header_trust_enabled",
+            "oauth_runtime_approved",
+            "oidc_runtime_approved",
+            "openapi_security_scheme_added",
+            "operator_write_execution_approved",
+            "package_files_added",
+            "password_storage_approved",
+            "password_verification_approved",
+            "production_actor_header_trust_enabled",
+            "production_auth_runtime_enabled",
+            "production_identity_header_trust_approved",
+            "production_permission_header_trust_enabled",
+            "production_role_header_trust_enabled",
+            "production_security_scope_header_trust_enabled",
+            "protected_material_handling_approved",
+            "provider_runtime_approved",
+            "provider_sdk_approved",
+            "runtime_api_routes_added",
+            "runtime_effect",
+            "runtime_implementation_approved",
+            "saml_runtime_approved",
+            "sandbox_execution_approved",
+            "sdk_runtime_resource_added",
+            "session_creation_approved",
+            "session_endpoint_approved",
+            "session_storage_approved",
+            "token_endpoint_approved",
+            "token_issuance_approved",
+            "token_parsing_approved",
+            "token_refresh_approved",
+            "token_storage_approved",
+            "v02_release_created",
+            "v02_tag_created",
+        }
+        for key in false_keys:
+            if key in payload and payload.get(key) is not False:
+                raise SystemExit(f"authorization demo flag must be false: {key}: {path}")
+        continue
     if payload.get("read_only") is not True:
         raise SystemExit(f"read_only must be true: {path}")
     if payload.get("redaction_applied") is not True:
@@ -276,6 +345,7 @@ for path in sorted(demo_dir.glob("*.json")):
         "v02-production-auth-stabilization-authorization.json",
         "v02-production-auth-request-boundary-authorization.json",
         "v02-production-auth-request-identity-stabilization-authorization.json",
+        "v02-actor-context-trust-boundary-authorization.json",
         "production-auth-core-status.json",
         "production-auth-runtime-hold.json",
         "production-auth-core-stabilization.json",
@@ -306,6 +376,7 @@ for path in sorted(demo_dir.glob("*.json")):
             "v02-production-auth-stabilization-authorization.json",
             "v02-production-auth-request-boundary-authorization.json",
             "v02-production-auth-request-identity-stabilization-authorization.json",
+            "v02-actor-context-trust-boundary-authorization.json",
             "production-auth-core-status.json",
             "production-auth-runtime-hold.json",
             "production-auth-core-stabilization.json",

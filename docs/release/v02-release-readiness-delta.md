@@ -13,10 +13,11 @@ Status: `not-ready`
 - Production-auth stabilization
 - Disabled request identity boundary
 - Request identity implementation evidence
+- Request identity stabilization
 
 ## Remaining Blockers
 
-- Request identity stabilization
+- Actor-context trust-boundary remediation
 - Real identity verification
 - External provider integration
 - Protected-material handling decision
@@ -50,13 +51,12 @@ Status: `not-ready`
 
 ## Next Critical Path
 
-`AION-158` is the next critical path and stabilizes the disabled request identity boundary under
-`AION-157-PA-0004` with pure ASGI middleware, receive/send passthrough,
-streaming and request-body preservation, cancellation and disconnect hardening,
-non-HTTP bypass, forged-state replacement, duplicate-registration prevention,
-concurrency isolation, deterministic evidence, diagnostics, and runtime-hold
-gates.
+`AION-160` is the next critical path and remediates the actor-context trust
+boundary under `AION-159-PA-0005`. AION-160 must remove non-development trust
+in identity-bearing `X-AION` headers, preserve explicit development simulation,
+use RequestIdentityContext as primary identity evidence, project safe trace and
+correlation from RequestContext, and return anonymous zero-permission
+ActorContext outside development simulation.
 
-Formal lifecycle closeout for `AION-157-PA-0004` is deferred to AION-159. The
-implementation remains observe-only and disabled unless a future authorization
-explicitly changes the runtime guard state.
+The implementation remains observe-only and disabled unless a future
+authorization explicitly changes the runtime guard state.
