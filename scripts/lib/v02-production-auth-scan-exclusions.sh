@@ -24,10 +24,19 @@ aion151_is_scoped_authorization_path() {
     docs/release/v02-production-auth-stabilization-explicit-approval-record.md|\
     docs/release/v02-production-auth-stabilization-runtime-guard-renewal.md|\
     docs/release/v02-production-auth-stabilization-scope.md|\
+    docs/project-status.md|\
+    docs/release/v02-production-auth-core-stabilization-closeout.md|\
+    docs/release/v02-production-auth-request-boundary-authorization-transaction.md|\
+    docs/release/v02-production-auth-request-boundary-scope.md|\
+    docs/release/v02-production-auth-request-boundary-runtime-hold.md|\
+    docs/release/v02-production-auth-request-boundary-authorization-checklist.md|\
+    docs/release/v02-release-readiness-delta.md|\
     docs/adr/0142-v02-production-auth-implementation-authorization.md|\
     docs/adr/0144-v02-production-auth-core-stabilization-authorization.md|\
+    docs/adr/0146-v02-production-auth-request-boundary-authorization.md|\
     examples/release/v02-production-auth-authorization-evidence-matrix.json|\
     examples/release/v02-production-auth-core-implementation-closeout.json|\
+    examples/release/v02-production-auth-core-stabilization-closeout.json|\
     examples/release/v02-production-auth-explicit-approval-record.json|\
     examples/release/v02-production-auth-implementation-authorization.json|\
     examples/release/v02-production-auth-runtime-guard-hold.json|\
@@ -35,8 +44,11 @@ aion151_is_scoped_authorization_path() {
     examples/release/v02-production-auth-stabilization-authorization.json|\
     examples/release/v02-production-auth-stabilization-explicit-approval-record.json|\
     examples/release/v02-production-auth-stabilization-runtime-guard-renewal.json|\
+    examples/release/v02-production-auth-request-boundary-authorization.json|\
+    examples/release/v02-production-auth-request-boundary-runtime-hold.json|\
     operator-console-static/demo-data/v02-production-auth-authorization.json|\
     operator-console-static/demo-data/v02-production-auth-core-implementation-closeout.json|\
+    operator-console-static/demo-data/v02-production-auth-request-boundary-authorization.json|\
     operator-console-static/demo-data/v02-production-auth-runtime-guard-hold.json|\
     operator-console-static/demo-data/v02-production-auth-stabilization-authorization.json|\
     services/brain-api/tests/test_v02_production_auth_authorization_docs.py|\
@@ -46,7 +58,10 @@ aion151_is_scoped_authorization_path() {
     scripts/v02-production-auth-stabilization-authorization-check.sh|\
     scripts/v02-production-auth-stabilization-runtime-guard-hold.sh|\
     scripts/v02-production-auth-stabilization-authorization-no-go-regression.sh|\
+    scripts/v02-production-auth-request-boundary-authorization-check.sh|\
+    scripts/v02-production-auth-request-boundary-authorization-no-go-regression.sh|\
     services/brain-api/tests/test_v02_production_auth_stabilization_authorization_docs.py|\
+    services/brain-api/tests/test_v02_production_auth_request_boundary_authorization_docs.py|\
     scripts/lib/v02_production_auth_authorization.py|\
     scripts/lib/v02-production-auth-scan-exclusions.sh)
       return 0

@@ -48,3 +48,11 @@ Local gates:
 ./scripts/production-auth-core-stabilization-check.sh
 ./scripts/production-auth-core-stabilization-runtime-hold.sh
 ```
+
+## AION-155 Closeout
+
+AION-155 records AION-154 as the consumer of `AION-153-PA-0002` through PR 64
+and merge commit `85584ea1976fd6f2cb73a641464b3caf87481618`. The stabilization
+authorization is now inactive, consumed, expired, and non-reusable. The
+successor authorization is `AION-155-PA-0003`, scoped only to future AION-156
+disabled request identity boundary implementation.

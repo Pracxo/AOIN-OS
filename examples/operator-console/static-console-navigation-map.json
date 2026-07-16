@@ -159,6 +159,8 @@
         "./scripts/production-auth-core-stabilization-no-go-regression.sh",
         "./scripts/production-auth-core-stabilization-check.sh",
         "./scripts/production-auth-core-stabilization-runtime-hold.sh",
+        "./scripts/v02-production-auth-request-boundary-authorization-no-go-regression.sh",
+        "./scripts/v02-production-auth-request-boundary-authorization-check.sh",
         "./scripts/docs-check.sh"
   ],
   "forbidden_surface": {

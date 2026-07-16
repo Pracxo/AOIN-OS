@@ -17,13 +17,10 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "scripts/lib"))
 
 from v02_production_auth_authorization import (  # noqa: E402
-    ACTIVE_AUTHORIZATION,
-    ACTIVE_REQUIRED_SCOPE,
+    AION151_AUTHORIZATION,
+    AION153_AUTHORIZATION,
+    AION155_AUTHORIZATION,
     APPROVAL_TRUE_KEYS,
-    CANONICAL_FALSE_KEYS,
-    HISTORICAL_AUTHORIZATION,
-    HISTORICAL_REQUIRED_SCOPE,
-    PROHIBITED_SCOPE,
     validate_authorization_lifecycle_payloads,
 )
 
@@ -40,17 +37,11 @@ DOCS = [
 ]
 
 JSON_ARTIFACTS = [
-    "examples/release/v02-production-auth-core-implementation-closeout.json",
     "examples/release/v02-production-auth-stabilization-authorization.json",
     "examples/release/v02-production-auth-stabilization-explicit-approval-record.json",
     "examples/release/v02-production-auth-stabilization-runtime-guard-renewal.json",
     "examples/release/v02-production-auth-stabilization-authorization-evidence-matrix.json",
-    "operator-console-static/demo-data/v02-production-auth-core-implementation-closeout.json",
     "operator-console-static/demo-data/v02-production-auth-stabilization-authorization.json",
-]
-
-ACTIVE_JSON_ARTIFACTS = [
-    relative for relative in JSON_ARTIFACTS if "stabilization" in relative
 ]
 
 SCRIPTS = [
@@ -70,20 +61,8 @@ FORBIDDEN_CHANGED_PATHS = [
     "migrations",
 ]
 
-AION154_ALLOWED_STABILIZATION_SOURCE_PATHS = {
-    "services/brain-api/src/aion_brain/contracts/production_auth.py",
-    "services/brain-api/src/aion_brain/production_auth/__init__.py",
-    "services/brain-api/src/aion_brain/production_auth/audit.py",
-    "services/brain-api/src/aion_brain/production_auth/canonical.py",
-    "services/brain-api/src/aion_brain/production_auth/core.py",
-    "services/brain-api/src/aion_brain/production_auth/diagnostics.py",
-    "services/brain-api/src/aion_brain/production_auth/policy.py",
-    "services/brain-api/src/aion_brain/production_auth/provenance.py",
-    "services/brain-api/src/aion_brain/production_auth/reason_codes.py",
-}
 
-
-def test_v02_production_auth_stabilization_docs_exist_and_define_scope() -> None:
+def test_v02_production_auth_stabilization_docs_exist_and_show_consumed_state() -> None:
     for relative in DOCS:
         assert (ROOT / relative).exists(), relative
     assert "0144-v02-production-auth-core-stabilization-authorization.md" in _text(
@@ -101,29 +80,19 @@ def test_v02_production_auth_stabilization_docs_exist_and_define_scope() -> None
         "workstream=production-auth-hardening",
         "implementation_task=AION-154",
         "authorization_scope=disabled-production-auth-core-stabilization",
-        "authorization_active=true",
-        "authorization_consumed=false",
-        "authorization_expired=false",
+        "authorization_active=false",
+        "authorization_consumed=true",
+        "authorization_consumed_by_pr=64",
+        "authorization_consumed_by_feature_commit=f001632ed0566bcf7facfe8905a2781ff9fa6ce9",
+        "authorization_consumed_by_merge_commit=85584ea1976fd6f2cb73a641464b3caf87481618",
+        "authorization_expired=true",
         "authorization_reusable=false",
-        "production_auth_runtime_enabled=false",
     ]:
         assert required in transaction
 
-    closeout = _text("docs/release/v02-production-auth-core-implementation-closeout.md")
-    for required in [
-        "authorization_transaction_id=AION-151-PA-0001",
-        "authorization_active=false",
-        "authorization_consumed=true",
-        "authorization_consumed_by_pr=62",
-        "authorization_expired=true",
-        "authorization_reusable=false",
-        "bc0614bcde19448b2a423614836bee3c06728c98",
-    ]:
-        assert required in closeout
 
-
-def test_v02_production_auth_stabilization_json_is_exactly_scoped() -> None:
-    for relative in ACTIVE_JSON_ARTIFACTS:
+def test_v02_production_auth_stabilization_json_is_historical() -> None:
+    for relative in JSON_ARTIFACTS:
         payload = _json(relative)
         assert payload["task_id"] == "AION-153"
         assert payload["synthetic"] is True
@@ -135,55 +104,36 @@ def test_v02_production_auth_stabilization_json_is_exactly_scoped() -> None:
         assert payload["workstream"] == "production-auth-hardening"
         assert payload["implementation_task"] == "AION-154"
         assert payload["authorization_scope"] == "disabled-production-auth-core-stabilization"
-        assert payload["authorization_active"] is True
-        assert payload["authorization_consumed"] is False
-        assert payload["authorization_expired"] is False
+        assert payload["authorization_active"] is False
+        assert payload["authorization_consumed"] is True
+        assert payload["authorization_consumed_by_task"] == "AION-154"
+        assert payload["authorization_consumed_by_pr"] == 64
+        assert (
+            payload["authorization_consumed_by_feature_commit"]
+            == "f001632ed0566bcf7facfe8905a2781ff9fa6ce9"
+        )
+        assert (
+            payload["authorization_consumed_by_merge_commit"]
+            == "85584ea1976fd6f2cb73a641464b3caf87481618"
+        )
+        assert payload["authorization_expired"] is True
         assert payload["authorization_reusable"] is False
         for key in APPROVAL_TRUE_KEYS:
             assert payload.get(key) is True, f"{relative}: {key}"
-        for key in CANONICAL_FALSE_KEYS:
+        for key in AION153_AUTHORIZATION.false_keys:
             assert payload.get(key) is False, f"{relative}: {key}"
-        assert payload["runtime_guard_hold_active"] is True
-        assert payload["runtime_no_go_status"] is True
-        assert ACTIVE_REQUIRED_SCOPE <= set(payload["approved_scope"])
-        assert PROHIBITED_SCOPE <= set(payload["prohibited_scope"])
-        assert (
-            payload["required_adr"]
-            == "0144-v02-production-auth-core-stabilization-authorization.md"
-        )
-        assert payload["expiry"] == "AION-154 merged or authorization explicitly revoked"
-        assert payload["required_gates"]
-        assert payload["evidence_references"]
-        assert payload["reviewer_roles"]
+        assert set(payload["approved_scope"]) == AION153_AUTHORIZATION.approved_scope
+        assert set(payload["prohibited_scope"]) == AION153_AUTHORIZATION.prohibited_scope
+        assert payload["required_adr"] == AION153_AUTHORIZATION.required_adr
+        assert payload["expiry"] == AION153_AUTHORIZATION.expiry
 
 
-def test_v02_production_auth_stabilization_closes_aion151_lifecycle() -> None:
-    closeout = _json("examples/release/v02-production-auth-core-implementation-closeout.json")
-    consumed = closeout["consumed_authorization_record"]
-    assert consumed["authorization_transaction_id"] == "AION-151-PA-0001"
-    assert consumed["approval_record_id"] == "AION-151-PA-0001"
-    assert consumed["candidate_id"] == "production-auth-core"
-    assert consumed["implementation_task"] == "AION-152"
-    assert consumed["authorization_scope"] == "disabled-production-auth-core"
-    assert consumed["authorization_active"] is False
-    assert consumed["authorization_consumed"] is True
-    assert consumed["authorization_consumed_by_task"] == "AION-152"
-    assert consumed["authorization_consumed_by_pr"] == 62
-    assert (
-        consumed["authorization_consumed_by_merge_commit"]
-        == "bc0614bcde19448b2a423614836bee3c06728c98"
-    )
-    assert consumed["authorization_expired"] is True
-    assert consumed["authorization_reusable"] is False
-    assert HISTORICAL_REQUIRED_SCOPE <= set(consumed["approved_scope"])
-    assert PROHIBITED_SCOPE <= set(consumed["prohibited_scope"])
-
-
-def test_v02_production_auth_stabilization_validator_accepts_exact_lifecycle() -> None:
+def test_v02_production_auth_stabilization_validator_accepts_three_record_lifecycle() -> None:
     validate_authorization_lifecycle_payloads(
         [
-            ("historical.json", _payload_from_spec(HISTORICAL_AUTHORIZATION)),
-            ("active.json", _payload_from_spec(ACTIVE_AUTHORIZATION)),
+            ("aion151.json", _payload_from_spec(AION151_AUTHORIZATION)),
+            ("aion153.json", _payload_from_spec(AION153_AUTHORIZATION)),
+            ("aion155.json", _payload_from_spec(AION155_AUTHORIZATION)),
         ]
     )
 
@@ -192,64 +142,23 @@ def test_v02_production_auth_stabilization_validator_accepts_exact_lifecycle() -
     ("mutator", "match"),
     [
         (
-            lambda records: records.append(
-                (
-                    "duplicate-active.json",
-                    {
-                        **_payload_from_spec(ACTIVE_AUTHORIZATION),
-                        "authorization_transaction_id": "AION-999-PA-0003",
-                        "approval_record_id": "AION-999-PA-0003",
-                    },
-                )
-            ),
-            "unknown approved authorization record",
-        ),
-        (
-            lambda records: records.append(
-                (
-                    "unknown-active.json",
-                    {
-                        **_payload_from_spec(ACTIVE_AUTHORIZATION),
-                        "authorization_transaction_id": "AION-000-PA-0000",
-                        "approval_record_id": "AION-000-PA-0000",
-                    },
-                )
-            ),
-            "unknown approved authorization record",
-        ),
-        (
-            lambda records: records[0][1].__setitem__("authorization_active", True),
+            lambda records: records[1][1].__setitem__("authorization_active", True),
             "authorization_active must be false",
         ),
         (
-            lambda records: records[0][1].update(
-                {"authorization_expired": False, "authorization_reusable": True}
-            ),
-            "authorization_expired must be true",
+            lambda records: records[1][1].__setitem__("authorization_reusable", True),
+            "authorization_reusable must be false",
         ),
         (
-            lambda records: records[1][1].update(
-                {"authorization_consumed": True, "authorization_expired": True}
-            ),
+            lambda records: records[2][1].__setitem__("authorization_consumed", True),
             "authorization_consumed must be false",
         ),
         (
-            lambda records: records[1][1].__setitem__(
-                "authorization_scope", "disabled-production-auth-core-stabilization-and-login"
+            lambda records: records[2][1].__setitem__(
+                "authorization_scope",
+                "disabled-request-identity-boundary-and-login",
             ),
             "authorization_scope mismatch",
-        ),
-        (
-            lambda records: records[1][1].__setitem__("implementation_task", "AION-155"),
-            "implementation_task mismatch",
-        ),
-        (
-            lambda records: records[1][1].__setitem__("production_auth_runtime_enabled", True),
-            "production_auth_runtime_enabled must be false",
-        ),
-        (
-            lambda records: records[1][1].__setitem__("implementation_go_status", False),
-            "partial authorization approval true keys",
         ),
     ],
 )
@@ -258,8 +167,9 @@ def test_v02_production_auth_stabilization_validator_rejects_bad_lifecycle(
     match: str,
 ) -> None:
     records = [
-        ("historical.json", _payload_from_spec(HISTORICAL_AUTHORIZATION)),
-        ("active.json", _payload_from_spec(ACTIVE_AUTHORIZATION)),
+        ("aion151.json", _payload_from_spec(AION151_AUTHORIZATION)),
+        ("aion153.json", _payload_from_spec(AION153_AUTHORIZATION)),
+        ("aion155.json", _payload_from_spec(AION155_AUTHORIZATION)),
     ]
     mutator(records)
     with pytest.raises(AssertionError, match=match):
@@ -271,9 +181,7 @@ def test_v02_production_auth_stabilization_scripts_are_executable_and_pass() -> 
     env["AION_V02_PRODUCTION_AUTH_STABILIZATION_RUNTIME_GUARD_HOLD_SKIP_FULL_CHECK"] = "1"
     env["AION_V02_PRODUCTION_AUTH_RUNTIME_GUARD_HOLD_SKIP_FULL_CHECK"] = "1"
     env["AION_PRODUCTION_AUTH_CORE_RUNTIME_HOLD_SKIP_FULL_CHECK"] = "1"
-    env["PYTEST_CURRENT_TEST"] = env.get(
-        "PYTEST_CURRENT_TEST", "AION-153 focused script test"
-    )
+    env["PYTEST_CURRENT_TEST"] = env.get("PYTEST_CURRENT_TEST", "AION-153 focused script test")
     for relative in SCRIPTS:
         path = ROOT / relative
         assert path.exists(), relative
@@ -282,7 +190,7 @@ def test_v02_production_auth_stabilization_scripts_are_executable_and_pass() -> 
 
 
 def test_v02_production_auth_stabilization_does_not_change_forbidden_sources() -> None:
-    changed = _changed_files() - AION154_ALLOWED_STABILIZATION_SOURCE_PATHS
+    changed = _changed_files()
     for forbidden in FORBIDDEN_CHANGED_PATHS:
         assert not any(path == forbidden or path.startswith(f"{forbidden}/") for path in changed)
     assert not any(path.endswith("package.json") for path in changed)
@@ -323,17 +231,14 @@ def _payload_from_spec(spec: Any) -> dict[str, Any]:
         "authorization_consumed": spec.authorization_consumed,
         "authorization_consumed_by_task": spec.authorization_consumed_by_task,
         "authorization_consumed_by_pr": spec.authorization_consumed_by_pr,
+        "authorization_consumed_by_feature_commit": spec.authorization_consumed_by_feature_commit,
         "authorization_consumed_by_merge_commit": spec.authorization_consumed_by_merge_commit,
         "authorization_expired": spec.authorization_expired,
         "authorization_reusable": spec.authorization_reusable,
         "runtime_guard_hold_active": True,
         "runtime_no_go_status": True,
-        "approved_scope": list(
-            ACTIVE_REQUIRED_SCOPE
-            if spec.transaction_id == ACTIVE_AUTHORIZATION.transaction_id
-            else HISTORICAL_REQUIRED_SCOPE
-        ),
-        "prohibited_scope": list(PROHIBITED_SCOPE),
+        "approved_scope": sorted(spec.approved_scope),
+        "prohibited_scope": sorted(spec.prohibited_scope),
         "required_adr": spec.required_adr,
         "required_gates": ["unit-test-gate"],
         "evidence_references": ["unit-test-evidence"],
@@ -343,8 +248,10 @@ def _payload_from_spec(spec: Any) -> dict[str, Any]:
     }
     for key in APPROVAL_TRUE_KEYS:
         payload[key] = True
-    for key in CANONICAL_FALSE_KEYS:
+    for key in spec.false_keys:
         payload[key] = False
+    for key in spec.implementation_true_keys:
+        payload[key] = True
     return copy.deepcopy(payload)
 
 

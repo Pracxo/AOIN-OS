@@ -69,6 +69,13 @@ Instructions for future Codex runs in this repository:
   production-auth source, config, kernel wiring, API routes, SDK/CLI source,
   package files, lockfiles, migrations, runtime auth enablement, credentials,
   tokens, provider SDKs, external calls, v0.2 tags, or releases.
+- Production-auth request boundary authorization work may close consumed
+  production-auth stabilization authorization and create a scoped future
+  request-identity-boundary authorization only. It must not modify
+  production-auth implementation source, contracts, config, kernel wiring, API
+  routes, SDK/CLI source, package files, lockfiles, migrations, runtime auth
+  enablement, credentials, tokens, sessions, cookies, provider SDKs, external
+  calls, v0.2 tags, or releases.
 - v0.2 planning charter work is planning-only. It may add charter docs,
   decision frameworks, workstream maps, ADR requirements, gate dependency
   matrices, synthetic examples, static console demo data, tests, and local
@@ -963,3 +970,13 @@ Agents must keep `production_auth_runtime_enabled=false`,
 external-call flags false, no production-auth API router, no package files, no
 lockfiles, no migrations, no SDK or CLI runtime surfaces, no v0.2 tag, and no
 v0.2 release.
+
+## AION-155 Production Auth Request Boundary Authorization
+
+AION-155 closes `AION-153-PA-0002` as inactive, consumed, expired, and
+non-reusable, then creates `AION-155-PA-0003` for future AION-156 disabled
+request identity boundary work. The task is governance and evidence only. It
+must keep production-auth runtime disabled, identity verification disabled,
+authenticated requests disabled, header/cookie parsing prohibited, credential
+and token handling prohibited, sessions prohibited, provider integration
+prohibited, external calls prohibited, and v0.2 tag or release creation false.

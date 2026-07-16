@@ -1,0 +1,39 @@
+{
+  "task_id": "AION-155",
+  "record_kind": "production_auth_core_stabilization_closeout",
+  "artifact": "v02-production-auth-core-stabilization-closeout",
+  "synthetic": true,
+  "read_only": true,
+  "authorization_transaction_id": "AION-153-PA-0002",
+  "approval_record_id": "AION-153-PA-0002",
+  "parent_authorization_transaction_id": "AION-151-PA-0001",
+  "candidate_id": "production-auth-core-stabilization",
+  "workstream": "production-auth-hardening",
+  "implementation_task": "AION-154",
+  "authorization_scope": "disabled-production-auth-core-stabilization",
+  "authorization_active": false,
+  "authorization_consumed": true,
+  "authorization_consumed_by_task": "AION-154",
+  "authorization_consumed_by_pr": 64,
+  "authorization_consumed_by_feature_commit": "f001632ed0566bcf7facfe8905a2781ff9fa6ce9",
+  "authorization_consumed_by_merge_commit": "85584ea1976fd6f2cb73a641464b3caf87481618",
+  "authorization_expired": true,
+  "authorization_reusable": false,
+  "production_auth_core_state": "implemented_disabled",
+  "production_auth_runtime_enabled": false,
+  "runtime_no_go_status": true,
+  "runtime_implementation_approved": false,
+  "runtime_enablement_guard_release_approved": false,
+  "runtime_enablement_master_lock_release_approved": false,
+  "evidence_references": [
+    "docs/release/v02-production-auth-core-stabilization.md",
+    "docs/release/v02-production-auth-core-stabilization-checklist.md",
+    "docs/release/v02-production-auth-core-stabilization-closeout.md"
+  ],
+  "content_safety": [
+    "no live endpoints",
+    "no secret values",
+    "no credential values",
+    "no private reasoning"
+  ]
+}

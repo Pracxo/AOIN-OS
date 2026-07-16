@@ -8,7 +8,7 @@ import json
 import os
 import subprocess
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
@@ -28,10 +28,15 @@ class AuthorizationSpec:
     authorization_consumed: bool
     authorization_expired: bool
     authorization_reusable: bool
+    approved_scope: frozenset[str]
+    prohibited_scope: frozenset[str]
+    false_keys: frozenset[str]
     parent_authorization_transaction_id: str | None = None
     authorization_consumed_by_task: str | None = None
     authorization_consumed_by_pr: int | None = None
+    authorization_consumed_by_feature_commit: str | None = None
     authorization_consumed_by_merge_commit: str | None = None
+    implementation_true_keys: frozenset[str] = field(default_factory=frozenset)
 
     @property
     def tuple_key(self) -> tuple[str, str, str, str, str]:
@@ -45,92 +50,74 @@ class AuthorizationSpec:
 
 
 AION_152_MERGE_COMMIT = "bc0614bcde19448b2a423614836bee3c06728c98"
+AION_154_FEATURE_COMMIT = "f001632ed0566bcf7facfe8905a2781ff9fa6ce9"
+AION_154_MERGE_COMMIT = "85584ea1976fd6f2cb73a641464b3caf87481618"
 
-HISTORICAL_AUTHORIZATION = AuthorizationSpec(
-    transaction_id="AION-151-PA-0001",
-    approval_record_id="AION-151-PA-0001",
-    candidate_id="production-auth-core",
-    workstream="production-auth-implementation",
-    implementation_task="AION-152",
-    authorization_scope="disabled-production-auth-core",
-    task_id="AION-151",
-    required_adr="0142-v02-production-auth-implementation-authorization.md",
-    expiry="AION-152 merged; authorization consumed by PR 62",
-    authorization_active=False,
-    authorization_consumed=True,
-    authorization_expired=True,
-    authorization_reusable=False,
-    authorization_consumed_by_task="AION-152",
-    authorization_consumed_by_pr=62,
-    authorization_consumed_by_merge_commit=AION_152_MERGE_COMMIT,
+APPROVAL_TRUE_KEYS = frozenset(
+    {
+        "authorization_transaction_approved",
+        "explicit_approval_record_approval",
+        "implementation_authorization_approved",
+        "implementation_go_status",
+    }
 )
 
-ACTIVE_AUTHORIZATION = AuthorizationSpec(
-    transaction_id="AION-153-PA-0002",
-    approval_record_id="AION-153-PA-0002",
-    candidate_id="production-auth-core-stabilization",
-    workstream="production-auth-hardening",
-    implementation_task="AION-154",
-    authorization_scope="disabled-production-auth-core-stabilization",
-    task_id="AION-153",
-    required_adr="0144-v02-production-auth-core-stabilization-authorization.md",
-    expiry="AION-154 merged or authorization explicitly revoked",
-    authorization_active=True,
-    authorization_consumed=False,
-    authorization_expired=False,
-    authorization_reusable=False,
-    parent_authorization_transaction_id="AION-151-PA-0001",
+LEGACY_FALSE_KEYS = frozenset(
+    {
+        "implementation_no_go_status",
+        "runtime_implementation_approved",
+        "production_auth_runtime_enabled",
+        "runtime_enablement_guard_release_approved",
+        "runtime_enablement_guard_final_lock_release_approved",
+        "runtime_enablement_master_lock_release_approved",
+        "login_endpoint_approved",
+        "logout_endpoint_approved",
+        "callback_endpoint_approved",
+        "credential_storage_approved",
+        "password_storage_approved",
+        "token_storage_approved",
+        "session_storage_approved",
+        "cookie_session_persistence_approved",
+        "external_identity_provider_approved",
+        "oauth_runtime_approved",
+        "oidc_runtime_approved",
+        "saml_runtime_approved",
+        "external_calls_approved",
+        "network_client_approved",
+        "provider_sdk_approved",
+        "operator_write_execution_approved",
+        "connector_implementation_approved",
+        "connector_runtime_enabled",
+        "module_activation_approved",
+        "sandbox_execution_approved",
+        "package_files_added",
+        "lockfiles_added",
+        "migrations_added",
+        "runtime_api_routes_added",
+        "v02_tag_created",
+        "v02_release_created",
+        "v02_release_approved",
+    }
 )
 
-AUTHORIZATION_SPECS = {
-    HISTORICAL_AUTHORIZATION.transaction_id: HISTORICAL_AUTHORIZATION,
-    ACTIVE_AUTHORIZATION.transaction_id: ACTIVE_AUTHORIZATION,
-}
+REQUEST_BOUNDARY_FALSE_KEYS = LEGACY_FALSE_KEYS | frozenset(
+    {
+        "identity_verification_enabled",
+        "authenticated_requests_enabled",
+        "authorization_header_parsing_approved",
+        "cookie_parsing_approved",
+        "credential_verification_approved",
+        "token_parsing_approved",
+        "token_issuance_approved",
+        "token_refresh_approved",
+        "session_creation_approved",
+        "cookie_issuance_approved",
+    }
+)
 
-APPROVAL_TRUE_KEYS = {
-    "authorization_transaction_approved",
-    "explicit_approval_record_approval",
-    "implementation_authorization_approved",
-    "implementation_go_status",
-}
+CANONICAL_FALSE_KEYS = REQUEST_BOUNDARY_FALSE_KEYS
 
-CANONICAL_FALSE_KEYS = {
-    "implementation_no_go_status",
-    "runtime_implementation_approved",
-    "production_auth_runtime_enabled",
-    "runtime_enablement_guard_release_approved",
-    "runtime_enablement_guard_final_lock_release_approved",
-    "runtime_enablement_master_lock_release_approved",
-    "login_endpoint_approved",
-    "logout_endpoint_approved",
-    "callback_endpoint_approved",
-    "credential_storage_approved",
-    "password_storage_approved",
-    "token_storage_approved",
-    "session_storage_approved",
-    "cookie_session_persistence_approved",
-    "external_identity_provider_approved",
-    "oauth_runtime_approved",
-    "oidc_runtime_approved",
-    "saml_runtime_approved",
-    "external_calls_approved",
-    "network_client_approved",
-    "provider_sdk_approved",
-    "operator_write_execution_approved",
-    "connector_implementation_approved",
-    "connector_runtime_enabled",
-    "module_activation_approved",
-    "sandbox_execution_approved",
-    "package_files_added",
-    "lockfiles_added",
-    "migrations_added",
-    "runtime_api_routes_added",
-    "v02_tag_created",
-    "v02_release_created",
-    "v02_release_approved",
-}
-
-GLOBAL_FALSE_KEYS = (CANONICAL_FALSE_KEYS - {"implementation_no_go_status"}) | {
+GLOBAL_FALSE_KEYS = (REQUEST_BOUNDARY_FALSE_KEYS - {"implementation_no_go_status"}) | {
     "runtime_enablement_guard_release_approved",
     "runtime_enablement_master_lock_release_approved",
     "runtime_enablement_guard_final_lock_release_approved",
@@ -138,6 +125,12 @@ GLOBAL_FALSE_KEYS = (CANONICAL_FALSE_KEYS - {"implementation_no_go_status"}) | {
     "production_auth_runtime_enabled",
     "production_auth_enabled",
     "auth_runtime_enabled",
+    "identity_verification_enabled",
+    "authenticated_requests_enabled",
+    "authorization_header_parsing_approved",
+    "cookie_parsing_approved",
+    "credential_verification_approved",
+    "token_parsing_approved",
     "external_calls_enabled",
     "network_client_enabled",
     "provider_sdk_dependency_added",
@@ -161,6 +154,7 @@ GLOBAL_FALSE_KEYS = (CANONICAL_FALSE_KEYS - {"implementation_no_go_status"}) | {
     "password_storage_enabled",
     "token_issuance_enabled",
     "token_storage_enabled",
+    "token_refresh_enabled",
     "session_creation_enabled",
     "session_storage_enabled",
     "cookie_issuance_enabled",
@@ -171,54 +165,203 @@ GLOBAL_FALSE_KEYS = (CANONICAL_FALSE_KEYS - {"implementation_no_go_status"}) | {
     "saml_runtime_enabled",
 }
 
-HISTORICAL_REQUIRED_SCOPE = {
-    "internal production-auth contracts",
-    "internal production-auth configuration model",
-    "disabled-by-default feature flags",
-    "policy evaluation interfaces",
-    "audit and provenance events",
-    "redacted diagnostics",
-    "deterministic test fixtures",
-    "unit and integration tests",
-    "documentation",
-    "read-only static-console status evidence",
-}
+HISTORICAL_REQUIRED_SCOPE = frozenset(
+    {
+        "internal production-auth contracts",
+        "internal production-auth configuration model",
+        "disabled-by-default feature flags",
+        "policy evaluation interfaces",
+        "audit and provenance events",
+        "redacted diagnostics",
+        "deterministic test fixtures",
+        "unit and integration tests",
+        "documentation",
+        "read-only static-console status evidence",
+    }
+)
 
-ACTIVE_REQUIRED_SCOPE = {
-    "internal production-auth core stabilization",
-    "disabled-by-default configuration hardening",
-    "fail-closed policy stabilization",
-    "audit and provenance evidence stabilization",
-    "redacted diagnostics stabilization",
-    "deterministic stabilization tests",
-    "documentation",
-    "read-only static-console status evidence",
-}
+STABILIZATION_REQUIRED_SCOPE = frozenset(
+    {
+        "internal production-auth core stabilization",
+        "disabled-by-default configuration hardening",
+        "fail-closed policy stabilization",
+        "audit and provenance evidence stabilization",
+        "redacted diagnostics stabilization",
+        "deterministic stabilization tests",
+        "documentation",
+        "read-only static-console status evidence",
+    }
+)
 
-PROHIBITED_SCOPE = {
-    "runtime enablement",
-    "login endpoints",
-    "logout endpoints",
-    "authentication callback endpoints",
-    "credential storage",
-    "password storage",
-    "token issuance",
-    "token storage",
-    "cookie or session persistence",
-    "database migrations",
-    "external identity providers",
-    "network calls",
-    "OAuth runtime",
-    "OIDC runtime",
-    "SAML runtime",
-    "provider SDK installation",
-    "frontend dependencies",
-    "package or lockfile changes",
-    "operator write execution",
-    "connector runtime",
-    "module activation",
-    "sandbox execution",
-    "production release or tag creation",
+REQUEST_BOUNDARY_APPROVED_SCOPE = frozenset(
+    {
+        "request_identity_contracts",
+        "provider_agnostic_verifier_interface",
+        "disabled_verifier",
+        "deterministic_test_verifier",
+        "anonymous_disabled_context_attachment",
+        "observe_only_boundary_registration",
+        "audit_provenance_correlation",
+        "read_only_diagnostics",
+        "tests",
+        "documentation",
+    }
+)
+
+PROHIBITED_SCOPE = frozenset(
+    {
+        "runtime enablement",
+        "login endpoints",
+        "logout endpoints",
+        "authentication callback endpoints",
+        "credential storage",
+        "password storage",
+        "token issuance",
+        "token storage",
+        "cookie or session persistence",
+        "database migrations",
+        "external identity providers",
+        "network calls",
+        "OAuth runtime",
+        "OIDC runtime",
+        "SAML runtime",
+        "provider SDK installation",
+        "frontend dependencies",
+        "package or lockfile changes",
+        "operator write execution",
+        "connector runtime",
+        "module activation",
+        "sandbox execution",
+        "production release or tag creation",
+    }
+)
+
+REQUEST_BOUNDARY_PROHIBITED_SCOPE = frozenset(
+    {
+        "authorization_header_parsing",
+        "cookie_parsing",
+        "credential_verification",
+        "password_verification",
+        "token_parsing",
+        "token_issuance",
+        "token_refresh",
+        "token_storage",
+        "session_creation",
+        "session_persistence",
+        "cookie_issuance",
+        "cookie_persistence",
+        "external_identity_provider",
+        "oauth_runtime",
+        "oidc_runtime",
+        "saml_runtime",
+        "external_calls",
+        "provider_sdk",
+        "login_endpoint",
+        "logout_endpoint",
+        "callback_endpoint",
+        "token_endpoint",
+        "session_endpoint",
+        "credential_endpoint",
+        "migrations",
+        "package_files",
+        "lockfiles",
+        "sdk_runtime_resource",
+        "cli_runtime_command",
+        "connector_runtime",
+        "operator_write_execution",
+        "module_activation",
+        "sandbox_execution",
+        "v02_tag",
+        "v02_release",
+    }
+)
+
+REQUEST_BOUNDARY_IMPLEMENTATION_TRUE_KEYS = frozenset(
+    {
+        "request_identity_boundary_implementation_approved",
+        "request_identity_boundary_registration_approved",
+        "anonymous_disabled_context_attachment_approved",
+        "provider_agnostic_verifier_interface_approved",
+        "deterministic_test_verifier_approved",
+        "audit_provenance_correlation_approved",
+    }
+)
+
+AION151_AUTHORIZATION = AuthorizationSpec(
+    transaction_id="AION-151-PA-0001",
+    approval_record_id="AION-151-PA-0001",
+    candidate_id="production-auth-core",
+    workstream="production-auth-implementation",
+    implementation_task="AION-152",
+    authorization_scope="disabled-production-auth-core",
+    task_id="AION-151",
+    required_adr="0142-v02-production-auth-implementation-authorization.md",
+    expiry="AION-152 merged; authorization consumed by PR 62",
+    authorization_active=False,
+    authorization_consumed=True,
+    authorization_expired=True,
+    authorization_reusable=False,
+    approved_scope=HISTORICAL_REQUIRED_SCOPE,
+    prohibited_scope=PROHIBITED_SCOPE,
+    false_keys=LEGACY_FALSE_KEYS,
+    authorization_consumed_by_task="AION-152",
+    authorization_consumed_by_pr=62,
+    authorization_consumed_by_merge_commit=AION_152_MERGE_COMMIT,
+)
+
+AION153_AUTHORIZATION = AuthorizationSpec(
+    transaction_id="AION-153-PA-0002",
+    approval_record_id="AION-153-PA-0002",
+    candidate_id="production-auth-core-stabilization",
+    workstream="production-auth-hardening",
+    implementation_task="AION-154",
+    authorization_scope="disabled-production-auth-core-stabilization",
+    task_id="AION-153",
+    required_adr="0144-v02-production-auth-core-stabilization-authorization.md",
+    expiry="AION-154 merged; authorization consumed by PR 64",
+    authorization_active=False,
+    authorization_consumed=True,
+    authorization_expired=True,
+    authorization_reusable=False,
+    approved_scope=STABILIZATION_REQUIRED_SCOPE,
+    prohibited_scope=PROHIBITED_SCOPE,
+    false_keys=LEGACY_FALSE_KEYS,
+    parent_authorization_transaction_id="AION-151-PA-0001",
+    authorization_consumed_by_task="AION-154",
+    authorization_consumed_by_pr=64,
+    authorization_consumed_by_feature_commit=AION_154_FEATURE_COMMIT,
+    authorization_consumed_by_merge_commit=AION_154_MERGE_COMMIT,
+)
+
+AION155_AUTHORIZATION = AuthorizationSpec(
+    transaction_id="AION-155-PA-0003",
+    approval_record_id="AION-155-PA-0003",
+    candidate_id="production-auth-request-identity-boundary",
+    workstream="production-auth-request-integration",
+    implementation_task="AION-156",
+    authorization_scope="disabled-request-identity-boundary",
+    task_id="AION-155",
+    required_adr="0146-v02-production-auth-request-boundary-authorization.md",
+    expiry="AION-156 merged or AION-155-PA-0003 explicitly revoked",
+    authorization_active=True,
+    authorization_consumed=False,
+    authorization_expired=False,
+    authorization_reusable=False,
+    approved_scope=REQUEST_BOUNDARY_APPROVED_SCOPE,
+    prohibited_scope=REQUEST_BOUNDARY_PROHIBITED_SCOPE,
+    false_keys=REQUEST_BOUNDARY_FALSE_KEYS,
+    parent_authorization_transaction_id="AION-153-PA-0002",
+    implementation_true_keys=REQUEST_BOUNDARY_IMPLEMENTATION_TRUE_KEYS,
+)
+
+HISTORICAL_AUTHORIZATION = AION151_AUTHORIZATION
+STABILIZATION_AUTHORIZATION = AION153_AUTHORIZATION
+ACTIVE_AUTHORIZATION = AION155_AUTHORIZATION
+ACTIVE_REQUIRED_SCOPE = REQUEST_BOUNDARY_APPROVED_SCOPE
+
+AUTHORIZATION_SPECS = {
+    spec.transaction_id: spec
+    for spec in (AION151_AUTHORIZATION, AION153_AUTHORIZATION, AION155_AUTHORIZATION)
 }
 
 REQUIRED_DOCS_AION151 = [
@@ -254,13 +397,37 @@ REQUIRED_DOCS_AION153 = [
 ]
 
 REQUIRED_JSON_AION153 = [
-    "examples/release/v02-production-auth-core-implementation-closeout.json",
     "examples/release/v02-production-auth-stabilization-authorization.json",
     "examples/release/v02-production-auth-stabilization-explicit-approval-record.json",
     "examples/release/v02-production-auth-stabilization-runtime-guard-renewal.json",
     "examples/release/v02-production-auth-stabilization-authorization-evidence-matrix.json",
-    "operator-console-static/demo-data/v02-production-auth-core-implementation-closeout.json",
     "operator-console-static/demo-data/v02-production-auth-stabilization-authorization.json",
+]
+
+REQUIRED_JSON_AION153_CLOSEOUT = [
+    "examples/release/v02-production-auth-core-implementation-closeout.json",
+    "operator-console-static/demo-data/v02-production-auth-core-implementation-closeout.json",
+]
+
+REQUIRED_DOCS_AION155 = [
+    "docs/project-status.md",
+    "docs/release/v02-production-auth-core-stabilization-closeout.md",
+    "docs/release/v02-production-auth-request-boundary-authorization-transaction.md",
+    "docs/release/v02-production-auth-request-boundary-scope.md",
+    "docs/release/v02-production-auth-request-boundary-runtime-hold.md",
+    "docs/release/v02-production-auth-request-boundary-authorization-checklist.md",
+    "docs/release/v02-release-readiness-delta.md",
+    "docs/adr/0146-v02-production-auth-request-boundary-authorization.md",
+]
+
+REQUIRED_JSON_AION155_CLOSEOUT = [
+    "examples/release/v02-production-auth-core-stabilization-closeout.json",
+]
+
+REQUIRED_JSON_AION155 = [
+    "examples/release/v02-production-auth-request-boundary-authorization.json",
+    "examples/release/v02-production-auth-request-boundary-runtime-hold.json",
+    "operator-console-static/demo-data/v02-production-auth-request-boundary-authorization.json",
 ]
 
 BLOCKED_VALUE_MARKERS = (
@@ -300,12 +467,17 @@ def main() -> int:
 
 
 def validate(root: Path, mode: str) -> None:
-    for relative in (
+    required_paths = (
         REQUIRED_DOCS_AION151
         + REQUIRED_JSON_AION151
         + REQUIRED_DOCS_AION153
         + REQUIRED_JSON_AION153
-    ):
+        + REQUIRED_JSON_AION153_CLOSEOUT
+        + REQUIRED_DOCS_AION155
+        + REQUIRED_JSON_AION155_CLOSEOUT
+        + REQUIRED_JSON_AION155
+    )
+    for relative in required_paths:
         assert (root / relative).exists(), f"missing production-auth authorization artifact: {relative}"
 
     adr_index = (root / "docs/adr/README.md").read_text()
@@ -315,14 +487,23 @@ def validate(root: Path, mode: str) -> None:
     assert "0144-v02-production-auth-core-stabilization-authorization.md" in adr_index, (
         "ADR 0144 is not indexed"
     )
+    assert "0146-v02-production-auth-request-boundary-authorization.md" in adr_index, (
+        "ADR 0146 is not indexed"
+    )
 
-    for relative in REQUIRED_JSON_AION151 + REQUIRED_JSON_AION153:
+    for relative in (
+        REQUIRED_JSON_AION151
+        + REQUIRED_JSON_AION153
+        + REQUIRED_JSON_AION153_CLOSEOUT
+        + REQUIRED_JSON_AION155_CLOSEOUT
+        + REQUIRED_JSON_AION155
+    ):
         validate_required_payload(relative, load_json(root / relative))
 
     validate_authorization_lifecycle_payloads(iter_json_payloads(root))
 
     if mode == "guard":
-        for relative in REQUIRED_JSON_AION151 + REQUIRED_JSON_AION153:
+        for relative in REQUIRED_JSON_AION151 + REQUIRED_JSON_AION153 + REQUIRED_JSON_AION155:
             payload = load_json(root / relative)
             assert payload.get("runtime_guard_hold_active") is True, (
                 f"{relative}: runtime_guard_hold_active must be true"
@@ -343,18 +524,45 @@ def validate_required_payload(relative: str, payload: dict[str, Any]) -> None:
     assert payload.get("record_kind"), f"{relative}: record_kind missing"
 
     if relative in REQUIRED_JSON_AION151:
-        validate_authorization_record(relative, payload, expected=HISTORICAL_AUTHORIZATION)
-    elif relative.endswith("v02-production-auth-core-implementation-closeout.json"):
+        validate_authorization_record(relative, payload, expected=AION151_AUTHORIZATION)
+    elif relative in REQUIRED_JSON_AION153_CLOSEOUT:
         assert payload.get("task_id") == "AION-153", f"{relative}: task_id must be AION-153"
         consumed = payload.get("consumed_authorization_record")
         assert isinstance(consumed, dict), f"{relative}: consumed authorization record missing"
         validate_authorization_record(
             f"{relative}:consumed_authorization_record",
             consumed,
-            expected=HISTORICAL_AUTHORIZATION,
+            expected=AION151_AUTHORIZATION,
         )
+    elif relative in REQUIRED_JSON_AION153:
+        validate_authorization_record(relative, payload, expected=AION153_AUTHORIZATION)
+    elif relative in REQUIRED_JSON_AION155_CLOSEOUT:
+        validate_aion154_closeout_payload(relative, payload)
     else:
-        validate_authorization_record(relative, payload, expected=ACTIVE_AUTHORIZATION)
+        validate_authorization_record(relative, payload, expected=AION155_AUTHORIZATION)
+
+
+def validate_aion154_closeout_payload(relative: str, payload: dict[str, Any]) -> None:
+    assert payload.get("task_id") == "AION-155", f"{relative}: task_id must be AION-155"
+    assert payload.get("record_kind") == "production_auth_core_stabilization_closeout", (
+        f"{relative}: record_kind mismatch"
+    )
+    required = {
+        "authorization_transaction_id": "AION-153-PA-0002",
+        "authorization_active": False,
+        "authorization_consumed": True,
+        "authorization_consumed_by_task": "AION-154",
+        "authorization_consumed_by_pr": 64,
+        "authorization_consumed_by_feature_commit": AION_154_FEATURE_COMMIT,
+        "authorization_consumed_by_merge_commit": AION_154_MERGE_COMMIT,
+        "authorization_expired": True,
+        "authorization_reusable": False,
+        "production_auth_core_state": "implemented_disabled",
+        "production_auth_runtime_enabled": False,
+        "runtime_no_go_status": True,
+    }
+    for key, expected in required.items():
+        assert payload.get(key) == expected, f"{relative}: {key} mismatch"
 
 
 def validate_authorization_lifecycle_payloads(payloads: list[tuple[str, Any]]) -> None:
@@ -367,16 +575,17 @@ def validate_authorization_lifecycle_payloads(payloads: list[tuple[str, Any]]) -
         assert_global_false(relative, payload)
         assert_no_blocked_values(relative, payload)
 
-    expected_records = {HISTORICAL_AUTHORIZATION.tuple_key, ACTIVE_AUTHORIZATION.tuple_key}
+    expected_records = {spec.tuple_key for spec in AUTHORIZATION_SPECS.values()}
     assert set(approved_records) == expected_records, (
         f"unexpected approved authorization records: {sorted(approved_records)}"
     )
-    assert set(active_records) == {ACTIVE_AUTHORIZATION.tuple_key}, (
+    assert set(active_records) == {AION155_AUTHORIZATION.tuple_key}, (
         f"unexpected active approved authorization records: {sorted(active_records)}"
     )
-    assert HISTORICAL_AUTHORIZATION.tuple_key in historical_records, (
-        "AION-151 historical authorization record missing"
-    )
+    for spec in (AION151_AUTHORIZATION, AION153_AUTHORIZATION):
+        assert spec.tuple_key in historical_records, (
+            f"{spec.transaction_id} historical authorization record missing"
+        )
 
 
 def validate_authorization_record(
@@ -406,8 +615,11 @@ def validate_authorization_record(
     )
     assert payload.get("task_id") == spec.task_id, f"{relative}: task_id mismatch"
 
-    for key in CANONICAL_FALSE_KEYS:
+    for key in spec.false_keys:
         assert payload.get(key) is False, f"{relative}: {key} must be false"
+    for key in spec.implementation_true_keys:
+        assert payload.get(key) is True, f"{relative}: {key} must be true"
+
     assert payload.get("runtime_guard_hold_active") is True, (
         f"{relative}: runtime_guard_hold_active must be true"
     )
@@ -438,6 +650,11 @@ def validate_authorization_record(
         assert payload.get("authorization_consumed_by_pr") == spec.authorization_consumed_by_pr, (
             f"{relative}: authorization_consumed_by_pr mismatch"
         )
+        if spec.authorization_consumed_by_feature_commit is not None:
+            assert (
+                payload.get("authorization_consumed_by_feature_commit")
+                == spec.authorization_consumed_by_feature_commit
+            ), f"{relative}: authorization_consumed_by_feature_commit mismatch"
         assert (
             payload.get("authorization_consumed_by_merge_commit")
             == spec.authorization_consumed_by_merge_commit
@@ -449,20 +666,18 @@ def validate_authorization_record(
         assert payload.get("authorization_consumed_by_pr") in {None, ""}, (
             f"{relative}: active authorization must not be consumed by PR"
         )
+        assert payload.get("authorization_consumed_by_feature_commit") in {None, ""}, (
+            f"{relative}: active authorization must not be consumed by feature commit"
+        )
         assert payload.get("authorization_consumed_by_merge_commit") in {None, ""}, (
             f"{relative}: active authorization must not be consumed by merge commit"
         )
 
-    required_scope = (
-        ACTIVE_REQUIRED_SCOPE
-        if spec.transaction_id == ACTIVE_AUTHORIZATION.transaction_id
-        else HISTORICAL_REQUIRED_SCOPE
+    assert set(payload.get("approved_scope", [])) == spec.approved_scope, (
+        f"{relative}: approved_scope mismatch"
     )
-    assert required_scope <= set(payload.get("approved_scope", [])), (
-        f"{relative}: approved_scope is incomplete"
-    )
-    assert PROHIBITED_SCOPE <= set(payload.get("prohibited_scope", [])), (
-        f"{relative}: prohibited_scope is incomplete"
+    assert set(payload.get("prohibited_scope", [])) == spec.prohibited_scope, (
+        f"{relative}: prohibited_scope mismatch"
     )
     assert payload.get("required_adr") == spec.required_adr, f"{relative}: required_adr mismatch"
     assert payload.get("expiry") == spec.expiry, f"{relative}: expiry mismatch"

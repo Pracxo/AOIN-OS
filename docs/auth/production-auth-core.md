@@ -40,3 +40,13 @@ The implementation adds strict contracts, fail-closed configuration, blocked
 policy decisions, redacted audit/provenance builders, redacted diagnostics, and
 kernel wiring. It does not add login, logout, callback, credential, token,
 session, cookie, provider, SDK, CLI, or public API behavior.
+
+## AION-155 Request Boundary Authorization
+
+AION-155 does not change the internal production-auth core. It closes
+`AION-153-PA-0002` after AION-154 and creates `AION-155-PA-0003` for future
+AION-156 disabled request identity boundary work. Production-auth runtime,
+identity verification, authenticated requests, endpoint creation, protected
+material handling, provider integration, external calls, package changes,
+migrations, SDK/CLI runtime surfaces, v0.2 tags, and v0.2 releases remain
+blocked.

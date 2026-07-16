@@ -152,7 +152,8 @@ fi
 cat <<'SUMMARY'
 v0.2 production auth stabilization authorization check result:
 - AION-151-PA-0001: approved historical, inactive, consumed, expired, non-reusable
-- AION-153-PA-0002: only active approved authorization
+- AION-153-PA-0002: approved historical, inactive, consumed, expired, non-reusable
+- AION-155-PA-0003: only active approved authorization
 - candidate_id: production-auth-core-stabilization
 - workstream: production-auth-hardening
 - implementation_task: AION-154

@@ -149,6 +149,9 @@ allowed_aion154_static_demo_files = {
     "operator-console-static/demo-data/production-auth-core-stabilization.json",
     "operator-console-static/demo-data/production-auth-core-stabilization-runtime-hold.json",
 }
+allowed_aion155_static_demo_files = {
+    "operator-console-static/demo-data/v02-production-auth-request-boundary-authorization.json",
+}
 
 runtime_patterns = {
     "code loader": re.compile(r"\b(plugin|extension|module)[_\-\s]*(code[_\-\s]*)?loader\b", re.I),
@@ -172,6 +175,7 @@ for relative in sorted(changed):
     if (
         relative in allowed_review_files
         or relative in allowed_aion154_static_demo_files
+        or relative in allowed_aion155_static_demo_files
         or relative.startswith(allowed_review_prefixes)
     ):
         continue

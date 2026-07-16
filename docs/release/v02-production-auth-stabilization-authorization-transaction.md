@@ -1,11 +1,12 @@
 # v0.2 Production Auth Stabilization Authorization Transaction
 
-Status: `approved`
+Status: `consumed`
 
 ## Purpose
 
-AION-153 creates exactly one active production-auth authorization transaction
-for future AION-154 stabilization work after AION-152 has merged.
+AION-153 created the production-auth authorization transaction for AION-154
+stabilization work after AION-152 merged. AION-155 now records that AION-154 PR
+64 consumed this authorization.
 
 ## Governance prerequisite
 
@@ -36,10 +37,17 @@ transaction.
 
 ## Lifecycle
 
-- `authorization_active=true`
-- `authorization_consumed=false`
-- `authorization_expired=false`
+- `authorization_active=false`
+- `authorization_consumed=true`
+- `authorization_consumed_by_task=AION-154`
+- `authorization_consumed_by_pr=64`
+- `authorization_consumed_by_feature_commit=f001632ed0566bcf7facfe8905a2781ff9fa6ce9`
+- `authorization_consumed_by_merge_commit=85584ea1976fd6f2cb73a641464b3caf87481618`
+- `authorization_expired=true`
 - `authorization_reusable=false`
+
+The approval fields remain true as historical evidence. The record must never
+become active again.
 
 ## Runtime guard state
 
@@ -58,3 +66,9 @@ AION-153 authorizes future stabilization only. It does not modify
 `services/brain-api/src/aion_brain/contracts/production_auth.py`,
 `services/brain-api/src/aion_brain/config.py`, kernel wiring, API routes, SDK
 resources, CLI commands, package files, lockfiles, or migrations.
+
+## Successor Authorization
+
+`AION-155-PA-0003` is the only active production-auth authorization after this
+closeout. It is limited to future AION-156 disabled request identity boundary
+work.
