@@ -49,3 +49,9 @@ integration only. Identity verification, authenticated requests, Authorization
 header parsing, cookie parsing, credential verification, token parsing, session
 creation, cookie issuance, external identity providers, external calls, runtime
 API routes, and runtime guard release remain prohibited.
+# AION-156 Request Identity Runtime Hold
+
+The request identity boundary does not release any production-auth runtime
+guard. Identity verification, authenticated requests, Authorization header
+parsing, Cookie parsing, credentials, passwords, tokens, sessions, providers,
+external calls, and auth routes remain disabled or absent.

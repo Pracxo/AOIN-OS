@@ -52,3 +52,14 @@ The gates verify AION-153 is historical, `AION-155-PA-0003` is the only active
 authorization, the AION-156 scope is exact, and runtime authentication,
 protected-material handling, provider integration, package files, migrations,
 SDK/CLI runtime surfaces, v0.2 tags, and v0.2 releases remain blocked.
+# AION-156 Gate Addition
+
+AION-156 adds:
+
+- `scripts/production-auth-request-identity-no-go-regression.sh`
+- `scripts/production-auth-request-identity-check.sh`
+- `scripts/production-auth-request-identity-runtime-hold.sh`
+
+These gates keep the request identity boundary implemented-disabled,
+default-off, anonymous, route-free, provider-free, package-free, migration-free,
+and v0.2-release-free.

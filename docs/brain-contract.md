@@ -2209,3 +2209,9 @@ task. Future AION-156 contracts must keep the permitted request-state result at
 `authentication_state=disabled`, `authenticated=false`, `actor_id=null`,
 `subject=null`, `roles=[]`, and `runtime_effect=false` unless a later
 authorization changes the runtime guard.
+# AION-156 Request Identity Contract Note
+
+Request identity evidence uses strict Pydantic v2 contracts under
+`aion_brain.contracts.request_identity`. Evidence is canonical-fingerprinted,
+redacted, and locked to `authentication_state=disabled`, `authenticated=false`,
+`actor_id=null`, `subject=null`, `roles=[]`, and `runtime_effect=false`.

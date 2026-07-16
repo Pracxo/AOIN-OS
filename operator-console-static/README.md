@@ -141,6 +141,18 @@ The panel displays disabled production auth status and a mock claims preview.
 It has no login form, no logout control, no credential input, no token input,
 and no session persistence.
 
+## Production Auth Request Identity Evidence
+
+AION-156 adds read-only bundled evidence:
+
+- `demo-data/production-auth-request-identity-boundary.json`
+- `demo-data/production-auth-request-identity-runtime-hold.json`
+
+The evidence shows the disabled request identity boundary is implemented,
+default-off, observe-only, anonymous, and runtime-effect-free. It does not call
+the backend, accept credentials, accept tokens, parse headers, authenticate
+users, activate the boundary, or expose write controls.
+
 ## Connector Runtime Panel
 
 AION-108 adds a disabled Connector Runtime panel backed by:

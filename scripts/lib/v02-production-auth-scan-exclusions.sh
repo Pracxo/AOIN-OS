@@ -145,6 +145,88 @@ aion154_is_scoped_stabilization_path() {
   esac
 }
 
+aion156_is_scoped_request_identity_path() {
+  # Exact AION-156 disabled request-identity implementation paths. Inherited
+  # AION-152/AION-154/AION-155 no-go gates may allow only these paths.
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/request_identity.py|\
+    services/brain-api/src/aion_brain/production_auth/verifier.py|\
+    services/brain-api/src/aion_brain/production_auth/request_boundary.py|\
+    services/brain-api/src/aion_brain/production_auth/request_middleware.py|\
+    services/brain-api/src/aion_brain/production_auth/request_evidence.py|\
+    services/brain-api/src/aion_brain/production_auth/__init__.py|\
+    services/brain-api/src/aion_brain/config.py|\
+    services/brain-api/src/aion_brain/kernel/app_factory.py|\
+    services/brain-api/src/aion_brain/kernel/container.py|\
+    services/brain-api/src/aion_brain/kernel/diagnostics.py|\
+    services/brain-api/tests/test_request_identity_contracts.py|\
+    services/brain-api/tests/test_request_identity_verifiers.py|\
+    services/brain-api/tests/test_request_identity_boundary.py|\
+    services/brain-api/tests/test_request_identity_middleware.py|\
+    services/brain-api/tests/test_request_identity_app_factory.py|\
+    services/brain-api/tests/test_request_identity_audit_provenance.py|\
+    services/brain-api/tests/test_request_identity_concurrency.py|\
+    services/brain-api/tests/test_request_identity_redaction.py|\
+    services/brain-api/tests/test_request_identity_config.py|\
+    services/brain-api/tests/test_request_identity_no_runtime_routes.py|\
+    services/brain-api/tests/test_production_auth_config.py|\
+    .env.example|\
+    README.md|\
+    AGENTS.md|\
+    docs/project-status.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/visual-brain.md|\
+    docs/auth/request-identity-boundary.md|\
+    docs/auth/request-identity-runtime-boundary.md|\
+    docs/auth/production-auth-core.md|\
+    docs/auth/production-auth-core-runtime-boundary.md|\
+    docs/auth/production-auth-core-stabilization.md|\
+    docs/auth/future-auth-implementation-plan.md|\
+    docs/auth/production-auth-release-gates.md|\
+    docs/release/v02-production-auth-request-identity-boundary-implementation.md|\
+    docs/release/v02-production-auth-request-identity-boundary-runtime-hold.md|\
+    docs/release/v02-production-auth-request-identity-boundary-evidence-matrix.md|\
+    docs/release/v02-production-auth-request-identity-boundary-no-go.md|\
+    docs/release/v02-production-auth-request-identity-boundary-checklist.md|\
+    docs/release/v02-production-auth-request-boundary-authorization-transaction.md|\
+    docs/release/v02-production-auth-request-boundary-scope.md|\
+    docs/release/v02-production-auth-request-boundary-runtime-hold.md|\
+    docs/release/v02-production-auth-request-boundary-authorization-checklist.md|\
+    docs/release/v02-release-readiness-delta.md|\
+    docs/adr/0147-v02-disabled-production-auth-request-identity-boundary.md|\
+    docs/adr/README.md|\
+    examples/auth/request-identity-boundary-status.json|\
+    examples/auth/request-identity-disabled-context.json|\
+    examples/auth/request-identity-verification-result.json|\
+    examples/auth/request-identity-audit-event.json|\
+    examples/auth/request-identity-provenance-record.json|\
+    operator-console-static/demo-data/production-auth-request-identity-boundary.json|\
+    operator-console-static/demo-data/production-auth-request-identity-runtime-hold.json|\
+    operator-console-static/index.html|\
+    operator-console-static/app.js|\
+    operator-console-static/README.md|\
+    scripts/production-auth-request-identity-check.sh|\
+    scripts/production-auth-request-identity-runtime-hold.sh|\
+    scripts/production-auth-request-identity-no-go-regression.sh|\
+    scripts/auth-design-check.sh|\
+    scripts/local-auth-check.sh|\
+    scripts/production-auth-core-stabilization-check.sh|\
+    scripts/v02-production-auth-stabilization-authorization-check.sh|\
+    scripts/v02-production-auth-request-boundary-authorization-check.sh|\
+    scripts/production-auth-core-no-go-regression.sh|\
+    scripts/production-auth-core-stabilization-no-go-regression.sh|\
+    scripts/v02-production-auth-request-boundary-authorization-no-go-regression.sh|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
 aion151_scan_files_excluding_scoped_authorization() {
   local path
   local file

@@ -206,6 +206,50 @@ for path in sorted(demo_dir.glob("*.json")):
             if key in payload and payload.get(key) is not False:
                 raise SystemExit(f"auth runtime demo flag must be false: {key}: {path}")
         continue
+    if path.name.startswith("production-auth-request-identity-"):
+        if payload.get("read_only") is not True:
+            raise SystemExit(f"request identity demo must be read_only: {path}")
+        if payload.get("redaction_applied") is not True:
+            raise SystemExit(f"request identity demo must be redacted: {path}")
+        for key in (
+            "request_identity_boundary_default_enabled",
+            "identity_verification_enabled",
+            "authenticated_requests_enabled",
+            "production_auth_runtime_enabled",
+            "runtime_effect",
+            "runtime_implementation_approved",
+            "authorization_header_parsing_enabled",
+            "cookie_parsing_enabled",
+            "credential_verification_enabled",
+            "password_verification_enabled",
+            "token_parsing_enabled",
+            "token_issuance_enabled",
+            "token_storage_enabled",
+            "token_refresh_enabled",
+            "session_creation_enabled",
+            "session_storage_enabled",
+            "cookie_issuance_enabled",
+            "cookie_session_persistence_enabled",
+            "external_identity_provider_enabled",
+            "oauth_runtime_enabled",
+            "oidc_runtime_enabled",
+            "saml_runtime_enabled",
+            "external_calls_enabled",
+            "network_client_enabled",
+            "provider_sdk_enabled",
+            "login_endpoint_enabled",
+            "logout_endpoint_enabled",
+            "callback_endpoint_enabled",
+            "runtime_api_routes_added",
+            "package_files_added",
+            "lockfiles_added",
+            "migrations_added",
+            "v02_tag_created",
+            "v02_release_created",
+        ):
+            if payload.get(key) is not False:
+                raise SystemExit(f"request identity demo flag must be false: {key}: {path}")
+        continue
     if payload.get("read_only") is not True:
         raise SystemExit(f"read_only must be true: {path}")
     if payload.get("redaction_applied") is not True:
@@ -235,6 +279,8 @@ for path in sorted(demo_dir.glob("*.json")):
         "production-auth-runtime-hold.json",
         "production-auth-core-stabilization.json",
         "production-auth-core-stabilization-runtime-hold.json",
+        "production-auth-request-identity-boundary.json",
+        "production-auth-request-identity-runtime-hold.json",
     }
     blocked = (
         "raw_prompt",
@@ -262,6 +308,8 @@ for path in sorted(demo_dir.glob("*.json")):
             "production-auth-runtime-hold.json",
             "production-auth-core-stabilization.json",
             "production-auth-core-stabilization-runtime-hold.json",
+            "production-auth-request-identity-boundary.json",
+            "production-auth-request-identity-runtime-hold.json",
         }:
             continue
         if value in serialized:

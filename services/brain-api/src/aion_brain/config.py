@@ -1801,6 +1801,13 @@ class Settings(BaseSettings):
             "production_auth_core_runtime_enabled",
         ),
     )
+    production_auth_request_boundary_enabled: bool = Field(
+        default=False,
+        validation_alias=AliasChoices(
+            "AION_PRODUCTION_AUTH_REQUEST_BOUNDARY_ENABLED",
+            "production_auth_request_boundary_enabled",
+        ),
+    )
     production_auth_callback_endpoint_enabled: bool = Field(
         default=False,
         validation_alias=AliasChoices(

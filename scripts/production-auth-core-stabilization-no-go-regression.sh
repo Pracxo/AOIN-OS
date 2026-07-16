@@ -88,6 +88,7 @@ while IFS= read -r file; do
   esac
 
   if ! aion154_is_scoped_stabilization_path "$file" \
+    && ! aion156_is_scoped_request_identity_path "$file" \
     && ! aion151_is_scoped_authorization_path "$file"; then
     case "$file" in
       services/brain-api/src/aion_brain/production_auth/*|\
@@ -107,6 +108,7 @@ while IFS= read -r file; do
         ;;
       scripts/production-auth-core-stabilization-no-go-regression.sh|\
       scripts/production-auth-core-no-go-regression.sh|\
+      scripts/production-auth-request-identity-no-go-regression.sh|\
       scripts/lib/v02-production-auth-scan-exclusions.sh)
         ;;
       *)

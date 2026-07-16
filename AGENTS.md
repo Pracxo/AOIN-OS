@@ -76,6 +76,15 @@ Instructions for future Codex runs in this repository:
   routes, SDK/CLI source, package files, lockfiles, migrations, runtime auth
   enablement, credentials, tokens, sessions, cookies, provider SDKs, external
   calls, v0.2 tags, or releases.
+- Disabled production-auth request identity boundary work may add internal
+  production-auth request identity contracts, disabled verifier wiring,
+  observe-only middleware, anonymous request-state evidence, diagnostics, docs,
+  examples, static console evidence, and local gates only. It must keep
+  `production_auth_request_boundary_enabled=false` by default, never trust
+  `RequestContext.actor_id`, never parse Authorization headers or cookies, add
+  no public route, add no SDK/CLI runtime surface, and keep runtime auth,
+  identity verification, authenticated requests, providers, packages,
+  migrations, v0.2 tags, and v0.2 releases disabled or absent.
 - v0.2 planning charter work is planning-only. It may add charter docs,
   decision frameworks, workstream maps, ADR requirements, gate dependency
   matrices, synthetic examples, static console demo data, tests, and local

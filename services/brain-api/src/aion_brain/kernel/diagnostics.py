@@ -574,6 +574,7 @@ class KernelDiagnostics:
         checks.extend(self._action_authorization_checks(settings))
         checks.extend(self._auth_runtime_checks(settings))
         checks.extend(self._production_auth_core_checks(settings))
+        checks.extend(self._production_auth_request_identity_checks(settings))
         checks.extend(self._connector_runtime_checks(settings))
         checks.extend(self._connector_simulator_checks(settings))
         checks.extend(self._connector_policy_checks(settings))
@@ -1223,6 +1224,75 @@ class KernelDiagnostics:
                 ),
                 "high",
                 "Production-auth diagnostics expose only redacted safety state.",
+            ),
+        ]
+
+    def _production_auth_request_identity_checks(
+        self,
+        settings: object,
+    ) -> list[DiagnosticCheck]:
+        boundary = getattr(self._container, "production_auth_request_identity_boundary", None)
+        registered = bool(
+            getattr(settings, "production_auth_request_boundary_enabled", False)
+        )
+        snapshot = None
+        if boundary is not None:
+            snapshot_method = getattr(boundary, "diagnostic_snapshot", None)
+            if callable(snapshot_method):
+                snapshot = snapshot_method(registered=registered)
+        return [
+            self._result(
+                "request_identity_boundary_implemented",
+                "production_auth_request_identity",
+                "passed" if boundary is not None else "failed",
+                "high",
+                "Disabled request identity boundary service is assembled.",
+            ),
+            self._result(
+                "request_identity_boundary_default_disabled",
+                "production_auth_request_identity",
+                (
+                    "passed"
+                    if snapshot is not None
+                    and not bool(
+                        getattr(
+                            snapshot,
+                            "request_identity_boundary_default_enabled",
+                            False,
+                        )
+                    )
+                    else "failed"
+                ),
+                "critical",
+                "Request identity boundary remains disabled by default.",
+            ),
+            self._result(
+                "request_identity_boundary_runtime_disabled",
+                "production_auth_request_identity",
+                (
+                    "failed"
+                    if bool(getattr(settings, "production_auth_enabled", False))
+                    or bool(getattr(settings, "auth_runtime_enabled", False))
+                    or bool(getattr(settings, "production_auth_core_runtime_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Request identity diagnostics keep production-auth runtime disabled.",
+            ),
+            self._result(
+                "request_identity_boundary_diagnostics_redacted",
+                "production_auth_request_identity",
+                (
+                    "passed"
+                    if snapshot is not None
+                    and bool(getattr(snapshot, "redacted", False))
+                    and bool(getattr(snapshot, "runtime_no_go_status", False))
+                    and not bool(getattr(snapshot, "identity_verification_enabled", True))
+                    and not bool(getattr(snapshot, "authenticated_requests_enabled", True))
+                    else "failed"
+                ),
+                "high",
+                "Request identity diagnostics expose only redacted disabled state.",
             ),
         ]
 

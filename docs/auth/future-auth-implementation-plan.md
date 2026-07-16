@@ -111,3 +111,10 @@ tests, docs, and static-console evidence. It must not authenticate users, parse
 headers or cookies, verify credentials, issue or store tokens, create sessions,
 contact providers, add endpoints, add packages, add migrations, or create a
 v0.2 tag or release.
+# AION-156 Request Identity Boundary Update
+
+The disabled request identity boundary now exists as an internal observe-only
+layer. It is not real identity verification. Future work must separately
+authorize verifier activation, provider integration, protected-material
+lifecycle, runtime route surfaces, deployment, rollback, and runtime guard
+release.

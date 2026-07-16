@@ -111,6 +111,7 @@ from aion_brain.api.workspaces import router as workspaces_router
 from aion_brain.api_support.exception_handlers import register_exception_handlers
 from aion_brain.api_support.middleware import RequestContextMiddleware
 from aion_brain.kernel.container import KernelContainer
+from aion_brain.production_auth import ProductionAuthRequestIdentityMiddleware
 
 ROUTERS = (
     health_router,
@@ -227,6 +228,16 @@ def create_app(container: KernelContainer | None = None) -> FastAPI:
     kernel = container or KernelContainer()
     app = FastAPI(title="AION Brain API", version=kernel.settings.version)
     app.state.kernel_container = kernel
+    app.state.aion_request_identity_boundary_present = False
+    app.state.aion_request_identity_boundary_mode = "observe_only_disabled"
+    app.state.aion_request_identity_identity_verification_enabled = False
+    app.state.aion_request_identity_authenticated_requests_enabled = False
+    if bool(getattr(kernel.settings, "production_auth_request_boundary_enabled", False)):
+        app.add_middleware(
+            ProductionAuthRequestIdentityMiddleware,
+            boundary=kernel.production_auth_request_identity_boundary,
+        )
+        app.state.aion_request_identity_boundary_present = True
     app.add_middleware(RequestContextMiddleware)
     app.state.aion_request_context_middleware_present = True
     register_exception_handlers(app)

@@ -74,6 +74,7 @@ def test_no_secret_bearing_production_auth_settings_were_added() -> None:
 def _new_boundary_settings() -> tuple[str, ...]:
     return (
         "production_auth_core_runtime_enabled",
+        "production_auth_request_boundary_enabled",
         "production_auth_callback_endpoint_enabled",
         "production_auth_password_storage_enabled",
         "production_auth_token_storage_enabled",

@@ -1,0 +1,43 @@
+{
+  "actor_id": null,
+  "approval_record_id": "AION-155-PA-0003",
+  "authenticated": false,
+  "authentication_state": "disabled",
+  "authorization_scope": "disabled-request-identity-boundary",
+  "authorization_transaction_id": "AION-155-PA-0003",
+  "boundary_mode": "observe_only_disabled",
+  "boundary_version": "request-identity-boundary/v1",
+  "canonicalization_version": "production-auth-canonical-json/v1",
+  "context_id": "request-identity-context-example",
+  "correlation_id": "corr-example-001",
+  "created_at": "2026-07-16T10:00:00Z",
+  "event_id": "request-identity-audit-example",
+  "event_type": "request_identity_boundary_attached",
+  "fingerprint": "67f8ff4779c95c3090294f9654a48e57a2d250160182701ef591a3084baab278",
+  "identity_source": "disabled_verifier",
+  "implementation_task": "AION-156",
+  "metadata": {
+    "event_scope": "request_identity_boundary",
+    "read_only": true,
+    "synthetic": true
+  },
+  "parent_authorization_transaction_id": "AION-153-PA-0002",
+  "reason_code_registry_version": "request-identity-reason-codes/v1",
+  "reason_codes": [
+    "request_identity_boundary_observe_only",
+    "production_auth_runtime_disabled",
+    "identity_verification_disabled",
+    "authenticated_requests_disabled",
+    "anonymous_disabled_context_attached",
+    "runtime_enablement_guard_locked",
+    "authorization_scope_implementation_only"
+  ],
+  "redacted": true,
+  "request_id": "request-example-001",
+  "roles": [],
+  "runtime_effect": false,
+  "schema_version": "request-identity/v1",
+  "subject": null,
+  "trace_id": "trace-example-001",
+  "verification_id": "request-identity-verification-example"
+}
