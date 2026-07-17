@@ -2240,3 +2240,16 @@ The authorized future contract keeps `RequestContext` as the safe trace and
 correlation owner, keeps `RequestIdentityContext` as the primary identity
 evidence source, and requires anonymous zero-permission `ActorContext` outside
 explicit development simulation.
+
+## AION-161 Offline Identity Assertion Contract Authorization
+
+`AION-159-PA-0005` is now historical, consumed by AION-160 PR 70, inactive,
+expired, and non-reusable. `AION-161-PA-0006` is the single active
+authorization for AION-162 offline Ed25519 identity assertion verification.
+
+The future contract may define a strict assertion envelope with `schema_version`,
+`key_id`, `payload`, and `signature`, and a strict payload with assertion,
+issuer, audience, subject, actor, workspace, role, permission, scope, temporal,
+and metadata fields. A valid verification result must not authenticate a
+request, apply ActorContext, apply RequestIdentityContext, create replay
+protection, or cause runtime effects.

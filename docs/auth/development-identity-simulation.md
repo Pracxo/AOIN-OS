@@ -29,3 +29,10 @@ When a valid `RequestContext` is present, its trace and correlation values take
 precedence for actor-context correlation. Only when the request context is
 absent and the exact development gate is active does the compatibility path
 preserve the legacy development trace and correlation header fallback.
+
+## AION-161 Boundary
+
+AION-161 does not change development identity simulation. The future AION-162
+offline Ed25519 verifier may use test-only ephemeral signing keys inside tests,
+but no runtime signing key, request authentication, ActorContext application,
+or RequestIdentityContext application is approved.

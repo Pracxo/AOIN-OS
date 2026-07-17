@@ -36,3 +36,9 @@ All runtime, parsing, identity, endpoint, protected-material, provider,
 network, package, migration, SDK, CLI, connector, operator, module, sandbox,
 tag, and release permissions remain false. This record permits no real
 identity verification and no authenticated request handling.
+
+## AION-161 Lifecycle Update
+
+This approval record remains true historical evidence, but the authorization is
+now inactive, consumed by AION-160 PR 70, expired, and non-reusable. It must not
+be reactivated. `AION-161-PA-0006` is the only active successor authorization.

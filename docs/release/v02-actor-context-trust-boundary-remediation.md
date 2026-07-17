@@ -53,5 +53,7 @@ execution, `v0.2` tag, or `v0.2` release are added.
 
 ## Lifecycle
 
-`AION-159-PA-0005` is consumed by AION-160 when this remediation merges. Formal
-authorization lifecycle closeout is deferred to AION-161.
+`AION-159-PA-0005` is consumed by AION-160 PR 70 and merge commit
+`bfc2afdc96358559027ee36efc0bc26ed3bb796d`. AION-161 records it as inactive,
+consumed, expired, and non-reusable, and creates `AION-161-PA-0006` for
+AION-162 offline Ed25519 identity assertion verification.

@@ -15,12 +15,18 @@ Status: `not-ready`
 - Request identity implementation evidence
 - Request identity stabilization
 - Actor-context trust-boundary remediation
+- Fail-closed ActorContext resolution
+- Non-development identity-header rejection
+- Anonymous zero-permission fallback
+- Development identity simulation isolation
 
 ## Remaining Blockers
 
-- Real identity verification
+- Offline cryptographic identity verification core and later request integration
+- request-level verified identity integration
+- replay protection
 - External provider integration
-- Protected-material handling decision
+- Protected-material handling decision beyond public verification keys
 - Credential lifecycle
 - Token lifecycle
 - Session lifecycle
@@ -52,12 +58,12 @@ Status: `not-ready`
 
 ## Next Critical Path
 
-AION-160 remediates the actor-context trust boundary under `AION-159-PA-0005`.
-The implementation removes non-development trust in identity-bearing `X-AION`
-headers, preserves explicit development simulation behind the exact development
-gate, uses RequestIdentityContext as primary identity evidence, projects safe
-trace and correlation from RequestContext, and returns anonymous
-zero-permission ActorContext outside development simulation.
+`AION-162` is the next critical path.
 
-The implementation remains observe-only and disabled unless a future
-authorization explicitly changes the runtime guard state.
+AION-162 implements the offline Ed25519 identity assertion verification core
+authorized by `AION-161-PA-0006`.
+
+The next core may verify signatures and claims offline with public keys, but it
+must not authenticate requests, apply ActorContext, apply RequestIdentityContext,
+parse HTTP headers, contact providers, create a replay cache, or release runtime
+guards. Later request integration remains a separate blocker.

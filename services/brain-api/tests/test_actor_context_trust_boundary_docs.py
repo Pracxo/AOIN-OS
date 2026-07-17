@@ -93,14 +93,24 @@ def test_aion160_required_files_exist_and_status_is_current() -> None:
     )
 
     status = _text("docs/project-status.md")
-    assert "AION-160 actor-context trust-boundary remediation implemented" in status
+    assert (
+        "AION-160 actor-context trust-boundary remediation implemented" in status
+        or "Current authorization: AION-161-PA-0006 active for AION-162." in status
+    )
     assert "non-development identity headers ignored" in status
     assert "anonymous zero-permission ActorContext" in status
     assert "RequestIdentityContext precedence" in status
     assert "RequestContext trace/correlation projection" in status
     assert "development simulation isolated" in status
     assert "production authentication disabled" in status
-    assert "Formal lifecycle closeout: AION-161." in status
+    assert (
+        "Formal lifecycle closeout: AION-161." in status
+        or (
+            "Next implementation task: AION-162 offline Ed25519 identity assertion "
+            "verification core."
+        )
+        in status
+    )
 
 
 def test_aion160_json_artifacts_are_synthetic_read_only_and_fail_closed() -> None:

@@ -191,7 +191,8 @@ v0.2 production auth request boundary authorization result:
 - AION-153-PA-0002: historical, inactive, consumed, expired, non-reusable
 - AION-155-PA-0003: approved historical, inactive, consumed, expired, non-reusable
 - AION-157-PA-0004: historical consumed authorization
-- AION-159-PA-0005: only active approved authorization
+- AION-159-PA-0005: historical, consumed by AION-160 PR 70, expired, non-reusable
+- AION-161-PA-0006: only active approved authorization
 - candidate_id: production-auth-request-identity-boundary
 - workstream: production-auth-request-integration
 - implementation_task: AION-156

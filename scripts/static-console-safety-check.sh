@@ -201,6 +201,7 @@ allowed_authorization_demo_names = {
     "v02-production-auth-request-boundary-authorization.json",
     "v02-production-auth-request-identity-stabilization-authorization.json",
     "v02-actor-context-trust-boundary-authorization.json",
+    "v02-offline-identity-assertion-verification-authorization.json",
     "production-auth-core-status.json",
     "production-auth-runtime-hold.json",
     "production-auth-core-stabilization.json",
@@ -211,6 +212,12 @@ allowed_authorization_demo_names = {
     "production-auth-request-identity-stabilization-runtime-hold.json",
     "actor-context-trust-boundary.json",
     "actor-context-runtime-hold.json",
+}
+aion161_allowed_policy_markers = {
+    "runtime_private_key",
+    "private_key_configuration",
+    "private_key_persistence",
+    "private_key_serialization",
 }
 
 
@@ -228,6 +235,12 @@ def walk(value: object, path: Path) -> None:
         lowered = value.lower()
         for marker in unsafe_markers:
             if marker == "authorization" and path.name in allowed_authorization_demo_names:
+                continue
+            if (
+                marker == "private_key"
+                and path.name == "v02-offline-identity-assertion-verification-authorization.json"
+                and lowered in aion161_allowed_policy_markers
+            ):
                 continue
             if marker == "password" and path.name in {
                 "v02-production-auth-authorization.json",

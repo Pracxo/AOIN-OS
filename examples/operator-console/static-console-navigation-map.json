@@ -196,6 +196,8 @@
     "./scripts/production-auth-request-identity-stabilization-runtime-hold.sh",
     "./scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh",
     "./scripts/v02-actor-context-trust-boundary-authorization-check.sh",
+    "./scripts/v02-offline-identity-assertion-verification-authorization-no-go-regression.sh",
+    "./scripts/v02-offline-identity-assertion-verification-authorization-check.sh",
     "./scripts/docs-check.sh"
   ],
   "forbidden_surface": {

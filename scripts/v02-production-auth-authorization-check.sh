@@ -62,10 +62,20 @@ v0.2 production auth authorization check result:
 - historical implementation_task: AION-156
 - historical authorization_scope: disabled-request-identity-boundary
 - historical lifecycle: inactive, consumed, expired, non-reusable
-- active authorization_transaction_id: AION-159-PA-0005
-- active candidate_id: production-auth-request-identity-boundary-stabilization
-- active implementation_task: AION-158
-- active authorization_scope: disabled-request-identity-boundary-stabilization
+- historical authorization_transaction_id: AION-157-PA-0004
+- historical candidate_id: production-auth-request-identity-boundary-stabilization
+- historical implementation_task: AION-158
+- historical authorization_scope: disabled-request-identity-boundary-stabilization
+- historical lifecycle: inactive, consumed, expired, non-reusable
+- historical authorization_transaction_id: AION-159-PA-0005
+- historical candidate_id: production-auth-actor-context-trust-boundary
+- historical implementation_task: AION-160
+- historical authorization_scope: fail-closed-actor-context-resolution
+- historical lifecycle: inactive, consumed, expired, non-reusable
+- active authorization_transaction_id: AION-161-PA-0006
+- active candidate_id: production-auth-offline-identity-assertion-verification
+- active implementation_task: AION-162
+- active authorization_scope: offline-ed25519-identity-assertion-verification
 - implementation authorization: approved for the exact lifecycle records only
 - implementation go: true for the exact active lifecycle record only
 - runtime implementation approved: false

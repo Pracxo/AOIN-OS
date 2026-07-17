@@ -22,6 +22,7 @@ from v02_production_auth_authorization import (  # noqa: E402
     AION155_AUTHORIZATION,
     AION157_AUTHORIZATION,
     AION159_AUTHORIZATION,
+    AION161_AUTHORIZATION,
     APPROVAL_TRUE_KEYS,
     REQUEST_BOUNDARY_IMPLEMENTATION_TRUE_KEYS,
     REQUEST_IDENTITY_STABILIZATION_FALSE_KEYS,
@@ -105,15 +106,21 @@ def test_aion157_required_files_exist_and_status_is_current() -> None:
         "Current milestone: AION-158 request-identity stabilization merged." in status
         or "Current milestone: AION-160 actor-context trust-boundary remediation implemented."
         in status
-    )
-    assert (
-        "Current authorization: AION-159-PA-0005 active for AION-160." in status
-        or "Current authorization: AION-159-PA-0005 consumed by AION-160 when merged."
+        or "Current milestone: AION-160 actor-context trust-boundary remediation merged."
         in status
+    )
+    assert any(
+        marker in status
+        for marker in (
+            "Current authorization: AION-159-PA-0005 active for AION-160.",
+            "Current authorization: AION-159-PA-0005 consumed by AION-160 when merged.",
+            "Current authorization: AION-161-PA-0006 active for AION-162.",
+        )
     )
     assert (
         "Next task: AION-160 actor-context trust-boundary remediation." in status
         or "Formal lifecycle closeout: AION-161." in status
+        or "Next task: AION-162 offline identity assertion verification core." in status
     )
 
     readiness = _text("docs/release/v02-release-readiness-delta.md")
@@ -123,6 +130,7 @@ def test_aion157_required_files_exist_and_status_is_current() -> None:
     assert (
         "`AION-160` is the next critical path" in readiness
         or "AION-160 remediates the actor-context trust boundary" in readiness
+        or "`AION-162` is the next critical path" in readiness
     )
     assert "`v02_release_ready=false`" in readiness
     assert "`v02_tag_created=false`" in readiness
@@ -207,7 +215,7 @@ def test_aion157_json_is_valid_synthetic_read_only_and_exactly_scoped() -> None:
         assert payload["expiry"] == AION157_AUTHORIZATION.expiry
 
 
-def test_aion157_validator_accepts_exact_five_record_lifecycle() -> None:
+def test_aion157_validator_accepts_exact_six_record_lifecycle() -> None:
     validate_authorization_lifecycle_payloads(_canonical_records())
 
 
@@ -253,103 +261,103 @@ def test_aion157_validator_accepts_exact_five_record_lifecycle() -> None:
             "authorization_expired must be true",
         ),
         (
-            lambda records: records[4][1].__setitem__("authorization_consumed", True),
+            lambda records: records[5][1].__setitem__("authorization_consumed", True),
             "authorization_consumed must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("authorization_expired", True),
+            lambda records: records[5][1].__setitem__("authorization_expired", True),
             "authorization_expired must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__(
+            lambda records: records[5][1].__setitem__(
                 "parent_authorization_transaction_id",
                 "AION-153-PA-0002",
             ),
             "parent_authorization_transaction_id mismatch",
         ),
         (
-            lambda records: records[4][1].__setitem__("implementation_task", "AION-157"),
+            lambda records: records[5][1].__setitem__("implementation_task", "AION-157"),
             "implementation_task mismatch",
         ),
         (
-            lambda records: records[4][1].__setitem__("candidate_id", "production-auth-runtime"),
+            lambda records: records[5][1].__setitem__("candidate_id", "production-auth-runtime"),
             "candidate_id mismatch",
         ),
         (
-            lambda records: records[4][1].__setitem__("workstream", "production-auth-runtime"),
+            lambda records: records[5][1].__setitem__("workstream", "production-auth-runtime"),
             "workstream mismatch",
         ),
         (
-            lambda records: records[4][1].__setitem__(
+            lambda records: records[5][1].__setitem__(
                 "authorization_scope",
                 "disabled-request-identity-boundary-stabilization-and-login",
             ),
             "authorization_scope mismatch",
         ),
         (
-            lambda records: records[4][1].__setitem__(
-                "actor_context_trust_boundary_remediation_approved",
+            lambda records: records[5][1].__setitem__(
+                "offline_identity_assertion_verifier_approved",
                 False,
             ),
-            "actor_context_trust_boundary_remediation_approved must be true",
+            "offline_identity_assertion_verifier_approved must be true",
         ),
         (
-            lambda records: records[4][1].__setitem__("extra_runtime_permission_approved", True),
+            lambda records: records[5][1].__setitem__("extra_runtime_permission_approved", True),
             "approved permission set mismatch",
         ),
         (
-            lambda records: records[4][1]["prohibited_scope"].remove("token_storage"),
+            lambda records: records[5][1]["prohibited_scope"].remove("http_header_parsing"),
             "prohibited_scope mismatch",
         ),
         (
-            lambda records: records[4][1].__setitem__("identity_verification_enabled", True),
+            lambda records: records[5][1].__setitem__("identity_verification_enabled", True),
             "identity_verification_enabled must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("authenticated_requests_enabled", True),
+            lambda records: records[5][1].__setitem__("authenticated_requests_enabled", True),
             "authenticated_requests_enabled must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__(
+            lambda records: records[5][1].__setitem__(
                 "authorization_header_parsing_approved",
                 True,
             ),
             "authorization_header_parsing_approved must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("cookie_parsing_approved", True),
+            lambda records: records[5][1].__setitem__("cookie_parsing_approved", True),
             "cookie_parsing_approved must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("credential_verification_approved", True),
+            lambda records: records[5][1].__setitem__("credential_verification_approved", True),
             "credential_verification_approved must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("external_identity_provider_approved", True),
+            lambda records: records[5][1].__setitem__("external_identity_provider_approved", True),
             "external_identity_provider_approved must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("login_endpoint_approved", True),
+            lambda records: records[5][1].__setitem__("login_endpoint_approved", True),
             "login_endpoint_approved must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("openapi_security_scheme_added", True),
+            lambda records: records[5][1].__setitem__("openapi_security_scheme_added", True),
             "openapi_security_scheme_added must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("package_files_added", True),
+            lambda records: records[5][1].__setitem__("package_files_added", True),
             "package_files_added must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("migrations_added", True),
+            lambda records: records[5][1].__setitem__("migrations_added", True),
             "migrations_added must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("v02_tag_created", True),
+            lambda records: records[5][1].__setitem__("v02_tag_created", True),
             "v02_tag_created must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("v02_release_created", True),
+            lambda records: records[5][1].__setitem__("v02_release_created", True),
             "v02_release_created must be false",
         ),
     ],
@@ -412,6 +420,7 @@ def _canonical_records() -> list[tuple[str, dict[str, Any]]]:
         ("aion155.json", _payload_from_spec(AION155_AUTHORIZATION)),
         ("aion157.json", _payload_from_spec(AION157_AUTHORIZATION)),
         ("aion159.json", _payload_from_spec(AION159_AUTHORIZATION)),
+        ("aion161.json", _payload_from_spec(AION161_AUTHORIZATION)),
     ]
 
 
@@ -454,11 +463,18 @@ def _payload_from_spec(spec: Any) -> dict[str, Any]:
         payload[key] = False
     for key in spec.implementation_true_keys:
         payload[key] = True
+    if spec.approved_dependency_name is not None:
+        payload["approved_dependency"] = {
+            "name": spec.approved_dependency_name,
+            "specifier": spec.approved_dependency_specifier,
+            "manifest": spec.approved_dependency_manifest,
+            "change_count": spec.approved_dependency_change_count,
+        }
     return copy.deepcopy(payload)
 
 
 def _unknown_active_payload() -> dict[str, Any]:
-    payload = _payload_from_spec(AION159_AUTHORIZATION)
+    payload = _payload_from_spec(AION161_AUTHORIZATION)
     payload["authorization_transaction_id"] = "AION-999-PA-9999"
     payload["approval_record_id"] = "AION-999-PA-9999"
     return payload

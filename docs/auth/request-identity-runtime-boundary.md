@@ -64,3 +64,10 @@ AION-157 stabilization authorization. The actor-context trust-boundary
 authorization for AION-160 does not enable identity verification,
 authenticated requests, header parsing, cookie parsing, credentials, tokens,
 sessions, providers, runtime routes, SDK/CLI resources, tags, or releases.
+
+## AION-161 Runtime Hold
+
+`AION-161-PA-0006` keeps request identity runtime integration disabled.
+Cryptographic verification in AION-162 may produce an internal verification
+result, but `request_identity_context_applied=false`,
+`request_authenticated=false`, and `runtime_effect=false` remain mandatory.

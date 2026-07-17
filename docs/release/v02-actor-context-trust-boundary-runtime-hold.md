@@ -25,3 +25,12 @@ Validation:
 - `./scripts/production-auth-actor-context-trust-boundary-check.sh`
 - `./scripts/production-auth-actor-context-trust-boundary-runtime-hold.sh`
 - `./scripts/production-auth-actor-context-trust-boundary-no-go-regression.sh`
+
+## AION-161 Closeout
+
+AION-161 keeps this runtime hold in force. `AION-159-PA-0005` is historical and
+`AION-161-PA-0006` authorizes only future offline Ed25519 verification; request
+authentication, ActorContext application, RequestIdentityContext application,
+runtime private keys, provider networking, replay cache, endpoints, packages,
+lockfiles, migrations, SDK/CLI runtime surfaces, v0.2 tags, and v0.2 releases
+remain false or absent.

@@ -1037,3 +1037,18 @@ keep runtime authentication, credential/token/session handling, providers,
 external calls, auth endpoints, OpenAPI security, connector runtime, operator
 writes, module activation, sandbox execution, runtime guard release, v0.2
 tags, and v0.2 releases blocked.
+
+## AION-161 Offline Identity Assertion Verification Authorization
+
+AION-161 is governance-only. Agents must not modify actor-context,
+request-identity, production-auth implementation source, config, kernel,
+api-support, API routers, SDK source, migrations, package manifests, lockfiles,
+or `services/brain-api/pyproject.toml` for AION-161.
+
+`AION-159-PA-0005` is historical after AION-160 PR 70. `AION-161-PA-0006` is
+the sole active authorization for AION-162 offline Ed25519 identity assertion
+verification. The future scope is public-key-only verification with fixed
+Ed25519 signatures and no request authentication, no ActorContext application,
+no RequestIdentityContext application, no HTTP parsing, no runtime private
+keys, no provider network, no replay cache, no endpoints, no SDK/CLI runtime
+surface, and no v0.2 tag or release.

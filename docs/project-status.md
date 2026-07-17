@@ -8,14 +8,16 @@ v0.2 tag or release exists.
 
 ## Current Main Milestone
 
-The current main milestone is v0.2 actor-context trust-boundary remediation.
+The current main milestone is v0.2 offline identity assertion verification authorization.
 AION-158 implemented and merged the pure ASGI disabled request identity
 stabilization. AION-159 closed `AION-157-PA-0004` and created
-`AION-159-PA-0005` as the active authorization for AION-160.
+`AION-159-PA-0005` for AION-160. AION-160 merged the fail-closed actor-context
+trust-boundary remediation.
 
-Current milestone: AION-160 actor-context trust-boundary remediation implemented.
+Current milestone: AION-160 actor-context trust-boundary remediation merged.
 Current implementation state:
 
+- fail-closed ActorContext resolution
 - non-development identity headers ignored
 - anonymous zero-permission ActorContext
 - RequestIdentityContext precedence
@@ -23,8 +25,9 @@ Current implementation state:
 - development simulation isolated
 - production authentication disabled
 
-Current authorization: AION-159-PA-0005 consumed by AION-160 when merged.
-Formal lifecycle closeout: AION-161.
+Current authorization: AION-161-PA-0006 active for AION-162.
+Next task: AION-162 offline identity assertion verification core.
+Next implementation task: AION-162 offline Ed25519 identity assertion verification core.
 
 ## Implemented Subsystems
 
@@ -40,6 +43,10 @@ Formal lifecycle closeout: AION-161.
   deterministic disabled test verifier, anonymous request-state attachment,
   audit/provenance correlation, diagnostics, middleware ordering coverage, and
   runtime/no-go gates.
+- Fail-closed ActorContext resolution: non-development identity-header
+  rejection, anonymous zero-permission fallback, RequestIdentityContext
+  precedence, RequestContext trace/correlation projection, and development
+  identity simulation isolation.
 
 ## Disabled Subsystems
 
@@ -62,8 +69,12 @@ Formal lifecycle closeout: AION-161.
 `authorization_active=false`, `authorization_consumed=true`,
 `authorization_expired=true`, and `authorization_reusable=false`.
 
-`AION-159-PA-0005` is active for AION-160 under
+`AION-159-PA-0005` is historical, consumed by AION-160 PR 70, expired,
+inactive, and non-reusable under
 `authorization_scope=fail-closed-actor-context-resolution`.
+
+`AION-161-PA-0006` is active for AION-162 under
+`authorization_scope=offline-ed25519-identity-assertion-verification`.
 
 `AION-153-PA-0002` is historical, consumed by AION-154 PR 64, expired, inactive,
 and non-reusable. `AION-151-PA-0001` remains historical evidence consumed by
@@ -86,21 +97,25 @@ authentication.
 `v02_tag_created=false`
 `v02_release_created=false`
 
-The v0.2 release remains blocked until real identity verification, external
-provider integration, protected-material, credential, token, session,
+The v0.2 release remains blocked until offline cryptographic identity
+verification core and later request integration, external provider integration,
+protected-material, credential, token, session,
 deployment, rollback, observability, threat-model, release-candidate, runtime
 guard release decision, tag, and release authorization work is complete.
 
 ## Current Implementation Task
 
-AION-160 actor-context trust-boundary remediation implemented. The
-implementation removes non-development trust in identity-bearing `X-AION`
-headers, isolates development simulation behind the exact development gate,
-preserves RequestIdentityContext precedence, preserves RequestContext
-trace/correlation projection, ignores RequestContext actor/workspace metadata,
-and returns anonymous zero-permission ActorContext outside development
-simulation. Real identity verification, external provider integration,
-protected material lifecycle, and runtime guard release remain blocked.
+AION-162 offline Ed25519 identity assertion verification core is the next
+implementation task. AION-161 authorizes only strict offline verification with
+public verification keys, fixed Ed25519 signatures, canonical payloads,
+domain separation, issuer/audience/time/assertion-ID validation, claim
+constraints, audit/provenance evidence, deterministic negative fixtures,
+test-only ephemeral signing keys, and exactly one future `cryptography`
+dependency change in `services/brain-api/pyproject.toml`.
+Request authentication, ActorContext application, RequestIdentityContext
+application, runtime private keys, provider networking, replay cache,
+endpoints, packages, migrations, SDK/CLI runtime surfaces, and v0.2 release
+actions remain blocked.
 
 ## Implemented Code Versus Enabled Runtime
 
@@ -113,6 +128,6 @@ providers are contacted, and no production-auth or request-identity API route
 exists.
 
 The actor-context trust-boundary finding was documented by AION-159 as a
-non-development identity-header trust fallback. AION-160 owns and implements
-the fail-closed remediation. Formal lifecycle closeout for `AION-159-PA-0005`
-belongs to AION-161.
+non-development identity-header trust fallback. AION-160 implemented the
+fail-closed remediation. AION-161 closes `AION-159-PA-0005` and creates
+`AION-161-PA-0006` for the next offline verification core.

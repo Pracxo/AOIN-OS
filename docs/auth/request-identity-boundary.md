@@ -78,3 +78,10 @@ AION-159 closes the AION-157 stabilization authorization as consumed by
 AION-158. Request identity remains disabled, anonymous, observe-only, and
 runtime-effect-free. The next active authorization is AION-159-PA-0005 for
 AION-160 actor-context trust-boundary remediation.
+
+## AION-161 Boundary
+
+AION-161 authorizes future offline identity assertion verification only. It
+does not replace `DisabledRequestIdentityVerifier`, populate
+RequestIdentityContext, parse request headers, authenticate requests, or add a
+request integration path.

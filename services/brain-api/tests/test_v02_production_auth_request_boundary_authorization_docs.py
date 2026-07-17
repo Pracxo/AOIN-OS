@@ -22,6 +22,7 @@ from v02_production_auth_authorization import (  # noqa: E402
     AION155_AUTHORIZATION,
     AION157_AUTHORIZATION,
     AION159_AUTHORIZATION,
+    AION161_AUTHORIZATION,
     APPROVAL_TRUE_KEYS,
     REQUEST_BOUNDARY_FALSE_KEYS,
     REQUEST_BOUNDARY_IMPLEMENTATION_TRUE_KEYS,
@@ -168,7 +169,7 @@ def test_aion155_json_is_synthetic_read_only_and_exactly_scoped() -> None:
         assert payload["expiry"] == AION155_AUTHORIZATION.expiry
 
 
-def test_aion155_validator_accepts_exact_five_record_lifecycle() -> None:
+def test_aion155_validator_accepts_exact_six_record_lifecycle() -> None:
     validate_authorization_lifecycle_payloads(
         [
             ("aion151.json", _payload_from_spec(AION151_AUTHORIZATION)),
@@ -176,6 +177,7 @@ def test_aion155_validator_accepts_exact_five_record_lifecycle() -> None:
             ("aion155.json", _payload_from_spec(AION155_AUTHORIZATION)),
             ("aion157.json", _payload_from_spec(AION157_AUTHORIZATION)),
             ("aion159.json", _payload_from_spec(AION159_AUTHORIZATION)),
+            ("aion161.json", _payload_from_spec(AION161_AUTHORIZATION)),
         ]
     )
 
@@ -212,82 +214,82 @@ def test_aion155_validator_accepts_exact_five_record_lifecycle() -> None:
             "authorization_expired must be true",
         ),
         (
-            lambda records: records[4][1].__setitem__("authorization_consumed", True),
+            lambda records: records[5][1].__setitem__("authorization_consumed", True),
             "authorization_consumed must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("authorization_expired", True),
+            lambda records: records[5][1].__setitem__("authorization_expired", True),
             "authorization_expired must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__(
+            lambda records: records[5][1].__setitem__(
                 "parent_authorization_transaction_id",
                 "AION-153-PA-0002",
             ),
             "parent_authorization_transaction_id mismatch",
         ),
         (
-            lambda records: records[4][1].__setitem__("implementation_task", "AION-157"),
+            lambda records: records[5][1].__setitem__("implementation_task", "AION-157"),
             "implementation_task mismatch",
         ),
         (
-            lambda records: records[4][1].__setitem__(
+            lambda records: records[5][1].__setitem__(
                 "authorization_scope",
                 "disabled-request-identity-boundary-stabilization-and-login",
             ),
             "authorization_scope mismatch",
         ),
         (
-            lambda records: records[4][1]["approved_scope"].append("login_endpoint"),
+            lambda records: records[5][1]["approved_scope"].append("login_endpoint"),
             "approved_scope mismatch",
         ),
         (
-            lambda records: records[4][1]["prohibited_scope"].remove("token_storage"),
+            lambda records: records[5][1]["prohibited_scope"].remove("http_header_parsing"),
             "prohibited_scope mismatch",
         ),
         (
-            lambda records: records[4][1].__setitem__("production_auth_runtime_enabled", True),
+            lambda records: records[5][1].__setitem__("production_auth_runtime_enabled", True),
             "production_auth_runtime_enabled must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("identity_verification_enabled", True),
+            lambda records: records[5][1].__setitem__("identity_verification_enabled", True),
             "identity_verification_enabled must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__(
+            lambda records: records[5][1].__setitem__(
                 "authorization_header_parsing_approved",
                 True,
             ),
             "authorization_header_parsing_approved must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("credential_verification_approved", True),
+            lambda records: records[5][1].__setitem__("credential_verification_approved", True),
             "credential_verification_approved must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("token_parsing_approved", True),
+            lambda records: records[5][1].__setitem__("token_parsing_approved", True),
             "token_parsing_approved must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__(
+            lambda records: records[5][1].__setitem__(
                 "external_identity_provider_approved", True
             ),
             "external_identity_provider_approved must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("package_files_added", True),
+            lambda records: records[5][1].__setitem__("package_files_added", True),
             "package_files_added must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("migrations_added", True),
+            lambda records: records[5][1].__setitem__("migrations_added", True),
             "migrations_added must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("v02_tag_created", True),
+            lambda records: records[5][1].__setitem__("v02_tag_created", True),
             "v02_tag_created must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("v02_release_created", True),
+            lambda records: records[5][1].__setitem__("v02_release_created", True),
             "v02_release_created must be false",
         ),
     ],
@@ -299,6 +301,7 @@ def test_aion155_validator_rejects_bad_lifecycle(mutator: Any, match: str) -> No
         ("aion155.json", _payload_from_spec(AION155_AUTHORIZATION)),
         ("aion157.json", _payload_from_spec(AION157_AUTHORIZATION)),
         ("aion159.json", _payload_from_spec(AION159_AUTHORIZATION)),
+        ("aion161.json", _payload_from_spec(AION161_AUTHORIZATION)),
     ]
     mutator(records)
     with pytest.raises(AssertionError, match=match):
@@ -365,11 +368,18 @@ def _payload_from_spec(spec: Any) -> dict[str, Any]:
         payload[key] = False
     for key in spec.implementation_true_keys:
         payload[key] = True
+    if spec.approved_dependency_name is not None:
+        payload["approved_dependency"] = {
+            "name": spec.approved_dependency_name,
+            "specifier": spec.approved_dependency_specifier,
+            "manifest": spec.approved_dependency_manifest,
+            "change_count": spec.approved_dependency_change_count,
+        }
     return copy.deepcopy(payload)
 
 
 def _unknown_active_payload() -> dict[str, Any]:
-    payload = _payload_from_spec(AION157_AUTHORIZATION)
+    payload = _payload_from_spec(AION161_AUTHORIZATION)
     payload["authorization_transaction_id"] = "AION-999-PA-9999"
     payload["approval_record_id"] = "AION-999-PA-9999"
     return payload

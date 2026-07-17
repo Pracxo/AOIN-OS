@@ -25,6 +25,7 @@ from v02_production_auth_authorization import (  # noqa: E402
     AION155_AUTHORIZATION,
     AION157_AUTHORIZATION,
     AION159_AUTHORIZATION,
+    AION161_AUTHORIZATION,
     APPROVAL_TRUE_KEYS,
     REQUEST_IDENTITY_STABILIZATION_TRUE_KEYS,
     validate_authorization_lifecycle_payloads,
@@ -32,6 +33,8 @@ from v02_production_auth_authorization import (  # noqa: E402
 
 AION158_FEATURE_COMMIT = "767fd9b228b00b04569df2e3b1b3f6bc9ecd846f"
 AION158_MERGE_COMMIT = "f792c92e1d8a73ec8e7377b5d59269dea359006d"
+AION160_FEATURE_COMMIT = "085b1b9d9cbbc23a735c1a82be66a2e901a56761"
+AION160_MERGE_COMMIT = "bfc2afdc96358559027ee36efc0bc26ed3bb796d"
 
 DOCS = [
     "docs/release/v02-request-identity-stabilization-closeout.md",
@@ -96,15 +99,21 @@ def test_aion159_required_files_exist_and_status_is_current() -> None:
         "Current milestone: AION-158 request-identity stabilization merged." in status
         or "Current milestone: AION-160 actor-context trust-boundary remediation implemented."
         in status
-    )
-    assert (
-        "Current authorization: AION-159-PA-0005 active for AION-160." in status
-        or "Current authorization: AION-159-PA-0005 consumed by AION-160 when merged."
+        or "Current milestone: AION-160 actor-context trust-boundary remediation merged."
         in status
+    )
+    assert any(
+        marker in status
+        for marker in (
+            "Current authorization: AION-159-PA-0005 active for AION-160.",
+            "Current authorization: AION-159-PA-0005 consumed by AION-160 when merged.",
+            "Current authorization: AION-161-PA-0006 active for AION-162.",
+        )
     )
     assert (
         "Next task: AION-160 actor-context trust-boundary remediation." in status
         or "Formal lifecycle closeout: AION-161." in status
+        or "Next task: AION-162 offline identity assertion verification core." in status
     )
 
     readiness = _text("docs/release/v02-release-readiness-delta.md")
@@ -113,6 +122,7 @@ def test_aion159_required_files_exist_and_status_is_current() -> None:
     assert (
         "`AION-160` is the next critical path" in readiness
         or "AION-160 remediates the actor-context trust boundary" in readiness
+        or "`AION-162` is the next critical path" in readiness
     )
     assert "`v02_release_ready=false`" in readiness
     assert "`v02_tag_created=false`" in readiness
@@ -153,9 +163,13 @@ def test_aion159_json_is_valid_synthetic_read_only_and_exactly_scoped() -> None:
         assert payload["workstream"] == "production-auth-route-context-hardening"
         assert payload["implementation_task"] == "AION-160"
         assert payload["authorization_scope"] == "fail-closed-actor-context-resolution"
-        assert payload["authorization_active"] is True
-        assert payload["authorization_consumed"] is False
-        assert payload["authorization_expired"] is False
+        assert payload["authorization_active"] is False
+        assert payload["authorization_consumed"] is True
+        assert payload["authorization_consumed_by_task"] == "AION-160"
+        assert payload["authorization_consumed_by_pr"] == 70
+        assert payload["authorization_consumed_by_feature_commit"] == AION160_FEATURE_COMMIT
+        assert payload["authorization_consumed_by_merge_commit"] == AION160_MERGE_COMMIT
+        assert payload["authorization_expired"] is True
         assert payload["authorization_reusable"] is False
         for key in APPROVAL_TRUE_KEYS | ACTOR_CONTEXT_TRUST_BOUNDARY_TRUE_KEYS:
             assert payload.get(key) is True, f"{relative}: {key}"
@@ -167,7 +181,7 @@ def test_aion159_json_is_valid_synthetic_read_only_and_exactly_scoped() -> None:
         assert payload["expiry"] == AION159_AUTHORIZATION.expiry
 
 
-def test_aion157_is_historical_and_aion159_is_only_active_record() -> None:
+def test_aion157_and_aion159_are_historical_and_aion161_is_only_active_record() -> None:
     validate_authorization_lifecycle_payloads(_canonical_records())
     aion157 = _payload_from_spec(AION157_AUTHORIZATION)
     assert aion157["authorization_active"] is False
@@ -180,6 +194,19 @@ def test_aion157_is_historical_and_aion159_is_only_active_record() -> None:
     assert aion157["authorization_reusable"] is False
     for key in APPROVAL_TRUE_KEYS | REQUEST_IDENTITY_STABILIZATION_TRUE_KEYS:
         assert aion157[key] is True
+    aion159 = _payload_from_spec(AION159_AUTHORIZATION)
+    assert aion159["authorization_active"] is False
+    assert aion159["authorization_consumed"] is True
+    assert aion159["authorization_consumed_by_task"] == "AION-160"
+    assert aion159["authorization_consumed_by_pr"] == 70
+    assert aion159["authorization_consumed_by_feature_commit"] == AION160_FEATURE_COMMIT
+    assert aion159["authorization_consumed_by_merge_commit"] == AION160_MERGE_COMMIT
+    assert aion159["authorization_expired"] is True
+    assert aion159["authorization_reusable"] is False
+    aion161 = _payload_from_spec(AION161_AUTHORIZATION)
+    assert aion161["authorization_active"] is True
+    assert aion161["authorization_consumed"] is False
+    assert aion161["authorization_expired"] is False
 
 
 def test_aion159_trust_boundary_finding_is_documented_from_source() -> None:
@@ -237,110 +264,108 @@ def test_aion159_trust_boundary_finding_is_documented_from_source() -> None:
             "authorization_expired must be true",
         ),
         (
-            lambda records: records[4][1].__setitem__("authorization_consumed", True),
+            lambda records: records[5][1].__setitem__("authorization_consumed", True),
             "authorization_consumed must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("authorization_expired", True),
+            lambda records: records[5][1].__setitem__("authorization_expired", True),
             "authorization_expired must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__(
+            lambda records: records[5][1].__setitem__(
                 "parent_authorization_transaction_id",
                 "AION-155-PA-0003",
             ),
             "parent_authorization_transaction_id mismatch",
         ),
         (
-            lambda records: records[4][1].__setitem__("implementation_task", "AION-159"),
+            lambda records: records[5][1].__setitem__("implementation_task", "AION-159"),
             "implementation_task mismatch",
         ),
         (
-            lambda records: records[4][1].__setitem__("candidate_id", "production-auth-runtime"),
+            lambda records: records[5][1].__setitem__("candidate_id", "production-auth-runtime"),
             "candidate_id mismatch",
         ),
         (
-            lambda records: records[4][1].__setitem__("workstream", "production-auth-runtime"),
+            lambda records: records[5][1].__setitem__("workstream", "production-auth-runtime"),
             "workstream mismatch",
         ),
         (
-            lambda records: records[4][1].__setitem__(
+            lambda records: records[5][1].__setitem__(
                 "authorization_scope",
                 "fail-closed-actor-context-resolution-and-login",
             ),
             "authorization_scope mismatch",
         ),
         (
-            lambda records: records[4][1].__setitem__(
-                "actor_context_trust_boundary_remediation_approved",
+            lambda records: records[5][1].__setitem__(
+                "offline_identity_assertion_verifier_approved",
                 False,
             ),
-            "actor_context_trust_boundary_remediation_approved must be true",
+            "offline_identity_assertion_verifier_approved must be true",
         ),
         (
-            lambda records: records[4][1].__setitem__(
+            lambda records: records[5][1].__setitem__(
                 "extra_actor_context_permission_approved",
                 True,
             ),
             "approved permission set mismatch",
         ),
         (
-            lambda records: records[4][1]["prohibited_scope"].remove(
-                "production_identity_header_trust"
-            ),
+            lambda records: records[5][1]["prohibited_scope"].remove("http_header_parsing"),
             "prohibited_scope mismatch",
         ),
         (
-            lambda records: records[4][1].__setitem__(
+            lambda records: records[5][1].__setitem__(
                 "production_identity_header_trust_approved",
                 True,
             ),
             "production_identity_header_trust_approved must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("production_role_header_trust_enabled", True),
+            lambda records: records[5][1].__setitem__("production_role_header_trust_enabled", True),
             "production_role_header_trust_enabled must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__(
+            lambda records: records[5][1].__setitem__(
                 "production_permission_header_trust_enabled",
                 True,
             ),
             "production_permission_header_trust_enabled must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__(
+            lambda records: records[5][1].__setitem__(
                 "production_security_scope_header_trust_enabled",
                 True,
             ),
             "production_security_scope_header_trust_enabled must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("identity_verification_enabled", True),
+            lambda records: records[5][1].__setitem__("identity_verification_enabled", True),
             "identity_verification_enabled must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("authenticated_requests_enabled", True),
+            lambda records: records[5][1].__setitem__("authenticated_requests_enabled", True),
             "authenticated_requests_enabled must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("protected_material_handling_approved", True),
+            lambda records: records[5][1].__setitem__("protected_material_handling_approved", True),
             "protected_material_handling_approved must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("provider_sdk_approved", True),
+            lambda records: records[5][1].__setitem__("provider_sdk_approved", True),
             "provider_sdk_approved must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("package_files_added", True),
+            lambda records: records[5][1].__setitem__("package_files_added", True),
             "package_files_added must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("migrations_added", True),
+            lambda records: records[5][1].__setitem__("migrations_added", True),
             "migrations_added must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("v02_release_created", True),
+            lambda records: records[5][1].__setitem__("v02_release_created", True),
             "v02_release_created must be false",
         ),
     ],
@@ -407,6 +432,7 @@ def _canonical_records() -> list[tuple[str, dict[str, Any]]]:
         ("aion155.json", _payload_from_spec(AION155_AUTHORIZATION)),
         ("aion157.json", _payload_from_spec(AION157_AUTHORIZATION)),
         ("aion159.json", _payload_from_spec(AION159_AUTHORIZATION)),
+        ("aion161.json", _payload_from_spec(AION161_AUTHORIZATION)),
     ]
 
 
@@ -449,11 +475,18 @@ def _payload_from_spec(spec: Any) -> dict[str, Any]:
         payload[key] = False
     for key in spec.implementation_true_keys:
         payload[key] = True
+    if spec.approved_dependency_name is not None:
+        payload["approved_dependency"] = {
+            "name": spec.approved_dependency_name,
+            "specifier": spec.approved_dependency_specifier,
+            "manifest": spec.approved_dependency_manifest,
+            "change_count": spec.approved_dependency_change_count,
+        }
     return copy.deepcopy(payload)
 
 
 def _unknown_active_payload() -> dict[str, Any]:
-    payload = _payload_from_spec(AION159_AUTHORIZATION)
+    payload = _payload_from_spec(AION161_AUTHORIZATION)
     payload["authorization_transaction_id"] = "AION-999-PA-9999"
     payload["approval_record_id"] = "AION-999-PA-9999"
     return payload
