@@ -94,6 +94,26 @@ current_deps = set(current["project"]["dependencies"])
 if "cryptography>=49.0.0,<50.0.0" not in current_deps:
     raise SystemExit("authorized cryptography dependency is missing")
 if base:
+    base_resolved = subprocess.run(
+        ["git", "rev-parse", base],
+        cwd=root,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    head_resolved = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=root,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if (
+        base_resolved.returncode == 0
+        and head_resolved.returncode == 0
+        and base_resolved.stdout.strip() == head_resolved.stdout.strip()
+    ):
+        raise SystemExit(0)
     proc = subprocess.run(
         ["git", "show", f"{base}:services/brain-api/pyproject.toml"],
         cwd=root,
