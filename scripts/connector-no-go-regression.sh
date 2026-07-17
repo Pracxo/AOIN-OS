@@ -306,6 +306,9 @@ allowed_aion160_files = {
     "services/brain-api/src/aion_brain/production_auth/actor_context.py",
     "services/brain-api/src/aion_brain/production_auth/actor_context_evidence.py",
 }
+allowed_aion161_files = {
+    "operator-console-static/demo-data/v02-offline-identity-assertion-verification-authorization.json",
+}
 allowed_aion152_prefixes = (
     "services/brain-api/src/aion_brain/production_auth/",
 )
@@ -360,6 +363,7 @@ for relative in sorted(changed):
         or relative in allowed_aion157_files
         or relative in allowed_aion159_files
         or relative in allowed_aion160_files
+        or relative in allowed_aion161_files
         or relative in allowed_aion152_files
         or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)

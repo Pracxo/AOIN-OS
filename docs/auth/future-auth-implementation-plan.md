@@ -143,3 +143,15 @@ preserving explicit development simulation. It is not authorization for real
 identity verification, external provider integration, protected-material
 handling, credential lifecycle, token lifecycle, session lifecycle, runtime
 guard release, or v0.2 release work.
+
+## AION-161 Authorized Next Step
+
+AION-161 authorizes AION-162 to implement an offline Ed25519 identity assertion
+verification core. The plan is deliberately narrower than JWT/OIDC/JWKS or
+request authentication: static public keys, fixed Ed25519 verification,
+canonical payloads, domain separation, issuer/audience/time/assertion-ID
+validation, claim constraints, audit/provenance evidence, deterministic
+negative fixtures, and exactly one future `cryptography` dependency change.
+Runtime integration, replay protection runtime, provider networking, private
+runtime keys, tokens, sessions, endpoints, and v0.2 release actions remain
+future work.

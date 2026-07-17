@@ -164,6 +164,26 @@ The evidence shows `AION-157-PA-0004` is consumed by AION-158 and
 console remains static. It does not accept actor headers, authenticate users,
 grant roles or permissions, enable production auth, or expose write controls.
 
+## Offline Identity Assertion Verification Evidence
+
+AION-161 adds bundled read-only authorization evidence for AION-162:
+
+- `demo-data/v02-offline-identity-assertion-verification-authorization.json`
+
+The evidence shows `AION-159-PA-0005` is consumed by AION-160 PR 70 and
+`AION-161-PA-0006` is active for offline Ed25519 identity assertion
+verification. The console remains static. It does not parse headers, verify
+requests, apply ActorContext or RequestIdentityContext, load runtime signing
+material, contact providers, create replay caches, enable production auth, or
+expose write controls.
+
+Safe local commands:
+
+```bash
+./scripts/v02-offline-identity-assertion-verification-authorization-no-go-regression.sh
+./scripts/v02-offline-identity-assertion-verification-authorization-check.sh
+```
+
 ## Production Auth Request Identity Evidence
 
 AION-156 adds read-only bundled evidence:

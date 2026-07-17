@@ -22,6 +22,7 @@ from v02_production_auth_authorization import (  # noqa: E402
     AION155_AUTHORIZATION,
     AION157_AUTHORIZATION,
     AION159_AUTHORIZATION,
+    AION161_AUTHORIZATION,
     APPROVAL_TRUE_KEYS,
     validate_authorization_lifecycle_payloads,
 )
@@ -153,7 +154,7 @@ def test_v02_production_auth_stabilization_json_is_historical() -> None:
         assert payload["expiry"] == AION153_AUTHORIZATION.expiry
 
 
-def test_v02_production_auth_stabilization_validator_accepts_five_record_lifecycle() -> None:
+def test_v02_production_auth_stabilization_validator_accepts_six_record_lifecycle() -> None:
     validate_authorization_lifecycle_payloads(
         [
             ("aion151.json", _payload_from_spec(AION151_AUTHORIZATION)),
@@ -161,6 +162,7 @@ def test_v02_production_auth_stabilization_validator_accepts_five_record_lifecyc
             ("aion155.json", _payload_from_spec(AION155_AUTHORIZATION)),
             ("aion157.json", _payload_from_spec(AION157_AUTHORIZATION)),
             ("aion159.json", _payload_from_spec(AION159_AUTHORIZATION)),
+            ("aion161.json", _payload_from_spec(AION161_AUTHORIZATION)),
         ]
     )
 
@@ -181,7 +183,7 @@ def test_v02_production_auth_stabilization_validator_accepts_five_record_lifecyc
             "authorization_active must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("authorization_consumed", True),
+            lambda records: records[5][1].__setitem__("authorization_consumed", True),
             "authorization_consumed must be false",
         ),
         (
@@ -203,6 +205,7 @@ def test_v02_production_auth_stabilization_validator_rejects_bad_lifecycle(
         ("aion155.json", _payload_from_spec(AION155_AUTHORIZATION)),
         ("aion157.json", _payload_from_spec(AION157_AUTHORIZATION)),
         ("aion159.json", _payload_from_spec(AION159_AUTHORIZATION)),
+        ("aion161.json", _payload_from_spec(AION161_AUTHORIZATION)),
     ]
     mutator(records)
     with pytest.raises(AssertionError, match=match):
@@ -285,6 +288,13 @@ def _payload_from_spec(spec: Any) -> dict[str, Any]:
         payload[key] = False
     for key in spec.implementation_true_keys:
         payload[key] = True
+    if spec.approved_dependency_name is not None:
+        payload["approved_dependency"] = {
+            "name": spec.approved_dependency_name,
+            "specifier": spec.approved_dependency_specifier,
+            "manifest": spec.approved_dependency_manifest,
+            "change_count": spec.approved_dependency_change_count,
+        }
     return copy.deepcopy(payload)
 
 

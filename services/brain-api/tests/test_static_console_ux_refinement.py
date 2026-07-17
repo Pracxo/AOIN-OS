@@ -183,6 +183,8 @@ def test_navigation_map_and_accessibility_result_are_valid() -> None:
         "./scripts/production-auth-request-identity-stabilization-runtime-hold.sh",
         "./scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh",
         "./scripts/v02-actor-context-trust-boundary-authorization-check.sh",
+        "./scripts/v02-offline-identity-assertion-verification-authorization-no-go-regression.sh",
+        "./scripts/v02-offline-identity-assertion-verification-authorization-check.sh",
         "./scripts/docs-check.sh",
     }
     assert set(nav["safe_copy_commands"]) == allowed_commands
@@ -349,6 +351,8 @@ def test_static_console_has_navigation_accessibility_and_safe_command_copy() -> 
             "./scripts/production-auth-request-identity-stabilization-runtime-hold.sh",
             "./scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh",
             "./scripts/v02-actor-context-trust-boundary-authorization-check.sh",
+            "./scripts/v02-offline-identity-assertion-verification-authorization-no-go-regression.sh",
+            "./scripts/v02-offline-identity-assertion-verification-authorization-check.sh",
             "./scripts/docs-check.sh",
         }
 

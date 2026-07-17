@@ -116,3 +116,11 @@ The no-go gate rejects historical reactivation, a second active authorization,
 unknown approved authorization records, scope widening, implementation-source
 changes in AION-159, runtime authentication, protected material, provider or
 network work, packages, migrations, tags, and releases.
+
+## AION-161 Lifecycle Update
+
+After AION-160 PR 70 merged, `AION-159-PA-0005` became historical: inactive,
+consumed, expired, and non-reusable. AION-161 creates `AION-161-PA-0006` as the
+sole active authorization for AION-162 offline Ed25519 identity assertion
+verification. The AION-159 approval values remain historical evidence and are
+not rewritten to false.

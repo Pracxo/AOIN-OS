@@ -172,6 +172,8 @@
     "./scripts/production-auth-request-identity-stabilization-runtime-hold.sh",
     "./scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh",
     "./scripts/v02-actor-context-trust-boundary-authorization-check.sh",
+    "./scripts/v02-offline-identity-assertion-verification-authorization-no-go-regression.sh",
+    "./scripts/v02-offline-identity-assertion-verification-authorization-check.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -306,7 +308,8 @@
     production_auth_request_identity_stabilization_authorization: "demo-data/v02-production-auth-request-identity-stabilization-authorization.json",
     production_auth_request_identity_stabilization: "demo-data/production-auth-request-identity-stabilization.json",
     production_auth_request_identity_stabilization_runtime_hold: "demo-data/production-auth-request-identity-stabilization-runtime-hold.json",
-    actor_context_trust_boundary_authorization: "demo-data/v02-actor-context-trust-boundary-authorization.json"
+    actor_context_trust_boundary_authorization: "demo-data/v02-actor-context-trust-boundary-authorization.json",
+    offline_identity_assertion_verification_authorization: "demo-data/v02-offline-identity-assertion-verification-authorization.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1846,7 +1849,8 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.production_auth_request_identity_stabilization_authorization),
       fetchJson(RELEASE_CANDIDATE_DEMOS.production_auth_request_identity_stabilization),
       fetchJson(RELEASE_CANDIDATE_DEMOS.production_auth_request_identity_stabilization_runtime_hold),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.actor_context_trust_boundary_authorization)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.actor_context_trust_boundary_authorization),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.offline_identity_assertion_verification_authorization)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
@@ -1928,6 +1932,7 @@
         renderReleaseCandidateEvidence("production-auth-request-identity-stabilization", redact(payloads[76]));
         renderReleaseCandidateEvidence("production-auth-request-identity-stabilization-runtime-hold", redact(payloads[77]));
         renderReleaseCandidateEvidence("v02-actor-context-trust-boundary-authorization", redact(payloads[78]));
+        renderReleaseCandidateEvidence("v02-offline-identity-assertion-verification-authorization", redact(payloads[79]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
@@ -2009,6 +2014,7 @@
         renderReleaseCandidateEvidence("production-auth-request-identity-stabilization", { status: "unavailable" });
         renderReleaseCandidateEvidence("production-auth-request-identity-stabilization-runtime-hold", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-actor-context-trust-boundary-authorization", { status: "unavailable" });
+        renderReleaseCandidateEvidence("v02-offline-identity-assertion-verification-authorization", { status: "unavailable" });
       });
   }
 

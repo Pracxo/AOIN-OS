@@ -57,7 +57,8 @@ grep -q "0151-v02-actor-context-trust-boundary-remediation.md" docs/adr/README.m
   exit 1
 }
 
-grep -F "AION-160 actor-context trust-boundary remediation implemented" docs/project-status.md >/dev/null || {
+grep -F "AION-160 actor-context trust-boundary remediation implemented" docs/project-status.md >/dev/null || \
+grep -F "Fail-closed ActorContext resolution" docs/project-status.md >/dev/null || {
   echo "project status does not describe AION-160 implementation" >&2
   exit 1
 }

@@ -257,6 +257,82 @@ aion158_is_scoped_request_identity_stabilization_path() {
   esac
 }
 
+aion161_is_scoped_offline_identity_assertion_verification_authorization_path() {
+  # Exact AION-161 governance, evidence, and validator paths. This task closes
+  # AION-159 and creates an offline verification authorization only; it does
+  # not exempt implementation source, dependency manifests, package files,
+  # migrations, routes, SDK/CLI runtime surfaces, or lockfiles.
+  case "$1" in
+    README.md|\
+    AGENTS.md|\
+    docs/project-status.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/visual-brain.md|\
+    docs/auth/actor-context-trust-boundary.md|\
+    docs/auth/development-identity-simulation.md|\
+    docs/auth/request-identity-boundary.md|\
+    docs/auth/request-identity-runtime-boundary.md|\
+    docs/auth/future-auth-implementation-plan.md|\
+    docs/auth/production-auth-release-gates.md|\
+    docs/release/v02-actor-context-trust-boundary-remediation.md|\
+    docs/release/v02-actor-context-trust-boundary-runtime-hold.md|\
+    docs/release/v02-actor-context-trust-boundary-evidence-matrix.md|\
+    docs/release/v02-actor-context-trust-boundary-checklist.md|\
+    docs/release/v02-actor-context-trust-boundary-authorization-transaction.md|\
+    docs/release/v02-actor-context-trust-boundary-explicit-approval-record.md|\
+    docs/release/v02-actor-context-trust-boundary-remediation-closeout.md|\
+    docs/release/v02-offline-identity-assertion-verification-authorization-transaction.md|\
+    docs/release/v02-offline-identity-assertion-verification-explicit-approval-record.md|\
+    docs/release/v02-offline-identity-assertion-verification-scope.md|\
+    docs/release/v02-offline-identity-assertion-verification-threat-model.md|\
+    docs/release/v02-offline-identity-assertion-verification-runtime-hold.md|\
+    docs/release/v02-offline-identity-assertion-verification-evidence-matrix.md|\
+    docs/release/v02-offline-identity-assertion-verification-no-go.md|\
+    docs/release/v02-offline-identity-assertion-verification-checklist.md|\
+    docs/release/v02-release-readiness-delta.md|\
+    docs/release/v02-explicit-approval-record-master-ledger.md|\
+    docs/release/v02-implementation-authorization-final-status.md|\
+    docs/adr/0152-v02-offline-ed25519-identity-assertion-verification-authorization.md|\
+    docs/adr/README.md|\
+    examples/release/v02-actor-context-trust-boundary-authorization.json|\
+    examples/release/v02-actor-context-trust-boundary-explicit-approval-record.json|\
+    examples/release/v02-actor-context-trust-boundary-runtime-hold.json|\
+    examples/release/v02-actor-context-trust-boundary-evidence-matrix.json|\
+    examples/release/v02-actor-context-trust-boundary-remediation-closeout.json|\
+    examples/release/v02-offline-identity-assertion-verification-authorization.json|\
+    examples/release/v02-offline-identity-assertion-verification-explicit-approval-record.json|\
+    examples/release/v02-offline-identity-assertion-verification-runtime-hold.json|\
+    examples/release/v02-offline-identity-assertion-verification-evidence-matrix.json|\
+    operator-console-static/index.html|\
+    operator-console-static/app.js|\
+    operator-console-static/README.md|\
+    operator-console-static/demo-data/v02-actor-context-trust-boundary-authorization.json|\
+    operator-console-static/demo-data/v02-offline-identity-assertion-verification-authorization.json|\
+    scripts/lib/v02_production_auth_authorization.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    scripts/v02-actor-context-trust-boundary-authorization-check.sh|\
+    scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh|\
+    scripts/production-auth-actor-context-trust-boundary-check.sh|\
+    scripts/production-auth-actor-context-trust-boundary-no-go-regression.sh|\
+    scripts/v02-production-auth-stabilization-authorization-check.sh|\
+    scripts/v02-production-auth-request-boundary-authorization-check.sh|\
+    scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh|\
+    scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh|\
+    scripts/v02-offline-identity-assertion-verification-authorization-check.sh|\
+    scripts/v02-offline-identity-assertion-verification-authorization-no-go-regression.sh|\
+    services/brain-api/tests/test_actor_context_trust_boundary_docs.py|\
+    services/brain-api/tests/test_v02_actor_context_trust_boundary_authorization_docs.py|\
+    services/brain-api/tests/test_v02_offline_identity_assertion_verification_authorization_docs.py)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
 aion159_is_scoped_actor_context_trust_boundary_authorization_path() {
   # Exact AION-159 governance, evidence, and validator paths. This task does
   # not exempt actor-context, production-auth, config, kernel, API, SDK, CLI,
@@ -324,6 +400,9 @@ aion159_is_scoped_actor_context_trust_boundary_authorization_path() {
       return 0
       ;;
     *)
+      if aion161_is_scoped_offline_identity_assertion_verification_authorization_path "$1"; then
+        return 0
+      fi
       if aion160_is_scoped_actor_context_trust_boundary_remediation_path "$1"; then
         return 0
       fi

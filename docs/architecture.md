@@ -2579,3 +2579,19 @@ prefer disabled anonymous `RequestIdentityContext` evidence, project safe
 trace/correlation from `RequestContext`, and return anonymous zero-permission
 `ActorContext` outside development simulation. Runtime authentication remains
 disabled.
+
+## AION-161 Offline Identity Assertion Verification Authorization
+
+AION-161 records the architectural decision to authorize a future offline
+Ed25519 identity assertion verifier instead of HMAC/shared secrets or
+JWT/OIDC/JWKS runtime integration. The verifier is a future AION-162 internal
+core, not request middleware. It may verify canonical signed payloads using
+static public keys and exact issuer, audience, temporal, assertion ID, and
+claim constraints.
+
+The architecture boundary remains: cryptographic verification may be true, but
+request authentication remains false. ActorContext and RequestIdentityContext
+are not applied by this authorization. Runtime private keys, HTTP parsing,
+provider network calls, replay caches, auth endpoints, OpenAPI security, SDK
+and CLI runtime surfaces, connector runtime, operator writes, module
+activation, sandbox execution, and v0.2 release actions remain out of scope.

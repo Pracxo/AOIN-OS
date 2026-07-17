@@ -2298,3 +2298,15 @@ permissions, or security scope through identity-bearing `X-AION` headers.
 Privilege-escalation regressions must cover owner/admin/system roles, write and
 execution permissions, activation permissions, external-call permissions, and
 security scopes outside explicit development simulation.
+
+## AION-161 Offline Verification Policy Boundary
+
+AION-161 adds no runtime policy effect. It authorizes AION-162 to implement an
+offline Ed25519 verification core whose result can say cryptographic signature
+and claim checks passed, while still requiring `request_authenticated=false`,
+`actor_context_applied=false`, `request_identity_context_applied=false`, and
+`runtime_effect=false`.
+
+Replay protection remains a future requirement before request integration.
+Provider trust, token semantics, sessions, credentials, and protected-material
+handling beyond public verification keys remain outside this authorization.

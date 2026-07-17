@@ -43,8 +43,17 @@ and releases remain blocked.
 
 ## AION-159-PA-0005
 
-`AION-159-PA-0005` is the sole active production-auth authorization. It
-authorizes AION-160 fail-closed actor-context resolution only and keeps
-runtime authentication, production header trust, credentials, tokens, sessions,
-providers, endpoints, packages, migrations, SDK/CLI runtime surfaces, tags,
-and releases blocked.
+`AION-159-PA-0005` is historical. It was consumed by AION-160 PR 70, feature
+commit `085b1b9d9cbbc23a735c1a82be66a2e901a56761`, and merge commit
+`bfc2afdc96358559027ee36efc0bc26ed3bb796d`. It is inactive, consumed, expired,
+and non-reusable.
+
+## AION-161-PA-0006
+
+`AION-161-PA-0006` is the sole active production-auth authorization. It
+authorizes AION-162 offline Ed25519 identity assertion verification only and
+approves exactly `cryptography>=49.0.0,<50.0.0` as a future change to
+`services/brain-api/pyproject.toml`. Runtime authentication, HTTP parsing,
+ActorContext application, RequestIdentityContext application, runtime private
+keys, provider networking, replay cache, endpoints, packages, lockfiles,
+migrations, SDK/CLI runtime surfaces, tags, and releases remain blocked.

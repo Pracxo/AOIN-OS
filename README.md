@@ -5025,3 +5025,21 @@ external calls, auth endpoints, OpenAPI security, package files, lockfiles,
 migrations, SDK/CLI runtime surfaces, connector runtime, operator writes,
 module activation, sandbox execution, runtime guard release, v0.2 tags, and
 v0.2 releases remain blocked.
+
+## AION-161 Offline Identity Assertion Verification Authorization
+
+AION-161 closes `AION-159-PA-0005` as consumed by AION-160 PR 70 and creates
+`AION-161-PA-0006` as the sole active authorization for AION-162. AION-162 is
+authorized to implement only an offline Ed25519 signed-assertion verification
+core with public verification keys, fixed algorithm semantics, canonical
+payloads, domain separation, issuer/audience/time/assertion-ID validation,
+claim limits, audit/provenance evidence, deterministic negative fixtures, and
+test-only ephemeral signing keys.
+
+AION-161 does not add the implementation or the dependency. It authorizes
+exactly one future dependency change: `cryptography>=49.0.0,<50.0.0` in
+`services/brain-api/pyproject.toml`. Request authentication, ActorContext
+application, RequestIdentityContext application, HTTP header parsing, runtime
+private keys, provider networking, replay caches, endpoints, SDK/CLI runtime
+surfaces, migrations, package manifests, lockfiles, v0.2 tags, and v0.2
+releases remain prohibited.

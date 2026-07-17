@@ -1466,3 +1466,12 @@ by AION-158 PR 68 and keep actor-context remediation, runtime authentication,
 identity verification, authenticated requests, production header trust,
 protected-material handling, providers, external calls, packages, migrations,
 tags, and releases in a no-go state until AION-160 lands.
+
+## AION-161 Offline Identity Assertion Evidence
+
+Static and visual evidence may now show `AION-159-PA-0005` as consumed by
+AION-160 PR 70 and `AION-161-PA-0006` as the active authorization for
+AION-162. The visual surface must remain read-only and must show request
+authentication, ActorContext application, RequestIdentityContext application,
+runtime private keys, provider networking, replay cache, endpoints, SDK/CLI
+runtime surfaces, tags, and releases as blocked.

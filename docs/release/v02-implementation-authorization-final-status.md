@@ -54,9 +54,18 @@ remain blocked.
 
 ## AION-159 Status
 
-AION-159 closes `AION-157-PA-0004` after AION-158 PR 68 and creates
+AION-159 closed `AION-157-PA-0004` after AION-158 PR 68 and created
 `AION-159-PA-0005` for AION-160 actor-context trust-boundary remediation.
-Implementation authorization remains scoped: AION-160 may remove
-non-development trust in identity-bearing actor headers and preserve
-development simulation, but it may not enable production auth runtime or real
-identity verification.
+AION-160 consumed that authorization through PR 70 and merge commit
+`bfc2afdc96358559027ee36efc0bc26ed3bb796d`.
+
+## AION-161 Status
+
+AION-161 closes `AION-159-PA-0005` as inactive, consumed, expired, and
+non-reusable. It creates `AION-161-PA-0006` for AION-162 offline Ed25519
+identity assertion verification. The authorization permits a future
+public-key-only verification core and exactly one future dependency change to
+`services/brain-api/pyproject.toml`; it does not approve request
+authentication, ActorContext application, RequestIdentityContext application,
+runtime private keys, provider networking, replay cache, endpoints, packages,
+migrations, SDK/CLI runtime surfaces, tags, or releases.

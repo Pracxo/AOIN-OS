@@ -13,5 +13,7 @@
 - [x] Keep payload actor metadata unverified.
 - [x] Add privilege-escalation, route, payload, concurrency, redaction, diagnostics, and runtime-surface tests.
 - [x] Add AION-160 docs, examples, console evidence, ADR, and gates.
-- [ ] Merge AION-160.
-- [ ] Defer formal lifecycle closeout to AION-161.
+- [x] Merge AION-160.
+- [x] Record formal lifecycle closeout in AION-161.
+- [x] Mark `AION-159-PA-0005` inactive, consumed, expired, and non-reusable.
+- [x] Create `AION-161-PA-0006` for AION-162 offline Ed25519 verification.

@@ -107,3 +107,14 @@ active authorization, the current non-development identity-header trust
 fallback is documented, AION-160 scope is fail-closed actor-context
 resolution, implementation source is unchanged in AION-159, runtime
 authentication remains disabled, and v0.2 tags and releases remain absent.
+
+## AION-161 Offline Verification Authorization Gates
+
+The AION-161 gates verify `AION-159-PA-0005` is historical and consumed by
+AION-160 PR 70, `AION-161-PA-0006` is the only active authorization, the
+AION-162 scope is offline Ed25519 identity assertion verification, the approved
+dependency is exactly `cryptography>=49.0.0,<50.0.0`, and runtime
+authentication, HTTP parsing, ActorContext application, RequestIdentityContext
+application, runtime private keys, provider networking, replay cache, packages,
+lockfiles, migrations, SDK/CLI runtime surfaces, v0.2 tags, and v0.2 releases
+remain blocked.

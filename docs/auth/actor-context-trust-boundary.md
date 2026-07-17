@@ -66,4 +66,8 @@ AION-160 does not enable production authentication. These states remain false:
 - connector runtime, operator writes, module activation, sandbox execution
 - `v0.2` tag or release
 
-Formal lifecycle closeout for `AION-159-PA-0005` belongs to AION-161.
+Formal lifecycle closeout for `AION-159-PA-0005` is recorded by AION-161.
+`AION-159-PA-0005` is inactive, consumed by AION-160 PR 70, expired, and
+non-reusable. `AION-161-PA-0006` is the active follow-up authorization for
+AION-162 offline Ed25519 identity assertion verification; it does not approve
+request authentication or ActorContext application.

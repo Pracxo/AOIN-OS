@@ -141,7 +141,7 @@ fi
 
 cat <<'SUMMARY'
 v0.2 production auth request identity stabilization authorization no-go result:
-- exactly one active authorization tuple: AION-159-PA-0005
+- exactly one active authorization tuple: AION-161-PA-0006
 - AION-155 historical consumed record: present
 - AION-157 historical consumed record: present
 - duplicate active authorization tuple: absent

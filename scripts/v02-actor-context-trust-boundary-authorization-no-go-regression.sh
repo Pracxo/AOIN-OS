@@ -139,8 +139,8 @@ fi
 
 cat <<'SUMMARY'
 v0.2 actor context trust boundary authorization no-go result:
-- exactly one active authorization tuple: AION-159-PA-0005
-- AION-157 historical consumed record: present
+- exactly one active authorization tuple: AION-161-PA-0006
+- AION-157 and AION-159 historical consumed records: present
 - duplicate active authorization tuple: absent
 - unknown approved authorization: absent
 - historical reactivation: absent
