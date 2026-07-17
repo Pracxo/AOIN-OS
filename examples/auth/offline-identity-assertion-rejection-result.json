@@ -1,0 +1,50 @@
+{
+  "schema_version": "identity-assertion-verification/v1",
+  "canonicalization_version": "production-auth-canonical-json/v1",
+  "reason_code_registry_version": "identity-assertion-reason-codes/v1",
+  "authorization_transaction_id": "AION-161-PA-0006",
+  "implementation_task": "AION-162",
+  "authorization_scope": "offline-ed25519-identity-assertion-verification",
+  "offline_identity_assertion_verification_implemented": true,
+  "offline_identity_assertion_verification_state": "implemented_unintegrated",
+  "fixed_algorithm": "Ed25519",
+  "request_authenticated": false,
+  "actor_context_applied": false,
+  "request_identity_context_applied": false,
+  "runtime_effect": false,
+  "runtime_integration_allowed": false,
+  "replay_check_performed": false,
+  "replay_protection_required_before_request_integration": true,
+  "verification_id": "verification-example-rejected",
+  "assertion_id": "assertion-example-002",
+  "key_id": "key-example-001",
+  "issuer": "issuer.aion.local",
+  "audience": "aion-brain",
+  "verified": false,
+  "rejected": true,
+  "primary_reason_code": "signature_invalid",
+  "reason_codes": [
+    "identity_assertion_rejected",
+    "signature_invalid",
+    "runtime_authentication_disabled",
+    "actor_context_application_disabled",
+    "request_identity_context_application_disabled",
+    "runtime_integration_disabled",
+    "replay_protection_not_implemented",
+    "authorization_scope_implementation_only",
+    "runtime_no_go_status_locked"
+  ],
+  "claim_counts": {
+    "roles": 0,
+    "permissions": 0,
+    "security_scope": 0,
+    "workspace_present": false,
+    "metadata_keys": 0
+  },
+  "assertion_fingerprint": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "verified_at": "2026-07-17T12:00:00Z",
+  "metadata": {
+    "synthetic": true,
+    "read_only": true
+  }
+}

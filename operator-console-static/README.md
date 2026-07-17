@@ -184,6 +184,26 @@ Safe local commands:
 ./scripts/v02-offline-identity-assertion-verification-authorization-check.sh
 ```
 
+AION-162 adds bundled read-only implementation evidence:
+
+- `demo-data/offline-identity-assertion-verification.json`
+- `demo-data/offline-identity-assertion-runtime-hold.json`
+
+The console may display the implemented but unintegrated verification core,
+fixed Ed25519 algorithm, public-key-only registry, canonical payload,
+domain separation, replay-protection absence, runtime no-go state, and
+`AION-161-PA-0006`. It does not accept assertions, signatures, public keys, or
+signing material; it does not verify live identities, authenticate requests,
+activate runtime auth, call the backend, or expose write controls.
+
+Safe local commands:
+
+```bash
+./scripts/production-auth-offline-identity-assertion-no-go-regression.sh
+./scripts/production-auth-offline-identity-assertion-check.sh
+./scripts/production-auth-offline-identity-assertion-runtime-hold.sh
+```
+
 ## Production Auth Request Identity Evidence
 
 AION-156 adds read-only bundled evidence:

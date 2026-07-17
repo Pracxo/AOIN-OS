@@ -2253,3 +2253,19 @@ issuer, audience, subject, actor, workspace, role, permission, scope, temporal,
 and metadata fields. A valid verification result must not authenticate a
 request, apply ActorContext, apply RequestIdentityContext, create replay
 protection, or cause runtime effects.
+## AION-162 Identity Assertion Contract
+
+The AION-162 contract family is `identity-assertion/v1`,
+`identity-assertion-payload/v1`, `identity-assertion-public-key/v1`, and
+`identity-assertion-verification/v1`.
+
+The payload contract uses sorted duplicate-free roles, permissions, and
+security scope; UTC-only assertion times; a maximum lifetime of 300 seconds;
+safe metadata; and canonical JSON reuse. The envelope contains only
+`schema_version`, `key_id`, `payload`, and `signature`; algorithm fields are
+forbidden.
+
+The verification evidence contract is redacted and records
+`request_authenticated=false`, `actor_context_applied=false`,
+`request_identity_context_applied=false`, `runtime_effect=false`, and
+`replay_check_performed=false`.

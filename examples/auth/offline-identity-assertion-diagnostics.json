@@ -1,0 +1,24 @@
+{
+  "schema_version": "identity-assertion-verification/v1",
+  "authorization_transaction_id": "AION-161-PA-0006",
+  "implementation_task": "AION-162",
+  "authorization_scope": "offline-ed25519-identity-assertion-verification",
+  "snapshot_id": "diagnostic-example-001",
+  "verifier_name": "OfflineEd25519IdentityAssertionVerifier",
+  "fixed_algorithm_available": true,
+  "trusted_public_key_count": 1,
+  "allowed_clock_skew_seconds": 30,
+  "maximum_assertion_lifetime_seconds": 300,
+  "runtime_no_go_status": true,
+  "request_authenticated": false,
+  "actor_context_applied": false,
+  "request_identity_context_applied": false,
+  "runtime_effect": false,
+  "runtime_integration_allowed": false,
+  "replay_check_performed": false,
+  "replay_protection_required_before_request_integration": true,
+  "created_at": "2026-07-17T12:00:00Z",
+  "metadata": {
+    "synthetic": true
+  }
+}

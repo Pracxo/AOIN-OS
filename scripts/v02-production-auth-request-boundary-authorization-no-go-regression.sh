@@ -89,6 +89,9 @@ while IFS= read -r file; do
   if aion158_is_scoped_request_identity_stabilization_path "$file"; then
     continue
   fi
+  if aion162_is_scoped_offline_identity_assertion_verification_path "$file"; then
+    continue
+  fi
   echo "AION-155 must not modify production-auth, kernel, API, SDK, or CLI implementation source: $file" >&2
   exit 1
 done < <(

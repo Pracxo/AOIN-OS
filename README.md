@@ -5043,3 +5043,19 @@ application, RequestIdentityContext application, HTTP header parsing, runtime
 private keys, provider networking, replay caches, endpoints, SDK/CLI runtime
 surfaces, migrations, package manifests, lockfiles, v0.2 tags, and v0.2
 releases remain prohibited.
+
+## AION-162 Offline Identity Assertion Verification
+
+AION-162 implements the AION-161-authorized offline Ed25519 identity assertion
+verification core. It adds exactly `cryptography>=49.0.0,<50.0.0`, strict
+assertion contracts, canonical domain-separated payloads, strict unpadded
+base64url handling, public-key-only trust, an immutable exact-key registry,
+rotation and revocation checks, redacted verification evidence, replay-boundary
+tests, concurrency tests, and runtime/no-go gates.
+
+The implementation state is `implemented_unintegrated`. Request
+authentication, ActorContext application, RequestIdentityContext application,
+HTTP parsing, middleware registration, runtime signing material, provider
+networking, replay caches, endpoints, OpenAPI security, SDK/CLI runtime
+surfaces, package manifests, lockfiles, migrations, v0.2 tags, and v0.2
+releases remain absent or disabled.

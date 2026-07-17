@@ -174,6 +174,9 @@
     "./scripts/v02-actor-context-trust-boundary-authorization-check.sh",
     "./scripts/v02-offline-identity-assertion-verification-authorization-no-go-regression.sh",
     "./scripts/v02-offline-identity-assertion-verification-authorization-check.sh",
+    "./scripts/production-auth-offline-identity-assertion-no-go-regression.sh",
+    "./scripts/production-auth-offline-identity-assertion-check.sh",
+    "./scripts/production-auth-offline-identity-assertion-runtime-hold.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -309,7 +312,9 @@
     production_auth_request_identity_stabilization: "demo-data/production-auth-request-identity-stabilization.json",
     production_auth_request_identity_stabilization_runtime_hold: "demo-data/production-auth-request-identity-stabilization-runtime-hold.json",
     actor_context_trust_boundary_authorization: "demo-data/v02-actor-context-trust-boundary-authorization.json",
-    offline_identity_assertion_verification_authorization: "demo-data/v02-offline-identity-assertion-verification-authorization.json"
+    offline_identity_assertion_verification_authorization: "demo-data/v02-offline-identity-assertion-verification-authorization.json",
+    offline_identity_assertion_verification: "demo-data/offline-identity-assertion-verification.json",
+    offline_identity_assertion_runtime_hold: "demo-data/offline-identity-assertion-runtime-hold.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1850,7 +1855,9 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.production_auth_request_identity_stabilization),
       fetchJson(RELEASE_CANDIDATE_DEMOS.production_auth_request_identity_stabilization_runtime_hold),
       fetchJson(RELEASE_CANDIDATE_DEMOS.actor_context_trust_boundary_authorization),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.offline_identity_assertion_verification_authorization)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.offline_identity_assertion_verification_authorization),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.offline_identity_assertion_verification),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.offline_identity_assertion_runtime_hold)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
@@ -1933,6 +1940,8 @@
         renderReleaseCandidateEvidence("production-auth-request-identity-stabilization-runtime-hold", redact(payloads[77]));
         renderReleaseCandidateEvidence("v02-actor-context-trust-boundary-authorization", redact(payloads[78]));
         renderReleaseCandidateEvidence("v02-offline-identity-assertion-verification-authorization", redact(payloads[79]));
+        renderReleaseCandidateEvidence("offline-identity-assertion-verification", redact(payloads[80]));
+        renderReleaseCandidateEvidence("offline-identity-assertion-runtime-hold", redact(payloads[81]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
@@ -2015,6 +2024,8 @@
         renderReleaseCandidateEvidence("production-auth-request-identity-stabilization-runtime-hold", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-actor-context-trust-boundary-authorization", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-offline-identity-assertion-verification-authorization", { status: "unavailable" });
+        renderReleaseCandidateEvidence("offline-identity-assertion-verification", { status: "unavailable" });
+        renderReleaseCandidateEvidence("offline-identity-assertion-runtime-hold", { status: "unavailable" });
       });
   }
 

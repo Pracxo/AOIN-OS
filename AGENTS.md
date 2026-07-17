@@ -1052,3 +1052,17 @@ Ed25519 signatures and no request authentication, no ActorContext application,
 no RequestIdentityContext application, no HTTP parsing, no runtime private
 keys, no provider network, no replay cache, no endpoints, no SDK/CLI runtime
 surface, and no v0.2 tag or release.
+
+## AION-162 Offline Identity Assertion Verification
+
+AION-162 may change only the scoped offline assertion verification artifacts.
+It is authorized by `AION-161-PA-0006` and adds exactly one dependency:
+`cryptography>=49.0.0,<50.0.0` in `services/brain-api/pyproject.toml`.
+
+Keep the verifier public-key-only and unintegrated. Do not add request
+authentication, ActorContext application, RequestIdentityContext application,
+HTTP parsing, middleware registration, runtime signing material, provider
+networking, replay caches, endpoints, OpenAPI security, SDK/CLI runtime
+surfaces, package manifests, lockfiles, migrations, runtime guard release,
+v0.2 tags, or v0.2 releases. Formal authorization lifecycle closeout belongs
+to AION-163.

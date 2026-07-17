@@ -71,3 +71,9 @@ sessions, providers, runtime routes, SDK/CLI resources, tags, or releases.
 Cryptographic verification in AION-162 may produce an internal verification
 result, but `request_identity_context_applied=false`,
 `request_authenticated=false`, and `runtime_effect=false` remain mandatory.
+## AION-162 Interaction
+
+AION-162 does not replace `RequestIdentityVerifier` and does not attach
+RequestIdentityContext. Offline Ed25519 verification is unintegrated and every
+verification result records `request_identity_context_applied=false`,
+`request_authenticated=false`, and `runtime_effect=false`.

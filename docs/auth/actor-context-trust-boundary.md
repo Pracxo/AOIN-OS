@@ -71,3 +71,9 @@ Formal lifecycle closeout for `AION-159-PA-0005` is recorded by AION-161.
 non-reusable. `AION-161-PA-0006` is the active follow-up authorization for
 AION-162 offline Ed25519 identity assertion verification; it does not approve
 request authentication or ActorContext application.
+## AION-162 Interaction
+
+AION-162 does not change ActorContext resolution. Offline identity assertion
+verification returns redacted evidence only and always records
+`actor_context_applied=false`. Fail-closed ActorContext behavior from AION-160
+remains the active boundary until a separate request-integration authorization.

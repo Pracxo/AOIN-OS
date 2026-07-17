@@ -79,6 +79,9 @@ while IFS= read -r file; do
   if aion160_is_scoped_actor_context_trust_boundary_remediation_path "$file"; then
     continue
   fi
+  if aion162_is_scoped_offline_identity_assertion_verification_path "$file"; then
+    continue
+  fi
 
   case "$file" in
     services/brain-api/src/aion_brain/identity/dev_auth.py|\

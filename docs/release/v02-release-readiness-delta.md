@@ -19,12 +19,16 @@ Status: `not-ready`
 - Non-development identity-header rejection
 - Anonymous zero-permission fallback
 - Development identity simulation isolation
+- Offline cryptographic identity verification core
+- Public-key registry
+- Deterministic cryptographic regression coverage
 
 ## Remaining Blockers
 
-- Offline cryptographic identity verification core and later request integration
-- request-level verified identity integration
 - replay protection
+- formal AION-161 authorization closeout
+- request-level verified identity integration
+- operational public-key provisioning and rotation evidence
 - External provider integration
 - Protected-material handling decision beyond public verification keys
 - Credential lifecycle
@@ -58,12 +62,16 @@ Status: `not-ready`
 
 ## Next Critical Path
 
-`AION-162` is the next critical path.
+`AION-163` is the next critical path.
+
+The inherited release gates still record that `AION-162` is the next critical path
+marker authorized by `AION-161-PA-0006`; the implementation is now present and
+formal authorization closeout moves to AION-163.
 
 AION-162 implements the offline Ed25519 identity assertion verification core
-authorized by `AION-161-PA-0006`.
-
-The next core may verify signatures and claims offline with public keys, but it
-must not authenticate requests, apply ActorContext, apply RequestIdentityContext,
-parse HTTP headers, contact providers, create a replay cache, or release runtime
-guards. Later request integration remains a separate blocker.
+authorized by `AION-161-PA-0006`. The core verifies signatures and claims
+offline with public keys, but it does not authenticate requests, apply
+ActorContext, apply RequestIdentityContext, parse HTTP headers, contact
+providers, create a replay cache, or release runtime guards. AION-163 owns
+formal authorization lifecycle closeout; later request integration remains a
+separate blocker.

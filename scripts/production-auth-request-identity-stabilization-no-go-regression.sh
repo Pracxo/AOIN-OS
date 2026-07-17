@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
+source "$ROOT_DIR/scripts/lib/v02-production-auth-scan-exclusions.sh"
 
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
@@ -91,6 +92,10 @@ while IFS= read -r file; do
       exit 1
       ;;
   esac
+
+  if aion162_is_scoped_offline_identity_assertion_verification_path "$file"; then
+    continue
+  fi
 
   if [[ -f "$file" ]]; then
     case "$file" in

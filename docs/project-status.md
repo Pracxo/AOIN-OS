@@ -8,26 +8,32 @@ v0.2 tag or release exists.
 
 ## Current Main Milestone
 
-The current main milestone is v0.2 offline identity assertion verification authorization.
+The current main milestone is v0.2 offline identity assertion verification core implementation.
 AION-158 implemented and merged the pure ASGI disabled request identity
 stabilization. AION-159 closed `AION-157-PA-0004` and created
 `AION-159-PA-0005` for AION-160. AION-160 merged the fail-closed actor-context
 trust-boundary remediation.
 
-Current milestone: AION-160 actor-context trust-boundary remediation merged.
+Current milestone: AION-162 offline Ed25519 identity assertion verification core implemented.
 Current implementation state:
 
-- fail-closed ActorContext resolution
-- non-development identity headers ignored
-- anonymous zero-permission ActorContext
-- RequestIdentityContext precedence
-- RequestContext trace/correlation projection
-- development simulation isolated
+- fixed Ed25519 verification
+- public-key-only trust
+- canonical domain-separated payloads
+- strict key, issuer, audience, time, and claim validation
+- safe verification evidence
+- request integration absent
+- replay protection absent
 - production authentication disabled
 
-Current authorization: AION-161-PA-0006 active for AION-162.
-Next task: AION-162 offline identity assertion verification core.
-Next implementation task: AION-162 offline Ed25519 identity assertion verification core.
+Current authorization: AION-161-PA-0006 consumed by AION-162 when merged.
+Formal lifecycle closeout: AION-163.
+
+Prior actor-context closeout remains in force: non-development identity headers ignored,
+anonymous zero-permission ActorContext, RequestIdentityContext precedence,
+RequestContext trace/correlation projection, development simulation isolated, and
+production authentication disabled.
+Historical AION-160 marker: Next implementation task: AION-162 offline Ed25519 identity assertion verification core.
 
 ## Implemented Subsystems
 
@@ -47,6 +53,10 @@ Next implementation task: AION-162 offline Ed25519 identity assertion verificati
   rejection, anonymous zero-permission fallback, RequestIdentityContext
   precedence, RequestContext trace/correlation projection, and development
   identity simulation isolation.
+- Offline Ed25519 identity assertion verification core: strict assertion
+  contracts, public-key registry, canonical domain-separated signing input,
+  fixed Ed25519 signature verification, redacted evidence, concurrency tests,
+  replay-boundary tests, and runtime/no-go gates.
 
 ## Disabled Subsystems
 
@@ -73,8 +83,10 @@ Next implementation task: AION-162 offline Ed25519 identity assertion verificati
 inactive, and non-reusable under
 `authorization_scope=fail-closed-actor-context-resolution`.
 
-`AION-161-PA-0006` is active for AION-162 under
+`AION-161-PA-0006` is consumed by AION-162 when merged under
 `authorization_scope=offline-ed25519-identity-assertion-verification`.
+`authorization_reusable=false`; formal lifecycle closeout is deferred to
+AION-163.
 
 `AION-153-PA-0002` is historical, consumed by AION-154 PR 64, expired, inactive,
 and non-reusable. `AION-151-PA-0001` remains historical evidence consumed by
@@ -97,25 +109,24 @@ authentication.
 `v02_tag_created=false`
 `v02_release_created=false`
 
-The v0.2 release remains blocked until offline cryptographic identity
-verification core and later request integration, external provider integration,
+The v0.2 release remains blocked until formal AION-161 authorization closeout,
+replay protection, request-level verified identity integration, operational
+public-key provisioning and rotation evidence, external provider integration,
 protected-material, credential, token, session,
 deployment, rollback, observability, threat-model, release-candidate, runtime
 guard release decision, tag, and release authorization work is complete.
 
 ## Current Implementation Task
 
-AION-162 offline Ed25519 identity assertion verification core is the next
-implementation task. AION-161 authorizes only strict offline verification with
-public verification keys, fixed Ed25519 signatures, canonical payloads,
+AION-162 implements the offline Ed25519 identity assertion verification core
+authorized by AION-161. It adds exactly `cryptography>=49.0.0,<50.0.0`,
+strict offline verification, public verification keys, canonical payloads,
 domain separation, issuer/audience/time/assertion-ID validation, claim
-constraints, audit/provenance evidence, deterministic negative fixtures,
-test-only ephemeral signing keys, and exactly one future `cryptography`
-dependency change in `services/brain-api/pyproject.toml`.
-Request authentication, ActorContext application, RequestIdentityContext
-application, runtime private keys, provider networking, replay cache,
-endpoints, packages, migrations, SDK/CLI runtime surfaces, and v0.2 release
-actions remain blocked.
+constraints, audit/provenance evidence, deterministic negative fixtures, and
+test-only ephemeral signing keys. Request authentication, ActorContext
+application, RequestIdentityContext application, runtime private keys, provider
+networking, replay cache, endpoints, package manifests, lockfiles, migrations,
+SDK/CLI runtime surfaces, and v0.2 release actions remain blocked.
 
 ## Implemented Code Versus Enabled Runtime
 

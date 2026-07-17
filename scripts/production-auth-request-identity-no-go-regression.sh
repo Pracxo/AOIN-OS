@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
+source "$ROOT_DIR/scripts/lib/v02-production-auth-scan-exclusions.sh"
 
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
@@ -102,6 +103,10 @@ while IFS= read -r file; do
       ;;
   esac
 
+  if aion162_is_scoped_offline_identity_assertion_verification_path "$file"; then
+    continue
+  fi
+
   if [[ -f "$file" ]]; then
     case "$file" in
       services/brain-api/tests/*|docs/*|README.md|AGENTS.md|\
@@ -161,6 +166,9 @@ all_changed_text="$(mktemp)"
 trap 'rm -f "$changed_file_list" "$scan_file_list" "$all_changed_text"' EXIT
 while IFS= read -r file; do
   [[ -f "$file" ]] || continue
+  if aion162_is_scoped_offline_identity_assertion_verification_path "$file"; then
+    continue
+  fi
   case "$file" in
     services/brain-api/tests/*|\
     scripts/production-auth-request-identity-no-go-regression.sh|\

@@ -1,0 +1,43 @@
+{
+  "schema_version": "identity-assertion-verification/v1",
+  "authorization_transaction_id": "AION-161-PA-0006",
+  "implementation_task": "AION-162",
+  "authorization_scope": "offline-ed25519-identity-assertion-verification",
+  "event_id": "audit-example-001",
+  "event_type": "identity_assertion_verification_succeeded",
+  "verification_id": "verification-example-success",
+  "assertion_id_present": true,
+  "key_id": "key-example-001",
+  "issuer": "issuer.aion.local",
+  "audience": "aion-brain",
+  "verified": true,
+  "rejected": false,
+  "reason_codes": [
+    "identity_assertion_verified",
+    "payload_canonicalized",
+    "public_key_resolved",
+    "signature_valid",
+    "runtime_authentication_disabled",
+    "actor_context_application_disabled",
+    "request_identity_context_application_disabled",
+    "runtime_integration_disabled",
+    "replay_protection_not_implemented",
+    "authorization_scope_implementation_only",
+    "runtime_no_go_status_locked"
+  ],
+  "claim_counts": {
+    "roles": 2,
+    "permissions": 1,
+    "security_scope": 1,
+    "workspace_present": true,
+    "metadata_keys": 1
+  },
+  "created_at": "2026-07-17T12:00:00Z",
+  "request_authenticated": false,
+  "actor_context_applied": false,
+  "request_identity_context_applied": false,
+  "runtime_effect": false,
+  "metadata": {
+    "synthetic": true
+  }
+}

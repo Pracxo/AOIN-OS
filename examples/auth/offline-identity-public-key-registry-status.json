@@ -1,0 +1,20 @@
+{
+  "schema_version": "identity-assertion-public-key-registry-status/v1",
+  "authorization_transaction_id": "AION-161-PA-0006",
+  "implementation_task": "AION-162",
+  "authorization_scope": "offline-ed25519-identity-assertion-verification",
+  "public_key_registry_enabled": true,
+  "public_key_only_runtime": true,
+  "trusted_public_key_count": 1,
+  "key_selection": "exact-key-id",
+  "key_rotation_supported": true,
+  "key_revocation_supported": true,
+  "jwks_network_fetch_enabled": false,
+  "provider_discovery_enabled": false,
+  "external_calls_enabled": false,
+  "runtime_private_key_material_present": false,
+  "full_public_key_stored": false,
+  "evidence_fingerprint": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "synthetic": true,
+  "read_only": true
+}

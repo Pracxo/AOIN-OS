@@ -76,6 +76,16 @@ PROTECTED_SOURCE_PATHS = [
     "packages/aion-sdk-python/src",
 ]
 
+AION162_ALLOWED_CHANGED_PATHS = {
+    "services/brain-api/pyproject.toml",
+    "services/brain-api/src/aion_brain/contracts/identity_assertion.py",
+    "services/brain-api/src/aion_brain/production_auth/__init__.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_evidence.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_verifier.py",
+    "services/brain-api/src/aion_brain/production_auth/trusted_public_keys.py",
+}
+
 
 def test_aion161_required_files_exist_and_status_is_current() -> None:
     for relative in DOCS + JSON_ARTIFACTS + SCRIPTS:
@@ -85,11 +95,12 @@ def test_aion161_required_files_exist_and_status_is_current() -> None:
     )
 
     status = _text("docs/project-status.md")
-    assert "Current authorization: AION-161-PA-0006 active for AION-162." in status
     assert (
-        "Next implementation task: AION-162 offline Ed25519 identity assertion verification core."
+        "Current authorization: AION-161-PA-0006 active for AION-162." in status
+        or "Current authorization: AION-161-PA-0006 consumed by AION-162 when merged."
         in status
     )
+    assert "AION-162 offline Ed25519 identity assertion verification core" in status
     assert "Production authentication runtime remains disabled." in status
 
     ledger = _text("docs/release/v02-explicit-approval-record-master-ledger.md")
@@ -296,7 +307,7 @@ def test_aion161_validator_rejects_bad_lifecycle(mutator: Any, match: str) -> No
 
 
 def test_aion161_does_not_change_protected_sources_or_add_release_artifacts() -> None:
-    changed = _changed_files()
+    changed = _changed_files() - AION162_ALLOWED_CHANGED_PATHS
     for forbidden in PROTECTED_SOURCE_PATHS:
         assert not any(path == forbidden or path.startswith(f"{forbidden}/") for path in changed)
     assert not any(path.endswith("package.json") for path in changed)

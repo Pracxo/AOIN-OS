@@ -328,6 +328,94 @@ aion161_is_scoped_offline_identity_assertion_verification_authorization_path() {
       return 0
       ;;
     *)
+      if aion162_is_scoped_offline_identity_assertion_verification_path "$1"; then
+        return 0
+      fi
+      return 1
+      ;;
+  esac
+}
+
+aion162_is_scoped_offline_identity_assertion_verification_path() {
+  # Exact AION-162 implementation, evidence, tests, and validators. This keeps
+  # the authorized offline verification implementation narrow and unintegrated.
+  case "$1" in
+    README.md|\
+    AGENTS.md|\
+    docs/project-status.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/visual-brain.md|\
+    docs/auth/actor-context-trust-boundary.md|\
+    docs/auth/request-identity-runtime-boundary.md|\
+    docs/auth/future-auth-implementation-plan.md|\
+    docs/auth/production-auth-release-gates.md|\
+    docs/auth/offline-identity-assertion-verification.md|\
+    docs/auth/identity-assertion-public-key-registry.md|\
+    docs/auth/identity-assertion-runtime-boundary.md|\
+    docs/release/v02-offline-identity-assertion-verification-authorization-transaction.md|\
+    docs/release/v02-offline-identity-assertion-verification-explicit-approval-record.md|\
+    docs/release/v02-offline-identity-assertion-verification-scope.md|\
+    docs/release/v02-offline-identity-assertion-verification-threat-model.md|\
+    docs/release/v02-offline-identity-assertion-verification-runtime-hold.md|\
+    docs/release/v02-offline-identity-assertion-verification-evidence-matrix.md|\
+    docs/release/v02-offline-identity-assertion-verification-no-go.md|\
+    docs/release/v02-offline-identity-assertion-verification-checklist.md|\
+    docs/release/v02-offline-identity-assertion-verification-implementation.md|\
+    docs/release/v02-offline-identity-assertion-verification-security-evidence.md|\
+    docs/release/v02-release-readiness-delta.md|\
+    docs/adr/0153-v02-offline-ed25519-identity-assertion-verification.md|\
+    docs/adr/README.md|\
+    examples/auth/offline-identity-assertion-verification-result.json|\
+    examples/auth/offline-identity-assertion-rejection-result.json|\
+    examples/auth/offline-identity-assertion-audit-event.json|\
+    examples/auth/offline-identity-assertion-provenance-record.json|\
+    examples/auth/offline-identity-assertion-diagnostics.json|\
+    examples/auth/offline-identity-public-key-registry-status.json|\
+    operator-console-static/index.html|\
+    operator-console-static/app.js|\
+    operator-console-static/README.md|\
+    operator-console-static/demo-data/offline-identity-assertion-verification.json|\
+    operator-console-static/demo-data/offline-identity-assertion-runtime-hold.json|\
+    services/brain-api/pyproject.toml|\
+    services/brain-api/src/aion_brain/contracts/identity_assertion.py|\
+    services/brain-api/src/aion_brain/production_auth/__init__.py|\
+    services/brain-api/src/aion_brain/production_auth/identity_assertion.py|\
+    services/brain-api/src/aion_brain/production_auth/identity_assertion_evidence.py|\
+    services/brain-api/src/aion_brain/production_auth/identity_assertion_verifier.py|\
+    services/brain-api/src/aion_brain/production_auth/trusted_public_keys.py|\
+    services/brain-api/src/aion_brain/explanations/redaction.py|\
+    services/brain-api/src/aion_brain/grounding/redaction.py|\
+    services/brain-api/src/aion_brain/model_outputs/redaction.py|\
+    services/brain-api/src/aion_brain/prompts/redaction.py|\
+    services/brain-api/tests/__init__.py|\
+    services/brain-api/tests/test_identity_assertion_contracts.py|\
+    services/brain-api/tests/test_identity_assertion_base64url.py|\
+    services/brain-api/tests/test_identity_assertion_canonical_payload.py|\
+    services/brain-api/tests/test_trusted_public_key_registry.py|\
+    services/brain-api/tests/test_offline_identity_assertion_verifier.py|\
+    services/brain-api/tests/test_identity_assertion_temporal_validation.py|\
+    services/brain-api/tests/test_identity_assertion_claim_constraints.py|\
+    services/brain-api/tests/test_identity_assertion_negative_crypto.py|\
+    services/brain-api/tests/test_identity_assertion_key_rotation.py|\
+    services/brain-api/tests/test_identity_assertion_evidence.py|\
+    services/brain-api/tests/test_identity_assertion_replay_boundary.py|\
+    services/brain-api/tests/test_identity_assertion_concurrency.py|\
+    services/brain-api/tests/test_identity_assertion_dependency_boundary.py|\
+    services/brain-api/tests/test_identity_assertion_no_runtime_integration.py|\
+    services/brain-api/tests/test_identity_assertion_performance.py|\
+    scripts/production-auth-offline-identity-assertion-check.sh|\
+    scripts/production-auth-offline-identity-assertion-runtime-hold.sh|\
+    scripts/production-auth-offline-identity-assertion-no-go-regression.sh|\
+    scripts/connector-platform-checkpoint.sh|\
+    scripts/connector-release-no-go-regression.sh|\
+    scripts/connector-runtime-no-external-call-regression.sh|\
+    scripts/connector-no-go-regression.sh|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh)
+      return 0
+      ;;
+    *)
       return 1
       ;;
   esac

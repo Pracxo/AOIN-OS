@@ -85,6 +85,9 @@ while IFS= read -r file; do
       if aion158_is_scoped_request_identity_stabilization_path "$file"; then
         continue
       fi
+      if aion162_is_scoped_offline_identity_assertion_verification_path "$file"; then
+        continue
+      fi
       echo "implementation source changes are forbidden for AION-157: $file" >&2
       exit 1
       ;;

@@ -145,6 +145,8 @@ for path in sorted((root / "examples" / "auth").glob("*.json")):
         continue
     if path.name.startswith("actor-context-"):
         continue
+    if path.name.startswith("offline-identity-"):
+        continue
     payload = json.loads(path.read_text())
     serialized = json.dumps(payload, sort_keys=True).lower()
     blocked = (
@@ -868,6 +870,69 @@ aion161_auth_paths = {
     "services/brain-api/tests/test_v02_production_auth_stabilization_authorization_docs.py",
 }
 
+aion162_auth_paths = {
+    "AGENTS.md",
+    "README.md",
+    "docs/adr/0153-v02-offline-ed25519-identity-assertion-verification.md",
+    "docs/adr/README.md",
+    "docs/architecture.md",
+    "docs/auth/actor-context-trust-boundary.md",
+    "docs/auth/future-auth-implementation-plan.md",
+    "docs/auth/identity-assertion-public-key-registry.md",
+    "docs/auth/identity-assertion-runtime-boundary.md",
+    "docs/auth/offline-identity-assertion-verification.md",
+    "docs/auth/production-auth-release-gates.md",
+    "docs/auth/request-identity-runtime-boundary.md",
+    "docs/brain-contract.md",
+    "docs/policy-model.md",
+    "docs/project-status.md",
+    "docs/release/v02-offline-identity-assertion-verification-checklist.md",
+    "docs/release/v02-offline-identity-assertion-verification-evidence-matrix.md",
+    "docs/release/v02-offline-identity-assertion-verification-implementation.md",
+    "docs/release/v02-offline-identity-assertion-verification-no-go.md",
+    "docs/release/v02-offline-identity-assertion-verification-runtime-hold.md",
+    "docs/release/v02-offline-identity-assertion-verification-security-evidence.md",
+    "docs/release/v02-release-readiness-delta.md",
+    "docs/visual-brain.md",
+    "examples/auth/offline-identity-assertion-audit-event.json",
+    "examples/auth/offline-identity-assertion-diagnostics.json",
+    "examples/auth/offline-identity-assertion-provenance-record.json",
+    "examples/auth/offline-identity-assertion-rejection-result.json",
+    "examples/auth/offline-identity-assertion-verification-result.json",
+    "examples/auth/offline-identity-public-key-registry-status.json",
+    "operator-console-static/README.md",
+    "operator-console-static/app.js",
+    "operator-console-static/demo-data/offline-identity-assertion-runtime-hold.json",
+    "operator-console-static/demo-data/offline-identity-assertion-verification.json",
+    "operator-console-static/index.html",
+    "scripts/lib/v02-production-auth-scan-exclusions.sh",
+    "scripts/production-auth-offline-identity-assertion-check.sh",
+    "scripts/production-auth-offline-identity-assertion-no-go-regression.sh",
+    "scripts/production-auth-offline-identity-assertion-runtime-hold.sh",
+    "services/brain-api/pyproject.toml",
+    "services/brain-api/src/aion_brain/contracts/identity_assertion.py",
+    "services/brain-api/src/aion_brain/production_auth/__init__.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_evidence.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_verifier.py",
+    "services/brain-api/src/aion_brain/production_auth/trusted_public_keys.py",
+    "services/brain-api/tests/test_identity_assertion_base64url.py",
+    "services/brain-api/tests/test_identity_assertion_canonical_payload.py",
+    "services/brain-api/tests/test_identity_assertion_claim_constraints.py",
+    "services/brain-api/tests/test_identity_assertion_concurrency.py",
+    "services/brain-api/tests/test_identity_assertion_contracts.py",
+    "services/brain-api/tests/test_identity_assertion_dependency_boundary.py",
+    "services/brain-api/tests/test_identity_assertion_evidence.py",
+    "services/brain-api/tests/test_identity_assertion_key_rotation.py",
+    "services/brain-api/tests/test_identity_assertion_negative_crypto.py",
+    "services/brain-api/tests/test_identity_assertion_no_runtime_integration.py",
+    "services/brain-api/tests/test_identity_assertion_performance.py",
+    "services/brain-api/tests/test_identity_assertion_replay_boundary.py",
+    "services/brain-api/tests/test_identity_assertion_temporal_validation.py",
+    "services/brain-api/tests/test_offline_identity_assertion_verifier.py",
+    "services/brain-api/tests/test_trusted_public_key_registry.py",
+}
+
 blocked_package_names = {
     "package.json",
     "package-lock.json",
@@ -899,6 +964,7 @@ for name in [*changed, *untracked]:
         and name not in aion158_auth_paths
         and name not in aion159_auth_paths
         and name not in aion161_auth_paths
+        and name not in aion162_auth_paths
     ):
         raise SystemExit(f"unexpected auth runtime or artifact path: {name}")
 

@@ -9,6 +9,7 @@ description = "AION Brain API scaffold"
 requires-python = ">=3.12"
 dependencies = [
   "alembic>=1.13.0,<2.0.0",
+  "cryptography>=49.0.0,<50.0.0",
   "fastapi>=0.111.0,<1.0.0",
   "httpx>=0.27.0,<1.0.0",
   "langgraph>=1.2.0,<2.0.0",

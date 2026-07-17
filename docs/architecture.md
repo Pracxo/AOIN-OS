@@ -2595,3 +2595,14 @@ are not applied by this authorization. Runtime private keys, HTTP parsing,
 provider network calls, replay caches, auth endpoints, OpenAPI security, SDK
 and CLI runtime surfaces, connector runtime, operator writes, module
 activation, sandbox execution, and v0.2 release actions remain out of scope.
+## AION-162 Offline Identity Assertion Verification
+
+AION-162 adds an unintegrated production-auth verification primitive under
+`aion_brain.production_auth`. The primitive verifies strict offline Ed25519
+assertions using public keys only, canonical domain-separated payload bytes,
+and exact issuer, audience, key, time, and claim constraints.
+
+This is not a request-authentication path. No API route, middleware
+registration, ActorContext application, RequestIdentityContext application,
+provider discovery, JWKS fetch, replay cache, SDK runtime surface, CLI runtime
+surface, migration, or v0.2 release artifact is added.

@@ -1,0 +1,61 @@
+{
+  "view": "offline_identity_assertion_verification",
+  "title": "Offline Identity Assertion Verification",
+  "status": "implemented_unintegrated",
+  "summary": "AION-162 adds fixed Ed25519 offline verification with public keys only. It does not authenticate requests or activate runtime auth.",
+  "authorization_transaction_id": "AION-161-PA-0006",
+  "implementation_task": "AION-162",
+  "authorization_scope": "offline-ed25519-identity-assertion-verification",
+  "authorization_consumed_by_task": "AION-162",
+  "authorization_reusable": false,
+  "authorization_expires_on_aion_162_merge": true,
+  "offline_identity_assertion_verification_implemented": true,
+  "offline_identity_assertion_verification_state": "implemented_unintegrated",
+  "fixed_algorithm": "Ed25519",
+  "canonical_payload_enabled": true,
+  "domain_separation_enabled": true,
+  "public_key_registry_enabled": true,
+  "trusted_public_key_count": 1,
+  "runtime_private_key_material_present": false,
+  "request_authenticated": false,
+  "actor_context_applied": false,
+  "request_identity_context_applied": false,
+  "runtime_effect": false,
+  "runtime_integration_allowed": false,
+  "replay_check_performed": false,
+  "replay_protection_required_before_request_integration": true,
+  "sections": [
+    {
+      "title": "Verification Core",
+      "status": "implemented",
+      "summary": "Strict offline Ed25519 verification, canonical payloads, domain separation, exact issuer and audience validation, and redacted evidence.",
+      "refs": [
+        "docs/auth/offline-identity-assertion-verification.md",
+        "docs/adr/0153-v02-offline-ed25519-identity-assertion-verification.md"
+      ]
+    },
+    {
+      "title": "Runtime Boundary",
+      "status": "blocked",
+      "summary": "Request authentication, ActorContext application, RequestIdentityContext application, replay protection, providers, routes, SDK/CLI, tags, and releases remain absent.",
+      "refs": [
+        "docs/auth/identity-assertion-runtime-boundary.md"
+      ]
+    }
+  ],
+  "forbidden_actions": [
+    {
+      "action": "authenticate_request",
+      "allowed": false,
+      "reason": "AION-162 verifies offline assertions only"
+    },
+    {
+      "action": "activate_runtime_auth",
+      "allowed": false,
+      "reason": "runtime guard release is not authorized"
+    }
+  ],
+  "synthetic": true,
+  "read_only": true,
+  "redaction_applied": true
+}
