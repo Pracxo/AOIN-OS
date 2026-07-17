@@ -35,3 +35,9 @@ release gates.
 
 The gates inherit AION-156 request identity checks and AION-157 authorization
 checks without invoking runtime authentication or adding public auth surfaces.
+
+## AION-159 Closeout
+
+AION-159 records this stabilization as merged in PR 68 and closes
+`AION-157-PA-0004` as consumed, inactive, expired, and non-reusable. The
+request identity boundary remains disabled and runtime-effect-free.

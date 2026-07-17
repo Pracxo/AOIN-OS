@@ -8,14 +8,15 @@ v0.2 tag or release exists.
 
 ## Current Main Milestone
 
-The current main milestone is v0.2 request identity boundary stabilization
-authorization. AION-156 implemented and merged the disabled request identity
-boundary. AION-157 closes `AION-155-PA-0003` and creates `AION-157-PA-0004`
-as the active authorization for AION-158.
+The current main milestone is v0.2 request identity stabilization closeout and
+actor-context trust-boundary authorization. AION-158 implemented and merged the
+pure ASGI disabled request identity stabilization. AION-159 closes
+`AION-157-PA-0004` and creates `AION-159-PA-0005` as the active authorization
+for AION-160.
 
-Current milestone: AION-156 request-identity boundary implemented and merged.
-Current authorization: AION-157-PA-0004 active for AION-158.
-Next task: AION-158 request-identity boundary stabilization.
+Current milestone: AION-158 request-identity stabilization merged.
+Current authorization: AION-159-PA-0005 active for AION-160.
+Next task: AION-160 actor-context trust-boundary remediation.
 
 ## Implemented Subsystems
 
@@ -48,8 +49,13 @@ Next task: AION-158 request-identity boundary stabilization.
 `authorization_consumed_by_task=AION-156`, `authorization_active=false`,
 `authorization_expired=true`, and `authorization_reusable=false`.
 
-`AION-157-PA-0004` is active for AION-158 under
+`AION-157-PA-0004` is consumed by AION-158 PR 68 under
 `authorization_scope=disabled-request-identity-boundary-stabilization`.
+`authorization_active=false`, `authorization_consumed=true`,
+`authorization_expired=true`, and `authorization_reusable=false`.
+
+`AION-159-PA-0005` is active for AION-160 under
+`authorization_scope=fail-closed-actor-context-resolution`.
 
 `AION-153-PA-0002` is historical, consumed by AION-154 PR 64, expired, inactive,
 and non-reusable. `AION-151-PA-0001` remains historical evidence consumed by
@@ -59,9 +65,9 @@ AION-152.
 
 The repository has focused gates for the production-auth authorization lineage,
 the disabled production-auth core, AION-154 stabilization, AION-155 request
-boundary authorization, and AION-157 request identity stabilization
-authorization. These gates are local, deterministic, and do not enable runtime
-authentication.
+boundary authorization, AION-157 request identity stabilization authorization,
+and AION-159 actor-context trust-boundary authorization. These gates are local,
+deterministic, and do not enable runtime authentication.
 
 ## Current Release Posture
 
@@ -69,21 +75,20 @@ authentication.
 `v02_tag_created=false`
 `v02_release_created=false`
 
-The v0.2 release remains blocked until request identity, verification,
+The v0.2 release remains blocked until actor-context trust-boundary
+remediation, real identity verification, external provider integration,
 protected-material, credential, token, session, deployment, rollback,
 observability, threat-model, release-candidate, tag, and release authorization
 work is complete.
 
 ## Current Implementation Task
 
-AION-158 stabilizes the disabled request identity boundary with pure ASGI
-middleware, receive/send passthrough, streaming and request-body preservation,
-cancellation and client-disconnect hardening, forged-state replacement,
-duplicate-registration prevention, concurrency isolation, deterministic
-evidence, diagnostics, static-console evidence, and local gates.
-
-Formal lifecycle closeout for `AION-157-PA-0004` is deferred to AION-159 after
-the AION-158 merge. Real identity verification, external provider integration,
+AION-160 is authorized to remediate the actor-context trust boundary by
+removing non-development trust in identity-bearing `X-AION` headers, isolating
+development simulation behind the explicit development gate, preserving
+RequestIdentityContext precedence, preserving RequestContext correlation, and
+returning anonymous zero-permission ActorContext outside development
+simulation. Real identity verification, external provider integration,
 protected material lifecycle, and runtime guard release remain blocked.
 
 ## Implemented Code Versus Enabled Runtime
@@ -95,3 +100,7 @@ default. No user is authenticated, no headers or cookies are parsed, no
 credentials or tokens are verified or stored, no sessions are created, no
 providers are contacted, and no production-auth or request-identity API route
 exists.
+
+The current actor-context trust-boundary finding is documented as a
+non-development identity-header trust fallback. AION-159 does not alter source
+implementation; AION-160 owns the fail-closed remediation.

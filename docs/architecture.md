@@ -2565,3 +2565,17 @@ audit, telemetry, and performance sampling. It must preserve anonymous disabled
 identity and may not add authentication, parsing, protected-material handling,
 providers, routes, SDK/CLI runtime surfaces, packages, migrations, tags, or
 releases.
+
+## AION-159 Actor Context Trust Boundary
+
+AION-159 documents that `identity/dev_auth.py` currently has a
+non-development identity-header trust fallback in `actor_context_from_headers`.
+That finding is governance evidence only. AION-159 changes no implementation
+source.
+
+AION-160 is authorized to add fail-closed actor-context resolution: ignore
+identity-bearing `X-AION` headers outside explicit development simulation,
+prefer disabled anonymous `RequestIdentityContext` evidence, project safe
+trace/correlation from `RequestContext`, and return anonymous zero-permission
+`ActorContext` outside development simulation. Runtime authentication remains
+disabled.

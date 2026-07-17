@@ -2289,3 +2289,12 @@ cookie issuance, provider runtime, external calls, network clients, endpoints,
 OpenAPI security, package files, lockfiles, migrations, SDK/CLI runtime
 surfaces, connector runtime, operator writes, module activation, sandbox
 execution, v0.2 tags, and v0.2 releases.
+
+## AION-159 Actor Context Trust Boundary
+
+AION-159 adds no runtime policy effect. It authorizes AION-160 to prove that
+non-development callers cannot gain actor identity, workspace identity, roles,
+permissions, or security scope through identity-bearing `X-AION` headers.
+Privilege-escalation regressions must cover owner/admin/system roles, write and
+execution permissions, activation permissions, external-call permissions, and
+security scopes outside explicit development simulation.

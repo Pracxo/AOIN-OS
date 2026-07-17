@@ -37,3 +37,6 @@ Status: `passed`
 - [x] Full repository check required before merge.
 - [x] v0.2 tag absent.
 - [x] v0.2 release absent.
+- [x] AION-158 merged by PR 68.
+- [x] AION-157 consumed by AION-158.
+- [x] AION-157 inactive, expired, and non-reusable after AION-159 closeout.

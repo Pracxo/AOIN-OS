@@ -2226,5 +2226,17 @@ stabilize the disabled request identity boundary while preserving
 The contract boundary remains no headers, no cookies, no credentials, no
 passwords, no tokens, no sessions, no external providers, no network calls, no
 runtime API routes, no OpenAPI security scheme, no SDK resource, and no CLI
-command. `AION-157-PA-0004` is active only for
-`disabled-request-identity-boundary-stabilization`.
+command. `AION-157-PA-0004` is now historical, consumed by AION-158 PR 68,
+and `AION-159-PA-0005` is active only for
+`fail-closed-actor-context-resolution`.
+
+## AION-159 Actor Context Trust Boundary
+
+`AION-157-PA-0004` is now historical, consumed by AION-158 PR 68, expired,
+inactive, and non-reusable. `AION-159-PA-0005` is the single active
+authorization for AION-160 fail-closed actor-context resolution.
+
+The authorized future contract keeps `RequestContext` as the safe trace and
+correlation owner, keeps `RequestIdentityContext` as the primary identity
+evidence source, and requires anonymous zero-permission `ActorContext` outside
+explicit development simulation.

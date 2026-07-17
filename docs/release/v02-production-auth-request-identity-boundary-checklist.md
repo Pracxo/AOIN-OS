@@ -27,7 +27,7 @@
 - [x] `AION-155-PA-0003` consumed=true.
 - [x] `AION-155-PA-0003` expired=true.
 - [x] `AION-155-PA-0003` reusable=false.
-- [x] `AION-157-PA-0004` active for AION-158.
+- [x] `AION-157-PA-0004` consumed by AION-158 PR 68.
 - [x] No request identity implementation source changed by AION-157.
 
 ## AION-158 Stabilization Checklist

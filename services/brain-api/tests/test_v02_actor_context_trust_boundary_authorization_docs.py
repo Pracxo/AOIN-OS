@@ -1,4 +1,4 @@
-"""AION-157 request identity stabilization authorization tests."""
+"""AION-159 actor-context trust-boundary authorization tests."""
 
 from __future__ import annotations
 
@@ -17,76 +17,67 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "scripts/lib"))
 
 from v02_production_auth_authorization import (  # noqa: E402
+    ACTOR_CONTEXT_TRUST_BOUNDARY_FALSE_KEYS,
+    ACTOR_CONTEXT_TRUST_BOUNDARY_PROHIBITED_SCOPE,
+    ACTOR_CONTEXT_TRUST_BOUNDARY_TRUE_KEYS,
     AION151_AUTHORIZATION,
     AION153_AUTHORIZATION,
     AION155_AUTHORIZATION,
     AION157_AUTHORIZATION,
     AION159_AUTHORIZATION,
     APPROVAL_TRUE_KEYS,
-    REQUEST_BOUNDARY_IMPLEMENTATION_TRUE_KEYS,
-    REQUEST_IDENTITY_STABILIZATION_FALSE_KEYS,
-    REQUEST_IDENTITY_STABILIZATION_PROHIBITED_SCOPE,
     REQUEST_IDENTITY_STABILIZATION_TRUE_KEYS,
     validate_authorization_lifecycle_payloads,
 )
 
-AION156_FEATURE_COMMIT = "2fbeb77bdc33772c46a679cbfa0bdafe327abb42"
-AION156_MERGE_COMMIT = "051f6f2e8b901863f8dc9cad405e5b5401db3695"
 AION158_FEATURE_COMMIT = "767fd9b228b00b04569df2e3b1b3f6bc9ecd846f"
 AION158_MERGE_COMMIT = "f792c92e1d8a73ec8e7377b5d59269dea359006d"
 
 DOCS = [
-    "docs/release/v02-production-auth-request-identity-boundary-closeout.md",
-    "docs/release/v02-production-auth-request-identity-stabilization-authorization-transaction.md",
-    "docs/release/v02-production-auth-request-identity-stabilization-explicit-approval-record.md",
-    "docs/release/v02-production-auth-request-identity-stabilization-scope.md",
-    "docs/release/v02-production-auth-request-identity-stabilization-runtime-guard-renewal.md",
-    "docs/release/v02-production-auth-request-identity-stabilization-evidence-matrix.md",
-    "docs/release/v02-production-auth-request-identity-stabilization-no-go.md",
-    "docs/release/v02-production-auth-request-identity-stabilization-checklist.md",
-    "docs/adr/0148-v02-production-auth-request-identity-stabilization-authorization.md",
-]
-
-AION155_JSON_ARTIFACTS = [
-    "examples/release/v02-production-auth-request-boundary-authorization.json",
-    "examples/release/v02-production-auth-request-boundary-runtime-hold.json",
-    "operator-console-static/demo-data/v02-production-auth-request-boundary-authorization.json",
-]
-
-AION157_JSON_ARTIFACTS = [
-    "examples/release/v02-production-auth-request-identity-stabilization-authorization.json",
-    "examples/release/v02-production-auth-request-identity-stabilization-explicit-approval-record.json",
-    "examples/release/v02-production-auth-request-identity-stabilization-runtime-guard-renewal.json",
-    "examples/release/v02-production-auth-request-identity-stabilization-evidence-matrix.json",
-    "operator-console-static/demo-data/v02-production-auth-request-identity-stabilization-authorization.json",
+    "docs/release/v02-request-identity-stabilization-closeout.md",
+    "docs/release/v02-actor-context-trust-boundary-authorization-transaction.md",
+    "docs/release/v02-actor-context-trust-boundary-explicit-approval-record.md",
+    "docs/release/v02-actor-context-trust-boundary-scope.md",
+    "docs/release/v02-actor-context-trust-boundary-runtime-hold.md",
+    "docs/release/v02-actor-context-trust-boundary-evidence-matrix.md",
+    "docs/release/v02-actor-context-trust-boundary-no-go.md",
+    "docs/release/v02-actor-context-trust-boundary-checklist.md",
+    "docs/adr/0150-v02-actor-context-trust-boundary-authorization.md",
 ]
 
 JSON_ARTIFACTS = [
-    "examples/release/v02-production-auth-request-identity-boundary-closeout.json",
-    *AION155_JSON_ARTIFACTS,
-    *AION157_JSON_ARTIFACTS,
+    "examples/release/v02-request-identity-stabilization-closeout.json",
+    "examples/release/v02-actor-context-trust-boundary-authorization.json",
+    "examples/release/v02-actor-context-trust-boundary-explicit-approval-record.json",
+    "examples/release/v02-actor-context-trust-boundary-runtime-hold.json",
+    "examples/release/v02-actor-context-trust-boundary-evidence-matrix.json",
+    "operator-console-static/demo-data/v02-actor-context-trust-boundary-authorization.json",
 ]
 
+AION159_JSON_ARTIFACTS = JSON_ARTIFACTS[1:]
+
 SCRIPTS = [
-    "scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh",
-    "scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh",
+    "scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh",
+    "scripts/v02-actor-context-trust-boundary-authorization-check.sh",
 ]
 
 PROTECTED_SOURCE_PATHS = [
+    "services/brain-api/src/aion_brain/identity/dev_auth.py",
+    "services/brain-api/src/aion_brain/contracts/scopes.py",
     "services/brain-api/src/aion_brain/contracts/request_identity.py",
     "services/brain-api/src/aion_brain/production_auth",
-    "services/brain-api/src/aion_brain/api_support",
     "services/brain-api/src/aion_brain/config.py",
     "services/brain-api/src/aion_brain/kernel",
+    "services/brain-api/src/aion_brain/api_support",
     "services/brain-api/src/aion_brain/api",
     "packages/aion-sdk-python/src",
 ]
 
 
-def test_aion157_required_files_exist_and_status_is_current() -> None:
+def test_aion159_required_files_exist_and_status_is_current() -> None:
     for relative in DOCS + JSON_ARTIFACTS + SCRIPTS:
         assert (ROOT / relative).exists(), relative
-    assert "0148-v02-production-auth-request-identity-stabilization-authorization.md" in _text(
+    assert "0150-v02-actor-context-trust-boundary-authorization.md" in _text(
         "docs/adr/README.md"
     )
 
@@ -96,95 +87,93 @@ def test_aion157_required_files_exist_and_status_is_current() -> None:
     assert "Next task: AION-160 actor-context trust-boundary remediation." in status
 
     readiness = _text("docs/release/v02-release-readiness-delta.md")
-    assert "Disabled request identity boundary" in readiness
-    assert "Request identity implementation evidence" in readiness
     assert "Request identity stabilization" in readiness
+    assert "Actor-context trust-boundary remediation" in readiness
     assert "`AION-160` is the next critical path" in readiness
     assert "`v02_release_ready=false`" in readiness
     assert "`v02_tag_created=false`" in readiness
     assert "`v02_release_created=false`" in readiness
 
 
-def test_aion157_json_is_valid_synthetic_read_only_and_exactly_scoped() -> None:
+def test_aion159_json_is_valid_synthetic_read_only_and_exactly_scoped() -> None:
     for relative in JSON_ARTIFACTS:
         payload = _json(relative)
         assert payload["synthetic"] is True
         assert payload["read_only"] is True
 
-    closeout = _json("examples/release/v02-production-auth-request-identity-boundary-closeout.json")
-    assert closeout["task_id"] == "AION-157"
-    assert closeout["record_kind"] == "request_identity_boundary_closeout"
-    assert closeout["authorization_transaction_id"] == "AION-155-PA-0003"
+    closeout = _json("examples/release/v02-request-identity-stabilization-closeout.json")
+    assert closeout["task_id"] == "AION-159"
+    assert closeout["record_kind"] == "request_identity_stabilization_closeout"
+    assert closeout["authorization_transaction_id"] == "AION-157-PA-0004"
     assert closeout["authorization_active"] is False
     assert closeout["authorization_consumed"] is True
-    assert closeout["authorization_consumed_by_task"] == "AION-156"
-    assert closeout["authorization_consumed_by_pr"] == 66
-    assert closeout["authorization_consumed_by_feature_commit"] == AION156_FEATURE_COMMIT
-    assert closeout["authorization_consumed_by_merge_commit"] == AION156_MERGE_COMMIT
+    assert closeout["authorization_consumed_by_task"] == "AION-158"
+    assert closeout["authorization_consumed_by_pr"] == 68
+    assert closeout["authorization_consumed_by_feature_commit"] == AION158_FEATURE_COMMIT
+    assert closeout["authorization_consumed_by_merge_commit"] == AION158_MERGE_COMMIT
     assert closeout["authorization_expired"] is True
     assert closeout["authorization_reusable"] is False
-    assert closeout["request_identity_boundary_implemented"] is True
+    assert closeout["request_identity_middleware_implementation"] == "pure_asgi"
     assert closeout["request_identity_boundary_state"] == "implemented_disabled"
-    assert closeout["request_identity_boundary_default_enabled"] is False
-    assert closeout["request_identity_boundary_mode"] == "observe_only_disabled"
-    assert closeout["authentication_state"] == "disabled"
-    assert closeout["authenticated"] is False
-    assert closeout["actor_id"] is None
-    assert closeout["subject"] is None
-    assert closeout["roles"] == []
-    assert closeout["runtime_effect"] is False
+    assert closeout["identity_verification_enabled"] is False
+    assert closeout["authenticated_requests_enabled"] is False
+    assert closeout["production_auth_runtime_enabled"] is False
 
-    for relative in AION155_JSON_ARTIFACTS:
+    for relative in AION159_JSON_ARTIFACTS:
         payload = _json(relative)
-        assert payload["task_id"] == "AION-155"
-        assert payload["authorization_transaction_id"] == "AION-155-PA-0003"
-        assert payload["approval_record_id"] == "AION-155-PA-0003"
-        assert payload["parent_authorization_transaction_id"] == "AION-153-PA-0002"
-        assert payload["candidate_id"] == "production-auth-request-identity-boundary"
-        assert payload["workstream"] == "production-auth-request-integration"
-        assert payload["implementation_task"] == "AION-156"
-        assert payload["authorization_scope"] == "disabled-request-identity-boundary"
-        assert payload["authorization_active"] is False
-        assert payload["authorization_consumed"] is True
-        assert payload["authorization_consumed_by_task"] == "AION-156"
-        assert payload["authorization_consumed_by_pr"] == 66
-        assert payload["authorization_consumed_by_feature_commit"] == AION156_FEATURE_COMMIT
-        assert payload["authorization_consumed_by_merge_commit"] == AION156_MERGE_COMMIT
-        assert payload["authorization_expired"] is True
+        assert payload["task_id"] == "AION-159"
+        assert payload["authorization_transaction_id"] == "AION-159-PA-0005"
+        assert payload["approval_record_id"] == "AION-159-PA-0005"
+        assert payload["parent_authorization_transaction_id"] == "AION-157-PA-0004"
+        assert payload["candidate_id"] == "production-auth-actor-context-trust-boundary"
+        assert payload["workstream"] == "production-auth-route-context-hardening"
+        assert payload["implementation_task"] == "AION-160"
+        assert payload["authorization_scope"] == "fail-closed-actor-context-resolution"
+        assert payload["authorization_active"] is True
+        assert payload["authorization_consumed"] is False
+        assert payload["authorization_expired"] is False
         assert payload["authorization_reusable"] is False
-        for key in APPROVAL_TRUE_KEYS | REQUEST_BOUNDARY_IMPLEMENTATION_TRUE_KEYS:
+        for key in APPROVAL_TRUE_KEYS | ACTOR_CONTEXT_TRUST_BOUNDARY_TRUE_KEYS:
             assert payload.get(key) is True, f"{relative}: {key}"
-
-    for relative in AION157_JSON_ARTIFACTS:
-        payload = _json(relative)
-        assert payload["task_id"] == "AION-157"
-        assert payload["authorization_transaction_id"] == "AION-157-PA-0004"
-        assert payload["approval_record_id"] == "AION-157-PA-0004"
-        assert payload["parent_authorization_transaction_id"] == "AION-155-PA-0003"
-        assert payload["candidate_id"] == "production-auth-request-identity-boundary-stabilization"
-        assert payload["workstream"] == "production-auth-request-integration-hardening"
-        assert payload["implementation_task"] == "AION-158"
-        assert payload["authorization_scope"] == "disabled-request-identity-boundary-stabilization"
-        assert payload["authorization_active"] is False
-        assert payload["authorization_consumed"] is True
-        assert payload["authorization_consumed_by_task"] == "AION-158"
-        assert payload["authorization_consumed_by_pr"] == 68
-        assert payload["authorization_consumed_by_feature_commit"] == AION158_FEATURE_COMMIT
-        assert payload["authorization_consumed_by_merge_commit"] == AION158_MERGE_COMMIT
-        assert payload["authorization_expired"] is True
-        assert payload["authorization_reusable"] is False
-        for key in APPROVAL_TRUE_KEYS | REQUEST_IDENTITY_STABILIZATION_TRUE_KEYS:
-            assert payload.get(key) is True, f"{relative}: {key}"
-        for key in REQUEST_IDENTITY_STABILIZATION_FALSE_KEYS:
+        for key in ACTOR_CONTEXT_TRUST_BOUNDARY_FALSE_KEYS:
             assert payload.get(key) is False, f"{relative}: {key}"
-        assert set(payload["approved_scope"]) == AION157_AUTHORIZATION.approved_scope
-        assert set(payload["prohibited_scope"]) == REQUEST_IDENTITY_STABILIZATION_PROHIBITED_SCOPE
-        assert payload["required_adr"] == AION157_AUTHORIZATION.required_adr
-        assert payload["expiry"] == AION157_AUTHORIZATION.expiry
+        assert set(payload["approved_scope"]) == AION159_AUTHORIZATION.approved_scope
+        assert set(payload["prohibited_scope"]) == ACTOR_CONTEXT_TRUST_BOUNDARY_PROHIBITED_SCOPE
+        assert payload["required_adr"] == AION159_AUTHORIZATION.required_adr
+        assert payload["expiry"] == AION159_AUTHORIZATION.expiry
 
 
-def test_aion157_validator_accepts_exact_five_record_lifecycle() -> None:
+def test_aion157_is_historical_and_aion159_is_only_active_record() -> None:
     validate_authorization_lifecycle_payloads(_canonical_records())
+    aion157 = _payload_from_spec(AION157_AUTHORIZATION)
+    assert aion157["authorization_active"] is False
+    assert aion157["authorization_consumed"] is True
+    assert aion157["authorization_consumed_by_task"] == "AION-158"
+    assert aion157["authorization_consumed_by_pr"] == 68
+    assert aion157["authorization_consumed_by_feature_commit"] == AION158_FEATURE_COMMIT
+    assert aion157["authorization_consumed_by_merge_commit"] == AION158_MERGE_COMMIT
+    assert aion157["authorization_expired"] is True
+    assert aion157["authorization_reusable"] is False
+    for key in APPROVAL_TRUE_KEYS | REQUEST_IDENTITY_STABILIZATION_TRUE_KEYS:
+        assert aion157[key] is True
+
+
+def test_aion159_trust_boundary_finding_is_documented_from_source() -> None:
+    source = _text("services/brain-api/src/aion_brain/identity/dev_auth.py")
+    docs = _text("docs/release/v02-actor-context-trust-boundary-authorization-transaction.md")
+    assert 'dev_enabled = settings.env == "development" and settings.dev_auth_enabled' in source
+    assert "if not dev_enabled:" in source
+    for header in (
+        "X-AION-Actor-ID",
+        "X-AION-Workspace-ID",
+        "X-AION-Roles",
+        "X-AION-Permissions",
+        "X-AION-Security-Scope",
+    ):
+        assert header in source
+        assert header in docs
+    assert "non-development identity-header trust fallback" in docs
+    assert "AION-159 changes no implementation source" in docs
 
 
 @pytest.mark.parametrize(
@@ -194,8 +183,7 @@ def test_aion157_validator_accepts_exact_five_record_lifecycle() -> None:
             lambda records: records.append(
                 (
                     "duplicate-active.json",
-                    _payload_from_spec(AION155_AUTHORIZATION)
-                    | {"authorization_active": True},
+                    _payload_from_spec(AION157_AUTHORIZATION) | {"authorization_active": True},
                 )
             ),
             "authorization_active must be false",
@@ -203,18 +191,6 @@ def test_aion157_validator_accepts_exact_five_record_lifecycle() -> None:
         (
             lambda records: records.append(("unknown.json", _unknown_active_payload())),
             "unknown approved authorization record",
-        ),
-        (
-            lambda records: records[2][1].__setitem__("authorization_active", True),
-            "authorization_active must be false",
-        ),
-        (
-            lambda records: records[2][1].__setitem__("authorization_reusable", True),
-            "authorization_reusable must be false",
-        ),
-        (
-            lambda records: records[2][1].__setitem__("authorization_expired", False),
-            "authorization_expired must be true",
         ),
         (
             lambda records: records[3][1].__setitem__("authorization_active", True),
@@ -239,12 +215,12 @@ def test_aion157_validator_accepts_exact_five_record_lifecycle() -> None:
         (
             lambda records: records[4][1].__setitem__(
                 "parent_authorization_transaction_id",
-                "AION-153-PA-0002",
+                "AION-155-PA-0003",
             ),
             "parent_authorization_transaction_id mismatch",
         ),
         (
-            lambda records: records[4][1].__setitem__("implementation_task", "AION-157"),
+            lambda records: records[4][1].__setitem__("implementation_task", "AION-159"),
             "implementation_task mismatch",
         ),
         (
@@ -258,7 +234,7 @@ def test_aion157_validator_accepts_exact_five_record_lifecycle() -> None:
         (
             lambda records: records[4][1].__setitem__(
                 "authorization_scope",
-                "disabled-request-identity-boundary-stabilization-and-login",
+                "fail-closed-actor-context-resolution-and-login",
             ),
             "authorization_scope mismatch",
         ),
@@ -270,12 +246,42 @@ def test_aion157_validator_accepts_exact_five_record_lifecycle() -> None:
             "actor_context_trust_boundary_remediation_approved must be true",
         ),
         (
-            lambda records: records[4][1].__setitem__("extra_runtime_permission_approved", True),
+            lambda records: records[4][1].__setitem__(
+                "extra_actor_context_permission_approved",
+                True,
+            ),
             "approved permission set mismatch",
         ),
         (
-            lambda records: records[4][1]["prohibited_scope"].remove("token_storage"),
+            lambda records: records[4][1]["prohibited_scope"].remove(
+                "production_identity_header_trust"
+            ),
             "prohibited_scope mismatch",
+        ),
+        (
+            lambda records: records[4][1].__setitem__(
+                "production_identity_header_trust_approved",
+                True,
+            ),
+            "production_identity_header_trust_approved must be false",
+        ),
+        (
+            lambda records: records[4][1].__setitem__("production_role_header_trust_enabled", True),
+            "production_role_header_trust_enabled must be false",
+        ),
+        (
+            lambda records: records[4][1].__setitem__(
+                "production_permission_header_trust_enabled",
+                True,
+            ),
+            "production_permission_header_trust_enabled must be false",
+        ),
+        (
+            lambda records: records[4][1].__setitem__(
+                "production_security_scope_header_trust_enabled",
+                True,
+            ),
+            "production_security_scope_header_trust_enabled must be false",
         ),
         (
             lambda records: records[4][1].__setitem__("identity_verification_enabled", True),
@@ -286,31 +292,12 @@ def test_aion157_validator_accepts_exact_five_record_lifecycle() -> None:
             "authenticated_requests_enabled must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__(
-                "authorization_header_parsing_approved",
-                True,
-            ),
-            "authorization_header_parsing_approved must be false",
+            lambda records: records[4][1].__setitem__("protected_material_handling_approved", True),
+            "protected_material_handling_approved must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("cookie_parsing_approved", True),
-            "cookie_parsing_approved must be false",
-        ),
-        (
-            lambda records: records[4][1].__setitem__("credential_verification_approved", True),
-            "credential_verification_approved must be false",
-        ),
-        (
-            lambda records: records[4][1].__setitem__("external_identity_provider_approved", True),
-            "external_identity_provider_approved must be false",
-        ),
-        (
-            lambda records: records[4][1].__setitem__("login_endpoint_approved", True),
-            "login_endpoint_approved must be false",
-        ),
-        (
-            lambda records: records[4][1].__setitem__("openapi_security_scheme_added", True),
-            "openapi_security_scheme_added must be false",
+            lambda records: records[4][1].__setitem__("provider_sdk_approved", True),
+            "provider_sdk_approved must be false",
         ),
         (
             lambda records: records[4][1].__setitem__("package_files_added", True),
@@ -321,23 +308,19 @@ def test_aion157_validator_accepts_exact_five_record_lifecycle() -> None:
             "migrations_added must be false",
         ),
         (
-            lambda records: records[4][1].__setitem__("v02_tag_created", True),
-            "v02_tag_created must be false",
-        ),
-        (
             lambda records: records[4][1].__setitem__("v02_release_created", True),
             "v02_release_created must be false",
         ),
     ],
 )
-def test_aion157_validator_rejects_bad_lifecycle(mutator: Any, match: str) -> None:
+def test_aion159_validator_rejects_bad_lifecycle(mutator: Any, match: str) -> None:
     records = _canonical_records()
     mutator(records)
     with pytest.raises(AssertionError, match=match):
         validate_authorization_lifecycle_payloads(records)
 
 
-def test_aion157_does_not_change_protected_sources_or_add_release_artifacts() -> None:
+def test_aion159_does_not_change_protected_sources_or_add_release_artifacts() -> None:
     changed = _changed_files()
     for forbidden in PROTECTED_SOURCE_PATHS:
         assert not any(path == forbidden or path.startswith(f"{forbidden}/") for path in changed)
@@ -350,9 +333,9 @@ def test_aion157_does_not_change_protected_sources_or_add_release_artifacts() ->
     assert not any(path.startswith("migrations/") for path in changed)
 
 
-def test_aion157_scripts_are_executable_and_pass() -> None:
+def test_aion159_scripts_are_executable_and_pass() -> None:
     env = os.environ.copy()
-    env["PYTEST_CURRENT_TEST"] = env.get("PYTEST_CURRENT_TEST", "AION-157 focused script test")
+    env["PYTEST_CURRENT_TEST"] = env.get("PYTEST_CURRENT_TEST", "AION-159 focused script test")
     for relative in SCRIPTS:
         path = ROOT / relative
         assert path.exists(), relative
@@ -360,7 +343,7 @@ def test_aion157_scripts_are_executable_and_pass() -> None:
         subprocess.run([str(path)], cwd=ROOT, check=True, env=env)
 
 
-def test_aion157_does_not_create_v02_release_or_tag() -> None:
+def test_aion159_does_not_create_v02_release_or_tag() -> None:
     tags = subprocess.run(
         ["git", "tag", "--list"],
         cwd=ROOT,

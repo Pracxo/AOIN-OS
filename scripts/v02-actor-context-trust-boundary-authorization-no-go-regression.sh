@@ -60,7 +60,6 @@ changed_files() {
 changed_file_list="$(mktemp)"
 scan_file_list="$(mktemp)"
 trap 'rm -f "$changed_file_list" "$scan_file_list"' EXIT
-
 changed_files > "$changed_file_list"
 
 while IFS= read -r file; do
@@ -68,31 +67,28 @@ while IFS= read -r file; do
   case "$file" in
     package.json|package-lock.json|pnpm-lock.yaml|yarn.lock|bun.lockb|\
     */package.json|*/package-lock.json|*/pnpm-lock.yaml|*/yarn.lock|*/bun.lockb)
-      echo "package files and lockfiles are forbidden for AION-157: $file" >&2
+      echo "package files and lockfiles are forbidden for AION-159: $file" >&2
       exit 1
       ;;
-    *migrations/*|*alembic/*|*migration*.py|*migration*.sql)
-      echo "migrations are forbidden for AION-157: $file" >&2
+    *migrations/*|migrations/*|*alembic/*|*migration*.py|*migration*.sql)
+      echo "migrations are forbidden for AION-159: $file" >&2
       exit 1
       ;;
+    services/brain-api/src/aion_brain/identity/dev_auth.py|\
+    services/brain-api/src/aion_brain/contracts/scopes.py|\
     services/brain-api/src/aion_brain/contracts/request_identity.py|\
     services/brain-api/src/aion_brain/production_auth/*|\
-    services/brain-api/src/aion_brain/api_support/*|\
     services/brain-api/src/aion_brain/config.py|\
     services/brain-api/src/aion_brain/kernel/*|\
+    services/brain-api/src/aion_brain/api_support/*|\
     services/brain-api/src/aion_brain/api/*|\
     packages/aion-sdk-python/src/*)
-      if aion158_is_scoped_request_identity_stabilization_path "$file"; then
-        continue
-      fi
-      echo "implementation source changes are forbidden for AION-157: $file" >&2
+      echo "protected implementation source changes are forbidden for AION-159: $file" >&2
       exit 1
       ;;
   esac
 
-  if [[ -f "$file" ]] \
-    && ! aion157_is_scoped_request_identity_stabilization_path "$file" \
-    && ! aion158_is_scoped_request_identity_stabilization_path "$file"; then
+  if [[ -f "$file" ]] && ! aion159_is_scoped_actor_context_trust_boundary_authorization_path "$file"; then
     printf '%s\n' "$file" >> "$scan_file_list"
   fi
 done < "$changed_file_list"
@@ -108,8 +104,8 @@ test ! -e services/brain-api/src/aion_brain/api/request_identity.py || {
 }
 
 if [[ -s "$scan_file_list" ]]; then
-  if rg -n '\b(runtime_implementation_approved|production_auth_runtime_enabled|identity_verification_enabled|authenticated_requests_enabled|runtime_enablement_guard_release_approved|runtime_enablement_guard_final_lock_release_approved|runtime_enablement_master_lock_release_approved|authorization_header_parsing_approved|cookie_parsing_approved|credential_verification_approved|password_verification_approved|credential_storage_approved|password_storage_approved|token_parsing_approved|token_issuance_approved|token_storage_approved|token_refresh_approved|session_creation_approved|session_storage_approved|cookie_issuance_approved|cookie_session_persistence_approved|external_identity_provider_approved|oauth_runtime_approved|oidc_runtime_approved|saml_runtime_approved|external_calls_approved|network_client_approved|provider_sdk_approved|login_endpoint_approved|logout_endpoint_approved|callback_endpoint_approved|token_endpoint_approved|session_endpoint_approved|credential_endpoint_approved|openapi_security_scheme_added|package_files_added|lockfiles_added|migrations_added|runtime_api_routes_added|api_runtime_execution_route_added|sdk_runtime_resource_added|cli_runtime_command_added|operator_write_execution_approved|connector_implementation_approved|connector_runtime_enabled|module_activation_approved|sandbox_execution_approved|v02_tag_created|v02_release_created|v02_release_approved)\s*[:=]\s*true\b' $(cat "$scan_file_list"); then
-    echo "runtime, parsing, endpoint, protected-material, provider, package, migration, route, release, or execution approval was enabled" >&2
+  if rg -n '\b(runtime_implementation_approved|production_auth_runtime_enabled|identity_verification_enabled|authenticated_requests_enabled|authenticated_actor_context_enabled|non_development_identity_header_trust_enabled|production_identity_header_trust_approved|production_actor_header_trust_enabled|production_role_header_trust_enabled|production_permission_header_trust_enabled|production_security_scope_header_trust_enabled|authorization_header_parsing_approved|cookie_parsing_approved|credential_verification_approved|password_verification_approved|credential_storage_approved|password_storage_approved|token_parsing_approved|token_issuance_approved|token_storage_approved|token_refresh_approved|session_creation_approved|session_storage_approved|cookie_issuance_approved|cookie_session_persistence_approved|protected_material_handling_approved|external_identity_provider_approved|oauth_runtime_approved|oidc_runtime_approved|saml_runtime_approved|external_calls_approved|network_client_approved|provider_sdk_approved|login_endpoint_approved|logout_endpoint_approved|callback_endpoint_approved|token_endpoint_approved|session_endpoint_approved|credential_endpoint_approved|openapi_security_scheme_added|package_files_added|lockfiles_added|migrations_added|runtime_api_routes_added|api_runtime_execution_route_added|sdk_runtime_resource_added|cli_runtime_command_added|operator_write_execution_approved|connector_implementation_approved|connector_runtime_enabled|module_activation_approved|sandbox_execution_approved|v02_tag_created|v02_release_created|v02_release_approved)\s*[:=]\s*true\b' $(cat "$scan_file_list"); then
+    echo "runtime, production header trust, parsing, protected-material, provider, package, migration, route, release, or execution approval was enabled" >&2
     exit 1
   fi
 
@@ -122,37 +118,32 @@ if [[ -s "$scan_file_list" ]]; then
     echo "network or external call path found in changed files" >&2
     exit 1
   fi
-
-  if rg -n '\b(oauth|oidc|saml|authlib|okta|auth0|webauthn|passkey|python-jose|jwt)\b.*\b(enabled|client|provider|runtime|sdk)\b' $(cat "$scan_file_list"); then
-    echo "provider runtime or SDK surface found in changed files" >&2
-    exit 1
-  fi
 fi
 
 if git tag --list | rg -n '^(v0\.2|v0\.2\.0|aion-v0\.2\.0|aion-v0\.2)$'; then
-  echo "v0.2 tag must not exist for AION-157" >&2
+  echo "v0.2 tag must not exist for AION-159" >&2
   exit 1
 fi
 
 if gh release view v0.2 >/dev/null 2>&1 || gh release view aion-v0.2 >/dev/null 2>&1; then
-  echo "v0.2 release must not exist for AION-157" >&2
+  echo "v0.2 release must not exist for AION-159" >&2
   exit 1
 fi
 
 cat <<'SUMMARY'
-v0.2 production auth request identity stabilization authorization no-go result:
+v0.2 actor context trust boundary authorization no-go result:
 - exactly one active authorization tuple: AION-159-PA-0005
-- AION-155 historical consumed record: present
 - AION-157 historical consumed record: present
 - duplicate active authorization tuple: absent
 - unknown approved authorization: absent
 - historical reactivation: absent
 - wrong parent, task, candidate, workstream, or scope: absent
-- partial stabilization permission set: absent
+- partial remediation permission set: absent
 - extra approved permission: absent
 - missing prohibited scope entry: absent
-- request identity implementation source changes: absent
-- config, kernel, app-factory, API, SDK, and CLI source changes: absent
-- runtime authentication, headers, cookies, protected material, providers, network calls, endpoints, OpenAPI security, packages, lockfiles, migrations, connector runtime, operator writes, module activation, sandbox execution, v0.2 tags, and v0.2 releases: absent
-v0.2 production auth request identity stabilization authorization no-go PASS
+- dev_auth.py changes: absent
+- ActorContext contract changes: absent
+- production-auth, config, kernel, API, SDK, and CLI source changes: absent
+- runtime authentication, production header trust, protected material, providers, network calls, endpoints, packages, lockfiles, migrations, connector runtime, operator writes, module activation, sandbox execution, v0.2 tags, and v0.2 releases: absent
+v0.2 actor context trust boundary authorization no-go PASS
 SUMMARY

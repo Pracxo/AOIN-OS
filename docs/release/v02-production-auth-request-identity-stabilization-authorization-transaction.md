@@ -29,9 +29,13 @@ creates no runtime API route, and creates no v0.2 tag or release.
 
 ## Lifecycle
 
-- `authorization_active=true`
-- `authorization_consumed=false`
-- `authorization_expired=false`
+- `authorization_active=false`
+- `authorization_consumed=true`
+- `authorization_consumed_by_task=AION-158`
+- `authorization_consumed_by_pr=68`
+- `authorization_consumed_by_feature_commit=767fd9b228b00b04569df2e3b1b3f6bc9ecd846f`
+- `authorization_consumed_by_merge_commit=f792c92e1d8a73ec8e7377b5d59269dea359006d`
+- `authorization_expired=true`
 - `authorization_reusable=false`
 - Exactly one active production-auth authorization may exist.
 
@@ -66,3 +70,9 @@ This authorization expires when AION-158 merges or when
 AION-158 implements the authorized stabilization scope with pure ASGI
 middleware and disabled runtime guard checks. Formal lifecycle closeout for
 `AION-157-PA-0004` remains deferred to AION-159 after merge.
+
+## AION-159 Closeout
+
+AION-159 marks this transaction consumed by AION-158 PR 68:
+`authorization_active=false`, `authorization_consumed=true`,
+`authorization_expired=true`, and `authorization_reusable=false`.

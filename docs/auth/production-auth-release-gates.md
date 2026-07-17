@@ -74,7 +74,7 @@ AION-157 adds:
 ```
 
 These gates verify `AION-155-PA-0003` is historical consumed evidence,
-`AION-157-PA-0004` is the only active authorization, AION-158 scope is exact,
+`AION-157-PA-0004` is historical and `AION-159-PA-0005` is the only active authorization, AION-160 scope is exact,
 runtime authentication remains disabled, implementation source remains
 unchanged in AION-157, and v0.2 tag or release creation remains absent.
 
@@ -94,3 +94,16 @@ replaced, duplicate registration is rejected, runtime authentication remains
 disabled, public auth routes and OpenAPI security remain absent, and package
 files, lockfiles, migrations, SDK/CLI runtime surfaces, v0.2 tags, and v0.2
 releases remain absent.
+
+## Actor Context Trust Boundary Authorization Gate
+
+```bash
+./scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh
+./scripts/v02-actor-context-trust-boundary-authorization-check.sh
+```
+
+These gates verify that AION-157 is historical, `AION-159-PA-0005` is the only
+active authorization, the current non-development identity-header trust
+fallback is documented, AION-160 scope is fail-closed actor-context
+resolution, implementation source is unchanged in AION-159, runtime
+authentication remains disabled, and v0.2 tags and releases remain absent.

@@ -4971,11 +4971,12 @@ external call, v0.2 tag, or v0.2 release is added.
 
 ## AION-157 Request Identity Stabilization Authorization
 
-AION-157 closes `AION-155-PA-0003` as consumed by AION-156 PR 66 and creates
-`AION-157-PA-0004` as the only active authorization for future AION-158
-request identity boundary stabilization. It is governance, evidence,
-documentation, validation, and authorization work only. It changes no request
-identity implementation source and enables no authentication capability.
+AION-157 closed `AION-155-PA-0003` as consumed by AION-156 PR 66 and created
+`AION-157-PA-0004` for AION-158 request identity boundary stabilization.
+AION-159 now marks `AION-157-PA-0004` consumed by AION-158 PR 68, inactive,
+expired, and non-reusable. The AION-157 work was governance, evidence,
+documentation, validation, and authorization only. It changed no request
+identity implementation source and enabled no authentication capability.
 
 Runtime remains disabled: `identity_verification_enabled=false`,
 `authenticated_requests_enabled=false`, `production_auth_runtime_enabled=false`,
@@ -5004,3 +5005,23 @@ Authorization or Cookie parsing, no credentials, passwords, tokens, sessions,
 providers, external calls, auth endpoints, OpenAPI security, package files,
 lockfiles, migrations, SDK/CLI runtime surfaces, connector runtime, operator
 writes, module activation, sandbox execution, v0.2 tags, or v0.2 releases.
+
+## AION-159 Actor Context Trust Boundary Authorization
+
+AION-159 closes `AION-157-PA-0004` as consumed by AION-158 PR 68 and creates
+`AION-159-PA-0005` as the only active authorization for AION-160 actor-context
+trust-boundary remediation. It documents the current non-development
+identity-header trust fallback in `identity/dev_auth.py` without altering
+implementation source.
+
+AION-160 is authorized only to make actor-context resolution fail closed:
+ignore identity-bearing `X-AION` headers outside explicit development
+simulation, give `RequestIdentityContext` precedence, project safe trace and
+correlation from `RequestContext`, return anonymous zero-permission
+`ActorContext` outside development simulation, harden route dependencies, and
+add regression evidence. Runtime authentication, real identity verification,
+Authorization or Cookie parsing, credentials, tokens, sessions, providers,
+external calls, auth endpoints, OpenAPI security, package files, lockfiles,
+migrations, SDK/CLI runtime surfaces, connector runtime, operator writes,
+module activation, sandbox execution, runtime guard release, v0.2 tags, and
+v0.2 releases remain blocked.

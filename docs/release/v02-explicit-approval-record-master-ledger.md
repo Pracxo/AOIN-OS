@@ -40,3 +40,11 @@ idempotency, diagnostic hardening, performance smoke tests, documentation, and
 read-only evidence. Runtime authentication, protected material, providers,
 network calls, endpoints, packages, migrations, SDK/CLI runtime surfaces, tags,
 and releases remain blocked.
+
+## AION-159-PA-0005
+
+`AION-159-PA-0005` is the sole active production-auth authorization. It
+authorizes AION-160 fail-closed actor-context resolution only and keeps
+runtime authentication, production header trust, credentials, tokens, sessions,
+providers, endpoints, packages, migrations, SDK/CLI runtime surfaces, tags,
+and releases blocked.
