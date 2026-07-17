@@ -73,6 +73,16 @@ PROTECTED_SOURCE_PATHS = [
     "packages/aion-sdk-python/src",
 ]
 
+AION160_REMEDIATION_PATHS = {
+    "services/brain-api/src/aion_brain/contracts/actor_context_resolution.py",
+    "services/brain-api/src/aion_brain/identity/dev_auth.py",
+    "services/brain-api/src/aion_brain/production_auth/__init__.py",
+    "services/brain-api/src/aion_brain/production_auth/actor_context.py",
+    "services/brain-api/src/aion_brain/production_auth/actor_context_evidence.py",
+    "services/brain-api/src/aion_brain/kernel/container.py",
+    "services/brain-api/src/aion_brain/kernel/diagnostics.py",
+}
+
 
 def test_aion159_required_files_exist_and_status_is_current() -> None:
     for relative in DOCS + JSON_ARTIFACTS + SCRIPTS:
@@ -82,14 +92,28 @@ def test_aion159_required_files_exist_and_status_is_current() -> None:
     )
 
     status = _text("docs/project-status.md")
-    assert "Current milestone: AION-158 request-identity stabilization merged." in status
-    assert "Current authorization: AION-159-PA-0005 active for AION-160." in status
-    assert "Next task: AION-160 actor-context trust-boundary remediation." in status
+    assert (
+        "Current milestone: AION-158 request-identity stabilization merged." in status
+        or "Current milestone: AION-160 actor-context trust-boundary remediation implemented."
+        in status
+    )
+    assert (
+        "Current authorization: AION-159-PA-0005 active for AION-160." in status
+        or "Current authorization: AION-159-PA-0005 consumed by AION-160 when merged."
+        in status
+    )
+    assert (
+        "Next task: AION-160 actor-context trust-boundary remediation." in status
+        or "Formal lifecycle closeout: AION-161." in status
+    )
 
     readiness = _text("docs/release/v02-release-readiness-delta.md")
     assert "Request identity stabilization" in readiness
     assert "Actor-context trust-boundary remediation" in readiness
-    assert "`AION-160` is the next critical path" in readiness
+    assert (
+        "`AION-160` is the next critical path" in readiness
+        or "AION-160 remediates the actor-context trust boundary" in readiness
+    )
     assert "`v02_release_ready=false`" in readiness
     assert "`v02_tag_created=false`" in readiness
     assert "`v02_release_created=false`" in readiness
@@ -161,8 +185,13 @@ def test_aion157_is_historical_and_aion159_is_only_active_record() -> None:
 def test_aion159_trust_boundary_finding_is_documented_from_source() -> None:
     source = _text("services/brain-api/src/aion_brain/identity/dev_auth.py")
     docs = _text("docs/release/v02-actor-context-trust-boundary-authorization-transaction.md")
-    assert 'dev_enabled = settings.env == "development" and settings.dev_auth_enabled' in source
-    assert "if not dev_enabled:" in source
+    remediated = _text("docs/release/v02-actor-context-trust-boundary-remediation.md")
+    assert (
+        'dev_enabled = settings.env == "development" and settings.dev_auth_enabled'
+        in source
+        or 'return settings.env == "development" and settings.dev_auth_enabled is True'
+        in source
+    )
     for header in (
         "X-AION-Actor-ID",
         "X-AION-Workspace-ID",
@@ -173,7 +202,10 @@ def test_aion159_trust_boundary_finding_is_documented_from_source() -> None:
         assert header in source
         assert header in docs
     assert "non-development identity-header trust fallback" in docs
-    assert "AION-159 changes no implementation source" in docs
+    assert (
+        "AION-159 changes no implementation source" in docs
+        or "AION-160 remediates that behavior" in remediated
+    )
 
 
 @pytest.mark.parametrize(
@@ -323,7 +355,11 @@ def test_aion159_validator_rejects_bad_lifecycle(mutator: Any, match: str) -> No
 def test_aion159_does_not_change_protected_sources_or_add_release_artifacts() -> None:
     changed = _changed_files()
     for forbidden in PROTECTED_SOURCE_PATHS:
-        assert not any(path == forbidden or path.startswith(f"{forbidden}/") for path in changed)
+        assert not any(
+            (path == forbidden or path.startswith(f"{forbidden}/"))
+            and path not in AION160_REMEDIATION_PATHS
+            for path in changed
+        )
     assert not any(path.endswith("package.json") for path in changed)
     assert not any(path.endswith("package-lock.json") for path in changed)
     assert not any(path.endswith("pnpm-lock.yaml") for path in changed)

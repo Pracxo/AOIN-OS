@@ -82,11 +82,23 @@ for header in \
   }
 done
 
-grep -F 'dev_enabled = settings.env == "development" and settings.dev_auth_enabled' \
-  services/brain-api/src/aion_brain/identity/dev_auth.py >/dev/null || {
-    echo "dev_auth development gate expression changed unexpectedly" >&2
+if grep -F 'dev_enabled = settings.env == "development" and settings.dev_auth_enabled' \
+  services/brain-api/src/aion_brain/identity/dev_auth.py >/dev/null; then
+  grep -F "AION-159 changes no implementation source" \
+    docs/release/v02-actor-context-trust-boundary-authorization-transaction.md >/dev/null || {
+      echo "AION-159 pre-remediation source state is not documented" >&2
+      exit 1
+    }
+elif grep -F 'return settings.env == "development" and settings.dev_auth_enabled is True' \
+  services/brain-api/src/aion_brain/identity/dev_auth.py >/dev/null; then
+  test -f docs/release/v02-actor-context-trust-boundary-remediation.md || {
+    echo "AION-160 remediated actor-context state is missing implementation evidence" >&2
     exit 1
   }
+else
+  echo "dev_auth development gate expression changed unexpectedly" >&2
+  exit 1
+fi
 
 verify_aion158_commit_in_history "$AION158_FEATURE_COMMIT" "feature"
 verify_aion158_commit_in_history "$AION158_MERGE_COMMIT" "merge"

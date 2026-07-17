@@ -65,6 +65,7 @@ def test_auth_examples_are_valid_and_redacted() -> None:
             or "mock-claims" in path.name
             or "production-auth" in path.name
             or path.name.startswith("request-identity-")
+            or path.name.startswith("actor-context-")
             or path.name == "disabled-auth-prototype-plan.json"
         ):
             continue

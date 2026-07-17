@@ -46,11 +46,21 @@ def test_dev_auth_parses_header_roles_permissions_and_scopes() -> None:
 def test_dev_auth_does_not_create_implicit_owner_outside_development() -> None:
     """Non-development mode does not invent owner permissions."""
     context = actor_context_from_headers(
-        FakeRequest(),
+        FakeRequest(
+            {
+                "X-AION-Actor-ID": "root",
+                "X-AION-Workspace-ID": "system",
+                "X-AION-Roles": "owner,admin",
+                "X-AION-Permissions": "*",
+                "X-AION-Security-Scope": "global:*",
+            }
+        ),
         Settings(env="production", dev_auth_enabled=True),
     )
 
     assert context.actor_id is None
+    assert context.workspace_id is None
     assert context.roles == []
     assert context.permissions == []
+    assert context.security_scope == []
     assert context.dev_mode is False

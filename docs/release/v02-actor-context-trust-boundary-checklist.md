@@ -1,25 +1,17 @@
 # v0.2 Actor Context Trust Boundary Checklist
 
-- [x] AION-158 merged.
-- [x] AION-158 closeout complete.
-- [x] AION-157 inactive.
-- [x] AION-157 consumed.
-- [x] AION-157 expired.
-- [x] AION-157 non-reusable.
-- [x] Trust-boundary finding documented.
-- [x] AION-159 record complete.
-- [x] Exact transaction: `AION-159-PA-0005`.
-- [x] Exact parent: `AION-157-PA-0004`.
-- [x] Exact candidate: `production-auth-actor-context-trust-boundary`.
-- [x] Exact workstream: `production-auth-route-context-hardening`.
-- [x] Exact task: `AION-160`.
-- [x] Exact scope: `fail-closed-actor-context-resolution`.
-- [x] Exactly one active authorization.
-- [x] Every remediation permission present.
-- [x] Every runtime permission false.
-- [x] Implementation source unchanged in AION-159.
-- [x] Scripts executable.
-- [x] Focused tests passing.
-- [x] Full repository check required before merge.
-- [x] v0.2 tag absent.
-- [x] v0.2 release absent.
+- [x] Verify AION-159 PR 69 and `AION-159-PA-0005`.
+- [x] Document the pre-change non-development identity-header fallback.
+- [x] Add immutable actor-context resolution contracts.
+- [x] Add stateless fail-closed production actor-context resolver.
+- [x] Preserve `get_actor_context` and `actor_context_from_headers`.
+- [x] Enforce exact development simulation gate.
+- [x] Ignore identity-bearing `X-AION` headers outside development simulation.
+- [x] Preserve RequestIdentityContext precedence.
+- [x] Project only RequestContext trace and correlation.
+- [x] Ignore RequestContext actor and workspace metadata.
+- [x] Keep payload actor metadata unverified.
+- [x] Add privilege-escalation, route, payload, concurrency, redaction, diagnostics, and runtime-surface tests.
+- [x] Add AION-160 docs, examples, console evidence, ADR, and gates.
+- [ ] Merge AION-160.
+- [ ] Defer formal lifecycle closeout to AION-161.

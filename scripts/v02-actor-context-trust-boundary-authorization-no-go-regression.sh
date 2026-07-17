@@ -74,6 +74,13 @@ while IFS= read -r file; do
       echo "migrations are forbidden for AION-159: $file" >&2
       exit 1
       ;;
+  esac
+
+  if aion160_is_scoped_actor_context_trust_boundary_remediation_path "$file"; then
+    continue
+  fi
+
+  case "$file" in
     services/brain-api/src/aion_brain/identity/dev_auth.py|\
     services/brain-api/src/aion_brain/contracts/scopes.py|\
     services/brain-api/src/aion_brain/contracts/request_identity.py|\

@@ -8,15 +8,23 @@ v0.2 tag or release exists.
 
 ## Current Main Milestone
 
-The current main milestone is v0.2 request identity stabilization closeout and
-actor-context trust-boundary authorization. AION-158 implemented and merged the
-pure ASGI disabled request identity stabilization. AION-159 closes
-`AION-157-PA-0004` and creates `AION-159-PA-0005` as the active authorization
-for AION-160.
+The current main milestone is v0.2 actor-context trust-boundary remediation.
+AION-158 implemented and merged the pure ASGI disabled request identity
+stabilization. AION-159 closed `AION-157-PA-0004` and created
+`AION-159-PA-0005` as the active authorization for AION-160.
 
-Current milestone: AION-158 request-identity stabilization merged.
-Current authorization: AION-159-PA-0005 active for AION-160.
-Next task: AION-160 actor-context trust-boundary remediation.
+Current milestone: AION-160 actor-context trust-boundary remediation implemented.
+Current implementation state:
+
+- non-development identity headers ignored
+- anonymous zero-permission ActorContext
+- RequestIdentityContext precedence
+- RequestContext trace/correlation projection
+- development simulation isolated
+- production authentication disabled
+
+Current authorization: AION-159-PA-0005 consumed by AION-160 when merged.
+Formal lifecycle closeout: AION-161.
 
 ## Implemented Subsystems
 
@@ -66,8 +74,11 @@ AION-152.
 The repository has focused gates for the production-auth authorization lineage,
 the disabled production-auth core, AION-154 stabilization, AION-155 request
 boundary authorization, AION-157 request identity stabilization authorization,
-and AION-159 actor-context trust-boundary authorization. These gates are local,
-deterministic, and do not enable runtime authentication.
+and AION-159 actor-context trust-boundary authorization. AION-160 adds
+fail-closed actor-context remediation gates, privilege-escalation regressions,
+route regressions, concurrency coverage, redaction coverage, and runtime-hold
+checks. These gates are local, deterministic, and do not enable runtime
+authentication.
 
 ## Current Release Posture
 
@@ -75,19 +86,19 @@ deterministic, and do not enable runtime authentication.
 `v02_tag_created=false`
 `v02_release_created=false`
 
-The v0.2 release remains blocked until actor-context trust-boundary
-remediation, real identity verification, external provider integration,
-protected-material, credential, token, session, deployment, rollback,
-observability, threat-model, release-candidate, tag, and release authorization
-work is complete.
+The v0.2 release remains blocked until real identity verification, external
+provider integration, protected-material, credential, token, session,
+deployment, rollback, observability, threat-model, release-candidate, runtime
+guard release decision, tag, and release authorization work is complete.
 
 ## Current Implementation Task
 
-AION-160 is authorized to remediate the actor-context trust boundary by
-removing non-development trust in identity-bearing `X-AION` headers, isolating
-development simulation behind the explicit development gate, preserving
-RequestIdentityContext precedence, preserving RequestContext correlation, and
-returning anonymous zero-permission ActorContext outside development
+AION-160 actor-context trust-boundary remediation implemented. The
+implementation removes non-development trust in identity-bearing `X-AION`
+headers, isolates development simulation behind the exact development gate,
+preserves RequestIdentityContext precedence, preserves RequestContext
+trace/correlation projection, ignores RequestContext actor/workspace metadata,
+and returns anonymous zero-permission ActorContext outside development
 simulation. Real identity verification, external provider integration,
 protected material lifecycle, and runtime guard release remain blocked.
 
@@ -101,6 +112,7 @@ credentials or tokens are verified or stored, no sessions are created, no
 providers are contacted, and no production-auth or request-identity API route
 exists.
 
-The current actor-context trust-boundary finding is documented as a
-non-development identity-header trust fallback. AION-159 does not alter source
-implementation; AION-160 owns the fail-closed remediation.
+The actor-context trust-boundary finding was documented by AION-159 as a
+non-development identity-header trust fallback. AION-160 owns and implements
+the fail-closed remediation. Formal lifecycle closeout for `AION-159-PA-0005`
+belongs to AION-161.

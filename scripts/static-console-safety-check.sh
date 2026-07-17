@@ -209,6 +209,8 @@ allowed_authorization_demo_names = {
     "production-auth-request-identity-runtime-hold.json",
     "production-auth-request-identity-stabilization.json",
     "production-auth-request-identity-stabilization-runtime-hold.json",
+    "actor-context-trust-boundary.json",
+    "actor-context-runtime-hold.json",
 }
 
 
@@ -243,6 +245,8 @@ def walk(value: object, path: Path) -> None:
                 "production-auth-request-identity-runtime-hold.json",
                 "production-auth-request-identity-stabilization.json",
                 "production-auth-request-identity-stabilization-runtime-hold.json",
+                "actor-context-trust-boundary.json",
+                "actor-context-runtime-hold.json",
             }:
                 continue
             if marker in lowered:

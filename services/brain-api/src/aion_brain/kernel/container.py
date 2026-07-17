@@ -459,6 +459,7 @@ from aion_brain.policy_catalog.simulation import PolicySimulationService
 from aion_brain.policy_catalog.test_harness import PolicyTestHarness
 from aion_brain.production_auth import (
     DisabledRequestIdentityVerifier,
+    ProductionAuthActorContextResolver,
     ProductionAuthCoreService,
     ProductionAuthRequestIdentityBoundary,
     production_auth_core_config_from_settings,
@@ -3668,6 +3669,9 @@ class KernelContainer:
             ProductionAuthRequestIdentityBoundary(
                 self.production_auth_request_identity_verifier
             )
+        )
+        self.production_auth_actor_context_resolver = (
+            ProductionAuthActorContextResolver()
         )
         self.connector_runtime_gate_service = ConnectorRuntimeGateService(
             settings=self.settings,

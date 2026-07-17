@@ -5,7 +5,14 @@ from typing import Annotated
 from fastapi import Depends, Request
 
 from aion_brain.config import Settings, get_settings
+from aion_brain.contracts.actor_context_resolution import (
+    ActorContextResolutionBundle,
+    ActorContextResolutionInput,
+)
+from aion_brain.contracts.api import RequestContext
+from aion_brain.contracts.request_identity import RequestIdentityContext
 from aion_brain.contracts.scopes import ActorContext
+from aion_brain.production_auth.actor_context import ProductionAuthActorContextResolver
 
 DEV_PERMISSIONS = [
     "brain.think",
@@ -562,45 +569,143 @@ def get_actor_context(
     request: Request,
     settings: Annotated[Settings, Depends(get_settings)],
 ) -> ActorContext:
-    """Return the current request actor context for local development."""
-    return actor_context_from_headers(request, settings)
+    """Return the current request actor context for route dependencies."""
+    resolver = _resolver_from_request(request)
+    bundle = resolve_actor_context_bundle(request, settings, resolver=resolver)
+    _attach_resolution_bundle(request, bundle)
+    return bundle.actor_context
 
 
 def actor_context_from_headers(request: Request, settings: Settings) -> ActorContext:
-    """Create an actor context from development headers only."""
-    dev_enabled = settings.env == "development" and settings.dev_auth_enabled
-    if not dev_enabled:
-        return ActorContext(
-            actor_id=_header(request, "X-AION-Actor-ID"),
-            actor_type=None,
-            workspace_id=_header(request, "X-AION-Workspace-ID"),
-            roles=_csv_header(request, "X-AION-Roles"),
-            permissions=_csv_header(request, "X-AION-Permissions"),
-            security_scope=_csv_header(request, "X-AION-Security-Scope"),
-            correlation_id=_header(request, "X-AION-Correlation-ID"),
-            trace_id=_header(request, "X-AION-Trace-ID"),
-            dev_mode=False,
-        )
+    """Compatibility wrapper for existing route and test imports."""
+    return resolve_actor_context_bundle(request, settings).actor_context
 
-    actor_id = _header(request, "X-AION-Actor-ID") or settings.default_dev_actor_id
-    workspace_id = _header(request, "X-AION-Workspace-ID") or settings.default_dev_workspace_id
-    roles = _csv_header(request, "X-AION-Roles") or ["owner"]
-    permissions = _csv_header(request, "X-AION-Permissions") or list(DEV_PERMISSIONS)
-    security_scope = _csv_header(request, "X-AION-Security-Scope") or [
-        f"workspace:{workspace_id}",
-        f"actor:{actor_id}",
-    ]
-    return ActorContext(
-        actor_id=actor_id,
-        actor_type="user",
-        workspace_id=workspace_id,
-        roles=roles,
-        permissions=permissions,
-        security_scope=security_scope,
-        correlation_id=_header(request, "X-AION-Correlation-ID"),
-        trace_id=_header(request, "X-AION-Trace-ID"),
-        dev_mode=True,
+
+def resolve_actor_context_bundle(
+    request: Request,
+    settings: Settings,
+    *,
+    resolver: ProductionAuthActorContextResolver | None = None,
+) -> ActorContextResolutionBundle:
+    """Resolve actor context from structured safe request state."""
+    effective_resolver = resolver or ProductionAuthActorContextResolver()
+    return effective_resolver.resolve(_resolution_input_from_request(request, settings))
+
+
+def development_identity_simulation_enabled(settings: Settings) -> bool:
+    """Return true only for the exact local development identity simulation gate."""
+    return settings.env == "development" and settings.dev_auth_enabled is True
+
+
+def _resolution_input_from_request(
+    request: Request,
+    settings: Settings,
+) -> ActorContextResolutionInput:
+    request_context = _safe_request_context(request)
+    identity_present = _state_has(request, "aion_request_identity_context")
+    identity_context = _safe_request_identity_context(request)
+    identity_valid = identity_context is not None and _request_identity_is_disabled(
+        identity_context
     )
+    dev_enabled = development_identity_simulation_enabled(settings)
+    trace_id = request_context.trace_id if request_context is not None else None
+    correlation_id = (
+        request_context.correlation_id if request_context is not None else None
+    )
+    if dev_enabled:
+        actor_id = _header(request, "X-AION-Actor-ID") or settings.default_dev_actor_id
+        workspace_id = (
+            _header(request, "X-AION-Workspace-ID") or settings.default_dev_workspace_id
+        )
+        roles = tuple(_csv_header(request, "X-AION-Roles") or ["owner"])
+        permissions = tuple(_csv_header(request, "X-AION-Permissions") or DEV_PERMISSIONS)
+        security_scope = tuple(
+            _csv_header(request, "X-AION-Security-Scope")
+            or [f"workspace:{workspace_id}", f"actor:{actor_id}"]
+        )
+        if request_context is None:
+            trace_id = _header(request, "X-AION-Trace-ID")
+            correlation_id = _header(request, "X-AION-Correlation-ID")
+    else:
+        actor_id = None
+        workspace_id = None
+        roles = ()
+        permissions = ()
+        security_scope = ()
+    return ActorContextResolutionInput(
+        request_id=request_context.request_id if request_context is not None else None,
+        trace_id=trace_id,
+        correlation_id=correlation_id,
+        request_identity_context_present=identity_present,
+        request_identity_context_valid=identity_valid,
+        development_simulation_enabled=dev_enabled,
+        development_actor_id=actor_id,
+        development_workspace_id=workspace_id,
+        development_roles=roles,
+        development_permissions=permissions,
+        development_security_scope=security_scope,
+        metadata={
+            "request_context_actor_ignored": True,
+            "request_context_workspace_ignored": True,
+            "raw_headers_in_resolver_input": False,
+        },
+    )
+
+
+def _resolver_from_request(request: Request) -> ProductionAuthActorContextResolver:
+    container = getattr(request.app.state, "kernel_container", None)
+    resolver = getattr(container, "production_auth_actor_context_resolver", None)
+    if isinstance(resolver, ProductionAuthActorContextResolver):
+        return resolver
+    return ProductionAuthActorContextResolver()
+
+
+def _safe_request_context(request: Request) -> RequestContext | None:
+    value = _state_get(request, "aion_request_context")
+    return value if isinstance(value, RequestContext) else None
+
+
+def _safe_request_identity_context(request: Request) -> RequestIdentityContext | None:
+    value = _state_get(request, "aion_request_identity_context")
+    return value if isinstance(value, RequestIdentityContext) else None
+
+
+def _request_identity_is_disabled(context: RequestIdentityContext) -> bool:
+    return (
+        context.authentication_state == "disabled"
+        and context.authenticated is False
+        and context.actor_id is None
+        and context.subject is None
+        and tuple(context.roles) == ()
+        and context.runtime_effect is False
+    )
+
+
+def _attach_resolution_bundle(
+    request: Request,
+    bundle: ActorContextResolutionBundle,
+) -> None:
+    state = getattr(request, "state", None)
+    if state is None:
+        return
+    state.aion_actor_context_resolution = bundle
+    state.aion_actor_context_resolution_audit_event = getattr(bundle, "audit_event", None)
+    state.aion_actor_context_resolution_provenance = getattr(bundle, "provenance", None)
+    state.aion_actor_context_resolution_source = getattr(bundle, "source", "anonymous_fail_closed")
+    state.aion_actor_context_resolution_failed = bool(getattr(bundle, "resolution_failed", False))
+    state.aion_actor_context_resolution_failure_reason = getattr(bundle, "failure_reason", None)
+
+
+def _state_get(request: Request, name: str) -> object | None:
+    state = getattr(request, "state", None)
+    if state is None:
+        return None
+    return getattr(state, name, None)
+
+
+def _state_has(request: Request, name: str) -> bool:
+    state = getattr(request, "state", None)
+    return bool(state is not None and hasattr(state, name))
 
 
 def _header(request: Request, name: str) -> str | None:
