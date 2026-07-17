@@ -294,6 +294,18 @@ allowed_aion157_files = {
 allowed_aion159_files = {
     "operator-console-static/demo-data/v02-actor-context-trust-boundary-authorization.json",
 }
+allowed_aion160_files = {
+    "operator-console-static/demo-data/actor-context-runtime-hold.json",
+    "operator-console-static/demo-data/actor-context-trust-boundary.json",
+    "services/brain-api/src/aion_brain/contracts/actor_context_resolution.py",
+    "services/brain-api/src/aion_brain/identity/dev_auth.py",
+    "services/brain-api/src/aion_brain/kernel/container.py",
+    "services/brain-api/src/aion_brain/kernel/diagnostics.py",
+    "services/brain-api/src/aion_brain/local_auth/audit.py",
+    "services/brain-api/src/aion_brain/production_auth/__init__.py",
+    "services/brain-api/src/aion_brain/production_auth/actor_context.py",
+    "services/brain-api/src/aion_brain/production_auth/actor_context_evidence.py",
+}
 allowed_aion152_prefixes = (
     "services/brain-api/src/aion_brain/production_auth/",
 )
@@ -347,6 +359,7 @@ for relative in sorted(changed):
         or relative in allowed_aion156_files
         or relative in allowed_aion157_files
         or relative in allowed_aion159_files
+        or relative in allowed_aion160_files
         or relative in allowed_aion152_files
         or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)

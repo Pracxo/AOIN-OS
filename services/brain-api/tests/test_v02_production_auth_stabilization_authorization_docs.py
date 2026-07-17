@@ -76,6 +76,16 @@ AION156_ALLOWED_CHANGED_PATHS = {
     "services/brain-api/src/aion_brain/kernel/diagnostics.py",
 }
 
+AION160_ALLOWED_CHANGED_PATHS = {
+    "services/brain-api/src/aion_brain/contracts/actor_context_resolution.py",
+    "services/brain-api/src/aion_brain/identity/dev_auth.py",
+    "services/brain-api/src/aion_brain/production_auth/__init__.py",
+    "services/brain-api/src/aion_brain/production_auth/actor_context.py",
+    "services/brain-api/src/aion_brain/production_auth/actor_context_evidence.py",
+    "services/brain-api/src/aion_brain/kernel/container.py",
+    "services/brain-api/src/aion_brain/kernel/diagnostics.py",
+}
+
 
 def test_v02_production_auth_stabilization_docs_exist_and_show_consumed_state() -> None:
     for relative in DOCS:
@@ -213,7 +223,7 @@ def test_v02_production_auth_stabilization_scripts_are_executable_and_pass() -> 
 
 
 def test_v02_production_auth_stabilization_does_not_change_forbidden_sources() -> None:
-    changed = _changed_files() - AION156_ALLOWED_CHANGED_PATHS
+    changed = _changed_files() - AION156_ALLOWED_CHANGED_PATHS - AION160_ALLOWED_CHANGED_PATHS
     for forbidden in FORBIDDEN_CHANGED_PATHS:
         assert not any(path == forbidden or path.startswith(f"{forbidden}/") for path in changed)
     assert not any(path.endswith("package.json") for path in changed)

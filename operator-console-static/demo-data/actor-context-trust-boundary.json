@@ -1,0 +1,92 @@
+{
+  "actor_context_source": "anonymous_fail_closed",
+  "actor_context_trust_boundary_remediated": true,
+  "actor_context_resolution_state": "implemented_fail_closed",
+  "actor_id": null,
+  "actor_type": null,
+  "anonymous_zero_permission_fallback": true,
+  "authenticated": false,
+  "authenticated_actor_context_enabled": false,
+  "authenticated_requests_enabled": false,
+  "authentication_state": "disabled",
+  "authorization_consumed_by_task": "AION-160",
+  "authorization_expires_on_aion_160_merge": true,
+  "authorization_scope": "fail-closed-actor-context-resolution",
+  "authorization_transaction_id": "AION-159-PA-0005",
+  "dev_mode": false,
+  "development_identity_simulation_active": false,
+  "development_identity_simulation_available": true,
+  "identity_verification_enabled": false,
+  "implementation_task": "AION-160",
+  "non_development_identity_headers_ignored": true,
+  "permissions": [],
+  "production_actor_header_trust_enabled": false,
+  "production_auth_runtime_enabled": false,
+  "production_permission_header_trust_enabled": false,
+  "production_role_header_trust_enabled": false,
+  "production_security_scope_header_trust_enabled": false,
+  "production_workspace_header_trust_enabled": false,
+  "read_only": true,
+  "redaction_applied": true,
+  "status": "passed",
+  "sections": [
+    {
+      "title": "Actor-context trust boundary",
+      "status": "passed",
+      "summary": "Non-development identity-bearing headers are ignored and actor context resolves fail-closed."
+    }
+  ],
+  "blockers": [],
+  "warnings": [],
+  "refs": [
+    "docs/auth/actor-context-trust-boundary.md",
+    "docs/release/v02-actor-context-trust-boundary-remediation.md",
+    "scripts/production-auth-actor-context-trust-boundary-check.sh"
+  ],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
+  ],
+  "reason_codes": [
+    "actor_context_anonymous_fail_closed",
+    "non_development_identity_headers_ignored",
+    "request_context_correlation_projected",
+    "request_context_identity_metadata_ignored",
+    "runtime_authentication_disabled",
+    "runtime_enablement_guard_locked",
+    "authorization_scope_implementation_only"
+  ],
+  "request_context_correlation_projection": true,
+  "request_context_identity_metadata_ignored": true,
+  "request_identity_context_precedence": true,
+  "roles": [],
+  "runtime_effect": false,
+  "runtime_guard_hold_active": true,
+  "runtime_implementation_approved": false,
+  "runtime_no_go_status": true,
+  "security_scope": [],
+  "synthetic": true,
+  "workspace_id": null
+}

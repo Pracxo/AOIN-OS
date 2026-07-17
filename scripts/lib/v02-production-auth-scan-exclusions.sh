@@ -70,6 +70,9 @@ aion151_is_scoped_authorization_path() {
       if aion159_is_scoped_actor_context_trust_boundary_authorization_path "$1"; then
         return 0
       fi
+      if aion160_is_scoped_actor_context_trust_boundary_remediation_path "$1"; then
+        return 0
+      fi
       if aion157_is_scoped_request_identity_stabilization_path "$1"; then
         return 0
       fi
@@ -147,6 +150,9 @@ aion157_is_scoped_request_identity_stabilization_path() {
       ;;
     *)
       if aion159_is_scoped_actor_context_trust_boundary_authorization_path "$1"; then
+        return 0
+      fi
+      if aion160_is_scoped_actor_context_trust_boundary_remediation_path "$1"; then
         return 0
       fi
       if aion158_is_scoped_request_identity_stabilization_path "$1"; then
@@ -243,6 +249,9 @@ aion158_is_scoped_request_identity_stabilization_path() {
       return 0
       ;;
     *)
+      if aion160_is_scoped_actor_context_trust_boundary_remediation_path "$1"; then
+        return 0
+      fi
       return 1
       ;;
   esac
@@ -312,6 +321,85 @@ aion159_is_scoped_actor_context_trust_boundary_authorization_path() {
     services/brain-api/tests/test_static_console_ux_refinement.py|\
     services/brain-api/tests/test_v02_production_auth_request_identity_stabilization_authorization_docs.py|\
     services/brain-api/tests/test_v02_actor_context_trust_boundary_authorization_docs.py)
+      return 0
+      ;;
+    *)
+      if aion160_is_scoped_actor_context_trust_boundary_remediation_path "$1"; then
+        return 0
+      fi
+      return 1
+      ;;
+  esac
+}
+
+aion160_is_scoped_actor_context_trust_boundary_remediation_path() {
+  # Exact AION-160 fail-closed actor-context remediation paths. This permits
+  # the scoped source remediation and evidence without exempting auth routers,
+  # SDK/CLI runtime surfaces, migrations, package files, providers, or broad
+  # source directories.
+  case "$1" in
+    README.md|\
+    AGENTS.md|\
+    docs/project-status.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/visual-brain.md|\
+    docs/auth/actor-context-trust-boundary.md|\
+    docs/auth/development-identity-simulation.md|\
+    docs/auth/request-identity-boundary.md|\
+    docs/auth/request-identity-stabilization.md|\
+    docs/auth/request-identity-runtime-boundary.md|\
+    docs/auth/future-auth-implementation-plan.md|\
+    docs/auth/production-auth-release-gates.md|\
+    docs/release/v02-actor-context-trust-boundary-authorization-transaction.md|\
+    docs/release/v02-actor-context-trust-boundary-explicit-approval-record.md|\
+    docs/release/v02-actor-context-trust-boundary-scope.md|\
+    docs/release/v02-actor-context-trust-boundary-remediation.md|\
+    docs/release/v02-actor-context-trust-boundary-runtime-hold.md|\
+    docs/release/v02-actor-context-trust-boundary-evidence-matrix.md|\
+    docs/release/v02-actor-context-trust-boundary-no-go.md|\
+    docs/release/v02-actor-context-trust-boundary-checklist.md|\
+    docs/release/v02-release-readiness-delta.md|\
+    docs/adr/0151-v02-actor-context-trust-boundary-remediation.md|\
+    docs/adr/README.md|\
+    examples/auth/actor-context-anonymous-resolution.json|\
+    examples/auth/actor-context-request-identity-resolution.json|\
+    examples/auth/actor-context-development-simulation.json|\
+    examples/auth/actor-context-resolution-audit-event.json|\
+    examples/auth/actor-context-resolution-provenance.json|\
+    examples/auth/actor-context-resolution-diagnostics.json|\
+    operator-console-static/demo-data/actor-context-trust-boundary.json|\
+    operator-console-static/demo-data/actor-context-runtime-hold.json|\
+    services/brain-api/src/aion_brain/contracts/actor_context_resolution.py|\
+    services/brain-api/src/aion_brain/identity/dev_auth.py|\
+    services/brain-api/src/aion_brain/production_auth/__init__.py|\
+    services/brain-api/src/aion_brain/production_auth/actor_context.py|\
+    services/brain-api/src/aion_brain/production_auth/actor_context_evidence.py|\
+    services/brain-api/src/aion_brain/kernel/container.py|\
+    services/brain-api/src/aion_brain/kernel/diagnostics.py|\
+    services/brain-api/tests/test_dev_auth_context.py|\
+    services/brain-api/tests/test_actor_context_resolution_contracts.py|\
+    services/brain-api/tests/test_actor_context_fail_closed.py|\
+    services/brain-api/tests/test_actor_context_development_simulation.py|\
+    services/brain-api/tests/test_actor_context_request_identity_precedence.py|\
+    services/brain-api/tests/test_actor_context_request_context_correlation.py|\
+    services/brain-api/tests/test_actor_context_privilege_escalation.py|\
+    services/brain-api/tests/test_actor_context_route_integration.py|\
+    services/brain-api/tests/test_actor_context_payload_metadata.py|\
+    services/brain-api/tests/test_actor_context_audit_provenance.py|\
+    services/brain-api/tests/test_actor_context_concurrency.py|\
+    services/brain-api/tests/test_actor_context_redaction.py|\
+    services/brain-api/tests/test_actor_context_diagnostics.py|\
+    services/brain-api/tests/test_actor_context_no_runtime_surface.py|\
+    services/brain-api/tests/test_actor_context_trust_boundary_docs.py|\
+    services/brain-api/tests/test_v02_actor_context_trust_boundary_authorization_docs.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    scripts/production-auth-actor-context-trust-boundary-check.sh|\
+    scripts/production-auth-actor-context-trust-boundary-runtime-hold.sh|\
+    scripts/production-auth-actor-context-trust-boundary-no-go-regression.sh|\
+    scripts/v02-actor-context-trust-boundary-authorization-check.sh|\
+    scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh)
       return 0
       ;;
     *)
@@ -388,6 +476,9 @@ aion154_is_scoped_stabilization_path() {
       return 0
       ;;
     *)
+      if aion160_is_scoped_actor_context_trust_boundary_remediation_path "$1"; then
+        return 0
+      fi
       return 1
       ;;
   esac
@@ -473,6 +564,9 @@ aion156_is_scoped_request_identity_path() {
       return 0
       ;;
     *)
+      if aion160_is_scoped_actor_context_trust_boundary_remediation_path "$1"; then
+        return 0
+      fi
       return 1
       ;;
   esac

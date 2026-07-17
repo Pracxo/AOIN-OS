@@ -181,6 +181,7 @@ class LocalAuthAuditService:
                 or "auth-runtime" in path.name
                 or "mock-claims" in path.name
                 or path.name.startswith("request-identity-")
+                or path.name.startswith("actor-context-")
             ):
                 continue
             try:

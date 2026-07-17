@@ -9,6 +9,7 @@ __all__ = [
     "ProductionAuthRequestIdentityBoundary",
     "ProductionAuthRequestIdentityMiddleware",
     "ProductionAuthAuditBuilder",
+    "ProductionAuthActorContextResolver",
     "ProductionAuthCoreService",
     "ProductionAuthDiagnosticBuilder",
     "ProductionAuthPolicyEvaluator",
@@ -32,6 +33,12 @@ def __getattr__(name: str) -> Any:
         from aion_brain.production_auth.core import ProductionAuthCoreService
 
         return ProductionAuthCoreService
+    if name == "ProductionAuthActorContextResolver":
+        from aion_brain.production_auth.actor_context import (
+            ProductionAuthActorContextResolver,
+        )
+
+        return ProductionAuthActorContextResolver
     if name == "DisabledRequestIdentityVerifier":
         from aion_brain.production_auth.verifier import DisabledRequestIdentityVerifier
 

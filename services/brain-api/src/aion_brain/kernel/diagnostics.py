@@ -575,6 +575,7 @@ class KernelDiagnostics:
         checks.extend(self._auth_runtime_checks(settings))
         checks.extend(self._production_auth_core_checks(settings))
         checks.extend(self._production_auth_request_identity_checks(settings))
+        checks.extend(self._production_auth_actor_context_checks(settings))
         checks.extend(self._connector_runtime_checks(settings))
         checks.extend(self._connector_simulator_checks(settings))
         checks.extend(self._connector_policy_checks(settings))
@@ -1371,6 +1372,111 @@ class KernelDiagnostics:
                 ),
                 "high",
                 "Request identity diagnostics preserve implementation and stabilization lineage.",
+            ),
+        ]
+
+    def _production_auth_actor_context_checks(
+        self,
+        settings: object,
+    ) -> list[DiagnosticCheck]:
+        resolver = getattr(self._container, "production_auth_actor_context_resolver", None)
+        development_active = (
+            getattr(settings, "env", None) == "development"
+            and getattr(settings, "dev_auth_enabled", False) is True
+        )
+        snapshot = None
+        if resolver is not None:
+            snapshot_method = getattr(resolver, "diagnostic_snapshot", None)
+            if callable(snapshot_method):
+                snapshot = snapshot_method(
+                    development_simulation_active=development_active
+                )
+        return [
+            self._result(
+                "actor_context_trust_boundary_remediated",
+                "production_auth_actor_context",
+                "passed" if resolver is not None else "failed",
+                "critical",
+                "Fail-closed actor-context resolver is assembled.",
+            ),
+            self._result(
+                "actor_context_resolution_implemented_fail_closed",
+                "production_auth_actor_context",
+                (
+                    "passed"
+                    if snapshot is not None
+                    and bool(
+                        getattr(
+                            snapshot,
+                            "actor_context_trust_boundary_remediated",
+                            False,
+                        )
+                    )
+                    and getattr(snapshot, "actor_context_resolution_state", None)
+                    == "implemented_fail_closed"
+                    else "failed"
+                ),
+                "critical",
+                "Actor-context resolution is implemented fail-closed.",
+            ),
+            self._result(
+                "actor_context_runtime_disabled",
+                "production_auth_actor_context",
+                (
+                    "failed"
+                    if bool(getattr(settings, "production_auth_enabled", False))
+                    or bool(getattr(settings, "auth_runtime_enabled", False))
+                    or bool(getattr(settings, "production_auth_core_runtime_enabled", False))
+                    else "passed"
+                ),
+                "critical",
+                "Actor-context remediation does not enable production authentication.",
+            ),
+            self._result(
+                "actor_context_production_header_trust_disabled",
+                "production_auth_actor_context",
+                (
+                    "passed"
+                    if snapshot is not None
+                    and bool(getattr(snapshot, "non_development_identity_headers_ignored", False))
+                    and not bool(
+                        getattr(snapshot, "production_actor_header_trust_enabled", True)
+                    )
+                    and not bool(
+                        getattr(snapshot, "production_workspace_header_trust_enabled", True)
+                    )
+                    and not bool(
+                        getattr(snapshot, "production_role_header_trust_enabled", True)
+                    )
+                    and not bool(
+                        getattr(snapshot, "production_permission_header_trust_enabled", True)
+                    )
+                    and not bool(
+                        getattr(
+                            snapshot,
+                            "production_security_scope_header_trust_enabled",
+                            True,
+                        )
+                    )
+                    else "failed"
+                ),
+                "critical",
+                "Production identity, role, permission, and scope headers are ignored.",
+            ),
+            self._result(
+                "actor_context_diagnostics_redacted",
+                "production_auth_actor_context",
+                (
+                    "passed"
+                    if snapshot is not None
+                    and bool(getattr(snapshot, "redacted", False))
+                    and bool(getattr(snapshot, "runtime_no_go_status", False))
+                    and not bool(getattr(snapshot, "identity_verification_enabled", True))
+                    and not bool(getattr(snapshot, "authenticated_actor_context_enabled", True))
+                    else "failed"
+                ),
+                "high",
+                "Actor-context diagnostics expose only redacted process state.",
             ),
         ]
 
