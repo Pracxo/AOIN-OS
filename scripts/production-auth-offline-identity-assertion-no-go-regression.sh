@@ -125,6 +125,8 @@ if base:
         base_deps = set(tomllib.loads(proc.stdout)["project"]["dependencies"])
         added = current_deps - base_deps
         removed = base_deps - current_deps
+        if not added and not removed:
+            raise SystemExit(0)
         if added != {"cryptography>=49.0.0,<50.0.0"}:
             raise SystemExit(f"unexpected dependency additions: {sorted(added)}")
         if removed:
