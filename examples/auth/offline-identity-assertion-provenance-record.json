@@ -1,0 +1,25 @@
+{
+  "schema_version": "identity-assertion-verification/v1",
+  "authorization_transaction_id": "AION-161-PA-0006",
+  "implementation_task": "AION-162",
+  "authorization_scope": "offline-ed25519-identity-assertion-verification",
+  "provenance_id": "provenance-example-001",
+  "verification_id": "verification-example-success",
+  "source_refs": [
+    "AION-161-PA-0006",
+    "docs/adr/0153-v02-offline-ed25519-identity-assertion-verification.md"
+  ],
+  "verifier_name": "OfflineEd25519IdentityAssertionVerifier",
+  "verifier_version": "identity-assertion-verification/v1",
+  "public_key_registry_key_count": 1,
+  "canonicalization_reused": true,
+  "public_key_only_runtime": true,
+  "raw_assertion_stored": false,
+  "raw_signature_stored": false,
+  "full_public_key_stored": false,
+  "verified_claims_persisted": false,
+  "created_at": "2026-07-17T12:00:00Z",
+  "metadata": {
+    "synthetic": true
+  }
+}

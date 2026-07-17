@@ -90,6 +90,7 @@ while IFS= read -r file; do
   if ! aion154_is_scoped_stabilization_path "$file" \
     && ! aion156_is_scoped_request_identity_path "$file" \
     && ! aion158_is_scoped_request_identity_stabilization_path "$file" \
+    && ! aion162_is_scoped_offline_identity_assertion_verification_path "$file" \
     && ! aion151_is_scoped_authorization_path "$file"; then
     case "$file" in
       services/brain-api/src/aion_brain/production_auth/*|\
@@ -104,6 +105,9 @@ while IFS= read -r file; do
   fi
 
   if [[ -f "$file" ]]; then
+    if aion162_is_scoped_offline_identity_assertion_verification_path "$file"; then
+      continue
+    fi
     if aion158_is_scoped_request_identity_stabilization_path "$file"; then
       continue
     fi

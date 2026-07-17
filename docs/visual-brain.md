@@ -1475,3 +1475,14 @@ AION-162. The visual surface must remain read-only and must show request
 authentication, ActorContext application, RequestIdentityContext application,
 runtime private keys, provider networking, replay cache, endpoints, SDK/CLI
 runtime surfaces, tags, and releases as blocked.
+## AION-162 Static Evidence Projection
+
+The static console can project AION-162 bundled evidence from
+`operator-console-static/demo-data/offline-identity-assertion-verification.json`
+and `operator-console-static/demo-data/offline-identity-assertion-runtime-hold.json`.
+
+The projection is read-only. It may show the implemented unintegrated verifier,
+fixed Ed25519 semantics, public-key registry status, replay-protection absence,
+and runtime no-go state. It must not accept assertions, signatures, public keys,
+or signing material and must not verify live identities or authenticate
+requests.

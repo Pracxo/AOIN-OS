@@ -2310,3 +2310,13 @@ and claim checks passed, while still requiring `request_authenticated=false`,
 Replay protection remains a future requirement before request integration.
 Provider trust, token semantics, sessions, credentials, and protected-material
 handling beyond public verification keys remain outside this authorization.
+## AION-162 Verification Policy Boundary
+
+AION-162 adds a local verification policy requiring exact expected issuer and
+audience values, maximum assertion lifetime no greater than 300 seconds, and
+clock skew no greater than 30 seconds.
+
+The policy does not authorize runtime authentication, fallback issuers,
+wildcard audiences, provider discovery, JWKS fetch, replay caches, or request
+identity application. Runtime integration remains blocked until a separate
+authorization.

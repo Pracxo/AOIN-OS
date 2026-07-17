@@ -6,6 +6,7 @@ from typing import Any
 
 __all__ = [
     "DisabledRequestIdentityVerifier",
+    "OfflineEd25519IdentityAssertionVerifier",
     "ProductionAuthRequestIdentityBoundary",
     "ProductionAuthRequestIdentityMiddleware",
     "ProductionAuthAuditBuilder",
@@ -15,6 +16,7 @@ __all__ = [
     "ProductionAuthPolicyEvaluator",
     "ProductionAuthProvenanceBuilder",
     "RequestIdentityVerifier",
+    "TrustedPublicKeyRegistry",
     "canonical_json_bytes",
     "canonical_json_text",
     "production_auth_core_config_from_settings",
@@ -39,6 +41,18 @@ def __getattr__(name: str) -> Any:
         )
 
         return ProductionAuthActorContextResolver
+    if name == "OfflineEd25519IdentityAssertionVerifier":
+        from aion_brain.production_auth.identity_assertion_verifier import (
+            OfflineEd25519IdentityAssertionVerifier,
+        )
+
+        return OfflineEd25519IdentityAssertionVerifier
+    if name == "TrustedPublicKeyRegistry":
+        from aion_brain.production_auth.trusted_public_keys import (
+            TrustedPublicKeyRegistry,
+        )
+
+        return TrustedPublicKeyRegistry
     if name == "DisabledRequestIdentityVerifier":
         from aion_brain.production_auth.verifier import DisabledRequestIdentityVerifier
 

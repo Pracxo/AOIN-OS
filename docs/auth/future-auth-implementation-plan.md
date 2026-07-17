@@ -155,3 +155,10 @@ negative fixtures, and exactly one future `cryptography` dependency change.
 Runtime integration, replay protection runtime, provider networking, private
 runtime keys, tokens, sessions, endpoints, and v0.2 release actions remain
 future work.
+## AION-162 Implemented Primitive
+
+AION-162 delivers the offline Ed25519 verification primitive authorized by
+`AION-161-PA-0006`. It narrows future production-auth work by providing a
+tested public-key-only verifier, but it does not authorize request integration,
+replay protection, provider integration, credential lifecycle, token lifecycle,
+session lifecycle, runtime guard release, or v0.2 release work.

@@ -161,6 +161,44 @@ for path in sorted(demo_dir.glob("*.json")):
         if payload.get("dry_run_only") is not True:
             raise SystemExit(f"action authorization demo must be dry_run_only: {path}")
         continue
+    if path.name.startswith("offline-identity-assertion-"):
+        if payload.get("read_only") is not True:
+            raise SystemExit(f"offline identity assertion demo must be read_only: {path}")
+        if payload.get("redaction_applied") is not True:
+            raise SystemExit(f"offline identity assertion demo must be redacted: {path}")
+        false_keys = {
+            "actor_context_applied",
+            "authorization_header_parsing_enabled",
+            "cli_runtime_command_added",
+            "connector_runtime_enabled",
+            "cookie_parsing_enabled",
+            "external_calls_enabled",
+            "external_identity_provider_enabled",
+            "identity_assertion_endpoint_enabled",
+            "identity_assertion_header_parsing_enabled",
+            "identity_assertion_middleware_registered",
+            "lockfiles_added",
+            "migrations_added",
+            "module_activation_enabled",
+            "new_package_manifest_added",
+            "openapi_security_scheme_added",
+            "operator_write_execution_enabled",
+            "replay_check_performed",
+            "request_authenticated",
+            "request_identity_context_applied",
+            "runtime_api_routes_added",
+            "runtime_effect",
+            "runtime_integration_allowed",
+            "runtime_private_key_material_present",
+            "sandbox_execution_enabled",
+            "sdk_runtime_resource_added",
+            "v02_release_created",
+            "v02_tag_created",
+        }
+        for key in false_keys:
+            if key in payload and payload.get(key) is not False:
+                raise SystemExit(f"offline identity assertion demo flag must be false: {key}: {path}")
+        continue
     if path.name.startswith("local-session-"):
         if payload.get("read_only") is not True:
             raise SystemExit(f"local session demo must be read_only: {path}")

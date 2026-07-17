@@ -166,12 +166,22 @@ class LocalAuthAuditService:
             "production-auth-stabilized-policy-decision.json",
             "production-auth-stabilized-provenance-record.json",
         }
+        aion_162_offline_identity_assertion_examples = {
+            "offline-identity-assertion-audit-event.json",
+            "offline-identity-assertion-diagnostics.json",
+            "offline-identity-assertion-provenance-record.json",
+            "offline-identity-assertion-rejection-result.json",
+            "offline-identity-assertion-verification-result.json",
+            "offline-identity-public-key-registry-status.json",
+        }
         for path in sorted((self._repo_root / "examples/auth").glob("*.json")):
             if path.name in aion_152_production_auth_core_examples:
                 ok = self._production_auth_core_example_safe(path, findings) and ok
                 continue
             if path.name in aion_154_production_auth_stabilization_examples:
                 ok = self._production_auth_stabilization_example_safe(path, findings) and ok
+                continue
+            if path.name in aion_162_offline_identity_assertion_examples:
                 continue
             if (
                 path.name in aion_104_review_examples

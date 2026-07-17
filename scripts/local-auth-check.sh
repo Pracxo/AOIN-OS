@@ -97,6 +97,8 @@ for path in sorted((root / "examples" / "auth").glob("*.json")):
         continue
     if path.name.startswith("actor-context-"):
         continue
+    if path.name.startswith("offline-identity-"):
+        continue
     payload = json.loads(path.read_text())
     serialized = json.dumps(payload, sort_keys=True).lower()
     blocked = (

@@ -86,6 +86,16 @@ AION160_REMEDIATION_PATHS = {
     "services/brain-api/src/aion_brain/kernel/diagnostics.py",
 }
 
+AION162_ALLOWED_CHANGED_PATHS = {
+    "services/brain-api/pyproject.toml",
+    "services/brain-api/src/aion_brain/contracts/identity_assertion.py",
+    "services/brain-api/src/aion_brain/production_auth/__init__.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_evidence.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_verifier.py",
+    "services/brain-api/src/aion_brain/production_auth/trusted_public_keys.py",
+}
+
 
 def test_aion159_required_files_exist_and_status_is_current() -> None:
     for relative in DOCS + JSON_ARTIFACTS + SCRIPTS:
@@ -101,6 +111,11 @@ def test_aion159_required_files_exist_and_status_is_current() -> None:
         in status
         or "Current milestone: AION-160 actor-context trust-boundary remediation merged."
         in status
+        or (
+            "Current milestone: AION-162 offline Ed25519 identity assertion verification "
+            "core implemented."
+        )
+        in status
     )
     assert any(
         marker in status
@@ -108,12 +123,14 @@ def test_aion159_required_files_exist_and_status_is_current() -> None:
             "Current authorization: AION-159-PA-0005 active for AION-160.",
             "Current authorization: AION-159-PA-0005 consumed by AION-160 when merged.",
             "Current authorization: AION-161-PA-0006 active for AION-162.",
+            "Current authorization: AION-161-PA-0006 consumed by AION-162 when merged.",
         )
     )
     assert (
         "Next task: AION-160 actor-context trust-boundary remediation." in status
         or "Formal lifecycle closeout: AION-161." in status
         or "Next task: AION-162 offline identity assertion verification core." in status
+        or "Formal lifecycle closeout: AION-163." in status
     )
 
     readiness = _text("docs/release/v02-release-readiness-delta.md")
@@ -383,6 +400,7 @@ def test_aion159_does_not_change_protected_sources_or_add_release_artifacts() ->
         assert not any(
             (path == forbidden or path.startswith(f"{forbidden}/"))
             and path not in AION160_REMEDIATION_PATHS
+            and path not in AION162_ALLOWED_CHANGED_PATHS
             for path in changed
         )
     assert not any(path.endswith("package.json") for path in changed)

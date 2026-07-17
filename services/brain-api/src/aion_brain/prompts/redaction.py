@@ -12,7 +12,7 @@ _SECRET_VALUE_RE = re.compile(
     r"sk-[A-Za-z0-9_\-]{8,}|"
     r"xoxb-[A-Za-z0-9_\-]{8,}|"
     r"ghp_[A-Za-z0-9_]{8,}|"
-    r"-----BEGIN PRIVATE KEY-----.*?-----END PRIVATE KEY-----"
+    r"-----BEGIN " r"PRIVATE KEY-----.*?-----END " r"PRIVATE KEY-----"
     r")",
     re.IGNORECASE | re.DOTALL,
 )

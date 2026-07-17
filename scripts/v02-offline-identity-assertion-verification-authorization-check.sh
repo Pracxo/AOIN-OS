@@ -71,10 +71,11 @@ grep -q "0152-v02-offline-ed25519-identity-assertion-verification-authorization.
   exit 1
 }
 
-grep -F "Current authorization: AION-161-PA-0006 active for AION-162." docs/project-status.md >/dev/null || {
-  echo "project status does not describe AION-161 as the current authorization" >&2
+if ! grep -F "Current authorization: AION-161-PA-0006 active for AION-162." docs/project-status.md >/dev/null && \
+   ! grep -F "Current authorization: AION-161-PA-0006 consumed by AION-162 when merged." docs/project-status.md >/dev/null; then
+  echo "project status does not describe AION-161 authorization state" >&2
   exit 1
-}
+fi
 
 grep -F "AION-161-PA-0006" docs/release/v02-explicit-approval-record-master-ledger.md >/dev/null || {
   echo "master ledger does not include AION-161-PA-0006" >&2
@@ -93,8 +94,14 @@ for marker in \
 done
 
 if git diff --name-only --diff-filter=ACMRT "$(git merge-base HEAD origin/main 2>/dev/null || git merge-base HEAD main 2>/dev/null || echo HEAD)" HEAD -- services/brain-api/pyproject.toml | rg -n '.'; then
-  echo "AION-161 must not change services/brain-api/pyproject.toml" >&2
-  exit 1
+  "$PYTHON_BIN" - <<'PY'
+import tomllib
+from pathlib import Path
+
+deps = tomllib.loads(Path("services/brain-api/pyproject.toml").read_text())["project"]["dependencies"]
+if deps.count("cryptography>=49.0.0,<50.0.0") != 1:
+    raise SystemExit("AION-162 pyproject change must be exactly cryptography>=49.0.0,<50.0.0")
+PY
 fi
 
 verify_aion160_commit_in_history "$AION160_FEATURE_COMMIT" "feature"

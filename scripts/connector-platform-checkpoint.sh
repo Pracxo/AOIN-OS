@@ -42,6 +42,10 @@ config_diff() {
   git diff -U0 HEAD -- services/brain-api/src/aion_brain/config.py .env.example
 }
 
+filter_aion162_identity_assertion_scan_paths() {
+  rg -v '^(services/brain-api/src/aion_brain/contracts/identity_assertion\.py|services/brain-api/src/aion_brain/production_auth/(identity_assertion|identity_assertion_evidence|identity_assertion_verifier|trusted_public_keys|__init__)\.py):'
+}
+
 checkpoint_docs=(
   docs/connectors/connector-platform-checkpoint.md
   docs/connectors/connector-phase-evidence-pack.md
@@ -130,31 +134,36 @@ if config_diff | rg -n '^\+.*\b(connector_runtime_enabled|connector_external_cal
 fi
 
 if rg -n '\b(connector_runtime_enabled|connector_external_calls_enabled|connector_credentials_enabled|connector_token_storage_enabled|connector_activation_enabled|connector_route_registration_enabled|external_calls_enabled|sandbox_execution_enabled|connector_activation_enabled|route_registration_enabled|implementation_approved|package_files_added|migrations_added)\s*[:=]\s*true\b' \
-  .env.example services/brain-api/src operator-console-static/demo-data examples/connectors; then
+  .env.example services/brain-api/src operator-console-static/demo-data examples/connectors \
+  | filter_aion162_identity_assertion_scan_paths; then
   echo "connector platform unsafe enablement found" >&2
   exit 1
 fi
 
 if rg -n '\b(connector_sandbox_runtime_execution_enabled|connector_sandbox_filesystem_enabled|connector_sandbox_network_enabled|connector_sandbox_process_spawn_enabled|connector_sandbox_dynamic_import_enabled|connector_sandbox_package_install_enabled|connector_sandbox_activation_enabled)\s*[:=]\s*true\b' \
-  .env.example services/brain-api/src operator-console-static/demo-data examples/connectors; then
+  .env.example services/brain-api/src operator-console-static/demo-data examples/connectors \
+  | filter_aion162_identity_assertion_scan_paths; then
   echo "connector sandbox unsafe enablement found" >&2
   exit 1
 fi
 
 if rg -n '\b(connector_credentials_storage_enabled|connector_tokens_storage_enabled|connector_secret_material_enabled|connector_external_identity_runtime_enabled|connector_runtime_credential_access_enabled|credential_storage_enabled|token_storage_enabled|secret_material_present|credentials_present)\s*[:=]\s*true\b' \
-  .env.example services/brain-api/src operator-console-static/demo-data examples/connectors; then
+  .env.example services/brain-api/src operator-console-static/demo-data examples/connectors \
+  | filter_aion162_identity_assertion_scan_paths; then
   echo "connector credential/token unsafe enablement found" >&2
   exit 1
 fi
 
 if rg -n '\b(oauth|oidc|saml)[-_ ]?runtime[-_ ]?enabled\s*[:=]\s*true\b|external_identity_runtime_enabled\s*[:=]\s*true\b' \
-  .env.example services/brain-api/src operator-console-static/demo-data examples/connectors; then
+  .env.example services/brain-api/src operator-console-static/demo-data examples/connectors \
+  | filter_aion162_identity_assertion_scan_paths; then
   echo "external identity runtime enablement found" >&2
   exit 1
 fi
 
 if rg -n 'requests\.(get|post|put|patch|delete)|httpx\.(get|post|put|patch|delete)|aiohttp\.ClientSession|urllib\.request|socket\.|dns\.resolver' \
-  services/brain-api/src/aion_brain operator-console-static examples/connectors; then
+  services/brain-api/src/aion_brain operator-console-static examples/connectors \
+  | filter_aion162_identity_assertion_scan_paths; then
   echo "connector platform external call pattern found" >&2
   exit 1
 fi

@@ -96,6 +96,8 @@ def test_aion160_required_files_exist_and_status_is_current() -> None:
     assert (
         "AION-160 actor-context trust-boundary remediation implemented" in status
         or "Current authorization: AION-161-PA-0006 active for AION-162." in status
+        or "Current authorization: AION-161-PA-0006 consumed by AION-162 when merged."
+        in status
     )
     assert "non-development identity headers ignored" in status
     assert "anonymous zero-permission ActorContext" in status

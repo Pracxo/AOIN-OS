@@ -309,6 +309,16 @@ allowed_aion160_files = {
 allowed_aion161_files = {
     "operator-console-static/demo-data/v02-offline-identity-assertion-verification-authorization.json",
 }
+allowed_aion162_files = {
+    "operator-console-static/demo-data/offline-identity-assertion-runtime-hold.json",
+    "operator-console-static/demo-data/offline-identity-assertion-verification.json",
+    "services/brain-api/src/aion_brain/contracts/identity_assertion.py",
+    "services/brain-api/src/aion_brain/production_auth/__init__.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_evidence.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_verifier.py",
+    "services/brain-api/src/aion_brain/production_auth/trusted_public_keys.py",
+}
 allowed_aion152_prefixes = (
     "services/brain-api/src/aion_brain/production_auth/",
 )
@@ -364,6 +374,7 @@ for relative in sorted(changed):
         or relative in allowed_aion159_files
         or relative in allowed_aion160_files
         or relative in allowed_aion161_files
+        or relative in allowed_aion162_files
         or relative in allowed_aion152_files
         or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)

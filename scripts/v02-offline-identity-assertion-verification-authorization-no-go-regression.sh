@@ -66,6 +66,9 @@ while IFS= read -r file; do
   [[ -n "$file" ]] || continue
   case "$file" in
     services/brain-api/pyproject.toml)
+      if aion162_is_scoped_offline_identity_assertion_verification_path "$file"; then
+        continue
+      fi
       echo "AION-161 authorizes a future AION-162 dependency change but must not modify pyproject.toml" >&2
       exit 1
       ;;
@@ -87,6 +90,9 @@ while IFS= read -r file; do
     services/brain-api/src/aion_brain/api_support/*|\
     services/brain-api/src/aion_brain/api/*|\
     packages/aion-sdk-python/src/*)
+      if aion162_is_scoped_offline_identity_assertion_verification_path "$file"; then
+        continue
+      fi
       echo "implementation source changes are forbidden for AION-161: $file" >&2
       exit 1
       ;;

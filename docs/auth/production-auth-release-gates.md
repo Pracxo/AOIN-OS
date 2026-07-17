@@ -118,3 +118,17 @@ authentication, HTTP parsing, ActorContext application, RequestIdentityContext
 application, runtime private keys, provider networking, replay cache, packages,
 lockfiles, migrations, SDK/CLI runtime surfaces, v0.2 tags, and v0.2 releases
 remain blocked.
+## AION-162 Gates
+
+AION-162 adds these gates:
+
+- `scripts/production-auth-offline-identity-assertion-no-go-regression.sh`
+- `scripts/production-auth-offline-identity-assertion-check.sh`
+- `scripts/production-auth-offline-identity-assertion-runtime-hold.sh`
+
+The gates verify the exact `cryptography>=49.0.0,<50.0.0` dependency,
+fixed Ed25519 behavior, strict base64url handling, canonical payload reuse,
+public-key-only registry behavior, no runtime private-key source, no HTTP
+parsing, no request authentication, no ActorContext or RequestIdentityContext
+application, no routes, no OpenAPI security, no SDK/CLI runtime surface, no
+lockfiles, no migrations, and no v0.2 tag or release.

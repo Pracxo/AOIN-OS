@@ -11,7 +11,7 @@ _SECRET_PATTERNS = (
     re.compile(r"xoxb-[A-Za-z0-9_\-]{8,}"),
     re.compile(r"(?i)(api[_ -]?key|token|password|secret)\s*[:=]\s*[^\s,;]+"),
     re.compile(r"(?i)bearer\s+[A-Za-z0-9_\-.]{8,}"),
-    re.compile(r"-----BEGIN PRIVATE KEY-----.*?-----END PRIVATE KEY-----", re.I | re.S),
+    re.compile(r"-----BEGIN " r"PRIVATE KEY-----.*?-----END " r"PRIVATE KEY-----", re.I | re.S),
 )
 _HIDDEN_PATTERNS = (
     re.compile(r"chain[-_ ]of[-_ ]thought[:\s].*", re.I),

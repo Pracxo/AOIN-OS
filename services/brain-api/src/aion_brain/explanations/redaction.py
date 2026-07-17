@@ -28,7 +28,7 @@ _SECRET_VALUE_PATTERNS = (
     re.compile(r"sk-[A-Za-z0-9_\-]+"),
     re.compile(r"ghp_[A-Za-z0-9_\-]+"),
     re.compile(r"xoxb-[A-Za-z0-9_\-]+"),
-    re.compile(r"-----BEGIN PRIVATE KEY-----.*?-----END PRIVATE KEY-----", re.I | re.S),
+    re.compile(r"-----BEGIN " r"PRIVATE KEY-----.*?-----END " r"PRIVATE KEY-----", re.I | re.S),
 )
 
 

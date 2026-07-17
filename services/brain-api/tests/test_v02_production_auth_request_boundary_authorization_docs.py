@@ -92,6 +92,16 @@ AION160_ALLOWED_CHANGED_PATHS = {
     "services/brain-api/src/aion_brain/kernel/diagnostics.py",
 }
 
+AION162_ALLOWED_CHANGED_PATHS = {
+    "services/brain-api/pyproject.toml",
+    "services/brain-api/src/aion_brain/contracts/identity_assertion.py",
+    "services/brain-api/src/aion_brain/production_auth/__init__.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_evidence.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_verifier.py",
+    "services/brain-api/src/aion_brain/production_auth/trusted_public_keys.py",
+}
+
 
 def test_aion155_required_files_exist_and_readme_state_is_current() -> None:
     for relative in DOCS + JSON_ARTIFACTS:
@@ -309,7 +319,12 @@ def test_aion155_validator_rejects_bad_lifecycle(mutator: Any, match: str) -> No
 
 
 def test_aion155_does_not_change_forbidden_sources() -> None:
-    changed = _changed_files() - AION156_ALLOWED_CHANGED_PATHS - AION160_ALLOWED_CHANGED_PATHS
+    changed = (
+        _changed_files()
+        - AION156_ALLOWED_CHANGED_PATHS
+        - AION160_ALLOWED_CHANGED_PATHS
+        - AION162_ALLOWED_CHANGED_PATHS
+    )
     for forbidden in FORBIDDEN_CHANGED_PATHS:
         assert not any(path == forbidden or path.startswith(f"{forbidden}/") for path in changed)
     assert not any(path.endswith("package.json") for path in changed)
