@@ -80,6 +80,9 @@ while IFS= read -r file; do
   if aion168_is_scoped_self_improvement_evaluation_plane_path "$file"; then
     continue
   fi
+  if aion169_is_scoped_self_improvement_experiment_authorization_path "$file"; then
+    continue
+  fi
   case "$file" in
     package.json|package-lock.json|pnpm-lock.yaml|yarn.lock|bun.lockb|\
     */package.json|*/package-lock.json|*/pnpm-lock.yaml|*/yarn.lock|*/bun.lockb)
@@ -114,6 +117,9 @@ while IFS= read -r file; do
     continue
   fi
   if aion168_is_scoped_self_improvement_evaluation_plane_path "$file"; then
+    continue
+  fi
+  if aion169_is_scoped_self_improvement_experiment_authorization_path "$file"; then
     continue
   fi
   case "$file" in
@@ -154,6 +160,9 @@ while IFS= read -r file; do
     continue
   fi
   if aion168_is_scoped_self_improvement_evaluation_plane_path "$file"; then
+    continue
+  fi
+  if aion169_is_scoped_self_improvement_experiment_authorization_path "$file"; then
     continue
   fi
   case "$file" in

@@ -1085,6 +1085,15 @@ aion165_auth_paths = {
     "services/brain-api/tests/test_self_improvement_evaluation_authorization_docs.py",
 }
 
+aion169_auth_paths = {
+    "docs/adr/0158-self-improvement-experiment-authorization.md",
+    "docs/self-improvement/experiment-authorization.md",
+    "scripts/production-auth-core-no-go-regression.sh",
+    "scripts/self-improvement-experiment-authorization-check.sh",
+    "scripts/self-improvement-experiment-no-go-regression.sh",
+    "services/brain-api/tests/test_self_improvement_experiment_authorization_docs.py",
+}
+
 blocked_package_names = {
     "package.json",
     "package-lock.json",
@@ -1120,6 +1129,7 @@ for name in [*changed, *untracked]:
         and name not in aion163_auth_paths
         and name not in aion164_auth_paths
         and name not in aion165_auth_paths
+        and name not in aion169_auth_paths
     ):
         raise SystemExit(f"unexpected auth runtime or artifact path: {name}")
 

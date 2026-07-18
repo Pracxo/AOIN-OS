@@ -43,20 +43,10 @@ required_files=(
 
 for file in "${required_files[@]}"; do
   test -f "$file" || {
-    echo "missing AION-165 artifact: $file" >&2
+    echo "missing AION-169 artifact: $file" >&2
     exit 1
   }
 done
-
-grep -F "0156-governed-self-improvement-control-plane.md" docs/adr/README.md >/dev/null || {
-  echo "ADR 0156 is not indexed" >&2
-  exit 1
-}
-
-grep -F "0157-self-improvement-evaluation-authorization.md" docs/adr/README.md >/dev/null || {
-  echo "ADR 0157 is not indexed" >&2
-  exit 1
-}
 
 grep -F "0158-self-improvement-experiment-authorization.md" docs/adr/README.md >/dev/null || {
   echo "ADR 0158 is not indexed" >&2
@@ -64,13 +54,15 @@ grep -F "0158-self-improvement-experiment-authorization.md" docs/adr/README.md >
 }
 
 "$PYTHON_BIN" scripts/lib/self_improvement_governance.py --repo-root "$ROOT_DIR" --mode check
-./scripts/self-improvement-governance-no-go-regression.sh
+./scripts/self-improvement-experiment-no-go-regression.sh
 
 if is_nested_gate_context; then
   echo "PASS: focused pytest deferred to outer gate"
 else
   "$PYTHON_BIN" -m pytest \
     services/brain-api/tests/test_self_improvement_governance_authorization_docs.py \
+    services/brain-api/tests/test_self_improvement_evaluation_authorization_docs.py \
+    services/brain-api/tests/test_self_improvement_experiment_authorization_docs.py \
     -q
 fi
 
@@ -84,15 +76,15 @@ else
 fi
 
 cat <<'SUMMARY'
-self-improvement governance authorization result:
-- AION-163-PA-0007: consumed by AION-164 PR 75 and closed by AION-165
-- AION-165-SI-0001: consumed by AION-166 PR 77 and closed by AION-167
+self-improvement experiment authorization result:
 - AION-167-SI-0002: consumed by AION-168 PR 79 and closed by AION-169
-- AION-169-SI-0003: active authorization for AION-170
-- self_improvement_runtime_enabled=false
-- self_rewrite_runtime_enabled=false
-- automatic_merge_enabled=false
-- automatic_production_deployment_enabled=false
-- human approval, exact commit approval, exact diff hash approval, rollback evidence, benchmark evidence, and protected holdout are required
-self-improvement governance authorization PASS
+- AION-169-SI-0003: active authorization for AION-170 proposal and experiment engine
+- source_mutation_enabled=false
+- git_commits_enabled=false
+- branch_creation_enabled=false
+- pull_request_creation_enabled=false
+- merge_enabled=false
+- deployment_enabled=false
+- model_weight_changes_enabled=false
+self-improvement experiment authorization PASS
 SUMMARY

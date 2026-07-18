@@ -107,6 +107,78 @@
     {
       "task_id": "AION-167",
       "branch": "phase/self-improvement-evaluation-authorization",
+      "feature_commits": [
+        "bbc04cf57f02483e00752c20fa70b77abf95ce46"
+      ],
+      "pull_requests": [
+        78
+      ],
+      "merge_commits": [
+        "98a50edb5eaaf55de5babaa0ea9eb057ef5b2feb"
+      ],
+      "ci_result": "pass",
+      "corrective_prs": [],
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "./scripts/self-improvement-governance-no-go-regression.sh pass",
+        "./scripts/self-improvement-governance-authorization-check.sh pass",
+        "./scripts/self-improvement-evaluation-no-go-regression.sh pass",
+        "./scripts/self-improvement-evaluation-authorization-check.sh pass",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_governance_authorization_docs.py services/brain-api/tests/test_self_improvement_evaluation_authorization_docs.py -q: 10 passed"
+      ],
+      "authorization_transaction": "AION-167-SI-0002",
+      "authorization_state": "consumed_by_AION-168_closed_by_AION-169",
+      "next_task": "AION-168",
+      "runtime_state": "authorization_only_no_evaluation_runtime_implementation",
+      "completion_timestamp": "2026-07-18T19:47:43Z"
+    },
+    {
+      "task_id": "AION-168",
+      "branch": "phase/self-improvement-evaluation-plane",
+      "feature_commits": [
+        "8d1402f6c122098f3aec5809cf94539992b45d10"
+      ],
+      "pull_requests": [
+        79
+      ],
+      "merge_commits": [
+        "74472522edffbbeabb996c6d572dce1dcb0cda48"
+      ],
+      "ci_result": "pass",
+      "corrective_prs": [],
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_evaluation_plane.py -q: 8 passed",
+        "services/brain-api/.venv/bin/python -m ruff check services/brain-api/src/aion_brain/self_improvement services/brain-api/tests/test_self_improvement_evaluation_plane.py pass",
+        "services/brain-api/.venv/bin/python -m mypy services/brain-api/src/aion_brain/self_improvement services/brain-api/tests/test_self_improvement_evaluation_plane.py pass",
+        "./scripts/self-improvement-governance-no-go-regression.sh pass",
+        "./scripts/self-improvement-evaluation-no-go-regression.sh pass",
+        "./scripts/production-auth-core-no-go-regression.sh pass",
+        "./scripts/connector-runtime-no-external-call-regression.sh pass",
+        "./scripts/production-auth-architecture-check.sh pass",
+        "./scripts/check.sh pass"
+      ],
+      "authorization_transaction": "AION-167-SI-0002",
+      "authorization_state": "consumed_by_AION-168_closed_by_AION-169",
+      "next_task": "AION-169",
+      "runtime_state": "evaluation_plane_implemented_no_source_mutation_or_pr_creation",
+      "completion_timestamp": "2026-07-18T20:50:21Z"
+    },
+    {
+      "task_id": "AION-169",
+      "branch": "phase/self-improvement-experiment-authorization",
       "feature_commits": [],
       "pull_requests": [],
       "merge_commits": [],
@@ -114,15 +186,15 @@
       "corrective_prs": [],
       "tests": [
         "./scripts/self-improvement-governance-no-go-regression.sh",
-        "./scripts/self-improvement-governance-authorization-check.sh",
         "./scripts/self-improvement-evaluation-no-go-regression.sh",
-        "./scripts/self-improvement-evaluation-authorization-check.sh",
-        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_governance_authorization_docs.py services/brain-api/tests/test_self_improvement_evaluation_authorization_docs.py -q"
+        "./scripts/self-improvement-experiment-no-go-regression.sh",
+        "./scripts/self-improvement-experiment-authorization-check.sh",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_governance_authorization_docs.py services/brain-api/tests/test_self_improvement_evaluation_authorization_docs.py services/brain-api/tests/test_self_improvement_experiment_authorization_docs.py -q"
       ],
-      "authorization_transaction": "AION-167-SI-0002",
-      "authorization_state": "active_until_AION-168_merge",
-      "next_task": "AION-168",
-      "runtime_state": "authorization_only_no_evaluation_runtime_implementation",
+      "authorization_transaction": "AION-169-SI-0003",
+      "authorization_state": "active_until_AION-170_merge",
+      "next_task": "AION-170",
+      "runtime_state": "authorization_only_no_experiment_engine_implementation",
       "completion_timestamp": null
     }
   ]

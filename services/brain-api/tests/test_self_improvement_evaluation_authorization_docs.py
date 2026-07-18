@@ -15,58 +15,69 @@ sys.path.insert(0, str(ROOT / "scripts/lib"))
 from self_improvement_governance import (  # noqa: E402
     AUTHORIZATION_ID,
     EVALUATION_APPROVED_SCOPE,
+    EVALUATION_AUTHORIZATION_ID,
     EVALUATION_PROHIBITED_SCOPE,
+    EXPERIMENT_APPROVED_SCOPE,
+    EXPERIMENT_PROHIBITED_SCOPE,
     GovernanceValidationError,
     validate_authorization_ledger,
     validate_no_go,
 )
 
 
-def test_aion167_authorizes_only_immutable_evaluation_plane() -> None:
+def test_aion167_is_closed_after_immutable_evaluation_plane_merge() -> None:
     payload = _authorization()
     validate_authorization_ledger(payload)
-    active = payload["records"][2]
+    evaluation_closeout = payload["records"][2]
+    active = payload["records"][3]
+
+    assert evaluation_closeout["authorization_transaction_id"] == EVALUATION_AUTHORIZATION_ID
+    assert evaluation_closeout["authorization_consumed_by_task"] == "AION-168"
+    assert evaluation_closeout["authorization_consumed_by_pr"] == 79
+    assert evaluation_closeout["authorization_active"] is False
+    assert evaluation_closeout["authorization_reusable"] is False
 
     assert active["authorization_transaction_id"] == AUTHORIZATION_ID
-    assert active["implementation_task"] == "AION-168"
-    assert active["authorization_scope"] == "immutable-self-improvement-evaluation-plane"
-    assert tuple(active["approved_scope"]) == EVALUATION_APPROVED_SCOPE
-    assert tuple(active["prohibited_scope"]) == EVALUATION_PROHIBITED_SCOPE
+    assert active["implementation_task"] == "AION-170"
+    assert tuple(active["approved_scope"]) == EXPERIMENT_APPROVED_SCOPE
+    assert tuple(active["prohibited_scope"]) == EXPERIMENT_PROHIBITED_SCOPE
 
 
-def test_aion167_blocks_rewrite_pr_approval_deploy_and_training_flags() -> None:
+def test_aion169_continues_to_block_rewrite_pr_approval_deploy_and_training_flags() -> None:
     validate_no_go(ROOT)
     prohibited_flags = [
+        "source_mutation_enabled",
         "source_rewriting_enabled",
+        "git_commits_enabled",
+        "branch_creation_enabled",
         "pull_request_creation_enabled",
+        "merge_enabled",
         "automatic_approval_enabled",
-        "benchmark_mutation_by_candidate_enabled",
-        "holdout_disclosure_to_patch_generators_enabled",
         "production_deployment_enabled",
+        "deployment_enabled",
         "model_weight_training_enabled",
+        "model_weight_changes_enabled",
     ]
     for flag in prohibited_flags:
         payload = _authorization()
-        payload["records"][2][flag] = True
+        payload["records"][3][flag] = True
         with pytest.raises(GovernanceValidationError, match=flag):
             validate_authorization_ledger(payload)
 
 
-def test_aion167_requires_hard_safety_and_immutable_holdout_controls() -> None:
+def test_aion167_scope_remains_recorded_as_consumed_evaluation_authorization() -> None:
     payload = _authorization()
-    active = payload["records"][2]
-    assert active["hard_safety_gates_authorized"] is True
-    assert active["immutable_benchmark_manifests_required"] is True
-    assert active["hidden_holdout_required"] is True
-    assert active["holdout_disclosure_to_patch_generators_enabled"] is False
-    assert "holdout disclosure to patch generators" in active["prohibited_scope"]
+    consumed_scope = set(EVALUATION_APPROVED_SCOPE)
+    consumed_prohibitions = set(EVALUATION_PROHIBITED_SCOPE)
 
-    active["prohibited_scope"] = [
-        item
-        for item in active["prohibited_scope"]
-        if item != "holdout disclosure to patch generators"
+    assert "benchmark contracts" in consumed_scope
+    assert "benchmark mutation through candidate code" in consumed_prohibitions
+    assert payload["records"][2]["authorization_consumed_by_feature_commits"] == [
+        "8d1402f6c122098f3aec5809cf94539992b45d10"
     ]
-    with pytest.raises(GovernanceValidationError, match="prohibited evaluation scope"):
+
+    payload["records"][2]["authorization_consumed_by_pr"] = 80
+    with pytest.raises(GovernanceValidationError, match="evaluation PR"):
         validate_authorization_ledger(payload)
 
 

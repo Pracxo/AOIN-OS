@@ -12,9 +12,14 @@ from typing import Any, Iterable, cast
 PROGRAM_ID = "AION-SELF-IMPROVEMENT-001"
 ROOT_AUTHORIZATION_ID = "AION-163-PA-0007"
 PARENT_AUTHORIZATION_ID = "AION-165-SI-0001"
-AUTHORIZATION_ID = "AION-167-SI-0002"
+EVALUATION_AUTHORIZATION_ID = "AION-167-SI-0002"
+AUTHORIZATION_ID = "AION-169-SI-0003"
 AION_166_FEATURE_COMMIT = "fae49a3f913b7a3d4d18ad4e7f989ed2aca5de91"
 AION_166_MERGE_COMMIT = "9a7105e31b8f6e56faf53bfb56e11eed75a01203"
+AION_167_FEATURE_COMMIT = "bbc04cf57f02483e00752c20fa70b77abf95ce46"
+AION_167_MERGE_COMMIT = "98a50edb5eaaf55de5babaa0ea9eb057ef5b2feb"
+AION_168_FEATURE_COMMIT = "8d1402f6c122098f3aec5809cf94539992b45d10"
+AION_168_MERGE_COMMIT = "74472522edffbbeabb996c6d572dce1dcb0cda48"
 
 LIFECYCLE_STATES = (
     "observed",
@@ -62,12 +67,18 @@ GOVERNANCE_FALSE_FLAGS = {
     "automatic_merge_enabled",
     "automatic_production_deployment_enabled",
     "source_rewriting_enabled",
+    "source_mutation_enabled",
+    "git_commits_enabled",
+    "branch_creation_enabled",
     "pull_request_creation_enabled",
+    "merge_enabled",
     "automatic_approval_enabled",
     "benchmark_mutation_by_candidate_enabled",
     "holdout_disclosure_to_patch_generators_enabled",
     "production_deployment_enabled",
+    "deployment_enabled",
     "model_weight_training_enabled",
+    "model_weight_changes_enabled",
 }
 
 GOVERNANCE_TRUE_FLAGS = {
@@ -79,17 +90,14 @@ GOVERNANCE_TRUE_FLAGS = {
     "rollback_plan_required",
     "benchmark_evidence_required",
     "hidden_holdout_required",
-    "benchmark_contracts_authorized",
-    "baseline_results_authorized",
-    "candidate_results_authorized",
-    "multi_objective_scoring_authorized",
-    "hard_safety_gates_authorized",
-    "immutable_benchmark_manifests_required",
-    "holdout_references_authorized",
-    "statistical_comparison_authorized",
-    "evaluation_provenance_required",
-    "cost_latency_accounting_required",
-    "benchmark_drift_detection_required",
+    "failure_pattern_intake_authorized",
+    "improvement_hypotheses_authorized",
+    "regression_test_proposals_authorized",
+    "experiment_plans_authorized",
+    "baseline_candidate_experiment_execution_authorized",
+    "risk_classification_authorized",
+    "evidence_bundles_authorized",
+    "approval_pending_lifecycle_authorized",
 }
 
 PROTECTED_PATHS = (
@@ -145,9 +153,38 @@ EVALUATION_PROHIBITED_SCOPE = (
     "aion-v0.1.0 modification",
 )
 
+EXPERIMENT_APPROVED_SCOPE = (
+    "failure-pattern intake",
+    "improvement hypotheses",
+    "regression-test proposals",
+    "experiment plans",
+    "baseline/candidate experiment execution",
+    "risk classification",
+    "evidence bundles",
+    "approval-pending lifecycle",
+)
+
+EXPERIMENT_PROHIBITED_SCOPE = (
+    "source mutation",
+    "source rewriting",
+    "Git commits",
+    "branch creation",
+    "Git mutation",
+    "pull request creation",
+    "merge",
+    "production deployment",
+    "deployment",
+    "model-weight changes",
+    "model-weight training",
+    "automatic approval",
+    "v0.2 tag or release",
+    "aion-v0.1.0 modification",
+)
+
 REQUIRED_DOCS = (
     "docs/self-improvement/governance-charter.md",
     "docs/self-improvement/evaluation-authorization.md",
+    "docs/self-improvement/experiment-authorization.md",
     "docs/self-improvement/protected-core-boundary.md",
     "docs/self-improvement/approval-model.md",
     "docs/self-improvement/change-budget-model.md",
@@ -157,6 +194,7 @@ REQUIRED_DOCS = (
     "docs/self-improvement/program-ledger.json",
     "docs/adr/0156-governed-self-improvement-control-plane.md",
     "docs/adr/0157-self-improvement-evaluation-authorization.md",
+    "docs/adr/0158-self-improvement-experiment-authorization.md",
 )
 
 PRIVATE_MARKERS = (
@@ -231,18 +269,22 @@ def validate_no_go(repo_root: Path) -> None:
             raise GovernanceValidationError(f"{key} must be true")
     if "source rewriting" not in active.get("prohibited_scope", []):
         raise GovernanceValidationError("source rewriting must be prohibited")
+    if "source mutation" not in active.get("prohibited_scope", []):
+        raise GovernanceValidationError("source mutation must be prohibited")
+    if "Git commits" not in active.get("prohibited_scope", []):
+        raise GovernanceValidationError("Git commits must be prohibited")
+    if "branch creation" not in active.get("prohibited_scope", []):
+        raise GovernanceValidationError("branch creation must be prohibited")
     if "pull request creation" not in active.get("prohibited_scope", []):
         raise GovernanceValidationError("pull request creation must be prohibited")
+    if "merge" not in active.get("prohibited_scope", []):
+        raise GovernanceValidationError("merge must be prohibited")
     if "automatic approval" not in active.get("prohibited_scope", []):
         raise GovernanceValidationError("automatic approval must be prohibited")
-    if "benchmark mutation through candidate code" not in active.get("prohibited_scope", []):
-        raise GovernanceValidationError("benchmark mutation must be prohibited")
-    if "holdout disclosure to patch generators" not in active.get("prohibited_scope", []):
-        raise GovernanceValidationError("holdout disclosure must be prohibited")
-    if "production deployment" not in active.get("prohibited_scope", []):
-        raise GovernanceValidationError("production deployment must be prohibited")
-    if "model-weight training" not in active.get("prohibited_scope", []):
-        raise GovernanceValidationError("model-weight training must be prohibited")
+    if "deployment" not in active.get("prohibited_scope", []):
+        raise GovernanceValidationError("deployment must be prohibited")
+    if "model-weight changes" not in active.get("prohibited_scope", []):
+        raise GovernanceValidationError("model-weight changes must be prohibited")
 
 
 def validate_authorization_ledger(payload: dict[str, Any]) -> None:
@@ -252,7 +294,7 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
     records = payload.get("records")
     _require(isinstance(records, list), "records must be a list")
     records = cast(list[dict[str, Any]], records)
-    _require(len(records) == 3, "AION-167 authorization ledger must have three records")
+    _require(len(records) == 4, "AION-169 authorization ledger must have four records")
 
     root_closeout = records[0]
     _require(root_closeout.get("record_kind") == "authorization_closeout", "missing root closeout")
@@ -292,14 +334,52 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
     _require(parent_closeout.get("authorization_expired") is True, "parent expired")
     _require(parent_closeout.get("authorization_reusable") is False, "parent reusable")
 
-    active = records[2]
+    evaluation_closeout = records[2]
+    _require(
+        evaluation_closeout.get("record_kind") == "authorization_closeout",
+        "missing evaluation closeout",
+    )
+    _require(
+        evaluation_closeout.get("authorization_transaction_id") == EVALUATION_AUTHORIZATION_ID,
+        "evaluation closeout id",
+    )
+    _require(
+        evaluation_closeout.get("authorization_active") is False,
+        "evaluation must be inactive",
+    )
+    _require(
+        evaluation_closeout.get("authorization_consumed") is True,
+        "evaluation must be consumed",
+    )
+    _require(
+        evaluation_closeout.get("authorization_consumed_by_task") == "AION-168",
+        "evaluation task",
+    )
+    _require(evaluation_closeout.get("authorization_consumed_by_pr") == 79, "evaluation PR")
+    _require(
+        evaluation_closeout.get("authorization_consumed_by_feature_commits")
+        == [AION_168_FEATURE_COMMIT],
+        "evaluation feature commit",
+    )
+    _require(
+        evaluation_closeout.get("authorization_consumed_by_merge_commit")
+        == AION_168_MERGE_COMMIT,
+        "evaluation merge commit",
+    )
+    _require(evaluation_closeout.get("authorization_expired") is True, "evaluation expired")
+    _require(evaluation_closeout.get("authorization_reusable") is False, "evaluation reusable")
+
+    active = records[3]
     _require(active.get("record_kind") == "authorization_transaction", "missing active record")
     _require(active.get("authorization_transaction_id") == AUTHORIZATION_ID, "authorization id")
     _require(active.get("approval_record_id") == AUTHORIZATION_ID, "approval id")
-    _require(active.get("parent_authorization_transaction_id") == PARENT_AUTHORIZATION_ID, "parent id")
-    _require(active.get("implementation_task") == "AION-168", "implementation task")
     _require(
-        active.get("authorization_scope") == "immutable-self-improvement-evaluation-plane",
+        active.get("parent_authorization_transaction_id") == EVALUATION_AUTHORIZATION_ID,
+        "parent id",
+    )
+    _require(active.get("implementation_task") == "AION-170", "implementation task")
+    _require(
+        active.get("authorization_scope") == "self-improvement-proposal-and-experiment-engine",
         "authorization scope",
     )
     _require(active.get("authorization_active") is True, "authorization active")
@@ -317,12 +397,12 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
         "change budget dimensions",
     )
     _require(
-        tuple(active.get("approved_scope", [])) == EVALUATION_APPROVED_SCOPE,
-        "approved evaluation scope",
+        tuple(active.get("approved_scope", [])) == EXPERIMENT_APPROVED_SCOPE,
+        "approved experiment scope",
     )
     _require(
-        tuple(active.get("prohibited_scope", [])) == EVALUATION_PROHIBITED_SCOPE,
-        "prohibited evaluation scope",
+        tuple(active.get("prohibited_scope", [])) == EXPERIMENT_PROHIBITED_SCOPE,
+        "prohibited experiment scope",
     )
 
 
@@ -338,6 +418,8 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
     _require("AION-165" in by_task, "AION-165 record missing")
     _require("AION-166" in by_task, "AION-166 record missing")
     _require("AION-167" in by_task, "AION-167 record missing")
+    _require("AION-168" in by_task, "AION-168 record missing")
+    _require("AION-169" in by_task, "AION-169 record missing")
     aion164 = by_task["AION-164"]
     _require(aion164.get("pull_requests") == [75], "AION-164 PR mismatch")
     _require(
@@ -373,11 +455,57 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
         "AION-166 runtime state",
     )
     aion167 = by_task["AION-167"]
-    _require(aion167.get("authorization_transaction") == AUTHORIZATION_ID, "AION-167 auth")
+    _require(
+        aion167.get("authorization_transaction") == EVALUATION_AUTHORIZATION_ID,
+        "AION-167 auth",
+    )
+    _require(aion167.get("pull_requests") == [78], "AION-167 PR mismatch")
+    _require(aion167.get("feature_commits") == [AION_167_FEATURE_COMMIT], "AION-167 feature")
+    _require(
+        aion167.get("merge_commits") == [AION_167_MERGE_COMMIT],
+        "AION-167 merge commit missing",
+    )
+    _require(aion167.get("ci_result") == "pass", "AION-167 CI result")
     _require(aion167.get("next_task") == "AION-168", "AION-167 next task")
+    _require(
+        aion167.get("authorization_state") == "consumed_by_AION-168_closed_by_AION-169",
+        "AION-167 authorization state",
+    )
     _require(
         aion167.get("runtime_state") == "authorization_only_no_evaluation_runtime_implementation",
         "AION-167 runtime state",
+    )
+    aion168 = by_task["AION-168"]
+    _require(
+        aion168.get("authorization_transaction") == EVALUATION_AUTHORIZATION_ID,
+        "AION-168 auth",
+    )
+    _require(aion168.get("pull_requests") == [79], "AION-168 PR mismatch")
+    _require(aion168.get("feature_commits") == [AION_168_FEATURE_COMMIT], "AION-168 feature")
+    _require(
+        aion168.get("merge_commits") == [AION_168_MERGE_COMMIT],
+        "AION-168 merge commit missing",
+    )
+    _require(aion168.get("ci_result") == "pass", "AION-168 CI result")
+    _require(aion168.get("next_task") == "AION-169", "AION-168 next task")
+    _require(
+        aion168.get("authorization_state") == "consumed_by_AION-168_closed_by_AION-169",
+        "AION-168 authorization state",
+    )
+    _require(
+        aion168.get("runtime_state") == "evaluation_plane_implemented_no_source_mutation_or_pr_creation",
+        "AION-168 runtime state",
+    )
+    aion169 = by_task["AION-169"]
+    _require(aion169.get("authorization_transaction") == AUTHORIZATION_ID, "AION-169 auth")
+    _require(aion169.get("next_task") == "AION-170", "AION-169 next task")
+    _require(
+        aion169.get("authorization_state") == "active_until_AION-170_merge",
+        "AION-169 authorization state",
+    )
+    _require(
+        aion169.get("runtime_state") == "authorization_only_no_experiment_engine_implementation",
+        "AION-169 runtime state",
     )
 
 
@@ -401,6 +529,8 @@ def _validate_adr_index(repo_root: Path) -> None:
         raise GovernanceValidationError("ADR 0156 is not indexed")
     if "0157-self-improvement-evaluation-authorization.md" not in index:
         raise GovernanceValidationError("ADR 0157 is not indexed")
+    if "0158-self-improvement-experiment-authorization.md" not in index:
+        raise GovernanceValidationError("ADR 0158 is not indexed")
 
 
 def _validate_docs_do_not_store_private_material(repo_root: Path) -> None:
