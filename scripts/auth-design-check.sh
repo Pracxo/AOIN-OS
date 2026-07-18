@@ -1062,6 +1062,24 @@ aion164_auth_paths = {
     "services/brain-api/tests/test_auth_design_docs.py",
 }
 
+aion165_auth_paths = {
+    "docs/adr/0156-governed-self-improvement-control-plane.md",
+    "docs/adr/README.md",
+    "docs/self-improvement/governance-charter.md",
+    "docs/self-improvement/protected-core-boundary.md",
+    "docs/self-improvement/approval-model.md",
+    "docs/self-improvement/change-budget-model.md",
+    "docs/self-improvement/risk-model.md",
+    "docs/self-improvement/aion-164-closeout-evidence.md",
+    "docs/self-improvement/authorization-ledger.json",
+    "docs/self-improvement/program-ledger.json",
+    "scripts/lib/self_improvement_governance.py",
+    "scripts/lib/v02-production-auth-scan-exclusions.sh",
+    "scripts/self-improvement-governance-authorization-check.sh",
+    "scripts/self-improvement-governance-no-go-regression.sh",
+    "services/brain-api/tests/test_self_improvement_governance_authorization_docs.py",
+}
+
 blocked_package_names = {
     "package.json",
     "package-lock.json",
@@ -1096,6 +1114,7 @@ for name in [*changed, *untracked]:
         and name not in aion162_auth_paths
         and name not in aion163_auth_paths
         and name not in aion164_auth_paths
+        and name not in aion165_auth_paths
     ):
         raise SystemExit(f"unexpected auth runtime or artifact path: {name}")
 

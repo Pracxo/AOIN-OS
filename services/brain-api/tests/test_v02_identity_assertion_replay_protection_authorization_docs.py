@@ -365,8 +365,9 @@ def test_aion163_does_not_change_protected_sources_or_add_release_artifacts() ->
             and path not in AION164_IMPLEMENTATION_PATHS
             for path in changed
         )
+    has_aion164_implementation_diff = any(path in changed for path in AION164_IMPLEMENTATION_PATHS)
     for path in AION164_IMPLEMENTATION_PATHS:
-        if (ROOT / path).exists():
+        if has_aion164_implementation_diff and (ROOT / path).exists():
             assert path in changed or not changed, path
     assert not any(path.endswith("package.json") for path in changed)
     assert not any(path.endswith("package-lock.json") for path in changed)

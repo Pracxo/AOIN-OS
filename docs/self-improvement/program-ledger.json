@@ -1,0 +1,62 @@
+{
+  "program_id": "AION-SELF-IMPROVEMENT-001",
+  "repository": "/Users/damilaremerotiwon/KITEV2/AOIN OS",
+  "end_state": "AION-175 COMPLETE AND MERGED",
+  "synthetic": true,
+  "read_only": true,
+  "records": [
+    {
+      "task_id": "AION-164",
+      "branch": "phase/v02-identity-assertion-replay-protection",
+      "feature_commits": [
+        "3ff9145b3102340bad44054df532865b35132d7c",
+        "5593574380c0daa401ee4e7bfb5a431cfaa44adc"
+      ],
+      "pull_requests": [
+        75
+      ],
+      "merge_commits": [
+        "8b2938a8995a9109b677f240d82da3b4bdc5d73c"
+      ],
+      "ci_result": "pass",
+      "corrective_prs": [],
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "./scripts/production-auth-identity-assertion-replay-no-go-regression.sh pass",
+        "./scripts/production-auth-identity-assertion-replay-check.sh pass",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_identity_assertion_replay_*.py -q: 54 passed",
+        "./scripts/check.sh pass"
+      ],
+      "authorization_transaction": "AION-163-PA-0007",
+      "authorization_state": "consumed_by_AION-164_closed_by_AION-165",
+      "next_task": "AION-165",
+      "runtime_state": "implemented_unintegrated_runtime_disabled",
+      "completion_timestamp": "2026-07-18T13:14:27Z"
+    },
+    {
+      "task_id": "AION-165",
+      "branch": "phase/self-improvement-governance-authorization",
+      "feature_commits": [],
+      "pull_requests": [],
+      "merge_commits": [],
+      "ci_result": "pending",
+      "corrective_prs": [],
+      "tests": [
+        "./scripts/self-improvement-governance-no-go-regression.sh",
+        "./scripts/self-improvement-governance-authorization-check.sh",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_governance_authorization_docs.py -q"
+      ],
+      "authorization_transaction": "AION-165-SI-0001",
+      "authorization_state": "active_until_AION-166_merge",
+      "next_task": "AION-166",
+      "runtime_state": "authorization_only_no_self_rewrite_implementation",
+      "completion_timestamp": null
+    }
+  ]
+}
