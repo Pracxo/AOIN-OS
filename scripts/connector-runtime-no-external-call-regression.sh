@@ -74,6 +74,7 @@ if git diff --name-only --diff-filter=ACMRT HEAD -- services/brain-api/src packa
 	  | rg -v '^services/brain-api/src/aion_brain/contracts/actor_context_resolution\.py$|^services/brain-api/src/aion_brain/identity/dev_auth\.py$' \
 	  | rg -v '^services/brain-api/src/aion_brain/contracts/(identity_assertion|identity_assertion_replay)\.py$' \
 	  | rg -v '^services/brain-api/src/aion_brain/contracts/self_improvement\.py$|^services/brain-api/src/aion_brain/self_improvement/(__init__|approval|change_budget|evidence|governance|ledger|lifecycle|protected_paths|risk)\.py$' \
+	  | rg -v '^services/brain-api/src/aion_brain/self_improvement/(benchmark_contracts|benchmark_registry|benchmark_runner|comparison|evaluation_evidence|holdout|scoring)\.py$' \
 	  | rg -v '^services/brain-api/src/aion_brain/(explanations|grounding|model_outputs|prompts)/redaction\.py$' \
 	  | rg -n '.'; then
   echo "AION-109 must not change runtime, SDK, CLI, or config source files" >&2
@@ -86,6 +87,7 @@ if git ls-files --others --exclude-standard services/brain-api/src packages/aion
 	  | rg -v '^services/brain-api/src/aion_brain/contracts/actor_context_resolution\.py$' \
 	  | rg -v '^services/brain-api/src/aion_brain/contracts/(identity_assertion|identity_assertion_replay)\.py$' \
 	  | rg -v '^services/brain-api/src/aion_brain/contracts/self_improvement\.py$|^services/brain-api/src/aion_brain/self_improvement/(__init__|approval|change_budget|evidence|governance|ledger|lifecycle|protected_paths|risk)\.py$' \
+	  | rg -v '^services/brain-api/src/aion_brain/self_improvement/(benchmark_contracts|benchmark_registry|benchmark_runner|comparison|evaluation_evidence|holdout|scoring)\.py$' \
 	  | rg -v '^services/brain-api/src/aion_brain/(explanations|grounding|model_outputs|prompts)/redaction\.py$' \
 	  | rg -n '.'; then
   echo "AION-109 must not add runtime, SDK, or CLI source files" >&2
