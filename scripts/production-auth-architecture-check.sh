@@ -294,6 +294,16 @@ allowed_aion_166_runtime = {
     "services/brain-api/src/aion_brain/self_improvement/protected_paths.py",
     "services/brain-api/src/aion_brain/self_improvement/risk.py",
 }
+allowed_aion_168_runtime = {
+    "services/brain-api/src/aion_brain/self_improvement/__init__.py",
+    "services/brain-api/src/aion_brain/self_improvement/benchmark_contracts.py",
+    "services/brain-api/src/aion_brain/self_improvement/benchmark_registry.py",
+    "services/brain-api/src/aion_brain/self_improvement/benchmark_runner.py",
+    "services/brain-api/src/aion_brain/self_improvement/comparison.py",
+    "services/brain-api/src/aion_brain/self_improvement/evaluation_evidence.py",
+    "services/brain-api/src/aion_brain/self_improvement/holdout.py",
+    "services/brain-api/src/aion_brain/self_improvement/scoring.py",
+}
 for name in [*changed, *untracked]:
     if name in allowed_runtime_tests:
         continue
@@ -320,6 +330,8 @@ for name in [*changed, *untracked]:
     if name in allowed_aion_164_runtime:
         continue
     if name in allowed_aion_166_runtime:
+        continue
+    if name in allowed_aion_168_runtime:
         continue
     if name.startswith(runtime_prefixes):
         raise SystemExit(f"production auth architecture must not change runtime file: {name}")

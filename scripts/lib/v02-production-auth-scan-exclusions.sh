@@ -491,6 +491,28 @@ aion165_is_scoped_self_improvement_governance_authorization_path() {
   esac
 }
 
+aion168_is_scoped_self_improvement_evaluation_plane_path() {
+  # Exact AION-168 self-improvement evaluation plane implementation paths. This
+  # does not exempt production-auth source, auth APIs, SDK/CLI runtime surfaces,
+  # package files, lockfiles, migrations, or broad source directories.
+  case "$1" in
+    services/brain-api/src/aion_brain/self_improvement/__init__.py|\
+    services/brain-api/src/aion_brain/self_improvement/benchmark_contracts.py|\
+    services/brain-api/src/aion_brain/self_improvement/benchmark_registry.py|\
+    services/brain-api/src/aion_brain/self_improvement/benchmark_runner.py|\
+    services/brain-api/src/aion_brain/self_improvement/comparison.py|\
+    services/brain-api/src/aion_brain/self_improvement/evaluation_evidence.py|\
+    services/brain-api/src/aion_brain/self_improvement/holdout.py|\
+    services/brain-api/src/aion_brain/self_improvement/scoring.py|\
+    services/brain-api/tests/test_self_improvement_evaluation_plane.py)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
 aion161_is_scoped_offline_identity_assertion_verification_authorization_path() {
   # Exact AION-161 governance, evidence, and validator paths. This task closes
   # AION-159 and creates an offline verification authorization only; it does
