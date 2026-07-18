@@ -23,6 +23,7 @@ from v02_production_auth_authorization import (  # noqa: E402
     AION157_AUTHORIZATION,
     AION159_AUTHORIZATION,
     AION161_AUTHORIZATION,
+    AION163_AUTHORIZATION,
     APPROVAL_TRUE_KEYS,
     REQUEST_BOUNDARY_FALSE_KEYS,
     REQUEST_BOUNDARY_IMPLEMENTATION_TRUE_KEYS,
@@ -179,7 +180,7 @@ def test_aion155_json_is_synthetic_read_only_and_exactly_scoped() -> None:
         assert payload["expiry"] == AION155_AUTHORIZATION.expiry
 
 
-def test_aion155_validator_accepts_exact_six_record_lifecycle() -> None:
+def test_aion155_validator_accepts_current_record_lifecycle() -> None:
     validate_authorization_lifecycle_payloads(
         [
             ("aion151.json", _payload_from_spec(AION151_AUTHORIZATION)),
@@ -187,6 +188,7 @@ def test_aion155_validator_accepts_exact_six_record_lifecycle() -> None:
             ("aion155.json", _payload_from_spec(AION155_AUTHORIZATION)),
             ("aion157.json", _payload_from_spec(AION157_AUTHORIZATION)),
             ("aion159.json", _payload_from_spec(AION159_AUTHORIZATION)),
+            ("aion163.json", _payload_from_spec(AION163_AUTHORIZATION)),
             ("aion161.json", _payload_from_spec(AION161_AUTHORIZATION)),
         ]
     )
@@ -281,9 +283,7 @@ def test_aion155_validator_accepts_exact_six_record_lifecycle() -> None:
             "token_parsing_approved must be false",
         ),
         (
-            lambda records: records[5][1].__setitem__(
-                "external_identity_provider_approved", True
-            ),
+            lambda records: records[5][1].__setitem__("external_identity_provider_approved", True),
             "external_identity_provider_approved must be false",
         ),
         (
@@ -311,6 +311,7 @@ def test_aion155_validator_rejects_bad_lifecycle(mutator: Any, match: str) -> No
         ("aion155.json", _payload_from_spec(AION155_AUTHORIZATION)),
         ("aion157.json", _payload_from_spec(AION157_AUTHORIZATION)),
         ("aion159.json", _payload_from_spec(AION159_AUTHORIZATION)),
+        ("aion163.json", _payload_from_spec(AION163_AUTHORIZATION)),
         ("aion161.json", _payload_from_spec(AION161_AUTHORIZATION)),
     ]
     mutator(records)
@@ -394,7 +395,7 @@ def _payload_from_spec(spec: Any) -> dict[str, Any]:
 
 
 def _unknown_active_payload() -> dict[str, Any]:
-    payload = _payload_from_spec(AION161_AUTHORIZATION)
+    payload = _payload_from_spec(AION163_AUTHORIZATION)
     payload["authorization_transaction_id"] = "AION-999-PA-9999"
     payload["approval_record_id"] = "AION-999-PA-9999"
     return payload

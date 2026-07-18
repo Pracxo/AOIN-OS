@@ -88,16 +88,15 @@ REQUIRED_FALSE = [
 def test_aion160_required_files_exist_and_status_is_current() -> None:
     for relative in DOCS + JSON_ARTIFACTS + SCRIPTS:
         assert (ROOT / relative).exists(), relative
-    assert "0151-v02-actor-context-trust-boundary-remediation.md" in _text(
-        "docs/adr/README.md"
-    )
+    assert "0151-v02-actor-context-trust-boundary-remediation.md" in _text("docs/adr/README.md")
 
     status = _text("docs/project-status.md")
     assert (
         "AION-160 actor-context trust-boundary remediation implemented" in status
         or "Current authorization: AION-161-PA-0006 active for AION-162." in status
-        or "Current authorization: AION-161-PA-0006 consumed by AION-162 when merged."
-        in status
+        or "Current authorization: AION-161-PA-0006 consumed by AION-162 when merged." in status
+        or "Current authorization: AION-163-PA-0007 active for AION-164." in status
+        or "AION-161-PA-0006 consumed by AION-162 when merged." in status
     )
     assert "non-development identity headers ignored" in status
     assert "anonymous zero-permission ActorContext" in status
@@ -112,6 +111,7 @@ def test_aion160_required_files_exist_and_status_is_current() -> None:
             "verification core."
         )
         in status
+        or "AION-164 is the next implementation task" in status
     )
 
 

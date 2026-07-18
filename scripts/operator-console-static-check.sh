@@ -290,6 +290,7 @@ for path in sorted(demo_dir.glob("*.json")):
         continue
     if path.name in {
         "v02-actor-context-trust-boundary-authorization.json",
+        "v02-identity-assertion-replay-protection-authorization.json",
         "v02-offline-identity-assertion-verification-authorization.json",
         "v02-production-auth-request-identity-stabilization-authorization.json",
     }:

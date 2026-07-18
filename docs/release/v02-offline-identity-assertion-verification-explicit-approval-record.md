@@ -70,3 +70,8 @@ This explicit approval record creates `AION-161-PA-0006` as the sole active auth
 ## Prohibited Runtime Surface
 
 All HTTP header parsing, Authorization parsing, Cookie parsing, middleware registration, request authentication, ActorContext application, RequestIdentityContext application, runtime private-key material, private-key configuration, private-key persistence, private-key serialization, raw assertion logging, verified-claim persistence, provider integration, provider discovery, JWKS fetch, external calls, replay caches, auth endpoints, OpenAPI security, package manifests, lockfiles, migrations, SDK/CLI runtime surfaces, connector runtime, operator writes, module activation, sandbox execution, runtime guard release, v0.2 tags, and v0.2 releases remain false or absent.
+
+
+## AION-163 Replay Protection Authorization Update
+
+AION-163 records AION-162 PR #72 and corrective PR #73 as the completed offline verification delivery, closes `AION-161-PA-0006` as inactive, consumed, expired, and non-reusable, and creates `AION-163-PA-0007` as the sole active authorization for AION-164 persistent identity-assertion replay protection. The next critical path is AION-164. Runtime request authentication, ActorContext application, RequestIdentityContext application, dependency changes, migrations, production schema auto-create, package files, lockfiles, v0.2 tags, and v0.2 releases remain blocked.

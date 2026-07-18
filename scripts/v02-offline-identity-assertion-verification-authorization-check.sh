@@ -72,7 +72,8 @@ grep -q "0152-v02-offline-ed25519-identity-assertion-verification-authorization.
 }
 
 if ! grep -F "Current authorization: AION-161-PA-0006 active for AION-162." docs/project-status.md >/dev/null && \
-   ! grep -F "Current authorization: AION-161-PA-0006 consumed by AION-162 when merged." docs/project-status.md >/dev/null; then
+   ! grep -F "Current authorization: AION-161-PA-0006 consumed by AION-162 when merged." docs/project-status.md >/dev/null && \
+   ! grep -F "AION-161-PA-0006 consumed by AION-162 when merged." docs/project-status.md >/dev/null; then
   echo "project status does not describe AION-161 authorization state" >&2
   exit 1
 fi
@@ -118,14 +119,18 @@ else
     -q
 fi
 
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/production-auth-actor-context-trust-boundary-check.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/production-auth-actor-context-trust-boundary-no-go-regression.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/v02-actor-context-trust-boundary-authorization-check.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/production-auth-request-identity-stabilization-check.sh
-./scripts/docs-check.sh
-./scripts/final-docs-audit.sh
-./scripts/verify-no-domain-drift.sh
-./scripts/boundary-check.sh
+if is_nested_gate_context; then
+  echo "PASS: inherited repository gates deferred to outer gate"
+else
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/production-auth-actor-context-trust-boundary-check.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/production-auth-actor-context-trust-boundary-no-go-regression.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/v02-actor-context-trust-boundary-authorization-check.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/production-auth-request-identity-stabilization-check.sh
+  ./scripts/docs-check.sh
+  ./scripts/final-docs-audit.sh
+  ./scripts/verify-no-domain-drift.sh
+  ./scripts/boundary-check.sh
+fi
 
 cat <<'SUMMARY'
 v0.2 offline identity assertion verification authorization result:
@@ -134,7 +139,8 @@ v0.2 offline identity assertion verification authorization result:
 - AION-155-PA-0003: historical, consumed, expired, non-reusable
 - AION-157-PA-0004: historical, consumed by AION-158 PR 68, expired, non-reusable
 - AION-159-PA-0005: historical, consumed by AION-160 PR 70, expired, non-reusable
-- AION-161-PA-0006: only active approved authorization
+- AION-161-PA-0006: historical, consumed by AION-162 PR 72 and corrective PR 73, expired, non-reusable
+- AION-163-PA-0007: only active approved authorization
 - candidate_id: production-auth-offline-identity-assertion-verification
 - workstream: production-auth-verification-core
 - implementation_task: AION-162

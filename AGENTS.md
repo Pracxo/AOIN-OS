@@ -1066,3 +1066,6 @@ networking, replay caches, endpoints, OpenAPI security, SDK/CLI runtime
 surfaces, package manifests, lockfiles, migrations, runtime guard release,
 v0.2 tags, or v0.2 releases. Formal authorization lifecycle closeout belongs
 to AION-163.
+
+
+- AION-163 replay protection authorization work is governance-only. It may add closeout docs, replay-protection authorization records, examples, static console evidence, scripts, and tests, but it must not add replay implementation source, modify production-auth source, modify pyproject, add migrations, register runtime services, parse HTTP identity assertions, authenticate requests, apply ActorContext or RequestIdentityContext, add package or lock files, or create v0.2 tags or releases.

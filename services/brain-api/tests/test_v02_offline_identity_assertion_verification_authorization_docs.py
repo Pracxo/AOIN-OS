@@ -23,6 +23,12 @@ from v02_production_auth_authorization import (  # noqa: E402
     AION157_AUTHORIZATION,
     AION159_AUTHORIZATION,
     AION161_AUTHORIZATION,
+    AION163_AUTHORIZATION,
+    AION_162_CORRECTIVE_FEATURE_COMMIT,
+    AION_162_CORRECTIVE_MERGE_COMMIT,
+    AION_162_FINAL_MAIN_COMMIT,
+    AION_162_PRIMARY_FEATURE_COMMIT,
+    AION_162_PRIMARY_MERGE_COMMIT,
     APPROVAL_TRUE_KEYS,
     OFFLINE_IDENTITY_ASSERTION_APPROVED_SCOPE,
     OFFLINE_IDENTITY_ASSERTION_FALSE_KEYS,
@@ -97,8 +103,8 @@ def test_aion161_required_files_exist_and_status_is_current() -> None:
     status = _text("docs/project-status.md")
     assert (
         "Current authorization: AION-161-PA-0006 active for AION-162." in status
-        or "Current authorization: AION-161-PA-0006 consumed by AION-162 when merged."
-        in status
+        or "Current authorization: AION-161-PA-0006 consumed by AION-162 when merged." in status
+        or "AION-161-PA-0006 consumed by AION-162 when merged." in status
     )
     assert "AION-162 offline Ed25519 identity assertion verification core" in status
     assert "Production authentication runtime remains disabled." in status
@@ -144,10 +150,30 @@ def test_aion161_json_is_valid_synthetic_read_only_and_exactly_scoped() -> None:
         assert payload["workstream"] == "production-auth-verification-core"
         assert payload["implementation_task"] == "AION-162"
         assert payload["authorization_scope"] == "offline-ed25519-identity-assertion-verification"
-        assert payload["authorization_active"] is True
-        assert payload["authorization_consumed"] is False
-        assert payload["authorization_expired"] is False
+        assert payload["authorization_active"] is False
+        assert payload["authorization_consumed"] is True
+        assert payload["authorization_expired"] is True
         assert payload["authorization_reusable"] is False
+        assert payload["authorization_consumed_by_task"] == "AION-162"
+        assert payload["authorization_consumed_by_primary_pr"] == 72
+        assert (
+            payload["authorization_consumed_by_primary_feature_commit"]
+            == AION_162_PRIMARY_FEATURE_COMMIT
+        )
+        assert (
+            payload["authorization_consumed_by_primary_merge_commit"]
+            == AION_162_PRIMARY_MERGE_COMMIT
+        )
+        assert payload["authorization_post_merge_correction_pr"] == 73
+        assert (
+            payload["authorization_post_merge_correction_feature_commit"]
+            == AION_162_CORRECTIVE_FEATURE_COMMIT
+        )
+        assert (
+            payload["authorization_post_merge_correction_merge_commit"]
+            == AION_162_CORRECTIVE_MERGE_COMMIT
+        )
+        assert payload["authorization_final_verified_main_commit"] == AION_162_FINAL_MAIN_COMMIT
         assert payload["signature_algorithm"] == "Ed25519"
         assert payload["algorithm_negotiation_approved"] is False
         assert payload["signature_domain"] == "AION-IDENTITY-ASSERTION-V1"
@@ -190,10 +216,17 @@ def test_aion161_is_only_active_authorization_record() -> None:
     assert aion159["authorization_reusable"] is False
 
     aion161 = _payload_from_spec(AION161_AUTHORIZATION)
-    assert aion161["authorization_active"] is True
-    assert aion161["authorization_consumed"] is False
-    assert aion161["authorization_expired"] is False
+    assert aion161["authorization_active"] is False
+    assert aion161["authorization_consumed"] is True
+    assert aion161["authorization_consumed_by_task"] == "AION-162"
+    assert aion161["authorization_expired"] is True
     assert aion161["authorization_reusable"] is False
+
+    aion163 = _payload_from_spec(AION163_AUTHORIZATION)
+    assert aion163["authorization_active"] is True
+    assert aion163["authorization_consumed"] is False
+    assert aion163["authorization_expired"] is False
+    assert aion163["authorization_reusable"] is False
 
 
 @pytest.mark.parametrize(
@@ -208,93 +241,90 @@ def test_aion161_is_only_active_authorization_record() -> None:
             "unknown approved authorization record",
         ),
         (
-            lambda records: records[5][1].__setitem__("authorization_consumed", True),
+            lambda records: records[6][1].__setitem__("authorization_consumed", True),
             "authorization_consumed must be false",
         ),
         (
-            lambda records: records[5][1].__setitem__("authorization_expired", True),
+            lambda records: records[6][1].__setitem__("authorization_expired", True),
             "authorization_expired must be false",
         ),
         (
-            lambda records: records[5][1].__setitem__("authorization_reusable", True),
+            lambda records: records[6][1].__setitem__("authorization_reusable", True),
             "authorization_reusable must be false",
         ),
         (
-            lambda records: records[5][1].__setitem__(
+            lambda records: records[6][1].__setitem__(
                 "parent_authorization_transaction_id",
                 "AION-157-PA-0004",
             ),
             "parent_authorization_transaction_id mismatch",
         ),
         (
-            lambda records: records[5][1].__setitem__("implementation_task", "AION-161"),
+            lambda records: records[6][1].__setitem__("implementation_task", "AION-161"),
             "implementation_task mismatch",
         ),
         (
-            lambda records: records[5][1].__setitem__("candidate_id", "production-auth-runtime"),
+            lambda records: records[6][1].__setitem__("candidate_id", "production-auth-runtime"),
             "candidate_id mismatch",
         ),
         (
-            lambda records: records[5][1].__setitem__(
+            lambda records: records[6][1].__setitem__(
                 "authorization_scope",
                 "offline-ed25519-identity-assertion-verification-and-request-auth",
             ),
             "authorization_scope mismatch",
         ),
         (
-            lambda records: records[5][1].__setitem__(
-                "ed25519_signature_verification_approved",
+            lambda records: records[6][1].__setitem__(
+                "atomic_replay_claim_approved",
                 False,
             ),
-            "ed25519_signature_verification_approved must be true",
+            "atomic_replay_claim_approved must be true",
         ),
         (
-            lambda records: records[5][1].__setitem__("extra_crypto_permission_approved", True),
+            lambda records: records[6][1].__setitem__("extra_crypto_permission_approved", True),
             "approved permission set mismatch",
         ),
         (
-            lambda records: records[5][1]["approved_scope"].remove("offline_ed25519_verifier"),
+            lambda records: records[6][1]["approved_scope"].remove("atomic_replay_claim"),
             "approved_scope mismatch",
         ),
         (
-            lambda records: records[5][1]["prohibited_scope"].remove("runtime_private_key"),
+            lambda records: records[6][1]["prohibited_scope"].remove("runtime_private_key"),
             "prohibited_scope mismatch",
         ),
         (
-            lambda records: records[5][1]["approved_dependency"].__setitem__(
-                "specifier",
-                ">=49.0.0",
-            ),
-            "approved dependency specifier mismatch",
+            lambda records: records[6][1].__setitem__("dependency_change_approved", True),
+            "dependency_change_approved must be false",
         ),
         (
-            lambda records: records[5][1]["approved_dependency"].__setitem__("change_count", 2),
-            "approved dependency change count mismatch",
+            lambda records: records[6][1].__setitem__("database_migration_approved", True),
+            "database_migration_approved must be false",
         ),
         (
-            lambda records: records[5][1].__setitem__(
+            lambda records: records[6][1].__setitem__(
                 "identity_assertion_header_parsing_approved",
                 True,
             ),
             "identity_assertion_header_parsing_approved must be false",
         ),
         (
-            lambda records: records[5][1].__setitem__(
+            lambda records: records[6][1].__setitem__(
                 "runtime_private_key_material_approved",
                 True,
             ),
             "runtime_private_key_material_approved must be false",
         ),
         (
-            lambda records: records[5][1].__setitem__("jwks_network_fetch_approved", True),
+            lambda records: records[6][1].__setitem__("jwks_network_fetch_approved", True),
             "jwks_network_fetch_approved must be false",
         ),
         (
-            lambda records: records[5][1].__setitem__("replay_cache_approved", True),
+            lambda records: records[6][1].__setitem__("replay_cache_approved", True),
             "replay_cache_approved must be false",
         ),
         (
-            lambda records: records[5][1].__setitem__("runtime_effect", True),
+            lambda records: records[6][1].__setitem__("runtime_effect", True),
             "runtime_effect must be false",
         ),
     ],
@@ -358,6 +388,7 @@ def _canonical_records() -> list[tuple[str, dict[str, Any]]]:
         ("aion157.json", _payload_from_spec(AION157_AUTHORIZATION)),
         ("aion159.json", _payload_from_spec(AION159_AUTHORIZATION)),
         ("aion161.json", _payload_from_spec(AION161_AUTHORIZATION)),
+        ("aion163.json", _payload_from_spec(AION163_AUTHORIZATION)),
     ]
 
 
@@ -400,6 +431,23 @@ def _payload_from_spec(spec: Any) -> dict[str, Any]:
         payload[key] = False
     for key in spec.implementation_true_keys:
         payload[key] = True
+
+    if spec.transaction_id == "AION-161-PA-0006":
+        payload.update(
+            {
+                "authorization_consumed_by_primary_pr": 72,
+                "authorization_consumed_by_primary_feature_commit": AION_162_PRIMARY_FEATURE_COMMIT,
+                "authorization_consumed_by_primary_merge_commit": AION_162_PRIMARY_MERGE_COMMIT,
+                "authorization_post_merge_correction_pr": 73,
+                "authorization_post_merge_correction_feature_commit": (
+                    AION_162_CORRECTIVE_FEATURE_COMMIT
+                ),
+                "authorization_post_merge_correction_merge_commit": (
+                    AION_162_CORRECTIVE_MERGE_COMMIT
+                ),
+                "authorization_final_verified_main_commit": AION_162_FINAL_MAIN_COMMIT,
+            }
+        )
     if spec.approved_dependency_name is not None:
         payload["approved_dependency"] = {
             "name": spec.approved_dependency_name,
@@ -411,7 +459,7 @@ def _payload_from_spec(spec: Any) -> dict[str, Any]:
 
 
 def _unknown_active_payload() -> dict[str, Any]:
-    payload = _payload_from_spec(AION161_AUTHORIZATION)
+    payload = _payload_from_spec(AION163_AUTHORIZATION)
     payload["authorization_transaction_id"] = "AION-999-PA-9999"
     payload["approval_record_id"] = "AION-999-PA-9999"
     return payload

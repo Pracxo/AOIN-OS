@@ -148,7 +148,8 @@ fi
 cat <<'SUMMARY'
 v0.2 offline identity assertion verification authorization no-go result:
 - AION-159-PA-0005: historical, consumed by AION-160 PR 70, expired, non-reusable
-- AION-161-PA-0006: only active approved authorization
+- AION-161-PA-0006: historical, consumed by AION-162 PR 72 and corrective PR 73, expired, non-reusable
+- AION-163-PA-0007: only active approved authorization
 - approved future dependency: cryptography>=49.0.0,<50.0.0 in services/brain-api/pyproject.toml
 - AION-161 dependency changes: absent
 - implementation source changes: absent

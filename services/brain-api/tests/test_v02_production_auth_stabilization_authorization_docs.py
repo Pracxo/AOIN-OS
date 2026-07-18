@@ -23,6 +23,7 @@ from v02_production_auth_authorization import (  # noqa: E402
     AION157_AUTHORIZATION,
     AION159_AUTHORIZATION,
     AION161_AUTHORIZATION,
+    AION163_AUTHORIZATION,
     APPROVAL_TRUE_KEYS,
     validate_authorization_lifecycle_payloads,
 )
@@ -164,7 +165,7 @@ def test_v02_production_auth_stabilization_json_is_historical() -> None:
         assert payload["expiry"] == AION153_AUTHORIZATION.expiry
 
 
-def test_v02_production_auth_stabilization_validator_accepts_six_record_lifecycle() -> None:
+def test_v02_production_auth_stabilization_validator_accepts_current_lifecycle() -> None:
     validate_authorization_lifecycle_payloads(
         [
             ("aion151.json", _payload_from_spec(AION151_AUTHORIZATION)),
@@ -172,6 +173,7 @@ def test_v02_production_auth_stabilization_validator_accepts_six_record_lifecycl
             ("aion155.json", _payload_from_spec(AION155_AUTHORIZATION)),
             ("aion157.json", _payload_from_spec(AION157_AUTHORIZATION)),
             ("aion159.json", _payload_from_spec(AION159_AUTHORIZATION)),
+            ("aion163.json", _payload_from_spec(AION163_AUTHORIZATION)),
             ("aion161.json", _payload_from_spec(AION161_AUTHORIZATION)),
         ]
     )
@@ -215,6 +217,7 @@ def test_v02_production_auth_stabilization_validator_rejects_bad_lifecycle(
         ("aion155.json", _payload_from_spec(AION155_AUTHORIZATION)),
         ("aion157.json", _payload_from_spec(AION157_AUTHORIZATION)),
         ("aion159.json", _payload_from_spec(AION159_AUTHORIZATION)),
+        ("aion163.json", _payload_from_spec(AION163_AUTHORIZATION)),
         ("aion161.json", _payload_from_spec(AION161_AUTHORIZATION)),
     ]
     mutator(records)
