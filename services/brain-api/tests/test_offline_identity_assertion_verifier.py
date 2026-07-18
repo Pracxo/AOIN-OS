@@ -5,7 +5,13 @@ import inspect
 from aion_brain.production_auth.identity_assertion_verifier import (
     OfflineEd25519IdentityAssertionVerifier,
 )
-from tests.test_identity_assertion_contracts import NOW, make_envelope, make_key_pair, make_policy
+from tests.test_identity_assertion_contracts import (
+    NOW,
+    make_envelope,
+    make_key_pair,
+    make_policy,
+    tamper_signature,
+)
 
 
 def test_valid_signature_verifies_without_runtime_authentication() -> None:
@@ -36,7 +42,7 @@ def test_signature_tampering_is_rejected_fail_closed() -> None:
         clock=lambda: NOW,
     )
     envelope = make_envelope(signing_material)
-    tampered = envelope.model_copy(update={"signature": "A" + envelope.signature[1:]})
+    tampered = envelope.model_copy(update={"signature": tamper_signature(envelope.signature)})
 
     bundle = verifier.verify(tampered)
 

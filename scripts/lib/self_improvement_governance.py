@@ -20,6 +20,8 @@ AION_167_FEATURE_COMMIT = "bbc04cf57f02483e00752c20fa70b77abf95ce46"
 AION_167_MERGE_COMMIT = "98a50edb5eaaf55de5babaa0ea9eb057ef5b2feb"
 AION_168_FEATURE_COMMIT = "8d1402f6c122098f3aec5809cf94539992b45d10"
 AION_168_MERGE_COMMIT = "74472522edffbbeabb996c6d572dce1dcb0cda48"
+AION_169_FEATURE_COMMIT = "3af4e7a24955f83f8e3d1e98d3fa26f008ad83e6"
+AION_169_MERGE_COMMIT = "3a09cb642414ff22f15c90df41d1132030dbe0a1"
 
 LIFECYCLE_STATES = (
     "observed",
@@ -420,6 +422,7 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
     _require("AION-167" in by_task, "AION-167 record missing")
     _require("AION-168" in by_task, "AION-168 record missing")
     _require("AION-169" in by_task, "AION-169 record missing")
+    _require("AION-170" in by_task, "AION-170 record missing")
     aion164 = by_task["AION-164"]
     _require(aion164.get("pull_requests") == [75], "AION-164 PR mismatch")
     _require(
@@ -498,6 +501,13 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
     )
     aion169 = by_task["AION-169"]
     _require(aion169.get("authorization_transaction") == AUTHORIZATION_ID, "AION-169 auth")
+    _require(aion169.get("pull_requests") == [80], "AION-169 PR mismatch")
+    _require(aion169.get("feature_commits") == [AION_169_FEATURE_COMMIT], "AION-169 feature")
+    _require(
+        aion169.get("merge_commits") == [AION_169_MERGE_COMMIT],
+        "AION-169 merge commit missing",
+    )
+    _require(aion169.get("ci_result") == "pass", "AION-169 CI result")
     _require(aion169.get("next_task") == "AION-170", "AION-169 next task")
     _require(
         aion169.get("authorization_state") == "active_until_AION-170_merge",
@@ -506,6 +516,18 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
     _require(
         aion169.get("runtime_state") == "authorization_only_no_experiment_engine_implementation",
         "AION-169 runtime state",
+    )
+    aion170 = by_task["AION-170"]
+    _require(aion170.get("authorization_transaction") == AUTHORIZATION_ID, "AION-170 auth")
+    _require(aion170.get("next_task") == "AION-171", "AION-170 next task")
+    _require(
+        aion170.get("authorization_state") == "active_until_AION-171_closeout",
+        "AION-170 authorization state",
+    )
+    _require(
+        aion170.get("runtime_state")
+        == "experiment_engine_implemented_no_source_mutation_or_git_or_pr_runtime",
+        "AION-170 runtime state",
     )
 
 

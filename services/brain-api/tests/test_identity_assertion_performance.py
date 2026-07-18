@@ -6,7 +6,13 @@ from aion_brain.production_auth.identity_assertion_verifier import (
     OfflineEd25519IdentityAssertionVerifier,
 )
 from aion_brain.production_auth.trusted_public_keys import TrustedPublicKeyRegistry
-from tests.test_identity_assertion_contracts import NOW, make_envelope, make_key_pair, make_policy
+from tests.test_identity_assertion_contracts import (
+    NOW,
+    make_envelope,
+    make_key_pair,
+    make_policy,
+    tamper_signature,
+)
 
 
 def test_performance_smoke_for_valid_invalid_and_lookup() -> None:
@@ -18,7 +24,7 @@ def test_performance_smoke_for_valid_invalid_and_lookup() -> None:
         clock=lambda: NOW,
     )
     valid = make_envelope(signing_material)
-    invalid = valid.model_copy(update={"signature": "A" + valid.signature[1:]})
+    invalid = valid.model_copy(update={"signature": tamper_signature(valid.signature)})
 
     start = time.perf_counter()
     for _ in range(1000):
