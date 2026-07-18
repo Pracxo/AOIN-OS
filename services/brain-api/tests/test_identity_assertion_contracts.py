@@ -87,6 +87,11 @@ def make_envelope(
     )
 
 
+def tamper_signature(signature: str) -> str:
+    replacement = "A" if signature[0] != "A" else "B"
+    return replacement + signature[1:]
+
+
 def make_policy(**overrides: object) -> IdentityAssertionVerificationPolicy:
     values = {
         "expected_issuer": "issuer.aion.local",
