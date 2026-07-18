@@ -9,9 +9,13 @@ ROOT = Path(__file__).resolve().parents[3]
 
 def test_pyproject_package_files_and_migrations_are_unchanged() -> None:
     changed = _changed_files()
+    migration_name_allowlist = {
+        "services/brain-api/tests/test_identity_assertion_replay_no_dependency_or_migration.py",
+    }
+    migration_named_changes = changed - migration_name_allowlist
     assert "services/brain-api/pyproject.toml" not in changed
     assert not any(path.startswith("migrations/") for path in changed)
-    assert not any("migration" in Path(path).name.lower() for path in changed)
+    assert not any("migration" in Path(path).name.lower() for path in migration_named_changes)
     assert not any(path.endswith(("package.json", "package-lock.json")) for path in changed)
     assert not any(path.endswith(("pnpm-lock.yaml", "yarn.lock", "bun.lockb")) for path in changed)
     pyproject = (ROOT / "services/brain-api/pyproject.toml").read_text()

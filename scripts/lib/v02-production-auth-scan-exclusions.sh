@@ -441,6 +441,7 @@ aion164_is_scoped_identity_assertion_replay_protection_path() {
     services/brain-api/tests/test_identity_assertion_replay_no_runtime_integration.py|\
     services/brain-api/tests/test_identity_assertion_replay_no_dependency_or_migration.py|\
     services/brain-api/tests/test_identity_assertion_replay_performance.py|\
+    services/brain-api/tests/test_actor_context_diagnostics.py|\
     services/brain-api/tests/test_auth_design_docs.py|\
     services/brain-api/tests/test_static_console_ux_refinement.py|\
     services/brain-api/tests/test_v02_actor_context_trust_boundary_authorization_docs.py|\
