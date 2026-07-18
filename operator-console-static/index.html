@@ -781,6 +781,14 @@
               <h3>Replay Protection Auth</h3>
               <div class="review-checklist" id="v02-identity-assertion-replay-protection-authorization"></div>
             </section>
+            <section class="module-subpanel" aria-label="identity assertion replay protection implementation">
+              <h3>Replay Protection Core</h3>
+              <div class="review-checklist" id="identity-assertion-replay-protection"></div>
+            </section>
+            <section class="module-subpanel" aria-label="identity assertion replay protection runtime hold">
+              <h3>Replay Runtime Hold</h3>
+              <div class="review-checklist" id="identity-assertion-replay-runtime-hold"></div>
+            </section>
           </div>
         </section>
 
@@ -1336,6 +1344,18 @@
             <article class="command-card">
               <code>./scripts/v02-identity-assertion-replay-protection-authorization-check.sh</code>
               <button class="copy-command" type="button" data-command="./scripts/v02-identity-assertion-replay-protection-authorization-check.sh">Copy local check</button>
+            </article>
+            <article class="command-card">
+              <code>./scripts/production-auth-identity-assertion-replay-no-go-regression.sh</code>
+              <button class="copy-command" type="button" data-command="./scripts/production-auth-identity-assertion-replay-no-go-regression.sh">Copy local check</button>
+            </article>
+            <article class="command-card">
+              <code>./scripts/production-auth-identity-assertion-replay-check.sh</code>
+              <button class="copy-command" type="button" data-command="./scripts/production-auth-identity-assertion-replay-check.sh">Copy local check</button>
+            </article>
+            <article class="command-card">
+              <code>./scripts/production-auth-identity-assertion-replay-runtime-hold.sh</code>
+              <button class="copy-command" type="button" data-command="./scripts/production-auth-identity-assertion-replay-runtime-hold.sh">Copy local check</button>
             </article>
           </div>
           <p class="copy-status" id="copy-status" aria-live="polite">

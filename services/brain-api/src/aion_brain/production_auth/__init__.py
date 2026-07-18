@@ -6,6 +6,9 @@ from typing import Any
 
 __all__ = [
     "DisabledRequestIdentityVerifier",
+    "IdentityAssertionReplayProtectionService",
+    "IdentityAssertionReplayRepository",
+    "OfflineIdentityAssertionVerificationPipeline",
     "OfflineEd25519IdentityAssertionVerifier",
     "ProductionAuthRequestIdentityBoundary",
     "ProductionAuthRequestIdentityMiddleware",
@@ -47,6 +50,24 @@ def __getattr__(name: str) -> Any:
         )
 
         return OfflineEd25519IdentityAssertionVerifier
+    if name == "IdentityAssertionReplayProtectionService":
+        from aion_brain.production_auth.identity_assertion_replay_service import (
+            IdentityAssertionReplayProtectionService,
+        )
+
+        return IdentityAssertionReplayProtectionService
+    if name == "IdentityAssertionReplayRepository":
+        from aion_brain.production_auth.identity_assertion_replay_repository import (
+            IdentityAssertionReplayRepository,
+        )
+
+        return IdentityAssertionReplayRepository
+    if name == "OfflineIdentityAssertionVerificationPipeline":
+        from aion_brain.production_auth.identity_assertion_pipeline import (
+            OfflineIdentityAssertionVerificationPipeline,
+        )
+
+        return OfflineIdentityAssertionVerificationPipeline
     if name == "TrustedPublicKeyRegistry":
         from aion_brain.production_auth.trusted_public_keys import (
             TrustedPublicKeyRegistry,

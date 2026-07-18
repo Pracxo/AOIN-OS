@@ -67,6 +67,8 @@ def test_auth_examples_are_valid_and_redacted() -> None:
             or path.name.startswith("request-identity-")
             or path.name.startswith("actor-context-")
             or path.name.startswith("offline-identity-")
+            or path.name.startswith("identity-assertion-replay-")
+            or path.name == "identity-assertion-identifier-collision.json"
             or path.name == "disabled-auth-prototype-plan.json"
         ):
             continue

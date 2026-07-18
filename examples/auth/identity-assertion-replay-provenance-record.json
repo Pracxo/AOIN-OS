@@ -1,0 +1,14 @@
+{
+  "artifact": "identity-assertion-replay-provenance-record",
+  "synthetic": true,
+  "read_only": true,
+  "authorization_transaction_id": "AION-163-PA-0007",
+  "implementation_task": "AION-164",
+  "authorization_scope": "persistent-identity-assertion-replay-protection-core",
+  "repository_implementation_name": "IdentityAssertionReplayRepository",
+  "atomic_insert": true,
+  "unique_constraint": true,
+  "outcome": "claimed",
+  "runtime_effect": false,
+  "redacted": true
+}

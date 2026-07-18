@@ -1150,3 +1150,6 @@ Local checks:
 ./scripts/v02-identity-assertion-replay-protection-authorization-no-go-regression.sh
 ./scripts/v02-identity-assertion-replay-protection-authorization-check.sh
 ```
+## AION-164 Replay Protection Static Evidence
+
+The static console now includes `identity-assertion-replay-protection.json` and `identity-assertion-replay-runtime-hold.json`. These payloads are synthetic, read-only, and show only replay core status plus runtime-hold flags; they do not enable authentication or activation.

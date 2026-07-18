@@ -147,6 +147,10 @@ for path in sorted((root / "examples" / "auth").glob("*.json")):
         continue
     if path.name.startswith("offline-identity-"):
         continue
+    if path.name.startswith("identity-assertion-replay-"):
+        continue
+    if path.name == "identity-assertion-identifier-collision.json":
+        continue
     payload = json.loads(path.read_text())
     serialized = json.dumps(payload, sort_keys=True).lower()
     blocked = (
@@ -999,6 +1003,65 @@ aion163_auth_paths = {
     "services/brain-api/tests/test_v02_production_auth_stabilization_authorization_docs.py",
 }
 
+aion164_auth_paths = {
+    "AGENTS.md",
+    "README.md",
+    "docs/adr/0155-v02-persistent-identity-assertion-replay-protection.md",
+    "docs/adr/README.md",
+    "docs/architecture.md",
+    "docs/auth/future-auth-implementation-plan.md",
+    "docs/auth/identity-assertion-public-key-registry.md",
+    "docs/auth/identity-assertion-replay-ledger.md",
+    "docs/auth/identity-assertion-replay-protection.md",
+    "docs/auth/identity-assertion-replay-runtime-boundary.md",
+    "docs/auth/identity-assertion-runtime-boundary.md",
+    "docs/auth/offline-identity-assertion-verification.md",
+    "docs/auth/production-auth-release-gates.md",
+    "docs/brain-contract.md",
+    "docs/policy-model.md",
+    "docs/project-status.md",
+    "docs/release/v02-identity-assertion-replay-protection-authorization-transaction.md",
+    "docs/release/v02-identity-assertion-replay-protection-checklist.md",
+    "docs/release/v02-identity-assertion-replay-protection-evidence-matrix.md",
+    "docs/release/v02-identity-assertion-replay-protection-explicit-approval-record.md",
+    "docs/release/v02-identity-assertion-replay-protection-implementation.md",
+    "docs/release/v02-identity-assertion-replay-protection-no-go.md",
+    "docs/release/v02-identity-assertion-replay-protection-persistence-model.md",
+    "docs/release/v02-identity-assertion-replay-protection-runtime-hold.md",
+    "docs/release/v02-identity-assertion-replay-protection-scope.md",
+    "docs/release/v02-identity-assertion-replay-protection-security-evidence.md",
+    "docs/release/v02-identity-assertion-replay-protection-threat-model.md",
+    "docs/release/v02-release-readiness-delta.md",
+    "docs/visual-brain.md",
+    "examples/auth/identity-assertion-identifier-collision.json",
+    "examples/auth/identity-assertion-replay-audit-event.json",
+    "examples/auth/identity-assertion-replay-detected.json",
+    "examples/auth/identity-assertion-replay-diagnostics.json",
+    "examples/auth/identity-assertion-replay-first-claim.json",
+    "examples/auth/identity-assertion-replay-provenance-record.json",
+    "examples/auth/identity-assertion-replay-repository-failure.json",
+    "examples/auth/offline-identity-assertion-pipeline-result.json",
+    "operator-console-static/README.md",
+    "operator-console-static/app.js",
+    "operator-console-static/demo-data/identity-assertion-replay-protection.json",
+    "operator-console-static/demo-data/identity-assertion-replay-runtime-hold.json",
+    "operator-console-static/index.html",
+    "scripts/lib/v02-production-auth-scan-exclusions.sh",
+    "scripts/production-auth-identity-assertion-replay-check.sh",
+    "scripts/production-auth-identity-assertion-replay-no-go-regression.sh",
+    "scripts/production-auth-identity-assertion-replay-runtime-hold.sh",
+    "scripts/production-auth-core-no-go-regression.sh",
+    "services/brain-api/src/aion_brain/contracts/identity_assertion_replay.py",
+    "services/brain-api/src/aion_brain/local_auth/audit.py",
+    "services/brain-api/src/aion_brain/production_auth/__init__.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_pipeline.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_replay.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_replay_evidence.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_replay_repository.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_replay_service.py",
+    "services/brain-api/tests/test_auth_design_docs.py",
+}
+
 blocked_package_names = {
     "package.json",
     "package-lock.json",
@@ -1032,6 +1095,7 @@ for name in [*changed, *untracked]:
         and name not in aion161_auth_paths
         and name not in aion162_auth_paths
         and name not in aion163_auth_paths
+        and name not in aion164_auth_paths
     ):
         raise SystemExit(f"unexpected auth runtime or artifact path: {name}")
 

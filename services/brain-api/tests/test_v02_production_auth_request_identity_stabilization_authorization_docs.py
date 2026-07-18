@@ -104,6 +104,17 @@ AION162_ALLOWED_CHANGED_PATHS = {
     "services/brain-api/src/aion_brain/production_auth/trusted_public_keys.py",
 }
 
+AION164_ALLOWED_CHANGED_PATHS = {
+    "services/brain-api/src/aion_brain/contracts/identity_assertion_replay.py",
+    "services/brain-api/src/aion_brain/production_auth/__init__.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_pipeline.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_replay.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_replay_evidence.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_replay_repository.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_replay_service.py",
+    "services/brain-api/tests/test_identity_assertion_replay_no_dependency_or_migration.py",
+}
+
 
 def test_aion157_required_files_exist_and_status_is_current() -> None:
     for relative in DOCS + JSON_ARTIFACTS + SCRIPTS:
@@ -396,7 +407,12 @@ def test_aion157_validator_rejects_bad_lifecycle(mutator: Any, match: str) -> No
 
 
 def test_aion157_does_not_change_protected_sources_or_add_release_artifacts() -> None:
-    changed = _changed_files() - AION160_ALLOWED_CHANGED_PATHS - AION162_ALLOWED_CHANGED_PATHS
+    changed = (
+        _changed_files()
+        - AION160_ALLOWED_CHANGED_PATHS
+        - AION162_ALLOWED_CHANGED_PATHS
+        - AION164_ALLOWED_CHANGED_PATHS
+    )
     for forbidden in PROTECTED_SOURCE_PATHS:
         assert not any(path == forbidden or path.startswith(f"{forbidden}/") for path in changed)
     assert not any(path.endswith("package.json") for path in changed)

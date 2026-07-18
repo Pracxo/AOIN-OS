@@ -166,3 +166,4 @@ closure decision in ADR 0072.
 - [0153: v0.2 Offline Ed25519 Identity Assertion Verification](0153-v02-offline-ed25519-identity-assertion-verification.md) - Implements the AION-161-authorized offline Ed25519 verification core with public-key-only trust while keeping request authentication disabled.
 
 - [0154: v0.2 Identity Assertion Replay Protection Authorization](0154-v02-identity-assertion-replay-protection-authorization.md) - Closes AION-161 as consumed by AION-162 and creates AION-163-PA-0007 for future AION-164 persistent replay protection while keeping runtime authentication disabled.
+- [0155: v0.2 Persistent Identity Assertion Replay Protection](0155-v02-persistent-identity-assertion-replay-protection.md) - Implements the AION-163-authorized persistent replay-protection core with a dedicated SQLAlchemy ledger, fail-closed outcomes, redacted evidence, explicit cleanup, and no runtime authentication integration.

@@ -98,6 +98,17 @@ AION162_ALLOWED_CHANGED_PATHS = {
     "services/brain-api/src/aion_brain/production_auth/trusted_public_keys.py",
 }
 
+AION164_ALLOWED_CHANGED_PATHS = {
+    "services/brain-api/src/aion_brain/contracts/identity_assertion_replay.py",
+    "services/brain-api/src/aion_brain/production_auth/__init__.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_pipeline.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_replay.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_replay_evidence.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_replay_repository.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_replay_service.py",
+    "services/brain-api/tests/test_identity_assertion_replay_no_dependency_or_migration.py",
+}
+
 
 def test_v02_production_auth_stabilization_docs_exist_and_show_consumed_state() -> None:
     for relative in DOCS:
@@ -244,6 +255,7 @@ def test_v02_production_auth_stabilization_does_not_change_forbidden_sources() -
         - AION156_ALLOWED_CHANGED_PATHS
         - AION160_ALLOWED_CHANGED_PATHS
         - AION162_ALLOWED_CHANGED_PATHS
+        - AION164_ALLOWED_CHANGED_PATHS
     )
     for forbidden in FORBIDDEN_CHANGED_PATHS:
         assert not any(path == forbidden or path.startswith(f"{forbidden}/") for path in changed)

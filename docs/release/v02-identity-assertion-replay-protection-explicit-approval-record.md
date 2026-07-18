@@ -81,3 +81,6 @@ Required gates: `./scripts/v02-identity-assertion-replay-protection-authorizatio
 ## Expiry And Revocation
 
 `AION-163-PA-0007` expires when AION-164 merges or when explicitly revoked. No other active approved authorization may exist.
+## AION-164 Implementation Note
+
+The approval record was consumed by the AION-164 implementation scope only. Runtime authentication and request integration remain prohibited until a later authorization.

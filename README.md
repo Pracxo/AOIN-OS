@@ -5064,3 +5064,8 @@ releases remain absent or disabled.
 ## v0.2 Identity Assertion Replay Protection Authorization
 
 AION-163 closes `AION-161-PA-0006` as consumed by AION-162 PR #72 and corrective PR #73, then creates `AION-163-PA-0007` as the sole active authorization for AION-164 persistent identity-assertion replay protection. This is governance-only: no replay implementation source, dependency manifest, migration, route, SDK/CLI runtime surface, package file, lockfile, v0.2 tag, or v0.2 release is added.
+## AION-164 Persistent Identity Assertion Replay Protection
+
+AION-164 adds an internal persistent replay-protection core for offline identity assertions. It remains unintegrated with request authentication: no API route, middleware, KernelContainer registration, SDK/CLI surface, package file, lockfile, migration, v0.2 tag, or release is added.
+
+Primary evidence lives in `docs/auth/identity-assertion-replay-protection.md`, `docs/auth/identity-assertion-replay-ledger.md`, `docs/auth/identity-assertion-replay-runtime-boundary.md`, and ADR 0155.

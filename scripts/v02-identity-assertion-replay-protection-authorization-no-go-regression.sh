@@ -64,6 +64,9 @@ changed_files > "$changed_file_list"
 
 while IFS= read -r file; do
   [[ -n "$file" ]] || continue
+  if aion164_is_scoped_identity_assertion_replay_protection_path "$file"; then
+    continue
+  fi
   case "$file" in
     services/brain-api/pyproject.toml|\
     services/brain-api/src/aion_brain/contracts/identity_assertion.py|\
@@ -103,10 +106,10 @@ for path in \
   services/brain-api/src/aion_brain/production_auth/identity_assertion_replay_service.py \
   services/brain-api/src/aion_brain/production_auth/identity_assertion_replay_evidence.py \
   services/brain-api/src/aion_brain/production_auth/identity_assertion_pipeline.py; do
-  test ! -e "$path" || {
-    echo "AION-164 replay implementation source was added prematurely: $path" >&2
+  if [[ -e "$path" ]] && ! aion164_is_scoped_identity_assertion_replay_protection_path "$path"; then
+    echo "unscoped AION-164 replay implementation source detected: $path" >&2
     exit 1
-  }
+  fi
 done
 
 if [[ -s "$scan_file_list" ]]; then

@@ -76,6 +76,9 @@ aion151_is_scoped_authorization_path() {
       if aion157_is_scoped_request_identity_stabilization_path "$1"; then
         return 0
       fi
+      if aion164_is_scoped_identity_assertion_replay_protection_path "$1"; then
+        return 0
+      fi
       return 1
       ;;
   esac
@@ -156,6 +159,9 @@ aion157_is_scoped_request_identity_stabilization_path() {
         return 0
       fi
       if aion158_is_scoped_request_identity_stabilization_path "$1"; then
+        return 0
+      fi
+      if aion164_is_scoped_identity_assertion_replay_protection_path "$1"; then
         return 0
       fi
       return 1
@@ -252,6 +258,9 @@ aion158_is_scoped_request_identity_stabilization_path() {
       if aion160_is_scoped_actor_context_trust_boundary_remediation_path "$1"; then
         return 0
       fi
+      if aion164_is_scoped_identity_assertion_replay_protection_path "$1"; then
+        return 0
+      fi
       return 1
       ;;
   esac
@@ -319,6 +328,128 @@ aion163_is_scoped_identity_assertion_replay_protection_authorization_path() {
     scripts/v02-identity-assertion-replay-protection-authorization-no-go-regression.sh|\
     services/brain-api/tests/test_v02_identity_assertion_replay_protection_authorization_docs.py|\
     services/brain-api/tests/test_v02_offline_identity_assertion_verification_authorization_docs.py)
+      return 0
+      ;;
+    *)
+      if aion164_is_scoped_identity_assertion_replay_protection_path "$1"; then
+        return 0
+      fi
+      return 1
+      ;;
+  esac
+}
+
+aion164_is_scoped_identity_assertion_replay_protection_path() {
+  # Exact AION-164 implementation, evidence, validator, and static-console
+  # paths. This permits only the authorized persistent replay-protection core
+  # and keeps API routes, config, kernel wiring, SDK/CLI surfaces, package
+  # files, lockfiles, migrations, tags, and releases outside the exemption.
+  case "$1" in
+    README.md|\
+    AGENTS.md|\
+    docs/project-status.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/visual-brain.md|\
+    docs/auth/offline-identity-assertion-verification.md|\
+    docs/auth/identity-assertion-public-key-registry.md|\
+    docs/auth/identity-assertion-runtime-boundary.md|\
+    docs/auth/identity-assertion-replay-protection.md|\
+    docs/auth/identity-assertion-replay-ledger.md|\
+    docs/auth/identity-assertion-replay-runtime-boundary.md|\
+    docs/auth/future-auth-implementation-plan.md|\
+    docs/auth/production-auth-release-gates.md|\
+    docs/release/v02-identity-assertion-replay-protection-authorization-transaction.md|\
+    docs/release/v02-identity-assertion-replay-protection-explicit-approval-record.md|\
+    docs/release/v02-identity-assertion-replay-protection-scope.md|\
+    docs/release/v02-identity-assertion-replay-protection-persistence-model.md|\
+    docs/release/v02-identity-assertion-replay-protection-threat-model.md|\
+    docs/release/v02-identity-assertion-replay-protection-implementation.md|\
+    docs/release/v02-identity-assertion-replay-protection-security-evidence.md|\
+    docs/release/v02-identity-assertion-replay-protection-runtime-hold.md|\
+    docs/release/v02-identity-assertion-replay-protection-evidence-matrix.md|\
+    docs/release/v02-identity-assertion-replay-protection-no-go.md|\
+    docs/release/v02-identity-assertion-replay-protection-checklist.md|\
+    docs/release/v02-release-readiness-delta.md|\
+    docs/adr/0155-v02-persistent-identity-assertion-replay-protection.md|\
+    docs/adr/README.md|\
+    examples/auth/identity-assertion-replay-first-claim.json|\
+    examples/auth/identity-assertion-replay-detected.json|\
+    examples/auth/identity-assertion-identifier-collision.json|\
+    examples/auth/identity-assertion-replay-repository-failure.json|\
+    examples/auth/identity-assertion-replay-audit-event.json|\
+    examples/auth/identity-assertion-replay-provenance-record.json|\
+    examples/auth/identity-assertion-replay-diagnostics.json|\
+    examples/auth/offline-identity-assertion-pipeline-result.json|\
+    examples/operator-console/static-console-navigation-map.json|\
+    operator-console-static/index.html|\
+    operator-console-static/app.js|\
+    operator-console-static/README.md|\
+    operator-console-static/demo-data/identity-assertion-replay-protection.json|\
+    operator-console-static/demo-data/identity-assertion-replay-runtime-hold.json|\
+    scripts/auth-design-check.sh|\
+    scripts/connector-platform-checkpoint.sh|\
+    scripts/connector-release-no-go-regression.sh|\
+    scripts/connector-runtime-no-external-call-regression.sh|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    scripts/local-auth-check.sh|\
+    scripts/operator-console-static-check.sh|\
+    scripts/production-auth-architecture-check.sh|\
+    scripts/production-auth-core-check.sh|\
+    scripts/production-auth-core-no-go-regression.sh|\
+    scripts/production-auth-core-stabilization-no-go-regression.sh|\
+    scripts/production-auth-identity-assertion-replay-check.sh|\
+    scripts/production-auth-identity-assertion-replay-runtime-hold.sh|\
+    scripts/production-auth-identity-assertion-replay-no-go-regression.sh|\
+    scripts/production-auth-offline-identity-assertion-no-go-regression.sh|\
+    scripts/production-auth-request-identity-no-go-regression.sh|\
+    scripts/production-auth-request-identity-stabilization-no-go-regression.sh|\
+    scripts/production-auth-actor-context-trust-boundary-no-go-regression.sh|\
+    scripts/static-console-ux-check.sh|\
+    scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh|\
+    scripts/v02-offline-identity-assertion-verification-authorization-no-go-regression.sh|\
+    scripts/v02-identity-assertion-replay-protection-authorization-no-go-regression.sh|\
+    scripts/v02-production-auth-request-boundary-authorization-no-go-regression.sh|\
+    scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh|\
+    scripts/v02-production-auth-stabilization-authorization-check.sh|\
+    services/brain-api/src/aion_brain/local_auth/audit.py|\
+    services/brain-api/src/aion_brain/contracts/identity_assertion_replay.py|\
+    services/brain-api/src/aion_brain/production_auth/__init__.py|\
+    services/brain-api/src/aion_brain/production_auth/identity_assertion_replay.py|\
+    services/brain-api/src/aion_brain/production_auth/identity_assertion_replay_repository.py|\
+    services/brain-api/src/aion_brain/production_auth/identity_assertion_replay_service.py|\
+    services/brain-api/src/aion_brain/production_auth/identity_assertion_replay_evidence.py|\
+    services/brain-api/src/aion_brain/production_auth/identity_assertion_pipeline.py|\
+    services/brain-api/tests/test_identity_assertion_replay_contracts.py|\
+    services/brain-api/tests/test_identity_assertion_replay_key.py|\
+    services/brain-api/tests/test_identity_assertion_replay_policy.py|\
+    services/brain-api/tests/test_identity_assertion_replay_table_contract.py|\
+    services/brain-api/tests/test_identity_assertion_replay_repository_schema.py|\
+    services/brain-api/tests/test_identity_assertion_replay_repository_claim.py|\
+    services/brain-api/tests/test_identity_assertion_replay_repository_concurrency.py|\
+    services/brain-api/tests/test_identity_assertion_replay_multiple_engines.py|\
+    services/brain-api/tests/test_identity_assertion_replay_service.py|\
+    services/brain-api/tests/test_identity_assertion_replay_pipeline.py|\
+    services/brain-api/tests/test_identity_assertion_replay_retention.py|\
+    services/brain-api/tests/test_identity_assertion_replay_cleanup.py|\
+    services/brain-api/tests/test_identity_assertion_replay_cleanup_race.py|\
+    services/brain-api/tests/test_identity_assertion_replay_failure_safety.py|\
+    services/brain-api/tests/test_identity_assertion_replay_evidence.py|\
+    services/brain-api/tests/test_identity_assertion_replay_redaction.py|\
+    services/brain-api/tests/test_identity_assertion_replay_concurrency.py|\
+    services/brain-api/tests/test_identity_assertion_replay_no_runtime_integration.py|\
+    services/brain-api/tests/test_identity_assertion_replay_no_dependency_or_migration.py|\
+    services/brain-api/tests/test_identity_assertion_replay_performance.py|\
+    services/brain-api/tests/test_actor_context_diagnostics.py|\
+    services/brain-api/tests/test_auth_design_docs.py|\
+    services/brain-api/tests/test_static_console_ux_refinement.py|\
+    services/brain-api/tests/test_v02_actor_context_trust_boundary_authorization_docs.py|\
+    services/brain-api/tests/test_v02_identity_assertion_replay_protection_authorization_docs.py|\
+    services/brain-api/tests/test_v02_offline_identity_assertion_verification_authorization_docs.py|\
+    services/brain-api/tests/test_v02_production_auth_request_boundary_authorization_docs.py|\
+    services/brain-api/tests/test_v02_production_auth_request_identity_stabilization_authorization_docs.py|\
+    services/brain-api/tests/test_v02_production_auth_stabilization_authorization_docs.py)
       return 0
       ;;
     *)
@@ -565,6 +696,9 @@ aion159_is_scoped_actor_context_trust_boundary_authorization_path() {
         return 0
       fi
       if aion160_is_scoped_actor_context_trust_boundary_remediation_path "$1"; then
+        return 0
+      fi
+      if aion164_is_scoped_identity_assertion_replay_protection_path "$1"; then
         return 0
       fi
       return 1

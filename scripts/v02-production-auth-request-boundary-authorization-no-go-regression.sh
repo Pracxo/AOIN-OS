@@ -92,6 +92,9 @@ while IFS= read -r file; do
   if aion162_is_scoped_offline_identity_assertion_verification_path "$file"; then
     continue
   fi
+  if aion164_is_scoped_identity_assertion_replay_protection_path "$file"; then
+    continue
+  fi
   echo "AION-155 must not modify production-auth, kernel, API, SDK, or CLI implementation source: $file" >&2
   exit 1
 done < <(
@@ -104,7 +107,9 @@ done < <(
     packages/aion-sdk-python/src
 )
 
-if changed_files | rg -n '(^|/)(migrations|alembic)/|(^|/).*migration.*\.(py|sql)$'; then
+if changed_files \
+  | rg -v '^services/brain-api/tests/test_identity_assertion_replay_no_dependency_or_migration\.py$' \
+  | rg -n '(^|/)(migrations|alembic)/|(^|/).*migration.*\.(py|sql)$'; then
   echo "AION-155 must not add or change migrations" >&2
   exit 1
 fi

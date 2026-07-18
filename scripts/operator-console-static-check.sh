@@ -199,6 +199,39 @@ for path in sorted(demo_dir.glob("*.json")):
             if key in payload and payload.get(key) is not False:
                 raise SystemExit(f"offline identity assertion demo flag must be false: {key}: {path}")
         continue
+    if path.name.startswith("identity-assertion-replay-"):
+        if payload.get("read_only") is not True:
+            raise SystemExit(f"identity assertion replay demo must be read_only: {path}")
+        if payload.get("redaction_applied") is not True:
+            raise SystemExit(f"identity assertion replay demo must be redacted: {path}")
+        false_keys = {
+            "actor_context_applied",
+            "background_cleanup_scheduler_enabled",
+            "cli_runtime_command_added",
+            "external_calls_enabled",
+            "identity_assertion_endpoint_enabled",
+            "in_memory_runtime_replay_store_enabled",
+            "kernel_container_registration_enabled",
+            "migrations_added",
+            "middleware_integration_enabled",
+            "openapi_security_scheme_added",
+            "production_auth_runtime_enabled",
+            "replay_protection_core_runtime_enabled",
+            "replay_repository_runtime_registered",
+            "request_authenticated",
+            "request_identity_context_applied",
+            "request_integration_enabled",
+            "runtime_api_routes_added",
+            "runtime_effect",
+            "runtime_integration_allowed",
+            "sdk_runtime_resource_added",
+            "v02_release_created",
+            "v02_tag_created",
+        }
+        for key in false_keys:
+            if key in payload and payload.get(key) is not False:
+                raise SystemExit(f"identity assertion replay demo flag must be false: {key}: {path}")
+        continue
     if path.name.startswith("local-session-"):
         if payload.get("read_only") is not True:
             raise SystemExit(f"local session demo must be read_only: {path}")

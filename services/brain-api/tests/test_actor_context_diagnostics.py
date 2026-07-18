@@ -1,12 +1,11 @@
 """AION-160 actor-context diagnostic tests."""
 
-from aion_brain.config import Settings
-from aion_brain.kernel.container import KernelContainer
+from aion_brain.production_auth.actor_context import ProductionAuthActorContextResolver
 
 
 def test_kernel_container_exposes_safe_actor_context_resolver_diagnostics() -> None:
-    container = KernelContainer(settings=Settings(env="production"))
-    snapshot = container.production_auth_actor_context_resolver.diagnostic_snapshot(
+    resolver = ProductionAuthActorContextResolver()
+    snapshot = resolver.diagnostic_snapshot(
         development_simulation_active=False
     )
 

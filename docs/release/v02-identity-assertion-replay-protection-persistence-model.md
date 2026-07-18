@@ -14,3 +14,6 @@ Only hashes and timestamps may be stored. Raw issuer, raw assertion ID, raw asse
 ## Auto-Create
 
 `IdentityAssertionReplayRepository(*, engine: Engine, auto_create: bool = False)` defaults to `auto_create=false`. Test code may set `auto_create=true`. Production runtime code must never call create-all automatically. Missing schema fails closed.
+## AION-164 Implementation Note
+
+The implementation uses the documented `aion_identity_assertion_replay_claims` table with exact hash-and-timestamp columns and explicit test-only schema creation.

@@ -1,0 +1,19 @@
+{
+  "artifact": "offline-identity-assertion-pipeline-result",
+  "synthetic": true,
+  "read_only": true,
+  "authorization_transaction_id": "AION-163-PA-0007",
+  "implementation_task": "AION-164",
+  "outcome": "verified_once",
+  "cryptographic_verified": true,
+  "replay_check_performed": true,
+  "replay_detected": false,
+  "identifier_collision": false,
+  "verification_and_replay_checks_passed": true,
+  "request_authenticated": false,
+  "actor_context_applied": false,
+  "request_identity_context_applied": false,
+  "runtime_effect": false,
+  "runtime_integration_allowed": false,
+  "redacted": true
+}

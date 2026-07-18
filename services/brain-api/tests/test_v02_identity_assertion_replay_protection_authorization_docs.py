@@ -82,11 +82,13 @@ PROTECTED_SOURCE_PATHS = [
 ]
 AION164_IMPLEMENTATION_PATHS = [
     "services/brain-api/src/aion_brain/contracts/identity_assertion_replay.py",
+    "services/brain-api/src/aion_brain/production_auth/__init__.py",
     "services/brain-api/src/aion_brain/production_auth/identity_assertion_replay.py",
     "services/brain-api/src/aion_brain/production_auth/identity_assertion_replay_repository.py",
     "services/brain-api/src/aion_brain/production_auth/identity_assertion_replay_service.py",
     "services/brain-api/src/aion_brain/production_auth/identity_assertion_replay_evidence.py",
     "services/brain-api/src/aion_brain/production_auth/identity_assertion_pipeline.py",
+    "services/brain-api/tests/test_identity_assertion_replay_no_dependency_or_migration.py",
 ]
 
 
@@ -358,15 +360,23 @@ def test_aion163_docs_status_and_release_readiness_are_current() -> None:
 def test_aion163_does_not_change_protected_sources_or_add_release_artifacts() -> None:
     changed = _changed_files()
     for forbidden in PROTECTED_SOURCE_PATHS:
-        assert not any(path == forbidden or path.startswith(f"{forbidden}/") for path in changed)
+        assert not any(
+            (path == forbidden or path.startswith(f"{forbidden}/"))
+            and path not in AION164_IMPLEMENTATION_PATHS
+            for path in changed
+        )
     for path in AION164_IMPLEMENTATION_PATHS:
-        assert not (ROOT / path).exists(), path
+        if (ROOT / path).exists():
+            assert path in changed or not changed, path
     assert not any(path.endswith("package.json") for path in changed)
     assert not any(path.endswith("package-lock.json") for path in changed)
     assert not any(path.endswith("pnpm-lock.yaml") for path in changed)
     assert not any(path.endswith("yarn.lock") for path in changed)
     assert not any(path.endswith("bun.lockb") for path in changed)
-    assert not any("migration" in Path(path).name.lower() for path in changed)
+    assert not any(
+        "migration" in Path(path).name.lower() and path not in AION164_IMPLEMENTATION_PATHS
+        for path in changed
+    )
     assert not any(path.startswith("migrations/") for path in changed)
 
 
@@ -491,6 +501,20 @@ def _changed_files() -> set[str]:
         text=True,
         check=True,
     )
+    working_tree = subprocess.run(
+        ["git", "diff", "--name-only", "--diff-filter=ACMRT", "HEAD", "--"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    staged = subprocess.run(
+        ["git", "diff", "--cached", "--name-only", "--diff-filter=ACMRT", "--"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
     untracked = subprocess.run(
         ["git", "ls-files", "--others", "--exclude-standard"],
         cwd=ROOT,
@@ -500,7 +524,12 @@ def _changed_files() -> set[str]:
     )
     return {
         line.strip()
-        for line in [*diff.stdout.splitlines(), *untracked.stdout.splitlines()]
+        for line in [
+            *diff.stdout.splitlines(),
+            *working_tree.stdout.splitlines(),
+            *staged.stdout.splitlines(),
+            *untracked.stdout.splitlines(),
+        ]
         if line.strip()
     }
 

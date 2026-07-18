@@ -2611,3 +2611,6 @@ surface, migration, or v0.2 release artifact is added.
 ## AION-163 Replay Protection Authorization Update
 
 AION-163 records AION-162 PR #72 and corrective PR #73 as the completed offline verification delivery, closes `AION-161-PA-0006` as inactive, consumed, expired, and non-reusable, and creates `AION-163-PA-0007` as the sole active authorization for AION-164 persistent identity-assertion replay protection. The next critical path is AION-164. Runtime request authentication, ActorContext application, RequestIdentityContext application, dependency changes, migrations, production schema auto-create, package files, lockfiles, v0.2 tags, and v0.2 releases remain blocked.
+## AION-164 Replay Protection Architecture
+
+Persistent identity assertion replay protection is implemented as a production-auth internal component. The core uses the existing canonical serializer, a domain-separated replay key, and a dedicated SQLAlchemy table with a unique primary key. It is not wired into request runtime architecture, app factory, KernelContainer, middleware, API routes, SDKs, or CLI commands.

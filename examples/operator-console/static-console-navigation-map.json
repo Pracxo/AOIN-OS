@@ -203,6 +203,9 @@
     "./scripts/production-auth-offline-identity-assertion-runtime-hold.sh",
     "./scripts/v02-identity-assertion-replay-protection-authorization-no-go-regression.sh",
     "./scripts/v02-identity-assertion-replay-protection-authorization-check.sh",
+    "./scripts/production-auth-identity-assertion-replay-no-go-regression.sh",
+    "./scripts/production-auth-identity-assertion-replay-check.sh",
+    "./scripts/production-auth-identity-assertion-replay-runtime-hold.sh",
     "./scripts/docs-check.sh"
   ],
   "forbidden_surface": {
