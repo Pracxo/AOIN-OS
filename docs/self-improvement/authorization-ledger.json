@@ -1,0 +1,108 @@
+{
+  "program_id": "AION-SELF-IMPROVEMENT-001",
+  "synthetic": true,
+  "read_only": true,
+  "records": [
+    {
+      "record_kind": "authorization_closeout",
+      "task_id": "AION-165",
+      "authorization_transaction_id": "AION-163-PA-0007",
+      "authorization_active": false,
+      "authorization_consumed": true,
+      "authorization_consumed_by_task": "AION-164",
+      "authorization_consumed_by_pr": 75,
+      "authorization_consumed_by_feature_commits": [
+        "3ff9145b3102340bad44054df532865b35132d7c",
+        "5593574380c0daa401ee4e7bfb5a431cfaa44adc"
+      ],
+      "authorization_consumed_by_merge_commit": "8b2938a8995a9109b677f240d82da3b4bdc5d73c",
+      "authorization_expired": true,
+      "authorization_reusable": false
+    },
+    {
+      "record_kind": "authorization_transaction",
+      "task_id": "AION-165",
+      "authorization_transaction_id": "AION-165-SI-0001",
+      "approval_record_id": "AION-165-SI-0001",
+      "parent_authorization_transaction_id": "AION-163-PA-0007",
+      "candidate_id": "self-improvement-governance-plane",
+      "workstream": "governed-self-improvement-control-plane",
+      "implementation_task": "AION-166",
+      "authorization_scope": "governed-self-improvement-control-plane",
+      "authorization_active": true,
+      "authorization_consumed": false,
+      "authorization_expired": false,
+      "authorization_reusable": false,
+      "self_improvement_runtime_enabled": false,
+      "self_rewrite_runtime_enabled": false,
+      "automatic_merge_enabled": false,
+      "automatic_production_deployment_enabled": false,
+      "human_approval_required": true,
+      "exact_commit_approval_required": true,
+      "exact_diff_hash_approval_required": true,
+      "no_self_approval": true,
+      "protected_core_dual_approval_required": true,
+      "rollback_plan_required": true,
+      "benchmark_evidence_required": true,
+      "hidden_holdout_required": true,
+      "protected_paths": [
+        ".github/workflows/",
+        "scripts/*approval*",
+        "scripts/*no-go*",
+        "scripts/*release*",
+        "scripts/lib/*authorization*",
+        "services/brain-api/src/aion_brain/policy/",
+        "services/brain-api/src/aion_brain/audit/",
+        "services/brain-api/src/aion_brain/self_improvement/approval*",
+        "services/brain-api/src/aion_brain/self_improvement/protected*",
+        "docs/self-improvement/holdout/",
+        "docs/self-improvement/policy/"
+      ],
+      "protected_core_change_requirements": [
+        "separate proposal",
+        "dual approval",
+        "security review",
+        "full CI",
+        "holdout validation",
+        "no simultaneous benchmark weakening"
+      ],
+      "risk_levels": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "change_budget_dimensions": [
+        "maximum files",
+        "maximum insertions",
+        "maximum deletions",
+        "maximum dependency changes",
+        "maximum protected paths",
+        "maximum benchmark cost",
+        "maximum canary exposure"
+      ],
+      "approved_scope": [
+        "governance contracts",
+        "lifecycle validation",
+        "protected-core boundaries",
+        "approval binding model",
+        "change budget model",
+        "risk classification",
+        "rollback requirements",
+        "benchmark evidence requirements"
+      ],
+      "prohibited_scope": [
+        "source rewriting",
+        "Git mutation",
+        "pull request creation by AION",
+        "automatic approval",
+        "automatic merge",
+        "production deployment",
+        "production canary activation",
+        "model-weight training",
+        "v0.2 tag or release",
+        "aion-v0.1.0 modification"
+      ]
+    }
+  ]
+}
