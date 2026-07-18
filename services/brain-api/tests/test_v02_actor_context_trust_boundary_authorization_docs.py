@@ -97,6 +97,17 @@ AION162_ALLOWED_CHANGED_PATHS = {
     "services/brain-api/src/aion_brain/production_auth/trusted_public_keys.py",
 }
 
+AION164_ALLOWED_CHANGED_PATHS = {
+    "services/brain-api/src/aion_brain/contracts/identity_assertion_replay.py",
+    "services/brain-api/src/aion_brain/production_auth/__init__.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_pipeline.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_replay.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_replay_evidence.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_replay_repository.py",
+    "services/brain-api/src/aion_brain/production_auth/identity_assertion_replay_service.py",
+    "services/brain-api/tests/test_identity_assertion_replay_no_dependency_or_migration.py",
+}
+
 
 def test_aion159_required_files_exist_and_status_is_current() -> None:
     for relative in DOCS + JSON_ARTIFACTS + SCRIPTS:
@@ -413,6 +424,7 @@ def test_aion159_does_not_change_protected_sources_or_add_release_artifacts() ->
             (path == forbidden or path.startswith(f"{forbidden}/"))
             and path not in AION160_REMEDIATION_PATHS
             and path not in AION162_ALLOWED_CHANGED_PATHS
+            and path not in AION164_ALLOWED_CHANGED_PATHS
             for path in changed
         )
     assert not any(path.endswith("package.json") for path in changed)
@@ -420,7 +432,10 @@ def test_aion159_does_not_change_protected_sources_or_add_release_artifacts() ->
     assert not any(path.endswith("pnpm-lock.yaml") for path in changed)
     assert not any(path.endswith("yarn.lock") for path in changed)
     assert not any(path.endswith("bun.lockb") for path in changed)
-    assert not any("migration" in Path(path).name.lower() for path in changed)
+    assert not any(
+        "migration" in Path(path).name.lower() and path not in AION164_ALLOWED_CHANGED_PATHS
+        for path in changed
+    )
     assert not any(path.startswith("migrations/") for path in changed)
 
 

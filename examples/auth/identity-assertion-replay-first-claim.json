@@ -1,0 +1,23 @@
+{
+  "artifact": "identity-assertion-replay-first-claim",
+  "synthetic": true,
+  "read_only": true,
+  "authorization_transaction_id": "AION-163-PA-0007",
+  "implementation_task": "AION-164",
+  "authorization_scope": "persistent-identity-assertion-replay-protection-core",
+  "outcome": "claimed",
+  "claim_created": true,
+  "replay_detected": false,
+  "identifier_collision": false,
+  "replay_protection_passed": true,
+  "fail_closed": false,
+  "replay_key": "1111111111111111111111111111111111111111111111111111111111111111",
+  "issuer_fingerprint": "2222222222222222222222222222222222222222222222222222222222222222",
+  "assertion_fingerprint": "3333333333333333333333333333333333333333333333333333333333333333",
+  "request_authenticated": false,
+  "actor_context_applied": false,
+  "request_identity_context_applied": false,
+  "runtime_effect": false,
+  "runtime_integration_allowed": false,
+  "redacted": true
+}

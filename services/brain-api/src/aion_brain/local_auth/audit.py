@@ -172,6 +172,7 @@ class LocalAuthAuditService:
             "offline-identity-assertion-provenance-record.json",
             "offline-identity-assertion-rejection-result.json",
             "offline-identity-assertion-verification-result.json",
+            "offline-identity-assertion-pipeline-result.json",
             "offline-identity-public-key-registry-status.json",
         }
         for path in sorted((self._repo_root / "examples/auth").glob("*.json")):
@@ -192,6 +193,8 @@ class LocalAuthAuditService:
                 or "mock-claims" in path.name
                 or path.name.startswith("request-identity-")
                 or path.name.startswith("actor-context-")
+                or path.name.startswith("identity-assertion-replay-")
+                or path.name == "identity-assertion-identifier-collision.json"
             ):
                 continue
             try:

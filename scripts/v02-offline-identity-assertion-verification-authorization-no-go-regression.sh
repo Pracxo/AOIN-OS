@@ -64,6 +64,9 @@ changed_files > "$changed_file_list"
 
 while IFS= read -r file; do
   [[ -n "$file" ]] || continue
+  if aion164_is_scoped_identity_assertion_replay_protection_path "$file"; then
+    continue
+  fi
   case "$file" in
     services/brain-api/pyproject.toml)
       if aion162_is_scoped_offline_identity_assertion_verification_path "$file"; then

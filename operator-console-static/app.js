@@ -179,6 +179,9 @@
     "./scripts/production-auth-offline-identity-assertion-runtime-hold.sh",
     "./scripts/v02-identity-assertion-replay-protection-authorization-check.sh",
     "./scripts/v02-identity-assertion-replay-protection-authorization-no-go-regression.sh",
+    "./scripts/production-auth-identity-assertion-replay-no-go-regression.sh",
+    "./scripts/production-auth-identity-assertion-replay-check.sh",
+    "./scripts/production-auth-identity-assertion-replay-runtime-hold.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -317,7 +320,9 @@
     offline_identity_assertion_verification_authorization: "demo-data/v02-offline-identity-assertion-verification-authorization.json",
     offline_identity_assertion_verification: "demo-data/offline-identity-assertion-verification.json",
     offline_identity_assertion_runtime_hold: "demo-data/offline-identity-assertion-runtime-hold.json",
-    identity_assertion_replay_protection_authorization: "demo-data/v02-identity-assertion-replay-protection-authorization.json"
+    identity_assertion_replay_protection_authorization: "demo-data/v02-identity-assertion-replay-protection-authorization.json",
+    identity_assertion_replay_protection: "demo-data/identity-assertion-replay-protection.json",
+    identity_assertion_replay_runtime_hold: "demo-data/identity-assertion-replay-runtime-hold.json"
   };
   var LOCAL_AUTH_DEMOS = {
     status: "demo-data/local-auth-status.json",
@@ -1861,7 +1866,9 @@
       fetchJson(RELEASE_CANDIDATE_DEMOS.offline_identity_assertion_verification_authorization),
       fetchJson(RELEASE_CANDIDATE_DEMOS.offline_identity_assertion_verification),
       fetchJson(RELEASE_CANDIDATE_DEMOS.offline_identity_assertion_runtime_hold),
-      fetchJson(RELEASE_CANDIDATE_DEMOS.identity_assertion_replay_protection_authorization)
+      fetchJson(RELEASE_CANDIDATE_DEMOS.identity_assertion_replay_protection_authorization),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.identity_assertion_replay_protection),
+      fetchJson(RELEASE_CANDIDATE_DEMOS.identity_assertion_replay_runtime_hold)
     ])
       .then(function (payloads) {
         renderReleaseCandidateEvidence("post-v01-release-candidate", redact(payloads[0]));
@@ -1947,6 +1954,8 @@
         renderReleaseCandidateEvidence("offline-identity-assertion-verification", redact(payloads[80]));
         renderReleaseCandidateEvidence("offline-identity-assertion-runtime-hold", redact(payloads[81]));
         renderReleaseCandidateEvidence("v02-identity-assertion-replay-protection-authorization", redact(payloads[82]));
+        renderReleaseCandidateEvidence("identity-assertion-replay-protection", redact(payloads[83]));
+        renderReleaseCandidateEvidence("identity-assertion-replay-runtime-hold", redact(payloads[84]));
       })
       .catch(function () {
         renderReleaseCandidateEvidence("post-v01-release-candidate", { status: "unavailable" });
@@ -2032,6 +2041,8 @@
         renderReleaseCandidateEvidence("offline-identity-assertion-verification", { status: "unavailable" });
         renderReleaseCandidateEvidence("offline-identity-assertion-runtime-hold", { status: "unavailable" });
         renderReleaseCandidateEvidence("v02-identity-assertion-replay-protection-authorization", { status: "unavailable" });
+        renderReleaseCandidateEvidence("identity-assertion-replay-protection", { status: "unavailable" });
+        renderReleaseCandidateEvidence("identity-assertion-replay-runtime-hold", { status: "unavailable" });
       });
   }
 
@@ -2091,6 +2102,13 @@
       ["implementation_authorization_approved", String(Boolean(payload.implementation_authorization_approved))],
       ["runtime_guard_hold_active", String(Boolean(payload.runtime_guard_hold_active))],
       ["runtime_no_go_status", String(Boolean(payload.runtime_no_go_status))],
+      ["identity_assertion_replay_protection_implemented", String(Boolean(payload.identity_assertion_replay_protection_implemented))],
+      ["persistent_replay_ledger_available", String(Boolean(payload.persistent_replay_ledger_available))],
+      ["atomic_unique_insert_enabled", String(Boolean(payload.atomic_unique_insert_enabled))],
+      ["domain_separated_replay_key_enabled", String(Boolean(payload.domain_separated_replay_key_enabled))],
+      ["identifier_collision_detection_enabled", String(Boolean(payload.identifier_collision_detection_enabled))],
+      ["replay_protection_core_runtime_enabled", String(Boolean(payload.replay_protection_core_runtime_enabled))],
+      ["replay_repository_runtime_registered", String(Boolean(payload.replay_repository_runtime_registered))],
       ["production_auth_runtime_enabled", String(Boolean(payload.production_auth_runtime_enabled))],
       ["implementation_authorization_stabilization_approval", String(Boolean(payload.implementation_authorization_stabilization_approval))],
       ["implementation_authorization_final_review_approval", String(Boolean(payload.implementation_authorization_final_review_approval))],

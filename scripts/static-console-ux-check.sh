@@ -319,6 +319,9 @@ allowed = {
     "./scripts/production-auth-offline-identity-assertion-runtime-hold.sh",
     "./scripts/v02-identity-assertion-replay-protection-authorization-no-go-regression.sh",
     "./scripts/v02-identity-assertion-replay-protection-authorization-check.sh",
+    "./scripts/production-auth-identity-assertion-replay-no-go-regression.sh",
+    "./scripts/production-auth-identity-assertion-replay-check.sh",
+    "./scripts/production-auth-identity-assertion-replay-runtime-hold.sh",
     "./scripts/docs-check.sh",
 }
 listed = set(nav.get("safe_copy_commands", []))
@@ -372,6 +375,9 @@ for safe_command in (
     "./scripts/production-auth-offline-identity-assertion-runtime-hold.sh",
     "./scripts/v02-identity-assertion-replay-protection-authorization-no-go-regression.sh",
     "./scripts/v02-identity-assertion-replay-protection-authorization-check.sh",
+    "./scripts/production-auth-identity-assertion-replay-no-go-regression.sh",
+    "./scripts/production-auth-identity-assertion-replay-check.sh",
+    "./scripts/production-auth-identity-assertion-replay-runtime-hold.sh",
 ):
     serialized_for_sensitive_scan = serialized_for_sensitive_scan.replace(safe_command, "")
 blocked_markers = (

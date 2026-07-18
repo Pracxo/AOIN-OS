@@ -190,6 +190,9 @@ def test_navigation_map_and_accessibility_result_are_valid() -> None:
         "./scripts/production-auth-offline-identity-assertion-runtime-hold.sh",
         "./scripts/v02-identity-assertion-replay-protection-authorization-no-go-regression.sh",
         "./scripts/v02-identity-assertion-replay-protection-authorization-check.sh",
+        "./scripts/production-auth-identity-assertion-replay-no-go-regression.sh",
+        "./scripts/production-auth-identity-assertion-replay-check.sh",
+        "./scripts/production-auth-identity-assertion-replay-runtime-hold.sh",
         "./scripts/docs-check.sh",
     }
     assert set(nav["safe_copy_commands"]) == allowed_commands
@@ -363,6 +366,9 @@ def test_static_console_has_navigation_accessibility_and_safe_command_copy() -> 
         "./scripts/production-auth-offline-identity-assertion-runtime-hold.sh",
         "./scripts/v02-identity-assertion-replay-protection-authorization-no-go-regression.sh",
         "./scripts/v02-identity-assertion-replay-protection-authorization-check.sh",
+        "./scripts/production-auth-identity-assertion-replay-no-go-regression.sh",
+        "./scripts/production-auth-identity-assertion-replay-check.sh",
+        "./scripts/production-auth-identity-assertion-replay-runtime-hold.sh",
         "./scripts/docs-check.sh",
     }
 

@@ -152,7 +152,9 @@ if changed_files services/brain-api/src/aion_brain/api packages/aion-sdk-python/
   exit 1
 fi
 
-if changed_files | rg -n '(^|/)(migrations|alembic)/|(^|/).*migration.*\.(py|sql)$'; then
+if changed_files \
+  | rg -v '^services/brain-api/tests/test_identity_assertion_replay_no_dependency_or_migration\.py$' \
+  | rg -n '(^|/)(migrations|alembic)/|(^|/).*migration.*\.(py|sql)$'; then
   echo "AION-153 must not add or change migrations" >&2
   exit 1
 fi

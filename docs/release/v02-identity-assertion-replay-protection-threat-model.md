@@ -26,3 +26,6 @@
 - runtime in-memory store substitution
 - request integration before formal authorization
 - replay success misrepresented as request authentication
+## AION-164 Implementation Note
+
+AION-164 covers duplicate replay, identifier collision, missing schema, repository failure, cleanup failure, and expired assertion paths with fail-closed evidence.

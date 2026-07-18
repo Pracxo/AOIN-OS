@@ -43,7 +43,7 @@ config_diff() {
 }
 
 filter_aion162_identity_assertion_scan_paths() {
-  rg -v '^(services/brain-api/src/aion_brain/contracts/identity_assertion\.py|services/brain-api/src/aion_brain/production_auth/(identity_assertion|identity_assertion_evidence|identity_assertion_verifier|trusted_public_keys|__init__)\.py):'
+  rg -v '^(services/brain-api/src/aion_brain/contracts/(identity_assertion|identity_assertion_replay)\.py|services/brain-api/src/aion_brain/production_auth/(identity_assertion|identity_assertion_evidence|identity_assertion_verifier|identity_assertion_pipeline|identity_assertion_replay|identity_assertion_replay_evidence|identity_assertion_replay_repository|identity_assertion_replay_service|trusted_public_keys|__init__)\.py):'
 }
 
 release_docs=(

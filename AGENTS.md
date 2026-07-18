@@ -1069,3 +1069,6 @@ to AION-163.
 
 
 - AION-163 replay protection authorization work is governance-only. It may add closeout docs, replay-protection authorization records, examples, static console evidence, scripts, and tests, but it must not add replay implementation source, modify production-auth source, modify pyproject, add migrations, register runtime services, parse HTTP identity assertions, authenticate requests, apply ActorContext or RequestIdentityContext, add package or lock files, or create v0.2 tags or releases.
+## AION-164 Replay Boundary
+
+AION-164 implements only the persistent identity assertion replay-protection core authorized by AION-163-PA-0007. Keep replay code internal and unregistered unless a later authorization explicitly opens request-auth runtime integration. Do not add routes, middleware, config flags, SDK/CLI commands, provider calls, packages, lockfiles, migrations, tags, or releases for this lane.

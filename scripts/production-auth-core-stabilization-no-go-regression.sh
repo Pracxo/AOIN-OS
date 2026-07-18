@@ -67,6 +67,9 @@ test ! -e services/brain-api/src/aion_brain/api/production_auth.py || {
 
 while IFS= read -r file; do
   [[ -n "$file" ]] || continue
+  if aion164_is_scoped_identity_assertion_replay_protection_path "$file"; then
+    continue
+  fi
   case "$file" in
     package.json|package-lock.json|pnpm-lock.yaml|yarn.lock|bun.lockb|\
     */package.json|*/package-lock.json|*/pnpm-lock.yaml|*/yarn.lock|*/bun.lockb)

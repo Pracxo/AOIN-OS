@@ -1,0 +1,16 @@
+{
+  "artifact": "identity-assertion-replay-audit-event",
+  "synthetic": true,
+  "read_only": true,
+  "event_type": "identity_assertion_replay_claim_succeeded",
+  "replay_protection_id": "replay-protection-synthetic",
+  "replay_key": "1111111111111111111111111111111111111111111111111111111111111111",
+  "issuer_fingerprint": "2222222222222222222222222222222222222222222222222222222222222222",
+  "assertion_fingerprint": "3333333333333333333333333333333333333333333333333333333333333333",
+  "outcome": "claimed",
+  "claim_created": true,
+  "replay_detected": false,
+  "identifier_collision": false,
+  "runtime_effect": false,
+  "redacted": true
+}

@@ -1,0 +1,22 @@
+{
+  "artifact": "identity-assertion-replay-repository-failure",
+  "synthetic": true,
+  "read_only": true,
+  "authorization_transaction_id": "AION-163-PA-0007",
+  "implementation_task": "AION-164",
+  "outcome": "repository_unavailable",
+  "claim_created": false,
+  "replay_detected": false,
+  "identifier_collision": false,
+  "repository_available": false,
+  "schema_available": false,
+  "replay_protection_passed": false,
+  "fail_closed": true,
+  "primary_reason_code": "identity_assertion_replay_repository_unavailable",
+  "request_authenticated": false,
+  "actor_context_applied": false,
+  "request_identity_context_applied": false,
+  "runtime_effect": false,
+  "runtime_integration_allowed": false,
+  "redacted": true
+}

@@ -65,6 +65,9 @@ changed_files > "$changed_file_list"
 
 while IFS= read -r file; do
   [[ -n "$file" ]] || continue
+  if aion164_is_scoped_identity_assertion_replay_protection_path "$file"; then
+    continue
+  fi
   case "$file" in
     package.json|package-lock.json|pnpm-lock.yaml|yarn.lock|bun.lockb|\
     */package.json|*/package-lock.json|*/pnpm-lock.yaml|*/yarn.lock|*/bun.lockb)
@@ -88,6 +91,9 @@ while IFS= read -r file; do
       if aion162_is_scoped_offline_identity_assertion_verification_path "$file"; then
         continue
       fi
+      if aion164_is_scoped_identity_assertion_replay_protection_path "$file"; then
+        continue
+      fi
       echo "implementation source changes are forbidden for AION-157: $file" >&2
       exit 1
       ;;
@@ -95,7 +101,8 @@ while IFS= read -r file; do
 
   if [[ -f "$file" ]] \
     && ! aion157_is_scoped_request_identity_stabilization_path "$file" \
-    && ! aion158_is_scoped_request_identity_stabilization_path "$file"; then
+    && ! aion158_is_scoped_request_identity_stabilization_path "$file" \
+    && ! aion164_is_scoped_identity_assertion_replay_protection_path "$file"; then
     printf '%s\n' "$file" >> "$scan_file_list"
   fi
 done < "$changed_file_list"
