@@ -42,6 +42,71 @@
     {
       "task_id": "AION-165",
       "branch": "phase/self-improvement-governance-authorization",
+      "feature_commits": [
+        "f7052fb33d6cf8cd894e1d4a01f572f536a2c76a"
+      ],
+      "pull_requests": [
+        76
+      ],
+      "merge_commits": [
+        "a40ea4c9f76a969cac291c33f0c3ef94aa078d6b"
+      ],
+      "ci_result": "pass",
+      "corrective_prs": [],
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "./scripts/self-improvement-governance-no-go-regression.sh pass",
+        "./scripts/self-improvement-governance-authorization-check.sh pass",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_governance_authorization_docs.py -q: 7 passed"
+      ],
+      "authorization_transaction": "AION-165-SI-0001",
+      "authorization_state": "consumed_by_AION-166_closed_by_AION-167",
+      "next_task": "AION-166",
+      "runtime_state": "authorization_only_no_self_rewrite_implementation",
+      "completion_timestamp": "2026-07-18T15:43:02Z"
+    },
+    {
+      "task_id": "AION-166",
+      "branch": "phase/self-improvement-governance-plane",
+      "feature_commits": [
+        "fae49a3f913b7a3d4d18ad4e7f989ed2aca5de91"
+      ],
+      "pull_requests": [
+        77
+      ],
+      "merge_commits": [
+        "9a7105e31b8f6e56faf53bfb56e11eed75a01203"
+      ],
+      "ci_result": "pass",
+      "corrective_prs": [],
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_governance_plane.py -q: 13 passed",
+        "services/brain-api/.venv/bin/python -m ruff check services/brain-api/src/aion_brain/contracts/self_improvement.py services/brain-api/src/aion_brain/self_improvement services/brain-api/tests/test_self_improvement_governance_plane.py pass",
+        "services/brain-api/.venv/bin/python -m mypy services/brain-api/src/aion_brain/contracts/self_improvement.py services/brain-api/src/aion_brain/self_improvement services/brain-api/tests/test_self_improvement_governance_plane.py pass",
+        "./scripts/check.sh pass"
+      ],
+      "authorization_transaction": "AION-165-SI-0001",
+      "authorization_state": "consumed_by_AION-166_closed_by_AION-167",
+      "next_task": "AION-167",
+      "runtime_state": "governance_plane_implemented_no_self_rewrite_runtime",
+      "completion_timestamp": "2026-07-18T18:39:28Z"
+    },
+    {
+      "task_id": "AION-167",
+      "branch": "phase/self-improvement-evaluation-authorization",
       "feature_commits": [],
       "pull_requests": [],
       "merge_commits": [],
@@ -50,12 +115,14 @@
       "tests": [
         "./scripts/self-improvement-governance-no-go-regression.sh",
         "./scripts/self-improvement-governance-authorization-check.sh",
-        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_governance_authorization_docs.py -q"
+        "./scripts/self-improvement-evaluation-no-go-regression.sh",
+        "./scripts/self-improvement-evaluation-authorization-check.sh",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_governance_authorization_docs.py services/brain-api/tests/test_self_improvement_evaluation_authorization_docs.py -q"
       ],
-      "authorization_transaction": "AION-165-SI-0001",
-      "authorization_state": "active_until_AION-166_merge",
-      "next_task": "AION-166",
-      "runtime_state": "authorization_only_no_self_rewrite_implementation",
+      "authorization_transaction": "AION-167-SI-0002",
+      "authorization_state": "active_until_AION-168_merge",
+      "next_task": "AION-168",
+      "runtime_state": "authorization_only_no_evaluation_runtime_implementation",
       "completion_timestamp": null
     }
   ]
