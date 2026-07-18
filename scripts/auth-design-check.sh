@@ -1064,8 +1064,10 @@ aion164_auth_paths = {
 
 aion165_auth_paths = {
     "docs/adr/0156-governed-self-improvement-control-plane.md",
+    "docs/adr/0157-self-improvement-evaluation-authorization.md",
     "docs/adr/README.md",
     "docs/self-improvement/governance-charter.md",
+    "docs/self-improvement/evaluation-authorization.md",
     "docs/self-improvement/protected-core-boundary.md",
     "docs/self-improvement/approval-model.md",
     "docs/self-improvement/change-budget-model.md",
@@ -1077,7 +1079,10 @@ aion165_auth_paths = {
     "scripts/lib/v02-production-auth-scan-exclusions.sh",
     "scripts/self-improvement-governance-authorization-check.sh",
     "scripts/self-improvement-governance-no-go-regression.sh",
+    "scripts/self-improvement-evaluation-authorization-check.sh",
+    "scripts/self-improvement-evaluation-no-go-regression.sh",
     "services/brain-api/tests/test_self_improvement_governance_authorization_docs.py",
+    "services/brain-api/tests/test_self_improvement_evaluation_authorization_docs.py",
 }
 
 blocked_package_names = {

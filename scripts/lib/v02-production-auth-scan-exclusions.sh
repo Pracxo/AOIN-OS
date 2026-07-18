@@ -459,13 +459,15 @@ aion164_is_scoped_identity_assertion_replay_protection_path() {
 }
 
 aion165_is_scoped_self_improvement_governance_authorization_path() {
-  # Exact AION-165 self-improvement governance authorization paths. These are
+  # Exact self-improvement authorization document and guard paths. These are
   # not production-auth runtime artifacts and must not suppress package,
   # migration, API, SDK/CLI, or production-auth source checks.
   case "$1" in
     docs/adr/0156-governed-self-improvement-control-plane.md|\
+    docs/adr/0157-self-improvement-evaluation-authorization.md|\
     docs/adr/README.md|\
     docs/self-improvement/governance-charter.md|\
+    docs/self-improvement/evaluation-authorization.md|\
     docs/self-improvement/protected-core-boundary.md|\
     docs/self-improvement/approval-model.md|\
     docs/self-improvement/change-budget-model.md|\
@@ -477,7 +479,10 @@ aion165_is_scoped_self_improvement_governance_authorization_path() {
     scripts/lib/v02-production-auth-scan-exclusions.sh|\
     scripts/self-improvement-governance-authorization-check.sh|\
     scripts/self-improvement-governance-no-go-regression.sh|\
-    services/brain-api/tests/test_self_improvement_governance_authorization_docs.py)
+    scripts/self-improvement-evaluation-authorization-check.sh|\
+    scripts/self-improvement-evaluation-no-go-regression.sh|\
+    services/brain-api/tests/test_self_improvement_governance_authorization_docs.py|\
+    services/brain-api/tests/test_self_improvement_evaluation_authorization_docs.py)
       return 0
       ;;
     *)

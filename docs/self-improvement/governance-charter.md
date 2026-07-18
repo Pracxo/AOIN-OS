@@ -44,3 +44,9 @@ AION must never approve its own source changes, push directly to `main`, bypass 
 ## Required Evidence
 
 Every future self-improvement proposal must carry immutable evidence references, a lifecycle state, a bounded risk assessment, a change budget decision, exact approval bindings when approval is requested, a rollback plan when required by risk, and benchmark evidence that cannot be weakened by the same candidate patch.
+
+## AION-167 Evaluation Authorization Update
+
+AION-166 consumed `AION-165-SI-0001` through PR 77 and merge commit `9a7105e31b8f6e56faf53bfb56e11eed75a01203`. AION-167 creates `AION-167-SI-0002` as the single active authorization for AION-168 immutable evaluation-plane work.
+
+AION-167 preserves the same human-approval and protected-core controls while keeping source rewriting, pull request creation, automatic approval, production deployment, benchmark mutation by candidate code, holdout disclosure to patch generators, and model-weight training disabled.
