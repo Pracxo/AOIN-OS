@@ -202,6 +202,7 @@ allowed_authorization_demo_names = {
     "v02-production-auth-request-identity-stabilization-authorization.json",
     "v02-actor-context-trust-boundary-authorization.json",
     "v02-offline-identity-assertion-verification-authorization.json",
+    "v02-identity-assertion-replay-protection-authorization.json",
     "production-auth-core-status.json",
     "production-auth-runtime-hold.json",
     "production-auth-core-stabilization.json",
@@ -238,7 +239,11 @@ def walk(value: object, path: Path) -> None:
                 continue
             if (
                 marker == "private_key"
-                and path.name == "v02-offline-identity-assertion-verification-authorization.json"
+                and path.name
+                in {
+                    "v02-offline-identity-assertion-verification-authorization.json",
+                    "v02-identity-assertion-replay-protection-authorization.json",
+                }
                 and lowered in aion161_allowed_policy_markers
             ):
                 continue

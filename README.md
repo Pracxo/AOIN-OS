@@ -5059,3 +5059,8 @@ HTTP parsing, middleware registration, runtime signing material, provider
 networking, replay caches, endpoints, OpenAPI security, SDK/CLI runtime
 surfaces, package manifests, lockfiles, migrations, v0.2 tags, and v0.2
 releases remain absent or disabled.
+
+
+## v0.2 Identity Assertion Replay Protection Authorization
+
+AION-163 closes `AION-161-PA-0006` as consumed by AION-162 PR #72 and corrective PR #73, then creates `AION-163-PA-0007` as the sole active authorization for AION-164 persistent identity-assertion replay protection. This is governance-only: no replay implementation source, dependency manifest, migration, route, SDK/CLI runtime surface, package file, lockfile, v0.2 tag, or v0.2 release is added.

@@ -1138,3 +1138,15 @@ Safe local commands:
 ./scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh
 ./scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh
 ```
+
+
+## v0.2 identity assertion replay protection authorization
+
+The static console reads `demo-data/v02-identity-assertion-replay-protection-authorization.json` as synthetic, read-only evidence. It shows `AION-163-PA-0007` as the only active authorization for AION-164 while keeping request authentication, middleware integration, ActorContext and RequestIdentityContext application, dependency changes, migrations, production schema auto-create, package files, lockfiles, v0.2 tags, and v0.2 releases disabled or absent.
+
+Local checks:
+
+```sh
+./scripts/v02-identity-assertion-replay-protection-authorization-no-go-regression.sh
+./scripts/v02-identity-assertion-replay-protection-authorization-check.sh
+```

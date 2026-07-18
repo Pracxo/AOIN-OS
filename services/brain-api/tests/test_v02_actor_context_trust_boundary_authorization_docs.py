@@ -26,6 +26,7 @@ from v02_production_auth_authorization import (  # noqa: E402
     AION157_AUTHORIZATION,
     AION159_AUTHORIZATION,
     AION161_AUTHORIZATION,
+    AION163_AUTHORIZATION,
     APPROVAL_TRUE_KEYS,
     REQUEST_IDENTITY_STABILIZATION_TRUE_KEYS,
     validate_authorization_lifecycle_payloads,
@@ -100,20 +101,22 @@ AION162_ALLOWED_CHANGED_PATHS = {
 def test_aion159_required_files_exist_and_status_is_current() -> None:
     for relative in DOCS + JSON_ARTIFACTS + SCRIPTS:
         assert (ROOT / relative).exists(), relative
-    assert "0150-v02-actor-context-trust-boundary-authorization.md" in _text(
-        "docs/adr/README.md"
-    )
+    assert "0150-v02-actor-context-trust-boundary-authorization.md" in _text("docs/adr/README.md")
 
     status = _text("docs/project-status.md")
     assert (
         "Current milestone: AION-158 request-identity stabilization merged." in status
         or "Current milestone: AION-160 actor-context trust-boundary remediation implemented."
         in status
-        or "Current milestone: AION-160 actor-context trust-boundary remediation merged."
-        in status
+        or "Current milestone: AION-160 actor-context trust-boundary remediation merged." in status
         or (
             "Current milestone: AION-162 offline Ed25519 identity assertion verification "
             "core implemented."
+        )
+        in status
+        or (
+            "Current milestone: AION-162 offline Ed25519 identity assertion verification "
+            "core implemented and post-merge verification corrected."
         )
         in status
     )
@@ -124,6 +127,8 @@ def test_aion159_required_files_exist_and_status_is_current() -> None:
             "Current authorization: AION-159-PA-0005 consumed by AION-160 when merged.",
             "Current authorization: AION-161-PA-0006 active for AION-162.",
             "Current authorization: AION-161-PA-0006 consumed by AION-162 when merged.",
+            "Current authorization: AION-163-PA-0007 active for AION-164.",
+            "AION-161-PA-0006 consumed by AION-162 when merged.",
         )
     )
     assert (
@@ -131,6 +136,7 @@ def test_aion159_required_files_exist_and_status_is_current() -> None:
         or "Formal lifecycle closeout: AION-161." in status
         or "Next task: AION-162 offline identity assertion verification core." in status
         or "Formal lifecycle closeout: AION-163." in status
+        or "AION-164 is the next implementation task" in status
     )
 
     readiness = _text("docs/release/v02-release-readiness-delta.md")
@@ -140,6 +146,8 @@ def test_aion159_required_files_exist_and_status_is_current() -> None:
         "`AION-160` is the next critical path" in readiness
         or "AION-160 remediates the actor-context trust boundary" in readiness
         or "`AION-162` is the next critical path" in readiness
+        or "`AION-163` is the next critical path" in readiness
+        or "The next critical path is AION-164." in readiness
     )
     assert "`v02_release_ready=false`" in readiness
     assert "`v02_tag_created=false`" in readiness
@@ -198,7 +206,7 @@ def test_aion159_json_is_valid_synthetic_read_only_and_exactly_scoped() -> None:
         assert payload["expiry"] == AION159_AUTHORIZATION.expiry
 
 
-def test_aion157_and_aion159_are_historical_and_aion161_is_only_active_record() -> None:
+def test_aion157_and_aion159_are_historical_and_aion163_is_only_active_record() -> None:
     validate_authorization_lifecycle_payloads(_canonical_records())
     aion157 = _payload_from_spec(AION157_AUTHORIZATION)
     assert aion157["authorization_active"] is False
@@ -221,9 +229,15 @@ def test_aion157_and_aion159_are_historical_and_aion161_is_only_active_record() 
     assert aion159["authorization_expired"] is True
     assert aion159["authorization_reusable"] is False
     aion161 = _payload_from_spec(AION161_AUTHORIZATION)
-    assert aion161["authorization_active"] is True
-    assert aion161["authorization_consumed"] is False
-    assert aion161["authorization_expired"] is False
+    assert aion161["authorization_active"] is False
+    assert aion161["authorization_consumed"] is True
+    assert aion161["authorization_expired"] is True
+    assert aion161["authorization_reusable"] is False
+    aion163 = _payload_from_spec(AION163_AUTHORIZATION)
+    assert aion163["authorization_active"] is True
+    assert aion163["authorization_consumed"] is False
+    assert aion163["authorization_expired"] is False
+    assert aion163["authorization_reusable"] is False
 
 
 def test_aion159_trust_boundary_finding_is_documented_from_source() -> None:
@@ -231,10 +245,8 @@ def test_aion159_trust_boundary_finding_is_documented_from_source() -> None:
     docs = _text("docs/release/v02-actor-context-trust-boundary-authorization-transaction.md")
     remediated = _text("docs/release/v02-actor-context-trust-boundary-remediation.md")
     assert (
-        'dev_enabled = settings.env == "development" and settings.dev_auth_enabled'
-        in source
-        or 'return settings.env == "development" and settings.dev_auth_enabled is True'
-        in source
+        'dev_enabled = settings.env == "development" and settings.dev_auth_enabled' in source
+        or 'return settings.env == "development" and settings.dev_auth_enabled is True' in source
     )
     for header in (
         "X-AION-Actor-ID",
@@ -315,7 +327,7 @@ def test_aion159_trust_boundary_finding_is_documented_from_source() -> None:
             "authorization_scope mismatch",
         ),
         (
-            lambda records: records[5][1].__setitem__(
+            lambda records: records[6][1].__setitem__(
                 "offline_identity_assertion_verifier_approved",
                 False,
             ),
@@ -450,6 +462,7 @@ def _canonical_records() -> list[tuple[str, dict[str, Any]]]:
         ("aion155.json", _payload_from_spec(AION155_AUTHORIZATION)),
         ("aion157.json", _payload_from_spec(AION157_AUTHORIZATION)),
         ("aion159.json", _payload_from_spec(AION159_AUTHORIZATION)),
+        ("aion163.json", _payload_from_spec(AION163_AUTHORIZATION)),
         ("aion161.json", _payload_from_spec(AION161_AUTHORIZATION)),
     ]
 
@@ -504,7 +517,7 @@ def _payload_from_spec(spec: Any) -> dict[str, Any]:
 
 
 def _unknown_active_payload() -> dict[str, Any]:
-    payload = _payload_from_spec(AION161_AUTHORIZATION)
+    payload = _payload_from_spec(AION163_AUTHORIZATION)
     payload["authorization_transaction_id"] = "AION-999-PA-9999"
     payload["approval_record_id"] = "AION-999-PA-9999"
     return payload

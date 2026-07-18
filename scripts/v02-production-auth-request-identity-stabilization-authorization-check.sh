@@ -12,6 +12,13 @@ AION156_MERGE_COMMIT="051f6f2e8b901863f8dc9cad405e5b5401db3695"
 PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 
+is_nested_gate_context() {
+  [[ -n "${PYTEST_CURRENT_TEST:-}" ]] && return 0
+  [[ "${AION_AGGREGATE_GATE_RUNNING:-}" == "1" ]] && return 0
+  [[ "${AION_CHECK_RUNNING:-}" == "1" ]] && return 0
+  return 1
+}
+
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
 }
@@ -186,14 +193,18 @@ test ! -e services/brain-api/src/aion_brain/api/request_identity.py || {
 }
 
 ./scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh
-./scripts/production-auth-request-identity-check.sh
-./scripts/production-auth-request-identity-no-go-regression.sh
-run_inherited_gate ./scripts/production-auth-core-stabilization-check.sh
-run_inherited_gate ./scripts/v02-production-auth-request-boundary-authorization-check.sh
-./scripts/docs-check.sh
-./scripts/final-docs-audit.sh
-./scripts/verify-no-domain-drift.sh
-./scripts/boundary-check.sh
+if is_nested_gate_context; then
+  echo "PASS: inherited repository gates deferred to outer gate"
+else
+  ./scripts/production-auth-request-identity-check.sh
+  ./scripts/production-auth-request-identity-no-go-regression.sh
+  run_inherited_gate ./scripts/production-auth-core-stabilization-check.sh
+  run_inherited_gate ./scripts/v02-production-auth-request-boundary-authorization-check.sh
+  ./scripts/docs-check.sh
+  ./scripts/final-docs-audit.sh
+  ./scripts/verify-no-domain-drift.sh
+  ./scripts/boundary-check.sh
+fi
 
 cat <<'SUMMARY'
 v0.2 production auth request identity stabilization authorization result:
@@ -202,7 +213,8 @@ v0.2 production auth request identity stabilization authorization result:
 - AION-155-PA-0003: historical, inactive, consumed by AION-156 PR 66, expired, non-reusable
 - AION-157-PA-0004: historical, consumed by AION-158 PR 68, expired, non-reusable
 - AION-159-PA-0005: historical, consumed by AION-160 PR 70, expired, non-reusable
-- AION-161-PA-0006: only active approved authorization
+- AION-161-PA-0006: historical, consumed by AION-162 PR 72 and corrective PR 73, expired, non-reusable
+- AION-163-PA-0007: only active approved authorization
 - candidate_id: production-auth-request-identity-boundary-stabilization
 - workstream: production-auth-request-integration-hardening
 - implementation_task: AION-158

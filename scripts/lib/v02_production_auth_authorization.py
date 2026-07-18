@@ -62,6 +62,11 @@ AION_158_FEATURE_COMMIT = "767fd9b228b00b04569df2e3b1b3f6bc9ecd846f"
 AION_158_MERGE_COMMIT = "f792c92e1d8a73ec8e7377b5d59269dea359006d"
 AION_160_FEATURE_COMMIT = "085b1b9d9cbbc23a735c1a82be66a2e901a56761"
 AION_160_MERGE_COMMIT = "bfc2afdc96358559027ee36efc0bc26ed3bb796d"
+AION_162_PRIMARY_FEATURE_COMMIT = "954bc096847699807b60847f6506ec740e69c971"
+AION_162_PRIMARY_MERGE_COMMIT = "33e8d7da6a57ad71aefc1dd20a3126050b3517ff"
+AION_162_CORRECTIVE_FEATURE_COMMIT = "9ff614e139cf7f5cb882e969106fac9aa7fa88da"
+AION_162_CORRECTIVE_MERGE_COMMIT = "d8a1705028796fb35ffb214e7f56d571e7c66025"
+AION_162_FINAL_MAIN_COMMIT = AION_162_CORRECTIVE_MERGE_COMMIT
 
 APPROVAL_TRUE_KEYS = frozenset(
     {
@@ -263,6 +268,26 @@ GLOBAL_FALSE_KEYS = (ACTOR_CONTEXT_TRUST_BOUNDARY_FALSE_KEYS - {"implementation_
     "provider_discovery_approved",
     "replay_cache_approved",
     "replay_protection_runtime_approved",
+    "replay_protection_core_runtime_enabled",
+    "replay_repository_runtime_registered",
+    "kernel_container_integration_approved",
+    "request_middleware_integration_approved",
+    "request_body_parsing_approved",
+    "dependency_change_approved",
+    "new_dependency_approved",
+    "new_package_manifest_approved",
+    "lockfile_approved",
+    "database_migration_approved",
+    "production_schema_auto_create_approved",
+    "raw_assertion_persistence_approved",
+    "signature_persistence_approved",
+    "signature_logging_approved",
+    "raw_claim_persistence_approved",
+    "verified_claim_persistence_approved",
+    "raw_claim_logging_approved",
+    "in_memory_runtime_replay_store_approved",
+    "background_cleanup_scheduler_approved",
+    "automatic_runtime_schema_creation_approved",
     "identity_assertion_endpoint_approved",
     "new_package_manifest_added",
     "request_identity_context_application_approved",
@@ -653,6 +678,146 @@ OFFLINE_IDENTITY_ASSERTION_TRUE_KEYS = frozenset(
     }
 )
 
+IDENTITY_ASSERTION_REPLAY_PROTECTION_APPROVED_SCOPE = frozenset(
+    {
+        "identity_assertion_replay_contracts",
+        "domain_separated_replay_key",
+        "replay_key_hashing",
+        "atomic_replay_claim",
+        "persistent_replay_ledger",
+        "sqlalchemy_replay_repository",
+        "existing_sqlalchemy_dependency_reuse",
+        "unique_replay_key_constraint",
+        "assertion_fingerprint_binding",
+        "assertion_identifier_collision_detection",
+        "verification_bundle_binding",
+        "repository_failure_fail_closed",
+        "retention_policy",
+        "explicit_retention_cleanup",
+        "concurrency_race_hardening",
+        "multiple_repository_instance_regression",
+        "internal_offline_verification_pipeline",
+        "replay_audit_provenance",
+        "safe_diagnostics",
+        "test_only_schema_auto_create",
+        "performance_smoke",
+        "tests",
+        "documentation",
+    }
+)
+
+IDENTITY_ASSERTION_REPLAY_PROTECTION_PROHIBITED_SCOPE = frozenset(
+    {
+        "dependency_change",
+        "new_dependency",
+        "new_package_manifest",
+        "lockfile",
+        "database_migration",
+        "production_schema_auto_create",
+        "kernel_container_integration",
+        "request_middleware_integration",
+        "request_identity_verifier_replacement",
+        "actor_context_resolver_integration",
+        "request_authentication",
+        "actor_context_application",
+        "request_identity_context_application",
+        "http_header_parsing",
+        "authorization_header_parsing",
+        "cookie_parsing",
+        "request_body_parsing",
+        "runtime_private_key",
+        "raw_assertion_persistence",
+        "raw_assertion_logging",
+        "signature_persistence",
+        "signature_logging",
+        "raw_claim_persistence",
+        "verified_claim_persistence",
+        "in_memory_runtime_replay_store",
+        "background_cleanup_scheduler",
+        "external_identity_provider",
+        "jwks_network_fetch",
+        "provider_discovery",
+        "external_calls",
+        "network_client",
+        "provider_sdk",
+        "login_endpoint",
+        "logout_endpoint",
+        "callback_endpoint",
+        "token_endpoint",
+        "session_endpoint",
+        "credential_endpoint",
+        "identity_assertion_endpoint",
+        "api_router",
+        "openapi_security_scheme",
+        "sdk_runtime_resource",
+        "cli_runtime_command",
+        "connector_runtime",
+        "operator_write_execution",
+        "module_activation",
+        "sandbox_execution",
+        "v02_tag",
+        "v02_release",
+    }
+)
+
+IDENTITY_ASSERTION_REPLAY_PROTECTION_TRUE_KEYS = frozenset(
+    {
+        "identity_assertion_replay_contracts_approved",
+        "domain_separated_replay_key_approved",
+        "replay_key_hashing_approved",
+        "atomic_replay_claim_approved",
+        "persistent_replay_ledger_approved",
+        "sqlalchemy_replay_repository_approved",
+        "existing_sqlalchemy_dependency_reuse_approved",
+        "unique_replay_key_constraint_approved",
+        "assertion_fingerprint_binding_approved",
+        "assertion_identifier_collision_detection_approved",
+        "verification_bundle_binding_approved",
+        "repository_failure_fail_closed_approved",
+        "retention_policy_approved",
+        "explicit_retention_cleanup_approved",
+        "concurrency_race_hardening_approved",
+        "multiple_repository_instance_regression_approved",
+        "internal_offline_verification_pipeline_approved",
+        "replay_audit_provenance_approved",
+        "replay_diagnostic_snapshot_approved",
+        "safe_diagnostics_approved",
+        "deterministic_test_fixture_approved",
+        "test_only_schema_auto_create_approved",
+        "performance_smoke_approved",
+        "database_table_definition_approved",
+    }
+)
+
+IDENTITY_ASSERTION_REPLAY_PROTECTION_FALSE_KEYS = OFFLINE_IDENTITY_ASSERTION_FALSE_KEYS | frozenset(
+    {
+        "dependency_change_approved",
+        "new_dependency_approved",
+        "new_package_manifest_approved",
+        "lockfile_approved",
+        "database_migration_approved",
+        "production_schema_auto_create_approved",
+        "replay_protection_core_runtime_enabled",
+        "replay_repository_runtime_registered",
+        "kernel_container_integration_approved",
+        "request_authentication_approved",
+        "request_middleware_integration_approved",
+        "request_body_parsing_approved",
+        "raw_assertion_persistence_approved",
+        "signature_persistence_approved",
+        "signature_logging_approved",
+        "raw_claim_persistence_approved",
+        "verified_claim_persistence_approved",
+        "raw_claim_logging_approved",
+        "in_memory_runtime_replay_store_approved",
+        "background_cleanup_scheduler_approved",
+        "automatic_runtime_schema_creation_approved",
+        "openapi_security_scheme_added",
+        "sdk_runtime_resource_added",
+        "cli_runtime_command_added",
+    }
+)
+
 AION151_AUTHORIZATION = AuthorizationSpec(
     transaction_id="AION-151-PA-0001",
     approval_record_id="AION-151-PA-0001",
@@ -783,15 +948,19 @@ AION161_AUTHORIZATION = AuthorizationSpec(
     authorization_scope="offline-ed25519-identity-assertion-verification",
     task_id="AION-161",
     required_adr="0152-v02-offline-ed25519-identity-assertion-verification-authorization.md",
-    expiry="AION-162 merged or AION-161-PA-0006 explicitly revoked",
-    authorization_active=True,
-    authorization_consumed=False,
-    authorization_expired=False,
+    expiry="AION-162 merged through PR 72 and post-merge PR 73; authorization consumed",
+    authorization_active=False,
+    authorization_consumed=True,
+    authorization_expired=True,
     authorization_reusable=False,
     approved_scope=OFFLINE_IDENTITY_ASSERTION_APPROVED_SCOPE,
     prohibited_scope=OFFLINE_IDENTITY_ASSERTION_PROHIBITED_SCOPE,
     false_keys=OFFLINE_IDENTITY_ASSERTION_FALSE_KEYS,
     parent_authorization_transaction_id="AION-159-PA-0005",
+    authorization_consumed_by_task="AION-162",
+    authorization_consumed_by_pr=72,
+    authorization_consumed_by_feature_commit=AION_162_PRIMARY_FEATURE_COMMIT,
+    authorization_consumed_by_merge_commit=AION_162_PRIMARY_MERGE_COMMIT,
     implementation_true_keys=OFFLINE_IDENTITY_ASSERTION_TRUE_KEYS,
     approved_dependency_name="cryptography",
     approved_dependency_specifier=">=49.0.0,<50.0.0",
@@ -799,10 +968,31 @@ AION161_AUTHORIZATION = AuthorizationSpec(
     approved_dependency_change_count=1,
 )
 
+AION163_AUTHORIZATION = AuthorizationSpec(
+    transaction_id="AION-163-PA-0007",
+    approval_record_id="AION-163-PA-0007",
+    candidate_id="production-auth-identity-assertion-replay-protection",
+    workstream="production-auth-verification-integrity",
+    implementation_task="AION-164",
+    authorization_scope="persistent-identity-assertion-replay-protection-core",
+    task_id="AION-163",
+    required_adr="0154-v02-identity-assertion-replay-protection-authorization.md",
+    expiry="AION-164 merged, or AION-163-PA-0007 explicitly revoked",
+    authorization_active=True,
+    authorization_consumed=False,
+    authorization_expired=False,
+    authorization_reusable=False,
+    approved_scope=IDENTITY_ASSERTION_REPLAY_PROTECTION_APPROVED_SCOPE,
+    prohibited_scope=IDENTITY_ASSERTION_REPLAY_PROTECTION_PROHIBITED_SCOPE,
+    false_keys=IDENTITY_ASSERTION_REPLAY_PROTECTION_FALSE_KEYS,
+    parent_authorization_transaction_id="AION-161-PA-0006",
+    implementation_true_keys=IDENTITY_ASSERTION_REPLAY_PROTECTION_TRUE_KEYS,
+)
+
 HISTORICAL_AUTHORIZATION = AION151_AUTHORIZATION
 STABILIZATION_AUTHORIZATION = AION153_AUTHORIZATION
-ACTIVE_AUTHORIZATION = AION161_AUTHORIZATION
-ACTIVE_REQUIRED_SCOPE = OFFLINE_IDENTITY_ASSERTION_APPROVED_SCOPE
+ACTIVE_AUTHORIZATION = AION163_AUTHORIZATION
+ACTIVE_REQUIRED_SCOPE = IDENTITY_ASSERTION_REPLAY_PROTECTION_APPROVED_SCOPE
 
 AUTHORIZATION_SPECS = {
     spec.transaction_id: spec
@@ -813,6 +1003,7 @@ AUTHORIZATION_SPECS = {
         AION157_AUTHORIZATION,
         AION159_AUTHORIZATION,
         AION161_AUTHORIZATION,
+        AION163_AUTHORIZATION,
     )
 }
 
@@ -955,6 +1146,32 @@ REQUIRED_JSON_AION161 = [
     "operator-console-static/demo-data/v02-offline-identity-assertion-verification-authorization.json",
 ]
 
+REQUIRED_DOCS_AION163 = [
+    "docs/release/v02-offline-identity-assertion-verification-closeout.md",
+    "docs/release/v02-identity-assertion-replay-protection-authorization-transaction.md",
+    "docs/release/v02-identity-assertion-replay-protection-explicit-approval-record.md",
+    "docs/release/v02-identity-assertion-replay-protection-scope.md",
+    "docs/release/v02-identity-assertion-replay-protection-persistence-model.md",
+    "docs/release/v02-identity-assertion-replay-protection-threat-model.md",
+    "docs/release/v02-identity-assertion-replay-protection-runtime-hold.md",
+    "docs/release/v02-identity-assertion-replay-protection-evidence-matrix.md",
+    "docs/release/v02-identity-assertion-replay-protection-no-go.md",
+    "docs/release/v02-identity-assertion-replay-protection-checklist.md",
+    "docs/adr/0154-v02-identity-assertion-replay-protection-authorization.md",
+]
+
+REQUIRED_JSON_AION163_CLOSEOUT = [
+    "examples/release/v02-offline-identity-assertion-verification-closeout.json",
+]
+
+REQUIRED_JSON_AION163 = [
+    "examples/release/v02-identity-assertion-replay-protection-authorization.json",
+    "examples/release/v02-identity-assertion-replay-protection-explicit-approval-record.json",
+    "examples/release/v02-identity-assertion-replay-protection-runtime-hold.json",
+    "examples/release/v02-identity-assertion-replay-protection-evidence-matrix.json",
+    "operator-console-static/demo-data/v02-identity-assertion-replay-protection-authorization.json",
+]
+
 SAFE_POLICY_MARKER_VALUES = frozenset(
     {
         "runtime_private_key",
@@ -1019,6 +1236,9 @@ def validate(root: Path, mode: str) -> None:
         + REQUIRED_DOCS_AION161
         + REQUIRED_JSON_AION161_CLOSEOUT
         + REQUIRED_JSON_AION161
+        + REQUIRED_DOCS_AION163
+        + REQUIRED_JSON_AION163_CLOSEOUT
+        + REQUIRED_JSON_AION163
     )
     for relative in required_paths:
         assert (root / relative).exists(), f"missing production-auth authorization artifact: {relative}"
@@ -1042,6 +1262,9 @@ def validate(root: Path, mode: str) -> None:
     assert "0152-v02-offline-ed25519-identity-assertion-verification-authorization.md" in adr_index, (
         "ADR 0152 is not indexed"
     )
+    assert "0154-v02-identity-assertion-replay-protection-authorization.md" in adr_index, (
+        "ADR 0154 is not indexed"
+    )
 
     for relative in (
         REQUIRED_JSON_AION151
@@ -1055,6 +1278,8 @@ def validate(root: Path, mode: str) -> None:
         + REQUIRED_JSON_AION159
         + REQUIRED_JSON_AION161_CLOSEOUT
         + REQUIRED_JSON_AION161
+        + REQUIRED_JSON_AION163_CLOSEOUT
+        + REQUIRED_JSON_AION163
     ):
         validate_required_payload(relative, load_json(root / relative))
 
@@ -1068,6 +1293,7 @@ def validate(root: Path, mode: str) -> None:
             + REQUIRED_JSON_AION157
             + REQUIRED_JSON_AION159
             + REQUIRED_JSON_AION161
+            + REQUIRED_JSON_AION163
         ):
             payload = load_json(root / relative)
             assert payload.get("runtime_guard_hold_active") is True, (
@@ -1115,6 +1341,10 @@ def validate_required_payload(relative: str, payload: dict[str, Any]) -> None:
         validate_aion160_closeout_payload(relative, payload)
     elif relative in REQUIRED_JSON_AION161:
         validate_authorization_record(relative, payload, expected=AION161_AUTHORIZATION)
+    elif relative in REQUIRED_JSON_AION163_CLOSEOUT:
+        validate_aion162_closeout_payload(relative, payload)
+    elif relative in REQUIRED_JSON_AION163:
+        validate_authorization_record(relative, payload, expected=AION163_AUTHORIZATION)
     else:
         validate_authorization_record(relative, payload, expected=AION155_AUTHORIZATION)
 
@@ -1222,6 +1452,44 @@ def validate_aion160_closeout_payload(relative: str, payload: dict[str, Any]) ->
         assert payload.get(key) == expected, f"{relative}: {key} mismatch"
 
 
+def validate_aion162_closeout_payload(relative: str, payload: dict[str, Any]) -> None:
+    assert payload.get("task_id") == "AION-163", f"{relative}: task_id must be AION-163"
+    assert payload.get("record_kind") == "offline_identity_assertion_verification_closeout", (
+        f"{relative}: record_kind mismatch"
+    )
+    required = {
+        "authorization_transaction_id": "AION-161-PA-0006",
+        "authorization_active": False,
+        "authorization_consumed": True,
+        "authorization_consumed_by_task": "AION-162",
+        "authorization_consumed_by_primary_pr": 72,
+        "authorization_consumed_by_primary_feature_commit": AION_162_PRIMARY_FEATURE_COMMIT,
+        "authorization_consumed_by_primary_merge_commit": AION_162_PRIMARY_MERGE_COMMIT,
+        "authorization_post_merge_correction_pr": 73,
+        "authorization_post_merge_correction_feature_commit": AION_162_CORRECTIVE_FEATURE_COMMIT,
+        "authorization_post_merge_correction_merge_commit": AION_162_CORRECTIVE_MERGE_COMMIT,
+        "authorization_final_verified_main_commit": AION_162_FINAL_MAIN_COMMIT,
+        "authorization_expired": True,
+        "authorization_reusable": False,
+        "offline_identity_assertion_verification_implemented": True,
+        "offline_identity_assertion_verification_state": "implemented_unintegrated",
+        "cryptography_dependency_present": True,
+        "cryptography_dependency_specifier": ">=49.0.0,<50.0.0",
+        "cryptography_dependency_count": 1,
+        "request_authenticated": False,
+        "actor_context_applied": False,
+        "request_identity_context_applied": False,
+        "runtime_effect": False,
+        "replay_check_performed": False,
+        "replay_protection_required_before_request_integration": True,
+        "runtime_private_key_material_present": False,
+        "production_auth_runtime_enabled": False,
+        "runtime_no_go_status": True,
+    }
+    for key, expected in required.items():
+        assert payload.get(key) == expected, f"{relative}: {key} mismatch"
+
+
 def validate_authorization_lifecycle_payloads(payloads: list[tuple[str, Any]]) -> None:
     approved_records: dict[tuple[str, str, str, str, str], set[str]] = {}
     active_records: dict[tuple[str, str, str, str, str], set[str]] = {}
@@ -1236,7 +1504,7 @@ def validate_authorization_lifecycle_payloads(payloads: list[tuple[str, Any]]) -
     assert set(approved_records) == expected_records, (
         f"unexpected approved authorization records: {sorted(approved_records)}"
     )
-    assert set(active_records) == {AION161_AUTHORIZATION.tuple_key}, (
+    assert set(active_records) == {AION163_AUTHORIZATION.tuple_key}, (
         f"unexpected active approved authorization records: {sorted(active_records)}"
     )
     for spec in (
@@ -1245,6 +1513,7 @@ def validate_authorization_lifecycle_payloads(payloads: list[tuple[str, Any]]) -
         AION155_AUTHORIZATION,
         AION157_AUTHORIZATION,
         AION159_AUTHORIZATION,
+        AION161_AUTHORIZATION,
     ):
         assert spec.tuple_key in historical_records, (
             f"{spec.transaction_id} historical authorization record missing"
@@ -1333,6 +1602,31 @@ def validate_authorization_record(
             payload.get("authorization_consumed_by_merge_commit")
             == spec.authorization_consumed_by_merge_commit
         ), f"{relative}: authorization_consumed_by_merge_commit mismatch"
+        if (
+            spec is AION161_AUTHORIZATION
+            and payload.get("record_kind") != "unit_test_authorization_record"
+        ):
+            assert payload.get("authorization_consumed_by_primary_pr") == 72, (
+                f"{relative}: authorization_consumed_by_primary_pr mismatch"
+            )
+            assert payload.get("authorization_consumed_by_primary_feature_commit") == (
+                AION_162_PRIMARY_FEATURE_COMMIT
+            ), f"{relative}: authorization_consumed_by_primary_feature_commit mismatch"
+            assert payload.get("authorization_consumed_by_primary_merge_commit") == (
+                AION_162_PRIMARY_MERGE_COMMIT
+            ), f"{relative}: authorization_consumed_by_primary_merge_commit mismatch"
+            assert payload.get("authorization_post_merge_correction_pr") == 73, (
+                f"{relative}: authorization_post_merge_correction_pr mismatch"
+            )
+            assert payload.get("authorization_post_merge_correction_feature_commit") == (
+                AION_162_CORRECTIVE_FEATURE_COMMIT
+            ), f"{relative}: authorization_post_merge_correction_feature_commit mismatch"
+            assert payload.get("authorization_post_merge_correction_merge_commit") == (
+                AION_162_CORRECTIVE_MERGE_COMMIT
+            ), f"{relative}: authorization_post_merge_correction_merge_commit mismatch"
+            assert payload.get("authorization_final_verified_main_commit") == AION_162_FINAL_MAIN_COMMIT, (
+                f"{relative}: authorization_final_verified_main_commit mismatch"
+            )
     else:
         assert payload.get("authorization_consumed_by_task") in {None, ""}, (
             f"{relative}: active authorization must not be consumed by task"

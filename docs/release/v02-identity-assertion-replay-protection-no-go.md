@@ -1,0 +1,4 @@
+
+# v0.2 Identity Assertion Replay Protection No-Go
+
+AION-163 is no-go if any unknown active authorization appears, AION-161 reactivates, AION-163 is consumed or expired before AION-164, replay permissions are missing or broadened, dependency changes are approved, migrations are approved, production schema auto-create is approved, runtime request authentication is approved, middleware or ActorContext or RequestIdentityContext integration is approved, raw assertion/signature/claim persistence is approved, in-memory runtime replay storage is approved, background cleanup is approved, provider/network integration is approved, auth endpoints are approved, SDK/CLI runtime resources are added, package files or lockfiles are added, migrations are added, v0.2 tags or releases exist, or protected implementation source is changed.

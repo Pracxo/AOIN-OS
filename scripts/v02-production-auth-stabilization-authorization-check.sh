@@ -169,7 +169,8 @@ v0.2 production auth stabilization authorization check result:
 - AION-155-PA-0003: approved historical, inactive, consumed, expired, non-reusable
 - AION-157-PA-0004: historical consumed authorization
 - AION-159-PA-0005: historical, consumed by AION-160 PR 70, expired, non-reusable
-- AION-161-PA-0006: only active approved authorization
+- AION-161-PA-0006: historical, consumed by AION-162 PR 72 and corrective PR 73, expired, non-reusable
+- AION-163-PA-0007: only active approved authorization
 - candidate_id: production-auth-core-stabilization
 - workstream: production-auth-hardening
 - implementation_task: AION-154

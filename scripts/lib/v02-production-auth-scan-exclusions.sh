@@ -257,6 +257,76 @@ aion158_is_scoped_request_identity_stabilization_path() {
   esac
 }
 
+aion163_is_scoped_identity_assertion_replay_protection_authorization_path() {
+  # Exact AION-163 governance, evidence, validator, and static-console paths.
+  # This authorization task creates no replay implementation source, schema,
+  # dependency, API route, SDK/CLI runtime surface, migration, package, or lockfile.
+  case "$1" in
+    README.md|\
+    AGENTS.md|\
+    docs/project-status.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/visual-brain.md|\
+    docs/auth/offline-identity-assertion-verification.md|\
+    docs/auth/identity-assertion-public-key-registry.md|\
+    docs/auth/identity-assertion-runtime-boundary.md|\
+    docs/auth/future-auth-implementation-plan.md|\
+    docs/auth/production-auth-release-gates.md|\
+    docs/release/v02-offline-identity-assertion-verification-closeout.md|\
+    docs/release/v02-offline-identity-assertion-verification-implementation.md|\
+    docs/release/v02-offline-identity-assertion-verification-security-evidence.md|\
+    docs/release/v02-offline-identity-assertion-verification-runtime-hold.md|\
+    docs/release/v02-offline-identity-assertion-verification-evidence-matrix.md|\
+    docs/release/v02-offline-identity-assertion-verification-checklist.md|\
+    docs/release/v02-offline-identity-assertion-verification-authorization-transaction.md|\
+    docs/release/v02-offline-identity-assertion-verification-explicit-approval-record.md|\
+    docs/release/v02-identity-assertion-replay-protection-authorization-transaction.md|\
+    docs/release/v02-identity-assertion-replay-protection-explicit-approval-record.md|\
+    docs/release/v02-identity-assertion-replay-protection-scope.md|\
+    docs/release/v02-identity-assertion-replay-protection-persistence-model.md|\
+    docs/release/v02-identity-assertion-replay-protection-threat-model.md|\
+    docs/release/v02-identity-assertion-replay-protection-runtime-hold.md|\
+    docs/release/v02-identity-assertion-replay-protection-evidence-matrix.md|\
+    docs/release/v02-identity-assertion-replay-protection-no-go.md|\
+    docs/release/v02-identity-assertion-replay-protection-checklist.md|\
+    docs/release/v02-release-readiness-delta.md|\
+    docs/release/v02-explicit-approval-record-master-ledger.md|\
+    docs/release/v02-implementation-authorization-final-status.md|\
+    docs/adr/0154-v02-identity-assertion-replay-protection-authorization.md|\
+    docs/adr/README.md|\
+    examples/release/v02-offline-identity-assertion-verification-closeout.json|\
+    examples/release/v02-offline-identity-assertion-verification-authorization.json|\
+    examples/release/v02-offline-identity-assertion-verification-explicit-approval-record.json|\
+    examples/release/v02-identity-assertion-replay-protection-authorization.json|\
+    examples/release/v02-identity-assertion-replay-protection-explicit-approval-record.json|\
+    examples/release/v02-identity-assertion-replay-protection-runtime-hold.json|\
+    examples/release/v02-identity-assertion-replay-protection-evidence-matrix.json|\
+    operator-console-static/index.html|\
+    operator-console-static/app.js|\
+    operator-console-static/README.md|\
+    operator-console-static/demo-data/offline-identity-assertion-verification.json|\
+    operator-console-static/demo-data/offline-identity-assertion-runtime-hold.json|\
+    operator-console-static/demo-data/v02-identity-assertion-replay-protection-authorization.json|\
+    scripts/lib/v02_production_auth_authorization.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    scripts/v02-offline-identity-assertion-verification-authorization-check.sh|\
+    scripts/v02-offline-identity-assertion-verification-authorization-no-go-regression.sh|\
+    scripts/production-auth-offline-identity-assertion-check.sh|\
+    scripts/production-auth-offline-identity-assertion-no-go-regression.sh|\
+    scripts/v02-identity-assertion-replay-protection-authorization-check.sh|\
+    scripts/v02-identity-assertion-replay-protection-authorization-no-go-regression.sh|\
+    services/brain-api/tests/test_v02_identity_assertion_replay_protection_authorization_docs.py|\
+    services/brain-api/tests/test_v02_offline_identity_assertion_verification_authorization_docs.py)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
 aion161_is_scoped_offline_identity_assertion_verification_authorization_path() {
   # Exact AION-161 governance, evidence, and validator paths. This task closes
   # AION-159 and creates an offline verification authorization only; it does
@@ -328,6 +398,9 @@ aion161_is_scoped_offline_identity_assertion_verification_authorization_path() {
       return 0
       ;;
     *)
+      if aion163_is_scoped_identity_assertion_replay_protection_authorization_path "$1"; then
+        return 0
+      fi
       if aion162_is_scoped_offline_identity_assertion_verification_path "$1"; then
         return 0
       fi

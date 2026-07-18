@@ -14,7 +14,7 @@ stabilization. AION-159 closed `AION-157-PA-0004` and created
 `AION-159-PA-0005` for AION-160. AION-160 merged the fail-closed actor-context
 trust-boundary remediation.
 
-Current milestone: AION-162 offline Ed25519 identity assertion verification core implemented.
+Current milestone: AION-162 offline Ed25519 identity assertion verification core implemented and post-merge verification corrected.
 Current implementation state:
 
 - fixed Ed25519 verification
@@ -26,8 +26,9 @@ Current implementation state:
 - replay protection absent
 - production authentication disabled
 
-Current authorization: AION-161-PA-0006 consumed by AION-162 when merged.
-Formal lifecycle closeout: AION-163.
+Current authorization: AION-163-PA-0007 active for AION-164.
+AION-161-PA-0006 consumed by AION-162 when merged.
+Formal lifecycle closeout: AION-163 complete on this branch.
 
 Prior actor-context closeout remains in force: non-development identity headers ignored,
 anonymous zero-permission ActorContext, RequestIdentityContext precedence,
@@ -110,7 +111,7 @@ authentication.
 `v02_release_created=false`
 
 The v0.2 release remains blocked until formal AION-161 authorization closeout,
-replay protection, request-level verified identity integration, operational
+persistent identity-assertion replay protection, replay-ledger production schema provisioning, request-level verified identity integration, operational
 public-key provisioning and rotation evidence, external provider integration,
 protected-material, credential, token, session,
 deployment, rollback, observability, threat-model, release-candidate, runtime
@@ -118,7 +119,7 @@ guard release decision, tag, and release authorization work is complete.
 
 ## Current Implementation Task
 
-AION-162 implements the offline Ed25519 identity assertion verification core
+AION-164 is the next implementation task: persistent identity-assertion replay-protection core. AION-162 implements the offline Ed25519 identity assertion verification core
 authorized by AION-161. It adds exactly `cryptography>=49.0.0,<50.0.0`,
 strict offline verification, public verification keys, canonical payloads,
 domain separation, issuer/audience/time/assertion-ID validation, claim
@@ -142,3 +143,10 @@ The actor-context trust-boundary finding was documented by AION-159 as a
 non-development identity-header trust fallback. AION-160 implemented the
 fail-closed remediation. AION-161 closes `AION-159-PA-0005` and creates
 `AION-161-PA-0006` for the next offline verification core.
+
+
+## AION-163 Authorization State
+
+AION-163 closes `AION-161-PA-0006` as inactive, consumed, expired, and non-reusable after AION-162 PR #72 and corrective PR #73. `AION-163-PA-0007` is the sole active production-auth authorization for AION-164 under `authorization_scope=persistent-identity-assertion-replay-protection-core`.
+
+AION-164 is authorized to implement a persistent SQLAlchemy replay ledger, domain-separated issuer/assertion-ID replay key, atomic unique-insert claim, assertion-fingerprint collision detection, fail-closed repository behavior, retention policy, explicit cleanup, internal verification pipeline, redacted replay evidence, test-only schema auto-create, and performance smoke coverage. Dependency changes, migrations, production schema auto-create, runtime in-memory replay stores, background cleanup schedulers, HTTP parsing, request authentication, middleware integration, ActorContext and RequestIdentityContext application, providers, endpoints, SDK/CLI runtime surfaces, package files, lockfiles, v0.2 tags, and v0.2 releases remain blocked.
