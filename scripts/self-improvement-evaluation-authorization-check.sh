@@ -18,6 +18,7 @@ is_nested_gate_context() {
 required_files=(
   docs/self-improvement/governance-charter.md
   docs/self-improvement/evaluation-authorization.md
+  docs/self-improvement/experiment-authorization.md
   docs/self-improvement/protected-core-boundary.md
   docs/self-improvement/approval-model.md
   docs/self-improvement/change-budget-model.md
@@ -27,13 +28,17 @@ required_files=(
   docs/self-improvement/program-ledger.json
   docs/adr/0156-governed-self-improvement-control-plane.md
   docs/adr/0157-self-improvement-evaluation-authorization.md
+  docs/adr/0158-self-improvement-experiment-authorization.md
   scripts/lib/self_improvement_governance.py
   scripts/self-improvement-governance-no-go-regression.sh
   scripts/self-improvement-governance-authorization-check.sh
   scripts/self-improvement-evaluation-no-go-regression.sh
   scripts/self-improvement-evaluation-authorization-check.sh
+  scripts/self-improvement-experiment-no-go-regression.sh
+  scripts/self-improvement-experiment-authorization-check.sh
   services/brain-api/tests/test_self_improvement_governance_authorization_docs.py
   services/brain-api/tests/test_self_improvement_evaluation_authorization_docs.py
+  services/brain-api/tests/test_self_improvement_experiment_authorization_docs.py
 )
 
 for file in "${required_files[@]}"; do
@@ -48,6 +53,11 @@ grep -F "0157-self-improvement-evaluation-authorization.md" docs/adr/README.md >
   exit 1
 }
 
+grep -F "0158-self-improvement-experiment-authorization.md" docs/adr/README.md >/dev/null || {
+  echo "ADR 0158 is not indexed" >&2
+  exit 1
+}
+
 "$PYTHON_BIN" scripts/lib/self_improvement_governance.py --repo-root "$ROOT_DIR" --mode check
 ./scripts/self-improvement-evaluation-no-go-regression.sh
 
@@ -57,6 +67,7 @@ else
   "$PYTHON_BIN" -m pytest \
     services/brain-api/tests/test_self_improvement_governance_authorization_docs.py \
     services/brain-api/tests/test_self_improvement_evaluation_authorization_docs.py \
+    services/brain-api/tests/test_self_improvement_experiment_authorization_docs.py \
     -q
 fi
 
@@ -72,12 +83,11 @@ fi
 cat <<'SUMMARY'
 self-improvement evaluation authorization result:
 - AION-165-SI-0001: consumed by AION-166 PR 77 and closed by AION-167
-- AION-167-SI-0002: active authorization for AION-168 immutable evaluation plane
+- AION-167-SI-0002: consumed by AION-168 PR 79 and closed by AION-169
+- AION-169-SI-0003: active authorization for AION-170 proposal and experiment engine
 - source_rewriting_enabled=false
 - pull_request_creation_enabled=false
 - automatic_approval_enabled=false
-- benchmark_mutation_by_candidate_enabled=false
-- holdout_disclosure_to_patch_generators_enabled=false
 - production_deployment_enabled=false
 - model_weight_training_enabled=false
 self-improvement evaluation authorization PASS

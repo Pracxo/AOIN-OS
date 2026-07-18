@@ -18,8 +18,9 @@ sys.path.insert(0, str(ROOT / "scripts/lib"))
 from self_improvement_governance import (  # noqa: E402
     AUTHORIZATION_ID,
     CHANGE_BUDGET_DIMENSIONS,
-    EVALUATION_APPROVED_SCOPE,
-    EVALUATION_PROHIBITED_SCOPE,
+    EVALUATION_AUTHORIZATION_ID,
+    EXPERIMENT_APPROVED_SCOPE,
+    EXPERIMENT_PROHIBITED_SCOPE,
     GOVERNANCE_FALSE_FLAGS,
     GOVERNANCE_TRUE_FLAGS,
     LIFECYCLE_STATES,
@@ -38,12 +39,17 @@ from self_improvement_governance import (  # noqa: E402
 
 AION_166_FEATURE_COMMIT = "fae49a3f913b7a3d4d18ad4e7f989ed2aca5de91"
 AION_166_MERGE_COMMIT = "9a7105e31b8f6e56faf53bfb56e11eed75a01203"
+AION_167_FEATURE_COMMIT = "bbc04cf57f02483e00752c20fa70b77abf95ce46"
+AION_167_MERGE_COMMIT = "98a50edb5eaaf55de5babaa0ea9eb057ef5b2feb"
+AION_168_FEATURE_COMMIT = "8d1402f6c122098f3aec5809cf94539992b45d10"
+AION_168_MERGE_COMMIT = "74472522edffbbeabb996c6d572dce1dcb0cda48"
 
 
 def test_self_improvement_required_files_exist_and_adrs_are_indexed() -> None:
     required = [
         "docs/self-improvement/governance-charter.md",
         "docs/self-improvement/evaluation-authorization.md",
+        "docs/self-improvement/experiment-authorization.md",
         "docs/self-improvement/protected-core-boundary.md",
         "docs/self-improvement/approval-model.md",
         "docs/self-improvement/change-budget-model.md",
@@ -53,18 +59,20 @@ def test_self_improvement_required_files_exist_and_adrs_are_indexed() -> None:
         "docs/self-improvement/program-ledger.json",
         "docs/adr/0156-governed-self-improvement-control-plane.md",
         "docs/adr/0157-self-improvement-evaluation-authorization.md",
+        "docs/adr/0158-self-improvement-experiment-authorization.md",
     ]
     for relative in required:
         assert (ROOT / relative).is_file(), relative
     adr_index = _text("docs/adr/README.md")
     assert "0156-governed-self-improvement-control-plane.md" in adr_index
     assert "0157-self-improvement-evaluation-authorization.md" in adr_index
+    assert "0158-self-improvement-experiment-authorization.md" in adr_index
 
 
-def test_aion165_is_consumed_and_aion167_authorization_is_exact() -> None:
+def test_aion167_is_consumed_and_aion169_authorization_is_exact() -> None:
     payload = _json("docs/self-improvement/authorization-ledger.json")
     validate_authorization_ledger(payload)
-    root_closeout, parent_closeout, active = payload["records"]
+    root_closeout, parent_closeout, evaluation_closeout, active = payload["records"]
 
     assert root_closeout["authorization_transaction_id"] == ROOT_AUTHORIZATION_ID
     assert root_closeout["authorization_consumed_by_pr"] == 75
@@ -78,14 +86,23 @@ def test_aion165_is_consumed_and_aion167_authorization_is_exact() -> None:
     assert parent_closeout["authorization_consumed_by_merge_commit"] == AION_166_MERGE_COMMIT
     assert parent_closeout["authorization_reusable"] is False
 
+    assert evaluation_closeout["authorization_transaction_id"] == EVALUATION_AUTHORIZATION_ID
+    assert evaluation_closeout["authorization_consumed_by_task"] == "AION-168"
+    assert evaluation_closeout["authorization_consumed_by_pr"] == 79
+    assert evaluation_closeout["authorization_consumed_by_feature_commits"] == [
+        AION_168_FEATURE_COMMIT
+    ]
+    assert evaluation_closeout["authorization_consumed_by_merge_commit"] == AION_168_MERGE_COMMIT
+    assert evaluation_closeout["authorization_reusable"] is False
+
     assert active["authorization_transaction_id"] == AUTHORIZATION_ID
-    assert active["implementation_task"] == "AION-168"
-    assert active["authorization_scope"] == "immutable-self-improvement-evaluation-plane"
+    assert active["implementation_task"] == "AION-170"
+    assert active["authorization_scope"] == "self-improvement-proposal-and-experiment-engine"
     assert tuple(active["protected_paths"]) == PROTECTED_PATHS
     assert tuple(active["risk_levels"]) == RISK_LEVELS
     assert tuple(active["change_budget_dimensions"]) == CHANGE_BUDGET_DIMENSIONS
-    assert tuple(active["approved_scope"]) == EVALUATION_APPROVED_SCOPE
-    assert tuple(active["prohibited_scope"]) == EVALUATION_PROHIBITED_SCOPE
+    assert tuple(active["approved_scope"]) == EXPERIMENT_APPROVED_SCOPE
+    assert tuple(active["prohibited_scope"]) == EXPERIMENT_PROHIBITED_SCOPE
     for key in GOVERNANCE_FALSE_FLAGS:
         assert active[key] is False
     for key in GOVERNANCE_TRUE_FLAGS:
@@ -111,9 +128,28 @@ def test_program_ledger_records_aion164_through_aion167() -> None:
     assert by_task["AION-166"]["ci_result"] == "pass"
 
     assert by_task["AION-167"]["branch"] == "phase/self-improvement-evaluation-authorization"
-    assert by_task["AION-167"]["authorization_transaction"] == AUTHORIZATION_ID
-    assert by_task["AION-167"]["authorization_state"] == "active_until_AION-168_merge"
+    assert by_task["AION-167"]["feature_commits"] == [AION_167_FEATURE_COMMIT]
+    assert by_task["AION-167"]["pull_requests"] == [78]
+    assert by_task["AION-167"]["merge_commits"] == [AION_167_MERGE_COMMIT]
+    assert by_task["AION-167"]["authorization_transaction"] == EVALUATION_AUTHORIZATION_ID
+    assert by_task["AION-167"]["authorization_state"] == (
+        "consumed_by_AION-168_closed_by_AION-169"
+    )
     assert by_task["AION-167"]["next_task"] == "AION-168"
+
+    assert by_task["AION-168"]["branch"] == "phase/self-improvement-evaluation-plane"
+    assert by_task["AION-168"]["feature_commits"] == [AION_168_FEATURE_COMMIT]
+    assert by_task["AION-168"]["pull_requests"] == [79]
+    assert by_task["AION-168"]["merge_commits"] == [AION_168_MERGE_COMMIT]
+    assert by_task["AION-168"]["authorization_transaction"] == EVALUATION_AUTHORIZATION_ID
+    assert by_task["AION-168"]["authorization_state"] == (
+        "consumed_by_AION-168_closed_by_AION-169"
+    )
+
+    assert by_task["AION-169"]["branch"] == "phase/self-improvement-experiment-authorization"
+    assert by_task["AION-169"]["authorization_transaction"] == AUTHORIZATION_ID
+    assert by_task["AION-169"]["authorization_state"] == "active_until_AION-170_merge"
+    assert by_task["AION-169"]["next_task"] == "AION-170"
 
 
 def test_lifecycle_validator_accepts_known_path_and_rejects_unknowns() -> None:
@@ -149,8 +185,8 @@ def test_governance_validator_blocks_runtime_enablement() -> None:
     payload = _json("docs/self-improvement/authorization-ledger.json")
     validate_no_go(ROOT)
     mutated = json.loads(json.dumps(payload))
-    mutated["records"][2]["source_rewriting_enabled"] = True
-    with pytest.raises(GovernanceValidationError, match="source_rewriting_enabled"):
+    mutated["records"][3]["source_mutation_enabled"] = True
+    with pytest.raises(GovernanceValidationError, match="source_mutation_enabled"):
         validate_authorization_ledger(mutated)
 
 
@@ -161,6 +197,7 @@ def test_governance_docs_do_not_store_private_material() -> None:
         for relative in [
             "docs/self-improvement/governance-charter.md",
             "docs/self-improvement/evaluation-authorization.md",
+            "docs/self-improvement/experiment-authorization.md",
             "docs/self-improvement/program-ledger.json",
             "docs/self-improvement/authorization-ledger.json",
         ]
@@ -175,6 +212,8 @@ def test_self_improvement_authorization_scripts_are_executable_and_pass() -> Non
         "scripts/self-improvement-governance-authorization-check.sh",
         "scripts/self-improvement-evaluation-no-go-regression.sh",
         "scripts/self-improvement-evaluation-authorization-check.sh",
+        "scripts/self-improvement-experiment-no-go-regression.sh",
+        "scripts/self-improvement-experiment-authorization-check.sh",
     ]
     for relative in scripts:
         mode = (ROOT / relative).stat().st_mode
