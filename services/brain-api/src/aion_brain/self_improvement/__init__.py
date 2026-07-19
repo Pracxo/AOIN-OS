@@ -23,7 +23,25 @@ from aion_brain.self_improvement.benchmark_runner import (
     run_candidate_benchmark,
 )
 from aion_brain.self_improvement.change_budget import evaluate_change_budget
+from aion_brain.self_improvement.ci_monitor import (
+    CheckStatus,
+    CICheckResult,
+    CIMonitor,
+    CIMonitorAdapter,
+    CIReport,
+    DeterministicTestCIMonitorAdapter,
+    DisabledCIMonitorAdapter,
+)
 from aion_brain.self_improvement.comparison import compare_baseline_to_candidate
+from aion_brain.self_improvement.diff_hash import (
+    DiffHashEvidence,
+    candidate_commit_fingerprint,
+    canonical_diff_hash,
+    canonical_json_hash,
+    changed_paths_fingerprint,
+    normalize_diff,
+    sha256_text,
+)
 from aion_brain.self_improvement.evaluation_evidence import (
     benchmark_metrics_from_evaluator_records,
     capture_evaluation_provenance,
@@ -44,6 +62,11 @@ from aion_brain.self_improvement.experiment_runner import (
     ExperimentCandidateProvider,
     ImprovementExperimentRunner,
 )
+from aion_brain.self_improvement.git_controller import (
+    GitController,
+    GitSnapshot,
+    TaskBranchRequest,
+)
 from aion_brain.self_improvement.governance import evaluate_governance
 from aion_brain.self_improvement.holdout import (
     assert_holdout_controls,
@@ -63,6 +86,15 @@ from aion_brain.self_improvement.lifecycle import (
     require_valid_transition,
     transition_state,
 )
+from aion_brain.self_improvement.merge_controller import (
+    DeterministicTestMergeAdapter,
+    DisabledMergeAdapter,
+    MergeAdapter,
+    MergeController,
+    MergeRequest,
+    MergeResult,
+    MergeStatus,
+)
 from aion_brain.self_improvement.observation import (
     EXPERIMENT_AUTHORIZATION_SCOPE,
     EXPERIMENT_AUTHORIZATION_TRANSACTION_ID,
@@ -71,10 +103,35 @@ from aion_brain.self_improvement.observation import (
     ObservationSourceType,
     observation_from_evaluation_record,
 )
+from aion_brain.self_improvement.patch_generator import (
+    DeterministicTestPatchGenerator,
+    DisabledPatchGenerator,
+    PatchArtifact,
+    PatchGenerator,
+    PatchRequest,
+)
+from aion_brain.self_improvement.patch_validator import (
+    ChangeObservation,
+    PatchValidationResult,
+    PatchValidator,
+    PathPolicy,
+    TestWeakeningReport,
+    analyze_test_weakening,
+)
 from aion_brain.self_improvement.pattern_intake import (
     ImprovementFailurePattern,
     ImprovementFailurePatternType,
     intake_failure_pattern,
+)
+from aion_brain.self_improvement.pr_controller import (
+    ApprovalStatus,
+    DeterministicTestPullRequestAdapter,
+    DisabledPullRequestAdapter,
+    PullRequestAdapter,
+    PullRequestController,
+    PullRequestCreateRequest,
+    PullRequestRecord,
+    RewriteApprovalBinding,
 )
 from aion_brain.self_improvement.proposal_service import ImprovementProposalService
 from aion_brain.self_improvement.protected_paths import (
@@ -89,6 +146,38 @@ from aion_brain.self_improvement.regression_proposal import (
     RegressionTestProposalGenerator,
 )
 from aion_brain.self_improvement.risk import assess_improvement_risk
+from aion_brain.self_improvement.rollback import (
+    RollbackMetadata,
+    rollback_metadata_for_candidate,
+)
+from aion_brain.self_improvement.sandbox import (
+    REQUIRED_SANDBOX_GATES,
+    DeterministicTestSandboxRunner,
+    DisabledSandboxRunner,
+    SandboxCommand,
+    SandboxCommandResult,
+    SandboxGateName,
+    SandboxRunEvidence,
+    SandboxRunner,
+    build_sandbox_evidence,
+    required_sandbox_commands,
+)
+from aion_brain.self_improvement.test_first import (
+    RegressionTestSpec,
+    TestCommandResult,
+    TestFirstEvidence,
+    TestFirstVerifier,
+)
+from aion_brain.self_improvement.worktree import (
+    REWRITE_AUTHORIZATION_SCOPE,
+    REWRITE_AUTHORIZATION_TRANSACTION_ID,
+    REWRITE_IMPLEMENTATION_TASK,
+    DisabledGitCommandRunner,
+    GitCommandRunner,
+    WorktreeManager,
+    WorktreeRequest,
+    WorktreeResult,
+)
 
 __all__ = [
     "EVALUATION_AUTHORIZATION_SCOPE",
@@ -98,6 +187,11 @@ __all__ = [
     "EXPERIMENT_AUTHORIZATION_TRANSACTION_ID",
     "EXPERIMENT_IMPLEMENTATION_TASK",
     "REQUIRED_BENCHMARK_METRICS",
+    "REQUIRED_SANDBOX_GATES",
+    "REWRITE_AUTHORIZATION_SCOPE",
+    "REWRITE_AUTHORIZATION_TRANSACTION_ID",
+    "REWRITE_IMPLEMENTATION_TASK",
+    "ApprovalStatus",
     "ApprovalTier",
     "BenchmarkBaseline",
     "BenchmarkCandidateResult",
@@ -110,13 +204,34 @@ __all__ = [
     "BenchmarkMetricDelta",
     "BenchmarkRegistry",
     "BenchmarkSafetyGate",
+    "CICheckResult",
+    "CIMonitor",
+    "CIMonitorAdapter",
+    "CIReport",
+    "ChangeObservation",
+    "CheckStatus",
     "DeterministicExperimentCandidateProvider",
+    "DeterministicTestCIMonitorAdapter",
     "DeterministicTestHypothesisGenerator",
+    "DeterministicTestMergeAdapter",
+    "DeterministicTestPatchGenerator",
+    "DeterministicTestPullRequestAdapter",
     "DeterministicTestRegressionProposalGenerator",
+    "DeterministicTestSandboxRunner",
+    "DiffHashEvidence",
+    "DisabledCIMonitorAdapter",
     "DisabledExperimentCandidateProvider",
+    "DisabledGitCommandRunner",
     "DisabledHypothesisGenerator",
+    "DisabledMergeAdapter",
+    "DisabledPatchGenerator",
+    "DisabledPullRequestAdapter",
     "DisabledRegressionTestProposalGenerator",
+    "DisabledSandboxRunner",
     "ExperimentCandidateProvider",
+    "GitController",
+    "GitCommandRunner",
+    "GitSnapshot",
     "HypothesisGenerator",
     "ImprovementChangeType",
     "ImprovementEvidenceBundle",
@@ -130,30 +245,71 @@ __all__ = [
     "ImprovementProposalService",
     "ImprovementExperimentRunner",
     "MetricDirection",
+    "MergeAdapter",
+    "MergeController",
+    "MergeRequest",
+    "MergeResult",
+    "MergeStatus",
     "ObservationSourceType",
+    "PatchArtifact",
+    "PatchGenerator",
+    "PatchRequest",
+    "PatchValidationResult",
+    "PatchValidator",
+    "PathPolicy",
     "ProposalLifecycleState",
+    "PullRequestAdapter",
+    "PullRequestController",
+    "PullRequestCreateRequest",
+    "PullRequestRecord",
     "RegressionTestProposal",
     "RegressionTestProposalGenerator",
+    "RegressionTestSpec",
+    "RewriteApprovalBinding",
+    "RollbackMetadata",
+    "SandboxCommand",
+    "SandboxCommandResult",
+    "SandboxGateName",
+    "SandboxRunEvidence",
+    "SandboxRunner",
     "SelfImprovementLedger",
+    "TaskBranchRequest",
+    "TestCommandResult",
+    "TestFirstEvidence",
+    "TestFirstVerifier",
+    "TestWeakeningReport",
+    "WorktreeManager",
+    "WorktreeRequest",
+    "WorktreeResult",
+    "analyze_test_weakening",
     "approval_tier_for_risk",
     "assess_improvement_risk",
     "assert_holdout_controls",
     "benchmark_metrics_from_evaluator_records",
     "bind_human_approval",
     "can_transition",
+    "build_sandbox_evidence",
     "build_evaluation_bundle",
+    "candidate_commit_fingerprint",
     "capture_evaluation_provenance",
+    "canonical_diff_hash",
+    "canonical_json_hash",
+    "changed_paths_fingerprint",
     "compare_baseline_to_candidate",
     "evaluate_change_budget",
     "evaluate_governance",
     "intake_failure_pattern",
+    "normalize_diff",
     "observation_from_evaluation_record",
     "patch_generator_case_ids",
     "protected_path_decision",
     "protected_path_decisions",
     "redact_evidence_payload",
     "require_valid_transition",
+    "required_sandbox_commands",
+    "rollback_metadata_for_candidate",
     "run_candidate_benchmark",
+    "sha256_text",
     "touches_protected_core",
     "transition_state",
 ]

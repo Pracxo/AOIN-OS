@@ -570,6 +570,38 @@ aion171_is_scoped_self_improvement_rewrite_authorization_path() {
   esac
 }
 
+aion172_is_scoped_self_improvement_rewrite_controller_path() {
+  # Exact AION-172 self-improvement rewrite-controller implementation paths.
+  # These are disabled-by-default control-plane artifacts and do not exempt
+  # production-auth source, auth APIs, SDK/CLI runtime surfaces, package files,
+  # lockfiles, migrations, or broad source directories.
+  case "$1" in
+    docs/self-improvement/program-ledger.json|\
+    scripts/lib/self_improvement_governance.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    scripts/self-improvement-rewrite-controller-check.sh|\
+    scripts/self-improvement-rewrite-controller-no-go-regression.sh|\
+    services/brain-api/src/aion_brain/self_improvement/__init__.py|\
+    services/brain-api/src/aion_brain/self_improvement/ci_monitor.py|\
+    services/brain-api/src/aion_brain/self_improvement/diff_hash.py|\
+    services/brain-api/src/aion_brain/self_improvement/git_controller.py|\
+    services/brain-api/src/aion_brain/self_improvement/merge_controller.py|\
+    services/brain-api/src/aion_brain/self_improvement/patch_generator.py|\
+    services/brain-api/src/aion_brain/self_improvement/patch_validator.py|\
+    services/brain-api/src/aion_brain/self_improvement/pr_controller.py|\
+    services/brain-api/src/aion_brain/self_improvement/rollback.py|\
+    services/brain-api/src/aion_brain/self_improvement/sandbox.py|\
+    services/brain-api/src/aion_brain/self_improvement/test_first.py|\
+    services/brain-api/src/aion_brain/self_improvement/worktree.py|\
+    services/brain-api/tests/test_self_improvement_rewrite_controller.py)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
 aion161_is_scoped_offline_identity_assertion_verification_authorization_path() {
   # Exact AION-161 governance, evidence, and validator paths. This task closes
   # AION-159 and creates an offline verification authorization only; it does

@@ -254,20 +254,50 @@
     {
       "task_id": "AION-171",
       "branch": "phase/self-improvement-rewrite-authorization",
+      "feature_commits": [
+        "4970700555638b4ecd53a581d1797148906f81ef"
+      ],
+      "pull_requests": [
+        82
+      ],
+      "merge_commits": [
+        "478b79de1fbd4eeeb0280a41abf4050c0f513d8f"
+      ],
+      "ci_result": "pass",
+      "corrective_prs": [],
+      "tests": [
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_rewrite_authorization_docs.py -q: pass",
+        "./scripts/self-improvement-rewrite-no-go-regression.sh pass",
+        "./scripts/self-improvement-rewrite-authorization-check.sh pass",
+        "./scripts/production-auth-core-no-go-regression.sh pass",
+        "./scripts/connector-runtime-no-external-call-regression.sh pass",
+        "./scripts/check.sh pass"
+      ],
+      "authorization_transaction": "AION-171-SI-0004",
+      "authorization_state": "active_until_AION-172_merge",
+      "next_task": "AION-172",
+      "runtime_state": "authorization_only_no_rewrite_controller_implementation",
+      "completion_timestamp": "2026-07-19T01:00:23Z"
+    },
+    {
+      "task_id": "AION-172",
+      "branch": "phase/self-improvement-approved-rewrite-controller",
       "feature_commits": [],
       "pull_requests": [],
       "merge_commits": [],
       "ci_result": "pending",
       "corrective_prs": [],
       "tests": [
-        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_rewrite_authorization_docs.py -q",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_rewrite_controller.py -q",
+        "./scripts/self-improvement-rewrite-controller-no-go-regression.sh",
+        "./scripts/self-improvement-rewrite-controller-check.sh",
         "./scripts/self-improvement-rewrite-no-go-regression.sh",
         "./scripts/self-improvement-rewrite-authorization-check.sh"
       ],
       "authorization_transaction": "AION-171-SI-0004",
       "authorization_state": "active_until_AION-172_merge",
-      "next_task": "AION-172",
-      "runtime_state": "authorization_only_no_rewrite_controller_implementation",
+      "next_task": "AION-173",
+      "runtime_state": "rewrite_controller_implemented_disabled_approval_bound_no_production_github_calls",
       "completion_timestamp": null
     }
   ]
