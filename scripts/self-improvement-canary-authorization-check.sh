@@ -93,7 +93,7 @@ fi
 cat <<'SUMMARY'
 self-improvement canary authorization result:
 - AION-171-SI-0004: consumed by AION-172 PR 83 and closed by AION-173
-- AION-173-SI-0005: active authorization for AION-174 canary and adaptive policy
+- AION-173-SI-0005: consumed by AION-174 PR 85 and closed by AION-175
 - canary plans: authorized
 - automatic rollback: approval-threshold bound
 - adaptive learning: data-only and approval-gated

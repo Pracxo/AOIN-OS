@@ -6,7 +6,11 @@ Task: AION-173
 
 ## Purpose
 
-AION-173 closes `AION-171-SI-0004` as consumed by AION-172 PR 83 and creates `AION-173-SI-0005` as the single active authorization for AION-174. The next implementation may add an approval-bound canary, rollback, outcome-ledger, and adaptive-policy plane only.
+AION-173 closes `AION-171-SI-0004` as consumed by AION-172 PR 83 and creates `AION-173-SI-0005` as the authorization for AION-174. The implementation may add an approval-bound canary, rollback, outcome-ledger, and adaptive-policy plane only.
+
+## AION-175 Closeout
+
+AION-175 closes `AION-173-SI-0005` as consumed by AION-174 PR 85 and merge commit `dd17639986160938043d8ddef7da8cb9b8a2faa4`. No new implementation authorization is created. Production canary, policy relaxation, runtime self-approval, autonomous production activation, and model-weight training remain disabled.
 
 The authorized plane may describe canary plans, exposure budgets, monitoring windows, automatic rollback under approved thresholds, improvement outcome ledgers, retrieval-ranking optimization, case-based planning, bounded strategy selection, shadow-mode policy comparison, data-only procedural skill evolution, and a final integrated dry-run.
 
@@ -17,7 +21,7 @@ The authorized plane may describe canary plans, exposure budgets, monitoring win
 - `parent_authorization_transaction_id=AION-171-SI-0004`
 - `implementation_task=AION-174`
 - `authorization_scope=approval-bound-canary-rollback-and-adaptive-policy`
-- `authorization_active=true`
+- `authorization_active=false` after AION-175 closeout
 - `authorization_consumed=false`
 - `authorization_expired=false`
 - `authorization_reusable=false`

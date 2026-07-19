@@ -35,6 +35,8 @@ AION_172_FEATURE_COMMIT = "4a8adbc6ed3c364588883eb5fe91e393f26479cd"
 AION_172_MERGE_COMMIT = "0033f24c5f2f1f1b2a1a89a8595f29db1c1d1bf9"
 AION_173_FEATURE_COMMIT = "bd215d2910e6c29b7f0d53381d0960330fda4623"
 AION_173_MERGE_COMMIT = "9d827d8bbbe0cb726904b19b0662e214d7f1b04e"
+AION_174_FEATURE_COMMIT = "61fdce1795385fa954114a38098f6f2dba26a5f4"
+AION_174_MERGE_COMMIT = "dd17639986160938043d8ddef7da8cb9b8a2faa4"
 
 LIFECYCLE_STATES = (
     "observed",
@@ -94,7 +96,9 @@ GOVERNANCE_FALSE_FLAGS = {
     "deployment_enabled",
     "model_weight_training_enabled",
     "model_weight_changes_enabled",
+    "canary_runtime_enabled",
     "production_canary_enabled",
+    "production_exposure_enabled",
     "unrestricted_traffic_exposure_enabled",
     "automatic_protected_core_modification_enabled",
     "automatic_policy_relaxation_enabled",
@@ -142,6 +146,21 @@ GOVERNANCE_TRUE_FLAGS = {
     "shadow_mode_policy_comparison_authorized",
     "data_only_procedural_skill_evolution_authorized",
     "final_integrated_dry_run_authorized",
+    "self_improvement_platform_implemented",
+    "proposal_generation_available",
+    "experiment_execution_available",
+    "benchmark_comparison_available",
+    "isolated_worktree_available",
+    "test_first_patch_generation_available",
+    "approval_bound_pr_creation_available",
+    "approval_bound_merge_control_available",
+    "canary_simulation_available",
+    "automatic_rollback_available",
+    "adaptive_retrieval_candidates_available",
+    "case_based_planning_candidates_available",
+    "procedural_skill_candidates_available",
+    "holdout_protected",
+    "rollback_required",
 }
 
 PROTECTED_PATHS = (
@@ -317,6 +336,14 @@ REQUIRED_DOCS = (
     "docs/self-improvement/experiment-authorization.md",
     "docs/self-improvement/rewrite-authorization.md",
     "docs/self-improvement/canary-authorization.md",
+    "docs/self-improvement/final-architecture.md",
+    "docs/self-improvement/operator-evaluation-guide.md",
+    "docs/self-improvement/security-review.md",
+    "docs/self-improvement/benchmark-report.md",
+    "docs/self-improvement/end-to-end-evidence.md",
+    "docs/self-improvement/known-limitations.md",
+    "docs/self-improvement/runtime-activation-checklist.md",
+    "docs/self-improvement/future-model-training-boundary.md",
     "docs/self-improvement/protected-core-boundary.md",
     "docs/self-improvement/approval-model.md",
     "docs/self-improvement/change-budget-model.md",
@@ -329,6 +356,7 @@ REQUIRED_DOCS = (
     "docs/adr/0158-self-improvement-experiment-authorization.md",
     "docs/adr/0159-self-improvement-rewrite-authorization.md",
     "docs/adr/0160-self-improvement-canary-authorization.md",
+    "docs/adr/0161-governed-self-improvement-platform-complete.md",
 )
 
 PRIVATE_MARKERS = (
@@ -394,7 +422,7 @@ def validate_repo(repo_root: Path) -> None:
 
 def validate_no_go(repo_root: Path) -> None:
     authorization = _load_json(repo_root / "docs/self-improvement/authorization-ledger.json")
-    active = _active_authorization(authorization)
+    active = _current_authorization_record(authorization)
     for key in GOVERNANCE_FALSE_FLAGS:
         if active.get(key) is not False:
             raise GovernanceValidationError(f"{key} must be false")
@@ -420,7 +448,7 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
     records = payload.get("records")
     _require(isinstance(records, list), "records must be a list")
     records = cast(list[dict[str, Any]], records)
-    _require(len(records) == 6, "AION-173 authorization ledger must have six records")
+    _require(len(records) == 6, "AION-175 authorization ledger must have six records")
 
     root_closeout = records[0]
     _require(root_closeout.get("record_kind") == "authorization_closeout", "missing root closeout")
@@ -564,7 +592,7 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
     _require(rewrite_closeout.get("authorization_reusable") is False, "rewrite reusable")
 
     active = records[5]
-    _require(active.get("record_kind") == "authorization_transaction", "missing active record")
+    _require(active.get("record_kind") == "authorization_closeout", "missing canary closeout")
     _require(
         active.get("authorization_transaction_id") == CANARY_AUTHORIZATION_ID,
         "authorization id",
@@ -579,10 +607,24 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
         active.get("authorization_scope") == "approval-bound-canary-rollback-and-adaptive-policy",
         "authorization scope",
     )
-    _require(active.get("authorization_active") is True, "authorization active")
-    _require(active.get("authorization_consumed") is False, "authorization consumed")
-    _require(active.get("authorization_expired") is False, "authorization expired")
+    _require(active.get("authorization_active") is False, "authorization inactive")
+    _require(active.get("authorization_consumed") is True, "authorization consumed")
+    _require(active.get("authorization_consumed_by_task") == "AION-174", "canary task")
+    _require(active.get("authorization_consumed_by_pr") == 85, "canary PR")
+    _require(
+        active.get("authorization_consumed_by_feature_commits") == [AION_174_FEATURE_COMMIT],
+        "canary feature commit",
+    )
+    _require(
+        active.get("authorization_consumed_by_merge_commit") == AION_174_MERGE_COMMIT,
+        "canary merge commit",
+    )
+    _require(active.get("authorization_expired") is True, "authorization expired")
     _require(active.get("authorization_reusable") is False, "authorization reusable")
+    _require(
+        active.get("self_improvement_platform_state") == "implemented_disabled",
+        "platform state",
+    )
     for key in GOVERNANCE_FALSE_FLAGS:
         _require(active.get(key) is False, f"{key} must be false")
     for key in GOVERNANCE_TRUE_FLAGS:
@@ -631,6 +673,7 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
     _require("AION-172" in by_task, "AION-172 record missing")
     _require("AION-173" in by_task, "AION-173 record missing")
     _require("AION-174" in by_task, "AION-174 record missing")
+    _require("AION-175" in by_task, "AION-175 record missing")
     aion164 = by_task["AION-164"]
     _require(aion164.get("pull_requests") == [75], "AION-164 PR mismatch")
     _require(
@@ -820,14 +863,20 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
         aion174.get("authorization_transaction") == CANARY_AUTHORIZATION_ID,
         "AION-174 auth",
     )
-    _require(aion174.get("branch") == "phase/self-improvement-canary-and-adaptation", "AION-174 branch")
-    _require(aion174.get("pull_requests") == [], "AION-174 PR pending")
-    _require(aion174.get("feature_commits") == [], "AION-174 feature pending")
-    _require(aion174.get("merge_commits") == [], "AION-174 merge pending")
-    _require(aion174.get("ci_result") == "pending", "AION-174 CI pending")
+    _require(
+        aion174.get("branch") == "phase/self-improvement-canary-and-adaptation",
+        "AION-174 branch",
+    )
+    _require(aion174.get("pull_requests") == [85], "AION-174 PR mismatch")
+    _require(aion174.get("feature_commits") == [AION_174_FEATURE_COMMIT], "AION-174 feature")
+    _require(
+        aion174.get("merge_commits") == [AION_174_MERGE_COMMIT],
+        "AION-174 merge commit missing",
+    )
+    _require(aion174.get("ci_result") == "pass", "AION-174 CI result")
     _require(aion174.get("next_task") == "AION-175", "AION-174 next task")
     _require(
-        aion174.get("authorization_state") == "active_until_AION-174_merge",
+        aion174.get("authorization_state") == "consumed_by_AION-174_closed_by_AION-175",
         "AION-174 authorization state",
     )
     _require(
@@ -836,13 +885,46 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
         "AION-174 runtime state",
     )
 
+    aion175 = by_task["AION-175"]
+    _require(
+        aion175.get("branch") == "phase/self-improvement-final-closeout",
+        "AION-175 branch",
+    )
+    _require(
+        aion175.get("authorization_transaction") == CANARY_AUTHORIZATION_ID,
+        "AION-175 auth",
+    )
+    _require(aion175.get("pull_requests") == [], "AION-175 PR pending")
+    _require(aion175.get("feature_commits") == [], "AION-175 feature pending")
+    _require(aion175.get("merge_commits") == [], "AION-175 merge pending")
+    _require(aion175.get("ci_result") == "pending", "AION-175 CI pending")
+    _require(aion175.get("next_task") == "user_evaluation", "AION-175 next task")
+    _require(
+        aion175.get("authorization_state") == "final_closeout_no_new_authorization",
+        "AION-175 authorization state",
+    )
+    _require(
+        aion175.get("runtime_state") == "self_improvement_platform_implemented_disabled",
+        "AION-175 runtime state",
+    )
 
-def _active_authorization(payload: dict[str, Any]) -> dict[str, Any]:
+
+def _current_authorization_record(payload: dict[str, Any]) -> dict[str, Any]:
+    records = cast(list[dict[str, Any]], payload.get("records", []))
     matches = [
-        record for record in payload.get("records", []) if record.get("authorization_active") is True
+        record for record in records if record.get("authorization_active") is True
     ]
-    _require(len(matches) == 1, "exactly one active self-improvement authorization required")
-    return matches[0]
+    if matches:
+        _require(len(matches) == 1, "at most one active self-improvement authorization required")
+        return matches[0]
+    closeouts = [
+        record
+        for record in records
+        if record.get("authorization_transaction_id") == CANARY_AUTHORIZATION_ID
+        and record.get("authorization_consumed") is True
+    ]
+    _require(len(closeouts) == 1, "final canary authorization closeout required")
+    return closeouts[0]
 
 
 def _require_required_docs(repo_root: Path) -> None:
@@ -863,6 +945,8 @@ def _validate_adr_index(repo_root: Path) -> None:
         raise GovernanceValidationError("ADR 0159 is not indexed")
     if "0160-self-improvement-canary-authorization.md" not in index:
         raise GovernanceValidationError("ADR 0160 is not indexed")
+    if "0161-governed-self-improvement-platform-complete.md" not in index:
+        raise GovernanceValidationError("ADR 0161 is not indexed")
 
 
 def _validate_docs_do_not_store_private_material(repo_root: Path) -> None:
