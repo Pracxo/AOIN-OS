@@ -33,6 +33,8 @@ AION_171_FEATURE_COMMIT = "4970700555638b4ecd53a581d1797148906f81ef"
 AION_171_MERGE_COMMIT = "478b79de1fbd4eeeb0280a41abf4050c0f513d8f"
 AION_172_FEATURE_COMMIT = "4a8adbc6ed3c364588883eb5fe91e393f26479cd"
 AION_172_MERGE_COMMIT = "0033f24c5f2f1f1b2a1a89a8595f29db1c1d1bf9"
+AION_173_FEATURE_COMMIT = "bd215d2910e6c29b7f0d53381d0960330fda4623"
+AION_173_MERGE_COMMIT = "9d827d8bbbe0cb726904b19b0662e214d7f1b04e"
 
 LIFECYCLE_STATES = (
     "observed",
@@ -628,6 +630,7 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
     _require("AION-171" in by_task, "AION-171 record missing")
     _require("AION-172" in by_task, "AION-172 record missing")
     _require("AION-173" in by_task, "AION-173 record missing")
+    _require("AION-174" in by_task, "AION-174 record missing")
     aion164 = by_task["AION-164"]
     _require(aion164.get("pull_requests") == [75], "AION-164 PR mismatch")
     _require(
@@ -794,10 +797,13 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
         aion173.get("authorization_transaction") == CANARY_AUTHORIZATION_ID,
         "AION-173 auth",
     )
-    _require(aion173.get("pull_requests") == [], "AION-173 PR pending")
-    _require(aion173.get("feature_commits") == [], "AION-173 feature pending")
-    _require(aion173.get("merge_commits") == [], "AION-173 merge pending")
-    _require(aion173.get("ci_result") == "pending", "AION-173 CI pending")
+    _require(aion173.get("pull_requests") == [84], "AION-173 PR mismatch")
+    _require(aion173.get("feature_commits") == [AION_173_FEATURE_COMMIT], "AION-173 feature")
+    _require(
+        aion173.get("merge_commits") == [AION_173_MERGE_COMMIT],
+        "AION-173 merge commit missing",
+    )
+    _require(aion173.get("ci_result") == "pass", "AION-173 CI result")
     _require(aion173.get("next_task") == "AION-174", "AION-173 next task")
     _require(
         aion173.get("authorization_state") == "active_until_AION-174_merge",
@@ -807,6 +813,27 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
         aion173.get("runtime_state")
         == "authorization_only_no_canary_runtime_or_adaptive_learning_implementation",
         "AION-173 runtime state",
+    )
+
+    aion174 = by_task["AION-174"]
+    _require(
+        aion174.get("authorization_transaction") == CANARY_AUTHORIZATION_ID,
+        "AION-174 auth",
+    )
+    _require(aion174.get("branch") == "phase/self-improvement-canary-and-adaptation", "AION-174 branch")
+    _require(aion174.get("pull_requests") == [], "AION-174 PR pending")
+    _require(aion174.get("feature_commits") == [], "AION-174 feature pending")
+    _require(aion174.get("merge_commits") == [], "AION-174 merge pending")
+    _require(aion174.get("ci_result") == "pending", "AION-174 CI pending")
+    _require(aion174.get("next_task") == "AION-175", "AION-174 next task")
+    _require(
+        aion174.get("authorization_state") == "active_until_AION-174_merge",
+        "AION-174 authorization state",
+    )
+    _require(
+        aion174.get("runtime_state")
+        == "canary_adaptation_plane_implemented_disabled_data_only_no_production_activation",
+        "AION-174 runtime state",
     )
 
 
