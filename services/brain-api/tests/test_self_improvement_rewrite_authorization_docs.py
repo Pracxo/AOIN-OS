@@ -16,11 +16,11 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "scripts/lib"))
 
 from self_improvement_governance import (  # noqa: E402
+    AION_172_FEATURE_COMMIT,
+    AION_172_MERGE_COMMIT,
     APPROVAL_BINDING_REQUIREMENTS,
     AUTHORIZATION_ID,
     EXPERIMENT_AUTHORIZATION_ID,
-    GOVERNANCE_FALSE_FLAGS,
-    GOVERNANCE_TRUE_FLAGS,
     REWRITE_APPROVED_SCOPE,
     REWRITE_PROHIBITED_SCOPE,
     TEST_WEAKENING_CONTROLS,
@@ -33,20 +33,28 @@ from self_improvement_governance import (  # noqa: E402
 def test_aion171_authorizes_only_approval_bound_rewrite_controller() -> None:
     payload = _authorization()
     validate_authorization_ledger(payload)
-    active = payload["records"][4]
+    closeout = payload["records"][4]
+    historical = _text("docs/self-improvement/rewrite-authorization.md")
 
-    assert active["authorization_transaction_id"] == AUTHORIZATION_ID
-    assert active["parent_authorization_transaction_id"] == EXPERIMENT_AUTHORIZATION_ID
-    assert active["implementation_task"] == "AION-172"
-    assert active["authorization_scope"] == "approval-bound-isolated-source-rewrite-and-pr-control"
-    assert tuple(active["approved_scope"]) == REWRITE_APPROVED_SCOPE
-    assert tuple(active["prohibited_scope"]) == REWRITE_PROHIBITED_SCOPE
-    assert tuple(active["approval_binding_requirements"]) == APPROVAL_BINDING_REQUIREMENTS
-    assert tuple(active["test_weakening_controls"]) == TEST_WEAKENING_CONTROLS
-    for key in GOVERNANCE_FALSE_FLAGS:
-        assert active[key] is False
-    for key in GOVERNANCE_TRUE_FLAGS:
-        assert active[key] is True
+    assert closeout["authorization_transaction_id"] == AUTHORIZATION_ID
+    assert closeout["authorization_active"] is False
+    assert closeout["authorization_consumed"] is True
+    assert closeout["authorization_consumed_by_task"] == "AION-172"
+    assert closeout["authorization_consumed_by_pr"] == 83
+    assert closeout["authorization_consumed_by_feature_commits"] == [AION_172_FEATURE_COMMIT]
+    assert closeout["authorization_consumed_by_merge_commit"] == AION_172_MERGE_COMMIT
+    assert closeout["authorization_reusable"] is False
+
+    assert AUTHORIZATION_ID in historical
+    assert EXPERIMENT_AUTHORIZATION_ID in historical
+    for item in REWRITE_APPROVED_SCOPE:
+        assert item in historical
+    for item in REWRITE_PROHIBITED_SCOPE:
+        assert item in historical
+    for item in APPROVAL_BINDING_REQUIREMENTS:
+        assert item in historical
+    for item in TEST_WEAKENING_CONTROLS:
+        assert item in historical
 
 
 def test_aion171_blocks_runtime_rewrite_merge_deploy_and_self_approval() -> None:
@@ -67,44 +75,40 @@ def test_aion171_blocks_runtime_rewrite_merge_deploy_and_self_approval() -> None
         "model_weight_training_enabled",
     ]:
         payload = _authorization()
-        payload["records"][4][flag] = True
+        payload["records"][5][flag] = True
         with pytest.raises(GovernanceValidationError, match=flag):
             validate_authorization_ledger(payload)
 
 
 def test_aion171_requires_exact_approval_binding_and_test_integrity_controls() -> None:
     payload = _authorization()
-    active = payload["records"][4]
+    historical = _text("docs/self-improvement/rewrite-authorization.md")
 
-    assert "exact commit SHA" in active["approval_binding_requirements"]
-    assert "exact diff hash" in active["approval_binding_requirements"]
-    assert "exact benchmark fingerprint" in active["approval_binding_requirements"]
-    assert "exact rollback commit" in active["approval_binding_requirements"]
-    assert "detect deleted assertions" in active["test_weakening_controls"]
-    assert "detect skipped tests" in active["test_weakening_controls"]
-    assert "detect changed benchmark thresholds" in active["test_weakening_controls"]
+    assert "exact commit SHA" in historical
+    assert "exact diff hash" in historical
+    assert "exact benchmark fingerprint" in historical
+    assert "exact rollback commit" in historical
+    assert "detect deleted assertions" in historical
+    assert "detect skipped tests" in historical
+    assert "detect changed benchmark thresholds" in historical
 
-    active["approval_binding_requirements"] = [
-        item for item in active["approval_binding_requirements"] if item != "exact diff hash"
-    ]
-    with pytest.raises(GovernanceValidationError, match="approval binding requirements"):
+    payload["records"][4]["authorization_consumed_by_feature_commits"] = []
+    with pytest.raises(GovernanceValidationError, match="rewrite feature commit"):
         validate_authorization_ledger(payload)
 
 
 def test_aion171_prohibits_direct_main_force_push_and_unapproved_merge() -> None:
     payload = _authorization()
-    active = payload["records"][4]
+    historical = _text("docs/self-improvement/rewrite-authorization.md")
 
-    assert "direct main writes" in active["prohibited_scope"]
-    assert "force pushes" in active["prohibited_scope"]
-    assert "self-approval" in active["prohibited_scope"]
-    assert "automatic merge without approval" in active["prohibited_scope"]
-    assert "production deployment" in active["prohibited_scope"]
+    assert "direct main writes" in historical
+    assert "force pushes" in historical
+    assert "self-approval" in historical
+    assert "automatic merge without approval" in historical
+    assert "production deployment" in historical
 
-    active["prohibited_scope"] = [
-        item for item in active["prohibited_scope"] if item != "self-approval"
-    ]
-    with pytest.raises(GovernanceValidationError, match="prohibited rewrite scope"):
+    payload["records"][4]["authorization_consumed_by_merge_commit"] = "deadbeef"
+    with pytest.raises(GovernanceValidationError, match="rewrite merge commit"):
         validate_authorization_ledger(payload)
 
 
@@ -124,6 +128,10 @@ def _authorization() -> dict[str, Any]:
         payload = json.load(handle)
     assert isinstance(payload, dict)
     return payload
+
+
+def _text(relative: str) -> str:
+    return (ROOT / relative).read_text()
 
 
 def _nested_env() -> dict[str, str]:

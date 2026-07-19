@@ -602,6 +602,35 @@ aion172_is_scoped_self_improvement_rewrite_controller_path() {
   esac
 }
 
+aion173_is_scoped_self_improvement_canary_authorization_path() {
+  # Exact AION-173 self-improvement canary authorization paths. This task is
+  # governance-only and does not exempt runtime source, SDK/CLI surfaces,
+  # package files, lockfiles, migrations, or API routes.
+  case "$1" in
+    docs/adr/0160-self-improvement-canary-authorization.md|\
+    docs/adr/README.md|\
+    docs/self-improvement/canary-authorization.md|\
+    docs/self-improvement/authorization-ledger.json|\
+    docs/self-improvement/program-ledger.json|\
+    scripts/auth-design-check.sh|\
+    scripts/production-auth-core-no-go-regression.sh|\
+    scripts/lib/self_improvement_governance.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    scripts/self-improvement-canary-no-go-regression.sh|\
+    scripts/self-improvement-canary-authorization-check.sh|\
+    services/brain-api/tests/test_self_improvement_governance_authorization_docs.py|\
+    services/brain-api/tests/test_self_improvement_evaluation_authorization_docs.py|\
+    services/brain-api/tests/test_self_improvement_experiment_authorization_docs.py|\
+    services/brain-api/tests/test_self_improvement_rewrite_authorization_docs.py|\
+    services/brain-api/tests/test_self_improvement_canary_authorization_docs.py)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
 aion161_is_scoped_offline_identity_assertion_verification_authorization_path() {
   # Exact AION-161 governance, evidence, and validator paths. This task closes
   # AION-159 and creates an offline verification authorization only; it does

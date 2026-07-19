@@ -1110,6 +1110,24 @@ aion171_auth_paths = {
     "services/brain-api/tests/test_self_improvement_rewrite_authorization_docs.py",
 }
 
+aion173_auth_paths = {
+    "docs/adr/0160-self-improvement-canary-authorization.md",
+    "docs/self-improvement/canary-authorization.md",
+    "docs/self-improvement/authorization-ledger.json",
+    "docs/self-improvement/program-ledger.json",
+    "scripts/auth-design-check.sh",
+    "scripts/production-auth-core-no-go-regression.sh",
+    "scripts/lib/self_improvement_governance.py",
+    "scripts/lib/v02-production-auth-scan-exclusions.sh",
+    "scripts/self-improvement-canary-authorization-check.sh",
+    "scripts/self-improvement-canary-no-go-regression.sh",
+    "services/brain-api/tests/test_self_improvement_governance_authorization_docs.py",
+    "services/brain-api/tests/test_self_improvement_evaluation_authorization_docs.py",
+    "services/brain-api/tests/test_self_improvement_experiment_authorization_docs.py",
+    "services/brain-api/tests/test_self_improvement_rewrite_authorization_docs.py",
+    "services/brain-api/tests/test_self_improvement_canary_authorization_docs.py",
+}
+
 blocked_package_names = {
     "package.json",
     "package-lock.json",
@@ -1147,6 +1165,7 @@ for name in [*changed, *untracked]:
         and name not in aion165_auth_paths
         and name not in aion169_auth_paths
         and name not in aion171_auth_paths
+        and name not in aion173_auth_paths
     ):
         raise SystemExit(f"unexpected auth runtime or artifact path: {name}")
 

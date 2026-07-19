@@ -15,6 +15,7 @@ PARENT_AUTHORIZATION_ID = "AION-165-SI-0001"
 EVALUATION_AUTHORIZATION_ID = "AION-167-SI-0002"
 EXPERIMENT_AUTHORIZATION_ID = "AION-169-SI-0003"
 AUTHORIZATION_ID = "AION-171-SI-0004"
+CANARY_AUTHORIZATION_ID = "AION-173-SI-0005"
 AION_166_FEATURE_COMMIT = "fae49a3f913b7a3d4d18ad4e7f989ed2aca5de91"
 AION_166_MERGE_COMMIT = "9a7105e31b8f6e56faf53bfb56e11eed75a01203"
 AION_167_FEATURE_COMMIT = "bbc04cf57f02483e00752c20fa70b77abf95ce46"
@@ -30,6 +31,8 @@ AION_170_FEATURE_COMMITS = (
 AION_170_MERGE_COMMIT = "6e741c8327d900fa80480bce911fbccffb8b4781"
 AION_171_FEATURE_COMMIT = "4970700555638b4ecd53a581d1797148906f81ef"
 AION_171_MERGE_COMMIT = "478b79de1fbd4eeeb0280a41abf4050c0f513d8f"
+AION_172_FEATURE_COMMIT = "4a8adbc6ed3c364588883eb5fe91e393f26479cd"
+AION_172_MERGE_COMMIT = "0033f24c5f2f1f1b2a1a89a8595f29db1c1d1bf9"
 
 LIFECYCLE_STATES = (
     "observed",
@@ -89,6 +92,12 @@ GOVERNANCE_FALSE_FLAGS = {
     "deployment_enabled",
     "model_weight_training_enabled",
     "model_weight_changes_enabled",
+    "production_canary_enabled",
+    "unrestricted_traffic_exposure_enabled",
+    "automatic_protected_core_modification_enabled",
+    "automatic_policy_relaxation_enabled",
+    "runtime_self_approval_enabled",
+    "autonomous_production_activation_enabled",
 }
 
 GOVERNANCE_TRUE_FLAGS = {
@@ -120,6 +129,17 @@ GOVERNANCE_TRUE_FLAGS = {
     "approved_merge_control_authorized",
     "rollback_commits_authorized",
     "github_ci_monitoring_authorized",
+    "canary_plans_authorized",
+    "exposure_budgets_authorized",
+    "monitoring_windows_authorized",
+    "automatic_rollback_under_approved_thresholds_authorized",
+    "improvement_outcome_ledger_authorized",
+    "retrieval_ranking_optimization_authorized",
+    "case_based_planning_authorized",
+    "bounded_strategy_selection_authorized",
+    "shadow_mode_policy_comparison_authorized",
+    "data_only_procedural_skill_evolution_authorized",
+    "final_integrated_dry_run_authorized",
 }
 
 PROTECTED_PATHS = (
@@ -252,11 +272,49 @@ TEST_WEAKENING_CONTROLS = (
     "mutation-style checks for high-risk proposals",
 )
 
+CANARY_APPROVED_SCOPE = (
+    "canary plans",
+    "exposure budgets",
+    "monitoring windows",
+    "automatic rollback under approved thresholds",
+    "improvement outcome ledger",
+    "retrieval-ranking optimization",
+    "case-based planning",
+    "bounded strategy selection",
+    "shadow-mode policy comparison",
+    "data-only procedural skill evolution",
+    "final integrated dry-run",
+)
+
+CANARY_PROHIBITED_SCOPE = (
+    "production canary by default",
+    "unrestricted traffic exposure",
+    "model-weight training",
+    "automatic protected-core modification",
+    "automatic policy relaxation",
+    "runtime self-approval",
+    "autonomous production activation",
+    "v0.2 tag or release",
+    "aion-v0.1.0 modification",
+)
+
+CANARY_APPROVAL_BINDING_REQUIREMENTS = (
+    "exact merge commit",
+    "exact deployment artifact",
+    "exact exposure budget",
+    "exact monitoring duration",
+    "exact rollback commit",
+    "exact metric thresholds",
+    "exact outcome ledger ID",
+    "exact adaptive policy version",
+)
+
 REQUIRED_DOCS = (
     "docs/self-improvement/governance-charter.md",
     "docs/self-improvement/evaluation-authorization.md",
     "docs/self-improvement/experiment-authorization.md",
     "docs/self-improvement/rewrite-authorization.md",
+    "docs/self-improvement/canary-authorization.md",
     "docs/self-improvement/protected-core-boundary.md",
     "docs/self-improvement/approval-model.md",
     "docs/self-improvement/change-budget-model.md",
@@ -268,6 +326,7 @@ REQUIRED_DOCS = (
     "docs/adr/0157-self-improvement-evaluation-authorization.md",
     "docs/adr/0158-self-improvement-experiment-authorization.md",
     "docs/adr/0159-self-improvement-rewrite-authorization.md",
+    "docs/adr/0160-self-improvement-canary-authorization.md",
 )
 
 PRIVATE_MARKERS = (
@@ -340,11 +399,13 @@ def validate_no_go(repo_root: Path) -> None:
     for key in GOVERNANCE_TRUE_FLAGS:
         if active.get(key) is not True:
             raise GovernanceValidationError(f"{key} must be true")
-    required_prohibited_scope = (
-        REWRITE_PROHIBITED_SCOPE
-        if active.get("authorization_transaction_id") == AUTHORIZATION_ID
-        else EXPERIMENT_PROHIBITED_SCOPE
-    )
+    required_prohibited_scope: tuple[str, ...]
+    if active.get("authorization_transaction_id") == CANARY_AUTHORIZATION_ID:
+        required_prohibited_scope = CANARY_PROHIBITED_SCOPE
+    elif active.get("authorization_transaction_id") == AUTHORIZATION_ID:
+        required_prohibited_scope = REWRITE_PROHIBITED_SCOPE
+    else:
+        required_prohibited_scope = EXPERIMENT_PROHIBITED_SCOPE
     for item in required_prohibited_scope:
         if item not in active.get("prohibited_scope", []):
             raise GovernanceValidationError(f"{item} must be prohibited")
@@ -357,7 +418,7 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
     records = payload.get("records")
     _require(isinstance(records, list), "records must be a list")
     records = cast(list[dict[str, Any]], records)
-    _require(len(records) == 5, "AION-171 authorization ledger must have five records")
+    _require(len(records) == 6, "AION-173 authorization ledger must have six records")
 
     root_closeout = records[0]
     _require(root_closeout.get("record_kind") == "authorization_closeout", "missing root closeout")
@@ -466,17 +527,54 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
     _require(experiment_closeout.get("authorization_expired") is True, "experiment expired")
     _require(experiment_closeout.get("authorization_reusable") is False, "experiment reusable")
 
-    active = records[4]
-    _require(active.get("record_kind") == "authorization_transaction", "missing active record")
-    _require(active.get("authorization_transaction_id") == AUTHORIZATION_ID, "authorization id")
-    _require(active.get("approval_record_id") == AUTHORIZATION_ID, "approval id")
+    rewrite_closeout = records[4]
     _require(
-        active.get("parent_authorization_transaction_id") == EXPERIMENT_AUTHORIZATION_ID,
+        rewrite_closeout.get("record_kind") == "authorization_closeout",
+        "missing rewrite closeout",
+    )
+    _require(
+        rewrite_closeout.get("authorization_transaction_id") == AUTHORIZATION_ID,
+        "rewrite closeout id",
+    )
+    _require(
+        rewrite_closeout.get("authorization_active") is False,
+        "rewrite must be inactive",
+    )
+    _require(
+        rewrite_closeout.get("authorization_consumed") is True,
+        "rewrite must be consumed",
+    )
+    _require(
+        rewrite_closeout.get("authorization_consumed_by_task") == "AION-172",
+        "rewrite task",
+    )
+    _require(rewrite_closeout.get("authorization_consumed_by_pr") == 83, "rewrite PR")
+    _require(
+        rewrite_closeout.get("authorization_consumed_by_feature_commits")
+        == [AION_172_FEATURE_COMMIT],
+        "rewrite feature commit",
+    )
+    _require(
+        rewrite_closeout.get("authorization_consumed_by_merge_commit") == AION_172_MERGE_COMMIT,
+        "rewrite merge commit",
+    )
+    _require(rewrite_closeout.get("authorization_expired") is True, "rewrite expired")
+    _require(rewrite_closeout.get("authorization_reusable") is False, "rewrite reusable")
+
+    active = records[5]
+    _require(active.get("record_kind") == "authorization_transaction", "missing active record")
+    _require(
+        active.get("authorization_transaction_id") == CANARY_AUTHORIZATION_ID,
+        "authorization id",
+    )
+    _require(active.get("approval_record_id") == CANARY_AUTHORIZATION_ID, "approval id")
+    _require(
+        active.get("parent_authorization_transaction_id") == AUTHORIZATION_ID,
         "parent id",
     )
-    _require(active.get("implementation_task") == "AION-172", "implementation task")
+    _require(active.get("implementation_task") == "AION-174", "implementation task")
     _require(
-        active.get("authorization_scope") == "approval-bound-isolated-source-rewrite-and-pr-control",
+        active.get("authorization_scope") == "approval-bound-canary-rollback-and-adaptive-policy",
         "authorization scope",
     )
     _require(active.get("authorization_active") is True, "authorization active")
@@ -494,7 +592,8 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
         "change budget dimensions",
     )
     _require(
-        tuple(active.get("approval_binding_requirements", [])) == APPROVAL_BINDING_REQUIREMENTS,
+        tuple(active.get("approval_binding_requirements", []))
+        == CANARY_APPROVAL_BINDING_REQUIREMENTS,
         "approval binding requirements",
     )
     _require(
@@ -502,12 +601,12 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
         "test weakening controls",
     )
     _require(
-        tuple(active.get("approved_scope", [])) == REWRITE_APPROVED_SCOPE,
-        "approved rewrite scope",
+        tuple(active.get("approved_scope", [])) == CANARY_APPROVED_SCOPE,
+        "approved canary scope",
     )
     _require(
-        tuple(active.get("prohibited_scope", [])) == REWRITE_PROHIBITED_SCOPE,
-        "prohibited rewrite scope",
+        tuple(active.get("prohibited_scope", [])) == CANARY_PROHIBITED_SCOPE,
+        "prohibited canary scope",
     )
 
 
@@ -528,6 +627,7 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
     _require("AION-170" in by_task, "AION-170 record missing")
     _require("AION-171" in by_task, "AION-171 record missing")
     _require("AION-172" in by_task, "AION-172 record missing")
+    _require("AION-173" in by_task, "AION-173 record missing")
     aion164 = by_task["AION-164"]
     _require(aion164.get("pull_requests") == [75], "AION-164 PR mismatch")
     _require(
@@ -661,7 +761,7 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
     _require(aion171.get("ci_result") == "pass", "AION-171 CI result")
     _require(aion171.get("next_task") == "AION-172", "AION-171 next task")
     _require(
-        aion171.get("authorization_state") == "active_until_AION-172_merge",
+        aion171.get("authorization_state") == "consumed_by_AION-172_closed_by_AION-173",
         "AION-171 authorization state",
     )
     _require(
@@ -671,19 +771,42 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
 
     aion172 = by_task["AION-172"]
     _require(aion172.get("authorization_transaction") == AUTHORIZATION_ID, "AION-172 auth")
-    _require(aion172.get("pull_requests") == [], "AION-172 PR pending")
-    _require(aion172.get("feature_commits") == [], "AION-172 feature pending")
-    _require(aion172.get("merge_commits") == [], "AION-172 merge pending")
-    _require(aion172.get("ci_result") == "pending", "AION-172 CI pending")
+    _require(aion172.get("pull_requests") == [83], "AION-172 PR mismatch")
+    _require(aion172.get("feature_commits") == [AION_172_FEATURE_COMMIT], "AION-172 feature")
+    _require(
+        aion172.get("merge_commits") == [AION_172_MERGE_COMMIT],
+        "AION-172 merge commit missing",
+    )
+    _require(aion172.get("ci_result") == "pass", "AION-172 CI result")
     _require(aion172.get("next_task") == "AION-173", "AION-172 next task")
     _require(
-        aion172.get("authorization_state") == "active_until_AION-172_merge",
+        aion172.get("authorization_state") == "consumed_by_AION-172_closed_by_AION-173",
         "AION-172 authorization state",
     )
     _require(
         aion172.get("runtime_state")
         == "rewrite_controller_implemented_disabled_approval_bound_no_production_github_calls",
         "AION-172 runtime state",
+    )
+
+    aion173 = by_task["AION-173"]
+    _require(
+        aion173.get("authorization_transaction") == CANARY_AUTHORIZATION_ID,
+        "AION-173 auth",
+    )
+    _require(aion173.get("pull_requests") == [], "AION-173 PR pending")
+    _require(aion173.get("feature_commits") == [], "AION-173 feature pending")
+    _require(aion173.get("merge_commits") == [], "AION-173 merge pending")
+    _require(aion173.get("ci_result") == "pending", "AION-173 CI pending")
+    _require(aion173.get("next_task") == "AION-174", "AION-173 next task")
+    _require(
+        aion173.get("authorization_state") == "active_until_AION-174_merge",
+        "AION-173 authorization state",
+    )
+    _require(
+        aion173.get("runtime_state")
+        == "authorization_only_no_canary_runtime_or_adaptive_learning_implementation",
+        "AION-173 runtime state",
     )
 
 
@@ -711,6 +834,8 @@ def _validate_adr_index(repo_root: Path) -> None:
         raise GovernanceValidationError("ADR 0158 is not indexed")
     if "0159-self-improvement-rewrite-authorization.md" not in index:
         raise GovernanceValidationError("ADR 0159 is not indexed")
+    if "0160-self-improvement-canary-authorization.md" not in index:
+        raise GovernanceValidationError("ADR 0160 is not indexed")
 
 
 def _validate_docs_do_not_store_private_material(repo_root: Path) -> None:

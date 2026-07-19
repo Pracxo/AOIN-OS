@@ -274,7 +274,7 @@
         "./scripts/check.sh pass"
       ],
       "authorization_transaction": "AION-171-SI-0004",
-      "authorization_state": "active_until_AION-172_merge",
+      "authorization_state": "consumed_by_AION-172_closed_by_AION-173",
       "next_task": "AION-172",
       "runtime_state": "authorization_only_no_rewrite_controller_implementation",
       "completion_timestamp": "2026-07-19T01:00:23Z"
@@ -282,22 +282,59 @@
     {
       "task_id": "AION-172",
       "branch": "phase/self-improvement-approved-rewrite-controller",
+      "feature_commits": [
+        "4a8adbc6ed3c364588883eb5fe91e393f26479cd"
+      ],
+      "pull_requests": [
+        83
+      ],
+      "merge_commits": [
+        "0033f24c5f2f1f1b2a1a89a8595f29db1c1d1bf9"
+      ],
+      "ci_result": "pass",
+      "corrective_prs": [],
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_rewrite_controller.py -q: 10 passed",
+        "./scripts/self-improvement-rewrite-controller-no-go-regression.sh pass",
+        "./scripts/self-improvement-rewrite-controller-check.sh pass",
+        "./scripts/self-improvement-rewrite-no-go-regression.sh pass",
+        "./scripts/self-improvement-rewrite-authorization-check.sh pass",
+        "./scripts/production-auth-core-no-go-regression.sh pass",
+        "./scripts/connector-runtime-no-external-call-regression.sh pass",
+        "./scripts/check.sh pass"
+      ],
+      "authorization_transaction": "AION-171-SI-0004",
+      "authorization_state": "consumed_by_AION-172_closed_by_AION-173",
+      "next_task": "AION-173",
+      "runtime_state": "rewrite_controller_implemented_disabled_approval_bound_no_production_github_calls",
+      "completion_timestamp": "2026-07-19T02:14:33Z"
+    },
+    {
+      "task_id": "AION-173",
+      "branch": "phase/self-improvement-canary-authorization",
       "feature_commits": [],
       "pull_requests": [],
       "merge_commits": [],
       "ci_result": "pending",
       "corrective_prs": [],
       "tests": [
-        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_rewrite_controller.py -q",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_canary_authorization_docs.py -q",
+        "./scripts/self-improvement-canary-no-go-regression.sh",
+        "./scripts/self-improvement-canary-authorization-check.sh",
         "./scripts/self-improvement-rewrite-controller-no-go-regression.sh",
-        "./scripts/self-improvement-rewrite-controller-check.sh",
-        "./scripts/self-improvement-rewrite-no-go-regression.sh",
-        "./scripts/self-improvement-rewrite-authorization-check.sh"
+        "./scripts/self-improvement-rewrite-controller-check.sh"
       ],
-      "authorization_transaction": "AION-171-SI-0004",
-      "authorization_state": "active_until_AION-172_merge",
-      "next_task": "AION-173",
-      "runtime_state": "rewrite_controller_implemented_disabled_approval_bound_no_production_github_calls",
+      "authorization_transaction": "AION-173-SI-0005",
+      "authorization_state": "active_until_AION-174_merge",
+      "next_task": "AION-174",
+      "runtime_state": "authorization_only_no_canary_runtime_or_adaptive_learning_implementation",
       "completion_timestamp": null
     }
   ]

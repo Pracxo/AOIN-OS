@@ -57,7 +57,7 @@ def test_aion169_blocks_source_git_pr_merge_deploy_and_model_changes() -> None:
         "model_weight_training_enabled",
     ]:
         payload = _authorization()
-        payload["records"][4][flag] = True
+        payload["records"][5][flag] = True
         with pytest.raises(GovernanceValidationError, match=flag):
             validate_authorization_ledger(payload)
 
