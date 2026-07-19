@@ -17,8 +17,9 @@ from self_improvement_governance import (  # noqa: E402
     EVALUATION_APPROVED_SCOPE,
     EVALUATION_AUTHORIZATION_ID,
     EVALUATION_PROHIBITED_SCOPE,
-    EXPERIMENT_APPROVED_SCOPE,
-    EXPERIMENT_PROHIBITED_SCOPE,
+    EXPERIMENT_AUTHORIZATION_ID,
+    REWRITE_APPROVED_SCOPE,
+    REWRITE_PROHIBITED_SCOPE,
     GovernanceValidationError,
     validate_authorization_ledger,
     validate_no_go,
@@ -29,7 +30,8 @@ def test_aion167_is_closed_after_immutable_evaluation_plane_merge() -> None:
     payload = _authorization()
     validate_authorization_ledger(payload)
     evaluation_closeout = payload["records"][2]
-    active = payload["records"][3]
+    experiment_closeout = payload["records"][3]
+    active = payload["records"][4]
 
     assert evaluation_closeout["authorization_transaction_id"] == EVALUATION_AUTHORIZATION_ID
     assert evaluation_closeout["authorization_consumed_by_task"] == "AION-168"
@@ -37,10 +39,14 @@ def test_aion167_is_closed_after_immutable_evaluation_plane_merge() -> None:
     assert evaluation_closeout["authorization_active"] is False
     assert evaluation_closeout["authorization_reusable"] is False
 
+    assert experiment_closeout["authorization_transaction_id"] == EXPERIMENT_AUTHORIZATION_ID
+    assert experiment_closeout["authorization_consumed_by_task"] == "AION-170"
+    assert experiment_closeout["authorization_active"] is False
+
     assert active["authorization_transaction_id"] == AUTHORIZATION_ID
-    assert active["implementation_task"] == "AION-170"
-    assert tuple(active["approved_scope"]) == EXPERIMENT_APPROVED_SCOPE
-    assert tuple(active["prohibited_scope"]) == EXPERIMENT_PROHIBITED_SCOPE
+    assert active["implementation_task"] == "AION-172"
+    assert tuple(active["approved_scope"]) == REWRITE_APPROVED_SCOPE
+    assert tuple(active["prohibited_scope"]) == REWRITE_PROHIBITED_SCOPE
 
 
 def test_aion169_continues_to_block_rewrite_pr_approval_deploy_and_training_flags() -> None:
@@ -60,7 +66,7 @@ def test_aion169_continues_to_block_rewrite_pr_approval_deploy_and_training_flag
     ]
     for flag in prohibited_flags:
         payload = _authorization()
-        payload["records"][3][flag] = True
+        payload["records"][4][flag] = True
         with pytest.raises(GovernanceValidationError, match=flag):
             validate_authorization_ledger(payload)
 

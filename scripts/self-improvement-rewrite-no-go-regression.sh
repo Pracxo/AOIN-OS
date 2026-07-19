@@ -20,6 +20,16 @@ if gh release view v0.2 >/dev/null 2>&1 || gh release view aion-v0.2 >/dev/null 
   exit 1
 fi
 
-./scripts/self-improvement-rewrite-no-go-regression.sh >/dev/null
-
-echo "self-improvement experiment no-go PASS"
+cat <<'SUMMARY'
+self-improvement rewrite no-go result:
+- self_rewrite_runtime_enabled=false
+- source_rewriting_enabled=false
+- git_commits_enabled=false
+- branch_creation_enabled=false
+- pull_request_creation_enabled=false
+- merge_enabled=false
+- automatic_merge_enabled=false
+- production_deployment_enabled=false
+- model_weight_changes_enabled=false
+self-improvement rewrite no-go PASS
+SUMMARY

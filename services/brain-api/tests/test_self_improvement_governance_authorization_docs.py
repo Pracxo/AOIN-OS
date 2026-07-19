@@ -16,18 +16,21 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "scripts/lib"))
 
 from self_improvement_governance import (  # noqa: E402
+    APPROVAL_BINDING_REQUIREMENTS,
     AUTHORIZATION_ID,
     CHANGE_BUDGET_DIMENSIONS,
     EVALUATION_AUTHORIZATION_ID,
-    EXPERIMENT_APPROVED_SCOPE,
-    EXPERIMENT_PROHIBITED_SCOPE,
+    EXPERIMENT_AUTHORIZATION_ID,
     GOVERNANCE_FALSE_FLAGS,
     GOVERNANCE_TRUE_FLAGS,
     LIFECYCLE_STATES,
     PARENT_AUTHORIZATION_ID,
     PROTECTED_PATHS,
+    REWRITE_APPROVED_SCOPE,
+    REWRITE_PROHIBITED_SCOPE,
     RISK_LEVELS,
     ROOT_AUTHORIZATION_ID,
+    TEST_WEAKENING_CONTROLS,
     GovernanceValidationError,
     validate_authorization_ledger,
     validate_no_go,
@@ -43,6 +46,11 @@ AION_167_FEATURE_COMMIT = "bbc04cf57f02483e00752c20fa70b77abf95ce46"
 AION_167_MERGE_COMMIT = "98a50edb5eaaf55de5babaa0ea9eb057ef5b2feb"
 AION_168_FEATURE_COMMIT = "8d1402f6c122098f3aec5809cf94539992b45d10"
 AION_168_MERGE_COMMIT = "74472522edffbbeabb996c6d572dce1dcb0cda48"
+AION_170_FEATURE_COMMITS = [
+    "2005217334301a6b4951cc3ae2a0d88de99b95e0",
+    "4798459eec61e5f534c880234508815364804ee5",
+]
+AION_170_MERGE_COMMIT = "6e741c8327d900fa80480bce911fbccffb8b4781"
 
 
 def test_self_improvement_required_files_exist_and_adrs_are_indexed() -> None:
@@ -50,6 +58,7 @@ def test_self_improvement_required_files_exist_and_adrs_are_indexed() -> None:
         "docs/self-improvement/governance-charter.md",
         "docs/self-improvement/evaluation-authorization.md",
         "docs/self-improvement/experiment-authorization.md",
+        "docs/self-improvement/rewrite-authorization.md",
         "docs/self-improvement/protected-core-boundary.md",
         "docs/self-improvement/approval-model.md",
         "docs/self-improvement/change-budget-model.md",
@@ -60,6 +69,7 @@ def test_self_improvement_required_files_exist_and_adrs_are_indexed() -> None:
         "docs/adr/0156-governed-self-improvement-control-plane.md",
         "docs/adr/0157-self-improvement-evaluation-authorization.md",
         "docs/adr/0158-self-improvement-experiment-authorization.md",
+        "docs/adr/0159-self-improvement-rewrite-authorization.md",
     ]
     for relative in required:
         assert (ROOT / relative).is_file(), relative
@@ -67,12 +77,15 @@ def test_self_improvement_required_files_exist_and_adrs_are_indexed() -> None:
     assert "0156-governed-self-improvement-control-plane.md" in adr_index
     assert "0157-self-improvement-evaluation-authorization.md" in adr_index
     assert "0158-self-improvement-experiment-authorization.md" in adr_index
+    assert "0159-self-improvement-rewrite-authorization.md" in adr_index
 
 
-def test_aion167_is_consumed_and_aion169_authorization_is_exact() -> None:
+def test_aion169_is_consumed_and_aion171_authorization_is_exact() -> None:
     payload = _json("docs/self-improvement/authorization-ledger.json")
     validate_authorization_ledger(payload)
-    root_closeout, parent_closeout, evaluation_closeout, active = payload["records"]
+    root_closeout, parent_closeout, evaluation_closeout, experiment_closeout, active = payload[
+        "records"
+    ]
 
     assert root_closeout["authorization_transaction_id"] == ROOT_AUTHORIZATION_ID
     assert root_closeout["authorization_consumed_by_pr"] == 75
@@ -95,14 +108,25 @@ def test_aion167_is_consumed_and_aion169_authorization_is_exact() -> None:
     assert evaluation_closeout["authorization_consumed_by_merge_commit"] == AION_168_MERGE_COMMIT
     assert evaluation_closeout["authorization_reusable"] is False
 
+    assert experiment_closeout["authorization_transaction_id"] == EXPERIMENT_AUTHORIZATION_ID
+    assert experiment_closeout["authorization_consumed_by_task"] == "AION-170"
+    assert experiment_closeout["authorization_consumed_by_pr"] == 81
+    assert experiment_closeout["authorization_consumed_by_feature_commits"] == (
+        AION_170_FEATURE_COMMITS
+    )
+    assert experiment_closeout["authorization_consumed_by_merge_commit"] == AION_170_MERGE_COMMIT
+    assert experiment_closeout["authorization_reusable"] is False
+
     assert active["authorization_transaction_id"] == AUTHORIZATION_ID
-    assert active["implementation_task"] == "AION-170"
-    assert active["authorization_scope"] == "self-improvement-proposal-and-experiment-engine"
+    assert active["implementation_task"] == "AION-172"
+    assert active["authorization_scope"] == "approval-bound-isolated-source-rewrite-and-pr-control"
     assert tuple(active["protected_paths"]) == PROTECTED_PATHS
     assert tuple(active["risk_levels"]) == RISK_LEVELS
     assert tuple(active["change_budget_dimensions"]) == CHANGE_BUDGET_DIMENSIONS
-    assert tuple(active["approved_scope"]) == EXPERIMENT_APPROVED_SCOPE
-    assert tuple(active["prohibited_scope"]) == EXPERIMENT_PROHIBITED_SCOPE
+    assert tuple(active["approval_binding_requirements"]) == APPROVAL_BINDING_REQUIREMENTS
+    assert tuple(active["test_weakening_controls"]) == TEST_WEAKENING_CONTROLS
+    assert tuple(active["approved_scope"]) == REWRITE_APPROVED_SCOPE
+    assert tuple(active["prohibited_scope"]) == REWRITE_PROHIBITED_SCOPE
     for key in GOVERNANCE_FALSE_FLAGS:
         assert active[key] is False
     for key in GOVERNANCE_TRUE_FLAGS:
@@ -147,9 +171,26 @@ def test_program_ledger_records_aion164_through_aion167() -> None:
     )
 
     assert by_task["AION-169"]["branch"] == "phase/self-improvement-experiment-authorization"
-    assert by_task["AION-169"]["authorization_transaction"] == AUTHORIZATION_ID
-    assert by_task["AION-169"]["authorization_state"] == "active_until_AION-170_merge"
+    assert by_task["AION-169"]["authorization_transaction"] == EXPERIMENT_AUTHORIZATION_ID
+    assert by_task["AION-169"]["authorization_state"] == (
+        "consumed_by_AION-170_closed_by_AION-171"
+    )
     assert by_task["AION-169"]["next_task"] == "AION-170"
+
+    assert by_task["AION-170"]["branch"] == "phase/self-improvement-experiment-engine"
+    assert by_task["AION-170"]["feature_commits"] == AION_170_FEATURE_COMMITS
+    assert by_task["AION-170"]["pull_requests"] == [81]
+    assert by_task["AION-170"]["merge_commits"] == [AION_170_MERGE_COMMIT]
+    assert by_task["AION-170"]["authorization_transaction"] == EXPERIMENT_AUTHORIZATION_ID
+    assert by_task["AION-170"]["authorization_state"] == (
+        "consumed_by_AION-170_closed_by_AION-171"
+    )
+    assert by_task["AION-170"]["next_task"] == "AION-171"
+
+    assert by_task["AION-171"]["branch"] == "phase/self-improvement-rewrite-authorization"
+    assert by_task["AION-171"]["authorization_transaction"] == AUTHORIZATION_ID
+    assert by_task["AION-171"]["authorization_state"] == "active_until_AION-172_merge"
+    assert by_task["AION-171"]["next_task"] == "AION-172"
 
 
 def test_lifecycle_validator_accepts_known_path_and_rejects_unknowns() -> None:
@@ -185,7 +226,7 @@ def test_governance_validator_blocks_runtime_enablement() -> None:
     payload = _json("docs/self-improvement/authorization-ledger.json")
     validate_no_go(ROOT)
     mutated = json.loads(json.dumps(payload))
-    mutated["records"][3]["source_mutation_enabled"] = True
+    mutated["records"][4]["source_mutation_enabled"] = True
     with pytest.raises(GovernanceValidationError, match="source_mutation_enabled"):
         validate_authorization_ledger(mutated)
 
@@ -198,6 +239,7 @@ def test_governance_docs_do_not_store_private_material() -> None:
             "docs/self-improvement/governance-charter.md",
             "docs/self-improvement/evaluation-authorization.md",
             "docs/self-improvement/experiment-authorization.md",
+            "docs/self-improvement/rewrite-authorization.md",
             "docs/self-improvement/program-ledger.json",
             "docs/self-improvement/authorization-ledger.json",
         ]
@@ -214,6 +256,8 @@ def test_self_improvement_authorization_scripts_are_executable_and_pass() -> Non
         "scripts/self-improvement-evaluation-authorization-check.sh",
         "scripts/self-improvement-experiment-no-go-regression.sh",
         "scripts/self-improvement-experiment-authorization-check.sh",
+        "scripts/self-improvement-rewrite-no-go-regression.sh",
+        "scripts/self-improvement-rewrite-authorization-check.sh",
     ]
     for relative in scripts:
         mode = (ROOT / relative).stat().st_mode

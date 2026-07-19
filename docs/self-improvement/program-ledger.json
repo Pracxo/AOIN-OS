@@ -206,7 +206,7 @@
         "./scripts/check.sh pass"
       ],
       "authorization_transaction": "AION-169-SI-0003",
-      "authorization_state": "active_until_AION-170_merge",
+      "authorization_state": "consumed_by_AION-170_closed_by_AION-171",
       "next_task": "AION-170",
       "runtime_state": "authorization_only_no_experiment_engine_implementation",
       "completion_timestamp": "2026-07-18T22:00:24Z"
@@ -214,22 +214,60 @@
     {
       "task_id": "AION-170",
       "branch": "phase/self-improvement-experiment-engine",
+      "feature_commits": [
+        "2005217334301a6b4951cc3ae2a0d88de99b95e0",
+        "4798459eec61e5f534c880234508815364804ee5"
+      ],
+      "pull_requests": [
+        81
+      ],
+      "merge_commits": [
+        "6e741c8327d900fa80480bce911fbccffb8b4781"
+      ],
+      "ci_result": "pass",
+      "corrective_prs": [],
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_experiment_engine.py -q: 5 passed",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_offline_identity_assertion_verifier.py services/brain-api/tests/test_identity_assertion_performance.py services/brain-api/tests/test_identity_assertion_negative_crypto.py -q: 10 passed",
+        "./scripts/self-improvement-experiment-engine-no-go-regression.sh pass",
+        "./scripts/self-improvement-experiment-engine-check.sh pass",
+        "./scripts/self-improvement-experiment-authorization-check.sh pass",
+        "./scripts/self-improvement-governance-no-go-regression.sh pass",
+        "./scripts/self-improvement-evaluation-no-go-regression.sh pass",
+        "./scripts/production-auth-core-no-go-regression.sh pass",
+        "./scripts/connector-runtime-no-external-call-regression.sh pass",
+        "./scripts/check.sh pass"
+      ],
+      "authorization_transaction": "AION-169-SI-0003",
+      "authorization_state": "consumed_by_AION-170_closed_by_AION-171",
+      "next_task": "AION-171",
+      "runtime_state": "experiment_engine_implemented_no_source_mutation_or_git_or_pr_runtime",
+      "completion_timestamp": "2026-07-18T23:48:33Z"
+    },
+    {
+      "task_id": "AION-171",
+      "branch": "phase/self-improvement-rewrite-authorization",
       "feature_commits": [],
       "pull_requests": [],
       "merge_commits": [],
       "ci_result": "pending",
       "corrective_prs": [],
       "tests": [
-        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_experiment_engine.py -q",
-        "services/brain-api/.venv/bin/python -m ruff check services/brain-api/src/aion_brain/self_improvement/observation.py services/brain-api/src/aion_brain/self_improvement/pattern_intake.py services/brain-api/src/aion_brain/self_improvement/hypothesis.py services/brain-api/src/aion_brain/self_improvement/regression_proposal.py services/brain-api/src/aion_brain/self_improvement/experiment.py services/brain-api/src/aion_brain/self_improvement/experiment_runner.py services/brain-api/src/aion_brain/self_improvement/proposal_service.py services/brain-api/src/aion_brain/self_improvement/__init__.py services/brain-api/tests/test_self_improvement_experiment_engine.py",
-        "services/brain-api/.venv/bin/python -m mypy services/brain-api/src/aion_brain/self_improvement/observation.py services/brain-api/src/aion_brain/self_improvement/pattern_intake.py services/brain-api/src/aion_brain/self_improvement/hypothesis.py services/brain-api/src/aion_brain/self_improvement/regression_proposal.py services/brain-api/src/aion_brain/self_improvement/experiment.py services/brain-api/src/aion_brain/self_improvement/experiment_runner.py services/brain-api/src/aion_brain/self_improvement/proposal_service.py services/brain-api/tests/test_self_improvement_experiment_engine.py",
-        "./scripts/self-improvement-experiment-engine-no-go-regression.sh",
-        "./scripts/self-improvement-experiment-engine-check.sh"
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_rewrite_authorization_docs.py -q",
+        "./scripts/self-improvement-rewrite-no-go-regression.sh",
+        "./scripts/self-improvement-rewrite-authorization-check.sh"
       ],
-      "authorization_transaction": "AION-169-SI-0003",
-      "authorization_state": "active_until_AION-171_closeout",
-      "next_task": "AION-171",
-      "runtime_state": "experiment_engine_implemented_no_source_mutation_or_git_or_pr_runtime",
+      "authorization_transaction": "AION-171-SI-0004",
+      "authorization_state": "active_until_AION-172_merge",
+      "next_task": "AION-172",
+      "runtime_state": "authorization_only_no_rewrite_controller_implementation",
       "completion_timestamp": null
     }
   ]

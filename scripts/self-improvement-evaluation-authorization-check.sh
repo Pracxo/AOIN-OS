@@ -19,6 +19,7 @@ required_files=(
   docs/self-improvement/governance-charter.md
   docs/self-improvement/evaluation-authorization.md
   docs/self-improvement/experiment-authorization.md
+  docs/self-improvement/rewrite-authorization.md
   docs/self-improvement/protected-core-boundary.md
   docs/self-improvement/approval-model.md
   docs/self-improvement/change-budget-model.md
@@ -29,6 +30,7 @@ required_files=(
   docs/adr/0156-governed-self-improvement-control-plane.md
   docs/adr/0157-self-improvement-evaluation-authorization.md
   docs/adr/0158-self-improvement-experiment-authorization.md
+  docs/adr/0159-self-improvement-rewrite-authorization.md
   scripts/lib/self_improvement_governance.py
   scripts/self-improvement-governance-no-go-regression.sh
   scripts/self-improvement-governance-authorization-check.sh
@@ -36,9 +38,12 @@ required_files=(
   scripts/self-improvement-evaluation-authorization-check.sh
   scripts/self-improvement-experiment-no-go-regression.sh
   scripts/self-improvement-experiment-authorization-check.sh
+  scripts/self-improvement-rewrite-no-go-regression.sh
+  scripts/self-improvement-rewrite-authorization-check.sh
   services/brain-api/tests/test_self_improvement_governance_authorization_docs.py
   services/brain-api/tests/test_self_improvement_evaluation_authorization_docs.py
   services/brain-api/tests/test_self_improvement_experiment_authorization_docs.py
+  services/brain-api/tests/test_self_improvement_rewrite_authorization_docs.py
 )
 
 for file in "${required_files[@]}"; do
@@ -58,6 +63,11 @@ grep -F "0158-self-improvement-experiment-authorization.md" docs/adr/README.md >
   exit 1
 }
 
+grep -F "0159-self-improvement-rewrite-authorization.md" docs/adr/README.md >/dev/null || {
+  echo "ADR 0159 is not indexed" >&2
+  exit 1
+}
+
 "$PYTHON_BIN" scripts/lib/self_improvement_governance.py --repo-root "$ROOT_DIR" --mode check
 ./scripts/self-improvement-evaluation-no-go-regression.sh
 
@@ -68,6 +78,7 @@ else
     services/brain-api/tests/test_self_improvement_governance_authorization_docs.py \
     services/brain-api/tests/test_self_improvement_evaluation_authorization_docs.py \
     services/brain-api/tests/test_self_improvement_experiment_authorization_docs.py \
+    services/brain-api/tests/test_self_improvement_rewrite_authorization_docs.py \
     -q
 fi
 
@@ -84,7 +95,8 @@ cat <<'SUMMARY'
 self-improvement evaluation authorization result:
 - AION-165-SI-0001: consumed by AION-166 PR 77 and closed by AION-167
 - AION-167-SI-0002: consumed by AION-168 PR 79 and closed by AION-169
-- AION-169-SI-0003: active authorization for AION-170 proposal and experiment engine
+- AION-169-SI-0003: consumed by AION-170 PR 81 and closed by AION-171
+- AION-171-SI-0004: active authorization for AION-172 approval-bound rewrite controller
 - source_rewriting_enabled=false
 - pull_request_creation_enabled=false
 - automatic_approval_enabled=false

@@ -16,32 +16,30 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "scripts/lib"))
 
 from self_improvement_governance import (  # noqa: E402
-    AUTHORIZATION_ID,
-    EXPERIMENT_APPROVED_SCOPE,
-    EXPERIMENT_PROHIBITED_SCOPE,
-    GOVERNANCE_FALSE_FLAGS,
-    GOVERNANCE_TRUE_FLAGS,
+    AION_170_FEATURE_COMMITS,
+    AION_170_MERGE_COMMIT,
+    EXPERIMENT_AUTHORIZATION_ID,
     GovernanceValidationError,
     validate_authorization_ledger,
     validate_no_go,
 )
 
 
-def test_aion169_authorizes_only_proposal_and_experiment_engine() -> None:
+def test_aion169_is_closed_after_proposal_and_experiment_engine_merge() -> None:
     payload = _authorization()
     validate_authorization_ledger(payload)
-    active = payload["records"][3]
+    closeout = payload["records"][3]
 
-    assert active["authorization_transaction_id"] == AUTHORIZATION_ID
-    assert active["parent_authorization_transaction_id"] == "AION-167-SI-0002"
-    assert active["implementation_task"] == "AION-170"
-    assert active["authorization_scope"] == "self-improvement-proposal-and-experiment-engine"
-    assert tuple(active["approved_scope"]) == EXPERIMENT_APPROVED_SCOPE
-    assert tuple(active["prohibited_scope"]) == EXPERIMENT_PROHIBITED_SCOPE
-    for key in GOVERNANCE_FALSE_FLAGS:
-        assert active[key] is False
-    for key in GOVERNANCE_TRUE_FLAGS:
-        assert active[key] is True
+    assert closeout["authorization_transaction_id"] == EXPERIMENT_AUTHORIZATION_ID
+    assert closeout["authorization_active"] is False
+    assert closeout["authorization_consumed"] is True
+    assert closeout["authorization_consumed_by_task"] == "AION-170"
+    assert closeout["authorization_consumed_by_pr"] == 81
+    assert closeout["authorization_consumed_by_feature_commits"] == list(
+        AION_170_FEATURE_COMMITS
+    )
+    assert closeout["authorization_consumed_by_merge_commit"] == AION_170_MERGE_COMMIT
+    assert closeout["authorization_reusable"] is False
 
 
 def test_aion169_blocks_source_git_pr_merge_deploy_and_model_changes() -> None:
@@ -59,26 +57,24 @@ def test_aion169_blocks_source_git_pr_merge_deploy_and_model_changes() -> None:
         "model_weight_training_enabled",
     ]:
         payload = _authorization()
-        payload["records"][3][flag] = True
+        payload["records"][4][flag] = True
         with pytest.raises(GovernanceValidationError, match=flag):
             validate_authorization_ledger(payload)
 
 
 def test_aion169_requires_experiment_scope_and_no_direct_promotion() -> None:
     payload = _authorization()
-    active = payload["records"][3]
+    historical = _text("docs/self-improvement/experiment-authorization.md")
 
-    assert "failure-pattern intake" in active["approved_scope"]
-    assert "baseline/candidate experiment execution" in active["approved_scope"]
-    assert "approval-pending lifecycle" in active["approved_scope"]
-    assert "Git commits" in active["prohibited_scope"]
-    assert "pull request creation" in active["prohibited_scope"]
-    assert "merge" in active["prohibited_scope"]
+    assert "failure-pattern intake" in historical
+    assert "baseline/candidate experiment execution" in historical
+    assert "approval-pending lifecycle" in historical
+    assert "Git commits" in historical
+    assert "pull request creation" in historical
+    assert "merge" in historical
 
-    active["approved_scope"] = [
-        item for item in active["approved_scope"] if item != "regression-test proposals"
-    ]
-    with pytest.raises(GovernanceValidationError, match="approved experiment scope"):
+    payload["records"][3]["authorization_consumed_by_feature_commits"] = []
+    with pytest.raises(GovernanceValidationError, match="experiment feature commit"):
         validate_authorization_ledger(payload)
 
 
@@ -98,6 +94,10 @@ def _authorization() -> dict[str, Any]:
         payload = json.load(handle)
     assert isinstance(payload, dict)
     return payload
+
+
+def _text(relative: str) -> str:
+    return (ROOT / relative).read_text()
 
 
 def _nested_env() -> dict[str, str]:

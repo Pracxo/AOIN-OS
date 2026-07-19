@@ -48,22 +48,18 @@ required_files=(
 
 for file in "${required_files[@]}"; do
   test -f "$file" || {
-    echo "missing AION-169 artifact: $file" >&2
+    echo "missing AION-171 artifact: $file" >&2
     exit 1
   }
 done
 
-grep -F "0158-self-improvement-experiment-authorization.md" docs/adr/README.md >/dev/null || {
-  echo "ADR 0158 is not indexed" >&2
-  exit 1
-}
 grep -F "0159-self-improvement-rewrite-authorization.md" docs/adr/README.md >/dev/null || {
   echo "ADR 0159 is not indexed" >&2
   exit 1
 }
 
 "$PYTHON_BIN" scripts/lib/self_improvement_governance.py --repo-root "$ROOT_DIR" --mode check
-./scripts/self-improvement-experiment-no-go-regression.sh
+./scripts/self-improvement-rewrite-no-go-regression.sh
 
 if is_nested_gate_context; then
   echo "PASS: focused pytest deferred to outer gate"
@@ -86,16 +82,15 @@ else
 fi
 
 cat <<'SUMMARY'
-self-improvement experiment authorization result:
-- AION-167-SI-0002: consumed by AION-168 PR 79 and closed by AION-169
+self-improvement rewrite authorization result:
 - AION-169-SI-0003: consumed by AION-170 PR 81 and closed by AION-171
 - AION-171-SI-0004: active authorization for AION-172 approval-bound rewrite controller
-- source_mutation_enabled=false
-- git_commits_enabled=false
-- branch_creation_enabled=false
-- pull_request_creation_enabled=false
-- merge_enabled=false
-- deployment_enabled=false
-- model_weight_changes_enabled=false
-self-improvement experiment authorization PASS
+- isolated Git worktrees: authorized
+- test-first patch workflow: authorized
+- PR creation: approval-bound
+- merge control: approval-bound
+- self_rewrite_runtime_enabled=false
+- automatic_merge_enabled=false
+- production_deployment_enabled=false
+self-improvement rewrite authorization PASS
 SUMMARY
