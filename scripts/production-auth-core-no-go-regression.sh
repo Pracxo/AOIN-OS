@@ -95,6 +95,9 @@ while IFS= read -r file; do
   if aion174_is_scoped_self_improvement_canary_adaptation_path "$file"; then
     continue
   fi
+  if aion175_is_scoped_self_improvement_final_closeout_path "$file"; then
+    continue
+  fi
   case "$file" in
     package.json|package-lock.json|pnpm-lock.yaml|yarn.lock|bun.lockb|\
     */package.json|*/package-lock.json|*/pnpm-lock.yaml|*/yarn.lock|*/bun.lockb)
@@ -144,6 +147,9 @@ while IFS= read -r file; do
     continue
   fi
   if aion174_is_scoped_self_improvement_canary_adaptation_path "$file"; then
+    continue
+  fi
+  if aion175_is_scoped_self_improvement_final_closeout_path "$file"; then
     continue
   fi
   case "$file" in
@@ -199,6 +205,9 @@ while IFS= read -r file; do
     continue
   fi
   if aion174_is_scoped_self_improvement_canary_adaptation_path "$file"; then
+    continue
+  fi
+  if aion175_is_scoped_self_improvement_final_closeout_path "$file"; then
     continue
   fi
   case "$file" in

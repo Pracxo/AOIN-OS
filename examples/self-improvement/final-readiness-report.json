@@ -1,0 +1,242 @@
+{
+  "program_id": "AION-SELF-IMPROVEMENT-001",
+  "task_id": "AION-175",
+  "synthetic": true,
+  "read_only": true,
+  "report_state": "final_closeout_pre_merge_evidence",
+  "architecture_components": [
+    "governance charter and authorization ledger",
+    "immutable benchmark and holdout evaluation plane",
+    "failure-pattern intake and experiment planning plane",
+    "approval-bound isolated rewrite controller",
+    "test-first patch evidence and test-integrity controls",
+    "approval-bound pull request and merge controller",
+    "disabled canary simulation and rollback controller",
+    "outcome ledger",
+    "adaptive retrieval candidate selection",
+    "case-based planning candidates",
+    "bounded strategy selection",
+    "preference-learning candidates",
+    "data-only procedural skill candidates"
+  ],
+  "completed_tasks": [
+    {
+      "task_id": "AION-164",
+      "status": "merged",
+      "pull_requests": [75],
+      "feature_commits": [
+        "3ff9145b3102340bad44054df532865b35132d7c",
+        "5593574380c0daa401ee4e7bfb5a431cfaa44adc"
+      ],
+      "merge_commits": ["8b2938a8995a9109b677f240d82da3b4bdc5d73c"],
+      "ci_result": "pass"
+    },
+    {
+      "task_id": "AION-165",
+      "status": "merged",
+      "pull_requests": [76],
+      "feature_commits": ["f7052fb"],
+      "merge_commits": ["a40ea4c9f76a969cac291c33f0c3ef94aa078d6b"],
+      "ci_result": "pass"
+    },
+    {
+      "task_id": "AION-166",
+      "status": "merged",
+      "pull_requests": [77],
+      "feature_commits": ["fae49a3f913b7a3d4d18ad4e7f989ed2aca5de91"],
+      "merge_commits": ["9a7105e31b8f6e56faf53bfb56e11eed75a01203"],
+      "ci_result": "pass"
+    },
+    {
+      "task_id": "AION-167",
+      "status": "merged",
+      "pull_requests": [78],
+      "feature_commits": ["bbc04cf57f02483e00752c20fa70b77abf95ce46"],
+      "merge_commits": ["98a50edb5eaaf55de5babaa0ea9eb057ef5b2feb"],
+      "ci_result": "pass"
+    },
+    {
+      "task_id": "AION-168",
+      "status": "merged",
+      "pull_requests": [79],
+      "feature_commits": ["8d1402f6c122098f3aec5809cf94539992b45d10"],
+      "merge_commits": ["74472522edffbbeabb996c6d572dce1dcb0cda48"],
+      "ci_result": "pass"
+    },
+    {
+      "task_id": "AION-169",
+      "status": "merged",
+      "pull_requests": [80],
+      "feature_commits": ["3af4e7a24955f83f8e3d1e98d3fa26f008ad83e6"],
+      "merge_commits": ["3a09cb642414ff22f15c90df41d1132030dbe0a1"],
+      "ci_result": "pass"
+    },
+    {
+      "task_id": "AION-170",
+      "status": "merged",
+      "pull_requests": [81],
+      "feature_commits": [
+        "2005217334301a6b4951cc3ae2a0d88de99b95e0",
+        "4798459eec61e5f534c880234508815364804ee5"
+      ],
+      "merge_commits": ["6e741c8327d900fa80480bce911fbccffb8b4781"],
+      "ci_result": "pass"
+    },
+    {
+      "task_id": "AION-171",
+      "status": "merged",
+      "pull_requests": [82],
+      "feature_commits": ["4970700555638b4ecd53a581d1797148906f81ef"],
+      "merge_commits": ["478b79de1fbd4eeeb0280a41abf4050c0f513d8f"],
+      "ci_result": "pass"
+    },
+    {
+      "task_id": "AION-172",
+      "status": "merged",
+      "pull_requests": [83],
+      "feature_commits": ["4a8adbc6ed3c364588883eb5fe91e393f26479cd"],
+      "merge_commits": ["0033f24c5f2f1f1b2a1a89a8595f29db1c1d1bf9"],
+      "ci_result": "pass"
+    },
+    {
+      "task_id": "AION-173",
+      "status": "merged",
+      "pull_requests": [84],
+      "feature_commits": ["bd215d2910e6c29b7f0d53381d0960330fda4623"],
+      "merge_commits": ["9d827d8bbbe0cb726904b19b0662e214d7f1b04e"],
+      "ci_result": "pass"
+    },
+    {
+      "task_id": "AION-174",
+      "status": "merged",
+      "pull_requests": [85],
+      "feature_commits": ["61fdce1795385fa954114a38098f6f2dba26a5f4"],
+      "merge_commits": ["dd17639986160938043d8ddef7da8cb9b8a2faa4"],
+      "ci_result": "pass"
+    },
+    {
+      "task_id": "AION-175",
+      "status": "pending_pr_merge",
+      "pull_requests": [],
+      "feature_commits": [],
+      "merge_commits": [],
+      "ci_result": "pending"
+    }
+  ],
+  "test_totals": {
+    "last_full_repository_check": "2885 brain-api tests passed, 274 sdk tests passed in AION-175 final gate",
+    "aion_175_focused_tests": [
+      "services/brain-api/tests/test_self_improvement_final_closeout_docs.py",
+      "services/brain-api/tests/test_self_improvement_governance_authorization_docs.py",
+      "services/brain-api/tests/test_self_improvement_evaluation_plane.py",
+      "services/brain-api/tests/test_self_improvement_experiment_engine.py",
+      "services/brain-api/tests/test_self_improvement_rewrite_controller.py",
+      "services/brain-api/tests/test_self_improvement_canary_adaptation.py"
+    ],
+    "final_gate": "./scripts/self-improvement-final-check.sh"
+  },
+  "benchmark_totals": {
+    "required_metrics": [
+      "task_success",
+      "evidence_grounding",
+      "user_correction_rate",
+      "retrieval_precision",
+      "plan_success",
+      "policy_violation_count",
+      "regression_count",
+      "latency",
+      "compute_cost",
+      "rollback_count",
+      "improvement_survival"
+    ],
+    "hidden_holdout_required": true,
+    "hard_safety_gate_required": true,
+    "quality_cannot_offset_safety_failure": true
+  },
+  "security_gates": {
+    "direct_main_writes": false,
+    "self_approval": false,
+    "automatic_merge": false,
+    "production_deployment": false,
+    "production_canary": false,
+    "protected_core_ordinary_modification": false,
+    "benchmark_self_modification": false,
+    "holdout_disclosure": false,
+    "test_weakening_allowed": false,
+    "runtime_self_rewrite": false,
+    "model_weight_training": false,
+    "v02_tag_created": false,
+    "v02_release_created": false,
+    "aion_v010_unchanged": true
+  },
+  "protected_core_state": {
+    "protected_core_dual_approval_required": true,
+    "protected_paths": [
+      ".github/workflows/",
+      "scripts/*approval*",
+      "scripts/*no-go*",
+      "scripts/*release*",
+      "scripts/lib/*authorization*",
+      "services/brain-api/src/aion_brain/policy/",
+      "services/brain-api/src/aion_brain/audit/",
+      "services/brain-api/src/aion_brain/self_improvement/approval*",
+      "services/brain-api/src/aion_brain/self_improvement/protected*",
+      "docs/self-improvement/holdout/",
+      "docs/self-improvement/policy/"
+    ],
+    "holdout_protected": true
+  },
+  "approval_state": {
+    "authorization_transaction": "AION-173-SI-0005",
+    "authorization_active": false,
+    "authorization_consumed": true,
+    "authorization_consumed_by_task": "AION-174",
+    "authorization_consumed_by_pr": 85,
+    "new_implementation_authorization_created": false,
+    "human_approval_required": true,
+    "exact_commit_approval_required": true,
+    "exact_diff_hash_approval_required": true,
+    "no_self_approval": true
+  },
+  "runtime_state": {
+    "self_improvement_platform_implemented": true,
+    "self_improvement_platform_state": "implemented_disabled",
+    "proposal_generation_available": true,
+    "experiment_execution_available": true,
+    "benchmark_comparison_available": true,
+    "isolated_worktree_available": true,
+    "test_first_patch_generation_available": true,
+    "approval_bound_pr_creation_available": true,
+    "approval_bound_merge_control_available": true,
+    "canary_simulation_available": true,
+    "automatic_rollback_available": true,
+    "adaptive_retrieval_candidates_available": true,
+    "case_based_planning_candidates_available": true,
+    "procedural_skill_candidates_available": true,
+    "self_improvement_runtime_enabled": false,
+    "self_rewrite_runtime_enabled": false,
+    "automatic_merge_enabled": false,
+    "production_canary_enabled": false,
+    "production_deployment_enabled": false,
+    "model_weight_training_enabled": false
+  },
+  "known_limitations": [
+    "production self-improvement runtime remains disabled",
+    "model-weight training is outside the authorization",
+    "adaptive candidates remain data-only until separately approved",
+    "holdout content is protected and not disclosed to patch generation",
+    "AION-175 PR and merge evidence are reported live after this branch merges"
+  ],
+  "remaining_blockers": [
+    "operator evaluation",
+    "new explicit authorization before any runtime activation",
+    "new exact approval before any source-changing proposal can merge"
+  ],
+  "user_evaluation_steps": [
+    "read docs/self-improvement/operator-evaluation-guide.md",
+    "inspect docs/self-improvement/end-to-end-evidence.md",
+    "run ./scripts/self-improvement-runtime-hold.sh",
+    "run ./scripts/self-improvement-final-check.sh",
+    "review examples/self-improvement/final-readiness-report.json"
+  ]
+}

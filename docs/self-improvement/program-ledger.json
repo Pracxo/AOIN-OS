@@ -354,26 +354,57 @@
     {
       "task_id": "AION-174",
       "branch": "phase/self-improvement-canary-and-adaptation",
+      "feature_commits": [
+        "61fdce1795385fa954114a38098f6f2dba26a5f4"
+      ],
+      "pull_requests": [
+        85
+      ],
+      "merge_commits": [
+        "dd17639986160938043d8ddef7da8cb9b8a2faa4"
+      ],
+      "ci_result": "pass",
+      "corrective_prs": [],
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_canary_adaptation.py -q: 3 passed",
+        "./scripts/self-improvement-canary-adaptation-no-go-regression.sh pass",
+        "./scripts/self-improvement-canary-adaptation-check.sh pass",
+        "./scripts/self-improvement-canary-authorization-check.sh pass",
+        "./scripts/self-improvement-rewrite-controller-check.sh pass",
+        "./scripts/production-auth-core-no-go-regression.sh pass",
+        "./scripts/connector-runtime-no-external-call-regression.sh pass",
+        "./scripts/check.sh pass"
+      ],
+      "authorization_transaction": "AION-173-SI-0005",
+      "authorization_state": "consumed_by_AION-174_closed_by_AION-175",
+      "next_task": "AION-175",
+      "runtime_state": "canary_adaptation_plane_implemented_disabled_data_only_no_production_activation",
+      "completion_timestamp": "2026-07-19T04:45:05Z"
+    },
+    {
+      "task_id": "AION-175",
+      "branch": "phase/self-improvement-final-closeout",
       "feature_commits": [],
       "pull_requests": [],
       "merge_commits": [],
       "ci_result": "pending",
       "corrective_prs": [],
       "tests": [
-        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_canary_adaptation.py -q",
-        "services/brain-api/.venv/bin/python -m ruff check AION-174 self-improvement modules and test",
-        "services/brain-api/.venv/bin/python -m mypy AION-174 self-improvement modules and test",
-        "./scripts/self-improvement-canary-adaptation-no-go-regression.sh",
-        "./scripts/self-improvement-canary-adaptation-check.sh",
-        "./scripts/self-improvement-canary-authorization-check.sh",
-        "./scripts/self-improvement-rewrite-controller-check.sh",
-        "./scripts/production-auth-core-no-go-regression.sh",
-        "./scripts/connector-runtime-no-external-call-regression.sh"
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_final_closeout_docs.py -q",
+        "./scripts/self-improvement-runtime-hold.sh",
+        "./scripts/self-improvement-final-check.sh"
       ],
       "authorization_transaction": "AION-173-SI-0005",
-      "authorization_state": "active_until_AION-174_merge",
-      "next_task": "AION-175",
-      "runtime_state": "canary_adaptation_plane_implemented_disabled_data_only_no_production_activation",
+      "authorization_state": "final_closeout_no_new_authorization",
+      "next_task": "user_evaluation",
+      "runtime_state": "self_improvement_platform_implemented_disabled",
       "completion_timestamp": null
     }
   ]

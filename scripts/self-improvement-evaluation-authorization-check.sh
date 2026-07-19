@@ -97,7 +97,7 @@ self-improvement evaluation authorization result:
 - AION-167-SI-0002: consumed by AION-168 PR 79 and closed by AION-169
 - AION-169-SI-0003: consumed by AION-170 PR 81 and closed by AION-171
 - AION-171-SI-0004: consumed by AION-172 PR 83 and closed by AION-173
-- AION-173-SI-0005: active authorization for AION-174 canary and adaptive policy
+- AION-173-SI-0005: consumed by AION-174 PR 85 and closed by AION-175
 - source_rewriting_enabled=false
 - pull_request_creation_enabled=false
 - automatic_approval_enabled=false

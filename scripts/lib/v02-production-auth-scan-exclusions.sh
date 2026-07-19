@@ -665,6 +665,45 @@ aion174_is_scoped_self_improvement_canary_adaptation_path() {
   esac
 }
 
+aion175_is_scoped_self_improvement_final_closeout_path() {
+  # Exact AION-175 final closeout, evidence, and guard paths. This task closes
+  # the canary authorization and adds no production-auth source, auth APIs,
+  # SDK/CLI runtime surfaces, package files, lockfiles, migrations, or broad
+  # source-directory exemptions.
+  case "$1" in
+    docs/adr/0161-governed-self-improvement-platform-complete.md|\
+    docs/adr/README.md|\
+    docs/self-improvement/final-architecture.md|\
+    docs/self-improvement/operator-evaluation-guide.md|\
+    docs/self-improvement/security-review.md|\
+    docs/self-improvement/benchmark-report.md|\
+    docs/self-improvement/end-to-end-evidence.md|\
+    docs/self-improvement/known-limitations.md|\
+    docs/self-improvement/runtime-activation-checklist.md|\
+    docs/self-improvement/future-model-training-boundary.md|\
+    docs/self-improvement/canary-authorization.md|\
+    docs/self-improvement/authorization-ledger.json|\
+    docs/self-improvement/program-ledger.json|\
+    examples/self-improvement/final-readiness-report.json|\
+    scripts/lib/self_improvement_governance.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    scripts/production-auth-core-no-go-regression.sh|\
+    scripts/self-improvement-governance-authorization-check.sh|\
+    scripts/self-improvement-evaluation-authorization-check.sh|\
+    scripts/self-improvement-experiment-authorization-check.sh|\
+    scripts/self-improvement-rewrite-authorization-check.sh|\
+    scripts/self-improvement-canary-authorization-check.sh|\
+    scripts/self-improvement-runtime-hold.sh|\
+    scripts/self-improvement-final-check.sh|\
+    services/brain-api/tests/test_self_improvement_final_closeout_docs.py)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
 aion161_is_scoped_offline_identity_assertion_verification_authorization_path() {
   # Exact AION-161 governance, evidence, and validator paths. This task closes
   # AION-159 and creates an offline verification authorization only; it does
