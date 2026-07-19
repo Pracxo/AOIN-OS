@@ -22,6 +22,28 @@ from aion_brain.self_improvement.benchmark_runner import (
     build_evaluation_bundle,
     run_candidate_benchmark,
 )
+from aion_brain.self_improvement.canary import CanaryController
+from aion_brain.self_improvement.canary_contracts import (
+    CANARY_AUTHORIZATION_SCOPE,
+    CANARY_AUTHORIZATION_TRANSACTION_ID,
+    CANARY_IMPLEMENTATION_TASK,
+    CANARY_RUNTIME_ENABLED,
+    PRODUCTION_EXPOSURE_ENABLED,
+    ROLLBACK_TRIGGERS,
+    CanaryApprovalBinding,
+    CanaryDecision,
+    CanaryExposureBudget,
+    CanaryMetricThreshold,
+    CanaryObservation,
+    CanaryPlan,
+    ImprovementOutcome,
+    RollbackDecision,
+)
+from aion_brain.self_improvement.case_based_planner import (
+    AdaptedPlan,
+    CaseBasedPlanner,
+    PlanningCase,
+)
 from aion_brain.self_improvement.change_budget import evaluate_change_budget
 from aion_brain.self_improvement.ci_monitor import (
     CheckStatus,
@@ -80,6 +102,10 @@ from aion_brain.self_improvement.hypothesis import (
     ImprovementHypothesis,
     MetricDirection,
 )
+from aion_brain.self_improvement.integrated_pipeline import (
+    IntegratedDryRunResult,
+    IntegratedSelfImprovementDryRun,
+)
 from aion_brain.self_improvement.ledger import SelfImprovementLedger
 from aion_brain.self_improvement.lifecycle import (
     can_transition,
@@ -95,6 +121,11 @@ from aion_brain.self_improvement.merge_controller import (
     MergeResult,
     MergeStatus,
 )
+from aion_brain.self_improvement.monitoring import (
+    CanaryMonitor,
+    CanaryMonitoringSummary,
+    required_rollback_triggers,
+)
 from aion_brain.self_improvement.observation import (
     EXPERIMENT_AUTHORIZATION_SCOPE,
     EXPERIMENT_AUTHORIZATION_TRANSACTION_ID,
@@ -102,6 +133,10 @@ from aion_brain.self_improvement.observation import (
     ImprovementObservation,
     ObservationSourceType,
     observation_from_evaluation_record,
+)
+from aion_brain.self_improvement.outcome_ledger import (
+    ImprovementOutcomeLedger,
+    LearningLedgerRecord,
 )
 from aion_brain.self_improvement.patch_generator import (
     DeterministicTestPatchGenerator,
@@ -133,6 +168,11 @@ from aion_brain.self_improvement.pr_controller import (
     PullRequestRecord,
     RewriteApprovalBinding,
 )
+from aion_brain.self_improvement.preference_learning import (
+    PreferenceDistribution,
+    PreferenceLearner,
+    UserPreferenceSignal,
+)
 from aion_brain.self_improvement.proposal_service import ImprovementProposalService
 from aion_brain.self_improvement.protected_paths import (
     protected_path_decision,
@@ -145,11 +185,17 @@ from aion_brain.self_improvement.regression_proposal import (
     RegressionTestProposal,
     RegressionTestProposalGenerator,
 )
+from aion_brain.self_improvement.retrieval_optimizer import (
+    RetrievalRankingOptimizer,
+    RetrievalRankingStatus,
+    RetrievalRankingVersion,
+)
 from aion_brain.self_improvement.risk import assess_improvement_risk
 from aion_brain.self_improvement.rollback import (
     RollbackMetadata,
     rollback_metadata_for_candidate,
 )
+from aion_brain.self_improvement.rollback_controller import RollbackController
 from aion_brain.self_improvement.sandbox import (
     REQUIRED_SANDBOX_GATES,
     DeterministicTestSandboxRunner,
@@ -161,6 +207,16 @@ from aion_brain.self_improvement.sandbox import (
     SandboxRunner,
     build_sandbox_evidence,
     required_sandbox_commands,
+)
+from aion_brain.self_improvement.skill_evolution import (
+    ProceduralSkillEvolution,
+    ProceduralSkillRecord,
+)
+from aion_brain.self_improvement.strategy_selector import (
+    ContextBucketStrategySelector,
+    StrategySelection,
+    StrategySelectionPolicy,
+    StrategyStats,
 )
 from aion_brain.self_improvement.test_first import (
     RegressionTestSpec,
@@ -191,6 +247,13 @@ __all__ = [
     "REWRITE_AUTHORIZATION_SCOPE",
     "REWRITE_AUTHORIZATION_TRANSACTION_ID",
     "REWRITE_IMPLEMENTATION_TASK",
+    "ROLLBACK_TRIGGERS",
+    "CANARY_AUTHORIZATION_SCOPE",
+    "CANARY_AUTHORIZATION_TRANSACTION_ID",
+    "CANARY_IMPLEMENTATION_TASK",
+    "CANARY_RUNTIME_ENABLED",
+    "PRODUCTION_EXPOSURE_ENABLED",
+    "AdaptedPlan",
     "ApprovalStatus",
     "ApprovalTier",
     "BenchmarkBaseline",
@@ -208,8 +271,19 @@ __all__ = [
     "CIMonitor",
     "CIMonitorAdapter",
     "CIReport",
+    "CanaryApprovalBinding",
+    "CanaryController",
+    "CanaryDecision",
+    "CanaryExposureBudget",
+    "CanaryMetricThreshold",
+    "CanaryMonitor",
+    "CanaryMonitoringSummary",
+    "CanaryObservation",
+    "CanaryPlan",
+    "CaseBasedPlanner",
     "ChangeObservation",
     "CheckStatus",
+    "ContextBucketStrategySelector",
     "DeterministicExperimentCandidateProvider",
     "DeterministicTestCIMonitorAdapter",
     "DeterministicTestHypothesisGenerator",
@@ -241,9 +315,14 @@ __all__ = [
     "ImprovementFailurePatternType",
     "ImprovementHypothesis",
     "ImprovementObservation",
+    "ImprovementOutcome",
+    "ImprovementOutcomeLedger",
     "ImprovementProposal",
     "ImprovementProposalService",
     "ImprovementExperimentRunner",
+    "IntegratedDryRunResult",
+    "IntegratedSelfImprovementDryRun",
+    "LearningLedgerRecord",
     "MetricDirection",
     "MergeAdapter",
     "MergeController",
@@ -257,6 +336,12 @@ __all__ = [
     "PatchValidationResult",
     "PatchValidator",
     "PathPolicy",
+    "PlanningCase",
+    "PreferenceDistribution",
+    "PreferenceLearner",
+    "UserPreferenceSignal",
+    "ProceduralSkillEvolution",
+    "ProceduralSkillRecord",
     "ProposalLifecycleState",
     "PullRequestAdapter",
     "PullRequestController",
@@ -265,14 +350,22 @@ __all__ = [
     "RegressionTestProposal",
     "RegressionTestProposalGenerator",
     "RegressionTestSpec",
+    "RetrievalRankingOptimizer",
+    "RetrievalRankingStatus",
+    "RetrievalRankingVersion",
     "RewriteApprovalBinding",
     "RollbackMetadata",
+    "RollbackController",
+    "RollbackDecision",
     "SandboxCommand",
     "SandboxCommandResult",
     "SandboxGateName",
     "SandboxRunEvidence",
     "SandboxRunner",
     "SelfImprovementLedger",
+    "StrategySelection",
+    "StrategySelectionPolicy",
+    "StrategyStats",
     "TaskBranchRequest",
     "TestCommandResult",
     "TestFirstEvidence",
@@ -306,6 +399,7 @@ __all__ = [
     "protected_path_decisions",
     "redact_evidence_payload",
     "require_valid_transition",
+    "required_rollback_triggers",
     "required_sandbox_commands",
     "rollback_metadata_for_candidate",
     "run_candidate_benchmark",

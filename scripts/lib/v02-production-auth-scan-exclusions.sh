@@ -631,6 +631,40 @@ aion173_is_scoped_self_improvement_canary_authorization_path() {
   esac
 }
 
+aion174_is_scoped_self_improvement_canary_adaptation_path() {
+  # Exact AION-174 canary, rollback, and adaptive-learning implementation
+  # paths. These are disabled-by-default/data-only self-improvement artifacts
+  # and do not exempt production-auth source, auth APIs, SDK/CLI runtime
+  # surfaces, package files, lockfiles, migrations, or broad source directories.
+  case "$1" in
+    docs/self-improvement/program-ledger.json|\
+    scripts/lib/self_improvement_governance.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    scripts/production-auth-core-no-go-regression.sh|\
+    scripts/connector-runtime-no-external-call-regression.sh|\
+    scripts/self-improvement-canary-adaptation-no-go-regression.sh|\
+    scripts/self-improvement-canary-adaptation-check.sh|\
+    services/brain-api/src/aion_brain/self_improvement/__init__.py|\
+    services/brain-api/src/aion_brain/self_improvement/canary_contracts.py|\
+    services/brain-api/src/aion_brain/self_improvement/canary.py|\
+    services/brain-api/src/aion_brain/self_improvement/monitoring.py|\
+    services/brain-api/src/aion_brain/self_improvement/rollback_controller.py|\
+    services/brain-api/src/aion_brain/self_improvement/outcome_ledger.py|\
+    services/brain-api/src/aion_brain/self_improvement/strategy_selector.py|\
+    services/brain-api/src/aion_brain/self_improvement/retrieval_optimizer.py|\
+    services/brain-api/src/aion_brain/self_improvement/case_based_planner.py|\
+    services/brain-api/src/aion_brain/self_improvement/preference_learning.py|\
+    services/brain-api/src/aion_brain/self_improvement/skill_evolution.py|\
+    services/brain-api/src/aion_brain/self_improvement/integrated_pipeline.py|\
+    services/brain-api/tests/test_self_improvement_canary_adaptation.py)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
 aion161_is_scoped_offline_identity_assertion_verification_authorization_path() {
   # Exact AION-161 governance, evidence, and validator paths. This task closes
   # AION-159 and creates an offline verification authorization only; it does
