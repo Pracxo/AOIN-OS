@@ -1,0 +1,138 @@
+{
+  "view": "self_improvement_shadow_mode",
+  "title": "Self-Improvement Shadow Mode",
+  "status": "authorized_not_implemented",
+  "summary": "AION-177 authorizes future AION-178 disabled, observation-only shadow-mode implementation. Runtime and write paths remain disabled.",
+  "program_id": "AION-SELF-IMPROVEMENT-001",
+  "authorization_transaction_id": "AION-177-SI-0006",
+  "activation_phase_id": "AION-SELF-IMPROVEMENT-SHADOW-001",
+  "implementation_task": "AION-178",
+  "synthetic": true,
+  "read_only": true,
+  "redaction_applied": true,
+  "shadow_mode_authorized": true,
+  "shadow_mode_implemented": false,
+  "shadow_mode_runtime_enabled": false,
+  "operator_evaluation_decision": "OPERATOR_EVALUATION_PASS_RECOMMEND_SHADOW_MODE_AUTHORIZATION_REVIEW",
+  "cards": [
+    {
+      "label": "Authorization",
+      "value": "active for AION-178 only"
+    },
+    {
+      "label": "Runtime",
+      "value": "disabled"
+    },
+    {
+      "label": "Mode",
+      "value": "observation only"
+    }
+  ],
+  "blocked_capabilities": [
+    "continuous background shadow loop",
+    "production event stream subscription",
+    "production shadow-mode activation",
+    "kernel container registration",
+    "application startup registration",
+    "background scheduler",
+    "automatic polling",
+    "network calls",
+    "external connector calls",
+    "provider SDKs",
+    "raw prompt intake",
+    "hidden reasoning intake",
+    "credential intake",
+    "token intake",
+    "cookie intake",
+    "private key intake",
+    "raw user message intake",
+    "unredacted personal data intake",
+    "source patch generation",
+    "source file mutation",
+    "canonical repository mutation",
+    "worktree creation",
+    "Git branch creation",
+    "Git commit creation",
+    "Git push",
+    "real pull request creation",
+    "approval creation",
+    "approval satisfaction",
+    "automatic merge",
+    "manual merge execution",
+    "production canary",
+    "production deployment",
+    "model-weight training",
+    "active retrieval weight promotion",
+    "active strategy promotion",
+    "preference promotion",
+    "skill promotion",
+    "policy mutation",
+    "audit ledger mutation",
+    "benchmark manifest mutation",
+    "holdout mutation",
+    "holdout disclosure",
+    "test weakening",
+    "runtime response influence",
+    "runtime planning influence",
+    "runtime retrieval influence",
+    "runtime policy influence",
+    "runtime tool-selection influence",
+    "runtime effect",
+    "dependency change",
+    "migration",
+    "GitHub workflow change",
+    "API route",
+    "installed CLI command",
+    "SDK runtime resource",
+    "v0.2 tag or release"
+  ],
+  "sections": [
+    {
+      "title": "Authorization",
+      "status": "active",
+      "severity": "governed",
+      "summary": "AION-177-SI-0006 is active for AION-178 only and is non-reusable.",
+      "blockers": [
+        {
+          "message": "runtime activation requires separate future authorization"
+        }
+      ],
+      "warnings": [],
+      "refs": [
+        "docs/release/self-improvement-shadow-mode-authorization-transaction.md"
+      ]
+    },
+    {
+      "title": "Runtime Hold",
+      "status": "disabled",
+      "severity": "release blocker",
+      "summary": "Shadow mode is not implemented and runtime execution remains disabled.",
+      "blockers": [
+        {
+          "message": "shadow_mode_runtime_enabled=false"
+        },
+        {
+          "message": "source mutation and Git writes remain disabled"
+        }
+      ],
+      "warnings": [],
+      "refs": [
+        "docs/release/self-improvement-shadow-mode-runtime-hold.md"
+      ]
+    }
+  ],
+  "forbidden_actions": [
+    {
+      "action": "self_improvement.shadow.activate_runtime",
+      "reason": "runtime activation is out of scope for AION-177"
+    },
+    {
+      "action": "self_improvement.shadow.create_pull_request",
+      "reason": "PR creation is prohibited by AION-177"
+    },
+    {
+      "action": "self_improvement.shadow.merge",
+      "reason": "automatic merge is prohibited by AION-177"
+    }
+  ]
+}

@@ -40,6 +40,235 @@ AION_174_MERGE_COMMIT = "dd17639986160938043d8ddef7da8cb9b8a2faa4"
 AION_175_FEATURE_COMMIT = "50b498e9a47a95f82c26df718e11696b9ef741b3"
 AION_175_MERGE_COMMIT = "00b71a6172fb136279716103b10dae986f455968"
 AION_175_MERGED_AT = "2026-07-19T06:17:29Z"
+AION_176_FEATURE_COMMIT = "1738f49ff22e197dd8fff3038fc8429306eadf76"
+AION_176_MERGE_COMMIT = "ee50f1cc9ed3573661d1571954421abfb749e877"
+AION_176_MERGED_AT = "2026-07-19T10:02:18Z"
+OPERATOR_EVALUATION_ID = "AION-OE-001"
+OPERATOR_EVALUATION_DECISION = (
+    "OPERATOR_EVALUATION_PASS_RECOMMEND_SHADOW_MODE_AUTHORIZATION_REVIEW"
+)
+SHADOW_AUTHORIZATION_ID = "AION-177-SI-0006"
+SHADOW_ACTIVATION_PHASE_ID = "AION-SELF-IMPROVEMENT-SHADOW-001"
+SHADOW_CANDIDATE_ID = "controlled-self-improvement-shadow-mode"
+SHADOW_WORKSTREAM = "self-improvement-shadow-observation"
+SHADOW_IMPLEMENTATION_TASK = "AION-178"
+SHADOW_AUTHORIZATION_SCOPE = (
+    "read-only-shadow-observation-evaluation-pattern-mining-proposal-generation"
+)
+
+AION178_ALLOWED_CREATE = (
+    "services/brain-api/src/aion_brain/contracts/self_improvement_shadow.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_mode.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_observation.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_pipeline.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_evidence.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_budget.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_redaction.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_runner.py",
+)
+
+AION177_PROHIBITED_SOURCE_FILES = AION178_ALLOWED_CREATE
+
+SHADOW_APPROVED_FLAGS = (
+    "authorization_transaction_approved",
+    "explicit_approval_record_approval",
+    "implementation_authorization_approved",
+    "implementation_go_status",
+    "shadow_mode_contracts_approved",
+    "shadow_observation_manifest_approved",
+    "read_only_trace_reference_intake_approved",
+    "read_only_evaluation_reference_intake_approved",
+    "read_only_outcome_reference_intake_approved",
+    "read_only_experience_reference_intake_approved",
+    "redacted_metric_intake_approved",
+    "deterministic_evaluation_invocation_approved",
+    "failure_pattern_mining_approved",
+    "bounded_hypothesis_generation_approved",
+    "regression_test_proposal_generation_approved",
+    "shadow_improvement_proposal_generation_approved",
+    "operator_review_item_generation_approved",
+    "shadow_evidence_bundle_approved",
+    "shadow_audit_provenance_approved",
+    "shadow_run_diagnostics_approved",
+    "operator_invoked_batch_runner_approved",
+    "explicit_manifest_input_approved",
+    "ephemeral_shadow_store_approved",
+    "operator_supplied_output_directory_approved",
+    "resource_budget_enforcement_approved",
+    "redaction_enforcement_approved",
+    "retention_policy_approved",
+    "deterministic_replay_approved",
+    "shadow_drift_metrics_approved",
+    "no_runtime_influence_enforcement_approved",
+    "no_active_learning_promotion_enforcement_approved",
+    "no_source_mutation_enforcement_approved",
+    "no_git_mutation_enforcement_approved",
+    "no_approval_creation_enforcement_approved",
+    "test_only_fixture_approved",
+    "documentation_and_static_evidence_approved",
+)
+
+SHADOW_PROHIBITED_FLAGS = (
+    "implementation_no_go_status",
+    "continuous_background_shadow_loop_approved",
+    "production_event_stream_subscription_approved",
+    "production_shadow_mode_activation_approved",
+    "kernel_container_registration_approved",
+    "application_startup_registration_approved",
+    "background_scheduler_approved",
+    "automatic_polling_approved",
+    "network_call_approved",
+    "external_connector_call_approved",
+    "provider_sdk_approved",
+    "raw_prompt_intake_approved",
+    "hidden_reasoning_intake_approved",
+    "credential_intake_approved",
+    "token_intake_approved",
+    "cookie_intake_approved",
+    "private_key_intake_approved",
+    "raw_user_message_intake_approved",
+    "unredacted_personal_data_intake_approved",
+    "source_patch_generation_approved",
+    "source_file_mutation_approved",
+    "canonical_repository_mutation_approved",
+    "worktree_creation_approved",
+    "git_branch_creation_approved",
+    "git_commit_creation_approved",
+    "git_push_approved",
+    "real_pull_request_creation_approved",
+    "approval_creation_approved",
+    "approval_satisfaction_approved",
+    "automatic_merge_approved",
+    "manual_merge_execution_approved",
+    "production_canary_approved",
+    "production_deployment_approved",
+    "model_weight_training_approved",
+    "active_retrieval_weight_promotion_approved",
+    "active_strategy_promotion_approved",
+    "preference_promotion_approved",
+    "skill_promotion_approved",
+    "policy_mutation_approved",
+    "audit_ledger_mutation_approved",
+    "benchmark_manifest_mutation_approved",
+    "holdout_mutation_approved",
+    "holdout_disclosure_approved",
+    "test_weakening_approved",
+    "runtime_response_influence_approved",
+    "runtime_planning_influence_approved",
+    "runtime_retrieval_influence_approved",
+    "runtime_policy_influence_approved",
+    "runtime_tool_selection_influence_approved",
+    "runtime_effect_approved",
+    "dependency_change_approved",
+    "migration_approved",
+    "github_workflow_change_approved",
+    "api_route_approved",
+    "installed_cli_command_approved",
+    "sdk_runtime_resource_approved",
+    "v02_tag_created",
+    "v02_release_created",
+    "shadow_mode_runtime_enabled",
+    "shadow_mode_source_rewrite_enabled",
+    "shadow_mode_git_write_enabled",
+    "shadow_mode_pr_creation_enabled",
+    "shadow_mode_auto_merge_enabled",
+    "shadow_mode_production_canary_enabled",
+    "shadow_mode_deployment_enabled",
+    "shadow_mode_provider_call_enabled",
+    "shadow_mode_connector_runtime_enabled",
+    "shadow_mode_model_training_enabled",
+    "shadow_mode_approval_creation_enabled",
+    "shadow_mode_self_approval_enabled",
+    "shadow_mode_protected_core_bypass_enabled",
+    "shadow_mode_user_traffic_enabled",
+)
+
+SHADOW_ALLOWED_INPUTS = (
+    "trace reference IDs",
+    "evaluation reference IDs",
+    "outcome reference IDs",
+    "experience reference IDs",
+    "lesson reference IDs",
+    "pattern reference IDs",
+    "safe fingerprints",
+    "redacted numeric metrics",
+    "bounded timestamps",
+    "synthetic test metadata",
+    "operator-selected scope labels",
+)
+
+SHADOW_DISALLOWED_INPUTS = (
+    "raw prompt",
+    "raw hidden reasoning",
+    "chain of thought",
+    "raw user message",
+    "credential",
+    "token",
+    "cookie",
+    "authorization header",
+    "private key",
+    "provider payload",
+    "raw source patch",
+    "raw diff",
+    "unredacted personal data",
+    "arbitrary filesystem path",
+    "URL",
+    "network location",
+    "executable command",
+)
+
+SHADOW_ALLOWED_OUTPUT_FLAGS = (
+    "redacted observation summaries",
+    "deterministic evaluation summaries",
+    "repeated failure-pattern candidates",
+    "bounded hypothesis candidates",
+    "regression-test proposal specifications",
+    "shadow improvement-proposal candidates",
+    "operator review items",
+    "audit evidence",
+    "provenance evidence",
+    "run diagnostics",
+    "resource-budget evidence",
+)
+
+SHADOW_ALLOWED_REVIEW_STATES = (
+    "shadow_observed",
+    "shadow_evaluated",
+    "shadow_pattern_detected",
+    "shadow_hypothesis_generated",
+    "shadow_regression_proposed",
+    "shadow_proposal_generated",
+    "operator_review_pending",
+    "discarded",
+    "archived",
+)
+
+SHADOW_FORBIDDEN_REVIEW_STATES = (
+    "approved",
+    "pr_created",
+    "merged",
+    "canary",
+    "promoted",
+)
+
+SHADOW_RESOURCE_BUDGETS = {
+    "maximum_observation_references": 1000,
+    "maximum_evaluation_records": 1000,
+    "maximum_failure_patterns": 100,
+    "maximum_hypotheses": 50,
+    "maximum_regression_test_proposals": 25,
+    "maximum_shadow_proposals": 10,
+    "maximum_concurrency": 4,
+    "maximum_wall_clock_seconds": 1800,
+    "maximum_benchmark_cost_units": 50,
+    "maximum_output_bytes": 10485760,
+    "maximum_operator_output_files": 20,
+    "network_calls": 0,
+    "git_operations": 0,
+    "source_mutations": 0,
+    "real_pull_requests": 0,
+    "runtime_promotions": 0,
+}
 
 LIFECYCLE_STATES = (
     "observed",
@@ -322,6 +551,100 @@ CANARY_PROHIBITED_SCOPE = (
     "aion-v0.1.0 modification",
 )
 
+SHADOW_APPROVED_SCOPE = (
+    "shadow-mode contracts",
+    "shadow observation manifest",
+    "read-only trace reference intake",
+    "read-only evaluation reference intake",
+    "read-only outcome reference intake",
+    "read-only experience reference intake",
+    "redacted metric intake",
+    "deterministic evaluation invocation",
+    "failure-pattern mining",
+    "bounded hypothesis generation",
+    "regression-test proposal generation",
+    "shadow improvement-proposal generation",
+    "operator review item generation",
+    "shadow evidence bundle",
+    "shadow audit provenance",
+    "shadow run diagnostics",
+    "operator-invoked batch runner",
+    "explicit manifest input",
+    "ephemeral shadow store",
+    "operator-supplied output directory",
+    "resource budget enforcement",
+    "redaction enforcement",
+    "retention policy",
+    "deterministic replay",
+    "shadow drift metrics",
+    "no runtime influence enforcement",
+    "no active learning promotion enforcement",
+    "no source mutation enforcement",
+    "no Git mutation enforcement",
+    "no approval creation enforcement",
+    "test-only fixture",
+    "documentation and static evidence",
+)
+
+SHADOW_PROHIBITED_SCOPE = (
+    "continuous background shadow loop",
+    "production event stream subscription",
+    "production shadow-mode activation",
+    "kernel container registration",
+    "application startup registration",
+    "background scheduler",
+    "automatic polling",
+    "network calls",
+    "external connector calls",
+    "provider SDKs",
+    "raw prompt intake",
+    "hidden reasoning intake",
+    "credential intake",
+    "token intake",
+    "cookie intake",
+    "private key intake",
+    "raw user message intake",
+    "unredacted personal data intake",
+    "source patch generation",
+    "source file mutation",
+    "canonical repository mutation",
+    "worktree creation",
+    "Git branch creation",
+    "Git commit creation",
+    "Git push",
+    "real pull request creation",
+    "approval creation",
+    "approval satisfaction",
+    "automatic merge",
+    "manual merge execution",
+    "production canary",
+    "production deployment",
+    "model-weight training",
+    "active retrieval weight promotion",
+    "active strategy promotion",
+    "preference promotion",
+    "skill promotion",
+    "policy mutation",
+    "audit ledger mutation",
+    "benchmark manifest mutation",
+    "holdout mutation",
+    "holdout disclosure",
+    "test weakening",
+    "runtime response influence",
+    "runtime planning influence",
+    "runtime retrieval influence",
+    "runtime policy influence",
+    "runtime tool-selection influence",
+    "runtime effect",
+    "dependency change",
+    "migration",
+    "GitHub workflow change",
+    "API route",
+    "installed CLI command",
+    "SDK runtime resource",
+    "v0.2 tag or release",
+)
+
 CANARY_APPROVAL_BINDING_REQUIREMENTS = (
     "exact merge commit",
     "exact deployment artifact",
@@ -361,6 +684,37 @@ REQUIRED_DOCS = (
     "docs/adr/0159-self-improvement-rewrite-authorization.md",
     "docs/adr/0160-self-improvement-canary-authorization.md",
     "docs/adr/0161-governed-self-improvement-platform-complete.md",
+)
+
+AION177_REQUIRED_DOCS = (
+    "docs/self-improvement/operator-evaluation-closeout.md",
+    "docs/self-improvement/shadow-mode-architecture.md",
+    "docs/self-improvement/shadow-mode-boundary.md",
+    "docs/self-improvement/shadow-mode-data-governance.md",
+    "docs/self-improvement/shadow-mode-resource-budgets.md",
+    "docs/self-improvement/shadow-mode-threat-model.md",
+    "docs/self-improvement/shadow-mode-operator-workflow.md",
+    "docs/self-improvement/shadow-mode-roadmap.md",
+    "docs/release/self-improvement-shadow-mode-authorization-transaction.md",
+    "docs/release/self-improvement-shadow-mode-explicit-approval-record.md",
+    "docs/release/self-improvement-shadow-mode-scope.md",
+    "docs/release/self-improvement-shadow-mode-runtime-hold.md",
+    "docs/release/self-improvement-shadow-mode-no-go.md",
+    "docs/release/self-improvement-shadow-mode-checklist.md",
+    "docs/release/self-improvement-shadow-mode-evidence-matrix.md",
+    "docs/adr/0162-controlled-self-improvement-shadow-mode-authorization.md",
+)
+
+AION177_REQUIRED_EXAMPLES = (
+    "examples/self-improvement/operator-evaluation-closeout.json",
+    "examples/self-improvement/shadow-mode-authorization.json",
+    "examples/self-improvement/shadow-mode-runtime-hold.json",
+    "examples/self-improvement/shadow-mode-resource-budget.json",
+    "examples/self-improvement/shadow-mode-data-boundary.json",
+    "examples/self-improvement/shadow-mode-output-boundary.json",
+    "examples/self-improvement/shadow-mode-operator-review-item.json",
+    "operator-console-static/demo-data/self-improvement-shadow-mode-authorization.json",
+    "operator-console-static/demo-data/self-improvement-shadow-mode-runtime-hold.json",
 )
 
 PRIVATE_MARKERS = (
@@ -421,20 +775,33 @@ def validate_repo(repo_root: Path) -> None:
     program = _load_json(repo_root / "docs/self-improvement/program-ledger.json")
     validate_authorization_ledger(authorization)
     validate_program_ledger(program)
+    validate_operator_evaluation_closeout(
+        _load_json(repo_root / "examples/self-improvement/operator-evaluation-closeout.json")
+    )
+    validate_shadow_authorization_example(
+        _load_json(repo_root / "examples/self-improvement/shadow-mode-authorization.json")
+    )
+    validate_shadow_runtime_hold_example(
+        _load_json(repo_root / "examples/self-improvement/shadow-mode-runtime-hold.json")
+    )
     _validate_docs_do_not_store_private_material(repo_root)
 
 
 def validate_no_go(repo_root: Path) -> None:
     authorization = _load_json(repo_root / "docs/self-improvement/authorization-ledger.json")
     active = _current_authorization_record(authorization)
-    for key in GOVERNANCE_FALSE_FLAGS:
+    false_keys = set(GOVERNANCE_FALSE_FLAGS)
+    false_keys.update(SHADOW_PROHIBITED_FLAGS)
+    for key in false_keys:
         if active.get(key) is not False:
             raise GovernanceValidationError(f"{key} must be false")
-    for key in GOVERNANCE_TRUE_FLAGS:
+    for key in SHADOW_APPROVED_FLAGS:
         if active.get(key) is not True:
             raise GovernanceValidationError(f"{key} must be true")
     required_prohibited_scope: tuple[str, ...]
-    if active.get("authorization_transaction_id") == CANARY_AUTHORIZATION_ID:
+    if active.get("authorization_transaction_id") == SHADOW_AUTHORIZATION_ID:
+        required_prohibited_scope = SHADOW_PROHIBITED_SCOPE
+    elif active.get("authorization_transaction_id") == CANARY_AUTHORIZATION_ID:
         required_prohibited_scope = CANARY_PROHIBITED_SCOPE
     elif active.get("authorization_transaction_id") == AUTHORIZATION_ID:
         required_prohibited_scope = REWRITE_PROHIBITED_SCOPE
@@ -443,6 +810,9 @@ def validate_no_go(repo_root: Path) -> None:
     for item in required_prohibited_scope:
         if item not in active.get("prohibited_scope", []):
             raise GovernanceValidationError(f"{item} must be prohibited")
+    for relative in AION177_PROHIBITED_SOURCE_FILES:
+        if (repo_root / relative).exists():
+            raise GovernanceValidationError(f"AION-178 runtime source must be absent: {relative}")
 
 
 def validate_authorization_ledger(payload: dict[str, Any]) -> None:
@@ -452,7 +822,7 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
     records = payload.get("records")
     _require(isinstance(records, list), "records must be a list")
     records = cast(list[dict[str, Any]], records)
-    _require(len(records) == 6, "AION-175 authorization ledger must have six records")
+    _require(len(records) == 7, "AION-177 authorization ledger must have seven records")
 
     root_closeout = records[0]
     _require(root_closeout.get("record_kind") == "authorization_closeout", "missing root closeout")
@@ -595,66 +965,83 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
     _require(rewrite_closeout.get("authorization_expired") is True, "rewrite expired")
     _require(rewrite_closeout.get("authorization_reusable") is False, "rewrite reusable")
 
-    active = records[5]
-    _require(active.get("record_kind") == "authorization_closeout", "missing canary closeout")
+    canary_closeout = records[5]
+    _require(canary_closeout.get("record_kind") == "authorization_closeout", "missing canary closeout")
     _require(
-        active.get("authorization_transaction_id") == CANARY_AUTHORIZATION_ID,
+        canary_closeout.get("authorization_transaction_id") == CANARY_AUTHORIZATION_ID,
         "authorization id",
     )
-    _require(active.get("approval_record_id") == CANARY_AUTHORIZATION_ID, "approval id")
+    _require(canary_closeout.get("approval_record_id") == CANARY_AUTHORIZATION_ID, "approval id")
     _require(
-        active.get("parent_authorization_transaction_id") == AUTHORIZATION_ID,
+        canary_closeout.get("parent_authorization_transaction_id") == AUTHORIZATION_ID,
         "parent id",
     )
-    _require(active.get("implementation_task") == "AION-174", "implementation task")
+    _require(canary_closeout.get("implementation_task") == "AION-174", "implementation task")
     _require(
-        active.get("authorization_scope") == "approval-bound-canary-rollback-and-adaptive-policy",
+        canary_closeout.get("authorization_scope") == "approval-bound-canary-rollback-and-adaptive-policy",
         "authorization scope",
     )
-    _require(active.get("authorization_active") is False, "authorization inactive")
-    _require(active.get("authorization_consumed") is True, "authorization consumed")
-    _require(active.get("authorization_consumed_by_task") == "AION-174", "canary task")
-    _require(active.get("authorization_consumed_by_pr") == 85, "canary PR")
+    _require(canary_closeout.get("authorization_active") is False, "authorization inactive")
+    _require(canary_closeout.get("authorization_consumed") is True, "authorization consumed")
+    _require(canary_closeout.get("authorization_consumed_by_task") == "AION-174", "canary task")
+    _require(canary_closeout.get("authorization_consumed_by_pr") == 85, "canary PR")
     _require(
-        active.get("authorization_consumed_by_feature_commits") == [AION_174_FEATURE_COMMIT],
+        canary_closeout.get("authorization_consumed_by_feature_commits") == [AION_174_FEATURE_COMMIT],
         "canary feature commit",
     )
     _require(
-        active.get("authorization_consumed_by_merge_commit") == AION_174_MERGE_COMMIT,
+        canary_closeout.get("authorization_consumed_by_merge_commit") == AION_174_MERGE_COMMIT,
         "canary merge commit",
     )
-    _require(active.get("authorization_expired") is True, "authorization expired")
-    _require(active.get("authorization_reusable") is False, "authorization reusable")
+    _require(canary_closeout.get("authorization_expired") is True, "authorization expired")
+    _require(canary_closeout.get("authorization_reusable") is False, "authorization reusable")
     _require(
-        active.get("self_improvement_platform_state") == "implemented_disabled",
+        canary_closeout.get("self_improvement_platform_state") == "implemented_disabled",
         "platform state",
     )
     for key in GOVERNANCE_FALSE_FLAGS:
-        _require(active.get(key) is False, f"{key} must be false")
+        _require(canary_closeout.get(key) is False, f"{key} must be false")
     for key in GOVERNANCE_TRUE_FLAGS:
-        _require(active.get(key) is True, f"{key} must be true")
-    _require(tuple(active.get("protected_paths", [])) == PROTECTED_PATHS, "protected paths")
-    _require(tuple(active.get("risk_levels", [])) == RISK_LEVELS, "risk levels")
+        _require(canary_closeout.get(key) is True, f"{key} must be true")
+    _require(tuple(canary_closeout.get("protected_paths", [])) == PROTECTED_PATHS, "protected paths")
+    _require(tuple(canary_closeout.get("risk_levels", [])) == RISK_LEVELS, "risk levels")
     _require(
-        tuple(active.get("change_budget_dimensions", [])) == CHANGE_BUDGET_DIMENSIONS,
+        tuple(canary_closeout.get("change_budget_dimensions", [])) == CHANGE_BUDGET_DIMENSIONS,
         "change budget dimensions",
     )
     _require(
-        tuple(active.get("approval_binding_requirements", []))
+        tuple(canary_closeout.get("approval_binding_requirements", []))
         == CANARY_APPROVAL_BINDING_REQUIREMENTS,
         "approval binding requirements",
     )
     _require(
-        tuple(active.get("test_weakening_controls", [])) == TEST_WEAKENING_CONTROLS,
+        tuple(canary_closeout.get("test_weakening_controls", [])) == TEST_WEAKENING_CONTROLS,
         "test weakening controls",
     )
     _require(
-        tuple(active.get("approved_scope", [])) == CANARY_APPROVED_SCOPE,
+        tuple(canary_closeout.get("approved_scope", [])) == CANARY_APPROVED_SCOPE,
         "approved canary scope",
     )
     _require(
-        tuple(active.get("prohibited_scope", [])) == CANARY_PROHIBITED_SCOPE,
+        tuple(canary_closeout.get("prohibited_scope", [])) == CANARY_PROHIBITED_SCOPE,
         "prohibited canary scope",
+    )
+
+    shadow = records[6]
+    _validate_shadow_authorization_record(shadow)
+
+    _require(
+        payload.get("active_self_improvement_implementation_authorization_count") == 1,
+        "active authorization count",
+    )
+    _require(
+        payload.get("active_self_improvement_implementation_authorization")
+        == SHADOW_AUTHORIZATION_ID,
+        "active authorization id",
+    )
+    _require(
+        payload.get("active_implementation_task") == SHADOW_IMPLEMENTATION_TASK,
+        "active implementation task",
     )
 
 
@@ -678,6 +1065,8 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
     _require("AION-173" in by_task, "AION-173 record missing")
     _require("AION-174" in by_task, "AION-174 record missing")
     _require("AION-175" in by_task, "AION-175 record missing")
+    _require("AION-176" in by_task, "AION-176 record missing")
+    _require("AION-177" in by_task, "AION-177 record missing")
     aion164 = by_task["AION-164"]
     _require(aion164.get("pull_requests") == [75], "AION-164 PR mismatch")
     _require(
@@ -923,6 +1312,148 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
         "AION-175 completion timestamp",
     )
 
+    aion176 = by_task["AION-176"]
+    _require(
+        aion176.get("branch") == "phase/self-improvement-postmerge-evidence-reconciliation",
+        "AION-176 branch",
+    )
+    _require(aion176.get("pull_requests") == [87], "AION-176 PR mismatch")
+    _require(aion176.get("feature_commits") == [AION_176_FEATURE_COMMIT], "AION-176 feature")
+    _require(aion176.get("merge_commits") == [AION_176_MERGE_COMMIT], "AION-176 merge")
+    _require(aion176.get("ci_result") == "pass", "AION-176 CI result")
+    _require(aion176.get("next_task") == "AION-OE-001", "AION-176 next task")
+    _require(
+        aion176.get("authorization_state") == "no_new_implementation_authorization",
+        "AION-176 authorization state",
+    )
+    _require(aion176.get("runtime_state") == "operator_evaluation_ready", "AION-176 runtime")
+    _require(
+        aion176.get("completion_timestamp") == AION_176_MERGED_AT,
+        "AION-176 completion timestamp",
+    )
+
+    aion177 = by_task["AION-177"]
+    _require(
+        aion177.get("branch") == "phase/self-improvement-shadow-mode-authorization",
+        "AION-177 branch",
+    )
+    _require(aion177.get("authorization_transaction") == SHADOW_AUTHORIZATION_ID, "AION-177 auth")
+    _require(aion177.get("next_task") == SHADOW_IMPLEMENTATION_TASK, "AION-177 next task")
+    _require(
+        aion177.get("authorization_state") == "active_for_AION-178_shadow_mode_only",
+        "AION-177 authorization state",
+    )
+    _require(
+        aion177.get("runtime_state") == "authorization_only_shadow_mode_not_implemented",
+        "AION-177 runtime state",
+    )
+
+
+def validate_operator_evaluation_closeout(payload: dict[str, Any]) -> None:
+    _require(payload.get("program_id") == PROGRAM_ID, "operator closeout program id")
+    _require(payload.get("evaluation_id") == OPERATOR_EVALUATION_ID, "operator evaluation id")
+    _require(payload.get("synthetic") is True, "operator closeout must be synthetic")
+    _require(payload.get("read_only") is True, "operator closeout must be read_only")
+    _require(payload.get("decision") == OPERATOR_EVALUATION_DECISION, "operator decision")
+    _require(payload.get("base_commit") == AION_176_MERGE_COMMIT, "operator base commit")
+    _require(payload.get("new_implementation_authorization_created") is False, "operator auth")
+    _require(payload.get("runtime_activation_created") is False, "operator runtime activation")
+    validations = payload.get("validations", {})
+    _require(isinstance(validations, dict), "operator validations")
+    for key in (
+        "runtime_hold",
+        "final_integrated_check",
+        "docs",
+        "domain_drift",
+        "boundary",
+        "repository_health",
+        "immutable_tag",
+    ):
+        _require(validations.get(key) == "PASS", f"operator validation {key}")
+
+
+def validate_shadow_authorization_example(payload: dict[str, Any]) -> None:
+    _require(payload.get("program_id") == PROGRAM_ID, "shadow example program id")
+    _validate_shadow_authorization_record(payload)
+
+
+def validate_shadow_runtime_hold_example(payload: dict[str, Any]) -> None:
+    _require(payload.get("program_id") == PROGRAM_ID, "shadow runtime hold program id")
+    _require(payload.get("authorization_transaction_id") == SHADOW_AUTHORIZATION_ID, "hold auth id")
+    _require(payload.get("shadow_mode_authorized") is True, "shadow authorized")
+    _require(payload.get("shadow_mode_implemented") is False, "shadow implemented")
+    for key in SHADOW_PROHIBITED_FLAGS:
+        _require(payload.get(key) is False, f"runtime hold {key}")
+    for relative in AION177_PROHIBITED_SOURCE_FILES:
+        _require(relative in payload.get("prohibited_source_files_absent", []), relative)
+
+
+def _validate_shadow_authorization_record(record: dict[str, Any]) -> None:
+    _require(record.get("record_kind") == "implementation_authorization", "shadow record kind")
+    _require(
+        record.get("authorization_transaction_id") == SHADOW_AUTHORIZATION_ID,
+        "shadow authorization id",
+    )
+    _require(record.get("approval_record_id") == SHADOW_AUTHORIZATION_ID, "shadow approval id")
+    _require(record.get("program_id") == PROGRAM_ID, "shadow program id")
+    _require(record.get("activation_phase_id") == SHADOW_ACTIVATION_PHASE_ID, "shadow phase id")
+    _require(record.get("candidate_id") == SHADOW_CANDIDATE_ID, "shadow candidate")
+    _require(record.get("workstream") == SHADOW_WORKSTREAM, "shadow workstream")
+    _require(record.get("implementation_task") == SHADOW_IMPLEMENTATION_TASK, "shadow task")
+    _require(record.get("authorization_scope") == SHADOW_AUTHORIZATION_SCOPE, "shadow scope")
+    _require(record.get("authorization_active") is True, "shadow active")
+    _require(record.get("authorization_consumed") is False, "shadow consumed")
+    _require(record.get("authorization_expired") is False, "shadow expired")
+    _require(record.get("authorization_reusable") is False, "shadow reusable")
+    _require(record.get("parent_evaluation_id") == OPERATOR_EVALUATION_ID, "parent evaluation id")
+    _require(record.get("parent_closeout_task") == "AION-176", "parent closeout task")
+    _require(record.get("parent_main_commit") == AION_176_MERGE_COMMIT, "parent main commit")
+    _require(record.get("operator_evaluation_decision") == OPERATOR_EVALUATION_DECISION, "decision")
+    _require(record.get("operator_evaluation_used_as_approval") is False, "operator approval")
+    _require(record.get("operator_evaluation_reusable") is False, "operator reusable")
+    _require(record.get("shadow_mode_authorized") is True, "shadow authorized")
+    _require(record.get("shadow_mode_implemented") is False, "shadow implemented")
+    _require(
+        record.get("shadow_mode_runtime_enabled") is False,
+        "shadow_mode_runtime_enabled must be false",
+    )
+    _require(record.get("self_improvement_platform_state") == "implemented_disabled", "platform")
+    for key in GOVERNANCE_FALSE_FLAGS:
+        _require(record.get(key) is False, f"{key} must be false")
+    for key in SHADOW_APPROVED_FLAGS:
+        _require(record.get(key) is True, f"{key} must be true")
+    for key in SHADOW_PROHIBITED_FLAGS:
+        _require(record.get(key) is False, f"{key} must be false")
+    allowed_approved_flags = set(SHADOW_APPROVED_FLAGS)
+    for key, value in record.items():
+        if (
+            key.endswith("_approved") or key.endswith("_approval")
+        ) and value is True and key not in allowed_approved_flags:
+            raise GovernanceValidationError(f"extra approved capability: {key}")
+    _require(tuple(record.get("approved_scope", [])) == SHADOW_APPROVED_SCOPE, "shadow approved")
+    _require(
+        tuple(record.get("prohibited_scope", [])) == SHADOW_PROHIBITED_SCOPE,
+        "shadow prohibited",
+    )
+    _require(tuple(record.get("allowed_inputs", [])) == SHADOW_ALLOWED_INPUTS, "allowed inputs")
+    _require(
+        tuple(record.get("disallowed_inputs", [])) == SHADOW_DISALLOWED_INPUTS,
+        "disallowed inputs",
+    )
+    _require(
+        tuple(record.get("allowed_outputs", [])) == SHADOW_ALLOWED_OUTPUT_FLAGS,
+        "allowed outputs",
+    )
+    _require(
+        tuple(record.get("allowed_review_states", [])) == SHADOW_ALLOWED_REVIEW_STATES,
+        "allowed review states",
+    )
+    _require(
+        tuple(record.get("forbidden_review_states", [])) == SHADOW_FORBIDDEN_REVIEW_STATES,
+        "forbidden review states",
+    )
+    _require(record.get("resource_budgets") == SHADOW_RESOURCE_BUDGETS, "resource budgets")
+
 
 def _current_authorization_record(payload: dict[str, Any]) -> dict[str, Any]:
     records = cast(list[dict[str, Any]], payload.get("records", []))
@@ -931,19 +1462,16 @@ def _current_authorization_record(payload: dict[str, Any]) -> dict[str, Any]:
     ]
     if matches:
         _require(len(matches) == 1, "at most one active self-improvement authorization required")
+        _require(
+            matches[0].get("authorization_transaction_id") == SHADOW_AUTHORIZATION_ID,
+            "active authorization must be AION-177 shadow mode",
+        )
         return matches[0]
-    closeouts = [
-        record
-        for record in records
-        if record.get("authorization_transaction_id") == CANARY_AUTHORIZATION_ID
-        and record.get("authorization_consumed") is True
-    ]
-    _require(len(closeouts) == 1, "final canary authorization closeout required")
-    return closeouts[0]
+    raise GovernanceValidationError("one active AION-177 shadow-mode authorization required")
 
 
 def _require_required_docs(repo_root: Path) -> None:
-    for relative in REQUIRED_DOCS:
+    for relative in (*REQUIRED_DOCS, *AION177_REQUIRED_DOCS, *AION177_REQUIRED_EXAMPLES):
         if not (repo_root / relative).is_file():
             raise GovernanceValidationError(f"missing required doc: {relative}")
 
@@ -962,14 +1490,38 @@ def _validate_adr_index(repo_root: Path) -> None:
         raise GovernanceValidationError("ADR 0160 is not indexed")
     if "0161-governed-self-improvement-platform-complete.md" not in index:
         raise GovernanceValidationError("ADR 0161 is not indexed")
+    if "0162-controlled-self-improvement-shadow-mode-authorization.md" not in index:
+        raise GovernanceValidationError("ADR 0162 is not indexed")
 
 
 def _validate_docs_do_not_store_private_material(repo_root: Path) -> None:
     for relative in REQUIRED_DOCS:
-        text = (repo_root / relative).read_text().lower()
+        path = repo_root / relative
+        if relative == "docs/self-improvement/authorization-ledger.json":
+            payload = _load_json(path)
+            text = json.dumps(_redact_formal_no_go_labels(payload)).lower()
+        else:
+            text = path.read_text().lower()
         for marker in PRIVATE_MARKERS:
             if marker in text:
                 raise GovernanceValidationError(f"private marker found in {relative}: {marker}")
+
+
+def _redact_formal_no_go_labels(value: Any) -> Any:
+    if isinstance(value, dict):
+        redacted = {}
+        for key, item in value.items():
+            if key in SHADOW_PROHIBITED_FLAGS or key in {
+                "disallowed_inputs",
+                "prohibited_scope",
+                "prohibited_additions_for_AION_178",
+            }:
+                continue
+            redacted[key] = _redact_formal_no_go_labels(item)
+        return redacted
+    if isinstance(value, list):
+        return [_redact_formal_no_go_labels(item) for item in value]
+    return value
 
 
 def _load_json(path: Path) -> dict[str, Any]:

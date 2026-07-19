@@ -2328,3 +2328,13 @@ AION-163 records AION-162 PR #72 and corrective PR #73 as the completed offline 
 ## AION-164 Replay Policy
 
 The replay policy sets a default minimum retention of 86400 seconds, maximum retention of 604800 seconds, cleanup batch size of 1000, and allowed clock skew of 30 seconds. Cleanup is explicit and never automatic.
+
+## AION-177 Shadow-Mode Authorization Policy
+
+AION-177 permits future AION-178 policy comparison only in disabled
+observation-only shadow mode. Policy output may be summarized for operator
+review, but it must not approve changes, mutate source, write Git state, create
+pull requests, merge, deploy, call providers, call connectors, train model
+weights, bypass protected-core controls, or expose production traffic.
+
+Runtime activation requires a separate future explicit authorization.

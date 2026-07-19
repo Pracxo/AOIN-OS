@@ -1144,6 +1144,18 @@ Safe local commands:
 
 The static console reads `demo-data/v02-identity-assertion-replay-protection-authorization.json` as synthetic, read-only evidence. It shows `AION-163-PA-0007` as the only active authorization for AION-164 while keeping request authentication, middleware integration, ActorContext and RequestIdentityContext application, dependency changes, migrations, production schema auto-create, package files, lockfiles, v0.2 tags, and v0.2 releases disabled or absent.
 
+## AION-177 Self-Improvement Shadow-Mode Authorization
+
+The static console reads these synthetic, read-only evidence files:
+
+- `demo-data/self-improvement-shadow-mode-authorization.json`
+- `demo-data/self-improvement-shadow-mode-runtime-hold.json`
+
+It presents `AION-177-SI-0006` as active for future AION-178 disabled,
+observation-only shadow-mode implementation. It must not expose activation
+actions, source mutation, Git writes, pull request creation, merge, deployment,
+provider calls, connector calls, model training, v0.2 tags, or releases.
+
 Local checks:
 
 ```sh

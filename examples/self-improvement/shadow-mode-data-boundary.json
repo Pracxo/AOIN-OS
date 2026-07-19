@@ -1,0 +1,40 @@
+{
+  "program_id": "AION-SELF-IMPROVEMENT-001",
+  "authorization_transaction_id": "AION-177-SI-0006",
+  "synthetic": true,
+  "read_only": true,
+  "required_future_contract": "ShadowObservationManifest",
+  "allowed_inputs": [
+    "trace reference IDs",
+    "evaluation reference IDs",
+    "outcome reference IDs",
+    "experience reference IDs",
+    "lesson reference IDs",
+    "pattern reference IDs",
+    "safe fingerprints",
+    "redacted numeric metrics",
+    "bounded timestamps",
+    "synthetic test metadata",
+    "operator-selected scope labels"
+  ],
+  "disallowed_inputs": [
+    "raw prompt",
+    "raw hidden reasoning",
+    "chain of thought",
+    "raw user message",
+    "credential",
+    "token",
+    "cookie",
+    "authorization header",
+    "private key",
+    "provider payload",
+    "raw source patch",
+    "raw diff",
+    "unredacted personal data",
+    "arbitrary filesystem path",
+    "URL",
+    "network location",
+    "executable command"
+  ],
+  "redaction_required": true
+}

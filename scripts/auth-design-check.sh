@@ -1128,6 +1128,17 @@ aion173_auth_paths = {
     "services/brain-api/tests/test_self_improvement_canary_authorization_docs.py",
 }
 
+aion177_auth_paths = {
+    "docs/adr/0162-controlled-self-improvement-shadow-mode-authorization.md",
+    "docs/release/self-improvement-shadow-mode-authorization-transaction.md",
+    "examples/self-improvement/shadow-mode-authorization.json",
+    "operator-console-static/demo-data/self-improvement-shadow-mode-authorization.json",
+    "scripts/self-improvement-shadow-mode-authorization-check.sh",
+    "scripts/self-improvement-shadow-mode-authorization-no-go-regression.sh",
+    "services/brain-api/tests/test_self_improvement_shadow_mode_authorization_docs.py",
+    "services/brain-api/tests/test_self_improvement_shadow_mode_authorization_validator.py",
+}
+
 blocked_package_names = {
     "package.json",
     "package-lock.json",
@@ -1166,6 +1177,7 @@ for name in [*changed, *untracked]:
         and name not in aion169_auth_paths
         and name not in aion171_auth_paths
         and name not in aion173_auth_paths
+        and name not in aion177_auth_paths
     ):
         raise SystemExit(f"unexpected auth runtime or artifact path: {name}")
 

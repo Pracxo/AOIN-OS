@@ -8,19 +8,24 @@ tag or release exists.
 
 ## Current Main Milestone
 
-AION-175 governed self-improvement platform final closeout merged.
+AION-177 controlled self-improvement shadow-mode authorization is active.
 
-Current stage: Operator evaluation.
+Current stage: Controlled shadow-mode authorization.
 
-No implementation task is active.
+AION-178 is the active implementation task, bounded to disabled
+observation-only shadow mode.
 
 The current self-improvement state is:
 
 - `self_improvement_platform_implemented=true`
 - `self_improvement_platform_state=implemented_disabled`
-- active self-improvement implementation authorization count: 0
-- operator evaluation creates no implementation authorization
-- any runtime activation requires a new explicit authorization
+- `shadow_mode_authorized=true`
+- `shadow_mode_implemented=false`
+- `shadow_mode_runtime_enabled=false`
+- active self-improvement implementation authorization count: 1
+- active self-improvement implementation authorization: `AION-177-SI-0006`
+- active implementation task: `AION-178`
+- runtime activation still requires a separate future explicit authorization
 
 ## Completed Architecture
 
@@ -38,6 +43,7 @@ The current self-improvement state is:
 - Approval-bound isolated rewrite and PR-control plane.
 - Disabled canary, rollback, and adaptive-learning plane.
 - Final self-improvement closeout.
+- Controlled self-improvement shadow-mode authorization.
 
 ## Available Governed Capabilities
 
@@ -57,6 +63,8 @@ The current self-improvement state is:
 - Bounded strategy candidates.
 - Preference-learning candidates.
 - Data-only procedural skill candidates.
+- Controlled shadow-mode authorization for future AION-178 observation-only
+  implementation.
 
 ## Disabled Capabilities
 
@@ -74,9 +82,11 @@ The current self-improvement state is:
 ## Authorization State
 
 `AION-173-SI-0005` was consumed by AION-174 and closed by AION-175. AION-175
-created no new implementation authorization. Operator evaluation creates no
-implementation authorization, and any runtime activation requires a new explicit
-authorization.
+created no new implementation authorization. AION-OE-001 passed operator
+evaluation and recommended shadow-mode authorization review. AION-177 creates
+`AION-177-SI-0006` as the single active authorization for future AION-178
+disabled, observation-only shadow-mode implementation. Any runtime activation
+still requires a separate future explicit authorization.
 
 All production-auth authorization records through `AION-163-PA-0007` are
 historical, inactive, consumed, expired, and non-reusable. Production-auth
@@ -88,7 +98,7 @@ Production authentication runtime remains disabled.
 
 These lines preserve exact historical progression markers consumed by inherited
 release-contract tests. They are not the authoritative current state; the current
-state remains AION-175 merged with operator evaluation next.
+state remains AION-177 shadow mode authorized but not implemented.
 
 Historical marker: Current milestone: AION-160 actor-context trust-boundary remediation implemented.
 Historical marker: Current authorization: AION-161-PA-0006 consumed by AION-162 when merged.
@@ -103,13 +113,15 @@ and production authentication disabled. Formal lifecycle closeout: AION-161.
 
 ## Current Operator Task
 
-Evaluate the governed self-improvement platform.
+Review AION-177 shadow-mode authorization evidence and prepare AION-178 within
+the recorded boundary.
 
-The operator can inspect the final architecture, final readiness report,
-end-to-end evidence, security review, runtime activation checklist, and known
-limitations. Evaluation does not authorize runtime self-improvement, source
-rewrite, automatic merge, production canary, production deployment, or
-model-weight training.
+The operator can inspect the AION-OE-001 closeout, AION-177 authorization
+transaction, shadow-mode architecture, data-governance boundary, resource
+budgets, threat model, runtime hold, and no-go evidence. AION-177 does not
+authorize runtime self-improvement, source rewrite, Git writes, pull request
+creation, automatic merge, production canary, production deployment, provider
+calls, connector calls, or model-weight training.
 
 ## Current Test Posture
 
@@ -127,6 +139,7 @@ Focused self-improvement checks cover:
 - Approval-bound rewrite and PR-control surfaces.
 - Disabled canary, rollback, and adaptive-learning controls.
 - Final closeout readiness.
+- Shadow-mode authorization, boundary, budget, runtime hold, and no-go evidence.
 
 ## Current Release Posture
 
@@ -134,9 +147,10 @@ Focused self-improvement checks cover:
 `v02_tag_created=false`
 `v02_release_created=false`
 
-Completion of the governed self-improvement implementation program does not make
-v0.2 release-ready. Remaining production blockers include operator evaluation,
-production-auth runtime integration, production replay-ledger schema
+Completion of the governed self-improvement implementation program and
+authorization of disabled shadow-mode work do not make v0.2 release-ready.
+Remaining production blockers include production-auth runtime integration,
+production replay-ledger schema
 provisioning, identity-provider integration, protected-material lifecycle,
 credential lifecycle, token lifecycle, session lifecycle, production deployment
 artifact, rollback operations, production observability, threat-model review,
@@ -151,4 +165,6 @@ verification, persistent replay protection, and governed self-improvement
 platform are implemented internally under fail-closed boundaries. No user is
 authenticated, no credentials or tokens are verified or stored, no sessions are
 created, no external providers are contacted, no production canary is active,
-and no production self-improvement runtime is enabled.
+and no production self-improvement runtime is enabled. AION-177 authorizes
+future AION-178 shadow-mode implementation only; shadow-mode runtime remains
+disabled and no AION-178 runtime source exists in AION-177.

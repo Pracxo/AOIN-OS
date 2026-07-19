@@ -19,6 +19,7 @@
     overview: "demo-data/overview-view-model.json",
     readiness: "demo-data/release-readiness-view-model.json",
     release_candidate: "demo-data/post-v01-release-candidate.json",
+    self_improvement_shadow_mode: "demo-data/self-improvement-shadow-mode-authorization.json",
     module_lifecycle: "demo-data/module-lifecycle-dashboard.json",
     model_provider_hardening: "demo-data/provider-hardening-view-model.json",
     operator_actions: "demo-data/operator-action-preview.json",
@@ -33,7 +34,7 @@
     providers: ["model_provider_hardening"],
     actions: ["operator_actions"],
     auth: ["overview"],
-    evidence: ["registry_integrity", "audit_provenance"],
+    evidence: ["registry_integrity", "audit_provenance", "self_improvement_shadow_mode"],
     safety: ["settings_safety", "incidents"]
   };
   var SAFE_COPY_COMMANDS = [
@@ -182,6 +183,9 @@
     "./scripts/production-auth-identity-assertion-replay-no-go-regression.sh",
     "./scripts/production-auth-identity-assertion-replay-check.sh",
     "./scripts/production-auth-identity-assertion-replay-runtime-hold.sh",
+    "./scripts/self-improvement-shadow-mode-authorization-no-go-regression.sh",
+    "./scripts/self-improvement-shadow-mode-authorization-check.sh",
+    "./scripts/self-improvement-shadow-mode-runtime-hold.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
@@ -858,6 +862,9 @@
       "v02_release_created",
       "v02_tag_created",
       "runtime_implementation_approved",
+      "authorization_transaction_id",
+      "active_self_improvement_implementation_authorization",
+      "shadow_mode_authorized",
       "credential_values_present",
       "token_values_present"
     ].indexOf(normalized) !== -1) {

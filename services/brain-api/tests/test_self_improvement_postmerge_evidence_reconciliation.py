@@ -137,14 +137,16 @@ def test_runtime_safety_flags_remain_disabled() -> None:
     assert safety["aion_v010_unchanged"] is True
 
 
-def test_project_status_describes_operator_evaluation_current_state() -> None:
+def test_project_status_describes_current_shadow_authorization_state() -> None:
     text = _text("docs/project-status.md")
     current_text = _project_status_current_text()
 
-    assert "AION-175 governed self-improvement platform final closeout merged." in text
-    assert "Current stage: Operator evaluation." in text
+    assert "AION-177 controlled self-improvement shadow-mode authorization is active." in text
+    assert "Current stage: Controlled shadow-mode authorization." in text
     assert "`self_improvement_platform_state=implemented_disabled`" in text
-    assert "No implementation task is active." in text
+    assert "`shadow_mode_runtime_enabled=false`" in text
+    assert "active self-improvement implementation authorization count: 1" in text
+    assert "active implementation task: `AION-178`" in text
     assert "v02_tag_created=false" in text
     assert "v02_release_created=false" in text
     for stale_marker in STALE_CURRENT_STATE_MARKERS:

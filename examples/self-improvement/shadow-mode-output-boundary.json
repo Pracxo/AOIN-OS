@@ -1,0 +1,50 @@
+{
+  "program_id": "AION-SELF-IMPROVEMENT-001",
+  "authorization_transaction_id": "AION-177-SI-0006",
+  "synthetic": true,
+  "read_only": true,
+  "allowed_outputs": [
+    "redacted observation summaries",
+    "deterministic evaluation summaries",
+    "repeated failure-pattern candidates",
+    "bounded hypothesis candidates",
+    "regression-test proposal specifications",
+    "shadow improvement-proposal candidates",
+    "operator review items",
+    "audit evidence",
+    "provenance evidence",
+    "run diagnostics",
+    "resource-budget evidence"
+  ],
+  "required_output_state": {
+    "shadow_mode": true,
+    "shadow_only": true,
+    "operator_review_required": true,
+    "implementation_authorization_created": false,
+    "approval_created": false,
+    "source_modified": false,
+    "git_mutated": false,
+    "pull_request_created": false,
+    "merged": false,
+    "runtime_effect": false,
+    "active_learning_promoted": false
+  },
+  "allowed_review_states": [
+    "shadow_observed",
+    "shadow_evaluated",
+    "shadow_pattern_detected",
+    "shadow_hypothesis_generated",
+    "shadow_regression_proposed",
+    "shadow_proposal_generated",
+    "operator_review_pending",
+    "discarded",
+    "archived"
+  ],
+  "forbidden_review_states": [
+    "approved",
+    "pr_created",
+    "merged",
+    "canary",
+    "promoted"
+  ]
+}

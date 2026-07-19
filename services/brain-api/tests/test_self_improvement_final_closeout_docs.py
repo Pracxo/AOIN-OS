@@ -39,6 +39,8 @@ from self_improvement_governance import (  # noqa: E402
     CANARY_AUTHORIZATION_ID,
     GOVERNANCE_FALSE_FLAGS,
     GOVERNANCE_TRUE_FLAGS,
+    SHADOW_AUTHORIZATION_ID,
+    SHADOW_IMPLEMENTATION_TASK,
     GovernanceValidationError,
     validate_authorization_ledger,
     validate_no_go,
@@ -110,8 +112,12 @@ def test_aion175_closes_canary_authorization_without_new_implementation_auth() -
     validate_no_go(ROOT)
 
     records = payload["records"]
-    assert len(records) == 6
-    assert [record for record in records if record["authorization_active"] is True] == []
+    assert len(records) == 7
+    active_records = [record for record in records if record["authorization_active"] is True]
+    assert [record["authorization_transaction_id"] for record in active_records] == [
+        SHADOW_AUTHORIZATION_ID
+    ]
+    assert active_records[0]["implementation_task"] == SHADOW_IMPLEMENTATION_TASK
 
     closeout = records[5]
     assert closeout["record_kind"] == "authorization_closeout"
@@ -166,6 +172,12 @@ def test_aion175_program_ledger_records_merged_final_task() -> None:
     assert closeout["merge_commits"] == [AION_175_MERGE_COMMIT]
     assert closeout["ci_result"] == "pass"
     assert closeout["completion_timestamp"] == AION_175_MERGED_AT
+
+    aion177 = by_task["AION-177"]
+    assert aion177["authorization_transaction"] == SHADOW_AUTHORIZATION_ID
+    assert aion177["authorization_state"] == "active_for_AION-178_shadow_mode_only"
+    assert aion177["next_task"] == SHADOW_IMPLEMENTATION_TASK
+    assert aion177["runtime_state"] == "authorization_only_shadow_mode_not_implemented"
 
 
 def test_final_readiness_report_has_required_capabilities_safety_and_evaluation_steps() -> None:

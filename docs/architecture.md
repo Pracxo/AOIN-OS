@@ -2614,3 +2614,17 @@ AION-163 records AION-162 PR #72 and corrective PR #73 as the completed offline 
 ## AION-164 Replay Protection Architecture
 
 Persistent identity assertion replay protection is implemented as a production-auth internal component. The core uses the existing canonical serializer, a domain-separated replay key, and a dedicated SQLAlchemy table with a unique primary key. It is not wired into request runtime architecture, app factory, KernelContainer, middleware, API routes, SDKs, or CLI commands.
+
+## AION-177 Controlled Self-Improvement Shadow-Mode Authorization
+
+AION-177 adds the authorization architecture for future AION-178 controlled
+self-improvement shadow mode. The architecture is observation-only and disabled
+by default. It may later support shadow-mode contracts, redacted observation
+records, policy comparison summaries, resource budgets, and operator review
+items, but AION-177 does not implement those runtime source files.
+
+The active authorization is `AION-177-SI-0006`. It is scoped to AION-178 only
+and keeps runtime self-improvement, source rewrite, Git writes, PR creation,
+automatic merge, canary, deployment, provider calls, connector calls,
+model-weight training, v0.2 tags, v0.2 releases, and `aion-v0.1.0` movement
+disabled or absent.
