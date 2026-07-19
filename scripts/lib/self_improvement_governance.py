@@ -37,6 +37,9 @@ AION_173_FEATURE_COMMIT = "bd215d2910e6c29b7f0d53381d0960330fda4623"
 AION_173_MERGE_COMMIT = "9d827d8bbbe0cb726904b19b0662e214d7f1b04e"
 AION_174_FEATURE_COMMIT = "61fdce1795385fa954114a38098f6f2dba26a5f4"
 AION_174_MERGE_COMMIT = "dd17639986160938043d8ddef7da8cb9b8a2faa4"
+AION_175_FEATURE_COMMIT = "50b498e9a47a95f82c26df718e11696b9ef741b3"
+AION_175_MERGE_COMMIT = "00b71a6172fb136279716103b10dae986f455968"
+AION_175_MERGED_AT = "2026-07-19T06:17:29Z"
 
 LIFECYCLE_STATES = (
     "observed",
@@ -344,6 +347,7 @@ REQUIRED_DOCS = (
     "docs/self-improvement/known-limitations.md",
     "docs/self-improvement/runtime-activation-checklist.md",
     "docs/self-improvement/future-model-training-boundary.md",
+    "docs/self-improvement/aion-176-post-merge-evidence-reconciliation.md",
     "docs/self-improvement/protected-core-boundary.md",
     "docs/self-improvement/approval-model.md",
     "docs/self-improvement/change-budget-model.md",
@@ -894,18 +898,29 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
         aion175.get("authorization_transaction") == CANARY_AUTHORIZATION_ID,
         "AION-175 auth",
     )
-    _require(aion175.get("pull_requests") == [], "AION-175 PR pending")
-    _require(aion175.get("feature_commits") == [], "AION-175 feature pending")
-    _require(aion175.get("merge_commits") == [], "AION-175 merge pending")
-    _require(aion175.get("ci_result") == "pending", "AION-175 CI pending")
-    _require(aion175.get("next_task") == "user_evaluation", "AION-175 next task")
+    _require(aion175.get("pull_requests") == [86], "AION-175 PR mismatch")
     _require(
-        aion175.get("authorization_state") == "final_closeout_no_new_authorization",
+        aion175.get("feature_commits") == [AION_175_FEATURE_COMMIT],
+        "AION-175 feature commit",
+    )
+    _require(
+        aion175.get("merge_commits") == [AION_175_MERGE_COMMIT],
+        "AION-175 merge commit",
+    )
+    _require(aion175.get("ci_result") == "pass", "AION-175 CI result")
+    _require(aion175.get("next_task") == "operator_evaluation", "AION-175 next task")
+    _require(
+        aion175.get("authorization_state")
+        == "final_closeout_complete_no_new_implementation_authorization",
         "AION-175 authorization state",
     )
     _require(
         aion175.get("runtime_state") == "self_improvement_platform_implemented_disabled",
         "AION-175 runtime state",
+    )
+    _require(
+        aion175.get("completion_timestamp") == AION_175_MERGED_AT,
+        "AION-175 completion timestamp",
     )
 
 
