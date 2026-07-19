@@ -57,10 +57,29 @@ The authorized controller may prepare isolated worktrees, bounded patches, test-
 
 ## Approval Binding
 
+Required approval binding evidence:
+
+- proposal ID
+- exact commit SHA
+- exact diff hash
+- exact benchmark fingerprint
+- exact rollback commit
+- exact deployment scope
+
 AION-172 must invalidate approval after any code change and must bind approval to the exact proposal ID, commit SHA, diff hash, benchmark fingerprint, rollback commit, and deployment scope. It may not push to main, merge a different commit, or create a pull request before valid approval exists.
+
+## Test Weakening Controls
+
+- detect deleted assertions
+- detect reduced expected security state
+- detect skipped tests
+- detect broad test exclusions
+- detect changed benchmark thresholds
+- require elevated approval when source and guarding tests both change
+- mutation-style checks for high-risk proposals
 
 ## Prohibited Scope
 
-AION-172 may not implement direct main writes, force pushes, self-approval, protected-core edits under ordinary approval, dependency changes without exact authorization, test weakening, holdout mutation, automatic merge without approval, production deployment, model-weight modification, a v0.2 tag, a v0.2 release, or any modification to `aion-v0.1.0`.
+AION-172 may not implement direct main writes, force pushes, self-approval, protected-core edits under ordinary approval, dependency changes without exact authorization, test weakening, holdout mutation, automatic merge without approval, production deployment, model-weight modification, a v0.2 tag or release, or any `aion-v0.1.0 modification`.
 
 Production GitHub calls remain disabled until explicitly configured. GitHub behavior must be adapter-driven and mocked in focused tests.

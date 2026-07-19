@@ -20,6 +20,7 @@ required_files=(
   docs/self-improvement/evaluation-authorization.md
   docs/self-improvement/experiment-authorization.md
   docs/self-improvement/rewrite-authorization.md
+  docs/self-improvement/canary-authorization.md
   docs/self-improvement/protected-core-boundary.md
   docs/self-improvement/approval-model.md
   docs/self-improvement/change-budget-model.md
@@ -31,6 +32,7 @@ required_files=(
   docs/adr/0157-self-improvement-evaluation-authorization.md
   docs/adr/0158-self-improvement-experiment-authorization.md
   docs/adr/0159-self-improvement-rewrite-authorization.md
+  docs/adr/0160-self-improvement-canary-authorization.md
   scripts/lib/self_improvement_governance.py
   scripts/self-improvement-governance-no-go-regression.sh
   scripts/self-improvement-governance-authorization-check.sh
@@ -40,30 +42,32 @@ required_files=(
   scripts/self-improvement-experiment-authorization-check.sh
   scripts/self-improvement-rewrite-no-go-regression.sh
   scripts/self-improvement-rewrite-authorization-check.sh
+  scripts/self-improvement-rewrite-controller-no-go-regression.sh
+  scripts/self-improvement-rewrite-controller-check.sh
+  scripts/self-improvement-canary-no-go-regression.sh
+  scripts/self-improvement-canary-authorization-check.sh
   services/brain-api/tests/test_self_improvement_governance_authorization_docs.py
   services/brain-api/tests/test_self_improvement_evaluation_authorization_docs.py
   services/brain-api/tests/test_self_improvement_experiment_authorization_docs.py
   services/brain-api/tests/test_self_improvement_rewrite_authorization_docs.py
+  services/brain-api/tests/test_self_improvement_rewrite_controller.py
+  services/brain-api/tests/test_self_improvement_canary_authorization_docs.py
 )
 
 for file in "${required_files[@]}"; do
   test -f "$file" || {
-    echo "missing AION-169 artifact: $file" >&2
+    echo "missing AION-173 artifact: $file" >&2
     exit 1
   }
 done
 
-grep -F "0158-self-improvement-experiment-authorization.md" docs/adr/README.md >/dev/null || {
-  echo "ADR 0158 is not indexed" >&2
-  exit 1
-}
-grep -F "0159-self-improvement-rewrite-authorization.md" docs/adr/README.md >/dev/null || {
-  echo "ADR 0159 is not indexed" >&2
+grep -F "0160-self-improvement-canary-authorization.md" docs/adr/README.md >/dev/null || {
+  echo "ADR 0160 is not indexed" >&2
   exit 1
 }
 
 "$PYTHON_BIN" scripts/lib/self_improvement_governance.py --repo-root "$ROOT_DIR" --mode check
-./scripts/self-improvement-experiment-no-go-regression.sh
+./scripts/self-improvement-canary-no-go-regression.sh
 
 if is_nested_gate_context; then
   echo "PASS: focused pytest deferred to outer gate"
@@ -73,6 +77,7 @@ else
     services/brain-api/tests/test_self_improvement_evaluation_authorization_docs.py \
     services/brain-api/tests/test_self_improvement_experiment_authorization_docs.py \
     services/brain-api/tests/test_self_improvement_rewrite_authorization_docs.py \
+    services/brain-api/tests/test_self_improvement_canary_authorization_docs.py \
     -q
 fi
 
@@ -86,17 +91,14 @@ else
 fi
 
 cat <<'SUMMARY'
-self-improvement experiment authorization result:
-- AION-167-SI-0002: consumed by AION-168 PR 79 and closed by AION-169
-- AION-169-SI-0003: consumed by AION-170 PR 81 and closed by AION-171
+self-improvement canary authorization result:
 - AION-171-SI-0004: consumed by AION-172 PR 83 and closed by AION-173
 - AION-173-SI-0005: active authorization for AION-174 canary and adaptive policy
-- source_mutation_enabled=false
-- git_commits_enabled=false
-- branch_creation_enabled=false
-- pull_request_creation_enabled=false
-- merge_enabled=false
-- deployment_enabled=false
-- model_weight_changes_enabled=false
-self-improvement experiment authorization PASS
+- canary plans: authorized
+- automatic rollback: approval-threshold bound
+- adaptive learning: data-only and approval-gated
+- production_canary_enabled=false
+- runtime_self_approval_enabled=false
+- autonomous_production_activation_enabled=false
+self-improvement canary authorization PASS
 SUMMARY
