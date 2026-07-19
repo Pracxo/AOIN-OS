@@ -28,6 +28,8 @@ AION_170_FEATURE_COMMITS = (
     "4798459eec61e5f534c880234508815364804ee5",
 )
 AION_170_MERGE_COMMIT = "6e741c8327d900fa80480bce911fbccffb8b4781"
+AION_171_FEATURE_COMMIT = "4970700555638b4ecd53a581d1797148906f81ef"
+AION_171_MERGE_COMMIT = "478b79de1fbd4eeeb0280a41abf4050c0f513d8f"
 
 LIFECYCLE_STATES = (
     "observed",
@@ -525,6 +527,7 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
     _require("AION-169" in by_task, "AION-169 record missing")
     _require("AION-170" in by_task, "AION-170 record missing")
     _require("AION-171" in by_task, "AION-171 record missing")
+    _require("AION-172" in by_task, "AION-172 record missing")
     aion164 = by_task["AION-164"]
     _require(aion164.get("pull_requests") == [75], "AION-164 PR mismatch")
     _require(
@@ -649,6 +652,13 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
     )
     aion171 = by_task["AION-171"]
     _require(aion171.get("authorization_transaction") == AUTHORIZATION_ID, "AION-171 auth")
+    _require(aion171.get("pull_requests") == [82], "AION-171 PR mismatch")
+    _require(aion171.get("feature_commits") == [AION_171_FEATURE_COMMIT], "AION-171 feature")
+    _require(
+        aion171.get("merge_commits") == [AION_171_MERGE_COMMIT],
+        "AION-171 merge commit missing",
+    )
+    _require(aion171.get("ci_result") == "pass", "AION-171 CI result")
     _require(aion171.get("next_task") == "AION-172", "AION-171 next task")
     _require(
         aion171.get("authorization_state") == "active_until_AION-172_merge",
@@ -657,6 +667,23 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
     _require(
         aion171.get("runtime_state") == "authorization_only_no_rewrite_controller_implementation",
         "AION-171 runtime state",
+    )
+
+    aion172 = by_task["AION-172"]
+    _require(aion172.get("authorization_transaction") == AUTHORIZATION_ID, "AION-172 auth")
+    _require(aion172.get("pull_requests") == [], "AION-172 PR pending")
+    _require(aion172.get("feature_commits") == [], "AION-172 feature pending")
+    _require(aion172.get("merge_commits") == [], "AION-172 merge pending")
+    _require(aion172.get("ci_result") == "pending", "AION-172 CI pending")
+    _require(aion172.get("next_task") == "AION-173", "AION-172 next task")
+    _require(
+        aion172.get("authorization_state") == "active_until_AION-172_merge",
+        "AION-172 authorization state",
+    )
+    _require(
+        aion172.get("runtime_state")
+        == "rewrite_controller_implemented_disabled_approval_bound_no_production_github_calls",
+        "AION-172 runtime state",
     )
 
 
