@@ -392,6 +392,53 @@ for path in sorted(demo_dir.glob("*.json")):
             if key in payload and payload.get(key) is not False:
                 raise SystemExit(f"authorization demo flag must be false: {key}: {path}")
         continue
+    if path.name.startswith("self-improvement-shadow-mode-"):
+        if path.name not in {
+            "self-improvement-shadow-mode-authorization.json",
+            "self-improvement-shadow-mode-runtime-hold.json",
+        }:
+            raise SystemExit(f"unknown self-improvement shadow-mode demo: {path}")
+        if payload.get("read_only") is not True:
+            raise SystemExit(f"self-improvement shadow-mode demo must be read_only: {path}")
+        if payload.get("redaction_applied") is not True:
+            raise SystemExit(f"self-improvement shadow-mode demo must be redacted: {path}")
+        if payload.get("shadow_mode_implemented") is not False:
+            raise SystemExit(f"shadow_mode_implemented must be false: {path}")
+        if payload.get("shadow_mode_runtime_enabled") is not False:
+            raise SystemExit(f"shadow_mode_runtime_enabled must be false: {path}")
+        allowed_true_keys = {
+            "synthetic",
+            "read_only",
+            "redaction_applied",
+            "shadow_mode_authorized",
+        }
+        blocked_true_markers = (
+            "_enabled",
+            "_approved",
+            "_allowed",
+            "_created",
+            "_added",
+            "_present",
+            "_mutated",
+            "_mutation",
+            "_training",
+            "_deployment",
+            "_canary",
+            "_merge",
+            "_push",
+            "_execution",
+            "_effect",
+        )
+        for key, value in payload.items():
+            normalized = key.lower()
+            if (
+                isinstance(value, bool)
+                and value is True
+                and normalized not in allowed_true_keys
+                and any(marker in normalized for marker in blocked_true_markers)
+            ):
+                raise SystemExit(f"self-improvement shadow-mode flag must not be true: {key}: {path}")
+        continue
     if payload.get("read_only") is not True:
         raise SystemExit(f"read_only must be true: {path}")
     if payload.get("redaction_applied") is not True:
@@ -419,6 +466,7 @@ for path in sorted(demo_dir.glob("*.json")):
         "v02-production-auth-request-boundary-authorization.json",
         "v02-production-auth-request-identity-stabilization-authorization.json",
         "v02-actor-context-trust-boundary-authorization.json",
+        "self-improvement-shadow-mode-authorization.json",
         "production-auth-core-status.json",
         "production-auth-runtime-hold.json",
         "production-auth-core-stabilization.json",

@@ -76,6 +76,13 @@ Instructions for future Codex runs in this repository:
   routes, SDK/CLI source, package files, lockfiles, migrations, runtime auth
   enablement, credentials, tokens, sessions, cookies, provider SDKs, external
   calls, v0.2 tags, or releases.
+- Controlled self-improvement shadow-mode authorization work may record
+  operator-evaluation closeout evidence and create a scoped future AION-178
+  authorization only. It must not implement shadow-mode runtime source, modify
+  workflows, modify Brain runtime source, modify SDK runtime source, add
+  dependencies, add migrations, activate runtime self-improvement, rewrite
+  source, mutate Git state, create pull requests, merge, deploy, call providers
+  or connectors, train model weights, create v0.2 tags, or create releases.
 - Disabled production-auth request identity boundary work may add internal
   production-auth request identity contracts, disabled verifier wiring,
   observe-only middleware, anonymous request-state evidence, diagnostics, docs,

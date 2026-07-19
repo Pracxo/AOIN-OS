@@ -12,6 +12,14 @@ control plane.
 4. Run `./scripts/self-improvement-final-check.sh` when a full local validation is required.
 5. Review `docs/self-improvement/security-review.md` and `docs/self-improvement/known-limitations.md` before considering future activation work.
 
+## AION-177 Follow-Up
+
+AION-OE-001 is closed with
+`OPERATOR_EVALUATION_PASS_RECOMMEND_SHADOW_MODE_AUTHORIZATION_REVIEW`. AION-177
+turns that recommendation into a separate, explicit, non-reusable authorization
+for future AION-178 disabled shadow-mode implementation. The evaluation itself
+is not approval and cannot be reused for runtime activation.
+
 ## Evaluation Questions
 
 - Does the evidence show deterministic self-evaluation and immutable benchmark comparison?

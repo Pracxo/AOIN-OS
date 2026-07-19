@@ -69,10 +69,10 @@ Status: `not-ready`
 
 ## Current Critical Path
 
-The current critical path is operator evaluation of the governed
-self-improvement platform. AION-175 completed the implementation track and left
-the platform implemented but disabled for autonomous runtime use. Operator
-evaluation does not activate production self-improvement, production
+The current critical path has advanced past operator evaluation into controlled
+shadow-mode authorization. AION-177 creates `AION-177-SI-0006` for future
+AION-178 disabled, observation-only shadow-mode implementation. This
+authorization does not activate production self-improvement, production
 authentication, external providers, production canary traffic, deployment, or
 model-weight training.
 

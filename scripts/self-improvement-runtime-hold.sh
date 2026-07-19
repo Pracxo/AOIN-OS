@@ -9,6 +9,8 @@ source "$ROOT_DIR/scripts/lib/immutable-tags.sh"
 PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 
+"$PYTHON_BIN" scripts/lib/self_improvement_governance.py --repo-root "$ROOT_DIR" --mode no-go
+
 "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
 
@@ -85,13 +87,45 @@ TRUE_KEYS = {
     "rollback_required",
 }
 
+SHADOW_FALSE_KEYS = {
+    "shadow_mode_implemented",
+    "shadow_mode_runtime_enabled",
+    "shadow_mode_source_rewrite_enabled",
+    "shadow_mode_git_write_enabled",
+    "shadow_mode_pr_creation_enabled",
+    "shadow_mode_auto_merge_enabled",
+    "shadow_mode_production_canary_enabled",
+    "shadow_mode_deployment_enabled",
+    "shadow_mode_provider_call_enabled",
+    "shadow_mode_connector_runtime_enabled",
+    "shadow_mode_model_training_enabled",
+    "shadow_mode_approval_creation_enabled",
+    "shadow_mode_self_approval_enabled",
+    "shadow_mode_protected_core_bypass_enabled",
+    "shadow_mode_user_traffic_enabled",
+}
+
 active_authorizations = [
     record for record in AUTHORIZATION["records"] if record.get("authorization_active") is True
 ]
-if active_authorizations:
-    raise SystemExit("self-improvement authorization must not remain active")
+if len(active_authorizations) != 1:
+    raise SystemExit("exactly one AION-177 shadow-mode authorization must remain active")
+active_authorization = active_authorizations[0]
+if active_authorization["authorization_transaction_id"] != "AION-177-SI-0006":
+    raise SystemExit("active authorization must be AION-177-SI-0006")
+if active_authorization["implementation_task"] != "AION-178":
+    raise SystemExit("active authorization must be scoped to AION-178")
+if active_authorization["authorization_reusable"] is not False:
+    raise SystemExit("active authorization must be non-reusable")
 
-final_record = AUTHORIZATION["records"][-1]
+final_record_matches = [
+    record
+    for record in AUTHORIZATION["records"]
+    if record.get("authorization_transaction_id") == "AION-173-SI-0005"
+]
+if len(final_record_matches) != 1:
+    raise SystemExit("AION-173-SI-0005 closeout record missing")
+final_record = final_record_matches[0]
 if final_record["authorization_transaction_id"] != "AION-173-SI-0005":
     raise SystemExit("final authorization closeout id mismatch")
 if final_record["authorization_consumed_by_task"] != "AION-174":
@@ -114,9 +148,26 @@ if approval_state["new_implementation_authorization_created"] is not False:
 for key in FALSE_KEYS:
     if final_record.get(key) is not False:
         raise SystemExit(f"authorization ledger {key} must be false")
+    if active_authorization.get(key) is not False:
+        raise SystemExit(f"active authorization {key} must be false")
 for key in TRUE_KEYS:
     if final_record.get(key) is not True:
         raise SystemExit(f"authorization ledger {key} must be true")
+for key in SHADOW_FALSE_KEYS:
+    if active_authorization.get(key) is not False:
+        raise SystemExit(f"active shadow authorization {key} must be false")
+for relative in [
+    "services/brain-api/src/aion_brain/contracts/self_improvement_shadow.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_mode.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_observation.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_pipeline.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_evidence.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_budget.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_redaction.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_runner.py",
+]:
+    if (ROOT / relative).exists():
+        raise SystemExit(f"AION-178 shadow runtime source must be absent: {relative}")
 for key in {
     "self_improvement_runtime_enabled",
     "self_rewrite_runtime_enabled",
@@ -218,7 +269,9 @@ fi
 cat <<'SUMMARY'
 self-improvement runtime hold result:
 - self_improvement_platform_state=implemented_disabled
-- active implementation authorization=false
+- active implementation authorization=AION-177-SI-0006 for AION-178 shadow mode only
+- shadow_mode_implemented=false
+- shadow_mode_runtime_enabled=false
 - self_improvement_runtime_enabled=false
 - self_rewrite_runtime_enabled=false
 - automatic_merge_enabled=false

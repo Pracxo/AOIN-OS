@@ -1494,3 +1494,11 @@ AION-163 records AION-162 PR #72 and corrective PR #73 as the completed offline 
 ## AION-164 Static Evidence
 
 The static console includes synthetic read-only replay-protection and runtime-hold evidence. These panels show replay readiness and no-go state only; they do not enable runtime authentication or request integration.
+
+## AION-177 Shadow-Mode Static Evidence
+
+The static console can display AION-177 shadow-mode authorization and runtime
+hold evidence from synthetic local JSON files. The view is read-only and
+operator-facing. It does not activate shadow mode, call an API, execute actions,
+create approvals, create pull requests, merge, deploy, or expose provider or
+connector payloads.

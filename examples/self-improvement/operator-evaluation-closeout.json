@@ -1,0 +1,53 @@
+{
+  "program_id": "AION-SELF-IMPROVEMENT-001",
+  "evaluation_id": "AION-OE-001",
+  "synthetic": true,
+  "read_only": true,
+  "redacted": true,
+  "base_commit": "ee50f1cc9ed3573661d1571954421abfb749e877",
+  "decision": "OPERATOR_EVALUATION_PASS_RECOMMEND_SHADOW_MODE_AUTHORIZATION_REVIEW",
+  "aion_176": {
+    "pull_request": 87,
+    "branch": "phase/self-improvement-postmerge-evidence-reconciliation",
+    "feature_commit": "1738f49ff22e197dd8fff3038fc8429306eadf76",
+    "merge_commit": "ee50f1cc9ed3573661d1571954421abfb749e877",
+    "merged_at": "2026-07-19T10:02:18Z",
+    "checks": [
+      "brain-api-quality",
+      "contract-check",
+      "docker-build-core",
+      "policy-check",
+      "repository-hygiene",
+      "sdk-cli-check",
+      "sdk-quality"
+    ]
+  },
+  "validations": {
+    "runtime_hold": "PASS",
+    "final_integrated_check": "PASS",
+    "focused_operator_evaluation_tests": "51 passed",
+    "rewrite_scenario": "1 passed",
+    "canary_scenario": "1 passed",
+    "adaptive_scenario": "1 passed",
+    "brain_api": "2891 passed",
+    "sdk": "274 passed",
+    "mypy_brain_api_files": "1184 passed",
+    "mypy_sdk_files": "145 passed",
+    "lint": "PASS",
+    "docs": "PASS",
+    "domain_drift": "PASS",
+    "boundary": "PASS",
+    "repository_health": "PASS",
+    "immutable_tag": "PASS",
+    "v02_absent": "PASS",
+    "temporary_artifacts_cleaned": "PASS"
+  },
+  "new_implementation_authorization_created": false,
+  "runtime_activation_created": false,
+  "real_pull_request_created": false,
+  "source_rewrite_enabled": false,
+  "canary_enabled": false,
+  "deployment_enabled": false,
+  "model_weight_training_enabled": false,
+  "recommended_next_step": "create separate bounded shadow-mode authorization"
+}

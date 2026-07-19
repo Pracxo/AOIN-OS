@@ -14,6 +14,16 @@ AION-175 closes the governed self-improvement implementation track. The platform
 
 The implementation state is `implemented_disabled`. Runtime self-improvement, runtime source rewrite, automatic merge, production canary, production deployment, production exposure, and model-weight training are all disabled. Human approval remains required for any source change, exact commit and diff hash binding remain required, and protected-core changes still require dual approval.
 
+## AION-177 Shadow-Mode Authorization
+
+AION-177 does not change the implemented-disabled platform architecture. It
+creates `AION-177-SI-0006` for future AION-178 disabled, observation-only
+shadow-mode implementation. The authorization permits architecture and evidence
+surfaces for shadow observations and operator review, but it keeps runtime
+self-improvement, source rewrite, Git writes, PR creation, merge, production
+canary, deployment, provider calls, connector calls, and model-weight training
+disabled.
+
 ## Control Flow
 
 1. Evaluation evidence identifies a repeated weakness.

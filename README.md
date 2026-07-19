@@ -16,6 +16,14 @@ Module activation remains disabled. No v0.2 tag or release exists.
 The request identity boundary is default-off, observe-only, anonymous, and
 authorized by `AION-155-PA-0003` for `AION-156`.
 
+Governed self-improvement is implemented-disabled. AION-OE-001 passed operator
+evaluation, and AION-177 creates `AION-177-SI-0006` as the single active
+authorization for future AION-178 controlled shadow-mode implementation. Shadow
+mode is authorized but not implemented, runtime remains disabled, source
+mutation and Git writes remain disabled, and production canary, deployment,
+provider calls, connector calls, model-weight training, v0.2 tags, and v0.2
+releases remain absent.
+
 This repository does not implement finance, trading, IT automation, legal,
 healthcare, HR, procurement, business workflows, or any vertical module logic.
 
@@ -164,6 +172,16 @@ disabled request identity boundary work. It is governance, documentation,
 evidence, validation, and authorization only. It adds no production-auth
 implementation source, no kernel wiring, no API routes, no SDK or CLI runtime
 surfaces, no package files, no migrations, no v0.2 tag, and no release.
+
+## Controlled Self-Improvement Shadow-Mode Authorization
+
+AION-177 records the AION-OE-001 operator-evaluation closeout and authorizes
+future AION-178 disabled, observation-only shadow-mode implementation. It adds
+governance docs, synthetic examples, static console demo data, validator tests,
+and local scripts only. It does not implement shadow-mode runtime source,
+activate runtime self-improvement, rewrite source, mutate Git state, create
+pull requests, merge, deploy, call providers or connectors, train model
+weights, create a v0.2 tag, or create a release.
 
 ## Core Brain Loop
 

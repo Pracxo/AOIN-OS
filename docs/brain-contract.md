@@ -2277,3 +2277,14 @@ AION-163 records AION-162 PR #72 and corrective PR #73 as the completed offline 
 ## AION-164 Replay Contract
 
 Offline identity assertion replay protection accepts verified evidence only and returns immutable redacted replay evidence. It does not authenticate the current request or mutate ActorContext or RequestIdentityContext. The persistent ledger stores only replay hashes and timestamps.
+
+## AION-177 Shadow-Mode Authorization Contract Boundary
+
+AION-177 records the contract boundary for future AION-178 shadow-mode work.
+Authorized future contracts may describe shadow observations, redacted evidence,
+resource-budget status, policy-delta summaries, and operator review items.
+
+AION-177 does not add those Brain runtime contracts. It keeps
+`shadow_mode_implemented=false` and `shadow_mode_runtime_enabled=false` and does
+not add API routes, SDK surfaces, CLI commands, provider calls, connector calls,
+migrations, package files, v0.2 tags, or releases.
