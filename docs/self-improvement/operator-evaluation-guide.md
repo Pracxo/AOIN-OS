@@ -1,6 +1,8 @@
 # Operator Evaluation Guide
 
-This guide is the AION-175 user evaluation entry point. The platform is ready for review as an implemented, disabled self-improvement control plane.
+This guide is the operator evaluation entry point after AION-175 merged. The
+platform is ready for review as an implemented, disabled self-improvement
+control plane.
 
 ## Review Steps
 
@@ -21,4 +23,7 @@ This guide is the AION-175 user evaluation entry point. The platform is ready fo
 
 ## Non-Goals For This Review
 
-This closeout does not approve production runtime self-improvement. It does not approve model-backed patch generation, model-weight training, production canary traffic, direct deployment, or autonomous merge. Those require a separate future authorization.
+This closeout does not approve production runtime self-improvement. It does not
+approve model-backed patch generation, model-weight training, production canary
+traffic, direct deployment, or autonomous merge. Those require a separate future
+authorization.

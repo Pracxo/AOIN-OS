@@ -19,28 +19,35 @@ Status: `not-ready`
 - Non-development identity-header rejection
 - Anonymous zero-permission fallback
 - Development identity simulation isolation
-- Offline cryptographic identity verification core
+- Offline Ed25519 verification
 - Public-key registry
 - Deterministic cryptographic regression coverage
+- Persistent replay protection
+- Governed self-improvement control plane
+- Immutable benchmark plane
+- Approval-bound rewrite control
+- Canary and rollback simulation
+- Adaptive-learning candidates
 
 ## Remaining Blockers
 
-- replay protection
-- formal AION-161 authorization closeout
-- request-level verified identity integration
-- operational public-key provisioning and rotation evidence
-- External provider integration
-- Protected-material handling decision beyond public verification keys
+- Operator evaluation
+- Production-auth runtime integration
+- Production replay-ledger schema provisioning
+- Request-level verified identity integration
+- Identity-provider integration
+- Operational public-key provisioning and rotation evidence
+- Protected-material lifecycle
 - Credential lifecycle
 - Token lifecycle
 - Session lifecycle
-- Deployment artifact
-- Rollback procedure
-- Operational observability
+- Production deployment artifact
+- Rollback operations
+- Production observability
 - Threat-model review
-- Release-candidate validation
 - Runtime guard release decision
-- v0.2 tag and release approval
+- Release-candidate validation
+- v0.2 tag and release authorization
 
 ## v0.2 Release Exit Criteria
 
@@ -60,26 +67,23 @@ Status: `not-ready`
 - `v02_tag_created=false`
 - `v02_release_created=false`
 
-## Next Critical Path
+## Current Critical Path
 
-`AION-163` is the next critical path.
+The current critical path is operator evaluation of the governed
+self-improvement platform. AION-175 completed the implementation track and left
+the platform implemented but disabled for autonomous runtime use. Operator
+evaluation does not activate production self-improvement, production
+authentication, external providers, production canary traffic, deployment, or
+model-weight training.
 
-The inherited release gates still record that `AION-162` is the next critical path
-marker authorized by `AION-161-PA-0006`; the implementation is now present and
-formal authorization closeout moves to AION-163.
+Completion of the self-improvement implementation program does not make v0.2
+release-ready. Production runtime integration and release-candidate work remain
+separate future authorization tracks.
 
-AION-162 implements the offline Ed25519 identity assertion verification core
-authorized by `AION-161-PA-0006`. The core verifies signatures and claims
-offline with public keys, but it does not authenticate requests, apply
-ActorContext, apply RequestIdentityContext, parse HTTP headers, contact
-providers, create a replay cache, or release runtime guards. AION-163 owns
-formal authorization lifecycle closeout; later request integration remains a
-separate blocker.
+## Historical Compatibility Markers
 
+These markers preserve inherited v0.2 authorization-test references. They are
+not the current critical path.
 
-## AION-163 Replay Protection Authorization Update
-
-AION-163 records AION-162 PR #72 and corrective PR #73 as the completed offline verification delivery, closes `AION-161-PA-0006` as inactive, consumed, expired, and non-reusable, and creates `AION-163-PA-0007` as the sole active authorization for AION-164 persistent identity-assertion replay protection. The next critical path is AION-164. Runtime request authentication, ActorContext application, RequestIdentityContext application, dependency changes, migrations, production schema auto-create, package files, lockfiles, v0.2 tags, and v0.2 releases remain blocked.
-## AION-164 Delta
-
-AION-164 implements persistent identity assertion replay protection under AION-163-PA-0007. `v02_release_ready=false`, `v02_tag_created=false`, and `v02_release_created=false` remain unchanged. Formal authorization lifecycle closeout is deferred to AION-165.
+- AION-163-PA-0007
+- The next critical path is AION-164.

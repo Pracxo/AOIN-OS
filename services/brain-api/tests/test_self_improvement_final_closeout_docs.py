@@ -33,6 +33,9 @@ sys.path.insert(0, str(ROOT / "scripts/lib"))
 from self_improvement_governance import (  # noqa: E402
     AION_174_FEATURE_COMMIT,
     AION_174_MERGE_COMMIT,
+    AION_175_FEATURE_COMMIT,
+    AION_175_MERGE_COMMIT,
+    AION_175_MERGED_AT,
     CANARY_AUTHORIZATION_ID,
     GOVERNANCE_FALSE_FLAGS,
     GOVERNANCE_TRUE_FLAGS,
@@ -137,7 +140,7 @@ def test_aion175_closes_canary_authorization_without_new_implementation_auth() -
         validate_authorization_ledger(mutated)
 
 
-def test_aion175_program_ledger_records_final_task_without_completion_claim() -> None:
+def test_aion175_program_ledger_records_merged_final_task() -> None:
     payload = _json("docs/self-improvement/program-ledger.json")
     validate_program_ledger(payload)
     by_task = {record["task_id"]: record for record in payload["records"]}
@@ -152,13 +155,17 @@ def test_aion175_program_ledger_records_final_task_without_completion_claim() ->
     closeout = by_task["AION-175"]
     assert closeout["branch"] == "phase/self-improvement-final-closeout"
     assert closeout["authorization_transaction"] == CANARY_AUTHORIZATION_ID
-    assert closeout["authorization_state"] == "final_closeout_no_new_authorization"
+    assert (
+        closeout["authorization_state"]
+        == "final_closeout_complete_no_new_implementation_authorization"
+    )
     assert closeout["runtime_state"] == "self_improvement_platform_implemented_disabled"
-    assert closeout["next_task"] == "user_evaluation"
-    assert closeout["pull_requests"] == []
-    assert closeout["feature_commits"] == []
-    assert closeout["merge_commits"] == []
-    assert closeout["ci_result"] == "pending"
+    assert closeout["next_task"] == "operator_evaluation"
+    assert closeout["pull_requests"] == [86]
+    assert closeout["feature_commits"] == [AION_175_FEATURE_COMMIT]
+    assert closeout["merge_commits"] == [AION_175_MERGE_COMMIT]
+    assert closeout["ci_result"] == "pass"
+    assert closeout["completion_timestamp"] == AION_175_MERGED_AT
 
 
 def test_final_readiness_report_has_required_capabilities_safety_and_evaluation_steps() -> None:
@@ -171,6 +178,8 @@ def test_final_readiness_report_has_required_capabilities_safety_and_evaluation_
     assert report["task_id"] == "AION-175"
     assert report["synthetic"] is True
     assert report["read_only"] is True
+    assert report["report_state"] == "final_closeout_merged_evidence"
+    assert report["current_stage"] == "operator_evaluation"
     assert runtime_state["self_improvement_platform_implemented"] is True
     assert runtime_state["self_improvement_platform_state"] == "implemented_disabled"
     for key in FINAL_TRUE_FLAGS:
