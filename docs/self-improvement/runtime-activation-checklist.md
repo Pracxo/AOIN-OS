@@ -8,6 +8,9 @@ AION-178 shadow-mode implementation only. AION-178 sets
 `shadow_mode_implementation_state=implemented_operator_invoked_disabled`; any
 runtime activation still requires a later explicit authorization.
 
+AION-179 closes `AION-177-SI-0006` after a PASS operator evaluation. That PASS is
+not activation approval and does not create a new implementation authorization.
+
 ## Required Evidence
 
 - New authorization transaction with exact implementation scope.

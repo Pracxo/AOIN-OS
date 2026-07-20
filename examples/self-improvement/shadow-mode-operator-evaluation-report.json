@@ -1,0 +1,277 @@
+{
+  "activation_phase_id": "AION-SELF-IMPROVEMENT-SHADOW-001",
+  "active_learning_promoted": false,
+  "approval_created": false,
+  "authorization_transaction_id": "AION-177-SI-0006",
+  "created_at": "2026-07-20T12:00:00Z",
+  "decision": "SHADOW_MODE_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_ACTIVATION_AUTHORIZATION_REVIEW",
+  "decision_reason": "all hard gates and read-only shadow evaluation scenarios passed",
+  "evaluated_feature_commit": "1f7a9750e3b5567b173e9a42af069cb4d7d7bc8f",
+  "evaluated_merge_commit": "b05dd3cc49cff086997232bfc579a7ca891a184b",
+  "evaluated_merge_timestamp": "2026-07-20T06:10:57Z",
+  "evaluated_pr": 89,
+  "evaluation_base_commit": "b05dd3cc49cff086997232bfc579a7ca891a184b",
+  "evaluation_id": "AION-SOE-001",
+  "git_mutated": false,
+  "hard_gates": {
+    "aion_178_api_used_only_in_process": true,
+    "all_scenarios_passed": true,
+    "evaluation_base_commit_bound_to_pr_89_merge": true,
+    "no_authorization_or_approval_created": true,
+    "no_git_mutations_observed": true,
+    "no_model_training_or_runtime_promotion": true,
+    "no_network_calls_observed": true,
+    "no_provider_or_connector_calls_observed": true,
+    "no_pull_requests_created_by_evaluation": true,
+    "no_source_mutations_observed": true,
+    "no_v02_tag_or_release_created_by_evaluation": true,
+    "repository_digest_unchanged_by_harness": true,
+    "scenario_registry_exact": true,
+    "shadow_mode_runtime_disabled": true,
+    "temporary_output_outside_repo": true
+  },
+  "implementation_task": "AION-178",
+  "new_implementation_authorization_created": false,
+  "operator_invoked": true,
+  "program_id": "AION-SELF-IMPROVEMENT-001",
+  "pull_request_created": false,
+  "read_only": true,
+  "redacted": true,
+  "repository_digest_after": "5556bcdc7d6ef4a14c7a6a4566a87138ef7f14762f6b7c72d9b19dac441e7c43",
+  "repository_digest_before": "5556bcdc7d6ef4a14c7a6a4566a87138ef7f14762f6b7c72d9b19dac441e7c43",
+  "repository_root": "/Users/damilaremerotiwon/KITEV2/AOIN OS",
+  "runtime_activation_created": false,
+  "runtime_effect": false,
+  "scenario_count": 14,
+  "scenario_results": [
+    {
+      "details": {},
+      "hard_gates": {
+        "no_proposals_without_repeated_pattern": true
+      },
+      "observed_outcome": "completed_without_pattern",
+      "passed": true,
+      "reason_codes": [
+        "shadow_run_completed_without_pattern",
+        "shadow_no_repeated_pattern"
+      ],
+      "scenario_id": "no-pattern"
+    },
+    {
+      "details": {
+        "pattern_count": 1,
+        "proposal_count": 1,
+        "review_item_count": 1
+      },
+      "hard_gates": {
+        "operator_review_required": true,
+        "side_effects_absent": true
+      },
+      "observed_outcome": "completed",
+      "passed": true,
+      "reason_codes": [
+        "shadow_run_completed",
+        "shadow_pattern_detected"
+      ],
+      "scenario_id": "repeated-retrieval-failure"
+    },
+    {
+      "details": {
+        "pattern_count": 1,
+        "proposal_count": 1,
+        "review_item_count": 1
+      },
+      "hard_gates": {
+        "operator_review_required": true,
+        "side_effects_absent": true
+      },
+      "observed_outcome": "completed",
+      "passed": true,
+      "reason_codes": [
+        "shadow_run_completed",
+        "shadow_pattern_detected"
+      ],
+      "scenario_id": "planning-failure"
+    },
+    {
+      "details": {
+        "pattern_count": 1,
+        "proposal_count": 1,
+        "review_item_count": 1
+      },
+      "hard_gates": {
+        "operator_review_required": true,
+        "side_effects_absent": true
+      },
+      "observed_outcome": "completed",
+      "passed": true,
+      "reason_codes": [
+        "shadow_run_completed",
+        "shadow_pattern_detected"
+      ],
+      "scenario_id": "evidence-grounding-failure"
+    },
+    {
+      "details": {
+        "pattern_count": 1,
+        "proposal_count": 1,
+        "review_item_count": 1
+      },
+      "hard_gates": {
+        "operator_review_required": true,
+        "side_effects_absent": true
+      },
+      "observed_outcome": "completed",
+      "passed": true,
+      "reason_codes": [
+        "shadow_run_completed",
+        "shadow_pattern_detected"
+      ],
+      "scenario_id": "policy-violation"
+    },
+    {
+      "details": {
+        "violations": [
+          "maximum_observation_references"
+        ]
+      },
+      "hard_gates": {
+        "budget_fail_closed": true
+      },
+      "observed_outcome": "budget_blocked",
+      "passed": true,
+      "reason_codes": [
+        "shadow_budget_exceeded",
+        "shadow_run_stopped_fail_closed"
+      ],
+      "scenario_id": "budget-violation"
+    },
+    {
+      "details": {},
+      "hard_gates": {
+        "reference_failure_fail_closed": true
+      },
+      "observed_outcome": "reference_unavailable",
+      "passed": true,
+      "reason_codes": [
+        "shadow_reference_unavailable",
+        "shadow_run_stopped_fail_closed"
+      ],
+      "scenario_id": "missing-reference"
+    },
+    {
+      "details": {},
+      "hard_gates": {
+        "fingerprint_mismatch_fail_closed": true
+      },
+      "observed_outcome": "reference_unavailable",
+      "passed": true,
+      "reason_codes": [
+        "shadow_reference_unavailable",
+        "shadow_run_stopped_fail_closed"
+      ],
+      "scenario_id": "fingerprint-mismatch"
+    },
+    {
+      "details": {},
+      "hard_gates": {
+        "protected_input_rejected": true,
+        "rejection_message_redacted": true
+      },
+      "observed_outcome": "input_rejected",
+      "passed": true,
+      "reason_codes": [
+        "shadow_manifest_rejected"
+      ],
+      "scenario_id": "protected-input-rejection"
+    },
+    {
+      "details": {
+        "output_bytes": 12126,
+        "output_files": [
+          "shadow-run-1.json"
+        ]
+      },
+      "hard_gates": {
+        "output_directory_outside_repo": true,
+        "output_size_rejected": true,
+        "overwrite_rejected": true,
+        "repo_output_rejected": true
+      },
+      "observed_outcome": "completed",
+      "passed": true,
+      "reason_codes": [
+        "shadow_output_boundary_satisfied"
+      ],
+      "scenario_id": "output-boundary"
+    },
+    {
+      "details": {
+        "bundle_fingerprint": "d45ffdb5a2e073be926098eea9d5c17c4d3b9133116bea4b640e79641e237b42"
+      },
+      "hard_gates": {
+        "replay_fingerprint_matches": true
+      },
+      "observed_outcome": "completed",
+      "passed": true,
+      "reason_codes": [
+        "shadow_run_completed",
+        "shadow_pattern_detected"
+      ],
+      "scenario_id": "deterministic-replay"
+    },
+    {
+      "details": {},
+      "hard_gates": {
+        "ephemeral_store_requires_explicit_purge": true,
+        "expired_bundle_purged": true
+      },
+      "observed_outcome": "completed",
+      "passed": true,
+      "reason_codes": [
+        "shadow_run_completed",
+        "shadow_pattern_detected"
+      ],
+      "scenario_id": "retention"
+    },
+    {
+      "details": {},
+      "hard_gates": {
+        "duplicate_reference_rejected": true,
+        "maximum_concurrency_enforced": true
+      },
+      "observed_outcome": "completed",
+      "passed": true,
+      "reason_codes": [
+        "shadow_run_completed",
+        "shadow_pattern_detected"
+      ],
+      "scenario_id": "bounded-concurrency"
+    },
+    {
+      "details": {},
+      "hard_gates": {
+        "approval_creation_absent": true,
+        "git_operations_zero": true,
+        "network_calls_zero": true,
+        "real_pull_requests_zero": true,
+        "runtime_effect_absent": true,
+        "runtime_promotions_zero": true,
+        "source_mutations_zero": true
+      },
+      "observed_outcome": "completed",
+      "passed": true,
+      "reason_codes": [
+        "shadow_run_completed",
+        "shadow_pattern_detected"
+      ],
+      "scenario_id": "runtime-influence-boundary"
+    }
+  ],
+  "schema_version": "aion-self-improvement-shadow-operator-evaluation/v1",
+  "shadow_plane_runtime_enabled": false,
+  "source_modified": false,
+  "synthetic": true,
+  "task_id": "AION-179",
+  "temporary_output_directory": "/private/tmp/aion-shadow-operator-evaluation"
+}

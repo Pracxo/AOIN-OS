@@ -39,3 +39,10 @@ write, pull request creation, approval creation, automatic merge, production
 canary, production deployment, external provider calls, connector runtime
 calls, runtime influence, promotion, and v0.2 tag or release creation remain
 out of scope.
+
+## AION-179 Boundary Update
+
+AION-179 closes `AION-177-SI-0006` after a PASS operator evaluation. The closeout
+does not widen the boundary. A future activation request must use a separate
+authorization and cannot reuse AION-177, AION-178, or AION-179 evidence as
+runtime approval.

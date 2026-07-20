@@ -90,7 +90,14 @@ Instructions for future Codex runs in this repository:
   It must not route evidence into runtime response, retrieval, planning, policy,
   tool selection, source mutation, Git mutation, PR creation, approval creation,
   merge, canary, deployment, active-learning promotion, or model-weight
-  training. AION-177-SI-0006 remains active pending AION-179 closeout.
+  training. AION-177-SI-0006 is closed by AION-179 and is non-reusable.
+- AION-179 shadow-mode operator evaluation closeout work may add read-only
+  harnesses, docs, tests, examples, static evidence, and local gates only. A
+  PASS recommendation may support a future controlled activation authorization
+  review, but it must not create a new implementation authorization, enable
+  runtime shadow mode, mutate source, mutate Git, create approvals, create pull
+  requests, merge, deploy, call providers or connectors, train model weights,
+  create v0.2 tags, or create releases.
 - Disabled production-auth request identity boundary work may add internal
   production-auth request identity contracts, disabled verifier wiring,
   observe-only middleware, anonymous request-state evidence, diagnostics, docs,

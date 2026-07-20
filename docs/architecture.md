@@ -56,6 +56,15 @@ runtime execution disabled. It does not call external services, store
 credentials, store tokens, activate connectors, register routes, execute tools,
 or execute write paths.
 
+## Self-Improvement Shadow-Mode Evaluation Boundary
+
+AION-179 evaluates the AION-178 shadow plane through an operator-invoked,
+read-only harness. The result is advisory evidence only. It closes
+`AION-177-SI-0006` and recommends a future controlled activation authorization
+review, but it does not register runtime shadow mode, mutate source, mutate Git,
+create approvals, create pull requests, merge, deploy, call providers or
+connectors, or train model weights.
+
 ## Infrastructure Boundaries
 
 Postgres, Redis, NATS, and Open Policy Agent are checked through

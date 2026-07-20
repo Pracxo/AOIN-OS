@@ -20,3 +20,11 @@ Security controls:
 The implementation does not change protected self-improvement controllers,
 policy, audit, security, kernel, API, SDK runtime surfaces, workflows,
 dependencies, migrations, `aion-v0.1.0`, or any v0.2 tag or release.
+
+## AION-179 Security Closeout
+
+The AION-SOE-001 harness checks protected input rejection, budget failure,
+reference failure, fingerprint mismatch, output boundary rejection,
+deterministic replay, retention, bounded concurrency, and runtime-influence
+absence. The PASS decision records no new authorization and no runtime
+activation.

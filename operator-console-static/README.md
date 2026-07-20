@@ -1152,12 +1152,15 @@ The static console reads these synthetic, read-only evidence files:
 - `demo-data/self-improvement-shadow-mode-plane.json`
 - `demo-data/self-improvement-shadow-mode-review-items.json`
 - `demo-data/self-improvement-shadow-mode-runtime-hold.json`
+- `demo-data/self-improvement-shadow-mode-operator-evaluation.json`
+- `demo-data/self-improvement-shadow-mode-activation-review-boundary.json`
 
-It presents AION-178 as implemented, operator-invoked, read-only, advisory,
-non-influencing, and runtime-disabled. It must not run shadow mode, call the
-backend, expose activation actions, edit source, call Git, create approvals,
-create pull requests, merge, deploy, promote candidates, create v0.2 tags, or
-create releases.
+It presents AION-178 as implemented and AION-179 as evaluated with a PASS
+recommendation for future controlled activation authorization review. The
+console remains static and must not run shadow mode, call the backend, expose
+activation actions, edit source, call Git, create approvals, create pull
+requests, merge, deploy, promote candidates, create v0.2 tags, or create
+releases.
 
 Local checks:
 
@@ -1167,6 +1170,8 @@ Local checks:
 ./scripts/self-improvement-shadow-mode-no-go-regression.sh
 ./scripts/self-improvement-shadow-mode-check.sh
 ./scripts/self-improvement-shadow-mode-runtime-hold.sh
+./scripts/self-improvement-shadow-mode-operator-evaluation-no-go-regression.sh
+./scripts/self-improvement-shadow-mode-operator-evaluation-check.sh
 ```
 ## AION-164 Replay Protection Static Evidence
 

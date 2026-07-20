@@ -36,11 +36,16 @@ from self_improvement_governance import (  # noqa: E402
     AION_175_FEATURE_COMMIT,
     AION_175_MERGE_COMMIT,
     AION_175_MERGED_AT,
+    AION_178_FEATURE_COMMIT,
+    AION_178_MERGE_COMMIT,
+    AION_178_MERGED_AT,
     CANARY_AUTHORIZATION_ID,
     GOVERNANCE_FALSE_FLAGS,
     GOVERNANCE_TRUE_FLAGS,
     SHADOW_AUTHORIZATION_ID,
     SHADOW_IMPLEMENTATION_TASK,
+    SHADOW_OPERATOR_EVALUATION_DECISION,
+    SHADOW_OPERATOR_EVALUATION_ID,
     GovernanceValidationError,
     validate_authorization_ledger,
     validate_no_go,
@@ -114,10 +119,10 @@ def test_aion175_closes_canary_authorization_without_new_implementation_auth() -
     records = payload["records"]
     assert len(records) == 7
     active_records = [record for record in records if record["authorization_active"] is True]
-    assert [record["authorization_transaction_id"] for record in active_records] == [
-        SHADOW_AUTHORIZATION_ID
-    ]
-    assert active_records[0]["implementation_task"] == SHADOW_IMPLEMENTATION_TASK
+    assert active_records == []
+    assert payload["active_self_improvement_implementation_authorization_count"] == 0
+    assert payload["active_self_improvement_implementation_authorization"] == "none"
+    assert payload["active_implementation_task"] == "none"
 
     closeout = records[5]
     assert closeout["record_kind"] == "authorization_closeout"
@@ -139,6 +144,28 @@ def test_aion175_closes_canary_authorization_without_new_implementation_auth() -
         assert closeout[key] is True
     for key in FINAL_TRUE_FLAGS:
         assert closeout[key] is True
+
+    shadow_closeout = records[6]
+    assert shadow_closeout["record_kind"] == "authorization_closeout"
+    assert shadow_closeout["authorization_transaction_id"] == SHADOW_AUTHORIZATION_ID
+    assert shadow_closeout["authorization_active"] is False
+    assert shadow_closeout["authorization_consumed"] is True
+    assert shadow_closeout["authorization_consumed_by_task"] == SHADOW_IMPLEMENTATION_TASK
+    assert shadow_closeout["authorization_consumed_by_pr"] == 89
+    assert shadow_closeout["authorization_consumed_by_feature_commits"] == [
+        AION_178_FEATURE_COMMIT
+    ]
+    assert shadow_closeout["authorization_consumed_by_merge_commit"] == AION_178_MERGE_COMMIT
+    assert shadow_closeout["authorization_consumed_at"] == AION_178_MERGED_AT
+    assert shadow_closeout["authorization_expired"] is True
+    assert shadow_closeout["authorization_reusable"] is False
+    assert shadow_closeout["closeout_evaluation_id"] == SHADOW_OPERATOR_EVALUATION_ID
+    assert (
+        shadow_closeout["shadow_operator_evaluation_decision"]
+        == SHADOW_OPERATOR_EVALUATION_DECISION
+    )
+    assert shadow_closeout["new_implementation_authorization_created"] is False
+    assert shadow_closeout["runtime_activation_created"] is False
 
     mutated = _json("docs/self-improvement/authorization-ledger.json")
     mutated["records"][5]["self_improvement_runtime_enabled"] = True
@@ -175,18 +202,35 @@ def test_aion175_program_ledger_records_merged_final_task() -> None:
 
     aion177 = by_task["AION-177"]
     assert aion177["authorization_transaction"] == SHADOW_AUTHORIZATION_ID
-    assert aion177["authorization_state"] == "active_until_AION-179_closeout"
+    assert aion177["authorization_state"] == "consumed_by_AION-178_closed_by_AION-179"
     assert aion177["next_task"] == SHADOW_IMPLEMENTATION_TASK
-    assert aion177["runtime_state"] == "shadow_mode_authorized_not_implemented"
+    assert aion177["runtime_state"] == "shadow_mode_authorization_consumed_runtime_disabled"
 
     aion178 = by_task["AION-178"]
     assert aion178["authorization_transaction"] == SHADOW_AUTHORIZATION_ID
-    assert aion178["authorization_state"] == (
-        "implementation_in_progress_formal_closeout_AION-179"
+    assert aion178["authorization_state"] == "consumed_by_AION-178_closed_by_AION-179"
+    assert (
+        aion178["runtime_state"]
+        == "shadow_mode_implemented_operator_invoked_disabled_closed_by_AION-179"
     )
-    assert aion178["runtime_state"] == "shadow_mode_implemented_operator_invoked_disabled"
     assert aion178["next_task"] == "AION-179"
-    assert aion178["ci_result"] == "pending"
+    assert aion178["pull_requests"] == [89]
+    assert aion178["feature_commits"] == [AION_178_FEATURE_COMMIT]
+    assert aion178["merge_commits"] == [AION_178_MERGE_COMMIT]
+    assert aion178["ci_result"] == "pass"
+    assert aion178["completion_timestamp"] == AION_178_MERGED_AT
+
+    aion179 = by_task["AION-179"]
+    assert aion179["authorization_transaction"] == SHADOW_AUTHORIZATION_ID
+    assert (
+        aion179["authorization_state"]
+        == "closed_AION-177-SI-0006_no_new_implementation_authorization"
+    )
+    assert aion179["runtime_state"] == "shadow_mode_operator_evaluation_pass_runtime_disabled"
+    assert aion179["next_task"] == (
+        "controlled_activation_authorization_review_requires_new_human_approval"
+    )
+    assert aion179["ci_result"] == "pending"
 
 
 def test_final_readiness_report_has_required_capabilities_safety_and_evaluation_steps() -> None:

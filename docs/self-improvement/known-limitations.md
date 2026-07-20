@@ -5,8 +5,8 @@ The AION-175 platform is intentionally implemented but disabled.
 ## Current Limits
 
 - Production runtime self-improvement is not enabled.
-- AION-177 authorizes future shadow-mode implementation, but shadow mode is not
-  implemented in AION-177 and remains runtime-disabled.
+- AION-177 authorized AION-178 shadow-mode implementation only; AION-179 has
+  closed that authorization, and shadow mode remains runtime-disabled.
 - Production source rewrite is not enabled.
 - Production canary exposure is not enabled.
 - Model-backed patch generation is not enabled by default.

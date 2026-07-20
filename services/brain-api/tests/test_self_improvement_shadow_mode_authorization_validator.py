@@ -13,8 +13,13 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "scripts/lib"))
 
 from self_improvement_governance import (  # noqa: E402
+    AION_178_FEATURE_COMMIT,
+    AION_178_MERGE_COMMIT,
+    AION_178_MERGED_AT,
     SHADOW_APPROVED_FLAGS,
     SHADOW_AUTHORIZATION_ID,
+    SHADOW_OPERATOR_EVALUATION_DECISION,
+    SHADOW_OPERATOR_EVALUATION_ID,
     SHADOW_PROHIBITED_FLAGS,
     GovernanceValidationError,
     validate_authorization_ledger,
@@ -23,18 +28,31 @@ from self_improvement_governance import (  # noqa: E402
 )
 
 
-def test_authorization_ledger_has_single_active_shadow_mode_record() -> None:
+def test_authorization_ledger_has_closed_shadow_mode_record() -> None:
     payload = _json("docs/self-improvement/authorization-ledger.json")
     validate_authorization_ledger(payload)
     validate_no_go(ROOT)
 
     active = [record for record in payload["records"] if record["authorization_active"] is True]
-    assert len(active) == 1
-    record = active[0]
+    assert active == []
+    assert payload["active_self_improvement_implementation_authorization_count"] == 0
+    assert payload["active_self_improvement_implementation_authorization"] == "none"
+    assert payload["active_implementation_task"] == "none"
+    record = payload["records"][-1]
     assert record["authorization_transaction_id"] == SHADOW_AUTHORIZATION_ID
-    assert record["authorization_consumed"] is False
-    assert record["authorization_expired"] is False
+    assert record["record_kind"] == "authorization_closeout"
+    assert record["authorization_consumed"] is True
+    assert record["authorization_consumed_by_task"] == "AION-178"
+    assert record["authorization_consumed_by_pr"] == 89
+    assert record["authorization_consumed_by_feature_commits"] == [AION_178_FEATURE_COMMIT]
+    assert record["authorization_consumed_by_merge_commit"] == AION_178_MERGE_COMMIT
+    assert record["authorization_consumed_at"] == AION_178_MERGED_AT
+    assert record["authorization_expired"] is True
     assert record["authorization_reusable"] is False
+    assert record["closeout_evaluation_id"] == SHADOW_OPERATOR_EVALUATION_ID
+    assert record["shadow_operator_evaluation_decision"] == SHADOW_OPERATOR_EVALUATION_DECISION
+    assert record["new_implementation_authorization_created"] is False
+    assert record["runtime_activation_created"] is False
     for key in SHADOW_APPROVED_FLAGS:
         assert record[key] is True
     for key in SHADOW_PROHIBITED_FLAGS:

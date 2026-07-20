@@ -1,0 +1,60 @@
+{
+  "decision": "SHADOW_MODE_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_ACTIVATION_AUTHORIZATION_REVIEW",
+  "evaluation_id": "AION-SOE-001",
+  "forbidden_actions": [
+    "runtime activation",
+    "source rewrite",
+    "Git writes",
+    "pull request creation",
+    "merge",
+    "deployment",
+    "provider calls",
+    "connector calls",
+    "model training",
+    "v0.2 tag or release"
+  ],
+  "program_id": "AION-SELF-IMPROVEMENT-001",
+  "read_only": true,
+  "redacted": true,
+  "runtime_effect": false,
+  "sections": [
+    {
+      "blockers": [
+        {
+          "message": "future runtime activation still requires a separate human authorization"
+        }
+      ],
+      "refs": [
+        "examples/self-improvement/shadow-mode-operator-evaluation-report.json"
+      ],
+      "severity": "review required",
+      "status": "pass",
+      "summary": "Fourteen read-only operator scenarios passed, including no-pattern handling, repeated failure mining, budget failure, reference failure, output boundary, replay, retention, concurrency, and runtime-influence checks.",
+      "title": "Evaluation Decision",
+      "warnings": []
+    },
+    {
+      "blockers": [
+        {
+          "message": "runtime activation remains false"
+        }
+      ],
+      "refs": [
+        "docs/release/self-improvement-shadow-mode-evaluation-runtime-hold.md"
+      ],
+      "severity": "release blocker",
+      "status": "disabled",
+      "summary": "No network calls, Git writes, pull requests, approvals, source mutation, deployment, runtime promotion, provider calls, connector calls, model training, v0.2 tag, or release were created by the evaluation.",
+      "title": "Runtime Hold",
+      "warnings": []
+    }
+  ],
+  "shadow_mode_implementation_state": "implemented_operator_invoked_disabled",
+  "shadow_mode_implemented": true,
+  "shadow_mode_runtime_enabled": false,
+  "status": "pass_runtime_disabled",
+  "summary": "AION-179 records a PASS recommendation for a future controlled activation authorization review while keeping shadow mode operator-invoked, read-only, advisory, and runtime-disabled.",
+  "synthetic": true,
+  "title": "Self-Improvement Shadow Mode",
+  "view": "self_improvement_shadow_mode"
+}

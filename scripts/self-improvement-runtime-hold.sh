@@ -107,9 +107,28 @@ SHADOW_FALSE_KEYS = {
 active_authorizations = [
     record for record in AUTHORIZATION["records"] if record.get("authorization_active") is True
 ]
-if len(active_authorizations) != 1:
-    raise SystemExit("exactly one AION-177 shadow-mode authorization must remain active")
-active_authorization = active_authorizations[0]
+closed_shadow_authorizations = [
+    record
+    for record in AUTHORIZATION["records"]
+    if record.get("authorization_transaction_id") == "AION-177-SI-0006"
+    and record.get("authorization_consumed") is True
+]
+if AUTHORIZATION.get("current_stage") == "shadow_mode_operator_evaluation_passed_disabled":
+    if active_authorizations:
+        raise SystemExit("no active implementation authorization is allowed after AION-179 closeout")
+    if len(closed_shadow_authorizations) != 1:
+        raise SystemExit("closed AION-177 shadow-mode authorization is required")
+    active_authorization = closed_shadow_authorizations[0]
+    if active_authorization.get("shadow_operator_evaluation_decision") != "SHADOW_MODE_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_ACTIVATION_AUTHORIZATION_REVIEW":
+        raise SystemExit("shadow operator evaluation decision mismatch")
+    if active_authorization.get("new_implementation_authorization_created") is not False:
+        raise SystemExit("AION-179 must not create a new implementation authorization")
+    if active_authorization.get("runtime_activation_created") is not False:
+        raise SystemExit("AION-179 must not create runtime activation")
+else:
+    if len(active_authorizations) != 1:
+        raise SystemExit("exactly one AION-177 shadow-mode authorization must remain active")
+    active_authorization = active_authorizations[0]
 if active_authorization["authorization_transaction_id"] != "AION-177-SI-0006":
     raise SystemExit("active authorization must be AION-177-SI-0006")
 if active_authorization["implementation_task"] != "AION-178":
@@ -276,7 +295,7 @@ fi
 cat <<'SUMMARY'
 self-improvement runtime hold result:
 - self_improvement_platform_state=implemented_disabled
-- active implementation authorization=AION-177-SI-0006 for AION-178 shadow mode only
+- implementation authorization=AION-177-SI-0006 for AION-178 shadow mode, closed by AION-179 after PASS
 - shadow_mode_implemented=true
 - shadow_mode_implementation_state=implemented_operator_invoked_disabled
 - shadow_mode_runtime_enabled=false

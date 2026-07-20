@@ -118,6 +118,14 @@ AION core policy vocabulary stays generic:
 - `evidence.read`
 - `evidence.search`
 - `evidence.link`
+- `self_improvement.shadow.evaluate`
+- `self_improvement.shadow.review`
+- `self_improvement.shadow.activation_review.request`
+
+AION-179 records the shadow evaluation as advisory only. The policy vocabulary
+does not gain an allow action for runtime shadow activation, source rewrite,
+Git mutation, approval creation, pull request creation, merge, deployment,
+provider calls, connector calls, or model training.
 
 ## Connector Simulator Policy Actions
 
