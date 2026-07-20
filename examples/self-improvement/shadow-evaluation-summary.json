@@ -1,0 +1,53 @@
+{
+  "activation_phase_id": "AION-SELF-IMPROVEMENT-SHADOW-001",
+  "active_learning_promoted": false,
+  "approval_created": false,
+  "authorization_scope": "read-only-shadow-observation-evaluation-pattern-mining-proposal-generation",
+  "authorization_transaction_id": "AION-177-SI-0006",
+  "benchmark_cost_units": 0,
+  "created_at": "2026-07-20T12:00:00Z",
+  "evaluation_id": "shadow-evaluation-1",
+  "example_id": "shadow-evaluation-summary",
+  "fingerprint": "02742c7075e816e28fdad7551983ac6bf1769b3932cf28990fe83dd806550228",
+  "git_mutated": false,
+  "implementation_authorization_created": false,
+  "implementation_task": "AION-178",
+  "merged": false,
+  "metric_drifts": [
+    {
+      "absolute_delta": 0.29999999999999993,
+      "baseline_value": 0.7,
+      "current_value": 0.4,
+      "fingerprint": "607f655c703474bf1b160c1725761b3730966b32cad9c2d0eb5771d0b326cc3f",
+      "higher_is_better": true,
+      "metric_name": "retrieval_precision",
+      "regressed": true,
+      "target_gap": 0.4,
+      "target_met": false,
+      "target_value": 0.8
+    }
+  ],
+  "observation_ids": [
+    "shadow-observation-1"
+  ],
+  "operator_review_required": true,
+  "policy_violation_count": 0,
+  "program_id": "AION-SELF-IMPROVEMENT-001",
+  "pull_request_created": false,
+  "read_only": true,
+  "redacted": true,
+  "regression_count": 1,
+  "review_state": "shadow_evaluated",
+  "runtime_effect": false,
+  "schema_version": "self-improvement-shadow-diagnostics/v1",
+  "shadow_mode": true,
+  "shadow_mode_authorized": true,
+  "shadow_mode_implementation_state": "implemented_operator_invoked_disabled",
+  "shadow_mode_implemented": true,
+  "shadow_mode_runtime_enabled": false,
+  "shadow_only": true,
+  "source_modified": false,
+  "synthetic": true,
+  "target_miss_count": 1,
+  "weakest_metric": "retrieval_precision"
+}

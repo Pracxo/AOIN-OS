@@ -46,3 +46,10 @@ Required controls:
   input, or execute commands from input.
 - Any finding requiring source change must remain a proposal for a later
   explicit authorization.
+## AION-178 Data Governance Update
+
+AION-178 accepts only explicit references, safe fingerprints, redacted numeric
+metrics, bounded UTC timestamps, synthetic metadata, and operator-selected
+scope labels. Recursive redaction rejects protected markers, locations,
+commands, arbitrary objects, bytes, exceptions, callables, non-finite floats,
+and recursive structures before evidence is produced.

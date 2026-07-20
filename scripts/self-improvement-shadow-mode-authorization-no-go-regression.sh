@@ -38,27 +38,12 @@ comparison_base() {
 
 blocked_paths=(
   ".github/workflows/"
-  "services/brain-api/src/aion_brain/"
   "packages/aion-sdk-python/src/"
   "services/brain-api/pyproject.toml"
   "migrations/"
 )
 
-if base="$(comparison_base)"; then
-  while IFS= read -r changed; do
-    [[ -z "$changed" ]] && continue
-    for blocked in "${blocked_paths[@]}"; do
-      if [[ "$changed" == "$blocked"* || "$changed" == "$blocked" ]]; then
-        echo "blocked AION-177 path changed: $changed" >&2
-        exit 1
-      fi
-    done
-  done < <(git diff --name-only "$base" HEAD)
-else
-  echo "WARN: comparison base unavailable; relying on current-tree no-go checks" >&2
-fi
-
-prohibited_source_files=(
+allowed_aion178_source_files=(
   "services/brain-api/src/aion_brain/contracts/self_improvement_shadow.py"
   "services/brain-api/src/aion_brain/self_improvement/shadow_mode.py"
   "services/brain-api/src/aion_brain/self_improvement/shadow_observation.py"
@@ -69,12 +54,35 @@ prohibited_source_files=(
   "services/brain-api/src/aion_brain/self_improvement/shadow_runner.py"
 )
 
-for file in "${prohibited_source_files[@]}"; do
-  if [[ -e "$file" ]]; then
-    echo "AION-178 runtime source must be absent during AION-177: $file" >&2
-    exit 1
-  fi
-done
+is_allowed_aion178_source_file() {
+  local changed="$1"
+  local allowed
+  for allowed in "${allowed_aion178_source_files[@]}"; do
+    [[ "$changed" == "$allowed" ]] && return 0
+  done
+  return 1
+}
+
+if base="$(comparison_base)"; then
+  while IFS= read -r changed; do
+    [[ -z "$changed" ]] && continue
+    if [[ "$changed" == services/brain-api/src/aion_brain/* ]]; then
+      is_allowed_aion178_source_file "$changed" || {
+        echo "blocked AION-178 source path changed: $changed" >&2
+        exit 1
+      }
+      continue
+    fi
+    for blocked in "${blocked_paths[@]}"; do
+      if [[ "$changed" == "$blocked"* || "$changed" == "$blocked" ]]; then
+        echo "blocked AION-177 path changed: $changed" >&2
+        exit 1
+      fi
+    done
+  done < <(git diff --name-only "$base" HEAD)
+else
+  echo "WARN: comparison base unavailable; relying on current-tree no-go checks" >&2
+fi
 
 "$PYTHON_BIN" scripts/lib/self_improvement_governance.py --repo-root "$ROOT_DIR" --mode no-go
 aion_confirm_immutable_v01_tag_history >/dev/null
@@ -91,8 +99,8 @@ fi
 
 cat <<'SUMMARY'
 self-improvement shadow-mode no-go result:
-- runtime source absent
-- workflow, runtime source, SDK runtime, pyproject, and migration paths unchanged
+- only exact AION-178 shadow source paths are allowed
+- workflow, protected runtime source, SDK runtime, pyproject, and migration paths unchanged
 - source mutation, Git writes, PR creation, merge, deployment, provider calls, connector calls, model training, approval creation, and self approval disabled
 - v0.2 tags and releases absent
 self-improvement shadow-mode no-go PASS

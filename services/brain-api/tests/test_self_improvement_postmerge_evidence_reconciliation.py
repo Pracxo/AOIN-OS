@@ -22,10 +22,9 @@ CURRENT_STATE_SURFACES = (
     "docs/self-improvement/aion-176-post-merge-evidence-reconciliation.md",
 )
 
-STALE_CURRENT_STATE_MARKERS = (
+STALE_AION_176_CURRENT_STATE_MARKERS = (
     "final_closeout_pre_merge_evidence",
     "pending_pr_merge",
-    '"ci_result": "pending"',
     "AION-164 is the next implementation task",
     "Current milestone: AION-162",
     "replay protection absent",
@@ -141,15 +140,18 @@ def test_project_status_describes_current_shadow_authorization_state() -> None:
     text = _text("docs/project-status.md")
     current_text = _project_status_current_text()
 
-    assert "AION-177 controlled self-improvement shadow-mode authorization is active." in text
-    assert "Current stage: Controlled shadow-mode authorization." in text
+    assert "AION-178 controlled self-improvement shadow plane is implemented." in text
+    assert "Current stage: Shadow mode implemented and disabled" in text
     assert "`self_improvement_platform_state=implemented_disabled`" in text
+    assert "`shadow_mode_implemented=true`" in text
+    assert "`shadow_mode_implementation_state=implemented_operator_invoked_disabled`" in text
     assert "`shadow_mode_runtime_enabled=false`" in text
     assert "active self-improvement implementation authorization count: 1" in text
     assert "active implementation task: `AION-178`" in text
+    assert "formal closeout task: `AION-179`" in text
     assert "v02_tag_created=false" in text
     assert "v02_release_created=false" in text
-    for stale_marker in STALE_CURRENT_STATE_MARKERS:
+    for stale_marker in STALE_AION_176_CURRENT_STATE_MARKERS:
         assert stale_marker not in current_text
 
 
@@ -158,8 +160,12 @@ def test_current_state_surfaces_are_reconciled_and_safe() -> None:
         _project_status_current_text() if surface == "docs/project-status.md" else _text(surface)
         for surface in CURRENT_STATE_SURFACES
     )
-    for stale_marker in STALE_CURRENT_STATE_MARKERS:
+    for stale_marker in STALE_AION_176_CURRENT_STATE_MARKERS:
         assert stale_marker not in combined
+    ledger = _json("docs/self-improvement/program-ledger.json")
+    aion178 = _task(ledger["records"], "AION-178")
+    assert aion178["ci_result"] == "pending"
+    assert aion178["runtime_state"] == "shadow_mode_implemented_operator_invoked_disabled"
     for marker in SENSITIVE_EVIDENCE_MARKERS:
         assert marker not in combined
     assert re.search(r"sk-[A-Za-z0-9_-]{10,}", combined) is None

@@ -459,6 +459,19 @@ allowed_aion160_files = {
     "services/brain-api/src/aion_brain/production_auth/actor_context.py",
     "services/brain-api/src/aion_brain/production_auth/actor_context_evidence.py",
 }
+allowed_aion178_files = {
+    "operator-console-static/demo-data/self-improvement-shadow-mode-plane.json",
+    "operator-console-static/demo-data/self-improvement-shadow-mode-review-items.json",
+    "operator-console-static/demo-data/self-improvement-shadow-mode-runtime-hold.json",
+    "services/brain-api/src/aion_brain/contracts/self_improvement_shadow.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_budget.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_evidence.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_mode.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_observation.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_pipeline.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_redaction.py",
+    "services/brain-api/src/aion_brain/self_improvement/shadow_runner.py",
+}
 runtime_prefixes = (
     "services/brain-api/src/",
     "packages/aion-sdk-python/src/",
@@ -532,6 +545,7 @@ for relative in sorted(changed):
         or relative in allowed_aion155_files
         or relative in allowed_aion157_files
         or relative in allowed_aion160_files
+        or relative in allowed_aion178_files
         or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)
         or relative.startswith(allowed_aion110_prefixes)

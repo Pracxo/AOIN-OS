@@ -8,23 +8,26 @@ tag or release exists.
 
 ## Current Main Milestone
 
-AION-177 controlled self-improvement shadow-mode authorization is active.
+AION-178 controlled self-improvement shadow plane is implemented.
 
-Current stage: Controlled shadow-mode authorization.
+Current stage: Shadow mode implemented and disabled, pending formal AION-179
+closeout and shadow-mode operator evaluation.
 
-AION-178 is the active implementation task, bounded to disabled
-observation-only shadow mode.
+AION-178 remains the active implementation task until AION-179 records formal
+closeout.
 
 The current self-improvement state is:
 
 - `self_improvement_platform_implemented=true`
 - `self_improvement_platform_state=implemented_disabled`
 - `shadow_mode_authorized=true`
-- `shadow_mode_implemented=false`
+- `shadow_mode_implemented=true`
+- `shadow_mode_implementation_state=implemented_operator_invoked_disabled`
 - `shadow_mode_runtime_enabled=false`
 - active self-improvement implementation authorization count: 1
 - active self-improvement implementation authorization: `AION-177-SI-0006`
 - active implementation task: `AION-178`
+- formal closeout task: `AION-179`
 - runtime activation still requires a separate future explicit authorization
 
 ## Completed Architecture
@@ -44,6 +47,7 @@ The current self-improvement state is:
 - Disabled canary, rollback, and adaptive-learning plane.
 - Final self-improvement closeout.
 - Controlled self-improvement shadow-mode authorization.
+- Controlled self-improvement shadow plane implemented disabled.
 
 ## Available Governed Capabilities
 
@@ -63,8 +67,15 @@ The current self-improvement state is:
 - Bounded strategy candidates.
 - Preference-learning candidates.
 - Data-only procedural skill candidates.
-- Controlled shadow-mode authorization for future AION-178 observation-only
-  implementation.
+- Reference-only shadow manifests.
+- Injected read-only shadow reference adapters.
+- Deterministic shadow metric evaluation.
+- Repeated shadow failure-pattern mining.
+- Bounded shadow hypothesis candidates.
+- Regression-test proposal specifications.
+- Shadow proposal candidates and operator review items.
+- Recursive redaction, deterministic replay, bounded concurrency, resource
+  budgets, ephemeral retention, and explicit output-directory boundaries.
 
 ## Disabled Capabilities
 
@@ -84,9 +95,10 @@ The current self-improvement state is:
 `AION-173-SI-0005` was consumed by AION-174 and closed by AION-175. AION-175
 created no new implementation authorization. AION-OE-001 passed operator
 evaluation and recommended shadow-mode authorization review. AION-177 creates
-`AION-177-SI-0006` as the single active authorization for future AION-178
-disabled, observation-only shadow-mode implementation. Any runtime activation
-still requires a separate future explicit authorization.
+`AION-177-SI-0006` as the single active authorization for AION-178 disabled,
+observation-only shadow-mode implementation. AION-178 implements that plane as
+operator-invoked and runtime-disabled. Any runtime activation still requires a
+separate future explicit authorization.
 
 All production-auth authorization records through `AION-163-PA-0007` are
 historical, inactive, consumed, expired, and non-reusable. Production-auth
@@ -98,7 +110,7 @@ Production authentication runtime remains disabled.
 
 These lines preserve exact historical progression markers consumed by inherited
 release-contract tests. They are not the authoritative current state; the current
-state remains AION-177 shadow mode authorized but not implemented.
+state remains AION-178 shadow mode implemented disabled pending AION-179.
 
 Historical marker: Current milestone: AION-160 actor-context trust-boundary remediation implemented.
 Historical marker: Current authorization: AION-161-PA-0006 consumed by AION-162 when merged.
@@ -113,15 +125,14 @@ and production authentication disabled. Formal lifecycle closeout: AION-161.
 
 ## Current Operator Task
 
-Review AION-177 shadow-mode authorization evidence and prepare AION-178 within
-the recorded boundary.
+Review AION-178 shadow-mode implementation evidence and prepare AION-179 formal
+closeout within the recorded boundary.
 
 The operator can inspect the AION-OE-001 closeout, AION-177 authorization
-transaction, shadow-mode architecture, data-governance boundary, resource
-budgets, threat model, runtime hold, and no-go evidence. AION-177 does not
-authorize runtime self-improvement, source rewrite, Git writes, pull request
-creation, automatic merge, production canary, production deployment, provider
-calls, connector calls, or model-weight training.
+transaction, AION-178 implementation evidence, runtime hold, and no-go evidence.
+AION-178 does not authorize runtime self-improvement, source rewrite, Git
+writes, pull request creation, automatic merge, production canary, production
+deployment, provider calls, connector calls, or model-weight training.
 
 ## Current Test Posture
 
@@ -140,6 +151,9 @@ Focused self-improvement checks cover:
 - Disabled canary, rollback, and adaptive-learning controls.
 - Final closeout readiness.
 - Shadow-mode authorization, boundary, budget, runtime hold, and no-go evidence.
+- Shadow-mode implementation contracts, reference adapters, pipeline, evidence,
+  output boundary, retention, replay, concurrency, no-runtime-influence, and
+  no-network-Git-PR evidence.
 
 ## Current Release Posture
 

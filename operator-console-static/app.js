@@ -19,7 +19,7 @@
     overview: "demo-data/overview-view-model.json",
     readiness: "demo-data/release-readiness-view-model.json",
     release_candidate: "demo-data/post-v01-release-candidate.json",
-    self_improvement_shadow_mode: "demo-data/self-improvement-shadow-mode-authorization.json",
+    self_improvement_shadow_mode: "demo-data/self-improvement-shadow-mode-plane.json",
     module_lifecycle: "demo-data/module-lifecycle-dashboard.json",
     model_provider_hardening: "demo-data/provider-hardening-view-model.json",
     operator_actions: "demo-data/operator-action-preview.json",
@@ -185,6 +185,8 @@
     "./scripts/production-auth-identity-assertion-replay-runtime-hold.sh",
     "./scripts/self-improvement-shadow-mode-authorization-no-go-regression.sh",
     "./scripts/self-improvement-shadow-mode-authorization-check.sh",
+    "./scripts/self-improvement-shadow-mode-no-go-regression.sh",
+    "./scripts/self-improvement-shadow-mode-check.sh",
     "./scripts/self-improvement-shadow-mode-runtime-hold.sh",
     "./scripts/docs-check.sh"
   ];

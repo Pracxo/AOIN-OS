@@ -117,7 +117,7 @@ cat <<'SUMMARY'
 self-improvement shadow-mode authorization result:
 - AION-OE-001 closeout decision recorded
 - AION-177-SI-0006 active for AION-178 only
-- shadow mode authorized but not implemented
+- shadow mode authorized and implemented as operator-invoked disabled infrastructure
 - shadow-mode runtime disabled
 - source mutation, Git writes, PR creation, merge, deployment, provider calls, connector calls, and model training disabled
 - v0.2 tags and releases absent

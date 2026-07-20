@@ -2284,7 +2284,16 @@ AION-177 records the contract boundary for future AION-178 shadow-mode work.
 Authorized future contracts may describe shadow observations, redacted evidence,
 resource-budget status, policy-delta summaries, and operator review items.
 
-AION-177 does not add those Brain runtime contracts. It keeps
-`shadow_mode_implemented=false` and `shadow_mode_runtime_enabled=false` and does
-not add API routes, SDK surfaces, CLI commands, provider calls, connector calls,
-migrations, package files, v0.2 tags, or releases.
+AION-177 did not add those Brain runtime contracts. AION-178 now adds the
+disabled, operator-invoked contract plane while keeping
+`shadow_mode_runtime_enabled=false` and still adding no API routes, SDK
+surfaces, CLI commands, provider calls, connector calls, migrations, package
+files, v0.2 tags, or releases.
+## AION-178 Shadow Contracts
+
+The shadow-mode contracts live in
+`services/brain-api/src/aion_brain/contracts/self_improvement_shadow.py`.
+They are strict Pydantic v2 contracts with UTC-only timestamps, bounded safe
+identifiers, lowercase SHA-256 fingerprints, recursive protected-material
+rejection, immutable evidence, and AION-177-SI-0006 lineage. They do not add
+API routes or runtime activation.

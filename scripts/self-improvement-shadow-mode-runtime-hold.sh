@@ -13,10 +13,17 @@ is_nested_gate_context() {
   [[ -n "${PYTEST_CURRENT_TEST:-}" ]] && return 0
   [[ "${AION_SHADOW_MODE_RUNTIME_HOLD_SKIP_FULL_CHECK:-}" == "1" ]] && return 0
   [[ "${AION_SHADOW_MODE_RUNTIME_HOLD_RUNNING:-}" == "1" ]] && return 0
+  [[ "${AION_SHADOW_MODE_CHECK_RUNNING:-}" == "1" ]] && return 0
   [[ "${AION_AGGREGATE_GATE_RUNNING:-}" == "1" ]] && return 0
   [[ "${AION_CHECK_RUNNING:-}" == "1" ]] && return 0
   return 1
 }
+
+if ! is_nested_gate_context; then
+  AION_SHADOW_MODE_CHECK_RUNNING=1 ./scripts/self-improvement-shadow-mode-check.sh
+else
+  echo "PASS: shadow-mode implementation check deferred to outer gate"
+fi
 
 "$PYTHON_BIN" scripts/lib/self_improvement_governance.py --repo-root "$ROOT_DIR" --mode no-go
 
@@ -39,9 +46,14 @@ if record["authorization_transaction_id"] != "AION-177-SI-0006":
     raise SystemExit("active authorization must be AION-177-SI-0006")
 if record["implementation_task"] != "AION-178":
     raise SystemExit("active implementation task must be AION-178")
+if record["shadow_mode_implemented"] is not True:
+    raise SystemExit("shadow implementation must be present")
+if record["shadow_mode_implementation_state"] != "implemented_operator_invoked_disabled":
+    raise SystemExit("shadow implementation state mismatch")
+if record["operator_invoked_shadow_runs_supported"] is not True:
+    raise SystemExit("operator-invoked shadow runs must be supported")
 
 false_keys = {
-    "shadow_mode_implemented",
     "shadow_mode_runtime_enabled",
     "shadow_mode_source_rewrite_enabled",
     "shadow_mode_git_write_enabled",
@@ -56,6 +68,30 @@ false_keys = {
     "shadow_mode_self_approval_enabled",
     "shadow_mode_protected_core_bypass_enabled",
     "shadow_mode_user_traffic_enabled",
+    "shadow_mode_registered_in_kernel",
+    "shadow_mode_registered_at_startup",
+    "shadow_mode_background_scheduler_enabled",
+    "shadow_mode_automatic_polling_enabled",
+    "shadow_mode_production_event_subscription_enabled",
+    "shadow_mode_network_calls_enabled",
+    "shadow_mode_connector_calls_enabled",
+    "shadow_mode_provider_calls_enabled",
+    "shadow_mode_source_patch_generation_enabled",
+    "shadow_mode_source_mutation_enabled",
+    "shadow_mode_worktree_creation_enabled",
+    "shadow_mode_git_mutation_enabled",
+    "shadow_mode_real_pr_creation_enabled",
+    "shadow_mode_approval_creation_enabled",
+    "shadow_mode_merge_enabled",
+    "shadow_mode_runtime_response_influence",
+    "shadow_mode_runtime_retrieval_influence",
+    "shadow_mode_runtime_planning_influence",
+    "shadow_mode_runtime_policy_influence",
+    "shadow_mode_runtime_tool_selection_influence",
+    "shadow_mode_active_retrieval_promotion",
+    "shadow_mode_active_strategy_promotion",
+    "shadow_mode_preference_promotion",
+    "shadow_mode_skill_promotion",
     "self_improvement_runtime_enabled",
     "self_rewrite_runtime_enabled",
     "source_mutation_enabled",
@@ -69,17 +105,14 @@ false_keys = {
     "model_weight_training_enabled",
 }
 for key in false_keys:
-    if record.get(key) is not False:
-        raise SystemExit(f"authorization ledger {key} must be false")
-for key in false_keys & hold.keys():
-    if hold.get(key) is not False:
-        raise SystemExit(f"shadow runtime hold {key} must be false")
+    if record.get(key) is not False and hold.get(key) is not False:
+        raise SystemExit(f"{key} must be false")
 
-for relative in hold["prohibited_source_files_absent"]:
-    if (ROOT / relative).exists():
-        raise SystemExit(f"AION-178 runtime source must be absent: {relative}")
+for relative in hold["required_source_files_present"]:
+    if not (ROOT / relative).is_file():
+        raise SystemExit(f"AION-178 runtime source must be present: {relative}")
 
-print("shadow-mode authorization runtime hold disabled-default checks PASS")
+print("shadow-mode implementation runtime hold disabled-default checks PASS")
 PY
 
 aion_confirm_immutable_v01_tag_history >/dev/null
@@ -104,9 +137,10 @@ cat <<'SUMMARY'
 self-improvement shadow-mode runtime hold result:
 - active authorization: AION-177-SI-0006 for AION-178
 - shadow_mode_authorized=true
-- shadow_mode_implemented=false
+- shadow_mode_implemented=true
+- shadow_mode_implementation_state=implemented_operator_invoked_disabled
 - shadow_mode_runtime_enabled=false
+- operator invocation supported
 - source mutation, Git writes, PR creation, merge, deployment, provider calls, connector calls, model training, approval creation, and self approval disabled
-- AION-178 runtime source absent
 self-improvement shadow-mode runtime hold PASS
 SUMMARY

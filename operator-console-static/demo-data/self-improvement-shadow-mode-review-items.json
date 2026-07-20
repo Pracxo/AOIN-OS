@@ -1,0 +1,59 @@
+{
+  "activation_phase_id": "AION-SELF-IMPROVEMENT-SHADOW-001",
+  "active_learning_promoted": false,
+  "approval_created": false,
+  "authorization_scope": "read-only-shadow-observation-evaluation-pattern-mining-proposal-generation",
+  "authorization_transaction_id": "AION-177-SI-0006",
+  "demo_id": "self-improvement-shadow-mode-review-items",
+  "git_mutated": false,
+  "implementation_authorization_created": false,
+  "implementation_task": "AION-178",
+  "items": [
+    {
+      "active_learning_promoted": false,
+      "approval_created": false,
+      "budget_status": "within_budget",
+      "created_at": "2026-07-20T12:00:00Z",
+      "expires_at": "2026-07-21T12:00:00Z",
+      "fingerprint": "7d44becc262def0be8931985cd767248797cbbb73a17f0cb176e84f383b65518",
+      "git_mutated": false,
+      "hypothesis_summary": "Hypothesis shadow-hypothesis-1 remains advisory.",
+      "implementation_authorization_created": false,
+      "merged": false,
+      "observation_summary": "Repeated retrieval failure for retrieval_precision across 2 redacted observations.",
+      "operator_review_required": true,
+      "pattern_summary": "Pattern shadow-pattern-1 requires review.",
+      "policy_delta_summary": "No policy change is applied.",
+      "pull_request_created": false,
+      "reason_codes": [
+        "shadow_operator_review_required"
+      ],
+      "regression_test_summary": "Regression proposal is specification only.",
+      "review_item_id": "shadow-review-1",
+      "review_state": "operator_review_pending",
+      "risk_level": "medium",
+      "runtime_effect": false,
+      "schema_version": "self-improvement-shadow-review-item/v1",
+      "shadow_proposal_id": "shadow-proposal-1",
+      "source_modified": false,
+      "source_reference_fingerprints": [
+        "ba12d4e688877f26a49e81c4c1569b66cb5ea18ff87cc631feec7590a581aed2"
+      ]
+    }
+  ],
+  "merged": false,
+  "operator_review_required": true,
+  "program_id": "AION-SELF-IMPROVEMENT-001",
+  "pull_request_created": false,
+  "read_only": true,
+  "redacted": true,
+  "runtime_effect": false,
+  "shadow_mode": true,
+  "shadow_mode_authorized": true,
+  "shadow_mode_implementation_state": "implemented_operator_invoked_disabled",
+  "shadow_mode_implemented": true,
+  "shadow_mode_runtime_enabled": false,
+  "shadow_only": true,
+  "source_modified": false,
+  "synthetic": true
+}

@@ -175,9 +175,18 @@ def test_aion175_program_ledger_records_merged_final_task() -> None:
 
     aion177 = by_task["AION-177"]
     assert aion177["authorization_transaction"] == SHADOW_AUTHORIZATION_ID
-    assert aion177["authorization_state"] == "active_for_AION-178_shadow_mode_only"
+    assert aion177["authorization_state"] == "active_until_AION-179_closeout"
     assert aion177["next_task"] == SHADOW_IMPLEMENTATION_TASK
-    assert aion177["runtime_state"] == "authorization_only_shadow_mode_not_implemented"
+    assert aion177["runtime_state"] == "shadow_mode_authorized_not_implemented"
+
+    aion178 = by_task["AION-178"]
+    assert aion178["authorization_transaction"] == SHADOW_AUTHORIZATION_ID
+    assert aion178["authorization_state"] == (
+        "implementation_in_progress_formal_closeout_AION-179"
+    )
+    assert aion178["runtime_state"] == "shadow_mode_implemented_operator_invoked_disabled"
+    assert aion178["next_task"] == "AION-179"
+    assert aion178["ci_result"] == "pending"
 
 
 def test_final_readiness_report_has_required_capabilities_safety_and_evaluation_steps() -> None:

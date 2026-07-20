@@ -88,7 +88,6 @@ TRUE_KEYS = {
 }
 
 SHADOW_FALSE_KEYS = {
-    "shadow_mode_implemented",
     "shadow_mode_runtime_enabled",
     "shadow_mode_source_rewrite_enabled",
     "shadow_mode_git_write_enabled",
@@ -117,6 +116,14 @@ if active_authorization["implementation_task"] != "AION-178":
     raise SystemExit("active authorization must be scoped to AION-178")
 if active_authorization["authorization_reusable"] is not False:
     raise SystemExit("active authorization must be non-reusable")
+if active_authorization["shadow_mode_implemented"] is not True:
+    raise SystemExit("active authorization shadow_mode_implemented must be true")
+if active_authorization["shadow_mode_implementation_state"] != "implemented_operator_invoked_disabled":
+    raise SystemExit("active authorization shadow implementation state mismatch")
+if active_authorization.get("operator_invoked_shadow_runs_supported") is not True:
+    raise SystemExit("active authorization must support operator-invoked shadow runs")
+if active_authorization.get("operator_invoked_batch_runner_available") is not True:
+    raise SystemExit("active authorization must expose the disabled batch runner")
 
 final_record_matches = [
     record
@@ -166,8 +173,8 @@ for relative in [
     "services/brain-api/src/aion_brain/self_improvement/shadow_redaction.py",
     "services/brain-api/src/aion_brain/self_improvement/shadow_runner.py",
 ]:
-    if (ROOT / relative).exists():
-        raise SystemExit(f"AION-178 shadow runtime source must be absent: {relative}")
+    if not (ROOT / relative).is_file():
+        raise SystemExit(f"AION-178 shadow runtime source must be present: {relative}")
 for key in {
     "self_improvement_runtime_enabled",
     "self_rewrite_runtime_enabled",
@@ -270,7 +277,8 @@ cat <<'SUMMARY'
 self-improvement runtime hold result:
 - self_improvement_platform_state=implemented_disabled
 - active implementation authorization=AION-177-SI-0006 for AION-178 shadow mode only
-- shadow_mode_implemented=false
+- shadow_mode_implemented=true
+- shadow_mode_implementation_state=implemented_operator_invoked_disabled
 - shadow_mode_runtime_enabled=false
 - self_improvement_runtime_enabled=false
 - self_rewrite_runtime_enabled=false

@@ -23,3 +23,11 @@ The architecture remains behind the disabled governed self-improvement platform.
 `shadow_mode_authorized=true` records scope approval. It does not imply
 `shadow_mode_implemented=true`, and it must not imply
 `shadow_mode_runtime_enabled=true`.
+## AION-178 Implementation Note
+
+AION-178 implements the authorized shadow-mode plane as explicit, read-only
+Python contracts and services. The implementation is operator-invoked and
+runtime-disabled: no kernel registration, startup registration, scheduler,
+production event subscription, API route, source mutation, Git mutation, PR
+creation, approval creation, merge, canary, deployment, promotion, or model
+training is added.

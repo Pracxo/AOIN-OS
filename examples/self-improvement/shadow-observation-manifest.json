@@ -1,0 +1,65 @@
+{
+  "activation_phase_id": "AION-SELF-IMPROVEMENT-SHADOW-001",
+  "active_learning_promoted": false,
+  "approval_created": false,
+  "authorization_scope": "read-only-shadow-observation-evaluation-pattern-mining-proposal-generation",
+  "authorization_transaction_id": "AION-177-SI-0006",
+  "benchmark_cost_units": 0,
+  "created_at": "2026-07-20T12:00:00Z",
+  "example_id": "shadow-observation-manifest",
+  "git_mutated": false,
+  "implementation_authorization_created": false,
+  "implementation_task": "AION-178",
+  "input_classification": "redacted",
+  "manifest_id": "shadow-manifest-1",
+  "maximum_concurrency": 4,
+  "merged": false,
+  "operator_invoked": true,
+  "operator_review_required": true,
+  "operator_scope_labels": [
+    "retrieval-ranking"
+  ],
+  "program_id": "AION-SELF-IMPROVEMENT-001",
+  "pull_request_created": false,
+  "read_only": true,
+  "redacted": true,
+  "redacted_metrics": [
+    {
+      "baseline_value": 0.7,
+      "current_value": 0.4,
+      "higher_is_better": true,
+      "metric_name": "retrieval_precision",
+      "recorded_at": "2026-07-20T12:00:00Z",
+      "reference_id": "shadow-ref-1",
+      "target_value": 0.8,
+      "weight": 1.0
+    }
+  ],
+  "references": [
+    {
+      "observed_at": "2026-07-20T12:00:00Z",
+      "read_only": true,
+      "redacted": true,
+      "reference_fingerprint": "ba12d4e688877f26a49e81c4c1569b66cb5ea18ff87cc631feec7590a581aed2",
+      "reference_id": "shadow-ref-1",
+      "reference_kind": "evaluation",
+      "repeated_count": 2,
+      "schema_version": "self-improvement-shadow-reference/v1",
+      "source_version": "source-v1"
+    }
+  ],
+  "requested_review_outputs": [
+    "operator-review-items"
+  ],
+  "retention_seconds": 86400,
+  "runtime_effect": false,
+  "schema_version": "self-improvement-shadow-manifest/v1",
+  "shadow_mode": true,
+  "shadow_mode_authorized": true,
+  "shadow_mode_implementation_state": "implemented_operator_invoked_disabled",
+  "shadow_mode_implemented": true,
+  "shadow_mode_runtime_enabled": false,
+  "shadow_only": true,
+  "source_modified": false,
+  "synthetic": true
+}

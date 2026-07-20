@@ -2,11 +2,11 @@
 
 AION-175 does not activate runtime self-improvement. This checklist defines the minimum evidence required before any future activation request can be reviewed.
 
-AION-177 also does not activate runtime self-improvement. It authorizes future
-AION-178 shadow-mode implementation only. Shadow mode must remain
-`shadow_mode_implemented=false` and `shadow_mode_runtime_enabled=false` in
-AION-177, and any runtime activation still requires a later explicit
-authorization.
+AION-177 also does not activate runtime self-improvement. It authorized the
+AION-178 shadow-mode implementation only. AION-178 sets
+`shadow_mode_implemented=true` with
+`shadow_mode_implementation_state=implemented_operator_invoked_disabled`; any
+runtime activation still requires a later explicit authorization.
 
 ## Required Evidence
 

@@ -1502,3 +1502,9 @@ hold evidence from synthetic local JSON files. The view is read-only and
 operator-facing. It does not activate shadow mode, call an API, execute actions,
 create approvals, create pull requests, merge, deploy, or expose provider or
 connector payloads.
+## AION-178 Static Evidence
+
+The static console may display bundled AION-178 shadow evidence from local demo
+JSON. It does not call the backend, run a shadow pipeline, load live traces,
+edit source, call Git, create approvals, create pull requests, merge, deploy,
+or promote candidates.

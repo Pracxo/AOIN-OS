@@ -12,3 +12,12 @@
   disabled.
 - New authorization checks and no-go regression scripts are executable.
 - Static console evidence is synthetic and read-only.
+## AION-178 Checklist Update
+
+- controlled shadow-mode source files present
+- focused AION-178 tests present
+- AION-178 runtime hold present
+- AION-178 no-go regression present
+- ADR 0163 indexed
+- AION-177-SI-0006 active pending AION-179
+- runtime activation not approved

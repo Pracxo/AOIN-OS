@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "scripts/lib"))
 
 from self_improvement_governance import (  # noqa: E402
-    AION177_PROHIBITED_SOURCE_FILES,
+    AION178_ALLOWED_CREATE,
     SHADOW_ALLOWED_INPUTS,
     SHADOW_DISALLOWED_INPUTS,
     SHADOW_PROHIBITED_SCOPE,
@@ -39,9 +39,9 @@ def test_data_boundary_lists_allowed_and_disallowed_inputs() -> None:
     assert tuple(payload["disallowed_inputs"]) == SHADOW_DISALLOWED_INPUTS
 
 
-def test_aion177_does_not_create_aion178_shadow_runtime_source() -> None:
-    for relative in AION177_PROHIBITED_SOURCE_FILES:
-        assert not (ROOT / relative).exists(), relative
+def test_aion178_creates_only_scoped_shadow_runtime_source() -> None:
+    for relative in AION178_ALLOWED_CREATE:
+        assert (ROOT / relative).is_file(), relative
     authorization = _json("docs/self-improvement/authorization-ledger.json")
     prohibited = tuple(authorization["records"][-1]["prohibited_scope"])
     assert prohibited == SHADOW_PROHIBITED_SCOPE

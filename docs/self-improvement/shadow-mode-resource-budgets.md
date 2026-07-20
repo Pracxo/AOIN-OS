@@ -30,3 +30,11 @@ An exceeded budget must stop the run, fail closed, produce no implementation
 authorization, produce no approval, produce no partial active-runtime change,
 and create a redacted budget-failure record. A quality gain cannot override a
 resource-budget violation.
+## AION-178 Resource Budget Update
+
+AION-178 enforces exact default budgets: 1000 observation references, 1000
+evaluation records, 100 failure patterns, 50 hypotheses, 25 regression-test
+proposals, 10 shadow proposals, 4 workers, 1800 wall-clock seconds, 50 cost
+units, 10485760 output bytes, and 20 operator output files. Network calls, Git
+operations, source mutations, real pull requests, and runtime promotions remain
+zero-budget dimensions.
