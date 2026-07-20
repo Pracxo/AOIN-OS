@@ -2338,3 +2338,9 @@ pull requests, merge, deploy, call providers, call connectors, train model
 weights, bypass protected-core controls, or expose production traffic.
 
 Runtime activation requires a separate future explicit authorization.
+## AION-178 Policy Boundary
+
+AION-178 does not mutate policy or influence runtime policy decisions. Shadow
+outputs are advisory review evidence only. Policy-related findings can produce a
+`governance_review` shadow candidate, but high and critical candidates require a
+separate future authorization before any implementation work.

@@ -87,3 +87,9 @@ not the current critical path.
 
 - AION-163-PA-0007
 - The next critical path is AION-164.
+## AION-178 Delta
+
+AION-178 adds disabled, read-only self-improvement shadow-mode infrastructure.
+It does not make v0.2 release-ready, does not create a v0.2 tag or release,
+does not move `aion-v0.1.0`, and does not approve production runtime
+activation.

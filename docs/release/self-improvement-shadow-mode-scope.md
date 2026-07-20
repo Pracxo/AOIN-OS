@@ -61,3 +61,10 @@ Prohibited scope:
   runtime-resource change.
 - v0.2 tag or release.
 - `aion-v0.1.0` modification.
+## AION-178 Implemented Scope
+
+AION-178 implements only reference-based input, deterministic evaluation,
+failure-pattern mining, bounded hypothesis generation, regression-test
+proposal generation, shadow proposal generation, operator review item
+generation, evidence, redaction, resource budgets, deterministic replay,
+bounded concurrency, ephemeral retention, and explicit output boundaries.

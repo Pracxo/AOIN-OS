@@ -1,0 +1,56 @@
+{
+  "activation_phase_id": "AION-SELF-IMPROVEMENT-SHADOW-001",
+  "active_learning_promoted": false,
+  "approval_created": false,
+  "authorization_scope": "read-only-shadow-observation-evaluation-pattern-mining-proposal-generation",
+  "authorization_transaction_id": "AION-177-SI-0006",
+  "evidence_reference_fingerprints": [
+    "ba12d4e688877f26a49e81c4c1569b66cb5ea18ff87cc631feec7590a581aed2"
+  ],
+  "example_id": "shadow-reference-snapshot",
+  "fingerprint": "1eb2253bfa80297a714115c9cf59643f8f92c8ee6dc3b94dbf087761139cc546",
+  "git_mutated": false,
+  "implementation_authorization_created": false,
+  "implementation_task": "AION-178",
+  "merged": false,
+  "metrics": [
+    {
+      "baseline_value": 0.7,
+      "current_value": 0.4,
+      "higher_is_better": true,
+      "metric_name": "retrieval_precision",
+      "recorded_at": "2026-07-20T12:00:00Z",
+      "reference_id": "shadow-ref-1",
+      "target_value": 0.8,
+      "weight": 1.0
+    }
+  ],
+  "operator_review_required": true,
+  "program_id": "AION-SELF-IMPROVEMENT-001",
+  "pull_request_created": false,
+  "read_only": true,
+  "redacted": true,
+  "reference": {
+    "observed_at": "2026-07-20T12:00:00Z",
+    "read_only": true,
+    "redacted": true,
+    "reference_fingerprint": "ba12d4e688877f26a49e81c4c1569b66cb5ea18ff87cc631feec7590a581aed2",
+    "reference_id": "shadow-ref-1",
+    "reference_kind": "evaluation",
+    "repeated_count": 2,
+    "schema_version": "self-improvement-shadow-reference/v1",
+    "source_version": "source-v1"
+  },
+  "resolved_at": "2026-07-20T12:00:00Z",
+  "runtime_effect": false,
+  "shadow_mode": true,
+  "shadow_mode_authorized": true,
+  "shadow_mode_implementation_state": "implemented_operator_invoked_disabled",
+  "shadow_mode_implemented": true,
+  "shadow_mode_runtime_enabled": false,
+  "shadow_only": true,
+  "source_modified": false,
+  "source_record_version": "source-v1",
+  "summary": "Retrieval precision trailed the redacted target.",
+  "synthetic": true
+}

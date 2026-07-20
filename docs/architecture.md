@@ -2628,3 +2628,11 @@ and keeps runtime self-improvement, source rewrite, Git writes, PR creation,
 automatic merge, canary, deployment, provider calls, connector calls,
 model-weight training, v0.2 tags, v0.2 releases, and `aion-v0.1.0` movement
 disabled or absent.
+## AION-178 Shadow-Mode Plane
+
+AION-178 adds a controlled self-improvement shadow plane that remains outside
+runtime composition. It is invoked only through an explicit Python API with a
+reference-only manifest and injected read-only adapter. It emits advisory
+evidence, diagnostics, and operator review items, while kernel, startup, API,
+policy, planning, retrieval, tool-selection, source, Git, PR, approval, merge,
+canary, deployment, promotion, and model-training surfaces remain unregistered.

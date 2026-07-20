@@ -29,3 +29,13 @@ Forbidden behavior:
 The AION-177 authorization is non-reusable and scoped to AION-178. Completion of
 AION-178 must consume or close this transaction before any later activation
 request can be considered.
+## AION-178 Boundary Update
+
+AION-178 may create only review-bound shadow evidence: observations,
+evaluation summaries, repeated failure-pattern candidates, bounded hypotheses,
+regression-test specifications, shadow proposal candidates, operator review
+items, audit, provenance, diagnostics, and budget records. Source mutation, Git
+write, pull request creation, approval creation, automatic merge, production
+canary, production deployment, external provider calls, connector runtime
+calls, runtime influence, promotion, and v0.2 tag or release creation remain
+out of scope.

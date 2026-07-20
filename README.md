@@ -17,12 +17,13 @@ The request identity boundary is default-off, observe-only, anonymous, and
 authorized by `AION-155-PA-0003` for `AION-156`.
 
 Governed self-improvement is implemented-disabled. AION-OE-001 passed operator
-evaluation, and AION-177 creates `AION-177-SI-0006` as the single active
-authorization for future AION-178 controlled shadow-mode implementation. Shadow
-mode is authorized but not implemented, runtime remains disabled, source
-mutation and Git writes remain disabled, and production canary, deployment,
-provider calls, connector calls, model-weight training, v0.2 tags, and v0.2
-releases remain absent.
+evaluation, AION-177 created `AION-177-SI-0006` as the single active
+authorization for AION-178, and AION-178 now implements the controlled
+shadow-mode plane as operator-invoked, read-only, advisory, non-influencing, and
+runtime-disabled. Source mutation and Git writes remain disabled, and
+production canary, deployment, provider calls, connector calls, model-weight
+training, v0.2 tags, and v0.2 releases remain absent. AION-179 owns formal
+closeout.
 
 This repository does not implement finance, trading, IT automation, legal,
 healthcare, HR, procurement, business workflows, or any vertical module logic.

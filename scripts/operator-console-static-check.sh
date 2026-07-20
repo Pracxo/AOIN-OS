@@ -395,22 +395,40 @@ for path in sorted(demo_dir.glob("*.json")):
     if path.name.startswith("self-improvement-shadow-mode-"):
         if path.name not in {
             "self-improvement-shadow-mode-authorization.json",
+            "self-improvement-shadow-mode-plane.json",
+            "self-improvement-shadow-mode-review-items.json",
             "self-improvement-shadow-mode-runtime-hold.json",
         }:
             raise SystemExit(f"unknown self-improvement shadow-mode demo: {path}")
         if payload.get("read_only") is not True:
             raise SystemExit(f"self-improvement shadow-mode demo must be read_only: {path}")
-        if payload.get("redaction_applied") is not True:
+        redaction_applied = payload.get("redaction_applied")
+        redacted = payload.get("redacted")
+        if redaction_applied is not True and redacted is not True:
             raise SystemExit(f"self-improvement shadow-mode demo must be redacted: {path}")
-        if payload.get("shadow_mode_implemented") is not False:
-            raise SystemExit(f"shadow_mode_implemented must be false: {path}")
+        if path.name == "self-improvement-shadow-mode-authorization.json":
+            if payload.get("shadow_mode_implemented") is not False:
+                raise SystemExit(f"shadow_mode_implemented must be false: {path}")
+        else:
+            if payload.get("shadow_mode_implemented") is not True:
+                raise SystemExit(f"shadow_mode_implemented must be true: {path}")
+            if payload.get("shadow_mode_implementation_state") != "implemented_operator_invoked_disabled":
+                raise SystemExit(f"shadow implementation state mismatch: {path}")
         if payload.get("shadow_mode_runtime_enabled") is not False:
             raise SystemExit(f"shadow_mode_runtime_enabled must be false: {path}")
         allowed_true_keys = {
             "synthetic",
             "read_only",
+            "redacted",
             "redaction_applied",
             "shadow_mode_authorized",
+            "shadow_mode",
+            "shadow_mode_implemented",
+            "shadow_only",
+            "operator_review_required",
+            "operator_invoked_shadow_runs_supported",
+            "operator_invoked_batch_runner_available",
+            "required_source_files_present",
         }
         blocked_true_markers = (
             "_enabled",

@@ -1212,6 +1212,120 @@ aion151_scan_files_excluding_scoped_authorization() {
   done
 }
 
+aion178_is_scoped_self_improvement_shadow_mode_path() {
+  # Exact AION-178 disabled self-improvement shadow-mode implementation paths.
+  # These paths are covered by the AION-178 shadow no-go gate; production-auth
+  # scanners should not treat their redaction vocabulary as auth runtime scope.
+  case "$1" in
+    AGENTS.md|\
+    README.md|\
+    docs/adr/0163-controlled-self-improvement-shadow-mode-plane.md|\
+    docs/adr/README.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/project-status.md|\
+    docs/release/self-improvement-shadow-mode-authorization-transaction.md|\
+    docs/release/self-improvement-shadow-mode-checklist.md|\
+    docs/release/self-improvement-shadow-mode-implementation-checklist.md|\
+    docs/release/self-improvement-shadow-mode-implementation-evidence-matrix.md|\
+    docs/release/self-improvement-shadow-mode-implementation-no-go.md|\
+    docs/release/self-improvement-shadow-mode-implementation-runtime-hold.md|\
+    docs/release/self-improvement-shadow-mode-implementation.md|\
+    docs/release/self-improvement-shadow-mode-runtime-hold.md|\
+    docs/release/self-improvement-shadow-mode-scope.md|\
+    docs/release/self-improvement-shadow-mode-security-evidence.md|\
+    docs/release/v02-release-readiness-delta.md|\
+    docs/self-improvement/aion-178-checklist.md|\
+    docs/self-improvement/authorization-ledger.json|\
+    docs/self-improvement/program-ledger.json|\
+    docs/self-improvement/runtime-activation-checklist.md|\
+    docs/self-improvement/shadow-mode-architecture.md|\
+    docs/self-improvement/shadow-mode-boundary.md|\
+    docs/self-improvement/shadow-mode-data-governance.md|\
+    docs/self-improvement/shadow-mode-evidence.md|\
+    docs/self-improvement/shadow-mode-implementation.md|\
+    docs/self-improvement/shadow-mode-operator-runbook.md|\
+    docs/self-improvement/shadow-mode-operator-workflow.md|\
+    docs/self-improvement/shadow-mode-output-and-retention.md|\
+    docs/self-improvement/shadow-mode-pipeline.md|\
+    docs/self-improvement/shadow-mode-reference-adapters.md|\
+    docs/self-improvement/shadow-mode-resource-budgets.md|\
+    docs/self-improvement/shadow-mode-roadmap.md|\
+    docs/self-improvement/shadow-mode-security-review.md|\
+    docs/visual-brain.md|\
+    examples/self-improvement/shadow-budget-failure.json|\
+    examples/self-improvement/shadow-evaluation-summary.json|\
+    examples/self-improvement/shadow-evidence-bundle.json|\
+    examples/self-improvement/shadow-failure-pattern.json|\
+    examples/self-improvement/shadow-hypothesis.json|\
+    examples/self-improvement/shadow-improvement-proposal.json|\
+    examples/self-improvement/shadow-mode-runtime-hold.json|\
+    examples/self-improvement/shadow-observation-manifest.json|\
+    examples/self-improvement/shadow-operator-review-item.json|\
+    examples/self-improvement/shadow-reference-snapshot.json|\
+    examples/self-improvement/shadow-regression-test-proposal.json|\
+    examples/self-improvement/shadow-run-diagnostics.json|\
+    operator-console-static/README.md|\
+    operator-console-static/app.js|\
+    operator-console-static/demo-data/self-improvement-shadow-mode-plane.json|\
+    operator-console-static/demo-data/self-improvement-shadow-mode-review-items.json|\
+    operator-console-static/demo-data/self-improvement-shadow-mode-runtime-hold.json|\
+    operator-console-static/index.html|\
+    scripts/lib/self_improvement_governance.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    scripts/operator-action-write-path-no-go-regression.sh|\
+    scripts/operator-console-static-check.sh|\
+    scripts/production-auth-architecture-check.sh|\
+    scripts/production-auth-core-no-go-regression.sh|\
+    scripts/self-improvement-runtime-hold.sh|\
+    scripts/self-improvement-shadow-mode-authorization-check.sh|\
+    scripts/self-improvement-shadow-mode-authorization-no-go-regression.sh|\
+    scripts/self-improvement-shadow-mode-check.sh|\
+    scripts/self-improvement-shadow-mode-no-go-regression.sh|\
+    scripts/self-improvement-shadow-mode-runtime-hold.sh|\
+    services/brain-api/src/aion_brain/contracts/self_improvement_shadow.py|\
+    services/brain-api/src/aion_brain/self_improvement/shadow_budget.py|\
+    services/brain-api/src/aion_brain/self_improvement/shadow_evidence.py|\
+    services/brain-api/src/aion_brain/self_improvement/shadow_mode.py|\
+    services/brain-api/src/aion_brain/self_improvement/shadow_observation.py|\
+    services/brain-api/src/aion_brain/self_improvement/shadow_pipeline.py|\
+    services/brain-api/src/aion_brain/self_improvement/shadow_redaction.py|\
+    services/brain-api/src/aion_brain/self_improvement/shadow_runner.py|\
+    services/brain-api/tests/conftest.py|\
+    services/brain-api/tests/test_self_improvement_final_closeout_docs.py|\
+    services/brain-api/tests/test_self_improvement_postmerge_evidence_reconciliation.py|\
+    services/brain-api/tests/test_self_improvement_shadow_budget.py|\
+    services/brain-api/tests/test_self_improvement_shadow_concurrency.py|\
+    services/brain-api/tests/test_self_improvement_shadow_contracts.py|\
+    services/brain-api/tests/test_self_improvement_shadow_deterministic_replay.py|\
+    services/brain-api/tests/test_self_improvement_shadow_evaluation.py|\
+    services/brain-api/tests/test_self_improvement_shadow_evidence.py|\
+    services/brain-api/tests/test_self_improvement_shadow_hypotheses.py|\
+    services/brain-api/tests/test_self_improvement_shadow_manifest.py|\
+    services/brain-api/tests/test_self_improvement_shadow_mode_authorization_docs.py|\
+    services/brain-api/tests/test_self_improvement_shadow_mode_boundary_spec.py|\
+    services/brain-api/tests/test_self_improvement_shadow_no_network_git_or_pr.py|\
+    services/brain-api/tests/test_self_improvement_shadow_no_runtime_influence.py|\
+    services/brain-api/tests/test_self_improvement_shadow_observation.py|\
+    services/brain-api/tests/test_self_improvement_shadow_output_boundary.py|\
+    services/brain-api/tests/test_self_improvement_shadow_pattern_mining.py|\
+    services/brain-api/tests/test_self_improvement_shadow_performance.py|\
+    services/brain-api/tests/test_self_improvement_shadow_pipeline.py|\
+    services/brain-api/tests/test_self_improvement_shadow_proposals.py|\
+    services/brain-api/tests/test_self_improvement_shadow_redaction.py|\
+    services/brain-api/tests/test_self_improvement_shadow_reference_adapter.py|\
+    services/brain-api/tests/test_self_improvement_shadow_regression_proposals.py|\
+    services/brain-api/tests/test_self_improvement_shadow_retention.py|\
+    services/brain-api/tests/test_self_improvement_shadow_review_items.py)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
 aion151_validate_scoped_authorization_if_present() {
   if [[ -f examples/release/v02-production-auth-implementation-authorization.json ]]; then
     python3 scripts/lib/v02_production_auth_authorization.py --repo-root "$ROOT_DIR" --mode no-go

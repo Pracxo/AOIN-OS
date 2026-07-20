@@ -43,6 +43,9 @@ AION_175_MERGED_AT = "2026-07-19T06:17:29Z"
 AION_176_FEATURE_COMMIT = "1738f49ff22e197dd8fff3038fc8429306eadf76"
 AION_176_MERGE_COMMIT = "ee50f1cc9ed3573661d1571954421abfb749e877"
 AION_176_MERGED_AT = "2026-07-19T10:02:18Z"
+AION_177_FEATURE_COMMIT = "b1f3f721038ffffe5d78115f7efe8da7f493b677"
+AION_177_MERGE_COMMIT = "544c71ed18530699eb1756674d38c874af8a0aae"
+AION_177_MERGED_AT = "2026-07-19T20:18:44Z"
 OPERATOR_EVALUATION_ID = "AION-OE-001"
 OPERATOR_EVALUATION_DECISION = (
     "OPERATOR_EVALUATION_PASS_RECOMMEND_SHADOW_MODE_AUTHORIZATION_REVIEW"
@@ -717,6 +720,41 @@ AION177_REQUIRED_EXAMPLES = (
     "operator-console-static/demo-data/self-improvement-shadow-mode-runtime-hold.json",
 )
 
+AION178_REQUIRED_DOCS = (
+    "docs/self-improvement/shadow-mode-implementation.md",
+    "docs/self-improvement/shadow-mode-reference-adapters.md",
+    "docs/self-improvement/shadow-mode-pipeline.md",
+    "docs/self-improvement/shadow-mode-evidence.md",
+    "docs/self-improvement/shadow-mode-output-and-retention.md",
+    "docs/self-improvement/shadow-mode-operator-runbook.md",
+    "docs/self-improvement/shadow-mode-security-review.md",
+    "docs/self-improvement/aion-178-checklist.md",
+    "docs/release/self-improvement-shadow-mode-implementation.md",
+    "docs/release/self-improvement-shadow-mode-security-evidence.md",
+    "docs/release/self-improvement-shadow-mode-implementation-runtime-hold.md",
+    "docs/release/self-improvement-shadow-mode-implementation-no-go.md",
+    "docs/release/self-improvement-shadow-mode-implementation-checklist.md",
+    "docs/release/self-improvement-shadow-mode-implementation-evidence-matrix.md",
+    "docs/adr/0163-controlled-self-improvement-shadow-mode-plane.md",
+)
+
+AION178_REQUIRED_EXAMPLES = (
+    "examples/self-improvement/shadow-observation-manifest.json",
+    "examples/self-improvement/shadow-reference-snapshot.json",
+    "examples/self-improvement/shadow-evaluation-summary.json",
+    "examples/self-improvement/shadow-failure-pattern.json",
+    "examples/self-improvement/shadow-hypothesis.json",
+    "examples/self-improvement/shadow-regression-test-proposal.json",
+    "examples/self-improvement/shadow-improvement-proposal.json",
+    "examples/self-improvement/shadow-operator-review-item.json",
+    "examples/self-improvement/shadow-budget-failure.json",
+    "examples/self-improvement/shadow-run-diagnostics.json",
+    "examples/self-improvement/shadow-evidence-bundle.json",
+    "operator-console-static/demo-data/self-improvement-shadow-mode-plane.json",
+    "operator-console-static/demo-data/self-improvement-shadow-mode-review-items.json",
+    "operator-console-static/demo-data/self-improvement-shadow-mode-runtime-hold.json",
+)
+
 PRIVATE_MARKERS = (
     "raw prompt",
     "raw_prompt",
@@ -810,9 +848,14 @@ def validate_no_go(repo_root: Path) -> None:
     for item in required_prohibited_scope:
         if item not in active.get("prohibited_scope", []):
             raise GovernanceValidationError(f"{item} must be prohibited")
-    for relative in AION177_PROHIBITED_SOURCE_FILES:
-        if (repo_root / relative).exists():
-            raise GovernanceValidationError(f"AION-178 runtime source must be absent: {relative}")
+    if active.get("shadow_mode_implemented") is True:
+        for relative in AION178_ALLOWED_CREATE:
+            if not (repo_root / relative).is_file():
+                raise GovernanceValidationError(f"AION-178 runtime source must exist: {relative}")
+    else:
+        for relative in AION177_PROHIBITED_SOURCE_FILES:
+            if (repo_root / relative).exists():
+                raise GovernanceValidationError(f"AION-178 runtime source must be absent: {relative}")
 
 
 def validate_authorization_ledger(payload: dict[str, Any]) -> None:
@@ -1067,6 +1110,7 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
     _require("AION-175" in by_task, "AION-175 record missing")
     _require("AION-176" in by_task, "AION-176 record missing")
     _require("AION-177" in by_task, "AION-177 record missing")
+    _require("AION-178" in by_task, "AION-178 record missing")
     aion164 = by_task["AION-164"]
     _require(aion164.get("pull_requests") == [75], "AION-164 PR mismatch")
     _require(
@@ -1337,16 +1381,46 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
         aion177.get("branch") == "phase/self-improvement-shadow-mode-authorization",
         "AION-177 branch",
     )
+    _require(aion177.get("feature_commits") == [AION_177_FEATURE_COMMIT], "AION-177 feature")
+    _require(aion177.get("pull_requests") == [88], "AION-177 PR mismatch")
+    _require(aion177.get("merge_commits") == [AION_177_MERGE_COMMIT], "AION-177 merge")
+    _require(aion177.get("ci_result") == "pass", "AION-177 CI result")
     _require(aion177.get("authorization_transaction") == SHADOW_AUTHORIZATION_ID, "AION-177 auth")
     _require(aion177.get("next_task") == SHADOW_IMPLEMENTATION_TASK, "AION-177 next task")
     _require(
-        aion177.get("authorization_state") == "active_for_AION-178_shadow_mode_only",
+        aion177.get("authorization_state") == "active_until_AION-179_closeout",
         "AION-177 authorization state",
     )
     _require(
-        aion177.get("runtime_state") == "authorization_only_shadow_mode_not_implemented",
+        aion177.get("runtime_state") == "shadow_mode_authorized_not_implemented",
         "AION-177 runtime state",
     )
+    _require(
+        aion177.get("completion_timestamp") == AION_177_MERGED_AT,
+        "AION-177 completion timestamp",
+    )
+
+    aion178 = by_task["AION-178"]
+    _require(
+        aion178.get("branch") == "phase/self-improvement-shadow-mode-plane",
+        "AION-178 branch",
+    )
+    _require(aion178.get("feature_commits") == [], "AION-178 feature commits pending")
+    _require(aion178.get("pull_requests") == [], "AION-178 PR pending")
+    _require(aion178.get("merge_commits") == [], "AION-178 merge pending")
+    _require(aion178.get("ci_result") == "pending", "AION-178 CI pending")
+    _require(aion178.get("authorization_transaction") == SHADOW_AUTHORIZATION_ID, "AION-178 auth")
+    _require(
+        aion178.get("authorization_state")
+        == "implementation_in_progress_formal_closeout_AION-179",
+        "AION-178 authorization state",
+    )
+    _require(aion178.get("next_task") == "AION-179", "AION-178 next task")
+    _require(
+        aion178.get("runtime_state") == "shadow_mode_implemented_operator_invoked_disabled",
+        "AION-178 runtime state",
+    )
+    _require(aion178.get("completion_timestamp") is None, "AION-178 timestamp pending")
 
 
 def validate_operator_evaluation_closeout(payload: dict[str, Any]) -> None:
@@ -1381,11 +1455,19 @@ def validate_shadow_runtime_hold_example(payload: dict[str, Any]) -> None:
     _require(payload.get("program_id") == PROGRAM_ID, "shadow runtime hold program id")
     _require(payload.get("authorization_transaction_id") == SHADOW_AUTHORIZATION_ID, "hold auth id")
     _require(payload.get("shadow_mode_authorized") is True, "shadow authorized")
-    _require(payload.get("shadow_mode_implemented") is False, "shadow implemented")
+    if payload.get("shadow_mode_implemented") is True:
+        _require(
+            payload.get("shadow_mode_implementation_state")
+            == "implemented_operator_invoked_disabled",
+            "shadow implementation state",
+        )
+        for relative in AION178_ALLOWED_CREATE:
+            _require(relative in payload.get("required_source_files_present", []), relative)
+    else:
+        for relative in AION177_PROHIBITED_SOURCE_FILES:
+            _require(relative in payload.get("prohibited_source_files_absent", []), relative)
     for key in SHADOW_PROHIBITED_FLAGS:
         _require(payload.get(key) is False, f"runtime hold {key}")
-    for relative in AION177_PROHIBITED_SOURCE_FILES:
-        _require(relative in payload.get("prohibited_source_files_absent", []), relative)
 
 
 def _validate_shadow_authorization_record(record: dict[str, Any]) -> None:
@@ -1412,7 +1494,22 @@ def _validate_shadow_authorization_record(record: dict[str, Any]) -> None:
     _require(record.get("operator_evaluation_used_as_approval") is False, "operator approval")
     _require(record.get("operator_evaluation_reusable") is False, "operator reusable")
     _require(record.get("shadow_mode_authorized") is True, "shadow authorized")
-    _require(record.get("shadow_mode_implemented") is False, "shadow implemented")
+    if record.get("shadow_mode_implemented") is True:
+        _require(
+            record.get("shadow_mode_implementation_state")
+            == "implemented_operator_invoked_disabled",
+            "shadow implementation state",
+        )
+        _require(
+            record.get("operator_invoked_shadow_runs_supported") is True,
+            "operator-invoked shadow runs supported",
+        )
+        _require(
+            record.get("operator_invoked_batch_runner_available") is True,
+            "operator batch runner available",
+        )
+    else:
+        _require(record.get("shadow_mode_implemented") is False, "shadow implemented")
     _require(
         record.get("shadow_mode_runtime_enabled") is False,
         "shadow_mode_runtime_enabled must be false",
@@ -1471,7 +1568,14 @@ def _current_authorization_record(payload: dict[str, Any]) -> dict[str, Any]:
 
 
 def _require_required_docs(repo_root: Path) -> None:
-    for relative in (*REQUIRED_DOCS, *AION177_REQUIRED_DOCS, *AION177_REQUIRED_EXAMPLES):
+    required = (
+        *REQUIRED_DOCS,
+        *AION177_REQUIRED_DOCS,
+        *AION177_REQUIRED_EXAMPLES,
+        *AION178_REQUIRED_DOCS,
+        *AION178_REQUIRED_EXAMPLES,
+    )
+    for relative in required:
         if not (repo_root / relative).is_file():
             raise GovernanceValidationError(f"missing required doc: {relative}")
 
@@ -1492,6 +1596,8 @@ def _validate_adr_index(repo_root: Path) -> None:
         raise GovernanceValidationError("ADR 0161 is not indexed")
     if "0162-controlled-self-improvement-shadow-mode-authorization.md" not in index:
         raise GovernanceValidationError("ADR 0162 is not indexed")
+    if "0163-controlled-self-improvement-shadow-mode-plane.md" not in index:
+        raise GovernanceValidationError("ADR 0163 is not indexed")
 
 
 def _validate_docs_do_not_store_private_material(repo_root: Path) -> None:

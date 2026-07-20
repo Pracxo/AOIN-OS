@@ -31,3 +31,10 @@ Forbidden review states:
 
 Any later source-changing work requires a separate explicit approval record and
 must not reuse AION-177.
+## AION-178 Operator Workflow Update
+
+Operators can invoke the controlled shadow plane only by supplying a manifest
+and read-only redacted reference snapshots to the Python runner. The default
+run writes no files. Optional output requires an existing absolute directory
+outside the repository. Operator review items remain advisory and expire under
+the retention limit.

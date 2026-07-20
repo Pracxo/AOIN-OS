@@ -83,6 +83,14 @@ Instructions for future Codex runs in this repository:
   dependencies, add migrations, activate runtime self-improvement, rewrite
   source, mutate Git state, create pull requests, merge, deploy, call providers
   or connectors, train model weights, create v0.2 tags, or create releases.
+- AION-178 controlled shadow-mode implementation work may touch only the scoped
+  shadow contracts, shadow runtime-disabled helper modules, focused tests, docs,
+  examples, static evidence, and local gates. The shadow plane must remain
+  operator-invoked, read-only, advisory, non-influencing, and runtime-disabled.
+  It must not route evidence into runtime response, retrieval, planning, policy,
+  tool selection, source mutation, Git mutation, PR creation, approval creation,
+  merge, canary, deployment, active-learning promotion, or model-weight
+  training. AION-177-SI-0006 remains active pending AION-179 closeout.
 - Disabled production-auth request identity boundary work may add internal
   production-auth request identity contracts, disabled verifier wiring,
   observe-only middleware, anonymous request-state evidence, diagnostics, docs,

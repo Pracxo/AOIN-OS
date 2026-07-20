@@ -1,0 +1,424 @@
+{
+  "activation_phase_id": "AION-SELF-IMPROVEMENT-SHADOW-001",
+  "active_learning_promoted": false,
+  "approval_created": false,
+  "audit_events": [
+    {
+      "audit_event_id": "audit-shadow-run-1",
+      "created_at": "2026-07-20T12:00:00Z",
+      "event_type": "shadow_run_completed",
+      "fingerprint": "82a0b86635002f200c674aa7dbf96fa980958e1857c4eaa188072e01e9618140",
+      "reason_codes": [
+        "shadow_run_completed",
+        "shadow_pattern_detected"
+      ],
+      "redacted": true,
+      "reference_count": 1,
+      "run_id": "shadow-run-1",
+      "runtime_effect": false
+    }
+  ],
+  "authorization_scope": "read-only-shadow-observation-evaluation-pattern-mining-proposal-generation",
+  "authorization_transaction_id": "AION-177-SI-0006",
+  "budget_decision": {
+    "budget": {
+      "git_operations": 0,
+      "maximum_benchmark_cost_units": 50,
+      "maximum_concurrency": 4,
+      "maximum_evaluation_records": 1000,
+      "maximum_failure_patterns": 100,
+      "maximum_hypotheses": 50,
+      "maximum_observation_references": 1000,
+      "maximum_operator_output_files": 20,
+      "maximum_output_bytes": 10485760,
+      "maximum_regression_test_proposals": 25,
+      "maximum_shadow_proposals": 10,
+      "maximum_wall_clock_seconds": 1800.0,
+      "network_calls": 0,
+      "real_pull_requests": 0,
+      "runtime_promotions": 0,
+      "schema_version": "self-improvement-shadow-budget/v1",
+      "source_mutations": 0
+    },
+    "fail_closed": false,
+    "fingerprint": "5efaabdec92f82bc771a9b3c07fa70479ada632c8c046184c709efb2cb7f9d10",
+    "quality_override_allowed": false,
+    "reason_codes": [
+      "shadow_budget_satisfied"
+    ],
+    "run_stopped": false,
+    "usage": {
+      "benchmark_cost_units": 0,
+      "concurrency": 4,
+      "evaluation_records": 1,
+      "failure_patterns": 1,
+      "git_operations": 0,
+      "hypotheses": 1,
+      "network_calls": 0,
+      "observation_references": 1,
+      "output_bytes": 0,
+      "output_files": 0,
+      "real_pull_requests": 0,
+      "regression_test_proposals": 1,
+      "runtime_promotions": 0,
+      "shadow_proposals": 1,
+      "source_mutations": 0,
+      "wall_clock_seconds": 0.0
+    },
+    "violations": [],
+    "within_budget": true
+  },
+  "budget_failure": null,
+  "created_at": "2026-07-20T12:00:00Z",
+  "diagnostics": {
+    "approval_created": false,
+    "background_loop": false,
+    "benchmark_cost_units": 0,
+    "created_at": "2026-07-20T12:00:00Z",
+    "evaluation_count": 1,
+    "fingerprint": "81ebbf1d81fd821df8909169261c2615bf5f5ca59e8bcbb9df5d62a9a9da2849",
+    "git_operations": 0,
+    "hypothesis_count": 1,
+    "implementation_authorization_created": false,
+    "network_calls": 0,
+    "observation_count": 1,
+    "operator_invoked": true,
+    "operator_review_item_count": 1,
+    "output_bytes": 0,
+    "output_files": 0,
+    "pattern_count": 1,
+    "production_event_subscription": false,
+    "real_pull_requests": 0,
+    "reference_count": 1,
+    "regression_proposal_count": 1,
+    "run_id": "shadow-run-1",
+    "runtime_effect": false,
+    "runtime_promotions": 0,
+    "schema_version": "self-improvement-shadow-diagnostics/v1",
+    "shadow_mode_implementation_state": "implemented_operator_invoked_disabled",
+    "shadow_mode_implemented": true,
+    "shadow_mode_runtime_enabled": false,
+    "shadow_proposal_count": 1,
+    "source_mutations": 0,
+    "wall_clock_seconds": 0.0
+  },
+  "evaluation_summary": {
+    "active_learning_promoted": false,
+    "approval_created": false,
+    "benchmark_cost_units": 0,
+    "created_at": "2026-07-20T12:00:00Z",
+    "evaluation_id": "shadow-evaluation-1",
+    "fingerprint": "02742c7075e816e28fdad7551983ac6bf1769b3932cf28990fe83dd806550228",
+    "git_mutated": false,
+    "implementation_authorization_created": false,
+    "merged": false,
+    "metric_drifts": [
+      {
+        "absolute_delta": 0.29999999999999993,
+        "baseline_value": 0.7,
+        "current_value": 0.4,
+        "fingerprint": "607f655c703474bf1b160c1725761b3730966b32cad9c2d0eb5771d0b326cc3f",
+        "higher_is_better": true,
+        "metric_name": "retrieval_precision",
+        "regressed": true,
+        "target_gap": 0.4,
+        "target_met": false,
+        "target_value": 0.8
+      }
+    ],
+    "observation_ids": [
+      "shadow-observation-1"
+    ],
+    "policy_violation_count": 0,
+    "pull_request_created": false,
+    "regression_count": 1,
+    "review_state": "shadow_evaluated",
+    "runtime_effect": false,
+    "schema_version": "self-improvement-shadow-diagnostics/v1",
+    "source_modified": false,
+    "target_miss_count": 1,
+    "weakest_metric": "retrieval_precision"
+  },
+  "example_id": "shadow-evidence-bundle",
+  "expires_at": "2026-07-21T12:00:00Z",
+  "failure_patterns": [
+    {
+      "confidence": 0.4,
+      "created_at": "2026-07-20T12:00:00Z",
+      "failure_pattern_id": "shadow-pattern-1",
+      "fingerprint": "2e1d1012f66a7444f83c311d72de7e521368a28435696f491d7b21beca1292a0",
+      "frequency": 2,
+      "pattern_key": "retrieval_precision",
+      "pattern_type": "retrieval_failure",
+      "problem_summary": "Repeated retrieval failure for retrieval_precision across 2 redacted observations.",
+      "review_state": "shadow_pattern_detected",
+      "schema_version": "self-improvement-shadow-pattern/v1",
+      "severity": "low",
+      "source_observation_ids": [
+        "shadow-observation-1"
+      ],
+      "source_reference_fingerprints": [
+        "ba12d4e688877f26a49e81c4c1569b66cb5ea18ff87cc631feec7590a581aed2"
+      ]
+    }
+  ],
+  "fingerprint": "55d0c8e160dc26d0fbb3b1188c4eae64a46332dfbde2a031da50ca4a2e32d3be",
+  "git_mutated": false,
+  "hypotheses": [
+    {
+      "change_type": "retrieval_ranking_candidate",
+      "confidence": 0.4,
+      "created_at": "2026-07-20T12:00:00Z",
+      "failure_pattern_id": "shadow-pattern-1",
+      "fingerprint": "c29f5eccaca5358365ec3e1e9f8581aa087d42fc8b84c1b927e36c2713db6e4f",
+      "hypothesis_id": "shadow-hypothesis-1",
+      "requires_separate_authorization": false,
+      "review_state": "shadow_hypothesis_generated",
+      "schema_version": "self-improvement-shadow-hypothesis/v1",
+      "statement": "Review retrieval_precision with a bounded retrieval ranking candidate to increase retrieval_precision.",
+      "suggested_scope_labels": [
+        "retrieval_failure",
+        "retrieval_ranking_candidate"
+      ],
+      "target_delta": 0.04,
+      "target_direction": "increase",
+      "target_metric": "retrieval_precision"
+    }
+  ],
+  "implementation_authorization_created": false,
+  "implementation_task": "AION-178",
+  "manifest_fingerprint": "49ea74ba7ddf9b896133c47a6611f6a72f16a652a86eaa56b37a90b98274c5b2",
+  "manifest_id": "shadow-manifest-1",
+  "merged": false,
+  "observations": [
+    {
+      "active_learning_promoted": false,
+      "approval_created": false,
+      "created_at": "2026-07-20T12:00:00Z",
+      "evidence_reference_fingerprints": [
+        "ba12d4e688877f26a49e81c4c1569b66cb5ea18ff87cc631feec7590a581aed2"
+      ],
+      "fingerprint": "60d7d0395a7fee87cc530ac68d5863dea979b31119cd49dbcb48c4ae2fe7bfdd",
+      "git_mutated": false,
+      "implementation_authorization_created": false,
+      "merged": false,
+      "metrics": [
+        {
+          "baseline_value": 0.7,
+          "current_value": 0.4,
+          "higher_is_better": true,
+          "metric_name": "retrieval_precision",
+          "recorded_at": "2026-07-20T12:00:00Z",
+          "reference_id": "shadow-ref-1",
+          "target_value": 0.8,
+          "weight": 1.0
+        }
+      ],
+      "observation_id": "shadow-observation-1",
+      "operator_review_required": true,
+      "problem_category": "retrieval_failure",
+      "problem_summary": "Retrieval precision trailed the redacted target.",
+      "pull_request_created": false,
+      "repeated_count": 2,
+      "review_state": "shadow_observed",
+      "runtime_effect": false,
+      "schema_version": "self-improvement-shadow-observation/v1",
+      "shadow_mode": true,
+      "shadow_only": true,
+      "source_modified": false,
+      "source_reference": {
+        "observed_at": "2026-07-20T12:00:00Z",
+        "read_only": true,
+        "redacted": true,
+        "reference_fingerprint": "ba12d4e688877f26a49e81c4c1569b66cb5ea18ff87cc631feec7590a581aed2",
+        "reference_id": "shadow-ref-1",
+        "reference_kind": "evaluation",
+        "repeated_count": 2,
+        "schema_version": "self-improvement-shadow-reference/v1",
+        "source_version": "source-v1"
+      },
+      "target_metric_value": 0.8,
+      "weakest_metric": "retrieval_precision",
+      "weakest_metric_value": 0.4
+    }
+  ],
+  "operator_review_items": [
+    {
+      "active_learning_promoted": false,
+      "approval_created": false,
+      "budget_status": "within_budget",
+      "created_at": "2026-07-20T12:00:00Z",
+      "expires_at": "2026-07-21T12:00:00Z",
+      "fingerprint": "7d44becc262def0be8931985cd767248797cbbb73a17f0cb176e84f383b65518",
+      "git_mutated": false,
+      "hypothesis_summary": "Hypothesis shadow-hypothesis-1 remains advisory.",
+      "implementation_authorization_created": false,
+      "merged": false,
+      "observation_summary": "Repeated retrieval failure for retrieval_precision across 2 redacted observations.",
+      "operator_review_required": true,
+      "pattern_summary": "Pattern shadow-pattern-1 requires review.",
+      "policy_delta_summary": "No policy change is applied.",
+      "pull_request_created": false,
+      "reason_codes": [
+        "shadow_operator_review_required"
+      ],
+      "regression_test_summary": "Regression proposal is specification only.",
+      "review_item_id": "shadow-review-1",
+      "review_state": "operator_review_pending",
+      "risk_level": "medium",
+      "runtime_effect": false,
+      "schema_version": "self-improvement-shadow-review-item/v1",
+      "shadow_proposal_id": "shadow-proposal-1",
+      "source_modified": false,
+      "source_reference_fingerprints": [
+        "ba12d4e688877f26a49e81c4c1569b66cb5ea18ff87cc631feec7590a581aed2"
+      ]
+    }
+  ],
+  "operator_review_required": true,
+  "outcome": "completed",
+  "program_id": "AION-SELF-IMPROVEMENT-001",
+  "provenance": {
+    "authorization_transaction_id": "AION-177-SI-0006",
+    "created_at": "2026-07-20T12:00:00Z",
+    "fingerprint": "3fb6180466eda9e143cb99389088794e3b7c82228446b46b1ab8f468809159c5",
+    "hypothesis_ids": [
+      "shadow-hypothesis-1"
+    ],
+    "manifest_fingerprint": "49ea74ba7ddf9b896133c47a6611f6a72f16a652a86eaa56b37a90b98274c5b2",
+    "observation_ids": [
+      "shadow-observation-1"
+    ],
+    "pattern_ids": [
+      "shadow-pattern-1"
+    ],
+    "proposal_ids": [
+      "shadow-proposal-1"
+    ],
+    "provenance_record_id": "provenance-shadow-run-1",
+    "redacted": true,
+    "reference_fingerprints": [
+      "ba12d4e688877f26a49e81c4c1569b66cb5ea18ff87cc631feec7590a581aed2"
+    ],
+    "review_item_ids": [
+      "shadow-review-1"
+    ],
+    "run_id": "shadow-run-1",
+    "runtime_effect": false
+  },
+  "pull_request_created": false,
+  "read_only": true,
+  "reason_codes": [
+    "shadow_run_completed",
+    "shadow_pattern_detected"
+  ],
+  "redacted": true,
+  "regression_test_proposals": [
+    {
+      "created_at": "2026-07-20T12:00:00Z",
+      "expected_behavior": "Future separately authorized work should increase retrieval_precision without side effects.",
+      "failing_condition": "Redacted metric retrieval_precision misses target.",
+      "failure_pattern_id": "shadow-pattern-1",
+      "fingerprint": "703de1b5158d8be47f9325843624d99fab783c606486953906d9f61ddf14478e",
+      "hypothesis_id": "shadow-hypothesis-1",
+      "proposed_assertion_summaries": [
+        "Candidate remains review only.",
+        "Runtime influence remains false.",
+        "Separate governance review is required before implementation."
+      ],
+      "regression_proposal_id": "shadow-regression-1",
+      "review_state": "shadow_regression_proposed",
+      "schema_version": "self-improvement-shadow-regression-proposal/v1",
+      "source_reference_fingerprints": [
+        "c29f5eccaca5358365ec3e1e9f8581aa087d42fc8b84c1b927e36c2713db6e4f"
+      ],
+      "suggested_test_area": "brain_api_retrieval_tests",
+      "test_name": "shadow_test_retrieval_precision"
+    }
+  ],
+  "resource_budget": {
+    "git_operations": 0,
+    "maximum_benchmark_cost_units": 50,
+    "maximum_concurrency": 4,
+    "maximum_evaluation_records": 1000,
+    "maximum_failure_patterns": 100,
+    "maximum_hypotheses": 50,
+    "maximum_observation_references": 1000,
+    "maximum_operator_output_files": 20,
+    "maximum_output_bytes": 10485760,
+    "maximum_regression_test_proposals": 25,
+    "maximum_shadow_proposals": 10,
+    "maximum_wall_clock_seconds": 1800.0,
+    "network_calls": 0,
+    "real_pull_requests": 0,
+    "runtime_promotions": 0,
+    "schema_version": "self-improvement-shadow-budget/v1",
+    "source_mutations": 0
+  },
+  "resource_usage": {
+    "benchmark_cost_units": 0,
+    "concurrency": 4,
+    "evaluation_records": 1,
+    "failure_patterns": 1,
+    "git_operations": 0,
+    "hypotheses": 1,
+    "network_calls": 0,
+    "observation_references": 1,
+    "output_bytes": 0,
+    "output_files": 0,
+    "real_pull_requests": 0,
+    "regression_test_proposals": 1,
+    "runtime_promotions": 0,
+    "shadow_proposals": 1,
+    "source_mutations": 0,
+    "wall_clock_seconds": 0.0
+  },
+  "run_id": "shadow-run-1",
+  "runtime_effect": false,
+  "schema_version": "self-improvement-shadow-evidence/v1",
+  "shadow_mode": true,
+  "shadow_mode_authorized": true,
+  "shadow_mode_implementation_state": "implemented_operator_invoked_disabled",
+  "shadow_mode_implemented": true,
+  "shadow_mode_runtime_enabled": false,
+  "shadow_only": true,
+  "shadow_proposals": [
+    {
+      "active_learning_promoted": false,
+      "approval_created": false,
+      "change_type": "retrieval_ranking_candidate",
+      "created_at": "2026-07-20T12:00:00Z",
+      "failure_pattern_id": "shadow-pattern-1",
+      "fingerprint": "c088cd781bb5fffce92a0f96fcec340b748a44c62449b68158c4a20731b98566",
+      "git_mutated": false,
+      "hypothesis_id": "shadow-hypothesis-1",
+      "implementation_authorization_created": false,
+      "merged": false,
+      "operator_review_required": true,
+      "problem_summary": "Repeated retrieval failure for retrieval_precision across 2 redacted observations.",
+      "pull_request_created": false,
+      "regression_proposal_ids": [
+        "shadow-regression-1"
+      ],
+      "requires_separate_authorization": false,
+      "review_state": "shadow_proposal_generated",
+      "risk_level": "medium",
+      "runtime_effect": false,
+      "schema_version": "self-improvement-shadow-proposal/v1",
+      "shadow_proposal_id": "shadow-proposal-1",
+      "source_modified": false,
+      "source_reference_fingerprints": [
+        "ba12d4e688877f26a49e81c4c1569b66cb5ea18ff87cc631feec7590a581aed2"
+      ],
+      "suggested_scope_labels": [
+        "retrieval_failure",
+        "retrieval_ranking_candidate"
+      ],
+      "target_delta": 0.04,
+      "target_direction": "increase",
+      "target_metric": "retrieval_precision"
+    }
+  ],
+  "source_modified": false,
+  "synthetic": true
+}

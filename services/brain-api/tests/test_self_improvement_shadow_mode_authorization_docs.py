@@ -42,19 +42,17 @@ def test_shadow_mode_authorization_scripts_are_executable() -> None:
 
 def test_shadow_mode_static_console_evidence_is_read_only() -> None:
     payload = _json(
-        "operator-console-static/demo-data/self-improvement-shadow-mode-authorization.json"
+        "operator-console-static/demo-data/self-improvement-shadow-mode-plane.json"
     )
     assert payload["authorization_transaction_id"] == SHADOW_AUTHORIZATION_ID
     assert payload["implementation_task"] == SHADOW_IMPLEMENTATION_TASK
     assert payload["synthetic"] is True
     assert payload["read_only"] is True
-    assert payload["shadow_mode_authorized"] is True
-    assert payload["shadow_mode_implemented"] is False
+    assert payload["shadow_mode"] is True
+    assert payload["shadow_mode_implemented"] is True
     assert payload["shadow_mode_runtime_enabled"] is False
-    assert any(
-        item["action"] == "self_improvement.shadow.merge"
-        for item in payload["forbidden_actions"]
-    )
+    assert payload["runtime_effect"] is False
+    assert payload["diagnostics"]["network_calls"] == 0
 
 
 def _json(relative: str) -> dict[str, Any]:

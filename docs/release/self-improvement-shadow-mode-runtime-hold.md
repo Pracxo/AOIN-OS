@@ -3,7 +3,8 @@
 Runtime hold requirements:
 
 - `shadow_mode_authorized=true`
-- `shadow_mode_implemented=false`
+- `shadow_mode_implemented=true`
+- `shadow_mode_implementation_state=implemented_operator_invoked_disabled`
 - `shadow_mode_runtime_enabled=false`
 - `shadow_mode_source_rewrite_enabled=false`
 - `shadow_mode_git_write_enabled=false`
@@ -29,6 +30,14 @@ Runtime hold requirements:
 - `v02_tag_created=false`
 - `v02_release_created=false`
 
-The runtime hold script must fail if any AION-178 source file exists during
-AION-177, if any prohibited flag becomes true, or if v0.2 tags or releases
-appear.
+The runtime hold script must require the exact AION-178 source files and fail if
+any prohibited flag becomes true, or if v0.2 tags or releases appear.
+## AION-178 Runtime Hold Update
+
+The shadow plane is implemented but still disabled at runtime:
+`shadow_mode_implementation_state=implemented_operator_invoked_disabled` and
+`shadow_mode_runtime_enabled=false`. It has no kernel registration, startup
+registration, scheduler, production event subscription, network call,
+connector call, provider call, source rewrite, Git mutation, PR creation,
+approval creation, merge, active promotion, production canary, deployment, or
+model-weight training.
