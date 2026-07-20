@@ -1643,10 +1643,23 @@ def _require(condition: bool, message: str) -> None:
         raise GovernanceValidationError(message)
 
 
+def validate_shadow_operator_evaluation_no_go(repo_root: Path) -> None:
+    validate_repo(repo_root)
+    validate_no_go(repo_root)
+
+
+def validate_shadow_operator_evaluation(repo_root: Path) -> None:
+    validate_shadow_operator_evaluation_no_go(repo_root)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo-root", type=Path, default=Path.cwd())
-    parser.add_argument("--mode", choices=("check", "no-go"), default="check")
+    parser.add_argument(
+        "--mode",
+        choices=("check", "no-go", "shadow-operator-evaluation-no-go", "shadow-operator-evaluation"),
+        default="check",
+    )
     args = parser.parse_args()
 
     if args.mode == "check":
@@ -1669,9 +1682,13 @@ def main() -> int:
                 "archived",
             )
         )
-    else:
+    elif args.mode == "no-go":
         validate_repo(args.repo_root)
         validate_no_go(args.repo_root)
+    elif args.mode == "shadow-operator-evaluation-no-go":
+        validate_shadow_operator_evaluation_no_go(args.repo_root)
+    else:
+        validate_shadow_operator_evaluation(args.repo_root)
     print(f"self-improvement governance {args.mode} PASS")
     return 0
 
