@@ -1176,3 +1176,20 @@ Local checks:
 ## AION-164 Replay Protection Static Evidence
 
 The static console now includes `identity-assertion-replay-protection.json` and `identity-assertion-replay-runtime-hold.json`. These payloads are synthetic, read-only, and show only replay core status plus runtime-hold flags; they do not enable authentication or activation.
+
+## AION-180 Shadow Activation Authorization
+
+The static console reads these synthetic, read-only evidence files:
+
+- `demo-data/self-improvement-shadow-activation-authorization.json`
+- `demo-data/self-improvement-shadow-activation-runtime-hold.json`
+
+They show `AION-180-SI-0007` as the sole active implementation authorization for AION-181 while keeping shadow activation, shadow runtime, network calls, connector calls, provider calls, source mutation, Git mutation, pull request creation, approval creation, merge, promotion, canary, deployment, model training, v0.2 tags, and v0.2 releases disabled or absent.
+
+Local checks:
+
+```sh
+./scripts/self-improvement-shadow-activation-authorization-no-go-regression.sh
+./scripts/self-improvement-shadow-activation-authorization-check.sh
+./scripts/self-improvement-shadow-activation-runtime-hold.sh
+```

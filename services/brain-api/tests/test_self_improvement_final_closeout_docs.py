@@ -42,6 +42,7 @@ from self_improvement_governance import (  # noqa: E402
     CANARY_AUTHORIZATION_ID,
     GOVERNANCE_FALSE_FLAGS,
     GOVERNANCE_TRUE_FLAGS,
+    SHADOW_ACTIVATION_AUTHORIZATION_ID,
     SHADOW_AUTHORIZATION_ID,
     SHADOW_IMPLEMENTATION_TASK,
     SHADOW_OPERATOR_EVALUATION_DECISION,
@@ -117,12 +118,16 @@ def test_aion175_closes_canary_authorization_without_new_implementation_auth() -
     validate_no_go(ROOT)
 
     records = payload["records"]
-    assert len(records) == 7
+    assert len(records) == 8
     active_records = [record for record in records if record["authorization_active"] is True]
-    assert active_records == []
-    assert payload["active_self_improvement_implementation_authorization_count"] == 0
-    assert payload["active_self_improvement_implementation_authorization"] == "none"
-    assert payload["active_implementation_task"] == "none"
+    assert len(active_records) == 1
+    assert active_records[0]["authorization_transaction_id"] == SHADOW_ACTIVATION_AUTHORIZATION_ID
+    assert payload["active_self_improvement_implementation_authorization_count"] == 1
+    assert (
+        payload["active_self_improvement_implementation_authorization"]
+        == SHADOW_ACTIVATION_AUTHORIZATION_ID
+    )
+    assert payload["active_implementation_task"] == "AION-181"
 
     closeout = records[5]
     assert closeout["record_kind"] == "authorization_closeout"
@@ -222,15 +227,10 @@ def test_aion175_program_ledger_records_merged_final_task() -> None:
 
     aion179 = by_task["AION-179"]
     assert aion179["authorization_transaction"] == SHADOW_AUTHORIZATION_ID
-    assert (
-        aion179["authorization_state"]
-        == "closed_AION-177-SI-0006_no_new_implementation_authorization"
-    )
-    assert aion179["runtime_state"] == "shadow_mode_operator_evaluation_pass_runtime_disabled"
-    assert aion179["next_task"] == (
-        "controlled_activation_authorization_review_requires_new_human_approval"
-    )
-    assert aion179["ci_result"] == "pending"
+    assert aion179["authorization_state"] == "consumed_by_AION-178_closed_by_AION-179"
+    assert aion179["runtime_state"] == "shadow_mode_operator_evaluation_passed_runtime_disabled"
+    assert aion179["next_task"] == "AION-180"
+    assert aion179["ci_result"] == "pass"
 
 
 def test_final_readiness_report_has_required_capabilities_safety_and_evaluation_steps() -> None:

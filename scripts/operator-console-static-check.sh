@@ -457,7 +457,45 @@ for path in sorted(demo_dir.glob("*.json")):
                 and normalized not in allowed_true_keys
                 and any(marker in normalized for marker in blocked_true_markers)
             ):
-                raise SystemExit(f"self-improvement shadow-mode flag must not be true: {key}: {path}")
+                raise SystemExit(
+                    f"self-improvement shadow-mode flag must not be true: {key}: {path}"
+                )
+        continue
+    if path.name.startswith("self-improvement-shadow-activation-"):
+        if path.name not in {
+            "self-improvement-shadow-activation-authorization.json",
+            "self-improvement-shadow-activation-runtime-hold.json",
+        }:
+            raise SystemExit(f"unknown self-improvement shadow-activation demo: {path}")
+        if payload.get("read_only") is not True:
+            raise SystemExit(f"self-improvement shadow-activation demo must be read_only: {path}")
+        redaction_applied = payload.get("redaction_applied")
+        redacted = payload.get("redacted")
+        if redaction_applied is not True and redacted is not True:
+            raise SystemExit(f"self-improvement shadow-activation demo must be redacted: {path}")
+        if payload.get("shadow_activation_control_plane_authorized") is not True:
+            raise SystemExit(f"shadow activation control plane must be authorized: {path}")
+        for key in (
+            "shadow_activation_control_plane_implemented",
+            "shadow_activation_enabled",
+            "shadow_mode_runtime_enabled",
+            "runtime_effect",
+            "network_calls_enabled",
+            "connector_calls_enabled",
+            "provider_calls_enabled",
+            "source_mutation_enabled",
+            "git_mutation_enabled",
+            "real_pull_request_creation_enabled",
+            "approval_creation_enabled",
+            "automatic_merge_enabled",
+            "production_canary_enabled",
+            "production_deployment_enabled",
+            "model_weight_training_enabled",
+            "v02_tag_created",
+            "v02_release_created",
+        ):
+            if payload.get(key) is not False:
+                raise SystemExit(f"self-improvement shadow-activation flag must be false: {key}: {path}")
         continue
     if payload.get("read_only") is not True:
         raise SystemExit(f"read_only must be true: {path}")
@@ -488,6 +526,8 @@ for path in sorted(demo_dir.glob("*.json")):
         "v02-actor-context-trust-boundary-authorization.json",
         "self-improvement-shadow-mode-authorization.json",
         "self-improvement-shadow-mode-activation-review-boundary.json",
+        "self-improvement-shadow-activation-authorization.json",
+        "self-improvement-shadow-activation-runtime-hold.json",
         "production-auth-core-status.json",
         "production-auth-runtime-hold.json",
         "production-auth-core-stabilization.json",

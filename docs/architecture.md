@@ -2645,3 +2645,8 @@ reference-only manifest and injected read-only adapter. It emits advisory
 evidence, diagnostics, and operator review items, while kernel, startup, API,
 policy, planning, retrieval, tool-selection, source, Git, PR, approval, merge,
 canary, deployment, promotion, and model-training surfaces remain unregistered.
+## AION-180 Shadow Activation Authorization
+
+AION-180 records `AION-180-SI-0007` as the sole active implementation authorization for AION-181. It authorizes construction of a disabled controlled shadow activation control plane only. It does not authorize activation, runtime enablement, source mutation, Git mutation, approval creation, merge, promotion, canary, deployment, model training, a v0.2 tag, or a v0.2 release.
+
+AION-SOE-001 remains successful advisory evidence and is not an approval. `AION-177-SI-0006` remains closed, expired, and non-reusable.

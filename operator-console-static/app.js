@@ -20,6 +20,7 @@
     readiness: "demo-data/release-readiness-view-model.json",
     release_candidate: "demo-data/post-v01-release-candidate.json",
     self_improvement_shadow_mode: "demo-data/self-improvement-shadow-mode-operator-evaluation.json",
+    self_improvement_shadow_activation: "demo-data/self-improvement-shadow-activation-authorization.json",
     module_lifecycle: "demo-data/module-lifecycle-dashboard.json",
     model_provider_hardening: "demo-data/provider-hardening-view-model.json",
     operator_actions: "demo-data/operator-action-preview.json",
@@ -34,7 +35,7 @@
     providers: ["model_provider_hardening"],
     actions: ["operator_actions"],
     auth: ["overview"],
-    evidence: ["registry_integrity", "audit_provenance", "self_improvement_shadow_mode"],
+    evidence: ["registry_integrity", "audit_provenance", "self_improvement_shadow_mode", "self_improvement_shadow_activation"],
     safety: ["settings_safety", "incidents"]
   };
   var SAFE_COPY_COMMANDS = [
@@ -190,6 +191,9 @@
     "./scripts/self-improvement-shadow-mode-runtime-hold.sh",
     "./scripts/self-improvement-shadow-mode-operator-evaluation-no-go-regression.sh",
     "./scripts/self-improvement-shadow-mode-operator-evaluation-check.sh",
+    "./scripts/self-improvement-shadow-activation-runtime-hold.sh",
+    "./scripts/self-improvement-shadow-activation-authorization-check.sh",
+    "./scripts/self-improvement-shadow-activation-authorization-no-go-regression.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {

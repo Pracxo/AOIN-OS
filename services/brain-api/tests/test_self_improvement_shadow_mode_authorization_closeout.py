@@ -14,6 +14,7 @@ from self_improvement_governance import (  # noqa: E402
     AION_178_FEATURE_COMMIT,
     AION_178_MERGE_COMMIT,
     AION_178_MERGED_AT,
+    SHADOW_ACTIVATION_AUTHORIZATION_ID,
     SHADOW_AUTHORIZATION_ID,
     SHADOW_OPERATOR_EVALUATION_DECISION,
     SHADOW_OPERATOR_EVALUATION_ID,
@@ -26,10 +27,13 @@ def test_aion_177_shadow_authorization_is_closed_by_aion_179() -> None:
     ledger = _json("docs/self-improvement/authorization-ledger.json")
     validate_authorization_ledger(ledger)
 
-    assert ledger["current_stage"] == "shadow_mode_operator_evaluation_passed_disabled"
-    assert ledger["active_self_improvement_implementation_authorization_count"] == 0
-    assert ledger["active_self_improvement_implementation_authorization"] == "none"
-    assert ledger["active_implementation_task"] == "none"
+    assert ledger["current_stage"] == "shadow_activation_control_plane_authorized_not_implemented"
+    assert ledger["active_self_improvement_implementation_authorization_count"] == 1
+    assert (
+        ledger["active_self_improvement_implementation_authorization"]
+        == SHADOW_ACTIVATION_AUTHORIZATION_ID
+    )
+    assert ledger["active_implementation_task"] == "AION-181"
 
     record = _record(ledger["records"], SHADOW_AUTHORIZATION_ID)
     assert record["record_kind"] == "authorization_closeout"
@@ -58,12 +62,10 @@ def test_program_ledger_records_aion_178_completion_and_aion_179_closeout() -> N
     assert aion178["completion_timestamp"] == AION_178_MERGED_AT
 
     aion179 = _task(program["records"], "AION-179")
-    assert (
-        aion179["authorization_state"]
-        == "closed_AION-177-SI-0006_no_new_implementation_authorization"
-    )
-    assert aion179["runtime_state"] == "shadow_mode_operator_evaluation_pass_runtime_disabled"
-    assert aion179["ci_result"] == "pending"
+    assert aion179["authorization_state"] == "consumed_by_AION-178_closed_by_AION-179"
+    assert aion179["runtime_state"] == "shadow_mode_operator_evaluation_passed_runtime_disabled"
+    assert aion179["next_task"] == "AION-180"
+    assert aion179["ci_result"] == "pass"
 
 
 def _json(relative: str) -> dict[str, Any]:

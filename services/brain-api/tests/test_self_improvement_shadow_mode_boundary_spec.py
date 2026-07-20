@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / "scripts/lib"))
 from self_improvement_governance import (  # noqa: E402
     AION178_ALLOWED_CREATE,
     SHADOW_ALLOWED_INPUTS,
+    SHADOW_AUTHORIZATION_ID,
     SHADOW_DISALLOWED_INPUTS,
     SHADOW_PROHIBITED_SCOPE,
 )
@@ -43,7 +44,8 @@ def test_aion178_creates_only_scoped_shadow_runtime_source() -> None:
     for relative in AION178_ALLOWED_CREATE:
         assert (ROOT / relative).is_file(), relative
     authorization = _json("docs/self-improvement/authorization-ledger.json")
-    prohibited = tuple(authorization["records"][-1]["prohibited_scope"])
+    shadow_record = _record(authorization["records"], SHADOW_AUTHORIZATION_ID)
+    prohibited = tuple(shadow_record["prohibited_scope"])
     assert prohibited == SHADOW_PROHIBITED_SCOPE
 
 
@@ -52,3 +54,13 @@ def _json(relative: str) -> dict[str, Any]:
         payload = json.load(handle)
     assert isinstance(payload, dict)
     return payload
+
+
+def _record(records: list[dict[str, Any]], authorization_id: str) -> dict[str, Any]:
+    matches = [
+        record
+        for record in records
+        if record["authorization_transaction_id"] == authorization_id
+    ]
+    assert len(matches) == 1
+    return matches[0]

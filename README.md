@@ -5088,3 +5088,10 @@ AION-163 closes `AION-161-PA-0006` as consumed by AION-162 PR #72 and corrective
 AION-164 adds an internal persistent replay-protection core for offline identity assertions. It remains unintegrated with request authentication: no API route, middleware, KernelContainer registration, SDK/CLI surface, package file, lockfile, migration, v0.2 tag, or release is added.
 
 Primary evidence lives in `docs/auth/identity-assertion-replay-protection.md`, `docs/auth/identity-assertion-replay-ledger.md`, `docs/auth/identity-assertion-replay-runtime-boundary.md`, and ADR 0155.
+## AION-180 Shadow Activation Authorization
+
+AION-180 records `AION-180-SI-0007` as the sole active implementation authorization for AION-181. It authorizes construction of a disabled controlled shadow activation control plane only. It does not authorize activation, runtime enablement, source mutation, Git mutation, approval creation, merge, promotion, canary, deployment, model training, a v0.2 tag, or a v0.2 release.
+
+AION-SOE-001 remains successful advisory evidence and is not an approval. `AION-177-SI-0006` remains closed, expired, and non-reusable.
+
+Next task: AION-181 controlled shadow activation control plane.

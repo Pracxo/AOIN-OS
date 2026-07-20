@@ -8,27 +8,28 @@ tag or release exists.
 
 ## Current Main Milestone
 
-AION-179 self-improvement shadow-mode operator evaluation closeout is recorded.
+AION-180 controlled shadow activation control-plane authorization is recorded.
 
-Current stage: Shadow mode operator evaluation passed and runtime remains
-disabled.
+Current stage: Activation control plane authorized and not implemented.
 
-AION-177-SI-0006 is consumed by AION-178 PR 89, closed by AION-179, expired,
-and non-reusable.
+AION-180-SI-0007 is the sole active implementation authorization. It is scoped to AION-181 and must be closed by AION-182. AION-177-SI-0006 remains closed, expired, and non-reusable. AION-SOE-001 remains successful advisory evidence and is not an approval.
 
 The current self-improvement state is:
 
 - `self_improvement_platform_implemented=true`
 - `self_improvement_platform_state=implemented_disabled`
-- `shadow_mode_authorized=true`
 - `shadow_mode_implemented=true`
-- `shadow_mode_implementation_state=implemented_operator_invoked_disabled`
+- `shadow_mode_operator_evaluation_passed=true`
 - `shadow_mode_runtime_enabled=false`
-- active self-improvement implementation authorization count: 0
-- active self-improvement implementation authorization: `none`
-- active implementation task: `none`
-- formal closeout task: `AION-179`
-- runtime activation still requires a separate future explicit authorization
+- `shadow_activation_control_plane_authorized=true`
+- `shadow_activation_control_plane_implemented=false`
+- `shadow_activation_enabled=false`
+- active self-improvement implementation authorization count: 1
+- active self-improvement implementation authorization: `AION-180-SI-0007`
+- active implementation task: `AION-181`
+- formal closeout task: `AION-182`
+- AION-180 authorizes implementation of a disabled control plane
+- AION-180 does not authorize activation
 
 ## Completed Architecture
 
@@ -187,3 +188,6 @@ created, no external providers are contacted, no production canary is active,
 and no production self-improvement runtime is enabled. AION-177 authorized
 AION-178 shadow-mode implementation only and is now closed by AION-179;
 shadow-mode runtime remains disabled.
+## AION-180 Authorization State
+
+AION-181 is the next task: controlled shadow activation control plane. Shadow activation remains disabled; actual activation requires a future authorization after AION-181 implementation and AION-182 evaluation.

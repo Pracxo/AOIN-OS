@@ -16,6 +16,7 @@ from self_improvement_governance import (  # noqa: E402
     AION_178_FEATURE_COMMIT,
     AION_178_MERGE_COMMIT,
     AION_178_MERGED_AT,
+    SHADOW_ACTIVATION_AUTHORIZATION_ID,
     SHADOW_APPROVED_FLAGS,
     SHADOW_AUTHORIZATION_ID,
     SHADOW_OPERATOR_EVALUATION_DECISION,
@@ -34,11 +35,15 @@ def test_authorization_ledger_has_closed_shadow_mode_record() -> None:
     validate_no_go(ROOT)
 
     active = [record for record in payload["records"] if record["authorization_active"] is True]
-    assert active == []
-    assert payload["active_self_improvement_implementation_authorization_count"] == 0
-    assert payload["active_self_improvement_implementation_authorization"] == "none"
-    assert payload["active_implementation_task"] == "none"
-    record = payload["records"][-1]
+    assert len(active) == 1
+    assert active[0]["authorization_transaction_id"] == SHADOW_ACTIVATION_AUTHORIZATION_ID
+    assert payload["active_self_improvement_implementation_authorization_count"] == 1
+    assert (
+        payload["active_self_improvement_implementation_authorization"]
+        == SHADOW_ACTIVATION_AUTHORIZATION_ID
+    )
+    assert payload["active_implementation_task"] == "AION-181"
+    record = _record(payload["records"], SHADOW_AUTHORIZATION_ID)
     assert record["authorization_transaction_id"] == SHADOW_AUTHORIZATION_ID
     assert record["record_kind"] == "authorization_closeout"
     assert record["authorization_consumed"] is True
@@ -66,7 +71,7 @@ def test_shadow_authorization_example_matches_validator_contract() -> None:
 
 def test_shadow_validator_rejects_runtime_enablement() -> None:
     payload = _json("docs/self-improvement/authorization-ledger.json")
-    payload["records"][-1]["shadow_mode_runtime_enabled"] = True
+    _record(payload["records"], SHADOW_AUTHORIZATION_ID)["shadow_mode_runtime_enabled"] = True
     with pytest.raises(GovernanceValidationError, match="shadow_mode_runtime_enabled"):
         validate_authorization_ledger(payload)
 
@@ -76,3 +81,13 @@ def _json(relative: str) -> dict[str, Any]:
         payload = json.load(handle)
     assert isinstance(payload, dict)
     return payload
+
+
+def _record(records: list[dict[str, Any]], authorization_id: str) -> dict[str, Any]:
+    matches = [
+        record
+        for record in records
+        if record["authorization_transaction_id"] == authorization_id
+    ]
+    assert len(matches) == 1
+    return matches[0]

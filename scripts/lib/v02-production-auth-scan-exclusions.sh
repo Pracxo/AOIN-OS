@@ -79,6 +79,9 @@ aion151_is_scoped_authorization_path() {
       if aion164_is_scoped_identity_assertion_replay_protection_path "$1"; then
         return 0
       fi
+      if aion180_is_scoped_self_improvement_shadow_activation_authorization_path "$1"; then
+        return 0
+      fi
       return 1
       ;;
   esac
@@ -1318,6 +1321,93 @@ aion178_is_scoped_self_improvement_shadow_mode_path() {
     services/brain-api/tests/test_self_improvement_shadow_regression_proposals.py|\
     services/brain-api/tests/test_self_improvement_shadow_retention.py|\
     services/brain-api/tests/test_self_improvement_shadow_review_items.py)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+aion180_is_scoped_self_improvement_shadow_activation_authorization_path() {
+  # Exact AION-180 controlled shadow activation authorization paths.
+  # This authorization-only task adds governance evidence, static read-only
+  # console data, validation scripts, and tests. It does not exempt production
+  # auth source, API routes, SDK/CLI runtime surfaces, package files,
+  # lockfiles, migrations, or broad source directories.
+  case "$1" in
+    AGENTS.md|\
+    README.md|\
+    docs/adr/0165-controlled-shadow-activation-control-plane-authorization.md|\
+    docs/adr/README.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/project-status.md|\
+    docs/release/self-improvement-shadow-activation-authorization-transaction.md|\
+    docs/release/self-improvement-shadow-activation-checklist.md|\
+    docs/release/self-improvement-shadow-activation-evidence-matrix.md|\
+    docs/release/self-improvement-shadow-activation-explicit-approval-record.md|\
+    docs/release/self-improvement-shadow-activation-no-go.md|\
+    docs/release/self-improvement-shadow-activation-runtime-hold.md|\
+    docs/release/self-improvement-shadow-activation-scope.md|\
+    docs/release/v02-release-readiness-delta.md|\
+    docs/self-improvement/aion-179-delivery-verification.md|\
+    docs/self-improvement/authorization-ledger.json|\
+    docs/self-improvement/known-limitations.md|\
+    docs/self-improvement/program-ledger.json|\
+    docs/self-improvement/runtime-activation-checklist.md|\
+    docs/self-improvement/shadow-activation-approval-binding.md|\
+    docs/self-improvement/shadow-activation-authorization-boundary.md|\
+    docs/self-improvement/shadow-activation-control-plane-architecture.md|\
+    docs/self-improvement/shadow-activation-data-boundary.md|\
+    docs/self-improvement/shadow-activation-deactivation.md|\
+    docs/self-improvement/shadow-activation-monitoring.md|\
+    docs/self-improvement/shadow-activation-resource-budgets.md|\
+    docs/self-improvement/shadow-activation-roadmap.md|\
+    docs/self-improvement/shadow-activation-threat-model.md|\
+    docs/self-improvement/shadow-mode-activation-decision-boundary.md|\
+    docs/self-improvement/shadow-mode-roadmap.md|\
+    docs/visual-brain.md|\
+    examples/self-improvement/shadow-activation-approval-binding.json|\
+    examples/self-improvement/shadow-activation-authorization.json|\
+    examples/self-improvement/shadow-activation-candidate.json|\
+    examples/self-improvement/shadow-activation-deactivation-plan.json|\
+    examples/self-improvement/shadow-activation-monitoring-plan.json|\
+    examples/self-improvement/shadow-activation-request.json|\
+    examples/self-improvement/shadow-activation-resource-budget.json|\
+    examples/self-improvement/shadow-activation-runtime-hold.json|\
+    examples/self-improvement/shadow-mode-operator-evaluation-report.json|\
+    operator-console-static/README.md|\
+    operator-console-static/app.js|\
+    operator-console-static/demo-data/self-improvement-shadow-activation-authorization.json|\
+    operator-console-static/demo-data/self-improvement-shadow-activation-runtime-hold.json|\
+    operator-console-static/index.html|\
+    scripts/auth-design-check.sh|\
+    scripts/lib/self_improvement_governance.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    scripts/operator-console-static-check.sh|\
+    scripts/production-auth-core-no-go-regression.sh|\
+    scripts/self-improvement-runtime-hold.sh|\
+    scripts/self-improvement-shadow-activation-authorization-check.sh|\
+    scripts/self-improvement-shadow-activation-authorization-no-go-regression.sh|\
+    scripts/self-improvement-shadow-activation-runtime-hold.sh|\
+    scripts/self-improvement-shadow-mode-runtime-hold.sh|\
+    scripts/static-console-safety-check.sh|\
+    services/brain-api/tests/test_self_improvement_final_closeout_docs.py|\
+    services/brain-api/tests/test_self_improvement_governance_authorization_docs.py|\
+    services/brain-api/tests/test_self_improvement_postmerge_evidence_reconciliation.py|\
+    services/brain-api/tests/test_self_improvement_shadow_activation_approval_binding_spec.py|\
+    services/brain-api/tests/test_self_improvement_shadow_activation_authorization_docs.py|\
+    services/brain-api/tests/test_self_improvement_shadow_activation_authorization_validator.py|\
+    services/brain-api/tests/test_self_improvement_shadow_activation_budget_spec.py|\
+    services/brain-api/tests/test_self_improvement_shadow_activation_monitoring_spec.py|\
+    services/brain-api/tests/test_self_improvement_shadow_activation_scope_spec.py|\
+    services/brain-api/tests/test_self_improvement_shadow_activation_threat_model.py|\
+    services/brain-api/tests/test_self_improvement_shadow_mode_authorization_closeout.py|\
+    services/brain-api/tests/test_self_improvement_shadow_mode_authorization_validator.py|\
+    services/brain-api/tests/test_self_improvement_shadow_mode_boundary_spec.py|\
+    services/brain-api/tests/test_self_improvement_shadow_mode_budget_spec.py)
       return 0
       ;;
     *)

@@ -1094,3 +1094,10 @@ to AION-163.
 ## AION-164 Replay Boundary
 
 AION-164 implements only the persistent identity assertion replay-protection core authorized by AION-163-PA-0007. Keep replay code internal and unregistered unless a later authorization explicitly opens request-auth runtime integration. Do not add routes, middleware, config flags, SDK/CLI commands, provider calls, packages, lockfiles, migrations, tags, or releases for this lane.
+## AION-180 Shadow Activation Authorization
+
+AION-180 records `AION-180-SI-0007` as the sole active implementation authorization for AION-181. It authorizes construction of a disabled controlled shadow activation control plane only. It does not authorize activation, runtime enablement, source mutation, Git mutation, approval creation, merge, promotion, canary, deployment, model training, a v0.2 tag, or a v0.2 release.
+
+AION-SOE-001 remains successful advisory evidence and is not an approval. `AION-177-SI-0006` remains closed, expired, and non-reusable.
+
+Agents must not implement AION-181 runtime source while working AION-180.

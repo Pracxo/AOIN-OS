@@ -140,16 +140,20 @@ def test_project_status_describes_current_shadow_authorization_state() -> None:
     text = _text("docs/project-status.md")
     current_text = _project_status_current_text()
 
-    assert "AION-179 self-improvement shadow-mode operator evaluation closeout" in text
-    assert "Current stage: Shadow mode operator evaluation passed" in text
+    assert "AION-180 controlled shadow activation control-plane authorization" in text
+    assert "Current stage: Activation control plane authorized and not implemented" in text
     assert "`self_improvement_platform_state=implemented_disabled`" in text
     assert "`shadow_mode_implemented=true`" in text
-    assert "`shadow_mode_implementation_state=implemented_operator_invoked_disabled`" in text
+    assert "`shadow_mode_operator_evaluation_passed=true`" in text
     assert "`shadow_mode_runtime_enabled=false`" in text
-    assert "active self-improvement implementation authorization count: 0" in text
-    assert "active implementation task: `none`" in text
-    assert "formal closeout task: `AION-179`" in text
-    assert "runtime activation still requires a separate future explicit authorization" in text
+    assert "`shadow_activation_control_plane_authorized=true`" in text
+    assert "`shadow_activation_control_plane_implemented=false`" in text
+    assert "`shadow_activation_enabled=false`" in text
+    assert "active self-improvement implementation authorization count: 1" in text
+    assert "active self-improvement implementation authorization: `AION-180-SI-0007`" in text
+    assert "active implementation task: `AION-181`" in text
+    assert "formal closeout task: `AION-182`" in text
+    assert "AION-180 does not authorize activation" in text
     assert "v02_tag_created=false" in text
     assert "v02_release_created=false" in text
     for stale_marker in STALE_AION_176_CURRENT_STATE_MARKERS:
@@ -171,8 +175,12 @@ def test_current_state_surfaces_are_reconciled_and_safe() -> None:
         == "shadow_mode_implemented_operator_invoked_disabled_closed_by_AION-179"
     )
     aion179 = _task(ledger["records"], "AION-179")
-    assert aion179["ci_result"] == "pending"
-    assert aion179["runtime_state"] == "shadow_mode_operator_evaluation_pass_runtime_disabled"
+    assert aion179["ci_result"] == "pass"
+    assert aion179["runtime_state"] == "shadow_mode_operator_evaluation_passed_runtime_disabled"
+    aion180 = _task(ledger["records"], "AION-180")
+    assert aion180["ci_result"] == "pending"
+    assert aion180["runtime_state"] == "activation_control_plane_authorized_not_implemented"
+    assert aion180["next_task"] == "AION-181"
     for marker in SENSITIVE_EVIDENCE_MARKERS:
         assert marker not in combined
     assert re.search(r"sk-[A-Za-z0-9_-]{10,}", combined) is None
