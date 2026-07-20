@@ -464,7 +464,9 @@ for path in sorted(demo_dir.glob("*.json")):
     if path.name.startswith("self-improvement-shadow-activation-"):
         if path.name not in {
             "self-improvement-shadow-activation-authorization.json",
+            "self-improvement-shadow-activation-control-plane.json",
             "self-improvement-shadow-activation-runtime-hold.json",
+            "self-improvement-shadow-activation-simulation.json",
         }:
             raise SystemExit(f"unknown self-improvement shadow-activation demo: {path}")
         if payload.get("read_only") is not True:
@@ -475,11 +477,26 @@ for path in sorted(demo_dir.glob("*.json")):
             raise SystemExit(f"self-improvement shadow-activation demo must be redacted: {path}")
         if payload.get("shadow_activation_control_plane_authorized") is not True:
             raise SystemExit(f"shadow activation control plane must be authorized: {path}")
+        implemented_payloads = {
+            "self-improvement-shadow-activation-control-plane.json",
+            "self-improvement-shadow-activation-runtime-hold.json",
+            "self-improvement-shadow-activation-simulation.json",
+        }
+        if path.name in implemented_payloads:
+            if payload.get("shadow_activation_control_plane_implemented") is not True:
+                raise SystemExit(f"shadow activation control plane must be implemented-disabled: {path}")
+            if payload.get("shadow_activation_control_plane_state") != "implemented_disabled_simulation_only":
+                raise SystemExit(f"shadow activation control plane state mismatch: {path}")
+        elif payload.get("shadow_activation_control_plane_implemented") is not False:
+            raise SystemExit(f"shadow activation control plane must remain unimplemented: {path}")
         for key in (
-            "shadow_activation_control_plane_implemented",
             "shadow_activation_enabled",
             "shadow_mode_runtime_enabled",
             "runtime_effect",
+        ):
+            if payload.get(key) is not False:
+                raise SystemExit(f"self-improvement shadow-activation flag must be false: {key}: {path}")
+        for key in (
             "network_calls_enabled",
             "connector_calls_enabled",
             "provider_calls_enabled",
@@ -494,7 +511,7 @@ for path in sorted(demo_dir.glob("*.json")):
             "v02_tag_created",
             "v02_release_created",
         ):
-            if payload.get(key) is not False:
+            if key in payload and payload.get(key) is not False:
                 raise SystemExit(f"self-improvement shadow-activation flag must be false: {key}: {path}")
         continue
     if payload.get("read_only") is not True:
@@ -527,7 +544,9 @@ for path in sorted(demo_dir.glob("*.json")):
         "self-improvement-shadow-mode-authorization.json",
         "self-improvement-shadow-mode-activation-review-boundary.json",
         "self-improvement-shadow-activation-authorization.json",
+        "self-improvement-shadow-activation-control-plane.json",
         "self-improvement-shadow-activation-runtime-hold.json",
+        "self-improvement-shadow-activation-simulation.json",
         "production-auth-core-status.json",
         "production-auth-runtime-hold.json",
         "production-auth-core-stabilization.json",

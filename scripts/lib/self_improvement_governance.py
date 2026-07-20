@@ -55,6 +55,12 @@ AION_179_FEATURE_COMMITS = (
 )
 AION_179_MERGE_COMMIT = "133040597ca8ed997bbc32b8bb8c980a123d2f9a"
 AION_179_MERGED_AT = "2026-07-20T10:10:12Z"
+AION_180_FEATURE_COMMITS = (
+    "a008986872e46b1786bf7d20c18074c4275a852c",
+    "2b97743e65bf0c405c4eaa5360f809399ff9046c",
+)
+AION_180_MERGE_COMMIT = "e50754bbd27570625befea3d3e73e65a7ec098d1"
+AION_180_MERGED_AT = "2026-07-20T15:15:08Z"
 OPERATOR_EVALUATION_ID = "AION-OE-001"
 OPERATOR_EVALUATION_DECISION = (
     "OPERATOR_EVALUATION_PASS_RECOMMEND_SHADOW_MODE_AUTHORIZATION_REVIEW"
@@ -834,6 +840,44 @@ AION180_REQUIRED_EXAMPLES = (
     "operator-console-static/demo-data/self-improvement-shadow-activation-runtime-hold.json",
 )
 
+AION181_REQUIRED_DOCS = (
+    "docs/self-improvement/shadow-activation-control-plane-implementation.md",
+    "docs/self-improvement/shadow-activation-contracts.md",
+    "docs/self-improvement/shadow-activation-state-machine.md",
+    "docs/self-improvement/shadow-activation-local-evidence-adapter.md",
+    "docs/self-improvement/shadow-activation-policy-service.md",
+    "docs/self-improvement/shadow-activation-monitoring-runtime-hold.md",
+    "docs/self-improvement/shadow-activation-simulation.md",
+    "docs/self-improvement/shadow-activation-operator-review.md",
+    "docs/self-improvement/shadow-activation-security-review.md",
+    "docs/self-improvement/aion-181-checklist.md",
+    "docs/release/self-improvement-shadow-activation-control-plane-implementation.md",
+    "docs/release/self-improvement-shadow-activation-control-plane-security-evidence.md",
+    "docs/release/self-improvement-shadow-activation-control-plane-runtime-hold.md",
+    "docs/release/self-improvement-shadow-activation-control-plane-no-go.md",
+    "docs/release/self-improvement-shadow-activation-control-plane-checklist.md",
+    "docs/release/self-improvement-shadow-activation-control-plane-evidence-matrix.md",
+    "docs/adr/0166-controlled-shadow-activation-control-plane.md",
+)
+
+AION181_REQUIRED_EXAMPLES = (
+    "examples/self-improvement/shadow-activation-control-plane-candidate.json",
+    "examples/self-improvement/shadow-activation-control-plane-request.json",
+    "examples/self-improvement/shadow-activation-control-plane-approval-binding.json",
+    "examples/self-improvement/shadow-activation-control-plane-current-facts.json",
+    "examples/self-improvement/shadow-activation-control-plane-budget-decision.json",
+    "examples/self-improvement/shadow-activation-control-plane-monitoring-plan.json",
+    "examples/self-improvement/shadow-activation-control-plane-health-snapshot.json",
+    "examples/self-improvement/shadow-activation-control-plane-deactivation-plan.json",
+    "examples/self-improvement/shadow-activation-control-plane-incident.json",
+    "examples/self-improvement/shadow-activation-control-plane-simulation-pass.json",
+    "examples/self-improvement/shadow-activation-control-plane-simulation-fail.json",
+    "examples/self-improvement/shadow-activation-control-plane-operator-review-item.json",
+    "examples/self-improvement/shadow-activation-control-plane-runtime-hold.json",
+    "operator-console-static/demo-data/self-improvement-shadow-activation-control-plane.json",
+    "operator-console-static/demo-data/self-improvement-shadow-activation-simulation.json",
+)
+
 SHADOW_ACTIVATION_APPROVED_FLAGS = (
     "authorization_transaction_approved",
     "explicit_approval_record_approval",
@@ -1352,9 +1396,13 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
     records = payload.get("records")
     _require(isinstance(records, list), "records must be a list")
     records = cast(list[dict[str, Any]], records)
-    activation_stage = (
+    activation_stage = payload.get("current_stage") in {
+        "shadow_activation_control_plane_authorized_not_implemented",
+        "shadow_activation_control_plane_implemented_disabled_pending_closeout",
+    }
+    activation_implemented = (
         payload.get("current_stage")
-        == "shadow_activation_control_plane_authorized_not_implemented"
+        == "shadow_activation_control_plane_implemented_disabled_pending_closeout"
     )
     _require(
         len(records) == (8 if activation_stage else 7),
@@ -1370,6 +1418,15 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
             active_authorizations == [SHADOW_ACTIVATION_AUTHORIZATION_ID],
             "AION-180 implementation authorization must be the sole active authorization",
         )
+        _require(
+            payload.get("shadow_activation_control_plane_authorized") is True,
+            "activation control plane authorized",
+        )
+        _require(
+            payload.get("shadow_activation_control_plane_implemented") is activation_implemented,
+            "activation control plane implemented state",
+        )
+        _require(payload.get("shadow_activation_enabled") is False, "shadow activation disabled")
 
     root_closeout = records[0]
     _require(root_closeout.get("record_kind") == "authorization_closeout", "missing root closeout")
@@ -1583,7 +1640,10 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
 
     if activation_stage:
         activation = records[7]
-        _validate_shadow_activation_authorization_record(activation)
+        _validate_shadow_activation_authorization_record(
+            activation,
+            implemented=activation_implemented,
+        )
         _require(
             payload.get("active_self_improvement_implementation_authorization_count") == 1,
             "active authorization count",
@@ -1609,7 +1669,7 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
             "activation control plane authorized",
         )
         _require(
-            payload.get("shadow_activation_control_plane_implemented") is False,
+            payload.get("shadow_activation_control_plane_implemented") is activation_implemented,
             "activation control plane implemented",
         )
         _require(payload.get("shadow_activation_enabled") is False, "shadow activation")
@@ -2039,12 +2099,51 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
             aion180.get("runtime_state") == "activation_control_plane_authorized_not_implemented",
             "AION-180 runtime state",
         )
-        _require(aion180.get("feature_commits") == [], "AION-180 feature pending")
-        _require(aion180.get("pull_requests") == [], "AION-180 PR pending")
-        _require(aion180.get("merge_commits") == [], "AION-180 merge pending")
-        _require(aion180.get("ci_result") == "pending", "AION-180 CI pending")
+        if "AION-181" in by_task:
+            _require(
+                tuple(aion180.get("feature_commits", ())) == AION_180_FEATURE_COMMITS,
+                "AION-180 feature commits",
+            )
+            _require(aion180.get("pull_requests") == [91], "AION-180 PR")
+            _require(aion180.get("merge_commits") == [AION_180_MERGE_COMMIT], "AION-180 merge")
+            _require(aion180.get("ci_result") == "pass", "AION-180 CI")
+            _require(
+                aion180.get("completion_timestamp") == AION_180_MERGED_AT,
+                "AION-180 timestamp",
+            )
+            aion181 = by_task["AION-181"]
+            _require(
+                aion181.get("branch")
+                == "phase/self-improvement-shadow-activation-control-plane",
+                "AION-181 branch",
+            )
+            _require(
+                aion181.get("authorization_transaction") == SHADOW_ACTIVATION_AUTHORIZATION_ID,
+                "AION-181 auth",
+            )
+            _require(
+                aion181.get("authorization_state")
+                == "implementation_in_progress_formal_closeout_AION-182",
+                "AION-181 authorization state",
+            )
+            _require(
+                aion181.get("runtime_state")
+                == "activation_control_plane_implemented_disabled_simulation_only",
+                "AION-181 runtime state",
+            )
+            _require(aion181.get("feature_commits") == [], "AION-181 feature pending")
+            _require(aion181.get("pull_requests") == [], "AION-181 PR pending")
+            _require(aion181.get("merge_commits") == [], "AION-181 merge pending")
+            _require(aion181.get("ci_result") == "pending", "AION-181 CI pending")
+            _require(aion181.get("next_task") == "AION-182", "AION-181 next")
+            _require(aion181.get("completion_timestamp") is None, "AION-181 timestamp pending")
+        else:
+            _require(aion180.get("feature_commits") == [], "AION-180 feature pending")
+            _require(aion180.get("pull_requests") == [], "AION-180 PR pending")
+            _require(aion180.get("merge_commits") == [], "AION-180 merge pending")
+            _require(aion180.get("ci_result") == "pending", "AION-180 CI pending")
+            _require(aion180.get("completion_timestamp") is None, "AION-180 timestamp pending")
         _require(aion180.get("next_task") == SHADOW_ACTIVATION_IMPLEMENTATION_TASK, "AION-180 next")
-        _require(aion180.get("completion_timestamp") is None, "AION-180 timestamp pending")
     else:
         _require(
             aion178.get("runtime_state") == "shadow_mode_implemented_operator_invoked_disabled",
@@ -2193,7 +2292,7 @@ def require_shadow_activation_transition(current_state: str, next_state: str) ->
 
 
 def validate_shadow_activation_authorization_example(payload: dict[str, Any]) -> None:
-    _validate_shadow_activation_authorization_record(payload)
+    _validate_shadow_activation_authorization_record(payload, implemented=False)
 
 
 def validate_shadow_activation_runtime_hold_example(payload: dict[str, Any]) -> None:
@@ -2222,7 +2321,11 @@ def validate_shadow_activation_runtime_hold_example(payload: dict[str, Any]) -> 
             _require(payload.get(key) is False, f"activation hold {key}")
 
 
-def _validate_shadow_activation_authorization_record(record: dict[str, Any]) -> None:
+def _validate_shadow_activation_authorization_record(
+    record: dict[str, Any],
+    *,
+    implemented: bool | None = None,
+) -> None:
     _require(record.get("record_kind") == "implementation_authorization", "activation record kind")
     _require(
         record.get("program_id") == PROGRAM_ID,
@@ -2279,9 +2382,36 @@ def _validate_shadow_activation_authorization_record(record: dict[str, Any]) -> 
         "activation control plane authorized",
     )
     _require(
-        record.get("shadow_activation_control_plane_implemented") is False,
+        isinstance(record.get("shadow_activation_control_plane_implemented"), bool),
         "activation control plane implemented",
     )
+    if implemented is not None:
+        _require(
+            record.get("shadow_activation_control_plane_implemented") is implemented,
+            "activation control plane implemented",
+        )
+    if record.get("shadow_activation_control_plane_implemented") is True:
+        _require(
+            record.get("shadow_activation_control_plane_state")
+            == "implemented_disabled_simulation_only",
+            "activation control plane state",
+        )
+        for key in (
+            "activation_candidate_validation_available",
+            "activation_request_validation_available",
+            "activation_approval_binding_validation_available",
+            "activation_state_machine_available",
+            "activation_resource_budget_validation_available",
+            "activation_monitoring_validation_available",
+            "activation_deactivation_decision_available",
+            "activation_kill_switch_decision_available",
+            "activation_local_evidence_adapter_available",
+            "activation_in_memory_adapter_available",
+            "activation_simulation_available",
+        ):
+            _require(record.get(key) is True, f"{key} must be true")
+        _require(record.get("actual_activation_available") is False, "actual activation unavailable")
+        _require(record.get("runtime_effect") is False, "runtime effect")
     _require(record.get("shadow_activation_enabled") is False, "shadow_activation_enabled")
     _require(
         record.get("shadow_activation_actual_activation_authorized") is False,
@@ -2507,6 +2637,8 @@ def _require_required_docs(repo_root: Path) -> None:
         *AION179_REQUIRED_EXAMPLES,
         *AION180_REQUIRED_DOCS,
         *AION180_REQUIRED_EXAMPLES,
+        *AION181_REQUIRED_DOCS,
+        *AION181_REQUIRED_EXAMPLES,
     )
     for relative in required:
         if not (repo_root / relative).is_file():
@@ -2535,6 +2667,8 @@ def _validate_adr_index(repo_root: Path) -> None:
         raise GovernanceValidationError("ADR 0164 is not indexed")
     if "0165-controlled-shadow-activation-control-plane-authorization.md" not in index:
         raise GovernanceValidationError("ADR 0165 is not indexed")
+    if "0166-controlled-shadow-activation-control-plane.md" not in index:
+        raise GovernanceValidationError("ADR 0166 is not indexed")
 
 
 def _validate_docs_do_not_store_private_material(repo_root: Path) -> None:
@@ -2598,6 +2732,18 @@ def validate_shadow_activation_authorization(repo_root: Path) -> None:
     validate_shadow_activation_authorization_no_go(repo_root)
 
 
+def validate_shadow_activation_control_plane_no_go(repo_root: Path) -> None:
+    validate_repo(repo_root)
+    validate_no_go(repo_root)
+    for relative in SHADOW_ACTIVATION_ALLOWED_CREATE:
+        if not (repo_root / relative).is_file():
+            raise GovernanceValidationError(f"AION-181 runtime source must exist: {relative}")
+
+
+def validate_shadow_activation_control_plane(repo_root: Path) -> None:
+    validate_shadow_activation_control_plane_no_go(repo_root)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo-root", type=Path, default=Path.cwd())
@@ -2610,6 +2756,8 @@ def main() -> int:
             "shadow-operator-evaluation",
             "shadow-activation-authorization-no-go",
             "shadow-activation-authorization",
+            "shadow-activation-control-plane-no-go",
+            "shadow-activation-control-plane",
         ),
         default="check",
     )
@@ -2644,8 +2792,12 @@ def main() -> int:
         validate_shadow_operator_evaluation(args.repo_root)
     elif args.mode == "shadow-activation-authorization-no-go":
         validate_shadow_activation_authorization_no_go(args.repo_root)
-    else:
+    elif args.mode == "shadow-activation-authorization":
         validate_shadow_activation_authorization(args.repo_root)
+    elif args.mode == "shadow-activation-control-plane-no-go":
+        validate_shadow_activation_control_plane_no_go(args.repo_root)
+    else:
+        validate_shadow_activation_control_plane(args.repo_root)
     print(f"self-improvement governance {args.mode} PASS")
     return 0
 

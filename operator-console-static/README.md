@@ -1193,3 +1193,7 @@ Local checks:
 ./scripts/self-improvement-shadow-activation-authorization-check.sh
 ./scripts/self-improvement-shadow-activation-runtime-hold.sh
 ```
+
+## AION-181 Shadow Activation Control Plane
+
+The static console includes read-only AION-181 evidence in `self-improvement-shadow-activation-control-plane.json`, `self-improvement-shadow-activation-simulation.json`, and the updated runtime-hold payload. These files show implemented-disabled control-plane status, simulation outcomes, monitoring thresholds, deactivation triggers, and operator review evidence. They do not create requests, approvals, source changes, Git operations, merges, promotions, deployments, or runtime effects.

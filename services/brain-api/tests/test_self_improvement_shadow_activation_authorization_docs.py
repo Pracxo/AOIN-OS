@@ -86,13 +86,13 @@ def test_aion180_scripts_are_executable() -> None:
 def test_project_status_reports_aion180_current_state() -> None:
     text = _text("docs/project-status.md")
     current = text.split("## Historical Compatibility Markers", 1)[0]
-    assert "AION-180 controlled shadow activation control-plane authorization" in current
-    assert "Activation control plane authorized and not implemented" in current
+    assert "AION-181 disabled controlled shadow activation control plane implemented" in current
+    assert "Activation control plane implemented and disabled" in current
     assert "active self-improvement implementation authorization count: 1" in current
     assert "active self-improvement implementation authorization: `AION-180-SI-0007`" in current
     assert "active implementation task: `AION-181`" in current
     assert "formal closeout task: `AION-182`" in current
-    assert "AION-180 does not authorize activation" in current
+    assert "Actual activation requires another authorization after AION-182" in current
 
 
 def _json(relative: str) -> dict[str, Any]:

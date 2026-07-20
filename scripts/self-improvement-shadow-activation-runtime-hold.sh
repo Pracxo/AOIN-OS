@@ -18,7 +18,15 @@ is_nested_gate_context() {
   return 1
 }
 
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/self-improvement-shadow-activation-authorization-check.sh
+if is_nested_gate_context; then
+  echo "PASS: shadow activation control-plane check deferred to outer gate"
+elif [[ "${AION_SHADOW_ACTIVATION_CONTROL_PLANE_CHECK_RUNNING:-}" != "1" ]]; then
+  AION_AGGREGATE_GATE_RUNNING=1 \
+    AION_SHADOW_ACTIVATION_CONTROL_PLANE_CHECK_RUNNING=1 \
+    ./scripts/self-improvement-shadow-activation-control-plane-check.sh
+else
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/self-improvement-shadow-activation-authorization-check.sh
+fi
 
 "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
@@ -28,7 +36,7 @@ from pathlib import Path
 
 ROOT = Path.cwd()
 ledger = json.loads((ROOT / "docs/self-improvement/authorization-ledger.json").read_text())
-hold = json.loads((ROOT / "examples/self-improvement/shadow-activation-runtime-hold.json").read_text())
+hold = json.loads((ROOT / "examples/self-improvement/shadow-activation-control-plane-runtime-hold.json").read_text())
 
 active = [record for record in ledger["records"] if record.get("authorization_active") is True]
 if len(active) != 1:
@@ -40,9 +48,14 @@ if record["implementation_task"] != "AION-181":
     raise SystemExit("AION-181 must be the active implementation task")
 if record["formal_closeout_task"] != "AION-182":
     raise SystemExit("AION-182 must be the formal closeout task")
+if ledger.get("current_stage") != "shadow_activation_control_plane_implemented_disabled_pending_closeout":
+    raise SystemExit("AION-181 current stage mismatch")
+if record.get("shadow_activation_control_plane_implemented") is not True:
+    raise SystemExit("AION-181 must implement the disabled activation control plane")
+if record.get("shadow_activation_control_plane_state") != "implemented_disabled_simulation_only":
+    raise SystemExit("AION-181 activation control plane state mismatch")
 
 false_keys = {
-    "shadow_activation_control_plane_implemented",
     "shadow_activation_enabled",
     "shadow_mode_runtime_enabled",
     "self_improvement_runtime_enabled",
@@ -88,8 +101,8 @@ for path in [
     "services/brain-api/src/aion_brain/self_improvement/shadow_activation_evidence.py",
     "services/brain-api/src/aion_brain/self_improvement/shadow_activation_simulator.py",
 ]:
-    if (ROOT / path).exists():
-        raise SystemExit(f"AION-181 runtime source must be absent in AION-180: {path}")
+    if not (ROOT / path).is_file():
+        raise SystemExit(f"AION-181 activation source must exist: {path}")
 
 print("shadow activation runtime hold disabled-default checks PASS")
 PY
@@ -117,7 +130,8 @@ self-improvement shadow activation runtime hold result:
 - authorization: AION-180-SI-0007 for AION-181 disabled activation control plane
 - formal closeout: AION-182
 - shadow_activation_control_plane_authorized=true
-- shadow_activation_control_plane_implemented=false
+- shadow_activation_control_plane_implemented=true
+- shadow_activation_control_plane_state=implemented_disabled_simulation_only
 - shadow_activation_enabled=false
 - shadow_mode_runtime_enabled=false
 - source mutation, Git writes, PR creation, merge, deployment, provider calls, connector calls, model training, approval creation, and runtime influence disabled
