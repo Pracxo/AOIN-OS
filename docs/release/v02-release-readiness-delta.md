@@ -31,7 +31,6 @@ Status: `not-ready`
 
 ## Remaining Blockers
 
-- Operator evaluation
 - Production-auth runtime integration
 - Production replay-ledger schema provisioning
 - Request-level verified identity integration
@@ -69,12 +68,11 @@ Status: `not-ready`
 
 ## Current Critical Path
 
-The current critical path has advanced past operator evaluation into controlled
-shadow-mode authorization. AION-177 creates `AION-177-SI-0006` for future
-AION-178 disabled, observation-only shadow-mode implementation. This
-authorization does not activate production self-improvement, production
-authentication, external providers, production canary traffic, deployment, or
-model-weight training.
+The current critical path has advanced through controlled shadow-mode
+authorization, implementation, and AION-179 operator evaluation closeout.
+`AION-177-SI-0006` is closed and non-reusable. The PASS recommendation does not
+activate production self-improvement, production authentication, external
+providers, production canary traffic, deployment, or model-weight training.
 
 Completion of the self-improvement implementation program does not make v0.2
 release-ready. Production runtime integration and release-candidate work remain
@@ -93,3 +91,11 @@ AION-178 adds disabled, read-only self-improvement shadow-mode infrastructure.
 It does not make v0.2 release-ready, does not create a v0.2 tag or release,
 does not move `aion-v0.1.0`, and does not approve production runtime
 activation.
+
+## AION-179 Delta
+
+AION-179 adds read-only shadow-mode operator evaluation closeout evidence and a
+PASS recommendation for future controlled activation authorization review. It
+does not make v0.2 release-ready, create a v0.2 tag or release, move
+`aion-v0.1.0`, create a new implementation authorization, or approve production
+runtime activation.

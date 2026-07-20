@@ -140,15 +140,16 @@ def test_project_status_describes_current_shadow_authorization_state() -> None:
     text = _text("docs/project-status.md")
     current_text = _project_status_current_text()
 
-    assert "AION-178 controlled self-improvement shadow plane is implemented." in text
-    assert "Current stage: Shadow mode implemented and disabled" in text
+    assert "AION-179 self-improvement shadow-mode operator evaluation closeout" in text
+    assert "Current stage: Shadow mode operator evaluation passed" in text
     assert "`self_improvement_platform_state=implemented_disabled`" in text
     assert "`shadow_mode_implemented=true`" in text
     assert "`shadow_mode_implementation_state=implemented_operator_invoked_disabled`" in text
     assert "`shadow_mode_runtime_enabled=false`" in text
-    assert "active self-improvement implementation authorization count: 1" in text
-    assert "active implementation task: `AION-178`" in text
+    assert "active self-improvement implementation authorization count: 0" in text
+    assert "active implementation task: `none`" in text
     assert "formal closeout task: `AION-179`" in text
+    assert "runtime activation still requires a separate future explicit authorization" in text
     assert "v02_tag_created=false" in text
     assert "v02_release_created=false" in text
     for stale_marker in STALE_AION_176_CURRENT_STATE_MARKERS:
@@ -164,8 +165,14 @@ def test_current_state_surfaces_are_reconciled_and_safe() -> None:
         assert stale_marker not in combined
     ledger = _json("docs/self-improvement/program-ledger.json")
     aion178 = _task(ledger["records"], "AION-178")
-    assert aion178["ci_result"] == "pending"
-    assert aion178["runtime_state"] == "shadow_mode_implemented_operator_invoked_disabled"
+    assert aion178["ci_result"] == "pass"
+    assert (
+        aion178["runtime_state"]
+        == "shadow_mode_implemented_operator_invoked_disabled_closed_by_AION-179"
+    )
+    aion179 = _task(ledger["records"], "AION-179")
+    assert aion179["ci_result"] == "pending"
+    assert aion179["runtime_state"] == "shadow_mode_operator_evaluation_pass_runtime_disabled"
     for marker in SENSITIVE_EVIDENCE_MARKERS:
         assert marker not in combined
     assert re.search(r"sk-[A-Za-z0-9_-]{10,}", combined) is None

@@ -398,6 +398,8 @@ for path in sorted(demo_dir.glob("*.json")):
             "self-improvement-shadow-mode-plane.json",
             "self-improvement-shadow-mode-review-items.json",
             "self-improvement-shadow-mode-runtime-hold.json",
+            "self-improvement-shadow-mode-operator-evaluation.json",
+            "self-improvement-shadow-mode-activation-review-boundary.json",
         }:
             raise SystemExit(f"unknown self-improvement shadow-mode demo: {path}")
         if payload.get("read_only") is not True:
@@ -485,6 +487,7 @@ for path in sorted(demo_dir.glob("*.json")):
         "v02-production-auth-request-identity-stabilization-authorization.json",
         "v02-actor-context-trust-boundary-authorization.json",
         "self-improvement-shadow-mode-authorization.json",
+        "self-improvement-shadow-mode-activation-review-boundary.json",
         "production-auth-core-status.json",
         "production-auth-runtime-hold.json",
         "production-auth-core-stabilization.json",

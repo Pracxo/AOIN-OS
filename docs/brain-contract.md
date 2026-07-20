@@ -20,6 +20,11 @@ The contract includes:
   external calls, credential use, or activation.
 - `ConnectorSimulatorFinding`: safe connector simulator finding summary without
   blocked material values.
+- `ShadowObservationManifest`: operator-supplied read-only shadow run manifest.
+- `ShadowReference`: opaque reference to approved redacted evidence.
+- `ShadowRedactedMetric`: bounded numeric metric for deterministic shadow evaluation.
+- `ShadowReferenceSnapshot`: resolved redacted reference evidence from an injected adapter.
+- `ShadowEvidenceBundle`: advisory shadow-mode evidence bundle with runtime and write flags false.
 - `EventSubscription`: generic event reaction subscription.
 - `EventSubscriptionCreateRequest`: request to create a subscription.
 - `EventDispatchRequest`: request to dispatch an event through subscriptions.

@@ -16,3 +16,15 @@ Expected operator evidence:
 Any operator review item is advisory. It cannot approve work, satisfy an
 approval record, create a branch, create a pull request, merge code, promote a
 candidate, or enable production shadow mode.
+
+## AION-179 Operator Evaluation
+
+Run the closeout gate after reviewing the machine report:
+
+```sh
+./scripts/self-improvement-shadow-mode-operator-evaluation-no-go-regression.sh
+./scripts/self-improvement-shadow-mode-operator-evaluation-check.sh
+```
+
+The PASS recommendation remains review-only. Operators must treat runtime
+activation as blocked until a separate future authorization exists.

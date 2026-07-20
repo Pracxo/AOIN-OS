@@ -39,9 +39,28 @@ hold = json.loads((ROOT / "examples/self-improvement/shadow-mode-runtime-hold.js
 
 records = authorization["records"]
 active = [record for record in records if record.get("authorization_active") is True]
-if len(active) != 1:
-    raise SystemExit("exactly one active shadow-mode authorization is required")
-record = active[0]
+closed = [
+    record
+    for record in records
+    if record.get("authorization_transaction_id") == "AION-177-SI-0006"
+    and record.get("authorization_consumed") is True
+]
+if authorization.get("current_stage") == "shadow_mode_operator_evaluation_passed_disabled":
+    if active:
+        raise SystemExit("no active implementation authorization is allowed after AION-179 closeout")
+    if len(closed) != 1:
+        raise SystemExit("closed AION-177-SI-0006 authorization is required")
+    record = closed[0]
+    if record.get("shadow_operator_evaluation_decision") != "SHADOW_MODE_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_ACTIVATION_AUTHORIZATION_REVIEW":
+        raise SystemExit("shadow operator evaluation decision mismatch")
+    if record.get("new_implementation_authorization_created") is not False:
+        raise SystemExit("AION-179 must not create an implementation authorization")
+    if record.get("runtime_activation_created") is not False:
+        raise SystemExit("AION-179 must not create runtime activation")
+else:
+    if len(active) != 1:
+        raise SystemExit("exactly one active shadow-mode authorization is required")
+    record = active[0]
 if record["authorization_transaction_id"] != "AION-177-SI-0006":
     raise SystemExit("active authorization must be AION-177-SI-0006")
 if record["implementation_task"] != "AION-178":
@@ -135,7 +154,7 @@ fi
 
 cat <<'SUMMARY'
 self-improvement shadow-mode runtime hold result:
-- active authorization: AION-177-SI-0006 for AION-178
+- authorization: AION-177-SI-0006 for AION-178, active before AION-179 and closed after AION-179
 - shadow_mode_authorized=true
 - shadow_mode_implemented=true
 - shadow_mode_implementation_state=implemented_operator_invoked_disabled

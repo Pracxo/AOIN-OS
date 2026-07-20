@@ -335,6 +335,10 @@ allowed_aion178_files = {
     "services/brain-api/src/aion_brain/self_improvement/shadow_redaction.py",
     "services/brain-api/src/aion_brain/self_improvement/shadow_runner.py",
 }
+allowed_aion179_files = {
+    "operator-console-static/demo-data/self-improvement-shadow-mode-operator-evaluation.json",
+    "operator-console-static/demo-data/self-improvement-shadow-mode-activation-review-boundary.json",
+}
 allowed_aion152_prefixes = (
     "services/brain-api/src/aion_brain/production_auth/",
 )
@@ -393,6 +397,7 @@ for relative in sorted(changed):
         or relative in allowed_aion162_files
         or relative in allowed_aion163_files
         or relative in allowed_aion178_files
+        or relative in allowed_aion179_files
         or relative in allowed_aion152_files
         or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)

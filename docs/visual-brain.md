@@ -92,6 +92,15 @@ These events show local dry-run and readiness evidence only. They must not
 imply connector execution, trusted ingress, route registration, activation,
 external calls, credential use, token use, tool execution, or write execution.
 
+## Self-Improvement Shadow Evaluation Projection
+
+AION-179 evidence can be projected as read-only visual nodes for
+`shadow_operator_evaluation`, `shadow_evaluation_scenario`, and
+`shadow_activation_review_boundary`. These nodes represent advisory evidence and
+must not imply runtime activation, source mutation, Git mutation, approval
+creation, pull request creation, merge, deployment, provider calls, connector
+calls, or model training.
+
 ## Module Mock Runtime Projection
 
 AION-085 adds frontend-agnostic visual telemetry for deterministic module mock

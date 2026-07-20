@@ -24,3 +24,10 @@ Out of scope until separate authorization:
 Exit criteria for AION-179 must include formal disposition of
 `AION-177-SI-0006`, runtime-disabled checks, no-go regression checks, and
 operator-visible evidence proving shadow mode remains advisory only.
+
+## AION-179 Roadmap Update
+
+AION-179 has recorded the formal disposition: `AION-177-SI-0006` is consumed by
+AION-178, closed by AION-179, expired, and non-reusable. The next possible step
+is not implementation; it is a separate controlled activation authorization
+review, if a human explicitly requests it.

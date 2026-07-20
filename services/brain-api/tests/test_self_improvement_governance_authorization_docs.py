@@ -18,6 +18,9 @@ sys.path.insert(0, str(ROOT / "scripts/lib"))
 from self_improvement_governance import (  # noqa: E402
     AION_172_FEATURE_COMMIT,
     AION_172_MERGE_COMMIT,
+    AION_178_FEATURE_COMMIT,
+    AION_178_MERGE_COMMIT,
+    AION_178_MERGED_AT,
     AUTHORIZATION_ID,
     CANARY_APPROVAL_BINDING_REQUIREMENTS,
     CANARY_APPROVED_SCOPE,
@@ -34,6 +37,8 @@ from self_improvement_governance import (  # noqa: E402
     RISK_LEVELS,
     ROOT_AUTHORIZATION_ID,
     SHADOW_AUTHORIZATION_ID,
+    SHADOW_OPERATOR_EVALUATION_DECISION,
+    SHADOW_OPERATOR_EVALUATION_ID,
     SHADOW_PROHIBITED_FLAGS,
     SHADOW_PROHIBITED_SCOPE,
     TEST_WEAKENING_CONTROLS,
@@ -99,7 +104,7 @@ def test_aion171_is_consumed_and_aion173_authorization_is_exact() -> None:
         experiment_closeout,
         rewrite_closeout,
         canary_closeout,
-        shadow_active,
+        shadow_closeout,
     ) = payload["records"]
 
     assert root_closeout["authorization_transaction_id"] == ROOT_AUTHORIZATION_ID
@@ -162,12 +167,30 @@ def test_aion171_is_consumed_and_aion173_authorization_is_exact() -> None:
     for key in GOVERNANCE_TRUE_FLAGS:
         assert canary_closeout[key] is True
 
-    assert shadow_active["authorization_transaction_id"] == SHADOW_AUTHORIZATION_ID
-    assert shadow_active["authorization_active"] is True
-    assert shadow_active["implementation_task"] == "AION-178"
-    assert tuple(shadow_active["prohibited_scope"]) == SHADOW_PROHIBITED_SCOPE
+    assert shadow_closeout["authorization_transaction_id"] == SHADOW_AUTHORIZATION_ID
+    assert shadow_closeout["record_kind"] == "authorization_closeout"
+    assert shadow_closeout["authorization_active"] is False
+    assert shadow_closeout["authorization_consumed"] is True
+    assert shadow_closeout["authorization_consumed_by_task"] == "AION-178"
+    assert shadow_closeout["authorization_consumed_by_pr"] == 89
+    assert shadow_closeout["authorization_consumed_by_feature_commits"] == [
+        AION_178_FEATURE_COMMIT
+    ]
+    assert shadow_closeout["authorization_consumed_by_merge_commit"] == AION_178_MERGE_COMMIT
+    assert shadow_closeout["authorization_consumed_at"] == AION_178_MERGED_AT
+    assert shadow_closeout["authorization_expired"] is True
+    assert shadow_closeout["authorization_reusable"] is False
+    assert shadow_closeout["implementation_task"] == "AION-178"
+    assert tuple(shadow_closeout["prohibited_scope"]) == SHADOW_PROHIBITED_SCOPE
+    assert shadow_closeout["closeout_evaluation_id"] == SHADOW_OPERATOR_EVALUATION_ID
+    assert (
+        shadow_closeout["shadow_operator_evaluation_decision"]
+        == SHADOW_OPERATOR_EVALUATION_DECISION
+    )
+    assert shadow_closeout["new_implementation_authorization_created"] is False
+    assert shadow_closeout["runtime_activation_created"] is False
     for key in SHADOW_PROHIBITED_FLAGS:
-        assert shadow_active[key] is False
+        assert shadow_closeout[key] is False
 
 
 def test_program_ledger_records_aion164_through_aion167() -> None:
