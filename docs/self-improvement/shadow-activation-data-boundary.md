@@ -6,3 +6,12 @@ AION-SOE-001 remains successful advisory evidence and is not an approval. `AION-
 
 
 Authorized future adapters are `in_memory_redacted_snapshot_adapter` and `explicit_local_shadow_evidence_bundle_adapter`. The local evidence bundle adapter must require an explicit absolute file path outside the repository, reject traversal, symlink escape, hidden files, directories, URLs, network paths, device files, oversized files, unknown schema fields, protected text, credentials, tokens, cookies, private keys, personal data, source patches, and raw diffs. It remains read-only and performs no directory discovery.
+
+## AION-181 Disabled Shadow Activation Control Plane
+
+AION-181 implements the AION-180-authorized disabled controlled shadow activation control plane.
+It validates candidates, requests, externally supplied approval evidence, resource budgets, local redacted evidence bundles, monitoring snapshots, deactivation decisions, incident records, audit evidence, provenance evidence, operator review items, and simulation-only outcomes.
+
+The control plane can validate and simulate future activation requests but cannot activate shadow mode. Shadow activation remains false, shadow-mode runtime remains false, actual activation remains unavailable, and every decision remains evidence only.
+
+AION-180-SI-0007 remains active pending AION-182 closeout. AION-182 is the next formal closeout and operator-evaluation task. Actual activation requires another authorization after AION-182.

@@ -45,6 +45,10 @@ def test_aion180_is_the_sole_active_authorization() -> None:
     )
     assert payload["active_implementation_task"] == "AION-181"
     assert payload["formal_closeout_task"] == "AION-182"
+    assert (
+        payload["current_stage"]
+        == "shadow_activation_control_plane_implemented_disabled_pending_closeout"
+    )
 
     shadow = [
         record
@@ -60,6 +64,22 @@ def test_aion180_is_the_sole_active_authorization() -> None:
         assert record[key] is True
     for key in SHADOW_ACTIVATION_PROHIBITED_FLAGS:
         assert record[key] is False
+    assert record["shadow_activation_control_plane_implemented"] is True
+    assert record["shadow_activation_control_plane_state"] == "implemented_disabled_simulation_only"
+    for key in (
+        "activation_candidate_validation_available",
+        "activation_request_validation_available",
+        "activation_approval_binding_validation_available",
+        "activation_state_machine_available",
+        "activation_resource_budget_validation_available",
+        "activation_monitoring_validation_available",
+        "activation_deactivation_decision_available",
+        "activation_kill_switch_decision_available",
+        "activation_local_evidence_adapter_available",
+        "activation_in_memory_adapter_available",
+        "activation_simulation_available",
+    ):
+        assert record[key] is True
 
 
 @pytest.mark.parametrize(

@@ -8,11 +8,11 @@ tag or release exists.
 
 ## Current Main Milestone
 
-AION-180 controlled shadow activation control-plane authorization is recorded.
+AION-181 disabled controlled shadow activation control plane implemented.
 
-Current stage: Activation control plane authorized and not implemented.
+Current stage: Activation control plane implemented and disabled, pending formal AION-182 closeout and operator evaluation.
 
-AION-180-SI-0007 is the sole active implementation authorization. It is scoped to AION-181 and must be closed by AION-182. AION-177-SI-0006 remains closed, expired, and non-reusable. AION-SOE-001 remains successful advisory evidence and is not an approval.
+AION-180-SI-0007 is the sole active implementation authorization. It remains scoped to AION-181 and must be closed by AION-182. AION-177-SI-0006 remains closed, expired, and non-reusable. AION-SOE-001 remains successful advisory evidence and is not an approval.
 
 The current self-improvement state is:
 
@@ -22,14 +22,17 @@ The current self-improvement state is:
 - `shadow_mode_operator_evaluation_passed=true`
 - `shadow_mode_runtime_enabled=false`
 - `shadow_activation_control_plane_authorized=true`
-- `shadow_activation_control_plane_implemented=false`
+- `shadow_activation_control_plane_implemented=true`
+- `shadow_activation_control_plane_state=implemented_disabled_simulation_only`
 - `shadow_activation_enabled=false`
+- `actual_activation_available=false`
 - active self-improvement implementation authorization count: 1
 - active self-improvement implementation authorization: `AION-180-SI-0007`
 - active implementation task: `AION-181`
 - formal closeout task: `AION-182`
-- AION-180 authorizes implementation of a disabled control plane
-- AION-180 does not authorize activation
+- AION-181 implements a disabled control plane
+- AION-181 creates no activation authorization
+- Actual activation requires another authorization after AION-182
 
 ## Completed Architecture
 

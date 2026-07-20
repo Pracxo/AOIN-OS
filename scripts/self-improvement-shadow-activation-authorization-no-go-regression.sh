@@ -10,6 +10,34 @@ source "$ROOT_DIR/scripts/lib/portable-search.sh"
 PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 
+CONTROL_PLANE_STAGE="$("$PYTHON_BIN" - <<'PY'
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+ledger = json.loads(Path("docs/self-improvement/authorization-ledger.json").read_text())
+print(ledger.get("current_stage", ""))
+PY
+)"
+
+is_allowed_activation_source() {
+  [[ "$CONTROL_PLANE_STAGE" == "shadow_activation_control_plane_implemented_disabled_pending_closeout" ]] || return 1
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/self_improvement_shadow_activation.py|\
+services/brain-api/src/aion_brain/self_improvement/shadow_activation.py|\
+services/brain-api/src/aion_brain/self_improvement/shadow_activation_policy.py|\
+services/brain-api/src/aion_brain/self_improvement/shadow_activation_approval.py|\
+services/brain-api/src/aion_brain/self_improvement/shadow_activation_monitoring.py|\
+services/brain-api/src/aion_brain/self_improvement/shadow_activation_deactivation.py|\
+services/brain-api/src/aion_brain/self_improvement/shadow_activation_evidence.py|\
+services/brain-api/src/aion_brain/self_improvement/shadow_activation_simulator.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
 }
@@ -41,9 +69,15 @@ if base="$(comparison_base)"; then
   while IFS= read -r changed; do
     [[ -z "$changed" ]] && continue
     case "$changed" in
-      .github/workflows/*|migrations/*|services/brain-api/src/aion_brain/*|packages/aion-sdk-python/src/*)
+      .github/workflows/*|migrations/*|packages/aion-sdk-python/src/*)
         echo "blocked runtime/protected source change: $changed" >&2
         exit 1
+        ;;
+      services/brain-api/src/aion_brain/*)
+        if ! is_allowed_activation_source "$changed"; then
+          echo "blocked runtime/protected source change: $changed" >&2
+          exit 1
+        fi
         ;;
       services/brain-api/pyproject.toml|services/brain-api/poetry.lock|services/brain-api/requirements.txt)
         echo "blocked dependency change: $changed" >&2
@@ -68,10 +102,17 @@ for path in \
   services/brain-api/src/aion_brain/self_improvement/shadow_activation_deactivation.py \
   services/brain-api/src/aion_brain/self_improvement/shadow_activation_evidence.py \
   services/brain-api/src/aion_brain/self_improvement/shadow_activation_simulator.py; do
-  test ! -e "$path" || {
-    echo "AION-181 runtime source must be absent in AION-180: $path" >&2
-    exit 1
-  }
+  if [[ "$CONTROL_PLANE_STAGE" == "shadow_activation_control_plane_implemented_disabled_pending_closeout" ]]; then
+    test -f "$path" || {
+      echo "AION-181 activation source must exist after implementation: $path" >&2
+      exit 1
+    }
+  else
+    test ! -e "$path" || {
+      echo "AION-181 runtime source must be absent in AION-180: $path" >&2
+      exit 1
+    }
+  fi
 done
 
 "$PYTHON_BIN" scripts/lib/self_improvement_governance.py \

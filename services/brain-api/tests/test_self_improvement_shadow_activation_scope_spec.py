@@ -18,9 +18,9 @@ from self_improvement_governance import (  # noqa: E402
 )
 
 
-def test_aion181_runtime_source_is_absent_in_aion180() -> None:
+def test_aion181_runtime_source_is_present_after_authorized_implementation() -> None:
     for relative in SHADOW_ACTIVATION_ALLOWED_CREATE:
-        assert not (ROOT / relative).exists(), relative
+        assert (ROOT / relative).is_file(), relative
 
 
 def test_aion181_source_scope_is_exactly_recorded() -> None:
@@ -34,7 +34,7 @@ def test_aion181_source_scope_is_exactly_recorded() -> None:
     assert "migrations/" in record["aion181_must_not_modify_paths"]
 
 
-def test_aion180_branch_does_not_modify_runtime_or_package_surfaces() -> None:
+def test_aion181_branch_modifies_only_authorized_runtime_or_package_surfaces() -> None:
     changed = _changed_files(
         ".github/workflows",
         "services/brain-api/src/aion_brain",
@@ -42,7 +42,7 @@ def test_aion180_branch_does_not_modify_runtime_or_package_surfaces() -> None:
         "packages/aion-sdk-python/src",
         "migrations",
     )
-    assert changed == set()
+    assert changed <= set(SHADOW_ACTIVATION_ALLOWED_CREATE)
 
 
 def _json(relative: str) -> dict[str, Any]:

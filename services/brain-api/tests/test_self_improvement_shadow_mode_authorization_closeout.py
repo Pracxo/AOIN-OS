@@ -27,13 +27,24 @@ def test_aion_177_shadow_authorization_is_closed_by_aion_179() -> None:
     ledger = _json("docs/self-improvement/authorization-ledger.json")
     validate_authorization_ledger(ledger)
 
-    assert ledger["current_stage"] == "shadow_activation_control_plane_authorized_not_implemented"
+    assert (
+        ledger["current_stage"]
+        == "shadow_activation_control_plane_implemented_disabled_pending_closeout"
+    )
     assert ledger["active_self_improvement_implementation_authorization_count"] == 1
     assert (
         ledger["active_self_improvement_implementation_authorization"]
         == SHADOW_ACTIVATION_AUTHORIZATION_ID
     )
     assert ledger["active_implementation_task"] == "AION-181"
+    activation_record = _record(ledger["records"], SHADOW_ACTIVATION_AUTHORIZATION_ID)
+    assert activation_record["shadow_activation_control_plane_implemented"] is True
+    assert (
+        activation_record["shadow_activation_control_plane_state"]
+        == "implemented_disabled_simulation_only"
+    )
+    assert activation_record["shadow_activation_enabled"] is False
+    assert activation_record["actual_activation_available"] is False
 
     record = _record(ledger["records"], SHADOW_AUTHORIZATION_ID)
     assert record["record_kind"] == "authorization_closeout"
