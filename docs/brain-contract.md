@@ -2302,3 +2302,10 @@ They are strict Pydantic v2 contracts with UTC-only timestamps, bounded safe
 identifiers, lowercase SHA-256 fingerprints, recursive protected-material
 rejection, immutable evidence, and AION-177-SI-0006 lineage. They do not add
 API routes or runtime activation.
+## AION-180 Shadow Activation Contract Boundary
+
+AION-180 records `AION-180-SI-0007` as the sole active implementation authorization for AION-181. It authorizes construction of a disabled controlled shadow activation control plane only. It does not authorize activation, runtime enablement, source mutation, Git mutation, approval creation, merge, promotion, canary, deployment, model training, a v0.2 tag, or a v0.2 release.
+
+AION-SOE-001 remains successful advisory evidence and is not an approval. `AION-177-SI-0006` remains closed, expired, and non-reusable.
+
+AION-181 may define disabled activation-request, candidate, approval-binding, monitoring, deactivation, evidence, and simulator contracts only after this authorization.

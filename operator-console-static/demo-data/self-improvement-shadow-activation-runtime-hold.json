@@ -1,0 +1,85 @@
+{
+  "activation_program_id": "AION-SELF-IMPROVEMENT-CONTROLLED-SHADOW-ACTIVATION-001",
+  "approval_creation_enabled": false,
+  "approval_record_id": "AION-180-SI-0007",
+  "authorization_scope": "disabled-shadow-activation-request-approval-monitoring-deactivation-control-plane",
+  "authorization_transaction_id": "AION-180-SI-0007",
+  "automatic_merge_enabled": false,
+  "blockers": [
+    "actual activation requires a later separate authorization"
+  ],
+  "candidate_id": "controlled-shadow-mode-activation-control-plane",
+  "connector_calls_enabled": false,
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module"
+    },
+    {
+      "action_key": "activate_capability"
+    },
+    {
+      "action_key": "load_code"
+    },
+    {
+      "action_key": "review_local_check"
+    },
+    {
+      "action_key": "enable_external_model_calls"
+    },
+    {
+      "action_key": "permanent_removal_review"
+    }
+  ],
+  "formal_closeout_task": "AION-182",
+  "git_mutation_enabled": false,
+  "implementation_task": "AION-181",
+  "model_weight_training_enabled": false,
+  "network_calls_enabled": false,
+  "parent_evaluation_id": "AION-SOE-001",
+  "parent_main_commit": "133040597ca8ed997bbc32b8bb8c980a123d2f9a",
+  "production_canary_enabled": false,
+  "production_deployment_enabled": false,
+  "program_id": "AION-SELF-IMPROVEMENT-001",
+  "provider_calls_enabled": false,
+  "read_only": true,
+  "real_pull_request_creation_enabled": false,
+  "redacted": true,
+  "redaction_applied": true,
+  "refs": [
+    "AION-SOE-001",
+    "AION-180-SI-0007"
+  ],
+  "runtime_effect": false,
+  "sections": [
+    {
+      "items": [
+        "AION-180-SI-0007",
+        "AION-181",
+        "AION-182"
+      ],
+      "title": "Authorization"
+    },
+    {
+      "items": [
+        "shadow activation disabled",
+        "no network",
+        "no source mutation",
+        "no Git mutation"
+      ],
+      "title": "Runtime Hold"
+    }
+  ],
+  "shadow_activation_control_plane_authorized": true,
+  "shadow_activation_control_plane_implemented": false,
+  "shadow_activation_enabled": false,
+  "shadow_mode_runtime_enabled": false,
+  "source_mutation_enabled": false,
+  "status": "runtime_hold_active",
+  "summary": "AION-180 runtime hold keeps activation and implementation disabled.",
+  "synthetic": true,
+  "v02_release_created": false,
+  "v02_tag_created": false,
+  "warnings": [
+    "AION-SOE-001 is evidence only and not an approval"
+  ]
+}

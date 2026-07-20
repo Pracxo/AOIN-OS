@@ -19,3 +19,10 @@ The AION-175 platform is intentionally implemented but disabled.
 ## Required Future Work Before Activation
 
 Any future activation requires a new authorization, exact approval record, full security review, rollback plan, production observability plan, protected-core review where applicable, holdout validation, full CI, and explicit operator acceptance.
+## AION-180 Limitations
+
+AION-180 records `AION-180-SI-0007` as the sole active implementation authorization for AION-181. It authorizes construction of a disabled controlled shadow activation control plane only. It does not authorize activation, runtime enablement, source mutation, Git mutation, approval creation, merge, promotion, canary, deployment, model training, a v0.2 tag, or a v0.2 release.
+
+AION-SOE-001 remains successful advisory evidence and is not an approval. `AION-177-SI-0006` remains closed, expired, and non-reusable.
+
+The activation control plane is authorized but not implemented, and actual operator-invoked activation remains unavailable.

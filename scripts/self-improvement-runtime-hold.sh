@@ -125,6 +125,20 @@ if AUTHORIZATION.get("current_stage") == "shadow_mode_operator_evaluation_passed
         raise SystemExit("AION-179 must not create a new implementation authorization")
     if active_authorization.get("runtime_activation_created") is not False:
         raise SystemExit("AION-179 must not create runtime activation")
+elif AUTHORIZATION.get("current_stage") == "shadow_activation_control_plane_authorized_not_implemented":
+    if len(active_authorizations) != 1:
+        raise SystemExit("exactly one AION-180 implementation authorization is required")
+    if active_authorizations[0].get("authorization_transaction_id") != "AION-180-SI-0007":
+        raise SystemExit("active implementation authorization must be AION-180-SI-0007")
+    if active_authorizations[0].get("implementation_task") != "AION-181":
+        raise SystemExit("active implementation task must be AION-181")
+    if active_authorizations[0].get("shadow_activation_enabled") is not False:
+        raise SystemExit("AION-180 must not enable shadow activation")
+    if active_authorizations[0].get("shadow_activation_control_plane_implemented") is not False:
+        raise SystemExit("AION-180 must not implement the activation control plane")
+    if len(closed_shadow_authorizations) != 1:
+        raise SystemExit("closed AION-177 shadow-mode authorization is required")
+    active_authorization = closed_shadow_authorizations[0]
 else:
     if len(active_authorizations) != 1:
         raise SystemExit("exactly one AION-177 shadow-mode authorization must remain active")

@@ -36,6 +36,7 @@ from self_improvement_governance import (  # noqa: E402
     PROTECTED_PATHS,
     RISK_LEVELS,
     ROOT_AUTHORIZATION_ID,
+    SHADOW_ACTIVATION_AUTHORIZATION_ID,
     SHADOW_AUTHORIZATION_ID,
     SHADOW_OPERATOR_EVALUATION_DECISION,
     SHADOW_OPERATOR_EVALUATION_ID,
@@ -97,6 +98,7 @@ def test_self_improvement_required_files_exist_and_adrs_are_indexed() -> None:
 def test_aion171_is_consumed_and_aion173_authorization_is_exact() -> None:
     payload = _json("docs/self-improvement/authorization-ledger.json")
     validate_authorization_ledger(payload)
+    records = payload["records"]
     (
         root_closeout,
         parent_closeout,
@@ -105,7 +107,8 @@ def test_aion171_is_consumed_and_aion173_authorization_is_exact() -> None:
         rewrite_closeout,
         canary_closeout,
         shadow_closeout,
-    ) = payload["records"]
+    ) = records[:7]
+    activation_authorization = records[7] if len(records) > 7 else None
 
     assert root_closeout["authorization_transaction_id"] == ROOT_AUTHORIZATION_ID
     assert root_closeout["authorization_consumed_by_pr"] == 75
@@ -189,6 +192,15 @@ def test_aion171_is_consumed_and_aion173_authorization_is_exact() -> None:
     )
     assert shadow_closeout["new_implementation_authorization_created"] is False
     assert shadow_closeout["runtime_activation_created"] is False
+
+    if activation_authorization is not None:
+        assert (
+            activation_authorization["authorization_transaction_id"]
+            == SHADOW_ACTIVATION_AUTHORIZATION_ID
+        )
+        assert activation_authorization["authorization_active"] is True
+        assert activation_authorization["implementation_task"] == "AION-181"
+        assert activation_authorization["formal_closeout_task"] == "AION-182"
     for key in SHADOW_PROHIBITED_FLAGS:
         assert shadow_closeout[key] is False
 

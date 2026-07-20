@@ -1139,6 +1139,35 @@ aion177_auth_paths = {
     "services/brain-api/tests/test_self_improvement_shadow_mode_authorization_validator.py",
 }
 
+aion180_auth_paths = {
+    "docs/adr/0165-controlled-shadow-activation-control-plane-authorization.md",
+    "docs/release/self-improvement-shadow-activation-authorization-transaction.md",
+    "docs/release/self-improvement-shadow-activation-explicit-approval-record.md",
+    "docs/release/self-improvement-shadow-activation-no-go.md",
+    "docs/release/self-improvement-shadow-activation-runtime-hold.md",
+    "docs/release/self-improvement-shadow-activation-scope.md",
+    "docs/self-improvement/authorization-ledger.json",
+    "docs/self-improvement/shadow-activation-approval-binding.md",
+    "docs/self-improvement/shadow-activation-authorization-boundary.md",
+    "docs/self-improvement/shadow-activation-control-plane-architecture.md",
+    "examples/self-improvement/shadow-activation-approval-binding.json",
+    "examples/self-improvement/shadow-activation-authorization.json",
+    "operator-console-static/demo-data/self-improvement-shadow-activation-authorization.json",
+    "operator-console-static/demo-data/self-improvement-shadow-activation-runtime-hold.json",
+    "scripts/auth-design-check.sh",
+    "scripts/lib/v02-production-auth-scan-exclusions.sh",
+    "scripts/production-auth-core-no-go-regression.sh",
+    "scripts/self-improvement-shadow-activation-authorization-check.sh",
+    "scripts/self-improvement-shadow-activation-authorization-no-go-regression.sh",
+    "scripts/self-improvement-shadow-activation-runtime-hold.sh",
+    "services/brain-api/tests/test_self_improvement_governance_authorization_docs.py",
+    "services/brain-api/tests/test_self_improvement_shadow_activation_approval_binding_spec.py",
+    "services/brain-api/tests/test_self_improvement_shadow_activation_authorization_docs.py",
+    "services/brain-api/tests/test_self_improvement_shadow_activation_authorization_validator.py",
+    "services/brain-api/tests/test_self_improvement_shadow_mode_authorization_closeout.py",
+    "services/brain-api/tests/test_self_improvement_shadow_mode_authorization_validator.py",
+}
+
 blocked_package_names = {
     "package.json",
     "package-lock.json",
@@ -1178,6 +1207,7 @@ for name in [*changed, *untracked]:
         and name not in aion171_auth_paths
         and name not in aion173_auth_paths
         and name not in aion177_auth_paths
+        and name not in aion180_auth_paths
     ):
         raise SystemExit(f"unexpected auth runtime or artifact path: {name}")
 

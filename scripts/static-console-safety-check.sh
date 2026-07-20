@@ -206,6 +206,8 @@ allowed_authorization_demo_names = {
     "self-improvement-shadow-mode-authorization.json",
     "self-improvement-shadow-mode-operator-evaluation.json",
     "self-improvement-shadow-mode-activation-review-boundary.json",
+    "self-improvement-shadow-activation-authorization.json",
+    "self-improvement-shadow-activation-runtime-hold.json",
     "production-auth-core-status.json",
     "production-auth-runtime-hold.json",
     "production-auth-core-stabilization.json",

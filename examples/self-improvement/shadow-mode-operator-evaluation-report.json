@@ -12,6 +12,8 @@
   "evaluated_pr": 89,
   "evaluation_base_commit": "b05dd3cc49cff086997232bfc579a7ca891a184b",
   "evaluation_id": "AION-SOE-001",
+  "evaluation_passed": true,
+  "evaluation_type": "read_only_shadow_mode_operator_evaluation",
   "git_mutated": false,
   "hard_gates": {
     "aion_178_api_used_only_in_process": true,
@@ -33,6 +35,16 @@
   "implementation_task": "AION-178",
   "new_implementation_authorization_created": false,
   "operator_invoked": true,
+  "output_state": {
+    "active_learning_promoted": false,
+    "approval_created": false,
+    "git_mutated": false,
+    "new_implementation_authorization_created": false,
+    "pull_request_created": false,
+    "runtime_activation_created": false,
+    "runtime_effect": false,
+    "source_modified": false
+  },
   "program_id": "AION-SELF-IMPROVEMENT-001",
   "pull_request_created": false,
   "read_only": true,
