@@ -61,6 +61,9 @@ AION_180_FEATURE_COMMITS = (
 )
 AION_180_MERGE_COMMIT = "e50754bbd27570625befea3d3e73e65a7ec098d1"
 AION_180_MERGED_AT = "2026-07-20T15:15:08Z"
+AION_181_FEATURE_COMMIT = "c7c7a5c83606399dff2221bd7f847ea00e177603"
+AION_181_MERGE_COMMIT = "e9374853a53cd098096ed50da0fabb5874152d54"
+AION_181_MERGED_AT = "2026-07-20T21:10:45Z"
 OPERATOR_EVALUATION_ID = "AION-OE-001"
 OPERATOR_EVALUATION_DECISION = (
     "OPERATOR_EVALUATION_PASS_RECOMMEND_SHADOW_MODE_AUTHORIZATION_REVIEW"
@@ -88,6 +91,13 @@ SHADOW_ACTIVATION_IMPLEMENTATION_TASK = "AION-181"
 SHADOW_ACTIVATION_CLOSEOUT_TASK = "AION-182"
 SHADOW_ACTIVATION_SCOPE = (
     "disabled-shadow-activation-request-approval-monitoring-deactivation-control-plane"
+)
+SHADOW_ACTIVATION_OPERATOR_EVALUATION_ID = "AION-SACE-001"
+SHADOW_ACTIVATION_OPERATOR_EVALUATION_PASS_DECISION = (
+    "SHADOW_ACTIVATION_CONTROL_PLANE_EVALUATION_PASS_RECOMMEND_ACTUAL_ACTIVATION_AUTHORIZATION_REVIEW"
+)
+SHADOW_ACTIVATION_OPERATOR_EVALUATION_FAIL_DECISION = (
+    "SHADOW_ACTIVATION_CONTROL_PLANE_EVALUATION_FAIL_REMAIN_DISABLED"
 )
 
 AION178_ALLOWED_CREATE = (
@@ -2744,6 +2754,56 @@ def validate_shadow_activation_control_plane(repo_root: Path) -> None:
     validate_shadow_activation_control_plane_no_go(repo_root)
 
 
+def validate_shadow_activation_operator_evaluation_no_go(repo_root: Path) -> None:
+    validate_repo(repo_root)
+    validate_no_go(repo_root)
+    harness = repo_root / "scripts/lib/self_improvement_shadow_activation_operator_evaluation.py"
+    if not harness.is_file():
+        raise GovernanceValidationError("AION-182 operator evaluation harness missing")
+
+
+def validate_shadow_activation_operator_evaluation(repo_root: Path) -> None:
+    validate_shadow_activation_operator_evaluation_no_go(repo_root)
+    report = repo_root / "examples/self-improvement/shadow-activation-control-plane-operator-evaluation-report.json"
+    if not report.is_file():
+        raise GovernanceValidationError("AION-182 operator evaluation report missing")
+    payload = _load_json(report)
+    if payload.get("evaluation_id") != SHADOW_ACTIVATION_OPERATOR_EVALUATION_ID:
+        raise GovernanceValidationError("AION-182 evaluation id mismatch")
+    if payload.get("decision") not in {
+        SHADOW_ACTIVATION_OPERATOR_EVALUATION_PASS_DECISION,
+        SHADOW_ACTIVATION_OPERATOR_EVALUATION_FAIL_DECISION,
+    }:
+        raise GovernanceValidationError("AION-182 evaluation decision mismatch")
+    if payload.get("implementation_feature_commit") != AION_181_FEATURE_COMMIT:
+        raise GovernanceValidationError("AION-182 implementation feature commit mismatch")
+    if payload.get("implementation_merge_commit") != AION_181_MERGE_COMMIT:
+        raise GovernanceValidationError("AION-182 implementation merge commit mismatch")
+    if payload.get("implementation_pr") != 92:
+        raise GovernanceValidationError("AION-182 implementation PR mismatch")
+    if payload.get("scenario_count") != 21:
+        raise GovernanceValidationError("AION-182 scenario count mismatch")
+    if not all(item.get("passed") is True for item in payload.get("scenario_results", [])):
+        raise GovernanceValidationError("AION-182 scenario failure")
+    if not all(payload.get("hard_gate_results", {}).values()):
+        raise GovernanceValidationError("AION-182 hard gate failure")
+    for key in (
+        "new_implementation_authorization_created",
+        "activation_approval_created",
+        "actual_activation_created",
+        "shadow_activation_enabled",
+        "source_modified",
+        "git_mutated",
+        "pull_request_created",
+        "merged",
+        "runtime_effect",
+        "active_learning_promoted",
+        "production_exposure",
+    ):
+        if payload.get(key) is not False:
+            raise GovernanceValidationError(f"AION-182 report {key} must be false")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo-root", type=Path, default=Path.cwd())
@@ -2758,6 +2818,8 @@ def main() -> int:
             "shadow-activation-authorization",
             "shadow-activation-control-plane-no-go",
             "shadow-activation-control-plane",
+            "shadow-activation-operator-evaluation-no-go",
+            "shadow-activation-operator-evaluation",
         ),
         default="check",
     )
@@ -2796,8 +2858,12 @@ def main() -> int:
         validate_shadow_activation_authorization(args.repo_root)
     elif args.mode == "shadow-activation-control-plane-no-go":
         validate_shadow_activation_control_plane_no_go(args.repo_root)
-    else:
+    elif args.mode == "shadow-activation-control-plane":
         validate_shadow_activation_control_plane(args.repo_root)
+    elif args.mode == "shadow-activation-operator-evaluation-no-go":
+        validate_shadow_activation_operator_evaluation_no_go(args.repo_root)
+    else:
+        validate_shadow_activation_operator_evaluation(args.repo_root)
     print(f"self-improvement governance {args.mode} PASS")
     return 0
 
