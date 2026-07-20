@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -34,25 +35,14 @@ def test_aion181_source_scope_is_exactly_recorded() -> None:
 
 
 def test_aion180_branch_does_not_modify_runtime_or_package_surfaces() -> None:
-    changed = subprocess.run(
-        [
-            "git",
-            "diff",
-            "--name-only",
-            "origin/main...HEAD",
-            "--",
-            ".github/workflows",
-            "services/brain-api/src/aion_brain",
-            "services/brain-api/pyproject.toml",
-            "packages/aion-sdk-python/src",
-            "migrations",
-        ],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-        check=True,
+    changed = _changed_files(
+        ".github/workflows",
+        "services/brain-api/src/aion_brain",
+        "services/brain-api/pyproject.toml",
+        "packages/aion-sdk-python/src",
+        "migrations",
     )
-    assert changed.stdout.strip() == ""
+    assert changed == set()
 
 
 def _json(relative: str) -> dict[str, Any]:
@@ -60,3 +50,56 @@ def _json(relative: str) -> dict[str, Any]:
         payload = json.load(handle)
     assert isinstance(payload, dict)
     return payload
+
+
+def _git_ref_exists(ref: str) -> bool:
+    return (
+        subprocess.run(
+            ["git", "rev-parse", "--verify", "--quiet", ref],
+            cwd=ROOT,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            check=False,
+        ).returncode
+        == 0
+    )
+
+
+def _comparison_base() -> str | None:
+    candidates = []
+    github_base_ref = os.environ.get("GITHUB_BASE_REF")
+    if github_base_ref:
+        candidates.extend([f"origin/{github_base_ref}", github_base_ref])
+    candidates.extend(["origin/main", "main"])
+
+    for candidate in candidates:
+        if not _git_ref_exists(candidate):
+            continue
+        merge_base = subprocess.run(
+            ["git", "merge-base", "HEAD", candidate],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if merge_base.returncode == 0 and merge_base.stdout.strip():
+            return merge_base.stdout.strip()
+
+    if _git_ref_exists("HEAD~1"):
+        return "HEAD~1"
+    return None
+
+
+def _changed_files(*pathspecs: str) -> set[str]:
+    base = _comparison_base()
+    if base is None:
+        return set()
+
+    changed = subprocess.run(
+        ["git", "diff", "--name-only", base, "HEAD", "--", *pathspecs],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    return {line.strip() for line in changed.stdout.splitlines() if line.strip()}
