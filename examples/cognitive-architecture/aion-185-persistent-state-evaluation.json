@@ -1,0 +1,48 @@
+{
+  "schema_version": "aion-cognitive-persistent-state-evaluation/v1",
+  "program_id": "AION-COGNITIVE-ARCHITECTURE-001",
+  "task_id": "AION-185",
+  "evaluation_id": "AION-PCSE-001",
+  "evaluated_task": "AION-184",
+  "closed_authorization_id": "AION-183-CA-0001",
+  "implementation_pr": 95,
+  "implementation_merge_commit": "9482a148d2a71862a69d8187ea2649b7ca8f8061",
+  "result": "PASS",
+  "decision": "PERSISTENT_STATE_EVALUATION_PASS_AUTHORIZE_WORLD_MODEL",
+  "hard_pass_conditions": {
+    "replay_equality_rate": 1.0,
+    "state_invariant_violations": 0,
+    "lost_committed_events": 0,
+    "duplicate_applied_events": 0,
+    "forbidden_side_effects": 0
+  },
+  "evaluation_matrix": {
+    "exact_replay": "PASS",
+    "restart_continuity": "PASS",
+    "concurrency": "PASS",
+    "contradiction_handling": "PASS",
+    "uncertainty_tracking": "PASS",
+    "retention": "PASS",
+    "corruption_detection": "PASS",
+    "repository_integrity": "PASS",
+    "zero_runtime_side_effects": "PASS"
+  },
+  "side_effects": {
+    "runtime_effect": false,
+    "api_route_added": false,
+    "kernel_registration_added": false,
+    "background_loop_added": false,
+    "action_execution_enabled": false,
+    "network_calls": 0,
+    "connector_calls": 0,
+    "model_provider_calls": 0,
+    "source_rewrite_operations": 0,
+    "deployment_enabled": false,
+    "model_weights_changed": false
+  },
+  "new_authorization_id": "AION-185-CA-0002",
+  "authorized_next_task": "AION-186",
+  "synthetic": true,
+  "read_only": true,
+  "redacted": true
+}

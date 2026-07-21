@@ -15,12 +15,19 @@ AION182_MERGE_COMMIT = "05edb88f0b115c245f36f507c112cceb29c4aeee"
 AION183_AUTHORIZATION_ID = "AION-183-CA-0001"
 AION184_TASK_ID = "AION-184"
 AION185_TASK_ID = "AION-185"
+AION186_TASK_ID = "AION-186"
 AION184_CANDIDATE_ID = "persistent-cognitive-state-core"
 AION184_SCOPE = (
     "persistent-cognitive-state-belief-goal-hypothesis-uncertainty-resource-core"
 )
 AION183_PR = 94
 AION183_MERGE_COMMIT = "e388a6bf16fe2e7777f4d8d5654a89b1a6f604c3"
+AION184_PR = 95
+AION184_MERGE_COMMIT = "9482a148d2a71862a69d8187ea2649b7ca8f8061"
+AION185_EVALUATION_ID = "AION-PCSE-001"
+AION185_AUTHORIZATION_ID = "AION-185-CA-0002"
+AION186_CANDIDATE_ID = "predictive-world-model-core"
+AION186_SCOPE = "predictive-world-model-transition-outcome-uncertainty-counterfactual-core"
 
 FALSE_RUNTIME_FLAGS = (
     "runtime_effect",
@@ -122,6 +129,67 @@ AION184_REQUIRED_SERVICES = (
     "UncertaintyTracker",
 )
 
+AION185_REQUIRED_FILES = (
+    "docs/cognitive-architecture/tasks/AION-185.md",
+    "docs/cognitive-architecture/program-ledger.json",
+    "docs/cognitive-architecture/authorization-ledger.json",
+    "examples/cognitive-architecture/aion-185-persistent-state-evaluation.json",
+    "examples/cognitive-architecture/aion-185-world-model-authorization.json",
+    "services/brain-api/tests/test_cognitive_persistent_state_closeout_authorization_docs.py",
+    "scripts/cognitive-persistent-state-closeout-check.sh",
+    "scripts/cognitive-persistent-state-closeout-no-go-regression.sh",
+    "scripts/lib/cognitive_architecture_governance.py",
+)
+
+AION185_ALLOWED_EXACT_PATHS = set(AION185_REQUIRED_FILES) | {
+    "services/brain-api/tests/test_cognitive_architecture_program_authorization_docs.py",
+    "scripts/auth-design-check.sh",
+    "scripts/cognitive-architecture-authorization-check.sh",
+    "scripts/cognitive-persistent-state-check.sh",
+    "scripts/lib/v02-production-auth-scan-exclusions.sh",
+}
+
+AION185_ALLOWED_PREFIXES = (
+    "docs/cognitive-architecture/",
+    "examples/cognitive-architecture/",
+)
+
+AION185_PROHIBITED_PREFIXES = (
+    ".github/workflows/",
+    "migrations/",
+    "services/brain-api/src/",
+    "packages/aion-sdk-python/src/",
+    "services/brain-api/migrations/",
+    "infra/postgres/migrations/",
+)
+
+WORLD_MODEL_REQUIRED_CONTRACTS = (
+    "WorldState",
+    "WorldObservation",
+    "WorldActionReference",
+    "TransitionEvidence",
+    "TransitionPrediction",
+    "OutcomePrediction",
+    "UncertaintyEstimate",
+    "CausalHypothesis",
+    "CounterfactualScenario",
+    "CounterfactualRollout",
+    "WorldModelSnapshot",
+    "WorldModelEvaluation",
+)
+
+WORLD_MODEL_REQUIRED_SERVICES = (
+    "WorldStateEncoder",
+    "TransitionModel protocol",
+    "DeterministicTransitionModel",
+    "ProbabilisticTransitionModel",
+    "OutcomePredictor",
+    "UncertaintyEstimator",
+    "CausalHypothesisService",
+    "CounterfactualSimulator",
+    "WorldModelRepository protocol",
+)
+
 FORBIDDEN_CLAIM_TERMS = (
     "sentient",
     "sentience",
@@ -173,12 +241,16 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
     _assert(payload["final_planned_task"] == "AION-203", "bad final planned task")
     _assert(
         payload["active_cognitive_implementation_authorization"]
-        == AION183_AUTHORIZATION_ID,
+        == AION185_AUTHORIZATION_ID,
         "wrong active authorization",
     )
     _assert(
         payload["active_cognitive_implementation_authorization_count"] == 1,
         "active authorization count must be one",
+    )
+    _assert(
+        payload["program_state"] == "persistent_state_evaluated_world_model_authorized",
+        "wrong cognitive program state",
     )
     for flag in (
         "production_cognitive_runtime_enabled",
@@ -217,6 +289,46 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
         _assert(records[1]["pr"] == AION183_PR, "AION-183 PR mismatch")
     if "merge_commit" in records[1]:
         _assert(records[1]["merge_commit"] == AION183_MERGE_COMMIT, "AION-183 merge mismatch")
+    authorization = records[1]
+    _assert(
+        authorization["authorization_id"] == AION183_AUTHORIZATION_ID,
+        "AION-183 authorization id mismatch",
+    )
+    _assert(
+        authorization["task_state"] == "closed_by_aion_185_passed",
+        "AION-183 authorization must be closed by AION-185",
+    )
+    implementation = _find_record(records, "implementation_task", AION184_TASK_ID)
+    _assert(implementation["pr"] == AION184_PR, "AION-184 PR mismatch")
+    _assert(
+        implementation["merge_commit"] == AION184_MERGE_COMMIT,
+        "AION-184 merge commit mismatch",
+    )
+    _assert(
+        implementation["evaluation_id"] == AION185_EVALUATION_ID,
+        "AION-184 evaluation mismatch",
+    )
+    _assert(
+        implementation["task_state"] == "merged_evaluated_passed",
+        "AION-184 implementation must be evaluated",
+    )
+    closeout = _find_closeout_record(records)
+    _assert(closeout["task_id"] == AION185_TASK_ID, "AION-185 closeout missing")
+    _assert(closeout["result"] == "PASS", "AION-185 evaluation must pass")
+    _assert(
+        closeout["closed_authorization_id"] == AION183_AUTHORIZATION_ID,
+        "AION-185 must close AION-183 authorization",
+    )
+    _assert(
+        closeout["new_authorization_id"] == AION185_AUTHORIZATION_ID,
+        "AION-185 must create AION-185 authorization",
+    )
+    world_model_auth = _find_record(records, "authorization_id", AION185_AUTHORIZATION_ID)
+    _assert(
+        world_model_auth["authorized_task"] == AION186_TASK_ID,
+        "AION-185 must authorize AION-186",
+    )
+    _assert(world_model_auth["scope"] == AION186_SCOPE, "AION-186 scope mismatch")
 
 
 def validate_authorization_ledger(payload: dict[str, Any]) -> None:
@@ -232,7 +344,7 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
     )
     _assert(
         payload["active_cognitive_implementation_authorization"]
-        == AION183_AUTHORIZATION_ID,
+        == AION185_AUTHORIZATION_ID,
         "wrong active authorization",
     )
     for flag in (
@@ -247,20 +359,46 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
         _assert(payload[flag] is False, f"{flag} must be false")
 
     records = payload["records"]
-    _assert(len(records) == 1, "AION-183 must create exactly one authorization")
-    record = records[0]
-    _assert(record["authorization_id"] == AION183_AUTHORIZATION_ID, "authorization id mismatch")
-    _assert(record["authorization_active"] is True, "authorization must be active")
-    _assert(record["authorization_consumed"] is False, "authorization must not be consumed")
-    _assert(record["authorization_expired"] is False, "authorization must not be expired")
-    _assert(record["authorization_reusable"] is False, "authorization must be non-reusable")
-    _assert(record["implementation_task"] == AION184_TASK_ID, "implementation task mismatch")
-    _assert(record["formal_closeout_task"] == AION185_TASK_ID, "formal closeout mismatch")
-    _assert(record["candidate_id"] == AION184_CANDIDATE_ID, "candidate mismatch")
-    _assert(record["scope"] == AION184_SCOPE, "scope mismatch")
-    _assert(record["parent_evaluation"] == AION182_EVALUATION_ID, "parent evaluation mismatch")
-    _assert(record["parent_commit"] == AION182_MERGE_COMMIT, "parent commit mismatch")
-    _assert(record["parent_pr"] == 93, "parent PR mismatch")
+    _assert(len(records) == 2, "AION-185 must leave one closed and one active authorization")
+    closed = _find_record(records, "authorization_id", AION183_AUTHORIZATION_ID)
+    _assert(closed["record_kind"] == "implementation_authorization_closeout", "bad closeout kind")
+    _assert(closed["authorization_active"] is False, "AION-183 authorization must be inactive")
+    _assert(closed["authorization_consumed"] is True, "AION-183 authorization must be consumed")
+    _assert(closed["authorization_expired"] is True, "AION-183 authorization must be expired")
+    _assert(closed["authorization_reusable"] is False, "AION-183 authorization must be non-reusable")
+    _assert(closed["authorization_consumed_by_task"] == AION184_TASK_ID, "AION-183 consumer task")
+    _assert(closed["authorization_closed_by_task"] == AION185_TASK_ID, "AION-183 closeout task")
+    _assert(closed["authorization_closeout_evaluation"] == AION185_EVALUATION_ID, "closeout eval")
+    _assert(closed["implementation_pr"] == AION184_PR, "AION-184 closeout PR mismatch")
+    _assert(closed["implementation_merge_commit"] == AION184_MERGE_COMMIT, "AION-184 merge")
+    _assert(closed["evaluation_result"] == "PASS", "AION-185 closeout must pass")
+    _assert(
+        closed["hard_pass_conditions"]["replay_equality_rate"] == 1.0,
+        "replay equality must be complete",
+    )
+    for key in (
+        "state_invariant_violations",
+        "lost_committed_events",
+        "duplicate_applied_events",
+        "forbidden_side_effects",
+    ):
+        _assert(closed["hard_pass_conditions"][key] == 0, f"{key} must be zero")
+    for flag in FALSE_RUNTIME_FLAGS:
+        _assert(closed[flag] is False, f"closed {flag} must be false")
+
+    record = _find_record(records, "authorization_id", AION185_AUTHORIZATION_ID)
+    _assert(record["record_kind"] == "implementation_authorization", "bad authorization kind")
+    _assert(record["authorization_active"] is True, "AION-185 authorization must be active")
+    _assert(record["authorization_consumed"] is False, "AION-185 authorization must not be consumed")
+    _assert(record["authorization_expired"] is False, "AION-185 authorization must not be expired")
+    _assert(record["authorization_reusable"] is False, "AION-185 authorization must be non-reusable")
+    _assert(record["implementation_task"] == AION186_TASK_ID, "implementation task mismatch")
+    _assert(record["formal_closeout_task"] == "AION-187", "formal closeout mismatch")
+    _assert(record["candidate_id"] == AION186_CANDIDATE_ID, "candidate mismatch")
+    _assert(record["scope"] == AION186_SCOPE, "scope mismatch")
+    _assert(record["parent_evaluation"] == AION185_EVALUATION_ID, "parent evaluation mismatch")
+    _assert(record["parent_commit"] == AION184_MERGE_COMMIT, "parent commit mismatch")
+    _assert(record["parent_pr"] == AION184_PR, "parent PR mismatch")
     _assert(record["resource_limits"]["network_calls"] == 0, "network calls must be zero")
     _assert(record["resource_limits"]["connector_calls"] == 0, "connector calls must be zero")
     _assert(
@@ -277,12 +415,30 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
         _assert(record[flag] is False, f"{flag} must be false")
     _assert(
         any(
-            path.startswith("services/brain-api/src/aion_brain/cognitive_architecture")
+            path.startswith("services/brain-api/src/aion_brain/world_model")
             for path in record["allowed_source_paths"]
         ),
-        "cognitive namespace not allowed",
+        "world model namespace not allowed",
     )
     _assert(".github/workflows/" in record["prohibited_source_paths"], "workflow prohibition missing")
+
+
+def _find_record(records: list[dict[str, Any]], key: str, value: Any) -> dict[str, Any]:
+    matches = [record for record in records if record.get(key) == value]
+    _assert(len(matches) == 1, f"expected one record with {key}={value}")
+    return matches[0]
+
+
+def _find_closeout_record(records: list[dict[str, Any]]) -> dict[str, Any]:
+    matches = [
+        record
+        for record in records
+        if record.get("task_id") == AION185_TASK_ID
+        and record.get("record_kind") == "evaluation_authorization"
+        and record.get("evaluation_id") == AION185_EVALUATION_ID
+    ]
+    _assert(len(matches) == 1, "expected one AION-185 evaluation closeout record")
+    return matches[0]
 
 
 def validate_no_claim_terms(root: Path, extra_scan_roots: tuple[Path, ...] = ()) -> None:
@@ -375,17 +531,15 @@ def validate_persistent_state(root: Path) -> None:
     program = _load_json(root, "docs/cognitive-architecture/program-ledger.json")
     authorization = _load_json(root, "docs/cognitive-architecture/authorization-ledger.json")
     _assert(
-        program["active_cognitive_implementation_authorization"] == AION183_AUTHORIZATION_ID,
-        "AION-184 must remain bound to AION-183 authorization",
+        program["active_cognitive_implementation_authorization"] == AION185_AUTHORIZATION_ID,
+        "AION-184 must be evaluated before AION-186 authorization becomes active",
     )
-    _assert(
-        authorization["records"][0]["authorization_active"] is True,
-        "AION-183 authorization must remain active until AION-185 closeout",
-    )
-    _assert(
-        authorization["records"][0]["implementation_task"] == AION184_TASK_ID,
-        "authorization must bind AION-184",
-    )
+    closed = _find_record(authorization["records"], "authorization_id", AION183_AUTHORIZATION_ID)
+    _assert(closed["authorization_active"] is False, "AION-183 authorization must be closed")
+    _assert(closed["authorization_consumed"] is True, "AION-183 authorization must be consumed")
+    _assert(closed["authorization_closeout_evaluation"] == AION185_EVALUATION_ID, "closeout eval")
+    active = _find_record(authorization["records"], "authorization_id", AION185_AUTHORIZATION_ID)
+    _assert(active["implementation_task"] == AION186_TASK_ID, "active authorization must bind AION-186")
     for key in (
         "runtime_effect",
         "source_modified_by_runtime",
@@ -405,6 +559,10 @@ def validate_persistent_state(root: Path) -> None:
 def validate_persistent_state_no_go(root: Path) -> None:
     validate_persistent_state(root)
     validate_no_go(root)
+    authorization = _load_json(root, "docs/cognitive-architecture/authorization-ledger.json")
+    closeout_paths_allowed = (
+        authorization["active_cognitive_implementation_authorization"] == AION185_AUTHORIZATION_ID
+    )
     changed = _changed_files(root)
     for relative in sorted(changed):
         path = Path(relative)
@@ -417,7 +575,8 @@ def validate_persistent_state_no_go(root: Path) -> None:
             f"prohibited AION-184 path changed: {relative}",
         )
         _assert(
-            _aion184_path_allowed(relative),
+            _aion184_path_allowed(relative)
+            or (closeout_paths_allowed and _aion185_path_allowed(relative)),
             f"unexpected AION-184 path changed: {relative}",
         )
     source_text = "\n".join(
@@ -437,9 +596,176 @@ def validate_persistent_state_no_go(root: Path) -> None:
         _assert(marker not in source_text, f"prohibited cognitive import: {marker}")
 
 
+def validate_persistent_state_closeout(root: Path) -> None:
+    validate_persistent_state(root)
+    validate_required_files(root, AION185_REQUIRED_FILES)
+    validate_no_claim_terms(
+        root,
+        (
+            root / "services/brain-api/tests/test_cognitive_persistent_state_closeout_authorization_docs.py",
+        ),
+    )
+    evaluation = _load_json(
+        root,
+        "examples/cognitive-architecture/aion-185-persistent-state-evaluation.json",
+    )
+    world_model_authorization = _load_json(
+        root,
+        "examples/cognitive-architecture/aion-185-world-model-authorization.json",
+    )
+    validate_aion185_evaluation_payload(evaluation)
+    validate_aion185_authorization_payload(world_model_authorization)
+    task_doc = (root / "docs/cognitive-architecture/tasks/AION-185.md").read_text()
+    for section in (
+        "## Task Purpose",
+        "## Evaluation",
+        "## Closed Authorization",
+        "## Hard PASS Conditions",
+        "## New Authorization",
+        "## AION-186 Scope",
+        "## Source Boundaries",
+        "## Required Gates",
+        "## Security Invariants",
+        "## Completion Conditions",
+        "## Next Task",
+    ):
+        _assert(section in task_doc, f"AION-185 task doc missing {section}")
+    for term in (
+        AION185_EVALUATION_ID,
+        AION183_AUTHORIZATION_ID,
+        AION185_AUTHORIZATION_ID,
+        AION186_TASK_ID,
+        AION186_SCOPE,
+    ):
+        _assert(term in task_doc, f"AION-185 task doc missing {term}")
+    program = _load_json(root, "docs/cognitive-architecture/program-ledger.json")
+    authorization = _load_json(root, "docs/cognitive-architecture/authorization-ledger.json")
+    closeout = _find_closeout_record(program["records"])
+    _assert(closeout["result"] == "PASS", "AION-185 ledger result must pass")
+    active = _find_record(authorization["records"], "authorization_id", AION185_AUTHORIZATION_ID)
+    _assert(active["authorization_active"] is True, "AION-185 authorization must be active")
+    _assert(
+        not (root / "services/brain-api/src/aion_brain/api/world_model.py").exists(),
+        "AION-185 must not add a world-model API route",
+    )
+    _assert(
+        not (root / "services/brain-api/src/aion_brain/world_model").exists(),
+        "AION-185 must not implement world-model runtime source",
+    )
+
+
+def validate_persistent_state_closeout_no_go(root: Path) -> None:
+    validate_persistent_state_closeout(root)
+    validate_no_go(root)
+    changed = _changed_files(root)
+    for relative in sorted(changed):
+        path = Path(relative)
+        _assert(
+            path.name not in AION184_BLOCKED_FILENAMES,
+            f"blocked package or dependency file changed: {relative}",
+        )
+        _assert(
+            not any(relative.startswith(prefix) for prefix in AION185_PROHIBITED_PREFIXES),
+            f"prohibited AION-185 path changed: {relative}",
+        )
+        _assert(
+            _aion185_path_allowed(relative),
+            f"unexpected AION-185 path changed: {relative}",
+        )
+
+
+def validate_aion185_evaluation_payload(payload: dict[str, Any]) -> None:
+    _assert(
+        payload["schema_version"] == "aion-cognitive-persistent-state-evaluation/v1",
+        "bad AION-185 evaluation schema",
+    )
+    _assert(payload["program_id"] == PROGRAM_ID, "bad AION-185 program id")
+    _assert(payload["task_id"] == AION185_TASK_ID, "bad AION-185 task id")
+    _assert(payload["evaluation_id"] == AION185_EVALUATION_ID, "bad AION-185 evaluation id")
+    _assert(payload["evaluated_task"] == AION184_TASK_ID, "bad evaluated task")
+    _assert(payload["closed_authorization_id"] == AION183_AUTHORIZATION_ID, "bad closed auth")
+    _assert(payload["result"] == "PASS", "AION-185 evaluation must pass")
+    _assert(
+        payload["decision"]
+        == "PERSISTENT_STATE_EVALUATION_PASS_AUTHORIZE_WORLD_MODEL",
+        "bad AION-185 decision",
+    )
+    _assert(payload["implementation_pr"] == AION184_PR, "bad AION-184 PR")
+    _assert(payload["implementation_merge_commit"] == AION184_MERGE_COMMIT, "bad AION-184 merge")
+    metrics = payload["hard_pass_conditions"]
+    _assert(metrics["replay_equality_rate"] == 1.0, "replay equality must be 100 percent")
+    for key in (
+        "state_invariant_violations",
+        "lost_committed_events",
+        "duplicate_applied_events",
+        "forbidden_side_effects",
+    ):
+        _assert(metrics[key] == 0, f"{key} must be zero")
+    for key in (
+        "restart_continuity",
+        "concurrency",
+        "contradiction_handling",
+        "uncertainty_tracking",
+        "retention",
+        "corruption_detection",
+        "repository_integrity",
+        "zero_runtime_side_effects",
+    ):
+        _assert(payload["evaluation_matrix"][key] == "PASS", f"{key} must pass")
+    side_effects = payload["side_effects"]
+    for key in (
+        "runtime_effect",
+        "api_route_added",
+        "kernel_registration_added",
+        "background_loop_added",
+        "action_execution_enabled",
+        "network_calls",
+        "connector_calls",
+        "model_provider_calls",
+        "source_rewrite_operations",
+        "deployment_enabled",
+        "model_weights_changed",
+    ):
+        _assert(side_effects[key] in (False, 0), f"{key} must be absent")
+
+
+def validate_aion185_authorization_payload(payload: dict[str, Any]) -> None:
+    _assert(
+        payload["schema_version"] == "aion-cognitive-world-model-authorization/v1",
+        "bad AION-185 authorization schema",
+    )
+    _assert(payload["program_id"] == PROGRAM_ID, "bad AION-185 authorization program")
+    _assert(payload["authorization_id"] == AION185_AUTHORIZATION_ID, "bad AION-185 auth id")
+    _assert(payload["parent_evaluation_id"] == AION185_EVALUATION_ID, "bad parent eval")
+    _assert(payload["authorized_task"] == AION186_TASK_ID, "bad authorized task")
+    _assert(payload["candidate_id"] == AION186_CANDIDATE_ID, "bad candidate")
+    _assert(payload["scope"] == AION186_SCOPE, "bad AION-186 scope")
+    _assert(payload["authorization_active"] is True, "AION-185 auth must be active")
+    _assert(payload["authorization_consumed"] is False, "AION-185 auth must not be consumed")
+    _assert(payload["authorization_expired"] is False, "AION-185 auth must not be expired")
+    _assert(payload["authorization_reusable"] is False, "AION-185 auth must be non-reusable")
+    _assert(payload["formal_closeout_task"] == "AION-187", "bad formal closeout")
+    for contract in WORLD_MODEL_REQUIRED_CONTRACTS:
+        _assert(contract in payload["required_contracts"], f"missing world contract: {contract}")
+    for service in WORLD_MODEL_REQUIRED_SERVICES:
+        _assert(service in payload["required_services"], f"missing world service: {service}")
+    for flag in FALSE_RUNTIME_FLAGS:
+        _assert(payload[flag] is False, f"{flag} must be false")
+    _assert(payload["resource_limits"]["network_calls"] == 0, "network calls must be zero")
+    _assert(payload["resource_limits"]["model_provider_calls"] == 0, "provider calls must be zero")
+    _assert(payload["resource_limits"]["model_weight_training"] == 0, "model training must be zero")
+    _assert(".github/workflows/" in payload["prohibited_source_paths"], "workflow prohibition")
+
+
 def _aion184_path_allowed(relative: str) -> bool:
     return relative in AION184_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION184_ALLOWED_PREFIXES
+    )
+
+
+def _aion185_path_allowed(relative: str) -> bool:
+    return relative in AION185_ALLOWED_EXACT_PATHS or any(
+        relative.startswith(prefix) for prefix in AION185_ALLOWED_PREFIXES
     )
 
 
@@ -494,6 +820,8 @@ def main() -> int:
             "no-go",
             "persistent-state",
             "persistent-state-no-go",
+            "persistent-state-closeout",
+            "persistent-state-closeout-no-go",
         ),
         default="authorization",
     )
@@ -508,9 +836,15 @@ def main() -> int:
     elif args.mode == "persistent-state":
         validate_persistent_state(root)
         print("cognitive persistent-state validation PASS")
-    else:
+    elif args.mode == "persistent-state-no-go":
         validate_persistent_state_no_go(root)
         print("cognitive persistent-state no-go validation PASS")
+    elif args.mode == "persistent-state-closeout":
+        validate_persistent_state_closeout(root)
+        print("cognitive persistent-state closeout validation PASS")
+    else:
+        validate_persistent_state_closeout_no_go(root)
+        print("cognitive persistent-state closeout no-go validation PASS")
     return 0
 
 
