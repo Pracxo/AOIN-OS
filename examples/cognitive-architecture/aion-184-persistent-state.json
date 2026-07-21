@@ -1,0 +1,32 @@
+{
+  "authorization_id": "AION-183-CA-0001",
+  "candidate_id": "persistent-cognitive-state-core",
+  "event_store": {
+    "append_only": true,
+    "idempotent": true,
+    "optimistic_concurrency": true,
+    "monotonic_sequence": true
+  },
+  "implementation_task": "AION-184",
+  "persistence": {
+    "default_path": null,
+    "explicit_local_sqlite_supported": true,
+    "hidden_path_allowed": false,
+    "repository_path_allowed": false,
+    "schema_initialization": "explicit"
+  },
+  "program_id": "AION-COGNITIVE-ARCHITECTURE-001",
+  "runtime_boundaries": {
+    "api_route_added": false,
+    "approval_created": false,
+    "background_loop": false,
+    "external_call": false,
+    "git_mutated": false,
+    "kernel_registration_added": false,
+    "model_weights_changed": false,
+    "production_exposure": false,
+    "pull_request_created": false,
+    "runtime_effect": false
+  },
+  "schema_version": "aion-cognitive-persistent-state-example/v1"
+}

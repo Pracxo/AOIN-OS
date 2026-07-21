@@ -41,6 +41,8 @@
       "expiry_condition": "AION-184 implementation merge followed by AION-185 evaluation closeout",
       "formal_closeout_task": "AION-185",
       "git_mutated": false,
+      "implementation_branch": "phase/cognitive-persistent-state",
+      "implementation_state": "implemented_pending_merge_and_aion_185_evaluation",
       "implementation_task": "AION-184",
       "merged": false,
       "model_weights_changed": false,
