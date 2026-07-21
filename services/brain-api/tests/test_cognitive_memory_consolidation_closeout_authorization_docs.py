@@ -24,6 +24,7 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION191_EVALUATION_ID,
     AION192_SCOPE,
     AION192_TASK_ID,
+    AION193_AUTHORIZATION_ID,
     PROGRAM_ID,
     validate_aion191_authorization_payload,
     validate_aion191_evaluation_payload,
@@ -214,9 +215,13 @@ def test_aion_191_ledgers_examples_and_no_go_validate() -> None:
     authorization = _json("docs/cognitive-architecture/authorization-ledger.json")
 
     assert program["program_id"] == PROGRAM_ID
-    assert program["active_cognitive_implementation_authorization"] == AION191_AUTHORIZATION_ID
+    assert program["active_cognitive_implementation_authorization"] in {
+        AION191_AUTHORIZATION_ID,
+        AION193_AUTHORIZATION_ID,
+    }
     assert (
-        authorization["active_cognitive_implementation_authorization"] == AION191_AUTHORIZATION_ID
+        authorization["active_cognitive_implementation_authorization"]
+        in {AION191_AUTHORIZATION_ID, AION193_AUTHORIZATION_ID}
     )
     assert authorization["active_cognitive_implementation_authorization_count"] == 1
 
@@ -245,7 +250,14 @@ def test_aion_191_ledgers_examples_and_no_go_validate() -> None:
         for item in authorization["records"]
         if item["authorization_id"] == AION191_AUTHORIZATION_ID
     )
-    assert active["authorization_active"] is True
+    if authorization["active_cognitive_implementation_authorization"] == AION191_AUTHORIZATION_ID:
+        assert active["authorization_active"] is True
+        assert active["authorization_consumed"] is False
+        assert active["authorization_expired"] is False
+    else:
+        assert active["authorization_active"] is False
+        assert active["authorization_consumed"] is True
+        assert active["authorization_expired"] is True
     assert active["implementation_task"] == AION192_TASK_ID
     assert active["scope"] == AION192_SCOPE
 
@@ -301,7 +313,10 @@ def test_aion_191_does_not_implement_aion_192_runtime_surface() -> None:
         assert "class StrategicPlanner" not in source_text
         assert "class ReplanningService" not in source_text
     else:
-        assert planning_state == "implemented_pending_aion_193_evaluation"
+        assert planning_state in {
+            "implemented_pending_aion_193_evaluation",
+            "merged_evaluated_passed",
+        }
     assert not (ROOT / "services/brain-api/src/aion_brain/api/planning.py").exists()
 
 
