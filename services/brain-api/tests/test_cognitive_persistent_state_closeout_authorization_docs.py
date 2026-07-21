@@ -228,6 +228,16 @@ def test_aion_185_evaluation_scenario_preserves_replay_and_restart(tmp_path: Pat
 
 
 def test_aion_185_adds_no_world_model_runtime_surface() -> None:
-    assert not (ROOT / "services/brain-api/src/aion_brain/world_model").exists()
-    assert not (ROOT / "services/brain-api/src/aion_brain/contracts/world_model.py").exists()
+    program = _json("docs/cognitive-architecture/program-ledger.json")
+    aion_186_implemented = any(
+        record.get("implementation_task") == "AION-186"
+        and record.get("task_state") == "implemented_pending_aion_187_evaluation"
+        for record in program["records"]
+    )
+    assert aion_186_implemented or not (
+        ROOT / "services/brain-api/src/aion_brain/world_model"
+    ).exists()
+    assert aion_186_implemented or not (
+        ROOT / "services/brain-api/src/aion_brain/contracts/world_model.py"
+    ).exists()
     assert not (ROOT / "services/brain-api/src/aion_brain/api/world_model.py").exists()

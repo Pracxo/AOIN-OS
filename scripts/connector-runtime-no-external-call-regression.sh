@@ -81,6 +81,7 @@ if git diff --name-only --diff-filter=ACMRT HEAD -- services/brain-api/src packa
 			  | rg -v '^services/brain-api/src/aion_brain/contracts/self_improvement_shadow\.py$|^services/brain-api/src/aion_brain/self_improvement/shadow_(budget|evidence|mode|observation|pipeline|redaction|runner)\.py$' \
 			  | rg -v '^services/brain-api/src/aion_brain/contracts/self_improvement_shadow_activation\.py$|^services/brain-api/src/aion_brain/self_improvement/shadow_activation(_approval|_deactivation|_evidence|_monitoring|_policy|_simulator)?\.py$' \
 			  | rg -v '^services/brain-api/src/aion_brain/contracts/cognitive_state\.py$|^services/brain-api/src/aion_brain/cognitive_architecture/(__init__|repository|state)\.py$' \
+			  | rg -v '^services/brain-api/src/aion_brain/contracts/world_model\.py$|^services/brain-api/src/aion_brain/world_model/(__init__|prediction|repository)\.py$' \
 			  | rg -v '^services/brain-api/src/aion_brain/(explanations|grounding|model_outputs|prompts)/redaction\.py$' \
 			  | rg -n '.'; then
   echo "AION-109 must not change runtime, SDK, CLI, or config source files" >&2
@@ -100,6 +101,7 @@ if git ls-files --others --exclude-standard services/brain-api/src packages/aion
 			  | rg -v '^services/brain-api/src/aion_brain/contracts/self_improvement_shadow\.py$|^services/brain-api/src/aion_brain/self_improvement/shadow_(budget|evidence|mode|observation|pipeline|redaction|runner)\.py$' \
 			  | rg -v '^services/brain-api/src/aion_brain/contracts/self_improvement_shadow_activation\.py$|^services/brain-api/src/aion_brain/self_improvement/shadow_activation(_approval|_deactivation|_evidence|_monitoring|_policy|_simulator)?\.py$' \
 			  | rg -v '^services/brain-api/src/aion_brain/contracts/cognitive_state\.py$|^services/brain-api/src/aion_brain/cognitive_architecture/(__init__|repository|state)\.py$' \
+			  | rg -v '^services/brain-api/src/aion_brain/contracts/world_model\.py$|^services/brain-api/src/aion_brain/world_model/(__init__|prediction|repository)\.py$' \
 			  | rg -v '^services/brain-api/src/aion_brain/(explanations|grounding|model_outputs|prompts)/redaction\.py$' \
 			  | rg -n '.'; then
   echo "AION-109 must not add runtime, SDK, or CLI source files" >&2

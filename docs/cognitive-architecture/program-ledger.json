@@ -10,7 +10,7 @@
   "production_event_subscription_enabled": false,
   "program_id": "AION-COGNITIVE-ARCHITECTURE-001",
   "program_name": "AION Cognitive Architecture Program",
-  "program_state": "persistent_state_evaluated_world_model_authorized",
+  "program_state": "predictive_world_model_implemented_pending_evaluation",
   "records": [
     {
       "authorization_id": "AION-180-SI-0007",
@@ -80,7 +80,23 @@
       "evaluation_id": "AION-PCSE-001",
       "pr": null,
       "merge_commit": null,
-      "task_state": "authorization_pending_merge"
+      "task_state": "implementation_pending_aion_187_evaluation"
+    },
+    {
+      "task_id": "AION-186",
+      "record_kind": "implementation",
+      "authorization_id": "AION-185-CA-0002",
+      "candidate_id": "predictive-world-model-core",
+      "scope": "predictive-world-model-transition-outcome-uncertainty-counterfactual-core",
+      "workstream": "predictive-world-model",
+      "closeout_task": "AION-187",
+      "evaluation_id": null,
+      "implementation_task": "AION-186",
+      "runtime_effect": false,
+      "forbidden_side_effects": 0,
+      "pr": null,
+      "merge_commit": null,
+      "task_state": "implemented_pending_aion_187_evaluation"
     }
   ],
   "schema_version": "aion-cognitive-architecture-program-ledger/v1",

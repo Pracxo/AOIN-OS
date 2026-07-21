@@ -49,7 +49,7 @@
       "parent_pr": 95,
       "implementation_task": "AION-186",
       "implementation_branch": "phase/cognitive-predictive-world-model",
-      "implementation_state": "authorized_pending_aion_186_implementation",
+      "implementation_state": "implemented_pending_aion_187_evaluation",
       "formal_closeout_task": "AION-187",
       "candidate_id": "predictive-world-model-core",
       "scope": "predictive-world-model-transition-outcome-uncertainty-counterfactual-core",

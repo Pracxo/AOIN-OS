@@ -1,0 +1,44 @@
+{
+  "schema_version": "aion-cognitive-predictive-world-model-evidence/v1",
+  "program_id": "AION-COGNITIVE-ARCHITECTURE-001",
+  "task_id": "AION-186",
+  "authorization_id": "AION-185-CA-0002",
+  "candidate_id": "predictive-world-model-core",
+  "scope": "predictive-world-model-transition-outcome-uncertainty-counterfactual-core",
+  "model": {
+    "algorithm": "deterministic-count-based-probabilistic-transition-model",
+    "smoothing": 0.5,
+    "model_weight_training": false,
+    "network_calls": 0,
+    "connector_calls": 0,
+    "model_provider_calls": 0,
+    "runtime_action_execution": false
+  },
+  "capabilities": {
+    "multiple_possible_futures": true,
+    "calibrated_uncertainty": true,
+    "counterfactual_branches": true,
+    "action_effect_comparison": true,
+    "reversible_effect_flags": true,
+    "irreversible_effect_flags": true,
+    "unknown_state_detection": true,
+    "model_version_fingerprints": true,
+    "data_provenance": true,
+    "deterministic_replay": true
+  },
+  "side_effects": {
+    "runtime_effect": false,
+    "api_route_added": false,
+    "kernel_registration_added": false,
+    "background_loop_added": false,
+    "action_execution_enabled": false,
+    "network_calls": 0,
+    "connector_calls": 0,
+    "model_provider_calls": 0,
+    "source_rewrite_operations": 0,
+    "deployment_enabled": false,
+    "model_weights_changed": false,
+    "forbidden_side_effects": 0
+  },
+  "next_task": "AION-187"
+}
