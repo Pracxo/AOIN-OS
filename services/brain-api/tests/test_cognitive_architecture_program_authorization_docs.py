@@ -1,0 +1,139 @@
+"""AION-183 cognitive architecture authorization document tests."""
+
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(ROOT / "scripts/lib"))
+
+from cognitive_architecture_governance import (  # noqa: E402
+    AION183_AUTHORIZATION_ID,
+    AION184_SCOPE,
+    AION184_TASK_ID,
+    AION185_TASK_ID,
+    PROGRAM_ID,
+    validate_authorization_ledger,
+    validate_no_go,
+    validate_program_ledger,
+    validate_repo,
+)
+
+REQUIRED_FILES = (
+    "docs/cognitive-architecture/tasks/AION-183.md",
+    "docs/cognitive-architecture/program-ledger.json",
+    "docs/cognitive-architecture/authorization-ledger.json",
+    "docs/cognitive-architecture/architecture-roadmap.md",
+    "docs/cognitive-architecture/security-boundary.md",
+    "docs/cognitive-architecture/operator-model.md",
+    "examples/cognitive-architecture/aion-183-program-authorization.json",
+    "scripts/lib/cognitive_architecture_governance.py",
+    "scripts/cognitive-architecture-authorization-check.sh",
+    "scripts/cognitive-architecture-no-go-regression.sh",
+)
+
+
+def _json(relative: str) -> dict:
+    return json.loads((ROOT / relative).read_text())
+
+
+def _text(relative: str) -> str:
+    return (ROOT / relative).read_text()
+
+
+def test_aion_183_required_files_exist() -> None:
+    for relative in REQUIRED_FILES:
+        assert (ROOT / relative).is_file(), relative
+
+
+def test_aion_183_task_doc_contains_required_sections() -> None:
+    text = _text("docs/cognitive-architecture/tasks/AION-183.md")
+    for marker in (
+        "## Task Purpose",
+        "## Authorization ID",
+        "## Exact Scope",
+        "## Role Comparison",
+        "## Source Boundaries",
+        "## Required Contracts",
+        "## Required Services",
+        "## Required Tests",
+        "## Required Gates",
+        "## Security Invariants",
+        "## Performance Limits",
+        "## Completion Conditions",
+        "## Next Task",
+    ):
+        assert marker in text
+    assert AION183_AUTHORIZATION_ID in text
+    assert AION184_TASK_ID in text
+    assert AION185_TASK_ID in text
+
+
+def test_aion_183_ledgers_validate_and_authorize_aion_184_only() -> None:
+    program = _json("docs/cognitive-architecture/program-ledger.json")
+    authorization = _json("docs/cognitive-architecture/authorization-ledger.json")
+
+    validate_program_ledger(program)
+    validate_authorization_ledger(authorization)
+    validate_repo(ROOT)
+    validate_no_go(ROOT)
+
+    assert program["program_id"] == PROGRAM_ID
+    assert program["active_cognitive_implementation_authorization_count"] == 1
+    assert program["active_cognitive_implementation_authorization"] == AION183_AUTHORIZATION_ID
+    assert program["tasks"][0]["task_id"] == "AION-183"
+    assert program["tasks"][-1]["task_id"] == "AION-203"
+
+    record = authorization["records"][0]
+    assert record["authorization_id"] == AION183_AUTHORIZATION_ID
+    assert record["implementation_task"] == AION184_TASK_ID
+    assert record["formal_closeout_task"] == AION185_TASK_ID
+    assert record["scope"] == AION184_SCOPE
+    assert record["authorization_active"] is True
+    assert record["authorization_consumed"] is False
+    assert record["authorization_expired"] is False
+    assert record["authorization_reusable"] is False
+
+
+def test_aion_183_preserves_runtime_disabled_boundaries() -> None:
+    authorization = _json("docs/cognitive-architecture/authorization-ledger.json")
+    record = authorization["records"][0]
+    false_flags = (
+        "runtime_effect",
+        "source_modified",
+        "git_mutated",
+        "pull_request_created",
+        "approval_created",
+        "merged",
+        "production_exposure",
+        "model_weights_changed",
+    )
+    for key in false_flags:
+        assert record[key] is False
+    assert record["resource_limits"]["network_calls"] == 0
+    assert record["resource_limits"]["connector_calls"] == 0
+    assert record["resource_limits"]["model_provider_calls"] == 0
+    assert record["resource_limits"]["git_operations"] == 0
+    assert record["resource_limits"]["background_loops"] == 0
+
+
+def test_aion_183_docs_do_not_claim_subjective_state() -> None:
+    for relative in (
+        "docs/cognitive-architecture/tasks/AION-183.md",
+        "docs/cognitive-architecture/architecture-roadmap.md",
+        "docs/cognitive-architecture/security-boundary.md",
+        "docs/cognitive-architecture/operator-model.md",
+        "examples/cognitive-architecture/aion-183-program-authorization.json",
+    ):
+        lowered = _text(relative).lower()
+        for term in (
+            "sentient",
+            "sentience",
+            "conscious",
+            "consciousness",
+            "self-preservation",
+            "ego",
+        ):
+            assert term not in lowered, f"{relative} contains {term}"
