@@ -10,7 +10,7 @@
   "production_event_subscription_enabled": false,
   "program_id": "AION-COGNITIVE-ARCHITECTURE-001",
   "program_name": "AION Cognitive Architecture Program",
-  "program_state": "memory_consolidation_evaluated_planning_authorized",
+  "program_state": "counterfactual_planning_implemented_pending_evaluation",
   "records": [
     {
       "authorization_id": "AION-180-SI-0007",
@@ -207,7 +207,7 @@
       "runtime_effect": false,
       "source_modified_by_evaluation": false,
       "forbidden_side_effects": 0,
-      "task_state": "passed_authorized_aion_192_pending_implementation"
+      "task_state": "passed_authorized_aion_192_implemented_pending_evaluation"
     },
     {
       "task_id": "AION-191",
@@ -221,7 +221,24 @@
       "evaluation_id": "AION-MCRE-001",
       "pr": null,
       "merge_commit": null,
-      "task_state": "implementation_pending_aion_193_evaluation"
+      "task_state": "implemented_pending_aion_193_evaluation"
+    },
+    {
+      "task_id": "AION-192",
+      "record_kind": "implementation",
+      "authorization_id": "AION-191-CA-0005",
+      "candidate_id": "hierarchical-counterfactual-planning-core",
+      "scope": "hierarchical-counterfactual-goal-strategy-milestone-task-action-planning-core",
+      "workstream": "counterfactual-planning",
+      "closeout_task": "AION-193",
+      "evaluation_id": "AION-HCPE-001",
+      "implementation_task": "AION-192",
+      "implementation_branch": "phase/cognitive-counterfactual-planning",
+      "runtime_effect": false,
+      "forbidden_side_effects": 0,
+      "pr": null,
+      "merge_commit": null,
+      "task_state": "implemented_pending_aion_193_evaluation"
     }
   ],
   "schema_version": "aion-cognitive-architecture-program-ledger/v1",

@@ -1,0 +1,113 @@
+{
+  "authorization_id": "AION-191-CA-0005",
+  "benchmark_requirements": {
+    "budget_overrun_count": 0,
+    "deterministic_plan_replay_rate": 1.0,
+    "forbidden_side_effects": 0,
+    "irreversible_unsafe_plan_selection_count": 0,
+    "policy_violation_count": 0,
+    "synthetic_goal_completion_plan_success_minimum": 0.8
+  },
+  "candidate_id": "hierarchical-counterfactual-planning-core",
+  "capabilities": {
+    "action_proposal_only": true,
+    "bounded_counterfactual_rollouts": true,
+    "deterministic_replay_hashes": true,
+    "goal_strategy_milestone_task_hierarchy": true,
+    "hard_policy_override": true,
+    "hard_safety_override": true,
+    "replanning_decisions": true,
+    "resource_budget_estimates": true,
+    "reversibility_checks": true,
+    "world_model_backed_branch_scoring": true
+  },
+  "closeout_task": "AION-193",
+  "contracts": [
+    "StrategicGoal",
+    "StrategyOption",
+    "MilestonePlan",
+    "TaskPlan",
+    "ActionProposal",
+    "CounterfactualBranch",
+    "ExpectedOutcome",
+    "PlanRisk",
+    "PlanResourceEstimate",
+    "PlanReversibility",
+    "HierarchicalPlan",
+    "ReplanningDecision",
+    "PlanEvidence"
+  ],
+  "hard_policy_overrides": [
+    "policy failure overrides utility gain",
+    "safety failure overrides utility gain",
+    "irreversible unsafe action proposals are rejected",
+    "planner produces action proposals only"
+  ],
+  "implementation_branch": "phase/cognitive-counterfactual-planning",
+  "implementation_state": "implemented_pending_aion_193_evaluation",
+  "next_task": "AION-193",
+  "program_id": "AION-COGNITIVE-ARCHITECTURE-001",
+  "prohibited_behaviors": [
+    "action execution",
+    "external action dispatch",
+    "background planning loop",
+    "unrestricted network access",
+    "model-weight update",
+    "source rewrite",
+    "git mutation"
+  ],
+  "resource_limits": {
+    "action_execution": 0,
+    "background_loops": 0,
+    "connector_calls": 0,
+    "git_operations": 0,
+    "model_provider_calls": 0,
+    "model_weight_training": 0,
+    "network_calls": 0,
+    "production_exposure": 0,
+    "source_rewrite_operations": 0
+  },
+  "runtime_boundaries": {
+    "action_execution_enabled": false,
+    "api_route_added": false,
+    "background_loop_added": false,
+    "connector_calls": 0,
+    "deployment_enabled": false,
+    "external_action_dispatch": false,
+    "forbidden_side_effects": 0,
+    "git_operations": 0,
+    "kernel_registration_added": false,
+    "model_calls_by_default": 0,
+    "model_provider_calls": 0,
+    "model_weight_training": 0,
+    "model_weights_changed": false,
+    "network_calls": 0,
+    "production_exposure": false,
+    "runtime_effect": false,
+    "source_rewrite_operations": 0
+  },
+  "schema_version": "aion-cognitive-counterfactual-planning-implementation/v1",
+  "scope": "hierarchical-counterfactual-goal-strategy-milestone-task-action-planning-core",
+  "score_dimensions": [
+    "expected_goal_progress",
+    "expected_information_gain",
+    "confidence",
+    "risk",
+    "resource_cost",
+    "reversibility",
+    "policy_eligibility",
+    "uncertainty",
+    "time_horizon"
+  ],
+  "services": [
+    "StrategicPlanner",
+    "TacticalPlanner",
+    "ActionPlanner",
+    "CounterfactualPlanEvaluator",
+    "PlanRiskEvaluator",
+    "ReversibilityEvaluator",
+    "ResourceBudgetEvaluator",
+    "ReplanningService"
+  ],
+  "task_id": "AION-192"
+}

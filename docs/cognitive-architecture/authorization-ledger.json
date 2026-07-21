@@ -335,7 +335,7 @@
       "parent_pr": 101,
       "implementation_task": "AION-192",
       "implementation_branch": "phase/cognitive-counterfactual-planning",
-      "implementation_state": "authorized_pending_aion_192_implementation",
+      "implementation_state": "implemented_pending_aion_193_evaluation",
       "formal_closeout_task": "AION-193",
       "candidate_id": "hierarchical-counterfactual-planning-core",
       "scope": "hierarchical-counterfactual-goal-strategy-milestone-task-action-planning-core",
