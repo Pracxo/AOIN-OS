@@ -60,7 +60,9 @@ AION184_REQUIRED_FILES = (
 )
 
 AION184_ALLOWED_EXACT_PATHS = set(AION184_REQUIRED_FILES) | {
+    "scripts/connector-runtime-no-external-call-regression.sh",
     "scripts/lib/cognitive_architecture_governance.py",
+    "scripts/production-auth-architecture-check.sh",
 }
 
 AION184_ALLOWED_PREFIXES = (

@@ -29,6 +29,7 @@ from aion_brain.contracts.cognitive_state import (
     UncertaintyDirection,
     UncertaintyRecord,
     empty_cognitive_state_snapshot,
+    fingerprint_model,
 )
 
 
@@ -65,16 +66,13 @@ class CognitiveStateProjector:
             raise ValueError("cognitive event sequence must be monotonic")
         before_hash = snapshot.content_hash or ""
         updated = self._apply_payload(snapshot, event)
-        after = updated.model_copy(
-            update={
-                "sequence": event.sequence,
-                "event_count": snapshot.event_count + 1,
-                "provenance": (*snapshot.provenance, event.provenance),
-                "content_hash": None,
-                "created_at": event.created_at,
-            }
+        after = _validated_snapshot_copy(
+            updated,
+            sequence=event.sequence,
+            event_count=snapshot.event_count + 1,
+            provenance=(*snapshot.provenance, event.provenance),
+            created_at=event.created_at,
         )
-        after = CognitiveStateSnapshot.model_validate(after.model_dump(mode="python"))
         transition = CognitiveStateTransition(
             transition_id=f"cognitive-transition-{event.sequence}",
             event_id=event.event_id,
@@ -433,6 +431,35 @@ def _replace_by_id(
     ]
     retained.append(new_item)
     return tuple(sorted(retained, key=lambda item: getattr(item, id_attribute)))
+
+
+def _validated_snapshot_copy(
+    snapshot: CognitiveStateSnapshot,
+    *,
+    sequence: int,
+    event_count: int,
+    provenance: tuple[CognitiveStateProvenance, ...],
+    created_at: datetime,
+) -> CognitiveStateSnapshot:
+    if event_count < sequence:
+        raise ValueError("event_count cannot be smaller than sequence")
+    if snapshot.retained_from_sequence > sequence:
+        raise ValueError("retained_from_sequence cannot exceed sequence")
+    updated = snapshot.model_copy(
+        update={
+            "sequence": sequence,
+            "event_count": event_count,
+            "provenance": provenance,
+            "content_hash": None,
+            "created_at": created_at,
+        }
+    )
+    object.__setattr__(
+        updated,
+        "content_hash",
+        fingerprint_model(updated, exclude={"content_hash", "created_at"}),
+    )
+    return updated
 
 
 def _apply_belief_revision(
