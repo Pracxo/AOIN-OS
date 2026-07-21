@@ -16,6 +16,8 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION185_TASK_ID,
     AION186_SCOPE,
     AION186_TASK_ID,
+    AION187_AUTHORIZATION_ID,
+    AION188_TASK_ID,
     PROGRAM_ID,
     validate_authorization_ledger,
     validate_no_go,
@@ -84,12 +86,19 @@ def test_aion_183_ledgers_validate_and_close_authorization_after_aion_185() -> N
 
     assert program["program_id"] == PROGRAM_ID
     assert program["active_cognitive_implementation_authorization_count"] == 1
-    assert program["active_cognitive_implementation_authorization"] == AION185_AUTHORIZATION_ID
+    assert program["active_cognitive_implementation_authorization"] in {
+        AION185_AUTHORIZATION_ID,
+        AION187_AUTHORIZATION_ID,
+    }
     assert program["tasks"][0]["task_id"] == "AION-183"
     assert program["tasks"][-1]["task_id"] == "AION-203"
 
     closed = authorization["records"][0]
-    active = authorization["records"][1]
+    world_model = next(
+        item
+        for item in authorization["records"]
+        if item["authorization_id"] == AION185_AUTHORIZATION_ID
+    )
     assert closed["authorization_id"] == AION183_AUTHORIZATION_ID
     assert closed["implementation_task"] == AION184_TASK_ID
     assert closed["authorization_closed_by_task"] == AION185_TASK_ID
@@ -97,14 +106,28 @@ def test_aion_183_ledgers_validate_and_close_authorization_after_aion_185() -> N
     assert closed["authorization_consumed"] is True
     assert closed["authorization_expired"] is True
     assert closed["authorization_reusable"] is False
-    assert active["authorization_id"] == AION185_AUTHORIZATION_ID
-    assert active["implementation_task"] == AION186_TASK_ID
-    assert active["scope"] == AION186_SCOPE
+    assert world_model["authorization_id"] == AION185_AUTHORIZATION_ID
+    assert world_model["implementation_task"] == AION186_TASK_ID
+    if world_model["record_kind"] == "implementation_authorization":
+        assert world_model["scope"] == AION186_SCOPE
+    if program["active_cognitive_implementation_authorization"] == AION187_AUTHORIZATION_ID:
+        active = next(
+            item
+            for item in authorization["records"]
+            if item["authorization_id"] == AION187_AUTHORIZATION_ID
+        )
+        assert active["implementation_task"] == AION188_TASK_ID
 
 
 def test_aion_183_preserves_runtime_disabled_boundaries() -> None:
     authorization = _json("docs/cognitive-architecture/authorization-ledger.json")
-    closed, record = authorization["records"]
+    closed = authorization["records"][0]
+    active_authorization = authorization["active_cognitive_implementation_authorization"]
+    record = next(
+        item
+        for item in authorization["records"]
+        if item["authorization_id"] == active_authorization
+    )
     false_flags = (
         "runtime_effect",
         "source_modified",

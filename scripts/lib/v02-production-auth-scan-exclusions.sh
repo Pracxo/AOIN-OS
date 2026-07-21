@@ -1499,6 +1499,7 @@ aion183_is_scoped_cognitive_architecture_authorization_path() {
     docs/cognitive-architecture/tasks/AION-183.md|\
     docs/cognitive-architecture/tasks/AION-185.md|\
     docs/cognitive-architecture/tasks/AION-186.md|\
+    docs/cognitive-architecture/tasks/AION-187.md|\
     docs/cognitive-architecture/program-ledger.json|\
     docs/cognitive-architecture/authorization-ledger.json|\
     docs/cognitive-architecture/architecture-roadmap.md|\
@@ -1508,12 +1509,16 @@ aion183_is_scoped_cognitive_architecture_authorization_path() {
     examples/cognitive-architecture/aion-185-persistent-state-evaluation.json|\
     examples/cognitive-architecture/aion-185-world-model-authorization.json|\
     examples/cognitive-architecture/aion-186-predictive-world-model.json|\
+    examples/cognitive-architecture/aion-187-world-model-evaluation.json|\
+    examples/cognitive-architecture/aion-187-workspace-authorization.json|\
     scripts/cognitive-architecture-authorization-check.sh|\
     scripts/cognitive-architecture-no-go-regression.sh|\
     scripts/cognitive-persistent-state-check.sh|\
     scripts/cognitive-persistent-state-closeout-check.sh|\
     scripts/cognitive-persistent-state-closeout-no-go-regression.sh|\
     scripts/cognitive-world-model-check.sh|\
+    scripts/cognitive-world-model-closeout-check.sh|\
+    scripts/cognitive-world-model-closeout-no-go-regression.sh|\
     scripts/cognitive-world-model-no-go-regression.sh|\
     scripts/lib/cognitive_architecture_governance.py|\
     services/brain-api/src/aion_brain/contracts/world_model.py|\
@@ -1523,7 +1528,8 @@ aion183_is_scoped_cognitive_architecture_authorization_path() {
     services/brain-api/tests/test_cognitive_architecture_program_authorization_docs.py|\
     services/brain-api/tests/test_cognitive_persistent_state_closeout_authorization_docs.py|\
     services/brain-api/tests/test_cognitive_predictive_world_model.py|\
-    services/brain-api/tests/test_cognitive_predictive_world_model_no_runtime_effect.py)
+    services/brain-api/tests/test_cognitive_predictive_world_model_no_runtime_effect.py|\
+    services/brain-api/tests/test_cognitive_world_model_closeout_authorization_docs.py)
       return 0
       ;;
     *)
