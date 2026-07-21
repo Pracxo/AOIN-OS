@@ -23,6 +23,8 @@
     self_improvement_shadow_activation: "demo-data/self-improvement-shadow-activation-authorization.json",
     self_improvement_shadow_activation_control_plane: "demo-data/self-improvement-shadow-activation-control-plane.json",
     self_improvement_shadow_activation_simulation: "demo-data/self-improvement-shadow-activation-simulation.json",
+    self_improvement_shadow_activation_control_plane_evaluation: "demo-data/self-improvement-shadow-activation-control-plane-evaluation.json",
+    self_improvement_actual_shadow_activation_review_boundary: "demo-data/self-improvement-actual-shadow-activation-review-boundary.json",
     module_lifecycle: "demo-data/module-lifecycle-dashboard.json",
     model_provider_hardening: "demo-data/provider-hardening-view-model.json",
     operator_actions: "demo-data/operator-action-preview.json",
@@ -43,7 +45,9 @@
       "self_improvement_shadow_mode",
       "self_improvement_shadow_activation",
       "self_improvement_shadow_activation_control_plane",
-      "self_improvement_shadow_activation_simulation"
+      "self_improvement_shadow_activation_simulation",
+      "self_improvement_shadow_activation_control_plane_evaluation",
+      "self_improvement_actual_shadow_activation_review_boundary"
     ],
     safety: ["settings_safety", "incidents"]
   };
@@ -205,6 +209,8 @@
     "./scripts/self-improvement-shadow-activation-authorization-no-go-regression.sh",
     "./scripts/self-improvement-shadow-activation-control-plane-check.sh",
     "./scripts/self-improvement-shadow-activation-control-plane-no-go-regression.sh",
+    "./scripts/self-improvement-shadow-activation-operator-evaluation-no-go-regression.sh",
+    "./scripts/self-improvement-shadow-activation-operator-evaluation-check.sh",
     "./scripts/docs-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {

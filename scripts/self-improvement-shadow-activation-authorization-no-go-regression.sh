@@ -21,8 +21,15 @@ print(ledger.get("current_stage", ""))
 PY
 )"
 
+is_activation_control_plane_implemented_stage() {
+  [[ "$CONTROL_PLANE_STAGE" == "shadow_activation_control_plane_implemented_disabled_pending_closeout" ]] && return 0
+  [[ "$CONTROL_PLANE_STAGE" == "shadow_activation_control_plane_operator_evaluation_passed_disabled" ]] && return 0
+  [[ "$CONTROL_PLANE_STAGE" == "shadow_activation_control_plane_operator_evaluation_failed_disabled" ]] && return 0
+  return 1
+}
+
 is_allowed_activation_source() {
-  [[ "$CONTROL_PLANE_STAGE" == "shadow_activation_control_plane_implemented_disabled_pending_closeout" ]] || return 1
+  is_activation_control_plane_implemented_stage || return 1
   case "$1" in
     services/brain-api/src/aion_brain/contracts/self_improvement_shadow_activation.py|\
 services/brain-api/src/aion_brain/self_improvement/shadow_activation.py|\
@@ -102,7 +109,7 @@ for path in \
   services/brain-api/src/aion_brain/self_improvement/shadow_activation_deactivation.py \
   services/brain-api/src/aion_brain/self_improvement/shadow_activation_evidence.py \
   services/brain-api/src/aion_brain/self_improvement/shadow_activation_simulator.py; do
-  if [[ "$CONTROL_PLANE_STAGE" == "shadow_activation_control_plane_implemented_disabled_pending_closeout" ]]; then
+  if is_activation_control_plane_implemented_stage; then
     test -f "$path" || {
       echo "AION-181 activation source must exist after implementation: $path" >&2
       exit 1

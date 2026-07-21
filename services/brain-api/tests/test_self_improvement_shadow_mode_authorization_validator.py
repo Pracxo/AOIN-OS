@@ -35,14 +35,15 @@ def test_authorization_ledger_has_closed_shadow_mode_record() -> None:
     validate_no_go(ROOT)
 
     active = [record for record in payload["records"] if record["authorization_active"] is True]
-    assert len(active) == 1
-    assert active[0]["authorization_transaction_id"] == SHADOW_ACTIVATION_AUTHORIZATION_ID
-    assert payload["active_self_improvement_implementation_authorization_count"] == 1
-    assert (
-        payload["active_self_improvement_implementation_authorization"]
-        == SHADOW_ACTIVATION_AUTHORIZATION_ID
-    )
-    assert payload["active_implementation_task"] == "AION-181"
+    assert active == []
+    assert payload["active_self_improvement_implementation_authorization_count"] == 0
+    assert payload["active_self_improvement_implementation_authorization"] == "none"
+    assert payload["active_implementation_task"] == "none"
+    activation_record = _record(payload["records"], SHADOW_ACTIVATION_AUTHORIZATION_ID)
+    assert activation_record["authorization_active"] is False
+    assert activation_record["authorization_consumed"] is True
+    assert activation_record["authorization_consumed_by_task"] == "AION-181"
+    assert activation_record["formal_closeout_task"] == "AION-182"
     record = _record(payload["records"], SHADOW_AUTHORIZATION_ID)
     assert record["authorization_transaction_id"] == SHADOW_AUTHORIZATION_ID
     assert record["record_kind"] == "authorization_closeout"

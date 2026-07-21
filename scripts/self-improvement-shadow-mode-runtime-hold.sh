@@ -60,23 +60,33 @@ if authorization.get("current_stage") == "shadow_mode_operator_evaluation_passed
 elif authorization.get("current_stage") in {
     "shadow_activation_control_plane_authorized_not_implemented",
     "shadow_activation_control_plane_implemented_disabled_pending_closeout",
+    "shadow_activation_control_plane_operator_evaluation_passed_disabled",
+    "shadow_activation_control_plane_operator_evaluation_failed_disabled",
 }:
-    if len(active) != 1:
-        raise SystemExit("exactly one AION-180 implementation authorization is required")
-    if active[0].get("authorization_transaction_id") != "AION-180-SI-0007":
-        raise SystemExit("active implementation authorization must be AION-180-SI-0007")
-    if active[0].get("implementation_task") != "AION-181":
-        raise SystemExit("active implementation task must be AION-181")
-    if active[0].get("shadow_activation_enabled") is not False:
-        raise SystemExit("AION-180 must not enable shadow activation")
-    if authorization.get("current_stage") == "shadow_activation_control_plane_authorized_not_implemented":
-        if active[0].get("shadow_activation_control_plane_implemented") is not False:
-            raise SystemExit("AION-180 must not implement the activation control plane")
+    activation_closed = authorization.get("current_stage") in {
+        "shadow_activation_control_plane_operator_evaluation_passed_disabled",
+        "shadow_activation_control_plane_operator_evaluation_failed_disabled",
+    }
+    if activation_closed:
+        if active:
+            raise SystemExit("no active implementation authorization is allowed after AION-182 closeout")
     else:
-        if active[0].get("shadow_activation_control_plane_implemented") is not True:
-            raise SystemExit("AION-181 must implement the disabled activation control plane")
-        if active[0].get("shadow_activation_control_plane_state") != "implemented_disabled_simulation_only":
-            raise SystemExit("AION-181 activation control plane state mismatch")
+        if len(active) != 1:
+            raise SystemExit("exactly one AION-180 implementation authorization is required")
+        if active[0].get("authorization_transaction_id") != "AION-180-SI-0007":
+            raise SystemExit("active implementation authorization must be AION-180-SI-0007")
+        if active[0].get("implementation_task") != "AION-181":
+            raise SystemExit("active implementation task must be AION-181")
+        if active[0].get("shadow_activation_enabled") is not False:
+            raise SystemExit("AION-180 must not enable shadow activation")
+        if authorization.get("current_stage") == "shadow_activation_control_plane_authorized_not_implemented":
+            if active[0].get("shadow_activation_control_plane_implemented") is not False:
+                raise SystemExit("AION-180 must not implement the activation control plane")
+        else:
+            if active[0].get("shadow_activation_control_plane_implemented") is not True:
+                raise SystemExit("AION-181 must implement the disabled activation control plane")
+            if active[0].get("shadow_activation_control_plane_state") != "implemented_disabled_simulation_only":
+                raise SystemExit("AION-181 activation control plane state mismatch")
     if len(closed) != 1:
         raise SystemExit("closed AION-177-SI-0006 authorization is required")
     record = closed[0]

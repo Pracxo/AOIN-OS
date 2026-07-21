@@ -1,1 +1,651 @@
-{"active_implementation_task":"AION-181","active_self_improvement_implementation_authorization":"AION-180-SI-0007","current_stage":"shadow_activation_control_plane_implemented_disabled_pending_closeout","end_state":"AION-181 SHADOW ACTIVATION CONTROL PLANE IMPLEMENTED DISABLED PENDING CLOSEOUT","program_id":"AION-SELF-IMPROVEMENT-001","read_only":true,"records":[{"authorization_state":"consumed_by_AION-164_closed_by_AION-165","authorization_transaction":"AION-163-PA-0007","branch":"phase/v02-identity-assertion-replay-protection","ci_result":"pass","completion_timestamp":"2026-07-18T13:14:27Z","corrective_prs":[],"feature_commits":["3ff9145b3102340bad44054df532865b35132d7c","5593574380c0daa401ee4e7bfb5a431cfaa44adc"],"merge_commits":["8b2938a8995a9109b677f240d82da3b4bdc5d73c"],"next_task":"AION-165","pull_requests":[75],"runtime_state":"implemented_unintegrated_runtime_disabled","task_id":"AION-164","tests":["GitHub brain-api-quality pass","GitHub contract-check pass","GitHub docker-build-core pass","GitHub policy-check pass","GitHub repository-hygiene pass","GitHub sdk-cli-check pass","GitHub sdk-quality pass","./scripts/production-auth-identity-assertion-replay-no-go-regression.sh pass","./scripts/production-auth-identity-assertion-replay-check.sh pass","services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_identity_assertion_replay_*.py -q: 54 passed","./scripts/check.sh pass"]},{"authorization_state":"consumed_by_AION-166_closed_by_AION-167","authorization_transaction":"AION-165-SI-0001","branch":"phase/self-improvement-governance-authorization","ci_result":"pass","completion_timestamp":"2026-07-18T15:43:02Z","corrective_prs":[],"feature_commits":["f7052fb33d6cf8cd894e1d4a01f572f536a2c76a"],"merge_commits":["a40ea4c9f76a969cac291c33f0c3ef94aa078d6b"],"next_task":"AION-166","pull_requests":[76],"runtime_state":"authorization_only_no_self_rewrite_implementation","task_id":"AION-165","tests":["GitHub brain-api-quality pass","GitHub contract-check pass","GitHub docker-build-core pass","GitHub policy-check pass","GitHub repository-hygiene pass","GitHub sdk-cli-check pass","GitHub sdk-quality pass","./scripts/self-improvement-governance-no-go-regression.sh pass","./scripts/self-improvement-governance-authorization-check.sh pass","services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_governance_authorization_docs.py -q: 7 passed"]},{"authorization_state":"consumed_by_AION-166_closed_by_AION-167","authorization_transaction":"AION-165-SI-0001","branch":"phase/self-improvement-governance-plane","ci_result":"pass","completion_timestamp":"2026-07-18T18:39:28Z","corrective_prs":[],"feature_commits":["fae49a3f913b7a3d4d18ad4e7f989ed2aca5de91"],"merge_commits":["9a7105e31b8f6e56faf53bfb56e11eed75a01203"],"next_task":"AION-167","pull_requests":[77],"runtime_state":"governance_plane_implemented_no_self_rewrite_runtime","task_id":"AION-166","tests":["GitHub brain-api-quality pass","GitHub contract-check pass","GitHub docker-build-core pass","GitHub policy-check pass","GitHub repository-hygiene pass","GitHub sdk-cli-check pass","GitHub sdk-quality pass","services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_governance_plane.py -q: 13 passed","services/brain-api/.venv/bin/python -m ruff check services/brain-api/src/aion_brain/contracts/self_improvement.py services/brain-api/src/aion_brain/self_improvement services/brain-api/tests/test_self_improvement_governance_plane.py pass","services/brain-api/.venv/bin/python -m mypy services/brain-api/src/aion_brain/contracts/self_improvement.py services/brain-api/src/aion_brain/self_improvement services/brain-api/tests/test_self_improvement_governance_plane.py pass","./scripts/check.sh pass"]},{"authorization_state":"consumed_by_AION-168_closed_by_AION-169","authorization_transaction":"AION-167-SI-0002","branch":"phase/self-improvement-evaluation-authorization","ci_result":"pass","completion_timestamp":"2026-07-18T19:47:43Z","corrective_prs":[],"feature_commits":["bbc04cf57f02483e00752c20fa70b77abf95ce46"],"merge_commits":["98a50edb5eaaf55de5babaa0ea9eb057ef5b2feb"],"next_task":"AION-168","pull_requests":[78],"runtime_state":"authorization_only_no_evaluation_runtime_implementation","task_id":"AION-167","tests":["GitHub brain-api-quality pass","GitHub contract-check pass","GitHub docker-build-core pass","GitHub policy-check pass","GitHub repository-hygiene pass","GitHub sdk-cli-check pass","GitHub sdk-quality pass","./scripts/self-improvement-governance-no-go-regression.sh pass","./scripts/self-improvement-governance-authorization-check.sh pass","./scripts/self-improvement-evaluation-no-go-regression.sh pass","./scripts/self-improvement-evaluation-authorization-check.sh pass","services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_governance_authorization_docs.py services/brain-api/tests/test_self_improvement_evaluation_authorization_docs.py -q: 10 passed"]},{"authorization_state":"consumed_by_AION-168_closed_by_AION-169","authorization_transaction":"AION-167-SI-0002","branch":"phase/self-improvement-evaluation-plane","ci_result":"pass","completion_timestamp":"2026-07-18T20:50:21Z","corrective_prs":[],"feature_commits":["8d1402f6c122098f3aec5809cf94539992b45d10"],"merge_commits":["74472522edffbbeabb996c6d572dce1dcb0cda48"],"next_task":"AION-169","pull_requests":[79],"runtime_state":"evaluation_plane_implemented_no_source_mutation_or_pr_creation","task_id":"AION-168","tests":["GitHub brain-api-quality pass","GitHub contract-check pass","GitHub docker-build-core pass","GitHub policy-check pass","GitHub repository-hygiene pass","GitHub sdk-cli-check pass","GitHub sdk-quality pass","services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_evaluation_plane.py -q: 8 passed","services/brain-api/.venv/bin/python -m ruff check services/brain-api/src/aion_brain/self_improvement services/brain-api/tests/test_self_improvement_evaluation_plane.py pass","services/brain-api/.venv/bin/python -m mypy services/brain-api/src/aion_brain/self_improvement services/brain-api/tests/test_self_improvement_evaluation_plane.py pass","./scripts/self-improvement-governance-no-go-regression.sh pass","./scripts/self-improvement-evaluation-no-go-regression.sh pass","./scripts/production-auth-core-no-go-regression.sh pass","./scripts/connector-runtime-no-external-call-regression.sh pass","./scripts/production-auth-architecture-check.sh pass","./scripts/check.sh pass"]},{"authorization_state":"consumed_by_AION-170_closed_by_AION-171","authorization_transaction":"AION-169-SI-0003","branch":"phase/self-improvement-experiment-authorization","ci_result":"pass","completion_timestamp":"2026-07-18T22:00:24Z","corrective_prs":[],"feature_commits":["3af4e7a24955f83f8e3d1e98d3fa26f008ad83e6"],"merge_commits":["3a09cb642414ff22f15c90df41d1132030dbe0a1"],"next_task":"AION-170","pull_requests":[80],"runtime_state":"authorization_only_no_experiment_engine_implementation","task_id":"AION-169","tests":["GitHub brain-api-quality pass","GitHub contract-check pass","GitHub docker-build-core pass","GitHub policy-check pass","GitHub repository-hygiene pass","GitHub sdk-cli-check pass","GitHub sdk-quality pass","./scripts/self-improvement-governance-no-go-regression.sh","./scripts/self-improvement-evaluation-no-go-regression.sh","./scripts/self-improvement-experiment-no-go-regression.sh","./scripts/self-improvement-experiment-authorization-check.sh","services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_governance_authorization_docs.py services/brain-api/tests/test_self_improvement_evaluation_authorization_docs.py services/brain-api/tests/test_self_improvement_experiment_authorization_docs.py -q: 14 passed","./scripts/check.sh pass"]},{"authorization_state":"consumed_by_AION-170_closed_by_AION-171","authorization_transaction":"AION-169-SI-0003","branch":"phase/self-improvement-experiment-engine","ci_result":"pass","completion_timestamp":"2026-07-18T23:48:33Z","corrective_prs":[],"feature_commits":["2005217334301a6b4951cc3ae2a0d88de99b95e0","4798459eec61e5f534c880234508815364804ee5"],"merge_commits":["6e741c8327d900fa80480bce911fbccffb8b4781"],"next_task":"AION-171","pull_requests":[81],"runtime_state":"experiment_engine_implemented_no_source_mutation_or_git_or_pr_runtime","task_id":"AION-170","tests":["GitHub brain-api-quality pass","GitHub contract-check pass","GitHub docker-build-core pass","GitHub policy-check pass","GitHub repository-hygiene pass","GitHub sdk-cli-check pass","GitHub sdk-quality pass","services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_experiment_engine.py -q: 5 passed","services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_offline_identity_assertion_verifier.py services/brain-api/tests/test_identity_assertion_performance.py services/brain-api/tests/test_identity_assertion_negative_crypto.py -q: 10 passed","./scripts/self-improvement-experiment-engine-no-go-regression.sh pass","./scripts/self-improvement-experiment-engine-check.sh pass","./scripts/self-improvement-experiment-authorization-check.sh pass","./scripts/self-improvement-governance-no-go-regression.sh pass","./scripts/self-improvement-evaluation-no-go-regression.sh pass","./scripts/production-auth-core-no-go-regression.sh pass","./scripts/connector-runtime-no-external-call-regression.sh pass","./scripts/check.sh pass"]},{"authorization_state":"consumed_by_AION-172_closed_by_AION-173","authorization_transaction":"AION-171-SI-0004","branch":"phase/self-improvement-rewrite-authorization","ci_result":"pass","completion_timestamp":"2026-07-19T01:00:23Z","corrective_prs":[],"feature_commits":["4970700555638b4ecd53a581d1797148906f81ef"],"merge_commits":["478b79de1fbd4eeeb0280a41abf4050c0f513d8f"],"next_task":"AION-172","pull_requests":[82],"runtime_state":"authorization_only_no_rewrite_controller_implementation","task_id":"AION-171","tests":["services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_rewrite_authorization_docs.py -q: pass","./scripts/self-improvement-rewrite-no-go-regression.sh pass","./scripts/self-improvement-rewrite-authorization-check.sh pass","./scripts/production-auth-core-no-go-regression.sh pass","./scripts/connector-runtime-no-external-call-regression.sh pass","./scripts/check.sh pass"]},{"authorization_state":"consumed_by_AION-172_closed_by_AION-173","authorization_transaction":"AION-171-SI-0004","branch":"phase/self-improvement-approved-rewrite-controller","ci_result":"pass","completion_timestamp":"2026-07-19T02:14:33Z","corrective_prs":[],"feature_commits":["4a8adbc6ed3c364588883eb5fe91e393f26479cd"],"merge_commits":["0033f24c5f2f1f1b2a1a89a8595f29db1c1d1bf9"],"next_task":"AION-173","pull_requests":[83],"runtime_state":"rewrite_controller_implemented_disabled_approval_bound_no_production_github_calls","task_id":"AION-172","tests":["GitHub brain-api-quality pass","GitHub contract-check pass","GitHub docker-build-core pass","GitHub policy-check pass","GitHub repository-hygiene pass","GitHub sdk-cli-check pass","GitHub sdk-quality pass","services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_rewrite_controller.py -q: 10 passed","./scripts/self-improvement-rewrite-controller-no-go-regression.sh pass","./scripts/self-improvement-rewrite-controller-check.sh pass","./scripts/self-improvement-rewrite-no-go-regression.sh pass","./scripts/self-improvement-rewrite-authorization-check.sh pass","./scripts/production-auth-core-no-go-regression.sh pass","./scripts/connector-runtime-no-external-call-regression.sh pass","./scripts/check.sh pass"]},{"authorization_state":"active_until_AION-174_merge","authorization_transaction":"AION-173-SI-0005","branch":"phase/self-improvement-canary-authorization","ci_result":"pass","completion_timestamp":"2026-07-19T03:27:39Z","corrective_prs":[],"feature_commits":["bd215d2910e6c29b7f0d53381d0960330fda4623"],"merge_commits":["9d827d8bbbe0cb726904b19b0662e214d7f1b04e"],"next_task":"AION-174","pull_requests":[84],"runtime_state":"authorization_only_no_canary_runtime_or_adaptive_learning_implementation","task_id":"AION-173","tests":["GitHub brain-api-quality pass","GitHub contract-check pass","GitHub docker-build-core pass","GitHub policy-check pass","GitHub repository-hygiene pass","GitHub sdk-cli-check pass","GitHub sdk-quality pass","services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_canary_authorization_docs.py -q: pass","./scripts/self-improvement-canary-no-go-regression.sh pass","./scripts/self-improvement-canary-authorization-check.sh pass","./scripts/self-improvement-rewrite-controller-no-go-regression.sh pass","./scripts/self-improvement-rewrite-controller-check.sh pass","./scripts/check.sh pass"]},{"authorization_state":"consumed_by_AION-174_closed_by_AION-175","authorization_transaction":"AION-173-SI-0005","branch":"phase/self-improvement-canary-and-adaptation","ci_result":"pass","completion_timestamp":"2026-07-19T04:45:05Z","corrective_prs":[],"feature_commits":["61fdce1795385fa954114a38098f6f2dba26a5f4"],"merge_commits":["dd17639986160938043d8ddef7da8cb9b8a2faa4"],"next_task":"AION-175","pull_requests":[85],"runtime_state":"canary_adaptation_plane_implemented_disabled_data_only_no_production_activation","task_id":"AION-174","tests":["GitHub brain-api-quality pass","GitHub contract-check pass","GitHub docker-build-core pass","GitHub policy-check pass","GitHub repository-hygiene pass","GitHub sdk-cli-check pass","GitHub sdk-quality pass","services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_canary_adaptation.py -q: 3 passed","./scripts/self-improvement-canary-adaptation-no-go-regression.sh pass","./scripts/self-improvement-canary-adaptation-check.sh pass","./scripts/self-improvement-canary-authorization-check.sh pass","./scripts/self-improvement-rewrite-controller-check.sh pass","./scripts/production-auth-core-no-go-regression.sh pass","./scripts/connector-runtime-no-external-call-regression.sh pass","./scripts/check.sh pass"]},{"authorization_state":"final_closeout_complete_no_new_implementation_authorization","authorization_transaction":"AION-173-SI-0005","branch":"phase/self-improvement-final-closeout","ci_result":"pass","completion_timestamp":"2026-07-19T06:17:29Z","corrective_prs":[],"feature_commits":["50b498e9a47a95f82c26df718e11696b9ef741b3"],"merge_commits":["00b71a6172fb136279716103b10dae986f455968"],"next_task":"operator_evaluation","pull_requests":[86],"runtime_state":"self_improvement_platform_implemented_disabled","task_id":"AION-175","tests":["GitHub brain-api-quality pass","GitHub contract-check pass","GitHub docker-build-core pass","GitHub policy-check pass","GitHub repository-hygiene pass","GitHub sdk-cli-check pass","GitHub sdk-quality pass","./scripts/self-improvement-final-check.sh pass","2885 Brain API tests passed","274 SDK tests passed","mypy passed for 1184 Brain API source files","mypy passed for 145 SDK source files","documentation checks passed","boundary checks passed","repository-health checks passed","immutable tag check passed","no-v0.2 checks passed"]},{"authorization_state":"no_new_implementation_authorization","authorization_transaction":"none","branch":"phase/self-improvement-postmerge-evidence-reconciliation","ci_result":"pass","completion_timestamp":"2026-07-19T10:02:18Z","corrective_prs":[],"feature_commits":["1738f49ff22e197dd8fff3038fc8429306eadf76"],"merge_commits":["ee50f1cc9ed3573661d1571954421abfb749e877"],"next_task":"AION-OE-001","pull_requests":[87],"runtime_state":"operator_evaluation_ready","task_id":"AION-176","tests":["GitHub brain-api-quality pass","GitHub contract-check pass","GitHub docker-build-core pass","GitHub policy-check pass","GitHub repository-hygiene pass","GitHub sdk-cli-check pass","GitHub sdk-quality pass","./scripts/self-improvement-final-check.sh pass","post-merge evidence reconciliation pass"]},{"authorization_state":"consumed_by_AION-178_closed_by_AION-179","authorization_transaction":"AION-177-SI-0006","branch":"phase/self-improvement-shadow-mode-authorization","ci_result":"pass","completion_timestamp":"2026-07-19T20:18:44Z","corrective_prs":[],"feature_commits":["b1f3f721038ffffe5d78115f7efe8da7f493b677"],"merge_commits":["544c71ed18530699eb1756674d38c874af8a0aae"],"next_task":"AION-178","pull_requests":[88],"runtime_state":"shadow_mode_authorization_consumed_runtime_disabled","task_id":"AION-177","tests":["./scripts/self-improvement-shadow-mode-authorization-no-go-regression.sh","./scripts/self-improvement-shadow-mode-authorization-check.sh","./scripts/self-improvement-shadow-mode-runtime-hold.sh"]},{"authorization_state":"consumed_by_AION-178_closed_by_AION-179","authorization_transaction":"AION-177-SI-0006","branch":"phase/self-improvement-shadow-mode-plane","ci_result":"pass","completion_timestamp":"2026-07-20T06:10:57Z","corrective_prs":[],"feature_commits":["1f7a9750e3b5567b173e9a42af069cb4d7d7bc8f"],"merge_commits":["b05dd3cc49cff086997232bfc579a7ca891a184b"],"next_task":"AION-179","pull_requests":[89],"runtime_state":"shadow_mode_implemented_operator_invoked_disabled_closed_by_AION-179","task_id":"AION-178","tests":["GitHub brain-api-quality pass for PR 89","GitHub contract-check pass for PR 89","GitHub docker-build-core pass for PR 89","GitHub policy-check pass for PR 89","GitHub repository-hygiene pass for PR 89","GitHub sdk-cli-check pass for PR 89","GitHub sdk-quality pass for PR 89","./scripts/self-improvement-shadow-mode-no-go-regression.sh","./scripts/self-improvement-shadow-mode-check.sh","./scripts/self-improvement-shadow-mode-runtime-hold.sh"]},{"authorization_state":"consumed_by_AION-178_closed_by_AION-179","authorization_transaction":"AION-177-SI-0006","branch":"phase/self-improvement-shadow-mode-evaluation-closeout","ci_result":"pass","completion_timestamp":"2026-07-20T10:10:12Z","corrective_prs":[],"feature_commits":["13fa892bf3dd4518fd9ea41ebaa58655813c6da9","8246bef6bcdec313e07e0dff732239778fad3739"],"merge_commits":["133040597ca8ed997bbc32b8bb8c980a123d2f9a"],"next_task":"AION-180","pull_requests":[90],"runtime_state":"shadow_mode_operator_evaluation_passed_runtime_disabled","task_id":"AION-179","tests":["GitHub brain-api-quality pass","GitHub contract-check pass","GitHub docker-build-core pass","GitHub policy-check pass","GitHub repository-hygiene pass","GitHub sdk-cli-check pass","GitHub sdk-quality pass","AION-SOE-001 fourteen scenarios passed","runtime hold pass","shadow-mode implementation check pass","shadow-mode no-go pass","authorization closeout pass","repository unchanged during evaluation","no shadow-plane PR created","no source, Git, approval, merge, promotion, canary, deployment, or model training action","immutable tag check pass","no-v0.2 checks pass"]},{"authorization_state":"active_for_AION-181_formal_closeout_AION-182","authorization_transaction":"AION-180-SI-0007","branch":"phase/self-improvement-shadow-activation-authorization","ci_result":"pass","completion_timestamp":"2026-07-20T15:15:08Z","corrective_prs":[],"feature_commits":["a008986872e46b1786bf7d20c18074c4275a852c","2b97743e65bf0c405c4eaa5360f809399ff9046c"],"merge_commits":["e50754bbd27570625befea3d3e73e65a7ec098d1"],"next_task":"AION-181","pull_requests":[91],"runtime_state":"activation_control_plane_authorized_not_implemented","task_id":"AION-180","tests":["GitHub brain-api-quality pass","GitHub contract-check pass","GitHub docker-build-core pass","GitHub policy-check pass","GitHub repository-hygiene pass","GitHub sdk-cli-check pass","GitHub sdk-quality pass","AION-180 no-go regression pass","AION-180 authorization check pass","activation runtime hold pass","Brain API 3059 passed","SDK 274 passed","type checks passed","boundary passed","repository health passed","git diff checks passed","shallow/detached CI scope-diff repair verified"]},{"authorization_state":"implementation_in_progress_formal_closeout_AION-182","authorization_transaction":"AION-180-SI-0007","branch":"phase/self-improvement-shadow-activation-control-plane","ci_result":"pending","completion_timestamp":null,"corrective_prs":[],"feature_commits":[],"merge_commits":[],"next_task":"AION-182","pull_requests":[],"runtime_state":"activation_control_plane_implemented_disabled_simulation_only","task_id":"AION-181","tests":[]}],"repository":"/Users/damilaremerotiwon/KITEV2/AOIN OS","synthetic":true}
+{
+  "active_implementation_task": "none",
+  "active_self_improvement_implementation_authorization": "none",
+  "current_stage": "shadow_activation_control_plane_operator_evaluation_passed_disabled",
+  "end_state": "AION-182 SHADOW ACTIVATION CONTROL PLANE EVALUATED DISABLED",
+  "next_architecture_decision": "actual_controlled_shadow_activation_authorization_review",
+  "program_id": "AION-SELF-IMPROVEMENT-001",
+  "read_only": true,
+  "records": [
+    {
+      "authorization_state": "consumed_by_AION-164_closed_by_AION-165",
+      "authorization_transaction": "AION-163-PA-0007",
+      "branch": "phase/v02-identity-assertion-replay-protection",
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-18T13:14:27Z",
+      "corrective_prs": [],
+      "feature_commits": [
+        "3ff9145b3102340bad44054df532865b35132d7c",
+        "5593574380c0daa401ee4e7bfb5a431cfaa44adc"
+      ],
+      "merge_commits": [
+        "8b2938a8995a9109b677f240d82da3b4bdc5d73c"
+      ],
+      "next_task": "AION-165",
+      "pull_requests": [
+        75
+      ],
+      "runtime_state": "implemented_unintegrated_runtime_disabled",
+      "task_id": "AION-164",
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "./scripts/production-auth-identity-assertion-replay-no-go-regression.sh pass",
+        "./scripts/production-auth-identity-assertion-replay-check.sh pass",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_identity_assertion_replay_*.py -q: 54 passed",
+        "./scripts/check.sh pass"
+      ]
+    },
+    {
+      "authorization_state": "consumed_by_AION-166_closed_by_AION-167",
+      "authorization_transaction": "AION-165-SI-0001",
+      "branch": "phase/self-improvement-governance-authorization",
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-18T15:43:02Z",
+      "corrective_prs": [],
+      "feature_commits": [
+        "f7052fb33d6cf8cd894e1d4a01f572f536a2c76a"
+      ],
+      "merge_commits": [
+        "a40ea4c9f76a969cac291c33f0c3ef94aa078d6b"
+      ],
+      "next_task": "AION-166",
+      "pull_requests": [
+        76
+      ],
+      "runtime_state": "authorization_only_no_self_rewrite_implementation",
+      "task_id": "AION-165",
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "./scripts/self-improvement-governance-no-go-regression.sh pass",
+        "./scripts/self-improvement-governance-authorization-check.sh pass",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_governance_authorization_docs.py -q: 7 passed"
+      ]
+    },
+    {
+      "authorization_state": "consumed_by_AION-166_closed_by_AION-167",
+      "authorization_transaction": "AION-165-SI-0001",
+      "branch": "phase/self-improvement-governance-plane",
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-18T18:39:28Z",
+      "corrective_prs": [],
+      "feature_commits": [
+        "fae49a3f913b7a3d4d18ad4e7f989ed2aca5de91"
+      ],
+      "merge_commits": [
+        "9a7105e31b8f6e56faf53bfb56e11eed75a01203"
+      ],
+      "next_task": "AION-167",
+      "pull_requests": [
+        77
+      ],
+      "runtime_state": "governance_plane_implemented_no_self_rewrite_runtime",
+      "task_id": "AION-166",
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_governance_plane.py -q: 13 passed",
+        "services/brain-api/.venv/bin/python -m ruff check services/brain-api/src/aion_brain/contracts/self_improvement.py services/brain-api/src/aion_brain/self_improvement services/brain-api/tests/test_self_improvement_governance_plane.py pass",
+        "services/brain-api/.venv/bin/python -m mypy services/brain-api/src/aion_brain/contracts/self_improvement.py services/brain-api/src/aion_brain/self_improvement services/brain-api/tests/test_self_improvement_governance_plane.py pass",
+        "./scripts/check.sh pass"
+      ]
+    },
+    {
+      "authorization_state": "consumed_by_AION-168_closed_by_AION-169",
+      "authorization_transaction": "AION-167-SI-0002",
+      "branch": "phase/self-improvement-evaluation-authorization",
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-18T19:47:43Z",
+      "corrective_prs": [],
+      "feature_commits": [
+        "bbc04cf57f02483e00752c20fa70b77abf95ce46"
+      ],
+      "merge_commits": [
+        "98a50edb5eaaf55de5babaa0ea9eb057ef5b2feb"
+      ],
+      "next_task": "AION-168",
+      "pull_requests": [
+        78
+      ],
+      "runtime_state": "authorization_only_no_evaluation_runtime_implementation",
+      "task_id": "AION-167",
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "./scripts/self-improvement-governance-no-go-regression.sh pass",
+        "./scripts/self-improvement-governance-authorization-check.sh pass",
+        "./scripts/self-improvement-evaluation-no-go-regression.sh pass",
+        "./scripts/self-improvement-evaluation-authorization-check.sh pass",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_governance_authorization_docs.py services/brain-api/tests/test_self_improvement_evaluation_authorization_docs.py -q: 10 passed"
+      ]
+    },
+    {
+      "authorization_state": "consumed_by_AION-168_closed_by_AION-169",
+      "authorization_transaction": "AION-167-SI-0002",
+      "branch": "phase/self-improvement-evaluation-plane",
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-18T20:50:21Z",
+      "corrective_prs": [],
+      "feature_commits": [
+        "8d1402f6c122098f3aec5809cf94539992b45d10"
+      ],
+      "merge_commits": [
+        "74472522edffbbeabb996c6d572dce1dcb0cda48"
+      ],
+      "next_task": "AION-169",
+      "pull_requests": [
+        79
+      ],
+      "runtime_state": "evaluation_plane_implemented_no_source_mutation_or_pr_creation",
+      "task_id": "AION-168",
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_evaluation_plane.py -q: 8 passed",
+        "services/brain-api/.venv/bin/python -m ruff check services/brain-api/src/aion_brain/self_improvement services/brain-api/tests/test_self_improvement_evaluation_plane.py pass",
+        "services/brain-api/.venv/bin/python -m mypy services/brain-api/src/aion_brain/self_improvement services/brain-api/tests/test_self_improvement_evaluation_plane.py pass",
+        "./scripts/self-improvement-governance-no-go-regression.sh pass",
+        "./scripts/self-improvement-evaluation-no-go-regression.sh pass",
+        "./scripts/production-auth-core-no-go-regression.sh pass",
+        "./scripts/connector-runtime-no-external-call-regression.sh pass",
+        "./scripts/production-auth-architecture-check.sh pass",
+        "./scripts/check.sh pass"
+      ]
+    },
+    {
+      "authorization_state": "consumed_by_AION-170_closed_by_AION-171",
+      "authorization_transaction": "AION-169-SI-0003",
+      "branch": "phase/self-improvement-experiment-authorization",
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-18T22:00:24Z",
+      "corrective_prs": [],
+      "feature_commits": [
+        "3af4e7a24955f83f8e3d1e98d3fa26f008ad83e6"
+      ],
+      "merge_commits": [
+        "3a09cb642414ff22f15c90df41d1132030dbe0a1"
+      ],
+      "next_task": "AION-170",
+      "pull_requests": [
+        80
+      ],
+      "runtime_state": "authorization_only_no_experiment_engine_implementation",
+      "task_id": "AION-169",
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "./scripts/self-improvement-governance-no-go-regression.sh",
+        "./scripts/self-improvement-evaluation-no-go-regression.sh",
+        "./scripts/self-improvement-experiment-no-go-regression.sh",
+        "./scripts/self-improvement-experiment-authorization-check.sh",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_governance_authorization_docs.py services/brain-api/tests/test_self_improvement_evaluation_authorization_docs.py services/brain-api/tests/test_self_improvement_experiment_authorization_docs.py -q: 14 passed",
+        "./scripts/check.sh pass"
+      ]
+    },
+    {
+      "authorization_state": "consumed_by_AION-170_closed_by_AION-171",
+      "authorization_transaction": "AION-169-SI-0003",
+      "branch": "phase/self-improvement-experiment-engine",
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-18T23:48:33Z",
+      "corrective_prs": [],
+      "feature_commits": [
+        "2005217334301a6b4951cc3ae2a0d88de99b95e0",
+        "4798459eec61e5f534c880234508815364804ee5"
+      ],
+      "merge_commits": [
+        "6e741c8327d900fa80480bce911fbccffb8b4781"
+      ],
+      "next_task": "AION-171",
+      "pull_requests": [
+        81
+      ],
+      "runtime_state": "experiment_engine_implemented_no_source_mutation_or_git_or_pr_runtime",
+      "task_id": "AION-170",
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_experiment_engine.py -q: 5 passed",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_offline_identity_assertion_verifier.py services/brain-api/tests/test_identity_assertion_performance.py services/brain-api/tests/test_identity_assertion_negative_crypto.py -q: 10 passed",
+        "./scripts/self-improvement-experiment-engine-no-go-regression.sh pass",
+        "./scripts/self-improvement-experiment-engine-check.sh pass",
+        "./scripts/self-improvement-experiment-authorization-check.sh pass",
+        "./scripts/self-improvement-governance-no-go-regression.sh pass",
+        "./scripts/self-improvement-evaluation-no-go-regression.sh pass",
+        "./scripts/production-auth-core-no-go-regression.sh pass",
+        "./scripts/connector-runtime-no-external-call-regression.sh pass",
+        "./scripts/check.sh pass"
+      ]
+    },
+    {
+      "authorization_state": "consumed_by_AION-172_closed_by_AION-173",
+      "authorization_transaction": "AION-171-SI-0004",
+      "branch": "phase/self-improvement-rewrite-authorization",
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-19T01:00:23Z",
+      "corrective_prs": [],
+      "feature_commits": [
+        "4970700555638b4ecd53a581d1797148906f81ef"
+      ],
+      "merge_commits": [
+        "478b79de1fbd4eeeb0280a41abf4050c0f513d8f"
+      ],
+      "next_task": "AION-172",
+      "pull_requests": [
+        82
+      ],
+      "runtime_state": "authorization_only_no_rewrite_controller_implementation",
+      "task_id": "AION-171",
+      "tests": [
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_rewrite_authorization_docs.py -q: pass",
+        "./scripts/self-improvement-rewrite-no-go-regression.sh pass",
+        "./scripts/self-improvement-rewrite-authorization-check.sh pass",
+        "./scripts/production-auth-core-no-go-regression.sh pass",
+        "./scripts/connector-runtime-no-external-call-regression.sh pass",
+        "./scripts/check.sh pass"
+      ]
+    },
+    {
+      "authorization_state": "consumed_by_AION-172_closed_by_AION-173",
+      "authorization_transaction": "AION-171-SI-0004",
+      "branch": "phase/self-improvement-approved-rewrite-controller",
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-19T02:14:33Z",
+      "corrective_prs": [],
+      "feature_commits": [
+        "4a8adbc6ed3c364588883eb5fe91e393f26479cd"
+      ],
+      "merge_commits": [
+        "0033f24c5f2f1f1b2a1a89a8595f29db1c1d1bf9"
+      ],
+      "next_task": "AION-173",
+      "pull_requests": [
+        83
+      ],
+      "runtime_state": "rewrite_controller_implemented_disabled_approval_bound_no_production_github_calls",
+      "task_id": "AION-172",
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_rewrite_controller.py -q: 10 passed",
+        "./scripts/self-improvement-rewrite-controller-no-go-regression.sh pass",
+        "./scripts/self-improvement-rewrite-controller-check.sh pass",
+        "./scripts/self-improvement-rewrite-no-go-regression.sh pass",
+        "./scripts/self-improvement-rewrite-authorization-check.sh pass",
+        "./scripts/production-auth-core-no-go-regression.sh pass",
+        "./scripts/connector-runtime-no-external-call-regression.sh pass",
+        "./scripts/check.sh pass"
+      ]
+    },
+    {
+      "authorization_state": "active_until_AION-174_merge",
+      "authorization_transaction": "AION-173-SI-0005",
+      "branch": "phase/self-improvement-canary-authorization",
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-19T03:27:39Z",
+      "corrective_prs": [],
+      "feature_commits": [
+        "bd215d2910e6c29b7f0d53381d0960330fda4623"
+      ],
+      "merge_commits": [
+        "9d827d8bbbe0cb726904b19b0662e214d7f1b04e"
+      ],
+      "next_task": "AION-174",
+      "pull_requests": [
+        84
+      ],
+      "runtime_state": "authorization_only_no_canary_runtime_or_adaptive_learning_implementation",
+      "task_id": "AION-173",
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_canary_authorization_docs.py -q: pass",
+        "./scripts/self-improvement-canary-no-go-regression.sh pass",
+        "./scripts/self-improvement-canary-authorization-check.sh pass",
+        "./scripts/self-improvement-rewrite-controller-no-go-regression.sh pass",
+        "./scripts/self-improvement-rewrite-controller-check.sh pass",
+        "./scripts/check.sh pass"
+      ]
+    },
+    {
+      "authorization_state": "consumed_by_AION-174_closed_by_AION-175",
+      "authorization_transaction": "AION-173-SI-0005",
+      "branch": "phase/self-improvement-canary-and-adaptation",
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-19T04:45:05Z",
+      "corrective_prs": [],
+      "feature_commits": [
+        "61fdce1795385fa954114a38098f6f2dba26a5f4"
+      ],
+      "merge_commits": [
+        "dd17639986160938043d8ddef7da8cb9b8a2faa4"
+      ],
+      "next_task": "AION-175",
+      "pull_requests": [
+        85
+      ],
+      "runtime_state": "canary_adaptation_plane_implemented_disabled_data_only_no_production_activation",
+      "task_id": "AION-174",
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "services/brain-api/.venv/bin/python -m pytest services/brain-api/tests/test_self_improvement_canary_adaptation.py -q: 3 passed",
+        "./scripts/self-improvement-canary-adaptation-no-go-regression.sh pass",
+        "./scripts/self-improvement-canary-adaptation-check.sh pass",
+        "./scripts/self-improvement-canary-authorization-check.sh pass",
+        "./scripts/self-improvement-rewrite-controller-check.sh pass",
+        "./scripts/production-auth-core-no-go-regression.sh pass",
+        "./scripts/connector-runtime-no-external-call-regression.sh pass",
+        "./scripts/check.sh pass"
+      ]
+    },
+    {
+      "authorization_state": "final_closeout_complete_no_new_implementation_authorization",
+      "authorization_transaction": "AION-173-SI-0005",
+      "branch": "phase/self-improvement-final-closeout",
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-19T06:17:29Z",
+      "corrective_prs": [],
+      "feature_commits": [
+        "50b498e9a47a95f82c26df718e11696b9ef741b3"
+      ],
+      "merge_commits": [
+        "00b71a6172fb136279716103b10dae986f455968"
+      ],
+      "next_task": "operator_evaluation",
+      "pull_requests": [
+        86
+      ],
+      "runtime_state": "self_improvement_platform_implemented_disabled",
+      "task_id": "AION-175",
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "./scripts/self-improvement-final-check.sh pass",
+        "2885 Brain API tests passed",
+        "274 SDK tests passed",
+        "mypy passed for 1184 Brain API source files",
+        "mypy passed for 145 SDK source files",
+        "documentation checks passed",
+        "boundary checks passed",
+        "repository-health checks passed",
+        "immutable tag check passed",
+        "no-v0.2 checks passed"
+      ]
+    },
+    {
+      "authorization_state": "no_new_implementation_authorization",
+      "authorization_transaction": "none",
+      "branch": "phase/self-improvement-postmerge-evidence-reconciliation",
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-19T10:02:18Z",
+      "corrective_prs": [],
+      "feature_commits": [
+        "1738f49ff22e197dd8fff3038fc8429306eadf76"
+      ],
+      "merge_commits": [
+        "ee50f1cc9ed3573661d1571954421abfb749e877"
+      ],
+      "next_task": "AION-OE-001",
+      "pull_requests": [
+        87
+      ],
+      "runtime_state": "operator_evaluation_ready",
+      "task_id": "AION-176",
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "./scripts/self-improvement-final-check.sh pass",
+        "post-merge evidence reconciliation pass"
+      ]
+    },
+    {
+      "authorization_state": "consumed_by_AION-178_closed_by_AION-179",
+      "authorization_transaction": "AION-177-SI-0006",
+      "branch": "phase/self-improvement-shadow-mode-authorization",
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-19T20:18:44Z",
+      "corrective_prs": [],
+      "feature_commits": [
+        "b1f3f721038ffffe5d78115f7efe8da7f493b677"
+      ],
+      "merge_commits": [
+        "544c71ed18530699eb1756674d38c874af8a0aae"
+      ],
+      "next_task": "AION-178",
+      "pull_requests": [
+        88
+      ],
+      "runtime_state": "shadow_mode_authorization_consumed_runtime_disabled",
+      "task_id": "AION-177",
+      "tests": [
+        "./scripts/self-improvement-shadow-mode-authorization-no-go-regression.sh",
+        "./scripts/self-improvement-shadow-mode-authorization-check.sh",
+        "./scripts/self-improvement-shadow-mode-runtime-hold.sh"
+      ]
+    },
+    {
+      "authorization_state": "consumed_by_AION-178_closed_by_AION-179",
+      "authorization_transaction": "AION-177-SI-0006",
+      "branch": "phase/self-improvement-shadow-mode-plane",
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-20T06:10:57Z",
+      "corrective_prs": [],
+      "feature_commits": [
+        "1f7a9750e3b5567b173e9a42af069cb4d7d7bc8f"
+      ],
+      "merge_commits": [
+        "b05dd3cc49cff086997232bfc579a7ca891a184b"
+      ],
+      "next_task": "AION-179",
+      "pull_requests": [
+        89
+      ],
+      "runtime_state": "shadow_mode_implemented_operator_invoked_disabled_closed_by_AION-179",
+      "task_id": "AION-178",
+      "tests": [
+        "GitHub brain-api-quality pass for PR 89",
+        "GitHub contract-check pass for PR 89",
+        "GitHub docker-build-core pass for PR 89",
+        "GitHub policy-check pass for PR 89",
+        "GitHub repository-hygiene pass for PR 89",
+        "GitHub sdk-cli-check pass for PR 89",
+        "GitHub sdk-quality pass for PR 89",
+        "./scripts/self-improvement-shadow-mode-no-go-regression.sh",
+        "./scripts/self-improvement-shadow-mode-check.sh",
+        "./scripts/self-improvement-shadow-mode-runtime-hold.sh"
+      ]
+    },
+    {
+      "authorization_state": "consumed_by_AION-178_closed_by_AION-179",
+      "authorization_transaction": "AION-177-SI-0006",
+      "branch": "phase/self-improvement-shadow-mode-evaluation-closeout",
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-20T10:10:12Z",
+      "corrective_prs": [],
+      "feature_commits": [
+        "13fa892bf3dd4518fd9ea41ebaa58655813c6da9",
+        "8246bef6bcdec313e07e0dff732239778fad3739"
+      ],
+      "merge_commits": [
+        "133040597ca8ed997bbc32b8bb8c980a123d2f9a"
+      ],
+      "next_task": "AION-180",
+      "pull_requests": [
+        90
+      ],
+      "runtime_state": "shadow_mode_operator_evaluation_passed_runtime_disabled",
+      "task_id": "AION-179",
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "AION-SOE-001 fourteen scenarios passed",
+        "runtime hold pass",
+        "shadow-mode implementation check pass",
+        "shadow-mode no-go pass",
+        "authorization closeout pass",
+        "repository unchanged during evaluation",
+        "no shadow-plane PR created",
+        "no source, Git, approval, merge, promotion, canary, deployment, or model training action",
+        "immutable tag check pass",
+        "no-v0.2 checks pass"
+      ]
+    },
+    {
+      "authorization_state": "active_for_AION-181_formal_closeout_AION-182",
+      "authorization_transaction": "AION-180-SI-0007",
+      "branch": "phase/self-improvement-shadow-activation-authorization",
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-20T15:15:08Z",
+      "corrective_prs": [],
+      "feature_commits": [
+        "a008986872e46b1786bf7d20c18074c4275a852c",
+        "2b97743e65bf0c405c4eaa5360f809399ff9046c"
+      ],
+      "merge_commits": [
+        "e50754bbd27570625befea3d3e73e65a7ec098d1"
+      ],
+      "next_task": "AION-181",
+      "pull_requests": [
+        91
+      ],
+      "runtime_state": "activation_control_plane_authorized_not_implemented",
+      "task_id": "AION-180",
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "AION-180 no-go regression pass",
+        "AION-180 authorization check pass",
+        "activation runtime hold pass",
+        "Brain API 3059 passed",
+        "SDK 274 passed",
+        "type checks passed",
+        "boundary passed",
+        "repository health passed",
+        "git diff checks passed",
+        "shallow/detached CI scope-diff repair verified"
+      ]
+    },
+    {
+      "authorization_state": "consumed_by_AION-181_closed_by_AION-182",
+      "authorization_transaction": "AION-180-SI-0007",
+      "branch": "phase/self-improvement-shadow-activation-control-plane",
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-20T21:10:45Z",
+      "corrective_prs": [],
+      "feature_commits": [
+        "c7c7a5c83606399dff2221bd7f847ea00e177603"
+      ],
+      "merge_commits": [
+        "e9374853a53cd098096ed50da0fabb5874152d54"
+      ],
+      "next_task": "AION-182",
+      "pull_requests": [
+        92
+      ],
+      "runtime_state": "activation_control_plane_implemented_disabled_simulation_only",
+      "task_id": "AION-181",
+      "tests": [
+        "GitHub brain-api-quality pass",
+        "GitHub contract-check pass",
+        "GitHub docker-build-core pass",
+        "GitHub policy-check pass",
+        "GitHub repository-hygiene pass",
+        "GitHub sdk-cli-check pass",
+        "GitHub sdk-quality pass",
+        "stale policy-check attempt cancelled",
+        "policy-check rerun passed without code changes",
+        "focused AION-181 tests: 77 passed",
+        "post-merge focused subset: 21 passed",
+        "Brain API: 3100 passed",
+        "SDK: 274 passed",
+        "Brain API mypy: 1200 files clean",
+        "SDK mypy: 145 files clean",
+        "no-go regression pass",
+        "control-plane check pass",
+        "activation runtime hold pass",
+        "docs check pass",
+        "final docs audit pass",
+        "no-domain-drift pass",
+        "boundary pass",
+        "repository health pass",
+        "git diff checks pass",
+        "authorization-ledger check pass"
+      ]
+    }
+  ],
+  "repository": "/Users/damilaremerotiwon/KITEV2/AOIN OS",
+  "shadow_activation_control_plane_operator_evaluation_passed": true,
+  "synthetic": true
+}

@@ -21,6 +21,8 @@ from self_improvement_governance import (  # noqa: E402
     AION_178_FEATURE_COMMIT,
     AION_178_MERGE_COMMIT,
     AION_178_MERGED_AT,
+    AION_181_FEATURE_COMMIT,
+    AION_181_MERGE_COMMIT,
     AUTHORIZATION_ID,
     CANARY_APPROVAL_BINDING_REQUIREMENTS,
     CANARY_APPROVED_SCOPE,
@@ -37,6 +39,8 @@ from self_improvement_governance import (  # noqa: E402
     RISK_LEVELS,
     ROOT_AUTHORIZATION_ID,
     SHADOW_ACTIVATION_AUTHORIZATION_ID,
+    SHADOW_ACTIVATION_OPERATOR_EVALUATION_ID,
+    SHADOW_ACTIVATION_OPERATOR_EVALUATION_PASS_DECISION,
     SHADOW_AUTHORIZATION_ID,
     SHADOW_OPERATOR_EVALUATION_DECISION,
     SHADOW_OPERATOR_EVALUATION_ID,
@@ -198,9 +202,48 @@ def test_aion171_is_consumed_and_aion173_authorization_is_exact() -> None:
             activation_authorization["authorization_transaction_id"]
             == SHADOW_ACTIVATION_AUTHORIZATION_ID
         )
-        assert activation_authorization["authorization_active"] is True
+        assert activation_authorization["record_kind"] == "authorization_closeout"
+        assert activation_authorization["authorization_active"] is False
+        assert activation_authorization["authorization_consumed"] is True
+        assert activation_authorization["authorization_consumed_by_task"] == "AION-181"
+        assert activation_authorization["authorization_consumed_by_pr"] == 92
+        assert activation_authorization["authorization_consumed_by_feature_commits"] == [
+            AION_181_FEATURE_COMMIT
+        ]
+        assert (
+            activation_authorization["authorization_consumed_by_merge_commit"]
+            == AION_181_MERGE_COMMIT
+        )
+        assert activation_authorization["authorization_expired"] is True
+        assert activation_authorization["authorization_reusable"] is False
         assert activation_authorization["implementation_task"] == "AION-181"
         assert activation_authorization["formal_closeout_task"] == "AION-182"
+        assert (
+            activation_authorization["control_plane_operator_evaluation_id"]
+            == SHADOW_ACTIVATION_OPERATOR_EVALUATION_ID
+        )
+        assert (
+            activation_authorization["control_plane_operator_evaluation_decision"]
+            == SHADOW_ACTIVATION_OPERATOR_EVALUATION_PASS_DECISION
+        )
+        assert (
+            activation_authorization["control_plane_operator_evaluation_used_as_approval"]
+            is False
+        )
+        assert (
+            activation_authorization[
+                "control_plane_operator_evaluation_created_implementation_authorization"
+            ]
+            is False
+        )
+        assert (
+            activation_authorization["control_plane_operator_evaluation_created_activation_approval"]
+            is False
+        )
+        assert (
+            activation_authorization["control_plane_operator_evaluation_created_actual_activation"]
+            is False
+        )
     for key in SHADOW_PROHIBITED_FLAGS:
         assert shadow_closeout[key] is False
 

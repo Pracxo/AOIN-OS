@@ -1163,6 +1163,7 @@ aion180_auth_paths = {
     "services/brain-api/tests/test_self_improvement_governance_authorization_docs.py",
     "services/brain-api/tests/test_self_improvement_shadow_activation_approval_binding_spec.py",
     "services/brain-api/tests/test_self_improvement_shadow_activation_authorization_docs.py",
+    "services/brain-api/tests/test_self_improvement_shadow_activation_authorization_closeout.py",
     "services/brain-api/tests/test_self_improvement_shadow_activation_authorization_validator.py",
     "services/brain-api/tests/test_self_improvement_shadow_mode_authorization_closeout.py",
     "services/brain-api/tests/test_self_improvement_shadow_mode_authorization_validator.py",

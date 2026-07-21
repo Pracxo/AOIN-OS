@@ -1,0 +1,85 @@
+{
+  "decision": "SHADOW_ACTIVATION_CONTROL_PLANE_EVALUATION_PASS_RECOMMEND_ACTUAL_ACTIVATION_AUTHORIZATION_REVIEW",
+  "evaluation_id": "AION-SACE-001",
+  "hard_gate_count": 31,
+  "read_only": true,
+  "redaction_applied": true,
+  "redacted": true,
+  "repository_integrity": {
+    "canonical_repository_untouched_by_evaluation": true,
+    "control_plane_approval_creation_count": 0,
+    "control_plane_connector_call_count": 0,
+    "control_plane_git_operation_count": 0,
+    "control_plane_network_call_count": 0,
+    "control_plane_provider_call_count": 0,
+    "control_plane_real_pull_request_created": false,
+    "control_plane_runtime_promotion_count": 0,
+    "control_plane_source_mutation_count": 0,
+    "temporary_evaluation_data_cleaned": true
+  },
+  "safety_labels": [
+    "read_only=true",
+    "synthetic=true",
+    "redacted=true",
+    "shadow_activation_enabled=false",
+    "actual_activation_available=false",
+    "runtime_effect=false"
+  ],
+  "scenario_count": 21,
+  "sections": [
+    {
+      "checks": [
+        {
+          "label": "scenario_count",
+          "status": "21"
+        },
+        {
+          "label": "all_scenarios_passed",
+          "status": "true"
+        },
+        {
+          "label": "all_hard_gates_passed",
+          "status": "true"
+        }
+      ],
+      "summary": "SHADOW_ACTIVATION_CONTROL_PLANE_EVALUATION_PASS_RECOMMEND_ACTUAL_ACTIVATION_AUTHORIZATION_REVIEW",
+      "title": "Evaluation Result"
+    },
+    {
+      "checks": [
+        {
+          "label": "git_operations",
+          "status": "0"
+        },
+        {
+          "label": "source_mutations",
+          "status": "0"
+        },
+        {
+          "label": "real_pull_request_created",
+          "status": "false"
+        },
+        {
+          "label": "network_calls",
+          "status": "0"
+        },
+        {
+          "label": "approval_creation_count",
+          "status": "0"
+        }
+      ],
+      "summary": "All evaluated control-plane side effects remained zero or false.",
+      "title": "Side Effect Counters"
+    }
+  ],
+  "runtime_effect": false,
+  "status": "passed_disabled",
+  "summary": "AION-SACE-001 passed all 21 read-only operator scenarios. The control plane remains implemented and runtime-disabled.",
+  "shadow_activation_control_plane_authorized": true,
+  "shadow_activation_control_plane_implemented": true,
+  "shadow_activation_control_plane_state": "implemented_disabled_simulation_only",
+  "shadow_activation_enabled": false,
+  "shadow_mode_runtime_enabled": false,
+  "title": "Shadow Activation Control-Plane Evaluation",
+  "view": "self_improvement_shadow_activation_control_plane_evaluation"
+}

@@ -140,23 +140,26 @@ def test_project_status_describes_current_shadow_authorization_state() -> None:
     text = _text("docs/project-status.md")
     current_text = _project_status_current_text()
 
-    assert "AION-181 disabled controlled shadow activation control plane implemented" in text
-    assert "Current stage: Activation control plane implemented and disabled" in text
+    assert "AION-182 shadow activation control-plane operator evaluation complete" in text
+    assert "Current stage: Activation control plane implemented, evaluated, and disabled" in text
     assert "`self_improvement_platform_state=implemented_disabled`" in text
     assert "`shadow_mode_implemented=true`" in text
     assert "`shadow_mode_operator_evaluation_passed=true`" in text
     assert "`shadow_mode_runtime_enabled=false`" in text
-    assert "`shadow_activation_control_plane_authorized=true`" in text
+    assert "`shadow_activation_control_plane_authorized_historically=true`" in text
     assert "`shadow_activation_control_plane_implemented=true`" in text
+    assert "`shadow_activation_control_plane_operator_evaluation_passed=true`" in text
     assert "`shadow_activation_control_plane_state=implemented_disabled_simulation_only`" in text
     assert "`shadow_activation_enabled=false`" in text
     assert "`actual_activation_available=false`" in text
-    assert "active self-improvement implementation authorization count: 1" in text
-    assert "active self-improvement implementation authorization: `AION-180-SI-0007`" in text
-    assert "active implementation task: `AION-181`" in text
-    assert "formal closeout task: `AION-182`" in text
-    assert "AION-181 creates no activation authorization" in text
-    assert "Actual activation requires another authorization after AION-182" in text
+    assert "active self-improvement implementation authorization count: 0" in text
+    assert "active self-improvement implementation authorization: `none`" in text
+    assert "active implementation task: `none`" in text
+    assert "new implementation authorization created: `false`" in text
+    assert "activation approval created: `false`" in text
+    assert "actual activation created: `false`" in text
+    assert "AION-180-SI-0007 is closed, consumed by AION-181" in text
+    assert "AION-SACE-001 passed as evidence only and is not approval" in text
     assert "v02_tag_created=false" in text
     assert "v02_release_created=false" in text
     for stale_marker in STALE_AION_176_CURRENT_STATE_MARKERS:
@@ -185,12 +188,14 @@ def test_current_state_surfaces_are_reconciled_and_safe() -> None:
     assert aion180["runtime_state"] == "activation_control_plane_authorized_not_implemented"
     assert aion180["next_task"] == "AION-181"
     aion181 = _task(ledger["records"], "AION-181")
-    assert aion181["ci_result"] == "pending"
+    assert aion181["ci_result"] == "pass"
     assert (
         aion181["runtime_state"]
         == "activation_control_plane_implemented_disabled_simulation_only"
     )
     assert aion181["next_task"] == "AION-182"
+    assert aion181["authorization_state"] == "consumed_by_AION-181_closed_by_AION-182"
+    assert aion181["pull_requests"] == [92]
     for marker in SENSITIVE_EVIDENCE_MARKERS:
         assert marker not in combined
     assert re.search(r"sk-[A-Za-z0-9_-]{10,}", combined) is None

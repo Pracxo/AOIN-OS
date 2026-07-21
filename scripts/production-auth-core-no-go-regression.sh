@@ -104,6 +104,9 @@ while IFS= read -r file; do
   if aion180_is_scoped_self_improvement_shadow_activation_authorization_path "$file"; then
     continue
   fi
+  if aion182_is_scoped_self_improvement_shadow_activation_operator_evaluation_path "$file"; then
+    continue
+  fi
   case "$file" in
     package.json|package-lock.json|pnpm-lock.yaml|yarn.lock|bun.lockb|\
     */package.json|*/package-lock.json|*/pnpm-lock.yaml|*/yarn.lock|*/bun.lockb)
@@ -162,6 +165,9 @@ while IFS= read -r file; do
     continue
   fi
   if aion180_is_scoped_self_improvement_shadow_activation_authorization_path "$file"; then
+    continue
+  fi
+  if aion182_is_scoped_self_improvement_shadow_activation_operator_evaluation_path "$file"; then
     continue
   fi
   case "$file" in
@@ -226,6 +232,9 @@ while IFS= read -r file; do
     continue
   fi
   if aion180_is_scoped_self_improvement_shadow_activation_authorization_path "$file"; then
+    continue
+  fi
+  if aion182_is_scoped_self_improvement_shadow_activation_operator_evaluation_path "$file"; then
     continue
   fi
   case "$file" in

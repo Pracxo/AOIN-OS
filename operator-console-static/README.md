@@ -1197,3 +1197,12 @@ Local checks:
 ## AION-181 Shadow Activation Control Plane
 
 The static console includes read-only AION-181 evidence in `self-improvement-shadow-activation-control-plane.json`, `self-improvement-shadow-activation-simulation.json`, and the updated runtime-hold payload. These files show implemented-disabled control-plane status, simulation outcomes, monitoring thresholds, deactivation triggers, and operator review evidence. They do not create requests, approvals, source changes, Git operations, merges, promotions, deployments, or runtime effects.
+
+## AION-182 Shadow Activation Evaluation
+
+AION-182 adds static, read-only demo evidence for the disabled shadow activation control-plane operator evaluation:
+
+- `demo-data/self-improvement-shadow-activation-control-plane-evaluation.json`
+- `demo-data/self-improvement-actual-shadow-activation-review-boundary.json`
+
+The panels render local JSON only. They do not activate shadow mode, create approval, create authorization, call a backend, call a provider or connector, write source, mutate Git, create a PR, merge, deploy, train a model, or store protected values.
