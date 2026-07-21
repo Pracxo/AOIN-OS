@@ -1,0 +1,63 @@
+{
+  "schema_version": "aion-cognitive-memory-consolidation-evaluation/v1",
+  "program_id": "AION-COGNITIVE-ARCHITECTURE-001",
+  "task_id": "AION-191",
+  "evaluation_id": "AION-MCRE-001",
+  "evaluated_task": "AION-190",
+  "closed_authorization_id": "AION-189-CA-0004",
+  "implementation_pr": 101,
+  "implementation_merge_commit": "a1dcd0826a48ebc2e953e61c4b5ed522da2bcdd1",
+  "result": "PASS",
+  "decision": "MEMORY_CONSOLIDATION_EVALUATION_PASS_AUTHORIZE_COUNTERFACTUAL_PLANNING",
+  "synthetic_environment": {
+    "episode_count": 5,
+    "replay_batch_count": 2,
+    "semantic_candidate_minimum": 3,
+    "procedural_candidate_minimum": 1,
+    "contradiction_candidate_minimum": 1,
+    "forgetting_candidate_minimum": 1,
+    "evidence_fingerprint": "aion-191-mcre-local-deterministic-v1"
+  },
+  "hard_pass_conditions": {
+    "retained_critical_memories_rate": 1.0,
+    "duplicate_reduction_rate": 1.0,
+    "contradiction_loss_rate": 0.0,
+    "catastrophic_forgetting_rate": 0.0,
+    "provenance_coverage": 1.0,
+    "unauthorized_promotion_count": 0,
+    "deterministic_replay_rate": 1.0,
+    "forbidden_side_effects": 0
+  },
+  "evaluation_matrix": {
+    "episodic_recall": "PASS",
+    "semantic_generalization": "PASS",
+    "duplicate_reduction": "PASS",
+    "contradiction_preservation": "PASS",
+    "retention": "PASS",
+    "approved_forgetting": "PASS",
+    "catastrophic_forgetting": "PASS",
+    "procedural_candidate_safety": "PASS",
+    "replay_determinism": "PASS",
+    "zero_automatic_promotion": "PASS"
+  },
+  "side_effects": {
+    "runtime_effect": false,
+    "api_route_added": false,
+    "kernel_registration_added": false,
+    "background_loop_added": false,
+    "action_execution_enabled": false,
+    "automatic_promotion": false,
+    "hidden_memory_mutation": false,
+    "deletion_performed": false,
+    "network_calls": 0,
+    "connector_calls": 0,
+    "model_provider_calls": 0,
+    "source_rewrite_operations": 0,
+    "deployment_enabled": false,
+    "model_weights_changed": false,
+    "forbidden_side_effects": 0
+  },
+  "new_authorization_id": "AION-191-CA-0005",
+  "authorized_task": "AION-192",
+  "next_task": "AION-192"
+}
