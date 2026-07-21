@@ -1175,6 +1175,7 @@ aion183_auth_paths = {
     "docs/cognitive-architecture/tasks/AION-186.md",
     "docs/cognitive-architecture/tasks/AION-187.md",
     "docs/cognitive-architecture/tasks/AION-188.md",
+    "docs/cognitive-architecture/tasks/AION-189.md",
     "docs/cognitive-architecture/program-ledger.json",
     "docs/cognitive-architecture/authorization-ledger.json",
     "docs/cognitive-architecture/architecture-roadmap.md",
@@ -1187,6 +1188,8 @@ aion183_auth_paths = {
     "examples/cognitive-architecture/aion-187-world-model-evaluation.json",
     "examples/cognitive-architecture/aion-187-workspace-authorization.json",
     "examples/cognitive-architecture/aion-188-global-workspace.json",
+    "examples/cognitive-architecture/aion-189-workspace-evaluation.json",
+    "examples/cognitive-architecture/aion-189-consolidation-authorization.json",
     "scripts/cognitive-architecture-authorization-check.sh",
     "scripts/cognitive-architecture-no-go-regression.sh",
     "scripts/cognitive-persistent-state-check.sh",
@@ -1198,6 +1201,8 @@ aion183_auth_paths = {
     "scripts/cognitive-world-model-no-go-regression.sh",
     "scripts/cognitive-global-workspace-check.sh",
     "scripts/cognitive-global-workspace-no-go-regression.sh",
+    "scripts/cognitive-workspace-closeout-check.sh",
+    "scripts/cognitive-workspace-closeout-no-go-regression.sh",
     "scripts/lib/cognitive_architecture_governance.py",
     "services/brain-api/tests/test_cognitive_architecture_program_authorization_docs.py",
     "services/brain-api/tests/test_cognitive_persistent_state_closeout_authorization_docs.py",
@@ -1206,6 +1211,7 @@ aion183_auth_paths = {
     "services/brain-api/tests/test_cognitive_world_model_closeout_authorization_docs.py",
     "services/brain-api/tests/test_cognitive_global_workspace.py",
     "services/brain-api/tests/test_cognitive_global_workspace_no_runtime_effect.py",
+    "services/brain-api/tests/test_cognitive_workspace_closeout_authorization_docs.py",
 }
 
 blocked_package_names = {

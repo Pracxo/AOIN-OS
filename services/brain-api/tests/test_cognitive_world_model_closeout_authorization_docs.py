@@ -33,6 +33,8 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION187_EVALUATION_ID,
     AION188_SCOPE,
     AION188_TASK_ID,
+    AION189_AUTHORIZATION_ID,
+    AION189_EVALUATION_ID,
     PROGRAM_ID,
     validate_aion187_authorization_payload,
     validate_aion187_evaluation_payload,
@@ -167,8 +169,14 @@ def test_aion_187_ledgers_examples_and_no_go_validate() -> None:
     auth_ledger = _json("docs/cognitive-architecture/authorization-ledger.json")
 
     assert program["program_id"] == PROGRAM_ID
-    assert program["active_cognitive_implementation_authorization"] == AION187_AUTHORIZATION_ID
-    assert auth_ledger["active_cognitive_implementation_authorization"] == AION187_AUTHORIZATION_ID
+    assert program["active_cognitive_implementation_authorization"] in {
+        AION187_AUTHORIZATION_ID,
+        AION189_AUTHORIZATION_ID,
+    }
+    assert auth_ledger["active_cognitive_implementation_authorization"] in {
+        AION187_AUTHORIZATION_ID,
+        AION189_AUTHORIZATION_ID,
+    }
     assert auth_ledger["active_cognitive_implementation_authorization_count"] == 1
 
     closed = next(
@@ -188,6 +196,18 @@ def test_aion_187_ledgers_examples_and_no_go_validate() -> None:
     assert closed["implementation_merge_commit"] == AION186_MERGE_COMMIT
     assert active["implementation_task"] == AION188_TASK_ID
     assert active["scope"] == AION188_SCOPE
+    if auth_ledger["active_cognitive_implementation_authorization"] == AION187_AUTHORIZATION_ID:
+        assert active["authorization_active"] is True
+    else:
+        assert active["authorization_active"] is False
+        assert active["authorization_consumed"] is True
+        assert active["authorization_closeout_evaluation"] == AION189_EVALUATION_ID
+        consolidation = next(
+            item
+            for item in auth_ledger["records"]
+            if item["authorization_id"] == AION189_AUTHORIZATION_ID
+        )
+        assert consolidation["authorization_active"] is True
 
 
 def test_aion_187_synthetic_world_model_evaluation_meets_thresholds() -> None:
