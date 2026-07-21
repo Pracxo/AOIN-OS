@@ -10,7 +10,7 @@
   "production_event_subscription_enabled": false,
   "program_id": "AION-COGNITIVE-ARCHITECTURE-001",
   "program_name": "AION Cognitive Architecture Program",
-  "program_state": "chartered_persistent_state_authorized",
+  "program_state": "persistent_state_implemented_pending_evaluation",
   "records": [
     {
       "authorization_id": "AION-180-SI-0007",
@@ -30,9 +30,23 @@
       "candidate_id": "persistent-cognitive-state-core",
       "closeout_task": "AION-185",
       "evaluation_id": null,
+      "merge_commit": "e388a6bf16fe2e7777f4d8d5654a89b1a6f604c3",
+      "pr": 94,
       "record_kind": "authorization",
       "task_id": "AION-183",
-      "task_state": "ready_for_merge",
+      "task_state": "merged_authorized_aion_184",
+      "workstream": "persistent-cognitive-state"
+    },
+    {
+      "authorization_id": "AION-183-CA-0001",
+      "candidate_id": "persistent-cognitive-state-core",
+      "closeout_task": "AION-185",
+      "evaluation_id": null,
+      "implementation_task": "AION-184",
+      "record_kind": "implementation",
+      "runtime_effect": false,
+      "task_id": "AION-184",
+      "task_state": "implemented_pending_merge_and_evaluation",
       "workstream": "persistent-cognitive-state"
     }
   ],
