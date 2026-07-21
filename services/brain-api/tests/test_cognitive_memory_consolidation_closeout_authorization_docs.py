@@ -288,19 +288,20 @@ def test_aion_191_does_not_implement_aion_192_runtime_surface() -> None:
         ),
         None,
     )
-    assert planning_record is None or planning_record["task_state"].startswith(
-        "implementation_pending"
-    )
+    planning_state = planning_record["task_state"] if planning_record else ""
     contract = ROOT / "services/brain-api/src/aion_brain/contracts/planning.py"
     source = ROOT / "services/brain-api/src/aion_brain/planning"
     contract_text = contract.read_text() if contract.exists() else ""
     source_text = (
         "\n".join(path.read_text() for path in source.glob("*.py")) if source.is_dir() else ""
     )
-    assert "class StrategicGoal" not in contract_text
-    assert "class HierarchicalPlan" not in contract_text
-    assert "class StrategicPlanner" not in source_text
-    assert "class ReplanningService" not in source_text
+    if not planning_record or planning_state.startswith("implementation_pending"):
+        assert "class StrategicGoal" not in contract_text
+        assert "class HierarchicalPlan" not in contract_text
+        assert "class StrategicPlanner" not in source_text
+        assert "class ReplanningService" not in source_text
+    else:
+        assert planning_state == "implemented_pending_aion_193_evaluation"
     assert not (ROOT / "services/brain-api/src/aion_brain/api/planning.py").exists()
 
 
