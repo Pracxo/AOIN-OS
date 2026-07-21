@@ -207,7 +207,7 @@
       "parent_pr": 99,
       "implementation_task": "AION-190",
       "implementation_branch": "phase/cognitive-memory-consolidation",
-      "implementation_state": "authorized_pending_aion_190_implementation",
+      "implementation_state": "implemented_pending_aion_191_evaluation",
       "formal_closeout_task": "AION-191",
       "candidate_id": "memory-consolidation-replay-core",
       "scope": "episodic-replay-semantic-consolidation-procedural-candidate-core",

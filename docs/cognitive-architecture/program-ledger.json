@@ -10,7 +10,7 @@
   "production_event_subscription_enabled": false,
   "program_id": "AION-COGNITIVE-ARCHITECTURE-001",
   "program_name": "AION Cognitive Architecture Program",
-  "program_state": "global_workspace_evaluated_consolidation_authorized",
+  "program_state": "memory_consolidation_implemented_pending_evaluation",
   "records": [
     {
       "authorization_id": "AION-180-SI-0007",
@@ -174,7 +174,23 @@
       "evaluation_id": "AION-GWE-001",
       "pr": null,
       "merge_commit": null,
-      "task_state": "authorized_pending_aion_190_implementation"
+      "task_state": "implementation_pending_aion_191_evaluation"
+    },
+    {
+      "task_id": "AION-190",
+      "record_kind": "implementation",
+      "authorization_id": "AION-189-CA-0004",
+      "candidate_id": "memory-consolidation-replay-core",
+      "scope": "episodic-replay-semantic-consolidation-procedural-candidate-core",
+      "workstream": "memory-consolidation",
+      "closeout_task": "AION-191",
+      "evaluation_id": "AION-MCE-001",
+      "implementation_task": "AION-190",
+      "runtime_effect": false,
+      "forbidden_side_effects": 0,
+      "pr": null,
+      "merge_commit": null,
+      "task_state": "implemented_pending_aion_191_evaluation"
     }
   ],
   "schema_version": "aion-cognitive-architecture-program-ledger/v1",

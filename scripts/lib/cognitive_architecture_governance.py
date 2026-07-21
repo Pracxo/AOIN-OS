@@ -44,6 +44,8 @@ AION189_AUTHORIZATION_ID = "AION-189-CA-0004"
 AION190_TASK_ID = "AION-190"
 AION190_CANDIDATE_ID = "memory-consolidation-replay-core"
 AION190_SCOPE = "episodic-replay-semantic-consolidation-procedural-candidate-core"
+AION191_TASK_ID = "AION-191"
+AION191_EVALUATION_ID = "AION-MCE-001"
 
 FALSE_RUNTIME_FLAGS = (
     "runtime_effect",
@@ -331,6 +333,47 @@ AION189_PROHIBITED_PREFIXES = (
     "packages/aion-sdk-python/src/",
 )
 
+AION190_REQUIRED_FILES = (
+    "docs/cognitive-architecture/tasks/AION-190.md",
+    "docs/cognitive-architecture/program-ledger.json",
+    "docs/cognitive-architecture/authorization-ledger.json",
+    "examples/cognitive-architecture/aion-190-memory-consolidation.json",
+    "services/brain-api/src/aion_brain/contracts/memory_consolidation.py",
+    "services/brain-api/src/aion_brain/memory_consolidation/__init__.py",
+    "services/brain-api/src/aion_brain/memory_consolidation/core.py",
+    "services/brain-api/tests/test_cognitive_memory_consolidation.py",
+    "services/brain-api/tests/test_cognitive_memory_consolidation_no_runtime_effect.py",
+    "scripts/cognitive-memory-consolidation-check.sh",
+    "scripts/cognitive-memory-consolidation-no-go-regression.sh",
+    "scripts/lib/cognitive_architecture_governance.py",
+)
+
+AION190_ALLOWED_EXACT_PATHS = set(AION190_REQUIRED_FILES) | {
+    "scripts/auth-design-check.sh",
+    "scripts/lib/v02-production-auth-scan-exclusions.sh",
+}
+
+AION190_ALLOWED_PREFIXES = (
+    "docs/cognitive-architecture/",
+    "examples/cognitive-architecture/",
+    "services/brain-api/src/aion_brain/memory_consolidation/",
+)
+
+AION190_PROHIBITED_PREFIXES = (
+    ".github/workflows/",
+    "migrations/",
+    "services/brain-api/migrations/",
+    "infra/postgres/migrations/",
+    "services/brain-api/src/aion_brain/api/",
+    "services/brain-api/src/aion_brain/git/",
+    "services/brain-api/src/aion_brain/pull_requests/",
+    "services/brain-api/src/aion_brain/deployment/",
+    "services/brain-api/src/aion_brain/connectors/",
+    "services/brain-api/src/aion_brain/model_providers/",
+    "services/brain-api/src/aion_brain/credentials/",
+    "packages/aion-sdk-python/src/",
+)
+
 WORLD_MODEL_REQUIRED_CONTRACTS = (
     "WorldState",
     "WorldObservation",
@@ -497,6 +540,7 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
             "world_model_evaluated_workspace_authorized",
             "global_workspace_implemented_pending_evaluation",
             "global_workspace_evaluated_consolidation_authorized",
+            "memory_consolidation_implemented_pending_evaluation",
         },
         "wrong cognitive program state",
     )
@@ -742,6 +786,53 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
         _assert(
             active_authorization == AION189_AUTHORIZATION_ID,
             "AION-189 authorization must be active when present",
+        )
+        _assert(
+            consolidation_auth["task_state"]
+            in {
+                "authorized_pending_aion_190_implementation",
+                "implementation_pending_aion_191_evaluation",
+            },
+            "AION-189 authorization state mismatch",
+        )
+    consolidation_implementation = _find_optional_record(
+        records,
+        "implementation_task",
+        AION190_TASK_ID,
+    )
+    if consolidation_implementation is not None:
+        _assert(
+            consolidation_implementation["authorization_id"] == AION189_AUTHORIZATION_ID,
+            "AION-190 implementation must use AION-189 authorization",
+        )
+        _assert(
+            consolidation_implementation["candidate_id"] == AION190_CANDIDATE_ID,
+            "AION-190 candidate mismatch",
+        )
+        _assert(
+            consolidation_implementation["scope"] == AION190_SCOPE,
+            "AION-190 implementation scope mismatch",
+        )
+        _assert(
+            consolidation_implementation["closeout_task"] == AION191_TASK_ID,
+            "AION-190 closeout task mismatch",
+        )
+        _assert(
+            consolidation_implementation["evaluation_id"] == AION191_EVALUATION_ID,
+            "AION-190 evaluation mismatch",
+        )
+        _assert(
+            consolidation_implementation["runtime_effect"] is False,
+            "AION-190 runtime effect must be false",
+        )
+        _assert(
+            consolidation_implementation["forbidden_side_effects"] == 0,
+            "AION-190 forbidden side effects must be zero",
+        )
+        _assert(
+            consolidation_implementation["task_state"]
+            == "implemented_pending_aion_191_evaluation",
+            "AION-190 task state mismatch",
         )
 
 
@@ -1068,7 +1159,10 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
             )
             _assert(
                 consolidation["implementation_state"]
-                == "authorized_pending_aion_190_implementation",
+                in {
+                    "authorized_pending_aion_190_implementation",
+                    "implemented_pending_aion_191_evaluation",
+                },
                 "AION-189 implementation state mismatch",
             )
             _assert(consolidation["formal_closeout_task"] == "AION-191", "AION-190 closeout")
@@ -1335,6 +1429,9 @@ def validate_persistent_state_no_go(root: Path) -> None:
         current_workspace_closeout_path_allowed = (
             _aion189_closeout_record_exists(root) and _aion189_path_allowed(relative)
         )
+        current_memory_consolidation_path_allowed = (
+            _aion190_implementation_record_exists(root) and _aion190_path_allowed(relative)
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -1344,6 +1441,7 @@ def validate_persistent_state_no_go(root: Path) -> None:
             or current_world_model_closeout_path_allowed
             or current_workspace_path_allowed
             or current_workspace_closeout_path_allowed
+            or current_memory_consolidation_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION184_PROHIBITED_PREFIXES),
             f"prohibited AION-184 path changed: {relative}",
         )
@@ -1353,7 +1451,8 @@ def validate_persistent_state_no_go(root: Path) -> None:
             or current_world_model_path_allowed
             or current_world_model_closeout_path_allowed
             or current_workspace_path_allowed
-            or current_workspace_closeout_path_allowed,
+            or current_workspace_closeout_path_allowed
+            or current_memory_consolidation_path_allowed,
             f"unexpected AION-184 path changed: {relative}",
         )
     source_text = "\n".join(
@@ -1466,6 +1565,9 @@ def validate_persistent_state_closeout_no_go(root: Path) -> None:
         current_workspace_closeout_path_allowed = (
             _aion189_closeout_record_exists(root) and _aion189_path_allowed(relative)
         )
+        current_memory_consolidation_path_allowed = (
+            _aion190_implementation_record_exists(root) and _aion190_path_allowed(relative)
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -1475,6 +1577,7 @@ def validate_persistent_state_closeout_no_go(root: Path) -> None:
             or current_world_model_closeout_path_allowed
             or current_workspace_path_allowed
             or current_workspace_closeout_path_allowed
+            or current_memory_consolidation_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION185_PROHIBITED_PREFIXES),
             f"prohibited AION-185 path changed: {relative}",
         )
@@ -1483,7 +1586,8 @@ def validate_persistent_state_closeout_no_go(root: Path) -> None:
             or current_world_model_path_allowed
             or current_world_model_closeout_path_allowed
             or current_workspace_path_allowed
-            or current_workspace_closeout_path_allowed,
+            or current_workspace_closeout_path_allowed
+            or current_memory_consolidation_path_allowed,
             f"unexpected AION-185 path changed: {relative}",
         )
 
@@ -1683,6 +1787,9 @@ def validate_world_model_no_go(root: Path) -> None:
         aion189_path_allowed = _aion189_closeout_record_exists(root) and _aion189_path_allowed(
             relative
         )
+        aion190_path_allowed = _aion190_implementation_record_exists(root) and _aion190_path_allowed(
+            relative
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -1691,6 +1798,7 @@ def validate_world_model_no_go(root: Path) -> None:
             aion187_path_allowed
             or aion188_path_allowed
             or aion189_path_allowed
+            or aion190_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION186_PROHIBITED_PREFIXES),
             f"prohibited AION-186 path changed: {relative}",
         )
@@ -1698,7 +1806,8 @@ def validate_world_model_no_go(root: Path) -> None:
             _aion186_path_allowed(relative)
             or aion187_path_allowed
             or aion188_path_allowed
-            or aion189_path_allowed,
+            or aion189_path_allowed
+            or aion190_path_allowed,
             f"unexpected AION-186 path changed: {relative}",
         )
     source_text = "\n".join(
@@ -1867,6 +1976,9 @@ def validate_world_model_closeout_no_go(root: Path) -> None:
         aion189_path_allowed = _aion189_closeout_record_exists(root) and _aion189_path_allowed(
             relative
         )
+        aion190_path_allowed = _aion190_implementation_record_exists(root) and _aion190_path_allowed(
+            relative
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -1874,11 +1986,15 @@ def validate_world_model_closeout_no_go(root: Path) -> None:
         _assert(
             aion188_path_allowed
             or aion189_path_allowed
+            or aion190_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION187_PROHIBITED_PREFIXES),
             f"prohibited AION-187 path changed: {relative}",
         )
         _assert(
-            _aion187_path_allowed(relative) or aion188_path_allowed or aion189_path_allowed,
+            _aion187_path_allowed(relative)
+            or aion188_path_allowed
+            or aion189_path_allowed
+            or aion190_path_allowed,
             f"unexpected AION-187 path changed: {relative}",
         )
 
@@ -2097,6 +2213,7 @@ def validate_global_workspace(root: Path) -> None:
         in {
             "global_workspace_implemented_pending_evaluation",
             "global_workspace_evaluated_consolidation_authorized",
+            "memory_consolidation_implemented_pending_evaluation",
         },
         "AION-188 program state mismatch",
     )
@@ -2167,17 +2284,21 @@ def validate_global_workspace_no_go(root: Path) -> None:
         aion189_path_allowed = _aion189_closeout_record_exists(root) and _aion189_path_allowed(
             relative
         )
+        aion190_path_allowed = _aion190_implementation_record_exists(root) and _aion190_path_allowed(
+            relative
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
         )
         _assert(
             aion189_path_allowed
+            or aion190_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION188_PROHIBITED_PREFIXES),
             f"prohibited AION-188 path changed: {relative}",
         )
         _assert(
-            _aion188_path_allowed(relative) or aion189_path_allowed,
+            _aion188_path_allowed(relative) or aion189_path_allowed or aion190_path_allowed,
             f"unexpected AION-188 path changed: {relative}",
         )
 
@@ -2389,24 +2510,266 @@ def validate_workspace_closeout(root: Path) -> None:
     )
 
 
+def validate_aion190_implementation_payload(payload: dict[str, Any]) -> None:
+    _assert(
+        payload["schema_version"] == "aion-cognitive-memory-consolidation-implementation/v1",
+        "bad AION-190 implementation schema",
+    )
+    _assert(payload["program_id"] == PROGRAM_ID, "bad AION-190 program id")
+    _assert(payload["task_id"] == AION190_TASK_ID, "bad AION-190 task id")
+    _assert(payload["authorization_id"] == AION189_AUTHORIZATION_ID, "bad AION-190 auth")
+    _assert(payload["candidate_id"] == AION190_CANDIDATE_ID, "bad AION-190 candidate")
+    _assert(payload["scope"] == AION190_SCOPE, "bad AION-190 scope")
+    _assert(payload["closeout_task"] == AION191_TASK_ID, "bad AION-190 closeout")
+    _assert(
+        payload["implementation_state"] == "implemented_pending_aion_191_evaluation",
+        "bad AION-190 implementation state",
+    )
+    for contract in CONSOLIDATION_REQUIRED_CONTRACTS:
+        _assert(contract in payload["contracts"], f"missing consolidation contract: {contract}")
+    for service in CONSOLIDATION_REQUIRED_SERVICES:
+        _assert(service in payload["services"], f"missing consolidation service: {service}")
+    for stage in CONSOLIDATION_REQUIRED_PIPELINE:
+        _assert(stage in payload["pipeline"], f"missing consolidation pipeline stage: {stage}")
+    for behavior in (
+        "automatic semantic promotion",
+        "automatic procedural promotion",
+        "source rewrite",
+        "model-weight update",
+        "background consolidation",
+        "hidden memory mutation",
+        "deletion without explicit policy evidence",
+    ):
+        _assert(behavior in payload["prohibited_behaviors"], f"missing prohibition: {behavior}")
+    capabilities = payload["capabilities"]
+    for key in (
+        "deterministic_replay_selection",
+        "semantic_candidate_generation",
+        "procedural_candidate_synthesis",
+        "contradiction_analysis",
+        "benchmark_evidence",
+        "operator_review_checkpoints",
+        "non_destructive_forgetting_candidates",
+    ):
+        _assert(capabilities[key] is True, f"{key} must be true")
+    metrics = payload["benchmark_requirements"]
+    _assert(metrics["retained_critical_memories_rate"] == 1.0, "critical memory retention")
+    _assert(metrics["duplicate_reduction_minimum"] >= 0.8, "duplicate reduction threshold")
+    _assert(metrics["contradiction_loss_rate"] == 0.0, "contradiction loss")
+    _assert(metrics["catastrophic_forgetting_maximum"] <= 0.05, "forgetting threshold")
+    _assert(metrics["provenance_coverage"] == 1.0, "provenance coverage")
+    _assert(metrics["unauthorized_promotion_count"] == 0, "unauthorized promotion count")
+    _assert(metrics["deterministic_replay_rate"] == 1.0, "deterministic replay")
+    _assert(metrics["forbidden_side_effects"] == 0, "forbidden side effects")
+    runtime = payload["runtime_boundaries"]
+    for key in (
+        "runtime_effect",
+        "api_route_added",
+        "kernel_registration_added",
+        "background_loop_added",
+        "action_execution_enabled",
+        "deployment_enabled",
+        "model_weights_changed",
+        "production_exposure",
+        "automatic_promotion",
+        "hidden_memory_mutation",
+    ):
+        _assert(runtime[key] is False, f"{key} must be false")
+    for key in (
+        "network_calls",
+        "connector_calls",
+        "model_provider_calls",
+        "model_weight_training",
+        "source_rewrite_operations",
+        "git_operations",
+        "forbidden_side_effects",
+    ):
+        _assert(runtime[key] == 0, f"{key} must be zero")
+
+
+def validate_memory_consolidation(root: Path) -> None:
+    validate_workspace_closeout(root)
+    validate_required_files(root, AION190_REQUIRED_FILES)
+    validate_aion190_implementation_payload(
+        _load_json(root, "examples/cognitive-architecture/aion-190-memory-consolidation.json")
+    )
+    validate_no_claim_terms(
+        root,
+        (
+            root / "docs/cognitive-architecture/tasks/AION-190.md",
+            root / "services/brain-api/src/aion_brain/contracts/memory_consolidation.py",
+            root / "services/brain-api/src/aion_brain/memory_consolidation",
+            root / "services/brain-api/tests/test_cognitive_memory_consolidation.py",
+            root
+            / "services/brain-api/tests/test_cognitive_memory_consolidation_no_runtime_effect.py",
+        ),
+    )
+    contract_text = (
+        root / "services/brain-api/src/aion_brain/contracts/memory_consolidation.py"
+    ).read_text()
+    source_text = "\n".join(
+        path.read_text()
+        for path in (root / "services/brain-api/src/aion_brain/memory_consolidation").glob(
+            "*.py"
+        )
+    )
+    for contract in CONSOLIDATION_REQUIRED_CONTRACTS:
+        _assert(
+            f"class {contract}" in contract_text,
+            f"missing memory-consolidation contract: {contract}",
+        )
+    for service in CONSOLIDATION_REQUIRED_SERVICES:
+        _assert(f"class {service}" in source_text, f"missing consolidation service: {service}")
+    for marker in (
+        "automatic_promotion",
+        "hidden_memory_mutation",
+        "deletion_without_policy_evidence",
+    ):
+        _assert(marker in contract_text, f"missing runtime boundary marker: {marker}")
+    task_doc = (root / "docs/cognitive-architecture/tasks/AION-190.md").read_text()
+    for section in (
+        "## Task Purpose",
+        "## Authorization",
+        "## Source Boundaries",
+        "## Required Contracts",
+        "## Required Services",
+        "## Pipeline",
+        "## Required Tests",
+        "## Required Gates",
+        "## Security Invariants",
+        "## Completion Conditions",
+        "## Next Task",
+    ):
+        _assert(section in task_doc, f"AION-190 task doc missing {section}")
+    for term in (
+        AION189_AUTHORIZATION_ID,
+        AION190_CANDIDATE_ID,
+        AION190_SCOPE,
+        AION191_TASK_ID,
+    ):
+        _assert(term in task_doc, f"AION-190 task doc missing {term}")
+    program = _load_json(root, "docs/cognitive-architecture/program-ledger.json")
+    authorization = _load_json(root, "docs/cognitive-architecture/authorization-ledger.json")
+    _assert(
+        program["program_state"] == "memory_consolidation_implemented_pending_evaluation",
+        "AION-190 program state mismatch",
+    )
+    implementation = _find_record(program["records"], "implementation_task", AION190_TASK_ID)
+    _assert(implementation["authorization_id"] == AION189_AUTHORIZATION_ID, "AION-190 auth")
+    _assert(implementation["candidate_id"] == AION190_CANDIDATE_ID, "AION-190 candidate")
+    _assert(implementation["scope"] == AION190_SCOPE, "AION-190 scope")
+    _assert(implementation["closeout_task"] == AION191_TASK_ID, "AION-190 closeout")
+    _assert(implementation["evaluation_id"] == AION191_EVALUATION_ID, "AION-190 eval")
+    _assert(implementation["runtime_effect"] is False, "AION-190 runtime effect")
+    _assert(implementation["forbidden_side_effects"] == 0, "AION-190 side effects")
+    _assert(
+        implementation["task_state"] == "implemented_pending_aion_191_evaluation",
+        "AION-190 task state",
+    )
+    active = _find_record(authorization["records"], "authorization_id", AION189_AUTHORIZATION_ID)
+    _assert(active["authorization_active"] is True, "AION-189 authorization must remain active")
+    _assert(active["authorization_consumed"] is False, "AION-189 must not be consumed yet")
+    _assert(active["authorization_expired"] is False, "AION-189 must not expire before AION-191")
+    _assert(active["authorization_reusable"] is False, "AION-189 must remain non-reusable")
+    _assert(
+        active["implementation_state"] == "implemented_pending_aion_191_evaluation",
+        "AION-189 implementation state must await AION-191",
+    )
+    _assert(
+        not (root / "services/brain-api/src/aion_brain/api/memory_consolidation.py").exists(),
+        "AION-190 must not add a memory-consolidation API route",
+    )
+    for path in (
+        root / "services/brain-api/src/aion_brain/kernel/container.py",
+        root / "services/brain-api/src/aion_brain/kernel/diagnostics.py",
+    ):
+        _assert(
+            "aion_brain.memory_consolidation" not in path.read_text(),
+            "AION-190 must not add kernel memory-consolidation registration",
+        )
+    for marker in (
+        "aion_brain.api",
+        "aion_brain.git",
+        "aion_brain.pull_requests",
+        "aion_brain.deployment",
+        "aion_brain.connectors",
+        "aion_brain.model_providers",
+        "aion_brain.credentials",
+        "requests",
+        "httpx",
+        "urllib",
+        "socket",
+        "subprocess",
+        "openai",
+        "anthropic",
+    ):
+        _assert(marker not in source_text, f"prohibited consolidation source marker: {marker}")
+
+
 def validate_workspace_closeout_no_go(root: Path) -> None:
     validate_workspace_closeout(root)
     validate_no_go(root)
     changed = _changed_files(root)
     for relative in sorted(changed):
         path = Path(relative)
+        aion190_path_allowed = _aion190_implementation_record_exists(root) and _aion190_path_allowed(
+            relative
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
         )
         _assert(
-            not any(relative.startswith(prefix) for prefix in AION189_PROHIBITED_PREFIXES),
+            aion190_path_allowed
+            or not any(relative.startswith(prefix) for prefix in AION189_PROHIBITED_PREFIXES),
             f"prohibited AION-189 path changed: {relative}",
         )
         _assert(
-            _aion189_path_allowed(relative),
+            _aion189_path_allowed(relative) or aion190_path_allowed,
             f"unexpected AION-189 path changed: {relative}",
         )
+
+
+def validate_memory_consolidation_no_go(root: Path) -> None:
+    validate_memory_consolidation(root)
+    validate_no_go(root)
+    changed = _changed_files(root)
+    for relative in sorted(changed):
+        path = Path(relative)
+        aion190_path_allowed = _aion190_path_allowed(relative)
+        _assert(
+            path.name not in AION184_BLOCKED_FILENAMES,
+            f"blocked package or dependency file changed: {relative}",
+        )
+        _assert(
+            aion190_path_allowed
+            or not any(relative.startswith(prefix) for prefix in AION190_PROHIBITED_PREFIXES),
+            f"prohibited AION-190 path changed: {relative}",
+        )
+        _assert(aion190_path_allowed, f"unexpected AION-190 path changed: {relative}")
+    source_text = "\n".join(
+        path.read_text()
+        for path in (root / "services/brain-api/src/aion_brain/memory_consolidation").glob(
+            "*.py"
+        )
+    )
+    for marker in (
+        "aion_brain.api",
+        "aion_brain.git",
+        "aion_brain.pull_requests",
+        "aion_brain.deployment",
+        "aion_brain.connectors",
+        "aion_brain.model_providers",
+        "aion_brain.credentials",
+        "requests",
+        "httpx",
+        "urllib",
+        "socket",
+        "subprocess",
+        "openai",
+        "anthropic",
+    ):
+        _assert(marker not in source_text, f"prohibited consolidation source marker: {marker}")
 
 
 def _aion184_path_allowed(relative: str) -> bool:
@@ -2442,6 +2805,12 @@ def _aion188_path_allowed(relative: str) -> bool:
 def _aion189_path_allowed(relative: str) -> bool:
     return relative in AION189_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION189_ALLOWED_PREFIXES
+    )
+
+
+def _aion190_path_allowed(relative: str) -> bool:
+    return relative in AION190_ALLOWED_EXACT_PATHS or any(
+        relative.startswith(prefix) for prefix in AION190_ALLOWED_PREFIXES
     )
 
 
@@ -2545,6 +2914,8 @@ def main() -> int:
             "global-workspace-no-go",
             "workspace-closeout",
             "workspace-closeout-no-go",
+            "memory-consolidation",
+            "memory-consolidation-no-go",
         ),
         default="authorization",
     )
@@ -2589,9 +2960,15 @@ def main() -> int:
     elif args.mode == "workspace-closeout":
         validate_workspace_closeout(root)
         print("cognitive workspace closeout validation PASS")
-    else:
+    elif args.mode == "workspace-closeout-no-go":
         validate_workspace_closeout_no_go(root)
         print("cognitive workspace closeout no-go validation PASS")
+    elif args.mode == "memory-consolidation":
+        validate_memory_consolidation(root)
+        print("cognitive memory-consolidation validation PASS")
+    else:
+        validate_memory_consolidation_no_go(root)
+        print("cognitive memory-consolidation no-go validation PASS")
     return 0
 
 
