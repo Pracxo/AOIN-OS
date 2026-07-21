@@ -1503,6 +1503,7 @@ aion183_is_scoped_cognitive_architecture_authorization_path() {
     docs/cognitive-architecture/tasks/AION-188.md|\
     docs/cognitive-architecture/tasks/AION-189.md|\
     docs/cognitive-architecture/tasks/AION-190.md|\
+    docs/cognitive-architecture/tasks/AION-191.md|\
     docs/cognitive-architecture/program-ledger.json|\
     docs/cognitive-architecture/authorization-ledger.json|\
     docs/cognitive-architecture/architecture-roadmap.md|\
@@ -1518,8 +1519,12 @@ aion183_is_scoped_cognitive_architecture_authorization_path() {
     examples/cognitive-architecture/aion-189-workspace-evaluation.json|\
     examples/cognitive-architecture/aion-189-consolidation-authorization.json|\
     examples/cognitive-architecture/aion-190-memory-consolidation.json|\
+    examples/cognitive-architecture/aion-191-memory-consolidation-evaluation.json|\
+    examples/cognitive-architecture/aion-191-planning-authorization.json|\
     scripts/cognitive-architecture-authorization-check.sh|\
     scripts/cognitive-architecture-no-go-regression.sh|\
+    scripts/cognitive-memory-consolidation-closeout-check.sh|\
+    scripts/cognitive-memory-consolidation-closeout-no-go-regression.sh|\
     scripts/cognitive-memory-consolidation-check.sh|\
     scripts/cognitive-memory-consolidation-no-go-regression.sh|\
     scripts/cognitive-persistent-state-check.sh|\
@@ -1553,6 +1558,7 @@ aion183_is_scoped_cognitive_architecture_authorization_path() {
     services/brain-api/tests/test_cognitive_global_workspace_no_runtime_effect.py|\
     services/brain-api/tests/test_cognitive_workspace_closeout_authorization_docs.py|\
     services/brain-api/tests/test_cognitive_memory_consolidation.py|\
+    services/brain-api/tests/test_cognitive_memory_consolidation_closeout_authorization_docs.py|\
     services/brain-api/tests/test_cognitive_memory_consolidation_no_runtime_effect.py)
       return 0
       ;;

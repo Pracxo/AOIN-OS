@@ -35,6 +35,7 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION188_TASK_ID,
     AION189_AUTHORIZATION_ID,
     AION189_EVALUATION_ID,
+    AION191_AUTHORIZATION_ID,
     PROGRAM_ID,
     validate_aion187_authorization_payload,
     validate_aion187_evaluation_payload,
@@ -172,10 +173,12 @@ def test_aion_187_ledgers_examples_and_no_go_validate() -> None:
     assert program["active_cognitive_implementation_authorization"] in {
         AION187_AUTHORIZATION_ID,
         AION189_AUTHORIZATION_ID,
+        AION191_AUTHORIZATION_ID,
     }
     assert auth_ledger["active_cognitive_implementation_authorization"] in {
         AION187_AUTHORIZATION_ID,
         AION189_AUTHORIZATION_ID,
+        AION191_AUTHORIZATION_ID,
     }
     assert auth_ledger["active_cognitive_implementation_authorization_count"] == 1
 
@@ -207,7 +210,11 @@ def test_aion_187_ledgers_examples_and_no_go_validate() -> None:
             for item in auth_ledger["records"]
             if item["authorization_id"] == AION189_AUTHORIZATION_ID
         )
-        assert consolidation["authorization_active"] is True
+        if auth_ledger["active_cognitive_implementation_authorization"] == AION189_AUTHORIZATION_ID:
+            assert consolidation["authorization_active"] is True
+        else:
+            assert consolidation["authorization_active"] is False
+            assert consolidation["authorization_consumed"] is True
 
 
 def test_aion_187_synthetic_world_model_evaluation_meets_thresholds() -> None:
