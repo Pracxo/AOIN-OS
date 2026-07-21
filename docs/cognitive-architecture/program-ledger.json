@@ -1,0 +1,173 @@
+{
+  "active_cognitive_implementation_authorization": "AION-183-CA-0001",
+  "active_cognitive_implementation_authorization_count": 1,
+  "created_by_task": "AION-183",
+  "final_planned_task": "AION-203",
+  "model_weights_changed": false,
+  "network_access_enabled": false,
+  "production_cognitive_runtime_enabled": false,
+  "production_deployment_enabled": false,
+  "production_event_subscription_enabled": false,
+  "program_id": "AION-COGNITIVE-ARCHITECTURE-001",
+  "program_name": "AION Cognitive Architecture Program",
+  "program_state": "chartered_persistent_state_authorized",
+  "records": [
+    {
+      "authorization_id": "AION-180-SI-0007",
+      "evaluation_id": "AION-SACE-001",
+      "merge_commit": "05edb88f0b115c245f36f507c112cceb29c4aeee",
+      "pr": 93,
+      "record_kind": "prerequisite_closeout",
+      "runtime_effect": false,
+      "source_modified_by_evaluation": false,
+      "task_id": "AION-182",
+      "task_state": "merged_passed",
+      "upstream_program_id": "AION-SELF-IMPROVEMENT-001"
+    },
+    {
+      "authorization_id": "AION-183-CA-0001",
+      "authorized_task": "AION-184",
+      "candidate_id": "persistent-cognitive-state-core",
+      "closeout_task": "AION-185",
+      "evaluation_id": null,
+      "record_kind": "authorization",
+      "task_id": "AION-183",
+      "task_state": "ready_for_merge",
+      "workstream": "persistent-cognitive-state"
+    }
+  ],
+  "schema_version": "aion-cognitive-architecture-program-ledger/v1",
+  "self_improvement_ledger_references": {
+    "authorization_ledger": "docs/self-improvement/authorization-ledger.json",
+    "program_ledger": "docs/self-improvement/program-ledger.json"
+  },
+  "source_rewrite_runtime_enabled": false,
+  "tasks": [
+    {
+      "branch": "phase/cognitive-architecture-program-authorization",
+      "task_id": "AION-183",
+      "title": "Program Charter and Persistent-State Authorization",
+      "type": "authorization"
+    },
+    {
+      "branch": "phase/cognitive-persistent-state",
+      "task_id": "AION-184",
+      "title": "Persistent Cognitive State",
+      "type": "implementation"
+    },
+    {
+      "branch": "phase/cognitive-persistent-state-closeout-world-model-authorization",
+      "task_id": "AION-185",
+      "title": "Persistent-State Evaluation and World-Model Authorization",
+      "type": "evaluation_authorization"
+    },
+    {
+      "branch": "phase/cognitive-predictive-world-model",
+      "task_id": "AION-186",
+      "title": "Predictive World Model",
+      "type": "implementation"
+    },
+    {
+      "branch": "phase/cognitive-world-model-closeout-workspace-authorization",
+      "task_id": "AION-187",
+      "title": "World-Model Evaluation and Workspace Authorization",
+      "type": "evaluation_authorization"
+    },
+    {
+      "branch": "phase/cognitive-global-workspace",
+      "task_id": "AION-188",
+      "title": "Global Cognitive Workspace",
+      "type": "implementation"
+    },
+    {
+      "branch": "phase/cognitive-workspace-closeout-consolidation-authorization",
+      "task_id": "AION-189",
+      "title": "Workspace Evaluation and Consolidation Authorization",
+      "type": "evaluation_authorization"
+    },
+    {
+      "branch": "phase/cognitive-memory-consolidation",
+      "task_id": "AION-190",
+      "title": "Memory Consolidation and Replay",
+      "type": "implementation"
+    },
+    {
+      "branch": "phase/cognitive-consolidation-closeout-planning-authorization",
+      "task_id": "AION-191",
+      "title": "Consolidation Evaluation and Planning Authorization",
+      "type": "evaluation_authorization"
+    },
+    {
+      "branch": "phase/cognitive-counterfactual-planning",
+      "task_id": "AION-192",
+      "title": "Hierarchical Counterfactual Planning",
+      "type": "implementation"
+    },
+    {
+      "branch": "phase/cognitive-planning-closeout-information-acquisition-authorization",
+      "task_id": "AION-193",
+      "title": "Planning Evaluation and Information-Acquisition Authorization",
+      "type": "evaluation_authorization"
+    },
+    {
+      "branch": "phase/cognitive-active-information-acquisition",
+      "task_id": "AION-194",
+      "title": "Active Information Acquisition",
+      "type": "implementation"
+    },
+    {
+      "branch": "phase/cognitive-information-closeout-continual-learning-authorization",
+      "task_id": "AION-195",
+      "title": "Information-Acquisition Evaluation and Continual-Learning Authorization",
+      "type": "evaluation_authorization"
+    },
+    {
+      "branch": "phase/cognitive-governed-continual-learning",
+      "task_id": "AION-196",
+      "title": "Governed Continual Learning",
+      "type": "implementation"
+    },
+    {
+      "branch": "phase/cognitive-integrated-evaluation-closeout",
+      "task_id": "AION-197",
+      "title": "Integrated Cognitive Architecture Evaluation",
+      "type": "evaluation_closeout"
+    },
+    {
+      "branch": "phase/cognitive-shadow-runtime-authorization",
+      "task_id": "AION-198",
+      "title": "Integrated Cognitive Shadow-Runtime Authorization",
+      "type": "authorization"
+    },
+    {
+      "branch": "phase/cognitive-shadow-runtime",
+      "task_id": "AION-199",
+      "title": "Integrated Cognitive Shadow Runtime",
+      "type": "implementation"
+    },
+    {
+      "branch": "phase/cognitive-shadow-runtime-evaluation-closeout",
+      "task_id": "AION-200",
+      "title": "Cognitive Shadow-Runtime Evaluation and Closeout",
+      "type": "evaluation_closeout"
+    },
+    {
+      "branch": "phase/cognitive-local-offline-pilot-authorization",
+      "task_id": "AION-201",
+      "title": "Controlled Local-Offline Pilot Authorization",
+      "type": "authorization"
+    },
+    {
+      "branch": "phase/cognitive-local-offline-pilot",
+      "task_id": "AION-202",
+      "title": "Controlled Cognitive Pilot Execution",
+      "type": "operational_evidence"
+    },
+    {
+      "branch": "phase/cognitive-local-offline-pilot-closeout",
+      "task_id": "AION-203",
+      "title": "Final Pilot Evaluation and Program Closeout",
+      "type": "final_evaluation_closeout"
+    }
+  ]
+}

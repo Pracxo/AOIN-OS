@@ -85,6 +85,9 @@ aion151_is_scoped_authorization_path() {
       if aion182_is_scoped_self_improvement_shadow_activation_operator_evaluation_path "$1"; then
         return 0
       fi
+      if aion183_is_scoped_cognitive_architecture_authorization_path "$1"; then
+        return 0
+      fi
       return 1
       ;;
   esac
@@ -1479,6 +1482,31 @@ aion182_is_scoped_self_improvement_shadow_activation_operator_evaluation_path() 
     services/brain-api/tests/test_self_improvement_shadow_activation_operator_evaluation.py|\
     services/brain-api/tests/test_self_improvement_shadow_activation_operator_evaluation_docs.py|\
     services/brain-api/tests/test_self_improvement_shadow_mode_authorization_closeout.py)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+aion183_is_scoped_cognitive_architecture_authorization_path() {
+  # Exact AION-183 cognitive architecture program-authorization paths. This
+  # governance package authorizes the next implementation task but does not
+  # exempt production-auth source, API routes, package files, lockfiles,
+  # migrations, external connectors, credentials, or runtime activation.
+  case "$1" in
+    docs/cognitive-architecture/tasks/AION-183.md|\
+    docs/cognitive-architecture/program-ledger.json|\
+    docs/cognitive-architecture/authorization-ledger.json|\
+    docs/cognitive-architecture/architecture-roadmap.md|\
+    docs/cognitive-architecture/security-boundary.md|\
+    docs/cognitive-architecture/operator-model.md|\
+    examples/cognitive-architecture/aion-183-program-authorization.json|\
+    scripts/cognitive-architecture-authorization-check.sh|\
+    scripts/cognitive-architecture-no-go-regression.sh|\
+    scripts/lib/cognitive_architecture_governance.py|\
+    services/brain-api/tests/test_cognitive_architecture_program_authorization_docs.py)
       return 0
       ;;
     *)
