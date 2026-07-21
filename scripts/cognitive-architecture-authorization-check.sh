@@ -45,9 +45,10 @@ fi
 cat <<'SUMMARY'
 cognitive architecture authorization result:
 - program_id=AION-COGNITIVE-ARCHITECTURE-001
-- authorization=AION-183-CA-0001
-- authorized_task=AION-184
-- candidate=persistent-cognitive-state-core
+- closed_authorization=AION-183-CA-0001
+- active_authorization=AION-185-CA-0002
+- authorized_task=AION-186
+- candidate=predictive-world-model-core
 - active implementation authorization count=1
 - production cognitive runtime disabled
 - network access, connector access, provider access, source rewrite, runtime Git mutation, approval creation, merge, deployment, canary, and model-weight training disabled

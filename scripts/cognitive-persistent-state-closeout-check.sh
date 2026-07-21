@@ -17,28 +17,29 @@ is_nested_gate_context() {
 
 "$PYTHON_BIN" -m json.tool docs/cognitive-architecture/program-ledger.json >/dev/null
 "$PYTHON_BIN" -m json.tool docs/cognitive-architecture/authorization-ledger.json >/dev/null
-"$PYTHON_BIN" -m json.tool examples/cognitive-architecture/aion-184-persistent-state.json >/dev/null
+"$PYTHON_BIN" -m json.tool examples/cognitive-architecture/aion-185-persistent-state-evaluation.json >/dev/null
+"$PYTHON_BIN" -m json.tool examples/cognitive-architecture/aion-185-world-model-authorization.json >/dev/null
 
 "$PYTHON_BIN" scripts/lib/cognitive_architecture_governance.py \
   --repo-root "$ROOT_DIR" \
-  --mode persistent-state
+  --mode persistent-state-closeout
 
-./scripts/cognitive-persistent-state-no-go-regression.sh
+./scripts/cognitive-persistent-state-closeout-no-go-regression.sh
 
 "$PYTHON_BIN" -m ruff check \
-  services/brain-api/src/aion_brain/contracts/cognitive_state.py \
-  services/brain-api/src/aion_brain/cognitive_architecture \
-  services/brain-api/tests/test_cognitive_persistent_state.py \
-  services/brain-api/tests/test_cognitive_persistent_state_repository.py \
-  services/brain-api/tests/test_cognitive_persistent_state_no_runtime_effect.py
+  scripts/lib/cognitive_architecture_governance.py \
+  services/brain-api/tests/test_cognitive_architecture_program_authorization_docs.py \
+  services/brain-api/tests/test_cognitive_persistent_state_closeout_authorization_docs.py
 
 if is_nested_gate_context; then
-  echo "PASS: focused cognitive persistent-state pytest deferred to outer gate"
+  echo "PASS: focused cognitive persistent-state closeout pytest deferred to outer gate"
 else
   "$PYTHON_BIN" -m pytest \
     services/brain-api/tests/test_cognitive_persistent_state.py \
     services/brain-api/tests/test_cognitive_persistent_state_repository.py \
     services/brain-api/tests/test_cognitive_persistent_state_no_runtime_effect.py \
+    services/brain-api/tests/test_cognitive_architecture_program_authorization_docs.py \
+    services/brain-api/tests/test_cognitive_persistent_state_closeout_authorization_docs.py \
     -q
 fi
 
@@ -53,19 +54,16 @@ else
 fi
 
 cat <<'SUMMARY'
-cognitive persistent-state result:
-- closed_authorization=AION-183-CA-0001
-- active_authorization=AION-185-CA-0002
-- implementation_task=AION-184
+cognitive persistent-state closeout result:
 - evaluation=AION-PCSE-001
-- contracts=immutable
-- repository=append-only in-memory and explicit local SQLite
-- replay=deterministic
-- checkpoint_restore=hash-verified
-- retention=explicit
+- closed_authorization=AION-183-CA-0001
+- new_authorization=AION-185-CA-0002
+- authorized_task=AION-186
+- replay_equality=100%
+- state_invariant_violations=0
+- lost_committed_events=0
+- duplicate_applied_events=0
+- forbidden_side_effects=0
 - runtime_effect=false
-- api_route_added=false
-- kernel_registration_added=false
-- network_calls=0
-cognitive persistent-state PASS
+cognitive persistent-state closeout PASS
 SUMMARY
