@@ -1,0 +1,56 @@
+{
+  "schema_version": "aion-cognitive-world-model-evaluation/v1",
+  "program_id": "AION-COGNITIVE-ARCHITECTURE-001",
+  "task_id": "AION-187",
+  "evaluation_id": "AION-PWME-001",
+  "evaluated_task": "AION-186",
+  "closed_authorization_id": "AION-185-CA-0002",
+  "result": "PASS",
+  "decision": "WORLD_MODEL_EVALUATION_PASS_AUTHORIZE_GLOBAL_WORKSPACE",
+  "implementation_pr": 97,
+  "implementation_merge_commit": "d8762dd881974a8540cde3c9aac068f015eff4e3",
+  "synthetic_environment": {
+    "manifest_id": "aion-187-synthetic-transition-environments",
+    "environment_count": 3,
+    "transition_evidence_count": 24,
+    "holdout_prediction_count": 10,
+    "unseen_state_cases": 3,
+    "counterfactual_scenarios": 3,
+    "evidence_fingerprint": "aion://evidence/aion-187-world-model-evaluation"
+  },
+  "hard_pass_conditions": {
+    "transition_top_1_accuracy": 1.0,
+    "brier_score": 0.07,
+    "probability_sum_error": 0.0,
+    "unknown_state_fail_closed_rate": 1.0,
+    "deterministic_replay_rate": 1.0,
+    "forbidden_side_effects": 0
+  },
+  "evaluation_matrix": {
+    "prediction_accuracy": "PASS",
+    "probability_normalization": "PASS",
+    "uncertainty_calibration": "PASS",
+    "unseen_state_behavior": "PASS",
+    "counterfactual_consistency": "PASS",
+    "causal_hypothesis_provenance": "PASS",
+    "deterministic_replay": "PASS",
+    "no_runtime_action": "PASS"
+  },
+  "side_effects": {
+    "runtime_effect": false,
+    "api_route_added": false,
+    "kernel_registration_added": false,
+    "background_loop_added": false,
+    "action_execution_enabled": false,
+    "network_calls": 0,
+    "connector_calls": 0,
+    "model_provider_calls": 0,
+    "source_rewrite_operations": 0,
+    "deployment_enabled": false,
+    "model_weights_changed": false,
+    "forbidden_side_effects": 0
+  },
+  "new_authorization_id": "AION-187-CA-0003",
+  "authorized_task": "AION-188",
+  "next_task": "AION-188"
+}

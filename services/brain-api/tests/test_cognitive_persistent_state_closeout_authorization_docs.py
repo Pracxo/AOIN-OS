@@ -20,6 +20,7 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION185_EVALUATION_ID,
     AION186_SCOPE,
     AION186_TASK_ID,
+    AION187_AUTHORIZATION_ID,
     PROGRAM_ID,
     validate_aion185_authorization_payload,
     validate_aion185_evaluation_payload,
@@ -121,19 +122,30 @@ def test_aion_185_ledgers_examples_and_no_go_validate() -> None:
     auth_ledger = _json("docs/cognitive-architecture/authorization-ledger.json")
 
     assert program["program_id"] == PROGRAM_ID
-    assert program["active_cognitive_implementation_authorization"] == AION185_AUTHORIZATION_ID
-    assert auth_ledger["active_cognitive_implementation_authorization"] == AION185_AUTHORIZATION_ID
+    assert program["active_cognitive_implementation_authorization"] in {
+        AION185_AUTHORIZATION_ID,
+        AION187_AUTHORIZATION_ID,
+    }
+    assert auth_ledger["active_cognitive_implementation_authorization"] in {
+        AION185_AUTHORIZATION_ID,
+        AION187_AUTHORIZATION_ID,
+    }
     assert auth_ledger["active_cognitive_implementation_authorization_count"] == 1
 
     closed = auth_ledger["records"][0]
-    active = auth_ledger["records"][1]
+    world_model = next(
+        item
+        for item in auth_ledger["records"]
+        if item["authorization_id"] == AION185_AUTHORIZATION_ID
+    )
     assert closed["authorization_id"] == AION183_AUTHORIZATION_ID
     assert closed["authorization_active"] is False
     assert closed["authorization_consumed"] is True
     assert closed["authorization_closeout_evaluation"] == AION185_EVALUATION_ID
-    assert active["authorization_id"] == AION185_AUTHORIZATION_ID
-    assert active["implementation_task"] == AION186_TASK_ID
-    assert active["scope"] == AION186_SCOPE
+    assert world_model["authorization_id"] == AION185_AUTHORIZATION_ID
+    assert world_model["implementation_task"] == AION186_TASK_ID
+    if world_model["record_kind"] == "implementation_authorization":
+        assert world_model["scope"] == AION186_SCOPE
 
 
 def test_aion_185_evaluation_scenario_preserves_replay_and_restart(tmp_path: Path) -> None:
@@ -231,7 +243,11 @@ def test_aion_185_adds_no_world_model_runtime_surface() -> None:
     program = _json("docs/cognitive-architecture/program-ledger.json")
     aion_186_implemented = any(
         record.get("implementation_task") == "AION-186"
-        and record.get("task_state") == "implemented_pending_aion_187_evaluation"
+        and record.get("task_state")
+        in {
+            "implemented_pending_aion_187_evaluation",
+            "merged_evaluated_passed",
+        }
         for record in program["records"]
     )
     assert aion_186_implemented or not (
