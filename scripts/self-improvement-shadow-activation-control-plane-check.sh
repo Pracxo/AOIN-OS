@@ -49,9 +49,25 @@ for relative in required_json:
         raise SystemExit(f"runtime effect must remain false: {relative}")
 
 ledger = json.loads((ROOT / "docs/self-improvement/authorization-ledger.json").read_text())
-if ledger["current_stage"] != "shadow_activation_control_plane_implemented_disabled_pending_closeout":
+closed_stage = ledger["current_stage"] in {
+    "shadow_activation_control_plane_operator_evaluation_passed_disabled",
+    "shadow_activation_control_plane_operator_evaluation_failed_disabled",
+}
+if ledger["current_stage"] not in {
+    "shadow_activation_control_plane_implemented_disabled_pending_closeout",
+    "shadow_activation_control_plane_operator_evaluation_passed_disabled",
+    "shadow_activation_control_plane_operator_evaluation_failed_disabled",
+}:
     raise SystemExit("AION-181 current stage mismatch")
-if ledger["active_self_improvement_implementation_authorization"] != "AION-180-SI-0007":
+if closed_stage:
+    if ledger["active_self_improvement_implementation_authorization"] != "none":
+        raise SystemExit("AION-180-SI-0007 must be closed")
+    if ledger["active_self_improvement_implementation_authorization_count"] != 0:
+        raise SystemExit("active authorization count must be zero")
+else:
+    if ledger["active_self_improvement_implementation_authorization"] != "AION-180-SI-0007":
+        raise SystemExit("AION-180-SI-0007 must remain active")
+if not closed_stage and ledger["active_self_improvement_implementation_authorization"] != "AION-180-SI-0007":
     raise SystemExit("AION-180-SI-0007 must remain active")
 record = [
     item for item in ledger["records"]
@@ -101,7 +117,8 @@ program = json.loads((ROOT / "docs/self-improvement/program-ledger.json").read_t
 by_task = {item["task_id"]: item for item in program["records"]}
 if by_task["AION-180"]["ci_result"] != "pass":
     raise SystemExit("AION-180 must be reconciled as pass")
-if by_task["AION-181"]["ci_result"] != "pending":
+expected_aion181_ci = "pass" if closed_stage else "pending"
+if by_task["AION-181"]["ci_result"] != expected_aion181_ci:
     raise SystemExit("AION-181 must remain pending before merge")
 PY
 

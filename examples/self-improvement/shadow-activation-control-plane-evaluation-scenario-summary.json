@@ -1,0 +1,290 @@
+{
+  "all_scenarios_passed": true,
+  "decision": "SHADOW_ACTIVATION_CONTROL_PLANE_EVALUATION_PASS_RECOMMEND_ACTUAL_ACTIVATION_AUTHORIZATION_REVIEW",
+  "evaluation_id": "AION-SACE-001",
+  "evaluation_passed": true,
+  "read_only": true,
+  "redacted": true,
+  "scenario_count": 21,
+  "scenarios": [
+    {
+      "hard_gates": {
+        "exact_aion_180_lineage": true,
+        "runtime_effect_false": true
+      },
+      "observed_outcome": "candidate_valid",
+      "passed": true,
+      "reason_codes": [
+        "activation_candidate_valid",
+        "activation_scope_control_plane_only",
+        "activation_runtime_disabled"
+      ],
+      "scenario_id": "valid-candidate",
+      "title": "Valid candidate"
+    },
+    {
+      "hard_gates": {
+        "exact_approval_binding_failed_closed": true
+      },
+      "observed_outcome": "approval_invalid",
+      "passed": true,
+      "reason_codes": [
+        "activation_binding_mismatch",
+        "activation_runtime_disabled"
+      ],
+      "scenario_id": "invalid-candidate-binding",
+      "title": "Invalid candidate binding"
+    },
+    {
+      "hard_gates": {
+        "production_environments_rejected": true
+      },
+      "observed_outcome": "environment_fail_closed",
+      "passed": true,
+      "reason_codes": [
+        "activation_environment_allowed",
+        "activation_environment_blocked"
+      ],
+      "scenario_id": "environment-boundary",
+      "title": "Environment boundary"
+    },
+    {
+      "hard_gates": {
+        "adapter_boundary_passed": true
+      },
+      "observed_outcome": "adapter_boundary_enforced",
+      "passed": true,
+      "reason_codes": [
+        "activation_data_classification_allowed",
+        "activation_adapter_allowed"
+      ],
+      "scenario_id": "data-and-adapter-boundary",
+      "title": "Data and adapter boundary"
+    },
+    {
+      "hard_gates": {
+        "no_approval_created": true,
+        "no_authorization_created": true
+      },
+      "observed_outcome": "approval_required",
+      "passed": true,
+      "reason_codes": [
+        "activation_runtime_disabled",
+        "activation_scope_control_plane_only",
+        "activation_budget_satisfied",
+        "activation_monitoring_passed",
+        "activation_deactivation_not_required",
+        "activation_approval_required"
+      ],
+      "scenario_id": "approval-required",
+      "title": "Approval required"
+    },
+    {
+      "hard_gates": {
+        "exact_approval_binding_passed": true
+      },
+      "observed_outcome": "simulation_passed",
+      "passed": true,
+      "reason_codes": [
+        "activation_separation_of_duties_satisfied",
+        "activation_security_review_satisfied",
+        "activation_approval_valid",
+        "activation_runtime_disabled"
+      ],
+      "scenario_id": "valid-synthetic-approval-evidence",
+      "title": "Valid synthetic approval evidence"
+    },
+    {
+      "hard_gates": {
+        "separation_of_duties_passed": true
+      },
+      "observed_outcome": "approval_invalid",
+      "passed": true,
+      "reason_codes": [
+        "activation_separation_of_duties_failed",
+        "activation_approval_invalid"
+      ],
+      "scenario_id": "separation-of-duties-rejection",
+      "title": "Separation of duties rejection"
+    },
+    {
+      "hard_gates": {
+        "non_reusable_approval_enforced": true
+      },
+      "observed_outcome": "approval_invalid",
+      "passed": true,
+      "reason_codes": [
+        "activation_approval_invalid",
+        "activation_runtime_disabled"
+      ],
+      "scenario_id": "expired-consumed-reusable-approval",
+      "title": "Expired, consumed, and reusable approval"
+    },
+    {
+      "hard_gates": {
+        "resource_limits_enforced": true
+      },
+      "observed_outcome": "budget_satisfied",
+      "passed": true,
+      "reason_codes": [
+        "activation_budget_satisfied"
+      ],
+      "scenario_id": "resource-budget-success",
+      "title": "Resource budget success"
+    },
+    {
+      "hard_gates": {
+        "forbidden_counters_fail_closed": true
+      },
+      "observed_outcome": "budget_fail_closed",
+      "passed": true,
+      "reason_codes": [
+        "activation_budget_exceeded",
+        "activation_runtime_disabled"
+      ],
+      "scenario_id": "resource-budget-failure",
+      "title": "Resource budget failure"
+    },
+    {
+      "hard_gates": {
+        "output_boundary_passed": true
+      },
+      "observed_outcome": "output_boundary_validated",
+      "passed": true,
+      "reason_codes": [
+        "activation_output_boundary_valid"
+      ],
+      "scenario_id": "output-boundary-validation",
+      "title": "Output boundary validation"
+    },
+    {
+      "hard_gates": {
+        "local_evidence_adapter_boundary_passed": true
+      },
+      "observed_outcome": "local_adapter_boundary_enforced",
+      "passed": true,
+      "reason_codes": [
+        "activation_adapter_allowed",
+        "activation_adapter_blocked"
+      ],
+      "scenario_id": "local-evidence-adapter",
+      "title": "Local evidence adapter"
+    },
+    {
+      "hard_gates": {
+        "active_state_rejected": true,
+        "state_machine_passed": true
+      },
+      "observed_outcome": "state_machine_fail_closed",
+      "passed": true,
+      "reason_codes": [
+        "activation_transition_allowed",
+        "activation_forbidden_state_blocked"
+      ],
+      "scenario_id": "state-machine",
+      "title": "State machine"
+    },
+    {
+      "hard_gates": {
+        "monitoring_passed": true
+      },
+      "observed_outcome": "monitoring_passed",
+      "passed": true,
+      "reason_codes": [
+        "activation_monitoring_passed"
+      ],
+      "scenario_id": "healthy-monitoring",
+      "title": "Healthy monitoring"
+    },
+    {
+      "hard_gates": {
+        "deactivation_triggers_passed": true
+      },
+      "observed_outcome": "deactivation_required",
+      "passed": true,
+      "reason_codes": [
+        "activation_deactivation_required"
+      ],
+      "scenario_id": "deactivation-triggers",
+      "title": "Deactivation triggers"
+    },
+    {
+      "hard_gates": {
+        "valid_simulation_passed": true
+      },
+      "observed_outcome": "simulation_passed",
+      "passed": true,
+      "reason_codes": [
+        "activation_simulation_passed",
+        "activation_runtime_disabled"
+      ],
+      "scenario_id": "valid-simulation",
+      "title": "Valid simulation"
+    },
+    {
+      "hard_gates": {
+        "invalid_approval_fail_closed": true
+      },
+      "observed_outcome": "approval_invalid",
+      "passed": true,
+      "reason_codes": [
+        "activation_approval_invalid",
+        "activation_runtime_disabled"
+      ],
+      "scenario_id": "invalid-approval-simulation",
+      "title": "Invalid approval simulation"
+    },
+    {
+      "hard_gates": {
+        "deactivation_simulation_fail_closed": true
+      },
+      "observed_outcome": "simulation_failed",
+      "passed": true,
+      "reason_codes": [
+        "activation_simulation_failed",
+        "activation_deactivation_required"
+      ],
+      "scenario_id": "triggered-deactivation-simulation",
+      "title": "Triggered deactivation simulation"
+    },
+    {
+      "hard_gates": {
+        "deterministic_replay_passed": true
+      },
+      "observed_outcome": "deterministic_replay",
+      "passed": true,
+      "reason_codes": [
+        "activation_simulation_passed"
+      ],
+      "scenario_id": "determinism",
+      "title": "Determinism"
+    },
+    {
+      "hard_gates": {
+        "concurrency_isolation_passed": true
+      },
+      "observed_outcome": "concurrency_isolated",
+      "passed": true,
+      "reason_codes": [
+        "activation_runtime_disabled"
+      ],
+      "scenario_id": "concurrency",
+      "title": "Concurrency"
+    },
+    {
+      "hard_gates": {
+        "no_runtime_registration_exists": true
+      },
+      "observed_outcome": "runtime_integration_absent",
+      "passed": true,
+      "reason_codes": [
+        "activation_runtime_disabled",
+        "activation_actual_activation_unauthorized"
+      ],
+      "scenario_id": "runtime-and-integration-boundary",
+      "title": "Runtime and integration boundary"
+    }
+  ],
+  "schema_version": "aion-self-improvement-shadow-activation-evaluation-scenarios/v1",
+  "synthetic": true
+}

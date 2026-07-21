@@ -8,11 +8,11 @@ tag or release exists.
 
 ## Current Main Milestone
 
-AION-181 disabled controlled shadow activation control plane implemented.
+AION-182 shadow activation control-plane operator evaluation complete.
 
-Current stage: Activation control plane implemented and disabled, pending formal AION-182 closeout and operator evaluation.
+Current stage: Activation control plane implemented, evaluated, and disabled. Actual controlled shadow activation authorization review is the next architecture decision.
 
-AION-180-SI-0007 is the sole active implementation authorization. It remains scoped to AION-181 and must be closed by AION-182. AION-177-SI-0006 remains closed, expired, and non-reusable. AION-SOE-001 remains successful advisory evidence and is not an approval.
+AION-180-SI-0007 is closed, consumed by AION-181, expired, and non-reusable. AION-SACE-001 passed as evidence only and is not approval. AION-177-SI-0006 remains closed, expired, and non-reusable. AION-SOE-001 remains successful advisory evidence and is not an approval.
 
 The current self-improvement state is:
 
@@ -21,18 +21,19 @@ The current self-improvement state is:
 - `shadow_mode_implemented=true`
 - `shadow_mode_operator_evaluation_passed=true`
 - `shadow_mode_runtime_enabled=false`
-- `shadow_activation_control_plane_authorized=true`
+- `shadow_activation_control_plane_authorized_historically=true`
 - `shadow_activation_control_plane_implemented=true`
+- `shadow_activation_control_plane_operator_evaluation_passed=true`
 - `shadow_activation_control_plane_state=implemented_disabled_simulation_only`
 - `shadow_activation_enabled=false`
 - `actual_activation_available=false`
-- active self-improvement implementation authorization count: 1
-- active self-improvement implementation authorization: `AION-180-SI-0007`
-- active implementation task: `AION-181`
-- formal closeout task: `AION-182`
-- AION-181 implements a disabled control plane
-- AION-181 creates no activation authorization
-- Actual activation requires another authorization after AION-182
+- active self-improvement implementation authorization count: 0
+- active self-improvement implementation authorization: `none`
+- active implementation task: `none`
+- new implementation authorization created: `false`
+- activation approval created: `false`
+- actual activation created: `false`
+- next architecture decision: `actual_controlled_shadow_activation_authorization_review`
 
 ## Completed Architecture
 

@@ -76,7 +76,9 @@ for path in \
   services/brain-api/src/aion_brain/self_improvement/shadow_activation_deactivation.py \
   services/brain-api/src/aion_brain/self_improvement/shadow_activation_evidence.py \
   services/brain-api/src/aion_brain/self_improvement/shadow_activation_simulator.py; do
-  if [[ "$CONTROL_PLANE_STAGE" == "shadow_activation_control_plane_implemented_disabled_pending_closeout" ]]; then
+  if [[ "$CONTROL_PLANE_STAGE" == "shadow_activation_control_plane_implemented_disabled_pending_closeout" || \
+        "$CONTROL_PLANE_STAGE" == "shadow_activation_control_plane_operator_evaluation_passed_disabled" || \
+        "$CONTROL_PLANE_STAGE" == "shadow_activation_control_plane_operator_evaluation_failed_disabled" ]]; then
     test -f "$path" || {
       echo "AION-181 activation source must exist after implementation: $path" >&2
       exit 1

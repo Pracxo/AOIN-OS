@@ -465,6 +465,7 @@ for path in sorted(demo_dir.glob("*.json")):
         if path.name not in {
             "self-improvement-shadow-activation-authorization.json",
             "self-improvement-shadow-activation-control-plane.json",
+            "self-improvement-shadow-activation-control-plane-evaluation.json",
             "self-improvement-shadow-activation-runtime-hold.json",
             "self-improvement-shadow-activation-simulation.json",
         }:
@@ -479,6 +480,7 @@ for path in sorted(demo_dir.glob("*.json")):
             raise SystemExit(f"shadow activation control plane must be authorized: {path}")
         implemented_payloads = {
             "self-improvement-shadow-activation-control-plane.json",
+            "self-improvement-shadow-activation-control-plane-evaluation.json",
             "self-improvement-shadow-activation-runtime-hold.json",
             "self-improvement-shadow-activation-simulation.json",
         }
@@ -514,6 +516,40 @@ for path in sorted(demo_dir.glob("*.json")):
             if key in payload and payload.get(key) is not False:
                 raise SystemExit(f"self-improvement shadow-activation flag must be false: {key}: {path}")
         continue
+    if path.name == "self-improvement-actual-shadow-activation-review-boundary.json":
+        if payload.get("read_only") is not True:
+            raise SystemExit(f"actual shadow activation review boundary must be read_only: {path}")
+        redaction_applied = payload.get("redaction_applied")
+        redacted = payload.get("redacted")
+        if redaction_applied is not True and redacted is not True:
+            raise SystemExit(f"actual shadow activation review boundary must be redacted: {path}")
+        for key in (
+            "activation_approval_created",
+            "actual_activation_authorized",
+            "actual_activation_created",
+            "connector_calls_allowed",
+            "deployment_allowed",
+            "evaluation_reusable",
+            "evaluation_used_as_approval",
+            "git_write_allowed",
+            "merge_allowed",
+            "model_training_allowed",
+            "new_implementation_authorization_created",
+            "provider_calls_allowed",
+            "pull_request_creation_allowed",
+            "runtime_enablement_allowed",
+            "shadow_activation_enabled",
+            "shadow_mode_runtime_enabled",
+            "source_mutation_allowed",
+            "synthetic_approval_evidence_is_real_approval",
+        ):
+            if payload.get(key) is not False:
+                raise SystemExit(f"actual shadow activation boundary flag must be false: {key}: {path}")
+        if payload.get("next_authorization_required") is not True:
+            raise SystemExit(f"actual shadow activation review must require future authorization: {path}")
+        if payload.get("next_authorization_must_be_separate") is not True:
+            raise SystemExit(f"actual shadow activation review must require separate authorization: {path}")
+        continue
     if payload.get("read_only") is not True:
         raise SystemExit(f"read_only must be true: {path}")
     if payload.get("redaction_applied") is not True:
@@ -543,8 +579,10 @@ for path in sorted(demo_dir.glob("*.json")):
         "v02-actor-context-trust-boundary-authorization.json",
         "self-improvement-shadow-mode-authorization.json",
         "self-improvement-shadow-mode-activation-review-boundary.json",
+        "self-improvement-actual-shadow-activation-review-boundary.json",
         "self-improvement-shadow-activation-authorization.json",
         "self-improvement-shadow-activation-control-plane.json",
+        "self-improvement-shadow-activation-control-plane-evaluation.json",
         "self-improvement-shadow-activation-runtime-hold.json",
         "self-improvement-shadow-activation-simulation.json",
         "production-auth-core-status.json",

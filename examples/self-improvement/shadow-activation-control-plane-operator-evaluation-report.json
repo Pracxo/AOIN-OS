@@ -1,0 +1,536 @@
+{
+  "activation_approval_created": false,
+  "activation_program_id": "AION-SELF-IMPROVEMENT-CONTROLLED-SHADOW-ACTIVATION-001",
+  "active_learning_promoted": false,
+  "actual_activation_created": false,
+  "authorization_closeout": {
+    "authorization_closed_by_task": "AION-182",
+    "authorization_consumed_by_feature_commits": [
+      "c7c7a5c83606399dff2221bd7f847ea00e177603"
+    ],
+    "authorization_consumed_by_merge_commit": "e9374853a53cd098096ed50da0fabb5874152d54",
+    "authorization_consumed_by_pr": 92,
+    "authorization_consumed_by_task": "AION-181",
+    "authorization_transaction_id": "AION-180-SI-0007",
+    "control_plane_operator_evaluation_created_activation_approval": false,
+    "control_plane_operator_evaluation_created_actual_activation": false,
+    "control_plane_operator_evaluation_created_implementation_authorization": false,
+    "control_plane_operator_evaluation_decision": "SHADOW_ACTIVATION_CONTROL_PLANE_EVALUATION_PASS_RECOMMEND_ACTUAL_ACTIVATION_AUTHORIZATION_REVIEW",
+    "control_plane_operator_evaluation_id": "AION-SACE-001",
+    "control_plane_operator_evaluation_reusable": false,
+    "control_plane_operator_evaluation_used_as_approval": false
+  },
+  "closeout_task": "AION-182",
+  "decision": "SHADOW_ACTIVATION_CONTROL_PLANE_EVALUATION_PASS_RECOMMEND_ACTUAL_ACTIVATION_AUTHORIZATION_REVIEW",
+  "evaluation_base_commit": "e9374853a53cd098096ed50da0fabb5874152d54",
+  "evaluation_id": "AION-SACE-001",
+  "evaluation_passed": true,
+  "evaluation_type": "read_only_shadow_activation_control_plane_operator_evaluation",
+  "git_mutated": false,
+  "hard_gate_results": {
+    "active_state_rejected": true,
+    "all_21_scenarios_executed": true,
+    "all_21_scenarios_passed": true,
+    "canonical_repository_unchanged": true,
+    "concurrency_isolation_passed": true,
+    "deactivation_simulation_fail_closed": true,
+    "deactivation_triggers_passed": true,
+    "deterministic_replay_passed": true,
+    "exact_approval_binding_passed": true,
+    "final_ci_verified": true,
+    "focused_implementation_tests_passed": true,
+    "forbidden_counters_fail_closed": true,
+    "invalid_approval_fail_closed": true,
+    "local_evidence_adapter_boundary_passed": true,
+    "monitoring_passed": true,
+    "no_actual_activation_created": true,
+    "no_approval_created": true,
+    "no_control_plane_pr_created_by_evaluation": true,
+    "no_go_gate_passed": true,
+    "no_implementation_authorization_created": true,
+    "no_runtime_effect_occurred": true,
+    "no_runtime_registration_exists": true,
+    "no_v02_tag_or_release_created": true,
+    "output_boundary_passed": true,
+    "pr_92_delivery_verified": true,
+    "production_environments_rejected": true,
+    "resource_limits_enforced": true,
+    "runtime_hold_passed": true,
+    "separation_of_duties_passed": true,
+    "state_machine_passed": true,
+    "valid_simulation_passed": true
+  },
+  "hard_gates": {
+    "active_state_rejected": true,
+    "all_21_scenarios_executed": true,
+    "all_21_scenarios_passed": true,
+    "canonical_repository_unchanged": true,
+    "concurrency_isolation_passed": true,
+    "deactivation_simulation_fail_closed": true,
+    "deactivation_triggers_passed": true,
+    "deterministic_replay_passed": true,
+    "exact_approval_binding_passed": true,
+    "final_ci_verified": true,
+    "focused_implementation_tests_passed": true,
+    "forbidden_counters_fail_closed": true,
+    "invalid_approval_fail_closed": true,
+    "local_evidence_adapter_boundary_passed": true,
+    "monitoring_passed": true,
+    "no_actual_activation_created": true,
+    "no_approval_created": true,
+    "no_control_plane_pr_created_by_evaluation": true,
+    "no_go_gate_passed": true,
+    "no_implementation_authorization_created": true,
+    "no_runtime_effect_occurred": true,
+    "no_runtime_registration_exists": true,
+    "no_v02_tag_or_release_created": true,
+    "output_boundary_passed": true,
+    "pr_92_delivery_verified": true,
+    "production_environments_rejected": true,
+    "resource_limits_enforced": true,
+    "runtime_hold_passed": true,
+    "separation_of_duties_passed": true,
+    "state_machine_passed": true,
+    "valid_simulation_passed": true
+  },
+  "implementation_feature_commit": "c7c7a5c83606399dff2221bd7f847ea00e177603",
+  "implementation_merge_commit": "e9374853a53cd098096ed50da0fabb5874152d54",
+  "implementation_merged_at": "2026-07-20T21:10:45Z",
+  "implementation_pr": 92,
+  "implementation_task": "AION-181",
+  "merged": false,
+  "new_implementation_authorization_created": false,
+  "next_architecture_decision": "actual_controlled_shadow_activation_authorization_review",
+  "production_exposure": false,
+  "program_id": "AION-SELF-IMPROVEMENT-001",
+  "pull_request_created": false,
+  "read_only": true,
+  "redacted": true,
+  "repository_digest_after": "5afe4592ce588ad6097ccdda664baa6e175ab7dfc20288ec235159ee7c930b91",
+  "repository_digest_before": "5afe4592ce588ad6097ccdda664baa6e175ab7dfc20288ec235159ee7c930b91",
+  "repository_integrity": {
+    "canonical_repository_untouched_by_evaluation": true,
+    "control_plane_approval_creation_count": 0,
+    "control_plane_connector_call_count": 0,
+    "control_plane_git_operation_count": 0,
+    "control_plane_network_call_count": 0,
+    "control_plane_provider_call_count": 0,
+    "control_plane_real_pull_request_created": false,
+    "control_plane_runtime_promotion_count": 0,
+    "control_plane_source_mutation_count": 0,
+    "temporary_evaluation_data_cleaned": true
+  },
+  "resource_state": {
+    "forbidden_counters": {
+      "approvals_created": 0,
+      "connector_calls": 0,
+      "deployments": 0,
+      "git_operations": 0,
+      "merges": 0,
+      "model_training_runs": 0,
+      "network_calls": 0,
+      "production_canaries": 0,
+      "provider_calls": 0,
+      "real_pull_requests": 0,
+      "runtime_promotions": 0,
+      "source_mutations": 0
+    },
+    "maximum_activation_window_seconds": 3600,
+    "maximum_concurrency": 4,
+    "maximum_runs_per_activation": 10,
+    "production_exposure_basis_points": 0
+  },
+  "runtime_effect": false,
+  "runtime_state": {
+    "active_state_available": false,
+    "actual_activation_available": false,
+    "runtime_effect": false,
+    "shadow_activation_control_plane_implemented": true,
+    "shadow_activation_control_plane_state": "implemented_disabled_simulation_only",
+    "shadow_activation_enabled": false,
+    "shadow_mode_runtime_enabled": false
+  },
+  "scenario_count": 21,
+  "scenario_results": [
+    {
+      "details": {
+        "candidate_fingerprint": "8a9e4111306b9ca11e440f850c63ad8373f889ddbae97c860ff7e1c1763f77d8"
+      },
+      "hard_gates": {
+        "exact_aion_180_lineage": true,
+        "runtime_effect_false": true
+      },
+      "observed_outcome": "candidate_valid",
+      "passed": true,
+      "reason_codes": [
+        "activation_candidate_valid",
+        "activation_scope_control_plane_only",
+        "activation_runtime_disabled"
+      ],
+      "scenario_id": "valid-candidate"
+    },
+    {
+      "details": {
+        "independent_binding_checks": 12
+      },
+      "hard_gates": {
+        "exact_approval_binding_failed_closed": true
+      },
+      "observed_outcome": "approval_invalid",
+      "passed": true,
+      "reason_codes": [
+        "activation_binding_mismatch",
+        "activation_runtime_disabled"
+      ],
+      "scenario_id": "invalid-candidate-binding"
+    },
+    {
+      "details": {},
+      "hard_gates": {
+        "production_environments_rejected": true
+      },
+      "observed_outcome": "environment_fail_closed",
+      "passed": true,
+      "reason_codes": [
+        "activation_environment_allowed",
+        "activation_environment_blocked"
+      ],
+      "scenario_id": "environment-boundary"
+    },
+    {
+      "details": {},
+      "hard_gates": {
+        "adapter_boundary_passed": true
+      },
+      "observed_outcome": "adapter_boundary_enforced",
+      "passed": true,
+      "reason_codes": [
+        "activation_data_classification_allowed",
+        "activation_adapter_allowed"
+      ],
+      "scenario_id": "data-and-adapter-boundary"
+    },
+    {
+      "details": {},
+      "hard_gates": {
+        "no_approval_created": true,
+        "no_authorization_created": true
+      },
+      "observed_outcome": "approval_required",
+      "passed": true,
+      "reason_codes": [
+        "activation_runtime_disabled",
+        "activation_scope_control_plane_only",
+        "activation_budget_satisfied",
+        "activation_monitoring_passed",
+        "activation_deactivation_not_required",
+        "activation_approval_required"
+      ],
+      "scenario_id": "approval-required"
+    },
+    {
+      "details": {
+        "approval_created_by_AION": false,
+        "production_approval": false,
+        "simulation_only": true,
+        "synthetic": true
+      },
+      "hard_gates": {
+        "exact_approval_binding_passed": true
+      },
+      "observed_outcome": "simulation_passed",
+      "passed": true,
+      "reason_codes": [
+        "activation_separation_of_duties_satisfied",
+        "activation_security_review_satisfied",
+        "activation_approval_valid",
+        "activation_runtime_disabled"
+      ],
+      "scenario_id": "valid-synthetic-approval-evidence"
+    },
+    {
+      "details": {
+        "rejection_count": 10
+      },
+      "hard_gates": {
+        "separation_of_duties_passed": true
+      },
+      "observed_outcome": "approval_invalid",
+      "passed": true,
+      "reason_codes": [
+        "activation_separation_of_duties_failed",
+        "activation_approval_invalid"
+      ],
+      "scenario_id": "separation-of-duties-rejection"
+    },
+    {
+      "details": {
+        "rejection_count": 8
+      },
+      "hard_gates": {
+        "non_reusable_approval_enforced": true
+      },
+      "observed_outcome": "approval_invalid",
+      "passed": true,
+      "reason_codes": [
+        "activation_approval_invalid",
+        "activation_runtime_disabled"
+      ],
+      "scenario_id": "expired-consumed-reusable-approval"
+    },
+    {
+      "details": {},
+      "hard_gates": {
+        "resource_limits_enforced": true
+      },
+      "observed_outcome": "budget_satisfied",
+      "passed": true,
+      "reason_codes": [
+        "activation_budget_satisfied"
+      ],
+      "scenario_id": "resource-budget-success"
+    },
+    {
+      "details": {
+        "bounded_dimensions": 15,
+        "forbidden_counter_order": [
+          "network_calls",
+          "connector_calls",
+          "provider_calls",
+          "git_operations",
+          "source_mutations",
+          "real_pull_requests",
+          "approvals_created",
+          "merges",
+          "runtime_promotions",
+          "production_canaries",
+          "deployments",
+          "model_training_runs",
+          "production_exposure_basis_points"
+        ]
+      },
+      "hard_gates": {
+        "forbidden_counters_fail_closed": true
+      },
+      "observed_outcome": "budget_fail_closed",
+      "passed": true,
+      "reason_codes": [
+        "activation_budget_exceeded",
+        "activation_runtime_disabled"
+      ],
+      "scenario_id": "resource-budget-failure"
+    },
+    {
+      "details": {
+        "rejection_count": 14
+      },
+      "hard_gates": {
+        "output_boundary_passed": true
+      },
+      "observed_outcome": "output_boundary_validated",
+      "passed": true,
+      "reason_codes": [
+        "activation_output_boundary_valid"
+      ],
+      "scenario_id": "output-boundary-validation"
+    },
+    {
+      "details": {
+        "rejection_count": 24
+      },
+      "hard_gates": {
+        "local_evidence_adapter_boundary_passed": true
+      },
+      "observed_outcome": "local_adapter_boundary_enforced",
+      "passed": true,
+      "reason_codes": [
+        "activation_adapter_allowed",
+        "activation_adapter_blocked"
+      ],
+      "scenario_id": "local-evidence-adapter"
+    },
+    {
+      "details": {},
+      "hard_gates": {
+        "active_state_rejected": true,
+        "state_machine_passed": true
+      },
+      "observed_outcome": "state_machine_fail_closed",
+      "passed": true,
+      "reason_codes": [
+        "activation_transition_allowed",
+        "activation_forbidden_state_blocked"
+      ],
+      "scenario_id": "state-machine"
+    },
+    {
+      "details": {},
+      "hard_gates": {
+        "monitoring_passed": true
+      },
+      "observed_outcome": "monitoring_passed",
+      "passed": true,
+      "reason_codes": [
+        "activation_monitoring_passed"
+      ],
+      "scenario_id": "healthy-monitoring"
+    },
+    {
+      "details": {
+        "trigger_codes": [
+          "network_call_detected",
+          "connector_call_detected",
+          "provider_call_detected",
+          "git_operation_detected",
+          "source_mutation_detected",
+          "pull_request_creation_detected",
+          "approval_creation_detected",
+          "runtime_promotion_detected",
+          "runtime_influence_detected",
+          "output_boundary_escape_detected",
+          "redaction_failure_detected",
+          "holdout_disclosure_detected",
+          "protected_material_exposure_detected",
+          "fingerprint_mismatch_detected",
+          "budget_violation_detected",
+          "unknown_reference_type_detected",
+          "stale_or_expired_approval_detected",
+          "activation_window_expired",
+          "run_count_exhausted",
+          "operator_kill_switch_asserted"
+        ],
+        "trigger_count": 20
+      },
+      "hard_gates": {
+        "deactivation_triggers_passed": true
+      },
+      "observed_outcome": "deactivation_required",
+      "passed": true,
+      "reason_codes": [
+        "activation_deactivation_required"
+      ],
+      "scenario_id": "deactivation-triggers"
+    },
+    {
+      "details": {
+        "fingerprint": "ac3059b4c4d120dc9bcfe5e58ab7d231eee7ac682df1a94b888e231bc3c8dc86",
+        "state_sequence": [
+          "drafted",
+          "evidence_ready",
+          "approval_pending",
+          "approved_disabled",
+          "simulation_ready",
+          "simulated",
+          "review_pending"
+        ]
+      },
+      "hard_gates": {
+        "valid_simulation_passed": true
+      },
+      "observed_outcome": "simulation_passed",
+      "passed": true,
+      "reason_codes": [
+        "activation_simulation_passed",
+        "activation_runtime_disabled"
+      ],
+      "scenario_id": "valid-simulation"
+    },
+    {
+      "details": {
+        "state_sequence": [
+          "drafted",
+          "evidence_ready",
+          "approval_pending"
+        ]
+      },
+      "hard_gates": {
+        "invalid_approval_fail_closed": true
+      },
+      "observed_outcome": "approval_invalid",
+      "passed": true,
+      "reason_codes": [
+        "activation_approval_invalid",
+        "activation_runtime_disabled"
+      ],
+      "scenario_id": "invalid-approval-simulation"
+    },
+    {
+      "details": {
+        "incident_count": 1
+      },
+      "hard_gates": {
+        "deactivation_simulation_fail_closed": true
+      },
+      "observed_outcome": "simulation_failed",
+      "passed": true,
+      "reason_codes": [
+        "activation_simulation_failed",
+        "activation_deactivation_required"
+      ],
+      "scenario_id": "triggered-deactivation-simulation"
+    },
+    {
+      "details": {},
+      "hard_gates": {
+        "deterministic_replay_passed": true
+      },
+      "observed_outcome": "deterministic_replay",
+      "passed": true,
+      "reason_codes": [
+        "activation_simulation_passed"
+      ],
+      "scenario_id": "determinism"
+    },
+    {
+      "details": {
+        "background_executor_retained": false,
+        "parallel_runs": 4
+      },
+      "hard_gates": {
+        "concurrency_isolation_passed": true
+      },
+      "observed_outcome": "concurrency_isolated",
+      "passed": true,
+      "reason_codes": [
+        "activation_runtime_disabled"
+      ],
+      "scenario_id": "concurrency"
+    },
+    {
+      "details": {
+        "violations": []
+      },
+      "hard_gates": {
+        "no_runtime_registration_exists": true
+      },
+      "observed_outcome": "runtime_integration_absent",
+      "passed": true,
+      "reason_codes": [
+        "activation_runtime_disabled",
+        "activation_actual_activation_unauthorized"
+      ],
+      "scenario_id": "runtime-and-integration-boundary"
+    }
+  ],
+  "security_state": {
+    "evaluation_used_as_approval": false,
+    "read_only": true,
+    "redacted": true,
+    "separation_of_duties_enforced": true,
+    "synthetic_approval_evidence_is_approval": false
+  },
+  "shadow_activation_enabled": false,
+  "source_modified": false,
+  "synthetic": true,
+  "validation_results": {
+    "approval_binding_validation": true,
+    "budget_validation": true,
+    "candidate_validation": true,
+    "concurrency_validation": true,
+    "deactivation_validation": true,
+    "determinism_validation": true,
+    "monitoring_validation": true,
+    "request_validation": true,
+    "simulation_validation": true
+  }
+}

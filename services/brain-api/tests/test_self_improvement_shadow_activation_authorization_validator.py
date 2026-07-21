@@ -24,30 +24,35 @@ from self_improvement_governance import (  # noqa: E402
 )
 
 
-def test_aion180_is_the_sole_active_authorization() -> None:
+def test_aion180_authorization_is_closed_by_aion182() -> None:
     payload = _json("docs/self-improvement/authorization-ledger.json")
     validate_authorization_ledger(payload)
     validate_no_go(ROOT)
 
     active = [record for record in payload["records"] if record["authorization_active"] is True]
-    assert len(active) == 1
-    record = active[0]
+    assert active == []
+    matches = [
+        record
+        for record in payload["records"]
+        if record["authorization_transaction_id"] == SHADOW_ACTIVATION_AUTHORIZATION_ID
+    ]
+    assert len(matches) == 1
+    record = matches[0]
     assert record["authorization_transaction_id"] == SHADOW_ACTIVATION_AUTHORIZATION_ID
     assert record["approval_record_id"] == SHADOW_ACTIVATION_AUTHORIZATION_ID
-    assert record["authorization_active"] is True
-    assert record["authorization_consumed"] is False
-    assert record["authorization_expired"] is False
+    assert record["authorization_active"] is False
+    assert record["authorization_consumed"] is True
+    assert record["authorization_consumed_by_task"] == "AION-181"
+    assert record["authorization_consumed_by_pr"] == 92
+    assert record["authorization_expired"] is True
     assert record["authorization_reusable"] is False
-    assert payload["active_self_improvement_implementation_authorization_count"] == 1
-    assert (
-        payload["active_self_improvement_implementation_authorization"]
-        == SHADOW_ACTIVATION_AUTHORIZATION_ID
-    )
-    assert payload["active_implementation_task"] == "AION-181"
+    assert payload["active_self_improvement_implementation_authorization_count"] == 0
+    assert payload["active_self_improvement_implementation_authorization"] == "none"
+    assert payload["active_implementation_task"] == "none"
     assert payload["formal_closeout_task"] == "AION-182"
     assert (
         payload["current_stage"]
-        == "shadow_activation_control_plane_implemented_disabled_pending_closeout"
+        == "shadow_activation_control_plane_operator_evaluation_passed_disabled"
     )
 
     shadow = [
@@ -131,7 +136,7 @@ def test_aion180_validator_rejects_partial_and_extra_permission_sets() -> None:
 def test_aion180_validator_rejects_aion177_reactivation_and_soe_approval_use() -> None:
     payload = _json("docs/self-improvement/authorization-ledger.json")
     payload["records"][6]["authorization_active"] = True
-    with pytest.raises(GovernanceValidationError, match="AION-180 implementation authorization"):
+    with pytest.raises(GovernanceValidationError, match="must be closed"):
         validate_authorization_ledger(payload)
 
     payload = _json("docs/self-improvement/authorization-ledger.json")

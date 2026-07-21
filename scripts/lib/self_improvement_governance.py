@@ -888,6 +888,26 @@ AION181_REQUIRED_EXAMPLES = (
     "operator-console-static/demo-data/self-improvement-shadow-activation-simulation.json",
 )
 
+AION182_REQUIRED_DOCS = (
+    "docs/self-improvement/shadow-activation-control-plane-operator-evaluation-closeout.md",
+    "docs/self-improvement/shadow-activation-control-plane-operator-evaluation-report.md",
+    "docs/self-improvement/shadow-activation-control-plane-evaluation-scenarios.md",
+    "docs/self-improvement/actual-shadow-activation-decision-boundary.md",
+    "docs/release/self-improvement-shadow-activation-control-plane-evaluation-closeout.md",
+    "docs/release/self-improvement-shadow-activation-control-plane-evaluation-checklist.md",
+    "docs/release/self-improvement-shadow-activation-control-plane-evaluation-evidence-matrix.md",
+    "docs/release/self-improvement-shadow-activation-control-plane-evaluation-runtime-hold.md",
+    "docs/adr/0167-shadow-activation-control-plane-operator-evaluation.md",
+)
+
+AION182_REQUIRED_EXAMPLES = (
+    "examples/self-improvement/shadow-activation-control-plane-operator-evaluation-report.json",
+    "examples/self-improvement/shadow-activation-control-plane-evaluation-scenario-summary.json",
+    "examples/self-improvement/actual-shadow-activation-review-boundary.json",
+    "operator-console-static/demo-data/self-improvement-shadow-activation-control-plane-evaluation.json",
+    "operator-console-static/demo-data/self-improvement-actual-shadow-activation-review-boundary.json",
+)
+
 SHADOW_ACTIVATION_APPROVED_FLAGS = (
     "authorization_transaction_approved",
     "explicit_approval_record_approval",
@@ -1366,8 +1386,16 @@ def validate_repo(repo_root: Path) -> None:
 def validate_no_go(repo_root: Path) -> None:
     authorization = _load_json(repo_root / "docs/self-improvement/authorization-ledger.json")
     active = _current_authorization_record(authorization)
+    activation_closed = authorization.get("current_stage") in {
+        "shadow_activation_control_plane_operator_evaluation_passed_disabled",
+        "shadow_activation_control_plane_operator_evaluation_failed_disabled",
+    }
     if active.get("authorization_transaction_id") == SHADOW_ACTIVATION_AUTHORIZATION_ID:
-        _validate_shadow_activation_authorization_record(active)
+        _validate_shadow_activation_authorization_record(
+            active,
+            implemented=True,
+            closed=activation_closed,
+        )
         return
     false_keys = set(GOVERNANCE_FALSE_FLAGS)
     false_keys.update(SHADOW_PROHIBITED_FLAGS)
@@ -1409,10 +1437,23 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
     activation_stage = payload.get("current_stage") in {
         "shadow_activation_control_plane_authorized_not_implemented",
         "shadow_activation_control_plane_implemented_disabled_pending_closeout",
+        "shadow_activation_control_plane_operator_evaluation_passed_disabled",
+        "shadow_activation_control_plane_operator_evaluation_failed_disabled",
     }
     activation_implemented = (
         payload.get("current_stage")
-        == "shadow_activation_control_plane_implemented_disabled_pending_closeout"
+        in {
+            "shadow_activation_control_plane_implemented_disabled_pending_closeout",
+            "shadow_activation_control_plane_operator_evaluation_passed_disabled",
+            "shadow_activation_control_plane_operator_evaluation_failed_disabled",
+        }
+    )
+    activation_closed = (
+        payload.get("current_stage")
+        in {
+            "shadow_activation_control_plane_operator_evaluation_passed_disabled",
+            "shadow_activation_control_plane_operator_evaluation_failed_disabled",
+        }
     )
     _require(
         len(records) == (8 if activation_stage else 7),
@@ -1424,10 +1465,26 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
             for record in records
             if record.get("authorization_active") is True
         ]
-        _require(
-            active_authorizations == [SHADOW_ACTIVATION_AUTHORIZATION_ID],
-            "AION-180 implementation authorization must be the sole active authorization",
-        )
+        if activation_closed:
+            _require(active_authorizations == [], "AION-180 authorization must be closed")
+            _require(
+                payload.get("active_self_improvement_implementation_authorization_count") == 0,
+                "active implementation authorization count",
+            )
+            _require(
+                payload.get("active_self_improvement_implementation_authorization") == "none",
+                "active implementation authorization",
+            )
+            _require(payload.get("active_implementation_task") == "none", "active task")
+            _require(
+                payload.get("new_implementation_authorization_created") is False,
+                "new implementation authorization",
+            )
+        else:
+            _require(
+                active_authorizations == [SHADOW_ACTIVATION_AUTHORIZATION_ID],
+                "AION-180 implementation authorization must be the sole active authorization",
+            )
         _require(
             payload.get("shadow_activation_control_plane_authorized") is True,
             "activation control plane authorized",
@@ -1653,25 +1710,30 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
         _validate_shadow_activation_authorization_record(
             activation,
             implemented=activation_implemented,
+            closed=activation_closed,
         )
-        _require(
-            payload.get("active_self_improvement_implementation_authorization_count") == 1,
-            "active authorization count",
-        )
-        _require(
-            payload.get("active_self_improvement_implementation_authorization")
-            == SHADOW_ACTIVATION_AUTHORIZATION_ID,
-            "active authorization id",
-        )
-        _require(
-            payload.get("active_implementation_task") == SHADOW_ACTIVATION_IMPLEMENTATION_TASK,
-            "active implementation task",
-        )
+        if not activation_closed:
+            _require(
+                payload.get("active_self_improvement_implementation_authorization_count") == 1,
+                "active authorization count",
+            )
+            _require(
+                payload.get("active_self_improvement_implementation_authorization")
+                == SHADOW_ACTIVATION_AUTHORIZATION_ID,
+                "active authorization id",
+            )
+            _require(
+                payload.get("active_implementation_task") == SHADOW_ACTIVATION_IMPLEMENTATION_TASK,
+                "active implementation task",
+            )
         _require(
             payload.get("formal_closeout_task") == SHADOW_ACTIVATION_CLOSEOUT_TASK,
             "closeout task",
         )
-        _require(payload.get("new_implementation_authorization_created") is True, "new auth")
+        _require(
+            payload.get("new_implementation_authorization_created") is (not activation_closed),
+            "new auth",
+        )
         _require(payload.get("shadow_mode_implemented") is True, "shadow implemented")
         _require(payload.get("shadow_mode_runtime_enabled") is False, "shadow runtime")
         _require(
@@ -1735,6 +1797,12 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
     _require("AION-178" in by_task, "AION-178 record missing")
     _require("AION-179" in by_task, "AION-179 record missing")
     _require("AION-180" in by_task, "AION-180 record missing")
+    activation_evaluation_closed = payload.get("current_stage") in {
+        "shadow_activation_control_plane_operator_evaluation_passed_disabled",
+        "shadow_activation_control_plane_operator_evaluation_failed_disabled",
+    }
+    if activation_evaluation_closed:
+        _require("AION-181" in by_task, "AION-181 record missing")
     shadow_operator_closed = by_task.get("AION-179")
     aion164 = by_task["AION-164"]
     _require(aion164.get("pull_requests") == [75], "AION-164 PR mismatch")
@@ -2132,21 +2200,42 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
                 "AION-181 auth",
             )
             _require(
-                aion181.get("authorization_state")
-                == "implementation_in_progress_formal_closeout_AION-182",
-                "AION-181 authorization state",
-            )
-            _require(
                 aion181.get("runtime_state")
                 == "activation_control_plane_implemented_disabled_simulation_only",
                 "AION-181 runtime state",
             )
-            _require(aion181.get("feature_commits") == [], "AION-181 feature pending")
-            _require(aion181.get("pull_requests") == [], "AION-181 PR pending")
-            _require(aion181.get("merge_commits") == [], "AION-181 merge pending")
-            _require(aion181.get("ci_result") == "pending", "AION-181 CI pending")
+            if activation_evaluation_closed:
+                _require(
+                    aion181.get("authorization_state")
+                    == "consumed_by_AION-181_closed_by_AION-182",
+                    "AION-181 authorization state",
+                )
+                _require(
+                    aion181.get("feature_commits") == [AION_181_FEATURE_COMMIT],
+                    "AION-181 feature",
+                )
+                _require(aion181.get("pull_requests") == [92], "AION-181 PR")
+                _require(
+                    aion181.get("merge_commits") == [AION_181_MERGE_COMMIT],
+                    "AION-181 merge",
+                )
+                _require(aion181.get("ci_result") == "pass", "AION-181 CI")
+                _require(
+                    aion181.get("completion_timestamp") == AION_181_MERGED_AT,
+                    "AION-181 timestamp",
+                )
+            else:
+                _require(
+                    aion181.get("authorization_state")
+                    == "implementation_in_progress_formal_closeout_AION-182",
+                    "AION-181 authorization state",
+                )
+                _require(aion181.get("feature_commits") == [], "AION-181 feature pending")
+                _require(aion181.get("pull_requests") == [], "AION-181 PR pending")
+                _require(aion181.get("merge_commits") == [], "AION-181 merge pending")
+                _require(aion181.get("ci_result") == "pending", "AION-181 CI pending")
+                _require(aion181.get("completion_timestamp") is None, "AION-181 timestamp pending")
             _require(aion181.get("next_task") == "AION-182", "AION-181 next")
-            _require(aion181.get("completion_timestamp") is None, "AION-181 timestamp pending")
         else:
             _require(aion180.get("feature_commits") == [], "AION-180 feature pending")
             _require(aion180.get("pull_requests") == [], "AION-180 PR pending")
@@ -2335,8 +2424,10 @@ def _validate_shadow_activation_authorization_record(
     record: dict[str, Any],
     *,
     implemented: bool | None = None,
+    closed: bool = False,
 ) -> None:
-    _require(record.get("record_kind") == "implementation_authorization", "activation record kind")
+    expected_kind = "authorization_closeout" if closed else "implementation_authorization"
+    _require(record.get("record_kind") == expected_kind, "activation record kind")
     _require(
         record.get("program_id") == PROGRAM_ID,
         "activation program id",
@@ -2381,9 +2472,61 @@ def _validate_shadow_activation_authorization_record(
         "activation closeout task",
     )
     _require(record.get("authorization_scope") == SHADOW_ACTIVATION_SCOPE, "activation scope")
-    _require(record.get("authorization_active") is True, "activation active")
-    _require(record.get("authorization_consumed") is False, "activation consumed")
-    _require(record.get("authorization_expired") is False, "activation expired")
+    if closed:
+        _require(record.get("authorization_active") is False, "activation active")
+        _require(record.get("authorization_consumed") is True, "activation consumed")
+        _require(
+            record.get("authorization_consumed_by_task") == SHADOW_ACTIVATION_IMPLEMENTATION_TASK,
+            "activation consumed task",
+        )
+        _require(record.get("authorization_consumed_by_pr") == 92, "activation consumed PR")
+        _require(
+            record.get("authorization_consumed_by_feature_commits") == [AION_181_FEATURE_COMMIT],
+            "activation consumed feature commit",
+        )
+        _require(
+            record.get("authorization_consumed_by_merge_commit") == AION_181_MERGE_COMMIT,
+            "activation consumed merge commit",
+        )
+        _require(record.get("authorization_expired") is True, "activation expired")
+        _require(
+            record.get("control_plane_operator_evaluation_id")
+            == SHADOW_ACTIVATION_OPERATOR_EVALUATION_ID,
+            "activation evaluation id",
+        )
+        _require(
+            record.get("control_plane_operator_evaluation_decision")
+            in {
+                SHADOW_ACTIVATION_OPERATOR_EVALUATION_PASS_DECISION,
+                SHADOW_ACTIVATION_OPERATOR_EVALUATION_FAIL_DECISION,
+            },
+            "activation evaluation decision",
+        )
+        _require(
+            record.get("control_plane_operator_evaluation_used_as_approval") is False,
+            "activation evaluation approval use",
+        )
+        _require(
+            record.get("control_plane_operator_evaluation_reusable") is False,
+            "activation evaluation reusable",
+        )
+        _require(
+            record.get("control_plane_operator_evaluation_created_implementation_authorization")
+            is False,
+            "activation evaluation implementation authorization",
+        )
+        _require(
+            record.get("control_plane_operator_evaluation_created_activation_approval") is False,
+            "activation evaluation approval",
+        )
+        _require(
+            record.get("control_plane_operator_evaluation_created_actual_activation") is False,
+            "activation evaluation actual activation",
+        )
+    else:
+        _require(record.get("authorization_active") is True, "activation active")
+        _require(record.get("authorization_consumed") is False, "activation consumed")
+        _require(record.get("authorization_expired") is False, "activation expired")
     _require(record.get("authorization_reusable") is False, "activation reusable")
     _require(record.get("shadow_mode_implemented") is True, "shadow implemented")
     _require(record.get("shadow_mode_runtime_enabled") is False, "shadow_mode_runtime_enabled")
@@ -2633,6 +2776,22 @@ def _current_authorization_record(payload: dict[str, Any]) -> dict[str, Any]:
         _require(len(closed_matches) == 1, "one closed AION-177 shadow-mode authorization required")
         _validate_shadow_authorization_record(closed_matches[0], closed=True)
         return closed_matches[0]
+    if payload.get("current_stage") in {
+        "shadow_activation_control_plane_operator_evaluation_passed_disabled",
+        "shadow_activation_control_plane_operator_evaluation_failed_disabled",
+    }:
+        closed_matches = [
+            record
+            for record in records
+            if record.get("authorization_transaction_id") == SHADOW_ACTIVATION_AUTHORIZATION_ID
+        ]
+        _require(len(closed_matches) == 1, "one closed AION-180 authorization required")
+        _validate_shadow_activation_authorization_record(
+            closed_matches[0],
+            implemented=True,
+            closed=True,
+        )
+        return closed_matches[0]
     raise GovernanceValidationError("one active AION-177 shadow-mode authorization required")
 
 
@@ -2649,6 +2808,8 @@ def _require_required_docs(repo_root: Path) -> None:
         *AION180_REQUIRED_EXAMPLES,
         *AION181_REQUIRED_DOCS,
         *AION181_REQUIRED_EXAMPLES,
+        *AION182_REQUIRED_DOCS,
+        *AION182_REQUIRED_EXAMPLES,
     )
     for relative in required:
         if not (repo_root / relative).is_file():
@@ -2679,6 +2840,8 @@ def _validate_adr_index(repo_root: Path) -> None:
         raise GovernanceValidationError("ADR 0165 is not indexed")
     if "0166-controlled-shadow-activation-control-plane.md" not in index:
         raise GovernanceValidationError("ADR 0166 is not indexed")
+    if "0167-shadow-activation-control-plane-operator-evaluation.md" not in index:
+        raise GovernanceValidationError("ADR 0167 is not indexed")
 
 
 def _validate_docs_do_not_store_private_material(repo_root: Path) -> None:

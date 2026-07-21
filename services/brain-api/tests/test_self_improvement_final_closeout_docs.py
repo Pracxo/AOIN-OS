@@ -39,10 +39,14 @@ from self_improvement_governance import (  # noqa: E402
     AION_178_FEATURE_COMMIT,
     AION_178_MERGE_COMMIT,
     AION_178_MERGED_AT,
+    AION_181_FEATURE_COMMIT,
+    AION_181_MERGE_COMMIT,
     CANARY_AUTHORIZATION_ID,
     GOVERNANCE_FALSE_FLAGS,
     GOVERNANCE_TRUE_FLAGS,
     SHADOW_ACTIVATION_AUTHORIZATION_ID,
+    SHADOW_ACTIVATION_OPERATOR_EVALUATION_ID,
+    SHADOW_ACTIVATION_OPERATOR_EVALUATION_PASS_DECISION,
     SHADOW_AUTHORIZATION_ID,
     SHADOW_IMPLEMENTATION_TASK,
     SHADOW_OPERATOR_EVALUATION_DECISION,
@@ -120,14 +124,10 @@ def test_aion175_closes_canary_authorization_without_new_implementation_auth() -
     records = payload["records"]
     assert len(records) == 8
     active_records = [record for record in records if record["authorization_active"] is True]
-    assert len(active_records) == 1
-    assert active_records[0]["authorization_transaction_id"] == SHADOW_ACTIVATION_AUTHORIZATION_ID
-    assert payload["active_self_improvement_implementation_authorization_count"] == 1
-    assert (
-        payload["active_self_improvement_implementation_authorization"]
-        == SHADOW_ACTIVATION_AUTHORIZATION_ID
-    )
-    assert payload["active_implementation_task"] == "AION-181"
+    assert active_records == []
+    assert payload["active_self_improvement_implementation_authorization_count"] == 0
+    assert payload["active_self_improvement_implementation_authorization"] == "none"
+    assert payload["active_implementation_task"] == "none"
 
     closeout = records[5]
     assert closeout["record_kind"] == "authorization_closeout"
@@ -171,6 +171,41 @@ def test_aion175_closes_canary_authorization_without_new_implementation_auth() -
     )
     assert shadow_closeout["new_implementation_authorization_created"] is False
     assert shadow_closeout["runtime_activation_created"] is False
+
+    activation_closeout = records[7]
+    assert activation_closeout["record_kind"] == "authorization_closeout"
+    assert activation_closeout["authorization_transaction_id"] == SHADOW_ACTIVATION_AUTHORIZATION_ID
+    assert activation_closeout["authorization_active"] is False
+    assert activation_closeout["authorization_consumed"] is True
+    assert activation_closeout["authorization_consumed_by_task"] == "AION-181"
+    assert activation_closeout["authorization_consumed_by_pr"] == 92
+    assert activation_closeout["authorization_consumed_by_feature_commits"] == [
+        AION_181_FEATURE_COMMIT
+    ]
+    assert activation_closeout["authorization_consumed_by_merge_commit"] == AION_181_MERGE_COMMIT
+    assert activation_closeout["authorization_expired"] is True
+    assert activation_closeout["authorization_reusable"] is False
+    assert (
+        activation_closeout["control_plane_operator_evaluation_id"]
+        == SHADOW_ACTIVATION_OPERATOR_EVALUATION_ID
+    )
+    assert (
+        activation_closeout["control_plane_operator_evaluation_decision"]
+        == SHADOW_ACTIVATION_OPERATOR_EVALUATION_PASS_DECISION
+    )
+    assert activation_closeout["control_plane_operator_evaluation_used_as_approval"] is False
+    assert (
+        activation_closeout["control_plane_operator_evaluation_created_implementation_authorization"]
+        is False
+    )
+    assert (
+        activation_closeout["control_plane_operator_evaluation_created_activation_approval"]
+        is False
+    )
+    assert (
+        activation_closeout["control_plane_operator_evaluation_created_actual_activation"]
+        is False
+    )
 
     mutated = _json("docs/self-improvement/authorization-ledger.json")
     mutated["records"][5]["self_improvement_runtime_enabled"] = True

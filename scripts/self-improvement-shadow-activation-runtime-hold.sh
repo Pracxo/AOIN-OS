@@ -39,17 +39,49 @@ ledger = json.loads((ROOT / "docs/self-improvement/authorization-ledger.json").r
 hold = json.loads((ROOT / "examples/self-improvement/shadow-activation-control-plane-runtime-hold.json").read_text())
 
 active = [record for record in ledger["records"] if record.get("authorization_active") is True]
-if len(active) != 1:
-    raise SystemExit("exactly one active authorization is required")
-record = active[0]
-if record["authorization_transaction_id"] != "AION-180-SI-0007":
-    raise SystemExit("AION-180-SI-0007 must be the active authorization")
-if record["implementation_task"] != "AION-181":
-    raise SystemExit("AION-181 must be the active implementation task")
-if record["formal_closeout_task"] != "AION-182":
-    raise SystemExit("AION-182 must be the formal closeout task")
-if ledger.get("current_stage") != "shadow_activation_control_plane_implemented_disabled_pending_closeout":
-    raise SystemExit("AION-181 current stage mismatch")
+closed_stage = ledger.get("current_stage") in {
+    "shadow_activation_control_plane_operator_evaluation_passed_disabled",
+    "shadow_activation_control_plane_operator_evaluation_failed_disabled",
+}
+if closed_stage:
+    if active:
+        raise SystemExit("closed AION-180 authorization cannot remain active")
+    matches = [
+        record
+        for record in ledger["records"]
+        if record.get("authorization_transaction_id") == "AION-180-SI-0007"
+    ]
+    if len(matches) != 1:
+        raise SystemExit("closed AION-180-SI-0007 authorization is required")
+    record = matches[0]
+    if record.get("authorization_consumed") is not True:
+        raise SystemExit("AION-180-SI-0007 must be consumed")
+    if record.get("authorization_consumed_by_task") != "AION-181":
+        raise SystemExit("AION-180-SI-0007 must be consumed by AION-181")
+    if record.get("authorization_consumed_by_pr") != 92:
+        raise SystemExit("AION-180-SI-0007 must be consumed by PR #92")
+    if record.get("authorization_expired") is not True:
+        raise SystemExit("AION-180-SI-0007 must be expired")
+    if record.get("authorization_reusable") is not False:
+        raise SystemExit("AION-180-SI-0007 must be non-reusable")
+    if ledger.get("active_self_improvement_implementation_authorization_count") != 0:
+        raise SystemExit("active implementation authorization count must be zero")
+    if ledger.get("active_self_improvement_implementation_authorization") != "none":
+        raise SystemExit("active implementation authorization must be none")
+    if ledger.get("active_implementation_task") != "none":
+        raise SystemExit("active implementation task must be none")
+else:
+    if len(active) != 1:
+        raise SystemExit("exactly one active authorization is required")
+    record = active[0]
+    if record["authorization_transaction_id"] != "AION-180-SI-0007":
+        raise SystemExit("AION-180-SI-0007 must be the active authorization")
+    if record["implementation_task"] != "AION-181":
+        raise SystemExit("AION-181 must be the active implementation task")
+    if record["formal_closeout_task"] != "AION-182":
+        raise SystemExit("AION-182 must be the formal closeout task")
+    if ledger.get("current_stage") != "shadow_activation_control_plane_implemented_disabled_pending_closeout":
+        raise SystemExit("AION-181 current stage mismatch")
 if record.get("shadow_activation_control_plane_implemented") is not True:
     raise SystemExit("AION-181 must implement the disabled activation control plane")
 if record.get("shadow_activation_control_plane_state") != "implemented_disabled_simulation_only":
@@ -127,7 +159,7 @@ fi
 
 cat <<'SUMMARY'
 self-improvement shadow activation runtime hold result:
-- authorization: AION-180-SI-0007 for AION-181 disabled activation control plane
+- authorization: AION-180-SI-0007 consumed by AION-181 and closed by AION-182
 - formal closeout: AION-182
 - shadow_activation_control_plane_authorized=true
 - shadow_activation_control_plane_implemented=true
