@@ -10,7 +10,7 @@
   "production_event_subscription_enabled": false,
   "program_id": "AION-COGNITIVE-ARCHITECTURE-001",
   "program_name": "AION Cognitive Architecture Program",
-  "program_state": "world_model_evaluated_workspace_authorized",
+  "program_state": "global_workspace_implemented_pending_evaluation",
   "records": [
     {
       "authorization_id": "AION-180-SI-0007",
@@ -113,7 +113,7 @@
       "runtime_effect": false,
       "source_modified_by_evaluation": false,
       "forbidden_side_effects": 0,
-      "task_state": "passed_authorized_aion_188_pending_merge"
+      "task_state": "passed_authorized_aion_188_merged"
     },
     {
       "task_id": "AION-187",
@@ -128,6 +128,22 @@
       "pr": null,
       "merge_commit": null,
       "task_state": "implementation_pending_aion_189_evaluation"
+    },
+    {
+      "task_id": "AION-188",
+      "record_kind": "implementation",
+      "authorization_id": "AION-187-CA-0003",
+      "candidate_id": "global-cognitive-workspace-core",
+      "scope": "global-cognitive-workspace-attention-salience-broadcast-core",
+      "workstream": "global-cognitive-workspace",
+      "closeout_task": "AION-189",
+      "evaluation_id": "AION-GWE-001",
+      "implementation_task": "AION-188",
+      "runtime_effect": false,
+      "forbidden_side_effects": 0,
+      "pr": null,
+      "merge_commit": null,
+      "task_state": "implemented_pending_aion_189_evaluation"
     }
   ],
   "schema_version": "aion-cognitive-architecture-program-ledger/v1",

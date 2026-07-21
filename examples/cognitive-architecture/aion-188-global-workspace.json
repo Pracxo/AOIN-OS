@@ -1,0 +1,70 @@
+{
+  "schema_version": "aion-cognitive-global-workspace-evidence/v1",
+  "program_id": "AION-COGNITIVE-ARCHITECTURE-001",
+  "task_id": "AION-188",
+  "authorization_id": "AION-187-CA-0003",
+  "candidate_id": "global-cognitive-workspace-core",
+  "scope": "global-cognitive-workspace-attention-salience-broadcast-core",
+  "contracts": [
+    "WorkspaceItem",
+    "SpecialistBid",
+    "SalienceVector",
+    "AttentionDecision",
+    "WorkspaceBroadcast",
+    "SpecialistResponse",
+    "CognitiveCycleState",
+    "WorkspaceSnapshot",
+    "WorkspaceAuditEvent"
+  ],
+  "services": [
+    "CognitiveSpecialist protocol",
+    "AttentionArbiter",
+    "WorkspaceCapacityController",
+    "WorkspaceBroadcastService",
+    "AntiStarvationController",
+    "CognitiveCycleCoordinator"
+  ],
+  "salience_dimensions": [
+    "goal_relevance",
+    "urgency",
+    "novelty",
+    "recurrence",
+    "uncertainty",
+    "expected_uncertainty_reduction",
+    "information_gain",
+    "expected_goal_progress",
+    "safety_risk",
+    "resource_cost",
+    "irreversibility",
+    "confidence"
+  ],
+  "capabilities": {
+    "immutable_specialist_bids": true,
+    "bounded_working_set": true,
+    "deterministic_tie_breaking": true,
+    "critical_safety_preemption": true,
+    "anti_starvation": true,
+    "capacity_limits": true,
+    "approved_specialist_broadcast": true,
+    "duplicate_bid_handling": true,
+    "cycle_provenance": true
+  },
+  "runtime_boundaries": {
+    "runtime_effect": false,
+    "api_route_added": false,
+    "kernel_registration_added": false,
+    "background_loop_added": false,
+    "action_execution_enabled": false,
+    "network_calls": 0,
+    "connector_calls": 0,
+    "model_provider_calls": 0,
+    "model_calls_by_default": 0,
+    "source_rewrite_operations": 0,
+    "git_operations": 0,
+    "deployment_enabled": false,
+    "model_weights_changed": false,
+    "subjective_state_claim": false,
+    "forbidden_side_effects": 0
+  },
+  "next_task": "AION-189"
+}

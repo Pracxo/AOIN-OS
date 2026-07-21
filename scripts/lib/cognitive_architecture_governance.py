@@ -36,6 +36,7 @@ AION187_AUTHORIZATION_ID = "AION-187-CA-0003"
 AION188_TASK_ID = "AION-188"
 AION188_CANDIDATE_ID = "global-cognitive-workspace-core"
 AION188_SCOPE = "global-cognitive-workspace-attention-salience-broadcast-core"
+AION189_TASK_ID = "AION-189"
 
 FALSE_RUNTIME_FLAGS = (
     "runtime_effect",
@@ -247,6 +248,47 @@ AION187_PROHIBITED_PREFIXES = (
     "packages/aion-sdk-python/src/",
 )
 
+AION188_REQUIRED_FILES = (
+    "docs/cognitive-architecture/tasks/AION-188.md",
+    "docs/cognitive-architecture/program-ledger.json",
+    "docs/cognitive-architecture/authorization-ledger.json",
+    "examples/cognitive-architecture/aion-188-global-workspace.json",
+    "services/brain-api/src/aion_brain/contracts/workspace.py",
+    "services/brain-api/src/aion_brain/workspace/__init__.py",
+    "services/brain-api/src/aion_brain/workspace/core.py",
+    "services/brain-api/tests/test_cognitive_global_workspace.py",
+    "services/brain-api/tests/test_cognitive_global_workspace_no_runtime_effect.py",
+    "scripts/cognitive-global-workspace-check.sh",
+    "scripts/cognitive-global-workspace-no-go-regression.sh",
+    "scripts/lib/cognitive_architecture_governance.py",
+)
+
+AION188_ALLOWED_EXACT_PATHS = set(AION188_REQUIRED_FILES) | {
+    "scripts/auth-design-check.sh",
+    "scripts/lib/v02-production-auth-scan-exclusions.sh",
+}
+
+AION188_ALLOWED_PREFIXES = (
+    "docs/cognitive-architecture/",
+    "examples/cognitive-architecture/",
+    "services/brain-api/src/aion_brain/workspace/",
+)
+
+AION188_PROHIBITED_PREFIXES = (
+    ".github/workflows/",
+    "migrations/",
+    "services/brain-api/migrations/",
+    "infra/postgres/migrations/",
+    "services/brain-api/src/aion_brain/api/",
+    "services/brain-api/src/aion_brain/git/",
+    "services/brain-api/src/aion_brain/pull_requests/",
+    "services/brain-api/src/aion_brain/deployment/",
+    "services/brain-api/src/aion_brain/connectors/",
+    "services/brain-api/src/aion_brain/model_providers/",
+    "services/brain-api/src/aion_brain/credentials/",
+    "packages/aion-sdk-python/src/",
+)
+
 WORLD_MODEL_REQUIRED_CONTRACTS = (
     "WorldState",
     "WorldObservation",
@@ -374,6 +416,7 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
             "persistent_state_evaluated_world_model_authorized",
             "predictive_world_model_implemented_pending_evaluation",
             "world_model_evaluated_workspace_authorized",
+            "global_workspace_implemented_pending_evaluation",
         },
         "wrong cognitive program state",
     )
@@ -527,6 +570,41 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
         _assert(
             active_authorization == AION187_AUTHORIZATION_ID,
             "AION-187 authorization must be active when present",
+        )
+    workspace_implementation = _find_optional_record(
+        records,
+        "implementation_task",
+        AION188_TASK_ID,
+    )
+    if workspace_implementation is not None:
+        _assert(
+            workspace_implementation["authorization_id"] == AION187_AUTHORIZATION_ID,
+            "AION-188 implementation must use AION-187 authorization",
+        )
+        _assert(
+            workspace_implementation["candidate_id"] == AION188_CANDIDATE_ID,
+            "AION-188 candidate mismatch",
+        )
+        _assert(
+            workspace_implementation["scope"] == AION188_SCOPE,
+            "AION-188 implementation scope mismatch",
+        )
+        _assert(
+            workspace_implementation["closeout_task"] == AION189_TASK_ID,
+            "AION-188 closeout task mismatch",
+        )
+        _assert(
+            workspace_implementation["runtime_effect"] is False,
+            "AION-188 runtime effect must be false",
+        )
+        _assert(
+            workspace_implementation["forbidden_side_effects"] == 0,
+            "AION-188 forbidden side effects must be zero",
+        )
+        _assert(
+            workspace_implementation["task_state"]
+            == "implemented_pending_aion_189_evaluation",
+            "AION-188 task state mismatch",
         )
 
 
@@ -712,7 +790,11 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
         )
         _assert(workspace["implementation_task"] == AION188_TASK_ID, "workspace task mismatch")
         _assert(
-            workspace["implementation_state"] == "authorized_pending_aion_188_implementation",
+            workspace["implementation_state"]
+            in {
+                "authorized_pending_aion_188_implementation",
+                "implemented_pending_aion_189_evaluation",
+            },
             "AION-187 implementation state mismatch",
         )
         _assert(workspace["formal_closeout_task"] == "AION-189", "workspace closeout mismatch")
@@ -981,6 +1063,9 @@ def validate_persistent_state_no_go(root: Path) -> None:
         current_world_model_closeout_path_allowed = (
             world_model_closeout_paths_allowed and _aion187_path_allowed(relative)
         )
+        current_workspace_path_allowed = (
+            _aion188_implementation_record_exists(root) and _aion188_path_allowed(relative)
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -988,6 +1073,7 @@ def validate_persistent_state_no_go(root: Path) -> None:
         _assert(
             current_world_model_path_allowed
             or current_world_model_closeout_path_allowed
+            or current_workspace_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION184_PROHIBITED_PREFIXES),
             f"prohibited AION-184 path changed: {relative}",
         )
@@ -995,7 +1081,8 @@ def validate_persistent_state_no_go(root: Path) -> None:
             _aion184_path_allowed(relative)
             or (closeout_paths_allowed and _aion185_path_allowed(relative))
             or current_world_model_path_allowed
-            or current_world_model_closeout_path_allowed,
+            or current_world_model_closeout_path_allowed
+            or current_workspace_path_allowed,
             f"unexpected AION-184 path changed: {relative}",
         )
     source_text = "\n".join(
@@ -1102,6 +1189,9 @@ def validate_persistent_state_closeout_no_go(root: Path) -> None:
         current_world_model_closeout_path_allowed = (
             _aion187_closeout_record_exists(root) and _aion187_path_allowed(relative)
         )
+        current_workspace_path_allowed = (
+            _aion188_implementation_record_exists(root) and _aion188_path_allowed(relative)
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -1109,13 +1199,15 @@ def validate_persistent_state_closeout_no_go(root: Path) -> None:
         _assert(
             current_world_model_path_allowed
             or current_world_model_closeout_path_allowed
+            or current_workspace_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION185_PROHIBITED_PREFIXES),
             f"prohibited AION-185 path changed: {relative}",
         )
         _assert(
             _aion185_path_allowed(relative)
             or current_world_model_path_allowed
-            or current_world_model_closeout_path_allowed,
+            or current_world_model_closeout_path_allowed
+            or current_workspace_path_allowed,
             f"unexpected AION-185 path changed: {relative}",
         )
 
@@ -1309,17 +1401,21 @@ def validate_world_model_no_go(root: Path) -> None:
         aion187_path_allowed = _aion187_closeout_record_exists(root) and _aion187_path_allowed(
             relative
         )
+        aion188_path_allowed = _aion188_implementation_record_exists(root) and _aion188_path_allowed(
+            relative
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
         )
         _assert(
             aion187_path_allowed
+            or aion188_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION186_PROHIBITED_PREFIXES),
             f"prohibited AION-186 path changed: {relative}",
         )
         _assert(
-            _aion186_path_allowed(relative) or aion187_path_allowed,
+            _aion186_path_allowed(relative) or aion187_path_allowed or aion188_path_allowed,
             f"unexpected AION-186 path changed: {relative}",
         )
     source_text = "\n".join(
@@ -1462,7 +1558,8 @@ def validate_world_model_closeout(root: Path) -> None:
         "AION-187 must not add a workspace API route",
     )
     _assert(
-        not (root / "services/brain-api/src/aion_brain/workspace").exists(),
+        _aion188_implementation_record_exists(root)
+        or not (root / "services/brain-api/src/aion_brain/workspace").exists(),
         "AION-187 must not implement workspace runtime source",
     )
 
@@ -1473,16 +1570,20 @@ def validate_world_model_closeout_no_go(root: Path) -> None:
     changed = _changed_files(root)
     for relative in sorted(changed):
         path = Path(relative)
+        aion188_path_allowed = _aion188_implementation_record_exists(root) and _aion188_path_allowed(
+            relative
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
         )
         _assert(
-            not any(relative.startswith(prefix) for prefix in AION187_PROHIBITED_PREFIXES),
+            aion188_path_allowed
+            or not any(relative.startswith(prefix) for prefix in AION187_PROHIBITED_PREFIXES),
             f"prohibited AION-187 path changed: {relative}",
         )
         _assert(
-            _aion187_path_allowed(relative),
+            _aion187_path_allowed(relative) or aion188_path_allowed,
             f"unexpected AION-187 path changed: {relative}",
         )
 
@@ -1582,6 +1683,188 @@ def validate_aion187_authorization_payload(payload: dict[str, Any]) -> None:
     _assert(".github/workflows/" in payload["prohibited_source_paths"], "workflow prohibition")
 
 
+def validate_aion188_workspace_payload(payload: dict[str, Any]) -> None:
+    _assert(
+        payload["schema_version"] == "aion-cognitive-global-workspace-evidence/v1",
+        "bad AION-188 workspace evidence schema",
+    )
+    _assert(payload["program_id"] == PROGRAM_ID, "bad AION-188 program id")
+    _assert(payload["task_id"] == AION188_TASK_ID, "bad AION-188 task id")
+    _assert(payload["authorization_id"] == AION187_AUTHORIZATION_ID, "bad AION-188 auth")
+    _assert(payload["candidate_id"] == AION188_CANDIDATE_ID, "bad AION-188 candidate")
+    _assert(payload["scope"] == AION188_SCOPE, "bad AION-188 scope")
+    for contract in WORKSPACE_REQUIRED_CONTRACTS:
+        _assert(contract in payload["contracts"], f"missing AION-188 contract: {contract}")
+    for service in WORKSPACE_REQUIRED_SERVICES:
+        _assert(service in payload["services"], f"missing AION-188 service: {service}")
+    for dimension in WORKSPACE_REQUIRED_SALIENCE_DIMENSIONS:
+        _assert(
+            dimension in payload["salience_dimensions"],
+            f"missing AION-188 salience dimension: {dimension}",
+        )
+    for key in (
+        "immutable_specialist_bids",
+        "bounded_working_set",
+        "deterministic_tie_breaking",
+        "critical_safety_preemption",
+        "anti_starvation",
+        "capacity_limits",
+        "approved_specialist_broadcast",
+        "duplicate_bid_handling",
+        "cycle_provenance",
+    ):
+        _assert(payload["capabilities"][key] is True, f"{key} must be true")
+    runtime = payload["runtime_boundaries"]
+    for key in (
+        "runtime_effect",
+        "api_route_added",
+        "kernel_registration_added",
+        "background_loop_added",
+        "action_execution_enabled",
+        "deployment_enabled",
+        "model_weights_changed",
+        "subjective_state_claim",
+    ):
+        _assert(runtime[key] is False, f"{key} must be false")
+    for key in (
+        "network_calls",
+        "connector_calls",
+        "model_provider_calls",
+        "model_calls_by_default",
+        "source_rewrite_operations",
+        "git_operations",
+        "forbidden_side_effects",
+    ):
+        _assert(runtime[key] == 0, f"{key} must be zero")
+    _assert(payload["next_task"] == AION189_TASK_ID, "AION-188 next task mismatch")
+
+
+def validate_global_workspace(root: Path) -> None:
+    validate_world_model_closeout(root)
+    validate_required_files(root, AION188_REQUIRED_FILES)
+    validate_aion188_workspace_payload(
+        _load_json(root, "examples/cognitive-architecture/aion-188-global-workspace.json")
+    )
+    validate_no_claim_terms(
+        root,
+        (
+            root / "docs/cognitive-architecture/tasks/AION-188.md",
+            root / "services/brain-api/src/aion_brain/contracts/workspace.py",
+            root / "services/brain-api/src/aion_brain/workspace",
+            root / "services/brain-api/tests/test_cognitive_global_workspace.py",
+            root / "services/brain-api/tests/test_cognitive_global_workspace_no_runtime_effect.py",
+        ),
+    )
+    contract_text = (root / "services/brain-api/src/aion_brain/contracts/workspace.py").read_text()
+    source_text = "\n".join(
+        path.read_text()
+        for path in (root / "services/brain-api/src/aion_brain/workspace").glob("*.py")
+    )
+    for contract in WORKSPACE_REQUIRED_CONTRACTS:
+        _assert(f"class {contract}" in contract_text, f"missing workspace contract: {contract}")
+    for service in (
+        "AttentionArbiter",
+        "WorkspaceCapacityController",
+        "WorkspaceBroadcastService",
+        "AntiStarvationController",
+        "CognitiveCycleCoordinator",
+    ):
+        _assert(f"class {service}" in source_text, f"missing workspace service: {service}")
+    _assert("class CognitiveSpecialist(Protocol)" in source_text, "missing specialist protocol")
+    for dimension in WORKSPACE_REQUIRED_SALIENCE_DIMENSIONS:
+        _assert(f"{dimension}:" in contract_text, f"missing salience field: {dimension}")
+    task_doc = (root / "docs/cognitive-architecture/tasks/AION-188.md").read_text()
+    for section in (
+        "## Task Purpose",
+        "## Authorization",
+        "## Source Boundaries",
+        "## Required Contracts",
+        "## Required Services",
+        "## Algorithm",
+        "## Required Tests",
+        "## Required Gates",
+        "## Security Invariants",
+        "## Completion Conditions",
+        "## Next Task",
+    ):
+        _assert(section in task_doc, f"AION-188 task doc missing {section}")
+    for term in (
+        AION187_AUTHORIZATION_ID,
+        AION188_CANDIDATE_ID,
+        AION188_SCOPE,
+        AION189_TASK_ID,
+    ):
+        _assert(term in task_doc, f"AION-188 task doc missing {term}")
+    program = _load_json(root, "docs/cognitive-architecture/program-ledger.json")
+    authorization = _load_json(root, "docs/cognitive-architecture/authorization-ledger.json")
+    _assert(
+        program["program_state"] == "global_workspace_implemented_pending_evaluation",
+        "AION-188 program state mismatch",
+    )
+    implementation = _find_record(program["records"], "implementation_task", AION188_TASK_ID)
+    _assert(implementation["authorization_id"] == AION187_AUTHORIZATION_ID, "AION-188 auth")
+    _assert(implementation["candidate_id"] == AION188_CANDIDATE_ID, "AION-188 candidate")
+    _assert(implementation["scope"] == AION188_SCOPE, "AION-188 scope")
+    _assert(implementation["closeout_task"] == AION189_TASK_ID, "AION-188 closeout")
+    _assert(implementation["runtime_effect"] is False, "AION-188 runtime effect")
+    _assert(implementation["forbidden_side_effects"] == 0, "AION-188 side effects")
+    _assert(
+        implementation["task_state"] == "implemented_pending_aion_189_evaluation",
+        "AION-188 task state",
+    )
+    active = _find_record(authorization["records"], "authorization_id", AION187_AUTHORIZATION_ID)
+    _assert(active["authorization_active"] is True, "AION-187 authorization must remain active")
+    _assert(
+        active["implementation_state"] == "implemented_pending_aion_189_evaluation",
+        "AION-187 implementation state must await AION-189",
+    )
+    _assert(
+        not (root / "services/brain-api/src/aion_brain/api/workspace.py").exists(),
+        "AION-188 must not add a workspace API route",
+    )
+    _assert(
+        not (root / "services/brain-api/src/aion_brain/api/global_workspace.py").exists(),
+        "AION-188 must not add a global-workspace API route",
+    )
+    for marker in (
+        "aion_brain.api",
+        "aion_brain.git",
+        "aion_brain.pull_requests",
+        "aion_brain.deployment",
+        "aion_brain.connectors",
+        "aion_brain.model_providers",
+        "aion_brain.credentials",
+        "requests",
+        "httpx",
+        "urllib",
+        "socket",
+        "subprocess",
+        "openai",
+        "anthropic",
+    ):
+        _assert(marker not in source_text, f"prohibited workspace source marker: {marker}")
+
+
+def validate_global_workspace_no_go(root: Path) -> None:
+    validate_global_workspace(root)
+    validate_no_go(root)
+    changed = _changed_files(root)
+    for relative in sorted(changed):
+        path = Path(relative)
+        _assert(
+            path.name not in AION184_BLOCKED_FILENAMES,
+            f"blocked package or dependency file changed: {relative}",
+        )
+        _assert(
+            not any(relative.startswith(prefix) for prefix in AION188_PROHIBITED_PREFIXES),
+            f"prohibited AION-188 path changed: {relative}",
+        )
+        _assert(
+            _aion188_path_allowed(relative),
+            f"unexpected AION-188 path changed: {relative}",
+        )
+
+
 def _aion184_path_allowed(relative: str) -> bool:
     return relative in AION184_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION184_ALLOWED_PREFIXES
@@ -1606,6 +1889,12 @@ def _aion187_path_allowed(relative: str) -> bool:
     )
 
 
+def _aion188_path_allowed(relative: str) -> bool:
+    return relative in AION188_ALLOWED_EXACT_PATHS or any(
+        relative.startswith(prefix) for prefix in AION188_ALLOWED_PREFIXES
+    )
+
+
 def _aion186_implementation_record_exists(root: Path) -> bool:
     program = _load_json(root, "docs/cognitive-architecture/program-ledger.json")
     return _find_optional_record(program["records"], "implementation_task", AION186_TASK_ID) is not None
@@ -1621,6 +1910,11 @@ def _aion187_closeout_record_exists(root: Path) -> bool:
         )
         is not None
     )
+
+
+def _aion188_implementation_record_exists(root: Path) -> bool:
+    program = _load_json(root, "docs/cognitive-architecture/program-ledger.json")
+    return _find_optional_record(program["records"], "implementation_task", AION188_TASK_ID) is not None
 
 
 def _comparison_base(root: Path) -> str | None:
@@ -1680,6 +1974,8 @@ def main() -> int:
             "world-model-no-go",
             "world-model-closeout",
             "world-model-closeout-no-go",
+            "global-workspace",
+            "global-workspace-no-go",
         ),
         default="authorization",
     )
@@ -1712,9 +2008,15 @@ def main() -> int:
     elif args.mode == "world-model-closeout":
         validate_world_model_closeout(root)
         print("cognitive world-model closeout validation PASS")
-    else:
+    elif args.mode == "world-model-closeout-no-go":
         validate_world_model_closeout_no_go(root)
         print("cognitive world-model closeout no-go validation PASS")
+    elif args.mode == "global-workspace":
+        validate_global_workspace(root)
+        print("cognitive global-workspace validation PASS")
+    else:
+        validate_global_workspace_no_go(root)
+        print("cognitive global-workspace no-go validation PASS")
     return 0
 
 

@@ -265,8 +265,17 @@ def test_aion_187_synthetic_world_model_evaluation_meets_thresholds() -> None:
 
 
 def test_aion_187_adds_no_workspace_runtime_surface() -> None:
-    assert not (ROOT / "services/brain-api/src/aion_brain/workspace").exists()
-    assert not (ROOT / "services/brain-api/src/aion_brain/contracts/workspace.py").exists()
+    program = _json("docs/cognitive-architecture/program-ledger.json")
+    aion188_implemented = any(
+        record.get("implementation_task") == AION188_TASK_ID
+        for record in program["records"]
+    )
+    if aion188_implemented:
+        assert (ROOT / "services/brain-api/src/aion_brain/workspace").is_dir()
+        assert (ROOT / "services/brain-api/src/aion_brain/contracts/workspace.py").is_file()
+    else:
+        assert not (ROOT / "services/brain-api/src/aion_brain/workspace").exists()
+        assert not (ROOT / "services/brain-api/src/aion_brain/contracts/workspace.py").exists()
     assert not (ROOT / "services/brain-api/src/aion_brain/api/workspace.py").exists()
 
 

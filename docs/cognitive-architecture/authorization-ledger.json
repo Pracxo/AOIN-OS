@@ -81,7 +81,7 @@
       "parent_pr": 97,
       "implementation_task": "AION-188",
       "implementation_branch": "phase/cognitive-global-workspace",
-      "implementation_state": "authorized_pending_aion_188_implementation",
+      "implementation_state": "implemented_pending_aion_189_evaluation",
       "formal_closeout_task": "AION-189",
       "candidate_id": "global-cognitive-workspace-core",
       "scope": "global-cognitive-workspace-attention-salience-broadcast-core",
