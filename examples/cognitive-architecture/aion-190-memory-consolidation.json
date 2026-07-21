@@ -1,0 +1,90 @@
+{
+  "authorization_id": "AION-189-CA-0004",
+  "benchmark_requirements": {
+    "catastrophic_forgetting_maximum": 0.05,
+    "contradiction_loss_rate": 0.0,
+    "deterministic_replay_rate": 1.0,
+    "duplicate_reduction_minimum": 0.8,
+    "forbidden_side_effects": 0,
+    "provenance_coverage": 1.0,
+    "retained_critical_memories_rate": 1.0,
+    "unauthorized_promotion_count": 0
+  },
+  "candidate_id": "memory-consolidation-replay-core",
+  "capabilities": {
+    "benchmark_evidence": true,
+    "contradiction_analysis": true,
+    "deterministic_replay_selection": true,
+    "non_destructive_forgetting_candidates": true,
+    "operator_review_checkpoints": true,
+    "procedural_candidate_synthesis": true,
+    "semantic_candidate_generation": true
+  },
+  "closeout_task": "AION-191",
+  "contracts": [
+    "EpisodicMemoryReference",
+    "ReplayBatch",
+    "ConsolidationCandidate",
+    "SemanticCandidate",
+    "ProceduralCandidate",
+    "ContradictionResolutionCandidate",
+    "ForgettingCandidate",
+    "ConsolidationEvidence",
+    "ConsolidationCheckpoint",
+    "ConsolidationOutcome"
+  ],
+  "implementation_state": "implemented_pending_aion_191_evaluation",
+  "pipeline": [
+    "operational episodes",
+    "replay selection",
+    "clustering",
+    "contradiction analysis",
+    "semantic candidates",
+    "procedural candidates",
+    "benchmark evidence",
+    "operator review",
+    "approved promotion by existing governance only"
+  ],
+  "program_id": "AION-COGNITIVE-ARCHITECTURE-001",
+  "prohibited_behaviors": [
+    "automatic semantic promotion",
+    "automatic procedural promotion",
+    "source rewrite",
+    "model-weight update",
+    "background consolidation",
+    "hidden memory mutation",
+    "deletion without explicit policy evidence"
+  ],
+  "runtime_boundaries": {
+    "action_execution_enabled": false,
+    "api_route_added": false,
+    "automatic_promotion": false,
+    "background_loop_added": false,
+    "connector_calls": 0,
+    "deployment_enabled": false,
+    "forbidden_side_effects": 0,
+    "git_operations": 0,
+    "hidden_memory_mutation": false,
+    "kernel_registration_added": false,
+    "model_provider_calls": 0,
+    "model_weight_training": 0,
+    "model_weights_changed": false,
+    "network_calls": 0,
+    "production_exposure": false,
+    "runtime_effect": false,
+    "source_rewrite_operations": 0
+  },
+  "schema_version": "aion-cognitive-memory-consolidation-implementation/v1",
+  "scope": "episodic-replay-semantic-consolidation-procedural-candidate-core",
+  "services": [
+    "EpisodicReplayPlanner",
+    "ReplaySelector",
+    "SemanticConsolidator",
+    "ProceduralCandidateSynthesizer",
+    "ContradictionResolver",
+    "MemoryCompactor",
+    "ForgettingPolicyEvaluator",
+    "ConsolidationService"
+  ],
+  "task_id": "AION-190"
+}

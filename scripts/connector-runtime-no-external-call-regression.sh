@@ -83,6 +83,7 @@ if git diff --name-only --diff-filter=ACMRT HEAD -- services/brain-api/src packa
 			  | rg -v '^services/brain-api/src/aion_brain/contracts/cognitive_state\.py$|^services/brain-api/src/aion_brain/cognitive_architecture/(__init__|repository|state)\.py$' \
 			  | rg -v '^services/brain-api/src/aion_brain/contracts/world_model\.py$|^services/brain-api/src/aion_brain/world_model/(__init__|prediction|repository)\.py$' \
 			  | rg -v '^services/brain-api/src/aion_brain/contracts/workspace\.py$|^services/brain-api/src/aion_brain/workspace/(__init__|core)\.py$' \
+			  | rg -v '^services/brain-api/src/aion_brain/contracts/memory_consolidation\.py$|^services/brain-api/src/aion_brain/memory_consolidation/(__init__|core)\.py$' \
 			  | rg -v '^services/brain-api/src/aion_brain/(explanations|grounding|model_outputs|prompts)/redaction\.py$' \
 			  | rg -n '.'; then
   echo "AION-109 must not change runtime, SDK, CLI, or config source files" >&2
@@ -104,6 +105,7 @@ if git ls-files --others --exclude-standard services/brain-api/src packages/aion
 			  | rg -v '^services/brain-api/src/aion_brain/contracts/cognitive_state\.py$|^services/brain-api/src/aion_brain/cognitive_architecture/(__init__|repository|state)\.py$' \
 			  | rg -v '^services/brain-api/src/aion_brain/contracts/world_model\.py$|^services/brain-api/src/aion_brain/world_model/(__init__|prediction|repository)\.py$' \
 			  | rg -v '^services/brain-api/src/aion_brain/contracts/workspace\.py$|^services/brain-api/src/aion_brain/workspace/(__init__|core)\.py$' \
+			  | rg -v '^services/brain-api/src/aion_brain/contracts/memory_consolidation\.py$|^services/brain-api/src/aion_brain/memory_consolidation/(__init__|core)\.py$' \
 			  | rg -v '^services/brain-api/src/aion_brain/(explanations|grounding|model_outputs|prompts)/redaction\.py$' \
 			  | rg -n '.'; then
   echo "AION-109 must not add runtime, SDK, or CLI source files" >&2
