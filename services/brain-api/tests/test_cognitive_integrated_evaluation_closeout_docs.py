@@ -20,6 +20,10 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION197_EVALUATION_ID,
     AION197_PROGRAM_STATE,
     AION197_TASK_ID,
+    AION198_AUTHORIZATION_ID,
+    AION198_PROGRAM_STATE,
+    AION198_TASK_ID,
+    AION199_TASK_ID,
     INTEGRATED_EVALUATION_CYCLE_STEPS,
     INTEGRATED_EVALUATION_ENVIRONMENT_FACTORS,
     INTEGRATED_EVALUATION_REQUIRED_METRICS,
@@ -116,12 +120,20 @@ def test_aion_197_ledgers_close_aion_195_without_new_authorization() -> None:
 
     program = _json("docs/cognitive-architecture/program-ledger.json")
     authorization = _json("docs/cognitive-architecture/authorization-ledger.json")
+    aion198_authorized = any(
+        record.get("authorization_id") == AION198_AUTHORIZATION_ID
+        for record in program["records"]
+    )
+    expected_active = AION198_AUTHORIZATION_ID if aion198_authorized else None
+    expected_count = 1 if aion198_authorized else 0
 
-    assert program["program_state"] == AION197_PROGRAM_STATE
-    assert program["active_cognitive_implementation_authorization"] is None
-    assert authorization["active_cognitive_implementation_authorization"] is None
-    assert program["active_cognitive_implementation_authorization_count"] == 0
-    assert authorization["active_cognitive_implementation_authorization_count"] == 0
+    assert program["program_state"] == (
+        AION198_PROGRAM_STATE if aion198_authorized else AION197_PROGRAM_STATE
+    )
+    assert program["active_cognitive_implementation_authorization"] == expected_active
+    assert authorization["active_cognitive_implementation_authorization"] == expected_active
+    assert program["active_cognitive_implementation_authorization_count"] == expected_count
+    assert authorization["active_cognitive_implementation_authorization_count"] == expected_count
 
     implementation = next(
         record
@@ -159,10 +171,26 @@ def test_aion_197_ledgers_close_aion_195_without_new_authorization() -> None:
     assert closed["implementation_merge_commit"] == AION196_MERGE_COMMIT
     assert closed["evaluation_result"] == "PASS"
 
-    assert all(
-        record.get("authorization_id") != "AION-198-CA-0008"
-        for record in program["records"] + authorization["records"]
-    )
+    if aion198_authorized:
+        aion198 = next(
+            record
+            for record in authorization["records"]
+            if record.get("authorization_id") == AION198_AUTHORIZATION_ID
+        )
+        assert aion198["record_kind"] == "implementation_authorization"
+        assert aion198["authorization_active"] is True
+        assert aion198["implementation_task"] == AION199_TASK_ID
+        program_aion198 = next(
+            record
+            for record in program["records"]
+            if record.get("authorization_id") == AION198_AUTHORIZATION_ID
+        )
+        assert program_aion198["task_id"] == AION198_TASK_ID
+    else:
+        assert all(
+            record.get("authorization_id") != AION198_AUTHORIZATION_ID
+            for record in program["records"] + authorization["records"]
+        )
 
 
 def test_aion_197_keeps_runtime_and_external_effects_absent() -> None:
