@@ -29,6 +29,7 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION198_AUTHORIZATION_ID,
     AION200_EVALUATION_ID,
     AION200_TASK_ID,
+    AION201_AUTHORIZATION_ID,
     CONTINUAL_LEARNING_REQUIRED_CONTRACTS,
     CONTINUAL_LEARNING_REQUIRED_SERVICES,
     PROGRAM_ID,
@@ -251,15 +252,29 @@ def test_aion_195_ledgers_examples_and_no_go_validate() -> None:
         and item.get("evaluation_id") == AION200_EVALUATION_ID
         for item in program["records"]
     )
+    aion201_authorized = any(
+        item.get("authorization_id") == AION201_AUTHORIZATION_ID
+        for item in program["records"]
+    )
     if aion197_closed:
         expected_active = (
-            None
+            AION201_AUTHORIZATION_ID
+            if aion201_authorized
+            else None
             if aion200_evaluated
             else AION198_AUTHORIZATION_ID
             if aion198_authorized
             else None
         )
-        expected_count = 0 if aion200_evaluated else 1 if aion198_authorized else 0
+        expected_count = (
+            1
+            if aion201_authorized
+            else 0
+            if aion200_evaluated
+            else 1
+            if aion198_authorized
+            else 0
+        )
         assert program["active_cognitive_implementation_authorization"] == expected_active
         assert authorization["active_cognitive_implementation_authorization"] == expected_active
         assert program["active_cognitive_implementation_authorization_count"] == expected_count

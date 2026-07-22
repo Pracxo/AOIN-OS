@@ -33,6 +33,7 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION195_AUTHORIZATION_ID,
     AION195_EVALUATION_ID,
     AION198_AUTHORIZATION_ID,
+    AION201_AUTHORIZATION_ID,
     INFORMATION_ACQUISITION_REQUIRED_CONTRACTS,
     INFORMATION_ACQUISITION_REQUIRED_SERVICES,
     PROGRAM_ID,
@@ -250,6 +251,7 @@ def test_aion_193_ledgers_examples_and_no_go_validate() -> None:
         AION193_AUTHORIZATION_ID,
         AION195_AUTHORIZATION_ID,
         AION198_AUTHORIZATION_ID,
+        AION201_AUTHORIZATION_ID,
     }
     active_authorization = program["active_cognitive_implementation_authorization"]
     assert active_authorization is None or active_authorization in allowed_authorizations

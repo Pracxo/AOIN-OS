@@ -28,6 +28,8 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION200_EVALUATION_ID,
     AION200_PROGRAM_STATE,
     AION200_TASK_ID,
+    AION201_AUTHORIZATION_ID,
+    AION201_PROGRAM_STATE,
     INTEGRATED_EVALUATION_CYCLE_STEPS,
     INTEGRATED_EVALUATION_ENVIRONMENT_FACTORS,
     INTEGRATED_EVALUATION_REQUIRED_METRICS,
@@ -137,13 +139,22 @@ def test_aion_197_ledgers_close_aion_195_without_new_authorization() -> None:
         and record.get("evaluation_id") == AION200_EVALUATION_ID
         for record in program["records"]
     )
+    aion201_authorized = any(
+        record.get("authorization_id") == AION201_AUTHORIZATION_ID
+        for record in program["records"]
+    )
     expected_active = AION198_AUTHORIZATION_ID if aion198_authorized else None
     expected_count = 1 if aion198_authorized else 0
-    if aion200_evaluated:
+    if aion201_authorized:
+        expected_active = AION201_AUTHORIZATION_ID
+        expected_count = 1
+    elif aion200_evaluated:
         expected_active = None
         expected_count = 0
     expected_program_state = AION197_PROGRAM_STATE
-    if aion200_evaluated:
+    if aion201_authorized:
+        expected_program_state = AION201_PROGRAM_STATE
+    elif aion200_evaluated:
         expected_program_state = AION200_PROGRAM_STATE
     elif aion199_implemented:
         expected_program_state = AION199_PROGRAM_STATE
