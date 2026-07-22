@@ -1,5 +1,5 @@
 {
-  "active_cognitive_implementation_authorization": "AION-191-CA-0005",
+  "active_cognitive_implementation_authorization": "AION-193-CA-0006",
   "active_cognitive_implementation_authorization_count": 1,
   "created_by_task": "AION-183",
   "final_planned_task": "AION-203",
@@ -10,7 +10,7 @@
   "production_event_subscription_enabled": false,
   "program_id": "AION-COGNITIVE-ARCHITECTURE-001",
   "program_name": "AION Cognitive Architecture Program",
-  "program_state": "counterfactual_planning_implemented_pending_evaluation",
+  "program_state": "counterfactual_planning_evaluated_information_acquisition_authorized",
   "records": [
     {
       "authorization_id": "AION-180-SI-0007",
@@ -221,7 +221,7 @@
       "evaluation_id": "AION-MCRE-001",
       "pr": null,
       "merge_commit": null,
-      "task_state": "implemented_pending_aion_193_evaluation"
+      "task_state": "closed_by_aion_193_passed"
     },
     {
       "task_id": "AION-192",
@@ -236,9 +236,40 @@
       "implementation_branch": "phase/cognitive-counterfactual-planning",
       "runtime_effect": false,
       "forbidden_side_effects": 0,
+      "pr": 103,
+      "merge_commit": "854c5e3fe34eeffa54cb1676e5524e28878cb078",
+      "task_state": "merged_evaluated_passed"
+    },
+    {
+      "task_id": "AION-193",
+      "record_kind": "evaluation_authorization",
+      "evaluation_id": "AION-HCPE-001",
+      "closed_authorization_id": "AION-191-CA-0005",
+      "evaluated_task": "AION-192",
+      "implementation_pr": 103,
+      "implementation_merge_commit": "854c5e3fe34eeffa54cb1676e5524e28878cb078",
+      "result": "PASS",
+      "decision": "COUNTERFACTUAL_PLANNING_EVALUATION_PASS_AUTHORIZE_ACTIVE_INFORMATION_ACQUISITION",
+      "new_authorization_id": "AION-193-CA-0006",
+      "authorized_task": "AION-194",
+      "runtime_effect": false,
+      "source_modified_by_evaluation": false,
+      "forbidden_side_effects": 0,
+      "task_state": "passed_authorized_aion_194_pending_implementation"
+    },
+    {
+      "task_id": "AION-193",
+      "record_kind": "authorization",
+      "authorization_id": "AION-193-CA-0006",
+      "authorized_task": "AION-194",
+      "candidate_id": "active-information-acquisition-core",
+      "scope": "active-information-need-observation-selection-information-gain-stopping-core",
+      "workstream": "active-information-acquisition",
+      "closeout_task": "AION-195",
+      "evaluation_id": "AION-HCPE-001",
       "pr": null,
       "merge_commit": null,
-      "task_state": "implemented_pending_aion_193_evaluation"
+      "task_state": "authorized_pending_aion_194_implementation"
     }
   ],
   "schema_version": "aion-cognitive-architecture-program-ledger/v1",

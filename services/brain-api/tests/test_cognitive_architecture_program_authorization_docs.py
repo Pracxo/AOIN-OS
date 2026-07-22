@@ -22,6 +22,8 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION190_TASK_ID,
     AION191_AUTHORIZATION_ID,
     AION192_TASK_ID,
+    AION193_AUTHORIZATION_ID,
+    AION194_TASK_ID,
     PROGRAM_ID,
     validate_authorization_ledger,
     validate_no_go,
@@ -95,6 +97,7 @@ def test_aion_183_ledgers_validate_and_close_authorization_after_aion_185() -> N
         AION187_AUTHORIZATION_ID,
         AION189_AUTHORIZATION_ID,
         AION191_AUTHORIZATION_ID,
+        AION193_AUTHORIZATION_ID,
     }
     assert program["tasks"][0]["task_id"] == "AION-183"
     assert program["tasks"][-1]["task_id"] == "AION-203"
@@ -137,6 +140,13 @@ def test_aion_183_ledgers_validate_and_close_authorization_after_aion_185() -> N
             if item["authorization_id"] == AION191_AUTHORIZATION_ID
         )
         assert active["implementation_task"] == AION192_TASK_ID
+    if program["active_cognitive_implementation_authorization"] == AION193_AUTHORIZATION_ID:
+        active = next(
+            item
+            for item in authorization["records"]
+            if item["authorization_id"] == AION193_AUTHORIZATION_ID
+        )
+        assert active["implementation_task"] == AION194_TASK_ID
 
 
 def test_aion_183_preserves_runtime_disabled_boundaries() -> None:
