@@ -472,6 +472,11 @@ allowed_aion178_files = {
     "services/brain-api/src/aion_brain/self_improvement/shadow_redaction.py",
     "services/brain-api/src/aion_brain/self_improvement/shadow_runner.py",
 }
+allowed_aion194_files = {
+    "services/brain-api/src/aion_brain/contracts/information_acquisition.py",
+    "services/brain-api/src/aion_brain/information_acquisition/__init__.py",
+    "services/brain-api/src/aion_brain/information_acquisition/core.py",
+}
 runtime_prefixes = (
     "services/brain-api/src/",
     "packages/aion-sdk-python/src/",
@@ -546,6 +551,7 @@ for relative in sorted(changed):
         or relative in allowed_aion157_files
         or relative in allowed_aion160_files
         or relative in allowed_aion178_files
+        or relative in allowed_aion194_files
         or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)
         or relative.startswith(allowed_aion110_prefixes)

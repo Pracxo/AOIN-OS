@@ -322,10 +322,20 @@ def test_aion_193_counterfactual_planning_evaluation_meets_thresholds() -> None:
 
 
 def test_aion_193_does_not_implement_aion_194_runtime_surface() -> None:
-    assert not (
-        ROOT / "services/brain-api/src/aion_brain/contracts/information_acquisition.py"
-    ).exists()
-    assert not (ROOT / "services/brain-api/src/aion_brain/information_acquisition").exists()
+    program = _json("docs/cognitive-architecture/program-ledger.json")
+    aion_194_implemented = any(
+        item.get("implementation_task") == AION194_TASK_ID for item in program["records"]
+    )
+    if not aion_194_implemented:
+        assert not (
+            ROOT / "services/brain-api/src/aion_brain/contracts/information_acquisition.py"
+        ).exists()
+        assert not (ROOT / "services/brain-api/src/aion_brain/information_acquisition").exists()
+    else:
+        assert (
+            ROOT / "services/brain-api/src/aion_brain/contracts/information_acquisition.py"
+        ).is_file()
+        assert (ROOT / "services/brain-api/src/aion_brain/information_acquisition").is_dir()
     assert not (ROOT / "services/brain-api/src/aion_brain/api/information_acquisition.py").exists()
 
     for relative in (

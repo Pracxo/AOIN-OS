@@ -466,7 +466,7 @@
       "parent_pr": 103,
       "implementation_task": "AION-194",
       "implementation_branch": "phase/cognitive-active-information-acquisition",
-      "implementation_state": "authorized_pending_aion_194_implementation",
+      "implementation_state": "implemented_pending_aion_195_evaluation",
       "formal_closeout_task": "AION-195",
       "candidate_id": "active-information-acquisition-core",
       "scope": "active-information-need-observation-selection-information-gain-stopping-core",
