@@ -52,6 +52,14 @@ def _json(relative: str) -> dict:
     return json.loads((ROOT / relative).read_text())
 
 
+def _aion_196_implemented() -> bool:
+    program = _json("docs/cognitive-architecture/program-ledger.json")
+    return any(
+        item.get("implementation_task") == AION196_TASK_ID
+        for item in program["records"]
+    )
+
+
 def need(
     need_id: str = "need-release-evidence",
     *,
@@ -291,8 +299,16 @@ def test_aion_195_information_acquisition_evaluation_meets_thresholds() -> None:
 
 def test_aion_195_does_not_implement_aion_196_runtime_surface() -> None:
     assert not (ROOT / "services/brain-api/src/aion_brain/api/continual_learning.py").exists()
-    assert not (ROOT / "services/brain-api/src/aion_brain/continual_learning").exists()
-    assert not (ROOT / "services/brain-api/src/aion_brain/contracts/continual_learning.py").exists()
+    if _aion_196_implemented():
+        assert (ROOT / "services/brain-api/src/aion_brain/continual_learning").is_dir()
+        assert (
+            ROOT / "services/brain-api/src/aion_brain/contracts/continual_learning.py"
+        ).is_file()
+    else:
+        assert not (ROOT / "services/brain-api/src/aion_brain/continual_learning").exists()
+        assert not (
+            ROOT / "services/brain-api/src/aion_brain/contracts/continual_learning.py"
+        ).exists()
 
     for relative in (
         "services/brain-api/src/aion_brain/kernel/container.py",
