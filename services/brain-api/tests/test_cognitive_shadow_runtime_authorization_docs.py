@@ -22,6 +22,7 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION198_TASK_ID,
     AION199_CANDIDATE_ID,
     AION199_IMPLEMENTATION_BRANCH,
+    AION199_PROGRAM_STATE,
     AION199_SCOPE,
     AION199_TASK_ID,
     AION200_EVALUATION_ID,
@@ -145,8 +146,15 @@ def test_aion_198_ledgers_create_single_active_authorization() -> None:
 
     program = _json("docs/cognitive-architecture/program-ledger.json")
     authorization = _json("docs/cognitive-architecture/authorization-ledger.json")
+    aion199_implemented = any(
+        record.get("implementation_task") == AION199_TASK_ID
+        for record in program["records"]
+    )
+    expected_program_state = (
+        AION199_PROGRAM_STATE if aion199_implemented else AION198_PROGRAM_STATE
+    )
 
-    assert program["program_state"] == AION198_PROGRAM_STATE
+    assert program["program_state"] == expected_program_state
     assert program["active_cognitive_implementation_authorization"] == AION198_AUTHORIZATION_ID
     assert (
         authorization["active_cognitive_implementation_authorization"]
@@ -166,6 +174,11 @@ def test_aion_198_ledgers_create_single_active_authorization() -> None:
     assert aion198["authorization_expired"] is False
     assert aion198["authorization_reusable"] is False
     assert aion198["implementation_task"] == AION199_TASK_ID
+    assert aion198["implementation_state"] == (
+        "implemented_pending_aion_200_evaluation"
+        if aion199_implemented
+        else "authorized_pending_implementation"
+    )
     assert aion198["scope"] == AION199_SCOPE
     assert aion198["formal_closeout_task"] == AION200_TASK_ID
     assert aion198["resource_limits"]["network_calls"] == 0
@@ -181,8 +194,16 @@ def test_aion_198_ledgers_create_single_active_authorization() -> None:
 
 
 def test_aion_198_does_not_implement_shadow_runtime_surface() -> None:
+    program = _json("docs/cognitive-architecture/program-ledger.json")
+    aion199_implemented = any(
+        record.get("implementation_task") == AION199_TASK_ID
+        for record in program["records"]
+    )
     assert not (ROOT / "services/brain-api/src/aion_brain/api/cognitive_runtime.py").exists()
-    assert not (ROOT / "services/brain-api/src/aion_brain/cognitive_runtime").exists()
+    if aion199_implemented:
+        assert (ROOT / "services/brain-api/src/aion_brain/cognitive_runtime").is_dir()
+    else:
+        assert not (ROOT / "services/brain-api/src/aion_brain/cognitive_runtime").exists()
     for relative in (
         "services/brain-api/src/aion_brain/kernel/container.py",
         "services/brain-api/src/aion_brain/kernel/diagnostics.py",

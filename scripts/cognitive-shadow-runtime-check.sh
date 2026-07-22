@@ -18,33 +18,37 @@ is_nested_gate_context() {
 "$PYTHON_BIN" -m json.tool docs/cognitive-architecture/program-ledger.json >/dev/null
 "$PYTHON_BIN" -m json.tool docs/cognitive-architecture/authorization-ledger.json >/dev/null
 "$PYTHON_BIN" -m json.tool \
-  examples/cognitive-architecture/aion-198-shadow-runtime-authorization.json >/dev/null
+  examples/cognitive-architecture/aion-199-cognitive-shadow-runtime.json >/dev/null
 
 "$PYTHON_BIN" scripts/lib/cognitive_architecture_governance.py \
   --repo-root "$ROOT_DIR" \
-  --mode shadow-runtime-authorization
+  --mode shadow-runtime
 
-./scripts/cognitive-shadow-runtime-authorization-no-go-regression.sh
+./scripts/cognitive-shadow-runtime-no-go-regression.sh
 
 "$PYTHON_BIN" -m ruff check \
   scripts/lib/cognitive_architecture_governance.py \
-  services/brain-api/tests/test_cognitive_integrated_evaluation_closeout_docs.py \
+  services/brain-api/src/aion_brain/contracts/cognitive_runtime.py \
+  services/brain-api/src/aion_brain/cognitive_runtime \
+  services/brain-api/tests/test_cognitive_shadow_runtime.py \
+  services/brain-api/tests/test_cognitive_shadow_runtime_no_runtime_effect.py \
   services/brain-api/tests/test_cognitive_shadow_runtime_authorization_docs.py \
-  services/brain-api/tests/test_cognitive_architecture_program_authorization_docs.py
+  services/brain-api/tests/test_cognitive_integrated_evaluation_closeout_docs.py
 
 if is_nested_gate_context; then
-  echo "PASS: focused cognitive shadow-runtime authorization pytest deferred to outer gate"
+  echo "PASS: focused cognitive shadow-runtime pytest deferred to outer gate"
 else
   "$PYTHON_BIN" -m pytest \
-    services/brain-api/tests/test_cognitive_shadow_runtime_authorization_docs.py \
+    services/brain-api/tests/test_cognitive_shadow_runtime.py \
+    services/brain-api/tests/test_cognitive_shadow_runtime_no_runtime_effect.py \
     -q
 fi
 
 if is_nested_gate_context; then
   echo "PASS: inherited repository gates deferred to outer gate"
 else
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/cognitive-shadow-runtime-authorization-check.sh
   AION_AGGREGATE_GATE_RUNNING=1 ./scripts/cognitive-integrated-evaluation-check.sh
-  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/cognitive-architecture-authorization-check.sh
   ./scripts/docs-check.sh
   ./scripts/final-docs-audit.sh
   ./scripts/verify-no-domain-drift.sh
@@ -53,26 +57,32 @@ else
 fi
 
 cat <<'SUMMARY'
-cognitive shadow-runtime authorization result:
+cognitive shadow-runtime result:
 - authorization=AION-198-CA-0008
-- parent_evaluation=AION-CAE-001
-- parent_task=AION-197
-- parent_pr=108
-- parent_merge_commit=770a195eae98de12a67370c790f2c7eb36e91aec
-- authorized_task=AION-199
-- implementation_branch=phase/cognitive-shadow-runtime
+- implementation_task=AION-199
+- closeout_task=AION-200
+- evaluation=AION-CSE-001
 - scope=operator-invoked-local-offline-integrated-cognitive-shadow-runtime
-- active_cognitive_implementation_authorization_count=1
-- runtime_implementation_added_by_aion_198=false
+- explicit_python_api=true
+- operator_invoked=true
+- local_offline=true
 - production_cognitive_runtime_enabled=false
-- network_access=false
-- connector_access=false
-- provider_access=false
+- api_route_added=false
+- kernel_registration_added=false
+- startup_registration_added=false
+- scheduler_started=false
+- background_loop_added=false
+- cli_installation_added=false
+- operator_review_required=true
+- action_execution_performed=false
+- network_calls=0
+- connector_calls=0
+- model_provider_calls=0
 - source_rewrite=false
 - git_mutation=false
-- approval_creation=false
-- merge=false
-- deployment=false
+- approval_creation=0
+- merge_operations=0
+- deployment_operations=0
 - model_weight_training=0
-cognitive shadow-runtime authorization PASS
+cognitive shadow-runtime PASS
 SUMMARY

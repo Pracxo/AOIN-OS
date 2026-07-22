@@ -23,6 +23,7 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION198_AUTHORIZATION_ID,
     AION198_PROGRAM_STATE,
     AION198_TASK_ID,
+    AION199_PROGRAM_STATE,
     AION199_TASK_ID,
     INTEGRATED_EVALUATION_CYCLE_STEPS,
     INTEGRATED_EVALUATION_ENVIRONMENT_FACTORS,
@@ -124,12 +125,19 @@ def test_aion_197_ledgers_close_aion_195_without_new_authorization() -> None:
         record.get("authorization_id") == AION198_AUTHORIZATION_ID
         for record in program["records"]
     )
+    aion199_implemented = any(
+        record.get("implementation_task") == AION199_TASK_ID
+        for record in program["records"]
+    )
     expected_active = AION198_AUTHORIZATION_ID if aion198_authorized else None
     expected_count = 1 if aion198_authorized else 0
+    expected_program_state = AION197_PROGRAM_STATE
+    if aion199_implemented:
+        expected_program_state = AION199_PROGRAM_STATE
+    elif aion198_authorized:
+        expected_program_state = AION198_PROGRAM_STATE
 
-    assert program["program_state"] == (
-        AION198_PROGRAM_STATE if aion198_authorized else AION197_PROGRAM_STATE
-    )
+    assert program["program_state"] == expected_program_state
     assert program["active_cognitive_implementation_authorization"] == expected_active
     assert authorization["active_cognitive_implementation_authorization"] == expected_active
     assert program["active_cognitive_implementation_authorization_count"] == expected_count
@@ -195,6 +203,11 @@ def test_aion_197_ledgers_close_aion_195_without_new_authorization() -> None:
 
 def test_aion_197_keeps_runtime_and_external_effects_absent() -> None:
     payload = _json("examples/cognitive-architecture/aion-197-integrated-cognitive-evaluation.json")
+    program = _json("docs/cognitive-architecture/program-ledger.json")
+    aion199_implemented = any(
+        record.get("implementation_task") == AION199_TASK_ID
+        for record in program["records"]
+    )
     side_effects = payload["side_effects"]
     assert side_effects["runtime_effect"] is False
     assert side_effects["api_route_added"] is False
@@ -208,7 +221,10 @@ def test_aion_197_keeps_runtime_and_external_effects_absent() -> None:
     assert side_effects["model_weight_training"] == 0
     assert side_effects["forbidden_side_effects"] == 0
     assert not (ROOT / "services/brain-api/src/aion_brain/api/cognitive_runtime.py").exists()
-    assert not (ROOT / "services/brain-api/src/aion_brain/cognitive_runtime").exists()
+    if aion199_implemented:
+        assert (ROOT / "services/brain-api/src/aion_brain/cognitive_runtime").is_dir()
+    else:
+        assert not (ROOT / "services/brain-api/src/aion_brain/cognitive_runtime").exists()
     for relative in (
         "services/brain-api/src/aion_brain/kernel/container.py",
         "services/brain-api/src/aion_brain/kernel/diagnostics.py",

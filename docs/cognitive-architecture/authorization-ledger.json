@@ -767,7 +767,7 @@
       "parent_decision": "INTEGRATED_COGNITIVE_ARCHITECTURE_EVALUATION_PASS_RECOMMEND_SHADOW_RUNTIME_AUTHORIZATION_REVIEW",
       "implementation_task": "AION-199",
       "implementation_branch": "phase/cognitive-shadow-runtime",
-      "implementation_state": "authorized_pending_implementation",
+      "implementation_state": "implemented_pending_aion_200_evaluation",
       "candidate_id": "integrated-cognitive-shadow-runtime",
       "workstream": "cognitive-shadow-runtime",
       "scope": "operator-invoked-local-offline-integrated-cognitive-shadow-runtime",
