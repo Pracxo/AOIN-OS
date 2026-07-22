@@ -43,8 +43,8 @@ fi
 if is_nested_gate_context; then
   echo "PASS: inherited repository gates deferred to outer gate"
 else
-  ./scripts/cognitive-continual-learning-check.sh
-  ./scripts/cognitive-architecture-authorization-check.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/cognitive-continual-learning-check.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/cognitive-architecture-authorization-check.sh
   ./scripts/docs-check.sh
   ./scripts/final-docs-audit.sh
   ./scripts/verify-no-domain-drift.sh
