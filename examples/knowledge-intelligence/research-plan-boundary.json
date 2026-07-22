@@ -1,0 +1,50 @@
+{
+  "allowed_methods": [
+    "GET",
+    "HEAD"
+  ],
+  "approval_record_id": "AION-204-KI-0001",
+  "authorization_scope": "disabled-allowlisted-public-research-query-fetch-snapshot-provenance-core",
+  "authorization_transaction_id": "AION-204-KI-0001",
+  "background_crawler_enabled": false,
+  "belief_mutation_enabled": false,
+  "browser_automation_enabled": false,
+  "candidate_id": "controlled-internet-research-acquisition-core",
+  "content_promotion_enabled": false,
+  "cookies_enabled": false,
+  "credential_use_enabled": false,
+  "domain_allowlist_required": true,
+  "formal_closeout_task": "AION-206",
+  "implementation_task": "AION-205",
+  "javascript_execution_enabled": false,
+  "login_flow_enabled": false,
+  "network_access_enabled": false,
+  "parent_closeout_task": "AION-203",
+  "parent_evaluation_decision": "CONTROLLED_LOCAL_OFFLINE_PILOT_PASS_COMPLETE_COGNITIVE_ARCHITECTURE_PROGRAM",
+  "parent_evaluation_id": "AION-CASE-001",
+  "parent_main_commit": "fdc38402e050ffb5beebd9d6d298f859736f0121",
+  "parent_program_id": "AION-COGNITIVE-ARCHITECTURE-001",
+  "plan_id": "synthetic-plan-aion-205-boundary-v1",
+  "private_and_local_destinations_prohibited": true,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "prohibited_methods": [
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE"
+  ],
+  "read_only": true,
+  "redacted": true,
+  "redirect_revalidation_required": true,
+  "research_plane_authorized": true,
+  "research_plane_implemented": false,
+  "research_runtime_enabled": false,
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-research-plan-boundary/v1",
+  "synthetic": true,
+  "synthetic_domains": [
+    "research-a.example",
+    "research-b.example"
+  ],
+  "workstream": "knowledge-intelligence-research-acquisition"
+}

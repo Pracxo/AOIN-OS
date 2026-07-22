@@ -220,6 +220,7 @@ allowed_authorization_demo_names = {
     "production-auth-request-identity-stabilization-runtime-hold.json",
     "actor-context-trust-boundary.json",
     "actor-context-runtime-hold.json",
+    "knowledge-intelligence-research-authorization.json",
 }
 aion161_allowed_policy_markers = {
     "runtime_private_key",

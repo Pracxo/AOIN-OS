@@ -1,0 +1,121 @@
+{
+  "active_knowledge_implementation_authorization": "AION-204-KI-0001",
+  "active_knowledge_implementation_authorization_count": 1,
+  "active_knowledge_implementation_task": "AION-205",
+  "approval_record_id": "AION-204-KI-0001",
+  "authorization_scope": "disabled-allowlisted-public-research-query-fetch-snapshot-provenance-core",
+  "authorization_transaction_id": "AION-204-KI-0001",
+  "automatic_belief_creation_enabled": false,
+  "background_crawler_enabled": false,
+  "candidate_id": "controlled-internet-research-acquisition-core",
+  "formal_closeout_task": "AION-206",
+  "implementation_task": "AION-205",
+  "knowledge_promotion_enabled": false,
+  "model_weight_training_enabled": false,
+  "network_access_enabled": false,
+  "parent_closeout_task": "AION-203",
+  "parent_evaluation_decision": "CONTROLLED_LOCAL_OFFLINE_PILOT_PASS_COMPLETE_COGNITIVE_ARCHITECTURE_PROGRAM",
+  "parent_evaluation_id": "AION-CASE-001",
+  "parent_main_commit": "fdc38402e050ffb5beebd9d6d298f859736f0121",
+  "parent_program_complete": true,
+  "parent_program_id": "AION-COGNITIVE-ARCHITECTURE-001",
+  "production_exposure": false,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "program_name": "AION Knowledge Intelligence Program",
+  "program_state": "research_plane_authorized_not_implemented",
+  "read_only": true,
+  "records": [
+    {
+      "authorization_state": "active_for_AION-205_formal_closeout_AION-206",
+      "authorization_transaction": "AION-204-KI-0001",
+      "branch": "phase/knowledge-intelligence-program-authorization",
+      "ci_result": "pending",
+      "completion_timestamp": null,
+      "feature_commits": [],
+      "merge_commits": [],
+      "next_task": "AION-205",
+      "pull_requests": [],
+      "runtime_state": "research_plane_authorized_not_implemented",
+      "task_id": "AION-204"
+    }
+  ],
+  "redacted": true,
+  "research_plane_authorized": true,
+  "research_plane_implemented": false,
+  "research_runtime_enabled": false,
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-intelligence-program-ledger/v1",
+  "synthetic": true,
+  "tasks": [
+    {
+      "summary": "Cognitive closeout reconciliation and research-plane authorization.",
+      "task_id": "AION-204"
+    },
+    {
+      "summary": "Controlled research acquisition and source-snapshot core.",
+      "task_id": "AION-205"
+    },
+    {
+      "summary": "Research-plane evaluation and source-provenance-registry authorization.",
+      "task_id": "AION-206"
+    },
+    {
+      "summary": "Source and provenance registry.",
+      "task_id": "AION-207"
+    },
+    {
+      "summary": "Provenance evaluation and temporal claim-evidence graph authorization.",
+      "task_id": "AION-208"
+    },
+    {
+      "summary": "Temporal claim-evidence graph.",
+      "task_id": "AION-209"
+    },
+    {
+      "summary": "Claim-graph evaluation and epistemic truth-engine authorization.",
+      "task_id": "AION-210"
+    },
+    {
+      "summary": "Epistemic truth, contradiction, freshness, and confidence engine.",
+      "task_id": "AION-211"
+    },
+    {
+      "summary": "Truth-engine evaluation and domain-expert-mesh authorization.",
+      "task_id": "AION-212"
+    },
+    {
+      "summary": "Domain expert mesh.",
+      "task_id": "AION-213"
+    },
+    {
+      "summary": "Expert-mesh evaluation and tool-verification-fabric authorization.",
+      "task_id": "AION-214"
+    },
+    {
+      "summary": "Deterministic tool and verification fabric.",
+      "task_id": "AION-215"
+    },
+    {
+      "summary": "Integrated research-agent evaluation and verified-knowledge authorization.",
+      "task_id": "AION-216"
+    },
+    {
+      "summary": "Verified knowledge memory and engagement-learning candidate plane.",
+      "task_id": "AION-217"
+    },
+    {
+      "summary": "Verified-memory evaluation and controlled public-research pilot authorization.",
+      "task_id": "AION-218"
+    },
+    {
+      "summary": "Controlled public internet research and verified-knowledge pilot.",
+      "task_id": "AION-219"
+    },
+    {
+      "summary": "Final Knowledge Intelligence Program evaluation and closeout.",
+      "task_id": "AION-220"
+    }
+  ],
+  "verified_knowledge_memory_enabled": false,
+  "workstream": "knowledge-intelligence-research-acquisition"
+}

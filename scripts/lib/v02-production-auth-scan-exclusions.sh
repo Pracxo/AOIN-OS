@@ -88,6 +88,9 @@ aion151_is_scoped_authorization_path() {
       if aion183_is_scoped_cognitive_architecture_authorization_path "$1"; then
         return 0
       fi
+      if aion204_is_scoped_knowledge_intelligence_authorization_path "$1"; then
+        return 0
+      fi
       return 1
       ;;
   esac
@@ -1609,6 +1612,21 @@ aion183_is_scoped_cognitive_architecture_authorization_path() {
     services/brain-api/tests/test_cognitive_memory_consolidation.py|\
     services/brain-api/tests/test_cognitive_memory_consolidation_closeout_authorization_docs.py|\
     services/brain-api/tests/test_cognitive_memory_consolidation_no_runtime_effect.py)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+aion204_is_scoped_knowledge_intelligence_authorization_path() {
+  # Exact AION-204 Knowledge Intelligence authorization paths. These records
+  # are outside the v0.2 runtime enablement track and do not exempt runtime
+  # source, API routes, package files, migrations, credentials, or releases.
+  case "$1" in
+    docs/release/knowledge-intelligence-research-authorization-transaction.md|\
+    operator-console-static/demo-data/knowledge-intelligence-research-authorization.json)
       return 0
       ;;
     *)

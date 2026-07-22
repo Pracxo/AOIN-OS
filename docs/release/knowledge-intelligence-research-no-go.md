@@ -1,0 +1,3 @@
+# Knowledge Intelligence Research No Go
+
+No-go conditions include runtime enablement, network enablement, crawler enablement, search-provider integration, connector integration, credential use, cookie use, authorization header use, POST/PUT/PATCH/DELETE, private-network access, automatic knowledge promotion, cognitive belief mutation, destructive deletion or rename, source mutation, Git mutation, runtime-created PR, approval creation, automatic merge, deployment, model training, dependency change, migration, workflow change, API route, CLI command, SDK runtime surface, AION-205 source in AION-204, v0.2 tag, v0.2 release, or movement of `aion-v0.1.0`.

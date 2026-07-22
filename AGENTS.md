@@ -1109,10 +1109,18 @@ It validates candidates, requests, externally supplied approval evidence, resour
 
 The control plane can validate and simulate future activation requests but cannot activate shadow mode. Shadow activation remains false, shadow-mode runtime remains false, actual activation remains unavailable, and every decision remains evidence only.
 
-AION-180-SI-0007 remains active pending AION-182 closeout. AION-182 is the next formal closeout and operator-evaluation task. Actual activation requires another authorization after AION-182.
+Historical AION-181 note: at implementation time, AION-180-SI-0007 remained active pending the later AION-182 closeout. AION-182 subsequently closed that authorization as consumed, expired, and non-reusable; actual activation still requires a separate future authorization.
 
 ## AION-182 Shadow Activation Evaluation Closeout
 
 AION-182 records `AION-SACE-001` with decision `SHADOW_ACTIVATION_CONTROL_PLANE_EVALUATION_PASS_RECOMMEND_ACTUAL_ACTIVATION_AUTHORIZATION_REVIEW`. The AION-181 control plane is implemented, evaluated, and disabled. `AION-180-SI-0007` is closed, consumed by AION-181 PR #92, expired, and non-reusable.
 
 No implementation authorization, activation approval, actual activation, source mutation, Git mutation, real control-plane PR, merge, promotion, canary, deployment, model training, provider call, connector call, network call, v0.2 tag, or v0.2 release is created by AION-182.
+
+## AION-203 Cognitive Architecture Program Closeout
+
+AION-203 records `AION-CASE-001` with decision `CONTROLLED_LOCAL_OFFLINE_PILOT_PASS_COMPLETE_COGNITIVE_ARCHITECTURE_PROGRAM`. The AION Cognitive Architecture Program is complete: persistent cognitive state, predictive world model, global cognitive workspace, memory consolidation, hierarchical counterfactual planning, active information acquisition, governed continual learning, integrated cognitive shadow runtime, and the controlled local-offline cognitive pilot are available as governed evidence. Production cognitive runtime, production event subscription, unrestricted network access, source rewriting, automatic merge, production canary, production deployment, and model-weight training remain disabled.
+
+## AION-204 Knowledge Intelligence Program Authorization
+
+AION-204 creates `AION-KNOWLEDGE-INTELLIGENCE-001` and `AION-204-KI-0001` as the sole active Knowledge Intelligence implementation authorization for AION-205. The authorized scope is `disabled-allowlisted-public-research-query-fetch-snapshot-provenance-core`. Research plane authorized=true, research plane implemented=false, research runtime enabled=false, network access enabled=false, background crawler enabled=false, automatic knowledge promotion enabled=false, cognitive belief mutation enabled=false, source mutation enabled=false, Git mutation enabled=false, production exposure=false, and model-weight training enabled=false. AION-206 is the formal closeout task.

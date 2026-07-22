@@ -25,6 +25,7 @@
     self_improvement_shadow_activation_simulation: "demo-data/self-improvement-shadow-activation-simulation.json",
     self_improvement_shadow_activation_control_plane_evaluation: "demo-data/self-improvement-shadow-activation-control-plane-evaluation.json",
     self_improvement_actual_shadow_activation_review_boundary: "demo-data/self-improvement-actual-shadow-activation-review-boundary.json",
+    knowledge_intelligence: "demo-data/knowledge-intelligence-program.json",
     module_lifecycle: "demo-data/module-lifecycle-dashboard.json",
     model_provider_hardening: "demo-data/provider-hardening-view-model.json",
     operator_actions: "demo-data/operator-action-preview.json",
@@ -36,6 +37,7 @@
   var VIEW_GROUPS = {
     platform: ["overview", "readiness", "release_candidate"],
     modules: ["module_lifecycle"],
+    knowledge: ["knowledge_intelligence"],
     providers: ["model_provider_hardening"],
     actions: ["operator_actions"],
     auth: ["overview"],
@@ -47,7 +49,8 @@
       "self_improvement_shadow_activation_control_plane",
       "self_improvement_shadow_activation_simulation",
       "self_improvement_shadow_activation_control_plane_evaluation",
-      "self_improvement_actual_shadow_activation_review_boundary"
+      "self_improvement_actual_shadow_activation_review_boundary",
+      "knowledge_intelligence"
     ],
     safety: ["settings_safety", "incidents"]
   };
@@ -211,7 +214,10 @@
     "./scripts/self-improvement-shadow-activation-control-plane-no-go-regression.sh",
     "./scripts/self-improvement-shadow-activation-operator-evaluation-no-go-regression.sh",
     "./scripts/self-improvement-shadow-activation-operator-evaluation-check.sh",
-    "./scripts/docs-check.sh"
+    "./scripts/docs-check.sh",
+    "./scripts/knowledge-intelligence-research-authorization-no-go-regression.sh",
+    "./scripts/knowledge-intelligence-research-authorization-check.sh",
+    "./scripts/knowledge-intelligence-research-runtime-hold.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
     generic_knowledge_trail: "demo-data/generic-knowledge-trail.json",

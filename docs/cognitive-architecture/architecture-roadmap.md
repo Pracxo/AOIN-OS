@@ -35,3 +35,8 @@ The architecture may form beliefs, predictions, hypotheses, plans, information r
 ## Runtime Hold
 
 Production cognitive runtime, production event subscription, unrestricted network access, source rewriting, automatic merge, production canary, production deployment, and model-weight training remain disabled.
+
+
+## Program Closeout And Handoff
+
+AION-203 completes the cognitive architecture program with decision `CONTROLLED_LOCAL_OFFLINE_PILOT_PASS_COMPLETE_COGNITIVE_ARCHITECTURE_PROGRAM`. The program now hands off to `AION-KNOWLEDGE-INTELLIGENCE-001` for governed Knowledge Intelligence authorization. This handoff does not change the completed cognitive task sequence or enable production cognitive runtime, network access, source rewriting, automatic merge, deployment, or model-weight training.
