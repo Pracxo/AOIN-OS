@@ -62,8 +62,16 @@ AION193_AUTHORIZATION_ID = "AION-193-CA-0006"
 AION194_TASK_ID = "AION-194"
 AION194_CANDIDATE_ID = "active-information-acquisition-core"
 AION194_SCOPE = "active-information-need-observation-selection-information-gain-stopping-core"
+AION194_PR = 105
+AION194_MERGE_COMMIT = "aeaae23db08c4dfe84e3544e4e393149a54c60cd"
 AION195_TASK_ID = "AION-195"
 AION195_EVALUATION_ID = "AION-AIAE-001"
+AION195_AUTHORIZATION_ID = "AION-195-CA-0007"
+AION196_TASK_ID = "AION-196"
+AION196_CANDIDATE_ID = "governed-continual-learning-core"
+AION196_SCOPE = "governed-continual-learning-replay-adapter-policy-skill-candidate-core"
+AION197_TASK_ID = "AION-197"
+AION197_EVALUATION_ID = "AION-CAE-001"
 
 FALSE_RUNTIME_FLAGS = (
     "runtime_effect",
@@ -542,6 +550,37 @@ AION194_PROHIBITED_PREFIXES = (
     "packages/aion-sdk-python/src/",
 )
 
+AION195_REQUIRED_FILES = (
+    "docs/cognitive-architecture/tasks/AION-195.md",
+    "docs/cognitive-architecture/program-ledger.json",
+    "docs/cognitive-architecture/authorization-ledger.json",
+    "examples/cognitive-architecture/aion-195-information-acquisition-evaluation.json",
+    "examples/cognitive-architecture/aion-195-continual-learning-authorization.json",
+    "services/brain-api/tests/test_cognitive_information_acquisition_closeout_authorization_docs.py",
+    "scripts/cognitive-information-acquisition-closeout-check.sh",
+    "scripts/cognitive-information-acquisition-closeout-no-go-regression.sh",
+    "scripts/lib/cognitive_architecture_governance.py",
+)
+
+AION195_ALLOWED_EXACT_PATHS = set(AION195_REQUIRED_FILES) | {
+    "scripts/auth-design-check.sh",
+    "scripts/lib/v02-production-auth-scan-exclusions.sh",
+}
+
+AION195_ALLOWED_PREFIXES = (
+    "docs/cognitive-architecture/",
+    "examples/cognitive-architecture/",
+)
+
+AION195_PROHIBITED_PREFIXES = (
+    ".github/workflows/",
+    "migrations/",
+    "services/brain-api/migrations/",
+    "infra/postgres/migrations/",
+    "services/brain-api/src/",
+    "packages/aion-sdk-python/src/",
+)
+
 WORLD_MODEL_REQUIRED_CONTRACTS = (
     "WorldState",
     "WorldObservation",
@@ -722,6 +761,67 @@ INFORMATION_ACQUISITION_PROHIBITED_BEHAVIORS = (
     "continue when expected value falls below cost",
 )
 
+CONTINUAL_LEARNING_REQUIRED_CONTRACTS = (
+    "ContinualLearningObservation",
+    "LearningEpisode",
+    "ReplaySample",
+    "LearningCandidate",
+    "RetrievalPolicyCandidate",
+    "PlanningPolicyCandidate",
+    "ProceduralSkillCandidate",
+    "WorldModelAdapterCandidate",
+    "StrategyCandidate",
+    "ForgettingRisk",
+    "LearningEvaluation",
+    "PromotionRequest",
+    "LearningRollbackPlan",
+)
+
+CONTINUAL_LEARNING_REQUIRED_SERVICES = (
+    "ExperienceReplayService",
+    "CandidateLearningService",
+    "CatastrophicForgettingEvaluator",
+    "LearningBenchmarkEvaluator",
+    "CandidatePromotionPolicy",
+    "LearningRollbackService",
+)
+
+CONTINUAL_LEARNING_LEVELS = (
+    "Memory candidate",
+    "Retrieval-policy candidate",
+    "Planning-policy candidate",
+    "Procedural-skill candidate",
+    "World-model adapter candidate",
+    "Strategy-selection candidate",
+)
+
+CONTINUAL_LEARNING_REQUIREMENTS = (
+    "versioned candidates",
+    "immutable baseline",
+    "protected holdout",
+    "replay",
+    "rollback",
+    "candidate isolation",
+    "approval-bound promotion",
+    "no self-approval",
+    "no automatic promotion",
+    "no source mutation",
+    "no model-weight changes",
+)
+
+CONTINUAL_LEARNING_PROHIBITED_BEHAVIORS = (
+    "model-weight training",
+    "automatic promotion",
+    "self approval",
+    "source mutation",
+    "unbounded replay over private data",
+    "holdout leakage",
+    "network acquisition",
+    "connector call",
+    "provider call",
+    "git mutation",
+)
+
 FORBIDDEN_CLAIM_TERMS = (
     "sentient",
     "sentience",
@@ -780,6 +880,7 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
             AION189_AUTHORIZATION_ID,
             AION191_AUTHORIZATION_ID,
             AION193_AUTHORIZATION_ID,
+            AION195_AUTHORIZATION_ID,
         },
         "wrong active authorization",
     )
@@ -800,6 +901,7 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
             "counterfactual_planning_implemented_pending_evaluation",
             "counterfactual_planning_evaluated_information_acquisition_authorized",
             "information_acquisition_implemented_pending_evaluation",
+            "information_acquisition_evaluated_continual_learning_authorized",
         },
         "wrong cognitive program state",
     )
@@ -1226,18 +1328,20 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
             "AION-193 must authorize AION-194",
         )
         _assert(acquisition_auth["scope"] == AION194_SCOPE, "AION-194 scope mismatch")
-        _assert(
-            active_authorization == AION193_AUTHORIZATION_ID,
-            "AION-193 authorization must be active when present",
-        )
-        _assert(
-            acquisition_auth["task_state"]
-            in {
-                "authorized_pending_aion_194_implementation",
-                "implemented_pending_aion_195_evaluation",
-            },
-            "AION-193 authorization state mismatch",
-        )
+        if active_authorization == AION193_AUTHORIZATION_ID:
+            _assert(
+                acquisition_auth["task_state"]
+                in {
+                    "authorized_pending_aion_194_implementation",
+                    "implemented_pending_aion_195_evaluation",
+                },
+                "AION-193 authorization state mismatch",
+            )
+        else:
+            _assert(
+                acquisition_auth["task_state"] == "closed_by_aion_195_passed",
+                "AION-193 authorization must be closed by AION-195",
+            )
     acquisition_implementation = _find_optional_record(
         records,
         "implementation_task",
@@ -1278,8 +1382,59 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
         )
         _assert(
             acquisition_implementation["task_state"]
-            == "implemented_pending_aion_195_evaluation",
+            in {
+                "implemented_pending_aion_195_evaluation",
+                "merged_evaluated_passed",
+            },
             "AION-194 task state mismatch",
+        )
+        if acquisition_implementation["task_state"] == "merged_evaluated_passed":
+            _assert(acquisition_implementation["pr"] == AION194_PR, "AION-194 PR mismatch")
+            _assert(
+                acquisition_implementation["merge_commit"] == AION194_MERGE_COMMIT,
+                "AION-194 merge commit mismatch",
+            )
+    continual_closeout = _find_optional_evaluation_record(
+        records,
+        AION195_TASK_ID,
+        AION195_EVALUATION_ID,
+    )
+    if continual_closeout is not None:
+        _assert(continual_closeout["result"] == "PASS", "AION-195 evaluation must pass")
+        _assert(
+            continual_closeout["closed_authorization_id"] == AION193_AUTHORIZATION_ID,
+            "AION-195 must close AION-193 authorization",
+        )
+        _assert(
+            continual_closeout["new_authorization_id"] == AION195_AUTHORIZATION_ID,
+            "AION-195 must create AION-195 authorization",
+        )
+        _assert(
+            continual_closeout["implementation_pr"] == AION194_PR,
+            "AION-195 implementation PR mismatch",
+        )
+        _assert(
+            continual_closeout["implementation_merge_commit"] == AION194_MERGE_COMMIT,
+            "AION-195 implementation merge mismatch",
+        )
+    continual_auth = _find_optional_authorization_record(records, AION195_AUTHORIZATION_ID)
+    if continual_auth is not None:
+        _assert(
+            continual_auth["authorized_task"] == AION196_TASK_ID,
+            "AION-195 must authorize AION-196",
+        )
+        _assert(continual_auth["scope"] == AION196_SCOPE, "AION-196 scope mismatch")
+        _assert(
+            active_authorization == AION195_AUTHORIZATION_ID,
+            "AION-195 authorization must be active when present",
+        )
+        _assert(
+            continual_auth["task_state"]
+            in {
+                "authorized_pending_aion_196_implementation",
+                "implemented_pending_aion_197_evaluation",
+            },
+            "AION-195 authorization state mismatch",
         )
 
 
@@ -1303,6 +1458,7 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
             AION189_AUTHORIZATION_ID,
             AION191_AUTHORIZATION_ID,
             AION193_AUTHORIZATION_ID,
+            AION195_AUTHORIZATION_ID,
         },
         "wrong active authorization",
     )
@@ -1319,7 +1475,7 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
 
     records = payload["records"]
     _assert(
-        len(records) in {2, 3, 4, 5, 6},
+        len(records) in {2, 3, 4, 5, 6, 7},
         "cognitive authorization ledger must have closed history plus one active authorization",
     )
     closed = _find_record(records, "authorization_id", AION183_AUTHORIZATION_ID)
@@ -1855,8 +2011,8 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
             )
             for flag in FALSE_RUNTIME_FLAGS:
                 _assert(planning[flag] is False, f"planning {flag} must be false")
+            acquisition = _find_record(records, "authorization_id", AION193_AUTHORIZATION_ID)
             if active_authorization == AION193_AUTHORIZATION_ID:
-                acquisition = _find_record(records, "authorization_id", AION193_AUTHORIZATION_ID)
                 _assert(
                     acquisition["record_kind"] == "implementation_authorization",
                     "bad information-acquisition authorization kind",
@@ -1935,6 +2091,167 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
                 )
                 for flag in FALSE_RUNTIME_FLAGS:
                     _assert(acquisition[flag] is False, f"acquisition {flag} must be false")
+            else:
+                _assert(
+                    acquisition["record_kind"] == "implementation_authorization_closeout",
+                    "AION-193 authorization must be closed after AION-195",
+                )
+                _assert(
+                    acquisition["authorization_active"] is False,
+                    "AION-193 authorization must be inactive",
+                )
+                _assert(
+                    acquisition["authorization_consumed"] is True,
+                    "AION-193 authorization must be consumed",
+                )
+                _assert(
+                    acquisition["authorization_expired"] is True,
+                    "AION-193 authorization must be expired",
+                )
+                _assert(
+                    acquisition["authorization_reusable"] is False,
+                    "AION-193 authorization must be non-reusable",
+                )
+                _assert(
+                    acquisition["authorization_consumed_by_task"] == AION194_TASK_ID,
+                    "AION-193 consumer task",
+                )
+                _assert(
+                    acquisition["authorization_closed_by_task"] == AION195_TASK_ID,
+                    "AION-193 closeout task",
+                )
+                _assert(
+                    acquisition["authorization_closeout_evaluation"] == AION195_EVALUATION_ID,
+                    "AION-193 closeout evaluation",
+                )
+                _assert(acquisition["implementation_pr"] == AION194_PR, "AION-194 closeout PR")
+                _assert(
+                    acquisition["implementation_merge_commit"] == AION194_MERGE_COMMIT,
+                    "AION-194 closeout merge",
+                )
+                _assert(acquisition["evaluation_result"] == "PASS", "AION-195 closeout must pass")
+                metrics = acquisition["hard_pass_conditions"]
+                _assert(metrics["uncertainty_detection_rate"] == 1.0, "uncertainty detection")
+                _assert(
+                    metrics["expected_information_gain_positive_rate"] == 1.0,
+                    "expected information gain",
+                )
+                _assert(
+                    metrics["candidate_ranking_deterministic_rate"] == 1.0,
+                    "candidate ranking determinism",
+                )
+                _assert(
+                    metrics["cost_risk_constraint_violation_count"] == 0,
+                    "cost-risk violations",
+                )
+                _assert(metrics["clarification_quality_rate"] == 1.0, "clarification quality")
+                _assert(metrics["stopping_decision_accuracy"] == 1.0, "stopping accuracy")
+                _assert(
+                    metrics["permission_enforcement_violation_count"] == 0,
+                    "permission violations",
+                )
+                _assert(
+                    metrics["unauthorized_information_acquisition_count"] == 0,
+                    "unauthorized acquisition",
+                )
+                _assert(metrics["forbidden_side_effects"] == 0, "forbidden side effects")
+                for contract in INFORMATION_ACQUISITION_REQUIRED_CONTRACTS:
+                    _assert(
+                        contract in acquisition["required_contracts"],
+                        f"missing information-acquisition contract: {contract}",
+                    )
+                for service in INFORMATION_ACQUISITION_REQUIRED_SERVICES:
+                    _assert(
+                        service in acquisition["required_services"],
+                        f"missing information-acquisition service: {service}",
+                    )
+                for flag in FALSE_RUNTIME_FLAGS:
+                    _assert(acquisition[flag] is False, f"acquisition {flag} must be false")
+
+                continual = _find_record(records, "authorization_id", AION195_AUTHORIZATION_ID)
+                _assert(
+                    continual["record_kind"] == "implementation_authorization",
+                    "bad continual-learning authorization kind",
+                )
+                _assert(
+                    continual["authorization_active"] is True,
+                    "AION-195 authorization must be active",
+                )
+                _assert(
+                    continual["authorization_consumed"] is False,
+                    "AION-195 authorization must not be consumed",
+                )
+                _assert(
+                    continual["authorization_expired"] is False,
+                    "AION-195 authorization must not be expired",
+                )
+                _assert(
+                    continual["authorization_reusable"] is False,
+                    "AION-195 authorization must be non-reusable",
+                )
+                _assert(
+                    continual["implementation_task"] == AION196_TASK_ID,
+                    "AION-196 implementation task mismatch",
+                )
+                _assert(
+                    continual["implementation_state"]
+                    in {
+                        "authorized_pending_aion_196_implementation",
+                        "implemented_pending_aion_197_evaluation",
+                    },
+                    "AION-195 implementation state mismatch",
+                )
+                _assert(
+                    continual["formal_closeout_task"] == AION197_TASK_ID,
+                    "AION-196 closeout mismatch",
+                )
+                _assert(
+                    continual["candidate_id"] == AION196_CANDIDATE_ID,
+                    "AION-196 candidate mismatch",
+                )
+                _assert(continual["scope"] == AION196_SCOPE, "AION-196 scope mismatch")
+                _assert(
+                    continual["parent_evaluation"] == AION195_EVALUATION_ID,
+                    "AION-195 parent evaluation mismatch",
+                )
+                _assert(
+                    continual["parent_commit"] == AION194_MERGE_COMMIT,
+                    "AION-195 parent commit mismatch",
+                )
+                _assert(continual["parent_pr"] == AION194_PR, "AION-195 parent PR mismatch")
+                for contract in CONTINUAL_LEARNING_REQUIRED_CONTRACTS:
+                    _assert(
+                        contract in continual["required_contracts"],
+                        f"missing continual-learning contract: {contract}",
+                    )
+                for service in CONTINUAL_LEARNING_REQUIRED_SERVICES:
+                    _assert(
+                        service in continual["required_services"],
+                        f"missing continual-learning service: {service}",
+                    )
+                for requirement in CONTINUAL_LEARNING_REQUIREMENTS:
+                    _assert(
+                        requirement in continual["requirements"],
+                        f"missing continual-learning requirement: {requirement}",
+                    )
+                _assert(
+                    continual["resource_limits"]["model_weight_training"] == 0,
+                    "model-weight training must be zero",
+                )
+                _assert(
+                    continual["resource_limits"]["automatic_promotion"] == 0,
+                    "automatic promotion must be zero",
+                )
+                _assert(
+                    continual["resource_limits"]["source_rewrite_operations"] == 0,
+                    "source rewrite must be zero",
+                )
+                _assert(
+                    continual["resource_limits"]["git_operations"] == 0,
+                    "git operations must be zero",
+                )
+                for flag in FALSE_RUNTIME_FLAGS:
+                    _assert(continual[flag] is False, f"continual {flag} must be false")
     for flag in FALSE_RUNTIME_FLAGS:
         _assert(record[flag] is False, f"{flag} must be false")
 
@@ -1997,6 +2314,22 @@ def _find_optional_evaluation_record(
     ]
     _assert(len(matches) <= 1, f"expected at most one evaluation record for {task_id}")
     return matches[0] if matches else None
+
+
+def _find_evaluation_record(
+    records: list[dict[str, Any]],
+    task_id: str,
+    evaluation_id: str,
+) -> dict[str, Any]:
+    matches = [
+        record
+        for record in records
+        if record.get("task_id") == task_id
+        and record.get("record_kind") == "evaluation_authorization"
+        and record.get("evaluation_id") == evaluation_id
+    ]
+    _assert(len(matches) == 1, f"expected one evaluation record for {task_id}")
+    return matches[0]
 
 
 def _find_closeout_record(records: list[dict[str, Any]]) -> dict[str, Any]:
@@ -2108,6 +2441,7 @@ def validate_persistent_state(root: Path) -> None:
             AION189_AUTHORIZATION_ID,
             AION191_AUTHORIZATION_ID,
             AION193_AUTHORIZATION_ID,
+            AION195_AUTHORIZATION_ID,
         },
         "AION-184 must remain inside the cognitive authorization chain",
     )
@@ -2188,6 +2522,9 @@ def validate_persistent_state_no_go(root: Path) -> None:
         current_information_acquisition_path_allowed = (
             _aion194_implementation_record_exists(root) and _aion194_path_allowed(relative)
         )
+        current_information_acquisition_closeout_path_allowed = (
+            _aion195_closeout_record_exists(root) and _aion195_path_allowed(relative)
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -2202,6 +2539,7 @@ def validate_persistent_state_no_go(root: Path) -> None:
             or current_counterfactual_planning_path_allowed
             or current_counterfactual_planning_closeout_path_allowed
             or current_information_acquisition_path_allowed
+            or current_information_acquisition_closeout_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION184_PROHIBITED_PREFIXES),
             f"prohibited AION-184 path changed: {relative}",
         )
@@ -2216,7 +2554,8 @@ def validate_persistent_state_no_go(root: Path) -> None:
             or current_memory_consolidation_closeout_path_allowed
             or current_counterfactual_planning_path_allowed
             or current_counterfactual_planning_closeout_path_allowed
-            or current_information_acquisition_path_allowed,
+            or current_information_acquisition_path_allowed
+            or current_information_acquisition_closeout_path_allowed,
             f"unexpected AION-184 path changed: {relative}",
         )
     source_text = "\n".join(
@@ -2344,6 +2683,9 @@ def validate_persistent_state_closeout_no_go(root: Path) -> None:
         current_information_acquisition_path_allowed = (
             _aion194_implementation_record_exists(root) and _aion194_path_allowed(relative)
         )
+        current_information_acquisition_closeout_path_allowed = (
+            _aion195_closeout_record_exists(root) and _aion195_path_allowed(relative)
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -2358,6 +2700,7 @@ def validate_persistent_state_closeout_no_go(root: Path) -> None:
             or current_counterfactual_planning_path_allowed
             or current_counterfactual_planning_closeout_path_allowed
             or current_information_acquisition_path_allowed
+            or current_information_acquisition_closeout_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION185_PROHIBITED_PREFIXES),
             f"prohibited AION-185 path changed: {relative}",
         )
@@ -2371,7 +2714,8 @@ def validate_persistent_state_closeout_no_go(root: Path) -> None:
             or current_memory_consolidation_closeout_path_allowed
             or current_counterfactual_planning_path_allowed
             or current_counterfactual_planning_closeout_path_allowed
-            or current_information_acquisition_path_allowed,
+            or current_information_acquisition_path_allowed
+            or current_information_acquisition_closeout_path_allowed,
             f"unexpected AION-185 path changed: {relative}",
         )
 
@@ -2595,6 +2939,9 @@ def validate_world_model_no_go(root: Path) -> None:
         aion194_path_allowed = _aion194_implementation_record_exists(root) and _aion194_path_allowed(
             relative
         )
+        aion195_path_allowed = _aion195_closeout_record_exists(root) and _aion195_path_allowed(
+            relative
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -2608,6 +2955,7 @@ def validate_world_model_no_go(root: Path) -> None:
             or aion192_path_allowed
             or aion193_path_allowed
             or aion194_path_allowed
+            or aion195_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION186_PROHIBITED_PREFIXES),
             f"prohibited AION-186 path changed: {relative}",
         )
@@ -2620,7 +2968,8 @@ def validate_world_model_no_go(root: Path) -> None:
             or aion191_path_allowed
             or aion192_path_allowed
             or aion193_path_allowed
-            or aion194_path_allowed,
+            or aion194_path_allowed
+            or aion195_path_allowed,
             f"unexpected AION-186 path changed: {relative}",
         )
     source_text = "\n".join(
@@ -2741,12 +3090,11 @@ def validate_world_model_closeout(root: Path) -> None:
         _assert(term in task_doc, f"AION-187 task doc missing {term}")
     program = _load_json(root, "docs/cognitive-architecture/program-ledger.json")
     authorization = _load_json(root, "docs/cognitive-architecture/authorization-ledger.json")
-    closeout = _find_optional_evaluation_record(
+    closeout = _find_evaluation_record(
         program["records"],
         AION187_TASK_ID,
         AION187_EVALUATION_ID,
     )
-    _assert(closeout is not None, "AION-187 closeout record missing")
     _assert(closeout["result"] == "PASS", "AION-187 ledger result must pass")
     _assert(
         program["active_cognitive_implementation_authorization"]
@@ -2755,6 +3103,7 @@ def validate_world_model_closeout(root: Path) -> None:
             AION189_AUTHORIZATION_ID,
             AION191_AUTHORIZATION_ID,
             AION193_AUTHORIZATION_ID,
+            AION195_AUTHORIZATION_ID,
         },
         "AION-187 authorization chain mismatch",
     )
@@ -2809,6 +3158,9 @@ def validate_world_model_closeout_no_go(root: Path) -> None:
         aion194_path_allowed = _aion194_implementation_record_exists(root) and _aion194_path_allowed(
             relative
         )
+        aion195_path_allowed = _aion195_closeout_record_exists(root) and _aion195_path_allowed(
+            relative
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -2821,6 +3173,7 @@ def validate_world_model_closeout_no_go(root: Path) -> None:
             or aion192_path_allowed
             or aion193_path_allowed
             or aion194_path_allowed
+            or aion195_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION187_PROHIBITED_PREFIXES),
             f"prohibited AION-187 path changed: {relative}",
         )
@@ -2832,7 +3185,8 @@ def validate_world_model_closeout_no_go(root: Path) -> None:
             or aion191_path_allowed
             or aion192_path_allowed
             or aion193_path_allowed
-            or aion194_path_allowed,
+            or aion194_path_allowed
+            or aion195_path_allowed,
             f"unexpected AION-187 path changed: {relative}",
         )
 
@@ -3056,6 +3410,7 @@ def validate_global_workspace(root: Path) -> None:
             "counterfactual_planning_implemented_pending_evaluation",
             "counterfactual_planning_evaluated_information_acquisition_authorized",
             "information_acquisition_implemented_pending_evaluation",
+            "information_acquisition_evaluated_continual_learning_authorized",
         },
         "AION-188 program state mismatch",
     )
@@ -3141,6 +3496,9 @@ def validate_global_workspace_no_go(root: Path) -> None:
         aion194_path_allowed = _aion194_implementation_record_exists(root) and _aion194_path_allowed(
             relative
         )
+        aion195_path_allowed = _aion195_closeout_record_exists(root) and _aion195_path_allowed(
+            relative
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -3152,6 +3510,7 @@ def validate_global_workspace_no_go(root: Path) -> None:
             or aion192_path_allowed
             or aion193_path_allowed
             or aion194_path_allowed
+            or aion195_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION188_PROHIBITED_PREFIXES),
             f"prohibited AION-188 path changed: {relative}",
         )
@@ -3162,7 +3521,8 @@ def validate_global_workspace_no_go(root: Path) -> None:
             or aion191_path_allowed
             or aion192_path_allowed
             or aion193_path_allowed
-            or aion194_path_allowed,
+            or aion194_path_allowed
+            or aion195_path_allowed,
             f"unexpected AION-188 path changed: {relative}",
         )
 
@@ -3325,16 +3685,20 @@ def validate_workspace_closeout(root: Path) -> None:
         _assert(term in task_doc, f"AION-189 task doc missing {term}")
     program = _load_json(root, "docs/cognitive-architecture/program-ledger.json")
     authorization_ledger = _load_json(root, "docs/cognitive-architecture/authorization-ledger.json")
-    closeout = _find_optional_evaluation_record(
+    closeout = _find_evaluation_record(
         program["records"],
         AION189_TASK_ID,
         AION189_EVALUATION_ID,
     )
-    _assert(closeout is not None, "AION-189 closeout record missing")
     _assert(closeout["result"] == "PASS", "AION-189 ledger result must pass")
     _assert(
         program["active_cognitive_implementation_authorization"]
-        in {AION189_AUTHORIZATION_ID, AION191_AUTHORIZATION_ID, AION193_AUTHORIZATION_ID},
+        in {
+            AION189_AUTHORIZATION_ID,
+            AION191_AUTHORIZATION_ID,
+            AION193_AUTHORIZATION_ID,
+            AION195_AUTHORIZATION_ID,
+        },
         "AION-189 authorization chain mismatch",
     )
     closed = _find_record(
@@ -3533,6 +3897,7 @@ def validate_memory_consolidation(root: Path) -> None:
             "counterfactual_planning_implemented_pending_evaluation",
             "counterfactual_planning_evaluated_information_acquisition_authorized",
             "information_acquisition_implemented_pending_evaluation",
+            "information_acquisition_evaluated_continual_learning_authorized",
         },
         "AION-190 program state mismatch",
     )
@@ -3778,16 +4143,15 @@ def validate_memory_consolidation_closeout(root: Path) -> None:
         _assert(term in task_doc, f"AION-191 task doc missing {term}")
     program = _load_json(root, "docs/cognitive-architecture/program-ledger.json")
     authorization = _load_json(root, "docs/cognitive-architecture/authorization-ledger.json")
-    closeout = _find_optional_evaluation_record(
+    closeout = _find_evaluation_record(
         program["records"],
         AION191_TASK_ID,
         AION191_EVALUATION_ID,
     )
-    _assert(closeout is not None, "AION-191 closeout record missing")
     _assert(closeout["result"] == "PASS", "AION-191 ledger result must pass")
     _assert(
         program["active_cognitive_implementation_authorization"]
-        in {AION191_AUTHORIZATION_ID, AION193_AUTHORIZATION_ID},
+        in {AION191_AUTHORIZATION_ID, AION193_AUTHORIZATION_ID, AION195_AUTHORIZATION_ID},
         "AION-191 authorization chain mismatch",
     )
     implementation = _find_record(program["records"], "implementation_task", AION190_TASK_ID)
@@ -3868,6 +4232,9 @@ def validate_workspace_closeout_no_go(root: Path) -> None:
         aion194_path_allowed = _aion194_implementation_record_exists(root) and _aion194_path_allowed(
             relative
         )
+        aion195_path_allowed = _aion195_closeout_record_exists(root) and _aion195_path_allowed(
+            relative
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -3878,6 +4245,7 @@ def validate_workspace_closeout_no_go(root: Path) -> None:
             or aion192_path_allowed
             or aion193_path_allowed
             or aion194_path_allowed
+            or aion195_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION189_PROHIBITED_PREFIXES),
             f"prohibited AION-189 path changed: {relative}",
         )
@@ -3887,7 +4255,8 @@ def validate_workspace_closeout_no_go(root: Path) -> None:
             or aion191_path_allowed
             or aion192_path_allowed
             or aion193_path_allowed
-            or aion194_path_allowed,
+            or aion194_path_allowed
+            or aion195_path_allowed,
             f"unexpected AION-189 path changed: {relative}",
         )
 
@@ -3911,6 +4280,9 @@ def validate_memory_consolidation_no_go(root: Path) -> None:
         aion194_path_allowed = _aion194_implementation_record_exists(root) and _aion194_path_allowed(
             relative
         )
+        aion195_path_allowed = _aion195_closeout_record_exists(root) and _aion195_path_allowed(
+            relative
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -3921,6 +4293,7 @@ def validate_memory_consolidation_no_go(root: Path) -> None:
             or aion192_path_allowed
             or aion193_path_allowed
             or aion194_path_allowed
+            or aion195_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION190_PROHIBITED_PREFIXES),
             f"prohibited AION-190 path changed: {relative}",
         )
@@ -3929,7 +4302,8 @@ def validate_memory_consolidation_no_go(root: Path) -> None:
             or aion191_path_allowed
             or aion192_path_allowed
             or aion193_path_allowed
-            or aion194_path_allowed,
+            or aion194_path_allowed
+            or aion195_path_allowed,
             f"unexpected AION-190 path changed: {relative}",
         )
     source_text = "\n".join(
@@ -3973,6 +4347,9 @@ def validate_memory_consolidation_closeout_no_go(root: Path) -> None:
         aion194_path_allowed = _aion194_implementation_record_exists(root) and _aion194_path_allowed(
             relative
         )
+        aion195_path_allowed = _aion195_closeout_record_exists(root) and _aion195_path_allowed(
+            relative
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -3982,6 +4359,7 @@ def validate_memory_consolidation_closeout_no_go(root: Path) -> None:
             or aion192_path_allowed
             or aion193_path_allowed
             or aion194_path_allowed
+            or aion195_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION191_PROHIBITED_PREFIXES),
             f"prohibited AION-191 path changed: {relative}",
         )
@@ -3989,7 +4367,8 @@ def validate_memory_consolidation_closeout_no_go(root: Path) -> None:
             aion191_path_allowed
             or aion192_path_allowed
             or aion193_path_allowed
-            or aion194_path_allowed,
+            or aion194_path_allowed
+            or aion195_path_allowed,
             f"unexpected AION-191 path changed: {relative}",
         )
 
@@ -4165,6 +4544,7 @@ def validate_counterfactual_planning(root: Path) -> None:
             "counterfactual_planning_implemented_pending_evaluation",
             "counterfactual_planning_evaluated_information_acquisition_authorized",
             "information_acquisition_implemented_pending_evaluation",
+            "information_acquisition_evaluated_continual_learning_authorized",
         },
         "AION-192 program state mismatch",
     )
@@ -4266,6 +4646,9 @@ def validate_counterfactual_planning_no_go(root: Path) -> None:
         aion194_path_allowed = _aion194_implementation_record_exists(root) and _aion194_path_allowed(
             relative
         )
+        aion195_path_allowed = _aion195_closeout_record_exists(root) and _aion195_path_allowed(
+            relative
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -4274,11 +4657,15 @@ def validate_counterfactual_planning_no_go(root: Path) -> None:
             aion192_path_allowed
             or aion193_path_allowed
             or aion194_path_allowed
+            or aion195_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION192_PROHIBITED_PREFIXES),
             f"prohibited AION-192 path changed: {relative}",
         )
         _assert(
-            aion192_path_allowed or aion193_path_allowed or aion194_path_allowed,
+            aion192_path_allowed
+            or aion193_path_allowed
+            or aion194_path_allowed
+            or aion195_path_allowed,
             f"unexpected AION-192 path changed: {relative}",
         )
 
@@ -4457,24 +4844,29 @@ def validate_counterfactual_planning_closeout(root: Path) -> None:
         _assert(term in task_doc, f"AION-193 task doc missing {term}")
     program = _load_json(root, "docs/cognitive-architecture/program-ledger.json")
     authorization = _load_json(root, "docs/cognitive-architecture/authorization-ledger.json")
-    closeout = _find_optional_evaluation_record(
+    closeout = _find_evaluation_record(
         program["records"],
         AION193_TASK_ID,
         AION193_EVALUATION_ID,
     )
-    _assert(closeout is not None, "AION-193 closeout record missing")
     _assert(closeout["result"] == "PASS", "AION-193 ledger result must pass")
-    _assert(
-        program["active_cognitive_implementation_authorization"] == AION193_AUTHORIZATION_ID,
-        "AION-193 authorization must be active",
-    )
     aion194_implemented = _aion194_implementation_record_exists(root)
+    aion195_closeout_exists = _aion195_closeout_record_exists(root)
+    _assert(
+        program["active_cognitive_implementation_authorization"]
+        == (AION195_AUTHORIZATION_ID if aion195_closeout_exists else AION193_AUTHORIZATION_ID),
+        "AION-193 authorization chain mismatch",
+    )
     _assert(
         program["program_state"]
         == (
-            "information_acquisition_implemented_pending_evaluation"
-            if aion194_implemented
-            else "counterfactual_planning_evaluated_information_acquisition_authorized"
+            "information_acquisition_evaluated_continual_learning_authorized"
+            if aion195_closeout_exists
+            else (
+                "information_acquisition_implemented_pending_evaluation"
+                if aion194_implemented
+                else "counterfactual_planning_evaluated_information_acquisition_authorized"
+            )
         ),
         "AION-193 program state mismatch",
     )
@@ -4490,7 +4882,35 @@ def validate_counterfactual_planning_closeout(root: Path) -> None:
     _assert(closed["implementation_pr"] == AION192_PR, "AION-192 closeout PR")
     _assert(closed["implementation_merge_commit"] == AION192_MERGE_COMMIT, "AION-192 closeout")
     active = _find_record(authorization["records"], "authorization_id", AION193_AUTHORIZATION_ID)
-    _assert(active["authorization_active"] is True, "AION-193 authorization must be active")
+    _assert(
+        active["authorization_active"] is not aion195_closeout_exists,
+        "AION-193 authorization active state mismatch",
+    )
+    _assert(
+        active["authorization_consumed"] is aion195_closeout_exists,
+        "AION-193 consumed state mismatch",
+    )
+    _assert(
+        active["authorization_expired"] is aion195_closeout_exists,
+        "AION-193 expiry state mismatch",
+    )
+    if aion195_closeout_exists:
+        _assert(
+            active["record_kind"] == "implementation_authorization_closeout",
+            "AION-193 authorization must be closed after AION-195",
+        )
+        _assert(active["authorization_closed_by_task"] == AION195_TASK_ID, "AION-193 closeout")
+        _assert(
+            active["authorization_closeout_evaluation"] == AION195_EVALUATION_ID,
+            "AION-195 closeout eval",
+        )
+        _assert(active["implementation_pr"] == AION194_PR, "AION-194 closeout PR")
+        _assert(active["implementation_merge_commit"] == AION194_MERGE_COMMIT, "AION-194 closeout")
+    else:
+        _assert(
+            active["record_kind"] == "implementation_authorization",
+            "AION-193 authorization must remain open before AION-195",
+        )
     _assert(active["implementation_task"] == AION194_TASK_ID, "AION-194 authorization mismatch")
     _assert(active["scope"] == AION194_SCOPE, "AION-194 scope")
     if not aion194_implemented:
@@ -4513,6 +4933,9 @@ def validate_counterfactual_planning_closeout_no_go(root: Path) -> None:
         aion194_path_allowed = _aion194_implementation_record_exists(root) and _aion194_path_allowed(
             relative
         )
+        aion195_path_allowed = _aion195_closeout_record_exists(root) and _aion195_path_allowed(
+            relative
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -4520,11 +4943,12 @@ def validate_counterfactual_planning_closeout_no_go(root: Path) -> None:
         _assert(
             aion193_path_allowed
             or aion194_path_allowed
+            or aion195_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION193_PROHIBITED_PREFIXES),
             f"prohibited AION-193 path changed: {relative}",
         )
         _assert(
-            aion193_path_allowed or aion194_path_allowed,
+            aion193_path_allowed or aion194_path_allowed or aion195_path_allowed,
             f"unexpected AION-193 path changed: {relative}",
         )
 
@@ -4705,8 +5129,14 @@ def validate_information_acquisition(root: Path) -> None:
         _assert(term in task_doc, f"AION-194 task doc missing {term}")
     program = _load_json(root, "docs/cognitive-architecture/program-ledger.json")
     authorization = _load_json(root, "docs/cognitive-architecture/authorization-ledger.json")
+    aion195_closeout_exists = _aion195_closeout_record_exists(root)
     _assert(
-        program["program_state"] == "information_acquisition_implemented_pending_evaluation",
+        program["program_state"]
+        == (
+            "information_acquisition_evaluated_continual_learning_authorized"
+            if aion195_closeout_exists
+            else "information_acquisition_implemented_pending_evaluation"
+        ),
         "AION-194 program state mismatch",
     )
     implementation = _find_record(program["records"], "implementation_task", AION194_TASK_ID)
@@ -4722,18 +5152,54 @@ def validate_information_acquisition(root: Path) -> None:
         "AION-194 unauthorized acquisition",
     )
     _assert(
-        implementation["task_state"] == "implemented_pending_aion_195_evaluation",
+        implementation["task_state"]
+        == (
+            "merged_evaluated_passed"
+            if aion195_closeout_exists
+            else "implemented_pending_aion_195_evaluation"
+        ),
         "AION-194 task state",
     )
+    if aion195_closeout_exists:
+        _assert(implementation["pr"] == AION194_PR, "AION-194 PR")
+        _assert(implementation["merge_commit"] == AION194_MERGE_COMMIT, "AION-194 merge")
     active = _find_record(authorization["records"], "authorization_id", AION193_AUTHORIZATION_ID)
-    _assert(active["authorization_active"] is True, "AION-193 authorization must remain active")
-    _assert(active["authorization_consumed"] is False, "AION-193 must not be consumed yet")
-    _assert(active["authorization_expired"] is False, "AION-193 must not expire before AION-195")
-    _assert(active["authorization_reusable"] is False, "AION-193 must remain non-reusable")
     _assert(
-        active["implementation_state"] == "implemented_pending_aion_195_evaluation",
-        "AION-193 implementation state must await AION-195",
+        active["authorization_active"] is not aion195_closeout_exists,
+        "AION-193 authorization active state mismatch",
     )
+    _assert(
+        active["authorization_consumed"] is aion195_closeout_exists,
+        "AION-193 consumed state mismatch",
+    )
+    _assert(
+        active["authorization_expired"] is aion195_closeout_exists,
+        "AION-193 expiry state mismatch",
+    )
+    _assert(active["authorization_reusable"] is False, "AION-193 must remain non-reusable")
+    if aion195_closeout_exists:
+        _assert(
+            active["implementation_state"] == "merged_evaluated_passed",
+            "AION-193 implementation state must be closed after AION-195",
+        )
+        _assert(
+            active["authorization_closed_by_task"] == AION195_TASK_ID,
+            "AION-193 closeout task mismatch",
+        )
+        _assert(
+            active["authorization_closeout_evaluation"] == AION195_EVALUATION_ID,
+            "AION-193 closeout evaluation mismatch",
+        )
+        _assert(active["implementation_pr"] == AION194_PR, "AION-194 closeout PR")
+        _assert(
+            active["implementation_merge_commit"] == AION194_MERGE_COMMIT,
+            "AION-194 closeout merge",
+        )
+    else:
+        _assert(
+            active["implementation_state"] == "implemented_pending_aion_195_evaluation",
+            "AION-193 implementation state must await AION-195",
+        )
     _assert(
         not (root / "services/brain-api/src/aion_brain/api/information_acquisition.py").exists(),
         "AION-194 must not add an information-acquisition API route",
@@ -4777,16 +5243,279 @@ def validate_information_acquisition_no_go(root: Path) -> None:
     for relative in sorted(changed):
         path = Path(relative)
         aion194_path_allowed = _aion194_path_allowed(relative)
+        aion195_path_allowed = _aion195_closeout_record_exists(root) and _aion195_path_allowed(
+            relative
+        )
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
         )
         _assert(
             aion194_path_allowed
+            or aion195_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION194_PROHIBITED_PREFIXES),
             f"prohibited AION-194 path changed: {relative}",
         )
-        _assert(aion194_path_allowed, f"unexpected AION-194 path changed: {relative}")
+        _assert(
+            aion194_path_allowed or aion195_path_allowed,
+            f"unexpected AION-194 path changed: {relative}",
+        )
+
+
+def validate_aion195_evaluation_payload(payload: dict[str, Any]) -> None:
+    _assert(
+        payload["schema_version"] == "aion-cognitive-information-acquisition-evaluation/v1",
+        "bad AION-195 evaluation schema",
+    )
+    _assert(payload["program_id"] == PROGRAM_ID, "bad AION-195 program id")
+    _assert(payload["task_id"] == AION195_TASK_ID, "bad AION-195 task id")
+    _assert(payload["evaluation_id"] == AION195_EVALUATION_ID, "bad AION-195 evaluation")
+    _assert(payload["evaluated_task"] == AION194_TASK_ID, "bad AION-195 evaluated task")
+    _assert(payload["closed_authorization_id"] == AION193_AUTHORIZATION_ID, "bad closed auth")
+    _assert(payload["implementation_pr"] == AION194_PR, "bad AION-194 PR")
+    _assert(payload["implementation_merge_commit"] == AION194_MERGE_COMMIT, "bad AION-194 merge")
+    _assert(payload["result"] == "PASS", "AION-195 evaluation must pass")
+    _assert(
+        payload["decision"]
+        == "INFORMATION_ACQUISITION_EVALUATION_PASS_AUTHORIZE_GOVERNED_CONTINUAL_LEARNING",
+        "bad AION-195 decision",
+    )
+    metrics = payload["hard_pass_conditions"]
+    _assert(metrics["uncertainty_detection_rate"] == 1.0, "uncertainty detection")
+    _assert(
+        metrics["expected_information_gain_positive_rate"] == 1.0,
+        "expected information gain",
+    )
+    _assert(
+        metrics["candidate_ranking_deterministic_rate"] == 1.0,
+        "candidate ranking determinism",
+    )
+    _assert(
+        metrics["cost_risk_constraint_violation_count"] == 0,
+        "cost-risk violations",
+    )
+    _assert(metrics["clarification_quality_rate"] == 1.0, "clarification quality")
+    _assert(metrics["stopping_decision_accuracy"] == 1.0, "stopping accuracy")
+    _assert(
+        metrics["permission_enforcement_violation_count"] == 0,
+        "permission violations",
+    )
+    _assert(
+        metrics["unauthorized_information_acquisition_count"] == 0,
+        "unauthorized acquisition",
+    )
+    _assert(metrics["forbidden_side_effects"] == 0, "forbidden side effects")
+    for key in (
+        "uncertainty_detection",
+        "expected_information_gain",
+        "candidate_ranking",
+        "cost_and_risk",
+        "clarification_quality",
+        "stopping_decisions",
+        "permission_enforcement",
+        "no_unauthorized_acquisition",
+    ):
+        _assert(payload["evaluation_matrix"][key] == "PASS", f"{key} must pass")
+    side_effects = payload["side_effects"]
+    for key in (
+        "runtime_effect",
+        "api_route_added",
+        "kernel_registration_added",
+        "background_loop_added",
+        "information_acquired",
+        "tool_execution",
+        "external_action_dispatch",
+        "network_calls",
+        "connector_calls",
+        "model_provider_calls",
+        "source_rewrite_operations",
+        "git_operations",
+        "deployment_enabled",
+        "model_weights_changed",
+        "forbidden_side_effects",
+    ):
+        _assert(side_effects[key] in (False, 0), f"{key} must be absent")
+    _assert(payload["new_authorization_id"] == AION195_AUTHORIZATION_ID, "bad new auth")
+    _assert(payload["authorized_task"] == AION196_TASK_ID, "bad authorized task")
+    _assert(payload["next_task"] == AION196_TASK_ID, "bad next task")
+
+
+def validate_aion195_authorization_payload(payload: dict[str, Any]) -> None:
+    _assert(
+        payload["schema_version"] == "aion-cognitive-governed-continual-learning-authorization/v1",
+        "bad AION-195 authorization schema",
+    )
+    _assert(payload["program_id"] == PROGRAM_ID, "bad AION-195 authorization program")
+    _assert(payload["authorization_id"] == AION195_AUTHORIZATION_ID, "bad AION-195 auth")
+    _assert(payload["parent_evaluation_id"] == AION195_EVALUATION_ID, "bad parent eval")
+    _assert(payload["parent_task"] == AION195_TASK_ID, "bad parent task")
+    _assert(payload["parent_commit"] == AION194_MERGE_COMMIT, "bad parent commit")
+    _assert(payload["parent_pr"] == AION194_PR, "bad parent PR")
+    _assert(payload["authorized_task"] == AION196_TASK_ID, "bad AION-196 task")
+    _assert(payload["candidate_id"] == AION196_CANDIDATE_ID, "bad AION-196 candidate")
+    _assert(payload["scope"] == AION196_SCOPE, "bad AION-196 scope")
+    _assert(payload["authorization_active"] is True, "AION-195 auth must be active")
+    _assert(payload["authorization_consumed"] is False, "AION-195 auth must not be consumed")
+    _assert(payload["authorization_expired"] is False, "AION-195 auth must not be expired")
+    _assert(payload["authorization_reusable"] is False, "AION-195 auth must be non-reusable")
+    _assert(payload["formal_closeout_task"] == AION197_TASK_ID, "bad formal closeout")
+    for contract in CONTINUAL_LEARNING_REQUIRED_CONTRACTS:
+        _assert(
+            contract in payload["required_contracts"],
+            f"missing continual-learning contract: {contract}",
+        )
+    for service in CONTINUAL_LEARNING_REQUIRED_SERVICES:
+        _assert(
+            service in payload["required_services"],
+            f"missing continual-learning service: {service}",
+        )
+    for level in CONTINUAL_LEARNING_LEVELS:
+        _assert(level in payload["learning_levels"], f"missing learning level: {level}")
+    for requirement in CONTINUAL_LEARNING_REQUIREMENTS:
+        _assert(requirement in payload["requirements"], f"missing requirement: {requirement}")
+    for behavior in CONTINUAL_LEARNING_PROHIBITED_BEHAVIORS:
+        _assert(behavior in payload["prohibited_behaviors"], f"missing prohibition: {behavior}")
+    for key in (
+        "network_calls",
+        "connector_calls",
+        "model_provider_calls",
+        "model_weight_training",
+        "background_loops",
+        "git_operations",
+        "source_rewrite_operations",
+        "action_execution",
+        "automatic_promotion",
+        "self_approval",
+        "unauthorized_promotion",
+        "production_exposure",
+    ):
+        _assert(payload["resource_limits"][key] == 0, f"{key} must be zero")
+    _assert(".github/workflows/" in payload["prohibited_source_paths"], "workflow prohibition")
+    for flag in FALSE_RUNTIME_FLAGS:
+        _assert(payload[flag] is False, f"{flag} must be false")
+
+
+def validate_information_acquisition_closeout(root: Path) -> None:
+    validate_information_acquisition(root)
+    validate_required_files(root, AION195_REQUIRED_FILES)
+    validate_no_claim_terms(
+        root,
+        (
+            root / "docs/cognitive-architecture/tasks/AION-195.md",
+            root
+            / "services/brain-api/tests/test_cognitive_information_acquisition_closeout_authorization_docs.py",
+        ),
+    )
+    evaluation = _load_json(
+        root,
+        "examples/cognitive-architecture/aion-195-information-acquisition-evaluation.json",
+    )
+    continual_authorization = _load_json(
+        root,
+        "examples/cognitive-architecture/aion-195-continual-learning-authorization.json",
+    )
+    validate_aion195_evaluation_payload(evaluation)
+    validate_aion195_authorization_payload(continual_authorization)
+    task_doc = (root / "docs/cognitive-architecture/tasks/AION-195.md").read_text()
+    for section in (
+        "## Task Purpose",
+        "## Authorization ID",
+        "## Exact Scope",
+        "## Role Comparison",
+        "## Source Boundaries",
+        "## Required Contracts",
+        "## Required Services",
+        "## Required Tests",
+        "## Required Gates",
+        "## Security Invariants",
+        "## Performance Limits",
+        "## Completion Conditions",
+        "## Next Task",
+    ):
+        _assert(section in task_doc, f"AION-195 task doc missing {section}")
+    for term in (
+        AION195_EVALUATION_ID,
+        AION193_AUTHORIZATION_ID,
+        AION195_AUTHORIZATION_ID,
+        AION196_TASK_ID,
+        AION196_SCOPE,
+    ):
+        _assert(term in task_doc, f"AION-195 task doc missing {term}")
+    program = _load_json(root, "docs/cognitive-architecture/program-ledger.json")
+    authorization = _load_json(root, "docs/cognitive-architecture/authorization-ledger.json")
+    closeout = _find_evaluation_record(
+        program["records"],
+        AION195_TASK_ID,
+        AION195_EVALUATION_ID,
+    )
+    _assert(closeout["result"] == "PASS", "AION-195 ledger result must pass")
+    _assert(
+        program["active_cognitive_implementation_authorization"] == AION195_AUTHORIZATION_ID,
+        "AION-195 authorization must be active",
+    )
+    _assert(
+        program["program_state"] == "information_acquisition_evaluated_continual_learning_authorized",
+        "AION-195 program state mismatch",
+    )
+    implementation = _find_record(program["records"], "implementation_task", AION194_TASK_ID)
+    _assert(implementation["pr"] == AION194_PR, "AION-194 PR")
+    _assert(implementation["merge_commit"] == AION194_MERGE_COMMIT, "AION-194 merge")
+    _assert(implementation["task_state"] == "merged_evaluated_passed", "AION-194 state")
+    closed = _find_record(authorization["records"], "authorization_id", AION193_AUTHORIZATION_ID)
+    _assert(closed["authorization_active"] is False, "AION-193 authorization must be closed")
+    _assert(closed["authorization_consumed"] is True, "AION-193 authorization must be consumed")
+    _assert(closed["authorization_expired"] is True, "AION-193 authorization must be expired")
+    _assert(closed["authorization_closeout_evaluation"] == AION195_EVALUATION_ID, "closeout eval")
+    _assert(closed["implementation_pr"] == AION194_PR, "AION-194 closeout PR")
+    _assert(closed["implementation_merge_commit"] == AION194_MERGE_COMMIT, "AION-194 closeout")
+    active = _find_record(authorization["records"], "authorization_id", AION195_AUTHORIZATION_ID)
+    _assert(active["authorization_active"] is True, "AION-195 authorization must be active")
+    _assert(active["implementation_task"] == AION196_TASK_ID, "AION-196 authorization mismatch")
+    _assert(active["scope"] == AION196_SCOPE, "AION-196 scope")
+    _assert(
+        set(CONTINUAL_LEARNING_REQUIRED_CONTRACTS).issubset(active["required_contracts"]),
+        "AION-196 required contracts missing",
+    )
+    _assert(
+        set(CONTINUAL_LEARNING_REQUIRED_SERVICES).issubset(active["required_services"]),
+        "AION-196 required services missing",
+    )
+    _assert(
+        not (root / "services/brain-api/src/aion_brain/api/continual_learning.py").exists(),
+        "AION-195 must not add a continual-learning API route",
+    )
+    for path in (
+        root / "services/brain-api/src/aion_brain/kernel/container.py",
+        root / "services/brain-api/src/aion_brain/kernel/diagnostics.py",
+    ):
+        text = path.read_text()
+        _assert(
+            "ExperienceReplayService" not in text,
+            "AION-195 must not register continual-learning services",
+        )
+        _assert(
+            "aion_brain.continual_learning" not in text,
+            "AION-195 must not add kernel continual-learning registration",
+        )
+
+
+def validate_information_acquisition_closeout_no_go(root: Path) -> None:
+    validate_information_acquisition_closeout(root)
+    validate_no_go(root)
+    changed = _changed_files(root)
+    for relative in sorted(changed):
+        path = Path(relative)
+        aion195_path_allowed = _aion195_path_allowed(relative)
+        _assert(
+            path.name not in AION184_BLOCKED_FILENAMES,
+            f"blocked package or dependency file changed: {relative}",
+        )
+        _assert(
+            aion195_path_allowed
+            or not any(relative.startswith(prefix) for prefix in AION195_PROHIBITED_PREFIXES),
+            f"prohibited AION-195 path changed: {relative}",
+        )
+        _assert(aion195_path_allowed, f"unexpected AION-195 path changed: {relative}")
 
 
 def _aion184_path_allowed(relative: str) -> bool:
@@ -4852,6 +5581,12 @@ def _aion193_path_allowed(relative: str) -> bool:
 def _aion194_path_allowed(relative: str) -> bool:
     return relative in AION194_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION194_ALLOWED_PREFIXES
+    )
+
+
+def _aion195_path_allowed(relative: str) -> bool:
+    return relative in AION195_ALLOWED_EXACT_PATHS or any(
+        relative.startswith(prefix) for prefix in AION195_ALLOWED_PREFIXES
     )
 
 
@@ -4928,6 +5663,18 @@ def _aion193_closeout_record_exists(root: Path) -> bool:
     )
 
 
+def _aion195_closeout_record_exists(root: Path) -> bool:
+    program = _load_json(root, "docs/cognitive-architecture/program-ledger.json")
+    return (
+        _find_optional_evaluation_record(
+            program["records"],
+            AION195_TASK_ID,
+            AION195_EVALUATION_ID,
+        )
+        is not None
+    )
+
+
 def _comparison_base(root: Path) -> str | None:
     candidates = ("origin/main", "main")
     for candidate in candidates:
@@ -4999,6 +5746,8 @@ def main() -> int:
             "counterfactual-planning-closeout-no-go",
             "information-acquisition",
             "information-acquisition-no-go",
+            "information-acquisition-closeout",
+            "information-acquisition-closeout-no-go",
         ),
         default="authorization",
     )
@@ -5073,9 +5822,15 @@ def main() -> int:
     elif args.mode == "information-acquisition":
         validate_information_acquisition(root)
         print("cognitive information-acquisition validation PASS")
-    else:
+    elif args.mode == "information-acquisition-no-go":
         validate_information_acquisition_no_go(root)
         print("cognitive information-acquisition no-go validation PASS")
+    elif args.mode == "information-acquisition-closeout":
+        validate_information_acquisition_closeout(root)
+        print("cognitive information-acquisition closeout validation PASS")
+    else:
+        validate_information_acquisition_closeout_no_go(root)
+        print("cognitive information-acquisition closeout no-go validation PASS")
     return 0
 
 

@@ -24,6 +24,7 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION192_TASK_ID,
     AION193_AUTHORIZATION_ID,
     AION194_TASK_ID,
+    AION195_AUTHORIZATION_ID,
     PROGRAM_ID,
     validate_authorization_ledger,
     validate_no_go,
@@ -98,6 +99,7 @@ def test_aion_183_ledgers_validate_and_close_authorization_after_aion_185() -> N
         AION189_AUTHORIZATION_ID,
         AION191_AUTHORIZATION_ID,
         AION193_AUTHORIZATION_ID,
+        AION195_AUTHORIZATION_ID,
     }
     assert program["tasks"][0]["task_id"] == "AION-183"
     assert program["tasks"][-1]["task_id"] == "AION-203"

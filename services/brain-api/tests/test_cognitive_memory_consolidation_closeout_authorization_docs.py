@@ -25,6 +25,7 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION192_SCOPE,
     AION192_TASK_ID,
     AION193_AUTHORIZATION_ID,
+    AION195_AUTHORIZATION_ID,
     PROGRAM_ID,
     validate_aion191_authorization_payload,
     validate_aion191_evaluation_payload,
@@ -218,10 +219,11 @@ def test_aion_191_ledgers_examples_and_no_go_validate() -> None:
     assert program["active_cognitive_implementation_authorization"] in {
         AION191_AUTHORIZATION_ID,
         AION193_AUTHORIZATION_ID,
+        AION195_AUTHORIZATION_ID,
     }
     assert (
         authorization["active_cognitive_implementation_authorization"]
-        in {AION191_AUTHORIZATION_ID, AION193_AUTHORIZATION_ID}
+        in {AION191_AUTHORIZATION_ID, AION193_AUTHORIZATION_ID, AION195_AUTHORIZATION_ID}
     )
     assert authorization["active_cognitive_implementation_authorization_count"] == 1
 

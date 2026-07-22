@@ -30,6 +30,8 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION193_EVALUATION_ID,
     AION194_SCOPE,
     AION194_TASK_ID,
+    AION195_AUTHORIZATION_ID,
+    AION195_EVALUATION_ID,
     INFORMATION_ACQUISITION_REQUIRED_CONTRACTS,
     INFORMATION_ACQUISITION_REQUIRED_SERVICES,
     PROGRAM_ID,
@@ -243,10 +245,13 @@ def test_aion_193_ledgers_examples_and_no_go_validate() -> None:
     authorization = _json("docs/cognitive-architecture/authorization-ledger.json")
 
     assert program["program_id"] == PROGRAM_ID
-    assert program["active_cognitive_implementation_authorization"] == AION193_AUTHORIZATION_ID
+    assert program["active_cognitive_implementation_authorization"] in {
+        AION193_AUTHORIZATION_ID,
+        AION195_AUTHORIZATION_ID,
+    }
     assert (
         authorization["active_cognitive_implementation_authorization"]
-        == AION193_AUTHORIZATION_ID
+        in {AION193_AUTHORIZATION_ID, AION195_AUTHORIZATION_ID}
     )
     assert authorization["active_cognitive_implementation_authorization_count"] == 1
 
@@ -275,7 +280,15 @@ def test_aion_193_ledgers_examples_and_no_go_validate() -> None:
         for item in authorization["records"]
         if item["authorization_id"] == AION193_AUTHORIZATION_ID
     )
-    assert active["authorization_active"] is True
+    if authorization["active_cognitive_implementation_authorization"] == AION193_AUTHORIZATION_ID:
+        assert active["authorization_active"] is True
+        assert active["authorization_consumed"] is False
+        assert active["authorization_expired"] is False
+    else:
+        assert active["authorization_active"] is False
+        assert active["authorization_consumed"] is True
+        assert active["authorization_expired"] is True
+        assert active["authorization_closeout_evaluation"] == AION195_EVALUATION_ID
     assert active["implementation_task"] == AION194_TASK_ID
     assert active["scope"] == AION194_SCOPE
     assert set(INFORMATION_ACQUISITION_REQUIRED_CONTRACTS).issubset(active["required_contracts"])
