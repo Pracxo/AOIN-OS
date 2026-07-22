@@ -66,6 +66,13 @@ def _aion_196_implemented() -> bool:
     )
 
 
+def _aion_203_closed() -> bool:
+    return (
+        ROOT
+        / "examples/cognitive-architecture/aion-203-cognitive-pilot-evaluation-closeout.json"
+    ).is_file()
+
+
 def need(
     need_id: str = "need-release-evidence",
     *,
@@ -256,9 +263,12 @@ def test_aion_195_ledgers_examples_and_no_go_validate() -> None:
         item.get("authorization_id") == AION201_AUTHORIZATION_ID
         for item in program["records"]
     )
+    aion203_closed = _aion_203_closed()
     if aion197_closed:
         expected_active = (
-            AION201_AUTHORIZATION_ID
+            None
+            if aion203_closed
+            else AION201_AUTHORIZATION_ID
             if aion201_authorized
             else None
             if aion200_evaluated
@@ -267,7 +277,9 @@ def test_aion_195_ledgers_examples_and_no_go_validate() -> None:
             else None
         )
         expected_count = (
-            1
+            0
+            if aion203_closed
+            else 1
             if aion201_authorized
             else 0
             if aion200_evaluated

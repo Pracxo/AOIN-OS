@@ -17,11 +17,14 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION201_PR,
     AION202_CANDIDATE_ID,
     AION202_IMPLEMENTATION_BRANCH,
+    AION202_MERGE_COMMIT,
+    AION202_PR,
     AION202_PROGRAM_STATE,
     AION202_SCOPE,
     AION202_TASK_ID,
     AION202_WORKSTREAM,
     AION203_EVALUATION_ID,
+    AION203_PROGRAM_STATE,
     AION203_TASK_ID,
     PROGRAM_ID,
     validate_aion202_pilot_payload,
@@ -48,6 +51,13 @@ def _json(relative: str) -> dict:
 
 def _text(relative: str) -> str:
     return (ROOT / relative).read_text()
+
+
+def _aion203_closeout_exists() -> bool:
+    return (
+        ROOT
+        / "examples/cognitive-architecture/aion-203-cognitive-pilot-evaluation-closeout.json"
+    ).is_file()
 
 
 def test_aion_202_required_files_exist() -> None:
@@ -172,14 +182,18 @@ def test_aion_202_ledgers_record_executed_pending_evaluation_state() -> None:
 
     program = _json("docs/cognitive-architecture/program-ledger.json")
     authorization = _json("docs/cognitive-architecture/authorization-ledger.json")
-    assert program["program_state"] == AION202_PROGRAM_STATE
-    assert program["active_cognitive_implementation_authorization"] == AION201_AUTHORIZATION_ID
+    aion203_closed = _aion203_closeout_exists()
+    expected_program_state = AION203_PROGRAM_STATE if aion203_closed else AION202_PROGRAM_STATE
+    expected_active = None if aion203_closed else AION201_AUTHORIZATION_ID
+    expected_count = 0 if aion203_closed else 1
+    assert program["program_state"] == expected_program_state
+    assert program["active_cognitive_implementation_authorization"] == expected_active
     assert (
         authorization["active_cognitive_implementation_authorization"]
-        == AION201_AUTHORIZATION_ID
+        == expected_active
     )
-    assert program["active_cognitive_implementation_authorization_count"] == 1
-    assert authorization["active_cognitive_implementation_authorization_count"] == 1
+    assert program["active_cognitive_implementation_authorization_count"] == expected_count
+    assert authorization["active_cognitive_implementation_authorization_count"] == expected_count
 
     program_auth = next(
         record
@@ -193,16 +207,22 @@ def test_aion_202_ledgers_record_executed_pending_evaluation_state() -> None:
         if record.get("authorization_id") == AION201_AUTHORIZATION_ID
     )
     for record in (program_auth, auth_record):
-        assert record["authorization_active"] is True
-        assert record["authorization_consumed"] is False
-        assert record["authorization_expired"] is False
+        assert record["authorization_active"] is (not aion203_closed)
+        assert record["authorization_consumed"] is aion203_closed
+        assert record["authorization_expired"] is aion203_closed
         assert record["authorization_reusable"] is False
         assert record["authorized_task"] == AION202_TASK_ID
         assert record["pilot_executed"] is True
-        assert (
-            record["implementation_state"]
-            == "aion_202_pilot_executed_pending_aion_203_evaluation"
+        expected_implementation_state = (
+            "aion_203_evaluation_passed_authorization_closed"
+            if aion203_closed
+            else "aion_202_pilot_executed_pending_aion_203_evaluation"
         )
+        assert record["implementation_state"] == expected_implementation_state
+        if aion203_closed:
+            assert record["authorization_closed_by_task"] == AION203_TASK_ID
+            assert record["authorization_closeout_evaluation"] == AION203_EVALUATION_ID
+            assert record["evaluation_result"] == "PASS"
 
     execution = next(
         record
@@ -210,7 +230,17 @@ def test_aion_202_ledgers_record_executed_pending_evaluation_state() -> None:
         if record.get("record_kind") == "implementation"
         and record.get("implementation_task") == AION202_TASK_ID
     )
-    assert execution["task_state"] == "pilot_executed_pending_aion_203_evaluation"
+    expected_task_state = (
+        "pilot_executed_evaluated_passed_program_complete"
+        if aion203_closed
+        else "pilot_executed_pending_aion_203_evaluation"
+    )
+    assert execution["task_state"] == expected_task_state
+    if aion203_closed:
+        assert execution["pr"] == AION202_PR
+        assert execution["merge_commit"] == AION202_MERGE_COMMIT
+        assert execution["evaluation_result"] == "PASS"
+        assert execution["evaluated_by_task"] == AION203_TASK_ID
     assert execution["pilot_executed"] is True
     assert execution["sessions_executed"] == 10
     assert execution["total_cycles_executed"] == 1000

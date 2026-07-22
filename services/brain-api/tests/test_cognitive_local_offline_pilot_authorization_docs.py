@@ -31,6 +31,7 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION202_TASK_ID,
     AION202_WORKSTREAM,
     AION203_EVALUATION_ID,
+    AION203_PROGRAM_STATE,
     AION203_TASK_ID,
     PROGRAM_ID,
     validate_aion201_authorization_payload,
@@ -61,6 +62,13 @@ def _text(relative: str) -> str:
 def _aion202_evidence_exists() -> bool:
     return (
         ROOT / "examples/cognitive-architecture/aion-202-controlled-cognitive-pilot.json"
+    ).is_file()
+
+
+def _aion203_closeout_exists() -> bool:
+    return (
+        ROOT
+        / "examples/cognitive-architecture/aion-203-cognitive-pilot-evaluation-closeout.json"
     ).is_file()
 
 
@@ -177,20 +185,31 @@ def test_aion_201_ledgers_activate_single_non_reusable_pilot_authorization() -> 
     program = _json("docs/cognitive-architecture/program-ledger.json")
     authorization = _json("docs/cognitive-architecture/authorization-ledger.json")
     aion202_executed = _aion202_evidence_exists()
-    expected_program_state = AION202_PROGRAM_STATE if aion202_executed else AION201_PROGRAM_STATE
+    aion203_closed = _aion203_closeout_exists()
+    expected_program_state = (
+        AION203_PROGRAM_STATE
+        if aion203_closed
+        else AION202_PROGRAM_STATE
+        if aion202_executed
+        else AION201_PROGRAM_STATE
+    )
     expected_implementation_state = (
-        "aion_202_pilot_executed_pending_aion_203_evaluation"
+        "aion_203_evaluation_passed_authorization_closed"
+        if aion203_closed
+        else "aion_202_pilot_executed_pending_aion_203_evaluation"
         if aion202_executed
         else "authorized_pending_aion_202_pilot_execution"
     )
+    expected_active = None if aion203_closed else AION201_AUTHORIZATION_ID
+    expected_count = 0 if aion203_closed else 1
     assert program["program_state"] == expected_program_state
-    assert program["active_cognitive_implementation_authorization"] == AION201_AUTHORIZATION_ID
+    assert program["active_cognitive_implementation_authorization"] == expected_active
     assert (
         authorization["active_cognitive_implementation_authorization"]
-        == AION201_AUTHORIZATION_ID
+        == expected_active
     )
-    assert program["active_cognitive_implementation_authorization_count"] == 1
-    assert authorization["active_cognitive_implementation_authorization_count"] == 1
+    assert program["active_cognitive_implementation_authorization_count"] == expected_count
+    assert authorization["active_cognitive_implementation_authorization_count"] == expected_count
 
     aion200 = next(
         record
@@ -215,13 +234,17 @@ def test_aion_201_ledgers_activate_single_non_reusable_pilot_authorization() -> 
     )
     for record in (program_record, auth_record):
         assert record["task_id"] == AION201_TASK_ID
-        assert record["authorization_active"] is True
-        assert record["authorization_consumed"] is False
-        assert record["authorization_expired"] is False
+        assert record["authorization_active"] is (not aion203_closed)
+        assert record["authorization_consumed"] is aion203_closed
+        assert record["authorization_expired"] is aion203_closed
         assert record["authorization_reusable"] is False
         assert record["authorized_task"] == AION202_TASK_ID
         assert record["implementation_state"] == expected_implementation_state
         assert record["pilot_executed"] is aion202_executed
+        if aion203_closed:
+            assert record["authorization_closed_by_task"] == AION203_TASK_ID
+            assert record["authorization_closeout_evaluation"] == AION203_EVALUATION_ID
+            assert record["evaluation_result"] == "PASS"
         assert record["runtime_effect"] is False
         assert record["source_modified"] is False
         assert record["git_mutated"] is False

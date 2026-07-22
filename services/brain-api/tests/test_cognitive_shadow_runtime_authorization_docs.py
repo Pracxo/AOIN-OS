@@ -31,6 +31,7 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION201_AUTHORIZATION_ID,
     AION201_PROGRAM_STATE,
     AION202_PROGRAM_STATE,
+    AION203_PROGRAM_STATE,
     PROGRAM_ID,
     SHADOW_RUNTIME_AUTHORIZED_CAPABILITIES,
     SHADOW_RUNTIME_PROHIBITED_BEHAVIORS,
@@ -65,6 +66,13 @@ def _text(relative: str) -> str:
 def _aion202_evidence_exists() -> bool:
     return (
         ROOT / "examples/cognitive-architecture/aion-202-controlled-cognitive-pilot.json"
+    ).is_file()
+
+
+def _aion203_closeout_exists() -> bool:
+    return (
+        ROOT
+        / "examples/cognitive-architecture/aion-203-cognitive-pilot-evaluation-closeout.json"
     ).is_file()
 
 
@@ -169,8 +177,11 @@ def test_aion_198_ledgers_create_single_active_authorization() -> None:
         record.get("authorization_id") == AION201_AUTHORIZATION_ID
         for record in program["records"]
     )
+    aion203_closed = _aion203_closeout_exists()
     expected_program_state = AION198_PROGRAM_STATE
-    if _aion202_evidence_exists():
+    if aion203_closed:
+        expected_program_state = AION203_PROGRAM_STATE
+    elif _aion202_evidence_exists():
         expected_program_state = AION202_PROGRAM_STATE
     elif aion201_authorized:
         expected_program_state = AION201_PROGRAM_STATE
@@ -180,7 +191,10 @@ def test_aion_198_ledgers_create_single_active_authorization() -> None:
         expected_program_state = AION199_PROGRAM_STATE
     expected_active = AION198_AUTHORIZATION_ID
     expected_count = 1
-    if aion201_authorized:
+    if aion203_closed:
+        expected_active = None
+        expected_count = 0
+    elif aion201_authorized:
         expected_active = AION201_AUTHORIZATION_ID
     elif aion200_evaluated:
         expected_active = None

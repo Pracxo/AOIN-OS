@@ -108,6 +108,8 @@ AION202_IMPLEMENTATION_BRANCH = "phase/cognitive-local-offline-pilot"
 AION202_PROGRAM_STATE = "controlled_local_offline_pilot_executed_pending_aion_203_evaluation"
 AION203_TASK_ID = "AION-203"
 AION203_EVALUATION_ID = "AION-CASE-001"
+AION203_PROGRAM_STATE = "cognitive_architecture_program_complete"
+AION203_DECISION = "CONTROLLED_LOCAL_OFFLINE_PILOT_PASS_COMPLETE_COGNITIVE_ARCHITECTURE_PROGRAM"
 AION199_IMPLEMENTATION_BRANCH = "phase/cognitive-shadow-runtime"
 AION199_IMPLEMENTATION_COMMIT = "c1479e805ee95e11f7f2d8719607189ccbf9ed4b"
 AION199_PR = 110
@@ -116,6 +118,8 @@ AION200_PR = 111
 AION200_MERGE_COMMIT = "ca1f7eb4b72b65fd7f32cfeae08a065d9054d6ec"
 AION201_PR = 112
 AION201_MERGE_COMMIT = "b4ddd9c60dc9b5c236beb7c7e795cdd3222c6be0"
+AION202_PR = 113
+AION202_MERGE_COMMIT = "b93fde4bb195573702f10c1807a23e65f6d55eb2"
 AION200_EVALUATION_FINGERPRINT = (
     "4cb32ba5e5cfb0f0d78014aa2eb7bb959fe3c9a6e23d5a06740b578c3c8cc563"
 )
@@ -124,6 +128,32 @@ AION199_IMPLEMENTATION_SCHEMA = "aion-cognitive-shadow-runtime-implementation/v1
 AION200_EVALUATION_SCHEMA = "aion-cognitive-shadow-runtime-evaluation/v1"
 AION201_AUTHORIZATION_SCHEMA = "aion-controlled-local-offline-pilot-authorization/v1"
 AION202_PILOT_SCHEMA = "aion-controlled-local-offline-pilot-execution/v1"
+AION203_CLOSEOUT_SCHEMA = "aion-cognitive-local-offline-pilot-closeout/v1"
+
+AION203_FINAL_TRUE_FLAGS = (
+    "cognitive_architecture_program_complete",
+    "cognitive_architecture_implemented",
+    "persistent_cognitive_state_available",
+    "predictive_world_model_available",
+    "global_cognitive_workspace_available",
+    "memory_consolidation_available",
+    "hierarchical_counterfactual_planning_available",
+    "active_information_acquisition_available",
+    "governed_continual_learning_available",
+    "integrated_cognitive_shadow_runtime_available",
+    "controlled_local_offline_pilot_passed",
+)
+
+AION203_FINAL_FALSE_FLAGS = (
+    "production_cognitive_runtime_enabled",
+    "production_event_subscription_enabled",
+    "network_access_enabled",
+    "source_rewrite_runtime_enabled",
+    "automatic_merge_enabled",
+    "production_canary_enabled",
+    "production_deployment_enabled",
+    "model_weight_training_enabled",
+)
 
 FALSE_RUNTIME_FLAGS = (
     "runtime_effect",
@@ -747,6 +777,17 @@ AION202_REQUIRED_FILES = (
     "scripts/lib/cognitive_architecture_governance.py",
 )
 
+AION203_REQUIRED_FILES = (
+    "docs/cognitive-architecture/tasks/AION-203.md",
+    "docs/cognitive-architecture/program-ledger.json",
+    "docs/cognitive-architecture/authorization-ledger.json",
+    "examples/cognitive-architecture/aion-203-cognitive-pilot-evaluation-closeout.json",
+    "services/brain-api/tests/test_cognitive_local_offline_pilot_closeout_docs.py",
+    "scripts/cognitive-local-offline-pilot-closeout-check.sh",
+    "scripts/cognitive-local-offline-pilot-closeout-no-go-regression.sh",
+    "scripts/lib/cognitive_architecture_governance.py",
+)
+
 AION199_ALLOWED_EXACT_PATHS = set(AION199_REQUIRED_FILES) | {
     "scripts/connector-runtime-no-external-call-regression.sh",
     "scripts/cognitive-integrated-evaluation-check.sh",
@@ -786,6 +827,16 @@ AION202_ALLOWED_EXACT_PATHS = set(AION202_REQUIRED_FILES) | {
     "scripts/cognitive-local-offline-pilot-authorization-no-go-regression.sh",
 }
 
+AION203_ALLOWED_EXACT_PATHS = set(AION203_REQUIRED_FILES) | {
+    "services/brain-api/tests/test_cognitive_integrated_evaluation_closeout_docs.py",
+    "services/brain-api/tests/test_cognitive_local_offline_pilot_authorization_docs.py",
+    "services/brain-api/tests/test_cognitive_local_offline_pilot_docs.py",
+    "services/brain-api/tests/test_cognitive_shadow_runtime_authorization_docs.py",
+    "services/brain-api/tests/test_cognitive_shadow_runtime_evaluation_closeout.py",
+    "scripts/cognitive-local-offline-pilot-check.sh",
+    "scripts/cognitive-local-offline-pilot-no-go-regression.sh",
+}
+
 AION196_ALLOWED_EXACT_PATHS = (
     set(AION196_REQUIRED_FILES)
     | AION197_ALLOWED_EXACT_PATHS
@@ -794,6 +845,7 @@ AION196_ALLOWED_EXACT_PATHS = (
     | AION200_ALLOWED_EXACT_PATHS
     | AION201_ALLOWED_EXACT_PATHS
     | AION202_ALLOWED_EXACT_PATHS
+    | AION203_ALLOWED_EXACT_PATHS
     | {
         "services/brain-api/tests/test_cognitive_information_acquisition_closeout_authorization_docs.py",
     }
@@ -832,6 +884,11 @@ AION201_ALLOWED_PREFIXES = (
 )
 
 AION202_ALLOWED_PREFIXES = (
+    "docs/cognitive-architecture/",
+    "examples/cognitive-architecture/",
+)
+
+AION203_ALLOWED_PREFIXES = (
     "docs/cognitive-architecture/",
     "examples/cognitive-architecture/",
 )
@@ -882,6 +939,8 @@ AION200_PROHIBITED_PREFIXES = AION197_PROHIBITED_PREFIXES
 AION201_PROHIBITED_PREFIXES = AION197_PROHIBITED_PREFIXES
 
 AION202_PROHIBITED_PREFIXES = AION197_PROHIBITED_PREFIXES
+
+AION203_PROHIBITED_PREFIXES = AION197_PROHIBITED_PREFIXES
 
 WORLD_MODEL_REQUIRED_CONTRACTS = (
     "WorldState",
@@ -1351,6 +1410,14 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
         and record.get("implementation_task") == AION202_TASK_ID
         for record in records
     )
+    local_offline_pilot_closed = (
+        _find_optional_evaluation_record(
+            records,
+            AION203_TASK_ID,
+            AION203_EVALUATION_ID,
+        )
+        is not None
+    )
     active_authorization = payload["active_cognitive_implementation_authorization"]
     active_authorizations = {
         AION185_AUTHORIZATION_ID,
@@ -1362,7 +1429,16 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
         AION198_AUTHORIZATION_ID,
         AION201_AUTHORIZATION_ID,
     }
-    if local_offline_pilot_authorized:
+    if local_offline_pilot_closed:
+        _assert(
+            active_authorization is None,
+            "AION-201 authorization must be closed after AION-203",
+        )
+        _assert(
+            payload["active_cognitive_implementation_authorization_count"] == 0,
+            "active authorization count must be zero after AION-203",
+        )
+    elif local_offline_pilot_authorized:
         _assert(
             active_authorization == AION201_AUTHORIZATION_ID,
             "AION-201 authorization must be active",
@@ -1422,10 +1498,16 @@ def validate_program_ledger(payload: dict[str, Any]) -> None:
             AION200_PROGRAM_STATE,
             AION201_PROGRAM_STATE,
             AION202_PROGRAM_STATE,
+            AION203_PROGRAM_STATE,
         },
         "wrong cognitive program state",
     )
-    if local_offline_pilot_authorized:
+    if local_offline_pilot_closed:
+        _assert(
+            payload["program_state"] == AION203_PROGRAM_STATE,
+            "AION-203 program state mismatch",
+        )
+    elif local_offline_pilot_authorized:
         _assert(
             payload["program_state"]
             == (AION202_PROGRAM_STATE if local_offline_pilot_executed else AION201_PROGRAM_STATE),
@@ -2242,6 +2324,11 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
         and aion198_record["authorization_closed_by_task"] == AION200_TASK_ID
     )
     aion201_record = _find_optional_record(records, "authorization_id", AION201_AUTHORIZATION_ID)
+    aion203_closed = (
+        aion201_record is not None
+        and aion201_record["record_kind"] == "implementation_authorization_closeout"
+        and aion201_record["authorization_closed_by_task"] == AION203_TASK_ID
+    )
     active_authorizations = {
         AION185_AUTHORIZATION_ID,
         AION187_AUTHORIZATION_ID,
@@ -2252,7 +2339,16 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
         AION198_AUTHORIZATION_ID,
         AION201_AUTHORIZATION_ID,
     }
-    if aion201_record is not None:
+    if aion203_closed:
+        _assert(
+            active_authorization is None,
+            "AION-201 authorization must be closed after AION-203",
+        )
+        _assert(
+            payload["active_cognitive_implementation_authorization_count"] == 0,
+            "active authorization count must be zero after AION-203",
+        )
+    elif aion201_record is not None:
         _assert(
             active_authorization == AION201_AUTHORIZATION_ID,
             "AION-201 authorization must be active",
@@ -3331,13 +3427,27 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
         for flag in FALSE_RUNTIME_FLAGS:
             _assert(aion198_record[flag] is False, f"AION-198 {flag} must be false")
     if aion201_record is not None:
+        expected_aion201_kind = (
+            "implementation_authorization_closeout"
+            if aion203_closed
+            else "implementation_authorization"
+        )
         _assert(
-            aion201_record["record_kind"] == "implementation_authorization",
+            aion201_record["record_kind"] == expected_aion201_kind,
             "AION-201 authorization kind",
         )
-        _assert(aion201_record["authorization_active"] is True, "AION-201 active")
-        _assert(aion201_record["authorization_consumed"] is False, "AION-201 consumed")
-        _assert(aion201_record["authorization_expired"] is False, "AION-201 expired")
+        _assert(
+            aion201_record["authorization_active"] is (not aion203_closed),
+            "AION-201 active",
+        )
+        _assert(
+            aion201_record["authorization_consumed"] is aion203_closed,
+            "AION-201 consumed",
+        )
+        _assert(
+            aion201_record["authorization_expired"] is aion203_closed,
+            "AION-201 expired",
+        )
         _assert(
             aion201_record["authorization_reusable"] is False,
             "AION-201 reusable",
@@ -3380,6 +3490,29 @@ def validate_authorization_ledger(payload: dict[str, Any]) -> None:
             aion201_record["authorization_closeout_evaluation"] == AION203_EVALUATION_ID,
             "AION-203 closeout evaluation",
         )
+        expected_aion201_state = (
+            "aion_203_evaluation_passed_authorization_closed"
+            if aion203_closed
+            else "aion_202_pilot_executed_pending_aion_203_evaluation"
+            if aion201_record.get("pilot_executed") is True
+            else "authorized_pending_aion_202_pilot_execution"
+        )
+        _assert(
+            aion201_record["implementation_state"] == expected_aion201_state,
+            "AION-201 implementation state",
+        )
+        if aion203_closed:
+            _assert(
+                aion201_record["authorization_closed_by_task"] == AION203_TASK_ID,
+                "AION-203 authorization closeout task",
+            )
+            _assert(aion201_record["evaluation_result"] == "PASS", "AION-203 result")
+            _assert(aion201_record["implementation_pr"] == AION202_PR, "AION-202 PR")
+            _assert(
+                aion201_record["implementation_merge_commit"] == AION202_MERGE_COMMIT,
+                "AION-202 merge",
+            )
+            _assert(aion201_record["pilot_passed"] is True, "pilot passed")
         _assert(
             aion201_record["aion199_implementation_commit"] == AION199_IMPLEMENTATION_COMMIT,
             "AION-199 implementation commit binding",
@@ -4643,6 +4776,7 @@ def validate_global_workspace(root: Path) -> None:
             AION200_PROGRAM_STATE,
             AION201_PROGRAM_STATE,
             AION202_PROGRAM_STATE,
+            AION203_PROGRAM_STATE,
         },
         "AION-188 program state mismatch",
     )
@@ -5149,6 +5283,7 @@ def validate_memory_consolidation(root: Path) -> None:
             AION200_PROGRAM_STATE,
             AION201_PROGRAM_STATE,
             AION202_PROGRAM_STATE,
+            AION203_PROGRAM_STATE,
         },
         "AION-190 program state mismatch",
     )
@@ -5829,6 +5964,7 @@ def validate_counterfactual_planning(root: Path) -> None:
             AION200_PROGRAM_STATE,
             AION201_PROGRAM_STATE,
             AION202_PROGRAM_STATE,
+            AION203_PROGRAM_STATE,
         },
         "AION-192 program state mismatch",
     )
@@ -6147,10 +6283,13 @@ def validate_counterfactual_planning_closeout(root: Path) -> None:
     aion199_implementation_exists = _aion199_implementation_record_exists(root)
     aion200_closeout_exists = _aion200_closeout_record_exists(root)
     aion201_authorization_exists = _aion201_authorization_record_exists(root)
+    aion203_closeout_exists = _aion203_closeout_evidence_exists(root)
     _assert(
         program["active_cognitive_implementation_authorization"]
         == (
-            AION201_AUTHORIZATION_ID
+            None
+            if aion203_closeout_exists
+            else AION201_AUTHORIZATION_ID
             if aion201_authorization_exists
             else None
             if aion200_closeout_exists
@@ -6167,7 +6306,13 @@ def validate_counterfactual_planning_closeout(root: Path) -> None:
     _assert(
         program["program_state"]
         == (
-            (AION202_PROGRAM_STATE if _aion202_pilot_evidence_exists(root) else AION201_PROGRAM_STATE)
+            AION203_PROGRAM_STATE
+            if aion203_closeout_exists
+            else (
+                AION202_PROGRAM_STATE
+                if _aion202_pilot_evidence_exists(root)
+                else AION201_PROGRAM_STATE
+            )
             if aion201_authorization_exists
             else AION200_PROGRAM_STATE
             if aion200_closeout_exists
@@ -6462,10 +6607,17 @@ def validate_information_acquisition(root: Path) -> None:
     aion199_implementation_exists = _aion199_implementation_record_exists(root)
     aion200_closeout_exists = _aion200_closeout_record_exists(root)
     aion201_authorization_exists = _aion201_authorization_record_exists(root)
+    aion203_closeout_exists = _aion203_closeout_evidence_exists(root)
     _assert(
         program["program_state"]
         == (
-            (AION202_PROGRAM_STATE if _aion202_pilot_evidence_exists(root) else AION201_PROGRAM_STATE)
+            AION203_PROGRAM_STATE
+            if aion203_closeout_exists
+            else (
+                AION202_PROGRAM_STATE
+                if _aion202_pilot_evidence_exists(root)
+                else AION201_PROGRAM_STATE
+            )
             if aion201_authorization_exists
             else AION200_PROGRAM_STATE
             if aion200_closeout_exists
@@ -6794,6 +6946,7 @@ def validate_information_acquisition_closeout(root: Path) -> None:
     aion198_authorization_exists = _aion198_authorization_record_exists(root)
     aion200_closeout_exists = _aion200_closeout_record_exists(root)
     aion201_authorization_exists = _aion201_authorization_record_exists(root)
+    aion203_closeout_exists = _aion203_closeout_evidence_exists(root)
     closeout = _find_evaluation_record(
         program["records"],
         AION195_TASK_ID,
@@ -6802,7 +6955,9 @@ def validate_information_acquisition_closeout(root: Path) -> None:
     _assert(closeout["result"] == "PASS", "AION-195 ledger result must pass")
     if aion197_closeout_exists:
         expected_authorization = (
-            AION201_AUTHORIZATION_ID
+            None
+            if aion203_closeout_exists
+            else AION201_AUTHORIZATION_ID
             if aion201_authorization_exists
             else None
             if aion200_closeout_exists
@@ -6830,6 +6985,7 @@ def validate_information_acquisition_closeout(root: Path) -> None:
             AION200_PROGRAM_STATE,
             AION201_PROGRAM_STATE,
             AION202_PROGRAM_STATE,
+            AION203_PROGRAM_STATE,
         },
         "AION-195 program state mismatch",
     )
@@ -7066,9 +7222,12 @@ def validate_continual_learning(root: Path) -> None:
     aion198_authorization_exists = _aion198_authorization_record_exists(root)
     aion200_closeout_exists = _aion200_closeout_record_exists(root)
     aion201_authorization_exists = _aion201_authorization_record_exists(root)
+    aion203_closeout_exists = _aion203_closeout_evidence_exists(root)
     if aion197_closeout_exists:
         expected_authorization = (
-            AION201_AUTHORIZATION_ID
+            None
+            if aion203_closeout_exists
+            else AION201_AUTHORIZATION_ID
             if aion201_authorization_exists
             else None
             if aion200_closeout_exists
@@ -7095,6 +7254,7 @@ def validate_continual_learning(root: Path) -> None:
             AION200_PROGRAM_STATE,
             AION201_PROGRAM_STATE,
             AION202_PROGRAM_STATE,
+            AION203_PROGRAM_STATE,
         },
         "AION-196 program state mismatch",
     )
@@ -7346,10 +7506,13 @@ def validate_integrated_evaluation(root: Path) -> None:
     aion199_implementation_exists = _aion199_implementation_record_exists(root)
     aion200_closeout_exists = _aion200_closeout_record_exists(root)
     aion201_authorization_exists = _aion201_authorization_record_exists(root)
+    aion203_closeout_exists = _aion203_closeout_evidence_exists(root)
     expected_active_authorization = None
     expected_active_count = 0
     expected_program_state = AION197_PROGRAM_STATE
-    if aion201_authorization_exists:
+    if aion203_closeout_exists:
+        expected_program_state = AION203_PROGRAM_STATE
+    elif aion201_authorization_exists:
         expected_program_state = (
             AION202_PROGRAM_STATE
             if _aion202_pilot_evidence_exists(root)
@@ -7455,6 +7618,7 @@ def validate_integrated_evaluation_no_go(root: Path) -> None:
     aion200_closeout_exists = _aion200_closeout_record_exists(root)
     aion201_authorization_exists = _aion201_authorization_record_exists(root)
     aion202_pilot_executed = _aion202_pilot_evidence_exists(root)
+    aion203_closed = _aion203_closeout_evidence_exists(root)
     for relative in sorted(changed):
         path = Path(relative)
         aion197_path_allowed = _aion197_path_allowed(relative)
@@ -7469,6 +7633,7 @@ def validate_integrated_evaluation_no_go(root: Path) -> None:
             aion201_authorization_exists and _aion201_path_allowed(relative)
         )
         aion202_path_allowed = aion202_pilot_executed and _aion202_path_allowed(relative)
+        aion203_path_allowed = aion203_closed and _aion203_path_allowed(relative)
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -7480,6 +7645,7 @@ def validate_integrated_evaluation_no_go(root: Path) -> None:
             or aion200_path_allowed
             or aion201_path_allowed
             or aion202_path_allowed
+            or aion203_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION197_PROHIBITED_PREFIXES),
             f"prohibited AION-197 path changed: {relative}",
         )
@@ -7489,7 +7655,8 @@ def validate_integrated_evaluation_no_go(root: Path) -> None:
             or aion199_path_allowed
             or aion200_path_allowed
             or aion201_path_allowed
-            or aion202_path_allowed,
+            or aion202_path_allowed
+            or aion203_path_allowed,
             f"unexpected AION-197 path changed: {relative}",
         )
 
@@ -7641,8 +7808,11 @@ def validate_shadow_runtime_authorization(root: Path) -> None:
     aion200_closeout_exists = _aion200_closeout_record_exists(root)
     aion201_authorization_exists = _aion201_authorization_record_exists(root)
     aion202_pilot_executed = _aion202_pilot_evidence_exists(root)
+    aion203_closed = _aion203_closeout_evidence_exists(root)
     expected_program_state = AION198_PROGRAM_STATE
-    if aion201_authorization_exists:
+    if aion203_closed:
+        expected_program_state = AION203_PROGRAM_STATE
+    elif aion201_authorization_exists:
         expected_program_state = (
             AION202_PROGRAM_STATE if aion202_pilot_executed else AION201_PROGRAM_STATE
         )
@@ -7652,7 +7822,10 @@ def validate_shadow_runtime_authorization(root: Path) -> None:
         expected_program_state = AION199_PROGRAM_STATE
     expected_active = AION198_AUTHORIZATION_ID
     expected_active_count = 1
-    if aion201_authorization_exists:
+    if aion203_closed:
+        expected_active = None
+        expected_active_count = 0
+    elif aion201_authorization_exists:
         expected_active = AION201_AUTHORIZATION_ID
     elif aion200_closeout_exists:
         expected_active = None
@@ -7768,6 +7941,7 @@ def validate_shadow_runtime_authorization_no_go(root: Path) -> None:
     aion200_closeout_exists = _aion200_closeout_record_exists(root)
     aion201_authorization_exists = _aion201_authorization_record_exists(root)
     aion202_pilot_executed = _aion202_pilot_evidence_exists(root)
+    aion203_closed = _aion203_closeout_evidence_exists(root)
     for relative in sorted(changed):
         path = Path(relative)
         aion198_path_allowed = _aion198_path_allowed(relative)
@@ -7779,6 +7953,7 @@ def validate_shadow_runtime_authorization_no_go(root: Path) -> None:
             aion201_authorization_exists and _aion201_path_allowed(relative)
         )
         aion202_path_allowed = aion202_pilot_executed and _aion202_path_allowed(relative)
+        aion203_path_allowed = aion203_closed and _aion203_path_allowed(relative)
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -7789,6 +7964,7 @@ def validate_shadow_runtime_authorization_no_go(root: Path) -> None:
             or aion200_path_allowed
             or aion201_path_allowed
             or aion202_path_allowed
+            or aion203_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION198_PROHIBITED_PREFIXES),
             f"prohibited AION-198 path changed: {relative}",
         )
@@ -7797,7 +7973,8 @@ def validate_shadow_runtime_authorization_no_go(root: Path) -> None:
             or aion199_path_allowed
             or aion200_path_allowed
             or aion201_path_allowed
-            or aion202_path_allowed,
+            or aion202_path_allowed
+            or aion203_path_allowed,
             f"unexpected AION-198 path changed: {relative}",
         )
 
@@ -8006,9 +8183,13 @@ def validate_shadow_runtime(root: Path) -> None:
     authorization = _load_json(root, "docs/cognitive-architecture/authorization-ledger.json")
     aion200_closeout_exists = _aion200_closeout_record_exists(root)
     aion201_authorization_exists = _aion201_authorization_record_exists(root)
+    aion203_closed = _aion203_closeout_evidence_exists(root)
     expected_program_state = AION199_PROGRAM_STATE
     expected_active = AION198_AUTHORIZATION_ID
-    if aion201_authorization_exists:
+    if aion203_closed:
+        expected_program_state = AION203_PROGRAM_STATE
+        expected_active = None
+    elif aion201_authorization_exists:
         expected_program_state = (
             AION202_PROGRAM_STATE
             if _aion202_pilot_evidence_exists(root)
@@ -8065,6 +8246,7 @@ def validate_shadow_runtime_no_go(root: Path) -> None:
     aion200_closeout_exists = _aion200_closeout_record_exists(root)
     aion201_authorization_exists = _aion201_authorization_record_exists(root)
     aion202_pilot_executed = _aion202_pilot_evidence_exists(root)
+    aion203_closed = _aion203_closeout_evidence_exists(root)
     for relative in sorted(changed):
         path = Path(relative)
         aion199_path_allowed = _aion199_path_allowed(relative)
@@ -8073,6 +8255,7 @@ def validate_shadow_runtime_no_go(root: Path) -> None:
             aion201_authorization_exists and _aion201_path_allowed(relative)
         )
         aion202_path_allowed = aion202_pilot_executed and _aion202_path_allowed(relative)
+        aion203_path_allowed = aion203_closed and _aion203_path_allowed(relative)
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -8082,6 +8265,7 @@ def validate_shadow_runtime_no_go(root: Path) -> None:
             or aion200_path_allowed
             or aion201_path_allowed
             or aion202_path_allowed
+            or aion203_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION199_PROHIBITED_PREFIXES),
             f"prohibited AION-199 path changed: {relative}",
         )
@@ -8089,7 +8273,8 @@ def validate_shadow_runtime_no_go(root: Path) -> None:
             aion199_path_allowed
             or aion200_path_allowed
             or aion201_path_allowed
-            or aion202_path_allowed,
+            or aion202_path_allowed
+            or aion203_path_allowed,
             f"unexpected AION-199 path changed: {relative}",
         )
 
@@ -8648,6 +8833,159 @@ def validate_aion202_pilot_payload(payload: dict[str, Any], root: Path | None = 
         )
 
 
+def validate_aion203_closeout_payload(
+    payload: dict[str, Any],
+    root: Path | None = None,
+) -> None:
+    _assert(payload["schema_version"] == AION203_CLOSEOUT_SCHEMA, "bad AION-203 schema")
+    _assert(payload["program_id"] == PROGRAM_ID, "bad AION-203 program")
+    _assert(payload["task_id"] == AION203_TASK_ID, "bad AION-203 task")
+    _assert(payload["record_kind"] == "final_evaluation_closeout", "bad record kind")
+    _assert(payload["evaluation_id"] == AION203_EVALUATION_ID, "bad evaluation id")
+    _assert(payload["result"] == "PASS", "AION-203 result")
+    _assert(payload["decision"] == AION203_DECISION, "AION-203 decision")
+    _assert(payload["closed_authorization_id"] == AION201_AUTHORIZATION_ID, "closed auth")
+    _assert(payload["evaluated_task"] == AION202_TASK_ID, "evaluated task")
+    _assert(payload["implementation_pr"] == AION202_PR, "AION-202 PR")
+    _assert(payload["implementation_merge_commit"] == AION202_MERGE_COMMIT, "AION-202 merge")
+    _assert(payload["new_authorization_id"] is None, "AION-203 must not create auth")
+    _assert(payload["authorized_task"] is None, "AION-203 must not authorize task")
+    _assert(
+        payload["active_cognitive_implementation_authorization"] is None,
+        "AION-203 active auth",
+    )
+    _assert(
+        payload["active_cognitive_implementation_authorization_count"] == 0,
+        "AION-203 active count",
+    )
+    _assert(payload["source_modified_by_evaluation"] is False, "source mutation")
+    _assert(payload["runtime_effect"] is False, "runtime effect")
+    _assert(
+        payload["evaluated_artifact"]
+        == "examples/cognitive-architecture/aion-202-controlled-cognitive-pilot.json",
+        "evaluated artifact",
+    )
+    _assert(
+        payload["retained_evidence_path"]
+        == "examples/cognitive-architecture/aion-202-controlled-cognitive-pilot.json",
+        "retained evidence",
+    )
+
+    hard_pass = payload["hard_pass_conditions"]
+    for key in (
+        "approved_pilot_sessions_executed",
+        "prediction_threshold_met",
+        "planning_threshold_met",
+        "information_budgets_met",
+        "repository_unchanged_by_runtime",
+        "kill_switch_verified",
+        "kill_switch_blocked",
+        "temporary_state_cleaned_by_closeout",
+        "redacted_evidence_retained",
+    ):
+        _assert(hard_pass[key] is True, f"{key} must be true")
+    _assert(hard_pass["sessions_executed"] == 10, "sessions")
+    _assert(hard_pass["total_cycles_executed"] == 1000, "cycles")
+    _assert(hard_pass["state_continuity_rate"] == 1.0, "state continuity")
+    _assert(hard_pass["deterministic_replay_rate"] == 1.0, "deterministic replay")
+    _assert(hard_pass["prediction_accuracy"] >= 0.8, "prediction threshold")
+    _assert(hard_pass["planning_success_rate"] >= 0.8, "planning threshold")
+    for key in (
+        "forbidden_side_effects",
+        "policy_violations",
+        "safety_violations",
+        "critical_memory_loss",
+        "unauthorized_promotions",
+        "information_budget_overrun_count",
+        "repository_runtime_mutations",
+    ):
+        _assert(hard_pass[key] == 0, f"{key} must be zero")
+
+    final_state = payload["final_state"]
+    for flag in AION203_FINAL_TRUE_FLAGS:
+        _assert(final_state[flag] is True, f"{flag} must be true")
+    for flag in AION203_FINAL_FALSE_FLAGS:
+        _assert(final_state[flag] is False, f"{flag} must be false")
+    _assert(final_state["active_cognitive_implementation_authorization"] is None, "active auth")
+    _assert(final_state["active_cognitive_implementation_authorization_count"] == 0, "count")
+    _assert(final_state["working_tree_clean"] is True, "working tree clean evidence")
+
+    retention = payload["retention_evidence"]
+    _validate_aion201_local_path(retention["local_state_store_path"])
+    _validate_aion201_local_path(retention["local_output_directory"], directory=True)
+    _assert(retention["state_store_present_before_closeout"] is True, "state before cleanup")
+    _assert(retention["state_store_size_bytes_before_closeout"] == 4411392, "state size")
+    _assert(retention["state_store_latest_sequence_before_closeout"] == 2000, "state sequence")
+    _assert(retention["local_state_store_present_after_closeout"] is False, "state after")
+    _assert(retention["local_output_directory_present_after_closeout"] is False, "output after")
+    _assert(retention["committed_redacted_evidence_retained"] is True, "evidence retained")
+    for key in (
+        "raw_prompt_retention",
+        "hidden_reasoning_retention",
+        "credential_retention",
+        "unredacted_personal_data_retention",
+    ):
+        _assert(retention[key] is False, f"{key} must be false")
+
+    runtime = payload["runtime_boundaries"]
+    for key in (
+        "production_cognitive_runtime_enabled",
+        "production_event_subscription_enabled",
+        "network_access_enabled",
+        "source_rewrite_runtime_enabled",
+        "automatic_merge_enabled",
+        "production_canary_enabled",
+        "production_deployment_enabled",
+        "model_weight_training_enabled",
+        "production_input",
+        "user_traffic",
+        "connector_access",
+        "credential_access",
+        "api_route_added",
+        "kernel_registration_added",
+        "background_loop_added",
+        "scheduler_started",
+        "consequential_action_execution",
+    ):
+        _assert(runtime[key] is False, f"{key} must be false")
+    for key in (
+        "network_calls",
+        "connector_calls",
+        "model_provider_calls",
+        "source_mutations",
+        "git_operations",
+        "pull_requests_created",
+        "approvals_created",
+        "merge_operations",
+        "deployment_operations",
+        "model_weight_changes",
+    ):
+        _assert(runtime[key] == 0, f"{key} must be zero")
+
+    if root is not None:
+        pilot = _load_json(
+            root,
+            "examples/cognitive-architecture/aion-202-controlled-cognitive-pilot.json",
+        )
+        validate_aion202_pilot_payload(pilot, root=root)
+        metrics = pilot["metrics"]
+        _assert(
+            payload["pilot_evidence_fingerprint"] == pilot["pilot_evidence_fingerprint"],
+            "pilot fingerprint",
+        )
+        _assert(hard_pass["state_continuity_rate"] == metrics["state_continuity_rate"], "state")
+        _assert(
+            hard_pass["deterministic_replay_rate"] == metrics["deterministic_replay_rate"],
+            "replay",
+        )
+        _assert(hard_pass["prediction_accuracy"] == metrics["prediction_accuracy"], "prediction")
+        _assert(hard_pass["planning_success_rate"] == metrics["planning_success_rate"], "planning")
+        _assert(
+            (root / payload["retained_evidence_path"]).is_file(),
+            "retained pilot evidence missing",
+        )
+
+
 def validate_shadow_runtime_evaluation(root: Path) -> None:
     validate_shadow_runtime(root)
     validate_required_files(root, AION200_REQUIRED_FILES)
@@ -8808,6 +9146,7 @@ def validate_shadow_runtime_evaluation_no_go(root: Path) -> None:
     changed = _changed_files(root)
     aion201_authorization_exists = _aion201_authorization_record_exists(root)
     aion202_pilot_executed = _aion202_pilot_evidence_exists(root)
+    aion203_closed = _aion203_closeout_evidence_exists(root)
     for relative in sorted(changed):
         path = Path(relative)
         aion200_path_allowed = _aion200_path_allowed(relative)
@@ -8815,6 +9154,7 @@ def validate_shadow_runtime_evaluation_no_go(root: Path) -> None:
             aion201_authorization_exists and _aion201_path_allowed(relative)
         )
         aion202_path_allowed = aion202_pilot_executed and _aion202_path_allowed(relative)
+        aion203_path_allowed = aion203_closed and _aion203_path_allowed(relative)
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -8823,11 +9163,15 @@ def validate_shadow_runtime_evaluation_no_go(root: Path) -> None:
             aion200_path_allowed
             or aion201_path_allowed
             or aion202_path_allowed
+            or aion203_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION200_PROHIBITED_PREFIXES),
             f"prohibited AION-200 path changed: {relative}",
         )
         _assert(
-            aion200_path_allowed or aion201_path_allowed or aion202_path_allowed,
+            aion200_path_allowed
+            or aion201_path_allowed
+            or aion202_path_allowed
+            or aion203_path_allowed,
             f"unexpected AION-200 path changed: {relative}",
         )
 
@@ -8880,19 +9224,31 @@ def validate_local_offline_pilot_authorization(root: Path) -> None:
     program = _load_json(root, "docs/cognitive-architecture/program-ledger.json")
     authorization = _load_json(root, "docs/cognitive-architecture/authorization-ledger.json")
     aion202_executed = _aion202_pilot_evidence_exists(root)
-    expected_program_state = AION202_PROGRAM_STATE if aion202_executed else AION201_PROGRAM_STATE
+    aion203_closed = _aion203_closeout_evidence_exists(root)
+    expected_program_state = (
+        AION203_PROGRAM_STATE
+        if aion203_closed
+        else AION202_PROGRAM_STATE
+        if aion202_executed
+        else AION201_PROGRAM_STATE
+    )
+    expected_active = None if aion203_closed else AION201_AUTHORIZATION_ID
+    expected_count = 0 if aion203_closed else 1
     _assert(program["program_state"] == expected_program_state, "AION-201 program state")
     _assert(
-        program["active_cognitive_implementation_authorization"] == AION201_AUTHORIZATION_ID,
+        program["active_cognitive_implementation_authorization"] == expected_active,
         "AION-201 program active",
     )
     _assert(
-        authorization["active_cognitive_implementation_authorization"] == AION201_AUTHORIZATION_ID,
+        authorization["active_cognitive_implementation_authorization"] == expected_active,
         "AION-201 authorization active",
     )
-    _assert(program["active_cognitive_implementation_authorization_count"] == 1, "program count")
     _assert(
-        authorization["active_cognitive_implementation_authorization_count"] == 1,
+        program["active_cognitive_implementation_authorization_count"] == expected_count,
+        "program count",
+    )
+    _assert(
+        authorization["active_cognitive_implementation_authorization_count"] == expected_count,
         "authorization count",
     )
 
@@ -8916,9 +9272,9 @@ def validate_local_offline_pilot_authorization(root: Path) -> None:
     )
     for record in (program_auth, auth_record):
         _assert(record["task_id"] == AION201_TASK_ID, "AION-201 task id")
-        _assert(record["authorization_active"] is True, "AION-201 active")
-        _assert(record["authorization_consumed"] is False, "AION-201 consumed")
-        _assert(record["authorization_expired"] is False, "AION-201 expired")
+        _assert(record["authorization_active"] is (not aion203_closed), "AION-201 active")
+        _assert(record["authorization_consumed"] is aion203_closed, "AION-201 consumed")
+        _assert(record["authorization_expired"] is aion203_closed, "AION-201 expired")
         _assert(record["authorization_reusable"] is False, "AION-201 reusable")
         _assert(record["authorized_task"] == AION202_TASK_ID, "AION-202 task")
         _assert(record["implementation_branch"] == AION202_IMPLEMENTATION_BRANCH, "branch")
@@ -8926,12 +9282,24 @@ def validate_local_offline_pilot_authorization(root: Path) -> None:
         _assert(record["scope"] == AION202_SCOPE, "scope")
         _assert(record["formal_closeout_task"] == AION203_TASK_ID, "closeout")
         expected_state = (
-            "aion_202_pilot_executed_pending_aion_203_evaluation"
+            "aion_203_evaluation_passed_authorization_closed"
+            if aion203_closed
+            else "aion_202_pilot_executed_pending_aion_203_evaluation"
             if aion202_executed
             else "authorized_pending_aion_202_pilot_execution"
         )
         _assert(record["implementation_state"] == expected_state, "implementation state")
         _assert(record["pilot_executed"] is aion202_executed, "pilot execution state")
+        if aion203_closed:
+            _assert(
+                record["authorization_closed_by_task"] == AION203_TASK_ID,
+                "AION-203 closeout task",
+            )
+            _assert(
+                record["authorization_closeout_evaluation"] == AION203_EVALUATION_ID,
+                "AION-203 closeout evaluation",
+            )
+            _assert(record["evaluation_result"] == "PASS", "AION-203 result")
 
     aion202_records = [
         record
@@ -8964,12 +9332,14 @@ def validate_local_offline_pilot_authorization_no_go(root: Path) -> None:
     validate_local_offline_pilot_authorization(root)
     validate_no_go(root)
     changed = _changed_files(root)
+    aion203_closed = _aion203_closeout_evidence_exists(root)
     for relative in sorted(changed):
         path = Path(relative)
         aion201_path_allowed = _aion201_path_allowed(relative)
         aion202_path_allowed = _aion202_pilot_evidence_exists(root) and _aion202_path_allowed(
             relative
         )
+        aion203_path_allowed = aion203_closed and _aion203_path_allowed(relative)
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
@@ -8977,11 +9347,12 @@ def validate_local_offline_pilot_authorization_no_go(root: Path) -> None:
         _assert(
             aion201_path_allowed
             or aion202_path_allowed
+            or aion203_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION201_PROHIBITED_PREFIXES),
             f"prohibited AION-201 path changed: {relative}",
         )
         _assert(
-            aion201_path_allowed or aion202_path_allowed,
+            aion201_path_allowed or aion202_path_allowed or aion203_path_allowed,
             f"unexpected AION-201 path changed: {relative}",
         )
 
@@ -9032,17 +9403,21 @@ def validate_local_offline_pilot_execution(root: Path) -> None:
 
     program = _load_json(root, "docs/cognitive-architecture/program-ledger.json")
     authorization = _load_json(root, "docs/cognitive-architecture/authorization-ledger.json")
-    _assert(program["program_state"] == AION202_PROGRAM_STATE, "AION-202 program state")
+    aion203_closed = _aion203_closeout_evidence_exists(root)
+    expected_program_state = AION203_PROGRAM_STATE if aion203_closed else AION202_PROGRAM_STATE
+    expected_active = None if aion203_closed else AION201_AUTHORIZATION_ID
+    expected_count = 0 if aion203_closed else 1
+    _assert(program["program_state"] == expected_program_state, "AION-202 program state")
     _assert(
-        program["active_cognitive_implementation_authorization"] == AION201_AUTHORIZATION_ID,
+        program["active_cognitive_implementation_authorization"] == expected_active,
         "AION-202 active auth",
     )
     _assert(
-        authorization["active_cognitive_implementation_authorization"] == AION201_AUTHORIZATION_ID,
+        authorization["active_cognitive_implementation_authorization"] == expected_active,
         "AION-202 auth ledger active",
     )
-    _assert(program["active_cognitive_implementation_authorization_count"] == 1, "count")
-    _assert(authorization["active_cognitive_implementation_authorization_count"] == 1, "count")
+    _assert(program["active_cognitive_implementation_authorization_count"] == expected_count, "count")
+    _assert(authorization["active_cognitive_implementation_authorization_count"] == expected_count, "count")
 
     program_auth = _find_authorization_record(program["records"], AION201_AUTHORIZATION_ID)
     auth_record = _find_record(
@@ -9051,15 +9426,19 @@ def validate_local_offline_pilot_execution(root: Path) -> None:
         AION201_AUTHORIZATION_ID,
     )
     for record in (program_auth, auth_record):
-        _assert(record["authorization_active"] is True, "AION-201 active")
-        _assert(record["authorization_consumed"] is False, "AION-201 consumed")
-        _assert(record["authorization_expired"] is False, "AION-201 expired")
+        _assert(record["authorization_active"] is (not aion203_closed), "AION-201 active")
+        _assert(record["authorization_consumed"] is aion203_closed, "AION-201 consumed")
+        _assert(record["authorization_expired"] is aion203_closed, "AION-201 expired")
         _assert(record["authorization_reusable"] is False, "AION-201 reusable")
         _assert(record["authorized_task"] == AION202_TASK_ID, "AION-202 task")
         _assert(record["pilot_executed"] is True, "pilot executed")
+        expected_implementation_state = (
+            "aion_203_evaluation_passed_authorization_closed"
+            if aion203_closed
+            else "aion_202_pilot_executed_pending_aion_203_evaluation"
+        )
         _assert(
-            record["implementation_state"]
-            == "aion_202_pilot_executed_pending_aion_203_evaluation",
+            record["implementation_state"] == expected_implementation_state,
             "implementation state",
         )
         _assert(record["formal_closeout_task"] == AION203_TASK_ID, "closeout task")
@@ -9067,6 +9446,12 @@ def validate_local_offline_pilot_execution(root: Path) -> None:
             record["authorization_closeout_evaluation"] == AION203_EVALUATION_ID,
             "closeout evaluation",
         )
+        if aion203_closed:
+            _assert(
+                record["authorization_closed_by_task"] == AION203_TASK_ID,
+                "closeout task",
+            )
+            _assert(record["evaluation_result"] == "PASS", "closeout result")
 
     aion202_execution_records = [
         record
@@ -9082,10 +9467,17 @@ def validate_local_offline_pilot_execution(root: Path) -> None:
     _assert(execution["candidate_id"] == AION202_CANDIDATE_ID, "AION-202 candidate")
     _assert(execution["scope"] == AION202_SCOPE, "AION-202 scope")
     _assert(execution["implementation_branch"] == AION202_IMPLEMENTATION_BRANCH, "branch")
-    _assert(
-        execution["task_state"] == "pilot_executed_pending_aion_203_evaluation",
-        "task state",
+    expected_task_state = (
+        "pilot_executed_evaluated_passed_program_complete"
+        if aion203_closed
+        else "pilot_executed_pending_aion_203_evaluation"
     )
+    _assert(execution["task_state"] == expected_task_state, "task state")
+    if aion203_closed:
+        _assert(execution["pr"] == AION202_PR, "AION-202 PR")
+        _assert(execution["merge_commit"] == AION202_MERGE_COMMIT, "AION-202 merge")
+        _assert(execution["evaluation_result"] == "PASS", "AION-202 evaluation result")
+        _assert(execution["evaluated_by_task"] == AION203_TASK_ID, "AION-203 evaluation task")
     _assert(execution["pilot_executed"] is True, "pilot execution")
     _assert(execution["sessions_executed"] == 10, "sessions")
     _assert(execution["total_cycles_executed"] == 1000, "cycles")
@@ -9138,19 +9530,188 @@ def validate_local_offline_pilot_execution_no_go(root: Path) -> None:
     validate_local_offline_pilot_execution(root)
     validate_no_go(root)
     changed = _changed_files(root)
+    aion203_closed = _aion203_closeout_evidence_exists(root)
     for relative in sorted(changed):
         path = Path(relative)
         aion202_path_allowed = _aion202_path_allowed(relative)
+        aion203_path_allowed = aion203_closed and _aion203_path_allowed(relative)
         _assert(
             path.name not in AION184_BLOCKED_FILENAMES,
             f"blocked package or dependency file changed: {relative}",
         )
         _assert(
             aion202_path_allowed
+            or aion203_path_allowed
             or not any(relative.startswith(prefix) for prefix in AION202_PROHIBITED_PREFIXES),
             f"prohibited AION-202 path changed: {relative}",
         )
-        _assert(aion202_path_allowed, f"unexpected AION-202 path changed: {relative}")
+        _assert(
+            aion202_path_allowed or aion203_path_allowed,
+            f"unexpected AION-202 path changed: {relative}",
+        )
+
+
+def validate_local_offline_pilot_closeout(root: Path) -> None:
+    validate_local_offline_pilot_execution(root)
+    validate_required_files(root, AION203_REQUIRED_FILES)
+    validate_no_claim_terms(
+        root,
+        (
+            root / "docs/cognitive-architecture/tasks/AION-203.md",
+            root
+            / "services/brain-api/tests/test_cognitive_local_offline_pilot_closeout_docs.py",
+        ),
+    )
+    payload = _load_json(
+        root,
+        "examples/cognitive-architecture/aion-203-cognitive-pilot-evaluation-closeout.json",
+    )
+    validate_aion203_closeout_payload(payload, root=root)
+
+    task_doc = (root / "docs/cognitive-architecture/tasks/AION-203.md").read_text()
+    for section in (
+        "## Task Purpose",
+        "## Authorization ID",
+        "## Exact Scope",
+        "## Role Comparison",
+        "## Source Boundaries",
+        "## Required Contracts",
+        "## Required Services",
+        "## Required Tests",
+        "## Required Gates",
+        "## Security Invariants",
+        "## Performance Limits",
+        "## Completion Conditions",
+        "## Final State",
+        "## Next Task",
+    ):
+        _assert(section in task_doc, f"AION-203 task doc missing {section}")
+    for term in (
+        AION201_AUTHORIZATION_ID,
+        AION202_TASK_ID,
+        str(AION202_PR),
+        AION202_MERGE_COMMIT,
+        AION203_EVALUATION_ID,
+        AION203_DECISION,
+        "state continuity=100%",
+        "deterministic replay=100%",
+        "temporary local pilot state cleaned",
+        "production_cognitive_runtime_enabled=false",
+        "network_access_enabled=false",
+        "source_rewrite_runtime_enabled=false",
+        "automatic_merge_enabled=false",
+        "production_deployment_enabled=false",
+        "model_weight_training_enabled=false",
+    ):
+        _assert(term in task_doc, f"AION-203 task doc missing {term}")
+
+    program = _load_json(root, "docs/cognitive-architecture/program-ledger.json")
+    authorization = _load_json(root, "docs/cognitive-architecture/authorization-ledger.json")
+    _assert(program["program_state"] == AION203_PROGRAM_STATE, "AION-203 program state")
+    _assert(
+        program["active_cognitive_implementation_authorization"] is None,
+        "program active auth",
+    )
+    _assert(
+        authorization["active_cognitive_implementation_authorization"] is None,
+        "authorization active auth",
+    )
+    _assert(program["active_cognitive_implementation_authorization_count"] == 0, "count")
+    _assert(authorization["active_cognitive_implementation_authorization_count"] == 0, "count")
+    for flag in AION203_FINAL_TRUE_FLAGS:
+        _assert(program[flag] is True, f"program {flag}")
+        _assert(authorization[flag] is True, f"authorization {flag}")
+    for flag in AION203_FINAL_FALSE_FLAGS:
+        _assert(program[flag] is False, f"program {flag}")
+        _assert(authorization[flag] is False, f"authorization {flag}")
+
+    program_auth = _find_authorization_record(program["records"], AION201_AUTHORIZATION_ID)
+    auth_record = _find_record(
+        authorization["records"],
+        "authorization_id",
+        AION201_AUTHORIZATION_ID,
+    )
+    for record in (program_auth, auth_record):
+        _assert(record["authorization_active"] is False, "AION-201 closed")
+        _assert(record["authorization_consumed"] is True, "AION-201 consumed")
+        _assert(record["authorization_expired"] is True, "AION-201 expired")
+        _assert(record["authorization_reusable"] is False, "AION-201 reusable")
+        _assert(record["authorization_closed_by_task"] == AION203_TASK_ID, "closed task")
+        _assert(
+            record["authorization_closeout_evaluation"] == AION203_EVALUATION_ID,
+            "closed evaluation",
+        )
+        _assert(record["evaluation_result"] == "PASS", "closeout result")
+        _assert(
+            record["implementation_state"] == "aion_203_evaluation_passed_authorization_closed",
+            "implementation state",
+        )
+        _assert(record["pilot_executed"] is True, "pilot executed")
+        _assert(record["pilot_passed"] is True, "pilot passed")
+        _assert(record["pilot_evidence_artifact"] == payload["evaluated_artifact"], "artifact")
+
+    execution_matches = [
+        record
+        for record in program["records"]
+        if record.get("record_kind") == "implementation"
+        and record.get("implementation_task") == AION202_TASK_ID
+    ]
+    _assert(len(execution_matches) == 1, "AION-202 execution record")
+    execution = execution_matches[0]
+    _assert(
+        execution["task_state"] == "pilot_executed_evaluated_passed_program_complete",
+        "AION-202 state",
+    )
+    _assert(execution["pr"] == AION202_PR, "AION-202 PR")
+    _assert(execution["merge_commit"] == AION202_MERGE_COMMIT, "AION-202 merge")
+    _assert(execution["evaluation_result"] == "PASS", "AION-202 result")
+    _assert(execution["evaluated_by_task"] == AION203_TASK_ID, "AION-203 evaluated task")
+
+    closeout = _find_evaluation_record(
+        program["records"],
+        AION203_TASK_ID,
+        AION203_EVALUATION_ID,
+    )
+    _assert(closeout["result"] == "PASS", "AION-203 result")
+    _assert(closeout["decision"] == AION203_DECISION, "AION-203 decision")
+    _assert(closeout["closed_authorization_id"] == AION201_AUTHORIZATION_ID, "closed auth")
+    _assert(closeout["evaluated_task"] == AION202_TASK_ID, "evaluated task")
+    _assert(closeout["implementation_pr"] == AION202_PR, "implementation PR")
+    _assert(closeout["implementation_merge_commit"] == AION202_MERGE_COMMIT, "merge")
+    _assert(closeout["new_authorization_id"] is None, "no new auth")
+    _assert(closeout["authorized_task"] is None, "no authorized task")
+    _assert(closeout["active_cognitive_implementation_authorization_count"] == 0, "count")
+
+    _assert(
+        not (root / "services/brain-api/src/aion_brain/api/cognitive_runtime.py").exists(),
+        "AION-203 must not add a cognitive runtime API route",
+    )
+    for path in (
+        root / "services/brain-api/src/aion_brain/kernel/container.py",
+        root / "services/brain-api/src/aion_brain/kernel/diagnostics.py",
+    ):
+        text = path.read_text()
+        _assert("ControlledCognitiveShadowRuntime" not in text, "runtime registration")
+        _assert("aion_brain.cognitive_runtime" not in text, "runtime import")
+
+
+def validate_local_offline_pilot_closeout_no_go(root: Path) -> None:
+    validate_local_offline_pilot_closeout(root)
+    validate_no_go(root)
+    changed = _changed_files(root)
+    for relative in sorted(changed):
+        path = Path(relative)
+        aion203_path_allowed = _aion203_path_allowed(relative)
+        _assert(
+            path.name not in AION184_BLOCKED_FILENAMES,
+            f"blocked package or dependency file changed: {relative}",
+        )
+        _assert(
+            aion203_path_allowed
+            or not any(relative.startswith(prefix) for prefix in AION203_PROHIBITED_PREFIXES),
+            f"prohibited AION-203 path changed: {relative}",
+        )
+        _assert(aion203_path_allowed, f"unexpected AION-203 path changed: {relative}")
 
 
 def _aion184_path_allowed(relative: str) -> bool:
@@ -9267,13 +9828,28 @@ def _aion202_path_allowed(relative: str) -> bool:
     )
 
 
+def _aion203_path_allowed(relative: str) -> bool:
+    return relative in AION203_ALLOWED_EXACT_PATHS or any(
+        relative.startswith(prefix) for prefix in AION203_ALLOWED_PREFIXES
+    )
+
+
 def _aion202_pilot_evidence_exists(root: Path) -> bool:
     return (
         root / "examples/cognitive-architecture/aion-202-controlled-cognitive-pilot.json"
     ).is_file()
 
 
+def _aion203_closeout_evidence_exists(root: Path) -> bool:
+    return (
+        root
+        / "examples/cognitive-architecture/aion-203-cognitive-pilot-evaluation-closeout.json"
+    ).is_file()
+
+
 def _expected_latest_program_state(root: Path, fallback: str) -> str:
+    if _aion203_closeout_evidence_exists(root):
+        return AION203_PROGRAM_STATE
     if _aion202_pilot_evidence_exists(root):
         return AION202_PROGRAM_STATE
     if _aion201_authorization_record_exists(root):
@@ -9282,12 +9858,16 @@ def _expected_latest_program_state(root: Path, fallback: str) -> str:
 
 
 def _expected_latest_active_authorization(root: Path) -> str | None:
+    if _aion203_closeout_evidence_exists(root):
+        return None
     if _aion201_authorization_record_exists(root):
         return AION201_AUTHORIZATION_ID
     return None
 
 
 def _expected_latest_active_authorization_count(root: Path) -> int:
+    if _aion203_closeout_evidence_exists(root):
+        return 0
     return 1 if _aion201_authorization_record_exists(root) else 0
 
 
@@ -9516,6 +10096,8 @@ def main() -> int:
             "local-offline-pilot-authorization-no-go",
             "local-offline-pilot",
             "local-offline-pilot-no-go",
+            "local-offline-pilot-closeout",
+            "local-offline-pilot-closeout-no-go",
         ),
         default="authorization",
     )
@@ -9638,6 +10220,12 @@ def main() -> int:
     elif args.mode == "local-offline-pilot":
         validate_local_offline_pilot_execution(root)
         print("cognitive local-offline pilot validation PASS")
+    elif args.mode == "local-offline-pilot-closeout":
+        validate_local_offline_pilot_closeout(root)
+        print("cognitive local-offline pilot closeout validation PASS")
+    elif args.mode == "local-offline-pilot-closeout-no-go":
+        validate_local_offline_pilot_closeout_no_go(root)
+        print("cognitive local-offline pilot closeout no-go validation PASS")
     else:
         validate_local_offline_pilot_execution_no_go(root)
         print("cognitive local-offline pilot no-go validation PASS")

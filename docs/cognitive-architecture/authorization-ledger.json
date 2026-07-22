@@ -1,10 +1,28 @@
 {
-  "active_cognitive_implementation_authorization": "AION-201-CA-0009",
-  "active_cognitive_implementation_authorization_count": 1,
+  "active_cognitive_implementation_authorization": null,
+  "active_cognitive_implementation_authorization_count": 0,
+  "active_information_acquisition_available": true,
   "approval_created": false,
+  "automatic_merge_enabled": false,
+  "cognitive_architecture_implemented": true,
+  "cognitive_architecture_program_complete": true,
+  "controlled_local_offline_pilot_passed": true,
   "created_by_task": "AION-183",
   "git_mutated_by_runtime": false,
+  "global_cognitive_workspace_available": true,
+  "governed_continual_learning_available": true,
+  "hierarchical_counterfactual_planning_available": true,
+  "integrated_cognitive_shadow_runtime_available": true,
+  "memory_consolidation_available": true,
+  "model_weight_training_enabled": false,
   "model_weights_changed": false,
+  "network_access_enabled": false,
+  "persistent_cognitive_state_available": true,
+  "predictive_world_model_available": true,
+  "production_canary_enabled": false,
+  "production_cognitive_runtime_enabled": false,
+  "production_deployment_enabled": false,
+  "production_event_subscription_enabled": false,
   "production_exposure": false,
   "program_id": "AION-COGNITIVE-ARCHITECTURE-001",
   "pull_request_created_by_runtime": false,
@@ -959,6 +977,7 @@
       "workstream": "cognitive-shadow-runtime"
     },
     {
+      "active_cognitive_implementation_authorization_count": 0,
       "aion199_implementation_commit": "c1479e805ee95e11f7f2d8719607189ccbf9ed4b",
       "aion199_implementation_merge_commit": "cf1fd2ca6a45aeb3e034a95799edf9833ca24b14",
       "aion200_evaluation_fingerprint": {
@@ -975,10 +994,11 @@
         "scripts/lib/cognitive_architecture_governance.py"
       ],
       "approval_created": false,
-      "authorization_active": true,
+      "authorization_active": false,
+      "authorization_closed_by_task": "AION-203",
       "authorization_closeout_evaluation": "AION-CASE-001",
-      "authorization_consumed": false,
-      "authorization_expired": false,
+      "authorization_consumed": true,
+      "authorization_expired": true,
       "authorization_id": "AION-201-CA-0009",
       "authorization_reusable": false,
       "authorized_capabilities": [
@@ -1000,6 +1020,7 @@
         "repository_integrity_evidence"
       ],
       "authorized_task": "AION-202",
+      "automatic_merge_enabled": false,
       "benchmark_requirements": {
         "manifest_id": "aion-201-local-offline-pilot-benchmark-v1",
         "required_evidence": [
@@ -1032,15 +1053,21 @@
         }
       },
       "candidate_id": "controlled-local-offline-cognitive-pilot",
+      "evaluation_result": "PASS",
       "expiry_condition": "AION-202 pilot evidence merge followed by AION-203 evaluation closeout",
       "formal_closeout_evaluation": "AION-CASE-001",
       "formal_closeout_task": "AION-203",
       "git_mutated": false,
       "implementation_branch": "phase/cognitive-local-offline-pilot",
-      "implementation_state": "aion_202_pilot_executed_pending_aion_203_evaluation",
+      "implementation_merge_commit": "b93fde4bb195573702f10c1807a23e65f6d55eb2",
+      "implementation_pr": 113,
+      "implementation_state": "aion_203_evaluation_passed_authorization_closed",
       "implementation_task": "AION-202",
       "merged": false,
+      "model_weight_training_enabled": false,
       "model_weights_changed": false,
+      "network_access_enabled": false,
+      "new_authorization_id": null,
       "parent_commit": "ca1f7eb4b72b65fd7f32cfeae08a065d9054d6ec",
       "parent_decision": "COGNITIVE_SHADOW_RUNTIME_EVALUATION_PASS_RECOMMEND_CONTROLLED_LOCAL_OFFLINE_PILOT_AUTHORIZATION_REVIEW",
       "parent_evaluation": "AION-CSE-001",
@@ -1172,6 +1199,8 @@
           "user_traffic": false
         }
       },
+      "pilot_closeout_evaluation": "AION-CASE-001",
+      "pilot_evaluation_task": "AION-203",
       "pilot_evidence_artifact": "examples/cognitive-architecture/aion-202-controlled-cognitive-pilot.json",
       "pilot_evidence_fingerprint": "7a3f41d466b2eb1e2e432a1c7f4fea63483d6e9afa169a1db7301ccae7ce5b7c",
       "pilot_executed": true,
@@ -1195,8 +1224,11 @@
         "uncertainty_calibration_mean_absolute_error": 0.1125,
         "workspace_decision_rate": 1.0
       },
+      "pilot_passed": true,
       "pilot_sessions_executed": 10,
       "pilot_total_cycles_executed": 1000,
+      "production_cognitive_runtime_enabled": false,
+      "production_deployment_enabled": false,
       "production_exposure": false,
       "program_id": "AION-COGNITIVE-ARCHITECTURE-001",
       "prohibited_behaviors": [
@@ -1238,7 +1270,7 @@
         "packages/aion-sdk-python/src/"
       ],
       "pull_request_created": false,
-      "record_kind": "implementation_authorization",
+      "record_kind": "implementation_authorization_closeout",
       "required_contracts": [
         "CognitiveSessionManifest",
         "CognitiveSessionState",
@@ -1349,11 +1381,14 @@
         "pilot_evidence_redacted"
       ],
       "source_modified": false,
+      "source_rewrite_runtime_enabled": false,
       "task_id": "AION-201",
+      "task_state": "closed_by_aion_203_passed",
       "workstream": "controlled-local-offline-pilot"
     }
   ],
   "runtime_effect": false,
   "schema_version": "aion-cognitive-architecture-authorization-ledger/v1",
-  "source_modified_by_runtime": false
+  "source_modified_by_runtime": false,
+  "source_rewrite_runtime_enabled": false
 }
