@@ -42,14 +42,28 @@ else
   ./scripts/boundary-check.sh
 fi
 
-cat <<'SUMMARY'
+read -r ACTIVE_AUTHORIZATION ACTIVE_AUTHORIZATION_COUNT PROGRAM_STATE <<SUMMARY_FIELDS
+$("$PYTHON_BIN" - <<'PY'
+import json
+from pathlib import Path
+
+program = json.loads(Path("docs/cognitive-architecture/program-ledger.json").read_text())
+print(
+    program["active_cognitive_implementation_authorization"] or "none",
+    program["active_cognitive_implementation_authorization_count"],
+    program["program_state"],
+)
+PY
+)
+SUMMARY_FIELDS
+
+cat <<SUMMARY
 cognitive architecture authorization result:
 - program_id=AION-COGNITIVE-ARCHITECTURE-001
 - closed_authorization=AION-183-CA-0001
-- active_authorization=AION-185-CA-0002
-- authorized_task=AION-186
-- candidate=predictive-world-model-core
-- active implementation authorization count=1
+- active_authorization=$ACTIVE_AUTHORIZATION
+- program_state=$PROGRAM_STATE
+- active implementation authorization count=$ACTIVE_AUTHORIZATION_COUNT
 - production cognitive runtime disabled
 - network access, connector access, provider access, source rewrite, runtime Git mutation, approval creation, merge, deployment, canary, and model-weight training disabled
 cognitive architecture authorization PASS
