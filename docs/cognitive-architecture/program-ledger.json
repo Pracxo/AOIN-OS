@@ -1,6 +1,6 @@
 {
-  "active_cognitive_implementation_authorization": null,
-  "active_cognitive_implementation_authorization_count": 0,
+  "active_cognitive_implementation_authorization": "AION-198-CA-0008",
+  "active_cognitive_implementation_authorization_count": 1,
   "created_by_task": "AION-183",
   "final_planned_task": "AION-203",
   "model_weights_changed": false,
@@ -10,7 +10,7 @@
   "production_event_subscription_enabled": false,
   "program_id": "AION-COGNITIVE-ARCHITECTURE-001",
   "program_name": "AION Cognitive Architecture Program",
-  "program_state": "integrated_cognitive_architecture_evaluated_shadow_runtime_authorization_review_recommended",
+  "program_state": "integrated_cognitive_shadow_runtime_authorized_pending_implementation",
   "records": [
     {
       "authorization_id": "AION-180-SI-0007",
@@ -362,6 +362,31 @@
       "task_id": "AION-197",
       "task_state": "passed_recommended_aion_198_authorization_review",
       "unauthorized_promotions": 0
+    },
+    {
+      "record_kind": "authorization",
+      "task_id": "AION-198",
+      "authorization_id": "AION-198-CA-0008",
+      "authorized_task": "AION-199",
+      "candidate_id": "integrated-cognitive-shadow-runtime",
+      "workstream": "cognitive-shadow-runtime",
+      "scope": "operator-invoked-local-offline-integrated-cognitive-shadow-runtime",
+      "parent_task": "AION-197",
+      "parent_evaluation": "AION-CAE-001",
+      "parent_pr": 108,
+      "parent_commit": "770a195eae98de12a67370c790f2c7eb36e91aec",
+      "parent_decision": "INTEGRATED_COGNITIVE_ARCHITECTURE_EVALUATION_PASS_RECOMMEND_SHADOW_RUNTIME_AUTHORIZATION_REVIEW",
+      "implementation_branch": "phase/cognitive-shadow-runtime",
+      "closeout_task": "AION-200",
+      "evaluation_id": "AION-CSE-001",
+      "task_state": "authorized_aion_199_pending_implementation",
+      "authorization_active": true,
+      "authorization_consumed": false,
+      "authorization_expired": false,
+      "authorization_reusable": false,
+      "runtime_effect": false,
+      "source_modified_by_authorization": false,
+      "forbidden_side_effects": 0
     }
   ],
   "schema_version": "aion-cognitive-architecture-program-ledger/v1",
