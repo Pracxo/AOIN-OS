@@ -25,6 +25,9 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION198_TASK_ID,
     AION199_PROGRAM_STATE,
     AION199_TASK_ID,
+    AION200_EVALUATION_ID,
+    AION200_PROGRAM_STATE,
+    AION200_TASK_ID,
     INTEGRATED_EVALUATION_CYCLE_STEPS,
     INTEGRATED_EVALUATION_ENVIRONMENT_FACTORS,
     INTEGRATED_EVALUATION_REQUIRED_METRICS,
@@ -129,10 +132,20 @@ def test_aion_197_ledgers_close_aion_195_without_new_authorization() -> None:
         record.get("implementation_task") == AION199_TASK_ID
         for record in program["records"]
     )
+    aion200_evaluated = any(
+        record.get("task_id") == AION200_TASK_ID
+        and record.get("evaluation_id") == AION200_EVALUATION_ID
+        for record in program["records"]
+    )
     expected_active = AION198_AUTHORIZATION_ID if aion198_authorized else None
     expected_count = 1 if aion198_authorized else 0
+    if aion200_evaluated:
+        expected_active = None
+        expected_count = 0
     expected_program_state = AION197_PROGRAM_STATE
-    if aion199_implemented:
+    if aion200_evaluated:
+        expected_program_state = AION200_PROGRAM_STATE
+    elif aion199_implemented:
         expected_program_state = AION199_PROGRAM_STATE
     elif aion198_authorized:
         expected_program_state = AION198_PROGRAM_STATE
@@ -185,8 +198,12 @@ def test_aion_197_ledgers_close_aion_195_without_new_authorization() -> None:
             for record in authorization["records"]
             if record.get("authorization_id") == AION198_AUTHORIZATION_ID
         )
-        assert aion198["record_kind"] == "implementation_authorization"
-        assert aion198["authorization_active"] is True
+        assert aion198["record_kind"] == (
+            "implementation_authorization_closeout"
+            if aion200_evaluated
+            else "implementation_authorization"
+        )
+        assert aion198["authorization_active"] is (not aion200_evaluated)
         assert aion198["implementation_task"] == AION199_TASK_ID
         program_aion198 = next(
             record
