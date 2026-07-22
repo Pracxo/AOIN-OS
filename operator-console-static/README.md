@@ -1206,3 +1206,22 @@ AION-182 adds static, read-only demo evidence for the disabled shadow activation
 - `demo-data/self-improvement-actual-shadow-activation-review-boundary.json`
 
 The panels render local JSON only. They do not activate shadow mode, create approval, create authorization, call a backend, call a provider or connector, write source, mutate Git, create a PR, merge, deploy, train a model, or store protected values.
+
+
+## Knowledge Intelligence Evidence
+
+AION-204 adds bundled read-only Knowledge Intelligence evidence:
+
+- `demo-data/knowledge-intelligence-program.json`
+- `demo-data/knowledge-intelligence-research-authorization.json`
+- `demo-data/knowledge-intelligence-research-runtime-hold.json`
+
+The console only renders static JSON. It does not call the backend for research, fetch live URLs, start a crawler, use credentials, integrate a search provider, integrate a connector, promote knowledge, mutate cognitive beliefs, mutate source, write Git state, create pull requests, merge, deploy, or train model weights.
+
+Safe local commands:
+
+```bash
+./scripts/knowledge-intelligence-research-authorization-no-go-regression.sh
+./scripts/knowledge-intelligence-research-authorization-check.sh
+./scripts/knowledge-intelligence-research-runtime-hold.sh
+```

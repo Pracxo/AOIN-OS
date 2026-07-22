@@ -86,13 +86,14 @@ def test_aion180_scripts_are_executable() -> None:
 def test_project_status_reports_aion180_current_state() -> None:
     text = _text("docs/project-status.md")
     current = text.split("## Historical Compatibility Markers", 1)[0]
-    assert "AION-182 shadow activation control-plane operator evaluation complete" in current
-    assert "Activation control plane implemented, evaluated, and disabled" in current
-    assert "AION-180-SI-0007 is closed" in current
-    assert "active self-improvement implementation authorization count: 0" in current
-    assert "active self-improvement implementation authorization: `none`" in current
-    assert "active implementation task: `none`" in current
-    assert "actual activation created: `false`" in current
+    historical = text.split("## Historical Compatibility Markers", 1)[1]
+    assert "AION-204 Cognitive Architecture closeout reconciliation" in current
+    assert "Knowledge Intelligence research plane authorized and not implemented" in current
+    assert "active self-improvement implementation authorization count is zero" in current
+    assert "`knowledge_research_runtime_enabled=false`" in current
+    assert "`active_knowledge_implementation_task=AION-205`" in current
+    assert "AION-180-SI-0007" in historical
+    assert "AION-182 later closed AION-180-SI-0007" in historical
 
 
 def _json(relative: str) -> dict[str, Any]:

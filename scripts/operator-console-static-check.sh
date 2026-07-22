@@ -550,6 +550,33 @@ for path in sorted(demo_dir.glob("*.json")):
         if payload.get("next_authorization_must_be_separate") is not True:
             raise SystemExit(f"actual shadow activation review must require separate authorization: {path}")
         continue
+    if path.name.startswith("knowledge-intelligence-"):
+        if path.name not in {
+            "knowledge-intelligence-program.json",
+            "knowledge-intelligence-research-authorization.json",
+            "knowledge-intelligence-research-runtime-hold.json",
+        }:
+            raise SystemExit(f"unknown knowledge intelligence demo: {path}")
+        if payload.get("read_only") is not True:
+            raise SystemExit(f"knowledge intelligence demo must be read_only: {path}")
+        redaction_applied = payload.get("redaction_applied")
+        redacted = payload.get("redacted")
+        if redaction_applied is not True and redacted is not True:
+            raise SystemExit(f"knowledge intelligence demo must be redacted: {path}")
+        for key in (
+            "research_plane_implemented",
+            "research_runtime_enabled",
+            "network_access_enabled",
+            "runtime_effect",
+        ):
+            if payload.get(key) is not False:
+                raise SystemExit(f"knowledge intelligence runtime flag must be false: {key}: {path}")
+        runtime_hold = payload.get("runtime_hold", {})
+        if isinstance(runtime_hold, dict):
+            for key, value in runtime_hold.items():
+                if value is not False:
+                    raise SystemExit(f"knowledge intelligence hold flag must be false: {key}: {path}")
+        continue
     if payload.get("read_only") is not True:
         raise SystemExit(f"read_only must be true: {path}")
     if payload.get("redaction_applied") is not True:

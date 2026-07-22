@@ -139,27 +139,17 @@ def test_runtime_safety_flags_remain_disabled() -> None:
 def test_project_status_describes_current_shadow_authorization_state() -> None:
     text = _text("docs/project-status.md")
     current_text = _project_status_current_text()
+    historical_text = text.split("## Historical Compatibility Markers", 1)[1]
 
-    assert "AION-182 shadow activation control-plane operator evaluation complete" in text
-    assert "Current stage: Activation control plane implemented, evaluated, and disabled" in text
-    assert "`self_improvement_platform_state=implemented_disabled`" in text
-    assert "`shadow_mode_implemented=true`" in text
-    assert "`shadow_mode_operator_evaluation_passed=true`" in text
-    assert "`shadow_mode_runtime_enabled=false`" in text
-    assert "`shadow_activation_control_plane_authorized_historically=true`" in text
-    assert "`shadow_activation_control_plane_implemented=true`" in text
-    assert "`shadow_activation_control_plane_operator_evaluation_passed=true`" in text
-    assert "`shadow_activation_control_plane_state=implemented_disabled_simulation_only`" in text
-    assert "`shadow_activation_enabled=false`" in text
-    assert "`actual_activation_available=false`" in text
-    assert "active self-improvement implementation authorization count: 0" in text
-    assert "active self-improvement implementation authorization: `none`" in text
-    assert "active implementation task: `none`" in text
-    assert "new implementation authorization created: `false`" in text
-    assert "activation approval created: `false`" in text
-    assert "actual activation created: `false`" in text
-    assert "AION-180-SI-0007 is closed, consumed by AION-181" in text
-    assert "AION-SACE-001 passed as evidence only and is not approval" in text
+    assert "AION-204 Cognitive Architecture closeout reconciliation" in current_text
+    assert "Knowledge Intelligence research plane authorized and not implemented" in current_text
+    assert "active self-improvement implementation authorization count is zero" in current_text
+    assert "`knowledge_research_runtime_enabled=false`" in current_text
+    assert "`network_access_enabled=false`" in current_text
+    assert "`active_knowledge_implementation_authorization=AION-204-KI-0001`" in current_text
+    assert "`active_knowledge_implementation_task=AION-205`" in current_text
+    assert "`formal_closeout_task=AION-206`" in current_text
+    assert "AION-180-SI-0007" in historical_text
     assert "v02_tag_created=false" in text
     assert "v02_release_created=false" in text
     for stale_marker in STALE_AION_176_CURRENT_STATE_MARKERS:
@@ -190,8 +180,7 @@ def test_current_state_surfaces_are_reconciled_and_safe() -> None:
     aion181 = _task(ledger["records"], "AION-181")
     assert aion181["ci_result"] == "pass"
     assert (
-        aion181["runtime_state"]
-        == "activation_control_plane_implemented_disabled_simulation_only"
+        aion181["runtime_state"] == "activation_control_plane_implemented_disabled_simulation_only"
     )
     assert aion181["next_task"] == "AION-182"
     assert aion181["authorization_state"] == "consumed_by_AION-181_closed_by_AION-182"
