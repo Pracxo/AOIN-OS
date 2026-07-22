@@ -26,6 +26,7 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION199_SCOPE,
     AION199_TASK_ID,
     AION200_EVALUATION_ID,
+    AION200_PROGRAM_STATE,
     AION200_TASK_ID,
     PROGRAM_ID,
     SHADOW_RUNTIME_AUTHORIZED_CAPABILITIES,
@@ -150,35 +151,46 @@ def test_aion_198_ledgers_create_single_active_authorization() -> None:
         record.get("implementation_task") == AION199_TASK_ID
         for record in program["records"]
     )
-    expected_program_state = (
-        AION199_PROGRAM_STATE if aion199_implemented else AION198_PROGRAM_STATE
+    aion200_evaluated = any(
+        record.get("task_id") == AION200_TASK_ID
+        and record.get("evaluation_id") == AION200_EVALUATION_ID
+        for record in program["records"]
     )
+    expected_program_state = AION198_PROGRAM_STATE
+    if aion200_evaluated:
+        expected_program_state = AION200_PROGRAM_STATE
+    elif aion199_implemented:
+        expected_program_state = AION199_PROGRAM_STATE
+    expected_active = None if aion200_evaluated else AION198_AUTHORIZATION_ID
+    expected_count = 0 if aion200_evaluated else 1
 
     assert program["program_state"] == expected_program_state
-    assert program["active_cognitive_implementation_authorization"] == AION198_AUTHORIZATION_ID
-    assert (
-        authorization["active_cognitive_implementation_authorization"]
-        == AION198_AUTHORIZATION_ID
-    )
-    assert program["active_cognitive_implementation_authorization_count"] == 1
-    assert authorization["active_cognitive_implementation_authorization_count"] == 1
+    assert program["active_cognitive_implementation_authorization"] == expected_active
+    assert authorization["active_cognitive_implementation_authorization"] == expected_active
+    assert program["active_cognitive_implementation_authorization_count"] == expected_count
+    assert authorization["active_cognitive_implementation_authorization_count"] == expected_count
 
     aion198 = next(
         record
         for record in authorization["records"]
         if record["authorization_id"] == AION198_AUTHORIZATION_ID
     )
-    assert aion198["record_kind"] == "implementation_authorization"
-    assert aion198["authorization_active"] is True
-    assert aion198["authorization_consumed"] is False
-    assert aion198["authorization_expired"] is False
+    assert aion198["record_kind"] == (
+        "implementation_authorization_closeout"
+        if aion200_evaluated
+        else "implementation_authorization"
+    )
+    assert aion198["authorization_active"] is (not aion200_evaluated)
+    assert aion198["authorization_consumed"] is aion200_evaluated
+    assert aion198["authorization_expired"] is aion200_evaluated
     assert aion198["authorization_reusable"] is False
     assert aion198["implementation_task"] == AION199_TASK_ID
-    assert aion198["implementation_state"] == (
-        "implemented_pending_aion_200_evaluation"
-        if aion199_implemented
-        else "authorized_pending_implementation"
-    )
+    expected_implementation_state = "authorized_pending_implementation"
+    if aion200_evaluated:
+        expected_implementation_state = "merged_evaluated_passed"
+    elif aion199_implemented:
+        expected_implementation_state = "implemented_pending_aion_200_evaluation"
+    assert aion198["implementation_state"] == expected_implementation_state
     assert aion198["scope"] == AION199_SCOPE
     assert aion198["formal_closeout_task"] == AION200_TASK_ID
     assert aion198["resource_limits"]["network_calls"] == 0

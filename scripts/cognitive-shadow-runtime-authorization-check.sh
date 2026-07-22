@@ -26,6 +26,18 @@ is_nested_gate_context() {
 
 ./scripts/cognitive-shadow-runtime-authorization-no-go-regression.sh
 
+active_count="$(
+  "$PYTHON_BIN" - <<'PY'
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+ledger = json.loads(Path("docs/cognitive-architecture/program-ledger.json").read_text())
+print(ledger["active_cognitive_implementation_authorization_count"])
+PY
+)"
+
 "$PYTHON_BIN" -m ruff check \
   scripts/lib/cognitive_architecture_governance.py \
   services/brain-api/tests/test_cognitive_integrated_evaluation_closeout_docs.py \
@@ -52,7 +64,7 @@ else
   ./scripts/repo-health.sh
 fi
 
-cat <<'SUMMARY'
+cat <<SUMMARY
 cognitive shadow-runtime authorization result:
 - authorization=AION-198-CA-0008
 - parent_evaluation=AION-CAE-001
@@ -62,7 +74,7 @@ cognitive shadow-runtime authorization result:
 - authorized_task=AION-199
 - implementation_branch=phase/cognitive-shadow-runtime
 - scope=operator-invoked-local-offline-integrated-cognitive-shadow-runtime
-- active_cognitive_implementation_authorization_count=1
+- active_cognitive_implementation_authorization_count=${active_count}
 - runtime_implementation_added_by_aion_198=false
 - production_cognitive_runtime_enabled=false
 - network_access=false
