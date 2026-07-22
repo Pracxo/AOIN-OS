@@ -10,7 +10,7 @@
   "production_event_subscription_enabled": false,
   "program_id": "AION-COGNITIVE-ARCHITECTURE-001",
   "program_name": "AION Cognitive Architecture Program",
-  "program_state": "counterfactual_planning_evaluated_information_acquisition_authorized",
+  "program_state": "information_acquisition_implemented_pending_evaluation",
   "records": [
     {
       "authorization_id": "AION-180-SI-0007",
@@ -269,7 +269,25 @@
       "evaluation_id": "AION-HCPE-001",
       "pr": null,
       "merge_commit": null,
-      "task_state": "authorized_pending_aion_194_implementation"
+      "task_state": "implemented_pending_aion_195_evaluation"
+    },
+    {
+      "task_id": "AION-194",
+      "record_kind": "implementation",
+      "authorization_id": "AION-193-CA-0006",
+      "candidate_id": "active-information-acquisition-core",
+      "scope": "active-information-need-observation-selection-information-gain-stopping-core",
+      "workstream": "active-information-acquisition",
+      "closeout_task": "AION-195",
+      "evaluation_id": "AION-AIAE-001",
+      "implementation_task": "AION-194",
+      "implementation_branch": "phase/cognitive-active-information-acquisition",
+      "runtime_effect": false,
+      "forbidden_side_effects": 0,
+      "unauthorized_information_acquisition_count": 0,
+      "pr": null,
+      "merge_commit": null,
+      "task_state": "implemented_pending_aion_195_evaluation"
     }
   ],
   "schema_version": "aion-cognitive-architecture-program-ledger/v1",
