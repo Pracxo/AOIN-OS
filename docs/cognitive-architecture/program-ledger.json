@@ -10,7 +10,7 @@
   "production_event_subscription_enabled": false,
   "program_id": "AION-COGNITIVE-ARCHITECTURE-001",
   "program_name": "AION Cognitive Architecture Program",
-  "program_state": "information_acquisition_evaluated_continual_learning_authorized",
+  "program_state": "continual_learning_implemented_pending_integrated_evaluation",
   "records": [
     {
       "authorization_id": "AION-180-SI-0007",
@@ -304,7 +304,7 @@
       "runtime_effect": false,
       "source_modified_by_evaluation": false,
       "task_id": "AION-195",
-      "task_state": "passed_authorized_aion_196_pending_implementation"
+      "task_state": "passed_authorized_aion_196_implemented_pending_evaluation"
     },
     {
       "authorization_id": "AION-195-CA-0007",
@@ -317,7 +317,27 @@
       "record_kind": "authorization",
       "scope": "governed-continual-learning-replay-adapter-policy-skill-candidate-core",
       "task_id": "AION-195",
-      "task_state": "authorized_pending_aion_196_implementation",
+      "task_state": "implemented_pending_aion_197_evaluation",
+      "workstream": "governed-continual-learning"
+    },
+    {
+      "authorization_id": "AION-195-CA-0007",
+      "candidate_id": "governed-continual-learning-core",
+      "closeout_task": "AION-197",
+      "evaluation_id": "AION-CAE-001",
+      "forbidden_side_effects": 0,
+      "implementation_branch": "phase/cognitive-governed-continual-learning",
+      "implementation_task": "AION-196",
+      "merge_commit": null,
+      "model_weight_training": 0,
+      "pr": null,
+      "record_kind": "implementation",
+      "runtime_effect": false,
+      "scope": "governed-continual-learning-replay-adapter-policy-skill-candidate-core",
+      "self_approval_count": 0,
+      "task_id": "AION-196",
+      "task_state": "implemented_pending_aion_197_evaluation",
+      "unauthorized_promotion_count": 0,
       "workstream": "governed-continual-learning"
     }
   ],
