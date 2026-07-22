@@ -30,6 +30,7 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION200_TASK_ID,
     AION201_AUTHORIZATION_ID,
     AION201_PROGRAM_STATE,
+    AION202_PROGRAM_STATE,
     PROGRAM_ID,
     SHADOW_RUNTIME_AUTHORIZED_CAPABILITIES,
     SHADOW_RUNTIME_PROHIBITED_BEHAVIORS,
@@ -59,6 +60,12 @@ def _json(relative: str) -> dict:
 
 def _text(relative: str) -> str:
     return (ROOT / relative).read_text()
+
+
+def _aion202_evidence_exists() -> bool:
+    return (
+        ROOT / "examples/cognitive-architecture/aion-202-controlled-cognitive-pilot.json"
+    ).is_file()
 
 
 def test_aion_198_required_files_exist() -> None:
@@ -163,7 +170,9 @@ def test_aion_198_ledgers_create_single_active_authorization() -> None:
         for record in program["records"]
     )
     expected_program_state = AION198_PROGRAM_STATE
-    if aion201_authorized:
+    if _aion202_evidence_exists():
+        expected_program_state = AION202_PROGRAM_STATE
+    elif aion201_authorized:
         expected_program_state = AION201_PROGRAM_STATE
     elif aion200_evaluated:
         expected_program_state = AION200_PROGRAM_STATE
