@@ -26,6 +26,7 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION201_TASK_ID,
     AION202_CANDIDATE_ID,
     AION202_IMPLEMENTATION_BRANCH,
+    AION202_PROGRAM_STATE,
     AION202_SCOPE,
     AION202_TASK_ID,
     AION202_WORKSTREAM,
@@ -55,6 +56,12 @@ def _json(relative: str) -> dict:
 
 def _text(relative: str) -> str:
     return (ROOT / relative).read_text()
+
+
+def _aion202_evidence_exists() -> bool:
+    return (
+        ROOT / "examples/cognitive-architecture/aion-202-controlled-cognitive-pilot.json"
+    ).is_file()
 
 
 def test_aion_201_required_files_exist() -> None:
@@ -169,7 +176,14 @@ def test_aion_201_ledgers_activate_single_non_reusable_pilot_authorization() -> 
 
     program = _json("docs/cognitive-architecture/program-ledger.json")
     authorization = _json("docs/cognitive-architecture/authorization-ledger.json")
-    assert program["program_state"] == AION201_PROGRAM_STATE
+    aion202_executed = _aion202_evidence_exists()
+    expected_program_state = AION202_PROGRAM_STATE if aion202_executed else AION201_PROGRAM_STATE
+    expected_implementation_state = (
+        "aion_202_pilot_executed_pending_aion_203_evaluation"
+        if aion202_executed
+        else "authorized_pending_aion_202_pilot_execution"
+    )
+    assert program["program_state"] == expected_program_state
     assert program["active_cognitive_implementation_authorization"] == AION201_AUTHORIZATION_ID
     assert (
         authorization["active_cognitive_implementation_authorization"]
@@ -206,8 +220,8 @@ def test_aion_201_ledgers_activate_single_non_reusable_pilot_authorization() -> 
         assert record["authorization_expired"] is False
         assert record["authorization_reusable"] is False
         assert record["authorized_task"] == AION202_TASK_ID
-        assert record["implementation_state"] == "authorized_pending_aion_202_pilot_execution"
-        assert record["pilot_executed"] is False
+        assert record["implementation_state"] == expected_implementation_state
+        assert record["pilot_executed"] is aion202_executed
         assert record["runtime_effect"] is False
         assert record["source_modified"] is False
         assert record["git_mutated"] is False
@@ -220,12 +234,13 @@ def test_aion_201_ledgers_activate_single_non_reusable_pilot_authorization() -> 
 
 def test_aion_201_does_not_execute_pilot_or_enable_runtime_surface() -> None:
     program = _json("docs/cognitive-architecture/program-ledger.json")
-    assert not any(
+    aion202_executed = _aion202_evidence_exists()
+    has_aion202_execution_record = any(
         record.get("record_kind") == "implementation"
         and record.get("implementation_task") == AION202_TASK_ID
         for record in program["records"]
     )
-    assert not list((ROOT / "examples/cognitive-architecture").glob("aion-202*"))
+    assert has_aion202_execution_record is aion202_executed
     assert not (ROOT / "services/brain-api/src/aion_brain/api/cognitive_runtime.py").exists()
     for relative in (
         "services/brain-api/src/aion_brain/kernel/container.py",
