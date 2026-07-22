@@ -93,8 +93,12 @@ def test_aion_183_ledgers_validate_and_close_authorization_after_aion_185() -> N
     validate_no_go(ROOT)
 
     assert program["program_id"] == PROGRAM_ID
-    assert program["active_cognitive_implementation_authorization_count"] == 1
-    assert program["active_cognitive_implementation_authorization"] in {
+    active_authorization = program["active_cognitive_implementation_authorization"]
+    if active_authorization is None:
+        assert program["active_cognitive_implementation_authorization_count"] == 0
+    else:
+        assert program["active_cognitive_implementation_authorization_count"] == 1
+    assert active_authorization is None or active_authorization in {
         AION185_AUTHORIZATION_ID,
         AION187_AUTHORIZATION_ID,
         AION189_AUTHORIZATION_ID,
@@ -122,35 +126,35 @@ def test_aion_183_ledgers_validate_and_close_authorization_after_aion_185() -> N
     assert world_model["implementation_task"] == AION186_TASK_ID
     if world_model["record_kind"] == "implementation_authorization":
         assert world_model["scope"] == AION186_SCOPE
-    if program["active_cognitive_implementation_authorization"] == AION187_AUTHORIZATION_ID:
+    if active_authorization == AION187_AUTHORIZATION_ID:
         active = next(
             item
             for item in authorization["records"]
             if item["authorization_id"] == AION187_AUTHORIZATION_ID
         )
         assert active["implementation_task"] == AION188_TASK_ID
-    if program["active_cognitive_implementation_authorization"] == AION189_AUTHORIZATION_ID:
+    if active_authorization == AION189_AUTHORIZATION_ID:
         active = next(
             item
             for item in authorization["records"]
             if item["authorization_id"] == AION189_AUTHORIZATION_ID
         )
         assert active["implementation_task"] == AION190_TASK_ID
-    if program["active_cognitive_implementation_authorization"] == AION191_AUTHORIZATION_ID:
+    if active_authorization == AION191_AUTHORIZATION_ID:
         active = next(
             item
             for item in authorization["records"]
             if item["authorization_id"] == AION191_AUTHORIZATION_ID
         )
         assert active["implementation_task"] == AION192_TASK_ID
-    if program["active_cognitive_implementation_authorization"] == AION193_AUTHORIZATION_ID:
+    if active_authorization == AION193_AUTHORIZATION_ID:
         active = next(
             item
             for item in authorization["records"]
             if item["authorization_id"] == AION193_AUTHORIZATION_ID
         )
         assert active["implementation_task"] == AION194_TASK_ID
-    if program["active_cognitive_implementation_authorization"] == AION195_AUTHORIZATION_ID:
+    if active_authorization == AION195_AUTHORIZATION_ID:
         active = next(
             item
             for item in authorization["records"]
@@ -163,10 +167,16 @@ def test_aion_183_preserves_runtime_disabled_boundaries() -> None:
     authorization = _json("docs/cognitive-architecture/authorization-ledger.json")
     closed = authorization["records"][0]
     active_authorization = authorization["active_cognitive_implementation_authorization"]
-    record = next(
-        item
-        for item in authorization["records"]
-        if item["authorization_id"] == active_authorization
+    records_to_check = (
+        tuple(authorization["records"])
+        if active_authorization is None
+        else (
+            next(
+                item
+                for item in authorization["records"]
+                if item["authorization_id"] == active_authorization
+            ),
+        )
     )
     false_flags = (
         "runtime_effect",
@@ -180,12 +190,16 @@ def test_aion_183_preserves_runtime_disabled_boundaries() -> None:
     )
     for key in false_flags:
         assert closed[key] is False
-        assert record[key] is False
-    assert record["resource_limits"]["network_calls"] == 0
-    assert record["resource_limits"]["connector_calls"] == 0
-    assert record["resource_limits"]["model_provider_calls"] == 0
-    assert record["resource_limits"]["git_operations"] == 0
-    assert record["resource_limits"]["background_loops"] == 0
+        for record in records_to_check:
+            assert record[key] is False
+    for record in records_to_check:
+        if "resource_limits" not in record:
+            continue
+        assert record["resource_limits"]["network_calls"] == 0
+        assert record["resource_limits"]["connector_calls"] == 0
+        assert record["resource_limits"]["model_provider_calls"] == 0
+        assert record["resource_limits"]["git_operations"] == 0
+        assert record["resource_limits"]["background_loops"] == 0
 
 
 def test_aion_183_docs_do_not_claim_subjective_state() -> None:

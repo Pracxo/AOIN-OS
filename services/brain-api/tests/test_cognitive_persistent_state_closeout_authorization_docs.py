@@ -126,7 +126,7 @@ def test_aion_185_ledgers_examples_and_no_go_validate() -> None:
     auth_ledger = _json("docs/cognitive-architecture/authorization-ledger.json")
 
     assert program["program_id"] == PROGRAM_ID
-    assert program["active_cognitive_implementation_authorization"] in {
+    allowed_authorizations = {
         AION185_AUTHORIZATION_ID,
         AION187_AUTHORIZATION_ID,
         AION189_AUTHORIZATION_ID,
@@ -134,15 +134,15 @@ def test_aion_185_ledgers_examples_and_no_go_validate() -> None:
         AION193_AUTHORIZATION_ID,
         AION195_AUTHORIZATION_ID,
     }
-    assert auth_ledger["active_cognitive_implementation_authorization"] in {
-        AION185_AUTHORIZATION_ID,
-        AION187_AUTHORIZATION_ID,
-        AION189_AUTHORIZATION_ID,
-        AION191_AUTHORIZATION_ID,
-        AION193_AUTHORIZATION_ID,
-        AION195_AUTHORIZATION_ID,
-    }
-    assert auth_ledger["active_cognitive_implementation_authorization_count"] == 1
+    active_authorization = program["active_cognitive_implementation_authorization"]
+    assert active_authorization is None or active_authorization in allowed_authorizations
+    assert (
+        auth_ledger["active_cognitive_implementation_authorization"] is None
+        or auth_ledger["active_cognitive_implementation_authorization"] in allowed_authorizations
+    )
+    assert auth_ledger["active_cognitive_implementation_authorization_count"] == (
+        0 if active_authorization is None else 1
+    )
 
     closed = auth_ledger["records"][0]
     world_model = next(

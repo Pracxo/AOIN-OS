@@ -1509,6 +1509,7 @@ aion183_is_scoped_cognitive_architecture_authorization_path() {
     docs/cognitive-architecture/tasks/AION-194.md|\
     docs/cognitive-architecture/tasks/AION-195.md|\
     docs/cognitive-architecture/tasks/AION-196.md|\
+    docs/cognitive-architecture/tasks/AION-197.md|\
     docs/cognitive-architecture/program-ledger.json|\
     docs/cognitive-architecture/authorization-ledger.json|\
     docs/cognitive-architecture/architecture-roadmap.md|\
@@ -1533,6 +1534,7 @@ aion183_is_scoped_cognitive_architecture_authorization_path() {
     examples/cognitive-architecture/aion-195-information-acquisition-evaluation.json|\
     examples/cognitive-architecture/aion-195-continual-learning-authorization.json|\
     examples/cognitive-architecture/aion-196-continual-learning.json|\
+    examples/cognitive-architecture/aion-197-integrated-cognitive-evaluation.json|\
     scripts/cognitive-architecture-authorization-check.sh|\
     scripts/cognitive-architecture-no-go-regression.sh|\
     scripts/cognitive-memory-consolidation-closeout-check.sh|\
@@ -1549,6 +1551,8 @@ aion183_is_scoped_cognitive_architecture_authorization_path() {
     scripts/cognitive-information-acquisition-no-go-regression.sh|\
     scripts/cognitive-continual-learning-check.sh|\
     scripts/cognitive-continual-learning-no-go-regression.sh|\
+    scripts/cognitive-integrated-evaluation-check.sh|\
+    scripts/cognitive-integrated-evaluation-no-go-regression.sh|\
     scripts/cognitive-persistent-state-check.sh|\
     scripts/cognitive-persistent-state-closeout-check.sh|\
     scripts/cognitive-persistent-state-closeout-no-go-regression.sh|\
@@ -1596,6 +1600,7 @@ aion183_is_scoped_cognitive_architecture_authorization_path() {
     services/brain-api/tests/test_cognitive_information_acquisition_no_runtime_effect.py|\
     services/brain-api/tests/test_cognitive_continual_learning.py|\
     services/brain-api/tests/test_cognitive_continual_learning_no_runtime_effect.py|\
+    services/brain-api/tests/test_cognitive_integrated_evaluation_closeout_docs.py|\
     services/brain-api/tests/test_cognitive_memory_consolidation.py|\
     services/brain-api/tests/test_cognitive_memory_consolidation_closeout_authorization_docs.py|\
     services/brain-api/tests/test_cognitive_memory_consolidation_no_runtime_effect.py)

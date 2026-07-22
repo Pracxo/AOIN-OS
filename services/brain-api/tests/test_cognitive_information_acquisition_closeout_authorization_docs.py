@@ -24,6 +24,8 @@ from cognitive_architecture_governance import (  # noqa: E402
     AION195_EVALUATION_ID,
     AION196_SCOPE,
     AION196_TASK_ID,
+    AION197_EVALUATION_ID,
+    AION197_TASK_ID,
     CONTINUAL_LEARNING_REQUIRED_CONTRACTS,
     CONTINUAL_LEARNING_REQUIRED_SERVICES,
     PROGRAM_ID,
@@ -232,12 +234,22 @@ def test_aion_195_ledgers_examples_and_no_go_validate() -> None:
     authorization = _json("docs/cognitive-architecture/authorization-ledger.json")
 
     assert program["program_id"] == PROGRAM_ID
-    assert program["active_cognitive_implementation_authorization"] == AION195_AUTHORIZATION_ID
-    assert (
-        authorization["active_cognitive_implementation_authorization"]
-        == AION195_AUTHORIZATION_ID
+    aion197_closed = any(
+        item.get("task_id") == AION197_TASK_ID
+        and item.get("evaluation_id") == AION197_EVALUATION_ID
+        for item in program["records"]
     )
-    assert authorization["active_cognitive_implementation_authorization_count"] == 1
+    if aion197_closed:
+        assert program["active_cognitive_implementation_authorization"] is None
+        assert authorization["active_cognitive_implementation_authorization"] is None
+        assert authorization["active_cognitive_implementation_authorization_count"] == 0
+    else:
+        assert program["active_cognitive_implementation_authorization"] == AION195_AUTHORIZATION_ID
+        assert (
+            authorization["active_cognitive_implementation_authorization"]
+            == AION195_AUTHORIZATION_ID
+        )
+        assert authorization["active_cognitive_implementation_authorization_count"] == 1
 
     implementation = next(
         item for item in program["records"] if item.get("implementation_task") == AION194_TASK_ID
@@ -264,7 +276,12 @@ def test_aion_195_ledgers_examples_and_no_go_validate() -> None:
         for item in authorization["records"]
         if item["authorization_id"] == AION195_AUTHORIZATION_ID
     )
-    assert active["authorization_active"] is True
+    assert active["authorization_active"] is not aion197_closed
+    assert active["authorization_consumed"] is aion197_closed
+    assert active["authorization_expired"] is aion197_closed
+    if aion197_closed:
+        assert active["authorization_closed_by_task"] == AION197_TASK_ID
+        assert active["authorization_closeout_evaluation"] == AION197_EVALUATION_ID
     assert active["implementation_task"] == AION196_TASK_ID
     assert active["scope"] == AION196_SCOPE
     assert set(CONTINUAL_LEARNING_REQUIRED_CONTRACTS).issubset(active["required_contracts"])

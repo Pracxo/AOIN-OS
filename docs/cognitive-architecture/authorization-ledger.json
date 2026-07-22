@@ -1,6 +1,6 @@
 {
-  "active_cognitive_implementation_authorization": "AION-195-CA-0007",
-  "active_cognitive_implementation_authorization_count": 1,
+  "active_cognitive_implementation_authorization": null,
+  "active_cognitive_implementation_authorization_count": 0,
   "approval_created": false,
   "created_by_task": "AION-183",
   "git_mutated_by_runtime": false,
@@ -592,6 +592,7 @@
       "workstream": "active-information-acquisition"
     },
     {
+      "active_cognitive_implementation_authorization_count": 0,
       "allowed_source_paths": [
         "services/brain-api/src/aion_brain/continual_learning/",
         "services/brain-api/src/aion_brain/contracts/continual_learning.py",
@@ -604,9 +605,12 @@
         "scripts/lib/cognitive_architecture_governance.py"
       ],
       "approval_created": false,
-      "authorization_active": true,
-      "authorization_consumed": false,
-      "authorization_expired": false,
+      "authorization_active": false,
+      "authorization_closed_by_task": "AION-197",
+      "authorization_closeout_evaluation": "AION-CAE-001",
+      "authorization_consumed": true,
+      "authorization_consumed_by_task": "AION-196",
+      "authorization_expired": true,
       "authorization_id": "AION-195-CA-0007",
       "authorization_reusable": false,
       "benchmark_requirements": {
@@ -623,11 +627,28 @@
         "unauthorized_promotion_count": 0
       },
       "candidate_id": "governed-continual-learning-core",
+      "cognitive_architecture_implemented": true,
+      "cognitive_architecture_integrated": true,
+      "evaluation_result": "PASS",
       "expiry_condition": "AION-196 implementation merge followed by AION-197 evaluation closeout",
       "formal_closeout_task": "AION-197",
       "git_mutated": false,
+      "hard_pass_conditions": {
+        "brier_score": 0.12,
+        "catastrophic_forgetting_rate": 0.02,
+        "critical_memory_retention_rate": 1.0,
+        "deterministic_replay_rate": 1.0,
+        "forbidden_side_effect_count": 0,
+        "plan_success_rate": 0.88,
+        "policy_violations": 0,
+        "state_continuity_rate": 1.0,
+        "transition_accuracy": 0.86,
+        "unauthorized_promotions": 0
+      },
       "implementation_branch": "phase/cognitive-governed-continual-learning",
-      "implementation_state": "implemented_pending_aion_197_evaluation",
+      "implementation_merge_commit": "31a20cffc845944a198d1a7e261ceaefc2c9fe89",
+      "implementation_pr": 107,
+      "implementation_state": "merged_evaluated_passed",
       "implementation_task": "AION-196",
       "learning_levels": [
         "Memory candidate",
@@ -674,7 +695,8 @@
         "services/brain-api/src/aion_brain/credentials/"
       ],
       "pull_request_created": false,
-      "record_kind": "implementation_authorization",
+      "recommendation": "integrated_cognitive_shadow_runtime_authorization_review",
+      "record_kind": "implementation_authorization_closeout",
       "required_contracts": [
         "ContinualLearningObservation",
         "LearningEpisode",

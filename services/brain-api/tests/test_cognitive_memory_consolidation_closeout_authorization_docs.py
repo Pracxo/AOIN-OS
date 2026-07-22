@@ -216,16 +216,20 @@ def test_aion_191_ledgers_examples_and_no_go_validate() -> None:
     authorization = _json("docs/cognitive-architecture/authorization-ledger.json")
 
     assert program["program_id"] == PROGRAM_ID
-    assert program["active_cognitive_implementation_authorization"] in {
+    allowed_authorizations = {
         AION191_AUTHORIZATION_ID,
         AION193_AUTHORIZATION_ID,
         AION195_AUTHORIZATION_ID,
     }
+    active_authorization = program["active_cognitive_implementation_authorization"]
+    assert active_authorization is None or active_authorization in allowed_authorizations
     assert (
-        authorization["active_cognitive_implementation_authorization"]
-        in {AION191_AUTHORIZATION_ID, AION193_AUTHORIZATION_ID, AION195_AUTHORIZATION_ID}
+        authorization["active_cognitive_implementation_authorization"] is None
+        or authorization["active_cognitive_implementation_authorization"] in allowed_authorizations
     )
-    assert authorization["active_cognitive_implementation_authorization_count"] == 1
+    assert authorization["active_cognitive_implementation_authorization_count"] == (
+        0 if active_authorization is None else 1
+    )
 
     implementation = next(
         item for item in program["records"] if item.get("implementation_task") == AION190_TASK_ID
