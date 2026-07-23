@@ -1,0 +1,552 @@
+{
+  "approval_created": false,
+  "authorization_closeout": {
+    "authorization_active": false,
+    "authorization_consumed": true,
+    "authorization_consumed_by_feature_commits": [
+      "b7299912f1c42c54581c20ad384602473169dcc1",
+      "c06b54c8bcb969fcae98a421a5d088bdd2307c0b"
+    ],
+    "authorization_consumed_by_merge_commits": [
+      "45d473fe2a07b62acd6f6957f5419fa78dcc6fc2",
+      "a775fb18bb0027d30834d8ab2507f461013753e2"
+    ],
+    "authorization_consumed_by_prs": [
+      116,
+      117
+    ],
+    "authorization_consumed_by_task": "AION-205",
+    "authorization_expired": true,
+    "authorization_reusable": false,
+    "authorization_transaction_id": "AION-204-KI-0001",
+    "corrective_prs": [
+      117
+    ],
+    "formal_closeout_task": "AION-206",
+    "research_operator_evaluation_created_belief": false,
+    "research_operator_evaluation_created_knowledge": false,
+    "research_operator_evaluation_created_live_network_access": false,
+    "research_operator_evaluation_decision": "RESEARCH_ACQUISITION_OPERATOR_EVALUATION_PASS_RECOMMEND_SOURCE_PROVENANCE_REGISTRY_AUTHORIZATION",
+    "research_operator_evaluation_id": "AION-RAE-001",
+    "research_operator_evaluation_reusable": false,
+    "research_operator_evaluation_used_as_approval": false
+  },
+  "belief_created": false,
+  "belief_mutated": false,
+  "claim_verification_performed": false,
+  "closeout_task": "AION-206",
+  "conditional_next_authorization": {
+    "authorization_scope": "append-only-immutable-source-snapshot-provenance-lineage-citation-registry-core",
+    "authorization_transaction_id": "AION-206-KI-0002",
+    "created": true,
+    "formal_closeout_task": "AION-208",
+    "implementation_task": "AION-207"
+  },
+  "corrective_prs": [
+    117
+  ],
+  "decision": "RESEARCH_ACQUISITION_OPERATOR_EVALUATION_PASS_RECOMMEND_SOURCE_PROVENANCE_REGISTRY_AUTHORIZATION",
+  "evaluation_base_commit": "a775fb18bb0027d30834d8ab2507f461013753e2",
+  "evaluation_id": "AION-RAE-001",
+  "evaluation_passed": true,
+  "evaluation_type": "read_only_research_acquisition_operator_evaluation",
+  "git_mutated": false,
+  "hard_gate_results": {
+    "aion_205_no_go_gate_passed": true,
+    "aion_205_research_plane_gate_passed": true,
+    "aion_205_runtime_hold_passed": true,
+    "all_28_scenarios_executed": true,
+    "all_28_scenarios_passed": true,
+    "budget_policy_passed": true,
+    "citation_integrity_passed": true,
+    "content_and_encoding_policy_passed": true,
+    "corrective_ci_verified": true,
+    "corrective_pr_117_verified": true,
+    "destination_and_ssrf_policy_passed": true,
+    "deterministic_replay_passed": true,
+    "dns_and_peer_pinning_policy_passed": true,
+    "evaluation_discovered_defect_closed": true,
+    "final_ci_verified": true,
+    "fixture_boundary_passed": true,
+    "focused_implementation_tests_passed": true,
+    "header_policy_passed": true,
+    "lineage_and_deduplication_passed": true,
+    "method_policy_passed": true,
+    "no_belief_creation_or_mutation_occurred": true,
+    "no_claim_verification_occurred": true,
+    "no_knowledge_promotion_occurred": true,
+    "no_live_network_request_occurred": true,
+    "no_required_scenario_skipped": true,
+    "no_source_git_pr_approval_merge_deploy_or_model_side_effect": true,
+    "no_unknown_scenario": true,
+    "no_v02_tag_or_release_created": true,
+    "pr_116_verified": true,
+    "prompt_injection_isolation_passed": true,
+    "provenance_passed": true,
+    "redirect_policy_passed": true,
+    "repository_integrity_passed": true,
+    "snapshot_immutability_passed": true,
+    "url_and_allowlist_policy_passed": true
+  },
+  "implementation_feature_commits": [
+    "b7299912f1c42c54581c20ad384602473169dcc1",
+    "c06b54c8bcb969fcae98a421a5d088bdd2307c0b"
+  ],
+  "implementation_merge_commits": [
+    "45d473fe2a07b62acd6f6957f5419fa78dcc6fc2",
+    "a775fb18bb0027d30834d8ab2507f461013753e2"
+  ],
+  "implementation_pr": 116,
+  "implementation_task": "AION-205",
+  "knowledge_candidate_created": false,
+  "knowledge_promoted": false,
+  "merged": false,
+  "network_access_enabled": false,
+  "next_architecture_decision": "source_provenance_registry_implementation_authorized",
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "pull_request_created": false,
+  "read_only": true,
+  "redacted": true,
+  "repository_integrity": {
+    "canonical_repository_untouched_by_evaluation": true,
+    "live_dns_requests": 0,
+    "live_network_requests": 0,
+    "research_plane_approvals_created": 0,
+    "research_plane_authorizations_created": 0,
+    "research_plane_belief_mutations": 0,
+    "research_plane_git_operations": 0,
+    "research_plane_knowledge_promotions": 0,
+    "research_plane_model_weight_changes": 0,
+    "research_plane_real_pull_requests_created": 0,
+    "research_plane_source_mutations": 0,
+    "temporary_evaluation_data_cleaned": true
+  },
+  "research_plane_implemented": true,
+  "research_runtime_enabled": false,
+  "resource_state": {
+    "approvals_created": 0,
+    "belief_mutations": 0,
+    "connector_calls": 0,
+    "deployments": 0,
+    "git_operations": 0,
+    "knowledge_promotions": 0,
+    "model_provider_calls": 0,
+    "model_weight_changes": 0,
+    "network_calls": 0,
+    "public_fetches": 0,
+    "runtime_created_pull_requests": 0,
+    "search_provider_calls": 0,
+    "source_body_bytes_persisted": 0,
+    "source_mutations": 0
+  },
+  "runtime_effect": false,
+  "runtime_state": {
+    "automatic_merge_enabled": false,
+    "background_crawler_enabled": false,
+    "belief_mutation_enabled": false,
+    "claim_verification_enabled": false,
+    "connector_integration_enabled": false,
+    "deployment_enabled": false,
+    "git_mutation_enabled": false,
+    "knowledge_promotion_enabled": false,
+    "model_provider_integration_enabled": false,
+    "model_weight_training_enabled": false,
+    "public_network_fetch_available": false,
+    "research_plane_implemented": true,
+    "research_runtime_enabled": false,
+    "runtime_pr_enabled": false,
+    "search_provider_integration_enabled": false,
+    "source_body_persistence_enabled": false,
+    "source_mutation_enabled": false,
+    "source_provenance_registry_implemented": false
+  },
+  "scenario_count": 28,
+  "scenario_results": [
+    {
+      "checks": {
+        "completed_outcome": true,
+        "one_citation_reference": true,
+        "one_operator_review_item": true,
+        "one_provenance_record": true,
+        "one_snapshot": true,
+        "zero_approvals": true,
+        "zero_beliefs": true,
+        "zero_knowledge_candidates": true,
+        "zero_runtime_effects": true
+      },
+      "evidence": {
+        "fingerprint": "3a7f2459a22c0940259f62b3c50cd3cd646a361e52204c0b990e3352a095f917"
+      },
+      "passed": true,
+      "scenario_id": "valid_in_memory_acquisition"
+    },
+    {
+      "checks": {
+        "disabled_fetch_adapter_fails_closed": true,
+        "disabled_search_adapter_fails_closed": true,
+        "http_policy_adapter_transport_unavailable": true,
+        "no_fallback_no_network": true,
+        "outcome_adapter_disabled": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "disabled_adapter_fail_closed"
+    },
+    {
+      "checks": {
+        "deterministic_candidate_order": true,
+        "duplicate_url_registration_rejected": true,
+        "exact_query_id_matching": true,
+        "no_provider_integration": true,
+        "result_limit_enforced": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "deterministic_in_memory_search"
+    },
+    {
+      "checks": {
+        "absolute_regular_synthetic_fixture_accepted": true,
+        "device_file_rejected": true,
+        "directory_rejected": true,
+        "hidden_file_rejected": true,
+        "missing_file_rejected": true,
+        "oversized_file_rejected": true,
+        "protected_fixture_material_rejected": true,
+        "relative_path_rejected": true,
+        "repository_descendant_rejected": true,
+        "repository_root_rejected": true,
+        "symlink_path_rejected": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "local_fixture_path_boundary"
+    },
+    {
+      "checks": {
+        "backslash_rejected": true,
+        "direct_ip_rejected": true,
+        "file_ftp_websocket_javascript_rejected": true,
+        "fragment_removed_and_query_preserved": true,
+        "hostname_case_and_punycode_normalization": true,
+        "https_normalization": true,
+        "invalid_port_rejected": true,
+        "malformed_percent_rejected": true,
+        "path_traversal_rejected": true,
+        "userinfo_rejected": true,
+        "whitespace_rejected": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "url_canonicalization"
+    },
+    {
+      "checks": {
+        "approved_subdomain_match": true,
+        "deterministic_fingerprint": true,
+        "duplicate_host_rejected": true,
+        "exact_host_match": true,
+        "registrable_root_not_matched": true,
+        "suffix_string_bypass_rejected": true,
+        "universal_wildcard_rejected": true,
+        "wildcard_label_boundary": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "domain_allowlist"
+    },
+    {
+      "checks": {
+        "decimal_octal_hex_mixed_bypass_rejected": true,
+        "link_local_rejected": true,
+        "loopback_rejected": true,
+        "metadata_service_rejected": true,
+        "multicast_rejected": true,
+        "reserved_and_unspecified_rejected": true,
+        "rfc1918_rejected": true,
+        "synthetic_public_ipv4_accepted_as_metadata": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "ipv4_destination_policy"
+    },
+    {
+      "checks": {
+        "loopback_link_local_multicast_unique_local_rejected": true,
+        "metadata_endpoints_rejected": true,
+        "reserved_unspecified_and_mapped_rejected": true,
+        "synthetic_public_ipv6_accepted_as_metadata": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "ipv6_and_metadata_destination_policy"
+    },
+    {
+      "checks": {
+        "changed_peer_or_resolution_rejected": true,
+        "duplicate_dns_answers_rejected": true,
+        "no_live_dns_or_proxy": true,
+        "peer_address_matches_validated_address": true,
+        "prohibited_dns_answer_rejects_host": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "dns_rebinding_and_peer_pinning"
+    },
+    {
+      "checks": {
+        "credential_target_loop_and_fourth_redirect_rejected": true,
+        "cross_domain_redirect_requires_allowlist": true,
+        "every_destination_revalidated": true,
+        "method_remains_get_or_head": true,
+        "private_or_disallowed_destination_rejected": true,
+        "same_domain_redirect_accepted": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "redirect_policy"
+    },
+    {
+      "checks": {
+        "get_and_head_accepted": true,
+        "no_file_upload": true,
+        "no_form_submission": true,
+        "write_methods_rejected": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "method_policy"
+    },
+    {
+      "checks": {
+        "authorized_types_accepted": true,
+        "conflicting_mime_evidence_rejected": true,
+        "no_active_content_execution": true,
+        "unsafe_types_rejected": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "content_type_policy"
+    },
+    {
+      "checks": {
+        "approved_encodings_accepted": true,
+        "conflicting_encoding_rejected": true,
+        "error_contains_no_source_body": true,
+        "malformed_bytes_rejected": true,
+        "unsupported_encoding_rejected": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "character_encoding_policy"
+    },
+    {
+      "checks": {
+        "crlf_contaminated_header_dropped": true,
+        "excess_unknown_headers_discarded": true,
+        "fixed_safe_outbound_headers": true,
+        "oversized_values_truncated": true,
+        "unsafe_response_headers_discarded": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "safe_header_projection"
+    },
+    {
+      "checks": {
+        "content_length_and_measured_bytes_checked": true,
+        "exact_boundary_accepted": true,
+        "no_partial_snapshot_or_body_incident": true,
+        "one_byte_over_boundary_rejected": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "per_source_size_budget"
+    },
+    {
+      "checks": {
+        "exact_total_transfer_accepted": true,
+        "no_knowledge_or_belief_created": true,
+        "one_byte_over_total_rejected": true,
+        "partial_unvalidated_output_discarded": true,
+        "plan_stops_fail_closed": true,
+        "quality_cannot_override_budget": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "total_plan_budget"
+    },
+    {
+      "checks": {
+        "licence_restricted_review_or_rejection": true,
+        "robots_disallowed_blocks_acquisition": true,
+        "source_class_disallowed_blocks_acquisition": true,
+        "source_class_does_not_establish_fact": true,
+        "unknown_remains_flagged": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "robots_licence_and_source_class_policy"
+    },
+    {
+      "checks": {
+        "content_remains_untrusted": true,
+        "no_tool_source_git_pr_approval_knowledge_or_belief_effect": true,
+        "policy_allowlist_and_budgets_unchanged": true,
+        "prompt_marker_recorded": true,
+        "protected_content_not_quoted": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "prompt_injection_isolation"
+    },
+    {
+      "checks": {
+        "body_excluded_from_repr": true,
+        "body_key_absent_from_diagnostics_incident_evidence": true,
+        "explicit_purge_clears_content": true,
+        "no_global_body_cache_or_file_persistence": true,
+        "source_bytes_exist_only_during_explicit_run": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "ephemeral_artifact_purge"
+    },
+    {
+      "checks": {
+        "changed_metadata_changes_fingerprint": true,
+        "deterministic_snapshot_fingerprint": true,
+        "exact_content_sha256": true,
+        "immutable_metadata": true,
+        "publication_unverified_and_no_effects": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "snapshot_immutability"
+    },
+    {
+      "checks": {
+        "declared_metadata_only_when_supplied": true,
+        "no_source_body": true,
+        "source_claims_verified_false": true,
+        "transport_fingerprints_recorded": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "provenance_metadata_unverified"
+    },
+    {
+      "checks": {
+        "citation_bound_to_snapshot": true,
+        "citation_contains_no_long_quote_or_hidden_reasoning": true,
+        "citation_does_not_verify_claim_or_store_body": true,
+        "content_sha_and_url_fingerprint_exact": true,
+        "locator_validated_and_bounded": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "citation_reference_integrity"
+    },
+    {
+      "checks": {
+        "deterministic_group_ids": true,
+        "duplicates_preserved_and_grouped": true,
+        "exact_content_duplicate_detected": true,
+        "exact_url_duplicate_detected": true,
+        "redirect_alias_detected": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "exact_duplicate_lineage"
+    },
+    {
+      "checks": {
+        "different_source_class_does_not_create_independence": true,
+        "identical_content_across_domains_grouped": true,
+        "repetition_does_not_establish_corroboration": true,
+        "suspected_mirrors_reviewable": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "mirror_independence_grouping"
+    },
+    {
+      "checks": {
+        "completed_with_rejections_when_allowed": true,
+        "fail_closed_budget_stop_available": true,
+        "invalid_source_creates_redacted_incident": true,
+        "no_invalid_snapshot": true,
+        "no_unvalidated_partial_output": true,
+        "valid_finalized_snapshots_retained_under_partial_policy": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "partial_source_rejection"
+    },
+    {
+      "checks": {
+        "changed_bytes_change_hashes_and_fingerprints": true,
+        "identical_result_snapshot_provenance_citation_lineage_diagnostics": true,
+        "incidents_deterministic": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "deterministic_replay"
+    },
+    {
+      "checks": {
+        "deterministic_output_duplicate_fetch_once_and_no_global_executor": true,
+        "failure_cannot_bypass_policy_or_budget": true,
+        "maximum_workers_four": true,
+        "no_retry_storm_or_network_fallback": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "bounded_concurrency"
+    },
+    {
+      "checks": {
+        "canonical_repository_tree_unchanged": true,
+        "knowledge_belief_authorization_approval_false": true,
+        "network_call_count_zero": true,
+        "no_kernel_startup_api_cli_scheduler_crawler_or_provider_integration": true,
+        "source_claims_verified_false": true,
+        "source_git_pr_deploy_model_counts_zero": true
+      },
+      "evidence": {},
+      "passed": true,
+      "scenario_id": "no_knowledge_belief_runtime_or_repository_effect"
+    }
+  ],
+  "schema_version": "aion-knowledge-research-operator-evaluation/v1",
+  "security_state": {
+    "no_authorization_headers": true,
+    "no_cookies": true,
+    "no_credentials": true,
+    "read_only": true,
+    "redacted": true,
+    "reserved_domains_only": true,
+    "synthetic_inputs_only": true
+  },
+  "source_modified": false,
+  "synthetic": true,
+  "validation_results": {
+    "brain_api_mypy": "1234 files clean",
+    "brain_api_total": "3380 passed",
+    "corrective_pr_117_brain_api_quality": "pass",
+    "focused_aion_205_tests": "86 passed",
+    "github_brain_api_quality": "pass",
+    "github_contract_check": "pass",
+    "github_docker_build_core": "pass",
+    "github_policy_check": "pass",
+    "github_repository_hygiene": "pass",
+    "github_sdk_cli_check": "pass",
+    "github_sdk_quality": "pass",
+    "merged_state_focused_subset": "36 passed",
+    "research_plane_gate": "pass",
+    "research_plane_no_go": "pass",
+    "runtime_hold": "pass",
+    "sdk_mypy": "145 files clean",
+    "sdk_total": "274 passed"
+  }
+}

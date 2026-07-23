@@ -27,8 +27,11 @@
     self_improvement_actual_shadow_activation_review_boundary: "demo-data/self-improvement-actual-shadow-activation-review-boundary.json",
     knowledge_intelligence: "demo-data/knowledge-intelligence-program.json",
     knowledge_intelligence_research_plane: "demo-data/knowledge-intelligence-research-plane.json",
+    knowledge_intelligence_research_evaluation: "demo-data/knowledge-intelligence-research-evaluation.json",
     knowledge_intelligence_source_snapshots: "demo-data/knowledge-intelligence-source-snapshots.json",
     knowledge_intelligence_source_lineage: "demo-data/knowledge-intelligence-source-lineage.json",
+    knowledge_intelligence_source_registry_authorization: "demo-data/knowledge-intelligence-source-registry-authorization.json",
+    knowledge_intelligence_source_registry_runtime_hold: "demo-data/knowledge-intelligence-source-registry-runtime-hold.json",
     knowledge_intelligence_research_runtime_hold: "demo-data/knowledge-intelligence-research-runtime-hold.json",
     module_lifecycle: "demo-data/module-lifecycle-dashboard.json",
     model_provider_hardening: "demo-data/provider-hardening-view-model.json",
@@ -44,8 +47,11 @@
     knowledge: [
       "knowledge_intelligence",
       "knowledge_intelligence_research_plane",
+      "knowledge_intelligence_research_evaluation",
       "knowledge_intelligence_source_snapshots",
       "knowledge_intelligence_source_lineage",
+      "knowledge_intelligence_source_registry_authorization",
+      "knowledge_intelligence_source_registry_runtime_hold",
       "knowledge_intelligence_research_runtime_hold"
     ],
     providers: ["model_provider_hardening"],
@@ -62,8 +68,11 @@
       "self_improvement_actual_shadow_activation_review_boundary",
       "knowledge_intelligence",
       "knowledge_intelligence_research_plane",
+      "knowledge_intelligence_research_evaluation",
       "knowledge_intelligence_source_snapshots",
       "knowledge_intelligence_source_lineage",
+      "knowledge_intelligence_source_registry_authorization",
+      "knowledge_intelligence_source_registry_runtime_hold",
       "knowledge_intelligence_research_runtime_hold"
     ],
     safety: ["settings_safety", "incidents"]
@@ -233,7 +242,12 @@
     "./scripts/knowledge-intelligence-research-authorization-check.sh",
     "./scripts/knowledge-intelligence-research-runtime-hold.sh",
     "./scripts/knowledge-intelligence-research-plane-no-go-regression.sh",
-    "./scripts/knowledge-intelligence-research-plane-check.sh"
+    "./scripts/knowledge-intelligence-research-plane-check.sh",
+    "./scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh",
+    "./scripts/knowledge-intelligence-research-operator-evaluation-check.sh",
+    "./scripts/knowledge-intelligence-source-registry-authorization-no-go-regression.sh",
+    "./scripts/knowledge-intelligence-source-registry-authorization-check.sh",
+    "./scripts/knowledge-intelligence-source-registry-runtime-hold.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
     generic_knowledge_trail: "demo-data/generic-knowledge-trail.json",

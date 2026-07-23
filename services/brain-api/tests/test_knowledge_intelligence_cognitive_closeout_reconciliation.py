@@ -53,9 +53,12 @@ def test_current_state_reconciled_without_stale_authoritative_markers():
         r"current stage remains AION-179"
     )
     status = read_text("docs/project-status.md")
-    milestone = "AION-205 controlled research acquisition and source-snapshot core implemented"
+    milestone = (
+        "AION-206 research acquisition operator evaluation complete; "
+        "source registry authorization active"
+    )
     next_task = (
-        "AION-206 research-plane evaluation and source-provenance-registry authorization"
+        "AION-207 append-only source-provenance registry implementation"
     )
     assert milestone in status
     assert next_task in status

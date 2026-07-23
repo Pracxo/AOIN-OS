@@ -225,6 +225,9 @@ allowed_authorization_demo_names = {
     "knowledge-intelligence-research-runtime-hold.json",
     "knowledge-intelligence-source-lineage.json",
     "knowledge-intelligence-source-snapshots.json",
+    "knowledge-intelligence-research-evaluation.json",
+    "knowledge-intelligence-source-registry-authorization.json",
+    "knowledge-intelligence-source-registry-runtime-hold.json",
 }
 aion161_allowed_policy_markers = {
     "runtime_private_key",

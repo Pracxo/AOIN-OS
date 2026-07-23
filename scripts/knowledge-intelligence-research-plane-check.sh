@@ -39,19 +39,36 @@ for path in sorted((ROOT / "examples/knowledge-intelligence").glob("*.json")):
     assert data["network_access_enabled"] is False
 program = json.loads((ROOT / "docs/knowledge-intelligence/program-ledger.json").read_text())
 auth = json.loads((ROOT / "docs/knowledge-intelligence/authorization-ledger.json").read_text())
-assert program["program_state"] == "research_plane_implemented_disabled_pending_closeout"
+assert program["program_state"] in {
+    "research_plane_implemented_disabled_pending_closeout",
+    "source_provenance_registry_authorized_not_implemented",
+}
 assert program["research_plane_implemented"] is True
 assert program["research_runtime_enabled"] is False
 assert program["public_network_fetch_available"] is False
-assert auth["active_knowledge_implementation_authorization"] == "AION-204-KI-0001"
-assert auth["active_knowledge_implementation_task"] == "AION-205"
-record = auth["records"][0]
-assert record["authorization_active"] is True
-assert record["authorization_consumed"] is False
-assert record["authorization_reusable"] is False
-assert record["research_plane_implemented"] is True
-assert record["public_network_fetch_available"] is False
-assert record["system_http_transport_available"] is False
+active = [record for record in auth["records"] if record.get("authorization_active") is True]
+assert len(active) == 1
+if program["program_state"] == "source_provenance_registry_authorized_not_implemented":
+    assert auth["active_knowledge_implementation_authorization"] == "AION-206-KI-0002"
+    assert auth["active_knowledge_implementation_task"] == "AION-207"
+    closed = [
+        record
+        for record in auth["records"]
+        if record.get("authorization_transaction_id") == "AION-204-KI-0001"
+    ][0]
+    assert closed["authorization_active"] is False
+    assert closed["authorization_consumed"] is True
+    assert closed["authorization_reusable"] is False
+else:
+    assert auth["active_knowledge_implementation_authorization"] == "AION-204-KI-0001"
+    assert auth["active_knowledge_implementation_task"] == "AION-205"
+    record = active[0]
+    assert record["authorization_active"] is True
+    assert record["authorization_consumed"] is False
+    assert record["authorization_reusable"] is False
+    assert record["research_plane_implemented"] is True
+    assert record["public_network_fetch_available"] is False
+    assert record["system_http_transport_available"] is False
 PY
 
 "$PYTHON_BIN" -m pytest \

@@ -1228,4 +1228,22 @@ Safe local commands:
 
 ## AION-205 Controlled Research Acquisition Core
 
-AION-205 implements the controlled research acquisition and immutable source-snapshot core as operator-invoked and runtime-disabled. Acquired content remains untrusted evidence; factual claim verification, knowledge promotion, cognitive belief mutation, public network fetch, crawler execution, search-provider integration, connector integration, source mutation, Git mutation, automatic merge, deployment, and model-weight training remain disabled. AION-204-KI-0001 remains active pending AION-206 closeout.
+AION-205 implements the controlled research acquisition and immutable source-snapshot core as operator-invoked and runtime-disabled. Acquired content remains untrusted evidence; factual claim verification, knowledge promotion, cognitive belief mutation, public network fetch, crawler execution, search-provider integration, connector integration, source mutation, Git mutation, automatic merge, deployment, and model-weight training remain disabled. AION-204-KI-0001 is closed by AION-206; AION-206-KI-0002 is active for AION-207 source registry authorization.
+
+## Knowledge Intelligence Research Evaluation and Source Registry Evidence
+
+AION-206 adds bundled read-only evidence for the AION-205 research evaluation and AION-207 source registry authorization:
+
+- `demo-data/knowledge-intelligence-research-evaluation.json`
+- `demo-data/knowledge-intelligence-source-registry-authorization.json`
+- `demo-data/knowledge-intelligence-source-registry-runtime-hold.json`
+
+The console remains static and local. It does not call the backend, fetch sources, store source bodies, verify claims, promote knowledge, mutate beliefs, activate runtime code, or expose write controls.
+
+Safe local commands:
+
+```bash
+./scripts/knowledge-intelligence-research-operator-evaluation-check.sh
+./scripts/knowledge-intelligence-source-registry-authorization-check.sh
+./scripts/knowledge-intelligence-source-registry-runtime-hold.sh
+```

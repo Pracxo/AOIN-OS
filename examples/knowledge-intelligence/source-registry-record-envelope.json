@@ -1,0 +1,52 @@
+{
+  "authorization_transaction_id": "AION-206-KI-0002",
+  "automatic_merge_enabled": false,
+  "background_crawler_enabled": false,
+  "belief_mutation_enabled": false,
+  "citation_references": [
+    {
+      "reference_id": "citation-0001",
+      "snapshot_fingerprint": "sha256:synthetic-source-snapshot-digest-only"
+    }
+  ],
+  "claim_verification_enabled": false,
+  "connector_integration_enabled": false,
+  "deployment_enabled": false,
+  "git_mutation_enabled": false,
+  "knowledge_promotion_enabled": false,
+  "lineage": [
+    {
+      "relation": "derived_from_snapshot_digest",
+      "target": "sha256:synthetic-source-snapshot-digest-only"
+    }
+  ],
+  "metadata": {
+    "body_sha256": "sha256:synthetic-body-digest-only",
+    "content_type": "text/plain",
+    "retrieved_at": "2026-07-23T06:00:00Z",
+    "source_class": "official_standard",
+    "source_url": "https://registry.example/source-0001"
+  },
+  "model_provider_integration_enabled": false,
+  "model_weight_training_enabled": false,
+  "network_access_enabled": false,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "public_network_fetch_available": false,
+  "read_only": true,
+  "record_id": "synthetic-source-record-0001",
+  "redacted": true,
+  "research_plane_implemented": true,
+  "research_runtime_enabled": false,
+  "runtime_effect": false,
+  "runtime_pr_enabled": false,
+  "schema_version": "aion-source-registry-record-envelope/v1",
+  "search_provider_integration_enabled": false,
+  "snapshot_fingerprint": "sha256:synthetic-source-snapshot-digest-only",
+  "source_body_bytes": 0,
+  "source_body_persistence_enabled": false,
+  "source_body_present": false,
+  "source_mutation_enabled": false,
+  "source_provenance_registry_implemented": false,
+  "source_registry_runtime_enabled": false,
+  "synthetic": true
+}
