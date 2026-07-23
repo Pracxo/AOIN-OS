@@ -1,5 +1,6 @@
 """Controlled Knowledge Intelligence research-acquisition package."""
 
 from aion_brain.knowledge_intelligence.research import ControlledResearchAcquisitionService
+from aion_brain.knowledge_intelligence.source_registry import ControlledSourceProvenanceRegistry
 
-__all__ = ["ControlledResearchAcquisitionService"]
+__all__ = ["ControlledResearchAcquisitionService", "ControlledSourceProvenanceRegistry"]

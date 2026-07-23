@@ -31,6 +31,9 @@
     knowledge_intelligence_source_snapshots: "demo-data/knowledge-intelligence-source-snapshots.json",
     knowledge_intelligence_source_lineage: "demo-data/knowledge-intelligence-source-lineage.json",
     knowledge_intelligence_source_registry_authorization: "demo-data/knowledge-intelligence-source-registry-authorization.json",
+    knowledge_intelligence_source_registry: "demo-data/knowledge-intelligence-source-registry.json",
+    knowledge_intelligence_source_registry_index: "demo-data/knowledge-intelligence-source-registry-index.json",
+    knowledge_intelligence_source_registry_integrity: "demo-data/knowledge-intelligence-source-registry-integrity.json",
     knowledge_intelligence_source_registry_runtime_hold: "demo-data/knowledge-intelligence-source-registry-runtime-hold.json",
     knowledge_intelligence_research_runtime_hold: "demo-data/knowledge-intelligence-research-runtime-hold.json",
     module_lifecycle: "demo-data/module-lifecycle-dashboard.json",
@@ -51,6 +54,9 @@
       "knowledge_intelligence_source_snapshots",
       "knowledge_intelligence_source_lineage",
       "knowledge_intelligence_source_registry_authorization",
+      "knowledge_intelligence_source_registry",
+      "knowledge_intelligence_source_registry_index",
+      "knowledge_intelligence_source_registry_integrity",
       "knowledge_intelligence_source_registry_runtime_hold",
       "knowledge_intelligence_research_runtime_hold"
     ],
@@ -72,6 +78,9 @@
       "knowledge_intelligence_source_snapshots",
       "knowledge_intelligence_source_lineage",
       "knowledge_intelligence_source_registry_authorization",
+      "knowledge_intelligence_source_registry",
+      "knowledge_intelligence_source_registry_index",
+      "knowledge_intelligence_source_registry_integrity",
       "knowledge_intelligence_source_registry_runtime_hold",
       "knowledge_intelligence_research_runtime_hold"
     ],
@@ -245,6 +254,8 @@
     "./scripts/knowledge-intelligence-research-plane-check.sh",
     "./scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh",
     "./scripts/knowledge-intelligence-research-operator-evaluation-check.sh",
+    "./scripts/knowledge-intelligence-source-registry-no-go-regression.sh",
+    "./scripts/knowledge-intelligence-source-registry-check.sh",
     "./scripts/knowledge-intelligence-source-registry-authorization-no-go-regression.sh",
     "./scripts/knowledge-intelligence-source-registry-authorization-check.sh",
     "./scripts/knowledge-intelligence-source-registry-runtime-hold.sh"

@@ -1232,18 +1232,23 @@ AION-205 implements the controlled research acquisition and immutable source-sna
 
 ## Knowledge Intelligence Research Evaluation and Source Registry Evidence
 
-AION-206 adds bundled read-only evidence for the AION-205 research evaluation and AION-207 source registry authorization:
+AION-206 adds bundled read-only evidence for the AION-205 research evaluation and AION-207 source registry authorization. AION-207 adds bundled read-only evidence for the implemented, in-memory-only source registry core:
 
 - `demo-data/knowledge-intelligence-research-evaluation.json`
 - `demo-data/knowledge-intelligence-source-registry-authorization.json`
+- `demo-data/knowledge-intelligence-source-registry.json`
+- `demo-data/knowledge-intelligence-source-registry-index.json`
+- `demo-data/knowledge-intelligence-source-registry-integrity.json`
 - `demo-data/knowledge-intelligence-source-registry-runtime-hold.json`
 
-The console remains static and local. It does not call the backend, fetch sources, store source bodies, verify claims, promote knowledge, mutate beliefs, activate runtime code, or expose write controls.
+The console remains static and local. It does not call the backend, fetch sources, accept source content or URLs, store source bodies, write registry data, create a database, execute fixture replay, verify claims, promote knowledge, mutate beliefs, activate runtime code, call Git, create pull requests, merge, deploy, or expose write controls.
 
 Safe local commands:
 
 ```bash
 ./scripts/knowledge-intelligence-research-operator-evaluation-check.sh
+./scripts/knowledge-intelligence-source-registry-no-go-regression.sh
+./scripts/knowledge-intelligence-source-registry-check.sh
 ./scripts/knowledge-intelligence-source-registry-authorization-check.sh
 ./scripts/knowledge-intelligence-source-registry-runtime-hold.sh
 ```

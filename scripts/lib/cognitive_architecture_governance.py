@@ -863,6 +863,7 @@ AION205_ALLOWED_EXACT_PATHS = {
     "AGENTS.md",
     "README.md",
     "docs/adr/0169-controlled-research-acquisition-and-immutable-source-snapshots.md",
+    "docs/adr/0171-append-only-source-provenance-registry-core.md",
     "docs/adr/README.md",
     "docs/architecture.md",
     "docs/brain-contract.md",
@@ -891,9 +892,14 @@ AION205_ALLOWED_EXACT_PATHS = {
     "scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh",
     "scripts/knowledge-intelligence-source-registry-authorization-check.sh",
     "scripts/knowledge-intelligence-source-registry-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-source-registry-check.sh",
+    "scripts/knowledge-intelligence-source-registry-no-go-regression.sh",
     "scripts/knowledge-intelligence-source-registry-runtime-hold.sh",
     "scripts/lib/knowledge_intelligence_research_operator_evaluation.py",
     "scripts/static-console-safety-check.sh",
+    "scripts/lib/v02_production_auth_authorization.py",
+    "services/brain-api/src/aion_brain/contracts/knowledge_source_registry.py",
+    "services/brain-api/tests/knowledge_source_registry_implementation_helpers.py",
 }
 
 AION205_ALLOWED_PREFIXES = (

@@ -1,0 +1,66 @@
+{
+  "authorization_scope": "append-only-immutable-source-snapshot-provenance-lineage-citation-registry-core",
+  "authorization_transaction_id": "AION-206-KI-0002",
+  "belief_mutation_enabled": false,
+  "budget_status": "within_budget",
+  "chain_head_fingerprint": "3d805faa6d80a6edd60ded8ee3a9d413c3b88c35f9e92fd7d5f13fbb9027d8af",
+  "citation_ids": [
+    "citation-reference-0001"
+  ],
+  "claim_verification_enabled": false,
+  "content_hashes": [
+    "353bb14cd2f687516bcdf35322dfdfa1720248d79443665c02eb9e9d2a666471"
+  ],
+  "formal_closeout_task": "AION-208",
+  "implementation_task": "AION-207",
+  "integrity_status": "passed",
+  "knowledge_promotion_enabled": false,
+  "lineage_groups": [
+    "research-independence-group-0001"
+  ],
+  "network_access_enabled": false,
+  "persistent_write_disabled": true,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "provenance_fingerprints": [
+    "9b17b375569c4279c358c5c9c2e76c40742c3b78747c993377edad874db1672e"
+  ],
+  "public_network_fetch_available": false,
+  "read_only": true,
+  "record_count": 6,
+  "record_ids": [
+    "source-registry-source_snapshot_digest-0001",
+    "source-registry-source_provenance-0002",
+    "source-registry-citation_reference-0003",
+    "source-registry-source_lineage-0004",
+    "source-registry-deduplication_decision-0005",
+    "source-registry-operator_review_reference-0006"
+  ],
+  "record_kinds": [
+    "source_snapshot_digest",
+    "source_provenance",
+    "citation_reference",
+    "source_lineage",
+    "deduplication_decision",
+    "operator_review_reference"
+  ],
+  "redacted": true,
+  "research_plane_implemented": true,
+  "research_runtime_enabled": false,
+  "runtime_effect": false,
+  "snapshot_fingerprints": [
+    "2228918f2eaea76990ec24ffc595b5f5ef143432add661dfaf3f854add30577b"
+  ],
+  "source_body_persistence_enabled": false,
+  "source_classes": [
+    "official_standard"
+  ],
+  "source_provenance_registry_authorized": true,
+  "source_provenance_registry_implemented": true,
+  "source_provenance_registry_state": "implemented_append_only_in_memory_replay_persistent_write_disabled",
+  "source_registry_persistent_write_enabled": false,
+  "source_registry_runtime_enabled": false,
+  "synthetic": true,
+  "title": "Knowledge Intelligence source registry",
+  "verified_knowledge_promotion_enabled": false,
+  "view_id": "knowledge_intelligence_source_registry"
+}

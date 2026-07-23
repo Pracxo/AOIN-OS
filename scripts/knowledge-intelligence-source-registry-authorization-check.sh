@@ -4,15 +4,15 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/python-selection.sh"
+source "$ROOT_DIR/scripts/lib/portable-search.sh"
 
 PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 export AION_REPO_ROOT="$ROOT_DIR"
 
-REPORT="examples/knowledge-intelligence/research-acquisition-operator-evaluation-report.json"
-test -f "$REPORT"
-"$PYTHON_BIN" -m json.tool "$REPORT" >/dev/null
-"$PYTHON_BIN" scripts/lib/knowledge_intelligence_research_operator_evaluation.py --validate-report "$REPORT"
+"$PYTHON_BIN" -m json.tool examples/knowledge-intelligence/research-acquisition-operator-evaluation-report.json >/dev/null
+"$PYTHON_BIN" scripts/lib/knowledge_intelligence_research_operator_evaluation.py \
+  --validate-report examples/knowledge-intelligence/research-acquisition-operator-evaluation-report.json
 
 "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
@@ -27,10 +27,20 @@ AUTH_206 = "AION-206-KI-0002"
 PROGRAM_ID = "AION-KNOWLEDGE-INTELLIGENCE-001"
 DECISION = "RESEARCH_ACQUISITION_OPERATOR_EVALUATION_PASS_RECOMMEND_SOURCE_PROVENANCE_REGISTRY_AUTHORIZATION"
 SOURCE_SCOPE = "append-only-immutable-source-snapshot-provenance-lineage-citation-registry-core"
+IMPLEMENTED_STATE = "implemented_append_only_in_memory_replay_persistent_write_disabled"
 REQUIRED_DOCS = [
-    "docs/knowledge-intelligence/research-plane-operator-evaluation-closeout.md",
-    "docs/knowledge-intelligence/research-plane-operator-evaluation-report.md",
-    "docs/knowledge-intelligence/research-plane-evaluation-scenarios.md",
+    "docs/knowledge-intelligence/source-registry-implementation.md",
+    "docs/knowledge-intelligence/source-registry-contracts.md",
+    "docs/knowledge-intelligence/source-registry-record-envelope.md",
+    "docs/knowledge-intelligence/source-registry-append-only-semantics.md",
+    "docs/knowledge-intelligence/source-registry-in-memory-repository.md",
+    "docs/knowledge-intelligence/source-registry-fixture-replay.md",
+    "docs/knowledge-intelligence/source-registry-indexes-and-queries.md",
+    "docs/knowledge-intelligence/source-registry-integrity-audit.md",
+    "docs/knowledge-intelligence/source-registry-versioning.md",
+    "docs/knowledge-intelligence/source-registry-security-review.md",
+    "docs/knowledge-intelligence/source-registry-operator-runbook.md",
+    "docs/knowledge-intelligence/aion-207-checklist.md",
     "docs/knowledge-intelligence/source-provenance-registry-architecture.md",
     "docs/knowledge-intelligence/source-provenance-registry-boundary.md",
     "docs/knowledge-intelligence/source-provenance-registry-data-model.md",
@@ -38,10 +48,8 @@ REQUIRED_DOCS = [
     "docs/knowledge-intelligence/source-provenance-registry-resource-budgets.md",
     "docs/knowledge-intelligence/source-provenance-registry-threat-model.md",
     "docs/knowledge-intelligence/source-provenance-registry-roadmap.md",
-    "docs/release/knowledge-intelligence-research-evaluation-closeout.md",
-    "docs/release/knowledge-intelligence-research-evaluation-checklist.md",
-    "docs/release/knowledge-intelligence-research-evaluation-evidence-matrix.md",
-    "docs/release/knowledge-intelligence-research-evaluation-runtime-hold.md",
+    "docs/release/knowledge-intelligence-source-registry-implementation.md",
+    "docs/release/knowledge-intelligence-source-registry-security-evidence.md",
     "docs/release/knowledge-intelligence-source-registry-authorization-transaction.md",
     "docs/release/knowledge-intelligence-source-registry-explicit-approval-record.md",
     "docs/release/knowledge-intelligence-source-registry-scope.md",
@@ -49,24 +57,39 @@ REQUIRED_DOCS = [
     "docs/release/knowledge-intelligence-source-registry-no-go.md",
     "docs/release/knowledge-intelligence-source-registry-checklist.md",
     "docs/release/knowledge-intelligence-source-registry-evidence-matrix.md",
-    "docs/adr/0170-research-acquisition-evaluation-and-source-provenance-registry-authorization.md",
+    "docs/adr/0171-append-only-source-provenance-registry-core.md",
 ]
 REQUIRED_EXAMPLES = [
-    "examples/knowledge-intelligence/research-acquisition-operator-evaluation-report.json",
-    "examples/knowledge-intelligence/research-acquisition-evaluation-scenario-summary.json",
     "examples/knowledge-intelligence/source-registry-authorization.json",
     "examples/knowledge-intelligence/source-registry-record-envelope.json",
+    "examples/knowledge-intelligence/source-registry-record.json",
+    "examples/knowledge-intelligence/source-registry-proposed-batch.json",
+    "examples/knowledge-intelligence/source-registry-state.json",
+    "examples/knowledge-intelligence/source-registry-index.json",
+    "examples/knowledge-intelligence/source-registry-query.json",
+    "examples/knowledge-intelligence/source-registry-query-result.json",
+    "examples/knowledge-intelligence/source-registry-integrity-report.json",
+    "examples/knowledge-intelligence/source-registry-fixture-replay.json",
+    "examples/knowledge-intelligence/source-registry-incident.json",
+    "examples/knowledge-intelligence/source-registry-operator-review.json",
+    "examples/knowledge-intelligence/source-registry-operator-review-item.json",
     "examples/knowledge-intelligence/source-registry-resource-budget.json",
     "examples/knowledge-intelligence/source-registry-runtime-hold.json",
-    "examples/knowledge-intelligence/source-registry-operator-review-item.json",
-    "operator-console-static/demo-data/knowledge-intelligence-research-evaluation.json",
     "operator-console-static/demo-data/knowledge-intelligence-source-registry-authorization.json",
     "operator-console-static/demo-data/knowledge-intelligence-source-registry-runtime-hold.json",
+    "operator-console-static/demo-data/knowledge-intelligence-source-registry.json",
+    "operator-console-static/demo-data/knowledge-intelligence-source-registry-index.json",
+    "operator-console-static/demo-data/knowledge-intelligence-source-registry-integrity.json",
 ]
-SOURCE_RUNTIME_PATHS = [
+REQUIRED_SOURCE = [
     "services/brain-api/src/aion_brain/contracts/knowledge_source_registry.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_repository.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_index.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_evidence.py",
+]
+PROHIBITED_SOURCE = [
     "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_runtime.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_service.py",
     "services/brain-api/src/aion_brain/api/source_registry.py",
@@ -120,9 +143,9 @@ def read_json(relative: str) -> dict:
     return json.loads((ROOT / relative).read_text())
 
 
-for relative in REQUIRED_DOCS + REQUIRED_EXAMPLES:
+for relative in REQUIRED_DOCS + REQUIRED_EXAMPLES + REQUIRED_SOURCE:
     assert (ROOT / relative).is_file(), relative
-for relative in SOURCE_RUNTIME_PATHS:
+for relative in PROHIBITED_SOURCE:
     assert not (ROOT / relative).exists(), relative
 
 program = read_json("docs/knowledge-intelligence/program-ledger.json")
@@ -131,24 +154,28 @@ report = read_json("examples/knowledge-intelligence/research-acquisition-operato
 source_auth = read_json("examples/knowledge-intelligence/source-registry-authorization.json")
 
 assert program["program_id"] == PROGRAM_ID
-assert program["program_state"] == "source_provenance_registry_authorized_not_implemented"
+assert program["program_state"] == "source_provenance_registry_implemented_write_disabled_pending_closeout"
 assert program["active_knowledge_implementation_authorization"] == AUTH_206
 assert program["active_knowledge_implementation_authorization_count"] == 1
 assert program["active_knowledge_implementation_task"] == "AION-207"
 assert program["formal_closeout_task"] == "AION-208"
 assert program["source_provenance_registry_authorized"] is True
-assert program["source_provenance_registry_implemented"] is False
+assert program["source_provenance_registry_implemented"] is True
+assert program["source_provenance_registry_state"] == IMPLEMENTED_STATE
+assert program["source_registry_runtime_enabled"] is False
+assert program["source_registry_persistent_write_enabled"] is False
+assert program["new_knowledge_implementation_authorization_created"] is False
 assert program["research_plane_implemented"] is True
 assert program["research_runtime_enabled"] is False
 assert program["network_access_enabled"] is False
+assert program["source_body_persistence_enabled"] is False
+assert program["claim_verification_enabled"] is False
+assert program["knowledge_promotion_enabled"] is False
+assert program["belief_mutation_enabled"] is False
 assert report["decision"] == DECISION
 assert report["scenario_count"] == 28
 assert all(item["passed"] for item in report["scenario_results"])
-assert report["authorization_closeout"]["authorization_transaction_id"] == AUTH_204
-assert report["authorization_closeout"]["authorization_active"] is False
-assert report["authorization_closeout"]["authorization_consumed"] is True
-assert report["authorization_closeout"]["authorization_expired"] is True
-assert report["authorization_closeout"]["authorization_reusable"] is False
+
 active = [record for record in auth["records"] if record.get("authorization_active") is True]
 closed = [
     record
@@ -157,36 +184,66 @@ closed = [
 ]
 assert len(active) == 1
 assert len(closed) == 1
-assert active[0]["authorization_transaction_id"] == AUTH_206
-assert active[0]["authorization_scope"] == SOURCE_SCOPE
-assert active[0]["implementation_task"] == "AION-207"
-assert active[0]["formal_closeout_task"] == "AION-208"
-assert active[0]["authorization_consumed"] is False
-assert active[0]["authorization_expired"] is False
-assert active[0]["authorization_reusable"] is False
-assert set(active[0]["authorized_capabilities"]) == AUTHORIZED_KEYS
-assert all(active[0]["authorized_capabilities"][key] is True for key in AUTHORIZED_KEYS)
-assert active[0]["resource_limits"] == RESOURCE_LIMITS
-assert all(value is False for value in active[0]["prohibited_capabilities"].values())
+record = active[0]
+assert record["authorization_transaction_id"] == AUTH_206
+assert record["approval_record_id"] == AUTH_206
+assert record["candidate_id"] == "source-provenance-registry-core"
+assert record["authorization_scope"] == SOURCE_SCOPE
+assert record["implementation_task"] == "AION-207"
+assert record["formal_closeout_task"] == "AION-208"
+assert record["authorization_active"] is True
+assert record["authorization_consumed"] is False
+assert record["authorization_expired"] is False
+assert record["authorization_reusable"] is False
+assert record["parent_authorization_transaction_id"] == AUTH_204
+assert record["parent_authorization_closed"] is True
+assert record["parent_evaluation_id"] == "AION-RAE-001"
+assert record["parent_evaluation_decision"] == DECISION
+assert record["parent_main_commit"] == "a775fb18bb0027d30834d8ab2507f461013753e2"
+assert set(record["authorized_capabilities"]) == AUTHORIZED_KEYS
+assert all(record["authorized_capabilities"][key] is True for key in AUTHORIZED_KEYS)
+assert record["resource_limits"] == RESOURCE_LIMITS
+assert all(value is False for value in record["prohibited_capabilities"].values())
+assert record["source_provenance_registry_implemented"] is True
+assert record["source_provenance_registry_state"] == IMPLEMENTED_STATE
+assert record["source_registry_runtime_enabled"] is False
+assert record["source_registry_persistent_write_enabled"] is False
+assert record["source_body_persistence_enabled"] is False
+assert record["claim_verification_enabled"] is False
+assert record["knowledge_promotion_enabled"] is False
+assert record["belief_mutation_enabled"] is False
+assert record["network_access_enabled"] is False
 assert closed[0]["authorization_active"] is False
 assert closed[0]["authorization_consumed"] is True
-assert closed[0]["authorization_consumed_by_task"] == "AION-205"
 assert closed[0]["authorization_consumed_by_prs"] == [116, 117]
-assert closed[0]["authorization_closed_by_task"] == "AION-206"
 assert closed[0]["authorization_expired"] is True
 assert closed[0]["authorization_reusable"] is False
 assert source_auth["authorization_transaction_id"] == AUTH_206
-assert source_auth["authorized_capabilities"] == active[0]["authorized_capabilities"]
-assert source_auth["prohibited_capabilities"] == active[0]["prohibited_capabilities"]
+assert source_auth["authorized_capabilities"] == record["authorized_capabilities"]
+assert source_auth["prohibited_capabilities"] == record["prohibited_capabilities"]
 assert source_auth["resource_limits"] == RESOURCE_LIMITS
+assert "0171-append-only-source-provenance-registry-core.md" in (
+    ROOT / "docs/adr/README.md"
+).read_text()
+
 for relative in REQUIRED_EXAMPLES:
     payload = read_json(relative)
     assert payload["synthetic"] is True, relative
     assert payload["read_only"] is True, relative
     assert payload["redacted"] is True, relative
-    assert payload["research_plane_implemented"] is True, relative
-    assert payload["research_runtime_enabled"] is False, relative
-    assert payload["network_access_enabled"] is False, relative
+    assert payload["program_id"] == PROGRAM_ID, relative
+    assert payload["authorization_transaction_id"] == AUTH_206, relative
+    assert payload["implementation_task"] == "AION-207", relative
+    assert payload["formal_closeout_task"] == "AION-208", relative
+    assert payload["source_provenance_registry_authorized"] is True, relative
+    assert payload["source_provenance_registry_implemented"] is True, relative
+    assert payload["source_registry_runtime_enabled"] is False, relative
+    assert payload["source_registry_persistent_write_enabled"] is False, relative
+    assert payload["source_body_persistence_enabled"] is False, relative
+    assert payload["claim_verification_enabled"] is False, relative
+    assert payload["knowledge_promotion_enabled"] is False, relative
+    assert payload["belief_mutation_enabled"] is False, relative
+    assert payload["runtime_effect"] is False, relative
 PY
 
 ./scripts/knowledge-intelligence-source-registry-authorization-no-go-regression.sh

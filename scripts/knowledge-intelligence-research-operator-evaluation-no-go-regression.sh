@@ -21,7 +21,17 @@ from pathlib import Path
 ROOT = Path(os.environ["AION_REPO_ROOT"])
 EXPECTED_TAG = "105fe29348160a2218ac095cfffadcb6f234421f"
 ALLOWED_PREFIXES = ("docs/", "examples/", "operator-console-static/", "scripts/", "services/brain-api/tests/")
-ALLOWED_EXACT = {"README.md", "AGENTS.md"}
+ALLOWED_EXACT = {
+    "README.md",
+    "AGENTS.md",
+    "services/brain-api/src/aion_brain/contracts/knowledge_source_registry.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_repository.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_index.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_evidence.py",
+}
 PROHIBITED_PREFIXES = (
     ".github/workflows/",
     "services/brain-api/src/aion_brain/",
@@ -87,7 +97,7 @@ for parts in entries:
         normalized = path.replace("\\", "/")
         if Path(normalized).name in PROHIBITED_NAMES:
             raise SystemExit(f"dependency/package file changed: {normalized}")
-        if normalized.startswith(PROHIBITED_PREFIXES):
+        if normalized.startswith(PROHIBITED_PREFIXES) and normalized not in ALLOWED_EXACT:
             raise SystemExit(f"runtime/source/workflow path changed on AION-206: {normalized}")
         if normalized not in ALLOWED_EXACT and not any(normalized.startswith(prefix) for prefix in ALLOWED_PREFIXES):
             raise SystemExit(f"path outside AION-206 scope: {normalized}")

@@ -60,8 +60,14 @@ RESOURCE_LIMITS = {
 }
 SOURCE_RUNTIME_PATHS = [
     "services/brain-api/src/aion_brain/contracts/knowledge_source_registry.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_repository.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_index.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_evidence.py",
+]
+PROHIBITED_SOURCE_RUNTIME_PATHS = [
     "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_runtime.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_service.py",
     "services/brain-api/src/aion_brain/api/source_registry.py",
@@ -113,7 +119,6 @@ def validate_source_authorization(record: dict) -> None:
         "research_runtime_enabled",
         "network_access_enabled",
         "public_network_fetch_available",
-        "source_provenance_registry_implemented",
         "source_body_persistence_enabled",
         "claim_verification_enabled",
         "knowledge_promotion_enabled",
@@ -121,6 +126,11 @@ def validate_source_authorization(record: dict) -> None:
         "runtime_effect",
     ):
         assert record[key] is False, key
+    assert record["source_provenance_registry_implemented"] is True
+    assert (
+        record["source_provenance_registry_state"]
+        == "implemented_append_only_in_memory_replay_persistent_write_disabled"
+    )
 
 
 def assert_source_authorization_rejects(mutator) -> None:

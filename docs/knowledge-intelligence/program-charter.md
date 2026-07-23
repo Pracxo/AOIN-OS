@@ -55,4 +55,10 @@ AION-205 implements the controlled research acquisition and immutable source-sna
 
 ## AION-206 source registry authorization
 
-AION-206 records `RESEARCH_ACQUISITION_OPERATOR_EVALUATION_PASS_RECOMMEND_SOURCE_PROVENANCE_REGISTRY_AUTHORIZATION`, closes `AION-204-KI-0001`, and creates `AION-206-KI-0002` for AION-207 only. The source registry remains authorized but not implemented; runtime, network, source body persistence, claim verification, knowledge promotion, and belief mutation remain disabled.
+AION-206 records `RESEARCH_ACQUISITION_OPERATOR_EVALUATION_PASS_RECOMMEND_SOURCE_PROVENANCE_REGISTRY_AUTHORIZATION`, closes `AION-204-KI-0001`, and creates `AION-206-KI-0002` for AION-207 only. The source registry core is implemented as immutable in-memory metadata only; runtime, persistent registry writes, network, source body persistence, claim verification, knowledge promotion, and belief mutation remain disabled pending AION-208 formal closeout.
+
+## AION-207 append-only source provenance registry
+
+AION-207 implements the metadata-only source provenance registry core under `AION-206-KI-0002`. It projects validated AION-205 evidence into immutable in-memory registry envelopes, supports synthetic fixture replay, builds deterministic indexes, runs integrity audits, and produces redacted diagnostics and operator-review items.
+
+The registry stores zero source-body bytes, applies no persistent registry write, verifies no claims, promotes no knowledge, mutates no cognitive beliefs, performs no network fetch, and registers no runtime API, CLI, SDK, scheduler, worker, or kernel service. AION-206-KI-0002 remains active pending AION-208 formal closeout.

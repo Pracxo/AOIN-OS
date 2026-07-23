@@ -1,6 +1,6 @@
 # Source Provenance Registry Resource Budgets
 
-AION-206 sets the AION-207 source registry authorization budgets below. Network, runtime write, claim verification, knowledge promotion, belief mutation, Git, approval, deployment, and model-provider budgets are all zero.
+AION-206 sets the AION-207 source registry authorization budgets below. AION-207 keeps the persistent write batch at zero. Network, runtime write, claim verification, knowledge promotion, belief mutation, Git, approval, deployment, and model-provider budgets are all zero.
 
 - `maximum_registry_records_per_plan`: `100`
 - `maximum_record_envelope_bytes`: `8192`

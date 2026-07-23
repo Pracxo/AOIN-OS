@@ -1,0 +1,33 @@
+{
+  "authorization_scope": "append-only-immutable-source-snapshot-provenance-lineage-citation-registry-core",
+  "authorization_transaction_id": "AION-206-KI-0002",
+  "belief_mutation_enabled": false,
+  "claim_verification_enabled": false,
+  "created_at": "2026-07-23T12:00:00Z",
+  "fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "formal_closeout_task": "AION-208",
+  "implementation_task": "AION-207",
+  "incident_id": "source-registry-incident-0001",
+  "knowledge_promotion_enabled": false,
+  "network_access_enabled": false,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "public_network_fetch_available": false,
+  "read_only": true,
+  "reason_codes": [
+    "source_registry_persistent_write_disabled"
+  ],
+  "redacted": true,
+  "redacted_summary": "Persistent registry writes remain disabled pending operator review.",
+  "research_plane_implemented": true,
+  "research_runtime_enabled": false,
+  "runtime_effect": false,
+  "severity": "low",
+  "source_body_persistence_enabled": false,
+  "source_provenance_registry_authorized": true,
+  "source_provenance_registry_implemented": true,
+  "source_provenance_registry_state": "implemented_append_only_in_memory_replay_persistent_write_disabled",
+  "source_registry_persistent_write_enabled": false,
+  "source_registry_runtime_enabled": false,
+  "synthetic": true,
+  "verified_knowledge_promotion_enabled": false
+}

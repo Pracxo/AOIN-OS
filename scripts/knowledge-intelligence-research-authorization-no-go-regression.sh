@@ -14,6 +14,15 @@ EXPECTED='105fe29348160a2218ac095cfffadcb6f234421f'
 PROHIBITED_PREFIXES=('.github/workflows/','services/brain-api/src/aion_brain/','services/brain-api/pyproject.toml','packages/aion-sdk-python/src/','migrations/','services/brain-api/migrations/','infra/postgres/migrations/')
 PROHIBITED_NAMES={'package.json','package-lock.json','pnpm-lock.yaml','yarn.lock','poetry.lock','uv.lock','Pipfile','Pipfile.lock'}
 AION205=('services/brain-api/src/aion_brain/contracts/knowledge_research.py','services/brain-api/src/aion_brain/knowledge_intelligence/')
+SOURCE_REGISTRY_SOURCE={
+    'services/brain-api/src/aion_brain/contracts/knowledge_source_registry.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/source_registry.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_repository.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_integrity.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_index.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_evidence.py',
+}
 SECRET=re.compile(r'(?i)(sk-[a-z0-9]|ghp_[a-z0-9]|gho_[a-z0-9]|xoxb-|bearer\s+[a-z0-9])')
 URL=re.compile(r'''https?://([^/\s"']+)''')
 def run(args, check=True): return subprocess.run(args,cwd=ROOT,text=True,capture_output=True,check=check)
@@ -36,6 +45,7 @@ if program_path.exists():
 implemented_states = {
     'research_plane_implemented_disabled_pending_closeout',
     'source_provenance_registry_authorized_not_implemented',
+    'source_provenance_registry_implemented_write_disabled_pending_closeout',
 }
 if b is not None:
     entries += [line.split('\t') for line in run(['git','diff','--name-status',b,'HEAD']).stdout.splitlines() if line.strip()]
@@ -58,7 +68,8 @@ for parts in entries:
         n=p.replace('\\','/')
         if n in PROHIBITED_NAMES or Path(n).name in PROHIBITED_NAMES: raise SystemExit(f'dependency/package file changed: {n}')
         aion205_allowed = program_state in implemented_states and (n == AION205[0] or n.startswith(AION205[1]))
-        if n.startswith(PROHIBITED_PREFIXES) and not aion205_allowed: raise SystemExit(f'prohibited runtime/source path changed: {n}')
+        source_registry_allowed = program_state == 'source_provenance_registry_implemented_write_disabled_pending_closeout' and n in SOURCE_REGISTRY_SOURCE
+        if n.startswith(PROHIBITED_PREFIXES) and not (aion205_allowed or source_registry_allowed): raise SystemExit(f'prohibited runtime/source path changed: {n}')
         if n.startswith(AION205) and not aion205_allowed: raise SystemExit(f'AION-205 implementation source added by AION-204: {n}')
 if program_state not in implemented_states:
     for p in AION205:
