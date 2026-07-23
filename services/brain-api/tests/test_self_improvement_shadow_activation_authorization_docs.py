@@ -88,7 +88,7 @@ def test_project_status_reports_aion180_current_state() -> None:
     current = text.split("## Historical Compatibility Markers", 1)[0]
     historical = text.split("## Historical Compatibility Markers", 1)[1]
     assert "AION-204 Cognitive Architecture closeout reconciliation" in current
-    assert "source registry authorized but not implemented" in current
+    assert "source registry implemented with persistent writes disabled" in current
     assert "active self-improvement implementation authorization count is zero" in current
     assert "`knowledge_research_runtime_enabled=false`" in current
     assert "`active_knowledge_implementation_task=AION-207`" in current

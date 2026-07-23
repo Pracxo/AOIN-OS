@@ -56,7 +56,10 @@ def test_ledgers_create_single_active_knowledge_authorization():
     program = read_json("docs/knowledge-intelligence/program-ledger.json")
     auth = read_json("docs/knowledge-intelligence/authorization-ledger.json")
     assert program["program_id"] == PROGRAM_ID
-    assert program["program_state"] == "source_provenance_registry_authorized_not_implemented"
+    assert (
+        program["program_state"]
+        == "source_provenance_registry_implemented_write_disabled_pending_closeout"
+    )
     assert program["active_knowledge_implementation_authorization_count"] == 1
     assert program["active_knowledge_implementation_authorization"] == SOURCE_AUTH_ID
     assert program["active_knowledge_implementation_task"] == "AION-207"
@@ -70,6 +73,11 @@ def test_ledgers_create_single_active_knowledge_authorization():
     assert program["verified_knowledge_memory_enabled"] is False
     assert program["background_crawler_enabled"] is False
     assert program["public_network_fetch_available"] is False
+    assert program["source_provenance_registry_implemented"] is True
+    assert (
+        program["source_provenance_registry_state"]
+        == "implemented_append_only_in_memory_replay_persistent_write_disabled"
+    )
     assert auth["active_cognitive_implementation_authorization_count"] == 0
     active = [record for record in auth["records"] if record.get("authorization_active") is True]
     assert len(active) == 1

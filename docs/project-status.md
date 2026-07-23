@@ -8,12 +8,12 @@ tag or release exists.
 
 ## Current Main Milestone
 
-AION-206 research acquisition operator evaluation complete; source registry authorization active.
+AION-207 append-only source provenance registry core implemented.
 
-Current stage: Knowledge Intelligence research plane implemented, operator-invoked, runtime-disabled, and formally evaluated. AION-206 closes `AION-204-KI-0001` as consumed, inactive, expired, and non-reusable, then creates `AION-206-KI-0002` for AION-207 only. AION-203 completed the AION Cognitive Architecture Program, the controlled local-offline cognitive pilot passed, and active cognitive implementation authorization count is zero.
+Current stage: Knowledge Intelligence research plane implemented, operator-invoked, runtime-disabled, and formally evaluated. AION-207 implements the source provenance registry with immutable in-memory projection, synthetic fixture replay, deterministic indexes, bounded exact queries, integrity auditing, redacted diagnostics, incidents, and operator-review items. Persistent registry writes and registry runtime remain disabled pending AION-208 formal closeout and operator evaluation. AION-203 completed the AION Cognitive Architecture Program, the controlled local-offline cognitive pilot passed, and active cognitive implementation authorization count is zero.
 
 AION-204 Cognitive Architecture closeout reconciliation remains part of the
-current compatibility record. The prior status phrase "Knowledge Intelligence research plane authorized and not implemented" is historical; the current Knowledge Intelligence state is source registry authorized but not implemented.
+current compatibility record. The prior status phrase "Knowledge Intelligence research plane authorized and not implemented" is historical; the current Knowledge Intelligence state is source registry implemented with persistent writes disabled.
 
 Current state flags:
 
@@ -33,10 +33,14 @@ Current state flags:
 - `connector_integration_enabled=false`
 - `knowledge_research_plane_state=implemented_operator_invoked_disabled`
 - `source_provenance_registry_authorized=true`
-- `source_provenance_registry_implemented=false`
+- `source_provenance_registry_implemented=true`
+- `source_provenance_registry_state=implemented_append_only_in_memory_replay_persistent_write_disabled`
+- `source_registry_runtime_enabled=false`
+- `source_registry_persistent_write_enabled=false`
 - `source_body_persistence_enabled=false`
 - `claim_verification_enabled=false`
 - `verified_knowledge_promotion_enabled=false`
+- `belief_mutation_enabled=false`
 - `active_knowledge_implementation_authorization=AION-206-KI-0002`
 - active Knowledge Intelligence implementation authorization count: 1
 - `active_knowledge_implementation_task=AION-207`
@@ -146,6 +150,8 @@ Historical marker: Current milestone: AION-160 actor-context trust-boundary reme
 Historical marker: Current authorization: AION-161-PA-0006 consumed by AION-162 when merged.
 Historical marker: Current authorization: AION-163-PA-0007 active for AION-164.
 Historical marker: AION-162 offline Ed25519 identity assertion verification core implemented and post-merge verification corrected.
+Historical marker: AION-206 research acquisition operator evaluation complete; source registry authorization active.
+Historical marker: The next task is AION-207 append-only source-provenance registry implementation.
 
 Historical AION-160 marker: AION-160 actor-context trust-boundary remediation implemented.
 The completed remediation keeps non-development identity headers ignored,
@@ -155,18 +161,11 @@ and production authentication disabled. Formal lifecycle closeout: AION-161.
 
 ## Current Operator Task
 
-Prepare AION-207 append-only source-provenance registry implementation under
-`AION-206-KI-0002`, while keeping the research runtime hold and source-registry
-runtime hold intact until AION-208 formal closeout.
-
-The next task is AION-207 append-only source-provenance registry implementation.
-AION-207 may implement only immutable source-record envelopes, redacted
-metadata persistence, canonical fingerprints, citation references,
-operator-review items, resource-budget checks, and runtime-hold enforcement
-under `append-only-immutable-source-snapshot-provenance-lineage-citation-registry-core`.
-AION-207 must not activate network fetch, source-body storage, claim
-verification, knowledge promotion, belief mutation, connector integration, Git
-mutation, automatic merge, or production deployment.
+Complete AION-208 source-provenance registry evaluation and formal closeout for
+`AION-206-KI-0002`. AION-205 acquires untrusted evidence; AION-207 registers
+immutable evidence metadata, stores zero acquired source-body bytes, does not
+verify claims, does not promote knowledge, does not mutate beliefs, and applies
+no persistent registry write.
 
 AION-204 does not authorize internet research runtime activation, crawler execution, unrestricted network access, search-provider integration, connector integration, credential use, automatic knowledge promotion, cognitive belief mutation, source mutation, Git mutation, automatic merge, production deployment, or model-weight training.
 

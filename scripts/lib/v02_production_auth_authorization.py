@@ -1201,6 +1201,12 @@ BLOCKED_VALUE_MARKERS = (
     "chain_of_thought",
 )
 
+NON_PRODUCTION_AUTH_APPROVAL_RECORDS = frozenset(
+    {
+        "operator-console-static/demo-data/knowledge-intelligence-source-registry-authorization.json",
+    }
+)
+
 
 def main() -> int:
     parser = argparse.ArgumentParser()
@@ -1685,6 +1691,9 @@ def collect_approval_record(
     if isinstance(payload, dict):
         true_keys = {key for key in APPROVAL_TRUE_KEYS if payload.get(key) is True}
         if true_keys:
+            base_relative = relative.split(":", 1)[0].split("[", 1)[0]
+            if base_relative in NON_PRODUCTION_AUTH_APPROVAL_RECORDS:
+                return
             spec = validate_authorization_record(relative, payload)
             approved_records.setdefault(spec.tuple_key, set()).add(relative)
             if payload.get("authorization_active") is True:

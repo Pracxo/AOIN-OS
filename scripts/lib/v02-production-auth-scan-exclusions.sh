@@ -94,6 +94,9 @@ aion151_is_scoped_authorization_path() {
       if aion205_is_scoped_knowledge_intelligence_research_acquisition_path "$1"; then
         return 0
       fi
+      if aion207_is_scoped_knowledge_intelligence_source_registry_path "$1"; then
+        return 0
+      fi
       return 1
       ;;
   esac
@@ -1673,6 +1676,42 @@ aion205_is_scoped_knowledge_intelligence_research_acquisition_path() {
     services/brain-api/src/aion_brain/knowledge_intelligence/*|\
     services/brain-api/tests/test_knowledge_research*|\
     services/brain-api/tests/test_knowledge_source*)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+aion207_is_scoped_knowledge_intelligence_source_registry_path() {
+  # Exact/prefix AION-207 Knowledge Intelligence source-registry paths. These
+  # are metadata-only registry implementation artifacts, not production-auth
+  # authorization, provider, credential, package, migration, API, or runtime
+  # enablement surfaces.
+  case "$1" in
+    docs/adr/0171-append-only-source-provenance-registry-core.md|\
+    docs/adr/README.md|\
+    docs/knowledge-intelligence/aion-207-checklist.md|\
+    docs/knowledge-intelligence/source-registry-*|\
+    docs/release/knowledge-intelligence-source-registry-*|\
+    examples/knowledge-intelligence/source-registry-*|\
+    operator-console-static/demo-data/knowledge-intelligence-source-registry*.json|\
+    scripts/knowledge-intelligence-source-registry-authorization-check.sh|\
+    scripts/knowledge-intelligence-source-registry-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-source-registry-check.sh|\
+    scripts/knowledge-intelligence-source-registry-no-go-regression.sh|\
+    scripts/knowledge-intelligence-source-registry-runtime-hold.sh|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    services/brain-api/src/aion_brain/contracts/knowledge_source_registry.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/source_registry.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_evidence.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_index.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_integrity.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_repository.py|\
+    services/brain-api/tests/knowledge_source_registry_implementation_helpers.py|\
+    services/brain-api/tests/knowledge_source_registry_test_helpers.py|\
+    services/brain-api/tests/test_knowledge_source_registry*.py)
       return 0
       ;;
     *)

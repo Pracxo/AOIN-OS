@@ -42,15 +42,27 @@ auth = json.loads((ROOT / "docs/knowledge-intelligence/authorization-ledger.json
 assert program["program_state"] in {
     "research_plane_implemented_disabled_pending_closeout",
     "source_provenance_registry_authorized_not_implemented",
+    "source_provenance_registry_implemented_write_disabled_pending_closeout",
 }
 assert program["research_plane_implemented"] is True
 assert program["research_runtime_enabled"] is False
 assert program["public_network_fetch_available"] is False
 active = [record for record in auth["records"] if record.get("authorization_active") is True]
 assert len(active) == 1
-if program["program_state"] == "source_provenance_registry_authorized_not_implemented":
+if program["program_state"] in {
+    "source_provenance_registry_authorized_not_implemented",
+    "source_provenance_registry_implemented_write_disabled_pending_closeout",
+}:
     assert auth["active_knowledge_implementation_authorization"] == "AION-206-KI-0002"
     assert auth["active_knowledge_implementation_task"] == "AION-207"
+    if program["program_state"] == "source_provenance_registry_implemented_write_disabled_pending_closeout":
+        assert program["source_provenance_registry_implemented"] is True
+        assert (
+            program["source_provenance_registry_state"]
+            == "implemented_append_only_in_memory_replay_persistent_write_disabled"
+        )
+        assert program["source_registry_runtime_enabled"] is False
+        assert program["source_registry_persistent_write_enabled"] is False
     closed = [
         record
         for record in auth["records"]
