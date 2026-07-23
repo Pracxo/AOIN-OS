@@ -233,6 +233,8 @@ class OperatorInvokedHttpResearchAdapter:
 def _validate_fixture_path(fixture_path: Path, *, repository_root: Path) -> Path:
     if not fixture_path.is_absolute():
         raise ValueError("fixture path must be absolute")
+    if fixture_path.is_symlink():
+        raise ValueError("symlink fixture file is rejected")
     root = repository_root.resolve()
     try:
         path = fixture_path.resolve(strict=True)
@@ -242,8 +244,6 @@ def _validate_fixture_path(fixture_path: Path, *, repository_root: Path) -> Path
         raise ValueError("repository fixture paths are rejected")
     if path.name.startswith("."):
         raise ValueError("hidden fixture file is rejected")
-    if path.is_symlink():
-        raise ValueError("symlink fixture file is rejected")
     if not path.is_file():
         raise ValueError("fixture path must be a regular file")
     if path.stat().st_size > MAXIMUM_RESPONSE_BYTES_PER_SOURCE:

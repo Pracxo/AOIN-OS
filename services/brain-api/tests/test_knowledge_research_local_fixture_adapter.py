@@ -47,6 +47,12 @@ def test_local_fixture_adapter_rejects_missing_repo_hidden_symlink_and_protected
     hidden.write_text("{}", encoding="utf-8")
     with pytest.raises(ValueError):
         ExplicitLocalFixtureResearchAdapter(hidden, repository_root=repo)
+    visible = tmp_path / "visible.json"
+    visible.write_text("{}", encoding="utf-8")
+    visible_link = tmp_path / "visible-link.json"
+    visible_link.symlink_to(visible)
+    with pytest.raises(ValueError):
+        ExplicitLocalFixtureResearchAdapter(visible_link, repository_root=repo)
     link = tmp_path / "link.json"
     link.symlink_to(hidden)
     with pytest.raises(ValueError):
