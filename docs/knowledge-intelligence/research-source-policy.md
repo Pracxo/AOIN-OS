@@ -16,3 +16,7 @@ Source classification is metadata. Classification does not prove a claim. A sour
 - disallowed
 
 AION-205 must not implement the final truth-verification decision. That belongs to AION-211.
+
+## AION-205 Controlled Research Acquisition Core
+
+AION-205 implements the controlled research acquisition and immutable source-snapshot core as operator-invoked and runtime-disabled. Acquired content remains untrusted evidence; factual claim verification, knowledge promotion, cognitive belief mutation, public network fetch, crawler execution, search-provider integration, connector integration, source mutation, Git mutation, automatic merge, deployment, and model-weight training remain disabled. AION-204-KI-0001 remains active pending AION-206 closeout.

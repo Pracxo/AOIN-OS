@@ -25,3 +25,7 @@ Formal closeout task: `AION-206`
 Scope: `disabled-allowlisted-public-research-query-fetch-snapshot-provenance-core`
 
 Approval state: authorization_transaction_approved=true, explicit_approval_record_approval=true, implementation_authorization_approved=true, implementation_go_status=true, implementation_no_go_status=false. Lifecycle: active=true, consumed=false, expired=false, reusable=false.
+
+## AION-205 Controlled Research Acquisition Core
+
+AION-205 implements the controlled research acquisition and immutable source-snapshot core as operator-invoked and runtime-disabled. Acquired content remains untrusted evidence; factual claim verification, knowledge promotion, cognitive belief mutation, public network fetch, crawler execution, search-provider integration, connector integration, source mutation, Git mutation, automatic merge, deployment, and model-weight training remain disabled. AION-204-KI-0001 remains active pending AION-206 closeout.

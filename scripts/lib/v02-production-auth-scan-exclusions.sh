@@ -91,6 +91,9 @@ aion151_is_scoped_authorization_path() {
       if aion204_is_scoped_knowledge_intelligence_authorization_path "$1"; then
         return 0
       fi
+      if aion205_is_scoped_knowledge_intelligence_research_acquisition_path "$1"; then
+        return 0
+      fi
       return 1
       ;;
   esac
@@ -1627,6 +1630,49 @@ aion204_is_scoped_knowledge_intelligence_authorization_path() {
   case "$1" in
     docs/release/knowledge-intelligence-research-authorization-transaction.md|\
     operator-console-static/demo-data/knowledge-intelligence-research-authorization.json)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+aion205_is_scoped_knowledge_intelligence_research_acquisition_path() {
+  # Exact/prefix AION-205 Knowledge Intelligence research-acquisition paths.
+  # These remain outside production-auth runtime enablement and do not exempt
+  # auth APIs, providers, package files, migrations, credentials, or releases.
+  case "$1" in
+    AGENTS.md|\
+    README.md|\
+    docs/adr/0169-controlled-research-acquisition-and-immutable-source-snapshots.md|\
+    docs/adr/README.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/project-status.md|\
+    docs/release/v02-release-readiness-delta.md|\
+    docs/visual-brain.md|\
+    scripts/knowledge-intelligence-research-authorization-check.sh|\
+    scripts/knowledge-intelligence-research-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-research-plane-check.sh|\
+    scripts/knowledge-intelligence-research-plane-no-go-regression.sh|\
+    scripts/knowledge-intelligence-research-runtime-hold.sh|\
+    scripts/lib/cognitive_architecture_governance.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    services/brain-api/src/aion_brain/contracts/knowledge_research.py|\
+    services/brain-api/tests/knowledge_intelligence_test_helpers.py|\
+    services/brain-api/tests/knowledge_research_test_helpers.py|\
+    services/brain-api/tests/test_knowledge_intelligence_cognitive_closeout_reconciliation.py|\
+    services/brain-api/tests/test_knowledge_intelligence_research_authorization_docs.py|\
+    services/brain-api/tests/test_knowledge_intelligence_research_budget_spec.py|\
+    docs/knowledge-intelligence/*|\
+    docs/release/knowledge-intelligence-research*|\
+    examples/knowledge-intelligence/*|\
+    operator-console-static/*|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/*|\
+    services/brain-api/tests/test_knowledge_research*|\
+    services/brain-api/tests/test_knowledge_source*)
       return 0
       ;;
     *)

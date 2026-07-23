@@ -53,11 +53,10 @@ def test_current_state_reconciled_without_stale_authoritative_markers():
         r"current stage remains AION-179"
     )
     status = read_text("docs/project-status.md")
-    milestone = (
-        "AION-204 Cognitive Architecture closeout reconciliation and "
-        "Knowledge Intelligence Program authorization"
+    milestone = "AION-205 controlled research acquisition and source-snapshot core implemented"
+    next_task = (
+        "AION-206 research-plane evaluation and source-provenance-registry authorization"
     )
-    next_task = "AION-205 controlled research acquisition and source-snapshot core"
     assert milestone in status
     assert next_task in status
     for relative in CURRENT_SURFACES:

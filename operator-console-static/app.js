@@ -26,6 +26,10 @@
     self_improvement_shadow_activation_control_plane_evaluation: "demo-data/self-improvement-shadow-activation-control-plane-evaluation.json",
     self_improvement_actual_shadow_activation_review_boundary: "demo-data/self-improvement-actual-shadow-activation-review-boundary.json",
     knowledge_intelligence: "demo-data/knowledge-intelligence-program.json",
+    knowledge_intelligence_research_plane: "demo-data/knowledge-intelligence-research-plane.json",
+    knowledge_intelligence_source_snapshots: "demo-data/knowledge-intelligence-source-snapshots.json",
+    knowledge_intelligence_source_lineage: "demo-data/knowledge-intelligence-source-lineage.json",
+    knowledge_intelligence_research_runtime_hold: "demo-data/knowledge-intelligence-research-runtime-hold.json",
     module_lifecycle: "demo-data/module-lifecycle-dashboard.json",
     model_provider_hardening: "demo-data/provider-hardening-view-model.json",
     operator_actions: "demo-data/operator-action-preview.json",
@@ -37,7 +41,13 @@
   var VIEW_GROUPS = {
     platform: ["overview", "readiness", "release_candidate"],
     modules: ["module_lifecycle"],
-    knowledge: ["knowledge_intelligence"],
+    knowledge: [
+      "knowledge_intelligence",
+      "knowledge_intelligence_research_plane",
+      "knowledge_intelligence_source_snapshots",
+      "knowledge_intelligence_source_lineage",
+      "knowledge_intelligence_research_runtime_hold"
+    ],
     providers: ["model_provider_hardening"],
     actions: ["operator_actions"],
     auth: ["overview"],
@@ -50,7 +60,11 @@
       "self_improvement_shadow_activation_simulation",
       "self_improvement_shadow_activation_control_plane_evaluation",
       "self_improvement_actual_shadow_activation_review_boundary",
-      "knowledge_intelligence"
+      "knowledge_intelligence",
+      "knowledge_intelligence_research_plane",
+      "knowledge_intelligence_source_snapshots",
+      "knowledge_intelligence_source_lineage",
+      "knowledge_intelligence_research_runtime_hold"
     ],
     safety: ["settings_safety", "incidents"]
   };
@@ -217,7 +231,9 @@
     "./scripts/docs-check.sh",
     "./scripts/knowledge-intelligence-research-authorization-no-go-regression.sh",
     "./scripts/knowledge-intelligence-research-authorization-check.sh",
-    "./scripts/knowledge-intelligence-research-runtime-hold.sh"
+    "./scripts/knowledge-intelligence-research-runtime-hold.sh",
+    "./scripts/knowledge-intelligence-research-plane-no-go-regression.sh",
+    "./scripts/knowledge-intelligence-research-plane-check.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
     generic_knowledge_trail: "demo-data/generic-knowledge-trail.json",

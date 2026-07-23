@@ -859,6 +859,41 @@ AION204_ALLOWED_EXACT_PATHS = {
     "services/brain-api/tests/test_knowledge_intelligence_research_threat_model.py",
 }
 
+AION205_ALLOWED_EXACT_PATHS = {
+    "AGENTS.md",
+    "README.md",
+    "docs/adr/0169-controlled-research-acquisition-and-immutable-source-snapshots.md",
+    "docs/adr/README.md",
+    "docs/architecture.md",
+    "docs/brain-contract.md",
+    "docs/policy-model.md",
+    "docs/project-status.md",
+    "docs/release/v02-release-readiness-delta.md",
+    "docs/visual-brain.md",
+    "scripts/knowledge-intelligence-research-authorization-check.sh",
+    "scripts/knowledge-intelligence-research-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-research-plane-check.sh",
+    "scripts/knowledge-intelligence-research-plane-no-go-regression.sh",
+    "scripts/knowledge-intelligence-research-runtime-hold.sh",
+    "scripts/lib/cognitive_architecture_governance.py",
+    "services/brain-api/src/aion_brain/contracts/knowledge_research.py",
+    "services/brain-api/tests/knowledge_intelligence_test_helpers.py",
+    "services/brain-api/tests/knowledge_research_test_helpers.py",
+    "services/brain-api/tests/test_knowledge_intelligence_cognitive_closeout_reconciliation.py",
+    "services/brain-api/tests/test_knowledge_intelligence_research_authorization_docs.py",
+    "services/brain-api/tests/test_knowledge_intelligence_research_budget_spec.py",
+}
+
+AION205_ALLOWED_PREFIXES = (
+    "docs/knowledge-intelligence/",
+    "docs/release/knowledge-intelligence-research",
+    "examples/knowledge-intelligence/",
+    "operator-console-static/",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/",
+    "services/brain-api/tests/test_knowledge_research",
+    "services/brain-api/tests/test_knowledge_source",
+)
+
 AION199_ALLOWED_EXACT_PATHS = set(AION199_REQUIRED_FILES) | {
     "scripts/connector-runtime-no-external-call-regression.sh",
     "scripts/cognitive-integrated-evaluation-check.sh",
@@ -910,6 +945,7 @@ AION203_ALLOWED_EXACT_PATHS = (
         "scripts/cognitive-local-offline-pilot-no-go-regression.sh",
     }
     | AION204_ALLOWED_EXACT_PATHS
+    | AION205_ALLOWED_EXACT_PATHS
 )
 
 AION196_ALLOWED_EXACT_PATHS = (
@@ -966,6 +1002,7 @@ AION202_ALLOWED_PREFIXES = (
 AION203_ALLOWED_PREFIXES = (
     "docs/cognitive-architecture/",
     "examples/cognitive-architecture/",
+    *AION205_ALLOWED_PREFIXES,
 )
 
 AION196_PROHIBITED_PREFIXES = (
@@ -11113,120 +11150,126 @@ def validate_local_offline_pilot_closeout_no_go(root: Path) -> None:
 def _aion184_path_allowed(relative: str) -> bool:
     return relative in AION184_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION184_ALLOWED_PREFIXES
-    )
+    ) or _aion205_path_allowed(relative)
 
 
 def _aion185_path_allowed(relative: str) -> bool:
     return relative in AION185_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION185_ALLOWED_PREFIXES
-    )
+    ) or _aion205_path_allowed(relative)
 
 
 def _aion186_path_allowed(relative: str) -> bool:
     return relative in AION186_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION186_ALLOWED_PREFIXES
-    )
+    ) or _aion205_path_allowed(relative)
 
 
 def _aion187_path_allowed(relative: str) -> bool:
     return relative in AION187_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION187_ALLOWED_PREFIXES
-    )
+    ) or _aion205_path_allowed(relative)
 
 
 def _aion188_path_allowed(relative: str) -> bool:
     return relative in AION188_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION188_ALLOWED_PREFIXES
-    )
+    ) or _aion205_path_allowed(relative)
 
 
 def _aion189_path_allowed(relative: str) -> bool:
     return relative in AION189_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION189_ALLOWED_PREFIXES
-    )
+    ) or _aion205_path_allowed(relative)
 
 
 def _aion190_path_allowed(relative: str) -> bool:
     return relative in AION190_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION190_ALLOWED_PREFIXES
-    )
+    ) or _aion205_path_allowed(relative)
 
 
 def _aion191_path_allowed(relative: str) -> bool:
     return relative in AION191_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION191_ALLOWED_PREFIXES
-    )
+    ) or _aion205_path_allowed(relative)
 
 
 def _aion192_path_allowed(relative: str) -> bool:
     return relative in AION192_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION192_ALLOWED_PREFIXES
-    )
+    ) or _aion205_path_allowed(relative)
 
 
 def _aion193_path_allowed(relative: str) -> bool:
     return relative in AION193_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION193_ALLOWED_PREFIXES
-    )
+    ) or _aion205_path_allowed(relative)
 
 
 def _aion194_path_allowed(relative: str) -> bool:
     return relative in AION194_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION194_ALLOWED_PREFIXES
-    )
+    ) or _aion205_path_allowed(relative)
 
 
 def _aion195_path_allowed(relative: str) -> bool:
     return relative in AION195_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION195_ALLOWED_PREFIXES
-    )
+    ) or _aion205_path_allowed(relative)
 
 
 def _aion196_path_allowed(relative: str) -> bool:
     return relative in AION196_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION196_ALLOWED_PREFIXES
-    )
+    ) or _aion205_path_allowed(relative)
 
 
 def _aion197_path_allowed(relative: str) -> bool:
     return relative in AION197_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION197_ALLOWED_PREFIXES
-    )
+    ) or _aion205_path_allowed(relative)
 
 
 def _aion198_path_allowed(relative: str) -> bool:
     return relative in AION198_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION198_ALLOWED_PREFIXES
-    )
+    ) or _aion205_path_allowed(relative)
 
 
 def _aion199_path_allowed(relative: str) -> bool:
     return relative in AION199_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION199_ALLOWED_PREFIXES
-    )
+    ) or _aion205_path_allowed(relative)
 
 
 def _aion200_path_allowed(relative: str) -> bool:
     return relative in AION200_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION200_ALLOWED_PREFIXES
-    )
+    ) or _aion205_path_allowed(relative)
 
 
 def _aion201_path_allowed(relative: str) -> bool:
     return relative in AION201_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION201_ALLOWED_PREFIXES
-    )
+    ) or _aion205_path_allowed(relative)
 
 
 def _aion202_path_allowed(relative: str) -> bool:
     return relative in AION202_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION202_ALLOWED_PREFIXES
-    )
+    ) or _aion205_path_allowed(relative)
 
 
 def _aion203_path_allowed(relative: str) -> bool:
     return relative in AION203_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION203_ALLOWED_PREFIXES
+    ) or _aion205_path_allowed(relative)
+
+
+def _aion205_path_allowed(relative: str) -> bool:
+    return relative in AION205_ALLOWED_EXACT_PATHS or any(
+        relative.startswith(prefix) for prefix in AION205_ALLOWED_PREFIXES
     )
 
 

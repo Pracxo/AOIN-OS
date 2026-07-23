@@ -27,3 +27,7 @@ AION-204 authorizes only AION-205. No later task is automatically authorized.
 ## Current State
 
 AION-204-KI-0001 is the sole active Knowledge Intelligence implementation authorization. AION-205 is the sole active implementation task. AION-206 is the formal closeout and operator-evaluation task. Controlled internet research remains unimplemented and disabled; existing cognitive architecture remains unchanged; production cognitive runtime and unrestricted network access remain disabled.
+
+## AION-205 Controlled Research Acquisition Core
+
+AION-205 implements the controlled research acquisition and immutable source-snapshot core as operator-invoked and runtime-disabled. Acquired content remains untrusted evidence; factual claim verification, knowledge promotion, cognitive belief mutation, public network fetch, crawler execution, search-provider integration, connector integration, source mutation, Git mutation, automatic merge, deployment, and model-weight training remain disabled. AION-204-KI-0001 remains active pending AION-206 closeout.

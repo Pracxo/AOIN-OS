@@ -29,6 +29,10 @@ def base():
     return 'HEAD~1' if ref_exists('HEAD~1') else None
 b=base()
 entries=[]
+program_state=''
+program_path=ROOT/'docs/knowledge-intelligence/program-ledger.json'
+if program_path.exists():
+    program_state=json.loads(program_path.read_text()).get('program_state','')
 if b is not None:
     entries += [line.split('\t') for line in run(['git','diff','--name-status',b,'HEAD']).stdout.splitlines() if line.strip()]
 entries += [line.split('\t') for line in run(['git','diff','--name-status']).stdout.splitlines() if line.strip()]
@@ -49,10 +53,15 @@ for parts in entries:
     for p in paths:
         n=p.replace('\\','/')
         if n in PROHIBITED_NAMES or Path(n).name in PROHIBITED_NAMES: raise SystemExit(f'dependency/package file changed: {n}')
-        if n.startswith(PROHIBITED_PREFIXES): raise SystemExit(f'prohibited runtime/source path changed: {n}')
-        if n.startswith(AION205): raise SystemExit(f'AION-205 implementation source added by AION-204: {n}')
-for p in AION205:
-    if (ROOT/p).exists(): raise SystemExit(f'AION-205 source exists during AION-204: {p}')
+        aion205_allowed = (
+            program_state == 'research_plane_implemented_disabled_pending_closeout'
+            and (n == AION205[0] or n.startswith(AION205[1]))
+        )
+        if n.startswith(PROHIBITED_PREFIXES) and not aion205_allowed: raise SystemExit(f'prohibited runtime/source path changed: {n}')
+        if n.startswith(AION205) and not aion205_allowed: raise SystemExit(f'AION-205 implementation source added by AION-204: {n}')
+if program_state != 'research_plane_implemented_disabled_pending_closeout':
+    for p in AION205:
+        if (ROOT/p).exists(): raise SystemExit(f'AION-205 source exists during AION-204: {p}')
 for path in list((ROOT/'examples/knowledge-intelligence').glob('*.json'))+list((ROOT/'operator-console-static/demo-data').glob('knowledge-intelligence*.json')):
     text=path.read_text()
     if SECRET.search(text): raise SystemExit(f'sensitive token pattern found in {path}')

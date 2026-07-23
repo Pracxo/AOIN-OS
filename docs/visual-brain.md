@@ -1547,3 +1547,7 @@ AION-203 records `AION-CASE-001` with decision `CONTROLLED_LOCAL_OFFLINE_PILOT_P
 ## AION-204 Knowledge Intelligence Program Authorization
 
 AION-204 creates `AION-KNOWLEDGE-INTELLIGENCE-001` and `AION-204-KI-0001` as the sole active Knowledge Intelligence implementation authorization for AION-205. The authorized scope is `disabled-allowlisted-public-research-query-fetch-snapshot-provenance-core`. Research plane authorized=true, research plane implemented=false, research runtime enabled=false, network access enabled=false, background crawler enabled=false, automatic knowledge promotion enabled=false, cognitive belief mutation enabled=false, source mutation enabled=false, Git mutation enabled=false, production exposure=false, and model-weight training enabled=false. AION-206 is the formal closeout task.
+
+## AION-205 Controlled Research Acquisition Core
+
+AION-205 implements the controlled research acquisition and immutable source-snapshot core as operator-invoked and runtime-disabled. Acquired content remains untrusted evidence; factual claim verification, knowledge promotion, cognitive belief mutation, public network fetch, crawler execution, search-provider integration, connector integration, source mutation, Git mutation, automatic merge, deployment, and model-weight training remain disabled. AION-204-KI-0001 remains active pending AION-206 closeout.
