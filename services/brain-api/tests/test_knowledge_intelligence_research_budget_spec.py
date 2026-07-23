@@ -9,6 +9,7 @@ def test_budget_document_and_example_match_authorization_limits():
         assert key in text
         assert payload["resource_limits"][key] == value
     assert payload["resource_limits"]["network_calls_during_AION_204"] == 0
+    assert payload["resource_limits"]["network_calls_permitted"] == 0
     assert payload["resource_limits"]["research_runtime_enabled"] is False
     assert payload["resource_limits"]["background_crawls"] == 0
     assert payload["resource_limits"]["knowledge_promotions"] == 0

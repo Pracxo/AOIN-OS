@@ -366,6 +366,12 @@ allowed_aion_199_runtime = {
     "services/brain-api/src/aion_brain/cognitive_runtime/__init__.py",
     "services/brain-api/src/aion_brain/cognitive_runtime/runtime.py",
 }
+allowed_aion_205_runtime = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_research.py",
+}
+allowed_aion_205_prefixes = (
+    "services/brain-api/src/aion_brain/knowledge_intelligence/",
+)
 for name in [*changed, *untracked]:
     if name in allowed_runtime_tests:
         continue
@@ -414,6 +420,10 @@ for name in [*changed, *untracked]:
     if name in allowed_aion_196_runtime:
         continue
     if name in allowed_aion_199_runtime:
+        continue
+    if name in allowed_aion_205_runtime:
+        continue
+    if name.startswith(allowed_aion_205_prefixes):
         continue
     if name.startswith(runtime_prefixes):
         raise SystemExit(f"production auth architecture must not change runtime file: {name}")

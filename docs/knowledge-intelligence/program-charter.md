@@ -47,3 +47,7 @@ AION-204 reconciles AION-203 completion evidence, charters the Knowledge Intelli
 ## Non-Destructive Invariant
 
 This program is additive and backward-compatible. No AION-204 or authorized AION-205 task may delete, rename, move, replace, deprecate, or remove the behaviour of an existing production source file, cognitive source file, self-improvement source file, public API, internal API, contract, repository adapter, database schema, test, validation gate, SDK surface, CLI surface, operator-console surface, audit record, authorization record, program ledger record, release artifact, or existing capability unless a later task-specific migration authorization identifies the exact path, reason, compatibility impact, migration plan, rollback, recovery procedure, regression evidence, and operator approval.
+
+## AION-205 Controlled Research Acquisition Core
+
+AION-205 implements the controlled research acquisition and immutable source-snapshot core as operator-invoked and runtime-disabled. Acquired content remains untrusted evidence; factual claim verification, knowledge promotion, cognitive belief mutation, public network fetch, crawler execution, search-provider integration, connector integration, source mutation, Git mutation, automatic merge, deployment, and model-weight training remain disabled. AION-204-KI-0001 remains active pending AION-206 closeout.

@@ -1,0 +1,26 @@
+{
+  "approval_record_id": "AION-204-KI-0001",
+  "authorization_scope": "disabled-allowlisted-public-research-query-fetch-snapshot-provenance-core",
+  "authorization_transaction_id": "AION-204-KI-0001",
+  "automatic_belief_creation_enabled": false,
+  "domain_hints": [
+    "research.example.invalid"
+  ],
+  "formal_closeout_task": "AION-206",
+  "implementation_task": "AION-205",
+  "knowledge_promotion_enabled": false,
+  "network_access_enabled": false,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "query_id": "query-001",
+  "read_only": true,
+  "redacted": true,
+  "research_plane_authorized": true,
+  "research_plane_implemented": true,
+  "research_plane_state": "implemented_operator_invoked_disabled",
+  "research_question": "What does the synthetic standard record state?",
+  "research_runtime_enabled": false,
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-research-query/v1",
+  "synthetic": true,
+  "workstream": "knowledge-intelligence-research-acquisition"
+}

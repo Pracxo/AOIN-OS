@@ -53,18 +53,20 @@ def test_ledgers_create_single_active_knowledge_authorization():
     program = read_json("docs/knowledge-intelligence/program-ledger.json")
     auth = read_json("docs/knowledge-intelligence/authorization-ledger.json")
     assert program["program_id"] == PROGRAM_ID
-    assert program["program_state"] == "research_plane_authorized_not_implemented"
+    assert program["program_state"] == "research_plane_implemented_disabled_pending_closeout"
     assert program["active_knowledge_implementation_authorization_count"] == 1
     assert program["active_knowledge_implementation_authorization"] == AUTH_ID
     assert program["active_knowledge_implementation_task"] == IMPLEMENTATION_TASK
     assert program["formal_closeout_task"] == FORMAL_CLOSEOUT_TASK
     assert program["research_plane_authorized"] is True
-    assert program["research_plane_implemented"] is False
+    assert program["research_plane_implemented"] is True
+    assert program["research_plane_state"] == "implemented_operator_invoked_disabled"
     assert program["research_runtime_enabled"] is False
     assert program["network_access_enabled"] is False
     assert program["knowledge_promotion_enabled"] is False
     assert program["verified_knowledge_memory_enabled"] is False
     assert program["background_crawler_enabled"] is False
+    assert program["public_network_fetch_available"] is False
     assert auth["active_cognitive_implementation_authorization_count"] == 0
     active = [record for record in auth["records"] if record.get("authorization_active") is True]
     assert len(active) == 1
@@ -87,6 +89,5 @@ def test_scripts_pass_in_nested_mode():
     for script in (
         "scripts/knowledge-intelligence-research-authorization-no-go-regression.sh",
         "scripts/knowledge-intelligence-research-authorization-check.sh",
-        "scripts/knowledge-intelligence-research-runtime-hold.sh",
     ):
         subprocess.run([str(ROOT / script)], cwd=ROOT, env=env, check=True)

@@ -221,6 +221,10 @@ allowed_authorization_demo_names = {
     "actor-context-trust-boundary.json",
     "actor-context-runtime-hold.json",
     "knowledge-intelligence-research-authorization.json",
+    "knowledge-intelligence-research-plane.json",
+    "knowledge-intelligence-research-runtime-hold.json",
+    "knowledge-intelligence-source-lineage.json",
+    "knowledge-intelligence-source-snapshots.json",
 }
 aion161_allowed_policy_markers = {
     "runtime_private_key",

@@ -8,9 +8,13 @@ tag or release exists.
 
 ## Current Main Milestone
 
-AION-204 Cognitive Architecture closeout reconciliation and Knowledge Intelligence Program authorization.
+AION-205 controlled research acquisition and source-snapshot core implemented.
 
-Current stage: Knowledge Intelligence research plane authorized and not implemented. AION-203 completed the AION Cognitive Architecture Program, the controlled local-offline cognitive pilot passed, and active cognitive implementation authorization count is zero.
+Current stage: Knowledge Intelligence research plane implemented, operator-invoked, and runtime-disabled, pending AION-206 formal closeout and operator evaluation. AION-203 completed the AION Cognitive Architecture Program, the controlled local-offline cognitive pilot passed, and active cognitive implementation authorization count is zero.
+
+AION-204 Cognitive Architecture closeout reconciliation remains part of the
+current compatibility record. The prior status phrase "Knowledge Intelligence research plane authorized and not implemented" is superseded by AION-205:
+implemented, operator-invoked, runtime-disabled, and pending AION-206 closeout.
 
 Current state flags:
 
@@ -21,10 +25,14 @@ Current state flags:
 - active cognitive implementation authorization: `none`
 - `knowledge_intelligence_program_created=true`
 - `knowledge_research_plane_authorized=true`
-- `knowledge_research_plane_implemented=false`
+- `knowledge_research_plane_implemented=true`
 - `knowledge_research_runtime_enabled=false`
 - `network_access_enabled=false`
 - `background_crawler_enabled=false`
+- `public_network_fetch_available=false`
+- `search_provider_integration_enabled=false`
+- `connector_integration_enabled=false`
+- `knowledge_research_plane_state=implemented_operator_invoked_disabled`
 - `verified_knowledge_promotion_enabled=false`
 - `active_knowledge_implementation_authorization=AION-204-KI-0001`
 - active Knowledge Intelligence implementation authorization count: 1
@@ -144,9 +152,9 @@ and production authentication disabled. Formal lifecycle closeout: AION-161.
 
 ## Current Operator Task
 
-Review AION-204 Knowledge Intelligence authorization evidence and keep the research runtime hold intact until a later task explicitly changes it.
+Review AION-205 controlled research-acquisition evidence and keep the research runtime hold intact until AION-206 formal closeout.
 
-The next implementation task is AION-205 controlled research acquisition and source-snapshot core. AION-205 may implement only the disabled, allowlisted, operator-invoked research acquisition and source-provenance core under `disabled-allowlisted-public-research-query-fetch-snapshot-provenance-core`. AION-206 is the formal closeout and operator-evaluation task.
+The next task is AION-206 research-plane evaluation and source-provenance-registry authorization. AION-205 may implement only the disabled, allowlisted, operator-invoked research acquisition and source-provenance core under `disabled-allowlisted-public-research-query-fetch-snapshot-provenance-core`. AION-206 is the formal closeout and operator-evaluation task.
 
 AION-204 does not authorize internet research runtime activation, crawler execution, unrestricted network access, search-provider integration, connector integration, credential use, automatic knowledge promotion, cognitive belief mutation, source mutation, Git mutation, automatic merge, production deployment, or model-weight training.
 

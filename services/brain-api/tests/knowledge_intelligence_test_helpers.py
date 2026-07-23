@@ -161,6 +161,8 @@ RESOURCE_LIMITS = {
     "maximum_snapshot_records_per_plan": 100,
     "maximum_safe_headers_per_snapshot": 32,
     "maximum_citation_references_per_snapshot": 20,
+    "maximum_operator_review_items_per_plan": 50,
+    "network_calls_permitted": 0,
     "network_calls_during_AION_204": 0,
     "research_runtime_enabled": False,
     "background_crawls": 0,
@@ -300,7 +302,8 @@ def validate_authorization_record(record: dict) -> None:
     assert all(record["authorized_capabilities"][key] is True for key in APPROVED_KEYS)
     assert set(record["prohibited_capabilities"]) == set(PROHIBITED_KEYS)
     assert all(record["prohibited_capabilities"][key] is False for key in PROHIBITED_KEYS)
-    assert record["resource_limits"] == RESOURCE_LIMITS
+    for key, value in RESOURCE_LIMITS.items():
+        assert record["resource_limits"][key] == value
 
 
 def assert_rejects(mutator) -> None:

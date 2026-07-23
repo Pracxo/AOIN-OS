@@ -554,7 +554,10 @@ for path in sorted(demo_dir.glob("*.json")):
         if path.name not in {
             "knowledge-intelligence-program.json",
             "knowledge-intelligence-research-authorization.json",
+            "knowledge-intelligence-research-plane.json",
             "knowledge-intelligence-research-runtime-hold.json",
+            "knowledge-intelligence-source-lineage.json",
+            "knowledge-intelligence-source-snapshots.json",
         }:
             raise SystemExit(f"unknown knowledge intelligence demo: {path}")
         if payload.get("read_only") is not True:
@@ -563,12 +566,9 @@ for path in sorted(demo_dir.glob("*.json")):
         redacted = payload.get("redacted")
         if redaction_applied is not True and redacted is not True:
             raise SystemExit(f"knowledge intelligence demo must be redacted: {path}")
-        for key in (
-            "research_plane_implemented",
-            "research_runtime_enabled",
-            "network_access_enabled",
-            "runtime_effect",
-        ):
+        if payload.get("research_plane_implemented") is not True:
+            raise SystemExit(f"knowledge intelligence plane must be implemented-disabled: {path}")
+        for key in ("research_runtime_enabled", "network_access_enabled", "runtime_effect"):
             if payload.get(key) is not False:
                 raise SystemExit(f"knowledge intelligence runtime flag must be false: {key}: {path}")
         runtime_hold = payload.get("runtime_hold", {})

@@ -2,6 +2,7 @@
   "approval_record_id": "AION-204-KI-0001",
   "authorization_scope": "disabled-allowlisted-public-research-query-fetch-snapshot-provenance-core",
   "authorization_transaction_id": "AION-204-KI-0001",
+  "automatic_belief_creation_enabled": false,
   "candidate_id": "controlled-internet-research-acquisition-core",
   "forbidden_actions": [
     {
@@ -22,6 +23,7 @@
   ],
   "formal_closeout_task": "AION-206",
   "implementation_task": "AION-205",
+  "knowledge_promotion_enabled": false,
   "network_access_enabled": false,
   "parent_closeout_task": "AION-203",
   "parent_evaluation_decision": "CONTROLLED_LOCAL_OFFLINE_PILOT_PASS_COMPLETE_COGNITIVE_ARCHITECTURE_PROGRAM",
@@ -30,10 +32,11 @@
   "parent_program_id": "AION-COGNITIVE-ARCHITECTURE-001",
   "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
   "read_only": true,
-  "redaction_applied": true,
   "redacted": true,
+  "redaction_applied": true,
   "research_plane_authorized": true,
-  "research_plane_implemented": false,
+  "research_plane_implemented": true,
+  "research_plane_state": "implemented_operator_invoked_disabled",
   "research_runtime_enabled": false,
   "runtime_effect": false,
   "sections": [
@@ -46,11 +49,11 @@
       "refs": [
         "docs/knowledge-intelligence/program-charter.md"
       ],
-      "status": "authorized_not_implemented",
-      "summary": "Cognitive Architecture is complete; Knowledge Intelligence is chartered for controlled evidence acquisition.",
+      "status": "implemented_disabled",
+      "summary": "Cognitive Architecture is complete; Knowledge Intelligence has an implemented-disabled controlled evidence acquisition core.",
       "title": "Program State",
       "warnings": [
-        "AION-205 implementation source is not present in AION-204"
+        "AION-205 implementation is pending AION-206 closeout before any runtime decision"
       ]
     },
     {
@@ -71,8 +74,8 @@
       "warnings": []
     }
   ],
-  "status": "authorized_not_implemented",
-  "summary": "AION-204 charters Knowledge Intelligence and authorizes AION-205 while research runtime, network access, crawler, and knowledge promotion remain disabled.",
+  "status": "implemented_disabled",
+  "summary": "AION-205 implements controlled research acquisition while runtime and network access remain disabled.",
   "synthetic": true,
   "title": "Knowledge Intelligence Program",
   "view": "knowledge_intelligence",
