@@ -1,0 +1,1735 @@
+{
+  "approval_created": false,
+  "approval_record_id": "AION-206-KI-0002",
+  "authorization_closeout": {
+    "approval_record_id": "AION-206-KI-0002",
+    "authorization_active": false,
+    "authorization_closed_by_task": "AION-208",
+    "authorization_consumed": true,
+    "authorization_consumed_by_feature_commits": [
+      "3e95d788726be4d3f51f299aa005df87aa00375b"
+    ],
+    "authorization_consumed_by_merge_commits": [
+      "14c12bebfced7fd6345c8af2899988aadfa91a44"
+    ],
+    "authorization_consumed_by_prs": [
+      119
+    ],
+    "authorization_consumed_by_task": "AION-207",
+    "authorization_expired": true,
+    "authorization_reusable": false,
+    "authorization_transaction_id": "AION-206-KI-0002",
+    "source_registry_operator_evaluation_created_belief": false,
+    "source_registry_operator_evaluation_created_claim": false,
+    "source_registry_operator_evaluation_created_knowledge": false,
+    "source_registry_operator_evaluation_created_persistent_write": false,
+    "source_registry_operator_evaluation_created_truth_decision": false,
+    "source_registry_operator_evaluation_decision": "SOURCE_PROVENANCE_REGISTRY_OPERATOR_EVALUATION_PASS_RECOMMEND_TEMPORAL_CLAIM_EVIDENCE_GRAPH_AUTHORIZATION",
+    "source_registry_operator_evaluation_id": "AION-SPRE-001",
+    "source_registry_operator_evaluation_reusable": false,
+    "source_registry_operator_evaluation_used_as_approval": false
+  },
+  "authorization_scope": "append-only-immutable-source-snapshot-provenance-lineage-citation-registry-core",
+  "authorization_transaction_id": "AION-206-KI-0002",
+  "belief_mutation_enabled": false,
+  "claim_verification_enabled": false,
+  "closeout_task": "AION-208",
+  "conditional_next_authorization": {
+    "approval_record_id": "AION-208-KI-0003",
+    "authorization_active": true,
+    "authorization_consumed": false,
+    "authorization_expired": false,
+    "authorization_reusable": false,
+    "authorization_scope": "append-only-immutable-temporal-claim-evidence-provenance-jurisdiction-version-contradiction-graph-core",
+    "authorization_transaction_id": "AION-208-KI-0003",
+    "candidate_id": "temporal-claim-evidence-graph-core",
+    "formal_closeout_task": "AION-210",
+    "implementation_task": "AION-209",
+    "workstream": "knowledge-intelligence-temporal-claim-evidence-graph"
+  },
+  "corrective_prs": [],
+  "decision": "SOURCE_PROVENANCE_REGISTRY_OPERATOR_EVALUATION_PASS_RECOMMEND_TEMPORAL_CLAIM_EVIDENCE_GRAPH_AUTHORIZATION",
+  "epistemic_confidence_enabled": false,
+  "evaluation_base_commit": "14c12bebfced7fd6345c8af2899988aadfa91a44",
+  "evaluation_id": "AION-SPRE-001",
+  "evaluation_passed": true,
+  "evaluation_type": "read_only_source_provenance_registry_operator_evaluation",
+  "formal_closeout_task": "AION-208",
+  "git_mutated": false,
+  "hard_gate_results": [
+    {
+      "gate_id": "pr_119_verified",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "final_ci_verified",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "aion_207_no_go_gate_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "aion_207_implementation_gate_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "aion_207_runtime_hold_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "focused_tests_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "all_28_scenarios_executed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "all_28_scenarios_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "no_required_scenario_skipped",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "no_unknown_scenario",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "record_projection_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "source_body_exclusion_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "budgets_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "persistent_write_rejection_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "append_only_semantics_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "idempotency_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "versioning_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "fixture_boundary_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "indexing_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "exact_queries_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "integrity_auditing_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "evidence_redaction_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "deterministic_replay_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "concurrency_isolation_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "repository_integrity_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "no_claim_verification",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "no_truth_decision",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "no_confidence_calculation",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "no_knowledge_promotion",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "no_belief_mutation",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "no_persistent_write",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "no_network",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "no_source_git_pr_approval_merge_deployment_or_model_effect",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "gate_id": "no_v02_tag_or_release",
+      "passed": true,
+      "runtime_effect": false
+    }
+  ],
+  "implementation_feature_commits": [
+    "3e95d788726be4d3f51f299aa005df87aa00375b"
+  ],
+  "implementation_merge_commits": [
+    "14c12bebfced7fd6345c8af2899988aadfa91a44"
+  ],
+  "implementation_prs": [
+    119
+  ],
+  "implementation_task": "AION-207",
+  "knowledge_promotion_enabled": false,
+  "merged": false,
+  "network_access_enabled": false,
+  "next_architecture_decision": "temporal_claim_evidence_graph_implementation_authorized",
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "public_network_fetch_available": false,
+  "pull_request_created": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "report_is_approval": false,
+  "report_reusable": false,
+  "repository_integrity": {
+    "belief_mutations": 0,
+    "canonical_repository_untouched_by_evaluation": true,
+    "claim_verifications": 0,
+    "confidence_calculations": 0,
+    "knowledge_promotions": 0,
+    "live_dns_requests": 0,
+    "live_network_requests": 0,
+    "persistent_registry_writes": 0,
+    "registry_approvals_created": 0,
+    "registry_authorizations_created": 0,
+    "registry_created_pull_requests": 0,
+    "registry_git_operations": 0,
+    "registry_source_mutations": 0,
+    "source_body_bytes_persisted": 0,
+    "temporary_evaluation_data_cleaned": true,
+    "truth_decisions": 0
+  },
+  "research_plane_implemented": true,
+  "research_runtime_enabled": false,
+  "resource_state": {
+    "approvals_created": 0,
+    "belief_mutations": 0,
+    "claim_verifications": 0,
+    "confidence_calculations": 0,
+    "deployments": 0,
+    "dns_calls": 0,
+    "git_operations": 0,
+    "knowledge_promotions": 0,
+    "merges": 0,
+    "model_weight_changes": 0,
+    "network_calls": 0,
+    "persistent_registry_writes": 0,
+    "runtime_created_pull_requests": 0,
+    "source_body_bytes": 0,
+    "source_mutations": 0,
+    "truth_decisions": 0
+  },
+  "runtime_effect": false,
+  "runtime_state": {
+    "approval_created": false,
+    "belief_created": false,
+    "belief_mutated": false,
+    "claim_verification_performed": false,
+    "epistemic_confidence_calculated": false,
+    "git_mutated": false,
+    "knowledge_candidate_created": false,
+    "knowledge_promoted": false,
+    "merged": false,
+    "persistent_write_applied": false,
+    "pull_request_created": false,
+    "runtime_effect": false,
+    "source_modified": false,
+    "truth_decision_performed": false
+  },
+  "scenario_count": 28,
+  "scenario_results": [
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "deterministic_projection",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "exact_record_kind_order",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "metadata_only",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "valid_budget",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "zero_source_body_bytes",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_truth_knowledge_belief_persistence_or_runtime",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.101,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "valid_evidence_projection",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "immutable_envelope",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "exact_program",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "exact_authorization",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "contiguous_sequence",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "valid_payload_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "valid_record_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "extra_fields_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "naive_timestamp_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "non_utc_timestamp_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "malformed_identifier_rejected",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.293,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "strict_record_envelope",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "excluded_source_bytes",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "excluded_source_body",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "excluded_redacted_preview",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "excluded_url_scheme_https",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "excluded_url_scheme_http",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "excluded_url_query_marker",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "excluded_authorization_header",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "excluded_cookie_material",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "excluded_token_material",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "excluded_credential_material",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "excluded_raw_prompt",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "excluded_hidden_reasoning",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "excluded_traceback_text",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "excluded_exception_text",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "excluded_raw_diff",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "approved_fingerprints_remain",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "content_hash_remains",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.156,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "source_body_and_preview_exclusion",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "one_hundred_records_accepted",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "one_hundred_one_records_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_silent_truncation",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_partial_batch_accepted",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.064,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "record_count_budget",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "envelope_boundary_accepted",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "oversized_envelope_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "metadata_boundary_accepted",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "oversized_metadata_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "twenty_lineage_refs_accepted",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "twenty_one_lineage_refs_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "twenty_citation_refs_accepted",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "twenty_one_citation_refs_rejected",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.168,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "envelope_and_metadata_budget",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "zero_record_request_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "one_record_request_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "write_batch_limit_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "append_allowed_false",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "persistent_write_requested",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "appended_record_count_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "operator_review_required",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_file_or_database_created",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.041,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "persistent_write_fail_closed",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "new_repository_returned",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "original_repository_unchanged",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "returned_snapshot_immutable_tuple",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "persistent_write_not_applied",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "deterministic_sequence",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "deterministic_chain",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.006,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "pure_in_memory_append",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "identical_replay_accepted",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_duplicate_stored_record",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "idempotent_count_exact",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "original_state_unchanged",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.309,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "idempotent_replay",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "same_id_changed_fingerprint_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_overwrite",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "prior_record_intact",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.019,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "changed_payload_same_id_rejected",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "missing_first_sequence",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "sequence_gap",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "duplicate_sequence",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "reordered_record",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "wrong_previous_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "truncated_chain",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "appended_wrong_predecessor",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 1.587,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "sequence_and_chain_integrity",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "valid_payload_fingerprint_passes",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "changed_payload_fails",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "valid_record_fingerprint_passes",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "changed_envelope_field_fails",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "fingerprint_errors_redacted",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.054,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "payload_and_record_fingerprints",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "new_record_id",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "version_increment_one",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "supersedes_resolves",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "old_record_present",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "append_only_sequence_preserved",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.347,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "valid_supersession",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "missing_superseded_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "self_supersession_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "version_rollback_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "version_jump_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "supersession_cycle_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "changed_payload_same_id_rejected",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.311,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "invalid_supersession",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "absolute_regular_outside_repo_accepted",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "relative_path_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "repository_root_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "repository_descendant_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "hidden_path_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "symlink_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "directory_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "missing_path_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "uri_syntax_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "environment_expansion_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "home_expansion_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "oversized_fixture_rejected",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 1.451,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "fixture_path_boundary",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "exact_fixture_schema",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "synthetic_true",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "read_only_true",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "redacted_true",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "valid_fixture_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "maximum_100_records",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "extra_fields_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_source_body_fields",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "valid_sequence",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "invalid_chain_rejected",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.84,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "fixture_schema_and_chain",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "record_id_index",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "snapshot_fingerprint_index",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "content_sha_index",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "provenance_fingerprint_index",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "citation_id_index",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "lineage_group_index",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "source_class_index",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "retrieval_timestamp_index",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "deterministic_ordering",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "deterministic_fingerprint",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.046,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "deterministic_index_build",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "exact_record_id",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "exact_snapshot_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "exact_content_sha256",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "exact_provenance_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "exact_citation_id",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "exact_lineage_group_id",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "exact_source_class",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_fuzzy_search",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_truth_ranking",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_source_body_search",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.231,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "exact_queries",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "inclusive_utc_range",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "deterministic_registry_order",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "invalid_range_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "naive_timestamp_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_result_beyond_range",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.071,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "retrieval_time_range_query",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "limit_one_accepted",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "limit_hundred_accepted",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "limit_101_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "truncation_flag_accurate",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "result_count_exact",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "missing_index_record_rejected",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.028,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "query_limits_and_truncation",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "provenance_without_snapshot_detected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "citation_without_snapshot_detected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "lineage_without_snapshot_detected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "deduplication_without_snapshot_detected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "policy_without_snapshot_detected",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.376,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "unresolved_reference_integrity",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "duplicate_and_mirror_groups_preserved",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "exact_duplicate_not_independent_corroboration",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "source_class_not_truth",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "lineage_group_lookup_deterministic",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_claim_corroboration_state",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.019,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "lineage_and_independence_integrity",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "redacted_absent_source_bytes",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "redacted_absent_source_body",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "redacted_absent_redacted_preview",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "redacted_absent_url_scheme_https",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "redacted_absent_url_scheme_http",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "redacted_absent_url_query_marker",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "redacted_absent_authorization_header",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "redacted_absent_cookie_material",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "redacted_absent_token_material",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "redacted_absent_credential_material",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "redacted_absent_raw_prompt",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "redacted_absent_hidden_reasoning",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "redacted_absent_traceback_text",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "redacted_absent_exception_text",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "redacted_absent_raw_diff",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.069,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "registry_evidence_redaction",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "operator_review_required",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "claim_verification_required",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "persistent_write_authorization_required",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "knowledge_promotion_not_authorized",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "belief_mutation_not_authorized",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "approval_not_created",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "implementation_authorization_not_created",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "expiry_within_seven_days",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "review_item_not_approval",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.004,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "operator_review_boundary",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "batch_deterministic",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "repository_deterministic",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "index_deterministic",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "query_result_deterministic",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "integrity_report_deterministic",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "evidence_deterministic",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 2.355,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "deterministic_replay",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "content_hash_changes_downstream",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "snapshot_fingerprint_changes_downstream",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "provenance_fingerprint_changes_downstream",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "citation_fingerprint_changes_downstream",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "lineage_group_changes_affect_index",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "source_class_preserved",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "retrieval_timestamp_preserved_with_fixed_clock",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 5.373,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "changed_input_changes_fingerprints",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "four_parallel_readers",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_shared_mutable_state",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "deterministic_results",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_global_repository",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_race_enables_writes_truth_or_belief",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 7.921,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "concurrency_isolation",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": 0.011,
+          "name": "bounded_workloads_completed",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_benchmark_dependency",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 11.222,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "performance_smoke",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "claim_verified_false",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "verified_fact_false",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "independent_corroboration_false",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "claim_corroboration_false",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "knowledge_promoted_false",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "belief_created_false",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "belief_mutated_false",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "persistent_write_applied_false",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "source_body_bytes_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "network_calls_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "dns_calls_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "source_mutations_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "git_operations_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "runtime_prs_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "approvals_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "runtime_effect_false",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.005,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "no_truth_knowledge_belief_runtime_or_repository_effect",
+      "synthetic": true
+    }
+  ],
+  "security_state": {
+    "belief_mutation_disabled": true,
+    "claim_verification_disabled": true,
+    "credentials_absent": true,
+    "knowledge_promotion_disabled": true,
+    "network_disabled": true,
+    "source_bodies_absent": true,
+    "tokens_absent": true,
+    "truth_decision_disabled": true
+  },
+  "source_body_persistence_enabled": false,
+  "source_modified": false,
+  "source_provenance_registry_implemented": true,
+  "source_provenance_registry_state": "implemented_append_only_in_memory_replay_persistent_write_disabled",
+  "source_registry_persistent_write_enabled": false,
+  "source_registry_runtime_enabled": false,
+  "synthetic": true,
+  "truth_decision_enabled": false,
+  "validation_results": {
+    "brain_api_total": "3439 passed",
+    "focused_aion_207_tests": "43 passed",
+    "mypy_brain": "success",
+    "mypy_sdk": "success",
+    "sdk_total": "274 passed",
+    "source_registry_check": true,
+    "source_registry_no_go": true,
+    "source_registry_runtime_hold": true
+  }
+}

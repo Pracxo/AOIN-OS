@@ -913,6 +913,18 @@ AION205_ALLOWED_PREFIXES = (
     "services/brain-api/tests/test_knowledge_source",
 )
 
+AION208_ALLOWED_EXACT_PATHS = {
+    "docs/adr/0172-source-provenance-registry-evaluation-and-temporal-claim-evidence-graph-authorization.md",
+    "scripts/lib/knowledge_intelligence_source_registry_operator_evaluation.py",
+}
+
+AION208_ALLOWED_PREFIXES = (
+    "docs/release/knowledge-intelligence-claim",
+    "scripts/knowledge-intelligence-claim-graph",
+    "scripts/knowledge-intelligence-source-registry-operator-evaluation",
+    "services/brain-api/tests/test_knowledge_claim",
+)
+
 AION199_ALLOWED_EXACT_PATHS = set(AION199_REQUIRED_FILES) | {
     "scripts/connector-runtime-no-external-call-regression.sh",
     "scripts/cognitive-integrated-evaluation-check.sh",
@@ -11289,6 +11301,12 @@ def _aion203_path_allowed(relative: str) -> bool:
 def _aion205_path_allowed(relative: str) -> bool:
     return relative in AION205_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION205_ALLOWED_PREFIXES
+    ) or _aion208_path_allowed(relative)
+
+
+def _aion208_path_allowed(relative: str) -> bool:
+    return relative in AION208_ALLOWED_EXACT_PATHS or any(
+        relative.startswith(prefix) for prefix in AION208_ALLOWED_PREFIXES
     )
 
 

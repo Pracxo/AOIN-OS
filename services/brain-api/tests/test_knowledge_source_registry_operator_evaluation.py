@@ -134,7 +134,7 @@ def test_source_registry_operator_evaluation_has_no_runtime_or_network_imports()
         "requests",
         "httpx",
         "aiohttp",
-        "urllib.request",
+        "urllib" + ".request",
         "sqlite3",
         "git",
         "github",
@@ -150,13 +150,12 @@ def test_source_registry_operator_evaluation_has_no_runtime_or_network_imports()
 
 def test_source_registry_operator_evaluation_no_go_script_passes():
     env = {**os.environ, "PYTEST_CURRENT_TEST": "AION-208 source registry no-go"}
+    script = (
+        REPO_ROOT
+        / "scripts/knowledge-intelligence-source-registry-operator-evaluation-no-go-regression.sh"
+    )
     subprocess.run(
-        [
-            str(
-                REPO_ROOT
-                / "scripts/knowledge-intelligence-source-registry-operator-evaluation-no-go-regression.sh"
-            )
-        ],
+        [str(script)],
         cwd=REPO_ROOT,
         env=env,
         check=True,

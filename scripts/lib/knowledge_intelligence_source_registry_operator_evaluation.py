@@ -97,22 +97,22 @@ HARD_GATE_IDS: tuple[str, ...] = (
     "no_v02_tag_or_release",
 )
 
-FORBIDDEN_TEXT_MARKERS: tuple[str, ...] = (
-    "synthetic evidence for operator review",
-    "source body",
-    "redacted preview",
-    "https://",
-    "http://",
-    "?",
-    "authorization header",
-    "cookie",
-    "token",
-    "credential",
-    "raw prompt",
-    "hidden reasoning",
-    "traceback",
-    "exception",
-    "raw diff",
+FORBIDDEN_TEXT_MARKERS: tuple[tuple[str, str], ...] = (
+    ("source_bytes", "synthetic evidence for operator review"),
+    ("source_body", "source body"),
+    ("redacted_preview", "redacted preview"),
+    ("url_scheme_https", "https://"),
+    ("url_scheme_http", "http://"),
+    ("url_query_marker", "?"),
+    ("authorization_header", "authorization header"),
+    ("cookie_material", "cookie"),
+    ("token_material", "token"),
+    ("credential_material", "credential"),
+    ("raw_prompt", "raw prompt"),
+    ("hidden_reasoning", "hidden reasoning"),
+    ("traceback_text", "traceback"),
+    ("exception_text", "exception"),
+    ("raw_diff", "raw diff"),
 )
 
 
@@ -149,6 +149,7 @@ def evaluate_source_registry(
         "closeout_task": CLOSEOUT_TASK,
         "evaluation_base_commit": evaluation_base_commit,
         "implementation_prs": [AION207_PR],
+        "corrective_prs": [],
         "implementation_feature_commits": [AION207_FEATURE_COMMIT],
         "implementation_merge_commits": [AION207_MERGE_COMMIT],
         "decision": decision,
@@ -521,8 +522,8 @@ def _strict_record_envelope(context: dict[str, Any]) -> list[dict[str, Any]]:
 def _source_body_and_preview_exclusion(context: dict[str, Any]) -> list[dict[str, Any]]:
     rendered = json.dumps(context["batch"].model_dump(mode="json"), sort_keys=True).lower()
     return [
-        _check(f"excluded_{marker}", marker not in rendered)
-        for marker in FORBIDDEN_TEXT_MARKERS
+        _check(f"excluded_{label}", marker not in rendered)
+        for label, marker in FORBIDDEN_TEXT_MARKERS
     ] + [
         _check("approved_fingerprints_remain", rendered.count("fingerprint") >= 10),
         _check("content_hash_remains", "content_sha256" in rendered),
@@ -669,7 +670,7 @@ def _sequence_and_chain_integrity(context: dict[str, Any]) -> list[dict[str, Any
         "duplicate_sequence": records[:1] + (records[1].model_copy(update={"sequence_number": 1}),) + records[2:],
         "reordered_record": (records[1], records[0]) + records[2:],
         "wrong_previous_fingerprint": records[:1] + (records[1].model_copy(update={"previous_record_fingerprint": "0" * 64}),) + records[2:],
-        "removed_middle_record": records[:1] + records[2:],
+        "truncated_chain": records[:1] + records[2:],
         "appended_wrong_predecessor": records + (records[-1].model_copy(update={"record_id": "source-registry-extra-0001", "sequence_number": len(records) + 1, "previous_record_fingerprint": "0" * 64}),),
     }
     checks = []
@@ -976,8 +977,8 @@ def _lineage_and_independence_integrity(context: dict[str, Any]) -> list[dict[st
 def _registry_evidence_redaction(context: dict[str, Any]) -> list[dict[str, Any]]:
     rendered = json.dumps(context["evidence"].model_dump(mode="json"), sort_keys=True).lower()
     return [
-        _check(f"redacted_absent_{marker}", marker not in rendered)
-        for marker in FORBIDDEN_TEXT_MARKERS
+        _check(f"redacted_absent_{label}", marker not in rendered)
+        for label, marker in FORBIDDEN_TEXT_MARKERS
     ]
 
 

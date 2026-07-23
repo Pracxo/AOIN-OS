@@ -562,6 +562,9 @@ for path in sorted(demo_dir.glob("*.json")):
             "knowledge-intelligence-source-registry-index.json",
             "knowledge-intelligence-source-registry-integrity.json",
             "knowledge-intelligence-source-registry-runtime-hold.json",
+            "knowledge-intelligence-source-registry-evaluation.json",
+            "knowledge-intelligence-claim-graph-authorization.json",
+            "knowledge-intelligence-claim-graph-runtime-hold.json",
             "knowledge-intelligence-source-lineage.json",
             "knowledge-intelligence-source-snapshots.json",
         }:

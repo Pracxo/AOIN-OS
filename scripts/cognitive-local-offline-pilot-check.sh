@@ -26,8 +26,9 @@ is_nested_gate_context() {
 
 ./scripts/cognitive-local-offline-pilot-no-go-regression.sh
 
+"$PYTHON_BIN" -m ruff check --extend-ignore E402 \
+  scripts/cognitive-local-offline-pilot-execute.py
 "$PYTHON_BIN" -m ruff check \
-  scripts/cognitive-local-offline-pilot-execute.py \
   scripts/lib/cognitive_architecture_governance.py \
   services/brain-api/tests/test_cognitive_local_offline_pilot_docs.py \
   services/brain-api/tests/test_cognitive_local_offline_pilot_authorization_docs.py

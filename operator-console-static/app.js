@@ -35,6 +35,9 @@
     knowledge_intelligence_source_registry_index: "demo-data/knowledge-intelligence-source-registry-index.json",
     knowledge_intelligence_source_registry_integrity: "demo-data/knowledge-intelligence-source-registry-integrity.json",
     knowledge_intelligence_source_registry_runtime_hold: "demo-data/knowledge-intelligence-source-registry-runtime-hold.json",
+    knowledge_intelligence_source_registry_evaluation: "demo-data/knowledge-intelligence-source-registry-evaluation.json",
+    knowledge_intelligence_claim_graph_authorization: "demo-data/knowledge-intelligence-claim-graph-authorization.json",
+    knowledge_intelligence_claim_graph_runtime_hold: "demo-data/knowledge-intelligence-claim-graph-runtime-hold.json",
     knowledge_intelligence_research_runtime_hold: "demo-data/knowledge-intelligence-research-runtime-hold.json",
     module_lifecycle: "demo-data/module-lifecycle-dashboard.json",
     model_provider_hardening: "demo-data/provider-hardening-view-model.json",
@@ -58,6 +61,9 @@
       "knowledge_intelligence_source_registry_index",
       "knowledge_intelligence_source_registry_integrity",
       "knowledge_intelligence_source_registry_runtime_hold",
+      "knowledge_intelligence_source_registry_evaluation",
+      "knowledge_intelligence_claim_graph_authorization",
+      "knowledge_intelligence_claim_graph_runtime_hold",
       "knowledge_intelligence_research_runtime_hold"
     ],
     providers: ["model_provider_hardening"],
@@ -82,6 +88,9 @@
       "knowledge_intelligence_source_registry_index",
       "knowledge_intelligence_source_registry_integrity",
       "knowledge_intelligence_source_registry_runtime_hold",
+      "knowledge_intelligence_source_registry_evaluation",
+      "knowledge_intelligence_claim_graph_authorization",
+      "knowledge_intelligence_claim_graph_runtime_hold",
       "knowledge_intelligence_research_runtime_hold"
     ],
     safety: ["settings_safety", "incidents"]
@@ -258,7 +267,12 @@
     "./scripts/knowledge-intelligence-source-registry-check.sh",
     "./scripts/knowledge-intelligence-source-registry-authorization-no-go-regression.sh",
     "./scripts/knowledge-intelligence-source-registry-authorization-check.sh",
-    "./scripts/knowledge-intelligence-source-registry-runtime-hold.sh"
+    "./scripts/knowledge-intelligence-source-registry-runtime-hold.sh",
+    "./scripts/knowledge-intelligence-source-registry-operator-evaluation-no-go-regression.sh",
+    "./scripts/knowledge-intelligence-source-registry-operator-evaluation-check.sh",
+    "./scripts/knowledge-intelligence-claim-graph-authorization-no-go-regression.sh",
+    "./scripts/knowledge-intelligence-claim-graph-authorization-check.sh",
+    "./scripts/knowledge-intelligence-claim-graph-runtime-hold.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
     generic_knowledge_trail: "demo-data/generic-knowledge-trail.json",

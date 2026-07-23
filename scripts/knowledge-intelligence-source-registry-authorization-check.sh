@@ -154,17 +154,24 @@ report = read_json("examples/knowledge-intelligence/research-acquisition-operato
 source_auth = read_json("examples/knowledge-intelligence/source-registry-authorization.json")
 
 assert program["program_id"] == PROGRAM_ID
-assert program["program_state"] == "source_provenance_registry_implemented_write_disabled_pending_closeout"
-assert program["active_knowledge_implementation_authorization"] == AUTH_206
+assert program["program_state"] in {
+    "source_provenance_registry_implemented_write_disabled_pending_closeout",
+    "temporal_claim_evidence_graph_authorized_not_implemented",
+}
 assert program["active_knowledge_implementation_authorization_count"] == 1
-assert program["active_knowledge_implementation_task"] == "AION-207"
-assert program["formal_closeout_task"] == "AION-208"
+if program["program_state"] == "temporal_claim_evidence_graph_authorized_not_implemented":
+    assert program["active_knowledge_implementation_authorization"] == "AION-208-KI-0003"
+    assert program["active_knowledge_implementation_task"] == "AION-209"
+    assert program["formal_closeout_task"] == "AION-210"
+else:
+    assert program["active_knowledge_implementation_authorization"] == AUTH_206
+    assert program["active_knowledge_implementation_task"] == "AION-207"
+    assert program["formal_closeout_task"] == "AION-208"
 assert program["source_provenance_registry_authorized"] is True
 assert program["source_provenance_registry_implemented"] is True
 assert program["source_provenance_registry_state"] == IMPLEMENTED_STATE
 assert program["source_registry_runtime_enabled"] is False
 assert program["source_registry_persistent_write_enabled"] is False
-assert program["new_knowledge_implementation_authorization_created"] is False
 assert program["research_plane_implemented"] is True
 assert program["research_runtime_enabled"] is False
 assert program["network_access_enabled"] is False
@@ -184,16 +191,27 @@ closed = [
 ]
 assert len(active) == 1
 assert len(closed) == 1
-record = active[0]
+source_records = [
+    record for record in auth["records"] if record.get("authorization_transaction_id") == AUTH_206
+]
+assert len(source_records) == 1
+record = source_records[0]
 assert record["authorization_transaction_id"] == AUTH_206
 assert record["approval_record_id"] == AUTH_206
 assert record["candidate_id"] == "source-provenance-registry-core"
 assert record["authorization_scope"] == SOURCE_SCOPE
 assert record["implementation_task"] == "AION-207"
 assert record["formal_closeout_task"] == "AION-208"
-assert record["authorization_active"] is True
-assert record["authorization_consumed"] is False
-assert record["authorization_expired"] is False
+if program["program_state"] == "temporal_claim_evidence_graph_authorized_not_implemented":
+    assert active[0]["authorization_transaction_id"] == "AION-208-KI-0003"
+    assert record["authorization_active"] is False
+    assert record["authorization_consumed"] is True
+    assert record["authorization_expired"] is True
+    assert record["authorization_closed_by_task"] == "AION-208"
+else:
+    assert record["authorization_active"] is True
+    assert record["authorization_consumed"] is False
+    assert record["authorization_expired"] is False
 assert record["authorization_reusable"] is False
 assert record["parent_authorization_transaction_id"] == AUTH_204
 assert record["parent_authorization_closed"] is True

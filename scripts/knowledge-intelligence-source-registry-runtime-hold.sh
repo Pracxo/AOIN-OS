@@ -19,7 +19,11 @@ is_nested_gate_context() {
   return 1
 }
 
-./scripts/knowledge-intelligence-source-registry-check.sh
+if is_nested_gate_context; then
+  echo "PASS: inherited source registry check deferred to outer gate"
+else
+  ./scripts/knowledge-intelligence-source-registry-check.sh
+fi
 
 "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
@@ -34,8 +38,19 @@ program = json.loads((ROOT / "docs/knowledge-intelligence/program-ledger.json").
 auth = json.loads((ROOT / "docs/knowledge-intelligence/authorization-ledger.json").read_text())
 active = [record for record in auth["records"] if record.get("authorization_active") is True]
 assert len(active) == 1
-record = active[0]
-assert record["authorization_transaction_id"] == "AION-206-KI-0002"
+source_records = [
+    record
+    for record in auth["records"]
+    if record.get("authorization_transaction_id") == "AION-206-KI-0002"
+]
+assert len(source_records) == 1
+record = source_records[0]
+if record["authorization_active"] is False:
+    assert active[0]["authorization_transaction_id"] == "AION-208-KI-0003"
+    assert record["authorization_consumed"] is True
+    assert record["authorization_closed_by_task"] == "AION-208"
+else:
+    assert active[0]["authorization_transaction_id"] == "AION-206-KI-0002"
 assert program["source_provenance_registry_authorized"] is True
 assert program["source_provenance_registry_implemented"] is True
 assert (

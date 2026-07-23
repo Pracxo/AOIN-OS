@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[3]
 PROGRAM_ID = "AION-KNOWLEDGE-INTELLIGENCE-001"
 CLOSED_AUTH_ID = "AION-204-KI-0001"
 SOURCE_AUTH_ID = "AION-206-KI-0002"
+CLAIM_GRAPH_AUTH_ID = "AION-208-KI-0003"
 EVALUATION_ID = "AION-RAE-001"
 DECISION = (
     "RESEARCH_ACQUISITION_OPERATOR_EVALUATION_PASS_RECOMMEND_SOURCE_PROVENANCE_REGISTRY_AUTHORIZATION"
@@ -83,6 +84,21 @@ def read_text(relative: str) -> str:
 
 
 def active_source_record() -> dict:
+    return source_authorization_record()
+
+
+def source_authorization_record() -> dict:
+    records = read_json("docs/knowledge-intelligence/authorization-ledger.json")["records"]
+    matches = [
+        record
+        for record in records
+        if record.get("authorization_transaction_id") == SOURCE_AUTH_ID
+    ]
+    assert len(matches) == 1
+    return matches[0]
+
+
+def active_knowledge_authorization_record() -> dict:
     records = read_json("docs/knowledge-intelligence/authorization-ledger.json")["records"]
     active = [record for record in records if record.get("authorization_active") is True]
     assert len(active) == 1
@@ -107,9 +123,16 @@ def validate_source_authorization(record: dict) -> None:
     assert record["authorization_scope"] == SOURCE_SCOPE
     assert record["implementation_task"] == "AION-207"
     assert record["formal_closeout_task"] == "AION-208"
-    assert record["authorization_active"] is True
-    assert record["authorization_consumed"] is False
-    assert record["authorization_expired"] is False
+    if record["authorization_active"] is True:
+        assert record["authorization_consumed"] is False
+        assert record["authorization_expired"] is False
+    else:
+        assert record["authorization_consumed"] is True
+        assert record["authorization_expired"] is True
+        assert record["authorization_consumed_by_task"] == "AION-207"
+        assert record["authorization_consumed_by_prs"] == [119]
+        assert record["authorization_closed_by_task"] == "AION-208"
+        assert record["source_registry_operator_evaluation_id"] == "AION-SPRE-001"
     assert record["authorization_reusable"] is False
     assert set(record["authorized_capabilities"]) == AUTHORIZED_KEYS
     assert all(record["authorized_capabilities"][key] is True for key in AUTHORIZED_KEYS)

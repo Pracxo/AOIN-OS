@@ -1,0 +1,204 @@
+{
+  "approval_record_id": "AION-206-KI-0002",
+  "authorization_scope": "append-only-immutable-source-snapshot-provenance-lineage-citation-registry-core",
+  "authorization_transaction_id": "AION-206-KI-0002",
+  "belief_mutation_enabled": false,
+  "claim_verification_enabled": false,
+  "decision": "SOURCE_PROVENANCE_REGISTRY_OPERATOR_EVALUATION_PASS_RECOMMEND_TEMPORAL_CLAIM_EVIDENCE_GRAPH_AUTHORIZATION",
+  "epistemic_confidence_enabled": false,
+  "evaluation_id": "AION-SPRE-001",
+  "failed_hard_gates": [],
+  "failed_scenarios": [],
+  "formal_closeout_task": "AION-208",
+  "hard_gate_count": 34,
+  "implementation_task": "AION-207",
+  "knowledge_promotion_enabled": false,
+  "network_access_enabled": false,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "public_network_fetch_available": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "research_plane_implemented": true,
+  "research_runtime_enabled": false,
+  "runtime_effect": false,
+  "scenario_count": 28,
+  "scenarios": [
+    {
+      "check_count": 6,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "valid_evidence_projection"
+    },
+    {
+      "check_count": 10,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "strict_record_envelope"
+    },
+    {
+      "check_count": 17,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "source_body_and_preview_exclusion"
+    },
+    {
+      "check_count": 4,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "record_count_budget"
+    },
+    {
+      "check_count": 8,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "envelope_and_metadata_budget"
+    },
+    {
+      "check_count": 8,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "persistent_write_fail_closed"
+    },
+    {
+      "check_count": 6,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "pure_in_memory_append"
+    },
+    {
+      "check_count": 4,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "idempotent_replay"
+    },
+    {
+      "check_count": 3,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "changed_payload_same_id_rejected"
+    },
+    {
+      "check_count": 7,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "sequence_and_chain_integrity"
+    },
+    {
+      "check_count": 5,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "payload_and_record_fingerprints"
+    },
+    {
+      "check_count": 5,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "valid_supersession"
+    },
+    {
+      "check_count": 6,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "invalid_supersession"
+    },
+    {
+      "check_count": 12,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "fixture_path_boundary"
+    },
+    {
+      "check_count": 10,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "fixture_schema_and_chain"
+    },
+    {
+      "check_count": 10,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "deterministic_index_build"
+    },
+    {
+      "check_count": 10,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "exact_queries"
+    },
+    {
+      "check_count": 5,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "retrieval_time_range_query"
+    },
+    {
+      "check_count": 6,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "query_limits_and_truncation"
+    },
+    {
+      "check_count": 5,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "unresolved_reference_integrity"
+    },
+    {
+      "check_count": 5,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "lineage_and_independence_integrity"
+    },
+    {
+      "check_count": 15,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "registry_evidence_redaction"
+    },
+    {
+      "check_count": 9,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "operator_review_boundary"
+    },
+    {
+      "check_count": 6,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "deterministic_replay"
+    },
+    {
+      "check_count": 7,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "changed_input_changes_fingerprints"
+    },
+    {
+      "check_count": 5,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "concurrency_isolation"
+    },
+    {
+      "check_count": 2,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "performance_smoke"
+    },
+    {
+      "check_count": 16,
+      "passed": true,
+      "runtime_effect": false,
+      "scenario_id": "no_truth_knowledge_belief_runtime_or_repository_effect"
+    }
+  ],
+  "schema_version": "aion-knowledge-source-registry-evaluation-scenario-summary/v1",
+  "source_body_persistence_enabled": false,
+  "source_provenance_registry_implemented": true,
+  "source_provenance_registry_state": "implemented_append_only_in_memory_replay_persistent_write_disabled",
+  "source_registry_persistent_write_enabled": false,
+  "source_registry_runtime_enabled": false,
+  "synthetic": true,
+  "truth_decision_enabled": false
+}

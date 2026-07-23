@@ -46,6 +46,7 @@ implemented_states = {
     'research_plane_implemented_disabled_pending_closeout',
     'source_provenance_registry_authorized_not_implemented',
     'source_provenance_registry_implemented_write_disabled_pending_closeout',
+    'temporal_claim_evidence_graph_authorized_not_implemented',
 }
 if b is not None:
     entries += [line.split('\t') for line in run(['git','diff','--name-status',b,'HEAD']).stdout.splitlines() if line.strip()]
