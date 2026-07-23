@@ -8,13 +8,12 @@ tag or release exists.
 
 ## Current Main Milestone
 
-AION-205 controlled research acquisition and source-snapshot core implemented.
+AION-206 research acquisition operator evaluation complete; source registry authorization active.
 
-Current stage: Knowledge Intelligence research plane implemented, operator-invoked, and runtime-disabled, pending AION-206 formal closeout and operator evaluation. AION-203 completed the AION Cognitive Architecture Program, the controlled local-offline cognitive pilot passed, and active cognitive implementation authorization count is zero.
+Current stage: Knowledge Intelligence research plane implemented, operator-invoked, runtime-disabled, and formally evaluated. AION-206 closes `AION-204-KI-0001` as consumed, inactive, expired, and non-reusable, then creates `AION-206-KI-0002` for AION-207 only. AION-203 completed the AION Cognitive Architecture Program, the controlled local-offline cognitive pilot passed, and active cognitive implementation authorization count is zero.
 
 AION-204 Cognitive Architecture closeout reconciliation remains part of the
-current compatibility record. The prior status phrase "Knowledge Intelligence research plane authorized and not implemented" is superseded by AION-205:
-implemented, operator-invoked, runtime-disabled, and pending AION-206 closeout.
+current compatibility record. The prior status phrase "Knowledge Intelligence research plane authorized and not implemented" is historical; the current Knowledge Intelligence state is source registry authorized but not implemented.
 
 Current state flags:
 
@@ -33,11 +32,15 @@ Current state flags:
 - `search_provider_integration_enabled=false`
 - `connector_integration_enabled=false`
 - `knowledge_research_plane_state=implemented_operator_invoked_disabled`
+- `source_provenance_registry_authorized=true`
+- `source_provenance_registry_implemented=false`
+- `source_body_persistence_enabled=false`
+- `claim_verification_enabled=false`
 - `verified_knowledge_promotion_enabled=false`
-- `active_knowledge_implementation_authorization=AION-204-KI-0001`
+- `active_knowledge_implementation_authorization=AION-206-KI-0002`
 - active Knowledge Intelligence implementation authorization count: 1
-- `active_knowledge_implementation_task=AION-205`
-- `formal_closeout_task=AION-206`
+- `active_knowledge_implementation_task=AION-207`
+- `formal_closeout_task=AION-208`
 
 The current self-improvement state is closed, historical, and disabled: shadow-mode and shadow-activation control-plane evidence remains advisory only, actual activation is unavailable, and active self-improvement implementation authorization count is zero.
 
@@ -152,9 +155,18 @@ and production authentication disabled. Formal lifecycle closeout: AION-161.
 
 ## Current Operator Task
 
-Review AION-205 controlled research-acquisition evidence and keep the research runtime hold intact until AION-206 formal closeout.
+Prepare AION-207 append-only source-provenance registry implementation under
+`AION-206-KI-0002`, while keeping the research runtime hold and source-registry
+runtime hold intact until AION-208 formal closeout.
 
-The next task is AION-206 research-plane evaluation and source-provenance-registry authorization. AION-205 may implement only the disabled, allowlisted, operator-invoked research acquisition and source-provenance core under `disabled-allowlisted-public-research-query-fetch-snapshot-provenance-core`. AION-206 is the formal closeout and operator-evaluation task.
+The next task is AION-207 append-only source-provenance registry implementation.
+AION-207 may implement only immutable source-record envelopes, redacted
+metadata persistence, canonical fingerprints, citation references,
+operator-review items, resource-budget checks, and runtime-hold enforcement
+under `append-only-immutable-source-snapshot-provenance-lineage-citation-registry-core`.
+AION-207 must not activate network fetch, source-body storage, claim
+verification, knowledge promotion, belief mutation, connector integration, Git
+mutation, automatic merge, or production deployment.
 
 AION-204 does not authorize internet research runtime activation, crawler execution, unrestricted network access, search-provider integration, connector integration, credential use, automatic knowledge promotion, cognitive belief mutation, source mutation, Git mutation, automatic merge, production deployment, or model-weight training.
 

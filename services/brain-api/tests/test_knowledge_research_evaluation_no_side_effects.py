@@ -9,15 +9,21 @@ HARNESS = Path(__file__).resolve().parents[3] / (
 
 def test_operator_evaluation_harness_has_no_network_git_or_provider_imports():
     text = HARNESS.read_text()
-    prohibited = (
-        "import socket",
-        "import requests",
-        "import httpx",
-        "import aiohttp",
-        "import urllib.request",
-        "import subprocess",
-        "import git",
-        "import github",
+    prohibited_modules = (
+        "socket",
+        "requests",
+        "httpx",
+        "aiohttp",
+        ".".join(("urllib", "request")),
+        "subprocess",
+        "git",
+        "github",
+    )
+    prohibited = tuple(
+        f"{prefix} {module}"
+        for prefix in ("import", "from")
+        for module in prohibited_modules
+    ) + (
         "browser automation",
         "connector clients",
         "model providers",

@@ -1,34 +1,37 @@
 {
-  "active_knowledge_implementation_authorization": "AION-204-KI-0001",
+  "active_knowledge_implementation_authorization": "AION-206-KI-0002",
   "active_knowledge_implementation_authorization_count": 1,
-  "active_knowledge_implementation_task": "AION-205",
-  "approval_record_id": "AION-204-KI-0001",
-  "authorization_scope": "disabled-allowlisted-public-research-query-fetch-snapshot-provenance-core",
-  "authorization_transaction_id": "AION-204-KI-0001",
+  "active_knowledge_implementation_task": "AION-207",
+  "approval_record_id": "AION-206-KI-0002",
+  "authorization_scope": "append-only-immutable-source-snapshot-provenance-lineage-citation-registry-core",
+  "authorization_transaction_id": "AION-206-KI-0002",
   "automatic_belief_creation_enabled": false,
   "automatic_merge_enabled": false,
   "background_crawler_enabled": false,
+  "belief_mutation_enabled": false,
   "browser_automation_enabled": false,
-  "candidate_id": "controlled-internet-research-acquisition-core",
+  "candidate_id": "source-provenance-registry-core",
   "character_encoding_validation_available": true,
   "citation_reference_contract_available": true,
+  "claim_verification_enabled": false,
   "connector_integration_enabled": false,
   "content_fingerprinting_available": true,
   "content_type_policy_available": true,
   "cookie_use_enabled": false,
   "credential_use_enabled": false,
+  "deployment_enabled": false,
   "disabled_research_adapter_available": true,
   "domain_allowlist_policy_available": true,
   "explicit_local_fixture_adapter_available": true,
-  "formal_closeout_task": "AION-206",
+  "formal_closeout_task": "AION-208",
   "git_mutation_enabled": false,
-  "implementation_task": "AION-205",
+  "implementation_task": "AION-207",
   "in_memory_research_adapter_available": true,
   "knowledge_promotion_enabled": false,
   "model_provider_integration_enabled": false,
   "model_weight_training_enabled": false,
   "network_access_enabled": false,
-  "new_knowledge_implementation_authorization_created": false,
+  "new_knowledge_implementation_authorization_created": true,
   "operator_invoked_http_adapter_policy_available": true,
   "operator_invoked_research_plan_available": true,
   "parent_closeout_task": "AION-203",
@@ -41,29 +44,31 @@
   "production_exposure": false,
   "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
   "program_name": "AION Knowledge Intelligence Program",
-  "program_state": "research_plane_implemented_disabled_pending_closeout",
+  "program_state": "source_provenance_registry_authorized_not_implemented",
   "public_destination_policy_available": true,
   "public_network_fetch_available": false,
   "read_only": true,
   "records": [
     {
-      "authorization_state": "active_for_AION-205_formal_closeout_AION-206",
+      "authorization_state": "consumed_by_AION-205_closed_by_AION-206",
       "authorization_transaction": "AION-204-KI-0001",
       "branch": "phase/knowledge-intelligence-program-authorization",
       "ci_result": "pass",
       "completion_timestamp": "2026-07-22T22:14:53Z",
-      "corrective_prs": [],
+      "corrective_prs": [
+        117
+      ],
       "feature_commits": [
         "22fa70765468793aacddc22512e11d104bc0122b"
       ],
       "merge_commits": [
         "94431e3788dab2f3e3fc934160abfd010c3055dd"
       ],
-      "next_task": "AION-205",
+      "next_task": "AION-206",
       "pull_requests": [
         115
       ],
-      "runtime_state": "research_plane_authorized_not_implemented",
+      "runtime_state": "implemented_operator_invoked_disabled",
       "task_id": "AION-204",
       "tests": [
         "GitHub brain-api-quality pass",
@@ -87,18 +92,71 @@
       ]
     },
     {
-      "authorization_state": "implementation_in_progress_formal_closeout_AION-206",
+      "authorization_state": "implemented_and_closed_by_AION-206",
       "authorization_transaction": "AION-204-KI-0001",
       "branch": "phase/knowledge-intelligence-research-acquisition-core",
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-23T10:13:46Z",
+      "corrective_prs": [
+        117
+      ],
+      "feature_commits": [
+        "b7299912f1c42c54581c20ad384602473169dcc1",
+        "c06b54c8bcb969fcae98a421a5d088bdd2307c0b"
+      ],
+      "merge_commits": [
+        "45d473fe2a07b62acd6f6957f5419fa78dcc6fc2",
+        "a775fb18bb0027d30834d8ab2507f461013753e2"
+      ],
+      "next_task": "AION-206",
+      "pull_requests": [
+        116,
+        117
+      ],
+      "runtime_state": "implemented_operator_invoked_disabled",
+      "task_id": "AION-205",
+      "tests": [
+        "GitHub PR #116 checks pass",
+        "GitHub PR #117 corrective checks pass",
+        "AION-205 no-go gate pass",
+        "AION-205 research-plane gate pass",
+        "AION-205 runtime hold pass",
+        "Brain API: 3380 passed",
+        "SDK: 274 passed",
+        "AION-206 operator evaluation: 28 passed"
+      ]
+    },
+    {
+      "authorization_state": "operator_evaluation_passed_source_registry_authorized",
+      "authorization_transaction": "AION-206-KI-0002",
+      "branch": "phase/knowledge-intelligence-research-evaluation-source-registry-authorization",
       "ci_result": "pending",
       "completion_timestamp": null,
-      "corrective_prs": [],
-      "feature_commits": [],
+      "evaluation_base_commit": "a775fb18bb0027d30834d8ab2507f461013753e2",
+      "evaluation_decision": "RESEARCH_ACQUISITION_OPERATOR_EVALUATION_PASS_RECOMMEND_SOURCE_PROVENANCE_REGISTRY_AUTHORIZATION",
+      "evaluation_id": "AION-RAE-001",
+      "feature_commits": [
+        "b9341bcb9753a27248d82b9297a2f331d4133b4b"
+      ],
       "merge_commits": [],
-      "next_task": "AION-206",
+      "next_task": "AION-207",
       "pull_requests": [],
-      "runtime_state": "implemented_operator_invoked_disabled",
-      "task_id": "AION-205"
+      "runtime_state": "source_provenance_registry_authorized_not_implemented",
+      "task_id": "AION-206",
+      "tests": [
+        "AION-206 operator evaluation: 28 passed"
+      ]
+    },
+    {
+      "authorization_state": "authorized_not_started",
+      "authorization_transaction": "AION-206-KI-0002",
+      "branch": null,
+      "ci_result": null,
+      "completion_timestamp": null,
+      "next_task": "AION-208",
+      "pull_requests": [],
+      "runtime_state": "source_provenance_registry_authorized_not_implemented",
+      "task_id": "AION-207"
     }
   ],
   "redacted": true,
@@ -112,15 +170,21 @@
   "research_runtime_enabled": false,
   "runtime_created_pr_enabled": false,
   "runtime_effect": false,
+  "runtime_pr_enabled": false,
   "safe_header_projection_available": true,
   "scheduled_research_enabled": false,
   "schema_version": "aion-knowledge-intelligence-program-ledger/v1",
   "search_provider_integration_enabled": false,
+  "source_body_persistence_enabled": false,
   "source_candidate_contract_available": true,
   "source_deduplication_available": true,
   "source_lineage_contract_available": true,
   "source_mutation_enabled": false,
   "source_provenance_contract_available": true,
+  "source_provenance_registry_authorized": true,
+  "source_provenance_registry_implemented": false,
+  "source_registry_authorized": true,
+  "source_registry_runtime_enabled": false,
   "source_snapshot_contract_available": true,
   "synthetic": true,
   "system_http_transport_available": false,

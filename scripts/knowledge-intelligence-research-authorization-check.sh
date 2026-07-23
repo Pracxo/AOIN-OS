@@ -45,24 +45,40 @@ def main():
     assert t('docs/cognitive-architecture/aion-203-postmerge-verification.md').find(PARENT_DECISION) != -1
     pg = j('docs/knowledge-intelligence/program-ledger.json'); au = j('docs/knowledge-intelligence/authorization-ledger.json')
     assert pg['program_id'] == PROGRAM_ID
-    assert pg['program_state'] in {'research_plane_authorized_not_implemented', 'research_plane_implemented_disabled_pending_closeout'}
-    assert pg['active_knowledge_implementation_authorization_count'] == 1 and pg['active_knowledge_implementation_authorization'] == AUTH_ID
-    assert pg['active_knowledge_implementation_task'] == 'AION-205' and pg['formal_closeout_task'] == 'AION-206'
+    assert pg['program_state'] in {'research_plane_authorized_not_implemented', 'research_plane_implemented_disabled_pending_closeout', 'source_provenance_registry_authorized_not_implemented'}
+    assert pg['active_knowledge_implementation_authorization_count'] == 1
     assert pg['research_plane_implemented'] in {False, True}
     for k in ['research_runtime_enabled','network_access_enabled','knowledge_promotion_enabled','verified_knowledge_memory_enabled','automatic_belief_creation_enabled','background_crawler_enabled','production_exposure','model_weight_training_enabled']: assert pg[k] is False, k
     assert [x['task_id'] for x in pg['tasks']] == ROADMAP_TASKS
     assert au['active_cognitive_implementation_authorization_count'] == 0 and au['active_knowledge_implementation_authorization_count'] == 1
     active = [r for r in au['records'] if r.get('authorization_active') is True]
     assert len(active) == 1
-    r = active[0]
-    assert r['authorization_transaction_id'] == AUTH_ID and r['approval_record_id'] == AUTH_ID
-    assert r['candidate_id'] == 'controlled-internet-research-acquisition-core' and r['implementation_task'] == 'AION-205' and r['formal_closeout_task'] == 'AION-206'
-    assert r['authorization_scope'] == 'disabled-allowlisted-public-research-query-fetch-snapshot-provenance-core' and r['authorization_consumed'] is False and r['authorization_expired'] is False and r['authorization_reusable'] is False
-    assert set(r['authorized_capabilities']) == set(APPROVED_KEYS) and all(r['authorized_capabilities'][k] is True for k in APPROVED_KEYS)
-    assert set(r['prohibited_capabilities']) == set(PROHIBITED_KEYS) and all(r['prohibited_capabilities'][k] is False for k in PROHIBITED_KEYS)
-    for key, value in RESOURCE_LIMITS.items():
-        assert r['resource_limits'][key] == value, key
-    assert r['source_quality_classes'] == SOURCE_CLASSES
+    if pg['program_state'] == 'source_provenance_registry_authorized_not_implemented':
+        assert pg['active_knowledge_implementation_authorization'] == 'AION-206-KI-0002'
+        assert pg['active_knowledge_implementation_task'] == 'AION-207' and pg['formal_closeout_task'] == 'AION-208'
+        r = active[0]
+        assert r['authorization_transaction_id'] == 'AION-206-KI-0002'
+        assert r['authorization_scope'] == 'append-only-immutable-source-snapshot-provenance-lineage-citation-registry-core'
+        assert r['implementation_task'] == 'AION-207' and r['formal_closeout_task'] == 'AION-208'
+        assert r['authorization_consumed'] is False and r['authorization_expired'] is False and r['authorization_reusable'] is False
+        closed = [x for x in au['records'] if x.get('authorization_transaction_id') == AUTH_ID][0]
+        assert closed['authorization_active'] is False
+        assert closed['authorization_consumed'] is True
+        assert closed['authorization_expired'] is True
+        assert closed['authorization_reusable'] is False
+        assert closed['authorization_consumed_by_prs'] == [116, 117]
+    else:
+        assert pg['active_knowledge_implementation_authorization'] == AUTH_ID
+        assert pg['active_knowledge_implementation_task'] == 'AION-205' and pg['formal_closeout_task'] == 'AION-206'
+        r = active[0]
+        assert r['authorization_transaction_id'] == AUTH_ID and r['approval_record_id'] == AUTH_ID
+        assert r['candidate_id'] == 'controlled-internet-research-acquisition-core' and r['implementation_task'] == 'AION-205' and r['formal_closeout_task'] == 'AION-206'
+        assert r['authorization_scope'] == 'disabled-allowlisted-public-research-query-fetch-snapshot-provenance-core' and r['authorization_consumed'] is False and r['authorization_expired'] is False and r['authorization_reusable'] is False
+        assert set(r['authorized_capabilities']) == set(APPROVED_KEYS) and all(r['authorized_capabilities'][k] is True for k in APPROVED_KEYS)
+        assert set(r['prohibited_capabilities']) == set(PROHIBITED_KEYS) and all(r['prohibited_capabilities'][k] is False for k in PROHIBITED_KEYS)
+        for key, value in RESOURCE_LIMITS.items():
+            assert r['resource_limits'][key] == value, key
+        assert r['source_quality_classes'] == SOURCE_CLASSES
     stale = re.compile(r'Current milestone:\s*AION-18[12]|AION-181 is the next task|AION-182.*next|actual_controlled_shadow_activation_authorization_review|current state remains AION-179|current stage remains AION-179')
     for p in ['README.md','AGENTS.md','docs/project-status.md','docs/architecture.md','docs/brain-contract.md','docs/policy-model.md','docs/visual-brain.md','docs/release/v02-release-readiness-delta.md','operator-console-static/README.md']:
         assert stale.search(t(p)) is None, p

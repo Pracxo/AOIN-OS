@@ -27,7 +27,8 @@ from pathlib import Path
 root = Path(".")
 program = json.loads((root / "docs/knowledge-intelligence/program-ledger.json").read_text())
 auth = json.loads((root / "docs/knowledge-intelligence/authorization-ledger.json").read_text())
-record = auth["records"][0]
+active = [record for record in auth["records"] if record.get("authorization_active") is True]
+assert len(active) == 1
 assert program["research_plane_implemented"] is True
 assert program["research_plane_state"] == "implemented_operator_invoked_disabled"
 for key in (
@@ -49,10 +50,22 @@ for key in (
     "runtime_effect",
 ):
     assert program[key] is False, key
-assert record["authorization_active"] is True
-assert record["authorization_consumed"] is False
-assert record["authorization_reusable"] is False
-assert record["system_http_transport_available"] is False
+if program["program_state"] == "source_provenance_registry_authorized_not_implemented":
+    assert active[0]["authorization_transaction_id"] == "AION-206-KI-0002"
+    closed = [
+        record
+        for record in auth["records"]
+        if record.get("authorization_transaction_id") == "AION-204-KI-0001"
+    ][0]
+    assert closed["authorization_active"] is False
+    assert closed["authorization_consumed"] is True
+    assert closed["authorization_reusable"] is False
+    assert closed["system_http_transport_available"] is False
+else:
+    assert active[0]["authorization_transaction_id"] == "AION-204-KI-0001"
+    assert active[0]["authorization_consumed"] is False
+    assert active[0]["authorization_reusable"] is False
+    assert active[0]["system_http_transport_available"] is False
 assert (root / "services/brain-api/src/aion_brain/knowledge_intelligence").is_dir()
 assert (root / "services/brain-api/src/aion_brain/contracts/knowledge_research.py").is_file()
 assert (

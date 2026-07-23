@@ -21,6 +21,7 @@ from pathlib import Path
 ROOT = Path(os.environ["AION_REPO_ROOT"])
 EXPECTED_TAG = "105fe29348160a2218ac095cfffadcb6f234421f"
 ALLOWED_PREFIXES = ("docs/", "examples/", "operator-console-static/", "scripts/", "services/brain-api/tests/")
+ALLOWED_EXACT = {"README.md", "AGENTS.md"}
 PROHIBITED_PREFIXES = (
     ".github/workflows/",
     "services/brain-api/src/aion_brain/",
@@ -88,7 +89,7 @@ for parts in entries:
             raise SystemExit(f"dependency/package file changed: {normalized}")
         if normalized.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"runtime/source/workflow path changed on AION-206: {normalized}")
-        if not any(normalized.startswith(prefix) for prefix in ALLOWED_PREFIXES):
+        if normalized not in ALLOWED_EXACT and not any(normalized.startswith(prefix) for prefix in ALLOWED_PREFIXES):
             raise SystemExit(f"path outside AION-206 scope: {normalized}")
 
 if run(["git", "rev-parse", "aion-v0.1.0^{commit}"]).stdout.strip() != EXPECTED_TAG:

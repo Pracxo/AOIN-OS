@@ -142,13 +142,15 @@ def test_project_status_describes_current_shadow_authorization_state() -> None:
     historical_text = text.split("## Historical Compatibility Markers", 1)[1]
 
     assert "AION-204 Cognitive Architecture closeout reconciliation" in current_text
-    assert "Knowledge Intelligence research plane authorized and not implemented" in current_text
+    assert "source registry authorized but not implemented" in current_text
     assert "active self-improvement implementation authorization count is zero" in current_text
     assert "`knowledge_research_runtime_enabled=false`" in current_text
     assert "`network_access_enabled=false`" in current_text
-    assert "`active_knowledge_implementation_authorization=AION-204-KI-0001`" in current_text
-    assert "`active_knowledge_implementation_task=AION-205`" in current_text
-    assert "`formal_closeout_task=AION-206`" in current_text
+    assert "`active_knowledge_implementation_authorization=AION-206-KI-0002`" in current_text
+    assert "`active_knowledge_implementation_task=AION-207`" in current_text
+    assert "`formal_closeout_task=AION-208`" in current_text
+    assert "`source_provenance_registry_authorized=true`" in current_text
+    assert "`source_provenance_registry_implemented=false`" in current_text
     assert "AION-180-SI-0007" in historical_text
     assert "v02_tag_created=false" in text
     assert "v02_release_created=false" in text

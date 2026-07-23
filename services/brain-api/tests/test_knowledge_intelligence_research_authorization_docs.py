@@ -3,13 +3,16 @@ import os
 import subprocess
 
 from knowledge_intelligence_test_helpers import (
-    AUTH_ID,
-    FORMAL_CLOSEOUT_TASK,
-    IMPLEMENTATION_TASK,
     PROGRAM_ID,
     ROOT,
     read_json,
-    validate_authorization_record,
+)
+from knowledge_source_registry_test_helpers import (
+    CLOSED_AUTH_ID,
+    SOURCE_AUTH_ID,
+    active_source_record,
+    closed_research_record,
+    validate_source_authorization,
 )
 
 REQUIRED_FILES = [
@@ -53,11 +56,11 @@ def test_ledgers_create_single_active_knowledge_authorization():
     program = read_json("docs/knowledge-intelligence/program-ledger.json")
     auth = read_json("docs/knowledge-intelligence/authorization-ledger.json")
     assert program["program_id"] == PROGRAM_ID
-    assert program["program_state"] == "research_plane_implemented_disabled_pending_closeout"
+    assert program["program_state"] == "source_provenance_registry_authorized_not_implemented"
     assert program["active_knowledge_implementation_authorization_count"] == 1
-    assert program["active_knowledge_implementation_authorization"] == AUTH_ID
-    assert program["active_knowledge_implementation_task"] == IMPLEMENTATION_TASK
-    assert program["formal_closeout_task"] == FORMAL_CLOSEOUT_TASK
+    assert program["active_knowledge_implementation_authorization"] == SOURCE_AUTH_ID
+    assert program["active_knowledge_implementation_task"] == "AION-207"
+    assert program["formal_closeout_task"] == "AION-208"
     assert program["research_plane_authorized"] is True
     assert program["research_plane_implemented"] is True
     assert program["research_plane_state"] == "implemented_operator_invoked_disabled"
@@ -70,7 +73,13 @@ def test_ledgers_create_single_active_knowledge_authorization():
     assert auth["active_cognitive_implementation_authorization_count"] == 0
     active = [record for record in auth["records"] if record.get("authorization_active") is True]
     assert len(active) == 1
-    validate_authorization_record(active[0])
+    validate_source_authorization(active_source_record())
+    closed = closed_research_record()
+    assert closed["authorization_transaction_id"] == CLOSED_AUTH_ID
+    assert closed["authorization_active"] is False
+    assert closed["authorization_consumed"] is True
+    assert closed["authorization_expired"] is True
+    assert closed["authorization_reusable"] is False
 
 
 def test_json_examples_have_required_metadata_and_no_secret_patterns():

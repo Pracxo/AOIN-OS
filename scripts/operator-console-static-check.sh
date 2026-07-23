@@ -554,8 +554,11 @@ for path in sorted(demo_dir.glob("*.json")):
         if path.name not in {
             "knowledge-intelligence-program.json",
             "knowledge-intelligence-research-authorization.json",
+            "knowledge-intelligence-research-evaluation.json",
             "knowledge-intelligence-research-plane.json",
             "knowledge-intelligence-research-runtime-hold.json",
+            "knowledge-intelligence-source-registry-authorization.json",
+            "knowledge-intelligence-source-registry-runtime-hold.json",
             "knowledge-intelligence-source-lineage.json",
             "knowledge-intelligence-source-snapshots.json",
         }:
