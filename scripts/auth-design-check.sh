@@ -1321,6 +1321,26 @@ aion209_auth_paths = {
     "services/brain-api/tests/test_knowledge_claim_graph_authorization_validator.py",
 }
 
+aion210_auth_paths = {
+    "docs/adr/0174-temporal-claim-evidence-graph-evaluation-and-epistemic-truth-engine-authorization.md",
+    "docs/knowledge-intelligence/authorization-ledger.json",
+    "docs/release/knowledge-intelligence-epistemic-truth-authorization-transaction.md",
+    "docs/release/knowledge-intelligence-epistemic-truth-explicit-approval-record.md",
+    "examples/knowledge-intelligence/epistemic-truth-authorization.json",
+    "operator-console-static/demo-data/knowledge-intelligence-epistemic-truth-authorization.json",
+    "scripts/knowledge-intelligence-claim-graph-authorization-check.sh",
+    "scripts/knowledge-intelligence-claim-graph-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-epistemic-truth-authorization-check.sh",
+    "scripts/knowledge-intelligence-epistemic-truth-authorization-no-go-regression.sh",
+    "services/brain-api/tests/test_knowledge_claim_graph_authorization_closeout.py",
+    "services/brain-api/tests/test_knowledge_claim_graph_authorization_validator.py",
+    "services/brain-api/tests/test_knowledge_epistemic_truth_authorization_docs.py",
+    "services/brain-api/tests/test_knowledge_epistemic_truth_authorization_validator.py",
+    "services/brain-api/tests/test_knowledge_intelligence_research_authorization_docs.py",
+    "services/brain-api/tests/test_knowledge_research_authorization_closeout.py",
+    "services/brain-api/tests/test_knowledge_source_registry_authorization_closeout.py",
+}
+
 blocked_package_names = {
     "package.json",
     "package-lock.json",
@@ -1365,6 +1385,7 @@ for name in [*changed, *untracked]:
         and name not in aion204_auth_paths
         and name not in aion206_auth_paths
         and name not in aion209_auth_paths
+        and name not in aion210_auth_paths
     ):
         raise SystemExit(f"unexpected auth runtime or artifact path: {name}")
 

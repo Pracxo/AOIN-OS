@@ -10,6 +10,7 @@ PROGRAM_ID = "AION-KNOWLEDGE-INTELLIGENCE-001"
 CLOSED_AUTH_ID = "AION-204-KI-0001"
 SOURCE_AUTH_ID = "AION-206-KI-0002"
 CLAIM_GRAPH_AUTH_ID = "AION-208-KI-0003"
+EPISTEMIC_AUTH_ID = "AION-210-KI-0004"
 EVALUATION_ID = "AION-RAE-001"
 DECISION = (
     "RESEARCH_ACQUISITION_OPERATOR_EVALUATION_PASS_RECOMMEND_SOURCE_PROVENANCE_REGISTRY_AUTHORIZATION"
@@ -103,6 +104,28 @@ def active_knowledge_authorization_record() -> dict:
     active = [record for record in records if record.get("authorization_active") is True]
     assert len(active) == 1
     return active[0]
+
+
+def claim_graph_authorization_record() -> dict:
+    records = read_json("docs/knowledge-intelligence/authorization-ledger.json")["records"]
+    matches = [
+        record
+        for record in records
+        if record.get("authorization_transaction_id") == CLAIM_GRAPH_AUTH_ID
+    ]
+    assert len(matches) == 1
+    return matches[0]
+
+
+def epistemic_authorization_record() -> dict:
+    records = read_json("docs/knowledge-intelligence/authorization-ledger.json")["records"]
+    matches = [
+        record
+        for record in records
+        if record.get("authorization_transaction_id") == EPISTEMIC_AUTH_ID
+    ]
+    assert len(matches) == 1
+    return matches[0]
 
 
 def closed_research_record() -> dict:

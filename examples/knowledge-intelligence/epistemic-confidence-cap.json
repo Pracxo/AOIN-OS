@@ -1,0 +1,53 @@
+{
+  "authorization_transaction_id": "AION-210-KI-0004",
+  "confidence_range": [
+    0,
+    1
+  ],
+  "hard_caps": {
+    "applicable_retraction": {
+      "status": "retracted"
+    },
+    "applicable_supersession_without_current_support": {
+      "status": "superseded"
+    },
+    "broken_source_registry_or_graph_integrity": {
+      "confidence": 0,
+      "status": "unknown"
+    },
+    "incomplete_provenance": {
+      "maximum_confidence": 0.5
+    },
+    "insufficient_explicit_scope": {
+      "status": "insufficient_evidence"
+    },
+    "missing_citation_coverage": {
+      "maximum_confidence": 0.45
+    },
+    "one_independent_evidence_group": {
+      "maximum_confidence": 0.6
+    },
+    "only_unknown_or_community_unverified_evidence": {
+      "maximum_confidence": 0.5
+    },
+    "scope_mismatch": {
+      "maximum_confidence": 0.2,
+      "status": "scope_mismatch"
+    },
+    "stale_evidence": {
+      "maximum_confidence": 0.5
+    },
+    "unresolved_material_opposition": {
+      "maximum_confidence": 0.65,
+      "status": "mixed"
+    },
+    "zero_independent_evidence_groups": {
+      "maximum_confidence": 0.2
+    }
+  },
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "read_only": true,
+  "redacted": true,
+  "runtime_effect": false,
+  "synthetic": true
+}

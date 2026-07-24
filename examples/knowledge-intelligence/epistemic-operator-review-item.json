@@ -1,0 +1,14 @@
+{
+  "assessment_used_as_approval": false,
+  "authorization_transaction_id": "AION-210-KI-0004",
+  "belief_mutation_authorized": false,
+  "knowledge_promotion_authorized": false,
+  "operator_review_required": true,
+  "persistent_write_authorized": false,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "read_only": true,
+  "redacted": true,
+  "review_item_id": "epistemic-review-0001",
+  "runtime_effect": false,
+  "synthetic": true
+}

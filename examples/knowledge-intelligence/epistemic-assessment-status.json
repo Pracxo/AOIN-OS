@@ -1,0 +1,52 @@
+{
+  "absolute_truth_oracle_enabled": false,
+  "assessment_status_values": [
+    "supported",
+    "contradicted",
+    "mixed",
+    "insufficient_evidence",
+    "stale",
+    "superseded",
+    "retracted",
+    "scope_mismatch",
+    "unknown"
+  ],
+  "authorization_transaction_id": "AION-210-KI-0004",
+  "belief_mutation_enabled": false,
+  "confidence_bands": [
+    "very_low",
+    "low",
+    "medium",
+    "high",
+    "very_high"
+  ],
+  "contradiction_status_values": [
+    "none_detected",
+    "unresolved",
+    "material",
+    "scope_separated",
+    "insufficient_evidence"
+  ],
+  "formal_closeout_task": "AION-212",
+  "freshness_status_values": [
+    "current",
+    "ageing",
+    "stale",
+    "superseded",
+    "retracted",
+    "unknown"
+  ],
+  "implementation_task": "AION-211",
+  "knowledge_promotion_enabled": false,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "read_only": true,
+  "redacted": true,
+  "runtime_effect": false,
+  "scope_applicability_values": [
+    "applicable",
+    "partially_applicable",
+    "not_applicable",
+    "insufficient_scope"
+  ],
+  "synthetic": true
+}

@@ -36,7 +36,21 @@ program = json.loads((root / "docs/knowledge-intelligence/program-ledger.json").
 auth = json.loads((root / "docs/knowledge-intelligence/authorization-ledger.json").read_text())
 active = [record for record in auth["records"] if record.get("authorization_active") is True]
 assert len(active) == 1
-claim = active[0]
+if active[0]["authorization_transaction_id"] == "AION-208-KI-0003":
+    claim = active[0]
+else:
+    assert active[0]["authorization_transaction_id"] == "AION-210-KI-0004"
+    matches = [
+        record
+        for record in auth["records"]
+        if record.get("authorization_transaction_id") == "AION-208-KI-0003"
+    ]
+    assert len(matches) == 1
+    claim = matches[0]
+    assert claim["authorization_active"] is False
+    assert claim["authorization_consumed"] is True
+    assert claim["authorization_expired"] is True
+    assert claim["authorization_closed_by_task"] == "AION-210"
 assert claim["authorization_transaction_id"] == "AION-208-KI-0003"
 assert program["temporal_claim_evidence_graph_implemented"] is True
 assert program["persistent_claim_graph_write_enabled"] is False

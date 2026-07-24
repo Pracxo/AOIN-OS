@@ -9,6 +9,19 @@ PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 export AION_REPO_ROOT="$ROOT_DIR"
 
+if "$PYTHON_BIN" - <<'PY'
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+program = json.loads(Path("docs/knowledge-intelligence/program-ledger.json").read_text())
+raise SystemExit(0 if program.get("program_state") == "epistemic_truth_engine_authorized_not_implemented" else 1)
+PY
+then
+  export AION_KNOWLEDGE_POST_AION210_CONTEXT=1
+fi
+
 ./scripts/knowledge-intelligence-claim-graph-authorization-no-go-regression.sh
 
 "$PYTHON_BIN" - <<'PY'
@@ -27,6 +40,7 @@ SCOPE = (
     "version-contradiction-graph-core"
 )
 STATE = "implemented_append_only_in_memory_unverified_persistent_write_disabled"
+POST_AION210_STATE = "epistemic_truth_engine_authorized_not_implemented"
 REQUIRED_SOURCE = [
     "services/brain-api/src/aion_brain/contracts/knowledge_claim_graph.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph.py",
@@ -157,7 +171,25 @@ assert source["authorization_active"] is False
 assert source["authorization_consumed"] is True
 assert source["authorization_expired"] is True
 assert len(active) == 1
-claim = active[0]
+if program["program_state"] == POST_AION210_STATE:
+    assert active[0]["authorization_transaction_id"] == "AION-210-KI-0004"
+    claim_matches = [
+        record
+        for record in auth["records"]
+        if record.get("authorization_transaction_id") == "AION-208-KI-0003"
+    ]
+    assert len(claim_matches) == 1
+    claim = claim_matches[0]
+    assert claim["authorization_active"] is False
+    assert claim["authorization_consumed"] is True
+    assert claim["authorization_expired"] is True
+    assert claim["authorization_closed_by_task"] == "AION-210"
+    assert claim["claim_graph_operator_evaluation_id"] == "AION-TCGE-001"
+else:
+    claim = active[0]
+    assert claim["authorization_active"] is True
+    assert claim["authorization_consumed"] is False
+    assert claim["authorization_expired"] is False
 assert claim["authorization_transaction_id"] == "AION-208-KI-0003"
 assert claim["approval_record_id"] == "AION-208-KI-0003"
 assert claim["parent_authorization_transaction_id"] == "AION-206-KI-0002"
@@ -168,22 +200,31 @@ assert claim["workstream"] == "knowledge-intelligence-temporal-claim-evidence-gr
 assert claim["implementation_task"] == "AION-209"
 assert claim["formal_closeout_task"] == "AION-210"
 assert claim["authorization_scope"] == SCOPE
-assert claim["authorization_active"] is True
-assert claim["authorization_consumed"] is False
-assert claim["authorization_expired"] is False
 assert claim["authorization_reusable"] is False
 assert claim["temporal_claim_evidence_graph_state"] == STATE
-assert program["program_state"] == "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout"
-assert program["active_knowledge_implementation_authorization"] == "AION-208-KI-0003"
-assert program["active_knowledge_implementation_task"] == "AION-209"
-assert program["formal_closeout_task"] == "AION-210"
+assert program["program_state"] in {
+    "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
+    POST_AION210_STATE,
+}
+if program["program_state"] == POST_AION210_STATE:
+    assert program["active_knowledge_implementation_authorization"] == "AION-210-KI-0004"
+    assert program["active_knowledge_implementation_task"] == "AION-211"
+    assert program["formal_closeout_task"] == "AION-212"
+    assert program["new_knowledge_implementation_authorization_created"] is True
+else:
+    assert program["active_knowledge_implementation_authorization"] == "AION-208-KI-0003"
+    assert program["active_knowledge_implementation_task"] == "AION-209"
+    assert program["formal_closeout_task"] == "AION-210"
 assert program["active_knowledge_implementation_authorization_count"] == 1
 assert program["active_cognitive_implementation_authorization_count"] == 0
 for key in TRUE_FLAGS:
     assert program.get(key) is True, key
     assert claim.get(key) is True, key
 for key in FALSE_FLAGS:
-    assert program.get(key, False) is False, key
+    if key == "new_knowledge_implementation_authorization_created" and program["program_state"] == POST_AION210_STATE:
+        assert program[key] is True, key
+    else:
+        assert program.get(key, False) is False, key
     assert claim.get(key, False) is False, key
 assert all(claim["authorized_capabilities"].values())
 assert all(value is False for value in claim["prohibited_capabilities"].values())
@@ -210,8 +251,11 @@ assert a208["merge_commits"] == ["f4193e2b05da7c88031a9144181989b1ee1db7bc"]
 assert a208["completion_timestamp"] == "2026-07-24T02:06:23Z"
 a209 = records["AION-209"]
 assert a209["branch"] == "phase/knowledge-intelligence-temporal-claim-evidence-graph"
-assert a209["ci_result"] == "pending"
-assert a209["runtime_state"] == "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout"
+assert a209["ci_result"] in {"pending", "pass"}
+assert a209["runtime_state"] in {
+    "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
+    "temporal_claim_evidence_graph_implemented_write_disabled",
+}
 PY
 
 echo "knowledge intelligence claim graph authorization PASS"

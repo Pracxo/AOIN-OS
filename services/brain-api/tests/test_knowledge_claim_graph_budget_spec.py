@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from knowledge_source_registry_test_helpers import (
-    active_knowledge_authorization_record,
+    claim_graph_authorization_record,
     read_json,
     read_text,
 )
@@ -44,7 +44,7 @@ EXPECTED_LIMITS = {
 
 
 def test_claim_graph_budget_document_and_examples_match_authorization():
-    record = active_knowledge_authorization_record()
+    record = claim_graph_authorization_record()
     budget = read_json("examples/knowledge-intelligence/claim-graph-resource-budget.json")
     text = read_text(
         "docs/knowledge-intelligence/temporal-claim-evidence-graph-resource-budgets.md"

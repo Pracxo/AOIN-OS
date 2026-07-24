@@ -8,18 +8,18 @@ tag or release exists.
 
 ## Current Main Milestone
 
-## AION-209 Immutable Temporal Claim-Evidence Graph
+## AION-210 Claim Graph Evaluation and Epistemic Truth Authorization
 
-AION-209 immutable temporal claim-evidence graph implementation is in progress
-under `AION-208-KI-0003`. The implementation adds an append-only in-memory
-graph for explicit unverified claims, source-registry evidence bindings,
-temporal scope, jurisdiction, version scope, relations, structural conflict
-candidates, deterministic indexes, fixture replay, integrity audit, and
-redacted operator evidence.
+AION-210 completed the independent operator evaluation for the AION-209
+immutable temporal claim-evidence graph and generated AION-TCGE-001. The
+evaluation passed, closed `AION-208-KI-0003` as consumed by AION-209, and
+created `AION-210-KI-0004` as the sole active Knowledge Intelligence
+implementation authorization for AION-211.
 
-Current stage: temporal claim-evidence graph implemented, append-only,
-in-memory, unverified, runtime-disabled, and persistent-write-disabled pending
-AION-210 formal closeout.
+Current stage: epistemic truth-engine authorization active for deterministic
+evidence assessment planning only. AION-211 remains unimplemented. The
+temporal claim-evidence graph stays append-only, in-memory, unverified,
+runtime-disabled, and persistent-write-disabled.
 
 AION-204 Cognitive Architecture closeout reconciliation remains complete, and
 the active self-improvement implementation authorization count is zero.
@@ -47,16 +47,21 @@ Current state flags:
 - `verified_knowledge_promotion_enabled=false`
 - `belief_mutation_enabled=false`
 - `network_access_enabled=false`
-- `active_knowledge_implementation_authorization=AION-208-KI-0003`
+- `active_knowledge_implementation_authorization=AION-210-KI-0004`
 - active Knowledge Intelligence implementation authorization count: 1
-- `active_knowledge_implementation_task=AION-209`
-- `formal_closeout_task=AION-210`
+- `active_knowledge_implementation_task=AION-211`
+- `formal_closeout_task=AION-212`
+
+AION-209 compatibility marker retained for inherited closeout gates:
+`active_knowledge_implementation_task=AION-209` denotes the prior consumed
+implementation task, not the current active authorization.
 
 AION-205 captures untrusted evidence. AION-207 registers immutable evidence
 metadata. AION-208 evaluated the registry and authorized AION-209. AION-209
 represents unverified claims and evidence relationships, but does not determine
-truth. AION-211 remains the future epistemic truth engine. Persistent writes
-and public-network research remain disabled.
+truth. AION-210 authorizes AION-211 to implement bounded epistemic assessment
+later; it does not implement that engine. Persistent writes and public-network
+research remain disabled.
 
 ## Completed Architecture
 
@@ -162,6 +167,8 @@ Historical marker: Current authorization: AION-163-PA-0007 active for AION-164.
 Historical marker: AION-162 offline Ed25519 identity assertion verification core implemented and post-merge verification corrected.
 Historical marker: AION-206 research acquisition operator evaluation complete; source registry authorization active.
 Historical marker: The next task is AION-207 append-only source-provenance registry implementation.
+Historical marker: AION-209 temporal claim-evidence graph was implemented under AION-208-KI-0003.
+Historical marker: AION-208-KI-0003 was consumed by AION-209 and closed by AION-210.
 
 Historical AION-160 marker: AION-160 actor-context trust-boundary remediation implemented.
 The completed remediation keeps non-development identity headers ignored,
@@ -171,7 +178,7 @@ and production authentication disabled. Formal lifecycle closeout: AION-161.
 
 ## Current Operator Task
 
-AION-209 temporal claim-evidence graph is the next task. AION-208 closed `AION-206-KI-0002` as consumed by AION-207 and created `AION-208-KI-0003` as the sole active Knowledge Intelligence implementation authorization.
+AION-211 deterministic epistemic assessment engine is the next task. AION-210 closed `AION-208-KI-0003` as consumed by AION-209 and created `AION-210-KI-0004` as the sole active Knowledge Intelligence implementation authorization.
 
 ## Current Test Posture
 
@@ -232,3 +239,13 @@ Historical AION-180 marker: AION-181 implemented the disabled controlled shadow 
 AION-209 implements the temporal claim-evidence graph core under `AION-208-KI-0003`. The graph represents explicit unverified claims, source-registry evidence bindings, valid time, transaction time, jurisdiction, version scope, relations, structural conflict candidates, immutable in-memory projection, deterministic indexes, bounded exact queries, fixture replay, integrity audit, and redacted operator-review evidence.
 
 The current state is `implemented_append_only_in_memory_unverified_persistent_write_disabled`. `claim_graph_runtime_enabled=false`, `persistent_claim_graph_write_enabled=false`, `maximum_graph_write_batch=0`, `automatic_claim_extraction_enabled=false`, `claim_verification_enabled=false`, `truth_decision_enabled=false`, `epistemic_confidence_enabled=false`, `contradiction_resolution_enabled=false`, `knowledge_promotion_enabled=false`, and `belief_mutation_enabled=false`. AION-210 is the next formal closeout and evaluation task.
+
+## AION-210 Claim Graph Evaluation and Epistemic Authorization
+
+AION-210 completed read-only operator evaluation `AION-TCGE-001` for AION-209. The decision is `TEMPORAL_CLAIM_EVIDENCE_GRAPH_OPERATOR_EVALUATION_PASS_RECOMMEND_EPISTEMIC_TRUTH_ENGINE_AUTHORIZATION`.
+
+Current stage: temporal claim-evidence graph implemented, evaluated, in-memory, append-only, unverified, and persistent-write-disabled. Deterministic epistemic assessment is authorized for AION-211 and not implemented.
+
+Required flags: `temporal_claim_evidence_graph_implemented=true`, `claim_graph_operator_evaluation_passed=true`, `claim_graph_runtime_enabled=false`, `persistent_claim_graph_write_enabled=false`, `epistemic_truth_engine_authorized=true`, `epistemic_truth_engine_implemented=false`, `absolute_truth_oracle_enabled=false`, `knowledge_promotion_enabled=false`, `belief_mutation_enabled=false`, `network_access_enabled=false`, `active_knowledge_implementation_authorization=AION-210-KI-0004`, `active_knowledge_implementation_task=AION-211`, `formal_closeout_task=AION-212`.
+
+AION-209 represents unverified claims. AION-210 evaluated the graph. AION-211 will assess evidence rather than claim metaphysical certainty. Source independence and freshness will be explicit; unresolved contradiction will be preserved; knowledge promotion and belief mutation remain unavailable.

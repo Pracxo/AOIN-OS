@@ -1,0 +1,68 @@
+{
+  "claim_graph_runtime_enabled": false,
+  "forbidden_actions": [
+    {
+      "message": "runtime execution remains disabled"
+    },
+    {
+      "message": "persistent writes remain disabled"
+    },
+    {
+      "message": "network, provider, connector, API, CLI, deployment, approval, and merge actions remain blocked"
+    }
+  ],
+  "network_access_enabled": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "research_runtime_enabled": false,
+  "runtime_effect": false,
+  "runtime_hold": {
+    "belief_mutation_enabled": false,
+    "claim_graph_runtime_enabled": false,
+    "knowledge_promotion_enabled": false,
+    "network_access_enabled": false,
+    "persistent_claim_graph_write_enabled": false,
+    "truth_decision_enabled": false
+  },
+  "sections": [
+    {
+      "blockers": [],
+      "refs": [
+        "examples/knowledge-intelligence/claim-graph-operator-evaluation-report.json"
+      ],
+      "severity": "evidence",
+      "status": "pass",
+      "summary": "TEMPORAL_CLAIM_EVIDENCE_GRAPH_OPERATOR_EVALUATION_PASS_RECOMMEND_EPISTEMIC_TRUTH_ENGINE_AUTHORIZATION",
+      "title": "Decision",
+      "warnings": [
+        "report is evidence, not approval"
+      ]
+    },
+    {
+      "blockers": [
+        {
+          "message": "persistent graph writes disabled"
+        },
+        {
+          "message": "knowledge promotion disabled"
+        }
+      ],
+      "refs": [
+        "docs/release/knowledge-intelligence-claim-graph-evaluation-runtime-hold.md"
+      ],
+      "severity": "release hold",
+      "status": "disabled",
+      "summary": "truth, confidence, knowledge, belief, persistence, network, and runtime effects remain zero.",
+      "title": "Runtime Effects",
+      "warnings": []
+    }
+  ],
+  "source_registry_runtime_enabled": false,
+  "status": "read-only",
+  "summary": "AION-TCGE-001 passed 28 read-only scenarios and closes AION-208-KI-0003.",
+  "synthetic": true,
+  "temporal_claim_evidence_graph_implemented": true,
+  "title": "Claim Graph Evaluation",
+  "view": "knowledge_intelligence_claim_graph_evaluation"
+}

@@ -1,0 +1,71 @@
+{
+  "claim_graph_runtime_enabled": false,
+  "epistemic_truth_engine_implemented": false,
+  "forbidden_actions": [
+    {
+      "message": "runtime execution remains disabled"
+    },
+    {
+      "message": "persistent writes remain disabled"
+    },
+    {
+      "message": "network, provider, connector, API, CLI, deployment, approval, and merge actions remain blocked"
+    }
+  ],
+  "network_access_enabled": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "research_runtime_enabled": false,
+  "runtime_effect": false,
+  "runtime_hold": {
+    "belief_mutation_enabled": false,
+    "claim_graph_runtime_enabled": false,
+    "epistemic_truth_engine_runtime_enabled": false,
+    "knowledge_promotion_enabled": false,
+    "network_access_enabled": false,
+    "persistent_assessment_write_enabled": false,
+    "persistent_claim_graph_write_enabled": false,
+    "truth_decision_enabled": false
+  },
+  "sections": [
+    {
+      "blockers": [],
+      "refs": [
+        "examples/knowledge-intelligence/epistemic-truth-authorization.json"
+      ],
+      "severity": "implementation authorization",
+      "status": "active",
+      "summary": "AION-211 may implement deterministic evidence assessment under explicit hard caps.",
+      "title": "Authorization",
+      "warnings": [
+        "not a truth oracle"
+      ]
+    },
+    {
+      "blockers": [
+        {
+          "message": "absolute truth oracle prohibited"
+        },
+        {
+          "message": "persistent assessment writes disabled"
+        }
+      ],
+      "refs": [
+        "docs/release/knowledge-intelligence-epistemic-truth-no-go.md"
+      ],
+      "severity": "no-go",
+      "status": "blocked",
+      "summary": "automatic claim acceptance, knowledge promotion, belief mutation, persistence, network, API, CLI, database, and provider calls remain unavailable.",
+      "title": "Disabled Surfaces",
+      "warnings": []
+    }
+  ],
+  "source_registry_runtime_enabled": false,
+  "status": "read-only",
+  "summary": "AION-210-KI-0004 authorizes AION-211 planning scope only; no AION-211 source exists.",
+  "synthetic": true,
+  "temporal_claim_evidence_graph_implemented": true,
+  "title": "Epistemic Truth Authorization",
+  "view": "knowledge_intelligence_epistemic_truth_authorization"
+}

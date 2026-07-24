@@ -21,6 +21,17 @@ from pathlib import Path
 
 ROOT = Path(os.environ["AION_REPO_ROOT"])
 EXPECTED_TAG = "105fe29348160a2218ac095cfffadcb6f234421f"
+POST_AION210_CONTEXT = os.environ.get("AION_KNOWLEDGE_POST_AION210_CONTEXT") == "1"
+PROGRAM_PATH = ROOT / "docs/knowledge-intelligence/program-ledger.json"
+if PROGRAM_PATH.exists():
+    try:
+        POST_AION210_CONTEXT = (
+            POST_AION210_CONTEXT
+            or json.loads(PROGRAM_PATH.read_text()).get("program_state")
+            == "epistemic_truth_engine_authorized_not_implemented"
+        )
+    except json.JSONDecodeError:
+        pass
 ALLOWED_EXACT = {
     "README.md",
     "AGENTS.md",
@@ -106,6 +117,49 @@ ALLOWED_TESTS = {
     "services/brain-api/tests/test_knowledge_research_authorization_closeout.py",
     "services/brain-api/tests/test_knowledge_source_registry_evaluation_no_side_effects.py",
 }
+POST_AION210_ALLOWED_EXACT = {
+    "docs/adr/0174-temporal-claim-evidence-graph-evaluation-and-epistemic-truth-engine-authorization.md",
+    "scripts/knowledge-intelligence-research-authorization-check.sh",
+    "scripts/knowledge-intelligence-research-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-research-plane-check.sh",
+    "scripts/knowledge-intelligence-research-plane-no-go-regression.sh",
+    "scripts/knowledge-intelligence-research-runtime-hold.sh",
+    "scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-source-registry-authorization-check.sh",
+    "scripts/knowledge-intelligence-source-registry-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-source-registry-check.sh",
+    "scripts/knowledge-intelligence-source-registry-no-go-regression.sh",
+    "scripts/knowledge-intelligence-source-registry-operator-evaluation-check.sh",
+    "scripts/knowledge-intelligence-source-registry-operator-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-source-registry-runtime-hold.sh",
+    "scripts/knowledge-intelligence-claim-graph-runtime-hold.sh",
+    "scripts/static-console-safety-check.sh",
+    "scripts/lib/knowledge_intelligence_claim_graph_operator_evaluation.py",
+    "services/brain-api/tests/knowledge_source_registry_test_helpers.py",
+    "services/brain-api/tests/knowledge_claim_graph_evaluation_test_helpers.py",
+    "services/brain-api/tests/test_knowledge_source_registry_authorization_closeout.py",
+    "services/brain-api/tests/test_self_improvement_postmerge_evidence_reconciliation.py",
+    "services/brain-api/tests/test_knowledge_claim_graph_authorization_closeout.py",
+    "services/brain-api/tests/test_knowledge_claim_graph_operator_evaluation.py",
+    "services/brain-api/tests/test_knowledge_claim_graph_operator_evaluation_docs.py",
+    "services/brain-api/tests/test_knowledge_claim_graph_evaluation_no_side_effects.py",
+    "services/brain-api/tests/test_knowledge_claim_graph_evaluation_repository_integrity.py",
+}
+POST_AION210_ALLOWED_PREFIXES = (
+    "docs/knowledge-intelligence/claim-graph-evaluation",
+    "docs/knowledge-intelligence/claim-graph-operator-evaluation",
+    "docs/knowledge-intelligence/epistemic-",
+    "docs/release/knowledge-intelligence-claim-graph-evaluation-",
+    "docs/release/knowledge-intelligence-epistemic-truth-",
+    "examples/knowledge-intelligence/claim-graph-evaluation",
+    "examples/knowledge-intelligence/claim-graph-operator-evaluation",
+    "examples/knowledge-intelligence/epistemic-",
+    "operator-console-static/demo-data/knowledge-intelligence-claim-graph-evaluation",
+    "operator-console-static/demo-data/knowledge-intelligence-epistemic-",
+    "scripts/knowledge-intelligence-claim-graph-operator-evaluation-",
+    "scripts/knowledge-intelligence-epistemic-truth-",
+    "services/brain-api/tests/test_knowledge_epistemic_truth_",
+)
 PROHIBITED_PREFIXES = (
     ".github/workflows/",
     "services/brain-api/src/aion_brain/api/",
@@ -192,6 +246,11 @@ def changed_entries() -> list[list[str]]:
 
 def path_allowed(path: str) -> bool:
     normalized = path.replace("\\", "/")
+    if POST_AION210_CONTEXT and (
+        normalized in POST_AION210_ALLOWED_EXACT
+        or any(normalized.startswith(prefix) for prefix in POST_AION210_ALLOWED_PREFIXES)
+    ):
+        return True
     if (
         normalized in ALLOWED_EXACT
         or normalized in ALLOWED_SOURCE
@@ -220,9 +279,29 @@ for parts in changed_entries():
 program = json.loads((ROOT / "docs/knowledge-intelligence/program-ledger.json").read_text())
 auth = json.loads((ROOT / "docs/knowledge-intelligence/authorization-ledger.json").read_text())
 active = [record for record in auth["records"] if record.get("authorization_active") is True]
-if len(active) != 1 or active[0].get("authorization_transaction_id") != "AION-208-KI-0003":
-    raise SystemExit("AION-208-KI-0003 must be the sole active authorization")
-claim = active[0]
+if len(active) != 1:
+    raise SystemExit("exactly one active Knowledge Intelligence authorization is required")
+if POST_AION210_CONTEXT:
+    if active[0].get("authorization_transaction_id") != "AION-210-KI-0004":
+        raise SystemExit("AION-210-KI-0004 must be the sole active authorization after AION-210")
+    matches = [
+        record
+        for record in auth["records"]
+        if record.get("authorization_transaction_id") == "AION-208-KI-0003"
+    ]
+    if len(matches) != 1:
+        raise SystemExit("AION-208-KI-0003 closeout record is required")
+    claim = matches[0]
+    if claim.get("authorization_active") is not False:
+        raise SystemExit("AION-208-KI-0003 must be inactive after AION-210")
+    if claim.get("authorization_consumed") is not True:
+        raise SystemExit("AION-208-KI-0003 must be consumed after AION-210")
+    if claim.get("authorization_closed_by_task") != "AION-210":
+        raise SystemExit("AION-208-KI-0003 must be closed by AION-210")
+else:
+    if active[0].get("authorization_transaction_id") != "AION-208-KI-0003":
+        raise SystemExit("AION-208-KI-0003 must be the sole active authorization")
+    claim = active[0]
 if program["temporal_claim_evidence_graph_implemented"] is not True:
     raise SystemExit("temporal claim evidence graph implementation flag must be true")
 for key in (

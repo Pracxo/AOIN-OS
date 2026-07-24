@@ -42,6 +42,9 @@
     knowledge_intelligence_claim_graph_integrity: "demo-data/knowledge-intelligence-claim-graph-integrity.json",
     knowledge_intelligence_claim_graph_conflict_candidates: "demo-data/knowledge-intelligence-claim-graph-conflict-candidates.json",
     knowledge_intelligence_claim_graph_runtime_hold: "demo-data/knowledge-intelligence-claim-graph-runtime-hold.json",
+    knowledge_intelligence_claim_graph_evaluation: "demo-data/knowledge-intelligence-claim-graph-evaluation.json",
+    knowledge_intelligence_epistemic_truth_authorization: "demo-data/knowledge-intelligence-epistemic-truth-authorization.json",
+    knowledge_intelligence_epistemic_runtime_hold: "demo-data/knowledge-intelligence-epistemic-runtime-hold.json",
     knowledge_intelligence_research_runtime_hold: "demo-data/knowledge-intelligence-research-runtime-hold.json",
     module_lifecycle: "demo-data/module-lifecycle-dashboard.json",
     model_provider_hardening: "demo-data/provider-hardening-view-model.json",
@@ -72,6 +75,9 @@
       "knowledge_intelligence_claim_graph_integrity",
       "knowledge_intelligence_claim_graph_conflict_candidates",
       "knowledge_intelligence_claim_graph_runtime_hold",
+      "knowledge_intelligence_claim_graph_evaluation",
+      "knowledge_intelligence_epistemic_truth_authorization",
+      "knowledge_intelligence_epistemic_runtime_hold",
       "knowledge_intelligence_research_runtime_hold"
     ],
     providers: ["model_provider_hardening"],
@@ -103,6 +109,9 @@
       "knowledge_intelligence_claim_graph_integrity",
       "knowledge_intelligence_claim_graph_conflict_candidates",
       "knowledge_intelligence_claim_graph_runtime_hold",
+      "knowledge_intelligence_claim_graph_evaluation",
+      "knowledge_intelligence_epistemic_truth_authorization",
+      "knowledge_intelligence_epistemic_runtime_hold",
       "knowledge_intelligence_research_runtime_hold"
     ],
     safety: ["settings_safety", "incidents"]
@@ -286,7 +295,12 @@
     "./scripts/knowledge-intelligence-claim-graph-authorization-check.sh",
     "./scripts/knowledge-intelligence-claim-graph-no-go-regression.sh",
     "./scripts/knowledge-intelligence-claim-graph-check.sh",
-    "./scripts/knowledge-intelligence-claim-graph-runtime-hold.sh"
+    "./scripts/knowledge-intelligence-claim-graph-runtime-hold.sh",
+    "./scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh",
+    "./scripts/knowledge-intelligence-claim-graph-operator-evaluation-check.sh",
+    "./scripts/knowledge-intelligence-epistemic-truth-authorization-no-go-regression.sh",
+    "./scripts/knowledge-intelligence-epistemic-truth-authorization-check.sh",
+    "./scripts/knowledge-intelligence-epistemic-truth-runtime-hold.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
     generic_knowledge_trail: "demo-data/generic-knowledge-trail.json",

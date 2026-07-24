@@ -19,10 +19,12 @@ ALLOWED_PREFIXES = (
     "docs/release/knowledge-intelligence-research",
     "docs/release/knowledge-intelligence-source",
     "docs/release/knowledge-intelligence-claim",
+    "docs/release/knowledge-intelligence-epistemic",
     "examples/knowledge-intelligence/",
     "operator-console-static/",
     "scripts/knowledge-intelligence-source-registry-operator-evaluation",
     "scripts/knowledge-intelligence-claim-graph",
+    "scripts/knowledge-intelligence-epistemic-truth",
     "services/brain-api/src/aion_brain/knowledge_intelligence/",
 )
 ALLOWED_EXACT = {
@@ -39,6 +41,8 @@ ALLOWED_EXACT = {
     "docs/adr/0170-research-acquisition-evaluation-and-source-provenance-registry-authorization.md",
     "docs/adr/0171-append-only-source-provenance-registry-core.md",
     "docs/adr/0172-source-provenance-registry-evaluation-and-temporal-claim-evidence-graph-authorization.md",
+    "docs/adr/0173-immutable-temporal-claim-evidence-graph-core.md",
+    "docs/adr/0174-temporal-claim-evidence-graph-evaluation-and-epistemic-truth-engine-authorization.md",
     "scripts/knowledge-intelligence-research-plane-check.sh",
     "scripts/knowledge-intelligence-research-plane-no-go-regression.sh",
     "scripts/knowledge-intelligence-research-runtime-hold.sh",
@@ -52,6 +56,7 @@ ALLOWED_EXACT = {
     "scripts/static-console-safety-check.sh",
     "scripts/lib/knowledge_intelligence_research_operator_evaluation.py",
     "scripts/lib/knowledge_intelligence_source_registry_operator_evaluation.py",
+    "scripts/lib/knowledge_intelligence_claim_graph_operator_evaluation.py",
     "scripts/connector-no-go-regression.sh",
     "scripts/connector-runtime-no-external-call-regression.sh",
     "scripts/knowledge-intelligence-research-authorization-check.sh",
@@ -73,6 +78,7 @@ ALLOWED_EXACT = {
     "services/brain-api/tests/test_knowledge_intelligence_research_budget_spec.py",
     "services/brain-api/tests/test_self_improvement_postmerge_evidence_reconciliation.py",
     "services/brain-api/tests/test_self_improvement_shadow_activation_authorization_docs.py",
+    "services/brain-api/tests/knowledge_claim_graph_evaluation_test_helpers.py",
 }
 ALLOWED_SOURCE = {
     "services/brain-api/src/aion_brain/contracts/knowledge_research.py",
@@ -172,6 +178,8 @@ def allowed(path: str) -> bool:
     if normalized.startswith("services/brain-api/tests/test_knowledge_source"):
         return True
     if normalized.startswith("services/brain-api/tests/test_knowledge_claim"):
+        return True
+    if normalized.startswith("services/brain-api/tests/test_knowledge_epistemic_truth_"):
         return True
     return any(normalized.startswith(prefix) for prefix in ALLOWED_PREFIXES)
 
