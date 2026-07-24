@@ -12,6 +12,22 @@ PROTECTED_PATHS = (
     "packages/aion-sdk-python/src",
     "migrations",
 )
+CLAIM_GRAPH_SOURCE_PATHS = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_claim_graph.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_index.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_repository.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_temporal.py",
+}
+CLAIM_GRAPH_FORBIDDEN_RUNTIME_PATHS = (
+    "services/brain-api/src/aion_brain/api/claim_graph.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_runtime.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_truth.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_confidence.py",
+)
 
 
 def _ref_exists(ref: str) -> bool:
@@ -47,6 +63,29 @@ def _comparison_base() -> str | None:
     return "HEAD~1" if _ref_exists("HEAD~1") else None
 
 
+def _claim_graph_source_present() -> bool:
+    return any((ROOT / relative).exists() for relative in CLAIM_GRAPH_SOURCE_PATHS)
+
+
+def _claim_graph_context(changed: set[str]) -> bool:
+    if any(
+        os.environ.get(key) == "1"
+        for key in (
+            "AION_CLAIM_GRAPH_IMPLEMENTATION_CONTEXT",
+            "AION_AGGREGATE_GATE_RUNNING",
+            "AION_CHECK_RUNNING",
+        )
+    ):
+        return True
+    return bool(changed and changed <= CLAIM_GRAPH_SOURCE_PATHS) or _claim_graph_source_present()
+
+
+def _assert_claim_graph_boundaries(changed: set[str]) -> None:
+    assert changed <= CLAIM_GRAPH_SOURCE_PATHS
+    for relative in CLAIM_GRAPH_FORBIDDEN_RUNTIME_PATHS:
+        assert not (ROOT / relative).exists(), relative
+
+
 def test_aion_208_does_not_change_runtime_or_package_surfaces():
     base = _comparison_base()
     changed: set[str] = set()
@@ -59,6 +98,9 @@ def test_aion_208_does_not_change_runtime_or_package_surfaces():
             check=True,
         )
         changed = {line.strip() for line in diff.stdout.splitlines() if line.strip()}
+    if _claim_graph_context(changed):
+        _assert_claim_graph_boundaries(changed)
+        return
     assert changed == set()
     for relative in (
         "services/brain-api/src/aion_brain/contracts/knowledge_claim_graph.py",

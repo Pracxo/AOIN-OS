@@ -26,7 +26,11 @@ is_nested_gate_context() {
   --repo-root "$ROOT_DIR" \
   --mode local-offline-pilot-closeout
 
-./scripts/cognitive-local-offline-pilot-closeout-no-go-regression.sh
+if is_nested_gate_context; then
+  echo "PASS: cognitive local-offline pilot closeout changed-path no-go deferred to outer gate"
+else
+  ./scripts/cognitive-local-offline-pilot-closeout-no-go-regression.sh
+fi
 
 "$PYTHON_BIN" -m ruff check \
   scripts/lib/cognitive_architecture_governance.py \

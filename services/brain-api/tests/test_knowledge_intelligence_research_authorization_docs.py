@@ -60,9 +60,13 @@ def test_ledgers_create_single_active_knowledge_authorization():
     assert program["program_state"] in {
         "source_provenance_registry_implemented_write_disabled_pending_closeout",
         "temporal_claim_evidence_graph_authorized_not_implemented",
+        "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
     }
     assert program["active_knowledge_implementation_authorization_count"] == 1
-    if program["program_state"] == "temporal_claim_evidence_graph_authorized_not_implemented":
+    if program["program_state"] in {
+        "temporal_claim_evidence_graph_authorized_not_implemented",
+        "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
+    }:
         assert program["active_knowledge_implementation_authorization"] == CLAIM_GRAPH_AUTH_ID
         assert program["active_knowledge_implementation_task"] == "AION-209"
         assert program["formal_closeout_task"] == "AION-210"

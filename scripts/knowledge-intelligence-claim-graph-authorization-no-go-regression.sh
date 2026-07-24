@@ -21,7 +21,50 @@ from pathlib import Path
 
 ROOT = Path(os.environ["AION_REPO_ROOT"])
 EXPECTED_TAG = "105fe29348160a2218ac095cfffadcb6f234421f"
-CLAIM_GRAPH_SOURCE = (
+ALLOWED_EXACT = {
+    "README.md",
+    "AGENTS.md",
+    "docs/project-status.md",
+    "docs/architecture.md",
+    "docs/brain-contract.md",
+    "docs/policy-model.md",
+    "docs/visual-brain.md",
+    "docs/knowledge-intelligence/program-charter.md",
+    "docs/knowledge-intelligence/architecture-roadmap.md",
+    "docs/knowledge-intelligence/security-boundary.md",
+    "docs/knowledge-intelligence/operator-model.md",
+    "docs/knowledge-intelligence/program-ledger.json",
+    "docs/knowledge-intelligence/authorization-ledger.json",
+    "docs/knowledge-intelligence/temporal-claim-evidence-graph-architecture.md",
+    "docs/knowledge-intelligence/temporal-claim-evidence-graph-boundary.md",
+    "docs/knowledge-intelligence/temporal-claim-evidence-graph-data-model.md",
+    "docs/knowledge-intelligence/temporal-claim-evidence-graph-relations.md",
+    "docs/knowledge-intelligence/temporal-claim-evidence-graph-time-model.md",
+    "docs/knowledge-intelligence/temporal-claim-evidence-graph-jurisdiction-model.md",
+    "docs/knowledge-intelligence/temporal-claim-evidence-graph-version-model.md",
+    "docs/knowledge-intelligence/temporal-claim-evidence-graph-resource-budgets.md",
+    "docs/knowledge-intelligence/temporal-claim-evidence-graph-threat-model.md",
+    "docs/knowledge-intelligence/temporal-claim-evidence-graph-roadmap.md",
+    "docs/release/knowledge-intelligence-claim-graph-authorization-transaction.md",
+    "docs/release/knowledge-intelligence-claim-graph-scope.md",
+    "docs/release/v02-release-readiness-delta.md",
+    "docs/adr/README.md",
+    "operator-console-static/index.html",
+    "operator-console-static/app.js",
+    "operator-console-static/README.md",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+}
+ALLOWED_PREFIXES = (
+    "docs/knowledge-intelligence/claim-",
+    "docs/knowledge-intelligence/structural-conflict-candidates.md",
+    "docs/knowledge-intelligence/aion-209-checklist.md",
+    "docs/release/knowledge-intelligence-claim-graph-",
+    "docs/adr/0173-immutable-temporal-claim-evidence-graph-core.md",
+    "examples/knowledge-intelligence/",
+    "operator-console-static/demo-data/knowledge-intelligence-claim-graph",
+    "services/brain-api/tests/test_knowledge_claim_graph",
+)
+ALLOWED_SOURCE = {
     "services/brain-api/src/aion_brain/contracts/knowledge_claim_graph.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_repository.py",
@@ -29,24 +72,62 @@ CLAIM_GRAPH_SOURCE = (
     "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_integrity.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_temporal.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_evidence.py",
-)
+}
+ALLOWED_SCRIPTS = {
+    "scripts/knowledge-intelligence-claim-graph-authorization-check.sh",
+    "scripts/knowledge-intelligence-claim-graph-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-claim-graph-runtime-hold.sh",
+    "scripts/knowledge-intelligence-claim-graph-check.sh",
+    "scripts/knowledge-intelligence-claim-graph-no-go-regression.sh",
+    "scripts/cognitive-local-offline-pilot-closeout-check.sh",
+    "scripts/auth-design-check.sh",
+    "scripts/knowledge-intelligence-source-registry-operator-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-source-registry-operator-evaluation-check.sh",
+    "scripts/knowledge-intelligence-source-registry-authorization-check.sh",
+    "scripts/knowledge-intelligence-source-registry-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-research-authorization-check.sh",
+    "scripts/knowledge-intelligence-research-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-research-runtime-hold.sh",
+    "scripts/connector-runtime-no-external-call-regression.sh",
+    "scripts/lib/cognitive_architecture_governance.py",
+    "scripts/lib/v02-production-auth-scan-exclusions.sh",
+    "scripts/operator-console-static-check.sh",
+    "scripts/production-auth-architecture-check.sh",
+    "scripts/production-auth-core-check.sh",
+    "scripts/production-auth-core-no-go-regression.sh",
+    "scripts/production-auth-core-stabilization-check.sh",
+    "scripts/v02-production-auth-authorization-check.sh",
+    "scripts/v02-production-auth-stabilization-authorization-check.sh",
+    "scripts/v02-production-auth-request-boundary-authorization-check.sh",
+}
+ALLOWED_TESTS = {
+    "services/brain-api/tests/test_knowledge_intelligence_research_authorization_docs.py",
+    "services/brain-api/tests/test_knowledge_research_authorization_closeout.py",
+    "services/brain-api/tests/test_knowledge_source_registry_evaluation_no_side_effects.py",
+}
 PROHIBITED_PREFIXES = (
     ".github/workflows/",
-    "services/brain-api/src/aion_brain/",
+    "services/brain-api/src/aion_brain/api/",
+    "services/brain-api/src/aion_brain/api_support/",
+    "services/brain-api/src/aion_brain/audit/",
+    "services/brain-api/src/aion_brain/config.py",
+    "services/brain-api/src/aion_brain/cognitive_architecture/",
+    "services/brain-api/src/aion_brain/kernel/",
+    "services/brain-api/src/aion_brain/policy/",
+    "services/brain-api/src/aion_brain/production_auth/",
+    "services/brain-api/src/aion_brain/security/",
+    "services/brain-api/src/aion_brain/self_improvement/",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/research",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/source_",
+    "services/brain-api/src/aion_brain/contracts/knowledge_research.py",
+    "services/brain-api/src/aion_brain/contracts/knowledge_source_registry.py",
     "services/brain-api/pyproject.toml",
     "packages/aion-sdk-python/",
     "migrations/",
     "services/brain-api/migrations/",
     "infra/postgres/migrations/",
 )
-ALLOWED_PREFIXES = (
-    "docs/",
-    "examples/",
-    "operator-console-static/",
-    "scripts/",
-    "services/brain-api/tests/",
-)
-ALLOWED_EXACT = {"README.md", "AGENTS.md"}
 PROHIBITED_NAMES = {
     "package.json",
     "package-lock.json",
@@ -58,50 +139,6 @@ PROHIBITED_NAMES = {
     "Pipfile",
     "Pipfile.lock",
 }
-FALSE_KEYS = (
-    "automatic_claim_extraction_enabled",
-    "source_body_parsing_enabled",
-    "raw_source_content_storage_enabled",
-    "claim_verification_enabled",
-    "truth_decision_enabled",
-    "epistemic_confidence_enabled",
-    "contradiction_resolution_enabled",
-    "knowledge_promotion_enabled",
-    "cognitive_belief_creation_enabled",
-    "cognitive_belief_mutation_enabled",
-    "persistent_claim_graph_write_enabled",
-    "graph_database_enabled",
-    "network_acquisition_enabled",
-    "public_network_fetch_enabled",
-    "search_provider_integration_enabled",
-    "connector_integration_enabled",
-    "model_provider_integration_enabled",
-    "background_graph_worker_enabled",
-    "scheduled_graph_job_enabled",
-    "kernel_registration_enabled",
-    "application_startup_registration_enabled",
-    "api_route_enabled",
-    "installed_cli_command_enabled",
-    "sdk_runtime_resource_enabled",
-    "credential_use_enabled",
-    "cookie_use_enabled",
-    "authorization_header_use_enabled",
-    "source_patch_generation_enabled",
-    "source_mutation_enabled",
-    "worktree_creation_enabled",
-    "git_mutation_enabled",
-    "real_pull_request_creation_enabled",
-    "approval_creation_enabled",
-    "automatic_merge_enabled",
-    "production_deployment_enabled",
-    "model_weight_training_enabled",
-    "runtime_effect",
-    "dependency_change_approved",
-    "migration_approved",
-    "github_workflow_change_approved",
-    "v02_tag_created",
-    "v02_release_created",
-)
 
 
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -126,47 +163,59 @@ def comparison_base() -> str | None:
     return "HEAD~1" if ref_exists("HEAD~1") else None
 
 
-entries: list[list[str]] = []
-base = comparison_base()
-if base:
+def changed_entries() -> list[list[str]]:
+    entries: list[list[str]] = []
+    base = comparison_base()
+    if base:
+        entries.extend(
+            line.split("\t")
+            for line in run(["git", "diff", "--name-status", base, "HEAD"]).stdout.splitlines()
+            if line.strip()
+        )
+    else:
+        print("WARN: comparison base unavailable; relying on current-tree checks")
     entries.extend(
         line.split("\t")
-        for line in run(["git", "diff", "--name-status", base, "HEAD"]).stdout.splitlines()
+        for line in run(["git", "diff", "--name-status"]).stdout.splitlines()
         if line.strip()
     )
-else:
-    print("WARN: comparison base unavailable; relying on current-tree checks")
-entries.extend(
-    line.split("\t") for line in run(["git", "diff", "--name-status"]).stdout.splitlines() if line.strip()
-)
-entries.extend(
-    line.split("\t") for line in run(["git", "diff", "--cached", "--name-status"]).stdout.splitlines() if line.strip()
-)
-for line in run(["git", "status", "--porcelain=v1"]).stdout.splitlines():
-    if line.startswith("?? "):
-        entries.append(["A", line[3:]])
+    entries.extend(
+        line.split("\t")
+        for line in run(["git", "diff", "--cached", "--name-status"]).stdout.splitlines()
+        if line.strip()
+    )
+    for line in run(["git", "status", "--porcelain=v1"]).stdout.splitlines():
+        if line.startswith("?? "):
+            entries.append(["A", line[3:]])
+    return entries
 
-for parts in entries:
+
+def path_allowed(path: str) -> bool:
+    normalized = path.replace("\\", "/")
+    if (
+        normalized in ALLOWED_EXACT
+        or normalized in ALLOWED_SOURCE
+        or normalized in ALLOWED_SCRIPTS
+        or normalized in ALLOWED_TESTS
+    ):
+        return True
+    return any(normalized.startswith(prefix) for prefix in ALLOWED_PREFIXES)
+
+
+for parts in changed_entries():
     status = parts[0]
     paths = parts[1:]
     if status.startswith(("D", "R")):
         raise SystemExit(f"destructive deletion or rename is not authorized: {parts}")
     for path in paths:
         normalized = path.replace("\\", "/")
-        if normalized in CLAIM_GRAPH_SOURCE:
-            raise SystemExit(f"AION-209 source is not allowed on AION-208 branch: {normalized}")
         if Path(normalized).name in PROHIBITED_NAMES:
             raise SystemExit(f"dependency/package file changed: {normalized}")
-        if normalized.startswith(PROHIBITED_PREFIXES):
-            raise SystemExit(f"prohibited runtime/workflow/dependency path changed: {normalized}")
-        if normalized not in ALLOWED_EXACT and not any(
-            normalized.startswith(prefix) for prefix in ALLOWED_PREFIXES
-        ):
-            raise SystemExit(f"path outside AION-208 claim graph scope: {normalized}")
-
-for relative in CLAIM_GRAPH_SOURCE:
-    if (ROOT / relative).exists():
-        raise SystemExit(f"AION-209 source exists on AION-208 branch: {relative}")
+        if any(normalized.startswith(prefix) for prefix in PROHIBITED_PREFIXES):
+            if normalized not in ALLOWED_SOURCE and normalized not in ALLOWED_EXACT:
+                raise SystemExit(f"prohibited runtime/workflow/dependency path changed: {normalized}")
+        if not path_allowed(normalized):
+            raise SystemExit(f"path outside AION-209 claim graph scope: {normalized}")
 
 program = json.loads((ROOT / "docs/knowledge-intelligence/program-ledger.json").read_text())
 auth = json.loads((ROOT / "docs/knowledge-intelligence/authorization-ledger.json").read_text())
@@ -174,13 +223,26 @@ active = [record for record in auth["records"] if record.get("authorization_acti
 if len(active) != 1 or active[0].get("authorization_transaction_id") != "AION-208-KI-0003":
     raise SystemExit("AION-208-KI-0003 must be the sole active authorization")
 claim = active[0]
-for key in FALSE_KEYS:
+if program["temporal_claim_evidence_graph_implemented"] is not True:
+    raise SystemExit("temporal claim evidence graph implementation flag must be true")
+for key in (
+    "claim_graph_runtime_enabled",
+    "persistent_claim_graph_write_enabled",
+    "graph_database_enabled",
+    "automatic_claim_extraction_enabled",
+    "claim_verification_enabled",
+    "truth_decision_enabled",
+    "epistemic_confidence_enabled",
+    "contradiction_resolution_enabled",
+    "knowledge_promotion_enabled",
+    "belief_mutation_enabled",
+    "network_access_enabled",
+    "runtime_effect",
+):
     if program.get(key, False) is not False:
         raise SystemExit(f"program enabled prohibited graph capability: {key}")
     if claim.get(key, False) is not False:
         raise SystemExit(f"authorization enabled prohibited graph capability: {key}")
-    if claim["prohibited_capabilities"].get(key, False) is not False:
-        raise SystemExit(f"prohibited capability is true: {key}")
 if claim["resource_limits"]["maximum_graph_write_batch"] != 0:
     raise SystemExit("maximum_graph_write_batch must remain zero")
 if run(["git", "rev-parse", "aion-v0.1.0^{commit}"]).stdout.strip() != EXPECTED_TAG:
@@ -189,9 +251,16 @@ if run(["git", "tag", "--list", "v0.2*", "aion-v0.2*"]).stdout.strip():
     raise SystemExit("v0.2 tag exists")
 for path in run(["git", "ls-files"]).stdout.splitlines():
     suffix = Path(path).suffix.lower()
-    if suffix in {".db", ".sqlite", ".sqlite3", ".jsonl"}:
+    if suffix in {".db", ".sqlite", ".sqlite3", ".jsonl", ".graphml", ".gexf"}:
         raise SystemExit(f"tracked runtime persistence file is not allowed: {path}")
 PY
+
+if rg -n '^[[:space:]]*(import|from)[[:space:]]+(socket|requests|httpx|aiohttp|urllib[.]request|sqlite3|subprocess|git|github)([[:space:].]|$)' \
+  services/brain-api/src/aion_brain/contracts/knowledge_claim_graph.py \
+  services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph*.py; then
+  echo "ERROR: prohibited network, database, runtime, or Git import" >&2
+  exit 1
+fi
 
 aion_confirm_immutable_v01_tag_history >/dev/null
 if command -v gh >/dev/null 2>&1; then

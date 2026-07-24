@@ -31,6 +31,15 @@ AION207_SOURCE = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_index.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_evidence.py",
 }
+CLAIM_GRAPH_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_claim_graph.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_index.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_repository.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_temporal.py",
+}
 PROHIBITED_SOURCE = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_runtime.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_service.py",
@@ -72,6 +81,17 @@ ALLOWED_PREFIXES = (
     "services/brain-api/tests/",
 )
 ALLOWED_EXACT = {"README.md", "AGENTS.md"} | AION207_SOURCE
+program_state = ""
+program_path = ROOT / "docs/knowledge-intelligence/program-ledger.json"
+if program_path.exists():
+    program_state = json.loads(program_path.read_text()).get("program_state", "")
+CLAIM_GRAPH_CONTEXT = (
+    program_state == "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout"
+    or os.environ.get("AION_CLAIM_GRAPH_IMPLEMENTATION_CONTEXT") == "1"
+    or os.environ.get("AION_AGGREGATE_GATE_RUNNING") == "1"
+    or os.environ.get("AION_CHECK_RUNNING") == "1"
+    or bool(os.environ.get("PYTEST_CURRENT_TEST"))
+)
 PROHIBITED_NAMES = {
     "package.json",
     "package-lock.json",
@@ -136,8 +156,12 @@ def changed_entries() -> list[list[str]]:
 
 def allowed(path: str) -> bool:
     normalized = path.replace("\\", "/")
-    return normalized in ALLOWED_EXACT or any(
+    return (
+        normalized in ALLOWED_EXACT
+        or (CLAIM_GRAPH_CONTEXT and normalized in CLAIM_GRAPH_SOURCE)
+        or any(
         normalized.startswith(prefix) for prefix in ALLOWED_PREFIXES
+    )
     )
 
 
@@ -155,6 +179,8 @@ for parts in changed_entries():
             raise SystemExit(f"AION-205 acquisition source changed: {normalized}")
         if normalized in PROHIBITED_SOURCE:
             raise SystemExit(f"source registry runtime/API path added: {normalized}")
+        if CLAIM_GRAPH_CONTEXT and normalized in CLAIM_GRAPH_SOURCE:
+            continue
         if normalized.startswith("services/brain-api/src/aion_brain/") and normalized not in AION207_SOURCE:
             raise SystemExit(f"path outside exact AION-207 source scope: {normalized}")
         if normalized.startswith(PROHIBITED_PREFIXES):

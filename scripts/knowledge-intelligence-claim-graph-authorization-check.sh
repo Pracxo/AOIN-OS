@@ -26,53 +26,136 @@ SCOPE = (
     "append-only-immutable-temporal-claim-evidence-provenance-jurisdiction-"
     "version-contradiction-graph-core"
 )
+STATE = "implemented_append_only_in_memory_unverified_persistent_write_disabled"
+REQUIRED_SOURCE = [
+    "services/brain-api/src/aion_brain/contracts/knowledge_claim_graph.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_repository.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_index.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_temporal.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_evidence.py",
+]
+TRUE_FLAGS = [
+    "temporal_claim_evidence_graph_authorized",
+    "temporal_claim_evidence_graph_implemented",
+    "unverified_claim_assertion_contract_available",
+    "claim_scope_contract_available",
+    "valid_time_interval_contract_available",
+    "jurisdiction_scope_contract_available",
+    "version_scope_contract_available",
+    "claim_evidence_binding_available",
+    "source_registry_binding_available",
+    "citation_binding_available",
+    "source_lineage_binding_available",
+    "source_independence_group_propagation_available",
+    "claim_relation_edge_available",
+    "structural_conflict_candidate_detection_available",
+    "temporal_overlap_detection_available",
+    "jurisdiction_mismatch_detection_available",
+    "version_mismatch_detection_available",
+    "append_only_graph_projection_available",
+    "immutable_claim_versioning_available",
+    "immutable_evidence_binding_versioning_available",
+    "in_memory_claim_graph_repository_available",
+    "synthetic_claim_graph_fixture_replay_available",
+    "deterministic_claim_graph_indexes_available",
+    "bounded_claim_graph_queries_available",
+    "claim_graph_integrity_audit_available",
+    "claim_graph_operator_review_item_available",
+]
+FALSE_FLAGS = [
+    "claim_graph_runtime_enabled",
+    "temporal_claim_graph_runtime_enabled",
+    "persistent_claim_graph_write_enabled",
+    "claim_graph_persistent_write_enabled",
+    "graph_database_enabled",
+    "automatic_claim_extraction_enabled",
+    "source_body_parsing_enabled",
+    "claim_verification_enabled",
+    "truth_decision_enabled",
+    "epistemic_confidence_enabled",
+    "contradiction_resolution_enabled",
+    "automatic_claim_acceptance_enabled",
+    "automatic_claim_rejection_enabled",
+    "automatic_correction_effect_enabled",
+    "automatic_retraction_effect_enabled",
+    "knowledge_promotion_enabled",
+    "verified_knowledge_creation_enabled",
+    "cognitive_belief_creation_enabled",
+    "cognitive_belief_mutation_enabled",
+    "belief_mutation_enabled",
+    "network_access_enabled",
+    "public_network_fetch_enabled",
+    "runtime_effect",
+    "new_knowledge_implementation_authorization_created",
+]
+
 required_docs = [
-    "docs/knowledge-intelligence/temporal-claim-evidence-graph-architecture.md",
-    "docs/knowledge-intelligence/temporal-claim-evidence-graph-boundary.md",
-    "docs/knowledge-intelligence/temporal-claim-evidence-graph-data-model.md",
-    "docs/knowledge-intelligence/temporal-claim-evidence-graph-relations.md",
-    "docs/knowledge-intelligence/temporal-claim-evidence-graph-time-model.md",
-    "docs/knowledge-intelligence/temporal-claim-evidence-graph-jurisdiction-model.md",
-    "docs/knowledge-intelligence/temporal-claim-evidence-graph-version-model.md",
-    "docs/knowledge-intelligence/temporal-claim-evidence-graph-resource-budgets.md",
-    "docs/knowledge-intelligence/temporal-claim-evidence-graph-threat-model.md",
-    "docs/knowledge-intelligence/temporal-claim-evidence-graph-roadmap.md",
-    "docs/release/knowledge-intelligence-claim-graph-authorization-transaction.md",
-    "docs/release/knowledge-intelligence-claim-graph-explicit-approval-record.md",
-    "docs/release/knowledge-intelligence-claim-graph-scope.md",
+    "docs/knowledge-intelligence/claim-graph-implementation.md",
+    "docs/knowledge-intelligence/claim-graph-contracts.md",
+    "docs/knowledge-intelligence/claim-identity-and-normalization.md",
+    "docs/knowledge-intelligence/claim-scope-model.md",
+    "docs/knowledge-intelligence/claim-time-model.md",
+    "docs/knowledge-intelligence/claim-jurisdiction-model.md",
+    "docs/knowledge-intelligence/claim-version-model.md",
+    "docs/knowledge-intelligence/claim-evidence-bindings.md",
+    "docs/knowledge-intelligence/claim-source-independence.md",
+    "docs/knowledge-intelligence/claim-relations.md",
+    "docs/knowledge-intelligence/structural-conflict-candidates.md",
+    "docs/knowledge-intelligence/claim-graph-append-only-semantics.md",
+    "docs/knowledge-intelligence/claim-graph-in-memory-repository.md",
+    "docs/knowledge-intelligence/claim-graph-fixture-replay.md",
+    "docs/knowledge-intelligence/claim-graph-indexes-and-queries.md",
+    "docs/knowledge-intelligence/claim-graph-integrity-audit.md",
+    "docs/knowledge-intelligence/claim-graph-security-review.md",
+    "docs/knowledge-intelligence/claim-graph-operator-runbook.md",
+    "docs/knowledge-intelligence/aion-209-checklist.md",
+    "docs/release/knowledge-intelligence-claim-graph-implementation.md",
+    "docs/release/knowledge-intelligence-claim-graph-security-evidence.md",
     "docs/release/knowledge-intelligence-claim-graph-runtime-hold.md",
     "docs/release/knowledge-intelligence-claim-graph-no-go.md",
     "docs/release/knowledge-intelligence-claim-graph-checklist.md",
     "docs/release/knowledge-intelligence-claim-graph-evidence-matrix.md",
-    "docs/adr/0172-source-provenance-registry-evaluation-and-temporal-claim-evidence-graph-authorization.md",
+    "docs/adr/0173-immutable-temporal-claim-evidence-graph-core.md",
 ]
 required_examples = [
-    "examples/knowledge-intelligence/claim-graph-authorization.json",
     "examples/knowledge-intelligence/unverified-claim-assertion.json",
+    "examples/knowledge-intelligence/claim-scope.json",
     "examples/knowledge-intelligence/claim-evidence-binding.json",
     "examples/knowledge-intelligence/claim-relation-edge.json",
-    "examples/knowledge-intelligence/temporal-claim-evidence-graph.json",
-    "examples/knowledge-intelligence/claim-graph-resource-budget.json",
+    "examples/knowledge-intelligence/structural-conflict-candidate.json",
+    "examples/knowledge-intelligence/claim-graph-record-envelope.json",
+    "examples/knowledge-intelligence/claim-graph-proposed-batch.json",
+    "examples/knowledge-intelligence/claim-graph-state.json",
+    "examples/knowledge-intelligence/claim-graph-index.json",
+    "examples/knowledge-intelligence/claim-graph-query.json",
+    "examples/knowledge-intelligence/claim-graph-query-result.json",
+    "examples/knowledge-intelligence/claim-graph-integrity-report.json",
+    "examples/knowledge-intelligence/claim-graph-fixture-replay.json",
+    "examples/knowledge-intelligence/claim-graph-incident.json",
+    "examples/knowledge-intelligence/claim-graph-operator-review.json",
     "examples/knowledge-intelligence/claim-graph-runtime-hold.json",
-    "examples/knowledge-intelligence/claim-graph-operator-review-item.json",
-    "operator-console-static/demo-data/knowledge-intelligence-claim-graph-authorization.json",
+    "operator-console-static/demo-data/knowledge-intelligence-claim-graph.json",
+    "operator-console-static/demo-data/knowledge-intelligence-claim-graph-index.json",
+    "operator-console-static/demo-data/knowledge-intelligence-claim-graph-integrity.json",
+    "operator-console-static/demo-data/knowledge-intelligence-claim-graph-conflict-candidates.json",
     "operator-console-static/demo-data/knowledge-intelligence-claim-graph-runtime-hold.json",
 ]
-for relative in required_docs + required_examples:
+for relative in [*REQUIRED_SOURCE, *required_docs, *required_examples]:
     assert (ROOT / relative).is_file(), relative
+
 program = json.loads((ROOT / "docs/knowledge-intelligence/program-ledger.json").read_text())
 auth = json.loads((ROOT / "docs/knowledge-intelligence/authorization-ledger.json").read_text())
-report = json.loads((ROOT / "examples/knowledge-intelligence/source-registry-operator-evaluation-report.json").read_text())
 active = [record for record in auth["records"] if record.get("authorization_active") is True]
 source = [
-    record for record in auth["records"] if record.get("authorization_transaction_id") == "AION-206-KI-0002"
+    record
+    for record in auth["records"]
+    if record.get("authorization_transaction_id") == "AION-206-KI-0002"
 ][0]
-assert report["decision"] == DECISION
 assert source["authorization_active"] is False
 assert source["authorization_consumed"] is True
 assert source["authorization_expired"] is True
-assert source["authorization_reusable"] is False
-assert source["authorization_closed_by_task"] == "AION-208"
 assert len(active) == 1
 claim = active[0]
 assert claim["authorization_transaction_id"] == "AION-208-KI-0003"
@@ -89,31 +172,46 @@ assert claim["authorization_active"] is True
 assert claim["authorization_consumed"] is False
 assert claim["authorization_expired"] is False
 assert claim["authorization_reusable"] is False
-assert all(claim["authorized_capabilities"].values())
-assert all(value is False for value in claim["prohibited_capabilities"].values())
-assert claim["resource_limits"]["maximum_graph_write_batch"] == 0
-assert claim["resource_limits"]["maximum_source_body_bytes"] == 0
-assert claim["resource_limits"]["maximum_claim_verifications"] == 0
-assert claim["resource_limits"]["maximum_truth_decisions"] == 0
-assert claim["resource_limits"]["maximum_confidence_calculations"] == 0
-assert claim["resource_limits"]["maximum_knowledge_promotions"] == 0
-assert claim["resource_limits"]["maximum_belief_mutations"] == 0
-assert claim["resource_limits"]["maximum_network_calls"] == 0
+assert claim["temporal_claim_evidence_graph_state"] == STATE
+assert program["program_state"] == "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout"
 assert program["active_knowledge_implementation_authorization"] == "AION-208-KI-0003"
 assert program["active_knowledge_implementation_task"] == "AION-209"
 assert program["formal_closeout_task"] == "AION-210"
-assert program["temporal_claim_evidence_graph_authorized"] is True
-assert program["temporal_claim_evidence_graph_implemented"] is False
-for relative in (
-    "services/brain-api/src/aion_brain/contracts/knowledge_claim_graph.py",
-    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph.py",
-    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_repository.py",
-    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_index.py",
-    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_integrity.py",
-    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_temporal.py",
-    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_evidence.py",
-):
-    assert not (ROOT / relative).exists(), relative
+assert program["active_knowledge_implementation_authorization_count"] == 1
+assert program["active_cognitive_implementation_authorization_count"] == 0
+for key in TRUE_FLAGS:
+    assert program.get(key) is True, key
+    assert claim.get(key) is True, key
+for key in FALSE_FLAGS:
+    assert program.get(key, False) is False, key
+    assert claim.get(key, False) is False, key
+assert all(claim["authorized_capabilities"].values())
+assert all(value is False for value in claim["prohibited_capabilities"].values())
+limits = claim["resource_limits"]
+assert limits["maximum_graph_write_batch"] == 0
+assert limits["maximum_source_body_bytes"] == 0
+assert limits["maximum_automatic_claim_extractions"] == 0
+assert limits["maximum_claim_verifications"] == 0
+assert limits["maximum_truth_decisions"] == 0
+assert limits["maximum_confidence_calculations"] == 0
+assert limits["maximum_knowledge_promotions"] == 0
+assert limits["maximum_belief_mutations"] == 0
+assert limits["maximum_network_calls"] == 0
+
+records = {record["task_id"]: record for record in program["records"]}
+a208 = records["AION-208"]
+assert a208["ci_result"] == "pass"
+assert a208["pull_requests"] == [120]
+assert a208["feature_commits"] == [
+    "9450e56c31f1dd00332aa28f55b8e4f39c3aeb78",
+    "94bfe497c63ec789942331e9a5aec479f8cf13cd",
+]
+assert a208["merge_commits"] == ["f4193e2b05da7c88031a9144181989b1ee1db7bc"]
+assert a208["completion_timestamp"] == "2026-07-24T02:06:23Z"
+a209 = records["AION-209"]
+assert a209["branch"] == "phase/knowledge-intelligence-temporal-claim-evidence-graph"
+assert a209["ci_result"] == "pending"
+assert a209["runtime_state"] == "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout"
 PY
 
 echo "knowledge intelligence claim graph authorization PASS"

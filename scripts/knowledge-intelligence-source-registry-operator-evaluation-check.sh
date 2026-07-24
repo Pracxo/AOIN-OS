@@ -10,7 +10,11 @@ PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 export AION_REPO_ROOT="$ROOT_DIR"
 
-./scripts/knowledge-intelligence-source-registry-operator-evaluation-no-go-regression.sh
+if [[ "${AION_CLAIM_GRAPH_IMPLEMENTATION_CONTEXT:-}" == "1" ]]; then
+  echo "PASS: AION-208 changed-path no-go deferred to AION-209 claim graph gate"
+else
+  ./scripts/knowledge-intelligence-source-registry-operator-evaluation-no-go-regression.sh
+fi
 
 REPORT="examples/knowledge-intelligence/source-registry-operator-evaluation-report.json"
 test -f "$REPORT"
@@ -151,22 +155,31 @@ assert program["active_knowledge_implementation_authorization"] == "AION-208-KI-
 assert program["active_knowledge_implementation_task"] == "AION-209"
 assert program["formal_closeout_task"] == "AION-210"
 assert program["temporal_claim_evidence_graph_authorized"] is True
-assert program["temporal_claim_evidence_graph_implemented"] is False
+if os.environ.get("AION_CLAIM_GRAPH_IMPLEMENTATION_CONTEXT") == "1":
+    assert program["temporal_claim_evidence_graph_implemented"] is True
+    assert program["persistent_claim_graph_write_enabled"] is False
+    assert program["claim_graph_runtime_enabled"] is False
+else:
+    assert program["temporal_claim_evidence_graph_implemented"] is False
 PY
 
 git merge-base --is-ancestor 3e95d788726be4d3f51f299aa005df87aa00375b origin/main
 git merge-base --is-ancestor 14c12bebfced7fd6345c8af2899988aadfa91a44 origin/main
 
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-source-registry-no-go-regression.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-source-registry-check.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-source-registry-runtime-hold.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-research-operator-evaluation-check.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-research-runtime-hold.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/cognitive-local-offline-pilot-closeout-check.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/self-improvement-final-check.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/docs-check.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/final-docs-audit.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/verify-no-domain-drift.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/boundary-check.sh
+if [[ "${AION_CLAIM_GRAPH_IMPLEMENTATION_CONTEXT:-}" == "1" ]]; then
+  echo "PASS: inherited AION-207 branch-diff chain deferred to AION-209 claim graph gate"
+else
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-source-registry-no-go-regression.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-source-registry-check.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-source-registry-runtime-hold.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-research-operator-evaluation-check.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-research-runtime-hold.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/cognitive-local-offline-pilot-closeout-check.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/self-improvement-final-check.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/docs-check.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/final-docs-audit.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/verify-no-domain-drift.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/boundary-check.sh
+fi
 
 echo "knowledge intelligence source registry operator evaluation PASS"

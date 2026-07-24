@@ -47,9 +47,12 @@ def test_claim_graph_authorization_required_files_exist():
         if relative.startswith("scripts/"):
             assert os.access(path, os.X_OK), relative
     assert "0172-source-provenance-registry-evaluation" in read_text("docs/adr/README.md")
-    assert read_json("examples/knowledge-intelligence/claim-graph-authorization.json")[
-        "authorization_transaction_id"
-    ] == "AION-208-KI-0003"
+    assert (
+        read_json("examples/knowledge-intelligence/claim-graph-authorization.json")[
+            "authorization_transaction_id"
+        ]
+        == "AION-208-KI-0003"
+    )
 
 
 def test_claim_graph_authorization_scripts_pass_in_nested_mode():

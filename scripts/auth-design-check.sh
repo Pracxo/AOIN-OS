@@ -1308,6 +1308,19 @@ aion206_auth_paths = {
     "services/brain-api/tests/test_knowledge_source_registry_authorization_validator.py",
 }
 
+aion209_auth_paths = {
+    "docs/knowledge-intelligence/authorization-ledger.json",
+    "docs/release/knowledge-intelligence-claim-graph-authorization-transaction.md",
+    "scripts/auth-design-check.sh",
+    "scripts/knowledge-intelligence-claim-graph-authorization-check.sh",
+    "scripts/knowledge-intelligence-claim-graph-authorization-no-go-regression.sh",
+    "scripts/lib/v02-production-auth-scan-exclusions.sh",
+    "scripts/production-auth-architecture-check.sh",
+    "scripts/production-auth-core-no-go-regression.sh",
+    "services/brain-api/tests/test_knowledge_claim_graph_authorization_docs.py",
+    "services/brain-api/tests/test_knowledge_claim_graph_authorization_validator.py",
+}
+
 blocked_package_names = {
     "package.json",
     "package-lock.json",
@@ -1351,6 +1364,7 @@ for name in [*changed, *untracked]:
         and name not in aion183_auth_paths
         and name not in aion204_auth_paths
         and name not in aion206_auth_paths
+        and name not in aion209_auth_paths
     ):
         raise SystemExit(f"unexpected auth runtime or artifact path: {name}")
 

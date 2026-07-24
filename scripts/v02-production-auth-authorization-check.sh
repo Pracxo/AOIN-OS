@@ -5,6 +5,13 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
 
+is_nested_gate_context() {
+  [[ -n "${PYTEST_CURRENT_TEST:-}" ]] && return 0
+  [[ "${AION_AGGREGATE_GATE_RUNNING:-}" == "1" ]] && return 0
+  [[ "${AION_CHECK_RUNNING:-}" == "1" ]] && return 0
+  return 1
+}
+
 required_docs=(
   docs/release/v02-production-auth-implementation-authorization-transaction.md
   docs/release/v02-production-auth-explicit-approval-record.md
@@ -39,11 +46,15 @@ grep -q "0142-v02-production-auth-implementation-authorization.md" docs/adr/READ
 
 python3 scripts/lib/v02_production_auth_authorization.py --repo-root "$ROOT_DIR" --mode check
 
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/v02-authorization-track-closeout.sh
-./scripts/docs-check.sh
-./scripts/final-docs-audit.sh
-./scripts/verify-no-domain-drift.sh
-./scripts/boundary-check.sh
+if is_nested_gate_context; then
+  echo "PASS: v0.2 production-auth authorization repository gates deferred to outer gate"
+else
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/v02-authorization-track-closeout.sh
+  ./scripts/docs-check.sh
+  ./scripts/final-docs-audit.sh
+  ./scripts/verify-no-domain-drift.sh
+  ./scripts/boundary-check.sh
+fi
 
 cat <<'SUMMARY'
 v0.2 production auth authorization check result:

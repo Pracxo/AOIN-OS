@@ -97,6 +97,9 @@ aion151_is_scoped_authorization_path() {
       if aion207_is_scoped_knowledge_intelligence_source_registry_path "$1"; then
         return 0
       fi
+      if aion209_is_scoped_knowledge_intelligence_claim_graph_path "$1"; then
+        return 0
+      fi
       return 1
       ;;
   esac
@@ -1712,6 +1715,52 @@ aion207_is_scoped_knowledge_intelligence_source_registry_path() {
     services/brain-api/tests/knowledge_source_registry_implementation_helpers.py|\
     services/brain-api/tests/knowledge_source_registry_test_helpers.py|\
     services/brain-api/tests/test_knowledge_source_registry*.py)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+aion209_is_scoped_knowledge_intelligence_claim_graph_path() {
+  # Exact/prefix AION-209 Knowledge Intelligence claim-graph paths. These
+  # artifacts remain outside production-auth runtime enablement and do not
+  # exempt auth APIs, providers, credentials, package files, migrations, or
+  # releases.
+  case "$1" in
+    AGENTS.md|\
+    README.md|\
+    docs/adr/0173-immutable-temporal-claim-evidence-graph-core.md|\
+    docs/adr/README.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/project-status.md|\
+    docs/release/v02-release-readiness-delta.md|\
+    docs/visual-brain.md|\
+    scripts/auth-design-check.sh|\
+    scripts/cognitive-local-offline-pilot-closeout-check.sh|\
+    scripts/knowledge-intelligence-claim-graph-authorization-check.sh|\
+    scripts/knowledge-intelligence-claim-graph-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-claim-graph-check.sh|\
+    scripts/knowledge-intelligence-claim-graph-no-go-regression.sh|\
+    scripts/knowledge-intelligence-claim-graph-runtime-hold.sh|\
+    scripts/knowledge-intelligence-source-registry-operator-evaluation-check.sh|\
+    scripts/knowledge-intelligence-source-registry-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-research-runtime-hold.sh|\
+    scripts/lib/cognitive_architecture_governance.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    scripts/production-auth-architecture-check.sh|\
+    scripts/production-auth-core-no-go-regression.sh|\
+    services/brain-api/src/aion_brain/contracts/knowledge_claim_graph.py|\
+    services/brain-api/tests/test_knowledge_source_registry_evaluation_no_side_effects.py|\
+    docs/knowledge-intelligence/*|\
+    docs/release/knowledge-intelligence-claim-graph-*|\
+    examples/knowledge-intelligence/*|\
+    operator-console-static/*|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/*|\
+    services/brain-api/tests/test_knowledge_claim_graph*)
       return 0
       ;;
     *)

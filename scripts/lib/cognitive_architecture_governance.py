@@ -915,13 +915,21 @@ AION205_ALLOWED_PREFIXES = (
 
 AION208_ALLOWED_EXACT_PATHS = {
     "docs/adr/0172-source-provenance-registry-evaluation-and-temporal-claim-evidence-graph-authorization.md",
+    "docs/adr/0173-immutable-temporal-claim-evidence-graph-core.md",
+    "scripts/cognitive-local-offline-pilot-closeout-check.sh",
+    "scripts/lib/cognitive_architecture_governance.py",
     "scripts/lib/knowledge_intelligence_source_registry_operator_evaluation.py",
+    "scripts/lib/v02-production-auth-scan-exclusions.sh",
+    "services/brain-api/src/aion_brain/contracts/knowledge_claim_graph.py",
+    "services/brain-api/tests/test_knowledge_source_registry_evaluation_no_side_effects.py",
 }
 
 AION208_ALLOWED_PREFIXES = (
     "docs/release/knowledge-intelligence-claim",
+    "scripts/auth-design-check.sh",
     "scripts/knowledge-intelligence-claim-graph",
     "scripts/knowledge-intelligence-source-registry-operator-evaluation",
+    "scripts/production-auth-core-no-go-regression.sh",
     "services/brain-api/tests/test_knowledge_claim",
 )
 
