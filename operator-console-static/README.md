@@ -169,6 +169,20 @@ counts, conflict-candidate counts, integrity status, and disabled write/runtime
 state only. It does not accept claim text, source content, URLs, credentials,
 tokens, cookies, or write actions, and it does not query a backend.
 
+## Claim Graph Evaluation and Epistemic Authorization
+
+AION-210 adds bundled read-only evidence for the claim-graph operator
+evaluation and conditional epistemic truth-engine authorization:
+
+- `demo-data/knowledge-intelligence-claim-graph-evaluation.json`
+- `demo-data/knowledge-intelligence-epistemic-truth-authorization.json`
+- `demo-data/knowledge-intelligence-epistemic-runtime-hold.json`
+
+The console shows `AION-TCGE-001` PASS, `AION-208-KI-0003` closed, and
+`AION-210-KI-0004` active for AION-211. It implements no AION-211 runtime
+source, no truth oracle, no persistent writes, no network access, no knowledge
+promotion, and no belief mutation.
+
 ## Actor Context Trust Boundary Evidence
 
 AION-159 adds bundled read-only authorization evidence for AION-160:

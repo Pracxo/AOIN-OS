@@ -46,7 +46,10 @@ source_records = [
 assert len(source_records) == 1
 record = source_records[0]
 if record["authorization_active"] is False:
-    assert active[0]["authorization_transaction_id"] == "AION-208-KI-0003"
+    assert active[0]["authorization_transaction_id"] in {
+        "AION-208-KI-0003",
+        "AION-210-KI-0004",
+    }
     assert record["authorization_consumed"] is True
     assert record["authorization_closed_by_task"] == "AION-208"
 else:

@@ -1,0 +1,1624 @@
+{
+  "approval_created": false,
+  "authorization_closeout": {
+    "approval_record_id": "AION-208-KI-0003",
+    "authorization_active": false,
+    "authorization_closed_by_task": "AION-210",
+    "authorization_consumed": true,
+    "authorization_consumed_by_feature_commits": [
+      "0a84080c83f87eef94b5191c432021776c6a336a",
+      "d50252c84a0a02b75317c7d2051eaee4fb9dc54c"
+    ],
+    "authorization_consumed_by_merge_commits": [
+      "f9e2438a49aae458983fc57cee5c12b5ef0ab856"
+    ],
+    "authorization_consumed_by_prs": [
+      121
+    ],
+    "authorization_consumed_by_task": "AION-209",
+    "authorization_expired": true,
+    "authorization_reusable": false,
+    "authorization_transaction_id": "AION-208-KI-0003",
+    "claim_graph_operator_evaluation_decision": "TEMPORAL_CLAIM_EVIDENCE_GRAPH_OPERATOR_EVALUATION_PASS_RECOMMEND_EPISTEMIC_TRUTH_ENGINE_AUTHORIZATION",
+    "claim_graph_operator_evaluation_id": "AION-TCGE-001",
+    "evaluation_created_belief": false,
+    "evaluation_created_confidence": false,
+    "evaluation_created_knowledge": false,
+    "evaluation_created_persistent_write": false,
+    "evaluation_created_truth_decision": false,
+    "evaluation_reusable": false,
+    "evaluation_used_as_approval": false
+  },
+  "closeout_task": "AION-210",
+  "conditional_next_authorization": {
+    "approval_record_id": "AION-210-KI-0004",
+    "authorization_active": true,
+    "authorization_consumed": false,
+    "authorization_expired": false,
+    "authorization_reusable": false,
+    "authorization_scope": "deterministic-evidence-corroboration-contradiction-freshness-source-independence-confidence-assessment-core",
+    "authorization_transaction_id": "AION-210-KI-0004",
+    "candidate_id": "epistemic-truth-engine-core",
+    "formal_closeout_task": "AION-212",
+    "implementation_task": "AION-211",
+    "parent_authorization_transaction_id": "AION-208-KI-0003",
+    "parent_claim_graph_implementation_feature_commits": [
+      "0a84080c83f87eef94b5191c432021776c6a336a",
+      "d50252c84a0a02b75317c7d2051eaee4fb9dc54c"
+    ],
+    "parent_claim_graph_implementation_merge_commits": [
+      "f9e2438a49aae458983fc57cee5c12b5ef0ab856"
+    ],
+    "parent_claim_graph_implementation_prs": [
+      121
+    ],
+    "parent_claim_graph_implementation_task": "AION-209",
+    "parent_closeout_task": "AION-210",
+    "parent_evaluation_decision": "TEMPORAL_CLAIM_EVIDENCE_GRAPH_OPERATOR_EVALUATION_PASS_RECOMMEND_EPISTEMIC_TRUTH_ENGINE_AUTHORIZATION",
+    "parent_evaluation_id": "AION-TCGE-001",
+    "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+    "workstream": "knowledge-intelligence-epistemic-truth-engine"
+  },
+  "corrective_prs": [],
+  "decision": "TEMPORAL_CLAIM_EVIDENCE_GRAPH_OPERATOR_EVALUATION_PASS_RECOMMEND_EPISTEMIC_TRUTH_ENGINE_AUTHORIZATION",
+  "evaluation_base_commit": "f9e2438a49aae458983fc57cee5c12b5ef0ab856",
+  "evaluation_id": "AION-TCGE-001",
+  "evaluation_passed": true,
+  "evaluation_type": "read_only_temporal_claim_evidence_graph_operator_evaluation",
+  "git_mutated": false,
+  "hard_gate_results": [
+    {
+      "detail": "redacted",
+      "gate_id": "pr_121_verified",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "final_ci_verified",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "aion_209_no_go_gate_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "aion_209_implementation_gate_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "aion_209_runtime_hold_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "focused_tests_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "all_28_scenarios_executed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "all_28_scenarios_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "no_required_scenario_skipped",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "no_unknown_scenario",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "claim_identity_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "temporal_scope_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "jurisdiction_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "version_scope_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "source_registry_binding_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "source_independence_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "relations_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "conservative_conflict_detection_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "append_only_integrity_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "persistent_write_rejection_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "redaction_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "deterministic_replay_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "concurrency_isolation_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "repository_integrity_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "no_truth_or_confidence_output",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "no_knowledge_or_belief_effect",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "no_network_or_runtime_effect",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "no_v02_tag_or_release",
+      "passed": true,
+      "runtime_effect": false
+    }
+  ],
+  "implementation_feature_commits": [
+    "0a84080c83f87eef94b5191c432021776c6a336a",
+    "d50252c84a0a02b75317c7d2051eaee4fb9dc54c"
+  ],
+  "implementation_merge_commits": [
+    "f9e2438a49aae458983fc57cee5c12b5ef0ab856"
+  ],
+  "implementation_prs": [
+    121
+  ],
+  "implementation_task": "AION-209",
+  "merged": false,
+  "next_architecture_decision": "epistemic_truth_engine_implementation_authorized",
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "pull_request_created": false,
+  "read_only": true,
+  "redacted": true,
+  "report_is_approval": false,
+  "report_reusable": false,
+  "repository_integrity": {
+    "belief_mutations": 0,
+    "claim_verifications": 0,
+    "confidence_calculations": 0,
+    "contradiction_resolutions": 0,
+    "deployments": 0,
+    "git_operations": 0,
+    "knowledge_promotions": 0,
+    "live_dns_requests": 0,
+    "live_network_requests": 0,
+    "model_weight_changes": 0,
+    "persistent_graph_writes": 0,
+    "repository_unchanged": true,
+    "runtime_approvals": 0,
+    "runtime_merges": 0,
+    "runtime_pull_requests": 0,
+    "source_body_bytes": 0,
+    "source_mutations": 0,
+    "temporary_evaluation_data_cleaned": true,
+    "truth_decisions": 0
+  },
+  "resource_state": {
+    "approvals": 0,
+    "automatic_claim_extractions": 0,
+    "belief_mutations": 0,
+    "claim_graph_runtime_enabled": false,
+    "claim_verifications": 0,
+    "confidence_calculations": 0,
+    "deployments": 0,
+    "git_operations": 0,
+    "knowledge_promotions": 0,
+    "model_weight_changes": 0,
+    "network_calls": 0,
+    "persistent_claim_graph_write_enabled": false,
+    "runtime_pull_requests": 0,
+    "source_body_bytes": 0,
+    "truth_decisions": 0
+  },
+  "runtime_effect": false,
+  "runtime_state": {
+    "approval_created": false,
+    "belief_created": false,
+    "belief_mutated": false,
+    "claim_verification_performed": false,
+    "contradiction_resolved": false,
+    "epistemic_confidence_calculated": false,
+    "git_mutated": false,
+    "knowledge_promoted": false,
+    "merged": false,
+    "persistent_write_applied": false,
+    "pull_request_created": false,
+    "runtime_effect": false,
+    "source_modified": false,
+    "truth_decision_performed": false
+  },
+  "scenario_count": 28,
+  "scenario_results": [
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "explicit_unverified_claims",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "valid_registry_bindings",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "deterministic_record_order",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "append_only_records",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "repository_record_count",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_runtime_effects",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.01,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "valid_claim_graph_projection",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "immutable_model",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "exact_authorization",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "extra_fields_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "naive_timestamp_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "non_utc_timestamp_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "malformed_ids_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "protected_material_rejected",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.454,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "strict_claim_contracts",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "all_ten_object_types",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "deterministic_fingerprints",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.183,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "typed_object_values",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "identical_semantics_same_identity",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "changed_object_changes_identity",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "changed_polarity_changes_identity",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "changed_modality_changes_identity",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "changed_scope_changes_identity",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "same_claim_id_changed_identity_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "identity_collision_rejected",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 2.589,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "claim_identity_and_collision",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "inclusive_boundaries_overlap",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "exclusive_boundaries_do_not_overlap",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "open_intervals_overlap",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "zero_length_interval_requires_inclusive",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "explicit_nonoverlap",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "transaction_time_separate",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_implicit_current_time_substitution",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.207,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "valid_time_semantics",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "exact_match",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "global_scope_explicit",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "parent_relationship",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "mismatch_detection",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "unknown_relationship_insufficient",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_external_geopolitical_inference",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.037,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "jurisdiction_semantics",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "opaque_exact_matching",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "opaque_mismatch",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "numeric_exact_matching",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "bounded_numeric_ranges",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "target_id_matching_required",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_lexicographic_comparison",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_implicit_semver",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.111,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "version_semantics",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "references_resolve",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "wrong_record_kind_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "missing_snapshot_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "missing_provenance_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "missing_citation_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "missing_lineage_rejected",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.151,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "source_registry_reference_resolution",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "duplicate_content_one_group",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "mirrors_share_group",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "source_class_not_independence",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "repeated_evidence_not_counted_twice",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_corroboration_conclusion",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.003,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "source_independence_propagation",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "supports_unverified",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "opposes_unverified",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "context_no_truth",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "duplicate_no_independence_effect",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "roles_assign_no_truth_or_confidence",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.126,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "evidence_role_semantics",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "equivalent_endpoints_canonicalized",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "refinement_directional",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "self_relations_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "missing_endpoints_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "relations_unverified",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.108,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "equivalence_and_refinement_relations",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "prior_claims_remain_present",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "correction_does_not_mutate_prior",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "retraction_does_not_delete_prior",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "supersession_preserves_history",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_automatic_truth_or_knowledge_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.066,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "correction_retraction_and_supersession",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "correction_cycles_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "retraction_cycles_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "supersession_cycles_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "self_cycles_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "malformed_directional_relations_rejected",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.813,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "relation_cycle_rejection",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "subject_matches",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "predicate_matches",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "time_overlaps",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "jurisdiction_overlaps",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "version_overlaps",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "incompatible_polarity",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_truth_assignment",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.053,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "valid_structural_conflict_candidate",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "time_nonoverlap_no_conflict",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "jurisdiction_diff_no_conflict",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "version_diff_no_conflict",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "unspecified_scope_no_conflict",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "many_cardinality_no_conflict",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "coexisting_values_no_conflict",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "unknown_exclusivity_no_conflict",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 1.104,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "structural_conflict_false_positive_guards",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "unspecified_time_not_global",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "unspecified_jurisdiction_not_global",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "unspecified_version_not_all_versions",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "conflict_detection_insufficient_scope",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_inferred_applicability",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.061,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "unspecified_scope_insufficiency",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "graph_write_batch_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "zero_limited_operation_rejected_1",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "zero_limited_operation_rejected_2",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "zero_limited_operation_rejected_3",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "zero_limited_operation_rejected_4",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "zero_limited_operation_rejected_5",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "zero_limited_operation_rejected_6",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "zero_limited_operation_rejected_7",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "zero_limited_operation_rejected_8",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.366,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "graph_resource_budgets",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "zero_record_write_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "one_record_write_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_graph_file",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_database",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "persistent_write_applied_false",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "operator_review_required",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.194,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "persistent_write_fail_closed",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "simulated_append_new_repository",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "original_repository_unchanged",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "identical_replay_idempotent",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "changed_payload_same_id_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "history_preserved",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.015,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "append_only_and_idempotent_replay",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "absolute_regular_synthetic_fixture_accepted",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "relative_path_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "repository_path_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "hidden_path_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "directory_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "missing_path_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "oversized_file_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "source_body_field_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "protected_material_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "broken_fingerprint_chain_rejected",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 3.619,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "fixture_path_and_schema_boundary",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "claim_id_index",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "identity_index",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "subject_index",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "predicate_index",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "source_reference_index",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "bounded_queries",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_fuzzy_search",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_truth_or_confidence_ranking",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 1.267,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "deterministic_indexes_and_queries",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "sequence_gap_detected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "duplicate_sequence_detected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "previous_fingerprint_mismatch_detected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "dangling_binding_detected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "relation_cycle_detected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "prohibited_state_detected",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 2.345,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "integrity_corruption_detection",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "diagnostics_redacted",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "operator_review_required",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "claim_verification_required",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "truth_engine_authorization_required",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "knowledge_promotion_not_authorized",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "belief_mutation_not_authorized",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "cannot_count_as_approval",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.038,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "evidence_redaction_and_operator_review",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "batches_identical",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "records_identical",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "indexes_identical",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "queries_identical",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "conflicts_identical",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "integrity_identical",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 5.103,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "deterministic_replay",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "claim_semantics_change_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "binding_change_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "valid_time_change_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "jurisdiction_change_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "version_change_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "relation_change_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "source_independence_change_fingerprint",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.618,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "fingerprint_sensitivity",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "parallel_outputs_identical",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_shared_mutable_state",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_global_graph",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "persistent_writes_not_enabled",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "truth_confidence_knowledge_belief_not_enabled",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 2.698,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "concurrency_isolation",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": 15.174,
+          "name": "bounded_workload_completed",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "projection_available",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "simulated_append_available",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "index_query_audit_available",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "fixture_replay_available",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 15.177,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "performance_smoke",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "every_claim_unverified",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "source_body_bytes_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "persistent_graph_writes_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "live_network_requests_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "live_dns_requests_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "claim_verifications_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "truth_decisions_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "confidence_calculations_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "contradiction_resolutions_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "knowledge_promotions_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "belief_mutations_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "source_mutations_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "git_operations_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "runtime_pull_requests_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "runtime_approvals_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "runtime_merges_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "deployments_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "model_weight_changes_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "repository_tree_unchanged",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_api",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_cli",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_kernel_registration",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_background_worker",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_database",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.063,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "no_truth_confidence_knowledge_belief_runtime_or_repository_effect",
+      "synthetic": true
+    }
+  ],
+  "security_state": {
+    "authorization_header_present": false,
+    "credential_present": false,
+    "raw_url_present": false,
+    "redacted": true,
+    "source_body_present": false,
+    "source_preview_present": false,
+    "synthetic_evidence_only": true,
+    "token_present": false
+  },
+  "source_modified": false,
+  "synthetic": true,
+  "validation_results": {
+    "brain_api_total": "authoritative merged-state run required",
+    "claim_graph_check": true,
+    "claim_graph_no_go": true,
+    "claim_graph_runtime_hold": true,
+    "focused_aion_209_tests": "authoritative merged-state run required",
+    "mypy_brain": "authoritative merged-state run required",
+    "mypy_sdk": "authoritative merged-state run required",
+    "sdk_total": "authoritative merged-state run required"
+  }
+}

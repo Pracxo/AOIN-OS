@@ -80,11 +80,22 @@ record = source_records[0]
 assert program["program_state"] in {
     "source_provenance_registry_implemented_write_disabled_pending_closeout",
     "temporal_claim_evidence_graph_authorized_not_implemented",
+    "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
+    "epistemic_truth_engine_authorized_not_implemented",
 }
-if program["program_state"] == "temporal_claim_evidence_graph_authorized_not_implemented":
-    assert program["active_knowledge_implementation_authorization"] == "AION-208-KI-0003"
-    assert program["active_knowledge_implementation_task"] == "AION-209"
-    assert program["formal_closeout_task"] == "AION-210"
+if program["program_state"] in {
+    "temporal_claim_evidence_graph_authorized_not_implemented",
+    "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
+    "epistemic_truth_engine_authorized_not_implemented",
+}:
+    if program["program_state"] == "epistemic_truth_engine_authorized_not_implemented":
+        assert program["active_knowledge_implementation_authorization"] == "AION-210-KI-0004"
+        assert program["active_knowledge_implementation_task"] == "AION-211"
+        assert program["formal_closeout_task"] == "AION-212"
+    else:
+        assert program["active_knowledge_implementation_authorization"] == "AION-208-KI-0003"
+        assert program["active_knowledge_implementation_task"] == "AION-209"
+        assert program["formal_closeout_task"] == "AION-210"
     assert record["authorization_active"] is False
     assert record["authorization_consumed"] is True
     assert record["authorization_expired"] is True

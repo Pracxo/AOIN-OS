@@ -79,7 +79,10 @@ if record["authorization_active"] is True:
     assert record["authorization_consumed"] is False
     assert record["authorization_expired"] is False
 else:
-    assert active[0]["authorization_transaction_id"] == "AION-208-KI-0003"
+    assert active[0]["authorization_transaction_id"] in {
+        "AION-208-KI-0003",
+        "AION-210-KI-0004",
+    }
     assert record["authorization_consumed"] is True
     assert record["authorization_expired"] is True
     assert record["authorization_closed_by_task"] == "AION-208"

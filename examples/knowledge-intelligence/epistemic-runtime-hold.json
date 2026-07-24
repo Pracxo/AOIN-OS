@@ -1,0 +1,17 @@
+{
+  "assessment_database_enabled": false,
+  "authorization_transaction_id": "AION-210-KI-0004",
+  "belief_mutation_enabled": false,
+  "epistemic_truth_engine_authorized": true,
+  "epistemic_truth_engine_implemented": false,
+  "knowledge_promotion_enabled": false,
+  "model_provider_integration_enabled": false,
+  "network_acquisition_enabled": false,
+  "persistent_assessment_write_enabled": false,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "read_only": true,
+  "redacted": true,
+  "runtime_effect": false,
+  "runtime_enabled": false,
+  "synthetic": true
+}

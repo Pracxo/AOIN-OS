@@ -38,7 +38,10 @@ program_path = ROOT / "docs/knowledge-intelligence/program-ledger.json"
 if program_path.exists():
     program_state = json.loads(program_path.read_text()).get("program_state", "")
 CLAIM_GRAPH_CONTEXT = (
-    program_state == "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout"
+    program_state in {
+        "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
+        "epistemic_truth_engine_authorized_not_implemented",
+    }
     or os.environ.get("AION_CLAIM_GRAPH_IMPLEMENTATION_CONTEXT") == "1"
     or os.environ.get("AION_AGGREGATE_GATE_RUNNING") == "1"
     or os.environ.get("AION_CHECK_RUNNING") == "1"

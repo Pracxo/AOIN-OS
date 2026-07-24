@@ -34,9 +34,10 @@ for path in sorted((ROOT / "examples/knowledge-intelligence").glob("*.json")):
     assert data["synthetic"] is True
     assert data["read_only"] is True
     assert data["redacted"] is True
-    assert data["research_plane_implemented"] is True
-    assert data["research_runtime_enabled"] is False
-    assert data["network_access_enabled"] is False
+    if "research_plane_implemented" in data:
+        assert data["research_plane_implemented"] is True
+    assert data.get("research_runtime_enabled", False) is False
+    assert data.get("network_access_enabled", False) is False
 program = json.loads((ROOT / "docs/knowledge-intelligence/program-ledger.json").read_text())
 auth = json.loads((ROOT / "docs/knowledge-intelligence/authorization-ledger.json").read_text())
 assert program["program_state"] in {
@@ -44,16 +45,27 @@ assert program["program_state"] in {
     "source_provenance_registry_authorized_not_implemented",
     "source_provenance_registry_implemented_write_disabled_pending_closeout",
     "temporal_claim_evidence_graph_authorized_not_implemented",
+    "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
+    "epistemic_truth_engine_authorized_not_implemented",
 }
 assert program["research_plane_implemented"] is True
 assert program["research_runtime_enabled"] is False
 assert program["public_network_fetch_available"] is False
 active = [record for record in auth["records"] if record.get("authorization_active") is True]
 assert len(active) == 1
-if program["program_state"] == "temporal_claim_evidence_graph_authorized_not_implemented":
-    assert auth["active_knowledge_implementation_authorization"] == "AION-208-KI-0003"
-    assert auth["active_knowledge_implementation_task"] == "AION-209"
-    assert program["formal_closeout_task"] == "AION-210"
+if program["program_state"] in {
+    "temporal_claim_evidence_graph_authorized_not_implemented",
+    "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
+    "epistemic_truth_engine_authorized_not_implemented",
+}:
+    if program["program_state"] == "epistemic_truth_engine_authorized_not_implemented":
+        assert auth["active_knowledge_implementation_authorization"] == "AION-210-KI-0004"
+        assert auth["active_knowledge_implementation_task"] == "AION-211"
+        assert program["formal_closeout_task"] == "AION-212"
+    else:
+        assert auth["active_knowledge_implementation_authorization"] == "AION-208-KI-0003"
+        assert auth["active_knowledge_implementation_task"] == "AION-209"
+        assert program["formal_closeout_task"] == "AION-210"
     assert program["source_provenance_registry_implemented"] is True
     assert (
         program["source_provenance_registry_state"]

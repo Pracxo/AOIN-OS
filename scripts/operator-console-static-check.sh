@@ -568,7 +568,10 @@ for path in sorted(demo_dir.glob("*.json")):
             "knowledge-intelligence-claim-graph-index.json",
             "knowledge-intelligence-claim-graph-integrity.json",
             "knowledge-intelligence-claim-graph-conflict-candidates.json",
+            "knowledge-intelligence-claim-graph-evaluation.json",
             "knowledge-intelligence-claim-graph-runtime-hold.json",
+            "knowledge-intelligence-epistemic-runtime-hold.json",
+            "knowledge-intelligence-epistemic-truth-authorization.json",
             "knowledge-intelligence-source-lineage.json",
             "knowledge-intelligence-source-snapshots.json",
         }:

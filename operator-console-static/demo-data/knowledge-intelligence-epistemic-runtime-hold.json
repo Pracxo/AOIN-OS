@@ -1,0 +1,58 @@
+{
+  "claim_graph_runtime_enabled": false,
+  "epistemic_truth_engine_implemented": false,
+  "forbidden_actions": [
+    {
+      "message": "runtime execution remains disabled"
+    },
+    {
+      "message": "persistent writes remain disabled"
+    },
+    {
+      "message": "network, provider, connector, API, CLI, deployment, approval, and merge actions remain blocked"
+    }
+  ],
+  "network_access_enabled": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "research_runtime_enabled": false,
+  "runtime_effect": false,
+  "runtime_hold": {
+    "belief_mutation_enabled": false,
+    "claim_graph_runtime_enabled": false,
+    "epistemic_truth_engine_runtime_enabled": false,
+    "knowledge_promotion_enabled": false,
+    "network_access_enabled": false,
+    "persistent_assessment_write_enabled": false,
+    "persistent_claim_graph_write_enabled": false,
+    "truth_decision_enabled": false
+  },
+  "sections": [
+    {
+      "blockers": [
+        {
+          "message": "epistemic_truth_engine_implemented=false"
+        },
+        {
+          "message": "runtime_effect=false"
+        }
+      ],
+      "refs": [
+        "examples/knowledge-intelligence/epistemic-runtime-hold.json"
+      ],
+      "severity": "release hold",
+      "status": "disabled",
+      "summary": "No assessment runtime, database, network, provider, background worker, API, CLI, SDK resource, or persistent write exists.",
+      "title": "Runtime Hold",
+      "warnings": []
+    }
+  ],
+  "source_registry_runtime_enabled": false,
+  "status": "read-only",
+  "summary": "The epistemic engine is authorized for AION-211 but remains unimplemented and runtime-disabled.",
+  "synthetic": true,
+  "temporal_claim_evidence_graph_implemented": true,
+  "title": "Epistemic Runtime Hold",
+  "view": "knowledge_intelligence_epistemic_runtime_hold"
+}

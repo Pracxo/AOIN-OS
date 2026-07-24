@@ -10,6 +10,7 @@ from knowledge_intelligence_test_helpers import (
 from knowledge_source_registry_test_helpers import (
     CLAIM_GRAPH_AUTH_ID,
     CLOSED_AUTH_ID,
+    EPISTEMIC_AUTH_ID,
     SOURCE_AUTH_ID,
     active_source_record,
     closed_research_record,
@@ -61,9 +62,14 @@ def test_ledgers_create_single_active_knowledge_authorization():
         "source_provenance_registry_implemented_write_disabled_pending_closeout",
         "temporal_claim_evidence_graph_authorized_not_implemented",
         "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
+        "epistemic_truth_engine_authorized_not_implemented",
     }
     assert program["active_knowledge_implementation_authorization_count"] == 1
-    if program["program_state"] in {
+    if program["program_state"] == "epistemic_truth_engine_authorized_not_implemented":
+        assert program["active_knowledge_implementation_authorization"] == EPISTEMIC_AUTH_ID
+        assert program["active_knowledge_implementation_task"] == "AION-211"
+        assert program["formal_closeout_task"] == "AION-212"
+    elif program["program_state"] in {
         "temporal_claim_evidence_graph_authorized_not_implemented",
         "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
     }:

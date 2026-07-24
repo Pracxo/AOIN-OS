@@ -204,6 +204,34 @@ elif active_id == "AION-208-KI-0003":
     for key in DISABLED_KEYS:
         if active_record.get(key, False) is not False:
             raise SystemExit(f"AION-208 authorization enabled prohibited capability: {key}")
+elif active_id == "AION-210-KI-0004":
+    if source_record["authorization_consumed"] is not True:
+        raise SystemExit("AION-206 authorization must be consumed after AION-208")
+    if source_record["authorization_expired"] is not True:
+        raise SystemExit("AION-206 authorization must be expired after AION-208")
+    if source_record.get("authorization_closed_by_task") != "AION-208":
+        raise SystemExit("AION-206 authorization must be closed by AION-208")
+    claim_records = [
+        record
+        for record in records
+        if record.get("authorization_transaction_id") == "AION-208-KI-0003"
+    ]
+    if len(claim_records) != 1:
+        raise SystemExit("AION-208 authorization closeout record is required")
+    claim_record = claim_records[0]
+    if claim_record.get("authorization_active") is not False:
+        raise SystemExit("AION-208 authorization must be inactive after AION-210")
+    if claim_record.get("authorization_consumed") is not True:
+        raise SystemExit("AION-208 authorization must be consumed after AION-210")
+    if claim_record.get("authorization_expired") is not True:
+        raise SystemExit("AION-208 authorization must be expired after AION-210")
+    if claim_record.get("authorization_closed_by_task") != "AION-210":
+        raise SystemExit("AION-208 authorization must be closed by AION-210")
+    if active_record["implementation_task"] != "AION-211":
+        raise SystemExit("AION-210 authorization must point only to AION-211")
+    for key in DISABLED_KEYS:
+        if active_record.get(key, False) is not False:
+            raise SystemExit(f"AION-210 authorization enabled prohibited capability: {key}")
 else:
     raise SystemExit(f"unexpected active Knowledge Intelligence authorization: {active_id}")
 

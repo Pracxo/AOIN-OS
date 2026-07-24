@@ -140,7 +140,21 @@ assert source["authorization_closed_by_task"] == "AION-208"
 assert source["source_registry_operator_evaluation_id"] == "AION-SPRE-001"
 assert source["source_registry_operator_evaluation_decision"] == decision
 
-claim = active[0]
+if active[0]["authorization_transaction_id"] == "AION-208-KI-0003":
+    claim = active[0]
+else:
+    assert active[0]["authorization_transaction_id"] == "AION-210-KI-0004"
+    matches = [
+        item
+        for item in auth["records"]
+        if item.get("authorization_transaction_id") == "AION-208-KI-0003"
+    ]
+    assert len(matches) == 1
+    claim = matches[0]
+    assert claim["authorization_active"] is False
+    assert claim["authorization_consumed"] is True
+    assert claim["authorization_expired"] is True
+    assert claim["authorization_closed_by_task"] == "AION-210"
 assert claim["authorization_transaction_id"] == "AION-208-KI-0003"
 assert claim["implementation_task"] == "AION-209"
 assert claim["formal_closeout_task"] == "AION-210"
@@ -151,9 +165,14 @@ assert claim["authorization_scope"] == (
 assert all(claim["authorized_capabilities"].values())
 assert all(value is False for value in claim["prohibited_capabilities"].values())
 assert claim["resource_limits"]["maximum_graph_write_batch"] == 0
-assert program["active_knowledge_implementation_authorization"] == "AION-208-KI-0003"
-assert program["active_knowledge_implementation_task"] == "AION-209"
-assert program["formal_closeout_task"] == "AION-210"
+if program["program_state"] == "epistemic_truth_engine_authorized_not_implemented":
+    assert program["active_knowledge_implementation_authorization"] == "AION-210-KI-0004"
+    assert program["active_knowledge_implementation_task"] == "AION-211"
+    assert program["formal_closeout_task"] == "AION-212"
+else:
+    assert program["active_knowledge_implementation_authorization"] == "AION-208-KI-0003"
+    assert program["active_knowledge_implementation_task"] == "AION-209"
+    assert program["formal_closeout_task"] == "AION-210"
 assert program["temporal_claim_evidence_graph_authorized"] is True
 if os.environ.get("AION_CLAIM_GRAPH_IMPLEMENTATION_CONTEXT") == "1":
     assert program["temporal_claim_evidence_graph_implemented"] is True

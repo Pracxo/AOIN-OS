@@ -916,21 +916,27 @@ AION205_ALLOWED_PREFIXES = (
 AION208_ALLOWED_EXACT_PATHS = {
     "docs/adr/0172-source-provenance-registry-evaluation-and-temporal-claim-evidence-graph-authorization.md",
     "docs/adr/0173-immutable-temporal-claim-evidence-graph-core.md",
+    "docs/adr/0174-temporal-claim-evidence-graph-evaluation-and-epistemic-truth-engine-authorization.md",
     "scripts/cognitive-local-offline-pilot-closeout-check.sh",
     "scripts/lib/cognitive_architecture_governance.py",
+    "scripts/lib/knowledge_intelligence_claim_graph_operator_evaluation.py",
     "scripts/lib/knowledge_intelligence_source_registry_operator_evaluation.py",
     "scripts/lib/v02-production-auth-scan-exclusions.sh",
     "services/brain-api/src/aion_brain/contracts/knowledge_claim_graph.py",
+    "services/brain-api/tests/knowledge_claim_graph_evaluation_test_helpers.py",
     "services/brain-api/tests/test_knowledge_source_registry_evaluation_no_side_effects.py",
 }
 
 AION208_ALLOWED_PREFIXES = (
     "docs/release/knowledge-intelligence-claim",
+    "docs/release/knowledge-intelligence-epistemic-truth",
     "scripts/auth-design-check.sh",
     "scripts/knowledge-intelligence-claim-graph",
+    "scripts/knowledge-intelligence-epistemic-truth",
     "scripts/knowledge-intelligence-source-registry-operator-evaluation",
     "scripts/production-auth-core-no-go-regression.sh",
     "services/brain-api/tests/test_knowledge_claim",
+    "services/brain-api/tests/test_knowledge_epistemic_truth",
 )
 
 AION199_ALLOWED_EXACT_PATHS = set(AION199_REQUIRED_FILES) | {
