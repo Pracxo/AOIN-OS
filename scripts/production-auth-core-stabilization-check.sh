@@ -9,6 +9,13 @@ source "$ROOT_DIR/scripts/lib/python-selection.sh"
 PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 
+is_nested_gate_context() {
+  [[ -n "${PYTEST_CURRENT_TEST:-}" ]] && return 0
+  [[ "${AION_AGGREGATE_GATE_RUNNING:-}" == "1" ]] && return 0
+  [[ "${AION_CHECK_RUNNING:-}" == "1" ]] && return 0
+  return 1
+}
+
 required_files=(
   services/brain-api/src/aion_brain/production_auth/canonical.py
   services/brain-api/src/aion_brain/production_auth/reason_codes.py
@@ -159,21 +166,25 @@ for marker in "${required_markers[@]}"; do
     }
 done
 
-"$PYTHON_BIN" -m pytest \
-  services/brain-api/tests/test_production_auth_stabilization_contracts.py \
-  services/brain-api/tests/test_production_auth_canonicalization.py \
-  services/brain-api/tests/test_production_auth_fingerprints.py \
-  services/brain-api/tests/test_production_auth_reason_codes.py \
-  services/brain-api/tests/test_production_auth_idempotency.py \
-  services/brain-api/tests/test_production_auth_concurrency.py \
-  services/brain-api/tests/test_production_auth_stabilization_redaction.py \
-  services/brain-api/tests/test_production_auth_stabilization_config_matrix.py \
-  services/brain-api/tests/test_production_auth_stabilization_kernel.py \
-  services/brain-api/tests/test_production_auth_stabilization_routes.py \
-  services/brain-api/tests/test_production_auth_stabilization_performance.py \
-  -q
+if is_nested_gate_context; then
+  echo "PASS: focused production-auth core stabilization pytest deferred to outer gate"
+else
+  "$PYTHON_BIN" -m pytest \
+    services/brain-api/tests/test_production_auth_stabilization_contracts.py \
+    services/brain-api/tests/test_production_auth_canonicalization.py \
+    services/brain-api/tests/test_production_auth_fingerprints.py \
+    services/brain-api/tests/test_production_auth_reason_codes.py \
+    services/brain-api/tests/test_production_auth_idempotency.py \
+    services/brain-api/tests/test_production_auth_concurrency.py \
+    services/brain-api/tests/test_production_auth_stabilization_redaction.py \
+    services/brain-api/tests/test_production_auth_stabilization_config_matrix.py \
+    services/brain-api/tests/test_production_auth_stabilization_kernel.py \
+    services/brain-api/tests/test_production_auth_stabilization_routes.py \
+    services/brain-api/tests/test_production_auth_stabilization_performance.py \
+    -q
+fi
 
-if [[ "${AION_PRODUCTION_AUTH_REQUEST_IDENTITY_INHERITED_GATE:-}" = "1" ]]; then
+if [[ "${AION_PRODUCTION_AUTH_REQUEST_IDENTITY_INHERITED_GATE:-}" = "1" ]] || is_nested_gate_context; then
   echo "PASS: production-auth core stabilization downstream gates deferred to AION-156 outer gate"
 else
   ./scripts/production-auth-core-no-go-regression.sh

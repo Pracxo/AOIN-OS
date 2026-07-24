@@ -564,6 +564,10 @@ for path in sorted(demo_dir.glob("*.json")):
             "knowledge-intelligence-source-registry-runtime-hold.json",
             "knowledge-intelligence-source-registry-evaluation.json",
             "knowledge-intelligence-claim-graph-authorization.json",
+            "knowledge-intelligence-claim-graph.json",
+            "knowledge-intelligence-claim-graph-index.json",
+            "knowledge-intelligence-claim-graph-integrity.json",
+            "knowledge-intelligence-claim-graph-conflict-candidates.json",
             "knowledge-intelligence-claim-graph-runtime-hold.json",
             "knowledge-intelligence-source-lineage.json",
             "knowledge-intelligence-source-snapshots.json",
@@ -575,10 +579,24 @@ for path in sorted(demo_dir.glob("*.json")):
         redacted = payload.get("redacted")
         if redaction_applied is not True and redacted is not True:
             raise SystemExit(f"knowledge intelligence demo must be redacted: {path}")
-        if payload.get("research_plane_implemented") is not True:
+        implemented_disabled_plane_present = any(
+            payload.get(key) is True
+            for key in (
+                "research_plane_implemented",
+                "source_provenance_registry_implemented",
+                "temporal_claim_evidence_graph_implemented",
+            )
+        )
+        if not implemented_disabled_plane_present:
             raise SystemExit(f"knowledge intelligence plane must be implemented-disabled: {path}")
-        for key in ("research_runtime_enabled", "network_access_enabled", "runtime_effect"):
-            if payload.get(key) is not False:
+        for key in (
+            "research_runtime_enabled",
+            "source_registry_runtime_enabled",
+            "claim_graph_runtime_enabled",
+            "network_access_enabled",
+            "runtime_effect",
+        ):
+            if payload.get(key, False) is not False:
                 raise SystemExit(f"knowledge intelligence runtime flag must be false: {key}: {path}")
         runtime_hold = payload.get("runtime_hold", {})
         if isinstance(runtime_hold, dict):

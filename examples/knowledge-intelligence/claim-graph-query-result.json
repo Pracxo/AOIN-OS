@@ -1,0 +1,154 @@
+{
+  "authorization_scope": "append-only-immutable-temporal-claim-evidence-provenance-jurisdiction-version-contradiction-graph-core",
+  "authorization_transaction_id": "AION-208-KI-0003",
+  "automatic_claim_acceptance_enabled": false,
+  "automatic_claim_extraction_enabled": false,
+  "automatic_claim_rejection_enabled": false,
+  "automatic_correction_effect_enabled": false,
+  "automatic_retraction_effect_enabled": false,
+  "belief_mutation_enabled": false,
+  "claim_graph_runtime_enabled": false,
+  "claim_verification_enabled": false,
+  "cognitive_belief_creation_enabled": false,
+  "cognitive_belief_mutation_enabled": false,
+  "contradiction_resolution_enabled": false,
+  "epistemic_confidence_enabled": false,
+  "example_kind": "claim_graph_query_result",
+  "formal_closeout_task": "AION-210",
+  "graph_database_enabled": false,
+  "implementation_task": "AION-209",
+  "knowledge_promotion_enabled": false,
+  "payload": {
+    "epistemic_confidence_assigned": false,
+    "query": {
+      "limit": 100,
+      "query_id": "query-0001",
+      "query_kind": "claim_id",
+      "relation_type": null,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-claim-graph-query/v1",
+      "secondary_value": null,
+      "valid_time_end": null,
+      "valid_time_start": null,
+      "value": "claim-0001"
+    },
+    "query_fingerprint": "e1122214611421aaa3f5502139ff1bbc47b84f3de1e2a84b89f23a14e999f37a",
+    "record_ids": [
+      "claim-graph-claim_assertion-0001"
+    ],
+    "records": [
+      {
+        "append_only": true,
+        "authorization_transaction_id": "AION-208-KI-0003",
+        "belief_created": false,
+        "belief_mutated": false,
+        "created_at": "2026-01-01T00:00:00Z",
+        "epistemic_confidence_assigned": false,
+        "implementation_task": "AION-209",
+        "knowledge_promoted": false,
+        "payload": {
+          "belief_created": false,
+          "belief_mutated": false,
+          "claim_id": "claim-0001",
+          "claim_identity_fingerprint": "590869128079c43ff76f83e942f3832d67c78f4e93bbb7a8a7709b78fbc5b2f4",
+          "claim_record_fingerprint": "c27facdd06db7d1ead6eea70b2840d8a2d661f67d75240957acf0c84b8a2fadd",
+          "claim_statement": "Product alpha has status alpha.",
+          "epistemic_confidence_assigned": false,
+          "knowledge_promoted": false,
+          "language": "en",
+          "modality": "asserted",
+          "object_value": {
+            "canonical_value": "alpha",
+            "display_value": "Alpha",
+            "kind": "text",
+            "object_fingerprint": "a7871fbd864d687072427d7cde69f6b76582b9e66543239d33cdf32c07dc0ba1"
+          },
+          "objects_mutually_exclusive": false,
+          "operator_supplied": true,
+          "polarity": "positive",
+          "predicate": "has_status",
+          "predicate_cardinality": "one",
+          "runtime_effect": false,
+          "schema_version": "aion-knowledge-unverified-claim-assertion/v1",
+          "scope": {
+            "jurisdiction_scopes": [
+              {
+                "jurisdiction_id": "global",
+                "jurisdiction_kind": "global",
+                "parent_jurisdiction_ids": [],
+                "scope_fingerprint": "cd44019d7ddb3006a31bda0254f96260f9664acd19d870e800917eb2531be19a"
+              }
+            ],
+            "schema_version": "aion-knowledge-claim-scope/v1",
+            "scope_fingerprint": "e15f9739acde48f41afc783a10fd6009e17771ca60a55d8e6b69862bf0e69002",
+            "valid_time_intervals": [
+              {
+                "end": "2026-01-02T00:00:00Z",
+                "end_inclusive": true,
+                "interval_fingerprint": "6b598b46cab7ab554c26f43fa76c74a487cf55b8385ac028c8cdfc0fe8af7110",
+                "interval_id": "interval-0001",
+                "start": "2026-01-01T00:00:00Z",
+                "start_inclusive": true
+              }
+            ],
+            "version_scopes": [
+              {
+                "exact_version": "1.0",
+                "lower_bound": null,
+                "lower_inclusive": true,
+                "scheme": "numeric_dotted_exact",
+                "scope_fingerprint": "fd1ece11c8c1d7b52601b61f5585f4af1e39afc78206e4a1609a6adecc4b941c",
+                "target_id": "standard-alpha",
+                "upper_bound": null,
+                "upper_inclusive": true
+              }
+            ]
+          },
+          "subject_id": "product-alpha",
+          "transaction_time": "2026-01-01T00:00:00Z",
+          "truth_value_assigned": false,
+          "unverified": true,
+          "verified": false
+        },
+        "payload_fingerprint": "9374ca0ed0658cc13864041b9cc79fc66dd70cd38fe7c17065a63c8dea0b3317",
+        "persistent_write_applied": false,
+        "previous_record_fingerprint": null,
+        "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+        "read_only": true,
+        "record_fingerprint": "c6111173f67f46c5ebca35016b3d232b8145e9cc1fcf33b96b889379d95e3a2a",
+        "record_id": "claim-graph-claim_assertion-0001",
+        "record_kind": "claim_assertion",
+        "record_version": 1,
+        "redacted": true,
+        "runtime_effect": false,
+        "schema_version": "aion-knowledge-claim-graph-record-envelope/v1",
+        "sequence_number": 1,
+        "source_body_bytes": 0,
+        "source_body_present": false,
+        "supersedes_record_id": null,
+        "synthetic": true,
+        "truth_value_assigned": false,
+        "unverified": true
+      }
+    ],
+    "result_count": 1,
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-claim-graph-query/v1",
+    "truncated": false,
+    "truth_value_assigned": false
+  },
+  "persistent_claim_graph_write_enabled": false,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "public_network_fetch_enabled": false,
+  "read_only": true,
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-claim-graph-example/v1",
+  "source_body_parsing_enabled": false,
+  "synthetic": true,
+  "temporal_claim_evidence_graph_authorized": true,
+  "temporal_claim_evidence_graph_implemented": true,
+  "temporal_claim_evidence_graph_state": "implemented_append_only_in_memory_unverified_persistent_write_disabled",
+  "truth_decision_enabled": false,
+  "verified_knowledge_creation_enabled": false
+}

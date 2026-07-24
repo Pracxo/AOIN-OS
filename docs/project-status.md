@@ -8,11 +8,18 @@ tag or release exists.
 
 ## Current Main Milestone
 
-## AION-208 Source Registry Evaluation
+## AION-209 Immutable Temporal Claim-Evidence Graph
 
-AION-208 source provenance registry operator evaluation is complete. `AION-SPRE-001` passed all 28 synthetic and redacted scenarios and produced `SOURCE_PROVENANCE_REGISTRY_OPERATOR_EVALUATION_PASS_RECOMMEND_TEMPORAL_CLAIM_EVIDENCE_GRAPH_AUTHORIZATION`.
+AION-209 immutable temporal claim-evidence graph implementation is in progress
+under `AION-208-KI-0003`. The implementation adds an append-only in-memory
+graph for explicit unverified claims, source-registry evidence bindings,
+temporal scope, jurisdiction, version scope, relations, structural conflict
+candidates, deterministic indexes, fixture replay, integrity audit, and
+redacted operator evidence.
 
-Current stage: source provenance registry implemented, evaluated, append-only, in-memory, and persistent-write-disabled. Temporal claim-evidence graph authorized and not implemented.
+Current stage: temporal claim-evidence graph implemented, append-only,
+in-memory, unverified, runtime-disabled, and persistent-write-disabled pending
+AION-210 formal closeout.
 
 AION-204 Cognitive Architecture closeout reconciliation remains complete, and
 the active self-improvement implementation authorization count is zero.
@@ -30,7 +37,9 @@ Current state flags:
 - `source_registry_runtime_enabled=false`
 - `source_registry_persistent_write_enabled=false`
 - `temporal_claim_evidence_graph_authorized=true`
-- `temporal_claim_evidence_graph_implemented=false`
+- `temporal_claim_evidence_graph_implemented=true`
+- `claim_graph_runtime_enabled=false`
+- `persistent_claim_graph_write_enabled=false`
 - `automatic_claim_extraction_enabled=false`
 - `claim_verification_enabled=false`
 - `truth_decision_enabled=false`
@@ -43,7 +52,11 @@ Current state flags:
 - `active_knowledge_implementation_task=AION-209`
 - `formal_closeout_task=AION-210`
 
-AION-205 captures untrusted evidence. AION-207 registers immutable evidence metadata. AION-208 evaluated the registry. AION-209 will represent unverified claims and evidence relationships and will not determine truth. AION-211 remains the future epistemic truth engine. Persistent writes and public-network research remain disabled.
+AION-205 captures untrusted evidence. AION-207 registers immutable evidence
+metadata. AION-208 evaluated the registry and authorized AION-209. AION-209
+represents unverified claims and evidence relationships, but does not determine
+truth. AION-211 remains the future epistemic truth engine. Persistent writes
+and public-network research remain disabled.
 
 ## Completed Architecture
 
@@ -213,3 +226,9 @@ shadow-mode runtime remains disabled.
 ## AION-180 Authorization State
 
 Historical AION-180 marker: AION-181 implemented the disabled controlled shadow activation control plane; AION-182 later closed AION-180-SI-0007 as consumed, expired, and non-reusable.
+
+## AION-209 Immutable Temporal Claim-Evidence Graph
+
+AION-209 implements the temporal claim-evidence graph core under `AION-208-KI-0003`. The graph represents explicit unverified claims, source-registry evidence bindings, valid time, transaction time, jurisdiction, version scope, relations, structural conflict candidates, immutable in-memory projection, deterministic indexes, bounded exact queries, fixture replay, integrity audit, and redacted operator-review evidence.
+
+The current state is `implemented_append_only_in_memory_unverified_persistent_write_disabled`. `claim_graph_runtime_enabled=false`, `persistent_claim_graph_write_enabled=false`, `maximum_graph_write_batch=0`, `automatic_claim_extraction_enabled=false`, `claim_verification_enabled=false`, `truth_decision_enabled=false`, `epistemic_confidence_enabled=false`, `contradiction_resolution_enabled=false`, `knowledge_promotion_enabled=false`, and `belief_mutation_enabled=false`. AION-210 is the next formal closeout and evaluation task.

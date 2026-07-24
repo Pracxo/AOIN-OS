@@ -153,6 +153,22 @@ boundary, or expose a write action.
 It has no login form, no logout control, no credential input, no token input,
 and no session persistence.
 
+## Knowledge Intelligence Claim Graph Evidence
+
+AION-209 adds bundled read-only evidence for the immutable temporal
+claim-evidence graph:
+
+- `demo-data/knowledge-intelligence-claim-graph.json`
+- `demo-data/knowledge-intelligence-claim-graph-index.json`
+- `demo-data/knowledge-intelligence-claim-graph-integrity.json`
+- `demo-data/knowledge-intelligence-claim-graph-conflict-candidates.json`
+- `demo-data/knowledge-intelligence-claim-graph-runtime-hold.json`
+
+The console displays synthetic counts, IDs, fingerprints, scopes, relation
+counts, conflict-candidate counts, integrity status, and disabled write/runtime
+state only. It does not accept claim text, source content, URLs, credentials,
+tokens, cookies, or write actions, and it does not query a backend.
+
 ## Actor Context Trust Boundary Evidence
 
 AION-159 adds bundled read-only authorization evidence for AION-160:

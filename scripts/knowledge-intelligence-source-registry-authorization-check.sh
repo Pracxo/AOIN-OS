@@ -157,9 +157,13 @@ assert program["program_id"] == PROGRAM_ID
 assert program["program_state"] in {
     "source_provenance_registry_implemented_write_disabled_pending_closeout",
     "temporal_claim_evidence_graph_authorized_not_implemented",
+    "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
 }
 assert program["active_knowledge_implementation_authorization_count"] == 1
-if program["program_state"] == "temporal_claim_evidence_graph_authorized_not_implemented":
+if program["program_state"] in {
+    "temporal_claim_evidence_graph_authorized_not_implemented",
+    "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
+}:
     assert program["active_knowledge_implementation_authorization"] == "AION-208-KI-0003"
     assert program["active_knowledge_implementation_task"] == "AION-209"
     assert program["formal_closeout_task"] == "AION-210"
@@ -202,7 +206,10 @@ assert record["candidate_id"] == "source-provenance-registry-core"
 assert record["authorization_scope"] == SOURCE_SCOPE
 assert record["implementation_task"] == "AION-207"
 assert record["formal_closeout_task"] == "AION-208"
-if program["program_state"] == "temporal_claim_evidence_graph_authorized_not_implemented":
+if program["program_state"] in {
+    "temporal_claim_evidence_graph_authorized_not_implemented",
+    "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
+}:
     assert active[0]["authorization_transaction_id"] == "AION-208-KI-0003"
     assert record["authorization_active"] is False
     assert record["authorization_consumed"] is True

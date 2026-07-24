@@ -15,7 +15,10 @@ DECISION = (
 def test_claim_graph_authorization_exact_lifecycle_and_parentage():
     program = read_json("docs/knowledge-intelligence/program-ledger.json")
     record = active_knowledge_authorization_record()
-    assert program["program_state"] == "temporal_claim_evidence_graph_authorized_not_implemented"
+    assert program["program_state"] in {
+        "temporal_claim_evidence_graph_authorized_not_implemented",
+        "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
+    }
     assert record["authorization_transaction_id"] == "AION-208-KI-0003"
     assert record["approval_record_id"] == "AION-208-KI-0003"
     assert record["parent_authorization_transaction_id"] == "AION-206-KI-0002"
@@ -31,6 +34,13 @@ def test_claim_graph_authorization_exact_lifecycle_and_parentage():
     assert record["authorization_consumed"] is False
     assert record["authorization_expired"] is False
     assert record["authorization_reusable"] is False
+    if program["program_state"].startswith("temporal_claim_evidence_graph_implemented"):
+        assert program["temporal_claim_evidence_graph_implemented"] is True
+        assert program["persistent_claim_graph_write_enabled"] is False
+        assert program["claim_graph_runtime_enabled"] is False
+        assert record["temporal_claim_evidence_graph_implemented"] is True
+        assert record["persistent_claim_graph_write_enabled"] is False
+        assert record["claim_graph_runtime_enabled"] is False
 
 
 def test_claim_graph_authorization_capability_maps_are_strict():

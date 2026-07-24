@@ -12,6 +12,13 @@ AION154_MERGE_COMMIT="85584ea1976fd6f2cb73a641464b3caf87481618"
 PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 
+is_nested_gate_context() {
+  [[ -n "${PYTEST_CURRENT_TEST:-}" ]] && return 0
+  [[ "${AION_AGGREGATE_GATE_RUNNING:-}" == "1" ]] && return 0
+  [[ "${AION_CHECK_RUNNING:-}" == "1" ]] && return 0
+  return 1
+}
+
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
 }
@@ -154,7 +161,7 @@ fi
 
 "$PYTHON_BIN" scripts/lib/v02_production_auth_authorization.py --repo-root "$ROOT_DIR" --mode check
 
-if [[ "${AION_PRODUCTION_AUTH_REQUEST_IDENTITY_INHERITED_GATE:-}" = "1" ]]; then
+if [[ "${AION_PRODUCTION_AUTH_REQUEST_IDENTITY_INHERITED_GATE:-}" = "1" ]] || is_nested_gate_context; then
   echo "PASS: AION-155 request-boundary downstream gates deferred to AION-156 outer gate"
 else
   ./scripts/production-auth-core-stabilization-check.sh

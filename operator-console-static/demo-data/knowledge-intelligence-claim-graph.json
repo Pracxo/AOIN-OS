@@ -1,0 +1,67 @@
+{
+  "authorization_id": "AION-208-KI-0003",
+  "authorization_scope": "append-only-immutable-temporal-claim-evidence-provenance-jurisdiction-version-contradiction-graph-core",
+  "authorization_transaction_id": "AION-208-KI-0003",
+  "automatic_claim_acceptance_enabled": false,
+  "automatic_claim_extraction_enabled": false,
+  "automatic_claim_rejection_enabled": false,
+  "automatic_correction_effect_enabled": false,
+  "automatic_retraction_effect_enabled": false,
+  "belief_mutation_enabled": false,
+  "chain_head_fingerprint": "6e4b789132179985bb31fe0fb466c31105eb8a5888e2bf8500bf2e4354a59d72",
+  "claim_count": 2,
+  "claim_graph_runtime_enabled": false,
+  "claim_ids": [
+    "claim-0001",
+    "claim-0002"
+  ],
+  "claim_verification_enabled": false,
+  "cognitive_belief_creation_enabled": false,
+  "cognitive_belief_mutation_enabled": false,
+  "contradiction_resolution_enabled": false,
+  "epistemic_confidence_enabled": false,
+  "evidence_binding_count": 2,
+  "formal_closeout_task": "AION-210",
+  "graph_database_enabled": false,
+  "identity_fingerprints": [
+    "590869128079c43ff76f83e942f3832d67c78f4e93bbb7a8a7709b78fbc5b2f4",
+    "c3d8dd5ac2e892a730c49e07f3ec38cd79684779577f0516043c470b8b3e843a"
+  ],
+  "implementation_task": "AION-209",
+  "knowledge_promotion_enabled": false,
+  "modalities": [
+    "asserted",
+    "asserted"
+  ],
+  "persistent_claim_graph_write_enabled": false,
+  "polarities": [
+    "positive",
+    "negative"
+  ],
+  "predicates": [
+    "has_status",
+    "has_status"
+  ],
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "public_network_fetch_enabled": false,
+  "read_only": true,
+  "redacted": true,
+  "relation_count": 1,
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-claim-graph-example/v1",
+  "source_body_parsing_enabled": false,
+  "structural_conflict_candidate_count": 1,
+  "subjects": [
+    "product-alpha",
+    "product-alpha"
+  ],
+  "summary": "Synthetic read-only claim graph evidence. Claims remain unverified and persistent writes remain disabled.",
+  "synthetic": true,
+  "temporal_claim_evidence_graph_authorized": true,
+  "temporal_claim_evidence_graph_implemented": true,
+  "temporal_claim_evidence_graph_state": "implemented_append_only_in_memory_unverified_persistent_write_disabled",
+  "title": "Temporal Claim Evidence Graph",
+  "truth_decision_enabled": false,
+  "verified_knowledge_creation_enabled": false,
+  "view_model_version": "aion-209-static-console/v1"
+}

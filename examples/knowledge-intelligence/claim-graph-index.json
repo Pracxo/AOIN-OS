@@ -1,0 +1,173 @@
+{
+  "authorization_scope": "append-only-immutable-temporal-claim-evidence-provenance-jurisdiction-version-contradiction-graph-core",
+  "authorization_transaction_id": "AION-208-KI-0003",
+  "automatic_claim_acceptance_enabled": false,
+  "automatic_claim_extraction_enabled": false,
+  "automatic_claim_rejection_enabled": false,
+  "automatic_correction_effect_enabled": false,
+  "automatic_retraction_effect_enabled": false,
+  "belief_mutation_enabled": false,
+  "claim_graph_runtime_enabled": false,
+  "claim_verification_enabled": false,
+  "cognitive_belief_creation_enabled": false,
+  "cognitive_belief_mutation_enabled": false,
+  "contradiction_resolution_enabled": false,
+  "epistemic_confidence_enabled": false,
+  "example_kind": "claim_graph_index",
+  "formal_closeout_task": "AION-210",
+  "graph_database_enabled": false,
+  "implementation_task": "AION-209",
+  "knowledge_promotion_enabled": false,
+  "payload": {
+    "bindings_by_citation_id": {
+      "source-registry-citation-reference-0003": [
+        "claim-graph-evidence_binding-0003",
+        "claim-graph-evidence_binding-0004"
+      ]
+    },
+    "bindings_by_claim_id": {
+      "claim-0001": [
+        "claim-graph-evidence_binding-0003"
+      ],
+      "claim-0002": [
+        "claim-graph-evidence_binding-0004"
+      ]
+    },
+    "bindings_by_lineage_group_id": {
+      "independence-group-0001": [
+        "claim-graph-evidence_binding-0003",
+        "claim-graph-evidence_binding-0004"
+      ]
+    },
+    "bindings_by_source_registry_record_id": {
+      "source-registry-source-snapshot-digest-0001": [
+        "claim-graph-evidence_binding-0003",
+        "claim-graph-evidence_binding-0004"
+      ]
+    },
+    "claims_by_claim_id": {
+      "claim-0001": [
+        "claim-graph-claim_assertion-0001"
+      ],
+      "claim-0002": [
+        "claim-graph-claim_assertion-0002"
+      ]
+    },
+    "claims_by_identity_fingerprint": {
+      "590869128079c43ff76f83e942f3832d67c78f4e93bbb7a8a7709b78fbc5b2f4": [
+        "claim-graph-claim_assertion-0001"
+      ],
+      "c3d8dd5ac2e892a730c49e07f3ec38cd79684779577f0516043c470b8b3e843a": [
+        "claim-graph-claim_assertion-0002"
+      ]
+    },
+    "claims_by_jurisdiction_id": {
+      "global": [
+        "claim-graph-claim_assertion-0001",
+        "claim-graph-claim_assertion-0002"
+      ]
+    },
+    "claims_by_predicate": {
+      "has_status": [
+        "claim-graph-claim_assertion-0001",
+        "claim-graph-claim_assertion-0002"
+      ]
+    },
+    "claims_by_subject_and_predicate": {
+      "product-alpha:has_status": [
+        "claim-graph-claim_assertion-0001",
+        "claim-graph-claim_assertion-0002"
+      ]
+    },
+    "claims_by_subject_id": {
+      "product-alpha": [
+        "claim-graph-claim_assertion-0001",
+        "claim-graph-claim_assertion-0002"
+      ]
+    },
+    "claims_by_valid_time_boundary": {
+      "2026-01-01T00:00:00+00:00": [
+        "claim-graph-claim_assertion-0001",
+        "claim-graph-claim_assertion-0002"
+      ],
+      "2026-01-02T00:00:00+00:00": [
+        "claim-graph-claim_assertion-0001",
+        "claim-graph-claim_assertion-0002"
+      ]
+    },
+    "claims_by_version_target_id": {
+      "standard-alpha": [
+        "claim-graph-claim_assertion-0001",
+        "claim-graph-claim_assertion-0002"
+      ]
+    },
+    "index_fingerprint": "57d6fafb7be584cace060b8bee0674933cbc6bf99096103ec04074a8478b43c9",
+    "record_ids": [
+      "claim-graph-claim_assertion-0001",
+      "claim-graph-claim_assertion-0002",
+      "claim-graph-evidence_binding-0003",
+      "claim-graph-evidence_binding-0004",
+      "claim-graph-relation_edge-0005",
+      "claim-graph-structural_conflict_candidate-0006"
+    ],
+    "records_by_id": {
+      "claim-graph-claim_assertion-0001": [
+        "claim-graph-claim_assertion-0001"
+      ],
+      "claim-graph-claim_assertion-0002": [
+        "claim-graph-claim_assertion-0002"
+      ],
+      "claim-graph-evidence_binding-0003": [
+        "claim-graph-evidence_binding-0003"
+      ],
+      "claim-graph-evidence_binding-0004": [
+        "claim-graph-evidence_binding-0004"
+      ],
+      "claim-graph-relation_edge-0005": [
+        "claim-graph-relation_edge-0005"
+      ],
+      "claim-graph-structural_conflict_candidate-0006": [
+        "claim-graph-structural_conflict_candidate-0006"
+      ]
+    },
+    "relations_by_source_claim": {
+      "claim-0002": [
+        "claim-graph-relation_edge-0005"
+      ]
+    },
+    "relations_by_target_claim": {
+      "claim-0001": [
+        "claim-graph-relation_edge-0005"
+      ]
+    },
+    "relations_by_type": {
+      "refines": [
+        "claim-graph-relation_edge-0005"
+      ]
+    },
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-claim-graph-index/v1",
+    "structural_conflict_candidates_by_claim": {
+      "claim-0001": [
+        "claim-graph-structural_conflict_candidate-0006"
+      ],
+      "claim-0002": [
+        "claim-graph-structural_conflict_candidate-0006"
+      ]
+    }
+  },
+  "persistent_claim_graph_write_enabled": false,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "public_network_fetch_enabled": false,
+  "read_only": true,
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-claim-graph-example/v1",
+  "source_body_parsing_enabled": false,
+  "synthetic": true,
+  "temporal_claim_evidence_graph_authorized": true,
+  "temporal_claim_evidence_graph_implemented": true,
+  "temporal_claim_evidence_graph_state": "implemented_append_only_in_memory_unverified_persistent_write_disabled",
+  "truth_decision_enabled": false,
+  "verified_knowledge_creation_enabled": false
+}

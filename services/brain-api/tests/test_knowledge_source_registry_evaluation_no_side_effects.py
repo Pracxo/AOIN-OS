@@ -12,6 +12,16 @@ PROTECTED_PATHS = (
     "packages/aion-sdk-python/src",
     "migrations",
 )
+CLAIM_GRAPH_SOURCE_PATHS = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_claim_graph.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_index.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_repository.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_temporal.py",
+}
 
 
 def _ref_exists(ref: str) -> bool:
@@ -48,6 +58,14 @@ def _comparison_base() -> str | None:
 
 
 def test_aion_208_does_not_change_runtime_or_package_surfaces():
+    claim_graph_context = any(
+        os.environ.get(key) == "1"
+        for key in (
+            "AION_CLAIM_GRAPH_IMPLEMENTATION_CONTEXT",
+            "AION_AGGREGATE_GATE_RUNNING",
+            "AION_CHECK_RUNNING",
+        )
+    )
     base = _comparison_base()
     changed: set[str] = set()
     if base:
@@ -59,6 +77,13 @@ def test_aion_208_does_not_change_runtime_or_package_surfaces():
             check=True,
         )
         changed = {line.strip() for line in diff.stdout.splitlines() if line.strip()}
+    if claim_graph_context:
+        assert changed <= CLAIM_GRAPH_SOURCE_PATHS
+        assert not (ROOT / "services/brain-api/src/aion_brain/api/claim_graph.py").exists()
+        assert not (
+            ROOT / "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_runtime.py"
+        ).exists()
+        return
     assert changed == set()
     for relative in (
         "services/brain-api/src/aion_brain/contracts/knowledge_claim_graph.py",

@@ -37,6 +37,10 @@
     knowledge_intelligence_source_registry_runtime_hold: "demo-data/knowledge-intelligence-source-registry-runtime-hold.json",
     knowledge_intelligence_source_registry_evaluation: "demo-data/knowledge-intelligence-source-registry-evaluation.json",
     knowledge_intelligence_claim_graph_authorization: "demo-data/knowledge-intelligence-claim-graph-authorization.json",
+    knowledge_intelligence_claim_graph: "demo-data/knowledge-intelligence-claim-graph.json",
+    knowledge_intelligence_claim_graph_index: "demo-data/knowledge-intelligence-claim-graph-index.json",
+    knowledge_intelligence_claim_graph_integrity: "demo-data/knowledge-intelligence-claim-graph-integrity.json",
+    knowledge_intelligence_claim_graph_conflict_candidates: "demo-data/knowledge-intelligence-claim-graph-conflict-candidates.json",
     knowledge_intelligence_claim_graph_runtime_hold: "demo-data/knowledge-intelligence-claim-graph-runtime-hold.json",
     knowledge_intelligence_research_runtime_hold: "demo-data/knowledge-intelligence-research-runtime-hold.json",
     module_lifecycle: "demo-data/module-lifecycle-dashboard.json",
@@ -63,6 +67,10 @@
       "knowledge_intelligence_source_registry_runtime_hold",
       "knowledge_intelligence_source_registry_evaluation",
       "knowledge_intelligence_claim_graph_authorization",
+      "knowledge_intelligence_claim_graph",
+      "knowledge_intelligence_claim_graph_index",
+      "knowledge_intelligence_claim_graph_integrity",
+      "knowledge_intelligence_claim_graph_conflict_candidates",
       "knowledge_intelligence_claim_graph_runtime_hold",
       "knowledge_intelligence_research_runtime_hold"
     ],
@@ -90,6 +98,10 @@
       "knowledge_intelligence_source_registry_runtime_hold",
       "knowledge_intelligence_source_registry_evaluation",
       "knowledge_intelligence_claim_graph_authorization",
+      "knowledge_intelligence_claim_graph",
+      "knowledge_intelligence_claim_graph_index",
+      "knowledge_intelligence_claim_graph_integrity",
+      "knowledge_intelligence_claim_graph_conflict_candidates",
       "knowledge_intelligence_claim_graph_runtime_hold",
       "knowledge_intelligence_research_runtime_hold"
     ],
@@ -272,6 +284,8 @@
     "./scripts/knowledge-intelligence-source-registry-operator-evaluation-check.sh",
     "./scripts/knowledge-intelligence-claim-graph-authorization-no-go-regression.sh",
     "./scripts/knowledge-intelligence-claim-graph-authorization-check.sh",
+    "./scripts/knowledge-intelligence-claim-graph-no-go-regression.sh",
+    "./scripts/knowledge-intelligence-claim-graph-check.sh",
     "./scripts/knowledge-intelligence-claim-graph-runtime-hold.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {

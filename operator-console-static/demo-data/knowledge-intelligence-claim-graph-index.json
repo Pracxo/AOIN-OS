@@ -1,0 +1,58 @@
+{
+  "authorization_id": "AION-208-KI-0003",
+  "authorization_scope": "append-only-immutable-temporal-claim-evidence-provenance-jurisdiction-version-contradiction-graph-core",
+  "authorization_transaction_id": "AION-208-KI-0003",
+  "automatic_claim_acceptance_enabled": false,
+  "automatic_claim_extraction_enabled": false,
+  "automatic_claim_rejection_enabled": false,
+  "automatic_correction_effect_enabled": false,
+  "automatic_retraction_effect_enabled": false,
+  "belief_mutation_enabled": false,
+  "bindings_by_source_registry_record_id": {
+    "source-registry-source-snapshot-digest-0001": [
+      "claim-graph-evidence_binding-0003",
+      "claim-graph-evidence_binding-0004"
+    ]
+  },
+  "claim_graph_runtime_enabled": false,
+  "claim_verification_enabled": false,
+  "claims_by_claim_id": {
+    "claim-0001": [
+      "claim-graph-claim_assertion-0001"
+    ],
+    "claim-0002": [
+      "claim-graph-claim_assertion-0002"
+    ]
+  },
+  "cognitive_belief_creation_enabled": false,
+  "cognitive_belief_mutation_enabled": false,
+  "contradiction_resolution_enabled": false,
+  "epistemic_confidence_enabled": false,
+  "formal_closeout_task": "AION-210",
+  "graph_database_enabled": false,
+  "implementation_task": "AION-209",
+  "index_fingerprint": "57d6fafb7be584cace060b8bee0674933cbc6bf99096103ec04074a8478b43c9",
+  "knowledge_promotion_enabled": false,
+  "persistent_claim_graph_write_enabled": false,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "public_network_fetch_enabled": false,
+  "read_only": true,
+  "records_by_id_count": 6,
+  "redacted": true,
+  "relations_by_type": {
+    "refines": [
+      "claim-graph-relation_edge-0005"
+    ]
+  },
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-claim-graph-example/v1",
+  "source_body_parsing_enabled": false,
+  "synthetic": true,
+  "temporal_claim_evidence_graph_authorized": true,
+  "temporal_claim_evidence_graph_implemented": true,
+  "temporal_claim_evidence_graph_state": "implemented_append_only_in_memory_unverified_persistent_write_disabled",
+  "title": "Claim Graph Index",
+  "truth_decision_enabled": false,
+  "verified_knowledge_creation_enabled": false,
+  "view_model_version": "aion-209-static-console/v1"
+}

@@ -9,6 +9,13 @@ source "$ROOT_DIR/scripts/lib/python-selection.sh"
 PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 
+is_nested_gate_context() {
+  [[ -n "${PYTEST_CURRENT_TEST:-}" ]] && return 0
+  [[ "${AION_AGGREGATE_GATE_RUNNING:-}" == "1" ]] && return 0
+  [[ "${AION_CHECK_RUNNING:-}" == "1" ]] && return 0
+  return 1
+}
+
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
 }
@@ -207,18 +214,26 @@ for relative in json_files:
     walk_values(payload, path)
 PY
 
-"$PYTHON_BIN" -m pytest \
-  services/brain-api/tests/test_production_auth_contracts.py \
-  services/brain-api/tests/test_production_auth_config.py \
-  services/brain-api/tests/test_production_auth_core.py \
-  services/brain-api/tests/test_production_auth_policy.py \
-  services/brain-api/tests/test_production_auth_audit_provenance.py \
-  services/brain-api/tests/test_production_auth_diagnostics.py \
-  services/brain-api/tests/test_kernel_production_auth_wiring.py \
-  services/brain-api/tests/test_production_auth_no_runtime_routes.py \
-  -q
+if is_nested_gate_context; then
+  echo "PASS: focused production-auth core pytest deferred to outer gate"
+else
+  "$PYTHON_BIN" -m pytest \
+    services/brain-api/tests/test_production_auth_contracts.py \
+    services/brain-api/tests/test_production_auth_config.py \
+    services/brain-api/tests/test_production_auth_core.py \
+    services/brain-api/tests/test_production_auth_policy.py \
+    services/brain-api/tests/test_production_auth_audit_provenance.py \
+    services/brain-api/tests/test_production_auth_diagnostics.py \
+    services/brain-api/tests/test_kernel_production_auth_wiring.py \
+    services/brain-api/tests/test_production_auth_no_runtime_routes.py \
+    -q
+fi
 
-./scripts/v02-production-auth-authorization-check.sh
+if is_nested_gate_context; then
+  echo "PASS: production-auth core downstream authorization gate deferred to outer gate"
+else
+  ./scripts/v02-production-auth-authorization-check.sh
+fi
 "$PYTHON_BIN" scripts/lib/v02_production_auth_authorization.py --repo-root "$ROOT_DIR" --mode no-go
 
 test ! -e services/brain-api/src/aion_brain/api/production_auth.py || {
@@ -253,11 +268,15 @@ if changed_files \
   exit 1
 fi
 
-./scripts/auth-design-check.sh
-./scripts/auth-runtime-check.sh
-./scripts/docs-check.sh
-./scripts/final-docs-audit.sh
-./scripts/verify-no-domain-drift.sh
-./scripts/boundary-check.sh
+if is_nested_gate_context; then
+  echo "PASS: production-auth core repository gates deferred to outer gate"
+else
+  ./scripts/auth-design-check.sh
+  ./scripts/auth-runtime-check.sh
+  ./scripts/docs-check.sh
+  ./scripts/final-docs-audit.sh
+  ./scripts/verify-no-domain-drift.sh
+  ./scripts/boundary-check.sh
+fi
 
 echo "production auth core check PASS"

@@ -58,14 +58,19 @@ if program["program_state"] in {
     "source_provenance_registry_authorized_not_implemented",
     "source_provenance_registry_implemented_write_disabled_pending_closeout",
     "temporal_claim_evidence_graph_authorized_not_implemented",
+    "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
 }:
-    if program["program_state"] == "temporal_claim_evidence_graph_authorized_not_implemented":
+    if program["program_state"] in {
+        "temporal_claim_evidence_graph_authorized_not_implemented",
+        "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
+    }:
         assert active[0]["authorization_transaction_id"] == "AION-208-KI-0003"
     else:
         assert active[0]["authorization_transaction_id"] == "AION-206-KI-0002"
     if program["program_state"] in {
         "source_provenance_registry_implemented_write_disabled_pending_closeout",
         "temporal_claim_evidence_graph_authorized_not_implemented",
+        "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
     }:
         assert program["source_provenance_registry_implemented"] is True
         assert (
