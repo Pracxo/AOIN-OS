@@ -18,8 +18,11 @@ ALLOWED_PREFIXES = (
     "docs/knowledge-intelligence/",
     "docs/release/knowledge-intelligence-research",
     "docs/release/knowledge-intelligence-source",
+    "docs/release/knowledge-intelligence-claim",
     "examples/knowledge-intelligence/",
     "operator-console-static/",
+    "scripts/knowledge-intelligence-source-registry-operator-evaluation",
+    "scripts/knowledge-intelligence-claim-graph",
     "services/brain-api/src/aion_brain/knowledge_intelligence/",
 )
 ALLOWED_EXACT = {
@@ -35,6 +38,7 @@ ALLOWED_EXACT = {
     "docs/adr/0169-controlled-research-acquisition-and-immutable-source-snapshots.md",
     "docs/adr/0170-research-acquisition-evaluation-and-source-provenance-registry-authorization.md",
     "docs/adr/0171-append-only-source-provenance-registry-core.md",
+    "docs/adr/0172-source-provenance-registry-evaluation-and-temporal-claim-evidence-graph-authorization.md",
     "scripts/knowledge-intelligence-research-plane-check.sh",
     "scripts/knowledge-intelligence-research-plane-no-go-regression.sh",
     "scripts/knowledge-intelligence-research-runtime-hold.sh",
@@ -47,6 +51,7 @@ ALLOWED_EXACT = {
     "scripts/knowledge-intelligence-source-registry-runtime-hold.sh",
     "scripts/static-console-safety-check.sh",
     "scripts/lib/knowledge_intelligence_research_operator_evaluation.py",
+    "scripts/lib/knowledge_intelligence_source_registry_operator_evaluation.py",
     "scripts/connector-no-go-regression.sh",
     "scripts/connector-runtime-no-external-call-regression.sh",
     "scripts/knowledge-intelligence-research-authorization-check.sh",
@@ -165,6 +170,8 @@ def allowed(path: str) -> bool:
     if normalized.startswith("services/brain-api/tests/test_knowledge_research"):
         return True
     if normalized.startswith("services/brain-api/tests/test_knowledge_source"):
+        return True
+    if normalized.startswith("services/brain-api/tests/test_knowledge_claim"):
         return True
     return any(normalized.startswith(prefix) for prefix in ALLOWED_PREFIXES)
 

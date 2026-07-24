@@ -8,45 +8,42 @@ tag or release exists.
 
 ## Current Main Milestone
 
-AION-207 append-only source provenance registry core implemented.
+## AION-208 Source Registry Evaluation
 
-Current stage: Knowledge Intelligence research plane implemented, operator-invoked, runtime-disabled, and formally evaluated. AION-207 implements the source provenance registry with immutable in-memory projection, synthetic fixture replay, deterministic indexes, bounded exact queries, integrity auditing, redacted diagnostics, incidents, and operator-review items. Persistent registry writes and registry runtime remain disabled pending AION-208 formal closeout and operator evaluation. AION-203 completed the AION Cognitive Architecture Program, the controlled local-offline cognitive pilot passed, and active cognitive implementation authorization count is zero.
+AION-208 source provenance registry operator evaluation is complete. `AION-SPRE-001` passed all 28 synthetic and redacted scenarios and produced `SOURCE_PROVENANCE_REGISTRY_OPERATOR_EVALUATION_PASS_RECOMMEND_TEMPORAL_CLAIM_EVIDENCE_GRAPH_AUTHORIZATION`.
 
-AION-204 Cognitive Architecture closeout reconciliation remains part of the
-current compatibility record. The prior status phrase "Knowledge Intelligence research plane authorized and not implemented" is historical; the current Knowledge Intelligence state is source registry implemented with persistent writes disabled.
+Current stage: source provenance registry implemented, evaluated, append-only, in-memory, and persistent-write-disabled. Temporal claim-evidence graph authorized and not implemented.
+
+AION-204 Cognitive Architecture closeout reconciliation remains complete, and
+the active self-improvement implementation authorization count is zero.
+The source registry implemented with persistent writes disabled is the current
+evaluated Knowledge Intelligence evidence registry state.
 
 Current state flags:
 
-- `cognitive_architecture_program_complete=true`
-- `cognitive_architecture_implemented=true`
-- `controlled_local_offline_pilot_passed=true`
-- active cognitive implementation authorization count: 0
-- active cognitive implementation authorization: `none`
-- `knowledge_intelligence_program_created=true`
-- `knowledge_research_plane_authorized=true`
 - `knowledge_research_plane_implemented=true`
 - `knowledge_research_runtime_enabled=false`
-- `network_access_enabled=false`
-- `background_crawler_enabled=false`
-- `public_network_fetch_available=false`
-- `search_provider_integration_enabled=false`
-- `connector_integration_enabled=false`
-- `knowledge_research_plane_state=implemented_operator_invoked_disabled`
 - `source_provenance_registry_authorized=true`
 - `source_provenance_registry_implemented=true`
 - `source_provenance_registry_state=implemented_append_only_in_memory_replay_persistent_write_disabled`
+- `source_registry_operator_evaluation_passed=true`
 - `source_registry_runtime_enabled=false`
 - `source_registry_persistent_write_enabled=false`
-- `source_body_persistence_enabled=false`
+- `temporal_claim_evidence_graph_authorized=true`
+- `temporal_claim_evidence_graph_implemented=false`
+- `automatic_claim_extraction_enabled=false`
 - `claim_verification_enabled=false`
+- `truth_decision_enabled=false`
+- `epistemic_confidence_enabled=false`
 - `verified_knowledge_promotion_enabled=false`
 - `belief_mutation_enabled=false`
-- `active_knowledge_implementation_authorization=AION-206-KI-0002`
+- `network_access_enabled=false`
+- `active_knowledge_implementation_authorization=AION-208-KI-0003`
 - active Knowledge Intelligence implementation authorization count: 1
-- `active_knowledge_implementation_task=AION-207`
-- `formal_closeout_task=AION-208`
+- `active_knowledge_implementation_task=AION-209`
+- `formal_closeout_task=AION-210`
 
-The current self-improvement state is closed, historical, and disabled: shadow-mode and shadow-activation control-plane evidence remains advisory only, actual activation is unavailable, and active self-improvement implementation authorization count is zero.
+AION-205 captures untrusted evidence. AION-207 registers immutable evidence metadata. AION-208 evaluated the registry. AION-209 will represent unverified claims and evidence relationships and will not determine truth. AION-211 remains the future epistemic truth engine. Persistent writes and public-network research remain disabled.
 
 ## Completed Architecture
 
@@ -161,13 +158,7 @@ and production authentication disabled. Formal lifecycle closeout: AION-161.
 
 ## Current Operator Task
 
-Complete AION-208 source-provenance registry evaluation and formal closeout for
-`AION-206-KI-0002`. AION-205 acquires untrusted evidence; AION-207 registers
-immutable evidence metadata, stores zero acquired source-body bytes, does not
-verify claims, does not promote knowledge, does not mutate beliefs, and applies
-no persistent registry write.
-
-AION-204 does not authorize internet research runtime activation, crawler execution, unrestricted network access, search-provider integration, connector integration, credential use, automatic knowledge promotion, cognitive belief mutation, source mutation, Git mutation, automatic merge, production deployment, or model-weight training.
+AION-209 temporal claim-evidence graph is the next task. AION-208 closed `AION-206-KI-0002` as consumed by AION-207 and created `AION-208-KI-0003` as the sole active Knowledge Intelligence implementation authorization.
 
 ## Current Test Posture
 

@@ -45,7 +45,7 @@ def main():
     assert t('docs/cognitive-architecture/aion-203-postmerge-verification.md').find(PARENT_DECISION) != -1
     pg = j('docs/knowledge-intelligence/program-ledger.json'); au = j('docs/knowledge-intelligence/authorization-ledger.json')
     assert pg['program_id'] == PROGRAM_ID
-    assert pg['program_state'] in {'research_plane_authorized_not_implemented', 'research_plane_implemented_disabled_pending_closeout', 'source_provenance_registry_authorized_not_implemented', 'source_provenance_registry_implemented_write_disabled_pending_closeout'}
+    assert pg['program_state'] in {'research_plane_authorized_not_implemented', 'research_plane_implemented_disabled_pending_closeout', 'source_provenance_registry_authorized_not_implemented', 'source_provenance_registry_implemented_write_disabled_pending_closeout', 'temporal_claim_evidence_graph_authorized_not_implemented'}
     assert pg['active_knowledge_implementation_authorization_count'] == 1
     assert pg['research_plane_implemented'] in {False, True}
     for k in ['research_runtime_enabled','network_access_enabled','knowledge_promotion_enabled','verified_knowledge_memory_enabled','automatic_belief_creation_enabled','background_crawler_enabled','production_exposure','model_weight_training_enabled']: assert pg[k] is False, k
@@ -53,7 +53,28 @@ def main():
     assert au['active_cognitive_implementation_authorization_count'] == 0 and au['active_knowledge_implementation_authorization_count'] == 1
     active = [r for r in au['records'] if r.get('authorization_active') is True]
     assert len(active) == 1
-    if pg['program_state'] in {'source_provenance_registry_authorized_not_implemented', 'source_provenance_registry_implemented_write_disabled_pending_closeout'}:
+    if pg['program_state'] == 'temporal_claim_evidence_graph_authorized_not_implemented':
+        assert pg['active_knowledge_implementation_authorization'] == 'AION-208-KI-0003'
+        assert pg['active_knowledge_implementation_task'] == 'AION-209' and pg['formal_closeout_task'] == 'AION-210'
+        assert pg['source_provenance_registry_implemented'] is True
+        assert pg['source_provenance_registry_state'] == 'implemented_append_only_in_memory_replay_persistent_write_disabled'
+        assert pg['source_registry_runtime_enabled'] is False
+        assert pg['source_registry_persistent_write_enabled'] is False
+        r = active[0]
+        assert r['authorization_transaction_id'] == 'AION-208-KI-0003'
+        source = [x for x in au['records'] if x.get('authorization_transaction_id') == 'AION-206-KI-0002'][0]
+        assert source['authorization_active'] is False
+        assert source['authorization_consumed'] is True
+        assert source['authorization_expired'] is True
+        assert source['authorization_reusable'] is False
+        assert source['authorization_closed_by_task'] == 'AION-208'
+        closed = [x for x in au['records'] if x.get('authorization_transaction_id') == AUTH_ID][0]
+        assert closed['authorization_active'] is False
+        assert closed['authorization_consumed'] is True
+        assert closed['authorization_expired'] is True
+        assert closed['authorization_reusable'] is False
+        assert closed['authorization_consumed_by_prs'] == [116, 117]
+    elif pg['program_state'] in {'source_provenance_registry_authorized_not_implemented', 'source_provenance_registry_implemented_write_disabled_pending_closeout'}:
         assert pg['active_knowledge_implementation_authorization'] == 'AION-206-KI-0002'
         assert pg['active_knowledge_implementation_task'] == 'AION-207' and pg['formal_closeout_task'] == 'AION-208'
         if pg['program_state'] == 'source_provenance_registry_implemented_write_disabled_pending_closeout':

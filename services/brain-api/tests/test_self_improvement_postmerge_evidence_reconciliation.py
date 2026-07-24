@@ -146,9 +146,9 @@ def test_project_status_describes_current_shadow_authorization_state() -> None:
     assert "active self-improvement implementation authorization count is zero" in current_text
     assert "`knowledge_research_runtime_enabled=false`" in current_text
     assert "`network_access_enabled=false`" in current_text
-    assert "`active_knowledge_implementation_authorization=AION-206-KI-0002`" in current_text
-    assert "`active_knowledge_implementation_task=AION-207`" in current_text
-    assert "`formal_closeout_task=AION-208`" in current_text
+    assert "`active_knowledge_implementation_authorization=AION-208-KI-0003`" in current_text
+    assert "`active_knowledge_implementation_task=AION-209`" in current_text
+    assert "`formal_closeout_task=AION-210`" in current_text
     assert "`source_provenance_registry_authorized=true`" in current_text
     assert "`source_provenance_registry_implemented=true`" in current_text
     assert "AION-180-SI-0007" in historical_text

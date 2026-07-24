@@ -49,7 +49,13 @@ program = json.loads((ROOT / "docs/knowledge-intelligence/program-ledger.json").
 auth = json.loads((ROOT / "docs/knowledge-intelligence/authorization-ledger.json").read_text())
 active = [record for record in auth["records"] if record.get("authorization_active") is True]
 assert len(active) == 1
-record = active[0]
+source = [
+    record
+    for record in auth["records"]
+    if record.get("authorization_transaction_id") == "AION-206-KI-0002"
+]
+assert len(source) == 1
+record = source[0]
 assert program["source_provenance_registry_implemented"] is True
 assert (
     program["source_provenance_registry_state"]
@@ -69,8 +75,14 @@ for key in (
     assert program[key] is False, key
     assert record[key] is False, key
 assert record["resource_limits"]["maximum_registry_write_batch"] == 0
-assert record["authorization_consumed"] is False
-assert record["authorization_expired"] is False
+if record["authorization_active"] is True:
+    assert record["authorization_consumed"] is False
+    assert record["authorization_expired"] is False
+else:
+    assert active[0]["authorization_transaction_id"] == "AION-208-KI-0003"
+    assert record["authorization_consumed"] is True
+    assert record["authorization_expired"] is True
+    assert record["authorization_closed_by_task"] == "AION-208"
 assert record["authorization_reusable"] is False
 PY
 

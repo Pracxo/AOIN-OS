@@ -2,6 +2,7 @@ import copy
 
 from knowledge_source_registry_test_helpers import (
     AUTHORIZED_KEYS,
+    active_knowledge_authorization_record,
     active_source_record,
     assert_source_authorization_rejects,
     closed_research_record,
@@ -49,7 +50,7 @@ def test_negative_authorization_mutations_rejected():
 
 def test_wrong_domain_and_second_active_authorization_rejected_by_fixture_logic():
     auth = copy.deepcopy(read_json("docs/knowledge-intelligence/authorization-ledger.json"))
-    auth["records"].append(copy.deepcopy(active_source_record()))
+    auth["records"].append(copy.deepcopy(active_knowledge_authorization_record()))
     assert len([r for r in auth["records"] if r.get("authorization_active") is True]) != 1
     assert_source_authorization_rejects(
         lambda r: r.update({"authorization_transaction_id": "AION-201-CA-0009"})

@@ -15,7 +15,11 @@ is_nested_gate_context() {
   return 1
 }
 
-./scripts/knowledge-intelligence-research-plane-check.sh
+if is_nested_gate_context; then
+  echo "PASS: inherited research plane check deferred to outer gate"
+else
+  ./scripts/knowledge-intelligence-research-plane-check.sh
+fi
 
 "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
@@ -53,9 +57,16 @@ for key in (
 if program["program_state"] in {
     "source_provenance_registry_authorized_not_implemented",
     "source_provenance_registry_implemented_write_disabled_pending_closeout",
+    "temporal_claim_evidence_graph_authorized_not_implemented",
 }:
-    assert active[0]["authorization_transaction_id"] == "AION-206-KI-0002"
-    if program["program_state"] == "source_provenance_registry_implemented_write_disabled_pending_closeout":
+    if program["program_state"] == "temporal_claim_evidence_graph_authorized_not_implemented":
+        assert active[0]["authorization_transaction_id"] == "AION-208-KI-0003"
+    else:
+        assert active[0]["authorization_transaction_id"] == "AION-206-KI-0002"
+    if program["program_state"] in {
+        "source_provenance_registry_implemented_write_disabled_pending_closeout",
+        "temporal_claim_evidence_graph_authorized_not_implemented",
+    }:
         assert program["source_provenance_registry_implemented"] is True
         assert (
             program["source_provenance_registry_state"]

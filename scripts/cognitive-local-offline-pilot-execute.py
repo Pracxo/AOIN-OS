@@ -16,41 +16,41 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "services/brain-api/src"))
 sys.path.insert(0, str(ROOT / "scripts/lib"))
 
-from aion_brain.cognitive_architecture import (  # noqa: E402
+from aion_brain.cognitive_architecture import (
     ExplicitLocalCognitiveStateRepository,
     InMemoryCognitiveStateRepository,
 )
-from aion_brain.cognitive_runtime import (  # noqa: E402
+from aion_brain.cognitive_runtime import (
     CognitiveRuntimeBoundaryError,
     ControlledCognitiveShadowRuntime,
 )
-from aion_brain.contracts.cognitive_runtime import (  # noqa: E402
+from aion_brain.contracts.cognitive_runtime import (
     ApprovedCognitiveObservation,
     CognitiveCycleInput,
     CognitiveRuntimeBudget,
     CognitiveSessionManifest,
 )
-from aion_brain.contracts.cognitive_state import fingerprint_payload  # noqa: E402
-from aion_brain.contracts.continual_learning import (  # noqa: E402
+from aion_brain.contracts.cognitive_state import fingerprint_payload
+from aion_brain.contracts.continual_learning import (
     ContinualLearningObservation,
     LearningEpisode,
 )
-from aion_brain.contracts.information_acquisition import InformationNeed  # noqa: E402
-from aion_brain.contracts.memory_consolidation import EpisodicMemoryReference  # noqa: E402
-from aion_brain.contracts.planning import StrategicGoal, StrategyOption  # noqa: E402
-from aion_brain.contracts.world_model import (  # noqa: E402
+from aion_brain.contracts.information_acquisition import InformationNeed
+from aion_brain.contracts.memory_consolidation import EpisodicMemoryReference
+from aion_brain.contracts.planning import StrategicGoal, StrategyOption
+from aion_brain.contracts.world_model import (
     TransitionEvidence,
     WorldActionReference,
     WorldState,
 )
-from cognitive_architecture_governance import (  # noqa: E402
+from cognitive_architecture_governance import (
     AION199_IMPLEMENTATION_COMMIT,
     AION199_MERGE_COMMIT,
     AION200_EVALUATION_FINGERPRINT,
     AION200_EVALUATION_ID,
     AION201_AUTHORIZATION_ID,
-    AION201_PR,
     AION201_MERGE_COMMIT,
+    AION201_PR,
     AION202_CANDIDATE_ID,
     AION202_IMPLEMENTATION_BRANCH,
     AION202_SCOPE,
@@ -358,7 +358,7 @@ def _latency_summary(values: list[float]) -> dict[str, float]:
     ordered = sorted(values)
     if not ordered:
         return {"mean_ms": 0.0, "p50_ms": 0.0, "p95_ms": 0.0, "max_ms": 0.0}
-    p95_index = min(len(ordered) - 1, int(round((len(ordered) - 1) * 0.95)))
+    p95_index = min(len(ordered) - 1, round((len(ordered) - 1) * 0.95))
     return {
         "mean_ms": round(statistics.fmean(ordered), 6),
         "p50_ms": round(statistics.median(ordered), 6),

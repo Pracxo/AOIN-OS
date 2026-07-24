@@ -8,6 +8,7 @@ from knowledge_intelligence_test_helpers import (
     read_json,
 )
 from knowledge_source_registry_test_helpers import (
+    CLAIM_GRAPH_AUTH_ID,
     CLOSED_AUTH_ID,
     SOURCE_AUTH_ID,
     active_source_record,
@@ -56,14 +57,19 @@ def test_ledgers_create_single_active_knowledge_authorization():
     program = read_json("docs/knowledge-intelligence/program-ledger.json")
     auth = read_json("docs/knowledge-intelligence/authorization-ledger.json")
     assert program["program_id"] == PROGRAM_ID
-    assert (
-        program["program_state"]
-        == "source_provenance_registry_implemented_write_disabled_pending_closeout"
-    )
+    assert program["program_state"] in {
+        "source_provenance_registry_implemented_write_disabled_pending_closeout",
+        "temporal_claim_evidence_graph_authorized_not_implemented",
+    }
     assert program["active_knowledge_implementation_authorization_count"] == 1
-    assert program["active_knowledge_implementation_authorization"] == SOURCE_AUTH_ID
-    assert program["active_knowledge_implementation_task"] == "AION-207"
-    assert program["formal_closeout_task"] == "AION-208"
+    if program["program_state"] == "temporal_claim_evidence_graph_authorized_not_implemented":
+        assert program["active_knowledge_implementation_authorization"] == CLAIM_GRAPH_AUTH_ID
+        assert program["active_knowledge_implementation_task"] == "AION-209"
+        assert program["formal_closeout_task"] == "AION-210"
+    else:
+        assert program["active_knowledge_implementation_authorization"] == SOURCE_AUTH_ID
+        assert program["active_knowledge_implementation_task"] == "AION-207"
+        assert program["formal_closeout_task"] == "AION-208"
     assert program["research_plane_authorized"] is True
     assert program["research_plane_implemented"] is True
     assert program["research_plane_state"] == "implemented_operator_invoked_disabled"

@@ -70,18 +70,36 @@ program = json.loads((ROOT / "docs/knowledge-intelligence/program-ledger.json").
 auth = json.loads((ROOT / "docs/knowledge-intelligence/authorization-ledger.json").read_text())
 active = [record for record in auth["records"] if record.get("authorization_active") is True]
 assert len(active) == 1
-record = active[0]
-assert program["program_state"] == "source_provenance_registry_implemented_write_disabled_pending_closeout"
-assert program["active_knowledge_implementation_authorization"] == AUTH_ID
+source_records = [
+    record
+    for record in auth["records"]
+    if record.get("authorization_transaction_id") == AUTH_ID
+]
+assert len(source_records) == 1
+record = source_records[0]
+assert program["program_state"] in {
+    "source_provenance_registry_implemented_write_disabled_pending_closeout",
+    "temporal_claim_evidence_graph_authorized_not_implemented",
+}
+if program["program_state"] == "temporal_claim_evidence_graph_authorized_not_implemented":
+    assert program["active_knowledge_implementation_authorization"] == "AION-208-KI-0003"
+    assert program["active_knowledge_implementation_task"] == "AION-209"
+    assert program["formal_closeout_task"] == "AION-210"
+    assert record["authorization_active"] is False
+    assert record["authorization_consumed"] is True
+    assert record["authorization_expired"] is True
+    assert record["authorization_closed_by_task"] == "AION-208"
+else:
+    assert program["active_knowledge_implementation_authorization"] == AUTH_ID
+    assert program["active_knowledge_implementation_task"] == "AION-207"
+    assert program["formal_closeout_task"] == "AION-208"
+    assert record["authorization_active"] is True
+    assert record["authorization_consumed"] is False
+    assert record["authorization_expired"] is False
 assert program["active_knowledge_implementation_authorization_count"] == 1
-assert program["active_knowledge_implementation_task"] == "AION-207"
-assert program["formal_closeout_task"] == "AION-208"
 assert program["source_provenance_registry_implemented"] is True
 assert program["source_provenance_registry_state"] == STATE
 assert record["authorization_transaction_id"] == AUTH_ID
-assert record["authorization_active"] is True
-assert record["authorization_consumed"] is False
-assert record["authorization_expired"] is False
 assert record["authorization_reusable"] is False
 assert record["resource_limits"]["maximum_registry_write_batch"] == 0
 for key in (
