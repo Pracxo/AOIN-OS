@@ -2,29 +2,30 @@ from __future__ import annotations
 
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[3]
+
 
 def test_claim_graph_adds_no_runtime_registration_api_cli_or_persistence_files() -> None:
-    root = Path("/Users/damilaremerotiwon/KITEV2/AOIN OS")
     forbidden = (
-        root / "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_runtime.py",
-        root / "services/brain-api/src/aion_brain/knowledge_intelligence/claim_truth.py",
-        root / "services/brain-api/src/aion_brain/knowledge_intelligence/claim_confidence.py",
-        root / "services/brain-api/src/aion_brain/api/claim_graph.py",
+        ROOT / "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_runtime.py",
+        ROOT / "services/brain-api/src/aion_brain/knowledge_intelligence/claim_truth.py",
+        ROOT / "services/brain-api/src/aion_brain/knowledge_intelligence/claim_confidence.py",
+        ROOT / "services/brain-api/src/aion_brain/api/claim_graph.py",
     )
     assert not any(path.exists() for path in forbidden)
     source_text = "\n".join(
         path.read_text(encoding="utf-8")
         for path in (
-            root / "services/brain-api/src/aion_brain/contracts/knowledge_claim_graph.py",
-            root / "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph.py",
-            root
+            ROOT / "services/brain-api/src/aion_brain/contracts/knowledge_claim_graph.py",
+            ROOT / "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph.py",
+            ROOT
             / "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_evidence.py",
-            root
+            ROOT
             / "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_repository.py",
-            root / "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_index.py",
-            root
+            ROOT / "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_index.py",
+            ROOT
             / "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_integrity.py",
-            root
+            ROOT
             / "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_temporal.py",
         )
     )
