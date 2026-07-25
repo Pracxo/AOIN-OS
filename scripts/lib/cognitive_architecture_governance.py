@@ -939,6 +939,58 @@ AION208_ALLOWED_PREFIXES = (
     "services/brain-api/tests/test_knowledge_epistemic_truth",
 )
 
+AION211_ALLOWED_EXACT_PATHS = {
+    "AGENTS.md",
+    "README.md",
+    "docs/adr/0175-deterministic-epistemic-evidence-assessment-engine-core.md",
+    "docs/adr/README.md",
+    "docs/architecture.md",
+    "docs/brain-contract.md",
+    "docs/policy-model.md",
+    "docs/project-status.md",
+    "docs/release/v02-release-readiness-delta.md",
+    "docs/visual-brain.md",
+    "scripts/connector-runtime-no-external-call-regression.sh",
+    "scripts/knowledge-intelligence-claim-graph-authorization-check.sh",
+    "scripts/knowledge-intelligence-claim-graph-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-claim-graph-operator-evaluation-check.sh",
+    "scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-epistemic-assessment-check.sh",
+    "scripts/knowledge-intelligence-epistemic-assessment-no-go-regression.sh",
+    "scripts/knowledge-intelligence-epistemic-truth-authorization-check.sh",
+    "scripts/knowledge-intelligence-epistemic-truth-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-epistemic-truth-runtime-hold.sh",
+    "scripts/knowledge-intelligence-research-authorization-check.sh",
+    "scripts/knowledge-intelligence-research-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-research-runtime-hold.sh",
+    "scripts/knowledge-intelligence-source-registry-authorization-check.sh",
+    "scripts/knowledge-intelligence-source-registry-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-source-registry-operator-evaluation-no-go-regression.sh",
+    "scripts/lib/cognitive_architecture_governance.py",
+    "scripts/lib/v02-production-auth-scan-exclusions.sh",
+    "scripts/operator-console-static-check.sh",
+    "scripts/production-auth-architecture-check.sh",
+    "scripts/static-console-safety-check.sh",
+    "services/brain-api/src/aion_brain/contracts/knowledge_epistemic_assessment.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/tests/knowledge_claim_graph_evaluation_test_helpers.py",
+    "services/brain-api/tests/test_knowledge_claim_graph_authorization_validator.py",
+    "services/brain-api/tests/test_knowledge_intelligence_research_authorization_docs.py",
+    "services/brain-api/tests/test_knowledge_research_authorization_closeout.py",
+    "services/brain-api/tests/test_knowledge_source_registry_authorization_closeout.py",
+}
+
+AION211_ALLOWED_PREFIXES = (
+    "docs/knowledge-intelligence/",
+    "docs/release/knowledge-intelligence-epistemic-assessment-",
+    "docs/release/knowledge-intelligence-epistemic-truth-",
+    "examples/knowledge-intelligence/",
+    "operator-console-static/",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_",
+    "services/brain-api/tests/test_knowledge_epistemic_assessment_",
+)
+
 AION199_ALLOWED_EXACT_PATHS = set(AION199_REQUIRED_FILES) | {
     "scripts/connector-runtime-no-external-call-regression.sh",
     "scripts/cognitive-integrated-evaluation-check.sh",
@@ -11321,6 +11373,12 @@ def _aion205_path_allowed(relative: str) -> bool:
 def _aion208_path_allowed(relative: str) -> bool:
     return relative in AION208_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION208_ALLOWED_PREFIXES
+    ) or _aion211_path_allowed(relative)
+
+
+def _aion211_path_allowed(relative: str) -> bool:
+    return relative in AION211_ALLOWED_EXACT_PATHS or any(
+        relative.startswith(prefix) for prefix in AION211_ALLOWED_PREFIXES
     )
 
 

@@ -570,7 +570,11 @@ for path in sorted(demo_dir.glob("*.json")):
             "knowledge-intelligence-claim-graph-conflict-candidates.json",
             "knowledge-intelligence-claim-graph-evaluation.json",
             "knowledge-intelligence-claim-graph-runtime-hold.json",
+            "knowledge-intelligence-epistemic-assessment.json",
+            "knowledge-intelligence-epistemic-hard-caps.json",
+            "knowledge-intelligence-epistemic-integrity.json",
             "knowledge-intelligence-epistemic-runtime-hold.json",
+            "knowledge-intelligence-epistemic-scorecard.json",
             "knowledge-intelligence-epistemic-truth-authorization.json",
             "knowledge-intelligence-source-lineage.json",
             "knowledge-intelligence-source-snapshots.json",
@@ -588,6 +592,7 @@ for path in sorted(demo_dir.glob("*.json")):
                 "research_plane_implemented",
                 "source_provenance_registry_implemented",
                 "temporal_claim_evidence_graph_implemented",
+                "epistemic_truth_engine_implemented",
             )
         )
         if not implemented_disabled_plane_present:
@@ -596,6 +601,8 @@ for path in sorted(demo_dir.glob("*.json")):
             "research_runtime_enabled",
             "source_registry_runtime_enabled",
             "claim_graph_runtime_enabled",
+            "epistemic_truth_engine_runtime_enabled",
+            "persistent_assessment_write_enabled",
             "network_access_enabled",
             "runtime_effect",
         ):

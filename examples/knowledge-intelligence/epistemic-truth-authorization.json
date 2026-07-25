@@ -89,7 +89,9 @@
   "credential_use_enabled": false,
   "engagement_signal_as_fact_enabled": false,
   "epistemic_truth_engine_authorized": true,
-  "epistemic_truth_engine_implemented": false,
+  "epistemic_truth_engine_implemented": true,
+  "epistemic_truth_engine_runtime_enabled": false,
+  "epistemic_truth_engine_state": "implemented_deterministic_in_memory_assessment_persistent_write_disabled",
   "explicit_approval_record_approval": true,
   "external_database_integration_enabled": false,
   "formal_closeout_task": "AION-212",
@@ -104,6 +106,7 @@
   "model_provider_integration_enabled": false,
   "model_weight_training_enabled": false,
   "network_acquisition_enabled": false,
+  "new_knowledge_implementation_authorization_created": false,
   "parent_authorization_transaction_id": "AION-208-KI-0003",
   "parent_claim_graph_implementation_feature_commits": [
     "0a84080c83f87eef94b5191c432021776c6a336a",

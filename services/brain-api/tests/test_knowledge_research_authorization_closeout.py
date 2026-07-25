@@ -10,6 +10,10 @@ from knowledge_source_registry_test_helpers import (
     validate_source_authorization,
 )
 
+AION211_STATE = (
+    "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout"
+)
+
 
 def test_aion_204_authorization_is_closed_and_non_reusable():
     closed = closed_research_record()
@@ -32,11 +36,19 @@ def test_aion_206_creates_single_active_source_registry_authorization():
         "temporal_claim_evidence_graph_authorized_not_implemented",
         "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
         "epistemic_truth_engine_authorized_not_implemented",
+        AION211_STATE,
     }
-    if program["program_state"] == "epistemic_truth_engine_authorized_not_implemented":
+    if program["program_state"] in {
+        "epistemic_truth_engine_authorized_not_implemented",
+        AION211_STATE,
+    }:
         assert program["active_knowledge_implementation_authorization"] == EPISTEMIC_AUTH_ID
         assert program["active_knowledge_implementation_task"] == "AION-211"
         assert program["formal_closeout_task"] == "AION-212"
+        if program["program_state"] == AION211_STATE:
+            assert program["epistemic_truth_engine_implemented"] is True
+            assert program["epistemic_truth_engine_runtime_enabled"] is False
+            assert program["persistent_assessment_write_enabled"] is False
     elif program["program_state"] in {
         "temporal_claim_evidence_graph_authorized_not_implemented",
         "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",

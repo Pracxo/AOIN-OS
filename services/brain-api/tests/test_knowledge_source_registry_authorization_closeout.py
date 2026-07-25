@@ -14,6 +14,9 @@ DECISION = (
     "SOURCE_PROVENANCE_REGISTRY_OPERATOR_EVALUATION_PASS_RECOMMEND_"
     "TEMPORAL_CLAIM_EVIDENCE_GRAPH_AUTHORIZATION"
 )
+AION211_STATE = (
+    "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout"
+)
 
 
 def test_aion_206_source_registry_authorization_is_closed_and_non_reusable():
@@ -44,10 +47,17 @@ def test_aion_208_claim_graph_authorization_hands_off_to_next_active_authorizati
     assert auth["active_cognitive_implementation_authorization_count"] == 0
     assert auth["active_knowledge_implementation_authorization_count"] == 1
     assert program["active_knowledge_implementation_authorization_count"] == 1
-    if program["program_state"] == "epistemic_truth_engine_authorized_not_implemented":
+    if program["program_state"] in {
+        "epistemic_truth_engine_authorized_not_implemented",
+        AION211_STATE,
+    }:
         assert active["authorization_transaction_id"] == EPISTEMIC_AUTH_ID
         assert active["implementation_task"] == "AION-211"
         assert active["formal_closeout_task"] == "AION-212"
+        if program["program_state"] == AION211_STATE:
+            assert active["epistemic_truth_engine_implemented"] is True
+            assert active["epistemic_truth_engine_runtime_enabled"] is False
+            assert active["resource_limits"]["maximum_persistent_assessment_write_batch"] == 0
     else:
         assert active["authorization_transaction_id"] == CLAIM_GRAPH_AUTH_ID
         assert active["implementation_task"] == "AION-209"

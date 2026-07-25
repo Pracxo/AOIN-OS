@@ -1,0 +1,46 @@
+{
+  "absolute_truth_oracle_enabled": false,
+  "approval_record_id": "AION-210-KI-0004",
+  "authorization_scope": "deterministic-evidence-corroboration-contradiction-freshness-source-independence-confidence-assessment-core",
+  "authorization_transaction_id": "AION-210-KI-0004",
+  "automatic_claim_acceptance_enabled": false,
+  "automatic_claim_rejection_enabled": false,
+  "belief_mutation_enabled": false,
+  "epistemic_truth_engine_authorized": true,
+  "epistemic_truth_engine_implemented": true,
+  "epistemic_truth_engine_runtime_enabled": false,
+  "epistemic_truth_engine_state": "implemented_deterministic_in_memory_assessment_persistent_write_disabled",
+  "example_kind": "epistemic_operator_review",
+  "formal_closeout_task": "AION-212",
+  "implementation_task": "AION-211",
+  "knowledge_promotion_enabled": false,
+  "payload": {
+    "approval_created": false,
+    "assessment_ids": [
+      "epistemic-assessment-claim-0001"
+    ],
+    "automatic_claim_acceptance_authorized": false,
+    "automatic_claim_rejection_authorized": false,
+    "belief_mutation_authorized": false,
+    "created_at": "2026-01-01T00:00:00Z",
+    "expires_at": "2026-01-08T00:00:00Z",
+    "human_fact_review_required": true,
+    "implementation_authorization_created": false,
+    "knowledge_promotion_authorized": false,
+    "operator_review_required": true,
+    "persistent_assessment_write_authorized": false,
+    "reason_codes": [
+      "epistemic_operator_review_required"
+    ],
+    "review_fingerprint": "c76804409d951954177aa663df2026cab5008d791d637999010e6f683813fd0f",
+    "review_item_id": "epistemic-review-0001",
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-epistemic-assessment-evidence/v1"
+  },
+  "persistent_assessment_write_enabled": false,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "read_only": true,
+  "redacted": true,
+  "runtime_effect": false,
+  "synthetic": true
+}

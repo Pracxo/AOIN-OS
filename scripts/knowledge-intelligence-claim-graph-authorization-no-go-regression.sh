@@ -28,7 +28,10 @@ if PROGRAM_PATH.exists():
         POST_AION210_CONTEXT = (
             POST_AION210_CONTEXT
             or json.loads(PROGRAM_PATH.read_text()).get("program_state")
-            == "epistemic_truth_engine_authorized_not_implemented"
+            in {
+                "epistemic_truth_engine_authorized_not_implemented",
+                "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
+            }
         )
     except json.JSONDecodeError:
         pass
@@ -83,6 +86,14 @@ ALLOWED_SOURCE = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_integrity.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_temporal.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_evidence.py",
+    "services/brain-api/src/aion_brain/contracts/knowledge_epistemic_assessment.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_assessment.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_corroboration.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_contradiction.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_freshness.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_confidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_evidence.py",
 }
 ALLOWED_SCRIPTS = {
     "scripts/knowledge-intelligence-claim-graph-authorization-check.sh",
@@ -119,6 +130,11 @@ ALLOWED_TESTS = {
 }
 POST_AION210_ALLOWED_EXACT = {
     "docs/adr/0174-temporal-claim-evidence-graph-evaluation-and-epistemic-truth-engine-authorization.md",
+    "docs/adr/0175-deterministic-epistemic-evidence-assessment-engine-core.md",
+    "docs/knowledge-intelligence/aion-211-checklist.md",
+    "examples/knowledge-intelligence/claim-epistemic-assessment.json",
+    "examples/knowledge-intelligence/evidence-contribution.json",
+    "examples/knowledge-intelligence/role-evidence-score.json",
     "scripts/knowledge-intelligence-research-authorization-check.sh",
     "scripts/knowledge-intelligence-research-authorization-no-go-regression.sh",
     "scripts/knowledge-intelligence-research-plane-check.sh",
@@ -133,6 +149,10 @@ POST_AION210_ALLOWED_EXACT = {
     "scripts/knowledge-intelligence-source-registry-operator-evaluation-no-go-regression.sh",
     "scripts/knowledge-intelligence-source-registry-runtime-hold.sh",
     "scripts/knowledge-intelligence-claim-graph-runtime-hold.sh",
+    "scripts/knowledge-intelligence-claim-graph-operator-evaluation-check.sh",
+    "scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-epistemic-assessment-check.sh",
+    "scripts/knowledge-intelligence-epistemic-assessment-no-go-regression.sh",
     "scripts/static-console-safety-check.sh",
     "scripts/lib/knowledge_intelligence_claim_graph_operator_evaluation.py",
     "services/brain-api/tests/knowledge_source_registry_test_helpers.py",
@@ -150,6 +170,7 @@ POST_AION210_ALLOWED_PREFIXES = (
     "docs/knowledge-intelligence/claim-graph-operator-evaluation",
     "docs/knowledge-intelligence/epistemic-",
     "docs/release/knowledge-intelligence-claim-graph-evaluation-",
+    "docs/release/knowledge-intelligence-epistemic-assessment-",
     "docs/release/knowledge-intelligence-epistemic-truth-",
     "examples/knowledge-intelligence/claim-graph-evaluation",
     "examples/knowledge-intelligence/claim-graph-operator-evaluation",
@@ -157,7 +178,10 @@ POST_AION210_ALLOWED_PREFIXES = (
     "operator-console-static/demo-data/knowledge-intelligence-claim-graph-evaluation",
     "operator-console-static/demo-data/knowledge-intelligence-epistemic-",
     "scripts/knowledge-intelligence-claim-graph-operator-evaluation-",
+    "scripts/knowledge-intelligence-epistemic-assessment-",
     "scripts/knowledge-intelligence-epistemic-truth-",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_",
+    "services/brain-api/tests/test_knowledge_epistemic_assessment_",
     "services/brain-api/tests/test_knowledge_epistemic_truth_",
 )
 PROHIBITED_PREFIXES = (

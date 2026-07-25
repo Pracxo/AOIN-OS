@@ -378,6 +378,9 @@ allowed_aion_207_runtime = {
 allowed_aion_209_runtime = {
     "services/brain-api/src/aion_brain/contracts/knowledge_claim_graph.py",
 }
+allowed_aion_211_runtime = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_epistemic_assessment.py",
+}
 for name in [*changed, *untracked]:
     if name in allowed_runtime_tests:
         continue
@@ -434,6 +437,8 @@ for name in [*changed, *untracked]:
     if name in allowed_aion_207_runtime:
         continue
     if name in allowed_aion_209_runtime:
+        continue
+    if name in allowed_aion_211_runtime:
         continue
     if name.startswith(runtime_prefixes):
         raise SystemExit(f"production auth architecture must not change runtime file: {name}")

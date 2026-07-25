@@ -40,6 +40,17 @@ CLAIM_GRAPH_SOURCE = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_repository.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_temporal.py",
 }
+EPISTEMIC_ASSESSMENT_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_epistemic_assessment.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_assessment.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_confidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_contradiction.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_corroboration.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_freshness.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_integrity.py",
+}
 PROHIBITED_SOURCE = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_runtime.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_service.py",
@@ -89,6 +100,7 @@ CLAIM_GRAPH_CONTEXT = (
     program_state in {
         "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
         "epistemic_truth_engine_authorized_not_implemented",
+        "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
     }
     or os.environ.get("AION_CLAIM_GRAPH_IMPLEMENTATION_CONTEXT") == "1"
     or os.environ.get("AION_AGGREGATE_GATE_RUNNING") == "1"
@@ -183,6 +195,11 @@ for parts in changed_entries():
         if normalized in PROHIBITED_SOURCE:
             raise SystemExit(f"source registry runtime/API path added: {normalized}")
         if CLAIM_GRAPH_CONTEXT and normalized in CLAIM_GRAPH_SOURCE:
+            continue
+        if (
+            program_state == "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout"
+            and normalized in EPISTEMIC_ASSESSMENT_SOURCE
+        ):
             continue
         if normalized.startswith("services/brain-api/src/aion_brain/") and normalized not in AION207_SOURCE:
             raise SystemExit(f"path outside exact AION-207 source scope: {normalized}")

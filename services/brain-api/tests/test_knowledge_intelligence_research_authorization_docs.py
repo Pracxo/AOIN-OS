@@ -44,6 +44,9 @@ REQUIRED_FILES = [
     "scripts/knowledge-intelligence-research-authorization-no-go-regression.sh",
     "scripts/knowledge-intelligence-research-runtime-hold.sh",
 ]
+AION211_STATE = (
+    "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout"
+)
 
 
 def test_required_files_exist_and_scripts_executable():
@@ -63,12 +66,20 @@ def test_ledgers_create_single_active_knowledge_authorization():
         "temporal_claim_evidence_graph_authorized_not_implemented",
         "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
         "epistemic_truth_engine_authorized_not_implemented",
+        AION211_STATE,
     }
     assert program["active_knowledge_implementation_authorization_count"] == 1
-    if program["program_state"] == "epistemic_truth_engine_authorized_not_implemented":
+    if program["program_state"] in {
+        "epistemic_truth_engine_authorized_not_implemented",
+        AION211_STATE,
+    }:
         assert program["active_knowledge_implementation_authorization"] == EPISTEMIC_AUTH_ID
         assert program["active_knowledge_implementation_task"] == "AION-211"
         assert program["formal_closeout_task"] == "AION-212"
+        if program["program_state"] == AION211_STATE:
+            assert program["epistemic_truth_engine_implemented"] is True
+            assert program["epistemic_truth_engine_runtime_enabled"] is False
+            assert program["persistent_assessment_write_enabled"] is False
     elif program["program_state"] in {
         "temporal_claim_evidence_graph_authorized_not_implemented",
         "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",

@@ -22,6 +22,7 @@ from pathlib import Path
 
 ROOT = Path(os.environ["AION_REPO_ROOT"])
 EXPECTED_TAG = "105fe29348160a2218ac095cfffadcb6f234421f"
+EPIS_STATE = "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout"
 ALLOWED_PREFIXES = (
     "docs/",
     "examples/",
@@ -49,6 +50,14 @@ CLAIM_GRAPH_CONTEXT = any(
         "AION_CHECK_RUNNING",
     )
 )
+program_path = ROOT / "docs/knowledge-intelligence/program-ledger.json"
+program_state = json.loads(program_path.read_text()).get("program_state", "") if program_path.exists() else ""
+EPISTEMIC_ASSESSMENT_CONTEXT = (
+    program_state == EPIS_STATE
+    or os.environ.get("AION_EPISTEMIC_ASSESSMENT_IMPLEMENTATION_CONTEXT") == "1"
+    or os.environ.get("AION_AGGREGATE_GATE_RUNNING") == "1"
+    or os.environ.get("AION_CHECK_RUNNING") == "1"
+)
 CLAIM_GRAPH_SOURCE_PATHS = {
     "services/brain-api/src/aion_brain/contracts/knowledge_claim_graph.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
@@ -58,6 +67,17 @@ CLAIM_GRAPH_SOURCE_PATHS = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_integrity.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_repository.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_temporal.py",
+}
+EPISTEMIC_ASSESSMENT_SOURCE_PATHS = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_epistemic_assessment.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_assessment.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_confidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_contradiction.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_corroboration.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_freshness.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_integrity.py",
 }
 PROHIBITED_NAMES = {
     "package.json",
@@ -145,6 +165,8 @@ for parts in changed_entries():
             raise SystemExit(f"prohibited package/workflow/migration path changed: {normalized}")
         if normalized.startswith(PROHIBITED_SOURCE_PREFIXES):
             if CLAIM_GRAPH_CONTEXT and normalized in CLAIM_GRAPH_SOURCE_PATHS:
+                continue
+            if EPISTEMIC_ASSESSMENT_CONTEXT and normalized in EPISTEMIC_ASSESSMENT_SOURCE_PATHS:
                 continue
             raise SystemExit(f"runtime source path changed on AION-208: {normalized}")
         if normalized not in ALLOWED_EXACT and not any(

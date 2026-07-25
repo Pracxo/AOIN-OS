@@ -44,6 +44,10 @@
     knowledge_intelligence_claim_graph_runtime_hold: "demo-data/knowledge-intelligence-claim-graph-runtime-hold.json",
     knowledge_intelligence_claim_graph_evaluation: "demo-data/knowledge-intelligence-claim-graph-evaluation.json",
     knowledge_intelligence_epistemic_truth_authorization: "demo-data/knowledge-intelligence-epistemic-truth-authorization.json",
+    knowledge_intelligence_epistemic_assessment: "demo-data/knowledge-intelligence-epistemic-assessment.json",
+    knowledge_intelligence_epistemic_scorecard: "demo-data/knowledge-intelligence-epistemic-scorecard.json",
+    knowledge_intelligence_epistemic_hard_caps: "demo-data/knowledge-intelligence-epistemic-hard-caps.json",
+    knowledge_intelligence_epistemic_integrity: "demo-data/knowledge-intelligence-epistemic-integrity.json",
     knowledge_intelligence_epistemic_runtime_hold: "demo-data/knowledge-intelligence-epistemic-runtime-hold.json",
     knowledge_intelligence_research_runtime_hold: "demo-data/knowledge-intelligence-research-runtime-hold.json",
     module_lifecycle: "demo-data/module-lifecycle-dashboard.json",
@@ -77,6 +81,10 @@
       "knowledge_intelligence_claim_graph_runtime_hold",
       "knowledge_intelligence_claim_graph_evaluation",
       "knowledge_intelligence_epistemic_truth_authorization",
+      "knowledge_intelligence_epistemic_assessment",
+      "knowledge_intelligence_epistemic_scorecard",
+      "knowledge_intelligence_epistemic_hard_caps",
+      "knowledge_intelligence_epistemic_integrity",
       "knowledge_intelligence_epistemic_runtime_hold",
       "knowledge_intelligence_research_runtime_hold"
     ],
@@ -111,6 +119,10 @@
       "knowledge_intelligence_claim_graph_runtime_hold",
       "knowledge_intelligence_claim_graph_evaluation",
       "knowledge_intelligence_epistemic_truth_authorization",
+      "knowledge_intelligence_epistemic_assessment",
+      "knowledge_intelligence_epistemic_scorecard",
+      "knowledge_intelligence_epistemic_hard_caps",
+      "knowledge_intelligence_epistemic_integrity",
       "knowledge_intelligence_epistemic_runtime_hold",
       "knowledge_intelligence_research_runtime_hold"
     ],
@@ -300,6 +312,8 @@
     "./scripts/knowledge-intelligence-claim-graph-operator-evaluation-check.sh",
     "./scripts/knowledge-intelligence-epistemic-truth-authorization-no-go-regression.sh",
     "./scripts/knowledge-intelligence-epistemic-truth-authorization-check.sh",
+    "./scripts/knowledge-intelligence-epistemic-assessment-no-go-regression.sh",
+    "./scripts/knowledge-intelligence-epistemic-assessment-check.sh",
     "./scripts/knowledge-intelligence-epistemic-truth-runtime-hold.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {

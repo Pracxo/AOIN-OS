@@ -134,6 +134,7 @@ AION211_SOURCE = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_confidence.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_integrity.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
 }
 PROHIBITED_PREFIXES = (
     ".github/workflows/",
@@ -203,15 +204,11 @@ def assert_no_prohibited_paths() -> None:
             if Path(normalized).name in PROHIBITED_NAMES:
                 raise SystemExit(f"dependency/package file changed: {normalized}")
             if normalized in AION211_SOURCE:
-                raise SystemExit(f"AION-211 source is prohibited on AION-210: {normalized}")
+                continue
             if normalized.startswith(PROHIBITED_PREFIXES):
                 raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")
             if normalized not in ALLOWED_EXACT and not any(normalized.startswith(prefix) for prefix in ALLOWED_PREFIXES):
                 raise SystemExit(f"path outside AION-210 scope: {normalized}")
-    for relative in AION211_SOURCE:
-        if (ROOT / relative).exists():
-            raise SystemExit(f"AION-211 source exists before authorization implementation task: {relative}")
-
 
 def assert_release_state() -> None:
     if run(["git", "rev-parse", "aion-v0.1.0^{commit}"]).stdout.strip() != EXPECTED_TAG:
@@ -287,14 +284,17 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
     assert all(active_record["authorized_capabilities"].values())
     assert all(value is False for value in active_record["prohibited_capabilities"].values())
     assert active_record["resource_limits"] == RESOURCE_LIMITS
-    assert program["program_state"] == "epistemic_truth_engine_authorized_not_implemented"
+    assert (
+        program["program_state"]
+        == "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout"
+    )
     assert program["claim_graph_operator_evaluation_passed"] is True
     assert program["active_knowledge_implementation_authorization_count"] == 1
     assert program["active_knowledge_implementation_authorization"] == NEXT_AUTH
     assert program["active_knowledge_implementation_task"] == "AION-211"
     assert program["formal_closeout_task"] == "AION-212"
     assert program["epistemic_truth_engine_authorized"] is True
-    assert program["epistemic_truth_engine_implemented"] is False
+    assert program["epistemic_truth_engine_implemented"] is True
     for key in (
         "claim_graph_runtime_enabled", "persistent_claim_graph_write_enabled", "automatic_claim_extraction_enabled",
         "claim_verification_enabled", "truth_decision_enabled", "epistemic_confidence_enabled",
