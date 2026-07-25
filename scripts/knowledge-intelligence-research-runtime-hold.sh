@@ -62,9 +62,20 @@ if program["program_state"] in {
     "epistemic_truth_engine_authorized_not_implemented",
     "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
     "domain_expert_mesh_authorized_not_implemented",
+    "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
 }:
-    if program["program_state"] == "domain_expert_mesh_authorized_not_implemented":
+    if program["program_state"] in {
+        "domain_expert_mesh_authorized_not_implemented",
+        "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
+    }:
         assert active[0]["authorization_transaction_id"] == "AION-212-KI-0005"
+        if (
+            program["program_state"]
+            == "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout"
+        ):
+            assert program["domain_expert_mesh_implemented"] is True
+            assert program["model_call_enabled"] is False
+            assert program["persistent_mesh_write_enabled"] is False
     elif program["program_state"] in {
         "epistemic_truth_engine_authorized_not_implemented",
         "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
@@ -84,6 +95,7 @@ if program["program_state"] in {
         "epistemic_truth_engine_authorized_not_implemented",
         "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
         "domain_expert_mesh_authorized_not_implemented",
+        "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
     }:
         assert program["source_provenance_registry_implemented"] is True
         assert (

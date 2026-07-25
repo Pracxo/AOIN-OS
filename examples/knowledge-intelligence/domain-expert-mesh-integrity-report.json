@@ -1,0 +1,13 @@
+{
+  "audit_timestamp": "2026-01-01T00:00:00Z",
+  "finding_count": 0,
+  "findings": [],
+  "reason_codes": [
+    "domain_mesh_integrity_passed"
+  ],
+  "report_fingerprint": "25563ed54008271ca2351e8b73f5d91a6901ad531e44baf63e4eb403244e2dd8",
+  "report_id": "integrity-domain-expert-mesh-session-artifacts",
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-expert-mesh-integrity/v1",
+  "status": "passed"
+}

@@ -1,0 +1,106 @@
+[
+  {
+    "case_id": "case-001",
+    "confidence_increased": false,
+    "critic_profile_id": "computational-cross-domain-evidence-auditor",
+    "critique_fingerprint": "a95900fe09e49e38139d7b5becc0795ec8cb743816dd308354935a36d6f9693d",
+    "critique_id": "critique-report-case-001-domain_analyst-evidence_auditor",
+    "deliberation_round": 1,
+    "issue_codes": [
+      "domain_mesh_critique_created",
+      "domain_mesh_evidence_gap_recorded",
+      "domain_mesh_limitation_recorded"
+    ],
+    "methodology_issue_codes": [
+      "domain_mesh_limitation_recorded"
+    ],
+    "panel_id": "panel-case-001",
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-expert-critique/v1",
+    "scope_issue_codes": [
+      "domain_mesh_evidence_gap_recorded"
+    ],
+    "target_profile_id": "computational-computing-and-information-systems-domain-analyst",
+    "target_report_id": "report-case-001-domain_analyst",
+    "target_report_preserved": true,
+    "unsupported_reference_ids": []
+  },
+  {
+    "case_id": "case-001",
+    "confidence_increased": false,
+    "critic_profile_id": "computational-cross-domain-methodological-skeptic",
+    "critique_fingerprint": "634304dd42d365918494b0139096c31f734b829c941522b94008e4ede0ba64a1",
+    "critique_id": "critique-report-case-001-evidence_auditor-methodological_skeptic",
+    "deliberation_round": 1,
+    "issue_codes": [
+      "domain_mesh_critique_created",
+      "domain_mesh_evidence_gap_recorded",
+      "domain_mesh_limitation_recorded"
+    ],
+    "methodology_issue_codes": [
+      "domain_mesh_limitation_recorded"
+    ],
+    "panel_id": "panel-case-001",
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-expert-critique/v1",
+    "scope_issue_codes": [
+      "domain_mesh_evidence_gap_recorded"
+    ],
+    "target_profile_id": "computational-cross-domain-evidence-auditor",
+    "target_report_id": "report-case-001-evidence_auditor",
+    "target_report_preserved": true,
+    "unsupported_reference_ids": []
+  },
+  {
+    "case_id": "case-001",
+    "confidence_increased": false,
+    "critic_profile_id": "computational-computing-and-information-systems-domain-analyst",
+    "critique_fingerprint": "fbe2229907b09e6d57e09c3840d3e68150c1d0827e2b2d49c72762993720c28e",
+    "critique_id": "critique-report-case-001-methodological_skeptic-domain_analyst",
+    "deliberation_round": 1,
+    "issue_codes": [
+      "domain_mesh_critique_created",
+      "domain_mesh_evidence_gap_recorded",
+      "domain_mesh_limitation_recorded"
+    ],
+    "methodology_issue_codes": [
+      "domain_mesh_limitation_recorded"
+    ],
+    "panel_id": "panel-case-001",
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-expert-critique/v1",
+    "scope_issue_codes": [
+      "domain_mesh_evidence_gap_recorded"
+    ],
+    "target_profile_id": "computational-cross-domain-methodological-skeptic",
+    "target_report_id": "report-case-001-methodological_skeptic",
+    "target_report_preserved": true,
+    "unsupported_reference_ids": []
+  },
+  {
+    "case_id": "case-001",
+    "confidence_increased": false,
+    "critic_profile_id": "computational-computing-and-information-systems-domain-analyst",
+    "critique_fingerprint": "87c5323581b0d04f88d3718751cc75b71afb8cdc881c6062b25bbce4a488310b",
+    "critique_id": "critique-report-case-001-synthesis_coordinator-domain_analyst",
+    "deliberation_round": 1,
+    "issue_codes": [
+      "domain_mesh_critique_created",
+      "domain_mesh_evidence_gap_recorded",
+      "domain_mesh_limitation_recorded"
+    ],
+    "methodology_issue_codes": [
+      "domain_mesh_limitation_recorded"
+    ],
+    "panel_id": "panel-case-001",
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-expert-critique/v1",
+    "scope_issue_codes": [
+      "domain_mesh_evidence_gap_recorded"
+    ],
+    "target_profile_id": "computational-synthesis-coordinator",
+    "target_report_id": "report-case-001-synthesis_coordinator",
+    "target_report_preserved": true,
+    "unsupported_reference_ids": []
+  }
+]

@@ -1,0 +1,466 @@
+{
+  "dynamic_domain_creation_enabled": false,
+  "embedding_classification_enabled": false,
+  "model_generated_domain_enabled": false,
+  "nodes": [
+    {
+      "deterministic_hierarchy": true,
+      "domain_id": "business-and-management",
+      "explicit_safe_ids": true,
+      "label": "Business and Management",
+      "model_generated_domain": false,
+      "network_ontology_lookup_enabled": false,
+      "node_fingerprint": "35f3c6c48696299092a8b0679862a9f350023e6fe4a4192a76d48eda0ff21bcd",
+      "parent_domain_id": null,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_ids": [
+        "business-and-management-general"
+      ],
+      "universal_wildcard_domain": false
+    },
+    {
+      "deterministic_hierarchy": true,
+      "domain_id": "computing-and-information-systems",
+      "explicit_safe_ids": true,
+      "label": "Computing and Information Systems",
+      "model_generated_domain": false,
+      "network_ontology_lookup_enabled": false,
+      "node_fingerprint": "c991855d09c0ec0fb0f06a255a13ecdbc1ef7e1f0dd131372d54e6552cc407c9",
+      "parent_domain_id": null,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_ids": [
+        "computing-and-information-systems-general"
+      ],
+      "universal_wildcard_domain": false
+    },
+    {
+      "deterministic_hierarchy": true,
+      "domain_id": "cross-domain-methodology",
+      "explicit_safe_ids": true,
+      "label": "Cross Domain Methodology",
+      "model_generated_domain": false,
+      "network_ontology_lookup_enabled": false,
+      "node_fingerprint": "094a0019d56dd25af6cd8b0e5f813cffd517508dd46c673ce047eca1c6ea56a6",
+      "parent_domain_id": null,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_ids": [
+        "cross-domain-methodology-general"
+      ],
+      "universal_wildcard_domain": false
+    },
+    {
+      "deterministic_hierarchy": true,
+      "domain_id": "cybersecurity-and-digital-trust",
+      "explicit_safe_ids": true,
+      "label": "Cybersecurity and Digital Trust",
+      "model_generated_domain": false,
+      "network_ontology_lookup_enabled": false,
+      "node_fingerprint": "423f2a0930125574b2ff7929d8559b9606cec18df7d935aecbeed2f12ad8eecc",
+      "parent_domain_id": null,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_ids": [
+        "cybersecurity-and-digital-trust-general"
+      ],
+      "universal_wildcard_domain": false
+    },
+    {
+      "deterministic_hierarchy": true,
+      "domain_id": "economics-and-finance",
+      "explicit_safe_ids": true,
+      "label": "Economics and Finance",
+      "model_generated_domain": false,
+      "network_ontology_lookup_enabled": false,
+      "node_fingerprint": "60f8b04e9f8d29776a47755aa634305225237511e98de746c4c173dbe40e6b3c",
+      "parent_domain_id": null,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_ids": [
+        "economics-and-finance-general"
+      ],
+      "universal_wildcard_domain": false
+    },
+    {
+      "deterministic_hierarchy": true,
+      "domain_id": "education-and-learning",
+      "explicit_safe_ids": true,
+      "label": "Education and Learning",
+      "model_generated_domain": false,
+      "network_ontology_lookup_enabled": false,
+      "node_fingerprint": "4d240f4134a629ab6b6bf7b7e3bb0c1f76ba92c81bce8ad3cc1fe88e716021d3",
+      "parent_domain_id": null,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_ids": [
+        "education-and-learning-general"
+      ],
+      "universal_wildcard_domain": false
+    },
+    {
+      "deterministic_hierarchy": true,
+      "domain_id": "engineering",
+      "explicit_safe_ids": true,
+      "label": "Engineering",
+      "model_generated_domain": false,
+      "network_ontology_lookup_enabled": false,
+      "node_fingerprint": "27174afb9a153ba97713b8a90bcdda4baa49b7f290f73f39da433c46cdc418e3",
+      "parent_domain_id": null,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_ids": [
+        "engineering-general"
+      ],
+      "universal_wildcard_domain": false
+    },
+    {
+      "deterministic_hierarchy": true,
+      "domain_id": "environment-and-earth-systems",
+      "explicit_safe_ids": true,
+      "label": "Environment and Earth Systems",
+      "model_generated_domain": false,
+      "network_ontology_lookup_enabled": false,
+      "node_fingerprint": "cc7a8958e12134adc45e766690858dca5623c124b4b83aacad588612a81b8dd1",
+      "parent_domain_id": null,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_ids": [
+        "environment-and-earth-systems-general"
+      ],
+      "universal_wildcard_domain": false
+    },
+    {
+      "deterministic_hierarchy": true,
+      "domain_id": "humanities",
+      "explicit_safe_ids": true,
+      "label": "Humanities",
+      "model_generated_domain": false,
+      "network_ontology_lookup_enabled": false,
+      "node_fingerprint": "fcce9dfb668815c0abd4b5f5c11296d4d57c9ced842fffe7abc6a12051fd4c9e",
+      "parent_domain_id": null,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_ids": [
+        "humanities-general"
+      ],
+      "universal_wildcard_domain": false
+    },
+    {
+      "deterministic_hierarchy": true,
+      "domain_id": "law-and-regulation",
+      "explicit_safe_ids": true,
+      "label": "Law and Regulation",
+      "model_generated_domain": false,
+      "network_ontology_lookup_enabled": false,
+      "node_fingerprint": "eab2646f534acd8662f602f0c6405dd567654813de5c4aa51694f57f1ec55fbb",
+      "parent_domain_id": null,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_ids": [
+        "law-and-regulation-general"
+      ],
+      "universal_wildcard_domain": false
+    },
+    {
+      "deterministic_hierarchy": true,
+      "domain_id": "life-sciences",
+      "explicit_safe_ids": true,
+      "label": "Life Sciences",
+      "model_generated_domain": false,
+      "network_ontology_lookup_enabled": false,
+      "node_fingerprint": "de46ab6240ac7adfa0be6b8b613c00e723214c8057bd8a11d99d91515720aa72",
+      "parent_domain_id": null,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_ids": [
+        "life-sciences-general"
+      ],
+      "universal_wildcard_domain": false
+    },
+    {
+      "deterministic_hierarchy": true,
+      "domain_id": "mathematics-and-statistics",
+      "explicit_safe_ids": true,
+      "label": "Mathematics and Statistics",
+      "model_generated_domain": false,
+      "network_ontology_lookup_enabled": false,
+      "node_fingerprint": "e43a1ccd0b9cbe6df89a92a39a629344196271d60d3efecdc5353381f458454b",
+      "parent_domain_id": null,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_ids": [
+        "mathematics-and-statistics-general"
+      ],
+      "universal_wildcard_domain": false
+    },
+    {
+      "deterministic_hierarchy": true,
+      "domain_id": "medicine-and-health",
+      "explicit_safe_ids": true,
+      "label": "Medicine and Health",
+      "model_generated_domain": false,
+      "network_ontology_lookup_enabled": false,
+      "node_fingerprint": "40917b0fd32b5d7477f304e7b29212e3a68f40f7b0867c04ad0a0e45033632d9",
+      "parent_domain_id": null,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_ids": [
+        "medicine-and-health-general"
+      ],
+      "universal_wildcard_domain": false
+    },
+    {
+      "deterministic_hierarchy": true,
+      "domain_id": "operations-and-supply-chain",
+      "explicit_safe_ids": true,
+      "label": "Operations and Supply Chain",
+      "model_generated_domain": false,
+      "network_ontology_lookup_enabled": false,
+      "node_fingerprint": "4fb7638b03dcace8f09cac298a0af775d14bc1ad84d109d70b253f4d3c64be53",
+      "parent_domain_id": null,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_ids": [
+        "operations-and-supply-chain-general"
+      ],
+      "universal_wildcard_domain": false
+    },
+    {
+      "deterministic_hierarchy": true,
+      "domain_id": "physical-sciences",
+      "explicit_safe_ids": true,
+      "label": "Physical Sciences",
+      "model_generated_domain": false,
+      "network_ontology_lookup_enabled": false,
+      "node_fingerprint": "8ddf30453846007e622a620e44c5b8c651da44459082cc59aab9e505ffd63976",
+      "parent_domain_id": null,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_ids": [
+        "physical-sciences-general"
+      ],
+      "universal_wildcard_domain": false
+    },
+    {
+      "deterministic_hierarchy": true,
+      "domain_id": "public-policy-and-government",
+      "explicit_safe_ids": true,
+      "label": "Public Policy and Government",
+      "model_generated_domain": false,
+      "network_ontology_lookup_enabled": false,
+      "node_fingerprint": "ab74336081fbcc010b67f063ce03c35f61e82e9caa1a36c1d22faa820f5533be",
+      "parent_domain_id": null,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_ids": [
+        "public-policy-and-government-general"
+      ],
+      "universal_wildcard_domain": false
+    },
+    {
+      "deterministic_hierarchy": true,
+      "domain_id": "safety-risk-and-resilience",
+      "explicit_safe_ids": true,
+      "label": "Safety Risk and Resilience",
+      "model_generated_domain": false,
+      "network_ontology_lookup_enabled": false,
+      "node_fingerprint": "05f6bf374fc4b4c022a70c70c7c81c5e13f9661855aab7c06fcef495eb739c35",
+      "parent_domain_id": null,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_ids": [
+        "safety-risk-and-resilience-general"
+      ],
+      "universal_wildcard_domain": false
+    },
+    {
+      "deterministic_hierarchy": true,
+      "domain_id": "social-sciences",
+      "explicit_safe_ids": true,
+      "label": "Social Sciences",
+      "model_generated_domain": false,
+      "network_ontology_lookup_enabled": false,
+      "node_fingerprint": "bf4d574b5fa71884dc5aa8acc38fa810aa1aa7410487351f95ad415051b78978",
+      "parent_domain_id": null,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_ids": [
+        "social-sciences-general"
+      ],
+      "universal_wildcard_domain": false
+    }
+  ],
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-domain-taxonomy/v1",
+  "specialties": [
+    {
+      "domain_id": "business-and-management",
+      "label": "Business and Management General",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_fingerprint": "d6752f789432976bf80f7e075e00ed655dadbb85b5c6b0c2ca9f5c83d5c1ff7d",
+      "specialty_id": "business-and-management-general"
+    },
+    {
+      "domain_id": "computing-and-information-systems",
+      "label": "Computing and Information Systems General",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_fingerprint": "26ecb2a9b4e7b0a693650622a1498a22f9531678a2f1941b9ea5a262cc840809",
+      "specialty_id": "computing-and-information-systems-general"
+    },
+    {
+      "domain_id": "cross-domain-methodology",
+      "label": "Cross Domain Methodology General",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_fingerprint": "086c9e44cb83dd1e85162abe22f0a8b79905711a3d0f78111ababefe6051f89a",
+      "specialty_id": "cross-domain-methodology-general"
+    },
+    {
+      "domain_id": "cybersecurity-and-digital-trust",
+      "label": "Cybersecurity and Digital Trust General",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_fingerprint": "4dfc16196bd0a68371c9c9ceafd341e7c50095bc51e9cd2fb92494268d8c9d33",
+      "specialty_id": "cybersecurity-and-digital-trust-general"
+    },
+    {
+      "domain_id": "economics-and-finance",
+      "label": "Economics and Finance General",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_fingerprint": "7db90383818dc76415e4ebbfd95de5d6df020a486c2fefef3e2167c253bcb2b5",
+      "specialty_id": "economics-and-finance-general"
+    },
+    {
+      "domain_id": "education-and-learning",
+      "label": "Education and Learning General",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_fingerprint": "1106035abfd72cea1369fd9f5a799b15718b125166dad52e86e0561671d932b3",
+      "specialty_id": "education-and-learning-general"
+    },
+    {
+      "domain_id": "engineering",
+      "label": "Engineering General",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_fingerprint": "0aeb7609b15ef8870aae8bd6cacd730d432b42cf44e97da32f5559c8d69c50f7",
+      "specialty_id": "engineering-general"
+    },
+    {
+      "domain_id": "environment-and-earth-systems",
+      "label": "Environment and Earth Systems General",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_fingerprint": "2f5e1920b6b2df5f39e108c1d6ab86dc42c9e4396ec4092f9f9628ebf5daf65f",
+      "specialty_id": "environment-and-earth-systems-general"
+    },
+    {
+      "domain_id": "humanities",
+      "label": "Humanities General",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_fingerprint": "3a7eb5ec14bc53bc2246047e490da29664952ce567f6b6f0da2c7de2a99214bd",
+      "specialty_id": "humanities-general"
+    },
+    {
+      "domain_id": "law-and-regulation",
+      "label": "Law and Regulation General",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_fingerprint": "d1205cbe630072d77dfe86fecbc54ff651ef842ec3b610280d0aab264bfc3ac1",
+      "specialty_id": "law-and-regulation-general"
+    },
+    {
+      "domain_id": "life-sciences",
+      "label": "Life Sciences General",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_fingerprint": "c1b553f9eef8487e22aed0803cff3e7672b7878e1bdf80c7bf9821a5f90ca4c4",
+      "specialty_id": "life-sciences-general"
+    },
+    {
+      "domain_id": "mathematics-and-statistics",
+      "label": "Mathematics and Statistics General",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_fingerprint": "3d02e2a068867f21f628717b5f70bd04280f3232e11fe0d772335d2e1064b6e6",
+      "specialty_id": "mathematics-and-statistics-general"
+    },
+    {
+      "domain_id": "medicine-and-health",
+      "label": "Medicine and Health General",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_fingerprint": "6a09789ca1f8a08664527f94761a7888e36dc5c8c823a39238cbf76145d275ef",
+      "specialty_id": "medicine-and-health-general"
+    },
+    {
+      "domain_id": "operations-and-supply-chain",
+      "label": "Operations and Supply Chain General",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_fingerprint": "15024737d60b17864862044aa25dec9dcbe1517f20a05c8c6ac6edd3fd91db79",
+      "specialty_id": "operations-and-supply-chain-general"
+    },
+    {
+      "domain_id": "physical-sciences",
+      "label": "Physical Sciences General",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_fingerprint": "027c2f6edd0cc9904153d5143c0e6de9b96ac8daf4bdc14956300fde4967e03d",
+      "specialty_id": "physical-sciences-general"
+    },
+    {
+      "domain_id": "public-policy-and-government",
+      "label": "Public Policy and Government General",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_fingerprint": "93f352bf3f5c935d6205c4f9d8c370620fa0ee6da889119039f118e89e2af99b",
+      "specialty_id": "public-policy-and-government-general"
+    },
+    {
+      "domain_id": "safety-risk-and-resilience",
+      "label": "Safety Risk and Resilience General",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_fingerprint": "04e8f046fddcd8a0d0312ef3b0df9b7d7e9f39bb00da0a624a63f46cb6934b4a",
+      "specialty_id": "safety-risk-and-resilience-general"
+    },
+    {
+      "domain_id": "social-sciences",
+      "label": "Social Sciences General",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-domain-taxonomy/v1",
+      "specialty_fingerprint": "c82dce5d73510e3080695771b2228c884e73b3e625a36da132cb5be7ee56fd00",
+      "specialty_id": "social-sciences-general"
+    }
+  ],
+  "taxonomy_fingerprint": "5f15447dbcb2e417fc6b0c1f0a3364e12f0dfc4b8c69ce267b6d35fa52ce4469",
+  "taxonomy_version": "domain-taxonomy-v1",
+  "top_level_domain_ids": [
+    "business-and-management",
+    "computing-and-information-systems",
+    "cross-domain-methodology",
+    "cybersecurity-and-digital-trust",
+    "economics-and-finance",
+    "education-and-learning",
+    "engineering",
+    "environment-and-earth-systems",
+    "humanities",
+    "law-and-regulation",
+    "life-sciences",
+    "mathematics-and-statistics",
+    "medicine-and-health",
+    "operations-and-supply-chain",
+    "physical-sciences",
+    "public-policy-and-government",
+    "safety-risk-and-resilience",
+    "social-sciences"
+  ],
+  "universal_wildcard_domain_enabled": false
+}

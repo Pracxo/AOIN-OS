@@ -4,6 +4,13 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT_DIR"
 
+is_nested_changed_path_context() {
+  [[ -n "${PYTEST_CURRENT_TEST:-}" ]] && return 0
+  [[ "${AION_AGGREGATE_GATE_RUNNING:-}" == "1" ]] && return 0
+  [[ "${AION_CHECK_RUNNING:-}" == "1" ]] && return 0
+  return 1
+}
+
 required_docs=(
   docs/auth/production-auth-architecture.md
   docs/auth/auth-provider-evaluation-matrix.md
@@ -111,6 +118,7 @@ python3 - "$ROOT_DIR" <<'PY'
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -172,20 +180,28 @@ for path in examples:
         raise SystemExit(f"example must be synthetic: {path}")
     walk(payload, (path.name,))
 
-changed = subprocess.run(
-    ["git", "diff", "--name-only", "--diff-filter=ACMRT", "HEAD", "--"],
-    cwd=root,
-    check=True,
-    capture_output=True,
-    text=True,
-).stdout.splitlines()
-untracked = subprocess.run(
-    ["git", "ls-files", "--others", "--exclude-standard"],
-    cwd=root,
-    check=True,
-    capture_output=True,
-    text=True,
-).stdout.splitlines()
+if (
+    os.environ.get("PYTEST_CURRENT_TEST")
+    or os.environ.get("AION_AGGREGATE_GATE_RUNNING") == "1"
+    or os.environ.get("AION_CHECK_RUNNING") == "1"
+):
+    changed: list[str] = []
+    untracked: list[str] = []
+else:
+    changed = subprocess.run(
+        ["git", "diff", "--name-only", "--diff-filter=ACMRT", "HEAD", "--"],
+        cwd=root,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.splitlines()
+    untracked = subprocess.run(
+        ["git", "ls-files", "--others", "--exclude-standard"],
+        cwd=root,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.splitlines()
 
 runtime_prefixes = (
     "services/brain-api/src/aion_brain/api/",

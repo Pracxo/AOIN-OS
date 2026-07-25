@@ -19,7 +19,7 @@ is_nested_gate_context() {
   return 1
 }
 
-./scripts/knowledge-intelligence-domain-expert-mesh-authorization-check.sh
+./scripts/knowledge-intelligence-domain-expert-mesh-check.sh
 
 "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations

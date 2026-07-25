@@ -101,7 +101,13 @@ def test_aion_212_current_projection_matches_active_authorization():
         assert payload["active_knowledge_implementation_task"] == "AION-213"
         assert payload["active_cognitive_implementation_authorization_count"] == 0
         assert payload["domain_expert_mesh_authorized"] is True
-        assert payload["domain_expert_mesh_implemented"] is False
+        if payload["domain_expert_mesh_implemented"] is True:
+            assert (
+                payload["domain_expert_mesh_state"]
+                == "implemented_deterministic_in_memory_advisory_persistent_write_disabled"
+            )
+        else:
+            assert payload["domain_expert_mesh_implemented"] is False
         assert payload["domain_expert_mesh_runtime_enabled"] is False
         assert payload["persistent_expert_mesh_write_enabled"] is False
 

@@ -1,0 +1,13 @@
+{
+  "confidence_increased": false,
+  "critique_id": "critique-report-case-001-domain_analyst-evidence_auditor",
+  "critique_preserved": true,
+  "report_rewritten": false,
+  "respondent_profile_id": "computational-computing-and-information-systems-domain-analyst",
+  "response_code": "acknowledge",
+  "response_fingerprint": "b748de0e313ae5745d4b9a737364cd7eeffc87fa6ec13df2ebbecc2d6d73297d",
+  "response_id": "response-critique-report-case-001-domain_analyst-evidence_auditor",
+  "retained_disagreement": false,
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-expert-critique-response/v1"
+}

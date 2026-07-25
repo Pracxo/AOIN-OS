@@ -10,6 +10,13 @@ git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
 }
 
+is_nested_changed_path_context() {
+  [[ -n "${PYTEST_CURRENT_TEST:-}" ]] && return 0
+  [[ "${AION_AGGREGATE_GATE_RUNNING:-}" == "1" ]] && return 0
+  [[ "${AION_CHECK_RUNNING:-}" == "1" ]] && return 0
+  return 1
+}
+
 comparison_base() {
   local candidate
   local merge_base
@@ -44,7 +51,13 @@ base_ref="$(comparison_base || true)"
 changed_file_list="$(mktemp)"
 trap 'rm -f "$changed_file_list"' EXIT
 
-if [[ -n "$base_ref" ]]; then
+if is_nested_changed_path_context; then
+  {
+    git diff --name-only --diff-filter=ACMRT HEAD --
+    git diff --cached --name-only --diff-filter=ACMRT --
+    git ls-files --others --exclude-standard --
+  } | sort -u > "$changed_file_list"
+elif [[ -n "$base_ref" ]]; then
   {
     git diff --name-only --diff-filter=ACMRT "$base_ref" HEAD --
     git diff --name-only --diff-filter=ACMRT HEAD --

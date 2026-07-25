@@ -28,8 +28,7 @@ def test_domain_expert_mesh_threat_model_names_core_no_go_risks():
 def test_domain_expert_mesh_runtime_hold_keeps_prohibited_capabilities_disabled():
     runtime = json.loads(
         (
-            REPO_ROOT
-            / "examples/knowledge-intelligence/domain-expert-mesh-runtime-hold.json"
+            REPO_ROOT / "examples/knowledge-intelligence/domain-expert-mesh-runtime-hold.json"
         ).read_text()
     )
     for key in (

@@ -60,6 +60,17 @@ AION211_SOURCE = (
     "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_evidence.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
 )
+AION213_SOURCE = (
+    "services/brain-api/src/aion_brain/contracts/knowledge_domain_expert_mesh.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_deliberation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_mesh.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_profiles.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_routing.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_synthesis.py",
+)
 
 
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -110,6 +121,8 @@ for parts in changed_entries():
         if Path(normalized).name in PROHIBITED_NAMES:
             raise SystemExit(f"dependency/package file changed: {normalized}")
         if normalized in AION211_SOURCE:
+            continue
+        if normalized in AION213_SOURCE:
             continue
         if normalized.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")

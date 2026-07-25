@@ -1,0 +1,12 @@
+{
+  "created_at": "2026-01-01T00:00:00Z",
+  "incident_fingerprint": "466741d0febb2bcf740154be756730104c5a2b21a5df6ae6f4049058a092f5a2",
+  "incident_id": "incident-domain-mesh-001",
+  "reason_codes": [
+    "domain_mesh_operator_review_required"
+  ],
+  "redacted_summary": "Domain mesh disagreement requires operator review",
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-expert-mesh-evidence/v1",
+  "severity": "medium"
+}

@@ -78,6 +78,22 @@ def _changed_forbidden_files() -> set[str]:
 
 
 def test_aion_212_branch_does_not_add_aion_213_runtime_source():
+    import json
+
+    program = json.loads(
+        (REPO_ROOT / "docs/knowledge-intelligence/program-ledger.json").read_text()
+    )
+    if (
+        program.get("program_state")
+        == "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout"
+    ):
+        for relative in AION213_SOURCE:
+            assert (REPO_ROOT / relative).exists(), relative
+        assert program["model_call_enabled"] is False
+        assert program["persistent_mesh_write_enabled"] is False
+        assert program["runtime_effect"] is False
+        return
+
     for relative in AION213_SOURCE:
         assert not (REPO_ROOT / relative).exists(), relative
 

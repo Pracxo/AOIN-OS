@@ -51,8 +51,13 @@ PROHIBITED_NAMES = {
 }
 AION213_SOURCE_PREFIXES = (
     "services/brain-api/src/aion_brain/contracts/knowledge_domain_expert_mesh.py",
-    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_mesh",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_",
 )
+PROGRAM_PATH = ROOT / "docs/knowledge-intelligence/program-ledger.json"
+PROGRAM_STATE = ""
+if PROGRAM_PATH.exists():
+    PROGRAM_STATE = __import__("json").loads(PROGRAM_PATH.read_text()).get("program_state", "")
 
 
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -106,7 +111,14 @@ for parts in changed_entries():
         if Path(normalized).name in PROHIBITED_NAMES:
             raise SystemExit(f"dependency/package file changed: {normalized}")
         if normalized.startswith(AION213_SOURCE_PREFIXES):
-            raise SystemExit(f"AION-213 runtime source is not authorized in AION-212: {normalized}")
+            if (
+                PROGRAM_STATE
+                != "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout"
+            ):
+                raise SystemExit(
+                    f"AION-213 runtime source is not authorized in AION-212: {normalized}"
+                )
+            continue
         if normalized.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")
         if normalized not in ALLOWED_EXACT and not any(

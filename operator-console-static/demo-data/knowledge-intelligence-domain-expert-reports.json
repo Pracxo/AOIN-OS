@@ -1,0 +1,207 @@
+[
+  {
+    "assessment_ids": [
+      "assessment-001",
+      "assessment-002"
+    ],
+    "assignment_id": "assignment-case-001-domain_analyst",
+    "assumption_codes": [],
+    "automatic_action": false,
+    "belief_mutated": false,
+    "case_id": "case-001",
+    "claim_accepted": false,
+    "claim_ids": [
+      "claim-001",
+      "claim-002"
+    ],
+    "claim_rejected": false,
+    "computational_profile": true,
+    "evidence_gap_codes": [
+      "domain_mesh_evidence_gap_recorded"
+    ],
+    "evidence_reference_ids": [
+      "conflict-001"
+    ],
+    "explicit_abstention": true,
+    "finding_codes": [
+      "domain_mesh_report_created",
+      "domain_mesh_assessment_reference_resolved",
+      "domain_mesh_underlying_cap_propagated",
+      "domain_mesh_confidence_non_amplification_enforced",
+      "domain_mesh_evidence_gap_recorded"
+    ],
+    "human_authored": false,
+    "human_identity_claimed": false,
+    "knowledge_promoted": false,
+    "limitation_codes": [
+      "domain_mesh_limitation_recorded"
+    ],
+    "panel_id": "panel-case-001",
+    "perspective_role": "domain_analyst",
+    "position": "abstain",
+    "professional_credential_claimed": false,
+    "profile_id": "computational-computing-and-information-systems-domain-analyst",
+    "report_confidence_cap": "0.550000",
+    "report_fingerprint": "142e63cba7947bbea1880462743cd3239f8776efd2180890861b4a47f4f0aa74",
+    "report_id": "report-case-001-domain_analyst",
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-expert-perspective-report/v1",
+    "truth_decision": false,
+    "underlying_assessment_confidence_cap": "0.550000"
+  },
+  {
+    "assessment_ids": [
+      "assessment-001",
+      "assessment-002"
+    ],
+    "assignment_id": "assignment-case-001-evidence_auditor",
+    "assumption_codes": [],
+    "automatic_action": false,
+    "belief_mutated": false,
+    "case_id": "case-001",
+    "claim_accepted": false,
+    "claim_ids": [
+      "claim-001",
+      "claim-002"
+    ],
+    "claim_rejected": false,
+    "computational_profile": true,
+    "evidence_gap_codes": [
+      "domain_mesh_evidence_gap_recorded"
+    ],
+    "evidence_reference_ids": [
+      "conflict-001"
+    ],
+    "explicit_abstention": true,
+    "finding_codes": [
+      "domain_mesh_report_created",
+      "domain_mesh_assessment_reference_resolved",
+      "domain_mesh_underlying_cap_propagated",
+      "domain_mesh_confidence_non_amplification_enforced",
+      "domain_mesh_evidence_reference_resolved",
+      "domain_mesh_evidence_gap_recorded"
+    ],
+    "human_authored": false,
+    "human_identity_claimed": false,
+    "knowledge_promoted": false,
+    "limitation_codes": [
+      "domain_mesh_limitation_recorded"
+    ],
+    "panel_id": "panel-case-001",
+    "perspective_role": "evidence_auditor",
+    "position": "abstain",
+    "professional_credential_claimed": false,
+    "profile_id": "computational-cross-domain-evidence-auditor",
+    "report_confidence_cap": "0.550000",
+    "report_fingerprint": "ba4136ad1d8237612c91df59fb06e63a4a4a2fd78098de5221d8aeeece7c4f58",
+    "report_id": "report-case-001-evidence_auditor",
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-expert-perspective-report/v1",
+    "truth_decision": false,
+    "underlying_assessment_confidence_cap": "0.550000"
+  },
+  {
+    "assessment_ids": [
+      "assessment-001",
+      "assessment-002"
+    ],
+    "assignment_id": "assignment-case-001-methodological_skeptic",
+    "assumption_codes": [
+      "domain_mesh_assumption_recorded"
+    ],
+    "automatic_action": false,
+    "belief_mutated": false,
+    "case_id": "case-001",
+    "claim_accepted": false,
+    "claim_ids": [
+      "claim-001",
+      "claim-002"
+    ],
+    "claim_rejected": false,
+    "computational_profile": true,
+    "evidence_gap_codes": [
+      "domain_mesh_evidence_gap_recorded"
+    ],
+    "evidence_reference_ids": [
+      "conflict-001"
+    ],
+    "explicit_abstention": true,
+    "finding_codes": [
+      "domain_mesh_report_created",
+      "domain_mesh_assessment_reference_resolved",
+      "domain_mesh_underlying_cap_propagated",
+      "domain_mesh_confidence_non_amplification_enforced",
+      "domain_mesh_assumption_recorded",
+      "domain_mesh_limitation_recorded",
+      "domain_mesh_evidence_gap_recorded"
+    ],
+    "human_authored": false,
+    "human_identity_claimed": false,
+    "knowledge_promoted": false,
+    "limitation_codes": [
+      "domain_mesh_limitation_recorded"
+    ],
+    "panel_id": "panel-case-001",
+    "perspective_role": "methodological_skeptic",
+    "position": "abstain",
+    "professional_credential_claimed": false,
+    "profile_id": "computational-cross-domain-methodological-skeptic",
+    "report_confidence_cap": "0.550000",
+    "report_fingerprint": "1bff235e4f8001549bc1dcf1542a4ab14543f65c79ea1814c51eb5a5e230688a",
+    "report_id": "report-case-001-methodological_skeptic",
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-expert-perspective-report/v1",
+    "truth_decision": false,
+    "underlying_assessment_confidence_cap": "0.550000"
+  },
+  {
+    "assessment_ids": [
+      "assessment-001",
+      "assessment-002"
+    ],
+    "assignment_id": "assignment-case-001-synthesis_coordinator",
+    "assumption_codes": [],
+    "automatic_action": false,
+    "belief_mutated": false,
+    "case_id": "case-001",
+    "claim_accepted": false,
+    "claim_ids": [
+      "claim-001",
+      "claim-002"
+    ],
+    "claim_rejected": false,
+    "computational_profile": true,
+    "evidence_gap_codes": [
+      "domain_mesh_evidence_gap_recorded"
+    ],
+    "evidence_reference_ids": [
+      "conflict-001"
+    ],
+    "explicit_abstention": true,
+    "finding_codes": [
+      "domain_mesh_report_created",
+      "domain_mesh_assessment_reference_resolved",
+      "domain_mesh_underlying_cap_propagated",
+      "domain_mesh_confidence_non_amplification_enforced",
+      "domain_mesh_evidence_gap_recorded"
+    ],
+    "human_authored": false,
+    "human_identity_claimed": false,
+    "knowledge_promoted": false,
+    "limitation_codes": [
+      "domain_mesh_limitation_recorded"
+    ],
+    "panel_id": "panel-case-001",
+    "perspective_role": "synthesis_coordinator",
+    "position": "abstain",
+    "professional_credential_claimed": false,
+    "profile_id": "computational-synthesis-coordinator",
+    "report_confidence_cap": "0.550000",
+    "report_fingerprint": "77cb62262f406902b6a8571947ceda58797b2c3f3b92fc0e1c7828f475ec4f43",
+    "report_id": "report-case-001-synthesis_coordinator",
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-expert-perspective-report/v1",
+    "truth_decision": false,
+    "underlying_assessment_confidence_cap": "0.550000"
+  }
+]

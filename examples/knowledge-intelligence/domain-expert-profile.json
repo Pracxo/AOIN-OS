@@ -1,48 +1,71 @@
 {
-  "authorization_transaction_id": "AION-212-KI-0005",
+  "capability_scope": {
+    "domain_ids": [
+      "computing-and-information-systems"
+    ],
+    "jurisdiction_ids": [],
+    "perspective_roles": [
+      "domain_analyst"
+    ],
+    "runtime_effect": false,
+    "specialty_ids": [
+      "computing-and-information-systems-general"
+    ],
+    "supported_risk_classes": [
+      "critical",
+      "high",
+      "low",
+      "moderate"
+    ],
+    "temporal_scope_required": false,
+    "version_target_ids": []
+  },
   "computational_profile": true,
   "domain_ids": [
-    "domain-regulatory-001"
+    "computing-and-information-systems"
   ],
+  "human_expert_impersonation": false,
   "human_identity_claimed": false,
-  "independence_group_id": "expert-independence-group-001",
-  "jurisdiction_ids": [
-    "global"
-  ],
+  "independence_group_id": "independence-computing-and-information-systems-analyst",
+  "jurisdiction_ids": [],
+  "licensed_professional_claimed": false,
   "model_provider_required": false,
   "network_access_required": false,
   "perspective_roles": [
-    "evidence_auditor"
+    "domain_analyst"
   ],
   "professional_credential_claimed": false,
-  "profile_fingerprint": "domain-expert-profile-fingerprint-001",
-  "profile_id": "computational-profile-evidence-auditor-001",
+  "profile_fingerprint": "eeecc3555aebe2c608fa58fb45c9f66cd1adec4f199d7e607271709f312a9f77",
+  "profile_id": "computational-computing-and-information-systems-domain-analyst",
   "profile_version": "profile-v1",
-  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
   "prohibited_input_kinds": [
-    "source_body",
-    "raw_prompt",
     "credential",
-    "hidden_reasoning"
+    "personal-data",
+    "private-key",
+    "raw-prompt",
+    "source-body",
+    "source-preview",
+    "token"
   ],
-  "read_only": true,
-  "redacted": true,
   "required_input_kinds": [
-    "claim_reference",
-    "epistemic_assessment_reference"
+    "assessment-id",
+    "claim-id",
+    "domain-id",
+    "risk-class",
+    "scope-id",
+    "specialty-id"
   ],
   "runtime_effect": false,
   "schema_version": "aion-knowledge-domain-expert-profile/v1",
   "specialty_ids": [
-    "specialty-policy-001"
+    "computing-and-information-systems-general"
   ],
   "supported_risk_classes": [
-    "standard",
-    "high_stakes"
+    "critical",
+    "high",
+    "low",
+    "moderate"
   ],
-  "synthetic": true,
   "tool_execution_required": false,
-  "version_target_ids": [
-    "policy-v1"
-  ]
+  "version_target_ids": []
 }

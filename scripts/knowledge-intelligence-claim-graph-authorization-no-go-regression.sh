@@ -32,6 +32,7 @@ if PROGRAM_PATH.exists():
                 "epistemic_truth_engine_authorized_not_implemented",
                 "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
                 "domain_expert_mesh_authorized_not_implemented",
+                "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
             }
         )
     except json.JSONDecodeError:
@@ -115,6 +116,7 @@ ALLOWED_SCRIPTS = {
     "scripts/connector-runtime-no-external-call-regression.sh",
     "scripts/lib/cognitive_architecture_governance.py",
     "scripts/lib/v02-production-auth-scan-exclusions.sh",
+    "scripts/operator-action-write-path-no-go-regression.sh",
     "scripts/operator-console-static-check.sh",
     "scripts/production-auth-architecture-check.sh",
     "scripts/production-auth-core-check.sh",
@@ -133,6 +135,8 @@ POST_AION210_ALLOWED_EXACT = {
     "docs/adr/0174-temporal-claim-evidence-graph-evaluation-and-epistemic-truth-engine-authorization.md",
     "docs/adr/0175-deterministic-epistemic-evidence-assessment-engine-core.md",
     "docs/knowledge-intelligence/aion-211-checklist.md",
+    "docs/knowledge-intelligence/aion-213-checklist.md",
+    "docs/knowledge-intelligence/computational-expert-profiles.md",
     "examples/knowledge-intelligence/claim-epistemic-assessment.json",
     "examples/knowledge-intelligence/evidence-contribution.json",
     "examples/knowledge-intelligence/role-evidence-score.json",
@@ -158,6 +162,7 @@ POST_AION210_ALLOWED_EXACT = {
     "scripts/lib/knowledge_intelligence_claim_graph_operator_evaluation.py",
     "services/brain-api/tests/knowledge_source_registry_test_helpers.py",
     "services/brain-api/tests/knowledge_claim_graph_evaluation_test_helpers.py",
+    "services/brain-api/tests/knowledge_domain_expert_mesh_test_helpers.py",
     "services/brain-api/tests/test_knowledge_source_registry_authorization_closeout.py",
     "services/brain-api/tests/test_self_improvement_postmerge_evidence_reconciliation.py",
     "services/brain-api/tests/test_knowledge_claim_graph_authorization_closeout.py",
@@ -165,6 +170,7 @@ POST_AION210_ALLOWED_EXACT = {
     "services/brain-api/tests/test_knowledge_claim_graph_operator_evaluation_docs.py",
     "services/brain-api/tests/test_knowledge_claim_graph_evaluation_no_side_effects.py",
     "services/brain-api/tests/test_knowledge_claim_graph_evaluation_repository_integrity.py",
+    "services/brain-api/tests/test_knowledge_intelligence_current_projection.py",
 }
 POST_AION210_ALLOWED_PREFIXES = (
     "docs/knowledge-intelligence/claim-graph-evaluation",
@@ -193,8 +199,13 @@ POST_AION210_ALLOWED_PREFIXES = (
     "docs/release/knowledge-intelligence-epistemic-assessment-evaluation",
     "docs/release/knowledge-intelligence-domain-expert-mesh",
     "docs/adr/0176-epistemic-assessment-evaluation-and-domain-expert-mesh-authorization.md",
+    "docs/adr/0177-deterministic-domain-expert-mesh-core.md",
     "operator-console-static/demo-data/knowledge-intelligence-domain-expert-mesh",
+    "operator-console-static/demo-data/knowledge-intelligence-domain-expert-",
+    "examples/knowledge-intelligence/domain-expert-",
     "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_",
+    "services/brain-api/src/aion_brain/contracts/knowledge_domain_expert_mesh.py",
     "services/brain-api/tests/test_knowledge_epistemic_assessment_",
     "services/brain-api/tests/test_knowledge_epistemic_truth_",
     "services/brain-api/tests/test_knowledge_domain_expert_mesh_",

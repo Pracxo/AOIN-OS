@@ -248,6 +248,14 @@ allowed_authorization_demo_names = {
     "knowledge-intelligence-domain-expert-mesh-panel-policy.json",
     "knowledge-intelligence-domain-expert-mesh-panel.json",
     "knowledge-intelligence-domain-expert-mesh-runtime-hold.json",
+    "knowledge-intelligence-domain-expert-critiques.json",
+    "knowledge-intelligence-domain-expert-disagreement.json",
+    "knowledge-intelligence-domain-expert-integrity.json",
+    "knowledge-intelligence-domain-expert-mesh.json",
+    "knowledge-intelligence-domain-expert-panel.json",
+    "knowledge-intelligence-domain-expert-reports.json",
+    "knowledge-intelligence-domain-expert-runtime-hold.json",
+    "knowledge-intelligence-domain-expert-synthesis.json",
 }
 aion161_allowed_policy_markers = {
     "runtime_private_key",

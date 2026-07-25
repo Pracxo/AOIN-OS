@@ -79,6 +79,17 @@ EPISTEMIC_ASSESSMENT_SOURCE_PATHS = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_freshness.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_integrity.py",
 }
+DOMAIN_EXPERT_MESH_SOURCE_PATHS = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_domain_expert_mesh.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_deliberation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_mesh.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_profiles.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_routing.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_synthesis.py",
+}
 PROHIBITED_NAMES = {
     "package.json",
     "package-lock.json",
@@ -167,6 +178,12 @@ for parts in changed_entries():
             if CLAIM_GRAPH_CONTEXT and normalized in CLAIM_GRAPH_SOURCE_PATHS:
                 continue
             if EPISTEMIC_ASSESSMENT_CONTEXT and normalized in EPISTEMIC_ASSESSMENT_SOURCE_PATHS:
+                continue
+            if (
+                program_state
+                == "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout"
+                and normalized in DOMAIN_EXPERT_MESH_SOURCE_PATHS
+            ):
                 continue
             raise SystemExit(f"runtime source path changed on AION-208: {normalized}")
         if normalized not in ALLOWED_EXACT and not any(
