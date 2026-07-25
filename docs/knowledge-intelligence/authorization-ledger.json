@@ -36,7 +36,7 @@
   "bounded_numeric_confidence_available": true,
   "bounded_query_available": true,
   "browser_automation_enabled": false,
-  "candidate_id": "epistemic-truth-engine-core",
+  "candidate_id": "domain-expert-mesh-core",
   "canonical_record_fingerprinting_available": true,
   "character_encoding_validation_available": true,
   "citation_binding_available": true,
@@ -130,6 +130,7 @@
   "parent_program_id": "AION-COGNITIVE-ARCHITECTURE-001",
   "persistent_assessment_write_enabled": false,
   "persistent_claim_graph_write_enabled": false,
+  "persistent_expert_mesh_write_enabled": false,
   "persistent_mesh_write_enabled": false,
   "production_deployment_enabled": false,
   "production_exposure": false,
@@ -1598,6 +1599,6 @@
   "version_applicability_evaluation_available": true,
   "version_mismatch_detection_available": true,
   "version_scope_contract_available": true,
-  "workstream": "knowledge-intelligence-temporal-claim-evidence-graph",
+  "workstream": "knowledge-intelligence-domain-expert-mesh",
   "worktree_creation_enabled": false
 }
