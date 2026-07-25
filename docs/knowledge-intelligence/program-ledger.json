@@ -38,7 +38,7 @@
   "bounded_numeric_confidence_available": true,
   "bounded_query_available": true,
   "browser_automation_enabled": false,
-  "candidate_id": "epistemic-truth-engine-core",
+  "candidate_id": "domain-expert-mesh-core",
   "canonical_record_fingerprinting_available": true,
   "character_encoding_validation_available": true,
   "citation_binding_available": true,
@@ -424,21 +424,83 @@
       ]
     },
     {
-      "authorization_state": "implementation_in_progress_formal_closeout_AION-212",
+      "authorization_state": "consumed_by_AION-211_closed_by_AION-212",
       "authorization_transaction": "AION-210-KI-0004",
       "branch": "phase/knowledge-intelligence-epistemic-truth-engine",
-      "ci_result": "pending",
-      "completion_timestamp": null,
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-25T01:16:53Z",
       "corrective_prs": [],
-      "feature_commits": [],
-      "merge_commits": [],
+      "feature_commits": [
+        "9a5bfca384a1720495cce677a817acef556f9e91"
+      ],
+      "merge_commits": [
+        "737f166966aeacc2362fd62b852292264b3e2d97"
+      ],
       "next_task": "AION-212",
-      "pull_requests": [],
-      "runtime_state": "epistemic_truth_engine_implemented_in_memory_persistent_write_disabled_pending_closeout",
+      "pull_requests": [
+        123
+      ],
+      "runtime_state": "epistemic_truth_engine_implemented_in_memory_persistent_write_disabled",
       "task_id": "AION-211",
       "tests": [
-        "focused AION-211 tests pending final local verification",
-        "AION-211 implementation gate pending final local verification"
+        "PR #123 all required checks passed",
+        "AION-211 feature commit verified in origin/main",
+        "AION-211 merge commit verified in origin/main",
+        "epistemic assessment implementation gate passed",
+        "epistemic assessment runtime hold passed",
+        "persistent assessment writes remained disabled",
+        "absolute truth mode remained absent",
+        "automatic claim acceptance and rejection remained disabled",
+        "knowledge promotion remained disabled",
+        "cognitive-belief mutation remained disabled",
+        "network access remained disabled"
+      ]
+    },
+    {
+      "authorization_state": "active_for_AION-213_formal_closeout_AION-214",
+      "authorization_transaction": "AION-212-KI-0005",
+      "branch": "phase/knowledge-intelligence-epistemic-evaluation-domain-expert-mesh-authorization",
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-25T08:58:05Z",
+      "corrective_prs": [],
+      "evaluation_decision": "EPISTEMIC_ASSESSMENT_ENGINE_OPERATOR_EVALUATION_PASS_RECOMMEND_DOMAIN_EXPERT_MESH_AUTHORIZATION",
+      "evaluation_id": "AION-EAE-001",
+      "feature_commits": [
+        "d3a92bc1626db5478e291900637f670e67c8819e",
+        "2516118be9743fc6c4d7a26e656a1866d8ed7228",
+        "11ce7f22be7e38918c069519d88f21a8020c0715"
+      ],
+      "merge_commits": [
+        "70e40641dc2d3dad25e9b3dac4aff8405664b437"
+      ],
+      "next_task": "AION-213",
+      "pull_requests": [
+        124
+      ],
+      "runtime_state": "domain_expert_mesh_authorized_not_implemented",
+      "task_id": "AION-212",
+      "tests": [
+        "PR #124 all required checks passed",
+        "AION-212 feature commits verified in origin/main",
+        "AION-212 merge commit verified in origin/main",
+        "AION-EAE-001: 28 scenarios passed",
+        "AION-210-KI-0004 closed, consumed, expired, and non-reusable",
+        "AION-212-KI-0005 created as sole active Knowledge Intelligence authorization",
+        "AION-212-KI-0005 remains active, unconsumed, unexpired, and non-reusable",
+        "AION-213 is the sole active Knowledge Intelligence implementation task",
+        "AION-214 is the formal closeout task",
+        "domain expert mesh remains authorized and not implemented",
+        "domain expert mesh runtime remains disabled",
+        "persistent expert mesh writes remain disabled",
+        "epistemic assessment runtime remains disabled",
+        "persistent assessment writes remain disabled",
+        "absolute truth mode remains absent",
+        "automatic claim acceptance and rejection remain disabled",
+        "knowledge promotion remains disabled",
+        "cognitive-belief mutation remains disabled",
+        "network access remains disabled",
+        "no AION-213 source was created by AION-212",
+        "Node 24 maintenance PR #125 verified after merge"
       ]
     }
   ],
@@ -612,6 +674,6 @@
   "version_applicability_evaluation_available": true,
   "version_mismatch_detection_available": true,
   "version_scope_contract_available": true,
-  "workstream": "knowledge-intelligence-temporal-claim-evidence-graph",
+  "workstream": "knowledge-intelligence-domain-expert-mesh",
   "worktree_creation_enabled": false
 }
