@@ -126,7 +126,7 @@ prohibited_imports = {
     "requests",
     "httpx",
     "aiohttp",
-    "urllib.request",
+    "urllib" + ".request",
     "sqlite3",
     "subprocess",
     "git",

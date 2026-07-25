@@ -48,7 +48,8 @@ POST_AION210_STATE = "epistemic_truth_engine_authorized_not_implemented"
 POST_AION211_STATE = (
     "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout"
 )
-SUCCESSOR_STATES = {POST_AION210_STATE, POST_AION211_STATE}
+POST_AION212_STATE = "domain_expert_mesh_authorized_not_implemented"
+SUCCESSOR_STATES = {POST_AION210_STATE, POST_AION211_STATE, POST_AION212_STATE}
 REQUIRED_SOURCE = [
     "services/brain-api/src/aion_brain/contracts/knowledge_claim_graph.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph.py",
@@ -180,7 +181,10 @@ assert source["authorization_consumed"] is True
 assert source["authorization_expired"] is True
 assert len(active) == 1
 if program["program_state"] in SUCCESSOR_STATES:
-    assert active[0]["authorization_transaction_id"] == "AION-210-KI-0004"
+    if program["program_state"] == POST_AION212_STATE:
+        assert active[0]["authorization_transaction_id"] == "AION-212-KI-0005"
+    else:
+        assert active[0]["authorization_transaction_id"] == "AION-210-KI-0004"
     claim_matches = [
         record
         for record in auth["records"]
@@ -214,12 +218,18 @@ assert program["program_state"] in {
     "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
     POST_AION210_STATE,
     POST_AION211_STATE,
+    POST_AION212_STATE,
 }
 if program["program_state"] in SUCCESSOR_STATES:
-    assert program["active_knowledge_implementation_authorization"] == "AION-210-KI-0004"
-    assert program["active_knowledge_implementation_task"] == "AION-211"
-    assert program["formal_closeout_task"] == "AION-212"
-    if program["program_state"] == POST_AION210_STATE:
+    if program["program_state"] == POST_AION212_STATE:
+        assert program["active_knowledge_implementation_authorization"] == "AION-212-KI-0005"
+        assert program["active_knowledge_implementation_task"] == "AION-213"
+        assert program["formal_closeout_task"] == "AION-214"
+    else:
+        assert program["active_knowledge_implementation_authorization"] == "AION-210-KI-0004"
+        assert program["active_knowledge_implementation_task"] == "AION-211"
+        assert program["formal_closeout_task"] == "AION-212"
+    if program["program_state"] in {POST_AION210_STATE, POST_AION212_STATE}:
         assert program["new_knowledge_implementation_authorization_created"] is True
     else:
         assert program["new_knowledge_implementation_authorization_created"] is False
@@ -233,7 +243,10 @@ for key in TRUE_FLAGS:
     assert program.get(key) is True, key
     assert claim.get(key) is True, key
 for key in FALSE_FLAGS:
-    if key == "new_knowledge_implementation_authorization_created" and program["program_state"] == POST_AION210_STATE:
+    if (
+        key == "new_knowledge_implementation_authorization_created"
+        and program["program_state"] in {POST_AION210_STATE, POST_AION212_STATE}
+    ):
         assert program[key] is True, key
     else:
         assert program.get(key, False) is False, key

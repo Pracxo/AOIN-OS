@@ -22,9 +22,14 @@ from pathlib import Path
 
 ROOT = Path(os.environ["AION_REPO_ROOT"])
 AUTH_ID = "AION-210-KI-0004"
+NEXT_AUTH_ID = "AION-212-KI-0005"
 SCOPE = (
     "deterministic-evidence-corroboration-contradiction-freshness-source-"
     "independence-confidence-assessment-core"
+)
+NEXT_SCOPE = (
+    "deterministic-domain-taxonomy-expert-profile-routing-independent-analysis-"
+    "deliberation-disagreement-synthesis-abstention-core"
 )
 ENGINE_STATE = "implemented_deterministic_in_memory_assessment_persistent_write_disabled"
 
@@ -38,7 +43,40 @@ auth = load("docs/knowledge-intelligence/authorization-ledger.json")
 active = [record for record in auth["records"] if record.get("authorization_active") is True]
 if len(active) != 1:
     raise SystemExit("exactly one active Knowledge Intelligence authorization is required")
-record = active[0]
+post_aion212 = (
+    ROOT / "examples/knowledge-intelligence/epistemic-assessment-operator-evaluation-report.json"
+).exists()
+if post_aion212:
+    if active[0]["authorization_transaction_id"] != NEXT_AUTH_ID:
+        raise SystemExit("post-AION-212 active authorization mismatch")
+    assert active[0]["approval_record_id"] == NEXT_AUTH_ID
+    assert active[0]["implementation_task"] == "AION-213"
+    assert active[0]["formal_closeout_task"] == "AION-214"
+    assert active[0]["authorization_scope"] == NEXT_SCOPE
+    matches = [
+        item for item in auth["records"] if item.get("authorization_transaction_id") == AUTH_ID
+    ]
+    assert len(matches) == 1
+    record = matches[0]
+    assert record["authorization_active"] is False
+    assert record["authorization_consumed"] is True
+    assert record["authorization_expired"] is True
+    assert record["authorization_reusable"] is False
+    assert record["authorization_closed_by_task"] == "AION-212"
+    assert program["active_knowledge_implementation_authorization"] == NEXT_AUTH_ID
+    assert program["active_knowledge_implementation_authorization_count"] == 1
+    assert program["active_knowledge_implementation_task"] == "AION-213"
+    assert program["formal_closeout_task"] == "AION-214"
+else:
+    record = active[0]
+    assert record["authorization_active"] is True
+    assert record["authorization_consumed"] is False
+    assert record["authorization_expired"] is False
+    assert record["authorization_reusable"] is False
+    assert program["active_knowledge_implementation_authorization"] == AUTH_ID
+    assert program["active_knowledge_implementation_authorization_count"] == 1
+    assert program["active_knowledge_implementation_task"] == "AION-211"
+    assert program["formal_closeout_task"] == "AION-212"
 assert record["authorization_transaction_id"] == AUTH_ID
 assert record["approval_record_id"] == AUTH_ID
 assert record["parent_authorization_transaction_id"] == "AION-208-KI-0003"
@@ -51,18 +89,11 @@ assert record["parent_evaluation_decision"] == (
 assert record["implementation_task"] == "AION-211"
 assert record["formal_closeout_task"] == "AION-212"
 assert record["authorization_scope"] == SCOPE
-assert record["authorization_active"] is True
-assert record["authorization_consumed"] is False
-assert record["authorization_expired"] is False
-assert record["authorization_reusable"] is False
 assert all(record["authorized_capabilities"].values())
 assert all(value is False for value in record["prohibited_capabilities"].values())
 assert record["resource_limits"]["maximum_persistent_assessment_write_batch"] == 0
-assert program["active_knowledge_implementation_authorization"] == AUTH_ID
-assert program["active_knowledge_implementation_authorization_count"] == 1
-assert program["active_knowledge_implementation_task"] == "AION-211"
-assert program["formal_closeout_task"] == "AION-212"
-assert program["authorization_scope"] == SCOPE
+expected_program_scope = NEXT_SCOPE if post_aion212 else SCOPE
+assert program["authorization_scope"] == expected_program_scope
 assert program["epistemic_truth_engine_authorized"] is True
 assert program["epistemic_truth_engine_implemented"] is True
 assert program["epistemic_truth_engine_state"] == ENGINE_STATE

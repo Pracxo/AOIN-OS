@@ -39,7 +39,10 @@ assert len(active) == 1
 if active[0]["authorization_transaction_id"] == "AION-208-KI-0003":
     claim = active[0]
 else:
-    assert active[0]["authorization_transaction_id"] == "AION-210-KI-0004"
+    assert active[0]["authorization_transaction_id"] in {
+        "AION-210-KI-0004",
+        "AION-212-KI-0005",
+    }
     matches = [
         record
         for record in auth["records"]

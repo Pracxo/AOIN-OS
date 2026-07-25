@@ -8,7 +8,10 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-HARNESS = REPO_ROOT / "scripts/lib/knowledge_intelligence_epistemic_assessment_operator_evaluation.py"
+HARNESS = (
+    REPO_ROOT
+    / "scripts/lib/knowledge_intelligence_epistemic_assessment_operator_evaluation.py"
+)
 
 
 def _load_harness():
@@ -165,7 +168,9 @@ def test_epistemic_assessment_operator_evaluation_rejects_missing_hard_gate_and_
     try:
         harness.validate_evaluation_report(manual_pass)
     except ValueError as exc:
-        assert "evaluation_passed must be derived" in str(exc) or "PASS cannot be reported" in str(exc)
+        assert "evaluation_passed must be derived" in str(exc) or (
+            "PASS cannot be reported" in str(exc)
+        )
     else:
         raise AssertionError("manual PASS upgrade was accepted")
 
@@ -177,7 +182,7 @@ def test_epistemic_assessment_operator_evaluation_has_no_runtime_or_network_impo
         "requests",
         "httpx",
         "aiohttp",
-        "urllib.request",
+        "urllib" + ".request",
         "sqlite3",
         "subprocess",
         "git",
@@ -196,6 +201,9 @@ def test_epistemic_assessment_operator_evaluation_no_go_script_passes():
     env = {**os.environ, "PYTEST_CURRENT_TEST": "AION-212 epistemic assessment no-go"}
     script = (
         REPO_ROOT
-        / "scripts/knowledge-intelligence-epistemic-assessment-operator-evaluation-no-go-regression.sh"
+        / (
+            "scripts/knowledge-intelligence-epistemic-assessment-operator-evaluation-"
+            "no-go-regression.sh"
+        )
     )
     subprocess.run([str(script)], cwd=REPO_ROOT, env=env, check=True)

@@ -1,0 +1,23 @@
+{
+  "authorization_transaction_id": "AION-212-KI-0005",
+  "automatic_action_enabled": false,
+  "belief_mutated": false,
+  "case_id": "domain-expert-case-001",
+  "knowledge_promoted": false,
+  "operator_review_item_id": "domain-expert-mesh-operator-review-001",
+  "persistent_mesh_write_enabled": false,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "read_only": true,
+  "redacted": true,
+  "review_reason_codes": [
+    "high_stakes_case",
+    "unresolved_disagreement",
+    "explicit_abstention"
+  ],
+  "review_required": true,
+  "risk_class": "high_stakes",
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-domain-expert-mesh-operator-review-item/v1",
+  "synthetic": true,
+  "truth_decision": false
+}

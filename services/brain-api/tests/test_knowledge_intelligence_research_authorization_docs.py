@@ -10,6 +10,7 @@ from knowledge_intelligence_test_helpers import (
 from knowledge_source_registry_test_helpers import (
     CLAIM_GRAPH_AUTH_ID,
     CLOSED_AUTH_ID,
+    DOMAIN_EXPERT_MESH_AUTH_ID,
     EPISTEMIC_AUTH_ID,
     SOURCE_AUTH_ID,
     active_source_record,
@@ -47,6 +48,7 @@ REQUIRED_FILES = [
 AION211_STATE = (
     "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout"
 )
+AION213_STATE = "domain_expert_mesh_authorized_not_implemented"
 
 
 def test_required_files_exist_and_scripts_executable():
@@ -67,6 +69,7 @@ def test_ledgers_create_single_active_knowledge_authorization():
         "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
         "epistemic_truth_engine_authorized_not_implemented",
         AION211_STATE,
+        AION213_STATE,
     }
     assert program["active_knowledge_implementation_authorization_count"] == 1
     if program["program_state"] in {
@@ -80,6 +83,15 @@ def test_ledgers_create_single_active_knowledge_authorization():
             assert program["epistemic_truth_engine_implemented"] is True
             assert program["epistemic_truth_engine_runtime_enabled"] is False
             assert program["persistent_assessment_write_enabled"] is False
+    elif program["program_state"] == AION213_STATE:
+        assert program["active_knowledge_implementation_authorization"] == (
+            DOMAIN_EXPERT_MESH_AUTH_ID
+        )
+        assert program["active_knowledge_implementation_task"] == "AION-213"
+        assert program["formal_closeout_task"] == "AION-214"
+        assert program["epistemic_truth_engine_implemented"] is True
+        assert program["epistemic_truth_engine_runtime_enabled"] is False
+        assert program["persistent_assessment_write_enabled"] is False
     elif program["program_state"] in {
         "temporal_claim_evidence_graph_authorized_not_implemented",
         "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",

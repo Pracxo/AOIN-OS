@@ -25,9 +25,14 @@ ROOT = Path(os.environ["AION_REPO_ROOT"])
 sys.path.insert(0, str(ROOT / "services/brain-api/src"))
 PROGRAM_ID = "AION-KNOWLEDGE-INTELLIGENCE-001"
 AUTH_ID = "AION-210-KI-0004"
+NEXT_AUTH_ID = "AION-212-KI-0005"
 SCOPE = (
     "deterministic-evidence-corroboration-contradiction-freshness-source-"
     "independence-confidence-assessment-core"
+)
+NEXT_SCOPE = (
+    "deterministic-domain-taxonomy-expert-profile-routing-independent-analysis-"
+    "deliberation-disagreement-synthesis-abstention-core"
 )
 ENGINE_STATE = "implemented_deterministic_in_memory_assessment_persistent_write_disabled"
 SOURCE_FILES = [
@@ -143,17 +148,11 @@ active = [record for record in auth["records"] if record.get("authorization_acti
 if len(active) != 1:
     raise SystemExit("authorization ledger must contain one active record")
 record = active[0]
-for payload in (program, record):
+post_aion212 = (ROOT / "examples/knowledge-intelligence/epistemic-assessment-operator-evaluation-report.json").exists()
+
+def assert_runtime_disabled(payload: dict) -> None:
     if payload["program_id"] != PROGRAM_ID:
         raise SystemExit("program ID mismatch")
-    if payload["authorization_transaction_id"] != AUTH_ID:
-        raise SystemExit("authorization transaction mismatch")
-    if payload["authorization_scope"] != SCOPE:
-        raise SystemExit("authorization scope mismatch")
-    if payload["implementation_task"] != "AION-211":
-        raise SystemExit("implementation task mismatch")
-    if payload["formal_closeout_task"] != "AION-212":
-        raise SystemExit("formal closeout mismatch")
     if payload["epistemic_truth_engine_implemented"] is not True:
         raise SystemExit("engine implementation flag missing")
     if payload["epistemic_truth_engine_state"] != ENGINE_STATE:
@@ -172,12 +171,55 @@ for payload in (program, record):
     ):
         if payload.get(false_key, False) is not False:
             raise SystemExit(f"runtime boundary flag must remain false: {false_key}")
-if record["authorization_active"] is not True or record["authorization_consumed"] is not False:
-    raise SystemExit("AION-210-KI-0004 must remain active and unconsumed")
-if record["authorization_expired"] is not False or record["authorization_reusable"] is not False:
-    raise SystemExit("AION-210-KI-0004 lifecycle flags changed")
-if record["resource_limits"]["maximum_persistent_assessment_write_batch"] != 0:
-    raise SystemExit("active authorization persistent-write limit mismatch")
+
+assert_runtime_disabled(program)
+
+closed_records = [item for item in auth["records"] if item.get("authorization_transaction_id") == AUTH_ID]
+if len(closed_records) != 1:
+    raise SystemExit("AION-210-KI-0004 authorization record missing")
+closed_record = closed_records[0]
+assert_runtime_disabled(closed_record)
+if closed_record["resource_limits"]["maximum_persistent_assessment_write_batch"] != 0:
+    raise SystemExit("AION-210-KI-0004 persistent-write limit mismatch")
+
+if post_aion212:
+    if program["authorization_transaction_id"] != NEXT_AUTH_ID:
+        raise SystemExit("post-AION-212 active authorization mismatch")
+    if program["authorization_scope"] != NEXT_SCOPE:
+        raise SystemExit("post-AION-212 active scope mismatch")
+    if program["implementation_task"] != "AION-213" or program["formal_closeout_task"] != "AION-214":
+        raise SystemExit("post-AION-212 task lineage mismatch")
+    if record["authorization_transaction_id"] != NEXT_AUTH_ID:
+        raise SystemExit("active authorization must be AION-212-KI-0005 after closeout")
+    if record["authorization_scope"] != NEXT_SCOPE:
+        raise SystemExit("active AION-212 scope mismatch")
+    if record["implementation_task"] != "AION-213" or record["formal_closeout_task"] != "AION-214":
+        raise SystemExit("active AION-212 task lineage mismatch")
+    if closed_record["authorization_active"] is not False or closed_record["authorization_consumed"] is not True:
+        raise SystemExit("AION-210-KI-0004 must be closed and consumed after AION-212")
+    if closed_record["authorization_expired"] is not True or closed_record["authorization_reusable"] is not False:
+        raise SystemExit("AION-210-KI-0004 post-closeout lifecycle mismatch")
+else:
+    if program["authorization_transaction_id"] != AUTH_ID:
+        raise SystemExit("authorization transaction mismatch")
+    if program["authorization_scope"] != SCOPE:
+        raise SystemExit("authorization scope mismatch")
+    if program["implementation_task"] != "AION-211":
+        raise SystemExit("implementation task mismatch")
+    if program["formal_closeout_task"] != "AION-212":
+        raise SystemExit("formal closeout mismatch")
+    if record["authorization_transaction_id"] != AUTH_ID:
+        raise SystemExit("active authorization must be AION-210-KI-0004 before closeout")
+    if record["authorization_scope"] != SCOPE:
+        raise SystemExit("active authorization scope mismatch")
+    if record["implementation_task"] != "AION-211" or record["formal_closeout_task"] != "AION-212":
+        raise SystemExit("active authorization task lineage mismatch")
+    if record["authorization_active"] is not True or record["authorization_consumed"] is not False:
+        raise SystemExit("AION-210-KI-0004 must remain active and unconsumed")
+    if record["authorization_expired"] is not False or record["authorization_reusable"] is not False:
+        raise SystemExit("AION-210-KI-0004 lifecycle flags changed")
+    if record["resource_limits"]["maximum_persistent_assessment_write_batch"] != 0:
+        raise SystemExit("active authorization persistent-write limit mismatch")
 
 scorecard = load_json("examples/knowledge-intelligence/epistemic-scorecard-v1.json")
 payload = scorecard["payload"]

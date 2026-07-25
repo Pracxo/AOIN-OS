@@ -1,0 +1,19 @@
+{
+  "decision": "EPISTEMIC_ASSESSMENT_ENGINE_OPERATOR_EVALUATION_PASS_RECOMMEND_DOMAIN_EXPERT_MESH_AUTHORIZATION",
+  "evaluation_id": "AION-EAE-001",
+  "evaluation_passed": true,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "read_only": true,
+  "redaction_applied": true,
+  "redacted": true,
+  "research_runtime_enabled": false,
+  "source_registry_runtime_enabled": false,
+  "claim_graph_runtime_enabled": false,
+  "epistemic_truth_engine_implemented": true,
+  "epistemic_truth_engine_runtime_enabled": false,
+  "persistent_assessment_write_enabled": false,
+  "network_access_enabled": false,
+  "runtime_effect": false,
+  "scenario_count": 28,
+  "synthetic": true
+}

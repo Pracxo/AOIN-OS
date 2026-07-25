@@ -576,6 +576,13 @@ for path in sorted(demo_dir.glob("*.json")):
             "knowledge-intelligence-epistemic-runtime-hold.json",
             "knowledge-intelligence-epistemic-scorecard.json",
             "knowledge-intelligence-epistemic-truth-authorization.json",
+            "knowledge-intelligence-epistemic-assessment-evaluation.json",
+            "knowledge-intelligence-domain-expert-mesh-authorization.json",
+            "knowledge-intelligence-domain-expert-mesh-budget.json",
+            "knowledge-intelligence-domain-expert-mesh-disagreement.json",
+            "knowledge-intelligence-domain-expert-mesh-panel-policy.json",
+            "knowledge-intelligence-domain-expert-mesh-panel.json",
+            "knowledge-intelligence-domain-expert-mesh-runtime-hold.json",
             "knowledge-intelligence-source-lineage.json",
             "knowledge-intelligence-source-snapshots.json",
         }:
@@ -657,6 +664,7 @@ for path in sorted(demo_dir.glob("*.json")):
         "production-auth-request-identity-runtime-hold.json",
         "actor-context-trust-boundary.json",
         "actor-context-runtime-hold.json",
+        "knowledge-intelligence-domain-expert-mesh-authorization.json",
     }
     blocked = (
         "raw_prompt",

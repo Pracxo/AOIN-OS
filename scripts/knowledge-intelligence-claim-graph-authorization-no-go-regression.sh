@@ -31,6 +31,7 @@ if PROGRAM_PATH.exists():
             in {
                 "epistemic_truth_engine_authorized_not_implemented",
                 "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
+                "domain_expert_mesh_authorized_not_implemented",
             }
         )
     except json.JSONDecodeError:
@@ -180,9 +181,23 @@ POST_AION210_ALLOWED_PREFIXES = (
     "scripts/knowledge-intelligence-claim-graph-operator-evaluation-",
     "scripts/knowledge-intelligence-epistemic-assessment-",
     "scripts/knowledge-intelligence-epistemic-truth-",
+    "scripts/knowledge-intelligence-domain-expert-mesh-",
+    "scripts/lib/knowledge_intelligence_epistemic_assessment_operator_evaluation.py",
+    "scripts/lib/knowledge_intelligence_domain_expert_mesh_authorization.py",
+    "scripts/lib/v02_production_auth_authorization.py",
+    "docs/knowledge-intelligence/epistemic-assessment-operator-evaluation",
+    "docs/knowledge-intelligence/epistemic-assessment-evaluation",
+    "docs/knowledge-intelligence/domain-expert-",
+    "docs/knowledge-intelligence/domain-expert-mesh",
+    "docs/knowledge-intelligence/domain-taxonomy",
+    "docs/release/knowledge-intelligence-epistemic-assessment-evaluation",
+    "docs/release/knowledge-intelligence-domain-expert-mesh",
+    "docs/adr/0176-epistemic-assessment-evaluation-and-domain-expert-mesh-authorization.md",
+    "operator-console-static/demo-data/knowledge-intelligence-domain-expert-mesh",
     "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_",
     "services/brain-api/tests/test_knowledge_epistemic_assessment_",
     "services/brain-api/tests/test_knowledge_epistemic_truth_",
+    "services/brain-api/tests/test_knowledge_domain_expert_mesh_",
 )
 PROHIBITED_PREFIXES = (
     ".github/workflows/",
@@ -306,8 +321,11 @@ active = [record for record in auth["records"] if record.get("authorization_acti
 if len(active) != 1:
     raise SystemExit("exactly one active Knowledge Intelligence authorization is required")
 if POST_AION210_CONTEXT:
-    if active[0].get("authorization_transaction_id") != "AION-210-KI-0004":
-        raise SystemExit("AION-210-KI-0004 must be the sole active authorization after AION-210")
+    if active[0].get("authorization_transaction_id") not in {
+        "AION-210-KI-0004",
+        "AION-212-KI-0005",
+    }:
+        raise SystemExit("AION-210-KI-0004 or AION-212-KI-0005 must be the sole active authorization after AION-210")
     matches = [
         record
         for record in auth["records"]

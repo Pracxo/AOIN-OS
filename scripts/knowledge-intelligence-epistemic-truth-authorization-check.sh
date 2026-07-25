@@ -33,9 +33,14 @@ from pathlib import Path
 
 ROOT = Path(os.environ["AION_REPO_ROOT"])
 AUTH_ID = "AION-210-KI-0004"
+NEXT_AUTH_ID = "AION-212-KI-0005"
 SCOPE = (
     "deterministic-evidence-corroboration-contradiction-freshness-source-"
     "independence-confidence-assessment-core"
+)
+NEXT_SCOPE = (
+    "deterministic-domain-taxonomy-expert-profile-routing-independent-analysis-"
+    "deliberation-disagreement-synthesis-abstention-core"
 )
 RESOURCE_LIMITS = {
     "maximum_claims_per_assessment_batch": 500,
@@ -86,7 +91,43 @@ runtime = load("examples/knowledge-intelligence/epistemic-runtime-hold.json")
 records = auth["records"]
 active = [record for record in records if record.get("authorization_active") is True]
 assert len(active) == 1
-record = active[0]
+post_aion212 = (
+    ROOT / "examples/knowledge-intelligence/epistemic-assessment-operator-evaluation-report.json"
+).exists()
+if post_aion212:
+    assert active[0]["authorization_transaction_id"] == NEXT_AUTH_ID
+    assert active[0]["approval_record_id"] == NEXT_AUTH_ID
+    assert active[0]["candidate_id"] == "domain-expert-mesh-core"
+    assert active[0]["workstream"] == "knowledge-intelligence-domain-expert-mesh"
+    assert active[0]["implementation_task"] == "AION-213"
+    assert active[0]["formal_closeout_task"] == "AION-214"
+    assert active[0]["authorization_scope"] == NEXT_SCOPE
+    assert active[0]["authorization_active"] is True
+    assert active[0]["authorization_consumed"] is False
+    assert active[0]["authorization_expired"] is False
+    assert active[0]["authorization_reusable"] is False
+    matches = [item for item in records if item.get("authorization_transaction_id") == AUTH_ID]
+    assert len(matches) == 1
+    record = matches[0]
+    assert record["authorization_active"] is False
+    assert record["authorization_consumed"] is True
+    assert record["authorization_expired"] is True
+    assert record["authorization_reusable"] is False
+    assert record["authorization_closed_by_task"] == "AION-212"
+    assert program["active_knowledge_implementation_authorization"] == NEXT_AUTH_ID
+    assert program["active_knowledge_implementation_authorization_count"] == 1
+    assert program["active_knowledge_implementation_task"] == "AION-213"
+    assert program["formal_closeout_task"] == "AION-214"
+else:
+    record = active[0]
+    assert record["authorization_active"] is True
+    assert record["authorization_consumed"] is False
+    assert record["authorization_expired"] is False
+    assert record["authorization_reusable"] is False
+    assert program["active_knowledge_implementation_authorization"] == AUTH_ID
+    assert program["active_knowledge_implementation_authorization_count"] == 1
+    assert program["active_knowledge_implementation_task"] == "AION-211"
+    assert program["formal_closeout_task"] == "AION-212"
 assert record["authorization_transaction_id"] == AUTH_ID
 assert record["approval_record_id"] == AUTH_ID
 assert record["candidate_id"] == "epistemic-truth-engine-core"
@@ -95,16 +136,8 @@ assert record["implementation_task"] == "AION-211"
 assert record["formal_closeout_task"] == "AION-212"
 assert record["authorization_scope"] == SCOPE
 assert record["resource_limits"] == RESOURCE_LIMITS
-assert record["authorization_active"] is True
-assert record["authorization_consumed"] is False
-assert record["authorization_expired"] is False
-assert record["authorization_reusable"] is False
 assert all(record["authorized_capabilities"].values())
 assert all(value is False for value in record["prohibited_capabilities"].values())
-assert program["active_knowledge_implementation_authorization"] == AUTH_ID
-assert program["active_knowledge_implementation_authorization_count"] == 1
-assert program["active_knowledge_implementation_task"] == "AION-211"
-assert program["formal_closeout_task"] == "AION-212"
 assert program["epistemic_truth_engine_authorized"] is True
 assert program["epistemic_truth_engine_implemented"] is True
 assert example["authorization_transaction_id"] == AUTH_ID

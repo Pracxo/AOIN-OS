@@ -1,0 +1,44 @@
+{
+  "assessment_ids": [
+    "epistemic-assessment-claim-0001"
+  ],
+  "assignment_id": "assignment-evidence-auditor-001",
+  "assumption_codes": [
+    "synthetic_fixture"
+  ],
+  "authorization_transaction_id": "AION-212-KI-0005",
+  "belief_mutated": false,
+  "case_id": "domain-expert-case-001",
+  "claim_ids": [
+    "claim-0001"
+  ],
+  "confidence_cap": "0.650000",
+  "evidence_gap_codes": [
+    "operator_review_required_for_high_stakes"
+  ],
+  "evidence_reference_ids": [
+    "source-registry-reference-0001"
+  ],
+  "explicit_abstention": true,
+  "finding_codes": [
+    "evidence_bound_review_only"
+  ],
+  "human_authored": false,
+  "human_credential_claimed": false,
+  "knowledge_promoted": false,
+  "limitation_codes": [
+    "no_new_evidence_created"
+  ],
+  "perspective_role": "evidence_auditor",
+  "position": "bounded_review_abstain",
+  "profile_id": "computational-profile-evidence-auditor-001",
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "read_only": true,
+  "redacted": true,
+  "report_fingerprint": "expert-perspective-report-fingerprint-001",
+  "report_id": "expert-perspective-report-001",
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-expert-perspective-report/v1",
+  "synthetic": true,
+  "truth_decision": false
+}

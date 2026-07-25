@@ -1,0 +1,70 @@
+{
+  "assignments": [
+    {
+      "assignment_id": "assignment-domain-analyst-001",
+      "independence_group_id": "expert-independence-group-001",
+      "perspective_role": "domain_analyst",
+      "profile_id": "computational-profile-domain-analyst-001"
+    },
+    {
+      "assignment_id": "assignment-evidence-auditor-001",
+      "independence_group_id": "expert-independence-group-002",
+      "perspective_role": "evidence_auditor",
+      "profile_id": "computational-profile-evidence-auditor-001"
+    },
+    {
+      "assignment_id": "assignment-methodological-skeptic-001",
+      "independence_group_id": "expert-independence-group-003",
+      "perspective_role": "methodological_skeptic",
+      "profile_id": "computational-profile-methodological-skeptic-001"
+    },
+    {
+      "assignment_id": "assignment-risk_reviewer-001",
+      "independence_group_id": "expert-independence-group-004",
+      "perspective_role": "risk_reviewer",
+      "profile_id": "computational-profile-risk_reviewer-001"
+    }
+  ],
+  "authorization_transaction_id": "AION-212-KI-0005",
+  "case_id": "domain-expert-case-001",
+  "circular_critique_rejected": true,
+  "dissent_preservation_required": true,
+  "independence_group_count": 4,
+  "majority_alignment_establishes_truth": false,
+  "maximum_panel_size": 12,
+  "operator_review_required": true,
+  "panel_fingerprint": "expert-panel-plan-fingerprint-001",
+  "panel_id": "expert-panel-plan-001",
+  "panel_size": 4,
+  "panel_size_confidence_amplification_enabled": false,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "read_only": true,
+  "redaction_applied": true,
+  "redacted": true,
+  "research_runtime_enabled": false,
+  "source_registry_runtime_enabled": false,
+  "claim_graph_runtime_enabled": false,
+  "epistemic_truth_engine_implemented": true,
+  "epistemic_truth_engine_runtime_enabled": false,
+  "persistent_assessment_write_enabled": false,
+  "network_access_enabled": false,
+  "required_roles": [
+    "domain_analyst",
+    "evidence_auditor",
+    "methodological_skeptic",
+    "risk_reviewer",
+    "temporal_scope_reviewer",
+    "jurisdiction_reviewer",
+    "version_reviewer",
+    "synthesis_coordinator"
+  ],
+  "routing_reason_codes": [
+    "exact_domain_match",
+    "exact_specialty_match",
+    "high_stakes_risk_reviewer_required"
+  ],
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-expert-panel-plan/v1",
+  "self_review_rejected": true,
+  "synthetic": true
+}

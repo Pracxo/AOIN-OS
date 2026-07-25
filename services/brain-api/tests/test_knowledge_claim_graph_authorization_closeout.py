@@ -5,6 +5,7 @@ import copy
 from knowledge_claim_graph_evaluation_test_helpers import (
     CLAIM_GRAPH_AUTH_ID,
     DECISION,
+    DOMAIN_EXPERT_MESH_AUTH_ID,
     EPISTEMIC_AUTH_ID,
     active_authorization_record,
     authorization_record,
@@ -37,12 +38,23 @@ def test_aion_208_claim_graph_authorization_is_closed_and_non_reusable():
 
 def test_aion_210_creates_sole_active_epistemic_authorization():
     program = read_json("docs/knowledge-intelligence/program-ledger.json")
+    record = authorization_record(EPISTEMIC_AUTH_ID)
     active = active_authorization_record()
-    validate_epistemic_authorization(active)
-    assert active["authorization_transaction_id"] == EPISTEMIC_AUTH_ID
-    assert program["active_knowledge_implementation_authorization"] == EPISTEMIC_AUTH_ID
-    assert program["active_knowledge_implementation_task"] == "AION-211"
-    assert program["formal_closeout_task"] == "AION-212"
+    validate_epistemic_authorization(record)
+    assert record["authorization_transaction_id"] == EPISTEMIC_AUTH_ID
+    if program["program_state"] == "domain_expert_mesh_authorized_not_implemented":
+        assert active["authorization_transaction_id"] == DOMAIN_EXPERT_MESH_AUTH_ID
+        assert (
+            program["active_knowledge_implementation_authorization"]
+            == DOMAIN_EXPERT_MESH_AUTH_ID
+        )
+        assert program["active_knowledge_implementation_task"] == "AION-213"
+        assert program["formal_closeout_task"] == "AION-214"
+    else:
+        assert active["authorization_transaction_id"] == EPISTEMIC_AUTH_ID
+        assert program["active_knowledge_implementation_authorization"] == EPISTEMIC_AUTH_ID
+        assert program["active_knowledge_implementation_task"] == "AION-211"
+        assert program["formal_closeout_task"] == "AION-212"
     assert program["active_cognitive_implementation_authorization_count"] == 0
 
 

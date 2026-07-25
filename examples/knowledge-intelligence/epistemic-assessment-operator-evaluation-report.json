@@ -1,0 +1,1196 @@
+{
+  "approval_created": false,
+  "authorization_closeout": {
+    "approval_record_id": "AION-210-KI-0004",
+    "authorization_active": false,
+    "authorization_closed_by_task": "AION-212",
+    "authorization_consumed": true,
+    "authorization_consumed_by_feature_commits": [
+      "9a5bfca384a1720495cce677a817acef556f9e91"
+    ],
+    "authorization_consumed_by_merge_commits": [
+      "737f166966aeacc2362fd62b852292264b3e2d97"
+    ],
+    "authorization_consumed_by_prs": [
+      123
+    ],
+    "authorization_consumed_by_task": "AION-211",
+    "authorization_expired": true,
+    "authorization_reusable": false,
+    "authorization_transaction_id": "AION-210-KI-0004",
+    "epistemic_assessment_operator_evaluation_decision": "EPISTEMIC_ASSESSMENT_ENGINE_OPERATOR_EVALUATION_PASS_RECOMMEND_DOMAIN_EXPERT_MESH_AUTHORIZATION",
+    "epistemic_assessment_operator_evaluation_id": "AION-EAE-001",
+    "evaluation_created_belief": false,
+    "evaluation_created_confidence": false,
+    "evaluation_created_knowledge": false,
+    "evaluation_created_persistent_write": false,
+    "evaluation_created_truth_decision": false,
+    "evaluation_reusable": false,
+    "evaluation_used_as_approval": false
+  },
+  "closeout_task": "AION-212",
+  "conditional_next_authorization": {
+    "approval_record_id": "AION-212-KI-0005",
+    "authorization_active": true,
+    "authorization_consumed": false,
+    "authorization_expired": false,
+    "authorization_reusable": false,
+    "authorization_scope": "deterministic-domain-taxonomy-expert-profile-routing-independent-analysis-deliberation-disagreement-synthesis-abstention-core",
+    "authorization_transaction_id": "AION-212-KI-0005",
+    "candidate_id": "domain-expert-mesh-core",
+    "formal_closeout_task": "AION-214",
+    "implementation_task": "AION-213",
+    "parent_authorization_transaction_id": "AION-210-KI-0004",
+    "parent_closeout_task": "AION-212",
+    "parent_epistemic_assessment_implementation_feature_commits": [
+      "9a5bfca384a1720495cce677a817acef556f9e91"
+    ],
+    "parent_epistemic_assessment_implementation_merge_commits": [
+      "737f166966aeacc2362fd62b852292264b3e2d97"
+    ],
+    "parent_epistemic_assessment_implementation_prs": [
+      123
+    ],
+    "parent_epistemic_assessment_implementation_task": "AION-211",
+    "parent_evaluation_decision": "EPISTEMIC_ASSESSMENT_ENGINE_OPERATOR_EVALUATION_PASS_RECOMMEND_DOMAIN_EXPERT_MESH_AUTHORIZATION",
+    "parent_evaluation_id": "AION-EAE-001",
+    "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+    "workstream": "knowledge-intelligence-domain-expert-mesh"
+  },
+  "corrective_prs": [],
+  "decision": "EPISTEMIC_ASSESSMENT_ENGINE_OPERATOR_EVALUATION_PASS_RECOMMEND_DOMAIN_EXPERT_MESH_AUTHORIZATION",
+  "evaluation_base_commit": "737f166966aeacc2362fd62b852292264b3e2d97",
+  "evaluation_id": "AION-EAE-001",
+  "evaluation_passed": true,
+  "evaluation_type": "read_only_epistemic_assessment_operator_evaluation",
+  "git_mutated": false,
+  "hard_gate_results": [
+    {
+      "detail": "redacted",
+      "gate_id": "pr_123_verified",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "final_ci_verified",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "aion_211_no_go_gate_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "aion_211_implementation_gate_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "aion_211_runtime_hold_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "focused_tests_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "all_28_scenarios_executed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "all_28_scenarios_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "no_required_scenario_skipped",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "no_unknown_scenario",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "source_registry_integrity_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "claim_graph_integrity_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "source_independence_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "duplicate_suppression_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "mirror_suppression_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "role_ambiguity_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "citation_coverage_cap_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "provenance_cap_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "freshness_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "scope_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "relation_status_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "hard_cap_order_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "confidence_bands_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "abstention_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "budget_boundary_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "deterministic_replay_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "concurrency_and_query_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "repository_integrity_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "no_truth_acceptance_knowledge_belief_runtime_or_repository_effect",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "no_v02_tag_or_release",
+      "passed": true,
+      "runtime_effect": false
+    }
+  ],
+  "implementation_feature_commits": [
+    "9a5bfca384a1720495cce677a817acef556f9e91"
+  ],
+  "implementation_merge_commits": [
+    "737f166966aeacc2362fd62b852292264b3e2d97"
+  ],
+  "implementation_prs": [
+    123
+  ],
+  "implementation_task": "AION-211",
+  "merged": false,
+  "next_architecture_decision": "domain_expert_mesh_implementation_authorized",
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "pull_request_created": false,
+  "read_only": true,
+  "redacted": true,
+  "report_is_approval": false,
+  "report_reusable": false,
+  "repository_integrity": {
+    "absolute_truth_decisions": 0,
+    "automatic_acceptances": 0,
+    "automatic_rejections": 0,
+    "belief_creations": 0,
+    "belief_mutations": 0,
+    "claim_false_assignments": 0,
+    "claim_true_assignments": 0,
+    "connector_calls": 0,
+    "contradiction_resolutions": 0,
+    "deployments": 0,
+    "git_operations": 0,
+    "knowledge_promotions": 0,
+    "model_provider_calls": 0,
+    "model_weight_changes": 0,
+    "network_calls": 0,
+    "persistent_writes": 0,
+    "repository_unchanged": true,
+    "runtime_approvals": 0,
+    "runtime_merges": 0,
+    "runtime_pull_requests": 0,
+    "source_body_bytes": 0,
+    "source_mutations": 0,
+    "temporary_evaluation_data_cleaned": true,
+    "tool_executions": 0
+  },
+  "resource_state": {
+    "absolute_truth_decisions": 0,
+    "approvals": 0,
+    "automatic_claim_acceptances": 0,
+    "automatic_claim_rejections": 0,
+    "belief_mutations": 0,
+    "connector_calls": 0,
+    "contradiction_resolutions": 0,
+    "deployments": 0,
+    "domain_expert_mesh_runtime_enabled": false,
+    "epistemic_truth_engine_runtime_enabled": false,
+    "git_operations": 0,
+    "knowledge_promotions": 0,
+    "model_provider_calls": 0,
+    "model_weight_changes": 0,
+    "network_calls": 0,
+    "persistent_assessment_write_enabled": false,
+    "persistent_mesh_write_enabled": false,
+    "runtime_pull_requests": 0,
+    "source_body_bytes": 0,
+    "tool_executions": 0
+  },
+  "runtime_effect": false,
+  "runtime_state": {
+    "absolute_truth_decision_performed": false,
+    "approval_created": false,
+    "automatic_claim_accepted": false,
+    "automatic_claim_rejected": false,
+    "belief_created": false,
+    "belief_mutated": false,
+    "claim_false_assigned": false,
+    "claim_true_assigned": false,
+    "connector_called": false,
+    "contradiction_resolved": false,
+    "git_mutated": false,
+    "knowledge_promoted": false,
+    "merged": false,
+    "model_provider_called": false,
+    "network_called": false,
+    "persistent_write_applied": false,
+    "pull_request_created": false,
+    "runtime_effect": false,
+    "source_modified": false,
+    "tool_executed": false
+  },
+  "scenario_count": 28,
+  "scenario_results": [
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "status_supported",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "two_support_groups",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_abstention",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "bounded_confidence",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_runtime_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.007,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "valid_supported_assessment",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "status_contradicted",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "two_opposition_groups",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "material_opposition_preserved",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "not_rejected",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 3.801,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "valid_contradicted_assessment",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "opposition_unresolved_or_material",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "support_preserved",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "opposition_preserved",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "not_resolved",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 4.332,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "mixed_unresolved_opposition",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "missing_claim_insufficient",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "explicit_abstention",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "zero_confidence",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 3.414,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "insufficient_evidence",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "status_stale",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "freshness_stale",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "stale_cap_present",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 3.701,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "stale_evidence",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "status_superseded",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "supersession_recorded",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "knowledge_not_promoted",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 4.567,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "superseded_claim",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "status_retracted",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "retraction_recorded",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "claim_not_rejected",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 4.419,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "retracted_claim",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "status_scope_mismatch",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "scope_not_applicable",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "scope_cap_present",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 3.183,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "scope_mismatch",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "integrity_failed",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "outcome_integrity_blocked",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "status_unknown",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "integrity_cap_present",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 3.15,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "integrity_failure_unknown",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "support_groups_counted",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "support_score_positive",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "supported_without_hard_caps",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 3.546,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "source_independence_counting",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "duplicate_suppressed",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "only_one_support_group_counted",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_claim_acceptance",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 3.32,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "duplicate_evidence_suppression",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "mirror_suppressed",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "zero_counted_support",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "abstains_after_mirror_suppression",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 3.173,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "mirror_evidence_suppression",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "ambiguous_groups_suppressed",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "support_not_counted",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "opposition_not_counted",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 3.325,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "role_ambiguity_suppression",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "citation_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "citation_cap_present",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "confidence_not_amplified",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 3.507,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "citation_coverage_cap",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "provenance_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "provenance_cap_present",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "confidence_capped",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 3.51,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "provenance_completeness_cap",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "source_quality_metadata_recorded",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "source_quality_cap_present",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "confidence_capped",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 3.541,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "source_quality_metadata_cap",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "zero_independence_cap",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "one_independence_cap",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "one_confidence_capped",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 5.62,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "zero_and_one_independence_caps",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "caps_in_contract_order",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "caps_do_not_increase_confidence",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "contract_order_nonempty",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 3.547,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "deterministic_hard_cap_order",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "very_low_band",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "medium_band",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "very_high_band",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.004,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "confidence_bands",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "stale_abstains",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "supported_does_not_abstain",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "abstention_reason_present",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 6.909,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "explicit_abstention",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "current_freshness",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "stale_freshness",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "stale_confidence_not_higher",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 6.912,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "freshness_boundaries",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "valid_time_applicable",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "jurisdiction_applicable",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "jurisdiction_mismatch",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "version_mismatch",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.361,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "temporal_jurisdiction_version_applicability",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "correction_recorded",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "retraction_status",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "supersession_status",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "conflict_preserved",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "conflict_unresolved",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 17.12,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "correction_retraction_supersession_and_conflict",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "deterministic_batch_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "changed_request_changes_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "assessment_fingerprint_stable",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 7.127,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "deterministic_replay_and_fingerprint_sensitivity",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "engine_rejects_write",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "budget_rejects_write",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "write_limit_zero",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.247,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "resource_budget_and_persistent_write_boundary",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "fixture_replayed",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "fixture_read_only",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "protected_material_absent",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "fixture_removed",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 7.207,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "fixture_path_schema_and_redaction",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "concurrent_fingerprints_equal",
+          "passed": true
+        },
+        {
+          "detail": 28.512,
+          "name": "performance_smoke_ms",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "query_result_exact",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "query_no_runtime_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 28.524,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "concurrency_performance_and_query_integrity",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "absolute_truth_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "claim_acceptance_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "claim_rejection_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "knowledge_promotion_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "belief_creation_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "belief_mutation_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "persistent_write_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "runtime_effect_zero",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.004,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "no_truth_acceptance_knowledge_belief_runtime_or_repository_effect",
+      "synthetic": true
+    }
+  ],
+  "security_state": {
+    "authorization_header_present": false,
+    "credential_present": false,
+    "human_expert_identity_claim_present": false,
+    "professional_credential_claim_present": false,
+    "raw_url_present": false,
+    "redacted": true,
+    "source_body_present": false,
+    "source_preview_present": false,
+    "synthetic_evidence_only": true,
+    "token_present": false
+  },
+  "source_modified": false,
+  "synthetic": true,
+  "validation_results": {
+    "brain_api_total": 3561,
+    "epistemic_assessment_check": true,
+    "epistemic_assessment_no_go": true,
+    "epistemic_truth_runtime_hold": true,
+    "focused_aion_211_tests": 36,
+    "mypy_brain": "success: 1255 source files",
+    "mypy_sdk": "success: 145 source files",
+    "sdk_total": 274
+  }
+}

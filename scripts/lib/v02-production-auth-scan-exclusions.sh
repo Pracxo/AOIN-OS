@@ -103,6 +103,9 @@ aion151_is_scoped_authorization_path() {
       if aion211_is_scoped_knowledge_intelligence_epistemic_assessment_path "$1"; then
         return 0
       fi
+      if aion212_is_scoped_knowledge_intelligence_epistemic_assessment_evaluation_path "$1"; then
+        return 0
+      fi
       return 1
       ;;
   esac
@@ -1830,6 +1833,56 @@ aion211_is_scoped_knowledge_intelligence_epistemic_assessment_path() {
     examples/knowledge-intelligence/*|\
     operator-console-static/*|\
     services/brain-api/tests/test_knowledge_epistemic_assessment_*)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+aion212_is_scoped_knowledge_intelligence_epistemic_assessment_evaluation_path() {
+  # Exact/prefix AION-212 Knowledge Intelligence evaluation and domain expert
+  # mesh authorization artifacts. These are docs, static evidence, harnesses,
+  # and tests only; no runtime source, API, dependency, migration, or workflow
+  # paths are exempted here.
+  case "$1" in
+    docs/adr/0176-epistemic-assessment-evaluation-and-domain-expert-mesh-authorization.md|\
+    docs/adr/README.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/project-status.md|\
+    docs/visual-brain.md|\
+    docs/knowledge-intelligence/*|\
+    docs/release/knowledge-intelligence-domain-expert-mesh-*|\
+    docs/release/knowledge-intelligence-epistemic-assessment-evaluation-*|\
+    examples/knowledge-intelligence/*|\
+    operator-console-static/demo-data/knowledge-intelligence-domain-expert-mesh-*.json|\
+    operator-console-static/demo-data/knowledge-intelligence-epistemic-assessment-evaluation.json|\
+    scripts/knowledge-intelligence-claim-graph-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-claim-graph-operator-evaluation-check.sh|\
+    scripts/knowledge-intelligence-claim-graph-runtime-hold.sh|\
+    scripts/knowledge-intelligence-domain-expert-mesh-authorization-check.sh|\
+    scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-domain-expert-mesh-runtime-hold.sh|\
+    scripts/knowledge-intelligence-epistemic-assessment-check.sh|\
+    scripts/knowledge-intelligence-epistemic-assessment-no-go-regression.sh|\
+    scripts/knowledge-intelligence-epistemic-assessment-operator-evaluation-check.sh|\
+    scripts/knowledge-intelligence-epistemic-assessment-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-epistemic-truth-authorization-check.sh|\
+    scripts/knowledge-intelligence-epistemic-truth-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-research-runtime-hold.sh|\
+    scripts/knowledge-intelligence-source-registry-runtime-hold.sh|\
+    scripts/lib/knowledge_intelligence_domain_expert_mesh_authorization.py|\
+    scripts/lib/knowledge_intelligence_epistemic_assessment_operator_evaluation.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    scripts/lib/v02_production_auth_authorization.py|\
+    services/brain-api/tests/test_knowledge_domain_expert_mesh_*.py|\
+    services/brain-api/tests/test_knowledge_epistemic_assessment_authorization_closeout.py|\
+    services/brain-api/tests/test_knowledge_epistemic_assessment_evaluation_*.py|\
+    services/brain-api/tests/test_knowledge_epistemic_assessment_operator_evaluation.py|\
+    services/brain-api/tests/test_knowledge_epistemic_assessment_operator_evaluation_docs.py)
       return 0
       ;;
     *)

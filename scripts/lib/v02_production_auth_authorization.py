@@ -1205,6 +1205,7 @@ NON_PRODUCTION_AUTH_APPROVAL_RECORDS = frozenset(
     {
         "operator-console-static/demo-data/knowledge-intelligence-source-registry-authorization.json",
         "operator-console-static/demo-data/knowledge-intelligence-claim-graph-authorization.json",
+        "operator-console-static/demo-data/knowledge-intelligence-domain-expert-mesh-authorization.json",
     }
 )
 

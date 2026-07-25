@@ -160,6 +160,7 @@ assert program["program_state"] in {
     "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
     "epistemic_truth_engine_authorized_not_implemented",
     "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
+    "domain_expert_mesh_authorized_not_implemented",
 }
 assert program["active_knowledge_implementation_authorization_count"] == 1
 if program["program_state"] == "epistemic_truth_engine_authorized_not_implemented":
@@ -170,6 +171,10 @@ elif program["program_state"] == "epistemic_truth_engine_implemented_persistent_
     assert program["active_knowledge_implementation_authorization"] == "AION-210-KI-0004"
     assert program["active_knowledge_implementation_task"] == "AION-211"
     assert program["formal_closeout_task"] == "AION-212"
+elif program["program_state"] == "domain_expert_mesh_authorized_not_implemented":
+    assert program["active_knowledge_implementation_authorization"] == "AION-212-KI-0005"
+    assert program["active_knowledge_implementation_task"] == "AION-213"
+    assert program["formal_closeout_task"] == "AION-214"
 elif program["program_state"] in {
     "temporal_claim_evidence_graph_authorized_not_implemented",
     "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
@@ -221,10 +226,12 @@ if program["program_state"] in {
     "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
     "epistemic_truth_engine_authorized_not_implemented",
     "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
+    "domain_expert_mesh_authorized_not_implemented",
 }:
     assert active[0]["authorization_transaction_id"] in {
         "AION-208-KI-0003",
         "AION-210-KI-0004",
+        "AION-212-KI-0005",
     }
     assert record["authorization_active"] is False
     assert record["authorization_consumed"] is True
