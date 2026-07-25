@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[3]
 PROGRAM_ID = "AION-KNOWLEDGE-INTELLIGENCE-001"
 CLAIM_GRAPH_AUTH_ID = "AION-208-KI-0003"
 EPISTEMIC_AUTH_ID = "AION-210-KI-0004"
+DOMAIN_EXPERT_MESH_AUTH_ID = "AION-212-KI-0005"
 EVALUATION_ID = "AION-TCGE-001"
 DECISION = (
     "TEMPORAL_CLAIM_EVIDENCE_GRAPH_OPERATOR_EVALUATION_PASS_RECOMMEND_"
@@ -302,9 +303,16 @@ def validate_epistemic_authorization(record: dict) -> None:
     assert record["implementation_authorization_approved"] is True
     assert record["implementation_go_status"] is True
     assert record["implementation_no_go_status"] is False
-    assert record["authorization_active"] is True
-    assert record["authorization_consumed"] is False
-    assert record["authorization_expired"] is False
+    if record["authorization_active"] is True:
+        assert record["authorization_consumed"] is False
+        assert record["authorization_expired"] is False
+    else:
+        assert record["authorization_consumed"] is True
+        assert record["authorization_consumed_by_task"] == "AION-211"
+        assert record["authorization_consumed_by_prs"] == [123]
+        assert record["authorization_closed_by_task"] == "AION-212"
+        assert record["epistemic_assessment_operator_evaluation_id"] == "AION-EAE-001"
+        assert record["authorization_expired"] is True
     assert record["authorization_reusable"] is False
     assert set(record["authorized_capabilities"]) == AUTHORIZED_KEYS
     assert all(record["authorized_capabilities"].values())
@@ -319,7 +327,7 @@ def validate_epistemic_authorization(record: dict) -> None:
 
 
 def assert_epistemic_authorization_rejects(mutator) -> None:
-    record = copy.deepcopy(active_authorization_record())
+    record = copy.deepcopy(authorization_record(EPISTEMIC_AUTH_ID))
     mutator(record)
     try:
         validate_epistemic_authorization(record)

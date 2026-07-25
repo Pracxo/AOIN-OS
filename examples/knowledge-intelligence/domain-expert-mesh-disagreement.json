@@ -1,0 +1,25 @@
+{
+  "authorization_transaction_id": "AION-212-KI-0005",
+  "claim_ids": [
+    "claim-0001"
+  ],
+  "disagreement_fingerprint": "expert-disagreement-item-fingerprint-001",
+  "disagreement_id": "expert-disagreement-item-001",
+  "disagreement_type": "methodological_scope_difference",
+  "dissent_preserved": true,
+  "evidence_separated": true,
+  "minority_report_deleted": false,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "read_only": true,
+  "redacted": true,
+  "report_ids": [
+    "expert-perspective-report-001",
+    "expert-perspective-report-002"
+  ],
+  "resolution_attempted": false,
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-expert-disagreement-item/v1",
+  "scope_separated": true,
+  "synthetic": true,
+  "unresolved": true
+}

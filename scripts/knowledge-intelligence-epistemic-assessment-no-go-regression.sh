@@ -22,11 +22,17 @@ from pathlib import Path
 ROOT = Path(os.environ["AION_REPO_ROOT"])
 PROGRAM_ID = "AION-KNOWLEDGE-INTELLIGENCE-001"
 AUTH_ID = "AION-210-KI-0004"
+NEXT_AUTH_ID = "AION-212-KI-0005"
 SCOPE = (
     "deterministic-evidence-corroboration-contradiction-freshness-source-"
     "independence-confidence-assessment-core"
 )
+NEXT_SCOPE = (
+    "deterministic-domain-taxonomy-expert-profile-routing-independent-analysis-"
+    "deliberation-disagreement-synthesis-abstention-core"
+)
 PROGRAM_STATE = "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout"
+POST_AION212_PROGRAM_STATE = "domain_expert_mesh_authorized_not_implemented"
 ENGINE_STATE = "implemented_deterministic_in_memory_assessment_persistent_write_disabled"
 SOURCE_FILES = {
     "services/brain-api/src/aion_brain/contracts/knowledge_epistemic_assessment.py",
@@ -151,6 +157,7 @@ ALLOWED_EXACT = {
     "scripts/knowledge-intelligence-claim-graph-authorization-no-go-regression.sh",
     "scripts/knowledge-intelligence-claim-graph-operator-evaluation-check.sh",
     "scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-claim-graph-runtime-hold.sh",
     "scripts/knowledge-intelligence-research-authorization-check.sh",
     "scripts/knowledge-intelligence-research-authorization-no-go-regression.sh",
     "scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh",
@@ -158,6 +165,7 @@ ALLOWED_EXACT = {
     "scripts/knowledge-intelligence-source-registry-authorization-check.sh",
     "scripts/knowledge-intelligence-source-registry-authorization-no-go-regression.sh",
     "scripts/knowledge-intelligence-source-registry-operator-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-source-registry-runtime-hold.sh",
     "scripts/lib/cognitive_architecture_governance.py",
     "scripts/lib/v02-production-auth-scan-exclusions.sh",
     "scripts/operator-console-static-check.sh",
@@ -167,6 +175,52 @@ ALLOWED_EXACT = {
 ALLOWED_PREFIXES = (
     "services/brain-api/tests/test_knowledge_epistemic_assessment_",
 )
+AION212_ALLOWED_PREFIXES = (
+    "docs/knowledge-intelligence/epistemic-assessment-operator-evaluation",
+    "docs/knowledge-intelligence/epistemic-assessment-evaluation",
+    "docs/knowledge-intelligence/domain-expert-mesh",
+    "docs/knowledge-intelligence/domain-taxonomy",
+    "docs/knowledge-intelligence/domain-expert-",
+    "docs/release/knowledge-intelligence-epistemic-assessment-evaluation",
+    "docs/release/knowledge-intelligence-domain-expert-mesh",
+    "examples/knowledge-intelligence/epistemic-assessment-operator-evaluation",
+    "examples/knowledge-intelligence/epistemic-assessment-evaluation",
+    "examples/knowledge-intelligence/domain-expert-mesh",
+    "examples/knowledge-intelligence/domain-taxonomy",
+    "examples/knowledge-intelligence/domain-expert-",
+    "examples/knowledge-intelligence/expert-",
+    "operator-console-static/demo-data/knowledge-intelligence-epistemic-assessment-evaluation",
+    "operator-console-static/demo-data/knowledge-intelligence-domain-expert-mesh",
+    "scripts/knowledge-intelligence-epistemic-assessment-operator-evaluation",
+    "scripts/knowledge-intelligence-domain-expert-mesh",
+    "scripts/lib/knowledge_intelligence_epistemic_assessment_operator_evaluation.py",
+    "scripts/lib/knowledge_intelligence_domain_expert_mesh_authorization.py",
+    "services/brain-api/tests/test_knowledge_epistemic_assessment_operator_evaluation",
+    "services/brain-api/tests/test_knowledge_domain_expert_mesh_",
+)
+AION212_ALLOWED_EXACT = {
+    "docs/adr/0176-epistemic-assessment-evaluation-and-domain-expert-mesh-authorization.md",
+    "examples/knowledge-intelligence/epistemic-assessment-operator-evaluation-report.json",
+    "examples/knowledge-intelligence/epistemic-assessment-evaluation-scenario-summary.json",
+    "scripts/auth-design-check.sh",
+    "scripts/knowledge-intelligence-claim-graph-authorization-check.sh",
+    "scripts/knowledge-intelligence-claim-graph-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-research-authorization-check.sh",
+    "scripts/knowledge-intelligence-research-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-source-registry-authorization-check.sh",
+    "scripts/knowledge-intelligence-source-registry-check.sh",
+    "scripts/knowledge-intelligence-source-registry-operator-evaluation-no-go-regression.sh",
+    "scripts/lib/v02-production-auth-scan-exclusions.sh",
+    "scripts/lib/v02_production_auth_authorization.py",
+    "services/brain-api/tests/knowledge_claim_graph_evaluation_test_helpers.py",
+    "services/brain-api/tests/knowledge_source_registry_test_helpers.py",
+    "services/brain-api/tests/test_knowledge_claim_graph_authorization_closeout.py",
+    "services/brain-api/tests/test_knowledge_claim_graph_authorization_validator.py",
+    "services/brain-api/tests/test_knowledge_epistemic_truth_authorization_validator.py",
+    "services/brain-api/tests/test_knowledge_intelligence_research_authorization_docs.py",
+    "services/brain-api/tests/test_knowledge_research_authorization_closeout.py",
+    "services/brain-api/tests/test_knowledge_source_registry_authorization_closeout.py",
+}
 PROHIBITED_PREFIXES = (
     ".github/workflows/",
     "packages/aion-sdk-python/src/",
@@ -268,6 +322,10 @@ def allowed_path(path: str) -> bool:
         return True
     if path in REQUIRED_EXAMPLES or path in REQUIRED_STATIC:
         return True
+    if path in AION212_ALLOWED_EXACT:
+        return True
+    if any(path.startswith(prefix) for prefix in AION212_ALLOWED_PREFIXES):
+        return True
     return any(path.startswith(prefix) for prefix in ALLOWED_PREFIXES)
 
 
@@ -330,27 +388,38 @@ def assert_json_evidence() -> None:
 def assert_ledgers() -> None:
     program = load_json("docs/knowledge-intelligence/program-ledger.json")
     auth = load_json("docs/knowledge-intelligence/authorization-ledger.json")
+    post_aion212 = (ROOT / "examples/knowledge-intelligence/epistemic-assessment-operator-evaluation-report.json").exists()
     for label, payload in (("program", program), ("authorization", auth)):
         if payload["program_id"] != PROGRAM_ID:
             raise SystemExit(f"{label} ledger program mismatch")
-        if payload["program_state"] != PROGRAM_STATE:
+        expected_state = POST_AION212_PROGRAM_STATE if post_aion212 else PROGRAM_STATE
+        if payload["program_state"] != expected_state:
             raise SystemExit(f"{label} ledger program_state mismatch")
-        if payload["active_knowledge_implementation_authorization"] != AUTH_ID:
-            raise SystemExit(f"{label} ledger active authorization mismatch")
         if payload["active_knowledge_implementation_authorization_count"] != 1:
             raise SystemExit(f"{label} ledger active authorization count mismatch")
-        if payload["active_knowledge_implementation_task"] != "AION-211":
-            raise SystemExit(f"{label} ledger active task mismatch")
-        if payload["formal_closeout_task"] != "AION-212":
-            raise SystemExit(f"{label} ledger closeout mismatch")
+        if post_aion212:
+            if payload["active_knowledge_implementation_authorization"] != NEXT_AUTH_ID:
+                raise SystemExit(f"{label} ledger active authorization mismatch")
+            if payload["active_knowledge_implementation_task"] != "AION-213":
+                raise SystemExit(f"{label} ledger active task mismatch")
+            if payload["formal_closeout_task"] != "AION-214":
+                raise SystemExit(f"{label} ledger closeout mismatch")
+        else:
+            if payload["active_knowledge_implementation_authorization"] != AUTH_ID:
+                raise SystemExit(f"{label} ledger active authorization mismatch")
+            if payload["active_knowledge_implementation_task"] != "AION-211":
+                raise SystemExit(f"{label} ledger active task mismatch")
+            if payload["formal_closeout_task"] != "AION-212":
+                raise SystemExit(f"{label} ledger closeout mismatch")
         if payload["epistemic_truth_engine_authorized"] is not True:
             raise SystemExit(f"{label} ledger engine authorization missing")
         if payload["epistemic_truth_engine_implemented"] is not True:
             raise SystemExit(f"{label} ledger engine implementation missing")
         if payload["epistemic_truth_engine_state"] != ENGINE_STATE:
             raise SystemExit(f"{label} ledger engine state mismatch")
-        if payload["new_knowledge_implementation_authorization_created"] is not False:
-            raise SystemExit(f"{label} ledger must not create new authorization")
+        expected_new_auth = True if post_aion212 else False
+        if payload["new_knowledge_implementation_authorization_created"] is not expected_new_auth:
+            raise SystemExit(f"{label} ledger new authorization flag mismatch")
         for key in FALSE_FLAGS:
             if payload.get(key, False) is not False:
                 raise SystemExit(f"{label} ledger flag must remain false: {key}")
@@ -360,24 +429,45 @@ def assert_ledgers() -> None:
     if len(active) != 1:
         raise SystemExit("exactly one Knowledge Intelligence authorization must be active")
     active_record = active[0]
-    if active_record["authorization_transaction_id"] != AUTH_ID:
-        raise SystemExit("active authorization must be AION-210-KI-0004")
-    if active_record["approval_record_id"] != AUTH_ID:
+    expected_active = NEXT_AUTH_ID if post_aion212 else AUTH_ID
+    expected_scope = NEXT_SCOPE if post_aion212 else SCOPE
+    expected_task = "AION-213" if post_aion212 else "AION-211"
+    expected_closeout = "AION-214" if post_aion212 else "AION-212"
+    if active_record["authorization_transaction_id"] != expected_active:
+        raise SystemExit("active authorization mismatch")
+    if active_record["approval_record_id"] != expected_active:
         raise SystemExit("active approval record mismatch")
-    if active_record["implementation_task"] != "AION-211":
+    if active_record["implementation_task"] != expected_task:
         raise SystemExit("active authorization implementation task mismatch")
-    if active_record["formal_closeout_task"] != "AION-212":
+    if active_record["formal_closeout_task"] != expected_closeout:
         raise SystemExit("active authorization formal closeout mismatch")
-    if active_record["authorization_scope"] != SCOPE:
+    if active_record["authorization_scope"] != expected_scope:
         raise SystemExit("active authorization scope mismatch")
     if active_record["authorization_consumed"] or active_record["authorization_expired"] or active_record["authorization_reusable"]:
-        raise SystemExit("AION-210-KI-0004 must remain active, unconsumed, unexpired, and non-reusable")
-    if active_record["resource_limits"]["maximum_persistent_assessment_write_batch"] != 0:
+        raise SystemExit("active authorization must remain unconsumed, unexpired, and non-reusable")
+    if post_aion212:
+        if active_record["resource_limits"]["maximum_persistent_mesh_write_batch"] != 0:
+            raise SystemExit("persistent mesh write budget must remain zero")
+    elif active_record["resource_limits"]["maximum_persistent_assessment_write_batch"] != 0:
         raise SystemExit("persistent assessment write budget must remain zero")
     if not active_record["epistemic_truth_engine_implemented"]:
         raise SystemExit("active authorization must record AION-211 implementation evidence")
     if active_record["epistemic_truth_engine_runtime_enabled"]:
         raise SystemExit("epistemic assessment runtime must remain disabled")
+    closed = [
+        record
+        for record in records
+        if record.get("authorization_transaction_id") == AUTH_ID
+    ]
+    if len(closed) != 1:
+        raise SystemExit("AION-210-KI-0004 record missing")
+    if post_aion212 and (
+        closed[0]["authorization_active"] is not False
+        or closed[0]["authorization_consumed"] is not True
+        or closed[0]["authorization_expired"] is not True
+        or closed[0]["authorization_reusable"] is not False
+    ):
+        raise SystemExit("AION-210-KI-0004 closeout lifecycle mismatch")
     for key, value in active_record.get("prohibited_capabilities", {}).items():
         if value is not False:
             raise SystemExit(f"prohibited capability must remain false: {key}")

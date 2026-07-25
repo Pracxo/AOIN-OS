@@ -1,0 +1,48 @@
+{
+  "authorization_transaction_id": "AION-212-KI-0005",
+  "computational_profile": true,
+  "domain_ids": [
+    "domain-regulatory-001"
+  ],
+  "human_identity_claimed": false,
+  "independence_group_id": "expert-independence-group-001",
+  "jurisdiction_ids": [
+    "global"
+  ],
+  "model_provider_required": false,
+  "network_access_required": false,
+  "perspective_roles": [
+    "evidence_auditor"
+  ],
+  "professional_credential_claimed": false,
+  "profile_fingerprint": "domain-expert-profile-fingerprint-001",
+  "profile_id": "computational-profile-evidence-auditor-001",
+  "profile_version": "profile-v1",
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "prohibited_input_kinds": [
+    "source_body",
+    "raw_prompt",
+    "credential",
+    "hidden_reasoning"
+  ],
+  "read_only": true,
+  "redacted": true,
+  "required_input_kinds": [
+    "claim_reference",
+    "epistemic_assessment_reference"
+  ],
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-domain-expert-profile/v1",
+  "specialty_ids": [
+    "specialty-policy-001"
+  ],
+  "supported_risk_classes": [
+    "standard",
+    "high_stakes"
+  ],
+  "synthetic": true,
+  "tool_execution_required": false,
+  "version_target_ids": [
+    "policy-v1"
+  ]
+}

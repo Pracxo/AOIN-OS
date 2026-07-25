@@ -1,0 +1,42 @@
+{
+  "alignment_state": "unresolved_disagreement",
+  "authorization_transaction_id": "AION-212-KI-0005",
+  "automatic_action": false,
+  "belief_mutated": false,
+  "case_id": "domain-expert-case-001",
+  "confidence_amplified": false,
+  "critique_ids": [
+    "expert-critique-001"
+  ],
+  "disagreement_ids": [
+    "expert-disagreement-item-001"
+  ],
+  "evidence_gap_codes": [
+    "operator_review_required_for_high_stakes"
+  ],
+  "explicit_abstention": true,
+  "knowledge_promoted": false,
+  "operator_review_required": true,
+  "panel_id": "expert-panel-plan-001",
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "read_only": true,
+  "redacted": true,
+  "report_ids": [
+    "expert-perspective-report-001"
+  ],
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-expert-mesh-synthesis/v1",
+  "synthesis_codes": [
+    "bounded_advisory_synthesis",
+    "dissent_preserved"
+  ],
+  "synthesis_confidence_cap": "0.650000",
+  "synthesis_fingerprint": "expert-mesh-synthesis-fingerprint-001",
+  "synthesis_id": "expert-mesh-synthesis-001",
+  "synthetic": true,
+  "truth_decision": false,
+  "underlying_assessment_confidence_cap": "0.650000",
+  "unresolved_dissent_ids": [
+    "expert-disagreement-item-001"
+  ]
+}

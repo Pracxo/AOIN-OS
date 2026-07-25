@@ -1,0 +1,30 @@
+# AION-EAE-001 Evaluation Scenarios
+
+- `valid_supported_assessment`: passed=true
+- `valid_contradicted_assessment`: passed=true
+- `mixed_unresolved_opposition`: passed=true
+- `insufficient_evidence`: passed=true
+- `stale_evidence`: passed=true
+- `superseded_claim`: passed=true
+- `retracted_claim`: passed=true
+- `scope_mismatch`: passed=true
+- `integrity_failure_unknown`: passed=true
+- `source_independence_counting`: passed=true
+- `duplicate_evidence_suppression`: passed=true
+- `mirror_evidence_suppression`: passed=true
+- `role_ambiguity_suppression`: passed=true
+- `citation_coverage_cap`: passed=true
+- `provenance_completeness_cap`: passed=true
+- `source_quality_metadata_cap`: passed=true
+- `zero_and_one_independence_caps`: passed=true
+- `deterministic_hard_cap_order`: passed=true
+- `confidence_bands`: passed=true
+- `explicit_abstention`: passed=true
+- `freshness_boundaries`: passed=true
+- `temporal_jurisdiction_version_applicability`: passed=true
+- `correction_retraction_supersession_and_conflict`: passed=true
+- `deterministic_replay_and_fingerprint_sensitivity`: passed=true
+- `resource_budget_and_persistent_write_boundary`: passed=true
+- `fixture_path_schema_and_redaction`: passed=true
+- `concurrency_performance_and_query_integrity`: passed=true
+- `no_truth_acceptance_knowledge_belief_runtime_or_repository_effect`: passed=true

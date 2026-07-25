@@ -241,6 +241,13 @@ allowed_authorization_demo_names = {
     "knowledge-intelligence-epistemic-runtime-hold.json",
     "knowledge-intelligence-epistemic-scorecard.json",
     "knowledge-intelligence-epistemic-truth-authorization.json",
+    "knowledge-intelligence-epistemic-assessment-evaluation.json",
+    "knowledge-intelligence-domain-expert-mesh-authorization.json",
+    "knowledge-intelligence-domain-expert-mesh-budget.json",
+    "knowledge-intelligence-domain-expert-mesh-disagreement.json",
+    "knowledge-intelligence-domain-expert-mesh-panel-policy.json",
+    "knowledge-intelligence-domain-expert-mesh-panel.json",
+    "knowledge-intelligence-domain-expert-mesh-runtime-hold.json",
 }
 aion161_allowed_policy_markers = {
     "runtime_private_key",

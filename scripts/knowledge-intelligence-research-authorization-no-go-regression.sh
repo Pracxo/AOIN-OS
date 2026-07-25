@@ -53,6 +53,7 @@ implemented_states = {
     'temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout',
     'epistemic_truth_engine_authorized_not_implemented',
     'epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout',
+    'domain_expert_mesh_authorized_not_implemented',
 }
 EPISTEMIC_ASSESSMENT_SOURCE={
     'services/brain-api/src/aion_brain/contracts/knowledge_epistemic_assessment.py',

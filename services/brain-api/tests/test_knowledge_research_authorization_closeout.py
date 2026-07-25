@@ -2,6 +2,7 @@ from knowledge_source_registry_test_helpers import (
     CLAIM_GRAPH_AUTH_ID,
     CLOSED_AUTH_ID,
     DECISION,
+    DOMAIN_EXPERT_MESH_AUTH_ID,
     EPISTEMIC_AUTH_ID,
     SOURCE_AUTH_ID,
     active_source_record,
@@ -13,6 +14,7 @@ from knowledge_source_registry_test_helpers import (
 AION211_STATE = (
     "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout"
 )
+AION213_STATE = "domain_expert_mesh_authorized_not_implemented"
 
 
 def test_aion_204_authorization_is_closed_and_non_reusable():
@@ -37,6 +39,7 @@ def test_aion_206_creates_single_active_source_registry_authorization():
         "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
         "epistemic_truth_engine_authorized_not_implemented",
         AION211_STATE,
+        AION213_STATE,
     }
     if program["program_state"] in {
         "epistemic_truth_engine_authorized_not_implemented",
@@ -49,6 +52,15 @@ def test_aion_206_creates_single_active_source_registry_authorization():
             assert program["epistemic_truth_engine_implemented"] is True
             assert program["epistemic_truth_engine_runtime_enabled"] is False
             assert program["persistent_assessment_write_enabled"] is False
+    elif program["program_state"] == AION213_STATE:
+        assert program["active_knowledge_implementation_authorization"] == (
+            DOMAIN_EXPERT_MESH_AUTH_ID
+        )
+        assert program["active_knowledge_implementation_task"] == "AION-213"
+        assert program["formal_closeout_task"] == "AION-214"
+        assert program["epistemic_truth_engine_implemented"] is True
+        assert program["epistemic_truth_engine_runtime_enabled"] is False
+        assert program["persistent_assessment_write_enabled"] is False
     elif program["program_state"] in {
         "temporal_claim_evidence_graph_authorized_not_implemented",
         "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
@@ -69,5 +81,6 @@ def test_aion_206_creates_single_active_source_registry_authorization():
         SOURCE_AUTH_ID,
         CLAIM_GRAPH_AUTH_ID,
         EPISTEMIC_AUTH_ID,
+        DOMAIN_EXPERT_MESH_AUTH_ID,
     }
     validate_source_authorization(active_source_record())

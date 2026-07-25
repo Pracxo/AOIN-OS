@@ -1,0 +1,34 @@
+{
+  "authorization_transaction_id": "AION-212-KI-0005",
+  "case_fingerprint": "domain-expert-case-fingerprint-001",
+  "case_id": "domain-expert-case-001",
+  "claim_ids": [
+    "claim-0001"
+  ],
+  "domain_ids": [
+    "domain-regulatory-001"
+  ],
+  "epistemic_assessment_ids": [
+    "epistemic-assessment-claim-0001"
+  ],
+  "new_evidence_created": false,
+  "operator_supplied": true,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "question_summary": "Evaluate the evidence posture for a bounded synthetic regulatory claim.",
+  "read_only": true,
+  "redacted": true,
+  "risk_class": "high_stakes",
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-domain-expert-case/v1",
+  "specialty_ids": [
+    "specialty-policy-001"
+  ],
+  "synthetic": true,
+  "target_jurisdiction_ids": [
+    "global"
+  ],
+  "target_valid_time": "2026-01-01T00:00:00Z",
+  "target_version_ids": [
+    "policy-v1"
+  ]
+}

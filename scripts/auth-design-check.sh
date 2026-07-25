@@ -1341,6 +1341,24 @@ aion210_auth_paths = {
     "services/brain-api/tests/test_knowledge_source_registry_authorization_closeout.py",
 }
 
+aion212_auth_paths = {
+    "docs/adr/0176-epistemic-assessment-evaluation-and-domain-expert-mesh-authorization.md",
+    "docs/knowledge-intelligence/authorization-ledger.json",
+    "docs/release/knowledge-intelligence-domain-expert-mesh-authorization-transaction.md",
+    "docs/release/knowledge-intelligence-domain-expert-mesh-explicit-approval-record.md",
+    "examples/knowledge-intelligence/domain-expert-mesh-authorization.json",
+    "operator-console-static/demo-data/knowledge-intelligence-domain-expert-mesh-authorization.json",
+    "scripts/knowledge-intelligence-claim-graph-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-domain-expert-mesh-authorization-check.sh",
+    "scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-epistemic-truth-authorization-check.sh",
+    "scripts/knowledge-intelligence-epistemic-truth-authorization-no-go-regression.sh",
+    "scripts/lib/knowledge_intelligence_domain_expert_mesh_authorization.py",
+    "services/brain-api/tests/test_knowledge_domain_expert_mesh_authorization_docs.py",
+    "services/brain-api/tests/test_knowledge_domain_expert_mesh_authorization_validator.py",
+    "services/brain-api/tests/test_knowledge_epistemic_assessment_authorization_closeout.py",
+}
+
 blocked_package_names = {
     "package.json",
     "package-lock.json",
@@ -1386,6 +1404,7 @@ for name in [*changed, *untracked]:
         and name not in aion206_auth_paths
         and name not in aion209_auth_paths
         and name not in aion210_auth_paths
+        and name not in aion212_auth_paths
     ):
         raise SystemExit(f"unexpected auth runtime or artifact path: {name}")
 

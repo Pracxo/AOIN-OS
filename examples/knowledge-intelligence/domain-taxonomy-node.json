@@ -1,0 +1,23 @@
+{
+  "authorization_transaction_id": "AION-212-KI-0005",
+  "cycle_detected": false,
+  "description_code": "regulated-claims-and-policy-controls",
+  "deterministic_hierarchy": true,
+  "domain_id": "domain-regulatory-001",
+  "explicit_safe_ids": true,
+  "model_generated_domain": false,
+  "network_ontology_lookup_enabled": false,
+  "node_fingerprint": "domain-taxonomy-node-fingerprint-001",
+  "parent_domain_ids": [],
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "read_only": true,
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-domain-taxonomy-node/v1",
+  "specialty_ids": [
+    "specialty-policy-001"
+  ],
+  "synthetic": true,
+  "taxonomy_version": "domain-taxonomy-v1",
+  "universal_wildcard_domain": false
+}

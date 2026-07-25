@@ -1,0 +1,26 @@
+{
+  "authorization_transaction_id": "AION-212-KI-0005",
+  "circular_critique_rejected": true,
+  "critic_profile_id": "computational-profile-methodological-skeptic-001",
+  "critique_fingerprint": "expert-critique-fingerprint-001",
+  "critique_id": "expert-critique-001",
+  "issue_codes": [
+    "methodological_limitation_visible"
+  ],
+  "methodology_issue_codes": [
+    "synthesis_must_not_amplify_confidence"
+  ],
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "read_only": true,
+  "redacted": true,
+  "response_required": true,
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-expert-critique/v1",
+  "scope_issue_codes": [
+    "high_stakes_review_required"
+  ],
+  "self_review_rejected": true,
+  "synthetic": true,
+  "target_report_id": "expert-perspective-report-001",
+  "unsupported_reference_ids": []
+}

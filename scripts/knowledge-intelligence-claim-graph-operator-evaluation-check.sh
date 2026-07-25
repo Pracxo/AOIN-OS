@@ -83,12 +83,17 @@ EXPECTED_TAG = "105fe29348160a2218ac095cfffadcb6f234421f"
 DECISION = "TEMPORAL_CLAIM_EVIDENCE_GRAPH_OPERATOR_EVALUATION_PASS_RECOMMEND_EPISTEMIC_TRUTH_ENGINE_AUTHORIZATION"
 CLAIM_AUTH = "AION-208-KI-0003"
 NEXT_AUTH = "AION-210-KI-0004"
+POST_AUTH = "AION-212-KI-0005"
 AION209_FEATURES = [
     "0a84080c83f87eef94b5191c432021776c6a336a",
     "d50252c84a0a02b75317c7d2051eaee4fb9dc54c",
 ]
 AION209_MERGE = "f9e2438a49aae458983fc57cee5c12b5ef0ab856"
 SCOPE = "deterministic-evidence-corroboration-contradiction-freshness-source-independence-confidence-assessment-core"
+POST_SCOPE = (
+    "deterministic-domain-taxonomy-expert-profile-routing-independent-analysis-"
+    "deliberation-disagreement-synthesis-abstention-core"
+)
 RESOURCE_LIMITS = {
     "maximum_claims_per_assessment_batch": 500,
     "maximum_evidence_bindings_per_claim": 100,
@@ -250,6 +255,9 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
     active = [record for record in records if record.get("authorization_active") is True]
     assert len(active) == 1
     active_record = active[0]
+    post_aion212 = (
+        ROOT / "examples/knowledge-intelligence/epistemic-assessment-operator-evaluation-report.json"
+    ).exists()
     closed = [record for record in records if record.get("authorization_transaction_id") == CLAIM_AUTH]
     assert len(closed) == 1
     closed_record = closed[0]
@@ -265,34 +273,66 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
     assert closed_record["claim_graph_operator_evaluation_id"] == "AION-TCGE-001"
     assert closed_record["claim_graph_operator_evaluation_decision"] == DECISION
     assert closed_record["evaluation_used_as_approval"] is False
-    assert active_record["authorization_transaction_id"] == NEXT_AUTH
-    assert active_record["approval_record_id"] == NEXT_AUTH
-    assert active_record["parent_authorization_transaction_id"] == CLAIM_AUTH
-    assert active_record["parent_evaluation_id"] == "AION-TCGE-001"
-    assert active_record["parent_evaluation_decision"] == DECISION
-    assert active_record["implementation_task"] == "AION-211"
-    assert active_record["formal_closeout_task"] == "AION-212"
-    assert active_record["authorization_scope"] == SCOPE
-    assert active_record["authorization_transaction_approved"] is True
-    assert active_record["explicit_approval_record_approval"] is True
-    assert active_record["implementation_authorization_approved"] is True
-    assert active_record["implementation_go_status"] is True
-    assert active_record["implementation_no_go_status"] is False
-    assert active_record["authorization_consumed"] is False
-    assert active_record["authorization_expired"] is False
-    assert active_record["authorization_reusable"] is False
-    assert all(active_record["authorized_capabilities"].values())
-    assert all(value is False for value in active_record["prohibited_capabilities"].values())
-    assert active_record["resource_limits"] == RESOURCE_LIMITS
-    assert (
-        program["program_state"]
-        == "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout"
-    )
+    if post_aion212:
+        assert active_record["authorization_transaction_id"] == POST_AUTH
+        assert active_record["approval_record_id"] == POST_AUTH
+        assert active_record["implementation_task"] == "AION-213"
+        assert active_record["formal_closeout_task"] == "AION-214"
+        assert active_record["authorization_scope"] == POST_SCOPE
+        next_matches = [
+            record for record in records if record.get("authorization_transaction_id") == NEXT_AUTH
+        ]
+        assert len(next_matches) == 1
+        epistemic_record = next_matches[0]
+        assert epistemic_record["authorization_active"] is False
+        assert epistemic_record["authorization_consumed"] is True
+        assert epistemic_record["authorization_expired"] is True
+        assert epistemic_record["authorization_reusable"] is False
+        assert epistemic_record["authorization_closed_by_task"] == "AION-212"
+        assert epistemic_record["authorization_transaction_id"] == NEXT_AUTH
+        assert epistemic_record["approval_record_id"] == NEXT_AUTH
+        assert epistemic_record["parent_authorization_transaction_id"] == CLAIM_AUTH
+        assert epistemic_record["parent_evaluation_id"] == "AION-TCGE-001"
+        assert epistemic_record["parent_evaluation_decision"] == DECISION
+        assert epistemic_record["implementation_task"] == "AION-211"
+        assert epistemic_record["formal_closeout_task"] == "AION-212"
+        assert epistemic_record["authorization_scope"] == SCOPE
+        assert all(epistemic_record["authorized_capabilities"].values())
+        assert all(value is False for value in epistemic_record["prohibited_capabilities"].values())
+        assert epistemic_record["resource_limits"] == RESOURCE_LIMITS
+        assert program["program_state"] == "domain_expert_mesh_authorized_not_implemented"
+        assert program["active_knowledge_implementation_authorization"] == POST_AUTH
+        assert program["active_knowledge_implementation_task"] == "AION-213"
+        assert program["formal_closeout_task"] == "AION-214"
+    else:
+        assert active_record["authorization_transaction_id"] == NEXT_AUTH
+        assert active_record["approval_record_id"] == NEXT_AUTH
+        assert active_record["parent_authorization_transaction_id"] == CLAIM_AUTH
+        assert active_record["parent_evaluation_id"] == "AION-TCGE-001"
+        assert active_record["parent_evaluation_decision"] == DECISION
+        assert active_record["implementation_task"] == "AION-211"
+        assert active_record["formal_closeout_task"] == "AION-212"
+        assert active_record["authorization_scope"] == SCOPE
+        assert active_record["authorization_transaction_approved"] is True
+        assert active_record["explicit_approval_record_approval"] is True
+        assert active_record["implementation_authorization_approved"] is True
+        assert active_record["implementation_go_status"] is True
+        assert active_record["implementation_no_go_status"] is False
+        assert active_record["authorization_consumed"] is False
+        assert active_record["authorization_expired"] is False
+        assert active_record["authorization_reusable"] is False
+        assert all(active_record["authorized_capabilities"].values())
+        assert all(value is False for value in active_record["prohibited_capabilities"].values())
+        assert active_record["resource_limits"] == RESOURCE_LIMITS
+        assert (
+            program["program_state"]
+            == "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout"
+        )
+        assert program["active_knowledge_implementation_authorization"] == NEXT_AUTH
+        assert program["active_knowledge_implementation_task"] == "AION-211"
+        assert program["formal_closeout_task"] == "AION-212"
     assert program["claim_graph_operator_evaluation_passed"] is True
     assert program["active_knowledge_implementation_authorization_count"] == 1
-    assert program["active_knowledge_implementation_authorization"] == NEXT_AUTH
-    assert program["active_knowledge_implementation_task"] == "AION-211"
-    assert program["formal_closeout_task"] == "AION-212"
     assert program["epistemic_truth_engine_authorized"] is True
     assert program["epistemic_truth_engine_implemented"] is True
     for key in (
@@ -302,7 +342,10 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
         "network_access_enabled", "absolute_truth_oracle_enabled", "runtime_effect",
     ):
         assert program.get(key, False) is False, key
-        assert active_record.get(key, False) is False, key
+        if post_aion212:
+            assert epistemic_record.get(key, False) is False, key
+        else:
+            assert active_record.get(key, False) is False, key
     return program, auth, closed_record, active_record
 
 

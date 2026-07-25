@@ -13,6 +13,7 @@ DECISION = (
 AION211_STATE = (
     "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout"
 )
+AION213_STATE = "domain_expert_mesh_authorized_not_implemented"
 
 
 def test_claim_graph_authorization_exact_lifecycle_and_parentage():
@@ -23,6 +24,7 @@ def test_claim_graph_authorization_exact_lifecycle_and_parentage():
         "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
         "epistemic_truth_engine_authorized_not_implemented",
         AION211_STATE,
+        AION213_STATE,
     }
     assert record["authorization_transaction_id"] == "AION-208-KI-0003"
     assert record["approval_record_id"] == "AION-208-KI-0003"
@@ -38,6 +40,7 @@ def test_claim_graph_authorization_exact_lifecycle_and_parentage():
     if program["program_state"] in {
         "epistemic_truth_engine_authorized_not_implemented",
         AION211_STATE,
+        AION213_STATE,
     }:
         assert record["authorization_active"] is False
         assert record["authorization_consumed"] is True
