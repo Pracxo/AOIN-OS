@@ -76,6 +76,17 @@ EPISTEMIC_ASSESSMENT_SOURCE = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_freshness.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_integrity.py",
 }
+DOMAIN_EXPERT_MESH_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_domain_expert_mesh.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_deliberation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_mesh.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_profiles.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_routing.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_synthesis.py",
+}
 PROHIBITED_PREFIXES = (
     ".github/workflows/",
     "services/brain-api/src/aion_brain/",
@@ -144,6 +155,12 @@ for parts in entries:
         if CLAIM_GRAPH_CONTEXT and normalized in CLAIM_GRAPH_SOURCE:
             continue
         if EPISTEMIC_ASSESSMENT_CONTEXT and normalized in EPISTEMIC_ASSESSMENT_SOURCE:
+            continue
+        if (
+            program_state
+            == "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout"
+            and normalized in DOMAIN_EXPERT_MESH_SOURCE
+        ):
             continue
         if normalized.startswith(PROHIBITED_PREFIXES) and normalized not in ALLOWED_EXACT:
             raise SystemExit(f"runtime/source/workflow path changed on AION-206: {normalized}")

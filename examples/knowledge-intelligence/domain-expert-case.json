@@ -1,34 +1,31 @@
 {
-  "authorization_transaction_id": "AION-212-KI-0005",
-  "case_fingerprint": "domain-expert-case-fingerprint-001",
-  "case_id": "domain-expert-case-001",
+  "advisory_only": true,
+  "case_fingerprint": "c4cab41cc695a7e7acac3daadfbae583df1ee28c79aabf9a9550b37724966d69",
+  "case_id": "case-001",
   "claim_ids": [
-    "claim-0001"
+    "claim-001",
+    "claim-002"
   ],
   "domain_ids": [
-    "domain-regulatory-001"
+    "computing-and-information-systems"
   ],
   "epistemic_assessment_ids": [
-    "epistemic-assessment-claim-0001"
+    "assessment-001",
+    "assessment-002"
   ],
-  "new_evidence_created": false,
+  "explicit_subquestions": [],
   "operator_supplied": true,
-  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
-  "question_summary": "Evaluate the evidence posture for a bounded synthetic regulatory claim.",
+  "question_summary": "Assess explicit claim posture for advisory review",
   "read_only": true,
   "redacted": true,
-  "risk_class": "high_stakes",
+  "risk_class": "moderate",
   "runtime_effect": false,
   "schema_version": "aion-knowledge-domain-expert-case/v1",
   "specialty_ids": [
-    "specialty-policy-001"
+    "computing-and-information-systems-general"
   ],
   "synthetic": true,
-  "target_jurisdiction_ids": [
-    "global"
-  ],
-  "target_valid_time": "2026-01-01T00:00:00Z",
-  "target_version_ids": [
-    "policy-v1"
-  ]
+  "target_jurisdiction_ids": [],
+  "target_valid_time": null,
+  "target_version_ids": []
 }

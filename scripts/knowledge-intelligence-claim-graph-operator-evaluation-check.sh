@@ -300,10 +300,20 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
         assert all(epistemic_record["authorized_capabilities"].values())
         assert all(value is False for value in epistemic_record["prohibited_capabilities"].values())
         assert epistemic_record["resource_limits"] == RESOURCE_LIMITS
-        assert program["program_state"] == "domain_expert_mesh_authorized_not_implemented"
+        assert program["program_state"] in {
+            "domain_expert_mesh_authorized_not_implemented",
+            "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
+        }
         assert program["active_knowledge_implementation_authorization"] == POST_AUTH
         assert program["active_knowledge_implementation_task"] == "AION-213"
         assert program["formal_closeout_task"] == "AION-214"
+        if (
+            program["program_state"]
+            == "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout"
+        ):
+            assert program["domain_expert_mesh_implemented"] is True
+            assert program["model_call_enabled"] is False
+            assert program["persistent_mesh_write_enabled"] is False
     else:
         assert active_record["authorization_transaction_id"] == NEXT_AUTH
         assert active_record["approval_record_id"] == NEXT_AUTH

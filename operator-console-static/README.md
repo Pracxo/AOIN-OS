@@ -178,6 +178,26 @@ evaluation and conditional epistemic truth-engine authorization:
 - `demo-data/knowledge-intelligence-epistemic-truth-authorization.json`
 - `demo-data/knowledge-intelligence-epistemic-runtime-hold.json`
 
+## Domain Expert Mesh Evidence
+
+AION-213 adds bundled read-only evidence for the deterministic in-memory
+domain expert mesh:
+
+- `demo-data/knowledge-intelligence-domain-expert-mesh.json`
+- `demo-data/knowledge-intelligence-domain-expert-panel.json`
+- `demo-data/knowledge-intelligence-domain-expert-reports.json`
+- `demo-data/knowledge-intelligence-domain-expert-critiques.json`
+- `demo-data/knowledge-intelligence-domain-expert-disagreement.json`
+- `demo-data/knowledge-intelligence-domain-expert-synthesis.json`
+- `demo-data/knowledge-intelligence-domain-expert-integrity.json`
+- `demo-data/knowledge-intelligence-domain-expert-runtime-hold.json`
+
+The console renders static redacted IDs, counts, roles, positions, confidence
+caps, abstention state, integrity state, and disabled runtime flags only. It
+does not impersonate experts, claim credentials, call models, execute tools,
+access a network, accept or reject claims, promote knowledge, mutate beliefs,
+or persist mesh state.
+
 The console shows `AION-TCGE-001` PASS, `AION-208-KI-0003` closed, and
 `AION-210-KI-0004` active for AION-211. It implements no AION-211 runtime
 source, no truth oracle, no persistent writes, no network access, no knowledge

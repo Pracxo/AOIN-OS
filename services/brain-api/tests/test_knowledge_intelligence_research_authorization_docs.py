@@ -49,6 +49,9 @@ AION211_STATE = (
     "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout"
 )
 AION213_STATE = "domain_expert_mesh_authorized_not_implemented"
+AION213_IMPLEMENTED_STATE = (
+    "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout"
+)
 
 
 def test_required_files_exist_and_scripts_executable():
@@ -70,6 +73,7 @@ def test_ledgers_create_single_active_knowledge_authorization():
         "epistemic_truth_engine_authorized_not_implemented",
         AION211_STATE,
         AION213_STATE,
+        AION213_IMPLEMENTED_STATE,
     }
     assert program["active_knowledge_implementation_authorization_count"] == 1
     if program["program_state"] in {
@@ -83,7 +87,7 @@ def test_ledgers_create_single_active_knowledge_authorization():
             assert program["epistemic_truth_engine_implemented"] is True
             assert program["epistemic_truth_engine_runtime_enabled"] is False
             assert program["persistent_assessment_write_enabled"] is False
-    elif program["program_state"] == AION213_STATE:
+    elif program["program_state"] in {AION213_STATE, AION213_IMPLEMENTED_STATE}:
         assert program["active_knowledge_implementation_authorization"] == (
             DOMAIN_EXPERT_MESH_AUTH_ID
         )
@@ -92,6 +96,10 @@ def test_ledgers_create_single_active_knowledge_authorization():
         assert program["epistemic_truth_engine_implemented"] is True
         assert program["epistemic_truth_engine_runtime_enabled"] is False
         assert program["persistent_assessment_write_enabled"] is False
+        if program["program_state"] == AION213_IMPLEMENTED_STATE:
+            assert program["domain_expert_mesh_implemented"] is True
+            assert program["model_call_enabled"] is False
+            assert program["persistent_mesh_write_enabled"] is False
     elif program["program_state"] in {
         "temporal_claim_evidence_graph_authorized_not_implemented",
         "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",

@@ -1,0 +1,20 @@
+{
+  "alignment_state": null,
+  "case_id": "case-001",
+  "consensus_ranking_enabled": false,
+  "disagreement_type": null,
+  "domain_id": null,
+  "explicit_abstention": null,
+  "fuzzy_search_enabled": false,
+  "limit": 1000,
+  "operator_review_required": null,
+  "panel_id": null,
+  "perspective_role": null,
+  "profile_id": null,
+  "report_position": null,
+  "risk_class": null,
+  "schema_version": "aion-knowledge-expert-mesh-evidence/v1",
+  "semantic_search_enabled": false,
+  "session_id": null,
+  "specialty_id": null
+}

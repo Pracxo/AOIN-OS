@@ -1,0 +1,167 @@
+{
+  "case_id": "case-001",
+  "decomposition_policy_fingerprint": "dc2acd4c7f2fc08f9866a0ad5dab3f4b6d00bf9a5f1dbc88083d33cc5307e9a4",
+  "external_research_requested": false,
+  "model_inference_used": false,
+  "plan_fingerprint": "68adfd7074da3027b4cd1588ba810bbbbe1969b0c597e6b8665f01536d2bdd42",
+  "plan_id": "subquestion-plan-case-001",
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-expert-panel-plan/v1",
+  "subquestion_count": 7,
+  "subquestions": [
+    {
+      "assessment_ids": [
+        "assessment-001",
+        "assessment-002"
+      ],
+      "case_id": "case-001",
+      "category": "domain-interpretation",
+      "claim_ids": [
+        "claim-001",
+        "claim-002"
+      ],
+      "domain_ids": [
+        "computing-and-information-systems"
+      ],
+      "perspective_role": "domain_analyst",
+      "runtime_effect": false,
+      "specialty_ids": [
+        "computing-and-information-systems-general"
+      ],
+      "subquestion_fingerprint": "4bac8c2bc706a77a6173ca661ed1cbaf508232f8673b696155c61736db461af9",
+      "subquestion_id": "subquestion-case-001-domain-interpretation"
+    },
+    {
+      "assessment_ids": [
+        "assessment-001",
+        "assessment-002"
+      ],
+      "case_id": "case-001",
+      "category": "evidence-sufficiency",
+      "claim_ids": [
+        "claim-001",
+        "claim-002"
+      ],
+      "domain_ids": [
+        "computing-and-information-systems"
+      ],
+      "perspective_role": "evidence_auditor",
+      "runtime_effect": false,
+      "specialty_ids": [
+        "computing-and-information-systems-general"
+      ],
+      "subquestion_fingerprint": "c022cadb3128c612353db5ebccfd71a5633d40cdf81d6a6168b8c1ea142e9413",
+      "subquestion_id": "subquestion-case-001-evidence-sufficiency"
+    },
+    {
+      "assessment_ids": [
+        "assessment-001",
+        "assessment-002"
+      ],
+      "case_id": "case-001",
+      "category": "limitations",
+      "claim_ids": [
+        "claim-001",
+        "claim-002"
+      ],
+      "domain_ids": [
+        "computing-and-information-systems"
+      ],
+      "perspective_role": "methodological_skeptic",
+      "runtime_effect": false,
+      "specialty_ids": [
+        "computing-and-information-systems-general"
+      ],
+      "subquestion_fingerprint": "b10f044a452050774c3bddb71c4da19bd277b2b6c731afdc8fb12c581966c95a",
+      "subquestion_id": "subquestion-case-001-limitations"
+    },
+    {
+      "assessment_ids": [
+        "assessment-001",
+        "assessment-002"
+      ],
+      "case_id": "case-001",
+      "category": "methodological-assumptions",
+      "claim_ids": [
+        "claim-001",
+        "claim-002"
+      ],
+      "domain_ids": [
+        "computing-and-information-systems"
+      ],
+      "perspective_role": "methodological_skeptic",
+      "runtime_effect": false,
+      "specialty_ids": [
+        "computing-and-information-systems-general"
+      ],
+      "subquestion_fingerprint": "1e4f4f9c6ac0d7531d9932474324bb09091e3546c07958bc79abe5b20f2b5712",
+      "subquestion_id": "subquestion-case-001-methodological-assumptions"
+    },
+    {
+      "assessment_ids": [
+        "assessment-001",
+        "assessment-002"
+      ],
+      "case_id": "case-001",
+      "category": "source-independence",
+      "claim_ids": [
+        "claim-001",
+        "claim-002"
+      ],
+      "domain_ids": [
+        "computing-and-information-systems"
+      ],
+      "perspective_role": "evidence_auditor",
+      "runtime_effect": false,
+      "specialty_ids": [
+        "computing-and-information-systems-general"
+      ],
+      "subquestion_fingerprint": "a51dfa703ed6edf0534717aa0d91714d1670a9b2508ec1dd778d46f1a1158dff",
+      "subquestion_id": "subquestion-case-001-source-independence"
+    },
+    {
+      "assessment_ids": [
+        "assessment-001",
+        "assessment-002"
+      ],
+      "case_id": "case-001",
+      "category": "synthesis-constraints",
+      "claim_ids": [
+        "claim-001",
+        "claim-002"
+      ],
+      "domain_ids": [
+        "computing-and-information-systems"
+      ],
+      "perspective_role": "synthesis_coordinator",
+      "runtime_effect": false,
+      "specialty_ids": [
+        "computing-and-information-systems-general"
+      ],
+      "subquestion_fingerprint": "1534bf9f2e0cf20d69d633ff6a2f44b7740dd30ae5b3bb6fec86ecf4a5c0ac7e",
+      "subquestion_id": "subquestion-case-001-synthesis-constraints"
+    },
+    {
+      "assessment_ids": [
+        "assessment-001",
+        "assessment-002"
+      ],
+      "case_id": "case-001",
+      "category": "unresolved-contradiction",
+      "claim_ids": [
+        "claim-001",
+        "claim-002"
+      ],
+      "domain_ids": [
+        "computing-and-information-systems"
+      ],
+      "perspective_role": "methodological_skeptic",
+      "runtime_effect": false,
+      "specialty_ids": [
+        "computing-and-information-systems-general"
+      ],
+      "subquestion_fingerprint": "67278d421056c52cecea7f01fdabfa88e4bd8e7a5ae213115918b0c822d237c7",
+      "subquestion_id": "subquestion-case-001-unresolved-contradiction"
+    }
+  ]
+}

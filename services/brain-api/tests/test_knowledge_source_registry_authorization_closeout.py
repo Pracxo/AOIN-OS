@@ -19,6 +19,9 @@ AION211_STATE = (
     "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout"
 )
 AION213_STATE = "domain_expert_mesh_authorized_not_implemented"
+AION213_IMPLEMENTED_STATE = (
+    "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout"
+)
 
 
 def test_aion_206_source_registry_authorization_is_closed_and_non_reusable():
@@ -60,13 +63,17 @@ def test_aion_208_claim_graph_authorization_hands_off_to_next_active_authorizati
             assert active["epistemic_truth_engine_implemented"] is True
             assert active["epistemic_truth_engine_runtime_enabled"] is False
             assert active["resource_limits"]["maximum_persistent_assessment_write_batch"] == 0
-    elif program["program_state"] == AION213_STATE:
+    elif program["program_state"] in {AION213_STATE, AION213_IMPLEMENTED_STATE}:
         assert active["authorization_transaction_id"] == DOMAIN_EXPERT_MESH_AUTH_ID
         assert active["implementation_task"] == "AION-213"
         assert active["formal_closeout_task"] == "AION-214"
         assert active["domain_expert_mesh_authorized"] is True
         assert active["domain_expert_mesh_implemented"] is False
         assert active["runtime_effect"] is False
+        if program["program_state"] == AION213_IMPLEMENTED_STATE:
+            assert program["domain_expert_mesh_implemented"] is True
+            assert program["model_call_enabled"] is False
+            assert program["persistent_mesh_write_enabled"] is False
     else:
         assert active["authorization_transaction_id"] == CLAIM_GRAPH_AUTH_ID
         assert active["implementation_task"] == "AION-209"

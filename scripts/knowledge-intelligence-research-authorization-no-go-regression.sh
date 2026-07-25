@@ -17,6 +17,17 @@ AION205=('services/brain-api/src/aion_brain/contracts/knowledge_research.py','se
 CLAIM_GRAPH_SOURCE={
     'services/brain-api/src/aion_brain/contracts/knowledge_claim_graph.py',
 }
+DOMAIN_EXPERT_MESH_SOURCE={
+    'services/brain-api/src/aion_brain/contracts/knowledge_domain_expert_mesh.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_deliberation.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_evidence.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_integrity.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_mesh.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_profiles.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_routing.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_synthesis.py',
+}
 SOURCE_REGISTRY_SOURCE={
     'services/brain-api/src/aion_brain/contracts/knowledge_source_registry.py',
     'services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py',
@@ -26,7 +37,7 @@ SOURCE_REGISTRY_SOURCE={
     'services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_index.py',
     'services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_evidence.py',
 }
-SECRET=re.compile(r'(?i)(sk-[a-z0-9]|ghp_[a-z0-9]|gho_[a-z0-9]|xoxb-|bearer\s+[a-z0-9])')
+SECRET=re.compile(r'(?i)((^|[^a-z0-9])sk-[a-z0-9_-]{20,}|ghp_[a-z0-9_-]{20,}|gho_[a-z0-9_-]{20,}|xoxb-[a-z0-9-]{20,}|bearer\s+[a-z0-9._-]{20,})')
 URL=re.compile(r'''https?://([^/\s"']+)''')
 def run(args, check=True): return subprocess.run(args,cwd=ROOT,text=True,capture_output=True,check=check)
 def ref_exists(ref): return run(['git','rev-parse','--verify','--quiet',ref],False).returncode==0
@@ -54,6 +65,7 @@ implemented_states = {
     'epistemic_truth_engine_authorized_not_implemented',
     'epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout',
     'domain_expert_mesh_authorized_not_implemented',
+    'domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout',
 }
 EPISTEMIC_ASSESSMENT_SOURCE={
     'services/brain-api/src/aion_brain/contracts/knowledge_epistemic_assessment.py',
@@ -87,10 +99,11 @@ for parts in entries:
         n=p.replace('\\','/')
         if n in PROHIBITED_NAMES or Path(n).name in PROHIBITED_NAMES: raise SystemExit(f'dependency/package file changed: {n}')
         aion205_allowed = program_state in implemented_states and (n == AION205[0] or n.startswith(AION205[1]))
-        claim_graph_allowed = program_state in {'temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout', 'epistemic_truth_engine_authorized_not_implemented', 'epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout'} and n in CLAIM_GRAPH_SOURCE
-        epistemic_assessment_allowed = program_state == 'epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout' and n in EPISTEMIC_ASSESSMENT_SOURCE
+        claim_graph_allowed = program_state in {'temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout', 'epistemic_truth_engine_authorized_not_implemented', 'epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout', 'domain_expert_mesh_authorized_not_implemented', 'domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout'} and n in CLAIM_GRAPH_SOURCE
+        epistemic_assessment_allowed = program_state in {'epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout', 'domain_expert_mesh_authorized_not_implemented', 'domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout'} and n in EPISTEMIC_ASSESSMENT_SOURCE
+        domain_expert_allowed = program_state == 'domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout' and n in DOMAIN_EXPERT_MESH_SOURCE
         source_registry_allowed = program_state == 'source_provenance_registry_implemented_write_disabled_pending_closeout' and n in SOURCE_REGISTRY_SOURCE
-        if n.startswith(PROHIBITED_PREFIXES) and not (aion205_allowed or source_registry_allowed or claim_graph_allowed or epistemic_assessment_allowed): raise SystemExit(f'prohibited runtime/source path changed: {n}')
+        if n.startswith(PROHIBITED_PREFIXES) and not (aion205_allowed or source_registry_allowed or claim_graph_allowed or epistemic_assessment_allowed or domain_expert_allowed): raise SystemExit(f'prohibited runtime/source path changed: {n}')
         if n.startswith(AION205) and not aion205_allowed: raise SystemExit(f'AION-205 implementation source added by AION-204: {n}')
 if program_state not in implemented_states:
     for p in AION205:

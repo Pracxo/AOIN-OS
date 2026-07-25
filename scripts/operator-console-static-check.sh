@@ -143,6 +143,52 @@ required_actions = {
     "enable_external_model_calls",
     "hard_delete",
 }
+
+
+def validate_domain_expert_demo(payload: object, path: Path) -> None:
+    forbidden_true_keys = {
+        "automatic_action",
+        "belief_mutated",
+        "claim_accepted",
+        "claim_rejected",
+        "confidence_amplified",
+        "consensus_as_truth",
+        "domain_expert_mesh_runtime_enabled",
+        "expert_majority_truth_override_enabled",
+        "expert_mesh_database_enabled",
+        "human_expert_identity_claimed",
+        "human_expert_identity_claim_enabled",
+        "knowledge_promoted",
+        "model_call_enabled",
+        "model_provider_integration_enabled",
+        "network_access_enabled",
+        "persistent_expert_mesh_write_enabled",
+        "persistent_mesh_write_authorized",
+        "professional_credential_claimed",
+        "professional_credential_claim_enabled",
+        "runtime_effect",
+        "tool_execution_enabled",
+        "truth_decision",
+    }
+
+    def walk(value: object) -> None:
+        if isinstance(value, dict):
+            if "read_only" in value and value["read_only"] is not True:
+                raise SystemExit(f"domain expert demo must be read_only: {path}")
+            if "redacted" in value and value["redacted"] is not True:
+                raise SystemExit(f"domain expert demo must be redacted: {path}")
+            if "redaction_applied" in value and value["redaction_applied"] is not True:
+                raise SystemExit(f"domain expert demo redaction flag must be true: {path}")
+            for key in forbidden_true_keys:
+                if value.get(key) is not False and key in value:
+                    raise SystemExit(f"domain expert demo flag must be false: {key}: {path}")
+            for nested in value.values():
+                walk(nested)
+        elif isinstance(value, list):
+            for item in value:
+                walk(item)
+
+    walk(payload)
 for path in sorted(demo_dir.glob("*.json")):
     payload = json.loads(path.read_text())
     if path.name.startswith("action-authorization-"):
@@ -549,6 +595,9 @@ for path in sorted(demo_dir.glob("*.json")):
             raise SystemExit(f"actual shadow activation review must require future authorization: {path}")
         if payload.get("next_authorization_must_be_separate") is not True:
             raise SystemExit(f"actual shadow activation review must require separate authorization: {path}")
+        continue
+    if path.name.startswith("knowledge-intelligence-domain-expert-"):
+        validate_domain_expert_demo(payload, path)
         continue
     if path.name.startswith("knowledge-intelligence-"):
         if path.name not in {

@@ -1,0 +1,53 @@
+{
+  "case_id": "case-001",
+  "disagreement_count": 1,
+  "disagreements": [
+    {
+      "critique_ids": [
+        "critique-report-case-001-domain_analyst-evidence_auditor",
+        "critique-report-case-001-evidence_auditor-methodological_skeptic",
+        "critique-report-case-001-methodological_skeptic-domain_analyst",
+        "critique-report-case-001-synthesis_coordinator-domain_analyst"
+      ],
+      "disagreement_fingerprint": "6e921d97c44bfc6c52356dcc00b8b79d524ec89bd83905e050f7f0857fd323e6",
+      "disagreement_id": "disagreement-case-001-evidence",
+      "disagreement_type": "evidence",
+      "material": true,
+      "position_values": [
+        "abstain"
+      ],
+      "reason_codes": [
+        "domain_mesh_disagreement_detected",
+        "domain_mesh_evidence_gap_recorded",
+        "domain_mesh_dissent_preserved"
+      ],
+      "report_ids": [
+        "report-case-001-domain_analyst",
+        "report-case-001-evidence_auditor",
+        "report-case-001-methodological_skeptic",
+        "report-case-001-synthesis_coordinator"
+      ],
+      "runtime_effect": false,
+      "truth_value_assigned": false,
+      "winner_declared": false
+    }
+  ],
+  "dissent_preserved": true,
+  "matrix_fingerprint": "847c1d74c19c5f836a1cfe568cb4347a6836166208096264d16917a581a090b2",
+  "matrix_id": "matrix-case-001",
+  "panel_id": "panel-case-001",
+  "preserved_critique_ids": [
+    "critique-report-case-001-domain_analyst-evidence_auditor",
+    "critique-report-case-001-evidence_auditor-methodological_skeptic",
+    "critique-report-case-001-methodological_skeptic-domain_analyst",
+    "critique-report-case-001-synthesis_coordinator-domain_analyst"
+  ],
+  "preserved_report_ids": [
+    "report-case-001-domain_analyst",
+    "report-case-001-evidence_auditor",
+    "report-case-001-methodological_skeptic",
+    "report-case-001-synthesis_coordinator"
+  ],
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-expert-disagreement-matrix/v1"
+}

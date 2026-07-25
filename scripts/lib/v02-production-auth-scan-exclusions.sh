@@ -106,6 +106,9 @@ aion151_is_scoped_authorization_path() {
       if aion212_is_scoped_knowledge_intelligence_epistemic_assessment_evaluation_path "$1"; then
         return 0
       fi
+      if aion213_is_scoped_knowledge_intelligence_domain_expert_mesh_path "$1"; then
+        return 0
+      fi
       return 1
       ;;
   esac
@@ -1883,6 +1886,49 @@ aion212_is_scoped_knowledge_intelligence_epistemic_assessment_evaluation_path() 
     services/brain-api/tests/test_knowledge_epistemic_assessment_evaluation_*.py|\
     services/brain-api/tests/test_knowledge_epistemic_assessment_operator_evaluation.py|\
     services/brain-api/tests/test_knowledge_epistemic_assessment_operator_evaluation_docs.py)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+aion213_is_scoped_knowledge_intelligence_domain_expert_mesh_path() {
+  # Scoped AION-213 Knowledge Intelligence domain expert mesh implementation
+  # artifacts. Production auth runtime files, package files, migrations, API
+  # routes, workflows, and releases remain blocked by the caller.
+  case "$1" in
+    README.md|\
+    AGENTS.md|\
+    docs/adr/0177-deterministic-domain-expert-mesh-core.md|\
+    docs/adr/README.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/project-status.md|\
+    docs/visual-brain.md|\
+    docs/knowledge-intelligence/*|\
+    docs/release/knowledge-intelligence-domain-expert-mesh-*|\
+    docs/release/v02-release-readiness-delta.md|\
+    examples/knowledge-intelligence/*|\
+    operator-console-static/README.md|\
+    operator-console-static/app.js|\
+    operator-console-static/demo-data/knowledge-intelligence-domain-expert-*.json|\
+    scripts/knowledge-intelligence-domain-expert-mesh-*.sh|\
+    scripts/lib/knowledge_intelligence_domain_expert_mesh_authorization.py|\
+    services/brain-api/src/aion_brain/contracts/knowledge_domain_expert_mesh.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_deliberation.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_evidence.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_integrity.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_mesh.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_profiles.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_routing.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_synthesis.py|\
+    services/brain-api/tests/knowledge_domain_expert_mesh_test_helpers.py|\
+    services/brain-api/tests/test_knowledge_domain_expert_mesh_*.py|\
+    services/brain-api/tests/test_knowledge_intelligence_current_projection.py)
       return 0
       ;;
     *)

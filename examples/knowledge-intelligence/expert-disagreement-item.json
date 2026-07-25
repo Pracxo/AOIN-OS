@@ -1,25 +1,33 @@
 {
-  "authorization_transaction_id": "AION-212-KI-0005",
-  "claim_ids": [
-    "claim-0001"
+  "critique_ids": [
+    "critique-report-case-001-domain_analyst-evidence_auditor",
+    "critique-report-case-001-evidence_auditor-methodological_skeptic",
+    "critique-report-case-001-methodological_skeptic-domain_analyst",
+    "critique-report-case-001-synthesis_coordinator-domain_analyst"
   ],
-  "disagreement_fingerprint": "expert-disagreement-item-fingerprint-001",
-  "disagreement_id": "expert-disagreement-item-001",
-  "disagreement_type": "methodological_scope_difference",
+  "disagreement_fingerprint": "6e921d97c44bfc6c52356dcc00b8b79d524ec89bd83905e050f7f0857fd323e6",
+  "disagreement_id": "disagreement-case-001-evidence",
+  "disagreement_type": "evidence",
   "dissent_preserved": true,
-  "evidence_separated": true,
+  "material": true,
   "minority_report_deleted": false,
-  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
-  "read_only": true,
-  "redacted": true,
+  "position_values": [
+    "abstain"
+  ],
+  "reason_codes": [
+    "domain_mesh_disagreement_detected",
+    "domain_mesh_evidence_gap_recorded",
+    "domain_mesh_dissent_preserved"
+  ],
   "report_ids": [
-    "expert-perspective-report-001",
-    "expert-perspective-report-002"
+    "report-case-001-domain_analyst",
+    "report-case-001-evidence_auditor",
+    "report-case-001-methodological_skeptic",
+    "report-case-001-synthesis_coordinator"
   ],
   "resolution_attempted": false,
   "runtime_effect": false,
-  "schema_version": "aion-knowledge-expert-disagreement-item/v1",
-  "scope_separated": true,
-  "synthetic": true,
-  "unresolved": true
+  "truth_value_assigned": false,
+  "unresolved": true,
+  "winner_declared": false
 }

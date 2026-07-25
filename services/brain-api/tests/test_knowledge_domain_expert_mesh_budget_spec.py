@@ -22,8 +22,7 @@ def test_domain_expert_mesh_resource_limits_are_exact_and_fail_closed():
     validator = _load_validator()
     budget = json.loads(
         (
-            REPO_ROOT
-            / "examples/knowledge-intelligence/domain-expert-mesh-resource-budget.json"
+            REPO_ROOT / "examples/knowledge-intelligence/domain-expert-mesh-resource-budget.json"
         ).read_text()
     )
     assert budget["resource_limits"] == validator.RESOURCE_LIMITS

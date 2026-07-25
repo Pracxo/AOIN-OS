@@ -241,6 +241,9 @@ DOMAIN_EXPERT_SOURCE_FILES: tuple[str, ...] = (
     "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_integrity.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_evidence.py",
 )
+DOMAIN_EXPERT_ALLOWED_EXPORTS: tuple[str, ...] = (
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+)
 
 
 def load_json(root: Path, relative: str) -> dict[str, Any]:
@@ -303,9 +306,15 @@ def validate_authorization_payload(payload: dict[str, Any]) -> None:
 
 
 def validate_repository_state(root: Path) -> None:
-    for relative in DOMAIN_EXPERT_SOURCE_FILES:
+    forbidden = (
+        "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_runtime.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_model_provider.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_tools.py",
+        "services/brain-api/src/aion_brain/api/domain_expert_mesh.py",
+    )
+    for relative in forbidden:
         if (root / relative).exists():
-            raise ValueError(f"AION-213 source must not exist on AION-212 branch: {relative}")
+            raise ValueError(f"unauthorized domain expert mesh runtime path exists: {relative}")
 
 
 def validate_authorization_files(root: Path) -> None:
@@ -325,8 +334,17 @@ def validate_authorization_files(root: Path) -> None:
         raise ValueError("program ledger formal closeout mismatch")
     if program.get("domain_expert_mesh_authorized") is not True:
         raise ValueError("program ledger must authorize domain expert mesh")
-    if program.get("domain_expert_mesh_implemented") is not False:
-        raise ValueError("program ledger must keep domain expert mesh unimplemented")
+    if program.get("domain_expert_mesh_implemented") not in {False, True}:
+        raise ValueError("program ledger domain expert mesh implementation flag invalid")
+    if program.get("domain_expert_mesh_implemented") is True:
+        if program.get("domain_expert_mesh_state") != (
+            "implemented_deterministic_in_memory_advisory_persistent_write_disabled"
+        ):
+            raise ValueError("program ledger domain expert mesh state mismatch")
+        if program.get("domain_expert_mesh_runtime_enabled") is not False:
+            raise ValueError("program ledger must keep mesh runtime disabled")
+        if program.get("persistent_expert_mesh_write_enabled") is not False:
+            raise ValueError("program ledger must keep mesh persistence disabled")
     for key in PROHIBITED_CAPABILITIES:
         if program.get(key, False) is not False:
             raise ValueError(f"program ledger prohibited capability enabled: {key}")
@@ -336,11 +354,15 @@ def validate_authorization_files(root: Path) -> None:
 def validate_runtime_hold(root: Path) -> None:
     validate_authorization_files(root)
     runtime = load_json(root, "examples/knowledge-intelligence/domain-expert-mesh-runtime-hold.json")
+    if runtime.get("domain_expert_mesh_implemented") is not True:
+        raise ValueError("runtime hold must verify implemented mesh state")
     for key in (
-        "domain_expert_mesh_implemented",
         "domain_expert_mesh_runtime_enabled",
         "persistent_mesh_write_enabled",
+        "persistent_expert_mesh_write_enabled",
+        "expert_mesh_database_enabled",
         "model_provider_integration_enabled",
+        "model_call_enabled",
         "tool_execution_enabled",
         "network_access_enabled",
         "human_expert_identity_claim_enabled",

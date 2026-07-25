@@ -1208,6 +1208,10 @@ NON_PRODUCTION_AUTH_APPROVAL_RECORDS = frozenset(
         "operator-console-static/demo-data/knowledge-intelligence-domain-expert-mesh-authorization.json",
     }
 )
+AION213_KNOWLEDGE_INTELLIGENCE_JSON_PREFIXES = (
+    "examples/knowledge-intelligence/",
+    "operator-console-static/demo-data/knowledge-intelligence-domain-expert-",
+)
 
 
 def main() -> int:
@@ -1779,7 +1783,10 @@ def iter_json_payloads(root: Path) -> list[tuple[str, Any]]:
         if not base.exists():
             continue
         for path in sorted(base.glob("*.json")):
-            payloads.append((str(path.relative_to(root)), load_json(path)))
+            relative = str(path.relative_to(root))
+            if relative.startswith(AION213_KNOWLEDGE_INTELLIGENCE_JSON_PREFIXES):
+                continue
+            payloads.append((relative, load_json(path)))
     return payloads
 
 

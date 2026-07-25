@@ -32,7 +32,10 @@ NEXT_SCOPE = (
     "deliberation-disagreement-synthesis-abstention-core"
 )
 PROGRAM_STATE = "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout"
-POST_AION212_PROGRAM_STATE = "domain_expert_mesh_authorized_not_implemented"
+POST_AION212_PROGRAM_STATES = {
+    "domain_expert_mesh_authorized_not_implemented",
+    "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
+}
 ENGINE_STATE = "implemented_deterministic_in_memory_assessment_persistent_write_disabled"
 SOURCE_FILES = {
     "services/brain-api/src/aion_brain/contracts/knowledge_epistemic_assessment.py",
@@ -168,8 +171,10 @@ ALLOWED_EXACT = {
     "scripts/knowledge-intelligence-source-registry-runtime-hold.sh",
     "scripts/lib/cognitive_architecture_governance.py",
     "scripts/lib/v02-production-auth-scan-exclusions.sh",
+    "scripts/operator-action-write-path-no-go-regression.sh",
     "scripts/operator-console-static-check.sh",
     "scripts/production-auth-architecture-check.sh",
+    "scripts/production-auth-core-no-go-regression.sh",
     "scripts/static-console-safety-check.sh",
 }
 ALLOWED_PREFIXES = (
@@ -191,15 +196,21 @@ AION212_ALLOWED_PREFIXES = (
     "examples/knowledge-intelligence/expert-",
     "operator-console-static/demo-data/knowledge-intelligence-epistemic-assessment-evaluation",
     "operator-console-static/demo-data/knowledge-intelligence-domain-expert-mesh",
+    "operator-console-static/demo-data/knowledge-intelligence-domain-expert-",
     "scripts/knowledge-intelligence-epistemic-assessment-operator-evaluation",
     "scripts/knowledge-intelligence-domain-expert-mesh",
     "scripts/lib/knowledge_intelligence_epistemic_assessment_operator_evaluation.py",
     "scripts/lib/knowledge_intelligence_domain_expert_mesh_authorization.py",
+    "services/brain-api/src/aion_brain/contracts/knowledge_domain_expert_mesh.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_",
     "services/brain-api/tests/test_knowledge_epistemic_assessment_operator_evaluation",
     "services/brain-api/tests/test_knowledge_domain_expert_mesh_",
 )
 AION212_ALLOWED_EXACT = {
     "docs/adr/0176-epistemic-assessment-evaluation-and-domain-expert-mesh-authorization.md",
+    "docs/adr/0177-deterministic-domain-expert-mesh-core.md",
+    "docs/knowledge-intelligence/aion-213-checklist.md",
+    "docs/knowledge-intelligence/computational-expert-profiles.md",
     "examples/knowledge-intelligence/epistemic-assessment-operator-evaluation-report.json",
     "examples/knowledge-intelligence/epistemic-assessment-evaluation-scenario-summary.json",
     "scripts/auth-design-check.sh",
@@ -213,10 +224,12 @@ AION212_ALLOWED_EXACT = {
     "scripts/lib/v02-production-auth-scan-exclusions.sh",
     "scripts/lib/v02_production_auth_authorization.py",
     "services/brain-api/tests/knowledge_claim_graph_evaluation_test_helpers.py",
+    "services/brain-api/tests/knowledge_domain_expert_mesh_test_helpers.py",
     "services/brain-api/tests/knowledge_source_registry_test_helpers.py",
     "services/brain-api/tests/test_knowledge_claim_graph_authorization_closeout.py",
     "services/brain-api/tests/test_knowledge_claim_graph_authorization_validator.py",
     "services/brain-api/tests/test_knowledge_epistemic_truth_authorization_validator.py",
+    "services/brain-api/tests/test_knowledge_intelligence_current_projection.py",
     "services/brain-api/tests/test_knowledge_intelligence_research_authorization_docs.py",
     "services/brain-api/tests/test_knowledge_research_authorization_closeout.py",
     "services/brain-api/tests/test_knowledge_source_registry_authorization_closeout.py",
@@ -340,7 +353,11 @@ def assert_changed_paths() -> None:
                 raise SystemExit(f"prohibited exact path changed: {normalized}")
             if normalized.startswith(PROHIBITED_PREFIXES):
                 raise SystemExit(f"prohibited runtime or governance path changed: {normalized}")
-            if normalized.startswith("services/brain-api/src/aion_brain/") and normalized not in SOURCE_FILES:
+            if (
+                normalized.startswith("services/brain-api/src/aion_brain/")
+                and normalized not in SOURCE_FILES
+                and not allowed_path(normalized)
+            ):
                 raise SystemExit(f"source path outside exact AION-211 scope changed: {normalized}")
             if not allowed_path(normalized):
                 raise SystemExit(f"path outside AION-211 scope changed: {normalized}")
@@ -392,8 +409,8 @@ def assert_ledgers() -> None:
     for label, payload in (("program", program), ("authorization", auth)):
         if payload["program_id"] != PROGRAM_ID:
             raise SystemExit(f"{label} ledger program mismatch")
-        expected_state = POST_AION212_PROGRAM_STATE if post_aion212 else PROGRAM_STATE
-        if payload["program_state"] != expected_state:
+        expected_states = POST_AION212_PROGRAM_STATES if post_aion212 else {PROGRAM_STATE}
+        if payload["program_state"] not in expected_states:
             raise SystemExit(f"{label} ledger program_state mismatch")
         if payload["active_knowledge_implementation_authorization_count"] != 1:
             raise SystemExit(f"{label} ledger active authorization count mismatch")

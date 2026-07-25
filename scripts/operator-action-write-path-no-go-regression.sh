@@ -477,6 +477,14 @@ allowed_aion194_files = {
     "services/brain-api/src/aion_brain/information_acquisition/__init__.py",
     "services/brain-api/src/aion_brain/information_acquisition/core.py",
 }
+allowed_aion213_files = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_domain_expert_mesh.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+}
+allowed_aion213_prefixes = (
+    "operator-console-static/demo-data/knowledge-intelligence-domain-expert-",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_",
+)
 runtime_prefixes = (
     "services/brain-api/src/",
     "packages/aion-sdk-python/src/",
@@ -552,12 +560,14 @@ for relative in sorted(changed):
         or relative in allowed_aion160_files
         or relative in allowed_aion178_files
         or relative in allowed_aion194_files
+        or relative in allowed_aion213_files
         or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)
         or relative.startswith(allowed_aion110_prefixes)
         or relative.startswith(allowed_aion111_prefixes)
         or relative.startswith(allowed_aion112_prefixes)
         or relative.startswith(allowed_aion113_prefixes)
+        or relative.startswith(allowed_aion213_prefixes)
     ):
         continue
     if not relative.startswith(runtime_prefixes):

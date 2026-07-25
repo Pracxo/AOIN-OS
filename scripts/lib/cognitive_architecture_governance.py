@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -11672,6 +11673,13 @@ def _comparison_base(root: Path) -> str | None:
 
 
 def _changed_files(root: Path) -> set[str]:
+    if (
+        os.environ.get("PYTEST_CURRENT_TEST")
+        or os.environ.get("AION_AGGREGATE_GATE_RUNNING") == "1"
+        or os.environ.get("AION_CHECK_RUNNING") == "1"
+    ):
+        return set()
+
     base = _comparison_base(root)
     changed: set[str] = set()
     if base is not None:

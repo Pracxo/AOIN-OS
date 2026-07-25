@@ -1,62 +1,111 @@
 {
   "assignments": [
     {
-      "assignment_id": "assignment-domain-analyst-001",
-      "independence_group_id": "expert-independence-group-001",
+      "assignment_fingerprint": "e01367bf29e3ea0400660f2376753b93cf67c8e8ebaa79256b0fb09fa1a6c743",
+      "assignment_id": "assignment-case-001-domain_analyst",
+      "domain_match_ids": [
+        "computing-and-information-systems"
+      ],
+      "independence_group_id": "independence-computing-and-information-systems-analyst",
+      "jurisdiction_match_ids": [],
       "perspective_role": "domain_analyst",
-      "profile_id": "computational-profile-domain-analyst-001"
+      "profile_id": "computational-computing-and-information-systems-domain-analyst",
+      "required_role": true,
+      "risk_class_match": true,
+      "runtime_effect": false,
+      "specialty_match_ids": [
+        "computing-and-information-systems-general"
+      ],
+      "temporal_scope_match": false,
+      "version_match_ids": []
     },
     {
-      "assignment_id": "assignment-evidence-auditor-001",
-      "independence_group_id": "expert-independence-group-002",
+      "assignment_fingerprint": "f1c02af1876a23dbe667d2de7b8cf947bc35809bad1f8e6e22300f55fc509345",
+      "assignment_id": "assignment-case-001-evidence_auditor",
+      "domain_match_ids": [
+        "computing-and-information-systems"
+      ],
+      "independence_group_id": "independence-cross-domain-evidence",
+      "jurisdiction_match_ids": [],
       "perspective_role": "evidence_auditor",
-      "profile_id": "computational-profile-evidence-auditor-001"
+      "profile_id": "computational-cross-domain-evidence-auditor",
+      "required_role": true,
+      "risk_class_match": true,
+      "runtime_effect": false,
+      "specialty_match_ids": [
+        "computing-and-information-systems-general"
+      ],
+      "temporal_scope_match": false,
+      "version_match_ids": []
     },
     {
-      "assignment_id": "assignment-methodological-skeptic-001",
-      "independence_group_id": "expert-independence-group-003",
+      "assignment_fingerprint": "7428c18ebbc4126e30e0768c21f04f38bd8f49b1c06ad9733397ea5c4ea42bf0",
+      "assignment_id": "assignment-case-001-methodological_skeptic",
+      "domain_match_ids": [
+        "computing-and-information-systems"
+      ],
+      "independence_group_id": "independence-cross-domain-methodology",
+      "jurisdiction_match_ids": [],
       "perspective_role": "methodological_skeptic",
-      "profile_id": "computational-profile-methodological-skeptic-001"
+      "profile_id": "computational-cross-domain-methodological-skeptic",
+      "required_role": true,
+      "risk_class_match": true,
+      "runtime_effect": false,
+      "specialty_match_ids": [
+        "computing-and-information-systems-general"
+      ],
+      "temporal_scope_match": false,
+      "version_match_ids": []
     },
     {
-      "assignment_id": "assignment-risk_reviewer-001",
-      "independence_group_id": "expert-independence-group-004",
+      "assignment_fingerprint": "587edc839820a8b41ac431b3b587fb447a4e93c9b686f09437e65e0e0ec43cf3",
+      "assignment_id": "assignment-case-001-risk_reviewer",
+      "domain_match_ids": [
+        "computing-and-information-systems"
+      ],
+      "independence_group_id": "independence-high-stakes-risk",
+      "jurisdiction_match_ids": [],
       "perspective_role": "risk_reviewer",
-      "profile_id": "computational-profile-risk_reviewer-001"
+      "profile_id": "computational-high-stakes-risk-reviewer",
+      "required_role": true,
+      "risk_class_match": true,
+      "runtime_effect": false,
+      "specialty_match_ids": [
+        "computing-and-information-systems-general"
+      ],
+      "temporal_scope_match": false,
+      "version_match_ids": []
     }
   ],
-  "authorization_transaction_id": "AION-212-KI-0005",
-  "case_id": "domain-expert-case-001",
+  "case_id": "case-001",
   "circular_critique_rejected": true,
   "dissent_preservation_required": true,
+  "explicit_abstention_required": true,
   "independence_group_count": 4,
   "majority_alignment_establishes_truth": false,
   "maximum_panel_size": 12,
+  "missing_required_roles": [],
   "operator_review_required": true,
-  "panel_fingerprint": "expert-panel-plan-fingerprint-001",
-  "panel_id": "expert-panel-plan-001",
+  "optional_roles": [],
+  "panel_fingerprint": "b2580b3e1f5104fa659ee566cf3abf55030174a3e9769894a092879ccbd7d473",
+  "panel_id": "panel-case-001",
   "panel_size": 4,
   "panel_size_confidence_amplification_enabled": false,
-  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
-  "read_only": true,
-  "redacted": true,
   "required_roles": [
     "domain_analyst",
     "evidence_auditor",
     "methodological_skeptic",
-    "risk_reviewer",
-    "temporal_scope_reviewer",
-    "jurisdiction_reviewer",
-    "version_reviewer",
-    "synthesis_coordinator"
+    "risk_reviewer"
   ],
+  "routing_policy_fingerprint": "0161549b999a3c4afad666311580304a11d2af0011c7b57a70681c213c9c86b5",
   "routing_reason_codes": [
-    "exact_domain_match",
-    "exact_specialty_match",
-    "high_stakes_risk_reviewer_required"
+    "domain_mesh_required_role_assigned",
+    "domain_mesh_domain_match",
+    "domain_mesh_risk_match",
+    "domain_mesh_specialty_match",
+    "domain_mesh_panel_selected"
   ],
   "runtime_effect": false,
   "schema_version": "aion-knowledge-expert-panel-plan/v1",
-  "self_review_rejected": true,
-  "synthetic": true
+  "self_review_rejected": true
 }

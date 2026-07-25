@@ -1,0 +1,111 @@
+{
+  "assignments": [
+    {
+      "assignment_fingerprint": "e01367bf29e3ea0400660f2376753b93cf67c8e8ebaa79256b0fb09fa1a6c743",
+      "assignment_id": "assignment-case-001-domain_analyst",
+      "domain_match_ids": [
+        "computing-and-information-systems"
+      ],
+      "independence_group_id": "independence-computing-and-information-systems-analyst",
+      "jurisdiction_match_ids": [],
+      "perspective_role": "domain_analyst",
+      "profile_id": "computational-computing-and-information-systems-domain-analyst",
+      "required_role": true,
+      "risk_class_match": true,
+      "runtime_effect": false,
+      "specialty_match_ids": [
+        "computing-and-information-systems-general"
+      ],
+      "temporal_scope_match": false,
+      "version_match_ids": []
+    },
+    {
+      "assignment_fingerprint": "f1c02af1876a23dbe667d2de7b8cf947bc35809bad1f8e6e22300f55fc509345",
+      "assignment_id": "assignment-case-001-evidence_auditor",
+      "domain_match_ids": [
+        "computing-and-information-systems"
+      ],
+      "independence_group_id": "independence-cross-domain-evidence",
+      "jurisdiction_match_ids": [],
+      "perspective_role": "evidence_auditor",
+      "profile_id": "computational-cross-domain-evidence-auditor",
+      "required_role": true,
+      "risk_class_match": true,
+      "runtime_effect": false,
+      "specialty_match_ids": [
+        "computing-and-information-systems-general"
+      ],
+      "temporal_scope_match": false,
+      "version_match_ids": []
+    },
+    {
+      "assignment_fingerprint": "7428c18ebbc4126e30e0768c21f04f38bd8f49b1c06ad9733397ea5c4ea42bf0",
+      "assignment_id": "assignment-case-001-methodological_skeptic",
+      "domain_match_ids": [
+        "computing-and-information-systems"
+      ],
+      "independence_group_id": "independence-cross-domain-methodology",
+      "jurisdiction_match_ids": [],
+      "perspective_role": "methodological_skeptic",
+      "profile_id": "computational-cross-domain-methodological-skeptic",
+      "required_role": true,
+      "risk_class_match": true,
+      "runtime_effect": false,
+      "specialty_match_ids": [
+        "computing-and-information-systems-general"
+      ],
+      "temporal_scope_match": false,
+      "version_match_ids": []
+    },
+    {
+      "assignment_fingerprint": "ae56bc4eda14fb790ef91b4e0a637c55f4502a365c408d3a6f71145f8167b780",
+      "assignment_id": "assignment-case-001-synthesis_coordinator",
+      "domain_match_ids": [
+        "computing-and-information-systems"
+      ],
+      "independence_group_id": "independence-synthesis-coordination",
+      "jurisdiction_match_ids": [],
+      "perspective_role": "synthesis_coordinator",
+      "profile_id": "computational-synthesis-coordinator",
+      "required_role": true,
+      "risk_class_match": true,
+      "runtime_effect": false,
+      "specialty_match_ids": [
+        "computing-and-information-systems-general"
+      ],
+      "temporal_scope_match": false,
+      "version_match_ids": []
+    }
+  ],
+  "case_id": "case-001",
+  "circular_critique_rejected": true,
+  "dissent_preservation_required": true,
+  "explicit_abstention_required": false,
+  "independence_group_count": 4,
+  "majority_alignment_establishes_truth": false,
+  "maximum_panel_size": 12,
+  "missing_required_roles": [],
+  "operator_review_required": false,
+  "optional_roles": [],
+  "panel_fingerprint": "b2a8e67c8c8365ea58b8acb81a502b697681a4e69946809524c7a9ecbec464cd",
+  "panel_id": "panel-case-001",
+  "panel_size": 4,
+  "panel_size_confidence_amplification_enabled": false,
+  "required_roles": [
+    "domain_analyst",
+    "evidence_auditor",
+    "methodological_skeptic",
+    "synthesis_coordinator"
+  ],
+  "routing_policy_fingerprint": "0161549b999a3c4afad666311580304a11d2af0011c7b57a70681c213c9c86b5",
+  "routing_reason_codes": [
+    "domain_mesh_required_role_assigned",
+    "domain_mesh_domain_match",
+    "domain_mesh_risk_match",
+    "domain_mesh_specialty_match",
+    "domain_mesh_panel_selected"
+  ],
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-expert-panel-plan/v1",
+  "self_review_rejected": true
+}

@@ -1,44 +1,50 @@
 {
   "assessment_ids": [
-    "epistemic-assessment-claim-0001"
+    "assessment-001",
+    "assessment-002"
   ],
-  "assignment_id": "assignment-evidence-auditor-001",
-  "assumption_codes": [
-    "synthetic_fixture"
-  ],
-  "authorization_transaction_id": "AION-212-KI-0005",
+  "assignment_id": "assignment-case-001-domain_analyst",
+  "assumption_codes": [],
+  "automatic_action": false,
   "belief_mutated": false,
-  "case_id": "domain-expert-case-001",
+  "case_id": "case-001",
+  "claim_accepted": false,
   "claim_ids": [
-    "claim-0001"
+    "claim-001",
+    "claim-002"
   ],
-  "confidence_cap": "0.650000",
+  "claim_rejected": false,
+  "computational_profile": true,
   "evidence_gap_codes": [
-    "operator_review_required_for_high_stakes"
+    "domain_mesh_evidence_gap_recorded"
   ],
   "evidence_reference_ids": [
-    "source-registry-reference-0001"
+    "conflict-001"
   ],
   "explicit_abstention": true,
   "finding_codes": [
-    "evidence_bound_review_only"
+    "domain_mesh_report_created",
+    "domain_mesh_assessment_reference_resolved",
+    "domain_mesh_underlying_cap_propagated",
+    "domain_mesh_confidence_non_amplification_enforced",
+    "domain_mesh_evidence_gap_recorded"
   ],
   "human_authored": false,
-  "human_credential_claimed": false,
+  "human_identity_claimed": false,
   "knowledge_promoted": false,
   "limitation_codes": [
-    "no_new_evidence_created"
+    "domain_mesh_limitation_recorded"
   ],
-  "perspective_role": "evidence_auditor",
-  "position": "bounded_review_abstain",
-  "profile_id": "computational-profile-evidence-auditor-001",
-  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
-  "read_only": true,
-  "redacted": true,
-  "report_fingerprint": "expert-perspective-report-fingerprint-001",
-  "report_id": "expert-perspective-report-001",
+  "panel_id": "panel-case-001",
+  "perspective_role": "domain_analyst",
+  "position": "abstain",
+  "professional_credential_claimed": false,
+  "profile_id": "computational-computing-and-information-systems-domain-analyst",
+  "report_confidence_cap": "0.550000",
+  "report_fingerprint": "142e63cba7947bbea1880462743cd3239f8776efd2180890861b4a47f4f0aa74",
+  "report_id": "report-case-001-domain_analyst",
   "runtime_effect": false,
   "schema_version": "aion-knowledge-expert-perspective-report/v1",
-  "synthetic": true,
-  "truth_decision": false
+  "truth_decision": false,
+  "underlying_assessment_confidence_cap": "0.550000"
 }

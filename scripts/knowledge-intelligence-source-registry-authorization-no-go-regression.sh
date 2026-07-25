@@ -51,6 +51,16 @@ EPISTEMIC_ASSESSMENT_SOURCE = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_freshness.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_integrity.py",
 }
+DOMAIN_EXPERT_MESH_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_domain_expert_mesh.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_deliberation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_mesh.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_profiles.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_routing.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_synthesis.py",
+}
 PROHIBITED_SOURCE = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_runtime.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_service.py",
@@ -101,6 +111,8 @@ CLAIM_GRAPH_CONTEXT = (
         "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
         "epistemic_truth_engine_authorized_not_implemented",
         "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
+        "domain_expert_mesh_authorized_not_implemented",
+        "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
     }
     or os.environ.get("AION_CLAIM_GRAPH_IMPLEMENTATION_CONTEXT") == "1"
     or os.environ.get("AION_AGGREGATE_GATE_RUNNING") == "1"
@@ -199,6 +211,12 @@ for parts in changed_entries():
         if (
             program_state == "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout"
             and normalized in EPISTEMIC_ASSESSMENT_SOURCE
+        ):
+            continue
+        if (
+            program_state
+            == "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout"
+            and normalized in DOMAIN_EXPERT_MESH_SOURCE
         ):
             continue
         if normalized.startswith("services/brain-api/src/aion_brain/") and normalized not in AION207_SOURCE:
