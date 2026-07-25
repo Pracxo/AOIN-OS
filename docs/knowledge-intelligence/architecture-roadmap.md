@@ -57,3 +57,9 @@ Current stage: temporal claim-evidence graph implemented, evaluated, in-memory, 
 Required flags: `temporal_claim_evidence_graph_implemented=true`, `claim_graph_operator_evaluation_passed=true`, `claim_graph_runtime_enabled=false`, `persistent_claim_graph_write_enabled=false`, `epistemic_truth_engine_authorized=true`, `epistemic_truth_engine_implemented=false`, `absolute_truth_oracle_enabled=false`, `knowledge_promotion_enabled=false`, `belief_mutation_enabled=false`, `network_access_enabled=false`, `active_knowledge_implementation_authorization=AION-210-KI-0004`, `active_knowledge_implementation_task=AION-211`, `formal_closeout_task=AION-212`.
 
 AION-209 represents unverified claims. AION-210 evaluated the graph. AION-211 will assess evidence rather than claim metaphysical certainty. Source independence and freshness will be explicit; unresolved contradiction will be preserved; knowledge promotion and belief mutation remain unavailable.
+
+## AION-211 Implementation Update
+
+AION-211 now implements the deterministic epistemic evidence-assessment engine under `AION-210-KI-0004`. The engine is in-memory, deterministic, transparent, versioned, and read-only. It evaluates evidence posture, source independence, support, opposition, freshness, scope applicability, corrections, retractions, supersession, unresolved contradiction, bounded confidence, confidence bands, hard caps, integrity, diagnostics, fixture replay, exact queries, and operator-review evidence.
+
+It remains runtime-disabled and persistent-write-disabled. It is not an absolute truth oracle, automatically accepts or rejects no claim, promotes no knowledge, mutates no cognitive belief, calls no network, creates no database, and creates no v0.2 tag or release. AION-212 is the next formal closeout task.

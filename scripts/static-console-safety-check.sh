@@ -235,7 +235,11 @@ allowed_authorization_demo_names = {
     "knowledge-intelligence-claim-graph-authorization.json",
     "knowledge-intelligence-claim-graph-evaluation.json",
     "knowledge-intelligence-claim-graph-runtime-hold.json",
+    "knowledge-intelligence-epistemic-assessment.json",
+    "knowledge-intelligence-epistemic-hard-caps.json",
+    "knowledge-intelligence-epistemic-integrity.json",
     "knowledge-intelligence-epistemic-runtime-hold.json",
+    "knowledge-intelligence-epistemic-scorecard.json",
     "knowledge-intelligence-epistemic-truth-authorization.json",
 }
 aion161_allowed_policy_markers = {

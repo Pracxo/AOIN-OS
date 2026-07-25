@@ -1,0 +1,79 @@
+{
+  "absolute_truth_oracle_enabled": false,
+  "approval_record_id": "AION-210-KI-0004",
+  "authorization_scope": "deterministic-evidence-corroboration-contradiction-freshness-source-independence-confidence-assessment-core",
+  "authorization_transaction_id": "AION-210-KI-0004",
+  "automatic_claim_acceptance_enabled": false,
+  "automatic_claim_rejection_enabled": false,
+  "belief_mutation_enabled": false,
+  "epistemic_truth_engine_authorized": true,
+  "epistemic_truth_engine_implemented": true,
+  "epistemic_truth_engine_runtime_enabled": false,
+  "epistemic_truth_engine_state": "implemented_deterministic_in_memory_assessment_persistent_write_disabled",
+  "example_kind": "epistemic_assessment_request",
+  "formal_closeout_task": "AION-212",
+  "implementation_task": "AION-211",
+  "knowledge_promotion_enabled": false,
+  "payload": {
+    "absolute_truth_requested": false,
+    "assessment_time": "2026-01-01T00:00:00Z",
+    "authorization_scope": "deterministic-evidence-corroboration-contradiction-freshness-source-independence-confidence-assessment-core",
+    "authorization_transaction_id": "AION-210-KI-0004",
+    "automatic_acceptance_requested": false,
+    "belief_mutation_requested": false,
+    "claim_ids": [
+      "claim-0001"
+    ],
+    "formal_closeout_task": "AION-212",
+    "freshness_policy": {
+      "current_max_age_seconds": 86400,
+      "future_timestamp_tolerance_seconds": 60,
+      "policy_fingerprint": "3813796a409219c8300416cc50a53ca51690511b3c3e0e53f7266f6943041bcf",
+      "policy_id": "freshness-policy-0001",
+      "stale_after_seconds": 604800
+    },
+    "implementation_task": "AION-211",
+    "knowledge_promotion_requested": false,
+    "operator_supplied": true,
+    "persistent_write_requested": false,
+    "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+    "read_only": true,
+    "redacted": true,
+    "request_id": "request-0001",
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-epistemic-assessment-request/v1",
+    "synthetic": true,
+    "target_scope": {
+      "scope_fingerprint": "e572e9af81dd4d244989bf8a8a0120320da7054a411251ef111547447ffd906a",
+      "target_jurisdiction_ids": [
+        "global"
+      ],
+      "target_valid_time": {
+        "end": "2026-01-02T00:00:00Z",
+        "end_inclusive": true,
+        "interval_fingerprint": "6b598b46cab7ab554c26f43fa76c74a487cf55b8385ac028c8cdfc0fe8af7110",
+        "interval_id": "interval-0001",
+        "start": "2026-01-01T00:00:00Z",
+        "start_inclusive": true
+      },
+      "target_version_scopes": [
+        {
+          "exact_version": "1.0",
+          "lower_bound": null,
+          "lower_inclusive": true,
+          "scheme": "numeric_dotted_exact",
+          "scope_fingerprint": "fd1ece11c8c1d7b52601b61f5585f4af1e39afc78206e4a1609a6adecc4b941c",
+          "target_id": "standard-alpha",
+          "upper_bound": null,
+          "upper_inclusive": true
+        }
+      ]
+    }
+  },
+  "persistent_assessment_write_enabled": false,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "read_only": true,
+  "redacted": true,
+  "runtime_effect": false,
+  "synthetic": true
+}

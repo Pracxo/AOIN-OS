@@ -16,7 +16,11 @@ import json
 from pathlib import Path
 
 program = json.loads(Path("docs/knowledge-intelligence/program-ledger.json").read_text())
-raise SystemExit(0 if program.get("program_state") == "epistemic_truth_engine_authorized_not_implemented" else 1)
+successor_states = {
+    "epistemic_truth_engine_authorized_not_implemented",
+    "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
+}
+raise SystemExit(0 if program.get("program_state") in successor_states else 1)
 PY
 then
   export AION_KNOWLEDGE_POST_AION210_CONTEXT=1
@@ -41,6 +45,10 @@ SCOPE = (
 )
 STATE = "implemented_append_only_in_memory_unverified_persistent_write_disabled"
 POST_AION210_STATE = "epistemic_truth_engine_authorized_not_implemented"
+POST_AION211_STATE = (
+    "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout"
+)
+SUCCESSOR_STATES = {POST_AION210_STATE, POST_AION211_STATE}
 REQUIRED_SOURCE = [
     "services/brain-api/src/aion_brain/contracts/knowledge_claim_graph.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph.py",
@@ -171,7 +179,7 @@ assert source["authorization_active"] is False
 assert source["authorization_consumed"] is True
 assert source["authorization_expired"] is True
 assert len(active) == 1
-if program["program_state"] == POST_AION210_STATE:
+if program["program_state"] in SUCCESSOR_STATES:
     assert active[0]["authorization_transaction_id"] == "AION-210-KI-0004"
     claim_matches = [
         record
@@ -205,12 +213,16 @@ assert claim["temporal_claim_evidence_graph_state"] == STATE
 assert program["program_state"] in {
     "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
     POST_AION210_STATE,
+    POST_AION211_STATE,
 }
-if program["program_state"] == POST_AION210_STATE:
+if program["program_state"] in SUCCESSOR_STATES:
     assert program["active_knowledge_implementation_authorization"] == "AION-210-KI-0004"
     assert program["active_knowledge_implementation_task"] == "AION-211"
     assert program["formal_closeout_task"] == "AION-212"
-    assert program["new_knowledge_implementation_authorization_created"] is True
+    if program["program_state"] == POST_AION210_STATE:
+        assert program["new_knowledge_implementation_authorization_created"] is True
+    else:
+        assert program["new_knowledge_implementation_authorization_created"] is False
 else:
     assert program["active_knowledge_implementation_authorization"] == "AION-208-KI-0003"
     assert program["active_knowledge_implementation_task"] == "AION-209"

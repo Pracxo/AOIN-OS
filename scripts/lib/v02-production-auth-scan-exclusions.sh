@@ -100,6 +100,9 @@ aion151_is_scoped_authorization_path() {
       if aion209_is_scoped_knowledge_intelligence_claim_graph_path "$1"; then
         return 0
       fi
+      if aion211_is_scoped_knowledge_intelligence_epistemic_assessment_path "$1"; then
+        return 0
+      fi
       return 1
       ;;
   esac
@@ -1761,6 +1764,72 @@ aion209_is_scoped_knowledge_intelligence_claim_graph_path() {
     operator-console-static/*|\
     services/brain-api/src/aion_brain/knowledge_intelligence/*|\
     services/brain-api/tests/test_knowledge_claim_graph*)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+aion211_is_scoped_knowledge_intelligence_epistemic_assessment_path() {
+  # Exact/prefix AION-211 Knowledge Intelligence epistemic-assessment paths.
+  # These deterministic in-memory assessment artifacts remain outside
+  # production-auth runtime enablement and do not exempt auth APIs, providers,
+  # credentials, package files, migrations, or releases.
+  case "$1" in
+    AGENTS.md|\
+    README.md|\
+    docs/adr/0175-deterministic-epistemic-evidence-assessment-engine-core.md|\
+    docs/adr/README.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/project-status.md|\
+    docs/release/v02-release-readiness-delta.md|\
+    docs/visual-brain.md|\
+    scripts/connector-runtime-no-external-call-regression.sh|\
+    scripts/knowledge-intelligence-claim-graph-authorization-check.sh|\
+    scripts/knowledge-intelligence-claim-graph-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-claim-graph-operator-evaluation-check.sh|\
+    scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-epistemic-assessment-check.sh|\
+    scripts/knowledge-intelligence-epistemic-assessment-no-go-regression.sh|\
+    scripts/knowledge-intelligence-epistemic-truth-authorization-check.sh|\
+    scripts/knowledge-intelligence-epistemic-truth-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-epistemic-truth-runtime-hold.sh|\
+    scripts/knowledge-intelligence-research-authorization-check.sh|\
+    scripts/knowledge-intelligence-research-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-research-runtime-hold.sh|\
+    scripts/knowledge-intelligence-source-registry-authorization-check.sh|\
+    scripts/knowledge-intelligence-source-registry-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-source-registry-operator-evaluation-no-go-regression.sh|\
+    scripts/lib/cognitive_architecture_governance.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    scripts/operator-console-static-check.sh|\
+    scripts/production-auth-architecture-check.sh|\
+    scripts/static-console-safety-check.sh|\
+    services/brain-api/src/aion_brain/contracts/knowledge_epistemic_assessment.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_assessment.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_confidence.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_contradiction.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_corroboration.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_evidence.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_freshness.py|\
+	    services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_integrity.py|\
+	    services/brain-api/tests/knowledge_claim_graph_evaluation_test_helpers.py|\
+	    services/brain-api/tests/test_knowledge_claim_graph_authorization_validator.py|\
+	    services/brain-api/tests/test_knowledge_intelligence_research_authorization_docs.py|\
+	    services/brain-api/tests/test_knowledge_research_authorization_closeout.py|\
+	    services/brain-api/tests/test_knowledge_source_registry_authorization_closeout.py|\
+	    docs/knowledge-intelligence/*|\
+	    docs/release/knowledge-intelligence-epistemic-assessment-*|\
+	    docs/release/knowledge-intelligence-epistemic-truth-*|\
+    examples/knowledge-intelligence/*|\
+    operator-console-static/*|\
+    services/brain-api/tests/test_knowledge_epistemic_assessment_*)
       return 0
       ;;
     *)

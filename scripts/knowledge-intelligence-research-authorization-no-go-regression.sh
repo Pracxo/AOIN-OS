@@ -52,6 +52,18 @@ implemented_states = {
     'temporal_claim_evidence_graph_authorized_not_implemented',
     'temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout',
     'epistemic_truth_engine_authorized_not_implemented',
+    'epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout',
+}
+EPISTEMIC_ASSESSMENT_SOURCE={
+    'services/brain-api/src/aion_brain/contracts/knowledge_epistemic_assessment.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_assessment.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_confidence.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_contradiction.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_corroboration.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_evidence.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_freshness.py',
+    'services/brain-api/src/aion_brain/knowledge_intelligence/epistemic_integrity.py',
 }
 if b is not None:
     entries += [line.split('\t') for line in run(['git','diff','--name-status',b,'HEAD']).stdout.splitlines() if line.strip()]
@@ -74,9 +86,10 @@ for parts in entries:
         n=p.replace('\\','/')
         if n in PROHIBITED_NAMES or Path(n).name in PROHIBITED_NAMES: raise SystemExit(f'dependency/package file changed: {n}')
         aion205_allowed = program_state in implemented_states and (n == AION205[0] or n.startswith(AION205[1]))
-        claim_graph_allowed = program_state in {'temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout', 'epistemic_truth_engine_authorized_not_implemented'} and n in CLAIM_GRAPH_SOURCE
+        claim_graph_allowed = program_state in {'temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout', 'epistemic_truth_engine_authorized_not_implemented', 'epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout'} and n in CLAIM_GRAPH_SOURCE
+        epistemic_assessment_allowed = program_state == 'epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout' and n in EPISTEMIC_ASSESSMENT_SOURCE
         source_registry_allowed = program_state == 'source_provenance_registry_implemented_write_disabled_pending_closeout' and n in SOURCE_REGISTRY_SOURCE
-        if n.startswith(PROHIBITED_PREFIXES) and not (aion205_allowed or source_registry_allowed or claim_graph_allowed): raise SystemExit(f'prohibited runtime/source path changed: {n}')
+        if n.startswith(PROHIBITED_PREFIXES) and not (aion205_allowed or source_registry_allowed or claim_graph_allowed or epistemic_assessment_allowed): raise SystemExit(f'prohibited runtime/source path changed: {n}')
         if n.startswith(AION205) and not aion205_allowed: raise SystemExit(f'AION-205 implementation source added by AION-204: {n}')
 if program_state not in implemented_states:
     for p in AION205:

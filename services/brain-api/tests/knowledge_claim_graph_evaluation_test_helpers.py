@@ -312,7 +312,9 @@ def validate_epistemic_authorization(record: dict) -> None:
     assert all(value is False for value in record["prohibited_capabilities"].values())
     assert record["resource_limits"] == RESOURCE_LIMITS
     assert record["epistemic_truth_engine_authorized"] is True
-    assert record["epistemic_truth_engine_implemented"] is False
+    assert record["epistemic_truth_engine_implemented"] is True
+    assert record["epistemic_truth_engine_runtime_enabled"] is False
+    assert record["persistent_assessment_write_enabled"] is False
     assert record["runtime_effect"] is False
 
 

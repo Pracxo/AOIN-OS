@@ -60,8 +60,12 @@ if program["program_state"] in {
     "temporal_claim_evidence_graph_authorized_not_implemented",
     "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
     "epistemic_truth_engine_authorized_not_implemented",
+    "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
 }:
-    if program["program_state"] == "epistemic_truth_engine_authorized_not_implemented":
+    if program["program_state"] in {
+        "epistemic_truth_engine_authorized_not_implemented",
+        "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
+    }:
         assert active[0]["authorization_transaction_id"] == "AION-210-KI-0004"
     elif program["program_state"] in {
         "temporal_claim_evidence_graph_authorized_not_implemented",
@@ -75,6 +79,7 @@ if program["program_state"] in {
         "temporal_claim_evidence_graph_authorized_not_implemented",
         "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
         "epistemic_truth_engine_authorized_not_implemented",
+        "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
     }:
         assert program["source_provenance_registry_implemented"] is True
         assert (
