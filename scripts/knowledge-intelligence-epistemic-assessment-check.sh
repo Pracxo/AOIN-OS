@@ -26,6 +26,7 @@ sys.path.insert(0, str(ROOT / "services/brain-api/src"))
 PROGRAM_ID = "AION-KNOWLEDGE-INTELLIGENCE-001"
 AUTH_ID = "AION-210-KI-0004"
 NEXT_AUTH_ID = "AION-212-KI-0005"
+SUCCESSOR_AUTH_ID = "AION-214-KI-0006"
 SCOPE = (
     "deterministic-evidence-corroboration-contradiction-freshness-source-"
     "independence-confidence-assessment-core"
@@ -33,6 +34,10 @@ SCOPE = (
 NEXT_SCOPE = (
     "deterministic-domain-taxonomy-expert-profile-routing-independent-analysis-"
     "deliberation-disagreement-synthesis-abstention-core"
+)
+SUCCESSOR_SCOPE = (
+    "deterministic-tool-manifest-intent-plan-simulation-verification-"
+    "attestation-effect-evidence-rollback-abstention-core"
 )
 ENGINE_STATE = "implemented_deterministic_in_memory_assessment_persistent_write_disabled"
 SOURCE_FILES = [
@@ -183,18 +188,23 @@ if closed_record["resource_limits"]["maximum_persistent_assessment_write_batch"]
     raise SystemExit("AION-210-KI-0004 persistent-write limit mismatch")
 
 if post_aion212:
-    if program["authorization_transaction_id"] != NEXT_AUTH_ID:
+    post_aion214 = program["program_state"] == "tool_verification_fabric_authorized_not_implemented"
+    expected_auth = SUCCESSOR_AUTH_ID if post_aion214 else NEXT_AUTH_ID
+    expected_scope = SUCCESSOR_SCOPE if post_aion214 else NEXT_SCOPE
+    expected_task = "AION-215" if post_aion214 else "AION-213"
+    expected_closeout = "AION-216" if post_aion214 else "AION-214"
+    if program["authorization_transaction_id"] != expected_auth:
         raise SystemExit("post-AION-212 active authorization mismatch")
-    if program["authorization_scope"] != NEXT_SCOPE:
+    if program["authorization_scope"] != expected_scope:
         raise SystemExit("post-AION-212 active scope mismatch")
-    if program["implementation_task"] != "AION-213" or program["formal_closeout_task"] != "AION-214":
+    if program["implementation_task"] != expected_task or program["formal_closeout_task"] != expected_closeout:
         raise SystemExit("post-AION-212 task lineage mismatch")
-    if record["authorization_transaction_id"] != NEXT_AUTH_ID:
-        raise SystemExit("active authorization must be AION-212-KI-0005 after closeout")
-    if record["authorization_scope"] != NEXT_SCOPE:
-        raise SystemExit("active AION-212 scope mismatch")
-    if record["implementation_task"] != "AION-213" or record["formal_closeout_task"] != "AION-214":
-        raise SystemExit("active AION-212 task lineage mismatch")
+    if record["authorization_transaction_id"] != expected_auth:
+        raise SystemExit("active authorization mismatch after closeout")
+    if record["authorization_scope"] != expected_scope:
+        raise SystemExit("active authorization scope mismatch after closeout")
+    if record["implementation_task"] != expected_task or record["formal_closeout_task"] != expected_closeout:
+        raise SystemExit("active authorization task lineage mismatch after closeout")
     if closed_record["authorization_active"] is not False or closed_record["authorization_consumed"] is not True:
         raise SystemExit("AION-210-KI-0004 must be closed and consumed after AION-212")
     if closed_record["authorization_expired"] is not True or closed_record["authorization_reusable"] is not False:

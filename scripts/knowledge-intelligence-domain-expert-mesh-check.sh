@@ -99,6 +99,7 @@ if any(profile.professional_credential_claimed for profile in registry.profiles)
 if any(profile.model_provider_required for profile in registry.profiles):
     raise SystemExit("profile model provider requirement detected")
 
+program = json.loads((ROOT / "docs/knowledge-intelligence/program-ledger.json").read_text())
 auth = json.loads((ROOT / "docs/knowledge-intelligence/authorization-ledger.json").read_text())
 active = [
     item
@@ -108,12 +109,26 @@ active = [
 if len(active) != 1:
     raise SystemExit("active AION-212-KI-0005 authorization record missing")
 record = active[0]
-if record["authorization_active"] is not True:
-    raise SystemExit("AION-212-KI-0005 must remain active")
-if record["authorization_consumed"] is not False:
-    raise SystemExit("AION-212-KI-0005 must remain unconsumed pending AION-214")
-if record["authorization_expired"] is not False or record["authorization_reusable"] is not False:
-    raise SystemExit("AION-212-KI-0005 lifecycle mismatch")
+post_aion214 = program.get("program_state") == "tool_verification_fabric_authorized_not_implemented"
+if post_aion214:
+    if record["authorization_active"] is not False:
+        raise SystemExit("AION-212-KI-0005 must be inactive after AION-214")
+    if record["authorization_consumed"] is not True:
+        raise SystemExit("AION-212-KI-0005 must be consumed after AION-214")
+    if record["authorization_expired"] is not True or record["authorization_reusable"] is not False:
+        raise SystemExit("AION-212-KI-0005 closeout lifecycle mismatch")
+    if record.get("authorization_closed_by_task") != "AION-214":
+        raise SystemExit("AION-212-KI-0005 must be closed by AION-214")
+    successor = [item for item in auth["records"] if item.get("authorization_active") is True]
+    if len(successor) != 1 or successor[0].get("authorization_transaction_id") != "AION-214-KI-0006":
+        raise SystemExit("AION-214-KI-0006 must be the sole active authorization")
+else:
+    if record["authorization_active"] is not True:
+        raise SystemExit("AION-212-KI-0005 must remain active")
+    if record["authorization_consumed"] is not False:
+        raise SystemExit("AION-212-KI-0005 must remain unconsumed pending AION-214")
+    if record["authorization_expired"] is not False or record["authorization_reusable"] is not False:
+        raise SystemExit("AION-212-KI-0005 lifecycle mismatch")
 if record["implementation_task"] != IMPLEMENTATION_TASK:
     raise SystemExit("authorization implementation task mismatch")
 if record["formal_closeout_task"] != FORMAL_CLOSEOUT_TASK:
@@ -126,15 +141,23 @@ for relative in (
     "docs/knowledge-intelligence/program-ledger.json",
 ):
     ledger = json.loads((ROOT / relative).read_text())
-    for key in (
-        "authorization_transaction_id",
-        "candidate_id",
-        "workstream",
-        "implementation_task",
-        "formal_closeout_task",
-    ):
-        if ledger[key] != record[key]:
-            raise SystemExit(f"current-state projection mismatch for {relative}: {key}")
+    if post_aion214:
+        if ledger["authorization_transaction_id"] != "AION-214-KI-0006":
+            raise SystemExit(f"successor projection mismatch for {relative}: authorization")
+        if ledger["implementation_task"] != "AION-215":
+            raise SystemExit(f"successor projection mismatch for {relative}: implementation task")
+        if ledger["formal_closeout_task"] != "AION-216":
+            raise SystemExit(f"successor projection mismatch for {relative}: closeout")
+    else:
+        for key in (
+            "authorization_transaction_id",
+            "candidate_id",
+            "workstream",
+            "implementation_task",
+            "formal_closeout_task",
+        ):
+            if ledger[key] != record[key]:
+                raise SystemExit(f"current-state projection mismatch for {relative}: {key}")
     if ledger["domain_expert_mesh_implemented"] is not True:
         raise SystemExit(f"mesh implementation flag missing in {relative}")
     for key in (

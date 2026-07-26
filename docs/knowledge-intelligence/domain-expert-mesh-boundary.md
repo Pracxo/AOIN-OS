@@ -44,3 +44,7 @@ Authorization scope: `deterministic-domain-taxonomy-expert-profile-routing-indep
 Runtime effect: `false`
 
 Threat controls: impersonation, credential claims, dissent suppression, confidence amplification, network access, model calls, tool execution, and persistence remain blocked.
+
+## AION-214 Closeout
+
+`AION-DEME-001` passed all 28 operator-evaluation scenarios. `AION-212-KI-0005` is now closed, consumed, expired, and non-reusable. `AION-214-KI-0006` authorizes AION-215 deterministic tool verification fabric work while mesh runtime and persistent writes remain disabled.

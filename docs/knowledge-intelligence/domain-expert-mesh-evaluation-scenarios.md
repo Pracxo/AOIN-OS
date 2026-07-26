@@ -1,0 +1,30 @@
+# Domain Expert Mesh Evaluation Scenarios
+
+- `valid_low_risk_single_domain_session`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `valid_multi_domain_session`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `high_risk_required_roles`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `taxonomy_integrity`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `computational_profile_boundary`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `exact_domain_and_specialty_routing`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `scope_aware_routing`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `risk_aware_routing`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `panel_independence`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `missing_required_role_abstention`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `evidence_and_assessment_binding`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `report_confidence_cap`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `role_specific_report_logic`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `self_review_rejection`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `circular_critique_rejection`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `critique_response_preservation`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `disagreement_matrix`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `dissent_preservation`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `bounded_synthesis`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `confidence_non_amplification`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `high_stakes_abstention`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `resource_budget_enforcement`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `fixture_path_schema_and_redaction`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `deterministic_replay`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `fingerprint_sensitivity`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `concurrency_and_query_integrity`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `performance_smoke`: passed, synthetic, read-only, redacted, runtime_effect=false.
+- `no_model_tool_network_action_persistence_or_repository_effect`: passed, synthetic, read-only, redacted, runtime_effect=false.

@@ -140,10 +140,15 @@ assert source["authorization_closed_by_task"] == "AION-208"
 assert source["source_registry_operator_evaluation_id"] == "AION-SPRE-001"
 assert source["source_registry_operator_evaluation_decision"] == decision
 
-if active[0]["authorization_transaction_id"] == "AION-208-KI-0003":
+active_authorization = active[0]["authorization_transaction_id"]
+if active_authorization == "AION-208-KI-0003":
     claim = active[0]
 else:
-    assert active[0]["authorization_transaction_id"] == "AION-210-KI-0004"
+    assert active_authorization in {
+        "AION-210-KI-0004",
+        "AION-212-KI-0005",
+        "AION-214-KI-0006",
+    }
     matches = [
         item
         for item in auth["records"]
@@ -165,10 +170,40 @@ assert claim["authorization_scope"] == (
 assert all(claim["authorized_capabilities"].values())
 assert all(value is False for value in claim["prohibited_capabilities"].values())
 assert claim["resource_limits"]["maximum_graph_write_batch"] == 0
-if program["program_state"] == "epistemic_truth_engine_authorized_not_implemented":
-    assert program["active_knowledge_implementation_authorization"] == "AION-210-KI-0004"
-    assert program["active_knowledge_implementation_task"] == "AION-211"
-    assert program["formal_closeout_task"] == "AION-212"
+successor_program_states = {
+    "epistemic_truth_engine_authorized_not_implemented": (
+        "AION-210-KI-0004",
+        "AION-211",
+        "AION-212",
+    ),
+    "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout": (
+        "AION-210-KI-0004",
+        "AION-211",
+        "AION-212",
+    ),
+    "domain_expert_mesh_authorized_not_implemented": (
+        "AION-212-KI-0005",
+        "AION-213",
+        "AION-214",
+    ),
+    "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout": (
+        "AION-212-KI-0005",
+        "AION-213",
+        "AION-214",
+    ),
+    "tool_verification_fabric_authorized_not_implemented": (
+        "AION-214-KI-0006",
+        "AION-215",
+        "AION-216",
+    ),
+}
+if program["program_state"] in successor_program_states:
+    expected_auth, expected_task, expected_closeout = successor_program_states[
+        program["program_state"]
+    ]
+    assert program["active_knowledge_implementation_authorization"] == expected_auth
+    assert program["active_knowledge_implementation_task"] == expected_task
+    assert program["formal_closeout_task"] == expected_closeout
 else:
     assert program["active_knowledge_implementation_authorization"] == "AION-208-KI-0003"
     assert program["active_knowledge_implementation_task"] == "AION-209"

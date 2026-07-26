@@ -94,6 +94,11 @@ POST_SCOPE = (
     "deterministic-domain-taxonomy-expert-profile-routing-independent-analysis-"
     "deliberation-disagreement-synthesis-abstention-core"
 )
+SUCCESSOR_AUTH = "AION-214-KI-0006"
+SUCCESSOR_SCOPE = (
+    "deterministic-tool-manifest-intent-plan-simulation-verification-attestation-"
+    "effect-evidence-rollback-abstention-core"
+)
 RESOURCE_LIMITS = {
     "maximum_claims_per_assessment_batch": 500,
     "maximum_evidence_bindings_per_claim": 100,
@@ -274,11 +279,31 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
     assert closed_record["claim_graph_operator_evaluation_decision"] == DECISION
     assert closed_record["evaluation_used_as_approval"] is False
     if post_aion212:
-        assert active_record["authorization_transaction_id"] == POST_AUTH
-        assert active_record["approval_record_id"] == POST_AUTH
-        assert active_record["implementation_task"] == "AION-213"
-        assert active_record["formal_closeout_task"] == "AION-214"
-        assert active_record["authorization_scope"] == POST_SCOPE
+        post_aion214 = (
+            program["program_state"] == "tool_verification_fabric_authorized_not_implemented"
+        )
+        expected_active_auth = SUCCESSOR_AUTH if post_aion214 else POST_AUTH
+        expected_active_scope = SUCCESSOR_SCOPE if post_aion214 else POST_SCOPE
+        expected_active_task = "AION-215" if post_aion214 else "AION-213"
+        expected_closeout_task = "AION-216" if post_aion214 else "AION-214"
+
+        post_matches = [
+            record for record in records if record.get("authorization_transaction_id") == POST_AUTH
+        ]
+        assert len(post_matches) == 1
+        post_record = post_matches[0]
+        if post_aion214:
+            assert post_record["authorization_active"] is False
+            assert post_record["authorization_consumed"] is True
+            assert post_record["authorization_expired"] is True
+            assert post_record["authorization_reusable"] is False
+            assert post_record["authorization_closed_by_task"] == "AION-214"
+
+        assert active_record["authorization_transaction_id"] == expected_active_auth
+        assert active_record["approval_record_id"] == expected_active_auth
+        assert active_record["implementation_task"] == expected_active_task
+        assert active_record["formal_closeout_task"] == expected_closeout_task
+        assert active_record["authorization_scope"] == expected_active_scope
         next_matches = [
             record for record in records if record.get("authorization_transaction_id") == NEXT_AUTH
         ]
@@ -303,10 +328,11 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
         assert program["program_state"] in {
             "domain_expert_mesh_authorized_not_implemented",
             "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
+            "tool_verification_fabric_authorized_not_implemented",
         }
-        assert program["active_knowledge_implementation_authorization"] == POST_AUTH
-        assert program["active_knowledge_implementation_task"] == "AION-213"
-        assert program["formal_closeout_task"] == "AION-214"
+        assert program["active_knowledge_implementation_authorization"] == expected_active_auth
+        assert program["active_knowledge_implementation_task"] == expected_active_task
+        assert program["formal_closeout_task"] == expected_closeout_task
         if (
             program["program_state"]
             == "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout"
@@ -314,6 +340,11 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
             assert program["domain_expert_mesh_implemented"] is True
             assert program["model_call_enabled"] is False
             assert program["persistent_mesh_write_enabled"] is False
+        if post_aion214:
+            assert program["domain_expert_mesh_operator_evaluation_passed"] is True
+            assert program["tool_verification_fabric_authorized"] is True
+            assert program["tool_verification_fabric_implemented"] is False
+            assert program["actual_tool_execution_enabled"] is False
     else:
         assert active_record["authorization_transaction_id"] == NEXT_AUTH
         assert active_record["approval_record_id"] == NEXT_AUTH

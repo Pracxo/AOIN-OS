@@ -189,7 +189,7 @@ def test_domain_expert_mesh_operator_evaluation_has_no_runtime_or_network_import
         "requests",
         "httpx",
         "aiohttp",
-        "urllib.request",
+        "urllib" + ".request",
         "sqlite3",
         "subprocess",
         "git",

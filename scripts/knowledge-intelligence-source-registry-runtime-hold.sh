@@ -50,6 +50,7 @@ if record["authorization_active"] is False:
         "AION-208-KI-0003",
         "AION-210-KI-0004",
         "AION-212-KI-0005",
+        "AION-214-KI-0006",
     }
     assert record["authorization_consumed"] is True
     assert record["authorization_closed_by_task"] == "AION-208"

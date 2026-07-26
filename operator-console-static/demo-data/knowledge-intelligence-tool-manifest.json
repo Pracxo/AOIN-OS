@@ -1,0 +1,41 @@
+{
+  "actual_execution_enabled": false,
+  "actual_tool_executed": false,
+  "approval_record_id": "AION-214-KI-0006",
+  "authorization_scope": "deterministic-tool-manifest-intent-plan-simulation-verification-attestation-effect-evidence-rollback-abstention-core",
+  "authorization_transaction_id": "AION-214-KI-0006",
+  "belief_mutated": false,
+  "compensation_supported": false,
+  "declared_effect_types": [
+    "validate"
+  ],
+  "deterministic_simulation_supported": true,
+  "formal_closeout_task": "AION-216",
+  "idempotency_supported": true,
+  "implementation_task": "AION-215",
+  "input_schema_fingerprint": "sha256:synthetic-input-schema",
+  "knowledge_promoted": false,
+  "manifest_fingerprint": "sha256:synthetic-manifest",
+  "operation_class": "deterministic_validator",
+  "output_schema_fingerprint": "sha256:synthetic-output-schema",
+  "permission_requirements": [],
+  "persistent_write_applied": false,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "prohibited_effect_types": [
+    "execute",
+    "transmit",
+    "approve",
+    "merge",
+    "deploy",
+    "train"
+  ],
+  "read_only": true,
+  "record_kind": "tool_capability_manifest",
+  "redacted": true,
+  "risk_class": "low",
+  "rollback_supported": false,
+  "runtime_effect": false,
+  "synthetic": true,
+  "tool_id": "synthetic.validator",
+  "tool_version": "1.0.0"
+}

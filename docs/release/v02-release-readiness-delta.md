@@ -174,3 +174,13 @@ It remains runtime-disabled and persistent-write-disabled. It is not an absolute
 ## AION-213 Deterministic Domain Expert Mesh
 
 AION-213 implements the deterministic in-memory advisory domain expert mesh under active authorization AION-212-KI-0005. The mesh provides explicit taxonomy, computational profiles, deterministic routing, independent panels, evidence-bound reports, critiques, disagreement and dissent preservation, bounded synthesis, confidence non-amplification, high-stakes abstention, fixture replay, exact queries, integrity audit, and operator-review evidence. Runtime activation, persistent mesh writes, databases, model providers, model calls, tools, network access, human identity claims, professional credential claims, truth override, automatic claim decisions, autonomous action, knowledge promotion, and belief mutation remain disabled pending AION-214 formal closeout.
+
+## AION-214 Domain Expert Mesh Evaluation and Tool Verification Authorization
+
+Current milestone: AION-214 domain expert mesh operator evaluation complete and deterministic tool verification fabric authorized.
+
+Current stage: The deterministic domain expert mesh is implemented, evaluated, advisory, in-memory, runtime-disabled, and persistent-write-disabled. The deterministic tool verification fabric is authorized and not implemented.
+
+Required flags: `domain_expert_mesh_implemented=true`, `domain_expert_mesh_operator_evaluation_passed=true`, `domain_expert_mesh_runtime_enabled=false`, `persistent_expert_mesh_write_enabled=false`, `tool_verification_fabric_authorized=true`, `tool_verification_fabric_implemented=false`, `actual_tool_execution_enabled=false`, `shell_command_execution_enabled=false`, `network_access_enabled=false`, `model_provider_integration_enabled=false`, `connector_integration_enabled=false`, `browser_automation_enabled=false`, `knowledge_promotion_enabled=false`, `belief_mutation_enabled=false`, `active_knowledge_implementation_authorization=AION-214-KI-0006`, `active_knowledge_implementation_task=AION-215`, `formal_closeout_task=AION-216`.
+
+AION-213 orchestrates computational perspectives. AION-214 evaluated AION-213. AION-215 will plan, simulate, verify, and attest proposed tool use. AION-215 will execute no real tool. Simulation evidence will not count as real-world execution. Verification evidence will not count as approval. Tool output will not become knowledge automatically. Runtime and persistent writes remain disabled. AION-216 is the formal closeout and integrated research-agent evaluation task.

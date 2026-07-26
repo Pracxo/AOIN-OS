@@ -1,0 +1,1686 @@
+{
+  "approval_created": false,
+  "authorization_closeout": {
+    "approval_record_id": "AION-212-KI-0005",
+    "authorization_active": false,
+    "authorization_closed_by_task": "AION-214",
+    "authorization_consumed": true,
+    "authorization_consumed_by_feature_commits": [
+      "ab7ef61ad45b484ead47d3338e6fd8ea13b3bdbe"
+    ],
+    "authorization_consumed_by_merge_commits": [
+      "99ce337a99f7f5eb98081b86fa735dd03582800e"
+    ],
+    "authorization_consumed_by_prs": [
+      127
+    ],
+    "authorization_consumed_by_task": "AION-213",
+    "authorization_expired": true,
+    "authorization_reusable": false,
+    "authorization_transaction_id": "AION-212-KI-0005",
+    "domain_expert_mesh_operator_evaluation_decision": "DOMAIN_EXPERT_MESH_OPERATOR_EVALUATION_PASS_RECOMMEND_TOOL_VERIFICATION_FABRIC_AUTHORIZATION",
+    "domain_expert_mesh_operator_evaluation_id": "AION-DEME-001",
+    "evaluation_created_autonomous_action": false,
+    "evaluation_created_belief": false,
+    "evaluation_created_knowledge": false,
+    "evaluation_created_network_access": false,
+    "evaluation_created_persistent_write": false,
+    "evaluation_created_tool_execution": false,
+    "evaluation_reusable": false,
+    "evaluation_used_as_approval": false
+  },
+  "closeout_task": "AION-214",
+  "conditional_next_authorization": {
+    "approval_record_id": "AION-214-KI-0006",
+    "authorization_active": true,
+    "authorization_consumed": false,
+    "authorization_expired": false,
+    "authorization_reusable": false,
+    "authorization_scope": "deterministic-tool-manifest-intent-plan-simulation-verification-attestation-effect-evidence-rollback-abstention-core",
+    "authorization_transaction_id": "AION-214-KI-0006",
+    "candidate_id": "deterministic-tool-verification-fabric-core",
+    "formal_closeout_task": "AION-216",
+    "implementation_task": "AION-215",
+    "parent_authorization_transaction_id": "AION-212-KI-0005",
+    "parent_closeout_task": "AION-214",
+    "parent_domain_mesh_implementation_feature_commits": [
+      "ab7ef61ad45b484ead47d3338e6fd8ea13b3bdbe"
+    ],
+    "parent_domain_mesh_implementation_merge_commits": [
+      "99ce337a99f7f5eb98081b86fa735dd03582800e"
+    ],
+    "parent_domain_mesh_implementation_prs": [
+      127
+    ],
+    "parent_domain_mesh_implementation_task": "AION-213",
+    "parent_evaluation_decision": "DOMAIN_EXPERT_MESH_OPERATOR_EVALUATION_PASS_RECOMMEND_TOOL_VERIFICATION_FABRIC_AUTHORIZATION",
+    "parent_evaluation_id": "AION-DEME-001",
+    "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+    "workstream": "knowledge-intelligence-tool-verification-fabric"
+  },
+  "corrective_prs": [],
+  "decision": "DOMAIN_EXPERT_MESH_OPERATOR_EVALUATION_PASS_RECOMMEND_TOOL_VERIFICATION_FABRIC_AUTHORIZATION",
+  "evaluation_base_commit": "a13ab2582ff0bccfdc404cbcd08fc9554c419adb",
+  "evaluation_id": "AION-DEME-001",
+  "evaluation_passed": true,
+  "evaluation_type": "read_only_domain_expert_mesh_operator_evaluation",
+  "git_mutated": false,
+  "hard_gate_results": [
+    {
+      "detail": "redacted",
+      "gate_id": "pr_127_verified",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "final_ci_verified",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "aion_213_no_go_gate_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "aion_213_implementation_gate_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "aion_213_runtime_hold_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "focused_tests_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "all_28_scenarios_executed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "all_28_scenarios_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "no_required_scenario_skipped",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "no_unknown_scenario",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "taxonomy_integrity_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "profile_boundary_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "deterministic_routing_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "required_role_composition_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "independence_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "reference_binding_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "report_confidence_caps_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "critique_controls_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "disagreement_detection_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "dissent_preservation_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "synthesis_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "confidence_non_amplification_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "high_stakes_abstention_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "budgets_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "fixture_boundary_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "deterministic_replay_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "concurrency_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "repository_integrity_passed",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "no_model_tool_network_persistence_action_knowledge_belief_source_git_pr_approval_deployment_or_training_effect",
+      "passed": true,
+      "runtime_effect": false
+    },
+    {
+      "detail": "redacted",
+      "gate_id": "no_v02_tag_or_release",
+      "passed": true,
+      "runtime_effect": false
+    }
+  ],
+  "implementation_feature_commits": [
+    "ab7ef61ad45b484ead47d3338e6fd8ea13b3bdbe"
+  ],
+  "implementation_merge_commits": [
+    "99ce337a99f7f5eb98081b86fa735dd03582800e"
+  ],
+  "implementation_prs": [
+    127
+  ],
+  "implementation_task": "AION-213",
+  "merged": false,
+  "next_architecture_decision": "tool_verification_fabric_implementation_authorized",
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "pull_request_created": false,
+  "read_only": true,
+  "redacted": true,
+  "report_is_approval": false,
+  "report_reusable": false,
+  "repository_integrity": {
+    "automatic_claim_acceptances": 0,
+    "automatic_claim_rejections": 0,
+    "autonomous_actions": 0,
+    "belief_mutations": 0,
+    "browser_actions": 0,
+    "connector_calls": 0,
+    "deployments": 0,
+    "dns_calls": 0,
+    "git_operations": 0,
+    "high_stakes_actions": 0,
+    "human_identity_claims": 0,
+    "knowledge_promotions": 0,
+    "model_calls": 0,
+    "model_provider_calls": 0,
+    "model_weight_changes": 0,
+    "network_calls": 0,
+    "persistent_writes": 0,
+    "professional_credential_claims": 0,
+    "repository_unchanged": true,
+    "runtime_approvals": 0,
+    "runtime_pull_requests": 0,
+    "shell_executions": 0,
+    "source_mutations": 0,
+    "temporary_evaluation_data_cleaned": true,
+    "tool_executions": 0,
+    "truth_overrides": 0
+  },
+  "resource_state": {
+    "actual_tool_executions": 0,
+    "belief_mutations": 0,
+    "browser_actions": 0,
+    "connector_calls": 0,
+    "dns_resolutions": 0,
+    "domain_expert_mesh_runtime_enabled": false,
+    "knowledge_promotions": 0,
+    "model_provider_calls": 0,
+    "network_calls": 0,
+    "persistent_mesh_write_enabled": false,
+    "persistent_tool_state_writes": 0,
+    "shell_commands": 0,
+    "subprocess_executions": 0,
+    "tool_verification_fabric_implemented": false
+  },
+  "runtime_effect": false,
+  "runtime_state": {
+    "actual_tool_executed": false,
+    "autonomous_action": false,
+    "belief_mutated": false,
+    "browser_automated": false,
+    "connector_called": false,
+    "dns_resolved": false,
+    "domain_mesh_runtime_enabled": false,
+    "filesystem_mutated": false,
+    "high_stakes_action": false,
+    "knowledge_promoted": false,
+    "model_provider_called": false,
+    "network_called": false,
+    "persistent_mesh_write_applied": false,
+    "runtime_effect": false,
+    "shell_executed": false,
+    "subprocess_executed": false,
+    "tool_fabric_implemented": false,
+    "tool_fabric_runtime_enabled": false
+  },
+  "scenario_count": 28,
+  "scenario_results": [
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "explicit_domain",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "explicit_specialty",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "valid_claim_binding",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "valid_assessment_binding",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "required_roles_present",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "deterministic_routing",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "immutable_reports",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "bounded_synthesis",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_runtime_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 5.569,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "valid_low_risk_single_domain_session",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "multiple_domains",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "cross_domain_reviewer_present",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "evidence_auditor_present",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "methodological_skeptic_present",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "synthesis_coordinator_present",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "deterministic_panel_selection",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 5.658,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "valid_multi_domain_session",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "risk_reviewer_present",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "domain_analyst_present",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "evidence_auditor_present",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "methodological_skeptic_present",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "synthesis_coordinator_present",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "operator_review_required",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "explicit_abstention_required",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "automatic_action_false",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.005,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "high_risk_required_roles",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "deterministic_taxonomy_version",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_duplicate_node",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_duplicate_specialty",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_cycle",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_orphan_parent",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_dynamic_domain_creation",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_wildcard_domain",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.011,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "taxonomy_integrity",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "computational_profile_true",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "human_identity_claim_false",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "impersonation_false",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "professional_credential_false",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "licensed_claim_false",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "model_provider_not_required",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "tool_not_required",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "network_not_required",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.012,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "computational_profile_boundary",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "exact_specialty_match_first",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "exact_domain_match_present",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_embedding_or_semantic_inference",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_random_routing",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "stable_profile_id_tiebreak",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.017,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "exact_domain_and_specialty_routing",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "valid_time_compatibility",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "jurisdiction_compatibility",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "version_compatibility",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "explicit_insufficient_scope_result",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_inferred_global_scope",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_inferred_all_version_scope",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.517,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "scope_aware_routing",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "supported_risk_classes_enforced",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "unsupported_profile_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "risk_reviewer_required_for_critical",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_fallback_profile_creation",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 9.692,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "risk_aware_routing",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "unique_profile_ids",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "required_roles_distinct_groups",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "duplicate_groups_not_counted",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "panel_size_not_evidence_independence",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.004,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "panel_independence",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "panel_marked_incomplete",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "missing_role_recorded",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "explicit_abstention_true",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "operator_review_true",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_complete_panel_claim",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 2.721,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "missing_required_role_abstention",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "every_claim_reference_resolves",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "every_assessment_reference_resolves",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "every_evidence_reference_resolves",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "missing_reference_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "report_creates_no_new_evidence",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 5.335,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "evidence_and_assessment_binding",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "report_cap_no_greater_than_underlying",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "underlying_cap_preserved",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "multiple_reports_cannot_increase_cap",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_panel_size_amplification",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_unanimity_amplification",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.006,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "report_confidence_cap",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "domain_analyst_preserves_posture",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "evidence_auditor_checks_coverage",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "methodological_skeptic_checks_assumptions",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "risk_reviewer_enforces_review",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "scope_reviewers_preserve_applicability",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "synthesis_coordinator_no_truth_authority",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.004,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "role_specific_report_logic",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "critic_profile_differs",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "self_review_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "target_report_preserved",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_hidden_override",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.043,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "self_review_rejection",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "circular_chains_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "critique_response_loops_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_report_deletion",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_critique_deletion",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.005,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "circular_critique_rejection",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "critique_preserved",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "response_preserved",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "response_code_allowed",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "response_cannot_rewrite_report",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "response_cannot_raise_confidence",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.002,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "critique_response_preservation",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "required_disagreement_types_represented",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "matrix_detected_material_disagreement",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "reports_preserved",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "critiques_preserved",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.009,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "disagreement_matrix",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "every_report_preserved",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "every_critique_preserved",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "minority_views_preserved",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "unresolved_disagreement_preserved",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_majority_winner",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_truth_assignment",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.004,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "dissent_preservation",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "all_report_references_resolve",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "all_critique_references_resolve",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "all_disagreement_references_resolve",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "evidence_gaps_preserved",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "limitations_preserved",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "scope_differences_preserved",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_new_evidence",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_automatic_action",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.005,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "bounded_synthesis",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "cap_lte_underlying",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "cap_lte_report_cap",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "unresolved_disagreement_cap",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "unanimity_does_not_increase",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "panel_size_does_not_increase",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "expert_count_does_not_increase",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.003,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "confidence_non_amplification",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "explicit_abstention_true",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "operator_review_required",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "operator_escalation_recommended",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "automatic_action_false",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_high_stakes_execution",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.001,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "high_stakes_abstention",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "exact_maximum_accepted",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "one_above_selected_maximum_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "persistent_write_batch_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "model_call_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "tool_execution_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "network_call_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "autonomous_action_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "high_stakes_action_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "knowledge_promotion_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "belief_mutation_rejected",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.25,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "resource_budget_enforcement",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "absolute_regular_fixture_accepted",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "invalid_fixture_paths_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "extra_fields_rejected",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "protected_material_absent",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_fixture_mutation",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 10.075,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "fixture_path_schema_and_redaction",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "subquestion_plan_identical",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "routing_candidates_identical",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "reports_identical",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "critiques_identical",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "responses_identical",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "disagreement_matrix_identical",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "synthesis_identical",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "integrity_identical",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "session_fingerprint_identical",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 10.661,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "deterministic_replay",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "domain_changes_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "specialty_changes_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "risk_class_in_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "scope_in_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "independence_group_in_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "assessment_confidence_changes_downstream",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "report_position_in_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "critique_in_fingerprint",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "disagreement_state_in_fingerprint",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 20.198,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "fingerprint_sensitivity",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "deterministic_output_order",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_shared_mutable_state",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_global_mesh_singleton",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_global_executor",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "bounded_exact_queries",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_fuzzy_search",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_consensus_ranking",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 122.641,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "concurrency_and_query_integrity",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "taxonomy_validation",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "profile_matching",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "decomposition",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "routing",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "report_generation",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "critique_generation",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "disagreement_detection",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "synthesis",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "integrity_audit",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "query",
+          "passed": true
+        },
+        {
+          "detail": 7.296,
+          "name": "fixture_replay_ready",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 7.335,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "performance_smoke",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": null,
+          "name": "model_provider_calls_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "model_calls_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "tool_executions_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "shell_executions_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "connector_calls_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "network_calls_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "dns_calls_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "browser_actions_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "human_identity_claims_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "professional_credential_claims_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "truth_overrides_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "automatic_claim_acceptances_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "automatic_claim_rejections_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "autonomous_actions_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "high_stakes_actions_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "knowledge_promotions_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "belief_mutations_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "persistent_writes_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "source_mutations_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "git_operations_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "runtime_prs_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "approvals_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "deployments_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "model_weight_changes_zero",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "repository_tree_unchanged",
+          "passed": true
+        },
+        {
+          "detail": null,
+          "name": "no_api_cli_kernel_scheduler_database",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.006,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "no_model_tool_network_action_persistence_or_repository_effect",
+      "synthetic": true
+    }
+  ],
+  "security_state": {
+    "authorization_header_present": false,
+    "credential_present": false,
+    "human_identity_claim_present": false,
+    "live_url_present": false,
+    "professional_credential_claim_present": false,
+    "redacted": true,
+    "synthetic_evidence_only": true,
+    "token_present": false
+  },
+  "source_modified": false,
+  "synthetic": true,
+  "validation_results": {
+    "boundary": "passed",
+    "brain_api_total": 3629,
+    "docs": "passed",
+    "domain_drift": "passed",
+    "domain_expert_mesh_check": true,
+    "domain_expert_mesh_no_go": true,
+    "domain_expert_mesh_runtime_hold": true,
+    "final_docs_audit": "passed",
+    "focused_aion_213_implementation_gate_tests": 51,
+    "focused_aion_213_packet_tests": 39,
+    "inherited_regression_subset": 21,
+    "lint": "passed",
+    "repository_health": "passed",
+    "sdk_total": 274,
+    "typecheck": "passed"
+  }
+}

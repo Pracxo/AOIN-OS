@@ -42,6 +42,7 @@ else:
     assert active[0]["authorization_transaction_id"] in {
         "AION-210-KI-0004",
         "AION-212-KI-0005",
+        "AION-214-KI-0006",
     }
     matches = [
         record

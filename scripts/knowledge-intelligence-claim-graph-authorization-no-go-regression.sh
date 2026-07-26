@@ -33,6 +33,7 @@ if PROGRAM_PATH.exists():
                 "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
                 "domain_expert_mesh_authorized_not_implemented",
                 "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
+                "tool_verification_fabric_authorized_not_implemented",
             }
         )
     except json.JSONDecodeError:
@@ -210,6 +211,26 @@ POST_AION210_ALLOWED_PREFIXES = (
     "services/brain-api/tests/test_knowledge_epistemic_truth_",
     "services/brain-api/tests/test_knowledge_domain_expert_mesh_",
 )
+AION214_ALLOWED_EXACT = {
+    "docs/adr/0178-domain-expert-mesh-evaluation-and-tool-verification-authorization.md",
+    "scripts/lib/knowledge_intelligence_domain_expert_mesh_operator_evaluation.py",
+    "scripts/lib/knowledge_intelligence_tool_verification_authorization.py",
+}
+AION214_ALLOWED_PREFIXES = (
+    "docs/knowledge-intelligence/domain-expert-mesh-operator-evaluation",
+    "docs/knowledge-intelligence/domain-expert-mesh-evaluation",
+    "docs/knowledge-intelligence/tool-",
+    "docs/release/knowledge-intelligence-domain-expert-mesh-operator-evaluation",
+    "docs/release/knowledge-intelligence-tool-verification",
+    "examples/knowledge-intelligence/domain-expert-mesh-operator-evaluation",
+    "examples/knowledge-intelligence/tool-",
+    "operator-console-static/demo-data/knowledge-intelligence-domain-expert-mesh-operator-evaluation",
+    "operator-console-static/demo-data/knowledge-intelligence-tool-",
+    "scripts/knowledge-intelligence-domain-expert-mesh-operator-evaluation",
+    "scripts/knowledge-intelligence-tool-verification",
+    "services/brain-api/tests/test_knowledge_domain_expert_mesh_operator_evaluation",
+    "services/brain-api/tests/test_knowledge_tool_verification",
+)
 PROHIBITED_PREFIXES = (
     ".github/workflows/",
     "services/brain-api/src/aion_brain/api/",
@@ -299,6 +320,8 @@ def path_allowed(path: str) -> bool:
     if POST_AION210_CONTEXT and (
         normalized in POST_AION210_ALLOWED_EXACT
         or any(normalized.startswith(prefix) for prefix in POST_AION210_ALLOWED_PREFIXES)
+        or normalized in AION214_ALLOWED_EXACT
+        or any(normalized.startswith(prefix) for prefix in AION214_ALLOWED_PREFIXES)
     ):
         return True
     if (
@@ -335,8 +358,12 @@ if POST_AION210_CONTEXT:
     if active[0].get("authorization_transaction_id") not in {
         "AION-210-KI-0004",
         "AION-212-KI-0005",
+        "AION-214-KI-0006",
     }:
-        raise SystemExit("AION-210-KI-0004 or AION-212-KI-0005 must be the sole active authorization after AION-210")
+        raise SystemExit(
+            "AION-210-KI-0004, AION-212-KI-0005, or AION-214-KI-0006 "
+            "must be the sole active authorization after AION-210"
+        )
     matches = [
         record
         for record in auth["records"]

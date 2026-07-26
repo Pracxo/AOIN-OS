@@ -9,6 +9,7 @@ from typing import Any
 
 PROGRAM_ID = "AION-KNOWLEDGE-INTELLIGENCE-001"
 AUTHORIZATION_ID = "AION-212-KI-0005"
+SUCCESSOR_AUTHORIZATION_ID = "AION-214-KI-0006"
 PARENT_AUTHORIZATION_ID = "AION-210-KI-0004"
 PARENT_EVALUATION_ID = "AION-EAE-001"
 PARENT_DECISION = (
@@ -324,13 +325,46 @@ def validate_authorization_files(root: Path) -> None:
     active = [record for record in auth["records"] if record.get("authorization_active") is True]
     if len(active) != 1:
         raise ValueError("exactly one Knowledge Intelligence authorization must be active")
-    validate_authorization_payload(active[0])
+    records = [
+        record
+        for record in auth["records"]
+        if record.get("authorization_transaction_id") == AUTHORIZATION_ID
+    ]
+    if len(records) != 1:
+        raise ValueError("AION-212-KI-0005 authorization record missing")
+    aion212_record = records[0]
+    successor_active = active[0].get("authorization_transaction_id") == SUCCESSOR_AUTHORIZATION_ID
+    if successor_active:
+        for key, expected in {
+            "authorization_active": False,
+            "authorization_consumed": True,
+            "authorization_expired": True,
+            "authorization_reusable": False,
+            "authorization_consumed_by_task": "AION-213",
+            "authorization_closed_by_task": "AION-214",
+            "domain_expert_mesh_operator_evaluation_id": "AION-DEME-001",
+            "domain_expert_mesh_operator_evaluation_decision": (
+                "DOMAIN_EXPERT_MESH_OPERATOR_EVALUATION_PASS_RECOMMEND_"
+                "TOOL_VERIFICATION_FABRIC_AUTHORIZATION"
+            ),
+        }.items():
+            if aion212_record.get(key) != expected:
+                raise ValueError(f"AION-212 closeout mismatch for {key}: {aion212_record.get(key)!r}")
+        if active[0].get("implementation_task") != "AION-215":
+            raise ValueError("successor authorization must point to AION-215")
+        if active[0].get("formal_closeout_task") != "AION-216":
+            raise ValueError("successor authorization must close out through AION-216")
+    else:
+        validate_authorization_payload(active[0])
     program = load_json(root, "docs/knowledge-intelligence/program-ledger.json")
-    if program.get("active_knowledge_implementation_authorization") != AUTHORIZATION_ID:
+    expected_active = SUCCESSOR_AUTHORIZATION_ID if successor_active else AUTHORIZATION_ID
+    expected_task = "AION-215" if successor_active else IMPLEMENTATION_TASK
+    expected_closeout = "AION-216" if successor_active else FORMAL_CLOSEOUT_TASK
+    if program.get("active_knowledge_implementation_authorization") != expected_active:
         raise ValueError("program ledger active authorization mismatch")
-    if program.get("active_knowledge_implementation_task") != IMPLEMENTATION_TASK:
+    if program.get("active_knowledge_implementation_task") != expected_task:
         raise ValueError("program ledger active implementation task mismatch")
-    if program.get("formal_closeout_task") != FORMAL_CLOSEOUT_TASK:
+    if program.get("formal_closeout_task") != expected_closeout:
         raise ValueError("program ledger formal closeout mismatch")
     if program.get("domain_expert_mesh_authorized") is not True:
         raise ValueError("program ledger must authorize domain expert mesh")

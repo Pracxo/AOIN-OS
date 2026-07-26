@@ -1211,6 +1211,8 @@ NON_PRODUCTION_AUTH_APPROVAL_RECORDS = frozenset(
 AION213_KNOWLEDGE_INTELLIGENCE_JSON_PREFIXES = (
     "examples/knowledge-intelligence/",
     "operator-console-static/demo-data/knowledge-intelligence-domain-expert-",
+    "operator-console-static/demo-data/knowledge-intelligence-domain-expert-mesh-evaluation",
+    "operator-console-static/demo-data/knowledge-intelligence-tool-",
 )
 
 

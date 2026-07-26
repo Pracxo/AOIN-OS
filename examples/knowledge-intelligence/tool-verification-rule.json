@@ -1,0 +1,22 @@
+{
+  "actual_tool_executed": false,
+  "approval_record_id": "AION-214-KI-0006",
+  "authorization_scope": "deterministic-tool-manifest-intent-plan-simulation-verification-attestation-effect-evidence-rollback-abstention-core",
+  "authorization_transaction_id": "AION-214-KI-0006",
+  "belief_mutated": false,
+  "fail_closed": true,
+  "formal_closeout_task": "AION-216",
+  "implementation_task": "AION-215",
+  "knowledge_promoted": false,
+  "pass_status": "simulation_passed",
+  "persistent_write_applied": false,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "read_only": true,
+  "record_kind": "tool_verification_rule",
+  "redacted": true,
+  "required": true,
+  "rule_id": "rule-effect",
+  "runtime_effect": false,
+  "synthetic": true,
+  "verifier_role": "effect_verifier"
+}

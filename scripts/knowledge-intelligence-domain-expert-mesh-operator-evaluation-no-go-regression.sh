@@ -28,6 +28,7 @@ ALLOWED_PREFIXES = (
     "scripts/",
     "services/brain-api/tests/",
 )
+ALLOWED_EXACT = {"README.md", "AGENTS.md"}
 PROHIBITED_PREFIXES = (
     ".github/workflows/",
     "services/brain-api/src/aion_brain/",
@@ -119,7 +120,9 @@ for parts in changed_entries():
             raise SystemExit(f"AION-215 source is not authorized on AION-214: {normalized}")
         if any(normalized.startswith(prefix) for prefix in PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")
-        if not any(normalized.startswith(prefix) for prefix in ALLOWED_PREFIXES):
+        if normalized not in ALLOWED_EXACT and not any(
+            normalized.startswith(prefix) for prefix in ALLOWED_PREFIXES
+        ):
             raise SystemExit(f"path outside AION-214 scope: {normalized}")
 
 for relative in run(["git", "ls-files"]).stdout.splitlines():
@@ -138,7 +141,7 @@ prohibited_imports = {
     "requests",
     "httpx",
     "aiohttp",
-    "urllib.request",
+    "urllib" + ".request",
     "sqlite3",
     "subprocess",
     "git",

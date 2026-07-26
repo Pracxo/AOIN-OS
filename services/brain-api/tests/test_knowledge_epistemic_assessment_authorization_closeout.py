@@ -57,8 +57,24 @@ def test_aion_210_cannot_be_the_active_authorization_after_closeout():
         if record.get("authorization_active") is True
     ]
     assert len(active) == 1
-    assert active[0]["authorization_transaction_id"] == "AION-212-KI-0005"
-    assert active[0]["implementation_task"] == "AION-213"
+    assert active[0]["authorization_transaction_id"] in {
+        "AION-212-KI-0005",
+        "AION-214-KI-0006",
+    }
+    if active[0]["authorization_transaction_id"] == "AION-214-KI-0006":
+        assert active[0]["implementation_task"] == "AION-215"
+        closed = [
+            record
+            for record in _authorization_records()
+            if record.get("authorization_transaction_id") == "AION-212-KI-0005"
+        ][0]
+        assert closed["authorization_active"] is False
+        assert closed["authorization_consumed"] is True
+        assert closed["authorization_expired"] is True
+        assert closed["authorization_reusable"] is False
+        assert closed["authorization_closed_by_task"] == "AION-214"
+    else:
+        assert active[0]["implementation_task"] == "AION-213"
 
 
 def test_aion_212_current_projection_matches_active_authorization():
@@ -72,17 +88,44 @@ def test_aion_212_current_projection_matches_active_authorization():
     assert len(active) == 1
     record = active[0]
 
-    assert record["authorization_transaction_id"] == "AION-212-KI-0005"
-    assert record["approval_record_id"] == "AION-212-KI-0005"
-    assert record["candidate_id"] == "domain-expert-mesh-core"
-    assert record["workstream"] == "knowledge-intelligence-domain-expert-mesh"
-    assert record["implementation_task"] == "AION-213"
-    assert record["formal_closeout_task"] == "AION-214"
-    assert record["authorization_active"] is True
-    assert record["authorization_consumed"] is False
-    assert record["authorization_expired"] is False
-    assert record["authorization_reusable"] is False
-    assert record["resource_limits"]["maximum_persistent_mesh_write_batch"] == 0
+    if record["authorization_transaction_id"] == "AION-214-KI-0006":
+        closed = [
+            item
+            for item in auth["records"]
+            if item.get("authorization_transaction_id") == "AION-212-KI-0005"
+        ][0]
+        assert closed["authorization_active"] is False
+        assert closed["authorization_consumed"] is True
+        assert closed["authorization_expired"] is True
+        assert closed["authorization_reusable"] is False
+        assert closed["authorization_closed_by_task"] == "AION-214"
+        assert record["approval_record_id"] == "AION-214-KI-0006"
+        assert record["candidate_id"] == "deterministic-tool-verification-fabric-core"
+        assert record["workstream"] == "knowledge-intelligence-tool-verification-fabric"
+        assert record["implementation_task"] == "AION-215"
+        assert record["formal_closeout_task"] == "AION-216"
+        assert record["authorization_active"] is True
+        assert record["authorization_consumed"] is False
+        assert record["authorization_expired"] is False
+        assert record["authorization_reusable"] is False
+        assert record["resource_limits"]["maximum_actual_tool_executions"] == 0
+    else:
+        assert record["authorization_transaction_id"] == "AION-212-KI-0005"
+        assert record["approval_record_id"] == "AION-212-KI-0005"
+        assert record["candidate_id"] == "domain-expert-mesh-core"
+        assert record["workstream"] == "knowledge-intelligence-domain-expert-mesh"
+        assert record["implementation_task"] == "AION-213"
+        assert record["formal_closeout_task"] == "AION-214"
+        assert record["authorization_active"] is True
+        assert record["authorization_consumed"] is False
+        assert record["authorization_expired"] is False
+        assert record["authorization_reusable"] is False
+        assert record["resource_limits"]["maximum_persistent_mesh_write_batch"] == 0
+
+    assert record["authorization_transaction_id"] in {
+        "AION-212-KI-0005",
+        "AION-214-KI-0006",
+    }
 
     for payload in (auth, program):
         assert payload["authorization_transaction_id"] == record[
@@ -96,9 +139,11 @@ def test_aion_212_current_projection_matches_active_authorization():
         assert payload["active_knowledge_implementation_authorization_count"] == 1
         assert (
             payload["active_knowledge_implementation_authorization"]
-            == "AION-212-KI-0005"
+            == record["authorization_transaction_id"]
         )
-        assert payload["active_knowledge_implementation_task"] == "AION-213"
+        assert payload["active_knowledge_implementation_task"] == record[
+            "implementation_task"
+        ]
         assert payload["active_cognitive_implementation_authorization_count"] == 0
         assert payload["domain_expert_mesh_authorized"] is True
         if payload["domain_expert_mesh_implemented"] is True:
