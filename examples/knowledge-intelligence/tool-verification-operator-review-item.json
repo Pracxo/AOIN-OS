@@ -1,25 +1,13 @@
 {
   "actual_tool_executed": false,
-  "approval_created": false,
-  "approval_record_id": "AION-214-KI-0006",
-  "authorization_scope": "deterministic-tool-manifest-intent-plan-simulation-verification-attestation-effect-evidence-rollback-abstention-core",
-  "authorization_transaction_id": "AION-214-KI-0006",
-  "belief_mutated": false,
-  "formal_closeout_task": "AION-216",
-  "implementation_task": "AION-215",
-  "knowledge_promoted": false,
-  "operator_review_required": true,
-  "persistent_write_applied": false,
-  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
-  "read_only": true,
-  "record_kind": "tool_verification_operator_review_item",
-  "redacted": true,
-  "review_item_id": "tool-review-0001",
-  "review_reason_codes": [
-    "operator_review_required",
-    "simulation_is_not_execution",
-    "verification_is_not_approval"
-  ],
+  "required": true,
+  "review_fingerprint": "5adca0435f5c44deb1cae72b7c53de65514e39f987d7cf507dcf90a5241ab644",
+  "review_item_id": "operator-review-session-intent-aion-215-001",
   "runtime_effect": false,
-  "synthetic": true
+  "schema_version": "aion-knowledge-tool-verification-operator-review/v1",
+  "session_id": "session-intent-aion-215-001",
+  "simulation_pass_not_execution": true,
+  "summary": "Synthetic tool simulation requires operator review before any future action.",
+  "tool_output_not_knowledge": true,
+  "verification_pass_not_approval": true
 }

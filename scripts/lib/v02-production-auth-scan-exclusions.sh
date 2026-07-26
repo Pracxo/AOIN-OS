@@ -109,6 +109,9 @@ aion151_is_scoped_authorization_path() {
       if aion213_is_scoped_knowledge_intelligence_domain_expert_mesh_path "$1"; then
         return 0
       fi
+      if aion215_is_scoped_knowledge_intelligence_tool_verification_path "$1"; then
+        return 0
+      fi
       return 1
       ;;
   esac
@@ -1929,6 +1932,60 @@ aion213_is_scoped_knowledge_intelligence_domain_expert_mesh_path() {
     services/brain-api/tests/knowledge_domain_expert_mesh_test_helpers.py|\
     services/brain-api/tests/test_knowledge_domain_expert_mesh_*.py|\
     services/brain-api/tests/test_knowledge_intelligence_current_projection.py)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+aion215_is_scoped_knowledge_intelligence_tool_verification_path() {
+  # Scoped AION-215 Knowledge Intelligence tool-verification implementation
+  # artifacts. This is a deterministic simulation-only fabric; production auth
+  # runtime files, API routes, package files, migrations, workflows, and releases
+  # remain blocked by the caller.
+  case "$1" in
+    README.md|\
+    AGENTS.md|\
+    docs/adr/0178-domain-expert-mesh-evaluation-and-tool-verification-authorization.md|\
+    docs/adr/README.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/project-status.md|\
+    docs/visual-brain.md|\
+    docs/knowledge-intelligence/*|\
+    docs/release/knowledge-intelligence-tool-verification-*|\
+    docs/release/v02-release-readiness-delta.md|\
+    examples/knowledge-intelligence/tool-*|\
+    operator-console-static/README.md|\
+    operator-console-static/app.js|\
+    operator-console-static/demo-data/knowledge-intelligence-program.json|\
+    operator-console-static/demo-data/knowledge-intelligence-tool-*.json|\
+    scripts/knowledge-intelligence-tool-verification-*.sh|\
+    scripts/lib/knowledge_intelligence_tool_verification_authorization.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    services/brain-api/src/aion_brain/contracts/knowledge_tool_verification.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/tool_attestation.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/tool_effects.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/tool_evidence.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/tool_integrity.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/tool_manifests.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/tool_planning.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/tool_simulation.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification_fabric.py|\
+    services/brain-api/tests/test_knowledge_tool_verification_*.py|\
+    services/brain-api/tests/test_knowledge_intelligence_current_projection.py|\
+    services/brain-api/tests/test_knowledge_source_registry_authorization_closeout.py|\
+    services/brain-api/tests/test_knowledge_research_authorization_closeout.py|\
+    services/brain-api/tests/test_knowledge_intelligence_research_authorization_docs.py|\
+    services/brain-api/tests/test_knowledge_claim_graph_authorization_validator.py|\
+    services/brain-api/tests/test_knowledge_claim_graph_authorization_closeout.py|\
+    services/brain-api/tests/test_knowledge_epistemic_assessment_evaluation_repository_integrity.py|\
+    services/brain-api/tests/test_knowledge_domain_expert_mesh_evaluation_repository_integrity.py)
       return 0
       ;;
     *)

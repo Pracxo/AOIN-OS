@@ -7,11 +7,15 @@ from aion_brain.knowledge_intelligence.epistemic_assessment import (
 )
 from aion_brain.knowledge_intelligence.research import ControlledResearchAcquisitionService
 from aion_brain.knowledge_intelligence.source_registry import ControlledSourceProvenanceRegistry
+from aion_brain.knowledge_intelligence.tool_verification_fabric import (
+    ControlledToolVerificationFabric,
+)
 
 __all__ = [
     "ControlledEpistemicAssessmentEngine",
     "ControlledDomainExpertMesh",
     "ControlledResearchAcquisitionService",
     "ControlledSourceProvenanceRegistry",
+    "ControlledToolVerificationFabric",
     "ControlledTemporalClaimEvidenceGraph",
 ]

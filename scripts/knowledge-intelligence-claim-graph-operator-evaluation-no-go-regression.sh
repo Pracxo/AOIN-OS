@@ -71,6 +71,28 @@ AION213_SOURCE = (
     "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_routing.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_synthesis.py",
 )
+AION215_SOURCE = (
+    "services/brain-api/src/aion_brain/contracts/knowledge_tool_verification.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_attestation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_effects.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_manifests.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_planning.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_simulation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification_fabric.py",
+)
+IMPLEMENTED_PROGRAM_STATE = (
+    "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
+)
+PROGRAM_PATH = ROOT / "docs/knowledge-intelligence/program-ledger.json"
+PROGRAM_STATE = (
+    json.loads(PROGRAM_PATH.read_text()).get("program_state", "")
+    if PROGRAM_PATH.exists()
+    else ""
+)
 
 
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -123,6 +145,8 @@ for parts in changed_entries():
         if normalized in AION211_SOURCE:
             continue
         if normalized in AION213_SOURCE:
+            continue
+        if PROGRAM_STATE == IMPLEMENTED_PROGRAM_STATE and normalized in AION215_SOURCE:
             continue
         if normalized.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")

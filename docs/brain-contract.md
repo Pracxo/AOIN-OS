@@ -2379,4 +2379,4 @@ AION-213 implements the deterministic in-memory advisory domain expert mesh unde
 
 ## AION-214 Knowledge Intelligence Boundary
 
-AION-214 closes `AION-212-KI-0005` after `AION-DEME-001` passes and records `AION-214-KI-0006` as the sole active authorization for AION-215. The tool verification fabric is authorized but not implemented; actual tool execution, shell commands, network access, connectors, browser automation, model providers, persistence, source mutation, PR creation, approval creation, deployment, knowledge promotion, and belief mutation remain disabled.
+AION-214 closes `AION-212-KI-0005` after `AION-DEME-001` passes and records `AION-214-KI-0006` as the sole active authorization for AION-215. The tool verification fabric is implemented as deterministic simulation-only infrastructure; actual tool execution, shell commands, network access, connectors, browser automation, model providers, persistence, source mutation, PR creation, approval creation, deployment, knowledge promotion, and belief mutation remain disabled.

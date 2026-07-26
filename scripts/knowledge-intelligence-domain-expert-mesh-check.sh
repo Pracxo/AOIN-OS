@@ -109,7 +109,7 @@ active = [
 if len(active) != 1:
     raise SystemExit("active AION-212-KI-0005 authorization record missing")
 record = active[0]
-post_aion214 = program.get("program_state") == "tool_verification_fabric_authorized_not_implemented"
+post_aion214 = program.get("program_state") in {"tool_verification_fabric_authorized_not_implemented", "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"}
 if post_aion214:
     if record["authorization_active"] is not False:
         raise SystemExit("AION-212-KI-0005 must be inactive after AION-214")

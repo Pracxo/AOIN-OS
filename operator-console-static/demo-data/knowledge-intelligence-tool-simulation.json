@@ -1,37 +1,64 @@
 {
   "actual_tool_executed": false,
-  "approval_record_id": "AION-214-KI-0006",
-  "authorization_scope": "deterministic-tool-manifest-intent-plan-simulation-verification-attestation-effect-evidence-rollback-abstention-core",
-  "authorization_transaction_id": "AION-214-KI-0006",
-  "belief_mutated": false,
-  "expected_effects": [
-    "validate"
-  ],
-  "forbidden_effects_detected": [],
-  "formal_closeout_task": "AION-216",
-  "implementation_task": "AION-215",
-  "knowledge_promoted": false,
-  "output_artifact_fingerprints": [
-    "sha256:output-artifact"
-  ],
-  "persistent_write_applied": false,
-  "plan_id": "plan-0001",
-  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
   "read_only": true,
-  "reason_codes": [
-    "synthetic_simulation_only"
-  ],
-  "record_kind": "tool_simulation_result",
   "redacted": true,
+  "synthetic": true,
+  "artifacts": [
+    {
+      "artifact_fingerprint": "55fde97ac54f7998e4459eb8d73f7e7d10b19c5f9cfc13f6ac8b64600fe55005",
+      "artifact_id": "artifact-step-intent-aion-215-001-001-001",
+      "canonical_output": {
+        "input_fingerprint": "636cad1256d14c43fab1cf6297ef72efdecc1aa13449795255a2337b6c4c39f1",
+        "plan_id": "plan-intent-aion-215-001",
+        "status": "synthetic_simulation_only",
+        "tool_id": "synthetic.json-validator",
+        "validated": true
+      },
+      "output_fingerprint": "f8422fce3c329915db3abf1fcd24b3a517f43e7aaed63782ea5edce135ff2394",
+      "output_schema_id": "schema-synthetic-validation-output",
+      "redacted": true,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-tool-simulation-artifact/v1",
+      "step_id": "step-intent-aion-215-001-001",
+      "synthetic": true
+    }
+  ],
+  "canonical_output": {
+    "input_fingerprint": "636cad1256d14c43fab1cf6297ef72efdecc1aa13449795255a2337b6c4c39f1",
+    "plan_id": "plan-intent-aion-215-001",
+    "status": "synthetic_simulation_only",
+    "tool_id": "synthetic.json-validator",
+    "validated": true
+  },
+  "expected_effects_satisfied": true,
+  "forbidden_effects_absent": true,
+  "observed_effects": [
+    {
+      "artifact_id": "artifact-intent-aion-215-001",
+      "effect_fingerprint": "2eb9e362ad4b433b30437b46d67860c803fe203ec581801031964ea95d22e86a",
+      "effect_id": "effect-intent-aion-215-001-validate",
+      "effect_scope": "synthetic-artifact",
+      "effect_type": "validate",
+      "requires_actual_execution": false,
+      "requires_persistent_write": false,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-tool-effect/v1",
+      "synthetic": true
+    }
+  ],
+  "output_fingerprint": "f8422fce3c329915db3abf1fcd24b3a517f43e7aaed63782ea5edce135ff2394",
+  "persistent_write_applied": false,
+  "plan_id": "plan-intent-aion-215-001",
+  "reason_codes": [
+    "tool_synthetic_simulation_passed",
+    "tool_output_canonicalized",
+    "tool_artifact_fingerprinted",
+    "tool_effect_expected_matched",
+    "tool_effect_forbidden_absent"
+  ],
   "runtime_effect": false,
-  "simulated_observed_effects": [
-    "validate"
-  ],
-  "simulation_fingerprint": "sha256:simulation",
-  "simulation_id": "simulation-0001",
-  "simulation_status": "simulation_passed",
-  "step_results": [
-    "step-0001:simulation_passed"
-  ],
-  "synthetic": true
+  "schema_version": "aion-knowledge-tool-simulation/v1",
+  "simulation_fingerprint": "5b1ddfa60acf19b7f97da46d9bae4f32e2ca652aceb7c1fbdaeb875eac8aa79d",
+  "simulation_id": "simulation-plan-intent-aion-215-001",
+  "status": "simulation_passed"
 }

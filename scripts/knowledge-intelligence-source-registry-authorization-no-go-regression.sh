@@ -21,6 +21,9 @@ from pathlib import Path
 
 ROOT = Path(os.environ["AION_REPO_ROOT"])
 EXPECTED_TAG = "105fe29348160a2218ac095cfffadcb6f234421f"
+TOOL_VERIFICATION_IMPLEMENTED_STATE = (
+    "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
+)
 
 AION207_SOURCE = {
     "services/brain-api/src/aion_brain/contracts/knowledge_source_registry.py",
@@ -60,6 +63,19 @@ DOMAIN_EXPERT_MESH_SOURCE = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_profiles.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_routing.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_synthesis.py",
+}
+AION215_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_tool_verification.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_attestation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_effects.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_manifests.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_planning.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_simulation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification_fabric.py",
 }
 PROHIBITED_SOURCE = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_runtime.py",
@@ -113,6 +129,8 @@ CLAIM_GRAPH_CONTEXT = (
         "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
         "domain_expert_mesh_authorized_not_implemented",
         "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
+        "tool_verification_fabric_authorized_not_implemented",
+        TOOL_VERIFICATION_IMPLEMENTED_STATE,
     }
     or os.environ.get("AION_CLAIM_GRAPH_IMPLEMENTATION_CONTEXT") == "1"
     or os.environ.get("AION_AGGREGATE_GATE_RUNNING") == "1"
@@ -215,9 +233,15 @@ for parts in changed_entries():
             continue
         if (
             program_state
-            == "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout"
+            in {
+                "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
+                "tool_verification_fabric_authorized_not_implemented",
+                TOOL_VERIFICATION_IMPLEMENTED_STATE,
+            }
             and normalized in DOMAIN_EXPERT_MESH_SOURCE
         ):
+            continue
+        if program_state == TOOL_VERIFICATION_IMPLEMENTED_STATE and normalized in AION215_SOURCE:
             continue
         if normalized.startswith("services/brain-api/src/aion_brain/") and normalized not in AION207_SOURCE:
             raise SystemExit(f"path outside exact AION-207 source scope: {normalized}")

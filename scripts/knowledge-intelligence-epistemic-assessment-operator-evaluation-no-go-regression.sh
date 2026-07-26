@@ -15,6 +15,7 @@ export AION_REPO_ROOT="$ROOT_DIR"
 from __future__ import annotations
 
 import ast
+import json
 import os
 import subprocess
 from pathlib import Path
@@ -54,10 +55,31 @@ AION213_SOURCE_PREFIXES = (
     "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_",
 )
+AION215_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_tool_verification.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_attestation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_effects.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_manifests.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_planning.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_simulation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification_fabric.py",
+}
+POST_AION213_SOURCE_STATES = {
+    "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
+    "tool_verification_fabric_authorized_not_implemented",
+    "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
+}
+IMPLEMENTED_TOOL_VERIFICATION_STATE = (
+    "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
+)
 PROGRAM_PATH = ROOT / "docs/knowledge-intelligence/program-ledger.json"
 PROGRAM_STATE = ""
 if PROGRAM_PATH.exists():
-    PROGRAM_STATE = __import__("json").loads(PROGRAM_PATH.read_text()).get("program_state", "")
+    PROGRAM_STATE = json.loads(PROGRAM_PATH.read_text()).get("program_state", "")
 
 
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -110,11 +132,10 @@ for parts in changed_entries():
         normalized = path.replace("\\", "/")
         if Path(normalized).name in PROHIBITED_NAMES:
             raise SystemExit(f"dependency/package file changed: {normalized}")
+        if PROGRAM_STATE == IMPLEMENTED_TOOL_VERIFICATION_STATE and normalized in AION215_SOURCE:
+            continue
         if normalized.startswith(AION213_SOURCE_PREFIXES):
-            if (
-                PROGRAM_STATE
-                != "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout"
-            ):
+            if PROGRAM_STATE not in POST_AION213_SOURCE_STATES:
                 raise SystemExit(
                     f"AION-213 runtime source is not authorized in AION-212: {normalized}"
                 )

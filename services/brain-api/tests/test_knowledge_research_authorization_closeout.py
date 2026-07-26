@@ -20,6 +20,9 @@ AION213_IMPLEMENTED_STATE = (
     "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout"
 )
 AION215_STATE = "tool_verification_fabric_authorized_not_implemented"
+AION215_IMPLEMENTED_STATE = (
+    "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
+)
 
 
 def test_aion_204_authorization_is_closed_and_non_reusable():
@@ -47,6 +50,7 @@ def test_aion_206_creates_single_active_source_registry_authorization():
         AION213_STATE,
         AION213_IMPLEMENTED_STATE,
         AION215_STATE,
+        AION215_IMPLEMENTED_STATE,
     }
     if program["program_state"] in {
         "epistemic_truth_engine_authorized_not_implemented",
@@ -72,7 +76,7 @@ def test_aion_206_creates_single_active_source_registry_authorization():
             assert program["domain_expert_mesh_implemented"] is True
             assert program["model_call_enabled"] is False
             assert program["persistent_mesh_write_enabled"] is False
-    elif program["program_state"] == AION215_STATE:
+    elif program["program_state"] in {AION215_STATE, AION215_IMPLEMENTED_STATE}:
         assert program["active_knowledge_implementation_authorization"] == (
             TOOL_VERIFICATION_AUTH_ID
         )
@@ -85,7 +89,14 @@ def test_aion_206_creates_single_active_source_registry_authorization():
         assert program["model_call_enabled"] is False
         assert program["persistent_mesh_write_enabled"] is False
         assert program["tool_verification_fabric_authorized"] is True
-        assert program["tool_verification_fabric_implemented"] is False
+        assert program["tool_verification_fabric_implemented"] is (
+            program["program_state"] == AION215_IMPLEMENTED_STATE
+        )
+        if program["program_state"] == AION215_IMPLEMENTED_STATE:
+            assert program["tool_verification_fabric_state"] == (
+                "implemented_deterministic_simulation_verification_attestation_persistent_write_disabled"
+            )
+            assert program["tool_verification_fabric_runtime_enabled"] is False
         assert program["actual_tool_execution_enabled"] is False
     elif program["program_state"] in {
         "temporal_claim_evidence_graph_authorized_not_implemented",

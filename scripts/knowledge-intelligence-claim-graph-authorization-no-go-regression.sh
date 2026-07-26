@@ -23,17 +23,23 @@ ROOT = Path(os.environ["AION_REPO_ROOT"])
 EXPECTED_TAG = "105fe29348160a2218ac095cfffadcb6f234421f"
 POST_AION210_CONTEXT = os.environ.get("AION_KNOWLEDGE_POST_AION210_CONTEXT") == "1"
 PROGRAM_PATH = ROOT / "docs/knowledge-intelligence/program-ledger.json"
+TOOL_VERIFICATION_IMPLEMENTED_STATE = (
+    "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
+)
+CURRENT_PROGRAM_STATE = ""
 if PROGRAM_PATH.exists():
     try:
+        CURRENT_PROGRAM_STATE = json.loads(PROGRAM_PATH.read_text()).get("program_state", "")
         POST_AION210_CONTEXT = (
             POST_AION210_CONTEXT
-            or json.loads(PROGRAM_PATH.read_text()).get("program_state")
+            or CURRENT_PROGRAM_STATE
             in {
                 "epistemic_truth_engine_authorized_not_implemented",
                 "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
                 "domain_expert_mesh_authorized_not_implemented",
                 "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
                 "tool_verification_fabric_authorized_not_implemented",
+                TOOL_VERIFICATION_IMPLEMENTED_STATE,
             }
         )
     except json.JSONDecodeError:
@@ -213,8 +219,22 @@ POST_AION210_ALLOWED_PREFIXES = (
 )
 AION214_ALLOWED_EXACT = {
     "docs/adr/0178-domain-expert-mesh-evaluation-and-tool-verification-authorization.md",
+    "operator-console-static/demo-data/knowledge-intelligence-program.json",
     "scripts/lib/knowledge_intelligence_domain_expert_mesh_operator_evaluation.py",
     "scripts/lib/knowledge_intelligence_tool_verification_authorization.py",
+}
+AION215_ALLOWED_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_tool_verification.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_attestation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_effects.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_manifests.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_planning.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_simulation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification_fabric.py",
 }
 AION214_ALLOWED_PREFIXES = (
     "docs/knowledge-intelligence/domain-expert-mesh-operator-evaluation",
@@ -322,6 +342,11 @@ def path_allowed(path: str) -> bool:
         or any(normalized.startswith(prefix) for prefix in POST_AION210_ALLOWED_PREFIXES)
         or normalized in AION214_ALLOWED_EXACT
         or any(normalized.startswith(prefix) for prefix in AION214_ALLOWED_PREFIXES)
+    ):
+        return True
+    if (
+        CURRENT_PROGRAM_STATE == TOOL_VERIFICATION_IMPLEMENTED_STATE
+        and normalized in AION215_ALLOWED_SOURCE
     ):
         return True
     if (

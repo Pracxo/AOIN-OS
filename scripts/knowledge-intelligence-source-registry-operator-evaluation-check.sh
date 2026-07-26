@@ -196,6 +196,11 @@ successor_program_states = {
         "AION-215",
         "AION-216",
     ),
+    "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout": (
+        "AION-214-KI-0006",
+        "AION-215",
+        "AION-216",
+    ),
 }
 if program["program_state"] in successor_program_states:
     expected_auth, expected_task, expected_closeout = successor_program_states[

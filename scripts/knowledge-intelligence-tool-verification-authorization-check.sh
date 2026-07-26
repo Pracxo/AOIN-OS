@@ -11,6 +11,13 @@ PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 export AION_REPO_ROOT="$ROOT_DIR"
 
+is_nested_gate_context() {
+  [[ -n "${PYTEST_CURRENT_TEST:-}" ]] && return 0
+  [[ "${AION_AGGREGATE_GATE_RUNNING:-}" == "1" ]] && return 0
+  [[ "${AION_CHECK_RUNNING:-}" == "1" ]] && return 0
+  return 1
+}
+
 ./scripts/knowledge-intelligence-tool-verification-authorization-no-go-regression.sh
 
 json_files=(
@@ -57,6 +64,18 @@ tool_auth = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(tool_auth)
 tool_auth.validate_authorization_files(ROOT)
 PY
+
+if is_nested_gate_context; then
+  echo "PASS: focused AION-215 pytest deferred to outer gate"
+else
+  "$PYTHON_BIN" -m pytest \
+    services/brain-api/tests/test_knowledge_tool_verification_fabric.py \
+    services/brain-api/tests/test_knowledge_tool_verification_attestation_spec.py \
+    services/brain-api/tests/test_knowledge_tool_verification_scope_spec.py \
+    services/brain-api/tests/test_knowledge_tool_verification_threat_model.py \
+    services/brain-api/tests/test_knowledge_intelligence_current_projection.py \
+    -q
+fi
 
 ./scripts/docs-check.sh
 ./scripts/final-docs-audit.sh

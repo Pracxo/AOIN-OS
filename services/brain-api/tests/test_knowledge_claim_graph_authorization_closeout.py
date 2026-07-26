@@ -44,6 +44,7 @@ def test_aion_210_creates_sole_active_epistemic_authorization():
     assert record["authorization_transaction_id"] == EPISTEMIC_AUTH_ID
     if program["program_state"] in {
         "tool_verification_fabric_authorized_not_implemented",
+        "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
     }:
         assert active["authorization_transaction_id"] == "AION-214-KI-0006"
         assert (

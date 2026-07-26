@@ -1,31 +1,23 @@
 {
+  "abstained": false,
   "actual_execution_verified": false,
-  "actual_tool_executed": false,
-  "approval_record_id": "AION-214-KI-0006",
-  "authorization_scope": "deterministic-tool-manifest-intent-plan-simulation-verification-attestation-effect-evidence-rollback-abstention-core",
-  "authorization_transaction_id": "AION-214-KI-0006",
+  "approval_created": false,
   "belief_mutated": false,
-  "evidence_reference_ids": [
-    "evidence-0001"
-  ],
-  "finding_fingerprint": "sha256:finding",
-  "finding_id": "finding-0001",
-  "formal_closeout_task": "AION-216",
-  "implementation_task": "AION-215",
+  "evidence_fingerprint": "5b1ddfa60acf19b7f97da46d9bae4f32e2ca652aceb7c1fbdaeb875eac8aa79d",
+  "finding_fingerprint": "0d944069e8dd2dbef08eb4647356de466ddd9c587528963ebfa1c0291e87dee4",
+  "finding_id": "finding-plan-intent-aion-215-001-001",
   "knowledge_promoted": false,
-  "persistent_write_applied": false,
-  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
-  "read_only": true,
+  "passed": true,
+  "plan_id": "plan-intent-aion-215-001",
   "reason_codes": [
-    "effect_matches_expected"
+    "tool_schema_valid"
   ],
-  "record_kind": "tool_verification_finding",
-  "redacted": true,
-  "rule_id": "rule-effect",
+  "rule_id": "rule-schema_verifier",
   "runtime_effect": false,
-  "simulation_id": "simulation-0001",
+  "schema_version": "aion-knowledge-tool-verification-finding/v1",
+  "severity": "info",
+  "simulation_id": "simulation-plan-intent-aion-215-001",
   "status": "verification_passed",
-  "step_id": "step-0001",
-  "synthetic": true,
-  "verifier_role": "effect_verifier"
+  "verifier_profile_id": "profile-schema_verifier",
+  "verifier_role": "schema_verifier"
 }

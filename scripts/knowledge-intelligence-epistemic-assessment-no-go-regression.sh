@@ -41,7 +41,11 @@ POST_AION212_PROGRAM_STATES = {
     "domain_expert_mesh_authorized_not_implemented",
     "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
     "tool_verification_fabric_authorized_not_implemented",
+    "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
 }
+TOOL_VERIFICATION_IMPLEMENTED_STATE = (
+    "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
+)
 ENGINE_STATE = "implemented_deterministic_in_memory_assessment_persistent_write_disabled"
 SOURCE_FILES = {
     "services/brain-api/src/aion_brain/contracts/knowledge_epistemic_assessment.py",
@@ -257,9 +261,23 @@ AION214_ALLOWED_PREFIXES = (
 )
 AION214_ALLOWED_EXACT = {
     "docs/adr/0178-domain-expert-mesh-evaluation-and-tool-verification-authorization.md",
+    "operator-console-static/demo-data/knowledge-intelligence-program.json",
     "scripts/knowledge-intelligence-source-registry-operator-evaluation-check.sh",
     "scripts/lib/knowledge_intelligence_domain_expert_mesh_operator_evaluation.py",
     "scripts/lib/knowledge_intelligence_tool_verification_authorization.py",
+}
+AION215_ALLOWED_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_tool_verification.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_attestation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_effects.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_manifests.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_planning.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_simulation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification_fabric.py",
 }
 PROHIBITED_PREFIXES = (
     ".github/workflows/",
@@ -358,6 +376,14 @@ def load_json(relative: str) -> dict:
 
 
 def allowed_path(path: str) -> bool:
+    current_state = ""
+    program_path = ROOT / "docs/knowledge-intelligence/program-ledger.json"
+    if program_path.exists():
+        current_state = json.loads(program_path.read_text(encoding="utf-8")).get(
+            "program_state", ""
+        )
+    if current_state == TOOL_VERIFICATION_IMPLEMENTED_STATE and path in AION215_ALLOWED_SOURCE:
+        return True
     if path in ALLOWED_EXACT or path in SOURCE_FILES or path in REQUIRED_DOCS:
         return True
     if path in REQUIRED_EXAMPLES or path in REQUIRED_STATIC:
@@ -438,7 +464,7 @@ def assert_ledgers() -> None:
     auth = load_json("docs/knowledge-intelligence/authorization-ledger.json")
     post_aion212 = (ROOT / "examples/knowledge-intelligence/epistemic-assessment-operator-evaluation-report.json").exists()
     for label, payload in (("program", program), ("authorization", auth)):
-        post_aion214 = payload.get("program_state") == "tool_verification_fabric_authorized_not_implemented"
+        post_aion214 = payload.get("program_state") in {"tool_verification_fabric_authorized_not_implemented", "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"}
         if payload["program_id"] != PROGRAM_ID:
             raise SystemExit(f"{label} ledger program mismatch")
         expected_states = POST_AION212_PROGRAM_STATES if post_aion212 else {PROGRAM_STATE}
@@ -485,7 +511,7 @@ def assert_ledgers() -> None:
     if len(active) != 1:
         raise SystemExit("exactly one Knowledge Intelligence authorization must be active")
     active_record = active[0]
-    post_aion214 = program.get("program_state") == "tool_verification_fabric_authorized_not_implemented"
+    post_aion214 = program.get("program_state") in {"tool_verification_fabric_authorized_not_implemented", "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"}
     if post_aion214:
         expected_active = SUCCESSOR_AUTH_ID
         expected_scope = SUCCESSOR_SCOPE

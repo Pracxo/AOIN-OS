@@ -38,7 +38,13 @@ def test_current_projection_matches_active_tool_verification_authorization() -> 
         assert ledger["active_knowledge_implementation_task"] == "AION-215"
         assert ledger["formal_closeout_task"] == "AION-216"
         assert ledger["tool_verification_fabric_authorized"] is True
-        assert ledger["tool_verification_fabric_implemented"] is False
+        assert ledger["tool_verification_fabric_implemented"] is True
+        assert ledger["tool_verification_fabric_state"] == (
+            "implemented_deterministic_simulation_verification_attestation_persistent_write_disabled"
+        )
+        assert ledger["tool_verification_fabric_runtime_enabled"] is False
+        assert ledger["actual_tool_execution_enabled"] is False
+        assert ledger["persistent_tool_state_write_enabled"] is False
 
 
 def test_aion_212_authorization_is_closed_after_domain_mesh_evaluation() -> None:
