@@ -6,6 +6,9 @@ from aion_brain.contracts.knowledge_verified_memory import VerifiedKnowledgeInte
 from aion_brain.knowledge_intelligence.verified_knowledge_integrity import (
     audit_integrated_knowledge_lineage,
 )
+from aion_brain.knowledge_intelligence.verified_knowledge_lineage import (
+    audit_integrated_knowledge_lineage as audit_lineage_public_api,
+)
 
 
 def test_integrated_lineage_preserves_all_upstream_reference_planes() -> None:
@@ -22,3 +25,10 @@ def test_integrated_lineage_audit_passes_redacted() -> None:
     report = audit_integrated_knowledge_lineage(sample_lineage())
     assert report.status is VerifiedKnowledgeIntegrityStatus.PASSED
     assert report.redacted is True
+
+
+def test_public_lineage_audit_preserves_integrity_report_fingerprint() -> None:
+    report = audit_lineage_public_api(sample_lineage())
+    assert report.status is VerifiedKnowledgeIntegrityStatus.PASSED
+    assert report.redacted is True
+    assert report.report_fingerprint
