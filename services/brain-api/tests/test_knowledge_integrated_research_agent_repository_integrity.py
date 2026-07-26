@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -28,13 +29,52 @@ def _load_json(relative: str) -> dict[str, object]:
     return json.loads((REPO_ROOT / relative).read_text(encoding="utf-8"))
 
 
-def test_aion_216_repository_boundary_has_no_runtime_changes() -> None:
-    changed = subprocess.run(
+def _git_ref_exists(ref: str) -> bool:
+    return (
+        subprocess.run(
+            ["git", "rev-parse", "--verify", "--quiet", ref],
+            cwd=REPO_ROOT,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            check=False,
+        ).returncode
+        == 0
+    )
+
+
+def _comparison_base() -> str | None:
+    candidates = ["origin/main", "main"]
+    github_base_ref = os.environ.get("GITHUB_BASE_REF")
+    if github_base_ref:
+        candidates.extend([f"origin/{github_base_ref}", github_base_ref])
+
+    for candidate in dict.fromkeys(candidates):
+        if not _git_ref_exists(candidate):
+            continue
+        merge_base = subprocess.run(
+            ["git", "merge-base", "HEAD", candidate],
+            cwd=REPO_ROOT,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+        if merge_base.returncode == 0 and merge_base.stdout.strip():
+            return merge_base.stdout.strip()
+
+    return "HEAD~1" if _git_ref_exists("HEAD~1") else None
+
+
+def _changed_runtime_boundary_paths() -> list[str]:
+    base = _comparison_base()
+    if base is None:
+        return []
+    return subprocess.run(
         [
             "git",
             "diff",
             "--name-only",
-            "origin/main...HEAD",
+            base,
+            "HEAD",
             "--",
             ".github/workflows",
             "services/brain-api/src/aion_brain",
@@ -47,6 +87,9 @@ def test_aion_216_repository_boundary_has_no_runtime_changes() -> None:
         capture_output=True,
         check=True,
     ).stdout.splitlines()
-    assert changed == []
+
+
+def test_aion_216_repository_boundary_has_no_runtime_changes() -> None:
+    assert _changed_runtime_boundary_paths() == []
     for relative in _load_validator().AION217_SOURCE_PATHS:
         assert not (REPO_ROOT / relative).exists(), relative
