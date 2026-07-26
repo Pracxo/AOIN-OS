@@ -1,11 +1,317 @@
 {
-  "automatic_policy_application": false,
-  "batch_id": "elc-batch-aion-216-001",
-  "knowledge_effect": false,
-  "learning_candidate_count": 1,
-  "learning_candidates": [
-    "elc-aion-216-001"
+  "automatic_application": false,
+  "batch_fingerprint": "3137ad9f0de247ba7d7d40b1303028e879690d78f64c48c8dd659206dd650b0c",
+  "batch_id": "engagement-learning-001",
+  "candidate_count": 9,
+  "candidates": [
+    {
+      "automatic_application": false,
+      "belief_effect": false,
+      "candidate_fingerprint": "3598af6a031e13d5b03d01397b8ea8961038c9e715bbc6c84945f6afe316f398",
+      "candidate_kind": "retrieval_strategy",
+      "candidate_version": 1,
+      "cognitive_memory_effect": false,
+      "confidence_effect": false,
+      "created_at": "2026-01-01T00:00:00Z",
+      "expires_at": null,
+      "factual_effect": false,
+      "knowledge_effect": false,
+      "learning_candidate_id": "engagement-learning-2ccdf424d8356e99055cc8c03db7ff086c8efe95ef5f6d38-v001",
+      "lifecycle_status": "proposed",
+      "model_weight_effect": false,
+      "operator_review_required": true,
+      "reason_codes": [
+        "engagement_learning_candidate_proposed",
+        "engagement_learning_candidate_operator_review_required",
+        "engagement_learning_candidate_automatic_application_blocked",
+        "engagement_learning_candidate_model_training_blocked"
+      ],
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-engagement-learning-candidate/v1",
+      "signal_fingerprints": [
+        "53a6551af2756158c58a5931bdd04317c5d730c04ea72834e045c448f0007eb4"
+      ],
+      "signal_ids": [
+        "signal-003"
+      ],
+      "supersedes_candidate_id": null,
+      "target_component_code": "retrieval-planning",
+      "target_policy_code": "retrieval-strategy-review"
+    },
+    {
+      "automatic_application": false,
+      "belief_effect": false,
+      "candidate_fingerprint": "fa0374325c01203aa47652ce40633fdd9e98c85536559f70ca5663bba8e1f830",
+      "candidate_kind": "response_quality",
+      "candidate_version": 1,
+      "cognitive_memory_effect": false,
+      "confidence_effect": false,
+      "created_at": "2026-01-01T00:00:00Z",
+      "expires_at": null,
+      "factual_effect": false,
+      "knowledge_effect": false,
+      "learning_candidate_id": "engagement-learning-60da42c10d81246de1c88e18daea9f2f65fdbce26f3ec863-v001",
+      "lifecycle_status": "proposed",
+      "model_weight_effect": false,
+      "operator_review_required": true,
+      "reason_codes": [
+        "engagement_learning_candidate_proposed",
+        "engagement_learning_candidate_operator_review_required",
+        "engagement_learning_candidate_automatic_application_blocked",
+        "engagement_learning_candidate_model_training_blocked"
+      ],
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-engagement-learning-candidate/v1",
+      "signal_fingerprints": [
+        "e8504ac0516283a4ceb6498e7ee1dcd04e2f0386dc2db45e073821114e3cdbf0"
+      ],
+      "signal_ids": [
+        "signal-008"
+      ],
+      "supersedes_candidate_id": null,
+      "target_component_code": "operator-response",
+      "target_policy_code": "response-quality-review"
+    },
+    {
+      "automatic_application": false,
+      "belief_effect": false,
+      "candidate_fingerprint": "9f53bae358cd55b846c7834e777bccb19f0e4cb907acadee08a9186e34ed5ba0",
+      "candidate_kind": "clarification_need",
+      "candidate_version": 1,
+      "cognitive_memory_effect": false,
+      "confidence_effect": false,
+      "created_at": "2026-01-01T00:00:00Z",
+      "expires_at": null,
+      "factual_effect": false,
+      "knowledge_effect": false,
+      "learning_candidate_id": "engagement-learning-88f2a2482426eb7999b3b429631af2fb87c0e334a6be9e09-v001",
+      "lifecycle_status": "proposed",
+      "model_weight_effect": false,
+      "operator_review_required": true,
+      "reason_codes": [
+        "engagement_learning_candidate_proposed",
+        "engagement_learning_candidate_operator_review_required",
+        "engagement_learning_candidate_automatic_application_blocked",
+        "engagement_learning_candidate_model_training_blocked"
+      ],
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-engagement-learning-candidate/v1",
+      "signal_fingerprints": [
+        "16527d5f63276ffdcb387a55ec9889d6cd13fabc60d2db276e73c3d7d12ce751"
+      ],
+      "signal_ids": [
+        "signal-002"
+      ],
+      "supersedes_candidate_id": null,
+      "target_component_code": "operator-dialogue",
+      "target_policy_code": "clarification-review"
+    },
+    {
+      "automatic_application": false,
+      "belief_effect": false,
+      "candidate_fingerprint": "ab8a8d9e3a83057125e4ddb5787fcba044389e58028cdc84335665650dbb75d4",
+      "candidate_kind": "source_selection",
+      "candidate_version": 1,
+      "cognitive_memory_effect": false,
+      "confidence_effect": false,
+      "created_at": "2026-01-01T00:00:00Z",
+      "expires_at": null,
+      "factual_effect": false,
+      "knowledge_effect": false,
+      "learning_candidate_id": "engagement-learning-a0981f1284bf2c6ba90fdbb897a51e2e46b4b6ef66cd503b-v001",
+      "lifecycle_status": "proposed",
+      "model_weight_effect": false,
+      "operator_review_required": true,
+      "reason_codes": [
+        "engagement_learning_candidate_proposed",
+        "engagement_learning_candidate_operator_review_required",
+        "engagement_learning_candidate_automatic_application_blocked",
+        "engagement_learning_candidate_model_training_blocked"
+      ],
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-engagement-learning-candidate/v1",
+      "signal_fingerprints": [
+        "ea108763af770aba16b67891724c50fa19eca914e9f7fa55e2cc2041814e4685"
+      ],
+      "signal_ids": [
+        "signal-004"
+      ],
+      "supersedes_candidate_id": null,
+      "target_component_code": "source-registry",
+      "target_policy_code": "source-selection-review"
+    },
+    {
+      "automatic_application": false,
+      "belief_effect": false,
+      "candidate_fingerprint": "3309559309dc564e0de305e77ec530876d0050d1f71c9a894268bdd2fdc758c2",
+      "candidate_kind": "domain_routing",
+      "candidate_version": 1,
+      "cognitive_memory_effect": false,
+      "confidence_effect": false,
+      "created_at": "2026-01-01T00:00:00Z",
+      "expires_at": null,
+      "factual_effect": false,
+      "knowledge_effect": false,
+      "learning_candidate_id": "engagement-learning-a0d71436b0e983ee34e423a65d9f1aa8818a77ca22d885ee-v001",
+      "lifecycle_status": "proposed",
+      "model_weight_effect": false,
+      "operator_review_required": true,
+      "reason_codes": [
+        "engagement_learning_candidate_proposed",
+        "engagement_learning_candidate_operator_review_required",
+        "engagement_learning_candidate_automatic_application_blocked",
+        "engagement_learning_candidate_model_training_blocked"
+      ],
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-engagement-learning-candidate/v1",
+      "signal_fingerprints": [
+        "702f170086062961f4b4ce90f2eb29f074e967bd9f994b76f83645904f6701b6"
+      ],
+      "signal_ids": [
+        "signal-005"
+      ],
+      "supersedes_candidate_id": null,
+      "target_component_code": "domain-expert-mesh",
+      "target_policy_code": "domain-routing-review"
+    },
+    {
+      "automatic_application": false,
+      "belief_effect": false,
+      "candidate_fingerprint": "a58ab2cccedec63e7106d958fe919dae0220a4cd683cdeb90f7a6aee8f5331d1",
+      "candidate_kind": "verification_rule",
+      "candidate_version": 1,
+      "cognitive_memory_effect": false,
+      "confidence_effect": false,
+      "created_at": "2026-01-01T00:00:00Z",
+      "expires_at": null,
+      "factual_effect": false,
+      "knowledge_effect": false,
+      "learning_candidate_id": "engagement-learning-a4f5a5a0ad6ee94ad8ba959d907b6fdb1824ef3d8272aa7c-v001",
+      "lifecycle_status": "proposed",
+      "model_weight_effect": false,
+      "operator_review_required": true,
+      "reason_codes": [
+        "engagement_learning_candidate_proposed",
+        "engagement_learning_candidate_operator_review_required",
+        "engagement_learning_candidate_automatic_application_blocked",
+        "engagement_learning_candidate_model_training_blocked"
+      ],
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-engagement-learning-candidate/v1",
+      "signal_fingerprints": [
+        "07b5a7aef8363746ad9a72262eb2d801d16d8d34958740a5b17b63d78c047039"
+      ],
+      "signal_ids": [
+        "signal-006"
+      ],
+      "supersedes_candidate_id": null,
+      "target_component_code": "tool-verification",
+      "target_policy_code": "verification-rule-review"
+    },
+    {
+      "automatic_application": false,
+      "belief_effect": false,
+      "candidate_fingerprint": "9aab10325bb95a8501adb14d67839db22a172180a5a73f657587b48ec80cb397",
+      "candidate_kind": "tool_manifest_gap",
+      "candidate_version": 1,
+      "cognitive_memory_effect": false,
+      "confidence_effect": false,
+      "created_at": "2026-01-01T00:00:00Z",
+      "expires_at": null,
+      "factual_effect": false,
+      "knowledge_effect": false,
+      "learning_candidate_id": "engagement-learning-b016a6c0659875f6d580befb9712d5382945acb742296c6e-v001",
+      "lifecycle_status": "proposed",
+      "model_weight_effect": false,
+      "operator_review_required": true,
+      "reason_codes": [
+        "engagement_learning_candidate_proposed",
+        "engagement_learning_candidate_operator_review_required",
+        "engagement_learning_candidate_automatic_application_blocked",
+        "engagement_learning_candidate_model_training_blocked"
+      ],
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-engagement-learning-candidate/v1",
+      "signal_fingerprints": [
+        "7c555e9dc977e6ead3f594e181bdf6d3ec296fb4e7385156f6e0e21a3d51a1e6"
+      ],
+      "signal_ids": [
+        "signal-007"
+      ],
+      "supersedes_candidate_id": null,
+      "target_component_code": "tool-manifest-registry",
+      "target_policy_code": "tool-manifest-gap-review"
+    },
+    {
+      "automatic_application": false,
+      "belief_effect": false,
+      "candidate_fingerprint": "7c957466f256326880dd5b0556649081950216d704092c471de31b39b8f41fa0",
+      "candidate_kind": "research_gap",
+      "candidate_version": 1,
+      "cognitive_memory_effect": false,
+      "confidence_effect": false,
+      "created_at": "2026-01-01T00:00:00Z",
+      "expires_at": null,
+      "factual_effect": false,
+      "knowledge_effect": false,
+      "learning_candidate_id": "engagement-learning-ed9869bf9faac58d9bf976653c4a8a243f6b60723c59db8d-v001",
+      "lifecycle_status": "proposed",
+      "model_weight_effect": false,
+      "operator_review_required": true,
+      "reason_codes": [
+        "engagement_learning_candidate_proposed",
+        "engagement_learning_candidate_operator_review_required",
+        "engagement_learning_candidate_automatic_application_blocked",
+        "engagement_learning_candidate_model_training_blocked"
+      ],
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-engagement-learning-candidate/v1",
+      "signal_fingerprints": [
+        "bc50b114faaea94f155b8e191960e690813ee656c5926b9ab1f3934347d23c9e"
+      ],
+      "signal_ids": [
+        "signal-001"
+      ],
+      "supersedes_candidate_id": null,
+      "target_component_code": "research-acquisition",
+      "target_policy_code": "research-gap-review"
+    },
+    {
+      "automatic_application": false,
+      "belief_effect": false,
+      "candidate_fingerprint": "fcd9bd92670ea81a9a85fa0c7c636c5d55b2e3311137719a4030e1e0e1da2834",
+      "candidate_kind": "preference_candidate",
+      "candidate_version": 1,
+      "cognitive_memory_effect": false,
+      "confidence_effect": false,
+      "created_at": "2026-01-01T00:00:00Z",
+      "expires_at": null,
+      "factual_effect": false,
+      "knowledge_effect": false,
+      "learning_candidate_id": "engagement-learning-eef6eeab68ce75ff5027a454497ddec4144ffde8e5c03721-v001",
+      "lifecycle_status": "proposed",
+      "model_weight_effect": false,
+      "operator_review_required": true,
+      "reason_codes": [
+        "engagement_learning_candidate_proposed",
+        "engagement_learning_candidate_operator_review_required",
+        "engagement_learning_candidate_automatic_application_blocked",
+        "engagement_learning_candidate_model_training_blocked"
+      ],
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-engagement-learning-candidate/v1",
+      "signal_fingerprints": [
+        "6d6c2df6e03515183260ec4f218f5134a4d4a66ed9edbfd54c2b5fec02e6c8b8"
+      ],
+      "signal_ids": [
+        "signal-009"
+      ],
+      "supersedes_candidate_id": null,
+      "target_component_code": "preference-review",
+      "target_policy_code": "operator-preference-review"
+    }
   ],
-  "model_training": false,
-  "record_kind": "engagement_learning_candidate_batch_contract_preview"
+  "model_weight_effect": false,
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-engagement-learning-batch/v1"
 }

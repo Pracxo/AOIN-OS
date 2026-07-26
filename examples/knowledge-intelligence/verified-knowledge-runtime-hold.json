@@ -9,6 +9,9 @@
   "belief_mutation_enabled": false,
   "cognitive_memory_write_enabled": false,
   "engagement_confidence_effect_enabled": false,
+  "engagement_learning_candidate_plane_authorized": true,
+  "engagement_learning_candidate_plane_implemented": true,
+  "engagement_learning_candidate_plane_state": "implemented_deterministic_in_memory_non_factual_candidate_only",
   "engagement_signal_as_fact_enabled": false,
   "formal_closeout_task": "AION-218",
   "implementation_task": "AION-217",
@@ -21,8 +24,10 @@
   "runtime_effect": false,
   "scheduled_revalidation_job_enabled": false,
   "synthetic": true,
+  "verified_knowledge_creation_enabled": false,
   "verified_knowledge_database_enabled": false,
   "verified_knowledge_memory_authorized": true,
-  "verified_knowledge_memory_implemented": false,
+  "verified_knowledge_memory_implemented": true,
+  "verified_knowledge_memory_state": "implemented_deterministic_in_memory_candidate_versioning_engagement_learning_persistent_write_disabled",
   "verified_knowledge_runtime_enabled": false
 }

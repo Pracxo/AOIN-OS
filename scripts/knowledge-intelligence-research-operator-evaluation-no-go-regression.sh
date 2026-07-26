@@ -33,9 +33,13 @@ DOMAIN_EXPERT_STATES = {
     "tool_verification_fabric_authorized_not_implemented",
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
     "verified_knowledge_memory_authorized_not_implemented",
+    "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
 }
 TOOL_VERIFICATION_IMPLEMENTED_STATE = (
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
+)
+VERIFIED_KNOWLEDGE_IMPLEMENTED_STATE = (
+    "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
 )
 ALLOWED_PREFIXES = ("docs/", "examples/", "operator-console-static/", "scripts/", "services/brain-api/tests/")
 ALLOWED_EXACT = {
@@ -116,6 +120,19 @@ AION215_SOURCE = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification_fabric.py",
 }
+AION217_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_verified_memory.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_learning_candidates.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_signal_policy.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_candidates.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_lineage.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_memory.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_revalidation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_versioning.py",
+}
 PROHIBITED_PREFIXES = (
     ".github/workflows/",
     "services/brain-api/src/aion_brain/",
@@ -187,7 +204,9 @@ for parts in entries:
             continue
         if program_state in DOMAIN_EXPERT_STATES and normalized in DOMAIN_EXPERT_MESH_SOURCE:
             continue
-        if program_state == TOOL_VERIFICATION_IMPLEMENTED_STATE and normalized in AION215_SOURCE:
+        if program_state in {TOOL_VERIFICATION_IMPLEMENTED_STATE, VERIFIED_KNOWLEDGE_IMPLEMENTED_STATE} and normalized in AION215_SOURCE:
+            continue
+        if program_state == VERIFIED_KNOWLEDGE_IMPLEMENTED_STATE and normalized in AION217_SOURCE:
             continue
         if normalized.startswith(PROHIBITED_PREFIXES) and normalized not in ALLOWED_EXACT:
             raise SystemExit(f"runtime/source/workflow path changed on AION-206: {normalized}")

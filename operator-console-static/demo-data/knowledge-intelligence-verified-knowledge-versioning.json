@@ -16,5 +16,6 @@
   "version": 1,
   "version_id": "vkc-aion-216-supported-001-v1",
   "verified_knowledge_memory_authorized": true,
-  "verified_knowledge_memory_implemented": false
+  "verified_knowledge_memory_implemented": true,
+  "redaction_applied": true
 }

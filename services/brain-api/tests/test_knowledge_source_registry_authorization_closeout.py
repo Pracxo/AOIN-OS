@@ -28,6 +28,9 @@ AION215_IMPLEMENTED_STATE = (
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
 )
 AION217_STATE = "verified_knowledge_memory_authorized_not_implemented"
+AION217_IMPLEMENTED_STATE = (
+    "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
+)
 
 
 def test_aion_206_source_registry_authorization_is_closed_and_non_reusable():
@@ -77,15 +80,17 @@ def test_aion_208_claim_graph_authorization_hands_off_to_next_active_authorizati
         assert active["domain_expert_mesh_implemented"] is False
         assert active["runtime_effect"] is False
         if program["program_state"] == AION213_IMPLEMENTED_STATE:
-                assert program["domain_expert_mesh_implemented"] is True
-                assert program["model_call_enabled"] is False
-                assert program["persistent_mesh_write_enabled"] is False
-    elif program["program_state"] == AION217_STATE:
+            assert program["domain_expert_mesh_implemented"] is True
+            assert program["model_call_enabled"] is False
+            assert program["persistent_mesh_write_enabled"] is False
+    elif program["program_state"] in {AION217_STATE, AION217_IMPLEMENTED_STATE}:
         assert active["authorization_transaction_id"] == "AION-216-KI-0007"
         assert active["implementation_task"] == "AION-217"
         assert active["formal_closeout_task"] == "AION-218"
         assert active["verified_knowledge_memory_authorized"] is True
-        assert active["verified_knowledge_memory_implemented"] is False
+        assert active["verified_knowledge_memory_implemented"] is (
+            program["program_state"] == AION217_IMPLEMENTED_STATE
+        )
         assert active["runtime_effect"] is False
         assert active["persistent_verified_knowledge_write_enabled"] is False
     elif program["program_state"] in {AION215_STATE, AION215_IMPLEMENTED_STATE}:

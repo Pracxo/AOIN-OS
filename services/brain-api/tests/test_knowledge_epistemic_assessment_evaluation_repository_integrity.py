@@ -1,10 +1,15 @@
 from __future__ import annotations
 
+import importlib.util
 import os
 import subprocess
+import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
+VALIDATOR = (
+    REPO_ROOT / "scripts/lib/knowledge_intelligence_verified_knowledge_authorization.py"
+)
 FORBIDDEN_DIFF_PATHS = (
     ".github/workflows",
     "services/brain-api/src/aion_brain",
@@ -26,6 +31,34 @@ AION213_SOURCE = (
 
 def _run(args: list[str]) -> subprocess.CompletedProcess[str]:
     return subprocess.run(args, cwd=REPO_ROOT, capture_output=True, text=True, check=False)
+
+
+def _load_validator():
+    sys.path.insert(0, str(REPO_ROOT / "scripts/lib"))
+    spec = importlib.util.spec_from_file_location("verified_auth", VALIDATOR)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def _aion217_source_paths() -> set[str]:
+    validator = _load_validator()
+    return set(validator.AION217_SOURCE_PATHS) | set(validator.AION217_OPTIONAL_SOURCE_PATHS)
+
+
+def _assert_aion217_boundaries(changed: set[str]) -> None:
+    assert changed <= _aion217_source_paths()
+    for relative in (
+        "services/brain-api/src/aion_brain/api/verified_knowledge.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_runtime.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_database.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/knowledge_promotion.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/cognitive_memory_writer.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_policy_updater.py",
+    ):
+        assert not (REPO_ROOT / relative).exists(), relative
 
 
 def _git_ref_exists(ref: str) -> bool:
@@ -90,6 +123,7 @@ def test_aion_212_branch_does_not_add_aion_213_runtime_source():
             "tool_verification_fabric_authorized_not_implemented",
             "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
             "verified_knowledge_memory_authorized_not_implemented",
+            "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
         }
     ):
         for relative in AION213_SOURCE:
@@ -104,7 +138,11 @@ def test_aion_212_branch_does_not_add_aion_213_runtime_source():
 
 
 def test_no_forbidden_runtime_dependency_migration_or_workflow_changes():
-    assert _changed_forbidden_files() == set()
+    changed = _changed_forbidden_files()
+    if changed and changed <= _aion217_source_paths():
+        _assert_aion217_boundaries(changed)
+        return
+    assert changed == set()
 
 
 def test_no_v02_tag_created():

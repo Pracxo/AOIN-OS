@@ -12,9 +12,17 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "scripts/lib"))
 
+from knowledge_intelligence_verified_knowledge_authorization import (  # noqa: E402
+    AION217_OPTIONAL_SOURCE_PATHS,
+    AION217_SOURCE_PATHS,
+)
 from self_improvement_governance import (  # noqa: E402
     SHADOW_ACTIVATION_ALLOWED_CREATE,
     SHADOW_ACTIVATION_ALLOWED_UPDATE,
+)
+
+AION217_ALLOWED_SOURCE_PATHS = set(AION217_SOURCE_PATHS) | set(
+    AION217_OPTIONAL_SOURCE_PATHS
 )
 
 
@@ -42,7 +50,21 @@ def test_aion181_branch_modifies_only_authorized_runtime_or_package_surfaces() -
         "packages/aion-sdk-python/src",
         "migrations",
     )
-    assert changed <= set(SHADOW_ACTIVATION_ALLOWED_CREATE)
+    assert changed <= set(SHADOW_ACTIVATION_ALLOWED_CREATE) | AION217_ALLOWED_SOURCE_PATHS
+    if changed & AION217_ALLOWED_SOURCE_PATHS:
+        _assert_aion217_runtime_surfaces_absent()
+
+
+def _assert_aion217_runtime_surfaces_absent() -> None:
+    for relative in (
+        "services/brain-api/src/aion_brain/api/verified_knowledge.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_runtime.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_database.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/knowledge_promotion.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/cognitive_memory_writer.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_policy_updater.py",
+    ):
+        assert not (ROOT / relative).exists(), relative
 
 
 def _json(relative: str) -> dict[str, Any]:

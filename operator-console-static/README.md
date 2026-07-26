@@ -119,6 +119,20 @@ The AION-096 role preview switcher is local demo data only. It exposes viewer,
 operator, reviewer, admin, and auditor views while keeping `system_service`
 internal and all privileged actions disabled.
 
+## Verified Knowledge Memory
+
+AION-217 adds static evidence for deterministic verified-knowledge candidate
+memory and engagement-learning candidates. The demo data remains local,
+read-only, redacted, and non-activating. Candidates are reviewable evidence,
+not factual truth. Engagement signals are non-factual and cannot change
+confidence, source independence, policy, cognitive memory, beliefs, or model
+weights.
+
+Offline demo files include `knowledge-intelligence-verified-memory.json`,
+support and refutation candidates, candidate revalidation, candidate integrity,
+engagement signals, engagement-learning candidates, and the verified-memory
+runtime hold.
+
 ## Action Authorization Panel
 
 AION-097 adds a static Action Authorization panel backed by:

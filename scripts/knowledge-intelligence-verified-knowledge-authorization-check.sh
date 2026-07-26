@@ -9,7 +9,54 @@ PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 export AION_REPO_ROOT="$ROOT_DIR"
 ./scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh
-json_files=(examples/knowledge-intelligence/integrated-research-agent-operator-evaluation-report.json examples/knowledge-intelligence/integrated-research-agent-evaluation-scenario-summary.json examples/knowledge-intelligence/integrated-knowledge-lineage.json examples/knowledge-intelligence/verified-knowledge-authorization.json examples/knowledge-intelligence/verified-knowledge-candidate.json examples/knowledge-intelligence/verified-knowledge-candidate-version.json examples/knowledge-intelligence/verified-knowledge-candidate-batch.json examples/knowledge-intelligence/verified-knowledge-memory-snapshot.json examples/knowledge-intelligence/verified-knowledge-candidate-query.json examples/knowledge-intelligence/verified-knowledge-candidate-integrity-report.json examples/knowledge-intelligence/verified-knowledge-operator-review-item.json examples/knowledge-intelligence/engagement-signal-metadata.json examples/knowledge-intelligence/engagement-learning-candidate.json examples/knowledge-intelligence/engagement-learning-candidate-batch.json examples/knowledge-intelligence/verified-knowledge-resource-budget.json examples/knowledge-intelligence/verified-knowledge-runtime-hold.json operator-console-static/demo-data/knowledge-intelligence-integrated-research-agent-evaluation.json operator-console-static/demo-data/knowledge-intelligence-integrated-lineage.json operator-console-static/demo-data/knowledge-intelligence-verified-knowledge-authorization.json operator-console-static/demo-data/knowledge-intelligence-verified-knowledge-candidate.json operator-console-static/demo-data/knowledge-intelligence-verified-knowledge-versioning.json operator-console-static/demo-data/knowledge-intelligence-engagement-learning-candidate.json operator-console-static/demo-data/knowledge-intelligence-verified-knowledge-runtime-hold.json)
+json_files=(
+  examples/knowledge-intelligence/engagement-learning-candidate-batch.json
+  examples/knowledge-intelligence/engagement-learning-candidate.json
+  examples/knowledge-intelligence/engagement-signal-batch.json
+  examples/knowledge-intelligence/engagement-signal-metadata.json
+  examples/knowledge-intelligence/engagement-signal.json
+  examples/knowledge-intelligence/integrated-knowledge-lineage-v1.json
+  examples/knowledge-intelligence/integrated-knowledge-lineage.json
+  examples/knowledge-intelligence/integrated-research-agent-evaluation-scenario-summary.json
+  examples/knowledge-intelligence/integrated-research-agent-operator-evaluation-report.json
+  examples/knowledge-intelligence/verified-knowledge-authorization.json
+  examples/knowledge-intelligence/verified-knowledge-candidate-batch.json
+  examples/knowledge-intelligence/verified-knowledge-candidate-history.json
+  examples/knowledge-intelligence/verified-knowledge-candidate-integrity-report.json
+  examples/knowledge-intelligence/verified-knowledge-candidate-query.json
+  examples/knowledge-intelligence/verified-knowledge-candidate-version.json
+  examples/knowledge-intelligence/verified-knowledge-candidate.json
+  examples/knowledge-intelligence/verified-knowledge-eligibility-decision.json
+  examples/knowledge-intelligence/verified-knowledge-eligibility-input.json
+  examples/knowledge-intelligence/verified-knowledge-evidence-bundle.json
+  examples/knowledge-intelligence/verified-knowledge-integrity-report.json
+  examples/knowledge-intelligence/verified-knowledge-memory-snapshot.json
+  examples/knowledge-intelligence/verified-knowledge-operator-review-item.json
+  examples/knowledge-intelligence/verified-knowledge-query-result.json
+  examples/knowledge-intelligence/verified-knowledge-query.json
+  examples/knowledge-intelligence/verified-knowledge-refutation-candidate.json
+  examples/knowledge-intelligence/verified-knowledge-resource-budget.json
+  examples/knowledge-intelligence/verified-knowledge-revalidation-request.json
+  examples/knowledge-intelligence/verified-knowledge-revalidation-result.json
+  examples/knowledge-intelligence/verified-knowledge-runtime-hold.json
+  examples/knowledge-intelligence/verified-knowledge-support-candidate.json
+  operator-console-static/demo-data/knowledge-intelligence-engagement-learning-candidate.json
+  operator-console-static/demo-data/knowledge-intelligence-engagement-learning-candidates.json
+  operator-console-static/demo-data/knowledge-intelligence-engagement-signals.json
+  operator-console-static/demo-data/knowledge-intelligence-integrated-lineage.json
+  operator-console-static/demo-data/knowledge-intelligence-integrated-research-agent-evaluation.json
+  operator-console-static/demo-data/knowledge-intelligence-verified-candidate-integrity.json
+  operator-console-static/demo-data/knowledge-intelligence-verified-candidate-refutation.json
+  operator-console-static/demo-data/knowledge-intelligence-verified-candidate-revalidation.json
+  operator-console-static/demo-data/knowledge-intelligence-verified-candidate-support.json
+  operator-console-static/demo-data/knowledge-intelligence-verified-candidate-versioning.json
+  operator-console-static/demo-data/knowledge-intelligence-verified-knowledge-authorization.json
+  operator-console-static/demo-data/knowledge-intelligence-verified-knowledge-candidate.json
+  operator-console-static/demo-data/knowledge-intelligence-verified-knowledge-runtime-hold.json
+  operator-console-static/demo-data/knowledge-intelligence-verified-knowledge-versioning.json
+  operator-console-static/demo-data/knowledge-intelligence-verified-memory-runtime-hold.json
+  operator-console-static/demo-data/knowledge-intelligence-verified-memory.json
+)
 for path in "${json_files[@]}"; do "$PYTHON_BIN" -m json.tool "$path" >/dev/null; done
 PYTHONPATH="$ROOT_DIR/scripts/lib:${PYTHONPATH:-}" "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations

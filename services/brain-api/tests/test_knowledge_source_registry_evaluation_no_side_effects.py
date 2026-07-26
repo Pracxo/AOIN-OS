@@ -22,6 +22,19 @@ CLAIM_GRAPH_SOURCE_PATHS = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_repository.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_temporal.py",
 }
+AION217_SOURCE_PATHS = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_verified_memory.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_learning_candidates.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_signal_policy.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_candidates.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_lineage.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_memory.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_revalidation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_versioning.py",
+}
 CLAIM_GRAPH_FORBIDDEN_RUNTIME_PATHS = (
     "services/brain-api/src/aion_brain/api/claim_graph.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_runtime.py",
@@ -86,6 +99,21 @@ def _assert_claim_graph_boundaries(changed: set[str]) -> None:
         assert not (ROOT / relative).exists(), relative
 
 
+def _assert_aion217_boundaries(changed: set[str]) -> None:
+    assert changed <= AION217_SOURCE_PATHS
+    for relative in CLAIM_GRAPH_FORBIDDEN_RUNTIME_PATHS:
+        assert not (ROOT / relative).exists(), relative
+    for relative in (
+        "services/brain-api/src/aion_brain/api/verified_knowledge.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_runtime.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_database.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/knowledge_promotion.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/cognitive_memory_writer.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_policy_updater.py",
+    ):
+        assert not (ROOT / relative).exists(), relative
+
+
 def test_aion_208_does_not_change_runtime_or_package_surfaces():
     base = _comparison_base()
     changed: set[str] = set()
@@ -98,6 +126,9 @@ def test_aion_208_does_not_change_runtime_or_package_surfaces():
             check=True,
         )
         changed = {line.strip() for line in diff.stdout.splitlines() if line.strip()}
+    if changed and changed <= AION217_SOURCE_PATHS:
+        _assert_aion217_boundaries(changed)
+        return
     if _claim_graph_context(changed):
         _assert_claim_graph_boundaries(changed)
         return

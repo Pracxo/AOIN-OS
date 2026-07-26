@@ -7,6 +7,10 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 VALIDATOR = REPO_ROOT / "scripts/lib/knowledge_intelligence_verified_knowledge_authorization.py"
+VERIFIED_KNOWLEDGE_MEMORY_STATE = (
+    "implemented_deterministic_in_memory_candidate_versioning_engagement_learning_"
+    "persistent_write_disabled"
+)
 HARNESS = (
     REPO_ROOT
     / "scripts/lib/knowledge_intelligence_integrated_research_agent_operator_evaluation.py"
@@ -53,7 +57,10 @@ def test_current_projection_matches_active_verified_knowledge_authorization() ->
         assert ledger["active_knowledge_implementation_task"] == "AION-217"
         assert ledger["formal_closeout_task"] == "AION-218"
         assert ledger["verified_knowledge_memory_authorized"] is True
-        assert ledger["verified_knowledge_memory_implemented"] is False
+        assert ledger["verified_knowledge_memory_implemented"] is True
+        assert ledger["verified_knowledge_memory_state"] == VERIFIED_KNOWLEDGE_MEMORY_STATE
+        assert ledger["engagement_learning_candidate_plane_authorized"] is True
+        assert ledger["engagement_learning_candidate_plane_implemented"] is True
         assert ledger["verified_knowledge_runtime_enabled"] is False
         assert ledger["persistent_verified_knowledge_write_enabled"] is False
         assert ledger["automatic_verified_knowledge_promotion_enabled"] is False

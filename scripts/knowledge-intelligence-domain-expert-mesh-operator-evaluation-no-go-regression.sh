@@ -75,8 +75,24 @@ AION215_ALLOWED_SOURCE_PATHS = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification_fabric.py",
 }
+AION217_ALLOWED_SOURCE_PATHS = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_verified_memory.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_learning_candidates.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_signal_policy.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_candidates.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_lineage.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_memory.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_revalidation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_versioning.py",
+}
 IMPLEMENTED_PROGRAM_STATE = (
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
+)
+AION217_IMPLEMENTED_PROGRAM_STATE = (
+    "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
 )
 PERSISTENCE_SUFFIXES = (".db", ".sqlite", ".sqlite3", ".jsonl", ".mesh-state", ".state")
 PROGRAM_PATH = ROOT / "docs/knowledge-intelligence/program-ledger.json"
@@ -138,6 +154,8 @@ for parts in changed_entries():
         if name in PROHIBITED_NAMES:
             raise SystemExit(f"dependency/package file changed: {normalized}")
         if PROGRAM_STATE == IMPLEMENTED_PROGRAM_STATE and normalized in AION215_ALLOWED_SOURCE_PATHS:
+            continue
+        if PROGRAM_STATE == AION217_IMPLEMENTED_PROGRAM_STATE and normalized in AION217_ALLOWED_SOURCE_PATHS:
             continue
         if name in AION215_SOURCE_NAMES and normalized.startswith(
             "services/brain-api/src/aion_brain/"

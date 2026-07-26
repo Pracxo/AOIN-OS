@@ -8,60 +8,59 @@ tag or release exists.
 
 ## Current Main Milestone
 
-## AION-210 Claim Graph Evaluation and Epistemic Truth Authorization
+## AION-217 Deterministic Verified Knowledge Candidate Memory
 
-AION-210 completed the independent operator evaluation for the AION-209
-immutable temporal claim-evidence graph and generated AION-TCGE-001. The
-evaluation passed, closed `AION-208-KI-0003` as consumed by AION-209, and
-created `AION-210-KI-0004` as the sole active Knowledge Intelligence
-implementation authorization for AION-211.
+Current milestone: AION-217 deterministic verified-knowledge candidate memory
+and engagement-learning candidate plane implemented.
 
-Current stage: epistemic truth-engine authorization active for deterministic
-evidence assessment planning only. AION-211 remains unimplemented. The
-temporal claim-evidence graph stays append-only, in-memory, unverified,
-runtime-disabled, and persistent-write-disabled.
+Current stage: the verified-knowledge candidate memory is implemented with
+complete upstream lineage, support and refutation eligibility, confidence
+inheritance, confidence non-amplification, immutable versioning, supersession,
+retraction, expiry, explicit revalidation, immutable in-memory repository
+snapshots, bounded exact queries, integrity auditing, engagement metadata, and
+engagement-learning candidates.
 
-AION-204 Cognitive Architecture closeout reconciliation remains complete, and
-the active self-improvement implementation authorization count is zero.
-The source registry implemented with persistent writes disabled is the current
-evaluated Knowledge Intelligence evidence registry state.
+Runtime, automatic promotion, persistent writes, cognitive-memory writes,
+belief mutation, engagement factual effects, and public-network access remain
+disabled pending AION-218. AION-216-KI-0007 remains active, consumed=false,
+expired=false, reusable=false.
 
 Current state flags:
 
-- `knowledge_research_plane_implemented=true`
-- `knowledge_research_runtime_enabled=false`
-- `source_provenance_registry_authorized=true`
-- `source_provenance_registry_implemented=true`
-- `source_provenance_registry_state=implemented_append_only_in_memory_replay_persistent_write_disabled`
-- `source_registry_operator_evaluation_passed=true`
-- `source_registry_runtime_enabled=false`
-- `source_registry_persistent_write_enabled=false`
-- `temporal_claim_evidence_graph_authorized=true`
-- `temporal_claim_evidence_graph_implemented=true`
-- `claim_graph_runtime_enabled=false`
-- `persistent_claim_graph_write_enabled=false`
-- `automatic_claim_extraction_enabled=false`
-- `claim_verification_enabled=false`
-- `truth_decision_enabled=false`
-- `epistemic_confidence_enabled=false`
-- `verified_knowledge_promotion_enabled=false`
+- `verified_knowledge_memory_authorized=true`
+- `verified_knowledge_memory_implemented=true`
+- `verified_knowledge_memory_state=implemented_deterministic_in_memory_candidate_versioning_engagement_learning_persistent_write_disabled`
+- `verified_knowledge_runtime_enabled=false`
+- `persistent_verified_knowledge_write_enabled=false`
+- `automatic_verified_knowledge_promotion_enabled=false`
+- `cognitive_memory_write_enabled=false`
 - `belief_mutation_enabled=false`
-- `network_access_enabled=false`
-- `active_knowledge_implementation_authorization=AION-210-KI-0004`
+- `engagement_learning_candidate_plane_authorized=true`
+- `engagement_learning_candidate_plane_implemented=true`
+- `engagement_learning_candidate_plane_state=implemented_deterministic_in_memory_non_factual_candidate_only`
+- `engagement_signal_as_fact_enabled=false`
+- `engagement_confidence_effect_enabled=false`
+- `public_network_fetch_enabled=false`
+- `actual_tool_execution_enabled=false`
+- `active_knowledge_implementation_authorization=AION-216-KI-0007`
 - active Knowledge Intelligence implementation authorization count: 1
-- `active_knowledge_implementation_task=AION-211`
-- `formal_closeout_task=AION-212`
+- `active_knowledge_implementation_task=AION-217`
+- `formal_closeout_task=AION-218`
 
 AION-209 compatibility marker retained for inherited closeout gates:
 `active_knowledge_implementation_task=AION-209` denotes the prior consumed
 implementation task, not the current active authorization.
 
 AION-205 captures untrusted evidence. AION-207 registers immutable evidence
-metadata. AION-208 evaluated the registry and authorized AION-209. AION-209
-represents unverified claims and evidence relationships, but does not determine
-truth. AION-210 authorizes AION-211 to implement bounded epistemic assessment
-later; it does not implement that engine. Persistent writes and public-network
-research remain disabled.
+metadata. AION-209 represents unverified claims and evidence relationships.
+AION-211 assesses evidence posture. AION-213 preserves domain dissent. AION-215
+simulates and verifies proposed tool use without executing real tools. AION-217
+creates reviewable support and refutation candidates, but candidates remain
+reviewable evidence, eligibility does not equal factual truth, automatic
+promotion remains disabled, cognitive-memory writes remain disabled, engagement
+remains non-factual, engagement candidates cannot update policy automatically,
+persistent writes remain disabled, public-network research remains disabled,
+and AION-218 is the next task.
 
 ## Completed Architecture
 
@@ -166,6 +165,11 @@ Historical marker: Current authorization: AION-161-PA-0006 consumed by AION-162 
 Historical marker: Current authorization: AION-163-PA-0007 active for AION-164.
 Historical marker: AION-162 offline Ed25519 identity assertion verification core implemented and post-merge verification corrected.
 Historical marker: AION-206 research acquisition operator evaluation complete; source registry authorization active.
+Historical marker: AION-204 Cognitive Architecture closeout reconciliation.
+Historical marker: source registry implemented with persistent writes disabled.
+Historical marker: active self-improvement implementation authorization count is zero.
+Historical marker: `knowledge_research_runtime_enabled=false`.
+Historical marker: `network_access_enabled=false`.
 Historical marker: The next task is AION-207 append-only source-provenance registry implementation.
 Historical marker: AION-209 temporal claim-evidence graph was implemented under AION-208-KI-0003.
 Historical marker: AION-208-KI-0003 was consumed by AION-209 and closed by AION-210.

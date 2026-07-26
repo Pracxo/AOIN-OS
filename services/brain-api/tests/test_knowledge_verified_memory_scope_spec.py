@@ -27,7 +27,7 @@ def _load_json(relative: str) -> dict[str, object]:
     return json.loads((REPO_ROOT / relative).read_text(encoding="utf-8"))
 
 
-def test_verified_knowledge_scope_is_exact_and_does_not_create_aion_217_source() -> None:
+def test_verified_knowledge_scope_is_exact_and_creates_only_aion_217_source() -> None:
     validator = _load_validator()
     auth = _load_json("examples/knowledge-intelligence/verified-knowledge-authorization.json")
     assert auth["authorization_transaction_id"] == "AION-216-KI-0007"
@@ -37,4 +37,6 @@ def test_verified_knowledge_scope_is_exact_and_does_not_create_aion_217_source()
     assert auth["formal_closeout_task"] == "AION-218"
     assert auth["authorization_scope"] == validator.SCOPE
     for relative in validator.AION217_SOURCE_PATHS:
-        assert not (REPO_ROOT / relative).exists(), relative
+        assert (REPO_ROOT / relative).exists(), relative
+    for relative in validator.AION217_OPTIONAL_SOURCE_PATHS:
+        assert (REPO_ROOT / relative).exists(), relative

@@ -19,7 +19,7 @@ ALLOWED_EXACT = {"README.md", "AGENTS.md"}
 PROHIBITED_PREFIXES = (".github/workflows/", "services/brain-api/src/aion_brain/", "services/brain-api/pyproject.toml", "packages/aion-sdk-python/src/", "migrations/", "services/brain-api/migrations/", "infra/postgres/migrations/")
 PROHIBITED_NAMES = {"package.json", "package-lock.json", "pnpm-lock.yaml", "yarn.lock", "bun.lockb", "poetry.lock", "uv.lock", "Pipfile", "Pipfile.lock"}
 PERSISTENCE_SUFFIXES = (".db", ".sqlite", ".sqlite3", ".jsonl", ".state")
-AION217_SOURCE_PATHS = {"services/brain-api/src/aion_brain/contracts/knowledge_verified_memory.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_candidates.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_memory.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_lineage.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_versioning.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_revalidation.py", "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_signal_policy.py", "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_learning_candidates.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_integrity.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_evidence.py"}
+AION217_SOURCE_PATHS = {"services/brain-api/src/aion_brain/contracts/knowledge_verified_memory.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_candidates.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_memory.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_lineage.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_versioning.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_revalidation.py", "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_signal_policy.py", "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_learning_candidates.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_integrity.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_evidence.py", "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py"}
 FORBIDDEN_CHANGED_CODE = ("automatic_candidate_approval_enabled = True", "automatic_verified_knowledge_promotion_enabled = True", "engagement_signal_as_fact_enabled = True", "engagement_confidence_effect_enabled = True", "tool_output_as_verified_fact_enabled = True", "model_output_as_verified_fact_enabled = True", "domain_mesh_consensus_as_truth_enabled = True", "public_network_fetch_enabled = True", "actual_tool_execution_enabled = True", "persistent_verified_knowledge_write_enabled = True", "cognitive_memory_write_enabled = True", "belief_mutation_enabled = True")
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]: return subprocess.run(args, cwd=ROOT, text=True, capture_output=True, check=check)
 def ref_exists(ref: str) -> bool: return run(["git", "rev-parse", "--verify", "--quiet", ref], check=False).returncode == 0
@@ -48,13 +48,13 @@ for parts in changed_entries():
     for path in paths:
         normalized = path.replace("\\", "/"); changed_paths.add(normalized); name = Path(normalized).name
         if name in PROHIBITED_NAMES: raise SystemExit(f"package or dependency file changed: {normalized}")
-        if normalized in AION217_SOURCE_PATHS: raise SystemExit(f"AION-217 source is not authorized on AION-216: {normalized}")
+        if normalized in AION217_SOURCE_PATHS: continue
         if any(normalized.startswith(prefix) for prefix in PROHIBITED_PREFIXES): raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")
-        if normalized not in ALLOWED_EXACT and not any(normalized.startswith(prefix) for prefix in ALLOWED_PREFIXES): raise SystemExit(f"path outside AION-216 scope: {normalized}")
+        if normalized not in ALLOWED_EXACT and not any(normalized.startswith(prefix) for prefix in ALLOWED_PREFIXES): raise SystemExit(f"path outside AION-217 scope: {normalized}")
 for relative in run(["git", "ls-files"]).stdout.splitlines():
     if relative.endswith(PERSISTENCE_SUFFIXES): raise SystemExit(f"tracked state file detected: {relative}")
 for relative in sorted(changed_paths):
-    if relative == "scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh":
+    if relative in {"scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh", "scripts/knowledge-intelligence-verified-knowledge-no-go-regression.sh"}:
         continue
     if not relative.endswith((".py", ".sh", ".js")) or relative.startswith("services/brain-api/tests/"): continue
     text = (ROOT / relative).read_text(encoding="utf-8")

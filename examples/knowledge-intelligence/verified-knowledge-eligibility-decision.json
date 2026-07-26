@@ -1,0 +1,28 @@
+{
+  "automatic_promotion": false,
+  "belief_mutated": false,
+  "candidate_confidence_cap": "0.870000",
+  "candidate_kind": "support_candidate",
+  "cognitive_memory_written": false,
+  "decision_fingerprint": "c5db684e8337852f0e9332b705a7edd654ccb1b9ffe7a39142875ec4f052fcd4",
+  "eligible": true,
+  "operator_review_required": true,
+  "reason_codes": [
+    "verified_candidate_confidence_inherited",
+    "verified_candidate_confidence_non_amplification_enforced",
+    "verified_candidate_tool_output_not_fact",
+    "verified_candidate_engagement_not_fact",
+    "verified_candidate_operator_review_required",
+    "verified_candidate_automatic_promotion_blocked",
+    "verified_candidate_cognitive_memory_write_blocked",
+    "verified_candidate_belief_mutation_blocked",
+    "verified_candidate_persistent_write_disabled",
+    "verified_candidate_runtime_disabled",
+    "verified_candidate_support_eligible",
+    "verified_candidate_integrity_passed"
+  ],
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-verified-candidate-eligibility/v1",
+  "status": "eligible_for_operator_review",
+  "verified_knowledge_created": false
+}

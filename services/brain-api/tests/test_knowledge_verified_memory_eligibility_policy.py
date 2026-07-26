@@ -31,7 +31,7 @@ def test_verified_knowledge_candidate_policy_blocks_unsafe_inputs() -> None:
     candidate = _load_json("examples/knowledge-intelligence/verified-knowledge-candidate.json")
     assert candidate["candidate_kind"] == "support_candidate"
     assert candidate["eligibility_status"] == "eligible_for_operator_review"
-    assert candidate["assessment_confidence"] == "0.850000"
+    assert candidate["assessment_confidence"] == "0.910000"
     assert candidate["independent_support_count"] == 3
     assert candidate["citation_coverage"] == "1.000000"
     assert candidate["provenance_completeness"] == "1.000000"

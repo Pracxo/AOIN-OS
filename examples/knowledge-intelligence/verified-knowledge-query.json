@@ -1,0 +1,19 @@
+{
+  "assessment_id": null,
+  "candidate_id": null,
+  "candidate_identity_id": null,
+  "candidate_kind": "support_candidate",
+  "claim_id": null,
+  "eligibility_status": null,
+  "expired": null,
+  "lifecycle_status": null,
+  "limit": 1000,
+  "maximum_version": null,
+  "mesh_session_id": null,
+  "minimum_version": null,
+  "operator_review_required": null,
+  "revalidation_due": null,
+  "schema_version": "aion-knowledge-verified-query/v1",
+  "synthesis_id": null,
+  "tool_verification_session_id": null
+}

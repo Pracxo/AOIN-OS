@@ -94,6 +94,22 @@ IMPLEMENTED_PROGRAM_STATE = (
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
 )
 CURRENT_PROGRAM_STATE = "verified_knowledge_memory_authorized_not_implemented"
+AION217_IMPLEMENTED_PROGRAM_STATE = (
+    "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
+)
+AION217_SOURCE = (
+    "services/brain-api/src/aion_brain/contracts/knowledge_verified_memory.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_learning_candidates.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_signal_policy.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_candidates.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_lineage.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_memory.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_revalidation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_versioning.py",
+)
 PROGRAM_PATH = ROOT / "docs/knowledge-intelligence/program-ledger.json"
 PROGRAM_STATE = (
     json.loads(PROGRAM_PATH.read_text()).get("program_state", "")
@@ -153,7 +169,9 @@ for parts in changed_entries():
             continue
         if normalized in AION213_SOURCE:
             continue
-        if PROGRAM_STATE in {IMPLEMENTED_PROGRAM_STATE, CURRENT_PROGRAM_STATE} and normalized in AION215_SOURCE:
+        if PROGRAM_STATE in {IMPLEMENTED_PROGRAM_STATE, CURRENT_PROGRAM_STATE, AION217_IMPLEMENTED_PROGRAM_STATE} and normalized in AION215_SOURCE:
+            continue
+        if PROGRAM_STATE == AION217_IMPLEMENTED_PROGRAM_STATE and normalized in AION217_SOURCE:
             continue
         if normalized.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")

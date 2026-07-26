@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
+import importlib.util
 import json
 import os
 import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
+VALIDATOR = ROOT / "scripts/lib/knowledge_intelligence_verified_knowledge_authorization.py"
 
 
 FORBIDDEN_DIFF_PATHS = (
@@ -17,6 +20,33 @@ FORBIDDEN_DIFF_PATHS = (
     "packages/aion-sdk-python/src",
     "migrations",
 )
+
+
+def _load_validator():
+    sys.path.insert(0, str(ROOT / "scripts/lib"))
+    spec = importlib.util.spec_from_file_location("verified_auth", VALIDATOR)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def _aion217_source_paths() -> set[str]:
+    validator = _load_validator()
+    return set(validator.AION217_SOURCE_PATHS) | set(validator.AION217_OPTIONAL_SOURCE_PATHS)
+
+
+def _assert_aion217_runtime_surfaces_absent() -> None:
+    for relative in (
+        "services/brain-api/src/aion_brain/api/verified_knowledge.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_runtime.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_database.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/knowledge_promotion.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/cognitive_memory_writer.py",
+        "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_policy_updater.py",
+    ):
+        assert not (ROOT / relative).exists(), relative
 
 
 def _git_ref_exists(ref: str) -> bool:
@@ -70,11 +100,18 @@ def _changed_files() -> set[str]:
 
 def test_aion_182_does_not_modify_protected_runtime_paths() -> None:
     changed = _changed_files()
+    aion217_paths = _aion217_source_paths()
     blocked = [
         path
         for path in changed
-        if any(path == prefix or path.startswith(f"{prefix}/") for prefix in FORBIDDEN_DIFF_PATHS)
+        if any(
+            path == prefix or path.startswith(f"{prefix}/")
+            for prefix in FORBIDDEN_DIFF_PATHS
+        )
+        and path not in aion217_paths
     ]
+    if changed & aion217_paths:
+        _assert_aion217_runtime_surfaces_absent()
     assert blocked == []
 
 

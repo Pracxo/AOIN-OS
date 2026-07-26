@@ -1,0 +1,68 @@
+{
+  "acquisition_result_fingerprint": "fa671ae8e84db1eb7b4b4f1c161ba30738aecbb817bb719f0b4db220a5472d92",
+  "assessment_confidence": "0.910000",
+  "assessment_fingerprint": "81ea6d45404a31affafd2feabee805a1c82e2d917e18246455e3bbfa3f32a3f6",
+  "assessment_hard_cap": "0.900000",
+  "assessment_id": "assessment-001",
+  "assessment_status": "supported",
+  "attestation_chain_head_fingerprints": [
+    "473293792ba0f334d9fa7038ab1e3d26f482ea6ad6d6767e87634010e78a221c"
+  ],
+  "authorization_transaction_id": "AION-216-KI-0007",
+  "citation_reference_fingerprints": [
+    "c42f7bb7257243d691ad6e8b48152b97628dcdd50a85c46207f3e62109dcadbf"
+  ],
+  "citation_reference_ids": [
+    "citation-001"
+  ],
+  "claim_graph_integrity_fingerprint": "d69b38663941d1bb9324418b205cc431799ca14fec7fce40f30a0eb5d5cde4dc",
+  "claim_id": "claim-001",
+  "claim_identity_fingerprint": "d9f05af5ef3f2cf6470f476dfad91296200bad990196627c27e9d1620748cd8a",
+  "claim_version_id": "claim-version-001",
+  "domain_mesh_session_fingerprint": "7562c802da5b428382a13737eced1eab0b3a2914fd4eedb4c2b152cd6432c4e1",
+  "domain_mesh_session_id": "mesh-session-001",
+  "jurisdiction_scope_fingerprint": "b25d623b835e381e92ca4d10b8967f219aaba097dfcf13185a5500425d717e53",
+  "lineage_fingerprint": "7615a10c2039a5b6064b855af36a9ed466ff8313fca7a2c71e57cbf65d762a21",
+  "lineage_id": "lineage-001",
+  "lineage_reference_count": 11,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "read_only": true,
+  "redacted": true,
+  "research_plan_fingerprint": "7586e723ed18b6dcfc1a50bd350fbd12f79056a31099a5046dd52a855a233d99",
+  "research_plan_id": "research-plan-001",
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-integrated-lineage/v1",
+  "source_independence_group_ids": [
+    "group-001",
+    "group-002",
+    "group-003"
+  ],
+  "source_provenance_fingerprints": [
+    "f7670105d014d83f0381a78ea844125520f0f7c4c0b24e4830945a98336e365b"
+  ],
+  "source_provenance_ids": [
+    "provenance-001"
+  ],
+  "source_registry_integrity_fingerprint": "411d9ac76f7723d204881e27c77be84398db12874bb78aa1fc8d4da261e956aa",
+  "source_snapshot_fingerprints": [
+    "5a8aaa77ac7748bca75635f67864c7b9c8adb521568d06c3796886e51a548e63"
+  ],
+  "source_snapshot_ids": [
+    "snapshot-001"
+  ],
+  "synthesis_confidence_cap": "0.890000",
+  "synthesis_fingerprint": "3054839ea8769daaca2f65e0d8c27c04e136f69b3e7ea2921b2675cda9d3af81",
+  "synthesis_id": "synthesis-001",
+  "synthetic": true,
+  "target_valid_time_fingerprint": "8391634fe5179b1ea8b552bceca0e5bd1e761f1d8ff0eac83080fd807efad7f4",
+  "tool_evidence_confidence_caps": [
+    "0.880000"
+  ],
+  "tool_verification_session_fingerprints": [
+    "fa900aa614144ea1a2f0852ebed4975c216b0af504039d4b6da37a55ed56fe70"
+  ],
+  "tool_verification_session_ids": [
+    "tool-session-001"
+  ],
+  "version_scope_fingerprint": "f39ccabd44f685cf14c73911927fa0793defc54e2c2e80b018004efb1762b6f4"
+}

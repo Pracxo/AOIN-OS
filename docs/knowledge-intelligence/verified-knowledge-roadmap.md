@@ -1,9 +1,19 @@
 # Verified Knowledge Roadmap
 
-AION-216 records `AION-IRAE-001`, a deterministic read-only integrated operator evaluation of the Knowledge Intelligence chain from controlled research acquisition through source provenance, temporal claim evidence, epistemic assessment, domain expert mesh, and simulation-only tool verification.
+AION-217 implements the deterministic verified-knowledge candidate memory and engagement-learning candidate plane under AION-216-KI-0007. The implementation is immutable, redacted, synthetic-testable, and in-memory only.
 
-The exact decision is `INTEGRATED_RESEARCH_AGENT_OPERATOR_EVALUATION_PASS_RECOMMEND_VERIFIED_KNOWLEDGE_MEMORY_AUTHORIZATION`. All 28 required scenarios passed, every hard gate passed, and all six planes validated without public network calls, DNS resolution, connector calls, model calls, real tool execution, shell execution, browser action, source mutation, Git mutation, persistent writes, automatic knowledge promotion, cognitive-memory writes, belief mutation, or engagement-as-fact effects.
+Key controls:
 
-`AION-214-KI-0006` is closed as consumed by AION-215. `AION-216-KI-0007` is the sole active Knowledge Intelligence authorization for AION-217. AION-217 may implement only a deterministic in-memory verified-knowledge candidate and engagement-learning candidate plane under the approved scope `deterministic-verified-knowledge-candidate-lineage-versioning-revalidation-operator-review-engagement-learning-abstention-core`; AION-216 creates no AION-217 runtime source.
+- candidates remain reviewable evidence, not factual truth
+- eligibility never creates approval or knowledge promotion
+- confidence is inherited from upstream assessment, mesh, and tool-evidence caps
+- confidence non-amplification is enforced by the minimum cap rule
+- source identity, source independence, claim identity, valid time, jurisdiction, and version scope stay explicit
+- corrections, retractions, supersession, unresolved contradiction, dissent, and optional tool-verification provenance stay preserved
+- repository snapshots and exact queries are deterministic and non-persistent
+- engagement metadata is non-factual and cannot alter confidence, source independence, coverage, freshness, contradiction state, policy, cognitive memory, beliefs, or model weights
+- persistent verified-knowledge writes, automatic promotion, cognitive-memory writes, belief mutation, public-network access, real tool execution, API routes, CLI commands, background workers, and schedulers remain disabled
 
-A verified-knowledge candidate remains reviewable, versioned evidence. Candidate eligibility is not automatic factual truth. Engagement metadata can only propose learning candidates and cannot raise factual confidence, promote knowledge, write cognitive memory, mutate beliefs, or train model weights.
+Current state flags: `verified_knowledge_memory_authorized=true`, `verified_knowledge_memory_implemented=true`, `verified_knowledge_memory_state=implemented_deterministic_in_memory_candidate_versioning_engagement_learning_persistent_write_disabled`, `engagement_learning_candidate_plane_authorized=true`, `engagement_learning_candidate_plane_implemented=true`, `verified_knowledge_runtime_enabled=false`, `persistent_verified_knowledge_write_enabled=false`, `automatic_verified_knowledge_promotion_enabled=false`, `cognitive_memory_write_enabled=false`, `belief_mutation_enabled=false`, `engagement_signal_as_fact_enabled=false`, `engagement_confidence_effect_enabled=false`, `public_network_fetch_enabled=false`, `actual_tool_execution_enabled=false`, `runtime_effect=false`.
+
+AION-216-KI-0007 remains active, consumed=false, expired=false, reusable=false, pending AION-218 formal closeout.

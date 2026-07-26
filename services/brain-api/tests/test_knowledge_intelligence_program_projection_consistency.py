@@ -30,6 +30,10 @@ def _load_json(relative: str) -> dict[str, object]:
 def test_program_and_authorization_ledgers_match_active_verified_knowledge_authorization() -> None:
     auth_ledger = _load_json("docs/knowledge-intelligence/authorization-ledger.json")
     program_ledger = _load_json("docs/knowledge-intelligence/program-ledger.json")
+    expected_memory_state = (
+        "implemented_deterministic_in_memory_candidate_versioning_"
+        "engagement_learning_persistent_write_disabled"
+    )
     active_records = [
         record for record in auth_ledger["records"] if record.get("authorization_active") is True
     ]
@@ -44,10 +48,11 @@ def test_program_and_authorization_ledgers_match_active_verified_knowledge_autho
         assert ledger["active_knowledge_implementation_authorization"] == "AION-216-KI-0007"
         assert ledger["active_knowledge_implementation_task"] == "AION-217"
         assert ledger["formal_closeout_task"] == "AION-218"
-        assert (
-            ledger["verified_knowledge_memory_authorized"] is True
-            and ledger["verified_knowledge_memory_implemented"] is False
-        )
+        assert ledger["verified_knowledge_memory_authorized"] is True
+        assert ledger["verified_knowledge_memory_implemented"] is True
+        assert ledger["verified_knowledge_memory_state"] == expected_memory_state
+        assert ledger["verified_knowledge_runtime_enabled"] is False
+        assert ledger["persistent_verified_knowledge_write_enabled"] is False
         assert ledger["engagement_signal_as_fact_enabled"] is False
     records = {
         record["task_id"]: record for record in program_ledger["records"] if "task_id" in record

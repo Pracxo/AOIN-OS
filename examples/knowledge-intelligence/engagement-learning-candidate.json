@@ -10,16 +10,76 @@
     "response_quality",
     "preference_candidate"
   ],
+  "automatic_application": false,
   "automatic_policy_application": false,
-  "belief_effect": false,
-  "confidence_effect": false,
-  "factual_effect": false,
-  "knowledge_effect": false,
-  "learning_candidate_id": "elc-aion-216-001",
-  "learning_candidate_kind": "research_gap",
+  "candidate": {
+    "automatic_application": false,
+    "belief_effect": false,
+    "candidate_fingerprint": "3598af6a031e13d5b03d01397b8ea8961038c9e715bbc6c84945f6afe316f398",
+    "candidate_kind": "retrieval_strategy",
+    "candidate_version": 1,
+    "cognitive_memory_effect": false,
+    "confidence_effect": false,
+    "created_at": "2026-01-01T00:00:00Z",
+    "expires_at": null,
+    "factual_effect": false,
+    "knowledge_effect": false,
+    "learning_candidate_id": "engagement-learning-2ccdf424d8356e99055cc8c03db7ff086c8efe95ef5f6d38-v001",
+    "lifecycle_status": "proposed",
+    "model_weight_effect": false,
+    "operator_review_required": true,
+    "reason_codes": [
+      "engagement_learning_candidate_proposed",
+      "engagement_learning_candidate_operator_review_required",
+      "engagement_learning_candidate_automatic_application_blocked",
+      "engagement_learning_candidate_model_training_blocked"
+    ],
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-engagement-learning-candidate/v1",
+    "signal_fingerprints": [
+      "53a6551af2756158c58a5931bdd04317c5d730c04ea72834e045c448f0007eb4"
+    ],
+    "signal_ids": [
+      "signal-003"
+    ],
+    "supersedes_candidate_id": null,
+    "target_component_code": "retrieval-planning",
+    "target_policy_code": "retrieval-strategy-review"
+  },
   "model_training": false,
-  "operator_review_required": true,
-  "record_kind": "engagement_learning_candidate_contract_preview",
-  "runtime_effect": false,
-  "source_signal_id": "engagement-signal-aion-216-001"
+  "record_kind": "engagement_learning_candidate_policy",
+  "version": {
+    "automatic_application": false,
+    "belief_effect": false,
+    "candidate_fingerprint": "b9658e5572f8dd7d538975001cf3ff359bf360fac2d8d01d9cfcbf23ff9a7b56",
+    "candidate_kind": "retrieval_strategy",
+    "candidate_version": 2,
+    "cognitive_memory_effect": false,
+    "confidence_effect": false,
+    "created_at": "2026-01-01T00:00:00Z",
+    "expires_at": null,
+    "factual_effect": false,
+    "knowledge_effect": false,
+    "learning_candidate_id": "engagement-learning-2ccdf424d8356e99055cc8c03db7ff086c8efe95ef5f6d38-v002",
+    "lifecycle_status": "proposed",
+    "model_weight_effect": false,
+    "operator_review_required": true,
+    "reason_codes": [
+      "engagement_learning_candidate_proposed",
+      "engagement_learning_candidate_operator_review_required",
+      "engagement_learning_candidate_automatic_application_blocked",
+      "engagement_learning_candidate_model_training_blocked"
+    ],
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-engagement-learning-candidate/v1",
+    "signal_fingerprints": [
+      "53a6551af2756158c58a5931bdd04317c5d730c04ea72834e045c448f0007eb4"
+    ],
+    "signal_ids": [
+      "signal-003"
+    ],
+    "supersedes_candidate_id": "engagement-learning-2ccdf424d8356e99055cc8c03db7ff086c8efe95ef5f6d38-v001",
+    "target_component_code": "retrieval-planning",
+    "target_policy_code": "retrieval-strategy-review"
+  }
 }

@@ -54,6 +54,7 @@ POST_AION212_PROGRAM_STATES = {
     "tool_verification_fabric_authorized_not_implemented",
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
     "verified_knowledge_memory_authorized_not_implemented",
+    "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
 }
 TOOL_VERIFICATION_IMPLEMENTED_STATE = (
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
@@ -307,6 +308,29 @@ AION215_ALLOWED_SOURCE = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification_fabric.py",
 }
+AION217_ALLOWED_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_verified_memory.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_learning_candidates.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_signal_policy.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_candidates.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_lineage.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_memory.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_revalidation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_versioning.py",
+}
+AION217_ALLOWED_EXACT = {
+    "scripts/connector-platform-freeze-check.sh",
+    "services/brain-api/tests/test_self_improvement_postmerge_evidence_reconciliation.py",
+    "services/brain-api/tests/test_self_improvement_shadow_activation_authorization_docs.py",
+    "services/brain-api/tests/test_self_improvement_shadow_activation_evaluation_repository_integrity.py",
+    "services/brain-api/tests/test_self_improvement_shadow_activation_scope_spec.py",
+}
+AION217_IMPLEMENTED_PROGRAM_STATE = (
+    "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
+)
 PROHIBITED_PREFIXES = (
     ".github/workflows/",
     "packages/aion-sdk-python/src/",
@@ -412,7 +436,14 @@ def allowed_path(path: str) -> bool:
         )
     if current_state == TOOL_VERIFICATION_IMPLEMENTED_STATE and path in AION215_ALLOWED_SOURCE:
         return True
-    if current_state == "verified_knowledge_memory_authorized_not_implemented" and (
+    if current_state == AION217_IMPLEMENTED_PROGRAM_STATE and path in AION217_ALLOWED_SOURCE:
+        return True
+    if current_state == AION217_IMPLEMENTED_PROGRAM_STATE and path in AION217_ALLOWED_EXACT:
+        return True
+    if current_state in {
+        "verified_knowledge_memory_authorized_not_implemented",
+        AION217_IMPLEMENTED_PROGRAM_STATE,
+    } and (
         path in AION216_ALLOWED_EXACT
         or any(path.startswith(prefix) for prefix in AION216_ALLOWED_PREFIXES)
     ):
@@ -441,7 +472,7 @@ def assert_changed_paths() -> None:
             normalized = path.replace("\\", "/")
             if normalized in PROHIBITED_EXACT or Path(normalized).name in PROHIBITED_EXACT:
                 raise SystemExit(f"prohibited exact path changed: {normalized}")
-            if normalized.startswith(PROHIBITED_PREFIXES):
+            if normalized.startswith(PROHIBITED_PREFIXES) and not allowed_path(normalized):
                 raise SystemExit(f"prohibited runtime or governance path changed: {normalized}")
             if (
                 normalized.startswith("services/brain-api/src/aion_brain/")
@@ -497,7 +528,10 @@ def assert_ledgers() -> None:
     auth = load_json("docs/knowledge-intelligence/authorization-ledger.json")
     post_aion212 = (ROOT / "examples/knowledge-intelligence/epistemic-assessment-operator-evaluation-report.json").exists()
     for label, payload in (("program", program), ("authorization", auth)):
-        post_aion216 = payload.get("program_state") == "verified_knowledge_memory_authorized_not_implemented"
+        post_aion216 = payload.get("program_state") in {
+            "verified_knowledge_memory_authorized_not_implemented",
+            "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
+        }
         post_aion214 = payload.get("program_state") in {"tool_verification_fabric_authorized_not_implemented", "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"}
         if payload["program_id"] != PROGRAM_ID:
             raise SystemExit(f"{label} ledger program mismatch")
@@ -552,7 +586,10 @@ def assert_ledgers() -> None:
     if len(active) != 1:
         raise SystemExit("exactly one Knowledge Intelligence authorization must be active")
     active_record = active[0]
-    post_aion216 = program.get("program_state") == "verified_knowledge_memory_authorized_not_implemented"
+    post_aion216 = program.get("program_state") in {
+        "verified_knowledge_memory_authorized_not_implemented",
+        "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
+    }
     post_aion214 = program.get("program_state") in {"tool_verification_fabric_authorized_not_implemented", "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"}
     if post_aion216:
         expected_active = CURRENT_AUTH_ID

@@ -90,6 +90,19 @@ def _changed_runtime_boundary_paths() -> list[str]:
 
 
 def test_aion_216_repository_boundary_has_no_runtime_changes() -> None:
+    program = _load_json("docs/knowledge-intelligence/program-ledger.json")
+    implemented_state = (
+        "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
+    )
+    if program["program_state"] == implemented_state:
+        for relative in _load_validator().AION217_SOURCE_PATHS:
+            assert (REPO_ROOT / relative).exists(), relative
+        assert program["verified_knowledge_memory_implemented"] is True
+        assert program["verified_knowledge_runtime_enabled"] is False
+        assert program["persistent_verified_knowledge_write_enabled"] is False
+        assert program["runtime_effect"] is False
+        return
+
     assert _changed_runtime_boundary_paths() == []
     for relative in _load_validator().AION217_SOURCE_PATHS:
         assert not (REPO_ROOT / relative).exists(), relative
