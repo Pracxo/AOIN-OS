@@ -14,6 +14,7 @@ export AION_REPO_ROOT="$ROOT_DIR"
 "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
 
+import json
 import os
 import subprocess
 from pathlib import Path
@@ -60,6 +61,22 @@ AION215_SOURCE_NAMES = {
     "tool_integrity.py",
     "tool_evidence.py",
 }
+AION215_ALLOWED_SOURCE_PATHS = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_tool_verification.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification_fabric.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_manifests.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_planning.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_simulation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_attestation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_effects.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+}
+IMPLEMENTED_PROGRAM_STATE = (
+    "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
+)
 PERSISTENCE_SUFFIXES = (".db", ".sqlite", ".sqlite3", ".jsonl", ".tool-state", ".state")
 
 
@@ -104,6 +121,9 @@ def changed_entries() -> list[list[str]]:
     return entries
 
 
+program = json.loads((ROOT / "docs/knowledge-intelligence/program-ledger.json").read_text())
+aion215_implemented = program.get("program_state") == IMPLEMENTED_PROGRAM_STATE
+
 for parts in changed_entries():
     status, paths = parts[0], parts[1:]
     if status.startswith(("D", "R")):
@@ -113,6 +133,8 @@ for parts in changed_entries():
         name = Path(normalized).name
         if name in PROHIBITED_NAMES:
             raise SystemExit(f"dependency/package file changed: {normalized}")
+        if aion215_implemented and normalized in AION215_ALLOWED_SOURCE_PATHS:
+            continue
         if name in AION215_SOURCE_NAMES and normalized.startswith(
             "services/brain-api/src/aion_brain/"
         ):

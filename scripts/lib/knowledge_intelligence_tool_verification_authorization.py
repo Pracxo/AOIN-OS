@@ -23,6 +23,13 @@ SCOPE = (
 )
 CANDIDATE_ID = "deterministic-tool-verification-fabric-core"
 WORKSTREAM = "knowledge-intelligence-tool-verification-fabric"
+AUTHORIZED_PROGRAM_STATE = "tool_verification_fabric_authorized_not_implemented"
+IMPLEMENTED_PROGRAM_STATE = (
+    "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
+)
+IMPLEMENTED_FABRIC_STATE = (
+    "implemented_deterministic_simulation_verification_attestation_persistent_write_disabled"
+)
 
 AUTHORIZED_CAPABILITIES: tuple[str, ...] = (
     "tool_manifest_contracts_approved",
@@ -304,7 +311,6 @@ def validate_authorization_payload(payload: dict[str, Any]) -> None:
         "authorization_expired": False,
         "authorization_reusable": False,
         "tool_verification_fabric_authorized": True,
-        "tool_verification_fabric_implemented": False,
         "synthetic": True,
         "read_only": True,
         "redacted": True,
@@ -323,6 +329,20 @@ def validate_authorization_payload(payload: dict[str, Any]) -> None:
             raise ValueError(f"approval flag must be true: {key}")
     if payload.get("implementation_no_go_status") is not False:
         raise ValueError("implementation_no_go_status must be false")
+    implemented = payload.get("tool_verification_fabric_implemented")
+    if implemented is True:
+        if payload.get("tool_verification_fabric_state") != IMPLEMENTED_FABRIC_STATE:
+            raise ValueError("tool verification fabric implemented state mismatch")
+        if payload.get("tool_verification_fabric_runtime_enabled") is not False:
+            raise ValueError("tool verification runtime must remain disabled")
+    elif implemented is False:
+        if payload.get("tool_verification_fabric_state") not in {
+            None,
+            "authorized_not_implemented",
+        }:
+            raise ValueError("tool verification authorized state mismatch")
+    else:
+        raise ValueError("tool verification implementation flag must be boolean")
     if payload.get("authorized_capabilities") != expected_authorized_capabilities():
         raise ValueError("authorized capability matrix mismatch")
     if payload.get("prohibited_capabilities") != expected_prohibited_capabilities():
@@ -390,7 +410,7 @@ def validate_authorization_files(root: Path) -> None:
     auth = load_json(root, "docs/knowledge-intelligence/authorization-ledger.json")
     program = load_json(root, "docs/knowledge-intelligence/program-ledger.json")
     for label, payload in (("authorization", auth), ("program", program)):
-        if payload.get("program_state") != "tool_verification_fabric_authorized_not_implemented":
+        if payload.get("program_state") not in {AUTHORIZED_PROGRAM_STATE, IMPLEMENTED_PROGRAM_STATE}:
             raise ValueError(f"{label} ledger program state mismatch")
         if payload.get("active_knowledge_implementation_authorization_count") != 1:
             raise ValueError(f"{label} active authorization count mismatch")
@@ -404,7 +424,14 @@ def validate_authorization_files(root: Path) -> None:
             raise ValueError(f"{label} evaluation decision mismatch")
         if payload.get("tool_verification_fabric_authorized") is not True:
             raise ValueError(f"{label} tool verification authorization missing")
-        if payload.get("tool_verification_fabric_implemented") is not False:
+        if payload.get("program_state") == IMPLEMENTED_PROGRAM_STATE:
+            if payload.get("tool_verification_fabric_implemented") is not True:
+                raise ValueError(f"{label} tool verification implementation missing")
+            if payload.get("tool_verification_fabric_state") != IMPLEMENTED_FABRIC_STATE:
+                raise ValueError(f"{label} tool verification state mismatch")
+            if payload.get("tool_verification_fabric_runtime_enabled") is not False:
+                raise ValueError(f"{label} tool verification runtime must remain disabled")
+        elif payload.get("tool_verification_fabric_implemented") is not False:
             raise ValueError(f"{label} tool verification implementation must be false")
         for key in PROHIBITED_CAPABILITIES:
             if payload.get(key, False) is not False:
@@ -443,8 +470,13 @@ def validate_authorization_files(root: Path) -> None:
 
 
 def validate_repository_state(root: Path) -> None:
+    program = load_json(root, "docs/knowledge-intelligence/program-ledger.json")
+    implemented = program.get("program_state") == IMPLEMENTED_PROGRAM_STATE
     for relative in AION215_SOURCE_FILES:
-        if (root / relative).exists():
+        exists = (root / relative).exists()
+        if implemented and not exists:
+            raise ValueError(f"AION-215 source missing after implementation: {relative}")
+        if not implemented and exists:
             raise ValueError(f"AION-215 source is not authorized on AION-214: {relative}")
     for evidence_root in ("docs", "examples", "operator-console-static", "scripts"):
         for relative in (root / evidence_root).rglob("*"):
@@ -458,7 +490,6 @@ def validate_runtime_hold(root: Path) -> None:
     validate_authorization_files(root)
     runtime = load_json(root, "examples/knowledge-intelligence/tool-verification-runtime-hold.json")
     for key in (
-        "tool_verification_fabric_implemented",
         "actual_tool_execution_enabled",
         "shell_command_execution_enabled",
         "subprocess_execution_enabled",
@@ -478,3 +509,9 @@ def validate_runtime_hold(root: Path) -> None:
             raise ValueError(f"runtime hold flag must remain false: {key}")
     if runtime.get("tool_verification_fabric_authorized") is not True:
         raise ValueError("tool verification authorization must be recorded")
+    if runtime.get("tool_verification_fabric_implemented") is not True:
+        raise ValueError("tool verification implementation must be recorded")
+    if runtime.get("tool_verification_fabric_state") != IMPLEMENTED_FABRIC_STATE:
+        raise ValueError("tool verification implementation state mismatch")
+    if runtime.get("tool_verification_fabric_runtime_enabled") is not False:
+        raise ValueError("tool verification runtime must remain disabled")

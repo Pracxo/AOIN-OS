@@ -264,7 +264,6 @@ def validate_tool_verification_demo(payload: object, path: Path) -> None:
         "subprocess_execution_enabled",
         "tool_execution_enabled",
         "tool_state_database_enabled",
-        "tool_verification_fabric_implemented",
     }
 
     def walk(value: object) -> None:
@@ -294,7 +293,9 @@ def validate_tool_verification_demo(payload: object, path: Path) -> None:
             raise SystemExit(f"knowledge intelligence tool authorization no-go flag must be false: {path}")
     elif path.name == "knowledge-intelligence-tool-verification-runtime-hold.json":
         if payload.get("tool_verification_fabric_authorized") is not True:
-            raise SystemExit(f"knowledge intelligence tool hold must remain authorized-only: {path}")
+            raise SystemExit(f"knowledge intelligence tool hold must remain authorized: {path}")
+        if payload.get("tool_verification_fabric_runtime_enabled") is not False:
+            raise SystemExit(f"knowledge intelligence tool runtime must remain disabled: {path}")
 
 
 for path in sorted(demo_dir.glob("*.json")):

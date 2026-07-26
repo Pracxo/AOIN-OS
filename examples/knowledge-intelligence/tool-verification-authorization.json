@@ -196,6 +196,7 @@
   "persistent_tool_state_write_enabled": false,
   "production_deployment_enabled": false,
   "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "program_state": "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
   "prohibited_capabilities": {
     "absolute_truth_oracle_enabled": false,
     "actual_tool_execution_enabled": false,
@@ -385,8 +386,9 @@
   "tool_result_as_automatic_knowledge_enabled": false,
   "tool_state_database_enabled": false,
   "tool_verification_fabric_authorized": true,
-  "tool_verification_fabric_implemented": false,
-  "tool_verification_fabric_state": "authorized_not_implemented",
+  "tool_verification_fabric_implemented": true,
+  "tool_verification_fabric_runtime_enabled": false,
+  "tool_verification_fabric_state": "implemented_deterministic_simulation_verification_attestation_persistent_write_disabled",
   "v02_release_created": false,
   "v02_tag_created": false,
   "verification_statuses": [

@@ -1,31 +1,1525 @@
 {
   "actual_tool_executed": false,
-  "approval_record_id": "AION-214-KI-0006",
+  "actual_tool_execution_enabled": false,
   "attestations": [
-    "attestation-0001"
+    {
+      "attestation_fingerprint": "c79f92ef89b35ffc33af9b504da34267393a3683a62f191e03a0bcc2783c0821",
+      "attestation_id": "attestation-finding-plan-intent-aion-215-001-001",
+      "attested_at": "2026-01-01T00:00:00Z",
+      "finding_fingerprint": "0d944069e8dd2dbef08eb4647356de466ddd9c587528963ebfa1c0291e87dee4",
+      "finding_id": "finding-plan-intent-aion-215-001-001",
+      "previous_attestation_fingerprint": null,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-tool-attestation/v1",
+      "sequence_number": 1,
+      "synthetic": true
+    },
+    {
+      "attestation_fingerprint": "04f91802c208d77b422dea3b42835f4c3dde2e4fda79dd5c9192f44617d4c4f4",
+      "attestation_id": "attestation-finding-plan-intent-aion-215-001-002",
+      "attested_at": "2026-01-01T00:00:00Z",
+      "finding_fingerprint": "f243de45220a615ed99dda01f45b8f3ee797a8408846e219de528ad492c7c5ed",
+      "finding_id": "finding-plan-intent-aion-215-001-002",
+      "previous_attestation_fingerprint": "c79f92ef89b35ffc33af9b504da34267393a3683a62f191e03a0bcc2783c0821",
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-tool-attestation/v1",
+      "sequence_number": 2,
+      "synthetic": true
+    },
+    {
+      "attestation_fingerprint": "ccea4372611cc452c94d74d24dcf86ec11382bbb4ef97faf0a2bddd7b2b030b6",
+      "attestation_id": "attestation-finding-plan-intent-aion-215-001-003",
+      "attested_at": "2026-01-01T00:00:00Z",
+      "finding_fingerprint": "9712a7d9e5c1b0016e9b84f6eebd4217db8e0619f4929c5c88923aa25e6e85e3",
+      "finding_id": "finding-plan-intent-aion-215-001-003",
+      "previous_attestation_fingerprint": "04f91802c208d77b422dea3b42835f4c3dde2e4fda79dd5c9192f44617d4c4f4",
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-tool-attestation/v1",
+      "sequence_number": 3,
+      "synthetic": true
+    },
+    {
+      "attestation_fingerprint": "37bae8fb0c7b8b3c121e60aeed564a205f40aac37e34bdd20cb56fa98d2e40e8",
+      "attestation_id": "attestation-finding-plan-intent-aion-215-001-004",
+      "attested_at": "2026-01-01T00:00:00Z",
+      "finding_fingerprint": "9e9f796dda2a76da63f5b9287b8a818b1411b2dcbe57694c9e366785824e3e61",
+      "finding_id": "finding-plan-intent-aion-215-001-004",
+      "previous_attestation_fingerprint": "ccea4372611cc452c94d74d24dcf86ec11382bbb4ef97faf0a2bddd7b2b030b6",
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-tool-attestation/v1",
+      "sequence_number": 4,
+      "synthetic": true
+    },
+    {
+      "attestation_fingerprint": "0fc398b621b3a7abb94b386c42b11c95910d560c1c41084b5f7dddbd31195d73",
+      "attestation_id": "attestation-finding-plan-intent-aion-215-001-005",
+      "attested_at": "2026-01-01T00:00:00Z",
+      "finding_fingerprint": "e1c2493e45b9bdc274910d16c7af9c8368f1b7b2de27f98199f4f049ed323380",
+      "finding_id": "finding-plan-intent-aion-215-001-005",
+      "previous_attestation_fingerprint": "37bae8fb0c7b8b3c121e60aeed564a205f40aac37e34bdd20cb56fa98d2e40e8",
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-tool-attestation/v1",
+      "sequence_number": 5,
+      "synthetic": true
+    }
   ],
-  "authorization_scope": "deterministic-tool-manifest-intent-plan-simulation-verification-attestation-effect-evidence-rollback-abstention-core",
   "authorization_transaction_id": "AION-214-KI-0006",
   "belief_mutated": false,
+  "diagnostics": {
+    "diagnostic_fingerprint": "a39d3101bf5af74d25a3c7afbe5ba917d284f621f6e5c46cca915a6bd1731d7b",
+    "diagnostic_id": "diagnostic-session-intent-aion-215-001",
+    "reason_codes": [
+      "tool_synthetic_simulation_passed",
+      "tool_operator_review_required"
+    ],
+    "redacted": true,
+    "schema_version": "aion-knowledge-tool-verification-diagnostics/v1",
+    "summary": "Synthetic tool simulation completed with runtime and persistence disabled."
+  },
+  "evidence_bundle": {
+    "artifact_fingerprints": [
+      "55fde97ac54f7998e4459eb8d73f7e7d10b19c5f9cfc13f6ac8b64600fe55005"
+    ],
+    "attestation_fingerprints": [
+      "c79f92ef89b35ffc33af9b504da34267393a3683a62f191e03a0bcc2783c0821",
+      "04f91802c208d77b422dea3b42835f4c3dde2e4fda79dd5c9192f44617d4c4f4",
+      "ccea4372611cc452c94d74d24dcf86ec11382bbb4ef97faf0a2bddd7b2b030b6",
+      "37bae8fb0c7b8b3c121e60aeed564a205f40aac37e34bdd20cb56fa98d2e40e8",
+      "0fc398b621b3a7abb94b386c42b11c95910d560c1c41084b5f7dddbd31195d73"
+    ],
+    "evidence_fingerprint": "25bbfad6ac999190ea489847e83ef8f7a946cd786a854279cbe72f67b8d8228d",
+    "evidence_id": "evidence-session-intent-aion-215-001",
+    "finding_fingerprints": [
+      "0d944069e8dd2dbef08eb4647356de466ddd9c587528963ebfa1c0291e87dee4",
+      "f243de45220a615ed99dda01f45b8f3ee797a8408846e219de528ad492c7c5ed",
+      "9712a7d9e5c1b0016e9b84f6eebd4217db8e0619f4929c5c88923aa25e6e85e3",
+      "9e9f796dda2a76da63f5b9287b8a818b1411b2dcbe57694c9e366785824e3e61",
+      "e1c2493e45b9bdc274910d16c7af9c8368f1b7b2de27f98199f4f049ed323380"
+    ],
+    "persistent_write_applied": false,
+    "provenance_fingerprints": [
+      "5b1ddfa60acf19b7f97da46d9bae4f32e2ca652aceb7c1fbdaeb875eac8aa79d",
+      "f8422fce3c329915db3abf1fcd24b3a517f43e7aaed63782ea5edce135ff2394"
+    ],
+    "redacted": true,
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-tool-verification-evidence/v1",
+    "session_id": "session-intent-aion-215-001"
+  },
   "explicit_abstention": true,
   "findings": [
-    "finding-0001"
+    {
+      "abstained": false,
+      "actual_execution_verified": false,
+      "approval_created": false,
+      "belief_mutated": false,
+      "evidence_fingerprint": "5b1ddfa60acf19b7f97da46d9bae4f32e2ca652aceb7c1fbdaeb875eac8aa79d",
+      "finding_fingerprint": "0d944069e8dd2dbef08eb4647356de466ddd9c587528963ebfa1c0291e87dee4",
+      "finding_id": "finding-plan-intent-aion-215-001-001",
+      "knowledge_promoted": false,
+      "passed": true,
+      "plan_id": "plan-intent-aion-215-001",
+      "reason_codes": [
+        "tool_schema_valid"
+      ],
+      "rule_id": "rule-schema_verifier",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-tool-verification-finding/v1",
+      "severity": "info",
+      "simulation_id": "simulation-plan-intent-aion-215-001",
+      "status": "verification_passed",
+      "verifier_profile_id": "profile-schema_verifier",
+      "verifier_role": "schema_verifier"
+    },
+    {
+      "abstained": false,
+      "actual_execution_verified": false,
+      "approval_created": false,
+      "belief_mutated": false,
+      "evidence_fingerprint": "5b1ddfa60acf19b7f97da46d9bae4f32e2ca652aceb7c1fbdaeb875eac8aa79d",
+      "finding_fingerprint": "f243de45220a615ed99dda01f45b8f3ee797a8408846e219de528ad492c7c5ed",
+      "finding_id": "finding-plan-intent-aion-215-001-002",
+      "knowledge_promoted": false,
+      "passed": true,
+      "plan_id": "plan-intent-aion-215-001",
+      "reason_codes": [
+        "tool_permission_valid",
+        "tool_runtime_disabled"
+      ],
+      "rule_id": "rule-policy_verifier",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-tool-verification-finding/v1",
+      "severity": "info",
+      "simulation_id": "simulation-plan-intent-aion-215-001",
+      "status": "verification_passed",
+      "verifier_profile_id": "profile-policy_verifier",
+      "verifier_role": "policy_verifier"
+    },
+    {
+      "abstained": false,
+      "actual_execution_verified": false,
+      "approval_created": false,
+      "belief_mutated": false,
+      "evidence_fingerprint": "5b1ddfa60acf19b7f97da46d9bae4f32e2ca652aceb7c1fbdaeb875eac8aa79d",
+      "finding_fingerprint": "9712a7d9e5c1b0016e9b84f6eebd4217db8e0619f4929c5c88923aa25e6e85e3",
+      "finding_id": "finding-plan-intent-aion-215-001-003",
+      "knowledge_promoted": false,
+      "passed": true,
+      "plan_id": "plan-intent-aion-215-001",
+      "reason_codes": [
+        "tool_effect_expected_matched",
+        "tool_effect_forbidden_absent"
+      ],
+      "rule_id": "rule-effect_verifier",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-tool-verification-finding/v1",
+      "severity": "info",
+      "simulation_id": "simulation-plan-intent-aion-215-001",
+      "status": "verification_passed",
+      "verifier_profile_id": "profile-effect_verifier",
+      "verifier_role": "effect_verifier"
+    },
+    {
+      "abstained": false,
+      "actual_execution_verified": false,
+      "approval_created": false,
+      "belief_mutated": false,
+      "evidence_fingerprint": "5b1ddfa60acf19b7f97da46d9bae4f32e2ca652aceb7c1fbdaeb875eac8aa79d",
+      "finding_fingerprint": "9e9f796dda2a76da63f5b9287b8a818b1411b2dcbe57694c9e366785824e3e61",
+      "finding_id": "finding-plan-intent-aion-215-001-004",
+      "knowledge_promoted": false,
+      "passed": true,
+      "plan_id": "plan-intent-aion-215-001",
+      "reason_codes": [
+        "tool_provenance_preserved"
+      ],
+      "rule_id": "rule-provenance_verifier",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-tool-verification-finding/v1",
+      "severity": "info",
+      "simulation_id": "simulation-plan-intent-aion-215-001",
+      "status": "verification_passed",
+      "verifier_profile_id": "profile-provenance_verifier",
+      "verifier_role": "provenance_verifier"
+    },
+    {
+      "abstained": false,
+      "actual_execution_verified": false,
+      "approval_created": false,
+      "belief_mutated": false,
+      "evidence_fingerprint": "5b1ddfa60acf19b7f97da46d9bae4f32e2ca652aceb7c1fbdaeb875eac8aa79d",
+      "finding_fingerprint": "e1c2493e45b9bdc274910d16c7af9c8368f1b7b2de27f98199f4f049ed323380",
+      "finding_id": "finding-plan-intent-aion-215-001-005",
+      "knowledge_promoted": false,
+      "passed": true,
+      "plan_id": "plan-intent-aion-215-001",
+      "reason_codes": [
+        "tool_artifact_fingerprinted"
+      ],
+      "rule_id": "rule-determinism_verifier",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-tool-verification-finding/v1",
+      "severity": "info",
+      "simulation_id": "simulation-plan-intent-aion-215-001",
+      "status": "verification_passed",
+      "verifier_profile_id": "profile-determinism_verifier",
+      "verifier_role": "determinism_verifier"
+    }
   ],
   "formal_closeout_task": "AION-216",
   "implementation_task": "AION-215",
-  "intent": "intent-0001",
+  "incidents": [],
+  "intent": {
+    "actual_tool_executed": false,
+    "authorization_transaction_id": "AION-214-KI-0006",
+    "case_id": "case-001",
+    "claim_ids": [
+      "claim-001"
+    ],
+    "epistemic_assessment_ids": [
+      "assessment-001"
+    ],
+    "expected_effects": [
+      {
+        "artifact_id": "artifact-intent-aion-215-001",
+        "effect_fingerprint": "2eb9e362ad4b433b30437b46d67860c803fe203ec581801031964ea95d22e86a",
+        "effect_id": "effect-intent-aion-215-001-validate",
+        "effect_scope": "synthetic-artifact",
+        "effect_type": "validate",
+        "requires_actual_execution": false,
+        "requires_persistent_write": false,
+        "runtime_effect": false,
+        "schema_version": "aion-knowledge-tool-effect/v1",
+        "synthetic": true
+      }
+    ],
+    "explicit_abstention_supported": true,
+    "forbidden_effects": [
+      {
+        "effect_fingerprint": "32ceb276e68771e64095bd06e46f25abeeddd1533054653e5e14dee1e22ab28e",
+        "effect_id": "forbidden-approve",
+        "effect_scope": "runtime-boundary",
+        "effect_type": "approve",
+        "reason_code": "tool_actual_execution_blocked",
+        "schema_version": "aion-knowledge-tool-effect/v1"
+      },
+      {
+        "effect_fingerprint": "095767bf7a752cda40c0e2327f919d96e78f94678c4bc072029ceb3f33248207",
+        "effect_id": "forbidden-create",
+        "effect_scope": "runtime-boundary",
+        "effect_type": "create",
+        "reason_code": "tool_actual_execution_blocked",
+        "schema_version": "aion-knowledge-tool-effect/v1"
+      },
+      {
+        "effect_fingerprint": "1540c1b9237cf64f6baa6de9856cda6622d97fd73326d0f76439e4dfc6a7747a",
+        "effect_id": "forbidden-delete",
+        "effect_scope": "runtime-boundary",
+        "effect_type": "delete",
+        "reason_code": "tool_actual_execution_blocked",
+        "schema_version": "aion-knowledge-tool-effect/v1"
+      },
+      {
+        "effect_fingerprint": "bc81e5a9566e33318afcfdb40740b586681fc172b730a8fe6b268e719937576d",
+        "effect_id": "forbidden-deploy",
+        "effect_scope": "runtime-boundary",
+        "effect_type": "deploy",
+        "reason_code": "tool_actual_execution_blocked",
+        "schema_version": "aion-knowledge-tool-effect/v1"
+      },
+      {
+        "effect_fingerprint": "ad5cad82a0bf6f8381e33c141387ff220716dd8bad9e1b7d814c28cfb8a0127d",
+        "effect_id": "forbidden-execute",
+        "effect_scope": "runtime-boundary",
+        "effect_type": "execute",
+        "reason_code": "tool_actual_execution_blocked",
+        "schema_version": "aion-knowledge-tool-effect/v1"
+      },
+      {
+        "effect_fingerprint": "509939df622588c5fad1ab12c686e2bb5789e4fc8798e7a34b3e37af8c538fb5",
+        "effect_id": "forbidden-merge",
+        "effect_scope": "runtime-boundary",
+        "effect_type": "merge",
+        "reason_code": "tool_actual_execution_blocked",
+        "schema_version": "aion-knowledge-tool-effect/v1"
+      },
+      {
+        "effect_fingerprint": "1362a789aa28b49f32f49e24dcc2f43569e234e89346c7dfb66e51c585ddc39c",
+        "effect_id": "forbidden-train",
+        "effect_scope": "runtime-boundary",
+        "effect_type": "train",
+        "reason_code": "tool_actual_execution_blocked",
+        "schema_version": "aion-knowledge-tool-effect/v1"
+      },
+      {
+        "effect_fingerprint": "47ec10dd0857059f4f6c36df7563915408509bc7ee263e3ac773db3cea8b1914",
+        "effect_id": "forbidden-transmit",
+        "effect_scope": "runtime-boundary",
+        "effect_type": "transmit",
+        "reason_code": "tool_actual_execution_blocked",
+        "schema_version": "aion-knowledge-tool-effect/v1"
+      },
+      {
+        "effect_fingerprint": "6801b567d4686f3bffaf2f81d1be5acf65c98a90fada28d1903c04dd8177152a",
+        "effect_id": "forbidden-update",
+        "effect_scope": "runtime-boundary",
+        "effect_type": "update",
+        "reason_code": "tool_actual_execution_blocked",
+        "schema_version": "aion-knowledge-tool-effect/v1"
+      }
+    ],
+    "formal_closeout_task": "AION-216",
+    "idempotency_key": "idempotency-aion-215-001",
+    "implementation_task": "AION-215",
+    "input_payload": {
+      "artifact_kind": "knowledge-intelligence-tool-verification-fixture",
+      "case_id": "case-001",
+      "content_fingerprint": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "intent_fingerprint": "77ec63be69e57219be73a543f56aeafee5c4a4eb610d8e63b7b3cc9eaa797152",
+    "intent_id": "intent-aion-215-001",
+    "max_risk_class": "low",
+    "mesh_synthesis_id": "mesh-synthesis-001",
+    "operator_review_required": true,
+    "persistent_write_applied": false,
+    "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+    "read_only": true,
+    "redacted": true,
+    "requested_tool_ids": [],
+    "required_operation_classes": [
+      "deterministic_validator"
+    ],
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-tool-intent/v1",
+    "synthetic": true
+  },
   "knowledge_promoted": false,
+  "operator_review_items": [
+    {
+      "actual_tool_executed": false,
+      "required": true,
+      "review_fingerprint": "5adca0435f5c44deb1cae72b7c53de65514e39f987d7cf507dcf90a5241ab644",
+      "review_item_id": "operator-review-session-intent-aion-215-001",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-tool-verification-operator-review/v1",
+      "session_id": "session-intent-aion-215-001",
+      "simulation_pass_not_execution": true,
+      "summary": "Synthetic tool simulation requires operator review before any future action.",
+      "tool_output_not_knowledge": true,
+      "verification_pass_not_approval": true
+    }
+  ],
   "operator_review_required": true,
   "overall_status": "simulation_passed",
+  "persistent_tool_state_write_enabled": false,
   "persistent_write_applied": false,
-  "plan": "plan-0001",
+  "plan": {
+    "actual_tool_executed": false,
+    "candidates": [
+      {
+        "candidate_fingerprint": "4712b1cb314bdd75832fc118db6b2f492f1bbdb90eac98dfabf8eb8c3d852dce",
+        "candidate_id": "candidate-intent-aion-215-001-001",
+        "candidate_rank": 1,
+        "eligible": true,
+        "intent_id": "intent-aion-215-001",
+        "manifest_id": "manifest-synthetic-json-validator",
+        "matched_effect_types": [
+          "validate"
+        ],
+        "reason_codes": [
+          "tool_candidate_eligible"
+        ],
+        "risk_class": "low",
+        "schema_version": "aion-knowledge-tool-candidate/v1",
+        "tool_id": "synthetic.json-validator"
+      }
+    ],
+    "explicit_abstention_required": true,
+    "intent": {
+      "actual_tool_executed": false,
+      "authorization_transaction_id": "AION-214-KI-0006",
+      "case_id": "case-001",
+      "claim_ids": [
+        "claim-001"
+      ],
+      "epistemic_assessment_ids": [
+        "assessment-001"
+      ],
+      "expected_effects": [
+        {
+          "artifact_id": "artifact-intent-aion-215-001",
+          "effect_fingerprint": "2eb9e362ad4b433b30437b46d67860c803fe203ec581801031964ea95d22e86a",
+          "effect_id": "effect-intent-aion-215-001-validate",
+          "effect_scope": "synthetic-artifact",
+          "effect_type": "validate",
+          "requires_actual_execution": false,
+          "requires_persistent_write": false,
+          "runtime_effect": false,
+          "schema_version": "aion-knowledge-tool-effect/v1",
+          "synthetic": true
+        }
+      ],
+      "explicit_abstention_supported": true,
+      "forbidden_effects": [
+        {
+          "effect_fingerprint": "32ceb276e68771e64095bd06e46f25abeeddd1533054653e5e14dee1e22ab28e",
+          "effect_id": "forbidden-approve",
+          "effect_scope": "runtime-boundary",
+          "effect_type": "approve",
+          "reason_code": "tool_actual_execution_blocked",
+          "schema_version": "aion-knowledge-tool-effect/v1"
+        },
+        {
+          "effect_fingerprint": "095767bf7a752cda40c0e2327f919d96e78f94678c4bc072029ceb3f33248207",
+          "effect_id": "forbidden-create",
+          "effect_scope": "runtime-boundary",
+          "effect_type": "create",
+          "reason_code": "tool_actual_execution_blocked",
+          "schema_version": "aion-knowledge-tool-effect/v1"
+        },
+        {
+          "effect_fingerprint": "1540c1b9237cf64f6baa6de9856cda6622d97fd73326d0f76439e4dfc6a7747a",
+          "effect_id": "forbidden-delete",
+          "effect_scope": "runtime-boundary",
+          "effect_type": "delete",
+          "reason_code": "tool_actual_execution_blocked",
+          "schema_version": "aion-knowledge-tool-effect/v1"
+        },
+        {
+          "effect_fingerprint": "bc81e5a9566e33318afcfdb40740b586681fc172b730a8fe6b268e719937576d",
+          "effect_id": "forbidden-deploy",
+          "effect_scope": "runtime-boundary",
+          "effect_type": "deploy",
+          "reason_code": "tool_actual_execution_blocked",
+          "schema_version": "aion-knowledge-tool-effect/v1"
+        },
+        {
+          "effect_fingerprint": "ad5cad82a0bf6f8381e33c141387ff220716dd8bad9e1b7d814c28cfb8a0127d",
+          "effect_id": "forbidden-execute",
+          "effect_scope": "runtime-boundary",
+          "effect_type": "execute",
+          "reason_code": "tool_actual_execution_blocked",
+          "schema_version": "aion-knowledge-tool-effect/v1"
+        },
+        {
+          "effect_fingerprint": "509939df622588c5fad1ab12c686e2bb5789e4fc8798e7a34b3e37af8c538fb5",
+          "effect_id": "forbidden-merge",
+          "effect_scope": "runtime-boundary",
+          "effect_type": "merge",
+          "reason_code": "tool_actual_execution_blocked",
+          "schema_version": "aion-knowledge-tool-effect/v1"
+        },
+        {
+          "effect_fingerprint": "1362a789aa28b49f32f49e24dcc2f43569e234e89346c7dfb66e51c585ddc39c",
+          "effect_id": "forbidden-train",
+          "effect_scope": "runtime-boundary",
+          "effect_type": "train",
+          "reason_code": "tool_actual_execution_blocked",
+          "schema_version": "aion-knowledge-tool-effect/v1"
+        },
+        {
+          "effect_fingerprint": "47ec10dd0857059f4f6c36df7563915408509bc7ee263e3ac773db3cea8b1914",
+          "effect_id": "forbidden-transmit",
+          "effect_scope": "runtime-boundary",
+          "effect_type": "transmit",
+          "reason_code": "tool_actual_execution_blocked",
+          "schema_version": "aion-knowledge-tool-effect/v1"
+        },
+        {
+          "effect_fingerprint": "6801b567d4686f3bffaf2f81d1be5acf65c98a90fada28d1903c04dd8177152a",
+          "effect_id": "forbidden-update",
+          "effect_scope": "runtime-boundary",
+          "effect_type": "update",
+          "reason_code": "tool_actual_execution_blocked",
+          "schema_version": "aion-knowledge-tool-effect/v1"
+        }
+      ],
+      "formal_closeout_task": "AION-216",
+      "idempotency_key": "idempotency-aion-215-001",
+      "implementation_task": "AION-215",
+      "input_payload": {
+        "artifact_kind": "knowledge-intelligence-tool-verification-fixture",
+        "case_id": "case-001",
+        "content_fingerprint": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "intent_fingerprint": "77ec63be69e57219be73a543f56aeafee5c4a4eb610d8e63b7b3cc9eaa797152",
+      "intent_id": "intent-aion-215-001",
+      "max_risk_class": "low",
+      "mesh_synthesis_id": "mesh-synthesis-001",
+      "operator_review_required": true,
+      "persistent_write_applied": false,
+      "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+      "read_only": true,
+      "redacted": true,
+      "requested_tool_ids": [],
+      "required_operation_classes": [
+        "deterministic_validator"
+      ],
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-tool-intent/v1",
+      "synthetic": true
+    },
+    "operator_review_required": true,
+    "persistent_write_applied": false,
+    "plan_fingerprint": "41db4c7cae27bfc709c783cb040dfba32a2d69e393e69fa4a6761124a373b0ad",
+    "plan_id": "plan-intent-aion-215-001",
+    "reason_codes": [
+      "tool_plan_valid",
+      "tool_candidate_selected"
+    ],
+    "required_verifier_roles": [
+      "schema_verifier",
+      "policy_verifier",
+      "effect_verifier",
+      "provenance_verifier",
+      "determinism_verifier"
+    ],
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-tool-plan/v1",
+    "selected_candidate_id": "candidate-intent-aion-215-001-001",
+    "simulation_only": true,
+    "steps": [
+      {
+        "actual_execution_enabled": false,
+        "actual_tool_executed": false,
+        "compensation_plan": {
+          "available": true,
+          "compensation_fingerprint": "29a4284881d55480cadc3027ad4ac488438dfe950913f072c1767beef805dea3",
+          "compensation_id": "compensation-step-intent-aion-215-001-001",
+          "reason_codes": [
+            "tool_compensation_valid"
+          ],
+          "requires_actual_execution": false,
+          "requires_persistent_write": false,
+          "step_ids": [
+            "step-intent-aion-215-001-001"
+          ],
+          "validated": true
+        },
+        "expected_effects": [
+          {
+            "artifact_id": "artifact-intent-aion-215-001",
+            "effect_fingerprint": "2eb9e362ad4b433b30437b46d67860c803fe203ec581801031964ea95d22e86a",
+            "effect_id": "effect-intent-aion-215-001-validate",
+            "effect_scope": "synthetic-artifact",
+            "effect_type": "validate",
+            "requires_actual_execution": false,
+            "requires_persistent_write": false,
+            "runtime_effect": false,
+            "schema_version": "aion-knowledge-tool-effect/v1",
+            "synthetic": true
+          }
+        ],
+        "forbidden_effects": [
+          {
+            "effect_fingerprint": "32ceb276e68771e64095bd06e46f25abeeddd1533054653e5e14dee1e22ab28e",
+            "effect_id": "forbidden-approve",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "approve",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "095767bf7a752cda40c0e2327f919d96e78f94678c4bc072029ceb3f33248207",
+            "effect_id": "forbidden-create",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "create",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "1540c1b9237cf64f6baa6de9856cda6622d97fd73326d0f76439e4dfc6a7747a",
+            "effect_id": "forbidden-delete",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "delete",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "bc81e5a9566e33318afcfdb40740b586681fc172b730a8fe6b268e719937576d",
+            "effect_id": "forbidden-deploy",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "deploy",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "ad5cad82a0bf6f8381e33c141387ff220716dd8bad9e1b7d814c28cfb8a0127d",
+            "effect_id": "forbidden-execute",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "execute",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "509939df622588c5fad1ab12c686e2bb5789e4fc8798e7a34b3e37af8c538fb5",
+            "effect_id": "forbidden-merge",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "merge",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "1362a789aa28b49f32f49e24dcc2f43569e234e89346c7dfb66e51c585ddc39c",
+            "effect_id": "forbidden-train",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "train",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "47ec10dd0857059f4f6c36df7563915408509bc7ee263e3ac773db3cea8b1914",
+            "effect_id": "forbidden-transmit",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "transmit",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "6801b567d4686f3bffaf2f81d1be5acf65c98a90fada28d1903c04dd8177152a",
+            "effect_id": "forbidden-update",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "update",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          }
+        ],
+        "idempotency_key": "idempotency-aion-215-001",
+        "input_payload": {
+          "artifact_kind": "knowledge-intelligence-tool-verification-fixture",
+          "case_id": "case-001",
+          "content_fingerprint": "0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        "intent_id": "intent-aion-215-001",
+        "manifest_id": "manifest-synthetic-json-validator",
+        "operation_class": "deterministic_validator",
+        "persistent_write_applied": false,
+        "postconditions": [
+          {
+            "check_name": "output-schema-validated",
+            "condition_fingerprint": "4c15c955a4bb7dc11305d07f028e66e80479a1a8b8227f0a934baacb38dd6bfd",
+            "condition_id": "postcondition-step-intent-aion-215-001-001-schema",
+            "reason_codes": [
+              "tool_schema_valid"
+            ],
+            "satisfied": true
+          },
+          {
+            "check_name": "effect-boundary-validated",
+            "condition_fingerprint": "538fc22d98a7d25494b64ef760c18e0a14019c747564c7af2e3814730b65a936",
+            "condition_id": "postcondition-step-intent-aion-215-001-001-effect",
+            "reason_codes": [
+              "tool_effect_forbidden_absent"
+            ],
+            "satisfied": true
+          }
+        ],
+        "preconditions": [
+          {
+            "check_name": "input-schema-validated",
+            "condition_fingerprint": "d1f32cbb4daf015c3c4533048c1ec35793eecaa4a977fe49b9d737f1f569991d",
+            "condition_id": "precondition-step-intent-aion-215-001-001-schema",
+            "reason_codes": [
+              "tool_schema_valid"
+            ],
+            "satisfied": true
+          },
+          {
+            "check_name": "permission-envelope-validated",
+            "condition_fingerprint": "f6f1a9424f64f7f96d1675cedbc741498db0151b6fad5c2fd876aa4674e19523",
+            "condition_id": "precondition-step-intent-aion-215-001-001-permission",
+            "reason_codes": [
+              "tool_permission_valid"
+            ],
+            "satisfied": true
+          },
+          {
+            "check_name": "idempotency-key-validated",
+            "condition_fingerprint": "0c8795f8d9bd389dc79dc3ba6659e4489af7c47465689c44fdee36c3d351376d",
+            "condition_id": "precondition-step-intent-aion-215-001-001-idempotency",
+            "reason_codes": [
+              "tool_idempotency_valid"
+            ],
+            "satisfied": true
+          }
+        ],
+        "required_verifier_roles": [
+          "schema_verifier",
+          "policy_verifier",
+          "effect_verifier",
+          "provenance_verifier",
+          "determinism_verifier"
+        ],
+        "risk_class": "low",
+        "rollback_plan": {
+          "available": true,
+          "reason_codes": [
+            "tool_rollback_valid"
+          ],
+          "requires_actual_execution": false,
+          "requires_persistent_write": false,
+          "rollback_fingerprint": "1051126a2f1a34e6f5f181ef39454b88728ff2e30fa385d610208c229a02e5c8",
+          "rollback_id": "rollback-step-intent-aion-215-001-001",
+          "step_ids": [
+            "step-intent-aion-215-001-001"
+          ],
+          "validated": true
+        },
+        "runtime_effect": false,
+        "schema_version": "aion-knowledge-tool-plan-step/v1",
+        "simulation_only": true,
+        "step_fingerprint": "d484799f6ea4bc6c7be5444a7d6b5d6b6caf24bf67b56228fd7dc8fa4c6aa181",
+        "step_id": "step-intent-aion-215-001-001",
+        "step_order": 1,
+        "tool_id": "synthetic.json-validator"
+      }
+    ]
+  },
   "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
   "read_only": true,
-  "record_kind": "tool_verification_session",
   "redacted": true,
+  "registry_snapshot": {
+    "in_memory_only": true,
+    "manifests": [
+      {
+        "actual_execution_enabled": false,
+        "actual_tool_executed": false,
+        "authorization_scope": "deterministic-tool-manifest-intent-plan-simulation-verification-attestation-effect-evidence-rollback-abstention-core",
+        "authorization_transaction_id": "AION-214-KI-0006",
+        "compensation_supported": true,
+        "declared_effects": [
+          {
+            "artifact_id": "artifact-manifest-synthetic-fixture-reader",
+            "effect_fingerprint": "99fc3301e04e74080f02975a40f8cfb2a123aa331270c666e5142af90a7e06cd",
+            "effect_id": "effect-manifest-synthetic-fixture-reader-read",
+            "effect_scope": "explicit-local-fixture",
+            "effect_type": "read",
+            "requires_actual_execution": false,
+            "requires_persistent_write": false,
+            "runtime_effect": false,
+            "schema_version": "aion-knowledge-tool-effect/v1",
+            "synthetic": true
+          }
+        ],
+        "deterministic_simulation_supported": true,
+        "formal_closeout_task": "AION-216",
+        "idempotency_supported": true,
+        "implementation_task": "AION-215",
+        "input_schema": {
+          "field_types": {
+            "case_id": "str",
+            "fixture_fingerprint": "str",
+            "record_count": "int"
+          },
+          "forbidden_fields": [
+            "credential",
+            "token",
+            "raw_prompt",
+            "source_patch"
+          ],
+          "optional_fields": [
+            "record_count"
+          ],
+          "required_fields": [
+            "fixture_fingerprint",
+            "case_id"
+          ],
+          "schema_fingerprint": "3382cdcbe0be031de567110b5b507751184641a3ad2d0541ca6a57a2b485cc88",
+          "schema_id": "schema-synthetic-fixture-read-input",
+          "schema_version": "aion-knowledge-tool-schema-descriptor/v1",
+          "strict": true
+        },
+        "manifest_fingerprint": "3410638de27e81f2e53d2e929f81a15051ff98c32ba85afac0ea655173a6cded",
+        "manifest_id": "manifest-synthetic-fixture-reader",
+        "operation_class": "local_fixture_read",
+        "output_schema": {
+          "field_types": {
+            "input_fingerprint": "str",
+            "plan_id": "str",
+            "status": "str",
+            "tool_id": "str",
+            "validated": "bool"
+          },
+          "forbidden_fields": [
+            "credential",
+            "token",
+            "raw_prompt",
+            "source_patch"
+          ],
+          "optional_fields": [
+            "plan_id"
+          ],
+          "required_fields": [
+            "status",
+            "input_fingerprint",
+            "tool_id",
+            "validated"
+          ],
+          "schema_fingerprint": "c8d413252c74900abec50605692ac199c73b97d048493e3ba116a594aa2b6115",
+          "schema_id": "schema-synthetic-validation-output",
+          "schema_version": "aion-knowledge-tool-schema-descriptor/v1",
+          "strict": true
+        },
+        "permission_envelope": {
+          "permission_fingerprint": "ccbfb712d32af9df4eaab66571ce0da504740dad83f40a34644b22cd4a0c201c",
+          "permission_ids": [
+            "explicit-local-fixture-read"
+          ],
+          "requires_approval_creation": false,
+          "requires_browser": false,
+          "requires_connector": false,
+          "requires_deployment": false,
+          "requires_dns": false,
+          "requires_filesystem_read": true,
+          "requires_filesystem_write": false,
+          "requires_git_write": false,
+          "requires_local_fixture_read": true,
+          "requires_model_provider": false,
+          "requires_network": false,
+          "requires_persistence": false,
+          "requires_shell": false,
+          "requires_source_write": false,
+          "requires_subprocess": false,
+          "schema_version": "aion-knowledge-tool-permission-envelope/v1"
+        },
+        "persistent_write_applied": false,
+        "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+        "prohibited_effects": [
+          {
+            "effect_fingerprint": "32ceb276e68771e64095bd06e46f25abeeddd1533054653e5e14dee1e22ab28e",
+            "effect_id": "forbidden-approve",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "approve",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "095767bf7a752cda40c0e2327f919d96e78f94678c4bc072029ceb3f33248207",
+            "effect_id": "forbidden-create",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "create",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "1540c1b9237cf64f6baa6de9856cda6622d97fd73326d0f76439e4dfc6a7747a",
+            "effect_id": "forbidden-delete",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "delete",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "bc81e5a9566e33318afcfdb40740b586681fc172b730a8fe6b268e719937576d",
+            "effect_id": "forbidden-deploy",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "deploy",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "ad5cad82a0bf6f8381e33c141387ff220716dd8bad9e1b7d814c28cfb8a0127d",
+            "effect_id": "forbidden-execute",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "execute",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "509939df622588c5fad1ab12c686e2bb5789e4fc8798e7a34b3e37af8c538fb5",
+            "effect_id": "forbidden-merge",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "merge",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "1362a789aa28b49f32f49e24dcc2f43569e234e89346c7dfb66e51c585ddc39c",
+            "effect_id": "forbidden-train",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "train",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "47ec10dd0857059f4f6c36df7563915408509bc7ee263e3ac773db3cea8b1914",
+            "effect_id": "forbidden-transmit",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "transmit",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "6801b567d4686f3bffaf2f81d1be5acf65c98a90fada28d1903c04dd8177152a",
+            "effect_id": "forbidden-update",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "update",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          }
+        ],
+        "read_only": true,
+        "redacted": true,
+        "risk_class": "moderate",
+        "rollback_supported": true,
+        "runtime_effect": false,
+        "schema_version": "aion-knowledge-tool-manifest/v1",
+        "synthetic": true,
+        "tool_id": "synthetic.fixture-reader",
+        "tool_version": "1.0.0"
+      },
+      {
+        "actual_execution_enabled": false,
+        "actual_tool_executed": false,
+        "authorization_scope": "deterministic-tool-manifest-intent-plan-simulation-verification-attestation-effect-evidence-rollback-abstention-core",
+        "authorization_transaction_id": "AION-214-KI-0006",
+        "compensation_supported": true,
+        "declared_effects": [
+          {
+            "artifact_id": "artifact-manifest-synthetic-json-parser",
+            "effect_fingerprint": "7f80f0c9f53a26686863132e408615544712b14aab6106ec16ef6a08d3ebe06c",
+            "effect_id": "effect-manifest-synthetic-json-parser-parse",
+            "effect_scope": "synthetic-artifact",
+            "effect_type": "parse",
+            "requires_actual_execution": false,
+            "requires_persistent_write": false,
+            "runtime_effect": false,
+            "schema_version": "aion-knowledge-tool-effect/v1",
+            "synthetic": true
+          }
+        ],
+        "deterministic_simulation_supported": true,
+        "formal_closeout_task": "AION-216",
+        "idempotency_supported": true,
+        "implementation_task": "AION-215",
+        "input_schema": {
+          "field_types": {
+            "artifact_kind": "str",
+            "content_fingerprint": "str",
+            "parse_mode": "str"
+          },
+          "forbidden_fields": [
+            "credential",
+            "token",
+            "raw_prompt",
+            "source_patch"
+          ],
+          "optional_fields": [
+            "parse_mode"
+          ],
+          "required_fields": [
+            "artifact_kind",
+            "content_fingerprint"
+          ],
+          "schema_fingerprint": "5e21709395219366cf6b62391c313e7b36c41616d89114599753929efa82b663",
+          "schema_id": "schema-synthetic-parser-input",
+          "schema_version": "aion-knowledge-tool-schema-descriptor/v1",
+          "strict": true
+        },
+        "manifest_fingerprint": "7121ede9191fc32b51da22a29c2e6e44bba3adfe7d5118f6bd104a6829a87dfb",
+        "manifest_id": "manifest-synthetic-json-parser",
+        "operation_class": "deterministic_parser",
+        "output_schema": {
+          "field_types": {
+            "input_fingerprint": "str",
+            "plan_id": "str",
+            "status": "str",
+            "tool_id": "str",
+            "validated": "bool"
+          },
+          "forbidden_fields": [
+            "credential",
+            "token",
+            "raw_prompt",
+            "source_patch"
+          ],
+          "optional_fields": [
+            "plan_id"
+          ],
+          "required_fields": [
+            "status",
+            "input_fingerprint",
+            "tool_id",
+            "validated"
+          ],
+          "schema_fingerprint": "c8d413252c74900abec50605692ac199c73b97d048493e3ba116a594aa2b6115",
+          "schema_id": "schema-synthetic-validation-output",
+          "schema_version": "aion-knowledge-tool-schema-descriptor/v1",
+          "strict": true
+        },
+        "permission_envelope": {
+          "permission_fingerprint": "b1621380d5ad9412bf1ca691424941aba7df38322bf7b8625851e22602d84f36",
+          "permission_ids": [],
+          "requires_approval_creation": false,
+          "requires_browser": false,
+          "requires_connector": false,
+          "requires_deployment": false,
+          "requires_dns": false,
+          "requires_filesystem_read": false,
+          "requires_filesystem_write": false,
+          "requires_git_write": false,
+          "requires_local_fixture_read": false,
+          "requires_model_provider": false,
+          "requires_network": false,
+          "requires_persistence": false,
+          "requires_shell": false,
+          "requires_source_write": false,
+          "requires_subprocess": false,
+          "schema_version": "aion-knowledge-tool-permission-envelope/v1"
+        },
+        "persistent_write_applied": false,
+        "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+        "prohibited_effects": [
+          {
+            "effect_fingerprint": "32ceb276e68771e64095bd06e46f25abeeddd1533054653e5e14dee1e22ab28e",
+            "effect_id": "forbidden-approve",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "approve",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "095767bf7a752cda40c0e2327f919d96e78f94678c4bc072029ceb3f33248207",
+            "effect_id": "forbidden-create",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "create",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "1540c1b9237cf64f6baa6de9856cda6622d97fd73326d0f76439e4dfc6a7747a",
+            "effect_id": "forbidden-delete",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "delete",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "bc81e5a9566e33318afcfdb40740b586681fc172b730a8fe6b268e719937576d",
+            "effect_id": "forbidden-deploy",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "deploy",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "ad5cad82a0bf6f8381e33c141387ff220716dd8bad9e1b7d814c28cfb8a0127d",
+            "effect_id": "forbidden-execute",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "execute",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "509939df622588c5fad1ab12c686e2bb5789e4fc8798e7a34b3e37af8c538fb5",
+            "effect_id": "forbidden-merge",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "merge",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "1362a789aa28b49f32f49e24dcc2f43569e234e89346c7dfb66e51c585ddc39c",
+            "effect_id": "forbidden-train",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "train",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "47ec10dd0857059f4f6c36df7563915408509bc7ee263e3ac773db3cea8b1914",
+            "effect_id": "forbidden-transmit",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "transmit",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "6801b567d4686f3bffaf2f81d1be5acf65c98a90fada28d1903c04dd8177152a",
+            "effect_id": "forbidden-update",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "update",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          }
+        ],
+        "read_only": true,
+        "redacted": true,
+        "risk_class": "minimal",
+        "rollback_supported": true,
+        "runtime_effect": false,
+        "schema_version": "aion-knowledge-tool-manifest/v1",
+        "synthetic": true,
+        "tool_id": "synthetic.json-parser",
+        "tool_version": "1.0.0"
+      },
+      {
+        "actual_execution_enabled": false,
+        "actual_tool_executed": false,
+        "authorization_scope": "deterministic-tool-manifest-intent-plan-simulation-verification-attestation-effect-evidence-rollback-abstention-core",
+        "authorization_transaction_id": "AION-214-KI-0006",
+        "compensation_supported": true,
+        "declared_effects": [
+          {
+            "artifact_id": "artifact-manifest-synthetic-json-validator",
+            "effect_fingerprint": "ae49414bdb326fd043208ea11bd3fcf7207d04ed90febc5bd9c23bf301236628",
+            "effect_id": "effect-manifest-synthetic-json-validator-validate",
+            "effect_scope": "synthetic-artifact",
+            "effect_type": "validate",
+            "requires_actual_execution": false,
+            "requires_persistent_write": false,
+            "runtime_effect": false,
+            "schema_version": "aion-knowledge-tool-effect/v1",
+            "synthetic": true
+          }
+        ],
+        "deterministic_simulation_supported": true,
+        "formal_closeout_task": "AION-216",
+        "idempotency_supported": true,
+        "implementation_task": "AION-215",
+        "input_schema": {
+          "field_types": {
+            "artifact_kind": "str",
+            "case_id": "str",
+            "content_fingerprint": "str",
+            "plan_id": "str"
+          },
+          "forbidden_fields": [
+            "credential",
+            "token",
+            "raw_prompt",
+            "source_patch"
+          ],
+          "optional_fields": [
+            "plan_id",
+            "case_id"
+          ],
+          "required_fields": [
+            "artifact_kind",
+            "content_fingerprint"
+          ],
+          "schema_fingerprint": "05e03dd302b7e8091c478c5f1da74d43e1d17098a2eb58ae3c9402802a87cca3",
+          "schema_id": "schema-synthetic-validation-input",
+          "schema_version": "aion-knowledge-tool-schema-descriptor/v1",
+          "strict": true
+        },
+        "manifest_fingerprint": "8f6237a0f7c152c914c0bcfbc7321193625596d91416d6de3aad495bf162bc66",
+        "manifest_id": "manifest-synthetic-json-validator",
+        "operation_class": "deterministic_validator",
+        "output_schema": {
+          "field_types": {
+            "input_fingerprint": "str",
+            "plan_id": "str",
+            "status": "str",
+            "tool_id": "str",
+            "validated": "bool"
+          },
+          "forbidden_fields": [
+            "credential",
+            "token",
+            "raw_prompt",
+            "source_patch"
+          ],
+          "optional_fields": [
+            "plan_id"
+          ],
+          "required_fields": [
+            "status",
+            "input_fingerprint",
+            "tool_id",
+            "validated"
+          ],
+          "schema_fingerprint": "c8d413252c74900abec50605692ac199c73b97d048493e3ba116a594aa2b6115",
+          "schema_id": "schema-synthetic-validation-output",
+          "schema_version": "aion-knowledge-tool-schema-descriptor/v1",
+          "strict": true
+        },
+        "permission_envelope": {
+          "permission_fingerprint": "b1621380d5ad9412bf1ca691424941aba7df38322bf7b8625851e22602d84f36",
+          "permission_ids": [],
+          "requires_approval_creation": false,
+          "requires_browser": false,
+          "requires_connector": false,
+          "requires_deployment": false,
+          "requires_dns": false,
+          "requires_filesystem_read": false,
+          "requires_filesystem_write": false,
+          "requires_git_write": false,
+          "requires_local_fixture_read": false,
+          "requires_model_provider": false,
+          "requires_network": false,
+          "requires_persistence": false,
+          "requires_shell": false,
+          "requires_source_write": false,
+          "requires_subprocess": false,
+          "schema_version": "aion-knowledge-tool-permission-envelope/v1"
+        },
+        "persistent_write_applied": false,
+        "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+        "prohibited_effects": [
+          {
+            "effect_fingerprint": "32ceb276e68771e64095bd06e46f25abeeddd1533054653e5e14dee1e22ab28e",
+            "effect_id": "forbidden-approve",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "approve",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "095767bf7a752cda40c0e2327f919d96e78f94678c4bc072029ceb3f33248207",
+            "effect_id": "forbidden-create",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "create",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "1540c1b9237cf64f6baa6de9856cda6622d97fd73326d0f76439e4dfc6a7747a",
+            "effect_id": "forbidden-delete",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "delete",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "bc81e5a9566e33318afcfdb40740b586681fc172b730a8fe6b268e719937576d",
+            "effect_id": "forbidden-deploy",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "deploy",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "ad5cad82a0bf6f8381e33c141387ff220716dd8bad9e1b7d814c28cfb8a0127d",
+            "effect_id": "forbidden-execute",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "execute",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "509939df622588c5fad1ab12c686e2bb5789e4fc8798e7a34b3e37af8c538fb5",
+            "effect_id": "forbidden-merge",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "merge",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "1362a789aa28b49f32f49e24dcc2f43569e234e89346c7dfb66e51c585ddc39c",
+            "effect_id": "forbidden-train",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "train",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "47ec10dd0857059f4f6c36df7563915408509bc7ee263e3ac773db3cea8b1914",
+            "effect_id": "forbidden-transmit",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "transmit",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          },
+          {
+            "effect_fingerprint": "6801b567d4686f3bffaf2f81d1be5acf65c98a90fada28d1903c04dd8177152a",
+            "effect_id": "forbidden-update",
+            "effect_scope": "runtime-boundary",
+            "effect_type": "update",
+            "reason_code": "tool_actual_execution_blocked",
+            "schema_version": "aion-knowledge-tool-effect/v1"
+          }
+        ],
+        "read_only": true,
+        "redacted": true,
+        "risk_class": "low",
+        "rollback_supported": true,
+        "runtime_effect": false,
+        "schema_version": "aion-knowledge-tool-manifest/v1",
+        "synthetic": true,
+        "tool_id": "synthetic.json-validator",
+        "tool_version": "1.0.0"
+      }
+    ],
+    "persistent_write_applied": false,
+    "registry_fingerprint": "de71ee61ece9ca8aed489e3fa3485e7742f442157b877fed42a6f25ec49574eb",
+    "registry_id": "registry-aion-215-default",
+    "registry_version": 1,
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-tool-registry/v1",
+    "schemas": [
+      {
+        "field_types": {
+          "case_id": "str",
+          "fixture_fingerprint": "str",
+          "record_count": "int"
+        },
+        "forbidden_fields": [
+          "credential",
+          "token",
+          "raw_prompt",
+          "source_patch"
+        ],
+        "optional_fields": [
+          "record_count"
+        ],
+        "required_fields": [
+          "fixture_fingerprint",
+          "case_id"
+        ],
+        "schema_fingerprint": "3382cdcbe0be031de567110b5b507751184641a3ad2d0541ca6a57a2b485cc88",
+        "schema_id": "schema-synthetic-fixture-read-input",
+        "schema_version": "aion-knowledge-tool-schema-descriptor/v1",
+        "strict": true
+      },
+      {
+        "field_types": {
+          "artifact_kind": "str",
+          "content_fingerprint": "str",
+          "parse_mode": "str"
+        },
+        "forbidden_fields": [
+          "credential",
+          "token",
+          "raw_prompt",
+          "source_patch"
+        ],
+        "optional_fields": [
+          "parse_mode"
+        ],
+        "required_fields": [
+          "artifact_kind",
+          "content_fingerprint"
+        ],
+        "schema_fingerprint": "5e21709395219366cf6b62391c313e7b36c41616d89114599753929efa82b663",
+        "schema_id": "schema-synthetic-parser-input",
+        "schema_version": "aion-knowledge-tool-schema-descriptor/v1",
+        "strict": true
+      },
+      {
+        "field_types": {
+          "artifact_kind": "str",
+          "case_id": "str",
+          "content_fingerprint": "str",
+          "plan_id": "str"
+        },
+        "forbidden_fields": [
+          "credential",
+          "token",
+          "raw_prompt",
+          "source_patch"
+        ],
+        "optional_fields": [
+          "plan_id",
+          "case_id"
+        ],
+        "required_fields": [
+          "artifact_kind",
+          "content_fingerprint"
+        ],
+        "schema_fingerprint": "05e03dd302b7e8091c478c5f1da74d43e1d17098a2eb58ae3c9402802a87cca3",
+        "schema_id": "schema-synthetic-validation-input",
+        "schema_version": "aion-knowledge-tool-schema-descriptor/v1",
+        "strict": true
+      },
+      {
+        "field_types": {
+          "input_fingerprint": "str",
+          "plan_id": "str",
+          "status": "str",
+          "tool_id": "str",
+          "validated": "bool"
+        },
+        "forbidden_fields": [
+          "credential",
+          "token",
+          "raw_prompt",
+          "source_patch"
+        ],
+        "optional_fields": [
+          "plan_id"
+        ],
+        "required_fields": [
+          "status",
+          "input_fingerprint",
+          "tool_id",
+          "validated"
+        ],
+        "schema_fingerprint": "c8d413252c74900abec50605692ac199c73b97d048493e3ba116a594aa2b6115",
+        "schema_id": "schema-synthetic-validation-output",
+        "schema_version": "aion-knowledge-tool-schema-descriptor/v1",
+        "strict": true
+      }
+    ]
+  },
+  "resource_usage": {
+    "actual_tool_executions": 0,
+    "approvals_created": 0,
+    "attestations": 5,
+    "autonomous_actions": 0,
+    "belief_mutations": 0,
+    "browser_actions": 0,
+    "connector_calls": 0,
+    "deployments": 0,
+    "dns_resolutions": 0,
+    "filesystem_mutations": 0,
+    "fixture_bytes": 0,
+    "fixture_records": 0,
+    "git_operations": 0,
+    "high_stakes_actions": 0,
+    "knowledge_promotions": 0,
+    "model_provider_calls": 0,
+    "model_weight_changes": 0,
+    "network_calls": 0,
+    "output_artifacts": 1,
+    "persistent_tool_state_write_batch": 0,
+    "runtime_created_pull_requests": 0,
+    "shell_commands": 0,
+    "simulated_sessions": 1,
+    "source_mutations": 0,
+    "subprocess_executions": 0,
+    "tool_candidates": 1,
+    "tool_manifests": 3,
+    "tool_steps": 1
+  },
   "runtime_effect": false,
-  "session_fingerprint": "sha256:session",
-  "session_id": "session-0001",
-  "simulation": "simulation-0001",
-  "synthetic": true
+  "schema_version": "aion-knowledge-tool-verification-session/v1",
+  "session_fingerprint": "ff6eb966db1a5b59c8c694291f360981701edfe31199e61eec6e32be93b6c220",
+  "session_id": "session-intent-aion-215-001",
+  "simulation": {
+    "actual_tool_executed": false,
+    "artifacts": [
+      {
+        "artifact_fingerprint": "55fde97ac54f7998e4459eb8d73f7e7d10b19c5f9cfc13f6ac8b64600fe55005",
+        "artifact_id": "artifact-step-intent-aion-215-001-001-001",
+        "canonical_output": {
+          "input_fingerprint": "636cad1256d14c43fab1cf6297ef72efdecc1aa13449795255a2337b6c4c39f1",
+          "plan_id": "plan-intent-aion-215-001",
+          "status": "synthetic_simulation_only",
+          "tool_id": "synthetic.json-validator",
+          "validated": true
+        },
+        "output_fingerprint": "f8422fce3c329915db3abf1fcd24b3a517f43e7aaed63782ea5edce135ff2394",
+        "output_schema_id": "schema-synthetic-validation-output",
+        "redacted": true,
+        "runtime_effect": false,
+        "schema_version": "aion-knowledge-tool-simulation-artifact/v1",
+        "step_id": "step-intent-aion-215-001-001",
+        "synthetic": true
+      }
+    ],
+    "canonical_output": {
+      "input_fingerprint": "636cad1256d14c43fab1cf6297ef72efdecc1aa13449795255a2337b6c4c39f1",
+      "plan_id": "plan-intent-aion-215-001",
+      "status": "synthetic_simulation_only",
+      "tool_id": "synthetic.json-validator",
+      "validated": true
+    },
+    "expected_effects_satisfied": true,
+    "forbidden_effects_absent": true,
+    "observed_effects": [
+      {
+        "artifact_id": "artifact-intent-aion-215-001",
+        "effect_fingerprint": "2eb9e362ad4b433b30437b46d67860c803fe203ec581801031964ea95d22e86a",
+        "effect_id": "effect-intent-aion-215-001-validate",
+        "effect_scope": "synthetic-artifact",
+        "effect_type": "validate",
+        "requires_actual_execution": false,
+        "requires_persistent_write": false,
+        "runtime_effect": false,
+        "schema_version": "aion-knowledge-tool-effect/v1",
+        "synthetic": true
+      }
+    ],
+    "output_fingerprint": "f8422fce3c329915db3abf1fcd24b3a517f43e7aaed63782ea5edce135ff2394",
+    "persistent_write_applied": false,
+    "plan_id": "plan-intent-aion-215-001",
+    "reason_codes": [
+      "tool_synthetic_simulation_passed",
+      "tool_output_canonicalized",
+      "tool_artifact_fingerprinted",
+      "tool_effect_expected_matched",
+      "tool_effect_forbidden_absent"
+    ],
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-tool-simulation/v1",
+    "simulation_fingerprint": "5b1ddfa60acf19b7f97da46d9bae4f32e2ca652aceb7c1fbdaeb875eac8aa79d",
+    "simulation_id": "simulation-plan-intent-aion-215-001",
+    "status": "simulation_passed"
+  },
+  "synthetic": true,
+  "tool_verification_fabric_authorized": true,
+  "tool_verification_fabric_implemented": true,
+  "tool_verification_fabric_runtime_enabled": false,
+  "tool_verification_fabric_state": "implemented_deterministic_simulation_verification_attestation_persistent_write_disabled"
 }

@@ -22,6 +22,14 @@ from pathlib import Path
 ROOT = Path(os.environ["AION_REPO_ROOT"])
 EXPECTED_TAG = "105fe29348160a2218ac095cfffadcb6f234421f"
 EPIS_STATE = "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout"
+DOMAIN_EXPERT_STATES = {
+    "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
+    "tool_verification_fabric_authorized_not_implemented",
+    "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
+}
+TOOL_VERIFICATION_IMPLEMENTED_STATE = (
+    "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
+)
 ALLOWED_PREFIXES = ("docs/", "examples/", "operator-console-static/", "scripts/", "services/brain-api/tests/")
 ALLOWED_EXACT = {
     "README.md",
@@ -51,6 +59,7 @@ CLAIM_GRAPH_CONTEXT = (
 )
 EPISTEMIC_ASSESSMENT_CONTEXT = (
     program_state == EPIS_STATE
+    or program_state in DOMAIN_EXPERT_STATES
     or os.environ.get("AION_EPISTEMIC_ASSESSMENT_IMPLEMENTATION_CONTEXT") == "1"
     or os.environ.get("AION_AGGREGATE_GATE_RUNNING") == "1"
     or os.environ.get("AION_CHECK_RUNNING") == "1"
@@ -86,6 +95,19 @@ DOMAIN_EXPERT_MESH_SOURCE = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_profiles.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_routing.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_synthesis.py",
+}
+AION215_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_tool_verification.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_attestation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_effects.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_manifests.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_planning.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_simulation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification_fabric.py",
 }
 PROHIBITED_PREFIXES = (
     ".github/workflows/",
@@ -156,11 +178,9 @@ for parts in entries:
             continue
         if EPISTEMIC_ASSESSMENT_CONTEXT and normalized in EPISTEMIC_ASSESSMENT_SOURCE:
             continue
-        if (
-            program_state
-            == "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout"
-            and normalized in DOMAIN_EXPERT_MESH_SOURCE
-        ):
+        if program_state in DOMAIN_EXPERT_STATES and normalized in DOMAIN_EXPERT_MESH_SOURCE:
+            continue
+        if program_state == TOOL_VERIFICATION_IMPLEMENTED_STATE and normalized in AION215_SOURCE:
             continue
         if normalized.startswith(PROHIBITED_PREFIXES) and normalized not in ALLOWED_EXACT:
             raise SystemExit(f"runtime/source/workflow path changed on AION-206: {normalized}")

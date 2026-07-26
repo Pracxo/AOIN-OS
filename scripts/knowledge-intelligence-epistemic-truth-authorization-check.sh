@@ -100,7 +100,7 @@ post_aion212 = (
     ROOT / "examples/knowledge-intelligence/epistemic-assessment-operator-evaluation-report.json"
 ).exists()
 if post_aion212:
-    post_aion214 = program["program_state"] == "tool_verification_fabric_authorized_not_implemented"
+    post_aion214 = program["program_state"] in {"tool_verification_fabric_authorized_not_implemented", "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"}
     expected_auth = SUCCESSOR_AUTH_ID if post_aion214 else NEXT_AUTH_ID
     expected_scope = SUCCESSOR_SCOPE if post_aion214 else NEXT_SCOPE
     expected_candidate = (

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -15,10 +16,33 @@ AION215_SOURCE = (
     "services/brain-api/src/aion_brain/knowledge_intelligence/tool_integrity.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/tool_evidence.py",
 )
+PROHIBITED_AION215_RUNTIME_SURFACES = (
+    "services/brain-api/src/aion_brain/api/tool_verification.py",
+    "services/brain-api/src/aion_brain/api/knowledge_tool_verification.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_runtime.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_state_repository.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_database.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/tool_worker.py",
+)
 
 
-def test_aion_214_does_not_create_aion_215_runtime_source() -> None:
+def test_aion_215_source_is_exact_and_runtime_surfaces_are_absent() -> None:
+    program = json.loads(
+        (REPO_ROOT / "docs/knowledge-intelligence/program-ledger.json").read_text()
+    )
+    assert (
+        program["program_state"]
+        == "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
+    )
+    assert program["tool_verification_fabric_implemented"] is True
+    assert program["tool_verification_fabric_runtime_enabled"] is False
+    assert program["actual_tool_execution_enabled"] is False
+    assert program["persistent_tool_state_write_enabled"] is False
+
     for relative in AION215_SOURCE:
+        assert (REPO_ROOT / relative).is_file(), relative
+
+    for relative in PROHIBITED_AION215_RUNTIME_SURFACES:
         assert not (REPO_ROOT / relative).exists(), relative
 
 

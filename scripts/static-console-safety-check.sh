@@ -220,6 +220,7 @@ allowed_authorization_demo_names = {
     "production-auth-request-identity-stabilization-runtime-hold.json",
     "actor-context-trust-boundary.json",
     "actor-context-runtime-hold.json",
+    "knowledge-intelligence-program.json",
     "knowledge-intelligence-research-authorization.json",
     "knowledge-intelligence-research-plane.json",
     "knowledge-intelligence-research-runtime-hold.json",
@@ -285,6 +286,12 @@ def walk(value: object, path: Path) -> None:
     elif isinstance(value, str):
         lowered = value.lower()
         for marker in unsafe_markers:
+            if (
+                marker == "raw_prompt"
+                and path.name == "knowledge-intelligence-tool-manifest.json"
+                and lowered == "raw_prompt"
+            ):
+                continue
             if marker == "authorization" and path.name in allowed_authorization_demo_names:
                 continue
             if (

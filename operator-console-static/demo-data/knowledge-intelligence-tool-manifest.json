@@ -1,41 +1,187 @@
 {
   "actual_execution_enabled": false,
   "actual_tool_executed": false,
-  "approval_record_id": "AION-214-KI-0006",
   "authorization_scope": "deterministic-tool-manifest-intent-plan-simulation-verification-attestation-effect-evidence-rollback-abstention-core",
   "authorization_transaction_id": "AION-214-KI-0006",
-  "belief_mutated": false,
-  "compensation_supported": false,
-  "declared_effect_types": [
-    "validate"
+  "compensation_supported": true,
+  "declared_effects": [
+    {
+      "artifact_id": "artifact-manifest-synthetic-json-validator",
+      "effect_fingerprint": "ae49414bdb326fd043208ea11bd3fcf7207d04ed90febc5bd9c23bf301236628",
+      "effect_id": "effect-manifest-synthetic-json-validator-validate",
+      "effect_scope": "synthetic-artifact",
+      "effect_type": "validate",
+      "requires_actual_execution": false,
+      "requires_persistent_write": false,
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-tool-effect/v1",
+      "synthetic": true
+    }
   ],
   "deterministic_simulation_supported": true,
   "formal_closeout_task": "AION-216",
   "idempotency_supported": true,
   "implementation_task": "AION-215",
-  "input_schema_fingerprint": "sha256:synthetic-input-schema",
-  "knowledge_promoted": false,
-  "manifest_fingerprint": "sha256:synthetic-manifest",
+  "input_schema": {
+    "field_types": {
+      "artifact_kind": "str",
+      "case_id": "str",
+      "content_fingerprint": "str",
+      "plan_id": "str"
+    },
+    "forbidden_fields": [
+      "credential",
+      "token",
+      "raw_prompt",
+      "source_patch"
+    ],
+    "optional_fields": [
+      "plan_id",
+      "case_id"
+    ],
+    "required_fields": [
+      "artifact_kind",
+      "content_fingerprint"
+    ],
+    "schema_fingerprint": "05e03dd302b7e8091c478c5f1da74d43e1d17098a2eb58ae3c9402802a87cca3",
+    "schema_id": "schema-synthetic-validation-input",
+    "schema_version": "aion-knowledge-tool-schema-descriptor/v1",
+    "strict": true
+  },
+  "manifest_fingerprint": "8f6237a0f7c152c914c0bcfbc7321193625596d91416d6de3aad495bf162bc66",
+  "manifest_id": "manifest-synthetic-json-validator",
   "operation_class": "deterministic_validator",
-  "output_schema_fingerprint": "sha256:synthetic-output-schema",
-  "permission_requirements": [],
+  "output_schema": {
+    "field_types": {
+      "input_fingerprint": "str",
+      "plan_id": "str",
+      "status": "str",
+      "tool_id": "str",
+      "validated": "bool"
+    },
+    "forbidden_fields": [
+      "credential",
+      "token",
+      "raw_prompt",
+      "source_patch"
+    ],
+    "optional_fields": [
+      "plan_id"
+    ],
+    "required_fields": [
+      "status",
+      "input_fingerprint",
+      "tool_id",
+      "validated"
+    ],
+    "schema_fingerprint": "c8d413252c74900abec50605692ac199c73b97d048493e3ba116a594aa2b6115",
+    "schema_id": "schema-synthetic-validation-output",
+    "schema_version": "aion-knowledge-tool-schema-descriptor/v1",
+    "strict": true
+  },
+  "permission_envelope": {
+    "permission_fingerprint": "b1621380d5ad9412bf1ca691424941aba7df38322bf7b8625851e22602d84f36",
+    "permission_ids": [],
+    "requires_approval_creation": false,
+    "requires_browser": false,
+    "requires_connector": false,
+    "requires_deployment": false,
+    "requires_dns": false,
+    "requires_filesystem_read": false,
+    "requires_filesystem_write": false,
+    "requires_git_write": false,
+    "requires_local_fixture_read": false,
+    "requires_model_provider": false,
+    "requires_network": false,
+    "requires_persistence": false,
+    "requires_shell": false,
+    "requires_source_write": false,
+    "requires_subprocess": false,
+    "schema_version": "aion-knowledge-tool-permission-envelope/v1"
+  },
   "persistent_write_applied": false,
   "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
-  "prohibited_effect_types": [
-    "execute",
-    "transmit",
-    "approve",
-    "merge",
-    "deploy",
-    "train"
+  "prohibited_effects": [
+    {
+      "effect_fingerprint": "32ceb276e68771e64095bd06e46f25abeeddd1533054653e5e14dee1e22ab28e",
+      "effect_id": "forbidden-approve",
+      "effect_scope": "runtime-boundary",
+      "effect_type": "approve",
+      "reason_code": "tool_actual_execution_blocked",
+      "schema_version": "aion-knowledge-tool-effect/v1"
+    },
+    {
+      "effect_fingerprint": "095767bf7a752cda40c0e2327f919d96e78f94678c4bc072029ceb3f33248207",
+      "effect_id": "forbidden-create",
+      "effect_scope": "runtime-boundary",
+      "effect_type": "create",
+      "reason_code": "tool_actual_execution_blocked",
+      "schema_version": "aion-knowledge-tool-effect/v1"
+    },
+    {
+      "effect_fingerprint": "1540c1b9237cf64f6baa6de9856cda6622d97fd73326d0f76439e4dfc6a7747a",
+      "effect_id": "forbidden-delete",
+      "effect_scope": "runtime-boundary",
+      "effect_type": "delete",
+      "reason_code": "tool_actual_execution_blocked",
+      "schema_version": "aion-knowledge-tool-effect/v1"
+    },
+    {
+      "effect_fingerprint": "bc81e5a9566e33318afcfdb40740b586681fc172b730a8fe6b268e719937576d",
+      "effect_id": "forbidden-deploy",
+      "effect_scope": "runtime-boundary",
+      "effect_type": "deploy",
+      "reason_code": "tool_actual_execution_blocked",
+      "schema_version": "aion-knowledge-tool-effect/v1"
+    },
+    {
+      "effect_fingerprint": "ad5cad82a0bf6f8381e33c141387ff220716dd8bad9e1b7d814c28cfb8a0127d",
+      "effect_id": "forbidden-execute",
+      "effect_scope": "runtime-boundary",
+      "effect_type": "execute",
+      "reason_code": "tool_actual_execution_blocked",
+      "schema_version": "aion-knowledge-tool-effect/v1"
+    },
+    {
+      "effect_fingerprint": "509939df622588c5fad1ab12c686e2bb5789e4fc8798e7a34b3e37af8c538fb5",
+      "effect_id": "forbidden-merge",
+      "effect_scope": "runtime-boundary",
+      "effect_type": "merge",
+      "reason_code": "tool_actual_execution_blocked",
+      "schema_version": "aion-knowledge-tool-effect/v1"
+    },
+    {
+      "effect_fingerprint": "1362a789aa28b49f32f49e24dcc2f43569e234e89346c7dfb66e51c585ddc39c",
+      "effect_id": "forbidden-train",
+      "effect_scope": "runtime-boundary",
+      "effect_type": "train",
+      "reason_code": "tool_actual_execution_blocked",
+      "schema_version": "aion-knowledge-tool-effect/v1"
+    },
+    {
+      "effect_fingerprint": "47ec10dd0857059f4f6c36df7563915408509bc7ee263e3ac773db3cea8b1914",
+      "effect_id": "forbidden-transmit",
+      "effect_scope": "runtime-boundary",
+      "effect_type": "transmit",
+      "reason_code": "tool_actual_execution_blocked",
+      "schema_version": "aion-knowledge-tool-effect/v1"
+    },
+    {
+      "effect_fingerprint": "6801b567d4686f3bffaf2f81d1be5acf65c98a90fada28d1903c04dd8177152a",
+      "effect_id": "forbidden-update",
+      "effect_scope": "runtime-boundary",
+      "effect_type": "update",
+      "reason_code": "tool_actual_execution_blocked",
+      "schema_version": "aion-knowledge-tool-effect/v1"
+    }
   ],
   "read_only": true,
-  "record_kind": "tool_capability_manifest",
   "redacted": true,
   "risk_class": "low",
-  "rollback_supported": false,
+  "rollback_supported": true,
   "runtime_effect": false,
+  "schema_version": "aion-knowledge-tool-manifest/v1",
   "synthetic": true,
-  "tool_id": "synthetic.validator",
+  "tool_id": "synthetic.json-validator",
   "tool_version": "1.0.0"
 }

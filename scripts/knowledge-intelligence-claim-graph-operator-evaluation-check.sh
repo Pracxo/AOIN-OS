@@ -280,7 +280,11 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
     assert closed_record["evaluation_used_as_approval"] is False
     if post_aion212:
         post_aion214 = (
-            program["program_state"] == "tool_verification_fabric_authorized_not_implemented"
+            program["program_state"]
+            in {
+                "tool_verification_fabric_authorized_not_implemented",
+                "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
+            }
         )
         expected_active_auth = SUCCESSOR_AUTH if post_aion214 else POST_AUTH
         expected_active_scope = SUCCESSOR_SCOPE if post_aion214 else POST_SCOPE
@@ -329,6 +333,7 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
             "domain_expert_mesh_authorized_not_implemented",
             "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
             "tool_verification_fabric_authorized_not_implemented",
+    "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
         }
         assert program["active_knowledge_implementation_authorization"] == expected_active_auth
         assert program["active_knowledge_implementation_task"] == expected_active_task
@@ -343,7 +348,18 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
         if post_aion214:
             assert program["domain_expert_mesh_operator_evaluation_passed"] is True
             assert program["tool_verification_fabric_authorized"] is True
-            assert program["tool_verification_fabric_implemented"] is False
+            assert program["tool_verification_fabric_implemented"] is (
+                program["program_state"]
+                == "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
+            )
+            if (
+                program["program_state"]
+                == "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
+            ):
+                assert program["tool_verification_fabric_state"] == (
+                    "implemented_deterministic_simulation_verification_attestation_persistent_write_disabled"
+                )
+                assert program["tool_verification_fabric_runtime_enabled"] is False
             assert program["actual_tool_execution_enabled"] is False
     else:
         assert active_record["authorization_transaction_id"] == NEXT_AUTH
