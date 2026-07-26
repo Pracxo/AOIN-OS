@@ -10,6 +10,14 @@ PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 export AION_REPO_ROOT="$ROOT_DIR"
 
+is_nested_gate_context() {
+  [[ -n "${PYTEST_CURRENT_TEST:-}" ]] && return 0
+  [[ "${AION_INTEGRATED_RESEARCH_AGENT_EVALUATION_RUNNING:-}" == "1" ]] && return 0
+  [[ "${AION_AGGREGATE_GATE_RUNNING:-}" == "1" ]] && return 0
+  [[ "${AION_CHECK_RUNNING:-}" == "1" ]] && return 0
+  return 1
+}
+
 if [[ "${AION_CLAIM_GRAPH_IMPLEMENTATION_CONTEXT:-}" == "1" ]]; then
   echo "PASS: AION-208 changed-path no-go deferred to AION-209 claim graph gate"
 else
@@ -148,6 +156,7 @@ else:
         "AION-210-KI-0004",
         "AION-212-KI-0005",
         "AION-214-KI-0006",
+        "AION-216-KI-0007",
     }
     matches = [
         item
@@ -201,6 +210,11 @@ successor_program_states = {
         "AION-215",
         "AION-216",
     ),
+    "verified_knowledge_memory_authorized_not_implemented": (
+        "AION-216-KI-0007",
+        "AION-217",
+        "AION-218",
+    ),
 }
 if program["program_state"] in successor_program_states:
     expected_auth, expected_task, expected_closeout = successor_program_states[
@@ -214,7 +228,10 @@ else:
     assert program["active_knowledge_implementation_task"] == "AION-209"
     assert program["formal_closeout_task"] == "AION-210"
 assert program["temporal_claim_evidence_graph_authorized"] is True
-if os.environ.get("AION_CLAIM_GRAPH_IMPLEMENTATION_CONTEXT") == "1":
+if (
+    os.environ.get("AION_CLAIM_GRAPH_IMPLEMENTATION_CONTEXT") == "1"
+    or program["program_state"] in successor_program_states
+):
     assert program["temporal_claim_evidence_graph_implemented"] is True
     assert program["persistent_claim_graph_write_enabled"] is False
     assert program["claim_graph_runtime_enabled"] is False
@@ -227,6 +244,8 @@ git merge-base --is-ancestor 14c12bebfced7fd6345c8af2899988aadfa91a44 origin/mai
 
 if [[ "${AION_CLAIM_GRAPH_IMPLEMENTATION_CONTEXT:-}" == "1" ]]; then
   echo "PASS: inherited AION-207 branch-diff chain deferred to AION-209 claim graph gate"
+elif is_nested_gate_context; then
+  echo "PASS: inherited AION-207 downstream repository gates deferred to outer gate"
 else
   AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-source-registry-no-go-regression.sh
   AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-source-registry-check.sh

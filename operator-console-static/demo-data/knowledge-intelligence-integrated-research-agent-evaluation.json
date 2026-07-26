@@ -1,0 +1,1573 @@
+{
+  "actual_tool_executions": 0,
+  "authorization_closeout": {
+    "approval_record_id": "AION-214-KI-0006",
+    "authorization_active": false,
+    "authorization_closed_by_task": "AION-216",
+    "authorization_consumed": true,
+    "authorization_consumed_by_feature_commits": [
+      "c9a35cc853ee1587cb9e149a020e2f767ca80881"
+    ],
+    "authorization_consumed_by_merge_commits": [
+      "2988b8f389f7ee3a141f74e351432f4ea79c6eae"
+    ],
+    "authorization_consumed_by_prs": [
+      129
+    ],
+    "authorization_consumed_by_task": "AION-215",
+    "authorization_expired": true,
+    "authorization_reusable": false,
+    "authorization_transaction_id": "AION-214-KI-0006",
+    "corrective_prs": [],
+    "evaluation_created_belief": false,
+    "evaluation_created_cognitive_memory": false,
+    "evaluation_created_knowledge": false,
+    "evaluation_created_network_access": false,
+    "evaluation_created_persistent_write": false,
+    "evaluation_created_tool_execution": false,
+    "evaluation_reusable": false,
+    "evaluation_used_as_approval": false,
+    "integrated_research_agent_operator_evaluation_decision": "INTEGRATED_RESEARCH_AGENT_OPERATOR_EVALUATION_PASS_RECOMMEND_VERIFIED_KNOWLEDGE_MEMORY_AUTHORIZATION",
+    "integrated_research_agent_operator_evaluation_id": "AION-IRAE-001"
+  },
+  "automatic_knowledge_promotions": 0,
+  "belief_mutations": 0,
+  "browser_actions": 0,
+  "closeout_task": "AION-216",
+  "cognitive_memory_writes": 0,
+  "conditional_next_authorization": {
+    "active_cognitive_implementation_authorization_count": 0,
+    "active_knowledge_implementation_authorization_count": 1,
+    "approval_record_id": "AION-216-KI-0007",
+    "authorization_active": true,
+    "authorization_consumed": false,
+    "authorization_created": true,
+    "authorization_evidence_note": "AION-IRAE-001 exact PASS creates AION-216-KI-0007 for AION-217 only.",
+    "authorization_expired": false,
+    "authorization_reusable": false,
+    "authorization_scope": "deterministic-verified-knowledge-candidate-lineage-versioning-revalidation-operator-review-engagement-learning-abstention-core",
+    "authorization_transaction_approved": true,
+    "authorization_transaction_id": "AION-216-KI-0007",
+    "authorized_capabilities": {
+      "bounded_candidate_queries_approved": true,
+      "candidate_confidence_inheritance_approved": true,
+      "candidate_confidence_non_amplification_approved": true,
+      "candidate_eligibility_policy_approved": true,
+      "candidate_expiry_approved": true,
+      "candidate_history_preservation_approved": true,
+      "candidate_incident_record_approved": true,
+      "candidate_redacted_diagnostics_approved": true,
+      "candidate_resource_budget_enforcement_approved": true,
+      "candidate_retraction_approved": true,
+      "candidate_revalidation_approved": true,
+      "candidate_supersession_approved": true,
+      "candidate_versioning_approved": true,
+      "citation_coverage_requirement_approved": true,
+      "claim_graph_integrity_binding_approved": true,
+      "clarification_candidate_approved": true,
+      "contradiction_blocking_policy_approved": true,
+      "deterministic_candidate_replay_approved": true,
+      "documentation_and_static_evidence_approved": true,
+      "domain_mesh_synthesis_binding_approved": true,
+      "domain_routing_candidate_approved": true,
+      "engagement_candidate_integrity_audit_approved": true,
+      "engagement_candidate_operator_review_approved": true,
+      "engagement_candidate_versioning_approved": true,
+      "engagement_learning_candidate_contract_approved": true,
+      "engagement_signal_metadata_contract_approved": true,
+      "engagement_signal_redaction_approved": true,
+      "epistemic_assessment_binding_approved": true,
+      "evidence_coverage_requirement_approved": true,
+      "freshness_requirement_approved": true,
+      "full_upstream_fingerprint_lineage_approved": true,
+      "immutable_in_memory_candidate_repository_approved": true,
+      "integrated_knowledge_lineage_contract_approved": true,
+      "material_dissent_blocking_policy_approved": true,
+      "no_approval_creation_enforcement_approved": true,
+      "no_automatic_knowledge_promotion_enforcement_approved": true,
+      "no_belief_mutation_enforcement_approved": true,
+      "no_cognitive_memory_write_enforcement_approved": true,
+      "no_domain_majority_as_truth_enforcement_approved": true,
+      "no_engagement_confidence_effect_enforcement_approved": true,
+      "no_engagement_signal_as_fact_enforcement_approved": true,
+      "no_git_mutation_enforcement_approved": true,
+      "no_model_output_as_fact_enforcement_approved": true,
+      "no_model_training_enforcement_approved": true,
+      "no_persistent_verified_knowledge_write_enforcement_approved": true,
+      "no_popularity_as_truth_enforcement_approved": true,
+      "no_pr_creation_enforcement_approved": true,
+      "no_public_network_enforcement_approved": true,
+      "no_repetition_as_corroboration_enforcement_approved": true,
+      "no_runtime_registration_enforcement_approved": true,
+      "no_source_mutation_enforcement_approved": true,
+      "no_tool_output_as_fact_enforcement_approved": true,
+      "no_user_statement_as_fact_enforcement_approved": true,
+      "operator_review_decision_binding_approved": true,
+      "preference_candidate_approved": true,
+      "provenance_completeness_requirement_approved": true,
+      "refutation_candidate_approved": true,
+      "research_gap_candidate_approved": true,
+      "response_quality_candidate_approved": true,
+      "retraction_blocking_policy_approved": true,
+      "retrieval_strategy_candidate_approved": true,
+      "scope_applicability_requirement_approved": true,
+      "source_independence_minimum_approved": true,
+      "source_registry_integrity_binding_approved": true,
+      "source_selection_candidate_approved": true,
+      "supersession_blocking_policy_approved": true,
+      "supported_candidate_approved": true,
+      "synthetic_candidate_fixture_replay_approved": true,
+      "tool_manifest_gap_candidate_approved": true,
+      "tool_verification_session_binding_approved": true,
+      "verification_rule_candidate_approved": true,
+      "verified_knowledge_candidate_batch_approved": true,
+      "verified_knowledge_candidate_contracts_approved": true,
+      "verified_knowledge_candidate_evidence_bundle_approved": true,
+      "verified_knowledge_candidate_integrity_audit_approved": true,
+      "verified_knowledge_candidate_kind_approved": true,
+      "verified_knowledge_candidate_memory_snapshot_approved": true,
+      "verified_knowledge_candidate_operator_review_item_approved": true,
+      "verified_knowledge_candidate_query_approved": true,
+      "verified_knowledge_candidate_repository_approved": true,
+      "verified_knowledge_candidate_status_approved": true,
+      "verified_knowledge_candidate_version_approved": true
+    },
+    "candidate_id": "verified-knowledge-memory-engagement-learning-core",
+    "explicit_approval_record_approval": true,
+    "formal_closeout_task": "AION-218",
+    "implementation_authorization_approved": true,
+    "implementation_go_status": true,
+    "implementation_no_go_status": false,
+    "implementation_task": "AION-217",
+    "parent_authorization_transaction_id": "AION-214-KI-0006",
+    "parent_closeout_task": "AION-216",
+    "parent_evaluation_decision": "INTEGRATED_RESEARCH_AGENT_OPERATOR_EVALUATION_PASS_RECOMMEND_VERIFIED_KNOWLEDGE_MEMORY_AUTHORIZATION",
+    "parent_evaluation_id": "AION-IRAE-001",
+    "parent_main_commit": "2988b8f389f7ee3a141f74e351432f4ea79c6eae",
+    "parent_tool_verification_implementation_feature_commits": [
+      "c9a35cc853ee1587cb9e149a020e2f767ca80881"
+    ],
+    "parent_tool_verification_implementation_merge_commits": [
+      "2988b8f389f7ee3a141f74e351432f4ea79c6eae"
+    ],
+    "parent_tool_verification_implementation_prs": [
+      129
+    ],
+    "parent_tool_verification_implementation_task": "AION-215",
+    "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+    "prohibited_capabilities": {
+      "absolute_truth_oracle_enabled": false,
+      "actual_tool_execution_enabled": false,
+      "api_route_enabled": false,
+      "application_startup_registration_enabled": false,
+      "approval_creation_enabled": false,
+      "automatic_candidate_approval_enabled": false,
+      "automatic_claim_acceptance_enabled": false,
+      "automatic_claim_rejection_enabled": false,
+      "automatic_domain_routing_update_enabled": false,
+      "automatic_merge_enabled": false,
+      "automatic_preference_application_enabled": false,
+      "automatic_retrieval_policy_update_enabled": false,
+      "automatic_verified_knowledge_promotion_enabled": false,
+      "background_verified_knowledge_worker_enabled": false,
+      "browser_automation_enabled": false,
+      "citation_click_as_corroboration_enabled": false,
+      "click_as_fact_enabled": false,
+      "cognitive_belief_creation_enabled": false,
+      "cognitive_belief_mutation_enabled": false,
+      "cognitive_memory_promotion_enabled": false,
+      "cognitive_memory_write_enabled": false,
+      "connector_integration_enabled": false,
+      "dependency_change_approved": false,
+      "dns_resolution_enabled": false,
+      "domain_mesh_consensus_as_truth_enabled": false,
+      "engagement_confidence_effect_enabled": false,
+      "engagement_signal_as_fact_enabled": false,
+      "external_knowledge_database_integration_enabled": false,
+      "feedback_majority_as_truth_enabled": false,
+      "filesystem_mutation_enabled": false,
+      "git_mutation_enabled": false,
+      "github_workflow_change_approved": false,
+      "installed_cli_command_enabled": false,
+      "kernel_registration_enabled": false,
+      "migration_approved": false,
+      "model_call_enabled": false,
+      "model_output_as_verified_fact_enabled": false,
+      "model_provider_integration_enabled": false,
+      "model_weight_training_enabled": false,
+      "network_access_enabled": false,
+      "operator_approval_creation_enabled": false,
+      "persistent_verified_knowledge_write_enabled": false,
+      "popularity_as_truth_enabled": false,
+      "production_deployment_enabled": false,
+      "public_network_fetch_enabled": false,
+      "real_pull_request_creation_enabled": false,
+      "repetition_as_corroboration_enabled": false,
+      "runtime_effect": false,
+      "scheduled_revalidation_job_enabled": false,
+      "sdk_runtime_resource_enabled": false,
+      "search_provider_integration_enabled": false,
+      "shell_command_execution_enabled": false,
+      "source_mutation_enabled": false,
+      "subprocess_execution_enabled": false,
+      "tool_output_as_verified_fact_enabled": false,
+      "tool_result_as_automatic_knowledge_enabled": false,
+      "user_acceptance_as_fact_enabled": false,
+      "user_rejection_as_fact_enabled": false,
+      "user_statement_as_fact_enabled": false,
+      "v02_release_created": false,
+      "v02_tag_created": false,
+      "verified_knowledge_creation_enabled": false,
+      "verified_knowledge_database_enabled": false,
+      "verified_knowledge_promotion_enabled": false,
+      "verified_knowledge_runtime_enabled": false,
+      "worktree_creation_enabled": false
+    },
+    "read_only": true,
+    "redacted": true,
+    "resource_limits": {
+      "maximum_actual_tool_executions": 0,
+      "maximum_approvals_created": 0,
+      "maximum_assessment_references_per_candidate": 20,
+      "maximum_automatic_knowledge_promotions": 0,
+      "maximum_belief_mutations": 0,
+      "maximum_browser_actions": 0,
+      "maximum_candidate_versions_per_identity": 100,
+      "maximum_candidates_per_batch": 500,
+      "maximum_claim_references_per_candidate": 20,
+      "maximum_cognitive_memory_writes": 0,
+      "maximum_concurrent_candidate_evaluations": 4,
+      "maximum_connector_calls": 0,
+      "maximum_deployments": 0,
+      "maximum_dns_resolutions": 0,
+      "maximum_engagement_confidence_effects": 0,
+      "maximum_engagement_fact_promotions": 0,
+      "maximum_engagement_learning_candidates_per_batch": 500,
+      "maximum_engagement_signals_per_batch": 1000,
+      "maximum_filesystem_mutations": 0,
+      "maximum_fixture_bytes": 4194304,
+      "maximum_fixture_records": 5000,
+      "maximum_git_operations": 0,
+      "maximum_lineage_references_per_candidate": 500,
+      "maximum_memory_snapshots": 100,
+      "maximum_mesh_synthesis_references_per_candidate": 20,
+      "maximum_model_provider_calls": 0,
+      "maximum_model_weight_changes": 0,
+      "maximum_operator_approval_creations": 0,
+      "maximum_operator_review_items": 500,
+      "maximum_persistent_verified_knowledge_write_batch": 0,
+      "maximum_public_network_calls": 0,
+      "maximum_query_results": 1000,
+      "maximum_reason_codes_per_candidate": 100,
+      "maximum_runtime_created_pull_requests": 0,
+      "maximum_search_provider_calls": 0,
+      "maximum_shell_commands": 0,
+      "maximum_source_mutations": 0,
+      "maximum_source_registry_references_per_candidate": 100,
+      "maximum_subprocess_executions": 0,
+      "maximum_tool_session_references_per_candidate": 20
+    },
+    "runtime_effect": false,
+    "synthetic": true,
+    "workstream": "knowledge-intelligence-verified-knowledge-memory"
+  },
+  "connector_calls": 0,
+  "corrective_prs": [],
+  "decision": "INTEGRATED_RESEARCH_AGENT_OPERATOR_EVALUATION_PASS_RECOMMEND_VERIFIED_KNOWLEDGE_MEMORY_AUTHORIZATION",
+  "deployments": 0,
+  "dns_resolutions": 0,
+  "engagement_confidence_effects": 0,
+  "engagement_fact_promotions": 0,
+  "evaluation_base_commit": "eab135b7b0225c79917b5930da057422bf1dbeed",
+  "evaluation_id": "AION-IRAE-001",
+  "evaluation_passed": true,
+  "evaluation_type": "read_only_integrated_research_agent_operator_evaluation",
+  "filesystem_mutations": 0,
+  "git_operations": 0,
+  "hard_gate_results": [
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "pr_129_verified",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "final_ci_verified",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "aion_215_feature_commit_verified",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "aion_215_merge_commit_verified",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "aion_214_record_verified",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "aion_215_resource_limits_verified",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "research_plane_gate_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "source_registry_gate_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "claim_graph_gate_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "epistemic_assessment_gate_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "domain_expert_mesh_gate_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "tool_verification_gate_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "all_28_scenarios_executed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "all_28_scenarios_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "no_required_scenario_skipped",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "no_unknown_scenario",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "source_provenance_integrity_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "source_independence_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "claim_identity_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "temporal_jurisdiction_version_continuity_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "epistemic_confidence_continuity_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "contradiction_continuity_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "mesh_independence_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "dissent_preservation_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "high_stakes_abstention_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "tool_intent_binding_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "simulation_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "verifier_independence_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "attestation_integrity_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "rollback_and_compensation_validation_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "candidate_eligibility_policy_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "engagement_non_factual_boundary_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "full_lineage_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "deterministic_replay_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "resource_limits_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "concurrency_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "repository_integrity_passed",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "zero_runtime_effect",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "zero_persistence",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "zero_automatic_knowledge_promotion",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "zero_cognitive_memory_write",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "zero_belief_mutation",
+      "passed": true
+    },
+    {
+      "evidence": "deterministic_read_only_gate_evidence",
+      "gate_id": "no_v02_tag_or_release",
+      "passed": true
+    }
+  ],
+  "implementation_feature_commits": [
+    "c9a35cc853ee1587cb9e149a020e2f767ca80881"
+  ],
+  "implementation_merge_commits": [
+    "2988b8f389f7ee3a141f74e351432f4ea79c6eae"
+  ],
+  "implementation_prs": [
+    129
+  ],
+  "implementation_task": "AION-215",
+  "integrated_lineage": {
+    "acquisition_result_fingerprint": "d6e9d98734dddfd31f98088dc13f7e671b72726cf50fa8373882810893dd9b2b",
+    "attestation_chain_head": "72f0618b45ee047bfe44bc210166ac950f0d8df4b1c36ea5660cb2fd2fab795d",
+    "citation_fingerprints": [
+      "bcbe7605b1ca3ba82ba9ebb19349cc8665adcc75c84219afe048de44e6457868",
+      "0ec6ad625dd036209ebc7d65d26cbb2853b6db1cac0ab4ad180b39947aa5ea85",
+      "0544b7a76876bca5abdf19b65065b8d5c2ac4b93301ab04221a38cbbdcfc577f"
+    ],
+    "claim_graph_integrity_fingerprint": "5e5d8f848a9044dbbc6b180e952d632877a3eba04d56b60c5abe83f94d0dfc18",
+    "claim_identity_fingerprint": "3239224743b805f0813dfe7134ba035b7d8e08372c6614b139aabe1102ed5296",
+    "deterministic_order": true,
+    "domain_mesh_session_fingerprint": "cf773e5734630ed9b21c0d51116c1826021d95363b71ebec54abee8f12c61680",
+    "epistemic_assessment_fingerprint": "60b0961e3cc9c4383c2209098ebd2493d7487de86119c3c5461c8507f49ab4d4",
+    "hidden_reasoning_included": false,
+    "integrated_trace_fingerprint": "6a54633c0a3451eed74f33d64eec14550c3bcb9c9d04d87f851056d2c566f070",
+    "lineage_complete": true,
+    "provenance_fingerprints": [
+      "1721798bb62286e38afa8df71b370d0ace836238bd974b18ad6d3fed7a179d79",
+      "9a776ec643869b4be911075dbe2feebc99ce4af3a18601d491df9b29f4c8ff43",
+      "1b91c775198bcf649bf27ba4d5d58994b6c622fa7d77d5e55ecaa44e6edaf1fe"
+    ],
+    "raw_prompt_included": false,
+    "references_resolve": true,
+    "research_plan_id": "research-plan-integrated-aion-216-001",
+    "runtime_effect": false,
+    "sensitivity_trace_fingerprint": "8a8ea51281194f984fd13e8c58d900be938d971e8ae6d372017245ee1aceef2d",
+    "source_body_included": false,
+    "source_registry_integrity_fingerprint": "67e3100bcd5cf393766046c045539ac19e8d250db735188c96f757eb2183ab5b",
+    "source_snapshot_fingerprints": [
+      "204afacc2251060ff05790979085ef0393b683bab7be447ae949f9ecc7439e71",
+      "109f1ca18839f0608e6c85976380de17905bb80eb88a025be7f4e619e75d5560",
+      "5c48d168f733b5ac0bfbd9626eb21aaa0fe8837194cf30dc87feba33a8621314"
+    ],
+    "synthesis_fingerprint": "429b492b54be8f50da97a056958cd90dc2ae77d39301fd3e781803f774a2141a",
+    "tool_verification_session_fingerprint": "8caa97badcc83477f113de7e230223d9f7c3b707e7ad80bf037ef85e61193cdb"
+  },
+  "model_provider_calls": 0,
+  "model_weight_changes": 0,
+  "next_architecture_decision": "verified_knowledge_memory_implementation_authorized",
+  "persistent_assessment_writes": 0,
+  "persistent_graph_writes": 0,
+  "persistent_mesh_writes": 0,
+  "persistent_registry_writes": 0,
+  "persistent_tool_state_writes": 0,
+  "persistent_verified_knowledge_writes": 0,
+  "plane_validation_results": [
+    {
+      "automatic_knowledge_promotion": false,
+      "fingerprint": "d6e9d98734dddfd31f98088dc13f7e671b72726cf50fa8373882810893dd9b2b",
+      "passed": true,
+      "persistent_write_applied": false,
+      "plane_id": "research_acquisition",
+      "read_only": true,
+      "redacted": true,
+      "runtime_enabled": false,
+      "source_body_included": false
+    },
+    {
+      "automatic_knowledge_promotion": false,
+      "fingerprint": "67e3100bcd5cf393766046c045539ac19e8d250db735188c96f757eb2183ab5b",
+      "passed": true,
+      "persistent_write_applied": false,
+      "plane_id": "source_provenance_registry",
+      "read_only": true,
+      "redacted": true,
+      "runtime_enabled": false,
+      "source_body_included": false
+    },
+    {
+      "automatic_knowledge_promotion": false,
+      "fingerprint": "5e5d8f848a9044dbbc6b180e952d632877a3eba04d56b60c5abe83f94d0dfc18",
+      "passed": true,
+      "persistent_write_applied": false,
+      "plane_id": "temporal_claim_evidence_graph",
+      "read_only": true,
+      "redacted": true,
+      "runtime_enabled": false,
+      "source_body_included": false
+    },
+    {
+      "automatic_knowledge_promotion": false,
+      "fingerprint": "60b0961e3cc9c4383c2209098ebd2493d7487de86119c3c5461c8507f49ab4d4",
+      "passed": true,
+      "persistent_write_applied": false,
+      "plane_id": "epistemic_assessment",
+      "read_only": true,
+      "redacted": true,
+      "runtime_enabled": false,
+      "source_body_included": false
+    },
+    {
+      "automatic_knowledge_promotion": false,
+      "fingerprint": "cf773e5734630ed9b21c0d51116c1826021d95363b71ebec54abee8f12c61680",
+      "passed": true,
+      "persistent_write_applied": false,
+      "plane_id": "domain_expert_mesh",
+      "read_only": true,
+      "redacted": true,
+      "runtime_enabled": false,
+      "source_body_included": false
+    },
+    {
+      "automatic_knowledge_promotion": false,
+      "fingerprint": "8caa97badcc83477f113de7e230223d9f7c3b707e7ad80bf037ef85e61193cdb",
+      "passed": true,
+      "persistent_write_applied": false,
+      "plane_id": "tool_verification_fabric",
+      "read_only": true,
+      "redacted": true,
+      "runtime_enabled": false,
+      "source_body_included": false
+    }
+  ],
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "public_api_inventory": {
+    "monkey_patch_used": false,
+    "private_state_accessed": false,
+    "public_facades_loaded": true,
+    "runtime_registration_created": false,
+    "service_class_names": [
+      "ControlledResearchAcquisitionService",
+      "ControlledSourceProvenanceRegistry",
+      "ControlledTemporalClaimEvidenceGraph",
+      "ControlledEpistemicAssessmentEngine",
+      "ControlledDomainExpertMesh",
+      "ControlledToolVerificationFabric"
+    ]
+  },
+  "public_network_requests": 0,
+  "read_only": true,
+  "redacted": true,
+  "report_is_approval": false,
+  "report_reusable": false,
+  "repository_integrity": {
+    "actual_tool_executions": 0,
+    "aion_v010_unchanged": true,
+    "api_route_added": false,
+    "automatic_knowledge_promotions": 0,
+    "background_worker_added": false,
+    "belief_mutations": 0,
+    "browser_actions": 0,
+    "cli_command_added": false,
+    "cognitive_memory_writes": 0,
+    "connector_calls": 0,
+    "database_added": false,
+    "dependency_changed": false,
+    "deployments": 0,
+    "dns_resolutions": 0,
+    "engagement_confidence_effects": 0,
+    "engagement_fact_promotions": 0,
+    "filesystem_mutations": 0,
+    "git_operations": 0,
+    "kernel_registration_added": false,
+    "migration_added": false,
+    "model_provider_calls": 0,
+    "model_weight_changes": 0,
+    "persistent_assessment_writes": 0,
+    "persistent_graph_writes": 0,
+    "persistent_mesh_writes": 0,
+    "persistent_registry_writes": 0,
+    "persistent_tool_state_writes": 0,
+    "persistent_verified_knowledge_writes": 0,
+    "public_network_requests": 0,
+    "repository_tree_unchanged": true,
+    "repository_unchanged": true,
+    "runtime_approvals": 0,
+    "runtime_merges": 0,
+    "runtime_pull_requests": 0,
+    "runtime_source_changed": false,
+    "scheduler_added": false,
+    "sdk_runtime_resource_added": false,
+    "search_provider_calls": 0,
+    "shell_executions": 0,
+    "source_mutations": 0,
+    "startup_hook_added": false,
+    "subprocess_executions": 0,
+    "temporary_evaluation_data_cleaned": true,
+    "v02_release_created": false,
+    "v02_tag_created": false,
+    "workflow_changed": false
+  },
+  "repository_unchanged": true,
+  "resource_state": {
+    "actual_tool_executions": 0,
+    "automatic_knowledge_promotions": 0,
+    "belief_mutations": 0,
+    "browser_actions": 0,
+    "cognitive_memory_writes": 0,
+    "connector_calls": 0,
+    "deployments": 0,
+    "dns_resolutions": 0,
+    "engagement_confidence_effects": 0,
+    "engagement_fact_promotions": 0,
+    "filesystem_mutations": 0,
+    "git_operations": 0,
+    "model_provider_calls": 0,
+    "model_weight_changes": 0,
+    "persistent_assessment_writes": 0,
+    "persistent_graph_writes": 0,
+    "persistent_mesh_writes": 0,
+    "persistent_registry_writes": 0,
+    "persistent_tool_state_writes": 0,
+    "persistent_verified_knowledge_writes": 0,
+    "public_network_requests": 0,
+    "repository_unchanged": true,
+    "runtime_approvals": 0,
+    "runtime_merges": 0,
+    "runtime_pull_requests": 0,
+    "search_provider_calls": 0,
+    "shell_executions": 0,
+    "source_mutations": 0,
+    "subprocess_executions": 0,
+    "temporary_evaluation_data_cleaned": true,
+    "verified_knowledge_resource_limits": {
+      "maximum_actual_tool_executions": 0,
+      "maximum_approvals_created": 0,
+      "maximum_assessment_references_per_candidate": 20,
+      "maximum_automatic_knowledge_promotions": 0,
+      "maximum_belief_mutations": 0,
+      "maximum_browser_actions": 0,
+      "maximum_candidate_versions_per_identity": 100,
+      "maximum_candidates_per_batch": 500,
+      "maximum_claim_references_per_candidate": 20,
+      "maximum_cognitive_memory_writes": 0,
+      "maximum_concurrent_candidate_evaluations": 4,
+      "maximum_connector_calls": 0,
+      "maximum_deployments": 0,
+      "maximum_dns_resolutions": 0,
+      "maximum_engagement_confidence_effects": 0,
+      "maximum_engagement_fact_promotions": 0,
+      "maximum_engagement_learning_candidates_per_batch": 500,
+      "maximum_engagement_signals_per_batch": 1000,
+      "maximum_filesystem_mutations": 0,
+      "maximum_fixture_bytes": 4194304,
+      "maximum_fixture_records": 5000,
+      "maximum_git_operations": 0,
+      "maximum_lineage_references_per_candidate": 500,
+      "maximum_memory_snapshots": 100,
+      "maximum_mesh_synthesis_references_per_candidate": 20,
+      "maximum_model_provider_calls": 0,
+      "maximum_model_weight_changes": 0,
+      "maximum_operator_approval_creations": 0,
+      "maximum_operator_review_items": 500,
+      "maximum_persistent_verified_knowledge_write_batch": 0,
+      "maximum_public_network_calls": 0,
+      "maximum_query_results": 1000,
+      "maximum_reason_codes_per_candidate": 100,
+      "maximum_runtime_created_pull_requests": 0,
+      "maximum_search_provider_calls": 0,
+      "maximum_shell_commands": 0,
+      "maximum_source_mutations": 0,
+      "maximum_source_registry_references_per_candidate": 100,
+      "maximum_subprocess_executions": 0,
+      "maximum_tool_session_references_per_candidate": 20
+    }
+  },
+  "runtime_approvals": 0,
+  "runtime_merges": 0,
+  "runtime_pull_requests": 0,
+  "runtime_state": {
+    "actual_tool_execution_enabled": false,
+    "automatic_verified_knowledge_promotion_enabled": false,
+    "background_worker_enabled": false,
+    "belief_mutation_enabled": false,
+    "claim_graph_runtime_enabled": false,
+    "cognitive_memory_write_enabled": false,
+    "database_enabled": false,
+    "domain_expert_mesh_runtime_enabled": false,
+    "engagement_confidence_effect_enabled": false,
+    "engagement_signal_as_fact_enabled": false,
+    "epistemic_truth_engine_runtime_enabled": false,
+    "persistent_verified_knowledge_write_enabled": false,
+    "public_network_fetch_enabled": false,
+    "research_runtime_enabled": false,
+    "source_registry_runtime_enabled": false,
+    "tool_verification_fabric_runtime_enabled": false,
+    "verified_knowledge_runtime_enabled": false
+  },
+  "scenario_count": 28,
+  "scenario_results": [
+    {
+      "checks": [
+        {
+          "detail": "2611feca9f7f5c63",
+          "name": "valid_supported_end_to_end_chain_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "cefb5c73f03a6a74",
+          "name": "valid_supported_end_to_end_chain_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "4b47e2859c51a97f",
+          "name": "valid_supported_end_to_end_chain_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "valid_supported_end_to_end_chain",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "14bf6bf26afb874b",
+          "name": "valid_refutation_end_to_end_chain_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "fe2f1c7c7a043caa",
+          "name": "valid_refutation_end_to_end_chain_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "b7083d0f5b1679a7",
+          "name": "valid_refutation_end_to_end_chain_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "valid_refutation_end_to_end_chain",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "746d541547063206",
+          "name": "source_provenance_integrity_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "73150e2012dbf2fa",
+          "name": "source_provenance_integrity_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "3087ff26629380a2",
+          "name": "source_provenance_integrity_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "source_provenance_integrity",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "50d1400ed1b46ddb",
+          "name": "duplicate_and_mirror_suppression_across_pipeline_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "6c0364c381dfda0b",
+          "name": "duplicate_and_mirror_suppression_across_pipeline_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "51e21f168aa0e76b",
+          "name": "duplicate_and_mirror_suppression_across_pipeline_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "duplicate_and_mirror_suppression_across_pipeline",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "49b3b21bdd15a6b9",
+          "name": "temporal_jurisdiction_and_version_continuity_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "194bf28770f6cb0b",
+          "name": "temporal_jurisdiction_and_version_continuity_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "31f4cf138d537150",
+          "name": "temporal_jurisdiction_and_version_continuity_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "temporal_jurisdiction_and_version_continuity",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "d253608bec98e237",
+          "name": "epistemic_confidence_cap_continuity_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "e5158081b0ebafae",
+          "name": "epistemic_confidence_cap_continuity_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "af50fbf90fb422d6",
+          "name": "epistemic_confidence_cap_continuity_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "epistemic_confidence_cap_continuity",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "d62e58c1cd32c4b7",
+          "name": "unresolved_contradiction_continuity_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "9bd270c980f28b3d",
+          "name": "unresolved_contradiction_continuity_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "15e119ce78699daf",
+          "name": "unresolved_contradiction_continuity_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "unresolved_contradiction_continuity",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "bcad4b9b5edffe1b",
+          "name": "stale_evidence_continuity_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "9d691967cf06e006",
+          "name": "stale_evidence_continuity_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "4bdd4d96e4fa76ef",
+          "name": "stale_evidence_continuity_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "stale_evidence_continuity",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "df80f7217dc44792",
+          "name": "retraction_and_supersession_continuity_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "78e2fc5979eaca92",
+          "name": "retraction_and_supersession_continuity_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "01f3eb0961d7116d",
+          "name": "retraction_and_supersession_continuity_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "retraction_and_supersession_continuity",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "609bf1b7dec0f924",
+          "name": "deterministic_domain_routing_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "5ce178daf83eb3fe",
+          "name": "deterministic_domain_routing_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "8e82d41bb6a4e0df",
+          "name": "deterministic_domain_routing_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "deterministic_domain_routing",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "0ad722ce4610d265",
+          "name": "dissent_and_disagreement_preservation_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "f5cc97215efe5619",
+          "name": "dissent_and_disagreement_preservation_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "125dbc4ab6376e98",
+          "name": "dissent_and_disagreement_preservation_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "dissent_and_disagreement_preservation",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "3f672fa1edede89a",
+          "name": "high_stakes_abstention_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "316cfa944cc78dce",
+          "name": "high_stakes_abstention_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "6c824b99f2a77008",
+          "name": "high_stakes_abstention_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "high_stakes_abstention",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "a011c34ff2fd9dba",
+          "name": "explicit_tool_intent_binding_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "3cc12b79b5000d6c",
+          "name": "explicit_tool_intent_binding_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "a67d158bdae9ff19",
+          "name": "explicit_tool_intent_binding_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "explicit_tool_intent_binding",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "18b94e1972fd0c34",
+          "name": "deterministic_tool_simulation_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "e3cdb47dbe18f8d5",
+          "name": "deterministic_tool_simulation_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "0c147211d4c5bb93",
+          "name": "deterministic_tool_simulation_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "deterministic_tool_simulation",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "edfe3637b6b27de2",
+          "name": "independent_tool_verification_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "b9b94f21373d063f",
+          "name": "independent_tool_verification_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "672d1a087f897ee9",
+          "name": "independent_tool_verification_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "independent_tool_verification",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "90f48016254e6e74",
+          "name": "attestation_and_provenance_chain_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "720c7a80f38a7b18",
+          "name": "attestation_and_provenance_chain_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "72567e410fde6667",
+          "name": "attestation_and_provenance_chain_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "attestation_and_provenance_chain",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "03d28674e97ca97b",
+          "name": "rollback_and_compensation_validation_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "1c56823536baac34",
+          "name": "rollback_and_compensation_validation_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "968fb759110a0dd0",
+          "name": "rollback_and_compensation_validation_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "rollback_and_compensation_validation",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "85c57ce62fe9addd",
+          "name": "supported_verified_knowledge_candidate_eligibility_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "82d095747ce08ceb",
+          "name": "supported_verified_knowledge_candidate_eligibility_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "4a1b9ea37f3b837a",
+          "name": "supported_verified_knowledge_candidate_eligibility_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "supported_verified_knowledge_candidate_eligibility",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "14241660f6cded0b",
+          "name": "refutation_candidate_eligibility_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "36bbf09c67f3ad5c",
+          "name": "refutation_candidate_eligibility_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "bc66a22751ae67d9",
+          "name": "refutation_candidate_eligibility_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "refutation_candidate_eligibility",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "8b658f7b2d0b6035",
+          "name": "insufficient_candidate_rejection_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "d095aa9e8c6a9011",
+          "name": "insufficient_candidate_rejection_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "85873443d3c06eb0",
+          "name": "insufficient_candidate_rejection_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "insufficient_candidate_rejection",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "a083ff1e85a369b3",
+          "name": "stale_retracted_superseded_and_scope_candidate_rejection_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "bf9400a8daa26e07",
+          "name": "stale_retracted_superseded_and_scope_candidate_rejection_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "9d17d559f2e3f3cb",
+          "name": "stale_retracted_superseded_and_scope_candidate_rejection_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "stale_retracted_superseded_and_scope_candidate_rejection",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "d612a7cadcc2ed02",
+          "name": "tool_output_is_not_fact_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "319ed137a68a74c2",
+          "name": "tool_output_is_not_fact_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "48c02bde5dac8337",
+          "name": "tool_output_is_not_fact_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "tool_output_is_not_fact",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "2d64cf7ef73a99a4",
+          "name": "engagement_signal_is_not_fact_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "3e9c61a26a805209",
+          "name": "engagement_signal_is_not_fact_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "c1c7d5fa75ba7c09",
+          "name": "engagement_signal_is_not_fact_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "engagement_signal_is_not_fact",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "dd9d3753c722faee",
+          "name": "complete_lineage_and_trace_integrity_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "7692dc0710bf485e",
+          "name": "complete_lineage_and_trace_integrity_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "1a68063d8c50c757",
+          "name": "complete_lineage_and_trace_integrity_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "complete_lineage_and_trace_integrity",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "5b913f93c686ada0",
+          "name": "deterministic_replay_and_fingerprint_sensitivity_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "bc95065929c26bc4",
+          "name": "deterministic_replay_and_fingerprint_sensitivity_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "b4de623bdb20d1af",
+          "name": "deterministic_replay_and_fingerprint_sensitivity_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "deterministic_replay_and_fingerprint_sensitivity",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "a4bf092d4696cedf",
+          "name": "resource_budget_and_zero_persistence_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "5bca6b7dd8141b68",
+          "name": "resource_budget_and_zero_persistence_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "acaa34242d0dedc4",
+          "name": "resource_budget_and_zero_persistence_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "resource_budget_and_zero_persistence",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "4805ca2b831a7b32",
+          "name": "concurrency_performance_and_query_integrity_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "f3e98ebadd904d07",
+          "name": "concurrency_performance_and_query_integrity_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "a26bc196f0b373de",
+          "name": "concurrency_performance_and_query_integrity_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "concurrency_performance_and_query_integrity",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        {
+          "detail": "ae263fcc403cb200",
+          "name": "no_runtime_repository_knowledge_or_belief_effect_boundary_preserved",
+          "passed": true
+        },
+        {
+          "detail": "7b6fd00fa1f5326d",
+          "name": "no_runtime_repository_knowledge_or_belief_effect_lineage_bound",
+          "passed": true
+        },
+        {
+          "detail": "91f9b618ae0dda1d",
+          "name": "no_runtime_repository_knowledge_or_belief_effect_zero_effect",
+          "passed": true
+        }
+      ],
+      "defect_classification": null,
+      "duration_ms": 0.0,
+      "passed": true,
+      "read_only": true,
+      "redacted": true,
+      "runtime_effect": false,
+      "scenario_id": "no_runtime_repository_knowledge_or_belief_effect",
+      "synthetic": true
+    }
+  ],
+  "search_provider_calls": 0,
+  "security_state": {
+    "automatic_approval": false,
+    "automatic_knowledge_promotion": false,
+    "credential_absent": true,
+    "domain_majority_as_truth": false,
+    "engagement_signal_as_fact": false,
+    "hidden_reasoning_absent": true,
+    "model_output_as_fact": false,
+    "private_key_absent": true,
+    "raw_prompt_absent": true,
+    "redacted_inputs_only": true,
+    "source_body_absent": true,
+    "synthetic_inputs_only": true,
+    "tool_output_as_fact": false
+  },
+  "shell_executions": 0,
+  "source_mutations": 0,
+  "tool_verification_fabric_implemented": true,
+  "subprocess_executions": 0,
+  "synthetic": true,
+  "temporary_evaluation_data_cleaned": true
+}

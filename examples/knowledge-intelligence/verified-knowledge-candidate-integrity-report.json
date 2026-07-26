@@ -1,0 +1,14 @@
+{
+  "automatic_promotion": false,
+  "candidate_eligible_for_operator_review": true,
+  "candidate_id": "vkc-aion-216-supported-001",
+  "claim_graph_integrity_passed": true,
+  "domain_mesh_integrity_passed": true,
+  "epistemic_assessment_integrity_passed": true,
+  "integrity_report_id": "vkc-integrity-aion-216-001",
+  "lineage_complete": true,
+  "record_kind": "verified_knowledge_candidate_integrity_report_preview",
+  "runtime_effect": false,
+  "source_registry_integrity_passed": true,
+  "tool_verification_integrity_passed": true
+}

@@ -1,0 +1,30 @@
+{
+  "allowed_signal_kinds": [
+    "query_repeated",
+    "response_accepted",
+    "response_rejected",
+    "correction_submitted",
+    "citation_opened",
+    "follow_up_requested",
+    "retrieval_succeeded",
+    "retrieval_failed",
+    "clarification_requested",
+    "task_outcome_reported"
+  ],
+  "belief_effect": false,
+  "bounded_outcome_code": "operator_review_requested",
+  "confidence_effect": false,
+  "factual_effect": false,
+  "knowledge_effect": false,
+  "record_kind": "engagement_signal_metadata_contract_preview",
+  "redacted_metadata": {
+    "contains_source_body": false,
+    "contains_transcript": false
+  },
+  "runtime_effect": false,
+  "session_fingerprint": "6a54633c0a3451eed74f33d64eec1455",
+  "signal_fingerprint": "8a8ea51281194f984fd13e8c58d900be938d971e8ae6d372017245ee1aceef2d",
+  "signal_id": "engagement-signal-aion-216-001",
+  "signal_kind": "query_repeated",
+  "timestamp": "2026-01-01T00:00:00Z"
+}

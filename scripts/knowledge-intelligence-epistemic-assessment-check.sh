@@ -27,6 +27,7 @@ PROGRAM_ID = "AION-KNOWLEDGE-INTELLIGENCE-001"
 AUTH_ID = "AION-210-KI-0004"
 NEXT_AUTH_ID = "AION-212-KI-0005"
 SUCCESSOR_AUTH_ID = "AION-214-KI-0006"
+CURRENT_AUTH_ID = "AION-216-KI-0007"
 SCOPE = (
     "deterministic-evidence-corroboration-contradiction-freshness-source-"
     "independence-confidence-assessment-core"
@@ -38,6 +39,10 @@ NEXT_SCOPE = (
 SUCCESSOR_SCOPE = (
     "deterministic-tool-manifest-intent-plan-simulation-verification-"
     "attestation-effect-evidence-rollback-abstention-core"
+)
+CURRENT_SCOPE = (
+    "deterministic-verified-knowledge-candidate-lineage-versioning-"
+    "revalidation-operator-review-engagement-learning-abstention-core"
 )
 ENGINE_STATE = "implemented_deterministic_in_memory_assessment_persistent_write_disabled"
 SOURCE_FILES = [
@@ -188,11 +193,23 @@ if closed_record["resource_limits"]["maximum_persistent_assessment_write_batch"]
     raise SystemExit("AION-210-KI-0004 persistent-write limit mismatch")
 
 if post_aion212:
+    post_aion216 = program["program_state"] == "verified_knowledge_memory_authorized_not_implemented"
     post_aion214 = program["program_state"] in {"tool_verification_fabric_authorized_not_implemented", "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"}
-    expected_auth = SUCCESSOR_AUTH_ID if post_aion214 else NEXT_AUTH_ID
-    expected_scope = SUCCESSOR_SCOPE if post_aion214 else NEXT_SCOPE
-    expected_task = "AION-215" if post_aion214 else "AION-213"
-    expected_closeout = "AION-216" if post_aion214 else "AION-214"
+    if post_aion216:
+        expected_auth = CURRENT_AUTH_ID
+        expected_scope = CURRENT_SCOPE
+        expected_task = "AION-217"
+        expected_closeout = "AION-218"
+    elif post_aion214:
+        expected_auth = SUCCESSOR_AUTH_ID
+        expected_scope = SUCCESSOR_SCOPE
+        expected_task = "AION-215"
+        expected_closeout = "AION-216"
+    else:
+        expected_auth = NEXT_AUTH_ID
+        expected_scope = NEXT_SCOPE
+        expected_task = "AION-213"
+        expected_closeout = "AION-214"
     if program["authorization_transaction_id"] != expected_auth:
         raise SystemExit("post-AION-212 active authorization mismatch")
     if program["authorization_scope"] != expected_scope:

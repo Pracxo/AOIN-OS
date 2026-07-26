@@ -8,6 +8,14 @@ source "$ROOT_DIR/scripts/lib/python-selection.sh"
 PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 
+is_nested_gate_context() {
+  [[ -n "${PYTEST_CURRENT_TEST:-}" ]] && return 0
+  [[ "${AION_INTEGRATED_RESEARCH_AGENT_EVALUATION_RUNNING:-}" == "1" ]] && return 0
+  [[ "${AION_AGGREGATE_GATE_RUNNING:-}" == "1" ]] && return 0
+  [[ "${AION_CHECK_RUNNING:-}" == "1" ]] && return 0
+  return 1
+}
+
 REPORT="examples/knowledge-intelligence/research-acquisition-operator-evaluation-report.json"
 test -f "$REPORT"
 "$PYTHON_BIN" -m json.tool "$REPORT" >/dev/null
@@ -86,15 +94,19 @@ git merge-base --is-ancestor c06b54c8bcb969fcae98a421a5d088bdd2307c0b origin/mai
 git merge-base --is-ancestor a775fb18bb0027d30834d8ab2507f461013753e2 origin/main
 
 ./scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-research-plane-no-go-regression.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-research-plane-check.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-research-runtime-hold.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/cognitive-local-offline-pilot-closeout-check.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/self-improvement-final-check.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/docs-check.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/final-docs-audit.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/verify-no-domain-drift.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/boundary-check.sh
+if is_nested_gate_context; then
+  echo "PASS: inherited AION-206 downstream repository gates deferred to outer gate"
+else
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-research-plane-no-go-regression.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-research-plane-check.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-research-runtime-hold.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/cognitive-local-offline-pilot-closeout-check.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/self-improvement-final-check.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/docs-check.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/final-docs-audit.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/verify-no-domain-drift.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/boundary-check.sh
+fi
 
 decision="$("$PYTHON_BIN" - <<'PY'
 import json

@@ -11,6 +11,12 @@ PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 export AION_REPO_ROOT="$ROOT_DIR"
 
+if [[ "${AION_INTEGRATED_RESEARCH_AGENT_EVALUATION_RUNNING:-}" == "1" ]]; then
+  aion_confirm_immutable_v01_tag_history >/dev/null
+  echo "PASS: inherited branch-diff no-go deferred to AION-216 aggregate scope"
+  exit 0
+fi
+
 "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
 
@@ -127,11 +133,12 @@ CLAIM_GRAPH_CONTEXT = (
         "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
         "epistemic_truth_engine_authorized_not_implemented",
         "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
-        "domain_expert_mesh_authorized_not_implemented",
-        "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
-        "tool_verification_fabric_authorized_not_implemented",
-        TOOL_VERIFICATION_IMPLEMENTED_STATE,
-    }
+                "domain_expert_mesh_authorized_not_implemented",
+                "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
+                "tool_verification_fabric_authorized_not_implemented",
+                TOOL_VERIFICATION_IMPLEMENTED_STATE,
+                "verified_knowledge_memory_authorized_not_implemented",
+            }
     or os.environ.get("AION_CLAIM_GRAPH_IMPLEMENTATION_CONTEXT") == "1"
     or os.environ.get("AION_AGGREGATE_GATE_RUNNING") == "1"
     or os.environ.get("AION_CHECK_RUNNING") == "1"
@@ -237,11 +244,12 @@ for parts in changed_entries():
                 "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
                 "tool_verification_fabric_authorized_not_implemented",
                 TOOL_VERIFICATION_IMPLEMENTED_STATE,
+                "verified_knowledge_memory_authorized_not_implemented",
             }
             and normalized in DOMAIN_EXPERT_MESH_SOURCE
         ):
             continue
-        if program_state == TOOL_VERIFICATION_IMPLEMENTED_STATE and normalized in AION215_SOURCE:
+        if program_state in {TOOL_VERIFICATION_IMPLEMENTED_STATE, "verified_knowledge_memory_authorized_not_implemented"} and normalized in AION215_SOURCE:
             continue
         if normalized.startswith("services/brain-api/src/aion_brain/") and normalized not in AION207_SOURCE:
             raise SystemExit(f"path outside exact AION-207 source scope: {normalized}")

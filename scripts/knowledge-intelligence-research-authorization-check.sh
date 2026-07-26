@@ -45,7 +45,7 @@ def main():
     assert t('docs/cognitive-architecture/aion-203-postmerge-verification.md').find(PARENT_DECISION) != -1
     pg = j('docs/knowledge-intelligence/program-ledger.json'); au = j('docs/knowledge-intelligence/authorization-ledger.json')
     assert pg['program_id'] == PROGRAM_ID
-    assert pg['program_state'] in {'research_plane_authorized_not_implemented', 'research_plane_implemented_disabled_pending_closeout', 'source_provenance_registry_authorized_not_implemented', 'source_provenance_registry_implemented_write_disabled_pending_closeout', 'temporal_claim_evidence_graph_authorized_not_implemented', 'temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout', 'epistemic_truth_engine_authorized_not_implemented', 'epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout', 'domain_expert_mesh_authorized_not_implemented', 'domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout', 'tool_verification_fabric_authorized_not_implemented', 'tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout'}
+    assert pg['program_state'] in {'research_plane_authorized_not_implemented', 'research_plane_implemented_disabled_pending_closeout', 'source_provenance_registry_authorized_not_implemented', 'source_provenance_registry_implemented_write_disabled_pending_closeout', 'temporal_claim_evidence_graph_authorized_not_implemented', 'temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout', 'epistemic_truth_engine_authorized_not_implemented', 'epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout', 'domain_expert_mesh_authorized_not_implemented', 'domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout', 'tool_verification_fabric_authorized_not_implemented', 'tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout', 'verified_knowledge_memory_authorized_not_implemented'}
     assert pg['active_knowledge_implementation_authorization_count'] == 1
     assert pg['research_plane_implemented'] in {False, True}
     for k in ['research_runtime_enabled','network_access_enabled','knowledge_promotion_enabled','verified_knowledge_memory_enabled','automatic_belief_creation_enabled','background_crawler_enabled','production_exposure','model_weight_training_enabled']: assert pg[k] is False, k
@@ -74,6 +74,44 @@ def main():
         assert claim['authorization_expired'] is True
         assert claim['authorization_reusable'] is False
         assert claim['authorization_closed_by_task'] == 'AION-210'
+        closed = [x for x in au['records'] if x.get('authorization_transaction_id') == AUTH_ID][0]
+        assert closed['authorization_active'] is False
+        assert closed['authorization_consumed'] is True
+        assert closed['authorization_expired'] is True
+        assert closed['authorization_reusable'] is False
+        assert closed['authorization_consumed_by_prs'] == [116, 117]
+    elif pg['program_state'] == 'verified_knowledge_memory_authorized_not_implemented':
+        assert pg['active_knowledge_implementation_authorization'] == 'AION-216-KI-0007'
+        assert pg['active_knowledge_implementation_task'] == 'AION-217' and pg['formal_closeout_task'] == 'AION-218'
+        assert pg['domain_expert_mesh_implemented'] is True
+        assert pg['model_call_enabled'] is False
+        assert pg['persistent_mesh_write_enabled'] is False
+        assert pg['tool_verification_fabric_authorized'] is True
+        assert pg['tool_verification_fabric_implemented'] is True
+        assert pg['tool_verification_fabric_runtime_enabled'] is False
+        assert pg['actual_tool_execution_enabled'] is False
+        assert pg['verified_knowledge_memory_authorized'] is True
+        assert pg['verified_knowledge_memory_implemented'] is False
+        assert pg['persistent_verified_knowledge_write_enabled'] is False
+        assert pg['source_provenance_registry_implemented'] is True
+        assert pg['source_provenance_registry_state'] == 'implemented_append_only_in_memory_replay_persistent_write_disabled'
+        assert pg['source_registry_runtime_enabled'] is False
+        assert pg['source_registry_persistent_write_enabled'] is False
+        r = active[0]
+        assert r['authorization_transaction_id'] == 'AION-216-KI-0007'
+        for expected_id, closed_by in {
+            'AION-206-KI-0002': 'AION-208',
+            'AION-208-KI-0003': 'AION-210',
+            'AION-210-KI-0004': 'AION-212',
+            'AION-212-KI-0005': 'AION-214',
+            'AION-214-KI-0006': 'AION-216',
+        }.items():
+            record = [x for x in au['records'] if x.get('authorization_transaction_id') == expected_id][0]
+            assert record['authorization_active'] is False
+            assert record['authorization_consumed'] is True
+            assert record['authorization_expired'] is True
+            assert record['authorization_reusable'] is False
+            assert record['authorization_closed_by_task'] == closed_by
         closed = [x for x in au['records'] if x.get('authorization_transaction_id') == AUTH_ID][0]
         assert closed['authorization_active'] is False
         assert closed['authorization_consumed'] is True

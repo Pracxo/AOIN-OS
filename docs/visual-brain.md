@@ -1595,3 +1595,13 @@ AION-213 implements the deterministic in-memory advisory domain expert mesh unde
 ## AION-214 Knowledge Intelligence Boundary
 
 AION-214 closes `AION-212-KI-0005` after `AION-DEME-001` passes and records `AION-214-KI-0006` as the sole active authorization for AION-215. The tool verification fabric is implemented as deterministic simulation-only infrastructure; actual tool execution, shell commands, network access, connectors, browser automation, model providers, persistence, source mutation, PR creation, approval creation, deployment, knowledge promotion, and belief mutation remain disabled.
+
+## AION-216 Integrated Research-Agent Evaluation and Verified Knowledge Authorization
+
+Current milestone: AION-216 integrated research-agent operator evaluation complete and verified knowledge memory authorized.
+
+Current stage: The complete Knowledge Intelligence chain from controlled research acquisition through source provenance, claim representation, epistemic assessment, domain expert analysis, and tool verification is implemented and passed deterministic read-only integrated evaluation. The verified-knowledge candidate memory and engagement-learning candidate plane is authorized and not implemented.
+
+Required flags: `integrated_research_agent_operator_evaluation_passed=true`, `integrated_research_agent_operator_evaluation_id=AION-IRAE-001`, `research_runtime_enabled=false`, `source_registry_runtime_enabled=false`, `claim_graph_runtime_enabled=false`, `epistemic_truth_engine_runtime_enabled=false`, `domain_expert_mesh_runtime_enabled=false`, `tool_verification_fabric_runtime_enabled=false`, `actual_tool_execution_enabled=false`, `verified_knowledge_memory_authorized=true`, `verified_knowledge_memory_implemented=false`, `automatic_verified_knowledge_promotion_enabled=false`, `persistent_verified_knowledge_write_enabled=false`, `engagement_learning_candidate_plane_authorized=true`, `engagement_learning_candidate_plane_implemented=false`, `engagement_signal_as_fact_enabled=false`, `engagement_confidence_effect_enabled=false`, `cognitive_memory_write_enabled=false`, `belief_mutation_enabled=false`, `active_knowledge_implementation_authorization=AION-216-KI-0007`, `active_knowledge_implementation_task=AION-217`, `formal_closeout_task=AION-218`.
+
+The integrated research-agent chain passed evaluation. A knowledge candidate is still reviewable evidence. Candidate eligibility does not equal factual truth. User engagement is not factual evidence. Tool output is not factual knowledge. Automatic promotion, cognitive-memory writes, persistent writes, and public-network research remain disabled. AION-218 is the future candidate-memory evaluation and controlled public-research-pilot authorization task.

@@ -10,6 +10,7 @@ from typing import Any
 PROGRAM_ID = "AION-KNOWLEDGE-INTELLIGENCE-001"
 AUTHORIZATION_ID = "AION-212-KI-0005"
 SUCCESSOR_AUTHORIZATION_ID = "AION-214-KI-0006"
+CURRENT_ACTIVE_AUTHORIZATION_ID = "AION-216-KI-0007"
 PARENT_AUTHORIZATION_ID = "AION-210-KI-0004"
 PARENT_EVALUATION_ID = "AION-EAE-001"
 PARENT_DECISION = (
@@ -333,7 +334,11 @@ def validate_authorization_files(root: Path) -> None:
     if len(records) != 1:
         raise ValueError("AION-212-KI-0005 authorization record missing")
     aion212_record = records[0]
-    successor_active = active[0].get("authorization_transaction_id") == SUCCESSOR_AUTHORIZATION_ID
+    active_authorization_id = active[0].get("authorization_transaction_id")
+    successor_active = active_authorization_id in {
+        SUCCESSOR_AUTHORIZATION_ID,
+        CURRENT_ACTIVE_AUTHORIZATION_ID,
+    }
     if successor_active:
         for key, expected in {
             "authorization_active": False,
@@ -350,16 +355,35 @@ def validate_authorization_files(root: Path) -> None:
         }.items():
             if aion212_record.get(key) != expected:
                 raise ValueError(f"AION-212 closeout mismatch for {key}: {aion212_record.get(key)!r}")
-        if active[0].get("implementation_task") != "AION-215":
+        expected_successor_task = (
+            "AION-217"
+            if active_authorization_id == CURRENT_ACTIVE_AUTHORIZATION_ID
+            else "AION-215"
+        )
+        expected_successor_closeout = (
+            "AION-218"
+            if active_authorization_id == CURRENT_ACTIVE_AUTHORIZATION_ID
+            else "AION-216"
+        )
+        if active[0].get("implementation_task") != expected_successor_task:
             raise ValueError("successor authorization must point to AION-215")
-        if active[0].get("formal_closeout_task") != "AION-216":
+        if active[0].get("formal_closeout_task") != expected_successor_closeout:
             raise ValueError("successor authorization must close out through AION-216")
     else:
         validate_authorization_payload(active[0])
     program = load_json(root, "docs/knowledge-intelligence/program-ledger.json")
-    expected_active = SUCCESSOR_AUTHORIZATION_ID if successor_active else AUTHORIZATION_ID
-    expected_task = "AION-215" if successor_active else IMPLEMENTATION_TASK
-    expected_closeout = "AION-216" if successor_active else FORMAL_CLOSEOUT_TASK
+    if active_authorization_id == CURRENT_ACTIVE_AUTHORIZATION_ID:
+        expected_active = CURRENT_ACTIVE_AUTHORIZATION_ID
+        expected_task = "AION-217"
+        expected_closeout = "AION-218"
+    elif successor_active:
+        expected_active = SUCCESSOR_AUTHORIZATION_ID
+        expected_task = "AION-215"
+        expected_closeout = "AION-216"
+    else:
+        expected_active = AUTHORIZATION_ID
+        expected_task = IMPLEMENTATION_TASK
+        expected_closeout = FORMAL_CLOSEOUT_TASK
     if program.get("active_knowledge_implementation_authorization") != expected_active:
         raise ValueError("program ledger active authorization mismatch")
     if program.get("active_knowledge_implementation_task") != expected_task:

@@ -30,10 +30,10 @@ def test_aion_215_source_is_exact_and_runtime_surfaces_are_absent() -> None:
     program = json.loads(
         (REPO_ROOT / "docs/knowledge-intelligence/program-ledger.json").read_text()
     )
-    assert (
-        program["program_state"]
-        == "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
-    )
+    assert program["program_state"] in {
+        "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
+        "verified_knowledge_memory_authorized_not_implemented",
+    }
     assert program["tool_verification_fabric_implemented"] is True
     assert program["tool_verification_fabric_runtime_enabled"] is False
     assert program["actual_tool_execution_enabled"] is False

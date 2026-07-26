@@ -1,0 +1,20 @@
+{
+  "append_only": true,
+  "candidate_fingerprint": "6a54633c0a3451eed74f33d64eec14550c3bcb9c9d04d87f851056d2c566f070",
+  "candidate_id": "vkc-aion-216-supported-001",
+  "confidence_carry_forward_automatic": false,
+  "expired": false,
+  "historical_version_mutated": false,
+  "prior_versions_preserved": true,
+  "read_only": true,
+  "record_kind": "verified_knowledge_candidate_version_contract_preview",
+  "redacted": true,
+  "retracted": false,
+  "revalidation_required": false,
+  "runtime_effect": false,
+  "superseded_by_version_id": null,
+  "version": 1,
+  "version_id": "vkc-aion-216-supported-001-v1",
+  "verified_knowledge_memory_authorized": true,
+  "verified_knowledge_memory_implemented": false
+}

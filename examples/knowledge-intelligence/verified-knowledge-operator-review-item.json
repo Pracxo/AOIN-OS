@@ -1,0 +1,10 @@
+{
+  "approval_created": false,
+  "candidate_id": "vkc-aion-216-supported-001",
+  "knowledge_promoted": false,
+  "operator_review_decision": "pending_future_AION_217_operator_action",
+  "operator_review_required": true,
+  "record_kind": "verified_knowledge_operator_review_item_preview",
+  "review_item_id": "vkc-review-aion-216-001",
+  "runtime_effect": false
+}

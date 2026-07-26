@@ -11,6 +11,12 @@ PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 export AION_REPO_ROOT="$ROOT_DIR"
 
+if [[ "${AION_INTEGRATED_RESEARCH_AGENT_EVALUATION_RUNNING:-}" == "1" ]]; then
+  aion_confirm_immutable_v01_tag_history >/dev/null
+  echo "PASS: inherited branch-diff no-go deferred to AION-216 aggregate scope"
+  exit 0
+fi
+
 "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
 
@@ -26,6 +32,7 @@ PROGRAM_PATH = ROOT / "docs/knowledge-intelligence/program-ledger.json"
 TOOL_VERIFICATION_IMPLEMENTED_STATE = (
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
 )
+VERIFIED_KNOWLEDGE_AUTHORIZED_STATE = "verified_knowledge_memory_authorized_not_implemented"
 CURRENT_PROGRAM_STATE = ""
 if PROGRAM_PATH.exists():
     try:
@@ -40,6 +47,7 @@ if PROGRAM_PATH.exists():
                 "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
                 "tool_verification_fabric_authorized_not_implemented",
                 TOOL_VERIFICATION_IMPLEMENTED_STATE,
+                VERIFIED_KNOWLEDGE_AUTHORIZED_STATE,
             }
         )
     except json.JSONDecodeError:
@@ -251,6 +259,22 @@ AION214_ALLOWED_PREFIXES = (
     "services/brain-api/tests/test_knowledge_domain_expert_mesh_operator_evaluation",
     "services/brain-api/tests/test_knowledge_tool_verification",
 )
+AION216_ALLOWED_EXACT = {
+    "README.md",
+    "AGENTS.md",
+    "operator-console-static/index.html",
+    "operator-console-static/app.js",
+    "operator-console-static/README.md",
+}
+AION216_ALLOWED_PREFIXES = (
+    "docs/",
+    "examples/knowledge-intelligence/",
+    "operator-console-static/demo-data/knowledge-intelligence-",
+    "scripts/knowledge-intelligence-",
+    "scripts/lib/knowledge_intelligence_",
+    "services/brain-api/tests/knowledge_",
+    "services/brain-api/tests/test_knowledge_",
+)
 PROHIBITED_PREFIXES = (
     ".github/workflows/",
     "services/brain-api/src/aion_brain/api/",
@@ -349,6 +373,11 @@ def path_allowed(path: str) -> bool:
         and normalized in AION215_ALLOWED_SOURCE
     ):
         return True
+    if CURRENT_PROGRAM_STATE == VERIFIED_KNOWLEDGE_AUTHORIZED_STATE and (
+        normalized in AION216_ALLOWED_EXACT
+        or any(normalized.startswith(prefix) for prefix in AION216_ALLOWED_PREFIXES)
+    ):
+        return True
     if (
         normalized in ALLOWED_EXACT
         or normalized in ALLOWED_SOURCE
@@ -384,9 +413,10 @@ if POST_AION210_CONTEXT:
         "AION-210-KI-0004",
         "AION-212-KI-0005",
         "AION-214-KI-0006",
+        "AION-216-KI-0007",
     }:
         raise SystemExit(
-            "AION-210-KI-0004, AION-212-KI-0005, or AION-214-KI-0006 "
+            "AION-210-KI-0004, AION-212-KI-0005, AION-214-KI-0006, or AION-216-KI-0007 "
             "must be the sole active authorization after AION-210"
         )
     matches = [

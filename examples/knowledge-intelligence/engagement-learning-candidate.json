@@ -1,0 +1,25 @@
+{
+  "allowed_learning_candidate_kinds": [
+    "research_gap",
+    "clarification_need",
+    "retrieval_strategy",
+    "source_selection",
+    "domain_routing",
+    "verification_rule",
+    "tool_manifest_gap",
+    "response_quality",
+    "preference_candidate"
+  ],
+  "automatic_policy_application": false,
+  "belief_effect": false,
+  "confidence_effect": false,
+  "factual_effect": false,
+  "knowledge_effect": false,
+  "learning_candidate_id": "elc-aion-216-001",
+  "learning_candidate_kind": "research_gap",
+  "model_training": false,
+  "operator_review_required": true,
+  "record_kind": "engagement_learning_candidate_contract_preview",
+  "runtime_effect": false,
+  "source_signal_id": "engagement-signal-aion-216-001"
+}

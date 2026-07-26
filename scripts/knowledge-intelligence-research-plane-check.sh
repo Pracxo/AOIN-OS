@@ -47,6 +47,12 @@ assert program["program_state"] in {
     "temporal_claim_evidence_graph_authorized_not_implemented",
     "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
     "epistemic_truth_engine_authorized_not_implemented",
+    "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
+    "domain_expert_mesh_authorized_not_implemented",
+    "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
+    "tool_verification_fabric_authorized_not_implemented",
+    "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
+    "verified_knowledge_memory_authorized_not_implemented",
 }
 assert program["research_plane_implemented"] is True
 assert program["research_runtime_enabled"] is False
@@ -57,8 +63,35 @@ if program["program_state"] in {
     "temporal_claim_evidence_graph_authorized_not_implemented",
     "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
     "epistemic_truth_engine_authorized_not_implemented",
+    "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
+    "domain_expert_mesh_authorized_not_implemented",
+    "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
+    "tool_verification_fabric_authorized_not_implemented",
+    "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
+    "verified_knowledge_memory_authorized_not_implemented",
 }:
-    if program["program_state"] == "epistemic_truth_engine_authorized_not_implemented":
+    if program["program_state"] == "verified_knowledge_memory_authorized_not_implemented":
+        assert auth["active_knowledge_implementation_authorization"] == "AION-216-KI-0007"
+        assert auth["active_knowledge_implementation_task"] == "AION-217"
+        assert program["formal_closeout_task"] == "AION-218"
+    elif program["program_state"] in {
+        "tool_verification_fabric_authorized_not_implemented",
+        "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
+    }:
+        assert auth["active_knowledge_implementation_authorization"] == "AION-214-KI-0006"
+        assert auth["active_knowledge_implementation_task"] == "AION-215"
+        assert program["formal_closeout_task"] == "AION-216"
+    elif program["program_state"] in {
+        "domain_expert_mesh_authorized_not_implemented",
+        "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
+    }:
+        assert auth["active_knowledge_implementation_authorization"] == "AION-212-KI-0005"
+        assert auth["active_knowledge_implementation_task"] == "AION-213"
+        assert program["formal_closeout_task"] == "AION-214"
+    elif program["program_state"] in {
+        "epistemic_truth_engine_authorized_not_implemented",
+        "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout",
+    }:
         assert auth["active_knowledge_implementation_authorization"] == "AION-210-KI-0004"
         assert auth["active_knowledge_implementation_task"] == "AION-211"
         assert program["formal_closeout_task"] == "AION-212"

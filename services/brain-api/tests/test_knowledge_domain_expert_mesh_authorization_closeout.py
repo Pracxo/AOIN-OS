@@ -47,6 +47,16 @@ def test_aion_212_ki_0005_is_closed_and_non_reusable() -> None:
     assert record["evaluation_used_as_approval"] is False
 
 
-def test_only_aion_214_ki_0006_is_active_after_closeout() -> None:
+def test_only_current_knowledge_authorization_is_active_after_closeout() -> None:
     active = [item for item in _auth_records() if item.get("authorization_active") is True]
-    assert [item["authorization_transaction_id"] for item in active] == ["AION-214-KI-0006"]
+    assert [item["authorization_transaction_id"] for item in active] == ["AION-216-KI-0007"]
+
+    closed_tool_authorization = [
+        item
+        for item in _auth_records()
+        if item.get("authorization_transaction_id") == "AION-214-KI-0006"
+    ]
+    assert len(closed_tool_authorization) == 1
+    assert closed_tool_authorization[0]["authorization_active"] is False
+    assert closed_tool_authorization[0]["authorization_consumed"] is True
+    assert closed_tool_authorization[0]["authorization_closed_by_task"] == "AION-216"

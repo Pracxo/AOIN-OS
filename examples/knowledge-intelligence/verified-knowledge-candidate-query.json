@@ -1,0 +1,9 @@
+{
+  "bounded": true,
+  "limit": 100,
+  "maximum_query_results": 1000,
+  "query_id": "vkc-query-aion-216-001",
+  "record_kind": "verified_knowledge_candidate_query_contract_preview",
+  "runtime_effect": false,
+  "semantic_search_enabled": false
+}

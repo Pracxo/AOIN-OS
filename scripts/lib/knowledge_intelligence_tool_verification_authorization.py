@@ -27,6 +27,9 @@ AUTHORIZED_PROGRAM_STATE = "tool_verification_fabric_authorized_not_implemented"
 IMPLEMENTED_PROGRAM_STATE = (
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
 )
+VERIFIED_KNOWLEDGE_AUTHORIZED_PROGRAM_STATE = (
+    "verified_knowledge_memory_authorized_not_implemented"
+)
 IMPLEMENTED_FABRIC_STATE = (
     "implemented_deterministic_simulation_verification_attestation_persistent_write_disabled"
 )
@@ -410,21 +413,36 @@ def validate_authorization_files(root: Path) -> None:
     auth = load_json(root, "docs/knowledge-intelligence/authorization-ledger.json")
     program = load_json(root, "docs/knowledge-intelligence/program-ledger.json")
     for label, payload in (("authorization", auth), ("program", program)):
-        if payload.get("program_state") not in {AUTHORIZED_PROGRAM_STATE, IMPLEMENTED_PROGRAM_STATE}:
+        if payload.get("program_state") not in {
+            AUTHORIZED_PROGRAM_STATE,
+            IMPLEMENTED_PROGRAM_STATE,
+            VERIFIED_KNOWLEDGE_AUTHORIZED_PROGRAM_STATE,
+        }:
             raise ValueError(f"{label} ledger program state mismatch")
         if payload.get("active_knowledge_implementation_authorization_count") != 1:
             raise ValueError(f"{label} active authorization count mismatch")
-        if payload.get("active_knowledge_implementation_authorization") != AUTHORIZATION_ID:
-            raise ValueError(f"{label} active authorization mismatch")
-        if payload.get("active_knowledge_implementation_task") != IMPLEMENTATION_TASK:
-            raise ValueError(f"{label} active task mismatch")
-        if payload.get("formal_closeout_task") != FORMAL_CLOSEOUT_TASK:
-            raise ValueError(f"{label} closeout task mismatch")
+        if payload.get("program_state") == VERIFIED_KNOWLEDGE_AUTHORIZED_PROGRAM_STATE:
+            if payload.get("active_knowledge_implementation_authorization") != "AION-216-KI-0007":
+                raise ValueError(f"{label} active verified-knowledge authorization mismatch")
+            if payload.get("active_knowledge_implementation_task") != "AION-217":
+                raise ValueError(f"{label} active verified-knowledge task mismatch")
+            if payload.get("formal_closeout_task") != "AION-218":
+                raise ValueError(f"{label} verified-knowledge closeout task mismatch")
+        else:
+            if payload.get("active_knowledge_implementation_authorization") != AUTHORIZATION_ID:
+                raise ValueError(f"{label} active authorization mismatch")
+            if payload.get("active_knowledge_implementation_task") != IMPLEMENTATION_TASK:
+                raise ValueError(f"{label} active task mismatch")
+            if payload.get("formal_closeout_task") != FORMAL_CLOSEOUT_TASK:
+                raise ValueError(f"{label} closeout task mismatch")
         if payload.get("domain_expert_mesh_operator_evaluation_decision") != PASS_DECISION:
             raise ValueError(f"{label} evaluation decision mismatch")
         if payload.get("tool_verification_fabric_authorized") is not True:
             raise ValueError(f"{label} tool verification authorization missing")
-        if payload.get("program_state") == IMPLEMENTED_PROGRAM_STATE:
+        if payload.get("program_state") in {
+            IMPLEMENTED_PROGRAM_STATE,
+            VERIFIED_KNOWLEDGE_AUTHORIZED_PROGRAM_STATE,
+        }:
             if payload.get("tool_verification_fabric_implemented") is not True:
                 raise ValueError(f"{label} tool verification implementation missing")
             if payload.get("tool_verification_fabric_state") != IMPLEMENTED_FABRIC_STATE:
@@ -440,7 +458,10 @@ def validate_authorization_files(root: Path) -> None:
     active = [record for record in auth["records"] if record.get("authorization_active") is True]
     if len(active) != 1:
         raise ValueError("exactly one Knowledge Intelligence authorization must be active")
-    validate_authorization_payload(active[0])
+    if active[0].get("authorization_transaction_id") == AUTHORIZATION_ID:
+        validate_authorization_payload(active[0])
+    elif auth.get("program_state") != VERIFIED_KNOWLEDGE_AUTHORIZED_PROGRAM_STATE:
+        raise ValueError("unexpected active Knowledge Intelligence authorization")
 
     closed = [
         record
@@ -466,12 +487,45 @@ def validate_authorization_files(root: Path) -> None:
             raise ValueError(f"AION-212 closeout mismatch for {key}: {parent.get(key)!r}")
     if parent.get("authorization_consumed_by_prs") != [127]:
         raise ValueError("AION-212 closeout PR evidence mismatch")
+
+    tool_records = [
+        record
+        for record in auth["records"]
+        if record.get("authorization_transaction_id") == AUTHORIZATION_ID
+    ]
+    if len(tool_records) != 1:
+        raise ValueError("AION-214-KI-0006 record missing")
+    if auth.get("program_state") == VERIFIED_KNOWLEDGE_AUTHORIZED_PROGRAM_STATE:
+        tool_record = tool_records[0]
+        for key, expected in {
+            "authorization_active": False,
+            "authorization_consumed": True,
+            "authorization_expired": True,
+            "authorization_reusable": False,
+            "authorization_closed_by_task": "AION-216",
+            "authorization_consumed_by_task": "AION-215",
+        }.items():
+            if tool_record.get(key) != expected:
+                raise ValueError(f"AION-214 closeout mismatch for {key}: {tool_record.get(key)!r}")
+        if tool_record.get("authorization_consumed_by_prs") != [129]:
+            raise ValueError("AION-214 closeout PR evidence mismatch")
+        if tool_record.get("authorization_consumed_by_feature_commits") != [
+            "c9a35cc853ee1587cb9e149a020e2f767ca80881"
+        ]:
+            raise ValueError("AION-214 closeout feature commit evidence mismatch")
+        if tool_record.get("authorization_consumed_by_merge_commits") != [
+            "2988b8f389f7ee3a141f74e351432f4ea79c6eae"
+        ]:
+            raise ValueError("AION-214 closeout merge commit evidence mismatch")
     validate_repository_state(root)
 
 
 def validate_repository_state(root: Path) -> None:
     program = load_json(root, "docs/knowledge-intelligence/program-ledger.json")
-    implemented = program.get("program_state") == IMPLEMENTED_PROGRAM_STATE
+    implemented = program.get("program_state") in {
+        IMPLEMENTED_PROGRAM_STATE,
+        VERIFIED_KNOWLEDGE_AUTHORIZED_PROGRAM_STATE,
+    }
     for relative in AION215_SOURCE_FILES:
         exists = (root / relative).exists()
         if implemented and not exists:

@@ -1,63 +1,74 @@
 from __future__ import annotations
 
+import importlib.util
 import json
+import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
+VALIDATOR = REPO_ROOT / "scripts/lib/knowledge_intelligence_verified_knowledge_authorization.py"
+HARNESS = (
+    REPO_ROOT
+    / "scripts/lib/knowledge_intelligence_integrated_research_agent_operator_evaluation.py"
+)
 
 
-def _load(relative: str) -> dict[str, object]:
+def _load_validator():
+    sys.path.insert(0, str(REPO_ROOT / "scripts/lib"))
+    spec = importlib.util.spec_from_file_location("verified_auth", VALIDATOR)
+    assert spec is not None and spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def _load_json(relative: str) -> dict[str, object]:
     return json.loads((REPO_ROOT / relative).read_text(encoding="utf-8"))
 
 
 def _active_record(ledger: dict[str, object]) -> dict[str, object]:
-    records = ledger["records"]
-    assert isinstance(records, list)
     active = [
         item
-        for item in records
-        if isinstance(item, dict) and item.get("authorization_transaction_id") == "AION-214-KI-0006"
+        for item in ledger["records"]
+        if isinstance(item, dict) and item.get("authorization_active") is True
     ]
     assert len(active) == 1
     return active[0]
 
 
-def test_current_projection_matches_active_tool_verification_authorization() -> None:
+def test_current_projection_matches_active_verified_knowledge_authorization() -> None:
+    active = _active_record(_load_json("docs/knowledge-intelligence/authorization-ledger.json"))
     for relative in (
         "docs/knowledge-intelligence/authorization-ledger.json",
         "docs/knowledge-intelligence/program-ledger.json",
     ):
-        ledger = _load(relative)
-        active = _active_record(_load("docs/knowledge-intelligence/authorization-ledger.json"))
+        ledger = _load_json(relative)
         assert ledger["authorization_transaction_id"] == active["authorization_transaction_id"]
         assert ledger["candidate_id"] == active["candidate_id"]
         assert ledger["workstream"] == active["workstream"]
         assert ledger["implementation_task"] == active["implementation_task"]
         assert ledger["formal_closeout_task"] == active["formal_closeout_task"]
-        assert ledger["active_knowledge_implementation_authorization"] == "AION-214-KI-0006"
-        assert ledger["active_knowledge_implementation_task"] == "AION-215"
-        assert ledger["formal_closeout_task"] == "AION-216"
-        assert ledger["tool_verification_fabric_authorized"] is True
-        assert ledger["tool_verification_fabric_implemented"] is True
-        assert ledger["tool_verification_fabric_state"] == (
-            "implemented_deterministic_simulation_verification_attestation_persistent_write_disabled"
-        )
-        assert ledger["tool_verification_fabric_runtime_enabled"] is False
-        assert ledger["actual_tool_execution_enabled"] is False
-        assert ledger["persistent_tool_state_write_enabled"] is False
+        assert ledger["active_knowledge_implementation_authorization"] == "AION-216-KI-0007"
+        assert ledger["active_knowledge_implementation_task"] == "AION-217"
+        assert ledger["formal_closeout_task"] == "AION-218"
+        assert ledger["verified_knowledge_memory_authorized"] is True
+        assert ledger["verified_knowledge_memory_implemented"] is False
+        assert ledger["verified_knowledge_runtime_enabled"] is False
+        assert ledger["persistent_verified_knowledge_write_enabled"] is False
+        assert ledger["automatic_verified_knowledge_promotion_enabled"] is False
 
 
-def test_aion_212_authorization_is_closed_after_domain_mesh_evaluation() -> None:
-    ledger = _load("docs/knowledge-intelligence/authorization-ledger.json")
-    records = ledger["records"]
-    assert isinstance(records, list)
+def test_aion_214_authorization_is_closed_after_integrated_evaluation() -> None:
+    ledger = _load_json("docs/knowledge-intelligence/authorization-ledger.json")
     closed = [
         item
-        for item in records
-        if isinstance(item, dict) and item.get("authorization_transaction_id") == "AION-212-KI-0005"
+        for item in ledger["records"]
+        if isinstance(item, dict) and item.get("authorization_transaction_id") == "AION-214-KI-0006"
     ]
     assert len(closed) == 1
     assert closed[0]["authorization_active"] is False
     assert closed[0]["authorization_consumed"] is True
     assert closed[0]["authorization_expired"] is True
     assert closed[0]["authorization_reusable"] is False
+    assert closed[0]["authorization_closed_by_task"] == "AION-216"

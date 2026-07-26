@@ -43,6 +43,21 @@ def test_aion_210_creates_sole_active_epistemic_authorization():
     validate_epistemic_authorization(record)
     assert record["authorization_transaction_id"] == EPISTEMIC_AUTH_ID
     if program["program_state"] in {
+        "verified_knowledge_memory_authorized_not_implemented",
+    }:
+        assert active["authorization_transaction_id"] == "AION-216-KI-0007"
+        assert (
+            program["active_knowledge_implementation_authorization"]
+            == "AION-216-KI-0007"
+        )
+        assert program["active_knowledge_implementation_task"] == "AION-217"
+        assert program["formal_closeout_task"] == "AION-218"
+        assert record["authorization_active"] is False
+        assert record["authorization_consumed"] is True
+        assert record["authorization_expired"] is True
+        assert record["authorization_reusable"] is False
+        assert record["authorization_closed_by_task"] == "AION-212"
+    elif program["program_state"] in {
         "tool_verification_fabric_authorized_not_implemented",
         "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
     }:

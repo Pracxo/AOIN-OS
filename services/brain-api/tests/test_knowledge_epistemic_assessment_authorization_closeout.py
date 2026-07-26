@@ -60,9 +60,18 @@ def test_aion_210_cannot_be_the_active_authorization_after_closeout():
     assert active[0]["authorization_transaction_id"] in {
         "AION-212-KI-0005",
         "AION-214-KI-0006",
+        "AION-216-KI-0007",
     }
-    if active[0]["authorization_transaction_id"] == "AION-214-KI-0006":
-        assert active[0]["implementation_task"] == "AION-215"
+    if active[0]["authorization_transaction_id"] in {
+        "AION-214-KI-0006",
+        "AION-216-KI-0007",
+    }:
+        expected_task = (
+            "AION-217"
+            if active[0]["authorization_transaction_id"] == "AION-216-KI-0007"
+            else "AION-215"
+        )
+        assert active[0]["implementation_task"] == expected_task
         closed = [
             record
             for record in _authorization_records()
@@ -88,7 +97,31 @@ def test_aion_212_current_projection_matches_active_authorization():
     assert len(active) == 1
     record = active[0]
 
-    if record["authorization_transaction_id"] == "AION-214-KI-0006":
+    if record["authorization_transaction_id"] == "AION-216-KI-0007":
+        closed = [
+            item
+            for item in auth["records"]
+            if item.get("authorization_transaction_id") == "AION-214-KI-0006"
+        ][0]
+        assert closed["authorization_active"] is False
+        assert closed["authorization_consumed"] is True
+        assert closed["authorization_expired"] is True
+        assert closed["authorization_reusable"] is False
+        assert closed["authorization_closed_by_task"] == "AION-216"
+        assert record["approval_record_id"] == "AION-216-KI-0007"
+        assert record["candidate_id"] == "verified-knowledge-memory-engagement-learning-core"
+        assert record["workstream"] == "knowledge-intelligence-verified-knowledge-memory"
+        assert record["implementation_task"] == "AION-217"
+        assert record["formal_closeout_task"] == "AION-218"
+        assert record["authorization_active"] is True
+        assert record["authorization_consumed"] is False
+        assert record["authorization_expired"] is False
+        assert record["authorization_reusable"] is False
+        assert (
+            record["resource_limits"]["maximum_persistent_verified_knowledge_write_batch"]
+            == 0
+        )
+    elif record["authorization_transaction_id"] == "AION-214-KI-0006":
         closed = [
             item
             for item in auth["records"]
@@ -125,6 +158,7 @@ def test_aion_212_current_projection_matches_active_authorization():
     assert record["authorization_transaction_id"] in {
         "AION-212-KI-0005",
         "AION-214-KI-0006",
+        "AION-216-KI-0007",
     }
 
     for payload in (auth, program):
