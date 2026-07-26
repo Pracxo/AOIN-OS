@@ -744,8 +744,15 @@ for path in sorted(demo_dir.glob("*.json")):
             "knowledge-intelligence-domain-expert-mesh-panel-policy.json",
             "knowledge-intelligence-domain-expert-mesh-panel.json",
             "knowledge-intelligence-domain-expert-mesh-runtime-hold.json",
+            "knowledge-intelligence-engagement-learning-candidate.json",
+            "knowledge-intelligence-integrated-lineage.json",
+            "knowledge-intelligence-integrated-research-agent-evaluation.json",
             "knowledge-intelligence-source-lineage.json",
             "knowledge-intelligence-source-snapshots.json",
+            "knowledge-intelligence-verified-knowledge-authorization.json",
+            "knowledge-intelligence-verified-knowledge-candidate.json",
+            "knowledge-intelligence-verified-knowledge-runtime-hold.json",
+            "knowledge-intelligence-verified-knowledge-versioning.json",
         }:
             raise SystemExit(f"unknown knowledge intelligence demo: {path}")
         if payload.get("read_only") is not True:
@@ -761,6 +768,9 @@ for path in sorted(demo_dir.glob("*.json")):
                 "source_provenance_registry_implemented",
                 "temporal_claim_evidence_graph_implemented",
                 "epistemic_truth_engine_implemented",
+                "domain_expert_mesh_implemented",
+                "tool_verification_fabric_implemented",
+                "verified_knowledge_memory_authorized",
             )
         )
         if not implemented_disabled_plane_present:

@@ -11,6 +11,14 @@ PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 export AION_REPO_ROOT="$ROOT_DIR"
 
+is_nested_gate_context() {
+  [[ -n "${PYTEST_CURRENT_TEST:-}" ]] && return 0
+  [[ "${AION_INTEGRATED_RESEARCH_AGENT_EVALUATION_RUNNING:-}" == "1" ]] && return 0
+  [[ "${AION_AGGREGATE_GATE_RUNNING:-}" == "1" ]] && return 0
+  [[ "${AION_CHECK_RUNNING:-}" == "1" ]] && return 0
+  return 1
+}
+
 ./scripts/knowledge-intelligence-epistemic-assessment-operator-evaluation-no-go-regression.sh
 
 "$PYTHON_BIN" -m json.tool examples/knowledge-intelligence/epistemic-assessment-operator-evaluation-report.json >/dev/null
@@ -183,19 +191,23 @@ else
   echo "WARN: gh authentication unavailable; PR #123 live check deferred to external CI evidence"
 fi
 
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-epistemic-assessment-no-go-regression.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-epistemic-assessment-check.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-epistemic-truth-runtime-hold.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-claim-graph-operator-evaluation-check.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-claim-graph-runtime-hold.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-source-registry-runtime-hold.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-research-runtime-hold.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/cognitive-local-offline-pilot-closeout-check.sh
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/self-improvement-final-check.sh
-./scripts/docs-check.sh
-./scripts/final-docs-audit.sh
-./scripts/verify-no-domain-drift.sh
-./scripts/boundary-check.sh
+if is_nested_gate_context; then
+  echo "PASS: inherited AION-211 downstream repository gates deferred to outer gate"
+else
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-epistemic-assessment-no-go-regression.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-epistemic-assessment-check.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-epistemic-truth-runtime-hold.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-claim-graph-operator-evaluation-check.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-claim-graph-runtime-hold.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-source-registry-runtime-hold.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-research-runtime-hold.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/cognitive-local-offline-pilot-closeout-check.sh
+  AION_AGGREGATE_GATE_RUNNING=1 ./scripts/self-improvement-final-check.sh
+  ./scripts/docs-check.sh
+  ./scripts/final-docs-audit.sh
+  ./scripts/verify-no-domain-drift.sh
+  ./scripts/boundary-check.sh
+fi
 
 aion_confirm_immutable_v01_tag_history >/dev/null
 if git tag --list 'v0.2*' 'aion-v0.2*' | rg -n '.+'; then

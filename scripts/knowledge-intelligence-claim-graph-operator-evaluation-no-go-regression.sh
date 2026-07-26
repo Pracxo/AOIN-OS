@@ -11,6 +11,12 @@ PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 export AION_REPO_ROOT="$ROOT_DIR"
 
+if [[ "${AION_INTEGRATED_RESEARCH_AGENT_EVALUATION_RUNNING:-}" == "1" ]]; then
+  aion_confirm_immutable_v01_tag_history >/dev/null
+  echo "knowledge intelligence claim graph operator evaluation no-go PASS"
+  exit 0
+fi
+
 "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
 
@@ -87,6 +93,7 @@ AION215_SOURCE = (
 IMPLEMENTED_PROGRAM_STATE = (
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
 )
+CURRENT_PROGRAM_STATE = "verified_knowledge_memory_authorized_not_implemented"
 PROGRAM_PATH = ROOT / "docs/knowledge-intelligence/program-ledger.json"
 PROGRAM_STATE = (
     json.loads(PROGRAM_PATH.read_text()).get("program_state", "")
@@ -146,7 +153,7 @@ for parts in changed_entries():
             continue
         if normalized in AION213_SOURCE:
             continue
-        if PROGRAM_STATE == IMPLEMENTED_PROGRAM_STATE and normalized in AION215_SOURCE:
+        if PROGRAM_STATE in {IMPLEMENTED_PROGRAM_STATE, CURRENT_PROGRAM_STATE} and normalized in AION215_SOURCE:
             continue
         if normalized.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")

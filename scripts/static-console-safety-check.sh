@@ -248,6 +248,8 @@ allowed_authorization_demo_names = {
     "knowledge-intelligence-domain-expert-mesh-budget.json",
     "knowledge-intelligence-domain-expert-mesh-disagreement.json",
     "knowledge-intelligence-domain-expert-mesh-panel-policy.json",
+    "knowledge-intelligence-integrated-research-agent-evaluation.json",
+    "knowledge-intelligence-verified-knowledge-authorization.json",
     "knowledge-intelligence-domain-expert-mesh-panel.json",
     "knowledge-intelligence-domain-expert-mesh-runtime-hold.json",
     "knowledge-intelligence-domain-expert-critiques.json",

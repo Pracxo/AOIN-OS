@@ -1,0 +1,57 @@
+{
+  "deterministic_order": true,
+  "evaluation_id": "AION-IRAE-001",
+  "lineage": {
+    "acquisition_result_fingerprint": "d6e9d98734dddfd31f98088dc13f7e671b72726cf50fa8373882810893dd9b2b",
+    "attestation_chain_head": "72f0618b45ee047bfe44bc210166ac950f0d8df4b1c36ea5660cb2fd2fab795d",
+    "citation_fingerprints": [
+      "bcbe7605b1ca3ba82ba9ebb19349cc8665adcc75c84219afe048de44e6457868",
+      "0ec6ad625dd036209ebc7d65d26cbb2853b6db1cac0ab4ad180b39947aa5ea85",
+      "0544b7a76876bca5abdf19b65065b8d5c2ac4b93301ab04221a38cbbdcfc577f"
+    ],
+    "claim_graph_integrity_fingerprint": "5e5d8f848a9044dbbc6b180e952d632877a3eba04d56b60c5abe83f94d0dfc18",
+    "claim_identity_fingerprint": "3239224743b805f0813dfe7134ba035b7d8e08372c6614b139aabe1102ed5296",
+    "deterministic_order": true,
+    "domain_mesh_session_fingerprint": "cf773e5734630ed9b21c0d51116c1826021d95363b71ebec54abee8f12c61680",
+    "epistemic_assessment_fingerprint": "60b0961e3cc9c4383c2209098ebd2493d7487de86119c3c5461c8507f49ab4d4",
+    "hidden_reasoning_included": false,
+    "integrated_trace_fingerprint": "6a54633c0a3451eed74f33d64eec14550c3bcb9c9d04d87f851056d2c566f070",
+    "lineage_complete": true,
+    "provenance_fingerprints": [
+      "1721798bb62286e38afa8df71b370d0ace836238bd974b18ad6d3fed7a179d79",
+      "9a776ec643869b4be911075dbe2feebc99ce4af3a18601d491df9b29f4c8ff43",
+      "1b91c775198bcf649bf27ba4d5d58994b6c622fa7d77d5e55ecaa44e6edaf1fe"
+    ],
+    "raw_prompt_included": false,
+    "references_resolve": true,
+    "research_plan_id": "research-plan-integrated-aion-216-001",
+    "runtime_effect": false,
+    "sensitivity_trace_fingerprint": "8a8ea51281194f984fd13e8c58d900be938d971e8ae6d372017245ee1aceef2d",
+    "source_body_included": false,
+    "source_registry_integrity_fingerprint": "67e3100bcd5cf393766046c045539ac19e8d250db735188c96f757eb2183ab5b",
+    "source_snapshot_fingerprints": [
+      "204afacc2251060ff05790979085ef0393b683bab7be447ae949f9ecc7439e71",
+      "109f1ca18839f0608e6c85976380de17905bb80eb88a025be7f4e619e75d5560",
+      "5c48d168f733b5ac0bfbd9626eb21aaa0fe8837194cf30dc87feba33a8621314"
+    ],
+    "synthesis_fingerprint": "429b492b54be8f50da97a056958cd90dc2ae77d39301fd3e781803f774a2141a",
+    "tool_verification_session_fingerprint": "8caa97badcc83477f113de7e230223d9f7c3b707e7ad80bf037ef85e61193cdb"
+  },
+  "lineage_complete": true,
+  "plane_order": [
+    "research_acquisition",
+    "source_provenance_registry",
+    "temporal_claim_evidence_graph",
+    "epistemic_assessment",
+    "domain_expert_mesh",
+    "tool_verification_fabric"
+  ],
+  "read_only": true,
+  "record_kind": "integrated_knowledge_lineage",
+  "redacted": true,
+  "references_resolve": true,
+  "runtime_effect": false,
+  "source_body_included": false,
+  "verified_knowledge_memory_authorized": true,
+  "verified_knowledge_memory_implemented": false
+}

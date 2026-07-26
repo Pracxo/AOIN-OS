@@ -1373,6 +1373,35 @@ aion214_auth_paths = {
     "services/brain-api/tests/test_knowledge_tool_verification_authorization_validator.py",
 }
 
+aion216_auth_paths = {
+    "docs/adr/0180-integrated-research-agent-evaluation-and-verified-knowledge-memory-authorization.md",
+    "docs/knowledge-intelligence/authorization-ledger.json",
+    "docs/release/knowledge-intelligence-integrated-research-agent-evaluation-closeout.md",
+    "docs/release/knowledge-intelligence-verified-knowledge-authorization-transaction.md",
+    "docs/release/knowledge-intelligence-verified-knowledge-explicit-approval-record.md",
+    "docs/release/knowledge-intelligence-verified-knowledge-scope.md",
+    "docs/release/knowledge-intelligence-verified-knowledge-runtime-hold.md",
+    "docs/release/knowledge-intelligence-verified-knowledge-no-go.md",
+    "docs/release/knowledge-intelligence-verified-knowledge-checklist.md",
+    "docs/release/knowledge-intelligence-verified-knowledge-evidence-matrix.md",
+    "examples/knowledge-intelligence/integrated-research-agent-operator-evaluation-report.json",
+    "examples/knowledge-intelligence/verified-knowledge-authorization.json",
+    "operator-console-static/demo-data/knowledge-intelligence-integrated-research-agent-evaluation.json",
+    "operator-console-static/demo-data/knowledge-intelligence-verified-knowledge-authorization.json",
+    "scripts/knowledge-intelligence-integrated-research-agent-operator-evaluation-check.sh",
+    "scripts/knowledge-intelligence-integrated-research-agent-operator-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-verified-knowledge-authorization-check.sh",
+    "scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-verified-knowledge-runtime-hold.sh",
+    "scripts/lib/knowledge_intelligence_integrated_research_agent_operator_evaluation.py",
+    "scripts/lib/knowledge_intelligence_verified_knowledge_authorization.py",
+    "services/brain-api/tests/test_knowledge_integrated_research_agent_authorization_closeout.py",
+    "services/brain-api/tests/test_knowledge_integrated_research_agent_operator_evaluation.py",
+    "services/brain-api/tests/test_knowledge_integrated_research_agent_operator_evaluation_docs.py",
+    "services/brain-api/tests/test_knowledge_verified_memory_authorization_docs.py",
+    "services/brain-api/tests/test_knowledge_verified_memory_authorization_validator.py",
+}
+
 blocked_package_names = {
     "package.json",
     "package-lock.json",
@@ -1420,6 +1449,7 @@ for name in [*changed, *untracked]:
         and name not in aion210_auth_paths
         and name not in aion212_auth_paths
         and name not in aion214_auth_paths
+        and name not in aion216_auth_paths
     ):
         raise SystemExit(f"unexpected auth runtime or artifact path: {name}")
 

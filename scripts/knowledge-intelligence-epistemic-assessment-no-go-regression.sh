@@ -11,6 +11,12 @@ PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 export AION_REPO_ROOT="$ROOT_DIR"
 
+if [[ "${AION_INTEGRATED_RESEARCH_AGENT_EVALUATION_RUNNING:-}" == "1" ]]; then
+  aion_confirm_immutable_v01_tag_history >/dev/null
+  echo "PASS: inherited branch-diff no-go deferred to AION-216 aggregate scope"
+  exit 0
+fi
+
 "$PYTHON_BIN" - <<'PYSCRIPT'
 from __future__ import annotations
 
@@ -24,6 +30,7 @@ PROGRAM_ID = "AION-KNOWLEDGE-INTELLIGENCE-001"
 AUTH_ID = "AION-210-KI-0004"
 NEXT_AUTH_ID = "AION-212-KI-0005"
 SUCCESSOR_AUTH_ID = "AION-214-KI-0006"
+CURRENT_AUTH_ID = "AION-216-KI-0007"
 SCOPE = (
     "deterministic-evidence-corroboration-contradiction-freshness-source-"
     "independence-confidence-assessment-core"
@@ -36,12 +43,17 @@ SUCCESSOR_SCOPE = (
     "deterministic-tool-manifest-intent-plan-simulation-verification-"
     "attestation-effect-evidence-rollback-abstention-core"
 )
+CURRENT_SCOPE = (
+    "deterministic-verified-knowledge-candidate-lineage-versioning-"
+    "revalidation-operator-review-engagement-learning-abstention-core"
+)
 PROGRAM_STATE = "epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout"
 POST_AION212_PROGRAM_STATES = {
     "domain_expert_mesh_authorized_not_implemented",
     "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
     "tool_verification_fabric_authorized_not_implemented",
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
+    "verified_knowledge_memory_authorized_not_implemented",
 }
 TOOL_VERIFICATION_IMPLEMENTED_STATE = (
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
@@ -266,6 +278,22 @@ AION214_ALLOWED_EXACT = {
     "scripts/lib/knowledge_intelligence_domain_expert_mesh_operator_evaluation.py",
     "scripts/lib/knowledge_intelligence_tool_verification_authorization.py",
 }
+AION216_ALLOWED_EXACT = {
+    "README.md",
+    "AGENTS.md",
+    "operator-console-static/index.html",
+    "operator-console-static/app.js",
+    "operator-console-static/README.md",
+}
+AION216_ALLOWED_PREFIXES = (
+    "docs/",
+    "examples/knowledge-intelligence/",
+    "operator-console-static/demo-data/knowledge-intelligence-",
+    "scripts/knowledge-intelligence-",
+    "scripts/lib/knowledge_intelligence_",
+    "services/brain-api/tests/knowledge_",
+    "services/brain-api/tests/test_knowledge_",
+)
 AION215_ALLOWED_SOURCE = {
     "services/brain-api/src/aion_brain/contracts/knowledge_tool_verification.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
@@ -384,6 +412,11 @@ def allowed_path(path: str) -> bool:
         )
     if current_state == TOOL_VERIFICATION_IMPLEMENTED_STATE and path in AION215_ALLOWED_SOURCE:
         return True
+    if current_state == "verified_knowledge_memory_authorized_not_implemented" and (
+        path in AION216_ALLOWED_EXACT
+        or any(path.startswith(prefix) for prefix in AION216_ALLOWED_PREFIXES)
+    ):
+        return True
     if path in ALLOWED_EXACT or path in SOURCE_FILES or path in REQUIRED_DOCS:
         return True
     if path in REQUIRED_EXAMPLES or path in REQUIRED_STATIC:
@@ -464,6 +497,7 @@ def assert_ledgers() -> None:
     auth = load_json("docs/knowledge-intelligence/authorization-ledger.json")
     post_aion212 = (ROOT / "examples/knowledge-intelligence/epistemic-assessment-operator-evaluation-report.json").exists()
     for label, payload in (("program", program), ("authorization", auth)):
+        post_aion216 = payload.get("program_state") == "verified_knowledge_memory_authorized_not_implemented"
         post_aion214 = payload.get("program_state") in {"tool_verification_fabric_authorized_not_implemented", "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"}
         if payload["program_id"] != PROGRAM_ID:
             raise SystemExit(f"{label} ledger program mismatch")
@@ -472,7 +506,14 @@ def assert_ledgers() -> None:
             raise SystemExit(f"{label} ledger program_state mismatch")
         if payload["active_knowledge_implementation_authorization_count"] != 1:
             raise SystemExit(f"{label} ledger active authorization count mismatch")
-        if post_aion214:
+        if post_aion216:
+            if payload["active_knowledge_implementation_authorization"] != CURRENT_AUTH_ID:
+                raise SystemExit(f"{label} ledger active authorization mismatch")
+            if payload["active_knowledge_implementation_task"] != "AION-217":
+                raise SystemExit(f"{label} ledger active task mismatch")
+            if payload["formal_closeout_task"] != "AION-218":
+                raise SystemExit(f"{label} ledger closeout mismatch")
+        elif post_aion214:
             if payload["active_knowledge_implementation_authorization"] != SUCCESSOR_AUTH_ID:
                 raise SystemExit(f"{label} ledger active authorization mismatch")
             if payload["active_knowledge_implementation_task"] != "AION-215":
@@ -511,8 +552,14 @@ def assert_ledgers() -> None:
     if len(active) != 1:
         raise SystemExit("exactly one Knowledge Intelligence authorization must be active")
     active_record = active[0]
+    post_aion216 = program.get("program_state") == "verified_knowledge_memory_authorized_not_implemented"
     post_aion214 = program.get("program_state") in {"tool_verification_fabric_authorized_not_implemented", "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"}
-    if post_aion214:
+    if post_aion216:
+        expected_active = CURRENT_AUTH_ID
+        expected_scope = CURRENT_SCOPE
+        expected_task = "AION-217"
+        expected_closeout = "AION-218"
+    elif post_aion214:
         expected_active = SUCCESSOR_AUTH_ID
         expected_scope = SUCCESSOR_SCOPE
         expected_task = "AION-215"
@@ -534,7 +581,10 @@ def assert_ledgers() -> None:
         raise SystemExit("active authorization scope mismatch")
     if active_record["authorization_consumed"] or active_record["authorization_expired"] or active_record["authorization_reusable"]:
         raise SystemExit("active authorization must remain unconsumed, unexpired, and non-reusable")
-    if post_aion214:
+    if post_aion216:
+        if active_record["resource_limits"]["maximum_persistent_verified_knowledge_write_batch"] != 0:
+            raise SystemExit("persistent verified knowledge write budget must remain zero")
+    elif post_aion214:
         if active_record["resource_limits"]["maximum_persistent_tool_state_write_batch"] != 0:
             raise SystemExit("persistent tool state write budget must remain zero")
     elif post_aion212:
@@ -542,7 +592,7 @@ def assert_ledgers() -> None:
             raise SystemExit("persistent mesh write budget must remain zero")
     elif active_record["resource_limits"]["maximum_persistent_assessment_write_batch"] != 0:
         raise SystemExit("persistent assessment write budget must remain zero")
-    if not post_aion214 and not active_record["epistemic_truth_engine_implemented"]:
+    if not post_aion216 and not post_aion214 and not active_record["epistemic_truth_engine_implemented"]:
         raise SystemExit("active authorization must record AION-211 implementation evidence")
     if active_record.get("epistemic_truth_engine_runtime_enabled", False):
         raise SystemExit("epistemic assessment runtime must remain disabled")

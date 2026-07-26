@@ -109,7 +109,11 @@ active = [
 if len(active) != 1:
     raise SystemExit("active AION-212-KI-0005 authorization record missing")
 record = active[0]
-post_aion214 = program.get("program_state") in {"tool_verification_fabric_authorized_not_implemented", "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"}
+post_aion214 = program.get("program_state") in {
+    "tool_verification_fabric_authorized_not_implemented",
+    "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
+    "verified_knowledge_memory_authorized_not_implemented",
+}
 if post_aion214:
     if record["authorization_active"] is not False:
         raise SystemExit("AION-212-KI-0005 must be inactive after AION-214")
@@ -120,8 +124,13 @@ if post_aion214:
     if record.get("authorization_closed_by_task") != "AION-214":
         raise SystemExit("AION-212-KI-0005 must be closed by AION-214")
     successor = [item for item in auth["records"] if item.get("authorization_active") is True]
-    if len(successor) != 1 or successor[0].get("authorization_transaction_id") != "AION-214-KI-0006":
-        raise SystemExit("AION-214-KI-0006 must be the sole active authorization")
+    expected_successor = (
+        "AION-216-KI-0007"
+        if program.get("program_state") == "verified_knowledge_memory_authorized_not_implemented"
+        else "AION-214-KI-0006"
+    )
+    if len(successor) != 1 or successor[0].get("authorization_transaction_id") != expected_successor:
+        raise SystemExit(f"{expected_successor} must be the sole active authorization")
 else:
     if record["authorization_active"] is not True:
         raise SystemExit("AION-212-KI-0005 must remain active")
@@ -142,11 +151,16 @@ for relative in (
 ):
     ledger = json.loads((ROOT / relative).read_text())
     if post_aion214:
-        if ledger["authorization_transaction_id"] != "AION-214-KI-0006":
+        expected_projection = (
+            ("AION-216-KI-0007", "AION-217", "AION-218")
+            if ledger.get("program_state") == "verified_knowledge_memory_authorized_not_implemented"
+            else ("AION-214-KI-0006", "AION-215", "AION-216")
+        )
+        if ledger["authorization_transaction_id"] != expected_projection[0]:
             raise SystemExit(f"successor projection mismatch for {relative}: authorization")
-        if ledger["implementation_task"] != "AION-215":
+        if ledger["implementation_task"] != expected_projection[1]:
             raise SystemExit(f"successor projection mismatch for {relative}: implementation task")
-        if ledger["formal_closeout_task"] != "AION-216":
+        if ledger["formal_closeout_task"] != expected_projection[2]:
             raise SystemExit(f"successor projection mismatch for {relative}: closeout")
     else:
         for key in (

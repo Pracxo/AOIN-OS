@@ -14,7 +14,7 @@ identity boundary, but production authentication runtime remains disabled.
 External connectors remain disabled. Operator write execution remains disabled.
 Module activation remains disabled. No v0.2 tag or release exists.
 
-Knowledge Intelligence status: AION-214 domain expert mesh operator evaluation complete and deterministic tool verification fabric authorized. `AION-214-KI-0006` is the sole active Knowledge Intelligence authorization for AION-215; AION-216 is the formal closeout. Tool verification remains simulation-only and executes no real tool.
+Knowledge Intelligence status: AION-216 integrated research-agent operator evaluation complete and verified knowledge memory authorized. `AION-216-KI-0007` is the sole active Knowledge Intelligence authorization for AION-217; AION-218 is the formal closeout. Verified-knowledge memory remains authorized, not implemented, runtime-disabled, persistence-disabled, and engagement remains non-factual.
 The request identity boundary is default-off, observe-only, anonymous, and
 authorized by `AION-155-PA-0003` for `AION-156`.
 
@@ -5160,3 +5160,13 @@ It remains runtime-disabled and persistent-write-disabled. It is not an absolute
 ## AION-213 Deterministic Domain Expert Mesh
 
 AION-213 implements the deterministic in-memory advisory domain expert mesh under active authorization AION-212-KI-0005. The mesh provides explicit taxonomy, computational profiles, deterministic routing, independent panels, evidence-bound reports, critiques, disagreement and dissent preservation, bounded synthesis, confidence non-amplification, high-stakes abstention, fixture replay, exact queries, integrity audit, and operator-review evidence. Runtime activation, persistent mesh writes, databases, model providers, model calls, tools, network access, human identity claims, professional credential claims, truth override, automatic claim decisions, autonomous action, knowledge promotion, and belief mutation remain disabled pending AION-214 formal closeout.
+
+## AION-216 Integrated Research-Agent Evaluation and Verified Knowledge Authorization
+
+Current milestone: AION-216 integrated research-agent operator evaluation complete and verified knowledge memory authorized.
+
+Current stage: The complete Knowledge Intelligence chain from controlled research acquisition through source provenance, claim representation, epistemic assessment, domain expert analysis, and tool verification is implemented and passed deterministic read-only integrated evaluation. The verified-knowledge candidate memory and engagement-learning candidate plane is authorized and not implemented.
+
+Required flags: `integrated_research_agent_operator_evaluation_passed=true`, `integrated_research_agent_operator_evaluation_id=AION-IRAE-001`, `research_runtime_enabled=false`, `source_registry_runtime_enabled=false`, `claim_graph_runtime_enabled=false`, `epistemic_truth_engine_runtime_enabled=false`, `domain_expert_mesh_runtime_enabled=false`, `tool_verification_fabric_runtime_enabled=false`, `actual_tool_execution_enabled=false`, `verified_knowledge_memory_authorized=true`, `verified_knowledge_memory_implemented=false`, `automatic_verified_knowledge_promotion_enabled=false`, `persistent_verified_knowledge_write_enabled=false`, `engagement_learning_candidate_plane_authorized=true`, `engagement_learning_candidate_plane_implemented=false`, `engagement_signal_as_fact_enabled=false`, `engagement_confidence_effect_enabled=false`, `cognitive_memory_write_enabled=false`, `belief_mutation_enabled=false`, `active_knowledge_implementation_authorization=AION-216-KI-0007`, `active_knowledge_implementation_task=AION-217`, `formal_closeout_task=AION-218`.
+
+The integrated research-agent chain passed evaluation. A knowledge candidate is still reviewable evidence. Candidate eligibility does not equal factual truth. User engagement is not factual evidence. Tool output is not factual knowledge. Automatic promotion, cognitive-memory writes, persistent writes, and public-network research remain disabled. AION-218 is the future candidate-memory evaluation and controlled public-research-pilot authorization task.

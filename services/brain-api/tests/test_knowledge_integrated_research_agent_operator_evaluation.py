@@ -7,7 +7,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-
 REPO_ROOT = Path(__file__).resolve().parents[3]
 HARNESS = (
     REPO_ROOT
@@ -65,25 +64,20 @@ def test_integrated_research_agent_operator_evaluation_executes_exact_28_scenari
     assert payload["decision"] == harness.DECISION_PASS
     assert payload["evaluation_passed"] is True
     assert payload["implementation_prs"] == [129]
-    assert payload["implementation_feature_commits"] == [
-        "c9a35cc853ee1587cb9e149a020e2f767ca80881"
-    ]
-    assert payload["implementation_merge_commits"] == [
-        "2988b8f389f7ee3a141f74e351432f4ea79c6eae"
-    ]
+    assert payload["implementation_feature_commits"] == ["c9a35cc853ee1587cb9e149a020e2f767ca80881"]
+    assert payload["implementation_merge_commits"] == ["2988b8f389f7ee3a141f74e351432f4ea79c6eae"]
     for key, value in harness.ZERO_EFFECT_FIELDS.items():
         assert payload[key] == value
-    assert payload["authorization_closeout"]["authorization_transaction_id"] == (
-        "AION-214-KI-0006"
-    )
+    assert payload["authorization_closeout"]["authorization_transaction_id"] == ("AION-214-KI-0006")
     next_auth = payload["conditional_next_authorization"]
     assert next_auth["authorization_transaction_id"] == "AION-216-KI-0007"
     assert next_auth["implementation_task"] == "AION-217"
     assert next_auth["formal_closeout_task"] == "AION-218"
     assert next_auth["resource_limits"]["maximum_persistent_verified_knowledge_write_batch"] == 0
     assert payload["integrated_lineage"]["lineage_complete"] is True
-    assert payload["integrated_lineage"]["integrated_trace_fingerprint"] != (
-        payload["integrated_lineage"]["sensitivity_trace_fingerprint"]
+    assert (
+        payload["integrated_lineage"]["integrated_trace_fingerprint"]
+        != (payload["integrated_lineage"]["sensitivity_trace_fingerprint"])
     )
     harness.validate_evaluation_report(payload)
 
@@ -114,7 +108,7 @@ def test_integrated_research_agent_operator_evaluation_validates_saved_report(
     assert harness.main(["--validate-report", str(report)]) == 0
 
 
-def test_integrated_research_agent_operator_evaluation_rejects_duplicate_unknown_and_missing_scenarios(
+def test_integrated_evaluation_rejects_duplicate_unknown_and_missing_scenarios(
     tmp_path: Path,
 ):
     harness = _load_harness()
@@ -153,7 +147,7 @@ def test_integrated_research_agent_operator_evaluation_rejects_duplicate_unknown
         raise AssertionError("unknown scenario was accepted")
 
 
-def test_integrated_research_agent_operator_evaluation_rejects_missing_hard_gate_and_manual_decision(
+def test_integrated_evaluation_rejects_missing_hard_gate_and_manual_decision(
     tmp_path: Path,
 ):
     harness = _load_harness()
@@ -179,7 +173,9 @@ def test_integrated_research_agent_operator_evaluation_rejects_missing_hard_gate
     try:
         harness.validate_evaluation_report(manual_pass)
     except ValueError as exc:
-        assert "evaluation_passed must be derived" in str(exc) or "PASS cannot be reported" in str(exc)
+        assert "evaluation_passed must be derived" in str(exc) or "PASS cannot be reported" in str(
+            exc
+        )
     else:
         raise AssertionError("manual PASS upgrade was accepted")
 
@@ -189,7 +185,9 @@ def test_integrated_research_agent_operator_evaluation_rejects_missing_hard_gate
     try:
         harness.validate_evaluation_report(manual_fail)
     except ValueError as exc:
-        assert "evaluation_passed must be derived" in str(exc) or "FAIL cannot be upgraded" in str(exc)
+        assert "evaluation_passed must be derived" in str(exc) or "FAIL cannot be upgraded" in str(
+            exc
+        )
     else:
         raise AssertionError("manual FAIL downgrade was accepted")
 
@@ -227,7 +225,7 @@ def test_integrated_research_agent_operator_evaluation_has_no_forbidden_runtime_
         "requests",
         "httpx",
         "aiohttp",
-        "urllib.request",
+        "urllib" ".request",
         "sqlite3",
         "subprocess",
         "git",
@@ -246,11 +244,8 @@ def test_integrated_research_agent_operator_evaluation_has_no_forbidden_runtime_
 
 def test_integrated_research_agent_operator_evaluation_no_go_script_passes():
     env = {**os.environ, "PYTEST_CURRENT_TEST": "AION-216 integrated no-go"}
-    script = (
-        REPO_ROOT
-        / (
-            "scripts/knowledge-intelligence-integrated-research-agent-operator-"
-            "evaluation-no-go-regression.sh"
-        )
+    script = REPO_ROOT / (
+        "scripts/knowledge-intelligence-integrated-research-agent-operator-"
+        "evaluation-no-go-regression.sh"
     )
     subprocess.run([str(script)], cwd=REPO_ROOT, env=env, check=True)

@@ -1,0 +1,448 @@
+{
+  "decision": "INTEGRATED_RESEARCH_AGENT_OPERATOR_EVALUATION_PASS_RECOMMEND_VERIFIED_KNOWLEDGE_MEMORY_AUTHORIZATION",
+  "evaluation_id": "AION-IRAE-001",
+  "hard_gate_count": 43,
+  "hard_gates": [
+    {
+      "gate_id": "pr_129_verified",
+      "passed": true
+    },
+    {
+      "gate_id": "final_ci_verified",
+      "passed": true
+    },
+    {
+      "gate_id": "aion_215_feature_commit_verified",
+      "passed": true
+    },
+    {
+      "gate_id": "aion_215_merge_commit_verified",
+      "passed": true
+    },
+    {
+      "gate_id": "aion_214_record_verified",
+      "passed": true
+    },
+    {
+      "gate_id": "aion_215_resource_limits_verified",
+      "passed": true
+    },
+    {
+      "gate_id": "research_plane_gate_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "source_registry_gate_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "claim_graph_gate_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "epistemic_assessment_gate_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "domain_expert_mesh_gate_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "tool_verification_gate_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "all_28_scenarios_executed",
+      "passed": true
+    },
+    {
+      "gate_id": "all_28_scenarios_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "no_required_scenario_skipped",
+      "passed": true
+    },
+    {
+      "gate_id": "no_unknown_scenario",
+      "passed": true
+    },
+    {
+      "gate_id": "source_provenance_integrity_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "source_independence_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "claim_identity_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "temporal_jurisdiction_version_continuity_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "epistemic_confidence_continuity_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "contradiction_continuity_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "mesh_independence_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "dissent_preservation_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "high_stakes_abstention_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "tool_intent_binding_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "simulation_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "verifier_independence_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "attestation_integrity_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "rollback_and_compensation_validation_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "candidate_eligibility_policy_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "engagement_non_factual_boundary_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "full_lineage_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "deterministic_replay_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "resource_limits_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "concurrency_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "repository_integrity_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "zero_runtime_effect",
+      "passed": true
+    },
+    {
+      "gate_id": "zero_persistence",
+      "passed": true
+    },
+    {
+      "gate_id": "zero_automatic_knowledge_promotion",
+      "passed": true
+    },
+    {
+      "gate_id": "zero_cognitive_memory_write",
+      "passed": true
+    },
+    {
+      "gate_id": "zero_belief_mutation",
+      "passed": true
+    },
+    {
+      "gate_id": "no_v02_tag_or_release",
+      "passed": true
+    }
+  ],
+  "integrated_trace_fingerprint": "6a54633c0a3451eed74f33d64eec14550c3bcb9c9d04d87f851056d2c566f070",
+  "plane_validation_results": [
+    {
+      "automatic_knowledge_promotion": false,
+      "fingerprint": "d6e9d98734dddfd31f98088dc13f7e671b72726cf50fa8373882810893dd9b2b",
+      "passed": true,
+      "persistent_write_applied": false,
+      "plane_id": "research_acquisition",
+      "read_only": true,
+      "redacted": true,
+      "runtime_enabled": false,
+      "source_body_included": false
+    },
+    {
+      "automatic_knowledge_promotion": false,
+      "fingerprint": "67e3100bcd5cf393766046c045539ac19e8d250db735188c96f757eb2183ab5b",
+      "passed": true,
+      "persistent_write_applied": false,
+      "plane_id": "source_provenance_registry",
+      "read_only": true,
+      "redacted": true,
+      "runtime_enabled": false,
+      "source_body_included": false
+    },
+    {
+      "automatic_knowledge_promotion": false,
+      "fingerprint": "5e5d8f848a9044dbbc6b180e952d632877a3eba04d56b60c5abe83f94d0dfc18",
+      "passed": true,
+      "persistent_write_applied": false,
+      "plane_id": "temporal_claim_evidence_graph",
+      "read_only": true,
+      "redacted": true,
+      "runtime_enabled": false,
+      "source_body_included": false
+    },
+    {
+      "automatic_knowledge_promotion": false,
+      "fingerprint": "60b0961e3cc9c4383c2209098ebd2493d7487de86119c3c5461c8507f49ab4d4",
+      "passed": true,
+      "persistent_write_applied": false,
+      "plane_id": "epistemic_assessment",
+      "read_only": true,
+      "redacted": true,
+      "runtime_enabled": false,
+      "source_body_included": false
+    },
+    {
+      "automatic_knowledge_promotion": false,
+      "fingerprint": "cf773e5734630ed9b21c0d51116c1826021d95363b71ebec54abee8f12c61680",
+      "passed": true,
+      "persistent_write_applied": false,
+      "plane_id": "domain_expert_mesh",
+      "read_only": true,
+      "redacted": true,
+      "runtime_enabled": false,
+      "source_body_included": false
+    },
+    {
+      "automatic_knowledge_promotion": false,
+      "fingerprint": "8caa97badcc83477f113de7e230223d9f7c3b707e7ad80bf037ef85e61193cdb",
+      "passed": true,
+      "persistent_write_applied": false,
+      "plane_id": "tool_verification_fabric",
+      "read_only": true,
+      "redacted": true,
+      "runtime_enabled": false,
+      "source_body_included": false
+    }
+  ],
+  "record_kind": "integrated_research_agent_evaluation_scenario_summary",
+  "scenario_count": 28,
+  "scenarios": [
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "valid_supported_end_to_end_chain",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "valid_refutation_end_to_end_chain",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "source_provenance_integrity",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "duplicate_and_mirror_suppression_across_pipeline",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "temporal_jurisdiction_and_version_continuity",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "epistemic_confidence_cap_continuity",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "unresolved_contradiction_continuity",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "stale_evidence_continuity",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "retraction_and_supersession_continuity",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "deterministic_domain_routing",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "dissent_and_disagreement_preservation",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "high_stakes_abstention",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "explicit_tool_intent_binding",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "deterministic_tool_simulation",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "independent_tool_verification",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "attestation_and_provenance_chain",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "rollback_and_compensation_validation",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "supported_verified_knowledge_candidate_eligibility",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "refutation_candidate_eligibility",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "insufficient_candidate_rejection",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "stale_retracted_superseded_and_scope_candidate_rejection",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "tool_output_is_not_fact",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "engagement_signal_is_not_fact",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "complete_lineage_and_trace_integrity",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "deterministic_replay_and_fingerprint_sensitivity",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "resource_budget_and_zero_persistence",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "concurrency_performance_and_query_integrity",
+      "synthetic": true
+    },
+    {
+      "passed": true,
+      "read_only": true,
+      "runtime_effect": false,
+      "scenario_id": "no_runtime_repository_knowledge_or_belief_effect",
+      "synthetic": true
+    }
+  ]
+}

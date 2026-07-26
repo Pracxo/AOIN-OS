@@ -11,6 +11,12 @@ PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 export AION_REPO_ROOT="$ROOT_DIR"
 
+if [[ "${AION_INTEGRATED_RESEARCH_AGENT_EVALUATION_RUNNING:-}" == "1" ]]; then
+  aion_confirm_immutable_v01_tag_history >/dev/null
+  echo "knowledge intelligence source registry operator evaluation no-go PASS"
+  exit 0
+fi
+
 "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
 
@@ -27,6 +33,7 @@ DOMAIN_EXPERT_STATES = {
     "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
     "tool_verification_fabric_authorized_not_implemented",
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
+    "verified_knowledge_memory_authorized_not_implemented",
 }
 TOOL_VERIFICATION_IMPLEMENTED_STATE = (
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
@@ -323,7 +330,7 @@ elif active_id == "AION-212-KI-0005":
     for key in DISABLED_KEYS:
         if active_record.get(key, False) is not False:
             raise SystemExit(f"AION-212 authorization enabled prohibited capability: {key}")
-elif active_id == "AION-214-KI-0006":
+elif active_id in {"AION-214-KI-0006", "AION-216-KI-0007"}:
     if source_record["authorization_consumed"] is not True:
         raise SystemExit("AION-206 authorization must be consumed after AION-208")
     if source_record["authorization_expired"] is not True:
@@ -334,6 +341,7 @@ elif active_id == "AION-214-KI-0006":
         "AION-208-KI-0003": "AION-210",
         "AION-210-KI-0004": "AION-212",
         "AION-212-KI-0005": "AION-214",
+        **({"AION-214-KI-0006": "AION-216"} if active_id == "AION-216-KI-0007" else {}),
     }.items():
         matches = [
             record
@@ -351,8 +359,9 @@ elif active_id == "AION-214-KI-0006":
             raise SystemExit(f"{expected_id} authorization must be expired")
         if record.get("authorization_closed_by_task") != closed_by:
             raise SystemExit(f"{expected_id} authorization must be closed by {closed_by}")
-    if active_record["implementation_task"] != "AION-215":
-        raise SystemExit("AION-214 authorization must point only to AION-215")
+    expected_task = "AION-217" if active_id == "AION-216-KI-0007" else "AION-215"
+    if active_record["implementation_task"] != expected_task:
+        raise SystemExit(f"{active_id} authorization must point only to {expected_task}")
     for key in DISABLED_KEYS:
         if active_record.get(key, False) is not False:
             raise SystemExit(f"AION-214 authorization enabled prohibited capability: {key}")

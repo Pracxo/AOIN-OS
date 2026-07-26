@@ -1,0 +1,11 @@
+{
+  "automatic_policy_application": false,
+  "batch_id": "elc-batch-aion-216-001",
+  "knowledge_effect": false,
+  "learning_candidate_count": 1,
+  "learning_candidates": [
+    "elc-aion-216-001"
+  ],
+  "model_training": false,
+  "record_kind": "engagement_learning_candidate_batch_contract_preview"
+}

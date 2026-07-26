@@ -1311,3 +1311,17 @@ AION-208 completed read-only operator evaluation `AION-SPRE-001` for the AION-20
 ## AION-214 Knowledge Intelligence Boundary
 
 AION-214 closes `AION-212-KI-0005` after `AION-DEME-001` passes and records `AION-214-KI-0006` as the sole active authorization for AION-215. The tool verification fabric is implemented as deterministic simulation-only infrastructure; actual tool execution, shell commands, network access, connectors, browser automation, model providers, persistence, source mutation, PR creation, approval creation, deployment, knowledge promotion, and belief mutation remain disabled.
+
+## Integrated Research-Agent Evaluation and Verified Knowledge Evidence
+
+AION-216 adds bundled read-only evidence for `AION-IRAE-001` and the conditional `AION-216-KI-0007` verified-knowledge authorization:
+
+- `demo-data/knowledge-intelligence-integrated-research-agent-evaluation.json`
+- `demo-data/knowledge-intelligence-integrated-lineage.json`
+- `demo-data/knowledge-intelligence-verified-knowledge-authorization.json`
+- `demo-data/knowledge-intelligence-verified-knowledge-candidate.json`
+- `demo-data/knowledge-intelligence-verified-knowledge-versioning.json`
+- `demo-data/knowledge-intelligence-engagement-learning-candidate.json`
+- `demo-data/knowledge-intelligence-verified-knowledge-runtime-hold.json`
+
+The console remains static and read-only. It creates no AION-217 runtime source, performs no public-network research, executes no real tool, writes no persistent verified-knowledge state, promotes no knowledge, and treats engagement metadata as non-factual.

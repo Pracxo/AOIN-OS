@@ -12,6 +12,7 @@ export AION_REPO_ROOT="$ROOT_DIR"
 
 is_nested_gate_context() {
   [[ -n "${PYTEST_CURRENT_TEST:-}" ]] && return 0
+  [[ "${AION_INTEGRATED_RESEARCH_AGENT_EVALUATION_RUNNING:-}" == "1" ]] && return 0
   [[ "${AION_AGGREGATE_GATE_RUNNING:-}" == "1" ]] && return 0
   [[ "${AION_CHECK_RUNNING:-}" == "1" ]] && return 0
   return 1
@@ -98,6 +99,11 @@ SUCCESSOR_AUTH = "AION-214-KI-0006"
 SUCCESSOR_SCOPE = (
     "deterministic-tool-manifest-intent-plan-simulation-verification-attestation-"
     "effect-evidence-rollback-abstention-core"
+)
+CURRENT_AUTH = "AION-216-KI-0007"
+CURRENT_SCOPE = (
+    "deterministic-verified-knowledge-candidate-lineage-versioning-"
+    "revalidation-operator-review-engagement-learning-abstention-core"
 )
 RESOURCE_LIMITS = {
     "maximum_claims_per_assessment_batch": 500,
@@ -279,6 +285,7 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
     assert closed_record["claim_graph_operator_evaluation_decision"] == DECISION
     assert closed_record["evaluation_used_as_approval"] is False
     if post_aion212:
+        post_aion216 = program["program_state"] == "verified_knowledge_memory_authorized_not_implemented"
         post_aion214 = (
             program["program_state"]
             in {
@@ -286,10 +293,21 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
                 "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
             }
         )
-        expected_active_auth = SUCCESSOR_AUTH if post_aion214 else POST_AUTH
-        expected_active_scope = SUCCESSOR_SCOPE if post_aion214 else POST_SCOPE
-        expected_active_task = "AION-215" if post_aion214 else "AION-213"
-        expected_closeout_task = "AION-216" if post_aion214 else "AION-214"
+        if post_aion216:
+            expected_active_auth = CURRENT_AUTH
+            expected_active_scope = CURRENT_SCOPE
+            expected_active_task = "AION-217"
+            expected_closeout_task = "AION-218"
+        elif post_aion214:
+            expected_active_auth = SUCCESSOR_AUTH
+            expected_active_scope = SUCCESSOR_SCOPE
+            expected_active_task = "AION-215"
+            expected_closeout_task = "AION-216"
+        else:
+            expected_active_auth = POST_AUTH
+            expected_active_scope = POST_SCOPE
+            expected_active_task = "AION-213"
+            expected_closeout_task = "AION-214"
 
         post_matches = [
             record for record in records if record.get("authorization_transaction_id") == POST_AUTH
@@ -333,7 +351,8 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
             "domain_expert_mesh_authorized_not_implemented",
             "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
             "tool_verification_fabric_authorized_not_implemented",
-    "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
+            "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
+            "verified_knowledge_memory_authorized_not_implemented",
         }
         assert program["active_knowledge_implementation_authorization"] == expected_active_auth
         assert program["active_knowledge_implementation_task"] == expected_active_task
@@ -345,12 +364,21 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
             assert program["domain_expert_mesh_implemented"] is True
             assert program["model_call_enabled"] is False
             assert program["persistent_mesh_write_enabled"] is False
-        if post_aion214:
+        if post_aion216:
+            assert program["integrated_research_agent_operator_evaluation_passed"] is True
+            assert program["verified_knowledge_memory_authorized"] is True
+            assert program["verified_knowledge_memory_implemented"] is False
+            assert program["persistent_verified_knowledge_write_enabled"] is False
+            assert program["automatic_verified_knowledge_promotion_enabled"] is False
+        if post_aion214 or post_aion216:
             assert program["domain_expert_mesh_operator_evaluation_passed"] is True
             assert program["tool_verification_fabric_authorized"] is True
             assert program["tool_verification_fabric_implemented"] is (
                 program["program_state"]
-                == "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
+                in {
+                    "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
+                    "verified_knowledge_memory_authorized_not_implemented",
+                }
             )
             if (
                 program["program_state"]
@@ -359,6 +387,8 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
                 assert program["tool_verification_fabric_state"] == (
                     "implemented_deterministic_simulation_verification_attestation_persistent_write_disabled"
                 )
+                assert program["tool_verification_fabric_runtime_enabled"] is False
+            if post_aion216:
                 assert program["tool_verification_fabric_runtime_enabled"] is False
             assert program["actual_tool_execution_enabled"] is False
     else:
@@ -453,14 +483,18 @@ else
   "$PYTHON_BIN" -m pytest     services/brain-api/tests/test_knowledge_claim_graph_operator_evaluation.py     services/brain-api/tests/test_knowledge_claim_graph_operator_evaluation_docs.py     services/brain-api/tests/test_knowledge_claim_graph_authorization_closeout.py     services/brain-api/tests/test_knowledge_claim_graph_evaluation_no_side_effects.py     services/brain-api/tests/test_knowledge_claim_graph_evaluation_repository_integrity.py     -q
 fi
 
-AION_KNOWLEDGE_POST_AION210_CONTEXT=1 AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-claim-graph-no-go-regression.sh
-AION_KNOWLEDGE_POST_AION210_CONTEXT=1 AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-claim-graph-runtime-hold.sh
-AION_KNOWLEDGE_POST_AION210_CONTEXT=1 AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-source-registry-runtime-hold.sh
-AION_KNOWLEDGE_POST_AION210_CONTEXT=1 AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-research-runtime-hold.sh
+if is_nested_gate_context; then
+  echo "PASS: inherited AION-210 downstream repository gates deferred to outer gate"
+else
+  AION_KNOWLEDGE_POST_AION210_CONTEXT=1 AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-claim-graph-no-go-regression.sh
+  AION_KNOWLEDGE_POST_AION210_CONTEXT=1 AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-claim-graph-runtime-hold.sh
+  AION_KNOWLEDGE_POST_AION210_CONTEXT=1 AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-source-registry-runtime-hold.sh
+  AION_KNOWLEDGE_POST_AION210_CONTEXT=1 AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-research-runtime-hold.sh
 
-./scripts/docs-check.sh
-./scripts/final-docs-audit.sh
-./scripts/verify-no-domain-drift.sh
-./scripts/boundary-check.sh
+  ./scripts/docs-check.sh
+  ./scripts/final-docs-audit.sh
+  ./scripts/verify-no-domain-drift.sh
+  ./scripts/boundary-check.sh
+fi
 
 echo "knowledge intelligence claim graph operator evaluation PASS"

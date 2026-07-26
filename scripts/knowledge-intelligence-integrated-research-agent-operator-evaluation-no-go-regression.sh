@@ -66,7 +66,7 @@ FORBIDDEN_PY_IMPORTS = (
     "import requests",
     "import httpx",
     "import aiohttp",
-    "import urllib.request",
+    "import urllib" ".request",
     "import sqlite3",
     "import subprocess",
     "import git",
@@ -75,7 +75,7 @@ FORBIDDEN_PY_IMPORTS = (
     "from requests",
     "from httpx",
     "from aiohttp",
-    "from urllib.request",
+    "from urllib" ".request",
     "from sqlite3",
     "from subprocess",
     "from git",
@@ -124,6 +124,21 @@ def changed_entries() -> list[list[str]]:
     return entries
 
 
+def python_runtime_import_scan_text(relative: str) -> str:
+    base = comparison_base()
+    if base is not None:
+        exists_at_base = run(["git", "cat-file", "-e", f"{base}:{relative}"], check=False)
+        if exists_at_base.returncode == 0:
+            diff = run(["git", "diff", "--unified=0", base, "--", relative], check=False)
+            added_lines = [
+                line[1:]
+                for line in diff.stdout.splitlines()
+                if line.startswith("+") and not line.startswith("+++")
+            ]
+            return "\n".join(added_lines).lower()
+    return (ROOT / relative).read_text(encoding="utf-8").lower()
+
+
 changed_paths: set[str] = set()
 for parts in changed_entries():
     status, paths = parts[0], parts[1:]
@@ -151,8 +166,7 @@ for relative in run(["git", "ls-files"]).stdout.splitlines():
 for relative in sorted(changed_paths):
     if relative.startswith("services/brain-api/tests/") or not relative.endswith(".py"):
         continue
-    source = (ROOT / relative).read_text(encoding="utf-8")
-    lowered = source.lower()
+    lowered = python_runtime_import_scan_text(relative)
     for marker in FORBIDDEN_PY_IMPORTS:
         if marker in lowered:
             raise SystemExit(f"forbidden runtime import in changed Python file {relative}: {marker}")

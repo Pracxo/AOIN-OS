@@ -57,6 +57,7 @@ AION215_STATE = "tool_verification_fabric_authorized_not_implemented"
 AION215_IMPLEMENTED_STATE = (
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
 )
+AION217_STATE = "verified_knowledge_memory_authorized_not_implemented"
 
 
 def test_required_files_exist_and_scripts_executable():
@@ -81,6 +82,7 @@ def test_ledgers_create_single_active_knowledge_authorization():
         AION213_IMPLEMENTED_STATE,
         AION215_STATE,
         AION215_IMPLEMENTED_STATE,
+        AION217_STATE,
     }
     assert program["active_knowledge_implementation_authorization_count"] == 1
     if program["program_state"] in {
@@ -107,6 +109,25 @@ def test_ledgers_create_single_active_knowledge_authorization():
             assert program["domain_expert_mesh_implemented"] is True
             assert program["model_call_enabled"] is False
             assert program["persistent_mesh_write_enabled"] is False
+    elif program["program_state"] == AION217_STATE:
+        assert program["active_knowledge_implementation_authorization"] == (
+            "AION-216-KI-0007"
+        )
+        assert program["active_knowledge_implementation_task"] == "AION-217"
+        assert program["formal_closeout_task"] == "AION-218"
+        assert program["epistemic_truth_engine_implemented"] is True
+        assert program["epistemic_truth_engine_runtime_enabled"] is False
+        assert program["persistent_assessment_write_enabled"] is False
+        assert program["domain_expert_mesh_implemented"] is True
+        assert program["model_call_enabled"] is False
+        assert program["persistent_mesh_write_enabled"] is False
+        assert program["tool_verification_fabric_authorized"] is True
+        assert program["tool_verification_fabric_implemented"] is True
+        assert program["tool_verification_fabric_runtime_enabled"] is False
+        assert program["verified_knowledge_memory_authorized"] is True
+        assert program["verified_knowledge_memory_implemented"] is False
+        assert program["persistent_verified_knowledge_write_enabled"] is False
+        assert program["actual_tool_execution_enabled"] is False
     elif program["program_state"] in {AION215_STATE, AION215_IMPLEMENTED_STATE}:
         assert program["active_knowledge_implementation_authorization"] == (
             TOOL_VERIFICATION_AUTH_ID

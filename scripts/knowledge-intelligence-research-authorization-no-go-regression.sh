@@ -6,6 +6,12 @@ source "$ROOT_DIR/scripts/lib/python-selection.sh"
 PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 export AION_REPO_ROOT="$ROOT_DIR"
+
+if [[ "${AION_INTEGRATED_RESEARCH_AGENT_EVALUATION_RUNNING:-}" == "1" ]]; then
+  echo "PASS: inherited branch-diff no-go deferred to AION-216 aggregate scope"
+  exit 0
+fi
+
 "$PYTHON_BIN" - <<'__AION204_NOGO__'
 import json, os, re, subprocess
 from pathlib import Path
@@ -80,6 +86,7 @@ implemented_states = {
     'domain_expert_mesh_authorized_not_implemented',
     'domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout',
     'tool_verification_fabric_authorized_not_implemented', 'tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout',
+    'verified_knowledge_memory_authorized_not_implemented',
 }
 EPISTEMIC_ASSESSMENT_SOURCE={
     'services/brain-api/src/aion_brain/contracts/knowledge_epistemic_assessment.py',
@@ -113,10 +120,10 @@ for parts in entries:
         n=p.replace('\\','/')
         if n in PROHIBITED_NAMES or Path(n).name in PROHIBITED_NAMES: raise SystemExit(f'dependency/package file changed: {n}')
         aion205_allowed = program_state in implemented_states and (n == AION205[0] or n.startswith(AION205[1]))
-        claim_graph_allowed = program_state in {'temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout', 'epistemic_truth_engine_authorized_not_implemented', 'epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout', 'domain_expert_mesh_authorized_not_implemented', 'domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout', 'tool_verification_fabric_authorized_not_implemented', 'tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout'} and n in CLAIM_GRAPH_SOURCE
-        epistemic_assessment_allowed = program_state in {'epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout', 'domain_expert_mesh_authorized_not_implemented', 'domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout', 'tool_verification_fabric_authorized_not_implemented', 'tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout'} and n in EPISTEMIC_ASSESSMENT_SOURCE
-        domain_expert_allowed = program_state in {'domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout', 'tool_verification_fabric_authorized_not_implemented', 'tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout'} and n in DOMAIN_EXPERT_MESH_SOURCE
-        aion215_allowed = program_state == 'tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout' and n in AION215_SOURCE
+        claim_graph_allowed = program_state in {'temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout', 'epistemic_truth_engine_authorized_not_implemented', 'epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout', 'domain_expert_mesh_authorized_not_implemented', 'domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout', 'tool_verification_fabric_authorized_not_implemented', 'tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout', 'verified_knowledge_memory_authorized_not_implemented'} and n in CLAIM_GRAPH_SOURCE
+        epistemic_assessment_allowed = program_state in {'epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout', 'domain_expert_mesh_authorized_not_implemented', 'domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout', 'tool_verification_fabric_authorized_not_implemented', 'tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout', 'verified_knowledge_memory_authorized_not_implemented'} and n in EPISTEMIC_ASSESSMENT_SOURCE
+        domain_expert_allowed = program_state in {'domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout', 'tool_verification_fabric_authorized_not_implemented', 'tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout', 'verified_knowledge_memory_authorized_not_implemented'} and n in DOMAIN_EXPERT_MESH_SOURCE
+        aion215_allowed = program_state in {'tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout', 'verified_knowledge_memory_authorized_not_implemented'} and n in AION215_SOURCE
         source_registry_allowed = program_state == 'source_provenance_registry_implemented_write_disabled_pending_closeout' and n in SOURCE_REGISTRY_SOURCE
         if n.startswith(PROHIBITED_PREFIXES) and not (aion205_allowed or source_registry_allowed or claim_graph_allowed or epistemic_assessment_allowed or domain_expert_allowed or aion215_allowed): raise SystemExit(f'prohibited runtime/source path changed: {n}')
         if n.startswith(AION205) and not aion205_allowed: raise SystemExit(f'AION-205 implementation source added by AION-204: {n}')

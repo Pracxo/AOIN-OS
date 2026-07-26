@@ -89,6 +89,7 @@ def test_aion_212_branch_does_not_add_aion_213_runtime_source():
             "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
             "tool_verification_fabric_authorized_not_implemented",
             "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
+            "verified_knowledge_memory_authorized_not_implemented",
         }
     ):
         for relative in AION213_SOURCE:

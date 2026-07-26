@@ -58,6 +58,13 @@
     knowledge_intelligence_domain_expert_integrity: "demo-data/knowledge-intelligence-domain-expert-integrity.json",
     knowledge_intelligence_domain_expert_runtime_hold: "demo-data/knowledge-intelligence-domain-expert-runtime-hold.json",
     knowledge_intelligence_research_runtime_hold: "demo-data/knowledge-intelligence-research-runtime-hold.json",
+    knowledge_intelligence_integrated_research_agent_evaluation: "demo-data/knowledge-intelligence-integrated-research-agent-evaluation.json",
+    knowledge_intelligence_integrated_lineage: "demo-data/knowledge-intelligence-integrated-lineage.json",
+    knowledge_intelligence_verified_knowledge_authorization: "demo-data/knowledge-intelligence-verified-knowledge-authorization.json",
+    knowledge_intelligence_verified_knowledge_candidate: "demo-data/knowledge-intelligence-verified-knowledge-candidate.json",
+    knowledge_intelligence_verified_knowledge_versioning: "demo-data/knowledge-intelligence-verified-knowledge-versioning.json",
+    knowledge_intelligence_engagement_learning_candidate: "demo-data/knowledge-intelligence-engagement-learning-candidate.json",
+    knowledge_intelligence_verified_knowledge_runtime_hold: "demo-data/knowledge-intelligence-verified-knowledge-runtime-hold.json",
     module_lifecycle: "demo-data/module-lifecycle-dashboard.json",
     model_provider_hardening: "demo-data/provider-hardening-view-model.json",
     operator_actions: "demo-data/operator-action-preview.json",
@@ -102,7 +109,14 @@
       "knowledge_intelligence_domain_expert_synthesis",
       "knowledge_intelligence_domain_expert_integrity",
       "knowledge_intelligence_domain_expert_runtime_hold",
-      "knowledge_intelligence_research_runtime_hold"
+      "knowledge_intelligence_research_runtime_hold",
+      "knowledge_intelligence_integrated_research_agent_evaluation",
+      "knowledge_intelligence_integrated_lineage",
+      "knowledge_intelligence_verified_knowledge_authorization",
+      "knowledge_intelligence_verified_knowledge_candidate",
+      "knowledge_intelligence_verified_knowledge_versioning",
+      "knowledge_intelligence_engagement_learning_candidate",
+      "knowledge_intelligence_verified_knowledge_runtime_hold"
     ],
     providers: ["model_provider_hardening"],
     actions: ["operator_actions"],
@@ -148,7 +162,14 @@
       "knowledge_intelligence_domain_expert_synthesis",
       "knowledge_intelligence_domain_expert_integrity",
       "knowledge_intelligence_domain_expert_runtime_hold",
-      "knowledge_intelligence_research_runtime_hold"
+      "knowledge_intelligence_research_runtime_hold",
+      "knowledge_intelligence_integrated_research_agent_evaluation",
+      "knowledge_intelligence_integrated_lineage",
+      "knowledge_intelligence_verified_knowledge_authorization",
+      "knowledge_intelligence_verified_knowledge_candidate",
+      "knowledge_intelligence_verified_knowledge_versioning",
+      "knowledge_intelligence_engagement_learning_candidate",
+      "knowledge_intelligence_verified_knowledge_runtime_hold"
     ],
     safety: ["settings_safety", "incidents"]
   };
