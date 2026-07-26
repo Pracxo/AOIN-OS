@@ -325,6 +325,8 @@ AION217_ALLOWED_EXACT = {
     "scripts/connector-platform-freeze-check.sh",
     "services/brain-api/tests/test_self_improvement_postmerge_evidence_reconciliation.py",
     "services/brain-api/tests/test_self_improvement_shadow_activation_authorization_docs.py",
+    "services/brain-api/tests/test_self_improvement_shadow_activation_evaluation_repository_integrity.py",
+    "services/brain-api/tests/test_self_improvement_shadow_activation_scope_spec.py",
 }
 AION217_IMPLEMENTED_PROGRAM_STATE = (
     "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
