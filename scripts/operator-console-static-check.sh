@@ -189,6 +189,114 @@ def validate_domain_expert_demo(payload: object, path: Path) -> None:
                 walk(item)
 
     walk(payload)
+
+
+def validate_tool_verification_demo(payload: object, path: Path) -> None:
+    allowed_names = {
+        "knowledge-intelligence-tool-attestation.json",
+        "knowledge-intelligence-tool-manifest.json",
+        "knowledge-intelligence-tool-plan.json",
+        "knowledge-intelligence-tool-simulation.json",
+        "knowledge-intelligence-tool-verification-authorization.json",
+        "knowledge-intelligence-tool-verification-runtime-hold.json",
+    }
+    if path.name not in allowed_names:
+        raise SystemExit(f"unknown knowledge intelligence tool demo: {path}")
+    if not isinstance(payload, dict):
+        raise SystemExit(f"knowledge intelligence tool demo must be an object: {path}")
+    if payload.get("read_only") is not True:
+        raise SystemExit(f"knowledge intelligence tool demo must be read_only: {path}")
+    redaction_applied = payload.get("redaction_applied")
+    redacted = payload.get("redacted")
+    if redaction_applied is not True and redacted is not True:
+        raise SystemExit(f"knowledge intelligence tool demo must be redacted: {path}")
+    if payload.get("synthetic") is not True:
+        raise SystemExit(f"knowledge intelligence tool demo must be synthetic: {path}")
+
+    forbidden_true_keys = {
+        "actual_execution_enabled",
+        "actual_tool_executed",
+        "actual_tool_execution_enabled",
+        "api_route_enabled",
+        "application_startup_registration_enabled",
+        "approval_creation_enabled",
+        "authorization_header_use_enabled",
+        "automatic_claim_acceptance_enabled",
+        "automatic_claim_rejection_enabled",
+        "automatic_memory_ingestion_enabled",
+        "automatic_merge_enabled",
+        "autonomous_real_world_action_enabled",
+        "background_tool_worker_enabled",
+        "belief_mutated",
+        "browser_automation_enabled",
+        "cognitive_belief_creation_enabled",
+        "cognitive_belief_mutation_enabled",
+        "connector_integration_enabled",
+        "cookie_use_enabled",
+        "credential_use_enabled",
+        "dependency_change_approved",
+        "dns_resolution_enabled",
+        "external_database_integration_enabled",
+        "filesystem_mutation_enabled",
+        "financial_action_execution_enabled",
+        "git_mutation_enabled",
+        "github_workflow_change_approved",
+        "high_stakes_action_enabled",
+        "installed_cli_command_enabled",
+        "kernel_registration_enabled",
+        "knowledge_promoted",
+        "knowledge_promotion_enabled",
+        "legal_action_execution_enabled",
+        "medical_action_execution_enabled",
+        "migration_approved",
+        "model_call_enabled",
+        "model_provider_integration_enabled",
+        "model_weight_training_enabled",
+        "network_access_enabled",
+        "network_acquisition_enabled",
+        "persistent_tool_state_write_enabled",
+        "persistent_write_applied",
+        "production_deployment_enabled",
+        "raw_source_content_storage_enabled",
+        "real_pull_request_creation_enabled",
+        "runtime_effect",
+        "shell_command_execution_enabled",
+        "subprocess_execution_enabled",
+        "tool_execution_enabled",
+        "tool_state_database_enabled",
+        "tool_verification_fabric_implemented",
+    }
+
+    def walk(value: object) -> None:
+        if isinstance(value, dict):
+            for key in forbidden_true_keys:
+                if key in value and value.get(key) is not False:
+                    raise SystemExit(f"knowledge intelligence tool demo flag must be false: {key}: {path}")
+            for nested in value.values():
+                walk(nested)
+        elif isinstance(value, list):
+            for item in value:
+                walk(item)
+
+    walk(payload)
+
+    if path.name == "knowledge-intelligence-tool-verification-authorization.json":
+        for key in (
+            "authorization_transaction_approved",
+            "explicit_approval_record_approval",
+            "implementation_authorization_approved",
+            "implementation_go_status",
+            "tool_verification_fabric_authorized",
+        ):
+            if payload.get(key) is not True:
+                raise SystemExit(f"knowledge intelligence tool authorization flag must be true: {key}: {path}")
+        if payload.get("implementation_no_go_status") is not False:
+            raise SystemExit(f"knowledge intelligence tool authorization no-go flag must be false: {path}")
+    elif path.name == "knowledge-intelligence-tool-verification-runtime-hold.json":
+        if payload.get("tool_verification_fabric_authorized") is not True:
+            raise SystemExit(f"knowledge intelligence tool hold must remain authorized-only: {path}")
+
+
 for path in sorted(demo_dir.glob("*.json")):
     payload = json.loads(path.read_text())
     if path.name.startswith("action-authorization-"):
@@ -598,6 +706,9 @@ for path in sorted(demo_dir.glob("*.json")):
         continue
     if path.name.startswith("knowledge-intelligence-domain-expert-"):
         validate_domain_expert_demo(payload, path)
+        continue
+    if path.name.startswith("knowledge-intelligence-tool-"):
+        validate_tool_verification_demo(payload, path)
         continue
     if path.name.startswith("knowledge-intelligence-"):
         if path.name not in {

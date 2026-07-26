@@ -16,13 +16,13 @@ def _active_record(ledger: dict[str, object]) -> dict[str, object]:
     active = [
         item
         for item in records
-        if isinstance(item, dict) and item.get("authorization_transaction_id") == "AION-212-KI-0005"
+        if isinstance(item, dict) and item.get("authorization_transaction_id") == "AION-214-KI-0006"
     ]
     assert len(active) == 1
     return active[0]
 
 
-def test_current_projection_matches_active_domain_expert_mesh_authorization() -> None:
+def test_current_projection_matches_active_tool_verification_authorization() -> None:
     for relative in (
         "docs/knowledge-intelligence/authorization-ledger.json",
         "docs/knowledge-intelligence/program-ledger.json",
@@ -34,6 +34,24 @@ def test_current_projection_matches_active_domain_expert_mesh_authorization() ->
         assert ledger["workstream"] == active["workstream"]
         assert ledger["implementation_task"] == active["implementation_task"]
         assert ledger["formal_closeout_task"] == active["formal_closeout_task"]
-        assert ledger["active_knowledge_implementation_authorization"] == "AION-212-KI-0005"
-        assert ledger["active_knowledge_implementation_task"] == "AION-213"
-        assert ledger["formal_closeout_task"] == "AION-214"
+        assert ledger["active_knowledge_implementation_authorization"] == "AION-214-KI-0006"
+        assert ledger["active_knowledge_implementation_task"] == "AION-215"
+        assert ledger["formal_closeout_task"] == "AION-216"
+        assert ledger["tool_verification_fabric_authorized"] is True
+        assert ledger["tool_verification_fabric_implemented"] is False
+
+
+def test_aion_212_authorization_is_closed_after_domain_mesh_evaluation() -> None:
+    ledger = _load("docs/knowledge-intelligence/authorization-ledger.json")
+    records = ledger["records"]
+    assert isinstance(records, list)
+    closed = [
+        item
+        for item in records
+        if isinstance(item, dict) and item.get("authorization_transaction_id") == "AION-212-KI-0005"
+    ]
+    assert len(closed) == 1
+    assert closed[0]["authorization_active"] is False
+    assert closed[0]["authorization_consumed"] is True
+    assert closed[0]["authorization_expired"] is True
+    assert closed[0]["authorization_reusable"] is False

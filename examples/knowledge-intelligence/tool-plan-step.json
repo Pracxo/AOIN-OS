@@ -1,0 +1,51 @@
+{
+  "actual_execution_enabled": false,
+  "actual_tool_executed": false,
+  "approval_record_id": "AION-214-KI-0006",
+  "authorization_scope": "deterministic-tool-manifest-intent-plan-simulation-verification-attestation-effect-evidence-rollback-abstention-core",
+  "authorization_transaction_id": "AION-214-KI-0006",
+  "belief_mutated": false,
+  "compensation_plan_id": "compensation-none",
+  "expected_effects": [
+    "validate"
+  ],
+  "forbidden_effects": [
+    "execute",
+    "transmit",
+    "approve",
+    "merge",
+    "deploy",
+    "train"
+  ],
+  "formal_closeout_task": "AION-216",
+  "idempotency_key": "synthetic-idempotency-0001",
+  "implementation_task": "AION-215",
+  "input_envelope_fingerprint": "sha256:input-envelope",
+  "knowledge_promoted": false,
+  "manifest_version": "1.0.0",
+  "ordered_index": 0,
+  "persistent_write_applied": false,
+  "postconditions": [
+    "simulation_result_recorded"
+  ],
+  "preconditions": [
+    "manifest_version_exact",
+    "intent_bound"
+  ],
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "read_only": true,
+  "record_kind": "tool_plan_step",
+  "redacted": true,
+  "rollback_plan_id": "rollback-none",
+  "runtime_effect": false,
+  "step_fingerprint": "sha256:step",
+  "step_id": "step-0001",
+  "synthetic": true,
+  "tool_id": "synthetic.validator",
+  "verification_rule_ids": [
+    "rule-schema",
+    "rule-policy",
+    "rule-effect",
+    "rule-provenance"
+  ]
+}

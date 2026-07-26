@@ -1359,6 +1359,20 @@ aion212_auth_paths = {
     "services/brain-api/tests/test_knowledge_epistemic_assessment_authorization_closeout.py",
 }
 
+aion214_auth_paths = {
+    "docs/adr/0178-domain-expert-mesh-evaluation-and-tool-verification-authorization.md",
+    "docs/knowledge-intelligence/authorization-ledger.json",
+    "docs/release/knowledge-intelligence-tool-verification-authorization-transaction.md",
+    "examples/knowledge-intelligence/tool-verification-authorization.json",
+    "operator-console-static/demo-data/knowledge-intelligence-tool-verification-authorization.json",
+    "scripts/knowledge-intelligence-tool-verification-authorization-check.sh",
+    "scripts/knowledge-intelligence-tool-verification-authorization-no-go-regression.sh",
+    "scripts/lib/knowledge_intelligence_tool_verification_authorization.py",
+    "services/brain-api/tests/test_knowledge_domain_expert_mesh_authorization_closeout.py",
+    "services/brain-api/tests/test_knowledge_tool_verification_authorization_docs.py",
+    "services/brain-api/tests/test_knowledge_tool_verification_authorization_validator.py",
+}
+
 blocked_package_names = {
     "package.json",
     "package-lock.json",
@@ -1405,6 +1419,7 @@ for name in [*changed, *untracked]:
         and name not in aion209_auth_paths
         and name not in aion210_auth_paths
         and name not in aion212_auth_paths
+        and name not in aion214_auth_paths
     ):
         raise SystemExit(f"unexpected auth runtime or artifact path: {name}")
 

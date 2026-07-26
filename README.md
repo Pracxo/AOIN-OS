@@ -13,6 +13,8 @@ identity boundary, but production authentication runtime remains disabled.
 
 External connectors remain disabled. Operator write execution remains disabled.
 Module activation remains disabled. No v0.2 tag or release exists.
+
+Knowledge Intelligence status: AION-214 domain expert mesh operator evaluation complete and deterministic tool verification fabric authorized. `AION-214-KI-0006` is the sole active Knowledge Intelligence authorization for AION-215; AION-216 is the formal closeout. Tool verification remains simulation-only and executes no real tool.
 The request identity boundary is default-off, observe-only, anonymous, and
 authorized by `AION-155-PA-0003` for `AION-156`.
 

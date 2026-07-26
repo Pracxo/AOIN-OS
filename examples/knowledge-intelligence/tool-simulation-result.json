@@ -1,0 +1,37 @@
+{
+  "actual_tool_executed": false,
+  "approval_record_id": "AION-214-KI-0006",
+  "authorization_scope": "deterministic-tool-manifest-intent-plan-simulation-verification-attestation-effect-evidence-rollback-abstention-core",
+  "authorization_transaction_id": "AION-214-KI-0006",
+  "belief_mutated": false,
+  "expected_effects": [
+    "validate"
+  ],
+  "forbidden_effects_detected": [],
+  "formal_closeout_task": "AION-216",
+  "implementation_task": "AION-215",
+  "knowledge_promoted": false,
+  "output_artifact_fingerprints": [
+    "sha256:output-artifact"
+  ],
+  "persistent_write_applied": false,
+  "plan_id": "plan-0001",
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "read_only": true,
+  "reason_codes": [
+    "synthetic_simulation_only"
+  ],
+  "record_kind": "tool_simulation_result",
+  "redacted": true,
+  "runtime_effect": false,
+  "simulated_observed_effects": [
+    "validate"
+  ],
+  "simulation_fingerprint": "sha256:simulation",
+  "simulation_id": "simulation-0001",
+  "simulation_status": "simulation_passed",
+  "step_results": [
+    "step-0001:simulation_passed"
+  ],
+  "synthetic": true
+}

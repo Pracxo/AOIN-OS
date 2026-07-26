@@ -303,6 +303,39 @@ elif active_id == "AION-212-KI-0005":
     for key in DISABLED_KEYS:
         if active_record.get(key, False) is not False:
             raise SystemExit(f"AION-212 authorization enabled prohibited capability: {key}")
+elif active_id == "AION-214-KI-0006":
+    if source_record["authorization_consumed"] is not True:
+        raise SystemExit("AION-206 authorization must be consumed after AION-208")
+    if source_record["authorization_expired"] is not True:
+        raise SystemExit("AION-206 authorization must be expired after AION-208")
+    if source_record.get("authorization_closed_by_task") != "AION-208":
+        raise SystemExit("AION-206 authorization must be closed by AION-208")
+    for expected_id, closed_by in {
+        "AION-208-KI-0003": "AION-210",
+        "AION-210-KI-0004": "AION-212",
+        "AION-212-KI-0005": "AION-214",
+    }.items():
+        matches = [
+            record
+            for record in records
+            if record.get("authorization_transaction_id") == expected_id
+        ]
+        if len(matches) != 1:
+            raise SystemExit(f"{expected_id} closeout record is required")
+        record = matches[0]
+        if record.get("authorization_active") is not False:
+            raise SystemExit(f"{expected_id} authorization must be inactive")
+        if record.get("authorization_consumed") is not True:
+            raise SystemExit(f"{expected_id} authorization must be consumed")
+        if record.get("authorization_expired") is not True:
+            raise SystemExit(f"{expected_id} authorization must be expired")
+        if record.get("authorization_closed_by_task") != closed_by:
+            raise SystemExit(f"{expected_id} authorization must be closed by {closed_by}")
+    if active_record["implementation_task"] != "AION-215":
+        raise SystemExit("AION-214 authorization must point only to AION-215")
+    for key in DISABLED_KEYS:
+        if active_record.get(key, False) is not False:
+            raise SystemExit(f"AION-214 authorization enabled prohibited capability: {key}")
 else:
     raise SystemExit(f"unexpected active Knowledge Intelligence authorization: {active_id}")
 

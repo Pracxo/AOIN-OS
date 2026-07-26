@@ -1591,3 +1591,7 @@ Current milestone: AION-212 epistemic assessment operator evaluation complete an
 ## AION-213 Deterministic Domain Expert Mesh
 
 AION-213 implements the deterministic in-memory advisory domain expert mesh under active authorization AION-212-KI-0005. The mesh provides explicit taxonomy, computational profiles, deterministic routing, independent panels, evidence-bound reports, critiques, disagreement and dissent preservation, bounded synthesis, confidence non-amplification, high-stakes abstention, fixture replay, exact queries, integrity audit, and operator-review evidence. Runtime activation, persistent mesh writes, databases, model providers, model calls, tools, network access, human identity claims, professional credential claims, truth override, automatic claim decisions, autonomous action, knowledge promotion, and belief mutation remain disabled pending AION-214 formal closeout.
+
+## AION-214 Knowledge Intelligence Boundary
+
+AION-214 closes `AION-212-KI-0005` after `AION-DEME-001` passes and records `AION-214-KI-0006` as the sole active authorization for AION-215. The tool verification fabric is authorized but not implemented; actual tool execution, shell commands, network access, connectors, browser automation, model providers, persistence, source mutation, PR creation, approval creation, deployment, knowledge promotion, and belief mutation remain disabled.

@@ -34,6 +34,7 @@ from pathlib import Path
 ROOT = Path(os.environ["AION_REPO_ROOT"])
 AUTH_ID = "AION-210-KI-0004"
 NEXT_AUTH_ID = "AION-212-KI-0005"
+SUCCESSOR_AUTH_ID = "AION-214-KI-0006"
 SCOPE = (
     "deterministic-evidence-corroboration-contradiction-freshness-source-"
     "independence-confidence-assessment-core"
@@ -41,6 +42,10 @@ SCOPE = (
 NEXT_SCOPE = (
     "deterministic-domain-taxonomy-expert-profile-routing-independent-analysis-"
     "deliberation-disagreement-synthesis-abstention-core"
+)
+SUCCESSOR_SCOPE = (
+    "deterministic-tool-manifest-intent-plan-simulation-verification-"
+    "attestation-effect-evidence-rollback-abstention-core"
 )
 RESOURCE_LIMITS = {
     "maximum_claims_per_assessment_batch": 500,
@@ -95,13 +100,28 @@ post_aion212 = (
     ROOT / "examples/knowledge-intelligence/epistemic-assessment-operator-evaluation-report.json"
 ).exists()
 if post_aion212:
-    assert active[0]["authorization_transaction_id"] == NEXT_AUTH_ID
-    assert active[0]["approval_record_id"] == NEXT_AUTH_ID
-    assert active[0]["candidate_id"] == "domain-expert-mesh-core"
-    assert active[0]["workstream"] == "knowledge-intelligence-domain-expert-mesh"
-    assert active[0]["implementation_task"] == "AION-213"
-    assert active[0]["formal_closeout_task"] == "AION-214"
-    assert active[0]["authorization_scope"] == NEXT_SCOPE
+    post_aion214 = program["program_state"] == "tool_verification_fabric_authorized_not_implemented"
+    expected_auth = SUCCESSOR_AUTH_ID if post_aion214 else NEXT_AUTH_ID
+    expected_scope = SUCCESSOR_SCOPE if post_aion214 else NEXT_SCOPE
+    expected_candidate = (
+        "deterministic-tool-verification-fabric-core"
+        if post_aion214
+        else "domain-expert-mesh-core"
+    )
+    expected_workstream = (
+        "knowledge-intelligence-tool-verification-fabric"
+        if post_aion214
+        else "knowledge-intelligence-domain-expert-mesh"
+    )
+    expected_task = "AION-215" if post_aion214 else "AION-213"
+    expected_closeout = "AION-216" if post_aion214 else "AION-214"
+    assert active[0]["authorization_transaction_id"] == expected_auth
+    assert active[0]["approval_record_id"] == expected_auth
+    assert active[0]["candidate_id"] == expected_candidate
+    assert active[0]["workstream"] == expected_workstream
+    assert active[0]["implementation_task"] == expected_task
+    assert active[0]["formal_closeout_task"] == expected_closeout
+    assert active[0]["authorization_scope"] == expected_scope
     assert active[0]["authorization_active"] is True
     assert active[0]["authorization_consumed"] is False
     assert active[0]["authorization_expired"] is False
@@ -114,10 +134,10 @@ if post_aion212:
     assert record["authorization_expired"] is True
     assert record["authorization_reusable"] is False
     assert record["authorization_closed_by_task"] == "AION-212"
-    assert program["active_knowledge_implementation_authorization"] == NEXT_AUTH_ID
+    assert program["active_knowledge_implementation_authorization"] == expected_auth
     assert program["active_knowledge_implementation_authorization_count"] == 1
-    assert program["active_knowledge_implementation_task"] == "AION-213"
-    assert program["formal_closeout_task"] == "AION-214"
+    assert program["active_knowledge_implementation_task"] == expected_task
+    assert program["formal_closeout_task"] == expected_closeout
 else:
     record = active[0]
     assert record["authorization_active"] is True

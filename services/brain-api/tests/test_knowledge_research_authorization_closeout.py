@@ -5,6 +5,7 @@ from knowledge_source_registry_test_helpers import (
     DOMAIN_EXPERT_MESH_AUTH_ID,
     EPISTEMIC_AUTH_ID,
     SOURCE_AUTH_ID,
+    TOOL_VERIFICATION_AUTH_ID,
     active_source_record,
     closed_research_record,
     read_json,
@@ -18,6 +19,7 @@ AION213_STATE = "domain_expert_mesh_authorized_not_implemented"
 AION213_IMPLEMENTED_STATE = (
     "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout"
 )
+AION215_STATE = "tool_verification_fabric_authorized_not_implemented"
 
 
 def test_aion_204_authorization_is_closed_and_non_reusable():
@@ -44,6 +46,7 @@ def test_aion_206_creates_single_active_source_registry_authorization():
         AION211_STATE,
         AION213_STATE,
         AION213_IMPLEMENTED_STATE,
+        AION215_STATE,
     }
     if program["program_state"] in {
         "epistemic_truth_engine_authorized_not_implemented",
@@ -69,6 +72,21 @@ def test_aion_206_creates_single_active_source_registry_authorization():
             assert program["domain_expert_mesh_implemented"] is True
             assert program["model_call_enabled"] is False
             assert program["persistent_mesh_write_enabled"] is False
+    elif program["program_state"] == AION215_STATE:
+        assert program["active_knowledge_implementation_authorization"] == (
+            TOOL_VERIFICATION_AUTH_ID
+        )
+        assert program["active_knowledge_implementation_task"] == "AION-215"
+        assert program["formal_closeout_task"] == "AION-216"
+        assert program["epistemic_truth_engine_implemented"] is True
+        assert program["epistemic_truth_engine_runtime_enabled"] is False
+        assert program["persistent_assessment_write_enabled"] is False
+        assert program["domain_expert_mesh_implemented"] is True
+        assert program["model_call_enabled"] is False
+        assert program["persistent_mesh_write_enabled"] is False
+        assert program["tool_verification_fabric_authorized"] is True
+        assert program["tool_verification_fabric_implemented"] is False
+        assert program["actual_tool_execution_enabled"] is False
     elif program["program_state"] in {
         "temporal_claim_evidence_graph_authorized_not_implemented",
         "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
@@ -90,5 +108,6 @@ def test_aion_206_creates_single_active_source_registry_authorization():
         CLAIM_GRAPH_AUTH_ID,
         EPISTEMIC_AUTH_ID,
         DOMAIN_EXPERT_MESH_AUTH_ID,
+        TOOL_VERIFICATION_AUTH_ID,
     }
     validate_source_authorization(active_source_record())

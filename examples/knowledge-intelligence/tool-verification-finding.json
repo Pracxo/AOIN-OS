@@ -1,0 +1,31 @@
+{
+  "actual_execution_verified": false,
+  "actual_tool_executed": false,
+  "approval_record_id": "AION-214-KI-0006",
+  "authorization_scope": "deterministic-tool-manifest-intent-plan-simulation-verification-attestation-effect-evidence-rollback-abstention-core",
+  "authorization_transaction_id": "AION-214-KI-0006",
+  "belief_mutated": false,
+  "evidence_reference_ids": [
+    "evidence-0001"
+  ],
+  "finding_fingerprint": "sha256:finding",
+  "finding_id": "finding-0001",
+  "formal_closeout_task": "AION-216",
+  "implementation_task": "AION-215",
+  "knowledge_promoted": false,
+  "persistent_write_applied": false,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "read_only": true,
+  "reason_codes": [
+    "effect_matches_expected"
+  ],
+  "record_kind": "tool_verification_finding",
+  "redacted": true,
+  "rule_id": "rule-effect",
+  "runtime_effect": false,
+  "simulation_id": "simulation-0001",
+  "status": "verification_passed",
+  "step_id": "step-0001",
+  "synthetic": true,
+  "verifier_role": "effect_verifier"
+}
