@@ -193,7 +193,10 @@ if closed_record["resource_limits"]["maximum_persistent_assessment_write_batch"]
     raise SystemExit("AION-210-KI-0004 persistent-write limit mismatch")
 
 if post_aion212:
-    post_aion216 = program["program_state"] == "verified_knowledge_memory_authorized_not_implemented"
+    post_aion216 = program["program_state"] in {
+        "verified_knowledge_memory_authorized_not_implemented",
+        "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
+    }
     post_aion214 = program["program_state"] in {"tool_verification_fabric_authorized_not_implemented", "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"}
     if post_aion216:
         expected_auth = CURRENT_AUTH_ID

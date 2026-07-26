@@ -33,6 +33,9 @@ TOOL_VERIFICATION_IMPLEMENTED_STATE = (
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
 )
 VERIFIED_KNOWLEDGE_AUTHORIZED_STATE = "verified_knowledge_memory_authorized_not_implemented"
+VERIFIED_KNOWLEDGE_IMPLEMENTED_STATE = (
+    "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
+)
 CURRENT_PROGRAM_STATE = ""
 if PROGRAM_PATH.exists():
     try:
@@ -48,6 +51,7 @@ if PROGRAM_PATH.exists():
                 "tool_verification_fabric_authorized_not_implemented",
                 TOOL_VERIFICATION_IMPLEMENTED_STATE,
                 VERIFIED_KNOWLEDGE_AUTHORIZED_STATE,
+                VERIFIED_KNOWLEDGE_IMPLEMENTED_STATE,
             }
         )
     except json.JSONDecodeError:
@@ -244,6 +248,24 @@ AION215_ALLOWED_SOURCE = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification_fabric.py",
 }
+AION217_ALLOWED_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_verified_memory.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_learning_candidates.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_signal_policy.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_candidates.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_lineage.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_memory.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_revalidation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_versioning.py",
+}
+AION217_ALLOWED_EXACT = {
+    "scripts/connector-platform-freeze-check.sh",
+    "services/brain-api/tests/test_self_improvement_postmerge_evidence_reconciliation.py",
+    "services/brain-api/tests/test_self_improvement_shadow_activation_authorization_docs.py",
+}
 AION214_ALLOWED_PREFIXES = (
     "docs/knowledge-intelligence/domain-expert-mesh-operator-evaluation",
     "docs/knowledge-intelligence/domain-expert-mesh-evaluation",
@@ -373,7 +395,14 @@ def path_allowed(path: str) -> bool:
         and normalized in AION215_ALLOWED_SOURCE
     ):
         return True
-    if CURRENT_PROGRAM_STATE == VERIFIED_KNOWLEDGE_AUTHORIZED_STATE and (
+    if CURRENT_PROGRAM_STATE == VERIFIED_KNOWLEDGE_IMPLEMENTED_STATE and (
+        normalized in AION217_ALLOWED_EXACT or normalized in AION217_ALLOWED_SOURCE
+    ):
+        return True
+    if CURRENT_PROGRAM_STATE in {
+        VERIFIED_KNOWLEDGE_AUTHORIZED_STATE,
+        VERIFIED_KNOWLEDGE_IMPLEMENTED_STATE,
+    } and (
         normalized in AION216_ALLOWED_EXACT
         or any(normalized.startswith(prefix) for prefix in AION216_ALLOWED_PREFIXES)
     ):

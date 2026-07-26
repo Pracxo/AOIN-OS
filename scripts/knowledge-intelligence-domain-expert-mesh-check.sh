@@ -113,6 +113,7 @@ post_aion214 = program.get("program_state") in {
     "tool_verification_fabric_authorized_not_implemented",
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
     "verified_knowledge_memory_authorized_not_implemented",
+    "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
 }
 if post_aion214:
     if record["authorization_active"] is not False:
@@ -126,7 +127,11 @@ if post_aion214:
     successor = [item for item in auth["records"] if item.get("authorization_active") is True]
     expected_successor = (
         "AION-216-KI-0007"
-        if program.get("program_state") == "verified_knowledge_memory_authorized_not_implemented"
+        if program.get("program_state")
+        in {
+            "verified_knowledge_memory_authorized_not_implemented",
+            "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
+        }
         else "AION-214-KI-0006"
     )
     if len(successor) != 1 or successor[0].get("authorization_transaction_id") != expected_successor:
@@ -153,7 +158,11 @@ for relative in (
     if post_aion214:
         expected_projection = (
             ("AION-216-KI-0007", "AION-217", "AION-218")
-            if ledger.get("program_state") == "verified_knowledge_memory_authorized_not_implemented"
+            if ledger.get("program_state")
+            in {
+                "verified_knowledge_memory_authorized_not_implemented",
+                "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
+            }
             else ("AION-214-KI-0006", "AION-215", "AION-216")
         )
         if ledger["authorization_transaction_id"] != expected_projection[0]:

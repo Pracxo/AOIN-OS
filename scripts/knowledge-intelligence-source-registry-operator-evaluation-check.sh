@@ -215,6 +215,11 @@ successor_program_states = {
         "AION-217",
         "AION-218",
     ),
+    "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout": (
+        "AION-216-KI-0007",
+        "AION-217",
+        "AION-218",
+    ),
 }
 if program["program_state"] in successor_program_states:
     expected_auth, expected_task, expected_closeout = successor_program_states[

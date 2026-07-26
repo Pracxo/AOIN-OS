@@ -12,19 +12,34 @@
     "task_outcome_reported"
   ],
   "belief_effect": false,
-  "bounded_outcome_code": "operator_review_requested",
+  "cognitive_memory_effect": false,
   "confidence_effect": false,
   "factual_effect": false,
   "knowledge_effect": false,
-  "record_kind": "engagement_signal_metadata_contract_preview",
-  "redacted_metadata": {
-    "contains_source_body": false,
-    "contains_transcript": false
+  "record_kind": "engagement_signal_metadata_policy",
+  "signal": {
+    "belief_effect": false,
+    "bounded_outcome_code": "unresolved-query",
+    "citation_coverage_effect": false,
+    "cognitive_memory_effect": false,
+    "confidence_effect": false,
+    "contradiction_resolution_effect": false,
+    "factual_effect": false,
+    "freshness_effect": false,
+    "knowledge_effect": false,
+    "metadata_codes": [],
+    "model_weight_effect": false,
+    "occurred_at": "2026-01-01T00:00:00Z",
+    "provenance_effect": false,
+    "response_fingerprint": "d75ceaf700f5c6800efe1c741d6e38f03763d063aa86ca550df62608dc7c726a",
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-engagement-signal/v1",
+    "session_fingerprint": "ee4315695dde46c69f358542db7e4b3a0329f960982522f47951e73b86951a5f",
+    "signal_fingerprint": "bc50b114faaea94f155b8e191960e690813ee656c5926b9ab1f3934347d23c9e",
+    "signal_id": "signal-001",
+    "signal_kind": "query_repeated",
+    "source_independence_effect": false,
+    "subject_fingerprint": "26fae7e011edccc9e9bc37fbbd0c08dba55867e70b9ee484cf6f4c7f9456af66"
   },
-  "runtime_effect": false,
-  "session_fingerprint": "6a54633c0a3451eed74f33d64eec1455",
-  "signal_fingerprint": "8a8ea51281194f984fd13e8c58d900be938d971e8ae6d372017245ee1aceef2d",
-  "signal_id": "engagement-signal-aion-216-001",
-  "signal_kind": "query_repeated",
-  "timestamp": "2026-01-01T00:00:00Z"
+  "source_independence_effect": false
 }

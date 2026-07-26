@@ -285,7 +285,10 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
     assert closed_record["claim_graph_operator_evaluation_decision"] == DECISION
     assert closed_record["evaluation_used_as_approval"] is False
     if post_aion212:
-        post_aion216 = program["program_state"] == "verified_knowledge_memory_authorized_not_implemented"
+        post_aion216 = program["program_state"] in {
+            "verified_knowledge_memory_authorized_not_implemented",
+            "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
+        }
         post_aion214 = (
             program["program_state"]
             in {
@@ -353,6 +356,7 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
             "tool_verification_fabric_authorized_not_implemented",
             "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
             "verified_knowledge_memory_authorized_not_implemented",
+            "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
         }
         assert program["active_knowledge_implementation_authorization"] == expected_active_auth
         assert program["active_knowledge_implementation_task"] == expected_active_task
@@ -367,7 +371,10 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
         if post_aion216:
             assert program["integrated_research_agent_operator_evaluation_passed"] is True
             assert program["verified_knowledge_memory_authorized"] is True
-            assert program["verified_knowledge_memory_implemented"] is False
+            assert program["verified_knowledge_memory_implemented"] is (
+                program["program_state"]
+                == "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
+            )
             assert program["persistent_verified_knowledge_write_enabled"] is False
             assert program["automatic_verified_knowledge_promotion_enabled"] is False
         if post_aion214 or post_aion216:
@@ -378,6 +385,7 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
                 in {
                     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
                     "verified_knowledge_memory_authorized_not_implemented",
+                    "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
                 }
             )
             if (

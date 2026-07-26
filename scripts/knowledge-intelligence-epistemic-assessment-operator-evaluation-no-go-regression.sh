@@ -74,11 +74,28 @@ AION215_SOURCE = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification_fabric.py",
 }
+AION217_IMPLEMENTED_STATE = (
+    "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
+)
+AION217_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_verified_memory.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_learning_candidates.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_signal_policy.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_candidates.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_lineage.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_memory.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_revalidation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_versioning.py",
+}
 POST_AION213_SOURCE_STATES = {
     "domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout",
     "tool_verification_fabric_authorized_not_implemented",
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
     "verified_knowledge_memory_authorized_not_implemented",
+    AION217_IMPLEMENTED_STATE,
 }
 IMPLEMENTED_TOOL_VERIFICATION_STATE = (
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
@@ -140,6 +157,8 @@ for parts in changed_entries():
         if Path(normalized).name in PROHIBITED_NAMES:
             raise SystemExit(f"dependency/package file changed: {normalized}")
         if PROGRAM_STATE == IMPLEMENTED_TOOL_VERIFICATION_STATE and normalized in AION215_SOURCE:
+            continue
+        if PROGRAM_STATE == AION217_IMPLEMENTED_STATE and normalized in AION217_SOURCE:
             continue
         if normalized.startswith(AION213_SOURCE_PREFIXES):
             if PROGRAM_STATE not in POST_AION213_SOURCE_STATES:

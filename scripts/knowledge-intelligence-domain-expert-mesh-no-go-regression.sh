@@ -14,6 +14,7 @@ export AION_REPO_ROOT="$ROOT_DIR"
 "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
 
+import json
 import os
 import subprocess
 from pathlib import Path
@@ -67,6 +68,28 @@ PROHIBITED_NAMES = {
     "Pipfile.lock",
 }
 PERSISTENCE_SUFFIXES = (".db", ".sqlite", ".sqlite3", ".jsonl", ".mesh-state", ".state")
+AION217_ALLOWED_SOURCE_PATHS = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_verified_memory.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_learning_candidates.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_signal_policy.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_candidates.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_lineage.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_memory.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_revalidation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_versioning.py",
+}
+AION217_IMPLEMENTED_PROGRAM_STATE = (
+    "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
+)
+PROGRAM_PATH = ROOT / "docs/knowledge-intelligence/program-ledger.json"
+PROGRAM_STATE = (
+    json.loads(PROGRAM_PATH.read_text()).get("program_state", "")
+    if PROGRAM_PATH.exists()
+    else ""
+)
 
 
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -120,6 +143,8 @@ for parts in changed_entries():
             raise SystemExit(f"unauthorized runtime path changed: {normalized}")
         if Path(normalized).name in PROHIBITED_NAMES:
             raise SystemExit(f"dependency/package file changed: {normalized}")
+        if PROGRAM_STATE == AION217_IMPLEMENTED_PROGRAM_STATE and normalized in AION217_ALLOWED_SOURCE_PATHS:
+            continue
         if normalized not in ALLOWED_EXACT and normalized.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")
         if normalized not in ALLOWED_EXACT and not any(

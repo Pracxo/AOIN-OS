@@ -87,10 +87,14 @@ def test_project_status_reports_aion180_current_state() -> None:
     text = _text("docs/project-status.md")
     current = text.split("## Historical Compatibility Markers", 1)[0]
     historical = text.split("## Historical Compatibility Markers", 1)[1]
-    assert "AION-204 Cognitive Architecture closeout reconciliation" in current
-    assert "source registry implemented with persistent writes disabled" in current
-    assert "active self-improvement implementation authorization count is zero" in current
-    assert "`knowledge_research_runtime_enabled=false`" in current
+    assert "AION-217 deterministic verified-knowledge candidate memory" in current
+    assert "`active_knowledge_implementation_task=AION-217`" in current
+    assert "`formal_closeout_task=AION-218`" in current
+    assert "`verified_knowledge_memory_implemented=true`" in current
+    assert "AION-204 Cognitive Architecture closeout reconciliation" in historical
+    assert "source registry implemented with persistent writes disabled" in historical
+    assert "active self-improvement implementation authorization count is zero" in historical
+    assert "`knowledge_research_runtime_enabled=false`" in historical
     assert "`active_knowledge_implementation_task=AION-209`" in current
     assert "AION-180-SI-0007" in historical
     assert "AION-182 later closed AION-180-SI-0007" in historical

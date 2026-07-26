@@ -745,14 +745,23 @@ for path in sorted(demo_dir.glob("*.json")):
             "knowledge-intelligence-domain-expert-mesh-panel.json",
             "knowledge-intelligence-domain-expert-mesh-runtime-hold.json",
             "knowledge-intelligence-engagement-learning-candidate.json",
+            "knowledge-intelligence-engagement-learning-candidates.json",
+            "knowledge-intelligence-engagement-signals.json",
             "knowledge-intelligence-integrated-lineage.json",
             "knowledge-intelligence-integrated-research-agent-evaluation.json",
+            "knowledge-intelligence-verified-candidate-integrity.json",
+            "knowledge-intelligence-verified-candidate-refutation.json",
+            "knowledge-intelligence-verified-candidate-revalidation.json",
+            "knowledge-intelligence-verified-candidate-support.json",
+            "knowledge-intelligence-verified-candidate-versioning.json",
             "knowledge-intelligence-source-lineage.json",
             "knowledge-intelligence-source-snapshots.json",
             "knowledge-intelligence-verified-knowledge-authorization.json",
             "knowledge-intelligence-verified-knowledge-candidate.json",
             "knowledge-intelligence-verified-knowledge-runtime-hold.json",
             "knowledge-intelligence-verified-knowledge-versioning.json",
+            "knowledge-intelligence-verified-memory-runtime-hold.json",
+            "knowledge-intelligence-verified-memory.json",
         }:
             raise SystemExit(f"unknown knowledge intelligence demo: {path}")
         if payload.get("read_only") is not True:
@@ -771,6 +780,8 @@ for path in sorted(demo_dir.glob("*.json")):
                 "domain_expert_mesh_implemented",
                 "tool_verification_fabric_implemented",
                 "verified_knowledge_memory_authorized",
+                "verified_knowledge_memory_implemented",
+                "engagement_learning_candidate_plane_implemented",
             )
         )
         if not implemented_disabled_plane_present:

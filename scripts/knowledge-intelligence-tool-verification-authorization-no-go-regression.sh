@@ -74,8 +74,24 @@ AION215_ALLOWED_SOURCE_PATHS = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/tool_evidence.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
 }
+AION217_ALLOWED_SOURCE_PATHS = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_verified_memory.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_learning_candidates.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_signal_policy.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_candidates.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_lineage.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_memory.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_revalidation.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_versioning.py",
+}
 IMPLEMENTED_PROGRAM_STATE = (
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"
+)
+AION217_IMPLEMENTED_PROGRAM_STATE = (
+    "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
 )
 PERSISTENCE_SUFFIXES = (".db", ".sqlite", ".sqlite3", ".jsonl", ".tool-state", ".state")
 
@@ -123,6 +139,7 @@ def changed_entries() -> list[list[str]]:
 
 program = json.loads((ROOT / "docs/knowledge-intelligence/program-ledger.json").read_text())
 aion215_implemented = program.get("program_state") == IMPLEMENTED_PROGRAM_STATE
+aion217_implemented = program.get("program_state") == AION217_IMPLEMENTED_PROGRAM_STATE
 
 for parts in changed_entries():
     status, paths = parts[0], parts[1:]
@@ -134,6 +151,8 @@ for parts in changed_entries():
         if name in PROHIBITED_NAMES:
             raise SystemExit(f"dependency/package file changed: {normalized}")
         if aion215_implemented and normalized in AION215_ALLOWED_SOURCE_PATHS:
+            continue
+        if aion217_implemented and normalized in AION217_ALLOWED_SOURCE_PATHS:
             continue
         if name in AION215_SOURCE_NAMES and normalized.startswith(
             "services/brain-api/src/aion_brain/"

@@ -1,9 +1,30 @@
 {
-  "candidate_count": 0,
-  "memory_implemented": false,
-  "memory_runtime_enabled": false,
+  "authorization_transaction_id": "AION-216-KI-0007",
+  "candidate_count": 2,
+  "candidate_identity_ids": [
+    "candidate-identity-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99",
+    "candidate-identity-c6a77ed10bec6c0ff782c7631fe363b73291bd6062edd1bd"
+  ],
+  "candidate_ids": [
+    "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+    "candidate-c6a77ed10bec6c0ff782c7631fe363b73291bd6062edd1bd-v001"
+  ],
+  "created_at": "2026-01-01T00:00:00Z",
+  "eligible_candidate_count": 2,
+  "ineligible_candidate_count": 0,
+  "latest_version_ids": [
+    "candidate-identity-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+    "candidate-identity-c6a77ed10bec6c0ff782c7631fe363b73291bd6062edd1bd-v001"
+  ],
   "persistent_write_applied": false,
-  "record_kind": "verified_knowledge_memory_snapshot_contract_preview",
-  "snapshot_fingerprint": "6a54633c0a3451eed74f33d64eec14550c3bcb9c9d04d87f851056d2c566f070",
-  "snapshot_id": "vkm-snapshot-aion-216-001"
+  "read_only": true,
+  "redacted": true,
+  "refutation_candidate_count": 1,
+  "revalidation_required_count": 0,
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-verified-memory-snapshot/v1",
+  "snapshot_fingerprint": "4ecb9c85aae6c450e17499a6cbed08817cf66c084fe1837b81b60e933f17a6f6",
+  "snapshot_id": "verified-memory-snapshot-001",
+  "support_candidate_count": 1,
+  "synthetic": true
 }

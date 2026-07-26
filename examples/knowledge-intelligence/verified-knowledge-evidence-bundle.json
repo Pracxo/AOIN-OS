@@ -1,0 +1,93 @@
+{
+  "authorization_lineage": [
+    "authorization-aion-216-ki-0007",
+    "closeout-aion-218",
+    "implementation-aion-217",
+    "program-aion-knowledge-intelligence-001"
+  ],
+  "candidate_ids": [
+    "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+    "candidate-c6a77ed10bec6c0ff782c7631fe363b73291bd6062edd1bd-v001"
+  ],
+  "candidate_kinds": [
+    "support_candidate",
+    "refutation_candidate"
+  ],
+  "confidence_caps": [
+    "0.870000",
+    "0.870000"
+  ],
+  "contradiction_statuses": [
+    "none_detected",
+    "none_detected"
+  ],
+  "coverage_values": [
+    "1.000000",
+    "1.000000"
+  ],
+  "disabled_state_flags": [
+    "automatic_promotion_disabled",
+    "belief_mutation_disabled",
+    "cognitive_memory_write_disabled",
+    "engagement_fact_effect_disabled",
+    "persistent_write_disabled",
+    "public_network_disabled",
+    "runtime_disabled"
+  ],
+  "dissent_counts": [
+    0,
+    0
+  ],
+  "eligibility_statuses": [
+    "eligible_for_operator_review",
+    "eligible_for_operator_review"
+  ],
+  "engagement_signal_kinds": [
+    "query_repeated",
+    "clarification_requested",
+    "retrieval_failed",
+    "retrieval_succeeded",
+    "correction_submitted",
+    "correction_submitted",
+    "correction_submitted",
+    "response_rejected",
+    "task_outcome_reported"
+  ],
+  "evidence_bundle_id": "evidence-001",
+  "evidence_fingerprint": "0380a475e2c657784c12ed439ee19b7319fdeb2f4c5bda0d0a19af32d922e601",
+  "freshness_statuses": [
+    "current",
+    "current"
+  ],
+  "integrity_status": "passed",
+  "learning_candidate_kinds": [
+    "retrieval_strategy",
+    "response_quality",
+    "clarification_need",
+    "source_selection",
+    "domain_routing",
+    "verification_rule",
+    "tool_manifest_gap",
+    "research_gap",
+    "preference_candidate"
+  ],
+  "lifecycle_statuses": [
+    "operator_review_pending",
+    "operator_review_pending"
+  ],
+  "lineage_counts": [
+    11,
+    11
+  ],
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-verified-evidence/v1",
+  "scope_statuses": [
+    "applicable",
+    "applicable"
+  ],
+  "version_numbers": [
+    1,
+    1
+  ]
+}

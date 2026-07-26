@@ -14,6 +14,7 @@ export AION_REPO_ROOT="$ROOT_DIR"
 "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
 
+import json
 import os
 import subprocess
 from pathlib import Path
@@ -50,6 +51,7 @@ PROHIBITED_NAMES = {
 }
 AION217_SOURCE_PATHS = {
     "services/brain-api/src/aion_brain/contracts/knowledge_verified_memory.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_candidates.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_memory.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_lineage.py",
@@ -60,6 +62,9 @@ AION217_SOURCE_PATHS = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_integrity.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_evidence.py",
 }
+AION217_IMPLEMENTED_PROGRAM_STATE = (
+    "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
+)
 PERSISTENCE_SUFFIXES = (".db", ".sqlite", ".sqlite3", ".jsonl", ".tool-state", ".state")
 FORBIDDEN_PY_IMPORTS = (
     "import socket",
@@ -140,6 +145,8 @@ def python_runtime_import_scan_text(relative: str) -> str:
 
 
 changed_paths: set[str] = set()
+program = json.loads((ROOT / "docs/knowledge-intelligence/program-ledger.json").read_text())
+aion217_implemented = program.get("program_state") == AION217_IMPLEMENTED_PROGRAM_STATE
 for parts in changed_entries():
     status, paths = parts[0], parts[1:]
     if status.startswith(("D", "R")):
@@ -151,6 +158,8 @@ for parts in changed_entries():
         if name in PROHIBITED_NAMES:
             raise SystemExit(f"dependency/package file changed: {normalized}")
         if normalized in AION217_SOURCE_PATHS:
+            if aion217_implemented:
+                continue
             raise SystemExit(f"AION-217 source is not authorized on AION-216: {normalized}")
         if any(normalized.startswith(prefix) for prefix in PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")

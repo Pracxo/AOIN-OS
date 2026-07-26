@@ -1,0 +1,33 @@
+{
+  "finding_count": 1,
+  "findings": [
+    {
+      "bounded_count": 4,
+      "finding_id": "finding-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+      "fingerprints": [
+        "29fb0577c27735d790f86b1f99541e329d575d10f9153334624a0c356d648017",
+        "7615a10c2039a5b6064b855af36a9ed466ff8313fca7a2c71e57cbf65d762a21"
+      ],
+      "reason_codes": [
+        "verified_candidate_integrity_passed"
+      ],
+      "redacted_summary": "verified knowledge integrity audit",
+      "runtime_effect": false,
+      "safe_ids": [
+        "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+        "candidate-identity-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99"
+      ],
+      "status": "passed"
+    }
+  ],
+  "persistent_write_applied": false,
+  "read_only": true,
+  "redacted": true,
+  "report_fingerprint": "190b8fcaa5ea7ee19823f64636d44bcef33e3564e2872aaae66f03b3b3447784",
+  "report_id": "integrity-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+  "runtime_effect": false,
+  "schema_version": "aion-knowledge-verified-integrity/v1",
+  "status": "passed",
+  "redaction_applied": true,
+  "verified_knowledge_memory_implemented": true
+}

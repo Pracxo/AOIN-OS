@@ -1,0 +1,18 @@
+{
+  "approval_created": false,
+  "background_worker_invoked": false,
+  "belief_mutated": false,
+  "candidate_version_id": "candidate-identity-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+  "cognitive_memory_written": false,
+  "knowledge_created": false,
+  "operator_invoked": true,
+  "persistent_write_applied": false,
+  "request_id": "revalidation-001",
+  "requested_at": "2026-01-01T00:00:00Z",
+  "runtime_effect": false,
+  "scheduler_invoked": false,
+  "schema_version": "aion-knowledge-verified-revalidation/v1",
+  "triggers": [
+    "operator_requested"
+  ]
+}

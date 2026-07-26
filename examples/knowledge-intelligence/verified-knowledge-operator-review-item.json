@@ -1,10 +1,30 @@
 {
   "approval_created": false,
-  "candidate_id": "vkc-aion-216-supported-001",
-  "knowledge_promoted": false,
-  "operator_review_decision": "pending_future_AION_217_operator_action",
+  "automatic_promotion_authorized": false,
+  "belief_mutation_authorized": false,
+  "candidate_approval_authorized": false,
+  "candidate_id": "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+  "candidate_is_not_factual_truth": true,
+  "cognitive_memory_write_authorized": false,
+  "created_at": "2026-01-01T00:00:00Z",
+  "eligibility_status": "eligible_for_operator_review",
+  "engagement_policy_update_authorized": false,
+  "expires_at": "2026-01-08T00:00:00Z",
+  "implementation_authorization_created": false,
+  "lifecycle_status": "operator_review_pending",
+  "model_training_authorized": false,
   "operator_review_required": true,
-  "record_kind": "verified_knowledge_operator_review_item_preview",
-  "review_item_id": "vkc-review-aion-216-001",
-  "runtime_effect": false
+  "persistent_write_authorized": false,
+  "public_network_authorized": false,
+  "reason_codes": [
+    "verified_candidate_operator_review_required",
+    "verified_candidate_automatic_promotion_blocked",
+    "verified_candidate_cognitive_memory_write_blocked",
+    "verified_candidate_belief_mutation_blocked",
+    "verified_candidate_persistent_write_disabled"
+  ],
+  "review_fingerprint": "2db4c94d2001b0a20eca78fef34bcb65a43a8c523dae47be1f86fe7cbad1216a",
+  "review_item_id": "review-001",
+  "runtime_effect": false,
+  "verified_knowledge_creation_authorized": false
 }

@@ -29,7 +29,7 @@ def _load_json(relative: str) -> dict[str, object]:
 
 def test_verified_knowledge_revalidation_is_explicit_and_not_background_runtime() -> None:
     runtime = _load_json("examples/knowledge-intelligence/verified-knowledge-runtime-hold.json")
-    assert runtime["verified_knowledge_memory_implemented"] is False
+    assert runtime["verified_knowledge_memory_implemented"] is True
     assert runtime["scheduled_revalidation_job_enabled"] is False
     assert runtime["background_verified_knowledge_worker_enabled"] is False
     assert runtime["persistent_verified_knowledge_write_enabled"] is False

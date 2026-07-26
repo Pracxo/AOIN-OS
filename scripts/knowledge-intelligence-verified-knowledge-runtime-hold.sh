@@ -11,11 +11,17 @@ export AION_REPO_ROOT="$ROOT_DIR"
 is_nested_gate_context() {
   [[ -n "${PYTEST_CURRENT_TEST:-}" ]] && return 0
   [[ "${AION_VERIFIED_KNOWLEDGE_RUNTIME_HOLD_SKIP_FULL_CHECK:-}" == "1" ]] && return 0
+  [[ "${AION_VERIFIED_KNOWLEDGE_CHECK_RUNNING:-}" == "1" ]] && return 0
   [[ "${AION_AGGREGATE_GATE_RUNNING:-}" == "1" ]] && return 0
   [[ "${AION_CHECK_RUNNING:-}" == "1" ]] && return 0
   return 1
 }
-./scripts/knowledge-intelligence-verified-knowledge-authorization-check.sh
+if [[ "${AION_VERIFIED_KNOWLEDGE_CHECK_RUNNING:-}" == "1" ]]; then
+  echo "PASS: implementation check already running; authorization gate retained"
+  ./scripts/knowledge-intelligence-verified-knowledge-authorization-check.sh
+else
+  ./scripts/knowledge-intelligence-verified-knowledge-check.sh
+fi
 PYTHONPATH="$ROOT_DIR/scripts/lib:${PYTHONPATH:-}" "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
 import os

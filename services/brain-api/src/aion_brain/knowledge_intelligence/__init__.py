@@ -10,6 +10,9 @@ from aion_brain.knowledge_intelligence.source_registry import ControlledSourcePr
 from aion_brain.knowledge_intelligence.tool_verification_fabric import (
     ControlledToolVerificationFabric,
 )
+from aion_brain.knowledge_intelligence.verified_knowledge_memory import (
+    InMemoryVerifiedKnowledgeCandidateRepository,
+)
 
 __all__ = [
     "ControlledEpistemicAssessmentEngine",
@@ -18,4 +21,5 @@ __all__ = [
     "ControlledSourceProvenanceRegistry",
     "ControlledToolVerificationFabric",
     "ControlledTemporalClaimEvidenceGraph",
+    "InMemoryVerifiedKnowledgeCandidateRepository",
 ]
