@@ -37,6 +37,31 @@ def test_program_and_authorization_ledgers_match_active_public_pilot_authorizati
     active_records = [
         record for record in auth_ledger["records"] if record.get("authorization_active") is True
     ]
+    if program_ledger.get("program_state") == "knowledge_intelligence_program_complete":
+        assert active_records == []
+        for ledger in (auth_ledger, program_ledger):
+            assert ledger["active_knowledge_implementation_authorization_count"] == 0
+            assert ledger["active_knowledge_implementation_authorization"] is None
+            assert ledger["active_knowledge_implementation_task"] is None
+            assert ledger["formal_closeout_task"] is None
+            assert ledger["new_knowledge_implementation_authorization_created"] is False
+            assert ledger["next_knowledge_implementation_authorization"] is None
+            assert ledger["next_knowledge_implementation_task"] is None
+            assert ledger["controlled_public_research_pilot_implemented"] is True
+            assert ledger["controlled_public_research_pilot_passed"] is True
+            assert ledger["public_network_fetch_enabled"] is False
+            assert ledger["verified_knowledge_runtime_enabled"] is False
+            assert ledger["persistent_verified_knowledge_write_enabled"] is False
+            assert ledger["engagement_signal_as_fact_enabled"] is False
+        records = {
+            record["task_id"]: record
+            for record in program_ledger["records"]
+            if "task_id" in record
+        }
+        assert records["AION-219"]["authorization_transaction"] == "AION-218-KI-0008"
+        assert records["AION-220"]["evaluation_id"] == "AION-KIPE-001"
+        return
+
     assert len(active_records) == 1
     active = active_records[0]
     for ledger in (auth_ledger, program_ledger):
@@ -73,6 +98,16 @@ def test_program_and_authorization_ledgers_match_active_public_pilot_authorizati
 
 def test_project_status_current_projection_matches_ledgers_and_keeps_history() -> None:
     status = (REPO_ROOT / "docs/project-status.md").read_text(encoding="utf-8")
+    if "knowledge_intelligence_program_complete=true" in status:
+        assert "AION-220 final Knowledge Intelligence Program evaluation and closeout complete" in status
+        assert "active_knowledge_implementation_authorization_count=0" in status
+        assert "active_knowledge_implementation_authorization=null" in status
+        assert "next_knowledge_implementation_task=null" in status
+        assert "v02_release_ready=false" in status
+        assert "Historical marker" in status
+        assert "AION-214 domain expert mesh operator evaluation complete" in status
+        return
+
     assert "AION-218 verified-knowledge memory operator evaluation complete" in status
     assert "active_knowledge_implementation_authorization=AION-218-KI-0008" in status
     assert "active_knowledge_implementation_task=AION-219" in status
