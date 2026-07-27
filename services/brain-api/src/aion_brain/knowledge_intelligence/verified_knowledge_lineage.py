@@ -9,6 +9,7 @@ from aion_brain.contracts.knowledge_verified_memory import (
     AUTHORIZATION_TRANSACTION_ID,
     INTEGRATED_KNOWLEDGE_LINEAGE_SCHEMA_VERSION,
     PROGRAM_ID,
+    VERIFIED_KNOWLEDGE_INTEGRITY_SCHEMA_VERSION,
     IntegratedKnowledgeLineage,
     VerifiedKnowledgeIntegrityFinding,
     VerifiedKnowledgeIntegrityReport,
@@ -173,6 +174,7 @@ def audit_integrated_knowledge_lineage(
     }
     finding = VerifiedKnowledgeIntegrityFinding.model_validate(finding_payload)
     report_payload = {
+        "schema_version": VERIFIED_KNOWLEDGE_INTEGRITY_SCHEMA_VERSION,
         "report_id": f"integrity-{lineage.lineage_id}",
         "status": status,
         "findings": (finding,),
