@@ -1,0 +1,113 @@
+{
+  "active_knowledge_implementation_authorization_count": 0,
+  "decision": "CONTROLLED_PUBLIC_RESEARCH_PILOT_PASS_COMPLETE_KNOWLEDGE_INTELLIGENCE_PROGRAM",
+  "evaluation_id": "AION-KIPE-001",
+  "knowledge_intelligence_program_complete": true,
+  "new_knowledge_implementation_authorization_created": false,
+  "next_knowledge_implementation_authorization": null,
+  "next_knowledge_implementation_task": null,
+  "planes": [
+    {
+      "automatic_promotion_enabled": false,
+      "passed": true,
+      "persistent_write_enabled": false,
+      "plane_id": "controlled_research_acquisition",
+      "runtime_enabled": false
+    },
+    {
+      "automatic_promotion_enabled": false,
+      "passed": true,
+      "persistent_write_enabled": false,
+      "plane_id": "source_provenance_registry",
+      "runtime_enabled": false
+    },
+    {
+      "automatic_promotion_enabled": false,
+      "passed": true,
+      "persistent_write_enabled": false,
+      "plane_id": "temporal_claim_evidence_graph",
+      "runtime_enabled": false
+    },
+    {
+      "automatic_promotion_enabled": false,
+      "passed": true,
+      "persistent_write_enabled": false,
+      "plane_id": "epistemic_assessment_engine",
+      "runtime_enabled": false
+    },
+    {
+      "automatic_promotion_enabled": false,
+      "passed": true,
+      "persistent_write_enabled": false,
+      "plane_id": "domain_expert_mesh",
+      "runtime_enabled": false
+    },
+    {
+      "automatic_promotion_enabled": false,
+      "passed": true,
+      "persistent_write_enabled": false,
+      "plane_id": "tool_verification_fabric",
+      "runtime_enabled": false
+    },
+    {
+      "automatic_promotion_enabled": false,
+      "passed": true,
+      "persistent_write_enabled": false,
+      "plane_id": "verified_knowledge_candidate_memory",
+      "runtime_enabled": false
+    },
+    {
+      "automatic_promotion_enabled": false,
+      "passed": true,
+      "persistent_write_enabled": false,
+      "plane_id": "controlled_public_https_research_pilot",
+      "runtime_enabled": false
+    }
+  ],
+  "program_complete": true,
+  "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+  "read_only": true,
+  "redacted": true,
+  "release_state": {
+    "aion_v010_unchanged": true,
+    "v02_release_created": false,
+    "v02_release_ready": false,
+    "v02_tag_created": false
+  },
+  "runtime_state": {
+    "actual_tool_execution_enabled": false,
+    "automatic_candidate_approval_enabled": false,
+    "automatic_claim_extraction_enabled": false,
+    "automatic_verified_knowledge_promotion_enabled": false,
+    "background_crawler_enabled": false,
+    "background_network_access_enabled": false,
+    "belief_mutation_enabled": false,
+    "browser_automation_enabled": false,
+    "cognitive_memory_write_enabled": false,
+    "connector_integration_enabled": false,
+    "model_provider_integration_enabled": false,
+    "operator_invoked_public_https_fetch_available": true,
+    "persistent_verified_knowledge_write_enabled": false,
+    "production_exposure": false,
+    "public_network_fetch_enabled": false,
+    "scheduled_public_research_enabled": false,
+    "search_provider_integration_enabled": false,
+    "system_dns_resolution_available": true,
+    "system_http_transport_available": true,
+    "unrestricted_network_access_enabled": false
+  },
+  "security_state": {
+    "allowlisted_https_only": true,
+    "candidate_not_truth": true,
+    "credential_free": true,
+    "dns_pinned": true,
+    "peer_verified": true,
+    "redirects_revalidated": true,
+    "source_body_purged": true,
+    "source_material_untrusted": true,
+    "tls_certificate_verified": true,
+    "tls_hostname_verified": true
+  },
+  "synthetic": true,
+  "v02_release_ready": false
+}

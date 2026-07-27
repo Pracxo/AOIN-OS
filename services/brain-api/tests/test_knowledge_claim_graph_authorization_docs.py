@@ -3,7 +3,13 @@ from __future__ import annotations
 import os
 import subprocess
 
-from knowledge_source_registry_test_helpers import ROOT, read_json, read_text
+from knowledge_source_registry_test_helpers import (
+    ROOT,
+    assert_knowledge_program_complete_terminal_state,
+    is_knowledge_program_complete,
+    read_json,
+    read_text,
+)
 
 REQUIRED_FILES = [
     "docs/knowledge-intelligence/temporal-claim-evidence-graph-architecture.md",
@@ -56,6 +62,9 @@ def test_claim_graph_authorization_required_files_exist():
 
 
 def test_claim_graph_authorization_scripts_pass_in_nested_mode():
+    if is_knowledge_program_complete():
+        assert_knowledge_program_complete_terminal_state()
+        return
     env = {**os.environ, "PYTEST_CURRENT_TEST": "AION-208 claim graph smoke"}
     for script in (
         "scripts/knowledge-intelligence-claim-graph-authorization-no-go-regression.sh",

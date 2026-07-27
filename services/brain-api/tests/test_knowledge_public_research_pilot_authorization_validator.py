@@ -41,7 +41,9 @@ def test_public_research_pilot_authorization_exact_fields() -> None:
     assert auth["parent_evaluation_id"] == "AION-VKME-001"
     assert auth["implementation_task"] == "AION-219"
     assert auth["formal_closeout_task"] == "AION-220"
-    assert auth["authorization_active"] is True
-    assert auth["authorization_consumed"] is False
-    assert auth["authorization_expired"] is False
+    assert auth["authorization_active"] is False
+    assert auth["authorization_consumed"] is True
+    assert auth["authorization_expired"] is True
     assert auth["authorization_reusable"] is False
+    assert auth["authorization_closed_by_task"] == "AION-220"
+    assert auth["authorization_consumed_by_task"] == "AION-219"

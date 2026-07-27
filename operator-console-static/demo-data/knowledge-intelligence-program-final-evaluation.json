@@ -1,0 +1,12 @@
+{
+  "all_hard_gates_passed": true,
+  "decision": "CONTROLLED_PUBLIC_RESEARCH_PILOT_PASS_COMPLETE_KNOWLEDGE_INTELLIGENCE_PROGRAM",
+  "evaluation_id": "AION-KIPE-001",
+  "evaluation_network_requests": 0,
+  "program_state": "knowledge_intelligence_program_complete",
+  "read_only": true,
+  "redacted": true,
+  "scenario_count": 28,
+  "synthetic": true,
+  "title": "Knowledge Intelligence Program final evaluation"
+}

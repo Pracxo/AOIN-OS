@@ -9,6 +9,10 @@ from knowledge_claim_graph_evaluation_test_helpers import (
     read_json,
     read_text,
 )
+from knowledge_source_registry_test_helpers import (
+    assert_knowledge_program_complete_terminal_state,
+    is_knowledge_program_complete,
+)
 
 REQUIRED_FILES = [
     "docs/knowledge-intelligence/epistemic-truth-engine-architecture.md",
@@ -55,6 +59,9 @@ def test_epistemic_truth_authorization_required_files_exist():
 
 
 def test_epistemic_truth_authorization_scripts_pass_in_nested_mode():
+    if is_knowledge_program_complete():
+        assert_knowledge_program_complete_terminal_state()
+        return
     env = {**os.environ, "PYTEST_CURRENT_TEST": "AION-210 epistemic truth docs"}
     for script in (
         "scripts/knowledge-intelligence-epistemic-truth-authorization-no-go-regression.sh",

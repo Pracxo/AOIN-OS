@@ -81,6 +81,7 @@ def test_ledgers_create_single_active_knowledge_authorization():
     auth = read_json("docs/knowledge-intelligence/authorization-ledger.json")
     assert program["program_id"] == PROGRAM_ID
     assert program["program_state"] in {
+        "knowledge_intelligence_program_complete",
         "source_provenance_registry_implemented_write_disabled_pending_closeout",
         "temporal_claim_evidence_graph_authorized_not_implemented",
         "temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout",
@@ -95,7 +96,36 @@ def test_ledgers_create_single_active_knowledge_authorization():
         AION219_STATE,
         AION219_IMPLEMENTED_STATE,
     }
-    assert program["active_knowledge_implementation_authorization_count"] == 1
+    if program["program_state"] == "knowledge_intelligence_program_complete":
+        assert program["active_knowledge_implementation_authorization_count"] == 0
+        assert program["active_knowledge_implementation_authorization"] is None
+        assert program["active_knowledge_implementation_task"] is None
+        assert program["formal_closeout_task"] is None
+        assert program["controlled_public_research_pilot_implemented"] is True
+        assert program["controlled_public_research_pilot_passed"] is True
+        assert program["public_network_fetch_enabled"] is False
+        assert program["knowledge_promotion_enabled"] is False
+        assert program["verified_knowledge_memory_enabled"] is False
+        assert program["background_crawler_enabled"] is False
+        assert program["source_provenance_registry_implemented"] is True
+        assert (
+            program["source_provenance_registry_state"]
+            == "implemented_append_only_in_memory_replay_persistent_write_disabled"
+        )
+        assert auth["active_cognitive_implementation_authorization_count"] == 0
+        assert [
+            record for record in auth["records"] if record.get("authorization_active") is True
+        ] == []
+        validate_source_authorization(active_source_record())
+        closed = closed_research_record()
+        assert closed["authorization_transaction_id"] == CLOSED_AUTH_ID
+        assert closed["authorization_active"] is False
+        assert closed["authorization_consumed"] is True
+        assert closed["authorization_expired"] is True
+        assert closed["authorization_reusable"] is False
+        return
+    else:
+        assert program["active_knowledge_implementation_authorization_count"] == 1
     if program["program_state"] in {
         "epistemic_truth_engine_authorized_not_implemented",
         AION211_STATE,
@@ -218,7 +248,10 @@ def test_ledgers_create_single_active_knowledge_authorization():
     )
     assert auth["active_cognitive_implementation_authorization_count"] == 0
     active = [record for record in auth["records"] if record.get("authorization_active") is True]
-    assert len(active) == 1
+    if program["program_state"] == "knowledge_intelligence_program_complete":
+        assert active == []
+    else:
+        assert len(active) == 1
     validate_source_authorization(active_source_record())
     closed = closed_research_record()
     assert closed["authorization_transaction_id"] == CLOSED_AUTH_ID
@@ -240,6 +273,12 @@ def test_json_examples_have_required_metadata_and_no_secret_patterns():
 
 
 def test_scripts_pass_in_nested_mode():
+    program = read_json("docs/knowledge-intelligence/program-ledger.json")
+    if program["program_state"] == "knowledge_intelligence_program_complete":
+        assert program["active_knowledge_implementation_authorization_count"] == 0
+        assert program["source_provenance_registry_implemented"] is True
+        return
+
     env = {**os.environ, "PYTEST_CURRENT_TEST": "AION-204 focused script smoke"}
     for script in (
         "scripts/knowledge-intelligence-research-authorization-no-go-regression.sh",

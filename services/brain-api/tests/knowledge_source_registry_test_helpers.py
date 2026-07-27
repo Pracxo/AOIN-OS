@@ -13,6 +13,8 @@ CLAIM_GRAPH_AUTH_ID = "AION-208-KI-0003"
 EPISTEMIC_AUTH_ID = "AION-210-KI-0004"
 DOMAIN_EXPERT_MESH_AUTH_ID = "AION-212-KI-0005"
 TOOL_VERIFICATION_AUTH_ID = "AION-214-KI-0006"
+PUBLIC_RESEARCH_PILOT_AUTH_ID = "AION-218-KI-0008"
+PROGRAM_COMPLETE_STATE = "knowledge_intelligence_program_complete"
 EVALUATION_ID = "AION-RAE-001"
 DECISION = (
     "RESEARCH_ACQUISITION_OPERATOR_EVALUATION_PASS_RECOMMEND_SOURCE_PROVENANCE_REGISTRY_AUTHORIZATION"
@@ -84,6 +86,50 @@ def read_json(relative: str) -> dict:
 
 def read_text(relative: str) -> str:
     return (ROOT / relative).read_text()
+
+
+def is_knowledge_program_complete() -> bool:
+    return (
+        read_json("docs/knowledge-intelligence/program-ledger.json").get(
+            "program_state"
+        )
+        == PROGRAM_COMPLETE_STATE
+    )
+
+
+def assert_knowledge_program_complete_terminal_state() -> None:
+    program = read_json("docs/knowledge-intelligence/program-ledger.json")
+    auth = read_json("docs/knowledge-intelligence/authorization-ledger.json")
+    assert program["program_state"] == PROGRAM_COMPLETE_STATE
+    assert program["knowledge_intelligence_program_complete"] is True
+    assert program["active_knowledge_implementation_authorization"] is None
+    assert program["active_knowledge_implementation_authorization_count"] == 0
+    assert program["active_knowledge_implementation_task"] is None
+    assert program["new_knowledge_implementation_authorization_created"] is False
+    assert program["next_knowledge_implementation_authorization"] is None
+    assert program["next_knowledge_implementation_task"] is None
+    assert program["runtime_effect"] is False
+    assert program["public_network_fetch_enabled"] is False
+    assert program["automatic_verified_knowledge_promotion_enabled"] is False
+    assert program["cognitive_memory_write_enabled"] is False
+    assert program["belief_mutation_enabled"] is False
+    active = [record for record in auth["records"] if record.get("authorization_active") is True]
+    assert active == []
+    closed = [
+        record
+        for record in auth["records"]
+        if record.get("authorization_transaction_id") == PUBLIC_RESEARCH_PILOT_AUTH_ID
+    ]
+    assert len(closed) == 1
+    record = closed[0]
+    assert record["authorization_active"] is False
+    assert record["authorization_consumed"] is True
+    assert record["authorization_expired"] is True
+    assert record["authorization_reusable"] is False
+    assert record["authorization_closed_by_task"] == "AION-220"
+    assert record["authorization_consumed_by_task"] == "AION-219"
+    assert record["controlled_public_research_pilot_implemented"] is True
+    assert record["public_network_fetch_enabled"] is False
 
 
 def active_source_record() -> dict:

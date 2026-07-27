@@ -8,6 +8,9 @@ PUBLIC_RESEARCH_PILOT_STATE = (
     "controlled_public_research_pilot_implemented_operator_invoked_"
     "persistent_write_disabled_pending_closeout"
 )
+FINAL_STATUS_MARKER = (
+    "AION-220 final Knowledge Intelligence Program evaluation and closeout complete"
+)
 
 
 def load_json(relative: str) -> dict[str, object]:
@@ -18,6 +21,26 @@ def test_current_state_matches_active_aion218_authorization_and_status() -> None
     program = load_json("docs/knowledge-intelligence/program-ledger.json")
     auth = load_json("docs/knowledge-intelligence/authorization-ledger.json")
     active = [item for item in auth["records"] if item.get("authorization_active") is True]
+    if program["program_state"] == "knowledge_intelligence_program_complete":
+        assert active == []
+        for ledger in (program, auth):
+            assert ledger["active_knowledge_implementation_authorization_count"] == 0
+            assert ledger["active_knowledge_implementation_authorization"] is None
+            assert ledger["active_knowledge_implementation_task"] is None
+            assert ledger["formal_closeout_task"] is None
+            assert ledger["controlled_public_research_pilot_authorized"] is True
+            assert ledger["controlled_public_research_pilot_implemented"] is True
+            assert ledger["controlled_public_research_pilot_passed"] is True
+            assert ledger["operator_invoked_public_https_fetch_available"] is True
+            assert ledger["system_dns_resolution_available"] is True
+            assert ledger["system_http_transport_available"] is True
+            assert ledger["public_network_fetch_enabled"] is False
+        status = (REPO_ROOT / "docs/project-status.md").read_text(encoding="utf-8")
+        assert FINAL_STATUS_MARKER in status
+        assert "active_knowledge_implementation_authorization_count=0" in status
+        assert "active_knowledge_implementation_authorization=null" in status
+        return
+
     assert len(active) == 1
     assert active[0]["authorization_transaction_id"] == "AION-218-KI-0008"
     for ledger in (program, auth):

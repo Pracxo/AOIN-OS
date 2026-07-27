@@ -38,6 +38,21 @@ def test_aion216_authorization_is_closed_and_non_reusable() -> None:
 def test_aion218_is_the_sole_active_knowledge_authorization() -> None:
     ledger = load_json("docs/knowledge-intelligence/authorization-ledger.json")
     active = [item for item in ledger["records"] if item.get("authorization_active") is True]
+    if ledger["program_state"] == "knowledge_intelligence_program_complete":
+        assert active == []
+        record = next(
+            item
+            for item in ledger["records"]
+            if item.get("authorization_transaction_id") == "AION-218-KI-0008"
+        )
+        assert record["authorization_active"] is False
+        assert record["authorization_consumed"] is True
+        assert record["authorization_consumed_by_task"] == "AION-219"
+        assert record["authorization_expired"] is True
+        assert record["authorization_reusable"] is False
+        assert record["authorization_closed_by_task"] == "AION-220"
+        return
+
     assert len(active) == 1
     record = active[0]
     assert record["authorization_transaction_id"] == "AION-218-KI-0008"

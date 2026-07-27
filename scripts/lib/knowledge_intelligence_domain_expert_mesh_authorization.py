@@ -12,6 +12,7 @@ AUTHORIZATION_ID = "AION-212-KI-0005"
 SUCCESSOR_AUTHORIZATION_ID = "AION-214-KI-0006"
 CURRENT_ACTIVE_AUTHORIZATION_ID = "AION-216-KI-0007"
 PUBLIC_RESEARCH_PILOT_AUTHORIZATION_ID = "AION-218-KI-0008"
+PROGRAM_COMPLETE_STATE = "knowledge_intelligence_program_complete"
 PARENT_AUTHORIZATION_ID = "AION-210-KI-0004"
 PARENT_EVALUATION_ID = "AION-EAE-001"
 PARENT_DECISION = (
@@ -324,8 +325,13 @@ def validate_authorization_files(root: Path) -> None:
     payload = load_json(root, "examples/knowledge-intelligence/domain-expert-mesh-authorization.json")
     validate_authorization_payload(payload)
     auth = load_json(root, "docs/knowledge-intelligence/authorization-ledger.json")
+    program = load_json(root, "docs/knowledge-intelligence/program-ledger.json")
+    program_complete = program.get("program_state") == PROGRAM_COMPLETE_STATE
     active = [record for record in auth["records"] if record.get("authorization_active") is True]
-    if len(active) != 1:
+    if program_complete:
+        if active:
+            raise ValueError("no Knowledge Intelligence authorization must remain active after completion")
+    elif len(active) != 1:
         raise ValueError("exactly one Knowledge Intelligence authorization must be active")
     records = [
         record
@@ -335,12 +341,14 @@ def validate_authorization_files(root: Path) -> None:
     if len(records) != 1:
         raise ValueError("AION-212-KI-0005 authorization record missing")
     aion212_record = records[0]
-    active_authorization_id = active[0].get("authorization_transaction_id")
+    active_authorization_id = (
+        None if program_complete else active[0].get("authorization_transaction_id")
+    )
     successor_active = active_authorization_id in {
         SUCCESSOR_AUTHORIZATION_ID,
         CURRENT_ACTIVE_AUTHORIZATION_ID,
         PUBLIC_RESEARCH_PILOT_AUTHORIZATION_ID,
-    }
+    } or program_complete
     if successor_active:
         for key, expected in {
             "authorization_active": False,
@@ -357,24 +365,28 @@ def validate_authorization_files(root: Path) -> None:
         }.items():
             if aion212_record.get(key) != expected:
                 raise ValueError(f"AION-212 closeout mismatch for {key}: {aion212_record.get(key)!r}")
-        expected_successor_task = {
-            SUCCESSOR_AUTHORIZATION_ID: "AION-215",
-            CURRENT_ACTIVE_AUTHORIZATION_ID: "AION-217",
-            PUBLIC_RESEARCH_PILOT_AUTHORIZATION_ID: "AION-219",
-        }[active_authorization_id]
-        expected_successor_closeout = {
-            SUCCESSOR_AUTHORIZATION_ID: "AION-216",
-            CURRENT_ACTIVE_AUTHORIZATION_ID: "AION-218",
-            PUBLIC_RESEARCH_PILOT_AUTHORIZATION_ID: "AION-220",
-        }[active_authorization_id]
-        if active[0].get("implementation_task") != expected_successor_task:
-            raise ValueError("successor authorization must point to AION-215")
-        if active[0].get("formal_closeout_task") != expected_successor_closeout:
-            raise ValueError("successor authorization must close out through AION-216")
+        if active_authorization_id is not None:
+            expected_successor_task = {
+                SUCCESSOR_AUTHORIZATION_ID: "AION-215",
+                CURRENT_ACTIVE_AUTHORIZATION_ID: "AION-217",
+                PUBLIC_RESEARCH_PILOT_AUTHORIZATION_ID: "AION-219",
+            }[active_authorization_id]
+            expected_successor_closeout = {
+                SUCCESSOR_AUTHORIZATION_ID: "AION-216",
+                CURRENT_ACTIVE_AUTHORIZATION_ID: "AION-218",
+                PUBLIC_RESEARCH_PILOT_AUTHORIZATION_ID: "AION-220",
+            }[active_authorization_id]
+            if active[0].get("implementation_task") != expected_successor_task:
+                raise ValueError("successor authorization task mismatch")
+            if active[0].get("formal_closeout_task") != expected_successor_closeout:
+                raise ValueError("successor authorization closeout mismatch")
     else:
         validate_authorization_payload(active[0])
-    program = load_json(root, "docs/knowledge-intelligence/program-ledger.json")
-    if active_authorization_id == CURRENT_ACTIVE_AUTHORIZATION_ID:
+    if program_complete:
+        expected_active = None
+        expected_task = None
+        expected_closeout = None
+    elif active_authorization_id == CURRENT_ACTIVE_AUTHORIZATION_ID:
         expected_active = CURRENT_ACTIVE_AUTHORIZATION_ID
         expected_task = "AION-217"
         expected_closeout = "AION-218"

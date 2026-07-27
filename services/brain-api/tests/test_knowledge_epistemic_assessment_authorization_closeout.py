@@ -56,6 +56,20 @@ def test_aion_210_cannot_be_the_active_authorization_after_closeout():
         for record in _authorization_records()
         if record.get("authorization_active") is True
     ]
+    if _program_ledger()["program_state"] == "knowledge_intelligence_program_complete":
+        assert active == []
+        aion218 = [
+            record
+            for record in _authorization_records()
+            if record.get("authorization_transaction_id") == "AION-218-KI-0008"
+        ][0]
+        assert aion218["authorization_active"] is False
+        assert aion218["authorization_consumed"] is True
+        assert aion218["authorization_expired"] is True
+        assert aion218["authorization_reusable"] is False
+        assert aion218["authorization_closed_by_task"] == "AION-220"
+        return
+
     assert len(active) == 1
     assert active[0]["authorization_transaction_id"] in {
         "AION-212-KI-0005",
@@ -106,6 +120,19 @@ def test_aion_212_current_projection_matches_active_authorization():
         for record in auth["records"]
         if record.get("authorization_active") is True
     ]
+    if program["program_state"] == "knowledge_intelligence_program_complete":
+        assert active == []
+        for payload in (auth, program):
+            assert payload["active_knowledge_implementation_authorization_count"] == 0
+            assert payload["active_knowledge_implementation_authorization"] is None
+            assert payload["active_knowledge_implementation_task"] is None
+            assert payload["formal_closeout_task"] is None
+            assert payload["domain_expert_mesh_authorized"] is True
+            assert payload["domain_expert_mesh_implemented"] is True
+            assert payload["domain_expert_mesh_runtime_enabled"] is False
+            assert payload["persistent_expert_mesh_write_enabled"] is False
+        return
+
     assert len(active) == 1
     record = active[0]
 

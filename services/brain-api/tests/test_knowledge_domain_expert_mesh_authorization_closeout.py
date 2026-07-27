@@ -49,6 +49,20 @@ def test_aion_212_ki_0005_is_closed_and_non_reusable() -> None:
 
 def test_only_current_knowledge_authorization_is_active_after_closeout() -> None:
     active = [item for item in _auth_records() if item.get("authorization_active") is True]
+    program = _load("docs/knowledge-intelligence/program-ledger.json")
+    if program["program_state"] == "knowledge_intelligence_program_complete":
+        assert active == []
+        closed_public_research = [
+            item
+            for item in _auth_records()
+            if item.get("authorization_transaction_id") == "AION-218-KI-0008"
+        ]
+        assert len(closed_public_research) == 1
+        assert closed_public_research[0]["authorization_active"] is False
+        assert closed_public_research[0]["authorization_consumed"] is True
+        assert closed_public_research[0]["authorization_closed_by_task"] == "AION-220"
+        return
+
     assert [item["authorization_transaction_id"] for item in active] == ["AION-218-KI-0008"]
     assert active[0]["implementation_task"] == "AION-219"
     assert active[0]["formal_closeout_task"] == "AION-220"

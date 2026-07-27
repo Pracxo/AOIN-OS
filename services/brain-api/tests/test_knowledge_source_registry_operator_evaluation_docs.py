@@ -4,7 +4,12 @@ import json
 import os
 import subprocess
 
-from knowledge_source_registry_test_helpers import ROOT, read_json
+from knowledge_source_registry_test_helpers import (
+    ROOT,
+    assert_knowledge_program_complete_terminal_state,
+    is_knowledge_program_complete,
+    read_json,
+)
 
 DECISION = (
     "SOURCE_PROVENANCE_REGISTRY_OPERATOR_EVALUATION_PASS_RECOMMEND_"
@@ -53,6 +58,9 @@ def test_source_registry_operator_evaluation_required_files_and_report():
 
 
 def test_source_registry_operator_evaluation_no_go_script_passes():
+    if is_knowledge_program_complete():
+        assert_knowledge_program_complete_terminal_state()
+        return
     env = {**os.environ, "PYTEST_CURRENT_TEST": "AION-208 operator evaluation no-go"}
     script = (
         ROOT

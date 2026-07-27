@@ -39,9 +39,30 @@ def test_aion_208_claim_graph_authorization_is_closed_and_non_reusable():
 def test_aion_210_creates_sole_active_epistemic_authorization():
     program = read_json("docs/knowledge-intelligence/program-ledger.json")
     record = authorization_record(EPISTEMIC_AUTH_ID)
-    active = active_authorization_record()
     validate_epistemic_authorization(record)
     assert record["authorization_transaction_id"] == EPISTEMIC_AUTH_ID
+    if program["program_state"] == "knowledge_intelligence_program_complete":
+        records = read_json("docs/knowledge-intelligence/authorization-ledger.json")[
+            "records"
+        ]
+        assert [
+            item
+            for item in records
+            if item.get("authorization_active") is True
+        ] == []
+        assert program["active_knowledge_implementation_authorization_count"] == 0
+        assert program["active_knowledge_implementation_authorization"] is None
+        assert program["active_knowledge_implementation_task"] is None
+        assert program["formal_closeout_task"] is None
+        assert record["authorization_active"] is False
+        assert record["authorization_consumed"] is True
+        assert record["authorization_expired"] is True
+        assert record["authorization_reusable"] is False
+        assert record["authorization_closed_by_task"] == "AION-212"
+        assert program["active_cognitive_implementation_authorization_count"] == 0
+        return
+
+    active = active_authorization_record()
     if program["program_state"] in {
         "controlled_public_research_pilot_authorized_not_implemented",
         "controlled_public_research_pilot_implemented_operator_invoked_persistent_write_disabled_pending_closeout",
