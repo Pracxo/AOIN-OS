@@ -124,7 +124,7 @@ for path in sorted((root / "operator-console-static" / "demo-data").glob("*auth*
     payload = json.loads(path.read_text())
     if payload.get("read_only") is not True:
         raise SystemExit(f"static auth demo must be read_only: {path}")
-    if payload.get("redaction_applied") is not True:
+    if payload.get("redaction_applied") is not True and payload.get("redacted") is not True:
         raise SystemExit(f"static auth demo must be redacted: {path}")
 
 print("Local auth examples valid")

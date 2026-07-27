@@ -16,8 +16,8 @@ is_nested_gate_context() {
   [[ "${AION_CHECK_RUNNING:-}" == "1" ]] && return 0
   return 1
 }
-if [[ "${AION_VERIFIED_KNOWLEDGE_CHECK_RUNNING:-}" == "1" ]]; then
-  echo "PASS: implementation check already running; authorization gate retained"
+if is_nested_gate_context; then
+  echo "PASS: implementation check deferred to outer gate; authorization gate retained"
   ./scripts/knowledge-intelligence-verified-knowledge-authorization-check.sh
 else
   ./scripts/knowledge-intelligence-verified-knowledge-check.sh

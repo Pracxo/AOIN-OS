@@ -54,6 +54,7 @@ assert program["program_state"] in {
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
     "verified_knowledge_memory_authorized_not_implemented",
     "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
+    "controlled_public_research_pilot_authorized_not_implemented",
 }
 assert program["research_plane_implemented"] is True
 assert program["research_runtime_enabled"] is False
@@ -71,8 +72,13 @@ if program["program_state"] in {
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
     "verified_knowledge_memory_authorized_not_implemented",
     "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
+    "controlled_public_research_pilot_authorized_not_implemented",
 }:
-    if program["program_state"] in {
+    if program["program_state"] == "controlled_public_research_pilot_authorized_not_implemented":
+        assert auth["active_knowledge_implementation_authorization"] == "AION-218-KI-0008"
+        assert auth["active_knowledge_implementation_task"] == "AION-219"
+        assert program["formal_closeout_task"] == "AION-220"
+    elif program["program_state"] in {
         "verified_knowledge_memory_authorized_not_implemented",
         "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
     }:

@@ -1,0 +1,17 @@
+{
+  "authorization_transaction_id": "AION-218-KI-0008",
+  "automatic_promotion_disabled": true,
+  "dns_pinning_verified": true,
+  "lineage_complete": true,
+  "operator_review_required": true,
+  "persistent_write_disabled": true,
+  "pilot_session_id": "public-research-pilot-session-aion-219-example",
+  "read_only": true,
+  "redacted": true,
+  "redirect_policy_verified": true,
+  "resource_budget_verified": true,
+  "runtime_effect": false,
+  "schema_version": "aion-public-research-pilot-integrity-report/v1",
+  "synthetic": true,
+  "tls_policy_verified": true
+}

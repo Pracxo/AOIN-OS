@@ -7,13 +7,13 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT / "scripts/lib"))
 
-from knowledge_intelligence_verified_memory_operator_evaluation import (
+from knowledge_intelligence_verified_memory_operator_evaluation import (  # noqa: E402
     EVALUATION_ID,
     FAIL_DECISION,
     PASS_DECISION,
     SCENARIO_IDS,
     build_report,
-)
+)  # noqa: E402
 
 
 def test_verified_memory_operator_evaluation_runs_all_required_scenarios(
@@ -24,7 +24,7 @@ def test_verified_memory_operator_evaluation_runs_all_required_scenarios(
         evaluation_id=EVALUATION_ID,
         evaluation_base_commit="f1812bc2bc5f2af1a4fdc2eeaac12ab3c9aa4a1d",
         temporary_output_directory=tmp_path,
-    )
+)
 
     assert report["decision"] in {PASS_DECISION, FAIL_DECISION}
     assert report["evaluation_passed"] is (report["decision"] == PASS_DECISION)

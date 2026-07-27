@@ -17,3 +17,7 @@ Key controls:
 Current state flags: `verified_knowledge_memory_authorized=true`, `verified_knowledge_memory_implemented=true`, `verified_knowledge_memory_state=implemented_deterministic_in_memory_candidate_versioning_engagement_learning_persistent_write_disabled`, `engagement_learning_candidate_plane_authorized=true`, `engagement_learning_candidate_plane_implemented=true`, `verified_knowledge_runtime_enabled=false`, `persistent_verified_knowledge_write_enabled=false`, `automatic_verified_knowledge_promotion_enabled=false`, `cognitive_memory_write_enabled=false`, `belief_mutation_enabled=false`, `engagement_signal_as_fact_enabled=false`, `engagement_confidence_effect_enabled=false`, `public_network_fetch_enabled=false`, `actual_tool_execution_enabled=false`, `runtime_effect=false`.
 
 AION-216-KI-0007 remains active, consumed=false, expired=false, reusable=false, pending AION-218 formal closeout.
+
+## AION-218 Current State
+
+AION-218 completed `AION-VKME-001` with exact PASS decision `VERIFIED_KNOWLEDGE_MEMORY_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_PUBLIC_RESEARCH_PILOT_AUTHORIZATION`. `AION-216-KI-0007` is closed, consumed, expired, and non-reusable. `AION-218-KI-0008` is the sole active Knowledge Intelligence authorization for AION-219, with AION-220 as formal closeout. The controlled public-research pilot is authorized but not implemented; public network fetch, system HTTP transport, automatic promotion, cognitive-memory write, belief mutation, and persistent verified-knowledge writes remain disabled.

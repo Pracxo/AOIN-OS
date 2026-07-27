@@ -141,18 +141,21 @@ def test_project_status_describes_current_shadow_authorization_state() -> None:
     current_text = _project_status_current_text()
     historical_text = text.split("## Historical Compatibility Markers", 1)[1]
 
-    assert "AION-217 deterministic verified-knowledge candidate memory" in current_text
-    assert "`active_knowledge_implementation_authorization=AION-216-KI-0007`" in current_text
-    assert "`active_knowledge_implementation_task=AION-217`" in current_text
-    assert "`formal_closeout_task=AION-218`" in current_text
+    assert "AION-218 verified-knowledge memory operator evaluation" in current_text
+    assert "`active_knowledge_implementation_authorization=AION-218-KI-0008`" in current_text
+    assert "`active_knowledge_implementation_task=AION-219`" in current_text
+    assert "`formal_closeout_task=AION-220`" in current_text
     assert "`verified_knowledge_memory_implemented=true`" in current_text
     assert "`persistent_verified_knowledge_write_enabled=false`" in current_text
+    assert "`controlled_public_research_pilot_authorized=true`" in current_text
+    assert "`controlled_public_research_pilot_implemented=false`" in current_text
     assert "AION-204 Cognitive Architecture closeout reconciliation" in historical_text
     assert "source registry implemented with persistent writes disabled" in historical_text
     assert "active self-improvement implementation authorization count is zero" in historical_text
     assert "`knowledge_research_runtime_enabled=false`" in historical_text
     assert "`network_access_enabled=false`" in historical_text
     assert "AION-180-SI-0007" in historical_text
+    assert "`active_knowledge_implementation_task=AION-217`" in historical_text
     assert "v02_tag_created=false" in text
     assert "v02_release_created=false" in text
     for stale_marker in STALE_AION_176_CURRENT_STATE_MARKERS:

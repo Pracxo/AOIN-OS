@@ -18,9 +18,13 @@ from knowledge_intelligence_integrated_research_agent_operator_evaluation import
 PROGRAM_ID = "AION-KNOWLEDGE-INTELLIGENCE-001"
 CURRENT_AUTHORIZATION_ID = "AION-214-KI-0006"
 AUTHORIZATION_ID = "AION-216-KI-0007"
+NEXT_AUTHORIZATION_ID = "AION-218-KI-0008"
 EVALUATION_ID = "AION-IRAE-001"
+NEXT_EVALUATION_ID = "AION-VKME-001"
 IMPLEMENTATION_TASK = "AION-217"
 FORMAL_CLOSEOUT_TASK = "AION-218"
+NEXT_IMPLEMENTATION_TASK = "AION-219"
+NEXT_FORMAL_CLOSEOUT_TASK = "AION-220"
 CANDIDATE_ID = "verified-knowledge-memory-engagement-learning-core"
 WORKSTREAM = "knowledge-intelligence-verified-knowledge-memory"
 SCOPE = "deterministic-verified-knowledge-candidate-lineage-versioning-revalidation-operator-review-engagement-learning-abstention-core"
@@ -28,6 +32,7 @@ PROGRAM_STATE = "verified_knowledge_memory_authorized_not_implemented"
 IMPLEMENTED_PROGRAM_STATE = (
     "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
 )
+FINAL_PROGRAM_STATE = "controlled_public_research_pilot_authorized_not_implemented"
 VERIFIED_KNOWLEDGE_MEMORY_STATE = (
     "implemented_deterministic_in_memory_candidate_versioning_engagement_learning_"
     "persistent_write_disabled"
@@ -81,10 +86,13 @@ def validate_authorization_payload(payload: dict[str, Any]) -> None:
         raise ValueError("resource limits mismatch")
 
 def is_implemented_state(payload: dict[str, Any]) -> bool:
-    return payload.get("program_state") == IMPLEMENTED_PROGRAM_STATE
+    return payload.get("program_state") in {IMPLEMENTED_PROGRAM_STATE, FINAL_PROGRAM_STATE}
+
+def is_final_public_pilot_state(payload: dict[str, Any]) -> bool:
+    return payload.get("program_state") == FINAL_PROGRAM_STATE
 
 def validate_implemented_state(label: str, payload: dict[str, Any]) -> None:
-    if payload.get("program_state") not in {PROGRAM_STATE, IMPLEMENTED_PROGRAM_STATE}:
+    if payload.get("program_state") not in {PROGRAM_STATE, IMPLEMENTED_PROGRAM_STATE, FINAL_PROGRAM_STATE}:
         raise ValueError(f"{label} program state mismatch")
     if is_implemented_state(payload):
         expected = {
@@ -134,15 +142,19 @@ def validate_authorization_files(root: Path) -> None:
         raise ValueError("AION-214 closeout PR evidence mismatch")
     auth_ledger = load_json(root, "docs/knowledge-intelligence/authorization-ledger.json")
     program_ledger = load_json(root, "docs/knowledge-intelligence/program-ledger.json")
+    final_state = is_final_public_pilot_state(program_ledger)
     for label, payload in (("authorization", auth_ledger), ("program", program_ledger)):
         validate_implemented_state(label, payload)
-        if payload.get("active_knowledge_implementation_authorization") != AUTHORIZATION_ID:
+        expected_authorization = NEXT_AUTHORIZATION_ID if final_state else AUTHORIZATION_ID
+        expected_task = NEXT_IMPLEMENTATION_TASK if final_state else IMPLEMENTATION_TASK
+        expected_closeout = NEXT_FORMAL_CLOSEOUT_TASK if final_state else FORMAL_CLOSEOUT_TASK
+        if payload.get("active_knowledge_implementation_authorization") != expected_authorization:
             raise ValueError(f"{label} active authorization mismatch")
         if payload.get("active_knowledge_implementation_authorization_count") != 1:
             raise ValueError(f"{label} active authorization count mismatch")
-        if payload.get("active_knowledge_implementation_task") != IMPLEMENTATION_TASK:
+        if payload.get("active_knowledge_implementation_task") != expected_task:
             raise ValueError(f"{label} active task mismatch")
-        if payload.get("formal_closeout_task") != FORMAL_CLOSEOUT_TASK:
+        if payload.get("formal_closeout_task") != expected_closeout:
             raise ValueError(f"{label} formal closeout mismatch")
         for key in ("verified_knowledge_runtime_enabled", "persistent_verified_knowledge_write_enabled", "automatic_verified_knowledge_promotion_enabled", "cognitive_memory_write_enabled", "belief_mutation_enabled", "engagement_signal_as_fact_enabled", "engagement_confidence_effect_enabled", "public_network_fetch_enabled", "actual_tool_execution_enabled"):
             if payload.get(key) is not False:
@@ -151,7 +163,20 @@ def validate_authorization_files(root: Path) -> None:
     active = [item for item in records if item.get("authorization_active") is True]
     if len(active) != 1:
         raise ValueError("exactly one active Knowledge Intelligence authorization is required")
-    validate_authorization_payload(active[0])
+    if final_state:
+        import knowledge_intelligence_public_research_pilot_authorization as public_pilot
+
+        public_pilot.validate_authorization_payload(active[0])
+        closed_aion216 = [
+            item
+            for item in records
+            if item.get("authorization_transaction_id") == AUTHORIZATION_ID
+        ]
+        if len(closed_aion216) != 1:
+            raise ValueError("AION-216-KI-0007 closeout record missing")
+        public_pilot.validate_closed_authorization(closed_aion216[0])
+    else:
+        validate_authorization_payload(active[0])
     closed = [item for item in records if item.get("authorization_transaction_id") == CURRENT_AUTHORIZATION_ID]
     if len(closed) != 1:
         raise ValueError("AION-214-KI-0006 closeout record missing")

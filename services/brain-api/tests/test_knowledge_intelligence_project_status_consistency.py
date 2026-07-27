@@ -18,4 +18,4 @@ def test_project_status_current_state_matches_ledgers_and_retains_history() -> N
     assert ledger["formal_closeout_task"] in status
     assert "verified_knowledge_memory_implemented=true" in status
     assert "AION-209 compatibility marker" in status
-    assert "AION-217 deterministic verified-knowledge candidate memory" in status
+    assert "AION-218 verified-knowledge memory operator evaluation complete" in status

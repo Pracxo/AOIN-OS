@@ -760,8 +760,13 @@ for path in sorted(demo_dir.glob("*.json")):
             "knowledge-intelligence-verified-knowledge-candidate.json",
             "knowledge-intelligence-verified-knowledge-runtime-hold.json",
             "knowledge-intelligence-verified-knowledge-versioning.json",
+            "knowledge-intelligence-verified-memory-evaluation.json",
             "knowledge-intelligence-verified-memory-runtime-hold.json",
             "knowledge-intelligence-verified-memory.json",
+            "knowledge-intelligence-public-research-pilot-authorization.json",
+            "knowledge-intelligence-public-research-pilot-network-policy.json",
+            "knowledge-intelligence-public-research-pilot-resource-budget.json",
+            "knowledge-intelligence-public-research-pilot-runtime-hold.json",
         }:
             raise SystemExit(f"unknown knowledge intelligence demo: {path}")
         if payload.get("read_only") is not True:
@@ -781,11 +786,19 @@ for path in sorted(demo_dir.glob("*.json")):
                 "tool_verification_fabric_implemented",
                 "verified_knowledge_memory_authorized",
                 "verified_knowledge_memory_implemented",
+                "controlled_public_research_pilot_authorized",
                 "engagement_learning_candidate_plane_implemented",
             )
         )
-        if not implemented_disabled_plane_present:
-            raise SystemExit(f"knowledge intelligence plane must be implemented-disabled: {path}")
+        read_only_evidence_marker_present = (
+            payload.get("evaluation_passed") is True
+            or payload.get("dns_pinning_required") is True
+            or payload.get("explicit_allowlist_required") is True
+            or payload.get("operator_invoked_public_https_fetch_authorized") is True
+            or isinstance(payload.get("resource_limits"), dict)
+        )
+        if not implemented_disabled_plane_present and not read_only_evidence_marker_present:
+            raise SystemExit(f"knowledge intelligence demo marker missing: {path}")
         for key in (
             "research_runtime_enabled",
             "source_registry_runtime_enabled",

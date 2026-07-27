@@ -1402,6 +1402,22 @@ aion216_auth_paths = {
     "services/brain-api/tests/test_knowledge_verified_memory_authorization_validator.py",
 }
 
+aion218_auth_paths = {
+    "docs/adr/0182-verified-knowledge-memory-evaluation-and-controlled-public-research-pilot-authorization.md",
+    "docs/knowledge-intelligence/authorization-ledger.json",
+    "docs/knowledge-intelligence/public-research-pilot-authorization-model.md",
+    "docs/release/knowledge-intelligence-public-research-pilot-authorization-transaction.md",
+    "examples/knowledge-intelligence/public-research-pilot-authorization-envelope.json",
+    "examples/knowledge-intelligence/public-research-pilot-authorization.json",
+    "operator-console-static/demo-data/knowledge-intelligence-public-research-pilot-authorization.json",
+    "scripts/knowledge-intelligence-public-research-pilot-authorization-check.sh",
+    "scripts/knowledge-intelligence-public-research-pilot-authorization-no-go-regression.sh",
+    "scripts/lib/knowledge_intelligence_public_research_pilot_authorization.py",
+    "services/brain-api/tests/test_knowledge_public_research_pilot_authorization_docs.py",
+    "services/brain-api/tests/test_knowledge_public_research_pilot_authorization_validator.py",
+    "services/brain-api/tests/test_knowledge_verified_memory_authorization_closeout.py",
+}
+
 blocked_package_names = {
     "package.json",
     "package-lock.json",
@@ -1450,6 +1466,7 @@ for name in [*changed, *untracked]:
         and name not in aion212_auth_paths
         and name not in aion214_auth_paths
         and name not in aion216_auth_paths
+        and name not in aion218_auth_paths
     ):
         raise SystemExit(f"unexpected auth runtime or artifact path: {name}")
 

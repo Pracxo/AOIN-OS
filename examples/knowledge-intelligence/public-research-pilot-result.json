@@ -1,0 +1,17 @@
+{
+  "authorization_transaction_id": "AION-218-KI-0008",
+  "automatic_promotion": false,
+  "belief_mutated": false,
+  "cognitive_memory_written": false,
+  "eligible_candidate_count": 1,
+  "ineligible_candidate_count": 0,
+  "operator_review_required": true,
+  "persistent_verified_knowledge_write_enabled": false,
+  "pilot_session_id": "public-research-pilot-session-aion-219-example",
+  "read_only": true,
+  "redacted": true,
+  "result_state": "authorized_not_implemented_synthetic_preview",
+  "runtime_effect": false,
+  "schema_version": "aion-public-research-pilot-result/v1",
+  "synthetic": true
+}

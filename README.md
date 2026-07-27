@@ -14,7 +14,7 @@ identity boundary, but production authentication runtime remains disabled.
 External connectors remain disabled. Operator write execution remains disabled.
 Module activation remains disabled. No v0.2 tag or release exists.
 
-Knowledge Intelligence status: AION-216 integrated research-agent operator evaluation complete and verified knowledge memory authorized. `AION-216-KI-0007` is the sole active Knowledge Intelligence authorization for AION-217; AION-218 is the formal closeout. Verified-knowledge memory remains authorized, not implemented, runtime-disabled, persistence-disabled, and engagement remains non-factual.
+Knowledge Intelligence status: AION-218 verified-knowledge memory operator evaluation complete and controlled public-research pilot authorized. `AION-218-KI-0008` is the sole active Knowledge Intelligence authorization for AION-219; AION-220 is the formal closeout. The controlled public-research pilot is authorized, not implemented, public-network disabled, persistence-disabled, and engagement remains non-factual.
 The request identity boundary is default-off, observe-only, anonymous, and
 authorized by `AION-155-PA-0003` for `AION-156`.
 
@@ -5176,3 +5176,7 @@ The integrated research-agent chain passed evaluation. A knowledge candidate is 
 AION-217 implements the deterministic in-memory verified-knowledge candidate memory and engagement-learning candidate plane under AION-216-KI-0007. Candidates remain reviewable evidence, not factual truth. Eligibility does not create approval, promotion, cognitive-memory writes, or belief mutation. Engagement metadata remains non-factual and can only create bounded operator-review learning candidates.
 
 Required disabled state remains explicit: `verified_knowledge_runtime_enabled=false`, `persistent_verified_knowledge_write_enabled=false`, `automatic_verified_knowledge_promotion_enabled=false`, `cognitive_memory_write_enabled=false`, `belief_mutation_enabled=false`, `engagement_signal_as_fact_enabled=false`, `engagement_confidence_effect_enabled=false`, `public_network_fetch_enabled=false`, `actual_tool_execution_enabled=false`, `runtime_effect=false`. AION-216-KI-0007 remains active pending AION-218 formal closeout.
+
+## AION-218 Current State
+
+AION-218 completed `AION-VKME-001` with exact PASS decision `VERIFIED_KNOWLEDGE_MEMORY_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_PUBLIC_RESEARCH_PILOT_AUTHORIZATION`. `AION-216-KI-0007` is closed, consumed, expired, and non-reusable. `AION-218-KI-0008` is the sole active Knowledge Intelligence authorization for AION-219, with AION-220 as formal closeout. The controlled public-research pilot is authorized but not implemented; public network fetch, system HTTP transport, automatic promotion, cognitive-memory write, belief mutation, and persistent verified-knowledge writes remain disabled.

@@ -1,0 +1,21 @@
+{
+  "authorization_transaction_id": "AION-218-KI-0008",
+  "body_retention_seconds": 300,
+  "compressed_response_rejected": true,
+  "cookie_free": true,
+  "credential_free": true,
+  "host": "research.example",
+  "http_exchange_id": "http-public-source-candidate-a",
+  "method": "GET",
+  "pinned_peer_address": "93.184.216.34",
+  "read_only": true,
+  "redacted": true,
+  "redirect_revalidation_required": true,
+  "runtime_effect": false,
+  "schema_version": "aion-public-research-pilot-http-exchange/v1",
+  "scheme": "https",
+  "synthetic": true,
+  "tls_certificate_verified": true,
+  "tls_hostname_verified": true,
+  "tls_sni_bound_to_original_host": true
+}

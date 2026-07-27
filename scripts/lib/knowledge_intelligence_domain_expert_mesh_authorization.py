@@ -11,6 +11,7 @@ PROGRAM_ID = "AION-KNOWLEDGE-INTELLIGENCE-001"
 AUTHORIZATION_ID = "AION-212-KI-0005"
 SUCCESSOR_AUTHORIZATION_ID = "AION-214-KI-0006"
 CURRENT_ACTIVE_AUTHORIZATION_ID = "AION-216-KI-0007"
+PUBLIC_RESEARCH_PILOT_AUTHORIZATION_ID = "AION-218-KI-0008"
 PARENT_AUTHORIZATION_ID = "AION-210-KI-0004"
 PARENT_EVALUATION_ID = "AION-EAE-001"
 PARENT_DECISION = (
@@ -338,6 +339,7 @@ def validate_authorization_files(root: Path) -> None:
     successor_active = active_authorization_id in {
         SUCCESSOR_AUTHORIZATION_ID,
         CURRENT_ACTIVE_AUTHORIZATION_ID,
+        PUBLIC_RESEARCH_PILOT_AUTHORIZATION_ID,
     }
     if successor_active:
         for key, expected in {
@@ -355,16 +357,16 @@ def validate_authorization_files(root: Path) -> None:
         }.items():
             if aion212_record.get(key) != expected:
                 raise ValueError(f"AION-212 closeout mismatch for {key}: {aion212_record.get(key)!r}")
-        expected_successor_task = (
-            "AION-217"
-            if active_authorization_id == CURRENT_ACTIVE_AUTHORIZATION_ID
-            else "AION-215"
-        )
-        expected_successor_closeout = (
-            "AION-218"
-            if active_authorization_id == CURRENT_ACTIVE_AUTHORIZATION_ID
-            else "AION-216"
-        )
+        expected_successor_task = {
+            SUCCESSOR_AUTHORIZATION_ID: "AION-215",
+            CURRENT_ACTIVE_AUTHORIZATION_ID: "AION-217",
+            PUBLIC_RESEARCH_PILOT_AUTHORIZATION_ID: "AION-219",
+        }[active_authorization_id]
+        expected_successor_closeout = {
+            SUCCESSOR_AUTHORIZATION_ID: "AION-216",
+            CURRENT_ACTIVE_AUTHORIZATION_ID: "AION-218",
+            PUBLIC_RESEARCH_PILOT_AUTHORIZATION_ID: "AION-220",
+        }[active_authorization_id]
         if active[0].get("implementation_task") != expected_successor_task:
             raise ValueError("successor authorization must point to AION-215")
         if active[0].get("formal_closeout_task") != expected_successor_closeout:
@@ -376,6 +378,10 @@ def validate_authorization_files(root: Path) -> None:
         expected_active = CURRENT_ACTIVE_AUTHORIZATION_ID
         expected_task = "AION-217"
         expected_closeout = "AION-218"
+    elif active_authorization_id == PUBLIC_RESEARCH_PILOT_AUTHORIZATION_ID:
+        expected_active = PUBLIC_RESEARCH_PILOT_AUTHORIZATION_ID
+        expected_task = "AION-219"
+        expected_closeout = "AION-220"
     elif successor_active:
         expected_active = SUCCESSOR_AUTHORIZATION_ID
         expected_task = "AION-215"

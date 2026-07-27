@@ -49,7 +49,9 @@ def test_aion_212_ki_0005_is_closed_and_non_reusable() -> None:
 
 def test_only_current_knowledge_authorization_is_active_after_closeout() -> None:
     active = [item for item in _auth_records() if item.get("authorization_active") is True]
-    assert [item["authorization_transaction_id"] for item in active] == ["AION-216-KI-0007"]
+    assert [item["authorization_transaction_id"] for item in active] == ["AION-218-KI-0008"]
+    assert active[0]["implementation_task"] == "AION-219"
+    assert active[0]["formal_closeout_task"] == "AION-220"
 
     closed_tool_authorization = [
         item

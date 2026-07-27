@@ -26,7 +26,7 @@ AION-204 authorizes only AION-205. No later task is automatically authorized.
 
 ## Current State
 
-AION-204-KI-0001 is the sole active Knowledge Intelligence implementation authorization. AION-205 is the sole active implementation task. AION-206 is the formal closeout and operator-evaluation task. Controlled internet research remains unimplemented and disabled; existing cognitive architecture remains unchanged; production cognitive runtime and unrestricted network access remain disabled.
+`AION-218-KI-0008` is the sole active Knowledge Intelligence implementation authorization. AION-219 is the sole active implementation task. AION-220 is the formal closeout and operator-evaluation task. The controlled public-research pilot is authorized and not implemented. Public network fetching remains unavailable; system HTTP transport is unavailable; search providers, connectors, model providers, browsers, actual tool execution, automatic promotion, cognitive-memory writes, belief mutation, persistent verified-knowledge writes, source mutation, Git mutation, deployments, v0.2 tags, and v0.2 releases remain disabled or absent.
 
 ## AION-205 Controlled Research Acquisition Core
 
@@ -97,3 +97,11 @@ The integrated research-agent chain passed evaluation. A knowledge candidate is 
 AION-217 implements the deterministic in-memory verified-knowledge candidate memory and engagement-learning candidate plane under AION-216-KI-0007. Candidates remain reviewable evidence, not factual truth. Eligibility does not create approval, promotion, cognitive-memory writes, or belief mutation. Engagement metadata remains non-factual and can only create bounded operator-review learning candidates.
 
 Required disabled state remains explicit: `verified_knowledge_runtime_enabled=false`, `persistent_verified_knowledge_write_enabled=false`, `automatic_verified_knowledge_promotion_enabled=false`, `cognitive_memory_write_enabled=false`, `belief_mutation_enabled=false`, `engagement_signal_as_fact_enabled=false`, `engagement_confidence_effect_enabled=false`, `public_network_fetch_enabled=false`, `actual_tool_execution_enabled=false`, `runtime_effect=false`. AION-216-KI-0007 remains active pending AION-218 formal closeout.
+
+## AION-218 Verified Memory Evaluation and Public Pilot Authorization
+
+AION-218 completed `AION-VKME-001` with PASS, closed `AION-216-KI-0007`, and created `AION-218-KI-0008` for AION-219. AION-218 created no AION-219 source and no network runtime.
+
+## AION-219 Controlled Public Research Pilot Authorization
+
+AION-219 is authorized to implement a bounded operator-invoked public HTTPS pilot under `operator-invoked-allowlisted-public-https-fetch-dns-pinning-integrated-research-verified-candidate-pilot-operator-review-abstention-core`. It must require explicit source URLs, explicit allowlisted domains, bounded DNS resolution, public-address validation, DNS pinning, certificate-verified TLS, peer-address verification, redirect revalidation, strict content limits, full lineage, operator review, and explicit abstention. It must not crawl in the background, use search providers, connectors, model providers, browsers, automatic claim extraction, automatic promotion, cognitive-memory writes, belief mutation, or persistent verified-knowledge writes.

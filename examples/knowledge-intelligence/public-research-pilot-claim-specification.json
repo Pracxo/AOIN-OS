@@ -1,0 +1,16 @@
+{
+  "authorization_transaction_id": "AION-218-KI-0008",
+  "automatic_claim_extraction_enabled": false,
+  "claim_id": "claim-public-pilot-a",
+  "claim_specification_id": "public-claim-spec-a",
+  "claim_text_redacted": "Operator supplied public research claim specification.",
+  "explicit_operator_supplied": true,
+  "jurisdiction": "global-public-reference",
+  "read_only": true,
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-public-research-pilot-claim-specification/v1",
+  "synthetic": true,
+  "valid_time": "2026-07-27T00:00:00Z",
+  "version_scope": "v1"
+}

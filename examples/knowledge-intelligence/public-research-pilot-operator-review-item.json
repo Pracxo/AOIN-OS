@@ -1,0 +1,14 @@
+{
+  "authorization_transaction_id": "AION-218-KI-0008",
+  "automatic_approval_enabled": false,
+  "automatic_promotion_enabled": false,
+  "candidate_id": "verified-candidate-public-pilot-a",
+  "candidate_is_truth": false,
+  "operator_review_item_id": "pilot-review-item-a",
+  "read_only": true,
+  "redacted": true,
+  "review_required": true,
+  "runtime_effect": false,
+  "schema_version": "aion-public-research-pilot-operator-review-item/v1",
+  "synthetic": true
+}

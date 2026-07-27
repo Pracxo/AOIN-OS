@@ -73,6 +73,11 @@
     knowledge_intelligence_engagement_signals: "demo-data/knowledge-intelligence-engagement-signals.json",
     knowledge_intelligence_engagement_learning_candidates: "demo-data/knowledge-intelligence-engagement-learning-candidates.json",
     knowledge_intelligence_verified_memory_runtime_hold: "demo-data/knowledge-intelligence-verified-memory-runtime-hold.json",
+    knowledge_intelligence_verified_memory_evaluation: "demo-data/knowledge-intelligence-verified-memory-evaluation.json",
+    knowledge_intelligence_public_research_pilot_authorization: "demo-data/knowledge-intelligence-public-research-pilot-authorization.json",
+    knowledge_intelligence_public_research_pilot_network_policy: "demo-data/knowledge-intelligence-public-research-pilot-network-policy.json",
+    knowledge_intelligence_public_research_pilot_resource_budget: "demo-data/knowledge-intelligence-public-research-pilot-resource-budget.json",
+    knowledge_intelligence_public_research_pilot_runtime_hold: "demo-data/knowledge-intelligence-public-research-pilot-runtime-hold.json",
     module_lifecycle: "demo-data/module-lifecycle-dashboard.json",
     model_provider_hardening: "demo-data/provider-hardening-view-model.json",
     operator_actions: "demo-data/operator-action-preview.json",
@@ -132,7 +137,12 @@
       "knowledge_intelligence_verified_candidate_integrity",
       "knowledge_intelligence_engagement_signals",
       "knowledge_intelligence_engagement_learning_candidates",
-      "knowledge_intelligence_verified_memory_runtime_hold"
+      "knowledge_intelligence_verified_memory_runtime_hold",
+      "knowledge_intelligence_verified_memory_evaluation",
+      "knowledge_intelligence_public_research_pilot_authorization",
+      "knowledge_intelligence_public_research_pilot_network_policy",
+      "knowledge_intelligence_public_research_pilot_resource_budget",
+      "knowledge_intelligence_public_research_pilot_runtime_hold"
     ],
     providers: ["model_provider_hardening"],
     actions: ["operator_actions"],
@@ -185,7 +195,12 @@
       "knowledge_intelligence_verified_knowledge_candidate",
       "knowledge_intelligence_verified_knowledge_versioning",
       "knowledge_intelligence_engagement_learning_candidate",
-      "knowledge_intelligence_verified_knowledge_runtime_hold"
+      "knowledge_intelligence_verified_knowledge_runtime_hold",
+      "knowledge_intelligence_verified_memory_evaluation",
+      "knowledge_intelligence_public_research_pilot_authorization",
+      "knowledge_intelligence_public_research_pilot_network_policy",
+      "knowledge_intelligence_public_research_pilot_resource_budget",
+      "knowledge_intelligence_public_research_pilot_runtime_hold"
     ],
     safety: ["settings_safety", "incidents"]
   };

@@ -36,6 +36,7 @@ AUTH_ID = "AION-210-KI-0004"
 NEXT_AUTH_ID = "AION-212-KI-0005"
 SUCCESSOR_AUTH_ID = "AION-214-KI-0006"
 CURRENT_AUTH_ID = "AION-216-KI-0007"
+FINAL_AUTH_ID = "AION-218-KI-0008"
 SCOPE = (
     "deterministic-evidence-corroboration-contradiction-freshness-source-"
     "independence-confidence-assessment-core"
@@ -51,6 +52,10 @@ SUCCESSOR_SCOPE = (
 CURRENT_SCOPE = (
     "deterministic-verified-knowledge-candidate-lineage-versioning-"
     "revalidation-operator-review-engagement-learning-abstention-core"
+)
+FINAL_SCOPE = (
+    "operator-invoked-allowlisted-public-https-fetch-dns-pinning-integrated-"
+    "research-verified-candidate-pilot-operator-review-abstention-core"
 )
 RESOURCE_LIMITS = {
     "maximum_claims_per_assessment_batch": 500,
@@ -109,8 +114,16 @@ if post_aion212:
         "verified_knowledge_memory_authorized_not_implemented",
         "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
     }
+    post_aion218 = program["program_state"] == "controlled_public_research_pilot_authorized_not_implemented"
     post_aion214 = program["program_state"] in {"tool_verification_fabric_authorized_not_implemented", "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"}
-    if post_aion216:
+    if post_aion218:
+        expected_auth = FINAL_AUTH_ID
+        expected_scope = FINAL_SCOPE
+        expected_candidate = "controlled-public-research-verified-knowledge-pilot"
+        expected_workstream = "knowledge-intelligence-controlled-public-research-pilot"
+        expected_task = "AION-219"
+        expected_closeout = "AION-220"
+    elif post_aion216:
         expected_auth = CURRENT_AUTH_ID
         expected_scope = CURRENT_SCOPE
         expected_candidate = "verified-knowledge-memory-engagement-learning-core"

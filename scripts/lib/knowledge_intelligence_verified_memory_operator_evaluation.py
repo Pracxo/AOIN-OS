@@ -27,12 +27,16 @@ PASS_DECISION = (
 )
 FAIL_DECISION = "VERIFIED_KNOWLEDGE_MEMORY_OPERATOR_EVALUATION_FAIL_REMAIN_DISABLED"
 
-IMPLEMENTATION_PRS = [131]
+IMPLEMENTATION_PRS = [131, 132]
 IMPLEMENTATION_FEATURE_COMMITS = [
     "c27066e7de07a8539d0a7fec3eddf3c7d05d1615",
     "f703283e74adf1eb7a0ec88a5c7907a7527ce1e7",
+    "ffd620e2e81d5c47140b851503515c724114633f",
 ]
-IMPLEMENTATION_MERGE_COMMITS = ["f1812bc2bc5f2af1a4fdc2eeaac12ab3c9aa4a1d"]
+IMPLEMENTATION_MERGE_COMMITS = [
+    "f1812bc2bc5f2af1a4fdc2eeaac12ab3c9aa4a1d",
+    "262ea384800997edd0d46531ecb7ca44528e3745",
+]
 
 SCENARIO_IDS = [
     "valid_support_candidate",
@@ -776,7 +780,7 @@ def build_report(
         "implementation_prs": IMPLEMENTATION_PRS,
         "implementation_feature_commits": IMPLEMENTATION_FEATURE_COMMITS,
         "implementation_merge_commits": IMPLEMENTATION_MERGE_COMMITS,
-        "corrective_prs": [],
+        "corrective_prs": [132],
         "decision": PASS_DECISION if evaluation_passed else FAIL_DECISION,
         "evaluation_passed": evaluation_passed,
         "scenario_count": len(scenario_results),
