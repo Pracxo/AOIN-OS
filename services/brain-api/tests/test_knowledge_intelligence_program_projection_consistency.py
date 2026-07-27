@@ -6,6 +6,9 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
+FINAL_STATUS_MARKER = (
+    "AION-220 final Knowledge Intelligence Program evaluation and closeout complete"
+)
 VALIDATOR = REPO_ROOT / "scripts/lib/knowledge_intelligence_verified_knowledge_authorization.py"
 HARNESS = (
     REPO_ROOT
@@ -99,7 +102,7 @@ def test_program_and_authorization_ledgers_match_active_public_pilot_authorizati
 def test_project_status_current_projection_matches_ledgers_and_keeps_history() -> None:
     status = (REPO_ROOT / "docs/project-status.md").read_text(encoding="utf-8")
     if "knowledge_intelligence_program_complete=true" in status:
-        assert "AION-220 final Knowledge Intelligence Program evaluation and closeout complete" in status
+        assert FINAL_STATUS_MARKER in status
         assert "active_knowledge_implementation_authorization_count=0" in status
         assert "active_knowledge_implementation_authorization=null" in status
         assert "next_knowledge_implementation_task=null" in status

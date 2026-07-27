@@ -141,10 +141,19 @@ def test_project_status_describes_current_shadow_authorization_state() -> None:
     current_text = _project_status_current_text()
     historical_text = text.split("## Historical Compatibility Markers", 1)[1]
 
-    assert "AION-218 verified-knowledge memory operator evaluation" in current_text
-    assert "`active_knowledge_implementation_authorization=AION-218-KI-0008`" in current_text
-    assert "`active_knowledge_implementation_task=AION-219`" in current_text
-    assert "`formal_closeout_task=AION-220`" in current_text
+    assert (
+        "AION-220 final Knowledge Intelligence Program evaluation and closeout complete"
+        in current_text
+        or "AION-218 verified-knowledge memory operator evaluation" in current_text
+    )
+    if "knowledge_intelligence_program_complete=true" in current_text:
+        assert "`active_knowledge_implementation_authorization_count=0`" in current_text
+        assert "`active_knowledge_implementation_authorization=null`" in current_text
+        assert "`next_knowledge_implementation_task=null`" in current_text
+    else:
+        assert "`active_knowledge_implementation_authorization=AION-218-KI-0008`" in current_text
+        assert "`active_knowledge_implementation_task=AION-219`" in current_text
+        assert "`formal_closeout_task=AION-220`" in current_text
     assert "`verified_knowledge_memory_implemented=true`" in current_text
     assert "`persistent_verified_knowledge_write_enabled=false`" in current_text
     assert "`controlled_public_research_pilot_authorized=true`" in current_text

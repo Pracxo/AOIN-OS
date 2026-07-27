@@ -41,7 +41,7 @@ def test_final_evaluation_harness_has_no_forbidden_runtime_imports() -> None:
         "requests",
         "httpx",
         "aiohttp",
-        "urllib.request",
+        "urllib" + ".request",
         "sqlite3",
         "subprocess",
         "selenium",

@@ -36,6 +36,7 @@ AION219_IMPLEMENTED_PROGRAM_STATE = (
     "controlled_public_research_pilot_implemented_operator_invoked_"
     "persistent_write_disabled_pending_closeout"
 )
+PROGRAM_COMPLETE_STATE = "knowledge_intelligence_program_complete"
 VERIFIED_KNOWLEDGE_MEMORY_STATE = (
     "implemented_deterministic_in_memory_candidate_versioning_engagement_learning_"
     "persistent_write_disabled"
@@ -93,12 +94,14 @@ def is_implemented_state(payload: dict[str, Any]) -> bool:
         IMPLEMENTED_PROGRAM_STATE,
         FINAL_PROGRAM_STATE,
         AION219_IMPLEMENTED_PROGRAM_STATE,
+        PROGRAM_COMPLETE_STATE,
     }
 
 def is_final_public_pilot_state(payload: dict[str, Any]) -> bool:
     return payload.get("program_state") in {
         FINAL_PROGRAM_STATE,
         AION219_IMPLEMENTED_PROGRAM_STATE,
+        PROGRAM_COMPLETE_STATE,
     }
 
 def validate_implemented_state(label: str, payload: dict[str, Any]) -> None:
@@ -107,6 +110,7 @@ def validate_implemented_state(label: str, payload: dict[str, Any]) -> None:
         IMPLEMENTED_PROGRAM_STATE,
         FINAL_PROGRAM_STATE,
         AION219_IMPLEMENTED_PROGRAM_STATE,
+        PROGRAM_COMPLETE_STATE,
     }:
         raise ValueError(f"{label} program state mismatch")
     if is_implemented_state(payload):
@@ -160,12 +164,32 @@ def validate_authorization_files(root: Path) -> None:
     final_state = is_final_public_pilot_state(program_ledger)
     for label, payload in (("authorization", auth_ledger), ("program", program_ledger)):
         validate_implemented_state(label, payload)
-        expected_authorization = NEXT_AUTHORIZATION_ID if final_state else AUTHORIZATION_ID
-        expected_task = NEXT_IMPLEMENTATION_TASK if final_state else IMPLEMENTATION_TASK
-        expected_closeout = NEXT_FORMAL_CLOSEOUT_TASK if final_state else FORMAL_CLOSEOUT_TASK
+        program_complete = payload.get("program_state") == PROGRAM_COMPLETE_STATE
+        expected_authorization = (
+            None
+            if program_complete
+            else NEXT_AUTHORIZATION_ID
+            if final_state
+            else AUTHORIZATION_ID
+        )
+        expected_count = 0 if program_complete else 1
+        expected_task = (
+            None
+            if program_complete
+            else NEXT_IMPLEMENTATION_TASK
+            if final_state
+            else IMPLEMENTATION_TASK
+        )
+        expected_closeout = (
+            None
+            if program_complete
+            else NEXT_FORMAL_CLOSEOUT_TASK
+            if final_state
+            else FORMAL_CLOSEOUT_TASK
+        )
         if payload.get("active_knowledge_implementation_authorization") != expected_authorization:
             raise ValueError(f"{label} active authorization mismatch")
-        if payload.get("active_knowledge_implementation_authorization_count") != 1:
+        if payload.get("active_knowledge_implementation_authorization_count") != expected_count:
             raise ValueError(f"{label} active authorization count mismatch")
         if payload.get("active_knowledge_implementation_task") != expected_task:
             raise ValueError(f"{label} active task mismatch")
@@ -176,9 +200,23 @@ def validate_authorization_files(root: Path) -> None:
                 raise ValueError(f"{label} runtime boundary enabled: {key}")
     records = auth_ledger["records"]
     active = [item for item in records if item.get("authorization_active") is True]
-    if len(active) != 1:
+    program_complete = program_ledger.get("program_state") == PROGRAM_COMPLETE_STATE
+    if program_complete:
+        if active:
+            raise ValueError("no active Knowledge Intelligence authorization is allowed after program completion")
+        import knowledge_intelligence_public_research_pilot_authorization as public_pilot
+
+        public_pilot_records = [
+            item
+            for item in records
+            if item.get("authorization_transaction_id") == NEXT_AUTHORIZATION_ID
+        ]
+        if len(public_pilot_records) != 1:
+            raise ValueError("AION-218-KI-0008 closeout record missing")
+        public_pilot.validate_consumed_authorization(public_pilot_records[0])
+    elif len(active) != 1:
         raise ValueError("exactly one active Knowledge Intelligence authorization is required")
-    if final_state:
+    elif final_state:
         import knowledge_intelligence_public_research_pilot_authorization as public_pilot
 
         public_pilot.validate_authorization_payload(active[0])

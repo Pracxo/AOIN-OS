@@ -714,6 +714,10 @@ for path in sorted(demo_dir.glob("*.json")):
     if path.name.startswith("knowledge-intelligence-"):
         if path.name not in {
             "knowledge-intelligence-program.json",
+            "knowledge-intelligence-program-complete.json",
+            "knowledge-intelligence-program-final-capabilities.json",
+            "knowledge-intelligence-program-final-evaluation.json",
+            "knowledge-intelligence-program-final-runtime-boundary.json",
             "knowledge-intelligence-research-authorization.json",
             "knowledge-intelligence-research-evaluation.json",
             "knowledge-intelligence-research-plane.json",
@@ -794,11 +798,16 @@ for path in sorted(demo_dir.glob("*.json")):
                 "verified_knowledge_memory_authorized",
                 "verified_knowledge_memory_implemented",
                 "controlled_public_research_pilot_authorized",
+                "controlled_public_research_pilot_passed",
                 "engagement_learning_candidate_plane_implemented",
+                "knowledge_intelligence_program_complete",
             )
         )
         read_only_evidence_marker_present = (
             payload.get("evaluation_passed") is True
+            or payload.get("all_hard_gates_passed") is True
+            or payload.get("evaluation_id") == "AION-KIPE-001"
+            or payload.get("program_state") == "knowledge_intelligence_program_complete"
             or payload.get("dns_pinning_required") is True
             or payload.get("explicit_allowlist_required") is True
             or payload.get("operator_invoked_public_https_fetch_authorized") is True

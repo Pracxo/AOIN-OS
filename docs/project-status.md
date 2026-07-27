@@ -8,55 +8,54 @@ tag or release exists.
 
 ## Current Main Milestone
 
-## AION-218 Verified Knowledge Memory Operator Evaluation
+## AION-220 Final Knowledge Intelligence Program Closeout
 
-Current milestone: AION-218 verified-knowledge memory operator evaluation complete and AION-219 controlled public-research pilot implemented.
+AION-220 final Knowledge Intelligence Program evaluation and closeout complete.
+The AION Knowledge Intelligence Program is complete.
 
-Current stage: the deterministic verified-knowledge candidate memory and engagement-learning candidate plane is implemented and passed read-only operator evaluation. The controlled public-research pilot is implemented, operator-invoked, and disabled by default outside explicit pilot construction.
+Required final flags:
 
-Required flags:
-
+- `knowledge_intelligence_program_complete=true`
+- `knowledge_intelligence_program_evaluation_id=AION-KIPE-001`
+- `knowledge_intelligence_program_evaluation_decision=CONTROLLED_PUBLIC_RESEARCH_PILOT_PASS_COMPLETE_KNOWLEDGE_INTELLIGENCE_PROGRAM`
 - `verified_knowledge_memory_implemented=true`
-- `verified_knowledge_memory_operator_evaluation_passed=true`
-- `verified_knowledge_runtime_enabled=false`
-- `persistent_verified_knowledge_write_enabled=false`
-- `automatic_verified_knowledge_promotion_enabled=false`
-- `cognitive_memory_write_enabled=false`
-- `belief_mutation_enabled=false`
-- `engagement_signal_as_fact_enabled=false`
-- `engagement_confidence_effect_enabled=false`
+- `controlled_public_research_pilot_passed=true`
 - `controlled_public_research_pilot_authorized=true`
 - `controlled_public_research_pilot_implemented=true`
-- `operator_invoked_public_https_fetch_authorized=true`
-- `operator_invoked_public_https_fetch_available=false`
+- `active_knowledge_implementation_authorization_count=0`
+- `active_knowledge_implementation_authorization=null`
+- `active_knowledge_implementation_task=null`
+- `formal_closeout_task=null`
+- `new_knowledge_implementation_authorization_created=false`
+- `next_knowledge_implementation_authorization=null`
+- `next_knowledge_implementation_task=null`
+- `final_planned_task=AION-220`
 - `public_network_fetch_enabled=false`
 - `unrestricted_network_access_enabled=false`
+- `background_network_access_enabled=false`
+- `scheduled_public_research_enabled=false`
 - `background_crawler_enabled=false`
-- `search_provider_integration_enabled=false`
-- `connector_integration_enabled=false`
-- `model_provider_integration_enabled=false`
-- `actual_tool_execution_enabled=false`
-- `active_knowledge_implementation_authorization=AION-218-KI-0008`
-- `active_knowledge_implementation_task=AION-219`
-- `formal_closeout_task=AION-220`
+- `automatic_verified_knowledge_promotion_enabled=false`
+- `persistent_verified_knowledge_write_enabled=false`
+- `cognitive_memory_write_enabled=false`
+- `belief_mutation_enabled=false`
+- `production_exposure=false`
+- `v02_release_ready=false`
+- `v02_tag_created=false`
+- `v02_release_created=false`
 
-AION-217 candidates remain reviewable evidence and eligibility does not equal factual truth. AION-218 evaluated AION-217. AION-219 implements bounded explicit-source HTTPS acquisition, remains operator-invoked, performs no background crawling, uses no search provider, connector, model provider, or browser, performs no automatic promotion, writes no cognitive memory, and persistent knowledge writes remain disabled. Public network fetching remains disabled by default outside explicit AION-219 pilot construction. AION-220 is the final Knowledge Intelligence Program evaluation and closeout.
+AION-218-KI-0008 is closed as consumed by AION-219, inactive, expired, and non-reusable. AION-220 created no AION-221 task, no replacement Knowledge Intelligence authorization, no production activation, no scheduled research, no background crawler, no automatic promotion, no cognitive-memory write, no belief mutation, no v0.2 tag, and no v0.2 release.
 
 AION-209 compatibility marker retained for inherited closeout gates:
 `active_knowledge_implementation_task=AION-209` denotes the prior consumed
 implementation task, not the current active authorization.
 
-AION-205 captures untrusted evidence. AION-207 registers immutable evidence
-metadata. AION-209 represents unverified claims and evidence relationships.
-AION-211 assesses evidence posture. AION-213 preserves domain dissent. AION-215
-simulates and verifies proposed tool use without executing real tools. AION-217
-creates reviewable support and refutation candidates, but candidates remain
-reviewable evidence, eligibility does not equal factual truth, automatic
-promotion remains disabled, cognitive-memory writes remain disabled, engagement
-remains non-factual, engagement candidates cannot update policy automatically,
-persistent writes remain disabled, public-network research remains disabled by
-default outside explicit AION-219 pilot construction, and AION-220 is the next
-task.
+Historical marker: AION-214 domain expert mesh operator evaluation complete.
+Historical marker: `active_knowledge_implementation_task=AION-217` denoted the prior verified-knowledge memory implementation task.
+Historical marker: AION-218 verified-knowledge memory operator evaluation complete.
+Historical marker: `active_knowledge_implementation_authorization=AION-218-KI-0008` denoted the prior AION-219 implementation authorization before AION-220 closeout.
+Historical marker: `active_knowledge_implementation_task=AION-219` denoted the prior AION-219 implementation task before AION-220 closeout.
+Historical marker: `formal_closeout_task=AION-220` denoted the prior closeout task before completion.
 
 ## Completed Architecture
 

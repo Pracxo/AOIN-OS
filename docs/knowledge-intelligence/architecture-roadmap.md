@@ -26,7 +26,7 @@ AION-204 authorizes only AION-205. No later task is automatically authorized.
 
 ## Current State
 
-`AION-218-KI-0008` is the sole active Knowledge Intelligence implementation authorization. AION-219 is the sole active implementation task. AION-220 is the formal closeout and operator-evaluation task. The controlled public-research pilot is authorized and not implemented. Public network fetching remains unavailable; system HTTP transport is unavailable; search providers, connectors, model providers, browsers, actual tool execution, automatic promotion, cognitive-memory writes, belief mutation, persistent verified-knowledge writes, source mutation, Git mutation, deployments, v0.2 tags, and v0.2 releases remain disabled or absent.
+The Knowledge Intelligence Program is complete after AION-220 final evaluation. `active_knowledge_implementation_authorization_count=0`, `active_knowledge_implementation_authorization=null`, `active_knowledge_implementation_task=null`, `formal_closeout_task=null`, `new_knowledge_implementation_authorization_created=false`, and `next_knowledge_implementation_task=null`. AION-218-KI-0008 is closed as consumed by AION-219, inactive, expired, and non-reusable. Public-network runtime activation, unrestricted network access, scheduled research, background crawling, search providers, connectors, model providers, browsers, actual tool execution, automatic promotion, cognitive-memory writes, belief mutation, persistent verified-knowledge writes, source mutation, Git mutation, deployments, v0.2 tags, and v0.2 releases remain disabled or absent.
 
 ## AION-205 Controlled Research Acquisition Core
 
@@ -108,8 +108,13 @@ AION-219 is authorized to implement a bounded operator-invoked public HTTPS pilo
 
 ## AION-219 Current State
 
-AION-219 controlled public HTTPS research and verified-candidate pilot implemented. `AION-218-KI-0008` remains the sole active Knowledge Intelligence authorization for AION-219 and remains active, non-consumed, non-expired, and non-reusable pending AION-220.
+AION-219 controlled public HTTPS research and verified-candidate pilot implemented and passed AION-220 final evaluation. `AION-218-KI-0008` is now consumed by AION-219, inactive, expired, non-reusable, and closed by AION-220.
 
 Flags: `controlled_public_research_pilot_implemented=true`, `operator_invoked_public_https_fetch_available=true`, `system_dns_resolution_available=true`, `system_http_transport_available=true`, `pilot_live_validation_completed=true`, `public_network_fetch_enabled=false`, `unrestricted_network_access_enabled=false`, `background_network_access_enabled=false`, `background_crawler_enabled=false`, `search_provider_integration_enabled=false`, `connector_integration_enabled=false`, `model_provider_integration_enabled=false`, `browser_automation_enabled=false`, `actual_tool_execution_enabled=false`, `automatic_verified_knowledge_promotion_enabled=false`, `persistent_verified_knowledge_write_enabled=false`, `cognitive_memory_write_enabled=false`, `belief_mutation_enabled=false`, and `production_exposure=false`.
 
-The pilot is not a crawler, search engine, browser, connector, model client, background service, or production runtime. Acquired content remains untrusted evidence. A verified candidate remains reviewable evidence and does not become automatic factual truth. AION-220 is the next task.
+The pilot is not a crawler, search engine, browser, connector, model client, background service, or production runtime. Acquired content remains untrusted evidence. A verified candidate remains reviewable evidence and does not become automatic factual truth. AION-220 is the final planned Knowledge Intelligence Program task.
+
+
+## AION-220 Final Knowledge Intelligence Program Evaluation
+
+AION-220 records AION-KIPE-001 with PASS decision `CONTROLLED_PUBLIC_RESEARCH_PILOT_PASS_COMPLETE_KNOWLEDGE_INTELLIGENCE_PROGRAM`. The evaluation executed 28 deterministic scenarios, validated committed AION-219 redacted live evidence without rerunning live public research, closed AION-218-KI-0008, left zero active Knowledge Intelligence implementation authorizations, and created no successor authorization or AION-221 task.

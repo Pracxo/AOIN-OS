@@ -42,7 +42,31 @@ def _active_record(ledger: dict[str, object]) -> dict[str, object]:
 
 
 def test_current_projection_matches_active_public_pilot_authorization() -> None:
-    active = _active_record(_load_json("docs/knowledge-intelligence/authorization-ledger.json"))
+    auth_ledger = _load_json("docs/knowledge-intelligence/authorization-ledger.json")
+    program_ledger = _load_json("docs/knowledge-intelligence/program-ledger.json")
+    if program_ledger["program_state"] == "knowledge_intelligence_program_complete":
+        assert [
+            item
+            for item in auth_ledger["records"]
+            if isinstance(item, dict) and item.get("authorization_active") is True
+        ] == []
+        for ledger in (auth_ledger, program_ledger):
+            assert ledger["active_knowledge_implementation_authorization_count"] == 0
+            assert ledger["active_knowledge_implementation_authorization"] is None
+            assert ledger["active_knowledge_implementation_task"] is None
+            assert ledger["formal_closeout_task"] is None
+            assert ledger["verified_knowledge_memory_authorized"] is True
+            assert ledger["verified_knowledge_memory_implemented"] is True
+            assert ledger["controlled_public_research_pilot_authorized"] is True
+            assert ledger["controlled_public_research_pilot_implemented"] is True
+            assert ledger["controlled_public_research_pilot_passed"] is True
+            assert ledger["public_network_fetch_enabled"] is False
+            assert ledger["verified_knowledge_runtime_enabled"] is False
+            assert ledger["persistent_verified_knowledge_write_enabled"] is False
+            assert ledger["automatic_verified_knowledge_promotion_enabled"] is False
+        return
+
+    active = _active_record(auth_ledger)
     for relative in (
         "docs/knowledge-intelligence/authorization-ledger.json",
         "docs/knowledge-intelligence/program-ledger.json",

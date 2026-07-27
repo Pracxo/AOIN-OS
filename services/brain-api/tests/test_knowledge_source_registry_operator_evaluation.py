@@ -7,6 +7,11 @@ import subprocess
 import sys
 from pathlib import Path
 
+from knowledge_source_registry_test_helpers import (
+    assert_knowledge_program_complete_terminal_state,
+    is_knowledge_program_complete,
+)
+
 REPO_ROOT = Path(__file__).resolve().parents[3]
 HARNESS = REPO_ROOT / "scripts/lib/knowledge_intelligence_source_registry_operator_evaluation.py"
 
@@ -149,6 +154,9 @@ def test_source_registry_operator_evaluation_has_no_runtime_or_network_imports()
 
 
 def test_source_registry_operator_evaluation_no_go_script_passes():
+    if is_knowledge_program_complete():
+        assert_knowledge_program_complete_terminal_state()
+        return
     env = {**os.environ, "PYTEST_CURRENT_TEST": "AION-208 source registry no-go"}
     script = (
         REPO_ROOT

@@ -55,7 +55,8 @@ def test_program_final_evaluation_validates_saved_report_when_present() -> None:
     harness = _load_harness()
     report = (
         REPO_ROOT
-        / "examples/knowledge-intelligence/knowledge-intelligence-program-final-evaluation-report.json"
+        / "examples/knowledge-intelligence"
+        / "knowledge-intelligence-program-final-evaluation-report.json"
     )
     if report.exists():
         assert harness.main(["--validate-report", str(report)]) == 0

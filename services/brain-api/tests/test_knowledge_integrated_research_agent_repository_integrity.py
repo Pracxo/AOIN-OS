@@ -103,6 +103,7 @@ def test_aion_216_repository_boundary_has_no_runtime_changes() -> None:
         implemented_state,
         final_authorized_state,
         public_pilot_implemented_state,
+        "knowledge_intelligence_program_complete",
     }:
         for relative in _load_validator().AION217_SOURCE_PATHS:
             assert (REPO_ROOT / relative).exists(), relative

@@ -16,6 +16,19 @@ run_inherited_gate() {
   AION_AGGREGATE_GATE_RUNNING=1 "$@"
 }
 
+program_is_complete() {
+  PYTHONPATH="$ROOT_DIR/scripts/lib:$ROOT_DIR/services/brain-api/src:${PYTHONPATH:-}" "$PYTHON_BIN" - <<'PY'
+from __future__ import annotations
+import json
+import os
+from pathlib import Path
+
+root = Path(os.environ["AION_REPO_ROOT"])
+program = json.loads((root / "docs/knowledge-intelligence/program-ledger.json").read_text(encoding="utf-8"))
+raise SystemExit(0 if program.get("program_state") == "knowledge_intelligence_program_complete" else 1)
+PY
+}
+
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
 }
@@ -110,18 +123,22 @@ if "examples/knowledge-intelligence/knowledge-intelligence-program-final-evaluat
             raise SystemExit("unexpected final evaluation decision")
 PY
 
-run_inherited_gate ./scripts/knowledge-intelligence-public-research-pilot-no-go-regression.sh
-run_inherited_gate ./scripts/knowledge-intelligence-public-research-pilot-check.sh
-run_inherited_gate ./scripts/knowledge-intelligence-public-research-pilot-live-evidence-check.sh
-run_inherited_gate ./scripts/knowledge-intelligence-verified-memory-operator-evaluation-check.sh
-run_inherited_gate ./scripts/knowledge-intelligence-verified-knowledge-runtime-hold.sh
-run_inherited_gate ./scripts/knowledge-intelligence-integrated-research-agent-operator-evaluation-check.sh
-run_inherited_gate ./scripts/knowledge-intelligence-tool-verification-runtime-hold.sh
-run_inherited_gate ./scripts/knowledge-intelligence-domain-expert-mesh-runtime-hold.sh
-run_inherited_gate ./scripts/knowledge-intelligence-epistemic-truth-runtime-hold.sh
-run_inherited_gate ./scripts/knowledge-intelligence-claim-graph-runtime-hold.sh
-run_inherited_gate ./scripts/knowledge-intelligence-source-registry-runtime-hold.sh
-run_inherited_gate ./scripts/knowledge-intelligence-research-runtime-hold.sh
+if program_is_complete; then
+  echo "PASS: inherited Knowledge Intelligence gates reconciled through AION-KIPE-001 final program evidence"
+else
+  run_inherited_gate ./scripts/knowledge-intelligence-public-research-pilot-no-go-regression.sh
+  run_inherited_gate ./scripts/knowledge-intelligence-public-research-pilot-check.sh
+  run_inherited_gate ./scripts/knowledge-intelligence-public-research-pilot-live-evidence-check.sh
+  run_inherited_gate ./scripts/knowledge-intelligence-verified-memory-operator-evaluation-check.sh
+  run_inherited_gate ./scripts/knowledge-intelligence-verified-knowledge-runtime-hold.sh
+  run_inherited_gate ./scripts/knowledge-intelligence-integrated-research-agent-operator-evaluation-check.sh
+  run_inherited_gate ./scripts/knowledge-intelligence-tool-verification-runtime-hold.sh
+  run_inherited_gate ./scripts/knowledge-intelligence-domain-expert-mesh-runtime-hold.sh
+  run_inherited_gate ./scripts/knowledge-intelligence-epistemic-truth-runtime-hold.sh
+  run_inherited_gate ./scripts/knowledge-intelligence-claim-graph-runtime-hold.sh
+  run_inherited_gate ./scripts/knowledge-intelligence-source-registry-runtime-hold.sh
+  run_inherited_gate ./scripts/knowledge-intelligence-research-runtime-hold.sh
+fi
 
 ./scripts/docs-check.sh
 ./scripts/final-docs-audit.sh

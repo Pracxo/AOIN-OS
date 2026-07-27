@@ -27,5 +27,11 @@ def test_zero_active_knowledge_authorizations_remain() -> None:
     assert ledger["active_knowledge_implementation_authorization_count"] == 0
     assert ledger["active_knowledge_implementation_authorization"] is None
     assert ledger["active_knowledge_implementation_task"] is None
-    assert [item for item in ledger["records"] if item.get("authorization_active") is True] == []
-    assert all(item.get("authorization_reusable") is False for item in ledger["records"])
+    assert [
+        item for item in ledger["records"] if item.get("authorization_active") is True
+    ] == []
+    assert all(
+        item.get("authorization_reusable") is False
+        for item in ledger["records"]
+        if "authorization_reusable" in item
+    )

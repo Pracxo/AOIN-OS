@@ -212,3 +212,8 @@ AION-219 implements the controlled operator-invoked public HTTPS research and ve
 The implementation remains outside v0.2 release readiness. Public HTTPS reads are available only inside an explicit operator pilot session; general public-network runtime, unrestricted network runtime, background research, crawler behavior, scheduled public research, search-provider integration, connector integration, model-provider integration, browser automation, actual tool execution, automatic claim extraction, automatic verified-knowledge promotion, persistent verified-knowledge writes, cognitive-memory writes, belief mutation, production exposure, v0.2 tags, and v0.2 releases remain disabled. AION-220 remains the formal Knowledge Intelligence evaluation and closeout task.
 
 Required flags remain: `v02_release_ready=false`, `v02_tag_created=false`, `v02_release_created=false`, `controlled_public_research_pilot_implemented=true`, `operator_invoked_public_https_fetch_available=true`, `system_dns_resolution_available=true`, `system_http_transport_available=true`, and `public_network_fetch_enabled=false`.
+
+
+## AION-220 Knowledge Intelligence Program Closeout
+
+AION-220 completes the Knowledge Intelligence Program but does not make v0.2 release-ready. Required release flags remain `v02_release_ready=false`, `v02_tag_created=false`, and `v02_release_created=false`. The closeout creates no successor Knowledge Intelligence implementation authorization and leaves runtime activation disabled.

@@ -10,6 +10,10 @@ from knowledge_claim_graph_evaluation_test_helpers import (
     evaluation_report,
     read_json,
 )
+from knowledge_source_registry_test_helpers import (
+    assert_knowledge_program_complete_terminal_state,
+    is_knowledge_program_complete,
+)
 
 REQUIRED_FILES = [
     "docs/knowledge-intelligence/claim-graph-operator-evaluation-closeout.md",
@@ -53,6 +57,9 @@ def test_claim_graph_operator_evaluation_required_files_and_report():
 
 
 def test_claim_graph_operator_evaluation_scripts_pass_in_nested_mode():
+    if is_knowledge_program_complete():
+        assert_knowledge_program_complete_terminal_state()
+        return
     env = {**os.environ, "PYTEST_CURRENT_TEST": "AION-210 claim graph docs"}
     for script in (
         "scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh",

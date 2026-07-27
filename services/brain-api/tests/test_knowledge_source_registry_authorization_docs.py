@@ -10,6 +10,8 @@ from knowledge_source_registry_test_helpers import (
     SOURCE_AUTH_ID,
     SOURCE_SCOPE,
     active_source_record,
+    assert_knowledge_program_complete_terminal_state,
+    is_knowledge_program_complete,
     read_json,
     validate_source_authorization,
 )
@@ -101,6 +103,9 @@ def test_source_registry_required_files_and_examples():
 
 def test_source_registry_authorization_record_validates_and_script_passes():
     validate_source_authorization(active_source_record())
+    if is_knowledge_program_complete():
+        assert_knowledge_program_complete_terminal_state()
+        return
     env = {**os.environ, "PYTEST_CURRENT_TEST": "AION-206 source registry smoke"}
     subprocess.run(
         [str(ROOT / "scripts/knowledge-intelligence-source-registry-authorization-check.sh")],

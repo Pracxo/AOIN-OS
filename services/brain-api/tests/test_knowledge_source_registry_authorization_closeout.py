@@ -61,6 +61,21 @@ def test_aion_206_source_registry_authorization_is_closed_and_non_reusable():
 def test_aion_208_claim_graph_authorization_hands_off_to_next_active_authorization():
     program = read_json("docs/knowledge-intelligence/program-ledger.json")
     auth = read_json("docs/knowledge-intelligence/authorization-ledger.json")
+    if program["program_state"] == "knowledge_intelligence_program_complete":
+        assert auth["active_cognitive_implementation_authorization_count"] == 0
+        assert auth["active_knowledge_implementation_authorization_count"] == 0
+        assert program["active_knowledge_implementation_authorization_count"] == 0
+        assert program["active_knowledge_implementation_authorization"] is None
+        assert program["active_knowledge_implementation_task"] is None
+        assert program["formal_closeout_task"] is None
+        assert [
+            item for item in auth["records"] if item.get("authorization_active") is True
+        ] == []
+        assert program["controlled_public_research_pilot_implemented"] is True
+        assert program["controlled_public_research_pilot_passed"] is True
+        assert program["public_network_fetch_enabled"] is False
+        return
+
     active = active_knowledge_authorization_record()
     assert auth["active_cognitive_implementation_authorization_count"] == 0
     assert auth["active_knowledge_implementation_authorization_count"] == 1

@@ -40,6 +40,7 @@ PUBLIC_RESEARCH_PILOT_IMPLEMENTED_PROGRAM_STATE = (
     "controlled_public_research_pilot_implemented_operator_invoked_"
     "persistent_write_disabled_pending_closeout"
 )
+PROGRAM_COMPLETE_STATE = "knowledge_intelligence_program_complete"
 IMPLEMENTED_FABRIC_STATE = (
     "implemented_deterministic_simulation_verification_attestation_persistent_write_disabled"
 )
@@ -430,11 +431,21 @@ def validate_authorization_files(root: Path) -> None:
             VERIFIED_KNOWLEDGE_IMPLEMENTED_PROGRAM_STATE,
             PUBLIC_RESEARCH_PILOT_AUTHORIZED_PROGRAM_STATE,
             PUBLIC_RESEARCH_PILOT_IMPLEMENTED_PROGRAM_STATE,
+            PROGRAM_COMPLETE_STATE,
         }:
             raise ValueError(f"{label} ledger program state mismatch")
-        if payload.get("active_knowledge_implementation_authorization_count") != 1:
+        program_complete = payload.get("program_state") == PROGRAM_COMPLETE_STATE
+        expected_active_count = 0 if program_complete else 1
+        if payload.get("active_knowledge_implementation_authorization_count") != expected_active_count:
             raise ValueError(f"{label} active authorization count mismatch")
-        if payload.get("program_state") in {
+        if program_complete:
+            if payload.get("active_knowledge_implementation_authorization") is not None:
+                raise ValueError(f"{label} active authorization must be closed")
+            if payload.get("active_knowledge_implementation_task") is not None:
+                raise ValueError(f"{label} active task must be closed")
+            if payload.get("formal_closeout_task") is not None:
+                raise ValueError(f"{label} formal closeout must be closed")
+        elif payload.get("program_state") in {
             PUBLIC_RESEARCH_PILOT_AUTHORIZED_PROGRAM_STATE,
             PUBLIC_RESEARCH_PILOT_IMPLEMENTED_PROGRAM_STATE,
         }:
@@ -471,6 +482,7 @@ def validate_authorization_files(root: Path) -> None:
             VERIFIED_KNOWLEDGE_IMPLEMENTED_PROGRAM_STATE,
             PUBLIC_RESEARCH_PILOT_AUTHORIZED_PROGRAM_STATE,
             PUBLIC_RESEARCH_PILOT_IMPLEMENTED_PROGRAM_STATE,
+            PROGRAM_COMPLETE_STATE,
         }:
             if payload.get("tool_verification_fabric_implemented") is not True:
                 raise ValueError(f"{label} tool verification implementation missing")
@@ -485,9 +497,15 @@ def validate_authorization_files(root: Path) -> None:
                 raise ValueError(f"{label} prohibited capability enabled: {key}")
 
     active = [record for record in auth["records"] if record.get("authorization_active") is True]
-    if len(active) != 1:
+    program_complete = auth.get("program_state") == PROGRAM_COMPLETE_STATE
+    if program_complete:
+        if active:
+            raise ValueError("no active Knowledge Intelligence authorization must remain after program completion")
+    elif len(active) != 1:
         raise ValueError("exactly one Knowledge Intelligence authorization must be active")
-    if active[0].get("authorization_transaction_id") == AUTHORIZATION_ID:
+    if program_complete:
+        pass
+    elif active[0].get("authorization_transaction_id") == AUTHORIZATION_ID:
         validate_authorization_payload(active[0])
     elif (
         (
@@ -546,6 +564,7 @@ def validate_authorization_files(root: Path) -> None:
         VERIFIED_KNOWLEDGE_IMPLEMENTED_PROGRAM_STATE,
         PUBLIC_RESEARCH_PILOT_AUTHORIZED_PROGRAM_STATE,
         PUBLIC_RESEARCH_PILOT_IMPLEMENTED_PROGRAM_STATE,
+        PROGRAM_COMPLETE_STATE,
     }:
         tool_record = tool_records[0]
         for key, expected in {
@@ -579,6 +598,7 @@ def validate_repository_state(root: Path) -> None:
         VERIFIED_KNOWLEDGE_IMPLEMENTED_PROGRAM_STATE,
         PUBLIC_RESEARCH_PILOT_AUTHORIZED_PROGRAM_STATE,
         PUBLIC_RESEARCH_PILOT_IMPLEMENTED_PROGRAM_STATE,
+        PROGRAM_COMPLETE_STATE,
     }
     for relative in AION215_SOURCE_FILES:
         exists = (root / relative).exists()

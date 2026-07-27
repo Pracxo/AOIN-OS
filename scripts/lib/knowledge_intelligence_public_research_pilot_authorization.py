@@ -16,6 +16,7 @@ CANDIDATE_ID = "controlled-public-research-verified-knowledge-pilot"
 WORKSTREAM = "knowledge-intelligence-controlled-public-research-pilot"
 SCOPE = "operator-invoked-allowlisted-public-https-fetch-dns-pinning-integrated-research-verified-candidate-pilot-operator-review-abstention-core"
 IMPLEMENTED_PROGRAM_STATE = "controlled_public_research_pilot_implemented_operator_invoked_persistent_write_disabled_pending_closeout"
+PROGRAM_COMPLETE_STATE = "knowledge_intelligence_program_complete"
 AUTHORIZED_CAPABILITIES = (
     "controlled_public_research_pilot_approved",
     "operator_invoked_pilot_session_approved",
@@ -349,7 +350,7 @@ def validate_closed_authorization(record: dict[str, Any]) -> None:
         raise ValueError("closed authorization PR evidence mismatch")
 
 
-def validate_authorization_payload(payload: dict[str, Any]) -> None:
+def validate_public_pilot_identity(payload: dict[str, Any]) -> None:
     expected = {
         "program_id": PROGRAM_ID,
         "authorization_transaction_id": AUTHORIZATION_ID,
@@ -360,11 +361,7 @@ def validate_authorization_payload(payload: dict[str, Any]) -> None:
         "candidate_id": CANDIDATE_ID,
         "workstream": WORKSTREAM,
         "implementation_task": IMPLEMENTATION_TASK,
-        "formal_closeout_task": FORMAL_CLOSEOUT_TASK,
         "authorization_scope": SCOPE,
-        "authorization_active": True,
-        "authorization_consumed": False,
-        "authorization_expired": False,
         "authorization_reusable": False,
         "controlled_public_research_pilot_authorized": True,
         "operator_invoked_public_https_fetch_authorized": True,
@@ -376,6 +373,9 @@ def validate_authorization_payload(payload: dict[str, Any]) -> None:
             raise ValueError(
                 f"public pilot authorization mismatch {key}: {payload.get(key)!r}"
             )
+
+
+def validate_public_pilot_implemented_flags(payload: dict[str, Any]) -> None:
     implemented = payload.get("controlled_public_research_pilot_implemented") is True
     required_true_when_implemented = (
         "operator_invoked_pilot_session_available",
@@ -429,15 +429,64 @@ def validate_authorization_payload(payload: dict[str, Any]) -> None:
             raise ValueError(f"approval flag must be true: {key}")
     if payload.get("implementation_no_go_status") is not False:
         raise ValueError("implementation no-go status must be false")
-    if payload.get("authorized_capabilities") != expected_authorized_capabilities():
-        raise ValueError("authorized capabilities mismatch")
-    if payload.get("prohibited_capabilities") != expected_prohibited_capabilities():
-        raise ValueError("prohibited capabilities mismatch")
-    if payload.get("resource_limits") != RESOURCE_LIMITS:
-        raise ValueError("resource limits mismatch")
+    if "records" not in payload:
+        if payload.get("authorized_capabilities") != expected_authorized_capabilities():
+            raise ValueError("authorized capabilities mismatch")
+        if payload.get("prohibited_capabilities") != expected_prohibited_capabilities():
+            raise ValueError("prohibited capabilities mismatch")
+        if payload.get("resource_limits") != RESOURCE_LIMITS:
+            raise ValueError("resource limits mismatch")
     for key in expected_prohibited_capabilities():
         if payload.get(key, False) is not False:
             raise ValueError(f"prohibited top-level flag enabled: {key}")
+
+
+def validate_consumed_authorization(payload: dict[str, Any]) -> None:
+    validate_public_pilot_identity(payload)
+    expected = {
+        "authorization_active": False,
+        "authorization_consumed": True,
+        "authorization_expired": True,
+        "authorization_reusable": False,
+        "authorization_closed_by_task": FORMAL_CLOSEOUT_TASK,
+        "authorization_consumed_by_task": IMPLEMENTATION_TASK,
+    }
+    for key, value in expected.items():
+        if payload.get(key) != value:
+            raise ValueError(
+                f"public pilot closeout mismatch {key}: {payload.get(key)!r}"
+            )
+    if payload.get("authorization_consumed_by_prs") != [134]:
+        raise ValueError("public pilot closeout PR evidence mismatch")
+    if payload.get("authorization_consumed_by_feature_commits") != [
+        "756c706299472d6f048acd4a2c6a523c36f0e119"
+    ]:
+        raise ValueError("public pilot closeout feature commit evidence mismatch")
+    if payload.get("authorization_consumed_by_merge_commits") != [
+        "d0e1807edd7b3098ce62f8d00b0bceb4ee6fd23d"
+    ]:
+        raise ValueError("public pilot closeout merge commit evidence mismatch")
+    validate_public_pilot_implemented_flags(payload)
+
+
+def validate_authorization_payload(payload: dict[str, Any]) -> None:
+    validate_public_pilot_identity(payload)
+    if payload.get("formal_closeout_task") != FORMAL_CLOSEOUT_TASK:
+        raise ValueError("public pilot formal closeout mismatch")
+    if payload.get("authorization_active") is True:
+        for key, value in {
+            "authorization_consumed": False,
+            "authorization_expired": False,
+        }.items():
+            if payload.get(key) != value:
+                raise ValueError(
+                    f"public pilot active lifecycle mismatch {key}: {payload.get(key)!r}"
+                )
+    elif payload.get("authorization_active") is False:
+        validate_consumed_authorization(payload)
+    else:
+        raise ValueError("public pilot authorization_active must be boolean")
+    validate_public_pilot_implemented_flags(payload)
 
 
 def validate_no_aion219_source(root: Path) -> None:
@@ -471,30 +520,50 @@ def validate_authorization_files(root: Path) -> None:
     )
     program_ledger = load_json(root, "docs/knowledge-intelligence/program-ledger.json")
     for label, payload in (("authorization", auth_ledger), ("program", program_ledger)):
-        if payload.get("program_state") != IMPLEMENTED_PROGRAM_STATE:
+        program_complete = payload.get("program_state") == PROGRAM_COMPLETE_STATE
+        if payload.get("program_state") not in {
+            IMPLEMENTED_PROGRAM_STATE,
+            PROGRAM_COMPLETE_STATE,
+        }:
             raise ValueError(f"{label} program state mismatch")
-        if (
-            payload.get("active_knowledge_implementation_authorization")
-            != AUTHORIZATION_ID
-        ):
+        expected_active = None if program_complete else AUTHORIZATION_ID
+        expected_count = 0 if program_complete else 1
+        expected_task = None if program_complete else IMPLEMENTATION_TASK
+        expected_closeout = None if program_complete else FORMAL_CLOSEOUT_TASK
+        if payload.get("active_knowledge_implementation_authorization") != expected_active:
             raise ValueError(f"{label} active authorization mismatch")
-        if payload.get("active_knowledge_implementation_authorization_count") != 1:
+        if payload.get("active_knowledge_implementation_authorization_count") != expected_count:
             raise ValueError(f"{label} active authorization count mismatch")
-        if payload.get("active_knowledge_implementation_task") != IMPLEMENTATION_TASK:
+        if payload.get("active_knowledge_implementation_task") != expected_task:
             raise ValueError(f"{label} active task mismatch")
-        if payload.get("formal_closeout_task") != FORMAL_CLOSEOUT_TASK:
+        if payload.get("formal_closeout_task") != expected_closeout:
             raise ValueError(f"{label} formal closeout mismatch")
-        validate_authorization_payload(payload)
+        validate_public_pilot_implemented_flags(payload)
     active = [
         item
         for item in auth_ledger["records"]
         if item.get("authorization_active") is True
     ]
-    if len(active) != 1:
+    program_complete = program_ledger.get("program_state") == PROGRAM_COMPLETE_STATE
+    if program_complete:
+        if active:
+            raise ValueError(
+                "no active Knowledge Intelligence authorization is allowed after program completion"
+            )
+        public_pilot_records = [
+            item
+            for item in auth_ledger["records"]
+            if item.get("authorization_transaction_id") == AUTHORIZATION_ID
+        ]
+        if len(public_pilot_records) != 1:
+            raise ValueError("AION-218-KI-0008 closeout record missing")
+        validate_consumed_authorization(public_pilot_records[0])
+    elif len(active) != 1:
         raise ValueError(
             "exactly one active Knowledge Intelligence authorization is required"
         )
-    validate_authorization_payload(active[0])
+    else:
+        validate_authorization_payload(active[0])
     closed = [
         item
         for item in auth_ledger["records"]
