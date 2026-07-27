@@ -1,0 +1,15 @@
+{
+  "corrective_prs": [
+    132
+  ],
+  "decision": "VERIFIED_KNOWLEDGE_MEMORY_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_PUBLIC_RESEARCH_PILOT_AUTHORIZATION",
+  "evaluation_id": "AION-VKME-001",
+  "evaluation_passed": true,
+  "read_only": true,
+  "redacted": true,
+  "runtime_effect": false,
+  "scenario_count": 28,
+  "synthetic": true,
+  "title": "AION-218 verified-memory operator evaluation",
+  "view_id": "knowledge_intelligence_verified_memory_evaluation"
+}

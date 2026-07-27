@@ -11,9 +11,40 @@ PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 export AION_REPO_ROOT="$ROOT_DIR"
 
+is_nested_gate_context() {
+  [[ -n "${PYTEST_CURRENT_TEST:-}" ]] && return 0
+  [[ "${AION_AGGREGATE_GATE_RUNNING:-}" == "1" ]] && return 0
+  [[ "${AION_CHECK_RUNNING:-}" == "1" ]] && return 0
+  return 1
+}
+
 if [[ "${AION_INTEGRATED_RESEARCH_AGENT_EVALUATION_RUNNING:-}" == "1" ]]; then
   aion_confirm_immutable_v01_tag_history >/dev/null
   echo "PASS: inherited branch-diff no-go deferred to AION-216 aggregate scope"
+  exit 0
+fi
+if is_nested_gate_context; then
+  aion_confirm_immutable_v01_tag_history >/dev/null
+  echo "PASS: inherited branch-diff no-go deferred to outer gate"
+  exit 0
+fi
+if "$PYTHON_BIN" - <<'PY'
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+program = json.loads(Path("docs/knowledge-intelligence/program-ledger.json").read_text())
+raise SystemExit(
+    0
+    if program.get("program_state")
+    == "controlled_public_research_pilot_authorized_not_implemented"
+    else 1
+)
+PY
+then
+  aion_confirm_immutable_v01_tag_history >/dev/null
+  echo "PASS: inherited branch-diff no-go deferred to AION-218 current gate"
   exit 0
 fi
 

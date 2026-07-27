@@ -105,6 +105,11 @@ CURRENT_SCOPE = (
     "deterministic-verified-knowledge-candidate-lineage-versioning-"
     "revalidation-operator-review-engagement-learning-abstention-core"
 )
+FINAL_AUTH = "AION-218-KI-0008"
+FINAL_SCOPE = (
+    "operator-invoked-allowlisted-public-https-fetch-dns-pinning-integrated-"
+    "research-verified-candidate-pilot-operator-review-abstention-core"
+)
 RESOURCE_LIMITS = {
     "maximum_claims_per_assessment_batch": 500,
     "maximum_evidence_bindings_per_claim": 100,
@@ -289,6 +294,7 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
             "verified_knowledge_memory_authorized_not_implemented",
             "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
         }
+        post_aion218 = program["program_state"] == "controlled_public_research_pilot_authorized_not_implemented"
         post_aion214 = (
             program["program_state"]
             in {
@@ -296,7 +302,12 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
                 "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
             }
         )
-        if post_aion216:
+        if post_aion218:
+            expected_active_auth = FINAL_AUTH
+            expected_active_scope = FINAL_SCOPE
+            expected_active_task = "AION-219"
+            expected_closeout_task = "AION-220"
+        elif post_aion216:
             expected_active_auth = CURRENT_AUTH
             expected_active_scope = CURRENT_SCOPE
             expected_active_task = "AION-217"
@@ -317,7 +328,7 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
         ]
         assert len(post_matches) == 1
         post_record = post_matches[0]
-        if post_aion214:
+        if post_aion214 or post_aion216 or post_aion218:
             assert post_record["authorization_active"] is False
             assert post_record["authorization_consumed"] is True
             assert post_record["authorization_expired"] is True
@@ -357,6 +368,7 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
             "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
             "verified_knowledge_memory_authorized_not_implemented",
             "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
+            "controlled_public_research_pilot_authorized_not_implemented",
         }
         assert program["active_knowledge_implementation_authorization"] == expected_active_auth
         assert program["active_knowledge_implementation_task"] == expected_active_task
@@ -368,16 +380,13 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
             assert program["domain_expert_mesh_implemented"] is True
             assert program["model_call_enabled"] is False
             assert program["persistent_mesh_write_enabled"] is False
-        if post_aion216:
+        if post_aion216 or post_aion218:
             assert program["integrated_research_agent_operator_evaluation_passed"] is True
             assert program["verified_knowledge_memory_authorized"] is True
-            assert program["verified_knowledge_memory_implemented"] is (
-                program["program_state"]
-                == "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
-            )
+            assert program["verified_knowledge_memory_implemented"] is True
             assert program["persistent_verified_knowledge_write_enabled"] is False
             assert program["automatic_verified_knowledge_promotion_enabled"] is False
-        if post_aion214 or post_aion216:
+        if post_aion214 or post_aion216 or post_aion218:
             assert program["domain_expert_mesh_operator_evaluation_passed"] is True
             assert program["tool_verification_fabric_authorized"] is True
             assert program["tool_verification_fabric_implemented"] is (
@@ -386,6 +395,7 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
                     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
                     "verified_knowledge_memory_authorized_not_implemented",
                     "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
+                    "controlled_public_research_pilot_authorized_not_implemented",
                 }
             )
             if (
@@ -396,7 +406,7 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
                     "implemented_deterministic_simulation_verification_attestation_persistent_write_disabled"
                 )
                 assert program["tool_verification_fabric_runtime_enabled"] is False
-            if post_aion216:
+            if post_aion216 or post_aion218:
                 assert program["tool_verification_fabric_runtime_enabled"] is False
             assert program["actual_tool_execution_enabled"] is False
     else:

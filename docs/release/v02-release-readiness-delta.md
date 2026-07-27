@@ -200,3 +200,7 @@ The integrated research-agent chain passed evaluation. A knowledge candidate is 
 AION-217 implements the deterministic in-memory verified-knowledge candidate memory and engagement-learning candidate plane under AION-216-KI-0007. Candidates remain reviewable evidence, not factual truth. Eligibility does not create approval, promotion, cognitive-memory writes, or belief mutation. Engagement metadata remains non-factual and can only create bounded operator-review learning candidates.
 
 Required disabled state remains explicit: `verified_knowledge_runtime_enabled=false`, `persistent_verified_knowledge_write_enabled=false`, `automatic_verified_knowledge_promotion_enabled=false`, `cognitive_memory_write_enabled=false`, `belief_mutation_enabled=false`, `engagement_signal_as_fact_enabled=false`, `engagement_confidence_effect_enabled=false`, `public_network_fetch_enabled=false`, `actual_tool_execution_enabled=false`, `runtime_effect=false`. AION-216-KI-0007 remains active pending AION-218 formal closeout.
+
+## AION-218 Release Delta
+
+AION-218 does not create a v0.2 tag or release. It records verified-memory evaluation evidence, closes `AION-216-KI-0007`, and authorizes `AION-218-KI-0008` for AION-219 while keeping release readiness false and runtime public-network behavior unavailable.

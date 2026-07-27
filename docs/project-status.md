@@ -8,44 +8,39 @@ tag or release exists.
 
 ## Current Main Milestone
 
-## AION-217 Deterministic Verified Knowledge Candidate Memory
+## AION-218 Verified Knowledge Memory Operator Evaluation
 
-Current milestone: AION-217 deterministic verified-knowledge candidate memory
-and engagement-learning candidate plane implemented.
+Current milestone: AION-218 verified-knowledge memory operator evaluation complete and controlled public-research pilot authorized.
 
-Current stage: the verified-knowledge candidate memory is implemented with
-complete upstream lineage, support and refutation eligibility, confidence
-inheritance, confidence non-amplification, immutable versioning, supersession,
-retraction, expiry, explicit revalidation, immutable in-memory repository
-snapshots, bounded exact queries, integrity auditing, engagement metadata, and
-engagement-learning candidates.
+Current stage: the deterministic verified-knowledge candidate memory and engagement-learning candidate plane is implemented and passed read-only operator evaluation. The controlled public-research pilot is authorized and not implemented.
 
-Runtime, automatic promotion, persistent writes, cognitive-memory writes,
-belief mutation, engagement factual effects, and public-network access remain
-disabled pending AION-218. AION-216-KI-0007 remains active, consumed=false,
-expired=false, reusable=false.
+Required flags:
 
-Current state flags:
-
-- `verified_knowledge_memory_authorized=true`
 - `verified_knowledge_memory_implemented=true`
-- `verified_knowledge_memory_state=implemented_deterministic_in_memory_candidate_versioning_engagement_learning_persistent_write_disabled`
+- `verified_knowledge_memory_operator_evaluation_passed=true`
 - `verified_knowledge_runtime_enabled=false`
 - `persistent_verified_knowledge_write_enabled=false`
 - `automatic_verified_knowledge_promotion_enabled=false`
 - `cognitive_memory_write_enabled=false`
 - `belief_mutation_enabled=false`
-- `engagement_learning_candidate_plane_authorized=true`
-- `engagement_learning_candidate_plane_implemented=true`
-- `engagement_learning_candidate_plane_state=implemented_deterministic_in_memory_non_factual_candidate_only`
 - `engagement_signal_as_fact_enabled=false`
 - `engagement_confidence_effect_enabled=false`
+- `controlled_public_research_pilot_authorized=true`
+- `controlled_public_research_pilot_implemented=false`
+- `operator_invoked_public_https_fetch_authorized=true`
+- `operator_invoked_public_https_fetch_available=false`
 - `public_network_fetch_enabled=false`
+- `unrestricted_network_access_enabled=false`
+- `background_crawler_enabled=false`
+- `search_provider_integration_enabled=false`
+- `connector_integration_enabled=false`
+- `model_provider_integration_enabled=false`
 - `actual_tool_execution_enabled=false`
-- `active_knowledge_implementation_authorization=AION-216-KI-0007`
-- active Knowledge Intelligence implementation authorization count: 1
-- `active_knowledge_implementation_task=AION-217`
-- `formal_closeout_task=AION-218`
+- `active_knowledge_implementation_authorization=AION-218-KI-0008`
+- `active_knowledge_implementation_task=AION-219`
+- `formal_closeout_task=AION-220`
+
+AION-217 candidates remain reviewable evidence and eligibility does not equal factual truth. AION-218 evaluated AION-217. AION-219 may implement bounded explicit-source HTTPS acquisition, remains operator-invoked, performs no background crawling, uses no search provider, connector, model provider, or browser, performs no automatic promotion, writes no cognitive memory, and persistent knowledge writes remain disabled. Public network fetching remains unavailable until AION-219 implementation. AION-220 is the final Knowledge Intelligence Program evaluation and closeout.
 
 AION-209 compatibility marker retained for inherited closeout gates:
 `active_knowledge_implementation_task=AION-209` denotes the prior consumed
@@ -60,7 +55,7 @@ reviewable evidence, eligibility does not equal factual truth, automatic
 promotion remains disabled, cognitive-memory writes remain disabled, engagement
 remains non-factual, engagement candidates cannot update policy automatically,
 persistent writes remain disabled, public-network research remains disabled,
-and AION-218 is the next task.
+and AION-219 is the next task.
 
 ## Completed Architecture
 

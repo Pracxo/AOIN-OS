@@ -34,6 +34,7 @@ def test_aion_215_source_is_exact_and_runtime_surfaces_are_absent() -> None:
         "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
         "verified_knowledge_memory_authorized_not_implemented",
         "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
+        "controlled_public_research_pilot_authorized_not_implemented",
     }
     assert program["tool_verification_fabric_implemented"] is True
     assert program["tool_verification_fabric_runtime_enabled"] is False

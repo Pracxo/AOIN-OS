@@ -1,0 +1,232 @@
+{
+  "corrective_cycles": [
+    {
+      "affected_component": "verified_knowledge_lineage.audit_integrated_knowledge_lineage",
+      "corrective_feature_commit": "ffd620e2e81d5c47140b851503515c724114633f",
+      "corrective_merge_commit": "262ea384800997edd0d46531ecb7ca44528e3745",
+      "corrective_pr": 132,
+      "cycle": 1,
+      "defect_class": "lineage_integrity_auditor_defect",
+      "expected_invariant": "public integrated lineage audit preserves integrity report schema version and fingerprint",
+      "failed_scenario": "integrated_lineage_integrity",
+      "observed_invariant": "schema version omitted from audit payload before corrective PR #132",
+      "result_after_correction": "PASS"
+    }
+  ],
+  "decision": "VERIFIED_KNOWLEDGE_MEMORY_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_PUBLIC_RESEARCH_PILOT_AUTHORIZATION",
+  "evaluation_id": "AION-VKME-001",
+  "hard_gates": {
+    "aion_217_implementation_gate_passed": true,
+    "aion_217_no_go_passed": true,
+    "aion_217_runtime_hold_passed": true,
+    "all_scenarios_executed": true,
+    "all_scenarios_passed": true,
+    "concurrency_passed": true,
+    "confidence_non_amplification_passed": true,
+    "contradiction_blocking_passed": true,
+    "coverage_passed": true,
+    "determinism_passed": true,
+    "dissent_blocking_passed": true,
+    "engagement_non_factuality_passed": true,
+    "final_ci_verified": true,
+    "focused_aion_217_tests_passed": true,
+    "freshness_blocking_passed": true,
+    "history_preservation_passed": true,
+    "lineage_integrity_passed": true,
+    "no_v02_tag_or_release": true,
+    "pr_131_verified": true,
+    "refutation_eligibility_passed": true,
+    "repository_immutability_passed": true,
+    "repository_integrity_passed": true,
+    "resource_limits_passed": true,
+    "retraction_blocking_passed": true,
+    "revalidation_passed": true,
+    "scenario_set_complete": true,
+    "scope_blocking_passed": true,
+    "source_independence_passed": true,
+    "supersession_policy_passed": true,
+    "support_eligibility_passed": true,
+    "tool_evidence_boundary_passed": true,
+    "versioning_passed": true,
+    "zero_automatic_promotion": true,
+    "zero_belief_mutation": true,
+    "zero_cognitive_memory_write": true,
+    "zero_engagement_factual_effect": true,
+    "zero_persistence": true,
+    "zero_runtime_effect": true
+  },
+  "read_only": true,
+  "redacted": true,
+  "scenario_count": 28,
+  "scenarios": [
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "valid_support_candidate",
+      "summary": "valid support candidate"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "valid_refutation_candidate",
+      "summary": "valid refutation candidate"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "integrated_lineage_integrity",
+      "summary": "integrated lineage integrity"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "candidate_confidence_non_amplification",
+      "summary": "candidate confidence non amplification"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "source_independence_minimum",
+      "summary": "source independence minimum"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "coverage_and_provenance_requirements",
+      "summary": "coverage and provenance requirements"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "stale_evidence_blocking",
+      "summary": "stale evidence blocking"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "retraction_blocking",
+      "summary": "retraction blocking"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "supersession_policy",
+      "summary": "supersession policy"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "scope_mismatch_blocking",
+      "summary": "scope mismatch blocking"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "unresolved_contradiction_blocking",
+      "summary": "unresolved contradiction blocking"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "material_dissent_blocking",
+      "summary": "material dissent blocking"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "tool_evidence_non_factual_boundary",
+      "summary": "tool evidence non factual boundary"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "upstream_abstention",
+      "summary": "upstream abstention"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "candidate_identity_and_version_boundary",
+      "summary": "candidate identity and version boundary"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "version_idempotency_and_collision",
+      "summary": "version idempotency and collision"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "supersession_history_preservation",
+      "summary": "supersession history preservation"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "retraction_expiry_and_archive_history",
+      "summary": "retraction expiry and archive history"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "explicit_revalidation",
+      "summary": "explicit revalidation"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "copy_on_write_repository",
+      "summary": "copy on write repository"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "snapshots_and_queries",
+      "summary": "snapshots and queries"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "fixture_path_schema_and_redaction",
+      "summary": "fixture path schema and redaction"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "engagement_signal_non_factual",
+      "summary": "engagement signal non factual"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "engagement_learning_candidate_mapping",
+      "summary": "engagement learning candidate mapping"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "engagement_cannot_change_candidate_state",
+      "summary": "engagement cannot change candidate state"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "resource_budgets_and_zero_persistence",
+      "summary": "resource budgets and zero persistence"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "determinism_concurrency_and_performance",
+      "summary": "determinism concurrency and performance"
+    },
+    {
+      "executed": true,
+      "passed": true,
+      "scenario_id": "no_runtime_network_promotion_memory_belief_or_repository_effect",
+      "summary": "no runtime network promotion memory belief or repository effect"
+    }
+  ],
+  "synthetic": true
+}

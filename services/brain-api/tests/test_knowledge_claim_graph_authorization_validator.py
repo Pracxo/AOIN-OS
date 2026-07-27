@@ -25,6 +25,7 @@ AION217_STATE = "verified_knowledge_memory_authorized_not_implemented"
 AION217_IMPLEMENTED_STATE = (
     "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
 )
+AION219_STATE = "controlled_public_research_pilot_authorized_not_implemented"
 
 
 def test_claim_graph_authorization_exact_lifecycle_and_parentage():
@@ -41,6 +42,7 @@ def test_claim_graph_authorization_exact_lifecycle_and_parentage():
         AION215_IMPLEMENTED_STATE,
         AION217_STATE,
         AION217_IMPLEMENTED_STATE,
+        AION219_STATE,
     }
     assert record["authorization_transaction_id"] == "AION-208-KI-0003"
     assert record["approval_record_id"] == "AION-208-KI-0003"
@@ -62,6 +64,7 @@ def test_claim_graph_authorization_exact_lifecycle_and_parentage():
         AION215_IMPLEMENTED_STATE,
         AION217_STATE,
         AION217_IMPLEMENTED_STATE,
+        AION219_STATE,
     }:
         assert record["authorization_active"] is False
         assert record["authorization_consumed"] is True

@@ -175,11 +175,16 @@ authorization = json.loads(
     (ROOT / "docs/knowledge-intelligence/authorization-ledger.json").read_text()
 )
 for label, payload in {"program": program, "authorization": authorization}.items():
-    if payload["authorization_transaction_id"] != auth.AUTHORIZATION_ID:
+    final_state = auth.is_final_public_pilot_state(payload)
+    expected_authorization = (
+        auth.NEXT_AUTHORIZATION_ID if final_state else auth.AUTHORIZATION_ID
+    )
+    expected_closeout = auth.NEXT_FORMAL_CLOSEOUT_TASK if final_state else auth.FORMAL_CLOSEOUT_TASK
+    if payload["authorization_transaction_id"] != expected_authorization:
         raise SystemExit(f"{label} active authorization mismatch")
-    if payload["formal_closeout_task"] != auth.FORMAL_CLOSEOUT_TASK:
+    if payload["formal_closeout_task"] != expected_closeout:
         raise SystemExit(f"{label} formal closeout mismatch")
-    if payload["program_state"] != auth.IMPLEMENTED_PROGRAM_STATE:
+    if payload["program_state"] not in {auth.IMPLEMENTED_PROGRAM_STATE, auth.FINAL_PROGRAM_STATE}:
         raise SystemExit(f"{label} implemented program state mismatch")
     for key in (
         "verified_knowledge_runtime_enabled",

@@ -1,0 +1,18 @@
+{
+  "authorization_transaction_id": "AION-218-KI-0008",
+  "dns_pinned": true,
+  "dns_resolution_id": "dns-public-source-candidate-a",
+  "hostname": "research.example",
+  "public_destination_validation_passed": true,
+  "read_only": true,
+  "redacted": true,
+  "rejected_addresses": [],
+  "resolution_fingerprint": "sha256:synthetic-dns-resolution-fingerprint",
+  "resolver_mode": "future-system-dns",
+  "runtime_effect": false,
+  "schema_version": "aion-public-research-pilot-dns-resolution/v1",
+  "synthetic": true,
+  "validated_public_addresses": [
+    "93.184.216.34"
+  ]
+}

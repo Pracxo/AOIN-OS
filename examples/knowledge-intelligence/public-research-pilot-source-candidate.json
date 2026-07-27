@@ -1,0 +1,18 @@
+{
+  "authorization_transaction_id": "AION-218-KI-0008",
+  "cookie_free": true,
+  "credential_free": true,
+  "domain": "research.example",
+  "domain_allowlisted": true,
+  "explicit_operator_supplied": true,
+  "ip_literal_url": false,
+  "method": "GET",
+  "read_only": true,
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-public-research-pilot-source-candidate/v1",
+  "scheme": "https",
+  "source_candidate_id": "public-source-candidate-a",
+  "source_url": "https://research.example/research/evidence-a",
+  "synthetic": true
+}

@@ -350,7 +350,7 @@ elif active_id == "AION-212-KI-0005":
     for key in DISABLED_KEYS:
         if active_record.get(key, False) is not False:
             raise SystemExit(f"AION-212 authorization enabled prohibited capability: {key}")
-elif active_id in {"AION-214-KI-0006", "AION-216-KI-0007"}:
+elif active_id in {"AION-214-KI-0006", "AION-216-KI-0007", "AION-218-KI-0008"}:
     if source_record["authorization_consumed"] is not True:
         raise SystemExit("AION-206 authorization must be consumed after AION-208")
     if source_record["authorization_expired"] is not True:
@@ -361,7 +361,8 @@ elif active_id in {"AION-214-KI-0006", "AION-216-KI-0007"}:
         "AION-208-KI-0003": "AION-210",
         "AION-210-KI-0004": "AION-212",
         "AION-212-KI-0005": "AION-214",
-        **({"AION-214-KI-0006": "AION-216"} if active_id == "AION-216-KI-0007" else {}),
+        **({"AION-214-KI-0006": "AION-216"} if active_id in {"AION-216-KI-0007", "AION-218-KI-0008"} else {}),
+        **({"AION-216-KI-0007": "AION-218"} if active_id == "AION-218-KI-0008" else {}),
     }.items():
         matches = [
             record
@@ -379,7 +380,13 @@ elif active_id in {"AION-214-KI-0006", "AION-216-KI-0007"}:
             raise SystemExit(f"{expected_id} authorization must be expired")
         if record.get("authorization_closed_by_task") != closed_by:
             raise SystemExit(f"{expected_id} authorization must be closed by {closed_by}")
-    expected_task = "AION-217" if active_id == "AION-216-KI-0007" else "AION-215"
+    expected_task = (
+        "AION-219"
+        if active_id == "AION-218-KI-0008"
+        else "AION-217"
+        if active_id == "AION-216-KI-0007"
+        else "AION-215"
+    )
     if active_record["implementation_task"] != expected_task:
         raise SystemExit(f"{active_id} authorization must point only to {expected_task}")
     for key in DISABLED_KEYS:

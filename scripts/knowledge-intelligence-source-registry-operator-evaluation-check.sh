@@ -188,6 +188,7 @@ else:
         "AION-212-KI-0005",
         "AION-214-KI-0006",
         "AION-216-KI-0007",
+        "AION-218-KI-0008",
     }
     matches = [
         item
@@ -250,6 +251,11 @@ successor_program_states = {
         "AION-216-KI-0007",
         "AION-217",
         "AION-218",
+    ),
+    "controlled_public_research_pilot_authorized_not_implemented": (
+        "AION-218-KI-0008",
+        "AION-219",
+        "AION-220",
     ),
 }
 if program["program_state"] in successor_program_states:

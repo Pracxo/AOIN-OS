@@ -1339,3 +1339,7 @@ AION-216 adds bundled read-only evidence for `AION-IRAE-001` and the conditional
 - `demo-data/knowledge-intelligence-verified-knowledge-runtime-hold.json`
 
 The console remains static and read-only. It creates no AION-217 runtime source, performs no public-network research, executes no real tool, writes no persistent verified-knowledge state, promotes no knowledge, and treats engagement metadata as non-factual.
+
+## AION-218 Current State
+
+AION-218 completed `AION-VKME-001` with exact PASS decision `VERIFIED_KNOWLEDGE_MEMORY_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_PUBLIC_RESEARCH_PILOT_AUTHORIZATION`. `AION-216-KI-0007` is closed, consumed, expired, and non-reusable. `AION-218-KI-0008` is the sole active Knowledge Intelligence authorization for AION-219, with AION-220 as formal closeout. The controlled public-research pilot is authorized but not implemented; public network fetch, system HTTP transport, automatic promotion, cognitive-memory write, belief mutation, and persistent verified-knowledge writes remain disabled.

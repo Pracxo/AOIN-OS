@@ -41,7 +41,7 @@ def _active_record(ledger: dict[str, object]) -> dict[str, object]:
     return active[0]
 
 
-def test_current_projection_matches_active_verified_knowledge_authorization() -> None:
+def test_current_projection_matches_active_public_pilot_authorization() -> None:
     active = _active_record(_load_json("docs/knowledge-intelligence/authorization-ledger.json"))
     for relative in (
         "docs/knowledge-intelligence/authorization-ledger.json",
@@ -53,14 +53,16 @@ def test_current_projection_matches_active_verified_knowledge_authorization() ->
         assert ledger["workstream"] == active["workstream"]
         assert ledger["implementation_task"] == active["implementation_task"]
         assert ledger["formal_closeout_task"] == active["formal_closeout_task"]
-        assert ledger["active_knowledge_implementation_authorization"] == "AION-216-KI-0007"
-        assert ledger["active_knowledge_implementation_task"] == "AION-217"
-        assert ledger["formal_closeout_task"] == "AION-218"
+        assert ledger["active_knowledge_implementation_authorization"] == "AION-218-KI-0008"
+        assert ledger["active_knowledge_implementation_task"] == "AION-219"
+        assert ledger["formal_closeout_task"] == "AION-220"
         assert ledger["verified_knowledge_memory_authorized"] is True
         assert ledger["verified_knowledge_memory_implemented"] is True
         assert ledger["verified_knowledge_memory_state"] == VERIFIED_KNOWLEDGE_MEMORY_STATE
         assert ledger["engagement_learning_candidate_plane_authorized"] is True
         assert ledger["engagement_learning_candidate_plane_implemented"] is True
+        assert ledger["controlled_public_research_pilot_authorized"] is True
+        assert ledger["controlled_public_research_pilot_implemented"] is False
         assert ledger["verified_knowledge_runtime_enabled"] is False
         assert ledger["persistent_verified_knowledge_write_enabled"] is False
         assert ledger["automatic_verified_knowledge_promotion_enabled"] is False

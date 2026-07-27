@@ -114,6 +114,7 @@ post_aion214 = program.get("program_state") in {
     "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout",
     "verified_knowledge_memory_authorized_not_implemented",
     "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
+    "controlled_public_research_pilot_authorized_not_implemented",
 }
 if post_aion214:
     if record["authorization_active"] is not False:
@@ -126,6 +127,10 @@ if post_aion214:
         raise SystemExit("AION-212-KI-0005 must be closed by AION-214")
     successor = [item for item in auth["records"] if item.get("authorization_active") is True]
     expected_successor = (
+        "AION-218-KI-0008"
+        if program.get("program_state")
+        == "controlled_public_research_pilot_authorized_not_implemented"
+        else
         "AION-216-KI-0007"
         if program.get("program_state")
         in {
@@ -157,6 +162,10 @@ for relative in (
     ledger = json.loads((ROOT / relative).read_text())
     if post_aion214:
         expected_projection = (
+            ("AION-218-KI-0008", "AION-219", "AION-220")
+            if ledger.get("program_state")
+            == "controlled_public_research_pilot_authorized_not_implemented"
+            else
             ("AION-216-KI-0007", "AION-217", "AION-218")
             if ledger.get("program_state")
             in {

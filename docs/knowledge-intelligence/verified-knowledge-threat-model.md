@@ -28,3 +28,7 @@ Threat markers retained for gate coverage:
 - automatic promotion
 - public-network activation
 - evaluation-as-approval
+
+## AION-218 Current State
+
+AION-218 completed `AION-VKME-001` with exact PASS decision `VERIFIED_KNOWLEDGE_MEMORY_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_PUBLIC_RESEARCH_PILOT_AUTHORIZATION`. `AION-216-KI-0007` is closed, consumed, expired, and non-reusable. `AION-218-KI-0008` is the sole active Knowledge Intelligence authorization for AION-219, with AION-220 as formal closeout. The controlled public-research pilot is authorized but not implemented; public network fetch, system HTTP transport, automatic promotion, cognitive-memory write, belief mutation, and persistent verified-knowledge writes remain disabled.
