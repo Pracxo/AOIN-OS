@@ -204,3 +204,11 @@ Required disabled state remains explicit: `verified_knowledge_runtime_enabled=fa
 ## AION-218 Release Delta
 
 AION-218 does not create a v0.2 tag or release. It records verified-memory evaluation evidence, closes `AION-216-KI-0007`, and authorizes `AION-218-KI-0008` for AION-219 while keeping release readiness false and runtime public-network behavior unavailable.
+
+## AION-219 Controlled Public Research Pilot
+
+AION-219 implements the controlled operator-invoked public HTTPS research and verified-candidate pilot under active authorization `AION-218-KI-0008`. The pilot requires explicit operator plans, explicit HTTPS source candidates, explicit domain allowlists, and explicit claim specifications. It provides bounded public DNS resolution, public-address validation, DNS pinning, certificate-verified TLS, hostname and SNI validation, peer-address verification, redirect revalidation, robots validation, source provenance, complete Knowledge Intelligence lineage, verified-candidate evaluation, integrity auditing, explicit abstention, and operator review.
+
+The implementation remains outside v0.2 release readiness. Public HTTPS reads are available only inside an explicit operator pilot session; general public-network runtime, unrestricted network runtime, background research, crawler behavior, scheduled public research, search-provider integration, connector integration, model-provider integration, browser automation, actual tool execution, automatic claim extraction, automatic verified-knowledge promotion, persistent verified-knowledge writes, cognitive-memory writes, belief mutation, production exposure, v0.2 tags, and v0.2 releases remain disabled. AION-220 remains the formal Knowledge Intelligence evaluation and closeout task.
+
+Required flags remain: `v02_release_ready=false`, `v02_tag_created=false`, `v02_release_created=false`, `controlled_public_research_pilot_implemented=true`, `operator_invoked_public_https_fetch_available=true`, `system_dns_resolution_available=true`, `system_http_transport_available=true`, and `public_network_fetch_enabled=false`.

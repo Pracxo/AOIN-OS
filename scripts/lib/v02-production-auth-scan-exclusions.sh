@@ -112,6 +112,9 @@ aion151_is_scoped_authorization_path() {
       if aion215_is_scoped_knowledge_intelligence_tool_verification_path "$1"; then
         return 0
       fi
+      if aion219_is_scoped_knowledge_intelligence_public_research_pilot_path "$1"; then
+        return 0
+      fi
       return 1
       ;;
   esac
@@ -1804,6 +1807,7 @@ aion211_is_scoped_knowledge_intelligence_epistemic_assessment_path() {
     scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh|\
     scripts/knowledge-intelligence-epistemic-assessment-check.sh|\
     scripts/knowledge-intelligence-epistemic-assessment-no-go-regression.sh|\
+    scripts/knowledge-intelligence-epistemic-assessment-operator-evaluation-no-go-regression.sh|\
     scripts/knowledge-intelligence-epistemic-truth-authorization-check.sh|\
     scripts/knowledge-intelligence-epistemic-truth-authorization-no-go-regression.sh|\
     scripts/knowledge-intelligence-epistemic-truth-runtime-hold.sh|\
@@ -1986,6 +1990,102 @@ aion215_is_scoped_knowledge_intelligence_tool_verification_path() {
     services/brain-api/tests/test_knowledge_claim_graph_authorization_closeout.py|\
     services/brain-api/tests/test_knowledge_epistemic_assessment_evaluation_repository_integrity.py|\
     services/brain-api/tests/test_knowledge_domain_expert_mesh_evaluation_repository_integrity.py)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+aion219_is_scoped_knowledge_intelligence_public_research_pilot_path() {
+  # Scoped AION-219 controlled public research pilot artifacts. This allows the
+  # operator-invoked HTTPS pilot surface through inherited production-auth drift
+  # scanners while package files, migrations, API routes, workflows, and releases
+  # remain blocked by the caller and by the AION-219 gates.
+  case "$1" in
+    README.md|\
+    AGENTS.md|\
+    docs/adr/0183-controlled-operator-invoked-public-https-research-and-verified-candidate-pilot.md|\
+    docs/adr/README.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/project-status.md|\
+    docs/visual-brain.md|\
+    docs/knowledge-intelligence/aion-219-checklist.md|\
+    docs/knowledge-intelligence/architecture-roadmap.md|\
+    docs/knowledge-intelligence/authorization-ledger.json|\
+    docs/knowledge-intelligence/operator-model.md|\
+    docs/knowledge-intelligence/program-charter.md|\
+    docs/knowledge-intelligence/program-ledger.json|\
+    docs/knowledge-intelligence/public-research-pilot-*|\
+    docs/knowledge-intelligence/security-boundary.md|\
+    docs/release/knowledge-intelligence-public-research-pilot-*|\
+    docs/release/v02-release-readiness-delta.md|\
+    examples/knowledge-intelligence/public-research-*|\
+    examples/knowledge-intelligence/public-research-pilot-*|\
+    operator-console-static/README.md|\
+    operator-console-static/app.js|\
+    operator-console-static/index.html|\
+    operator-console-static/demo-data/knowledge-intelligence-public-research-pilot-*.json|\
+    scripts/knowledge-intelligence-claim-graph-authorization-check.sh|\
+    scripts/knowledge-intelligence-claim-graph-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-claim-graph-operator-evaluation-check.sh|\
+    scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-domain-expert-mesh-check.sh|\
+    scripts/knowledge-intelligence-domain-expert-mesh-no-go-regression.sh|\
+    scripts/knowledge-intelligence-domain-expert-mesh-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-epistemic-assessment-check.sh|\
+    scripts/knowledge-intelligence-epistemic-assessment-no-go-regression.sh|\
+    scripts/knowledge-intelligence-epistemic-truth-authorization-check.sh|\
+    scripts/knowledge-intelligence-epistemic-truth-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-integrated-research-agent-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-public-research-pilot-*.sh|\
+    scripts/knowledge-intelligence-public-research-pilot-run.py|\
+    scripts/knowledge-intelligence-research-authorization-check.sh|\
+    scripts/knowledge-intelligence-research-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-research-runtime-hold.sh|\
+    scripts/knowledge-intelligence-source-registry-authorization-check.sh|\
+    scripts/knowledge-intelligence-source-registry-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-source-registry-check.sh|\
+    scripts/knowledge-intelligence-source-registry-no-go-regression.sh|\
+    scripts/knowledge-intelligence-source-registry-operator-evaluation-check.sh|\
+    scripts/knowledge-intelligence-source-registry-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-tool-verification-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-verified-memory-operator-evaluation-no-go-regression.sh|\
+    scripts/lib/knowledge_intelligence_public_research_pilot_authorization.py|\
+    scripts/lib/knowledge_intelligence_tool_verification_authorization.py|\
+    scripts/lib/knowledge_intelligence_verified_knowledge_authorization.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    scripts/production-auth-identity-assertion-replay-no-go-regression.sh|\
+    scripts/production-auth-request-identity-no-go-regression.sh|\
+    scripts/production-auth-request-identity-stabilization-no-go-regression.sh|\
+    scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh|\
+    scripts/v02-identity-assertion-replay-protection-authorization-no-go-regression.sh|\
+    scripts/v02-offline-identity-assertion-verification-authorization-no-go-regression.sh|\
+    scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh|\
+    services/brain-api/src/aion_brain/contracts/knowledge_public_research_pilot.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/public_research_claims.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/public_research_dns.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/public_research_evidence.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/public_research_http_transport.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/public_research_integrity.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/public_research_pilot.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/public_research_policy.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/public_research_session.py|\
+    services/brain-api/tests/public_research_pilot_test_helpers.py|\
+    services/brain-api/tests/test_knowledge_claim_graph_authorization_validator.py|\
+    services/brain-api/tests/test_knowledge_domain_expert_mesh_evaluation_repository_integrity.py|\
+    services/brain-api/tests/test_knowledge_intelligence_aion218_delivery_reconciliation.py|\
+    services/brain-api/tests/test_knowledge_intelligence_current_projection.py|\
+    services/brain-api/tests/test_knowledge_intelligence_current_state_consistency.py|\
+    services/brain-api/tests/test_knowledge_public_research_*.py|\
+    services/brain-api/tests/test_knowledge_source_registry_authorization_closeout.py)
       return 0
       ;;
     *)

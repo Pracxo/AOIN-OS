@@ -105,3 +105,11 @@ AION-218 completed `AION-VKME-001` with PASS, closed `AION-216-KI-0007`, and cre
 ## AION-219 Controlled Public Research Pilot Authorization
 
 AION-219 is authorized to implement a bounded operator-invoked public HTTPS pilot under `operator-invoked-allowlisted-public-https-fetch-dns-pinning-integrated-research-verified-candidate-pilot-operator-review-abstention-core`. It must require explicit source URLs, explicit allowlisted domains, bounded DNS resolution, public-address validation, DNS pinning, certificate-verified TLS, peer-address verification, redirect revalidation, strict content limits, full lineage, operator review, and explicit abstention. It must not crawl in the background, use search providers, connectors, model providers, browsers, automatic claim extraction, automatic promotion, cognitive-memory writes, belief mutation, or persistent verified-knowledge writes.
+
+## AION-219 Current State
+
+AION-219 controlled public HTTPS research and verified-candidate pilot implemented. `AION-218-KI-0008` remains the sole active Knowledge Intelligence authorization for AION-219 and remains active, non-consumed, non-expired, and non-reusable pending AION-220.
+
+Flags: `controlled_public_research_pilot_implemented=true`, `operator_invoked_public_https_fetch_available=true`, `system_dns_resolution_available=true`, `system_http_transport_available=true`, `pilot_live_validation_completed=true`, `public_network_fetch_enabled=false`, `unrestricted_network_access_enabled=false`, `background_network_access_enabled=false`, `background_crawler_enabled=false`, `search_provider_integration_enabled=false`, `connector_integration_enabled=false`, `model_provider_integration_enabled=false`, `browser_automation_enabled=false`, `actual_tool_execution_enabled=false`, `automatic_verified_knowledge_promotion_enabled=false`, `persistent_verified_knowledge_write_enabled=false`, `cognitive_memory_write_enabled=false`, `belief_mutation_enabled=false`, and `production_exposure=false`.
+
+The pilot is not a crawler, search engine, browser, connector, model client, background service, or production runtime. Acquired content remains untrusted evidence. A verified candidate remains reviewable evidence and does not become automatic factual truth. AION-220 is the next task.

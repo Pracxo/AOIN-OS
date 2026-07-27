@@ -36,6 +36,10 @@ VERIFIED_KNOWLEDGE_IMPLEMENTED_PROGRAM_STATE = (
 PUBLIC_RESEARCH_PILOT_AUTHORIZED_PROGRAM_STATE = (
     "controlled_public_research_pilot_authorized_not_implemented"
 )
+PUBLIC_RESEARCH_PILOT_IMPLEMENTED_PROGRAM_STATE = (
+    "controlled_public_research_pilot_implemented_operator_invoked_"
+    "persistent_write_disabled_pending_closeout"
+)
 IMPLEMENTED_FABRIC_STATE = (
     "implemented_deterministic_simulation_verification_attestation_persistent_write_disabled"
 )
@@ -425,11 +429,15 @@ def validate_authorization_files(root: Path) -> None:
             VERIFIED_KNOWLEDGE_AUTHORIZED_PROGRAM_STATE,
             VERIFIED_KNOWLEDGE_IMPLEMENTED_PROGRAM_STATE,
             PUBLIC_RESEARCH_PILOT_AUTHORIZED_PROGRAM_STATE,
+            PUBLIC_RESEARCH_PILOT_IMPLEMENTED_PROGRAM_STATE,
         }:
             raise ValueError(f"{label} ledger program state mismatch")
         if payload.get("active_knowledge_implementation_authorization_count") != 1:
             raise ValueError(f"{label} active authorization count mismatch")
-        if payload.get("program_state") == PUBLIC_RESEARCH_PILOT_AUTHORIZED_PROGRAM_STATE:
+        if payload.get("program_state") in {
+            PUBLIC_RESEARCH_PILOT_AUTHORIZED_PROGRAM_STATE,
+            PUBLIC_RESEARCH_PILOT_IMPLEMENTED_PROGRAM_STATE,
+        }:
             if payload.get("active_knowledge_implementation_authorization") != "AION-218-KI-0008":
                 raise ValueError(f"{label} active public-pilot authorization mismatch")
             if payload.get("active_knowledge_implementation_task") != "AION-219":
@@ -462,6 +470,7 @@ def validate_authorization_files(root: Path) -> None:
             VERIFIED_KNOWLEDGE_AUTHORIZED_PROGRAM_STATE,
             VERIFIED_KNOWLEDGE_IMPLEMENTED_PROGRAM_STATE,
             PUBLIC_RESEARCH_PILOT_AUTHORIZED_PROGRAM_STATE,
+            PUBLIC_RESEARCH_PILOT_IMPLEMENTED_PROGRAM_STATE,
         }:
             if payload.get("tool_verification_fabric_implemented") is not True:
                 raise ValueError(f"{label} tool verification implementation missing")
@@ -491,7 +500,11 @@ def validate_authorization_files(root: Path) -> None:
         )
         and (
             active[0].get("authorization_transaction_id") != "AION-218-KI-0008"
-            or auth.get("program_state") != PUBLIC_RESEARCH_PILOT_AUTHORIZED_PROGRAM_STATE
+            or auth.get("program_state")
+            not in {
+                PUBLIC_RESEARCH_PILOT_AUTHORIZED_PROGRAM_STATE,
+                PUBLIC_RESEARCH_PILOT_IMPLEMENTED_PROGRAM_STATE,
+            }
         )
     ):
         raise ValueError("unexpected active Knowledge Intelligence authorization")
@@ -532,6 +545,7 @@ def validate_authorization_files(root: Path) -> None:
         VERIFIED_KNOWLEDGE_AUTHORIZED_PROGRAM_STATE,
         VERIFIED_KNOWLEDGE_IMPLEMENTED_PROGRAM_STATE,
         PUBLIC_RESEARCH_PILOT_AUTHORIZED_PROGRAM_STATE,
+        PUBLIC_RESEARCH_PILOT_IMPLEMENTED_PROGRAM_STATE,
     }:
         tool_record = tool_records[0]
         for key, expected in {
@@ -564,6 +578,7 @@ def validate_repository_state(root: Path) -> None:
         VERIFIED_KNOWLEDGE_AUTHORIZED_PROGRAM_STATE,
         VERIFIED_KNOWLEDGE_IMPLEMENTED_PROGRAM_STATE,
         PUBLIC_RESEARCH_PILOT_AUTHORIZED_PROGRAM_STATE,
+        PUBLIC_RESEARCH_PILOT_IMPLEMENTED_PROGRAM_STATE,
     }
     for relative in AION215_SOURCE_FILES:
         exists = (root / relative).exists()

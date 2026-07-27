@@ -10,9 +10,9 @@ tag or release exists.
 
 ## AION-218 Verified Knowledge Memory Operator Evaluation
 
-Current milestone: AION-218 verified-knowledge memory operator evaluation complete and controlled public-research pilot authorized.
+Current milestone: AION-218 verified-knowledge memory operator evaluation complete and AION-219 controlled public-research pilot implemented.
 
-Current stage: the deterministic verified-knowledge candidate memory and engagement-learning candidate plane is implemented and passed read-only operator evaluation. The controlled public-research pilot is authorized and not implemented.
+Current stage: the deterministic verified-knowledge candidate memory and engagement-learning candidate plane is implemented and passed read-only operator evaluation. The controlled public-research pilot is implemented, operator-invoked, and disabled by default outside explicit pilot construction.
 
 Required flags:
 
@@ -26,7 +26,7 @@ Required flags:
 - `engagement_signal_as_fact_enabled=false`
 - `engagement_confidence_effect_enabled=false`
 - `controlled_public_research_pilot_authorized=true`
-- `controlled_public_research_pilot_implemented=false`
+- `controlled_public_research_pilot_implemented=true`
 - `operator_invoked_public_https_fetch_authorized=true`
 - `operator_invoked_public_https_fetch_available=false`
 - `public_network_fetch_enabled=false`
@@ -40,7 +40,7 @@ Required flags:
 - `active_knowledge_implementation_task=AION-219`
 - `formal_closeout_task=AION-220`
 
-AION-217 candidates remain reviewable evidence and eligibility does not equal factual truth. AION-218 evaluated AION-217. AION-219 may implement bounded explicit-source HTTPS acquisition, remains operator-invoked, performs no background crawling, uses no search provider, connector, model provider, or browser, performs no automatic promotion, writes no cognitive memory, and persistent knowledge writes remain disabled. Public network fetching remains unavailable until AION-219 implementation. AION-220 is the final Knowledge Intelligence Program evaluation and closeout.
+AION-217 candidates remain reviewable evidence and eligibility does not equal factual truth. AION-218 evaluated AION-217. AION-219 implements bounded explicit-source HTTPS acquisition, remains operator-invoked, performs no background crawling, uses no search provider, connector, model provider, or browser, performs no automatic promotion, writes no cognitive memory, and persistent knowledge writes remain disabled. Public network fetching remains disabled by default outside explicit AION-219 pilot construction. AION-220 is the final Knowledge Intelligence Program evaluation and closeout.
 
 AION-209 compatibility marker retained for inherited closeout gates:
 `active_knowledge_implementation_task=AION-209` denotes the prior consumed
@@ -54,8 +54,9 @@ creates reviewable support and refutation candidates, but candidates remain
 reviewable evidence, eligibility does not equal factual truth, automatic
 promotion remains disabled, cognitive-memory writes remain disabled, engagement
 remains non-factual, engagement candidates cannot update policy automatically,
-persistent writes remain disabled, public-network research remains disabled,
-and AION-219 is the next task.
+persistent writes remain disabled, public-network research remains disabled by
+default outside explicit AION-219 pilot construction, and AION-220 is the next
+task.
 
 ## Completed Architecture
 
@@ -156,9 +157,11 @@ These lines preserve exact historical progression markers consumed by inherited
 release-contract tests. They are not the authoritative current state; they preserve historical self-improvement progression before the completed cognitive architecture and current AION-204 Knowledge Intelligence authorization.
 
 Historical marker: Current milestone: AION-160 actor-context trust-boundary remediation implemented.
+Historical marker: Current milestone: AION-162 offline Ed25519 identity assertion verification core implemented and post-merge verification corrected.
+Historical marker: Current authorization: AION-159-PA-0005 consumed by AION-160 when merged.
 Historical marker: Current authorization: AION-161-PA-0006 consumed by AION-162 when merged.
 Historical marker: Current authorization: AION-163-PA-0007 active for AION-164.
-Historical marker: AION-162 offline Ed25519 identity assertion verification core implemented and post-merge verification corrected.
+Historical marker: AION-164 is the next implementation task.
 Historical marker: AION-206 research acquisition operator evaluation complete; source registry authorization active.
 Historical marker: AION-204 Cognitive Architecture closeout reconciliation.
 Historical marker: source registry implemented with persistent writes disabled.
@@ -294,3 +297,11 @@ Current stage: The complete Knowledge Intelligence chain from controlled researc
 Required flags: `integrated_research_agent_operator_evaluation_passed=true`, `integrated_research_agent_operator_evaluation_id=AION-IRAE-001`, `research_runtime_enabled=false`, `source_registry_runtime_enabled=false`, `claim_graph_runtime_enabled=false`, `epistemic_truth_engine_runtime_enabled=false`, `domain_expert_mesh_runtime_enabled=false`, `tool_verification_fabric_runtime_enabled=false`, `actual_tool_execution_enabled=false`, `verified_knowledge_memory_authorized=true`, `verified_knowledge_memory_implemented=false`, `automatic_verified_knowledge_promotion_enabled=false`, `persistent_verified_knowledge_write_enabled=false`, `engagement_learning_candidate_plane_authorized=true`, `engagement_learning_candidate_plane_implemented=false`, `engagement_signal_as_fact_enabled=false`, `engagement_confidence_effect_enabled=false`, `cognitive_memory_write_enabled=false`, `belief_mutation_enabled=false`, `active_knowledge_implementation_authorization=AION-216-KI-0007`, `active_knowledge_implementation_task=AION-217`, `formal_closeout_task=AION-218`.
 
 The integrated research-agent chain passed evaluation. A knowledge candidate is still reviewable evidence. Candidate eligibility does not equal factual truth. User engagement is not factual evidence. Tool output is not factual knowledge. Automatic promotion, cognitive-memory writes, persistent writes, and public-network research remain disabled. AION-218 is the future candidate-memory evaluation and controlled public-research-pilot authorization task.
+
+## AION-219 Current State
+
+AION-219 controlled public HTTPS research and verified-candidate pilot implemented. `AION-218-KI-0008` remains the sole active Knowledge Intelligence authorization for AION-219 and remains active, non-consumed, non-expired, and non-reusable pending AION-220.
+
+Flags: `controlled_public_research_pilot_implemented=true`, `operator_invoked_public_https_fetch_available=true`, `system_dns_resolution_available=true`, `system_http_transport_available=true`, `pilot_live_validation_completed=true`, `public_network_fetch_enabled=false`, `unrestricted_network_access_enabled=false`, `background_network_access_enabled=false`, `background_crawler_enabled=false`, `search_provider_integration_enabled=false`, `connector_integration_enabled=false`, `model_provider_integration_enabled=false`, `browser_automation_enabled=false`, `actual_tool_execution_enabled=false`, `automatic_verified_knowledge_promotion_enabled=false`, `persistent_verified_knowledge_write_enabled=false`, `cognitive_memory_write_enabled=false`, `belief_mutation_enabled=false`, and `production_exposure=false`.
+
+The pilot is not a crawler, search engine, browser, connector, model client, background service, or production runtime. Acquired content remains untrusted evidence. A verified candidate remains reviewable evidence and does not become automatic factual truth. AION-220 is the next task.

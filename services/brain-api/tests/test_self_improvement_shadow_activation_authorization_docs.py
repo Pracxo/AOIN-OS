@@ -92,7 +92,8 @@ def test_project_status_reports_aion180_current_state() -> None:
     assert "`formal_closeout_task=AION-220`" in current
     assert "`verified_knowledge_memory_implemented=true`" in current
     assert "`controlled_public_research_pilot_authorized=true`" in current
-    assert "`controlled_public_research_pilot_implemented=false`" in current
+    assert "`controlled_public_research_pilot_implemented=true`" in current
+    assert "`public_network_fetch_enabled=false`" in current
     assert "AION-204 Cognitive Architecture closeout reconciliation" in historical
     assert "source registry implemented with persistent writes disabled" in historical
     assert "active self-improvement implementation authorization count is zero" in historical

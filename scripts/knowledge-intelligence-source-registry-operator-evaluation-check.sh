@@ -257,6 +257,11 @@ successor_program_states = {
         "AION-219",
         "AION-220",
     ),
+    "controlled_public_research_pilot_implemented_operator_invoked_persistent_write_disabled_pending_closeout": (
+        "AION-218-KI-0008",
+        "AION-219",
+        "AION-220",
+    ),
 }
 if program["program_state"] in successor_program_states:
     expected_auth, expected_task, expected_closeout = successor_program_states[

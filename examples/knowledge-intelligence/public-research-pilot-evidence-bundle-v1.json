@@ -1,0 +1,64 @@
+{
+  "automatic_promotions": 0,
+  "belief_mutations": 0,
+  "bundle_fingerprint": "3f9f89103d7e77c5ef50b12aafd708ec6e09300efb4a361e60c7b09fda6e5279",
+  "citation_fingerprints": [
+    "6aab944d8b96710d8a2db9debaf218b6676049d5c9a889a4ca45d1970fc21185"
+  ],
+  "cognitive_memory_writes": 0,
+  "dns_resolution_fingerprints": [
+    "3014f848d4a3e96406acca762ac5bfde22aa4ca3eb7ffb43179ba5cb65010c17",
+    "46f2e9f334569a1748a2384a15db633ef640af6d05030851335c05f788218f1f"
+  ],
+  "evidence_bundle_id": "public-research-evidence-bundle-0001",
+  "http_exchange_fingerprints": [
+    "42e3bf83019a4ac1ca9b00f8fac58de673a1266870a83591aecdb470c4b3b2bd",
+    "57540404c4e06c56876d715931243a2fdd063d49115754450da363e8a8de8f38"
+  ],
+  "incidents": [],
+  "operator_review_items": [
+    {
+      "approval_created": false,
+      "automatic_promotion_authorized": false,
+      "background_research_authorized": false,
+      "belief_mutation_authorized": false,
+      "browser_authorized": false,
+      "candidate_approval_authorized": false,
+      "candidate_eligibility_statuses": [
+        "eligible_for_operator_review"
+      ],
+      "candidate_ids": [
+        "public-research-candidate-0001"
+      ],
+      "candidate_is_not_factual_truth": true,
+      "cognitive_memory_write_authorized": false,
+      "connector_authorized": false,
+      "fingerprint": "a279dab2cdd4642293d791d7d46aef5b422a39198835c07051a72e17d9e91467",
+      "implementation_authorization_created": false,
+      "model_provider_authorized": false,
+      "operator_review_required": true,
+      "persistent_write_authorized": false,
+      "review_item_id": "public-research-operator-review-0001",
+      "search_provider_authorized": false
+    }
+  ],
+  "persistent_verified_knowledge_writes": 0,
+  "redacted": true,
+  "redirect_hop_fingerprints": [],
+  "robots_policy_fingerprints": [
+    "08ada81771ea6954614cfbed1fba6b735042605324b7054c7bf1024e6542f29f"
+  ],
+  "runtime_effect": false,
+  "schema_version": "aion-public-research-pilot-evidence/v1",
+  "source_bodies_persisted": 0,
+  "source_bodies_retained": 0,
+  "source_provenance_fingerprints": [
+    "ee5b706dc5d7af9c9a0379f47dbd8f3ed77496af0fc58c824dba48e3699625d4"
+  ],
+  "source_snapshot_fingerprints": [
+    "18ec01797de075b8d5a7069bb7865f3d37a80fa3fc189235da876d702e282599"
+  ],
+  "verified_candidate_fingerprints": [
+    "64b6dba239f85df497aeaf549eede2487f6fe9277790dfb53f9aa42424894853"
+  ]
+}

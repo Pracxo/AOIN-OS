@@ -21,6 +21,17 @@ def report() -> dict[str, object]:
 
 
 def test_repository_integrity_records_no_runtime_or_future_source() -> None:
+    program = load_json("docs/knowledge-intelligence/program-ledger.json")
+    public_pilot_implemented_state = (
+        "controlled_public_research_pilot_implemented_operator_invoked_"
+        "persistent_write_disabled_pending_closeout"
+    )
+    if program["program_state"] == public_pilot_implemented_state:
+        assert PUBLIC_PILOT_SOURCE.exists()
+        assert program["public_network_fetch_enabled"] is False
+        assert program["persistent_verified_knowledge_write_enabled"] is False
+        return
+
     integrity = report()["repository_integrity"]
     for key in (
         "runtime_source_changed",

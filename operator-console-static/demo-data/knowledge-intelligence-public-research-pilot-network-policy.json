@@ -1,22 +1,7 @@
 {
-  "authorization_transaction_id": "AION-218-KI-0008",
-  "browser_automation_enabled": false,
-  "connector_integration_enabled": false,
-  "dns_pinning_required": true,
-  "explicit_allowlist_required": true,
-  "https_only": true,
-  "methods": [
-    "GET",
-    "HEAD"
-  ],
-  "model_provider_integration_enabled": false,
-  "peer_address_verification_required": true,
   "read_only": true,
   "redacted": true,
-  "redirect_revalidation_required": true,
-  "runtime_effect": false,
-  "search_provider_integration_enabled": false,
-  "synthetic": true,
-  "tls_certificate_verification_required": true,
-  "view_id": "knowledge_intelligence_public_research_pilot_network_policy"
+  "allowlist_required": true,
+  "crawler_enabled": false,
+  "https_only": true
 }

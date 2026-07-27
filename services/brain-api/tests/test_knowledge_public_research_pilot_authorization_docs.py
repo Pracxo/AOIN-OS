@@ -14,10 +14,7 @@ def test_public_research_pilot_docs_examples_and_release_evidence_exist() -> Non
         "docs/knowledge-intelligence/public-research-pilot-tls-policy.md",
         "docs/knowledge-intelligence/public-research-pilot-redirect-policy.md",
         "docs/knowledge-intelligence/public-research-pilot-threat-model.md",
-        (
-            "docs/release/"
-            "knowledge-intelligence-public-research-pilot-authorization-transaction.md"
-        ),
+        ("docs/release/knowledge-intelligence-public-research-pilot-authorization-transaction.md"),
         "examples/knowledge-intelligence/public-research-pilot-authorization.json",
         "examples/knowledge-intelligence/public-research-pilot-runtime-hold.json",
         (

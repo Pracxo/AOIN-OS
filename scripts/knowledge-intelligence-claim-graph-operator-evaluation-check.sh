@@ -294,7 +294,10 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
             "verified_knowledge_memory_authorized_not_implemented",
             "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
         }
-        post_aion218 = program["program_state"] == "controlled_public_research_pilot_authorized_not_implemented"
+        post_aion218 = program["program_state"] in {
+            "controlled_public_research_pilot_authorized_not_implemented",
+            "controlled_public_research_pilot_implemented_operator_invoked_persistent_write_disabled_pending_closeout",
+        }
         post_aion214 = (
             program["program_state"]
             in {
@@ -369,6 +372,7 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
             "verified_knowledge_memory_authorized_not_implemented",
             "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
             "controlled_public_research_pilot_authorized_not_implemented",
+            "controlled_public_research_pilot_implemented_operator_invoked_persistent_write_disabled_pending_closeout",
         }
         assert program["active_knowledge_implementation_authorization"] == expected_active_auth
         assert program["active_knowledge_implementation_task"] == expected_active_task
@@ -396,6 +400,7 @@ def assert_ledgers() -> tuple[dict, dict, dict, dict]:
                     "verified_knowledge_memory_authorized_not_implemented",
                     "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
                     "controlled_public_research_pilot_authorized_not_implemented",
+                    "controlled_public_research_pilot_implemented_operator_invoked_persistent_write_disabled_pending_closeout",
                 }
             )
             if (

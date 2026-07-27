@@ -95,7 +95,15 @@ def test_aion_216_repository_boundary_has_no_runtime_changes() -> None:
         "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
     )
     final_authorized_state = "controlled_public_research_pilot_authorized_not_implemented"
-    if program["program_state"] in {implemented_state, final_authorized_state}:
+    public_pilot_implemented_state = (
+        "controlled_public_research_pilot_implemented_operator_invoked_"
+        "persistent_write_disabled_pending_closeout"
+    )
+    if program["program_state"] in {
+        implemented_state,
+        final_authorized_state,
+        public_pilot_implemented_state,
+    }:
         for relative in _load_validator().AION217_SOURCE_PATHS:
             assert (REPO_ROOT / relative).exists(), relative
         assert program["verified_knowledge_memory_implemented"] is True

@@ -14,15 +14,20 @@ def public_auth() -> dict[str, object]:
     return load_json("examples/knowledge-intelligence/public-research-pilot-authorization.json")
 
 
-def test_public_research_pilot_network_policy_disabled_before_implementation() -> None:
+def test_public_research_pilot_network_policy_stays_runtime_disabled() -> None:
     plan = load_json("examples/knowledge-intelligence/public-research-pilot-plan.json")
     network = load_json(
         "operator-console-static/demo-data/"
         "knowledge-intelligence-public-research-pilot-network-policy.json"
     )
-    assert plan["allowed_schemes"] == ["https"]
+    assert {
+        candidate["scheme"] for candidate in plan["explicit_source_candidates"]
+    } == {"https"}
     assert plan["allowed_methods"] == ["GET", "HEAD"]
-    assert network["explicit_allowlist_required"] is True
-    assert network["dns_pinning_required"] is True
+    assert network["allowlist_required"] is True
+    assert network["https_only"] is True
+    assert network["crawler_enabled"] is False
     assert public_auth()["public_network_fetch_enabled"] is False
-    assert public_auth()["operator_invoked_public_https_fetch_available"] is False
+    assert public_auth()["operator_invoked_public_https_fetch_available"] is True
+    assert public_auth()["system_dns_resolution_available"] is True
+    assert public_auth()["system_http_transport_available"] is True

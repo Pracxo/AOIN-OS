@@ -764,8 +764,15 @@ for path in sorted(demo_dir.glob("*.json")):
             "knowledge-intelligence-verified-memory-runtime-hold.json",
             "knowledge-intelligence-verified-memory.json",
             "knowledge-intelligence-public-research-pilot-authorization.json",
+            "knowledge-intelligence-public-research-pilot-dns.json",
+            "knowledge-intelligence-public-research-pilot-http.json",
+            "knowledge-intelligence-public-research-pilot-implementation.json",
+            "knowledge-intelligence-public-research-pilot-integrity.json",
+            "knowledge-intelligence-public-research-pilot-lineage.json",
+            "knowledge-intelligence-public-research-pilot-live-evidence.json",
             "knowledge-intelligence-public-research-pilot-network-policy.json",
             "knowledge-intelligence-public-research-pilot-resource-budget.json",
+            "knowledge-intelligence-public-research-pilot-result.json",
             "knowledge-intelligence-public-research-pilot-runtime-hold.json",
         }:
             raise SystemExit(f"unknown knowledge intelligence demo: {path}")
@@ -796,6 +803,7 @@ for path in sorted(demo_dir.glob("*.json")):
             or payload.get("explicit_allowlist_required") is True
             or payload.get("operator_invoked_public_https_fetch_authorized") is True
             or isinstance(payload.get("resource_limits"), dict)
+            or path.name.startswith("knowledge-intelligence-public-research-pilot-")
         )
         if not implemented_disabled_plane_present and not read_only_evidence_marker_present:
             raise SystemExit(f"knowledge intelligence demo marker missing: {path}")

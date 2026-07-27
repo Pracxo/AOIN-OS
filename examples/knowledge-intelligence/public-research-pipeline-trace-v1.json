@@ -1,0 +1,40 @@
+{
+  "assessment_fingerprints": [
+    "9f888c978acaeb675547a79851e60fd66ef095c6d345e722347284c616705970"
+  ],
+  "automatic_promotion": false,
+  "belief_mutated": false,
+  "candidate_memory_snapshot_fingerprint": "0ac6b2a6178e422924b1f704fd068f7386020e7743c6efc7ab69143054c2287c",
+  "claim_graph_integrity_fingerprint": "48af04562394ed8ade62e5ecbedb610d4b3058d4856db63a65ace989a5a13046",
+  "cognitive_memory_written": false,
+  "composed_planes": [
+    "controlled_research_acquisition",
+    "source_provenance_registry",
+    "temporal_claim_evidence_graph",
+    "epistemic_assessment",
+    "domain_expert_mesh",
+    "simulation_only_tool_verification",
+    "verified_knowledge_candidate_memory"
+  ],
+  "domain_mesh_session_fingerprints": [
+    "160662198585f5e04bb3e8baa3e56f8718edf2af6525653306d709ef05ca9de2"
+  ],
+  "operator_review_required": true,
+  "persistent_write_applied": false,
+  "research_acquisition_result_fingerprint": "177c4565fcfdc600fa5b77f6dd1efbeff512477aad4bc919955d3bf42edaea42",
+  "runtime_effect": false,
+  "schema_version": "aion-public-research-pipeline-trace/v1",
+  "source_body_purged": true,
+  "source_registry_integrity_fingerprint": "0d79d2234c674f191b572c2d65c10ee5565c93cfd778614f09d8242c34393c1c",
+  "synthesis_fingerprints": [
+    "469c3180396c490198862ef9fd8bdd361a596107d95e8c11484517b0b2f2efd9"
+  ],
+  "tool_verification_session_fingerprints": [
+    "aef95a576afed1888bebbb4a6e3c030c3ace35262ac9b1ebadf39d0866abdf08"
+  ],
+  "trace_fingerprint": "53f5872cce658611a6c92a45bd1ddb1c3bdcdfe3492a31dfa36846011bce38df",
+  "trace_id": "public-research-pipeline-trace-0001",
+  "verified_candidate_fingerprints": [
+    "64b6dba239f85df497aeaf549eede2487f6fe9277790dfb53f9aa42424894853"
+  ]
+}

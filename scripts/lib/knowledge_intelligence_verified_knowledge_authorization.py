@@ -9,7 +9,6 @@ from typing import Any
 from knowledge_intelligence_integrated_research_agent_operator_evaluation import (
     AUTHORIZED_CAPABILITIES,
     DECISION_PASS,
-    NEXT_AUTHORIZATION_ID,
     PROHIBITED_CAPABILITIES,
     VERIFIED_KNOWLEDGE_RESOURCE_LIMITS,
     validate_evaluation_report,
@@ -33,6 +32,10 @@ IMPLEMENTED_PROGRAM_STATE = (
     "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
 )
 FINAL_PROGRAM_STATE = "controlled_public_research_pilot_authorized_not_implemented"
+AION219_IMPLEMENTED_PROGRAM_STATE = (
+    "controlled_public_research_pilot_implemented_operator_invoked_"
+    "persistent_write_disabled_pending_closeout"
+)
 VERIFIED_KNOWLEDGE_MEMORY_STATE = (
     "implemented_deterministic_in_memory_candidate_versioning_engagement_learning_"
     "persistent_write_disabled"
@@ -86,13 +89,25 @@ def validate_authorization_payload(payload: dict[str, Any]) -> None:
         raise ValueError("resource limits mismatch")
 
 def is_implemented_state(payload: dict[str, Any]) -> bool:
-    return payload.get("program_state") in {IMPLEMENTED_PROGRAM_STATE, FINAL_PROGRAM_STATE}
+    return payload.get("program_state") in {
+        IMPLEMENTED_PROGRAM_STATE,
+        FINAL_PROGRAM_STATE,
+        AION219_IMPLEMENTED_PROGRAM_STATE,
+    }
 
 def is_final_public_pilot_state(payload: dict[str, Any]) -> bool:
-    return payload.get("program_state") == FINAL_PROGRAM_STATE
+    return payload.get("program_state") in {
+        FINAL_PROGRAM_STATE,
+        AION219_IMPLEMENTED_PROGRAM_STATE,
+    }
 
 def validate_implemented_state(label: str, payload: dict[str, Any]) -> None:
-    if payload.get("program_state") not in {PROGRAM_STATE, IMPLEMENTED_PROGRAM_STATE, FINAL_PROGRAM_STATE}:
+    if payload.get("program_state") not in {
+        PROGRAM_STATE,
+        IMPLEMENTED_PROGRAM_STATE,
+        FINAL_PROGRAM_STATE,
+        AION219_IMPLEMENTED_PROGRAM_STATE,
+    }:
         raise ValueError(f"{label} program state mismatch")
     if is_implemented_state(payload):
         expected = {

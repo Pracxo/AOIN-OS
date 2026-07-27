@@ -148,7 +148,8 @@ def test_project_status_describes_current_shadow_authorization_state() -> None:
     assert "`verified_knowledge_memory_implemented=true`" in current_text
     assert "`persistent_verified_knowledge_write_enabled=false`" in current_text
     assert "`controlled_public_research_pilot_authorized=true`" in current_text
-    assert "`controlled_public_research_pilot_implemented=false`" in current_text
+    assert "`controlled_public_research_pilot_implemented=true`" in current_text
+    assert "`public_network_fetch_enabled=false`" in current_text
     assert "AION-204 Cognitive Architecture closeout reconciliation" in historical_text
     assert "source registry implemented with persistent writes disabled" in historical_text
     assert "active self-improvement implementation authorization count is zero" in historical_text

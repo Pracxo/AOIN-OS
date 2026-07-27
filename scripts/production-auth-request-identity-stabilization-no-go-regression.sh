@@ -76,6 +76,9 @@ while IFS= read -r file; do
   if aion164_is_scoped_identity_assertion_replay_protection_path "$file"; then
     continue
   fi
+  if aion219_is_scoped_knowledge_intelligence_public_research_pilot_path "$file"; then
+    continue
+  fi
   case "$file" in
     package.json|package-lock.json|pnpm-lock.yaml|yarn.lock|bun.lockb|\
     */package.json|*/package-lock.json|*/pnpm-lock.yaml|*/yarn.lock|*/bun.lockb)

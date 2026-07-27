@@ -5,7 +5,8 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 PUBLIC_RESEARCH_PILOT_STATE = (
-    "controlled_public_research_pilot_authorized_not_implemented"
+    "controlled_public_research_pilot_implemented_operator_invoked_"
+    "persistent_write_disabled_pending_closeout"
 )
 
 
@@ -25,7 +26,10 @@ def test_current_state_matches_active_aion218_authorization_and_status() -> None
         assert ledger["formal_closeout_task"] == "AION-220"
         assert ledger["program_state"] == PUBLIC_RESEARCH_PILOT_STATE
         assert ledger["controlled_public_research_pilot_authorized"] is True
-        assert ledger["controlled_public_research_pilot_implemented"] is False
+        assert ledger["controlled_public_research_pilot_implemented"] is True
+        assert ledger["operator_invoked_public_https_fetch_available"] is True
+        assert ledger["system_dns_resolution_available"] is True
+        assert ledger["system_http_transport_available"] is True
         assert ledger["public_network_fetch_enabled"] is False
     status = (REPO_ROOT / "docs/project-status.md").read_text(encoding="utf-8")
     assert "AION-218 verified-knowledge memory operator evaluation complete" in status

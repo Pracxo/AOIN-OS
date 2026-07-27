@@ -23,4 +23,8 @@ def test_public_research_pilot_scope_and_identity_are_exact() -> None:
         "integrated-research-verified-candidate-pilot-operator-review-abstention-core"
     )
     assert auth["controlled_public_research_pilot_authorized"] is True
-    assert auth["controlled_public_research_pilot_implemented"] is False
+    assert auth["controlled_public_research_pilot_implemented"] is True
+    assert auth["controlled_public_research_pilot_state"] == (
+        "implemented_operator_invoked_bounded_public_https_integrated_pipeline_"
+        "persistent_write_disabled"
+    )

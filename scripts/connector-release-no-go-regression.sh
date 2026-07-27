@@ -46,6 +46,10 @@ filter_aion162_identity_assertion_scan_paths() {
   rg -v '^(services/brain-api/src/aion_brain/contracts/(identity_assertion|identity_assertion_replay)\.py|services/brain-api/src/aion_brain/production_auth/(identity_assertion|identity_assertion_evidence|identity_assertion_verifier|identity_assertion_pipeline|identity_assertion_replay|identity_assertion_replay_evidence|identity_assertion_replay_repository|identity_assertion_replay_service|trusted_public_keys|__init__)\.py):'
 }
 
+filter_aion219_public_research_scan_paths() {
+  rg -v '^(services/brain-api/src/aion_brain/contracts/knowledge_public_research_pilot\.py|services/brain-api/src/aion_brain/knowledge_intelligence/public_research_(claims|dns|evidence|http_transport|integrity|pilot|policy|session)\.py):'
+}
+
 release_docs=(
   docs/connectors/connector-release-gate.md
   docs/connectors/connector-safety-freeze.md
@@ -140,7 +144,8 @@ fi
 
 if rg -n 'requests\.(get|post|put|patch|delete)|httpx\.(get|post|put|patch|delete)|aiohttp\.ClientSession|urllib\.request|socket\.|dns\.resolver' \
   services/brain-api/src/aion_brain operator-console-static examples/connectors \
-  | filter_aion162_identity_assertion_scan_paths; then
+  | filter_aion162_identity_assertion_scan_paths \
+  | filter_aion219_public_research_scan_paths; then
   echo "connector release external call pattern found" >&2
   exit 1
 fi

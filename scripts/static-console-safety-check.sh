@@ -268,8 +268,11 @@ allowed_authorization_demo_names = {
     "knowledge-intelligence-tool-verification-runtime-hold.json",
     "knowledge-intelligence-verified-memory-evaluation.json",
     "knowledge-intelligence-public-research-pilot-authorization.json",
+    "knowledge-intelligence-public-research-pilot-integrity.json",
+    "knowledge-intelligence-public-research-pilot-live-evidence.json",
     "knowledge-intelligence-public-research-pilot-network-policy.json",
     "knowledge-intelligence-public-research-pilot-resource-budget.json",
+    "knowledge-intelligence-public-research-pilot-result.json",
     "knowledge-intelligence-public-research-pilot-runtime-hold.json",
 }
 aion161_allowed_policy_markers = {

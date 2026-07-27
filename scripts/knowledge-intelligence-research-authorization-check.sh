@@ -45,7 +45,8 @@ def main():
     assert t('docs/cognitive-architecture/aion-203-postmerge-verification.md').find(PARENT_DECISION) != -1
     pg = j('docs/knowledge-intelligence/program-ledger.json'); au = j('docs/knowledge-intelligence/authorization-ledger.json')
     assert pg['program_id'] == PROGRAM_ID
-    assert pg['program_state'] in {'research_plane_authorized_not_implemented', 'research_plane_implemented_disabled_pending_closeout', 'source_provenance_registry_authorized_not_implemented', 'source_provenance_registry_implemented_write_disabled_pending_closeout', 'temporal_claim_evidence_graph_authorized_not_implemented', 'temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout', 'epistemic_truth_engine_authorized_not_implemented', 'epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout', 'domain_expert_mesh_authorized_not_implemented', 'domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout', 'tool_verification_fabric_authorized_not_implemented', 'tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout', 'verified_knowledge_memory_authorized_not_implemented', 'verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout', 'controlled_public_research_pilot_authorized_not_implemented'}
+    aion219_implemented_state = 'controlled_public_research_pilot_implemented_operator_invoked_persistent_write_disabled_pending_closeout'
+    assert pg['program_state'] in {'research_plane_authorized_not_implemented', 'research_plane_implemented_disabled_pending_closeout', 'source_provenance_registry_authorized_not_implemented', 'source_provenance_registry_implemented_write_disabled_pending_closeout', 'temporal_claim_evidence_graph_authorized_not_implemented', 'temporal_claim_evidence_graph_implemented_write_disabled_pending_closeout', 'epistemic_truth_engine_authorized_not_implemented', 'epistemic_truth_engine_implemented_persistent_write_disabled_pending_closeout', 'domain_expert_mesh_authorized_not_implemented', 'domain_expert_mesh_implemented_persistent_write_disabled_pending_closeout', 'tool_verification_fabric_authorized_not_implemented', 'tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout', 'verified_knowledge_memory_authorized_not_implemented', 'verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout', 'controlled_public_research_pilot_authorized_not_implemented', aion219_implemented_state}
     assert pg['active_knowledge_implementation_authorization_count'] == 1
     assert pg['research_plane_implemented'] in {False, True}
     for k in ['research_runtime_enabled','network_access_enabled','knowledge_promotion_enabled','verified_knowledge_memory_enabled','automatic_belief_creation_enabled','background_crawler_enabled','production_exposure','model_weight_training_enabled']: assert pg[k] is False, k
@@ -80,7 +81,7 @@ def main():
         assert closed['authorization_expired'] is True
         assert closed['authorization_reusable'] is False
         assert closed['authorization_consumed_by_prs'] == [116, 117]
-    elif pg['program_state'] == 'controlled_public_research_pilot_authorized_not_implemented':
+    elif pg['program_state'] in {'controlled_public_research_pilot_authorized_not_implemented', aion219_implemented_state}:
         assert pg['active_knowledge_implementation_authorization'] == 'AION-218-KI-0008'
         assert pg['active_knowledge_implementation_task'] == 'AION-219' and pg['formal_closeout_task'] == 'AION-220'
         assert pg['domain_expert_mesh_implemented'] is True
@@ -93,6 +94,13 @@ def main():
         assert pg['verified_knowledge_memory_authorized'] is True
         assert pg['verified_knowledge_memory_implemented'] is True
         assert pg['persistent_verified_knowledge_write_enabled'] is False
+        assert pg['controlled_public_research_pilot_authorized'] is True
+        assert pg['controlled_public_research_pilot_implemented'] is (pg['program_state'] == aion219_implemented_state)
+        if pg['program_state'] == aion219_implemented_state:
+            assert pg['operator_invoked_public_https_fetch_available'] is True
+            assert pg['system_dns_resolution_available'] is True
+            assert pg['system_http_transport_available'] is True
+        assert pg['public_network_fetch_enabled'] is False
         assert pg['source_provenance_registry_implemented'] is True
         assert pg['source_provenance_registry_state'] == 'implemented_append_only_in_memory_replay_persistent_write_disabled'
         assert pg['source_registry_runtime_enabled'] is False
