@@ -3123,3 +3123,5 @@
     document.getElementById("connection-status").textContent = message;
   }
 }());
+
+window.AION219_PUBLIC_RESEARCH_PILOT_DEMO_FILES = ["knowledge-intelligence-public-research-pilot-implementation.json", "knowledge-intelligence-public-research-pilot-dns.json", "knowledge-intelligence-public-research-pilot-http.json", "knowledge-intelligence-public-research-pilot-lineage.json", "knowledge-intelligence-public-research-pilot-result.json", "knowledge-intelligence-public-research-pilot-integrity.json", "knowledge-intelligence-public-research-pilot-live-evidence.json", "knowledge-intelligence-public-research-pilot-runtime-hold.json"];

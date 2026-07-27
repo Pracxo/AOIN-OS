@@ -79,6 +79,21 @@ TOOL_VERIFICATION_IMPLEMENTED_STATE = (
 AION217_IMPLEMENTED_PROGRAM_STATE = (
     "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
 )
+AION219_IMPLEMENTED_PROGRAM_STATE = (
+    "controlled_public_research_pilot_implemented_operator_invoked_"
+    "persistent_write_disabled_pending_closeout"
+)
+AION219_ALLOWED_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_public_research_pilot.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_dns.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_http_transport.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_policy.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_claims.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_pilot.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_session.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_integrity.py",
+}
 PROGRAM_PATH = ROOT / "docs/knowledge-intelligence/program-ledger.json"
 PROGRAM_STATE = (
     json.loads(PROGRAM_PATH.read_text()).get("program_state", "")
@@ -157,9 +172,18 @@ for parts in changed_entries():
         normalized = path.replace("\\", "/")
         if Path(normalized).name in PROHIBITED_NAMES:
             raise SystemExit(f"dependency/package file changed: {normalized}")
-        if PROGRAM_STATE == TOOL_VERIFICATION_IMPLEMENTED_STATE and normalized in AION215_ALLOWED_SOURCE:
+        if PROGRAM_STATE in {
+            TOOL_VERIFICATION_IMPLEMENTED_STATE,
+            AION217_IMPLEMENTED_PROGRAM_STATE,
+            AION219_IMPLEMENTED_PROGRAM_STATE,
+        } and normalized in AION215_ALLOWED_SOURCE:
             continue
-        if PROGRAM_STATE == AION217_IMPLEMENTED_PROGRAM_STATE and normalized in AION217_ALLOWED_SOURCE:
+        if PROGRAM_STATE in {
+            AION217_IMPLEMENTED_PROGRAM_STATE,
+            AION219_IMPLEMENTED_PROGRAM_STATE,
+        } and normalized in AION217_ALLOWED_SOURCE:
+            continue
+        if normalized in AION219_ALLOWED_SOURCE:
             continue
         if normalized not in ALLOWED_EXACT and normalized.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")

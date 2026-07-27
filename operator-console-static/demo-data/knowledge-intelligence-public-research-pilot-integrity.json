@@ -1,0 +1,299 @@
+{
+  "read_only": true,
+  "finding_count": 41,
+  "findings": [
+    {
+      "finding_id": "public-research-integrity-0001",
+      "fingerprint": "ce40ea5ea27be6b91b3696c3a8ff19c6048e9aca78f3bf7ef410fd51ab886fc8",
+      "passed": true,
+      "reason_code": "authorization_exact",
+      "redacted_summary": "authorization_exact=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0002",
+      "fingerprint": "b6634e04abe799272f6eaa9ee78121a7c1704d098c93babc97cb681f1d2fb5e8",
+      "passed": true,
+      "reason_code": "invocation_envelope_valid",
+      "redacted_summary": "invocation_envelope_valid=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0003",
+      "fingerprint": "3de91ef2f486699ad080713e1f88f961bc81d44e0fdc16a7b4d6dcc3757c0416",
+      "passed": true,
+      "reason_code": "plan_valid",
+      "redacted_summary": "plan_valid=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0004",
+      "fingerprint": "357742762c5a44dbb79d493eb9f432d5ff4d49409fc6b566e1c31ceab26540d7",
+      "passed": true,
+      "reason_code": "source_candidates_explicit",
+      "redacted_summary": "source_candidates_explicit=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0005",
+      "fingerprint": "acd28d1c6a986ac86f3622eeaee1e67f5686affd5594779f2883f8324c114f78",
+      "passed": true,
+      "reason_code": "allowlist_exact",
+      "redacted_summary": "allowlist_exact=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0006",
+      "fingerprint": "0540a9c8dc7645ae135bb2aa95342094cc333e48a9d6d372ec811f8b5a07dcd9",
+      "passed": true,
+      "reason_code": "claim_specifications_explicit",
+      "redacted_summary": "claim_specifications_explicit=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0007",
+      "fingerprint": "6615650143a4de5fba2fc16392b0e8580f58f84684a9bec39a9748914fbe57a7",
+      "passed": true,
+      "reason_code": "dns_resolutions_valid",
+      "redacted_summary": "dns_resolutions_valid=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0008",
+      "fingerprint": "b2fe6184a36efa45ec31c23f037d46c8ebf29513b44db2e4ea6f2658513d6937",
+      "passed": true,
+      "reason_code": "every_address_public",
+      "redacted_summary": "every_address_public=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0009",
+      "fingerprint": "7920978a4726e745e488c97fc73de6bf0bdd060c4809893549e0b3647b079765",
+      "passed": true,
+      "reason_code": "dns_pinning_used",
+      "redacted_summary": "dns_pinning_used=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0010",
+      "fingerprint": "87acf108e6c2cae616b58bba68ef2c97b1717badf6e95e605b0cec9a11427b50",
+      "passed": true,
+      "reason_code": "peer_address_verified",
+      "redacted_summary": "peer_address_verified=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0011",
+      "fingerprint": "d85fa61b89a94d88f2acdaacb48fa1f15c8c63040faddf2a79896a0d4d972fa9",
+      "passed": true,
+      "reason_code": "tls_certificate_verified",
+      "redacted_summary": "tls_certificate_verified=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0012",
+      "fingerprint": "30b5057bc54e8e9161ba92caa51a7e83ce0ba57a593e1ae30aec0ca9dc3dbfec",
+      "passed": true,
+      "reason_code": "hostname_verified",
+      "redacted_summary": "hostname_verified=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0013",
+      "fingerprint": "0d2d5347198dcca74931a9435d7c058379f5cb56e386a9802fc13aabbd36acef",
+      "passed": true,
+      "reason_code": "tls_minimum_enforced",
+      "redacted_summary": "tls_minimum_enforced=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0014",
+      "fingerprint": "08d4db54974c63bbfb66f6bb6158244ee21d790060f4d0932f8e40635cbe4653",
+      "passed": true,
+      "reason_code": "proxy_inheritance_absent",
+      "redacted_summary": "proxy_inheritance_absent=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0015",
+      "fingerprint": "2bd207862819596f3e8d5f9f7f54b99322217a33b8e5ae8d4957b224673b70cb",
+      "passed": true,
+      "reason_code": "methods_read_only",
+      "redacted_summary": "methods_read_only=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0016",
+      "fingerprint": "b80f1dfd667679dbcbf107c77a78a89850c5a44005903d1864757d01e4dd06ad",
+      "passed": true,
+      "reason_code": "redirects_revalidated",
+      "redacted_summary": "redirects_revalidated=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0017",
+      "fingerprint": "6883bf24a26645619e9afa582d3b37b9d157c81b9b985c9d56275762f17a20ee",
+      "passed": true,
+      "reason_code": "request_headers_fixed",
+      "redacted_summary": "request_headers_fixed=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0018",
+      "fingerprint": "860d1163b59d2ef50041c4e72b0ac69cc1de38c1cfc60c9be16604b21a50195f",
+      "passed": true,
+      "reason_code": "response_limits_enforced",
+      "redacted_summary": "response_limits_enforced=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0019",
+      "fingerprint": "042aa1e5bf131dde3e1a618fbbb1531df7f5c81d3e3078a090f95d6f05d140fb",
+      "passed": true,
+      "reason_code": "compression_absent",
+      "redacted_summary": "compression_absent=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0020",
+      "fingerprint": "aa59dc832071f8f5223a75cc5b9ec63a4eb3cf6e18210d3429d67205b124310c",
+      "passed": true,
+      "reason_code": "content_type_allowed",
+      "redacted_summary": "content_type_allowed=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0021",
+      "fingerprint": "228a4ef25520a683ac9c09c90ea22d94285e3c1f895f39281fbcc0f6b97e2090",
+      "passed": true,
+      "reason_code": "character_encoding_allowed",
+      "redacted_summary": "character_encoding_allowed=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0022",
+      "fingerprint": "b43a66b964ba538b96185aa5bb94d4cdff6efe70c31e67c8345dad2c7ef5ed89",
+      "passed": true,
+      "reason_code": "robots_policy_passed",
+      "redacted_summary": "robots_policy_passed=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0023",
+      "fingerprint": "33719a48c8d99da0e08f94778f07de993545137768a751c74fbccd9c52fe0bdf",
+      "passed": true,
+      "reason_code": "licence_policy_passed",
+      "redacted_summary": "licence_policy_passed=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0024",
+      "fingerprint": "fd2e090cfc275e0beb17e480a100004eecbd27cc80b60dd579b5f892b3e94d83",
+      "passed": true,
+      "reason_code": "source_bodies_purged",
+      "redacted_summary": "source_bodies_purged=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0025",
+      "fingerprint": "a0daab0e75f55c30386f1c0cbe166c87488e311b2df149e3a964531121a4469e",
+      "passed": true,
+      "reason_code": "source_snapshots_resolve",
+      "redacted_summary": "source_snapshots_resolve=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0026",
+      "fingerprint": "c94645a3563fdf80436b4e08cc7968c36161decafeb7b127070fa1551b28a7d5",
+      "passed": true,
+      "reason_code": "provenance_resolves",
+      "redacted_summary": "provenance_resolves=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0027",
+      "fingerprint": "7de98c6739c566f87776f4270a00cf330c1b20cdaef33143e2793b78ea51be89",
+      "passed": true,
+      "reason_code": "citations_resolve",
+      "redacted_summary": "citations_resolve=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0028",
+      "fingerprint": "63d381ae2dca34adc06bba886462d4474c10c13051410a635d131065e9ee4053",
+      "passed": true,
+      "reason_code": "source_independence_preserved",
+      "redacted_summary": "source_independence_preserved=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0029",
+      "fingerprint": "df1f92a3b6fa39d49734ddbd162d185a1656178c70f3b1a618a742e28afad9a7",
+      "passed": true,
+      "reason_code": "claim_references_resolve",
+      "redacted_summary": "claim_references_resolve=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0030",
+      "fingerprint": "9e8bbd038c846e4a5c89fc44f73919ea26a960b6a9b3d557efb2a1a7e0a9b1b2",
+      "passed": true,
+      "reason_code": "assessment_references_resolve",
+      "redacted_summary": "assessment_references_resolve=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0031",
+      "fingerprint": "0ba3125c4d0ccbf8ddd0ab43636bf9f9551ea7d1e9244da4d8033962d6faa585",
+      "passed": true,
+      "reason_code": "domain_mesh_references_resolve",
+      "redacted_summary": "domain_mesh_references_resolve=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0032",
+      "fingerprint": "eac6f5492895e7d86e35eacd46cdc4f9fab9b31b0f0e26eddf2bf9e9ed50976c",
+      "passed": true,
+      "reason_code": "tool_verification_references_resolve",
+      "redacted_summary": "tool_verification_references_resolve=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0033",
+      "fingerprint": "7a101331e4d80ce8bd4a34c3382af7b734feb6bdac18e3f1f1121304b3f6b1eb",
+      "passed": true,
+      "reason_code": "candidate_lineage_complete",
+      "redacted_summary": "candidate_lineage_complete=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0034",
+      "fingerprint": "fdef812ef381c0bc45a82f4078f6c34fee24d480c3a5a8917a235f58b2f6e084",
+      "passed": true,
+      "reason_code": "candidate_confidence_non_amplified",
+      "redacted_summary": "candidate_confidence_non_amplified=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0035",
+      "fingerprint": "1036060858b353a4a3d1dfda21348db59ff719461a5532d957a2c595f0b403b1",
+      "passed": true,
+      "reason_code": "operator_review_required",
+      "redacted_summary": "operator_review_required=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0036",
+      "fingerprint": "907d315d9a2e27e05252825aad65eb0deb92325a4b38655a57ba83568dd4ce2d",
+      "passed": true,
+      "reason_code": "automatic_promotion_false",
+      "redacted_summary": "automatic_promotion_false=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0037",
+      "fingerprint": "320096ea78684a544adb8acb4dcaa8cdebc000eeaf13259cc33ab028b2d45ae2",
+      "passed": true,
+      "reason_code": "persistent_write_false",
+      "redacted_summary": "persistent_write_false=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0038",
+      "fingerprint": "769f45b9fe2e22940c8074505cc5a3c566147050e9ace5ed6548ccc044d5dc9c",
+      "passed": true,
+      "reason_code": "cognitive_memory_write_false",
+      "redacted_summary": "cognitive_memory_write_false=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0039",
+      "fingerprint": "952679d8061f7ace60d9ab9d7ec19a46e449c998054bb5ca10dbc449b222ecbc",
+      "passed": true,
+      "reason_code": "belief_mutation_false",
+      "redacted_summary": "belief_mutation_false=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0040",
+      "fingerprint": "0aa44f7f1e65a1f6a28347b64597386f9de27ef73aa89caba259bd7360ac2773",
+      "passed": true,
+      "reason_code": "background_execution_false",
+      "redacted_summary": "background_execution_false=passed"
+    },
+    {
+      "finding_id": "public-research-integrity-0041",
+      "fingerprint": "57a1fd3b23ed9470586afed552442447489603d8996c5647d1fd4e22ceea6087",
+      "passed": true,
+      "reason_code": "production_exposure_false",
+      "redacted_summary": "production_exposure_false=passed"
+    }
+  ],
+  "passed": true,
+  "redacted": true,
+  "report_fingerprint": "9c654eec7c08abec49249a1d7adb18b4e1ea4c28d5bacf0a4e226a8d000b0277",
+  "report_id": "public-research-integrity-report-0001",
+  "runtime_effect": false,
+  "schema_version": "aion-public-research-pilot-integrity/v1"
+}

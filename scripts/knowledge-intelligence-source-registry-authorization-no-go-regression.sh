@@ -33,6 +33,10 @@ TOOL_VERIFICATION_IMPLEMENTED_STATE = (
 AION217_IMPLEMENTED_STATE = (
     "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
 )
+AION219_IMPLEMENTED_STATE = (
+    "controlled_public_research_pilot_implemented_operator_invoked_"
+    "persistent_write_disabled_pending_closeout"
+)
 
 AION207_SOURCE = {
     "services/brain-api/src/aion_brain/contracts/knowledge_source_registry.py",
@@ -99,6 +103,18 @@ AION217_SOURCE = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_revalidation.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_versioning.py",
 }
+AION219_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_public_research_pilot.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_claims.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_dns.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_http_transport.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_pilot.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_policy.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_session.py",
+}
 PROHIBITED_SOURCE = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_runtime.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/source_registry_service.py",
@@ -155,6 +171,7 @@ CLAIM_GRAPH_CONTEXT = (
                 TOOL_VERIFICATION_IMPLEMENTED_STATE,
                 "verified_knowledge_memory_authorized_not_implemented",
                 AION217_IMPLEMENTED_STATE,
+                AION219_IMPLEMENTED_STATE,
             }
     or os.environ.get("AION_CLAIM_GRAPH_IMPLEMENTATION_CONTEXT") == "1"
     or os.environ.get("AION_AGGREGATE_GATE_RUNNING") == "1"
@@ -270,6 +287,8 @@ for parts in changed_entries():
         if program_state in {TOOL_VERIFICATION_IMPLEMENTED_STATE, "verified_knowledge_memory_authorized_not_implemented", AION217_IMPLEMENTED_STATE} and normalized in AION215_SOURCE:
             continue
         if program_state == AION217_IMPLEMENTED_STATE and normalized in AION217_SOURCE:
+            continue
+        if program_state == AION219_IMPLEMENTED_STATE and normalized in AION219_SOURCE:
             continue
         if normalized.startswith("services/brain-api/src/aion_brain/") and normalized not in AION207_SOURCE:
             raise SystemExit(f"path outside exact AION-207 source scope: {normalized}")

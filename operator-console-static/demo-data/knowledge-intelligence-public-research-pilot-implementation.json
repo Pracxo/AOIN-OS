@@ -1,0 +1,8 @@
+{
+  "read_only": true,
+  "redacted": true,
+  "implemented": true,
+  "runtime_effect": false,
+  "state": "implemented_operator_invoked_bounded_public_https_integrated_pipeline_persistent_write_disabled",
+  "task_id": "AION-219"
+}

@@ -51,6 +51,10 @@ VERIFIED_KNOWLEDGE_IMPLEMENTED_STATE = (
 PUBLIC_RESEARCH_PILOT_AUTHORIZED_STATE = (
     "controlled_public_research_pilot_authorized_not_implemented"
 )
+PUBLIC_RESEARCH_PILOT_IMPLEMENTED_STATE = (
+    "controlled_public_research_pilot_implemented_operator_invoked_"
+    "persistent_write_disabled_pending_closeout"
+)
 CURRENT_PROGRAM_STATE = ""
 if PROGRAM_PATH.exists():
     try:
@@ -68,6 +72,7 @@ if PROGRAM_PATH.exists():
                 VERIFIED_KNOWLEDGE_AUTHORIZED_STATE,
                 VERIFIED_KNOWLEDGE_IMPLEMENTED_STATE,
                 PUBLIC_RESEARCH_PILOT_AUTHORIZED_STATE,
+                PUBLIC_RESEARCH_PILOT_IMPLEMENTED_STATE,
             }
         )
     except json.JSONDecodeError:
@@ -284,6 +289,18 @@ AION217_ALLOWED_EXACT = {
     "services/brain-api/tests/test_self_improvement_shadow_activation_evaluation_repository_integrity.py",
     "services/brain-api/tests/test_self_improvement_shadow_activation_scope_spec.py",
 }
+AION219_ALLOWED_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_public_research_pilot.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_dns.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_http_transport.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_policy.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_claims.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_pilot.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_session.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_integrity.py",
+    "services/brain-api/tests/public_research_pilot_test_helpers.py",
+}
 AION214_ALLOWED_PREFIXES = (
     "docs/knowledge-intelligence/domain-expert-mesh-operator-evaluation",
     "docs/knowledge-intelligence/domain-expert-mesh-evaluation",
@@ -413,13 +430,20 @@ def path_allowed(path: str) -> bool:
         and normalized in AION215_ALLOWED_SOURCE
     ):
         return True
-    if CURRENT_PROGRAM_STATE == VERIFIED_KNOWLEDGE_IMPLEMENTED_STATE and (
+    if CURRENT_PROGRAM_STATE in {
+        VERIFIED_KNOWLEDGE_IMPLEMENTED_STATE,
+        PUBLIC_RESEARCH_PILOT_IMPLEMENTED_STATE,
+    } and (
         normalized in AION217_ALLOWED_EXACT or normalized in AION217_ALLOWED_SOURCE
     ):
+        return True
+    if normalized in AION219_ALLOWED_SOURCE:
         return True
     if CURRENT_PROGRAM_STATE in {
         VERIFIED_KNOWLEDGE_AUTHORIZED_STATE,
         VERIFIED_KNOWLEDGE_IMPLEMENTED_STATE,
+        PUBLIC_RESEARCH_PILOT_AUTHORIZED_STATE,
+        PUBLIC_RESEARCH_PILOT_IMPLEMENTED_STATE,
     } and (
         normalized in AION216_ALLOWED_EXACT
         or any(normalized.startswith(prefix) for prefix in AION216_ALLOWED_PREFIXES)

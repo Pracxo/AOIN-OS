@@ -41,6 +41,10 @@ TOOL_VERIFICATION_IMPLEMENTED_STATE = (
 VERIFIED_KNOWLEDGE_IMPLEMENTED_STATE = (
     "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
 )
+PUBLIC_RESEARCH_PILOT_IMPLEMENTED_STATE = (
+    "controlled_public_research_pilot_implemented_operator_invoked_"
+    "persistent_write_disabled_pending_closeout"
+)
 ALLOWED_PREFIXES = ("docs/", "examples/", "operator-console-static/", "scripts/", "services/brain-api/tests/")
 ALLOWED_EXACT = {
     "README.md",
@@ -133,6 +137,18 @@ AION217_SOURCE = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_revalidation.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_versioning.py",
 }
+AION219_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_public_research_pilot.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_claims.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_dns.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_http_transport.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_pilot.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_policy.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_session.py",
+}
 PROHIBITED_PREFIXES = (
     ".github/workflows/",
     "services/brain-api/src/aion_brain/",
@@ -207,6 +223,8 @@ for parts in entries:
         if program_state in {TOOL_VERIFICATION_IMPLEMENTED_STATE, VERIFIED_KNOWLEDGE_IMPLEMENTED_STATE} and normalized in AION215_SOURCE:
             continue
         if program_state == VERIFIED_KNOWLEDGE_IMPLEMENTED_STATE and normalized in AION217_SOURCE:
+            continue
+        if program_state == PUBLIC_RESEARCH_PILOT_IMPLEMENTED_STATE and normalized in AION219_SOURCE:
             continue
         if normalized.startswith(PROHIBITED_PREFIXES) and normalized not in ALLOWED_EXACT:
             raise SystemExit(f"runtime/source/workflow path changed on AION-206: {normalized}")

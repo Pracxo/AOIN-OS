@@ -1,11 +1,21 @@
-# Public Research Pilot Resource Budgets
+# AION-219 Controlled Public Research Pilot Implementation
 
-AION-218 records `AION-VKME-001` as a deterministic, synthetic, read-only PASS evaluation of AION-217. The evaluation closes `AION-216-KI-0007` as consumed by AION-217 and creates `AION-218-KI-0008` only for future AION-219 implementation.
+AION-219 implements the AION-218-KI-0008 controlled operator-invoked public HTTPS research pilot. The pilot accepts explicit research plans, explicit HTTPS source candidates, exact domain allowlists, and explicit claim specifications.
 
-Authorized scope: `operator-invoked-allowlisted-public-https-fetch-dns-pinning-integrated-research-verified-candidate-pilot-operator-review-abstention-core`.
+Implemented controls:
 
-AION-219 is authorized to build a controlled operator-invoked public HTTPS pilot with explicit source candidates, explicit allowlisted domains, explicit claim specifications, bounded DNS resolution, public address validation, DNS pinning, certificate-verified TLS, peer-address verification, redirect revalidation, strict content limits, full Knowledge Intelligence lineage, operator review, and explicit abstention.
+- public DNS resolution through explicit backends with disabled defaults
+- public-address validation, DNS pinning, DNS rebinding defence, and peer verification
+- pinned HTTPS transport with certificate verification, hostname verification, SNI, TLS 1.2 minimum, and no proxy inheritance
+- fixed GET and HEAD request headers with `Accept-Encoding: identity`
+- manual redirect handling with destination revalidation and loop/downgrade rejection
+- robots and X-Robots policy validation
+- licence and source-class policy validation
+- prompt-injection markers treated as untrusted source data
+- source-body bytes purged from returned records after redacted fingerprints and evidence metadata are built
+- full Knowledge Intelligence lineage trace across acquisition, source registry, claim graph, assessment, domain mesh, simulation-only tool verification, and verified-candidate memory
+- operator review required for every candidate
 
-The authorization is not an implementation. Public network fetching remains unavailable until AION-219 creates and validates the scoped source. The current repository contains no AION-219 source, no DNS resolver, no network transport, no search provider, no connector, no model provider, no browser runtime, no actual tool execution, no automatic claim extraction, no automatic promotion, no cognitive-memory write, no belief mutation, and no persistent verified-knowledge write.
+Runtime boundary: `runtime_effect=false`, `public_network_fetch_enabled=false`, `background_network_access_enabled=false`, `background_crawler_enabled=false`, `search_provider_integration_enabled=false`, `connector_integration_enabled=false`, `model_provider_integration_enabled=false`, `browser_automation_enabled=false`, `automatic_verified_knowledge_promotion_enabled=false`, `persistent_verified_knowledge_write_enabled=false`, `cognitive_memory_write_enabled=false`, `belief_mutation_enabled=false`, and `production_exposure=false`.
 
-Resource anchor: `maximum_public_https_requests_per_plan=50`, `maximum_dns_resolutions_per_plan=100`, `maximum_persistent_verified_knowledge_writes=0`, `maximum_automatic_knowledge_promotions=0`, and `maximum_cognitive_memory_writes=0`.
+AION-218-KI-0008 remains active, non-consumed, non-expired, and non-reusable pending AION-220 formal evaluation and closeout.

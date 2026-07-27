@@ -90,6 +90,7 @@ assert program["program_state"] in {
     "verified_knowledge_memory_authorized_not_implemented",
     "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
     "controlled_public_research_pilot_authorized_not_implemented",
+    "controlled_public_research_pilot_implemented_operator_invoked_persistent_write_disabled_pending_closeout",
 }
 if program["program_state"] in {
     "temporal_claim_evidence_graph_authorized_not_implemented",
@@ -103,8 +104,12 @@ if program["program_state"] in {
     "verified_knowledge_memory_authorized_not_implemented",
     "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
     "controlled_public_research_pilot_authorized_not_implemented",
+    "controlled_public_research_pilot_implemented_operator_invoked_persistent_write_disabled_pending_closeout",
 }:
-    if program["program_state"] == "controlled_public_research_pilot_authorized_not_implemented":
+    if program["program_state"] in {
+        "controlled_public_research_pilot_authorized_not_implemented",
+        "controlled_public_research_pilot_implemented_operator_invoked_persistent_write_disabled_pending_closeout",
+    }:
         assert program["active_knowledge_implementation_authorization"] == "AION-218-KI-0008"
         assert program["active_knowledge_implementation_task"] == "AION-219"
         assert program["formal_closeout_task"] == "AION-220"

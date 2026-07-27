@@ -115,6 +115,7 @@ post_aion214 = program.get("program_state") in {
     "verified_knowledge_memory_authorized_not_implemented",
     "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
     "controlled_public_research_pilot_authorized_not_implemented",
+    "controlled_public_research_pilot_implemented_operator_invoked_persistent_write_disabled_pending_closeout",
 }
 if post_aion214:
     if record["authorization_active"] is not False:
@@ -129,7 +130,10 @@ if post_aion214:
     expected_successor = (
         "AION-218-KI-0008"
         if program.get("program_state")
-        == "controlled_public_research_pilot_authorized_not_implemented"
+        in {
+            "controlled_public_research_pilot_authorized_not_implemented",
+            "controlled_public_research_pilot_implemented_operator_invoked_persistent_write_disabled_pending_closeout",
+        }
         else
         "AION-216-KI-0007"
         if program.get("program_state")
@@ -164,7 +168,10 @@ for relative in (
         expected_projection = (
             ("AION-218-KI-0008", "AION-219", "AION-220")
             if ledger.get("program_state")
-            == "controlled_public_research_pilot_authorized_not_implemented"
+            in {
+                "controlled_public_research_pilot_authorized_not_implemented",
+                "controlled_public_research_pilot_implemented_operator_invoked_persistent_write_disabled_pending_closeout",
+            }
             else
             ("AION-216-KI-0007", "AION-217", "AION-218")
             if ledger.get("program_state")

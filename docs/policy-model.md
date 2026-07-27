@@ -2449,4 +2449,12 @@ Required disabled state remains explicit: `verified_knowledge_runtime_enabled=fa
 
 ## AION-218 Current State
 
-AION-218 completed `AION-VKME-001` with exact PASS decision `VERIFIED_KNOWLEDGE_MEMORY_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_PUBLIC_RESEARCH_PILOT_AUTHORIZATION`. `AION-216-KI-0007` is closed, consumed, expired, and non-reusable. `AION-218-KI-0008` is the sole active Knowledge Intelligence authorization for AION-219, with AION-220 as formal closeout. The controlled public-research pilot is authorized but not implemented; public network fetch, system HTTP transport, automatic promotion, cognitive-memory write, belief mutation, and persistent verified-knowledge writes remain disabled.
+AION-218 completed `AION-VKME-001` with exact PASS decision `VERIFIED_KNOWLEDGE_MEMORY_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_PUBLIC_RESEARCH_PILOT_AUTHORIZATION`. `AION-216-KI-0007` is closed, consumed, expired, and non-reusable. `AION-218-KI-0008` is the sole active Knowledge Intelligence authorization for AION-219, with AION-220 as formal closeout. The controlled public-research pilot is implemented with operator invocation and persistent writes disabled; public network fetch, system HTTP transport, automatic promotion, cognitive-memory write, belief mutation, and persistent verified-knowledge writes remain disabled.
+
+## AION-219 Current State
+
+AION-219 controlled public HTTPS research and verified-candidate pilot implemented. `AION-218-KI-0008` remains the sole active Knowledge Intelligence authorization for AION-219 and remains active, non-consumed, non-expired, and non-reusable pending AION-220.
+
+Flags: `controlled_public_research_pilot_implemented=true`, `operator_invoked_public_https_fetch_available=true`, `system_dns_resolution_available=true`, `system_http_transport_available=true`, `pilot_live_validation_completed=true`, `public_network_fetch_enabled=false`, `unrestricted_network_access_enabled=false`, `background_network_access_enabled=false`, `background_crawler_enabled=false`, `search_provider_integration_enabled=false`, `connector_integration_enabled=false`, `model_provider_integration_enabled=false`, `browser_automation_enabled=false`, `actual_tool_execution_enabled=false`, `automatic_verified_knowledge_promotion_enabled=false`, `persistent_verified_knowledge_write_enabled=false`, `cognitive_memory_write_enabled=false`, `belief_mutation_enabled=false`, and `production_exposure=false`.
+
+The pilot is not a crawler, search engine, browser, connector, model client, background service, or production runtime. Acquired content remains untrusted evidence. A verified candidate remains reviewable evidence and does not become automatic factual truth. AION-220 is the next task.

@@ -91,6 +91,10 @@ while IFS= read -r file; do
       ;;
   esac
 
+  if aion219_is_scoped_knowledge_intelligence_public_research_pilot_path "$file"; then
+    continue
+  fi
+
   if [[ -f "$file" ]] && ! aion160_is_scoped_actor_context_trust_boundary_remediation_path "$file"; then
     printf '%s\n' "$file" >> "$scan_file_list"
   fi

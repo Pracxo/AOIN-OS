@@ -125,6 +125,7 @@ def test_aion_212_branch_does_not_add_aion_213_runtime_source():
             "verified_knowledge_memory_authorized_not_implemented",
             "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
             "controlled_public_research_pilot_authorized_not_implemented",
+            "controlled_public_research_pilot_implemented_operator_invoked_persistent_write_disabled_pending_closeout",
         }
     ):
         for relative in AION213_SOURCE:

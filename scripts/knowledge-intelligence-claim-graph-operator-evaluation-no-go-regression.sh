@@ -97,6 +97,10 @@ CURRENT_PROGRAM_STATE = "verified_knowledge_memory_authorized_not_implemented"
 AION217_IMPLEMENTED_PROGRAM_STATE = (
     "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
 )
+AION219_IMPLEMENTED_PROGRAM_STATE = (
+    "controlled_public_research_pilot_implemented_operator_invoked_"
+    "persistent_write_disabled_pending_closeout"
+)
 AION217_SOURCE = (
     "services/brain-api/src/aion_brain/contracts/knowledge_verified_memory.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
@@ -109,6 +113,17 @@ AION217_SOURCE = (
     "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_memory.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_revalidation.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_versioning.py",
+)
+AION219_SOURCE = (
+    "services/brain-api/src/aion_brain/contracts/knowledge_public_research_pilot.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_dns.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_http_transport.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_policy.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_claims.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_pilot.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_session.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_integrity.py",
 )
 PROGRAM_PATH = ROOT / "docs/knowledge-intelligence/program-ledger.json"
 PROGRAM_STATE = (
@@ -169,9 +184,19 @@ for parts in changed_entries():
             continue
         if normalized in AION213_SOURCE:
             continue
-        if PROGRAM_STATE in {IMPLEMENTED_PROGRAM_STATE, CURRENT_PROGRAM_STATE, AION217_IMPLEMENTED_PROGRAM_STATE} and normalized in AION215_SOURCE:
+        if PROGRAM_STATE in {
+            IMPLEMENTED_PROGRAM_STATE,
+            CURRENT_PROGRAM_STATE,
+            AION217_IMPLEMENTED_PROGRAM_STATE,
+            AION219_IMPLEMENTED_PROGRAM_STATE,
+        } and normalized in AION215_SOURCE:
             continue
-        if PROGRAM_STATE == AION217_IMPLEMENTED_PROGRAM_STATE and normalized in AION217_SOURCE:
+        if PROGRAM_STATE in {
+            AION217_IMPLEMENTED_PROGRAM_STATE,
+            AION219_IMPLEMENTED_PROGRAM_STATE,
+        } and normalized in AION217_SOURCE:
+            continue
+        if normalized in AION219_SOURCE:
             continue
         if normalized.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")

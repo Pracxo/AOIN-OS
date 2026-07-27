@@ -52,7 +52,11 @@ def test_program_and_authorization_ledgers_match_active_public_pilot_authorizati
         assert ledger["verified_knowledge_memory_implemented"] is True
         assert ledger["verified_knowledge_memory_state"] == expected_memory_state
         assert ledger["controlled_public_research_pilot_authorized"] is True
-        assert ledger["controlled_public_research_pilot_implemented"] is False
+        assert ledger["controlled_public_research_pilot_implemented"] is True
+        assert ledger["operator_invoked_public_https_fetch_available"] is True
+        assert ledger["system_dns_resolution_available"] is True
+        assert ledger["system_http_transport_available"] is True
+        assert ledger["public_network_fetch_enabled"] is False
         assert ledger["verified_knowledge_runtime_enabled"] is False
         assert ledger["persistent_verified_knowledge_write_enabled"] is False
         assert ledger["engagement_signal_as_fact_enabled"] is False

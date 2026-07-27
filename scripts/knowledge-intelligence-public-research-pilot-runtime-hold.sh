@@ -16,7 +16,12 @@ is_nested_gate_context() {
   [[ "${AION_CHECK_RUNNING:-}" == "1" ]] && return 0
   return 1
 }
-AION_PUBLIC_RESEARCH_PILOT_CHECK_RUNNING=1 ./scripts/knowledge-intelligence-public-research-pilot-authorization-check.sh
+if is_nested_gate_context; then
+  echo "PASS: implementation check running in outer context; authorization gate retained"
+  ./scripts/knowledge-intelligence-public-research-pilot-authorization-check.sh
+else
+  AION_PUBLIC_RESEARCH_PILOT_RUNTIME_HOLD_SKIP_FULL_CHECK=1 ./scripts/knowledge-intelligence-public-research-pilot-check.sh
+fi
 PYTHONPATH="$ROOT_DIR/scripts/lib:${PYTHONPATH:-}" "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
 import os

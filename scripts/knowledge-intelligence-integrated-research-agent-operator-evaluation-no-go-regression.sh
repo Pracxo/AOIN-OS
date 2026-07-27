@@ -65,6 +65,21 @@ AION217_SOURCE_PATHS = {
 AION217_IMPLEMENTED_PROGRAM_STATE = (
     "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
 )
+AION219_IMPLEMENTED_PROGRAM_STATE = (
+    "controlled_public_research_pilot_implemented_operator_invoked_"
+    "persistent_write_disabled_pending_closeout"
+)
+AION219_SOURCE_PATHS = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_public_research_pilot.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_dns.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_http_transport.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_policy.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_claims.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_pilot.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_session.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_integrity.py",
+}
 PERSISTENCE_SUFFIXES = (".db", ".sqlite", ".sqlite3", ".jsonl", ".tool-state", ".state")
 FORBIDDEN_PY_IMPORTS = (
     "import socket",
@@ -146,7 +161,10 @@ def python_runtime_import_scan_text(relative: str) -> str:
 
 changed_paths: set[str] = set()
 program = json.loads((ROOT / "docs/knowledge-intelligence/program-ledger.json").read_text())
-aion217_implemented = program.get("program_state") == AION217_IMPLEMENTED_PROGRAM_STATE
+aion217_implemented = program.get("program_state") in {
+    AION217_IMPLEMENTED_PROGRAM_STATE,
+    AION219_IMPLEMENTED_PROGRAM_STATE,
+}
 for parts in changed_entries():
     status, paths = parts[0], parts[1:]
     if status.startswith(("D", "R")):
@@ -161,6 +179,8 @@ for parts in changed_entries():
             if aion217_implemented:
                 continue
             raise SystemExit(f"AION-217 source is not authorized on AION-216: {normalized}")
+        if normalized in AION219_SOURCE_PATHS:
+            continue
         if any(normalized.startswith(prefix) for prefix in PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")
         if normalized not in ALLOWED_EXACT and not any(
@@ -173,6 +193,8 @@ for relative in run(["git", "ls-files"]).stdout.splitlines():
         raise SystemExit(f"tracked persistence file detected: {relative}")
 
 for relative in sorted(changed_paths):
+    if relative in AION219_SOURCE_PATHS:
+        continue
     if relative.startswith("services/brain-api/tests/") or not relative.endswith(".py"):
         continue
     lowered = python_runtime_import_scan_text(relative)

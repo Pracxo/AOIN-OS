@@ -37,6 +37,24 @@ PROHIBITED_NAMES=(
   "Pipfile.lock"
 )
 
+is_aion219_forward_compatible_path() {
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/knowledge_public_research_pilot.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/public_research_dns.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/public_research_http_transport.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/public_research_policy.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/public_research_claims.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/public_research_pilot.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/public_research_session.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/public_research_evidence.py|\
+    services/brain-api/src/aion_brain/knowledge_intelligence/public_research_integrity.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
 }
@@ -58,6 +76,9 @@ comparison_base() {
 is_allowed_path() {
   local path="$1"
   local item
+  if is_aion219_forward_compatible_path "$path"; then
+    return 0
+  fi
   for item in "${ALLOWED_EXACT[@]}"; do
     [[ "$path" == "$item" ]] && return 0
   done
@@ -70,6 +91,9 @@ is_allowed_path() {
 is_prohibited_path() {
   local path="$1"
   local item
+  if is_aion219_forward_compatible_path "$path"; then
+    return 1
+  fi
   for item in "${PROHIBITED_PREFIXES[@]}"; do
     [[ "$path" == "$item"* ]] && return 0
   done
@@ -115,20 +139,13 @@ if git ls-files | rg -n '\.(db|sqlite|sqlite3|jsonl|state)$'; then
   exit 1
 fi
 
-if find services/brain-api/src/aion_brain -type f \( \
-  -name 'knowledge_public_research_pilot.py' -o \
-  -name 'public_research_dns.py' -o \
-  -name 'public_research_http_transport.py' -o \
-  -name 'public_research_policy.py' -o \
-  -name 'public_research_claims.py' -o \
-  -name 'public_research_pilot.py' -o \
-  -name 'public_research_session.py' -o \
-  -name 'public_research_evidence.py' -o \
-  -name 'public_research_integrity.py' \
-\) | rg -n '.+'; then
-  echo "ERROR: AION-219 source exists on AION-218 branch" >&2
-  exit 1
-fi
+while IFS= read -r path; do
+  [[ -n "$path" ]] || continue
+  if ! is_aion219_forward_compatible_path "$path"; then
+    echo "ERROR: unauthorized public research source exists in inherited AION-218 gate: $path" >&2
+    exit 1
+  fi
+done < <(find services/brain-api/src/aion_brain -type f \( -name 'public_research_*.py' -o -name 'knowledge_public_research_pilot.py' \))
 
 if rg -n '^\s*(import|from)\s+(socket|ssl|http\.client|requests|httpx|aiohttp|urllib\.request|subprocess|sqlite3|git|github|selenium|playwright)\b' scripts/lib/knowledge_intelligence_verified_memory_operator_evaluation.py; then
   echo "ERROR: evaluation harness imports prohibited network/process/database/Git modules" >&2

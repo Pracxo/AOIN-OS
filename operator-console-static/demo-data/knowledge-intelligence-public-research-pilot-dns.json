@@ -1,0 +1,20 @@
+{
+  "read_only": true,
+  "address_family_counts": {
+    "IPv4": 1
+  },
+  "address_fingerprints": [
+    "e6b959156a6055d751e8e97268ae736f7ccb4d40105a4d4f2921802cf848f920"
+  ],
+  "host_fingerprint": "9fa4949db3c4a48244066b813c388363df8936baae462339961edfe7e9772fa5",
+  "hostname": "example.com",
+  "port": 443,
+  "raw_address_logged": false,
+  "redacted": true,
+  "resolution_fingerprint": "218d0713c0218fb7d6bb2e24e6eceabb7e023734800c85bc5bf281ae14f1b671",
+  "resolution_id": "resolution-0001",
+  "resolved_at": "2026-01-01T00:00:00Z",
+  "schema_version": "aion-public-research-dns-resolution/v1",
+  "status": "resolved_and_pinned",
+  "validation_result": "all_addresses_public_and_pinned"
+}

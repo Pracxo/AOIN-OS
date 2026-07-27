@@ -133,6 +133,18 @@ AION217_SOURCE = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_revalidation.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_versioning.py",
 }
+AION219_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/knowledge_public_research_pilot.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_claims.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_dns.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_evidence.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_http_transport.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_integrity.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_pilot.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_policy.py",
+    "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_session.py",
+}
 PROHIBITED_NAMES = {
     "package.json",
     "package-lock.json",
@@ -230,6 +242,12 @@ for parts in changed_entries():
                 program_state
                 == "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout"
                 and normalized in AION217_SOURCE
+            ):
+                continue
+            if (
+                program_state
+                == "controlled_public_research_pilot_implemented_operator_invoked_persistent_write_disabled_pending_closeout"
+                and normalized in AION219_SOURCE
             ):
                 continue
             raise SystemExit(f"runtime source path changed on AION-208: {normalized}")

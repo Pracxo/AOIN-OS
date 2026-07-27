@@ -66,7 +66,10 @@ if post_aion212:
         "verified_knowledge_memory_authorized_not_implemented",
         "verified_knowledge_memory_implemented_persistent_write_disabled_pending_closeout",
     }
-    post_aion218 = program["program_state"] == "controlled_public_research_pilot_authorized_not_implemented"
+    post_aion218 = program["program_state"] in {
+        "controlled_public_research_pilot_authorized_not_implemented",
+        "controlled_public_research_pilot_implemented_operator_invoked_persistent_write_disabled_pending_closeout",
+    }
     post_aion214 = program["program_state"] in {"tool_verification_fabric_authorized_not_implemented", "tool_verification_fabric_implemented_persistent_write_disabled_pending_closeout"}
     if post_aion218:
         expected_auth = FINAL_AUTH_ID
@@ -136,7 +139,11 @@ assert record["resource_limits"]["maximum_persistent_assessment_write_batch"] ==
 expected_program_scope = (
     FINAL_SCOPE
     if post_aion212
-    and program["program_state"] == "controlled_public_research_pilot_authorized_not_implemented"
+    and program["program_state"]
+    in {
+        "controlled_public_research_pilot_authorized_not_implemented",
+        "controlled_public_research_pilot_implemented_operator_invoked_persistent_write_disabled_pending_closeout",
+    }
     else
     CURRENT_SCOPE
     if post_aion212

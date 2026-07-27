@@ -1,0 +1,11 @@
+{
+  "destination_resolution_fingerprint": "218d0713c0218fb7d6bb2e24e6eceabb7e023734800c85bc5bf281ae14f1b671",
+  "from_url_fingerprint": "4fff8a051f1f3b59e514190bcd2a7da9892f970be63aaaebc5567a63503bb799",
+  "peer_address_fingerprint": null,
+  "redacted": true,
+  "redirect_fingerprint": "ac7e65e4efae31cb0d116be6b2e78d3a41f15333e1493cb5100e6ac2055d1b31",
+  "redirect_id": "redirect-0001",
+  "schema_version": "aion-public-research-redirect-hop/v1",
+  "status_code": 302,
+  "to_url_fingerprint": "623a970fe727b66c5e8809a5c47f7fd939bcf0ec295782961191ab4b36b196ae"
+}

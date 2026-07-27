@@ -38,7 +38,10 @@ program = json.loads(Path("docs/knowledge-intelligence/program-ledger.json").rea
 raise SystemExit(
     0
     if program.get("program_state")
-    == "controlled_public_research_pilot_authorized_not_implemented"
+    in {
+        "controlled_public_research_pilot_authorized_not_implemented",
+        "controlled_public_research_pilot_implemented_operator_invoked_persistent_write_disabled_pending_closeout",
+    }
     else 1
 )
 PY
