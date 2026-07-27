@@ -1346,19 +1346,34 @@
       "authorization_state": "program_complete_zero_active_authorizations",
       "authorization_transaction": "AION-218-KI-0008",
       "branch": "phase/knowledge-intelligence-program-final-evaluation-closeout",
-      "ci_result": "pending_primary_pr",
-      "completion_timestamp": null,
+      "ci_result": "pass",
+      "completion_timestamp": "2026-07-27T20:36:26Z",
       "evaluation_decision": "CONTROLLED_PUBLIC_RESEARCH_PILOT_PASS_COMPLETE_KNOWLEDGE_INTELLIGENCE_PROGRAM",
       "evaluation_id": "AION-KIPE-001",
-      "feature_commits": [],
-      "merge_commits": [],
+      "feature_commits": [
+        "76b2e02adbbbcb2ef9c9a44f4ad30f1a3ebd7c7f",
+        "ccd3700d9dfd39cbb2bc56c811e6f38788e0f513"
+      ],
+      "merge_commits": [
+        "2b2fbc471011cc080149c59ff99ace0300140a5c"
+      ],
       "next_task": null,
-      "pull_requests": [],
-      "reconciliation_required_after_primary_merge": true,
+      "pull_requests": [
+        135
+      ],
+      "reconciliation_required_after_primary_merge": false,
       "runtime_state": "knowledge_intelligence_program_complete",
       "summary": "Final Knowledge Intelligence Program evaluation completed with PASS; AION-218-KI-0008 closed and no successor authorization created.",
       "task_id": "AION-220",
       "tests": [
+        "PR #135 all required checks passed",
+        "brain-api-quality passed",
+        "contract-check passed",
+        "docker-build-core passed",
+        "policy-check passed",
+        "repository-hygiene passed",
+        "sdk-cli-check passed",
+        "sdk-quality passed",
         "AION-KIPE-001: 28 scenarios passed",
         "zero active Knowledge Intelligence authorizations",
         "no successor authorization created",
