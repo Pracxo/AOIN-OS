@@ -1,0 +1,253 @@
+{
+  "decision": "PROMOTION_TRANSACTION_OPERATOR_EVALUATION_PASS_RECOMMEND_LOCAL_APPEND_ONLY_KNOWLEDGE_PERSISTENCE_AUTHORIZATION",
+  "evaluation_id": "AION-GLMPE-001",
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "redaction_applied": true,
+  "hard_gate_results": {
+    "aion_222_implementation_gate_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "aion_222_no_go_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "approval_binding_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "approval_expiry_revocation_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "candidate_integrity_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "compensation_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "confidence_non_amplification_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "conflict_preservation_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "determinism_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "duplicate_detection_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "final_ci_verified": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "glm_runtime_hold_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "identity_derivation_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "journal_integrity_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "lineage_integrity_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "no_v02_tag_or_release": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "pr_138_verified": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "projection_planning_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "repository_integrity_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "resource_limits_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "rollback_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "separation_of_duties_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "version_planning_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "zero_runtime_and_write_effects": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    }
+  },
+  "read_only": true,
+  "redacted": true,
+  "repository_unchanged": true,
+  "scenario_count": 28,
+  "scenario_ids": [
+    "valid_moderate_risk_semantic_projection",
+    "valid_high_risk_dual_approval",
+    "belief_candidate_requires_dual_approval",
+    "promotion_request_expiry_and_binding",
+    "candidate_binding_integrity",
+    "candidate_and_lineage_revalidation",
+    "confidence_non_amplification",
+    "approval_expiry_revocation_denial_and_cancellation",
+    "approval_scope_resource_and_transaction_binding",
+    "separation_of_duties",
+    "deterministic_knowledge_identity",
+    "exact_duplicate_idempotent_no_op",
+    "direct_support_refutation_conflict",
+    "temporal_jurisdiction_and_version_conflicts",
+    "retraction_and_supersession_conflicts",
+    "initial_and_new_version_planning",
+    "supersession_retraction_and_expiry_plans",
+    "semantic_memory_projection_plan",
+    "episodic_memory_projection_plan",
+    "procedural_memory_projection_plan",
+    "belief_candidate_projection_boundary",
+    "rollback_and_compensation_validation",
+    "resource_budget_enforcement",
+    "immutable_in_memory_journal",
+    "bounded_exact_queries_and_fixture_replay",
+    "determinism_concurrency_and_performance",
+    "zero_side_effect_and_repository_boundary",
+    "local_persistence_authorization_readiness"
+  ],
+  "scenario_results": [
+    {
+      "result": "passed",
+      "scenario_id": "valid_moderate_risk_semantic_projection"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "valid_high_risk_dual_approval"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "belief_candidate_requires_dual_approval"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "promotion_request_expiry_and_binding"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "candidate_binding_integrity"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "candidate_and_lineage_revalidation"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "confidence_non_amplification"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "approval_expiry_revocation_denial_and_cancellation"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "approval_scope_resource_and_transaction_binding"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "separation_of_duties"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "deterministic_knowledge_identity"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "exact_duplicate_idempotent_no_op"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "direct_support_refutation_conflict"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "temporal_jurisdiction_and_version_conflicts"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "retraction_and_supersession_conflicts"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "initial_and_new_version_planning"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "supersession_retraction_and_expiry_plans"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "semantic_memory_projection_plan"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "episodic_memory_projection_plan"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "procedural_memory_projection_plan"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "belief_candidate_projection_boundary"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "rollback_and_compensation_validation"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "resource_budget_enforcement"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "immutable_in_memory_journal"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "bounded_exact_queries_and_fixture_replay"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "determinism_concurrency_and_performance"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "zero_side_effect_and_repository_boundary"
+    },
+    {
+      "result": "passed",
+      "scenario_id": "local_persistence_authorization_readiness"
+    }
+  ],
+  "synthetic": true
+}

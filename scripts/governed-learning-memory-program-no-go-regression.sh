@@ -61,6 +61,7 @@ is_allowed_path() {
     docs/release/governed-learning-memory-*|\
     docs/adr/0185-governed-learning-and-memory-integration-program-charter.md|\
     docs/adr/0186-approval-bound-knowledge-promotion-transaction-core.md|\
+    docs/adr/0187-promotion-transaction-evaluation-and-local-append-only-knowledge-persistence-authorization.md|\
     docs/adr/README.md|\
     docs/release/v02-release-readiness-delta.md|\
     docs/project-status.md|docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/visual-brain.md|\
@@ -79,6 +80,13 @@ is_allowed_path() {
     scripts/governed-learning-memory-runtime-hold.sh|\
     scripts/governed-learning-memory-promotion-transaction-check.sh|\
     scripts/governed-learning-memory-promotion-transaction-no-go-regression.sh|\
+    scripts/governed-learning-memory-promotion-operator-evaluation-check.sh|\
+    scripts/governed-learning-memory-promotion-operator-evaluation-no-go-regression.sh|\
+    scripts/governed-learning-memory-local-persistence-authorization-check.sh|\
+    scripts/governed-learning-memory-local-persistence-authorization-no-go-regression.sh|\
+    scripts/governed-learning-memory-local-persistence-runtime-hold.sh|\
+    scripts/lib/governed_learning_memory_promotion_operator_evaluation.py|\
+    scripts/lib/governed_learning_memory_local_persistence_authorization.py|\
     scripts/connector-runtime-no-external-call-regression.sh|\
     scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh|\
     scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh|\
@@ -91,8 +99,12 @@ is_allowed_path() {
     scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh|\
     scripts/lib/cognitive_architecture_governance.py|\
     scripts/lib/self_improvement_governance.py|\
+    scripts/auth-design-check.sh|\
+    scripts/operator-console-static-check.sh|\
+    scripts/static-console-safety-check.sh|\
     scripts/operator-action-write-path-no-go-regression.sh|\
     scripts/production-auth-architecture-check.sh|\
+    services/brain-api/tests/conftest.py|\
     services/brain-api/tests/test_governed_learning_memory_*.py)
       return 0
       ;;

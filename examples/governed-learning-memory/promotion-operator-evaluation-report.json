@@ -1,0 +1,751 @@
+{
+  "actual_tool_executions": 0,
+  "approval_decisions_created": 0,
+  "approval_requests_created": 0,
+  "authorization_closeout": {
+    "authorization_transaction_id": "AION-221-GLM-0001",
+    "closeout_required": true,
+    "closeout_task": "AION-223",
+    "evaluation_reusable": false,
+    "evaluation_used_as_persistence_approval": false,
+    "performed_by_harness": false
+  },
+  "automatic_candidate_approvals": 0,
+  "automatic_knowledge_promotions": 0,
+  "belief_creations": 0,
+  "belief_mutations": 0,
+  "browser_actions": 0,
+  "closeout_task": "AION-223",
+  "cognitive_memory_writes": 0,
+  "conditional_next_authorization": {
+    "authorization_transaction_id": "AION-223-GLM-0002",
+    "created_by_harness": false,
+    "eligible": true,
+    "formal_closeout_task": "AION-225",
+    "implementation_task": "AION-224"
+  },
+  "connector_calls": 0,
+  "decision": "PROMOTION_TRANSACTION_OPERATOR_EVALUATION_PASS_RECOMMEND_LOCAL_APPEND_ONLY_KNOWLEDGE_PERSISTENCE_AUTHORIZATION",
+  "deployments": 0,
+  "dns_resolutions": 0,
+  "engagement_learning_applications": 0,
+  "episodic_memory_writes": 0,
+  "evaluation_base_commit": "b89c896b8e75955d28fd06d52b5fb66fb8ed5ac0",
+  "evaluation_id": "AION-GLMPE-001",
+  "evaluation_passed": true,
+  "evaluation_type": "read_only_promotion_transaction_operator_evaluation",
+  "filesystem_mutations": 0,
+  "git_operations": 0,
+  "hard_gate_results": {
+    "aion_222_implementation_gate_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "aion_222_no_go_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "approval_binding_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "approval_expiry_revocation_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "candidate_integrity_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "compensation_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "confidence_non_amplification_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "conflict_preservation_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "determinism_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "duplicate_detection_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "final_ci_verified": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "glm_runtime_hold_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "identity_derivation_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "journal_integrity_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "lineage_integrity_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "no_v02_tag_or_release": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "pr_138_verified": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "projection_planning_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "repository_integrity_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "resource_limits_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "rollback_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "separation_of_duties_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "version_planning_passed": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    },
+    "zero_runtime_and_write_effects": {
+      "passed": true,
+      "source": "AION-223 deterministic read-only operator evaluation"
+    }
+  },
+  "implementation_feature_commits": [
+    "e415cc397b9aec70f8b3d19285f5fdd315048731"
+  ],
+  "implementation_merge_commits": [
+    "b89c896b8e75955d28fd06d52b5fb66fb8ed5ac0"
+  ],
+  "implementation_prs": [
+    138
+  ],
+  "implementation_task": "AION-222",
+  "model_provider_calls": 0,
+  "model_weight_changes": 0,
+  "network_calls": 0,
+  "next_architecture_decision": "local_append_only_knowledge_persistence_implementation_authorized",
+  "persistent_knowledge_writes": 0,
+  "persistent_verified_knowledge_writes": 0,
+  "procedural_memory_writes": 0,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "redacted": true,
+  "repository_integrity": {
+    "git_operations": 0,
+    "repository_unchanged": true,
+    "runtime_pull_requests": 0,
+    "source_mutations": 0
+  },
+  "repository_unchanged": true,
+  "resource_state": {
+    "maximum_actual_tool_executions": 0,
+    "maximum_approval_evidence_records_per_transaction": 4,
+    "maximum_assessment_references_per_candidate": 20,
+    "maximum_automatic_candidate_approvals": 0,
+    "maximum_automatic_knowledge_promotions": 0,
+    "maximum_belief_creations": 0,
+    "maximum_belief_mutations": 0,
+    "maximum_browser_actions": 0,
+    "maximum_candidates_per_request": 100,
+    "maximum_claim_references_per_candidate": 20,
+    "maximum_cognitive_memory_writes": 0,
+    "maximum_compensation_steps_per_transaction": 50,
+    "maximum_concurrency": 4,
+    "maximum_connector_calls": 0,
+    "maximum_deployments": 0,
+    "maximum_engagement_confidence_effects": 0,
+    "maximum_engagement_fact_promotions": 0,
+    "maximum_episodic_memory_writes": 0,
+    "maximum_fixture_bytes": 4194304,
+    "maximum_fixture_records": 5000,
+    "maximum_git_operations": 0,
+    "maximum_in_memory_transactions": 1000,
+    "maximum_lineage_references_per_candidate": 500,
+    "maximum_mesh_references_per_candidate": 20,
+    "maximum_model_provider_calls": 0,
+    "maximum_model_weight_changes": 0,
+    "maximum_network_calls": 0,
+    "maximum_operator_review_items": 100,
+    "maximum_persistent_knowledge_writes": 0,
+    "maximum_persistent_verified_knowledge_writes": 0,
+    "maximum_procedural_memory_writes": 0,
+    "maximum_projection_records_per_transaction": 100,
+    "maximum_promotion_requests_per_batch": 100,
+    "maximum_query_results": 1000,
+    "maximum_rollback_steps_per_transaction": 50,
+    "maximum_runtime_created_approvals": 0,
+    "maximum_runtime_created_pull_requests": 0,
+    "maximum_search_provider_calls": 0,
+    "maximum_semantic_memory_writes": 0,
+    "maximum_shell_commands": 0,
+    "maximum_source_mutations": 0,
+    "maximum_source_references_per_candidate": 100,
+    "maximum_subprocess_executions": 0,
+    "maximum_tool_session_references_per_candidate": 20,
+    "maximum_versions_per_knowledge_identity": 100
+  },
+  "runtime_approvals": 0,
+  "runtime_pull_requests": 0,
+  "runtime_state": {
+    "aion_222_write_disabled": true,
+    "local_persistence_implemented": false,
+    "operator_invoked_persistence_available": false
+  },
+  "scenario_count": 28,
+  "scenario_results": [
+    {
+      "checks": [
+        "eligible_candidate",
+        "complete_lineage",
+        "valid_approval_evidence",
+        "separation_of_duties_passed",
+        "semantic_projection_planned",
+        "version_1_planned",
+        "rollback_valid",
+        "compensation_valid",
+        "future_persistence_authorized_false"
+      ],
+      "evidence": {
+        "result_fingerprint": "32d3f270719bf762f3a73441429071e2ba949b564e3e858dbe1a4ae9f608c600"
+      },
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "valid_moderate_risk_semantic_projection",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "high_risk_request",
+        "two_independent_approvers",
+        "requester_differs_from_approvers",
+        "approval_bindings_exact",
+        "separation_of_duties_passed"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "valid_high_risk_dual_approval",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "belief_candidate_requires_two_approvers",
+        "one_approver_insufficient",
+        "two_approvers_permit_candidate_projection_plan",
+        "belief_created_false",
+        "belief_mutated_false"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "belief_candidate_requires_dual_approval",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "expired_request_rejected",
+        "changed_candidate_id_rejected",
+        "changed_candidate_fingerprint_rejected",
+        "changed_transaction_id_rejected",
+        "changed_request_fingerprint_rejected",
+        "missing_projection_target_rejected"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "promotion_request_expiry_and_binding",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "candidate_id_exact",
+        "candidate_fingerprint_exact",
+        "candidate_identity_exact",
+        "candidate_version_exact",
+        "lineage_fingerprint_exact",
+        "memory_snapshot_fingerprint_exact",
+        "changed_nested_candidate_rejected"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "candidate_binding_integrity",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "candidate_integrity_audit_passed",
+        "lineage_audit_passed",
+        "policy_status_audit_passed",
+        "eligible_for_operator_review_exact",
+        "operator_review_pending_exact",
+        "expired_candidate_abstains",
+        "overdue_revalidation_abstains",
+        "invalid_lineage_fails_closed"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "candidate_and_lineage_revalidation",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "snapshot_confidence_equals_candidate_cap",
+        "approval_evidence_cannot_raise_confidence",
+        "approver_count_cannot_raise_confidence",
+        "projection_count_cannot_raise_confidence",
+        "duplicate_evidence_cannot_raise_confidence",
+        "engagement_cannot_raise_confidence"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "confidence_non_amplification",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "expired_approval_blocked",
+        "revoked_approval_blocked",
+        "denied_approval_blocked",
+        "cancelled_approval_blocked",
+        "pending_approval_blocked",
+        "approve_decision_with_non_approved_request_blocked"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "approval_expiry_revocation_denial_and_cancellation",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "wrong_action_type_blocked",
+        "wrong_resource_type_blocked",
+        "wrong_approval_scope_blocked",
+        "wrong_candidate_binding_blocked",
+        "wrong_candidate_fingerprint_blocked",
+        "wrong_transaction_binding_blocked",
+        "wrong_promotion_request_fingerprint_blocked"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "approval_scope_resource_and_transaction_binding",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "requester_and_approver_differ",
+        "duplicate_approvers_count_once",
+        "high_and_critical_risk_require_two",
+        "belief_candidate_projection_requires_two",
+        "changed_approver_identity_changes_bundle_fingerprint",
+        "runtime_approval_creation_blocked"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "separation_of_duties",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "identity_derived_from_claim_time_jurisdiction_version_scope",
+        "support_and_refutation_share_base_identity",
+        "changed_scope_changes_identity",
+        "changed_approval_does_not_change_factual_identity",
+        "changed_approval_changes_transaction_binding"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "deterministic_knowledge_identity",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "exact_duplicate_detected",
+        "status_dry_run_no_op_duplicate",
+        "no_new_version_planned",
+        "no_projection_write",
+        "idempotent_replay_identical"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "exact_duplicate_idempotent_no_op",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "support_refutation_direct_conflict",
+        "material_hold_true",
+        "status_abstained",
+        "approval_cannot_resolve_conflict",
+        "both_postures_preserved"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "direct_support_refutation_conflict",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "temporal_scope_conflict_preserved",
+        "jurisdiction_scope_conflict_preserved",
+        "version_scope_conflict_preserved",
+        "scope_separated_candidates_remain_separate",
+        "no_implicit_global_scope"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "temporal_jurisdiction_and_version_conflicts",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "retracted_reference_blocks_ordinary_promotion",
+        "supersession_requires_explicit_request",
+        "history_preserved",
+        "no_prior_record_deletion",
+        "no_approval_override"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "retraction_and_supersession_conflicts",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "first_version_begins_at_1",
+        "next_version_increments_contiguously",
+        "maximum_100_versions",
+        "changed_payload_same_version_rejected",
+        "prior_version_preserved",
+        "persistent_version_created_false"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "initial_and_new_version_planning",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "explicit_supersession_disposition",
+        "explicit_retraction_disposition",
+        "explicit_expiry_disposition",
+        "append_only_true",
+        "historical_versions_preserved_true",
+        "no_mutation_or_hard_deletion"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "supersession_retraction_and_expiry_plans",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "semantic_memory_target_explicit",
+        "candidate_posture_preserved",
+        "confidence_cap_preserved",
+        "source_references_preserved",
+        "memory_record_created_false",
+        "persistent_write_applied_false"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "semantic_memory_projection_plan",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "episodic_memory_target_explicit",
+        "candidate_posture_preserved",
+        "confidence_cap_preserved",
+        "source_references_preserved",
+        "memory_record_created_false",
+        "persistent_write_applied_false"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "episodic_memory_projection_plan",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "procedural_memory_target_explicit",
+        "candidate_posture_preserved",
+        "confidence_cap_preserved",
+        "source_references_preserved",
+        "memory_record_created_false",
+        "persistent_write_applied_false"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "procedural_memory_projection_plan",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "belief_target_remains_candidate_projection",
+        "uncertainty_and_contradiction_visible",
+        "two_approvers_required",
+        "BeliefClaim_not_created",
+        "belief_created_false",
+        "belief_mutated_false"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "belief_candidate_projection_boundary",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "valid_rollback_plan",
+        "valid_compensation_plan",
+        "closed_operation_registry",
+        "unique_step_ids",
+        "references_resolve",
+        "no_cycles",
+        "no_command_execution",
+        "no_delete_operation",
+        "no_write_application"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "rollback_and_compensation_validation",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "every_exact_authorization_limit_verified",
+        "exact_limits_pass",
+        "selected_one_over_limit_requests_fail_closed",
+        "zero_limit_effects_remain_zero",
+        "approval_quality_cannot_override_budget_failure"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "resource_budget_enforcement",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "copy_on_write_behavior",
+        "original_journal_unchanged",
+        "exact_replay_idempotent",
+        "changed_transaction_replay_rejected",
+        "maximum_1000_transactions",
+        "no_save_method",
+        "no_update_method",
+        "no_delete_method",
+        "journal_is_not_knowledge_store"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "immutable_in_memory_journal",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "exact_deterministic_queries",
+        "maximum_1000_results",
+        "no_semantic_search",
+        "no_fuzzy_search",
+        "no_engagement_ranking",
+        "explicit_absolute_fixture_path",
+        "repository_paths_rejected",
+        "symlinks_rejected",
+        "protected_material_rejected",
+        "fixture_replay_in_memory"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "bounded_exact_queries_and_fixture_replay",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "fixed_inputs_identical_results",
+        "changed_candidate_fingerprint_changes_downstream_fingerprints",
+        "changed_lineage_changes_downstream_fingerprints",
+        "changed_approval_changes_transaction_and_projection_fingerprints",
+        "deterministic_ordering_under_concurrency",
+        "no_global_planner_singleton",
+        "no_global_journal_singleton",
+        "no_race_enables_write",
+        "ci_safe_performance_smoke_passes"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "determinism_concurrency_and_performance",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "approval_creations_zero",
+        "approval_decisions_zero",
+        "persistent_knowledge_writes_zero",
+        "persistent_verified_candidate_writes_zero",
+        "semantic_memory_writes_zero",
+        "episodic_memory_writes_zero",
+        "procedural_memory_writes_zero",
+        "cognitive_memory_writes_zero",
+        "belief_creations_zero",
+        "belief_mutations_zero",
+        "automatic_approvals_zero",
+        "automatic_promotions_zero",
+        "network_calls_zero",
+        "tool_executions_zero",
+        "shell_executions_zero",
+        "subprocess_executions_zero",
+        "source_mutations_zero",
+        "git_mutations_zero",
+        "runtime_prs_zero",
+        "deployments_zero",
+        "repository_tree_unchanged"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "zero_side_effect_and_repository_boundary",
+      "synthetic": true
+    },
+    {
+      "checks": [
+        "every_AION_222_hard_gate_passed",
+        "dry_run_result_review_only",
+        "future_persistence_authorization_false_in_AION_222",
+        "local_persistence_isolatable_from_production_memory",
+        "separate_approval_can_bind_exact_dry_run_result",
+        "append_only_version_plans_have_deterministic_identifiers",
+        "projection_plans_have_deterministic_identifiers",
+        "rollback_and_compensation_references_complete",
+        "no_AION_222_weakening_required_before_AION_224"
+      ],
+      "evidence": {},
+      "read_only": true,
+      "redacted": true,
+      "result": "passed",
+      "runtime_effect": false,
+      "scenario_id": "local_persistence_authorization_readiness",
+      "synthetic": true
+    }
+  ],
+  "search_provider_calls": 0,
+  "security_state": {
+    "network_access": false,
+    "protected_material_absent": true,
+    "read_only": true,
+    "redacted": true,
+    "synthetic": true,
+    "tool_execution": false
+  },
+  "semantic_memory_writes": 0,
+  "shell_executions": 0,
+  "source_mutations": 0,
+  "subprocess_executions": 0,
+  "synthetic": true,
+  "temporary_evaluation_data_cleaned": true,
+  "validation_results": {
+    "all_required_scenarios_executed": true,
+    "corrective_cycles": 0,
+    "corrective_prs": [],
+    "no_scenario_skipped": true,
+    "no_unknown_scenario": true
+  }
+}

@@ -38,15 +38,9 @@ def test_promotion_operator_evaluation_uses_expected_aion222_delivery() -> None:
     )
 
     assert report["implementation_prs"] == [138]
-    assert report["implementation_feature_commits"] == [
-        "e415cc397b9aec70f8b3d19285f5fdd315048731"
-    ]
-    assert report["implementation_merge_commits"] == [
-        "b89c896b8e75955d28fd06d52b5fb66fb8ed5ac0"
-    ]
-    assert report["authorization_closeout"]["authorization_transaction_id"] == (
-        "AION-221-GLM-0001"
-    )
+    assert report["implementation_feature_commits"] == ["e415cc397b9aec70f8b3d19285f5fdd315048731"]
+    assert report["implementation_merge_commits"] == ["b89c896b8e75955d28fd06d52b5fb66fb8ed5ac0"]
+    assert report["authorization_closeout"]["authorization_transaction_id"] == ("AION-221-GLM-0001")
     assert report["conditional_next_authorization"]["authorization_transaction_id"] == (
         "AION-223-GLM-0002"
     )

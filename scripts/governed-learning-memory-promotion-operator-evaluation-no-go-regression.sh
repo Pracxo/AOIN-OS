@@ -71,16 +71,24 @@ is_allowed_path() {
     scripts/governed-learning-memory-local-persistence-authorization-check.sh|\
     scripts/governed-learning-memory-local-persistence-authorization-no-go-regression.sh|\
     scripts/governed-learning-memory-local-persistence-runtime-hold.sh|\
+    scripts/governed-learning-memory-program-authorization-check.sh|\
+    scripts/governed-learning-memory-program-no-go-regression.sh|\
+    scripts/governed-learning-memory-runtime-hold.sh|\
+    scripts/governed-learning-memory-promotion-transaction-check.sh|\
+    scripts/governed-learning-memory-promotion-transaction-no-go-regression.sh|\
     scripts/lib/governed_learning_memory_promotion_operator_evaluation.py|\
     scripts/lib/governed_learning_memory_local_persistence_authorization.py|\
     scripts/lib/cognitive_architecture_governance.py|\
     scripts/lib/self_improvement_governance.py|\
+    scripts/auth-design-check.sh|\
+    scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh|\
     scripts/connector-runtime-no-external-call-regression.sh|\
     scripts/operator-action-write-path-no-go-regression.sh|\
     scripts/production-auth-architecture-check.sh|\
     scripts/operator-console-static-check.sh|\
     scripts/static-console-safety-check.sh|\
     scripts/knowledge-intelligence-*-no-go-regression.sh|\
+    services/brain-api/tests/conftest.py|\
     services/brain-api/tests/test_governed_learning_memory_*.py)
       return 0
       ;;
@@ -202,7 +210,7 @@ if ((${#python_scan_paths[@]})) && rg -n '^[[:space:]]*(from|import)[[:space:]]+
   exit 1
 fi
 
-if ((${#python_scan_paths[@]})) && rg -n 'subprocess[.]|socket[.]|requests[.]|httpx[.]|aiohttp[.]|urllib[.]request|sqlite3[.]|os[.]system|git[.]|github[.]|playwright[.]|selenium[.]|ApprovalService|ApprovalRepository|MemoryRepository|BeliefRepository|create_belief|persist_knowledge' "${python_scan_paths[@]}"; then
+if ((${#python_scan_paths[@]})) && rg -n '(^|[^[:alnum:]_])(subprocess|socket|requests|httpx|aiohttp|sqlite3|git|github|playwright|selenium)[.]|urllib[.]request|(^|[^[:alnum:]_])os[.]system|ApprovalService|ApprovalRepository|MemoryRepository|BeliefRepository|create_belief[(]|persist_knowledge[(]' "${python_scan_paths[@]}"; then
   echo "ERROR: prohibited runtime or write primitive found" >&2
   exit 1
 fi

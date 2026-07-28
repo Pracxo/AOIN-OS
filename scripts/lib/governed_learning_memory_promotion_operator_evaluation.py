@@ -6,6 +6,8 @@ temporary output directory and performs no repository, approval, persistence,
 memory, belief, network, tool, source, or Git mutation.
 """
 
+# ruff: noqa: E402
+
 from __future__ import annotations
 
 import argparse
@@ -35,7 +37,6 @@ from aion_brain.contracts.knowledge_verified_memory import (
     VerifiedKnowledgeCandidate,
     VerifiedKnowledgeCandidateEligibilityInput,
     VerifiedKnowledgeCandidateKind,
-    VerifiedKnowledgeEligibilityStatus,
     VerifiedKnowledgeLifecycleStatus,
 )
 from aion_brain.knowledge_intelligence.verified_knowledge_candidates import (
@@ -278,10 +279,14 @@ def _candidate(
             "assessment_confidence": lineage.assessment_confidence,
             "assessment_hard_cap": lineage.assessment_hard_cap,
             "independent_support_count": (
-                3 if candidate_kind is VerifiedKnowledgeCandidateKind.SUPPORT_CANDIDATE else 0
+                3
+                if candidate_kind is VerifiedKnowledgeCandidateKind.SUPPORT_CANDIDATE
+                else 0
             ),
             "independent_opposition_count": (
-                3 if candidate_kind is VerifiedKnowledgeCandidateKind.REFUTATION_CANDIDATE else 0
+                3
+                if candidate_kind is VerifiedKnowledgeCandidateKind.REFUTATION_CANDIDATE
+                else 0
             ),
             "evidence_coverage": Decimal("1.000000"),
             "citation_coverage": Decimal("1.000000"),
@@ -324,7 +329,9 @@ def _request(
     transaction_id: str,
     candidates: tuple[VerifiedKnowledgeCandidate, ...],
     request_kind: glm.PromotionRequestKind = glm.PromotionRequestKind.INITIAL_VERSION,
-    targets: tuple[glm.MemoryProjectionTarget, ...] = (glm.MemoryProjectionTarget.SEMANTIC_MEMORY,),
+    targets: tuple[glm.MemoryProjectionTarget, ...] = (
+        glm.MemoryProjectionTarget.SEMANTIC_MEMORY,
+    ),
     risk_class: glm.PromotionRiskClass = glm.PromotionRiskClass.LOW,
 ) -> glm.KnowledgePromotionRequest:
     safe_transaction = _safe_id("tx", transaction_id)
@@ -333,7 +340,9 @@ def _request(
         transaction_id=safe_transaction,
         request_kind=request_kind,
         candidate_ids=tuple(candidate.candidate_id for candidate in candidates),
-        candidate_fingerprints=tuple(candidate.candidate_fingerprint for candidate in candidates),
+        candidate_fingerprints=tuple(
+            candidate.candidate_fingerprint for candidate in candidates
+        ),
         requested_projection_targets=targets,
         risk_class=risk_class,
         owner_scope_fingerprints=(_fp(f"scope-{transaction_id}"),),
@@ -409,7 +418,8 @@ def _existing_reference(
         target_valid_time_fingerprint=identity_plan.target_valid_time_fingerprint,
         jurisdiction_scope_fingerprint=identity_plan.jurisdiction_scope_fingerprint,
         version_scope_fingerprint=identity_plan.version_scope_fingerprint,
-        candidate_fingerprint=candidate_fingerprint or identity_plan.candidate_fingerprint,
+        candidate_fingerprint=candidate_fingerprint
+        or identity_plan.candidate_fingerprint,
         lineage_fingerprint=lineage_fingerprint or identity_plan.lineage_fingerprint,
         approval_bundle_fingerprint=identity_plan.approval_bundle_fingerprint,
         knowledge_version_fingerprint=_fp(f"knowledge-version-{version_number}"),
@@ -424,7 +434,9 @@ def _planning_context(
     transaction_id: str,
     candidates: tuple[VerifiedKnowledgeCandidate, ...] | None = None,
     request_kind: glm.PromotionRequestKind = glm.PromotionRequestKind.INITIAL_VERSION,
-    targets: tuple[glm.MemoryProjectionTarget, ...] = (glm.MemoryProjectionTarget.SEMANTIC_MEMORY,),
+    targets: tuple[glm.MemoryProjectionTarget, ...] = (
+        glm.MemoryProjectionTarget.SEMANTIC_MEMORY,
+    ),
     risk_class: glm.PromotionRiskClass = glm.PromotionRiskClass.LOW,
     approval_pairs: int = 1,
     approvers: tuple[str, ...] | None = None,
@@ -438,7 +450,9 @@ def _planning_context(
         targets=targets,
         risk_class=risk_class,
     )
-    approvers = approvers or tuple(f"approver-{index + 1:03d}" for index in range(approval_pairs))
+    approvers = approvers or tuple(
+        f"approver-{index + 1:03d}" for index in range(approval_pairs)
+    )
     approvals: list[ApprovalRequest] = []
     decisions: list[ApprovalDecision] = []
     for index in range(approval_pairs):
@@ -561,7 +575,9 @@ def _scenario_valid_moderate() -> dict[str, Any]:
     assert context.approval_bundle.independent_approver_count == 1
     assert context.approval_bundle.separation_of_duties_passed is True
     assert context.versions[0].planned_version_number == 1
-    assert context.projections.planned_targets == (glm.MemoryProjectionTarget.SEMANTIC_MEMORY,)
+    assert context.projections.planned_targets == (
+        glm.MemoryProjectionTarget.SEMANTIC_MEMORY,
+    )
     assert context.rollback.valid and context.compensation.valid
     assert context.result.status is glm.PromotionTransactionStatus.DRY_RUN_PASSED
     assert context.result.future_persistence_authorized is False
@@ -681,9 +697,9 @@ def _scenario_request_binding() -> dict[str, Any]:
     )
     _expect_raises(
         lambda: glm.KnowledgePromotionRequest.model_validate(
-            valid.model_copy(update={"request_fingerprint": _fp("changed-request")}).model_dump(
-                mode="python"
-            )
+            valid.model_copy(
+                update={"request_fingerprint": _fp("changed-request")}
+            ).model_dump(mode="python")
         )
     )
     _expect_raises(
@@ -726,9 +742,9 @@ def _scenario_candidate_binding_integrity() -> dict[str, Any]:
     )
     _expect_raises(
         lambda: glm.PromotionCandidateBinding.model_validate(
-            binding.model_copy(update={"candidate_fingerprint": _fp("changed")}).model_dump(
-                mode="python"
-            )
+            binding.model_copy(
+                update={"candidate_fingerprint": _fp("changed")}
+            ).model_dump(mode="python")
         )
     )
     return _passed(
@@ -774,7 +790,10 @@ def _scenario_revalidation() -> dict[str, Any]:
             ),
         ),
     )
-    assert valid.snapshots[0].disposition is glm.PromotionCandidateDisposition.ELIGIBLE_FOR_DRY_RUN
+    assert (
+        valid.snapshots[0].disposition
+        is glm.PromotionCandidateDisposition.ELIGIBLE_FOR_DRY_RUN
+    )
     assert expired.result.status is glm.PromotionTransactionStatus.ABSTAINED
     assert overdue.result.status is glm.PromotionTransactionStatus.ABSTAINED
     assert invalid.result.status is glm.PromotionTransactionStatus.ABSTAINED
@@ -807,7 +826,9 @@ def _scenario_confidence() -> dict[str, Any]:
     cap = one.candidates[0].candidate_confidence_cap
     assert one.snapshots[0].candidate_confidence_cap == cap
     assert two.snapshots[0].candidate_confidence_cap == cap
-    assert all(record.confidence_cap == cap for record in multi_projection.projections.records)
+    assert all(
+        record.confidence_cap == cap for record in multi_projection.projections.records
+    )
     return _passed(
         "confidence_non_amplification",
         (
@@ -836,9 +857,15 @@ def _scenario_approval_statuses() -> dict[str, Any]:
             request_id=f"approval-status-{status}-{decision}",
             status=status,
             decision=decision,
-            expires_delta=timedelta(minutes=-1) if status == "approved" else timedelta(hours=1),
+            expires_delta=timedelta(minutes=-1)
+            if status == "approved"
+            else timedelta(hours=1),
         )
-        kwargs = {"revoked_at": FIXED_TIME + timedelta(minutes=1)} if status == "approved" else {}
+        kwargs = (
+            {"revoked_at": FIXED_TIME + timedelta(minutes=1)}
+            if status == "approved"
+            else {}
+        )
         _expect_raises(
             lambda approval=approval, approval_decision=approval_decision, kwargs=kwargs: (
                 glm.project_existing_approval_evidence(
@@ -875,17 +902,21 @@ def _scenario_approval_binding() -> dict[str, Any]:
         "wrong_approval_scope": {"approval_scope": ("wrong-scope",)},
     }
     for request_id, kwargs in cases.items():
-        approval, decision = _approval_pair(context.request, request_id=request_id, **kwargs)
+        approval, decision = _approval_pair(
+            context.request, request_id=request_id, **kwargs
+        )
         _expect_raises(
-            lambda approval=approval, decision=decision: glm.project_existing_approval_evidence(
-                approval,
-                decision,
-                approval_evidence_id=f"evidence-{approval.approval_request_id}",
-                transaction_id=context.request.transaction_id,
-                promotion_request_fingerprint=context.request.request_fingerprint,
-                candidate_ids=context.request.candidate_ids,
-                candidate_fingerprints=context.request.candidate_fingerprints,
-                observed_at=FIXED_TIME + timedelta(minutes=2),
+            lambda approval=approval, decision=decision: (
+                glm.project_existing_approval_evidence(
+                    approval,
+                    decision,
+                    approval_evidence_id=f"evidence-{approval.approval_request_id}",
+                    transaction_id=context.request.transaction_id,
+                    promotion_request_fingerprint=context.request.request_fingerprint,
+                    candidate_ids=context.request.candidate_ids,
+                    candidate_fingerprints=context.request.candidate_fingerprints,
+                    observed_at=FIXED_TIME + timedelta(minutes=2),
+                )
             )
         )
     approval, decision = _approval_pair(context.request, request_id="wrong-payload")
@@ -895,7 +926,9 @@ def _scenario_approval_binding() -> dict[str, Any]:
         {"promotion_request_fingerprint": _fp("wrong-request")},
     )
     for index, payload_update in enumerate(payload_cases):
-        changed = approval.model_copy(update={"payload": {**approval.payload, **payload_update}})
+        changed = approval.model_copy(
+            update={"payload": {**approval.payload, **payload_update}}
+        )
         _expect_raises(
             lambda changed=changed, index=index: glm.project_existing_approval_evidence(
                 changed,
@@ -987,11 +1020,22 @@ def _scenario_identity() -> dict[str, Any]:
     )
     changed_scope = _planning_context(
         transaction_id="identity-changed-scope",
-        candidates=(_candidate(suffix="identity-scope", version_seed="changed-version"),),
+        candidates=(
+            _candidate(suffix="identity-scope", version_seed="changed-version"),
+        ),
     )
-    assert support.identities[0].knowledge_identity_id == refutation.identities[0].knowledge_identity_id
-    assert support.identities[0].knowledge_identity_id != changed_scope.identities[0].knowledge_identity_id
-    assert support.identities[0].identity_fingerprint != refutation.identities[0].identity_fingerprint
+    assert (
+        support.identities[0].knowledge_identity_id
+        == refutation.identities[0].knowledge_identity_id
+    )
+    assert (
+        support.identities[0].knowledge_identity_id
+        != changed_scope.identities[0].knowledge_identity_id
+    )
+    assert (
+        support.identities[0].identity_fingerprint
+        != refutation.identities[0].identity_fingerprint
+    )
     return _passed(
         "deterministic_knowledge_identity",
         (
@@ -1007,11 +1051,18 @@ def _scenario_identity() -> dict[str, Any]:
 def _scenario_duplicate() -> dict[str, Any]:
     seed = _planning_context(transaction_id="duplicate-seed")
     existing = _existing_reference(seed.identities[0])
-    context = _planning_context(transaction_id="duplicate-seed", existing_references=(existing,))
+    context = _planning_context(
+        transaction_id="duplicate-seed", existing_references=(existing,)
+    )
     replay = context.journal.with_transaction(context.record)
     assert context.conflicts.duplicate_count == 1
-    assert context.result.status is glm.PromotionTransactionStatus.DRY_RUN_NO_OP_DUPLICATE
-    assert context.versions[0].disposition is glm.KnowledgeVersionDisposition.NO_OP_DUPLICATE
+    assert (
+        context.result.status is glm.PromotionTransactionStatus.DRY_RUN_NO_OP_DUPLICATE
+    )
+    assert (
+        context.versions[0].disposition
+        is glm.KnowledgeVersionDisposition.NO_OP_DUPLICATE
+    )
     assert context.projections.record_count == 0
     assert replay is context.journal
     return _passed(
@@ -1059,11 +1110,15 @@ def _scenario_scope_conflicts() -> dict[str, Any]:
     base = _planning_context(transaction_id="scope-base")
     temporal = _planning_context(
         transaction_id="scope-temporal",
-        candidates=(_candidate(suffix="scope-temporal", valid_time_seed="valid-time-2"),),
+        candidates=(
+            _candidate(suffix="scope-temporal", valid_time_seed="valid-time-2"),
+        ),
     )
     jurisdiction = _planning_context(
         transaction_id="scope-jurisdiction",
-        candidates=(_candidate(suffix="scope-jurisdiction", jurisdiction_seed="jurisdiction-2"),),
+        candidates=(
+            _candidate(suffix="scope-jurisdiction", jurisdiction_seed="jurisdiction-2"),
+        ),
     )
     version = _planning_context(
         transaction_id="scope-version",
@@ -1112,7 +1167,9 @@ def _scenario_retraction_supersession_conflicts() -> dict[str, Any]:
         effective_from=seed.request.requested_at,
     )
     assert ordinary.result.status is glm.PromotionTransactionStatus.ABSTAINED
-    assert supersession.disposition is glm.KnowledgeVersionDisposition.SUPERSESSION_PLANNED
+    assert (
+        supersession.disposition is glm.KnowledgeVersionDisposition.SUPERSESSION_PLANNED
+    )
     assert supersession.historical_versions_preserved is True
     return _passed(
         "retraction_and_supersession_conflicts",
@@ -1190,7 +1247,9 @@ def _scenario_disposition_plans() -> dict[str, Any]:
     assert plans[0].supersedes_version_id == existing.reference_id
     assert plans[1].retracts_version_id == existing.reference_id
     assert plans[2].expires_version_id == existing.reference_id
-    assert all(plan.append_only and plan.historical_versions_preserved for plan in plans)
+    assert all(
+        plan.append_only and plan.historical_versions_preserved for plan in plans
+    )
     return _passed(
         "supersession_retraction_and_expiry_plans",
         (
@@ -1309,7 +1368,9 @@ def _scenario_journal() -> dict[str, Any]:
     assert empty.records == ()
     assert updated.records == (context.record,)
     assert updated.with_transaction(context.record) is updated
-    changed = context.record.model_copy(update={"transaction_fingerprint": _fp("changed")})
+    changed = context.record.model_copy(
+        update={"transaction_fingerprint": _fp("changed")}
+    )
     _expect_raises(lambda: updated.with_transaction(changed))
     assert not hasattr(updated, "save")
     assert not hasattr(updated, "update")
@@ -1349,13 +1410,16 @@ def _scenario_queries_fixture(tmp_dir: Path) -> dict[str, Any]:
         json.dumps(fixture.model_dump(mode="json"), sort_keys=True),
         encoding="utf-8",
     )
-    replayed = glm.ExplicitLocalPromotionFixtureReplay(repository_root=REPO_ROOT).replay_fixture(
-        fixture_path
-    )
+    replayed = glm.ExplicitLocalPromotionFixtureReplay(
+        repository_root=REPO_ROOT
+    ).replay_fixture(fixture_path)
     assert replayed.record_count == 1
     _expect_raises(
-        lambda: glm.ExplicitLocalPromotionFixtureReplay(repository_root=REPO_ROOT).replay_fixture(
-            REPO_ROOT / "examples/governed-learning-memory/promotion-transaction-result-v1.json"
+        lambda: glm.ExplicitLocalPromotionFixtureReplay(
+            repository_root=REPO_ROOT
+        ).replay_fixture(
+            REPO_ROOT
+            / "examples/governed-learning-memory/promotion-transaction-result-v1.json"
         )
     )
     symlink_path = tmp_dir / "aion-223-fixture-symlink.json"
@@ -1371,9 +1435,9 @@ def _scenario_queries_fixture(tmp_dir: Path) -> dict[str, Any]:
     protected_path = tmp_dir / "aion-223-protected-fixture.json"
     protected_path.write_text('{"source_body": "protected"}', encoding="utf-8")
     _expect_raises(
-        lambda: glm.ExplicitLocalPromotionFixtureReplay(repository_root=REPO_ROOT).replay_fixture(
-            protected_path
-        )
+        lambda: glm.ExplicitLocalPromotionFixtureReplay(
+            repository_root=REPO_ROOT
+        ).replay_fixture(protected_path)
     )
     return _passed(
         "bounded_exact_queries_and_fixture_replay",
@@ -1401,14 +1465,20 @@ def _scenario_determinism() -> dict[str, Any]:
     )
     changed_lineage = _planning_context(
         transaction_id="determinism-changed-lineage",
-        candidates=(_candidate(suffix="determinism-changed-lineage", claim_seed="changed-claim"),),
+        candidates=(
+            _candidate(
+                suffix="determinism-changed-lineage", claim_seed="changed-claim"
+            ),
+        ),
     )
     changed_approval = _planning_context(
         transaction_id="determinism-changed-approval",
         approval_pairs=2,
     )
     assert first.result.result_fingerprint == second.result.result_fingerprint
-    assert first.result.result_fingerprint != changed_candidate.result.result_fingerprint
+    assert (
+        first.result.result_fingerprint != changed_candidate.result.result_fingerprint
+    )
     assert first.result.result_fingerprint != changed_lineage.result.result_fingerprint
     assert first.result.result_fingerprint != changed_approval.result.result_fingerprint
     assert glm.PromotionResourceBudget().maximum_concurrency == 4
@@ -1441,7 +1511,10 @@ def _scenario_zero_side_effects() -> dict[str, Any]:
     assert context.result.automatic_promotions == 0
     assert context.result.runtime_effect is False
     assert context.result.future_persistence_authorized is False
-    assert glm.reject_persistent_write() is glm.PersistentWriteOutcome.PERSISTENT_WRITE_DISABLED
+    assert (
+        glm.reject_persistent_write()
+        is glm.PersistentWriteOutcome.PERSISTENT_WRITE_DISABLED
+    )
     return _passed(
         "zero_side_effect_and_repository_boundary",
         (
@@ -1523,13 +1596,16 @@ def _scenario_functions(tmp_dir: Path) -> tuple[Callable[[], dict[str, Any]], ..
         _scenario_initial_new_versions,
         _scenario_disposition_plans,
         lambda: _projection_scenario(
-            "semantic_memory_projection_plan", glm.MemoryProjectionTarget.SEMANTIC_MEMORY
+            "semantic_memory_projection_plan",
+            glm.MemoryProjectionTarget.SEMANTIC_MEMORY,
         ),
         lambda: _projection_scenario(
-            "episodic_memory_projection_plan", glm.MemoryProjectionTarget.EPISODIC_MEMORY
+            "episodic_memory_projection_plan",
+            glm.MemoryProjectionTarget.EPISODIC_MEMORY,
         ),
         lambda: _projection_scenario(
-            "procedural_memory_projection_plan", glm.MemoryProjectionTarget.PROCEDURAL_MEMORY
+            "procedural_memory_projection_plan",
+            glm.MemoryProjectionTarget.PROCEDURAL_MEMORY,
         ),
         _scenario_belief_boundary,
         _scenario_rollback_compensation,
@@ -1549,7 +1625,9 @@ def execute_scenarios(tmp_dir: Path) -> list[dict[str, Any]]:
         try:
             result = scenario_fn()
             if result["scenario_id"] != scenario_id:
-                raise AssertionError(f"scenario order mismatch: {result['scenario_id']}")
+                raise AssertionError(
+                    f"scenario order mismatch: {result['scenario_id']}"
+                )
             results.append(result)
         except Exception as exc:
             results.append(
@@ -1567,7 +1645,9 @@ def execute_scenarios(tmp_dir: Path) -> list[dict[str, Any]]:
     return results
 
 
-def build_hard_gate_results(scenario_results: list[Mapping[str, Any]]) -> dict[str, dict[str, Any]]:
+def build_hard_gate_results(
+    scenario_results: list[Mapping[str, Any]],
+) -> dict[str, dict[str, Any]]:
     all_scenarios_passed = all(item["result"] == "passed" for item in scenario_results)
     return {
         gate: {
@@ -1674,7 +1754,10 @@ def _raise(message: str) -> None:
 def validate_evaluation_report(report: Mapping[str, Any]) -> None:
     if report.get("evaluation_id") != EVALUATION_ID:
         _raise("evaluation ID mismatch")
-    if report.get("evaluation_type") != "read_only_promotion_transaction_operator_evaluation":
+    if (
+        report.get("evaluation_type")
+        != "read_only_promotion_transaction_operator_evaluation"
+    ):
         _raise("evaluation type mismatch")
     if report.get("program_id") != PROGRAM_ID:
         _raise("program ID mismatch")
@@ -1694,7 +1777,9 @@ def validate_evaluation_report(report: Mapping[str, Any]) -> None:
     if set(hard_gate_results) != set(REQUIRED_HARD_GATES):
         _raise("hard gate set mismatch")
     scenario_passed = all(item.get("result") == "passed" for item in scenario_results)
-    hard_gates_passed = all(item.get("passed") is True for item in hard_gate_results.values())
+    hard_gates_passed = all(
+        item.get("passed") is True for item in hard_gate_results.values()
+    )
     decision = report.get("decision")
     evaluation_passed = report.get("evaluation_passed")
     if decision == PASS_DECISION:
@@ -1717,7 +1802,10 @@ def validate_evaluation_report(report: Mapping[str, Any]) -> None:
     for field in ZERO_EFFECT_FIELDS:
         if report.get(field) != 0:
             _raise(f"zero-effect field is not zero: {field}")
-    if report.get("runtime_state", {}).get("local_persistence_implemented") is not False:
+    if (
+        report.get("runtime_state", {}).get("local_persistence_implemented")
+        is not False
+    ):
         _raise("local persistence must remain unimplemented")
     text = json.dumps(report, sort_keys=True).lower()
     protected = (
@@ -1744,7 +1832,9 @@ def write_report(report: Mapping[str, Any], report_path: Path, tmp_dir: Path) ->
     tmp_dir = tmp_dir.resolve()
     report_path = report_path.resolve()
     if report_path != tmp_dir and tmp_dir not in report_path.parents:
-        raise EvaluationReportError("report path must be beneath temporary output directory")
+        raise EvaluationReportError(
+            "report path must be beneath temporary output directory"
+        )
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(
         json.dumps(report, indent=2, sort_keys=True) + "\n",
@@ -1777,7 +1867,9 @@ def run_evaluation(
 
 
 def _parse_args(argv: list[str]) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run AION-223 GLM promotion evaluation")
+    parser = argparse.ArgumentParser(
+        description="Run AION-223 GLM promotion evaluation"
+    )
     parser.add_argument("--repo-root", required=True)
     parser.add_argument("--evaluation-id", required=True)
     parser.add_argument("--evaluation-base-commit", required=True)

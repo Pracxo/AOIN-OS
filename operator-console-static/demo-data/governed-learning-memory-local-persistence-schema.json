@@ -1,0 +1,26 @@
+{
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "synthetic": true,
+  "append_only_tables_required": true,
+  "authorization_transaction_id": "AION-223-GLM-0002",
+  "delete_rejection_triggers_required": true,
+  "future_sqlite_policy": {
+    "application_id": 223224,
+    "auto_vacuum": "NONE",
+    "busy_timeout": 5000,
+    "extension_loading": "disabled",
+    "foreign_keys": "ON",
+    "journal_mode": "WAL",
+    "recursive_triggers": "OFF",
+    "synchronous": "FULL",
+    "temp_store": "MEMORY",
+    "trusted_schema": "OFF",
+    "user_version": 1
+  },
+  "schema_created_by_aion_223": false,
+  "schema_version": 1,
+  "update_rejection_triggers_required": true
+}

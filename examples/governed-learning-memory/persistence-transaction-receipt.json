@@ -1,0 +1,16 @@
+{
+  "authorization_transaction_id": "AION-223-GLM-0002",
+  "begin_immediate_required": true,
+  "content_fingerprints": [
+    "fp-content-redacted-sample"
+  ],
+  "model": "PersistenceTransactionReceipt",
+  "persistent_transaction_executed_by_aion_223": false,
+  "projection_fingerprints": [
+    "fp-projection-redacted-sample"
+  ],
+  "promotion_result_fingerprint": "fp-result-redacted-sample",
+  "read_after_write_verification_required": true,
+  "rollback_on_exception_required": true,
+  "transaction_id": "persistence-transaction-aion-224-sample-001"
+}

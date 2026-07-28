@@ -1,32 +1,39 @@
 from __future__ import annotations
 
+from scripts.lib.governed_learning_memory_local_persistence_authorization import (
+    AION224_RESOURCE_LIMITS,
+)
 from test_governed_learning_memory_program_authorization import load_json
 
 
 def test_resource_budgets_include_positive_planning_limits_and_zero_effect_limits() -> None:
     limits = load_json("docs/governed-learning-memory/authorization-ledger.json")["resource_limits"]
 
-    assert limits["maximum_promotion_requests_per_batch"] == 100
-    assert limits["maximum_candidates_per_request"] == 100
-    assert limits["maximum_lineage_references_per_candidate"] == 500
-    assert limits["maximum_source_references_per_candidate"] == 100
-    assert limits["maximum_fixture_bytes"] == 4194304
-    assert limits["maximum_concurrency"] == 4
+    assert limits == AION224_RESOURCE_LIMITS
+    assert limits["maximum_persistence_sessions"] == 10
+    assert limits["maximum_transactions_per_session"] == 100
+    assert limits["maximum_knowledge_versions_per_transaction"] == 100
+    assert limits["maximum_projection_records_per_transaction"] == 100
+    assert limits["minimum_independent_approvers_per_transaction"] == 2
+    assert limits["maximum_total_transaction_bytes"] == 4194304
+    assert limits["maximum_database_bytes"] == 1073741824
+    assert limits["maximum_concurrent_readers"] == 4
+    assert limits["maximum_concurrent_writers"] == 1
 
     zero_limits = [
-        "maximum_persistent_knowledge_writes",
-        "maximum_persistent_verified_knowledge_writes",
-        "maximum_cognitive_memory_writes",
-        "maximum_semantic_memory_writes",
-        "maximum_episodic_memory_writes",
-        "maximum_procedural_memory_writes",
-        "maximum_belief_creations",
-        "maximum_belief_mutations",
+        "maximum_persistent_source_body_writes",
+        "maximum_persistent_source_preview_writes",
+        "maximum_persistent_raw_approval_payload_writes",
+        "maximum_confidential_content_writes",
+        "maximum_restricted_content_writes",
+        "maximum_actual_belief_creations",
+        "maximum_actual_belief_mutations",
         "maximum_automatic_knowledge_promotions",
         "maximum_automatic_candidate_approvals",
-        "maximum_engagement_fact_promotions",
-        "maximum_engagement_confidence_effects",
+        "maximum_automatic_memory_ingestions",
+        "maximum_engagement_learning_applications",
         "maximum_network_calls",
+        "maximum_search_provider_calls",
         "maximum_connector_calls",
         "maximum_model_provider_calls",
         "maximum_actual_tool_executions",

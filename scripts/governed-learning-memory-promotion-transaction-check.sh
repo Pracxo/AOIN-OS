@@ -55,7 +55,19 @@ import json
 import os
 from pathlib import Path
 
+from scripts.lib.governed_learning_memory_local_persistence_authorization import (
+    AION221_AUTHORIZATION_ID,
+    AION222_FEATURE_COMMIT,
+    AION222_MERGE_COMMIT,
+    AION222_MERGED_AT,
+    AION222_SOURCE_SCOPE,
+    AION223_AUTHORIZATION_ID,
+    PASS_DECISION,
+    validate_local_persistence_authorization,
+)
+
 root = Path(os.environ["AION_REPO_ROOT"])
+validate_local_persistence_authorization(root)
 program = json.loads((root / "docs/governed-learning-memory/program-ledger.json").read_text(encoding="utf-8"))
 auth = json.loads((root / "docs/governed-learning-memory/authorization-ledger.json").read_text(encoding="utf-8"))
 
@@ -84,6 +96,8 @@ required_true = [
     "in_memory_transaction_journal_available",
     "synthetic_fixture_replay_available",
     "bounded_exact_queries_available",
+    "local_append_only_knowledge_store_authorized",
+    "operator_invoked_local_persistence_authorized",
 ]
 required_false = [
     "actual_knowledge_promotion_enabled",
@@ -103,13 +117,24 @@ required_false = [
     "runtime_enabled",
     "production_exposure",
     "runtime_effect",
+    "local_append_only_knowledge_store_implemented",
+    "operator_invoked_local_persistence_available",
+    "background_persistent_knowledge_write_enabled",
+    "production_persistent_knowledge_write_enabled",
+    "approval_creation_by_runtime_enabled",
+    "approval_decision_by_runtime_enabled",
+    "network_access_enabled",
+    "shell_command_execution_enabled",
+    "subprocess_execution_enabled",
+    "source_mutation_enabled",
+    "git_mutation_enabled",
 ]
 for label, payload in (("program", program), ("authorization", auth)):
-    if payload["authorization_transaction_id"] != "AION-221-GLM-0001":
-        raise SystemExit(f"{label} authorization mismatch")
-    if payload["active_glm_implementation_task"] != "AION-222":
+    if payload["authorization_transaction_id"] != AION223_AUTHORIZATION_ID:
+        raise SystemExit(f"{label} current authorization mismatch")
+    if payload["active_glm_implementation_task"] != "AION-224":
         raise SystemExit(f"{label} active task mismatch")
-    if payload["formal_closeout_task"] != "AION-223":
+    if payload["formal_closeout_task"] != "AION-225":
         raise SystemExit(f"{label} closeout task mismatch")
     if payload["knowledge_promotion_transaction_core_state"] != state:
         raise SystemExit(f"{label} implementation state mismatch")
@@ -123,58 +148,68 @@ for label, payload in (("program", program), ("authorization", auth)):
         raise SystemExit(f"{label} AION-221 PR reconciliation mismatch")
     if payload["aion_221_delivery"]["merge_commits"] != ["ecb1e8ce8560ac06040cd297bfc26ff2ad020273"]:
         raise SystemExit(f"{label} AION-221 merge reconciliation mismatch")
+    expected_delivery = {
+        "task_id": "AION-222",
+        "branch": "phase/governed-learning-memory-promotion-transaction-core",
+        "feature_commits": [AION222_FEATURE_COMMIT],
+        "pull_requests": [138],
+        "merge_commits": [AION222_MERGE_COMMIT],
+        "ci_result": "pass",
+        "completion_timestamp": AION222_MERGED_AT,
+        "authorization_transaction": AION221_AUTHORIZATION_ID,
+        "authorization_state": "consumed_by_AION-222_closed_by_AION-223",
+        "next_task": "AION-223",
+        "runtime_state": "promotion_transaction_core_implemented_dry_run_in_memory_write_disabled",
+        "evaluation_id": "AION-GLMPE-001",
+        "evaluation_decision": PASS_DECISION,
+    }
+    delivery = payload["aion_222_delivery"]
+    for key, expected in expected_delivery.items():
+        if delivery.get(key) != expected:
+            raise SystemExit(f"{label} AION-222 delivery {key} mismatch")
 
-limits = program["resource_limits"]
-expected_limits = {
-    "maximum_promotion_requests_per_batch": 100,
-    "maximum_candidates_per_request": 100,
-    "maximum_lineage_references_per_candidate": 500,
-    "maximum_source_references_per_candidate": 100,
-    "maximum_claim_references_per_candidate": 20,
-    "maximum_assessment_references_per_candidate": 20,
-    "maximum_mesh_references_per_candidate": 20,
-    "maximum_tool_session_references_per_candidate": 20,
-    "maximum_approval_evidence_records_per_transaction": 4,
-    "maximum_projection_records_per_transaction": 100,
-    "maximum_versions_per_knowledge_identity": 100,
-    "maximum_rollback_steps_per_transaction": 50,
-    "maximum_compensation_steps_per_transaction": 50,
-    "maximum_operator_review_items": 100,
-    "maximum_in_memory_transactions": 1000,
-    "maximum_query_results": 1000,
-    "maximum_fixture_records": 5000,
-    "maximum_fixture_bytes": 4194304,
-    "maximum_concurrency": 4,
-    "maximum_persistent_knowledge_writes": 0,
-    "maximum_persistent_verified_knowledge_writes": 0,
-    "maximum_cognitive_memory_writes": 0,
-    "maximum_semantic_memory_writes": 0,
-    "maximum_episodic_memory_writes": 0,
-    "maximum_procedural_memory_writes": 0,
-    "maximum_belief_creations": 0,
-    "maximum_belief_mutations": 0,
-    "maximum_automatic_knowledge_promotions": 0,
-    "maximum_automatic_candidate_approvals": 0,
-    "maximum_engagement_fact_promotions": 0,
-    "maximum_engagement_confidence_effects": 0,
-    "maximum_network_calls": 0,
-    "maximum_search_provider_calls": 0,
-    "maximum_connector_calls": 0,
-    "maximum_model_provider_calls": 0,
-    "maximum_actual_tool_executions": 0,
-    "maximum_shell_commands": 0,
-    "maximum_subprocess_executions": 0,
-    "maximum_browser_actions": 0,
-    "maximum_source_mutations": 0,
-    "maximum_git_operations": 0,
-    "maximum_runtime_created_pull_requests": 0,
-    "maximum_runtime_created_approvals": 0,
-    "maximum_deployments": 0,
-    "maximum_model_weight_changes": 0,
+records = {
+    record["authorization_transaction_id"]: record
+    for record in auth["records"]
+    if "authorization_transaction_id" in record
 }
-for key, expected in expected_limits.items():
-    if limits.get(key) != expected:
-        raise SystemExit(f"resource limit mismatch: {key}: {limits.get(key)!r}")
+closed = records.get(AION221_AUTHORIZATION_ID)
+if not closed:
+    raise SystemExit("AION-221 authorization record missing")
+if closed.get("authorization_active") is not False:
+    raise SystemExit("AION-221 authorization still active")
+if closed.get("authorization_consumed") is not True:
+    raise SystemExit("AION-221 authorization not consumed")
+if closed.get("authorization_consumed_by_task") != "AION-222":
+    raise SystemExit("AION-221 consumed-by task mismatch")
+if closed.get("authorization_consumed_by_prs") != [138]:
+    raise SystemExit("AION-221 consumed-by PR mismatch")
+if closed.get("authorization_consumed_by_feature_commits") != [AION222_FEATURE_COMMIT]:
+    raise SystemExit("AION-221 consumed-by feature commit mismatch")
+if closed.get("authorization_consumed_by_merge_commits") != [AION222_MERGE_COMMIT]:
+    raise SystemExit("AION-221 consumed-by merge commit mismatch")
+if closed.get("authorization_closed_by_task") != "AION-223":
+    raise SystemExit("AION-221 closeout task mismatch")
+
+current = records.get(AION223_AUTHORIZATION_ID)
+if not current:
+    raise SystemExit("AION-223 authorization record missing")
+if current.get("authorization_active") is not True:
+    raise SystemExit("AION-223 authorization is not active")
+if current.get("authorization_consumed") is not False:
+    raise SystemExit("AION-223 authorization is already consumed")
+if current.get("implementation_approved", False) is not False:
+    raise SystemExit("AION-223 implementation approval must remain false")
+if current.get("runtime_enabled", False) is not False:
+    raise SystemExit("AION-223 runtime must remain disabled")
+if current.get("runtime_state") != "authorized_not_implemented":
+    raise SystemExit("AION-223 runtime state mismatch")
+if current.get("implementation_task") != "AION-224":
+    raise SystemExit("AION-223 implementation task mismatch")
+
+for relative in AION222_SOURCE_SCOPE:
+    if not (root / relative).exists():
+        raise SystemExit(f"AION-222 authorized source missing: {relative}")
 
 example_dir = root / "examples/governed-learning-memory"
 for path in sorted(example_dir.glob("*.json")):

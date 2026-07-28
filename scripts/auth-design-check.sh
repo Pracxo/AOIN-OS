@@ -1460,6 +1460,21 @@ aion221_auth_paths = {
     "services/brain-api/tests/test_governed_learning_memory_program_authorization.py",
 }
 
+aion223_auth_paths = {
+    "docs/adr/0187-promotion-transaction-evaluation-and-local-append-only-knowledge-persistence-authorization.md",
+    "docs/governed-learning-memory/local-persistence-authorization-model.md",
+    "docs/release/governed-learning-memory-local-persistence-authorization-transaction.md",
+    "examples/governed-learning-memory/local-persistence-authorization-envelope.json",
+    "examples/governed-learning-memory/local-persistence-authorization.json",
+    "operator-console-static/demo-data/governed-learning-memory-local-persistence-authorization.json",
+    "scripts/governed-learning-memory-local-persistence-authorization-check.sh",
+    "scripts/governed-learning-memory-local-persistence-authorization-no-go-regression.sh",
+    "scripts/lib/governed_learning_memory_local_persistence_authorization.py",
+    "services/brain-api/tests/test_governed_learning_memory_authorization_closeout.py",
+    "services/brain-api/tests/test_governed_learning_memory_local_persistence_authorization_docs.py",
+    "services/brain-api/tests/test_governed_learning_memory_local_persistence_authorization_validator.py",
+}
+
 blocked_package_names = {
     "package.json",
     "package-lock.json",
@@ -1512,6 +1527,7 @@ for name in [*changed, *untracked]:
         and name not in aion219_auth_paths
         and name not in aion220_auth_paths
         and name not in aion221_auth_paths
+        and name not in aion223_auth_paths
     ):
         raise SystemExit(f"unexpected auth runtime or artifact path: {name}")
 

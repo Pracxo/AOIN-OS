@@ -1,0 +1,22 @@
+{
+  "append_only_sequence": 2,
+  "belief_written": false,
+  "confidence_cap": "0.890000",
+  "content_reference": "content-env-aion-223-sample-001",
+  "entry_hash": "fp-projection-redacted-sample",
+  "memory_record_created_in_isolated_store": true,
+  "model": "PersistentMemoryProjectionRecord",
+  "owner_scope_fingerprints": [
+    "fp-owner-scope-redacted"
+  ],
+  "persistent_record_created_by_aion_223": false,
+  "previous_ledger_hash": "fp-entry-redacted-sample",
+  "production_memory_written": false,
+  "projection_target": "semantic",
+  "provenance_fingerprints": [
+    "fp-lineage-redacted-sample"
+  ],
+  "sensitivity": "internal",
+  "source_knowledge_version": "knowledge-id-aion-223-sample-001:v1",
+  "summary": "Redacted future local projection summary."
+}

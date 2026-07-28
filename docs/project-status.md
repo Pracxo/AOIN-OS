@@ -8,6 +8,16 @@ tag or release exists.
 
 ## Current Main Milestone
 
+## AION-223 Promotion Evaluation and Local Persistence Authorization
+
+Current milestone: AION-223 promotion transaction operator evaluation complete and local append-only knowledge persistence authorized.
+
+Current stage: The deterministic approval-bound promotion-planning core is implemented and passed read-only operator evaluation. The isolated local append-only knowledge and cognitive-memory projection store is authorized and not implemented.
+
+Required flags: `promotion_transaction_core_implemented=true`, `promotion_transaction_operator_evaluation_passed=true`, `local_append_only_knowledge_store_authorized=true`, `local_append_only_knowledge_store_implemented=false`, `operator_invoked_local_persistence_authorized=true`, `operator_invoked_local_persistence_available=false`, `general_persistent_knowledge_write_enabled=false`, `background_persistent_knowledge_write_enabled=false`, `production_persistent_knowledge_write_enabled=false`, `automatic_knowledge_promotion_enabled=false`, `actual_belief_creation_enabled=false`, `actual_belief_mutation_enabled=false`, `active_glm_implementation_authorization=AION-223-GLM-0002`, `active_glm_implementation_task=AION-224`, `formal_closeout_task=AION-225`.
+
+Candidate eligibility is not factual truth. Approval is not factual proof. A dry-run result is not persistence. AION-224 may implement an isolated local store only. Every real persistence transaction will require a new dual approval. The future store remains separate from production memory. Belief projections remain candidate records. Background and automatic persistence remain disabled. AION-225 is the next evaluation task after AION-224. AION-226 remains unapproved.
+
 ## AION-220 Final Knowledge Intelligence Program Closeout
 
 AION-220 final Knowledge Intelligence Program evaluation and closeout complete.
@@ -58,7 +68,7 @@ Post-closeout distinction:
 - AION-221 starts a new program through a later explicit charter.
 - AION-221 does not reactivate Knowledge Intelligence authorization.
 - AION-221 does not authorize production activation.
-- AION-222 is the sole authorized implementation task in the new program.
+- AION-222 has consumed its authorization; AION-224 is now the sole authorized implementation task in the new program.
 
 `AION-221-GLM-0001` is active for AION-222 only. AION-223 is the formal
 closeout task. AION-222 remains unimplemented and must remain deterministic,
@@ -123,7 +133,7 @@ Historical marker: `formal_closeout_task=AION-220` denoted the prior closeout ta
 - Governed continual learning available.
 - Integrated cognitive shadow runtime available.
 - Controlled local-offline cognitive pilot passed.
-- Governed Learning and Memory Integration Program authorized but not
+- Governed Learning and Memory local append-only persistence authorized but not
   implemented.
 
 ## Available Governed Capabilities
