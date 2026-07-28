@@ -142,10 +142,14 @@
     "authorization_state": "implementation_complete_pending_AION-225_closeout",
     "authorization_transaction": "AION-223-GLM-0002",
     "branch": "phase/governed-learning-memory-local-append-only-persistence",
-    "ci_result": "pending",
-    "completion_timestamp": null,
+    "ci_result": "pass",
+    "completion_timestamp": "2026-07-28T18:38:48Z",
     "corrective_prs": [],
-    "feature_commits": [],
+    "evaluation_decision": "pending_AION-225_operator_evaluation",
+    "evaluation_id": "AION-GLMPE-002",
+    "feature_commits": [
+      "f44756f4067cd381be1ebf11a6edce1e3bc8133b"
+    ],
     "implementation_summary": {
       "actual_belief_created": false,
       "automatic_promotion_applied": false,
@@ -157,9 +161,13 @@
       "sqlite_application_id": 223224,
       "synthetic_local_persistence_pilot_completed": true
     },
-    "merge_commits": [],
+    "merge_commits": [
+      "c6632a8e4985887f38400052f53f1c2a5d7882ec"
+    ],
     "next_task": "AION-225",
-    "pull_requests": [],
+    "pull_requests": [
+      140
+    ],
     "runtime_state": "local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout",
     "task_id": "AION-224"
   },
