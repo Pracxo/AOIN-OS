@@ -1,35 +1,17 @@
 {
-  "approvers_must_differ_from_each_other": true,
-  "evidence_type": "PersistenceApprovalBundle",
-  "fingerprint_bindings_required": [
-    "store_identity_fingerprint",
-    "transaction_id",
-    "promotion_request_fingerprint",
-    "transaction_plan_fingerprint",
-    "transaction_result_fingerprint",
-    "knowledge_identity_ids",
-    "planned_version_fingerprints",
-    "projection_fingerprints",
-    "approved_content_fingerprints",
-    "database_path_fingerprint",
-    "backup_policy_fingerprint"
-  ],
+  "approval_creation_performed_by_aion224": false,
+  "approval_decision_performed_by_aion224": false,
+  "example_fingerprint": "aa47044ad02695b36081bca8686b8c89513213b09fe3612b0ce7025958c9a384",
   "minimum_independent_approvers": 2,
   "plan_approval_can_authorize_persistence": false,
-  "raw_approval_payload_persisted": false,
-  "requester_must_differ_from_approvers": true,
-  "required_action_types": [
-    "governed_learning_memory.persist_local_knowledge_version",
-    "governed_learning_memory.persist_local_memory_projection"
-  ],
-  "required_approver_roles": [
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "raw_payload_persisted": false,
+  "redacted": true,
+  "required_roles": [
     "knowledge_steward",
     "memory_operator"
   ],
-  "required_resource_type": "promotion_transaction_result",
-  "required_scopes": [
-    "governed-learning-memory:persist-local-knowledge",
-    "governed-learning-memory:persist-local-projection"
-  ],
-  "runtime_can_create_approval": false
+  "runtime_effect": false,
+  "schema_version": "aion-glm-persistence-approval-evidence/v1",
+  "task_id": "AION-224"
 }

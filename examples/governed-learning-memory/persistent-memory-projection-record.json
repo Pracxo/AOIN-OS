@@ -1,22 +1,11 @@
 {
-  "append_only_sequence": 2,
   "belief_written": false,
-  "confidence_cap": "0.890000",
-  "content_reference": "content-env-aion-223-sample-001",
-  "entry_hash": "fp-projection-redacted-sample",
-  "memory_record_created_in_isolated_store": true,
-  "model": "PersistentMemoryProjectionRecord",
-  "owner_scope_fingerprints": [
-    "fp-owner-scope-redacted"
-  ],
-  "persistent_record_created_by_aion_223": false,
-  "previous_ledger_hash": "fp-entry-redacted-sample",
+  "example_fingerprint": "ee8ce621ad2849ec13f75f8ec88b843b1feb7b95a3aa53d69e1e696ee66d1104",
   "production_memory_written": false,
-  "projection_target": "semantic",
-  "provenance_fingerprints": [
-    "fp-lineage-redacted-sample"
-  ],
-  "sensitivity": "internal",
-  "source_knowledge_version": "knowledge-id-aion-223-sample-001:v1",
-  "summary": "Redacted future local projection summary."
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "projection_type": "semantic",
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-persistent-memory-projection/v1",
+  "task_id": "AION-224"
 }

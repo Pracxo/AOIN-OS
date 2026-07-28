@@ -1,0 +1,10 @@
+{
+  "exact_match_only": true,
+  "example_fingerprint": "1a21d5af57c56074e2b131f7d32b4e61b3c1ddc73364d9e449d06f9362e23383",
+  "limit": 100,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-local-knowledge-query/v1",
+  "task_id": "AION-224"
+}

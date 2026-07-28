@@ -1,0 +1,15 @@
+{
+  "approval_status": "valid",
+  "example_fingerprint": "56ddc0c569d1cfbb94c5cc8adfdd961f152efdfe208cc301205f893927e8cf42",
+  "independent_approver_count": 2,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "redacted": true,
+  "required_roles": [
+    "knowledge_steward",
+    "memory_operator"
+  ],
+  "runtime_effect": false,
+  "schema_version": "aion-glm-persistence-approval-bundle/v1",
+  "separation_of_duties_passed": true,
+  "task_id": "AION-224"
+}

@@ -1,40 +1,58 @@
 {
+  "blockers": [],
   "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
-  "read_only": true,
-  "redacted": true,
-  "redaction_applied": true,
-  "synthetic": true,
-  "approvers_must_differ_from_each_other": true,
-  "evidence_type": "PersistenceApprovalBundle",
-  "fingerprint_bindings_required": [
-    "store_identity_fingerprint",
-    "transaction_id",
-    "promotion_request_fingerprint",
-    "transaction_plan_fingerprint",
-    "transaction_result_fingerprint",
-    "knowledge_identity_ids",
-    "planned_version_fingerprints",
-    "projection_fingerprints",
-    "approved_content_fingerprints",
-    "database_path_fingerprint",
-    "backup_policy_fingerprint"
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
   ],
   "minimum_independent_approvers": 2,
   "plan_approval_can_authorize_persistence": false,
-  "raw_approval_payload_persisted": false,
-  "requester_must_differ_from_approvers": true,
-  "required_action_types": [
-    "governed_learning_memory.persist_local_knowledge_version",
-    "governed_learning_memory.persist_local_memory_projection"
+  "program_state": "governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "refs": [
+    "AION-223-GLM-0002",
+    "AION-224",
+    "AION-225"
   ],
-  "required_approver_roles": [
+  "required_roles": [
     "knowledge_steward",
     "memory_operator"
   ],
-  "required_resource_type": "promotion_transaction_result",
-  "required_scopes": [
-    "governed-learning-memory:persist-local-knowledge",
-    "governed-learning-memory:persist-local-projection"
+  "runtime_can_create_approval": false,
+  "sections": [
+    "approval bundle",
+    "separation of duties",
+    "payload redaction"
   ],
-  "runtime_can_create_approval": false
+  "status": "dual_approval_required",
+  "synthetic": true,
+  "task_id": "AION-224",
+  "view_fingerprint": "d256318ca39592fa71e619aa1cb7773639329e5cc997417e41cd42d650562dfb",
+  "warnings": [
+    "local SQLite store has no application-level encryption; rely on bounded content and OS controls"
+  ]
 }

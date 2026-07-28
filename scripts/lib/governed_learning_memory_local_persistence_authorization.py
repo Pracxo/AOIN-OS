@@ -15,6 +15,12 @@ AION223_AUTHORIZATION_ID = "AION-223-GLM-0002"
 AION224_TASK = "AION-224"
 AION225_TASK = "AION-225"
 PASS_DECISION = "PROMOTION_TRANSACTION_OPERATOR_EVALUATION_PASS_RECOMMEND_LOCAL_APPEND_ONLY_KNOWLEDGE_PERSISTENCE_AUTHORIZATION"
+AUTHORIZED_NOT_IMPLEMENTED_STATE = (
+    "governed_learning_memory_local_persistence_authorized_not_implemented"
+)
+IMPLEMENTED_PENDING_CLOSEOUT_STATE = (
+    "governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout"
+)
 AION222_FEATURE_COMMIT = "e415cc397b9aec70f8b3d19285f5fdd315048731"
 AION222_MERGE_COMMIT = "b89c896b8e75955d28fd06d52b5fb66fb8ed5ac0"
 AION222_MERGED_AT = "2026-07-28T09:00:39Z"
@@ -424,10 +430,11 @@ def validate_authorization_ledgers(
     for label, payload in (("program", program), ("authorization", auth)):
         if payload.get("program_id") != PROGRAM_ID:
             _fail(f"{label} program mismatch")
-        if (
-            payload.get("program_state")
-            != "governed_learning_memory_local_persistence_authorized_not_implemented"
-        ):
+        program_state = payload.get("program_state")
+        if program_state not in {
+            AUTHORIZED_NOT_IMPLEMENTED_STATE,
+            IMPLEMENTED_PENDING_CLOSEOUT_STATE,
+        }:
             _fail(f"{label} state mismatch")
         if (
             payload.get("active_glm_implementation_authorization_count") != 1
@@ -451,22 +458,38 @@ def validate_authorization_ledgers(
             ],
             label,
         )
+        expected_false = [
+            "general_persistent_knowledge_write_enabled",
+            "background_persistent_knowledge_write_enabled",
+            "production_persistent_knowledge_write_enabled",
+            "automatic_knowledge_promotion_enabled",
+            "cognitive_belief_creation_enabled",
+            "cognitive_belief_mutation_enabled",
+            "production_exposure",
+            "v02_release_ready",
+            "v02_tag_created",
+            "v02_release_created",
+        ]
+        if program_state == AUTHORIZED_NOT_IMPLEMENTED_STATE:
+            expected_false.extend(
+                [
+                    "local_append_only_knowledge_store_implemented",
+                    "operator_invoked_local_persistence_available",
+                ]
+            )
+        else:
+            _require_true(
+                payload,
+                [
+                    "local_append_only_knowledge_store_implemented",
+                    "operator_invoked_local_persistence_available",
+                    "synthetic_local_persistence_pilot_completed",
+                ],
+                label,
+            )
         _require_false(
             payload,
-            [
-                "local_append_only_knowledge_store_implemented",
-                "operator_invoked_local_persistence_available",
-                "general_persistent_knowledge_write_enabled",
-                "background_persistent_knowledge_write_enabled",
-                "production_persistent_knowledge_write_enabled",
-                "automatic_knowledge_promotion_enabled",
-                "cognitive_belief_creation_enabled",
-                "cognitive_belief_mutation_enabled",
-                "production_exposure",
-                "v02_release_ready",
-                "v02_tag_created",
-                "v02_release_created",
-            ],
+            expected_false,
             label,
         )
         if (
@@ -610,6 +633,15 @@ def validate_future_policy(root: Path = REPO_ROOT) -> None:
 
 
 def validate_no_aion224_source(root: Path = REPO_ROOT) -> None:
+    program_state = load_json(
+        "docs/governed-learning-memory/program-ledger.json",
+        root,
+    ).get("program_state")
+    if program_state == IMPLEMENTED_PENDING_CLOSEOUT_STATE:
+        missing = [rel for rel in AION224_SOURCE_SCOPE if not (root / rel).exists()]
+        if missing:
+            _fail(f"AION-224 source scope incomplete: {missing[0]}")
+        return
     for rel in AION224_SOURCE_SCOPE:
         if rel.endswith("__init__.py"):
             continue

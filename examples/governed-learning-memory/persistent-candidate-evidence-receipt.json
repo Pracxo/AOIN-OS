@@ -1,0 +1,11 @@
+{
+  "candidate_body_persisted": false,
+  "candidate_fingerprint": "d266c5d27d8fc250148090d6c2a46af8ecc9d56e7313f827633e0a6451fa2394",
+  "example_fingerprint": "31fec328c36084bb76848a04327a7829cba4841b4949a12add60eaf33b4f6755",
+  "lineage_fingerprint": "2217a335a2a5c257158e260784f2a85a7598aeef4a8f73c0bf864d2176fa2b39",
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-persistent-candidate-receipt/v1",
+  "task_id": "AION-224"
+}

@@ -1,28 +1,63 @@
 {
+  "actual_belief_creation_enabled": false,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "actual_belief_mutation_enabled": false,
+  "automatic_initialization_enabled": false,
+  "automatic_knowledge_promotion_enabled": false,
+  "background_persistent_knowledge_write_enabled": false,
+  "blockers": [],
+  "existing_memory_repository_write_enabled": false,
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
+  ],
+  "network_access_enabled": false,
+  "operator_invocation_required": true,
+  "production_exposure": false,
+  "production_persistent_knowledge_write_enabled": false,
+  "program_state": "governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout",
   "read_only": true,
   "redacted": true,
   "redaction_applied": true,
-  "synthetic": true,
-  "actual_belief_creation_enabled": false,
-  "actual_belief_mutation_enabled": false,
-  "authorization_transaction_id": "AION-223-GLM-0002",
-  "automatic_knowledge_promotion_enabled": false,
-  "background_persistent_knowledge_write_enabled": false,
-  "cognitive_memory_write_enabled": false,
-  "episodic_memory_write_enabled": false,
-  "formal_closeout_task": "AION-225",
-  "general_persistent_knowledge_write_enabled": false,
-  "implementation_task": "AION-224",
-  "local_append_only_knowledge_store_authorized": true,
-  "local_append_only_knowledge_store_implemented": false,
-  "operator_invoked_local_persistence_available": false,
-  "procedural_memory_write_enabled": false,
-  "production_exposure": false,
-  "production_persistent_knowledge_write_enabled": false,
-  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "refs": [
+    "AION-223-GLM-0002",
+    "AION-224",
+    "AION-225"
+  ],
   "runtime_enabled": false,
-  "semantic_memory_write_enabled": false,
-  "v02_release_created": false,
-  "v02_release_ready": false,
-  "v02_tag_created": false
+  "scheduled_persistent_knowledge_write_enabled": false,
+  "sections": [
+    "hold flags",
+    "outer gate",
+    "no runtime exposure"
+  ],
+  "status": "runtime_hold_passed",
+  "synthetic": true,
+  "task_id": "AION-224",
+  "view_fingerprint": "b48569065523aac6e8b45e02e6525bad07a1cfaa84ea66833b0f893ca84eb515",
+  "warnings": [
+    "local SQLite store has no application-level encryption; rely on bounded content and OS controls"
+  ]
 }

@@ -1,30 +1,55 @@
 {
+  "blockers": [],
   "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "confidential_content_persisted": false,
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
+  ],
+  "knowledge_identities_written": 1,
+  "knowledge_versions_written": 1,
+  "program_state": "governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout",
   "read_only": true,
   "redacted": true,
   "redaction_applied": true,
-  "synthetic": true,
-  "active_projection_marker_is_append_only_event": true,
-  "append_only_sequence": 1,
-  "approval_fingerprints": [
-    "fp-approval-1-redacted",
-    "fp-approval-2-redacted"
+  "refs": [
+    "AION-223-GLM-0002",
+    "AION-224",
+    "AION-225"
   ],
-  "candidate_fingerprint": "fp-candidate-redacted-sample",
-  "candidate_posture": "support",
-  "confidence_cap": "0.890000",
-  "content_fingerprint": "fp-content-redacted-sample",
-  "created_timestamp": "2026-01-01T00:00:00Z",
-  "entry_hash": "fp-entry-redacted-sample",
-  "jurisdiction": "global-redacted",
-  "knowledge_identity_id": "knowledge-id-aion-223-sample-001",
-  "lineage_fingerprint": "fp-lineage-redacted-sample",
-  "model": "PersistentKnowledgeVersion",
-  "persistent_record_created_by_aion_223": false,
-  "previous_ledger_hash": null,
-  "promotion_plan_fingerprint": "fp-plan-redacted-sample",
-  "promotion_result_fingerprint": "fp-result-redacted-sample",
-  "valid_time": "2026-01-01T00:00:00Z",
-  "version_number": 1,
-  "version_scope": "v1-redacted"
+  "sections": [
+    "identity",
+    "version",
+    "content envelope"
+  ],
+  "source_body_persisted": false,
+  "status": "knowledge_version_persistence_available",
+  "synthetic": true,
+  "task_id": "AION-224",
+  "view_fingerprint": "c9da8161aecf1257c3cee0a5dfcb1cb610d036b85cde8b8c568111086c23ce38",
+  "warnings": [
+    "local SQLite store has no application-level encryption; rely on bounded content and OS controls"
+  ]
 }

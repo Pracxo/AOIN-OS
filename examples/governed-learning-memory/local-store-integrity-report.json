@@ -1,10 +1,11 @@
 {
-  "authorization_transaction_id": "AION-223-GLM-0002",
-  "findings": [],
-  "foreign_key_check_required": true,
-  "ledger_hash_chain_audit_required": true,
-  "model": "LocalStoreIntegrityReport",
-  "production_memory_written": false,
-  "sqlite_integrity_check_required": true,
-  "tamper_evident_not_tamper_proof": true
+  "append_only_triggers_present": true,
+  "example_fingerprint": "1de3f2fb349164206626b8686fec691b8c61d5afc0c1132361c5c6abb227d1e6",
+  "global_hash_chain_passed": true,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-local-store-integrity/v1",
+  "task_id": "AION-224",
+  "transaction_hash_chain_passed": true
 }

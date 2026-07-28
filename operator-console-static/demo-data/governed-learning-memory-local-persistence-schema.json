@@ -1,26 +1,97 @@
 {
+  "application_id": 223224,
   "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "blockers": [],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
+  ],
+  "pragmas": {
+    "application_id": 223224,
+    "auto_vacuum": 0,
+    "foreign_keys": 1,
+    "journal_mode": "wal",
+    "recursive_triggers": 0,
+    "synchronous": 2,
+    "temp_store": 2,
+    "trusted_schema": 0,
+    "user_version": 1
+  },
+  "program_state": "governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout",
   "read_only": true,
   "redacted": true,
   "redaction_applied": true,
+  "refs": [
+    "AION-223-GLM-0002",
+    "AION-224",
+    "AION-225"
+  ],
+  "schema_fingerprint": "29a80c09163c01d7d0f8b51a6e7801cde607fcc56ce92b5a8f13cbd925b7f55b",
+  "schema_version": "aion-glm-local-persistence/v1",
+  "sections": [
+    "store metadata",
+    "append-only triggers",
+    "pragmas"
+  ],
+  "status": "schema_v1_implemented",
   "synthetic": true,
-  "append_only_tables_required": true,
-  "authorization_transaction_id": "AION-223-GLM-0002",
-  "delete_rejection_triggers_required": true,
-  "future_sqlite_policy": {
-    "application_id": 223224,
-    "auto_vacuum": "NONE",
-    "busy_timeout": 5000,
-    "extension_loading": "disabled",
-    "foreign_keys": "ON",
-    "journal_mode": "WAL",
-    "recursive_triggers": "OFF",
-    "synchronous": "FULL",
-    "temp_store": "MEMORY",
-    "trusted_schema": "OFF",
-    "user_version": 1
-  },
-  "schema_created_by_aion_223": false,
-  "schema_version": 1,
-  "update_rejection_triggers_required": true
+  "tables": [
+    "glm_store_metadata",
+    "glm_persistence_transactions",
+    "glm_approval_bindings",
+    "glm_candidate_evidence_receipts",
+    "glm_knowledge_identities",
+    "glm_knowledge_versions",
+    "glm_memory_projection_records",
+    "glm_belief_projection_candidates",
+    "glm_ledger_events"
+  ],
+  "task_id": "AION-224",
+  "triggers": [
+    "glm_store_metadata_reject_update",
+    "glm_store_metadata_reject_delete",
+    "glm_persistence_transactions_reject_update",
+    "glm_persistence_transactions_reject_delete",
+    "glm_approval_bindings_reject_update",
+    "glm_approval_bindings_reject_delete",
+    "glm_candidate_evidence_receipts_reject_update",
+    "glm_candidate_evidence_receipts_reject_delete",
+    "glm_knowledge_identities_reject_update",
+    "glm_knowledge_identities_reject_delete",
+    "glm_knowledge_versions_reject_update",
+    "glm_knowledge_versions_reject_delete",
+    "glm_memory_projection_records_reject_update",
+    "glm_memory_projection_records_reject_delete",
+    "glm_belief_projection_candidates_reject_update",
+    "glm_belief_projection_candidates_reject_delete",
+    "glm_ledger_events_reject_update",
+    "glm_ledger_events_reject_delete"
+  ],
+  "user_version": 1,
+  "view_fingerprint": "a1cb376750f52671c8024a653e1c74d2483c06f6b35ce939cfe364dafb0df337",
+  "warnings": [
+    "local SQLite store has no application-level encryption; rely on bounded content and OS controls"
+  ]
 }

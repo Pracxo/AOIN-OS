@@ -1,11 +1,10 @@
 {
-  "claim_identity_fingerprint": "fp-claim-redacted-sample",
-  "created_in_isolated_local_store": false,
-  "identity_fingerprint": "fp-identity-redacted-sample",
-  "jurisdiction_scope_fingerprint": "fp-jurisdiction-redacted-sample",
-  "knowledge_identity_id": "knowledge-id-aion-223-sample-001",
-  "model": "PersistentKnowledgeIdentity",
-  "production_memory_written": false,
-  "valid_time_fingerprint": "fp-valid-time-redacted-sample",
-  "version_scope_fingerprint": "fp-version-scope-redacted-sample"
+  "example_fingerprint": "9c785793a780d246ccdf3286d82e131439f4beffaa5567c1aa154098d05eb0eb",
+  "identity_fingerprint": "fb6c67c05dd63cb0b760c7c45264071d2330397b17979023619e4bea4f446f6b",
+  "knowledge_identity_id": "knowledge-example",
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-persistent-knowledge-identity/v1",
+  "task_id": "AION-224"
 }

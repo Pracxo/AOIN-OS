@@ -10,6 +10,7 @@ from scripts.lib.governed_learning_memory_local_persistence_authorization import
     AION224_PROHIBITED_CAPABILITIES,
     AION224_TASK,
     AION225_TASK,
+    IMPLEMENTED_PENDING_CLOSEOUT_STATE,
     PASS_DECISION,
     PROGRAM_ID,
     validate_authorization_ledgers,
@@ -35,15 +36,19 @@ def test_aion_223_program_and_authorization_are_exact() -> None:
     program, auth = validate_authorization_ledgers(REPO_ROOT)
     for payload in (program, auth):
         assert payload["program_id"] == PROGRAM_ID
-        assert (
-            payload["program_state"]
-            == "governed_learning_memory_local_persistence_authorized_not_implemented"
-        )
+        assert payload["program_state"] == IMPLEMENTED_PENDING_CLOSEOUT_STATE
         assert payload["active_glm_implementation_authorization_count"] == 1
         assert payload["active_glm_implementation_authorization"] == AUTH_ID
         assert payload["active_glm_implementation_task"] == IMPLEMENTATION_TASK
         assert payload["formal_closeout_task"] == FORMAL_CLOSEOUT_TASK
         assert payload["promotion_transaction_operator_evaluation_decision"] == PASS_DECISION
+        assert payload["local_append_only_knowledge_store_authorized"] is True
+        assert payload["local_append_only_knowledge_store_implemented"] is True
+        assert payload["operator_invoked_local_persistence_available"] is True
+        assert payload["synthetic_local_persistence_pilot_completed"] is True
+        assert payload["runtime_enabled"] is False
+        assert payload["production_persistent_knowledge_write_enabled"] is False
+        assert payload["automatic_knowledge_promotion_enabled"] is False
     assert auth["authorization_transaction_id"] == AUTH_ID
     assert auth["approval_record_id"] == AUTH_ID
     assert auth["candidate_id"] == CANDIDATE_ID

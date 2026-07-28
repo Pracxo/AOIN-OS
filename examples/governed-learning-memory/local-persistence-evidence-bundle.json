@@ -1,0 +1,8 @@
+{
+  "example_fingerprint": "349443b7f187075ba8f9431dd401c9d6a231bc5061718e4d45d59b819c61773c",
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-local-persistence-evidence/v1",
+  "task_id": "AION-224"
+}
