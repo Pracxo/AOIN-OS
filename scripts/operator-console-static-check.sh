@@ -833,6 +833,58 @@ for path in sorted(demo_dir.glob("*.json")):
                 if value is not False:
                     raise SystemExit(f"knowledge intelligence hold flag must be false: {key}: {path}")
         continue
+    if path.name.startswith("governed-learning-memory-"):
+        if path.name not in {
+            "governed-learning-memory-authorization.json",
+            "governed-learning-memory-boundary.json",
+            "governed-learning-memory-program.json",
+            "governed-learning-memory-roadmap.json",
+            "governed-learning-memory-runtime-hold.json",
+        }:
+            raise SystemExit(f"unknown governed learning memory demo: {path}")
+        if payload.get("read_only") is not True:
+            raise SystemExit(f"governed learning memory demo must be read_only: {path}")
+        redaction_applied = payload.get("redaction_applied")
+        redacted = payload.get("redacted")
+        if redaction_applied is not True and redacted is not True:
+            raise SystemExit(f"governed learning memory demo must be redacted: {path}")
+        if payload.get("synthetic") is not True:
+            raise SystemExit(f"governed learning memory demo must be synthetic: {path}")
+        if payload.get("program_id") != "AION-GOVERNED-LEARNING-MEMORY-001":
+            raise SystemExit(f"governed learning memory program id mismatch: {path}")
+        for key in (
+            "actual_knowledge_promotion_enabled",
+            "actual_tool_execution_enabled",
+            "automatic_knowledge_promotion_enabled",
+            "automatic_memory_ingestion_enabled",
+            "background_learning_enabled",
+            "cognitive_belief_creation_enabled",
+            "cognitive_belief_mutation_enabled",
+            "cognitive_memory_write_enabled",
+            "engagement_confidence_effect_enabled",
+            "engagement_factual_effect_enabled",
+            "episodic_memory_write_enabled",
+            "external_calls_enabled",
+            "model_provider_integration_enabled",
+            "network_calls_enabled",
+            "persistent_knowledge_write_enabled",
+            "persistent_verified_knowledge_write_enabled",
+            "procedural_memory_write_enabled",
+            "production_deployment_enabled",
+            "production_exposure",
+            "public_network_access_enabled",
+            "runtime_enabled",
+            "runtime_effect",
+            "runtime_source_rewrite_enabled",
+            "scheduled_learning_enabled",
+            "semantic_memory_write_enabled",
+            "source_mutation_enabled",
+            "v02_release_created",
+            "v02_tag_created",
+        ):
+            if key in payload and payload.get(key) is not False:
+                raise SystemExit(f"governed learning memory flag must be false: {key}: {path}")
+        continue
     if payload.get("read_only") is not True:
         raise SystemExit(f"read_only must be true: {path}")
     if payload.get("redaction_applied") is not True:

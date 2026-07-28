@@ -1,0 +1,14 @@
+{
+  "approval_expiry_validation_required": true,
+  "approval_is_authorization_evidence": true,
+  "approval_is_factual_truth_proof": false,
+  "approval_record_id": "AION-221-GLM-0001",
+  "approval_revocation_validation_required": true,
+  "authorization_transaction_id": "AION-221-GLM-0001",
+  "read_only": true,
+  "redacted": true,
+  "runtime_created_approval": false,
+  "schema_version": "governed-learning-memory-operator-approval-evidence/v1",
+  "separation_of_duties_satisfied": true,
+  "synthetic": true
+}

@@ -1209,6 +1209,7 @@ NON_PRODUCTION_AUTH_APPROVAL_RECORDS = frozenset(
         "operator-console-static/demo-data/knowledge-intelligence-integrated-research-agent-evaluation.json",
         "operator-console-static/demo-data/knowledge-intelligence-verified-knowledge-authorization.json",
         "operator-console-static/demo-data/knowledge-intelligence-public-research-pilot-authorization.json",
+        "operator-console-static/demo-data/governed-learning-memory-authorization.json",
     }
 )
 AION213_KNOWLEDGE_INTELLIGENCE_JSON_PREFIXES = (
@@ -1216,6 +1217,9 @@ AION213_KNOWLEDGE_INTELLIGENCE_JSON_PREFIXES = (
     "operator-console-static/demo-data/knowledge-intelligence-domain-expert-",
     "operator-console-static/demo-data/knowledge-intelligence-domain-expert-mesh-evaluation",
     "operator-console-static/demo-data/knowledge-intelligence-tool-",
+)
+AION221_GOVERNED_LEARNING_MEMORY_JSON_PREFIXES = (
+    "operator-console-static/demo-data/governed-learning-memory-",
 )
 
 
@@ -1789,7 +1793,10 @@ def iter_json_payloads(root: Path) -> list[tuple[str, Any]]:
             continue
         for path in sorted(base.glob("*.json")):
             relative = str(path.relative_to(root))
-            if relative.startswith(AION213_KNOWLEDGE_INTELLIGENCE_JSON_PREFIXES):
+            if relative.startswith(
+                AION213_KNOWLEDGE_INTELLIGENCE_JSON_PREFIXES
+                + AION221_GOVERNED_LEARNING_MEMORY_JSON_PREFIXES
+            ):
                 continue
             payloads.append((relative, load_json(path)))
     return payloads

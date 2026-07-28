@@ -149,6 +149,18 @@ must not include raw secrets, raw headers, production credentials, external
 provider payloads, package installation records, source mutation details, or
 domain-specific setup logic.
 
+## Governed Learning and Memory Projection
+
+AION-221 plans future read-only visual projection records for governed learning
+and memory. Candidate lineage, approval evidence, knowledge identity plans,
+version plans, conflict findings, memory projection plans, rollback plans, and
+promotion integrity audits may become visual nodes after AION-222.
+
+These nodes are planning evidence only. They must not imply durable knowledge,
+factual truth, cognitive-memory writes, belief mutation, automatic promotion,
+engagement-driven factual effects, production activation, tool execution,
+network calls, or v0.2 release readiness.
+
 ## AION Brain Map
 
 The AION Brain Map is a backend projection of cognitive telemetry. It is

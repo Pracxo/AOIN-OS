@@ -1,0 +1,17 @@
+{
+  "belief_projection_candidate_plan_approved": true,
+  "cognitive_belief_mutation_enabled": false,
+  "cognitive_memory_write_enabled": false,
+  "episodic_memory_projection_plan_approved": true,
+  "episodic_memory_write_enabled": false,
+  "memory_projection_plan_approved": true,
+  "procedural_memory_projection_plan_approved": true,
+  "procedural_memory_write_enabled": false,
+  "projection_plan_id": "glm-projection-plan-001",
+  "read_only": true,
+  "redacted": true,
+  "schema_version": "governed-learning-memory-projection-plan/v1",
+  "semantic_memory_projection_plan_approved": true,
+  "semantic_memory_write_enabled": false,
+  "synthetic": true
+}

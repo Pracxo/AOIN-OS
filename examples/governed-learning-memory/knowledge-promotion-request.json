@@ -1,0 +1,14 @@
+{
+  "approval_required": true,
+  "automatic_knowledge_promotion_enabled": false,
+  "candidate_id": "approval-bound-knowledge-promotion-transaction-core",
+  "candidate_state": "verified_candidate_reviewable_not_durable_knowledge",
+  "dry_run_only": true,
+  "operator_approval_record_id": "AION-221-GLM-0001",
+  "persistent_knowledge_write_enabled": false,
+  "read_only": true,
+  "redacted": true,
+  "request_id": "glm-request-001",
+  "schema_version": "governed-learning-memory-promotion-request/v1",
+  "synthetic": true
+}

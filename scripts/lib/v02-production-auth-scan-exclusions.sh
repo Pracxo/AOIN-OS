@@ -1,5 +1,38 @@
 #!/usr/bin/env bash
 
+aion221_is_scoped_governed_learning_memory_path() {
+  # Exact AION-221 charter, evidence, and validation paths. This program
+  # creates a separate GLM authorization and no production-auth runtime source.
+  case "$1" in
+    README.md|\
+    AGENTS.md|\
+    docs/project-status.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/visual-brain.md|\
+    docs/governed-learning-memory/*|\
+    docs/release/governed-learning-memory-*|\
+    docs/adr/0185-governed-learning-and-memory-integration-program-charter.md|\
+    docs/adr/README.md|\
+    examples/governed-learning-memory/*|\
+    operator-console-static/index.html|\
+    operator-console-static/app.js|\
+    operator-console-static/README.md|\
+    operator-console-static/demo-data/governed-learning-memory-*.json|\
+    scripts/governed-learning-memory-program-authorization-check.sh|\
+    scripts/governed-learning-memory-program-no-go-regression.sh|\
+    scripts/governed-learning-memory-runtime-hold.sh|\
+    scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh|\
+    scripts/lib/v02_production_auth_authorization.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    services/brain-api/tests/test_governed_learning_memory_*.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 aion151_is_scoped_authorization_path() {
   # Keep these as exact artifact paths. The no-go scanners must never exempt
   # broad directories such as scripts/ or services/brain-api/src/.
@@ -1235,13 +1268,15 @@ aion151_scan_files_excluding_scoped_authorization() {
     if [[ -d "$path" ]]; then
       while IFS= read -r file; do
         file="${file#./}"
-        if ! aion151_is_scoped_authorization_path "$file"; then
+        if ! aion151_is_scoped_authorization_path "$file" \
+          && ! aion221_is_scoped_governed_learning_memory_path "$file"; then
           printf '%s\n' "$file"
         fi
       done < <(find "$path" -type f -print)
     elif [[ -f "$path" ]]; then
       file="${path#./}"
-      if ! aion151_is_scoped_authorization_path "$file"; then
+      if ! aion151_is_scoped_authorization_path "$file" \
+        && ! aion221_is_scoped_governed_learning_memory_path "$file"; then
         printf '%s\n' "$file"
       fi
     fi

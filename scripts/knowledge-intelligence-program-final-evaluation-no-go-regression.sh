@@ -33,6 +33,23 @@ comparison_base() {
 
 is_allowed_path() {
   case "$1" in
+    docs/governed-learning-memory/*|\
+    docs/release/governed-learning-memory-*|\
+    docs/adr/0185-governed-learning-and-memory-integration-program-charter.md|\
+    examples/governed-learning-memory/*|\
+    operator-console-static/demo-data/governed-learning-memory-*.json|\
+    scripts/governed-learning-memory-program-authorization-check.sh|\
+    scripts/governed-learning-memory-program-no-go-regression.sh|\
+    scripts/governed-learning-memory-runtime-hold.sh|\
+    scripts/production-auth-core-no-go-regression.sh|\
+    scripts/static-console-safety-check.sh|\
+    scripts/lib/v02_production_auth_authorization.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    services/brain-api/tests/test_governed_learning_memory_*.py)
+      return 0
+      ;;
+  esac
+  case "$1" in
     README.md|AGENTS.md|docs/*|examples/*|operator-console-static/*|scripts/auth-design-check.sh|scripts/operator-console-static-check.sh|scripts/knowledge-intelligence-program-*|scripts/lib/knowledge_intelligence_program_final_evaluation.py|scripts/lib/knowledge_intelligence_domain_expert_mesh_authorization.py|scripts/lib/knowledge_intelligence_public_research_pilot_authorization.py|scripts/lib/knowledge_intelligence_tool_verification_authorization.py|scripts/lib/knowledge_intelligence_verified_knowledge_authorization.py|services/brain-api/tests/*)
       return 0
       ;;

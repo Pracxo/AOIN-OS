@@ -46,6 +46,43 @@ Required final flags:
 
 AION-218-KI-0008 is closed as consumed by AION-219, inactive, expired, and non-reusable. AION-220 created no AION-221 task, no replacement Knowledge Intelligence authorization, no production activation, no scheduled research, no background crawler, no automatic promotion, no cognitive-memory write, no belief mutation, no v0.2 tag, and no v0.2 release.
 
+## AION-221 Governed Learning and Memory Program Authorization
+
+AION-221 starts a separate program through a later explicit charter:
+`AION-GOVERNED-LEARNING-MEMORY-001`.
+
+Post-closeout distinction:
+
+- AION-220 created no successor Knowledge Intelligence task.
+- The Knowledge Intelligence Program remains complete.
+- AION-221 starts a new program through a later explicit charter.
+- AION-221 does not reactivate Knowledge Intelligence authorization.
+- AION-221 does not authorize production activation.
+- AION-222 is the sole authorized implementation task in the new program.
+
+`AION-221-GLM-0001` is active for AION-222 only. AION-223 is the formal
+closeout task. AION-222 remains unimplemented and must remain deterministic,
+in-memory, dry-run only, approval-bound, persistent-write-disabled,
+cognitive-memory-write-disabled, belief-mutation-disabled, and runtime-disabled.
+
+Required AION-221 flags:
+
+- `program_id=AION-GOVERNED-LEARNING-MEMORY-001`
+- `program_state=governed_learning_memory_program_authorized_not_implemented`
+- `active_glm_implementation_authorization_count=1`
+- `active_glm_implementation_authorization=AION-221-GLM-0001`
+- `active_glm_implementation_task=AION-222`
+- `formal_closeout_task=AION-223`
+- `persistent_knowledge_write_enabled=false`
+- `cognitive_memory_write_enabled=false`
+- `cognitive_belief_mutation_enabled=false`
+- `automatic_knowledge_promotion_enabled=false`
+- `engagement_factual_effect_enabled=false`
+- `production_exposure=false`
+- `v02_release_ready=false`
+- `v02_tag_created=false`
+- `v02_release_created=false`
+
 AION-209 compatibility marker retained for inherited closeout gates:
 `active_knowledge_implementation_task=AION-209` denotes the prior consumed
 implementation task, not the current active authorization.
@@ -86,6 +123,8 @@ Historical marker: `formal_closeout_task=AION-220` denoted the prior closeout ta
 - Governed continual learning available.
 - Integrated cognitive shadow runtime available.
 - Controlled local-offline cognitive pilot passed.
+- Governed Learning and Memory Integration Program authorized but not
+  implemented.
 
 ## Available Governed Capabilities
 
@@ -131,6 +170,10 @@ Historical marker: `formal_closeout_task=AION-220` denoted the prior closeout ta
 - Background crawler.
 - Automatic verified knowledge promotion.
 - Cognitive belief mutation from research evidence.
+- Governed learning and memory runtime.
+- Persistent knowledge promotion writes.
+- Cognitive-memory projection writes.
+- Engagement-driven factual effects.
 - v0.2 release.
 
 ## Authorization State
@@ -179,7 +222,13 @@ and production authentication disabled. Formal lifecycle closeout: AION-161.
 
 ## Current Operator Task
 
-AION-211 deterministic epistemic assessment engine is the next task. AION-210 closed `AION-208-KI-0003` as consumed by AION-209 and created `AION-210-KI-0004` as the sole active Knowledge Intelligence implementation authorization.
+AION-222 is the next task. It is authorized by `AION-221-GLM-0001` to implement
+the deterministic, approval-bound, write-disabled knowledge-promotion
+transaction and cognitive-memory projection-planning core. It may validate
+candidates, approvals, provenance, conflicts, versions, projection plans,
+idempotency, rollback, and integrity. It may not persist knowledge, write
+cognitive memory, mutate beliefs, apply engagement learning automatically,
+activate production runtime, or create a v0.2 release.
 
 ## Current Test Posture
 

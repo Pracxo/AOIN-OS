@@ -196,6 +196,15 @@ runs. They must not represent production provisioning, package installation,
 secret management, external provider setup, source mutation, tool execution,
 or domain-specific setup logic.
 
+AION-221 records the future governed-learning-memory contract surface for
+AION-222 only. Future contracts may describe promotion requests, approval
+evidence, eligibility revalidation, knowledge identity, knowledge version
+plans, memory projection plans, dry-run promotion transaction plans, rollback
+plans, integrity audits, and redacted promotion evidence. AION-221 creates no
+runtime contract source. AION-222 contracts must remain deterministic,
+in-memory, dry-run, approval-bound, persistent-write-disabled,
+cognitive-memory-write-disabled, belief-mutation-disabled, and runtime-disabled.
+
 AION-106 connector boundary contracts remain design-only. Future connector
 contracts must treat connector metadata, capability claims, egress previews,
 ingress responses, credential references, and returned data as untrusted until

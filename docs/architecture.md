@@ -190,6 +190,20 @@ the relationship, not the source evidence. Context compilation receives
 governance constraints from retrieval and must preserve them in the reasoning
 packet.
 
+## Governed Learning and Memory Integration
+
+AION-221 creates the `AION-GOVERNED-LEARNING-MEMORY-001` charter after the
+AION-220 Knowledge Intelligence closeout. This program bridges verified
+candidate evidence, operator approval evidence, provenance lineage, knowledge
+identity, append-only version planning, cognitive-memory projection planning,
+conflict handling, rollback, and revalidation.
+
+The bridge is planning-only until AION-222 is implemented under
+`AION-221-GLM-0001`. AION-222 may plan deterministic dry-run transactions, but
+it may not persist knowledge, write semantic, episodic, or procedural memory,
+mutate beliefs, promote candidates automatically, apply engagement learning as
+fact, activate production runtime, or create a v0.2 release.
+
 ## Capability Registry
 
 Future modules register capability manifests. AION Brain reads capability IDs,

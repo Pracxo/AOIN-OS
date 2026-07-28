@@ -274,6 +274,11 @@ allowed_authorization_demo_names = {
     "knowledge-intelligence-public-research-pilot-resource-budget.json",
     "knowledge-intelligence-public-research-pilot-result.json",
     "knowledge-intelligence-public-research-pilot-runtime-hold.json",
+    "governed-learning-memory-authorization.json",
+    "governed-learning-memory-boundary.json",
+    "governed-learning-memory-program.json",
+    "governed-learning-memory-roadmap.json",
+    "governed-learning-memory-runtime-hold.json",
 }
 aion161_allowed_policy_markers = {
     "runtime_private_key",

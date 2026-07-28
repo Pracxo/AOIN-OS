@@ -127,6 +127,21 @@ does not gain an allow action for runtime shadow activation, source rewrite,
 Git mutation, approval creation, pull request creation, merge, deployment,
 provider calls, connector calls, or model training.
 
+## Governed Learning and Memory Policy
+
+AION-221 authorizes policy planning for AION-222 only. Future policy actions
+may cover governed learning and memory transaction planning, approval evidence
+validation, provenance revalidation, conflict checks, version planning, memory
+projection planning, rollback validation, compensation validation, and
+integrity audit reads.
+
+Those actions must remain dry-run and in-memory until separately authorized.
+They must not allow persistent knowledge writes, cognitive-memory writes,
+belief mutation, automatic promotion, engagement-driven factual effects,
+runtime approval creation, source mutation, Git mutation, provider calls,
+connector calls, shell or subprocess execution, deployment, production
+activation, or v0.2 release creation.
+
 ## Connector Simulator Policy Actions
 
 AION-110 adds policy actions for synthetic connector simulator evidence:

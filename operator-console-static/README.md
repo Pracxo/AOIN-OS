@@ -1351,3 +1351,21 @@ AION-219 controlled public HTTPS research and verified-candidate pilot implement
 Flags: `controlled_public_research_pilot_implemented=true`, `operator_invoked_public_https_fetch_available=true`, `system_dns_resolution_available=true`, `system_http_transport_available=true`, `pilot_live_validation_completed=true`, `public_network_fetch_enabled=false`, `unrestricted_network_access_enabled=false`, `background_network_access_enabled=false`, `background_crawler_enabled=false`, `search_provider_integration_enabled=false`, `connector_integration_enabled=false`, `model_provider_integration_enabled=false`, `browser_automation_enabled=false`, `actual_tool_execution_enabled=false`, `automatic_verified_knowledge_promotion_enabled=false`, `persistent_verified_knowledge_write_enabled=false`, `cognitive_memory_write_enabled=false`, `belief_mutation_enabled=false`, and `production_exposure=false`.
 
 The pilot is not a crawler, search engine, browser, connector, model client, background service, or production runtime. Acquired content remains untrusted evidence. A verified candidate remains reviewable evidence and does not become automatic factual truth. AION-220 is the next task.
+
+## AION-221 Governed Learning and Memory Program
+
+AION-221 adds bundled read-only evidence for the new governed learning and
+memory program:
+
+- `demo-data/governed-learning-memory-program.json`
+- `demo-data/governed-learning-memory-authorization.json`
+- `demo-data/governed-learning-memory-roadmap.json`
+- `demo-data/governed-learning-memory-boundary.json`
+- `demo-data/governed-learning-memory-runtime-hold.json`
+
+AION-220 created no successor Knowledge Intelligence task. AION-221 starts a
+separate program through a later explicit charter. `AION-221-GLM-0001`
+authorizes AION-222 only. The console remains static and read-only; it does
+not create AION-222 source, persist knowledge, write cognitive memory, mutate
+beliefs, promote knowledge automatically, apply engagement learning as fact,
+activate production runtime, create a v0.2 tag, or create a v0.2 release.
