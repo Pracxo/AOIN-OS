@@ -1,0 +1,30 @@
+{
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "synthetic": true,
+  "active_projection_marker_is_append_only_event": true,
+  "append_only_sequence": 1,
+  "approval_fingerprints": [
+    "fp-approval-1-redacted",
+    "fp-approval-2-redacted"
+  ],
+  "candidate_fingerprint": "fp-candidate-redacted-sample",
+  "candidate_posture": "support",
+  "confidence_cap": "0.890000",
+  "content_fingerprint": "fp-content-redacted-sample",
+  "created_timestamp": "2026-01-01T00:00:00Z",
+  "entry_hash": "fp-entry-redacted-sample",
+  "jurisdiction": "global-redacted",
+  "knowledge_identity_id": "knowledge-id-aion-223-sample-001",
+  "lineage_fingerprint": "fp-lineage-redacted-sample",
+  "model": "PersistentKnowledgeVersion",
+  "persistent_record_created_by_aion_223": false,
+  "previous_ledger_hash": null,
+  "promotion_plan_fingerprint": "fp-plan-redacted-sample",
+  "promotion_result_fingerprint": "fp-result-redacted-sample",
+  "valid_time": "2026-01-01T00:00:00Z",
+  "version_number": 1,
+  "version_scope": "v1-redacted"
+}

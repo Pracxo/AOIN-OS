@@ -1,0 +1,30 @@
+# Promotion Evaluation Scenarios
+
+- `valid_moderate_risk_semantic_projection`: `passed`
+- `valid_high_risk_dual_approval`: `passed`
+- `belief_candidate_requires_dual_approval`: `passed`
+- `promotion_request_expiry_and_binding`: `passed`
+- `candidate_binding_integrity`: `passed`
+- `candidate_and_lineage_revalidation`: `passed`
+- `confidence_non_amplification`: `passed`
+- `approval_expiry_revocation_denial_and_cancellation`: `passed`
+- `approval_scope_resource_and_transaction_binding`: `passed`
+- `separation_of_duties`: `passed`
+- `deterministic_knowledge_identity`: `passed`
+- `exact_duplicate_idempotent_no_op`: `passed`
+- `direct_support_refutation_conflict`: `passed`
+- `temporal_jurisdiction_and_version_conflicts`: `passed`
+- `retraction_and_supersession_conflicts`: `passed`
+- `initial_and_new_version_planning`: `passed`
+- `supersession_retraction_and_expiry_plans`: `passed`
+- `semantic_memory_projection_plan`: `passed`
+- `episodic_memory_projection_plan`: `passed`
+- `procedural_memory_projection_plan`: `passed`
+- `belief_candidate_projection_boundary`: `passed`
+- `rollback_and_compensation_validation`: `passed`
+- `resource_budget_enforcement`: `passed`
+- `immutable_in_memory_journal`: `passed`
+- `bounded_exact_queries_and_fixture_replay`: `passed`
+- `determinism_concurrency_and_performance`: `passed`
+- `zero_side_effect_and_repository_boundary`: `passed`
+- `local_persistence_authorization_readiness`: `passed`

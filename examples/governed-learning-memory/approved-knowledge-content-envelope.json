@@ -1,0 +1,23 @@
+{
+  "bounded_summary": "Redacted future local persistence content envelope example.",
+  "candidate_fingerprint": "fp-candidate-redacted-sample",
+  "candidate_id": "verified-candidate-aion-223-sample-001",
+  "candidate_kind": "support_candidate",
+  "canonical_statement": "Redacted operator-supplied bounded knowledge statement for future AION-224 tests.",
+  "content_envelope_id": "content-env-aion-223-sample-001",
+  "content_fingerprint": "fp-content-redacted-sample",
+  "created_at": "2026-01-01T00:00:00Z",
+  "expires_at": "2027-01-01T00:00:00Z",
+  "explicitly_operator_supplied": true,
+  "knowledge_identity_id": "knowledge-id-aion-223-sample-001",
+  "language_code": "en",
+  "lineage_fingerprint": "fp-lineage-redacted-sample",
+  "model": "ApprovedKnowledgeContentEnvelope",
+  "model_generated": false,
+  "persistence_approval_bundle_fingerprint": "fp-approval-redacted-sample",
+  "redacted": true,
+  "sensitivity": "internal",
+  "source_body": false,
+  "transaction_plan_fingerprint": "fp-plan-redacted-sample",
+  "transaction_result_fingerprint": "fp-result-redacted-sample"
+}

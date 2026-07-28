@@ -3,7 +3,11 @@ from __future__ import annotations
 import os
 import subprocess
 
-from test_governed_learning_memory_program_authorization import REPO_ROOT, load_json
+from scripts.lib.governed_learning_memory_local_persistence_authorization import (
+    AION222_SOURCE_SCOPE,
+    AION224_SOURCE_SCOPE,
+)
+from test_governed_learning_memory_program_authorization import REPO_ROOT
 
 
 def _git_ref_exists(ref: str) -> bool:
@@ -20,49 +24,55 @@ def _git_ref_exists(ref: str) -> bool:
 
 
 def _comparison_base() -> str | None:
-    candidates: list[str] = []
-    if github_base_ref := os.environ.get("GITHUB_BASE_REF"):
-        candidates.extend([f"origin/{github_base_ref}", github_base_ref])
+    candidates = []
+    if base := os.environ.get("GITHUB_BASE_REF"):
+        candidates.extend([f"origin/{base}", base])
     candidates.extend(["origin/main", "main"])
-
     for candidate in candidates:
         if not _git_ref_exists(candidate):
             continue
-        merge_base = subprocess.run(
+        mb = subprocess.run(
             ["git", "merge-base", "HEAD", candidate],
             cwd=REPO_ROOT,
             capture_output=True,
             text=True,
             check=False,
         )
-        if merge_base.returncode == 0 and merge_base.stdout.strip():
-            return merge_base.stdout.strip()
-    if _git_ref_exists("HEAD~1"):
-        return "HEAD~1"
-    return None
+        if mb.returncode == 0 and mb.stdout.strip():
+            return mb.stdout.strip()
+    return "HEAD~1" if _git_ref_exists("HEAD~1") else None
 
 
-def test_aion_222_runtime_source_is_absent() -> None:
-    ledger = load_json("docs/governed-learning-memory/authorization-ledger.json")
-    for relative in ledger["authorized_source_scope"]:
+def test_aion_222_runtime_source_exists_and_aion_224_source_is_absent() -> None:
+    for relative in AION222_SOURCE_SCOPE:
         assert (REPO_ROOT / relative).exists(), relative
+    for relative in AION224_SOURCE_SCOPE:
+        if relative.endswith("__init__.py"):
+            continue
+        assert not (REPO_ROOT / relative).exists(), relative
 
 
-def test_aion_221_does_not_change_runtime_source_surface() -> None:
+def test_aion_223_does_not_change_runtime_source_surface() -> None:
     base = _comparison_base()
     if base is None:
         return
     diff = subprocess.run(
-        ["git", "diff", "--name-only", base, "HEAD", "--", "services/brain-api/src/aion_brain"],
+        [
+            "git",
+            "diff",
+            "--name-only",
+            base,
+            "HEAD",
+            "--",
+            "services/brain-api/src/aion_brain",
+            ".github/workflows",
+            "services/brain-api/pyproject.toml",
+            "packages/aion-sdk-python/src",
+            "migrations",
+        ],
         cwd=REPO_ROOT,
         capture_output=True,
         text=True,
         check=True,
     )
-    changed = {line for line in diff.stdout.splitlines() if line}
-    authorized = set(
-        load_json("docs/governed-learning-memory/authorization-ledger.json")[
-            "authorized_source_scope"
-        ]
-    )
-    assert changed <= authorized
+    assert {line for line in diff.stdout.splitlines() if line} == set()

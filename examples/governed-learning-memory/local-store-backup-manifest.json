@@ -1,0 +1,13 @@
+{
+  "automatic_schedule_created": false,
+  "backup_file_fingerprint": "fp-backup-redacted-sample",
+  "file_mode": "0600",
+  "last_ledger_sequence": 0,
+  "ledger_head_hash": null,
+  "model": "LocalStoreBackupManifest",
+  "operator_invoked": true,
+  "schema_version": 1,
+  "source_database_fingerprint": "fp-source-db-redacted-sample",
+  "store_id": "store-redacted-sample",
+  "target_requires_new_absolute_path": true
+}

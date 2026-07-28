@@ -40,6 +40,11 @@ is_allowed_path() {
     operator-console-static/demo-data/governed-learning-memory-*.json|\
     scripts/governed-learning-memory-promotion-transaction-check.sh|\
     scripts/governed-learning-memory-promotion-transaction-no-go-regression.sh|\
+    scripts/governed-learning-memory-promotion-operator-evaluation-check.sh|\
+    scripts/governed-learning-memory-promotion-operator-evaluation-no-go-regression.sh|\
+    scripts/governed-learning-memory-local-persistence-authorization-check.sh|\
+    scripts/governed-learning-memory-local-persistence-authorization-no-go-regression.sh|\
+    scripts/governed-learning-memory-local-persistence-runtime-hold.sh|\
     scripts/governed-learning-memory-program-authorization-check.sh|\
     scripts/governed-learning-memory-program-no-go-regression.sh|\
     scripts/governed-learning-memory-runtime-hold.sh|\
@@ -47,6 +52,8 @@ is_allowed_path() {
     scripts/static-console-safety-check.sh|\
     scripts/lib/v02_production_auth_authorization.py|\
     scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    scripts/lib/governed_learning_memory_promotion_operator_evaluation.py|\
+    scripts/lib/governed_learning_memory_local_persistence_authorization.py|\
     services/brain-api/tests/test_governed_learning_memory_*.py)
       return 0
       ;;

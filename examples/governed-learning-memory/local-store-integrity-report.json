@@ -1,0 +1,10 @@
+{
+  "authorization_transaction_id": "AION-223-GLM-0002",
+  "findings": [],
+  "foreign_key_check_required": true,
+  "ledger_hash_chain_audit_required": true,
+  "model": "LocalStoreIntegrityReport",
+  "production_memory_written": false,
+  "sqlite_integrity_check_required": true,
+  "tamper_evident_not_tamper_proof": true
+}

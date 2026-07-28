@@ -1,0 +1,10 @@
+{
+  "approval_requirement": "two independent approvers required",
+  "belief_claim_created": false,
+  "belief_claim_mutated": false,
+  "contradiction_visible": true,
+  "model": "PersistentBeliefProjectionCandidateRecord",
+  "persistent_record_created_by_aion_223": false,
+  "projection_target": "belief_candidate",
+  "uncertainty_visible": true
+}

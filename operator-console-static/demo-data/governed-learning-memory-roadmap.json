@@ -1,57 +1,37 @@
 {
-  "only_authorized_task": "AION-222",
-  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
   "read_only": true,
   "redacted": true,
   "redaction_applied": true,
-  "roadmap": [
+  "synthetic": true,
+  "active_task": "AION-224",
+  "formal_closeout_task": "AION-225",
+  "only_active_authorization": "AION-223-GLM-0002",
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "records": [
     {
-      "state": "authorized",
-      "task_id": "AION-221",
-      "title": "Governed Learning and Memory Integration Program charter and AION-222 authorization"
+      "state": "closed_consumed_by_AION-222",
+      "task_id": "AION-221"
+    },
+    {
+      "state": "implemented_pending_AION-223_closeout",
+      "task_id": "AION-222"
+    },
+    {
+      "state": "operator_evaluation_passed_local_persistence_authorized",
+      "task_id": "AION-223"
     },
     {
       "state": "authorized_not_implemented",
-      "task_id": "AION-222",
-      "title": "Deterministic approval-bound knowledge-promotion transaction and cognitive-memory projection-planning core"
+      "task_id": "AION-224"
+    },
+    {
+      "state": "planned_formal_closeout_not_authorized",
+      "task_id": "AION-225"
     },
     {
       "state": "planned_not_authorized",
-      "task_id": "AION-223",
-      "title": "AION-222 operator evaluation and local append-only knowledge persistence authorization decision"
-    },
-    {
-      "state": "planned_not_authorized",
-      "task_id": "AION-224",
-      "title": "Operator-approved local append-only knowledge store and cognitive-memory projection implementation"
-    },
-    {
-      "state": "planned_not_authorized",
-      "task_id": "AION-225",
-      "title": "Persistent knowledge and cognitive-memory projection evaluation with engagement-learning application authorization decision"
-    },
-    {
-      "state": "planned_not_authorized",
-      "task_id": "AION-226",
-      "title": "Operator-approved engagement-learning application plane"
-    },
-    {
-      "state": "planned_not_authorized",
-      "task_id": "AION-227",
-      "title": "Governed continual-learning pilot authorization review"
-    },
-    {
-      "state": "planned_not_authorized",
-      "task_id": "AION-228",
-      "title": "Controlled local continual-learning pilot"
-    },
-    {
-      "state": "planned_not_authorized",
-      "task_id": "AION-229",
-      "title": "Final Governed Learning and Memory Integration Program evaluation and closeout"
+      "task_id": "AION-226"
     }
   ],
-  "runtime_effect": false,
-  "schema_version": "governed-learning-memory-roadmap/v1",
-  "synthetic": true
+  "v02_release_ready": false
 }

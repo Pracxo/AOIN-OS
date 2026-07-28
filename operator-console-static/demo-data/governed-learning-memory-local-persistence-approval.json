@@ -1,0 +1,40 @@
+{
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "synthetic": true,
+  "approvers_must_differ_from_each_other": true,
+  "evidence_type": "PersistenceApprovalBundle",
+  "fingerprint_bindings_required": [
+    "store_identity_fingerprint",
+    "transaction_id",
+    "promotion_request_fingerprint",
+    "transaction_plan_fingerprint",
+    "transaction_result_fingerprint",
+    "knowledge_identity_ids",
+    "planned_version_fingerprints",
+    "projection_fingerprints",
+    "approved_content_fingerprints",
+    "database_path_fingerprint",
+    "backup_policy_fingerprint"
+  ],
+  "minimum_independent_approvers": 2,
+  "plan_approval_can_authorize_persistence": false,
+  "raw_approval_payload_persisted": false,
+  "requester_must_differ_from_approvers": true,
+  "required_action_types": [
+    "governed_learning_memory.persist_local_knowledge_version",
+    "governed_learning_memory.persist_local_memory_projection"
+  ],
+  "required_approver_roles": [
+    "knowledge_steward",
+    "memory_operator"
+  ],
+  "required_resource_type": "promotion_transaction_result",
+  "required_scopes": [
+    "governed-learning-memory:persist-local-knowledge",
+    "governed-learning-memory:persist-local-projection"
+  ],
+  "runtime_can_create_approval": false
+}

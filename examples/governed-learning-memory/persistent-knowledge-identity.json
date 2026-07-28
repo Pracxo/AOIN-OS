@@ -1,0 +1,11 @@
+{
+  "claim_identity_fingerprint": "fp-claim-redacted-sample",
+  "created_in_isolated_local_store": false,
+  "identity_fingerprint": "fp-identity-redacted-sample",
+  "jurisdiction_scope_fingerprint": "fp-jurisdiction-redacted-sample",
+  "knowledge_identity_id": "knowledge-id-aion-223-sample-001",
+  "model": "PersistentKnowledgeIdentity",
+  "production_memory_written": false,
+  "valid_time_fingerprint": "fp-valid-time-redacted-sample",
+  "version_scope_fingerprint": "fp-version-scope-redacted-sample"
+}
