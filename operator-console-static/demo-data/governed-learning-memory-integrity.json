@@ -1,0 +1,32 @@
+{
+  "finding_count": 1,
+  "findings": [
+    {
+      "bounded_count": 2,
+      "finding_fingerprint": "89c810965d6905e99dcb3ca79035a62e1d6f2343f944e45347c33aab903780b2",
+      "finding_id": "finding-audit-result-promotion-transaction-example",
+      "fingerprints": [
+        "139d6c59447eb17ca184e7f5967afbcf69bf0f3105414664248b33b8a8072bf5"
+      ],
+      "reason_codes": [
+        "promotion_transaction_integrity_passed"
+      ],
+      "redacted_summary": "redacted promotion integrity finding",
+      "runtime_effect": false,
+      "safe_ids": [
+        "promotion-transaction-example"
+      ],
+      "status": "passed"
+    }
+  ],
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "report_fingerprint": "adea7ff626b305764927f44d8d2970a72a46ef1ff521526f1c2a85cb17a45b85",
+  "report_id": "audit-result-promotion-transaction-example",
+  "runtime_effect": false,
+  "schema_version": "aion-glm-promotion-integrity/v1",
+  "status": "passed",
+  "synthetic": true
+}

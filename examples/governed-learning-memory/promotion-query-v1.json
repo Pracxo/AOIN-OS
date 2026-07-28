@@ -1,0 +1,20 @@
+{
+  "approval_status": null,
+  "candidate_disposition": null,
+  "candidate_id": null,
+  "candidate_identity_id": null,
+  "conflict_kind": null,
+  "knowledge_identity_id": null,
+  "limit": 100,
+  "operator_review_required": null,
+  "projection_target": null,
+  "promotion_request_id": null,
+  "ready_for_future_persistence_review": null,
+  "request_kind": null,
+  "risk_class": null,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-promotion-transaction-query/v1",
+  "transaction_id": null,
+  "transaction_status": "dry_run_passed",
+  "version_disposition": null
+}

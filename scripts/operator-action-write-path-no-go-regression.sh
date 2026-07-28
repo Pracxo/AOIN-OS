@@ -505,6 +505,23 @@ allowed_aion215_files = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/tool_verification_fabric.py",
 }
+allowed_aion222_files = {
+    "services/brain-api/src/aion_brain/contracts/governed_learning_memory.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/__init__.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/approval_evidence.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/eligibility_revalidation.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/evidence.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/integrity.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/knowledge_identity.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/memory_projection.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/promotion_requests.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/promotion_transactions.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/rollback.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/version_planning.py",
+}
+allowed_aion222_prefixes = (
+    "operator-console-static/demo-data/governed-learning-memory-",
+)
 runtime_prefixes = (
     "services/brain-api/src/",
     "packages/aion-sdk-python/src/",
@@ -582,6 +599,7 @@ for relative in sorted(changed):
 	        or relative in allowed_aion194_files
 	        or relative in allowed_aion213_files
 	        or relative in allowed_aion215_files
+	        or relative in allowed_aion222_files
 	        or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)
         or relative.startswith(allowed_aion110_prefixes)
@@ -589,6 +607,7 @@ for relative in sorted(changed):
         or relative.startswith(allowed_aion112_prefixes)
         or relative.startswith(allowed_aion113_prefixes)
         or relative.startswith(allowed_aion213_prefixes)
+        or relative.startswith(allowed_aion222_prefixes)
     ):
         continue
     if not relative.startswith(runtime_prefixes):

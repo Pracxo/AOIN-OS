@@ -1,23 +1,14 @@
 from __future__ import annotations
 
-from test_governed_learning_memory_program_authorization import load_json
+from test_governed_learning_memory_contracts import sample_planning_components
 
 
-def test_cognitive_memory_writes_remain_disabled() -> None:
-    auth = load_json("docs/governed-learning-memory/authorization-ledger.json")
-    projection = load_json(
-        "examples/governed-learning-memory/cognitive-memory-projection-plan.json"
+def test_memory_projection_records_never_write_cognitive_memory():
+    components = sample_planning_components()
+
+    assert components.projections.persistent_write_authorized is False
+    assert components.projections.cognitive_memory_write_authorized is False
+    assert all(record.memory_record_created is False for record in components.projections.records)
+    assert all(
+        record.cognitive_memory_written is False for record in components.projections.records
     )
-
-    for key in (
-        "cognitive_memory_write_enabled",
-        "semantic_memory_write_enabled",
-        "episodic_memory_write_enabled",
-        "procedural_memory_write_enabled",
-    ):
-        assert auth["prohibited_capabilities"][key] is False
-        assert projection[key] is False
-    assert auth["resource_limits"]["maximum_cognitive_memory_writes"] == 0
-    assert auth["resource_limits"]["maximum_semantic_memory_writes"] == 0
-    assert auth["resource_limits"]["maximum_episodic_memory_writes"] == 0
-    assert auth["resource_limits"]["maximum_procedural_memory_writes"] == 0

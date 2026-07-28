@@ -1,0 +1,98 @@
+{
+  "approval_status": "valid",
+  "bundle_fingerprint": "3876a77ded238a4a11c96589d4807e456a66e3713e24c1be46b7bd8d87e39842",
+  "bundle_id": "approval-bundle-promotion-transaction-example",
+  "evidence_records": [
+    {
+      "action_type": "governed_learning_memory.promotion_plan",
+      "approval_creation_performed_by_aion222": false,
+      "approval_decision_fingerprint": "a346c1597e4404d8f65b9c80c823bdfdffaa78fc73747fb33f4282d241bb6cb6",
+      "approval_decision_id": "decision-approval-request-001",
+      "approval_decision_performed_by_aion222": false,
+      "approval_evidence_id": "approval-evidence-001",
+      "approval_request_fingerprint": "751420fbc580fe29fc59c2d95a87dabb39c54336adc05d23a55b11624dc83387",
+      "approval_request_id": "approval-request-001",
+      "approval_scope": "governed-learning-memory:promotion-plan",
+      "approver_identity_fingerprint": "f1bb9187166627114880c7a1bbf5eed6bb778ea33939412722c13de93c864b6b",
+      "bound_candidate_fingerprints": [
+        "29fb0577c27735d790f86b1f99541e329d575d10f9153334624a0c356d648017"
+      ],
+      "bound_candidate_ids": [
+        "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001"
+      ],
+      "constraint_fingerprints": [
+        "2bbf74e131e5e61c159cef2f7c423ce8a3b25842dee336be0f8419a30b347823"
+      ],
+      "decided_at": "2026-01-01T00:01:00Z",
+      "decision": "approve",
+      "evidence_fingerprint": "968d288c116d6c19d3c107d0be1c03cd7d002fbf1fe1bccedec9a1bf6c0ad784",
+      "evidence_origin": "operator_supplied_existing_approval",
+      "expires_at": "2026-01-01T02:00:00Z",
+      "promotion_request_fingerprint": "73de012dd8ad23a59635f66589c2be92cfbf035a27d476e80ee35196cbdad023",
+      "read_only": true,
+      "redacted": true,
+      "requested_at": "2026-01-01T00:00:00Z",
+      "requester_identity_fingerprint": "b6e6a76c2877730f5b91912eedb476a9d1e2852e8671c9facfe3c8a9e3b2868c",
+      "resource_id": "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+      "resource_type": "verified_knowledge_candidate",
+      "revoked_at": null,
+      "runtime_effect": false,
+      "schema_version": "aion-glm-operator-approval-evidence/v1",
+      "status": "valid",
+      "transaction_id": "promotion-transaction-example"
+    },
+    {
+      "action_type": "governed_learning_memory.promotion_plan",
+      "approval_creation_performed_by_aion222": false,
+      "approval_decision_fingerprint": "7d1f3c13e49e4c2cb00fcbe9c0260f3e7d6db01626fc0597fcd55acc40509fd9",
+      "approval_decision_id": "decision-approval-request-002",
+      "approval_decision_performed_by_aion222": false,
+      "approval_evidence_id": "approval-evidence-002",
+      "approval_request_fingerprint": "110ae7bf4ab7288d8e0be7871b410b6dab745a3e6bbd39b83ba4e1a7b250c423",
+      "approval_request_id": "approval-request-002",
+      "approval_scope": "governed-learning-memory:promotion-plan",
+      "approver_identity_fingerprint": "a84dd45270de3d44afb7004bce23f470752c211a67ba7ea2bb55a8911651725d",
+      "bound_candidate_fingerprints": [
+        "29fb0577c27735d790f86b1f99541e329d575d10f9153334624a0c356d648017"
+      ],
+      "bound_candidate_ids": [
+        "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001"
+      ],
+      "constraint_fingerprints": [
+        "2bbf74e131e5e61c159cef2f7c423ce8a3b25842dee336be0f8419a30b347823"
+      ],
+      "decided_at": "2026-01-01T00:01:00Z",
+      "decision": "approve",
+      "evidence_fingerprint": "10e70e2be6d07978d8c69f55ab315647f0b5a6f83e62de3d516aa51f08ca6a37",
+      "evidence_origin": "operator_supplied_existing_approval",
+      "expires_at": "2026-01-01T02:00:00Z",
+      "promotion_request_fingerprint": "73de012dd8ad23a59635f66589c2be92cfbf035a27d476e80ee35196cbdad023",
+      "read_only": true,
+      "redacted": true,
+      "requested_at": "2026-01-01T00:00:00Z",
+      "requester_identity_fingerprint": "b6e6a76c2877730f5b91912eedb476a9d1e2852e8671c9facfe3c8a9e3b2868c",
+      "resource_id": "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+      "resource_type": "verified_knowledge_candidate",
+      "revoked_at": null,
+      "runtime_effect": false,
+      "schema_version": "aion-glm-operator-approval-evidence/v1",
+      "status": "valid",
+      "transaction_id": "promotion-transaction-example"
+    }
+  ],
+  "independent_approver_count": 2,
+  "independent_approver_fingerprints": [
+    "a84dd45270de3d44afb7004bce23f470752c211a67ba7ea2bb55a8911651725d",
+    "f1bb9187166627114880c7a1bbf5eed6bb778ea33939412722c13de93c864b6b"
+  ],
+  "read_only": true,
+  "reason_codes": [
+    "approval_separation_of_duties_passed",
+    "approval_evidence_valid"
+  ],
+  "redacted": true,
+  "required_approver_count": 2,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-approval-evidence-bundle/v1",
+  "separation_of_duties_passed": true
+}

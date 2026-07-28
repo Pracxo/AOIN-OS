@@ -1,18 +1,13 @@
 from __future__ import annotations
 
-from test_governed_learning_memory_program_authorization import load_json
+from test_governed_learning_memory_contracts import sample_transaction_context
 
 
-def test_automatic_candidate_approval_and_promotion_remain_disabled() -> None:
-    auth = load_json("docs/governed-learning-memory/authorization-ledger.json")
-    request = load_json("examples/governed-learning-memory/knowledge-promotion-request.json")
-    transaction = load_json("examples/governed-learning-memory/promotion-transaction-plan.json")
+def test_transaction_never_applies_automatic_promotion():
+    context = sample_transaction_context()
 
-    assert auth["prohibited_capabilities"]["automatic_candidate_approval_enabled"] is False
-    assert auth["prohibited_capabilities"]["automatic_knowledge_promotion_enabled"] is False
-    assert request["approval_required"] is True
-    assert request["automatic_knowledge_promotion_enabled"] is False
-    assert transaction["dry_run_promotion_transaction_approved"] is True
-    assert transaction["persistent_knowledge_write_enabled"] is False
-    assert auth["resource_limits"]["maximum_automatic_knowledge_promotions"] == 0
-    assert auth["resource_limits"]["maximum_automatic_candidate_approvals"] == 0
+    assert context.result.actual_knowledge_promotion_applied is False
+    assert context.result.automatic_promotions == 0
+    assert all(
+        item.operator_review_required is True for item in context.result.operator_review_items
+    )

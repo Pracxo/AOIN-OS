@@ -5,7 +5,10 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 PROGRAM_ID = "AION-GOVERNED-LEARNING-MEMORY-001"
-PROGRAM_STATE = "governed_learning_memory_program_authorized_not_implemented"
+PROGRAM_STATE = (
+    "governed_learning_memory_promotion_transaction_core_implemented_"
+    "write_disabled_pending_closeout"
+)
 AUTH_ID = "AION-221-GLM-0001"
 CANDIDATE_ID = "approval-bound-knowledge-promotion-transaction-core"
 WORKSTREAM = "governed-learning-memory-integration"
@@ -15,9 +18,7 @@ SCOPE = (
     "verified-candidate-operator-approval-provenance-revalidation-deduplication-"
     "conflict-supersession-rollback-dry-run-cognitive-memory-projection-core"
 )
-KI_DECISION = (
-    "CONTROLLED_PUBLIC_RESEARCH_PILOT_PASS_COMPLETE_KNOWLEDGE_INTELLIGENCE_PROGRAM"
-)
+KI_DECISION = "CONTROLLED_PUBLIC_RESEARCH_PILOT_PASS_COMPLETE_KNOWLEDGE_INTELLIGENCE_PROGRAM"
 
 AUTHORIZED_CAPABILITIES = {
     "knowledge_promotion_request_contract_approved",

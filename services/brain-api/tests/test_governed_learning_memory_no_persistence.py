@@ -1,15 +1,12 @@
 from __future__ import annotations
 
-from test_governed_learning_memory_program_authorization import load_json
+from test_governed_learning_memory_contracts import source_text
 
 
-def test_persistent_knowledge_writes_remain_disabled() -> None:
-    program = load_json("docs/governed-learning-memory/program-ledger.json")
-    auth = load_json("docs/governed-learning-memory/authorization-ledger.json")
-    runtime = load_json("examples/governed-learning-memory/runtime-hold.json")
+def test_source_does_not_persist_knowledge_or_verified_memory():
+    text = source_text()
 
-    for payload in (program, auth["prohibited_capabilities"], runtime):
-        assert payload["persistent_knowledge_write_enabled"] is False
-    assert auth["prohibited_capabilities"]["persistent_verified_knowledge_write_enabled"] is False
-    assert auth["resource_limits"]["maximum_persistent_knowledge_writes"] == 0
-    assert auth["resource_limits"]["maximum_persistent_verified_knowledge_writes"] == 0
+    assert ".write_text(" not in text
+    assert ".write_bytes(" not in text
+    assert "persistent_knowledge_writes: Literal[0]" in text
+    assert "persistent_verified_knowledge_writes: Literal[0]" in text

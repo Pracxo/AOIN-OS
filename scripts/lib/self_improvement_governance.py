@@ -2622,8 +2622,9 @@ def _validate_shadow_activation_authorization_record(
     )
     transitions = record.get("shadow_activation_allowed_transitions")
     _require(isinstance(transitions, dict), "activation transitions")
+    transition_map = cast(dict[str, list[str]], transitions)
     for state, allowed in SHADOW_ACTIVATION_ALLOWED_TRANSITIONS.items():
-        _require(set(transitions.get(state, [])) == allowed, f"transition {state}")
+        _require(set(transition_map.get(state, [])) == allowed, f"transition {state}")
     _require(record.get("resource_limits") == SHADOW_ACTIVATION_RESOURCE_LIMITS, "resource limits")
     _require(
         tuple(record.get("monitored_values", [])) == SHADOW_ACTIVATION_MONITORED_VALUES,

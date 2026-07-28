@@ -18,7 +18,7 @@ is_nested_gate_context() {
   return 1
 }
 
-./scripts/governed-learning-memory-program-authorization-check.sh
+./scripts/governed-learning-memory-promotion-transaction-check.sh
 
 "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
@@ -53,8 +53,12 @@ for key in required_false:
         raise SystemExit(f"runtime hold flag must remain false: {key}")
 if runtime.get("network_calls_enabled") is not False:
     raise SystemExit("network must remain disabled")
-if runtime.get("aion_222_source_present") is not False:
-    raise SystemExit("AION-222 source must remain absent")
+if runtime.get("aion_222_source_present") is not True:
+    raise SystemExit("AION-222 source must be present")
+if runtime.get("knowledge_promotion_transaction_core_implemented") is not True:
+    raise SystemExit("AION-222 implementation flag missing")
+if runtime.get("knowledge_promotion_transaction_core_state") != "implemented_deterministic_approval_bound_dry_run_in_memory_persistent_write_disabled":
+    raise SystemExit("AION-222 implementation state mismatch")
 if program.get("active_glm_implementation_authorization") != "AION-221-GLM-0001":
     raise SystemExit("GLM authorization missing")
 if program.get("active_glm_implementation_task") != "AION-222":

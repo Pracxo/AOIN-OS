@@ -1,0 +1,162 @@
+{
+  "journal_record_fingerprint": "c0e6498657a2be07f017496dc3a90d36e97486a7d449c35f5dbc436770723bc9",
+  "journal_record_id": "journal-record-promotion-transaction-example",
+  "persistent_write_applied": false,
+  "read_only": true,
+  "recorded_at": "2026-01-01T00:03:00Z",
+  "redacted": true,
+  "result": {
+    "actual_knowledge_promotion_applied": false,
+    "automatic_promotions": 0,
+    "belief_creations": 0,
+    "belief_mutations": 0,
+    "candidate_dispositions": [
+      "eligible_for_dry_run"
+    ],
+    "cognitive_memory_writes": 0,
+    "episodic_memory_writes": 0,
+    "evidence_bundle": {
+      "diagnostics": {
+        "diagnostics_fingerprint": "36e1dc512993cca428e6486bae3aeaaab7adb0aeb870033a03ebcfd66818e99a",
+        "diagnostics_id": "diagnostics-promotion-transaction-example",
+        "fingerprints": [
+          "73de012dd8ad23a59635f66589c2be92cfbf035a27d476e80ee35196cbdad023",
+          "6132e6a88861ed6e6d78765dfd04b2ed436adc809cd88996052589802665c6bc"
+        ],
+        "reason_codes": [
+          "promotion_transaction_dry_run_passed"
+        ],
+        "redacted": true,
+        "runtime_effect": false,
+        "safe_ids": [
+          "promotion-transaction-example"
+        ]
+      },
+      "evidence_bundle_id": "evidence-promotion-transaction-example",
+      "evidence_fingerprint": "c715c6176777c74ff32802454594d0dea87ef2f8854e55e8041ae9edfbfd9c62",
+      "incidents": [],
+      "operator_review_items": [
+        {
+          "actual_knowledge_promotion_authorized": false,
+          "approval_created": false,
+          "automatic_promotion_authorized": false,
+          "belief_mutation_authorized": false,
+          "belief_projection_is_not_belief_creation": true,
+          "candidate_ids": [
+            "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001"
+          ],
+          "candidate_is_not_durable_knowledge": true,
+          "cognitive_memory_write_authorized": false,
+          "dry_run_is_not_persistence": true,
+          "expires_at": "2026-01-08T00:02:00Z",
+          "future_persistence_authorized": false,
+          "implementation_authorization_created": false,
+          "operator_approval_is_not_factual_proof": true,
+          "operator_review_required": true,
+          "persistent_knowledge_write_authorized": false,
+          "projection_plan_is_not_memory_write": true,
+          "reason_codes": [
+            "promotion_transaction_dry_run_passed"
+          ],
+          "redacted": true,
+          "review_fingerprint": "e520bf6e626aae75a1867241cd982fd3a14f4a429838c01bd72fd2dbc8fbcd87",
+          "review_item_id": "review-promotion-transaction-example",
+          "runtime_effect": false,
+          "transaction_id": "promotion-transaction-example"
+        }
+      ],
+      "redacted": true,
+      "runtime_effect": false,
+      "schema_version": "aion-glm-promotion-evidence/v1"
+    },
+    "future_persistence_authorized": false,
+    "identity_dispositions": [
+      "new_identity"
+    ],
+    "integrity_report": {
+      "finding_count": 1,
+      "findings": [
+        {
+          "bounded_count": 2,
+          "finding_fingerprint": "c941ff1a6b36da7a29f161858b3f202f7f16ce831c525a6e7d9345943b01dbf9",
+          "finding_id": "finding-audit-promotion-transaction-example",
+          "fingerprints": [
+            "6132e6a88861ed6e6d78765dfd04b2ed436adc809cd88996052589802665c6bc"
+          ],
+          "reason_codes": [
+            "promotion_transaction_integrity_passed"
+          ],
+          "redacted_summary": "redacted promotion integrity finding",
+          "runtime_effect": false,
+          "safe_ids": [
+            "promotion-transaction-example"
+          ],
+          "status": "passed"
+        }
+      ],
+      "read_only": true,
+      "redacted": true,
+      "report_fingerprint": "78420e9fb734157704c21e468a737917888aa85b3cf498292c34ae024eef4125",
+      "report_id": "audit-promotion-transaction-example",
+      "runtime_effect": false,
+      "schema_version": "aion-glm-promotion-integrity/v1",
+      "status": "passed"
+    },
+    "operator_review_items": [
+      {
+        "actual_knowledge_promotion_authorized": false,
+        "approval_created": false,
+        "automatic_promotion_authorized": false,
+        "belief_mutation_authorized": false,
+        "belief_projection_is_not_belief_creation": true,
+        "candidate_ids": [
+          "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001"
+        ],
+        "candidate_is_not_durable_knowledge": true,
+        "cognitive_memory_write_authorized": false,
+        "dry_run_is_not_persistence": true,
+        "expires_at": "2026-01-08T00:02:00Z",
+        "future_persistence_authorized": false,
+        "implementation_authorization_created": false,
+        "operator_approval_is_not_factual_proof": true,
+        "operator_review_required": true,
+        "persistent_knowledge_write_authorized": false,
+        "projection_plan_is_not_memory_write": true,
+        "reason_codes": [
+          "promotion_transaction_dry_run_passed"
+        ],
+        "redacted": true,
+        "review_fingerprint": "e520bf6e626aae75a1867241cd982fd3a14f4a429838c01bd72fd2dbc8fbcd87",
+        "review_item_id": "review-promotion-transaction-example",
+        "runtime_effect": false,
+        "transaction_id": "promotion-transaction-example"
+      }
+    ],
+    "persistent_knowledge_writes": 0,
+    "persistent_verified_knowledge_writes": 0,
+    "procedural_memory_writes": 0,
+    "projection_statuses": [
+      "planned",
+      "planned",
+      "planned",
+      "planned"
+    ],
+    "ready_for_future_persistence_review": true,
+    "reason_codes": [
+      "promotion_transaction_dry_run_passed"
+    ],
+    "result_fingerprint": "139d6c59447eb17ca184e7f5967afbcf69bf0f3105414664248b33b8a8072bf5",
+    "runtime_effect": false,
+    "schema_version": "aion-glm-promotion-transaction-result/v1",
+    "semantic_memory_writes": 0,
+    "status": "dry_run_passed",
+    "transaction_id": "promotion-transaction-example",
+    "version_dispositions": [
+      "initial_version_planned"
+    ]
+  },
+  "runtime_effect": false,
+  "schema_version": "aion-glm-promotion-transaction-journal/v1",
+  "transaction_fingerprint": "139d6c59447eb17ca184e7f5967afbcf69bf0f3105414664248b33b8a8072bf5",
+  "transaction_id": "promotion-transaction-example"
+}

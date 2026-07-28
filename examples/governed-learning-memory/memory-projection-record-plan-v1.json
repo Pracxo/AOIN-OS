@@ -1,0 +1,43 @@
+{
+  "approval_bundle_fingerprint": "3876a77ded238a4a11c96589d4807e456a66e3713e24c1be46b7bd8d87e39842",
+  "belief_created": false,
+  "belief_mutated": false,
+  "candidate_fingerprint": "29fb0577c27735d790f86b1f99541e329d575d10f9153334624a0c356d648017",
+  "candidate_id": "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+  "cognitive_memory_written": false,
+  "confidence_cap": "0.870000",
+  "content_reference_fingerprint": "15b4be27fd9fc265bc7fe7df746e11378dcc2b429d584c9536f1ab5b37c8e97f",
+  "evidence_reference_fingerprints": [
+    "29fb0577c27735d790f86b1f99541e329d575d10f9153334624a0c356d648017",
+    "7615a10c2039a5b6064b855af36a9ed466ff8313fca7a2c71e57cbf65d762a21",
+    "3876a77ded238a4a11c96589d4807e456a66e3713e24c1be46b7bd8d87e39842"
+  ],
+  "knowledge_identity_id": "knowledge-0c10d75f88e49fb09c01297b80a859cb",
+  "knowledge_version_plan_id": "version-plan-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+  "lineage_fingerprint": "7615a10c2039a5b6064b855af36a9ed466ff8313fca7a2c71e57cbf65d762a21",
+  "memory_record_created": false,
+  "owner_scope_fingerprints": [
+    "780d47d575474cbe5053743bc933c4c29767660696ecded6ba3b7481d79a22f2"
+  ],
+  "persistent_write_applied": false,
+  "planned_record_id": "planned-belief_candidate-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+  "projection_fingerprint": "57d8559ba5d332445f0592b55fa760d25c5cedf6ae60586828d55d165f885bd6",
+  "projection_record_id": "projection-belief_candidate-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+  "projection_status": "planned",
+  "reason_codes": [
+    "belief_candidate_projection_planned",
+    "memory_projection_write_disabled",
+    "belief_projection_is_candidate_only"
+  ],
+  "runtime_effect": false,
+  "schema_version": "aion-glm-memory-projection-record-plan/v1",
+  "sensitivity": "internal",
+  "source_reference_ids": [
+    "operator-supplied-planning-context"
+  ],
+  "summary_fingerprint": "7d3f76883932daa6ce2c39b93e6fff4d4f01f30a690e547a1fcabb8ae8cf57f6",
+  "target": "belief_candidate",
+  "transaction_id": "promotion-transaction-example",
+  "valid_from": "2026-01-01T00:00:00Z",
+  "valid_to": null
+}

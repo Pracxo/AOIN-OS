@@ -22,6 +22,21 @@ PERSISTENCE_SUFFIXES = (".db", ".sqlite", ".sqlite3", ".jsonl", ".state")
 AION217_SOURCE_PATHS = {"services/brain-api/src/aion_brain/contracts/knowledge_verified_memory.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_candidates.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_memory.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_lineage.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_versioning.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_revalidation.py", "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_signal_policy.py", "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_learning_candidates.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_integrity.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_evidence.py", "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py"}
 AION219_SOURCE_PATHS = {"services/brain-api/src/aion_brain/contracts/knowledge_public_research_pilot.py", "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_dns.py", "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_http_transport.py", "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_policy.py", "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_claims.py", "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_pilot.py", "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_session.py", "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_evidence.py", "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_integrity.py", "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py"}
 FORBIDDEN_CHANGED_CODE = ("automatic_candidate_approval_enabled = True", "automatic_verified_knowledge_promotion_enabled = True", "engagement_signal_as_fact_enabled = True", "engagement_confidence_effect_enabled = True", "tool_output_as_verified_fact_enabled = True", "model_output_as_verified_fact_enabled = True", "domain_mesh_consensus_as_truth_enabled = True", "public_network_fetch_enabled = True", "actual_tool_execution_enabled = True", "persistent_verified_knowledge_write_enabled = True", "cognitive_memory_write_enabled = True", "belief_mutation_enabled = True")
+AION222_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/governed_learning_memory.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/__init__.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/approval_evidence.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/eligibility_revalidation.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/evidence.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/integrity.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/knowledge_identity.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/memory_projection.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/promotion_requests.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/promotion_transactions.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/rollback.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/version_planning.py",
+}
+
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]: return subprocess.run(args, cwd=ROOT, text=True, capture_output=True, check=check)
 def ref_exists(ref: str) -> bool: return run(["git", "rev-parse", "--verify", "--quiet", ref], check=False).returncode == 0
 def comparison_base() -> str | None:
@@ -39,7 +54,7 @@ def changed_entries() -> list[list[str]]:
     if base is not None: entries.extend(line.split("	") for line in run(["git", "diff", "--name-status", base, "HEAD"]).stdout.splitlines() if line.strip())
     else: print("WARN: comparison base unavailable; relying on current-tree checks")
     for args in (["git", "diff", "--name-status"], ["git", "diff", "--cached", "--name-status"]): entries.extend(line.split("	") for line in run(args).stdout.splitlines() if line.strip())
-    for line in run(["git", "status", "--porcelain=v1"]).stdout.splitlines():
+    for line in run(["git", "status", "--porcelain=v1", "--untracked-files=all"]).stdout.splitlines():
         if line.startswith("?? "): entries.append(["A", line[3:]])
     return entries
 changed_paths: set[str] = set()
@@ -50,6 +65,7 @@ for parts in changed_entries():
         normalized = path.replace("\\", "/"); changed_paths.add(normalized); name = Path(normalized).name
         if name in PROHIBITED_NAMES: raise SystemExit(f"package or dependency file changed: {normalized}")
         if normalized in AION217_SOURCE_PATHS or normalized in AION219_SOURCE_PATHS: continue
+        if normalized in AION222_SOURCE: continue
         if any(normalized.startswith(prefix) for prefix in PROHIBITED_PREFIXES): raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")
         if normalized not in ALLOWED_EXACT and not any(normalized.startswith(prefix) for prefix in ALLOWED_PREFIXES): raise SystemExit(f"path outside AION-217 scope: {normalized}")
 for relative in run(["git", "ls-files"]).stdout.splitlines():

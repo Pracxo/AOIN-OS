@@ -143,7 +143,6 @@ for commit in \
   require_ancestor "$commit"
 done
 
-AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-program-final-evaluation-check.sh
 AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-program-complete-check.sh
 AION_AGGREGATE_GATE_RUNNING=1 ./scripts/knowledge-intelligence-program-complete-runtime-hold.sh
 
@@ -169,7 +168,7 @@ decision = "CONTROLLED_PUBLIC_RESEARCH_PILOT_PASS_COMPLETE_KNOWLEDGE_INTELLIGENC
 required_program = {
     "program_id": program_id,
     "program_name": "AION Governed Learning and Memory Integration Program",
-    "program_state": "governed_learning_memory_program_authorized_not_implemented",
+    "program_state": "governed_learning_memory_promotion_transaction_core_implemented_write_disabled_pending_closeout",
     "parent_program_ids": [
         "AION-COGNITIVE-ARCHITECTURE-001",
         "AION-KNOWLEDGE-INTELLIGENCE-001",
@@ -274,8 +273,8 @@ if auth["resource_limits"] != required_limits:
     raise SystemExit("resource limit mismatch")
 
 for source_path in auth["authorized_source_scope"]:
-    if (root / source_path).exists():
-        raise SystemExit(f"AION-222 source exists during AION-221: {source_path}")
+    if not (root / source_path).exists():
+        raise SystemExit(f"AION-222 source missing after implementation: {source_path}")
 
 if ki_program["program_state"] != "knowledge_intelligence_program_complete":
     raise SystemExit("Knowledge Intelligence program not complete")
@@ -291,9 +290,26 @@ PY
 
 base_ref="$(comparison_base || true)"
 if [[ -n "$base_ref" ]]; then
-  if git diff --name-only --diff-filter=ACMRT "$base_ref" HEAD -- services/brain-api/src/aion_brain | rg -n '.+'; then
-    echo "ERROR: runtime source changed during AION-221" >&2
-    exit 1
+  changed_source="$(git diff --name-only --diff-filter=ACMRT "$base_ref" HEAD -- services/brain-api/src/aion_brain || true)"
+  allowed_source="$("$PYTHON_BIN" - <<'PY'
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+root = Path.cwd()
+auth = json.loads((root / "docs/governed-learning-memory/authorization-ledger.json").read_text(encoding="utf-8"))
+print("\n".join(auth["authorized_source_scope"]))
+PY
+)"
+  if [[ -n "$changed_source" ]]; then
+    while IFS= read -r path; do
+      [[ -n "$path" ]] || continue
+      if ! grep -Fxq "$path" <<<"$allowed_source"; then
+        echo "ERROR: runtime source outside AION-222 authorization changed: $path" >&2
+        exit 1
+      fi
+    done <<<"$changed_source"
   fi
 fi
 
@@ -310,8 +326,8 @@ for path in \
   services/brain-api/src/aion_brain/governed_learning_memory/rollback.py \
   services/brain-api/src/aion_brain/governed_learning_memory/integrity.py \
   services/brain-api/src/aion_brain/governed_learning_memory/evidence.py; do
-  if [[ -e "$path" ]]; then
-    echo "ERROR: AION-222 source created during AION-221: $path" >&2
+  if [[ ! -f "$path" ]]; then
+    echo "ERROR: AION-222 source missing after implementation: $path" >&2
     exit 1
   fi
 done

@@ -1,0 +1,47 @@
+{
+  "no_op_duplicate": false,
+  "plan_fingerprint": "572376bdec0a8d19c1b8cbfc1f2a72ada8831497483ce89737a72de15378da8b",
+  "reason_codes": [
+    "promotion_rollback_valid"
+  ],
+  "rollback_plan_id": "rollback-plan-promotion-transaction-example",
+  "runtime_effect": false,
+  "schema_version": "aion-glm-promotion-rollback-plan/v1",
+  "step_count": 2,
+  "steps": [
+    {
+      "actual_execution": false,
+      "belief_mutation_applied": false,
+      "depends_on": [],
+      "memory_write_applied": false,
+      "operation": "append_retraction_marker_plan",
+      "persistent_write_applied": false,
+      "reason_codes": [
+        "promotion_rollback_valid"
+      ],
+      "reference_ids": [
+        "version-plan-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001"
+      ],
+      "step_fingerprint": "bfd258093565983c99bf3af96bc87eeee82c4d70263c0a4368a97ce267586624",
+      "step_id": "rollback-promotion-transaction-example-001"
+    },
+    {
+      "actual_execution": false,
+      "belief_mutation_applied": false,
+      "depends_on": [],
+      "memory_write_applied": false,
+      "operation": "preserve_audit_evidence",
+      "persistent_write_applied": false,
+      "reason_codes": [
+        "promotion_rollback_valid"
+      ],
+      "reference_ids": [
+        "version-plan-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001"
+      ],
+      "step_fingerprint": "c11862ae3612596934363b7190a03d959d6d5f3a350918051c0afcd068a01163",
+      "step_id": "rollback-promotion-transaction-example-002"
+    }
+  ],
+  "transaction_id": "promotion-transaction-example",
+  "valid": true
+}

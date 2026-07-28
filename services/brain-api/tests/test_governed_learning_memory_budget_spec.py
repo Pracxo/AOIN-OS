@@ -4,9 +4,7 @@ from test_governed_learning_memory_program_authorization import load_json
 
 
 def test_resource_budgets_include_positive_planning_limits_and_zero_effect_limits() -> None:
-    limits = load_json("docs/governed-learning-memory/authorization-ledger.json")[
-        "resource_limits"
-    ]
+    limits = load_json("docs/governed-learning-memory/authorization-ledger.json")["resource_limits"]
 
     assert limits["maximum_promotion_requests_per_batch"] == 100
     assert limits["maximum_candidates_per_request"] == 100

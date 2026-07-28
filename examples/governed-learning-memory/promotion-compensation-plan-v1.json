@@ -1,0 +1,31 @@
+{
+  "compensation_plan_id": "compensation-plan-promotion-transaction-example",
+  "no_op_duplicate": false,
+  "plan_fingerprint": "9c3e63cf2b454210cefaf515821b46d24249cd55629bb00d0ff753e2e79ed33d",
+  "reason_codes": [
+    "promotion_compensation_valid"
+  ],
+  "runtime_effect": false,
+  "schema_version": "aion-glm-promotion-compensation-plan/v1",
+  "step_count": 1,
+  "steps": [
+    {
+      "actual_execution": false,
+      "belief_mutation_applied": false,
+      "depends_on": [],
+      "memory_write_applied": false,
+      "operation": "create_operator_review_item",
+      "persistent_write_applied": false,
+      "reason_codes": [
+        "promotion_compensation_valid"
+      ],
+      "reference_ids": [
+        "version-plan-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001"
+      ],
+      "step_fingerprint": "49f6c9a07a9dfa72d1a3fb0e271a741e23e9357fbe3f1fe2f9a08fcab5042641",
+      "step_id": "compensation-promotion-transaction-example-001"
+    }
+  ],
+  "transaction_id": "promotion-transaction-example",
+  "valid": true
+}
