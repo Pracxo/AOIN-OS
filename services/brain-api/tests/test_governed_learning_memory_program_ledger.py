@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+from scripts.lib.governed_learning_memory_local_persistence_authorization import (
+    ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+)
 from test_governed_learning_memory_program_authorization import (
     AUTH_ID,
     IMPLEMENTATION_TASK,
@@ -11,8 +14,12 @@ from test_governed_learning_memory_program_authorization import (
 def test_program_ledger_records_aion223_authorization_without_runtime_effects() -> None:
     program = load_json("docs/governed-learning-memory/program-ledger.json")
     assert program["program_id"] == PROGRAM_ID
-    assert program["active_glm_implementation_authorization"] == AUTH_ID
-    assert program["active_glm_implementation_task"] == IMPLEMENTATION_TASK
+    if program["program_state"] == ENGAGEMENT_APPLICATION_AUTHORIZED_STATE:
+        assert program["active_glm_implementation_authorization"] == "AION-225-GLM-0003"
+        assert program["active_glm_implementation_task"] == "AION-226"
+    else:
+        assert program["active_glm_implementation_authorization"] == AUTH_ID
+        assert program["active_glm_implementation_task"] == IMPLEMENTATION_TASK
     assert program["local_append_only_knowledge_store_authorized"] is True
     assert program["local_append_only_knowledge_store_implemented"] is True
     assert program["operator_invoked_local_persistence_available"] is True

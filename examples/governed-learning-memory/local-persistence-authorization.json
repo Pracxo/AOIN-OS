@@ -18,9 +18,20 @@
     "runtime_can_create_approval": false
   },
   "approval_record_id": "AION-223-GLM-0002",
-  "authorization_active": true,
-  "authorization_consumed": false,
-  "authorization_expired": false,
+  "authorization_active": false,
+  "authorization_closed_by_task": "AION-225",
+  "authorization_consumed": true,
+  "authorization_consumed_by_feature_commits": [
+    "f44756f4067cd381be1ebf11a6edce1e3bc8133b"
+  ],
+  "authorization_consumed_by_merge_commits": [
+    "c6632a8e4985887f38400052f53f1c2a5d7882ec"
+  ],
+  "authorization_consumed_by_prs": [
+    140
+  ],
+  "authorization_consumed_by_task": "AION-224",
+  "authorization_expired": true,
   "authorization_reusable": false,
   "authorization_scope": "operator-approved-local-append-only-knowledge-version-store-transactional-semantic-episodic-procedural-projection-belief-candidate-record-tamper-evidence-backup-restore-core",
   "authorization_transaction_approved": true,
@@ -125,6 +136,7 @@
     "restricted_content_allowed": false
   },
   "created_by_task": "AION-223",
+  "evaluation_used_as_engagement_application_approval": false,
   "evaluation_used_as_persistence_approval": false,
   "explicit_approval_record_approval": true,
   "formal_closeout_task": "AION-225",
@@ -159,6 +171,8 @@
   "implementation_no_go_status": false,
   "implementation_task": "AION-224",
   "individual_transaction_persistence_approved": false,
+  "local_persistence_operator_evaluation_decision": "LOCAL_APPEND_ONLY_PERSISTENCE_OPERATOR_EVALUATION_PASS_RECOMMEND_ENGAGEMENT_LEARNING_APPLICATION_AUTHORIZATION",
+  "local_persistence_operator_evaluation_id": "AION-GLMPE-002",
   "parent_authorization_transaction_id": "AION-221-GLM-0001",
   "parent_closeout_task": "AION-223",
   "parent_evaluation_decision": "PROMOTION_TRANSACTION_OPERATOR_EVALUATION_PASS_RECOMMEND_LOCAL_APPEND_ONLY_KNOWLEDGE_PERSISTENCE_AUTHORIZATION",

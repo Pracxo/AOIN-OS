@@ -31,5 +31,21 @@ if [[ -f examples/governed-learning-memory/local-persistence-operator-evaluation
   ./scripts/governed-learning-memory-local-persistence-no-go-regression.sh
   ./scripts/governed-learning-memory-local-persistence-check.sh
   ./scripts/governed-learning-memory-local-persistence-pilot-evidence-check.sh
+  AION_GLM_LOCAL_PERSISTENCE_RUNTIME_HOLD_SKIP_FULL_CHECK=1 \
+    ./scripts/governed-learning-memory-local-persistence-runtime-hold.sh
+  ./scripts/governed-learning-memory-promotion-operator-evaluation-check.sh merged-main
+  ./scripts/governed-learning-memory-promotion-transaction-check.sh merged-main
+  ./scripts/governed-learning-memory-program-authorization-check.sh
+  ./scripts/knowledge-intelligence-program-complete-check.sh
+  AION_KI_PROGRAM_COMPLETE_RUNTIME_HOLD_SKIP_FULL_CHECK=1 \
+    ./scripts/knowledge-intelligence-program-complete-runtime-hold.sh
+  AION_AGGREGATE_GATE_RUNNING=1 \
+    ./scripts/cognitive-local-offline-pilot-closeout-check.sh
+  ./scripts/self-improvement-final-check.sh
+  ./scripts/docs-check.sh
+  ./scripts/final-docs-audit.sh
+  ./scripts/verify-no-domain-drift.sh
+  ./scripts/boundary-check.sh
+  ./scripts/repo-health.sh
 fi
 echo "governed learning memory local persistence operator evaluation PASS"

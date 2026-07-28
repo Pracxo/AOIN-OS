@@ -1,0 +1,9 @@
+{
+  "automatic_production_activation": false,
+  "counterfactual_result_id": "engagement-counterfactual-001",
+  "deterministic_fixture_replay": true,
+  "policy_violations": 0,
+  "recommendation": "approve_shadow_candidate",
+  "safety_violations": 0,
+  "schema_version": "aion-glm-engagement-counterfactual-result/v1"
+}

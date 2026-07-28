@@ -1,0 +1,831 @@
+{
+  "actual_belief_creations": 0,
+  "actual_belief_mutations": 0,
+  "actual_tool_executions": 0,
+  "authorization_closeout": {
+    "authorization_transaction_id": "AION-223-GLM-0002",
+    "closeout_task": "AION-225",
+    "pending_repository_update": true
+  },
+  "automatic_candidate_approvals": 0,
+  "automatic_knowledge_promotions": 0,
+  "browser_actions": 0,
+  "closeout_task": "AION-225",
+  "conditional_next_authorization": {
+    "authorization_transaction_id": "AION-225-GLM-0003",
+    "created_in_repository": false,
+    "formal_closeout_task": "AION-227",
+    "implementation_task": "AION-226"
+  },
+  "connector_calls": 0,
+  "decision": "LOCAL_APPEND_ONLY_PERSISTENCE_OPERATOR_EVALUATION_PASS_RECOMMEND_ENGAGEMENT_LEARNING_APPLICATION_AUTHORIZATION",
+  "deployments": 0,
+  "engagement_learning_applications": 0,
+  "evaluation_base_commit": "1ec76b82a4506919ea6c7a57b67fe10ebfba2612",
+  "evaluation_id": "AION-GLMPE-002",
+  "evaluation_passed": true,
+  "evaluation_type": "local_append_only_persistence_operator_evaluation",
+  "git_operations": 0,
+  "hard_gate_results": {
+    "append_only_enforcement": {
+      "passed": true
+    },
+    "approval_binding": {
+      "passed": true
+    },
+    "atomicity": {
+      "passed": true
+    },
+    "authorization_lineage": {
+      "passed": true
+    },
+    "backup_integrity": {
+      "passed": true
+    },
+    "belief_candidate_boundary": {
+      "passed": true
+    },
+    "cleanup": {
+      "passed": true
+    },
+    "collision_rejection": {
+      "passed": true
+    },
+    "content_policy": {
+      "passed": true
+    },
+    "delivery_integrity": {
+      "passed": true
+    },
+    "idempotency": {
+      "passed": true
+    },
+    "ledger_integrity": {
+      "passed": true
+    },
+    "no_v02_tag_or_release": {
+      "passed": true
+    },
+    "path_security": {
+      "passed": true
+    },
+    "projection_isolation": {
+      "passed": true
+    },
+    "query_boundary": {
+      "passed": true
+    },
+    "restore_integrity": {
+      "passed": true
+    },
+    "schema_integrity": {
+      "passed": true
+    },
+    "sqlite_controls": {
+      "passed": true
+    },
+    "synthetic_pilot_integrity": {
+      "passed": true
+    },
+    "version_continuity": {
+      "passed": true
+    },
+    "zero_production_effects": {
+      "passed": true
+    }
+  },
+  "implementation_feature_commits": [
+    "f44756f4067cd381be1ebf11a6edce1e3bc8133b"
+  ],
+  "implementation_merge_commits": [
+    "c6632a8e4985887f38400052f53f1c2a5d7882ec"
+  ],
+  "implementation_prs": [
+    140
+  ],
+  "implementation_task": "AION-224",
+  "model_provider_calls": 0,
+  "model_weight_changes": 0,
+  "network_calls": 0,
+  "next_architecture_decision": "engagement_learning_application_implementation_authorized",
+  "operator_local_stores_created": 0,
+  "production_memory_writes": 0,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only_control_plane": true,
+  "redacted": true,
+  "repository_integrity": {
+    "aion_v010_unchanged": true,
+    "no_v02_tag_or_release": true,
+    "repository_unchanged": true,
+    "temporary_evaluation_data_cleaned": true
+  },
+  "repository_unchanged": true,
+  "resource_state": {
+    "aion224_resource_limits": {
+      "maximum_actual_belief_creations": 0,
+      "maximum_actual_belief_mutations": 0,
+      "maximum_actual_tool_executions": 0,
+      "maximum_approval_evidence_records_per_transaction": 4,
+      "maximum_automatic_candidate_approvals": 0,
+      "maximum_automatic_knowledge_promotions": 0,
+      "maximum_automatic_memory_ingestions": 0,
+      "maximum_backup_bytes": 1073741824,
+      "maximum_backup_copies": 10,
+      "maximum_belief_candidate_projection_records_per_transaction": 100,
+      "maximum_browser_actions": 0,
+      "maximum_candidate_evidence_receipts_per_transaction": 100,
+      "maximum_checkpoint_interval_records": 1000,
+      "maximum_concurrent_readers": 4,
+      "maximum_concurrent_writers": 1,
+      "maximum_confidential_content_writes": 0,
+      "maximum_connector_calls": 0,
+      "maximum_content_bytes_per_knowledge_version": 16384,
+      "maximum_database_bytes": 1073741824,
+      "maximum_deployments": 0,
+      "maximum_engagement_learning_applications": 0,
+      "maximum_episodic_projection_records_per_transaction": 100,
+      "maximum_git_operations": 0,
+      "maximum_integrity_findings": 1000,
+      "maximum_knowledge_identities_per_transaction": 100,
+      "maximum_knowledge_versions_per_transaction": 100,
+      "maximum_metadata_bytes_per_record": 16384,
+      "maximum_model_provider_calls": 0,
+      "maximum_model_weight_changes": 0,
+      "maximum_network_calls": 0,
+      "maximum_operator_review_items": 100,
+      "maximum_persistence_sessions": 10,
+      "maximum_persistent_raw_approval_payload_writes": 0,
+      "maximum_persistent_source_body_writes": 0,
+      "maximum_persistent_source_preview_writes": 0,
+      "maximum_procedural_projection_records_per_transaction": 100,
+      "maximum_projection_records_per_transaction": 100,
+      "maximum_query_results": 1000,
+      "maximum_restore_attempts_per_session": 3,
+      "maximum_restricted_content_writes": 0,
+      "maximum_runtime_created_approvals": 0,
+      "maximum_runtime_created_pull_requests": 0,
+      "maximum_search_provider_calls": 0,
+      "maximum_semantic_projection_records_per_transaction": 100,
+      "maximum_shell_commands": 0,
+      "maximum_source_mutations": 0,
+      "maximum_subprocess_executions": 0,
+      "maximum_summary_bytes_per_projection": 4096,
+      "maximum_total_transaction_bytes": 4194304,
+      "maximum_transaction_seconds": 30,
+      "maximum_transactions_per_session": 100,
+      "minimum_independent_approvers_per_transaction": 2
+    },
+    "aion226_resource_limits": {
+      "maximum_actual_belief_creations": 0,
+      "maximum_actual_belief_mutations": 0,
+      "maximum_actual_tool_executions": 0,
+      "maximum_adaptation_plans_per_batch": 500,
+      "maximum_aion_224_store_writes": 0,
+      "maximum_approval_evidence_records_per_application": 4,
+      "maximum_automatic_candidate_approvals": 0,
+      "maximum_automatic_knowledge_promotions": 0,
+      "maximum_baseline_candidate_comparisons": 1000,
+      "maximum_browser_actions": 0,
+      "maximum_candidate_versions_per_identity": 100,
+      "maximum_cognitive_memory_writes": 0,
+      "maximum_concurrency": 4,
+      "maximum_connector_calls": 0,
+      "maximum_counterfactual_cases_per_session": 1000,
+      "maximum_deployments": 0,
+      "maximum_engagement_candidates_per_batch": 500,
+      "maximum_engagement_confidence_effects": 0,
+      "maximum_engagement_fact_promotions": 0,
+      "maximum_engagement_knowledge_effects": 0,
+      "maximum_engagement_source_independence_effects": 0,
+      "maximum_fixture_bytes": 4194304,
+      "maximum_fixture_records": 5000,
+      "maximum_git_operations": 0,
+      "maximum_metrics_per_case": 100,
+      "maximum_model_provider_calls": 0,
+      "maximum_model_weight_changes": 0,
+      "maximum_network_calls": 0,
+      "maximum_operator_review_items": 500,
+      "maximum_overlay_records_per_session": 500,
+      "maximum_overlay_snapshots_per_session": 100,
+      "maximum_overlay_versions_per_identity": 100,
+      "maximum_persistent_engagement_overlay_writes": 0,
+      "maximum_production_policy_mutations": 0,
+      "maximum_query_results": 1000,
+      "maximum_rollback_steps_per_application": 50,
+      "maximum_runtime_created_approvals": 0,
+      "maximum_runtime_created_pull_requests": 0,
+      "maximum_search_provider_calls": 0,
+      "maximum_shell_commands": 0,
+      "maximum_signal_references_per_candidate": 1000,
+      "maximum_source_mutations": 0,
+      "maximum_subprocess_executions": 0,
+      "maximum_target_components": 9
+    }
+  },
+  "retained_backup_files": 0,
+  "retained_database_files": 0,
+  "retained_manifest_files": 0,
+  "retained_shm_files": 0,
+  "retained_wal_files": 0,
+  "runtime_approvals": 0,
+  "runtime_pull_requests": 0,
+  "runtime_state": {
+    "engagement_application_implemented": false,
+    "local_store_implemented": true,
+    "local_store_isolated": true,
+    "production_exposure": false
+  },
+  "scenario_count": 28,
+  "scenario_ids": [
+    "aion_224_delivery_and_ci_integrity",
+    "authorization_lineage_and_scope",
+    "synthetic_pilot_evidence_integrity",
+    "explicit_initialization_and_path_isolation",
+    "schema_identity_and_object_set",
+    "sqlite_security_controls",
+    "append_only_update_and_delete_rejection",
+    "dual_persistence_approval",
+    "exact_approval_binding",
+    "content_redaction_and_sensitivity",
+    "atomic_transaction_commit_and_rollback",
+    "idempotent_exact_replay",
+    "changed_replay_and_collision_rejection",
+    "knowledge_identity_and_version_continuity",
+    "append_only_lifecycle_markers",
+    "semantic_projection_isolation",
+    "episodic_and_procedural_projection_isolation",
+    "belief_candidate_boundary",
+    "global_ledger_hash_chain",
+    "per_transaction_hash_chain_and_row_completeness",
+    "integrity_tamper_detection",
+    "exact_query_boundary",
+    "checkpoint_integrity",
+    "backup_integrity",
+    "restore_to_new_store_integrity",
+    "concurrency_budgets_and_cleanup",
+    "zero_production_and_runtime_side_effects",
+    "engagement_application_authorization_readiness"
+  ],
+  "scenario_results": [
+    {
+      "evidence": {
+        "branch": "phase/governed-learning-memory-local-append-only-persistence",
+        "ci_result": "pass",
+        "completion_timestamp": "2026-07-28T18:38:48Z",
+        "feature_commits": [
+          "f44756f4067cd381be1ebf11a6edce1e3bc8133b"
+        ],
+        "merge_commits": [
+          "c6632a8e4985887f38400052f53f1c2a5d7882ec"
+        ],
+        "pull_requests": [
+          140
+        ],
+        "task_id": "AION-224"
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "aion_224_delivery_and_ci_integrity"
+    },
+    {
+      "evidence": {
+        "approval_record_id": "AION-223-GLM-0002",
+        "authorization_active": true,
+        "authorization_reusable": false,
+        "authorization_scope": "operator-approved-local-append-only-knowledge-version-store-transactional-semantic-episodic-procedural-projection-belief-candidate-record-tamper-evidence-backup-restore-core",
+        "authorization_transaction_id": "AION-223-GLM-0002",
+        "formal_closeout_task": "AION-225",
+        "implementation_task": "AION-224",
+        "parent_evaluation_id": "AION-GLMPE-001"
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "authorization_lineage_and_scope"
+    },
+    {
+      "evidence": {
+        "actual_beliefs_created": 0,
+        "actual_beliefs_mutated": 0,
+        "authorization_id": "AION-223-GLM-0002",
+        "automatic_promotions": 0,
+        "backup_integrity_passed": true,
+        "belief_candidate_records_written": 1,
+        "changed_replays_rejected": 1,
+        "confidential_content_persisted": 0,
+        "delete_attempts_rejected": 1,
+        "episodic_projection_records_written": 1,
+        "global_hash_chain_passed": true,
+        "idempotent_replays": 1,
+        "knowledge_identities_written": 1,
+        "knowledge_versions_written": 1,
+        "mode": "synthetic_test",
+        "pilot_id": "AION-224-synthetic-local-persistence-pilot-001",
+        "procedural_projection_records_written": 1,
+        "production_memory_writes": 0,
+        "raw_approval_payloads_persisted": 0,
+        "report_fingerprint": "3b2560d843fa90cf256c3a5f67ab8a583ca473a7d3b72d3066542af419cd5cea",
+        "restore_integrity_passed": true,
+        "restored_logical_state_equal": true,
+        "semantic_projection_records_written": 1,
+        "source_bodies_persisted": 0,
+        "temporary_database_files_retained": 0,
+        "transaction_hash_chain_passed": true,
+        "transactions_committed": 1,
+        "update_attempts_rejected": 1
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "synthetic_pilot_evidence_integrity"
+    },
+    {
+      "evidence": {
+        "database_file_mode": "0o600",
+        "explicit_absolute_path_required": true,
+        "operator_local_temporary_path_rejected": true,
+        "rejection_count": 3,
+        "repository_path_rejected": true,
+        "symlink_rejected": true,
+        "synthetic_path_parent_mode": "0o700"
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "explicit_initialization_and_path_isolation"
+    },
+    {
+      "evidence": {
+        "application_id": 223224,
+        "index_count": 8,
+        "schema_fingerprint": "29a80c09163c01d7d0f8b51a6e7801cde607fcc56ce92b5a8f13cbd925b7f55b",
+        "table_count": 9,
+        "trigger_count": 18,
+        "unknown_schema_object_rejected": true,
+        "unknown_user_version_rejected": true,
+        "user_version": 1
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "schema_identity_and_object_set"
+    },
+    {
+      "evidence": {
+        "arbitrary_sql_unavailable": true,
+        "expected_pragmas": {
+          "application_id": 223224,
+          "auto_vacuum": 0,
+          "foreign_keys": 1,
+          "journal_mode": "wal",
+          "recursive_triggers": 0,
+          "synchronous": 2,
+          "temp_store": 2,
+          "trusted_schema": 0,
+          "user_version": 1
+        },
+        "extension_loading_disabled": true,
+        "observed_pragmas": {
+          "auto_vacuum": 0,
+          "busy_timeout": 5000,
+          "foreign_keys": 0,
+          "journal_mode": "WAL",
+          "recursive_triggers": 0,
+          "synchronous": 2,
+          "temp_store": 0,
+          "trusted_schema": 1
+        }
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "sqlite_security_controls"
+    },
+    {
+      "evidence": {
+        "delete_rejected_tables": 9,
+        "hard_delete_path": false,
+        "hidden_mutable_status_row": false,
+        "isolated_local_persistence_applied": true,
+        "receipt_integrity_status": "passed",
+        "update_rejected_tables": 9
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "append_only_update_and_delete_rejection"
+    },
+    {
+      "evidence": {
+        "independent_approver_count": 2,
+        "knowledge_steward": true,
+        "memory_operator": true,
+        "plan_approval_cannot_authorize_persistence": true,
+        "requester_differs_from_approvers": true,
+        "runtime_creates_no_approval": true
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "dual_persistence_approval"
+    },
+    {
+      "evidence": {
+        "backup_policy_bound": true,
+        "changed_binding_fails_closed": true,
+        "content_fingerprint_bound": true,
+        "database_path_bound": true,
+        "knowledge_identity_bound": true,
+        "projection_plan_bound": true,
+        "promotion_plan_bound": true,
+        "promotion_request_bound": true,
+        "promotion_result_bound": true,
+        "store_identity_bound": true,
+        "transaction_id_bound": true,
+        "version_plan_bound": true
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "exact_approval_binding"
+    },
+    {
+      "evidence": {
+        "confidential_rejected": true,
+        "credential_rejected": true,
+        "hidden_reasoning_rejected": true,
+        "internal_allowed": true,
+        "personal_data_rejected": true,
+        "prompt_rejected": true,
+        "public_allowed": true,
+        "raw_approval_payload_rejected": true,
+        "restricted_rejected": true,
+        "source_body_rejected": true,
+        "source_preview_rejected": true,
+        "utf8_size_limits_enforced": true
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "content_redaction_and_sensitivity"
+    },
+    {
+      "evidence": {
+        "begin_immediate_used": true,
+        "fresh_audit_passes_after_rollback": true,
+        "injected_failure_rolls_back_all_rows": true,
+        "no_partial_chain": true,
+        "no_partial_receipt": true,
+        "rows_and_ledger_commit_together": true
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "atomic_transaction_commit_and_rollback"
+    },
+    {
+      "evidence": {
+        "existing_receipt_returned": true,
+        "ledger_head_unchanged": true,
+        "new_ledger_events": 0,
+        "new_rows": 9,
+        "receipt_fingerprint_stable": false
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "idempotent_exact_replay"
+    },
+    {
+      "evidence": {
+        "changed_content_with_reused_approval_rejected": true,
+        "identity_fingerprint_collision_rejected": true,
+        "ledger_sequence_collision_rejected": true,
+        "projection_id_collision_rejected": true,
+        "reused_result_with_stale_approval_rejected": true,
+        "same_transaction_id_changed_request_rejected": true,
+        "version_collision_rejected": true
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "changed_replay_and_collision_rejection"
+    },
+    {
+      "evidence": {
+        "confidence_cap_preserved": true,
+        "content_cannot_change_factual_identity": true,
+        "identity_fingerprint_deterministic": true,
+        "identity_version_pair_unique": true,
+        "initial_version_begins_at": 1,
+        "knowledge_identity_count": 1,
+        "knowledge_version_count": 1,
+        "new_versions_contiguous": true,
+        "prior_versions_preserved": true
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "knowledge_identity_and_version_continuity"
+    },
+    {
+      "evidence": {
+        "active_interpretation_derivable_from_events": true,
+        "expiry_marker_append_only": true,
+        "marker_lineage_complete": true,
+        "prior_row_deletion": false,
+        "prior_row_update": false,
+        "retraction_marker_append_only": true,
+        "rollback_marker_append_only": true,
+        "supersession_marker_append_only": true
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "append_only_lifecycle_markers"
+    },
+    {
+      "evidence": {
+        "confidence_and_provenance_preserved": true,
+        "memory_repository_unused": true,
+        "production_memory_written": false,
+        "semantic_record_count": 1,
+        "source_knowledge_version_resolves": true
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "semantic_projection_isolation"
+    },
+    {
+      "evidence": {
+        "episodic_record_count": 1,
+        "episodic_uses_bounded_fingerprints": true,
+        "free_form_procedure_inference": false,
+        "procedural_record_count": 1,
+        "procedural_requires_explicit_plan": true,
+        "production_memory_written": false,
+        "tool_execution": false
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "episodic_and_procedural_projection_isolation"
+    },
+    {
+      "evidence": {
+        "BeliefClaim_absent": true,
+        "actual_belief_created": false,
+        "actual_belief_mutated": false,
+        "belief_record_is_projection_candidate": true,
+        "belief_repository_unused": true,
+        "contradiction_preserved": true,
+        "provenance_preserved": true,
+        "uncertainty_preserved": true
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "belief_candidate_boundary"
+    },
+    {
+      "evidence": {
+        "changed_row_detected": true,
+        "first_event_uses_zero_hash": true,
+        "global_event_hash_exact": true,
+        "global_sequence_contiguous": true,
+        "missing_event_detected": true,
+        "previous_global_hash_exact": true,
+        "reordered_event_detected": true,
+        "truncated_chain_detected": true
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "global_ledger_hash_chain"
+    },
+    {
+      "evidence": {
+        "commit_event_present": true,
+        "ledger_end_sequence": 11,
+        "ledger_start_sequence": 1,
+        "orphan_event": false,
+        "previous_transaction_hash_exact": true,
+        "row_to_ledger_complete": true,
+        "transaction_head_exact": true,
+        "transaction_sequence_contiguous": true
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "per_transaction_hash_chain_and_row_completeness"
+    },
+    {
+      "evidence": {
+        "approval_binding_change_detected": true,
+        "chain_truncation_detected": true,
+        "event_hash_change_detected": true,
+        "missing_event_detected": true,
+        "missing_row_detected": true,
+        "projection_binding_change_detected": true,
+        "row_fingerprint_change_detected": true,
+        "schema_change_detected": true,
+        "sequence_gap_detected": true
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "integrity_tamper_detection"
+    },
+    {
+      "evidence": {
+        "arbitrary_sql": false,
+        "deterministic_order": true,
+        "engagement_ranking": false,
+        "fuzzy_search": false,
+        "knowledge_result_count": 1,
+        "maximum_results": 1000,
+        "projection_result_count": 4,
+        "query_only_enabled": true,
+        "semantic_search": false,
+        "truth_ranking": false
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "exact_query_boundary"
+    },
+    {
+      "evidence": {
+        "background_checkpoint_worker": false,
+        "checkpoint_result_recorded": true,
+        "explicit_operator_invocation": true,
+        "ledger_head_preserved": true,
+        "record_count_preserved": true,
+        "scheduler": false
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "checkpoint_integrity"
+    },
+    {
+      "evidence": {
+        "automatic_schedule": false,
+        "backup_audit_after_creation": true,
+        "destination_mode": "0o600",
+        "explicit_new_destination": true,
+        "ledger_head_exact": true,
+        "manifest_fingerprint_valid": true,
+        "maximum_backup_size_enforced": true,
+        "source_audit_before_backup": true,
+        "symlink_rejected": true
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "backup_integrity"
+    },
+    {
+      "evidence": {
+        "active_store_switched_automatically": false,
+        "application_id_verified": true,
+        "backup_fingerprint_verified": true,
+        "existing_store_overwritten": false,
+        "foreign_keys_verified": true,
+        "ledger_chains_verified": true,
+        "new_absent_destination_required": true,
+        "receipt_bindings_verified": true,
+        "restored_logical_state_equal": true,
+        "schema_verified": true
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "restore_to_new_store_integrity"
+    },
+    {
+      "evidence": {
+        "backup_count_limit_enforced": true,
+        "database_size_limit_enforced": true,
+        "maximum_four_readers": true,
+        "maximum_one_writer": true,
+        "resource_limits": {
+          "maximum_actual_belief_creations": 0,
+          "maximum_actual_belief_mutations": 0,
+          "maximum_actual_tool_executions": 0,
+          "maximum_approval_evidence_records_per_transaction": 4,
+          "maximum_automatic_candidate_approvals": 0,
+          "maximum_automatic_knowledge_promotions": 0,
+          "maximum_automatic_memory_ingestions": 0,
+          "maximum_backup_bytes": 1073741824,
+          "maximum_backup_copies": 10,
+          "maximum_belief_candidate_projection_records_per_transaction": 100,
+          "maximum_browser_actions": 0,
+          "maximum_candidate_evidence_receipts_per_transaction": 100,
+          "maximum_checkpoint_interval_records": 1000,
+          "maximum_concurrent_readers": 4,
+          "maximum_concurrent_writers": 1,
+          "maximum_confidential_content_writes": 0,
+          "maximum_connector_calls": 0,
+          "maximum_content_bytes_per_knowledge_version": 16384,
+          "maximum_database_bytes": 1073741824,
+          "maximum_deployments": 0,
+          "maximum_engagement_learning_applications": 0,
+          "maximum_episodic_projection_records_per_transaction": 100,
+          "maximum_git_operations": 0,
+          "maximum_integrity_findings": 1000,
+          "maximum_knowledge_identities_per_transaction": 100,
+          "maximum_knowledge_versions_per_transaction": 100,
+          "maximum_metadata_bytes_per_record": 16384,
+          "maximum_model_provider_calls": 0,
+          "maximum_model_weight_changes": 0,
+          "maximum_network_calls": 0,
+          "maximum_operator_review_items": 100,
+          "maximum_persistence_sessions": 10,
+          "maximum_persistent_raw_approval_payload_writes": 0,
+          "maximum_persistent_source_body_writes": 0,
+          "maximum_persistent_source_preview_writes": 0,
+          "maximum_procedural_projection_records_per_transaction": 100,
+          "maximum_projection_records_per_transaction": 100,
+          "maximum_query_results": 1000,
+          "maximum_restore_attempts_per_session": 3,
+          "maximum_restricted_content_writes": 0,
+          "maximum_runtime_created_approvals": 0,
+          "maximum_runtime_created_pull_requests": 0,
+          "maximum_search_provider_calls": 0,
+          "maximum_semantic_projection_records_per_transaction": 100,
+          "maximum_shell_commands": 0,
+          "maximum_source_mutations": 0,
+          "maximum_subprocess_executions": 0,
+          "maximum_summary_bytes_per_projection": 4096,
+          "maximum_total_transaction_bytes": 4194304,
+          "maximum_transaction_seconds": 30,
+          "maximum_transactions_per_session": 100,
+          "minimum_independent_approvers_per_transaction": 2
+        },
+        "temporary_sqlite_files_removed": true,
+        "transaction_size_limit_enforced": true,
+        "transaction_timeout_enforced": true,
+        "write_contention_within_policy": true
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "concurrency_budgets_and_cleanup"
+    },
+    {
+      "evidence": {
+        "actual_belief_creations": 0,
+        "actual_belief_mutations": 0,
+        "automatic_approvals": 0,
+        "automatic_promotions": 0,
+        "background_writes": 0,
+        "deployments": 0,
+        "git_mutations": 0,
+        "network_calls": 0,
+        "production_exposure": false,
+        "production_memory_writes": 0,
+        "repository_tree_unchanged": true,
+        "scheduled_writes": 0,
+        "source_mutations": 0,
+        "tool_executions": 0
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "zero_production_and_runtime_side_effects"
+    },
+    {
+      "evidence": {
+        "adaptation_overlays_can_remain_isolated_in_memory": true,
+        "adaptation_plans_can_be_versioned_and_rolled_back": true,
+        "aion_224_hard_gates_passed": true,
+        "aion_224_schema_change_required_for_aion_226": false,
+        "aion_226_can_be_implemented_without_weakening_aion_224": true,
+        "engagement_candidates_modify_source_independence": false,
+        "engagement_candidates_modify_stored_knowledge_confidence": false,
+        "engagement_candidates_remain_non_factual": true,
+        "engagement_candidates_resolve_contradictions": false,
+        "local_knowledge_read_only_context_available": true,
+        "operator_approval_binds_candidate_and_overlay_fingerprints": true,
+        "persistence_required_for_aion_226": false,
+        "production_policy_modification_required": false
+      },
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "engagement_application_authorization_readiness"
+    }
+  ],
+  "search_provider_calls": 0,
+  "security_state": {
+    "no_actual_belief_effect": true,
+    "no_engagement_application": true,
+    "no_production_memory_effect": true,
+    "read_only_control_plane": true,
+    "redacted": true
+  },
+  "shell_executions": 0,
+  "source_mutations": 0,
+  "subprocess_executions": 0,
+  "synthetic": true,
+  "synthetic_backups_created": 1,
+  "synthetic_changed_replays_rejected": 1,
+  "synthetic_delete_attempts_rejected": 9,
+  "synthetic_integrity_failures_detected": 1,
+  "synthetic_persistence_validation": {
+    "changed_replays_rejected": 1,
+    "delete_attempts_rejected": 9,
+    "idempotent_replays": 1,
+    "integrity_failures_detected": 1,
+    "synthetic": true,
+    "transactions_committed": 1,
+    "update_attempts_rejected": 9
+  },
+  "synthetic_restores_completed": 1,
+  "synthetic_stores_created": 1,
+  "synthetic_transactions_committed": 1,
+  "synthetic_update_attempts_rejected": 9,
+  "temporary_evaluation_data_cleaned": true,
+  "validation_results": {
+    "all_scenarios_executed": true,
+    "corrective_cycles": 0,
+    "corrective_prs": [],
+    "no_scenario_skipped": true,
+    "no_unknown_scenario": true
+  }
+}

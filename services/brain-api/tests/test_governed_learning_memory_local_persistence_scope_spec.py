@@ -3,6 +3,7 @@ from __future__ import annotations
 from scripts.lib.governed_learning_memory_local_persistence_authorization import (
     AION224_AUTHORIZATION_SCOPE,
     AION224_SOURCE_SCOPE,
+    ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
     IMPLEMENTED_PENDING_CLOSEOUT_STATE,
 )
 from test_governed_learning_memory_program_authorization import REPO_ROOT, load_json
@@ -23,7 +24,10 @@ def test_aion224_scope_is_exact_and_source_state_matches_program_state() -> None
         if relative.endswith("__init__.py"):
             continue
         exists = (REPO_ROOT / relative).exists()
-        if program["program_state"] == IMPLEMENTED_PENDING_CLOSEOUT_STATE:
+        if program["program_state"] in {
+            IMPLEMENTED_PENDING_CLOSEOUT_STATE,
+            ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+        }:
             assert exists, relative
         else:
             assert not exists, relative

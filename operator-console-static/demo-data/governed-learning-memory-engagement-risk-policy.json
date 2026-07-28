@@ -1,0 +1,12 @@
+{
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "synthetic": true,
+  "candidate_kind": "retrieval_strategy",
+  "minimum_independent_approvers": 2,
+  "production_policy_mutation_allowed": false,
+  "risk_class": "elevated",
+  "schema_version": "aion-glm-engagement-risk-assessment/v1"
+}

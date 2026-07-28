@@ -128,13 +128,23 @@ required_false = [
     "git_mutation_enabled",
 ]
 implemented_state = "governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout"
+engagement_authorized_state = "governed_learning_memory_engagement_application_authorized_not_implemented"
+implemented_states = {implemented_state, engagement_authorized_state}
 for label, payload in (("program", program), ("authorization", auth)):
-    if payload["authorization_transaction_id"] != AION223_AUTHORIZATION_ID:
-        raise SystemExit(f"{label} current authorization mismatch")
-    if payload["active_glm_implementation_task"] != "AION-224":
-        raise SystemExit(f"{label} active task mismatch")
-    if payload["formal_closeout_task"] != "AION-225":
-        raise SystemExit(f"{label} closeout task mismatch")
+    if payload.get("program_state") == engagement_authorized_state:
+        if payload["authorization_transaction_id"] != "AION-225-GLM-0003":
+            raise SystemExit(f"{label} current authorization mismatch")
+        if payload["active_glm_implementation_task"] != "AION-226":
+            raise SystemExit(f"{label} active task mismatch")
+        if payload["formal_closeout_task"] != "AION-227":
+            raise SystemExit(f"{label} closeout task mismatch")
+    else:
+        if payload["authorization_transaction_id"] != AION223_AUTHORIZATION_ID:
+            raise SystemExit(f"{label} current authorization mismatch")
+        if payload["active_glm_implementation_task"] != "AION-224":
+            raise SystemExit(f"{label} active task mismatch")
+        if payload["formal_closeout_task"] != "AION-225":
+            raise SystemExit(f"{label} closeout task mismatch")
     if payload["knowledge_promotion_transaction_core_state"] != state:
         raise SystemExit(f"{label} implementation state mismatch")
     for key in required_true:
@@ -143,7 +153,7 @@ for label, payload in (("program", program), ("authorization", auth)):
     for key in required_false:
         if payload.get(key) is not False:
             raise SystemExit(f"{label} expected false: {key}")
-    if payload.get("program_state") == implemented_state:
+    if payload.get("program_state") in implemented_states:
         for key in [
             "local_append_only_knowledge_store_implemented",
             "operator_invoked_local_persistence_available",
@@ -208,10 +218,20 @@ if closed.get("authorization_closed_by_task") != "AION-223":
 current = records.get(AION223_AUTHORIZATION_ID)
 if not current:
     raise SystemExit("AION-223 authorization record missing")
-if current.get("authorization_active") is not True:
-    raise SystemExit("AION-223 authorization is not active")
-if current.get("authorization_consumed") is not False:
-    raise SystemExit("AION-223 authorization is already consumed")
+if current.get("authorization_active") is True:
+    if current.get("authorization_consumed") is not False:
+        raise SystemExit("AION-223 authorization is already consumed")
+elif current.get("authorization_active") is False:
+    if (
+        current.get("authorization_consumed") is not True
+        or current.get("authorization_expired") is not True
+        or current.get("authorization_consumed_by_task") != "AION-224"
+        or current.get("authorization_consumed_by_prs") != [140]
+        or current.get("authorization_closed_by_task") != "AION-225"
+    ):
+        raise SystemExit("AION-223 closeout mismatch")
+else:
+    raise SystemExit("AION-223 authorization active flag mismatch")
 if current.get("implementation_approved", False) is not False:
     raise SystemExit("AION-223 implementation approval must remain false")
 if current.get("runtime_enabled", False) is not False:

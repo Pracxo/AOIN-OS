@@ -32,6 +32,8 @@ from pathlib import Path
 from scripts.lib.governed_learning_memory_local_persistence_authorization import (
     AION224_RESOURCE_LIMITS,
     AION224_SOURCE_SCOPE,
+    ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+    IMPLEMENTED_PENDING_CLOSEOUT_STATE,
     validate_authorization_ledgers,
     validate_delivery_reconciliation,
     validate_evaluation_report,
@@ -43,9 +45,12 @@ program, auth = validate_authorization_ledgers(root)
 validate_future_policy(root)
 validate_delivery_reconciliation(root)
 validate_evaluation_report(root)
-required_state = "governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout"
+implemented_states = {
+    IMPLEMENTED_PENDING_CLOSEOUT_STATE,
+    ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+}
 for label, payload in (("program", program), ("authorization", auth)):
-    if payload["program_state"] != required_state:
+    if payload["program_state"] not in implemented_states:
         raise SystemExit(f"{label} implemented state mismatch")
     for key in (
         "local_append_only_knowledge_store_implemented",

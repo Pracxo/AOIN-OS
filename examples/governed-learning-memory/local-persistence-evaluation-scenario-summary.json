@@ -1,0 +1,216 @@
+{
+  "decision": "LOCAL_APPEND_ONLY_PERSISTENCE_OPERATOR_EVALUATION_PASS_RECOMMEND_ENGAGEMENT_LEARNING_APPLICATION_AUTHORIZATION",
+  "evaluation_id": "AION-GLMPE-002",
+  "hard_gate_results": {
+    "append_only_enforcement": {
+      "passed": true
+    },
+    "approval_binding": {
+      "passed": true
+    },
+    "atomicity": {
+      "passed": true
+    },
+    "authorization_lineage": {
+      "passed": true
+    },
+    "backup_integrity": {
+      "passed": true
+    },
+    "belief_candidate_boundary": {
+      "passed": true
+    },
+    "cleanup": {
+      "passed": true
+    },
+    "collision_rejection": {
+      "passed": true
+    },
+    "content_policy": {
+      "passed": true
+    },
+    "delivery_integrity": {
+      "passed": true
+    },
+    "idempotency": {
+      "passed": true
+    },
+    "ledger_integrity": {
+      "passed": true
+    },
+    "no_v02_tag_or_release": {
+      "passed": true
+    },
+    "path_security": {
+      "passed": true
+    },
+    "projection_isolation": {
+      "passed": true
+    },
+    "query_boundary": {
+      "passed": true
+    },
+    "restore_integrity": {
+      "passed": true
+    },
+    "schema_integrity": {
+      "passed": true
+    },
+    "sqlite_controls": {
+      "passed": true
+    },
+    "synthetic_pilot_integrity": {
+      "passed": true
+    },
+    "version_continuity": {
+      "passed": true
+    },
+    "zero_production_effects": {
+      "passed": true
+    }
+  },
+  "redacted": true,
+  "scenario_count": 28,
+  "scenario_results": [
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "aion_224_delivery_and_ci_integrity"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "authorization_lineage_and_scope"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "synthetic_pilot_evidence_integrity"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "explicit_initialization_and_path_isolation"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "schema_identity_and_object_set"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "sqlite_security_controls"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "append_only_update_and_delete_rejection"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "dual_persistence_approval"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "exact_approval_binding"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "content_redaction_and_sensitivity"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "atomic_transaction_commit_and_rollback"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "idempotent_exact_replay"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "changed_replay_and_collision_rejection"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "knowledge_identity_and_version_continuity"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "append_only_lifecycle_markers"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "semantic_projection_isolation"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "episodic_and_procedural_projection_isolation"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "belief_candidate_boundary"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "global_ledger_hash_chain"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "per_transaction_hash_chain_and_row_completeness"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "integrity_tamper_detection"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "exact_query_boundary"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "checkpoint_integrity"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "backup_integrity"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "restore_to_new_store_integrity"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "concurrency_budgets_and_cleanup"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "zero_production_and_runtime_side_effects"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "engagement_application_authorization_readiness"
+    }
+  ]
+}

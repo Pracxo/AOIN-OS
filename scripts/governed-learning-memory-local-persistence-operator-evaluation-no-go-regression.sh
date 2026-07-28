@@ -51,7 +51,7 @@ else
   echo "WARN: comparison base unavailable; skipping feature diff surface check" >&2
 fi
 
-if rg -n '(AION-226.*implemented|engagement_application_implemented": true|automatic_engagement_learning_application_enabled": true|persistent_engagement_overlay_write_enabled": true|production_policy_mutation_enabled": true|cognitive_memory_write_enabled": true|actual_belief_creation_enabled": true|actual_belief_mutation_enabled": true|network_access_enabled": true|actual_tool_execution_enabled": true|v02_release_ready": true)' docs examples operator-console-static; then
+if rg -n '(engagement_application_implemented": true|automatic_engagement_learning_application_enabled": true|persistent_engagement_overlay_write_enabled": true|production_policy_mutation_enabled": true|cognitive_memory_write_enabled": true|actual_belief_creation_enabled": true|actual_belief_mutation_enabled": true|network_access_enabled": true|actual_tool_execution_enabled": true|v02_release_ready": true)' docs examples operator-console-static; then
   echo "ERROR: AION-225 no-go boundary violated" >&2
   exit 1
 fi

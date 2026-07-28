@@ -2813,3 +2813,7 @@ State after AION-224:
 AION-223-GLM-0002 remains active, unconsumed, unexpired, non-reusable, and pending AION-225 formal closeout. AION-226 remains unapproved.
 
 <!-- AION-224-IMPLEMENTATION-UPDATE:END -->
+
+## AION-225 Evaluation And Authorization Update
+
+AION-225 completed `AION-GLMPE-002` with exact PASS decision `LOCAL_APPEND_ONLY_PERSISTENCE_OPERATOR_EVALUATION_PASS_RECOMMEND_ENGAGEMENT_LEARNING_APPLICATION_AUTHORIZATION`. AION-223-GLM-0002 is closed as consumed by AION-224, expired and non-reusable. AION-225-GLM-0003 is the sole active Governed Learning and Memory implementation authorization for AION-226. Engagement learning remains non-factual, shadow-only, in-memory only, and unavailable until AION-226 implements it under the authorized boundary. Production memory writes, actual belief mutation, production policy mutation, persistent engagement overlays, network calls, model training, v0.2 tags and v0.2 releases remain disabled.

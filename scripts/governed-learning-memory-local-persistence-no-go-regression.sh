@@ -54,8 +54,11 @@ from pathlib import Path
 
 root = Path.cwd()
 state = json.loads((root / "docs/governed-learning-memory/program-ledger.json").read_text())
-required_state = "governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout"
-if state.get("program_state") != required_state:
+implemented_states = {
+    "governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout",
+    "governed_learning_memory_engagement_application_authorized_not_implemented",
+}
+if state.get("program_state") not in implemented_states:
     raise SystemExit("ERROR: AION-224 implemented state missing")
 for key in (
     "general_persistent_knowledge_write_enabled",

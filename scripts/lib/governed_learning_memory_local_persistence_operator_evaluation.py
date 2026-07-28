@@ -969,10 +969,26 @@ def scenario_authorization_lineage(context: dict[str, Any]) -> Mapping[str, Any]
         "approval_record_id": AUTHORIZATION_ID,
         "implementation_task": IMPLEMENTATION_TASK,
         "formal_closeout_task": CLOSEOUT_TASK,
-        "authorization_active": True,
         "authorization_reusable": False,
     }
     evidence = require_subset(record, expected, "AION-223 authorization")
+    if record.get("authorization_active") is True:
+        if (
+            record.get("authorization_consumed") is not False
+            or record.get("authorization_expired") is not False
+        ):
+            raise EvaluationError("AION-223 active authorization lifecycle mismatch")
+        evidence["authorization_lifecycle_state"] = "active_before_closeout"
+    elif (
+        record.get("authorization_active") is False
+        and record.get("authorization_consumed") is True
+        and record.get("authorization_expired") is True
+        and record.get("authorization_closed_by_task") == CLOSEOUT_TASK
+        and record.get("local_persistence_operator_evaluation_id") == EVALUATION_ID
+    ):
+        evidence["authorization_lifecycle_state"] = "closed_after_AION_225_pass"
+    else:
+        raise EvaluationError("AION-223 authorization lifecycle mismatch")
     evidence["parent_evaluation_id"] = record.get("parent_evaluation_id")
     evidence["authorization_scope"] = record.get("authorization_scope")
     if record.get("authorization_scope") != glmp.AUTHORIZATION_SCOPE:

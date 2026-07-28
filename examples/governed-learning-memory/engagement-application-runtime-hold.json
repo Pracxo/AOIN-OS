@@ -1,0 +1,10 @@
+{
+  "actual_belief_mutation_enabled": false,
+  "automatic_engagement_learning_application_enabled": false,
+  "cognitive_memory_write_enabled": false,
+  "network_access_enabled": false,
+  "persistent_engagement_overlay_write_enabled": false,
+  "production_exposure": false,
+  "production_policy_mutation_enabled": false,
+  "schema_version": "aion-glm-engagement-application-runtime-hold/v1"
+}

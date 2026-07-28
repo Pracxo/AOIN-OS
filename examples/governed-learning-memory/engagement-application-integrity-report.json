@@ -1,0 +1,7 @@
+{
+  "belief_mutation_detected": false,
+  "integrity_status": "passed",
+  "overlay_persistence_detected": false,
+  "production_policy_mutation_detected": false,
+  "schema_version": "aion-glm-engagement-application-integrity-report/v1"
+}

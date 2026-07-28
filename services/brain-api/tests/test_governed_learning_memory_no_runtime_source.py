@@ -6,6 +6,7 @@ import subprocess
 from scripts.lib.governed_learning_memory_local_persistence_authorization import (
     AION222_SOURCE_SCOPE,
     AION224_SOURCE_SCOPE,
+    ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
     IMPLEMENTED_PENDING_CLOSEOUT_STATE,
 )
 from test_governed_learning_memory_program_authorization import REPO_ROOT, load_json
@@ -47,7 +48,7 @@ def _comparison_base() -> str | None:
 def _aion224_implemented() -> bool:
     return (
         load_json("docs/governed-learning-memory/program-ledger.json")["program_state"]
-        == IMPLEMENTED_PENDING_CLOSEOUT_STATE
+        in {IMPLEMENTED_PENDING_CLOSEOUT_STATE, ENGAGEMENT_APPLICATION_AUTHORIZED_STATE}
     )
 
 

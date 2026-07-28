@@ -21,6 +21,9 @@ AUTHORIZED_NOT_IMPLEMENTED_STATE = (
 IMPLEMENTED_PENDING_CLOSEOUT_STATE = (
     "governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout"
 )
+ENGAGEMENT_APPLICATION_AUTHORIZED_STATE = (
+    "governed_learning_memory_engagement_application_authorized_not_implemented"
+)
 AION222_FEATURE_COMMIT = "e415cc397b9aec70f8b3d19285f5fdd315048731"
 AION222_MERGE_COMMIT = "b89c896b8e75955d28fd06d52b5fb66fb8ed5ac0"
 AION222_MERGED_AT = "2026-07-28T09:00:39Z"
@@ -434,19 +437,30 @@ def validate_authorization_ledgers(
         if program_state not in {
             AUTHORIZED_NOT_IMPLEMENTED_STATE,
             IMPLEMENTED_PENDING_CLOSEOUT_STATE,
+            ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
         }:
             _fail(f"{label} state mismatch")
-        if (
-            payload.get("active_glm_implementation_authorization_count") != 1
-            or payload.get("active_glm_implementation_authorization")
-            != AION223_AUTHORIZATION_ID
-        ):
-            _fail(f"{label} active authorization mismatch")
-        if (
-            payload.get("active_glm_implementation_task") != AION224_TASK
-            or payload.get("formal_closeout_task") != AION225_TASK
-        ):
-            _fail(f"{label} task mismatch")
+        if program_state == ENGAGEMENT_APPLICATION_AUTHORIZED_STATE:
+            if (
+                payload.get("active_glm_implementation_authorization_count") != 1
+                or payload.get("active_glm_implementation_authorization")
+                != "AION-225-GLM-0003"
+                or payload.get("active_glm_implementation_task") != "AION-226"
+                or payload.get("formal_closeout_task") != "AION-227"
+            ):
+                _fail(f"{label} post-closeout active authorization mismatch")
+        else:
+            if (
+                payload.get("active_glm_implementation_authorization_count") != 1
+                or payload.get("active_glm_implementation_authorization")
+                != AION223_AUTHORIZATION_ID
+            ):
+                _fail(f"{label} active authorization mismatch")
+            if (
+                payload.get("active_glm_implementation_task") != AION224_TASK
+                or payload.get("formal_closeout_task") != AION225_TASK
+            ):
+                _fail(f"{label} task mismatch")
         _require_true(
             payload,
             [
@@ -497,7 +511,11 @@ def validate_authorization_ledgers(
             != PASS_DECISION
         ):
             _fail(f"{label} decision mismatch")
-    if auth.get("active_authorizations") != [AION223_AUTHORIZATION_ID]:
+    if auth.get("program_state") == ENGAGEMENT_APPLICATION_AUTHORIZED_STATE:
+        expected_active_authorizations = ["AION-225-GLM-0003"]
+    else:
+        expected_active_authorizations = [AION223_AUTHORIZATION_ID]
+    if auth.get("active_authorizations") != expected_active_authorizations:
         _fail("active_authorizations mismatch")
     records = auth.get("records")
     if not isinstance(records, list):
@@ -546,7 +564,6 @@ def validate_authorization_ledgers(
             "explicit_approval_record_approval",
             "implementation_authorization_approved",
             "implementation_go_status",
-            "authorization_active",
         ],
         "new authorization",
     )
@@ -554,14 +571,28 @@ def validate_authorization_ledgers(
         new,
         [
             "implementation_no_go_status",
-            "authorization_consumed",
-            "authorization_expired",
             "authorization_reusable",
             "evaluation_used_as_persistence_approval",
             "individual_transaction_persistence_approved",
         ],
         "new authorization",
     )
+    if auth.get("program_state") == ENGAGEMENT_APPLICATION_AUTHORIZED_STATE:
+        if (
+            new.get("authorization_active") is not False
+            or new.get("authorization_consumed") is not True
+            or new.get("authorization_expired") is not True
+            or new.get("authorization_consumed_by_task") != AION224_TASK
+            or new.get("authorization_closed_by_task") != AION225_TASK
+        ):
+            _fail("AION-223 post-closeout state mismatch")
+    else:
+        if (
+            new.get("authorization_active") is not True
+            or new.get("authorization_consumed") is not False
+            or new.get("authorization_expired") is not False
+        ):
+            _fail("AION-223 active state mismatch")
     if set(new.get("authorized_capabilities", {})) != set(
         AION224_APPROVED_CAPABILITIES
     ):
@@ -637,7 +668,10 @@ def validate_no_aion224_source(root: Path = REPO_ROOT) -> None:
         "docs/governed-learning-memory/program-ledger.json",
         root,
     ).get("program_state")
-    if program_state == IMPLEMENTED_PENDING_CLOSEOUT_STATE:
+    if program_state in {
+        IMPLEMENTED_PENDING_CLOSEOUT_STATE,
+        ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+    }:
         missing = [rel for rel in AION224_SOURCE_SCOPE if not (root / rel).exists()]
         if missing:
             _fail(f"AION-224 source scope incomplete: {missing[0]}")

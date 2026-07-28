@@ -286,8 +286,16 @@ allowed_authorization_demo_names = {
     "governed-learning-memory-projection-plan.json",
     "governed-learning-memory-transaction-result.json",
     "governed-learning-memory-integrity.json",
+    "governed-learning-memory-engagement-application-authorization.json",
+    "governed-learning-memory-engagement-candidate-binding.json",
+    "governed-learning-memory-engagement-counterfactual.json",
+    "governed-learning-memory-engagement-integrity.json",
+    "governed-learning-memory-engagement-overlay.json",
+    "governed-learning-memory-engagement-risk-policy.json",
+    "governed-learning-memory-engagement-runtime-hold.json",
     "governed-learning-memory-local-persistence-approval.json",
     "governed-learning-memory-local-persistence-authorization.json",
+    "governed-learning-memory-local-persistence-evaluation.json",
     "governed-learning-memory-local-persistence-integrity.json",
     "governed-learning-memory-local-persistence-projection.json",
     "governed-learning-memory-local-persistence-runtime-hold.json",
@@ -325,6 +333,8 @@ def walk(value: object, path: Path) -> None:
             ):
                 continue
             if marker == "authorization" and path.name in allowed_authorization_demo_names:
+                continue
+            if marker == "sk-" and not re.search(r"\bsk-[a-z0-9_-]{12,}", lowered):
                 continue
             if (
                 marker == "private_key"

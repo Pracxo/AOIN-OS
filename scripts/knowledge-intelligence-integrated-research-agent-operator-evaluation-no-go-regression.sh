@@ -137,6 +137,9 @@ AION224_SOURCE = {
     "services/brain-api/src/aion_brain/governed_learning_memory/persistence_transactions.py",
 }
 AION224_RUNTIME_PATHS = {*AION224_SOURCE, "scripts/governed-learning-memory-local-persistence-run.py"}
+AION225_LOCAL_PERSISTENCE_EVALUATION_PATHS = {
+    "scripts/lib/governed_learning_memory_local_persistence_operator_evaluation.py",
+}
 GLM_PROGRAM_PATH = ROOT / "docs/governed-learning-memory/program-ledger.json"
 GLM_PROGRAM_STATE = (
     json.loads(GLM_PROGRAM_PATH.read_text()).get("program_state", "")
@@ -242,6 +245,8 @@ for relative in sorted(changed_paths):
     if relative in AION219_SOURCE_PATHS:
         continue
     if aion224_implemented and relative in AION224_RUNTIME_PATHS:
+        continue
+    if relative in AION225_LOCAL_PERSISTENCE_EVALUATION_PATHS:
         continue
     if relative.startswith("services/brain-api/tests/") or not relative.endswith(".py"):
         continue

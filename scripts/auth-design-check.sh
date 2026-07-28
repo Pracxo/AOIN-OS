@@ -1489,6 +1489,20 @@ blocked_build_prefixes = (
     "webpack.config.",
 )
 
+
+def is_governed_learning_memory_artifact(name: str) -> bool:
+    return (
+        name == "docs/adr/0189-local-persistence-evaluation-and-engagement-learning-application-authorization.md"
+        or name.startswith("docs/governed-learning-memory/")
+        or name.startswith("docs/release/governed-learning-memory-")
+        or name.startswith("examples/governed-learning-memory/")
+        or name.startswith("operator-console-static/demo-data/governed-learning-memory-")
+        or name.startswith("scripts/governed-learning-memory-")
+        or name.startswith("scripts/lib/governed_learning_memory_")
+        or name.startswith("services/brain-api/tests/test_governed_learning_memory_")
+    )
+
+
 for name in [*changed, *untracked]:
     path = Path(name)
     basename = path.name
@@ -1528,6 +1542,7 @@ for name in [*changed, *untracked]:
         and name not in aion220_auth_paths
         and name not in aion221_auth_paths
         and name not in aion223_auth_paths
+        and not is_governed_learning_memory_artifact(name)
     ):
         raise SystemExit(f"unexpected auth runtime or artifact path: {name}")
 

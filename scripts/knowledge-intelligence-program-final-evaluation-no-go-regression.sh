@@ -45,15 +45,24 @@ is_allowed_path() {
     scripts/governed-learning-memory-local-persistence-authorization-check.sh|\
     scripts/governed-learning-memory-local-persistence-authorization-no-go-regression.sh|\
     scripts/governed-learning-memory-local-persistence-runtime-hold.sh|\
+    scripts/governed-learning-memory-local-persistence-operator-evaluation-check.sh|\
+    scripts/governed-learning-memory-local-persistence-operator-evaluation-no-go-regression.sh|\
+    scripts/governed-learning-memory-engagement-application-authorization-check.sh|\
+    scripts/governed-learning-memory-engagement-application-authorization-no-go-regression.sh|\
+    scripts/governed-learning-memory-engagement-application-runtime-hold.sh|\
     scripts/governed-learning-memory-program-authorization-check.sh|\
     scripts/governed-learning-memory-program-no-go-regression.sh|\
     scripts/governed-learning-memory-runtime-hold.sh|\
     scripts/production-auth-core-no-go-regression.sh|\
     scripts/static-console-safety-check.sh|\
+    scripts/knowledge-intelligence-integrated-research-agent-operator-evaluation-no-go-regression.sh|\
+    scripts/operator-runbook-check.sh|\
     scripts/lib/v02_production_auth_authorization.py|\
     scripts/lib/v02-production-auth-scan-exclusions.sh|\
     scripts/lib/governed_learning_memory_promotion_operator_evaluation.py|\
     scripts/lib/governed_learning_memory_local_persistence_authorization.py|\
+    scripts/lib/governed_learning_memory_local_persistence_operator_evaluation.py|\
+    scripts/lib/governed_learning_memory_engagement_application_authorization.py|\
     services/brain-api/tests/test_governed_learning_memory_*.py)
       return 0
       ;;
@@ -127,7 +136,9 @@ aion224_is_scoped_local_persistence_compatibility_path() {
     scripts/governed-learning-memory-local-persistence-check.sh|\
     scripts/governed-learning-memory-local-persistence-no-go-regression.sh|\
     scripts/governed-learning-memory-local-persistence-pilot-evidence-check.sh|\
-    scripts/governed-learning-memory-local-persistence-run.py)
+    scripts/governed-learning-memory-local-persistence-run.py|\
+    scripts/governed-learning-memory-local-persistence-operator-evaluation-check.sh|\
+    scripts/governed-learning-memory-local-persistence-operator-evaluation-no-go-regression.sh)
       return 0
       ;;
   esac
