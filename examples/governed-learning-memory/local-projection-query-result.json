@@ -1,0 +1,10 @@
+{
+  "example_fingerprint": "e9d0c9cc4ba3b8aae6855aa877ab49f902097eb5c653f7afef9e1ad9e5fb2884",
+  "implies_actual_belief": false,
+  "implies_production_memory_write": false,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-local-projection-query-result/v1",
+  "task_id": "AION-224"
+}

@@ -1049,6 +1049,7 @@ AION222_ALLOWED_EXACT_PATHS = {
     "AGENTS.md",
     "README.md",
     "docs/adr/0186-approval-bound-knowledge-promotion-transaction-core.md",
+    "docs/adr/0188-operator-approved-local-append-only-knowledge-and-memory-projection-persistence.md",
     "docs/adr/README.md",
     "docs/architecture.md",
     "docs/brain-contract.md",
@@ -1061,6 +1062,14 @@ AION222_ALLOWED_EXACT_PATHS = {
     "scripts/connector-runtime-no-external-call-regression.sh",
     "scripts/governed-learning-memory-program-authorization-check.sh",
     "scripts/governed-learning-memory-program-no-go-regression.sh",
+    "scripts/governed-learning-memory-local-persistence-check.sh",
+    "scripts/governed-learning-memory-local-persistence-no-go-regression.sh",
+    "scripts/governed-learning-memory-local-persistence-pilot-evidence-check.sh",
+    "scripts/governed-learning-memory-local-persistence-run.py",
+    "scripts/governed-learning-memory-local-persistence-authorization-check.sh",
+    "scripts/governed-learning-memory-local-persistence-authorization-no-go-regression.sh",
+    "scripts/governed-learning-memory-local-persistence-runtime-hold.sh",
+    "scripts/governed-learning-memory-promotion-operator-evaluation-no-go-regression.sh",
     "scripts/governed-learning-memory-promotion-transaction-check.sh",
     "scripts/governed-learning-memory-promotion-transaction-no-go-regression.sh",
     "scripts/governed-learning-memory-runtime-hold.sh",
@@ -1078,7 +1087,9 @@ AION222_ALLOWED_EXACT_PATHS = {
     "scripts/operator-console-static-check.sh",
     "scripts/production-auth-architecture-check.sh",
     "scripts/static-console-safety-check.sh",
+    "scripts/lib/governed_learning_memory_local_persistence_authorization.py",
     "services/brain-api/src/aion_brain/contracts/governed_learning_memory.py",
+    "services/brain-api/src/aion_brain/contracts/governed_learning_memory_persistence.py",
 }
 
 AION222_ALLOWED_PREFIXES = (

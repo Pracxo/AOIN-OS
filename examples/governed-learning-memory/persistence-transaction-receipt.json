@@ -1,16 +1,14 @@
 {
-  "authorization_transaction_id": "AION-223-GLM-0002",
-  "begin_immediate_required": true,
-  "content_fingerprints": [
-    "fp-content-redacted-sample"
-  ],
-  "model": "PersistenceTransactionReceipt",
-  "persistent_transaction_executed_by_aion_223": false,
-  "projection_fingerprints": [
-    "fp-projection-redacted-sample"
-  ],
-  "promotion_result_fingerprint": "fp-result-redacted-sample",
-  "read_after_write_verification_required": true,
-  "rollback_on_exception_required": true,
-  "transaction_id": "persistence-transaction-aion-224-sample-001"
+  "actual_belief_created": false,
+  "actual_belief_mutated": false,
+  "automatic_promotion_applied": false,
+  "example_fingerprint": "43c635c5fb87951d80df55622437ef0254dfafeb407a78d36e2a04e5961baf00",
+  "isolated_local_persistence_applied": true,
+  "production_memory_written": false,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_after_write_verified": true,
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-persistence-transaction-receipt/v1",
+  "task_id": "AION-224"
 }

@@ -6,8 +6,9 @@ import subprocess
 from scripts.lib.governed_learning_memory_local_persistence_authorization import (
     AION222_SOURCE_SCOPE,
     AION224_SOURCE_SCOPE,
+    IMPLEMENTED_PENDING_CLOSEOUT_STATE,
 )
-from test_governed_learning_memory_program_authorization import REPO_ROOT
+from test_governed_learning_memory_program_authorization import REPO_ROOT, load_json
 
 
 def _git_ref_exists(ref: str) -> bool:
@@ -43,13 +44,20 @@ def _comparison_base() -> str | None:
     return "HEAD~1" if _git_ref_exists("HEAD~1") else None
 
 
-def test_aion_222_runtime_source_exists_and_aion_224_source_is_absent() -> None:
+def _aion224_implemented() -> bool:
+    return (
+        load_json("docs/governed-learning-memory/program-ledger.json")["program_state"]
+        == IMPLEMENTED_PENDING_CLOSEOUT_STATE
+    )
+
+
+def test_aion_222_runtime_source_exists_and_aion_224_source_matches_state() -> None:
     for relative in AION222_SOURCE_SCOPE:
         assert (REPO_ROOT / relative).exists(), relative
     for relative in AION224_SOURCE_SCOPE:
         if relative.endswith("__init__.py"):
             continue
-        assert not (REPO_ROOT / relative).exists(), relative
+        assert (REPO_ROOT / relative).exists() is _aion224_implemented(), relative
 
 
 def test_aion_223_does_not_change_runtime_source_surface() -> None:
@@ -75,4 +83,8 @@ def test_aion_223_does_not_change_runtime_source_surface() -> None:
         text=True,
         check=True,
     )
-    assert {line for line in diff.stdout.splitlines() if line} == set()
+    changed = {line for line in diff.stdout.splitlines() if line}
+    if _aion224_implemented():
+        assert changed <= set(AION224_SOURCE_SCOPE)
+    else:
+        assert changed == set()

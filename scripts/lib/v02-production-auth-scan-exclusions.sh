@@ -33,6 +33,36 @@ aion221_is_scoped_governed_learning_memory_path() {
   return 1
 }
 
+aion224_is_scoped_governed_learning_memory_local_persistence_path() {
+  # Exact AION-224 GLM local persistence implementation and validation paths.
+  # This keeps production-auth no-go scans focused on auth runtime surfaces
+  # while the AION-224 gates enforce local persistence no-go rules.
+  case "$1" in
+    docs/adr/0188-operator-approved-local-append-only-knowledge-and-memory-projection-persistence.md|\
+    scripts/governed-learning-memory-local-persistence-check.sh|\
+    scripts/governed-learning-memory-local-persistence-no-go-regression.sh|\
+    scripts/governed-learning-memory-local-persistence-pilot-evidence-check.sh|\
+    scripts/governed-learning-memory-local-persistence-run.py|\
+    scripts/governed-learning-memory-promotion-operator-evaluation-no-go-regression.sh|\
+    scripts/lib/governed_learning_memory_local_persistence_authorization.py|\
+    services/brain-api/src/aion_brain/contracts/governed_learning_memory_persistence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/backup_restore.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/knowledge_content.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/knowledge_persistence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/local_persistence_policy.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/local_sqlite_schema.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/local_sqlite_store.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/memory_projection_persistence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/persistence_approval.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/persistence_evidence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/persistence_integrity.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/persistence_transactions.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 aion151_is_scoped_authorization_path() {
   # Keep these as exact artifact paths. The no-go scanners must never exempt
   # broad directories such as scripts/ or services/brain-api/src/.

@@ -1,0 +1,10 @@
+{
+  "active_store_switched": false,
+  "example_fingerprint": "15f79d9f4e1eb794c0214e1331c3d448b73094a9255de7e3edf5564b9792a7ec",
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-local-store-restore-result/v1",
+  "status": "restored_to_new_store",
+  "task_id": "AION-224"
+}

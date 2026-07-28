@@ -54,7 +54,36 @@ comparison_base() {
   return 1
 }
 
+aion224_implemented_state() {
+  rg -q '"program_state"[[:space:]]*:[[:space:]]*"governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout"' \
+    docs/governed-learning-memory/program-ledger.json
+}
+
+is_aion224_source_path() {
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/governed_learning_memory_persistence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/local_persistence_policy.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/local_sqlite_schema.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/local_sqlite_store.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/persistence_approval.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/knowledge_content.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/knowledge_persistence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/memory_projection_persistence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/persistence_transactions.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/persistence_integrity.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/backup_restore.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/persistence_evidence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/__init__.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 is_allowed_path() {
+  if aion224_implemented_state && is_aion224_source_path "$1"; then
+    return 0
+  fi
   case "$1" in
     README.md|AGENTS.md|\
     docs/governed-learning-memory/*|\
@@ -62,6 +91,7 @@ is_allowed_path() {
     docs/adr/0185-governed-learning-and-memory-integration-program-charter.md|\
     docs/adr/0186-approval-bound-knowledge-promotion-transaction-core.md|\
     docs/adr/0187-promotion-transaction-evaluation-and-local-append-only-knowledge-persistence-authorization.md|\
+    docs/adr/0188-operator-approved-local-append-only-knowledge-and-memory-projection-persistence.md|\
     docs/adr/README.md|\
     docs/release/v02-release-readiness-delta.md|\
     docs/project-status.md|docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/visual-brain.md|\
@@ -85,6 +115,10 @@ is_allowed_path() {
     scripts/governed-learning-memory-local-persistence-authorization-check.sh|\
     scripts/governed-learning-memory-local-persistence-authorization-no-go-regression.sh|\
     scripts/governed-learning-memory-local-persistence-runtime-hold.sh|\
+    scripts/governed-learning-memory-local-persistence-check.sh|\
+    scripts/governed-learning-memory-local-persistence-no-go-regression.sh|\
+    scripts/governed-learning-memory-local-persistence-pilot-evidence-check.sh|\
+    scripts/governed-learning-memory-local-persistence-run.py|\
     scripts/lib/governed_learning_memory_promotion_operator_evaluation.py|\
     scripts/lib/governed_learning_memory_local_persistence_authorization.py|\
     scripts/connector-runtime-no-external-call-regression.sh|\
@@ -97,6 +131,7 @@ is_allowed_path() {
     scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh|\
     scripts/knowledge-intelligence-tool-verification-authorization-no-go-regression.sh|\
     scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-verified-memory-operator-evaluation-no-go-regression.sh|\
     scripts/lib/cognitive_architecture_governance.py|\
     scripts/lib/self_improvement_governance.py|\
     scripts/auth-design-check.sh|\
@@ -104,6 +139,7 @@ is_allowed_path() {
     scripts/static-console-safety-check.sh|\
     scripts/operator-action-write-path-no-go-regression.sh|\
     scripts/production-auth-architecture-check.sh|\
+    scripts/production-auth-core-no-go-regression.sh|\
     services/brain-api/tests/conftest.py|\
     services/brain-api/tests/test_governed_learning_memory_*.py)
       return 0
@@ -127,6 +163,9 @@ is_allowed_path() {
 }
 
 is_prohibited_path() {
+  if aion224_implemented_state && is_aion224_source_path "$1"; then
+    return 1
+  fi
   case "$1" in
     services/brain-api/src/aion_brain/contracts/governed_learning_memory.py|\
     services/brain-api/src/aion_brain/governed_learning_memory/__init__.py|\

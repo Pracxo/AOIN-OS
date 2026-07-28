@@ -55,6 +55,27 @@ is_aion219_forward_compatible_path() {
   return 1
 }
 
+is_aion224_local_persistence_path() {
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/governed_learning_memory_persistence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/__init__.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/backup_restore.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/knowledge_content.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/knowledge_persistence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/local_persistence_policy.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/local_sqlite_schema.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/local_sqlite_store.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/memory_projection_persistence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/persistence_approval.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/persistence_evidence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/persistence_integrity.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/persistence_transactions.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
 }
@@ -79,6 +100,9 @@ is_allowed_path() {
   if is_aion219_forward_compatible_path "$path"; then
     return 0
   fi
+  if is_aion224_local_persistence_path "$path"; then
+    return 0
+  fi
   for item in "${ALLOWED_EXACT[@]}"; do
     [[ "$path" == "$item" ]] && return 0
   done
@@ -92,6 +116,9 @@ is_prohibited_path() {
   local path="$1"
   local item
   if is_aion219_forward_compatible_path "$path"; then
+    return 1
+  fi
+  if is_aion224_local_persistence_path "$path"; then
     return 1
   fi
   for item in "${PROHIBITED_PREFIXES[@]}"; do

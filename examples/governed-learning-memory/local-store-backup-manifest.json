@@ -1,13 +1,10 @@
 {
-  "automatic_schedule_created": false,
-  "backup_file_fingerprint": "fp-backup-redacted-sample",
-  "file_mode": "0600",
-  "last_ledger_sequence": 0,
-  "ledger_head_hash": null,
-  "model": "LocalStoreBackupManifest",
-  "operator_invoked": true,
-  "schema_version": 1,
-  "source_database_fingerprint": "fp-source-db-redacted-sample",
-  "store_id": "store-redacted-sample",
-  "target_requires_new_absolute_path": true
+  "application_id": 223224,
+  "example_fingerprint": "8cb88dfbeaa6997ed9966fda980bca02ca214a0f53fa8330dc353118b5245fe2",
+  "integrity_status": "created",
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-local-store-backup-manifest/v1",
+  "task_id": "AION-224"
 }

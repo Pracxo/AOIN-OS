@@ -1,0 +1,10 @@
+{
+  "checkpoint_mode": "FULL",
+  "example_fingerprint": "9049c4a9ad4be56603752d9993f82a6b54eea6db82a54c533aa0a9ae9f46c8b0",
+  "operator_invoked": true,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-local-store-checkpoint/v1",
+  "task_id": "AION-224"
+}

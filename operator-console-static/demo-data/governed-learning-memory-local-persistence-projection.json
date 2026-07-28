@@ -1,27 +1,58 @@
 {
+  "actual_belief_created": false,
   "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "belief_candidate_records_written": 1,
+  "blockers": [],
+  "episodic_projection_records_written": 1,
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
+  ],
+  "procedural_projection_records_written": 1,
+  "production_memory_written": false,
+  "program_state": "governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout",
   "read_only": true,
   "redacted": true,
   "redaction_applied": true,
+  "refs": [
+    "AION-223-GLM-0002",
+    "AION-224",
+    "AION-225"
+  ],
+  "sections": [
+    "semantic",
+    "episodic",
+    "procedural",
+    "belief candidate"
+  ],
+  "semantic_projection_records_written": 1,
+  "status": "isolated_projection_persistence_available",
   "synthetic": true,
-  "append_only_sequence": 2,
-  "belief_written": false,
-  "confidence_cap": "0.890000",
-  "content_reference": "content-env-aion-223-sample-001",
-  "entry_hash": "fp-projection-redacted-sample",
-  "memory_record_created_in_isolated_store": true,
-  "model": "PersistentMemoryProjectionRecord",
-  "owner_scope_fingerprints": [
-    "fp-owner-scope-redacted"
-  ],
-  "persistent_record_created_by_aion_223": false,
-  "previous_ledger_hash": "fp-entry-redacted-sample",
-  "production_memory_written": false,
-  "projection_target": "semantic",
-  "provenance_fingerprints": [
-    "fp-lineage-redacted-sample"
-  ],
-  "sensitivity": "internal",
-  "source_knowledge_version": "knowledge-id-aion-223-sample-001:v1",
-  "summary": "Redacted future local projection summary."
+  "task_id": "AION-224",
+  "view_fingerprint": "9e33208ca44685c943c4e484964bf56525273dfc3bcf1b55325d0d88cca70ff0",
+  "warnings": [
+    "local SQLite store has no application-level encryption; rely on bounded content and OS controls"
+  ]
 }

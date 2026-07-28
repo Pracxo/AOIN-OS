@@ -125,6 +125,31 @@ AION222_SOURCE = {
     "services/brain-api/src/aion_brain/governed_learning_memory/rollback.py",
     "services/brain-api/src/aion_brain/governed_learning_memory/version_planning.py",
 }
+AION224_GLM_STATE = (
+    "governed_learning_memory_local_append_only_persistence_implemented_"
+    "operator_invoked_isolated_pending_closeout"
+)
+AION224_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/governed_learning_memory_persistence.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/__init__.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/backup_restore.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/knowledge_content.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/knowledge_persistence.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/local_persistence_policy.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/local_sqlite_schema.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/local_sqlite_store.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/memory_projection_persistence.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/persistence_approval.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/persistence_evidence.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/persistence_integrity.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/persistence_transactions.py",
+}
+GLM_PROGRAM_PATH = ROOT / "docs/governed-learning-memory/program-ledger.json"
+GLM_PROGRAM_STATE = (
+    json.loads(GLM_PROGRAM_PATH.read_text()).get("program_state", "")
+    if GLM_PROGRAM_PATH.exists()
+    else ""
+)
 
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
     return subprocess.run(args, cwd=ROOT, text=True, capture_output=True, check=check)
@@ -198,6 +223,8 @@ for parts in changed_entries():
         ):
             raise SystemExit(f"AION-215 source is not authorized on AION-214: {normalized}")
         if normalized in AION222_SOURCE:
+            continue
+        if GLM_PROGRAM_STATE == AION224_GLM_STATE and normalized in AION224_SOURCE:
             continue
         if any(normalized.startswith(prefix) for prefix in PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")

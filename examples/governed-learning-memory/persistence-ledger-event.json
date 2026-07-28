@@ -1,0 +1,12 @@
+{
+  "example_fingerprint": "da9873dd31fc8b800b8a6150f19d42caf101f767014d139df92d53db374c1ce6",
+  "global_event_hash": "09ec5cdbecec190aa3db70c2abc51f11ba25358a811b06511b77868248866e2f",
+  "previous_global_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "previous_transaction_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-persistence-ledger-event/v1",
+  "task_id": "AION-224",
+  "transaction_event_hash": "0783164be9f90f0642a675ba23954ea4fdfc313978eac6ca998a7876ac863313"
+}

@@ -3,11 +3,13 @@ from __future__ import annotations
 from scripts.lib.governed_learning_memory_local_persistence_authorization import (
     AION224_AUTHORIZATION_SCOPE,
     AION224_SOURCE_SCOPE,
+    IMPLEMENTED_PENDING_CLOSEOUT_STATE,
 )
 from test_governed_learning_memory_program_authorization import REPO_ROOT, load_json
 
 
-def test_aion224_scope_is_exact_and_source_is_not_created() -> None:
+def test_aion224_scope_is_exact_and_source_state_matches_program_state() -> None:
+    program = load_json("docs/governed-learning-memory/program-ledger.json")
     record = next(
         x
         for x in load_json("docs/governed-learning-memory/authorization-ledger.json")["records"]
@@ -20,4 +22,8 @@ def test_aion224_scope_is_exact_and_source_is_not_created() -> None:
     for relative in AION224_SOURCE_SCOPE:
         if relative.endswith("__init__.py"):
             continue
-        assert not (REPO_ROOT / relative).exists(), relative
+        exists = (REPO_ROOT / relative).exists()
+        if program["program_state"] == IMPLEMENTED_PENDING_CLOSEOUT_STATE:
+            assert exists, relative
+        else:
+            assert not exists, relative

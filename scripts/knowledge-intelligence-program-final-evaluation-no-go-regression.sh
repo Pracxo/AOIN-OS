@@ -98,10 +98,36 @@ aion222_is_scoped_promotion_transaction_compatibility_path() {
     scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh|\
     scripts/knowledge-intelligence-tool-verification-authorization-no-go-regression.sh|\
     scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-verified-memory-operator-evaluation-no-go-regression.sh|\
     scripts/lib/cognitive_architecture_governance.py|\
     scripts/lib/self_improvement_governance.py|\
     scripts/operator-action-write-path-no-go-regression.sh|\
     scripts/production-auth-architecture-check.sh)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
+aion224_is_scoped_local_persistence_compatibility_path() {
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/governed_learning_memory_persistence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/__init__.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/backup_restore.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/knowledge_content.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/knowledge_persistence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/local_persistence_policy.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/local_sqlite_schema.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/local_sqlite_store.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/memory_projection_persistence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/persistence_approval.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/persistence_evidence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/persistence_integrity.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/persistence_transactions.py|\
+    scripts/governed-learning-memory-local-persistence-check.sh|\
+    scripts/governed-learning-memory-local-persistence-no-go-regression.sh|\
+    scripts/governed-learning-memory-local-persistence-pilot-evidence-check.sh|\
+    scripts/governed-learning-memory-local-persistence-run.py)
       return 0
       ;;
   esac
@@ -129,6 +155,9 @@ while IFS=$'\t' read -r status path extra; do
   for changed in "$path" "${extra:-}"; do
     [[ -n "$changed" ]] || continue
     if aion222_is_scoped_promotion_transaction_compatibility_path "$changed"; then
+      continue
+    fi
+    if aion224_is_scoped_local_persistence_compatibility_path "$changed"; then
       continue
     fi
     if is_prohibited_path "$changed"; then

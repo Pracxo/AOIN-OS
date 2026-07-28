@@ -117,8 +117,6 @@ required_false = [
     "runtime_enabled",
     "production_exposure",
     "runtime_effect",
-    "local_append_only_knowledge_store_implemented",
-    "operator_invoked_local_persistence_available",
     "background_persistent_knowledge_write_enabled",
     "production_persistent_knowledge_write_enabled",
     "approval_creation_by_runtime_enabled",
@@ -129,6 +127,7 @@ required_false = [
     "source_mutation_enabled",
     "git_mutation_enabled",
 ]
+implemented_state = "governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout"
 for label, payload in (("program", program), ("authorization", auth)):
     if payload["authorization_transaction_id"] != AION223_AUTHORIZATION_ID:
         raise SystemExit(f"{label} current authorization mismatch")
@@ -144,6 +143,21 @@ for label, payload in (("program", program), ("authorization", auth)):
     for key in required_false:
         if payload.get(key) is not False:
             raise SystemExit(f"{label} expected false: {key}")
+    if payload.get("program_state") == implemented_state:
+        for key in [
+            "local_append_only_knowledge_store_implemented",
+            "operator_invoked_local_persistence_available",
+            "synthetic_local_persistence_pilot_completed",
+        ]:
+            if payload.get(key) is not True:
+                raise SystemExit(f"{label} expected true: {key}")
+    else:
+        for key in [
+            "local_append_only_knowledge_store_implemented",
+            "operator_invoked_local_persistence_available",
+        ]:
+            if payload.get(key) is not False:
+                raise SystemExit(f"{label} expected false: {key}")
     if payload["aion_221_delivery"]["pull_requests"] != [137]:
         raise SystemExit(f"{label} AION-221 PR reconciliation mismatch")
     if payload["aion_221_delivery"]["merge_commits"] != ["ecb1e8ce8560ac06040cd297bfc26ff2ad020273"]:

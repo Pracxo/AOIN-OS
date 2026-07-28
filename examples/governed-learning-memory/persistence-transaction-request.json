@@ -1,0 +1,14 @@
+{
+  "actual_belief_write_requested": false,
+  "authorization_transaction_id": "AION-223-GLM-0002",
+  "automatic_promotion": false,
+  "background_execution": false,
+  "example_fingerprint": "986d29508723b3c142462ae23073eb8e6c52263610a51f3a966bcbd4f6193173",
+  "operator_invoked": true,
+  "production_memory_write_requested": false,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-persistence-transaction-request/v1",
+  "task_id": "AION-224"
+}

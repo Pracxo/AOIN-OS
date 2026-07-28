@@ -14,8 +14,9 @@ def test_program_ledger_records_aion223_authorization_without_runtime_effects() 
     assert program["active_glm_implementation_authorization"] == AUTH_ID
     assert program["active_glm_implementation_task"] == IMPLEMENTATION_TASK
     assert program["local_append_only_knowledge_store_authorized"] is True
-    assert program["local_append_only_knowledge_store_implemented"] is False
-    assert program["operator_invoked_local_persistence_available"] is False
+    assert program["local_append_only_knowledge_store_implemented"] is True
+    assert program["operator_invoked_local_persistence_available"] is True
+    assert program["synthetic_local_persistence_pilot_completed"] is True
     assert program["runtime_enabled"] is False
     assert program["general_persistent_knowledge_write_enabled"] is False
     assert program["background_persistent_knowledge_write_enabled"] is False

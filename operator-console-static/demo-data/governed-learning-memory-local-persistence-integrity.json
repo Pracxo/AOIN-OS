@@ -1,15 +1,57 @@
 {
+  "append_only_triggers_present": true,
   "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "backup_integrity_passed": true,
+  "blockers": [],
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
+  ],
+  "global_hash_chain_passed": true,
+  "program_state": "governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout",
   "read_only": true,
   "redacted": true,
   "redaction_applied": true,
+  "refs": [
+    "AION-223-GLM-0002",
+    "AION-224",
+    "AION-225"
+  ],
+  "restore_integrity_passed": true,
+  "sections": [
+    "ledger",
+    "audit",
+    "backup",
+    "restore"
+  ],
+  "status": "integrity_passed",
   "synthetic": true,
-  "authorization_transaction_id": "AION-223-GLM-0002",
-  "findings": [],
-  "foreign_key_check_required": true,
-  "ledger_hash_chain_audit_required": true,
-  "model": "LocalStoreIntegrityReport",
-  "production_memory_written": false,
-  "sqlite_integrity_check_required": true,
-  "tamper_evident_not_tamper_proof": true
+  "task_id": "AION-224",
+  "transaction_hash_chain_passed": true,
+  "view_fingerprint": "490961ae35eb4a97f7304760ab3199546736dc6195c67de3619675558473ef9c",
+  "warnings": [
+    "local SQLite store has no application-level encryption; rely on bounded content and OS controls"
+  ]
 }

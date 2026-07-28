@@ -54,6 +54,32 @@ comparison_base() {
   return 1
 }
 
+aion224_implemented_state() {
+  rg -q '"program_state"[[:space:]]*:[[:space:]]*"governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout"' \
+    docs/governed-learning-memory/program-ledger.json
+}
+
+is_aion224_source_path() {
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/governed_learning_memory_persistence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/local_persistence_policy.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/local_sqlite_schema.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/local_sqlite_store.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/persistence_approval.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/knowledge_content.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/knowledge_persistence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/memory_projection_persistence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/persistence_transactions.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/persistence_integrity.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/backup_restore.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/persistence_evidence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/__init__.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 is_allowed_path() {
   case "$1" in
     README.md|AGENTS.md|\
@@ -61,6 +87,7 @@ is_allowed_path() {
     docs/release/governed-learning-memory-*|\
     docs/release/v02-release-readiness-delta.md|\
     docs/adr/0187-promotion-transaction-evaluation-and-local-append-only-knowledge-persistence-authorization.md|\
+    docs/adr/0188-operator-approved-local-append-only-knowledge-and-memory-projection-persistence.md|\
     docs/adr/README.md|\
     docs/project-status.md|docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/visual-brain.md|\
     examples/governed-learning-memory/*|\
@@ -71,6 +98,10 @@ is_allowed_path() {
     scripts/governed-learning-memory-local-persistence-authorization-check.sh|\
     scripts/governed-learning-memory-local-persistence-authorization-no-go-regression.sh|\
     scripts/governed-learning-memory-local-persistence-runtime-hold.sh|\
+    scripts/governed-learning-memory-local-persistence-check.sh|\
+    scripts/governed-learning-memory-local-persistence-no-go-regression.sh|\
+    scripts/governed-learning-memory-local-persistence-pilot-evidence-check.sh|\
+    scripts/governed-learning-memory-local-persistence-run.py|\
     scripts/governed-learning-memory-program-authorization-check.sh|\
     scripts/governed-learning-memory-program-no-go-regression.sh|\
     scripts/governed-learning-memory-runtime-hold.sh|\
@@ -80,11 +111,13 @@ is_allowed_path() {
     scripts/lib/governed_learning_memory_local_persistence_authorization.py|\
     scripts/lib/cognitive_architecture_governance.py|\
     scripts/lib/self_improvement_governance.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
     scripts/auth-design-check.sh|\
     scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh|\
     scripts/connector-runtime-no-external-call-regression.sh|\
     scripts/operator-action-write-path-no-go-regression.sh|\
     scripts/production-auth-architecture-check.sh|\
+    scripts/production-auth-core-no-go-regression.sh|\
     scripts/operator-console-static-check.sh|\
     scripts/static-console-safety-check.sh|\
     scripts/knowledge-intelligence-*-no-go-regression.sh|\
@@ -93,6 +126,7 @@ is_allowed_path() {
       return 0
       ;;
   esac
+  is_aion224_source_path "$1" && return 0
   return 1
 }
 
@@ -105,6 +139,9 @@ is_prohibited_path() {
     migrations/*|services/brain-api/migrations/*|infra/postgres/migrations/*|\
     package.json|package-lock.json|pnpm-lock.yaml|yarn.lock|bun.lockb|poetry.lock|uv.lock|Pipfile|Pipfile.lock|\
     */package.json|*/package-lock.json|*/pnpm-lock.yaml|*/yarn.lock|*/bun.lockb)
+      if aion224_implemented_state && is_aion224_source_path "$1"; then
+        return 1
+      fi
       return 0
       ;;
   esac
@@ -149,7 +186,7 @@ if git ls-files '*.db' '*.sqlite' '*.sqlite3' '*.jsonl' '*.state' | rg -n '(^|/)
   exit 1
 fi
 
-if git ls-files | rg -n 'services/brain-api/src/aion_brain/(contracts/governed_learning_memory_persistence.py|governed_learning_memory/local_.*|governed_learning_memory/.*persistence.*[.]py|governed_learning_memory/backup_restore.py)'; then
+if ! aion224_implemented_state && git ls-files | rg -n 'services/brain-api/src/aion_brain/(contracts/governed_learning_memory_persistence.py|governed_learning_memory/local_.*|governed_learning_memory/.*persistence.*[.]py|governed_learning_memory/backup_restore.py)'; then
   echo "ERROR: AION-224 source exists on AION-223 branch" >&2
   exit 1
 fi
