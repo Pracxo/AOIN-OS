@@ -171,6 +171,21 @@ PROHIBITED_NAMES = {
 }
 
 
+AION222_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/governed_learning_memory.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/__init__.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/approval_evidence.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/eligibility_revalidation.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/evidence.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/integrity.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/knowledge_identity.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/memory_projection.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/promotion_requests.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/promotion_transactions.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/rollback.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/version_planning.py",
+}
+
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
     return subprocess.run(args, cwd=ROOT, text=True, capture_output=True, check=check)
 
@@ -201,7 +216,7 @@ else:
     print("WARN: comparison base unavailable; relying on current-tree checks")
 entries.extend(line.split("\t") for line in run(["git", "diff", "--name-status"]).stdout.splitlines() if line.strip())
 entries.extend(line.split("\t") for line in run(["git", "diff", "--cached", "--name-status"]).stdout.splitlines() if line.strip())
-for line in run(["git", "status", "--porcelain=v1"]).stdout.splitlines():
+for line in run(["git", "status", "--porcelain=v1", "--untracked-files=all"]).stdout.splitlines():
     if line.startswith("?? "):
         entries.append(["A", line[3:]])
 
@@ -225,6 +240,8 @@ for parts in entries:
         if program_state == VERIFIED_KNOWLEDGE_IMPLEMENTED_STATE and normalized in AION217_SOURCE:
             continue
         if program_state == PUBLIC_RESEARCH_PILOT_IMPLEMENTED_STATE and normalized in AION219_SOURCE:
+            continue
+        if normalized in AION222_SOURCE:
             continue
         if normalized.startswith(PROHIBITED_PREFIXES) and normalized not in ALLOWED_EXACT:
             raise SystemExit(f"runtime/source/workflow path changed on AION-206: {normalized}")

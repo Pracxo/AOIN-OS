@@ -51,6 +51,7 @@
       "title": "Final Governed Learning and Memory Integration Program evaluation and closeout"
     }
   ],
+  "runtime_effect": false,
   "schema_version": "governed-learning-memory-roadmap/v1",
   "synthetic": true
 }

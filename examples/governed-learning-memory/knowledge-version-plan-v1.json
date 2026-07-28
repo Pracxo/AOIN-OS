@@ -1,0 +1,30 @@
+{
+  "append_only": true,
+  "approval_bundle_fingerprint": "3876a77ded238a4a11c96589d4807e456a66e3713e24c1be46b7bd8d87e39842",
+  "candidate_confidence_cap": "0.870000",
+  "candidate_fingerprint": "29fb0577c27735d790f86b1f99541e329d575d10f9153334624a0c356d648017",
+  "candidate_id": "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+  "candidate_kind": "support_candidate",
+  "disposition": "initial_version_planned",
+  "effective_from": "2026-01-01T00:00:00Z",
+  "effective_to": null,
+  "expires_version_id": null,
+  "historical_versions_preserved": true,
+  "knowledge_identity_id": "knowledge-0c10d75f88e49fb09c01297b80a859cb",
+  "lineage_fingerprint": "7615a10c2039a5b6064b855af36a9ed466ff8313fca7a2c71e57cbf65d762a21",
+  "persistent_version_created": false,
+  "planned_version_number": 1,
+  "previous_version_fingerprint": null,
+  "previous_version_id": null,
+  "reason_codes": [
+    "knowledge_initial_version_planned",
+    "knowledge_history_preserved"
+  ],
+  "request_kind": "initial_version",
+  "retracts_version_id": null,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-knowledge-version-plan/v1",
+  "supersedes_version_id": null,
+  "version_plan_fingerprint": "179dbc85e3b669c832f811473f5e1d096c09af97dcffcddf2f865c96727578ac",
+  "version_plan_id": "version-plan-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001"
+}

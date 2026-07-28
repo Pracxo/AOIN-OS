@@ -1,0 +1,18 @@
+{
+  "conflict_count": 0,
+  "duplicate_count": 0,
+  "findings": [],
+  "material_hold": false,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "reason_codes": [
+    "knowledge_identity_derived"
+  ],
+  "redacted": true,
+  "redaction_applied": true,
+  "report_fingerprint": "07e026ac5fd987ad4a4aadf02bf28deae78cee45179d268d6a0a23f42cba0bd6",
+  "report_id": "knowledge-conflicts",
+  "runtime_effect": false,
+  "schema_version": "aion-glm-knowledge-conflict-report/v1",
+  "synthetic": true
+}

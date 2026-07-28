@@ -83,6 +83,15 @@
     governed_learning_memory_roadmap: "demo-data/governed-learning-memory-roadmap.json",
     governed_learning_memory_boundary: "demo-data/governed-learning-memory-boundary.json",
     governed_learning_memory_runtime_hold: "demo-data/governed-learning-memory-runtime-hold.json",
+    governed_learning_memory_promotion_request: "demo-data/governed-learning-memory-promotion-request.json",
+    governed_learning_memory_approval_evidence: "demo-data/governed-learning-memory-approval-evidence.json",
+    governed_learning_memory_eligibility: "demo-data/governed-learning-memory-eligibility.json",
+    governed_learning_memory_knowledge_identity: "demo-data/governed-learning-memory-knowledge-identity.json",
+    governed_learning_memory_conflicts: "demo-data/governed-learning-memory-conflicts.json",
+    governed_learning_memory_version_plan: "demo-data/governed-learning-memory-version-plan.json",
+    governed_learning_memory_projection_plan: "demo-data/governed-learning-memory-projection-plan.json",
+    governed_learning_memory_transaction_result: "demo-data/governed-learning-memory-transaction-result.json",
+    governed_learning_memory_integrity: "demo-data/governed-learning-memory-integrity.json",
     module_lifecycle: "demo-data/module-lifecycle-dashboard.json",
     model_provider_hardening: "demo-data/provider-hardening-view-model.json",
     operator_actions: "demo-data/operator-action-preview.json",
@@ -152,7 +161,16 @@
       "governed_learning_memory_authorization",
       "governed_learning_memory_roadmap",
       "governed_learning_memory_boundary",
-      "governed_learning_memory_runtime_hold"
+      "governed_learning_memory_runtime_hold",
+      "governed_learning_memory_promotion_request",
+      "governed_learning_memory_approval_evidence",
+      "governed_learning_memory_eligibility",
+      "governed_learning_memory_knowledge_identity",
+      "governed_learning_memory_conflicts",
+      "governed_learning_memory_version_plan",
+      "governed_learning_memory_projection_plan",
+      "governed_learning_memory_transaction_result",
+      "governed_learning_memory_integrity",
     ],
     providers: ["model_provider_hardening"],
     actions: ["operator_actions"],
@@ -215,7 +233,16 @@
       "governed_learning_memory_authorization",
       "governed_learning_memory_roadmap",
       "governed_learning_memory_boundary",
-      "governed_learning_memory_runtime_hold"
+      "governed_learning_memory_runtime_hold",
+      "governed_learning_memory_promotion_request",
+      "governed_learning_memory_approval_evidence",
+      "governed_learning_memory_eligibility",
+      "governed_learning_memory_knowledge_identity",
+      "governed_learning_memory_conflicts",
+      "governed_learning_memory_version_plan",
+      "governed_learning_memory_projection_plan",
+      "governed_learning_memory_transaction_result",
+      "governed_learning_memory_integrity",
     ],
     safety: ["settings_safety", "incidents"]
   };
@@ -408,7 +435,9 @@
     "./scripts/knowledge-intelligence-epistemic-truth-runtime-hold.sh",
     "./scripts/governed-learning-memory-program-authorization-check.sh",
     "./scripts/governed-learning-memory-program-no-go-regression.sh",
-    "./scripts/governed-learning-memory-runtime-hold.sh"
+    "./scripts/governed-learning-memory-runtime-hold.sh",
+    "./scripts/governed-learning-memory-promotion-transaction-check.sh",
+    "./scripts/governed-learning-memory-promotion-transaction-no-go-regression.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
     generic_knowledge_trail: "demo-data/generic-knowledge-trail.json",

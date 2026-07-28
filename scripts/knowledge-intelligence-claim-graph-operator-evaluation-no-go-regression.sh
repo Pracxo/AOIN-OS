@@ -133,6 +133,21 @@ PROGRAM_STATE = (
 )
 
 
+AION222_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/governed_learning_memory.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/__init__.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/approval_evidence.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/eligibility_revalidation.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/evidence.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/integrity.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/knowledge_identity.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/memory_projection.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/promotion_requests.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/promotion_transactions.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/rollback.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/version_planning.py",
+}
+
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
     return subprocess.run(args, cwd=ROOT, text=True, capture_output=True, check=check)
 
@@ -165,7 +180,7 @@ def changed_entries() -> list[list[str]]:
         print("WARN: comparison base unavailable; relying on current-tree checks")
     for args in (["git", "diff", "--name-status"], ["git", "diff", "--cached", "--name-status"]):
         entries.extend(line.split("\t") for line in run(args).stdout.splitlines() if line.strip())
-    for line in run(["git", "status", "--porcelain=v1"]).stdout.splitlines():
+    for line in run(["git", "status", "--porcelain=v1", "--untracked-files=all"]).stdout.splitlines():
         if line.startswith("?? "):
             entries.append(["A", line[3:]])
     return entries
@@ -197,6 +212,8 @@ for parts in changed_entries():
         } and normalized in AION217_SOURCE:
             continue
         if normalized in AION219_SOURCE:
+            continue
+        if normalized in AION222_SOURCE:
             continue
         if normalized.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")

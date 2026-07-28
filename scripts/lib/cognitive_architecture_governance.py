@@ -1045,6 +1045,51 @@ AION212_ALLOWED_PREFIXES = (
     "services/brain-api/tests/test_knowledge_epistemic_assessment_",
 )
 
+AION222_ALLOWED_EXACT_PATHS = {
+    "AGENTS.md",
+    "README.md",
+    "docs/adr/0186-approval-bound-knowledge-promotion-transaction-core.md",
+    "docs/adr/README.md",
+    "docs/architecture.md",
+    "docs/brain-contract.md",
+    "docs/policy-model.md",
+    "docs/project-status.md",
+    "docs/release/v02-release-readiness-delta.md",
+    "docs/visual-brain.md",
+    "operator-console-static/README.md",
+    "operator-console-static/app.js",
+    "scripts/connector-runtime-no-external-call-regression.sh",
+    "scripts/governed-learning-memory-program-authorization-check.sh",
+    "scripts/governed-learning-memory-program-no-go-regression.sh",
+    "scripts/governed-learning-memory-promotion-transaction-check.sh",
+    "scripts/governed-learning-memory-promotion-transaction-no-go-regression.sh",
+    "scripts/governed-learning-memory-runtime-hold.sh",
+    "scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-domain-expert-mesh-operator-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-epistemic-assessment-operator-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-integrated-research-agent-operator-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-tool-verification-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh",
+    "scripts/lib/self_improvement_governance.py",
+    "scripts/operator-action-write-path-no-go-regression.sh",
+    "scripts/operator-console-static-check.sh",
+    "scripts/production-auth-architecture-check.sh",
+    "scripts/static-console-safety-check.sh",
+    "services/brain-api/src/aion_brain/contracts/governed_learning_memory.py",
+}
+
+AION222_ALLOWED_PREFIXES = (
+    "docs/governed-learning-memory/",
+    "docs/release/governed-learning-memory-",
+    "examples/governed-learning-memory/",
+    "operator-console-static/demo-data/governed-learning-memory-",
+    "services/brain-api/src/aion_brain/governed_learning_memory/",
+    "services/brain-api/tests/test_governed_learning_memory_",
+)
+
 AION199_ALLOWED_EXACT_PATHS = set(AION199_REQUIRED_FILES) | {
     "scripts/connector-runtime-no-external-call-regression.sh",
     "scripts/cognitive-integrated-evaluation-check.sh",
@@ -11439,6 +11484,12 @@ def _aion211_path_allowed(relative: str) -> bool:
 def _aion212_path_allowed(relative: str) -> bool:
     return relative in AION212_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION212_ALLOWED_PREFIXES
+    ) or _aion222_path_allowed(relative)
+
+
+def _aion222_path_allowed(relative: str) -> bool:
+    return relative in AION222_ALLOWED_EXACT_PATHS or any(
+        relative.startswith(prefix) for prefix in AION222_ALLOWED_PREFIXES
     )
 
 

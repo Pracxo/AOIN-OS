@@ -22,4 +22,4 @@ def test_authorization_scope_and_future_source_scope_are_recorded_only() -> None
         "services/brain-api/src/aion_brain/governed_learning_memory/evidence.py",
     ]
     for relative in auth["authorized_source_scope"]:
-        assert not (REPO_ROOT / relative).exists(), relative
+        assert (REPO_ROOT / relative).exists(), relative

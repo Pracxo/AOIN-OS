@@ -1,0 +1,40 @@
+{
+  "approval_evidence_ids": [
+    "approval-evidence-promotion-transaction-example"
+  ],
+  "automatic_promotion_requested": false,
+  "belief_mutation_requested": false,
+  "candidate_fingerprints": [
+    "29fb0577c27735d790f86b1f99541e329d575d10f9153334624a0c356d648017"
+  ],
+  "candidate_ids": [
+    "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001"
+  ],
+  "cognitive_memory_write_requested": false,
+  "dry_run_only": true,
+  "expires_at": "2026-01-01T01:00:00Z",
+  "operator_requested": true,
+  "owner_scope_fingerprints": [
+    "780d47d575474cbe5053743bc933c4c29767660696ecded6ba3b7481d79a22f2"
+  ],
+  "persistent_write_requested": false,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "promotion_request_id": "promotion-request-promotion-transaction-example",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "request_fingerprint": "73de012dd8ad23a59635f66589c2be92cfbf035a27d476e80ee35196cbdad023",
+  "request_kind": "initial_version",
+  "requested_at": "2026-01-01T00:00:00Z",
+  "requested_projection_targets": [
+    "semantic_memory",
+    "episodic_memory",
+    "procedural_memory",
+    "belief_candidate"
+  ],
+  "risk_class": "high",
+  "runtime_effect": false,
+  "schema_version": "aion-glm-knowledge-promotion-request/v1",
+  "synthetic": true,
+  "transaction_id": "promotion-transaction-example"
+}

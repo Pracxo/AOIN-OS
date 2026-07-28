@@ -4,9 +4,9 @@ from test_governed_learning_memory_program_authorization import REPO_ROOT
 
 
 def test_threat_model_preserves_candidate_truth_and_runtime_boundaries() -> None:
-    threat_model = (
-        REPO_ROOT / "docs/governed-learning-memory/threat-model.md"
-    ).read_text(encoding="utf-8")
+    threat_model = (REPO_ROOT / "docs/governed-learning-memory/threat-model.md").read_text(
+        encoding="utf-8"
+    )
     security_boundary = (
         REPO_ROOT / "docs/governed-learning-memory/security-boundary.md"
     ).read_text(encoding="utf-8")

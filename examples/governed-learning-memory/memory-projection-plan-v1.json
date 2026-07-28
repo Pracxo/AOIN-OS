@@ -1,0 +1,196 @@
+{
+  "belief_mutation_authorized": false,
+  "blocked_targets": [],
+  "cognitive_memory_write_authorized": false,
+  "operator_review_required": true,
+  "persistent_write_authorized": false,
+  "plan_fingerprint": "077b73ff71acc6aa41a41e3401f4045478d51b4ebc04c8f0025757f4355c9375",
+  "planned_targets": [
+    "belief_candidate",
+    "episodic_memory",
+    "procedural_memory",
+    "semantic_memory"
+  ],
+  "projection_plan_id": "projection-plan-promotion-transaction-example",
+  "record_count": 4,
+  "records": [
+    {
+      "approval_bundle_fingerprint": "3876a77ded238a4a11c96589d4807e456a66e3713e24c1be46b7bd8d87e39842",
+      "belief_created": false,
+      "belief_mutated": false,
+      "candidate_fingerprint": "29fb0577c27735d790f86b1f99541e329d575d10f9153334624a0c356d648017",
+      "candidate_id": "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+      "cognitive_memory_written": false,
+      "confidence_cap": "0.870000",
+      "content_reference_fingerprint": "15b4be27fd9fc265bc7fe7df746e11378dcc2b429d584c9536f1ab5b37c8e97f",
+      "evidence_reference_fingerprints": [
+        "29fb0577c27735d790f86b1f99541e329d575d10f9153334624a0c356d648017",
+        "7615a10c2039a5b6064b855af36a9ed466ff8313fca7a2c71e57cbf65d762a21",
+        "3876a77ded238a4a11c96589d4807e456a66e3713e24c1be46b7bd8d87e39842"
+      ],
+      "knowledge_identity_id": "knowledge-0c10d75f88e49fb09c01297b80a859cb",
+      "knowledge_version_plan_id": "version-plan-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+      "lineage_fingerprint": "7615a10c2039a5b6064b855af36a9ed466ff8313fca7a2c71e57cbf65d762a21",
+      "memory_record_created": false,
+      "owner_scope_fingerprints": [
+        "780d47d575474cbe5053743bc933c4c29767660696ecded6ba3b7481d79a22f2"
+      ],
+      "persistent_write_applied": false,
+      "planned_record_id": "planned-belief_candidate-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+      "projection_fingerprint": "57d8559ba5d332445f0592b55fa760d25c5cedf6ae60586828d55d165f885bd6",
+      "projection_record_id": "projection-belief_candidate-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+      "projection_status": "planned",
+      "reason_codes": [
+        "belief_candidate_projection_planned",
+        "memory_projection_write_disabled",
+        "belief_projection_is_candidate_only"
+      ],
+      "runtime_effect": false,
+      "schema_version": "aion-glm-memory-projection-record-plan/v1",
+      "sensitivity": "internal",
+      "source_reference_ids": [
+        "operator-supplied-planning-context"
+      ],
+      "summary_fingerprint": "7d3f76883932daa6ce2c39b93e6fff4d4f01f30a690e547a1fcabb8ae8cf57f6",
+      "target": "belief_candidate",
+      "transaction_id": "promotion-transaction-example",
+      "valid_from": "2026-01-01T00:00:00Z",
+      "valid_to": null
+    },
+    {
+      "approval_bundle_fingerprint": "3876a77ded238a4a11c96589d4807e456a66e3713e24c1be46b7bd8d87e39842",
+      "belief_created": false,
+      "belief_mutated": false,
+      "candidate_fingerprint": "29fb0577c27735d790f86b1f99541e329d575d10f9153334624a0c356d648017",
+      "candidate_id": "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+      "cognitive_memory_written": false,
+      "confidence_cap": "0.870000",
+      "content_reference_fingerprint": "2ee7b4f1926a5c0009d64165732ffc540a5568572d27ca8d3d5ca2337fb6c9c8",
+      "evidence_reference_fingerprints": [
+        "29fb0577c27735d790f86b1f99541e329d575d10f9153334624a0c356d648017",
+        "7615a10c2039a5b6064b855af36a9ed466ff8313fca7a2c71e57cbf65d762a21",
+        "3876a77ded238a4a11c96589d4807e456a66e3713e24c1be46b7bd8d87e39842"
+      ],
+      "knowledge_identity_id": "knowledge-0c10d75f88e49fb09c01297b80a859cb",
+      "knowledge_version_plan_id": "version-plan-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+      "lineage_fingerprint": "7615a10c2039a5b6064b855af36a9ed466ff8313fca7a2c71e57cbf65d762a21",
+      "memory_record_created": false,
+      "owner_scope_fingerprints": [
+        "780d47d575474cbe5053743bc933c4c29767660696ecded6ba3b7481d79a22f2"
+      ],
+      "persistent_write_applied": false,
+      "planned_record_id": "planned-episodic_memory-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+      "projection_fingerprint": "7f48512988fe82e51db874445ef0f460ef0de1352a76d8881d3ff3ee3effb8ac",
+      "projection_record_id": "projection-episodic_memory-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+      "projection_status": "planned",
+      "reason_codes": [
+        "episodic_memory_projection_planned",
+        "memory_projection_write_disabled"
+      ],
+      "runtime_effect": false,
+      "schema_version": "aion-glm-memory-projection-record-plan/v1",
+      "sensitivity": "internal",
+      "source_reference_ids": [
+        "operator-supplied-planning-context"
+      ],
+      "summary_fingerprint": "fedc7d029ca0ef7ec4f2b4abe8cca7738e29d0ce3b671659da363b8626e9fa0b",
+      "target": "episodic_memory",
+      "transaction_id": "promotion-transaction-example",
+      "valid_from": "2026-01-01T00:00:00Z",
+      "valid_to": null
+    },
+    {
+      "approval_bundle_fingerprint": "3876a77ded238a4a11c96589d4807e456a66e3713e24c1be46b7bd8d87e39842",
+      "belief_created": false,
+      "belief_mutated": false,
+      "candidate_fingerprint": "29fb0577c27735d790f86b1f99541e329d575d10f9153334624a0c356d648017",
+      "candidate_id": "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+      "cognitive_memory_written": false,
+      "confidence_cap": "0.870000",
+      "content_reference_fingerprint": "1f04e5b0608633114a2ab7b70217d6bde02dc359e6c7b48d2423ac000a75f6b9",
+      "evidence_reference_fingerprints": [
+        "29fb0577c27735d790f86b1f99541e329d575d10f9153334624a0c356d648017",
+        "7615a10c2039a5b6064b855af36a9ed466ff8313fca7a2c71e57cbf65d762a21",
+        "3876a77ded238a4a11c96589d4807e456a66e3713e24c1be46b7bd8d87e39842"
+      ],
+      "knowledge_identity_id": "knowledge-0c10d75f88e49fb09c01297b80a859cb",
+      "knowledge_version_plan_id": "version-plan-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+      "lineage_fingerprint": "7615a10c2039a5b6064b855af36a9ed466ff8313fca7a2c71e57cbf65d762a21",
+      "memory_record_created": false,
+      "owner_scope_fingerprints": [
+        "780d47d575474cbe5053743bc933c4c29767660696ecded6ba3b7481d79a22f2"
+      ],
+      "persistent_write_applied": false,
+      "planned_record_id": "planned-procedural_memory-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+      "projection_fingerprint": "a352d6354d11c68a272467a664522c5d1ffe97e40f6e2cd67e4390801635e98a",
+      "projection_record_id": "projection-procedural_memory-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+      "projection_status": "planned",
+      "reason_codes": [
+        "procedural_memory_projection_planned",
+        "memory_projection_write_disabled"
+      ],
+      "runtime_effect": false,
+      "schema_version": "aion-glm-memory-projection-record-plan/v1",
+      "sensitivity": "internal",
+      "source_reference_ids": [
+        "operator-supplied-planning-context"
+      ],
+      "summary_fingerprint": "c3999f836cafb33aa1fc30adf90d859a49693e23c8ceb85fff8040235e439466",
+      "target": "procedural_memory",
+      "transaction_id": "promotion-transaction-example",
+      "valid_from": "2026-01-01T00:00:00Z",
+      "valid_to": null
+    },
+    {
+      "approval_bundle_fingerprint": "3876a77ded238a4a11c96589d4807e456a66e3713e24c1be46b7bd8d87e39842",
+      "belief_created": false,
+      "belief_mutated": false,
+      "candidate_fingerprint": "29fb0577c27735d790f86b1f99541e329d575d10f9153334624a0c356d648017",
+      "candidate_id": "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+      "cognitive_memory_written": false,
+      "confidence_cap": "0.870000",
+      "content_reference_fingerprint": "8728656b81727358f44777a2b88816d0f60ccc8b5d9de04c53bcec921ab3cd71",
+      "evidence_reference_fingerprints": [
+        "29fb0577c27735d790f86b1f99541e329d575d10f9153334624a0c356d648017",
+        "7615a10c2039a5b6064b855af36a9ed466ff8313fca7a2c71e57cbf65d762a21",
+        "3876a77ded238a4a11c96589d4807e456a66e3713e24c1be46b7bd8d87e39842"
+      ],
+      "knowledge_identity_id": "knowledge-0c10d75f88e49fb09c01297b80a859cb",
+      "knowledge_version_plan_id": "version-plan-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+      "lineage_fingerprint": "7615a10c2039a5b6064b855af36a9ed466ff8313fca7a2c71e57cbf65d762a21",
+      "memory_record_created": false,
+      "owner_scope_fingerprints": [
+        "780d47d575474cbe5053743bc933c4c29767660696ecded6ba3b7481d79a22f2"
+      ],
+      "persistent_write_applied": false,
+      "planned_record_id": "planned-semantic_memory-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+      "projection_fingerprint": "8de165bf8b7f796e9cb5f855695f08bcb6805083b0ee958314ebf4e1debde321",
+      "projection_record_id": "projection-semantic_memory-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+      "projection_status": "planned",
+      "reason_codes": [
+        "semantic_memory_projection_planned",
+        "memory_projection_write_disabled"
+      ],
+      "runtime_effect": false,
+      "schema_version": "aion-glm-memory-projection-record-plan/v1",
+      "sensitivity": "internal",
+      "source_reference_ids": [
+        "operator-supplied-planning-context"
+      ],
+      "summary_fingerprint": "5190dca5b24cef78500f681fad48cce5f6c2b9bcbda18df366095be6b3f1a81b",
+      "target": "semantic_memory",
+      "transaction_id": "promotion-transaction-example",
+      "valid_from": "2026-01-01T00:00:00Z",
+      "valid_to": null
+    }
+  ],
+  "requested_targets": [
+    "belief_candidate",
+    "episodic_memory",
+    "procedural_memory",
+    "semantic_memory"
+  ],
+  "runtime_effect": false,
+  "schema_version": "aion-glm-memory-projection-plan/v1",
+  "transaction_id": "promotion-transaction-example"
+}

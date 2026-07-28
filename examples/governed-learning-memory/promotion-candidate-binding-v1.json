@@ -1,0 +1,267 @@
+{
+  "binding_fingerprint": "9a023b61c5d6a05b052530ed6a7c28d19bf55d1673c5f4ca5288d24c0cfee2c2",
+  "binding_id": "binding-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+  "candidate": {
+    "assessment_confidence": "0.910000",
+    "assessment_confidence_band": "high",
+    "assessment_hard_cap": "0.900000",
+    "assessment_id": "assessment-001",
+    "assessment_status": "supported",
+    "attestation_chain_head_fingerprints": [
+      "473293792ba0f334d9fa7038ab1e3d26f482ea6ad6d6767e87634010e78a221c"
+    ],
+    "automatic_promotion": false,
+    "belief_mutated": false,
+    "candidate_confidence_cap": "0.870000",
+    "candidate_fingerprint": "29fb0577c27735d790f86b1f99541e329d575d10f9153334624a0c356d648017",
+    "candidate_id": "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+    "candidate_identity_id": "candidate-identity-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99",
+    "candidate_kind": "support_candidate",
+    "candidate_version": 1,
+    "citation_coverage": "1.000000",
+    "claim_id": "claim-001",
+    "claim_identity_fingerprint": "d9f05af5ef3f2cf6470f476dfad91296200bad990196627c27e9d1620748cd8a",
+    "cognitive_memory_written": false,
+    "contradiction_status": "none_detected",
+    "created_at": "2026-01-01T00:00:00Z",
+    "eligibility_decision": {
+      "automatic_promotion": false,
+      "belief_mutated": false,
+      "candidate_confidence_cap": "0.870000",
+      "candidate_kind": "support_candidate",
+      "cognitive_memory_written": false,
+      "decision_fingerprint": "c5db684e8337852f0e9332b705a7edd654ccb1b9ffe7a39142875ec4f052fcd4",
+      "eligible": true,
+      "operator_review_required": true,
+      "reason_codes": [
+        "verified_candidate_confidence_inherited",
+        "verified_candidate_confidence_non_amplification_enforced",
+        "verified_candidate_tool_output_not_fact",
+        "verified_candidate_engagement_not_fact",
+        "verified_candidate_operator_review_required",
+        "verified_candidate_automatic_promotion_blocked",
+        "verified_candidate_cognitive_memory_write_blocked",
+        "verified_candidate_belief_mutation_blocked",
+        "verified_candidate_persistent_write_disabled",
+        "verified_candidate_runtime_disabled",
+        "verified_candidate_support_eligible",
+        "verified_candidate_integrity_passed"
+      ],
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-verified-candidate-eligibility/v1",
+      "status": "eligible_for_operator_review",
+      "verified_knowledge_created": false
+    },
+    "evidence_coverage": "1.000000",
+    "expires_at": null,
+    "freshness_status": "current",
+    "independent_opposition_count": 0,
+    "independent_support_count": 3,
+    "integrated_lineage": {
+      "acquisition_result_fingerprint": "fa671ae8e84db1eb7b4b4f1c161ba30738aecbb817bb719f0b4db220a5472d92",
+      "assessment_confidence": "0.910000",
+      "assessment_fingerprint": "81ea6d45404a31affafd2feabee805a1c82e2d917e18246455e3bbfa3f32a3f6",
+      "assessment_hard_cap": "0.900000",
+      "assessment_id": "assessment-001",
+      "assessment_status": "supported",
+      "attestation_chain_head_fingerprints": [
+        "473293792ba0f334d9fa7038ab1e3d26f482ea6ad6d6767e87634010e78a221c"
+      ],
+      "authorization_transaction_id": "AION-216-KI-0007",
+      "citation_reference_fingerprints": [
+        "c42f7bb7257243d691ad6e8b48152b97628dcdd50a85c46207f3e62109dcadbf"
+      ],
+      "citation_reference_ids": [
+        "citation-001"
+      ],
+      "claim_graph_integrity_fingerprint": "d69b38663941d1bb9324418b205cc431799ca14fec7fce40f30a0eb5d5cde4dc",
+      "claim_id": "claim-001",
+      "claim_identity_fingerprint": "d9f05af5ef3f2cf6470f476dfad91296200bad990196627c27e9d1620748cd8a",
+      "claim_version_id": "claim-version-001",
+      "domain_mesh_session_fingerprint": "7562c802da5b428382a13737eced1eab0b3a2914fd4eedb4c2b152cd6432c4e1",
+      "domain_mesh_session_id": "mesh-session-001",
+      "jurisdiction_scope_fingerprint": "b25d623b835e381e92ca4d10b8967f219aaba097dfcf13185a5500425d717e53",
+      "lineage_fingerprint": "7615a10c2039a5b6064b855af36a9ed466ff8313fca7a2c71e57cbf65d762a21",
+      "lineage_id": "lineage-001",
+      "lineage_reference_count": 11,
+      "program_id": "AION-KNOWLEDGE-INTELLIGENCE-001",
+      "read_only": true,
+      "redacted": true,
+      "research_plan_fingerprint": "7586e723ed18b6dcfc1a50bd350fbd12f79056a31099a5046dd52a855a233d99",
+      "research_plan_id": "research-plan-001",
+      "runtime_effect": false,
+      "schema_version": "aion-knowledge-integrated-lineage/v1",
+      "source_independence_group_ids": [
+        "group-001",
+        "group-002",
+        "group-003"
+      ],
+      "source_provenance_fingerprints": [
+        "f7670105d014d83f0381a78ea844125520f0f7c4c0b24e4830945a98336e365b"
+      ],
+      "source_provenance_ids": [
+        "provenance-001"
+      ],
+      "source_registry_integrity_fingerprint": "411d9ac76f7723d204881e27c77be84398db12874bb78aa1fc8d4da261e956aa",
+      "source_snapshot_fingerprints": [
+        "5a8aaa77ac7748bca75635f67864c7b9c8adb521568d06c3796886e51a548e63"
+      ],
+      "source_snapshot_ids": [
+        "snapshot-001"
+      ],
+      "synthesis_confidence_cap": "0.890000",
+      "synthesis_fingerprint": "3054839ea8769daaca2f65e0d8c27c04e136f69b3e7ea2921b2675cda9d3af81",
+      "synthesis_id": "synthesis-001",
+      "synthetic": true,
+      "target_valid_time_fingerprint": "8391634fe5179b1ea8b552bceca0e5bd1e761f1d8ff0eac83080fd807efad7f4",
+      "tool_evidence_confidence_caps": [
+        "0.880000"
+      ],
+      "tool_verification_session_fingerprints": [
+        "fa900aa614144ea1a2f0852ebed4975c216b0af504039d4b6da37a55ed56fe70"
+      ],
+      "tool_verification_session_ids": [
+        "tool-session-001"
+      ],
+      "version_scope_fingerprint": "f39ccabd44f685cf14c73911927fa0793defc54e2c2e80b018004efb1762b6f4"
+    },
+    "lifecycle_status": "operator_review_pending",
+    "mesh_session_id": "mesh-session-001",
+    "operator_review_required": true,
+    "persistent_write_applied": false,
+    "provenance_completeness": "1.000000",
+    "read_only": true,
+    "reason_codes": [
+      "verified_candidate_confidence_inherited",
+      "verified_candidate_confidence_non_amplification_enforced",
+      "verified_candidate_tool_output_not_fact",
+      "verified_candidate_engagement_not_fact",
+      "verified_candidate_operator_review_required",
+      "verified_candidate_automatic_promotion_blocked",
+      "verified_candidate_cognitive_memory_write_blocked",
+      "verified_candidate_belief_mutation_blocked",
+      "verified_candidate_persistent_write_disabled",
+      "verified_candidate_runtime_disabled",
+      "verified_candidate_support_eligible",
+      "verified_candidate_integrity_passed"
+    ],
+    "redacted": true,
+    "revalidation_due_at": null,
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-verified-candidate/v1",
+    "scope_applicability_status": "applicable",
+    "supersedes_candidate_version_id": null,
+    "synthesis_confidence_cap": "0.890000",
+    "synthesis_fingerprint": "3054839ea8769daaca2f65e0d8c27c04e136f69b3e7ea2921b2675cda9d3af81",
+    "synthesis_id": "synthesis-001",
+    "synthetic": true,
+    "tool_verification_session_ids": [
+      "tool-session-001"
+    ],
+    "unresolved_dissent_ids": [],
+    "verified_knowledge_created": false
+  },
+  "candidate_fingerprint": "29fb0577c27735d790f86b1f99541e329d575d10f9153334624a0c356d648017",
+  "candidate_id": "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+  "candidate_identity_id": "candidate-identity-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99",
+  "candidate_integrity_report": {
+    "finding_count": 1,
+    "findings": [
+      {
+        "bounded_count": 4,
+        "finding_id": "finding-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+        "fingerprints": [
+          "29fb0577c27735d790f86b1f99541e329d575d10f9153334624a0c356d648017",
+          "7615a10c2039a5b6064b855af36a9ed466ff8313fca7a2c71e57cbf65d762a21"
+        ],
+        "reason_codes": [
+          "verified_candidate_integrity_passed"
+        ],
+        "redacted_summary": "verified knowledge integrity audit",
+        "runtime_effect": false,
+        "safe_ids": [
+          "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+          "candidate-identity-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99"
+        ],
+        "status": "passed"
+      }
+    ],
+    "persistent_write_applied": false,
+    "read_only": true,
+    "redacted": true,
+    "report_fingerprint": "190b8fcaa5ea7ee19823f64636d44bcef33e3564e2872aaae66f03b3b3447784",
+    "report_id": "integrity-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-verified-integrity/v1",
+    "status": "passed"
+  },
+  "candidate_version": 1,
+  "integrated_lineage_fingerprint": "7615a10c2039a5b6064b855af36a9ed466ff8313fca7a2c71e57cbf65d762a21",
+  "lineage_integrity_report": {
+    "finding_count": 1,
+    "findings": [
+      {
+        "bounded_count": 3,
+        "finding_id": "finding-lineage-001",
+        "fingerprints": [
+          "7615a10c2039a5b6064b855af36a9ed466ff8313fca7a2c71e57cbf65d762a21"
+        ],
+        "reason_codes": [
+          "verified_lineage_valid"
+        ],
+        "redacted_summary": "verified knowledge integrity audit",
+        "runtime_effect": false,
+        "safe_ids": [
+          "claim-001",
+          "lineage-001"
+        ],
+        "status": "passed"
+      }
+    ],
+    "persistent_write_applied": false,
+    "read_only": true,
+    "redacted": true,
+    "report_fingerprint": "69b74f91f086b794d64b555d6149cc9ea6599ff7f96ea40fc8a7a982454c2fe1",
+    "report_id": "integrity-lineage-001",
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-verified-integrity/v1",
+    "status": "passed"
+  },
+  "memory_snapshot_fingerprint": "176bd8ed7fb01ffc41e8b55bd164b30e11a8a6ceb96140df12d151a6634f7ff3",
+  "memory_snapshot_id": "memory-snapshot-promotion-transaction-example",
+  "policy_status_integrity_report": {
+    "finding_count": 1,
+    "findings": [
+      {
+        "bounded_count": 2,
+        "finding_id": "finding-policy-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+        "fingerprints": [
+          "29fb0577c27735d790f86b1f99541e329d575d10f9153334624a0c356d648017"
+        ],
+        "reason_codes": [
+          "verified_candidate_integrity_passed"
+        ],
+        "redacted_summary": "verified knowledge integrity audit",
+        "runtime_effect": false,
+        "safe_ids": [
+          "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001"
+        ],
+        "status": "passed"
+      }
+    ],
+    "persistent_write_applied": false,
+    "read_only": true,
+    "redacted": true,
+    "report_fingerprint": "74e53c86bc9cf85ca05f5e6cdeda1dfc422e00f53e52d1c42e37acbbb3be4231",
+    "report_id": "integrity-policy-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+    "runtime_effect": false,
+    "schema_version": "aion-knowledge-verified-integrity/v1",
+    "status": "passed"
+  },
+  "promotion_request_id": "promotion-request-promotion-transaction-example",
+  "read_only": true,
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-promotion-candidate-binding/v1",
+  "transaction_id": "promotion-transaction-example"
+}

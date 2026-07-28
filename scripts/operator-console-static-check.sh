@@ -837,9 +837,18 @@ for path in sorted(demo_dir.glob("*.json")):
         if path.name not in {
             "governed-learning-memory-authorization.json",
             "governed-learning-memory-boundary.json",
+            "governed-learning-memory-approval-evidence.json",
+            "governed-learning-memory-conflicts.json",
+            "governed-learning-memory-eligibility.json",
+            "governed-learning-memory-integrity.json",
+            "governed-learning-memory-knowledge-identity.json",
+            "governed-learning-memory-projection-plan.json",
             "governed-learning-memory-program.json",
+            "governed-learning-memory-promotion-request.json",
             "governed-learning-memory-roadmap.json",
             "governed-learning-memory-runtime-hold.json",
+            "governed-learning-memory-transaction-result.json",
+            "governed-learning-memory-version-plan.json",
         }:
             raise SystemExit(f"unknown governed learning memory demo: {path}")
         if payload.get("read_only") is not True:

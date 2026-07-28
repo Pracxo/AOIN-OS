@@ -38,6 +38,8 @@ is_allowed_path() {
     docs/adr/0185-governed-learning-and-memory-integration-program-charter.md|\
     examples/governed-learning-memory/*|\
     operator-console-static/demo-data/governed-learning-memory-*.json|\
+    scripts/governed-learning-memory-promotion-transaction-check.sh|\
+    scripts/governed-learning-memory-promotion-transaction-no-go-regression.sh|\
     scripts/governed-learning-memory-program-authorization-check.sh|\
     scripts/governed-learning-memory-program-no-go-regression.sh|\
     scripts/governed-learning-memory-runtime-hold.sh|\
@@ -66,6 +68,39 @@ is_prohibited_path() {
   return 1
 }
 
+aion222_is_scoped_promotion_transaction_compatibility_path() {
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/governed_learning_memory.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/__init__.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/approval_evidence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/eligibility_revalidation.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/evidence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/integrity.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/knowledge_identity.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/memory_projection.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/promotion_requests.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/promotion_transactions.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/rollback.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/version_planning.py|\
+    scripts/connector-runtime-no-external-call-regression.sh|\
+    scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-domain-expert-mesh-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-epistemic-assessment-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-integrated-research-agent-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-tool-verification-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh|\
+    scripts/lib/cognitive_architecture_governance.py|\
+    scripts/lib/self_improvement_governance.py|\
+    scripts/operator-action-write-path-no-go-regression.sh|\
+    scripts/production-auth-architecture-check.sh)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 changed_entries() {
   local base
   if base="$(comparison_base)"; then
@@ -75,7 +110,7 @@ changed_entries() {
   fi
   git diff --name-status
   git diff --cached --name-status
-  git status --porcelain=v1 | awk '/^\?\? / {print "A\t" substr($0, 4)}'
+  git status --porcelain=v1 --untracked-files=all | awk '/^\?\? / {print "A\t" substr($0, 4)}'
 }
 
 while IFS=$'\t' read -r status path extra; do
@@ -86,6 +121,9 @@ while IFS=$'\t' read -r status path extra; do
   fi
   for changed in "$path" "${extra:-}"; do
     [[ -n "$changed" ]] || continue
+    if aion222_is_scoped_promotion_transaction_compatibility_path "$changed"; then
+      continue
+    fi
     if is_prohibited_path "$changed"; then
       echo "ERROR: prohibited AION-220 surface changed: $changed" >&2
       exit 1

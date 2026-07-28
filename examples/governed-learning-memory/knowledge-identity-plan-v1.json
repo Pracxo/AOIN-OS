@@ -1,0 +1,19 @@
+{
+  "approval_bundle_fingerprint": "3876a77ded238a4a11c96589d4807e456a66e3713e24c1be46b7bd8d87e39842",
+  "candidate_fingerprint": "29fb0577c27735d790f86b1f99541e329d575d10f9153334624a0c356d648017",
+  "candidate_id": "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+  "candidate_kind": "support_candidate",
+  "claim_id": "claim-001",
+  "claim_identity_fingerprint": "d9f05af5ef3f2cf6470f476dfad91296200bad990196627c27e9d1620748cd8a",
+  "disposition": "new_identity",
+  "identity_fingerprint": "c40e5e14b8b26155d04f9e0211546b810d7e835d33446bae55f4946ee3b95fbd",
+  "identity_plan_id": "identity-candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001",
+  "jurisdiction_scope_fingerprint": "b25d623b835e381e92ca4d10b8967f219aaba097dfcf13185a5500425d717e53",
+  "knowledge_identity_id": "knowledge-0c10d75f88e49fb09c01297b80a859cb",
+  "lineage_fingerprint": "7615a10c2039a5b6064b855af36a9ed466ff8313fca7a2c71e57cbf65d762a21",
+  "persistent_identity_created": false,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-knowledge-identity-plan/v1",
+  "target_valid_time_fingerprint": "8391634fe5179b1ea8b552bceca0e5bd1e761f1d8ff0eac83080fd807efad7f4",
+  "version_scope_fingerprint": "f39ccabd44f685cf14c73911927fa0793defc54e2c2e80b018004efb1762b6f4"
+}

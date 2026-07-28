@@ -60,7 +60,9 @@ is_allowed_path() {
     docs/governed-learning-memory/*|\
     docs/release/governed-learning-memory-*|\
     docs/adr/0185-governed-learning-and-memory-integration-program-charter.md|\
+    docs/adr/0186-approval-bound-knowledge-promotion-transaction-core.md|\
     docs/adr/README.md|\
+    docs/release/v02-release-readiness-delta.md|\
     docs/project-status.md|docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/visual-brain.md|\
     examples/governed-learning-memory/*|\
     operator-console-static/index.html|operator-console-static/app.js|operator-console-static/README.md|\
@@ -75,7 +77,37 @@ is_allowed_path() {
     scripts/governed-learning-memory-program-authorization-check.sh|\
     scripts/governed-learning-memory-program-no-go-regression.sh|\
     scripts/governed-learning-memory-runtime-hold.sh|\
+    scripts/governed-learning-memory-promotion-transaction-check.sh|\
+    scripts/governed-learning-memory-promotion-transaction-no-go-regression.sh|\
+    scripts/connector-runtime-no-external-call-regression.sh|\
+    scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-domain-expert-mesh-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-epistemic-assessment-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-integrated-research-agent-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-tool-verification-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh|\
+    scripts/lib/cognitive_architecture_governance.py|\
+    scripts/lib/self_improvement_governance.py|\
+    scripts/operator-action-write-path-no-go-regression.sh|\
+    scripts/production-auth-architecture-check.sh|\
     services/brain-api/tests/test_governed_learning_memory_*.py)
+      return 0
+      ;;
+    services/brain-api/src/aion_brain/contracts/governed_learning_memory.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/__init__.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/promotion_requests.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/approval_evidence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/eligibility_revalidation.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/knowledge_identity.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/version_planning.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/memory_projection.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/promotion_transactions.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/rollback.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/integrity.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/evidence.py)
       return 0
       ;;
   esac
@@ -84,6 +116,20 @@ is_allowed_path() {
 
 is_prohibited_path() {
   case "$1" in
+    services/brain-api/src/aion_brain/contracts/governed_learning_memory.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/__init__.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/promotion_requests.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/approval_evidence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/eligibility_revalidation.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/knowledge_identity.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/version_planning.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/memory_projection.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/promotion_transactions.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/rollback.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/integrity.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/evidence.py)
+      return 1
+      ;;
     .github/workflows/*|\
     services/brain-api/src/aion_brain/*|\
     services/brain-api/pyproject.toml|\
@@ -108,7 +154,7 @@ changed_entries() {
   fi
   git diff --name-status HEAD --
   git diff --cached --name-status --
-  git status --porcelain=v1 | awk '/^\?\? / {print "A\t" substr($0, 4)}'
+  git status --porcelain=v1 --untracked-files=all | awk '/^\?\? / {print "A\t" substr($0, 4)}'
 }
 
 while IFS=$'\t' read -r status path extra; do
@@ -143,8 +189,8 @@ for path in \
   services/brain-api/src/aion_brain/governed_learning_memory/rollback.py \
   services/brain-api/src/aion_brain/governed_learning_memory/integrity.py \
   services/brain-api/src/aion_brain/governed_learning_memory/evidence.py; do
-  if [[ -e "$path" ]]; then
-    echo "ERROR: AION-222 implementation source exists during AION-221: $path" >&2
+  if [[ ! -f "$path" ]]; then
+    echo "ERROR: AION-222 implementation source missing: $path" >&2
     exit 1
   fi
 done

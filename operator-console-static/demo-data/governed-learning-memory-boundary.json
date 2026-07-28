@@ -1,7 +1,5 @@
 {
   "aion_222_unimplemented": true,
-  "redacted": true,
-  "redaction_applied": true,
   "authorized_source_scope": [
     "services/brain-api/src/aion_brain/contracts/governed_learning_memory.py",
     "services/brain-api/src/aion_brain/governed_learning_memory/__init__.py",
@@ -70,6 +68,8 @@
   },
   "read_only": true,
   "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
   "runtime_enabled": false,
   "schema_version": "governed-learning-memory-boundary/v1",
   "synthetic": true

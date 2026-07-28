@@ -1,0 +1,28 @@
+{
+  "actual_knowledge_promotion_authorized": false,
+  "approval_created": false,
+  "automatic_promotion_authorized": false,
+  "belief_mutation_authorized": false,
+  "belief_projection_is_not_belief_creation": true,
+  "candidate_ids": [
+    "candidate-632647e4fa2e5e38240ec46efae2a0ba8e29e50f52194e99-v001"
+  ],
+  "candidate_is_not_durable_knowledge": true,
+  "cognitive_memory_write_authorized": false,
+  "dry_run_is_not_persistence": true,
+  "expires_at": "2026-01-08T00:02:00Z",
+  "future_persistence_authorized": false,
+  "implementation_authorization_created": false,
+  "operator_approval_is_not_factual_proof": true,
+  "operator_review_required": true,
+  "persistent_knowledge_write_authorized": false,
+  "projection_plan_is_not_memory_write": true,
+  "reason_codes": [
+    "promotion_transaction_dry_run_passed"
+  ],
+  "redacted": true,
+  "review_fingerprint": "e520bf6e626aae75a1867241cd982fd3a14f4a429838c01bd72fd2dbc8fbcd87",
+  "review_item_id": "review-promotion-transaction-example",
+  "runtime_effect": false,
+  "transaction_id": "promotion-transaction-example"
+}
