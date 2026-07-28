@@ -1,0 +1,16 @@
+{
+  "candidate_id": "approval-bound-knowledge-promotion-transaction-core",
+  "durable_knowledge_created": false,
+  "identity_material": [
+    "candidate_id",
+    "lineage_fingerprint",
+    "scope_fingerprint",
+    "approval_record_id"
+  ],
+  "knowledge_identity_derivation_approved": true,
+  "persistent_knowledge_write_enabled": false,
+  "read_only": true,
+  "redacted": true,
+  "schema_version": "governed-learning-memory-knowledge-identity-plan/v1",
+  "synthetic": true
+}

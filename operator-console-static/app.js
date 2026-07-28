@@ -78,6 +78,11 @@
     knowledge_intelligence_public_research_pilot_network_policy: "demo-data/knowledge-intelligence-public-research-pilot-network-policy.json",
     knowledge_intelligence_public_research_pilot_resource_budget: "demo-data/knowledge-intelligence-public-research-pilot-resource-budget.json",
     knowledge_intelligence_public_research_pilot_runtime_hold: "demo-data/knowledge-intelligence-public-research-pilot-runtime-hold.json",
+    governed_learning_memory_program: "demo-data/governed-learning-memory-program.json",
+    governed_learning_memory_authorization: "demo-data/governed-learning-memory-authorization.json",
+    governed_learning_memory_roadmap: "demo-data/governed-learning-memory-roadmap.json",
+    governed_learning_memory_boundary: "demo-data/governed-learning-memory-boundary.json",
+    governed_learning_memory_runtime_hold: "demo-data/governed-learning-memory-runtime-hold.json",
     module_lifecycle: "demo-data/module-lifecycle-dashboard.json",
     model_provider_hardening: "demo-data/provider-hardening-view-model.json",
     operator_actions: "demo-data/operator-action-preview.json",
@@ -142,7 +147,12 @@
       "knowledge_intelligence_public_research_pilot_authorization",
       "knowledge_intelligence_public_research_pilot_network_policy",
       "knowledge_intelligence_public_research_pilot_resource_budget",
-      "knowledge_intelligence_public_research_pilot_runtime_hold"
+      "knowledge_intelligence_public_research_pilot_runtime_hold",
+      "governed_learning_memory_program",
+      "governed_learning_memory_authorization",
+      "governed_learning_memory_roadmap",
+      "governed_learning_memory_boundary",
+      "governed_learning_memory_runtime_hold"
     ],
     providers: ["model_provider_hardening"],
     actions: ["operator_actions"],
@@ -200,7 +210,12 @@
       "knowledge_intelligence_public_research_pilot_authorization",
       "knowledge_intelligence_public_research_pilot_network_policy",
       "knowledge_intelligence_public_research_pilot_resource_budget",
-      "knowledge_intelligence_public_research_pilot_runtime_hold"
+      "knowledge_intelligence_public_research_pilot_runtime_hold",
+      "governed_learning_memory_program",
+      "governed_learning_memory_authorization",
+      "governed_learning_memory_roadmap",
+      "governed_learning_memory_boundary",
+      "governed_learning_memory_runtime_hold"
     ],
     safety: ["settings_safety", "incidents"]
   };
@@ -390,7 +405,10 @@
     "./scripts/knowledge-intelligence-epistemic-truth-authorization-check.sh",
     "./scripts/knowledge-intelligence-epistemic-assessment-no-go-regression.sh",
     "./scripts/knowledge-intelligence-epistemic-assessment-check.sh",
-    "./scripts/knowledge-intelligence-epistemic-truth-runtime-hold.sh"
+    "./scripts/knowledge-intelligence-epistemic-truth-runtime-hold.sh",
+    "./scripts/governed-learning-memory-program-authorization-check.sh",
+    "./scripts/governed-learning-memory-program-no-go-regression.sh",
+    "./scripts/governed-learning-memory-runtime-hold.sh"
   ];
   var MODULE_LIFECYCLE_DEMOS = {
     generic_knowledge_trail: "demo-data/generic-knowledge-trail.json",

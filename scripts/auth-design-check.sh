@@ -1450,6 +1450,16 @@ aion220_auth_paths = {
     "services/brain-api/tests/test_knowledge_intelligence_program_zero_active_authorizations.py",
 }
 
+aion221_auth_paths = {
+    "docs/governed-learning-memory/authorization-ledger.json",
+    "docs/release/governed-learning-memory-program-authorization.md",
+    "examples/governed-learning-memory/program-authorization.json",
+    "operator-console-static/demo-data/governed-learning-memory-authorization.json",
+    "scripts/governed-learning-memory-program-authorization-check.sh",
+    "services/brain-api/tests/test_governed_learning_memory_authorization_ledger.py",
+    "services/brain-api/tests/test_governed_learning_memory_program_authorization.py",
+}
+
 blocked_package_names = {
     "package.json",
     "package-lock.json",
@@ -1501,6 +1511,7 @@ for name in [*changed, *untracked]:
         and name not in aion218_auth_paths
         and name not in aion219_auth_paths
         and name not in aion220_auth_paths
+        and name not in aion221_auth_paths
     ):
         raise SystemExit(f"unexpected auth runtime or artifact path: {name}")
 

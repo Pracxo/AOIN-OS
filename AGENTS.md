@@ -64,6 +64,14 @@ Instructions for future Codex runs in this repository:
   approve module activation, approve operator write execution, call external
   services, store credentials or tokens, enable sandbox execution, add package
   files, add migrations, add API runtime routes, or add SDK/CLI implementations.
+- Governed learning and memory program authorization work may create a separate
+  program charter, ledgers, docs, examples, static console evidence, tests, and
+  local gates for AION-222 only. It must preserve the AION-220 closeout state
+  and must not create AION-222 runtime source, persist knowledge, write
+  cognitive memory, mutate beliefs, automatically promote knowledge, apply
+  engagement learning as fact, mutate source, mutate Git, call networks,
+  connectors, providers, browsers, shells, subprocesses, or tools, activate
+  production, create a v0.2 tag, or create a v0.2 release.
 - Production-auth stabilization authorization work may create governance
   transactions for future disabled-core hardening only. It must not modify
   production-auth source, config, kernel wiring, API routes, SDK/CLI source,

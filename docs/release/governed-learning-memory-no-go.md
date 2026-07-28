@@ -1,0 +1,3 @@
+# Governed Learning and Memory No-Go
+
+The no-go gate rejects runtime source, workflow changes, dependency changes, migrations, package files, API routes, installed CLI commands, kernel or startup registration, schedulers, workers, databases, persistent knowledge state, cognitive-memory writes, belief mutation, automatic promotion, network calls, connector calls, model-provider calls, browser automation, shell or subprocess execution, actual tool execution, source mutation, Git mutation, runtime pull-request creation, runtime approval creation, deployment, model training, deletions, renames, v0.2 tags, and v0.2 releases.

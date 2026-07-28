@@ -1,0 +1,15 @@
+{
+  "dry_run_promotion_transaction_approved": true,
+  "git_mutation_enabled": false,
+  "idempotency_validation_approved": true,
+  "in_memory_transaction_journal_approved": true,
+  "network_calls": 0,
+  "persistent_knowledge_write_enabled": false,
+  "promotion_integrity_audit_approved": true,
+  "read_only": true,
+  "redacted": true,
+  "schema_version": "governed-learning-memory-transaction-plan/v1",
+  "source_mutation_enabled": false,
+  "synthetic": true,
+  "transaction_plan_id": "glm-transaction-plan-001"
+}

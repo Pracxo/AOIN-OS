@@ -1,0 +1,15 @@
+{
+  "candidate_id": "approval-bound-knowledge-promotion-transaction-core",
+  "claim_scope_revalidation_planned": true,
+  "domain_dissent_revalidation_planned": true,
+  "eligible_for_dry_run": true,
+  "eligible_for_persistent_write": false,
+  "epistemic_confidence_revalidation_planned": true,
+  "lineage_bound": true,
+  "read_only": true,
+  "redacted": true,
+  "schema_version": "governed-learning-memory-eligibility-snapshot/v1",
+  "source_provenance_revalidation_planned": true,
+  "synthetic": true,
+  "tool_attestation_revalidation_planned": true
+}

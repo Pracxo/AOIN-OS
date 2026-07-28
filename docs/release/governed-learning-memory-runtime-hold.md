@@ -1,0 +1,3 @@
+# Governed Learning and Memory Runtime Hold
+
+Runtime remains disabled. Persistent knowledge writes, persistent verified-knowledge writes, cognitive-memory writes, semantic-memory writes, episodic-memory writes, procedural-memory writes, belief creation, belief mutation, automatic candidate approval, automatic knowledge promotion, engagement factual effects, engagement confidence effects, network calls, connector calls, model-provider calls, tool executions, shell commands, subprocess executions, browser actions, source mutations, Git operations, runtime-created pull requests, runtime-created approvals, deployments, and model-weight changes remain disabled with zero budgets.

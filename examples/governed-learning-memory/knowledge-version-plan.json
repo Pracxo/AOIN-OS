@@ -1,0 +1,14 @@
+{
+  "append_only_plan": true,
+  "knowledge_expiry_plan_approved": true,
+  "knowledge_retraction_plan_approved": true,
+  "knowledge_supersession_plan_approved": true,
+  "knowledge_version_plan_approved": true,
+  "maximum_versions_per_knowledge_identity": 100,
+  "persistent_write_enabled": false,
+  "read_only": true,
+  "redacted": true,
+  "schema_version": "governed-learning-memory-knowledge-version-plan/v1",
+  "synthetic": true,
+  "version_plan_id": "glm-version-plan-001"
+}

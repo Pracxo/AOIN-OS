@@ -1,0 +1,13 @@
+{
+  "compensation_plan_validation_approved": true,
+  "maximum_compensation_steps_per_transaction": 50,
+  "maximum_rollback_steps_per_transaction": 50,
+  "persistent_compensation_write_enabled": false,
+  "read_only": true,
+  "redacted": true,
+  "rollback_plan_id": "glm-rollback-plan-001",
+  "rollback_plan_validation_approved": true,
+  "runtime_effect": false,
+  "schema_version": "governed-learning-memory-rollback-plan/v1",
+  "synthetic": true
+}

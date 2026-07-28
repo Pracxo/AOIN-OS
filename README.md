@@ -14,7 +14,21 @@ identity boundary, but production authentication runtime remains disabled.
 External connectors remain disabled. Operator write execution remains disabled.
 Module activation remains disabled. No v0.2 tag or release exists.
 
-Knowledge Intelligence status: AION-218 verified-knowledge memory operator evaluation complete and controlled public-research pilot authorized. `AION-218-KI-0008` is the sole active Knowledge Intelligence authorization for AION-219; AION-220 is the formal closeout. The controlled public-research pilot is authorized, not implemented, general public-network runtime disabled, persistence-disabled, and engagement remains non-factual.
+Knowledge Intelligence status: AION-220 completed the Knowledge Intelligence
+Program through `AION-KIPE-001` with decision
+`CONTROLLED_PUBLIC_RESEARCH_PILOT_PASS_COMPLETE_KNOWLEDGE_INTELLIGENCE_PROGRAM`.
+`AION-218-KI-0008` is closed, consumed, expired, inactive, and non-reusable.
+The active Knowledge Intelligence implementation authorization count is zero,
+and AION-220 created no successor Knowledge Intelligence task.
+
+Governed Learning and Memory status: AION-221 starts a separate new program,
+`AION-GOVERNED-LEARNING-MEMORY-001`, through a later explicit charter.
+`AION-221-GLM-0001` authorizes AION-222 only for deterministic,
+approval-bound, write-disabled knowledge-promotion transaction planning and
+cognitive-memory projection planning. AION-222 remains unimplemented; runtime
+source, persistent knowledge writes, cognitive-memory writes, belief mutation,
+automatic promotion, production activation, v0.2 readiness, v0.2 tags, and
+v0.2 releases remain disabled or absent.
 The request identity boundary is default-off, observe-only, anonymous, and
 authorized by `AION-155-PA-0003` for `AION-156`.
 
