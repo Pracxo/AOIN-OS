@@ -19,6 +19,10 @@ POST_CLOSEOUT_PROGRAM_STATE = (
     "governed_learning_memory_controlled_local_continual_learning_pilot_"
     "authorized_not_implemented"
 )
+AION228_IMPLEMENTED_PROGRAM_STATE = (
+    "governed_learning_memory_controlled_local_continual_learning_pilot_"
+    "implemented_completed_pending_final_closeout"
+)
 APPLICATION_STATE = (
     "implemented_deterministic_operator_approved_non_factual_in_memory_shadow_only_"
     "pending_closeout"
@@ -280,7 +284,11 @@ def validate_implementation_state(root: Path = REPO_ROOT) -> None:
         if payload.get("program_id") != PROGRAM_ID:
             fail(f"{relative} program id mismatch")
         program_state = payload.get("program_state")
-        if program_state not in {PROGRAM_STATE, POST_CLOSEOUT_PROGRAM_STATE}:
+        if program_state not in {
+            PROGRAM_STATE,
+            POST_CLOSEOUT_PROGRAM_STATE,
+            AION228_IMPLEMENTED_PROGRAM_STATE,
+        }:
             fail(f"{relative} program state mismatch")
         if program_state == PROGRAM_STATE:
             if payload.get("engagement_learning_application_state") != APPLICATION_STATE:
@@ -311,8 +319,21 @@ def validate_implementation_state(root: Path = REPO_ROOT) -> None:
                 fail(f"{relative} AION-227 evaluation pass projection mismatch")
             if payload.get("controlled_local_continual_learning_pilot_authorized") is not True:
                 fail(f"{relative} continual-learning authorization projection mismatch")
-            if payload.get("controlled_local_continual_learning_pilot_implemented") is not False:
+            expected_implemented = program_state == AION228_IMPLEMENTED_PROGRAM_STATE
+            if (
+                payload.get("controlled_local_continual_learning_pilot_implemented")
+                is not expected_implemented
+            ):
                 fail(f"{relative} continual-learning implementation projection mismatch")
+            if expected_implemented:
+                if payload.get("operator_invoked_continual_learning_pilot_available") is not True:
+                    fail(f"{relative} AION-228 operator availability mismatch")
+                if payload.get("deterministic_continual_learning_simulation_available") is not True:
+                    fail(f"{relative} AION-228 deterministic simulation mismatch")
+                if payload.get("controlled_live_pilot_completed") is not True:
+                    fail(f"{relative} AION-228 live pilot completion mismatch")
+                if payload.get("controlled_live_pilot_cycle_count") != 3:
+                    fail(f"{relative} AION-228 live pilot cycle count mismatch")
             closeouts = payload.get("authorization_closeout_records")
             if not isinstance(closeouts, list) or not any(
                 item.get("authorization_transaction_id") == AUTHORIZATION_ID

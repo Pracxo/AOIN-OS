@@ -34,6 +34,7 @@ from scripts.lib.governed_learning_memory_local_persistence_authorization import
     AION224_SOURCE_SCOPE,
     AION223_AUTHORIZATION_ID,
     CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
+    CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
     ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
     IMPLEMENTED_PENDING_CLOSEOUT_STATE,
@@ -53,6 +54,7 @@ implemented_states = {
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
     ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
     CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
+    CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
 }
 for label, payload in (("program", program), ("authorization", auth)):
     if payload["program_state"] not in implemented_states:
@@ -64,7 +66,10 @@ for label, payload in (("program", program), ("authorization", auth)):
     ):
         if payload.get(key) is not True:
             raise SystemExit(f"{label} implementation flag mismatch: {key}")
-    if payload["program_state"] != CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE:
+    if payload["program_state"] not in {
+        CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
+        CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
+    }:
         if payload.get("authorized_source_scope") != AION224_SOURCE_SCOPE:
             raise SystemExit(f"{label} source scope mismatch")
         if payload.get("resource_limits") != AION224_RESOURCE_LIMITS:

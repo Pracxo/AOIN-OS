@@ -1503,6 +1503,8 @@ def is_governed_learning_memory_artifact(name: str) -> bool:
         or name.startswith("operator-console-static/demo-data/governed-learning-memory-")
         or name.startswith("scripts/governed-learning-memory-")
         or name.startswith("scripts/lib/governed_learning_memory_")
+        or name.startswith("services/brain-api/src/aion_brain/contracts/governed_")
+        or name.startswith("services/brain-api/src/aion_brain/governed_learning_memory/")
         or name.startswith("services/brain-api/tests/test_governed_learning_memory_")
     )
 

@@ -59,6 +59,7 @@ implemented_states = {
     "governed_learning_memory_engagement_application_authorized_not_implemented",
     "governed_learning_memory_engagement_application_implemented_shadow_only_pending_closeout",
     "governed_learning_memory_controlled_local_continual_learning_pilot_authorized_not_implemented",
+    "governed_learning_memory_controlled_local_continual_learning_pilot_implemented_completed_pending_final_closeout",
 }
 if state.get("program_state") not in implemented_states:
     raise SystemExit("ERROR: AION-224 implemented state missing")

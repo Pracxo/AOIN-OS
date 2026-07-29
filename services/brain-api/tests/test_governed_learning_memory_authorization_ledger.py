@@ -3,6 +3,7 @@ from __future__ import annotations
 from scripts.lib.governed_learning_memory_local_persistence_authorization import (
     AION221_AUTHORIZATION_ID,
     CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
+    CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
     ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
 )
@@ -25,7 +26,10 @@ def test_authorization_ledger_has_single_active_aion224_authorization() -> None:
     }:
         assert ledger["active_authorizations"] == ["AION-225-GLM-0003"]
         assert len(ledger["records"]) == 3
-    elif ledger["program_state"] == CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE:
+    elif ledger["program_state"] in {
+        CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
+        CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
+    }:
         assert ledger["active_authorizations"] == ["AION-227-GLM-0004"]
         assert len(ledger["records"]) == 4
     else:
@@ -53,6 +57,7 @@ def test_authorization_ledger_has_single_active_aion224_authorization() -> None:
         ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
         ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
         CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
+        CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
     }:
         assert record["authorization_active"] is False
         assert record["authorization_consumed"] is True

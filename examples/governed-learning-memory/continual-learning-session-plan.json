@@ -1,34 +1,18 @@
 {
-  "actual_belief_creation": false,
-  "actual_belief_mutation": false,
   "authorization_transaction_id": "AION-227-GLM-0004",
-  "automatic_approval": false,
-  "automatic_persistence": false,
-  "automatic_promotion": false,
-  "background_execution": false,
-  "cognitive_memory_write": false,
+  "automatic_cycle_continuation": false,
   "cycle_ids": [
-    "cycle-1-evidence-continuity",
-    "cycle-2-shadow-adaptation",
-    "cycle-3-abstention-rollback"
+    "aion-228-live-cycle-001",
+    "aion-228-live-cycle-002",
+    "aion-228-live-cycle-003"
   ],
   "formal_closeout_task": "AION-229",
-  "git_mutation": false,
   "implementation_task": "AION-228",
-  "maximum_cycles": 3,
-  "model_weight_change": false,
   "production_exposure": false,
-  "production_memory_write": false,
-  "production_policy_mutation": false,
-  "production_runtime": false,
   "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
-  "read_only": true,
   "redacted": true,
   "runtime_effect": false,
-  "scheduled_execution": false,
-  "session_plan_id": "AION-228-session-plan-preview",
-  "source_mutation": false,
-  "synthetic": true,
-  "temporary_store_required": true,
-  "temporary_store_retained_after_close": false
+  "schema_version": "aion-glm-continual-learning-session-plan/v1",
+  "session_id": "aion-228-live-session",
+  "session_plan_fingerprint": "7940085cb8fe6c56c2de37f5660fe006db857dfb774601780380307bfe2238ca"
 }

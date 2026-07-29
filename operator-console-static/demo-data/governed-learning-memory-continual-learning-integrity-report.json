@@ -1,0 +1,18 @@
+{
+  "authorization_transaction_id": "AION-227-GLM-0004",
+  "authorization_valid": true,
+  "cleanup_valid": true,
+  "formal_closeout_task": "AION-229",
+  "implementation_task": "AION-228",
+  "integrity_report_fingerprint": "78587c41ed99a3375022dc28be882f72b1a608a0dac7aa900c61f48b2bb37be6",
+  "production_exposure": false,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "receipt_chain_valid": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-continual-learning-integrity/v1",
+  "synthetic": true,
+  "zero_effect_boundary_valid": true
+}

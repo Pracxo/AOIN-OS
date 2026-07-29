@@ -1,0 +1,23 @@
+{
+  "authorization_transaction_id": "AION-227-GLM-0004",
+  "automatic_approval_enabled": false,
+  "automatic_promotion_enabled": false,
+  "background_continual_learning_enabled": false,
+  "belief_mutation_enabled": false,
+  "formal_closeout_task": "AION-229",
+  "implementation_task": "AION-228",
+  "model_training_enabled": false,
+  "pilot_operator_invoked": true,
+  "production_exposure": false,
+  "production_memory_write_enabled": false,
+  "production_policy_mutation_enabled": false,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "retained_pilot_store_enabled": false,
+  "runtime_boundary_fingerprint": "b51585dd504dce997b0e3c0c019eb6f20602fe347a32b52130fad36f0c14c0d7",
+  "runtime_effect": false,
+  "scheduled_continual_learning_enabled": false,
+  "synthetic": true
+}

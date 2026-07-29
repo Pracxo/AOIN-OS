@@ -52,8 +52,12 @@ is_allowed_path() {
     scripts/governed-learning-memory-engagement-application-operator-evaluation-check.sh|\
     scripts/governed-learning-memory-engagement-application-operator-evaluation-no-go-regression.sh|\
     scripts/governed-learning-memory-engagement-application-runtime-hold.sh|\
+    scripts/governed-learning-memory-controlled-local-continual-learning-run.py|\
+    scripts/governed-learning-memory-continual-learning-live-pilot-evidence-check.sh|\
+    scripts/governed-learning-memory-continual-learning-pilot-check.sh|\
     scripts/governed-learning-memory-continual-learning-pilot-authorization-check.sh|\
     scripts/governed-learning-memory-continual-learning-pilot-authorization-no-go-regression.sh|\
+    scripts/governed-learning-memory-continual-learning-pilot-no-go-regression.sh|\
     scripts/governed-learning-memory-continual-learning-pilot-runtime-hold.sh|\
     scripts/governed-learning-memory-program-authorization-check.sh|\
     scripts/governed-learning-memory-program-no-go-regression.sh|\
@@ -118,7 +122,17 @@ aion222_is_scoped_promotion_transaction_compatibility_path() {
     scripts/lib/cognitive_architecture_governance.py|\
     scripts/lib/self_improvement_governance.py|\
     scripts/operator-action-write-path-no-go-regression.sh|\
-    scripts/production-auth-architecture-check.sh)
+    scripts/production-auth-architecture-check.sh|\
+    scripts/production-auth-actor-context-trust-boundary-no-go-regression.sh|\
+    scripts/production-auth-core-stabilization-no-go-regression.sh|\
+    scripts/production-auth-identity-assertion-replay-no-go-regression.sh|\
+    scripts/production-auth-request-identity-no-go-regression.sh|\
+    scripts/production-auth-request-identity-stabilization-no-go-regression.sh|\
+    scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh|\
+    scripts/v02-identity-assertion-replay-protection-authorization-no-go-regression.sh|\
+    scripts/v02-offline-identity-assertion-verification-authorization-no-go-regression.sh|\
+    scripts/v02-production-auth-request-boundary-authorization-no-go-regression.sh|\
+    scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh)
       return 0
       ;;
   esac
@@ -177,6 +191,17 @@ aion226_is_scoped_engagement_application_compatibility_path() {
   return 1
 }
 
+aion228_is_scoped_continual_learning_compatibility_path() {
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/governed_continual_learning.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/__init__.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/continual_learning_*.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 changed_entries() {
   local base
   if base="$(comparison_base)"; then
@@ -204,6 +229,9 @@ while IFS=$'\t' read -r status path extra; do
       continue
     fi
     if aion226_is_scoped_engagement_application_compatibility_path "$changed"; then
+      continue
+    fi
+    if aion228_is_scoped_continual_learning_compatibility_path "$changed"; then
       continue
     fi
     if is_prohibited_path "$changed"; then

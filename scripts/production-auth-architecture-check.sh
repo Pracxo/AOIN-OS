@@ -424,6 +424,13 @@ allowed_aion_226_runtime = {
     "services/brain-api/src/aion_brain/governed_learning_memory/engagement_rollback.py",
     "services/brain-api/src/aion_brain/governed_learning_memory/engagement_shadow_application.py",
 }
+allowed_aion_228_runtime = {
+    "services/brain-api/src/aion_brain/contracts/governed_continual_learning.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/__init__.py",
+}
+allowed_aion_228_prefixes = (
+    "services/brain-api/src/aion_brain/governed_learning_memory/continual_learning_",
+)
 for name in [*changed, *untracked]:
     if name in allowed_runtime_tests:
         continue
@@ -486,6 +493,10 @@ for name in [*changed, *untracked]:
     if name in allowed_aion_222_runtime:
         continue
     if name in allowed_aion_226_runtime:
+        continue
+    if name in allowed_aion_228_runtime:
+        continue
+    if name.startswith(allowed_aion_228_prefixes):
         continue
     if name.startswith(runtime_prefixes):
         raise SystemExit(f"production auth architecture must not change runtime file: {name}")

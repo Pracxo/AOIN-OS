@@ -63,6 +63,38 @@ aion224_is_scoped_governed_learning_memory_local_persistence_path() {
   return 1
 }
 
+aion228_is_scoped_governed_learning_memory_continual_learning_path() {
+  # Exact AION-228 GLM continual-learning pilot implementation, evidence, and
+  # validation paths. AION-228 gates enforce the pilot no-go boundaries.
+  case "$1" in
+    README.md|\
+    AGENTS.md|\
+    docs/project-status.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/visual-brain.md|\
+    docs/governed-learning-memory/*|\
+    docs/release/governed-learning-memory-continual-learning-*|\
+    docs/release/v02-release-readiness-delta.md|\
+    docs/adr/0192-controlled-operator-invoked-local-continual-learning-pilot-composition-and-execution.md|\
+    docs/adr/README.md|\
+    examples/governed-learning-memory/*|\
+    operator-console-static/README.md|\
+    operator-console-static/demo-data/governed-learning-memory-continual-learning-*.json|\
+    scripts/governed-learning-memory-controlled-local-continual-learning-run.py|\
+    scripts/governed-learning-memory-continual-learning-*.sh|\
+    scripts/lib/governed_learning_memory_continual_learning_pilot_authorization.py|\
+    services/brain-api/src/aion_brain/contracts/governed_continual_learning.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/__init__.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/continual_learning_*.py|\
+    services/brain-api/tests/test_governed_learning_memory_*.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 aion151_is_scoped_authorization_path() {
   # Keep these as exact artifact paths. The no-go scanners must never exempt
   # broad directories such as scripts/ or services/brain-api/src/.
@@ -176,6 +208,9 @@ aion151_is_scoped_authorization_path() {
         return 0
       fi
       if aion219_is_scoped_knowledge_intelligence_public_research_pilot_path "$1"; then
+        return 0
+      fi
+      if aion228_is_scoped_governed_learning_memory_continual_learning_path "$1"; then
         return 0
       fi
       return 1
@@ -1299,14 +1334,16 @@ aion151_scan_files_excluding_scoped_authorization() {
       while IFS= read -r file; do
         file="${file#./}"
         if ! aion151_is_scoped_authorization_path "$file" \
-          && ! aion221_is_scoped_governed_learning_memory_path "$file"; then
+          && ! aion221_is_scoped_governed_learning_memory_path "$file" \
+          && ! aion228_is_scoped_governed_learning_memory_continual_learning_path "$file"; then
           printf '%s\n' "$file"
         fi
       done < <(find "$path" -type f -print)
     elif [[ -f "$path" ]]; then
       file="${path#./}"
       if ! aion151_is_scoped_authorization_path "$file" \
-        && ! aion221_is_scoped_governed_learning_memory_path "$file"; then
+        && ! aion221_is_scoped_governed_learning_memory_path "$file" \
+        && ! aion228_is_scoped_governed_learning_memory_continual_learning_path "$file"; then
         printf '%s\n' "$file"
       fi
     fi

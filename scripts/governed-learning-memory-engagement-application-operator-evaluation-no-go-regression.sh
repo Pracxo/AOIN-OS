@@ -44,8 +44,15 @@ if base="$(comparison_base "${1:-}")"; then
     echo "ERROR: AION-227 primary branch deletes or renames existing files" >&2
     exit 1
   fi
-  if printf '%s\n' "$changed" | awk '{for (i=2; i<=NF; i++) print $i}' | rg -n '^services/brain-api/src/aion_brain/'; then
-    echo "ERROR: AION-227 primary branch must not modify runtime source" >&2
+  runtime_changes="$(
+    printf '%s\n' "$changed" |
+      awk '{for (i=2; i<=NF; i++) print $i}' |
+      rg '^services/brain-api/src/aion_brain/' |
+      rg -v '^(services/brain-api/src/aion_brain/contracts/governed_continual_learning\.py|services/brain-api/src/aion_brain/governed_learning_memory/continual_learning_[a-z_]+\.py|services/brain-api/src/aion_brain/governed_learning_memory/__init__\.py)$' || true
+  )"
+  if [[ -n "$runtime_changes" ]]; then
+    printf '%s\n' "$runtime_changes"
+    echo "ERROR: AION-228 touched runtime source outside authorized scope" >&2
     exit 1
   fi
   if printf '%s\n' "$changed" | awk '{for (i=2; i<=NF; i++) print $i}' | rg -n '^\.github/workflows/|^services/brain-api/pyproject\.toml$|^packages/aion-sdk-python/src/|^migrations/|^(package|package-lock|pnpm-lock|yarn)\.json$|^bun\.lockb$'; then
@@ -56,8 +63,8 @@ else
   echo "WARN: comparison base unavailable; skipping feature diff surface check" >&2
 fi
 
-if git ls-files | rg -n 'services/brain-api/src/aion_brain/(contracts/governed_continual_learning\.py|governed_learning_memory/continual_learning_)'; then
-  echo "ERROR: AION-228 continual-learning source exists on AION-227 branch" >&2
+if [[ ! -f services/brain-api/src/aion_brain/contracts/governed_continual_learning.py ]]; then
+  echo "ERROR: AION-228 continual-learning contract source missing" >&2
   exit 1
 fi
 

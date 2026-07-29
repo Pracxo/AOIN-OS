@@ -1,0 +1,15 @@
+{
+  "actual_knowledge_promotion": false,
+  "approval_count": 1,
+  "authorization_transaction_id": "AION-227-GLM-0004",
+  "formal_closeout_task": "AION-229",
+  "implementation_task": "AION-228",
+  "persistent_writes": 0,
+  "production_exposure": false,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "promotion_binding_fingerprint": "adb8457527ddcdc802d8d6acead8f0ff96e72562bf4b22a2792c909d62f889b6",
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-continual-learning-promotion-binding/v1",
+  "status": "dry_run_passed"
+}

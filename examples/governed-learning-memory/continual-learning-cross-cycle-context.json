@@ -1,0 +1,18 @@
+{
+  "authorization_transaction_id": "AION-227-GLM-0004",
+  "completed_cycle_ids": [
+    "aion-228-live-cycle-001",
+    "aion-228-live-cycle-002"
+  ],
+  "context_fingerprint": "ea7792a26f405e2ae9c6f49ca93bbe6076ceac0a1fc53d83426c7d7f2d9377e4",
+  "formal_closeout_task": "AION-229",
+  "implementation_task": "AION-228",
+  "production_exposure": false,
+  "production_memory": false,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-continual-learning-cross-cycle-context/v1",
+  "temporary": true
+}

@@ -7,11 +7,11 @@ from test_governed_learning_memory_contracts import REPO_ROOT
 APPLICATION_STATE = "implemented_deterministic_operator_approved_non_factual_in_memory_shadow_only"
 PROGRAM_STATE = (
     "governed_learning_memory_controlled_local_continual_learning_pilot_"
-    "authorized_not_implemented"
+    "implemented_completed_pending_final_closeout"
 )
 
 
-def test_current_state_marks_engagement_application_authorized_after_local_persistence_closeout():
+def test_current_state_marks_continual_learning_pilot_implemented_pending_closeout():
     ledger = json.loads(
         (REPO_ROOT / "docs/governed-learning-memory/program-ledger.json").read_text(
             encoding="utf-8"
@@ -35,11 +35,14 @@ def test_current_state_marks_engagement_application_authorized_after_local_persi
     assert ledger["operator_invoked_engagement_shadow_application_available"] is True
     assert ledger["engagement_application_operator_evaluation_passed"] is True
     assert ledger["controlled_local_continual_learning_pilot_authorized"] is True
-    assert ledger["controlled_local_continual_learning_pilot_implemented"] is False
-    assert ledger["operator_invoked_continual_learning_pilot_available"] is False
+    assert ledger["controlled_local_continual_learning_pilot_implemented"] is True
+    assert ledger["operator_invoked_continual_learning_pilot_available"] is True
+    assert ledger["deterministic_continual_learning_simulation_available"] is True
+    assert ledger["controlled_live_pilot_completed"] is True
+    assert ledger["controlled_live_pilot_cycle_count"] == 3
 
 
-def test_aion227_current_state_authorizes_aion228_without_implementation():
+def test_aion228_current_state_preserves_aion229_closeout_boundary():
     import json
     from pathlib import Path
 
@@ -53,7 +56,10 @@ def test_aion227_current_state_authorizes_aion228_without_implementation():
     assert program["engagement_learning_application_implemented"] is True
     assert program["operator_invoked_engagement_shadow_application_available"] is True
     assert program["operator_invoked_continual_learning_pilot_authorized"] is True
-    assert program["operator_invoked_continual_learning_pilot_available"] is False
+    assert program["operator_invoked_continual_learning_pilot_available"] is True
+    assert program["controlled_local_continual_learning_pilot_implemented"] is True
+    assert program["controlled_live_pilot_completed"] is True
+    assert program["controlled_live_pilot_cycle_count"] == 3
     assert program["persistent_engagement_overlay_write_enabled"] is False
     assert program["aion_224_store_write_enabled"] is False
     assert program["production_policy_mutation_enabled"] is False

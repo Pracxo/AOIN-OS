@@ -86,7 +86,7 @@ comparison_base() {
 }
 
 aion224_implemented_state() {
-  rg -q '"program_state"[[:space:]]*:[[:space:]]*"(governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout|governed_learning_memory_engagement_application_authorized_not_implemented|governed_learning_memory_engagement_application_implemented_shadow_only_pending_closeout|governed_learning_memory_controlled_local_continual_learning_pilot_authorized_not_implemented)"' \
+  rg -q '"program_state"[[:space:]]*:[[:space:]]*"(governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout|governed_learning_memory_engagement_application_authorized_not_implemented|governed_learning_memory_engagement_application_implemented_shadow_only_pending_closeout|governed_learning_memory_controlled_local_continual_learning_pilot_authorized_not_implemented|governed_learning_memory_controlled_local_continual_learning_pilot_implemented_completed_pending_final_closeout)"' \
     docs/governed-learning-memory/program-ledger.json
 }
 
@@ -124,6 +124,22 @@ is_aion226_path() {
   return 1
 }
 
+is_aion228_path() {
+  case "$1" in
+    docs/adr/0192-controlled-operator-invoked-local-continual-learning-pilot-composition-and-execution.md|\
+    scripts/governed-learning-memory-controlled-local-continual-learning-run.py|\
+    scripts/governed-learning-memory-continual-learning-*.sh|\
+    scripts/lib/governed_learning_memory_continual_learning_pilot_authorization.py|\
+    services/brain-api/src/aion_brain/contracts/governed_continual_learning.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/continual_learning_*.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/__init__.py|\
+    services/brain-api/tests/test_governed_learning_memory_continual_learning_*.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 is_allowed_path() {
   if is_authorized_source "$1"; then
     return 0
@@ -132,6 +148,9 @@ is_allowed_path() {
     return 0
   fi
   if is_aion226_path "$1"; then
+    return 0
+  fi
+  if is_aion228_path "$1"; then
     return 0
   fi
   case "$1" in
@@ -207,6 +226,9 @@ is_prohibited_path() {
     return 1
   fi
   if is_aion226_path "$1"; then
+    return 1
+  fi
+  if is_aion228_path "$1"; then
     return 1
   fi
   case "$1" in

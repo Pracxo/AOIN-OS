@@ -14,6 +14,7 @@ from scripts.lib.governed_learning_memory_local_persistence_operator_evaluation 
     validate_evaluation_report_file,
 )
 from scripts.lib.governed_learning_memory_engagement_application import (
+    AION228_IMPLEMENTED_PROGRAM_STATE,
     APPLICATION_STATE,
     POST_CLOSEOUT_APPLICATION_STATE,
     POST_CLOSEOUT_PROGRAM_STATE,
@@ -114,7 +115,11 @@ def validate_authorization_ledgers(root: Path = REPO_ROOT) -> tuple[dict[str, An
         if payload.get("program_id") != PROGRAM_ID:
             fail(f"{label} program id mismatch")
         program_state = payload.get("program_state")
-        if program_state not in {PROGRAM_STATE, POST_CLOSEOUT_PROGRAM_STATE}:
+        post_closeout_states = {
+            POST_CLOSEOUT_PROGRAM_STATE,
+            AION228_IMPLEMENTED_PROGRAM_STATE,
+        }
+        if program_state not in {PROGRAM_STATE, *post_closeout_states}:
             fail(f"{label} program state mismatch")
         expected = {
             "local_persistence_operator_evaluation_passed": True,
@@ -150,6 +155,7 @@ def validate_authorization_ledgers(root: Path = REPO_ROOT) -> tuple[dict[str, An
                 }
             )
         else:
+            aion228_implemented = program_state == AION228_IMPLEMENTED_PROGRAM_STATE
             expected.update(
                 {
                     "active_glm_implementation_authorization_count": 1,
@@ -161,14 +167,25 @@ def validate_authorization_ledgers(root: Path = REPO_ROOT) -> tuple[dict[str, An
                     "engagement_application_operator_evaluation_id": "AION-GLMPE-003",
                     "engagement_application_operator_evaluation_decision": AION227_PASS_DECISION,
                     "controlled_local_continual_learning_pilot_authorized": True,
-                    "controlled_local_continual_learning_pilot_implemented": False,
-                    "operator_invoked_continual_learning_pilot_available": False,
+                    "controlled_local_continual_learning_pilot_implemented": aion228_implemented,
+                    "operator_invoked_continual_learning_pilot_available": aion228_implemented,
                 }
             )
+            if aion228_implemented:
+                expected.update(
+                    {
+                        "deterministic_continual_learning_simulation_available": True,
+                        "controlled_live_pilot_completed": True,
+                        "controlled_live_pilot_cycle_count": 3,
+                    }
+                )
         for key, value in expected.items():
             if payload.get(key) != value:
                 fail(f"{label} {key} mismatch")
-    if auth.get("program_state") == POST_CLOSEOUT_PROGRAM_STATE:
+    if auth.get("program_state") in {
+        POST_CLOSEOUT_PROGRAM_STATE,
+        AION228_IMPLEMENTED_PROGRAM_STATE,
+    }:
         expected_active_authorizations = [AION227_AUTHORIZATION_ID]
     else:
         expected_active_authorizations = [AION225_AUTHORIZATION_ID]
@@ -222,7 +239,10 @@ def validate_authorization_ledgers(root: Path = REPO_ROOT) -> tuple[dict[str, An
         ),
         "AION-225 authorization",
     )
-    if auth.get("program_state") == POST_CLOSEOUT_PROGRAM_STATE:
+    if auth.get("program_state") in {
+        POST_CLOSEOUT_PROGRAM_STATE,
+        AION228_IMPLEMENTED_PROGRAM_STATE,
+    }:
         if (
             child.get("authorization_active") is not False
             or child.get("authorization_consumed") is not True

@@ -2,6 +2,8 @@
   "active_cognitive_implementation_authorization_count": 0,
   "active_glm_implementation_authorization_count": 1,
   "active_knowledge_implementation_authorization_count": 0,
+  "actual_belief_creation_enabled": false,
+  "actual_belief_mutation_enabled": false,
   "approval_record_id": "AION-227-GLM-0004",
   "authorization_active": true,
   "authorization_consumed": false,
@@ -70,8 +72,16 @@
     "services/brain-api/src/aion_brain/governed_learning_memory/continual_learning_evidence.py",
     "services/brain-api/src/aion_brain/governed_learning_memory/__init__.py"
   ],
+  "automatic_candidate_approval_enabled": false,
+  "automatic_cycle_continuation_enabled": false,
+  "automatic_knowledge_promotion_enabled": false,
+  "background_continual_learning_enabled": false,
   "candidate_id": "operator-approved-controlled-local-continual-learning-pilot-core",
-  "controlled_local_continual_learning_pilot_implemented": false,
+  "cognitive_memory_write_enabled": false,
+  "controlled_live_pilot_completed": true,
+  "controlled_live_pilot_cycle_count": 3,
+  "controlled_local_continual_learning_pilot_implemented": true,
+  "deterministic_continual_learning_simulation_available": true,
   "explicit_approval_record_approval": true,
   "formal_closeout_task": "AION-229",
   "future_authorized_source_scope": [
@@ -89,11 +99,12 @@
     "services/brain-api/src/aion_brain/governed_learning_memory/__init__.py"
   ],
   "future_uninstalled_operator_runner": "scripts/governed-learning-memory-controlled-local-continual-learning-run.py",
+  "git_mutation_enabled": false,
   "implementation_authorization_approved": true,
   "implementation_go_status": true,
   "implementation_no_go_status": false,
   "implementation_task": "AION-228",
-  "operator_invoked_continual_learning_pilot_available": false,
+  "operator_invoked_continual_learning_pilot_available": true,
   "parent_authorization_transaction_id": "AION-225-GLM-0003",
   "parent_closeout_task": "AION-227",
   "parent_evaluation_decision": "ENGAGEMENT_SHADOW_APPLICATION_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_LOCAL_CONTINUAL_LEARNING_PILOT_AUTHORIZATION",
@@ -124,6 +135,9 @@
     "single_actor_persistence_allowed": false,
     "temporary_synthetic_store_only": true
   },
+  "production_exposure": false,
+  "production_memory_write_enabled": false,
+  "production_policy_mutation_enabled": false,
   "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
   "prohibited_capabilities": {
     "actual_belief_creation_enabled": false,
@@ -279,7 +293,9 @@
     "maximum_verified_candidates_per_cycle": 25,
     "maximum_wall_clock_seconds_per_cycle": 1800
   },
+  "retained_pilot_store_enabled": false,
   "runtime_effect": false,
+  "scheduled_continual_learning_enabled": false,
   "shadow_policy": {
     "compose_aion_226_public_apis_only": true,
     "factual_status_mutation_allowed": false,
@@ -290,6 +306,7 @@
     "zero_active_overlays_after_close_required": true
   },
   "sole_active_glm_authorization": true,
+  "source_mutation_enabled": false,
   "state_machine": [
     "drafted",
     "authorized",
