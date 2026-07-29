@@ -129,9 +129,11 @@ required_false = [
 ]
 implemented_state = "governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout"
 engagement_authorized_state = "governed_learning_memory_engagement_application_authorized_not_implemented"
-implemented_states = {implemented_state, engagement_authorized_state}
+engagement_implemented_state = "governed_learning_memory_engagement_application_implemented_shadow_only_pending_closeout"
+engagement_states = {engagement_authorized_state, engagement_implemented_state}
+implemented_states = {implemented_state, *engagement_states}
 for label, payload in (("program", program), ("authorization", auth)):
-    if payload.get("program_state") == engagement_authorized_state:
+    if payload.get("program_state") in engagement_states:
         if payload["authorization_transaction_id"] != "AION-225-GLM-0003":
             raise SystemExit(f"{label} current authorization mismatch")
         if payload["active_glm_implementation_task"] != "AION-226":

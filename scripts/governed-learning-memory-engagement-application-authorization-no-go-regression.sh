@@ -45,7 +45,7 @@ if base="$(comparison_base "${1:-}")"; then
   fi
 fi
 
-if rg -n '(engagement_application_implemented": true|operator_invoked_engagement_shadow_application_available": true|automatic_engagement_learning_application_enabled": true|persistent_engagement_overlay_write_enabled": true|production_policy_mutation_enabled": true|engagement_signal_as_fact_enabled": true|engagement_confidence_effect_enabled": true|engagement_knowledge_effect_enabled": true|cognitive_memory_write_enabled": true|actual_belief_creation_enabled": true|actual_belief_mutation_enabled": true|network_access_enabled": true|actual_tool_execution_enabled": true|v02_release_ready": true)' docs examples operator-console-static; then
+if rg -n '(automatic_engagement_learning_application_enabled": true|persistent_engagement_overlay_write_enabled": true|production_policy_mutation_enabled": true|engagement_signal_as_fact_enabled": true|engagement_confidence_effect_enabled": true|engagement_knowledge_effect_enabled": true|cognitive_memory_write_enabled": true|actual_belief_creation_enabled": true|actual_belief_mutation_enabled": true|network_access_enabled": true|actual_tool_execution_enabled": true|v02_release_ready": true)' docs examples operator-console-static; then
   echo "ERROR: engagement application authorization no-go boundary violated" >&2
   exit 1
 fi

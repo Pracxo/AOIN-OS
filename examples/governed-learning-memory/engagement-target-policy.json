@@ -1,0 +1,19 @@
+{
+  "bounded_parameter_codes": [
+    "baseline_fallback_required",
+    "candidate_enabled_for_shadow",
+    "review_required"
+  ],
+  "candidate_kind": "clarification_need",
+  "canonical_operation": "require_clarification_review",
+  "persistent_write_authorized": false,
+  "policy_fingerprint": "7b8db242db6836ba81cd5054d701280e8ea871d6193adcb0fdc9d5d5e7382dc5",
+  "production_component_reference_present": false,
+  "production_policy_mutation_authorized": false,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-engagement-target-policy/v1",
+  "target_component_code": "operator-dialogue",
+  "target_policy_code": "clarification-review",
+  "target_policy_id": "target-policy-engagement-learning-d7818da8f5a239d37a317d13b196a1c98c60a5a4cad47a53-v001",
+  "target_scope_fingerprint": "7afffb507e176c51f7476fb57b3eee98a496ae65465a9c2cfeb7d465e7e9fbe7"
+}

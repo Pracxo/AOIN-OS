@@ -1,12 +1,12 @@
 {
-  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
-  "read_only": true,
-  "redacted": true,
-  "redaction_applied": true,
-  "synthetic": true,
   "in_memory_only": true,
   "overlay_id": "engagement-overlay-001",
   "persistent_write_applied": false,
   "production_policy_effect": false,
-  "schema_version": "aion-glm-engagement-overlay-record/v1"
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "schema_version": "aion-glm-engagement-overlay-record/v1",
+  "synthetic": true
 }

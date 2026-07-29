@@ -4,6 +4,7 @@ from scripts.lib.governed_learning_memory_local_persistence_authorization import
     AION221_AUTHORIZATION_ID,
     AION223_AUTHORIZATION_ID,
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+    ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
     PASS_DECISION,
 )
 from test_governed_learning_memory_program_authorization import load_json
@@ -32,7 +33,10 @@ def test_aion221_closeout_is_consumed_expired_and_non_reusable() -> None:
         closed["authorization_closed_by_task"] == "AION-223"
         and closed["promotion_transaction_operator_evaluation_decision"] == PASS_DECISION
     )
-    if auth["program_state"] == ENGAGEMENT_APPLICATION_AUTHORIZED_STATE:
+    if auth["program_state"] in {
+        ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+        ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+    }:
         assert auth["active_authorizations"] == ["AION-225-GLM-0003"]
     else:
         assert auth["active_authorizations"] == [AION223_AUTHORIZATION_ID]

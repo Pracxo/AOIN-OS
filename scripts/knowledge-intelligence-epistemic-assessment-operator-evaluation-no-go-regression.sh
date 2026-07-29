@@ -162,6 +162,23 @@ GLM_PROGRAM_STATE = (
     if GLM_PROGRAM_PATH.exists()
     else ""
 )
+AION226_GLM_STATE = (
+    "governed_learning_memory_engagement_application_implemented_shadow_only_pending_closeout"
+)
+AION226_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/governed_engagement_learning.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/__init__.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_adaptation_identity.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_adaptation_planning.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_application_approval.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_candidate_binding.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_counterfactual_evaluation.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_evidence.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_integrity.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_overlay.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_rollback.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_shadow_application.py",
+}
 
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
     return subprocess.run(args, cwd=ROOT, text=True, capture_output=True, check=check)
@@ -228,6 +245,8 @@ for parts in changed_entries():
         if normalized in AION222_SOURCE:
             continue
         if GLM_PROGRAM_STATE == AION224_GLM_STATE and normalized in AION224_SOURCE:
+            continue
+        if GLM_PROGRAM_STATE == AION226_GLM_STATE and normalized in AION226_SOURCE:
             continue
         if normalized.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")

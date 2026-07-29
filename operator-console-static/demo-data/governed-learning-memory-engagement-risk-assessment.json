@@ -1,0 +1,28 @@
+{
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "record": {
+    "assessed_at": "2026-01-01T00:00:00Z",
+    "assessment_fingerprint": "85dd78cba9a0a741039e0ba25d73d1d085a00ec81145911f26eb9262716eb6ea",
+    "candidate_fingerprint": "4a31ceb6b57f9d32e56839dba9699cb30f256823bdc3327e3f244c0b1a639636",
+    "candidate_id": "engagement-learning-38b92ef152d9934a5ffceb51b5d2b981758bcf16ba7cbc27-v001",
+    "candidate_kind": "retrieval_strategy",
+    "read_only": true,
+    "redacted": true,
+    "required_independent_approvers": 2,
+    "risk_assessment_id": "risk-engagement-learning-38b92ef152d9934a5ffceb51b5d2b981758bcf16ba7cbc27-v001",
+    "risk_class": "elevated",
+    "risk_reason_codes": [
+      "engagement_risk_elevated"
+    ],
+    "runtime_effect": false,
+    "schema_version": "aion-glm-engagement-application-risk/v1",
+    "target_component_code": "retrieval-planning",
+    "target_policy_code": "retrieval-strategy-review"
+  },
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "synthetic": true,
+  "task_id": "AION-226"
+}

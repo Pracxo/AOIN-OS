@@ -1,0 +1,24 @@
+{
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "record": {
+    "conflict_report_id": "engagement-conflict-report",
+    "exact_duplicate_count": 0,
+    "findings": [],
+    "material_conflict_count": 0,
+    "read_only": true,
+    "reason_codes": [
+      "engagement_safety_gate_passed"
+    ],
+    "redacted": true,
+    "report_fingerprint": "72cb0339e579272b2f598c2a229ec68675e26d1cb422ffce16ca5c4e210eb4ff",
+    "runtime_effect": false,
+    "schema_version": "aion-glm-engagement-adaptation-conflict/v1",
+    "unresolved_material_conflicts": false
+  },
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "synthetic": true,
+  "task_id": "AION-226"
+}

@@ -4,6 +4,7 @@ from scripts.lib.governed_learning_memory_local_persistence_authorization import
     AION222_SOURCE_SCOPE,
     AION224_SOURCE_SCOPE,
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+    ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
     IMPLEMENTED_PENDING_CLOSEOUT_STATE,
 )
 from test_governed_learning_memory_program_authorization import REPO_ROOT, SCOPE, load_json
@@ -11,7 +12,11 @@ from test_governed_learning_memory_program_authorization import REPO_ROOT, SCOPE
 
 def test_authorization_scope_and_future_source_scope_are_recorded_only() -> None:
     auth = load_json("docs/governed-learning-memory/authorization-ledger.json")
-    if auth["program_state"] == ENGAGEMENT_APPLICATION_AUTHORIZED_STATE:
+    engagement_states = {
+        ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+        ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+    }
+    if auth["program_state"] in engagement_states:
         record = next(
             item
             for item in auth["records"]
@@ -28,6 +33,7 @@ def test_authorization_scope_and_future_source_scope_are_recorded_only() -> None
     implemented = auth["program_state"] in {
         IMPLEMENTED_PENDING_CLOSEOUT_STATE,
         ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+        ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
     }
     for relative in AION224_SOURCE_SCOPE:
         if relative.endswith("__init__.py"):

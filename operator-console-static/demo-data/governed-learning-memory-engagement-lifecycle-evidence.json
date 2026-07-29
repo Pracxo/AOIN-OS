@@ -1,0 +1,25 @@
+{
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "record": {
+    "candidate_fingerprint": "4a31ceb6b57f9d32e56839dba9699cb30f256823bdc3327e3f244c0b1a639636",
+    "candidate_version": 1,
+    "externally_supplied": true,
+    "learning_candidate_id": "engagement-learning-38b92ef152d9934a5ffceb51b5d2b981758bcf16ba7cbc27-v001",
+    "lifecycle_evidence_id": "lifecycle-engagement-learning-38b92ef152d9934a5ffceb51b5d2b981758bcf16ba7cbc27-v001",
+    "lifecycle_fingerprint": "53eae6a80edb552e784b5d95016289f8b7688ba838a53df00a95c0be6a4835dc",
+    "lifecycle_status": "proposed",
+    "observed_at": "2026-01-01T00:00:00Z",
+    "read_only": true,
+    "redacted": true,
+    "retraction_record_fingerprint": null,
+    "schema_version": "aion-glm-engagement-candidate-lifecycle/v1",
+    "supersedes_candidate_id": null,
+    "valid_until": "2026-01-01T00:30:00Z"
+  },
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "synthetic": true,
+  "task_id": "AION-226"
+}

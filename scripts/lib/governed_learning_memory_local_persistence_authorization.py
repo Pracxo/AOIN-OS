@@ -24,6 +24,9 @@ IMPLEMENTED_PENDING_CLOSEOUT_STATE = (
 ENGAGEMENT_APPLICATION_AUTHORIZED_STATE = (
     "governed_learning_memory_engagement_application_authorized_not_implemented"
 )
+ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE = (
+    "governed_learning_memory_engagement_application_implemented_shadow_only_pending_closeout"
+)
 AION222_FEATURE_COMMIT = "e415cc397b9aec70f8b3d19285f5fdd315048731"
 AION222_MERGE_COMMIT = "b89c896b8e75955d28fd06d52b5fb66fb8ed5ac0"
 AION222_MERGED_AT = "2026-07-28T09:00:39Z"
@@ -438,9 +441,13 @@ def validate_authorization_ledgers(
             AUTHORIZED_NOT_IMPLEMENTED_STATE,
             IMPLEMENTED_PENDING_CLOSEOUT_STATE,
             ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+            ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
         }:
             _fail(f"{label} state mismatch")
-        if program_state == ENGAGEMENT_APPLICATION_AUTHORIZED_STATE:
+        if program_state in {
+            ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+            ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+        }:
             if (
                 payload.get("active_glm_implementation_authorization_count") != 1
                 or payload.get("active_glm_implementation_authorization")
@@ -511,7 +518,10 @@ def validate_authorization_ledgers(
             != PASS_DECISION
         ):
             _fail(f"{label} decision mismatch")
-    if auth.get("program_state") == ENGAGEMENT_APPLICATION_AUTHORIZED_STATE:
+    if auth.get("program_state") in {
+        ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+        ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+    }:
         expected_active_authorizations = ["AION-225-GLM-0003"]
     else:
         expected_active_authorizations = [AION223_AUTHORIZATION_ID]
@@ -577,7 +587,10 @@ def validate_authorization_ledgers(
         ],
         "new authorization",
     )
-    if auth.get("program_state") == ENGAGEMENT_APPLICATION_AUTHORIZED_STATE:
+    if auth.get("program_state") in {
+        ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+        ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+    }:
         if (
             new.get("authorization_active") is not False
             or new.get("authorization_consumed") is not True
@@ -671,6 +684,7 @@ def validate_no_aion224_source(root: Path = REPO_ROOT) -> None:
     if program_state in {
         IMPLEMENTED_PENDING_CLOSEOUT_STATE,
         ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+        ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
     }:
         missing = [rel for rel in AION224_SOURCE_SCOPE if not (root / rel).exists()]
         if missing:

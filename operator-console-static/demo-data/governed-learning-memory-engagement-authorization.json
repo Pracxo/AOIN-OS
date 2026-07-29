@@ -1,0 +1,63 @@
+{
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "record": {
+    "allowed_target_components": [
+      "domain-expert-mesh",
+      "operator-dialogue",
+      "operator-response",
+      "preference-review",
+      "research-acquisition",
+      "retrieval-planning",
+      "source-registry",
+      "tool-manifest-registry",
+      "tool-verification"
+    ],
+    "approval_created": false,
+    "approval_record_id": "AION-225-GLM-0003",
+    "authorization_transaction_id": "AION-225-GLM-0003",
+    "background_execution": false,
+    "baseline_snapshot_fingerprint": "eee61ad9ecad3aa1c08ef95d973f20f9de1110be8efe60d762610f2340e0e71c",
+    "candidate_fingerprints": [
+      "0f86410d310530d92fb5e518ecbba53b54bb064e037e7223fa1fae7dea741e7c",
+      "20c55869e99c86bcd1daaa8f7706b80f69f3f2e9e79b0dd42c07580aa8d949eb",
+      "4a31ceb6b57f9d32e56839dba9699cb30f256823bdc3327e3f244c0b1a639636",
+      "569982f005a3793a62cb1664ad7eef346d8b5520d8dedfb151dc3d1b183085ba",
+      "7c48595b06d157d88ccff39a4c42fdc60f1b35584de0d3d95065baca7a58815f",
+      "9ade8974f989f674d70181064fac7cd28aae742cc26d06cc737e0624ca476871",
+      "b3eaa508638ab491df9ede5ce9a149fd02e48938cde0f4c2eef97023e74b4833",
+      "b8c1477a56d6d823d39fe60ffff9f3c68e41ef4010def442fd40e3462fbcf197",
+      "fee5a2e6786be48107d3131f08c527f2bd13a9c1463eb0e970d536d0403eeaa5"
+    ],
+    "candidate_ids": [
+      "engagement-learning-38b92ef152d9934a5ffceb51b5d2b981758bcf16ba7cbc27-v001",
+      "engagement-learning-4a77815b5cae59b6ff089b85c765f219318503b77f0ff7d6-v001",
+      "engagement-learning-96e5e0888c16892429032f9126986fc8b76e8a98010d516f-v001",
+      "engagement-learning-9788302b686f41bc1581e9882b059ea163ab9d49ce8fe5f3-v001",
+      "engagement-learning-98ad8e19f4a91b37a1562f09c09d72dd23edc57cb957f59e-v001",
+      "engagement-learning-a5fa86cebf13dd2e837175c461783c11b297939a279bec52-v001",
+      "engagement-learning-c557733c67864c4506c0e250b58695aa6877b74754c6fa0a-v001",
+      "engagement-learning-d7818da8f5a239d37a317d13b196a1c98c60a5a4cad47a53-v001",
+      "engagement-learning-df7afa003101ff00a9e120d7180cc771b6bc51e71d999246-v001"
+    ],
+    "created_at": "2026-01-01T00:00:00Z",
+    "envelope_fingerprint": "1ac9f1c274e75c12bd69eb5102a2cd40714ffc6dd959c2b012126faa86c5bb7c",
+    "expires_at": "2026-01-01T00:30:00Z",
+    "fixture_fingerprint": "f4c50e6f5d90f0fc3f988dc91028ff65b2934796244e29ea512f6bcd485e111f",
+    "mode": "deterministic_simulation",
+    "operator_identity_fingerprint": "87e749ddc907967fe383fb2779c25b2261c41805cd9bf3a4c622081216d73c1d",
+    "operator_invoked": true,
+    "overlay_snapshot_fingerprint": "b2ead5f8ea5c0dd3b290db47b0254daee043066b8a729a6ca72c795a9a135b66",
+    "persistent_overlay": false,
+    "production_application": false,
+    "runtime_effect": false,
+    "scheduled_execution": false,
+    "schema_version": "aion-glm-engagement-application-authorization/v1",
+    "shadow_session_id": "shadow-session-aion-226-pilot"
+  },
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "synthetic": true,
+  "task_id": "AION-226"
+}

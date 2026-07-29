@@ -1,7 +1,59 @@
 {
-  "in_memory_only": true,
-  "overlay_id": "engagement-overlay-001",
+  "adaptation_identity_id": "engagement-adaptation-retrieval_strategy-587718545aa55fa0-e9d5a5769350cf66",
+  "adaptation_version": 1,
+  "aion_224_store_write_applied": false,
+  "approval_bundle_fingerprint": "3e209141854a25b1258318f2b09a77ab90f532c57caad4c8166b12d1d81d33ca",
+  "baseline_snapshot_fingerprint": "eee61ad9ecad3aa1c08ef95d973f20f9de1110be8efe60d762610f2340e0e71c",
+  "belief_effect": false,
+  "candidate_fingerprint": "4a31ceb6b57f9d32e56839dba9699cb30f256823bdc3327e3f244c0b1a639636",
+  "candidate_id": "engagement-learning-38b92ef152d9934a5ffceb51b5d2b981758bcf16ba7cbc27-v001",
+  "candidate_kind": "retrieval_strategy",
+  "citation_coverage_effect": false,
+  "cognitive_memory_effect": false,
+  "confidence_effect": false,
+  "contradiction_resolution_effect": false,
+  "effective_from": "2026-01-01T00:00:00Z",
+  "expires_at": "2026-01-01T00:30:00Z",
+  "factual_effect": false,
+  "fixture_fingerprint": "f4c50e6f5d90f0fc3f988dc91028ff65b2934796244e29ea512f6bcd485e111f",
+  "freshness_effect": false,
+  "knowledge_effect": false,
+  "model_weight_effect": false,
+  "overlay_fingerprint": "d8a2cb8a7dbd3a352d47f53d85ddb106078a2c1772cca3d7555301c45dd3d462",
+  "overlay_record_id": "overlay-engagement-learning-38b92ef152d9934a5ffceb51b5d2b981758bcf16ba7cbc27-v001",
   "persistent_write_applied": false,
   "production_policy_effect": false,
-  "schema_version": "aion-glm-engagement-overlay-record/v1"
+  "provenance_effect": false,
+  "reason_codes": [
+    "engagement_overlay_planned"
+  ],
+  "risk_assessment_fingerprint": "85dd78cba9a0a741039e0ba25d73d1d085a00ec81145911f26eb9262716eb6ea",
+  "rollback_plan_fingerprint": "00901e5e74f18daddd24cdcb82c0ff038eb9bca9a4bddf7b8d26a4b2098e3782",
+  "runtime_effect": false,
+  "schema_version": "aion-glm-engagement-overlay-record/v1",
+  "shadow_session_id": "shadow-session-aion-226-pilot",
+  "signal_fingerprints": [
+    "f6cde5cefe029e8b3308ccffed64b780cf4c969f0d554bf9023ef0f292ff778f"
+  ],
+  "source_independence_effect": false,
+  "status": "active_shadow",
+  "target_policy": {
+    "bounded_parameter_codes": [
+      "baseline_fallback_required",
+      "candidate_enabled_for_shadow",
+      "review_required"
+    ],
+    "candidate_kind": "retrieval_strategy",
+    "canonical_operation": "select_retrieval_strategy_candidate",
+    "persistent_write_authorized": false,
+    "policy_fingerprint": "da0c4c242e90b55027804966efff2d97f3dabd0aac2808814fe62ca25183bc45",
+    "production_component_reference_present": false,
+    "production_policy_mutation_authorized": false,
+    "runtime_effect": false,
+    "schema_version": "aion-glm-engagement-target-policy/v1",
+    "target_component_code": "retrieval-planning",
+    "target_policy_code": "retrieval-strategy-review",
+    "target_policy_id": "target-policy-engagement-learning-38b92ef152d9934a5ffceb51b5d2b981758bcf16ba7cbc27-v001",
+    "target_scope_fingerprint": "34fc1711edd7ffa0a1f68737b7b5d7e1d75ad400311d457101c2762d84115597"
+  }
 }

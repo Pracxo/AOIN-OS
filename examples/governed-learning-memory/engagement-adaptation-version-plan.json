@@ -1,7 +1,28 @@
 {
-  "adaptation_identity_id": "engagement-adaptation-001",
-  "rollback_available": true,
-  "schema_version": "aion-glm-engagement-adaptation-version-plan/v1",
-  "supersedes_version": null,
-  "version_number": 1
+  "adaptation_identity_id": "engagement-adaptation-clarification_need-f2c1abf1e91d5128-e9d5a5769350cf66",
+  "append_only": true,
+  "approval_bundle_fingerprint": "6b051581f904fbdf14a5d8ef8b93eb79db07381b39b6107d8297e5fa1f404c79",
+  "candidate_fingerprint": "7c48595b06d157d88ccff39a4c42fdc60f1b35584de0d3d95065baca7a58815f",
+  "candidate_id": "engagement-learning-d7818da8f5a239d37a317d13b196a1c98c60a5a4cad47a53-v001",
+  "candidate_version": 1,
+  "canonical_operation": "require_clarification_review",
+  "disposition": "initial_version_planned",
+  "effective_from": "2026-01-01T00:00:00Z",
+  "expires_at": "2026-01-01T00:30:00Z",
+  "historical_versions_preserved": true,
+  "persistent_version_created": false,
+  "planned_version_number": 1,
+  "previous_version_id": null,
+  "reason_codes": [
+    "engagement_version_initial_planned",
+    "engagement_expiry_valid"
+  ],
+  "retracts_version_id": null,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-engagement-adaptation-version/v1",
+  "supersedes_version_id": null,
+  "target_component_code": "operator-dialogue",
+  "target_policy_code": "clarification-review",
+  "version_plan_fingerprint": "0776ea4f9506e404f6d41fae809838c79f32c38bd8e5b60f11e0bf772bdb0692",
+  "version_plan_id": "version-plan-engagement-learning-d7818da8f5a239d37a317d13b196a1c98c60a5a4cad47a53-v001"
 }

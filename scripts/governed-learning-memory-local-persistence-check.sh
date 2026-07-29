@@ -33,6 +33,7 @@ from scripts.lib.governed_learning_memory_local_persistence_authorization import
     AION224_RESOURCE_LIMITS,
     AION224_SOURCE_SCOPE,
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+    ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
     IMPLEMENTED_PENDING_CLOSEOUT_STATE,
     validate_authorization_ledgers,
     validate_delivery_reconciliation,
@@ -48,6 +49,7 @@ validate_evaluation_report(root)
 implemented_states = {
     IMPLEMENTED_PENDING_CLOSEOUT_STATE,
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+    ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
 }
 for label, payload in (("program", program), ("authorization", auth)):
     if payload["program_state"] not in implemented_states:
