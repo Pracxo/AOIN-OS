@@ -1,0 +1,20 @@
+{
+  "application_result_id": "engagement-application-result-001",
+  "belief_effect": false,
+  "candidate_is_non_factual": true,
+  "citation_coverage_effect": false,
+  "cognitive_memory_effect": false,
+  "confidence_effect": false,
+  "contradiction_resolution_effect": false,
+  "factual_effect": false,
+  "freshness_effect": false,
+  "knowledge_effect": false,
+  "model_weight_effect": false,
+  "operator_review_required": true,
+  "persistent_write_applied": false,
+  "production_policy_effect": false,
+  "provenance_effect": false,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-engagement-application-result/v1",
+  "source_independence_effect": false
+}

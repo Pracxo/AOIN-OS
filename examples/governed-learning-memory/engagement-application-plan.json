@@ -1,0 +1,7 @@
+{
+  "application_plan_id": "engagement-application-plan-001",
+  "operator_review_required": true,
+  "persistent_write_planned": false,
+  "schema_version": "aion-glm-engagement-application-plan/v1",
+  "shadow_session_only": true
+}

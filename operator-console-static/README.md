@@ -1419,3 +1419,7 @@ State after AION-224:
 AION-223-GLM-0002 remains active, unconsumed, unexpired, non-reusable, and pending AION-225 formal closeout. AION-226 remains unapproved.
 
 <!-- AION-224-IMPLEMENTATION-UPDATE:END -->
+
+## AION-225 Local Persistence Evaluation
+
+AION-225 adds read-only demo data for the local persistence operator evaluation and engagement-application authorization. The static console renders redacted JSON only; it creates no overlay, no persistent store, no production policy mutation, no memory write, no belief mutation, no network call, and no runtime activation.

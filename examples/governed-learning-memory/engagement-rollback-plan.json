@@ -1,0 +1,6 @@
+{
+  "maximum_rollback_steps": 50,
+  "production_rollback_required": false,
+  "rollback_plan_id": "engagement-rollback-001",
+  "schema_version": "aion-glm-engagement-rollback-plan/v1"
+}

@@ -1,0 +1,8 @@
+{
+  "approval_bundle_id": "engagement-approval-bundle-001",
+  "approval_status": "valid",
+  "independent_approver_count": 2,
+  "runtime_created_approvals": 0,
+  "schema_version": "aion-glm-engagement-application-approval-bundle/v1",
+  "separation_of_duties_passed": true
+}

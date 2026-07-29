@@ -2,21 +2,19 @@
 
 ## Current Release Baseline
 
-The frozen release baseline remains `AION Brain v0.1.0` at the immutable
-`aion-v0.1.0` tag. The repository carries v0.2 work in progress, but no v0.2
-tag or release exists.
+The frozen release baseline remains `AION Brain v0.1.0` at the immutable `aion-v0.1.0` tag. No v0.2 tag or release exists and `v02_release_ready=false`.
 
 ## Current Main Milestone
 
-## AION-223 Promotion Evaluation and Local Persistence Authorization
+Current milestone: AION-225 local persistence operator evaluation complete and engagement-learning application authorized.
 
-Current milestone: AION-223 promotion transaction operator evaluation complete and local append-only knowledge persistence authorized.
+Current stage: The operator-approved local append-only knowledge and projection store is implemented and passed deterministic operator evaluation. The non-factual engagement-learning shadow-application plane is authorized and unimplemented.
 
-Current stage: The deterministic approval-bound promotion-planning core is implemented and passed read-only operator evaluation. The isolated local append-only knowledge and cognitive-memory projection store is authorized and not implemented.
+Required flags: `local_append_only_knowledge_store_implemented=true`, `local_persistence_operator_evaluation_passed=true`, `engagement_learning_application_authorized=true`, `engagement_learning_application_implemented=false`, `operator_invoked_engagement_shadow_application_authorized=true`, `operator_invoked_engagement_shadow_application_available=false`, `automatic_engagement_learning_application_enabled=false`, `persistent_engagement_overlay_write_enabled=false`, `production_policy_mutation_enabled=false`, `engagement_signal_as_fact_enabled=false`, `engagement_confidence_effect_enabled=false`, `engagement_knowledge_effect_enabled=false`, `cognitive_memory_write_enabled=false`, `actual_belief_creation_enabled=false`, `actual_belief_mutation_enabled=false`, `active_glm_implementation_authorization=AION-225-GLM-0003`, `active_glm_implementation_task=AION-226`, `formal_closeout_task=AION-227`.
 
-Required flags: `promotion_transaction_core_implemented=true`, `promotion_transaction_operator_evaluation_passed=true`, `local_append_only_knowledge_store_authorized=true`, `local_append_only_knowledge_store_implemented=false`, `operator_invoked_local_persistence_authorized=true`, `operator_invoked_local_persistence_available=false`, `general_persistent_knowledge_write_enabled=false`, `background_persistent_knowledge_write_enabled=false`, `production_persistent_knowledge_write_enabled=false`, `automatic_knowledge_promotion_enabled=false`, `actual_belief_creation_enabled=false`, `actual_belief_mutation_enabled=false`, `active_glm_implementation_authorization=AION-223-GLM-0002`, `active_glm_implementation_task=AION-224`, `formal_closeout_task=AION-225`.
+The local store remains isolated. Persisted knowledge remains evidence-bound. Engagement candidates remain non-factual. Engagement approval does not prove truth. AION-226 may implement in-memory shadow overlays only. AION-226 may not mutate production policy, persist overlays, alter stored knowledge confidence, write cognitive memory, or mutate beliefs. AION-227 is the next evaluation task after AION-226. AION-228 remains unapproved.
 
-Candidate eligibility is not factual truth. Approval is not factual proof. A dry-run result is not persistence. AION-224 may implement an isolated local store only. Every real persistence transaction will require a new dual approval. The future store remains separate from production memory. Belief projections remain candidate records. Background and automatic persistence remain disabled. AION-225 is the next evaluation task after AION-224. AION-226 remains unapproved.
+## Historical Status
 
 ## AION-220 Final Knowledge Intelligence Program Closeout
 

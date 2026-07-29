@@ -1,0 +1,14 @@
+{
+  "candidate_fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "candidate_id": "engagement-candidate-research-gap-001",
+  "candidate_is_non_factual": true,
+  "candidate_kind": "research_gap",
+  "candidate_version": 1,
+  "confidence_effect": false,
+  "factual_effect": false,
+  "knowledge_effect": false,
+  "schema_version": "aion-glm-engagement-candidate-binding/v1",
+  "source_independence_effect": false,
+  "target_component": "research-acquisition",
+  "target_policy": "research-gap-review"
+}

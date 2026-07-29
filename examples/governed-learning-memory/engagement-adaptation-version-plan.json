@@ -1,0 +1,7 @@
+{
+  "adaptation_identity_id": "engagement-adaptation-001",
+  "rollback_available": true,
+  "schema_version": "aion-glm-engagement-adaptation-version-plan/v1",
+  "supersedes_version": null,
+  "version_number": 1
+}

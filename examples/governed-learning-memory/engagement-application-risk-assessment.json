@@ -1,0 +1,7 @@
+{
+  "candidate_kind": "retrieval_strategy",
+  "minimum_independent_approvers": 2,
+  "production_policy_mutation_allowed": false,
+  "risk_class": "elevated",
+  "schema_version": "aion-glm-engagement-risk-assessment/v1"
+}

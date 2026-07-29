@@ -1,0 +1,13 @@
+{
+  "action_type": "governed_learning_memory.apply_engagement_shadow_overlay",
+  "approval_evidence_id": "engagement-approval-evidence-001",
+  "approval_scope": "governed-learning-memory:engagement-shadow-application",
+  "approval_unexpired": true,
+  "approval_unrevoked": true,
+  "baseline_binding_exact": true,
+  "candidate_binding_exact": true,
+  "overlay_binding_exact": true,
+  "production_application_authorized": false,
+  "resource_type": "engagement_learning_candidate",
+  "schema_version": "aion-glm-engagement-application-approval-evidence/v1"
+}

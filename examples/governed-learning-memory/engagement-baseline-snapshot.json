@@ -1,0 +1,6 @@
+{
+  "baseline_snapshot_id": "engagement-baseline-001",
+  "immutable": true,
+  "production_mutation": false,
+  "schema_version": "aion-glm-engagement-baseline-snapshot/v1"
+}

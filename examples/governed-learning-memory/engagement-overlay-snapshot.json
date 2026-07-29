@@ -1,0 +1,7 @@
+{
+  "expires": true,
+  "immutable": true,
+  "overlay_snapshot_id": "engagement-overlay-snapshot-001",
+  "persistent_write_applied": false,
+  "schema_version": "aion-glm-engagement-overlay-snapshot/v1"
+}

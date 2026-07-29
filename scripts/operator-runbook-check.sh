@@ -67,7 +67,12 @@ for claim in \
   fi
 done
 
-for marker in "sk-" "OPENAI_API_KEY=" "password=" "bearer token" "private_key"; do
+if grep -R -i -E -q '(^|[^[:alnum:]_])sk-[[:alnum:]_-]+' docs/operations docs/release examples/demo; then
+  echo "raw secret example marker found: sk-" >&2
+  exit 1
+fi
+
+for marker in "OPENAI_API_KEY=" "password=" "bearer token" "private_key"; do
   if grep -R -i -F -q "$marker" docs/operations docs/release examples/demo; then
     echo "raw secret example marker found: $marker" >&2
     exit 1

@@ -1,7 +1,7 @@
 {
-  "active_glm_implementation_authorization": "AION-223-GLM-0002",
+  "active_glm_implementation_authorization": "AION-225-GLM-0003",
   "active_glm_implementation_authorization_count": 1,
-  "active_glm_implementation_task": "AION-224",
+  "active_glm_implementation_task": "AION-226",
   "actual_belief_creation_enabled": false,
   "actual_belief_mutation_enabled": false,
   "actual_knowledge_promotion_enabled": false,
@@ -139,13 +139,17 @@
     "task_id": "AION-223"
   },
   "aion_224_delivery": {
-    "authorization_state": "implementation_complete_pending_AION-225_closeout",
+    "authorization_state": "consumed_by_AION-224_closed_by_AION-225",
     "authorization_transaction": "AION-223-GLM-0002",
     "branch": "phase/governed-learning-memory-local-append-only-persistence",
-    "ci_result": "pending",
-    "completion_timestamp": null,
+    "ci_result": "pass",
+    "completion_timestamp": "2026-07-28T18:38:48Z",
     "corrective_prs": [],
-    "feature_commits": [],
+    "evaluation_decision": "LOCAL_APPEND_ONLY_PERSISTENCE_OPERATOR_EVALUATION_PASS_RECOMMEND_ENGAGEMENT_LEARNING_APPLICATION_AUTHORIZATION",
+    "evaluation_id": "AION-GLMPE-002",
+    "feature_commits": [
+      "f44756f4067cd381be1ebf11a6edce1e3bc8133b"
+    ],
     "implementation_summary": {
       "actual_belief_created": false,
       "automatic_promotion_applied": false,
@@ -157,17 +161,52 @@
       "sqlite_application_id": 223224,
       "synthetic_local_persistence_pilot_completed": true
     },
-    "merge_commits": [],
+    "merge_commits": [
+      "c6632a8e4985887f38400052f53f1c2a5d7882ec"
+    ],
     "next_task": "AION-225",
-    "pull_requests": [],
-    "runtime_state": "local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout",
+    "pull_requests": [
+      140
+    ],
+    "runtime_state": "local_append_only_persistence_implemented_operator_invoked_isolated",
     "task_id": "AION-224"
+  },
+  "aion_225_delivery": {
+    "authorization_state": "active_for_AION-226_formal_closeout_AION-227",
+    "authorization_transaction": "AION-225-GLM-0003",
+    "branch": "phase/governed-learning-memory-local-persistence-evaluation-engagement-authorization",
+    "ci_result": "pending",
+    "completion_timestamp": null,
+    "corrective_prs": [],
+    "evaluation_decision": "LOCAL_APPEND_ONLY_PERSISTENCE_OPERATOR_EVALUATION_PASS_RECOMMEND_ENGAGEMENT_LEARNING_APPLICATION_AUTHORIZATION",
+    "evaluation_id": "AION-GLMPE-002",
+    "feature_commits": [],
+    "harness_commit": "1ec76b82a4506919ea6c7a57b67fe10ebfba2612",
+    "merge_commits": [],
+    "next_task": "AION-226",
+    "pull_requests": [],
+    "runtime_state": "engagement_learning_application_authorized_not_implemented",
+    "task_id": "AION-225"
+  },
+  "aion_226_delivery": {
+    "authorization_state": "implementation_in_progress_formal_closeout_AION-227",
+    "authorization_transaction": "AION-225-GLM-0003",
+    "branch": "phase/governed-learning-memory-engagement-shadow-application",
+    "ci_result": "pending",
+    "completion_timestamp": null,
+    "corrective_prs": [],
+    "feature_commits": [],
+    "merge_commits": [],
+    "next_task": "AION-227",
+    "pull_requests": [],
+    "runtime_state": "engagement_learning_application_authorized_not_implemented",
+    "task_id": "AION-226"
   },
   "api_route_enabled": false,
   "application_startup_registration_enabled": false,
   "approval_creation_by_runtime_enabled": false,
   "approval_decision_by_runtime_enabled": false,
-  "approval_record_id": "AION-223-GLM-0002",
+  "approval_record_id": "AION-225-GLM-0003",
   "approval_reuse_for_changed_transaction_enabled": false,
   "arbitrary_sql_execution_enabled": false,
   "authorization_active": true,
@@ -198,14 +237,41 @@
       "evaluation_used_as_persistence_approval": false,
       "promotion_transaction_operator_evaluation_decision": "PROMOTION_TRANSACTION_OPERATOR_EVALUATION_PASS_RECOMMEND_LOCAL_APPEND_ONLY_KNOWLEDGE_PERSISTENCE_AUTHORIZATION",
       "promotion_transaction_operator_evaluation_id": "AION-GLMPE-001"
+    },
+    {
+      "approval_record_id": "AION-223-GLM-0002",
+      "authorization_active": false,
+      "authorization_closed_by_task": "AION-225",
+      "authorization_consumed": true,
+      "authorization_consumed_by_feature_commits": [
+        "f44756f4067cd381be1ebf11a6edce1e3bc8133b"
+      ],
+      "authorization_consumed_by_merge_commits": [
+        "c6632a8e4985887f38400052f53f1c2a5d7882ec"
+      ],
+      "authorization_consumed_by_prs": [
+        140
+      ],
+      "authorization_consumed_by_task": "AION-224",
+      "authorization_expired": true,
+      "authorization_reusable": false,
+      "authorization_transaction_id": "AION-223-GLM-0002",
+      "evaluation_applied_engagement_learning": false,
+      "evaluation_created_actual_belief": false,
+      "evaluation_created_operator_store": false,
+      "evaluation_created_production_memory_write": false,
+      "evaluation_reusable": false,
+      "evaluation_used_as_engagement_application_approval": false,
+      "local_persistence_operator_evaluation_decision": "LOCAL_APPEND_ONLY_PERSISTENCE_OPERATOR_EVALUATION_PASS_RECOMMEND_ENGAGEMENT_LEARNING_APPLICATION_AUTHORIZATION",
+      "local_persistence_operator_evaluation_id": "AION-GLMPE-002"
     }
   ],
   "authorization_consumed": false,
   "authorization_expired": false,
   "authorization_reusable": false,
-  "authorization_scope": "operator-approved-local-append-only-knowledge-version-store-transactional-semantic-episodic-procedural-projection-belief-candidate-record-tamper-evidence-backup-restore-core",
+  "authorization_scope": "engagement-learning-candidate-non-factual-validation-operator-approval-risk-routing-bounded-adaptation-versioning-isolated-in-memory-shadow-overlay-counterfactual-evaluation-rollback-expiry-audit-core",
   "authorization_transaction_approved": true,
-  "authorization_transaction_id": "AION-223-GLM-0002",
+  "authorization_transaction_id": "AION-225-GLM-0003",
   "authorized_capabilities": {
     "append_only_expiry_marker_approved": true,
     "append_only_retraction_marker_approved": true,
@@ -304,7 +370,7 @@
   "belief_repository_write_enabled": false,
   "bounded_exact_queries_available": true,
   "browser_automation_enabled": false,
-  "candidate_id": "operator-approved-local-append-only-knowledge-persistence-core",
+  "candidate_id": "operator-approved-engagement-learning-shadow-application-core",
   "candidate_revalidation_available": true,
   "cognitive_belief_creation_enabled": false,
   "cognitive_belief_mutation_enabled": false,
@@ -319,9 +385,9 @@
     "authorization_consumed": false,
     "authorization_expired": false,
     "authorization_reusable": false,
-    "authorization_transaction_id": "AION-223-GLM-0002",
-    "authorized_task": "AION-224",
-    "formal_closeout_task": "AION-225"
+    "authorization_transaction_id": "AION-225-GLM-0003",
+    "authorized_task": "AION-226",
+    "formal_closeout_task": "AION-227"
   },
   "current_milestone": "AION-224 operator-approved local append-only knowledge and memory-projection persistence implemented",
   "current_stage": "AION-224 operator-approved local append-only knowledge and memory-projection persistence implemented. Persistence remains operator-invoked; every transaction requires new dual approval; promotion-plan approval cannot authorize persistence; the store is separate from production memory; belief records remain candidates; no automatic promotion, background writer, network access, production exposure, AION-226 authorization, or v0.2 release exists.",
@@ -329,12 +395,16 @@
   "database_symlink_enabled": false,
   "engagement_confidence_effect_enabled": false,
   "engagement_factual_effect_enabled": false,
+  "engagement_knowledge_effect_enabled": false,
+  "engagement_learning_application_authorized": true,
+  "engagement_learning_application_implemented": false,
+  "engagement_signal_as_fact_enabled": false,
   "episodic_memory_projection_planning_available": true,
   "episodic_memory_write_enabled": false,
   "existing_memory_repository_write_enabled": false,
   "explicit_approval_record_approval": true,
   "final_planned_task": "AION-229",
-  "formal_closeout_task": "AION-225",
+  "formal_closeout_task": "AION-227",
   "future_authorized_source_scope": [
     "services/brain-api/src/aion_brain/contracts/governed_learning_memory_persistence.py",
     "services/brain-api/src/aion_brain/governed_learning_memory/local_persistence_policy.py",
@@ -451,7 +521,7 @@
   "implementation_authorization_approved": true,
   "implementation_go_status": true,
   "implementation_no_go_status": false,
-  "implementation_task": "AION-224",
+  "implementation_task": "AION-226",
   "in_memory_transaction_journal_available": true,
   "in_place_knowledge_version_update_enabled": false,
   "in_place_projection_update_enabled": false,
@@ -858,14 +928,49 @@
     ],
     "workstream": "governed-learning-memory-local-persistence"
   },
+  "local_persistence_authorization_closeout": {
+    "approval_record_id": "AION-223-GLM-0002",
+    "authorization_active": false,
+    "authorization_closed_by_task": "AION-225",
+    "authorization_consumed": true,
+    "authorization_consumed_by_feature_commits": [
+      "f44756f4067cd381be1ebf11a6edce1e3bc8133b"
+    ],
+    "authorization_consumed_by_merge_commits": [
+      "c6632a8e4985887f38400052f53f1c2a5d7882ec"
+    ],
+    "authorization_consumed_by_prs": [
+      140
+    ],
+    "authorization_consumed_by_task": "AION-224",
+    "authorization_expired": true,
+    "authorization_reusable": false,
+    "authorization_transaction_id": "AION-223-GLM-0002",
+    "evaluation_applied_engagement_learning": false,
+    "evaluation_created_actual_belief": false,
+    "evaluation_created_operator_store": false,
+    "evaluation_created_production_memory_write": false,
+    "evaluation_reusable": false,
+    "evaluation_used_as_engagement_application_approval": false,
+    "local_persistence_operator_evaluation_decision": "LOCAL_APPEND_ONLY_PERSISTENCE_OPERATOR_EVALUATION_PASS_RECOMMEND_ENGAGEMENT_LEARNING_APPLICATION_AUTHORIZATION",
+    "local_persistence_operator_evaluation_id": "AION-GLMPE-002"
+  },
+  "local_persistence_operator_evaluation_decision": "LOCAL_APPEND_ONLY_PERSISTENCE_OPERATOR_EVALUATION_PASS_RECOMMEND_ENGAGEMENT_LEARNING_APPLICATION_AUTHORIZATION",
+  "local_persistence_operator_evaluation_id": "AION-GLMPE-002",
+  "local_persistence_operator_evaluation_passed": true,
   "model_provider_integration_enabled": false,
   "model_weight_training_enabled": false,
   "network_access_enabled": false,
   "new_glm_implementation_authorization_created": true,
   "new_program_created": true,
   "operator_approval_evidence_validation_available": true,
+  "operator_invoked_engagement_shadow_application_authorized": true,
+  "operator_invoked_engagement_shadow_application_available": false,
   "operator_invoked_local_persistence_authorized": true,
   "operator_invoked_local_persistence_available": true,
+  "parent_authorization_transaction_id": "AION-223-GLM-0002",
+  "parent_evaluation_decision": "LOCAL_APPEND_ONLY_PERSISTENCE_OPERATOR_EVALUATION_PASS_RECOMMEND_ENGAGEMENT_LEARNING_APPLICATION_AUTHORIZATION",
+  "parent_evaluation_id": "AION-GLMPE-002",
   "parent_program_ids": [
     "AION-COGNITIVE-ARCHITECTURE-001",
     "AION-KNOWLEDGE-INTELLIGENCE-001",
@@ -894,6 +999,7 @@
       "program_id": "AION-SELF-IMPROVEMENT-001"
     }
   },
+  "persistent_engagement_overlay_write_enabled": false,
   "persistent_knowledge_write_enabled": false,
   "persistent_verified_knowledge_write_enabled": false,
   "prior_authorization_closeout": {
@@ -930,9 +1036,10 @@
   "production_exposure": false,
   "production_memory_repository_write_enabled": false,
   "production_persistent_knowledge_write_enabled": false,
+  "production_policy_mutation_enabled": false,
   "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
   "program_name": "AION Governed Learning and Memory Integration Program",
-  "program_state": "governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout",
+  "program_state": "governed_learning_memory_engagement_application_authorized_not_implemented",
   "prohibited_capabilities": {
     "actual_belief_creation_enabled": false,
     "actual_belief_mutation_enabled": false,
@@ -1113,6 +1220,30 @@
       "runtime_state": "local_append_only_knowledge_persistence_authorized_not_implemented",
       "source_created_by_aion_223": false,
       "task_id": "AION-224"
+    },
+    {
+      "authorization_closed": "AION-223-GLM-0002",
+      "authorization_created": "AION-225-GLM-0003",
+      "belief_mutation_effect": false,
+      "engagement_application_effect": false,
+      "evaluation_decision": "LOCAL_APPEND_ONLY_PERSISTENCE_OPERATOR_EVALUATION_PASS_RECOMMEND_ENGAGEMENT_LEARNING_APPLICATION_AUTHORIZATION",
+      "evaluation_id": "AION-GLMPE-002",
+      "memory_write_effect": false,
+      "production_policy_effect": false,
+      "record_kind": "operator_evaluation_closeout",
+      "runtime_effect": false,
+      "scenario_count": 28,
+      "task_id": "AION-225"
+    },
+    {
+      "authorization_id": "AION-225-GLM-0003",
+      "authorized_task": "AION-226",
+      "formal_closeout_task": "AION-227",
+      "overlay_created_by_aion_225": false,
+      "record_kind": "pending_implementation_authorization",
+      "runtime_state": "engagement_learning_application_authorized_not_implemented",
+      "source_created_by_aion_225": false,
+      "task_id": "AION-226"
     }
   ],
   "resource_limits": {
@@ -1242,5 +1373,5 @@
   "v02_release_created": false,
   "v02_release_ready": false,
   "v02_tag_created": false,
-  "workstream": "governed-learning-memory-local-persistence"
+  "workstream": "governed-learning-memory-engagement-application"
 }

@@ -55,7 +55,7 @@ comparison_base() {
 }
 
 aion224_implemented_state() {
-  rg -q '"program_state"[[:space:]]*:[[:space:]]*"governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout"' \
+  rg -q '"program_state"[[:space:]]*:[[:space:]]*"(governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout|governed_learning_memory_engagement_application_authorized_not_implemented)"' \
     docs/governed-learning-memory/program-ledger.json
 }
 
