@@ -57,6 +57,7 @@ state = json.loads((root / "docs/governed-learning-memory/program-ledger.json").
 implemented_states = {
     "governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout",
     "governed_learning_memory_engagement_application_authorized_not_implemented",
+    "governed_learning_memory_engagement_application_implemented_shadow_only_pending_closeout",
 }
 if state.get("program_state") not in implemented_states:
     raise SystemExit("ERROR: AION-224 implemented state missing")

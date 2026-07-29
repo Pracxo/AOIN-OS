@@ -145,6 +145,31 @@ aion224_is_scoped_local_persistence_compatibility_path() {
   return 1
 }
 
+aion226_is_scoped_engagement_application_compatibility_path() {
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/governed_engagement_learning.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/__init__.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/engagement_adaptation_identity.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/engagement_adaptation_planning.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/engagement_application_approval.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/engagement_candidate_binding.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/engagement_counterfactual_evaluation.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/engagement_evidence.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/engagement_integrity.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/engagement_overlay.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/engagement_rollback.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/engagement_shadow_application.py|\
+    scripts/governed-learning-memory-engagement-application-check.sh|\
+    scripts/governed-learning-memory-engagement-application-no-go-regression.sh|\
+    scripts/governed-learning-memory-engagement-shadow-pilot-evidence-check.sh|\
+    scripts/governed-learning-memory-engagement-shadow-run.py|\
+    scripts/lib/governed_learning_memory_engagement_application.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 changed_entries() {
   local base
   if base="$(comparison_base)"; then
@@ -169,6 +194,9 @@ while IFS=$'\t' read -r status path extra; do
       continue
     fi
     if aion224_is_scoped_local_persistence_compatibility_path "$changed"; then
+      continue
+    fi
+    if aion226_is_scoped_engagement_application_compatibility_path "$changed"; then
       continue
     fi
     if is_prohibited_path "$changed"; then

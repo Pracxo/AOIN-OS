@@ -147,6 +147,24 @@ GLM_PROGRAM_STATE = (
     else ""
 )
 aion224_implemented = GLM_PROGRAM_STATE == AION224_GLM_STATE
+AION226_GLM_STATE = (
+    "governed_learning_memory_engagement_application_implemented_shadow_only_pending_closeout"
+)
+AION226_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/governed_engagement_learning.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/__init__.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_adaptation_identity.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_adaptation_planning.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_application_approval.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_candidate_binding.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_counterfactual_evaluation.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_evidence.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_integrity.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_overlay.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_rollback.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_shadow_application.py",
+}
+aion226_implemented = GLM_PROGRAM_STATE == AION226_GLM_STATE
 
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
     return subprocess.run(args, cwd=ROOT, text=True, capture_output=True, check=check)
@@ -230,6 +248,8 @@ for parts in changed_entries():
             continue
         if aion224_implemented and normalized in AION224_SOURCE:
             continue
+        if aion226_implemented and normalized in AION226_SOURCE:
+            continue
         if any(normalized.startswith(prefix) for prefix in PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")
         if normalized not in ALLOWED_EXACT and not any(
@@ -245,6 +265,8 @@ for relative in sorted(changed_paths):
     if relative in AION219_SOURCE_PATHS:
         continue
     if aion224_implemented and relative in AION224_RUNTIME_PATHS:
+        continue
+    if aion226_implemented and relative in AION226_SOURCE:
         continue
     if relative in AION225_LOCAL_PERSISTENCE_EVALUATION_PATHS:
         continue

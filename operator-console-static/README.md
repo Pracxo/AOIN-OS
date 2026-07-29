@@ -1423,3 +1423,6 @@ AION-223-GLM-0002 remains active, unconsumed, unexpired, non-reusable, and pendi
 ## AION-225 Local Persistence Evaluation
 
 AION-225 adds read-only demo data for the local persistence operator evaluation and engagement-application authorization. The static console renders redacted JSON only; it creates no overlay, no persistent store, no production policy mutation, no memory write, no belief mutation, no network call, and no runtime activation.
+## AION-226 Engagement-Learning Shadow Application
+
+AION-226 implements the AION-225-GLM-0003 authorized deterministic, operator-approved, non-factual engagement-learning shadow application plane. Overlays are in-memory only, apply only inside explicit bounded shadow sessions, expire or roll back before close, and create no persistent overlay, AION-224 store write, production policy mutation, factual or confidence effect, cognitive-memory write, belief mutation, model training, network call, runtime effect, v0.2 tag, or v0.2 release. AION-225-GLM-0003 remains active pending AION-227 closeout; AION-228 remains unapproved and AION-229 remains the final planned GLM closeout.

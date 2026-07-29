@@ -1,0 +1,23 @@
+{
+  "aion_224_store_writes": false,
+  "belief_effect": false,
+  "cognitive_memory_write": false,
+  "confidence_effect": false,
+  "factual_effect": false,
+  "knowledge_effect": false,
+  "model_training": false,
+  "network": false,
+  "operator_invoked_engagement_shadow_application_available": true,
+  "overlay_in_memory_only": true,
+  "persistent_overlay": false,
+  "production_exposure": false,
+  "production_policy_mutation": false,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "source_independence_effect": false,
+  "synthetic": true,
+  "task_id": "AION-226"
+}

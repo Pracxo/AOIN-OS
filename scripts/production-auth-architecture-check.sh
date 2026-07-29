@@ -411,6 +411,19 @@ allowed_aion_222_runtime = {
     "services/brain-api/src/aion_brain/governed_learning_memory/rollback.py",
     "services/brain-api/src/aion_brain/governed_learning_memory/version_planning.py",
 }
+allowed_aion_226_runtime = {
+    "services/brain-api/src/aion_brain/contracts/governed_engagement_learning.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_adaptation_identity.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_adaptation_planning.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_application_approval.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_candidate_binding.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_counterfactual_evaluation.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_evidence.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_integrity.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_overlay.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_rollback.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_shadow_application.py",
+}
 for name in [*changed, *untracked]:
     if name in allowed_runtime_tests:
         continue
@@ -471,6 +484,8 @@ for name in [*changed, *untracked]:
     if name in allowed_aion_211_runtime:
         continue
     if name in allowed_aion_222_runtime:
+        continue
+    if name in allowed_aion_226_runtime:
         continue
     if name.startswith(runtime_prefixes):
         raise SystemExit(f"production auth architecture must not change runtime file: {name}")

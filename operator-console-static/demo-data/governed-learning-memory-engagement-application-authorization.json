@@ -1,8 +1,4 @@
 {
-  "read_only": true,
-  "redacted": true,
-  "redaction_applied": true,
-  "synthetic": true,
   "approval_policy": {
     "accept_existing_approvals_only": true,
     "approval_cannot_authorize_production_application": true,
@@ -211,6 +207,9 @@
     "v02_release_ready": false,
     "v02_tag_created": false
   },
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
   "resource_limits": {
     "maximum_actual_belief_creations": 0,
     "maximum_actual_belief_mutations": 0,
@@ -270,5 +269,6 @@
     "services/brain-api/src/aion_brain/governed_learning_memory/engagement_integrity.py",
     "services/brain-api/src/aion_brain/governed_learning_memory/engagement_evidence.py"
   ],
+  "synthetic": true,
   "workstream": "governed-learning-memory-engagement-application"
 }

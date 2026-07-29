@@ -1,0 +1,21 @@
+{
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "record": {
+    "baseline_value": "0.000000",
+    "candidate_value": "1.000000",
+    "delta": "1.000000",
+    "direction": "higher_is_better",
+    "hard_gate": false,
+    "improved": true,
+    "metric_fingerprint": "8d4cc8f3a713dae04c842f836a6523d22f6cb65df77aa74ab197011a9834b57e",
+    "metric_name": "task_completion",
+    "regressed": false,
+    "schema_version": "aion-glm-engagement-metric-delta/v1"
+  },
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "synthetic": true,
+  "task_id": "AION-226"
+}

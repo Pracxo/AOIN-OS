@@ -1,0 +1,47 @@
+{
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "record": {
+    "baseline_configuration_codes": [
+      "baseline-retained",
+      "shadow-only"
+    ],
+    "baseline_snapshot_id": "baseline-engagement-shadow",
+    "captured_at": "2026-01-01T00:00:00Z",
+    "fixture_fingerprint": "f4c50e6f5d90f0fc3f988dc91028ff65b2934796244e29ea512f6bcd485e111f",
+    "local_knowledge_context_fingerprint": "a8d110e2b4ddf4ff646dfd3fa9c15201dbcd5eb35aea1f2410d0d08b4bf56a3a",
+    "production_reference_present": false,
+    "read_only": true,
+    "redacted": true,
+    "runtime_effect": false,
+    "schema_version": "aion-glm-engagement-baseline-snapshot/v1",
+    "snapshot_fingerprint": "eee61ad9ecad3aa1c08ef95d973f20f9de1110be8efe60d762610f2340e0e71c",
+    "target_component_fingerprints": [
+      "10aa77a0fc0c86fcb3469f14eb47af6286338ffd0f11ca2794fabd89dcbe089e",
+      "44afa7ba9aa8c38efef122b2329f4592b0a75bd4b6356abd0e4270fddb1264f5",
+      "8f9e94709369a8235d972bc27cd5d4547adce67c1134b1509a70fa8c103866d6",
+      "968725453325d38a2d7e23586d7c4177c8118773320f3edda45265e77fa5d5e6",
+      "aa073fbe1c5ce50cae4969985f2f69c4ea89eb7f857e20f9e362dc2a39411eeb",
+      "b49e94007cc0c143f59a0faf57033e1bf0a94b20ac512cddbb6645d2c8b84025",
+      "b63fe6b524b856daea056b2370ba454ab7388491e3568df601e3c41bbe4d4119",
+      "bf027b79d7b64391a7bc5fe8c223012f7f0bef33acb287c05a93e40729a3c796",
+      "eb6df02cb84f86359fb6bc8d05389c765265d45d2a646da5f5a0d66bc3e0ce2d"
+    ],
+    "target_policy_fingerprints": [
+      "18662ccd59df5831f2c8e9ee47e25824d9c2abd0089dbbca718ad1dbde890399",
+      "23d147a344cbda3e7f9d56772e38aca59d33105fb1716b882d36d0c4f95f9f4a",
+      "2c49720c65dddc1028bb2f39cc8b31737b5cfa0355b9873b984e7772d9a7a060",
+      "3976d93226af267a40b482822bfdb6426e916c3e75ce57a2c72d4f4f3a785aea",
+      "5cc067a679d4431c16bfeca5c5af34bdf014c201e55a60b133d3ad05d520ef3a",
+      "6f4b8a94492fc4de379f0cd8dad5394a45cf3a5210350b6d894525a3111dd5a9",
+      "82f3f7239d4ed4d0cb4b8203347877e4f23a2b474c95b25871566b3880133200",
+      "b69bc92966636f727d70dc2a8e275fa881adf97ebf5057ce6fd52b3f92e7ed27",
+      "c12916f1f2c9f2413292920f5e2f36967759459c6db109cbe2f386c0722ad27a"
+    ]
+  },
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "synthetic": true,
+  "task_id": "AION-226"
+}

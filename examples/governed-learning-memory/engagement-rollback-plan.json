@@ -1,6 +1,90 @@
 {
-  "maximum_rollback_steps": 50,
-  "production_rollback_required": false,
-  "rollback_plan_id": "engagement-rollback-001",
-  "schema_version": "aion-glm-engagement-rollback-plan/v1"
+  "baseline_snapshot_fingerprint": "eee61ad9ecad3aa1c08ef95d973f20f9de1110be8efe60d762610f2340e0e71c",
+  "overlay_snapshot_fingerprint": "b2ead5f8ea5c0dd3b290db47b0254daee043066b8a729a6ca72c795a9a135b66",
+  "persistent_write_applied": false,
+  "production_policy_effect": false,
+  "read_only": true,
+  "reason_codes": [
+    "engagement_rollback_valid",
+    "engagement_expiry_valid"
+  ],
+  "redacted": true,
+  "rollback_plan_fingerprint": "c79a34db66f876a25cf8bbd2b01cc23a7455382b83599af8c36cb61215cd2dde",
+  "rollback_plan_id": "rollback-engagement-learning-38b92ef152d9934a5ffceb51b5d2b981758bcf16ba7cbc27-v001",
+  "runtime_effect": false,
+  "schema_version": "aion-glm-engagement-rollback/v1",
+  "shadow_session_id": "shadow-session-aion-226-pilot",
+  "step_count": 7,
+  "steps": [
+    {
+      "operation": "remove_overlay_from_shadow_session",
+      "order": 1,
+      "persistent_write_applied": false,
+      "production_policy_effect": false,
+      "rollback_step_id": "rollback-engagement-learning-38b92ef152d9934a5ffceb51b5d2b981758bcf16ba7cbc27-v001-step-01",
+      "runtime_effect": false,
+      "step_fingerprint": "ba69ab6f2c501b004f59daa0c6e8027da0f05a03f79ed93b8cdccaf2ef314115",
+      "target_reference_id": "overlay-snapshot-shadow-session-aion-226-pilot"
+    },
+    {
+      "operation": "restore_baseline_snapshot",
+      "order": 2,
+      "persistent_write_applied": false,
+      "production_policy_effect": false,
+      "rollback_step_id": "rollback-engagement-learning-38b92ef152d9934a5ffceb51b5d2b981758bcf16ba7cbc27-v001-step-02",
+      "runtime_effect": false,
+      "step_fingerprint": "d8654e890a599676b5ef9fdfd4bc7c94d9f9c383829cd0f92d3ec0cf5e20f735",
+      "target_reference_id": "baseline-engagement-shadow"
+    },
+    {
+      "operation": "invalidate_overlay_snapshot",
+      "order": 3,
+      "persistent_write_applied": false,
+      "production_policy_effect": false,
+      "rollback_step_id": "rollback-engagement-learning-38b92ef152d9934a5ffceb51b5d2b981758bcf16ba7cbc27-v001-step-03",
+      "runtime_effect": false,
+      "step_fingerprint": "bd43a6c9e4c8bbb1a4eb57a694b2c3d238fe1aa682de66720f628002d79e021c",
+      "target_reference_id": "overlay-snapshot-shadow-session-aion-226-pilot"
+    },
+    {
+      "operation": "expire_adaptation_version",
+      "order": 4,
+      "persistent_write_applied": false,
+      "production_policy_effect": false,
+      "rollback_step_id": "rollback-engagement-learning-38b92ef152d9934a5ffceb51b5d2b981758bcf16ba7cbc27-v001-step-04",
+      "runtime_effect": false,
+      "step_fingerprint": "e0412c6e1c9db4e6b47c1d07a548a6ab1444dec720fb595a4d661ec5034f2d77",
+      "target_reference_id": "overlay-snapshot-shadow-session-aion-226-pilot"
+    },
+    {
+      "operation": "preserve_evaluation_evidence",
+      "order": 5,
+      "persistent_write_applied": false,
+      "production_policy_effect": false,
+      "rollback_step_id": "rollback-engagement-learning-38b92ef152d9934a5ffceb51b5d2b981758bcf16ba7cbc27-v001-step-05",
+      "runtime_effect": false,
+      "step_fingerprint": "c48e025935b4b30abbafa393a1fbf1f88df997f74038c072250ca7fafe646d02",
+      "target_reference_id": "overlay-snapshot-shadow-session-aion-226-pilot"
+    },
+    {
+      "operation": "create_operator_review_item",
+      "order": 6,
+      "persistent_write_applied": false,
+      "production_policy_effect": false,
+      "rollback_step_id": "rollback-engagement-learning-38b92ef152d9934a5ffceb51b5d2b981758bcf16ba7cbc27-v001-step-06",
+      "runtime_effect": false,
+      "step_fingerprint": "fa7573a53b7c61f4575ed66971adcc29623babbec39cd2bff95cd752de6b941a",
+      "target_reference_id": "overlay-snapshot-shadow-session-aion-226-pilot"
+    },
+    {
+      "operation": "retain_baseline",
+      "order": 7,
+      "persistent_write_applied": false,
+      "production_policy_effect": false,
+      "rollback_step_id": "rollback-engagement-learning-38b92ef152d9934a5ffceb51b5d2b981758bcf16ba7cbc27-v001-step-07",
+      "runtime_effect": false,
+      "step_fingerprint": "b17df345dcb8f525cbc236a9026a6282a87ac871699761e61c4dbf2378b653c6",
+      "target_reference_id": "overlay-snapshot-shadow-session-aion-226-pilot"
+    }
+  ]
 }

@@ -1,0 +1,43 @@
+{
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "record": {
+    "finding_count": 1,
+    "findings": [
+      {
+        "bounded_count": 0,
+        "finding_fingerprint": "578488c1d09ed8b684ffbb15abe63a689316d14913da3a4d11d30641697b6818",
+        "finding_id": "finding-integrity-result-shadow-session-aion-226-pilot",
+        "fingerprints": [
+          "6fd73fa63256ec3843400e3de3b24084d9a955b2140892bd9f8facf61554f6b7",
+          "b2ead5f8ea5c0dd3b290db47b0254daee043066b8a729a6ca72c795a9a135b66",
+          "eee61ad9ecad3aa1c08ef95d973f20f9de1110be8efe60d762610f2340e0e71c"
+        ],
+        "reason_codes": [
+          "engagement_integrity_passed",
+          "engagement_overlay_rolled_back",
+          "engagement_runtime_disabled"
+        ],
+        "redacted_summary": "AION-226 engagement shadow application result audit",
+        "runtime_effect": false,
+        "safe_ids": [
+          "result-shadow-session-aion-226-pilot",
+          "shadow-session-aion-226-pilot"
+        ],
+        "status": "passed"
+      }
+    ],
+    "integrity_report_id": "integrity-result-shadow-session-aion-226-pilot",
+    "read_only": true,
+    "redacted": true,
+    "report_fingerprint": "da00ff05bf95ac9d43a674925c4241c25ddd3f836cb63f4fb7719290bc03f64f",
+    "runtime_effect": false,
+    "schema_version": "aion-glm-engagement-application-integrity/v1",
+    "status": "passed"
+  },
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "synthetic": true,
+  "task_id": "AION-226"
+}

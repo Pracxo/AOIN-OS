@@ -12,15 +12,23 @@ def load_json(relative: str):
 
 def test_engagement_result_has_no_factual_or_confidence_effects():
     result = load_json("examples/governed-learning-memory/engagement-application-result.json")
-    assert result["candidate_is_non_factual"] is True
+    assert all(
+        item["candidate_is_non_factual"] is True
+        for item in result["operator_review_items"]
+    )
+    assert all(
+        item["factual_effect"] is False
+        and item["confidence_effect"] is False
+        and item["knowledge_effect"] is False
+        and item["production_policy_effect"] is False
+        for item in result["counterfactual_results"]
+    )
     for key in [
-        "factual_effect",
-        "confidence_effect",
-        "knowledge_effect",
-        "source_independence_effect",
-        "cognitive_memory_effect",
-        "belief_effect",
-        "production_policy_effect",
-        "persistent_write_applied",
+        "persistent_engagement_overlay_writes",
+        "aion_224_store_writes",
+        "production_policy_mutations",
+        "cognitive_memory_writes",
+        "actual_belief_creations",
+        "actual_belief_mutations",
     ]:
-        assert result[key] is False
+        assert result[key] == 0

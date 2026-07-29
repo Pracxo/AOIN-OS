@@ -3,6 +3,7 @@ from __future__ import annotations
 from scripts.lib.governed_learning_memory_local_persistence_authorization import (
     AION221_AUTHORIZATION_ID,
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+    ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
 )
 from test_governed_learning_memory_program_authorization import (
     AUTH_ID,
@@ -17,7 +18,10 @@ from test_governed_learning_memory_program_authorization import (
 
 def test_authorization_ledger_has_single_active_aion224_authorization() -> None:
     ledger = load_json("docs/governed-learning-memory/authorization-ledger.json")
-    if ledger["program_state"] == ENGAGEMENT_APPLICATION_AUTHORIZED_STATE:
+    if ledger["program_state"] in {
+        ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+        ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+    }:
         assert ledger["active_authorizations"] == ["AION-225-GLM-0003"]
         assert len(ledger["records"]) == 3
     else:
@@ -41,7 +45,10 @@ def test_authorization_ledger_has_single_active_aion224_authorization() -> None:
     assert record["implementation_task"] == IMPLEMENTATION_TASK
     assert record["formal_closeout_task"] == FORMAL_CLOSEOUT_TASK
     assert record["authorization_scope"] == SCOPE
-    if ledger["program_state"] == ENGAGEMENT_APPLICATION_AUTHORIZED_STATE:
+    if ledger["program_state"] in {
+        ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+        ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+    }:
         assert record["authorization_active"] is False
         assert record["authorization_consumed"] is True
         assert record["authorization_expired"] is True

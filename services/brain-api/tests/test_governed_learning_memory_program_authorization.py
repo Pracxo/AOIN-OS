@@ -11,6 +11,7 @@ from scripts.lib.governed_learning_memory_local_persistence_authorization import
     AION224_TASK,
     AION225_TASK,
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+    ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
     IMPLEMENTED_PENDING_CLOSEOUT_STATE,
     PASS_DECISION,
     PROGRAM_ID,
@@ -40,9 +41,13 @@ def test_aion_223_program_and_authorization_are_exact() -> None:
         assert payload["program_state"] in {
             IMPLEMENTED_PENDING_CLOSEOUT_STATE,
             ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+            ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
         }
         assert payload["active_glm_implementation_authorization_count"] == 1
-        if payload["program_state"] == ENGAGEMENT_APPLICATION_AUTHORIZED_STATE:
+        if payload["program_state"] in {
+            ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+            ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+        }:
             assert payload["active_glm_implementation_authorization"] == "AION-225-GLM-0003"
             assert payload["active_glm_implementation_task"] == "AION-226"
             assert payload["formal_closeout_task"] == "AION-227"
@@ -58,7 +63,10 @@ def test_aion_223_program_and_authorization_are_exact() -> None:
         assert payload["runtime_enabled"] is False
         assert payload["production_persistent_knowledge_write_enabled"] is False
         assert payload["automatic_knowledge_promotion_enabled"] is False
-    if auth["program_state"] == ENGAGEMENT_APPLICATION_AUTHORIZED_STATE:
+    if auth["program_state"] in {
+        ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+        ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+    }:
         assert auth["authorization_transaction_id"] == "AION-225-GLM-0003"
         assert auth["implementation_task"] == "AION-226"
         record = next(

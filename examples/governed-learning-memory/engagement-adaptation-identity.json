@@ -1,6 +1,14 @@
 {
-  "adaptation_fingerprint": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-  "adaptation_identity_id": "engagement-adaptation-001",
-  "deterministic": true,
-  "schema_version": "aion-glm-engagement-adaptation-identity/v1"
+  "adaptation_identity_id": "engagement-adaptation-clarification_need-f2c1abf1e91d5128-e9d5a5769350cf66",
+  "adaptation_scope_fingerprint": "e9d5a5769350cf66273bd5b217fbe361046a4f1455a82acf4a62fbe7f3fdb01c",
+  "candidate_fingerprint": "7c48595b06d157d88ccff39a4c42fdc60f1b35584de0d3d95065baca7a58815f",
+  "candidate_id": "engagement-learning-d7818da8f5a239d37a317d13b196a1c98c60a5a4cad47a53-v001",
+  "candidate_kind": "clarification_need",
+  "canonical_operation": "require_clarification_review",
+  "identity_fingerprint": "836dc0dac7a670d0fa3b0508ae496d1b57c44ef6cacd2cca561e87dff70736b7",
+  "runtime_effect": false,
+  "schema_version": "aion-glm-engagement-adaptation-identity/v1",
+  "subject_scope_fingerprint": "f2c1abf1e91d512888ad05fc1c59220891002f6f81d231f7070a6160ed6962d6",
+  "target_component_code": "operator-dialogue",
+  "target_policy_code": "clarification-review"
 }

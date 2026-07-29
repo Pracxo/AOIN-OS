@@ -4,6 +4,15 @@ import json
 
 from test_governed_learning_memory_contracts import REPO_ROOT
 
+APPLICATION_STATE = (
+    "implemented_deterministic_operator_approved_non_factual_in_memory_shadow_only_"
+    "pending_closeout"
+)
+PROGRAM_STATE = (
+    "governed_learning_memory_engagement_application_implemented_shadow_only_"
+    "pending_closeout"
+)
+
 
 def test_current_state_marks_engagement_application_authorized_after_local_persistence_closeout():
     ledger = json.loads(
@@ -24,24 +33,24 @@ def test_current_state_marks_engagement_application_authorized_after_local_persi
     assert ledger["actual_belief_creation_enabled"] is False
     assert ledger["runtime_enabled"] is False
     assert ledger["engagement_learning_application_authorized"] is True
-    assert ledger["engagement_learning_application_implemented"] is False
-    assert ledger["operator_invoked_engagement_shadow_application_available"] is False
+    assert ledger["engagement_learning_application_implemented"] is True
+    assert ledger["engagement_learning_application_state"] == APPLICATION_STATE
+    assert ledger["operator_invoked_engagement_shadow_application_available"] is True
 
 
-def test_aion225_current_state_authorizes_aion226_without_implementation():
+def test_aion226_current_state_implements_shadow_application_pending_closeout():
     import json
     from pathlib import Path
 
     root = Path(__file__).resolve().parents[3]
     program = json.loads((root / "docs/governed-learning-memory/program-ledger.json").read_text())
-    assert (
-        program["program_state"]
-        == "governed_learning_memory_engagement_application_authorized_not_implemented"
-    )
+    assert program["program_state"] == PROGRAM_STATE
     assert program["active_glm_implementation_authorization"] == "AION-225-GLM-0003"
     assert program["active_glm_implementation_task"] == "AION-226"
     assert program["formal_closeout_task"] == "AION-227"
     assert program["engagement_learning_application_authorized"] is True
-    assert program["engagement_learning_application_implemented"] is False
+    assert program["engagement_learning_application_implemented"] is True
+    assert program["operator_invoked_engagement_shadow_application_available"] is True
     assert program["persistent_engagement_overlay_write_enabled"] is False
+    assert program["aion_224_store_write_enabled"] is False
     assert program["production_policy_mutation_enabled"] is False

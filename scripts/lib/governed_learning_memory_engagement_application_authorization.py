@@ -13,6 +13,11 @@ from scripts.lib.governed_learning_memory_local_persistence_operator_evaluation 
     PASS_DECISION,
     validate_evaluation_report_file,
 )
+from scripts.lib.governed_learning_memory_engagement_application import (
+    APPLICATION_STATE,
+    PROGRAM_STATE,
+    RUNTIME_STATE,
+)
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 PROGRAM_ID = "AION-GOVERNED-LEARNING-MEMORY-001"
@@ -92,7 +97,7 @@ def validate_authorization_ledgers(root: Path = REPO_ROOT) -> tuple[dict[str, An
         if payload.get("program_id") != PROGRAM_ID:
             fail(f"{label} program id mismatch")
         expected = {
-            "program_state": "governed_learning_memory_engagement_application_authorized_not_implemented",
+            "program_state": PROGRAM_STATE,
             "active_glm_implementation_authorization_count": 1,
             "active_glm_implementation_authorization": AION225_AUTHORIZATION_ID,
             "active_glm_implementation_task": "AION-226",
@@ -101,9 +106,10 @@ def validate_authorization_ledgers(root: Path = REPO_ROOT) -> tuple[dict[str, An
             "local_persistence_operator_evaluation_id": "AION-GLMPE-002",
             "local_persistence_operator_evaluation_decision": PASS_DECISION,
             "engagement_learning_application_authorized": True,
-            "engagement_learning_application_implemented": False,
+            "engagement_learning_application_implemented": True,
+            "engagement_learning_application_state": APPLICATION_STATE,
             "operator_invoked_engagement_shadow_application_authorized": True,
-            "operator_invoked_engagement_shadow_application_available": False,
+            "operator_invoked_engagement_shadow_application_available": True,
             "automatic_engagement_learning_application_enabled": False,
             "persistent_engagement_overlay_write_enabled": False,
             "production_policy_mutation_enabled": False,
@@ -196,10 +202,17 @@ def validate_authorization_ledgers(root: Path = REPO_ROOT) -> tuple[dict[str, An
     return program, auth
 
 
-def validate_no_aion226_source(root: Path = REPO_ROOT) -> None:
+def validate_aion226_source_scope(root: Path = REPO_ROOT) -> None:
+    program = load_json("docs/governed-learning-memory/program-ledger.json", root)
+    implemented = program.get("engagement_learning_application_implemented") is True
     for rel in AION226_SOURCE_SCOPE:
-        if (root / rel).exists():
+        exists = (root / rel).exists()
+        if implemented and not exists:
+            fail(f"AION-226 source missing after implementation: {rel}")
+        if not implemented and exists:
             fail(f"AION-226 source exists during AION-225: {rel}")
+    if implemented and program.get("aion_226_delivery", {}).get("runtime_state") != RUNTIME_STATE:
+        fail("AION-226 runtime state mismatch")
 
 
 def validate_engagement_examples(root: Path = REPO_ROOT) -> None:
@@ -207,29 +220,53 @@ def validate_engagement_examples(root: Path = REPO_ROOT) -> None:
     if auth.get("authorization_transaction_id") != AION225_AUTHORIZATION_ID:
         fail("engagement authorization example mismatch")
     result = load_json("examples/governed-learning-memory/engagement-application-result.json", root)
-    require_true(result, ("candidate_is_non_factual", "operator_review_required"), "engagement result")
-    require_false(
-        result,
-        (
-            "factual_effect",
-            "confidence_effect",
-            "knowledge_effect",
-            "source_independence_effect",
-            "cognitive_memory_effect",
-            "belief_effect",
-            "model_weight_effect",
-            "production_policy_effect",
-            "persistent_write_applied",
-            "runtime_effect",
-        ),
-        "engagement result",
+    if result.get("candidate_is_non_factual") is True:
+        require_true(result, ("operator_review_required",), "engagement result")
+        require_false(
+            result,
+            (
+                "factual_effect",
+                "confidence_effect",
+                "knowledge_effect",
+                "source_independence_effect",
+                "cognitive_memory_effect",
+                "belief_effect",
+                "model_weight_effect",
+                "production_policy_effect",
+                "persistent_write_applied",
+                "runtime_effect",
+            ),
+            "engagement result",
+        )
+        return
+    expected_zero = (
+        "persistent_engagement_overlay_writes",
+        "aion_224_store_writes",
+        "production_policy_mutations",
+        "engagement_fact_promotions",
+        "engagement_confidence_effects",
+        "engagement_knowledge_effects",
+        "engagement_source_independence_effects",
+        "cognitive_memory_writes",
+        "actual_belief_creations",
+        "actual_belief_mutations",
+        "automatic_candidate_approvals",
+        "automatic_knowledge_promotions",
+        "model_weight_changes",
     )
+    for key in expected_zero:
+        if result.get(key) != 0:
+            fail(f"engagement result expected zero: {key}")
+    if result.get("runtime_effect") is not False:
+        fail("engagement result runtime effect mismatch")
+    if result.get("active_overlay_records_after_close") != 0:
+        fail("engagement result active overlay close mismatch")
 
 
 def validate_engagement_application_authorization(root: Path = REPO_ROOT) -> None:
     validate_local_persistence_operator_evaluation(root)
     validate_authorization_ledgers(root)
-    validate_no_aion226_source(root)
+    validate_aion226_source_scope(root)
     validate_engagement_examples(root)
 
 

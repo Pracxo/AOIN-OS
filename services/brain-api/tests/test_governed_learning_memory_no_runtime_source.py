@@ -3,10 +3,15 @@ from __future__ import annotations
 import os
 import subprocess
 
+from scripts.lib.governed_learning_memory_engagement_application import (
+    AION226_SOURCE_SCOPE,
+    AION226_SUPPORT_SCOPE,
+)
 from scripts.lib.governed_learning_memory_local_persistence_authorization import (
     AION222_SOURCE_SCOPE,
     AION224_SOURCE_SCOPE,
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+    ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
     IMPLEMENTED_PENDING_CLOSEOUT_STATE,
 )
 from test_governed_learning_memory_program_authorization import REPO_ROOT, load_json
@@ -48,7 +53,18 @@ def _comparison_base() -> str | None:
 def _aion224_implemented() -> bool:
     return (
         load_json("docs/governed-learning-memory/program-ledger.json")["program_state"]
-        in {IMPLEMENTED_PENDING_CLOSEOUT_STATE, ENGAGEMENT_APPLICATION_AUTHORIZED_STATE}
+        in {
+            IMPLEMENTED_PENDING_CLOSEOUT_STATE,
+            ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
+            ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+        }
+    )
+
+
+def _aion226_implemented() -> bool:
+    return (
+        load_json("docs/governed-learning-memory/program-ledger.json")["program_state"]
+        == ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE
     )
 
 
@@ -59,6 +75,8 @@ def test_aion_222_runtime_source_exists_and_aion_224_source_matches_state() -> N
         if relative.endswith("__init__.py"):
             continue
         assert (REPO_ROOT / relative).exists() is _aion224_implemented(), relative
+    for relative in AION226_SOURCE_SCOPE:
+        assert (REPO_ROOT / relative).exists() is _aion226_implemented(), relative
 
 
 def test_aion_223_does_not_change_runtime_source_surface() -> None:
@@ -85,7 +103,13 @@ def test_aion_223_does_not_change_runtime_source_surface() -> None:
         check=True,
     )
     changed = {line for line in diff.stdout.splitlines() if line}
+    allowed = set()
     if _aion224_implemented():
-        assert changed <= set(AION224_SOURCE_SCOPE)
+        allowed.update(AION224_SOURCE_SCOPE)
+    if _aion226_implemented():
+        allowed.update(AION226_SOURCE_SCOPE)
+        allowed.update(AION226_SUPPORT_SCOPE)
+    if allowed:
+        assert changed <= allowed
     else:
         assert changed == set()
