@@ -1,0 +1,232 @@
+{
+  "all_hard_gates_passed": true,
+  "corrective_cycles": 1,
+  "corrective_prs": [
+    143
+  ],
+  "decision": "ENGAGEMENT_SHADOW_APPLICATION_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_LOCAL_CONTINUAL_LEARNING_PILOT_AUTHORIZATION",
+  "evaluation_base_commit": "8156661dae57b6e141f094ee9e6650a710765635",
+  "evaluation_id": "AION-GLMPE-003",
+  "hard_gate_ids": [
+    "aion_226_implementation_gate_passed",
+    "aion_226_no_go_passed",
+    "aion_226_pilot_evidence_gate_passed",
+    "aion_226_runtime_hold_passed",
+    "all_28_scenarios_executed",
+    "append_only_versions_passed",
+    "approval_binding_passed",
+    "authorization_lineage_passed",
+    "baseline_integrity_passed",
+    "conflict_preservation_passed",
+    "duplicate_detection_passed",
+    "expiry_rollback_cleanup_passed",
+    "final_ci_verified",
+    "identity_derivation_passed",
+    "lifecycle_controls_passed",
+    "metric_integrity_passed",
+    "no_v02_tag_or_release",
+    "non_factual_invariants_passed",
+    "overlay_integrity_passed",
+    "policy_gate_priority_passed",
+    "pr_142_verified",
+    "repository_integrity_passed",
+    "resource_budget_passed",
+    "risk_classification_passed",
+    "safety_gate_priority_passed",
+    "separation_of_duties_passed",
+    "target_mapping_passed",
+    "zero_prohibited_effects"
+  ],
+  "read_only": true,
+  "redacted": true,
+  "scenario_count": 28,
+  "scenario_ids": [
+    "aion_226_delivery_and_ci_integrity",
+    "authorization_lineage_and_scope",
+    "synthetic_pilot_evidence_integrity",
+    "candidate_and_signal_binding_integrity",
+    "non_factual_and_zero_effect_invariants",
+    "lifecycle_expiry_supersession_retraction_and_rejection",
+    "fixed_target_mapping_operation_and_risk",
+    "low_risk_single_independent_approval",
+    "elevated_risk_dual_approval_and_separation_of_duties",
+    "exact_approval_binding_and_replay_control",
+    "deterministic_adaptation_identity",
+    "duplicate_idempotency_and_collision_rejection",
+    "material_conflict_preservation",
+    "append_only_in_memory_version_planning",
+    "target_policy_closed_registry",
+    "baseline_and_read_only_knowledge_context",
+    "immutable_overlay_and_copy_on_write_repository",
+    "explicit_shadow_authorization_and_session_bounds",
+    "deterministic_reference_adapter_isolation",
+    "metric_registry_direction_and_delta_integrity",
+    "safety_and_policy_gate_priority",
+    "expiry_rollback_and_session_cleanup",
+    "exact_queries_and_fixture_boundary",
+    "resource_budget_enforcement",
+    "determinism_concurrency_and_performance",
+    "zero_persistence_production_memory_belief_and_network_effects",
+    "repository_and_release_boundary",
+    "controlled_local_continual_learning_pilot_authorization_readiness"
+  ],
+  "scenario_results": [
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "aion_226_delivery_and_ci_integrity"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "authorization_lineage_and_scope"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "synthetic_pilot_evidence_integrity"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "candidate_and_signal_binding_integrity"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "non_factual_and_zero_effect_invariants"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "lifecycle_expiry_supersession_retraction_and_rejection"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "fixed_target_mapping_operation_and_risk"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "low_risk_single_independent_approval"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "elevated_risk_dual_approval_and_separation_of_duties"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "exact_approval_binding_and_replay_control"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "deterministic_adaptation_identity"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "duplicate_idempotency_and_collision_rejection"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "material_conflict_preservation"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "append_only_in_memory_version_planning"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "target_policy_closed_registry"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "baseline_and_read_only_knowledge_context"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "immutable_overlay_and_copy_on_write_repository"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "explicit_shadow_authorization_and_session_bounds"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "deterministic_reference_adapter_isolation"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "metric_registry_direction_and_delta_integrity"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "safety_and_policy_gate_priority"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "expiry_rollback_and_session_cleanup"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "exact_queries_and_fixture_boundary"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "resource_budget_enforcement"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "determinism_concurrency_and_performance"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "zero_persistence_production_memory_belief_and_network_effects"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "repository_and_release_boundary"
+    },
+    {
+      "hard_gate": true,
+      "result": "passed",
+      "scenario_id": "controlled_local_continual_learning_pilot_authorization_readiness"
+    }
+  ],
+  "synthetic": true,
+  "zero_effect_fields": {
+    "active_overlay_records_after_evaluation": 0,
+    "actual_tool_executions": 0,
+    "browser_actions": 0,
+    "connector_calls": 0,
+    "deployments": 0,
+    "dns_resolutions": 0,
+    "git_operations": 0,
+    "model_provider_calls": 0,
+    "model_weight_changes": 0,
+    "network_calls": 0,
+    "search_provider_calls": 0,
+    "shell_executions": 0,
+    "source_mutations": 0,
+    "subprocess_executions": 0
+  }
+}

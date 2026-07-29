@@ -1,0 +1,850 @@
+{
+  "active_overlay_records_after_evaluation": 0,
+  "actual_belief_creations": 0,
+  "actual_belief_mutations": 0,
+  "actual_tool_executions": 0,
+  "aion_224_store_writes": 0,
+  "authorization_closeout": {
+    "approval_record_id": "AION-225-GLM-0003",
+    "authorization_active": false,
+    "authorization_closed_by_task": "AION-227",
+    "authorization_consumed": true,
+    "authorization_consumed_by_feature_commits": [
+      "44bb63222f7ccfb5ce98bbdf3b8e35c08ff4e8b3",
+      "b0c3a7e971097ce658d1b48b52662df31f4c3eb8"
+    ],
+    "authorization_consumed_by_merge_commits": [
+      "8cf9947e1304fc4cd3719867cf80e0819a87700c",
+      "8156661dae57b6e141f094ee9e6650a710765635"
+    ],
+    "authorization_consumed_by_prs": [
+      142,
+      143
+    ],
+    "authorization_consumed_by_task": "AION-226",
+    "authorization_expired": true,
+    "authorization_reusable": false,
+    "authorization_transaction_id": "AION-225-GLM-0003",
+    "engagement_application_operator_evaluation_decision": "ENGAGEMENT_SHADOW_APPLICATION_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_LOCAL_CONTINUAL_LEARNING_PILOT_AUTHORIZATION",
+    "engagement_application_operator_evaluation_id": "AION-GLMPE-003",
+    "evaluation_applied_overlay": false,
+    "evaluation_created_local_store": false,
+    "evaluation_created_network_session": false,
+    "evaluation_created_production_effect": false,
+    "evaluation_reusable": false,
+    "evaluation_used_as_continual_learning_cycle_approval": false
+  },
+  "automatic_candidate_approvals": 0,
+  "automatic_knowledge_promotions": 0,
+  "browser_actions": 0,
+  "closeout_task": "AION-227",
+  "cognitive_memory_writes": 0,
+  "conditional_next_authorization": {
+    "approval_record_id": "AION-227-GLM-0004",
+    "authorization_active": true,
+    "authorization_consumed": false,
+    "authorization_expired": false,
+    "authorization_reusable": false,
+    "authorization_transaction_id": "AION-227-GLM-0004",
+    "candidate_id": "operator-approved-controlled-local-continual-learning-pilot-core",
+    "created_in_repository": true,
+    "formal_closeout_task": "AION-229",
+    "implementation_task": "AION-228",
+    "parent_authorization_transaction_id": "AION-225-GLM-0003",
+    "parent_evaluation_id": "AION-GLMPE-003",
+    "sole_active_glm_authorization": true,
+    "workstream": "governed-learning-memory-controlled-local-continual-learning"
+  },
+  "connector_calls": 0,
+  "decision": "ENGAGEMENT_SHADOW_APPLICATION_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_LOCAL_CONTINUAL_LEARNING_PILOT_AUTHORIZATION",
+  "deployments": 0,
+  "dns_resolutions": 0,
+  "engagement_confidence_effects": 0,
+  "engagement_fact_promotions": 0,
+  "engagement_knowledge_effects": 0,
+  "engagement_source_independence_effects": 0,
+  "evaluation_base_commit": "8156661dae57b6e141f094ee9e6650a710765635",
+  "evaluation_id": "AION-GLMPE-003",
+  "evaluation_passed": true,
+  "evaluation_type": "engagement_shadow_application_operator_evaluation",
+  "failed_scenarios": [],
+  "git_operations": 0,
+  "hard_gate_results": {
+    "aion_226_implementation_gate_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "aion_226_no_go_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "aion_226_pilot_evidence_gate_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "aion_226_runtime_hold_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "all_28_scenarios_executed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "append_only_versions_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "approval_binding_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "authorization_lineage_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "baseline_integrity_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "conflict_preservation_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "duplicate_detection_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "expiry_rollback_cleanup_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "final_ci_verified": {
+      "passed": true,
+      "result": "passed"
+    },
+    "identity_derivation_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "lifecycle_controls_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "metric_integrity_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "no_v02_tag_or_release": {
+      "passed": true,
+      "result": "passed"
+    },
+    "non_factual_invariants_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "overlay_integrity_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "policy_gate_priority_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "pr_142_verified": {
+      "passed": true,
+      "result": "passed"
+    },
+    "repository_integrity_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "resource_budget_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "risk_classification_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "safety_gate_priority_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "separation_of_duties_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "target_mapping_passed": {
+      "passed": true,
+      "result": "passed"
+    },
+    "zero_prohibited_effects": {
+      "passed": true,
+      "result": "passed"
+    }
+  },
+  "implementation_feature_commits": [
+    "44bb63222f7ccfb5ce98bbdf3b8e35c08ff4e8b3",
+    "b0c3a7e971097ce658d1b48b52662df31f4c3eb8"
+  ],
+  "implementation_merge_commits": [
+    "8cf9947e1304fc4cd3719867cf80e0819a87700c",
+    "8156661dae57b6e141f094ee9e6650a710765635"
+  ],
+  "implementation_prs": [
+    142,
+    143
+  ],
+  "implementation_task": "AION-226",
+  "model_provider_calls": 0,
+  "model_weight_changes": 0,
+  "network_calls": 0,
+  "next_architecture_decision": "controlled_local_continual_learning_pilot_implementation_authorized",
+  "persistent_engagement_overlay_writes": 0,
+  "production_policy_mutations": 0,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "redacted": true,
+  "report_fingerprint": "446824cc9b5ac33540477f39fc2879b290ae400d839b854d236e6592fb2237fa",
+  "repository_integrity": {
+    "aion_v010_unchanged": true,
+    "no_v02_tag_or_release": true,
+    "repository_unchanged": true,
+    "temporary_evaluation_data_cleaned": true
+  },
+  "repository_unchanged": true,
+  "resource_state": {
+    "aion226_resource_limits": {
+      "maximum_actual_belief_creations": 0,
+      "maximum_actual_belief_mutations": 0,
+      "maximum_actual_tool_executions": 0,
+      "maximum_adaptation_plans_per_batch": 500,
+      "maximum_aion_224_store_writes": 0,
+      "maximum_approval_evidence_records_per_application": 4,
+      "maximum_automatic_candidate_approvals": 0,
+      "maximum_automatic_knowledge_promotions": 0,
+      "maximum_baseline_candidate_comparisons": 1000,
+      "maximum_browser_actions": 0,
+      "maximum_candidate_versions_per_identity": 100,
+      "maximum_cognitive_memory_writes": 0,
+      "maximum_concurrency": 4,
+      "maximum_connector_calls": 0,
+      "maximum_counterfactual_cases_per_session": 1000,
+      "maximum_deployments": 0,
+      "maximum_engagement_candidates_per_batch": 500,
+      "maximum_engagement_confidence_effects": 0,
+      "maximum_engagement_fact_promotions": 0,
+      "maximum_engagement_knowledge_effects": 0,
+      "maximum_engagement_source_independence_effects": 0,
+      "maximum_fixture_bytes": 4194304,
+      "maximum_fixture_records": 5000,
+      "maximum_git_operations": 0,
+      "maximum_metrics_per_case": 100,
+      "maximum_model_provider_calls": 0,
+      "maximum_model_weight_changes": 0,
+      "maximum_network_calls": 0,
+      "maximum_operator_review_items": 500,
+      "maximum_overlay_records_per_session": 500,
+      "maximum_overlay_snapshots_per_session": 100,
+      "maximum_overlay_versions_per_identity": 100,
+      "maximum_persistent_engagement_overlay_writes": 0,
+      "maximum_production_policy_mutations": 0,
+      "maximum_query_results": 1000,
+      "maximum_rollback_steps_per_application": 50,
+      "maximum_runtime_created_approvals": 0,
+      "maximum_runtime_created_pull_requests": 0,
+      "maximum_search_provider_calls": 0,
+      "maximum_shell_commands": 0,
+      "maximum_signal_references_per_candidate": 1000,
+      "maximum_source_mutations": 0,
+      "maximum_subprocess_executions": 0,
+      "maximum_target_components": 9
+    },
+    "resource_budget_hard_gate_passed": true
+  },
+  "runtime_approvals": 0,
+  "runtime_pull_requests": 0,
+  "runtime_state": {
+    "controlled_local_continual_learning_pilot_authorized": true,
+    "controlled_local_continual_learning_pilot_implemented": false,
+    "engagement_shadow_plane_implemented": true,
+    "production_exposure": false
+  },
+  "scenario_count": 28,
+  "scenario_ids": [
+    "aion_226_delivery_and_ci_integrity",
+    "authorization_lineage_and_scope",
+    "synthetic_pilot_evidence_integrity",
+    "candidate_and_signal_binding_integrity",
+    "non_factual_and_zero_effect_invariants",
+    "lifecycle_expiry_supersession_retraction_and_rejection",
+    "fixed_target_mapping_operation_and_risk",
+    "low_risk_single_independent_approval",
+    "elevated_risk_dual_approval_and_separation_of_duties",
+    "exact_approval_binding_and_replay_control",
+    "deterministic_adaptation_identity",
+    "duplicate_idempotency_and_collision_rejection",
+    "material_conflict_preservation",
+    "append_only_in_memory_version_planning",
+    "target_policy_closed_registry",
+    "baseline_and_read_only_knowledge_context",
+    "immutable_overlay_and_copy_on_write_repository",
+    "explicit_shadow_authorization_and_session_bounds",
+    "deterministic_reference_adapter_isolation",
+    "metric_registry_direction_and_delta_integrity",
+    "safety_and_policy_gate_priority",
+    "expiry_rollback_and_session_cleanup",
+    "exact_queries_and_fixture_boundary",
+    "resource_budget_enforcement",
+    "determinism_concurrency_and_performance",
+    "zero_persistence_production_memory_belief_and_network_effects",
+    "repository_and_release_boundary",
+    "controlled_local_continual_learning_pilot_authorization_readiness"
+  ],
+  "scenario_results": [
+    {
+      "checks": {
+        "branch": "phase/governed-learning-memory-engagement-shadow-application",
+        "delivery_evidence_reconciled_by_outer_gate": true,
+        "feature_commit": "44bb63222f7ccfb5ce98bbdf3b8e35c08ff4e8b3",
+        "merge_commit": "8cf9947e1304fc4cd3719867cf80e0819a87700c",
+        "merged_at": "2026-07-29T11:06:17Z",
+        "pr": 142,
+        "required_ci_checks": [
+          "brain-api-quality",
+          "contract-check",
+          "docker-build-core",
+          "policy-check",
+          "repository-hygiene",
+          "sdk-cli-check",
+          "sdk-quality"
+        ]
+      },
+      "result": "passed",
+      "scenario_id": "aion_226_delivery_and_ci_integrity"
+    },
+    {
+      "checks": {
+        "authorization_active_before_closeout": true,
+        "authorization_reusable": false,
+        "authorization_transaction_id": "AION-225-GLM-0003",
+        "parent_evaluation_id": "AION-GLMPE-002",
+        "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+        "scope": "engagement-learning-candidate-non-factual-validation-operator-approval-risk-routing-bounded-adaptation-versioning-isolated-in-memory-shadow-overlay-counterfactual-evaluation-rollback-expiry-audit-core"
+      },
+      "result": "passed",
+      "scenario_id": "authorization_lineage_and_scope"
+    },
+    {
+      "checks": {
+        "active_overlay_records_after_close": 0,
+        "adaptation_identity_count": 9,
+        "aion_224_store_writes": 0,
+        "approval_evidence_count": 14,
+        "authorization_id": "AION-225-GLM-0003",
+        "candidate_count": 9,
+        "candidate_kind_count": 9,
+        "changed_replays_rejected": 1,
+        "comparison_count": 9,
+        "duplicate_no_ops": 1,
+        "elevated_risk_application_count": 5,
+        "exact_replays": 1,
+        "expired_overlays": 9,
+        "integrity_passed": true,
+        "low_risk_application_count": 4,
+        "material_conflicts_abstained": 1,
+        "mode": "deterministic_simulation",
+        "network_calls": 0,
+        "overlay_record_count": 9,
+        "persistent_overlay_writes": 0,
+        "pilot_id": "AION-226-engagement-shadow-synthetic-pilot",
+        "production_policy_mutations": 0,
+        "redacted": true,
+        "report_fingerprint": "66744f62d5cd793bb2aec47ccc304fd605f7041514a8d68af753be50c8314cd2",
+        "rolled_back_overlays": 9,
+        "runtime_effect": false,
+        "signal_count": 9
+      },
+      "result": "passed",
+      "scenario_id": "synthetic_pilot_evidence_integrity"
+    },
+    {
+      "checks": {
+        "binding_count": 9,
+        "candidate_ids": [
+          "engagement-learning-38b92ef152d9934a5ffceb51b5d2b981758bcf16ba7cbc27-v001",
+          "engagement-learning-4a77815b5cae59b6ff089b85c765f219318503b77f0ff7d6-v001",
+          "engagement-learning-96e5e0888c16892429032f9126986fc8b76e8a98010d516f-v001",
+          "engagement-learning-9788302b686f41bc1581e9882b059ea163ab9d49ce8fe5f3-v001",
+          "engagement-learning-98ad8e19f4a91b37a1562f09c09d72dd23edc57cb957f59e-v001",
+          "engagement-learning-a5fa86cebf13dd2e837175c461783c11b297939a279bec52-v001",
+          "engagement-learning-c557733c67864c4506c0e250b58695aa6877b74754c6fa0a-v001",
+          "engagement-learning-d7818da8f5a239d37a317d13b196a1c98c60a5a4cad47a53-v001",
+          "engagement-learning-df7afa003101ff00a9e120d7180cc771b6bc51e71d999246-v001"
+        ],
+        "changed_nested_candidate_rejected": true,
+        "signal_ids": [
+          "signal-clarification",
+          "signal-domain-routing",
+          "signal-preference",
+          "signal-research-gap",
+          "signal-response-quality",
+          "signal-retrieval-strategy",
+          "signal-source-selection",
+          "signal-tool-manifest",
+          "signal-verification-rule"
+        ]
+      },
+      "result": "passed",
+      "scenario_id": "candidate_and_signal_binding_integrity"
+    },
+    {
+      "checks": {
+        "actual_belief_creations": 0,
+        "actual_belief_mutations": 0,
+        "aion_224_store_writes": 0,
+        "automatic_candidate_approvals": 0,
+        "automatic_knowledge_promotions": 0,
+        "candidate_count": 9,
+        "cognitive_memory_writes": 0,
+        "deployments": 0,
+        "engagement_confidence_effects": 0,
+        "engagement_fact_promotions": 0,
+        "engagement_knowledge_effects": 0,
+        "engagement_source_independence_effects": 0,
+        "model_weight_changes": 0,
+        "network_calls": 0,
+        "persistent_engagement_overlay_writes": 0,
+        "production_policy_mutations": 0,
+        "runtime_effect": false,
+        "tool_executions": 0
+      },
+      "result": "passed",
+      "scenario_id": "non_factual_and_zero_effect_invariants"
+    },
+    {
+      "checks": {
+        "archived": true,
+        "expired": true,
+        "operator_review_pending_accepted": true,
+        "operator_review_rejected": true,
+        "proposed_accepted": true,
+        "superseded": true
+      },
+      "result": "passed",
+      "scenario_id": "lifecycle_expiry_supersession_retraction_and_rejection"
+    },
+    {
+      "checks": {
+        "clarification_need": {
+          "canonical_operation": "require_clarification_review",
+          "risk_class": "low",
+          "target_component_code": "operator-dialogue",
+          "target_policy_code": "clarification-review"
+        },
+        "domain_routing": {
+          "canonical_operation": "select_domain_routing_candidate",
+          "risk_class": "elevated",
+          "target_component_code": "domain-expert-mesh",
+          "target_policy_code": "domain-routing-review"
+        },
+        "preference_candidate": {
+          "canonical_operation": "select_preference_hint_candidate",
+          "risk_class": "low",
+          "target_component_code": "preference-review",
+          "target_policy_code": "operator-preference-review"
+        },
+        "research_gap": {
+          "canonical_operation": "flag_research_gap",
+          "risk_class": "low",
+          "target_component_code": "research-acquisition",
+          "target_policy_code": "research-gap-review"
+        },
+        "response_quality": {
+          "canonical_operation": "select_response_quality_candidate",
+          "risk_class": "low",
+          "target_component_code": "operator-response",
+          "target_policy_code": "response-quality-review"
+        },
+        "retrieval_strategy": {
+          "canonical_operation": "select_retrieval_strategy_candidate",
+          "risk_class": "elevated",
+          "target_component_code": "retrieval-planning",
+          "target_policy_code": "retrieval-strategy-review"
+        },
+        "source_selection": {
+          "canonical_operation": "select_source_selection_candidate",
+          "risk_class": "elevated",
+          "target_component_code": "source-registry",
+          "target_policy_code": "source-selection-review"
+        },
+        "tool_manifest_gap": {
+          "canonical_operation": "record_tool_manifest_gap_candidate",
+          "risk_class": "elevated",
+          "target_component_code": "tool-manifest-registry",
+          "target_policy_code": "tool-manifest-gap-review"
+        },
+        "verification_rule": {
+          "canonical_operation": "select_verification_rule_candidate",
+          "risk_class": "elevated",
+          "target_component_code": "tool-verification",
+          "target_policy_code": "verification-rule-review"
+        }
+      },
+      "result": "passed",
+      "scenario_id": "fixed_target_mapping_operation_and_risk"
+    },
+    {
+      "checks": {
+        "clarification_need": true,
+        "preference_candidate": true,
+        "research_gap": true,
+        "response_quality": true
+      },
+      "result": "passed",
+      "scenario_id": "low_risk_single_independent_approval"
+    },
+    {
+      "checks": {
+        "domain_routing": true,
+        "retrieval_strategy": true,
+        "source_selection": true,
+        "tool_manifest_gap": true,
+        "verification_rule": true
+      },
+      "result": "passed",
+      "scenario_id": "elevated_risk_dual_approval_and_separation_of_duties"
+    },
+    {
+      "checks": {
+        "approval_creation_performed_by_aion226": false,
+        "changed_content_requires_new_approval": true,
+        "exact_candidate_binding": true
+      },
+      "result": "passed",
+      "scenario_id": "exact_approval_binding_and_replay_control"
+    },
+    {
+      "checks": {
+        "approval_not_in_base_identity": true,
+        "changed_subject_changes_identity": true,
+        "deterministic_replay": true
+      },
+      "result": "passed",
+      "scenario_id": "deterministic_adaptation_identity"
+    },
+    {
+      "checks": {
+        "changed_overlay_replay_rejected": true,
+        "exact_duplicate_no_op": true,
+        "exact_replay_identical": true
+      },
+      "result": "passed",
+      "scenario_id": "duplicate_idempotency_and_collision_rejection"
+    },
+    {
+      "checks": {
+        "approval_suppresses_conflict": false,
+        "automatic_precedence": false,
+        "material_conflict_count": 1,
+        "unresolved_material_conflicts": true
+      },
+      "result": "passed",
+      "scenario_id": "material_conflict_preservation"
+    },
+    {
+      "checks": {
+        "historical_versions_preserved": true,
+        "initial_version": 1,
+        "next_version": 2,
+        "persistent_version_created": false
+      },
+      "result": "passed",
+      "scenario_id": "append_only_in_memory_version_planning"
+    },
+    {
+      "checks": {
+        "callable_rejected": true,
+        "free_form_prompt_rejected": true,
+        "production_reference_present": false,
+        "target_policy_code": "clarification-review",
+        "unknown_parameter_rejected": true
+      },
+      "result": "passed",
+      "scenario_id": "target_policy_closed_registry"
+    },
+    {
+      "checks": {
+        "baseline_fingerprint": "51e01439ab017f29a22621eefc778b9c4b7d00190b51a9128078383554629118",
+        "baseline_immutable": true,
+        "confidence_change": false,
+        "factual_inference_from_engagement": false,
+        "local_knowledge_context_read_only": true,
+        "source_independence_change": false,
+        "store_opened": false,
+        "store_write": false
+      },
+      "result": "passed",
+      "scenario_id": "baseline_and_read_only_knowledge_context"
+    },
+    {
+      "checks": {
+        "copy_on_write": true,
+        "has_delete_method": false,
+        "has_save_method": false,
+        "has_update_method": false,
+        "overlay_records_immutable": true,
+        "records_deterministically_ordered": true,
+        "snapshot_immutable": true
+      },
+      "result": "passed",
+      "scenario_id": "immutable_overlay_and_copy_on_write_repository"
+    },
+    {
+      "checks": {
+        "authorization_transaction_id": "AION-225-GLM-0003",
+        "one_hour_maximum": true,
+        "operator_invoked": true,
+        "persistent_overlay": false,
+        "production_application": false
+      },
+      "result": "passed",
+      "scenario_id": "explicit_shadow_authorization_and_session_bounds"
+    },
+    {
+      "checks": {
+        "arbitrary_callable": false,
+        "dynamic_import": false,
+        "eval": false,
+        "exec": false,
+        "external_call": false,
+        "fixed_input_fixed_outcome": true,
+        "production_adapter": false,
+        "state_retained_between_calls": false
+      },
+      "result": "passed",
+      "scenario_id": "deterministic_reference_adapter_isolation"
+    },
+    {
+      "checks": {
+        "delta_deterministic": true,
+        "directions": {
+          "abstention_correctness": "higher_is_better",
+          "bounded_resource_cost": "lower_is_better",
+          "citation_completeness": "higher_is_better",
+          "clarification_count": "lower_is_better",
+          "latency": "lower_is_better",
+          "policy_violations": "zero_required",
+          "response_format_compliance": "higher_is_better",
+          "retrieval_success": "higher_is_better",
+          "routing_consistency": "higher_is_better",
+          "safety_violations": "zero_required",
+          "source_diversity": "higher_is_better",
+          "task_completion": "higher_is_better",
+          "verification_coverage": "higher_is_better"
+        },
+        "hard_gate_metrics": [
+          "policy_violations",
+          "safety_violations"
+        ],
+        "metric_improvement_implies_factual_correctness": false,
+        "unknown_metric_rejected": true
+      },
+      "result": "passed",
+      "scenario_id": "metric_registry_direction_and_delta_integrity"
+    },
+    {
+      "checks": {
+        "factual_effect_traded_for_quality": false,
+        "persistence_traded_for_quality": false,
+        "production_mutation_traded_for_quality": false,
+        "quality_gain_offsets_hard_gate": false,
+        "safety_violation_rejects": true
+      },
+      "result": "passed",
+      "scenario_id": "safety_and_policy_gate_priority"
+    },
+    {
+      "checks": {
+        "active_overlay_count_after_close": 0,
+        "every_overlay_has_expiry": true,
+        "redacted_evidence_preserved": true,
+        "rollback_restores_baseline_view": true
+      },
+      "result": "passed",
+      "scenario_id": "expiry_rollback_and_session_cleanup"
+    },
+    {
+      "checks": {
+        "deterministic_ordering": true,
+        "exact_queries_only": true,
+        "explicit_absolute_fixture_path": true,
+        "fixture_record_count": 9,
+        "fuzzy_search": false,
+        "maximum_results": 1000,
+        "repository_path_rejected": true,
+        "semantic_search": false
+      },
+      "result": "passed",
+      "scenario_id": "exact_queries_and_fixture_boundary"
+    },
+    {
+      "checks": {
+        "budget_passed": true,
+        "one_over_limit_rejected": true,
+        "operator_recommendation_overrides_budget_failure": false,
+        "resource_limits": {
+          "maximum_actual_belief_creations": 0,
+          "maximum_actual_belief_mutations": 0,
+          "maximum_actual_tool_executions": 0,
+          "maximum_adaptation_plans_per_batch": 500,
+          "maximum_aion_224_store_writes": 0,
+          "maximum_approval_evidence_records_per_application": 4,
+          "maximum_automatic_candidate_approvals": 0,
+          "maximum_automatic_knowledge_promotions": 0,
+          "maximum_baseline_candidate_comparisons": 1000,
+          "maximum_browser_actions": 0,
+          "maximum_candidate_versions_per_identity": 100,
+          "maximum_cognitive_memory_writes": 0,
+          "maximum_concurrency": 4,
+          "maximum_connector_calls": 0,
+          "maximum_counterfactual_cases_per_session": 1000,
+          "maximum_deployments": 0,
+          "maximum_engagement_candidates_per_batch": 500,
+          "maximum_engagement_confidence_effects": 0,
+          "maximum_engagement_fact_promotions": 0,
+          "maximum_engagement_knowledge_effects": 0,
+          "maximum_engagement_source_independence_effects": 0,
+          "maximum_fixture_bytes": 4194304,
+          "maximum_fixture_records": 5000,
+          "maximum_git_operations": 0,
+          "maximum_metrics_per_case": 100,
+          "maximum_model_provider_calls": 0,
+          "maximum_model_weight_changes": 0,
+          "maximum_network_calls": 0,
+          "maximum_operator_review_items": 500,
+          "maximum_overlay_records_per_session": 500,
+          "maximum_overlay_snapshots_per_session": 100,
+          "maximum_overlay_versions_per_identity": 100,
+          "maximum_persistent_engagement_overlay_writes": 0,
+          "maximum_production_policy_mutations": 0,
+          "maximum_query_results": 1000,
+          "maximum_rollback_steps_per_application": 50,
+          "maximum_runtime_created_approvals": 0,
+          "maximum_runtime_created_pull_requests": 0,
+          "maximum_search_provider_calls": 0,
+          "maximum_shell_commands": 0,
+          "maximum_signal_references_per_candidate": 1000,
+          "maximum_source_mutations": 0,
+          "maximum_subprocess_executions": 0,
+          "maximum_target_components": 9
+        }
+      },
+      "result": "passed",
+      "scenario_id": "resource_budget_enforcement"
+    },
+    {
+      "checks": {
+        "deterministic_ordering_under_concurrency": true,
+        "fixed_inputs_identical_outputs": true,
+        "performance_smoke_passed": true,
+        "shared_mutable_global_state": false
+      },
+      "result": "passed",
+      "scenario_id": "determinism_concurrency_and_performance"
+    },
+    {
+      "checks": {
+        "active_overlay_records_after_evaluation": 0,
+        "actual_belief_creations": 0,
+        "actual_belief_mutations": 0,
+        "actual_tool_executions": 0,
+        "aion_224_store_writes": 0,
+        "automatic_candidate_approvals": 0,
+        "automatic_knowledge_promotions": 0,
+        "browser_actions": 0,
+        "cognitive_memory_writes": 0,
+        "connector_calls": 0,
+        "deployments": 0,
+        "dns_resolutions": 0,
+        "engagement_confidence_effects": 0,
+        "engagement_fact_promotions": 0,
+        "engagement_knowledge_effects": 0,
+        "engagement_source_independence_effects": 0,
+        "git_operations": 0,
+        "model_provider_calls": 0,
+        "model_weight_changes": 0,
+        "network_calls": 0,
+        "persistent_engagement_overlay_writes": 0,
+        "production_policy_mutations": 0,
+        "runtime_approvals": 0,
+        "runtime_pull_requests": 0,
+        "search_provider_calls": 0,
+        "shell_executions": 0,
+        "source_mutations": 0,
+        "subprocess_executions": 0
+      },
+      "result": "passed",
+      "scenario_id": "zero_persistence_production_memory_belief_and_network_effects"
+    },
+    {
+      "checks": {
+        "aion_228_source_added": false,
+        "api_added": false,
+        "dependency_changed": false,
+        "installed_cli_added": false,
+        "migration_added": false,
+        "repository_tree_unchanged_by_harness": true,
+        "v02_release": false,
+        "v02_release_ready": false,
+        "v02_tag": false,
+        "workflow_changed": false
+      },
+      "result": "passed",
+      "scenario_id": "repository_and_release_boundary"
+    },
+    {
+      "checks": {
+        "aion_224_temporary_store_within_session_continuity": true,
+        "aion_226_hard_gates_all_passed": true,
+        "aion_226_overlays_session_local": true,
+        "cycle_stages_operator_gated": true,
+        "dual_approval_retained_for_persistence": true,
+        "failure_abstain_or_rollback": true,
+        "new_crawler_required": false,
+        "new_transport_required": false,
+        "production_policy_memory_belief_or_model_change_required": false,
+        "public_research_explicit_urls_only": true,
+        "temporary_stores_and_overlays_removed": true,
+        "verified_knowledge_pipeline_composable_read_only": true
+      },
+      "result": "passed",
+      "scenario_id": "controlled_local_continual_learning_pilot_authorization_readiness"
+    }
+  ],
+  "search_provider_calls": 0,
+  "security_state": {
+    "network_calls": 0,
+    "overlay_applied_by_evaluation": false,
+    "production_effect": false,
+    "read_only": true,
+    "redacted": true,
+    "synthetic": true,
+    "temporary_store_created": false
+  },
+  "shell_executions": 0,
+  "source_mutations": 0,
+  "subprocess_executions": 0,
+  "synthetic": true,
+  "temporary_evaluation_data_cleaned": true,
+  "validation_results": {
+    "all_scenarios_executed": true,
+    "corrective_cycles": 1,
+    "corrective_prs": [
+      143
+    ],
+    "hard_gate_failures": [],
+    "no_scenario_skipped": true,
+    "no_unknown_scenario": true
+  }
+}

@@ -27,6 +27,10 @@ ENGAGEMENT_APPLICATION_AUTHORIZED_STATE = (
 ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE = (
     "governed_learning_memory_engagement_application_implemented_shadow_only_pending_closeout"
 )
+CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE = (
+    "governed_learning_memory_controlled_local_continual_learning_pilot_"
+    "authorized_not_implemented"
+)
 AION222_FEATURE_COMMIT = "e415cc397b9aec70f8b3d19285f5fdd315048731"
 AION222_MERGE_COMMIT = "b89c896b8e75955d28fd06d52b5fb66fb8ed5ac0"
 AION222_MERGED_AT = "2026-07-28T09:00:39Z"
@@ -442,6 +446,7 @@ def validate_authorization_ledgers(
             IMPLEMENTED_PENDING_CLOSEOUT_STATE,
             ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
             ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+            CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
         }:
             _fail(f"{label} state mismatch")
         if program_state in {
@@ -456,6 +461,15 @@ def validate_authorization_ledgers(
                 or payload.get("formal_closeout_task") != "AION-227"
             ):
                 _fail(f"{label} post-closeout active authorization mismatch")
+        elif program_state == CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE:
+            if (
+                payload.get("active_glm_implementation_authorization_count") != 1
+                or payload.get("active_glm_implementation_authorization")
+                != "AION-227-GLM-0004"
+                or payload.get("active_glm_implementation_task") != "AION-228"
+                or payload.get("formal_closeout_task") != "AION-229"
+            ):
+                _fail(f"{label} continual-learning authorization mismatch")
         else:
             if (
                 payload.get("active_glm_implementation_authorization_count") != 1
@@ -523,6 +537,8 @@ def validate_authorization_ledgers(
         ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
     }:
         expected_active_authorizations = ["AION-225-GLM-0003"]
+    elif auth.get("program_state") == CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE:
+        expected_active_authorizations = ["AION-227-GLM-0004"]
     else:
         expected_active_authorizations = [AION223_AUTHORIZATION_ID]
     if auth.get("active_authorizations") != expected_active_authorizations:
@@ -590,6 +606,7 @@ def validate_authorization_ledgers(
     if auth.get("program_state") in {
         ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
         ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+        CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
     }:
         if (
             new.get("authorization_active") is not False
@@ -685,6 +702,7 @@ def validate_no_aion224_source(root: Path = REPO_ROOT) -> None:
         IMPLEMENTED_PENDING_CLOSEOUT_STATE,
         ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
         ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+        CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
     }:
         missing = [rel for rel in AION224_SOURCE_SCOPE if not (root / rel).exists()]
         if missing:

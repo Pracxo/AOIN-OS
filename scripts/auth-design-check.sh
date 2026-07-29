@@ -1492,7 +1492,11 @@ blocked_build_prefixes = (
 
 def is_governed_learning_memory_artifact(name: str) -> bool:
     return (
-        name == "docs/adr/0189-local-persistence-evaluation-and-engagement-learning-application-authorization.md"
+        name
+        in {
+            "docs/adr/0189-local-persistence-evaluation-and-engagement-learning-application-authorization.md",
+            "docs/adr/0191-engagement-shadow-application-evaluation-and-controlled-local-continual-learning-pilot-authorization.md",
+        }
         or name.startswith("docs/governed-learning-memory/")
         or name.startswith("docs/release/governed-learning-memory-")
         or name.startswith("examples/governed-learning-memory/")

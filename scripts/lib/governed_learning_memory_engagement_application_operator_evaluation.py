@@ -92,6 +92,14 @@ AION226_BRANCH = "phase/governed-learning-memory-engagement-shadow-application"
 AION226_FEATURE_COMMIT = "44bb63222f7ccfb5ce98bbdf3b8e35c08ff4e8b3"
 AION226_MERGE_COMMIT = "8cf9947e1304fc4cd3719867cf80e0819a87700c"
 AION226_MERGED_AT = "2026-07-29T11:06:17Z"
+AION227_CORRECTIVE_PRS: tuple[int, ...] = (143,)
+AION227_CORRECTIVE_FEATURE_COMMITS: tuple[str, ...] = (
+    "b0c3a7e971097ce658d1b48b52662df31f4c3eb8",
+)
+AION227_CORRECTIVE_MERGE_COMMITS: tuple[str, ...] = (
+    "8156661dae57b6e141f094ee9e6650a710765635",
+)
+AION227_CORRECTIVE_CYCLE_COUNT = 1
 PASS_DECISION = (
     "ENGAGEMENT_SHADOW_APPLICATION_OPERATOR_EVALUATION_PASS_RECOMMEND_"
     "CONTROLLED_LOCAL_CONTINUAL_LEARNING_PILOT_AUTHORIZATION"
@@ -1394,9 +1402,15 @@ def build_report(
         "implementation_task": IMPLEMENTATION_TASK,
         "closeout_task": CLOSEOUT_TASK,
         "evaluation_base_commit": evaluation_base_commit,
-        "implementation_prs": [AION226_PR],
-        "implementation_feature_commits": [AION226_FEATURE_COMMIT],
-        "implementation_merge_commits": [AION226_MERGE_COMMIT],
+        "implementation_prs": [AION226_PR, *AION227_CORRECTIVE_PRS],
+        "implementation_feature_commits": [
+            AION226_FEATURE_COMMIT,
+            *AION227_CORRECTIVE_FEATURE_COMMITS,
+        ],
+        "implementation_merge_commits": [
+            AION226_MERGE_COMMIT,
+            *AION227_CORRECTIVE_MERGE_COMMITS,
+        ],
         "decision": decision,
         "evaluation_passed": evaluation_passed,
         "scenario_count": len(scenario_results),
@@ -1408,8 +1422,8 @@ def build_report(
             "all_scenarios_executed": len(scenario_results) == len(SCENARIO_IDS),
             "no_scenario_skipped": True,
             "no_unknown_scenario": True,
-            "corrective_cycles": 0,
-            "corrective_prs": [],
+            "corrective_cycles": AION227_CORRECTIVE_CYCLE_COUNT,
+            "corrective_prs": list(AION227_CORRECTIVE_PRS),
             "hard_gate_failures": [
                 gate for gate, item in hard_gate_results.items() if not item["passed"]
             ],
@@ -1426,9 +1440,15 @@ def build_report(
             "authorization_active": False,
             "authorization_consumed": True,
             "authorization_consumed_by_task": IMPLEMENTATION_TASK,
-            "authorization_consumed_by_prs": [AION226_PR],
-            "authorization_consumed_by_feature_commits": [AION226_FEATURE_COMMIT],
-            "authorization_consumed_by_merge_commits": [AION226_MERGE_COMMIT],
+            "authorization_consumed_by_prs": [AION226_PR, *AION227_CORRECTIVE_PRS],
+            "authorization_consumed_by_feature_commits": [
+                AION226_FEATURE_COMMIT,
+                *AION227_CORRECTIVE_FEATURE_COMMITS,
+            ],
+            "authorization_consumed_by_merge_commits": [
+                AION226_MERGE_COMMIT,
+                *AION227_CORRECTIVE_MERGE_COMMITS,
+            ],
             "authorization_expired": True,
             "authorization_reusable": False,
             "authorization_closed_by_task": CLOSEOUT_TASK,
@@ -1446,9 +1466,24 @@ def build_report(
             if evaluation_passed
             else None,
             "approval_record_id": NEXT_AUTHORIZATION_ID if evaluation_passed else None,
+            "parent_authorization_transaction_id": CURRENT_AUTHORIZATION_ID
+            if evaluation_passed
+            else None,
+            "parent_evaluation_id": EVALUATION_ID if evaluation_passed else None,
+            "candidate_id": "operator-approved-controlled-local-continual-learning-pilot-core"
+            if evaluation_passed
+            else None,
+            "workstream": "governed-learning-memory-controlled-local-continual-learning"
+            if evaluation_passed
+            else None,
             "implementation_task": "AION-228" if evaluation_passed else None,
             "formal_closeout_task": "AION-229" if evaluation_passed else None,
-            "created_in_repository": False,
+            "authorization_active": evaluation_passed,
+            "authorization_consumed": False,
+            "authorization_expired": False,
+            "authorization_reusable": False,
+            "sole_active_glm_authorization": evaluation_passed,
+            "created_in_repository": evaluation_passed,
         },
         "runtime_state": {
             "engagement_shadow_plane_implemented": True,

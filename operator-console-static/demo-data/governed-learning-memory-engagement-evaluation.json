@@ -1,0 +1,24 @@
+{
+  "corrective_prs": [
+    143
+  ],
+  "decision": "ENGAGEMENT_SHADOW_APPLICATION_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_LOCAL_CONTINUAL_LEARNING_PILOT_AUTHORIZATION",
+  "evaluation_base_commit": "8156661dae57b6e141f094ee9e6650a710765635",
+  "evaluation_id": "AION-GLMPE-003",
+  "evaluation_passed": true,
+  "network_calls": 0,
+  "production_exposure": false,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "repository_unchanged": true,
+  "runtime_effect": false,
+  "scenario_count": 28,
+  "status": "pass",
+  "summary": "AION-GLMPE-003 passed all 28 read-only synthetic scenarios.",
+  "synthetic": true,
+  "temporary_evaluation_data_cleaned": true,
+  "title": "Engagement Application Operator Evaluation",
+  "v02_release_ready": false
+}

@@ -10,6 +10,7 @@ from scripts.lib.governed_learning_memory_engagement_application import (
 from scripts.lib.governed_learning_memory_local_persistence_authorization import (
     AION222_SOURCE_SCOPE,
     AION224_SOURCE_SCOPE,
+    CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
     ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
     IMPLEMENTED_PENDING_CLOSEOUT_STATE,
@@ -57,6 +58,7 @@ def _aion224_implemented() -> bool:
             IMPLEMENTED_PENDING_CLOSEOUT_STATE,
             ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
             ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+            CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
         }
     )
 
@@ -64,7 +66,10 @@ def _aion224_implemented() -> bool:
 def _aion226_implemented() -> bool:
     return (
         load_json("docs/governed-learning-memory/program-ledger.json")["program_state"]
-        == ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE
+        in {
+            ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+            CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
+        }
     )
 
 

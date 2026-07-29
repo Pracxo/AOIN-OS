@@ -130,8 +130,11 @@ required_false = [
 implemented_state = "governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout"
 engagement_authorized_state = "governed_learning_memory_engagement_application_authorized_not_implemented"
 engagement_implemented_state = "governed_learning_memory_engagement_application_implemented_shadow_only_pending_closeout"
+continual_learning_authorized_state = (
+    "governed_learning_memory_controlled_local_continual_learning_pilot_authorized_not_implemented"
+)
 engagement_states = {engagement_authorized_state, engagement_implemented_state}
-implemented_states = {implemented_state, *engagement_states}
+implemented_states = {implemented_state, *engagement_states, continual_learning_authorized_state}
 for label, payload in (("program", program), ("authorization", auth)):
     if payload.get("program_state") in engagement_states:
         if payload["authorization_transaction_id"] != "AION-225-GLM-0003":
@@ -139,6 +142,13 @@ for label, payload in (("program", program), ("authorization", auth)):
         if payload["active_glm_implementation_task"] != "AION-226":
             raise SystemExit(f"{label} active task mismatch")
         if payload["formal_closeout_task"] != "AION-227":
+            raise SystemExit(f"{label} closeout task mismatch")
+    elif payload.get("program_state") == continual_learning_authorized_state:
+        if payload["authorization_transaction_id"] != "AION-227-GLM-0004":
+            raise SystemExit(f"{label} current authorization mismatch")
+        if payload["active_glm_implementation_task"] != "AION-228":
+            raise SystemExit(f"{label} active task mismatch")
+        if payload["formal_closeout_task"] != "AION-229":
             raise SystemExit(f"{label} closeout task mismatch")
     else:
         if payload["authorization_transaction_id"] != AION223_AUTHORIZATION_ID:

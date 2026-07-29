@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from scripts.lib.governed_learning_memory_local_persistence_authorization import (
+    CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
     ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
 )
@@ -21,6 +22,9 @@ def test_program_ledger_records_aion223_authorization_without_runtime_effects() 
     }:
         assert program["active_glm_implementation_authorization"] == "AION-225-GLM-0003"
         assert program["active_glm_implementation_task"] == "AION-226"
+    elif program["program_state"] == CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE:
+        assert program["active_glm_implementation_authorization"] == "AION-227-GLM-0004"
+        assert program["active_glm_implementation_task"] == "AION-228"
     else:
         assert program["active_glm_implementation_authorization"] == AUTH_ID
         assert program["active_glm_implementation_task"] == IMPLEMENTATION_TASK

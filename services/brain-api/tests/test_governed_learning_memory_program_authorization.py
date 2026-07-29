@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from scripts.lib import governed_learning_memory_continual_learning_pilot_authorization as auth227
 from scripts.lib.governed_learning_memory_local_persistence_authorization import (
     AION223_AUTHORIZATION_ID,
     AION224_APPROVED_CAPABILITIES,
@@ -42,6 +43,7 @@ def test_aion_223_program_and_authorization_are_exact() -> None:
             IMPLEMENTED_PENDING_CLOSEOUT_STATE,
             ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
             ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+            auth227.PROGRAM_STATE,
         }
         assert payload["active_glm_implementation_authorization_count"] == 1
         if payload["program_state"] in {
@@ -51,6 +53,10 @@ def test_aion_223_program_and_authorization_are_exact() -> None:
             assert payload["active_glm_implementation_authorization"] == "AION-225-GLM-0003"
             assert payload["active_glm_implementation_task"] == "AION-226"
             assert payload["formal_closeout_task"] == "AION-227"
+        elif payload["program_state"] == auth227.PROGRAM_STATE:
+            assert payload["active_glm_implementation_authorization"] == "AION-227-GLM-0004"
+            assert payload["active_glm_implementation_task"] == "AION-228"
+            assert payload["formal_closeout_task"] == "AION-229"
         else:
             assert payload["active_glm_implementation_authorization"] == AUTH_ID
             assert payload["active_glm_implementation_task"] == IMPLEMENTATION_TASK
@@ -79,6 +85,20 @@ def test_aion_223_program_and_authorization_are_exact() -> None:
         assert record["authorization_expired"] is True
         assert record["authorization_reusable"] is False
         assert record["authorization_closed_by_task"] == "AION-225"
+    elif auth["program_state"] == auth227.PROGRAM_STATE:
+        assert auth["authorization_transaction_id"] == "AION-227-GLM-0004"
+        assert auth["implementation_task"] == "AION-228"
+        assert auth["formal_closeout_task"] == "AION-229"
+        record = next(
+            item
+            for item in auth["records"]
+            if item["authorization_transaction_id"] == "AION-225-GLM-0003"
+        )
+        assert record["authorization_active"] is False
+        assert record["authorization_consumed"] is True
+        assert record["authorization_expired"] is True
+        assert record["authorization_reusable"] is False
+        assert record["authorization_closed_by_task"] == "AION-227"
     else:
         assert auth["authorization_transaction_id"] == AUTH_ID
         assert auth["approval_record_id"] == AUTH_ID
@@ -95,7 +115,13 @@ def test_aion_223_program_and_authorization_are_exact() -> None:
 
 def test_authorized_and_prohibited_capabilities_are_explicit() -> None:
     auth = load_json("docs/governed-learning-memory/authorization-ledger.json")
-    assert set(auth["authorized_capabilities"]) == AUTHORIZED_CAPABILITIES
-    assert set(auth["prohibited_capabilities"]) == PROHIBITED_CAPABILITIES
-    assert all(auth["authorized_capabilities"][k] is True for k in AUTHORIZED_CAPABILITIES)
-    assert all(auth["prohibited_capabilities"][k] is False for k in PROHIBITED_CAPABILITIES)
+    if auth["program_state"] == auth227.PROGRAM_STATE:
+        authorized = set(auth227.AUTHORIZED_CAPABILITIES)
+        prohibited = set(auth227.PROHIBITED_CAPABILITIES)
+    else:
+        authorized = AUTHORIZED_CAPABILITIES
+        prohibited = PROHIBITED_CAPABILITIES
+    assert set(auth["authorized_capabilities"]) == authorized
+    assert set(auth["prohibited_capabilities"]) == prohibited
+    assert all(auth["authorized_capabilities"][k] is True for k in authorized)
+    assert all(auth["prohibited_capabilities"][k] is False for k in prohibited)
