@@ -1,0 +1,18 @@
+{
+  "approval_payloads_retained": 0,
+  "authorization_transaction_id": "AION-227-GLM-0004",
+  "evidence_bundle_fingerprint": "ee8250fb76e094b34b471f13a73dbbe51d1ae142e9df59d7c0d31ec20f0a0a8e",
+  "formal_closeout_task": "AION-229",
+  "implementation_task": "AION-228",
+  "live_pilot_report_fingerprint": "2294f6404e0581450d043017325957d38a42317b923326d334e76f1e2a5c8515",
+  "production_exposure": false,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-continual-learning-evidence/v1",
+  "source_bodies_retained": 0,
+  "synthetic": true,
+  "temporary_paths_retained": 0
+}

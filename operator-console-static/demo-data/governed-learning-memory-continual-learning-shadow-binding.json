@@ -1,0 +1,18 @@
+{
+  "active_overlay_records_after_cycle": 0,
+  "approval_count": 1,
+  "authorization_transaction_id": "AION-227-GLM-0004",
+  "formal_closeout_task": "AION-229",
+  "implementation_task": "AION-228",
+  "persistent_overlay_write": false,
+  "production_exposure": false,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-continual-learning-shadow-binding/v1",
+  "shadow_binding_fingerprint": "0bb09d80600eec3eb9d7793a6f859bedde2a2d83899b70bd78e961ed674b32f4",
+  "status": "shadow_applied",
+  "synthetic": true
+}

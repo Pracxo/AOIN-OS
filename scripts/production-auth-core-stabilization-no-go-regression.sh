@@ -114,6 +114,9 @@ while IFS= read -r file; do
     if aion158_is_scoped_request_identity_stabilization_path "$file"; then
       continue
     fi
+    if aion228_is_scoped_governed_learning_memory_continual_learning_path "$file"; then
+      continue
+    fi
     case "$file" in
       services/brain-api/tests/*|docs/*|README.md|AGENTS.md)
         ;;

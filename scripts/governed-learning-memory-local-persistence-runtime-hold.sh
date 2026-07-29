@@ -11,6 +11,7 @@ is_nested_gate_context(){ [[ -n "${PYTEST_CURRENT_TEST:-}" ]] && return 0; [[ "$
 "$PYTHON_BIN" - <<'PY'
 from scripts.lib.governed_learning_memory_local_persistence_authorization import (
     CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
+    CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
     ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
     IMPLEMENTED_PENDING_CLOSEOUT_STATE,
@@ -24,6 +25,7 @@ if program.get("program_state") in {
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
     ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
     CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
+    CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
 }:
     for key in ["local_append_only_knowledge_store_implemented","operator_invoked_local_persistence_available","synthetic_local_persistence_pilot_completed"]:
         if program.get(key) is not True: raise SystemExit(f"implemented local persistence flag must be true: {key}")

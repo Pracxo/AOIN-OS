@@ -289,6 +289,15 @@ for parts in entries:
             continue
         if GLM_PROGRAM_STATE == AION226_GLM_STATE and normalized in AION226_SOURCE:
             continue
+        if (
+            GLM_PROGRAM_STATE == "governed_learning_memory_controlled_local_continual_learning_pilot_implemented_completed_pending_final_closeout"
+            and (
+                normalized == "services/brain-api/src/aion_brain/contracts/governed_continual_learning.py"
+                or normalized == "services/brain-api/src/aion_brain/governed_learning_memory/__init__.py"
+                or normalized.startswith("services/brain-api/src/aion_brain/governed_learning_memory/continual_learning_")
+            )
+        ):
+            continue
         if normalized.startswith(PROHIBITED_PREFIXES) and normalized not in ALLOWED_EXACT:
             raise SystemExit(f"runtime/source/workflow path changed on AION-206: {normalized}")
         if normalized not in ALLOWED_EXACT and not any(normalized.startswith(prefix) for prefix in ALLOWED_PREFIXES):

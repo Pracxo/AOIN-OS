@@ -12,6 +12,11 @@ from test_governed_learning_memory_program_authorization import (
     load_json,
 )
 
+AION228_IMPLEMENTED_STATE = (
+    "governed_learning_memory_controlled_local_continual_learning_pilot_"
+    "implemented_completed_pending_final_closeout"
+)
+
 
 def test_program_ledger_records_aion223_authorization_without_runtime_effects() -> None:
     program = load_json("docs/governed-learning-memory/program-ledger.json")
@@ -22,7 +27,10 @@ def test_program_ledger_records_aion223_authorization_without_runtime_effects() 
     }:
         assert program["active_glm_implementation_authorization"] == "AION-225-GLM-0003"
         assert program["active_glm_implementation_task"] == "AION-226"
-    elif program["program_state"] == CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE:
+    elif program["program_state"] in {
+        CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
+        AION228_IMPLEMENTED_STATE,
+    }:
         assert program["active_glm_implementation_authorization"] == "AION-227-GLM-0004"
         assert program["active_glm_implementation_task"] == "AION-228"
     else:

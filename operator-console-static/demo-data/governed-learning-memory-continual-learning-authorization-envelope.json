@@ -1,0 +1,19 @@
+{
+  "authorization_envelope_fingerprint": "cbb82ebec6051b780ad26655ee48b5b42658c4ac49438888aac829e82195584f",
+  "authorization_transaction_id": "AION-227-GLM-0004",
+  "background_execution": false,
+  "cycle_count": 3,
+  "formal_closeout_task": "AION-229",
+  "implementation_task": "AION-228",
+  "mode": "operator_invoked_live",
+  "operator_invoked": true,
+  "production_exposure": false,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "scheduled_execution": false,
+  "schema_version": "aion-glm-continual-learning-authorization/v1",
+  "synthetic": true
+}

@@ -1,0 +1,18 @@
+{
+  "approval_count": 2,
+  "authorization_transaction_id": "AION-227-GLM-0004",
+  "formal_closeout_task": "AION-229",
+  "implementation_task": "AION-228",
+  "knowledge_version_write_count": 1,
+  "persistence_binding_fingerprint": "0d2a4d0e13a3e16b10271e1c232bb38ac04943133f58c30f37475518018063dc",
+  "production_exposure": false,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "retained_store": false,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-continual-learning-persistence-binding/v1",
+  "status": "temporarily_persisted",
+  "synthetic": true
+}

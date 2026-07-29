@@ -1,0 +1,18 @@
+{
+  "authorization_transaction_id": "AION-227-GLM-0004",
+  "candidate_binding_fingerprint": "dda18a0e21ae47c53b4309434cbc02ae8bf764fa83a6defbb719431242722aa7",
+  "candidate_status": "eligible_for_review",
+  "citation_coverage": "1.000000",
+  "confidence_non_amplified": true,
+  "formal_closeout_task": "AION-229",
+  "implementation_task": "AION-228",
+  "production_exposure": false,
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "provenance_complete": "1.000000",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "schema_version": "aion-glm-continual-learning-knowledge-binding/v1",
+  "synthetic": true
+}

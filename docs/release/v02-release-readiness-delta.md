@@ -280,3 +280,7 @@ AION-226 implements the AION-225-GLM-0003 authorized deterministic, operator-app
 AION-GLMPE-003 passed all 28 deterministic, synthetic, read-only scenarios and closed AION-225-GLM-0003 as consumed by AION-226. AION-227-GLM-0004 is now the sole active GLM implementation authorization for AION-228, with AION-229 preserved as final GLM closeout.
 
 AION-228 is authorized but unimplemented. Engagement remains non-factual; internet access remains explicit and allowlisted; local continuity remains temporary and isolated; every persistence and shadow adaptation remains approval-bound; background learning, scheduled learning, automatic approval, automatic promotion, code rewrite, production memory writes, belief mutation, production policy mutation and model training remain disabled.
+
+## AION-228 Controlled Continual-Learning Pilot
+
+AION-228 is implemented and completed pending AION-229 final evaluation and closeout. The pilot remains operator-invoked and local, executed one redacted three-cycle live session, purged source bodies, removed temporary persistence and overlay state, and keeps production memory, production policy, cognitive memory, belief mutation, source mutation, Git mutation, automatic approval, automatic promotion, background learning, scheduled learning, and model training disabled.

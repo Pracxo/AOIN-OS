@@ -6,6 +6,7 @@ from pathlib import Path
 from scripts.lib import governed_learning_memory_engagement_application_authorization as engauth
 from scripts.lib.governed_learning_memory_local_persistence_authorization import (
     CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
+    CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
 )
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -31,7 +32,10 @@ def test_aion223_authorization_is_closed_and_aion225_is_active():
     assert parent["authorization_consumed"] is True
     assert parent["authorization_expired"] is True
     assert parent["authorization_reusable"] is False
-    if program_state == CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE:
+    if program_state in {
+        CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
+        CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
+    }:
         assert child["authorization_active"] is False
         assert child["authorization_consumed"] is True
         assert child["authorization_expired"] is True

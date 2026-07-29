@@ -29,7 +29,7 @@ AION226_COMPLETION_TIMESTAMP = "2026-07-29T11:06:17Z"
 AION227_PARENT_MAIN_COMMIT = "8156661dae57b6e141f094ee9e6650a710765635"
 PROGRAM_STATE = (
     "governed_learning_memory_controlled_local_continual_learning_pilot_"
-    "authorized_not_implemented"
+    "implemented_completed_pending_final_closeout"
 )
 ENGAGEMENT_APPLICATION_STATE = (
     "implemented_deterministic_operator_approved_non_factual_in_memory_shadow_only"
@@ -328,6 +328,8 @@ def validate_authorization_record(record: Mapping[str, Any]) -> None:
             "implementation_go_status",
             "authorization_active",
             "sole_active_glm_authorization",
+            "controlled_local_continual_learning_pilot_implemented",
+            "operator_invoked_continual_learning_pilot_available",
         ),
         "AION-227 authorization",
     )
@@ -338,8 +340,6 @@ def validate_authorization_record(record: Mapping[str, Any]) -> None:
             "authorization_consumed",
             "authorization_expired",
             "authorization_reusable",
-            "controlled_local_continual_learning_pilot_implemented",
-            "operator_invoked_continual_learning_pilot_available",
             "runtime_effect",
         ),
         "AION-227 authorization",
@@ -401,9 +401,12 @@ def validate_ledgers(root: Path = REPO_ROOT) -> tuple[dict[str, Any], dict[str, 
             "formal_closeout_task": FORMAL_CLOSEOUT_TASK,
             "new_glm_implementation_authorization_created": True,
             "controlled_local_continual_learning_pilot_authorized": True,
-            "controlled_local_continual_learning_pilot_implemented": False,
+            "controlled_local_continual_learning_pilot_implemented": True,
             "operator_invoked_continual_learning_pilot_authorized": True,
-            "operator_invoked_continual_learning_pilot_available": False,
+            "operator_invoked_continual_learning_pilot_available": True,
+            "deterministic_continual_learning_simulation_available": True,
+            "controlled_live_pilot_completed": True,
+            "controlled_live_pilot_cycle_count": 3,
             "operator_invoked_bounded_public_https_cycle_authorized": True,
             "temporary_isolated_local_store_cycle_authorized": True,
             "engagement_shadow_cycle_authorized": True,
@@ -438,6 +441,35 @@ def validate_ledgers(root: Path = REPO_ROOT) -> tuple[dict[str, Any], dict[str, 
             or delivery.get("evaluation_decision") != PASS_DECISION
         ):
             fail(f"{label} AION-226 delivery reconciliation mismatch")
+        aion227_delivery = payload.get("aion_227_delivery")
+        if not isinstance(aion227_delivery, Mapping):
+            fail(f"{label} AION-227 delivery missing")
+        if (
+            aion227_delivery.get("pull_requests") != [144]
+            or aion227_delivery.get("feature_commits")
+            != [
+                "b29e7f80ab82b03cb5363ffc9daf629159f804ee",
+                "36279d736fbca06e041477c17d7e825c9b0a33b0",
+            ]
+            or aion227_delivery.get("merge_commits")
+            != ["7a505f1afa30b3732d1e1955ed6983b14ba4b5b8"]
+            or aion227_delivery.get("ci_result") != "pass"
+            or aion227_delivery.get("completion_timestamp") != "2026-07-29T17:20:10Z"
+            or aion227_delivery.get("authorization_transaction") != NEXT_AUTHORIZATION_ID
+            or aion227_delivery.get("next_task") != IMPLEMENTATION_TASK
+        ):
+            fail(f"{label} AION-227 delivery reconciliation mismatch")
+        aion228_delivery = payload.get("aion_228_delivery")
+        if not isinstance(aion228_delivery, Mapping):
+            fail(f"{label} AION-228 delivery missing")
+        if (
+            aion228_delivery.get("authorization_transaction") != NEXT_AUTHORIZATION_ID
+            or aion228_delivery.get("next_task") != FORMAL_CLOSEOUT_TASK
+            or aion228_delivery.get("ci_result") != "pending"
+            or aion228_delivery.get("runtime_state")
+            != "controlled_local_continual_learning_pilot_implemented_completed_pending_final_closeout"
+        ):
+            fail(f"{label} AION-228 delivery reconciliation mismatch")
     if auth.get("active_authorizations") != [NEXT_AUTHORIZATION_ID]:
         fail("authorization ledger active authorizations mismatch")
     records = auth.get("records")
@@ -464,38 +496,43 @@ def validate_examples(root: Path = REPO_ROOT) -> None:
         runtime_hold,
         (
             "controlled_local_continual_learning_pilot_authorized",
-            "no_cycle_service",
-            "no_live_pilot",
-            "no_network_session",
-            "no_temporary_store",
+            "controlled_local_continual_learning_pilot_implemented",
+            "operator_invoked_continual_learning_pilot_available",
+            "deterministic_continual_learning_simulation_available",
+            "controlled_live_pilot_completed",
             "no_active_overlay",
+            "pilot_operator_invocation_required",
         ),
         "runtime hold",
     )
     require_false(
         runtime_hold,
         (
-            "controlled_local_continual_learning_pilot_implemented",
-            "operator_invoked_continual_learning_pilot_available",
+            "background_continual_learning_enabled",
+            "scheduled_continual_learning_enabled",
+            "automatic_cycle_continuation_enabled",
+            "automatic_knowledge_promotion_enabled",
             "production_exposure",
         ),
         "runtime hold",
     )
+    if runtime_hold.get("controlled_live_pilot_cycle_count") != 3:
+        fail("runtime hold live pilot cycle count mismatch")
 
 
-def validate_no_aion228_source(root: Path = REPO_ROOT) -> None:
+def validate_aion228_source_scope(root: Path = REPO_ROOT) -> None:
     for relative in FUTURE_AION228_SOURCE_SCOPE:
-        if (root / relative).exists():
-            fail(f"AION-228 source exists before implementation: {relative}")
-    if (root / AION228_UNINSTALLED_OPERATOR_RUNNER).exists():
-        fail("AION-228 uninstalled runner exists before implementation")
+        if not (root / relative).exists():
+            fail(f"AION-228 source missing after implementation: {relative}")
+    if not (root / AION228_UNINSTALLED_OPERATOR_RUNNER).exists():
+        fail("AION-228 uninstalled runner missing after implementation")
 
 
 def validate_continual_learning_pilot_authorization(root: Path = REPO_ROOT) -> None:
     validate_evaluation_report(root)
     validate_ledgers(root)
     validate_examples(root)
-    validate_no_aion228_source(root)
+    validate_aion228_source_scope(root)
 
 
 def main() -> int:
