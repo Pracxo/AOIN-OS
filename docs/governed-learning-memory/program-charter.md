@@ -76,3 +76,9 @@ AION-225 completed `AION-GLMPE-002` with exact PASS decision `LOCAL_APPEND_ONLY_
 ## AION-226 Engagement-Learning Shadow Application
 
 AION-226 implements the AION-225-GLM-0003 authorized deterministic, operator-approved, non-factual engagement-learning shadow application plane. Overlays are in-memory only, apply only inside explicit bounded shadow sessions, expire or roll back before close, and create no persistent overlay, AION-224 store write, production policy mutation, factual or confidence effect, cognitive-memory write, belief mutation, model training, network call, runtime effect, v0.2 tag, or v0.2 release. AION-225-GLM-0003 remains active pending AION-227 closeout; AION-228 remains unapproved and AION-229 remains the final planned GLM closeout.
+
+## AION-227 Engagement Evaluation And Continual-Learning Pilot Authorization
+
+AION-GLMPE-003 passed all 28 deterministic, synthetic, read-only scenarios and closed AION-225-GLM-0003 as consumed by AION-226. AION-227-GLM-0004 is now the sole active GLM implementation authorization for AION-228, with AION-229 preserved as final GLM closeout.
+
+AION-228 is authorized but unimplemented. Engagement remains non-factual; internet access remains explicit and allowlisted; local continuity remains temporary and isolated; every persistence and shadow adaptation remains approval-bound; background learning, scheduled learning, automatic approval, automatic promotion, code rewrite, production memory writes, belief mutation, production policy mutation and model training remain disabled.

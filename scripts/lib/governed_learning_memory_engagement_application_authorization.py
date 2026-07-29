@@ -15,6 +15,9 @@ from scripts.lib.governed_learning_memory_local_persistence_operator_evaluation 
 )
 from scripts.lib.governed_learning_memory_engagement_application import (
     APPLICATION_STATE,
+    POST_CLOSEOUT_APPLICATION_STATE,
+    POST_CLOSEOUT_PROGRAM_STATE,
+    POST_CLOSEOUT_RUNTIME_STATE,
     PROGRAM_STATE,
     RUNTIME_STATE,
 )
@@ -23,9 +26,23 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 PROGRAM_ID = "AION-GOVERNED-LEARNING-MEMORY-001"
 AION223_AUTHORIZATION_ID = "AION-223-GLM-0002"
 AION225_AUTHORIZATION_ID = "AION-225-GLM-0003"
+AION227_AUTHORIZATION_ID = "AION-227-GLM-0004"
+AION227_PASS_DECISION = (
+    "ENGAGEMENT_SHADOW_APPLICATION_OPERATOR_EVALUATION_PASS_RECOMMEND_"
+    "CONTROLLED_LOCAL_CONTINUAL_LEARNING_PILOT_AUTHORIZATION"
+)
 AION224_FEATURE_COMMIT = "f44756f4067cd381be1ebf11a6edce1e3bc8133b"
 AION224_MERGE_COMMIT = "c6632a8e4985887f38400052f53f1c2a5d7882ec"
 AION224_PR = 140
+AION226_FEATURE_COMMITS = [
+    "44bb63222f7ccfb5ce98bbdf3b8e35c08ff4e8b3",
+    "b0c3a7e971097ce658d1b48b52662df31f4c3eb8",
+]
+AION226_MERGE_COMMITS = [
+    "8cf9947e1304fc4cd3719867cf80e0819a87700c",
+    "8156661dae57b6e141f094ee9e6650a710765635",
+]
+AION226_PRS = [142, 143]
 ENGAGEMENT_AUTHORIZATION_SCOPE = (
     "engagement-learning-candidate-non-factual-validation-operator-approval-"
     "risk-routing-bounded-adaptation-versioning-isolated-in-memory-shadow-overlay-"
@@ -96,18 +113,15 @@ def validate_authorization_ledgers(root: Path = REPO_ROOT) -> tuple[dict[str, An
     for label, payload in (("program", program), ("authorization", auth)):
         if payload.get("program_id") != PROGRAM_ID:
             fail(f"{label} program id mismatch")
+        program_state = payload.get("program_state")
+        if program_state not in {PROGRAM_STATE, POST_CLOSEOUT_PROGRAM_STATE}:
+            fail(f"{label} program state mismatch")
         expected = {
-            "program_state": PROGRAM_STATE,
-            "active_glm_implementation_authorization_count": 1,
-            "active_glm_implementation_authorization": AION225_AUTHORIZATION_ID,
-            "active_glm_implementation_task": "AION-226",
-            "formal_closeout_task": "AION-227",
             "local_persistence_operator_evaluation_passed": True,
             "local_persistence_operator_evaluation_id": "AION-GLMPE-002",
             "local_persistence_operator_evaluation_decision": PASS_DECISION,
             "engagement_learning_application_authorized": True,
             "engagement_learning_application_implemented": True,
-            "engagement_learning_application_state": APPLICATION_STATE,
             "operator_invoked_engagement_shadow_application_authorized": True,
             "operator_invoked_engagement_shadow_application_available": True,
             "automatic_engagement_learning_application_enabled": False,
@@ -125,10 +139,40 @@ def validate_authorization_ledgers(root: Path = REPO_ROOT) -> tuple[dict[str, An
             "v02_tag_created": False,
             "v02_release_created": False,
         }
+        if program_state == PROGRAM_STATE:
+            expected.update(
+                {
+                    "active_glm_implementation_authorization_count": 1,
+                    "active_glm_implementation_authorization": AION225_AUTHORIZATION_ID,
+                    "active_glm_implementation_task": "AION-226",
+                    "formal_closeout_task": "AION-227",
+                    "engagement_learning_application_state": APPLICATION_STATE,
+                }
+            )
+        else:
+            expected.update(
+                {
+                    "active_glm_implementation_authorization_count": 1,
+                    "active_glm_implementation_authorization": AION227_AUTHORIZATION_ID,
+                    "active_glm_implementation_task": "AION-228",
+                    "formal_closeout_task": "AION-229",
+                    "engagement_learning_application_state": POST_CLOSEOUT_APPLICATION_STATE,
+                    "engagement_application_operator_evaluation_passed": True,
+                    "engagement_application_operator_evaluation_id": "AION-GLMPE-003",
+                    "engagement_application_operator_evaluation_decision": AION227_PASS_DECISION,
+                    "controlled_local_continual_learning_pilot_authorized": True,
+                    "controlled_local_continual_learning_pilot_implemented": False,
+                    "operator_invoked_continual_learning_pilot_available": False,
+                }
+            )
         for key, value in expected.items():
             if payload.get(key) != value:
                 fail(f"{label} {key} mismatch")
-    if auth.get("active_authorizations") != [AION225_AUTHORIZATION_ID]:
+    if auth.get("program_state") == POST_CLOSEOUT_PROGRAM_STATE:
+        expected_active_authorizations = [AION227_AUTHORIZATION_ID]
+    else:
+        expected_active_authorizations = [AION225_AUTHORIZATION_ID]
+    if auth.get("active_authorizations") != expected_active_authorizations:
         fail("active authorization list mismatch")
     records = auth.get("records")
     if not isinstance(records, list):
@@ -175,20 +219,47 @@ def validate_authorization_ledgers(root: Path = REPO_ROOT) -> tuple[dict[str, An
             "explicit_approval_record_approval",
             "implementation_authorization_approved",
             "implementation_go_status",
-            "authorization_active",
         ),
         "AION-225 authorization",
     )
-    require_false(
-        child,
-        (
-            "implementation_no_go_status",
-            "authorization_consumed",
-            "authorization_expired",
-            "authorization_reusable",
-        ),
-        "AION-225 authorization",
-    )
+    if auth.get("program_state") == POST_CLOSEOUT_PROGRAM_STATE:
+        if (
+            child.get("authorization_active") is not False
+            or child.get("authorization_consumed") is not True
+            or child.get("authorization_expired") is not True
+            or child.get("authorization_reusable") is not False
+            or child.get("authorization_closed_by_task") != "AION-227"
+            or child.get("authorization_consumed_by_task") != "AION-226"
+            or child.get("authorization_consumed_by_prs") != AION226_PRS
+            or child.get("authorization_consumed_by_feature_commits") != AION226_FEATURE_COMMITS
+            or child.get("authorization_consumed_by_merge_commits") != AION226_MERGE_COMMITS
+            or child.get("engagement_application_operator_evaluation_id") != "AION-GLMPE-003"
+            or child.get("engagement_application_operator_evaluation_decision")
+            != AION227_PASS_DECISION
+        ):
+            fail("AION-225-GLM-0003 post-closeout mismatch")
+        next_auth = record_by_id(records, AION227_AUTHORIZATION_ID)
+        if (
+            next_auth.get("implementation_task") != "AION-228"
+            or next_auth.get("formal_closeout_task") != "AION-229"
+            or next_auth.get("authorization_active") is not True
+            or next_auth.get("authorization_consumed") is not False
+            or next_auth.get("authorization_expired") is not False
+            or next_auth.get("authorization_reusable") is not False
+        ):
+            fail("AION-227-GLM-0004 active authorization mismatch")
+    else:
+        require_true(child, ("authorization_active",), "AION-225 authorization")
+        require_false(
+            child,
+            (
+                "implementation_no_go_status",
+                "authorization_consumed",
+                "authorization_expired",
+                "authorization_reusable",
+            ),
+            "AION-225 authorization",
+        )
     if child.get("authorized_capabilities") != {
         key: True for key in AION226_AUTHORIZED_CAPABILITIES
     }:
@@ -211,8 +282,11 @@ def validate_aion226_source_scope(root: Path = REPO_ROOT) -> None:
             fail(f"AION-226 source missing after implementation: {rel}")
         if not implemented and exists:
             fail(f"AION-226 source exists during AION-225: {rel}")
-    if implemented and program.get("aion_226_delivery", {}).get("runtime_state") != RUNTIME_STATE:
-        fail("AION-226 runtime state mismatch")
+    if implemented:
+        runtime_state = program.get("aion_226_delivery", {}).get("runtime_state")
+        expected_states = {RUNTIME_STATE, POST_CLOSEOUT_RUNTIME_STATE}
+        if runtime_state not in expected_states:
+            fail("AION-226 runtime state mismatch")
 
 
 def validate_engagement_examples(root: Path = REPO_ROOT) -> None:

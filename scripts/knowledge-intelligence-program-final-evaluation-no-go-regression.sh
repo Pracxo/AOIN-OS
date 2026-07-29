@@ -49,7 +49,12 @@ is_allowed_path() {
     scripts/governed-learning-memory-local-persistence-operator-evaluation-no-go-regression.sh|\
     scripts/governed-learning-memory-engagement-application-authorization-check.sh|\
     scripts/governed-learning-memory-engagement-application-authorization-no-go-regression.sh|\
+    scripts/governed-learning-memory-engagement-application-operator-evaluation-check.sh|\
+    scripts/governed-learning-memory-engagement-application-operator-evaluation-no-go-regression.sh|\
     scripts/governed-learning-memory-engagement-application-runtime-hold.sh|\
+    scripts/governed-learning-memory-continual-learning-pilot-authorization-check.sh|\
+    scripts/governed-learning-memory-continual-learning-pilot-authorization-no-go-regression.sh|\
+    scripts/governed-learning-memory-continual-learning-pilot-runtime-hold.sh|\
     scripts/governed-learning-memory-program-authorization-check.sh|\
     scripts/governed-learning-memory-program-no-go-regression.sh|\
     scripts/governed-learning-memory-runtime-hold.sh|\
@@ -63,6 +68,8 @@ is_allowed_path() {
     scripts/lib/governed_learning_memory_local_persistence_authorization.py|\
     scripts/lib/governed_learning_memory_local_persistence_operator_evaluation.py|\
     scripts/lib/governed_learning_memory_engagement_application_authorization.py|\
+    scripts/lib/governed_learning_memory_engagement_application_operator_evaluation.py|\
+    scripts/lib/governed_learning_memory_continual_learning_pilot_authorization.py|\
     services/brain-api/tests/test_governed_learning_memory_*.py)
       return 0
       ;;

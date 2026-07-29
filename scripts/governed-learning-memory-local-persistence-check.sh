@@ -32,6 +32,8 @@ from pathlib import Path
 from scripts.lib.governed_learning_memory_local_persistence_authorization import (
     AION224_RESOURCE_LIMITS,
     AION224_SOURCE_SCOPE,
+    AION223_AUTHORIZATION_ID,
+    CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
     ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
     IMPLEMENTED_PENDING_CLOSEOUT_STATE,
@@ -50,6 +52,7 @@ implemented_states = {
     IMPLEMENTED_PENDING_CLOSEOUT_STATE,
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
     ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+    CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
 }
 for label, payload in (("program", program), ("authorization", auth)):
     if payload["program_state"] not in implemented_states:
@@ -61,10 +64,20 @@ for label, payload in (("program", program), ("authorization", auth)):
     ):
         if payload.get(key) is not True:
             raise SystemExit(f"{label} implementation flag mismatch: {key}")
-    if payload.get("authorized_source_scope") != AION224_SOURCE_SCOPE:
-        raise SystemExit(f"{label} source scope mismatch")
-    if payload.get("resource_limits") != AION224_RESOURCE_LIMITS:
-        raise SystemExit(f"{label} resource limits mismatch")
+    if payload["program_state"] != CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE:
+        if payload.get("authorized_source_scope") != AION224_SOURCE_SCOPE:
+            raise SystemExit(f"{label} source scope mismatch")
+        if payload.get("resource_limits") != AION224_RESOURCE_LIMITS:
+            raise SystemExit(f"{label} resource limits mismatch")
+historical_authorization = next(
+    item
+    for item in auth["records"]
+    if item["authorization_transaction_id"] == AION223_AUTHORIZATION_ID
+)
+if historical_authorization.get("authorized_source_scope") != AION224_SOURCE_SCOPE:
+    raise SystemExit("historical AION-224 source scope mismatch")
+if historical_authorization.get("resource_limits") != AION224_RESOURCE_LIMITS:
+    raise SystemExit("historical AION-224 resource limits mismatch")
 pilot = json.loads((root / "examples/governed-learning-memory/local-persistence-synthetic-pilot-evidence.json").read_text())
 if pilot["transactions_committed"] != 1 or pilot["temporary_database_files_retained"] != 0:
     raise SystemExit("synthetic pilot evidence mismatch")

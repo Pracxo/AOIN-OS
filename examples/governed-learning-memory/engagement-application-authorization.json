@@ -25,9 +25,23 @@
     "runtime_can_create_approval_request": false
   },
   "approval_record_id": "AION-225-GLM-0003",
-  "authorization_active": true,
-  "authorization_consumed": false,
-  "authorization_expired": false,
+  "authorization_active": false,
+  "authorization_closed_by_task": "AION-227",
+  "authorization_consumed": true,
+  "authorization_consumed_by_feature_commits": [
+    "44bb63222f7ccfb5ce98bbdf3b8e35c08ff4e8b3",
+    "b0c3a7e971097ce658d1b48b52662df31f4c3eb8"
+  ],
+  "authorization_consumed_by_merge_commits": [
+    "8cf9947e1304fc4cd3719867cf80e0819a87700c",
+    "8156661dae57b6e141f094ee9e6650a710765635"
+  ],
+  "authorization_consumed_by_prs": [
+    142,
+    143
+  ],
+  "authorization_consumed_by_task": "AION-226",
+  "authorization_expired": true,
   "authorization_reusable": false,
   "authorization_scope": "engagement-learning-candidate-non-factual-validation-operator-approval-risk-routing-bounded-adaptation-versioning-isolated-in-memory-shadow-overlay-counterfactual-evaluation-rollback-expiry-audit-core",
   "authorization_transaction_approved": true,
@@ -121,12 +135,34 @@
       "verification-rule-review"
     ]
   },
+  "engagement_application_operator_evaluation_decision": "ENGAGEMENT_SHADOW_APPLICATION_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_LOCAL_CONTINUAL_LEARNING_PILOT_AUTHORIZATION",
+  "engagement_application_operator_evaluation_id": "AION-GLMPE-003",
+  "evaluation_applied_overlay": false,
+  "evaluation_created_local_store": false,
+  "evaluation_created_network_session": false,
+  "evaluation_created_production_effect": false,
+  "evaluation_reusable": false,
+  "evaluation_used_as_continual_learning_cycle_approval": false,
   "explicit_approval_record_approval": true,
   "formal_closeout_task": "AION-227",
   "implementation_authorization_approved": true,
   "implementation_go_status": true,
   "implementation_no_go_status": false,
   "implementation_task": "AION-226",
+  "implemented_source_scope": [
+    "services/brain-api/src/aion_brain/contracts/governed_engagement_learning.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_candidate_binding.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_application_approval.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_adaptation_identity.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_adaptation_planning.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_overlay.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_shadow_application.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_counterfactual_evaluation.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_rollback.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_integrity.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_evidence.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/__init__.py"
+  ],
   "non_factual_policy": {
     "belief_effect": false,
     "confidence_effect": false,
@@ -264,7 +300,8 @@
     "services/brain-api/src/aion_brain/governed_learning_memory/engagement_counterfactual_evaluation.py",
     "services/brain-api/src/aion_brain/governed_learning_memory/engagement_rollback.py",
     "services/brain-api/src/aion_brain/governed_learning_memory/engagement_integrity.py",
-    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_evidence.py"
+    "services/brain-api/src/aion_brain/governed_learning_memory/engagement_evidence.py",
+    "services/brain-api/src/aion_brain/governed_learning_memory/__init__.py"
   ],
   "workstream": "governed-learning-memory-engagement-application"
 }

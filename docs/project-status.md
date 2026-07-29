@@ -407,3 +407,9 @@ State after AION-224:
 AION-223-GLM-0002 remains active, unconsumed, unexpired, non-reusable, and pending AION-225 formal closeout. AION-226 remains unapproved.
 
 <!-- AION-224-IMPLEMENTATION-UPDATE:END -->
+
+## AION-227 Engagement Evaluation And Continual-Learning Pilot Authorization
+
+AION-GLMPE-003 passed all 28 deterministic, synthetic, read-only scenarios and closed AION-225-GLM-0003 as consumed by AION-226. AION-227-GLM-0004 is now the sole active GLM implementation authorization for AION-228, with AION-229 preserved as final GLM closeout.
+
+AION-228 is authorized but unimplemented. Engagement remains non-factual; internet access remains explicit and allowlisted; local continuity remains temporary and isolated; every persistence and shadow adaptation remains approval-bound; background learning, scheduled learning, automatic approval, automatic promotion, code rewrite, production memory writes, belief mutation, production policy mutation and model training remain disabled.

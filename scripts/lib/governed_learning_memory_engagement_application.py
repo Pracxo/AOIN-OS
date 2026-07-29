@@ -10,16 +10,27 @@ from typing import Any, Mapping
 REPO_ROOT = Path(__file__).resolve().parents[2]
 PROGRAM_ID = "AION-GOVERNED-LEARNING-MEMORY-001"
 AUTHORIZATION_ID = "AION-225-GLM-0003"
+NEXT_AUTHORIZATION_ID = "AION-227-GLM-0004"
 PROGRAM_STATE = (
     "governed_learning_memory_engagement_application_implemented_shadow_only_"
     "pending_closeout"
+)
+POST_CLOSEOUT_PROGRAM_STATE = (
+    "governed_learning_memory_controlled_local_continual_learning_pilot_"
+    "authorized_not_implemented"
 )
 APPLICATION_STATE = (
     "implemented_deterministic_operator_approved_non_factual_in_memory_shadow_only_"
     "pending_closeout"
 )
+POST_CLOSEOUT_APPLICATION_STATE = (
+    "implemented_deterministic_operator_approved_non_factual_in_memory_shadow_only"
+)
 RUNTIME_STATE = (
     "engagement_learning_application_implemented_in_memory_shadow_only_pending_closeout"
+)
+POST_CLOSEOUT_RUNTIME_STATE = (
+    "engagement_learning_application_implemented_in_memory_shadow_only"
 )
 
 AION226_SOURCE_SCOPE: tuple[str, ...] = (
@@ -268,18 +279,52 @@ def validate_implementation_state(root: Path = REPO_ROOT) -> None:
         payload = load_json(relative, root)
         if payload.get("program_id") != PROGRAM_ID:
             fail(f"{relative} program id mismatch")
-        if payload.get("program_state") != PROGRAM_STATE:
+        program_state = payload.get("program_state")
+        if program_state not in {PROGRAM_STATE, POST_CLOSEOUT_PROGRAM_STATE}:
             fail(f"{relative} program state mismatch")
-        if payload.get("engagement_learning_application_state") != APPLICATION_STATE:
-            fail(f"{relative} engagement state mismatch")
-        if payload.get("active_glm_implementation_authorization_count") != 1:
-            fail(f"{relative} active authorization count mismatch")
-        if payload.get("active_glm_implementation_authorization") != AUTHORIZATION_ID:
-            fail(f"{relative} active authorization mismatch")
-        if payload.get("active_glm_implementation_task") != "AION-226":
-            fail(f"{relative} implementation task mismatch")
-        if payload.get("formal_closeout_task") != "AION-227":
-            fail(f"{relative} formal closeout mismatch")
+        if program_state == PROGRAM_STATE:
+            if payload.get("engagement_learning_application_state") != APPLICATION_STATE:
+                fail(f"{relative} engagement state mismatch")
+            if payload.get("active_glm_implementation_authorization_count") != 1:
+                fail(f"{relative} active authorization count mismatch")
+            if payload.get("active_glm_implementation_authorization") != AUTHORIZATION_ID:
+                fail(f"{relative} active authorization mismatch")
+            if payload.get("active_glm_implementation_task") != "AION-226":
+                fail(f"{relative} implementation task mismatch")
+            if payload.get("formal_closeout_task") != "AION-227":
+                fail(f"{relative} formal closeout mismatch")
+        else:
+            if (
+                payload.get("engagement_learning_application_state")
+                != POST_CLOSEOUT_APPLICATION_STATE
+            ):
+                fail(f"{relative} post-closeout engagement state mismatch")
+            if payload.get("active_glm_implementation_authorization_count") != 1:
+                fail(f"{relative} post-closeout active authorization count mismatch")
+            if payload.get("active_glm_implementation_authorization") != NEXT_AUTHORIZATION_ID:
+                fail(f"{relative} post-closeout active authorization mismatch")
+            if payload.get("active_glm_implementation_task") != "AION-228":
+                fail(f"{relative} post-closeout implementation task mismatch")
+            if payload.get("formal_closeout_task") != "AION-229":
+                fail(f"{relative} post-closeout formal closeout mismatch")
+            if payload.get("engagement_application_operator_evaluation_passed") is not True:
+                fail(f"{relative} AION-227 evaluation pass projection mismatch")
+            if payload.get("controlled_local_continual_learning_pilot_authorized") is not True:
+                fail(f"{relative} continual-learning authorization projection mismatch")
+            if payload.get("controlled_local_continual_learning_pilot_implemented") is not False:
+                fail(f"{relative} continual-learning implementation projection mismatch")
+            closeouts = payload.get("authorization_closeout_records")
+            if not isinstance(closeouts, list) or not any(
+                item.get("authorization_transaction_id") == AUTHORIZATION_ID
+                and item.get("authorization_active") is False
+                and item.get("authorization_consumed") is True
+                and item.get("authorization_expired") is True
+                and item.get("authorization_reusable") is False
+                and item.get("authorization_closed_by_task") == "AION-227"
+                for item in closeouts
+                if isinstance(item, Mapping)
+            ):
+                fail(f"{relative} AION-225 closeout record mismatch")
         if payload.get("final_planned_glm_closeout_task") != "AION-229":
             fail(f"{relative} final planned closeout mismatch")
         require_true(payload, TRUE_FLAGS, relative)
@@ -288,14 +333,24 @@ def validate_implementation_state(root: Path = REPO_ROOT) -> None:
         delivery = payload.get("aion_226_delivery")
         if not isinstance(delivery, Mapping):
             fail(f"{relative} AION-226 delivery missing")
-        if delivery.get("authorization_state") != (
-            "implementation_complete_pending_AION-227_closeout"
-        ):
-            fail(f"{relative} AION-226 delivery authorization state mismatch")
-        if delivery.get("runtime_state") != RUNTIME_STATE:
-            fail(f"{relative} AION-226 delivery runtime state mismatch")
-        if delivery.get("ci_result") != "pending" or delivery.get("completion_timestamp") is not None:
-            fail(f"{relative} AION-226 delivery must remain pending before PR merge")
+        if program_state == PROGRAM_STATE:
+            if delivery.get("authorization_state") != (
+                "implementation_complete_pending_AION-227_closeout"
+            ):
+                fail(f"{relative} AION-226 delivery authorization state mismatch")
+            if delivery.get("runtime_state") != RUNTIME_STATE:
+                fail(f"{relative} AION-226 delivery runtime state mismatch")
+            if delivery.get("ci_result") != "pending" or delivery.get("completion_timestamp") is not None:
+                fail(f"{relative} AION-226 delivery must remain pending before PR merge")
+        else:
+            if delivery.get("authorization_state") != "consumed_by_AION-226_closed_by_AION-227":
+                fail(f"{relative} post-closeout AION-226 authorization state mismatch")
+            if delivery.get("runtime_state") != POST_CLOSEOUT_RUNTIME_STATE:
+                fail(f"{relative} post-closeout AION-226 runtime state mismatch")
+            if delivery.get("ci_result") != "pass":
+                fail(f"{relative} post-closeout AION-226 CI mismatch")
+            if delivery.get("pull_requests") != [142, 143]:
+                fail(f"{relative} post-closeout AION-226 PR reconciliation mismatch")
 
 
 def validate_docs_and_examples(root: Path = REPO_ROOT) -> None:

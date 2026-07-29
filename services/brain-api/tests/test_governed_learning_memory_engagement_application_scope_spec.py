@@ -9,6 +9,10 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE = (
     "governed_learning_memory_engagement_application_implemented_shadow_only_pending_closeout"
 )
+CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE = (
+    "governed_learning_memory_controlled_local_continual_learning_pilot_"
+    "authorized_not_implemented"
+)
 
 
 def load_json(relative: str):
@@ -23,7 +27,10 @@ def test_engagement_authorization_scope_and_source_are_recorded_not_created():
     source_exists = [
         (REPO_ROOT / rel).exists() for rel in auth["source_scope_recorded_not_created"]
     ]
-    if program["program_state"] == ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE:
+    if program["program_state"] in {
+        ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+        CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
+    }:
         assert all(source_exists)
     else:
         assert not any(source_exists)

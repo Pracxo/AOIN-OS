@@ -1,13 +1,27 @@
 from __future__ import annotations
 
+from scripts.lib.governed_learning_memory_continual_learning_pilot_authorization import (
+    RESOURCE_LIMITS as AION228_RESOURCE_LIMITS,
+)
 from scripts.lib.governed_learning_memory_local_persistence_authorization import (
+    AION223_AUTHORIZATION_ID,
     AION224_RESOURCE_LIMITS,
+    CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
 )
 from test_governed_learning_memory_program_authorization import load_json
 
 
 def test_resource_budgets_include_positive_planning_limits_and_zero_effect_limits() -> None:
-    limits = load_json("docs/governed-learning-memory/authorization-ledger.json")["resource_limits"]
+    auth = load_json("docs/governed-learning-memory/authorization-ledger.json")
+    limits = auth["resource_limits"]
+
+    if auth["program_state"] == CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE:
+        assert limits == AION228_RESOURCE_LIMITS
+        limits = next(
+            item
+            for item in auth["records"]
+            if item["authorization_transaction_id"] == AION223_AUTHORIZATION_ID
+        )["resource_limits"]
 
     assert limits == AION224_RESOURCE_LIMITS
     assert limits["maximum_persistence_sessions"] == 10

@@ -3,6 +3,7 @@ from __future__ import annotations
 from scripts.lib.governed_learning_memory_local_persistence_authorization import (
     AION221_AUTHORIZATION_ID,
     AION223_AUTHORIZATION_ID,
+    CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
     ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
     PASS_DECISION,
@@ -38,5 +39,7 @@ def test_aion221_closeout_is_consumed_expired_and_non_reusable() -> None:
         ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
     }:
         assert auth["active_authorizations"] == ["AION-225-GLM-0003"]
+    elif auth["program_state"] == CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE:
+        assert auth["active_authorizations"] == ["AION-227-GLM-0004"]
     else:
         assert auth["active_authorizations"] == [AION223_AUTHORIZATION_ID]

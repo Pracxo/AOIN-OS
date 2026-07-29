@@ -15,3 +15,9 @@
 | `AION-229` | `planned_final_GLM_program_evaluation_and_closeout` | Final governed learning memory program evaluation and closeout |
 
 AION-226 may implement only an isolated in-memory shadow overlay application plane. It may not create persistent engagement overlays, mutate production policy, write cognitive memory, mutate beliefs, access networks, train model weights, or create production exposure.
+
+## AION-227 Engagement Evaluation And Continual-Learning Pilot Authorization
+
+AION-GLMPE-003 passed all 28 deterministic, synthetic, read-only scenarios and closed AION-225-GLM-0003 as consumed by AION-226. AION-227-GLM-0004 is now the sole active GLM implementation authorization for AION-228, with AION-229 preserved as final GLM closeout.
+
+AION-228 is authorized but unimplemented. Engagement remains non-factual; internet access remains explicit and allowlisted; local continuity remains temporary and isolated; every persistence and shadow adaptation remains approval-bound; background learning, scheduled learning, automatic approval, automatic promotion, code rewrite, production memory writes, belief mutation, production policy mutation and model training remain disabled.

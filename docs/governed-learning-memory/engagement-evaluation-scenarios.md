@@ -1,0 +1,30 @@
+# AION-227 Engagement Evaluation Scenarios
+
+- `aion_226_delivery_and_ci_integrity`: passed
+- `authorization_lineage_and_scope`: passed
+- `synthetic_pilot_evidence_integrity`: passed
+- `candidate_and_signal_binding_integrity`: passed
+- `non_factual_and_zero_effect_invariants`: passed
+- `lifecycle_expiry_supersession_retraction_and_rejection`: passed
+- `fixed_target_mapping_operation_and_risk`: passed
+- `low_risk_single_independent_approval`: passed
+- `elevated_risk_dual_approval_and_separation_of_duties`: passed
+- `exact_approval_binding_and_replay_control`: passed
+- `deterministic_adaptation_identity`: passed
+- `duplicate_idempotency_and_collision_rejection`: passed
+- `material_conflict_preservation`: passed
+- `append_only_in_memory_version_planning`: passed
+- `target_policy_closed_registry`: passed
+- `baseline_and_read_only_knowledge_context`: passed
+- `immutable_overlay_and_copy_on_write_repository`: passed
+- `explicit_shadow_authorization_and_session_bounds`: passed
+- `deterministic_reference_adapter_isolation`: passed
+- `metric_registry_direction_and_delta_integrity`: passed
+- `safety_and_policy_gate_priority`: passed
+- `expiry_rollback_and_session_cleanup`: passed
+- `exact_queries_and_fixture_boundary`: passed
+- `resource_budget_enforcement`: passed
+- `determinism_concurrency_and_performance`: passed
+- `zero_persistence_production_memory_belief_and_network_effects`: passed
+- `repository_and_release_boundary`: passed
+- `controlled_local_continual_learning_pilot_authorization_readiness`: passed
