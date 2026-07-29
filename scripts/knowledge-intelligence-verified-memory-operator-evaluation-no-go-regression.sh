@@ -76,6 +76,26 @@ is_aion224_local_persistence_path() {
   return 1
 }
 
+is_aion226_engagement_application_path() {
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/governed_engagement_learning.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/__init__.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/engagement_candidate_binding.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/engagement_application_approval.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/engagement_adaptation_identity.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/engagement_adaptation_planning.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/engagement_overlay.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/engagement_shadow_application.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/engagement_counterfactual_evaluation.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/engagement_rollback.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/engagement_integrity.py|\
+    services/brain-api/src/aion_brain/governed_learning_memory/engagement_evidence.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
 }
@@ -103,6 +123,9 @@ is_allowed_path() {
   if is_aion224_local_persistence_path "$path"; then
     return 0
   fi
+  if is_aion226_engagement_application_path "$path"; then
+    return 0
+  fi
   for item in "${ALLOWED_EXACT[@]}"; do
     [[ "$path" == "$item" ]] && return 0
   done
@@ -119,6 +142,9 @@ is_prohibited_path() {
     return 1
   fi
   if is_aion224_local_persistence_path "$path"; then
+    return 1
+  fi
+  if is_aion226_engagement_application_path "$path"; then
     return 1
   fi
   for item in "${PROHIBITED_PREFIXES[@]}"; do

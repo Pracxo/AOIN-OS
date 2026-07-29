@@ -210,6 +210,59 @@ RESOURCE_LIMITS: Final[Mapping[str, int]] = MappingProxyType(
     }
 )
 
+RESOURCE_USAGE_LIMIT_FIELDS: Final[Mapping[str, str]] = MappingProxyType(
+    {
+        "engagement_candidates": "maximum_engagement_candidates_per_batch",
+        "signal_references_per_candidate": "maximum_signal_references_per_candidate",
+        "candidate_versions": "maximum_candidate_versions_per_identity",
+        "target_components": "maximum_target_components",
+        "approval_records": "maximum_approval_evidence_records_per_application",
+        "adaptation_plans": "maximum_adaptation_plans_per_batch",
+        "overlay_records": "maximum_overlay_records_per_session",
+        "overlay_versions": "maximum_overlay_versions_per_identity",
+        "overlay_snapshots": "maximum_overlay_snapshots_per_session",
+        "counterfactual_cases": "maximum_counterfactual_cases_per_session",
+        "metrics_per_case": "maximum_metrics_per_case",
+        "comparisons": "maximum_baseline_candidate_comparisons",
+        "rollback_steps": "maximum_rollback_steps_per_application",
+        "operator_review_items": "maximum_operator_review_items",
+        "query_results": "maximum_query_results",
+        "fixture_records": "maximum_fixture_records",
+        "fixture_bytes": "maximum_fixture_bytes",
+        "concurrency": "maximum_concurrency",
+        "persistent_engagement_overlay_writes": (
+            "maximum_persistent_engagement_overlay_writes"
+        ),
+        "aion_224_store_writes": "maximum_aion_224_store_writes",
+        "production_policy_mutations": "maximum_production_policy_mutations",
+        "engagement_fact_promotions": "maximum_engagement_fact_promotions",
+        "engagement_confidence_effects": "maximum_engagement_confidence_effects",
+        "engagement_knowledge_effects": "maximum_engagement_knowledge_effects",
+        "engagement_source_independence_effects": (
+            "maximum_engagement_source_independence_effects"
+        ),
+        "cognitive_memory_writes": "maximum_cognitive_memory_writes",
+        "actual_belief_creations": "maximum_actual_belief_creations",
+        "actual_belief_mutations": "maximum_actual_belief_mutations",
+        "automatic_candidate_approvals": "maximum_automatic_candidate_approvals",
+        "automatic_knowledge_promotions": "maximum_automatic_knowledge_promotions",
+        "network_calls": "maximum_network_calls",
+        "search_provider_calls": "maximum_search_provider_calls",
+        "connector_calls": "maximum_connector_calls",
+        "model_provider_calls": "maximum_model_provider_calls",
+        "actual_tool_executions": "maximum_actual_tool_executions",
+        "shell_commands": "maximum_shell_commands",
+        "subprocess_executions": "maximum_subprocess_executions",
+        "browser_actions": "maximum_browser_actions",
+        "source_mutations": "maximum_source_mutations",
+        "git_operations": "maximum_git_operations",
+        "runtime_created_pull_requests": "maximum_runtime_created_pull_requests",
+        "runtime_created_approvals": "maximum_runtime_created_approvals",
+        "deployments": "maximum_deployments",
+        "model_weight_changes": "maximum_model_weight_changes",
+    }
+)
+
 _SAFE_ID_RE: Final = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$")
 _HEX_RE: Final = re.compile(r"^[0-9a-f]{64}$")
 _URI_RE: Final = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*:")
@@ -1467,6 +1520,23 @@ class EngagementApplicationBudgetDecision(StrictFrozenModel):
     @classmethod
     def reasons_are_known(cls, value: tuple[str, ...]) -> tuple[str, ...]:
         return validate_reason_codes(value)
+
+    @model_validator(mode="after")
+    def validate_usage_within_budget(self) -> Self:
+        violations = tuple(
+            field
+            for field, limit_key in RESOURCE_USAGE_LIMIT_FIELDS.items()
+            if getattr(self.usage, field) > self.budget.limits[limit_key]
+        )
+        if violations and self.budget_passed:
+            raise ValueError("resource budget violation cannot be marked passed")
+        if violations and "engagement_resource_budget_failed" not in self.reason_codes:
+            raise ValueError("resource budget failure reason is required")
+        if not violations and not self.budget_passed:
+            raise ValueError("resource budget cannot fail without a limit violation")
+        if not violations and "engagement_resource_budget_passed" not in self.reason_codes:
+            raise ValueError("resource budget pass reason is required")
+        return self
 
 
 class EngagementApplicationIntegrityFinding(StrictFrozenModel):
