@@ -1,0 +1,39 @@
+{
+  "boundary_id": "sri-runtime-boundary-001",
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "authorization_transaction_id": "AION-230-SRI-0001",
+  "implementation_task": "AION-231",
+  "formal_closeout_task": "AION-232",
+  "allowed": [
+    "offline_identity_assertion_composition",
+    "request_identity_projection",
+    "actor_context_binding",
+    "replay_validation",
+    "ephemeral_local_operator_session",
+    "capability_invocation_plan",
+    "policy_risk_guardrail_approval_binding",
+    "side_effect_budget_enforcement",
+    "runtime_guard",
+    "kill_switch",
+    "audit_projection",
+    "observability_snapshot",
+    "deterministic_fixture_replay"
+  ],
+  "disabled": {
+    "production_auth_runtime_enabled": false,
+    "external_identity_provider_enabled": false,
+    "credential_persistence_enabled": false,
+    "token_persistence_enabled": false,
+    "general_network_access_enabled": false,
+    "model_provider_call_enabled": false,
+    "connector_execution_enabled": false,
+    "actual_tool_execution_enabled": false,
+    "module_activation_enabled": false,
+    "production_write_execution_enabled": false,
+    "source_rewrite_enabled": false,
+    "git_mutation_enabled": false,
+    "production_deployment_enabled": false,
+    "model_weight_training_enabled": false,
+    "v02_release_ready": false
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "view_id": "secure_runtime_integration_runtime_guard",
+  "title": "Runtime Guard Boundary",
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "authorization_transaction_id": "AION-230-SRI-0001",
+  "read_only": true,
+  "redaction_applied": true,
+  "synthetic": true,
+  "guard_result": "allow_simulated_dispatch_only",
+  "identity_assertion_verified_required": true,
+  "request_identity_bound_required": true,
+  "actor_context_bound_required": true,
+  "replay_validation_required": true,
+  "policy_risk_guardrail_required": true,
+  "approval_evidence_required_when_gated": true,
+  "side_effect_budget_required": true,
+  "kill_switch_required": true,
+  "actual_execution_allowed": false,
+  "provider_call_allowed": false,
+  "connector_call_allowed": false,
+  "tool_execution_allowed": false,
+  "production_write_allowed": false
+}

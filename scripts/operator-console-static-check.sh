@@ -298,8 +298,109 @@ def validate_tool_verification_demo(payload: object, path: Path) -> None:
             raise SystemExit(f"knowledge intelligence tool runtime must remain disabled: {path}")
 
 
+def validate_secure_runtime_integration_demo(payload: object, path: Path) -> None:
+    allowed_names = {
+        "secure-runtime-integration-authorization.json",
+        "secure-runtime-integration-kill-switch.json",
+        "secure-runtime-integration-program.json",
+        "secure-runtime-integration-runtime-guard.json",
+        "secure-runtime-integration-runtime-hold.json",
+        "secure-runtime-integration-session.json",
+    }
+    if path.name not in allowed_names:
+        raise SystemExit(f"unknown secure runtime integration demo: {path}")
+    if not isinstance(payload, dict):
+        raise SystemExit(f"secure runtime integration demo must be an object: {path}")
+    if payload.get("program_id") != "AION-SECURE-RUNTIME-INTEGRATION-001":
+        raise SystemExit(f"secure runtime integration program id mismatch: {path}")
+    if payload.get("read_only") is not True:
+        raise SystemExit(f"secure runtime integration demo must be read_only: {path}")
+    redaction_applied = payload.get("redaction_applied")
+    redacted = payload.get("redacted")
+    if redaction_applied is not True and redacted is not True:
+        raise SystemExit(f"secure runtime integration demo must be redacted: {path}")
+    if payload.get("synthetic") is not True:
+        raise SystemExit(f"secure runtime integration demo must be synthetic: {path}")
+
+    false_keys = {
+        "actual_execution_allowed",
+        "actual_tool_execution_enabled",
+        "aion_231_runtime_source_exists",
+        "calls_providers",
+        "connector_call_allowed",
+        "connector_execution_enabled",
+        "credential_persistence_enabled",
+        "deploys",
+        "executes_tools",
+        "external_identity_provider_enabled",
+        "general_network_access_enabled",
+        "git_mutation_enabled",
+        "model_provider_call_enabled",
+        "model_weight_training_enabled",
+        "module_activation_enabled",
+        "mutates_production_policy",
+        "production_auth_runtime_enabled",
+        "production_deployment_enabled",
+        "production_runtime",
+        "production_runtime_authorized",
+        "production_write_allowed",
+        "production_write_execution_enabled",
+        "provider_call_allowed",
+        "runtime_implemented",
+        "session_implemented",
+        "session_token_issuance_enabled",
+        "source_rewrite_enabled",
+        "token_persistence_enabled",
+        "tool_execution_allowed",
+        "v02_release_created",
+        "v02_release_ready",
+        "v02_tag_created",
+    }
+    for key in false_keys:
+        if key in payload and payload.get(key) is not False:
+            raise SystemExit(f"secure runtime integration flag must be false: {key}: {path}")
+
+    if path.name == "secure-runtime-integration-authorization.json":
+        for key in (
+            "authorization_active",
+            "sole_active_sri_authorization",
+        ):
+            if payload.get(key) is not True:
+                raise SystemExit(f"secure runtime integration authorization flag must be true: {key}: {path}")
+        for key in (
+            "authorization_consumed",
+            "authorization_expired",
+            "authorization_reusable",
+        ):
+            if payload.get(key) is not False:
+                raise SystemExit(f"secure runtime integration authorization flag must be false: {key}: {path}")
+        if payload.get("implementation_task") != "AION-231":
+            raise SystemExit(f"secure runtime integration implementation task mismatch: {path}")
+        if payload.get("formal_closeout_task") != "AION-232":
+            raise SystemExit(f"secure runtime integration closeout task mismatch: {path}")
+    elif path.name == "secure-runtime-integration-program.json":
+        if payload.get("active_sri_implementation_authorization_count") != 1:
+            raise SystemExit(f"secure runtime integration active authorization count mismatch: {path}")
+        if payload.get("active_sri_implementation_authorization") != "AION-230-SRI-0001":
+            raise SystemExit(f"secure runtime integration active authorization mismatch: {path}")
+        if payload.get("active_sri_implementation_task") != "AION-231":
+            raise SystemExit(f"secure runtime integration active task mismatch: {path}")
+    elif path.name == "secure-runtime-integration-runtime-guard.json":
+        if payload.get("guard_result") != "allow_simulated_dispatch_only":
+            raise SystemExit(f"secure runtime integration guard result mismatch: {path}")
+    elif path.name == "secure-runtime-integration-runtime-hold.json":
+        if payload.get("runtime_hold_active") is not True:
+            raise SystemExit(f"secure runtime integration runtime hold must be active: {path}")
+    elif path.name == "secure-runtime-integration-session.json":
+        if payload.get("implementation_task") != "AION-231":
+            raise SystemExit(f"secure runtime integration session task mismatch: {path}")
+
+
 for path in sorted(demo_dir.glob("*.json")):
     payload = json.loads(path.read_text())
+    if path.name.startswith("secure-runtime-integration-"):
+        validate_secure_runtime_integration_demo(payload, path)
+        continue
     if path.name.startswith("action-authorization-"):
         if payload.get("read_only") is not True:
             raise SystemExit(f"action authorization demo must be read_only: {path}")

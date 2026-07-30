@@ -1,0 +1,22 @@
+{
+  "stage_command_id": "sri-stage-command-001",
+  "authorization_transaction_id": "AION-230-SRI-0001",
+  "implementation_task": "AION-231",
+  "formal_closeout_task": "AION-232",
+  "session_plan_id": "sri-session-plan-001",
+  "stage": "capability_plan_created",
+  "requires_prior_stages": [
+    "identity_assertion_verified",
+    "request_identity_bound",
+    "actor_context_bound",
+    "replay_validation_passed",
+    "runtime_guard_ready",
+    "session_active",
+    "request_validated"
+  ],
+  "simulated_only": true,
+  "actual_tool_execution_enabled": false,
+  "model_provider_call_enabled": false,
+  "connector_execution_enabled": false,
+  "production_write_execution_enabled": false
+}

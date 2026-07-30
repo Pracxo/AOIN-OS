@@ -114,6 +114,18 @@ AION core policy vocabulary stays generic:
 - `identity.permission.read`
 - `identity.permission.revoke`
 - `scope.resolve`
+- `secure_runtime.session.start`
+- `secure_runtime.session.close`
+- `secure_runtime.identity.verify`
+- `secure_runtime.request.bind`
+- `secure_runtime.actor.bind`
+- `secure_runtime.replay.validate`
+- `secure_runtime.guard.evaluate`
+- `secure_runtime.capability.plan`
+- `secure_runtime.dispatch.simulate`
+- `secure_runtime.kill_switch.read`
+- `secure_runtime.audit.read`
+- `secure_runtime.observability.read`
 - `evidence.create`
 - `evidence.read`
 - `evidence.search`
@@ -121,6 +133,11 @@ AION core policy vocabulary stays generic:
 - `self_improvement.shadow.evaluate`
 - `self_improvement.shadow.review`
 - `self_improvement.shadow.activation_review.request`
+
+The `secure_runtime.*` vocabulary is authorized for AION-231 local foundation
+planning only. It must remain side-effect-free and may not authorize provider
+calls, connector calls, actual tool execution, module activation, production
+writes, production policy mutation, deployment, v0.2 tags, or v0.2 releases.
 
 AION-179 records the shadow evaluation as advisory only. The policy vocabulary
 does not gain an allow action for runtime shadow activation, source rewrite,

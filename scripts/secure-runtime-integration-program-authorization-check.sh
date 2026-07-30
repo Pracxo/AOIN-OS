@@ -1,0 +1,460 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT_DIR"
+source "$ROOT_DIR/scripts/lib/python-selection.sh"
+source "$ROOT_DIR/scripts/lib/immutable-tags.sh"
+source "$ROOT_DIR/scripts/lib/portable-search.sh"
+
+PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
+aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
+export AION_REPO_ROOT="$ROOT_DIR"
+
+"$PYTHON_BIN" - <<'PY'
+from __future__ import annotations
+
+import json
+import os
+import subprocess
+from pathlib import Path
+from typing import Any
+
+root = Path(os.environ["AION_REPO_ROOT"])
+
+PROGRAM_ID = "AION-SECURE-RUNTIME-INTEGRATION-001"
+PROGRAM_STATE = "secure_runtime_integration_program_authorized_not_implemented"
+AUTH_ID = "AION-230-SRI-0001"
+IMPLEMENTATION_TASK = "AION-231"
+CLOSEOUT_TASK = "AION-232"
+FINAL_TASK = "AION-238"
+SCOPE = (
+    "local-operator-authenticated-session-offline-identity-request-context-"
+    "actor-context-replay-guarded-capability-dispatch-policy-risk-approval-"
+    "kill-switch-audit-observability-foundation-core"
+)
+GLM_DECISION = (
+    "CONTROLLED_LOCAL_CONTINUAL_LEARNING_PILOT_FINAL_EVALUATION_PASS_COMPLETE_"
+    "GOVERNED_LEARNING_MEMORY_PROGRAM"
+)
+PARENT_PROGRAMS = [
+    "AION-COGNITIVE-ARCHITECTURE-001",
+    "AION-KNOWLEDGE-INTELLIGENCE-001",
+    "AION-GOVERNED-LEARNING-MEMORY-001",
+    "AION-SELF-IMPROVEMENT-001",
+]
+REQUIRED_CHECKS = {
+    "brain-api-quality",
+    "contract-check",
+    "docker-build-core",
+    "policy-check",
+    "repository-hygiene",
+    "sdk-cli-check",
+    "sdk-quality",
+}
+AION_229 = {
+    146: {
+        "state": "MERGED",
+        "baseRefName": "main",
+        "headRefName": "phase/governed-learning-memory-program-final-evaluation-closeout",
+        "headRefOid": "3d718e29f07d260801bbe372c436442e95224d17",
+        "mergeCommit": "a6a6d62eb7c04666a206bfadbbcd640e5bdca10a",
+        "mergedAt": "2026-07-30T09:12:24Z",
+    },
+    147: {
+        "state": "MERGED",
+        "baseRefName": "main",
+        "headRefName": (
+            "phase/governed-learning-memory-program-final-evidence-reconciliation"
+        ),
+        "headRefOid": "ef8e7d0387734fc0c5fb12e1d35d38b0761bb342",
+        "mergeCommit": "9daca65b0a801988db17906611b00dff882aaacd",
+        "mergedAt": "2026-07-30T09:50:43Z",
+    },
+}
+AUTHORIZED = [
+    "secure_runtime_contract_approved",
+    "local_operator_runtime_authorization_envelope_approved",
+    "offline_ed25519_identity_assertion_composition_approved",
+    "public_key_registry_read_approved",
+    "request_identity_context_projection_approved",
+    "actor_context_binding_approved",
+    "persistent_replay_protection_validation_approved",
+    "ephemeral_operator_session_lifecycle_approved",
+    "explicit_session_start_approved",
+    "explicit_session_close_approved",
+    "deterministic_runtime_state_machine_approved",
+    "runtime_request_envelope_approved",
+    "capability_invocation_plan_approved",
+    "closed_capability_allowlist_approved",
+    "policy_decision_binding_approved",
+    "risk_assessment_binding_approved",
+    "guardrail_decision_binding_approved",
+    "existing_approval_evidence_validation_approved",
+    "side_effect_budget_enforcement_approved",
+    "runtime_guard_approved",
+    "operator_kill_switch_approved",
+    "request_trace_correlation_approved",
+    "runtime_audit_projection_approved",
+    "runtime_observability_snapshot_approved",
+    "runtime_health_readiness_approved",
+    "deterministic_runtime_fixture_replay_approved",
+    "local_operator_runtime_pilot_approved",
+    "read_only_operator_console_projection_approved",
+    "operator_review_item_approved",
+    "redacted_runtime_evidence_approved",
+    "documentation_and_static_evidence_approved",
+]
+PROHIBITED = [
+    "production_auth_runtime_enabled",
+    "public_auth_endpoint_enabled",
+    "external_identity_provider_enabled",
+    "password_authentication_enabled",
+    "credential_persistence_enabled",
+    "token_persistence_enabled",
+    "session_token_issuance_enabled",
+    "refresh_token_enabled",
+    "public_key_network_retrieval_enabled",
+    "general_network_access_enabled",
+    "public_network_access_enabled",
+    "model_provider_integration_enabled",
+    "model_provider_call_enabled",
+    "connector_integration_enabled",
+    "connector_execution_enabled",
+    "actual_tool_execution_enabled",
+    "shell_command_execution_enabled",
+    "subprocess_execution_enabled",
+    "browser_automation_enabled",
+    "module_activation_enabled",
+    "module_code_loading_enabled",
+    "package_installation_enabled",
+    "dynamic_route_registration_enabled",
+    "automatic_capability_execution_enabled",
+    "automatic_approval_enabled",
+    "runtime_approval_creation_enabled",
+    "production_write_execution_enabled",
+    "production_memory_write_enabled",
+    "production_policy_mutation_enabled",
+    "cognitive_memory_write_enabled",
+    "actual_belief_creation_enabled",
+    "actual_belief_mutation_enabled",
+    "glm_live_execution_enabled",
+    "repeat_continual_learning_pilot_enabled",
+    "self_improvement_runtime_enabled",
+    "source_rewrite_enabled",
+    "git_mutation_enabled",
+    "runtime_pull_request_creation_enabled",
+    "automatic_merge_enabled",
+    "production_canary_enabled",
+    "production_deployment_enabled",
+    "model_weight_training_enabled",
+    "production_exposure",
+    "v02_release_ready",
+    "v02_tag_created",
+    "v02_release_created",
+]
+RESOURCE_LIMITS = {
+    "maximum_local_operator_sessions": 1,
+    "maximum_session_seconds": 3600,
+    "maximum_requests_per_session": 100,
+    "maximum_concurrent_requests": 4,
+    "maximum_capability_plans_per_request": 10,
+    "maximum_capability_invocations_per_session": 100,
+    "maximum_policy_decisions_per_request": 20,
+    "maximum_risk_assessments_per_request": 20,
+    "maximum_guardrail_decisions_per_request": 20,
+    "maximum_approval_evidence_records_per_request": 4,
+    "maximum_stage_receipts_per_session": 1000,
+    "maximum_audit_records_per_session": 10000,
+    "maximum_telemetry_events_per_session": 10000,
+    "maximum_operator_review_items_per_session": 500,
+    "maximum_trace_bytes_per_session": 4194304,
+    "maximum_response_bytes_per_request": 1048576,
+    "maximum_fixture_records": 5000,
+    "maximum_fixture_bytes": 4194304,
+    "maximum_session_checkpoints": 20,
+    "maximum_replay_validations_per_request": 10,
+    "maximum_kill_switch_checks_per_request": 10,
+    "maximum_public_network_calls": 0,
+    "maximum_model_provider_calls": 0,
+    "maximum_connector_calls": 0,
+    "maximum_actual_tool_executions": 0,
+    "maximum_shell_commands": 0,
+    "maximum_subprocess_executions": 0,
+    "maximum_browser_actions": 0,
+    "maximum_credentials_persisted": 0,
+    "maximum_tokens_persisted": 0,
+    "maximum_session_tokens_issued": 0,
+    "maximum_external_identity_provider_calls": 0,
+    "maximum_modules_activated": 0,
+    "maximum_packages_installed": 0,
+    "maximum_dynamic_routes_registered": 0,
+    "maximum_automatic_approvals": 0,
+    "maximum_runtime_created_approvals": 0,
+    "maximum_production_writes": 0,
+    "maximum_production_memory_writes": 0,
+    "maximum_production_policy_mutations": 0,
+    "maximum_cognitive_memory_writes": 0,
+    "maximum_actual_belief_creations": 0,
+    "maximum_actual_belief_mutations": 0,
+    "maximum_glm_live_executions": 0,
+    "maximum_source_mutations": 0,
+    "maximum_git_operations": 0,
+    "maximum_runtime_created_pull_requests": 0,
+    "maximum_automatic_merges": 0,
+    "maximum_production_canary_executions": 0,
+    "maximum_deployments": 0,
+    "maximum_model_weight_changes": 0,
+}
+FUTURE_SOURCE_SCOPE = [
+    "services/brain-api/src/aion_brain/contracts/secure_runtime.py",
+    "services/brain-api/src/aion_brain/secure_runtime/__init__.py",
+    "services/brain-api/src/aion_brain/secure_runtime/authorization.py",
+    "services/brain-api/src/aion_brain/secure_runtime/identity_binding.py",
+    "services/brain-api/src/aion_brain/secure_runtime/session_lifecycle.py",
+    "services/brain-api/src/aion_brain/secure_runtime/request_pipeline.py",
+    "services/brain-api/src/aion_brain/secure_runtime/capability_dispatch.py",
+    "services/brain-api/src/aion_brain/secure_runtime/runtime_guard.py",
+    "services/brain-api/src/aion_brain/secure_runtime/kill_switch.py",
+    "services/brain-api/src/aion_brain/secure_runtime/audit.py",
+    "services/brain-api/src/aion_brain/secure_runtime/observability.py",
+    "services/brain-api/src/aion_brain/secure_runtime/integrity.py",
+    "services/brain-api/src/aion_brain/secure_runtime/evidence.py",
+]
+
+
+def load_json(relative: str) -> dict[str, Any]:
+    return json.loads((root / relative).read_text(encoding="utf-8"))
+
+
+def text(relative: str) -> str:
+    return (root / relative).read_text(encoding="utf-8")
+
+
+def require(condition: bool, message: str) -> None:
+    if not condition:
+        raise SystemExit(message)
+
+
+def git(args: list[str]) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        ["git", *args],
+        cwd=root,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+
+def gh_available() -> bool:
+    if subprocess.run(
+        ["gh", "--version"],
+        cwd=root,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    ).returncode != 0:
+        return False
+    if os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN"):
+        return True
+    return subprocess.run(
+        ["gh", "auth", "status"],
+        cwd=root,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    ).returncode == 0
+
+
+def verify_pr(number: int, expected: dict[str, str]) -> None:
+    result = subprocess.run(
+        [
+            "gh",
+            "pr",
+            "view",
+            str(number),
+            "--json",
+            "number,state,mergedAt,mergeCommit,headRefName,headRefOid,baseRefName,statusCheckRollup",
+        ],
+        cwd=root,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    require(result.returncode == 0, f"gh PR #{number} lookup failed")
+    payload = json.loads(result.stdout)
+    for key in ("state", "baseRefName", "headRefName", "headRefOid", "mergedAt"):
+        require(payload.get(key) == expected[key], f"PR #{number} mismatch {key}")
+    require(
+        (payload.get("mergeCommit") or {}).get("oid") == expected["mergeCommit"],
+        f"PR #{number} merge commit mismatch",
+    )
+    checks: dict[str, str] = {}
+    for item in payload.get("statusCheckRollup") or []:
+        name = item.get("name") or item.get("context") or item.get("workflowName")
+        conclusion = item.get("conclusion") or item.get("state")
+        if name in REQUIRED_CHECKS:
+            checks[name] = conclusion
+    require(REQUIRED_CHECKS <= set(checks), f"PR #{number} missing required checks")
+    failed = {
+        name: conclusion
+        for name, conclusion in checks.items()
+        if conclusion not in {"SUCCESS", "COMPLETED", "SUCCESSFUL"}
+    }
+    require(not failed, f"PR #{number} has non-success checks: {failed}")
+
+
+program = load_json("docs/secure-runtime-integration/program-ledger.json")
+auth = load_json("docs/secure-runtime-integration/authorization-ledger.json")
+glm_program = load_json("docs/governed-learning-memory/program-ledger.json")
+glm_auth = load_json("docs/governed-learning-memory/authorization-ledger.json")
+program_example = load_json("examples/secure-runtime-integration/program-authorization.json")
+auth_example = load_json("examples/secure-runtime-integration/local-operator-runtime-authorization.json")
+
+for payload in (program, auth):
+    require(payload["program_id"] == PROGRAM_ID, "program id mismatch")
+    require(payload["program_state"] == PROGRAM_STATE, "program state mismatch")
+    require(
+        payload["active_sri_implementation_authorization_count"] == 1,
+        "active SRI authorization count mismatch",
+    )
+    require(
+        payload["active_sri_implementation_authorization"] == AUTH_ID,
+        "active SRI authorization mismatch",
+    )
+    require(payload["active_sri_implementation_task"] == IMPLEMENTATION_TASK, "task mismatch")
+    require(payload["formal_closeout_task"] == CLOSEOUT_TASK, "closeout task mismatch")
+    require(payload["production_runtime_authorized"] is False, "production runtime authorized")
+    require(payload["v02_release_ready"] is False, "v0.2 readiness must be false")
+    require(payload["active_glm_implementation_authorization_count"] == 0, "GLM active auth")
+    require(payload["active_knowledge_implementation_authorization_count"] == 0, "KI active auth")
+    require(payload["active_cognitive_implementation_authorization_count"] == 0, "CA active auth")
+    require(
+        payload["active_self_improvement_implementation_authorization_count"] == 0,
+        "self-improvement active auth",
+    )
+    require(set(payload["authorized_capabilities"]) == set(AUTHORIZED), "approved keys mismatch")
+    require(all(payload["authorized_capabilities"][key] is True for key in AUTHORIZED), "approved flag")
+    require(set(payload["prohibited_capabilities"]) == set(PROHIBITED), "prohibited keys mismatch")
+    require(all(payload["prohibited_capabilities"][key] is False for key in PROHIBITED), "prohibited flag")
+    require(payload["resource_limits"] == RESOURCE_LIMITS, "resource limit mismatch")
+
+require(program["parent_completed_programs"] == PARENT_PROGRAMS, "parent lineage mismatch")
+require(program["parent_glm_evaluation_id"] == "AION-GLMPE-004", "GLMPE id mismatch")
+require(program["parent_glm_evaluation_decision"] == GLM_DECISION, "GLMPE decision mismatch")
+require(program["secure_runtime_foundation_authorized"] is True, "SRI foundation not authorized")
+require(program["secure_runtime_foundation_implemented"] is False, "SRI foundation implemented")
+require(program["aion_231_record"]["authorization_transaction"] == AUTH_ID, "AION-231 record auth")
+require(program["aion_231_record"]["next_task"] == CLOSEOUT_TASK, "AION-231 next task")
+require(program["aion_230_delivery"]["authorization_transaction"] == AUTH_ID, "AION-230 delivery auth")
+require(program["future_source_scope"] == FUTURE_SOURCE_SCOPE, "future source scope mismatch")
+for item in program["roadmap"]:
+    if item["task_id"] == IMPLEMENTATION_TASK:
+        require(item["state"] == "authorized_not_implemented", "AION-231 roadmap state")
+    if item["task_id"] in {"AION-233", "AION-234", "AION-235", "AION-236", "AION-237"}:
+        require(item["state"] == "planned_not_authorized", f"{item['task_id']} unauthorized")
+
+require(auth["authorization_transaction_id"] == AUTH_ID, "auth id mismatch")
+require(auth["approval_record_id"] == AUTH_ID, "approval id mismatch")
+require(auth["candidate_id"] == "authenticated-local-operator-runtime-foundation-core", "candidate")
+require(auth["workstream"] == "secure-runtime-foundation", "workstream")
+require(auth["implementation_task"] == IMPLEMENTATION_TASK, "implementation task")
+require(auth["formal_closeout_task"] == CLOSEOUT_TASK, "formal closeout")
+require(auth["authorization_scope"] == SCOPE, "scope mismatch")
+require(auth["authorization_transaction_approved"] is True, "transaction not approved")
+require(auth["explicit_approval_record_approval"] is True, "approval record false")
+require(auth["implementation_authorization_approved"] is True, "implementation auth false")
+require(auth["implementation_go_status"] is True, "go false")
+require(auth["implementation_no_go_status"] is False, "no-go true")
+require(auth["authorization_active"] is True, "authorization inactive")
+require(auth["authorization_consumed"] is False, "authorization consumed")
+require(auth["authorization_expired"] is False, "authorization expired")
+require(auth["authorization_reusable"] is False, "authorization reusable")
+require(len(auth["active_authorizations"]) == 1, "more than one active SRI auth")
+
+require(program_example["program_id"] == PROGRAM_ID, "program example mismatch")
+require(auth_example["authorization_transaction_id"] == AUTH_ID, "auth example mismatch")
+
+require(glm_program["program_state"] == "governed_learning_memory_program_complete", "GLM incomplete")
+require(glm_program["governed_learning_memory_program_complete"] is True, "GLM complete flag")
+require(glm_program["program_final_evidence_reconciled"] is True, "GLM reconciliation flag")
+require(glm_program["governed_learning_memory_program_evaluation_id"] == "AION-GLMPE-004", "GLMPE")
+require(glm_program["governed_learning_memory_program_evaluation_decision"] == GLM_DECISION, "GLM decision")
+require(glm_program["active_glm_implementation_authorization_count"] == 0, "active GLM auth")
+require(glm_auth["active_authorizations"] == [], "GLM active authorizations not empty")
+closed = next(
+    item
+    for item in glm_auth["records"]
+    if item.get("authorization_transaction_id") == "AION-227-GLM-0004"
+)
+require(closed["authorization_active"] is False, "AION-227 still active")
+require(closed["authorization_consumed"] is True, "AION-227 not consumed")
+require(closed["authorization_consumed_by_task"] == "AION-228", "AION-227 consumer")
+require(closed["authorization_consumed_by_prs"] == [145], "AION-227 PRs")
+require(closed["authorization_expired"] is True, "AION-227 not expired")
+require(closed["authorization_reusable"] is False, "AION-227 reusable")
+require(closed["authorization_closed_by_task"] == "AION-229", "AION-227 closeout")
+
+verification = program["aion_229_verification"]
+require(verification["primary_pr"] == 146, "AION-229 primary PR mismatch")
+require(verification["reconciliation_pr"] == 147, "AION-229 reconciliation PR mismatch")
+require(verification["ci_result"] == "pass", "AION-229 CI mismatch")
+require(verification["evaluation_id"] == "AION-GLMPE-004", "AION-229 eval id")
+require(verification["evaluation_decision"] == GLM_DECISION, "AION-229 eval decision")
+
+if gh_available():
+    for number, expected in AION_229.items():
+        verify_pr(number, expected)
+else:
+    print("WARN: gh PR evidence unavailable; relying on committed AION-229 evidence")
+
+for source_path in FUTURE_SOURCE_SCOPE:
+    require(not (root / source_path).exists(), f"AION-231 source exists: {source_path}")
+require(not (root / "services/brain-api/src/aion_brain/secure_runtime").exists(), "secure_runtime package exists")
+
+readme = text("README.md")
+status = text("docs/project-status.md")
+architecture = text("docs/architecture.md")
+release = text("docs/release/v02-release-readiness-delta.md")
+for content, label in ((readme, "README"), (status, "project status")):
+    require("Knowledge Intelligence Program" in content, f"{label} missing KI state")
+    require("Governed Learning and Memory Program" in content, f"{label} missing GLM state")
+    require(AUTH_ID in content, f"{label} missing SRI auth")
+    require("AION-231" in content and "AION-232" in content, f"{label} missing task flow")
+    require("v0.2 remains unreleased" in content or "v02_release_ready=false" in content, f"{label} v0.2")
+require("final Git evidence reconciliation is recorded by PR #147" in architecture, "architecture stale")
+for blocker in (
+    "Production-auth runtime integration",
+    "Production replay-ledger provisioning",
+    "Request-level verified identity integration",
+    "Identity-provider integration",
+    "Public-key operational provisioning and rotation",
+    "Protected-material lifecycle",
+    "Credential lifecycle",
+    "Token lifecycle",
+    "Session lifecycle",
+    "Deployment artifact",
+    "Rollback operations",
+    "Production observability",
+    "Threat-model review",
+    "Runtime guard release decision",
+    "Release-candidate validation",
+    "Explicit v0.2 tag and release authorization",
+):
+    require(blocker in release, f"release blocker missing: {blocker}")
+require("AION-230 addresses only the secure local runtime foundation" in release, "release scope")
+PY
+
+aion_confirm_immutable_v01_tag_history >/dev/null
+if git tag --list 'v0.2*' 'aion-v0.2*' | grep -q .; then
+  echo "ERROR: v0.2 tag exists" >&2
+  exit 1
+fi
+if command -v gh >/dev/null 2>&1; then
+  if gh release view v0.2 >/dev/null 2>&1 || gh release view aion-v0.2 >/dev/null 2>&1; then
+    echo "ERROR: v0.2 release exists" >&2
+    exit 1
+  fi
+fi
+
+echo "secure runtime integration program authorization PASS"

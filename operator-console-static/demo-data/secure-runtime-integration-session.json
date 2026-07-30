@@ -1,0 +1,21 @@
+{
+  "view_id": "secure_runtime_integration_session",
+  "title": "AION-231 Local Session Plan",
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "authorization_transaction_id": "AION-230-SRI-0001",
+  "implementation_task": "AION-231",
+  "read_only": true,
+  "redaction_applied": true,
+  "synthetic": true,
+  "operator_invoked": true,
+  "local_session": true,
+  "maximum_local_operator_sessions": 1,
+  "maximum_session_seconds": 3600,
+  "maximum_requests_per_session": 100,
+  "maximum_concurrent_requests": 4,
+  "session_implemented": false,
+  "session_token_issuance_enabled": false,
+  "credential_persistence_enabled": false,
+  "token_persistence_enabled": false,
+  "production_runtime": false
+}

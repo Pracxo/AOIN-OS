@@ -354,6 +354,7 @@ allowed_authorization_demo_names = {
     "governed-learning-memory-promotion-evaluation.json",
     "governed-learning-memory-roadmap.json",
     "governed-learning-memory-runtime-hold.json",
+    "secure-runtime-integration-authorization.json",
 }
 aion161_allowed_policy_markers = {
     "runtime_private_key",

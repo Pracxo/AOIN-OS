@@ -1,12 +1,28 @@
 # Project Status
 
-Current milestone: AION-229 complete - Governed Learning and Memory Program complete.
+Current milestone: AION-230 Secure Runtime Integration Program authorized.
 
-Current task: none.
+Current task: AION-231 controlled authenticated local operator runtime foundation.
 
-Current stage: AION OS contains a governed, evidence-bound learning and memory architecture covering verified-knowledge promotion planning, isolated append-only local persistence, non-factual engagement shadow adaptation, and one completed controlled local continual-learning pilot. The Governed Learning and Memory Program is complete; no active GLM implementation authorization, active GLM implementation task, successor GLM task, successor GLM authorization, repeated live-pilot authorization, or production runtime authorization remains.
+Current stage: The intelligence, cognitive, knowledge, learning, and memory programs are complete. A separate Secure Runtime Integration Program is now authorized to build the authenticated local operator control plane required before model, connector, module, production, deployment, or v0.2 release work.
 
-Required flags: `governed_learning_memory_program_complete=true`, `program_final_evidence_reconciled=true`, `active_glm_implementation_authorization_count=0`, `active_glm_implementation_authorization=null`, `active_glm_implementation_task=null`, `formal_closeout_task=null`, `next_glm_implementation_task=null`, `next_glm_implementation_authorization=null`, `final_completed_task=AION-229`, `controlled_local_continual_learning_pilot_implemented=true`, `controlled_live_pilot_completed=true`, `controlled_live_pilot_cycle_count=3`, `operator_invoked_continual_learning_pilot_available=false`, `repeat_live_pilot_authorized=false`, `production_runtime_authorized=false`, `background_continual_learning_enabled=false`, `scheduled_continual_learning_enabled=false`, `automatic_knowledge_promotion_enabled=false`, `automatic_persistence_enabled=false`, `production_memory_write_enabled=false`, `production_policy_mutation_enabled=false`, `cognitive_memory_write_enabled=false`, `actual_belief_creation_enabled=false`, `actual_belief_mutation_enabled=false`, `model_weight_training_enabled=false`, `production_exposure=false`, `v02_release_ready=false`.
+Required flags: `secure_runtime_integration_program_authorized=true`, `secure_runtime_foundation_authorized=true`, `secure_runtime_foundation_implemented=false`, `active_sri_implementation_authorization_count=1`, `active_sri_implementation_authorization=AION-230-SRI-0001`, `active_sri_implementation_task=AION-231`, `formal_closeout_task=AION-232`, `next_sri_implementation_task=AION-231`, `final_planned_sri_task=AION-238`, `governed_learning_memory_program_complete=true`, `program_final_evidence_reconciled=true`, `active_glm_implementation_authorization_count=0`, `active_glm_implementation_authorization=null`, `active_glm_implementation_task=null`, `active_knowledge_implementation_authorization_count=0`, `active_cognitive_implementation_authorization_count=0`, `active_self_improvement_implementation_authorization_count=0`, `repeat_live_pilot_authorized=false`, `production_auth_runtime_enabled=false`, `production_runtime_authorized=false`, `model_gateway_authorized=false`, `connector_runtime_authorized=false`, `capability_execution_authorized=false`, `module_activation_authorized=false`, `operator_console_live_services_authorized=false`, `external_identity_provider_enabled=false`, `credential_persistence_enabled=false`, `token_persistence_enabled=false`, `model_provider_call_enabled=false`, `connector_execution_enabled=false`, `actual_tool_execution_enabled=false`, `source_rewrite_enabled=false`, `git_mutation_enabled=false`, `production_deployment_enabled=false`, `model_weight_training_enabled=false`, `production_exposure=false`, `v02_release_ready=false`, `v02_tag_created=false`, `v02_release_created=false`.
+
+Secure Runtime Integration status: `AION-SECURE-RUNTIME-INTEGRATION-001` is a new separate program created by AION-230. `AION-230-SRI-0001` is the sole active Secure Runtime Integration implementation authorization. It authorizes only AION-231 for a controlled, authenticated, operator-invoked, local secure runtime foundation. AION-232 is the formal closeout and next-authorization decision task. AION-233 through AION-238 remain planned and unauthorized.
+
+Secure Runtime Integration boundary: AION-231 remains unimplemented. It may compose existing offline identity verification, RequestIdentity, ActorContext, replay protection, policy, risk, guardrails, approval evidence, audit, and observability through a local side-effect-free runtime boundary. It may not call model providers, connectors, tools, networks, external identity providers, production memory, production policy, modules, deployment, or model training.
+
+Governed Learning and Memory Program complete. GLM authorization count remains zero. External providers remain disabled,
+connectors remain disabled, tools remain disabled, module activation remains
+disabled, production runtime remains disabled, and v0.2 remains unreleased.
+Governed Learning and Memory Program remains complete. Boundary summary: external providers
+remain disabled, connectors remain disabled, tools remain disabled, module
+activation remains disabled, production runtime remains disabled, and v0.2
+remains unreleased.
+external providers remain disabled, connectors remain disabled, tools remain
+disabled, module activation remains disabled, production runtime remains
+disabled, and v0.2 remains unreleased.
+Literal guard phrases: external providers remain disabled; connectors remain disabled; tools remain disabled; module activation remains disabled; production runtime remains disabled; v0.2 remains unreleased.
 
 Historical AION-228 evidence remains preserved. The live pilot used explicit allowlisted public HTTPS research, purged source bodies, produced one verified candidate, produced one promotion plan, used dual-approved temporary persistence once, read cross-cycle context once, applied one in-memory shadow application, abstained in Cycle 3, and removed temporary stores and overlays. No second live pilot is authorized or performed.
 
