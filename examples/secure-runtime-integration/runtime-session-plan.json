@@ -1,14 +1,18 @@
 {
-  "session_plan_id": "sri-session-plan-001",
   "authorization_transaction_id": "AION-230-SRI-0001",
-  "implementation_task": "AION-231",
   "formal_closeout_task": "AION-232",
-  "operator_invoked": true,
-  "local_session": true,
-  "maximum_session_seconds": 3600,
-  "maximum_requests_per_session": 100,
-  "maximum_concurrent_requests": 4,
+  "implementation_task": "AION-231",
   "initial_state": "drafted",
+  "local_session": true,
+  "maximum_concurrent_requests": 4,
+  "maximum_requests_per_session": 100,
+  "maximum_session_seconds": 3600,
+  "operator_invoked": true,
+  "production_runtime": false,
+  "program_state": "secure_runtime_foundation_implemented_local_operator_simulation_only_pending_closeout",
+  "runtime_implemented": true,
+  "secure_runtime_foundation_state": "implemented_authenticated_local_operator_simulation_only_pending_AION-232_closeout",
+  "session_plan_id": "sri-session-plan-001",
   "terminal_states": [
     "abstained",
     "blocked",
@@ -16,7 +20,5 @@
     "expired",
     "failed",
     "session_closed"
-  ],
-  "runtime_implemented": false,
-  "production_runtime": false
+  ]
 }

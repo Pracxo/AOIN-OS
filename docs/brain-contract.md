@@ -101,20 +101,19 @@ The contract includes:
 - `WorkspaceMembership`: actor membership and role within a workspace.
 - `PermissionGrant`: generic allow or deny permission grant.
 - `ActorContext`: request-time actor, workspace, role, permission, and scope context.
-- Future `SecureRuntimeAuthorizationEnvelope`: authorization metadata for a
-  local operator runtime foundation, planned for AION-231 and not implemented
-  by AION-230.
-- Future `SecureOperatorIdentityBinding`: offline operator identity evidence
-  binding, planned for AION-231 and not implemented by AION-230.
-- Future `SecureRequestIdentityBinding`: request identity projection binding,
-  planned for AION-231 and not implemented by AION-230.
-- Future `SecureActorContextBinding`: verified ActorContext binding, planned
-  for AION-231 and not implemented by AION-230.
-- Future `SecureRuntimeSessionPlan`, `SecureRuntimeStageCommand`,
+- `SecureRuntimeAuthorizationEnvelope`: authorization metadata for a local
+  operator runtime foundation implemented by AION-231 under
+  `AION-230-SRI-0001`.
+- `SecureOperatorIdentityBinding`: redacted offline operator identity evidence
+  binding from an already verified Ed25519 assertion and replay claim.
+- `SecureRequestIdentityBinding`: request identity projection derived only from
+  signed assertion claims.
+- `SecureActorContextBinding`: verified local-operator ActorContext binding.
+- `SecureRuntimeSessionPlan`, `SecureRuntimeStageCommand`,
   `SecureRuntimeStageReceipt`, `SecureRuntimeGuardDecision`,
-  `SecureRuntimeKillSwitchState`, `SecureRuntimeAuditRecord`, and
-  `SecureRuntimeObservabilitySnapshot`: local secure-runtime foundation
-  contracts planned for AION-231 only.
+  `SecureRuntimeKillSwitchState`, `SecureRuntimeAuditRecord`,
+  `SecureRuntimeObservabilitySnapshot`, and `SecureRuntimeSessionResult`: local
+  secure-runtime foundation contracts implemented for AION-231 only.
 - `ScopeResolutionRequest`: request to resolve scopes for a generic action.
 - `ScopeResolution`: resolved scope, permission, allow, and constraint result.
 - `EvidenceRecord`: source evidence metadata and content addressing record.

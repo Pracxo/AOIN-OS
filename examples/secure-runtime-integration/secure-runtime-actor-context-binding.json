@@ -1,0 +1,45 @@
+{
+  "actor_context": {
+    "actor_id": "operator-AION-231",
+    "actor_type": "local_operator",
+    "correlation_id": "correlation-AION-231",
+    "dev_mode": false,
+    "permissions": [
+      "brain:think:simulate",
+      "secure_runtime:audit:read",
+      "secure_runtime:fixture:replay",
+      "secure_runtime:read"
+    ],
+    "roles": [
+      "operator",
+      "viewer"
+    ],
+    "security_scope": [
+      "secure-runtime:audit",
+      "secure-runtime:fixture-replay",
+      "secure-runtime:health",
+      "secure-runtime:observability",
+      "secure-runtime:simulate-capability"
+    ],
+    "trace_id": "trace-AION-231",
+    "workspace_id": "workspace-AION-231"
+  },
+  "actor_context_fingerprint": "0676c1cc225b4a346cc35906b23c21159f6dafdc81ef94853638bbe0f3ac68eb",
+  "anonymous_context": false,
+  "binding_fingerprint": "1180dac5f508f1aeb1d3cdd0cc22c1576be590d593a45fc86b3f459e805c71ff",
+  "binding_id": "actor-context-request-AION-231",
+  "created_at": "2026-07-30T12:00:00Z",
+  "development_simulation": false,
+  "local_operator_context": true,
+  "permission_count": 4,
+  "production_actor_context": false,
+  "production_effect": false,
+  "redacted": true,
+  "request_id": "request-AION-231",
+  "request_identity_binding_fingerprint": "3817a8ca3436707f42ca952d9c784aed08d411e1dc0b7856686f16de45cc9ecf",
+  "role_count": 2,
+  "runtime_effect": false,
+  "schema_version": "aion-secure-runtime-actor-context/v1",
+  "security_scope_count": 5,
+  "session_id": "session-AION-231"
+}

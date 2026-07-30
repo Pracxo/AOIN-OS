@@ -298,6 +298,10 @@ for parts in entries:
             )
         ):
             continue
+        if normalized == "services/brain-api/src/aion_brain/contracts/secure_runtime.py" or normalized.startswith(
+            "services/brain-api/src/aion_brain/secure_runtime/"
+        ):
+            continue
         if normalized.startswith(PROHIBITED_PREFIXES) and normalized not in ALLOWED_EXACT:
             raise SystemExit(f"runtime/source/workflow path changed on AION-206: {normalized}")
         if normalized not in ALLOWED_EXACT and not any(normalized.startswith(prefix) for prefix in ALLOWED_PREFIXES):

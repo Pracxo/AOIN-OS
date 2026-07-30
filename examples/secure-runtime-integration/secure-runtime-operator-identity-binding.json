@@ -1,0 +1,92 @@
+{
+  "assertion_fingerprint": "43b9f50e517593b9f1e1f9c0b47e7bca77a6d5904c514009421bced059530f70",
+  "assertion_id": "assertion-AION-231",
+  "binding_fingerprint": "90a92c64f7a664910aa5d23dea0c80d51ae232ab22a750a83d99d6649d8f87f1",
+  "binding_id": "operator-identity-session-AION-231",
+  "component_invocation_bindings": [
+    {
+      "binding_fingerprint": "e2e5c76ba89477b2b00c01b90034c9281445a5646662158699841d283c1f4c05",
+      "binding_id": "component-offline_ed25519_identity_assertion_verifier-session-AION-231",
+      "component_contract_authorization_closed": true,
+      "component_contract_authorization_id": "AION-161-PA-0006",
+      "component_contract_authorization_reactivated": false,
+      "component_implementation_task": "AION-162",
+      "component_invocation_authorized_by_current_parent": true,
+      "component_name": "offline_ed25519_identity_assertion_verifier",
+      "current_authorization_transaction_id": "AION-230-SRI-0001",
+      "current_program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+      "input_fingerprints": [
+        "43b9f50e517593b9f1e1f9c0b47e7bca77a6d5904c514009421bced059530f70"
+      ],
+      "invoked_at": "2026-07-30T12:00:00Z",
+      "output_fingerprints": [
+        "075deb2d4186c52df6676bd708e29bc28759342d24071691b81dca4ec39109ca"
+      ],
+      "read_only": true,
+      "redacted": true,
+      "request_id": null,
+      "runtime_effect": false,
+      "session_id": "session-AION-231"
+    },
+    {
+      "binding_fingerprint": "fc9b90dfa9f0c0a518afc6e3cedebbede8b7d637ba476ac5f01119646f49f0c6",
+      "binding_id": "component-identity_assertion_replay_protection-session-AION-231",
+      "component_contract_authorization_closed": true,
+      "component_contract_authorization_id": "AION-163-PA-0007",
+      "component_contract_authorization_reactivated": false,
+      "component_implementation_task": "AION-164",
+      "component_invocation_authorized_by_current_parent": true,
+      "component_name": "identity_assertion_replay_protection",
+      "current_authorization_transaction_id": "AION-230-SRI-0001",
+      "current_program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+      "input_fingerprints": [
+        "075deb2d4186c52df6676bd708e29bc28759342d24071691b81dca4ec39109ca"
+      ],
+      "invoked_at": "2026-07-30T12:00:00Z",
+      "output_fingerprints": [
+        "fa28bd915ec1686f32a24bcb400ad8a8f27cb8f29aeac1942242b2214368dfc3"
+      ],
+      "read_only": true,
+      "redacted": true,
+      "request_id": null,
+      "runtime_effect": false,
+      "session_id": "session-AION-231"
+    }
+  ],
+  "created_at": "2026-07-30T12:00:00Z",
+  "cryptographic_verification_passed": true,
+  "current_authorization_transaction_id": "AION-230-SRI-0001",
+  "expires_at": "2026-07-30T12:30:00Z",
+  "issuer_fingerprint": "bae7e656c029f0e67c168a3227403d9ab144ea3133b011ecab089ff7c73c8c89",
+  "local_operator_authenticated": true,
+  "operator_identity_fingerprint": "884c19c3488b5a647dfcd3ebee52646f2672d010629eb6e0138c82640a7607e8",
+  "permission_fingerprints": [
+    "38a08dfa095554b71bfaa13087d83e9699d13ffae2cdfe9ca5f222d0516eef98",
+    "5d41bd115cf96d58df6f889a92ef6ee106dfda5c44f0fa59be11d1ef464803d3",
+    "ccd0edc40a991ad7e439ada77ee308622c4386f0a5762926104d1b58cf513585",
+    "df855d6445ef8386fcc37e217d8063e9d1d69ba9b86f0a000c855caddc6c4dae"
+  ],
+  "production_effect": false,
+  "production_request_authenticated": false,
+  "redacted": true,
+  "replay_bundle_fingerprint": "fa28bd915ec1686f32a24bcb400ad8a8f27cb8f29aeac1942242b2214368dfc3",
+  "replay_key_fingerprint": "99840e9c820e243fe1be71a2dbe30262cf739baadaaccdf5d87a2133aae8f56a",
+  "replay_validation_passed": true,
+  "role_fingerprints": [
+    "084b84222ac430429f781d475f99729efe8f16f658c169c4533c036a30e192c8",
+    "911a607f2226824cf1bcebf93dee677c88f7dfd105f2d4fb18569692d99c183b"
+  ],
+  "runtime_effect": false,
+  "schema_version": "aion-secure-runtime-operator-identity/v1",
+  "security_scope_fingerprints": [
+    "05605971fdbe89fca0fa8ffb77c3452e5184f631c049d52cc1851ea539f7affc",
+    "0dcd0e9fb6009b8e253b955f6ce1c082c1b4fd8c8e9f5df3e63842ec553e6e1d",
+    "2f2165b5fc1498c44fe9fab45eab9c9bcf59f86da64b085f387ead401d6bb20a",
+    "7f0f0482f707603761a365e4e7a06d4f51750430f1e9113292d4bfc8b1a2ac03",
+    "88e20b15c23cda4dbee6b3ad6314bbf2fd71afeacf3d13be8a21f9573a371d55"
+  ],
+  "session_id": "session-AION-231",
+  "subject_fingerprint": "2f66b1466c9632593e9f739aaec6f6166931cd33aa8d485e1151c41ab7c2d5ad",
+  "verification_bundle_fingerprint": "075deb2d4186c52df6676bd708e29bc28759342d24071691b81dca4ec39109ca",
+  "workspace_fingerprint": "953ba0a374b1cf800e3b726ceed972b3a89e8c946b0dbecc1779e693b870c74b"
+}

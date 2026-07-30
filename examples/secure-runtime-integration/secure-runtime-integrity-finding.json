@@ -1,0 +1,13 @@
+{
+  "category": "no_effect_boundary",
+  "created_at": "2026-07-30T12:00:00Z",
+  "evidence_fingerprints": [
+    "8984d634da085b11ca19bd301679094252e1f28c618b00aeab007d69ffad1f2c"
+  ],
+  "finding_fingerprint": "91de4a9c28820bde31da59f147fa2680fe413262cbf39bdccff6487ad351ded7",
+  "finding_id": "finding-AION-231",
+  "reason_code": "no_prohibited_effects",
+  "redacted": true,
+  "schema_version": "aion-secure-runtime-integrity/v1",
+  "status": "passed"
+}

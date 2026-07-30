@@ -1,0 +1,21 @@
+{
+  "authorization_transaction_id": "AION-230-SRI-0001",
+  "checkpoint_fingerprint": "1ffd68ae1728910558cdd3bd0a613f4cd72717e810a95afa68847f68b6cd201d",
+  "connector_call_allowed": false,
+  "external_calls_enabled": false,
+  "formal_closeout_task": "AION-232",
+  "implementation_task": "AION-231",
+  "module_activation_allowed": false,
+  "persistent_session": false,
+  "production_runtime": false,
+  "production_write_allowed": false,
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "provider_call_allowed": false,
+  "read_only": true,
+  "redaction_applied": true,
+  "synthetic": true,
+  "temporary": true,
+  "title": "Checkpoint",
+  "tool_execution_allowed": false,
+  "view_id": "secure_runtime_integration_checkpoint"
+}

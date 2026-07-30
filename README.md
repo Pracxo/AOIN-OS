@@ -13,11 +13,21 @@ self-improvement implementation program are complete.
 
 The active program is `AION-SECURE-RUNTIME-INTEGRATION-001`. AION-230 created
 `AION-230-SRI-0001` as the sole active Secure Runtime Integration
-implementation authorization for AION-231. AION-231 is authorized only for a
+implementation authorization for AION-231. AION-231 implemented the
 controlled, authenticated, operator-invoked, local secure runtime foundation.
 AION-232 is the formal AION-231 operator-evaluation and next-authorization
 decision task. AION-233 through AION-238 remain planned and unauthorized.
 AION Secure Runtime Integration Program is the active program.
+
+The AION-231 foundation verifies short-lived offline Ed25519 operator
+assertions, rejects replay, binds secure request identity and ActorContext,
+creates bounded ephemeral local sessions, validates capability plans through
+policy, risk, guardrails, existing approval evidence, side-effect budgets and
+kill-switch checks, and performs simulation-only dispatch. It does not create a
+public authentication service, store credentials, issue tokens, call model
+providers, execute connectors, execute tools, activate modules, mutate
+production memory or policy, perform GLM live execution, rewrite source,
+deploy, train model weights, or make v0.2 release-ready.
 
 Knowledge Intelligence Program is complete. Governed Learning and Memory
 Program is complete.

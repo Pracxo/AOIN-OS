@@ -12,9 +12,7 @@ def test_resource_limits_are_exact_in_program_and_authorization_ledgers() -> Non
 
 
 def test_positive_and_zero_resource_limits_fail_closed_by_definition() -> None:
-    positive_limits = {
-        key: value for key, value in RESOURCE_LIMITS.items() if value > 0
-    }
+    positive_limits = {key: value for key, value in RESOURCE_LIMITS.items() if value > 0}
     zero_limits = {key: value for key, value in RESOURCE_LIMITS.items() if value == 0}
 
     assert positive_limits == {

@@ -1513,11 +1513,20 @@ def is_secure_runtime_integration_artifact(name: str) -> bool:
     return (
         name
         == "docs/adr/0194-secure-runtime-integration-program-charter-and-local-operator-runtime-foundation-authorization.md"
+        or name
+        == "docs/adr/0195-controlled-authenticated-local-operator-runtime-foundation.md"
         or name.startswith("docs/secure-runtime-integration/")
         or name.startswith("docs/release/secure-runtime-integration-")
+        or name.startswith("docs/release/secure-runtime-foundation-")
         or name.startswith("examples/secure-runtime-integration/")
         or name.startswith("operator-console-static/demo-data/secure-runtime-integration-")
         or name.startswith("scripts/secure-runtime-integration-")
+        or name.startswith("scripts/secure-runtime-foundation-")
+        or name == "scripts/secure-runtime-local-operator-run.py"
+        or name == "services/brain-api/src/aion_brain/contracts/secure_runtime.py"
+        or name.startswith("services/brain-api/src/aion_brain/secure_runtime/")
+        or name == "services/brain-api/tests/secure_runtime_test_support.py"
+        or name.startswith("services/brain-api/tests/test_secure_runtime_")
         or name.startswith("services/brain-api/tests/test_secure_runtime_integration_")
     )
 

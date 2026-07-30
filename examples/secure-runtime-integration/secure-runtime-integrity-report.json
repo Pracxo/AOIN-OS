@@ -1,0 +1,39 @@
+{
+  "checked_categories": [
+    "audit_chain",
+    "no_effect_boundary",
+    "receipt_chain"
+  ],
+  "created_at": "2026-07-30T12:00:00Z",
+  "findings": [
+    {
+      "category": "no_effect_boundary",
+      "created_at": "2026-07-30T12:00:00Z",
+      "evidence_fingerprints": [
+        "8984d634da085b11ca19bd301679094252e1f28c618b00aeab007d69ffad1f2c"
+      ],
+      "finding_fingerprint": "91de4a9c28820bde31da59f147fa2680fe413262cbf39bdccff6487ad351ded7",
+      "finding_id": "finding-AION-231",
+      "reason_code": "no_prohibited_effects",
+      "redacted": true,
+      "schema_version": "aion-secure-runtime-integrity/v1",
+      "status": "passed"
+    }
+  ],
+  "no_connectors": true,
+  "no_credentials": true,
+  "no_modules": true,
+  "no_network": true,
+  "no_production_writes": true,
+  "no_providers": true,
+  "no_tokens": true,
+  "no_tools": true,
+  "production_effect": false,
+  "redacted": true,
+  "report_fingerprint": "8e1a391aaec8017bf31039007ba92b9611860101ec5d1f6d9cc956628afd5cc7",
+  "report_id": "integrity-AION-231",
+  "runtime_effect": false,
+  "schema_version": "aion-secure-runtime-integrity/v1",
+  "session_id": "session-AION-231",
+  "status": "passed"
+}

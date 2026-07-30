@@ -1,0 +1,20 @@
+{
+  "authorization_transaction_id": "AION-230-SRI-0001",
+  "connector_call_allowed": false,
+  "external_calls_enabled": false,
+  "formal_closeout_task": "AION-232",
+  "implementation_task": "AION-231",
+  "module_activation_allowed": false,
+  "production_runtime": false,
+  "production_write_allowed": false,
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "provider_call_allowed": false,
+  "read_only": true,
+  "redaction_applied": true,
+  "report_fingerprint": "8e1a391aaec8017bf31039007ba92b9611860101ec5d1f6d9cc956628afd5cc7",
+  "status": "passed",
+  "synthetic": true,
+  "title": "Integrity",
+  "tool_execution_allowed": false,
+  "view_id": "secure_runtime_integration_integrity"
+}

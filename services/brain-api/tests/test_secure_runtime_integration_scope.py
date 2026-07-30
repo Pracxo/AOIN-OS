@@ -57,14 +57,17 @@ def test_roadmap_authorizes_only_aion231_and_keeps_later_tasks_planned() -> None
     roadmap = {item["task_id"]: item for item in program["roadmap"]}
     roadmap_text = read_text("docs/secure-runtime-integration/architecture-roadmap.md")
 
-    assert roadmap["AION-230"]["state"] == "active_program_authorization"
-    assert roadmap[IMPLEMENTATION_TASK]["state"] == "authorized_not_implemented"
-    assert roadmap[CLOSEOUT_TASK]["state"] == "planned_formal_evaluation"
+    assert roadmap["AION-230"]["state"] == "completed_program_authorization"
+    assert roadmap[IMPLEMENTATION_TASK]["state"] == "implemented_pending_AION-232_closeout"
+    assert (
+        roadmap[CLOSEOUT_TASK]["state"]
+        == "active_formal_evaluation_and_model_gateway_authorization_decision"
+    )
     for task_id in ("AION-233", "AION-234", "AION-235", "AION-236", "AION-237"):
         assert roadmap[task_id]["state"] == "planned_not_authorized"
     assert roadmap["AION-238"]["state"] == "planned_final_program_closeout"
-    assert "Only AION-231 is authorized" in roadmap_text
-    assert "No future authorization is created" in roadmap_text
+    assert "AION-231 is implemented" in roadmap_text
+    assert "AION-233 remains unauthorized" in roadmap_text
 
 
 def test_examples_are_bound_to_aion230_scope_and_closeout() -> None:

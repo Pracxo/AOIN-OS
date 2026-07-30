@@ -29,6 +29,8 @@ Status: `not-ready`
 - Canary and rollback simulation
 - Adaptive-learning candidates
 - Secure Runtime Integration Program authorization
+- Controlled authenticated local operator runtime foundation
+- Secure-runtime simulation-only dispatch evidence
 
 ## Remaining Blockers
 
@@ -70,15 +72,18 @@ Status: `not-ready`
 ## Current Critical Path
 
 The current critical path has advanced through completed Cognitive
-Architecture, Knowledge Intelligence, Governed Learning and Memory, and
-governed self-improvement programs. AION-230 creates the separate Secure
-Runtime Integration Program and authorizes AION-231 only for a controlled,
-authenticated, operator-invoked, local secure runtime foundation.
+Architecture, Knowledge Intelligence, Governed Learning and Memory, governed
+self-improvement, and AION-231 secure local operator runtime foundation work.
+AION-230 created the separate Secure Runtime Integration Program and authorized
+AION-231 only for a controlled, authenticated, operator-invoked, local secure
+runtime foundation.
 
-AION-230 addresses only the secure local runtime foundation authorization. It
-does not close all v0.2 release blockers, does not implement AION-231 runtime source,
-does not authorize model-gateway, connector, module, production, deployment, or
-release work, and does not make v0.2 release-ready.
+AION-231 implements that secure local runtime foundation. It does not close all
+v0.2 release blockers, does not authorize model-gateway, connector, module,
+production, deployment, or release work, and does not make v0.2 release-ready.
+Historical scope marker: AION-230 addresses only the secure local runtime
+foundation authorization.
+AION-230 addresses only the secure local runtime foundation authorization.
 It does not close all v0.2 release blockers.
 
 ## AION-230 Secure Runtime Integration Program Authorization
@@ -86,7 +91,8 @@ It does not close all v0.2 release blockers.
 AION-230 creates `AION-SECURE-RUNTIME-INTEGRATION-001` and
 `AION-230-SRI-0001` as the sole active Secure Runtime Integration
 implementation authorization for AION-231. AION-231 is authorized for local
-operator runtime foundation work only. AION-232 is the formal operator
+operator runtime foundation work only and has implemented the local,
+simulation-only foundation. AION-232 is the formal operator
 evaluation and next-authorization decision task. AION-233 through AION-238
 remain planned and unauthorized.
 

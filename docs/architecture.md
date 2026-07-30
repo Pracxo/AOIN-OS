@@ -204,16 +204,17 @@ GLM live execution remains unauthorized.
 
 ## Secure Runtime Integration
 
-`AION-SECURE-RUNTIME-INTEGRATION-001` is the active program. AION-230 creates
+`AION-SECURE-RUNTIME-INTEGRATION-001` is the active program. AION-230 created
 `AION-230-SRI-0001` as the sole active SRI implementation authorization for
-AION-231 only. AION-231 may implement a controlled, authenticated,
+AION-231 only. AION-231 implemented a controlled, authenticated,
 operator-invoked, local secure runtime foundation that composes offline
 identity verification, RequestIdentity, ActorContext, replay validation,
 session lifecycle, policy, risk, guardrails, approval evidence, side-effect
 budgets, runtime guard, kill switch, audit, observability, and deterministic
 fixture replay through a side-effect-free boundary.
 
-AION-231 is not implemented by AION-230. Model-gateway runtime, connector
+AION-230 did not implement runtime source; AION-231 implements only the
+authorized local simulation foundation. Model-gateway runtime, connector
 runtime, tool execution, module activation, operator-console live services,
 production runtime, deployment, v0.2 tag creation, and v0.2 release creation
 remain unauthorized.

@@ -1,0 +1,44 @@
+{
+  "actor_id": "operator-AION-231",
+  "assertion_fingerprint": "43b9f50e517593b9f1e1f9c0b47e7bca77a6d5904c514009421bced059530f70",
+  "authenticated_local_operator": true,
+  "binding_fingerprint": "3817a8ca3436707f42ca952d9c784aed08d411e1dc0b7856686f16de45cc9ecf",
+  "binding_id": "request-identity-request-AION-231",
+  "cookie_identity_used": false,
+  "correlation_id": "correlation-AION-231",
+  "created_at": "2026-07-30T12:00:00Z",
+  "expires_at": "2026-07-30T12:30:00Z",
+  "external_identity_provider_used": false,
+  "header_identity_used": false,
+  "operator_identity_fingerprint": "884c19c3488b5a647dfcd3ebee52646f2672d010629eb6e0138c82640a7607e8",
+  "permissions": [
+    "brain:think:simulate",
+    "secure_runtime:audit:read",
+    "secure_runtime:fixture:replay",
+    "secure_runtime:read"
+  ],
+  "production_authentication": false,
+  "production_effect": false,
+  "redacted": true,
+  "replay_bundle_fingerprint": "fa28bd915ec1686f32a24bcb400ad8a8f27cb8f29aeac1942242b2214368dfc3",
+  "request_id": "request-AION-231",
+  "roles": [
+    "operator",
+    "viewer"
+  ],
+  "runtime_effect": false,
+  "schema_version": "aion-secure-runtime-request-identity/v1",
+  "security_scopes": [
+    "secure-runtime:audit",
+    "secure-runtime:fixture-replay",
+    "secure-runtime:health",
+    "secure-runtime:observability",
+    "secure-runtime:simulate-capability"
+  ],
+  "session_id": "session-AION-231",
+  "subject_fingerprint": "2f66b1466c9632593e9f739aaec6f6166931cd33aa8d485e1151c41ab7c2d5ad",
+  "token_identity_used": false,
+  "trace_id": "trace-AION-231",
+  "verification_bundle_fingerprint": "075deb2d4186c52df6676bd708e29bc28759342d24071691b81dca4ec39109ca",
+  "workspace_id": "workspace-AION-231"
+}

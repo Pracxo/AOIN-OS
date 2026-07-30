@@ -1,0 +1,20 @@
+{
+  "authorization_transaction_id": "AION-230-SRI-0001",
+  "binding_fingerprint": "0315bcefbf515a4781146a53a2afa6d5b4be24777dd6304e990e48e056d266d1",
+  "computed_risk": "medium",
+  "connector_call_allowed": false,
+  "external_calls_enabled": false,
+  "formal_closeout_task": "AION-232",
+  "implementation_task": "AION-231",
+  "module_activation_allowed": false,
+  "production_runtime": false,
+  "production_write_allowed": false,
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "provider_call_allowed": false,
+  "read_only": true,
+  "redaction_applied": true,
+  "synthetic": true,
+  "title": "Risk Binding",
+  "tool_execution_allowed": false,
+  "view_id": "secure_runtime_integration_risk_binding"
+}

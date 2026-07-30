@@ -1,0 +1,20 @@
+{
+  "active_request_count": 0,
+  "actual_execution_performed": false,
+  "audit_chain_head": "6cabffe8464c7af7d5b00bc9d3061e20f29f2d79d9cd97b3d4564a224917b1ab",
+  "checkpoint_fingerprint": "1ffd68ae1728910558cdd3bd0a613f4cd72717e810a95afa68847f68b6cd201d",
+  "closed_at": "2026-07-30T12:00:00Z",
+  "completed_request_count": 1,
+  "final_state": "session_closed",
+  "production_effect": false,
+  "redacted": true,
+  "response_fingerprint": "8984d634da085b11ca19bd301679094252e1f28c618b00aeab007d69ffad1f2c",
+  "result_fingerprint": "ba8b883ae76015438b8f17abe08d0b4b251421c7f8d5c1a6c77699b1a9e427e0",
+  "result_id": "example-session-result-AION-231",
+  "runtime_effect": false,
+  "schema_version": "aion-secure-runtime-evidence/v1",
+  "session_id": "session-AION-231",
+  "session_plan_fingerprint": "7dd9ffae353955c1d3206eced2f203b4daa46eec985fcdff111df066b42fb4b1",
+  "simulated_dispatch_count": 1,
+  "stage_receipt_chain_head": "e997cddf6ee9ffce463d4ca9caf17916ce85e4ea1a9c5913008440f74e676f95"
+}

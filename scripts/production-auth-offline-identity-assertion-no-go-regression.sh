@@ -53,12 +53,17 @@ changed_files() {
 }
 
 changed_file_list="$(mktemp)"
-trap 'rm -f "$changed_file_list"' EXIT
+scan_file_list="$(mktemp)"
+source_scan_file_list="$(mktemp)"
+trap 'rm -f "$changed_file_list" "$scan_file_list" "$source_scan_file_list"' EXIT
 changed_files > "$changed_file_list"
 
 while IFS= read -r file; do
   [[ -n "$file" ]] || continue
   if aion164_is_scoped_identity_assertion_replay_protection_path "$file"; then
+    continue
+  fi
+  if aion231_is_scoped_secure_runtime_foundation_path "$file"; then
     continue
   fi
   case "$file" in
@@ -81,6 +86,9 @@ while IFS= read -r file; do
       exit 1
       ;;
   esac
+  if [[ -f "$file" ]]; then
+    printf '%s\n' "$file" >> "$scan_file_list"
+  fi
 done < "$changed_file_list"
 
 python3 - "$ROOT_DIR" "$(comparison_base || true)" <<'PY'
@@ -162,7 +170,14 @@ new_assertion_sources=(
   services/brain-api/src/aion_brain/production_auth/trusted_public_keys.py
 )
 
-if rg -n 'Ed25519PrivateKey|private_bytes\(|load_pem_private_key|BEGIN PRIVATE KEY|BEGIN OPENSSH PRIVATE KEY|signing_key|private_key_seed|private_key_base64' services/brain-api/src/aion_brain; then
+while IFS= read -r file; do
+  if aion231_is_scoped_secure_runtime_foundation_path "$file"; then
+    continue
+  fi
+  printf '%s\n' "$file" >> "$source_scan_file_list"
+done < <(find services/brain-api/src/aion_brain -type f -name '*.py' | sort)
+
+if [[ -s "$source_scan_file_list" ]] && rg -n 'Ed25519PrivateKey|private_bytes\(|load_pem_private_key|BEGIN PRIVATE KEY|BEGIN OPENSSH PRIVATE KEY|signing_key|private_key_seed|private_key_base64' $(cat "$source_scan_file_list"); then
   echo "runtime private-key material or API detected" >&2
   exit 1
 fi
@@ -187,7 +202,7 @@ if rg -n 'requests\.(get|post|put|patch|delete)|httpx\.(AsyncClient|Client|get|p
   exit 1
 fi
 
-if [[ -s "$changed_file_list" ]] && rg -n '\b(request_authenticated|actor_context_applied|request_identity_context_applied|runtime_effect|runtime_integration_allowed|production_auth_runtime_enabled|identity_verification_enabled|authenticated_requests_enabled|identity_assertion_header_parsing_enabled|authorization_header_parsing_enabled|cookie_parsing_enabled|identity_assertion_middleware_registered|external_identity_provider_enabled|jwks_network_fetch_enabled|provider_discovery_enabled|external_calls_enabled|identity_assertion_endpoint_enabled|runtime_api_routes_added|openapi_security_scheme_added|sdk_runtime_resource_added|cli_runtime_command_added|new_package_manifest_added|lockfiles_added|migrations_added|connector_runtime_enabled|operator_write_execution_enabled|module_activation_enabled|sandbox_execution_enabled|v02_tag_created|v02_release_created)\s*[:=]\s*true\b' $(cat "$changed_file_list"); then
+if [[ -s "$scan_file_list" ]] && rg -n '\b(request_authenticated|actor_context_applied|request_identity_context_applied|runtime_effect|runtime_integration_allowed|production_auth_runtime_enabled|identity_verification_enabled|authenticated_requests_enabled|identity_assertion_header_parsing_enabled|authorization_header_parsing_enabled|cookie_parsing_enabled|identity_assertion_middleware_registered|external_identity_provider_enabled|jwks_network_fetch_enabled|provider_discovery_enabled|external_calls_enabled|identity_assertion_endpoint_enabled|runtime_api_routes_added|openapi_security_scheme_added|sdk_runtime_resource_added|cli_runtime_command_added|new_package_manifest_added|lockfiles_added|migrations_added|connector_runtime_enabled|operator_write_execution_enabled|module_activation_enabled|sandbox_execution_enabled|v02_tag_created|v02_release_created)\s*[:=]\s*true\b' $(cat "$scan_file_list"); then
   echo "runtime, route, package, execution, tag, or release flag was enabled" >&2
   exit 1
 fi

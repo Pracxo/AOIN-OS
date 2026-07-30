@@ -1,0 +1,32 @@
+{
+  "action_type": "secure_runtime.dispatch.simulate",
+  "actual_execution_available": false,
+  "approval_required": true,
+  "capability_code": "brain.think.simulate",
+  "created_at": "2026-07-30T12:00:00Z",
+  "expected_approval_binding": "0000000000000000000000000000000000000000000000000000000000000000",
+  "expected_guardrail_binding": "0000000000000000000000000000000000000000000000000000000000000000",
+  "expected_policy_binding": "0000000000000000000000000000000000000000000000000000000000000000",
+  "expected_risk_binding": "0000000000000000000000000000000000000000000000000000000000000000",
+  "expires_at": "2026-07-30T12:05:00Z",
+  "plan_fingerprint": "421b96270517852129eae1e8f4420267154cf819f6ebf23bf6681deea7ff5c7a",
+  "plan_id": "capability-plan-request-AION-231",
+  "production_effect": false,
+  "request_fingerprint": "12912cc94b49d0cb67ce91c395f2b5e136c60ca3c602a4631198f770a28bca61",
+  "request_id": "request-AION-231",
+  "required_permissions": [
+    "brain:think:simulate"
+  ],
+  "required_security_scopes": [
+    "secure-runtime:simulate-capability"
+  ],
+  "resource_id": "resource-AION-231",
+  "resource_type": "secure_runtime_capability_plan",
+  "risk_class": "medium",
+  "runtime_effect": false,
+  "schema_version": "aion-secure-runtime-capability-plan/v1",
+  "session_id": "session-AION-231",
+  "side_effect_budget_fingerprint": "317a4fde588cea6c7ab99cf0c7a7ac805aa8e0c6c29889680de599094f1187a2",
+  "simulation_only": true,
+  "trace_id": "trace-AION-231"
+}

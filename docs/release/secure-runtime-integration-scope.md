@@ -25,5 +25,8 @@ composition for:
 - deterministic fixture replay
 - redacted operator review items
 
-The scope creates no AION-231 runtime source during AION-230. AION-231 source
-paths are recorded only as future scope.
+The AION-231 source paths are implemented exactly in the authorized
+secure-runtime foundation scope. No AION-232 evaluation result, AION-233
+model-gateway authorization, public auth route, provider integration,
+connector runtime, tool runtime, module loader, credential store, token store,
+production write path, v0.2 tag, or v0.2 release is created.

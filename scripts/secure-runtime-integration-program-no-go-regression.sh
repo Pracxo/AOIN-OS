@@ -49,9 +49,10 @@ is_allowed_path() {
     README.md|AGENTS.md|\
     docs/project-status.md|docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/visual-brain.md|\
     docs/secure-runtime-integration/*|\
-    docs/release/secure-runtime-integration-*|\
+    docs/release/secure-runtime-integration-*|docs/release/secure-runtime-foundation-*|\
     docs/release/v02-release-readiness-delta.md|\
     docs/adr/0194-secure-runtime-integration-program-charter-and-local-operator-runtime-foundation-authorization.md|\
+    docs/adr/0195-controlled-authenticated-local-operator-runtime-foundation.md|\
     docs/adr/README.md|\
     examples/secure-runtime-integration/*|\
 	    operator-console-static/index.html|operator-console-static/app.js|operator-console-static/README.md|\
@@ -59,12 +60,79 @@ is_allowed_path() {
 	    scripts/auth-design-check.sh|\
 	    scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh|\
 	    scripts/operator-console-static-check.sh|\
+	    scripts/connector-no-go-regression.sh|\
+	    scripts/connector-runtime-no-external-call-regression.sh|\
+	    scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-domain-expert-mesh-operator-evaluation-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-epistemic-assessment-operator-evaluation-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-integrated-research-agent-operator-evaluation-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-tool-verification-authorization-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh|\
+	    scripts/lib/cognitive_architecture_governance.py|\
+	    scripts/post-v01-release-candidate-no-go-regression.sh|\
+	    scripts/production-auth-architecture-check.sh|\
 	    scripts/static-console-safety-check.sh|\
 	    scripts/secure-runtime-integration-program-authorization-check.sh|\
 	    scripts/secure-runtime-integration-program-no-go-regression.sh|\
 	    scripts/secure-runtime-integration-runtime-hold.sh|\
+	    scripts/secure-runtime-foundation-check.sh|\
+	    scripts/secure-runtime-foundation-no-go-regression.sh|\
+	    scripts/secure-runtime-foundation-pilot-evidence-check.sh|\
+	    scripts/secure-runtime-foundation-runtime-hold.sh|\
+	    scripts/secure-runtime-local-operator-run.py|\
+	    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+	    scripts/production-auth-actor-context-trust-boundary-no-go-regression.sh|\
+	    scripts/production-auth-core-no-go-regression.sh|\
+	    scripts/production-auth-core-stabilization-no-go-regression.sh|\
+	    scripts/production-auth-identity-assertion-replay-no-go-regression.sh|\
+	    scripts/production-auth-offline-identity-assertion-check.sh|\
+	    scripts/production-auth-offline-identity-assertion-no-go-regression.sh|\
+	    scripts/production-auth-request-identity-no-go-regression.sh|\
+	    scripts/production-auth-request-identity-stabilization-no-go-regression.sh|\
+	    scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh|\
+	    scripts/v02-identity-assertion-replay-protection-authorization-no-go-regression.sh|\
+	    scripts/v02-offline-identity-assertion-verification-authorization-no-go-regression.sh|\
+	    scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh|\
 	    scripts/governed-learning-memory-program-final-evaluation-no-go-regression.sh|\
-    services/brain-api/tests/test_secure_runtime_integration_*.py)
+    services/brain-api/src/aion_brain/contracts/secure_runtime.py|\
+    services/brain-api/src/aion_brain/secure_runtime/__init__.py|\
+    services/brain-api/src/aion_brain/secure_runtime/authorization.py|\
+    services/brain-api/src/aion_brain/secure_runtime/identity_binding.py|\
+    services/brain-api/src/aion_brain/secure_runtime/session_lifecycle.py|\
+    services/brain-api/src/aion_brain/secure_runtime/request_pipeline.py|\
+    services/brain-api/src/aion_brain/secure_runtime/capability_dispatch.py|\
+    services/brain-api/src/aion_brain/secure_runtime/runtime_guard.py|\
+    services/brain-api/src/aion_brain/secure_runtime/kill_switch.py|\
+    services/brain-api/src/aion_brain/secure_runtime/audit.py|\
+    services/brain-api/src/aion_brain/secure_runtime/observability.py|\
+    services/brain-api/src/aion_brain/secure_runtime/integrity.py|\
+    services/brain-api/src/aion_brain/secure_runtime/evidence.py|\
+    services/brain-api/tests/secure_runtime_test_support.py|\
+    services/brain-api/tests/test_secure_runtime_*.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
+is_aion231_source_path() {
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/secure_runtime.py|\
+    services/brain-api/src/aion_brain/secure_runtime/__init__.py|\
+    services/brain-api/src/aion_brain/secure_runtime/authorization.py|\
+    services/brain-api/src/aion_brain/secure_runtime/identity_binding.py|\
+    services/brain-api/src/aion_brain/secure_runtime/session_lifecycle.py|\
+    services/brain-api/src/aion_brain/secure_runtime/request_pipeline.py|\
+    services/brain-api/src/aion_brain/secure_runtime/capability_dispatch.py|\
+    services/brain-api/src/aion_brain/secure_runtime/runtime_guard.py|\
+    services/brain-api/src/aion_brain/secure_runtime/kill_switch.py|\
+    services/brain-api/src/aion_brain/secure_runtime/audit.py|\
+    services/brain-api/src/aion_brain/secure_runtime/observability.py|\
+    services/brain-api/src/aion_brain/secure_runtime/integrity.py|\
+    services/brain-api/src/aion_brain/secure_runtime/evidence.py)
       return 0
       ;;
   esac
@@ -112,8 +180,10 @@ while IFS= read -r path; do
     services/brain-api/src/*|packages/*|.github/workflows/*|\
     *migrations*|*package.json|*package-lock.json|*pnpm-lock.yaml|*yarn.lock|\
     *poetry.lock|*Pipfile.lock|*requirements*.txt|*pyproject.toml)
-      echo "ERROR: prohibited runtime/dependency/migration path changed: $path" >&2
-      exit 1
+      if ! is_aion231_source_path "$path"; then
+        echo "ERROR: prohibited runtime/dependency/migration path changed: $path" >&2
+        exit 1
+      fi
       ;;
   esac
 done < "$changed_file_list"
@@ -146,13 +216,15 @@ future_source_paths=(
   services/brain-api/src/aion_brain/secure_runtime/evidence.py
 )
 for path in "${future_source_paths[@]}"; do
-  if [[ -e "$path" ]]; then
-    echo "ERROR: AION-231 source exists during AION-230: $path" >&2
+  if [[ ! -e "$path" ]]; then
+    echo "ERROR: AION-231 source missing after implementation: $path" >&2
     exit 1
   fi
 done
-if [[ -d services/brain-api/src/aion_brain/secure_runtime ]]; then
-  echo "ERROR: secure_runtime source package exists during AION-230" >&2
+if find services/brain-api/src/aion_brain/secure_runtime -type f | while IFS= read -r path; do
+  is_aion231_source_path "$path" || echo "$path"
+done | grep -q .; then
+  echo "ERROR: prohibited secure_runtime source file exists" >&2
   exit 1
 fi
 

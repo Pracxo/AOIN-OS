@@ -1,0 +1,24 @@
+{
+  "binding_fingerprint": "e2e5c76ba89477b2b00c01b90034c9281445a5646662158699841d283c1f4c05",
+  "binding_id": "component-offline_ed25519_identity_assertion_verifier-session-AION-231",
+  "component_contract_authorization_closed": true,
+  "component_contract_authorization_id": "AION-161-PA-0006",
+  "component_contract_authorization_reactivated": false,
+  "component_implementation_task": "AION-162",
+  "component_invocation_authorized_by_current_parent": true,
+  "component_name": "offline_ed25519_identity_assertion_verifier",
+  "current_authorization_transaction_id": "AION-230-SRI-0001",
+  "current_program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "input_fingerprints": [
+    "43b9f50e517593b9f1e1f9c0b47e7bca77a6d5904c514009421bced059530f70"
+  ],
+  "invoked_at": "2026-07-30T12:00:00Z",
+  "output_fingerprints": [
+    "075deb2d4186c52df6676bd708e29bc28759342d24071691b81dca4ec39109ca"
+  ],
+  "read_only": true,
+  "redacted": true,
+  "request_id": null,
+  "runtime_effect": false,
+  "session_id": "session-AION-231"
+}

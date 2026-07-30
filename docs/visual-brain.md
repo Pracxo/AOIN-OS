@@ -82,8 +82,8 @@ contract for future visualization work.
 
 ## Secure Runtime Integration Projection
 
-AION-230 adds planning-only visual projection language for AION-231 secure
-local runtime evidence. Future AION-231 evidence may render nodes for
+AION-231 adds visual projection language for secure local runtime evidence.
+Static AION-231 evidence may render nodes for
 `secure_operator_identity_binding`, `secure_request_identity_binding`,
 `secure_actor_context_binding`, `secure_runtime_session`,
 `secure_runtime_guard_decision`, `secure_runtime_kill_switch_state`,
