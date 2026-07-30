@@ -4,6 +4,7 @@ from scripts.lib.governed_learning_memory_local_persistence_authorization import
     CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
     ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+    FINAL_GLM_PROGRAM_STATES,
 )
 from test_governed_learning_memory_program_authorization import (
     AUTH_ID,
@@ -33,6 +34,9 @@ def test_program_ledger_records_aion223_authorization_without_runtime_effects() 
     }:
         assert program["active_glm_implementation_authorization"] == "AION-227-GLM-0004"
         assert program["active_glm_implementation_task"] == "AION-228"
+    elif program["program_state"] in FINAL_GLM_PROGRAM_STATES:
+        assert program["active_glm_implementation_authorization"] is None
+        assert program["active_glm_implementation_task"] is None
     else:
         assert program["active_glm_implementation_authorization"] == AUTH_ID
         assert program["active_glm_implementation_task"] == IMPLEMENTATION_TASK

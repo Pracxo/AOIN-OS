@@ -1,0 +1,69 @@
+# AION-229 Final Evaluation Scenarios
+
+- `aion_228_delivery_and_ci_integrity`: passed, hard-gated.
+- `final_authorization_lineage_and_scope`: passed, hard-gated.
+- `live_pilot_evidence_schema_and_fingerprint`: passed, hard-gated.
+- `live_research_source_and_transport_evidence`: passed, hard-gated.
+- `three_cycle_plan_and_terminal_outcomes`: passed, hard-gated.
+- `closed_state_machine_and_stage_command_integrity`: passed, hard-gated.
+- `stage_receipt_chain_integrity`: passed, hard-gated.
+- `checkpoint_and_resume_integrity`: passed, hard-gated.
+- `component_authority_and_closed_lineage`: passed, hard-gated.
+- `engagement_non_factual_integrity`: passed, hard-gated.
+- `verified_candidate_and_confidence_non_amplification`: passed, hard-gated.
+- `promotion_plan_and_approval_integrity`: passed, hard-gated.
+- `temporary_persistence_and_dual_approval_integrity`: passed, hard-gated.
+- `cross_cycle_context_integrity`: passed, hard-gated.
+- `shadow_approval_and_in_memory_boundary`: passed, hard-gated.
+- `cycle_1_evidence_and_temporary_continuity_outcome`: passed, hard-gated.
+- `cycle_2_context_and_shadow_outcome`: passed, hard-gated.
+- `cycle_3_contradiction_abstention_outcome`: passed, hard-gated.
+- `resource_budget_enforcement`: passed, hard-gated.
+- `deterministic_replay_and_collision_control`: passed, hard-gated.
+- `safety_and_policy_gate_priority`: passed, hard-gated.
+- `cleanup_and_zero_retained_state`: passed, hard-gated.
+- `zero_background_scheduled_and_automatic_execution`: passed, hard-gated.
+- `zero_production_memory_belief_policy_and_model_effects`: passed, hard-gated.
+- `operator_runner_and_runtime_registration_boundary`: passed, hard-gated.
+- `repository_release_and_dependency_boundary`: passed, hard-gated.
+- `complete_glm_program_lineage_and_capability_continuity`: passed, hard-gated.
+- `final_program_completion_readiness`: passed, hard-gated.
+
+## Hard Gates
+
+- `aion_227_corrective_pr_verified`: true.
+- `aion_227_glm_0004_scope_verified`: true.
+- `aion_227_pr_verified`: true.
+- `aion_228_feature_commit_verified`: true.
+- `aion_228_final_ci_verified`: true.
+- `aion_228_merge_commit_verified`: true.
+- `aion_228_pr_verified`: true.
+- `aion_228_resource_limits_verified`: true.
+- `all_scenarios_executed`: true.
+- `all_scenarios_passed`: true.
+- `checkpoint_integrity_verified`: true.
+- `cleanup_zero_retained_state_verified`: true.
+- `committed_live_pilot_evidence_verified`: true.
+- `cross_cycle_context_boundary_verified`: true.
+- `cycle_3_abstention_verified`: true.
+- `dual_persistence_approval_boundary_verified`: true.
+- `engagement_non_factual_boundary_verified`: true.
+- `live_evidence_fingerprint_verified`: true.
+- `live_evidence_redacted`: true.
+- `no_required_scenario_skipped`: true.
+- `no_successor_authorization_required`: true.
+- `no_successor_task_required`: true.
+- `no_unknown_scenario`: true.
+- `no_v02_tag_or_release`: true.
+- `node_24_actions_verified`: true.
+- `production_activation_separate_future_charter_required`: true.
+- `promotion_approval_boundary_verified`: true.
+- `receipt_chain_integrity_verified`: true.
+- `release_boundary_verified`: true.
+- `repository_boundary_verified`: true.
+- `scenario_set_complete`: true.
+- `shadow_overlay_in_memory_boundary_verified`: true.
+- `source_body_purge_verified`: true.
+- `verified_candidate_confidence_cap_verified`: true.
+- `zero_background_scheduled_automatic_execution`: true.
+- `zero_production_memory_policy_belief_model_effects`: true.

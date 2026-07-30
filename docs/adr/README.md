@@ -205,3 +205,4 @@ closure decision in ADR 0072.
 - [0190: Operator-Approved Non-Factual Engagement-Learning Shadow Application](0190-operator-approved-non-factual-engagement-learning-shadow-application.md) - Implements the AION-225-authorized in-memory non-factual engagement-learning shadow application pending AION-227 closeout.
 - [ADR 0191: Engagement Shadow Application Evaluation and Controlled Local Continual-Learning Pilot Authorization](0191-engagement-shadow-application-evaluation-and-controlled-local-continual-learning-pilot-authorization.md)
 - [ADR 0192: Controlled Operator-Invoked Local Continual-Learning Pilot Composition and Execution](0192-controlled-operator-invoked-local-continual-learning-pilot-composition-and-execution.md)
+- [ADR 0193: Final Governed Learning and Memory Program Evaluation and Closeout](0193-final-governed-learning-and-memory-program-evaluation-and-closeout.md)

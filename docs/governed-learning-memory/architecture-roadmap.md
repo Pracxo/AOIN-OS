@@ -1,27 +1,17 @@
 # Governed Learning and Memory Architecture Roadmap
 
-`AION-GOVERNED-LEARNING-MEMORY-001` has AION-226 implemented as an in-memory non-factual shadow application. `AION-225-GLM-0003` remains active and unconsumed pending AION-227 formal closeout.
+`AION-GOVERNED-LEARNING-MEMORY-001` is in primary closeout state after AION-229 final evaluation. Final Git evidence reconciliation remains before the terminal `governed_learning_memory_program_complete` state.
 
-| Task | State | Role |
+| Task | State | Scope |
 | --- | --- | --- |
-| `AION-221` | `closed_consumed_by_AION-222` | Governed Learning and Memory Integration Program charter and AION-222 authorization |
-| `AION-222` | `implemented_closed_by_AION-223` | Deterministic approval-bound knowledge-promotion transaction and cognitive-memory projection-planning core |
-| `AION-223` | `closed_consumed_by_AION-224_closed_by_AION-225` | AION-222 operator evaluation and local append-only knowledge persistence authorization decision |
-| `AION-224` | `implemented_evaluated_passed_AION-225` | Operator-approved local append-only knowledge-version and cognitive-memory projection store implementation |
-| `AION-225` | `operator_evaluation_passed_engagement_application_authorized` | Persistent knowledge and cognitive-memory projection evaluation with engagement-learning application authorization decision |
-| `AION-226` | `implemented_pending_AION-227_closeout` | Operator-approved non-factual engagement-learning shadow application plane |
-| `AION-227` | `active_formal_evaluation_and_continual_learning_pilot_authorization_decision` | Engagement application operator evaluation and next authorization decision |
-| `AION-228` | `planned_not_authorized_before_AION-227_decision` | Controlled local continual-learning pilot |
-| `AION-229` | `planned_final_GLM_program_evaluation_and_closeout` | Final governed learning memory program evaluation and closeout |
+| `AION-221` | `closed_consumed_by_AION-222` | Program charter and AION-222 authorization |
+| `AION-222` | `implemented_evaluated` | Approval-bound promotion planning |
+| `AION-223` | `closed_consumed_by_AION-224` | Local persistence authorization |
+| `AION-224` | `implemented_evaluated` | Isolated append-only local persistence |
+| `AION-225` | `closed_consumed_by_AION-226` | Engagement shadow authorization |
+| `AION-226` | `implemented_evaluated` | Non-factual in-memory engagement shadow application |
+| `AION-227` | `closed_consumed_by_AION-228` | Continual-learning pilot authorization and AION-GLMPE-003 |
+| `AION-228` | `implemented_completed_pending_AION-229_final_evaluation` | Controlled local continual-learning pilot |
+| `AION-229` | `active_final_GLM_program_evaluation_and_closeout` | Final evaluation, authorization closeout, and evidence reconciliation |
 
-AION-226 may implement only an isolated in-memory shadow overlay application plane. It may not create persistent engagement overlays, mutate production policy, write cognitive memory, mutate beliefs, access networks, train model weights, or create production exposure.
-
-## AION-227 Engagement Evaluation And Continual-Learning Pilot Authorization
-
-AION-GLMPE-003 passed all 28 deterministic, synthetic, read-only scenarios and closed AION-225-GLM-0003 as consumed by AION-226. AION-227-GLM-0004 is now the sole active GLM implementation authorization for AION-228, with AION-229 preserved as final GLM closeout.
-
-AION-228 is authorized but unimplemented. Engagement remains non-factual; internet access remains explicit and allowlisted; local continuity remains temporary and isolated; every persistence and shadow adaptation remains approval-bound; background learning, scheduled learning, automatic approval, automatic promotion, code rewrite, production memory writes, belief mutation, production policy mutation and model training remain disabled.
-
-## AION-228 Controlled Continual-Learning Pilot
-
-AION-228 is implemented and completed pending AION-229 final evaluation and closeout. The pilot remains operator-invoked and local, executed one redacted three-cycle live session, purged source bodies, removed temporary persistence and overlay state, and keeps production memory, production policy, cognitive memory, belief mutation, source mutation, Git mutation, automatic approval, automatic promotion, background learning, scheduled learning, and model training disabled.
+AION-229 PASS closes `AION-227-GLM-0004` and leaves no active GLM implementation authorization, no active GLM implementation task, no successor GLM authorization, and no successor GLM task. The implemented architecture is not current execution authority: repeated live pilots and production runtime require a separate future program charter.

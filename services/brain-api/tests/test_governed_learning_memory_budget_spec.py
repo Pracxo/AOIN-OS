@@ -8,6 +8,7 @@ from scripts.lib.governed_learning_memory_local_persistence_authorization import
     AION224_RESOURCE_LIMITS,
     CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
     CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
+    FINAL_GLM_PROGRAM_STATES,
 )
 from test_governed_learning_memory_program_authorization import load_json
 
@@ -19,6 +20,7 @@ def test_resource_budgets_include_positive_planning_limits_and_zero_effect_limit
     if auth["program_state"] in {
         CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
         CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
+        *FINAL_GLM_PROGRAM_STATES,
     }:
         assert limits == AION228_RESOURCE_LIMITS
         limits = next(

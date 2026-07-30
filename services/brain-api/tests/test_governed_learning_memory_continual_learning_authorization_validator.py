@@ -15,4 +15,11 @@ def test_conditional_authorization_is_exact_and_sole_active() -> None:
     _, ledger = auth227.validate_ledgers(REPO_ROOT)
     record = auth227.record_by_id(ledger["records"], auth227.NEXT_AUTHORIZATION_ID)
     auth227.validate_authorization_record(record)
-    assert ledger["active_authorizations"] == [auth227.NEXT_AUTHORIZATION_ID]
+    if ledger["active_glm_implementation_authorization_count"] == 0:
+        assert ledger["active_authorizations"] == []
+        assert record["authorization_active"] is False
+        assert record["authorization_consumed"] is True
+        assert record["authorization_expired"] is True
+        assert record["authorization_closed_by_task"] == "AION-229"
+    else:
+        assert ledger["active_authorizations"] == [auth227.NEXT_AUTHORIZATION_ID]

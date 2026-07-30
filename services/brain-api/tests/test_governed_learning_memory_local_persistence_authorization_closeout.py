@@ -7,6 +7,7 @@ from scripts.lib import governed_learning_memory_engagement_application_authoriz
 from scripts.lib.governed_learning_memory_local_persistence_authorization import (
     CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
     CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
+    FINAL_GLM_PROGRAM_STATES,
 )
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -41,6 +42,12 @@ def test_aion223_authorization_is_closed_and_aion225_is_active():
         assert child["authorization_expired"] is True
         assert child["authorization_reusable"] is False
         assert auth["active_authorizations"] == ["AION-227-GLM-0004"]
+    elif program_state in FINAL_GLM_PROGRAM_STATES:
+        assert child["authorization_active"] is False
+        assert child["authorization_consumed"] is True
+        assert child["authorization_expired"] is True
+        assert child["authorization_reusable"] is False
+        assert auth["active_authorizations"] == []
     else:
         assert child["authorization_active"] is True
     assert child["implementation_task"] == "AION-226"

@@ -9,7 +9,10 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 HARNESS = REPO_ROOT / "scripts/lib/governed_learning_memory_program_final_evaluation.py"
 LIVE_EVIDENCE = (
     REPO_ROOT
-    / "examples/governed-learning-memory/controlled-local-continual-learning-live-pilot-evidence.json"
+    / (
+        "examples/governed-learning-memory/"
+        "controlled-local-continual-learning-live-pilot-evidence.json"
+    )
 )
 
 

@@ -86,7 +86,7 @@ comparison_base() {
 }
 
 aion224_implemented_state() {
-  rg -q '"program_state"[[:space:]]*:[[:space:]]*"(governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout|governed_learning_memory_engagement_application_authorized_not_implemented|governed_learning_memory_engagement_application_implemented_shadow_only_pending_closeout|governed_learning_memory_controlled_local_continual_learning_pilot_authorized_not_implemented|governed_learning_memory_controlled_local_continual_learning_pilot_implemented_completed_pending_final_closeout)"' \
+  rg -q '"program_state"[[:space:]]*:[[:space:]]*"(governed_learning_memory_local_append_only_persistence_implemented_operator_invoked_isolated_pending_closeout|governed_learning_memory_engagement_application_authorized_not_implemented|governed_learning_memory_engagement_application_implemented_shadow_only_pending_closeout|governed_learning_memory_controlled_local_continual_learning_pilot_authorized_not_implemented|governed_learning_memory_controlled_local_continual_learning_pilot_implemented_completed_pending_final_closeout|governed_learning_memory_final_evaluation_complete_pending_git_reconciliation|governed_learning_memory_program_complete)"' \
     docs/governed-learning-memory/program-ledger.json
 }
 
@@ -162,12 +162,15 @@ is_allowed_path() {
     docs/adr/0187-promotion-transaction-evaluation-and-local-append-only-knowledge-persistence-authorization.md|\
     docs/adr/0188-operator-approved-local-append-only-knowledge-and-memory-projection-persistence.md|\
     docs/adr/0191-engagement-shadow-application-evaluation-and-controlled-local-continual-learning-pilot-authorization.md|\
+    docs/adr/0193-final-governed-learning-and-memory-program-evaluation-and-closeout.md|\
     docs/adr/README.md|\
     docs/project-status.md|docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/visual-brain.md|\
     examples/governed-learning-memory/*|\
     operator-console-static/index.html|operator-console-static/app.js|operator-console-static/README.md|\
     operator-console-static/demo-data/governed-learning-memory-*.json|\
     scripts/governed-learning-memory-program-authorization-check.sh|\
+    scripts/governed-learning-memory-program-final-*.sh|\
+    scripts/governed-learning-memory-program-complete*.sh|\
     scripts/governed-learning-memory-program-no-go-regression.sh|\
     scripts/governed-learning-memory-runtime-hold.sh|\
     scripts/governed-learning-memory-promotion-transaction-check.sh|\
@@ -190,6 +193,7 @@ is_allowed_path() {
     scripts/lib/governed_learning_memory_local_persistence_authorization.py|\
     scripts/lib/governed_learning_memory_engagement_application_operator_evaluation.py|\
     scripts/lib/governed_learning_memory_continual_learning_pilot_authorization.py|\
+    scripts/lib/governed_learning_memory_program_final_evaluation.py|\
     scripts/lib/v02-production-auth-scan-exclusions.sh|\
     scripts/connector-runtime-no-external-call-regression.sh|\
     scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh|\

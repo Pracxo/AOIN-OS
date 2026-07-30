@@ -7,6 +7,13 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 HARNESS = REPO_ROOT / "scripts/lib/governed_learning_memory_program_final_evaluation.py"
+LIVE_EVIDENCE = (
+    REPO_ROOT
+    / (
+        "examples/governed-learning-memory/"
+        "controlled-local-continual-learning-live-pilot-evidence.json"
+    )
+)
 
 
 def _load_harness():
@@ -30,10 +37,7 @@ def test_program_final_evaluation_executes_exact_28_scenarios(tmp_path: Path) ->
             "--evaluation-base-commit",
             "0fc95c345c1f8daada58a5b45e6f3b1fdd33d9e0",
             "--live-evidence",
-            str(
-                REPO_ROOT
-                / "examples/governed-learning-memory/controlled-local-continual-learning-live-pilot-evidence.json"
-            ),
+            str(LIVE_EVIDENCE),
             "--temporary-output-directory",
             str(tmp_path),
             "--report",

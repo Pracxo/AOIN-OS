@@ -14,6 +14,7 @@ from scripts.lib.governed_learning_memory_local_persistence_authorization import
     CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
     ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+    FINAL_GLM_PROGRAM_STATES,
     IMPLEMENTED_PENDING_CLOSEOUT_STATE,
 )
 from test_governed_learning_memory_program_authorization import REPO_ROOT, load_json
@@ -61,6 +62,7 @@ def _aion224_implemented() -> bool:
             ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
             CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
             CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
+            *FINAL_GLM_PROGRAM_STATES,
         }
     )
 
@@ -72,6 +74,7 @@ def _aion226_implemented() -> bool:
             ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
             CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
             CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
+            *FINAL_GLM_PROGRAM_STATES,
         }
     )
 

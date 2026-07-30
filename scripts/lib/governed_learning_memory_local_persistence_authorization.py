@@ -35,6 +35,14 @@ CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE = (
     "governed_learning_memory_controlled_local_continual_learning_pilot_"
     "implemented_completed_pending_final_closeout"
 )
+FINAL_EVALUATION_PENDING_STATE = (
+    "governed_learning_memory_final_evaluation_complete_pending_git_reconciliation"
+)
+GLM_PROGRAM_COMPLETE_STATE = "governed_learning_memory_program_complete"
+FINAL_GLM_PROGRAM_STATES = {
+    FINAL_EVALUATION_PENDING_STATE,
+    GLM_PROGRAM_COMPLETE_STATE,
+}
 AION222_FEATURE_COMMIT = "e415cc397b9aec70f8b3d19285f5fdd315048731"
 AION222_MERGE_COMMIT = "b89c896b8e75955d28fd06d52b5fb66fb8ed5ac0"
 AION222_MERGED_AT = "2026-07-28T09:00:39Z"
@@ -452,6 +460,7 @@ def validate_authorization_ledgers(
             ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
             CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
             CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
+            *FINAL_GLM_PROGRAM_STATES,
         }:
             _fail(f"{label} state mismatch")
         if program_state in {
@@ -478,6 +487,17 @@ def validate_authorization_ledgers(
                 or payload.get("formal_closeout_task") != "AION-229"
             ):
                 _fail(f"{label} continual-learning authorization mismatch")
+        elif program_state in FINAL_GLM_PROGRAM_STATES:
+            expected_closeout = (
+                "AION-229" if program_state == FINAL_EVALUATION_PENDING_STATE else None
+            )
+            if (
+                payload.get("active_glm_implementation_authorization_count") != 0
+                or payload.get("active_glm_implementation_authorization") is not None
+                or payload.get("active_glm_implementation_task") is not None
+                or payload.get("formal_closeout_task") != expected_closeout
+            ):
+                _fail(f"{label} final GLM closeout state mismatch")
         else:
             if (
                 payload.get("active_glm_implementation_authorization_count") != 1
@@ -494,13 +514,21 @@ def validate_authorization_ledgers(
             payload,
             [
                 "promotion_transaction_operator_evaluation_passed",
-                "new_glm_implementation_authorization_created",
                 "local_append_only_knowledge_store_authorized",
                 "operator_invoked_local_persistence_authorized",
                 "knowledge_promotion_transaction_core_implemented",
             ],
             label,
         )
+        if program_state in FINAL_GLM_PROGRAM_STATES:
+            if payload.get("new_glm_implementation_authorization_created") is not False:
+                _fail(f"{label} final authorization creation flag mismatch")
+        else:
+            _require_true(
+                payload,
+                ["new_glm_implementation_authorization_created"],
+                label,
+            )
         expected_false = [
             "general_persistent_knowledge_write_enabled",
             "background_persistent_knowledge_write_enabled",
@@ -550,6 +578,8 @@ def validate_authorization_ledgers(
         CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
     }:
         expected_active_authorizations = ["AION-227-GLM-0004"]
+    elif auth.get("program_state") in FINAL_GLM_PROGRAM_STATES:
+        expected_active_authorizations = []
     else:
         expected_active_authorizations = [AION223_AUTHORIZATION_ID]
     if auth.get("active_authorizations") != expected_active_authorizations:
@@ -619,6 +649,7 @@ def validate_authorization_ledgers(
         ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
         CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
         CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
+        *FINAL_GLM_PROGRAM_STATES,
     }:
         if (
             new.get("authorization_active") is not False
@@ -716,6 +747,7 @@ def validate_no_aion224_source(root: Path = REPO_ROOT) -> None:
         ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
         CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
         CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
+        *FINAL_GLM_PROGRAM_STATES,
     }:
         missing = [rel for rel in AION224_SOURCE_SCOPE if not (root / rel).exists()]
         if missing:

@@ -11,7 +11,10 @@ def test_aion228_delivery_is_reconcilable_to_pr145() -> None:
     program = json.loads(PROGRAM.read_text(encoding="utf-8"))
     delivery = program["aion_228_delivery"]
     assert delivery["task_id"] == "AION-228"
-    assert delivery["branch"] == "phase/governed-learning-memory-controlled-local-continual-learning-pilot"
+    assert (
+        delivery["branch"]
+        == "phase/governed-learning-memory-controlled-local-continual-learning-pilot"
+    )
     assert delivery["authorization_transaction"] == "AION-227-GLM-0004"
     assert delivery["next_task"] == "AION-229"
     if delivery["pull_requests"]:

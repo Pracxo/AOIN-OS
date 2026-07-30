@@ -6,6 +6,13 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 HARNESS = REPO_ROOT / "scripts/lib/governed_learning_memory_program_final_evaluation.py"
+LIVE_EVIDENCE = (
+    REPO_ROOT
+    / (
+        "examples/governed-learning-memory/"
+        "controlled-local-continual-learning-live-pilot-evidence.json"
+    )
+)
 
 
 def _load_harness():
@@ -24,8 +31,7 @@ def test_final_release_boundary_preserves_node24_and_v02_disabled(tmp_path: Path
         repo_root=REPO_ROOT,
         evaluation_id="AION-GLMPE-004",
         evaluation_base_commit="0fc95c345c1f8daada58a5b45e6f3b1fdd33d9e0",
-        live_evidence_path=REPO_ROOT
-        / "examples/governed-learning-memory/controlled-local-continual-learning-live-pilot-evidence.json",
+        live_evidence_path=LIVE_EVIDENCE,
         temporary_output_directory=tmp_path,
     )
     assert node24["supported_action_reference_count"] == 12

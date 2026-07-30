@@ -28,13 +28,15 @@ from scripts.lib.governed_learning_memory_continual_learning_pilot_authorization
 program = load_json("docs/governed-learning-memory/program-ledger.json")
 expected_true = (
     "controlled_local_continual_learning_pilot_implemented",
-    "operator_invoked_continual_learning_pilot_available",
     "deterministic_continual_learning_simulation_available",
     "controlled_live_pilot_completed",
 )
 for field in expected_true:
     if program.get(field) is not True:
         raise SystemExit(f"runtime hold expected true flag mismatch: {field}")
+expected_operator_available = program.get("active_glm_implementation_authorization_count") == 1
+if program.get("operator_invoked_continual_learning_pilot_available") is not expected_operator_available:
+    raise SystemExit("runtime hold operator availability mismatch")
 if program.get("controlled_live_pilot_cycle_count") != 3:
     raise SystemExit("runtime hold live cycle count mismatch")
 for field in (

@@ -1,0 +1,169 @@
+{
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "synthetic": true,
+  "aion_228_delivery": {
+    "authorization_state": "consumed_by_AION-228_closed_by_AION-229",
+    "authorization_transaction": "AION-227-GLM-0004",
+    "branch": "phase/governed-learning-memory-controlled-local-continual-learning-pilot",
+    "ci_result": "pass",
+    "completion_timestamp": "2026-07-29T20:57:20Z",
+    "corrective_prs": [],
+    "evaluation_decision": "CONTROLLED_LOCAL_CONTINUAL_LEARNING_PILOT_FINAL_EVALUATION_PASS_COMPLETE_GOVERNED_LEARNING_MEMORY_PROGRAM",
+    "evaluation_id": "AION-GLMPE-004",
+    "evidence": {
+      "active_overlays_after_close": 0,
+      "belief_effects": 0,
+      "brain_api_total": "4004 passed",
+      "cognitive_memory_writes": 0,
+      "cycle_count": 3,
+      "external_read_performed": true,
+      "feature_commit_verified_in_origin_main": true,
+      "implementation_gate": "pass",
+      "live_pilot_evidence_gate": "pass",
+      "merge_commit_verified_in_origin_main": true,
+      "model_weight_changes": 0,
+      "no_go": "pass",
+      "no_v02_tag_or_release": true,
+      "pr_145_required_checks_passed": true,
+      "production_memory_writes": 0,
+      "production_policy_mutations": 0,
+      "retained_temporary_files": 0,
+      "runtime_hold": "pass",
+      "sdk_total": "274 passed",
+      "source_bodies_retained": 0
+    },
+    "feature_commits": [
+      "07c146fe574a967266a2f2ad8b4473f51daf935d"
+    ],
+    "merge_commits": [
+      "0fc95c345c1f8daada58a5b45e6f3b1fdd33d9e0"
+    ],
+    "next_task": "AION-229",
+    "pull_requests": [
+      145
+    ],
+    "runtime_state": "controlled_local_continual_learning_pilot_implemented_completed",
+    "task_id": "AION-228"
+  },
+  "aion_229_delivery": {
+    "authorization_state": "no_active_glm_authorization",
+    "authorization_transaction": null,
+    "branch": "phase/governed-learning-memory-program-final-evaluation-closeout",
+    "ci_result": "pending",
+    "closeout_commit": null,
+    "completion_timestamp": null,
+    "corrective_prs": [],
+    "evaluation_decision": "CONTROLLED_LOCAL_CONTINUAL_LEARNING_PILOT_FINAL_EVALUATION_PASS_COMPLETE_GOVERNED_LEARNING_MEMORY_PROGRAM",
+    "evaluation_id": "AION-GLMPE-004",
+    "evidence_reconciliation_required": true,
+    "feature_commits": [
+      "1a45937f6fb5a25ffd468a6843f85f1b9a3bd0f1"
+    ],
+    "harness_commit": "1a45937f6fb5a25ffd468a6843f85f1b9a3bd0f1",
+    "merge_commits": [],
+    "next_task": null,
+    "primary_merge_commit": null,
+    "primary_merged_at": null,
+    "primary_pr": null,
+    "pull_requests": [],
+    "reconciliation_branch": "phase/governed-learning-memory-program-final-evidence-reconciliation",
+    "reconciliation_commit": null,
+    "reconciliation_merge_commit": null,
+    "reconciliation_merged_at": null,
+    "reconciliation_pr": null,
+    "required_checks": [
+      "brain-api-quality",
+      "contract-check",
+      "docker-build-core",
+      "policy-check",
+      "repository-hygiene",
+      "sdk-cli-check",
+      "sdk-quality"
+    ],
+    "runtime_state": "final_evaluation_complete_pending_git_reconciliation",
+    "task_id": "AION-229"
+  },
+  "authorization_closeout": {
+    "approval_record_id": "AION-227-GLM-0004",
+    "authorization_active": false,
+    "authorization_closed_by_task": "AION-229",
+    "authorization_consumed": true,
+    "authorization_consumed_by_feature_commits": [
+      "07c146fe574a967266a2f2ad8b4473f51daf935d"
+    ],
+    "authorization_consumed_by_merge_commits": [
+      "0fc95c345c1f8daada58a5b45e6f3b1fdd33d9e0"
+    ],
+    "authorization_consumed_by_prs": [
+      145
+    ],
+    "authorization_consumed_by_task": "AION-228",
+    "authorization_expired": true,
+    "authorization_reusable": false,
+    "authorization_transaction_id": "AION-227-GLM-0004",
+    "evaluation_applied_overlay": false,
+    "evaluation_created_local_store": false,
+    "evaluation_created_network_session": false,
+    "evaluation_created_production_effect": false,
+    "evaluation_reusable": false,
+    "evaluation_used_as_production_runtime_approval": false,
+    "evaluation_used_as_repeat_live_pilot_approval": false,
+    "program_final_evaluation_decision": "CONTROLLED_LOCAL_CONTINUAL_LEARNING_PILOT_FINAL_EVALUATION_PASS_COMPLETE_GOVERNED_LEARNING_MEMORY_PROGRAM",
+    "program_final_evaluation_id": "AION-GLMPE-004"
+  },
+  "evaluation_id": "AION-GLMPE-004",
+  "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+  "program_lineage": {
+    "aion227_delivery": {
+      "ci_result": "pass",
+      "corrective_feature_commit": "b0c3a7e971097ce658d1b48b52662df31f4c3eb8",
+      "corrective_merge_commit": "8156661dae57b6e141f094ee9e6650a710765635",
+      "corrective_pr": 143,
+      "feature_commits": [
+        "b29e7f80ab82b03cb5363ffc9daf629159f804ee",
+        "36279d736fbca06e041477c17d7e825c9b0a33b0"
+      ],
+      "merge_commit": "7a505f1afa30b3732d1e1955ed6983b14ba4b5b8",
+      "merged_at": "2026-07-29T17:20:10Z",
+      "primary_pr": 144
+    },
+    "aion228_delivery": {
+      "brain_api_total": "4004 passed",
+      "branch": "phase/governed-learning-memory-controlled-local-continual-learning-pilot",
+      "ci_result": "pass",
+      "feature_commit": "07c146fe574a967266a2f2ad8b4473f51daf935d",
+      "merge_commit": "0fc95c345c1f8daada58a5b45e6f3b1fdd33d9e0",
+      "merged_at": "2026-07-29T20:57:20Z",
+      "pull_request": 145,
+      "required_checks": [
+        "brain-api-quality",
+        "contract-check",
+        "docker-build-core",
+        "policy-check",
+        "repository-hygiene",
+        "sdk-cli-check",
+        "sdk-quality"
+      ],
+      "sdk_total": "274 passed"
+    },
+    "parent_programs": [
+      "AION-COGNITIVE-ARCHITECTURE-001",
+      "AION-KNOWLEDGE-INTELLIGENCE-001",
+      "AION-SELF-IMPROVEMENT-001"
+    ],
+    "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
+    "tasks": [
+      "AION-221",
+      "AION-222",
+      "AION-223",
+      "AION-224",
+      "AION-225",
+      "AION-226",
+      "AION-227",
+      "AION-228",
+      "AION-229"
+    ]
+  }
+}
