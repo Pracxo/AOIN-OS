@@ -1,8 +1,4 @@
 {
-  "read_only": true,
-  "redacted": true,
-  "redaction_applied": true,
-  "synthetic": true,
   "aion_228_delivery": {
     "authorization_state": "consumed_by_AION-228_closed_by_AION-229",
     "authorization_transaction": "AION-227-GLM-0004",
@@ -51,23 +47,47 @@
     "authorization_state": "no_active_glm_authorization",
     "authorization_transaction": null,
     "branch": "phase/governed-learning-memory-program-final-evaluation-closeout",
-    "ci_result": "pending",
-    "closeout_commit": null,
-    "completion_timestamp": null,
+    "ci_result": "pass",
+    "closeout_commit": "3d718e29f07d260801bbe372c436442e95224d17",
+    "completion_timestamp": "2026-07-30T09:12:24Z",
     "corrective_prs": [],
     "evaluation_decision": "CONTROLLED_LOCAL_CONTINUAL_LEARNING_PILOT_FINAL_EVALUATION_PASS_COMPLETE_GOVERNED_LEARNING_MEMORY_PROGRAM",
     "evaluation_id": "AION-GLMPE-004",
-    "evidence_reconciliation_required": true,
+    "evidence_reconciliation": {
+      "final_main_sha": null,
+      "final_origin_main_sha": null,
+      "primary_branch": "phase/governed-learning-memory-program-final-evaluation-closeout",
+      "primary_ci_result": "pass",
+      "primary_feature_commits": [
+        "1a45937f6fb5a25ffd468a6843f85f1b9a3bd0f1",
+        "3d718e29f07d260801bbe372c436442e95224d17"
+      ],
+      "primary_merge_commit": "a6a6d62eb7c04666a206bfadbbcd640e5bdca10a",
+      "primary_merged_at": "2026-07-30T09:12:24Z",
+      "primary_pr": 146,
+      "reconciliation_branch": "phase/governed-learning-memory-program-final-evidence-reconciliation",
+      "reconciliation_commit": null,
+      "reconciliation_merge_commit": null,
+      "reconciliation_merged_at": null,
+      "reconciliation_pr": null,
+      "state": "pending_reconciliation_pr_merge"
+    },
+    "evidence_reconciliation_required": false,
     "feature_commits": [
-      "1a45937f6fb5a25ffd468a6843f85f1b9a3bd0f1"
+      "1a45937f6fb5a25ffd468a6843f85f1b9a3bd0f1",
+      "3d718e29f07d260801bbe372c436442e95224d17"
     ],
     "harness_commit": "1a45937f6fb5a25ffd468a6843f85f1b9a3bd0f1",
-    "merge_commits": [],
+    "merge_commits": [
+      "a6a6d62eb7c04666a206bfadbbcd640e5bdca10a"
+    ],
     "next_task": null,
-    "primary_merge_commit": null,
-    "primary_merged_at": null,
-    "primary_pr": null,
-    "pull_requests": [],
+    "primary_merge_commit": "a6a6d62eb7c04666a206bfadbbcd640e5bdca10a",
+    "primary_merged_at": "2026-07-30T09:12:24Z",
+    "primary_pr": 146,
+    "pull_requests": [
+      146
+    ],
     "reconciliation_branch": "phase/governed-learning-memory-program-final-evidence-reconciliation",
     "reconciliation_commit": null,
     "reconciliation_merge_commit": null,
@@ -82,7 +102,7 @@
       "sdk-cli-check",
       "sdk-quality"
     ],
-    "runtime_state": "final_evaluation_complete_pending_git_reconciliation",
+    "runtime_state": "governed_learning_memory_program_complete",
     "task_id": "AION-229"
   },
   "authorization_closeout": {
@@ -114,6 +134,10 @@
     "program_final_evaluation_id": "AION-GLMPE-004"
   },
   "evaluation_id": "AION-GLMPE-004",
+  "final_completed_task": "AION-229",
+  "formal_closeout_task": null,
+  "governed_learning_memory_program_complete": true,
+  "program_final_evidence_reconciled": true,
   "program_id": "AION-GOVERNED-LEARNING-MEMORY-001",
   "program_lineage": {
     "aion227_delivery": {
@@ -165,5 +189,10 @@
       "AION-228",
       "AION-229"
     ]
-  }
+  },
+  "program_state": "governed_learning_memory_program_complete",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "synthetic": true
 }

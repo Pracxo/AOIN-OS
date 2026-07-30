@@ -19,7 +19,30 @@ is_nested_gate_context() {
 export AION_GLM_PROGRAM_COMPLETE_CHECK_RUNNING=1
 ./scripts/governed-learning-memory-program-complete-check.sh
 
-if rg -n '(production_runtime_authorized": true|repeat_live_pilot_authorized": true|active_continual_learning_execution_authorization": true|operator_invoked_continual_learning_pilot_available": true|background_continual_learning_enabled": true|scheduled_continual_learning_enabled": true|automatic_cycle_continuation_enabled": true|automatic_source_discovery_enabled": true|web_crawler_enabled": true|automatic_candidate_approval_enabled": true|automatic_knowledge_promotion_enabled": true|automatic_persistence_enabled": true|retained_pilot_store_enabled": true|production_memory_write_enabled": true|production_policy_mutation_enabled": true|cognitive_memory_write_enabled": true|actual_belief_creation_enabled": true|actual_belief_mutation_enabled": true|self_rewrite_enabled": true|runtime_source_rewrite_enabled": true|model_weight_training_enabled": true|production_exposure": true)' docs/governed-learning-memory docs/release examples/governed-learning-memory operator-console-static/demo-data; then
+final_state_paths=(
+  docs/governed-learning-memory/program-ledger.json
+  docs/governed-learning-memory/authorization-ledger.json
+  docs/governed-learning-memory/program-final-evaluation-report.md
+  docs/governed-learning-memory/program-final-capability-matrix.md
+  docs/governed-learning-memory/program-final-runtime-boundary.md
+  docs/release/governed-learning-memory-program-final-capability-matrix.md
+  docs/release/governed-learning-memory-program-final-evaluation-checklist.md
+  docs/release/governed-learning-memory-program-final-evaluation-closeout.md
+  docs/release/governed-learning-memory-program-final-evidence-matrix.md
+  docs/release/governed-learning-memory-program-final-reconciliation.md
+  docs/release/governed-learning-memory-program-final-runtime-hold.md
+  docs/release/governed-learning-memory-program-final-security-evidence.md
+  examples/governed-learning-memory/program-final-capability-matrix.json
+  examples/governed-learning-memory/program-final-closeout.json
+  examples/governed-learning-memory/program-final-evaluation-report.json
+  examples/governed-learning-memory/program-final-runtime-boundary.json
+  operator-console-static/demo-data/governed-learning-memory-authorization.json
+  operator-console-static/demo-data/governed-learning-memory-program.json
+  operator-console-static/demo-data/governed-learning-memory-program-final-closeout.json
+  operator-console-static/demo-data/governed-learning-memory-program-final-lineage.json
+)
+
+if rg -n '(production_runtime_authorized": true|repeat_live_pilot_authorized": true|active_continual_learning_execution_authorization": true|operator_invoked_continual_learning_pilot_available": true|background_continual_learning_enabled": true|scheduled_continual_learning_enabled": true|automatic_cycle_continuation_enabled": true|automatic_source_discovery_enabled": true|web_crawler_enabled": true|automatic_candidate_approval_enabled": true|automatic_knowledge_promotion_enabled": true|automatic_persistence_enabled": true|retained_pilot_store_enabled": true|production_memory_write_enabled": true|production_policy_mutation_enabled": true|cognitive_memory_write_enabled": true|actual_belief_creation_enabled": true|actual_belief_mutation_enabled": true|self_rewrite_enabled": true|runtime_source_rewrite_enabled": true|model_weight_training_enabled": true|production_exposure": true)' "${final_state_paths[@]}"; then
   echo "ERROR: final GLM runtime boundary violated" >&2
   exit 1
 fi
