@@ -16,6 +16,8 @@ from scripts.lib.governed_learning_memory_local_persistence_operator_evaluation 
 from scripts.lib.governed_learning_memory_engagement_application import (
     AION228_IMPLEMENTED_PROGRAM_STATE,
     APPLICATION_STATE,
+    FINAL_EVALUATION_PENDING_STATE,
+    FINAL_GLM_PROGRAM_STATES,
     POST_CLOSEOUT_APPLICATION_STATE,
     POST_CLOSEOUT_PROGRAM_STATE,
     POST_CLOSEOUT_RUNTIME_STATE,
@@ -118,6 +120,7 @@ def validate_authorization_ledgers(root: Path = REPO_ROOT) -> tuple[dict[str, An
         post_closeout_states = {
             POST_CLOSEOUT_PROGRAM_STATE,
             AION228_IMPLEMENTED_PROGRAM_STATE,
+            *FINAL_GLM_PROGRAM_STATES,
         }
         if program_state not in {PROGRAM_STATE, *post_closeout_states}:
             fail(f"{label} program state mismatch")
@@ -155,20 +158,33 @@ def validate_authorization_ledgers(root: Path = REPO_ROOT) -> tuple[dict[str, An
                 }
             )
         else:
-            aion228_implemented = program_state == AION228_IMPLEMENTED_PROGRAM_STATE
+            aion228_implemented = program_state in {
+                AION228_IMPLEMENTED_PROGRAM_STATE,
+                *FINAL_GLM_PROGRAM_STATES,
+            }
+            aion229_closed = program_state in FINAL_GLM_PROGRAM_STATES
+            expected_closeout = (
+                "AION-229" if program_state == FINAL_EVALUATION_PENDING_STATE else None
+            )
             expected.update(
                 {
-                    "active_glm_implementation_authorization_count": 1,
-                    "active_glm_implementation_authorization": AION227_AUTHORIZATION_ID,
-                    "active_glm_implementation_task": "AION-228",
-                    "formal_closeout_task": "AION-229",
+                    "active_glm_implementation_authorization_count": 0
+                    if aion229_closed
+                    else 1,
+                    "active_glm_implementation_authorization": None
+                    if aion229_closed
+                    else AION227_AUTHORIZATION_ID,
+                    "active_glm_implementation_task": None if aion229_closed else "AION-228",
+                    "formal_closeout_task": expected_closeout if aion229_closed else "AION-229",
                     "engagement_learning_application_state": POST_CLOSEOUT_APPLICATION_STATE,
                     "engagement_application_operator_evaluation_passed": True,
                     "engagement_application_operator_evaluation_id": "AION-GLMPE-003",
                     "engagement_application_operator_evaluation_decision": AION227_PASS_DECISION,
                     "controlled_local_continual_learning_pilot_authorized": True,
                     "controlled_local_continual_learning_pilot_implemented": aion228_implemented,
-                    "operator_invoked_continual_learning_pilot_available": aion228_implemented,
+                    "operator_invoked_continual_learning_pilot_available": (
+                        aion228_implemented and not aion229_closed
+                    ),
                 }
             )
             if aion228_implemented:
@@ -187,6 +203,8 @@ def validate_authorization_ledgers(root: Path = REPO_ROOT) -> tuple[dict[str, An
         AION228_IMPLEMENTED_PROGRAM_STATE,
     }:
         expected_active_authorizations = [AION227_AUTHORIZATION_ID]
+    elif auth.get("program_state") in FINAL_GLM_PROGRAM_STATES:
+        expected_active_authorizations = []
     else:
         expected_active_authorizations = [AION225_AUTHORIZATION_ID]
     if auth.get("active_authorizations") != expected_active_authorizations:
@@ -242,6 +260,7 @@ def validate_authorization_ledgers(root: Path = REPO_ROOT) -> tuple[dict[str, An
     if auth.get("program_state") in {
         POST_CLOSEOUT_PROGRAM_STATE,
         AION228_IMPLEMENTED_PROGRAM_STATE,
+        *FINAL_GLM_PROGRAM_STATES,
     }:
         if (
             child.get("authorization_active") is not False
@@ -262,12 +281,23 @@ def validate_authorization_ledgers(root: Path = REPO_ROOT) -> tuple[dict[str, An
         if (
             next_auth.get("implementation_task") != "AION-228"
             or next_auth.get("formal_closeout_task") != "AION-229"
-            or next_auth.get("authorization_active") is not True
-            or next_auth.get("authorization_consumed") is not False
-            or next_auth.get("authorization_expired") is not False
+            or next_auth.get("authorization_active") is not (
+                False if auth.get("program_state") in FINAL_GLM_PROGRAM_STATES else True
+            )
+            or next_auth.get("authorization_consumed") is not (
+                True if auth.get("program_state") in FINAL_GLM_PROGRAM_STATES else False
+            )
+            or next_auth.get("authorization_expired") is not (
+                True if auth.get("program_state") in FINAL_GLM_PROGRAM_STATES else False
+            )
             or next_auth.get("authorization_reusable") is not False
         ):
             fail("AION-227-GLM-0004 active authorization mismatch")
+        if auth.get("program_state") in FINAL_GLM_PROGRAM_STATES and (
+            next_auth.get("authorization_closed_by_task") != "AION-229"
+            or next_auth.get("authorization_consumed_by_task") != "AION-228"
+        ):
+            fail("AION-227-GLM-0004 final closeout mismatch")
     else:
         require_true(child, ("authorization_active",), "AION-225 authorization")
         require_false(

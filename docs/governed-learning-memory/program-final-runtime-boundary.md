@@ -1,0 +1,3 @@
+# AION-229 Final Runtime Boundary
+
+All current runtime authority is disabled after closeout. Historical implementation remains recorded, but `operator_invoked_continual_learning_pilot_available=false`, `active_continual_learning_execution_authorization=false`, `repeat_live_pilot_authorized=false`, and `production_runtime_authorized=false`. Background learning, scheduled learning, automatic continuation, automatic approval, automatic promotion, automatic persistence, retained pilot stores, production memory writes, production policy mutation, cognitive-memory writes, belief effects, source rewrite, Git mutation, deployment, and model-weight training remain disabled.

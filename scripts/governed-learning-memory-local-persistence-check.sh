@@ -37,6 +37,7 @@ from scripts.lib.governed_learning_memory_local_persistence_authorization import
     CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
     ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+    FINAL_GLM_PROGRAM_STATES,
     IMPLEMENTED_PENDING_CLOSEOUT_STATE,
     validate_authorization_ledgers,
     validate_delivery_reconciliation,
@@ -55,6 +56,7 @@ implemented_states = {
     ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
     CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
     CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
+    *FINAL_GLM_PROGRAM_STATES,
 }
 for label, payload in (("program", program), ("authorization", auth)):
     if payload["program_state"] not in implemented_states:
@@ -69,6 +71,7 @@ for label, payload in (("program", program), ("authorization", auth)):
     if payload["program_state"] not in {
         CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
         CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
+        *FINAL_GLM_PROGRAM_STATES,
     }:
         if payload.get("authorized_source_scope") != AION224_SOURCE_SCOPE:
             raise SystemExit(f"{label} source scope mismatch")

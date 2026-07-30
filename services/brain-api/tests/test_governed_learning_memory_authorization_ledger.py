@@ -6,6 +6,7 @@ from scripts.lib.governed_learning_memory_local_persistence_authorization import
     CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
     ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+    FINAL_GLM_PROGRAM_STATES,
 )
 from test_governed_learning_memory_program_authorization import (
     AUTH_ID,
@@ -31,6 +32,9 @@ def test_authorization_ledger_has_single_active_aion224_authorization() -> None:
         CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
     }:
         assert ledger["active_authorizations"] == ["AION-227-GLM-0004"]
+        assert len(ledger["records"]) == 4
+    elif ledger["program_state"] in FINAL_GLM_PROGRAM_STATES:
+        assert ledger["active_authorizations"] == []
         assert len(ledger["records"]) == 4
     else:
         assert ledger["active_authorizations"] == [AUTH_ID]
@@ -58,6 +62,7 @@ def test_authorization_ledger_has_single_active_aion224_authorization() -> None:
         ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
         CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
         CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
+        *FINAL_GLM_PROGRAM_STATES,
     }:
         assert record["authorization_active"] is False
         assert record["authorization_consumed"] is True

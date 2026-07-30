@@ -1436,3 +1436,18 @@ AION-228 is authorized but unimplemented. Engagement remains non-factual; intern
 ## AION-228 Controlled Continual-Learning Pilot
 
 AION-228 is implemented and completed pending AION-229 final evaluation and closeout. The pilot remains operator-invoked and local, executed one redacted three-cycle live session, purged source bodies, removed temporary persistence and overlay state, and keeps production memory, production policy, cognitive memory, belief mutation, source mutation, Git mutation, automatic approval, automatic promotion, background learning, scheduled learning, and model training disabled.
+
+## AION-229 Final Governed Learning And Memory Evaluation
+
+AION-229 adds read-only final evaluation and closeout evidence:
+
+- `demo-data/governed-learning-memory-program-final-evaluation.json`
+- `demo-data/governed-learning-memory-program-final-closeout.json`
+- `demo-data/governed-learning-memory-program-final-capability-matrix.json`
+- `demo-data/governed-learning-memory-program-final-runtime-boundary.json`
+- `demo-data/governed-learning-memory-program-final-lineage.json`
+
+The console remains static and local. It does not run another live pilot, call
+the backend, create approvals, create stores, apply overlays, write memory,
+mutate policy, create a successor GLM authorization, create a successor GLM
+task, or enable production learning.

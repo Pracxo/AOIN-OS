@@ -31,6 +31,14 @@ PROGRAM_STATE = (
     "governed_learning_memory_controlled_local_continual_learning_pilot_"
     "implemented_completed_pending_final_closeout"
 )
+FINAL_EVALUATION_PENDING_STATE = (
+    "governed_learning_memory_final_evaluation_complete_pending_git_reconciliation"
+)
+GLM_PROGRAM_COMPLETE_STATE = "governed_learning_memory_program_complete"
+FINAL_GLM_PROGRAM_STATES = {
+    FINAL_EVALUATION_PENDING_STATE,
+    GLM_PROGRAM_COMPLETE_STATE,
+}
 ENGAGEMENT_APPLICATION_STATE = (
     "implemented_deterministic_operator_approved_non_factual_in_memory_shadow_only"
 )
@@ -326,10 +334,7 @@ def validate_authorization_record(record: Mapping[str, Any]) -> None:
             "explicit_approval_record_approval",
             "implementation_authorization_approved",
             "implementation_go_status",
-            "authorization_active",
-            "sole_active_glm_authorization",
             "controlled_local_continual_learning_pilot_implemented",
-            "operator_invoked_continual_learning_pilot_available",
         ),
         "AION-227 authorization",
     )
@@ -337,20 +342,62 @@ def validate_authorization_record(record: Mapping[str, Any]) -> None:
         record,
         (
             "implementation_no_go_status",
-            "authorization_consumed",
-            "authorization_expired",
             "authorization_reusable",
             "runtime_effect",
         ),
         "AION-227 authorization",
     )
+    if record.get("authorization_active") is True:
+        require_true(record, ("sole_active_glm_authorization",), "AION-227 authorization")
+        require_true(
+            record,
+            ("operator_invoked_continual_learning_pilot_available",),
+            "AION-227 authorization",
+        )
+        require_false(
+            record,
+            ("authorization_consumed", "authorization_expired"),
+            "AION-227 authorization",
+        )
+    elif record.get("authorization_active") is False:
+        expected_closeout = {
+            "authorization_consumed": True,
+            "authorization_expired": True,
+            "authorization_reusable": False,
+            "authorization_consumed_by_task": IMPLEMENTATION_TASK,
+            "authorization_consumed_by_prs": [145],
+            "authorization_consumed_by_feature_commits": [
+                "07c146fe574a967266a2f2ad8b4473f51daf935d"
+            ],
+            "authorization_consumed_by_merge_commits": [
+                "0fc95c345c1f8daada58a5b45e6f3b1fdd33d9e0"
+            ],
+            "authorization_closed_by_task": FORMAL_CLOSEOUT_TASK,
+            "program_final_evaluation_id": "AION-GLMPE-004",
+            "program_final_evaluation_decision": (
+                "CONTROLLED_LOCAL_CONTINUAL_LEARNING_PILOT_FINAL_EVALUATION_PASS_"
+                "COMPLETE_GOVERNED_LEARNING_MEMORY_PROGRAM"
+            ),
+            "operator_invoked_continual_learning_pilot_available": False,
+        }
+        for key, value in expected_closeout.items():
+            if record.get(key) != value:
+                fail(f"AION-227 authorization closeout {key} mismatch")
+    else:
+        fail("AION-227 authorization active state mismatch")
     if record.get("authorized_capabilities") != {key: True for key in AUTHORIZED_CAPABILITIES}:
         fail("authorized AION-228 capabilities mismatch")
     if record.get("prohibited_capabilities") != {key: False for key in PROHIBITED_CAPABILITIES}:
         fail("prohibited AION-228 capabilities mismatch")
     if record.get("resource_limits") != RESOURCE_LIMITS:
         fail("AION-228 resource limit mismatch")
-    if tuple(record.get("future_authorized_source_scope", ())) != (
+    source_scope = (
+        record.get("future_authorized_source_scope")
+        or record.get("historical_future_authorized_source_scope")
+        or record.get("implemented_source_scope")
+        or ()
+    )
+    if tuple(source_scope) != (
         *FUTURE_AION228_SOURCE_SCOPE,
         *AION228_OPTIONAL_EXISTING_SCOPE,
     ):
@@ -390,20 +437,16 @@ def validate_ledgers(root: Path = REPO_ROOT) -> tuple[dict[str, Any], dict[str, 
     for label, payload in (("program", program), ("authorization", auth)):
         if payload.get("program_id") != PROGRAM_ID:
             fail(f"{label} program id mismatch")
+        program_state = payload.get("program_state")
+        if program_state not in {PROGRAM_STATE, *FINAL_GLM_PROGRAM_STATES}:
+            fail(f"{label} program state mismatch")
         expected = {
-            "program_state": PROGRAM_STATE,
             "engagement_application_operator_evaluation_passed": True,
             "engagement_application_operator_evaluation_id": EVALUATION_ID,
             "engagement_application_operator_evaluation_decision": PASS_DECISION,
-            "active_glm_implementation_authorization_count": 1,
-            "active_glm_implementation_authorization": NEXT_AUTHORIZATION_ID,
-            "active_glm_implementation_task": IMPLEMENTATION_TASK,
-            "formal_closeout_task": FORMAL_CLOSEOUT_TASK,
-            "new_glm_implementation_authorization_created": True,
             "controlled_local_continual_learning_pilot_authorized": True,
             "controlled_local_continual_learning_pilot_implemented": True,
             "operator_invoked_continual_learning_pilot_authorized": True,
-            "operator_invoked_continual_learning_pilot_available": True,
             "deterministic_continual_learning_simulation_available": True,
             "controlled_live_pilot_completed": True,
             "controlled_live_pilot_cycle_count": 3,
@@ -417,6 +460,32 @@ def validate_ledgers(root: Path = REPO_ROOT) -> tuple[dict[str, Any], dict[str, 
             "v02_tag_created": False,
             "v02_release_created": False,
         }
+        if program_state == PROGRAM_STATE:
+            expected.update(
+                {
+                    "active_glm_implementation_authorization_count": 1,
+                    "active_glm_implementation_authorization": NEXT_AUTHORIZATION_ID,
+                    "active_glm_implementation_task": IMPLEMENTATION_TASK,
+                    "formal_closeout_task": FORMAL_CLOSEOUT_TASK,
+                    "new_glm_implementation_authorization_created": True,
+                    "operator_invoked_continual_learning_pilot_available": True,
+                }
+            )
+        else:
+            expected.update(
+                {
+                    "active_glm_implementation_authorization_count": 0,
+                    "active_glm_implementation_authorization": None,
+                    "active_glm_implementation_task": None,
+                    "formal_closeout_task": (
+                        FORMAL_CLOSEOUT_TASK
+                        if program_state == FINAL_EVALUATION_PENDING_STATE
+                        else None
+                    ),
+                    "new_glm_implementation_authorization_created": False,
+                    "operator_invoked_continual_learning_pilot_available": False,
+                }
+            )
         for key, value in expected.items():
             if payload.get(key) != value:
                 fail(f"{label} {key} mismatch")
@@ -465,12 +534,16 @@ def validate_ledgers(root: Path = REPO_ROOT) -> tuple[dict[str, Any], dict[str, 
         if (
             aion228_delivery.get("authorization_transaction") != NEXT_AUTHORIZATION_ID
             or aion228_delivery.get("next_task") != FORMAL_CLOSEOUT_TASK
-            or aion228_delivery.get("ci_result") != "pending"
+            or aion228_delivery.get("ci_result") not in {"pending", "pass"}
             or aion228_delivery.get("runtime_state")
-            != "controlled_local_continual_learning_pilot_implemented_completed_pending_final_closeout"
+            not in {
+                "controlled_local_continual_learning_pilot_implemented_completed_pending_final_closeout",
+                "controlled_local_continual_learning_pilot_implemented_completed",
+            }
         ):
             fail(f"{label} AION-228 delivery reconciliation mismatch")
-    if auth.get("active_authorizations") != [NEXT_AUTHORIZATION_ID]:
+    expected_active = [NEXT_AUTHORIZATION_ID] if auth.get("program_state") == PROGRAM_STATE else []
+    if auth.get("active_authorizations") != expected_active:
         fail("authorization ledger active authorizations mismatch")
     records = auth.get("records")
     if not isinstance(records, list):

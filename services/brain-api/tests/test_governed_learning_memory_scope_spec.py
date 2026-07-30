@@ -7,6 +7,7 @@ from scripts.lib.governed_learning_memory_local_persistence_authorization import
     CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
     ENGAGEMENT_APPLICATION_AUTHORIZED_STATE,
     ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
+    FINAL_GLM_PROGRAM_STATES,
     IMPLEMENTED_PENDING_CLOSEOUT_STATE,
 )
 from test_governed_learning_memory_program_authorization import REPO_ROOT, SCOPE, load_json
@@ -20,6 +21,7 @@ def test_authorization_scope_and_future_source_scope_are_recorded_only() -> None
         ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
         CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
         CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
+        *FINAL_GLM_PROGRAM_STATES,
     }
     if auth["program_state"] in post_aion224_states:
         record = next(
@@ -41,6 +43,7 @@ def test_authorization_scope_and_future_source_scope_are_recorded_only() -> None
         ENGAGEMENT_APPLICATION_IMPLEMENTED_STATE,
         CONTINUAL_LEARNING_PILOT_AUTHORIZED_STATE,
         CONTINUAL_LEARNING_PILOT_IMPLEMENTED_STATE,
+        *FINAL_GLM_PROGRAM_STATES,
     }
     for relative in AION224_SOURCE_SCOPE:
         if relative.endswith("__init__.py"):

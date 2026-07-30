@@ -136,12 +136,22 @@ continual_learning_authorized_state = (
 continual_learning_implemented_state = (
     "governed_learning_memory_controlled_local_continual_learning_pilot_implemented_completed_pending_final_closeout"
 )
+final_evaluation_pending_state = (
+    "governed_learning_memory_final_evaluation_complete_pending_git_reconciliation"
+)
+glm_program_complete_state = "governed_learning_memory_program_complete"
 engagement_states = {engagement_authorized_state, engagement_implemented_state}
 continual_learning_states = {
     continual_learning_authorized_state,
     continual_learning_implemented_state,
 }
-implemented_states = {implemented_state, *engagement_states, *continual_learning_states}
+final_glm_states = {final_evaluation_pending_state, glm_program_complete_state}
+implemented_states = {
+    implemented_state,
+    *engagement_states,
+    *continual_learning_states,
+    *final_glm_states,
+}
 for label, payload in (("program", program), ("authorization", auth)):
     if payload.get("program_state") in engagement_states:
         if payload["authorization_transaction_id"] != "AION-225-GLM-0003":
@@ -157,6 +167,20 @@ for label, payload in (("program", program), ("authorization", auth)):
             raise SystemExit(f"{label} active task mismatch")
         if payload["formal_closeout_task"] != "AION-229":
             raise SystemExit(f"{label} closeout task mismatch")
+    elif payload.get("program_state") in final_glm_states:
+        if payload["authorization_transaction_id"] != "AION-227-GLM-0004":
+            raise SystemExit(f"{label} current authorization mismatch")
+        if payload["active_glm_implementation_authorization_count"] != 0:
+            raise SystemExit(f"{label} final active authorization count mismatch")
+        if payload["active_glm_implementation_authorization"] is not None:
+            raise SystemExit(f"{label} final active authorization mismatch")
+        if payload["active_glm_implementation_task"] is not None:
+            raise SystemExit(f"{label} final active task mismatch")
+        expected_closeout = (
+            "AION-229" if payload.get("program_state") == final_evaluation_pending_state else None
+        )
+        if payload["formal_closeout_task"] != expected_closeout:
+            raise SystemExit(f"{label} final closeout task mismatch")
     else:
         if payload["authorization_transaction_id"] != AION223_AUTHORIZATION_ID:
             raise SystemExit(f"{label} current authorization mismatch")

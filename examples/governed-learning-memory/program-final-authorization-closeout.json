@@ -1,0 +1,28 @@
+{
+  "approval_record_id": "AION-227-GLM-0004",
+  "authorization_active": false,
+  "authorization_closed_by_task": "AION-229",
+  "authorization_consumed": true,
+  "authorization_consumed_by_feature_commits": [
+    "07c146fe574a967266a2f2ad8b4473f51daf935d"
+  ],
+  "authorization_consumed_by_merge_commits": [
+    "0fc95c345c1f8daada58a5b45e6f3b1fdd33d9e0"
+  ],
+  "authorization_consumed_by_prs": [
+    145
+  ],
+  "authorization_consumed_by_task": "AION-228",
+  "authorization_expired": true,
+  "authorization_reusable": false,
+  "authorization_transaction_id": "AION-227-GLM-0004",
+  "evaluation_applied_overlay": false,
+  "evaluation_created_local_store": false,
+  "evaluation_created_network_session": false,
+  "evaluation_created_production_effect": false,
+  "evaluation_reusable": false,
+  "evaluation_used_as_production_runtime_approval": false,
+  "evaluation_used_as_repeat_live_pilot_approval": false,
+  "program_final_evaluation_decision": "CONTROLLED_LOCAL_CONTINUAL_LEARNING_PILOT_FINAL_EVALUATION_PASS_COMPLETE_GOVERNED_LEARNING_MEMORY_PROGRAM",
+  "program_final_evaluation_id": "AION-GLMPE-004"
+}

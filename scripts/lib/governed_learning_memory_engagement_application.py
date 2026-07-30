@@ -23,6 +23,14 @@ AION228_IMPLEMENTED_PROGRAM_STATE = (
     "governed_learning_memory_controlled_local_continual_learning_pilot_"
     "implemented_completed_pending_final_closeout"
 )
+FINAL_EVALUATION_PENDING_STATE = (
+    "governed_learning_memory_final_evaluation_complete_pending_git_reconciliation"
+)
+GLM_PROGRAM_COMPLETE_STATE = "governed_learning_memory_program_complete"
+FINAL_GLM_PROGRAM_STATES = {
+    FINAL_EVALUATION_PENDING_STATE,
+    GLM_PROGRAM_COMPLETE_STATE,
+}
 APPLICATION_STATE = (
     "implemented_deterministic_operator_approved_non_factual_in_memory_shadow_only_"
     "pending_closeout"
@@ -288,6 +296,7 @@ def validate_implementation_state(root: Path = REPO_ROOT) -> None:
             PROGRAM_STATE,
             POST_CLOSEOUT_PROGRAM_STATE,
             AION228_IMPLEMENTED_PROGRAM_STATE,
+            *FINAL_GLM_PROGRAM_STATES,
         }:
             fail(f"{relative} program state mismatch")
         if program_state == PROGRAM_STATE:
@@ -307,26 +316,46 @@ def validate_implementation_state(root: Path = REPO_ROOT) -> None:
                 != POST_CLOSEOUT_APPLICATION_STATE
             ):
                 fail(f"{relative} post-closeout engagement state mismatch")
-            if payload.get("active_glm_implementation_authorization_count") != 1:
-                fail(f"{relative} post-closeout active authorization count mismatch")
-            if payload.get("active_glm_implementation_authorization") != NEXT_AUTHORIZATION_ID:
-                fail(f"{relative} post-closeout active authorization mismatch")
-            if payload.get("active_glm_implementation_task") != "AION-228":
-                fail(f"{relative} post-closeout implementation task mismatch")
-            if payload.get("formal_closeout_task") != "AION-229":
-                fail(f"{relative} post-closeout formal closeout mismatch")
+            if program_state in FINAL_GLM_PROGRAM_STATES:
+                expected_closeout = (
+                    "AION-229" if program_state == FINAL_EVALUATION_PENDING_STATE else None
+                )
+                if payload.get("active_glm_implementation_authorization_count") != 0:
+                    fail(f"{relative} final active authorization count mismatch")
+                if payload.get("active_glm_implementation_authorization") is not None:
+                    fail(f"{relative} final active authorization mismatch")
+                if payload.get("active_glm_implementation_task") is not None:
+                    fail(f"{relative} final implementation task mismatch")
+                if payload.get("formal_closeout_task") != expected_closeout:
+                    fail(f"{relative} final formal closeout mismatch")
+            else:
+                if payload.get("active_glm_implementation_authorization_count") != 1:
+                    fail(f"{relative} post-closeout active authorization count mismatch")
+                if payload.get("active_glm_implementation_authorization") != NEXT_AUTHORIZATION_ID:
+                    fail(f"{relative} post-closeout active authorization mismatch")
+                if payload.get("active_glm_implementation_task") != "AION-228":
+                    fail(f"{relative} post-closeout implementation task mismatch")
+                if payload.get("formal_closeout_task") != "AION-229":
+                    fail(f"{relative} post-closeout formal closeout mismatch")
             if payload.get("engagement_application_operator_evaluation_passed") is not True:
                 fail(f"{relative} AION-227 evaluation pass projection mismatch")
             if payload.get("controlled_local_continual_learning_pilot_authorized") is not True:
                 fail(f"{relative} continual-learning authorization projection mismatch")
-            expected_implemented = program_state == AION228_IMPLEMENTED_PROGRAM_STATE
+            expected_implemented = program_state in {
+                AION228_IMPLEMENTED_PROGRAM_STATE,
+                *FINAL_GLM_PROGRAM_STATES,
+            }
             if (
                 payload.get("controlled_local_continual_learning_pilot_implemented")
                 is not expected_implemented
             ):
                 fail(f"{relative} continual-learning implementation projection mismatch")
             if expected_implemented:
-                if payload.get("operator_invoked_continual_learning_pilot_available") is not True:
+                expected_available = program_state == AION228_IMPLEMENTED_PROGRAM_STATE
+                if (
+                    payload.get("operator_invoked_continual_learning_pilot_available")
+                    is not expected_available
+                ):
                     fail(f"{relative} AION-228 operator availability mismatch")
                 if payload.get("deterministic_continual_learning_simulation_available") is not True:
                     fail(f"{relative} AION-228 deterministic simulation mismatch")
