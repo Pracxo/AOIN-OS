@@ -15,7 +15,7 @@
   "read_only": true,
   "redaction_applied": true,
   "synthetic": true,
-  "runtime_implemented": false,
+  "runtime_implemented": true,
   "production_runtime_authorized": false,
   "v02_release_ready": false
 }

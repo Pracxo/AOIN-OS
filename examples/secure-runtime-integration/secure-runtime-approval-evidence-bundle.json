@@ -1,0 +1,48 @@
+{
+  "approval_required": true,
+  "approvals_created_by_runtime": 0,
+  "bundle_fingerprint": "77fee8c4410c76c934bf39915ec1fc8dbfb7e1599c381c5ccb8c8ca779460f84",
+  "bundle_id": "approval-bundle-AION-231",
+  "capability_code": "brain.think.simulate",
+  "created_at": "2026-07-30T12:00:00Z",
+  "evidence": [
+    {
+      "action_type": "secure_runtime.dispatch.simulate",
+      "actor_context_fingerprint": "0676c1cc225b4a346cc35906b23c21159f6dafdc81ef94853638bbe0f3ac68eb",
+      "actual_execution_authorized": false,
+      "approval_decision_fingerprint": "d4a5c99765f2b60a830b0a4028adcf7946f099b5bf955f5beea09af8ec9c403c",
+      "approval_decision_id": "approval-decision-AION-231",
+      "approval_request_fingerprint": "a6f7fb040d3e89aeec978f186490b5e0ee8e8d3f4455fec81f9cc98e68ffcaa0",
+      "approval_request_id": "approval-request-AION-231",
+      "approval_scope": [
+        "secure-runtime:simulate-capability"
+      ],
+      "approved": true,
+      "capability_code": "brain.think.simulate",
+      "capability_plan_fingerprint": "421b96270517852129eae1e8f4420267154cf819f6ebf23bf6681deea7ff5c7a",
+      "created_at": "2026-07-30T12:00:00Z",
+      "evidence_fingerprint": "e0fc0dd2292718acb919617a7324e2c83a2f5102f7c0683cef685b2f76bd5fdf",
+      "evidence_id": "approval-evidence-request-AION-231",
+      "expires_at": "2026-07-30T12:10:00Z",
+      "guardrail_binding_fingerprint": "8209466a855765892a7d059bed85a3d2411291353cc45583f9410c7a677bea6f",
+      "policy_binding_fingerprint": "30a44624d55a6027d58fbab172d7e0d7c73578568842429856c996901696d864",
+      "production_effect_authorized": false,
+      "read_only": true,
+      "redacted": true,
+      "request_id": "request-AION-231",
+      "requester_differs_from_approver": true,
+      "resource_type": "secure_runtime_capability_plan",
+      "risk_binding_fingerprint": "0315bcefbf515a4781146a53a2afa6d5b4be24777dd6304e990e48e056d266d1",
+      "runtime_effect": false,
+      "schema_version": "aion-secure-runtime-approval-evidence/v1",
+      "session_id": "session-AION-231",
+      "side_effect_budget_fingerprint": "317a4fde588cea6c7ab99cf0c7a7ac805aa8e0c6c29889680de599094f1187a2"
+    }
+  ],
+  "read_only": true,
+  "redacted": true,
+  "request_id": "request-AION-231",
+  "runtime_effect": false,
+  "schema_version": "aion-secure-runtime-approval-evidence/v1",
+  "session_id": "session-AION-231"
+}

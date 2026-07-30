@@ -1,0 +1,14 @@
+{
+  "allowed": true,
+  "budget_fingerprint": "317a4fde588cea6c7ab99cf0c7a7ac805aa8e0c6c29889680de599094f1187a2",
+  "created_at": "2026-07-30T12:00:00Z",
+  "decision_fingerprint": "157cee5943da5b050db1bd41d9d670e5e0daf43bea574fbd9833398c449eadaa",
+  "production_effect": false,
+  "reason_codes": [
+    "budget_passed"
+  ],
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-secure-runtime-side-effect-budget/v1",
+  "usage_fingerprint": "9a97216a30419829e109ccd93623c54095a4bb718223d4565ea2e6a04533b856"
+}

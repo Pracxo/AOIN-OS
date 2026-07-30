@@ -1,0 +1,22 @@
+{
+  "action_type": "secure_runtime.dispatch.simulate",
+  "approval_required": true,
+  "binding_fingerprint": "30a44624d55a6027d58fbab172d7e0d7c73578568842429856c996901696d864",
+  "binding_id": "policy-binding-request-AION-231",
+  "capability_plan_fingerprint": "421b96270517852129eae1e8f4420267154cf819f6ebf23bf6681deea7ff5c7a",
+  "constraints": [
+    "simulation_only"
+  ],
+  "created_at": "2026-07-30T12:00:00Z",
+  "decision_outcome": "allow_require_approval",
+  "read_only": true,
+  "redacted": true,
+  "request_id": "request-AION-231",
+  "resource_id": "resource-AION-231",
+  "resource_type": "secure_runtime_capability_plan",
+  "runtime_effect": false,
+  "schema_version": "aion-secure-runtime-decision-binding/v1",
+  "session_id": "session-AION-231",
+  "source_decision_fingerprint": "05ed76dc74391bcac6280f73d2002cda506418565b5cbdc3ea47ba79f65d68ee",
+  "trace_id": "trace-AION-231"
+}

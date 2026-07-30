@@ -13,8 +13,7 @@ def test_every_aion231_authorized_capability_is_recorded_true() -> None:
     for payload in (program, auth):
         assert set(payload["authorized_capabilities"]) == set(AUTHORIZED_CAPABILITIES)
         assert all(
-            payload["authorized_capabilities"][key] is True
-            for key in AUTHORIZED_CAPABILITIES
+            payload["authorized_capabilities"][key] is True for key in AUTHORIZED_CAPABILITIES
         )
 
 

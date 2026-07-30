@@ -257,6 +257,10 @@ for parts in changed_entries():
             )
         ):
             continue
+        if normalized == "services/brain-api/src/aion_brain/contracts/secure_runtime.py" or normalized.startswith(
+            "services/brain-api/src/aion_brain/secure_runtime/"
+        ):
+            continue
         if any(normalized.startswith(prefix) for prefix in PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")
         if normalized not in ALLOWED_EXACT and not any(

@@ -74,6 +74,9 @@ while IFS= read -r file; do
   if aion228_is_scoped_governed_learning_memory_continual_learning_path "$file"; then
     continue
   fi
+  if aion231_is_scoped_secure_runtime_foundation_path "$file"; then
+    continue
+  fi
   case "$file" in
     services/brain-api/pyproject.toml)
       if aion162_is_scoped_offline_identity_assertion_verification_path "$file"; then

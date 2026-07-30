@@ -1,0 +1,55 @@
+{
+  "actual_execution": false,
+  "allowed_capability_codes": [
+    "brain.think.simulate",
+    "secure_runtime.audit.read",
+    "secure_runtime.fixture.replay",
+    "secure_runtime.health.read",
+    "secure_runtime.observability.read"
+  ],
+  "allowed_permissions": [
+    "brain:think:simulate",
+    "secure_runtime:audit:read",
+    "secure_runtime:fixture:replay",
+    "secure_runtime:read"
+  ],
+  "allowed_roles": [
+    "operator",
+    "viewer"
+  ],
+  "allowed_security_scopes": [
+    "secure-runtime:audit",
+    "secure-runtime:fixture-replay",
+    "secure-runtime:health",
+    "secure-runtime:observability",
+    "secure-runtime:simulate-capability"
+  ],
+  "allowed_workspace_id": "workspace-AION-231",
+  "approval_record_id": "AION-230-SRI-0001",
+  "assertion_fingerprint": "43b9f50e517593b9f1e1f9c0b47e7bca77a6d5904c514009421bced059530f70",
+  "authorization_scope": "local-operator-authenticated-session-offline-identity-request-context-actor-context-replay-guarded-capability-dispatch-policy-risk-approval-kill-switch-audit-observability-foundation-core",
+  "authorization_transaction_id": "AION-230-SRI-0001",
+  "confirmation_fingerprint": "746595b836720c56434af00498c7671856037858f897ec3d44ed6a1daac62331",
+  "created_at": "2026-07-30T12:00:00Z",
+  "credential_persistence": false,
+  "envelope_fingerprint": "cdb868f88a7cd7c563e73467275c51e603f2446b52314644c4debd174224d542",
+  "expected_audience": "aion-brain",
+  "expected_issuer": "issuer.aion.local",
+  "expires_at": "2026-07-30T12:30:00Z",
+  "external_identity_provider": false,
+  "formal_closeout_task": "AION-232",
+  "implementation_task": "AION-231",
+  "local_session": true,
+  "maximum_concurrent_requests": 4,
+  "maximum_requests": 100,
+  "maximum_session_seconds": 3600,
+  "network_access": false,
+  "operator_identity_fingerprint": "884c19c3488b5a647dfcd3ebee52646f2672d010629eb6e0138c82640a7607e8",
+  "operator_invoked": true,
+  "production_effect": false,
+  "production_runtime": false,
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "schema_version": "aion-secure-runtime-authorization/v1",
+  "session_id": "session-AION-231",
+  "token_persistence": false
+}

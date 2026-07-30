@@ -46,18 +46,9 @@ def test_aion229_final_evidence_is_reconciled_before_sri_authorization() -> None
     assert verification["reconciliation_pr"] == 147
     assert verification["harness_commit"] == "1a45937f6fb5a25ffd468a6843f85f1b9a3bd0f1"
     assert verification["closeout_commit"] == "3d718e29f07d260801bbe372c436442e95224d17"
-    assert (
-        verification["reconciliation_commit"]
-        == "ef8e7d0387734fc0c5fb12e1d35d38b0761bb342"
-    )
-    assert (
-        verification["primary_merge_commit"]
-        == "a6a6d62eb7c04666a206bfadbbcd640e5bdca10a"
-    )
-    assert (
-        verification["reconciliation_merge_commit"]
-        == "9daca65b0a801988db17906611b00dff882aaacd"
-    )
+    assert verification["reconciliation_commit"] == "ef8e7d0387734fc0c5fb12e1d35d38b0761bb342"
+    assert verification["primary_merge_commit"] == "a6a6d62eb7c04666a206bfadbbcd640e5bdca10a"
+    assert verification["reconciliation_merge_commit"] == "9daca65b0a801988db17906611b00dff882aaacd"
     assert verification["ci_result"] == "pass"
     assert verification["evaluation_id"] == "AION-GLMPE-004"
     assert verification["evaluation_decision"] == GLM_DECISION

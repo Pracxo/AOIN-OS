@@ -1,0 +1,13 @@
+{
+  "created_at": "2026-07-30T12:00:00Z",
+  "diagnostic_fingerprint": "3e298a53240219341af6604907b7369eb347a49dba09058483cc78ba457e6d09",
+  "diagnostic_id": "diagnostic-AION-231",
+  "redacted": true,
+  "safe_counts": {
+    "requests": 1,
+    "sessions": 1
+  },
+  "schema_version": "aion-secure-runtime-evidence/v1",
+  "session_id": "session-AION-231",
+  "status": "ready"
+}

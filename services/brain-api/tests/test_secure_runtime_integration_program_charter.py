@@ -7,7 +7,9 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[3]
 
 PROGRAM_ID = "AION-SECURE-RUNTIME-INTEGRATION-001"
-PROGRAM_STATE = "secure_runtime_integration_program_authorized_not_implemented"
+PROGRAM_STATE = (
+    "secure_runtime_foundation_implemented_local_operator_simulation_only_pending_closeout"
+)
 AUTH_ID = "AION-230-SRI-0001"
 IMPLEMENTATION_TASK = "AION-231"
 CLOSEOUT_TASK = "AION-232"
@@ -273,4 +275,4 @@ def test_program_charter_creates_separate_sri_program() -> None:
     assert "creates a new Secure Runtime Integration Program" in charter
     assert "does not reopen any parent program" in charter
     assert "inherits no active parent-program implementation authorization" in charter
-    assert "creates no AION-231 runtime source" in charter
+    assert "AION-231 runtime foundation is implemented" in charter

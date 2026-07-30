@@ -135,9 +135,12 @@ AION core policy vocabulary stays generic:
 - `self_improvement.shadow.activation_review.request`
 
 The `secure_runtime.*` vocabulary is authorized for AION-231 local foundation
-planning only. It must remain side-effect-free and may not authorize provider
+simulation only. It must remain side-effect-free and may not authorize provider
 calls, connector calls, actual tool execution, module activation, production
 writes, production policy mutation, deployment, v0.2 tags, or v0.2 releases.
+The earlier planning only marker is retained as historical context; current
+AION-231 behavior is deterministic local simulation evidence, not production
+execution.
 
 AION-179 records the shadow evaluation as advisory only. The policy vocabulary
 does not gain an allow action for runtime shadow activation, source rewrite,

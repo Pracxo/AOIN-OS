@@ -191,7 +191,7 @@ if rg -n 'npm[[:space:]]+install|pnpm[[:space:]]+install|yarn[[:space:]]+add|bun
 fi
 
 if rg -n 'https?://|sk-|ghp_|xoxb-|-----BEGIN PRIVATE KEY-----|bearer |basic |api_key|private_key|access_token|refresh_token|id_token|client_secret|raw_prompt|hidden_reasoning|chain_of_thought' \
-  examples/release operator-console-static/demo-data/post-v01-release-candidate.json operator-console-static/demo-data/v02-planning-boundary.json; then
+  "${required_artifacts[@]}"; then
   echo "blocked marker found in AION-118 examples or static data" >&2
   exit 1
 fi

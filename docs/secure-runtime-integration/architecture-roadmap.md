@@ -1,13 +1,15 @@
 # Secure Runtime Integration Architecture Roadmap
 
-Only AION-231 is authorized by AION-230. Future task numbering is planning
-metadata. No future authorization is created by this task.
+AION-231 is implemented under `AION-230-SRI-0001`. AION-232 is now the active
+formal evaluation and model-gateway authorization decision task. AION-233
+remains unauthorized.
+AION-233 remains unauthorized.
 
 | Task | State | Role |
 | --- | --- | --- |
-| AION-230 | active_program_authorization | Secure Runtime Integration charter and AION-231 authorization |
-| AION-231 | authorized_not_implemented | Controlled authenticated local operator runtime foundation |
-| AION-232 | planned_formal_evaluation | Runtime-foundation evaluation and controlled model-gateway authorization decision |
+| AION-230 | completed_program_authorization | Secure Runtime Integration charter and AION-231 authorization |
+| AION-231 | implemented_pending_AION-232_closeout | Controlled authenticated local operator runtime foundation |
+| AION-232 | active_formal_evaluation_and_model_gateway_authorization_decision | Runtime-foundation evaluation and controlled model-gateway authorization decision |
 | AION-233 | planned_not_authorized | Controlled model-gateway implementation |
 | AION-234 | planned_not_authorized | Model-gateway evaluation and capability-sandbox authorization |
 | AION-235 | planned_not_authorized | Sandboxed connector and capability execution runtime |
@@ -17,9 +19,9 @@ metadata. No future authorization is created by this task.
 
 ## Ordering
 
-1. AION-230 charters `AION-SECURE-RUNTIME-INTEGRATION-001` and creates
+1. AION-230 chartered `AION-SECURE-RUNTIME-INTEGRATION-001` and created
    `AION-230-SRI-0001`.
-2. AION-231 may implement the authenticated local operator runtime foundation.
+2. AION-231 implemented the authenticated local operator runtime foundation.
 3. AION-232 must evaluate AION-231 and decide whether a controlled
    model-gateway authorization should be created.
 4. AION-233 through AION-238 require later explicit authorization records before

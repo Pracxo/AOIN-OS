@@ -7,7 +7,7 @@
   "redaction_applied": true,
   "synthetic": true,
   "runtime_hold_active": true,
-  "aion_231_runtime_source_exists": false,
+  "aion_231_runtime_source_exists": true,
   "production_auth_runtime_enabled": false,
   "external_identity_provider_enabled": false,
   "credential_persistence_enabled": false,

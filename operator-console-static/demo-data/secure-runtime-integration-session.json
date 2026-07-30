@@ -13,7 +13,7 @@
   "maximum_session_seconds": 3600,
   "maximum_requests_per_session": 100,
   "maximum_concurrent_requests": 4,
-  "session_implemented": false,
+  "session_implemented": true,
   "session_token_issuance_enabled": false,
   "credential_persistence_enabled": false,
   "token_persistence_enabled": false,

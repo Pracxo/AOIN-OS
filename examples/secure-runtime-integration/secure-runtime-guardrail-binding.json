@@ -1,0 +1,22 @@
+{
+  "action_type": "secure_runtime.dispatch.simulate",
+  "approval_required": false,
+  "binding_fingerprint": "8209466a855765892a7d059bed85a3d2411291353cc45583f9410c7a677bea6f",
+  "binding_id": "guardrail-binding-request-AION-231",
+  "blocked": false,
+  "capability_plan_fingerprint": "421b96270517852129eae1e8f4420267154cf819f6ebf23bf6681deea7ff5c7a",
+  "constraints": [],
+  "created_at": "2026-07-30T12:00:00Z",
+  "decision_outcome": "allow",
+  "read_only": true,
+  "redacted": true,
+  "request_id": "request-AION-231",
+  "resource_id": "resource-AION-231",
+  "resource_type": "secure_runtime_capability_plan",
+  "runtime_effect": false,
+  "schema_version": "aion-secure-runtime-decision-binding/v1",
+  "session_id": "session-AION-231",
+  "severity": "medium",
+  "source_decision_fingerprint": "7ad1dbe088cf5b282bc11e55b427a235e6c23b273f1b661483e60925c83de859",
+  "trace_id": "trace-AION-231"
+}

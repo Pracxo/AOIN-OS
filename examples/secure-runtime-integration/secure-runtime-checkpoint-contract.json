@@ -1,0 +1,22 @@
+{
+  "active_request_ids": [],
+  "actor_context_binding_fingerprint": "1180dac5f508f1aeb1d3cdd0cc22c1576be590d593a45fc86b3f459e805c71ff",
+  "audit_chain_head": "5a9a16f8cdeb8bce30b5f2122ae6187389ce27eaf353e13d08551225a947475d",
+  "budget_usage_fingerprint": "9a97216a30419829e109ccd93623c54095a4bb718223d4565ea2e6a04533b856",
+  "checkpoint_fingerprint": "1ffd68ae1728910558cdd3bd0a613f4cd72717e810a95afa68847f68b6cd201d",
+  "checkpoint_id": "checkpoint-session-AION-231-0",
+  "completed_request_ids": [],
+  "created_at": "2026-07-30T17:09:40.560738Z",
+  "current_state": "drafted",
+  "expires_at": "2026-07-30T12:30:00Z",
+  "kill_switch_fingerprint": "866f713b004ec61f14e4aa34ffbe4d0fffd19fab79fc86b8de6cec2866e41d66",
+  "latest_stage_receipt_fingerprint": "0000000000000000000000000000000000000000000000000000000000000000",
+  "persistent_session": false,
+  "production_effect": false,
+  "runtime_effect": false,
+  "schema_version": "aion-secure-runtime-checkpoint/v1",
+  "session_id": "session-AION-231",
+  "session_plan_fingerprint": "7dd9ffae353955c1d3206eced2f203b4daa46eec985fcdff111df066b42fb4b1",
+  "stage_receipt_chain_head": "0000000000000000000000000000000000000000000000000000000000000000",
+  "temporary": true
+}

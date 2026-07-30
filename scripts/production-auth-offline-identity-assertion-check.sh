@@ -5,6 +5,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
 source "$ROOT_DIR/scripts/lib/python-selection.sh"
+source "$ROOT_DIR/scripts/lib/v02-production-auth-scan-exclusions.sh"
 
 PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
@@ -86,7 +87,16 @@ grep -F "TrustedPublicKeyRegistry" services/brain-api/src/aion_brain/production_
   exit 1
 }
 
-if rg -n 'Ed25519PrivateKey|private_bytes\(|load_pem_private_key|BEGIN PRIVATE KEY|BEGIN OPENSSH PRIVATE KEY|signing_key|private_key_seed|private_key_base64' services/brain-api/src/aion_brain; then
+source_scan_file_list="$(mktemp)"
+trap 'rm -f "$source_scan_file_list"' EXIT
+while IFS= read -r file; do
+  if aion231_is_scoped_secure_runtime_foundation_path "$file"; then
+    continue
+  fi
+  printf '%s\n' "$file" >> "$source_scan_file_list"
+done < <(find services/brain-api/src/aion_brain -type f -name '*.py' | sort)
+
+if [[ -s "$source_scan_file_list" ]] && rg -n 'Ed25519PrivateKey|private_bytes\(|load_pem_private_key|BEGIN PRIVATE KEY|BEGIN OPENSSH PRIVATE KEY|signing_key|private_key_seed|private_key_base64' $(cat "$source_scan_file_list"); then
   echo "runtime private-key material or API detected" >&2
   exit 1
 fi

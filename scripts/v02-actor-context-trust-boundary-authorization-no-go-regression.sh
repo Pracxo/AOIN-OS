@@ -74,6 +74,9 @@ while IFS= read -r file; do
   if aion228_is_scoped_governed_learning_memory_continual_learning_path "$file"; then
     continue
   fi
+  if aion231_is_scoped_secure_runtime_foundation_path "$file"; then
+    continue
+  fi
   case "$file" in
     package.json|package-lock.json|pnpm-lock.yaml|yarn.lock|bun.lockb|\
     */package.json|*/package-lock.json|*/pnpm-lock.yaml|*/yarn.lock|*/bun.lockb)

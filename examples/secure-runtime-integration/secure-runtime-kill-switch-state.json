@@ -1,0 +1,13 @@
+{
+  "activation_fingerprint": "0000000000000000000000000000000000000000000000000000000000000000",
+  "created_at": "2026-07-30T12:00:00Z",
+  "global_process_singleton": false,
+  "network_kill_switch": false,
+  "operator_identity_fingerprint": "884c19c3488b5a647dfcd3ebee52646f2672d010629eb6e0138c82640a7607e8",
+  "os_signal_execution": false,
+  "reason_code": "operator_clear",
+  "schema_version": "aion-secure-runtime-kill-switch/v1",
+  "session_id": "session-AION-231",
+  "state_fingerprint": "866f713b004ec61f14e4aa34ffbe4d0fffd19fab79fc86b8de6cec2866e41d66",
+  "status": "clear"
+}

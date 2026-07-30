@@ -24,18 +24,28 @@ export AION_SECURE_RUNTIME_INTEGRATION_RUNTIME_HOLD_RUNNING=1
 ./scripts/secure-runtime-integration-program-authorization-check.sh
 ./scripts/secure-runtime-integration-program-no-go-regression.sh
 
-if [[ -e services/brain-api/src/aion_brain/contracts/secure_runtime.py ]]; then
-  echo "ERROR: secure runtime contract source exists before AION-231" >&2
+if [[ ! -e services/brain-api/src/aion_brain/contracts/secure_runtime.py ]]; then
+  echo "ERROR: secure runtime contract source missing after AION-231" >&2
   exit 1
 fi
-if [[ -d services/brain-api/src/aion_brain/secure_runtime ]]; then
-  echo "ERROR: secure runtime source package exists before AION-231" >&2
-  exit 1
-fi
-if find services/brain-api/src/aion_brain -path '*secure_runtime*' -print -quit | grep -q .; then
-  echo "ERROR: secure runtime implementation source exists before AION-231" >&2
-  exit 1
-fi
+for prohibited in \
+  services/brain-api/src/aion_brain/api/secure_runtime.py \
+  services/brain-api/src/aion_brain/secure_runtime/network.py \
+  services/brain-api/src/aion_brain/secure_runtime/model_gateway.py \
+  services/brain-api/src/aion_brain/secure_runtime/connector_runtime.py \
+  services/brain-api/src/aion_brain/secure_runtime/tool_runtime.py \
+  services/brain-api/src/aion_brain/secure_runtime/shell_runtime.py \
+  services/brain-api/src/aion_brain/secure_runtime/module_loader.py \
+  services/brain-api/src/aion_brain/secure_runtime/credential_store.py \
+  services/brain-api/src/aion_brain/secure_runtime/token_store.py \
+  services/brain-api/src/aion_brain/secure_runtime/background_worker.py \
+  services/brain-api/src/aion_brain/secure_runtime/scheduler.py
+do
+  if [[ -e "$prohibited" ]]; then
+    echo "ERROR: prohibited secure runtime surface exists: $prohibited" >&2
+    exit 1
+  fi
+done
 
 if [[ "$nested_gate_context" == "1" ]]; then
   echo "PASS: full repository check deferred to outer gate"

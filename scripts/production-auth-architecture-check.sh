@@ -431,6 +431,12 @@ allowed_aion_228_runtime = {
 allowed_aion_228_prefixes = (
     "services/brain-api/src/aion_brain/governed_learning_memory/continual_learning_",
 )
+allowed_aion_231_runtime = {
+    "services/brain-api/src/aion_brain/contracts/secure_runtime.py",
+}
+allowed_aion_231_prefixes = (
+    "services/brain-api/src/aion_brain/secure_runtime/",
+)
 for name in [*changed, *untracked]:
     if name in allowed_runtime_tests:
         continue
@@ -497,6 +503,10 @@ for name in [*changed, *untracked]:
     if name in allowed_aion_228_runtime:
         continue
     if name.startswith(allowed_aion_228_prefixes):
+        continue
+    if name in allowed_aion_231_runtime:
+        continue
+    if name.startswith(allowed_aion_231_prefixes):
         continue
     if name.startswith(runtime_prefixes):
         raise SystemExit(f"production auth architecture must not change runtime file: {name}")

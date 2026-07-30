@@ -300,12 +300,31 @@ def validate_tool_verification_demo(payload: object, path: Path) -> None:
 
 def validate_secure_runtime_integration_demo(payload: object, path: Path) -> None:
     allowed_names = {
+        "secure-runtime-integration-actor-context.json",
+        "secure-runtime-integration-approval-bundle.json",
+        "secure-runtime-integration-audit.json",
         "secure-runtime-integration-authorization.json",
+        "secure-runtime-integration-capability-plan.json",
+        "secure-runtime-integration-checkpoint.json",
+        "secure-runtime-integration-guardrail-binding.json",
+        "secure-runtime-integration-health.json",
+        "secure-runtime-integration-identity-binding.json",
+        "secure-runtime-integration-integrity.json",
         "secure-runtime-integration-kill-switch.json",
+        "secure-runtime-integration-observability.json",
+        "secure-runtime-integration-pilot-evidence.json",
+        "secure-runtime-integration-policy-binding.json",
         "secure-runtime-integration-program.json",
+        "secure-runtime-integration-request-identity.json",
+        "secure-runtime-integration-risk-binding.json",
+        "secure-runtime-integration-runtime-boundary.json",
         "secure-runtime-integration-runtime-guard.json",
         "secure-runtime-integration-runtime-hold.json",
+        "secure-runtime-integration-session-state.json",
         "secure-runtime-integration-session.json",
+        "secure-runtime-integration-simulated-dispatch.json",
+        "secure-runtime-integration-stage-command.json",
+        "secure-runtime-integration-stage-receipt.json",
     }
     if path.name not in allowed_names:
         raise SystemExit(f"unknown secure runtime integration demo: {path}")
@@ -325,7 +344,6 @@ def validate_secure_runtime_integration_demo(payload: object, path: Path) -> Non
     false_keys = {
         "actual_execution_allowed",
         "actual_tool_execution_enabled",
-        "aion_231_runtime_source_exists",
         "calls_providers",
         "connector_call_allowed",
         "connector_execution_enabled",
@@ -346,8 +364,6 @@ def validate_secure_runtime_integration_demo(payload: object, path: Path) -> Non
         "production_write_allowed",
         "production_write_execution_enabled",
         "provider_call_allowed",
-        "runtime_implemented",
-        "session_implemented",
         "session_token_issuance_enabled",
         "source_rewrite_enabled",
         "token_persistence_enabled",

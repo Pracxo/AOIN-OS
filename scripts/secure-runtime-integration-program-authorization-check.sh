@@ -23,7 +23,9 @@ from typing import Any
 root = Path(os.environ["AION_REPO_ROOT"])
 
 PROGRAM_ID = "AION-SECURE-RUNTIME-INTEGRATION-001"
-PROGRAM_STATE = "secure_runtime_integration_program_authorized_not_implemented"
+PROGRAM_STATE = (
+    "secure_runtime_foundation_implemented_local_operator_simulation_only_pending_closeout"
+)
 AUTH_ID = "AION-230-SRI-0001"
 IMPLEMENTATION_TASK = "AION-231"
 CLOSEOUT_TASK = "AION-232"
@@ -343,14 +345,23 @@ require(program["parent_completed_programs"] == PARENT_PROGRAMS, "parent lineage
 require(program["parent_glm_evaluation_id"] == "AION-GLMPE-004", "GLMPE id mismatch")
 require(program["parent_glm_evaluation_decision"] == GLM_DECISION, "GLMPE decision mismatch")
 require(program["secure_runtime_foundation_authorized"] is True, "SRI foundation not authorized")
-require(program["secure_runtime_foundation_implemented"] is False, "SRI foundation implemented")
+require(program["secure_runtime_foundation_implemented"] is True, "SRI foundation not implemented")
+require(program["secure_runtime_implemented"] is True, "secure runtime implementation flag false")
+require(
+    program["secure_runtime_foundation_state"]
+    == "implemented_authenticated_local_operator_simulation_only_pending_AION-232_closeout",
+    "SRI foundation state mismatch",
+)
 require(program["aion_231_record"]["authorization_transaction"] == AUTH_ID, "AION-231 record auth")
 require(program["aion_231_record"]["next_task"] == CLOSEOUT_TASK, "AION-231 next task")
 require(program["aion_230_delivery"]["authorization_transaction"] == AUTH_ID, "AION-230 delivery auth")
 require(program["future_source_scope"] == FUTURE_SOURCE_SCOPE, "future source scope mismatch")
 for item in program["roadmap"]:
     if item["task_id"] == IMPLEMENTATION_TASK:
-        require(item["state"] == "authorized_not_implemented", "AION-231 roadmap state")
+        require(
+            item["state"] == "implemented_pending_AION-232_closeout",
+            "AION-231 roadmap state",
+        )
     if item["task_id"] in {"AION-233", "AION-234", "AION-235", "AION-236", "AION-237"}:
         require(item["state"] == "planned_not_authorized", f"{item['task_id']} unauthorized")
 
@@ -409,8 +420,21 @@ else:
     print("WARN: gh PR evidence unavailable; relying on committed AION-229 evidence")
 
 for source_path in FUTURE_SOURCE_SCOPE:
-    require(not (root / source_path).exists(), f"AION-231 source exists: {source_path}")
-require(not (root / "services/brain-api/src/aion_brain/secure_runtime").exists(), "secure_runtime package exists")
+    require((root / source_path).exists(), f"AION-231 source missing: {source_path}")
+for prohibited_path in (
+    "services/brain-api/src/aion_brain/api/secure_runtime.py",
+    "services/brain-api/src/aion_brain/secure_runtime/network.py",
+    "services/brain-api/src/aion_brain/secure_runtime/model_gateway.py",
+    "services/brain-api/src/aion_brain/secure_runtime/connector_runtime.py",
+    "services/brain-api/src/aion_brain/secure_runtime/tool_runtime.py",
+    "services/brain-api/src/aion_brain/secure_runtime/shell_runtime.py",
+    "services/brain-api/src/aion_brain/secure_runtime/module_loader.py",
+    "services/brain-api/src/aion_brain/secure_runtime/credential_store.py",
+    "services/brain-api/src/aion_brain/secure_runtime/token_store.py",
+    "services/brain-api/src/aion_brain/secure_runtime/background_worker.py",
+    "services/brain-api/src/aion_brain/secure_runtime/scheduler.py",
+):
+    require(not (root / prohibited_path).exists(), f"prohibited source exists: {prohibited_path}")
 
 readme = text("README.md")
 status = text("docs/project-status.md")

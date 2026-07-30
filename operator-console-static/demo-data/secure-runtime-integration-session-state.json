@@ -1,0 +1,21 @@
+{
+  "active_requests_after_close": 0,
+  "authorization_transaction_id": "AION-230-SRI-0001",
+  "connector_call_allowed": false,
+  "external_calls_enabled": false,
+  "formal_closeout_task": "AION-232",
+  "implementation_task": "AION-231",
+  "module_activation_allowed": false,
+  "production_runtime": false,
+  "production_write_allowed": false,
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "provider_call_allowed": false,
+  "read_only": true,
+  "redaction_applied": true,
+  "stage_receipts": 16,
+  "state": "session_closed",
+  "synthetic": true,
+  "title": "Session State",
+  "tool_execution_allowed": false,
+  "view_id": "secure_runtime_integration_session_state"
+}

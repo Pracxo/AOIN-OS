@@ -16,8 +16,7 @@ def test_every_aion231_prohibited_capability_remains_false() -> None:
     for payload in (program, auth):
         assert set(payload["prohibited_capabilities"]) == set(PROHIBITED_CAPABILITIES)
         assert all(
-            payload["prohibited_capabilities"][key] is False
-            for key in PROHIBITED_CAPABILITIES
+            payload["prohibited_capabilities"][key] is False for key in PROHIBITED_CAPABILITIES
         )
 
 
@@ -45,7 +44,7 @@ def test_static_runtime_hold_keeps_runtime_activation_disabled() -> None:
         "v02_release_ready",
     )
     assert hold["runtime_hold_active"] is True
-    assert hold["aion_231_runtime_source_exists"] is False
+    assert hold["aion_231_runtime_source_exists"] is True
     for key in disabled_keys:
         assert hold[key] is False
         assert boundary["disabled"][key] is False

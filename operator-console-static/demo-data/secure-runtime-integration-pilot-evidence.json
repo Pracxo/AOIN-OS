@@ -1,0 +1,21 @@
+{
+  "authorization_transaction_id": "AION-230-SRI-0001",
+  "connector_call_allowed": false,
+  "exact_replays_rejected": 1,
+  "external_calls_enabled": false,
+  "formal_closeout_task": "AION-232",
+  "implementation_task": "AION-231",
+  "module_activation_allowed": false,
+  "production_runtime": false,
+  "production_write_allowed": false,
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "provider_call_allowed": false,
+  "read_only": true,
+  "redaction_applied": true,
+  "report_fingerprint": "deff1c0f4a510aac2c8116fbfab11263784ea09f65a6ba8ccb9b3c7466fc883c",
+  "synthetic": true,
+  "temporary_files_retained": 0,
+  "title": "Pilot Evidence",
+  "tool_execution_allowed": false,
+  "view_id": "secure_runtime_integration_pilot_evidence"
+}

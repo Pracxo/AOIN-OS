@@ -1,0 +1,15 @@
+{
+  "bundle_fingerprint": "3b25f4f63e91aa33e63cc35295584ef2343e8b65d13a52beb63d76d0b54a7e41",
+  "bundle_id": "evidence-bundle-AION-231",
+  "created_at": "2026-07-30T12:00:00Z",
+  "evidence_fingerprints": [
+    "8984d634da085b11ca19bd301679094252e1f28c618b00aeab007d69ffad1f2c",
+    "ba8b883ae76015438b8f17abe08d0b4b251421c7f8d5c1a6c77699b1a9e427e0"
+  ],
+  "integrity_report_fingerprint": "8e1a391aaec8017bf31039007ba92b9611860101ec5d1f6d9cc956628afd5cc7",
+  "production_effect": false,
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-secure-runtime-evidence/v1",
+  "session_id": "session-AION-231"
+}

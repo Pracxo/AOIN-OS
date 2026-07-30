@@ -422,7 +422,7 @@ Validate the release candidate evidence:
 ./scripts/post-v01-release-candidate-no-go-regression.sh
 ```
 
-## AION-230 Secure Runtime Integration Panels
+## AION-231 Secure Runtime Foundation Panels
 
 The static console includes Secure Runtime Integration program, authorization,
 session, runtime guard, kill switch, and runtime hold panels:
@@ -433,6 +433,25 @@ session, runtime guard, kill switch, and runtime hold panels:
 - `demo-data/secure-runtime-integration-runtime-guard.json`
 - `demo-data/secure-runtime-integration-kill-switch.json`
 - `demo-data/secure-runtime-integration-runtime-hold.json`
+- `demo-data/secure-runtime-integration-identity-binding.json`
+- `demo-data/secure-runtime-integration-request-identity.json`
+- `demo-data/secure-runtime-integration-actor-context.json`
+- `demo-data/secure-runtime-integration-session-state.json`
+- `demo-data/secure-runtime-integration-stage-command.json`
+- `demo-data/secure-runtime-integration-stage-receipt.json`
+- `demo-data/secure-runtime-integration-capability-plan.json`
+- `demo-data/secure-runtime-integration-policy-binding.json`
+- `demo-data/secure-runtime-integration-risk-binding.json`
+- `demo-data/secure-runtime-integration-guardrail-binding.json`
+- `demo-data/secure-runtime-integration-approval-bundle.json`
+- `demo-data/secure-runtime-integration-simulated-dispatch.json`
+- `demo-data/secure-runtime-integration-audit.json`
+- `demo-data/secure-runtime-integration-observability.json`
+- `demo-data/secure-runtime-integration-health.json`
+- `demo-data/secure-runtime-integration-checkpoint.json`
+- `demo-data/secure-runtime-integration-integrity.json`
+- `demo-data/secure-runtime-integration-pilot-evidence.json`
+- `demo-data/secure-runtime-integration-runtime-boundary.json`
 
 The panels load bundled JSON only. They do not call the backend, authenticate
 users, issue session tokens, accept credentials, store tokens, call model
@@ -445,6 +464,10 @@ Validate the secure runtime evidence:
 ./scripts/secure-runtime-integration-program-authorization-check.sh
 ./scripts/secure-runtime-integration-program-no-go-regression.sh
 ./scripts/secure-runtime-integration-runtime-hold.sh
+./scripts/secure-runtime-foundation-no-go-regression.sh
+./scripts/secure-runtime-foundation-check.sh
+./scripts/secure-runtime-foundation-pilot-evidence-check.sh
+./scripts/secure-runtime-foundation-runtime-hold.sh
 ```
 
 ## AION-119 v0.2 Planning Panels

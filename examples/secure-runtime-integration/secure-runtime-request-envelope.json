@@ -1,0 +1,30 @@
+{
+  "action_type": "secure_runtime.dispatch.simulate",
+  "actor_context_binding_fingerprint": "1180dac5f508f1aeb1d3cdd0cc22c1576be590d593a45fc86b3f459e805c71ff",
+  "capability_code": "brain.think.simulate",
+  "correlation_id": "correlation-AION-231",
+  "created_at": "2026-07-30T12:00:00Z",
+  "credential_present": false,
+  "executable_present": false,
+  "expires_at": "2026-07-30T12:05:00Z",
+  "metadata_fingerprint": "00badf932bdca97c375596a4933d124c6b22a97350f28445d0db52cf6e04c689",
+  "network_target_present": false,
+  "production_target_present": false,
+  "request_body_retained": false,
+  "request_envelope_id": "request-envelope-AION-231",
+  "request_fingerprint": "12912cc94b49d0cb67ce91c395f2b5e136c60ca3c602a4631198f770a28bca61",
+  "request_id": "request-AION-231",
+  "requested_permissions": [
+    "brain:think:simulate"
+  ],
+  "requested_security_scopes": [
+    "secure-runtime:simulate-capability"
+  ],
+  "resource_id": "resource-AION-231",
+  "resource_type": "secure_runtime_capability_plan",
+  "safe_payload_fingerprint": "0c78922fe1b875a46db22b6ef387e1553613d9e6886b4367ff50aa3dd4795f05",
+  "schema_version": "aion-secure-runtime-request/v1",
+  "session_id": "session-AION-231",
+  "token_present": false,
+  "trace_id": "trace-AION-231"
+}
