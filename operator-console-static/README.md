@@ -422,6 +422,31 @@ Validate the release candidate evidence:
 ./scripts/post-v01-release-candidate-no-go-regression.sh
 ```
 
+## AION-230 Secure Runtime Integration Panels
+
+The static console includes Secure Runtime Integration program, authorization,
+session, runtime guard, kill switch, and runtime hold panels:
+
+- `demo-data/secure-runtime-integration-program.json`
+- `demo-data/secure-runtime-integration-authorization.json`
+- `demo-data/secure-runtime-integration-session.json`
+- `demo-data/secure-runtime-integration-runtime-guard.json`
+- `demo-data/secure-runtime-integration-kill-switch.json`
+- `demo-data/secure-runtime-integration-runtime-hold.json`
+
+The panels load bundled JSON only. They do not call the backend, authenticate
+users, issue session tokens, accept credentials, store tokens, call model
+providers, execute connectors or tools, activate modules, write production
+state, deploy, create v0.2 tags, or create v0.2 releases.
+
+Validate the secure runtime evidence:
+
+```bash
+./scripts/secure-runtime-integration-program-authorization-check.sh
+./scripts/secure-runtime-integration-program-no-go-regression.sh
+./scripts/secure-runtime-integration-runtime-hold.sh
+```
+
 ## AION-119 v0.2 Planning Panels
 
 The static console includes v0.2 planning charter and gate dependency matrix

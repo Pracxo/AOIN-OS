@@ -28,25 +28,26 @@ Status: `not-ready`
 - Approval-bound rewrite control
 - Canary and rollback simulation
 - Adaptive-learning candidates
+- Secure Runtime Integration Program authorization
 
 ## Remaining Blockers
 
 - Production-auth runtime integration
-- Production replay-ledger schema provisioning
+- Production replay-ledger provisioning
 - Request-level verified identity integration
 - Identity-provider integration
-- Operational public-key provisioning and rotation evidence
+- Public-key operational provisioning and rotation
 - Protected-material lifecycle
 - Credential lifecycle
 - Token lifecycle
 - Session lifecycle
-- Production deployment artifact
+- Deployment artifact
 - Rollback operations
 - Production observability
 - Threat-model review
 - Runtime guard release decision
 - Release-candidate validation
-- v0.2 tag and release authorization
+- Explicit v0.2 tag and release authorization
 
 ## v0.2 Release Exit Criteria
 
@@ -68,15 +69,30 @@ Status: `not-ready`
 
 ## Current Critical Path
 
-The current critical path has advanced through controlled shadow-mode
-authorization, implementation, and AION-179 operator evaluation closeout.
-`AION-177-SI-0006` is closed and non-reusable. The PASS recommendation does not
-activate production self-improvement, production authentication, external
-providers, production canary traffic, deployment, or model-weight training.
+The current critical path has advanced through completed Cognitive
+Architecture, Knowledge Intelligence, Governed Learning and Memory, and
+governed self-improvement programs. AION-230 creates the separate Secure
+Runtime Integration Program and authorizes AION-231 only for a controlled,
+authenticated, operator-invoked, local secure runtime foundation.
 
-Completion of the self-improvement implementation program does not make v0.2
-release-ready. Production runtime integration and release-candidate work remain
-separate future authorization tracks.
+AION-230 addresses only the secure local runtime foundation authorization. It
+does not close all v0.2 release blockers, does not implement AION-231 runtime source,
+does not authorize model-gateway, connector, module, production, deployment, or
+release work, and does not make v0.2 release-ready.
+It does not close all v0.2 release blockers.
+
+## AION-230 Secure Runtime Integration Program Authorization
+
+AION-230 creates `AION-SECURE-RUNTIME-INTEGRATION-001` and
+`AION-230-SRI-0001` as the sole active Secure Runtime Integration
+implementation authorization for AION-231. AION-231 is authorized for local
+operator runtime foundation work only. AION-232 is the formal operator
+evaluation and next-authorization decision task. AION-233 through AION-238
+remain planned and unauthorized.
+
+Production authentication runtime, external identity providers, credentials,
+tokens, networks, model providers, connectors, tools, modules, production
+writes, deployment, v0.2 tags, and v0.2 releases remain disabled or absent.
 
 ## Historical Compatibility Markers
 

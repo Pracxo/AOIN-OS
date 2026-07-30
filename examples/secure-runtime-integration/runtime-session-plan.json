@@ -1,0 +1,22 @@
+{
+  "session_plan_id": "sri-session-plan-001",
+  "authorization_transaction_id": "AION-230-SRI-0001",
+  "implementation_task": "AION-231",
+  "formal_closeout_task": "AION-232",
+  "operator_invoked": true,
+  "local_session": true,
+  "maximum_session_seconds": 3600,
+  "maximum_requests_per_session": 100,
+  "maximum_concurrent_requests": 4,
+  "initial_state": "drafted",
+  "terminal_states": [
+    "abstained",
+    "blocked",
+    "killed",
+    "expired",
+    "failed",
+    "session_closed"
+  ],
+  "runtime_implemented": false,
+  "production_runtime": false
+}

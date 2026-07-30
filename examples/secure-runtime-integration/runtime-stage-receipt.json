@@ -1,0 +1,26 @@
+{
+  "stage_receipt_id": "sri-stage-receipt-001",
+  "authorization_transaction_id": "AION-230-SRI-0001",
+  "implementation_task": "AION-231",
+  "formal_closeout_task": "AION-232",
+  "stage_command_id": "sri-stage-command-001",
+  "stage": "capability_plan_created",
+  "result": "accepted_for_simulation",
+  "receipt_bound": true,
+  "redacted": true,
+  "protected_material_present": false,
+  "credential_material_present": false,
+  "token_material_present": false,
+  "side_effects": {
+    "public_network_calls": 0,
+    "model_provider_calls": 0,
+    "connector_calls": 0,
+    "actual_tool_executions": 0,
+    "shell_commands": 0,
+    "subprocess_executions": 0,
+    "browser_actions": 0,
+    "production_writes": 0,
+    "git_operations": 0,
+    "deployments": 0
+  }
+}

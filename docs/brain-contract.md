@@ -101,6 +101,20 @@ The contract includes:
 - `WorkspaceMembership`: actor membership and role within a workspace.
 - `PermissionGrant`: generic allow or deny permission grant.
 - `ActorContext`: request-time actor, workspace, role, permission, and scope context.
+- Future `SecureRuntimeAuthorizationEnvelope`: authorization metadata for a
+  local operator runtime foundation, planned for AION-231 and not implemented
+  by AION-230.
+- Future `SecureOperatorIdentityBinding`: offline operator identity evidence
+  binding, planned for AION-231 and not implemented by AION-230.
+- Future `SecureRequestIdentityBinding`: request identity projection binding,
+  planned for AION-231 and not implemented by AION-230.
+- Future `SecureActorContextBinding`: verified ActorContext binding, planned
+  for AION-231 and not implemented by AION-230.
+- Future `SecureRuntimeSessionPlan`, `SecureRuntimeStageCommand`,
+  `SecureRuntimeStageReceipt`, `SecureRuntimeGuardDecision`,
+  `SecureRuntimeKillSwitchState`, `SecureRuntimeAuditRecord`, and
+  `SecureRuntimeObservabilitySnapshot`: local secure-runtime foundation
+  contracts planned for AION-231 only.
 - `ScopeResolutionRequest`: request to resolve scopes for a generic action.
 - `ScopeResolution`: resolved scope, permission, allow, and constraint result.
 - `EvidenceRecord`: source evidence metadata and content addressing record.

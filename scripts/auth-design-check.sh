@@ -1509,6 +1509,19 @@ def is_governed_learning_memory_artifact(name: str) -> bool:
     )
 
 
+def is_secure_runtime_integration_artifact(name: str) -> bool:
+    return (
+        name
+        == "docs/adr/0194-secure-runtime-integration-program-charter-and-local-operator-runtime-foundation-authorization.md"
+        or name.startswith("docs/secure-runtime-integration/")
+        or name.startswith("docs/release/secure-runtime-integration-")
+        or name.startswith("examples/secure-runtime-integration/")
+        or name.startswith("operator-console-static/demo-data/secure-runtime-integration-")
+        or name.startswith("scripts/secure-runtime-integration-")
+        or name.startswith("services/brain-api/tests/test_secure_runtime_integration_")
+    )
+
+
 for name in [*changed, *untracked]:
     path = Path(name)
     basename = path.name
@@ -1549,6 +1562,7 @@ for name in [*changed, *untracked]:
         and name not in aion221_auth_paths
         and name not in aion223_auth_paths
         and not is_governed_learning_memory_artifact(name)
+        and not is_secure_runtime_integration_artifact(name)
     ):
         raise SystemExit(f"unexpected auth runtime or artifact path: {name}")
 

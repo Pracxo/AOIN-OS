@@ -72,6 +72,18 @@ Instructions for future Codex runs in this repository:
   engagement learning as fact, mutate source, mutate Git, call networks,
   connectors, providers, browsers, shells, subprocesses, or tools, activate
   production, create a v0.2 tag, or create a v0.2 release.
+- Secure Runtime Integration Program authorization work may create a separate
+  program charter, ledgers, docs, examples, static console evidence, tests, and
+  local gates for AION-231 only. It must preserve completed Cognitive
+  Architecture, Knowledge Intelligence, Governed Learning and Memory, and
+  self-improvement program states. It must not create AION-231 runtime source,
+  modify completed-program runtime source, create public auth endpoints, store
+  credentials or tokens, issue session tokens, call external identity
+  providers, call model providers, call connectors, execute tools, execute
+  shells or subprocesses, automate browsers, activate modules, register
+  dynamic routes, create schedulers or workers, mutate production memory,
+  mutate production policy, mutate beliefs, mutate source, mutate Git, deploy,
+  train model weights, create a v0.2 tag, or create a v0.2 release.
 - Production-auth stabilization authorization work may create governance
   transactions for future disabled-core hardening only. It must not modify
   production-auth source, config, kernel wiring, API routes, SDK/CLI source,

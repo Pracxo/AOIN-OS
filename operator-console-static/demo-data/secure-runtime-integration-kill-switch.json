@@ -1,0 +1,18 @@
+{
+  "view_id": "secure_runtime_integration_kill_switch",
+  "title": "Operator Kill Switch",
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "authorization_transaction_id": "AION-230-SRI-0001",
+  "read_only": true,
+  "redaction_applied": true,
+  "synthetic": true,
+  "state": "clear",
+  "operator_controlled": true,
+  "blocks_progression_when_active": true,
+  "checked_before_session_activation": true,
+  "checked_before_simulated_dispatch": true,
+  "mutates_production_policy": false,
+  "executes_tools": false,
+  "calls_providers": false,
+  "deploys": false
+}

@@ -206,3 +206,4 @@ closure decision in ADR 0072.
 - [ADR 0191: Engagement Shadow Application Evaluation and Controlled Local Continual-Learning Pilot Authorization](0191-engagement-shadow-application-evaluation-and-controlled-local-continual-learning-pilot-authorization.md)
 - [ADR 0192: Controlled Operator-Invoked Local Continual-Learning Pilot Composition and Execution](0192-controlled-operator-invoked-local-continual-learning-pilot-composition-and-execution.md)
 - [ADR 0193: Final Governed Learning and Memory Program Evaluation and Closeout](0193-final-governed-learning-and-memory-program-evaluation-and-closeout.md)
+- [ADR 0194: Secure Runtime Integration Program Charter and Local Operator Runtime Foundation Authorization](0194-secure-runtime-integration-program-charter-and-local-operator-runtime-foundation-authorization.md)

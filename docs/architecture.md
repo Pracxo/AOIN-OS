@@ -192,17 +192,31 @@ packet.
 
 ## Governed Learning and Memory Integration
 
-AION-221 creates the `AION-GOVERNED-LEARNING-MEMORY-001` charter after the
-AION-220 Knowledge Intelligence closeout. This program bridges verified
-candidate evidence, operator approval evidence, provenance lineage, knowledge
-identity, append-only version planning, cognitive-memory projection planning,
-conflict handling, rollback, and revalidation.
+`AION-GOVERNED-LEARNING-MEMORY-001` is complete. AION-229 completed final
+evaluation `AION-GLMPE-004`, closed `AION-227-GLM-0004`, and left no active
+GLM implementation authorization, successor GLM task, repeated live-pilot
+authorization, or production runtime authorization.
 
-The bridge is planning-only until AION-222 is implemented under
-`AION-221-GLM-0001`. AION-222 may plan deterministic dry-run transactions, but
-it may not persist knowledge, write semantic, episodic, or procedural memory,
-mutate beliefs, promote candidates automatically, apply engagement learning as
-fact, activate production runtime, or create a v0.2 release.
+The implemented GLM architecture covers verified-knowledge promotion planning,
+isolated local append-only persistence, non-factual in-memory engagement shadow
+adaptation, and one completed controlled local continual-learning pilot. New
+GLM live execution remains unauthorized.
+
+## Secure Runtime Integration
+
+`AION-SECURE-RUNTIME-INTEGRATION-001` is the active program. AION-230 creates
+`AION-230-SRI-0001` as the sole active SRI implementation authorization for
+AION-231 only. AION-231 may implement a controlled, authenticated,
+operator-invoked, local secure runtime foundation that composes offline
+identity verification, RequestIdentity, ActorContext, replay validation,
+session lifecycle, policy, risk, guardrails, approval evidence, side-effect
+budgets, runtime guard, kill switch, audit, observability, and deterministic
+fixture replay through a side-effect-free boundary.
+
+AION-231 is not implemented by AION-230. Model-gateway runtime, connector
+runtime, tool execution, module activation, operator-console live services,
+production runtime, deployment, v0.2 tag creation, and v0.2 release creation
+remain unauthorized.
 
 ## Capability Registry
 
@@ -2833,4 +2847,4 @@ AION-228 is implemented and completed pending AION-229 final evaluation and clos
 
 ## AION-229 Final Program Evaluation
 
-AION-229 final evaluation AION-GLMPE-004 passed all 28 deterministic hard-gated scenarios, validated the committed AION-228 live-pilot evidence, and closed AION-227-GLM-0004 as consumed by AION-228. The program is in primary closeout pending final Git evidence reconciliation. No active GLM implementation authorization, successor task, repeated-live-pilot authorization, or production runtime authorization remains.
+AION-229 final evaluation AION-GLMPE-004 passed all 28 deterministic hard-gated scenarios, validated the committed AION-228 live-pilot evidence, and closed AION-227-GLM-0004 as consumed by AION-228. The Governed Learning and Memory Program is in terminal complete state and final Git evidence reconciliation is recorded by PR #147. No active GLM implementation authorization, successor task, repeated-live-pilot authorization, or production runtime authorization remains.

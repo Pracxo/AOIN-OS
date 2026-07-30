@@ -1,0 +1,21 @@
+{
+  "view_id": "secure_runtime_integration_authorization",
+  "title": "AION-230-SRI-0001 Authorization",
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "authorization_transaction_id": "AION-230-SRI-0001",
+  "candidate_id": "authenticated-local-operator-runtime-foundation-core",
+  "workstream": "secure-runtime-foundation",
+  "implementation_task": "AION-231",
+  "formal_closeout_task": "AION-232",
+  "authorization_active": true,
+  "authorization_consumed": false,
+  "authorization_expired": false,
+  "authorization_reusable": false,
+  "sole_active_sri_authorization": true,
+  "read_only": true,
+  "redaction_applied": true,
+  "synthetic": true,
+  "runtime_implemented": false,
+  "production_runtime_authorized": false,
+  "v02_release_ready": false
+}

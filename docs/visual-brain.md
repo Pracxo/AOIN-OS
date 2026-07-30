@@ -80,6 +80,21 @@ node after soft delete.
 No UI implementation exists in v0.1. Visual telemetry is a Brain-owned data
 contract for future visualization work.
 
+## Secure Runtime Integration Projection
+
+AION-230 adds planning-only visual projection language for AION-231 secure
+local runtime evidence. Future AION-231 evidence may render nodes for
+`secure_operator_identity_binding`, `secure_request_identity_binding`,
+`secure_actor_context_binding`, `secure_runtime_session`,
+`secure_runtime_guard_decision`, `secure_runtime_kill_switch_state`,
+`secure_runtime_audit_record`, and `secure_runtime_observability_snapshot`.
+
+These nodes represent redacted local operator runtime foundation evidence only.
+They must not imply public authentication, session-token issuance, model
+provider calls, connector execution, tool execution, module activation,
+production writes, production exposure, deployment, v0.2 tag creation, or v0.2
+release creation.
+
 ## Connector Simulator Projection
 
 AION-110 adds frontend-agnostic telemetry for synthetic connector simulator

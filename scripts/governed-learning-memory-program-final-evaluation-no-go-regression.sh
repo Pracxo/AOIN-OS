@@ -85,7 +85,13 @@ if rg -n '(^|[[:space:]])(import|from)[[:space:]]+(socket|ssl|requests|httpx|aio
   exit 1
 fi
 
-if rg -n '(AION-230|successor GLM implementation authorization|successor_glm_implementation_authorization_created": true|production_runtime_authorized": true|repeat_live_pilot_authorized": true|background_continual_learning_enabled": true|scheduled_continual_learning_enabled": true|automatic_cycle_continuation_enabled": true|automatic_source_discovery_enabled": true|web_crawler_enabled": true|automatic_candidate_approval_enabled": true|automatic_knowledge_promotion_enabled": true|automatic_persistence_enabled": true|retained_pilot_store_enabled": true|production_memory_write_enabled": true|production_policy_mutation_enabled": true|cognitive_memory_write_enabled": true|actual_belief_creation_enabled": true|actual_belief_mutation_enabled": true|self_rewrite_enabled": true|runtime_source_rewrite_enabled": true|model_weight_training_enabled": true|production_exposure": true|v02_release_ready": true|v02_tag_created": true|v02_release_created": true)' docs/governed-learning-memory docs/release examples/governed-learning-memory operator-console-static/demo-data; then
+glm_final_evidence_paths=(
+  docs/governed-learning-memory
+  docs/release/governed-learning-memory-*
+  examples/governed-learning-memory
+  operator-console-static/demo-data/governed-learning-memory-*.json
+)
+if rg -n '(AION-230|successor GLM implementation authorization|successor_glm_implementation_authorization_created": true|production_runtime_authorized": true|repeat_live_pilot_authorized": true|background_continual_learning_enabled": true|scheduled_continual_learning_enabled": true|automatic_cycle_continuation_enabled": true|automatic_source_discovery_enabled": true|web_crawler_enabled": true|automatic_candidate_approval_enabled": true|automatic_knowledge_promotion_enabled": true|automatic_persistence_enabled": true|retained_pilot_store_enabled": true|production_memory_write_enabled": true|production_policy_mutation_enabled": true|cognitive_memory_write_enabled": true|actual_belief_creation_enabled": true|actual_belief_mutation_enabled": true|self_rewrite_enabled": true|runtime_source_rewrite_enabled": true|model_weight_training_enabled": true|production_exposure": true|v02_release_ready": true|v02_tag_created": true|v02_release_created": true)' "${glm_final_evidence_paths[@]}"; then
   echo "ERROR: prohibited AION-229 final-program capability enabled in evidence" >&2
   exit 1
 fi

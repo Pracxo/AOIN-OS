@@ -1,0 +1,15 @@
+{
+  "kill_switch_state_id": "sri-kill-switch-001",
+  "authorization_transaction_id": "AION-230-SRI-0001",
+  "implementation_task": "AION-231",
+  "formal_closeout_task": "AION-232",
+  "state": "clear",
+  "operator_controlled": true,
+  "checked_before_session_activation": true,
+  "checked_before_simulated_dispatch": true,
+  "blocks_transitions_when_active": true,
+  "production_policy_mutation_enabled": false,
+  "provider_call_enabled": false,
+  "connector_call_enabled": false,
+  "tool_execution_enabled": false
+}

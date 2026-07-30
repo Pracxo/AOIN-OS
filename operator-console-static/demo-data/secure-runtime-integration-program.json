@@ -1,0 +1,28 @@
+{
+  "view_id": "secure_runtime_integration_program",
+  "title": "Secure Runtime Integration Program",
+  "status": "authorized_not_implemented",
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "authorization_transaction_id": "AION-230-SRI-0001",
+  "created_by_task": "AION-230",
+  "active_sri_implementation_authorization_count": 1,
+  "active_sri_implementation_authorization": "AION-230-SRI-0001",
+  "active_sri_implementation_task": "AION-231",
+  "active_implementation_task": "AION-231",
+  "formal_closeout_task": "AION-232",
+  "final_planned_task": "AION-238",
+  "summary": "Separate secure local runtime foundation program authorized after completed GLM closeout.",
+  "read_only": true,
+  "redaction_applied": true,
+  "synthetic": true,
+  "runtime_implemented": false,
+  "production_runtime_authorized": false,
+  "v02_release_ready": false,
+  "parent_programs_complete": [
+    "AION-COGNITIVE-ARCHITECTURE-001",
+    "AION-KNOWLEDGE-INTELLIGENCE-001",
+    "AION-GOVERNED-LEARNING-MEMORY-001",
+    "AION-SELF-IMPROVEMENT-001"
+  ],
+  "active_parent_authorizations": 0
+}

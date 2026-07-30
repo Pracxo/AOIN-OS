@@ -7,9 +7,26 @@ policies, traces, and learning signals that every future module must follow.
 ## Current Project State
 
 AION Brain v0.1.0 remains the frozen release baseline. v0.2 work is in
-progress on top of that baseline. The repository now contains a stabilized
-internal disabled production-auth core and an implemented-disabled request
-identity boundary, but production authentication runtime remains disabled.
+progress on top of that baseline. The Cognitive Architecture Program, Knowledge
+Intelligence Program, Governed Learning and Memory Program, and governed
+self-improvement implementation program are complete.
+
+The active program is `AION-SECURE-RUNTIME-INTEGRATION-001`. AION-230 created
+`AION-230-SRI-0001` as the sole active Secure Runtime Integration
+implementation authorization for AION-231. AION-231 is authorized only for a
+controlled, authenticated, operator-invoked, local secure runtime foundation.
+AION-232 is the formal AION-231 operator-evaluation and next-authorization
+decision task. AION-233 through AION-238 remain planned and unauthorized.
+AION Secure Runtime Integration Program is the active program.
+
+Knowledge Intelligence Program is complete. Governed Learning and Memory
+Program is complete.
+Governed Learning and Memory Program is complete.
+
+The repository contains a stabilized internal disabled production-auth core,
+an implemented-disabled request identity boundary, offline Ed25519 identity
+assertion verification, and persistent replay protection, but production
+authentication runtime remains disabled.
 
 External connectors remain disabled. Operator write execution remains disabled.
 Module activation remains disabled. No v0.2 tag or release exists.
@@ -21,16 +38,18 @@ Program through `AION-KIPE-001` with decision
 The active Knowledge Intelligence implementation authorization count is zero,
 and AION-220 created no successor Knowledge Intelligence task.
 
-Governed Learning and Memory status: AION-221 starts a separate new program,
-`AION-GOVERNED-LEARNING-MEMORY-001`, through a later explicit charter.
-`AION-221-GLM-0001` authorizes AION-222 only for deterministic,
-approval-bound, write-disabled knowledge-promotion transaction planning and
-cognitive-memory projection planning. AION-222 remains unimplemented; runtime
-source, persistent knowledge writes, cognitive-memory writes, belief mutation,
-automatic promotion, production activation, v0.2 readiness, v0.2 tags, and
-v0.2 releases remain disabled or absent.
-The request identity boundary is default-off, observe-only, anonymous, and
-authorized by `AION-155-PA-0003` for `AION-156`.
+Governed Learning and Memory status: AION-229 completed
+`AION-GOVERNED-LEARNING-MEMORY-001` through `AION-GLMPE-004` with decision
+`CONTROLLED_LOCAL_CONTINUAL_LEARNING_PILOT_FINAL_EVALUATION_PASS_COMPLETE_GOVERNED_LEARNING_MEMORY_PROGRAM`.
+There is no active GLM implementation authorization, active GLM implementation
+task, successor GLM task, successor GLM authorization, repeated live-pilot
+authorization, or production runtime authorization.
+
+Current authorization counts: active Knowledge Intelligence implementation
+authorizations: `0`; active GLM implementation authorizations: `0`; repeated
+live-pilot authorization: `false`; production runtime authorization: `false`;
+`v02_release_ready=false`; v0.2 remains unreleased.
+Status phrases: active Knowledge Intelligence implementation authorizations: `0`; active GLM implementation authorizations: `0`; repeated live-pilot authorization: `false`; production runtime authorization: `false`; v0.2 remains unreleased.
 
 Governed self-improvement is implemented-disabled. AION-OE-001 passed operator
 evaluation, AION-177 created `AION-177-SI-0006` for AION-178, AION-178
