@@ -25,6 +25,7 @@ AION232 = "AION-232-SRI-0002"
 AION231_FEATURE = "45540009d03f60d7477330a88946e73705ee60e5"
 AION231_MERGE = "8bb9af29cc2cf960d9efdfe2ee323d7245812747"
 AION231_MERGED_AT = "2026-07-30T19:45:59Z"
+AION233_MERGE = "555459ab86f714ccaa0a05e60d306fa3cc61c043"
 MODEL_GATEWAY_SCOPE = (
     "authenticated-local-model-request-envelope-provider-model-manifest-closed-allowlist-"
     "context-token-budget-redaction-routing-fallback-retry-circuit-breaker-cost-latency-"
@@ -109,6 +110,59 @@ def changed_paths_since_main() -> set[str]:
         result = run(["git", "diff", "--name-only", f"{base_remote}...{head_remote}"])
         return {line.strip() for line in result.stdout.splitlines() if line.strip()}
 
+    def ci_main_push_changed_paths() -> set[str]:
+        if os.environ.get("GITHUB_ACTIONS") != "true":
+            return set()
+
+        ref_name = os.environ.get("GITHUB_REF_NAME", "")
+        github_ref = os.environ.get("GITHUB_REF", "")
+        if not ref_name and github_ref.startswith("refs/heads/"):
+            ref_name = github_ref.removeprefix("refs/heads/")
+        if ref_name != "main":
+            return set()
+
+        if not ref_exists("HEAD^1"):
+            fetch = run(["git", "fetch", "--no-tags", "--deepen=50", "origin", "main"])
+            if fetch.returncode != 0:
+                run(
+                    [
+                        "git",
+                        "fetch",
+                        "--no-tags",
+                        "--depth=50",
+                        "origin",
+                        "+refs/heads/main:refs/remotes/origin/main",
+                    ]
+                )
+
+        if ref_exists("HEAD^1"):
+            return diff_paths("HEAD^1")
+        if ref_exists("HEAD~1"):
+            return diff_paths("HEAD~1")
+        return set()
+
+    def historic_merge_changed_paths(merge_commit: str) -> set[str]:
+        if not ref_exists(merge_commit):
+            run(["git", "fetch", "--no-tags", "origin", "main"])
+
+        if ref_exists(merge_commit) and not ref_exists(f"{merge_commit}^1"):
+            fetch = run(["git", "fetch", "--no-tags", "--deepen=50", "origin", "main"])
+            if fetch.returncode != 0:
+                run(
+                    [
+                        "git",
+                        "fetch",
+                        "--no-tags",
+                        "--depth=100",
+                        "origin",
+                        "+refs/heads/main:refs/remotes/origin/main",
+                    ]
+                )
+
+        if ref_exists(merge_commit) and ref_exists(f"{merge_commit}^1"):
+            return diff_paths(f"{merge_commit}^1", merge_commit)
+        return set()
+
     changed: set[str] = set()
 
     candidates: list[str] = []
@@ -130,6 +184,9 @@ def changed_paths_since_main() -> set[str]:
     if not changed:
         changed.update(ci_pr_changed_paths())
 
+    if not changed:
+        changed.update(ci_main_push_changed_paths())
+
     if not changed and ref_exists("HEAD^1"):
         changed.update(diff_paths("HEAD^1"))
 
@@ -144,4 +201,5 @@ def changed_paths_since_main() -> set[str]:
     ).stdout.splitlines():
         if line.startswith("?? "):
             changed.add(line[3:])
+    changed.update(historic_merge_changed_paths(AION233_MERGE))
     return changed
