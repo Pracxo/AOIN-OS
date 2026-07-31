@@ -7,13 +7,13 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[3]
 
 PROGRAM_ID = "AION-SECURE-RUNTIME-INTEGRATION-001"
-PROGRAM_STATE = "controlled_model_gateway_implemented_reference_simulation_only_pending_closeout"
+PROGRAM_STATE = "model_gateway_evaluated_sandboxed_capability_runtime_authorized_not_implemented"
 AUTH_ID = "AION-230-SRI-0001"
 IMPLEMENTATION_TASK = "AION-231"
 CLOSEOUT_TASK = "AION-232"
-CURRENT_AUTH_ID = "AION-232-SRI-0002"
-CURRENT_IMPLEMENTATION_TASK = "AION-233"
-CURRENT_CLOSEOUT_TASK = "AION-234"
+CURRENT_AUTH_ID = "AION-234-SRI-0003"
+CURRENT_IMPLEMENTATION_TASK = "AION-235"
+CURRENT_CLOSEOUT_TASK = "AION-236"
 FINAL_TASK = "AION-238"
 AUTH_SCOPE = (
     "local-operator-authenticated-session-offline-identity-request-context-"
@@ -277,12 +277,15 @@ def test_program_charter_creates_separate_sri_program() -> None:
     assert program["model_gateway_authorized"] is True
     assert program["model_gateway_implemented"] is True
     assert program["model_gateway_state"] == (
-        "implemented_provider_neutral_reference_simulation_only_pending_AION-234_closeout"
+        "implemented_provider_neutral_reference_simulation_only"
     )
+    assert program["model_gateway_operator_evaluation_passed"] is True
+    assert program["sandboxed_capability_runtime_authorized"] is True
+    assert program["sandboxed_capability_runtime_implemented"] is False
 
     assert "Program ID: `AION-SECURE-RUNTIME-INTEGRATION-001`" in charter
     assert "does not reopen any parent program" in charter
     assert "inherits no active parent-program implementation authorization" in charter
     assert "AION-230-SRI-0001` is closed" in charter
-    assert "AION-232-SRI-0002` is the sole active" in charter
+    assert "AION-234-SRI-0003` is the sole active" in charter
     assert "AION-231 remains implemented" in charter

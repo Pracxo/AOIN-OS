@@ -357,6 +357,12 @@ allowed_authorization_demo_names = {
     "secure-runtime-integration-authorization.json",
     "secure-runtime-foundation-operator-evaluation.json",
     "model-gateway-authorization.json",
+    "capability-runtime-authorization.json",
+    "capability-runtime-budget.json",
+    "capability-runtime-execution-plan.json",
+    "capability-runtime-manifests.json",
+    "capability-runtime-runtime-hold.json",
+    "capability-runtime-sandbox.json",
 }
 secure_runtime_evaluation_demo_names = {
     "secure-runtime-foundation-operator-evaluation.json",
@@ -385,6 +391,7 @@ model_gateway_demo_names = {
     "model-gateway-runtime-hold.json",
     "model-gateway-session-plan.json",
     "model-gateway-static-console-evidence.json",
+    "model-gateway-operator-evaluation.json",
 }
 aion161_allowed_policy_markers = {
     "runtime_private_key",

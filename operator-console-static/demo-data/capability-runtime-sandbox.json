@@ -1,0 +1,66 @@
+{
+  "authorization_transaction_id": "AION-234-SRI-0003",
+  "blockers": [],
+  "browser_enabled": false,
+  "directory_mutation_enabled": false,
+  "dns_enabled": false,
+  "dynamic_import_enabled": false,
+  "eval_enabled": false,
+  "exec_enabled": false,
+  "execution_scope": "deterministic_in_memory_reference_operations_only",
+  "external_connector_execution_enabled": false,
+  "external_tool_execution_enabled": false,
+  "filesystem_read_enabled": false,
+  "filesystem_write_enabled": false,
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
+  ],
+  "module_activation_enabled": false,
+  "network_enabled": false,
+  "package_installation_enabled": false,
+  "process_spawn_enabled": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "refs": [
+    "docs/secure-runtime-integration/capability-runtime-authorization-model.md",
+    "docs/release/capability-runtime-authorization-transaction.md"
+  ],
+  "runtime_implemented": false,
+  "sandbox_profile_id": "in-memory-reference-sandbox",
+  "sections": [
+    {
+      "section_id": "capability_runtime_authorization",
+      "status": "authorized_not_implemented",
+      "title": "Capability runtime authorization"
+    }
+  ],
+  "shell_enabled": false,
+  "status": "authorized_not_implemented",
+  "subprocess_enabled": false,
+  "synthetic": true,
+  "warnings": []
+}

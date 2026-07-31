@@ -1,0 +1,49 @@
+# Capability Runtime Threat Model
+
+Core rule: A sandboxed capability runtime may execute only closed, deterministic, in-memory reference operations with no external effect. It may not execute arbitrary tools, connectors, code, or operating-system actions.
+
+- `model output triggering execution automatically`
+- `model output treated as authorization`
+- `capability-ID substitution`
+- `connector-ID substitution`
+- `manifest tampering`
+- `schema bypass`
+- `input smuggling`
+- `output smuggling`
+- `path traversal`
+- `filesystem escape`
+- `network escape`
+- `DNS escape`
+- `process escape`
+- `shell injection`
+- `subprocess injection`
+- `browser automation escape`
+- `dynamic-import escape`
+- `eval and exec injection`
+- `package-install escape`
+- `module-loading escape`
+- `credential extraction`
+- `token extraction`
+- `environment-variable extraction`
+- `cross-session fixture leakage`
+- `idempotency-key collision`
+- `changed replay`
+- `approval replay`
+- `risk downgrade`
+- `guardrail bypass`
+- `side-effect-budget bypass`
+- `kill-switch bypass`
+- `operation-step exhaustion`
+- `input-size exhaustion`
+- `output-size exhaustion`
+- `execution-time exhaustion`
+- `rollback omission`
+- `audit-chain tampering`
+- `output treated as factual truth`
+- `output written to memory`
+- `output mutating policy`
+- `output mutating belief`
+- `source rewrite`
+- `Git mutation`
+- `deployment`
+- `model training`

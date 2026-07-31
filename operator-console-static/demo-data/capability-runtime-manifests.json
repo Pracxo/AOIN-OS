@@ -1,0 +1,126 @@
+{
+  "authorization_transaction_id": "AION-234-SRI-0003",
+  "blockers": [],
+  "closed": true,
+  "closed_capability_registry": [
+    {
+      "approval_required": false,
+      "capability_id": "capability_runtime.health.read",
+      "execution_kind": "read_only_reference",
+      "risk": "low",
+      "side_effect_class": "none"
+    },
+    {
+      "approval_required": false,
+      "capability_id": "capability_runtime.observability.read",
+      "execution_kind": "read_only_reference",
+      "risk": "low",
+      "side_effect_class": "none"
+    },
+    {
+      "approval_required": true,
+      "capability_id": "capability_runtime.audit.read",
+      "execution_kind": "read_only_reference",
+      "risk": "medium",
+      "side_effect_class": "none"
+    },
+    {
+      "approval_required": false,
+      "capability_id": "capability.text.normalize",
+      "execution_kind": "pure_function",
+      "risk": "low",
+      "side_effect_class": "none"
+    },
+    {
+      "approval_required": false,
+      "capability_id": "capability.hash.sha256",
+      "execution_kind": "pure_function",
+      "risk": "low",
+      "side_effect_class": "none"
+    },
+    {
+      "approval_required": false,
+      "capability_id": "capability.json.validate",
+      "execution_kind": "pure_function",
+      "risk": "low",
+      "side_effect_class": "none"
+    },
+    {
+      "approval_required": true,
+      "capability_id": "connector.reference.read.simulate",
+      "execution_kind": "synthetic_reference_connector",
+      "risk": "medium",
+      "side_effect_class": "none"
+    },
+    {
+      "approval_required": true,
+      "capability_id": "connector.reference.write.preview",
+      "execution_kind": "synthetic_reference_connector_preview",
+      "risk": "medium",
+      "side_effect_class": "none"
+    }
+  ],
+  "external_effect": false,
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
+  ],
+  "implementation_task": "AION-235",
+  "production_effect": false,
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "read_only": true,
+  "record_kind": "closed_capability_manifest_registry",
+  "redacted": true,
+  "redaction_applied": true,
+  "refs": [
+    "docs/secure-runtime-integration/capability-runtime-authorization-model.md",
+    "docs/release/capability-runtime-authorization-transaction.md"
+  ],
+  "registry_required_flags": {
+    "actual_tool_execution": false,
+    "credential_effect": false,
+    "deterministic": true,
+    "explicit_plan": true,
+    "external_effect": false,
+    "filesystem_effect": false,
+    "network_effect": false,
+    "operator_invoked": true,
+    "process_effect": false,
+    "production_effect": false,
+    "sandboxed": true,
+    "token_effect": false
+  },
+  "runtime_implemented": false,
+  "sections": [
+    {
+      "section_id": "capability_runtime_authorization",
+      "status": "authorized_not_implemented",
+      "title": "Capability runtime authorization"
+    }
+  ],
+  "status": "authorized_not_implemented",
+  "synthetic": true,
+  "warnings": []
+}

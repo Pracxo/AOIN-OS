@@ -1517,18 +1517,24 @@ def is_secure_runtime_integration_artifact(name: str) -> bool:
         == "docs/adr/0195-controlled-authenticated-local-operator-runtime-foundation.md"
         or name
         == "docs/adr/0196-secure-runtime-foundation-evaluation-and-controlled-model-gateway-authorization.md"
+        or name
+        == "docs/adr/0198-controlled-model-gateway-evaluation-and-sandboxed-capability-runtime-authorization.md"
         or name.startswith("docs/secure-runtime-integration/")
         or name.startswith("docs/release/secure-runtime-integration-")
         or name.startswith("docs/release/secure-runtime-foundation-")
         or name.startswith("docs/release/model-gateway-")
+        or name.startswith("docs/release/capability-runtime-")
         or name.startswith("examples/secure-runtime-integration/")
         or name.startswith("operator-console-static/demo-data/secure-runtime-integration-")
         or name.startswith("operator-console-static/demo-data/secure-runtime-foundation-operator-evaluation")
         or name.startswith("operator-console-static/demo-data/model-gateway-")
+        or name.startswith("operator-console-static/demo-data/capability-runtime-")
         or name.startswith("scripts/secure-runtime-integration-")
         or name.startswith("scripts/secure-runtime-foundation-")
         or name.startswith("scripts/model-gateway-")
+        or name.startswith("scripts/capability-runtime-")
         or name == "scripts/lib/secure_runtime_foundation_operator_evaluation.py"
+        or name == "scripts/lib/model_gateway_operator_evaluation.py"
         or name == "scripts/secure-runtime-local-operator-run.py"
         or name == "services/brain-api/src/aion_brain/contracts/secure_runtime.py"
         or name == "services/brain-api/src/aion_brain/contracts/model_gateway.py"
@@ -1538,6 +1544,8 @@ def is_secure_runtime_integration_artifact(name: str) -> bool:
         or name == "services/brain-api/tests/secure_runtime_aion232_test_helpers.py"
         or name == "services/brain-api/tests/secure_runtime_test_support.py"
         or name.startswith("services/brain-api/tests/test_model_gateway_")
+        or name.startswith("services/brain-api/tests/test_capability_runtime_")
+        or name == "services/brain-api/tests/aion234_test_support.py"
         or name.startswith("services/brain-api/tests/test_secure_runtime_")
         or name.startswith("services/brain-api/tests/test_secure_runtime_integration_")
     )

@@ -1,0 +1,67 @@
+{
+  "actual_tool_executions": 0,
+  "approval_evidence_required_for_medium_risk": true,
+  "authorization_transaction_id": "AION-234-SRI-0003",
+  "blockers": [],
+  "capability_id": "capability.text.normalize",
+  "changed_replay_rejected": true,
+  "execution_kind": "pure_function",
+  "external_connector_calls": 0,
+  "filesystem_reads": 0,
+  "filesystem_writes": 0,
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
+  ],
+  "guardrail_binding_required": true,
+  "idempotency_required": true,
+  "kill_switch_precedes_execution": true,
+  "model_output_can_trigger_execution": false,
+  "network_calls": 0,
+  "operator_selection_required": true,
+  "plan_id": "capability-plan-AION-235-preview-001",
+  "policy_binding_required": true,
+  "process_spawns": 0,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "refs": [
+    "docs/secure-runtime-integration/capability-runtime-authorization-model.md",
+    "docs/release/capability-runtime-authorization-transaction.md"
+  ],
+  "risk_binding_required": true,
+  "runtime_implemented": false,
+  "sandbox_profile_id": "in-memory-reference-sandbox",
+  "sections": [
+    {
+      "section_id": "capability_runtime_authorization",
+      "status": "authorized_not_implemented",
+      "title": "Capability runtime authorization"
+    }
+  ],
+  "status": "authorized_not_implemented",
+  "synthetic": true,
+  "warnings": []
+}

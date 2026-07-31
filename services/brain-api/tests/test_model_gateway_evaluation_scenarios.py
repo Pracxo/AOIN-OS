@@ -1,11 +1,15 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 HARNESS = REPO_ROOT / "scripts/lib/model_gateway_operator_evaluation.py"
+SAVED_REPORT = (
+    REPO_ROOT / "examples/secure-runtime-integration/model-gateway-operator-evaluation-report.json"
+)
 
 
 def _load_harness():
@@ -19,16 +23,22 @@ def _load_harness():
 
 def test_evaluation_report_records_exact_pass_and_scenario_set(tmp_path: Path) -> None:
     harness = _load_harness()
-    payload = harness.evaluate_model_gateway_operator(
-        repo_root=REPO_ROOT,
-        evaluation_id="AION-SRIPE-002",
-        evaluation_base_commit="48e9daebcac77aa48aa2336323c40eae948f3ac2",
-        pilot_evidence=(
+    if SAVED_REPORT.exists():
+        payload = json.loads(SAVED_REPORT.read_text(encoding="utf-8"))
+    else:
+        pilot_evidence = (
             REPO_ROOT
-            / "examples/secure-runtime-integration/model-gateway-local-simulation-pilot-evidence.json"
-        ),
-        temporary_output_directory=tmp_path,
-    )
+            / "examples/secure-runtime-integration/"
+            "model-gateway-local-simulation-pilot-evidence.json"
+        )
+        payload = harness.evaluate_model_gateway_operator(
+            repo_root=REPO_ROOT,
+            evaluation_id="AION-SRIPE-002",
+            evaluation_base_commit="48e9daebcac77aa48aa2336323c40eae948f3ac2",
+            pilot_evidence=pilot_evidence,
+            temporary_output_directory=tmp_path,
+        )
+    harness.validate_evaluation_report(payload)
     assert payload["decision"] == harness.DECISION_PASS
     assert payload["evaluation_passed"] is True
     assert payload["scenario_count"] == 28

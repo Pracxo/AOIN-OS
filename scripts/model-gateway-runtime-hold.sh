@@ -27,7 +27,10 @@ root = Path(os.environ["AION_REPO_ROOT"])
 for payload in (json.loads((root / "docs/secure-runtime-integration/program-ledger.json").read_text()), json.loads((root / "docs/secure-runtime-integration/authorization-ledger.json").read_text())):
     if payload["model_gateway_implemented"] is not True:
         raise SystemExit("model gateway must remain implemented under runtime hold")
-    if payload["model_gateway_state"] != "implemented_provider_neutral_reference_simulation_only_pending_AION-234_closeout":
+    if payload["model_gateway_state"] not in {
+        "implemented_provider_neutral_reference_simulation_only_pending_AION-234_closeout",
+        "implemented_provider_neutral_reference_simulation_only",
+    }:
         raise SystemExit("model gateway state mismatch")
     if payload["deterministic_reference_provider_available"] is not True:
         raise SystemExit("reference provider must remain available")

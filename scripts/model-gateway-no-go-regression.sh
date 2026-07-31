@@ -207,7 +207,10 @@ auth = json.loads((ROOT / "docs/secure-runtime-integration/authorization-ledger.
 for payload in (program, auth):
     if payload["model_gateway_implemented"] is not True:
         raise SystemExit("model gateway must be implemented")
-    if payload["model_gateway_state"] != "implemented_provider_neutral_reference_simulation_only_pending_AION-234_closeout":
+    if payload["model_gateway_state"] not in {
+        "implemented_provider_neutral_reference_simulation_only_pending_AION-234_closeout",
+        "implemented_provider_neutral_reference_simulation_only",
+    }:
         raise SystemExit("model gateway state mismatch")
     for key in (
         "actual_model_provider_call_enabled",

@@ -532,6 +532,9 @@ allowed_aion233_prefixes = (
     "operator-console-static/demo-data/model-gateway-",
     "services/brain-api/src/aion_brain/model_gateway/",
 )
+allowed_aion234_prefixes = (
+    "operator-console-static/demo-data/capability-runtime-",
+)
 runtime_prefixes = (
     "services/brain-api/src/",
     "packages/aion-sdk-python/src/",
@@ -610,7 +613,7 @@ for relative in sorted(changed):
 	        or relative in allowed_aion213_files
 	        or relative in allowed_aion215_files
 	        or relative in allowed_aion222_files
-	        or relative in allowed_aion233_files
+        or relative in allowed_aion233_files
 	        or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)
         or relative.startswith(allowed_aion110_prefixes)
@@ -620,6 +623,7 @@ for relative in sorted(changed):
         or relative.startswith(allowed_aion213_prefixes)
         or relative.startswith(allowed_aion222_prefixes)
         or relative.startswith(allowed_aion233_prefixes)
+        or relative.startswith(allowed_aion234_prefixes)
     ):
         continue
     if not relative.startswith(runtime_prefixes):

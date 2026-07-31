@@ -2511,3 +2511,9 @@ AION-232 authorized AION-233 model-gateway contracts through `AION-232-SRI-0002`
 AION-233 implements provider-neutral, credential-free, network-disabled, simulation-only, redacted model-gateway contracts. The contracts bind AION-231 secure-runtime evidence, closed provider and model manifests, bounded request envelopes, message and context fingerprints, context and token budgets, deterministic route/fallback/retry/circuit-breaker/cost/latency plans, guard decisions, deterministic reference-provider responses, response validation, untrusted classification, provenance, audit, observability, health, integrity, and pilot evidence.
 
 They do not create provider sessions, provider calls, connector sessions, tool executions, function calls, prompt persistence, response persistence, hidden-reasoning retention, raw provider-payload retention, memory writes, policy mutations, belief mutations, deployments, model-weight changes, v0.2 tags, or v0.2 releases. AION-232-SRI-0002 remains active until AION-234 evaluates and closes it.
+
+## AION-234 Model-Gateway Evaluation
+
+AION-234 records `AION-SRIPE-002` as a PASS evaluation of the merged AION-233 controlled provider-neutral model gateway. The gateway remains implemented as a deterministic reference-simulation plane. Model output is untrusted proposal material and cannot trigger execution.
+
+The next authorized layer is `AION-234-SRI-0003` for AION-235. It authorizes a sandboxed deterministic capability runtime only for closed, in-memory reference capabilities and synthetic reference connectors. External effects remain disabled. final Git evidence reconciliation is recorded by PR #147 for the completed Governed Learning and Memory parent program.

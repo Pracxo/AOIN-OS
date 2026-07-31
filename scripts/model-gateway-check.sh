@@ -85,8 +85,14 @@ from aion_brain.model_gateway.manifests import (
 
 ROOT = Path(os.environ["AION_REPO_ROOT"])
 
-PROGRAM_STATE = "controlled_model_gateway_implemented_reference_simulation_only_pending_closeout"
-GATEWAY_STATE = "implemented_provider_neutral_reference_simulation_only_pending_AION-234_closeout"
+PROGRAM_STATES = {
+    "controlled_model_gateway_implemented_reference_simulation_only_pending_closeout",
+    "model_gateway_evaluated_sandboxed_capability_runtime_authorized_not_implemented",
+}
+GATEWAY_STATES = {
+    "implemented_provider_neutral_reference_simulation_only_pending_AION-234_closeout",
+    "implemented_provider_neutral_reference_simulation_only",
+}
 SOURCE = [
     "services/brain-api/src/aion_brain/contracts/model_gateway.py",
     "services/brain-api/src/aion_brain/model_gateway/__init__.py",
@@ -256,11 +262,15 @@ for required_method in (
         raise SystemExit(f"gateway service method missing: {required_method}")
 
 for payload in (program, auth):
-    if payload["program_state"] != PROGRAM_STATE:
+    post_closeout = (
+        payload["program_state"]
+        == "model_gateway_evaluated_sandboxed_capability_runtime_authorized_not_implemented"
+    )
+    if payload["program_state"] not in PROGRAM_STATES:
         raise SystemExit("program state mismatch")
     if payload["model_gateway_authorized"] is not True or payload["model_gateway_implemented"] is not True:
         raise SystemExit("model gateway authorization/implementation mismatch")
-    if payload["model_gateway_state"] != GATEWAY_STATE:
+    if payload["model_gateway_state"] not in GATEWAY_STATES:
         raise SystemExit("model gateway state mismatch")
     if not all(payload["model_gateway_authorized_capabilities"].values()):
         raise SystemExit("not every gateway capability is available")
@@ -268,11 +278,14 @@ for payload in (program, auth):
         raise SystemExit("prohibited gateway capability enabled")
     if payload["active_sri_implementation_authorization_count"] != 1:
         raise SystemExit("there must be exactly one active SRI authorization")
-    if payload["active_sri_implementation_authorization"] != "AION-232-SRI-0002":
+    expected_auth = "AION-234-SRI-0003" if post_closeout else "AION-232-SRI-0002"
+    expected_task = "AION-235" if post_closeout else "AION-233"
+    expected_closeout = "AION-236" if post_closeout else "AION-234"
+    if payload["active_sri_implementation_authorization"] != expected_auth:
         raise SystemExit("active SRI authorization mismatch")
-    if payload["active_sri_implementation_task"] != "AION-233":
+    if payload["active_sri_implementation_task"] != expected_task:
         raise SystemExit("active SRI task mismatch")
-    if payload["formal_closeout_task"] != "AION-234":
+    if payload["formal_closeout_task"] != expected_closeout:
         raise SystemExit("formal closeout task mismatch")
     for key in (
         "actual_model_provider_call_enabled",
@@ -314,12 +327,34 @@ if program["secure_runtime_foundation_operator_evaluation_passed"] is not True:
 record = program["aion_233_record"]
 if record["task_id"] != "AION-233" or record["branch"] != "phase/controlled-model-gateway":
     raise SystemExit("AION-233 record identity mismatch")
-if record["feature_commits"] or record["pull_requests"] or record["merge_commits"]:
-    raise SystemExit("AION-233 Git delivery fields must remain pending for AION-234")
-if record["ci_result"] != "pending" or record["completion_timestamp"] is not None:
-    raise SystemExit("AION-233 completion fields must remain pending for AION-234")
-if record["authorization_state"] != "implementation_complete_pending_AION-234_closeout":
-    raise SystemExit("AION-233 authorization state mismatch")
+if program["program_state"] == "model_gateway_evaluated_sandboxed_capability_runtime_authorized_not_implemented":
+    if record["feature_commits"] != [
+        "39b886614fa8d6961492c1c076dd25d7eb16f5f5",
+        "9612d9d7455a7e504cd5def5ae71f7fe6bb9fa65",
+        "86a39a5fe92c1eade97b82d35fcd53a5e2379b8c",
+        "d268b56cb4c52458e3927c9f87bd88c099f162f6",
+        "10de8fadb9cf3eb689e653a007d5e8ce3516e860",
+        "e2a4a8056d14b2f38d086fa50c8a3f93052465be",
+    ]:
+        raise SystemExit("AION-233 feature commits mismatch")
+    if record["pull_requests"] != [151, 152]:
+        raise SystemExit("AION-233 PR reconciliation mismatch")
+    if record["merge_commits"] != [
+        "555459ab86f714ccaa0a05e60d306fa3cc61c043",
+        "48e9daebcac77aa48aa2336323c40eae948f3ac2",
+    ]:
+        raise SystemExit("AION-233 merge reconciliation mismatch")
+    if record["ci_result"] != "pass" or record["completion_timestamp"] != "2026-07-31T14:54:41Z":
+        raise SystemExit("AION-233 completion fields mismatch")
+    if record["authorization_state"] != "consumed_by_AION-233_closed_by_AION-234":
+        raise SystemExit("AION-233 authorization state mismatch")
+else:
+    if record["feature_commits"] or record["pull_requests"] or record["merge_commits"]:
+        raise SystemExit("AION-233 Git delivery fields must remain pending for AION-234")
+    if record["ci_result"] != "pending" or record["completion_timestamp"] is not None:
+        raise SystemExit("AION-233 completion fields must remain pending for AION-234")
+    if record["authorization_state"] != "implementation_complete_pending_AION-234_closeout":
+        raise SystemExit("AION-233 authorization state mismatch")
 
 if pilot["report_fingerprint"] != "d911ecc911b0f5833770629eb77fdfb42e6718c80c894984fb43f0e0a11d0982":
     raise SystemExit("pilot report fingerprint mismatch")

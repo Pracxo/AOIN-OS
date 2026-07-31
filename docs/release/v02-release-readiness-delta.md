@@ -325,3 +325,7 @@ These retained markers describe earlier v0.2 planning and production-auth author
 - `AION-163` is the next critical path historical marker.
 - AION-163-PA-0007 remained the historical authorization for AION-164.
 - Current authorization: AION-163-PA-0007 active for AION-164.
+
+## AION-234 Closeout
+
+`AION-SRIPE-002` passed all 28 model-gateway operator-evaluation scenarios. `AION-232-SRI-0002` is closed, consumed, expired, and non-reusable. `AION-234-SRI-0003` is active for AION-235 only. AION-235 is authorized to implement a sandboxed deterministic capability and synthetic connector runtime, but no AION-235 source is present in this closeout. Model output remains untrusted and cannot trigger execution. External connectors, real tools, network, credentials, filesystem, process, production runtime, v0.2 tags, and v0.2 releases remain disabled.

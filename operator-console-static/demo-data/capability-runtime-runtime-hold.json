@@ -1,0 +1,64 @@
+{
+  "authorization_transaction_id": "AION-234-SRI-0003",
+  "automatic_capability_execution_enabled": false,
+  "blockers": [],
+  "capability_runtime_authorized": true,
+  "capability_runtime_implemented": false,
+  "credential_persistence_enabled": false,
+  "credential_read_enabled": false,
+  "external_connector_execution_enabled": false,
+  "external_tool_execution_enabled": false,
+  "filesystem_read_enabled": false,
+  "filesystem_write_enabled": false,
+  "forbidden_actions": [
+    {
+      "action_key": "activate_module",
+      "allowed": false
+    },
+    {
+      "action_key": "activate_capability",
+      "allowed": false
+    },
+    {
+      "action_key": "load_code",
+      "allowed": false
+    },
+    {
+      "action_key": "execute_tool",
+      "allowed": false
+    },
+    {
+      "action_key": "enable_external_model_calls",
+      "allowed": false
+    },
+    {
+      "action_key": "hard_delete",
+      "allowed": false
+    }
+  ],
+  "hold_id": "AION-234-capability-runtime-runtime-hold",
+  "model_weight_training_enabled": false,
+  "network_enabled": false,
+  "process_spawn_enabled": false,
+  "production_runtime_authorized": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "refs": [
+    "docs/secure-runtime-integration/capability-runtime-authorization-model.md",
+    "docs/release/capability-runtime-authorization-transaction.md"
+  ],
+  "sections": [
+    {
+      "section_id": "capability_runtime_authorization",
+      "status": "authorized_not_implemented",
+      "title": "Capability runtime authorization"
+    }
+  ],
+  "status": "authorized_not_implemented",
+  "synthetic": true,
+  "token_persistence_enabled": false,
+  "token_read_enabled": false,
+  "v02_release_ready": false,
+  "warnings": []
+}

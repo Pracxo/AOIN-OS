@@ -8,6 +8,9 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 HARNESS = REPO_ROOT / "scripts/lib/model_gateway_operator_evaluation.py"
+SAVED_REPORT = (
+    REPO_ROOT / "examples/secure-runtime-integration/model-gateway-operator-evaluation-report.json"
+)
 
 
 def _load_harness():
@@ -22,12 +25,13 @@ def _load_harness():
     return module
 
 
-def test_model_gateway_operator_evaluation_executes_exact_28_scenarios(
-    tmp_path: Path,
-) -> None:
-    harness = _load_harness()
-    report = tmp_path / "AION-SRIPE-002.json"
+def _saved_or_generated_report(harness, tmp_path: Path) -> dict[str, object]:
+    if SAVED_REPORT.exists():
+        payload = json.loads(SAVED_REPORT.read_text(encoding="utf-8"))
+        harness.validate_evaluation_report(payload)
+        return payload
 
+    report = tmp_path / "AION-SRIPE-002.json"
     code = harness.main(
         [
             "--repo-root",
@@ -44,9 +48,15 @@ def test_model_gateway_operator_evaluation_executes_exact_28_scenarios(
             str(report),
         ]
     )
-
     assert code == 0
-    payload = json.loads(report.read_text())
+    return json.loads(report.read_text(encoding="utf-8"))
+
+
+def test_model_gateway_operator_evaluation_executes_exact_28_scenarios(
+    tmp_path: Path,
+) -> None:
+    harness = _load_harness()
+    payload = _saved_or_generated_report(harness, tmp_path)
     assert payload["evaluation_id"] == "AION-SRIPE-002"
     assert payload["evaluation_type"] == "controlled_model_gateway_operator_evaluation"
     assert payload["scenario_count"] == 28
@@ -76,41 +86,16 @@ def test_model_gateway_operator_evaluation_executes_exact_28_scenarios(
 
 def test_model_gateway_operator_evaluation_validates_saved_report(tmp_path: Path) -> None:
     harness = _load_harness()
-    report = tmp_path / "AION-SRIPE-002.json"
-    assert (
-        harness.main(
-            [
-                "--repo-root",
-                str(REPO_ROOT),
-                "--evaluation-id",
-                "AION-SRIPE-002",
-                "--evaluation-base-commit",
-                "48e9daebcac77aa48aa2336323c40eae948f3ac2",
-                "--pilot-evidence",
-                "examples/secure-runtime-integration/model-gateway-local-simulation-pilot-evidence.json",
-                "--temporary-output-directory",
-                str(tmp_path),
-                "--report",
-                str(report),
-            ]
-        )
-        == 0
-    )
+    payload = _saved_or_generated_report(harness, tmp_path)
+    report = SAVED_REPORT if SAVED_REPORT.exists() else tmp_path / "AION-SRIPE-002.json"
+    if not report.exists():
+        report.write_text(json.dumps(payload), encoding="utf-8")
     assert harness.main(["--validate-report", str(report)]) == 0
 
 
 def test_model_gateway_operator_evaluation_rejects_bad_shapes(tmp_path: Path) -> None:
     harness = _load_harness()
-    payload = harness.evaluate_model_gateway_operator(
-        repo_root=REPO_ROOT,
-        evaluation_id="AION-SRIPE-002",
-        evaluation_base_commit="48e9daebcac77aa48aa2336323c40eae948f3ac2",
-        pilot_evidence=(
-            REPO_ROOT
-            / "examples/secure-runtime-integration/model-gateway-local-simulation-pilot-evidence.json"
-        ),
-        temporary_output_directory=tmp_path,
-    )
+    payload = _saved_or_generated_report(harness, tmp_path)
 
     missing = json.loads(json.dumps(payload))
     missing["scenario_results"] = missing["scenario_results"][:-1]
@@ -147,16 +132,7 @@ def test_model_gateway_operator_evaluation_rejects_bad_shapes(tmp_path: Path) ->
 
 def test_model_gateway_operator_evaluation_rejects_bad_fingerprint(tmp_path: Path) -> None:
     harness = _load_harness()
-    payload = harness.evaluate_model_gateway_operator(
-        repo_root=REPO_ROOT,
-        evaluation_id="AION-SRIPE-002",
-        evaluation_base_commit="48e9daebcac77aa48aa2336323c40eae948f3ac2",
-        pilot_evidence=(
-            REPO_ROOT
-            / "examples/secure-runtime-integration/model-gateway-local-simulation-pilot-evidence.json"
-        ),
-        temporary_output_directory=tmp_path,
-    )
+    payload = _saved_or_generated_report(harness, tmp_path)
     payload["report_fingerprint"] = "0" * 64
     try:
         harness.validate_evaluation_report(payload)

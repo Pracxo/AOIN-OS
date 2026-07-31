@@ -1731,3 +1731,9 @@ The static console includes AION-232 operator-evaluation and model-gateway autho
 The static console includes AION-233 controlled model-gateway implementation evidence. These projections are read-only and show authorization, secure-runtime component binding, provider and model manifests, request/session planning, message normalization, context and token budgets, route/fallback/retry/circuit-breaker planning, guard decisions, deterministic reference-provider responses, response validation, output provenance, audit, observability, health, integrity, pilot evidence, and runtime boundary.
 
 The visual layer remains local static evidence. It does not call a provider, access a network, read credentials, create tokens or authorization headers, persist prompts or responses, retain hidden reasoning or provider raw payloads, execute connectors or tools, create memory or beliefs, mutate policy, deploy, train models, create v0.2 tags, or create v0.2 releases.
+
+## AION-234 Model-Gateway Evaluation
+
+AION-234 records `AION-SRIPE-002` as a PASS evaluation of the merged AION-233 controlled provider-neutral model gateway. The gateway remains implemented as a deterministic reference-simulation plane. Model output is untrusted proposal material and cannot trigger execution.
+
+The next authorized layer is `AION-234-SRI-0003` for AION-235. It authorizes a sandboxed deterministic capability runtime only for closed, in-memory reference capabilities and synthetic reference connectors. External effects remain disabled. final Git evidence reconciliation is recorded by PR #147 for the completed Governed Learning and Memory parent program.
