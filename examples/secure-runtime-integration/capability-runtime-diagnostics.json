@@ -1,0 +1,8 @@
+{
+  "diagnostic_id": "capability-runtime-diagnostics-AION-235",
+  "findings": [
+    "no_external_effects",
+    "all_receipts_redacted"
+  ],
+  "redacted": true
+}

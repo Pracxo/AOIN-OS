@@ -16,12 +16,18 @@ from __future__ import annotations
 import json, os, subprocess
 from pathlib import Path
 ROOT = Path(os.environ["AION_REPO_ROOT"])
+PROGRAM_LEDGER = ROOT / "docs/secure-runtime-integration/program-ledger.json"
+AION235_IMPLEMENTED_STATE = "sandboxed_capability_runtime_implemented_reference_only_pending_closeout"
 ALLOWED_PREFIXES = ("docs/", "examples/", "operator-console-static/", "scripts/", "services/brain-api/tests/")
 ALLOWED_EXACT = {"README.md", "AGENTS.md"}
 PROHIBITED_PREFIXES = (".github/workflows/", "services/brain-api/src/aion_brain/", "services/brain-api/pyproject.toml", "packages/aion-sdk-python/", "migrations/", "services/brain-api/migrations/", "infra/postgres/migrations/")
 PROHIBITED_NAMES = {"package.json", "package-lock.json", "pnpm-lock.yaml", "yarn.lock", "bun.lockb", "poetry.lock", "uv.lock", "Pipfile", "Pipfile.lock"}
 AION233_PREFIXES = ("services/brain-api/src/aion_brain/model_gateway/",)
 AION233_EXACT = {"services/brain-api/src/aion_brain/contracts/model_gateway.py"}
+AION235_PREFIXES = ("services/brain-api/src/aion_brain/capability_runtime/",)
+AION235_EXACT = {
+    "services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime.py",
+}
 
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
     return subprocess.run(args, cwd=ROOT, text=True, capture_output=True, check=check)
@@ -59,6 +65,24 @@ def changed_entries() -> list[list[str]]:
 def allowed(path: str) -> bool:
     return path in ALLOWED_EXACT or path.startswith(ALLOWED_PREFIXES)
 
+def aion235_implementation_state_active() -> bool:
+    if not PROGRAM_LEDGER.exists():
+        return False
+    payload = json.loads(PROGRAM_LEDGER.read_text(encoding="utf-8"))
+    return (
+        payload.get("program_state") == AION235_IMPLEMENTED_STATE
+        and payload.get("active_sri_implementation_authorization") == "AION-234-SRI-0003"
+        and payload.get("active_sri_implementation_task") == "AION-235"
+        and payload.get("formal_closeout_task") == "AION-236"
+    )
+
+def aion235_source_allowed(path: str) -> bool:
+    return (
+        aion235_active
+        and (path in AION235_EXACT or path.startswith(AION235_PREFIXES))
+    )
+
+aion235_active = aion235_implementation_state_active()
 for parts in changed_entries():
     status = parts[0]
     if status.startswith(("D", "R")):
@@ -68,6 +92,8 @@ for parts in changed_entries():
         if Path(normalized).name in PROHIBITED_NAMES:
             raise SystemExit(f"dependency/package file changed: {normalized}")
         if normalized in AION233_EXACT or normalized.startswith(AION233_PREFIXES):
+            continue
+        if aion235_source_allowed(normalized):
             continue
         if normalized.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/dependency path changed: {normalized}")

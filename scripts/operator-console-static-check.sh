@@ -508,6 +508,93 @@ for path in sorted(demo_dir.glob("*.json")):
             if key in payload and payload.get(key) is not False:
                 raise SystemExit(f"model gateway demo flag must be false: {key}: {path}")
         continue
+    if path.name.startswith("capability-runtime-"):
+        allowed_names = {
+            "capability-runtime-approval-evidence.json",
+            "capability-runtime-audit.json",
+            "capability-runtime-authorization.json",
+            "capability-runtime-budget.json",
+            "capability-runtime-component-binding.json",
+            "capability-runtime-connector-preview.json",
+            "capability-runtime-execution-plan.json",
+            "capability-runtime-execution-receipt.json",
+            "capability-runtime-guardrail-binding.json",
+            "capability-runtime-health.json",
+            "capability-runtime-integrity.json",
+            "capability-runtime-local-sandbox-pilot-evidence.json",
+            "capability-runtime-manifests.json",
+            "capability-runtime-model-proposal-binding.json",
+            "capability-runtime-observability.json",
+            "capability-runtime-policy-binding.json",
+            "capability-runtime-request-envelope.json",
+            "capability-runtime-risk-binding.json",
+            "capability-runtime-rollback.json",
+            "capability-runtime-runtime-boundary.json",
+            "capability-runtime-runtime-hold.json",
+            "capability-runtime-sandbox-decision.json",
+            "capability-runtime-sandbox-profile.json",
+            "capability-runtime-sandbox.json",
+        }
+        if path.name not in allowed_names:
+            raise SystemExit(f"unknown capability runtime demo: {path}")
+        if (
+            "program_id" in payload
+            and payload.get("program_id") != "AION-SECURE-RUNTIME-INTEGRATION-001"
+        ):
+            raise SystemExit(f"capability runtime demo program id mismatch: {path}")
+        for key in (
+            "actual_external_connector_call",
+            "actual_model_provider_call_enabled",
+            "actual_tool_execution",
+            "actual_tool_execution_enabled",
+            "automatic_capability_execution_enabled",
+            "automatic_capability_executions",
+            "automatic_capability_selection_enabled",
+            "automatic_capability_selections",
+            "automatic_connector_execution_enabled",
+            "automatic_connector_executions",
+            "browser_automation_enabled",
+            "credential_effect",
+            "credential_read_enabled",
+            "deployment",
+            "directory_mutation_enabled",
+            "dns_resolution_enabled",
+            "dynamic_import_enabled",
+            "eval_enabled",
+            "exec_enabled",
+            "external_connector_execution_enabled",
+            "external_effect",
+            "external_effect_allowed",
+            "external_tool_execution_enabled",
+            "filesystem_effect",
+            "filesystem_read_enabled",
+            "filesystem_write_enabled",
+            "git_mutation",
+            "model_output_triggered_execution_enabled",
+            "network_effect",
+            "process_effect",
+            "process_spawn_enabled",
+            "production_effect",
+            "production_exposure",
+            "production_memory_write_enabled",
+            "production_policy_mutation_enabled",
+            "production_runtime_authorized",
+            "production_write",
+            "public_network_access_enabled",
+            "runtime_effect",
+            "shell_command_execution_enabled",
+            "source_mutation",
+            "subprocess_execution_enabled",
+            "token_effect",
+            "token_read_enabled",
+            "tool_calling_enabled",
+            "v02_release_created",
+            "v02_release_ready",
+            "v02_tag_created",
+        ):
+            if key in payload and payload.get(key) not in (False, 0):
+                raise SystemExit(f"capability runtime demo flag must be false: {key}: {path}")
+        continue
     if path.name.startswith("action-authorization-"):
         if payload.get("read_only") is not True:
             raise SystemExit(f"action authorization demo must be read_only: {path}")

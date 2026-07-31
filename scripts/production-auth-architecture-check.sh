@@ -443,6 +443,12 @@ allowed_aion_233_runtime = {
 allowed_aion_233_prefixes = (
     "services/brain-api/src/aion_brain/model_gateway/",
 )
+allowed_aion_235_runtime = {
+    "services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime.py",
+}
+allowed_aion_235_prefixes = (
+    "services/brain-api/src/aion_brain/capability_runtime/",
+)
 for name in [*changed, *untracked]:
     if name in allowed_runtime_tests:
         continue
@@ -517,6 +523,10 @@ for name in [*changed, *untracked]:
     if name in allowed_aion_233_runtime:
         continue
     if name.startswith(allowed_aion_233_prefixes):
+        continue
+    if name in allowed_aion_235_runtime:
+        continue
+    if name.startswith(allowed_aion_235_prefixes):
         continue
     if name.startswith(runtime_prefixes):
         raise SystemExit(f"production auth architecture must not change runtime file: {name}")

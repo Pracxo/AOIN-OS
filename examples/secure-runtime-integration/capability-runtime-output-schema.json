@@ -1,0 +1,84 @@
+{
+  "schemas": [
+    {
+      "capability_id": "capability_runtime.health.read",
+      "schema": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "schema_fingerprint": "3804463c32c076a03818112a8cc8b0610476c773afbbaf12f630d28687b54bb4",
+      "schema_id": "capability_runtime.health.read:output",
+      "schema_version": "aion-capability-runtime-output-schema/v1"
+    },
+    {
+      "capability_id": "capability_runtime.observability.read",
+      "schema": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "schema_fingerprint": "b8b868ad76fa95b494e938d9a7e02876e661891444c1dbbe47a79702cef8d366",
+      "schema_id": "capability_runtime.observability.read:output",
+      "schema_version": "aion-capability-runtime-output-schema/v1"
+    },
+    {
+      "capability_id": "capability_runtime.audit.read",
+      "schema": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "schema_fingerprint": "693fbc633a1770db0702b6123a4991865ab39c53ceadc7f2ac779fe6cc41b127",
+      "schema_id": "capability_runtime.audit.read:output",
+      "schema_version": "aion-capability-runtime-output-schema/v1"
+    },
+    {
+      "capability_id": "capability.text.normalize",
+      "schema": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "schema_fingerprint": "d63a097b9c5e456dffe71a94a60edf1fc5c4f49bce1f95d6a081ecec38a891e3",
+      "schema_id": "capability.text.normalize:output",
+      "schema_version": "aion-capability-runtime-output-schema/v1"
+    },
+    {
+      "capability_id": "capability.hash.sha256",
+      "schema": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "schema_fingerprint": "2affa86d7d8ee6b8329980e1a6336067a41e0a3e84a0c0995f2c693b480f77c8",
+      "schema_id": "capability.hash.sha256:output",
+      "schema_version": "aion-capability-runtime-output-schema/v1"
+    },
+    {
+      "capability_id": "capability.json.validate",
+      "schema": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "schema_fingerprint": "401be362317b4bff116983322d8dae4a913a95bb3342cf44c8dd3f319ed01892",
+      "schema_id": "capability.json.validate:output",
+      "schema_version": "aion-capability-runtime-output-schema/v1"
+    },
+    {
+      "capability_id": "connector.reference.read.simulate",
+      "schema": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "schema_fingerprint": "1b3cc4cb1e63c370414250550b891c6f0ccbcf426df6a51b66b29629c88bcfc6",
+      "schema_id": "connector.reference.read.simulate:output",
+      "schema_version": "aion-capability-runtime-output-schema/v1"
+    },
+    {
+      "capability_id": "connector.reference.write.preview",
+      "schema": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "schema_fingerprint": "3b571a5da9e4c9ff8d10515e44ce1ee0a79df9332a1d75667d9b5cd6ad82e28a",
+      "schema_id": "connector.reference.write.preview:output",
+      "schema_version": "aion-capability-runtime-output-schema/v1"
+    }
+  ]
+}

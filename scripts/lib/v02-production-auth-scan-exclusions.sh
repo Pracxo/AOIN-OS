@@ -2391,6 +2391,67 @@ aion219_is_scoped_knowledge_intelligence_public_research_pilot_path() {
   esac
 }
 
+aion235_is_scoped_sandboxed_capability_runtime_path() {
+  if [[ ! -f docs/secure-runtime-integration/program-ledger.json ]] || \
+    ! grep -q '"program_state": "sandboxed_capability_runtime_implemented_reference_only_pending_closeout"' docs/secure-runtime-integration/program-ledger.json || \
+    ! grep -q '"active_sri_implementation_authorization": "AION-234-SRI-0003"' docs/secure-runtime-integration/program-ledger.json || \
+    ! grep -q '"active_sri_implementation_task": "AION-235"' docs/secure-runtime-integration/program-ledger.json || \
+    ! grep -q '"formal_closeout_task": "AION-236"' docs/secure-runtime-integration/program-ledger.json; then
+    return 1
+  fi
+  case "$1" in
+    README.md|AGENTS.md|\
+    docs/project-status.md|docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/visual-brain.md|\
+    docs/secure-runtime-integration/*|\
+    docs/release/capability-runtime-*|\
+    docs/adr/0199-sandboxed-deterministic-capability-and-synthetic-connector-runtime.md|\
+    docs/adr/README.md|\
+    examples/secure-runtime-integration/capability-runtime-*|\
+    operator-console-static/app.js|\
+    operator-console-static/demo-data/capability-runtime-*.json|\
+    scripts/capability-runtime-*.sh|\
+    scripts/capability-runtime-local-sandbox-run.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    scripts/model-gateway-authorization-check.sh|\
+    scripts/model-gateway-authorization-no-go-regression.sh|\
+    scripts/model-gateway-check.sh|\
+    scripts/model-gateway-no-go-regression.sh|\
+    scripts/model-gateway-operator-evaluation-no-go-regression.sh|\
+    scripts/secure-runtime-foundation-no-go-regression.sh|\
+    scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh|\
+    scripts/secure-runtime-integration-program-authorization-check.sh|\
+    scripts/secure-runtime-integration-program-no-go-regression.sh|\
+    services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime.py|\
+    services/brain-api/src/aion_brain/capability_runtime/__init__.py|\
+    services/brain-api/src/aion_brain/capability_runtime/authorization.py|\
+    services/brain-api/src/aion_brain/capability_runtime/component_binding.py|\
+    services/brain-api/src/aion_brain/capability_runtime/manifests.py|\
+    services/brain-api/src/aion_brain/capability_runtime/request_envelope.py|\
+    services/brain-api/src/aion_brain/capability_runtime/input_validation.py|\
+    services/brain-api/src/aion_brain/capability_runtime/execution_plan.py|\
+    services/brain-api/src/aion_brain/capability_runtime/sandbox.py|\
+    services/brain-api/src/aion_brain/capability_runtime/guard.py|\
+    services/brain-api/src/aion_brain/capability_runtime/dispatcher.py|\
+    services/brain-api/src/aion_brain/capability_runtime/reference_capabilities.py|\
+    services/brain-api/src/aion_brain/capability_runtime/reference_connector.py|\
+    services/brain-api/src/aion_brain/capability_runtime/budget.py|\
+    services/brain-api/src/aion_brain/capability_runtime/audit.py|\
+    services/brain-api/src/aion_brain/capability_runtime/observability.py|\
+    services/brain-api/src/aion_brain/capability_runtime/integrity.py|\
+    services/brain-api/src/aion_brain/capability_runtime/evidence.py|\
+    services/brain-api/tests/capability_runtime_test_support.py|\
+    services/brain-api/tests/test_capability_runtime_*.py|\
+    services/brain-api/tests/test_secure_runtime_current_state_*.py|\
+    services/brain-api/tests/test_secure_runtime_integration_*.py|\
+    services/brain-api/tests/test_model_gateway_current_state_consistency.py)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
 aion151_validate_scoped_authorization_if_present() {
   if [[ -f examples/release/v02-production-auth-implementation-authorization.json ]]; then
     python3 scripts/lib/v02_production_auth_authorization.py --repo-root "$ROOT_DIR" --mode no-go

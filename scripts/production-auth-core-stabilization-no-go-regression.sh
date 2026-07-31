@@ -123,6 +123,9 @@ while IFS= read -r file; do
     if aion233_is_scoped_controlled_model_gateway_path "$file"; then
       continue
     fi
+    if aion235_is_scoped_sandboxed_capability_runtime_path "$file"; then
+      continue
+    fi
     case "$file" in
       services/brain-api/tests/*|docs/*|README.md|AGENTS.md)
         ;;

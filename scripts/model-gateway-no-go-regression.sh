@@ -21,6 +21,9 @@ import subprocess
 from pathlib import Path
 
 ROOT = Path(os.environ["AION_REPO_ROOT"])
+AION235_IMPLEMENTED_STATE = (
+    "sandboxed_capability_runtime_implemented_reference_only_pending_closeout"
+)
 
 AION233_SOURCE = {
     "services/brain-api/src/aion_brain/contracts/model_gateway.py",
@@ -41,6 +44,10 @@ AION233_SOURCE = {
     "services/brain-api/src/aion_brain/model_gateway/integrity.py",
     "services/brain-api/src/aion_brain/model_gateway/evidence.py",
 }
+AION235_SOURCE_EXACT = {
+    "services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime.py",
+}
+AION235_SOURCE_PREFIXES = ("services/brain-api/src/aion_brain/capability_runtime/",)
 RUNNER = "scripts/model-gateway-local-simulation-run.py"
 ALLOWED_PREFIXES = (
     "docs/",
@@ -150,10 +157,35 @@ def changed_entries() -> list[list[str]]:
     return entries
 
 
+def aion235_implementation_state_active() -> bool:
+    ledger = ROOT / "docs/secure-runtime-integration/program-ledger.json"
+    if not ledger.exists():
+        return False
+    payload = json.loads(ledger.read_text(encoding="utf-8"))
+    return (
+        payload.get("program_state") == AION235_IMPLEMENTED_STATE
+        and payload.get("active_sri_implementation_authorization") == "AION-234-SRI-0003"
+        and payload.get("active_sri_implementation_task") == "AION-235"
+        and payload.get("formal_closeout_task") == "AION-236"
+    )
+
+
+def aion235_source_allowed(path: str) -> bool:
+    if not aion235_active:
+        return False
+    return path in AION235_SOURCE_EXACT or path.startswith(AION235_SOURCE_PREFIXES)
+
+
 def allowed(path: str) -> bool:
-    return path in AION233_SOURCE or path in ALLOWED_EXACT or path.startswith(ALLOWED_PREFIXES)
+    return (
+        path in AION233_SOURCE
+        or aion235_source_allowed(path)
+        or path in ALLOWED_EXACT
+        or path.startswith(ALLOWED_PREFIXES)
+    )
 
 
+aion235_active = aion235_implementation_state_active()
 changed_paths: set[str] = set()
 for parts in changed_entries():
     status = parts[0]
@@ -168,7 +200,11 @@ for parts in changed_entries():
             raise SystemExit(f"prohibited path changed: {path}")
         if path.startswith(PROHIBITED_RUNTIME_PREFIXES) and path not in AION233_SOURCE:
             raise SystemExit(f"protected runtime source changed: {path}")
-        if path.startswith("services/brain-api/src/aion_brain/") and path not in AION233_SOURCE:
+        if (
+            path.startswith("services/brain-api/src/aion_brain/")
+            and path not in AION233_SOURCE
+            and not aion235_source_allowed(path)
+        ):
             raise SystemExit(f"only exact AION-233 model-gateway source may change: {path}")
         if not allowed(path):
             raise SystemExit(f"disallowed AION-233 changed path: {path}")

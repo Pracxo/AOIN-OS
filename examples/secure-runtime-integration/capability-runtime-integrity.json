@@ -1,0 +1,109 @@
+{
+  "all_prohibited_counters_zero": true,
+  "findings": [
+    {
+      "finding_id": "exact_authorization",
+      "passed": true,
+      "reason_code": "passed"
+    },
+    {
+      "finding_id": "parent_component_lineage",
+      "passed": true,
+      "reason_code": "passed"
+    },
+    {
+      "finding_id": "model_output_untrusted",
+      "passed": true,
+      "reason_code": "passed"
+    },
+    {
+      "finding_id": "operator_selection_exists",
+      "passed": true,
+      "reason_code": "passed"
+    },
+    {
+      "finding_id": "manifest_registries_exact",
+      "passed": true,
+      "reason_code": "passed"
+    },
+    {
+      "finding_id": "schemas_exact",
+      "passed": true,
+      "reason_code": "passed"
+    },
+    {
+      "finding_id": "session_limits",
+      "passed": true,
+      "reason_code": "passed"
+    },
+    {
+      "finding_id": "request_lineage",
+      "passed": true,
+      "reason_code": "passed"
+    },
+    {
+      "finding_id": "idempotency",
+      "passed": true,
+      "reason_code": "passed"
+    },
+    {
+      "finding_id": "policy_risk_guardrail_approval_bindings",
+      "passed": true,
+      "reason_code": "passed"
+    },
+    {
+      "finding_id": "budget_limits",
+      "passed": true,
+      "reason_code": "passed"
+    },
+    {
+      "finding_id": "kill_switch_checks",
+      "passed": true,
+      "reason_code": "passed"
+    },
+    {
+      "finding_id": "sandbox_restrictions",
+      "passed": true,
+      "reason_code": "passed"
+    },
+    {
+      "finding_id": "static_dispatcher",
+      "passed": true,
+      "reason_code": "passed"
+    },
+    {
+      "finding_id": "receipt_chain",
+      "passed": true,
+      "reason_code": "passed"
+    },
+    {
+      "finding_id": "audit_chain",
+      "passed": true,
+      "reason_code": "passed"
+    },
+    {
+      "finding_id": "rollback",
+      "passed": true,
+      "reason_code": "passed"
+    },
+    {
+      "finding_id": "active_sessions",
+      "passed": true,
+      "reason_code": "passed"
+    },
+    {
+      "finding_id": "active_requests",
+      "passed": true,
+      "reason_code": "passed"
+    },
+    {
+      "finding_id": "all_prohibited_counters",
+      "passed": true,
+      "reason_code": "passed"
+    }
+  ],
+  "report_fingerprint": "30d355a854d76093011d3f55e1301d9dad2bb7dc7145589c695dd979547fb7d4",
+  "report_id": "capability-runtime-integrity-AION-235",
+  "schema_version": "aion-capability-runtime-integrity/v1",
+  "status": "passed"
+}

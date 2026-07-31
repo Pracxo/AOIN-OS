@@ -1,0 +1,17 @@
+{
+  "active_request_ids": [],
+  "authorization_envelope_fingerprint": "41b57ec749e70bf686df4c28dcf574cbb3e66d6ff2be343d34baa63036a8a656",
+  "automatic_continuation": false,
+  "background_execution": false,
+  "closed_at": null,
+  "completed_request_count": 0,
+  "created_at": "2026-07-31T20:00:00Z",
+  "expires_at": "2026-07-31T20:30:00Z",
+  "external_effect": false,
+  "production_effect": false,
+  "schema_version": "aion-capability-runtime-session/v1",
+  "session_fingerprint": "273d0a56d2a82b97660a2b2e7ee261e8e7aa6bf92ddd6727ca7557f5c43aefb5",
+  "session_id": "example-capability-runtime-session",
+  "session_plan_fingerprint": "9d503e9dae184ec09c5ac64d185f5491e1ce0c6d3dda009200f1c525edceadf4",
+  "status": "active"
+}

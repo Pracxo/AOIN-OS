@@ -1,0 +1,9 @@
+{
+  "allowed": true,
+  "decision_id": "policy-example-request-001",
+  "external_effect_allowed": false,
+  "policy_fingerprint": "3c42220402ccfef79438f9bada3acbd4455a61c1cc051bda6fcd3b1e03fe98d8",
+  "production_effect_allowed": false,
+  "request_id": "example-request-001",
+  "schema_version": "aion-capability-runtime-decision-binding/v1"
+}

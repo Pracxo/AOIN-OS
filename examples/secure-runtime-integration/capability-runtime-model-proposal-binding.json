@@ -1,0 +1,21 @@
+{
+  "approval_authority": false,
+  "execution_authority": false,
+  "model_output_is_untrusted": true,
+  "model_output_provenance_fingerprint": "925bffd39ec5e56ae799eda1e9f90f8be09c7b845533b1403204f86c6a8513e3",
+  "operator_selection_required": true,
+  "output_classification": "untrusted_model_output",
+  "proposal_fingerprint": "95650b47b9fd7a167e4b3db92416b27ed9055c5031497cc1a72903ad7e998962",
+  "proposal_id": "model-gateway-proposal-AION-235",
+  "redacted": true,
+  "suggested_capability_code_fingerprints": [
+    "de08c0ecf737b2df452fdb14b674663a6ac07d1154a2f4c3c8a2089d6de86029",
+    "92c9c47af938fe809f0933241df4123d3769f96913f362731a1707009cdbcd29",
+    "28b724ef2071ba1fae95698b76a9ebd13e583800122168e69594b05964753533",
+    "540f947acda4cceae00679277bba56656588f1c4e6f38599d7eb171502dcc5b5",
+    "83f93920cb28a0b06abbb4fdb5f311dc470f90042b8635d7f2de692a4314e6c9",
+    "43ea80b6015011d94a860264d7ea0d68d12e5220184d8353c26474dd5b313fe8",
+    "f6e29da56b37213f91c6d155b7f7258e0980e19483152286c8db9e6a30f04cc3",
+    "1d7beeb9dd0e22bca32462fdad38522384784b98bb92fe173ac8a72a7e1e9026"
+  ]
+}

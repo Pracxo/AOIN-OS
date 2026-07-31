@@ -1,0 +1,10 @@
+{
+  "capability_id": "connector.reference.read.simulate",
+  "schema": {
+    "additionalProperties": true,
+    "type": "object"
+  },
+  "schema_fingerprint": "1b3cc4cb1e63c370414250550b891c6f0ccbcf426df6a51b66b29629c88bcfc6",
+  "schema_id": "connector.reference.read.simulate:output",
+  "schema_version": "aion-capability-runtime-output-schema/v1"
+}

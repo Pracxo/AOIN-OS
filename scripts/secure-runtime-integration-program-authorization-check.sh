@@ -315,15 +315,23 @@ program_example = load_json("examples/secure-runtime-integration/program-authori
 auth_example = load_json("examples/secure-runtime-integration/local-operator-runtime-authorization.json")
 
 
-# AION-234_CURRENT_STATE_FAST_PATH
-if program.get("program_state") == "model_gateway_evaluated_sandboxed_capability_runtime_authorized_not_implemented":
+# AION-234/AION-235_CURRENT_STATE_FAST_PATH
+post_aion234_states = {
+    "model_gateway_evaluated_sandboxed_capability_runtime_authorized_not_implemented": False,
+    "sandboxed_capability_runtime_implemented_reference_only_pending_closeout": True,
+}
+if program.get("program_state") in post_aion234_states:
     require(program["active_sri_implementation_authorization_count"] == 1, "active SRI count mismatch")
     require(program["active_sri_implementation_authorization"] == "AION-234-SRI-0003", "active SRI auth mismatch")
     require(program["active_sri_implementation_task"] == "AION-235", "active SRI task mismatch")
     require(program["formal_closeout_task"] == "AION-236", "formal closeout mismatch")
     require(program["model_gateway_operator_evaluation_passed"] is True, "AION-234 evaluation missing")
     require(program["sandboxed_capability_runtime_authorized"] is True, "capability runtime auth missing")
-    require(program["sandboxed_capability_runtime_implemented"] is False, "capability runtime implemented")
+    expected_implemented = post_aion234_states[program["program_state"]]
+    require(
+        program["sandboxed_capability_runtime_implemented"] is expected_implemented,
+        "capability runtime implementation state mismatch",
+    )
     require(auth["authorization_transaction_id"] == "AION-234-SRI-0003", "auth ledger active id mismatch")
     require(auth["implementation_task"] == "AION-235", "auth implementation task mismatch")
     require(auth["formal_closeout_task"] == "AION-236", "auth closeout mismatch")

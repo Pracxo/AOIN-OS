@@ -1,0 +1,34 @@
+{
+  "approval_records": [
+    {
+      "action": "capability_runtime.execute.reference",
+      "actor_context_fingerprint": "51116b42036b5d60ff9683510b0a49d8a6794841c277eeaff2a2e938280f5f15",
+      "approval_decision_id": "approval-decision-example-request-001",
+      "approval_id": "approval-example-request-001",
+      "approval_request_id": "approval-request-example-request-001",
+      "approved": true,
+      "approver_id": "operator-approver-AION-235",
+      "budget_fingerprint": "37c820d5e44dc57312a888c8e6fb74f004da14ef6fcbb865a73e534d52fba354",
+      "cancelled": false,
+      "capability_id": "capability_runtime.audit.read",
+      "connector_id": null,
+      "created_at": "2026-07-31T20:00:00Z",
+      "decision": "approve",
+      "evidence_fingerprint": "31bea3611ee69c2b3cb7f25efbdeee466d02d8646a46ed6fae10ff00586da63e",
+      "execution_plan_fingerprint": "211ddfbcf26ca6d1dd1f752718ecb74561b322d8f959c198db08f58cef606c80",
+      "expires_at": "2026-07-31T20:10:00Z",
+      "external_effect_authority": false,
+      "guardrail_binding_fingerprint": "f22177a24cce5487cdc727cc6eb1efb5ccdf1ea0c9af227679a6629fa39cf01a",
+      "policy_binding_fingerprint": "4757886d94165eadb664cb0c0574b7367c74e5834c742a4ae9b17572c03542fa",
+      "request_id": "example-request-001",
+      "requester_id": "operator-requester-AION-235",
+      "resource": "capability_execution_plan",
+      "risk_binding_fingerprint": "984ccfd7c5ac635243b2d0d6ecf9d0457198eb17202130618ab5aa842034dd61",
+      "sandbox_profile_fingerprint": "d3f2cc2b9f058a0843f296c96001be8a996e8c7316ee90c0e8362f2fc9345448",
+      "schema_version": "aion-capability-runtime-approval/v1",
+      "scope": "capability-runtime:execute-reference",
+      "session_id": "example-capability-runtime-session"
+    }
+  ],
+  "bundle_fingerprint": "fb202af612256d1e96e07450a36646ebbaafde4b67d92c0c8fa307b7ddd642c7"
+}

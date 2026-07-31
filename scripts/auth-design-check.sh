@@ -1538,9 +1538,12 @@ def is_secure_runtime_integration_artifact(name: str) -> bool:
         or name == "scripts/secure-runtime-local-operator-run.py"
         or name == "services/brain-api/src/aion_brain/contracts/secure_runtime.py"
         or name == "services/brain-api/src/aion_brain/contracts/model_gateway.py"
+        or name == "services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime.py"
         or name.startswith("services/brain-api/src/aion_brain/model_gateway/")
+        or name.startswith("services/brain-api/src/aion_brain/capability_runtime/")
         or name == "services/brain-api/tests/model_gateway_aion233_test_support.py"
         or name.startswith("services/brain-api/src/aion_brain/secure_runtime/")
+        or name == "services/brain-api/tests/capability_runtime_test_support.py"
         or name == "services/brain-api/tests/secure_runtime_aion232_test_helpers.py"
         or name == "services/brain-api/tests/secure_runtime_test_support.py"
         or name.startswith("services/brain-api/tests/test_model_gateway_")

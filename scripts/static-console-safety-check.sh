@@ -357,11 +357,29 @@ allowed_authorization_demo_names = {
     "secure-runtime-integration-authorization.json",
     "secure-runtime-foundation-operator-evaluation.json",
     "model-gateway-authorization.json",
+    "capability-runtime-approval-evidence.json",
+    "capability-runtime-audit.json",
     "capability-runtime-authorization.json",
     "capability-runtime-budget.json",
+    "capability-runtime-component-binding.json",
+    "capability-runtime-connector-preview.json",
     "capability-runtime-execution-plan.json",
+    "capability-runtime-execution-receipt.json",
+    "capability-runtime-guardrail-binding.json",
+    "capability-runtime-health.json",
+    "capability-runtime-integrity.json",
+    "capability-runtime-local-sandbox-pilot-evidence.json",
     "capability-runtime-manifests.json",
+    "capability-runtime-model-proposal-binding.json",
+    "capability-runtime-observability.json",
+    "capability-runtime-policy-binding.json",
+    "capability-runtime-request-envelope.json",
+    "capability-runtime-risk-binding.json",
+    "capability-runtime-rollback.json",
+    "capability-runtime-runtime-boundary.json",
     "capability-runtime-runtime-hold.json",
+    "capability-runtime-sandbox-decision.json",
+    "capability-runtime-sandbox-profile.json",
     "capability-runtime-sandbox.json",
 }
 secure_runtime_evaluation_demo_names = {
@@ -392,6 +410,32 @@ model_gateway_demo_names = {
     "model-gateway-session-plan.json",
     "model-gateway-static-console-evidence.json",
     "model-gateway-operator-evaluation.json",
+}
+capability_runtime_demo_names = {
+    "capability-runtime-approval-evidence.json",
+    "capability-runtime-audit.json",
+    "capability-runtime-authorization.json",
+    "capability-runtime-budget.json",
+    "capability-runtime-component-binding.json",
+    "capability-runtime-connector-preview.json",
+    "capability-runtime-execution-plan.json",
+    "capability-runtime-execution-receipt.json",
+    "capability-runtime-guardrail-binding.json",
+    "capability-runtime-health.json",
+    "capability-runtime-integrity.json",
+    "capability-runtime-local-sandbox-pilot-evidence.json",
+    "capability-runtime-manifests.json",
+    "capability-runtime-model-proposal-binding.json",
+    "capability-runtime-observability.json",
+    "capability-runtime-policy-binding.json",
+    "capability-runtime-request-envelope.json",
+    "capability-runtime-risk-binding.json",
+    "capability-runtime-rollback.json",
+    "capability-runtime-runtime-boundary.json",
+    "capability-runtime-runtime-hold.json",
+    "capability-runtime-sandbox-decision.json",
+    "capability-runtime-sandbox-profile.json",
+    "capability-runtime-sandbox.json",
 }
 aion161_allowed_policy_markers = {
     "runtime_private_key",
@@ -427,7 +471,7 @@ def walk(value: object, path: Path) -> None:
                 "credential",
                 "token",
                 "hidden_reasoning",
-            } and path.name in model_gateway_demo_names:
+            } and path.name in model_gateway_demo_names | capability_runtime_demo_names:
                 continue
             if marker == "sk-" and not re.search(r"\bsk-[a-z0-9_-]{12,}", lowered):
                 continue
@@ -495,6 +539,25 @@ for path in sorted((static_dir / "demo-data").glob("*.json")):
             if payload.get(key) is not False:
                 raise SystemExit(f"{key} must be false in {path}")
         if payload.get("program_id") != "AION-SECURE-RUNTIME-INTEGRATION-001":
+            raise SystemExit(f"program_id mismatch in {path}")
+    if path.name in capability_runtime_demo_names:
+        for key in (
+            "external_effect",
+            "network_effect",
+            "filesystem_effect",
+            "process_effect",
+            "credential_effect",
+            "token_effect",
+            "runtime_effect",
+            "production_effect",
+            "production_exposure",
+        ):
+            if key in payload and payload.get(key) is not False:
+                raise SystemExit(f"{key} must be false in {path}")
+        if (
+            "program_id" in payload
+            and payload.get("program_id") != "AION-SECURE-RUNTIME-INTEGRATION-001"
+        ):
             raise SystemExit(f"program_id mismatch in {path}")
     walk(payload, path)
 

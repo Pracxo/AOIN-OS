@@ -15,8 +15,8 @@ from test_secure_runtime_integration_program_charter import (
 def test_project_status_reconciles_current_secure_runtime_program_state() -> None:
     status = read_text("docs/project-status.md")
 
-    assert "AION-230 Secure Runtime Integration Program authorized" in status
-    assert "AION-231 controlled authenticated local operator runtime foundation" in status
+    assert "Current milestone: AION-235 sandboxed deterministic capability" in status
+    assert "Current task: AION-236 capability-runtime operator evaluation" in status
     assert PROGRAM_ID in status
     assert AUTH_ID in status
     assert CURRENT_AUTH_ID in status
@@ -27,12 +27,11 @@ def test_project_status_reconciles_current_secure_runtime_program_state() -> Non
     assert "AION-233" in status
     assert CURRENT_CLOSEOUT_TASK in status
     assert "AION-234" in status
-    assert "active_glm_implementation_authorization_count=0" in status
-    assert "provider network egress remains disabled" in status
-    assert "connectors remain disabled" in status
-    assert "tools remain disabled" in status
-    assert "modules remain disabled" in status
-    assert "production runtime remains disabled" in status
+    assert "model_output_triggered_execution_enabled=false" in status
+    assert "external_connector_execution_enabled=false" in status
+    assert "external_tool_execution_enabled=false" in status
+    assert "public_network_access_enabled=false" in status
+    assert "production_runtime_authorized=false" in status
     assert "v0.2 remains unreleased" in status
 
 

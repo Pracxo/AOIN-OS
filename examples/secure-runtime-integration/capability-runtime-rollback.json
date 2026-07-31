@@ -1,0 +1,19 @@
+{
+  "external_effect": false,
+  "production_effect": false,
+  "request_id": "example-service-request",
+  "rollback_completed": true,
+  "rollback_fingerprint": "2376cd7f29f639a7508489783bafa68cb0e583733bd5834cf03d0a1560303b11",
+  "rollback_id": "rollback-example-service-request",
+  "schema_version": "aion-capability-runtime-rollback/v1",
+  "steps": [
+    "discard_transient_input",
+    "discard_transient_output",
+    "discard_connector_preview",
+    "release_fixture_snapshot",
+    "release_request_record",
+    "invalidate_pending_receipt",
+    "close_request",
+    "preserve_redacted_evidence"
+  ]
+}

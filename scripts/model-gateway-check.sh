@@ -88,6 +88,11 @@ ROOT = Path(os.environ["AION_REPO_ROOT"])
 PROGRAM_STATES = {
     "controlled_model_gateway_implemented_reference_simulation_only_pending_closeout",
     "model_gateway_evaluated_sandboxed_capability_runtime_authorized_not_implemented",
+    "sandboxed_capability_runtime_implemented_reference_only_pending_closeout",
+}
+POST_CLOSEOUT_STATES = {
+    "model_gateway_evaluated_sandboxed_capability_runtime_authorized_not_implemented",
+    "sandboxed_capability_runtime_implemented_reference_only_pending_closeout",
 }
 GATEWAY_STATES = {
     "implemented_provider_neutral_reference_simulation_only_pending_AION-234_closeout",
@@ -262,10 +267,7 @@ for required_method in (
         raise SystemExit(f"gateway service method missing: {required_method}")
 
 for payload in (program, auth):
-    post_closeout = (
-        payload["program_state"]
-        == "model_gateway_evaluated_sandboxed_capability_runtime_authorized_not_implemented"
-    )
+    post_closeout = payload["program_state"] in POST_CLOSEOUT_STATES
     if payload["program_state"] not in PROGRAM_STATES:
         raise SystemExit("program state mismatch")
     if payload["model_gateway_authorized"] is not True or payload["model_gateway_implemented"] is not True:
@@ -327,7 +329,7 @@ if program["secure_runtime_foundation_operator_evaluation_passed"] is not True:
 record = program["aion_233_record"]
 if record["task_id"] != "AION-233" or record["branch"] != "phase/controlled-model-gateway":
     raise SystemExit("AION-233 record identity mismatch")
-if program["program_state"] == "model_gateway_evaluated_sandboxed_capability_runtime_authorized_not_implemented":
+if program["program_state"] in POST_CLOSEOUT_STATES:
     if record["feature_commits"] != [
         "39b886614fa8d6961492c1c076dd25d7eb16f5f5",
         "9612d9d7455a7e504cd5def5ae71f7fe6bb9fa65",
