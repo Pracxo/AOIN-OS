@@ -20,10 +20,13 @@ def test_project_status_reconciles_current_secure_runtime_program_state() -> Non
     assert PROGRAM_ID in status
     assert AUTH_ID in status
     assert CURRENT_AUTH_ID in status
+    assert "AION-232-SRI-0002" in status
     assert IMPLEMENTATION_TASK in status
     assert CLOSEOUT_TASK in status
     assert CURRENT_IMPLEMENTATION_TASK in status
+    assert "AION-233" in status
     assert CURRENT_CLOSEOUT_TASK in status
+    assert "AION-234" in status
     assert "active_glm_implementation_authorization_count=0" in status
     assert "provider network egress remains disabled" in status
     assert "connectors remain disabled" in status

@@ -1,0 +1,22 @@
+{
+  "authorization_transaction_id": "AION-234-SRI-0003",
+  "browser_enabled": false,
+  "directory_mutation_enabled": false,
+  "dns_enabled": false,
+  "dynamic_import_enabled": false,
+  "eval_enabled": false,
+  "exec_enabled": false,
+  "execution_scope": "deterministic_in_memory_reference_operations_only",
+  "external_connector_execution_enabled": false,
+  "external_tool_execution_enabled": false,
+  "filesystem_read_enabled": false,
+  "filesystem_write_enabled": false,
+  "module_activation_enabled": false,
+  "network_enabled": false,
+  "package_installation_enabled": false,
+  "process_spawn_enabled": false,
+  "runtime_implemented": false,
+  "sandbox_profile_id": "in-memory-reference-sandbox",
+  "shell_enabled": false,
+  "subprocess_enabled": false
+}

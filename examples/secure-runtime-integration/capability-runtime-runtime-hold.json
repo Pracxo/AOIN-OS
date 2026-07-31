@@ -1,0 +1,23 @@
+{
+  "authorization_transaction_id": "AION-234-SRI-0003",
+  "automatic_capability_execution_enabled": false,
+  "capability_runtime_authorized": true,
+  "capability_runtime_implemented": false,
+  "credential_persistence_enabled": false,
+  "credential_read_enabled": false,
+  "external_connector_execution_enabled": false,
+  "external_tool_execution_enabled": false,
+  "filesystem_read_enabled": false,
+  "filesystem_write_enabled": false,
+  "hold_id": "AION-234-capability-runtime-runtime-hold",
+  "model_weight_training_enabled": false,
+  "network_enabled": false,
+  "process_spawn_enabled": false,
+  "production_runtime_authorized": false,
+  "read_only": true,
+  "redacted": true,
+  "synthetic": true,
+  "token_persistence_enabled": false,
+  "token_read_enabled": false,
+  "v02_release_ready": false
+}

@@ -206,6 +206,27 @@ aion228_is_scoped_continual_learning_compatibility_path() {
   return 1
 }
 
+aion234_is_scoped_model_gateway_evaluation_compatibility_path() {
+  case "$1" in
+    scripts/model-gateway-operator-evaluation-check.sh|\
+    scripts/model-gateway-operator-evaluation-no-go-regression.sh|\
+    scripts/capability-runtime-authorization-check.sh|\
+    scripts/capability-runtime-authorization-no-go-regression.sh|\
+    scripts/capability-runtime-runtime-hold.sh|\
+    scripts/lib/model_gateway_operator_evaluation.py|\
+    services/brain-api/tests/aion234_test_support.py|\
+    services/brain-api/tests/test_capability_runtime_*.py|\
+    services/brain-api/tests/test_model_gateway_aion233_delivery_reconciliation.py|\
+    services/brain-api/tests/test_model_gateway_authorization_closeout.py|\
+    services/brain-api/tests/test_model_gateway_evaluation_*.py|\
+    services/brain-api/tests/test_model_gateway_operator_evaluation.py|\
+    services/brain-api/tests/test_secure_runtime_current_state_after_aion234.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 changed_entries() {
   local base
   if base="$(comparison_base)"; then
@@ -236,6 +257,9 @@ while IFS=$'\t' read -r status path extra; do
       continue
     fi
     if aion228_is_scoped_continual_learning_compatibility_path "$changed"; then
+      continue
+    fi
+    if aion234_is_scoped_model_gateway_evaluation_compatibility_path "$changed"; then
       continue
     fi
     if aion231_is_scoped_secure_runtime_foundation_path "$changed"; then

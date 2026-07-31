@@ -2859,3 +2859,9 @@ AION-232 evaluated the AION-231 local secure-runtime foundation through `AION-SR
 AION-233 implements the provider-neutral model-gateway control plane as local deterministic reference simulation only. The architecture composes AION-231 through `brain.think.simulate`, requires parent guard outcome `allow_simulation`, and binds model requests to immutable provider and model manifests, closed allowlists, message/context normalization, context and token budgets, deterministic fingerprints, idempotency, route/fallback/retry/circuit-breaker/cost/latency planning, response validation, untrusted-output classification, provenance, audit, observability, health, integrity, and redacted pilot evidence.
 
 The deterministic reference provider is local and not a live provider. Provider calls, network egress, provider SDKs, credentials, tokens, authorization headers, live model sessions, prompt persistence, response persistence, hidden reasoning retention, raw provider payload retention, connectors, tools, functions, memory writes, policy mutation, belief mutation, source rewrite, deployment, model training, v0.2 tags, and v0.2 release readiness remain disabled. AION-234 is the next formal evaluation and closeout task.
+
+## AION-234 Model-Gateway Evaluation
+
+AION-234 records `AION-SRIPE-002` as a PASS evaluation of the merged AION-233 controlled provider-neutral model gateway. The gateway remains implemented as a deterministic reference-simulation plane. Model output is untrusted proposal material and cannot trigger execution.
+
+The next authorized layer is `AION-234-SRI-0003` for AION-235. It authorizes a sandboxed deterministic capability runtime only for closed, in-memory reference capabilities and synthetic reference connectors. External effects remain disabled. final Git evidence reconciliation is recorded by PR #147 for the completed Governed Learning and Memory parent program.

@@ -14,3 +14,7 @@ AION-230 created the Secure Runtime Integration Program after completion of the 
 ## Runtime Boundary
 
 AION-231 remains implemented as the controlled authenticated local operator runtime foundation. AION-233 composes it for model-gateway simulation planning, deterministic reference-provider simulation, untrusted output validation, provenance, audit, observability, health, and integrity evidence. Production authentication runtime, external identity providers, credentials, tokens, network calls, live model providers, connectors, tools, shell commands, subprocesses, browser automation, module activation, production writes, production memory, production policy, belief mutation, source rewrite, Git mutation, deployment, model training, v0.2 tagging, and v0.2 release creation remain disabled or absent.
+
+## AION-234 Closeout State
+
+AION-234 closes `AION-232-SRI-0002` as consumed by AION-233 after `AION-SRIPE-002` passed. `AION-234-SRI-0003` is the sole active Secure Runtime Integration authorization. The program does not reopen any parent program and inherits no active parent-program implementation authorization. `AION-230-SRI-0001` is closed. AION-231 remains implemented. AION-235 is authorized but not implemented; AION-236 is the next formal evaluation.

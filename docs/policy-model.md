@@ -2574,3 +2574,9 @@ AION-229 final evaluation AION-GLMPE-004 passed all 28 deterministic hard-gated 
 AION-233 implements the controlled model gateway while keeping policy fail-closed for live effects. Policy, risk, guardrails, approval evidence, protected-material checks, context budgets, token budgets, route planning, circuit-breaker state, output validation, untrusted classification, provenance, audit, observability, and integrity must all pass before redacted simulation evidence can be recorded.
 
 No approval under `AION-232-SRI-0002` may authorize live provider egress, provider SDK usage, credentials, tokens, authorization headers, live model sessions, tool calls, function calls, connector execution, prompt persistence, response persistence, memory writes, policy mutation, belief mutation, source rewrite, deployment, model training, v0.2 tags, or v0.2 release readiness.
+
+## AION-234 Model-Gateway Evaluation
+
+AION-234 records `AION-SRIPE-002` as a PASS evaluation of the merged AION-233 controlled provider-neutral model gateway. The gateway remains implemented as a deterministic reference-simulation plane. Model output is untrusted proposal material and cannot trigger execution.
+
+The next authorized layer is `AION-234-SRI-0003` for AION-235. It authorizes a sandboxed deterministic capability runtime only for closed, in-memory reference capabilities and synthetic reference connectors. External effects remain disabled. final Git evidence reconciliation is recorded by PR #147 for the completed Governed Learning and Memory parent program.

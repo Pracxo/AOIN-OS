@@ -129,6 +129,7 @@ python3 - "$ROOT_DIR" <<'PY'
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -465,6 +466,7 @@ for path in sorted(demo_dir.glob("*.json")):
             "model-gateway-runtime-hold.json",
             "model-gateway-session-plan.json",
             "model-gateway-static-console-evidence.json",
+            "model-gateway-operator-evaluation.json",
         }
         if path.name not in allowed_names:
             raise SystemExit(f"unknown model gateway demo: {path}")
@@ -1275,6 +1277,12 @@ for path in sorted(demo_dir.glob("*.json")):
         "governed-learning-memory-program-final-evaluation.json",
         "governed-learning-memory-program-final-lineage.json",
         "governed-learning-memory-program-final-runtime-boundary.json",
+        "capability-runtime-authorization.json",
+        "capability-runtime-budget.json",
+        "capability-runtime-execution-plan.json",
+        "capability-runtime-manifests.json",
+        "capability-runtime-runtime-hold.json",
+        "capability-runtime-sandbox.json",
     }
     blocked = (
         "raw_prompt",
@@ -1291,6 +1299,8 @@ for path in sorted(demo_dir.glob("*.json")):
     )
     for value in blocked:
         if value == "authorization" and path.name in allowed_authorization_demo_names:
+            continue
+        if value == "sk-" and not re.search(r"\bsk-[a-z0-9_-]{12,}", serialized):
             continue
         if value == "password" and path.name in {
             "v02-production-auth-authorization.json",

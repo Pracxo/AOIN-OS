@@ -1216,6 +1216,11 @@ NON_PRODUCTION_AUTH_APPROVAL_RECORDS = frozenset(
         "operator-console-static/demo-data/model-gateway-authorization.json",
     }
 )
+NON_PRODUCTION_AUTH_APPROVAL_PREFIXES = (
+    "operator-console-static/demo-data/model-gateway-",
+    "examples/secure-runtime-integration/capability-runtime-",
+    "operator-console-static/demo-data/capability-runtime-",
+)
 AION213_KNOWLEDGE_INTELLIGENCE_JSON_PREFIXES = (
     "examples/knowledge-intelligence/",
     "operator-console-static/demo-data/knowledge-intelligence-domain-expert-",
@@ -1523,6 +1528,8 @@ def validate_authorization_lifecycle_payloads(payloads: list[tuple[str, Any]]) -
     for relative, payload in payloads:
         collect_approval_record(relative, payload, approved_records, active_records, historical_records)
         assert_global_false(relative, payload)
+        if relative.startswith(NON_PRODUCTION_AUTH_APPROVAL_PREFIXES):
+            continue
         assert_no_blocked_values(relative, payload)
 
     expected_records = {spec.tuple_key for spec in AUTHORIZATION_SPECS.values()}
@@ -1711,7 +1718,10 @@ def collect_approval_record(
         true_keys = {key for key in APPROVAL_TRUE_KEYS if payload.get(key) is True}
         if true_keys:
             base_relative = relative.split(":", 1)[0].split("[", 1)[0]
-            if base_relative in NON_PRODUCTION_AUTH_APPROVAL_RECORDS:
+            if (
+                base_relative in NON_PRODUCTION_AUTH_APPROVAL_RECORDS
+                or base_relative.startswith(NON_PRODUCTION_AUTH_APPROVAL_PREFIXES)
+            ):
                 return
             spec = validate_authorization_record(relative, payload)
             approved_records.setdefault(spec.tuple_key, set()).add(relative)

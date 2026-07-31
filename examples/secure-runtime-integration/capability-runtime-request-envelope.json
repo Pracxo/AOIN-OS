@@ -1,0 +1,23 @@
+{
+  "authorization_transaction_id": "AION-234-SRI-0003",
+  "capability_id": "capability.text.normalize",
+  "credential_reference_present": false,
+  "explicit_operator_capability_selection": "capability.text.normalize",
+  "external_effect": false,
+  "input_fingerprint": "preview-input-fingerprint-redacted",
+  "input_schema": {
+    "additionalProperties": false,
+    "required": [
+      "text"
+    ],
+    "type": "object"
+  },
+  "operator_session_required": true,
+  "parent_model_gateway_evaluation_id": "AION-SRIPE-002",
+  "parent_model_gateway_output_classification": "untrusted_proposal",
+  "production_effect": false,
+  "raw_input_retained": false,
+  "request_id": "capability-request-AION-235-preview-001",
+  "runtime_implemented": false,
+  "token_reference_present": false
+}
