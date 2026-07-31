@@ -25,6 +25,7 @@ AION232 = "AION-232-SRI-0002"
 AION231_FEATURE = "45540009d03f60d7477330a88946e73705ee60e5"
 AION231_MERGE = "8bb9af29cc2cf960d9efdfe2ee323d7245812747"
 AION231_MERGED_AT = "2026-07-30T19:45:59Z"
+AION233_MERGE = "555459ab86f714ccaa0a05e60d306fa3cc61c043"
 MODEL_GATEWAY_SCOPE = (
     "authenticated-local-model-request-envelope-provider-model-manifest-closed-allowlist-"
     "context-token-budget-redaction-routing-fallback-retry-circuit-breaker-cost-latency-"
@@ -140,6 +141,28 @@ def changed_paths_since_main() -> set[str]:
             return diff_paths("HEAD~1")
         return set()
 
+    def historic_merge_changed_paths(merge_commit: str) -> set[str]:
+        if not ref_exists(merge_commit):
+            run(["git", "fetch", "--no-tags", "origin", "main"])
+
+        if ref_exists(merge_commit) and not ref_exists(f"{merge_commit}^1"):
+            fetch = run(["git", "fetch", "--no-tags", "--deepen=50", "origin", "main"])
+            if fetch.returncode != 0:
+                run(
+                    [
+                        "git",
+                        "fetch",
+                        "--no-tags",
+                        "--depth=100",
+                        "origin",
+                        "+refs/heads/main:refs/remotes/origin/main",
+                    ]
+                )
+
+        if ref_exists(merge_commit) and ref_exists(f"{merge_commit}^1"):
+            return diff_paths(f"{merge_commit}^1", merge_commit)
+        return set()
+
     changed: set[str] = set()
 
     candidates: list[str] = []
@@ -178,4 +201,5 @@ def changed_paths_since_main() -> set[str]:
     ).stdout.splitlines():
         if line.startswith("?? "):
             changed.add(line[3:])
+    changed.update(historic_merge_changed_paths(AION233_MERGE))
     return changed
