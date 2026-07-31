@@ -1,0 +1,32 @@
+{
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "synthetic": true,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "production_effect": false,
+  "forbidden_actions": [
+    "self_repair",
+    "source_rewrite",
+    "deployment",
+    "model_training"
+  ],
+  "integrity_passed": true,
+  "sections": [
+    {
+      "refs": [
+        "audit_chain",
+        "closed allowlists",
+        "zero prohibited counters"
+      ],
+      "status": "passed",
+      "summary": "Integrity confirms redacted evidence and zero prohibited effects.",
+      "title": "Gateway Integrity"
+    }
+  ],
+  "status": "implemented",
+  "summary": "Integrity findings cannot execute repair or production actions.",
+  "title": "Gateway Integrity",
+  "view": "model_gateway_integrity"
+}

@@ -78,9 +78,12 @@ AION-230 created the separate Secure Runtime Integration Program and authorized
 AION-231 only for a controlled, authenticated, operator-invoked, local secure
 runtime foundation.
 
-AION-231 implements that secure local runtime foundation. It does not close all
-v0.2 release blockers, does not authorize model-gateway, connector, module,
-production, deployment, or release work, and does not make v0.2 release-ready.
+AION-231 implements that secure local runtime foundation. AION-232 evaluated it
+and authorized AION-233. AION-233 now implements the controlled
+provider-neutral model gateway as deterministic local reference simulation only.
+This does not close all v0.2 release blockers, does not authorize connector,
+module, production, deployment, or release work, and does not make v0.2
+release-ready.
 Historical scope marker: AION-230 addresses only the secure local runtime
 foundation authorization.
 AION-230 addresses only the secure local runtime foundation authorization.
@@ -92,8 +95,8 @@ AION-230 creates `AION-SECURE-RUNTIME-INTEGRATION-001` and
 `AION-230-SRI-0001` as the sole active Secure Runtime Integration
 implementation authorization for AION-231. AION-231 is authorized for local
 operator runtime foundation work only and has implemented the local,
-simulation-only foundation. AION-232 is the formal operator
-evaluation and next-authorization decision task. AION-233 through AION-238
+simulation-only foundation. AION-232 is complete. AION-233 is implemented
+pending AION-234 formal evaluation and closeout. AION-235 through AION-238
 remain planned and unauthorized.
 
 Production authentication runtime, external identity providers, credentials,

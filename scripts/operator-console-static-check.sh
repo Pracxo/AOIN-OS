@@ -442,12 +442,29 @@ for path in sorted(demo_dir.glob("*.json")):
         continue
     if path.name.startswith("model-gateway-"):
         allowed_names = {
+            "model-gateway-audit.json",
             "model-gateway-authorization.json",
             "model-gateway-budget.json",
+            "model-gateway-circuit-breaker.json",
+            "model-gateway-component-binding.json",
+            "model-gateway-fallback-plan.json",
+            "model-gateway-guard.json",
+            "model-gateway-health.json",
+            "model-gateway-integrity.json",
+            "model-gateway-message-normalization.json",
+            "model-gateway-model-manifests.json",
+            "model-gateway-observability.json",
+            "model-gateway-output-provenance.json",
             "model-gateway-output-validation.json",
+            "model-gateway-pilot-evidence.json",
             "model-gateway-provider-manifest.json",
+            "model-gateway-reference-provider-response.json",
+            "model-gateway-retry-plan.json",
             "model-gateway-routing-plan.json",
+            "model-gateway-runtime-boundary.json",
             "model-gateway-runtime-hold.json",
+            "model-gateway-session-plan.json",
+            "model-gateway-static-console-evidence.json",
         }
         if path.name not in allowed_names:
             raise SystemExit(f"unknown model gateway demo: {path}")

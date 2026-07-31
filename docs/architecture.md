@@ -2852,4 +2852,10 @@ AION-229 final evaluation AION-GLMPE-004 passed all 28 deterministic hard-gated 
 
 ## Secure Runtime Model Gateway Authorization
 
-AION-232 evaluated the AION-231 local secure-runtime foundation through `AION-SRIPE-001` and authorized AION-233 under `AION-232-SRI-0002`. The model gateway is provider-neutral and simulation-only until later evaluation. Provider calls, network egress, credentials, tokens, connectors, tools, memory writes, policy mutation, belief mutation, source rewrite, deployment, model training, and v0.2 release readiness remain disabled. The Governed Learning and Memory Program final Git evidence reconciliation is recorded by PR #147.
+AION-232 evaluated the AION-231 local secure-runtime foundation through `AION-SRIPE-001` and authorized AION-233 under `AION-232-SRI-0002`.
+
+## AION-233 Controlled Model Gateway Architecture
+
+AION-233 implements the provider-neutral model-gateway control plane as local deterministic reference simulation only. The architecture composes AION-231 through `brain.think.simulate`, requires parent guard outcome `allow_simulation`, and binds model requests to immutable provider and model manifests, closed allowlists, message/context normalization, context and token budgets, deterministic fingerprints, idempotency, route/fallback/retry/circuit-breaker/cost/latency planning, response validation, untrusted-output classification, provenance, audit, observability, health, integrity, and redacted pilot evidence.
+
+The deterministic reference provider is local and not a live provider. Provider calls, network egress, provider SDKs, credentials, tokens, authorization headers, live model sessions, prompt persistence, response persistence, hidden reasoning retention, raw provider payload retention, connectors, tools, functions, memory writes, policy mutation, belief mutation, source rewrite, deployment, model training, v0.2 tags, and v0.2 release readiness remain disabled. AION-234 is the next formal evaluation and closeout task.

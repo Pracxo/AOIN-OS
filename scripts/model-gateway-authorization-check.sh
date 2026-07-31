@@ -11,7 +11,7 @@ export AION_REPO_ROOT="$ROOT_DIR"
 "$PYTHON_BIN" scripts/lib/secure_runtime_foundation_operator_evaluation.py --validate-report examples/secure-runtime-integration/runtime-foundation-operator-evaluation-report.json
 "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
-import json, os, subprocess
+import json, os
 from pathlib import Path
 ROOT = Path(os.environ["AION_REPO_ROOT"])
 REPORT = json.loads((ROOT / "examples/secure-runtime-integration/runtime-foundation-operator-evaluation-report.json").read_text())
@@ -47,32 +47,16 @@ for payload in (AUTH, EXAMPLE):
         raise SystemExit("AION-232 authorization lifecycle mismatch")
 if AUTH["active_sri_implementation_authorization_count"] != 1 or AUTH["active_sri_implementation_authorization"] != AION232 or AUTH["active_sri_implementation_task"] != "AION-233":
     raise SystemExit("sole active SRI authorization mismatch")
-if PROGRAM["formal_closeout_task"] != "AION-234" or PROGRAM["model_gateway_authorized"] is not True or PROGRAM["model_gateway_implemented"] is not False:
+if PROGRAM["formal_closeout_task"] != "AION-234" or PROGRAM["model_gateway_authorized"] is not True or PROGRAM["model_gateway_implemented"] is not True:
     raise SystemExit("program model-gateway state mismatch")
+if PROGRAM.get("model_gateway_state") != "implemented_provider_neutral_reference_simulation_only_pending_AION-234_closeout":
+    raise SystemExit("program model-gateway implemented state mismatch")
 if not all(AUTH["model_gateway_authorized_capabilities"].values()):
     raise SystemExit("not every model-gateway authorized capability is true")
 if any(AUTH["model_gateway_prohibited_capabilities"].values()):
     raise SystemExit("a prohibited model-gateway capability is true")
 if any(value != 0 for key, value in AUTH["model_gateway_resource_limits"].items() if key.startswith("maximum_public_network") or key in {"maximum_model_provider_calls", "maximum_provider_sdk_calls", "maximum_provider_endpoint_connections", "maximum_provider_credentials_read", "maximum_api_keys_persisted", "maximum_tokens_persisted", "maximum_live_model_sessions", "maximum_tool_calls", "maximum_function_calls", "maximum_connector_calls", "maximum_actual_tool_executions", "maximum_deployments", "maximum_model_weight_changes"}):
     raise SystemExit("zero-effect resource limit mismatch")
-def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(args, cwd=ROOT, text=True, capture_output=True, check=check)
-base = None
-for candidate in ["origin/main", "main"]:
-    if run(["git", "rev-parse", "--verify", "--quiet", candidate], check=False).returncode == 0:
-        mb = run(["git", "merge-base", "HEAD", candidate], check=False)
-        if mb.returncode == 0 and mb.stdout.strip():
-            base = mb.stdout.strip(); break
-changed = run(["git", "diff", "--name-only", base, "HEAD"]).stdout.splitlines() if base else []
-changed += run(["git", "diff", "--name-only"]).stdout.splitlines()
-changed += run(["git", "diff", "--cached", "--name-only"]).stdout.splitlines()
-for line in run(["git", "status", "--porcelain=v1", "--untracked-files=all"]).stdout.splitlines():
-    if line.startswith("?? "):
-        changed.append(line[3:])
-for path in changed:
-    normalized = path.replace("\\", "/")
-    if normalized == "services/brain-api/src/aion_brain/contracts/model_gateway.py" or normalized.startswith("services/brain-api/src/aion_brain/model_gateway/"):
-        raise SystemExit(f"AION-233 source changed on AION-232 branch: {normalized}")
 PY
 
 echo "controlled model gateway authorization PASS"

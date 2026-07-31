@@ -5,7 +5,7 @@
     "deterministic-reference-provider"
   ],
   "credential_free": true,
-  "manifest_id": "provider-manifest-AION-233-preview",
+  "manifest_id": "provider-manifest-AION-233-implemented",
   "production_effect": false,
   "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
   "provider_id": "deterministic-reference-provider",

@@ -1206,6 +1206,88 @@ AION232_ALLOWED_PREFIXES = (
     "services/brain-api/tests/test_secure_runtime_integration_",
 )
 
+AION233_ALLOWED_EXACT_PATHS = {
+    "AGENTS.md",
+    "README.md",
+    "docs/adr/0197-controlled-provider-neutral-model-gateway-and-deterministic-reference-provider.md",
+    "docs/adr/README.md",
+    "docs/architecture.md",
+    "docs/brain-contract.md",
+    "docs/policy-model.md",
+    "docs/project-status.md",
+    "docs/release/v02-release-readiness-delta.md",
+    "docs/visual-brain.md",
+    "operator-console-static/README.md",
+    "operator-console-static/app.js",
+    "operator-console-static/index.html",
+    "scripts/auth-design-check.sh",
+    "scripts/connector-runtime-no-external-call-regression.sh",
+    "scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-domain-expert-mesh-operator-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-epistemic-assessment-operator-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-integrated-research-agent-operator-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh",
+    "scripts/knowledge-intelligence-tool-verification-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh",
+    "scripts/knowledge-intelligence-verified-memory-operator-evaluation-no-go-regression.sh",
+    "scripts/lib/cognitive_architecture_governance.py",
+    "scripts/lib/secure_runtime_foundation_operator_evaluation.py",
+    "scripts/lib/v02-production-auth-scan-exclusions.sh",
+    "scripts/operator-action-write-path-no-go-regression.sh",
+    "scripts/operator-console-static-check.sh",
+    "scripts/production-auth-actor-context-trust-boundary-no-go-regression.sh",
+    "scripts/production-auth-architecture-check.sh",
+    "scripts/production-auth-core-no-go-regression.sh",
+    "scripts/production-auth-core-stabilization-no-go-regression.sh",
+    "scripts/production-auth-identity-assertion-replay-no-go-regression.sh",
+    "scripts/production-auth-offline-identity-assertion-check.sh",
+    "scripts/production-auth-offline-identity-assertion-no-go-regression.sh",
+    "scripts/production-auth-request-identity-no-go-regression.sh",
+    "scripts/production-auth-request-identity-stabilization-no-go-regression.sh",
+    "scripts/secure-runtime-foundation-no-go-regression.sh",
+    "scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh",
+    "scripts/secure-runtime-integration-program-authorization-check.sh",
+    "scripts/secure-runtime-integration-program-no-go-regression.sh",
+    "scripts/static-console-safety-check.sh",
+    "scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh",
+    "scripts/v02-identity-assertion-replay-protection-authorization-no-go-regression.sh",
+    "scripts/v02-offline-identity-assertion-verification-authorization-no-go-regression.sh",
+    "scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh",
+    "services/brain-api/src/aion_brain/contracts/model_gateway.py",
+    "services/brain-api/src/aion_brain/model_gateway/__init__.py",
+    "services/brain-api/src/aion_brain/model_gateway/audit.py",
+    "services/brain-api/src/aion_brain/model_gateway/authorization.py",
+    "services/brain-api/src/aion_brain/model_gateway/circuit_breaker.py",
+    "services/brain-api/src/aion_brain/model_gateway/context_budget.py",
+    "services/brain-api/src/aion_brain/model_gateway/evidence.py",
+    "services/brain-api/src/aion_brain/model_gateway/guard.py",
+    "services/brain-api/src/aion_brain/model_gateway/integrity.py",
+    "services/brain-api/src/aion_brain/model_gateway/manifests.py",
+    "services/brain-api/src/aion_brain/model_gateway/observability.py",
+    "services/brain-api/src/aion_brain/model_gateway/provider_adapter.py",
+    "services/brain-api/src/aion_brain/model_gateway/provider_registry.py",
+    "services/brain-api/src/aion_brain/model_gateway/reference_provider.py",
+    "services/brain-api/src/aion_brain/model_gateway/request_envelope.py",
+    "services/brain-api/src/aion_brain/model_gateway/response_validation.py",
+    "services/brain-api/src/aion_brain/model_gateway/routing.py",
+    "services/brain-api/tests/model_gateway_aion233_test_support.py",
+    "services/brain-api/tests/test_secure_runtime_current_state_after_aion232.py",
+    "services/brain-api/tests/test_secure_runtime_current_state_consistency.py",
+    "services/brain-api/tests/test_secure_runtime_integration_program_charter.py",
+    "services/brain-api/tests/test_secure_runtime_integration_scope.py",
+}
+
+AION233_ALLOWED_PREFIXES = (
+    "docs/secure-runtime-integration/",
+    "docs/release/model-gateway-",
+    "examples/secure-runtime-integration/model-gateway-",
+    "operator-console-static/demo-data/model-gateway-",
+    "scripts/model-gateway-",
+    "services/brain-api/tests/test_model_gateway_",
+)
+
 AION199_ALLOWED_EXACT_PATHS = set(AION199_REQUIRED_FILES) | {
     "scripts/connector-runtime-no-external-call-regression.sh",
     "scripts/cognitive-integrated-evaluation-check.sh",
@@ -11576,7 +11658,7 @@ def _aion202_path_allowed(relative: str) -> bool:
 def _aion203_path_allowed(relative: str) -> bool:
     return relative in AION203_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION203_ALLOWED_PREFIXES
-    ) or _aion205_path_allowed(relative) or _aion231_path_allowed(relative) or _aion232_path_allowed(relative)
+    ) or _aion205_path_allowed(relative) or _aion231_path_allowed(relative) or _aion232_path_allowed(relative) or _aion233_path_allowed(relative)
 
 
 def _aion205_path_allowed(relative: str) -> bool:
@@ -11618,6 +11700,12 @@ def _aion231_path_allowed(relative: str) -> bool:
 def _aion232_path_allowed(relative: str) -> bool:
     return relative in AION232_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION232_ALLOWED_PREFIXES
+    )
+
+
+def _aion233_path_allowed(relative: str) -> bool:
+    return relative in AION233_ALLOWED_EXACT_PATHS or any(
+        relative.startswith(prefix) for prefix in AION233_ALLOWED_PREFIXES
     )
 
 

@@ -217,6 +217,79 @@ aion232_is_scoped_secure_runtime_foundation_evaluation_path() {
   return 1
 }
 
+aion233_is_scoped_controlled_model_gateway_path() {
+  # Exact AION-233 controlled model-gateway implementation, evidence, and
+  # validation paths. This only covers provider-neutral reference simulation
+  # source and static evidence, never API routes, package files, migrations, or
+  # live provider integrations.
+  case "$1" in
+    README.md|\
+    AGENTS.md|\
+    docs/project-status.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/visual-brain.md|\
+    docs/secure-runtime-integration/*|\
+    docs/release/model-gateway-*|\
+    docs/release/v02-release-readiness-delta.md|\
+    docs/adr/0197-controlled-provider-neutral-model-gateway-and-deterministic-reference-provider.md|\
+    docs/adr/README.md|\
+    examples/secure-runtime-integration/model-gateway-*.json|\
+    operator-console-static/README.md|\
+    operator-console-static/app.js|\
+	    operator-console-static/index.html|\
+	    operator-console-static/demo-data/model-gateway-*.json|\
+	    scripts/auth-design-check.sh|\
+	    scripts/connector-runtime-no-external-call-regression.sh|\
+	    scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-domain-expert-mesh-operator-evaluation-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-epistemic-assessment-operator-evaluation-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-integrated-research-agent-operator-evaluation-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-tool-verification-authorization-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-verified-memory-operator-evaluation-no-go-regression.sh|\
+	    scripts/operator-action-write-path-no-go-regression.sh|\
+	    scripts/operator-console-static-check.sh|\
+	    scripts/production-auth-actor-context-trust-boundary-no-go-regression.sh|\
+	    scripts/production-auth-architecture-check.sh|\
+	    scripts/production-auth-core-no-go-regression.sh|\
+	    scripts/production-auth-core-stabilization-no-go-regression.sh|\
+	    scripts/production-auth-identity-assertion-replay-no-go-regression.sh|\
+	    scripts/production-auth-offline-identity-assertion-check.sh|\
+	    scripts/production-auth-offline-identity-assertion-no-go-regression.sh|\
+	    scripts/production-auth-request-identity-no-go-regression.sh|\
+	    scripts/production-auth-request-identity-stabilization-no-go-regression.sh|\
+	    scripts/static-console-safety-check.sh|\
+	    scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh|\
+	    scripts/v02-identity-assertion-replay-protection-authorization-no-go-regression.sh|\
+	    scripts/v02-offline-identity-assertion-verification-authorization-no-go-regression.sh|\
+	    scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh|\
+	    scripts/model-gateway-*.sh|\
+	    scripts/model-gateway-local-simulation-run.py|\
+	    scripts/lib/secure_runtime_foundation_operator_evaluation.py|\
+	    scripts/secure-runtime-foundation-no-go-regression.sh|\
+    scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh|\
+    scripts/secure-runtime-integration-program-authorization-check.sh|\
+    scripts/secure-runtime-integration-program-no-go-regression.sh|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    services/brain-api/src/aion_brain/contracts/model_gateway.py|\
+    services/brain-api/src/aion_brain/model_gateway/*|\
+    services/brain-api/tests/model_gateway_aion233_test_support.py|\
+    services/brain-api/tests/test_model_gateway_*.py|\
+    services/brain-api/tests/test_secure_runtime_current_state_after_aion232.py|\
+    services/brain-api/tests/test_secure_runtime_current_state_consistency.py|\
+    services/brain-api/tests/test_secure_runtime_integration_program_charter.py|\
+    services/brain-api/tests/test_secure_runtime_integration_scope.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 aion151_is_scoped_authorization_path() {
   # Keep these as exact artifact paths. The no-go scanners must never exempt
   # broad directories such as scripts/ or services/brain-api/src/.

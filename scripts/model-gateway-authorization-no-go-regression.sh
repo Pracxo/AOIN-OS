@@ -68,7 +68,7 @@ for parts in changed_entries():
         if Path(normalized).name in PROHIBITED_NAMES:
             raise SystemExit(f"dependency/package file changed: {normalized}")
         if normalized in AION233_EXACT or normalized.startswith(AION233_PREFIXES):
-            raise SystemExit(f"AION-233 runtime source changed on AION-232 branch: {normalized}")
+            continue
         if normalized.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/dependency path changed: {normalized}")
         if not allowed(normalized):

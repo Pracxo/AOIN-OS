@@ -101,6 +101,9 @@ while IFS= read -r file; do
   if aion231_is_scoped_secure_runtime_foundation_path "$file"; then
     continue
   fi
+  if aion233_is_scoped_controlled_model_gateway_path "$file"; then
+    continue
+  fi
 
   if [[ -f "$file" ]] && ! aion160_is_scoped_actor_context_trust_boundary_remediation_path "$file"; then
     printf '%s\n' "$file" >> "$scan_file_list"

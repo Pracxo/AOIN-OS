@@ -1,0 +1,38 @@
+{
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "synthetic": true,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "production_effect": false,
+  "forbidden_actions": [
+    "provider_call",
+    "network_egress",
+    "credential_read",
+    "prompt_persistence",
+    "response_persistence",
+    "tool_execution",
+    "connector_execution",
+    "production_effect"
+  ],
+  "sections": [
+    {
+      "refs": [
+        "authorization",
+        "component binding",
+        "provider manifest",
+        "model manifests",
+        "pilot evidence",
+        "runtime boundary"
+      ],
+      "status": "covered",
+      "summary": "Static console evidence covers every required AION-233 gateway area.",
+      "title": "Static Evidence Coverage"
+    }
+  ],
+  "status": "implemented",
+  "summary": "The static console displays redacted model-gateway evidence only.",
+  "title": "Gateway Static Evidence",
+  "view": "model_gateway_static_console_evidence"
+}

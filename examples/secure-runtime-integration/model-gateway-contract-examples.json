@@ -1,0 +1,189 @@
+{
+  "authorization_id": "AION-232-SRI-0002",
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "task_id": "AION-233",
+  "redacted": true,
+  "simulation_only": true,
+  "contracts": {
+    "authorization_envelope": {
+      "allowed_model_ids": [
+        "reference-json-sim-v1",
+        "reference-text-sim-v1"
+      ],
+      "allowed_operations": [
+        "health_read",
+        "observability_read",
+        "route_plan",
+        "structured_generate_simulate",
+        "text_generate_simulate"
+      ],
+      "allowed_provider_ids": [
+        "deterministic-reference-provider"
+      ],
+      "authorization_transaction_id": "AION-232-SRI-0002",
+      "confirmation_fingerprint": "2a7b2c802a6fc506fca6a88dfe4b7107df621ce6c4f8d4a85efac99e7f3c1790",
+      "local_session": true,
+      "network_access": false,
+      "operator_invoked": true,
+      "production_effect": false,
+      "simulation_only": true
+    },
+    "component_binding": {
+      "component_contract_authorization_closed": true,
+      "component_contract_authorization_id": "AION-230-SRI-0001",
+      "component_contract_authorization_reactivated": false,
+      "component_implementation_task": "AION-231",
+      "component_name": "secure-runtime-foundation",
+      "current_authorization_transaction_id": "AION-232-SRI-0002",
+      "parent_capability_code": "brain.think.simulate",
+      "parent_runtime_guard_outcome": "allow_simulation",
+      "parent_simulated_dispatch_status": "simulated",
+      "production_effect": false,
+      "read_only": true,
+      "runtime_effect": false
+    },
+    "provider_manifest": {
+      "actual_provider_call_available": false,
+      "credential_free": true,
+      "endpoint_present": false,
+      "network_egress_enabled": false,
+      "provider_id": "deterministic-reference-provider",
+      "provider_sdk_enabled": false,
+      "provider_type": "reference_simulation",
+      "streaming_enabled": false
+    },
+    "model_manifests": [
+      {
+        "actual_provider_call": false,
+        "function_calling": false,
+        "model_id": "reference-text-sim-v1",
+        "network_effect": false,
+        "provider_id": "deterministic-reference-provider",
+        "simulation_only": true,
+        "supported_operations": [
+          "text_generate_simulate"
+        ],
+        "tool_calling": false
+      },
+      {
+        "actual_provider_call": false,
+        "function_calling": false,
+        "model_id": "reference-json-sim-v1",
+        "network_effect": false,
+        "provider_id": "deterministic-reference-provider",
+        "simulation_only": true,
+        "supported_operations": [
+          "structured_generate_simulate",
+          "text_generate_simulate"
+        ],
+        "tool_calling": false
+      }
+    ],
+    "session_plan": {
+      "maximum_concurrent_requests": 4,
+      "maximum_requests": 100,
+      "model_gateway_session_id": "aion233-gateway-session-example",
+      "parent_capability_code": "brain.think.simulate",
+      "simulation_only": true,
+      "status": "authorized"
+    },
+    "message_normalization": {
+      "content_fingerprint": "cf4b2ce83011c4d30f4259994f40554bc0f4527932a6f64856bdb1ed5c73ce8a",
+      "estimated_tokens": 12,
+      "raw_content_retained": false,
+      "redacted": true,
+      "role": "user",
+      "utf8_byte_count": 36
+    },
+    "context_budget": {
+      "decision": "passed",
+      "maximum_context_bytes_per_request": 4194304,
+      "maximum_context_items_per_request": 256,
+      "one_over_limit_fails_closed": true
+    },
+    "token_budget": {
+      "decision": "passed",
+      "maximum_input_tokens_per_request": 131072,
+      "maximum_output_tokens_per_request": 16384,
+      "maximum_total_tokens_per_session": 1000000,
+      "token_estimator_version": "utf8-ceil-div-3/v1"
+    },
+    "request_envelope": {
+      "actual_provider_call": false,
+      "network_target_present": false,
+      "prompt_body_retained": false,
+      "request_fingerprint": "bdb0ab0c53e6eb87fda116d7003110d9f6be7441b9c8d35284abec539331ad5b",
+      "simulation_only": true
+    },
+    "routing_plan": {
+      "automatic_model_routing_execution_enabled": false,
+      "deterministic": true,
+      "selected_model_id": "reference-text-sim-v1",
+      "selected_provider_id": "deterministic-reference-provider"
+    },
+    "fallback_plan": {
+      "automatic_fallback_execution_enabled": false,
+      "fallback_candidates": [
+        "reference-json-sim-v1"
+      ],
+      "planning_only": true
+    },
+    "retry_plan": {
+      "automatic_retry_execution_enabled": false,
+      "maximum_retry_attempts_planned": 2,
+      "planning_only": true
+    },
+    "circuit_breaker": {
+      "background_reset_enabled": false,
+      "provider_id": "deterministic-reference-provider",
+      "status": "closed"
+    },
+    "guard": {
+      "outcome": "allow_reference_simulation",
+      "provider_call_authorized": false,
+      "tool_call_authorized": false
+    },
+    "reference_provider_response": {
+      "actual_provider_call": false,
+      "credential_effect": false,
+      "network_effect": false,
+      "output_mode": "text",
+      "synthetic": true
+    },
+    "response_validation": {
+      "approval_effect": false,
+      "memory_effect": false,
+      "status": "passed",
+      "trusted": false
+    },
+    "output_provenance": {
+      "output_classification": "untrusted_validated_text",
+      "raw_output_retained": false,
+      "response_fingerprint": "94a5f2ed0478d7069f194a6ed24b40c3b2b2f306d087ef3d2d7ab87555e0729a"
+    },
+    "audit": {
+      "append_only": true,
+      "raw_content_retained": false,
+      "session_chain_head": "d85c9e47121be826c17707828ff7768edafd12f6db6a310d43738a1d14c53033"
+    },
+    "observability": {
+      "actual_model_provider_calls": 0,
+      "network_calls": 0,
+      "redacted": true
+    },
+    "health": {
+      "ready_reference_simulation": true,
+      "runtime_effect": false
+    },
+    "integrity": {
+      "integrity_passed": true,
+      "prohibited_effect_counters_zero": true
+    },
+    "runtime_boundary": {
+      "output_untrusted": true,
+      "provider_neutral": true,
+      "reference_provider_local": true,
+      "simulation_only": true
+    }
+  }
+}

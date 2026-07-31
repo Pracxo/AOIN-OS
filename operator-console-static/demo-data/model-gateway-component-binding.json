@@ -1,0 +1,32 @@
+{
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "synthetic": true,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "production_effect": false,
+  "forbidden_actions": [
+    "provider_call",
+    "network_egress",
+    "tool_execution",
+    "connector_execution",
+    "production_effect"
+  ],
+  "sections": [
+    {
+      "refs": [
+        "brain.think.simulate",
+        "allow_simulation",
+        "simulated"
+      ],
+      "status": "bound",
+      "summary": "AION-233 binds current authority AION-232-SRI-0002 to the closed AION-231 component authority AION-230-SRI-0001.",
+      "title": "Secure Runtime Component Binding"
+    }
+  ],
+  "status": "implemented",
+  "summary": "Current-versus-historical component authority is explicit and read-only.",
+  "title": "Gateway Component Binding",
+  "view": "model_gateway_component_binding"
+}

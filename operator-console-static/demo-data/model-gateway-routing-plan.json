@@ -21,7 +21,7 @@
   "redacted": true,
   "redaction_applied": true,
   "retry_attempts_planned": 0,
-  "routing_plan_id": "routing-plan-AION-233-preview",
+  "routing_plan_id": "routing-plan-AION-233-implemented",
   "runtime_effect": false,
   "synthetic": true
 }

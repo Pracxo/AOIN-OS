@@ -1,0 +1,33 @@
+{
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "synthetic": true,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "production_effect": false,
+  "append_only": true,
+  "forbidden_actions": [
+    "prompt_body_retention",
+    "provider_response_body_retention",
+    "file_persistence",
+    "database_persistence"
+  ],
+  "sections": [
+    {
+      "refs": [
+        "authority_validated",
+        "route_planned",
+        "reference_simulation_completed",
+        "session_closed"
+      ],
+      "status": "hash_chained",
+      "summary": "Audit records are append-only in-memory hash-chain evidence.",
+      "title": "Gateway Audit"
+    }
+  ],
+  "status": "implemented",
+  "summary": "The audit ledger is redacted, in-memory, and non-persistent.",
+  "title": "Gateway Audit",
+  "view": "model_gateway_audit"
+}

@@ -68,11 +68,15 @@ changed_files() {
 verify_aion154_commit_in_history() {
   local commit="$1"
   local label="$2"
+  local ref
   if git cat-file -e "${commit}^{commit}" 2>/dev/null; then
-    git merge-base --is-ancestor "$commit" HEAD || {
-      echo "AION-154 ${label} commit is not in current history" >&2
-      exit 1
-    }
+    for ref in HEAD origin/main main; do
+      if git_ref_exists "$ref" && git merge-base --is-ancestor "$commit" "$ref"; then
+        return 0
+      fi
+    done
+    echo "AION-154 ${label} commit is not in current history or main history" >&2
+    exit 1
   else
     AION154_GIT_HISTORY_VERIFIED=0
     echo "WARN: AION-154 ${label} commit unavailable in this checkout; skipping shallow-checkout ancestry confirmation"

@@ -1,0 +1,33 @@
+{
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "synthetic": true,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "production_effect": false,
+  "automatic_fallback_execution_enabled": false,
+  "fallback_candidates": [
+    "reference-json-sim-v1"
+  ],
+  "forbidden_actions": [
+    "automatic_fallback_execution",
+    "provider_call",
+    "network_egress"
+  ],
+  "planning_only": true,
+  "sections": [
+    {
+      "refs": [
+        "maximum_fallback_candidates_per_request=3"
+      ],
+      "status": "planned_only",
+      "summary": "Fallback candidates are deterministic evidence and are not automatically executed.",
+      "title": "Fallback Planning"
+    }
+  ],
+  "status": "implemented",
+  "summary": "Fallback is planned only and cannot override budgets or guards.",
+  "title": "Gateway Fallback Plan",
+  "view": "model_gateway_fallback_plan"
+}

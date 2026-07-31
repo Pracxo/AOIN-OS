@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 from pathlib import Path
 from typing import Any
@@ -74,15 +75,67 @@ def changed_paths_since_main() -> set[str]:
     def run(args: list[str]) -> subprocess.CompletedProcess[str]:
         return subprocess.run(args, cwd=REPO_ROOT, text=True, capture_output=True, check=False)
 
+    def ref_exists(ref: str) -> bool:
+        return run(["git", "rev-parse", "--verify", "--quiet", ref]).returncode == 0
+
+    def diff_paths(base: str, head: str = "HEAD") -> set[str]:
+        result = run(["git", "diff", "--name-only", base, head])
+        return {line.strip() for line in result.stdout.splitlines() if line.strip()}
+
+    def ci_pr_changed_paths() -> set[str]:
+        if os.environ.get("GITHUB_ACTIONS") != "true":
+            return set()
+
+        github_base_ref = os.environ.get("GITHUB_BASE_REF")
+        github_head_ref = os.environ.get("GITHUB_HEAD_REF")
+        if not github_base_ref or not github_head_ref:
+            return set()
+
+        base_remote = f"refs/remotes/origin/{github_base_ref}"
+        head_remote = f"refs/remotes/origin/{github_head_ref}"
+        fetch = run(
+            [
+                "git",
+                "fetch",
+                "--no-tags",
+                "origin",
+                f"+refs/heads/{github_base_ref}:{base_remote}",
+                f"+refs/heads/{github_head_ref}:{head_remote}",
+            ]
+        )
+        if fetch.returncode != 0 or not ref_exists(base_remote) or not ref_exists(head_remote):
+            return set()
+
+        result = run(["git", "diff", "--name-only", f"{base_remote}...{head_remote}"])
+        return {line.strip() for line in result.stdout.splitlines() if line.strip()}
+
     changed: set[str] = set()
-    for candidate in ("origin/main", "main"):
-        if run(["git", "rev-parse", "--verify", "--quiet", candidate]).returncode != 0:
+
+    candidates: list[str] = []
+    github_base_ref = os.environ.get("GITHUB_BASE_REF")
+    if github_base_ref:
+        candidates.extend([f"origin/{github_base_ref}", github_base_ref])
+    candidates.extend(["origin/main", "main"])
+
+    for candidate in candidates:
+        if not ref_exists(candidate):
             continue
         merge_base = run(["git", "merge-base", "HEAD", candidate])
         if merge_base.returncode == 0 and merge_base.stdout.strip():
-            diff = run(["git", "diff", "--name-only", merge_base.stdout.strip(), "HEAD"])
-            changed.update(line.strip() for line in diff.stdout.splitlines() if line.strip())
-            break
+            candidate_paths = diff_paths(merge_base.stdout.strip())
+            if candidate_paths:
+                changed.update(candidate_paths)
+                break
+
+    if not changed:
+        changed.update(ci_pr_changed_paths())
+
+    if not changed and ref_exists("HEAD^1"):
+        changed.update(diff_paths("HEAD^1"))
+
+    if not changed and ref_exists("HEAD~1"):
+        changed.update(diff_paths("HEAD~1"))
+
     for args in (["git", "diff", "--name-only"], ["git", "diff", "--cached", "--name-only"]):
         result = run(args)
         changed.update(line.strip() for line in result.stdout.splitlines() if line.strip())

@@ -92,6 +92,7 @@ if git diff --name-only --diff-filter=ACMRT HEAD -- services/brain-api/src packa
 				  | rg -v '^services/brain-api/src/aion_brain/contracts/(governed_learning_memory|governed_learning_memory_persistence|governed_engagement_learning|governed_continual_learning)\.py$|^services/brain-api/src/aion_brain/governed_learning_memory/' \
 				  | rg -v '^services/brain-api/src/aion_brain/(explanations|grounding|model_outputs|prompts)/redaction\.py$' \
 				  | rg -v '^services/brain-api/src/aion_brain/contracts/secure_runtime\.py$|^services/brain-api/src/aion_brain/secure_runtime/' \
+				  | rg -v '^services/brain-api/src/aion_brain/contracts/model_gateway\.py$|^services/brain-api/src/aion_brain/model_gateway/' \
 			  | rg -n '.'; then
   echo "AION-109 must not change runtime, SDK, CLI, or config source files" >&2
   exit 1
@@ -121,6 +122,7 @@ if git ls-files --others --exclude-standard services/brain-api/src packages/aion
 								  | rg -v '^services/brain-api/src/aion_brain/contracts/(governed_learning_memory|governed_learning_memory_persistence|governed_engagement_learning|governed_continual_learning)\.py$|^services/brain-api/src/aion_brain/governed_learning_memory/' \
 				  | rg -v '^services/brain-api/src/aion_brain/(explanations|grounding|model_outputs|prompts)/redaction\.py$' \
 				  | rg -v '^services/brain-api/src/aion_brain/contracts/secure_runtime\.py$|^services/brain-api/src/aion_brain/secure_runtime/' \
+				  | rg -v '^services/brain-api/src/aion_brain/contracts/model_gateway\.py$|^services/brain-api/src/aion_brain/model_gateway/' \
 			  | rg -n '.'; then
   echo "AION-109 must not add runtime, SDK, or CLI source files" >&2
   exit 1

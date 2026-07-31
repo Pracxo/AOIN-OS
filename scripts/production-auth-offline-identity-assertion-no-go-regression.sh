@@ -66,6 +66,9 @@ while IFS= read -r file; do
   if aion231_is_scoped_secure_runtime_foundation_path "$file"; then
     continue
   fi
+  if aion233_is_scoped_controlled_model_gateway_path "$file"; then
+    continue
+  fi
   case "$file" in
     package.json|package-lock.json|pnpm-lock.yaml|yarn.lock|bun.lockb|\
     */package.json|*/package-lock.json|*/pnpm-lock.yaml|*/yarn.lock|*/bun.lockb|\
@@ -172,6 +175,9 @@ new_assertion_sources=(
 
 while IFS= read -r file; do
   if aion231_is_scoped_secure_runtime_foundation_path "$file"; then
+    continue
+  fi
+  if aion233_is_scoped_controlled_model_gateway_path "$file"; then
     continue
   fi
   printf '%s\n' "$file" >> "$source_scan_file_list"

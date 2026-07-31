@@ -1725,3 +1725,9 @@ AION-229 final evaluation AION-GLMPE-004 passed all 28 deterministic hard-gated 
 ## AION-232 Static Evidence Projection
 
 The static console includes AION-232 operator-evaluation and model-gateway authorization evidence. These projections are read-only and show the exact PASS decision, closed AION-230 authorization, active AION-232-SRI-0002 authorization, provider/network disablement, and v0.2 unreleased state.
+
+## AION-233 Static Evidence Projection
+
+The static console includes AION-233 controlled model-gateway implementation evidence. These projections are read-only and show authorization, secure-runtime component binding, provider and model manifests, request/session planning, message normalization, context and token budgets, route/fallback/retry/circuit-breaker planning, guard decisions, deterministic reference-provider responses, response validation, output provenance, audit, observability, health, integrity, pilot evidence, and runtime boundary.
+
+The visual layer remains local static evidence. It does not call a provider, access a network, read credentials, create tokens or authorization headers, persist prompts or responses, retain hidden reasoning or provider raw payloads, execute connectors or tools, create memory or beliefs, mutate policy, deploy, train models, create v0.2 tags, or create v0.2 releases.

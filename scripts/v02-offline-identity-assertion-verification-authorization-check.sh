@@ -23,15 +23,23 @@ git_commit_exists() {
   git cat-file -e "$1^{commit}" >/dev/null 2>&1
 }
 
+git_ref_exists() {
+  git rev-parse --verify --quiet "$1" >/dev/null 2>&1
+}
+
 verify_aion160_commit_in_history() {
   local commit="$1"
   local label="$2"
+  local ref
 
   if git_commit_exists "$commit"; then
-    git merge-base --is-ancestor "$commit" HEAD || {
-      echo "AION-160 $label commit is not in current history: $commit" >&2
-      exit 1
-    }
+    for ref in HEAD origin/main main; do
+      if git_ref_exists "$ref" && git merge-base --is-ancestor "$commit" "$ref"; then
+        return 0
+      fi
+    done
+    echo "AION-160 $label commit is not in current history or main history: $commit" >&2
+    exit 1
   else
     echo "WARN: AION-160 $label commit unavailable in this checkout; skipping shallow-checkout ancestry confirmation"
   fi

@@ -1,0 +1,31 @@
+{
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "synthetic": true,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "production_effect": false,
+  "forbidden_actions": [
+    "prompt_body_retention",
+    "system_override",
+    "tool_instruction",
+    "function_instruction"
+  ],
+  "sections": [
+    {
+      "refs": [
+        "content_fingerprint",
+        "utf8_byte_count",
+        "utf8-ceil-div-3/v1"
+      ],
+      "status": "redacted",
+      "summary": "Messages retain only fingerprints, byte counts, token estimates, roles, and redaction state.",
+      "title": "Message Normalization"
+    }
+  ],
+  "status": "implemented",
+  "summary": "Raw prompt content is transient and never retained in public records.",
+  "title": "Gateway Message Normalization",
+  "view": "model_gateway_message_normalization"
+}

@@ -419,6 +419,7 @@ FUTURE_MODEL_GATEWAY_SOURCE_SCOPE: tuple[str, ...] = (
     "services/brain-api/src/aion_brain/model_gateway/circuit_breaker.py",
     "services/brain-api/src/aion_brain/model_gateway/guard.py",
     "services/brain-api/src/aion_brain/model_gateway/response_validation.py",
+    "services/brain-api/src/aion_brain/model_gateway/provider_registry.py",
     "services/brain-api/src/aion_brain/model_gateway/provider_adapter.py",
     "services/brain-api/src/aion_brain/model_gateway/reference_provider.py",
     "services/brain-api/src/aion_brain/model_gateway/audit.py",

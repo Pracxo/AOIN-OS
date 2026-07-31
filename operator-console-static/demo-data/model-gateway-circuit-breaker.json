@@ -1,0 +1,31 @@
+{
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "synthetic": true,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "production_effect": false,
+  "background_reset_enabled": false,
+  "forbidden_actions": [
+    "background_reset",
+    "provider_failure_ingestion",
+    "automatic_half_open"
+  ],
+  "sections": [
+    {
+      "refs": [
+        "closed",
+        "open",
+        "half_open"
+      ],
+      "status": "local_state",
+      "summary": "Circuit breaker transitions are explicit, deterministic, and local.",
+      "title": "Circuit Breaker"
+    }
+  ],
+  "status": "implemented",
+  "summary": "Open circuits block routing; half-open allows deterministic reference simulation only.",
+  "title": "Gateway Circuit Breaker",
+  "view": "model_gateway_circuit_breaker"
+}

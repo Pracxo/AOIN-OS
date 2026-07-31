@@ -1,0 +1,31 @@
+{
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "synthetic": true,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "production_effect": false,
+  "automatic_retry_execution_enabled": false,
+  "forbidden_actions": [
+    "automatic_retry_execution",
+    "provider_retry",
+    "network_retry"
+  ],
+  "maximum_retry_attempts_planned_per_request": 2,
+  "planning_only": true,
+  "sections": [
+    {
+      "refs": [
+        "maximum_retry_attempts_planned_per_request=2"
+      ],
+      "status": "planned_only",
+      "summary": "Retries are deterministic planning evidence with execution disabled.",
+      "title": "Retry Planning"
+    }
+  ],
+  "status": "implemented",
+  "summary": "Retry evidence cannot perform an automatic provider call.",
+  "title": "Gateway Retry Plan",
+  "view": "model_gateway_retry_plan"
+}

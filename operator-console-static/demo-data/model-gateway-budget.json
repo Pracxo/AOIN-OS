@@ -2,7 +2,7 @@
   "authorization_transaction_id": "AION-232-SRI-0002",
   "context_budget": {
     "authorization_transaction_id": "AION-232-SRI-0002",
-    "budget_id": "context-budget-AION-233-preview",
+    "budget_id": "context-budget-AION-233-implemented",
     "budget_violation_fails_closed": true,
     "maximum_context_bytes_per_request": 4194304,
     "maximum_context_items_per_request": 256,
@@ -94,7 +94,7 @@
   "synthetic": true,
   "token_budget": {
     "authorization_transaction_id": "AION-232-SRI-0002",
-    "budget_id": "token-budget-AION-233-preview",
+    "budget_id": "token-budget-AION-233-implemented",
     "budget_violation_fails_closed": true,
     "maximum_input_tokens_per_request": 131072,
     "maximum_output_tokens_per_request": 16384,
