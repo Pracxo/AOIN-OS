@@ -7,7 +7,7 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[3]
 
 PROGRAM_ID = "AION-SECURE-RUNTIME-INTEGRATION-001"
-PROGRAM_STATE = "model_gateway_evaluated_sandboxed_capability_runtime_authorized_not_implemented"
+PROGRAM_STATE = "sandboxed_capability_runtime_implemented_reference_only_pending_closeout"
 AUTH_ID = "AION-230-SRI-0001"
 IMPLEMENTATION_TASK = "AION-231"
 CLOSEOUT_TASK = "AION-232"
@@ -281,7 +281,7 @@ def test_program_charter_creates_separate_sri_program() -> None:
     )
     assert program["model_gateway_operator_evaluation_passed"] is True
     assert program["sandboxed_capability_runtime_authorized"] is True
-    assert program["sandboxed_capability_runtime_implemented"] is False
+    assert program["sandboxed_capability_runtime_implemented"] is True
 
     assert "Program ID: `AION-SECURE-RUNTIME-INTEGRATION-001`" in charter
     assert "does not reopen any parent program" in charter

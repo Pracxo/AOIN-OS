@@ -6,6 +6,16 @@ cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/immutable-tags.sh"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
 
+if [[ -f docs/secure-runtime-integration/program-ledger.json ]] && \
+  grep -q '"program_state": "sandboxed_capability_runtime_implemented_reference_only_pending_closeout"' docs/secure-runtime-integration/program-ledger.json && \
+  grep -q '"active_sri_implementation_authorization": "AION-234-SRI-0003"' docs/secure-runtime-integration/program-ledger.json && \
+  grep -q '"active_sri_implementation_task": "AION-235"' docs/secure-runtime-integration/program-ledger.json && \
+  grep -q '"formal_closeout_task": "AION-236"' docs/secure-runtime-integration/program-ledger.json; then
+  AION235_IMPLEMENTATION_STATE_ACTIVE=1
+else
+  AION235_IMPLEMENTATION_STATE_ACTIVE=0
+fi
+
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
 }
@@ -56,9 +66,10 @@ is_allowed_path() {
     docs/adr/0194-secure-runtime-integration-program-charter-and-local-operator-runtime-foundation-authorization.md|\
     docs/adr/0195-controlled-authenticated-local-operator-runtime-foundation.md|\
     docs/adr/0196-secure-runtime-foundation-evaluation-and-controlled-model-gateway-authorization.md|\
-    docs/adr/0197-controlled-provider-neutral-model-gateway-and-deterministic-reference-provider.md|\
-    docs/adr/0198-controlled-model-gateway-evaluation-and-sandboxed-capability-runtime-authorization.md|\
-    docs/adr/README.md|\
+	    docs/adr/0197-controlled-provider-neutral-model-gateway-and-deterministic-reference-provider.md|\
+	    docs/adr/0198-controlled-model-gateway-evaluation-and-sandboxed-capability-runtime-authorization.md|\
+	    docs/adr/0199-sandboxed-deterministic-capability-and-synthetic-connector-runtime.md|\
+	    docs/adr/README.md|\
     examples/secure-runtime-integration/*|\
 	    operator-console-static/index.html|operator-console-static/app.js|operator-console-static/README.md|\
 	    operator-console-static/demo-data/secure-runtime-integration-*.json|\
@@ -104,7 +115,11 @@ is_allowed_path() {
 	    scripts/model-gateway-operator-evaluation-no-go-regression.sh|\
 	    scripts/capability-runtime-authorization-check.sh|\
 	    scripts/capability-runtime-authorization-no-go-regression.sh|\
+	    scripts/capability-runtime-check.sh|\
+	    scripts/capability-runtime-no-go-regression.sh|\
+	    scripts/capability-runtime-pilot-evidence-check.sh|\
 	    scripts/capability-runtime-runtime-hold.sh|\
+	    scripts/capability-runtime-local-sandbox-run.py|\
 	    scripts/model-gateway-local-simulation-run.py|\
 	    scripts/secure-runtime-local-operator-run.py|\
 	    scripts/lib/secure_runtime_foundation_operator_evaluation.py|\
@@ -142,8 +157,9 @@ is_allowed_path() {
     services/brain-api/src/aion_brain/secure_runtime/integrity.py|\
     services/brain-api/src/aion_brain/secure_runtime/evidence.py|\
     services/brain-api/tests/secure_runtime_test_support.py|\
-    services/brain-api/tests/secure_runtime_aion232_test_helpers.py|\
-    services/brain-api/tests/aion234_test_support.py|\
+	    services/brain-api/tests/secure_runtime_aion232_test_helpers.py|\
+	    services/brain-api/tests/aion234_test_support.py|\
+	    services/brain-api/tests/capability_runtime_test_support.py|\
     services/brain-api/tests/model_gateway_aion233_test_support.py|\
     services/brain-api/tests/test_secure_runtime_*.py|\
     services/brain-api/tests/test_capability_runtime_*.py|\
@@ -173,6 +189,33 @@ is_aion233_model_gateway_source_path() {
     services/brain-api/src/aion_brain/model_gateway/observability.py|\
     services/brain-api/src/aion_brain/model_gateway/integrity.py|\
     services/brain-api/src/aion_brain/model_gateway/evidence.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
+is_aion235_capability_runtime_source_path() {
+  [[ "$AION235_IMPLEMENTATION_STATE_ACTIVE" == "1" ]] || return 1
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime.py|\
+    services/brain-api/src/aion_brain/capability_runtime/__init__.py|\
+    services/brain-api/src/aion_brain/capability_runtime/authorization.py|\
+    services/brain-api/src/aion_brain/capability_runtime/component_binding.py|\
+    services/brain-api/src/aion_brain/capability_runtime/manifests.py|\
+    services/brain-api/src/aion_brain/capability_runtime/request_envelope.py|\
+    services/brain-api/src/aion_brain/capability_runtime/input_validation.py|\
+    services/brain-api/src/aion_brain/capability_runtime/execution_plan.py|\
+    services/brain-api/src/aion_brain/capability_runtime/sandbox.py|\
+    services/brain-api/src/aion_brain/capability_runtime/guard.py|\
+    services/brain-api/src/aion_brain/capability_runtime/dispatcher.py|\
+    services/brain-api/src/aion_brain/capability_runtime/reference_capabilities.py|\
+    services/brain-api/src/aion_brain/capability_runtime/reference_connector.py|\
+    services/brain-api/src/aion_brain/capability_runtime/budget.py|\
+    services/brain-api/src/aion_brain/capability_runtime/audit.py|\
+    services/brain-api/src/aion_brain/capability_runtime/observability.py|\
+    services/brain-api/src/aion_brain/capability_runtime/integrity.py|\
+    services/brain-api/src/aion_brain/capability_runtime/evidence.py)
       return 0
       ;;
   esac
@@ -233,20 +276,23 @@ fi
 
 while IFS= read -r path; do
   [[ -n "$path" ]] || continue
-  if ! is_allowed_path "$path"; then
-    if ! is_aion233_model_gateway_source_path "$path"; then
-      echo "ERROR: AION-230 changed disallowed path: $path" >&2
-      exit 1
-    fi
-  fi
+	  if ! is_allowed_path "$path"; then
+	    if ! is_aion233_model_gateway_source_path "$path" && \
+	      ! is_aion235_capability_runtime_source_path "$path"; then
+	      echo "ERROR: AION-230 changed disallowed path: $path" >&2
+	      exit 1
+	    fi
+	  fi
   case "$path" in
     services/brain-api/src/*|packages/*|.github/workflows/*|\
     *migrations*|*package.json|*package-lock.json|*pnpm-lock.yaml|*yarn.lock|\
     *poetry.lock|*Pipfile.lock|*requirements*.txt|*pyproject.toml)
-      if ! is_aion231_source_path "$path" && ! is_aion233_model_gateway_source_path "$path"; then
-        echo "ERROR: prohibited runtime/dependency/migration path changed: $path" >&2
-        exit 1
-      fi
+	      if ! is_aion231_source_path "$path" && \
+	        ! is_aion233_model_gateway_source_path "$path" && \
+	        ! is_aion235_capability_runtime_source_path "$path"; then
+	        echo "ERROR: prohibited runtime/dependency/migration path changed: $path" >&2
+	        exit 1
+	      fi
       ;;
   esac
 done < "$changed_file_list"

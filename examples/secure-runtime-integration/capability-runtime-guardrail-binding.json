@@ -1,0 +1,7 @@
+{
+  "allowed": true,
+  "guardrail_fingerprint": "449757279e68da4a2efe705488261bb2f6bfb609410ca6f98da69d0690a4444a",
+  "guardrail_id": "guardrail-example-request-001",
+  "request_id": "example-request-001",
+  "schema_version": "aion-capability-runtime-decision-binding/v1"
+}

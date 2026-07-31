@@ -1,0 +1,8 @@
+{
+  "active_requests": 0,
+  "active_sessions": 1,
+  "health_fingerprint": "31c55c42e73c391982dbfb7a2fe9ff1882ef6ff2a868288b45717d1c0c9ac3bc",
+  "health_state": "session_active",
+  "schema_version": "aion-capability-runtime-observability/v1",
+  "session_id": "example-service-session"
+}

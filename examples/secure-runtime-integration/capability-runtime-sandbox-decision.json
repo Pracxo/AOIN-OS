@@ -1,0 +1,10 @@
+{
+  "decision_id": "sandbox-example-request-001",
+  "outcome": "allow_reference_execution",
+  "profile_fingerprint": "d3f2cc2b9f058a0843f296c96001be8a996e8c7316ee90c0e8362f2fc9345448",
+  "reason_codes": [
+    "in_memory_static_dispatch_only"
+  ],
+  "sandbox_fingerprint": "4ee17a5224a8424947572a7a7777d5849e3ebca947c3a8b4149e35b9661e19a9",
+  "schema_version": "aion-capability-runtime-sandbox/v1"
+}

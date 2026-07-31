@@ -1,0 +1,12 @@
+{
+  "audit_fingerprint": "6df1123b77ec69e33fe4e6798c3e43e245f3dfb063bf402e5e4626b1e24e271e",
+  "created_at": "2026-07-31T20:00:00Z",
+  "event_id": "audit-0005-rollback_completed",
+  "event_type": "rollback_completed",
+  "payload_fingerprint": "eac9a61ffce528a3e852bcfff6934f62e397532617f9091da83cf9e8e1a3c047",
+  "prior_audit_fingerprint": "fd172ec0493873f05f06adfb8b6c242f83454fe7786e3284e7f0f967d2d29b4e",
+  "redacted": true,
+  "request_id": "example-service-request",
+  "schema_version": "aion-capability-runtime-audit/v1",
+  "session_id": "example-service-session"
+}

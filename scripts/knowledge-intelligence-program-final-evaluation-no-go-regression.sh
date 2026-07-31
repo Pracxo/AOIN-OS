@@ -227,6 +227,25 @@ aion234_is_scoped_model_gateway_evaluation_compatibility_path() {
   return 1
 }
 
+aion235_is_scoped_sandboxed_capability_runtime_path() {
+  case "$1" in
+    docs/adr/0199-sandboxed-deterministic-capability-and-synthetic-connector-runtime.md|\
+    docs/release/capability-runtime-*|\
+    docs/secure-runtime-integration/capability-runtime-*|\
+    examples/secure-runtime-integration/capability-runtime-*.json|\
+    operator-console-static/demo-data/capability-runtime-*.json|\
+    scripts/capability-runtime-*|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime.py|\
+    services/brain-api/src/aion_brain/capability_runtime/*|\
+    services/brain-api/tests/capability_runtime_test_support.py|\
+    services/brain-api/tests/test_capability_runtime_*.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 changed_entries() {
   local base
   if base="$(comparison_base)"; then
@@ -260,6 +279,9 @@ while IFS=$'\t' read -r status path extra; do
       continue
     fi
     if aion234_is_scoped_model_gateway_evaluation_compatibility_path "$changed"; then
+      continue
+    fi
+    if aion235_is_scoped_sandboxed_capability_runtime_path "$changed"; then
       continue
     fi
     if aion231_is_scoped_secure_runtime_foundation_path "$changed"; then

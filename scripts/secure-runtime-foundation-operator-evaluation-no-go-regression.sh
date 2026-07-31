@@ -20,6 +20,9 @@ import subprocess
 from pathlib import Path
 
 ROOT = Path(os.environ["AION_REPO_ROOT"])
+AION235_IMPLEMENTED_STATE = (
+    "sandboxed_capability_runtime_implemented_reference_only_pending_closeout"
+)
 ALLOWED_PREFIXES = (
     "docs/",
     "examples/",
@@ -67,6 +70,10 @@ AION233_SOURCE_EXACT = {
     "services/brain-api/src/aion_brain/model_gateway/integrity.py",
     "services/brain-api/src/aion_brain/model_gateway/evidence.py",
 }
+AION235_SOURCE_EXACT = {
+    "services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime.py",
+}
+AION235_SOURCE_PREFIXES = ("services/brain-api/src/aion_brain/capability_runtime/",)
 
 
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -111,6 +118,27 @@ def allowed_path(path: str) -> bool:
     return path in ALLOWED_EXACT or path.startswith(ALLOWED_PREFIXES)
 
 
+def aion235_implementation_state_active() -> bool:
+    ledger = ROOT / "docs/secure-runtime-integration/program-ledger.json"
+    if not ledger.exists():
+        return False
+    payload = json.loads(ledger.read_text(encoding="utf-8"))
+    return (
+        payload.get("program_state") == AION235_IMPLEMENTED_STATE
+        and payload.get("active_sri_implementation_authorization") == "AION-234-SRI-0003"
+        and payload.get("active_sri_implementation_task") == "AION-235"
+        and payload.get("formal_closeout_task") == "AION-236"
+    )
+
+
+def aion235_source_allowed(path: str) -> bool:
+    return (
+        aion235_active
+        and (path in AION235_SOURCE_EXACT or path.startswith(AION235_SOURCE_PREFIXES))
+    )
+
+
+aion235_active = aion235_implementation_state_active()
 for parts in changed_entries():
     status = parts[0]
     paths = parts[1:]
@@ -121,6 +149,8 @@ for parts in changed_entries():
         if Path(normalized).name in PROHIBITED_NAMES:
             raise SystemExit(f"dependency/package file changed: {normalized}")
         if normalized in AION233_SOURCE_EXACT:
+            continue
+        if aion235_source_allowed(normalized):
             continue
         if normalized.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/dependency path changed: {normalized}")

@@ -1,0 +1,21 @@
+# Capability Runtime Checklist
+
+- AION-234-SRI-0003 active: PASS
+- AION-235 implemented pending AION-236 closeout: PASS
+- Closed capability manifests: 8
+- Synthetic connector manifests: 1
+- Explicit operator selection required: PASS
+- Model output non-authority: PASS
+- Restricted schemas: PASS
+- Deterministic execution plans: PASS
+- Policy, risk, guardrails and approvals bound: PASS
+- Zero-external-effect budgets: PASS
+- Parent kill-switch composition: PASS
+- In-memory sandbox: PASS
+- Static dispatch: PASS
+- Idempotency and changed replay rejection: PASS
+- Immutable receipts and provenance: PASS
+- Rollback: PASS
+- Audit, observability, health and integrity: PASS
+- Local pilot completed: PASS
+- v0.2 unreleased: PASS

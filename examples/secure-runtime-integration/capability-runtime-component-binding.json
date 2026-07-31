@@ -1,0 +1,25 @@
+{
+  "actor_context_fingerprint": "51116b42036b5d60ff9683510b0a49d8a6794841c277eeaff2a2e938280f5f15",
+  "authorization_transaction_id": "AION-234-SRI-0003",
+  "binding_fingerprint": "64b3bd5ff266dddd758df556f527369cdc57b0fb703070bf8e5e1adf51895a56",
+  "component_authorizations_closed": true,
+  "component_authorizations_reactivated": false,
+  "historical_component_authorization_ids": [
+    "AION-230-SRI-0001",
+    "AION-232-SRI-0002"
+  ],
+  "model_gateway_request_id": "model-gateway-request-AION-233",
+  "model_gateway_session_id": "model-gateway-session-AION-233",
+  "model_output_classification": "untrusted_model_output",
+  "model_output_provenance_fingerprint": "925bffd39ec5e56ae799eda1e9f90f8be09c7b845533b1403204f86c6a8513e3",
+  "model_output_trusted": false,
+  "parent_kill_switch_fingerprint": "6ced1f873194b33160f4aead2f4aabda88b540a37763a3f7040f399d834a4852",
+  "production_effect": false,
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-capability-runtime-component-binding/v1",
+  "secure_runtime_guard_fingerprint": "c21d80261805636b9a24a11ef0c9e7ddcc52fc11a625eb2bed4b34a85ad3e588",
+  "secure_runtime_request_id": "sri-request-AION-235",
+  "secure_runtime_session_id": "sri-session-AION-235"
+}

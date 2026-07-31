@@ -44,7 +44,11 @@ if EXAMPLE["implementation_task"] != "AION-233" or EXAMPLE["formal_closeout_task
     raise SystemExit("task/scope mismatch")
 
 closed_aion232 = next(item for item in AUTH["records"] if item["authorization_transaction_id"] == AION232)
-if PROGRAM.get("program_state") == "model_gateway_evaluated_sandboxed_capability_runtime_authorized_not_implemented":
+post_closeout_states = {
+    "model_gateway_evaluated_sandboxed_capability_runtime_authorized_not_implemented",
+    "sandboxed_capability_runtime_implemented_reference_only_pending_closeout",
+}
+if PROGRAM.get("program_state") in post_closeout_states:
     if closed_aion232["authorization_active"] is not False or closed_aion232["authorization_consumed"] is not True or closed_aion232["authorization_expired"] is not True or closed_aion232["authorization_reusable"] is not False:
         raise SystemExit("AION-232 closeout lifecycle mismatch")
     if closed_aion232["authorization_consumed_by_task"] != "AION-233" or closed_aion232["authorization_closed_by_task"] != "AION-234":

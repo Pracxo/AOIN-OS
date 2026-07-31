@@ -54,7 +54,7 @@ def test_aion231_scope_records_contracts_state_machine_and_result_invariants() -
     }
 
 
-def test_roadmap_authorizes_only_aion231_and_keeps_later_tasks_planned() -> None:
+def test_roadmap_marks_aion235_implemented_and_aion236_active() -> None:
     program = load_json("docs/secure-runtime-integration/program-ledger.json")
     roadmap = {item["task_id"]: item for item in program["roadmap"]}
     roadmap_text = read_text("docs/secure-runtime-integration/architecture-roadmap.md")
@@ -66,9 +66,11 @@ def test_roadmap_authorizes_only_aion231_and_keeps_later_tasks_planned() -> None
     assert roadmap["AION-234"]["state"] == (
         "evaluation_complete_capability_runtime_authorized"
     )
-    assert roadmap[CURRENT_IMPLEMENTATION_TASK]["state"] == "authorized_not_implemented"
+    assert roadmap[CURRENT_IMPLEMENTATION_TASK]["state"] == (
+        "implemented_pending_AION-236_closeout"
+    )
     assert roadmap[CURRENT_CLOSEOUT_TASK]["state"] == (
-        "planned_formal_evaluation_and_operator_console_authorization_decision"
+        "active_formal_evaluation_and_operator_console_authorization_decision"
     )
     assert roadmap["AION-237"]["state"] == (
         "planned_not_authorized_operator_console_integration_and_integrated_local_pilot"

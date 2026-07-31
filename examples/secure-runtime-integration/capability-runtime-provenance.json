@@ -1,0 +1,14 @@
+{
+  "authorization_transaction_id": "AION-234-SRI-0003",
+  "capability_id": "capability_runtime.health.read",
+  "component_binding_fingerprint": "64b3bd5ff266dddd758df556f527369cdc57b0fb703070bf8e5e1adf51895a56",
+  "connector_id": null,
+  "external_effect": false,
+  "model_gateway_proposal_fingerprint": "95650b47b9fd7a167e4b3db92416b27ed9055c5031497cc1a72903ad7e998962",
+  "plan_fingerprint": "296a2dc8017627cc6561fa748f65e51d4358027b326a194d0a95e6c0e687d2f2",
+  "production_effect": false,
+  "provenance_fingerprint": "f31cf266943e6d06c9d2ae078c9051ce69235273c103010077fd00e8cd23d640",
+  "request_id": "example-service-request",
+  "result_fingerprint": "5fd4b44886d49aae4ac9822a0ef78c1e3f179e6d638dbdf987e1199bb94c52ef",
+  "session_id": "example-service-session"
+}

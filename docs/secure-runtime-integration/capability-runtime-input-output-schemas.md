@@ -1,3 +1,3 @@
-# Capability Runtime Input And Output Schemas
+# Capability Runtime Input Output Schemas
 
-Future AION-235 inputs and outputs must be schema validated. Unsupported keywords, remote references, dynamic references, executable formats, content encodings, excessive depth, excessive size, smuggled tool fields, smuggled connector targets, and production-action markers fail closed.
+AION-235 supports a restricted standard-library schema subset: type, properties, required, additionalProperties, items, enum, const, minimum, maximum, minLength, maxLength, minItems and maxItems. External refs, dynamic refs, remote schema IDs, content encodings, executable formats, unknown keywords, excessive depth, oversized input and oversized output fail closed.

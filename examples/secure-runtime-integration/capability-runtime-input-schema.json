@@ -1,0 +1,158 @@
+{
+  "schemas": [
+    {
+      "capability_id": "capability_runtime.health.read",
+      "schema": {
+        "additionalProperties": false,
+        "properties": {},
+        "required": [],
+        "type": "object"
+      },
+      "schema_fingerprint": "07a1c39c5dd86ca05dde9adb1c9e3cd1e9dd5338c13dbe8dd79ac65c99eae460",
+      "schema_id": "capability_runtime.health.read:input",
+      "schema_version": "aion-capability-runtime-input-schema/v1"
+    },
+    {
+      "capability_id": "capability_runtime.observability.read",
+      "schema": {
+        "additionalProperties": false,
+        "properties": {},
+        "required": [],
+        "type": "object"
+      },
+      "schema_fingerprint": "3fbd7026529be5224dff99252a053823d9b114e68ed5f02c6b2b79eb2b7c9391",
+      "schema_id": "capability_runtime.observability.read:input",
+      "schema_version": "aion-capability-runtime-input-schema/v1"
+    },
+    {
+      "capability_id": "capability_runtime.audit.read",
+      "schema": {
+        "additionalProperties": false,
+        "properties": {},
+        "required": [],
+        "type": "object"
+      },
+      "schema_fingerprint": "0466fbf428086b2df8e55a569aa46d6536623fd57ab74647bf2778830bb07acb",
+      "schema_id": "capability_runtime.audit.read:input",
+      "schema_version": "aion-capability-runtime-input-schema/v1"
+    },
+    {
+      "capability_id": "capability.text.normalize",
+      "schema": {
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "maxLength": 262144,
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "type": "object"
+      },
+      "schema_fingerprint": "aae3d90a0b755f54d2896abd733367eda098cb9dd0e1e78d00c585db4f43257d",
+      "schema_id": "capability.text.normalize:input",
+      "schema_version": "aion-capability-runtime-input-schema/v1"
+    },
+    {
+      "capability_id": "capability.hash.sha256",
+      "schema": {
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "maxLength": 262144,
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "type": "object"
+      },
+      "schema_fingerprint": "389173d40759d3a5c953286493328e969a4c945b134fc2240d011762a3e40df3",
+      "schema_id": "capability.hash.sha256:input",
+      "schema_version": "aion-capability-runtime-input-schema/v1"
+    },
+    {
+      "capability_id": "capability.json.validate",
+      "schema": {
+        "additionalProperties": false,
+        "properties": {
+          "document": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "schema": {
+            "additionalProperties": true,
+            "type": "object"
+          }
+        },
+        "required": [
+          "document",
+          "schema"
+        ],
+        "type": "object"
+      },
+      "schema_fingerprint": "826c9259ec84544eb002468b684dedd2874386c942da7bf93f6ec4ffacc11982",
+      "schema_id": "capability.json.validate:input",
+      "schema_version": "aion-capability-runtime-input-schema/v1"
+    },
+    {
+      "capability_id": "connector.reference.read.simulate",
+      "schema": {
+        "additionalProperties": false,
+        "properties": {
+          "fixture_id": {
+            "maxLength": 128,
+            "type": "string"
+          },
+          "proposed_value": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "record_key": {
+            "maxLength": 128,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fixture_id",
+          "record_key"
+        ],
+        "type": "object"
+      },
+      "schema_fingerprint": "22c37b87204cfe2c84127c92a6c3a65a282553f5511241c96ea6b15743975fcc",
+      "schema_id": "connector.reference.read.simulate:input",
+      "schema_version": "aion-capability-runtime-input-schema/v1"
+    },
+    {
+      "capability_id": "connector.reference.write.preview",
+      "schema": {
+        "additionalProperties": false,
+        "properties": {
+          "fixture_id": {
+            "maxLength": 128,
+            "type": "string"
+          },
+          "proposed_value": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "record_key": {
+            "maxLength": 128,
+            "type": "string"
+          }
+        },
+        "required": [
+          "fixture_id",
+          "record_key"
+        ],
+        "type": "object"
+      },
+      "schema_fingerprint": "53530a8858f8532564c102d90139e6add795f2c8b58d2c6fb0bf10f2b6a10c5b",
+      "schema_id": "connector.reference.write.preview:input",
+      "schema_version": "aion-capability-runtime-input-schema/v1"
+    }
+  ]
+}

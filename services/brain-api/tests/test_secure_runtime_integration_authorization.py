@@ -6,6 +6,7 @@ from test_secure_runtime_integration_program_charter import (
     CLOSEOUT_TASK,
     IMPLEMENTATION_TASK,
     PROGRAM_ID,
+    PROGRAM_STATE,
     load_json,
 )
 
@@ -35,9 +36,7 @@ def test_aion230_sri_authorization_is_closed_and_current_aion232_auth_is_single_
     assert auth["active_sri_implementation_authorization_count"] == 1
     assert auth["active_sri_implementation_authorization"] == "AION-234-SRI-0003"
     assert auth["active_sri_implementation_task"] == "AION-235"
-    assert auth["program_state"] == (
-        "model_gateway_evaluated_sandboxed_capability_runtime_authorized_not_implemented"
-    )
+    assert auth["program_state"] == PROGRAM_STATE
 
     assert auth["active_authorizations"] == [
         {

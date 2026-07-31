@@ -1,0 +1,14 @@
+{
+  "audit_chain_head": "6df1123b77ec69e33fe4e6798c3e43e245f3dfb063bf402e5e4626b1e24e271e",
+  "authorization_id": "AION-234-SRI-0003",
+  "component_binding_fingerprint": "64b3bd5ff266dddd758df556f527369cdc57b0fb703070bf8e5e1adf51895a56",
+  "evidence_fingerprint": "d74417b2d283849ec6a87ade09c846f177ca1bdf2f2ff768581439d8ce1142b7",
+  "evidence_id": "capability-runtime-evidence-AION-235",
+  "integrity_report_fingerprint": "30d355a854d76093011d3f55e1301d9dad2bb7dc7145589c695dd979547fb7d4",
+  "model_gateway_proposal_binding_fingerprint": "95650b47b9fd7a167e4b3db92416b27ed9055c5031497cc1a72903ad7e998962",
+  "production_effect": false,
+  "receipt_chain_head": "7e1347960fc1f186795121c94b0d5dff5c3f0fd4cfc6600d3b03182aaae11080",
+  "redacted": true,
+  "runtime_effect": false,
+  "schema_version": "aion-capability-runtime-evidence/v1"
+}

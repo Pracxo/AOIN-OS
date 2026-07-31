@@ -1,0 +1,8 @@
+{
+  "assessment_id": "risk-example-request-001",
+  "blocked": false,
+  "request_id": "example-request-001",
+  "risk": "low",
+  "risk_fingerprint": "2e541f8bafcf0e66a3eb03855f47e18497b436241827f2e8ce165c14d8ecd62b",
+  "schema_version": "aion-capability-runtime-decision-binding/v1"
+}

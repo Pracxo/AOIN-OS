@@ -1,0 +1,9 @@
+{
+  "connector_id": "deterministic-reference-fixture-connector",
+  "external_effect": false,
+  "mutation_applied": false,
+  "operation_id": "connector.reference.write.preview",
+  "preview_fingerprint": "c87a8873aa14f77ad1b28e0e565602efefce67b9210700ac7640c57928b236ef",
+  "production_effect": false,
+  "write_preview_is_not_a_write": true
+}

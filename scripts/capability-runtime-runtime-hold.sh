@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/python-selection.sh"
@@ -24,11 +25,18 @@ aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 export AION_REPO_ROOT="$ROOT_DIR"
 "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
-import json, os
+
+import json
+import os
 from pathlib import Path
+
 root = Path(os.environ["AION_REPO_ROOT"])
-for relative in ("docs/secure-runtime-integration/program-ledger.json", "docs/secure-runtime-integration/authorization-ledger.json", "examples/secure-runtime-integration/capability-runtime-runtime-hold.json"):
-    payload = json.loads((root / relative).read_text())
+for relative in (
+    "docs/secure-runtime-integration/program-ledger.json",
+    "docs/secure-runtime-integration/authorization-ledger.json",
+    "examples/secure-runtime-integration/capability-runtime-runtime-hold.json",
+):
+    payload = json.loads((root / relative).read_text(encoding="utf-8"))
     runtime_authorized = payload.get(
         "capability_runtime_authorized",
         payload.get("sandboxed_capability_runtime_authorized"),
@@ -38,10 +46,45 @@ for relative in ("docs/secure-runtime-integration/program-ledger.json", "docs/se
         payload.get("sandboxed_capability_runtime_implemented"),
     )
     assert runtime_authorized is True
-    assert runtime_implemented is False
-    for key in ("external_connector_execution_enabled", "external_tool_execution_enabled", "public_network_access_enabled", "general_network_access_enabled", "credential_read_enabled", "credential_persistence_enabled", "token_read_enabled", "token_persistence_enabled", "filesystem_read_enabled", "filesystem_write_enabled", "process_spawn_enabled", "automatic_capability_execution_enabled", "model_output_triggered_execution_enabled", "production_runtime_authorized", "model_weight_training_enabled", "v02_release_ready"):
-        if key in payload: assert payload[key] is False, key
+    assert runtime_implemented is True
+    expected_false = (
+        "model_output_triggered_execution_enabled",
+        "external_connector_execution_enabled",
+        "external_tool_execution_enabled",
+        "actual_tool_execution_enabled",
+        "tool_calling_enabled",
+        "function_calling_enabled",
+        "public_network_access_enabled",
+        "general_network_access_enabled",
+        "dns_resolution_enabled",
+        "credential_read_enabled",
+        "credential_persistence_enabled",
+        "token_read_enabled",
+        "token_persistence_enabled",
+        "filesystem_read_enabled",
+        "filesystem_write_enabled",
+        "process_spawn_enabled",
+        "shell_command_execution_enabled",
+        "subprocess_execution_enabled",
+        "browser_automation_enabled",
+        "dynamic_import_enabled",
+        "eval_enabled",
+        "exec_enabled",
+        "production_write_execution_enabled",
+        "production_memory_write_enabled",
+        "production_policy_mutation_enabled",
+        "actual_belief_creation_enabled",
+        "actual_belief_mutation_enabled",
+        "production_runtime_authorized",
+        "production_exposure",
+        "model_weight_training_enabled",
+        "v02_release_ready",
+    )
+    for key in expected_false:
+        if key in payload:
+            assert payload[key] is False, key
 PY
+
 if [[ "$nested_gate_context" == "1" ]]; then
   echo "PASS: full repository check deferred to outer gate"
 else

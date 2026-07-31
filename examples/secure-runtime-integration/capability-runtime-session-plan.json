@@ -1,0 +1,26 @@
+{
+  "authorization_envelope_fingerprint": "41b57ec749e70bf686df4c28dcf574cbb3e66d6ff2be343d34baa63036a8a656",
+  "budget_fingerprint": "37c820d5e44dc57312a888c8e6fb74f004da14ef6fcbb865a73e534d52fba354",
+  "capability_manifest_fingerprints": [
+    "c8d2341e0a0f8ae8f3e9d2e96b70be7da6e0ddd72f478bfc37870a3eb93ce55b",
+    "fc56fe43b8bcb175eec637b6d559c4a042b83ce39a116226fa420f893015ff09",
+    "f06697e60c452b8b50a593438b987f080e76a9a387fbfd545a040421c2c34d6e",
+    "91d0f92b5091473c71027c064fae0d40c9506bcd016432b3bdf37d0f421d3bf6",
+    "b163d9b4453fad2b5c8c93295b95645bc412194e12a875cae1b3078131cf3ffc",
+    "8111e2d987df7701a258baeb91831c8b519dbe568d04243f5a7406ebb5b76ac1",
+    "bf5a62ff8b0b08b162ac02b0558d0dec8692d55244b24fddb3f247debf4f181e",
+    "ab9f3ebe24934330012e66a651985a7cd848bf4f76dffffe7cf14dce20e28d45"
+  ],
+  "component_binding_fingerprint": "64b3bd5ff266dddd758df556f527369cdc57b0fb703070bf8e5e1adf51895a56",
+  "connector_manifest_fingerprint": "66ce7eac449307e66e4488349246bb0a7d66eb8ac39390b5a39d6c41798c2dbe",
+  "created_at": "2026-07-31T20:00:00Z",
+  "deterministic": true,
+  "expires_at": "2026-07-31T20:30:00Z",
+  "external_effect": false,
+  "model_gateway_proposal_fingerprint": "95650b47b9fd7a167e4b3db92416b27ed9055c5031497cc1a72903ad7e998962",
+  "plan_fingerprint": "9d503e9dae184ec09c5ac64d185f5491e1ce0c6d3dda009200f1c525edceadf4",
+  "production_effect": false,
+  "sandboxed": true,
+  "schema_version": "aion-capability-runtime-session/v1",
+  "session_plan_id": "capability-runtime-session-plan-AION-235"
+}
