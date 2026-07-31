@@ -109,6 +109,37 @@ def changed_paths_since_main() -> set[str]:
         result = run(["git", "diff", "--name-only", f"{base_remote}...{head_remote}"])
         return {line.strip() for line in result.stdout.splitlines() if line.strip()}
 
+    def ci_main_push_changed_paths() -> set[str]:
+        if os.environ.get("GITHUB_ACTIONS") != "true":
+            return set()
+
+        ref_name = os.environ.get("GITHUB_REF_NAME", "")
+        github_ref = os.environ.get("GITHUB_REF", "")
+        if not ref_name and github_ref.startswith("refs/heads/"):
+            ref_name = github_ref.removeprefix("refs/heads/")
+        if ref_name != "main":
+            return set()
+
+        if not ref_exists("HEAD^1"):
+            fetch = run(["git", "fetch", "--no-tags", "--deepen=50", "origin", "main"])
+            if fetch.returncode != 0:
+                run(
+                    [
+                        "git",
+                        "fetch",
+                        "--no-tags",
+                        "--depth=50",
+                        "origin",
+                        "+refs/heads/main:refs/remotes/origin/main",
+                    ]
+                )
+
+        if ref_exists("HEAD^1"):
+            return diff_paths("HEAD^1")
+        if ref_exists("HEAD~1"):
+            return diff_paths("HEAD~1")
+        return set()
+
     changed: set[str] = set()
 
     candidates: list[str] = []
@@ -129,6 +160,9 @@ def changed_paths_since_main() -> set[str]:
 
     if not changed:
         changed.update(ci_pr_changed_paths())
+
+    if not changed:
+        changed.update(ci_main_push_changed_paths())
 
     if not changed and ref_exists("HEAD^1"):
         changed.update(diff_paths("HEAD^1"))
