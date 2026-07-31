@@ -138,11 +138,15 @@ is_allowed_change() {
     scripts/production-auth-offline-identity-assertion-no-go-regression.sh|\
     scripts/production-auth-request-identity-no-go-regression.sh|\
     scripts/production-auth-request-identity-stabilization-no-go-regression.sh|\
+    scripts/v02-actor-context-trust-boundary-authorization-check.sh|\
     scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh|\
     scripts/v02-identity-assertion-replay-protection-authorization-no-go-regression.sh|\
+    scripts/v02-offline-identity-assertion-verification-authorization-check.sh|\
     scripts/v02-offline-identity-assertion-verification-authorization-no-go-regression.sh|\
     scripts/v02-production-auth-authorization-no-go-regression.sh|\
+    scripts/v02-production-auth-request-boundary-authorization-check.sh|\
     scripts/v02-production-auth-request-boundary-authorization-no-go-regression.sh|\
+    scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh|\
     scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh|\
     scripts/v02-production-auth-stabilization-authorization-no-go-regression.sh|\
     services/brain-api/tests/secure_runtime_test_support.py|\

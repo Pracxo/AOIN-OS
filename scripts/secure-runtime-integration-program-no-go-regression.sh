@@ -110,9 +110,13 @@ is_allowed_path() {
 	    scripts/production-auth-offline-identity-assertion-no-go-regression.sh|\
 	    scripts/production-auth-request-identity-no-go-regression.sh|\
 	    scripts/production-auth-request-identity-stabilization-no-go-regression.sh|\
+	    scripts/v02-actor-context-trust-boundary-authorization-check.sh|\
 	    scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh|\
 	    scripts/v02-identity-assertion-replay-protection-authorization-no-go-regression.sh|\
+	    scripts/v02-offline-identity-assertion-verification-authorization-check.sh|\
 	    scripts/v02-offline-identity-assertion-verification-authorization-no-go-regression.sh|\
+	    scripts/v02-production-auth-request-boundary-authorization-check.sh|\
+	    scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh|\
 	    scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh|\
 	    scripts/governed-learning-memory-program-final-evaluation-no-go-regression.sh|\
     services/brain-api/src/aion_brain/contracts/secure_runtime.py|\
