@@ -3,6 +3,9 @@ from __future__ import annotations
 from test_secure_runtime_integration_program_charter import (
     AUTH_ID,
     CLOSEOUT_TASK,
+    CURRENT_AUTH_ID,
+    CURRENT_CLOSEOUT_TASK,
+    CURRENT_IMPLEMENTATION_TASK,
     IMPLEMENTATION_TASK,
     PROGRAM_ID,
     read_text,
@@ -16,13 +19,16 @@ def test_project_status_reconciles_current_secure_runtime_program_state() -> Non
     assert "AION-231 controlled authenticated local operator runtime foundation" in status
     assert PROGRAM_ID in status
     assert AUTH_ID in status
+    assert CURRENT_AUTH_ID in status
     assert IMPLEMENTATION_TASK in status
     assert CLOSEOUT_TASK in status
-    assert "GLM authorization count remains zero" in status
-    assert "external providers remain disabled" in status
+    assert CURRENT_IMPLEMENTATION_TASK in status
+    assert CURRENT_CLOSEOUT_TASK in status
+    assert "active_glm_implementation_authorization_count=0" in status
+    assert "provider network egress remains disabled" in status
     assert "connectors remain disabled" in status
     assert "tools remain disabled" in status
-    assert "module activation remains disabled" in status
+    assert "modules remain disabled" in status
     assert "production runtime remains disabled" in status
     assert "v0.2 remains unreleased" in status
 

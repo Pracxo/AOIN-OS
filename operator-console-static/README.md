@@ -1499,3 +1499,22 @@ The console remains static and local. It does not run another live pilot, call
 the backend, create approvals, create stores, apply overlays, write memory,
 mutate policy, create a successor GLM authorization, create a successor GLM
 task, or enable production learning.
+
+
+AION-232 secure runtime foundation evaluation and model-gateway authorization demo data:
+
+- `demo-data/secure-runtime-foundation-operator-evaluation.json`
+- `demo-data/model-gateway-authorization.json`
+- `demo-data/model-gateway-provider-manifest.json`
+- `demo-data/model-gateway-routing-plan.json`
+- `demo-data/model-gateway-budget.json`
+- `demo-data/model-gateway-output-validation.json`
+- `demo-data/model-gateway-runtime-hold.json`
+
+AION-232 local gates:
+
+- `./scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh`
+- `./scripts/secure-runtime-foundation-operator-evaluation-check.sh`
+- `./scripts/model-gateway-authorization-no-go-regression.sh`
+- `./scripts/model-gateway-authorization-check.sh`
+- `./scripts/model-gateway-runtime-hold.sh`

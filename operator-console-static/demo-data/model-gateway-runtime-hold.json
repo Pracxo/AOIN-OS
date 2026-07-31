@@ -1,0 +1,23 @@
+{
+  "actual_model_provider_call_enabled": false,
+  "actual_tool_execution_enabled": false,
+  "authorization_transaction_id": "AION-232-SRI-0002",
+  "connector_execution_enabled": false,
+  "hold_id": "model-gateway-runtime-hold-AION-233-preview",
+  "model_gateway_authorized": true,
+  "model_gateway_implemented": false,
+  "model_weight_training_enabled": false,
+  "production_effect": false,
+  "production_runtime_authorized": false,
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "provider_credential_persistence_enabled": false,
+  "provider_credential_read_enabled": false,
+  "provider_network_egress_enabled": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "runtime_hold_active": true,
+  "synthetic": true,
+  "token_persistence_enabled": false
+}

@@ -2564,3 +2564,7 @@ AION-228 is implemented and completed pending AION-229 final evaluation and clos
 ## AION-229 Final Program Evaluation
 
 AION-229 final evaluation AION-GLMPE-004 passed all 28 deterministic hard-gated scenarios, validated the committed AION-228 live-pilot evidence, and closed AION-227-GLM-0004 as consumed by AION-228. The program is in primary closeout pending final Git evidence reconciliation. No active GLM implementation authorization, successor task, repeated-live-pilot authorization, or production runtime authorization remains.
+
+## AION-232 Model Gateway Policy Boundary
+
+`AION-232-SRI-0002` permits AION-233 to plan and simulate model-gateway requests through closed allowlists and deterministic routing only. Policy, risk, guardrails, approval evidence, budget checks, output validation, and provenance must all pass before simulation evidence can be recorded. No approval may authorize live provider egress under this transaction.

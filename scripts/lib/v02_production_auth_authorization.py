@@ -1210,6 +1210,10 @@ NON_PRODUCTION_AUTH_APPROVAL_RECORDS = frozenset(
         "operator-console-static/demo-data/knowledge-intelligence-verified-knowledge-authorization.json",
         "operator-console-static/demo-data/knowledge-intelligence-public-research-pilot-authorization.json",
         "operator-console-static/demo-data/governed-learning-memory-authorization.json",
+        "docs/secure-runtime-integration/authorization-ledger.json",
+        "examples/secure-runtime-integration/local-operator-runtime-authorization.json",
+        "examples/secure-runtime-integration/model-gateway-authorization.json",
+        "operator-console-static/demo-data/model-gateway-authorization.json",
     }
 )
 AION213_KNOWLEDGE_INTELLIGENCE_JSON_PREFIXES = (

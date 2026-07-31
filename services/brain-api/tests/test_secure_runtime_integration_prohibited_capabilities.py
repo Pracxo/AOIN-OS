@@ -14,9 +14,10 @@ def test_every_aion231_prohibited_capability_remains_false() -> None:
     auth = load_json("docs/secure-runtime-integration/authorization-ledger.json")
 
     for payload in (program, auth):
-        assert set(payload["prohibited_capabilities"]) == set(PROHIBITED_CAPABILITIES)
+        assert set(payload["foundation_prohibited_capabilities"]) == set(PROHIBITED_CAPABILITIES)
         assert all(
-            payload["prohibited_capabilities"][key] is False for key in PROHIBITED_CAPABILITIES
+            payload["foundation_prohibited_capabilities"][key] is False
+            for key in PROHIBITED_CAPABILITIES
         )
 
 

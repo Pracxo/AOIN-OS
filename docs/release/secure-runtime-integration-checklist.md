@@ -16,3 +16,7 @@
 - [x] AION-233 through AION-238 remain unauthorized roadmap metadata.
 - [x] Runtime hold and no-go gates created.
 - [x] Focused tests created.
+
+## AION-232 Closeout
+
+`AION-SRIPE-001` passed. `AION-230-SRI-0001` is closed, consumed by AION-231, expired, and non-reusable. `AION-232-SRI-0002` is active for AION-233 with AION-234 as formal closeout. Provider calls, network egress, credentials, tokens, connectors, tools, production runtime, deployment, model training, v0.2 tags, and v0.2 releases remain disabled.

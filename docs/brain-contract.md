@@ -2501,3 +2501,7 @@ AION-228 is implemented and completed pending AION-229 final evaluation and clos
 ## AION-229 Final Program Evaluation
 
 AION-229 final evaluation AION-GLMPE-004 passed all 28 deterministic hard-gated scenarios, validated the committed AION-228 live-pilot evidence, and closed AION-227-GLM-0004 as consumed by AION-228. The program is in primary closeout pending final Git evidence reconciliation. No active GLM implementation authorization, successor task, repeated-live-pilot authorization, or production runtime authorization remains.
+
+## AION-232 Model Gateway Contract Boundary
+
+AION-232 authorizes future AION-233 model-gateway contracts only. The future contracts must be provider-neutral, credential-free, network-disabled, simulation-only, redacted, and bounded by context and token budgets. They may not create provider sessions, connector sessions, tool executions, memory writes, policy mutations, belief mutations, deployments, model-weight changes, v0.2 tags, or v0.2 releases.

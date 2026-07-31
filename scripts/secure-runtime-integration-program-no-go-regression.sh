@@ -50,13 +50,17 @@ is_allowed_path() {
     docs/project-status.md|docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/visual-brain.md|\
     docs/secure-runtime-integration/*|\
     docs/release/secure-runtime-integration-*|docs/release/secure-runtime-foundation-*|\
+    docs/release/model-gateway-*|\
     docs/release/v02-release-readiness-delta.md|\
     docs/adr/0194-secure-runtime-integration-program-charter-and-local-operator-runtime-foundation-authorization.md|\
     docs/adr/0195-controlled-authenticated-local-operator-runtime-foundation.md|\
+    docs/adr/0196-secure-runtime-foundation-evaluation-and-controlled-model-gateway-authorization.md|\
     docs/adr/README.md|\
     examples/secure-runtime-integration/*|\
 	    operator-console-static/index.html|operator-console-static/app.js|operator-console-static/README.md|\
 	    operator-console-static/demo-data/secure-runtime-integration-*.json|\
+	    operator-console-static/demo-data/secure-runtime-foundation-operator-evaluation.json|\
+	    operator-console-static/demo-data/model-gateway-*.json|\
 	    scripts/auth-design-check.sh|\
 	    scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh|\
 	    scripts/operator-console-static-check.sh|\
@@ -82,7 +86,14 @@ is_allowed_path() {
 	    scripts/secure-runtime-foundation-no-go-regression.sh|\
 	    scripts/secure-runtime-foundation-pilot-evidence-check.sh|\
 	    scripts/secure-runtime-foundation-runtime-hold.sh|\
+	    scripts/secure-runtime-foundation-operator-evaluation-check.sh|\
+	    scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh|\
+	    scripts/model-gateway-authorization-check.sh|\
+	    scripts/model-gateway-authorization-no-go-regression.sh|\
+	    scripts/model-gateway-runtime-hold.sh|\
 	    scripts/secure-runtime-local-operator-run.py|\
+	    scripts/lib/secure_runtime_foundation_operator_evaluation.py|\
+	    scripts/lib/v02_production_auth_authorization.py|\
 	    scripts/lib/v02-production-auth-scan-exclusions.sh|\
 	    scripts/production-auth-actor-context-trust-boundary-no-go-regression.sh|\
 	    scripts/production-auth-core-no-go-regression.sh|\
@@ -111,7 +122,9 @@ is_allowed_path() {
     services/brain-api/src/aion_brain/secure_runtime/integrity.py|\
     services/brain-api/src/aion_brain/secure_runtime/evidence.py|\
     services/brain-api/tests/secure_runtime_test_support.py|\
-    services/brain-api/tests/test_secure_runtime_*.py)
+    services/brain-api/tests/secure_runtime_aion232_test_helpers.py|\
+    services/brain-api/tests/test_secure_runtime_*.py|\
+    services/brain-api/tests/test_model_gateway_*.py)
       return 0
       ;;
   esac

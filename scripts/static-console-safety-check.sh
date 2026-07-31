@@ -355,6 +355,19 @@ allowed_authorization_demo_names = {
     "governed-learning-memory-roadmap.json",
     "governed-learning-memory-runtime-hold.json",
     "secure-runtime-integration-authorization.json",
+    "secure-runtime-foundation-operator-evaluation.json",
+    "model-gateway-authorization.json",
+}
+secure_runtime_evaluation_demo_names = {
+    "secure-runtime-foundation-operator-evaluation.json",
+}
+model_gateway_demo_names = {
+    "model-gateway-authorization.json",
+    "model-gateway-budget.json",
+    "model-gateway-output-validation.json",
+    "model-gateway-provider-manifest.json",
+    "model-gateway-routing-plan.json",
+    "model-gateway-runtime-hold.json",
 }
 aion161_allowed_policy_markers = {
     "runtime_private_key",
@@ -423,6 +436,35 @@ def walk(value: object, path: Path) -> None:
 
 for path in sorted((static_dir / "demo-data").glob("*.json")):
     payload = json.loads(path.read_text())
+    if path.name in secure_runtime_evaluation_demo_names:
+        for key in ("read_only", "redacted", "synthetic"):
+            if payload.get(key) is not True:
+                raise SystemExit(f"{key} must be true in {path}")
+        for key in (
+            "active_requests_after_evaluation",
+            "active_sessions_after_evaluation",
+            "actual_belief_creations",
+            "actual_belief_mutations",
+            "actual_tool_executions",
+            "cognitive_memory_writes",
+            "connector_calls",
+            "credentials_persisted",
+            "deployments",
+            "git_operations",
+        ):
+            if payload.get(key) != 0:
+                raise SystemExit(f"{key} must be zero in {path}")
+        if payload.get("program_id") != "AION-SECURE-RUNTIME-INTEGRATION-001":
+            raise SystemExit(f"program_id mismatch in {path}")
+    if path.name in model_gateway_demo_names:
+        for key in ("read_only", "redacted", "redaction_applied", "synthetic"):
+            if payload.get(key) is not True:
+                raise SystemExit(f"{key} must be true in {path}")
+        for key in ("runtime_effect", "production_effect"):
+            if payload.get(key) is not False:
+                raise SystemExit(f"{key} must be false in {path}")
+        if payload.get("program_id") != "AION-SECURE-RUNTIME-INTEGRATION-001":
+            raise SystemExit(f"program_id mismatch in {path}")
     walk(payload, path)
 
 print("Static console safety JSON checks PASS")

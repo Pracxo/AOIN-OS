@@ -1,0 +1,16 @@
+{
+  "authorization_transaction_id": "AION-232-SRI-0002",
+  "budget_id": "context-budget-AION-233-preview",
+  "budget_violation_fails_closed": true,
+  "maximum_context_bytes_per_request": 4194304,
+  "maximum_context_items_per_request": 256,
+  "maximum_prompt_bytes_per_request": 1048576,
+  "production_effect": false,
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "protected_material_rejected": true,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "synthetic": true
+}

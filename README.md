@@ -12,11 +12,13 @@ Intelligence Program, Governed Learning and Memory Program, and governed
 self-improvement implementation program are complete.
 
 The active program is `AION-SECURE-RUNTIME-INTEGRATION-001`. AION-230 created
-`AION-230-SRI-0001` as the sole active Secure Runtime Integration
-implementation authorization for AION-231. AION-231 implemented the
-controlled, authenticated, operator-invoked, local secure runtime foundation.
-AION-232 is the formal AION-231 operator-evaluation and next-authorization
-decision task. AION-233 through AION-238 remain planned and unauthorized.
+`AION-230-SRI-0001` for AION-231. AION-231 implemented the controlled,
+authenticated, operator-invoked, local secure runtime foundation. AION-232
+evaluated AION-231 through `AION-SRIPE-001`, closed `AION-230-SRI-0001` as
+consumed, and created `AION-232-SRI-0002` as the sole active Secure Runtime
+Integration implementation authorization for AION-233. AION-233 is authorized
+but not implemented. AION-234 is the next formal evaluation task. AION-235
+through AION-238 remain planned and unauthorized.
 AION Secure Runtime Integration Program is the active program.
 
 The AION-231 foundation verifies short-lived offline Ed25519 operator
@@ -5302,3 +5304,7 @@ AION-228 is implemented and completed pending AION-229 final evaluation and clos
 ## AION-229 Final Program Evaluation
 
 AION-229 final evaluation AION-GLMPE-004 passed all 28 deterministic hard-gated scenarios, validated the committed AION-228 live-pilot evidence, and closed AION-227-GLM-0004 as consumed by AION-228. The Governed Learning and Memory Program is in terminal complete state; primary PR #146 merged at 2026-07-30T09:12:24Z and final reconciliation records the primary delivery evidence. No active GLM implementation authorization, successor task, repeated-live-pilot authorization, or production runtime authorization remains.
+
+## AION-232 Secure Runtime Evaluation
+
+AION-232 completed `AION-SRIPE-001` with an exact PASS decision, closed `AION-230-SRI-0001` as consumed by AION-231, and created `AION-232-SRI-0002` as the sole active SRI authorization for AION-233. AION-233 is authorized to implement a provider-neutral, simulation-only model gateway. Actual model calls, provider network egress, provider credentials, tokens, connectors, tools, modules, production runtime, deployment, model training, v0.2 tags, and v0.2 releases remain disabled. v0.2 remains unreleased.

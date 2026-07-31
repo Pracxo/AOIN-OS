@@ -1,0 +1,15 @@
+{
+  "authorization_transaction_id": "AION-232-SRI-0002",
+  "budget_id": "token-budget-AION-233-preview",
+  "budget_violation_fails_closed": true,
+  "maximum_input_tokens_per_request": 131072,
+  "maximum_output_tokens_per_request": 16384,
+  "maximum_total_tokens_per_session": 1000000,
+  "production_effect": false,
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "synthetic": true
+}

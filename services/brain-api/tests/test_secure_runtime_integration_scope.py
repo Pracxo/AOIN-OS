@@ -3,6 +3,8 @@ from __future__ import annotations
 from test_secure_runtime_integration_program_charter import (
     AUTH_SCOPE,
     CLOSEOUT_TASK,
+    CURRENT_CLOSEOUT_TASK,
+    CURRENT_IMPLEMENTATION_TASK,
     FUTURE_CONTRACTS,
     IMPLEMENTATION_TASK,
     STATE_MACHINE_STATES,
@@ -58,16 +60,15 @@ def test_roadmap_authorizes_only_aion231_and_keeps_later_tasks_planned() -> None
     roadmap_text = read_text("docs/secure-runtime-integration/architecture-roadmap.md")
 
     assert roadmap["AION-230"]["state"] == "completed_program_authorization"
-    assert roadmap[IMPLEMENTATION_TASK]["state"] == "implemented_pending_AION-232_closeout"
-    assert (
-        roadmap[CLOSEOUT_TASK]["state"]
-        == "active_formal_evaluation_and_model_gateway_authorization_decision"
-    )
-    for task_id in ("AION-233", "AION-234", "AION-235", "AION-236", "AION-237"):
+    assert roadmap[IMPLEMENTATION_TASK]["state"] == "evaluation_complete"
+    assert roadmap[CLOSEOUT_TASK]["state"] == "evaluation_complete_model_gateway_authorized"
+    assert roadmap[CURRENT_IMPLEMENTATION_TASK]["state"] == "authorized_not_implemented"
+    assert roadmap[CURRENT_CLOSEOUT_TASK]["state"] == "planned_formal_evaluation"
+    for task_id in ("AION-235", "AION-236", "AION-237"):
         assert roadmap[task_id]["state"] == "planned_not_authorized"
     assert roadmap["AION-238"]["state"] == "planned_final_program_closeout"
-    assert "AION-231 is implemented" in roadmap_text
-    assert "AION-233 remains unauthorized" in roadmap_text
+    assert "AION-231 is implemented and evaluation-complete" in roadmap_text
+    assert "AION-233 is authorized but not implemented" in roadmap_text
 
 
 def test_examples_are_bound_to_aion230_scope_and_closeout() -> None:

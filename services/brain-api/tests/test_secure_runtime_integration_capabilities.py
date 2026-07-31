@@ -1,32 +1,26 @@
 from __future__ import annotations
 
-from test_secure_runtime_integration_program_charter import (
-    AUTHORIZED_CAPABILITIES,
-    load_json,
-)
+from secure_runtime_aion232_test_helpers import authorization, load_json, program
 
 
-def test_every_aion231_authorized_capability_is_recorded_true() -> None:
-    program = load_json("docs/secure-runtime-integration/program-ledger.json")
-    auth = load_json("docs/secure-runtime-integration/authorization-ledger.json")
-
-    for payload in (program, auth):
-        assert set(payload["authorized_capabilities"]) == set(AUTHORIZED_CAPABILITIES)
-        assert all(
-            payload["authorized_capabilities"][key] is True for key in AUTHORIZED_CAPABILITIES
-        )
+def test_every_aion231_foundation_capability_remains_recorded_true() -> None:
+    for payload in (program(), authorization()):
+        caps = payload["foundation_authorized_capabilities"]
+        assert all(caps.values())
+        assert caps["local_operator_runtime_authorization_envelope_approved"] is True
+        assert caps["runtime_guard_approved"] is True
 
 
-def test_static_console_records_authorized_sri_capability_projection() -> None:
-    program = load_json("operator-console-static/demo-data/secure-runtime-integration-program.json")
-    authorization = load_json(
-        "operator-console-static/demo-data/secure-runtime-integration-authorization.json"
+def test_static_console_records_historical_aion231_and_current_gateway_projection() -> None:
+    old_program = load_json(
+        "operator-console-static/demo-data/secure-runtime-integration-program.json"
     )
+    gateway = load_json("operator-console-static/demo-data/model-gateway-authorization.json")
     session = load_json("operator-console-static/demo-data/secure-runtime-integration-session.json")
-
-    assert program["active_sri_implementation_authorization"] == "AION-230-SRI-0001"
-    assert authorization["authorization_active"] is True
-    assert authorization["implementation_task"] == "AION-231"
+    assert old_program["active_sri_implementation_authorization"] == "AION-230-SRI-0001"
+    assert gateway["authorization_transaction_id"] == "AION-232-SRI-0002"
+    assert gateway["authorization_active"] is True
+    assert gateway["implementation_task"] == "AION-233"
     assert session["operator_invoked"] is True
     assert session["local_session"] is True
     assert session["production_runtime"] is False
