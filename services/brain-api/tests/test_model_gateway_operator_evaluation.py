@@ -168,6 +168,7 @@ def test_model_gateway_operator_evaluation_scripts_pass_in_nested_mode() -> None
         ["./scripts/model-gateway-operator-evaluation-check.sh"],
         cwd=REPO_ROOT,
         env={
+            "AION_BRAIN_PYTHON": sys.executable,
             "PATH": str(Path("/usr/bin")) + ":" + str(Path("/bin")),
             "PYTEST_CURRENT_TEST": "1",
         },
