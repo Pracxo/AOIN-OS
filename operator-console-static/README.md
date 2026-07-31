@@ -1501,20 +1501,40 @@ mutate policy, create a successor GLM authorization, create a successor GLM
 task, or enable production learning.
 
 
-AION-232 secure runtime foundation evaluation and model-gateway authorization demo data:
+AION-232 secure runtime foundation evaluation and AION-233 controlled model-gateway demo data:
 
 - `demo-data/secure-runtime-foundation-operator-evaluation.json`
 - `demo-data/model-gateway-authorization.json`
 - `demo-data/model-gateway-provider-manifest.json`
+- `demo-data/model-gateway-model-manifests.json`
+- `demo-data/model-gateway-component-binding.json`
+- `demo-data/model-gateway-session-plan.json`
+- `demo-data/model-gateway-message-normalization.json`
 - `demo-data/model-gateway-routing-plan.json`
+- `demo-data/model-gateway-fallback-plan.json`
+- `demo-data/model-gateway-retry-plan.json`
+- `demo-data/model-gateway-circuit-breaker.json`
+- `demo-data/model-gateway-guard.json`
+- `demo-data/model-gateway-reference-provider-response.json`
 - `demo-data/model-gateway-budget.json`
 - `demo-data/model-gateway-output-validation.json`
+- `demo-data/model-gateway-output-provenance.json`
+- `demo-data/model-gateway-audit.json`
+- `demo-data/model-gateway-observability.json`
+- `demo-data/model-gateway-health.json`
+- `demo-data/model-gateway-integrity.json`
+- `demo-data/model-gateway-pilot-evidence.json`
+- `demo-data/model-gateway-runtime-boundary.json`
+- `demo-data/model-gateway-static-console-evidence.json`
 - `demo-data/model-gateway-runtime-hold.json`
 
-AION-232 local gates:
+AION-233 local gates:
 
 - `./scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh`
 - `./scripts/secure-runtime-foundation-operator-evaluation-check.sh`
 - `./scripts/model-gateway-authorization-no-go-regression.sh`
 - `./scripts/model-gateway-authorization-check.sh`
+- `./scripts/model-gateway-no-go-regression.sh`
+- `./scripts/model-gateway-check.sh`
+- `./scripts/model-gateway-pilot-evidence-check.sh`
 - `./scripts/model-gateway-runtime-hold.sh`

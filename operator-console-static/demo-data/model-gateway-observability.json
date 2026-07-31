@@ -1,0 +1,32 @@
+{
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "synthetic": true,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "production_effect": false,
+  "actual_model_provider_calls": 0,
+  "forbidden_actions": [
+    "raw_payload_telemetry",
+    "credential_telemetry",
+    "network_telemetry"
+  ],
+  "network_calls": 0,
+  "sections": [
+    {
+      "refs": [
+        "redacted snapshot",
+        "zero provider calls",
+        "zero network calls"
+      ],
+      "status": "redacted",
+      "summary": "Observability exposes counts, status, fingerprints, and zero-effect counters only.",
+      "title": "Gateway Observability"
+    }
+  ],
+  "status": "implemented",
+  "summary": "Observability is read-only and contains no raw prompt or response.",
+  "title": "Gateway Observability",
+  "view": "model_gateway_observability"
+}

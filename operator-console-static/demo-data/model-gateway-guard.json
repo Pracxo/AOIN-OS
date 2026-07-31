@@ -1,0 +1,33 @@
+{
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "synthetic": true,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "production_effect": false,
+  "forbidden_actions": [
+    "allow_provider_call",
+    "allow_network_egress",
+    "allow_tool_call",
+    "allow_function_call",
+    "allow_production_execution"
+  ],
+  "outcome": "allow_reference_simulation",
+  "sections": [
+    {
+      "refs": [
+        "AION-232-SRI-0002",
+        "brain.think.simulate",
+        "allow_simulation"
+      ],
+      "status": "allowed_reference_simulation",
+      "summary": "Guard decisions can allow only deterministic reference simulation, abstain, or block.",
+      "title": "Gateway Guard"
+    }
+  ],
+  "status": "implemented",
+  "summary": "The guard never authorizes live provider, tool, function, or production execution.",
+  "title": "Gateway Guard Decision",
+  "view": "model_gateway_guard"
+}

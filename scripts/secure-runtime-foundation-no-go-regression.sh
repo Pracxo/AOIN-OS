@@ -61,13 +61,39 @@ is_aion231_runtime_source() {
   return 1
 }
 
+is_aion233_model_gateway_source() {
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/model_gateway.py|\
+    services/brain-api/src/aion_brain/model_gateway/__init__.py|\
+    services/brain-api/src/aion_brain/model_gateway/authorization.py|\
+    services/brain-api/src/aion_brain/model_gateway/manifests.py|\
+    services/brain-api/src/aion_brain/model_gateway/request_envelope.py|\
+    services/brain-api/src/aion_brain/model_gateway/context_budget.py|\
+    services/brain-api/src/aion_brain/model_gateway/routing.py|\
+    services/brain-api/src/aion_brain/model_gateway/circuit_breaker.py|\
+    services/brain-api/src/aion_brain/model_gateway/guard.py|\
+    services/brain-api/src/aion_brain/model_gateway/response_validation.py|\
+    services/brain-api/src/aion_brain/model_gateway/provider_registry.py|\
+    services/brain-api/src/aion_brain/model_gateway/provider_adapter.py|\
+    services/brain-api/src/aion_brain/model_gateway/reference_provider.py|\
+    services/brain-api/src/aion_brain/model_gateway/audit.py|\
+    services/brain-api/src/aion_brain/model_gateway/observability.py|\
+    services/brain-api/src/aion_brain/model_gateway/integrity.py|\
+    services/brain-api/src/aion_brain/model_gateway/evidence.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 is_allowed_change() {
   case "$1" in
     README.md|AGENTS.md|\
     docs/project-status.md|docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/visual-brain.md|\
     docs/secure-runtime-integration/*|\
     docs/release/secure-runtime-integration-*|docs/release/secure-runtime-foundation-*|docs/release/model-gateway-*|docs/release/v02-release-readiness-delta.md|\
-    docs/adr/0195-controlled-authenticated-local-operator-runtime-foundation.md|docs/adr/0196-secure-runtime-foundation-evaluation-and-controlled-model-gateway-authorization.md|docs/adr/README.md|\
+    docs/adr/0195-controlled-authenticated-local-operator-runtime-foundation.md|docs/adr/0196-secure-runtime-foundation-evaluation-and-controlled-model-gateway-authorization.md|\
+    docs/adr/0197-controlled-provider-neutral-model-gateway-and-deterministic-reference-provider.md|docs/adr/README.md|\
     examples/secure-runtime-integration/*|\
     operator-console-static/index.html|operator-console-static/app.js|operator-console-static/README.md|\
     operator-console-static/demo-data/secure-runtime-integration-*.json|\
@@ -84,16 +110,20 @@ is_allowed_change() {
     scripts/knowledge-intelligence-integrated-research-agent-operator-evaluation-no-go-regression.sh|\
     scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh|\
     scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh|\
-    scripts/knowledge-intelligence-tool-verification-authorization-no-go-regression.sh|\
-    scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh|\
-    scripts/lib/cognitive_architecture_governance.py|\
-    scripts/post-v01-release-candidate-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-tool-verification-authorization-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-verified-memory-operator-evaluation-no-go-regression.sh|\
+	    scripts/lib/cognitive_architecture_governance.py|\
+	    scripts/operator-action-write-path-no-go-regression.sh|\
+	    scripts/post-v01-release-candidate-no-go-regression.sh|\
     scripts/production-auth-architecture-check.sh|\
     scripts/static-console-safety-check.sh|\
     scripts/secure-runtime-foundation-check.sh|scripts/secure-runtime-foundation-no-go-regression.sh|\
     scripts/secure-runtime-foundation-pilot-evidence-check.sh|scripts/secure-runtime-foundation-runtime-hold.sh|\
     scripts/secure-runtime-foundation-operator-evaluation-check.sh|scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh|\
-    scripts/model-gateway-authorization-check.sh|scripts/model-gateway-authorization-no-go-regression.sh|scripts/model-gateway-runtime-hold.sh|\
+    scripts/model-gateway-authorization-check.sh|scripts/model-gateway-authorization-no-go-regression.sh|\
+    scripts/model-gateway-check.sh|scripts/model-gateway-no-go-regression.sh|scripts/model-gateway-pilot-evidence-check.sh|\
+    scripts/model-gateway-runtime-hold.sh|scripts/model-gateway-local-simulation-run.py|\
     scripts/secure-runtime-local-operator-run.py|\
     scripts/lib/secure_runtime_foundation_operator_evaluation.py|\
     scripts/lib/v02_production_auth_authorization.py|\
@@ -117,12 +147,19 @@ is_allowed_change() {
     scripts/v02-production-auth-stabilization-authorization-no-go-regression.sh|\
     services/brain-api/tests/secure_runtime_test_support.py|\
     services/brain-api/tests/secure_runtime_aion232_test_helpers.py|\
+    services/brain-api/tests/model_gateway_aion233_test_support.py|\
     services/brain-api/tests/test_secure_runtime_*.py|\
     services/brain-api/tests/test_model_gateway_*.py)
       return 0
       ;;
   esac
-  is_aion231_runtime_source "$1"
+  if is_aion231_runtime_source "$1"; then
+    return 0
+  fi
+  if is_aion233_model_gateway_source "$1"; then
+    return 0
+  fi
+  return 1
 }
 
 base_ref="$(comparison_base || true)"
@@ -170,7 +207,7 @@ while IFS= read -r path; do
     services/brain-api/src/aion_brain/connectors/*|\
     services/brain-api/src/aion_brain/connector_runtime/*|\
     services/brain-api/src/aion_brain/model_gateway/*)
-      if ! is_aion231_runtime_source "$path"; then
+      if ! is_aion231_runtime_source "$path" && ! is_aion233_model_gateway_source "$path"; then
         echo "ERROR: prohibited runtime/dependency/API path changed: $path" >&2
         exit 1
       fi

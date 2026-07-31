@@ -2504,4 +2504,10 @@ AION-229 final evaluation AION-GLMPE-004 passed all 28 deterministic hard-gated 
 
 ## AION-232 Model Gateway Contract Boundary
 
-AION-232 authorizes future AION-233 model-gateway contracts only. The future contracts must be provider-neutral, credential-free, network-disabled, simulation-only, redacted, and bounded by context and token budgets. They may not create provider sessions, connector sessions, tool executions, memory writes, policy mutations, belief mutations, deployments, model-weight changes, v0.2 tags, or v0.2 releases.
+AION-232 authorized AION-233 model-gateway contracts through `AION-232-SRI-0002`.
+
+## AION-233 Model Gateway Contract Boundary
+
+AION-233 implements provider-neutral, credential-free, network-disabled, simulation-only, redacted model-gateway contracts. The contracts bind AION-231 secure-runtime evidence, closed provider and model manifests, bounded request envelopes, message and context fingerprints, context and token budgets, deterministic route/fallback/retry/circuit-breaker/cost/latency plans, guard decisions, deterministic reference-provider responses, response validation, untrusted classification, provenance, audit, observability, health, integrity, and pilot evidence.
+
+They do not create provider sessions, provider calls, connector sessions, tool executions, function calls, prompt persistence, response persistence, hidden-reasoning retention, raw provider-payload retention, memory writes, policy mutations, belief mutations, deployments, model-weight changes, v0.2 tags, or v0.2 releases. AION-232-SRI-0002 remains active until AION-234 evaluates and closes it.

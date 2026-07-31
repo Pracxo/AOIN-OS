@@ -2567,4 +2567,10 @@ AION-229 final evaluation AION-GLMPE-004 passed all 28 deterministic hard-gated 
 
 ## AION-232 Model Gateway Policy Boundary
 
-`AION-232-SRI-0002` permits AION-233 to plan and simulate model-gateway requests through closed allowlists and deterministic routing only. Policy, risk, guardrails, approval evidence, budget checks, output validation, and provenance must all pass before simulation evidence can be recorded. No approval may authorize live provider egress under this transaction.
+`AION-232-SRI-0002` permits AION-233 to plan and simulate model-gateway requests through closed allowlists and deterministic routing only.
+
+## AION-233 Model Gateway Policy Boundary
+
+AION-233 implements the controlled model gateway while keeping policy fail-closed for live effects. Policy, risk, guardrails, approval evidence, protected-material checks, context budgets, token budgets, route planning, circuit-breaker state, output validation, untrusted classification, provenance, audit, observability, and integrity must all pass before redacted simulation evidence can be recorded.
+
+No approval under `AION-232-SRI-0002` may authorize live provider egress, provider SDK usage, credentials, tokens, authorization headers, live model sessions, tool calls, function calls, connector execution, prompt persistence, response persistence, memory writes, policy mutation, belief mutation, source rewrite, deployment, model training, v0.2 tags, or v0.2 release readiness.

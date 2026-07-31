@@ -23,7 +23,7 @@ from typing import Any
 root = Path(os.environ["AION_REPO_ROOT"])
 
 PROGRAM_ID = "AION-SECURE-RUNTIME-INTEGRATION-001"
-PROGRAM_STATE = "secure_runtime_foundation_evaluated_model_gateway_authorized_not_implemented"
+PROGRAM_STATE = "controlled_model_gateway_implemented_reference_simulation_only_pending_closeout"
 AUTH_ID = "AION-230-SRI-0001"
 IMPLEMENTATION_TASK = "AION-231"
 CLOSEOUT_TASK = "AION-232"
@@ -369,9 +369,13 @@ for item in program["roadmap"]:
             "AION-232 roadmap state",
         )
     if item["task_id"] == ACTIVE_IMPLEMENTATION_TASK:
-        require(item["state"] == "authorized_not_implemented", "AION-233 roadmap state")
+        require(item["state"] == "implemented_pending_AION-234_closeout", "AION-233 roadmap state")
     if item["task_id"] == ACTIVE_CLOSEOUT_TASK:
-        require(item["state"] == "planned_formal_evaluation", "AION-234 roadmap state")
+        require(
+            item["state"]
+            == "active_formal_evaluation_and_sandboxed_capability_runtime_authorization_decision",
+            "AION-234 roadmap state",
+        )
     if item["task_id"] in {"AION-235", "AION-236", "AION-237"}:
         require(item["state"] == "planned_not_authorized", f"{item['task_id']} unauthorized")
 

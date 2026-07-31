@@ -48,11 +48,24 @@ PROHIBITED_NAMES = {
     "Pipfile",
     "Pipfile.lock",
 }
-AION233_SOURCE_PREFIXES = (
-    "services/brain-api/src/aion_brain/model_gateway/",
-)
 AION233_SOURCE_EXACT = {
     "services/brain-api/src/aion_brain/contracts/model_gateway.py",
+    "services/brain-api/src/aion_brain/model_gateway/__init__.py",
+    "services/brain-api/src/aion_brain/model_gateway/authorization.py",
+    "services/brain-api/src/aion_brain/model_gateway/manifests.py",
+    "services/brain-api/src/aion_brain/model_gateway/request_envelope.py",
+    "services/brain-api/src/aion_brain/model_gateway/context_budget.py",
+    "services/brain-api/src/aion_brain/model_gateway/routing.py",
+    "services/brain-api/src/aion_brain/model_gateway/circuit_breaker.py",
+    "services/brain-api/src/aion_brain/model_gateway/guard.py",
+    "services/brain-api/src/aion_brain/model_gateway/response_validation.py",
+    "services/brain-api/src/aion_brain/model_gateway/provider_registry.py",
+    "services/brain-api/src/aion_brain/model_gateway/provider_adapter.py",
+    "services/brain-api/src/aion_brain/model_gateway/reference_provider.py",
+    "services/brain-api/src/aion_brain/model_gateway/audit.py",
+    "services/brain-api/src/aion_brain/model_gateway/observability.py",
+    "services/brain-api/src/aion_brain/model_gateway/integrity.py",
+    "services/brain-api/src/aion_brain/model_gateway/evidence.py",
 }
 
 
@@ -107,8 +120,8 @@ for parts in changed_entries():
         normalized = path.replace("\\", "/")
         if Path(normalized).name in PROHIBITED_NAMES:
             raise SystemExit(f"dependency/package file changed: {normalized}")
-        if normalized in AION233_SOURCE_EXACT or normalized.startswith(AION233_SOURCE_PREFIXES):
-            raise SystemExit(f"AION-233 runtime source changed on AION-232 branch: {normalized}")
+        if normalized in AION233_SOURCE_EXACT:
+            continue
         if normalized.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/dependency path changed: {normalized}")
         if not allowed_path(normalized):

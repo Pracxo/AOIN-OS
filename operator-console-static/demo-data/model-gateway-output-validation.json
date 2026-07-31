@@ -11,7 +11,7 @@
   "redacted": true,
   "redaction_applied": true,
   "runtime_effect": false,
-  "schema_id": "structured-output-schema-AION-233-preview",
+  "schema_id": "structured-output-schema-AION-233-implemented",
   "synthetic": true,
   "tool_calling_enabled": false,
   "untrusted_output_classification_required": true

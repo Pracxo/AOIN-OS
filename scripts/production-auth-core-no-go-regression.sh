@@ -133,6 +133,9 @@ while IFS= read -r file; do
   if aion231_is_scoped_secure_runtime_foundation_path "$file"; then
     continue
   fi
+  if aion233_is_scoped_controlled_model_gateway_path "$file"; then
+    continue
+  fi
   if aion221_is_scoped_governed_learning_memory_path "$file"; then
     continue
   fi
@@ -213,6 +216,9 @@ while IFS= read -r file; do
     continue
   fi
   if aion231_is_scoped_secure_runtime_foundation_path "$file"; then
+    continue
+  fi
+  if aion233_is_scoped_controlled_model_gateway_path "$file"; then
     continue
   fi
   if aion221_is_scoped_governed_learning_memory_path "$file"; then
@@ -296,6 +302,9 @@ while IFS= read -r file; do
     continue
   fi
   if aion231_is_scoped_secure_runtime_foundation_path "$file"; then
+    continue
+  fi
+  if aion233_is_scoped_controlled_model_gateway_path "$file"; then
     continue
   fi
   if aion221_is_scoped_governed_learning_memory_path "$file"; then

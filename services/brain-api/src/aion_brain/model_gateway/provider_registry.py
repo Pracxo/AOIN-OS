@@ -3,7 +3,11 @@
 from datetime import UTC, datetime
 from uuid import uuid4
 
-from aion_brain.contracts.model_gateway import ModelProvider, ModelProviderHealth
+from aion_brain.contracts.model_gateway import (
+    ModelProvider,
+    ModelProviderHealth,
+    ModelProviderType,
+)
 from aion_brain.contracts.policy import PolicyRequest
 from aion_brain.contracts.scopes import ActorContext
 from aion_brain.model_gateway.repository import ModelGatewayRepository
@@ -17,7 +21,7 @@ def deterministic_provider() -> ModelProvider:
     """Return the built-in local deterministic provider."""
     return ModelProvider(
         provider_id=DETERMINISTIC_PROVIDER_ID,
-        provider_type="deterministic",
+        provider_type=ModelProviderType.deterministic,
         display_name="AION Deterministic Provider",
         status="active",
         endpoint_ref=None,

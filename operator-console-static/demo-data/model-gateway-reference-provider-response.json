@@ -1,0 +1,34 @@
+{
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "synthetic": true,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "production_effect": false,
+  "actual_provider_call": false,
+  "forbidden_actions": [
+    "provider_call",
+    "network_effect",
+    "credential_effect",
+    "tool_effect",
+    "production_effect"
+  ],
+  "network_effect": false,
+  "sections": [
+    {
+      "refs": [
+        "deterministic-reference-provider",
+        "reference-text-sim-v1",
+        "reference-json-sim-v1"
+      ],
+      "status": "synthetic",
+      "summary": "Responses are deterministic synthetic local simulation outputs.",
+      "title": "Reference Provider Response"
+    }
+  ],
+  "status": "implemented",
+  "summary": "Reference-provider responses are not live model responses and remain untrusted.",
+  "title": "Gateway Reference Provider Response",
+  "view": "model_gateway_reference_provider_response"
+}

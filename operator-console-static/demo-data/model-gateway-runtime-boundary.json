@@ -1,0 +1,39 @@
+{
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "synthetic": true,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "production_effect": false,
+  "actual_model_provider_call_enabled": false,
+  "connector_execution_enabled": false,
+  "forbidden_actions": [
+    "provider_call",
+    "network_egress",
+    "credential_read",
+    "tool_call",
+    "function_call",
+    "connector_execution",
+    "production_effect"
+  ],
+  "model_response_persistence_enabled": false,
+  "prompt_persistence_enabled": false,
+  "provider_network_egress_enabled": false,
+  "sections": [
+    {
+      "refs": [
+        "simulation_only=true",
+        "output_untrusted=true",
+        "v02_release_ready=false"
+      ],
+      "status": "held",
+      "summary": "The model gateway is implemented but live runtime effects remain disabled.",
+      "title": "Runtime Boundary"
+    }
+  ],
+  "status": "implemented",
+  "summary": "AION-234 must evaluate the gateway before any successor authorization.",
+  "title": "Gateway Runtime Boundary",
+  "view": "model_gateway_runtime_boundary"
+}

@@ -112,6 +112,7 @@ for parts in changed_entries():
         if GLM_PROGRAM_STATE == AION226_GLM_STATE and normalized in AION226_SOURCE: continue
         if (GLM_PROGRAM_STATE == "governed_learning_memory_controlled_local_continual_learning_pilot_implemented_completed_pending_final_closeout" and (normalized == "services/brain-api/src/aion_brain/contracts/governed_continual_learning.py" or normalized == "services/brain-api/src/aion_brain/governed_learning_memory/__init__.py" or normalized.startswith("services/brain-api/src/aion_brain/governed_learning_memory/continual_learning_"))): continue
         if normalized == "services/brain-api/src/aion_brain/contracts/secure_runtime.py" or normalized.startswith("services/brain-api/src/aion_brain/secure_runtime/"): continue
+        if normalized == "services/brain-api/src/aion_brain/contracts/model_gateway.py" or normalized.startswith("services/brain-api/src/aion_brain/model_gateway/"): continue
         if any(normalized.startswith(prefix) for prefix in PROHIBITED_PREFIXES): raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")
         if normalized not in ALLOWED_EXACT and not any(normalized.startswith(prefix) for prefix in ALLOWED_PREFIXES): raise SystemExit(f"path outside AION-217 scope: {normalized}")
 for relative in run(["git", "ls-files"]).stdout.splitlines():

@@ -96,6 +96,16 @@ is_aion226_engagement_application_path() {
   return 1
 }
 
+is_aion233_model_gateway_path() {
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/model_gateway.py|\
+    services/brain-api/src/aion_brain/model_gateway/*)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
 }
@@ -126,6 +136,9 @@ is_allowed_path() {
   if is_aion226_engagement_application_path "$path"; then
     return 0
   fi
+  if is_aion233_model_gateway_path "$path"; then
+    return 0
+  fi
   for item in "${ALLOWED_EXACT[@]}"; do
     [[ "$path" == "$item" ]] && return 0
   done
@@ -145,6 +158,9 @@ is_prohibited_path() {
     return 1
   fi
   if is_aion226_engagement_application_path "$path"; then
+    return 1
+  fi
+  if is_aion233_model_gateway_path "$path"; then
     return 1
   fi
   for item in "${PROHIBITED_PREFIXES[@]}"; do

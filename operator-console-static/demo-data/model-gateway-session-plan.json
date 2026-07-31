@@ -1,0 +1,32 @@
+{
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "synthetic": true,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "production_effect": false,
+  "forbidden_actions": [
+    "live_model_session",
+    "background_session",
+    "cross_session_context"
+  ],
+  "maximum_concurrent_requests": 4,
+  "maximum_requests": 100,
+  "sections": [
+    {
+      "refs": [
+        "maximum_model_gateway_sessions=1",
+        "maximum_requests_per_session=100",
+        "maximum_concurrent_requests=4"
+      ],
+      "status": "bounded",
+      "summary": "A single local gateway session is planned from the AION-231 secure runtime session.",
+      "title": "Session Limits"
+    }
+  ],
+  "status": "implemented",
+  "summary": "Gateway sessions are local, bounded, and closed with zero active requests.",
+  "title": "Gateway Session Plan",
+  "view": "model_gateway_session_plan"
+}

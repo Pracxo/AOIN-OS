@@ -1,0 +1,31 @@
+{
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "synthetic": true,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "production_effect": false,
+  "forbidden_actions": [
+    "live_provider_health_probe",
+    "network_probe",
+    "credential_probe"
+  ],
+  "ready_reference_simulation": true,
+  "sections": [
+    {
+      "refs": [
+        "authorization exact",
+        "reference provider available",
+        "runtime effects disabled"
+      ],
+      "status": "ready_reference_simulation",
+      "summary": "Readiness confirms local simulation availability and disabled live effects.",
+      "title": "Gateway Health"
+    }
+  ],
+  "status": "implemented",
+  "summary": "Health does not probe external providers or networks.",
+  "title": "Gateway Health",
+  "view": "model_gateway_health"
+}

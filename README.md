@@ -5307,4 +5307,10 @@ AION-229 final evaluation AION-GLMPE-004 passed all 28 deterministic hard-gated 
 
 ## AION-232 Secure Runtime Evaluation
 
-AION-232 completed `AION-SRIPE-001` with an exact PASS decision, closed `AION-230-SRI-0001` as consumed by AION-231, and created `AION-232-SRI-0002` as the sole active SRI authorization for AION-233. AION-233 is authorized to implement a provider-neutral, simulation-only model gateway. Actual model calls, provider network egress, provider credentials, tokens, connectors, tools, modules, production runtime, deployment, model training, v0.2 tags, and v0.2 releases remain disabled. v0.2 remains unreleased.
+AION-232 completed `AION-SRIPE-001` with an exact PASS decision, closed `AION-230-SRI-0001` as consumed by AION-231, and created `AION-232-SRI-0002` as the sole active SRI authorization for AION-233.
+
+## AION-233 Controlled Model Gateway
+
+AION-233 implements the provider-neutral, simulation-only model gateway under `AION-232-SRI-0002`. The gateway composes the AION-231 secure-runtime foundation through `brain.think.simulate`, requires parent guard outcome `allow_simulation`, validates closed provider and model manifests, enforces context and token budgets, plans routing/fallback/retry/circuit-breaker/cost/latency decisions, simulates text and structured JSON through the local deterministic reference provider, validates output as untrusted, and records redacted provenance, audit, observability, health, integrity, and pilot evidence.
+
+The only provider is `deterministic-reference-provider`. The only models are `reference-text-sim-v1` and `reference-json-sim-v1`. Actual model calls, provider network egress, provider SDKs, provider credentials, API keys, tokens, authorization headers, live model sessions, prompt persistence, response persistence, hidden reasoning retention, raw provider payload retention, connectors, tools, functions, shell/subprocess/browser execution, modules, production memory, production policy, beliefs, source rewrite, deployment, model training, v0.2 tags, and v0.2 releases remain disabled. `AION-232-SRI-0002` remains active pending AION-234 evaluation and closeout. v0.2 remains unreleased.

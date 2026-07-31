@@ -1,0 +1,45 @@
+{
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "synthetic": true,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "production_effect": false,
+  "forbidden_actions": [
+    "model_substitution",
+    "tool_calling",
+    "function_calling",
+    "provider_egress"
+  ],
+  "model_manifests": [
+    {
+      "model_id": "reference-text-sim-v1",
+      "supported_operations": [
+        "text_generate_simulate"
+      ]
+    },
+    {
+      "model_id": "reference-json-sim-v1",
+      "supported_operations": [
+        "text_generate_simulate",
+        "structured_generate_simulate"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "refs": [
+        "reference-text-sim-v1",
+        "reference-json-sim-v1"
+      ],
+      "status": "closed_allowlist",
+      "summary": "Exactly two local deterministic reference models are available.",
+      "title": "Closed Model Registry"
+    }
+  ],
+  "status": "implemented",
+  "summary": "Model manifests are immutable, provider-bound, and simulation-only.",
+  "title": "Gateway Model Manifests",
+  "view": "model_gateway_model_manifests"
+}

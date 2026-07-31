@@ -362,12 +362,29 @@ secure_runtime_evaluation_demo_names = {
     "secure-runtime-foundation-operator-evaluation.json",
 }
 model_gateway_demo_names = {
+    "model-gateway-audit.json",
     "model-gateway-authorization.json",
     "model-gateway-budget.json",
+    "model-gateway-circuit-breaker.json",
+    "model-gateway-component-binding.json",
+    "model-gateway-fallback-plan.json",
+    "model-gateway-guard.json",
+    "model-gateway-health.json",
+    "model-gateway-integrity.json",
+    "model-gateway-message-normalization.json",
+    "model-gateway-model-manifests.json",
+    "model-gateway-observability.json",
+    "model-gateway-output-provenance.json",
     "model-gateway-output-validation.json",
+    "model-gateway-pilot-evidence.json",
     "model-gateway-provider-manifest.json",
+    "model-gateway-reference-provider-response.json",
+    "model-gateway-retry-plan.json",
     "model-gateway-routing-plan.json",
+    "model-gateway-runtime-boundary.json",
     "model-gateway-runtime-hold.json",
+    "model-gateway-session-plan.json",
+    "model-gateway-static-console-evidence.json",
 }
 aion161_allowed_policy_markers = {
     "runtime_private_key",
@@ -397,6 +414,13 @@ def walk(value: object, path: Path) -> None:
             ):
                 continue
             if marker == "authorization" and path.name in allowed_authorization_demo_names:
+                continue
+            if marker in {
+                "authorization",
+                "credential",
+                "token",
+                "hidden_reasoning",
+            } and path.name in model_gateway_demo_names:
                 continue
             if marker == "sk-" and not re.search(r"\bsk-[a-z0-9_-]{12,}", lowered):
                 continue

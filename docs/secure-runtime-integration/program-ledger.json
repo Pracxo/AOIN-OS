@@ -110,34 +110,60 @@
     "authorization_state": "active_for_AION-233_formal_closeout_AION-234",
     "authorization_transaction": "AION-232-SRI-0002",
     "branch": "phase/secure-runtime-foundation-evaluation-model-gateway-authorization",
-    "ci_result": "pending",
-    "closeout_commit": "PENDING_AION_233_RECONCILIATION_AFTER_AION_232_MERGE",
-    "completion_timestamp": null,
+    "ci_result": "pass",
+    "closeout_commit": "58ca782263b0393d3b47bdedc5d8fbb4e6a7ad4a",
+    "completion_timestamp": "2026-07-31T03:41:13Z",
     "corrective_prs": [],
     "evaluation_decision": "SECURE_LOCAL_OPERATOR_RUNTIME_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_MODEL_GATEWAY_AUTHORIZATION",
     "evaluation_id": "AION-SRIPE-001",
     "feature_commits": [
       "6e0618b77e22ee45961b9660e6987af73436e3f7",
-      "PENDING_AION_233_RECONCILIATION_AFTER_AION_232_MERGE"
+      "58ca782263b0393d3b47bdedc5d8fbb4e6a7ad4a"
     ],
-    "git_delivery_evidence_reconciliation": "AION-233 will reconcile final AION-232 Git delivery evidence.",
     "harness_commit": "6e0618b77e22ee45961b9660e6987af73436e3f7",
-    "merge_commits": [],
+    "merge_commits": [
+      "490fc7070fd4f46d49d3cbe8fde28c006f5b5ed8"
+    ],
     "next_task": "AION-233",
-    "pull_requests": [],
-    "task_id": "AION-232"
+    "pull_requests": [
+      150
+    ],
+    "required_checks_passed": [
+      "brain-api-quality",
+      "contract-check",
+      "docker-build-core",
+      "policy-check",
+      "repository-hygiene",
+      "sdk-cli-check",
+      "sdk-quality"
+    ],
+    "runtime_state": "controlled_model_gateway_authorized_not_implemented",
+    "task_id": "AION-232",
+    "verification": {
+      "aion_sripe_001_passed_28_scenarios": true,
+      "closeout_commit_in_origin_main": true,
+      "harness_commit_in_origin_main": true,
+      "merge_commit_in_origin_main": true,
+      "model_gateway_authorization_gate_passed": true,
+      "model_gateway_runtime_hold_passed": true,
+      "model_provider_calls": 0,
+      "network_calls": 0,
+      "no_aion_233_source_created_by_aion_232": true,
+      "v02_tag_or_release_created": false
+    }
   },
   "aion_233_record": {
-    "authorization_state": "implementation_in_progress_formal_closeout_AION-234",
+    "authorization_state": "implementation_complete_pending_AION-234_closeout",
     "authorization_transaction": "AION-232-SRI-0002",
     "branch": "phase/controlled-model-gateway",
     "ci_result": "pending",
     "completion_timestamp": null,
+    "corrective_prs": [],
     "feature_commits": [],
     "merge_commits": [],
     "next_task": "AION-234",
     "pull_requests": [],
-    "runtime_state": "controlled_model_gateway_authorized_not_implemented",
+    "runtime_state": "controlled_model_gateway_implemented_reference_simulation_only_pending_closeout",
     "task_id": "AION-233"
   },
   "api_key_persistence_enabled": false,
@@ -185,19 +211,30 @@
   "browser_automation_enabled": false,
   "capability_execution_authorized": false,
   "capability_planning_available": true,
+  "circuit_breaker_state_available": true,
   "closed_capability_allowlist_available": true,
+  "closed_model_allowlist_available": true,
+  "closed_provider_allowlist_available": true,
   "cognitive_memory_write_enabled": false,
   "connector_execution_enabled": false,
   "connector_integration_enabled": false,
   "connector_runtime_authorized": false,
   "connectors_enabled": false,
+  "context_budget_enforcement_available": true,
+  "context_item_binding_available": true,
   "created_by_task": "AION-230",
   "credential_persistence_enabled": false,
   "cross_session_context_retention_enabled": false,
-  "current_task": "AION-233",
+  "current_milestone": "AION-233 controlled provider-neutral model gateway implemented.",
+  "current_stage": "AION OS now contains a provider-neutral, credential-free, network-disabled model-gateway control plane. It validates bounded model-request envelopes, closed provider and model manifests, context and token budgets, deterministic routing, fallback and retry plans, circuit-breaker state, structured-output schemas, response safety, output provenance, audit, and observability through a deterministic reference provider.",
+  "current_task": "AION-234 model-gateway operator evaluation and sandboxed capability-runtime authorization decision.",
+  "deterministic_fallback_planning_available": true,
+  "deterministic_model_routing_available": true,
+  "deterministic_reference_provider_available": true,
   "deterministic_runtime_fixture_replay_available": true,
   "dynamic_route_registration_enabled": false,
   "ephemeral_operator_session_available": true,
+  "estimated_cost_budget_available": true,
   "existing_approval_evidence_validation_available": true,
   "external_identity_provider_enabled": false,
   "external_providers_enabled": false,
@@ -386,13 +423,17 @@
   "glm_live_execution_enabled": false,
   "guardrail_binding_available": true,
   "hidden_reasoning_retention_enabled": false,
+  "latency_budget_available": true,
   "live_model_session_enabled": false,
+  "local_model_gateway_simulation_pilot_completed": true,
   "local_operator_authenticated_session_available": true,
   "local_operator_identity_verification_available": true,
   "local_operator_replay_protection_available": true,
   "local_operator_runtime_authorized": true,
   "local_operator_runtime_available": true,
   "local_operator_runtime_pilot_completed": true,
+  "model_capability_profile_available": true,
+  "model_gateway_audit_available": true,
   "model_gateway_authorization_scope": "authenticated-local-model-request-envelope-provider-model-manifest-closed-allowlist-context-token-budget-redaction-routing-fallback-retry-circuit-breaker-cost-latency-estimation-structured-output-validation-untrusted-output-provenance-deterministic-reference-provider-no-egress-core",
   "model_gateway_authorized": true,
   "model_gateway_authorized_capabilities": {
@@ -446,6 +487,7 @@
     "model_gateway.text.generate.simulate",
     "model_gateway.structured.generate.simulate"
   ],
+  "model_gateway_fixture_replay_available": true,
   "model_gateway_future_contracts": [
     "ModelGatewayAuthorizationEnvelope",
     "ModelProviderManifest",
@@ -486,6 +528,7 @@
     "services/brain-api/src/aion_brain/model_gateway/circuit_breaker.py",
     "services/brain-api/src/aion_brain/model_gateway/guard.py",
     "services/brain-api/src/aion_brain/model_gateway/response_validation.py",
+    "services/brain-api/src/aion_brain/model_gateway/provider_registry.py",
     "services/brain-api/src/aion_brain/model_gateway/provider_adapter.py",
     "services/brain-api/src/aion_brain/model_gateway/reference_provider.py",
     "services/brain-api/src/aion_brain/model_gateway/audit.py",
@@ -493,7 +536,10 @@
     "services/brain-api/src/aion_brain/model_gateway/integrity.py",
     "services/brain-api/src/aion_brain/model_gateway/evidence.py"
   ],
-  "model_gateway_implemented": false,
+  "model_gateway_health_readiness_available": true,
+  "model_gateway_implemented": true,
+  "model_gateway_integrity_audit_available": true,
+  "model_gateway_observability_available": true,
   "model_gateway_prohibited_capabilities": {
     "actual_belief_creation_enabled": false,
     "actual_belief_mutation_enabled": false,
@@ -623,15 +669,23 @@
     "maximum_total_tokens_per_session": 1000000,
     "maximum_trace_bytes_per_session": 4194304
   },
+  "model_gateway_session_available": true,
+  "model_gateway_state": "implemented_provider_neutral_reference_simulation_only_pending_AION-234_closeout",
+  "model_manifest_registry_available": true,
+  "model_message_normalization_available": true,
+  "model_output_provenance_available": true,
+  "model_output_redaction_available": true,
   "model_provider_call_enabled": false,
   "model_provider_integration_enabled": false,
+  "model_request_envelope_available": true,
   "model_response_persistence_enabled": false,
+  "model_response_validation_available": true,
   "model_weight_training_enabled": false,
   "module_activation_authorized": false,
   "module_activation_enabled": false,
   "module_code_loading_enabled": false,
   "next_knowledge_implementation_task": null,
-  "next_sri_implementation_task": "AION-233",
+  "next_sri_implementation_task": "AION-234",
   "operator_console_live_services_authorized": false,
   "operator_kill_switch_available": true,
   "package_installation_enabled": false,
@@ -656,7 +710,7 @@
   "program_authorized": true,
   "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
   "program_name": "AION Secure Runtime Integration Program",
-  "program_state": "secure_runtime_foundation_evaluated_model_gateway_authorized_not_implemented",
+  "program_state": "controlled_model_gateway_implemented_reference_simulation_only_pending_closeout",
   "prohibited_capabilities": {
     "actual_belief_creation_enabled": false,
     "actual_belief_mutation_enabled": false,
@@ -706,9 +760,12 @@
     "v02_tag_created": false
   },
   "prompt_persistence_enabled": false,
+  "prompt_protected_material_rejection_available": true,
+  "prompt_redaction_available": true,
   "provider_credential_persistence_enabled": false,
   "provider_credential_read_enabled": false,
   "provider_endpoint_connection_enabled": false,
+  "provider_manifest_registry_available": true,
   "provider_network_egress_enabled": false,
   "provider_raw_payload_retention_enabled": false,
   "provider_sdk_enabled": false,
@@ -720,6 +777,8 @@
   "refresh_token_enabled": false,
   "repeat_continual_learning_pilot_enabled": false,
   "repeat_live_pilot_authorized": false,
+  "request_fingerprinting_available": true,
+  "request_idempotency_available": true,
   "required_result_invariants": {
     "belief_effect": false,
     "cognitive_memory_effect": false,
@@ -791,6 +850,7 @@
     "maximum_tokens_persisted": 0,
     "maximum_trace_bytes_per_session": 4194304
   },
+  "retry_planning_available": true,
   "risk_binding_available": true,
   "roadmap": [
     {
@@ -810,12 +870,12 @@
     },
     {
       "role": "Controlled provider-neutral model-gateway implementation",
-      "state": "authorized_not_implemented",
+      "state": "implemented_pending_AION-234_closeout",
       "task_id": "AION-233"
     },
     {
       "role": "Model-gateway evaluation and capability-sandbox authorization",
-      "state": "planned_formal_evaluation",
+      "state": "active_formal_evaluation_and_sandboxed_capability_runtime_authorization_decision",
       "task_id": "AION-234"
     },
     {
@@ -835,7 +895,7 @@
     },
     {
       "role": "Final runtime integration evaluation and v0.2 RC authorization review",
-      "state": "planned_final_program_closeout",
+      "state": "planned_not_authorized",
       "task_id": "AION-238"
     }
   ],
@@ -909,10 +969,14 @@
   "simulated_capability_dispatch_available": true,
   "source_rewrite_enabled": false,
   "standalone_local_operator_runtime_pilot_authorized": false,
+  "structured_output_schema_available": true,
   "subprocess_execution_enabled": false,
+  "system_instruction_policy_binding_available": true,
+  "token_budget_enforcement_available": true,
   "token_persistence_enabled": false,
   "tool_calling_enabled": false,
   "tools_enabled": false,
+  "untrusted_model_output_classification_available": true,
   "v02_release_created": false,
   "v02_release_ready": false,
   "v02_tag_created": false

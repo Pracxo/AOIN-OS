@@ -55,6 +55,7 @@ is_allowed_path() {
     docs/adr/0194-secure-runtime-integration-program-charter-and-local-operator-runtime-foundation-authorization.md|\
     docs/adr/0195-controlled-authenticated-local-operator-runtime-foundation.md|\
     docs/adr/0196-secure-runtime-foundation-evaluation-and-controlled-model-gateway-authorization.md|\
+    docs/adr/0197-controlled-provider-neutral-model-gateway-and-deterministic-reference-provider.md|\
     docs/adr/README.md|\
     examples/secure-runtime-integration/*|\
 	    operator-console-static/index.html|operator-console-static/app.js|operator-console-static/README.md|\
@@ -75,7 +76,9 @@ is_allowed_path() {
 	    scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh|\
 	    scripts/knowledge-intelligence-tool-verification-authorization-no-go-regression.sh|\
 	    scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-verified-memory-operator-evaluation-no-go-regression.sh|\
 	    scripts/lib/cognitive_architecture_governance.py|\
+	    scripts/operator-action-write-path-no-go-regression.sh|\
 	    scripts/post-v01-release-candidate-no-go-regression.sh|\
 	    scripts/production-auth-architecture-check.sh|\
 	    scripts/static-console-safety-check.sh|\
@@ -90,7 +93,11 @@ is_allowed_path() {
 	    scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh|\
 	    scripts/model-gateway-authorization-check.sh|\
 	    scripts/model-gateway-authorization-no-go-regression.sh|\
+	    scripts/model-gateway-check.sh|\
+	    scripts/model-gateway-no-go-regression.sh|\
+	    scripts/model-gateway-pilot-evidence-check.sh|\
 	    scripts/model-gateway-runtime-hold.sh|\
+	    scripts/model-gateway-local-simulation-run.py|\
 	    scripts/secure-runtime-local-operator-run.py|\
 	    scripts/lib/secure_runtime_foundation_operator_evaluation.py|\
 	    scripts/lib/v02_production_auth_authorization.py|\
@@ -123,8 +130,34 @@ is_allowed_path() {
     services/brain-api/src/aion_brain/secure_runtime/evidence.py|\
     services/brain-api/tests/secure_runtime_test_support.py|\
     services/brain-api/tests/secure_runtime_aion232_test_helpers.py|\
+    services/brain-api/tests/model_gateway_aion233_test_support.py|\
     services/brain-api/tests/test_secure_runtime_*.py|\
     services/brain-api/tests/test_model_gateway_*.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
+is_aion233_model_gateway_source_path() {
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/model_gateway.py|\
+    services/brain-api/src/aion_brain/model_gateway/__init__.py|\
+    services/brain-api/src/aion_brain/model_gateway/authorization.py|\
+    services/brain-api/src/aion_brain/model_gateway/manifests.py|\
+    services/brain-api/src/aion_brain/model_gateway/request_envelope.py|\
+    services/brain-api/src/aion_brain/model_gateway/context_budget.py|\
+    services/brain-api/src/aion_brain/model_gateway/routing.py|\
+    services/brain-api/src/aion_brain/model_gateway/circuit_breaker.py|\
+    services/brain-api/src/aion_brain/model_gateway/guard.py|\
+    services/brain-api/src/aion_brain/model_gateway/response_validation.py|\
+    services/brain-api/src/aion_brain/model_gateway/provider_registry.py|\
+    services/brain-api/src/aion_brain/model_gateway/provider_adapter.py|\
+    services/brain-api/src/aion_brain/model_gateway/reference_provider.py|\
+    services/brain-api/src/aion_brain/model_gateway/audit.py|\
+    services/brain-api/src/aion_brain/model_gateway/observability.py|\
+    services/brain-api/src/aion_brain/model_gateway/integrity.py|\
+    services/brain-api/src/aion_brain/model_gateway/evidence.py)
       return 0
       ;;
   esac
@@ -186,14 +219,16 @@ fi
 while IFS= read -r path; do
   [[ -n "$path" ]] || continue
   if ! is_allowed_path "$path"; then
-    echo "ERROR: AION-230 changed disallowed path: $path" >&2
-    exit 1
+    if ! is_aion233_model_gateway_source_path "$path"; then
+      echo "ERROR: AION-230 changed disallowed path: $path" >&2
+      exit 1
+    fi
   fi
   case "$path" in
     services/brain-api/src/*|packages/*|.github/workflows/*|\
     *migrations*|*package.json|*package-lock.json|*pnpm-lock.yaml|*yarn.lock|\
     *poetry.lock|*Pipfile.lock|*requirements*.txt|*pyproject.toml)
-      if ! is_aion231_source_path "$path"; then
+      if ! is_aion231_source_path "$path" && ! is_aion233_model_gateway_source_path "$path"; then
         echo "ERROR: prohibited runtime/dependency/migration path changed: $path" >&2
         exit 1
       fi

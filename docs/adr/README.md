@@ -209,3 +209,4 @@ closure decision in ADR 0072.
 - [ADR 0194: Secure Runtime Integration Program Charter and Local Operator Runtime Foundation Authorization](0194-secure-runtime-integration-program-charter-and-local-operator-runtime-foundation-authorization.md)
 - [ADR 0195: Controlled Authenticated Local Operator Runtime Foundation](0195-controlled-authenticated-local-operator-runtime-foundation.md)
 - [ADR 0196: Secure Runtime Foundation Evaluation and Controlled Model-Gateway Authorization](0196-secure-runtime-foundation-evaluation-and-controlled-model-gateway-authorization.md)
+- [ADR 0197: Controlled Provider-Neutral Model Gateway and Deterministic Reference Provider](0197-controlled-provider-neutral-model-gateway-and-deterministic-reference-provider.md)

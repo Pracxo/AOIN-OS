@@ -1,0 +1,33 @@
+{
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "synthetic": true,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "production_effect": false,
+  "forbidden_actions": [
+    "rerun_live_provider",
+    "retain_temporary_files",
+    "store_prompt_body",
+    "store_provider_response_body"
+  ],
+  "pilot_id": "AION-233-controlled-model-gateway-simulation-pilot",
+  "report_fingerprint": "d911ecc911b0f5833770629eb77fdfb42e6718c80c894984fb43f0e0a11d0982",
+  "sections": [
+    {
+      "refs": [
+        "requests_processed=2",
+        "exact_replays_returned=1",
+        "temporary_files_retained=0"
+      ],
+      "status": "passed",
+      "summary": "The local pilot completed with zero active sessions, zero active requests, and zero prohibited effects.",
+      "title": "Controlled Pilot"
+    }
+  ],
+  "status": "implemented",
+  "summary": "Committed pilot evidence is redacted and static.",
+  "title": "Gateway Pilot Evidence",
+  "view": "model_gateway_pilot_evidence"
+}
