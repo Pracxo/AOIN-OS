@@ -166,6 +166,57 @@ aion231_is_scoped_secure_runtime_foundation_path() {
   return 1
 }
 
+aion232_is_scoped_secure_runtime_foundation_evaluation_path() {
+  # Exact AION-232 secure runtime foundation evaluation, model-gateway
+  # authorization, static evidence, and validation paths. This does not exempt
+  # runtime source, API routes, package files, migrations, or provider calls.
+  case "$1" in
+    README.md|\
+    AGENTS.md|\
+    docs/project-status.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/policy-model.md|\
+    docs/visual-brain.md|\
+    docs/secure-runtime-integration/*|\
+    docs/release/model-gateway-authorization-*|\
+    docs/release/secure-runtime-foundation-*|\
+    docs/release/secure-runtime-integration-*|\
+    docs/adr/0196-secure-runtime-foundation-evaluation-and-controlled-model-gateway-authorization.md|\
+    docs/adr/README.md|\
+    examples/secure-runtime-integration/*|\
+    operator-console-static/README.md|\
+    operator-console-static/app.js|\
+    operator-console-static/index.html|\
+    operator-console-static/demo-data/model-gateway-*.json|\
+    operator-console-static/demo-data/secure-runtime-foundation-operator-evaluation.json|\
+    scripts/auth-design-check.sh|\
+    scripts/model-gateway-authorization-check.sh|\
+    scripts/model-gateway-authorization-no-go-regression.sh|\
+    scripts/model-gateway-runtime-hold.sh|\
+    scripts/operator-console-static-check.sh|\
+    scripts/secure-runtime-foundation-no-go-regression.sh|\
+    scripts/secure-runtime-foundation-operator-evaluation-check.sh|\
+    scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh|\
+    scripts/secure-runtime-integration-program-authorization-check.sh|\
+    scripts/secure-runtime-integration-program-no-go-regression.sh|\
+    scripts/static-console-safety-check.sh|\
+    scripts/lib/secure_runtime_foundation_operator_evaluation.py|\
+    scripts/lib/v02_production_auth_authorization.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    services/brain-api/tests/secure_runtime_aion232_test_helpers.py|\
+    services/brain-api/tests/test_model_gateway_*.py|\
+    services/brain-api/tests/test_secure_runtime_aion231_delivery_reconciliation.py|\
+    services/brain-api/tests/test_secure_runtime_current_state_after_aion232.py|\
+    services/brain-api/tests/test_secure_runtime_current_state_consistency.py|\
+    services/brain-api/tests/test_secure_runtime_foundation_*.py|\
+    services/brain-api/tests/test_secure_runtime_integration_*.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 aion151_is_scoped_authorization_path() {
   # Keep these as exact artifact paths. The no-go scanners must never exempt
   # broad directories such as scripts/ or services/brain-api/src/.

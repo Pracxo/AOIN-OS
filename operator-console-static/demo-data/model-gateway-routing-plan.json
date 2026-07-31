@@ -1,0 +1,27 @@
+{
+  "authorization_transaction_id": "AION-232-SRI-0002",
+  "automatic_fallback_execution_enabled": false,
+  "automatic_retry_execution_enabled": false,
+  "automatic_routing_execution_enabled": false,
+  "circuit_breaker_required": true,
+  "deterministic": true,
+  "fallback_candidates": [
+    "reference-json-sim-v1"
+  ],
+  "maximum_retry_attempts_planned_per_request": 2,
+  "model_candidates": [
+    "reference-text-sim-v1"
+  ],
+  "production_effect": false,
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "provider_candidates": [
+    "deterministic-reference-provider"
+  ],
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "retry_attempts_planned": 0,
+  "routing_plan_id": "routing-plan-AION-233-preview",
+  "runtime_effect": false,
+  "synthetic": true
+}

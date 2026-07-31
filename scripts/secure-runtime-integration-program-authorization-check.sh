@@ -23,12 +23,13 @@ from typing import Any
 root = Path(os.environ["AION_REPO_ROOT"])
 
 PROGRAM_ID = "AION-SECURE-RUNTIME-INTEGRATION-001"
-PROGRAM_STATE = (
-    "secure_runtime_foundation_implemented_local_operator_simulation_only_pending_closeout"
-)
+PROGRAM_STATE = "secure_runtime_foundation_evaluated_model_gateway_authorized_not_implemented"
 AUTH_ID = "AION-230-SRI-0001"
 IMPLEMENTATION_TASK = "AION-231"
 CLOSEOUT_TASK = "AION-232"
+ACTIVE_AUTH_ID = "AION-232-SRI-0002"
+ACTIVE_IMPLEMENTATION_TASK = "AION-233"
+ACTIVE_CLOSEOUT_TASK = "AION-234"
 FINAL_TASK = "AION-238"
 SCOPE = (
     "local-operator-authenticated-session-offline-identity-request-context-"
@@ -321,11 +322,11 @@ for payload in (program, auth):
         "active SRI authorization count mismatch",
     )
     require(
-        payload["active_sri_implementation_authorization"] == AUTH_ID,
+        payload["active_sri_implementation_authorization"] == ACTIVE_AUTH_ID,
         "active SRI authorization mismatch",
     )
-    require(payload["active_sri_implementation_task"] == IMPLEMENTATION_TASK, "task mismatch")
-    require(payload["formal_closeout_task"] == CLOSEOUT_TASK, "closeout task mismatch")
+    require(payload["active_sri_implementation_task"] == ACTIVE_IMPLEMENTATION_TASK, "task mismatch")
+    require(payload["formal_closeout_task"] == ACTIVE_CLOSEOUT_TASK, "closeout task mismatch")
     require(payload["production_runtime_authorized"] is False, "production runtime authorized")
     require(payload["v02_release_ready"] is False, "v0.2 readiness must be false")
     require(payload["active_glm_implementation_authorization_count"] == 0, "GLM active auth")
@@ -335,11 +336,14 @@ for payload in (program, auth):
         payload["active_self_improvement_implementation_authorization_count"] == 0,
         "self-improvement active auth",
     )
-    require(set(payload["authorized_capabilities"]) == set(AUTHORIZED), "approved keys mismatch")
-    require(all(payload["authorized_capabilities"][key] is True for key in AUTHORIZED), "approved flag")
-    require(set(payload["prohibited_capabilities"]) == set(PROHIBITED), "prohibited keys mismatch")
-    require(all(payload["prohibited_capabilities"][key] is False for key in PROHIBITED), "prohibited flag")
-    require(payload["resource_limits"] == RESOURCE_LIMITS, "resource limit mismatch")
+    foundation_authorized = payload.get("foundation_authorized_capabilities", payload["authorized_capabilities"])
+    foundation_prohibited = payload.get("foundation_prohibited_capabilities", payload["prohibited_capabilities"])
+    foundation_limits = payload.get("foundation_resource_limits", payload["resource_limits"])
+    require(set(foundation_authorized) == set(AUTHORIZED), "approved keys mismatch")
+    require(all(foundation_authorized[key] is True for key in AUTHORIZED), "approved flag")
+    require(set(foundation_prohibited) == set(PROHIBITED), "prohibited keys mismatch")
+    require(all(foundation_prohibited[key] is False for key in PROHIBITED), "prohibited flag")
+    require(foundation_limits == RESOURCE_LIMITS, "resource limit mismatch")
 
 require(program["parent_completed_programs"] == PARENT_PROGRAMS, "parent lineage mismatch")
 require(program["parent_glm_evaluation_id"] == "AION-GLMPE-004", "GLMPE id mismatch")
@@ -349,7 +353,7 @@ require(program["secure_runtime_foundation_implemented"] is True, "SRI foundatio
 require(program["secure_runtime_implemented"] is True, "secure runtime implementation flag false")
 require(
     program["secure_runtime_foundation_state"]
-    == "implemented_authenticated_local_operator_simulation_only_pending_AION-232_closeout",
+    == "secure_runtime_foundation_implemented_local_operator_simulation_only",
     "SRI foundation state mismatch",
 )
 require(program["aion_231_record"]["authorization_transaction"] == AUTH_ID, "AION-231 record auth")
@@ -358,20 +362,25 @@ require(program["aion_230_delivery"]["authorization_transaction"] == AUTH_ID, "A
 require(program["future_source_scope"] == FUTURE_SOURCE_SCOPE, "future source scope mismatch")
 for item in program["roadmap"]:
     if item["task_id"] == IMPLEMENTATION_TASK:
+        require(item["state"] == "evaluation_complete", "AION-231 roadmap state")
+    if item["task_id"] == CLOSEOUT_TASK:
         require(
-            item["state"] == "implemented_pending_AION-232_closeout",
-            "AION-231 roadmap state",
+            item["state"] == "evaluation_complete_model_gateway_authorized",
+            "AION-232 roadmap state",
         )
-    if item["task_id"] in {"AION-233", "AION-234", "AION-235", "AION-236", "AION-237"}:
+    if item["task_id"] == ACTIVE_IMPLEMENTATION_TASK:
+        require(item["state"] == "authorized_not_implemented", "AION-233 roadmap state")
+    if item["task_id"] == ACTIVE_CLOSEOUT_TASK:
+        require(item["state"] == "planned_formal_evaluation", "AION-234 roadmap state")
+    if item["task_id"] in {"AION-235", "AION-236", "AION-237"}:
         require(item["state"] == "planned_not_authorized", f"{item['task_id']} unauthorized")
 
-require(auth["authorization_transaction_id"] == AUTH_ID, "auth id mismatch")
-require(auth["approval_record_id"] == AUTH_ID, "approval id mismatch")
-require(auth["candidate_id"] == "authenticated-local-operator-runtime-foundation-core", "candidate")
-require(auth["workstream"] == "secure-runtime-foundation", "workstream")
-require(auth["implementation_task"] == IMPLEMENTATION_TASK, "implementation task")
-require(auth["formal_closeout_task"] == CLOSEOUT_TASK, "formal closeout")
-require(auth["authorization_scope"] == SCOPE, "scope mismatch")
+require(auth["authorization_transaction_id"] == ACTIVE_AUTH_ID, "auth id mismatch")
+require(auth["approval_record_id"] == ACTIVE_AUTH_ID, "approval id mismatch")
+require(auth["candidate_id"] == "controlled-provider-neutral-model-gateway-core", "candidate")
+require(auth["workstream"] == "secure-runtime-model-gateway", "workstream")
+require(auth["implementation_task"] == ACTIVE_IMPLEMENTATION_TASK, "implementation task")
+require(auth["formal_closeout_task"] == ACTIVE_CLOSEOUT_TASK, "formal closeout")
 require(auth["authorization_transaction_approved"] is True, "transaction not approved")
 require(auth["explicit_approval_record_approval"] is True, "approval record false")
 require(auth["implementation_authorization_approved"] is True, "implementation auth false")
@@ -382,6 +391,19 @@ require(auth["authorization_consumed"] is False, "authorization consumed")
 require(auth["authorization_expired"] is False, "authorization expired")
 require(auth["authorization_reusable"] is False, "authorization reusable")
 require(len(auth["active_authorizations"]) == 1, "more than one active SRI auth")
+closed_aion230 = next(
+    item
+    for item in auth["records"]
+    if item.get("authorization_transaction_id") == AUTH_ID
+)
+require(closed_aion230["authorization_active"] is False, "AION-230 auth still active")
+require(closed_aion230["authorization_consumed"] is True, "AION-230 auth not consumed")
+require(closed_aion230["authorization_expired"] is True, "AION-230 auth not expired")
+require(closed_aion230["authorization_reusable"] is False, "AION-230 auth reusable")
+require(closed_aion230["authorization_closed_by_task"] == CLOSEOUT_TASK, "AION-230 closeout")
+require(closed_aion230["implementation_task"] == IMPLEMENTATION_TASK, "AION-230 implementation")
+require(closed_aion230["formal_closeout_task"] == CLOSEOUT_TASK, "AION-230 formal closeout")
+require(closed_aion230["authorization_scope"] == SCOPE, "AION-230 scope mismatch")
 
 require(program_example["program_id"] == PROGRAM_ID, "program example mismatch")
 require(auth_example["authorization_transaction_id"] == AUTH_ID, "auth example mismatch")
@@ -444,6 +466,7 @@ for content, label in ((readme, "README"), (status, "project status")):
     require("Knowledge Intelligence Program" in content, f"{label} missing KI state")
     require("Governed Learning and Memory Program" in content, f"{label} missing GLM state")
     require(AUTH_ID in content, f"{label} missing SRI auth")
+    require(ACTIVE_AUTH_ID in content, f"{label} missing active SRI auth")
     require("AION-231" in content and "AION-232" in content, f"{label} missing task flow")
     require("v0.2 remains unreleased" in content or "v02_release_ready=false" in content, f"{label} v0.2")
 require("final Git evidence reconciliation is recorded by PR #147" in architecture, "architecture stale")

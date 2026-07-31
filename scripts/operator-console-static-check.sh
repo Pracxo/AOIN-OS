@@ -417,6 +417,78 @@ for path in sorted(demo_dir.glob("*.json")):
     if path.name.startswith("secure-runtime-integration-"):
         validate_secure_runtime_integration_demo(payload, path)
         continue
+    if path.name == "secure-runtime-foundation-operator-evaluation.json":
+        if payload.get("read_only") is not True:
+            raise SystemExit(f"operator evaluation demo must be read_only: {path}")
+        if payload.get("redacted") is not True:
+            raise SystemExit(f"operator evaluation demo must be redacted: {path}")
+        if payload.get("synthetic") is not True:
+            raise SystemExit(f"operator evaluation demo must be synthetic: {path}")
+        for key in (
+            "network_calls",
+            "model_provider_calls",
+            "connector_calls",
+            "actual_tool_executions",
+            "credentials_persisted",
+            "tokens_persisted",
+            "production_writes",
+            "source_mutations",
+            "git_operations",
+            "deployments",
+            "model_weight_changes",
+        ):
+            if payload.get(key) != 0:
+                raise SystemExit(f"operator evaluation demo counter must be zero: {key}: {path}")
+        continue
+    if path.name.startswith("model-gateway-"):
+        allowed_names = {
+            "model-gateway-authorization.json",
+            "model-gateway-budget.json",
+            "model-gateway-output-validation.json",
+            "model-gateway-provider-manifest.json",
+            "model-gateway-routing-plan.json",
+            "model-gateway-runtime-hold.json",
+        }
+        if path.name not in allowed_names:
+            raise SystemExit(f"unknown model gateway demo: {path}")
+        if payload.get("program_id") != "AION-SECURE-RUNTIME-INTEGRATION-001":
+            raise SystemExit(f"model gateway demo program id mismatch: {path}")
+        if payload.get("read_only") is not True:
+            raise SystemExit(f"model gateway demo must be read_only: {path}")
+        redaction_applied = payload.get("redaction_applied")
+        redacted = payload.get("redacted")
+        if redaction_applied is not True and redacted is not True:
+            raise SystemExit(f"model gateway demo must be redacted: {path}")
+        if payload.get("synthetic") is not True:
+            raise SystemExit(f"model gateway demo must be synthetic: {path}")
+        for key in (
+            "actual_model_provider_call_enabled",
+            "actual_tool_execution_enabled",
+            "api_key_persistence_enabled",
+            "connector_execution_enabled",
+            "function_calling_enabled",
+            "live_model_session_enabled",
+            "model_response_persistence_enabled",
+            "production_runtime_authorized",
+            "provider_credential_persistence_enabled",
+            "provider_credential_read_enabled",
+            "provider_network_egress_enabled",
+            "provider_sdk_enabled",
+            "public_model_api_route_enabled",
+            "public_network_access_enabled",
+            "runtime_effect",
+            "shell_command_execution_enabled",
+            "source_rewrite_enabled",
+            "subprocess_execution_enabled",
+            "token_persistence_enabled",
+            "tool_calling_enabled",
+            "v02_release_created",
+            "v02_release_ready",
+            "v02_tag_created",
+        ):
+            if key in payload and payload.get(key) is not False:
+                raise SystemExit(f"model gateway demo flag must be false: {key}: {path}")
+        continue
     if path.name.startswith("action-authorization-"):
         if payload.get("read_only") is not True:
             raise SystemExit(f"action authorization demo must be read_only: {path}")

@@ -1,0 +1,23 @@
+{
+  "actual_provider_call": false,
+  "authorization_transaction_id": "AION-232-SRI-0002",
+  "context_budget_fingerprint": "redacted-context-budget-fingerprint",
+  "local_session": true,
+  "model_response_persistence_enabled": false,
+  "network_target": null,
+  "operator_invoked": true,
+  "parent_runtime_capability": "brain.think.simulate",
+  "production_effect": false,
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "prompt_persistence_enabled": false,
+  "provider_credential_reference": null,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "request_envelope_id": "model-request-AION-233-preview",
+  "request_fingerprinted": true,
+  "runtime_effect": false,
+  "simulation_only": true,
+  "synthetic": true,
+  "token_budget_fingerprint": "redacted-token-budget-fingerprint"
+}

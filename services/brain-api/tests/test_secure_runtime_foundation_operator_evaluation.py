@@ -7,7 +7,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-
 REPO_ROOT = Path(__file__).resolve().parents[3]
 HARNESS = REPO_ROOT / "scripts/lib/secure_runtime_foundation_operator_evaluation.py"
 
@@ -61,12 +60,8 @@ def test_secure_runtime_foundation_operator_evaluation_executes_exact_28_scenari
     assert payload["decision"] == harness.DECISION_PASS
     assert payload["evaluation_passed"] is True
     assert payload["implementation_prs"] == [149]
-    assert payload["implementation_feature_commits"] == [
-        "45540009d03f60d7477330a88946e73705ee60e5"
-    ]
-    assert payload["implementation_merge_commits"] == [
-        "8bb9af29cc2cf960d9efdfe2ee323d7245812747"
-    ]
+    assert payload["implementation_feature_commits"] == ["45540009d03f60d7477330a88946e73705ee60e5"]
+    assert payload["implementation_merge_commits"] == ["8bb9af29cc2cf960d9efdfe2ee323d7245812747"]
     assert payload["network_calls"] == 0
     assert payload["model_provider_calls"] == 0
     assert payload["active_sessions_after_evaluation"] == 0

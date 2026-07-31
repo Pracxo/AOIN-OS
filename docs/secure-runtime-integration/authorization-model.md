@@ -28,3 +28,7 @@ The authorization permits only local foundation composition. It does not
 authorize model-gateway runtime, connector runtime, capability execution,
 operator-console live-service integration, production runtime, deployment, or
 v0.2 release work.
+
+## AION-232 Closeout
+
+`AION-SRIPE-001` passed. `AION-230-SRI-0001` is closed, consumed by AION-231, expired, and non-reusable. `AION-232-SRI-0002` is active for AION-233 with AION-234 as formal closeout. Provider calls, network egress, credentials, tokens, connectors, tools, production runtime, deployment, model training, v0.2 tags, and v0.2 releases remain disabled.

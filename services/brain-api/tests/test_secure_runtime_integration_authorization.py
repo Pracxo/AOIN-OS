@@ -4,6 +4,9 @@ from test_secure_runtime_integration_program_charter import (
     AUTH_ID,
     AUTH_SCOPE,
     CLOSEOUT_TASK,
+    CURRENT_AUTH_ID,
+    CURRENT_CLOSEOUT_TASK,
+    CURRENT_IMPLEMENTATION_TASK,
     IMPLEMENTATION_TASK,
     PROGRAM_ID,
     PROGRAM_STATE,
@@ -11,46 +14,74 @@ from test_secure_runtime_integration_program_charter import (
 )
 
 
-def test_aion230_sri_authorization_is_active_and_single_use() -> None:
+def test_aion230_sri_authorization_is_closed_and_current_aion232_auth_is_single_active() -> None:
     auth = load_json("docs/secure-runtime-integration/authorization-ledger.json")
     example = load_json(
         "examples/secure-runtime-integration/local-operator-runtime-authorization.json"
     )
 
-    for payload in (auth, example):
-        assert payload["program_id"] == PROGRAM_ID
-        assert payload["authorization_transaction_id"] == AUTH_ID
-        assert payload["approval_record_id"] == AUTH_ID
-        assert payload["candidate_id"] == "authenticated-local-operator-runtime-foundation-core"
-        assert payload["workstream"] == "secure-runtime-foundation"
-        assert payload["implementation_task"] == IMPLEMENTATION_TASK
-        assert payload["formal_closeout_task"] == CLOSEOUT_TASK
-        assert payload["authorization_scope"] == AUTH_SCOPE
-        assert payload["authorization_transaction_approved"] is True
-        assert payload["explicit_approval_record_approval"] is True
-        assert payload["implementation_authorization_approved"] is True
-        assert payload["implementation_go_status"] is True
-        assert payload["implementation_no_go_status"] is False
-        assert payload["authorization_active"] is True
-        assert payload["authorization_consumed"] is False
-        assert payload["authorization_expired"] is False
-        assert payload["authorization_reusable"] is False
-        assert payload["active_sri_implementation_authorization_count"] == 1
-        assert payload["active_sri_implementation_authorization"] == AUTH_ID
-        assert payload["active_sri_implementation_task"] == IMPLEMENTATION_TASK
-        assert payload["program_state"] == PROGRAM_STATE
+    assert auth["program_id"] == PROGRAM_ID
+    assert auth["authorization_transaction_id"] == CURRENT_AUTH_ID
+    assert auth["approval_record_id"] == CURRENT_AUTH_ID
+    assert auth["candidate_id"] == "controlled-provider-neutral-model-gateway-core"
+    assert auth["workstream"] == "secure-runtime-model-gateway"
+    assert auth["implementation_task"] == CURRENT_IMPLEMENTATION_TASK
+    assert auth["formal_closeout_task"] == CURRENT_CLOSEOUT_TASK
+    assert auth["authorization_transaction_approved"] is True
+    assert auth["explicit_approval_record_approval"] is True
+    assert auth["implementation_authorization_approved"] is True
+    assert auth["implementation_go_status"] is True
+    assert auth["implementation_no_go_status"] is False
+    assert auth["authorization_active"] is True
+    assert auth["authorization_consumed"] is False
+    assert auth["authorization_expired"] is False
+    assert auth["authorization_reusable"] is False
+    assert auth["active_sri_implementation_authorization_count"] == 1
+    assert auth["active_sri_implementation_authorization"] == CURRENT_AUTH_ID
+    assert auth["active_sri_implementation_task"] == CURRENT_IMPLEMENTATION_TASK
+    assert auth["program_state"] == PROGRAM_STATE
 
     assert auth["active_authorizations"] == [
         {
-            "authorization_transaction_id": AUTH_ID,
-            "implementation_task": IMPLEMENTATION_TASK,
-            "formal_closeout_task": CLOSEOUT_TASK,
+            "authorization_transaction_id": CURRENT_AUTH_ID,
+            "implementation_task": CURRENT_IMPLEMENTATION_TASK,
+            "formal_closeout_task": CURRENT_CLOSEOUT_TASK,
             "authorization_active": True,
             "authorization_consumed": False,
             "authorization_expired": False,
             "authorization_reusable": False,
         }
     ]
-    assert len(auth["records"]) == 1
-    assert auth["records"][0]["authorization_transaction_id"] == AUTH_ID
-    assert auth["records"][0]["created_by_task"] == "AION-230"
+    assert len(auth["records"]) == 2
+    aion230 = next(
+        item for item in auth["records"] if item["authorization_transaction_id"] == AUTH_ID
+    )
+    assert aion230["created_by_task"] == "AION-230"
+    assert aion230["implementation_task"] == IMPLEMENTATION_TASK
+    assert aion230["formal_closeout_task"] == CLOSEOUT_TASK
+    assert aion230["authorization_scope"] == AUTH_SCOPE
+    assert aion230["authorization_active"] is False
+    assert aion230["authorization_consumed"] is True
+    assert aion230["authorization_expired"] is True
+    assert aion230["authorization_reusable"] is False
+    assert aion230["authorization_consumed_by_task"] == IMPLEMENTATION_TASK
+    assert aion230["authorization_closed_by_task"] == CLOSEOUT_TASK
+    assert aion230["runtime_foundation_evaluation_id"] == "AION-SRIPE-001"
+
+    assert example["program_id"] == PROGRAM_ID
+    assert example["authorization_transaction_id"] == AUTH_ID
+    assert example["approval_record_id"] == AUTH_ID
+    assert example["candidate_id"] == "authenticated-local-operator-runtime-foundation-core"
+    assert example["workstream"] == "secure-runtime-foundation"
+    assert example["implementation_task"] == IMPLEMENTATION_TASK
+    assert example["formal_closeout_task"] == CLOSEOUT_TASK
+    assert example["authorization_scope"] == AUTH_SCOPE
+    assert example["authorization_transaction_approved"] is True
+    assert example["explicit_approval_record_approval"] is True
+    assert example["implementation_authorization_approved"] is True
+    assert example["implementation_go_status"] is True
+    assert example["implementation_no_go_status"] is False
+    assert example["authorization_active"] is True
+    assert example["authorization_consumed"] is False
+    assert example["authorization_expired"] is False
+    assert example["authorization_reusable"] is False

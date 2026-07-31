@@ -1164,6 +1164,48 @@ AION231_ALLOWED_PREFIXES = (
     "services/brain-api/tests/test_secure_runtime_integration_",
 )
 
+AION232_ALLOWED_EXACT_PATHS = {
+    "AGENTS.md",
+    "README.md",
+    "docs/adr/0196-secure-runtime-foundation-evaluation-and-controlled-model-gateway-authorization.md",
+    "docs/adr/README.md",
+    "docs/architecture.md",
+    "docs/brain-contract.md",
+    "docs/policy-model.md",
+    "docs/project-status.md",
+    "docs/visual-brain.md",
+    "operator-console-static/README.md",
+    "operator-console-static/app.js",
+    "operator-console-static/index.html",
+    "operator-console-static/demo-data/secure-runtime-foundation-operator-evaluation.json",
+    "scripts/auth-design-check.sh",
+    "scripts/lib/cognitive_architecture_governance.py",
+    "scripts/lib/secure_runtime_foundation_operator_evaluation.py",
+    "scripts/lib/v02-production-auth-scan-exclusions.sh",
+    "scripts/lib/v02_production_auth_authorization.py",
+    "scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh",
+    "scripts/operator-console-static-check.sh",
+    "scripts/production-auth-identity-assertion-replay-no-go-regression.sh",
+    "scripts/secure-runtime-integration-program-authorization-check.sh",
+    "scripts/secure-runtime-integration-program-no-go-regression.sh",
+    "scripts/static-console-safety-check.sh",
+    "services/brain-api/tests/secure_runtime_aion232_test_helpers.py",
+}
+
+AION232_ALLOWED_PREFIXES = (
+    "docs/secure-runtime-integration/",
+    "docs/release/model-gateway-",
+    "docs/release/secure-runtime-foundation-",
+    "docs/release/secure-runtime-integration-",
+    "examples/secure-runtime-integration/",
+    "operator-console-static/demo-data/model-gateway-",
+    "scripts/model-gateway-",
+    "scripts/secure-runtime-foundation-",
+    "services/brain-api/tests/test_model_gateway_",
+    "services/brain-api/tests/test_secure_runtime_",
+    "services/brain-api/tests/test_secure_runtime_integration_",
+)
+
 AION199_ALLOWED_EXACT_PATHS = set(AION199_REQUIRED_FILES) | {
     "scripts/connector-runtime-no-external-call-regression.sh",
     "scripts/cognitive-integrated-evaluation-check.sh",
@@ -11534,7 +11576,7 @@ def _aion202_path_allowed(relative: str) -> bool:
 def _aion203_path_allowed(relative: str) -> bool:
     return relative in AION203_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION203_ALLOWED_PREFIXES
-    ) or _aion205_path_allowed(relative) or _aion231_path_allowed(relative)
+    ) or _aion205_path_allowed(relative) or _aion231_path_allowed(relative) or _aion232_path_allowed(relative)
 
 
 def _aion205_path_allowed(relative: str) -> bool:
@@ -11570,6 +11612,12 @@ def _aion222_path_allowed(relative: str) -> bool:
 def _aion231_path_allowed(relative: str) -> bool:
     return relative in AION231_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION231_ALLOWED_PREFIXES
+    )
+
+
+def _aion232_path_allowed(relative: str) -> bool:
+    return relative in AION232_ALLOWED_EXACT_PATHS or any(
+        relative.startswith(prefix) for prefix in AION232_ALLOWED_PREFIXES
     )
 
 

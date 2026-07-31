@@ -18,6 +18,11 @@ is_nested_gate_context() {
   return 1
 }
 
+nested_gate_context=0
+if is_nested_gate_context; then
+  nested_gate_context=1
+fi
+
 export AION_SECURE_RUNTIME_FOUNDATION_OPERATOR_EVALUATION_RUNNING=1
 
 ./scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh
@@ -41,7 +46,7 @@ else
     --validate-report "$tmp_dir/AION-SRIPE-001.json"
 fi
 
-if is_nested_gate_context; then
+if [[ "$nested_gate_context" == "1" ]]; then
   echo "PASS: inherited secure-runtime gates deferred to outer gate"
 else
   ./scripts/secure-runtime-foundation-no-go-regression.sh

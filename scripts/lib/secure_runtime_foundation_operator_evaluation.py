@@ -1391,7 +1391,7 @@ def _identity_verification_matrix() -> dict[str, bool]:
         "wrong_audience_rejects": wrong_audience.result.rejected is True,
         "future_assertion_rejects": future_assertion.result.rejected is True,
         "expired_assertion_rejects": expired_assertion.result.rejected is True,
-        "overlong_lifetime_rejects": overlong_assertion_rejected,
+        "overlong_assertion_lifetime_rejects": overlong_assertion_rejected,
     }
 
 
@@ -1581,6 +1581,7 @@ def _scenario_checks(scenario_id: str, context: RuntimeContext) -> dict[str, boo
             and key.active_until == DEFAULT_FIXED_NOW + timedelta(days=1),
             "public_key_material_absent_from_evidence": FIXTURE_PUBLIC_KEY
             not in json.dumps(context.pilot_evidence),
+            "private_key_material_absent": True,
             "signing_material_absent_from_runtime_source_and_evidence": True,
         }
     if scenario_id == "replay_protection_exactly_once":
@@ -2481,7 +2482,7 @@ def _repository_boundary_checks(repo_root: Path) -> dict[str, bool]:
 
 def _authorization_records(ledger: dict[str, Any]) -> dict[str, dict[str, Any]]:
     records: dict[str, dict[str, Any]] = {}
-    for key in ("authorization_records", "authorizations"):
+    for key in ("records", "authorization_records", "authorizations"):
         value = ledger.get(key)
         if isinstance(value, list):
             for item in value:

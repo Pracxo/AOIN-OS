@@ -1,0 +1,20 @@
+{
+  "actual_model_provider_call_enabled": false,
+  "authorization_transaction_id": "AION-232-SRI-0002",
+  "closed_provider_allowlist": [
+    "deterministic-reference-provider"
+  ],
+  "credential_free": true,
+  "manifest_id": "provider-manifest-AION-233-preview",
+  "production_effect": false,
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "provider_id": "deterministic-reference-provider",
+  "provider_network_egress_enabled": false,
+  "provider_sdk_enabled": false,
+  "provider_type": "reference_simulation",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "synthetic": true
+}

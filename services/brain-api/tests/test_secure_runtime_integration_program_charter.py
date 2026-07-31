@@ -7,12 +7,13 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[3]
 
 PROGRAM_ID = "AION-SECURE-RUNTIME-INTEGRATION-001"
-PROGRAM_STATE = (
-    "secure_runtime_foundation_implemented_local_operator_simulation_only_pending_closeout"
-)
+PROGRAM_STATE = "secure_runtime_foundation_evaluated_model_gateway_authorized_not_implemented"
 AUTH_ID = "AION-230-SRI-0001"
 IMPLEMENTATION_TASK = "AION-231"
 CLOSEOUT_TASK = "AION-232"
+CURRENT_AUTH_ID = "AION-232-SRI-0002"
+CURRENT_IMPLEMENTATION_TASK = "AION-233"
+CURRENT_CLOSEOUT_TASK = "AION-234"
 FINAL_TASK = "AION-238"
 AUTH_SCOPE = (
     "local-operator-authenticated-session-offline-identity-request-context-"
@@ -267,12 +268,18 @@ def test_program_charter_creates_separate_sri_program() -> None:
     assert program["parent_glm_evaluation_id"] == "AION-GLMPE-004"
     assert program["parent_glm_evaluation_decision"] == GLM_DECISION
     assert program["active_sri_implementation_authorization_count"] == 1
-    assert program["active_sri_implementation_authorization"] == AUTH_ID
-    assert program["active_sri_implementation_task"] == IMPLEMENTATION_TASK
-    assert program["formal_closeout_task"] == CLOSEOUT_TASK
+    assert program["active_sri_implementation_authorization"] == CURRENT_AUTH_ID
+    assert program["active_sri_implementation_task"] == CURRENT_IMPLEMENTATION_TASK
+    assert program["formal_closeout_task"] == CURRENT_CLOSEOUT_TASK
     assert program["final_planned_task"] == FINAL_TASK
+    assert program["secure_runtime_foundation_operator_evaluation_passed"] is True
+    assert program["secure_runtime_foundation_operator_evaluation_id"] == "AION-SRIPE-001"
+    assert program["model_gateway_authorized"] is True
+    assert program["model_gateway_implemented"] is False
 
-    assert "creates a new Secure Runtime Integration Program" in charter
+    assert "Program ID: `AION-SECURE-RUNTIME-INTEGRATION-001`" in charter
     assert "does not reopen any parent program" in charter
     assert "inherits no active parent-program implementation authorization" in charter
-    assert "AION-231 runtime foundation is implemented" in charter
+    assert "AION-230-SRI-0001` is closed" in charter
+    assert "AION-232-SRI-0002` is the sole active" in charter
+    assert "AION-231 remains implemented" in charter

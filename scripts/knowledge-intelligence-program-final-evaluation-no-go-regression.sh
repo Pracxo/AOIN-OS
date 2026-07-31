@@ -241,6 +241,9 @@ while IFS=$'\t' read -r status path extra; do
     if aion231_is_scoped_secure_runtime_foundation_path "$changed"; then
       continue
     fi
+    if aion232_is_scoped_secure_runtime_foundation_evaluation_path "$changed"; then
+      continue
+    fi
     if is_prohibited_path "$changed"; then
       echo "ERROR: prohibited AION-220 surface changed: $changed" >&2
       exit 1

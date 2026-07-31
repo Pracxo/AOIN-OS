@@ -8,7 +8,8 @@ def test_resource_limits_are_exact_in_program_and_authorization_ledgers() -> Non
     auth = load_json("docs/secure-runtime-integration/authorization-ledger.json")
 
     assert program["resource_limits"] == RESOURCE_LIMITS
-    assert auth["resource_limits"] == RESOURCE_LIMITS
+    assert program["foundation_resource_limits"] == RESOURCE_LIMITS
+    assert auth["foundation_resource_limits"] == RESOURCE_LIMITS
 
 
 def test_positive_and_zero_resource_limits_fail_closed_by_definition() -> None:

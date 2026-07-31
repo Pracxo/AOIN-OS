@@ -1,0 +1,18 @@
+{
+  "authorization_transaction_id": "AION-232-SRI-0002",
+  "function_calling_enabled": false,
+  "maximum_structured_output_depth": 16,
+  "maximum_structured_output_schema_bytes": 65536,
+  "model_output_provenance_required": true,
+  "output_trusted_after_validation": false,
+  "production_effect": false,
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "schema_id": "structured-output-schema-AION-233-preview",
+  "synthetic": true,
+  "tool_calling_enabled": false,
+  "untrusted_output_classification_required": true
+}
