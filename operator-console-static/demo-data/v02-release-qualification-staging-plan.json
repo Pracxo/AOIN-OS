@@ -1,0 +1,86 @@
+{
+  "evidence": {
+    "acceptance_criteria": [
+      {
+        "criterion_fingerprint": "f8400e109a46628ab89ceee10a53a7a71e6e7398028a370c1d9a9601f43f1ed6",
+        "criterion_id": "V02-STAGING-AC-001",
+        "criterion_summary": "future staging evidence required",
+        "evidence_requirement": "AION-241 evidence",
+        "staging_evidence_required": true
+      },
+      {
+        "criterion_fingerprint": "7b04b91cc3f3c3988d2c27195835a3fb7756fab87851a131e5bb961b949275c4",
+        "criterion_id": "V02-STAGING-AC-002",
+        "criterion_summary": "future staging evidence required",
+        "evidence_requirement": "AION-241 evidence",
+        "staging_evidence_required": true
+      },
+      {
+        "criterion_fingerprint": "d1cd5fb5aa262c3e462c4c81c5b11d374eeae93f2b9b926de969f9be84ffae7c",
+        "criterion_id": "V02-STAGING-AC-003",
+        "criterion_summary": "future staging evidence required",
+        "evidence_requirement": "AION-241 evidence",
+        "staging_evidence_required": true
+      }
+    ],
+    "artifact_transfer_prerequisites": [
+      "future signed artifact manifest"
+    ],
+    "cleanup": [
+      "remove fixtures",
+      "close staging session"
+    ],
+    "credential_token_prerequisites": [
+      "future dual-control provisioning"
+    ],
+    "deployment_order": [
+      "database plan review",
+      "artifact deploy",
+      "health validate"
+    ],
+    "environment_profile": {
+      "identity_provider_fixture_strategy": "offline fixture first, future IdP separately authorized",
+      "network_isolation_assumptions": [
+        "deny public ingress by default"
+      ],
+      "profile_id": "future-isolated-staging"
+    },
+    "evidence_capture": [
+      "health evidence",
+      "rollback evidence",
+      "operator approval"
+    ],
+    "health_validation": [
+      "V02-HEALTH-001",
+      "V02-HEALTH-002"
+    ],
+    "maximum_staging_deployments": 0,
+    "observability_validation": [
+      "V02-OBS-001",
+      "V02-OBS-002"
+    ],
+    "operator_approvals": [
+      "release manager",
+      "security reviewer"
+    ],
+    "plan_id": "V02-STAGING-QUALIFICATION-PLAN-001",
+    "replay_ledger_prerequisites": [
+      "future managed ledger evidence"
+    ],
+    "rollback_drill": "V02-ROLLBACK-DRILL-001",
+    "schema_version": "aion-v02-staging-qualification-plan/v1",
+    "security_tests": [
+      "identity spoofing",
+      "replay rejection",
+      "redaction"
+    ],
+    "staging_deployment_enabled": false,
+    "staging_plan_fingerprint": "412d2db704b324cf61c9957eb23882e2c52dc73751659c5db9eb318871d38b15",
+    "staging_runtime_authorized": false
+  },
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "synthetic": true
+}

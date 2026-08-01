@@ -1,0 +1,29 @@
+{
+  "evidence": [
+    {
+      "actual_artifact_created": false,
+      "actual_build_executed": false,
+      "evidence_maturity": "deterministic_simulation",
+      "planning_fingerprint": "c5c539de7e92ea6666f08c3f89a8ea98da20bed85e2b3b9792d972a48f7b52de",
+      "projection_fingerprint": "446c374b745b22a10c7c1565bb28e8ce8c6986a28a415cdb6b295d6c4cda9f7b",
+      "projection_id": "V02-REPRODUCIBLE-BUILD-001",
+      "reproducible_build_claimed_passed": false,
+      "schema_version": "aion-v02-reproducible-build-evidence-projection/v1"
+    },
+    {
+      "actual_artifact_created": false,
+      "actual_build_executed": false,
+      "evidence_maturity": "deterministic_simulation",
+      "planning_fingerprint": "e8bae06aecdcfe9216cee3f0c2b6c64f5b1992b4d83ca1d80ccb43c9ad5da27f",
+      "projection_fingerprint": "9b7845751eb101b715f35624eef03052262e8355077afa5a366aaae3b66d3e22",
+      "projection_id": "V02-REPRODUCIBLE-BUILD-002",
+      "reproducible_build_claimed_passed": false,
+      "schema_version": "aion-v02-reproducible-build-evidence-projection/v1"
+    }
+  ],
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "synthetic": true
+}

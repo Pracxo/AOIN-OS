@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT_DIR"
+source "$ROOT_DIR/scripts/lib/python-selection.sh"
+
+PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
+aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
+export AION_BRAIN_PYTHON="$PYTHON_BIN"
+
+./scripts/v02-release-qualification-foundation-no-go-regression.sh
+
+PYTHONPATH="$ROOT_DIR/services/brain-api/src:${PYTHONPATH:-}" "$PYTHON_BIN" - <<'PY'
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+from aion_brain.contracts import v02_release_qualification as c
+from aion_brain.v02_release_qualification import (
+    ControlledV02ReleaseQualificationService,
+)
+
+root = Path.cwd()
+source_scope = [
+    "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/__init__.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/authorization.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/gap_matrix.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/production_auth_composition.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/request_identity.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/replay_provisioning.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/identity_provider.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/key_lifecycle.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/protected_material.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/credential_lifecycle.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/token_lifecycle.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/session_lifecycle.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/deployment_manifest.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/artifact_provenance.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/rollback.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/observability.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/threat_model.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/runtime_guard.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/release_gate.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/integrity.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/evidence.py",
+]
+for relative in source_scope:
+    if not (root / relative).is_file():
+        raise SystemExit(f"missing AION-239 source: {relative}")
+if not (root / "scripts/v02-release-qualification-local-run.py").is_file():
+    raise SystemExit("missing uninstalled local runner")
+
+program = json.loads(
+    Path("docs/v02-release-qualification/program-ledger.json").read_text(
+        encoding="utf-8"
+    )
+)
+auth = json.loads(
+    Path("docs/v02-release-qualification/authorization-ledger.json").read_text(
+        encoding="utf-8"
+    )
+)
+for label, payload in (("program", program), ("authorization", auth)):
+    if payload["program_state"] != c.FOUNDATION_PROGRAM_STATE:
+        raise SystemExit(f"{label} program_state mismatch")
+    if payload["v02_release_qualification_program_authorized"] is not True:
+        raise SystemExit(f"{label} program not authorized")
+    if payload["v02_release_qualification_program_implemented"] is not True:
+        raise SystemExit(f"{label} program not implemented")
+    if payload["v02_release_qualification_foundation_implemented"] is not True:
+        raise SystemExit(f"{label} foundation not implemented")
+    if payload["v02_release_qualification_foundation_state"] != c.FOUNDATION_STATE:
+        raise SystemExit(f"{label} foundation state mismatch")
+    if payload["active_v02_release_qualification_authorization"] != c.AUTHORIZATION_TRANSACTION_ID:
+        raise SystemExit(f"{label} active authorization mismatch")
+    if payload["active_v02_release_qualification_task"] != c.IMPLEMENTATION_TASK:
+        raise SystemExit(f"{label} active task mismatch")
+    if payload["formal_closeout_task"] != c.FORMAL_CLOSEOUT_TASK:
+        raise SystemExit(f"{label} closeout task mismatch")
+    if payload["aion_238_delivery_reconciliation"]["merge_commits"] != [c.AION_238_MERGE_COMMIT]:
+        raise SystemExit(f"{label} AION-238 merge reconciliation mismatch")
+    if payload["resource_limits"] != c.resource_limits().model_dump():
+        raise SystemExit(f"{label} resource limits mismatch")
+    if payload["v02_release_ready"] is not False:
+        raise SystemExit(f"{label} must keep v02_release_ready=false")
+    if any(payload["prohibited_capabilities"].values()):
+        raise SystemExit(f"{label} has enabled prohibited capability")
+
+service = ControlledV02ReleaseQualificationService()
+result = service.run_canonical_disabled_pilot()
+if result.readiness_domains_evaluated != len(c.READINESS_DOMAINS):
+    raise SystemExit("service did not evaluate all readiness domains")
+if result.release_gates_evaluated != len(c.CANONICAL_RELEASE_GATE_IDS):
+    raise SystemExit("service did not evaluate all release gates")
+if result.v02_release_ready is not False or result.v02_release_candidate_created is not False:
+    raise SystemExit("service must preserve release hold")
+if sum(result.prohibited_effect_counters.values()) != 0:
+    raise SystemExit("service produced prohibited effects")
+PY
+
+PYTHONPATH="$ROOT_DIR/services/brain-api/src:${PYTHONPATH:-}" "$PYTHON_BIN" -m pytest \
+  services/brain-api/tests/test_v02_release_qualification_contracts_aion239.py \
+  services/brain-api/tests/test_v02_release_qualification_service_aion239.py \
+  services/brain-api/tests/test_v02_release_qualification_pilot_evidence_aion239.py \
+  services/brain-api/tests/test_v02_release_qualification_no_go_aion239.py \
+  services/brain-api/tests/test_v02_release_qualification_runner_aion239.py \
+  services/brain-api/tests/test_secure_runtime_integration_final_closeout_aion238.py \
+  -q
+
+./scripts/v02-release-qualification-program-authorization-check.sh >/dev/null
+./scripts/v02-release-qualification-foundation-pilot-evidence-check.sh >/dev/null
+
+echo "v0.2 release qualification foundation PASS"

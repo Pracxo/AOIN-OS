@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import os
 import subprocess
 import sys
@@ -48,6 +49,22 @@ def _aion217_source_paths() -> set[str]:
     return set(validator.AION217_SOURCE_PATHS) | set(validator.AION217_OPTIONAL_SOURCE_PATHS)
 
 
+def _aion239_source_paths() -> set[str]:
+    program = json.loads(
+        (REPO_ROOT / "docs/v02-release-qualification/program-ledger.json").read_text()
+    )
+    if (
+        program.get("active_v02_release_qualification_task") != "AION-239"
+        or program.get("v02_release_qualification_foundation_implemented") is not True
+        or program.get("foundation_runtime_state")
+        != "implemented_disabled_design_only_local_simulation"
+    ):
+        return set()
+    source_scope = program.get("implemented_source_scope")
+    assert isinstance(source_scope, list)
+    return {str(path) for path in source_scope}
+
+
 def _assert_aion217_boundaries(changed: set[str]) -> None:
     assert changed <= _aion217_source_paths()
     for relative in (
@@ -59,6 +76,13 @@ def _assert_aion217_boundaries(changed: set[str]) -> None:
         "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_policy_updater.py",
     ):
         assert not (REPO_ROOT / relative).exists(), relative
+
+
+def _assert_aion239_boundaries(changed: set[str]) -> None:
+    assert changed <= _aion239_source_paths()
+    assert not (
+        REPO_ROOT / "services/brain-api/src/aion_brain/api/v02_release_qualification.py"
+    ).exists()
 
 
 def _git_ref_exists(ref: str) -> bool:
@@ -111,8 +135,6 @@ def _changed_forbidden_files() -> set[str]:
 
 
 def test_aion_212_branch_does_not_add_aion_213_runtime_source():
-    import json
-
     program = json.loads(
         (REPO_ROOT / "docs/knowledge-intelligence/program-ledger.json").read_text()
     )
@@ -144,6 +166,9 @@ def test_no_forbidden_runtime_dependency_migration_or_workflow_changes():
     changed = _changed_forbidden_files()
     if changed and changed <= _aion217_source_paths():
         _assert_aion217_boundaries(changed)
+        return
+    if changed and changed <= _aion239_source_paths():
+        _assert_aion239_boundaries(changed)
         return
     assert changed == set()
 

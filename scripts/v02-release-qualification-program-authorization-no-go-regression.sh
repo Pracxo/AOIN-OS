@@ -59,6 +59,7 @@ is_allowed_path() {
   case "$1" in
     README.md|AGENTS.md|\
     docs/adr/0202-final-secure-runtime-integration-evaluation-and-v02-release-qualification-program-authorization.md|\
+    docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md|\
     docs/adr/README.md|\
     docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/project-status.md|docs/visual-brain.md|\
     docs/secure-runtime-integration/*|\
@@ -75,10 +76,31 @@ is_allowed_path() {
     operator-console-static/demo-data/secure-runtime-integration-*.json|\
     operator-console-static/demo-data/v02-release-qualification-*.json|\
     scripts/auth-design-check.sh|\
+    scripts/capability-runtime-authorization-check.sh|\
+    scripts/capability-runtime-authorization-no-go-regression.sh|\
+    scripts/capability-runtime-check.sh|\
+    scripts/capability-runtime-no-go-regression.sh|\
+    scripts/capability-runtime-operator-evaluation-no-go-regression.sh|\
+    scripts/connector-no-go-regression.sh|\
+    scripts/connector-runtime-no-external-call-regression.sh|\
+    scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-domain-expert-mesh-no-go-regression.sh|\
+    scripts/knowledge-intelligence-domain-expert-mesh-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-epistemic-assessment-operator-evaluation-no-go-regression.sh|\
     scripts/knowledge-intelligence-integrated-research-agent-operator-evaluation-no-go-regression.sh|\
     scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-tool-verification-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-verified-memory-operator-evaluation-no-go-regression.sh|\
+    scripts/model-gateway-authorization-check.sh|\
+    scripts/model-gateway-authorization-no-go-regression.sh|\
+    scripts/model-gateway-check.sh|\
+    scripts/model-gateway-no-go-regression.sh|\
     scripts/model-gateway-operator-evaluation-no-go-regression.sh|\
     scripts/operator-console-integration-authorization-check.sh|\
+    scripts/operator-console-integration-authorization-no-go-regression.sh|\
     scripts/operator-console-integration-check.sh|\
     scripts/operator-console-integration-runtime-hold.sh|\
     scripts/operator-console-static-check.sh|\
@@ -91,12 +113,21 @@ is_allowed_path() {
     scripts/secure-runtime-integration-program-no-go-regression.sh|\
     scripts/secure-runtime-integration-runtime-hold.sh|\
     scripts/static-console-safety-check.sh|\
+    scripts/secure-runtime-foundation-check.sh|\
+    scripts/secure-runtime-foundation-no-go-regression.sh|\
+    scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh|\
     scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh|\
     scripts/v02-offline-identity-assertion-verification-authorization-no-go-regression.sh|\
     scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh|\
     scripts/v02-release-qualification-program-authorization-check.sh|\
     scripts/v02-release-qualification-program-authorization-no-go-regression.sh|\
+    scripts/v02-release-qualification-foundation-check.sh|\
+    scripts/v02-release-qualification-foundation-no-go-regression.sh|\
+    scripts/v02-release-qualification-foundation-pilot-evidence-check.sh|\
+    scripts/v02-release-qualification-foundation-runtime-hold.sh|\
+    scripts/v02-release-qualification-local-run.py|\
     scripts/v02-release-qualification-runtime-hold.sh|\
+    scripts/lib/cognitive_architecture_governance.py|\
     scripts/lib/secure_runtime_integration_final_evaluation.py|\
     scripts/lib/v02_production_auth_authorization.py|\
     scripts/lib/v02-production-auth-scan-exclusions.sh|\
@@ -115,6 +146,18 @@ is_allowed_path() {
     services/brain-api/tests/test_secure_runtime_integration_program_charter.py|\
     services/brain-api/tests/test_secure_runtime_integration_project_status.py|\
     services/brain-api/tests/test_operator_console_integration_authorization.py)
+      return 0
+      ;;
+    services/brain-api/tests/test_governed_learning_memory_no_runtime_source.py|\
+    services/brain-api/tests/test_knowledge_epistemic_assessment_evaluation_repository_integrity.py|\
+    services/brain-api/tests/test_knowledge_intelligence_program_repository_integrity.py|\
+    services/brain-api/tests/test_knowledge_research_evaluation_repository_integrity.py|\
+    services/brain-api/tests/test_knowledge_source_registry_evaluation_no_side_effects.py|\
+    services/brain-api/tests/test_self_improvement_shadow_activation_evaluation_repository_integrity.py|\
+    services/brain-api/tests/test_self_improvement_shadow_activation_scope_spec.py|\
+    services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
+    services/brain-api/src/aion_brain/v02_release_qualification/*.py|\
+    services/brain-api/tests/test_v02_release_qualification_*.py)
       return 0
       ;;
   esac
@@ -141,15 +184,18 @@ if changed_paths | sort -u | rg -n '(^migrations/|/migrations/)' >/dev/null 2>&1
   echo "AION-238 must not add migrations" >&2
   exit 1
 fi
-if [[ -e services/brain-api/src/aion_brain/contracts/v02_release_qualification.py || \
-  -e services/brain-api/src/aion_brain/v02_release_qualification ]]; then
-  echo "AION-238 must not create AION-239 runtime source" >&2
-  exit 1
-fi
-if changed_paths | sort -u | rg -n '^services/brain-api/src/aion_brain/' >/dev/null 2>&1; then
-  echo "AION-238 must not modify runtime source" >&2
-  exit 1
-fi
+while IFS= read -r path; do
+  [[ -z "$path" ]] && continue
+  case "$path" in
+    services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
+    services/brain-api/src/aion_brain/v02_release_qualification/*.py)
+      ;;
+    services/brain-api/src/aion_brain/*)
+      echo "AION-239 must not modify completed runtime source: $path" >&2
+      exit 1
+      ;;
+  esac
+done < <(changed_paths | sort -u)
 if git tag --list 'v0.2*' 'aion-v0.2*' | rg -n '.+' >/dev/null 2>&1; then
   echo "AION-238 must not create a v0.2 tag" >&2
   exit 1

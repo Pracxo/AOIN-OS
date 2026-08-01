@@ -153,6 +153,16 @@ def aion237_source_allowed() -> bool:
     if not ledger.exists():
         return False
     payload = json.loads(ledger.read_text(encoding="utf-8"))
+    if payload.get("program_state") == "secure_runtime_integration_program_complete":
+        return (
+            payload.get("operator_console_integration_implemented") is True
+            and payload.get("integrated_authenticated_local_pilot_completed") is True
+            and payload.get("active_sri_implementation_authorization_count") == 0
+            and payload.get("active_sri_implementation_authorization") is None
+            and payload.get("active_sri_implementation_task") is None
+            and payload.get("formal_closeout_task") is None
+            and payload.get("final_completed_task") == "AION-238"
+        )
     return (
         payload.get("operator_console_integration_implemented") is True
         and payload.get("integrated_authenticated_local_pilot_completed") is True
@@ -179,7 +189,15 @@ for parts in changed_entries():
         if path.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited release path changed: {path}")
         if path.startswith("services/brain-api/src/aion_brain/"):
-            if path not in SOURCE_SCOPE and not (aion237_allowed and path in AION237_SOURCE_SCOPE):
+            allowed_aion239 = (
+                path == "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py"
+                or path.startswith("services/brain-api/src/aion_brain/v02_release_qualification/")
+            )
+            if (
+                path not in SOURCE_SCOPE
+                and not (aion237_allowed and path in AION237_SOURCE_SCOPE)
+                and not allowed_aion239
+            ):
                 raise SystemExit(f"source change outside AION-235 scope: {path}")
         if path == "scripts/capability-runtime-local-sandbox-run.py":
             continue

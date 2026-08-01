@@ -5332,3 +5332,9 @@ AION-237 implements a controlled same-origin loopback Operator Console integrati
 ## AION-238 Final SRI Status
 
 `AION-SRIPE-004` passed all 28 final scenarios. `AION-236-SRI-0004` is closed and no SRI implementation authorization remains active. `AION-238-V02RQ-0001` authorizes only disabled v0.2 release-qualification foundation work for AION-239. `v02_release_ready=false`; no v0.2 tag or release exists.
+
+## AION-239 Disabled v0.2 Release Qualification Foundation
+
+AION-239 implements the AION-238-authorized disabled v0.2 production-readiness qualification foundation. The foundation represents production-readiness gaps, production-auth composition, verified RequestIdentity integration, replay provisioning, IdP adapter contracts, key and protected-material policy, credential/token/session lifecycle, artifact/SBOM/provenance/reproducibility, rollback, observability, health, threat-model, release-gate and staging-plan evidence as strict local contracts.
+
+The implementation is disabled and design-only. It performs no external identity-provider call, DNS lookup, credential generation, token issuance, replay-ledger write, database provisioning, staging or production deployment, rollback execution, observability export, release-candidate creation, tag creation or release publication. The deterministic pilot returns a release hold because staging and production evidence remain absent. AION-238-V02RQ-0001 remains active pending AION-240 closeout.

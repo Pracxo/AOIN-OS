@@ -1,0 +1,124 @@
+{
+  "evidence": {
+    "components": [
+      {
+        "component_fingerprint": "4b448a4935a7b42b49123f476c476cc4e78089835026d83061f4237a83c38d48",
+        "component_name": "aion-component-01",
+        "component_type": "python-module",
+        "component_version": "design-projection",
+        "dependency_scope": "runtime-design",
+        "licence_identifier": "unknown-pending-review",
+        "supplier_code": "aion-local"
+      },
+      {
+        "component_fingerprint": "5f44dc53bde8840b1f7bb6c03babf1f178eafd7e7b88cc9d7521da566b53d96b",
+        "component_name": "aion-component-02",
+        "component_type": "python-module",
+        "component_version": "design-projection",
+        "dependency_scope": "runtime-design",
+        "licence_identifier": "unknown-pending-review",
+        "supplier_code": "aion-local"
+      },
+      {
+        "component_fingerprint": "4722ea5d531ac98fe4d3688a2dc2eca4030ea5f90c82f6f0e449deb9dcb7e874",
+        "component_name": "aion-component-03",
+        "component_type": "python-module",
+        "component_version": "design-projection",
+        "dependency_scope": "runtime-design",
+        "licence_identifier": "unknown-pending-review",
+        "supplier_code": "aion-local"
+      },
+      {
+        "component_fingerprint": "b45b8e57277781c3ba803e4f8def1b9d7a21e113c846c61dc22c348ef9b45a60",
+        "component_name": "aion-component-04",
+        "component_type": "python-module",
+        "component_version": "design-projection",
+        "dependency_scope": "runtime-design",
+        "licence_identifier": "unknown-pending-review",
+        "supplier_code": "aion-local"
+      },
+      {
+        "component_fingerprint": "43b661ba0445fdeefb4e40a832fc2ac0831a683b66e932bc615709a15deb8671",
+        "component_name": "aion-component-05",
+        "component_type": "python-module",
+        "component_version": "design-projection",
+        "dependency_scope": "runtime-design",
+        "licence_identifier": "unknown-pending-review",
+        "supplier_code": "aion-local"
+      },
+      {
+        "component_fingerprint": "36c982ace0df32a0748b0cac1ac0afec9fb1f7d9cdd94fef48a92b22b473b533",
+        "component_name": "aion-component-06",
+        "component_type": "python-module",
+        "component_version": "design-projection",
+        "dependency_scope": "runtime-design",
+        "licence_identifier": "unknown-pending-review",
+        "supplier_code": "aion-local"
+      },
+      {
+        "component_fingerprint": "eeea6c5c75227b105d7058444a84f0dba5844f5772cd5ff2cfca2632fa2fa38c",
+        "component_name": "aion-component-07",
+        "component_type": "python-module",
+        "component_version": "design-projection",
+        "dependency_scope": "runtime-design",
+        "licence_identifier": "unknown-pending-review",
+        "supplier_code": "aion-local"
+      },
+      {
+        "component_fingerprint": "02b430367f2ed4d2d9b207054e8656ddcb5a6197a79aa9f3f1803c6a45700850",
+        "component_name": "aion-component-08",
+        "component_type": "python-module",
+        "component_version": "design-projection",
+        "dependency_scope": "runtime-design",
+        "licence_identifier": "unknown-pending-review",
+        "supplier_code": "aion-local"
+      },
+      {
+        "component_fingerprint": "f6b78c00ff786fe19ed27917c576a00e541752222dac18165eac9a36d6451da4",
+        "component_name": "aion-component-09",
+        "component_type": "python-module",
+        "component_version": "design-projection",
+        "dependency_scope": "runtime-design",
+        "licence_identifier": "unknown-pending-review",
+        "supplier_code": "aion-local"
+      },
+      {
+        "component_fingerprint": "ce88702ffcaf77d892378343d8700bfb4bea9b1474278a41d9cbf7ec70140ec4",
+        "component_name": "aion-component-10",
+        "component_type": "python-module",
+        "component_version": "design-projection",
+        "dependency_scope": "runtime-design",
+        "licence_identifier": "unknown-pending-review",
+        "supplier_code": "aion-local"
+      },
+      {
+        "component_fingerprint": "ab48ba3cd7b517324eed62a3cefdac25793678bb7e59dbc7cbb369b77c5d0101",
+        "component_name": "aion-component-11",
+        "component_type": "python-module",
+        "component_version": "design-projection",
+        "dependency_scope": "runtime-design",
+        "licence_identifier": "unknown-pending-review",
+        "supplier_code": "aion-local"
+      },
+      {
+        "component_fingerprint": "7d78a0cd6d77d3385c2ef16347329dcceb22c30d79ba5d3511861c3adbebc67a",
+        "component_name": "aion-component-12",
+        "component_type": "python-module",
+        "component_version": "design-projection",
+        "dependency_scope": "runtime-design",
+        "licence_identifier": "unknown-pending-review",
+        "supplier_code": "aion-local"
+      }
+    ],
+    "evidence_maturity": "deterministic_simulation",
+    "private_registry_credentials_present": false,
+    "projection_id": "V02-SBOM-PROJECTION-001",
+    "sbom_projection_fingerprint": "6eb15f910b36066e2280f99b2753b832243d2fb721d38427630d8450eca0ed1e",
+    "schema_version": "aion-v02-sbom-projection/v1"
+  },
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "synthetic": true
+}

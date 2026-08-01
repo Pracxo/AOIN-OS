@@ -48,6 +48,7 @@ is_allowed_path() {
   case "$1" in
     README.md|AGENTS.md|\
     docs/adr/0202-final-secure-runtime-integration-evaluation-and-v02-release-qualification-program-authorization.md|\
+    docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md|\
     docs/adr/README.md|\
     docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/project-status.md|docs/visual-brain.md|\
     docs/secure-runtime-integration/*|\
@@ -63,6 +64,7 @@ is_allowed_path() {
     operator-console-static/index.html|operator-console-static/app.js|operator-console-static/README.md|\
     operator-console-static/demo-data/secure-runtime-integration-*.json|\
     operator-console-static/demo-data/v02-release-qualification-*.json|\
+    scripts/auth-design-check.sh|\
     scripts/operator-console-integration-authorization-check.sh|\
     scripts/operator-console-integration-check.sh|\
     scripts/operator-console-integration-runtime-hold.sh|\
@@ -71,6 +73,11 @@ is_allowed_path() {
     scripts/secure-runtime-integration-program-complete-check.sh|\
     scripts/v02-release-qualification-program-authorization-check.sh|\
     scripts/v02-release-qualification-program-authorization-no-go-regression.sh|\
+    scripts/v02-release-qualification-foundation-check.sh|\
+    scripts/v02-release-qualification-foundation-no-go-regression.sh|\
+    scripts/v02-release-qualification-foundation-pilot-evidence-check.sh|\
+    scripts/v02-release-qualification-foundation-runtime-hold.sh|\
+    scripts/v02-release-qualification-local-run.py|\
     scripts/v02-release-qualification-runtime-hold.sh|\
     scripts/production-auth-core-no-go-regression.sh|\
     scripts/lib/secure_runtime_integration_final_evaluation.py|\
@@ -88,6 +95,11 @@ is_allowed_path() {
     services/brain-api/tests/test_secure_runtime_integration_project_status.py|\
     services/brain-api/tests/test_secure_runtime_integration_scope.py|\
     services/brain-api/tests/test_operator_console_integration_authorization.py)
+      return 0
+      ;;
+    services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
+    services/brain-api/src/aion_brain/v02_release_qualification/*.py|\
+    services/brain-api/tests/test_v02_release_qualification_*.py)
       return 0
       ;;
   esac
@@ -120,16 +132,18 @@ if git diff --name-only "${base:-HEAD}" HEAD | rg -n '(^migrations/|/migrations/
   exit 1
 fi
 
-if git diff --name-only "${base:-HEAD}" HEAD | rg -n '^services/brain-api/src/aion_brain/' >/dev/null 2>&1; then
-  echo "AION-238 primary branch must not modify runtime source" >&2
-  exit 1
-fi
-
-if [[ -e services/brain-api/src/aion_brain/contracts/v02_release_qualification.py || \
-  -e services/brain-api/src/aion_brain/v02_release_qualification ]]; then
-  echo "AION-238 must not create AION-239 runtime source" >&2
-  exit 1
-fi
+while IFS= read -r path; do
+  [[ -z "$path" ]] && continue
+  case "$path" in
+    services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
+    services/brain-api/src/aion_brain/v02_release_qualification/*.py)
+      ;;
+    services/brain-api/src/aion_brain/*)
+      echo "AION-239 must not modify completed SRI runtime source: $path" >&2
+      exit 1
+      ;;
+  esac
+done < <(git diff --name-only "${base:-HEAD}" HEAD)
 
 if git tag -l 'aion-v0.2*' 'v0.2*' | rg -n '.' >/dev/null 2>&1; then
   echo "AION-238 must not create a v0.2 tag" >&2

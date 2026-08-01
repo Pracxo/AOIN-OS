@@ -1,0 +1,144 @@
+{
+  "evidence": [
+    {
+      "activation_window": "future bounded activation window",
+      "audit_requirements": [
+        "rotation approval",
+        "revocation proof"
+      ],
+      "compromise_response_plan": {
+        "compromise_detection": "future anomaly and operator report",
+        "evidence_requirement": "compromise response drill evidence",
+        "response_sequence": [
+          "freeze trust",
+          "publish revocation",
+          "require re-assertion"
+        ]
+      },
+      "evidence_requirements": [
+        "key lifecycle design",
+        "future staging key drill"
+      ],
+      "key_status_lifecycle": [
+        "planned",
+        "active_future",
+        "rotating_future",
+        "revoked_future"
+      ],
+      "live_key_rotation_enabled": false,
+      "maximum_live_key_rotations": 0,
+      "policy_fingerprint": "7997b0aea2c8369dc06b98ea799ce1f5c2bd4ae878567c2a1a7952783e0b6f9a",
+      "policy_id": "V02-KEY-POLICY-001",
+      "private_key_material_present": false,
+      "public_key_bytes_present": false,
+      "revocation_plan": {
+        "audit_requirement": "redacted revocation audit evidence",
+        "revocation_propagation": "future registry revocation propagation",
+        "stale_key_rejection": "reject stale key fingerprints"
+      },
+      "rollback_boundary": "no live key rotation in AION-239",
+      "rotation_plan": {
+        "dual_control_required": true,
+        "emergency_rollover": "operator-approved emergency rollover design",
+        "overlap_window": "dual-key overlap design",
+        "rotation_cadence": "30-day design cadence"
+      },
+      "schema_version": "aion-v02-public-key-lifecycle/v1"
+    },
+    {
+      "activation_window": "future bounded activation window",
+      "audit_requirements": [
+        "rotation approval",
+        "revocation proof"
+      ],
+      "compromise_response_plan": {
+        "compromise_detection": "future anomaly and operator report",
+        "evidence_requirement": "compromise response drill evidence",
+        "response_sequence": [
+          "freeze trust",
+          "publish revocation",
+          "require re-assertion"
+        ]
+      },
+      "evidence_requirements": [
+        "key lifecycle design",
+        "future staging key drill"
+      ],
+      "key_status_lifecycle": [
+        "planned",
+        "active_future",
+        "rotating_future",
+        "revoked_future"
+      ],
+      "live_key_rotation_enabled": false,
+      "maximum_live_key_rotations": 0,
+      "policy_fingerprint": "0806a9c789a34d121ec43aeb006921d16399b67fbc07b85937e8e28561609476",
+      "policy_id": "V02-KEY-POLICY-002",
+      "private_key_material_present": false,
+      "public_key_bytes_present": false,
+      "revocation_plan": {
+        "audit_requirement": "redacted revocation audit evidence",
+        "revocation_propagation": "future registry revocation propagation",
+        "stale_key_rejection": "reject stale key fingerprints"
+      },
+      "rollback_boundary": "no live key rotation in AION-239",
+      "rotation_plan": {
+        "dual_control_required": true,
+        "emergency_rollover": "operator-approved emergency rollover design",
+        "overlap_window": "dual-key overlap design",
+        "rotation_cadence": "60-day design cadence"
+      },
+      "schema_version": "aion-v02-public-key-lifecycle/v1"
+    },
+    {
+      "activation_window": "future bounded activation window",
+      "audit_requirements": [
+        "rotation approval",
+        "revocation proof"
+      ],
+      "compromise_response_plan": {
+        "compromise_detection": "future anomaly and operator report",
+        "evidence_requirement": "compromise response drill evidence",
+        "response_sequence": [
+          "freeze trust",
+          "publish revocation",
+          "require re-assertion"
+        ]
+      },
+      "evidence_requirements": [
+        "key lifecycle design",
+        "future staging key drill"
+      ],
+      "key_status_lifecycle": [
+        "planned",
+        "active_future",
+        "rotating_future",
+        "revoked_future"
+      ],
+      "live_key_rotation_enabled": false,
+      "maximum_live_key_rotations": 0,
+      "policy_fingerprint": "d01a52d949f7c238387d41416305fb330d2d72902e1c53443a010200eb86b4ce",
+      "policy_id": "V02-KEY-POLICY-003",
+      "private_key_material_present": false,
+      "public_key_bytes_present": false,
+      "revocation_plan": {
+        "audit_requirement": "redacted revocation audit evidence",
+        "revocation_propagation": "future registry revocation propagation",
+        "stale_key_rejection": "reject stale key fingerprints"
+      },
+      "rollback_boundary": "no live key rotation in AION-239",
+      "rotation_plan": {
+        "dual_control_required": true,
+        "emergency_rollover": "operator-approved emergency rollover design",
+        "overlap_window": "dual-key overlap design",
+        "rotation_cadence": "90-day design cadence"
+      },
+      "schema_version": "aion-v02-public-key-lifecycle/v1"
+    }
+  ],
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "synthetic": true
+}

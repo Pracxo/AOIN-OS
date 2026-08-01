@@ -1,0 +1,562 @@
+{
+  "external_log_export_enabled": false,
+  "external_metric_export_enabled": false,
+  "external_trace_export_enabled": false,
+  "observability_schema_fingerprint": "5acf516a8ff46644c85967aacda69793e27a73d7f4e21039d7606f854fd14100",
+  "production_observability_export_enabled": false,
+  "schema_version": "aion-v02-production-observability/v1",
+  "signals": [
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "info",
+      "signal_fingerprint": "b44b953776723b0e19e42a50d0676c5b59a47ff5b0086f9cdc1364dc16eef24c",
+      "signal_id": "V02-OBS-001",
+      "signal_kind": "log",
+      "source_component": "component-1"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "info",
+      "signal_fingerprint": "5d1b487bf395dda24a54e38867358a5b51e51ea5780da3ce9cbb7228096c7825",
+      "signal_id": "V02-OBS-002",
+      "signal_kind": "metric",
+      "source_component": "component-2"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "warning",
+      "signal_fingerprint": "85708db61770a87986f15365e708300a25d5beadee14e9f8023483c61609a9d7",
+      "signal_id": "V02-OBS-003",
+      "signal_kind": "trace",
+      "source_component": "component-3"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "info",
+      "signal_fingerprint": "d679841524baf5c9e462f9f5ea208b8a84d7133464c8db4e2ca817070ed5d2f6",
+      "signal_id": "V02-OBS-004",
+      "signal_kind": "audit",
+      "source_component": "component-4"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "info",
+      "signal_fingerprint": "3f510a9d71e21ba5ff8bf59870997434b246f0a40eda76ff337b723228541814",
+      "signal_id": "V02-OBS-005",
+      "signal_kind": "security_event",
+      "source_component": "component-5"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "warning",
+      "signal_fingerprint": "02d4aa42133b268dd528548e09c334c2f2f664a7bdd9dc93f55ce8d82fbd87f0",
+      "signal_id": "V02-OBS-006",
+      "signal_kind": "log",
+      "source_component": "component-6"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "info",
+      "signal_fingerprint": "ff0f9f74c99490eb5088e4c06059339fced1dde1c46b293290adf907bef447da",
+      "signal_id": "V02-OBS-007",
+      "signal_kind": "metric",
+      "source_component": "component-7"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "info",
+      "signal_fingerprint": "95aa0905fe4d81fa679d78a01462b2efc054b2456e3bd6e4667c98d191e1586c",
+      "signal_id": "V02-OBS-008",
+      "signal_kind": "trace",
+      "source_component": "component-0"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "warning",
+      "signal_fingerprint": "e4722bb2f720f4cad02e75ac52992f5e2ae7879898805012d8fac941ac39db22",
+      "signal_id": "V02-OBS-009",
+      "signal_kind": "audit",
+      "source_component": "component-1"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "info",
+      "signal_fingerprint": "42231425f863cb75a6d9837b1f15594b72dc506e1ba479b2f1f8f4a1258fc9dc",
+      "signal_id": "V02-OBS-010",
+      "signal_kind": "security_event",
+      "source_component": "component-2"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "info",
+      "signal_fingerprint": "a1d9b1a397ff8d4f294c7620a1a97d45e2c8b6cd7b899beb6659240341fcba2c",
+      "signal_id": "V02-OBS-011",
+      "signal_kind": "log",
+      "source_component": "component-3"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "warning",
+      "signal_fingerprint": "8f3df83b128f2cae7037454d1c65b5522d7ac544d2c27af2bb172c521623784f",
+      "signal_id": "V02-OBS-012",
+      "signal_kind": "metric",
+      "source_component": "component-4"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "info",
+      "signal_fingerprint": "44f8da08a10ebec171f0abd82b21f0fbc866ab0a4afaf1bbf9b3d3b35b219560",
+      "signal_id": "V02-OBS-013",
+      "signal_kind": "trace",
+      "source_component": "component-5"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "info",
+      "signal_fingerprint": "963165c49023983416dc37ca7dafba87b667f449eb4bcc7e8e87cdd058300783",
+      "signal_id": "V02-OBS-014",
+      "signal_kind": "audit",
+      "source_component": "component-6"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "warning",
+      "signal_fingerprint": "1750c2ff8f0a52f3442b307aae7e1abe865cfb58cc104dd65007dfe188be32dc",
+      "signal_id": "V02-OBS-015",
+      "signal_kind": "security_event",
+      "source_component": "component-7"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "info",
+      "signal_fingerprint": "aeea5b75e8771464605ca9742fbadaf290500c975c7a2f928748b5dc8178612e",
+      "signal_id": "V02-OBS-016",
+      "signal_kind": "log",
+      "source_component": "component-0"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "info",
+      "signal_fingerprint": "47de81596db61bd695fc35a20d0381cdf19f42803439a59de9d4b26d7b85b2fc",
+      "signal_id": "V02-OBS-017",
+      "signal_kind": "metric",
+      "source_component": "component-1"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "warning",
+      "signal_fingerprint": "2e44fdf7ab5fbccdd108cd0c28c61aed09d34bde7d5cf8993a51ad5078e751f5",
+      "signal_id": "V02-OBS-018",
+      "signal_kind": "trace",
+      "source_component": "component-2"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "info",
+      "signal_fingerprint": "00f32a6d920d0f577634acde77f21dea8c7b9ea5f18f448a75d06593446cf611",
+      "signal_id": "V02-OBS-019",
+      "signal_kind": "audit",
+      "source_component": "component-3"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "info",
+      "signal_fingerprint": "b2c2dfef4286e81740f9dd7d9e70ad68443b8a5a70783ad39c9c6ed82f0e3ef7",
+      "signal_id": "V02-OBS-020",
+      "signal_kind": "security_event",
+      "source_component": "component-4"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "warning",
+      "signal_fingerprint": "d2ea67502ab33ccb5f4ae92894411566e27cda2c802284566f1f543598a88f5b",
+      "signal_id": "V02-OBS-021",
+      "signal_kind": "log",
+      "source_component": "component-5"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "info",
+      "signal_fingerprint": "7b67ec5827fe2210d592529ecaa924ac48dcc96a1c8ed4e9a0e28f0bccc634b6",
+      "signal_id": "V02-OBS-022",
+      "signal_kind": "metric",
+      "source_component": "component-6"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "info",
+      "signal_fingerprint": "d5561f3c152a6aa7d6a1225726d63e3d30e9591f31643f19834812f6fb4ac619",
+      "signal_id": "V02-OBS-023",
+      "signal_kind": "trace",
+      "source_component": "component-7"
+    },
+    {
+      "alert_threshold": "future operator threshold",
+      "evidence_requirement": "future observability capture",
+      "expected_rate": "bounded by staging load profile",
+      "operator_action": "review evidence",
+      "prohibited_attributes": [
+        "raw_claim",
+        "secret_value",
+        "token_value"
+      ],
+      "redaction_policy": "redacted metadata only",
+      "retention_class": "governed",
+      "safe_attributes": [
+        "event_id",
+        "fingerprint",
+        "reason_code"
+      ],
+      "severity": "warning",
+      "signal_fingerprint": "b77a22fe0474e017d450b5daad19af7bdbd9dcd15be29bcf4bef876dde8d0a98",
+      "signal_id": "V02-OBS-024",
+      "signal_kind": "audit",
+      "source_component": "component-0"
+    }
+  ]
+}

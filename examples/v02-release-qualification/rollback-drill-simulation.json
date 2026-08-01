@@ -1,0 +1,16 @@
+{
+  "commands_executed": 0,
+  "database_mutations": 0,
+  "dependencies_valid": true,
+  "deployments": 0,
+  "drill_id": "V02-ROLLBACK-DRILL-001",
+  "drill_result_fingerprint": "3d239c86884072ed3e0d2f5629e75a73dbdf681b17ca10f589bbc0d1d1a51179",
+  "evidence_requirements_valid": true,
+  "health_checks_referenced": true,
+  "preconditions_valid": true,
+  "rollback_plan_ids": [
+    "V02-ROLLBACK-PLAN-001",
+    "V02-ROLLBACK-PLAN-002"
+  ],
+  "schema_version": "aion-v02-rollback-drill-plan/v1"
+}

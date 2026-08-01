@@ -1,0 +1,65 @@
+{
+  "evidence": [
+    {
+      "authorize_available": false,
+      "claim_mappings": [
+        {
+          "claim_mapping_fingerprint": "cc997847749a8a5b455b7e972b434088cf81d00dfbab1349a217ed6a0b42caed",
+          "provider_claim_code": "issuer",
+          "raw_value_retained": false,
+          "request_identity_field_code": "issuer",
+          "required": true
+        },
+        {
+          "claim_mapping_fingerprint": "3a85f3545ac412800cf557a9c3471c0d64e84a39c0c8f6da1b18dc6a611c5924",
+          "provider_claim_code": "audience",
+          "raw_value_retained": false,
+          "request_identity_field_code": "audience",
+          "required": true
+        },
+        {
+          "claim_mapping_fingerprint": "14dba652be39bb09341886779176bede84406d9bb830612119c64bba670700ca",
+          "provider_claim_code": "subject",
+          "raw_value_retained": false,
+          "request_identity_field_code": "subject",
+          "required": true
+        },
+        {
+          "claim_mapping_fingerprint": "3fbb430f799e794ee755a7d9cc11d774f569ed7c353a67cbc43239e350a3bd60",
+          "provider_claim_code": "roles",
+          "raw_value_retained": false,
+          "request_identity_field_code": "roles",
+          "required": true
+        }
+      ],
+      "connect_available": false,
+      "create_authorization_header_available": false,
+      "exchange_code_available": false,
+      "external_identity_provider_call_enabled": false,
+      "fetch_keys_available": false,
+      "fetch_metadata_available": false,
+      "identity_provider_manifest_fingerprint": "f795c358bd29ddab585cb0d0269365f3beb44f4d337545f69fe5674527cf2304",
+      "load_client_secret_available": false,
+      "maximum_external_identity_provider_calls": 0,
+      "protocol_kind": "generic_oidc_metadata",
+      "provider_code": "future-generic-oidc",
+      "refresh_available": false,
+      "schema_version": "aion-v02-identity-provider-manifest/v1",
+      "trust_plan": {
+        "audience_fingerprint": "7c078e8ae56c6acd227229edb80e2462d2026e714ee5537c05a12c0b223e1706",
+        "authentication_flow_design_fingerprint": "ba171109b50de8542aacb79386bc6e59e05f2bac26f9b476e457875c01f0ed06",
+        "failure_behavior": "fail closed without network calls",
+        "issuer_fingerprint": "0c092f65e4e7bf27c8132730500f34371ab0a9884fc71bd0427cb9fc7aae1753",
+        "logout_design_fingerprint": "09408c5797cdd7dde708c2704822628fc4269e050efb3593943761616ad0b4bb",
+        "metadata_location_fingerprint": "69f62ff3f9da87f5aa7a7cdea77c2cfbb013fe2065d95f4f4b556346c00e145b",
+        "public_key_source_policy_fingerprint": "d2729466fe5c3e19f691422c724a7d7be45fddfe1221e2de7fce827184fd76bb",
+        "trust_plan_fingerprint": "6826ae10256c069910909b3ffdf48e3ef21f1a568cd2059ec62b4d9c87bbcfbe"
+      }
+    }
+  ],
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "synthetic": true
+}

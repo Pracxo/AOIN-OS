@@ -26,6 +26,20 @@ AION217_ALLOWED_SOURCE_PATHS = set(AION217_SOURCE_PATHS) | set(
 )
 
 
+def _aion239_source_paths() -> set[str]:
+    program = _json("docs/v02-release-qualification/program-ledger.json")
+    if (
+        program.get("active_v02_release_qualification_task") != "AION-239"
+        or program.get("v02_release_qualification_foundation_implemented") is not True
+        or program.get("foundation_runtime_state")
+        != "implemented_disabled_design_only_local_simulation"
+    ):
+        return set()
+    source_scope = program.get("implemented_source_scope")
+    assert isinstance(source_scope, list)
+    return {str(path) for path in source_scope}
+
+
 def test_aion181_runtime_source_is_present_after_authorized_implementation() -> None:
     for relative in SHADOW_ACTIVATION_ALLOWED_CREATE:
         assert (ROOT / relative).is_file(), relative
@@ -50,9 +64,17 @@ def test_aion181_branch_modifies_only_authorized_runtime_or_package_surfaces() -
         "packages/aion-sdk-python/src",
         "migrations",
     )
-    assert changed <= set(SHADOW_ACTIVATION_ALLOWED_CREATE) | AION217_ALLOWED_SOURCE_PATHS
+    aion239_source_paths = _aion239_source_paths()
+    assert (
+        changed
+        <= set(SHADOW_ACTIVATION_ALLOWED_CREATE)
+        | AION217_ALLOWED_SOURCE_PATHS
+        | aion239_source_paths
+    )
     if changed & AION217_ALLOWED_SOURCE_PATHS:
         _assert_aion217_runtime_surfaces_absent()
+    if changed & aion239_source_paths:
+        _assert_aion239_runtime_surfaces_absent()
 
 
 def _assert_aion217_runtime_surfaces_absent() -> None:
@@ -65,6 +87,12 @@ def _assert_aion217_runtime_surfaces_absent() -> None:
         "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_policy_updater.py",
     ):
         assert not (ROOT / relative).exists(), relative
+
+
+def _assert_aion239_runtime_surfaces_absent() -> None:
+    assert not (
+        ROOT / "services/brain-api/src/aion_brain/api/v02_release_qualification.py"
+    ).exists()
 
 
 def _json(relative: str) -> dict[str, Any]:

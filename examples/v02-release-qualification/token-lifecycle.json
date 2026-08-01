@@ -1,0 +1,134 @@
+[
+  {
+    "access_tokens_issued": 0,
+    "binding_requirements": [
+      "issuer",
+      "audience",
+      "subject",
+      "workspace"
+    ],
+    "evidence_requirements": [
+      "staging token fixture evidence"
+    ],
+    "intended_audience": "future-aion-runtime",
+    "intended_issuer": "future-verified-idp",
+    "lifecycle_kind": "token",
+    "maximum_ttl_seconds": 900,
+    "policy_fingerprint": "80200a3dc3128f65944adc7e21e123ce3d0188d8595d276dfe1e523dae9d7340",
+    "policy_id": "V02-TOKEN-POLICY-001",
+    "refresh_policy": "future refresh requires explicit approval",
+    "refresh_tokens_issued": 0,
+    "replay_requirements": [
+      "assertion fingerprint",
+      "session binding"
+    ],
+    "revocation_policy": "fail closed on revocation uncertainty",
+    "rotation_policy": "rotate by issuer policy",
+    "schema_version": "aion-v02-token-lifecycle/v1",
+    "session_tokens_issued": 0,
+    "storage_prohibited": true,
+    "token_kind_code": "identity-assertion",
+    "tokens_generated": 0,
+    "tokens_persisted": 0,
+    "tokens_read": 0
+  },
+  {
+    "access_tokens_issued": 0,
+    "binding_requirements": [
+      "issuer",
+      "audience",
+      "subject",
+      "workspace"
+    ],
+    "evidence_requirements": [
+      "staging token fixture evidence"
+    ],
+    "intended_audience": "future-aion-runtime",
+    "intended_issuer": "future-verified-idp",
+    "lifecycle_kind": "token",
+    "maximum_ttl_seconds": 900,
+    "policy_fingerprint": "ab6fce1744d5d3e93505bc27d61fd225e57c44ab2b79bdd62eddea559e803600",
+    "policy_id": "V02-TOKEN-POLICY-002",
+    "refresh_policy": "future refresh requires explicit approval",
+    "refresh_tokens_issued": 0,
+    "replay_requirements": [
+      "assertion fingerprint",
+      "session binding"
+    ],
+    "revocation_policy": "fail closed on revocation uncertainty",
+    "rotation_policy": "rotate by issuer policy",
+    "schema_version": "aion-v02-token-lifecycle/v1",
+    "session_tokens_issued": 0,
+    "storage_prohibited": true,
+    "token_kind_code": "access",
+    "tokens_generated": 0,
+    "tokens_persisted": 0,
+    "tokens_read": 0
+  },
+  {
+    "access_tokens_issued": 0,
+    "binding_requirements": [
+      "issuer",
+      "audience",
+      "subject",
+      "workspace"
+    ],
+    "evidence_requirements": [
+      "staging token fixture evidence"
+    ],
+    "intended_audience": "future-aion-runtime",
+    "intended_issuer": "future-verified-idp",
+    "lifecycle_kind": "token",
+    "maximum_ttl_seconds": 900,
+    "policy_fingerprint": "44f3dcd74751b0d3e8acd0652455eec8449bdc9648425d6ee8eeab15950f79a2",
+    "policy_id": "V02-TOKEN-POLICY-003",
+    "refresh_policy": "future refresh requires explicit approval",
+    "refresh_tokens_issued": 0,
+    "replay_requirements": [
+      "assertion fingerprint",
+      "session binding"
+    ],
+    "revocation_policy": "fail closed on revocation uncertainty",
+    "rotation_policy": "rotate by issuer policy",
+    "schema_version": "aion-v02-token-lifecycle/v1",
+    "session_tokens_issued": 0,
+    "storage_prohibited": true,
+    "token_kind_code": "refresh",
+    "tokens_generated": 0,
+    "tokens_persisted": 0,
+    "tokens_read": 0
+  },
+  {
+    "access_tokens_issued": 0,
+    "binding_requirements": [
+      "issuer",
+      "audience",
+      "subject",
+      "workspace"
+    ],
+    "evidence_requirements": [
+      "staging token fixture evidence"
+    ],
+    "intended_audience": "future-aion-runtime",
+    "intended_issuer": "future-verified-idp",
+    "lifecycle_kind": "token",
+    "maximum_ttl_seconds": 900,
+    "policy_fingerprint": "982b00958533b757ba77657d0ad8683b5f3c5d3a131e27ddb1b52f83149b1080",
+    "policy_id": "V02-TOKEN-POLICY-004",
+    "refresh_policy": "future refresh requires explicit approval",
+    "refresh_tokens_issued": 0,
+    "replay_requirements": [
+      "assertion fingerprint",
+      "session binding"
+    ],
+    "revocation_policy": "fail closed on revocation uncertainty",
+    "rotation_policy": "rotate by issuer policy",
+    "schema_version": "aion-v02-token-lifecycle/v1",
+    "session_tokens_issued": 0,
+    "storage_prohibited": true,
+    "token_kind_code": "session",
+    "tokens_generated": 0,
+    "tokens_persisted": 0,
+    "tokens_read": 0
+  }
+]

@@ -40,6 +40,7 @@ ALLOWED_EXACT = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_synthesis.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_integrity.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/domain_expert_evidence.py",
+    "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py",
 }
 PROHIBITED_PREFIXES = (
     ".github/workflows/",
@@ -164,6 +165,8 @@ for parts in changed_entries():
         } and normalized in AION217_ALLOWED_SOURCE_PATHS:
             continue
         if normalized in AION219_ALLOWED_SOURCE_PATHS:
+            continue
+        if normalized.startswith("services/brain-api/src/aion_brain/v02_release_qualification/"):
             continue
         if normalized not in ALLOWED_EXACT and normalized.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")

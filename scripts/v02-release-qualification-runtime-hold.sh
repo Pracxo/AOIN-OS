@@ -30,7 +30,6 @@ auth = json.loads(
     )
 )
 required_false = (
-    "v02_release_qualification_program_implemented",
     "production_auth_runtime_enabled",
     "external_identity_provider_call_enabled",
     "credential_generation_enabled",
@@ -52,6 +51,16 @@ required_false = (
 for label, payload in (("program", program), ("authorization", auth)):
     if payload.get("v02_release_qualification_program_authorized") is not True:
         raise SystemExit(f"{label} qualification program is not authorized")
+    if payload.get("v02_release_qualification_program_implemented") is not True:
+        raise SystemExit(f"{label} qualification program is not implemented")
+    if payload.get("v02_release_qualification_foundation_implemented") is not True:
+        raise SystemExit(f"{label} qualification foundation is not implemented")
+    if payload.get("v02_release_qualification_foundation_state") != (
+        "implemented_disabled_design_and_local_simulation_pending_AION-240_closeout"
+    ):
+        raise SystemExit(f"{label} qualification foundation state mismatch")
+    if payload.get("local_qualification_pilot_completed") is not True:
+        raise SystemExit(f"{label} local qualification pilot is not complete")
     for key in required_false:
         if payload.get(key) is not False:
             raise SystemExit(f"{label} runtime hold mismatch {key}: {payload.get(key)!r}")

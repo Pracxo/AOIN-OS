@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import os
 import subprocess
 
@@ -35,6 +36,7 @@ AION217_SOURCE_PATHS = {
     "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_revalidation.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_versioning.py",
 }
+AION239_PROGRAM_LEDGER = "docs/v02-release-qualification/program-ledger.json"
 CLAIM_GRAPH_FORBIDDEN_RUNTIME_PATHS = (
     "services/brain-api/src/aion_brain/api/claim_graph.py",
     "services/brain-api/src/aion_brain/knowledge_intelligence/claim_graph_runtime.py",
@@ -114,6 +116,27 @@ def _assert_aion217_boundaries(changed: set[str]) -> None:
         assert not (ROOT / relative).exists(), relative
 
 
+def _aion239_source_paths() -> set[str]:
+    program = json.loads((ROOT / AION239_PROGRAM_LEDGER).read_text())
+    if (
+        program.get("active_v02_release_qualification_task") != "AION-239"
+        or program.get("v02_release_qualification_foundation_implemented") is not True
+        or program.get("foundation_runtime_state")
+        != "implemented_disabled_design_only_local_simulation"
+    ):
+        return set()
+    source_scope = program.get("implemented_source_scope")
+    assert isinstance(source_scope, list)
+    return {str(path) for path in source_scope}
+
+
+def _assert_aion239_boundaries(changed: set[str]) -> None:
+    assert changed <= _aion239_source_paths()
+    assert not (
+        ROOT / "services/brain-api/src/aion_brain/api/v02_release_qualification.py"
+    ).exists()
+
+
 def test_aion_208_does_not_change_runtime_or_package_surfaces():
     base = _comparison_base()
     changed: set[str] = set()
@@ -128,6 +151,10 @@ def test_aion_208_does_not_change_runtime_or_package_surfaces():
         changed = {line.strip() for line in diff.stdout.splitlines() if line.strip()}
     if changed and changed <= AION217_SOURCE_PATHS:
         _assert_aion217_boundaries(changed)
+        return
+    aion239_source_paths = _aion239_source_paths()
+    if changed and changed <= aion239_source_paths:
+        _assert_aion239_boundaries(changed)
         return
     if _claim_graph_context(changed):
         _assert_claim_graph_boundaries(changed)

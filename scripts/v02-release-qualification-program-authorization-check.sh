@@ -54,11 +54,17 @@ expected_program = {
     "program_id": SUCCESSOR_PROGRAM_ID,
     "program_name": "AION v0.2 Release Qualification Program",
     "created_by_task": "AION-238",
-    "program_state": "v02_release_qualification_program_authorized_not_implemented",
+    "program_state": "v02_release_qualification_foundation_implemented_disabled_pending_closeout",
     "parent_evaluation_id": "AION-SRIPE-004",
     "parent_evaluation_decision": PASS_DECISION,
     "v02_release_qualification_program_authorized": True,
-    "v02_release_qualification_program_implemented": False,
+    "v02_release_qualification_program_implemented": True,
+    "v02_release_qualification_foundation_authorized": True,
+    "v02_release_qualification_foundation_implemented": True,
+    "v02_release_qualification_foundation_state": (
+        "implemented_disabled_design_and_local_simulation_pending_AION-240_closeout"
+    ),
+    "local_qualification_pilot_completed": True,
     "active_v02_release_qualification_authorization_count": 1,
     "active_v02_release_qualification_authorization": SUCCESSOR_AUTHORIZATION_ID,
     "active_v02_release_qualification_task": SUCCESSOR_IMPLEMENTATION_TASK,
@@ -133,11 +139,17 @@ for key, value in limits.items():
     if key.startswith("maximum_") and key in auth.get("zero_resource_limit_keys", []):
         if value != 0:
             raise SystemExit(f"zero resource limit not zero: {key}")
-for path in auth.get("future_source_scope", []):
-    if (root / path).exists():
-        raise SystemExit(f"AION-239 source exists during AION-238: {path}")
-if (root / "scripts/v02-release-qualification-local-run.py").exists():
-    raise SystemExit("future AION-239 runner exists during AION-238")
+for path in auth.get("implemented_source_scope", []):
+    if not (root / path).exists():
+        raise SystemExit(f"AION-239 implemented source is absent: {path}")
+if not (root / "scripts/v02-release-qualification-local-run.py").exists():
+    raise SystemExit("AION-239 local runner is absent")
+pilot = root / (
+    "examples/v02-release-qualification/"
+    "v02-production-readiness-qualification-foundation-pilot-evidence.json"
+)
+if not pilot.exists():
+    raise SystemExit("AION-239 pilot evidence is absent")
 PY
 
 aion_confirm_immutable_v01_tag_history >/dev/null

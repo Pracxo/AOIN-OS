@@ -140,6 +140,10 @@ for parts in changed_entries():
             continue
         if aion237_source_allowed(normalized):
             continue
+        if normalized == "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py" or normalized.startswith(
+            "services/brain-api/src/aion_brain/v02_release_qualification/"
+        ):
+            continue
         if normalized.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/dependency path changed: {normalized}")
         if not allowed(normalized):

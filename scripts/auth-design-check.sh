@@ -1525,6 +1525,8 @@ def is_secure_runtime_integration_artifact(name: str) -> bool:
         == "docs/adr/0201-controlled-same-origin-loopback-operator-console-and-integrated-local-runtime.md"
         or name
         == "docs/adr/0202-final-secure-runtime-integration-evaluation-and-v02-release-qualification-program-authorization.md"
+        or name
+        == "docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md"
         or name.startswith("docs/secure-runtime-integration/")
         or name.startswith("docs/v02-release-qualification/")
         or name.startswith("docs/release/secure-runtime-integration-")
@@ -1558,9 +1560,11 @@ def is_secure_runtime_integration_artifact(name: str) -> bool:
         or name == "services/brain-api/src/aion_brain/contracts/model_gateway.py"
         or name == "services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime.py"
         or name == "services/brain-api/src/aion_brain/contracts/operator_console_integration.py"
+        or name == "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py"
         or name.startswith("services/brain-api/src/aion_brain/model_gateway/")
         or name.startswith("services/brain-api/src/aion_brain/capability_runtime/")
         or name.startswith("services/brain-api/src/aion_brain/operator_console_runtime/")
+        or name.startswith("services/brain-api/src/aion_brain/v02_release_qualification/")
         or name == "services/brain-api/tests/model_gateway_aion233_test_support.py"
         or name.startswith("services/brain-api/src/aion_brain/secure_runtime/")
         or name == "services/brain-api/tests/capability_runtime_test_support.py"
@@ -1575,6 +1579,7 @@ def is_secure_runtime_integration_artifact(name: str) -> bool:
         or name == "services/brain-api/tests/aion234_test_support.py"
         or name.startswith("services/brain-api/tests/test_secure_runtime_")
         or name.startswith("services/brain-api/tests/test_secure_runtime_integration_")
+        or name.startswith("services/brain-api/tests/test_v02_release_qualification_")
     )
 
 

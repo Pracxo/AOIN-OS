@@ -1,0 +1,50 @@
+[
+  {
+    "actor_role_code": "release-qualification-runner",
+    "artifact_bytes_present": false,
+    "evidence_fingerprints": [
+      "a09a2dc3e5d65349b1f75434377ca2ad57174dc9e9c662515817e9a16c308530"
+    ],
+    "predecessor_fingerprint": "0000000000000000000000000000000000000000000000000000000000000000",
+    "provenance_fingerprint": "ecf2f30269613aed33ab31a5a8589e1d92ec56613475d9beecf4483170fd663b",
+    "provenance_id": "V02-PROVENANCE-001",
+    "schema_version": "aion-v02-artifact-provenance/v1",
+    "source_commit": "81076eab86a90e2f2097508b654e7869a5d144bf"
+  },
+  {
+    "actor_role_code": "release-qualification-runner",
+    "artifact_bytes_present": false,
+    "evidence_fingerprints": [
+      "2b35a390e7f6f175e708eec49a20f90dca168304b46a39bb09f4352c03dc205b"
+    ],
+    "predecessor_fingerprint": "ecf2f30269613aed33ab31a5a8589e1d92ec56613475d9beecf4483170fd663b",
+    "provenance_fingerprint": "5ce459e1a24ad64c169f3c42c53f8e100be802d2e96909ea249f895658fb4088",
+    "provenance_id": "V02-PROVENANCE-002",
+    "schema_version": "aion-v02-artifact-provenance/v1",
+    "source_commit": "81076eab86a90e2f2097508b654e7869a5d144bf"
+  },
+  {
+    "actor_role_code": "release-qualification-runner",
+    "artifact_bytes_present": false,
+    "evidence_fingerprints": [
+      "f28163ca5fdd2afee52a9e082c5cc169bab5174a944719ec3c5fdbf4956d5a6b"
+    ],
+    "predecessor_fingerprint": "5ce459e1a24ad64c169f3c42c53f8e100be802d2e96909ea249f895658fb4088",
+    "provenance_fingerprint": "f8c5419f57e01518b9cb87b0fdc7f4b772cfb0d5672a87d0b6f872a0631da7e6",
+    "provenance_id": "V02-PROVENANCE-003",
+    "schema_version": "aion-v02-artifact-provenance/v1",
+    "source_commit": "81076eab86a90e2f2097508b654e7869a5d144bf"
+  },
+  {
+    "actor_role_code": "release-qualification-runner",
+    "artifact_bytes_present": false,
+    "evidence_fingerprints": [
+      "12e5d45ea97596ced804fd86084477c7ff415a8d5caa8620fac0d5ac0d2ea7d5"
+    ],
+    "predecessor_fingerprint": "f8c5419f57e01518b9cb87b0fdc7f4b772cfb0d5672a87d0b6f872a0631da7e6",
+    "provenance_fingerprint": "c260259879a7b5e988a6eac7e4d41cf8f2d9dd3c1291a4a1a30c7b31bf6d060b",
+    "provenance_id": "V02-PROVENANCE-004",
+    "schema_version": "aion-v02-artifact-provenance/v1",
+    "source_commit": "81076eab86a90e2f2097508b654e7869a5d144bf"
+  }
+]

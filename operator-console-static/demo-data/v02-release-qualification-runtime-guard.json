@@ -1,0 +1,18 @@
+{
+  "evidence": {
+    "outcome": "allow_disabled_qualification",
+    "production_evidence_required": true,
+    "qualification_decision": "foundation_implemented_release_not_ready_staging_evidence_required",
+    "release_hold": true,
+    "runtime_guard_fingerprint": "329294437a279c2021cbbcfe93d25e2bc1180a18d5b3be060ad9a1114acc77b4",
+    "schema_version": "aion-v02-runtime-release-guard/v1",
+    "staging_evidence_required": true,
+    "v02_release_candidate_created": false,
+    "v02_release_ready": false
+  },
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "synthetic": true
+}

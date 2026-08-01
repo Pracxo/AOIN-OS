@@ -1,0 +1,282 @@
+{
+  "classes": [
+    {
+      "allowed_handling_locations": [
+        "redacted evidence",
+        "future secured runtime"
+      ],
+      "class_fingerprint": "c13f7941e1e6c34dbcf3017a4441d6489ffca58299d95f52958975a70bfa856a",
+      "classification_level": "protected",
+      "destruction_required": true,
+      "encryption_required": true,
+      "evidence_policy": "redacted metadata only",
+      "incident_response_required": true,
+      "logging_policy": "fingerprints only",
+      "material_class_code": "private_key_material",
+      "protected_value_stored": false,
+      "redaction_required": true,
+      "retention_policy": "bounded by governance record"
+    },
+    {
+      "allowed_handling_locations": [
+        "redacted evidence",
+        "future secured runtime"
+      ],
+      "class_fingerprint": "7291fd52f49f7ba9c6d02073cd744a7e93e624775d61fa9127a31c397d6857d6",
+      "classification_level": "protected",
+      "destruction_required": true,
+      "encryption_required": true,
+      "evidence_policy": "redacted metadata only",
+      "incident_response_required": true,
+      "logging_policy": "fingerprints only",
+      "material_class_code": "public_key_material",
+      "protected_value_stored": false,
+      "redaction_required": true,
+      "retention_policy": "bounded by governance record"
+    },
+    {
+      "allowed_handling_locations": [
+        "redacted evidence",
+        "future secured runtime"
+      ],
+      "class_fingerprint": "1c7c994e9f75a62cf596523821f0e7abb9c2b0e87b893b45ce5bc444a75ef919",
+      "classification_level": "protected",
+      "destruction_required": true,
+      "encryption_required": true,
+      "evidence_policy": "redacted metadata only",
+      "incident_response_required": true,
+      "logging_policy": "fingerprints only",
+      "material_class_code": "identity_assertion",
+      "protected_value_stored": false,
+      "redaction_required": true,
+      "retention_policy": "bounded by governance record"
+    },
+    {
+      "allowed_handling_locations": [
+        "redacted evidence",
+        "future secured runtime"
+      ],
+      "class_fingerprint": "59ecd858695ad301a7ebe5a88c292b2f0ac5ec19ab258876a80847aad88293b3",
+      "classification_level": "protected",
+      "destruction_required": true,
+      "encryption_required": true,
+      "evidence_policy": "redacted metadata only",
+      "incident_response_required": true,
+      "logging_policy": "fingerprints only",
+      "material_class_code": "credential",
+      "protected_value_stored": false,
+      "redaction_required": true,
+      "retention_policy": "bounded by governance record"
+    },
+    {
+      "allowed_handling_locations": [
+        "redacted evidence",
+        "future secured runtime"
+      ],
+      "class_fingerprint": "b72718fc925a7a31f3ba6d64ceff38bd51905fcbc747034fdda9a3f8cf4ab93f",
+      "classification_level": "protected",
+      "destruction_required": true,
+      "encryption_required": true,
+      "evidence_policy": "redacted metadata only",
+      "incident_response_required": true,
+      "logging_policy": "fingerprints only",
+      "material_class_code": "client_secret",
+      "protected_value_stored": false,
+      "redaction_required": true,
+      "retention_policy": "bounded by governance record"
+    },
+    {
+      "allowed_handling_locations": [
+        "redacted evidence",
+        "future secured runtime"
+      ],
+      "class_fingerprint": "226e43a2f93908b9dca4e6a8513324ec44e16902cd9a288d40ef73ccae829049",
+      "classification_level": "protected",
+      "destruction_required": true,
+      "encryption_required": true,
+      "evidence_policy": "redacted metadata only",
+      "incident_response_required": true,
+      "logging_policy": "fingerprints only",
+      "material_class_code": "access_token",
+      "protected_value_stored": false,
+      "redaction_required": true,
+      "retention_policy": "bounded by governance record"
+    },
+    {
+      "allowed_handling_locations": [
+        "redacted evidence",
+        "future secured runtime"
+      ],
+      "class_fingerprint": "31832843ce58a7fce30de0d040f7f0b49e783a763e56ab48fd1108bbb9c97b78",
+      "classification_level": "protected",
+      "destruction_required": true,
+      "encryption_required": true,
+      "evidence_policy": "redacted metadata only",
+      "incident_response_required": true,
+      "logging_policy": "fingerprints only",
+      "material_class_code": "refresh_token",
+      "protected_value_stored": false,
+      "redaction_required": true,
+      "retention_policy": "bounded by governance record"
+    },
+    {
+      "allowed_handling_locations": [
+        "redacted evidence",
+        "future secured runtime"
+      ],
+      "class_fingerprint": "7b259d501353a6d21e7cd57436551707af89d6ad3ef597150c93b120f2e48dd2",
+      "classification_level": "protected",
+      "destruction_required": true,
+      "encryption_required": true,
+      "evidence_policy": "redacted metadata only",
+      "incident_response_required": true,
+      "logging_policy": "fingerprints only",
+      "material_class_code": "session_token",
+      "protected_value_stored": false,
+      "redaction_required": true,
+      "retention_policy": "bounded by governance record"
+    },
+    {
+      "allowed_handling_locations": [
+        "redacted evidence",
+        "future secured runtime"
+      ],
+      "class_fingerprint": "e8f35f638864cfbde744e796f5c97ad44f0dd2987e26b8ef56a0a5411e0063d8",
+      "classification_level": "protected",
+      "destruction_required": true,
+      "encryption_required": true,
+      "evidence_policy": "redacted metadata only",
+      "incident_response_required": true,
+      "logging_policy": "fingerprints only",
+      "material_class_code": "approval_evidence",
+      "protected_value_stored": false,
+      "redaction_required": true,
+      "retention_policy": "bounded by governance record"
+    },
+    {
+      "allowed_handling_locations": [
+        "redacted evidence",
+        "future secured runtime"
+      ],
+      "class_fingerprint": "9b5f9c308281c8f218396c6262b737dc19e314323361cdf2912ff17dd5d16cad",
+      "classification_level": "protected",
+      "destruction_required": true,
+      "encryption_required": true,
+      "evidence_policy": "redacted metadata only",
+      "incident_response_required": true,
+      "logging_policy": "fingerprints only",
+      "material_class_code": "operator_identity",
+      "protected_value_stored": false,
+      "redaction_required": true,
+      "retention_policy": "bounded by governance record"
+    },
+    {
+      "allowed_handling_locations": [
+        "redacted evidence",
+        "future secured runtime"
+      ],
+      "class_fingerprint": "82eae4ad188a6e2b850eebd945aa61dbcc7ef12ada045214eef124011627f211",
+      "classification_level": "protected",
+      "destruction_required": true,
+      "encryption_required": true,
+      "evidence_policy": "redacted metadata only",
+      "incident_response_required": true,
+      "logging_policy": "fingerprints only",
+      "material_class_code": "personal_data",
+      "protected_value_stored": false,
+      "redaction_required": true,
+      "retention_policy": "bounded by governance record"
+    },
+    {
+      "allowed_handling_locations": [
+        "redacted evidence",
+        "future secured runtime"
+      ],
+      "class_fingerprint": "bf4d2f59399e1f9bf5c6e762fe491459c9f831170cd49256df6ac56337248d20",
+      "classification_level": "protected",
+      "destruction_required": true,
+      "encryption_required": true,
+      "evidence_policy": "redacted metadata only",
+      "incident_response_required": true,
+      "logging_policy": "fingerprints only",
+      "material_class_code": "model_prompt",
+      "protected_value_stored": false,
+      "redaction_required": true,
+      "retention_policy": "bounded by governance record"
+    },
+    {
+      "allowed_handling_locations": [
+        "redacted evidence",
+        "future secured runtime"
+      ],
+      "class_fingerprint": "ae239b5cfbdb5a2366c3783562fb005e68dc06bf30857da8fc407146cc3257b7",
+      "classification_level": "protected",
+      "destruction_required": true,
+      "encryption_required": true,
+      "evidence_policy": "redacted metadata only",
+      "incident_response_required": true,
+      "logging_policy": "fingerprints only",
+      "material_class_code": "model_response",
+      "protected_value_stored": false,
+      "redaction_required": true,
+      "retention_policy": "bounded by governance record"
+    },
+    {
+      "allowed_handling_locations": [
+        "redacted evidence",
+        "future secured runtime"
+      ],
+      "class_fingerprint": "ab8dde9e0ef76e213b3ec64c70e81985c58c391a105e486309caf631a91e1d87",
+      "classification_level": "protected",
+      "destruction_required": true,
+      "encryption_required": true,
+      "evidence_policy": "redacted metadata only",
+      "incident_response_required": true,
+      "logging_policy": "fingerprints only",
+      "material_class_code": "connector_payload",
+      "protected_value_stored": false,
+      "redaction_required": true,
+      "retention_policy": "bounded by governance record"
+    },
+    {
+      "allowed_handling_locations": [
+        "redacted evidence",
+        "future secured runtime"
+      ],
+      "class_fingerprint": "5925bdcdb550bd443051dd6cc070bbd298019c9cdf846973c3d3ff63f284e72e",
+      "classification_level": "protected",
+      "destruction_required": true,
+      "encryption_required": true,
+      "evidence_policy": "redacted metadata only",
+      "incident_response_required": true,
+      "logging_policy": "fingerprints only",
+      "material_class_code": "production_configuration",
+      "protected_value_stored": false,
+      "redaction_required": true,
+      "retention_policy": "bounded by governance record"
+    },
+    {
+      "allowed_handling_locations": [
+        "redacted evidence",
+        "future secured runtime"
+      ],
+      "class_fingerprint": "45e7140c73d6aeef05328872ddf9608ace7a613ec6f277cddec168e541414fcf",
+      "classification_level": "protected",
+      "destruction_required": true,
+      "encryption_required": true,
+      "evidence_policy": "redacted metadata only",
+      "incident_response_required": true,
+      "logging_policy": "fingerprints only",
+      "material_class_code": "audit_sensitive_metadata",
+      "protected_value_stored": false,
+      "redaction_required": true,
+      "retention_policy": "bounded by governance record"
+    }
+  ],
+  "lifecycle_kind": "protected_material",
+  "policy_fingerprint": "8a9edeefb235dde423fd4e24be5ddc3c6038a429700026e8c912146be7e1e25f",
+  "policy_id": "V02-PROTECTED-MATERIAL-POLICY-001",
+  "protected_value_stored": false,
+  "redaction_default": true,
+  "schema_version": "aion-v02-protected-material/v1"
+}

@@ -1,0 +1,52 @@
+{
+  "availability_plan": {
+    "high_availability_design": "multi-zone managed datastore design",
+    "recovery_point_objective": "fifteen-minute design target",
+    "recovery_time_objective": "one-hour design target",
+    "restore_objective": "validated restore before staging"
+  },
+  "backend_class_code": "future-managed-sql-ledger",
+  "backup_restore_plan": {
+    "backup_frequency": "daily design target",
+    "evidence_requirement": "AION-241 staging drill evidence",
+    "restore_validation": "deterministic restore rehearsal required"
+  },
+  "capacity_plan": {
+    "cleanup_policy": "deterministic partition expiry design",
+    "estimated_daily_assertions": 100000,
+    "retention_days": 30
+  },
+  "cleanup_policy": "operator-approved retention expiry cleanup",
+  "encryption_at_rest_requirement": "required-before-staging",
+  "encryption_in_transit_requirement": "required-before-staging",
+  "fail_closed_behavior": "deny assertion when replay status cannot be proven",
+  "live_replay_ledger_enabled": false,
+  "maximum_live_replay_ledger_writes": 0,
+  "maximum_production_database_operations": 0,
+  "migration_plan": {
+    "evidence_requirement": "future staging migration evidence",
+    "migration_sequence": [
+      "create schema",
+      "backfill none",
+      "validate unique keys"
+    ],
+    "rollback_boundary": "no live rollback in AION-239"
+  },
+  "monitoring_requirements": [
+    "write conflict rate",
+    "availability",
+    "latency"
+  ],
+  "production_database_provisioning_enabled": false,
+  "provisioning_evidence_requirements": [
+    "schema review",
+    "restore drill",
+    "capacity test"
+  ],
+  "replay_plan_fingerprint": "abfe35fea7336da986019e3d7bdfefaec795ac9741004bcfb23228974d4d1568",
+  "retention_policy": "bounded assertion replay retention",
+  "schema_fingerprint": "2bc7a082e3ec377f765f38c2e9bf52a1ec19167b2fac8923aa86d7c46f3b642a",
+  "schema_version": "aion-v02-replay-ledger-provisioning/v1",
+  "transaction_isolation_requirement": "serializable-or-equivalent",
+  "unique_key_design": "issuer-audience-subject-assertion-fingerprint"
+}

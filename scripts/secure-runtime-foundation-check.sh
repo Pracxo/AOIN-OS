@@ -42,11 +42,21 @@ assert CLOSED_CAPABILITY_CODES == (
     "secure_runtime.health.read",
     "secure_runtime.observability.read",
 )
-for payload in (program, auth):
+for label, payload in (("program", program), ("authorization", auth)):
     assert payload["secure_runtime_foundation_implemented"] is True
     assert payload["secure_runtime_implemented"] is True
     assert payload["local_operator_runtime_available"] is True
-    if "authorization_active" in payload:
+    if payload.get("program_state") == "secure_runtime_integration_program_complete":
+        assert payload["active_sri_implementation_authorization_count"] == 0
+        assert payload["active_sri_implementation_authorization"] is None
+        assert payload["active_sri_implementation_task"] is None
+        assert payload["formal_closeout_task"] is None
+        if label == "authorization" and "authorization_active" in payload:
+            assert payload["authorization_active"] is False
+            assert payload["authorization_consumed"] is True
+            assert payload["authorization_expired"] is True
+            assert payload["authorization_reusable"] is False
+    elif "authorization_active" in payload:
         assert payload["authorization_active"] is True
         assert payload["authorization_consumed"] is False
         assert payload["authorization_expired"] is False

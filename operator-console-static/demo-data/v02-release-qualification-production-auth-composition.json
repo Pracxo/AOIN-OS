@@ -1,0 +1,147 @@
+{
+  "evidence": {
+    "actor_context_construction_order": [
+      "actor_id",
+      "workspace_id",
+      "roles",
+      "permissions",
+      "security_scopes"
+    ],
+    "audit_requirements": [
+      "redacted decision",
+      "fingerprint lineage",
+      "operator review"
+    ],
+    "component_bindings": [
+      {
+        "component_code": "offline_ed25519_identity_assertion_verification",
+        "component_fingerprint": "b5350e54b6778636c99c5a6c30a1f83cebab86633e54ad6d466390002f1ce464",
+        "component_status": "implemented_disabled_or_design_bound",
+        "source_contract_fingerprint": "e0e3a3fa3fd207c8e9119fbaa49e5ef41d42f38473c954a20b8093d5ca381c5d"
+      },
+      {
+        "component_code": "trusted_public_key_registry",
+        "component_fingerprint": "e27bd51620ef396109cbb717e7aa2c49be6e04b9c9a81a325299a539bb762aa9",
+        "component_status": "implemented_disabled_or_design_bound",
+        "source_contract_fingerprint": "e78fa7d1ab181735cdebafafe59474ef820735bb172b4d8156c9b407706acaa3"
+      },
+      {
+        "component_code": "identity_assertion_replay_protection",
+        "component_fingerprint": "5fced5a3f2869475466e467930b6afc7290ce258ce9285216729a2be97f9c392",
+        "component_status": "implemented_disabled_or_design_bound",
+        "source_contract_fingerprint": "91b55f8e763fa8b5df7a1eecdf69f5ffcc057c14847bf3c587d98346f7403279"
+      },
+      {
+        "component_code": "secure_request_identity_projection",
+        "component_fingerprint": "c82300e26f73fec8fd45f118f74b184631229e1f51fe2550d6f1442b9960f0ce",
+        "component_status": "implemented_disabled_or_design_bound",
+        "source_contract_fingerprint": "4fa9719f5d80a66e721dbec1011b365cff6e28a656e423eb9dba66d975362fc2"
+      },
+      {
+        "component_code": "actor_context_construction",
+        "component_fingerprint": "4965c47f9f3c949092a9e4e2839215d5f290e1ef02af71af629503312f88d2f7",
+        "component_status": "implemented_disabled_or_design_bound",
+        "source_contract_fingerprint": "a3961e1506e64c8b588423b880274bdac05e56a2fc491b9add44e001627544f9"
+      },
+      {
+        "component_code": "policy_evaluation",
+        "component_fingerprint": "2aebb91fd80c6742c3b4bd1960ddab49157d845e534a2ecf150c8327ec2fb64a",
+        "component_status": "implemented_disabled_or_design_bound",
+        "source_contract_fingerprint": "23661a461d63e2cfca53916a067e3823c369f5a336daa81d28848a0f9c250007"
+      },
+      {
+        "component_code": "risk_evaluation",
+        "component_fingerprint": "f1a0f16aa9a3dc433494cdde41cc3d6084f61ffe2b1382337d7540f52bdde109",
+        "component_status": "implemented_disabled_or_design_bound",
+        "source_contract_fingerprint": "39ac5ea42aac96616146e768c37c4092e3fedbbae71b998f2de31990e3d59894"
+      },
+      {
+        "component_code": "guardrails",
+        "component_fingerprint": "ec9ca526bba16635df2ba3d14f8ba50b12077cbb5529f33cfba4194fd131c4f1",
+        "component_status": "implemented_disabled_or_design_bound",
+        "source_contract_fingerprint": "70b3698b1d5b481716fe716120e3f5f86b42a1e6f24d2f7a5cd2d150c2b97d20"
+      },
+      {
+        "component_code": "approval_evidence",
+        "component_fingerprint": "91d2b6bdc41e607756e56b12db6fe77dc7daa011444419b9be592270574bdc18",
+        "component_status": "implemented_disabled_or_design_bound",
+        "source_contract_fingerprint": "d1b2997f54f956295ec19e8dd6416b0906904a5211a295c1a6f44073f727b157"
+      },
+      {
+        "component_code": "kill_switch",
+        "component_fingerprint": "411021e62ec7558fd877d35df00fc1fbe46c33750c88ee82ae2a843e4bcad019",
+        "component_status": "implemented_disabled_or_design_bound",
+        "source_contract_fingerprint": "e7b9ee83fd05bcf96e2bf06b3956aae56a30a4480bfbf1eec4c4a53f4b77a2af"
+      },
+      {
+        "component_code": "audit_and_observability",
+        "component_fingerprint": "4b12243c1db546c6d3c1be8cca9b82a4b78243b5314eeca5209602b2a38cc418",
+        "component_status": "implemented_disabled_or_design_bound",
+        "source_contract_fingerprint": "d8918c4405d1a961b5b6485ca2413674d2dd4501827b54ef2375cabe46a925e7"
+      }
+    ],
+    "component_order": [
+      "offline_ed25519_identity_assertion_verification",
+      "trusted_public_key_registry",
+      "identity_assertion_replay_protection",
+      "secure_request_identity_projection",
+      "actor_context_construction",
+      "policy_evaluation",
+      "risk_evaluation",
+      "guardrails",
+      "approval_evidence",
+      "kill_switch",
+      "audit_and_observability"
+    ],
+    "composition_fingerprint": "188599f65d90b235e932d65583554f41049a5547ce7e5bf31d1481fc615b1a4d",
+    "error_redaction": "errors expose reason codes only",
+    "external_identity_provider_call_enabled": false,
+    "fail_closed_behavior": "reject on missing verified claim, replay failure or policy denial",
+    "health_requirements": [
+      "identity verifier ready",
+      "replay ledger ready",
+      "policy ready"
+    ],
+    "issuer_audience_validation": "issuer and audience must be verified before projection",
+    "live_key_rotation_enabled": false,
+    "live_replay_ledger_enabled": false,
+    "policy_and_approval_precedence": [
+      "kill_switch",
+      "replay_protection",
+      "policy",
+      "risk",
+      "guardrails",
+      "explicit_approval"
+    ],
+    "production_auth_runtime_enabled": false,
+    "replay_validation_order": [
+      "assertion fingerprint",
+      "issuer",
+      "audience",
+      "subject"
+    ],
+    "request_identity_construction_order": [
+      "issuer",
+      "audience",
+      "subject",
+      "actor_id",
+      "workspace_id",
+      "roles",
+      "permissions"
+    ],
+    "rollback_boundary": "design only; rollback execution disabled",
+    "schema_version": "aion-v02-production-auth-composition/v1",
+    "session_creation_and_expiry": "future sessions require verified identity and bounded expiry",
+    "trust_boundary_transitions": [
+      "external assertion to offline verification",
+      "verified assertion to RequestIdentity",
+      "RequestIdentity to ActorContext"
+    ],
+    "unresolved_production_evidence": true
+  },
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "synthetic": true
+}

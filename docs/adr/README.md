@@ -216,5 +216,5 @@ closure decision in ADR 0072.
 - [ADR 0200: Sandboxed Capability-Runtime Evaluation and Controlled Local Operator-Console Integration Authorization](0200-sandboxed-capability-runtime-evaluation-and-controlled-local-operator-console-integration-authorization.md)
 - [ADR 0201: Controlled Same-Origin Loopback Operator Console and Integrated Local Runtime](0201-controlled-same-origin-loopback-operator-console-and-integrated-local-runtime.md)
 
-- [ADR 0202: Final Secure Runtime Integration Evaluation and v0.2 Release Qualification Program Authorization]
 - [ADR 0202: Final Secure Runtime Integration Evaluation and v0.2 Release Qualification Program Authorization](0202-final-secure-runtime-integration-evaluation-and-v02-release-qualification-program-authorization.md)
+- [ADR 0203: Disabled v0.2 Production-Readiness Qualification Foundation](0203-disabled-v02-production-readiness-qualification-foundation.md)
