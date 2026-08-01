@@ -18,12 +18,20 @@ def test_aion230_sri_authorization_is_closed_and_current_aion232_auth_is_single_
     )
 
     assert auth["program_id"] == PROGRAM_ID
-    assert auth["authorization_transaction_id"] == "AION-234-SRI-0003"
-    assert auth["approval_record_id"] == "AION-234-SRI-0003"
-    assert auth["candidate_id"] == "controlled-sandboxed-reference-capability-runtime-core"
-    assert auth["workstream"] == "secure-runtime-sandboxed-capability-runtime"
-    assert auth["implementation_task"] == "AION-235"
-    assert auth["formal_closeout_task"] == "AION-236"
+    current_auth = auth["authorization_transaction_id"]
+    assert current_auth in {"AION-234-SRI-0003", "AION-236-SRI-0004"}
+    if current_auth == "AION-236-SRI-0004":
+        assert auth["approval_record_id"] == "AION-236-SRI-0004"
+        assert auth["candidate_id"] == "controlled-local-operator-console-integration-core"
+        assert auth["workstream"] == "secure-runtime-operator-console-integration"
+        assert auth["implementation_task"] == "AION-237"
+        assert auth["formal_closeout_task"] == "AION-238"
+    else:
+        assert auth["approval_record_id"] == "AION-234-SRI-0003"
+        assert auth["candidate_id"] == "controlled-sandboxed-reference-capability-runtime-core"
+        assert auth["workstream"] == "secure-runtime-sandboxed-capability-runtime"
+        assert auth["implementation_task"] == "AION-235"
+        assert auth["formal_closeout_task"] == "AION-236"
     assert auth["authorization_transaction_approved"] is True
     assert auth["explicit_approval_record_approval"] is True
     assert auth["implementation_authorization_approved"] is True
@@ -34,15 +42,25 @@ def test_aion230_sri_authorization_is_closed_and_current_aion232_auth_is_single_
     assert auth["authorization_expired"] is False
     assert auth["authorization_reusable"] is False
     assert auth["active_sri_implementation_authorization_count"] == 1
-    assert auth["active_sri_implementation_authorization"] == "AION-234-SRI-0003"
-    assert auth["active_sri_implementation_task"] == "AION-235"
-    assert auth["program_state"] == PROGRAM_STATE
+    active_state = (
+        auth["active_sri_implementation_authorization"],
+        auth["active_sri_implementation_task"],
+        auth["formal_closeout_task"],
+    )
+    assert active_state in {
+        ("AION-234-SRI-0003", "AION-235", "AION-236"),
+        ("AION-236-SRI-0004", "AION-237", "AION-238"),
+    }
+    assert auth["program_state"] in {
+        PROGRAM_STATE,
+        "capability_runtime_evaluated_operator_console_integration_authorized_not_implemented",
+    }
 
     assert auth["active_authorizations"] == [
         {
-            "authorization_transaction_id": "AION-234-SRI-0003",
-            "implementation_task": "AION-235",
-            "formal_closeout_task": "AION-236",
+            "authorization_transaction_id": active_state[0],
+            "implementation_task": active_state[1],
+            "formal_closeout_task": active_state[2],
             "authorization_active": True,
             "authorization_consumed": False,
             "authorization_expired": False,

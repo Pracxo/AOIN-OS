@@ -246,6 +246,37 @@ aion235_is_scoped_sandboxed_capability_runtime_path() {
   return 1
 }
 
+aion236_is_scoped_operator_console_integration_authorization_path() {
+  case "$1" in
+    docs/adr/0200-sandboxed-capability-runtime-evaluation-and-controlled-local-operator-console-integration-authorization.md|\
+    docs/release/capability-runtime-operator-evaluation-*|\
+    docs/release/operator-console-integration-*|\
+    docs/secure-runtime-integration/capability-runtime-evaluation-*|\
+    docs/secure-runtime-integration/capability-runtime-operator-evaluation-*|\
+    docs/secure-runtime-integration/operator-console-*|\
+    examples/secure-runtime-integration/capability-runtime-operator-evaluation-report.json|\
+    examples/secure-runtime-integration/operator-console-*.json|\
+    operator-console-static/demo-data/capability-runtime-operator-evaluation.json|\
+    operator-console-static/demo-data/operator-console-*.json|\
+    scripts/auth-design-check.sh|\
+    scripts/auth-no-go-regression.sh|\
+    scripts/auth-runtime-check.sh|\
+    scripts/capability-runtime-operator-evaluation-*|\
+    scripts/local-auth-check.sh|\
+    scripts/local-session-check.sh|\
+    scripts/operator-console-integration-*|\
+    scripts/role-filter-check.sh|\
+    scripts/lib/capability_runtime_operator_evaluation.py|\
+    services/brain-api/tests/capability_runtime_operator_evaluation_test_support.py|\
+    services/brain-api/tests/operator_console_integration_test_support.py|\
+    services/brain-api/tests/test_operator_console_integration_*.py|\
+    services/brain-api/tests/test_secure_runtime_current_state_after_aion236.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 changed_entries() {
   local base
   if base="$(comparison_base)"; then
@@ -282,6 +313,9 @@ while IFS=$'\t' read -r status path extra; do
       continue
     fi
     if aion235_is_scoped_sandboxed_capability_runtime_path "$changed"; then
+      continue
+    fi
+    if aion236_is_scoped_operator_console_integration_authorization_path "$changed"; then
       continue
     fi
     if aion231_is_scoped_secure_runtime_foundation_path "$changed"; then

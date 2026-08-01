@@ -357,6 +357,7 @@ allowed_authorization_demo_names = {
     "secure-runtime-integration-authorization.json",
     "secure-runtime-foundation-operator-evaluation.json",
     "model-gateway-authorization.json",
+    "operator-console-integration-authorization.json",
     "capability-runtime-approval-evidence.json",
     "capability-runtime-audit.json",
     "capability-runtime-authorization.json",
@@ -372,6 +373,7 @@ allowed_authorization_demo_names = {
     "capability-runtime-manifests.json",
     "capability-runtime-model-proposal-binding.json",
     "capability-runtime-observability.json",
+    "capability-runtime-operator-evaluation.json",
     "capability-runtime-policy-binding.json",
     "capability-runtime-request-envelope.json",
     "capability-runtime-risk-binding.json",
@@ -381,6 +383,13 @@ allowed_authorization_demo_names = {
     "capability-runtime-sandbox-decision.json",
     "capability-runtime-sandbox-profile.json",
     "capability-runtime-sandbox.json",
+    "operator-console-action-boundary.json",
+    "operator-console-integration-authorization.json",
+    "operator-console-integration-runtime-hold.json",
+    "operator-console-origin-policy.json",
+    "operator-console-route-manifest.json",
+    "operator-console-security-headers.json",
+    "operator-console-session-bootstrap.json",
 }
 secure_runtime_evaluation_demo_names = {
     "secure-runtime-foundation-operator-evaluation.json",
@@ -427,6 +436,7 @@ capability_runtime_demo_names = {
     "capability-runtime-manifests.json",
     "capability-runtime-model-proposal-binding.json",
     "capability-runtime-observability.json",
+    "capability-runtime-operator-evaluation.json",
     "capability-runtime-policy-binding.json",
     "capability-runtime-request-envelope.json",
     "capability-runtime-risk-binding.json",
@@ -436,6 +446,15 @@ capability_runtime_demo_names = {
     "capability-runtime-sandbox-decision.json",
     "capability-runtime-sandbox-profile.json",
     "capability-runtime-sandbox.json",
+}
+operator_console_demo_names = {
+    "operator-console-action-boundary.json",
+    "operator-console-integration-authorization.json",
+    "operator-console-integration-runtime-hold.json",
+    "operator-console-origin-policy.json",
+    "operator-console-route-manifest.json",
+    "operator-console-security-headers.json",
+    "operator-console-session-bootstrap.json",
 }
 aion161_allowed_policy_markers = {
     "runtime_private_key",
@@ -471,7 +490,7 @@ def walk(value: object, path: Path) -> None:
                 "credential",
                 "token",
                 "hidden_reasoning",
-            } and path.name in model_gateway_demo_names | capability_runtime_demo_names:
+            } and path.name in model_gateway_demo_names | capability_runtime_demo_names | operator_console_demo_names:
                 continue
             if marker == "sk-" and not re.search(r"\bsk-[a-z0-9_-]{12,}", lowered):
                 continue
@@ -559,6 +578,35 @@ for path in sorted((static_dir / "demo-data").glob("*.json")):
             and payload.get("program_id") != "AION-SECURE-RUNTIME-INTEGRATION-001"
         ):
             raise SystemExit(f"program_id mismatch in {path}")
+    if path.name in operator_console_demo_names:
+        if payload.get("authorization_transaction_id") != "AION-236-SRI-0004":
+            raise SystemExit(f"operator console demo authorization mismatch in {path}")
+        for key in (
+            "actual_model_provider_call_enabled",
+            "actual_tool_execution_enabled",
+            "automatic_capability_execution_enabled",
+            "browser_persistence_enabled",
+            "cors_wildcard_enabled",
+            "dns_resolution_enabled",
+            "external_connector_execution_enabled",
+            "external_effect_authority",
+            "external_network_egress_enabled",
+            "ipv6_unspecified_binding_enabled",
+            "model_output_triggered_execution_enabled",
+            "model_weight_training_enabled",
+            "operator_console_integration_implemented",
+            "production_deployment_enabled",
+            "production_runtime_authorized",
+            "production_write_execution_enabled",
+            "public_listener_enabled",
+            "v02_release_ready",
+            "zero_address_binding_enabled",
+        ):
+            if key in payload and payload.get(key) is not False:
+                raise SystemExit(f"{key} must be false in {path}")
+        for key in ("loopback_listener_absent", "same_origin_required"):
+            if key in payload and payload.get(key) is not True:
+                raise SystemExit(f"{key} must be true in {path}")
     walk(payload, path)
 
 print("Static console safety JSON checks PASS")

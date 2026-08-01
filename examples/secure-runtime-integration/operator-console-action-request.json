@@ -1,0 +1,31 @@
+{
+  "allowed_post_routes": [
+    {
+      "method": "POST",
+      "path": "/aion/local/v1/model/simulate"
+    },
+    {
+      "method": "POST",
+      "path": "/aion/local/v1/capability/execute"
+    },
+    {
+      "method": "POST",
+      "path": "/aion/local/v1/connector/simulate"
+    },
+    {
+      "method": "POST",
+      "path": "/aion/local/v1/kill"
+    },
+    {
+      "method": "POST",
+      "path": "/aion/local/v1/session/close"
+    }
+  ],
+  "authorization_transaction_id": "AION-236-SRI-0004",
+  "automatic_capability_execution_enabled": false,
+  "external_effect_authority": false,
+  "model_output_triggered_execution_enabled": false,
+  "production_write_execution_enabled": false,
+  "requires_explicit_operator_confirmation": true,
+  "schema_version": "aion-operator-console-action-request/v1"
+}

@@ -8,12 +8,18 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 
 PROGRAM_ID = "AION-SECURE-RUNTIME-INTEGRATION-001"
 PROGRAM_STATE = "sandboxed_capability_runtime_implemented_reference_only_pending_closeout"
+POST_AION236_PROGRAM_STATE = (
+    "capability_runtime_evaluated_operator_console_integration_authorized_not_implemented"
+)
 AUTH_ID = "AION-230-SRI-0001"
 IMPLEMENTATION_TASK = "AION-231"
 CLOSEOUT_TASK = "AION-232"
 CURRENT_AUTH_ID = "AION-234-SRI-0003"
 CURRENT_IMPLEMENTATION_TASK = "AION-235"
 CURRENT_CLOSEOUT_TASK = "AION-236"
+POST_AION236_AUTH_ID = "AION-236-SRI-0004"
+POST_AION236_IMPLEMENTATION_TASK = "AION-237"
+POST_AION236_CLOSEOUT_TASK = "AION-238"
 FINAL_TASK = "AION-238"
 AUTH_SCOPE = (
     "local-operator-authenticated-session-offline-identity-request-context-"
@@ -261,16 +267,26 @@ def test_program_charter_creates_separate_sri_program() -> None:
     assert program["program_id"] == PROGRAM_ID
     assert program["program_name"] == "AION Secure Runtime Integration Program"
     assert program["created_by_task"] == "AION-230"
-    assert program["program_state"] == PROGRAM_STATE
+    assert program["program_state"] in {PROGRAM_STATE, POST_AION236_PROGRAM_STATE}
     assert program["program_authorized"] is True
     assert program["secure_runtime_integration_program_authorized"] is True
     assert program["parent_completed_programs"] == PARENT_PROGRAMS
     assert program["parent_glm_evaluation_id"] == "AION-GLMPE-004"
     assert program["parent_glm_evaluation_decision"] == GLM_DECISION
     assert program["active_sri_implementation_authorization_count"] == 1
-    assert program["active_sri_implementation_authorization"] == CURRENT_AUTH_ID
-    assert program["active_sri_implementation_task"] == CURRENT_IMPLEMENTATION_TASK
-    assert program["formal_closeout_task"] == CURRENT_CLOSEOUT_TASK
+    active_state = (
+        program["active_sri_implementation_authorization"],
+        program["active_sri_implementation_task"],
+        program["formal_closeout_task"],
+    )
+    assert active_state in {
+        (CURRENT_AUTH_ID, CURRENT_IMPLEMENTATION_TASK, CURRENT_CLOSEOUT_TASK),
+        (
+            POST_AION236_AUTH_ID,
+            POST_AION236_IMPLEMENTATION_TASK,
+            POST_AION236_CLOSEOUT_TASK,
+        ),
+    }
     assert program["final_planned_task"] == FINAL_TASK
     assert program["secure_runtime_foundation_operator_evaluation_passed"] is True
     assert program["secure_runtime_foundation_operator_evaluation_id"] == "AION-SRIPE-001"

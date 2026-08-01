@@ -4,8 +4,11 @@ import importlib.util
 from functools import cache
 from pathlib import Path
 
-
 REPO_ROOT = Path(__file__).resolve().parents[3]
+PILOT_EVIDENCE_PATH = (
+    "examples/secure-runtime-integration/"
+    "capability-runtime-local-sandbox-pilot-evidence.json"
+)
 
 
 @cache
@@ -24,15 +27,22 @@ def evaluation_module():
 @cache
 def evaluation_report():
     module = evaluation_module()
+    committed_report = (
+        REPO_ROOT
+        / "examples/secure-runtime-integration/capability-runtime-operator-evaluation-report.json"
+    )
+    if committed_report.exists():
+        import json
+
+        report = json.loads(committed_report.read_text(encoding="utf-8"))
+        module.validate_report(report)
+        return report
     report = module.evaluate(
         repo_root=REPO_ROOT,
         evaluation_id=module.EVALUATION_ID,
         implementation_main_commit=module.IMPLEMENTATION_MERGE_COMMIT,
         evaluation_base_commit="unit-test-base",
-        pilot_evidence_path=(
-            REPO_ROOT
-            / "examples/secure-runtime-integration/capability-runtime-local-sandbox-pilot-evidence.json"
-        ),
+        pilot_evidence_path=REPO_ROOT / PILOT_EVIDENCE_PATH,
         temporary_output_directory=Path("/tmp/aion-capability-runtime-evaluation-tests"),
     )
     module.validate_report(report)

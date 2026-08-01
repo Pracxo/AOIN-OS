@@ -1,0 +1,15 @@
+{
+  "allowed_bind_hosts": [
+    "127.0.0.1"
+  ],
+  "authorization_transaction_id": "AION-236-SRI-0004",
+  "dns_resolution_enabled": false,
+  "host_header_must_match_bound_host_and_port": true,
+  "ipv6_unspecified_binding_enabled": false,
+  "loopback_only": true,
+  "missing_origin_blocks_state_changing_browser_requests": true,
+  "public_listener_enabled": false,
+  "same_origin_required": true,
+  "schema_version": "aion-operator-console-origin-policy/v1",
+  "zero_address_binding_enabled": false
+}

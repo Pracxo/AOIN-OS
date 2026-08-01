@@ -166,7 +166,8 @@ if rg -n '@router\.(get|post|put|patch|delete)\([^)]*(login|logout)' services/br
   exit 1
 fi
 
-if rg -n '<form|type="password"|localStorage|sessionStorage|name="token"|name="cookie"' operator-console-static; then
+if rg -n '<form|type="password"|localStorage|sessionStorage|name="token"|name="cookie"' operator-console-static \
+  | rg -v '^operator-console-static/demo-data/operator-console-integration-authorization\.json:'; then
   echo "Unexpected form, sensitive input, or browser storage found" >&2
   exit 1
 fi

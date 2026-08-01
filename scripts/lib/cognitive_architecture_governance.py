@@ -1288,6 +1288,50 @@ AION233_ALLOWED_PREFIXES = (
     "services/brain-api/tests/test_model_gateway_",
 )
 
+AION236_ALLOWED_EXACT_PATHS = {
+    "AGENTS.md",
+    "README.md",
+    "docs/adr/0200-sandboxed-capability-runtime-evaluation-and-controlled-local-operator-console-integration-authorization.md",
+    "docs/adr/README.md",
+    "docs/architecture.md",
+    "docs/brain-contract.md",
+    "docs/policy-model.md",
+    "docs/project-status.md",
+    "docs/release/v02-release-readiness-delta.md",
+    "docs/visual-brain.md",
+    "operator-console-static/README.md",
+    "operator-console-static/app.js",
+    "operator-console-static/index.html",
+    "scripts/capability-runtime-operator-evaluation-check.sh",
+    "scripts/capability-runtime-operator-evaluation-no-go-regression.sh",
+    "scripts/lib/capability_runtime_operator_evaluation.py",
+    "scripts/lib/cognitive_architecture_governance.py",
+    "scripts/model-gateway-authorization-check.sh",
+    "scripts/model-gateway-authorization-no-go-regression.sh",
+    "scripts/model-gateway-check.sh",
+    "scripts/model-gateway-no-go-regression.sh",
+    "scripts/model-gateway-operator-evaluation-no-go-regression.sh",
+    "scripts/operator-console-integration-authorization-check.sh",
+    "scripts/operator-console-integration-authorization-no-go-regression.sh",
+    "scripts/operator-console-integration-runtime-hold.sh",
+    "scripts/secure-runtime-foundation-no-go-regression.sh",
+    "scripts/secure-runtime-integration-program-authorization-check.sh",
+    "services/brain-api/tests/capability_runtime_operator_evaluation_test_support.py",
+    "services/brain-api/tests/operator_console_integration_test_support.py",
+    "services/brain-api/tests/test_secure_runtime_current_state_after_aion236.py",
+}
+
+AION236_ALLOWED_PREFIXES = (
+    "docs/secure-runtime-integration/",
+    "docs/release/capability-runtime-",
+    "docs/release/operator-console-",
+    "examples/secure-runtime-integration/",
+    "operator-console-static/demo-data/capability-runtime-",
+    "operator-console-static/demo-data/operator-console-",
+    "services/brain-api/tests/test_capability_runtime_",
+    "services/brain-api/tests/test_operator_console_integration_",
+)
+
 AION199_ALLOWED_EXACT_PATHS = set(AION199_REQUIRED_FILES) | {
     "scripts/connector-runtime-no-external-call-regression.sh",
     "scripts/cognitive-integrated-evaluation-check.sh",
@@ -11658,7 +11702,7 @@ def _aion202_path_allowed(relative: str) -> bool:
 def _aion203_path_allowed(relative: str) -> bool:
     return relative in AION203_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION203_ALLOWED_PREFIXES
-    ) or _aion205_path_allowed(relative) or _aion231_path_allowed(relative) or _aion232_path_allowed(relative) or _aion233_path_allowed(relative)
+    ) or _aion205_path_allowed(relative) or _aion231_path_allowed(relative) or _aion232_path_allowed(relative) or _aion233_path_allowed(relative) or _aion236_path_allowed(relative)
 
 
 def _aion205_path_allowed(relative: str) -> bool:
@@ -11706,6 +11750,12 @@ def _aion232_path_allowed(relative: str) -> bool:
 def _aion233_path_allowed(relative: str) -> bool:
     return relative in AION233_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION233_ALLOWED_PREFIXES
+    )
+
+
+def _aion236_path_allowed(relative: str) -> bool:
+    return relative in AION236_ALLOWED_EXACT_PATHS or any(
+        relative.startswith(prefix) for prefix in AION236_ALLOWED_PREFIXES
     )
 
 

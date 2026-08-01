@@ -17,7 +17,18 @@ import json, os, subprocess
 from pathlib import Path
 ROOT = Path(os.environ["AION_REPO_ROOT"])
 PROGRAM_LEDGER = ROOT / "docs/secure-runtime-integration/program-ledger.json"
-AION235_IMPLEMENTED_STATE = "sandboxed_capability_runtime_implemented_reference_only_pending_closeout"
+AION235_SOURCE_ALLOWED_STATES = {
+    "sandboxed_capability_runtime_implemented_reference_only_pending_closeout": (
+        "AION-234-SRI-0003",
+        "AION-235",
+        "AION-236",
+    ),
+    "capability_runtime_evaluated_operator_console_integration_authorized_not_implemented": (
+        "AION-236-SRI-0004",
+        "AION-237",
+        "AION-238",
+    ),
+}
 ALLOWED_PREFIXES = ("docs/", "examples/", "operator-console-static/", "scripts/", "services/brain-api/tests/")
 ALLOWED_EXACT = {"README.md", "AGENTS.md"}
 PROHIBITED_PREFIXES = (".github/workflows/", "services/brain-api/src/aion_brain/", "services/brain-api/pyproject.toml", "packages/aion-sdk-python/", "migrations/", "services/brain-api/migrations/", "infra/postgres/migrations/")
@@ -69,11 +80,13 @@ def aion235_implementation_state_active() -> bool:
     if not PROGRAM_LEDGER.exists():
         return False
     payload = json.loads(PROGRAM_LEDGER.read_text(encoding="utf-8"))
+    expected = AION235_SOURCE_ALLOWED_STATES.get(payload.get("program_state"))
     return (
-        payload.get("program_state") == AION235_IMPLEMENTED_STATE
-        and payload.get("active_sri_implementation_authorization") == "AION-234-SRI-0003"
-        and payload.get("active_sri_implementation_task") == "AION-235"
-        and payload.get("formal_closeout_task") == "AION-236"
+        expected is not None
+        and payload.get("active_sri_implementation_authorization") == expected[0]
+        and payload.get("active_sri_implementation_task") == expected[1]
+        and payload.get("formal_closeout_task") == expected[2]
+        and payload.get("sandboxed_capability_runtime_implemented") is True
     )
 
 def aion235_source_allowed(path: str) -> bool:

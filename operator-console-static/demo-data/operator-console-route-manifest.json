@@ -1,0 +1,61 @@
+{
+  "authorization_transaction_id": "AION-236-SRI-0004",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/aion/local/v1/bootstrap"
+    },
+    {
+      "method": "GET",
+      "path": "/aion/local/v1/status"
+    },
+    {
+      "method": "GET",
+      "path": "/aion/local/v1/health"
+    },
+    {
+      "method": "GET",
+      "path": "/aion/local/v1/observability"
+    },
+    {
+      "method": "GET",
+      "path": "/aion/local/v1/audit"
+    },
+    {
+      "method": "POST",
+      "path": "/aion/local/v1/model/simulate"
+    },
+    {
+      "method": "POST",
+      "path": "/aion/local/v1/capability/execute"
+    },
+    {
+      "method": "POST",
+      "path": "/aion/local/v1/connector/simulate"
+    },
+    {
+      "method": "POST",
+      "path": "/aion/local/v1/kill"
+    },
+    {
+      "method": "POST",
+      "path": "/aion/local/v1/session/close"
+    }
+  ],
+  "rules": {
+    "bearer_token_enabled": false,
+    "cookies_enabled": false,
+    "cors_wildcard_enabled": false,
+    "dynamic_path_registration_enabled": false,
+    "exact_routes_only": true,
+    "file_upload_enabled": false,
+    "form_urlencoded_enabled": false,
+    "multipart_enabled": false,
+    "path_parameters_enabled": false,
+    "post_requires_json_content_type": true,
+    "post_requires_same_origin_mutation_nonce": true,
+    "state_changing_post_requires_operator_confirmation": true,
+    "wildcard_routes_enabled": false
+  },
+  "schema_version": "aion-operator-console-route-manifest/v1"
+}

@@ -525,6 +525,7 @@ for path in sorted(demo_dir.glob("*.json")):
             "capability-runtime-manifests.json",
             "capability-runtime-model-proposal-binding.json",
             "capability-runtime-observability.json",
+            "capability-runtime-operator-evaluation.json",
             "capability-runtime-policy-binding.json",
             "capability-runtime-request-envelope.json",
             "capability-runtime-risk-binding.json",
@@ -1254,6 +1255,47 @@ for path in sorted(demo_dir.glob("*.json")):
         ):
             if key in payload and payload.get(key) is not False:
                 raise SystemExit(f"governed learning memory flag must be false: {key}: {path}")
+        continue
+    if path.name.startswith("operator-console-"):
+        allowed_names = {
+            "operator-console-action-boundary.json",
+            "operator-console-integration-authorization.json",
+            "operator-console-integration-runtime-hold.json",
+            "operator-console-origin-policy.json",
+            "operator-console-route-manifest.json",
+            "operator-console-security-headers.json",
+            "operator-console-session-bootstrap.json",
+        }
+        if path.name not in allowed_names:
+            raise SystemExit(f"unknown operator console integration demo: {path}")
+        if payload.get("authorization_transaction_id") != "AION-236-SRI-0004":
+            raise SystemExit(f"operator console demo authorization mismatch: {path}")
+        for key in (
+            "actual_model_provider_call_enabled",
+            "actual_tool_execution_enabled",
+            "automatic_capability_execution_enabled",
+            "browser_persistence_enabled",
+            "cors_wildcard_enabled",
+            "dns_resolution_enabled",
+            "external_connector_execution_enabled",
+            "external_effect_authority",
+            "external_network_egress_enabled",
+            "ipv6_unspecified_binding_enabled",
+            "model_output_triggered_execution_enabled",
+            "model_weight_training_enabled",
+            "operator_console_integration_implemented",
+            "production_deployment_enabled",
+            "production_runtime_authorized",
+            "production_write_execution_enabled",
+            "public_listener_enabled",
+            "v02_release_ready",
+            "zero_address_binding_enabled",
+        ):
+            if key in payload and payload.get(key) is not False:
+                raise SystemExit(f"operator console demo flag must be false: {key}: {path}")
+        for key in ("loopback_listener_absent", "same_origin_required"):
+            if key in payload and payload.get(key) is not True:
+                raise SystemExit(f"operator console demo flag must be true: {key}: {path}")
         continue
     if payload.get("read_only") is not True:
         raise SystemExit(f"read_only must be true: {path}")

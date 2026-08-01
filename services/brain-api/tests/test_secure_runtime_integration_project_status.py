@@ -15,17 +15,20 @@ from test_secure_runtime_integration_program_charter import (
 def test_project_status_reconciles_current_secure_runtime_program_state() -> None:
     status = read_text("docs/project-status.md")
 
-    assert "Current milestone: AION-235 sandboxed deterministic capability" in status
-    assert "Current task: AION-236 capability-runtime operator evaluation" in status
+    assert "Current milestone: AION-236 capability-runtime operator evaluation complete" in status
+    assert "Current task: AION-237 controlled Operator Console integration" in status
     assert PROGRAM_ID in status
     assert AUTH_ID in status
     assert CURRENT_AUTH_ID in status
+    assert "AION-236-SRI-0004" in status
     assert "AION-232-SRI-0002" in status
     assert IMPLEMENTATION_TASK in status
     assert CLOSEOUT_TASK in status
     assert CURRENT_IMPLEMENTATION_TASK in status
     assert "AION-233" in status
     assert CURRENT_CLOSEOUT_TASK in status
+    assert "AION-237" in status
+    assert "AION-238" in status
     assert "AION-234" in status
     assert "model_output_triggered_execution_enabled=false" in status
     assert "external_connector_execution_enabled=false" in status

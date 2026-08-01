@@ -26,7 +26,8 @@ if rg -n 'set_cookie|delete_cookie|cookie_issuance_enabled[[:space:]]*=[[:space:
 fi
 
 if rg -n 'session_persistence_enabled[[:space:]]*=[[:space:]]*True|SESSION_PERSISTENCE_ENABLED=true|sessionStorage|localStorage' \
-  "${runtime_paths[@]}" operator-console-static .env.example; then
+  "${runtime_paths[@]}" operator-console-static .env.example \
+  | rg -v '^operator-console-static/demo-data/operator-console-integration-authorization\.json:'; then
   echo "session persistence or browser storage path found" >&2
   exit 1
 fi

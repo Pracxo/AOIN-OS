@@ -15,3 +15,7 @@ AION-231 is implemented and evaluation-complete. AION-232 evaluated AION-231 and
 | AION-238 | planned_final_program_evaluation_and_v02_RC_authorization_review | Final Secure Runtime Integration Program evaluation and v0.2 release-candidate authorization review |
 
 Provider calls, network egress, credentials, tokens, external connectors, real tools, filesystems, processes, shells, subprocesses, browsers, dynamic imports, eval, exec, modules, production runtime, memory writes, policy mutation, belief mutation, source rewrite, deployment, model training, v0.2 tags, and v0.2 releases remain disabled.
+
+## AION-236 Secure Runtime Integration Status
+
+AION-SRIPE-003 passed with report fingerprint `61e50ce0829e85b27b61a7620bb1ca4a7f58ad0c6f8cad0b93f0250c89365a11`. `AION-234-SRI-0003` is closed and consumed by AION-235. `AION-236-SRI-0004` is active for AION-237. AION-237 is authorized but not implemented. Public listening, external egress, browser persistence, provider calls, external connectors, real tools, production writes, deployment, model training and v0.2 release readiness remain disabled.

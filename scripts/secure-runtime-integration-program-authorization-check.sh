@@ -315,12 +315,66 @@ program_example = load_json("examples/secure-runtime-integration/program-authori
 auth_example = load_json("examples/secure-runtime-integration/local-operator-runtime-authorization.json")
 
 
+# AION-236_CURRENT_STATE_FAST_PATH
+post_aion236_state = (
+    "capability_runtime_evaluated_operator_console_integration_authorized_not_implemented"
+)
+if program.get("program_state") == post_aion236_state:
+    for payload in (program, auth):
+        require(payload["program_id"] == PROGRAM_ID, "program id mismatch")
+        require(payload["active_sri_implementation_authorization_count"] == 1, "active SRI count mismatch")
+        require(payload["active_sri_implementation_authorization"] == "AION-236-SRI-0004", "active SRI auth mismatch")
+        require(payload["active_sri_implementation_task"] == "AION-237", "active SRI task mismatch")
+        require(payload["formal_closeout_task"] == "AION-238", "formal closeout mismatch")
+        require(payload["production_runtime_authorized"] is False, "production runtime authorized")
+        require(payload["v02_release_ready"] is False, "v0.2 readiness must be false")
+        for key in (
+            "active_glm_implementation_authorization_count",
+            "active_knowledge_implementation_authorization_count",
+            "active_cognitive_implementation_authorization_count",
+            "active_self_improvement_implementation_authorization_count",
+        ):
+            require(payload[key] == 0, f"parent authorization count nonzero: {key}")
+        for key in (
+            "external_connector_execution_enabled",
+            "external_tool_execution_enabled",
+            "production_runtime_authorized",
+            "v02_release_ready",
+            "v02_tag_created",
+            "v02_release_created",
+        ):
+            require(payload[key] is False, f"runtime boundary flag true: {key}")
+        require(payload["sandboxed_capability_runtime_implemented"] is True, "capability runtime missing")
+        require(
+            payload["sandboxed_capability_runtime_operator_evaluation_passed"] is True,
+            "AION-236 evaluation missing",
+        )
+        require(payload["operator_console_integration_authorized"] is True, "operator console auth missing")
+        require(
+            payload["operator_console_integration_implemented"] is False,
+            "operator console implemented during AION-236",
+        )
+    closed_aion232 = next(item for item in auth["records"] if item.get("authorization_transaction_id") == "AION-232-SRI-0002")
+    require(closed_aion232["authorization_active"] is False, "AION-232 still active")
+    require(closed_aion232["authorization_consumed"] is True, "AION-232 not consumed")
+    require(closed_aion232["authorization_expired"] is True, "AION-232 not expired")
+    require(closed_aion232["authorization_reusable"] is False, "AION-232 reusable")
+    closed_aion234 = next(item for item in auth["records"] if item.get("authorization_transaction_id") == "AION-234-SRI-0003")
+    require(closed_aion234["authorization_active"] is False, "AION-234 still active")
+    require(closed_aion234["authorization_consumed"] is True, "AION-234 not consumed")
+    require(closed_aion234["authorization_expired"] is True, "AION-234 not expired")
+    require(closed_aion234["authorization_reusable"] is False, "AION-234 reusable")
+    require(closed_aion234["authorization_closed_by_task"] == "AION-236", "AION-234 closeout mismatch")
+    require("AION-236-SRI-0004" in text("docs/project-status.md"), "status missing AION-236 auth")
+    require("AION-237" in text("README.md"), "README missing AION-237")
+
 # AION-234/AION-235_CURRENT_STATE_FAST_PATH
-post_aion234_states = {
-    "model_gateway_evaluated_sandboxed_capability_runtime_authorized_not_implemented": False,
-    "sandboxed_capability_runtime_implemented_reference_only_pending_closeout": True,
-}
-if program.get("program_state") in post_aion234_states:
+else:
+  post_aion234_states = {
+      "model_gateway_evaluated_sandboxed_capability_runtime_authorized_not_implemented": False,
+      "sandboxed_capability_runtime_implemented_reference_only_pending_closeout": True,
+  }
+  if program.get("program_state") in post_aion234_states:
     require(program["active_sri_implementation_authorization_count"] == 1, "active SRI count mismatch")
     require(program["active_sri_implementation_authorization"] == "AION-234-SRI-0003", "active SRI auth mismatch")
     require(program["active_sri_implementation_task"] == "AION-235", "active SRI task mismatch")
@@ -350,7 +404,7 @@ if program.get("program_state") in post_aion234_states:
         require(program[key] is False, f"runtime boundary flag true: {key}")
     require("AION-234-SRI-0003" in text("docs/project-status.md"), "status missing AION-234 auth")
     require("AION-235" in text("README.md"), "README missing AION-235")
-else:
+  else:
     for payload in (program, auth):
         require(payload["program_id"] == PROGRAM_ID, "program id mismatch")
         require(payload["program_state"] == PROGRAM_STATE, "program state mismatch")

@@ -1,0 +1,940 @@
+{
+  "aion_234_record": {
+    "authorization_state": "active_for_AION-235_formal_closeout_AION-236",
+    "authorization_transaction": "AION-234-SRI-0003",
+    "next_task": "AION-235"
+  },
+  "aion_235_record": {
+    "authorization_state": "implementation_complete_pending_AION-236_closeout",
+    "feature_commits": [],
+    "merge_commits": [],
+    "pull_requests": [],
+    "runtime_state": "sandboxed_capability_runtime_implemented_reference_only_pending_closeout"
+  },
+  "authorization_transaction_id": "AION-234-SRI-0003",
+  "capability_manifest_ids": [
+    "capability_runtime.health.read",
+    "capability_runtime.observability.read",
+    "capability_runtime.audit.read",
+    "capability.text.normalize",
+    "capability.hash.sha256",
+    "capability.json.validate",
+    "connector.reference.read.simulate",
+    "connector.reference.write.preview"
+  ],
+  "connector_manifest_id": "deterministic-reference-fixture-connector",
+  "corrective_prs": [],
+  "created_at": "2026-08-01T00:00:00Z",
+  "decision": "SANDBOXED_DETERMINISTIC_CAPABILITY_RUNTIME_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_OPERATOR_CONSOLE_INTEGRATED_LOCAL_RUNTIME_AUTHORIZATION",
+  "evaluation_base_commit": "9f2ba0003f27fc5b3f78e678f116eccba3f2bf8d",
+  "evaluation_id": "AION-SRIPE-003",
+  "external_network_effect": false,
+  "formal_closeout_task": "AION-236",
+  "hard_gates": {
+    "aion_235_no_go_passed": true,
+    "all_28_scenarios_executed": true,
+    "all_28_scenarios_passed": true,
+    "all_external_and_production_effect_counters_zero": true,
+    "final_ci_verified": true,
+    "implementation_gate_passed": true,
+    "operator_console_integration_readiness_valid": true,
+    "pilot_evidence_gate_passed": true,
+    "pr_154_verified": true,
+    "runtime_hold_passed": true,
+    "scenario_01_aion_235_delivery_and_ci_integrity": true,
+    "scenario_02_authorization_lineage_and_scope": true,
+    "scenario_03_pilot_evidence_schema_and_fingerprint": true,
+    "scenario_04_parent_component_lineage_integrity": true,
+    "scenario_05_model_output_non_authority_and_operator_selection": true,
+    "scenario_06_capability_manifest_registry_integrity": true,
+    "scenario_07_connector_manifest_registry_integrity": true,
+    "scenario_08_restricted_input_and_output_schema_integrity": true,
+    "scenario_09_session_request_and_repository_lifecycle": true,
+    "scenario_10_deterministic_execution_plan_integrity": true,
+    "scenario_11_policy_binding_integrity": true,
+    "scenario_12_risk_binding_integrity": true,
+    "scenario_13_guardrail_binding_integrity": true,
+    "scenario_14_approval_evidence_and_separation_of_duties": true,
+    "scenario_15_side_effect_and_resource_budget_enforcement": true,
+    "scenario_16_parent_kill_switch_and_guard_precedence": true,
+    "scenario_17_in_memory_sandbox_isolation": true,
+    "scenario_18_pure_reference_capability_execution": true,
+    "scenario_19_synthetic_reference_connector_read": true,
+    "scenario_20_synthetic_write_preview_and_rollback": true,
+    "scenario_21_request_idempotency_and_changed_replay": true,
+    "scenario_22_execution_receipt_chain_and_provenance": true,
+    "scenario_23_output_validation_and_smuggling_rejection": true,
+    "scenario_24_audit_chain_integrity": true,
+    "scenario_25_observability_health_and_integrity": true,
+    "scenario_26_determinism_concurrency_redaction_and_performance": true,
+    "scenario_27_zero_external_effects_and_repository_boundary": true,
+    "scenario_28_controlled_operator_console_integration_readiness": true
+  },
+  "implementation_feature_commit": "03a86f5314b8e79e0d77e2657769be0b15f1c450",
+  "implementation_main_commit": "39eff73b76f8b68a956f0a852bf8fbd71d36654d",
+  "implementation_merge_commit": "39eff73b76f8b68a956f0a852bf8fbd71d36654d",
+  "implementation_merged_at": "2026-07-31T23:36:10Z",
+  "implementation_pr": 154,
+  "implementation_task": "AION-235",
+  "operator_console_integration_authorization": {
+    "authorization_scope": "authenticated-local-loopback-same-origin-operator-console-bridge-secure-session-bootstrap-live-read-projection-explicit-model-simulation-explicit-reference-capability-execution-synthetic-connector-preview-request-nonce-origin-host-csp-kill-switch-audit-receipt-integrity-integrated-pilot-no-external-effect-core",
+    "authorization_transaction_id": "AION-236-SRI-0004",
+    "browser_persistence_enabled": false,
+    "external_network_egress_enabled": false,
+    "formal_closeout_task": "AION-238",
+    "future_source_absent": true,
+    "future_source_scope": [
+      "services/brain-api/src/aion_brain/contracts/operator_console_integration.py",
+      "services/brain-api/src/aion_brain/operator_console_runtime/__init__.py",
+      "services/brain-api/src/aion_brain/operator_console_runtime/authorization.py",
+      "services/brain-api/src/aion_brain/operator_console_runtime/component_binding.py",
+      "services/brain-api/src/aion_brain/operator_console_runtime/origin_policy.py",
+      "services/brain-api/src/aion_brain/operator_console_runtime/request_nonce.py",
+      "services/brain-api/src/aion_brain/operator_console_runtime/session_bridge.py",
+      "services/brain-api/src/aion_brain/operator_console_runtime/request_router.py",
+      "services/brain-api/src/aion_brain/operator_console_runtime/view_models.py",
+      "services/brain-api/src/aion_brain/operator_console_runtime/local_http.py",
+      "services/brain-api/src/aion_brain/operator_console_runtime/audit.py",
+      "services/brain-api/src/aion_brain/operator_console_runtime/observability.py",
+      "services/brain-api/src/aion_brain/operator_console_runtime/integrity.py",
+      "services/brain-api/src/aion_brain/operator_console_runtime/evidence.py"
+    ],
+    "implementation_task": "AION-237",
+    "implemented": false,
+    "production_runtime_authorized": false,
+    "public_listener_enabled": false,
+    "routes": [
+      {
+        "method": "GET",
+        "path": "/aion/local/v1/bootstrap"
+      },
+      {
+        "method": "GET",
+        "path": "/aion/local/v1/status"
+      },
+      {
+        "method": "GET",
+        "path": "/aion/local/v1/health"
+      },
+      {
+        "method": "GET",
+        "path": "/aion/local/v1/observability"
+      },
+      {
+        "method": "GET",
+        "path": "/aion/local/v1/audit"
+      },
+      {
+        "method": "POST",
+        "path": "/aion/local/v1/model/simulate"
+      },
+      {
+        "method": "POST",
+        "path": "/aion/local/v1/capability/execute"
+      },
+      {
+        "method": "POST",
+        "path": "/aion/local/v1/connector/simulate"
+      },
+      {
+        "method": "POST",
+        "path": "/aion/local/v1/kill"
+      },
+      {
+        "method": "POST",
+        "path": "/aion/local/v1/session/close"
+      }
+    ],
+    "security_headers": {
+      "Cache-Control": "no-store",
+      "Content-Security-Policy": "default-src 'self'; connect-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'",
+      "Cross-Origin-Opener-Policy": "same-origin",
+      "Cross-Origin-Resource-Policy": "same-origin",
+      "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+      "Referrer-Policy": "no-referrer",
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY"
+    },
+    "static_assets": [
+      "/",
+      "/index.html",
+      "/styles.css",
+      "/app.js",
+      "/live-console.js"
+    ]
+  },
+  "pilot_audit_chain_head": "6c38cd530373e252cebbf9c7e33c7c628d9203b3c0f0984fd93f42e10d78821c",
+  "pilot_evidence_fingerprint": "896ea332c964393fc2f3264be1381509be46175cd8a4c0733ba3980088ed1a2e",
+  "pilot_receipt_chain_head": "c87a8873aa14f77ad1b28e0e565602efefce67b9210700ac7640c57928b236ef",
+  "production_effect": false,
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "prohibited_effect_counters": {
+    "authorization_headers_created": 0,
+    "automatic_capability_executions": 0,
+    "automatic_capability_selections": 0,
+    "automatic_connector_executions": 0,
+    "automatic_merges": 0,
+    "belief_creations": 0,
+    "belief_mutations": 0,
+    "browser_actions": 0,
+    "cognitive_memory_writes": 0,
+    "credentials_persisted": 0,
+    "credentials_read": 0,
+    "deployments": 0,
+    "directory_mutations": 0,
+    "dns_resolutions": 0,
+    "dynamic_imports": 0,
+    "dynamic_routes_registered": 0,
+    "eval_executions": 0,
+    "exec_executions": 0,
+    "external_connector_calls": 0,
+    "external_tool_executions": 0,
+    "filesystem_reads": 0,
+    "filesystem_writes": 0,
+    "function_calls": 0,
+    "git_operations": 0,
+    "glm_live_executions": 0,
+    "model_provider_calls": 0,
+    "model_weight_changes": 0,
+    "modules_activated": 0,
+    "network_calls": 0,
+    "packages_installed": 0,
+    "process_spawns": 0,
+    "production_canary_executions": 0,
+    "production_memory_writes": 0,
+    "production_policy_mutations": 0,
+    "production_writes": 0,
+    "provider_sdk_calls": 0,
+    "public_api_routes_added": 0,
+    "runtime_created_approvals": 0,
+    "runtime_created_pull_requests": 0,
+    "shell_commands": 0,
+    "source_mutations": 0,
+    "subprocess_executions": 0,
+    "tokens_persisted": 0,
+    "tokens_read": 0,
+    "tool_calls": 0
+  },
+  "report_fingerprint": "61e50ce0829e85b27b61a7620bb1ca4a7f58ad0c6f8cad0b93f0250c89365a11",
+  "repository_mutated_by_evaluation": false,
+  "runtime_source_modified": false,
+  "scenarios": [
+    {
+      "checks": [
+        {
+          "evidence": 154,
+          "name": "implementation_pr_154_merged",
+          "passed": true
+        },
+        {
+          "evidence": "03a86f5314b8e79e0d77e2657769be0b15f1c450",
+          "name": "feature_commit_exact",
+          "passed": true
+        },
+        {
+          "name": "merge_commit_exact",
+          "passed": true
+        },
+        {
+          "evidence": "2026-07-31T23:36:10Z",
+          "name": "merged_timestamp_exact",
+          "passed": true
+        },
+        {
+          "name": "required_ci_checks_passed",
+          "passed": true
+        },
+        {
+          "name": "final_main_exact",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "aion_235_delivery_and_ci_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "authorization_id_exact",
+          "passed": true
+        },
+        {
+          "name": "parent_evaluation_exact",
+          "passed": true
+        },
+        {
+          "name": "implementation_task_exact",
+          "passed": true
+        },
+        {
+          "name": "formal_closeout_exact",
+          "passed": true
+        },
+        {
+          "name": "authorization_active_before_closeout",
+          "passed": true
+        },
+        {
+          "name": "authorization_non_reusable",
+          "passed": true
+        },
+        {
+          "name": "parent_program_authorization_counts_zero",
+          "passed": true
+        },
+        {
+          "name": "authorization_scope_exact",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "authorization_lineage_and_scope",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "pilot_id_exact",
+          "passed": true
+        },
+        {
+          "name": "report_fingerprint_exact",
+          "passed": true
+        },
+        {
+          "name": "report_fingerprint_valid",
+          "passed": true
+        },
+        {
+          "name": "generated_pilot_matches_committed_evidence",
+          "passed": true
+        },
+        {
+          "name": "authorization_exact",
+          "passed": true
+        },
+        {
+          "name": "required_counters_exact",
+          "passed": true
+        },
+        {
+          "name": "redacted_and_no_effects",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "pilot_evidence_schema_and_fingerprint",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "aion_230_closed",
+          "passed": true
+        },
+        {
+          "name": "aion_232_closed",
+          "passed": true
+        },
+        {
+          "name": "current_authority_aion_234",
+          "passed": true
+        },
+        {
+          "name": "secure_runtime_component_binding_present",
+          "passed": true
+        },
+        {
+          "name": "model_gateway_proposal_binding_present",
+          "passed": true
+        },
+        {
+          "name": "model_output_execution_authority_false",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "parent_component_lineage_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "model_output_cannot_trigger_dispatch",
+          "passed": true
+        },
+        {
+          "name": "explicit_operator_selection_required",
+          "passed": true
+        },
+        {
+          "name": "operator_selected_every_success",
+          "passed": true
+        },
+        {
+          "name": "changed_selection_changes_plan",
+          "passed": true
+        },
+        {
+          "name": "automatic_selection_zero",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "model_output_non_authority_and_operator_selection",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "exact_eight_capabilities",
+          "passed": true
+        },
+        {
+          "name": "risk_approval_and_kind_exact",
+          "passed": true
+        },
+        {
+          "name": "all_side_effect_class_none",
+          "passed": true
+        },
+        {
+          "name": "unknown_capability_rejected",
+          "passed": true
+        },
+        {
+          "name": "manifest_tampering_detected",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "capability_manifest_registry_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "connector_id_exact",
+          "passed": true
+        },
+        {
+          "name": "supported_operations_exact",
+          "passed": true
+        },
+        {
+          "name": "credential_endpoint_network_disabled",
+          "passed": true
+        },
+        {
+          "name": "synthetic_in_memory_only",
+          "passed": true
+        },
+        {
+          "name": "connector_tampering_detected",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "connector_manifest_registry_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "default_input_schemas_create",
+          "passed": true
+        },
+        {
+          "name": "default_output_schemas_create",
+          "passed": true
+        },
+        {
+          "name": "unsafe_input_rejected",
+          "passed": true
+        },
+        {
+          "name": "malformed_external_ref_rejected",
+          "passed": true
+        },
+        {
+          "name": "content_encoding_rejected",
+          "passed": true
+        },
+        {
+          "name": "pattern_properties_rejected",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "restricted_input_and_output_schema_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "one_active_session_enforced",
+          "passed": true
+        },
+        {
+          "name": "session_closed",
+          "passed": true
+        },
+        {
+          "name": "zero_active_sessions_after_close",
+          "passed": true
+        },
+        {
+          "name": "zero_active_requests_after_close",
+          "passed": true
+        },
+        {
+          "name": "no_automatic_continuation",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "session_request_and_repository_lifecycle",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "request_and_plan_lineage_present",
+          "passed": true
+        },
+        {
+          "name": "fixed_input_replay_same_plan",
+          "passed": true
+        },
+        {
+          "name": "changed_input_rejected_by_idempotency",
+          "passed": true
+        },
+        {
+          "name": "budget_and_sandbox_fingerprints_present",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "deterministic_execution_plan_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "policy_allow_binding_exact",
+          "passed": true
+        },
+        {
+          "name": "policy_no_external_or_production",
+          "passed": true
+        },
+        {
+          "name": "policy_denial_blocks",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "policy_binding_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "low_risk_not_blocked",
+          "passed": true
+        },
+        {
+          "name": "high_risk_blocks",
+          "passed": true
+        },
+        {
+          "name": "critical_risk_blocks",
+          "passed": true
+        },
+        {
+          "name": "medium_connector_risk_preserved",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "risk_binding_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "guardrail_allow_binding_exact",
+          "passed": true
+        },
+        {
+          "name": "guardrail_fingerprint_present",
+          "passed": true
+        },
+        {
+          "name": "approval_required_preserved",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "guardrail_binding_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "approval_bundles_validated",
+          "passed": true
+        },
+        {
+          "name": "runtime_created_approvals_not_persisted",
+          "passed": true
+        },
+        {
+          "name": "approval_cannot_authorize_external_effects",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "approval_evidence_and_separation_of_duties",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "all_resource_limits_match_runtime",
+          "passed": true
+        },
+        {
+          "name": "budget_zero_external_effect",
+          "passed": true
+        },
+        {
+          "name": "budget_decisions_before_dispatch",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "side_effect_and_resource_budget_enforcement",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "clear_kill_switch_permits_execution",
+          "passed": true
+        },
+        {
+          "name": "active_kill_switch_rejects_request",
+          "passed": true
+        },
+        {
+          "name": "zero_active_requests_after_kill_rejection",
+          "passed": true
+        },
+        {
+          "name": "guard_never_external_authority",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "parent_kill_switch_and_guard_precedence",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "in_memory_static_dispatch",
+          "passed": true
+        },
+        {
+          "name": "network_dns_disabled",
+          "passed": true
+        },
+        {
+          "name": "filesystem_process_shell_disabled",
+          "passed": true
+        },
+        {
+          "name": "dynamic_eval_exec_disabled",
+          "passed": true
+        },
+        {
+          "name": "credentials_tokens_disabled",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "in_memory_sandbox_isolation",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "six_reference_capabilities_executed",
+          "passed": true
+        },
+        {
+          "name": "normalization_exact",
+          "passed": true
+        },
+        {
+          "name": "sha256_exact_lowercase",
+          "passed": true
+        },
+        {
+          "name": "json_validation_deterministic",
+          "passed": true
+        },
+        {
+          "name": "no_external_effects",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "pure_reference_capability_execution",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "read_fixture_exact",
+          "passed": true
+        },
+        {
+          "name": "read_no_endpoint_network_credential",
+          "passed": true
+        },
+        {
+          "name": "external_connector_call_absent",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "synthetic_reference_connector_read",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "write_preview_created",
+          "passed": true
+        },
+        {
+          "name": "write_applied_false",
+          "passed": true
+        },
+        {
+          "name": "preview_fingerprints_present",
+          "passed": true
+        },
+        {
+          "name": "rollback_completed",
+          "passed": true
+        },
+        {
+          "name": "no_external_write",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "synthetic_write_preview_and_rollback",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "exact_replay_returns_existing_result",
+          "passed": true
+        },
+        {
+          "name": "exact_replay_no_second_execution",
+          "passed": true
+        },
+        {
+          "name": "changed_replay_rejected",
+          "passed": true
+        },
+        {
+          "name": "capability_substitution_rejected",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "request_idempotency_and_changed_replay",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "eight_receipts",
+          "passed": true
+        },
+        {
+          "name": "first_receipt_zero_prior",
+          "passed": true
+        },
+        {
+          "name": "receipt_chain_contiguous",
+          "passed": true
+        },
+        {
+          "name": "authorization_lineage_exact",
+          "passed": true
+        },
+        {
+          "name": "provenance_no_raw_payloads",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "execution_receipt_chain_and_provenance",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "all_outputs_validated",
+          "passed": true
+        },
+        {
+          "name": "output_fingerprints_present",
+          "passed": true
+        },
+        {
+          "name": "protected_network_marker_rejected",
+          "passed": true
+        },
+        {
+          "name": "output_external_effect_flags_false",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "output_validation_and_smuggling_rejection",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "audit_chain_head_present",
+          "passed": true
+        },
+        {
+          "name": "audit_records_append_only_count",
+          "passed": true
+        },
+        {
+          "name": "audit_event_counts_safe",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "audit_chain_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "health_closed_zero_active",
+          "passed": true
+        },
+        {
+          "name": "observability_safe_counts_only",
+          "passed": true
+        },
+        {
+          "name": "integrity_passed",
+          "passed": true
+        },
+        {
+          "name": "every_prohibited_counter_audited_zero",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "observability_health_and_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "fixed_pilot_deterministic",
+          "passed": true
+        },
+        {
+          "name": "changed_manifest_changes_fingerprint",
+          "passed": true
+        },
+        {
+          "name": "deterministic_counter_ordering",
+          "passed": true
+        },
+        {
+          "name": "public_evidence_redacted",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "determinism_concurrency_redaction_and_performance",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "all_pilot_prohibited_counters_zero",
+          "passed": true
+        },
+        {
+          "name": "implementation_source_scope_present",
+          "passed": true
+        },
+        {
+          "name": "no_operator_console_runtime_source",
+          "passed": true
+        },
+        {
+          "name": "v02_release_ready_false",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "zero_external_effects_and_repository_boundary",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "parent_planes_available",
+          "passed": true
+        },
+        {
+          "name": "model_output_remains_untrusted",
+          "passed": true
+        },
+        {
+          "name": "explicit_operator_selection_mandatory",
+          "passed": true
+        },
+        {
+          "name": "route_manifest_bounded",
+          "passed": true
+        },
+        {
+          "name": "same_origin_loopback_authorizable",
+          "passed": true
+        },
+        {
+          "name": "operator_console_source_not_created",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "controlled_operator_console_integration_readiness",
+      "status": "pass"
+    }
+  ],
+  "schema_version": "aion-capability-runtime-operator-evaluation/v1",
+  "v02_release_ready": false
+}

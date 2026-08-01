@@ -13,10 +13,18 @@ def test_aion234_record_remains_reconciled_after_aion235() -> None:
     assert record["merge_commits"] == ["74c6ecc93333518a353bd4c69ad8823d7a47afd8"]
     assert record["ci_result"] == "pass"
     assert record["completion_timestamp"] == "2026-07-31T19:49:32Z"
-    assert record["authorization_state"] == "active_for_AION-235_formal_closeout_AION-236"
-    assert program["active_sri_implementation_authorization"] == "AION-234-SRI-0003"
-    assert program["active_sri_implementation_task"] == "AION-235"
-    assert program["formal_closeout_task"] == "AION-236"
+    assert record["authorization_state"] in {
+        "active_for_AION-235_formal_closeout_AION-236",
+        "consumed_by_AION-235_closed_by_AION-236",
+    }
+    if record["authorization_state"] == "consumed_by_AION-235_closed_by_AION-236":
+        assert program["active_sri_implementation_authorization"] == "AION-236-SRI-0004"
+        assert program["active_sri_implementation_task"] == "AION-237"
+        assert program["formal_closeout_task"] == "AION-238"
+    else:
+        assert program["active_sri_implementation_authorization"] == "AION-234-SRI-0003"
+        assert program["active_sri_implementation_task"] == "AION-235"
+        assert program["formal_closeout_task"] == "AION-236"
     assert program["sandboxed_capability_runtime_authorized"] is True
     assert program["external_connector_execution_enabled"] is False
     assert program["external_tool_execution_enabled"] is False
