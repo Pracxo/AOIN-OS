@@ -1,0 +1,46 @@
+{
+  "authorization_id": "AION-238-V02RQ-0001",
+  "gaps": [
+    {
+      "gap_id": "production-auth-composition",
+      "status": "authorized_for_disabled_design_only"
+    },
+    {
+      "gap_id": "verified-request-identity-integration",
+      "status": "authorized_for_disabled_design_only"
+    },
+    {
+      "gap_id": "replay-ledger-provisioning",
+      "status": "authorized_for_plan_only"
+    },
+    {
+      "gap_id": "idp-adapter-interface",
+      "status": "authorized_for_interface_only"
+    },
+    {
+      "gap_id": "credential-token-session-lifecycle",
+      "status": "authorized_for_contracts_only"
+    },
+    {
+      "gap_id": "deployment-artifact-provenance-rollback",
+      "status": "authorized_for_evidence_only"
+    },
+    {
+      "gap_id": "observability-threat-model-runtime-guard",
+      "status": "authorized_for_schema_only"
+    },
+    {
+      "gap_id": "release-gate-and-staging-plan",
+      "status": "authorized_without_activation"
+    }
+  ],
+  "implementation_task": "AION-239",
+  "production_runtime_authorized": false,
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "schema_version": "aion-v02-release-qualification-gap-matrix/v1",
+  "synthetic": true,
+  "v02_release_ready": false
+}

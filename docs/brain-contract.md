@@ -2521,3 +2521,8 @@ The next authorized layer is `AION-234-SRI-0003` for AION-235. It authorizes a s
 ## AION-236 Secure Runtime Integration Status
 
 AION-SRIPE-003 passed with report fingerprint `61e50ce0829e85b27b61a7620bb1ca4a7f58ad0c6f8cad0b93f0250c89365a11`. `AION-234-SRI-0003` is closed and consumed by AION-235. `AION-236-SRI-0004` remains active for AION-237 pending AION-238 closeout. AION-237 is implemented as a controlled same-origin loopback Operator Console integration and the integrated authenticated local pilot is complete. Public listening, external egress, DNS resolution, browser persistence, provider calls, external connectors, real tools, production writes, deployment, model training and v0.2 release readiness remain disabled.
+
+<!-- AION-238 FINAL SRI CLOSEOUT -->
+## AION-238 Final Secure Runtime Integration Closeout
+
+`AION-SRIPE-004` passed all 28 final scenarios. The Secure Runtime Integration Program is complete, `AION-236-SRI-0004` is closed, and `AION-238-V02RQ-0001` authorizes only disabled v0.2 release-qualification foundation work for AION-239. Production runtime, public listeners, external egress, credentials, tokens, deployment, release candidates, v0.2 tags and v0.2 releases remain disabled or absent.

@@ -307,6 +307,7 @@ def validate_secure_runtime_integration_demo(payload: object, path: Path) -> Non
         "secure-runtime-integration-authorization.json",
         "secure-runtime-integration-capability-plan.json",
         "secure-runtime-integration-checkpoint.json",
+        "secure-runtime-integration-final-evaluation.json",
         "secure-runtime-integration-guardrail-binding.json",
         "secure-runtime-integration-health.json",
         "secure-runtime-integration-identity-binding.json",
@@ -316,6 +317,7 @@ def validate_secure_runtime_integration_demo(payload: object, path: Path) -> Non
         "secure-runtime-integration-pilot-evidence.json",
         "secure-runtime-integration-policy-binding.json",
         "secure-runtime-integration-program.json",
+        "secure-runtime-integration-program-final-closeout.json",
         "secure-runtime-integration-request-identity.json",
         "secure-runtime-integration-risk-binding.json",
         "secure-runtime-integration-runtime-boundary.json",
@@ -1323,6 +1325,42 @@ for path in sorted(demo_dir.glob("*.json")):
         for key in ("loopback_listener_absent", "same_origin_required"):
             if key in payload and payload.get(key) is not True:
                 raise SystemExit(f"operator console demo flag must be true: {key}: {path}")
+        continue
+    if path.name.startswith("v02-release-qualification-"):
+        if payload.get("program_id") != "AION-V02-RELEASE-QUALIFICATION-001":
+            raise SystemExit(f"v0.2 release qualification program id mismatch: {path}")
+        for key in ("read_only", "redacted", "redaction_applied", "synthetic"):
+            if payload.get(key) is not True:
+                raise SystemExit(f"v0.2 release qualification evidence flag must be true: {key}: {path}")
+        for key in (
+            "access_token_issuance_enabled",
+            "actual_model_provider_call_enabled",
+            "credential_persistence_enabled",
+            "deployment_execution_enabled",
+            "external_connector_execution_enabled",
+            "external_network_egress_enabled",
+            "external_tool_execution_enabled",
+            "production_auth_runtime_enabled",
+            "production_deployment_enabled",
+            "production_runtime_authorized",
+            "production_write_execution_enabled",
+            "public_network_access_enabled",
+            "staging_deployment_enabled",
+            "v02_release_created",
+            "v02_release_ready",
+            "v02_tag_created",
+        ):
+            if key in payload and payload.get(key) is not False:
+                raise SystemExit(f"v0.2 release qualification flag must be false: {key}: {path}")
+        if path.name == "v02-release-qualification-program-authorization.json":
+            if payload.get("authorization_transaction_id") != "AION-238-V02RQ-0001":
+                raise SystemExit(f"v0.2 release qualification authorization mismatch: {path}")
+            if payload.get("authorization_active") is not True:
+                raise SystemExit(f"v0.2 release qualification authorization inactive: {path}")
+            if payload.get("implementation_task") != "AION-239":
+                raise SystemExit(f"v0.2 release qualification implementation task mismatch: {path}")
+            if payload.get("formal_closeout_task") != "AION-240":
+                raise SystemExit(f"v0.2 release qualification closeout task mismatch: {path}")
         continue
     if payload.get("read_only") is not True:
         raise SystemExit(f"read_only must be true: {path}")

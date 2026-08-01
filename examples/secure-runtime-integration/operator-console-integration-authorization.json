@@ -1,14 +1,25 @@
 {
   "accessible_operator_controls_available": true,
-  "active_sri_implementation_authorization": "AION-236-SRI-0004",
-  "active_sri_implementation_authorization_count": 1,
-  "active_sri_implementation_task": "AION-237",
+  "active_sri_implementation_authorization": null,
+  "active_sri_implementation_authorization_count": 0,
+  "active_sri_implementation_task": null,
   "approval_record_id": "AION-236-SRI-0004",
   "audit_projection_available": true,
   "audit_read_projection_available": true,
-  "authorization_active": true,
-  "authorization_consumed": false,
-  "authorization_expired": false,
+  "authorization_active": false,
+  "authorization_closed_by_task": "AION-238",
+  "authorization_consumed": true,
+  "authorization_consumed_by_feature_commits": [
+    "df1f89e1708638e32aef0532fb37ed150b85b600"
+  ],
+  "authorization_consumed_by_merge_commits": [
+    "55f2721bb036886a693a36d870d49f49f7ecc6d1"
+  ],
+  "authorization_consumed_by_prs": [
+    156
+  ],
+  "authorization_consumed_by_task": "AION-237",
+  "authorization_expired": true,
   "authorization_reusable": false,
   "authorization_scope": "authenticated-local-loopback-same-origin-operator-console-bridge-secure-session-bootstrap-live-read-projection-explicit-model-simulation-explicit-reference-capability-execution-synthetic-connector-preview-request-nonce-origin-host-csp-kill-switch-audit-receipt-integrity-integrated-pilot-no-external-effect-core",
   "authorization_transaction_approved": true,
@@ -16,6 +27,12 @@
   "bounded_route_manifest_available": true,
   "candidate_id": "controlled-local-operator-console-integration-core",
   "ephemeral_mutation_nonce_available": true,
+  "evaluation_reusable": false,
+  "evaluation_used_as_external_egress_approval": false,
+  "evaluation_used_as_production_runtime_approval": false,
+  "evaluation_used_as_public_listener_approval": false,
+  "evaluation_used_as_v02_release_approval": false,
+  "evaluation_used_as_v02_tag_approval": false,
   "exact_static_asset_allowlist_available": true,
   "explicit_approval_record_approval": true,
   "explicit_model_simulation_request_available": true,
@@ -23,7 +40,9 @@
   "explicit_reference_capability_request_available": true,
   "explicit_synthetic_connector_request_available": true,
   "explicit_write_preview_request_available": true,
-  "formal_closeout_task": "AION-238",
+  "final_sri_evaluation_decision": "CONTROLLED_OPERATOR_CONSOLE_INTEGRATED_LOCAL_RUNTIME_FINAL_EVALUATION_PASS_COMPLETE_SECURE_RUNTIME_INTEGRATION_PROGRAM_RECOMMEND_V02_RELEASE_QUALIFICATION_PROGRAM_AUTHORIZATION",
+  "final_sri_evaluation_id": "AION-SRIPE-004",
+  "formal_closeout_task": null,
   "future_source_scope": [
     "services/brain-api/src/aion_brain/contracts/operator_console_integration.py",
     "services/brain-api/src/aion_brain/operator_console_runtime/__init__.py",

@@ -8,12 +8,18 @@ from secure_runtime_aion232_test_helpers import (
 
 def test_aion232_authorization_is_closed_after_aion234_closeout() -> None:
     payload = authorization()
-    assert payload["active_sri_implementation_authorization_count"] == 1
-    assert payload["active_sri_implementation_authorization"] in {
-        "AION-234-SRI-0003",
-        "AION-236-SRI-0004",
-    }
-    assert payload["active_sri_implementation_task"] in {"AION-235", "AION-237"}
+    if payload["program_state"] == "secure_runtime_integration_program_complete":
+        assert payload["active_sri_implementation_authorization_count"] == 0
+        assert payload["active_sri_implementation_authorization"] is None
+        assert payload["active_sri_implementation_task"] is None
+        assert payload["formal_closeout_task"] is None
+    else:
+        assert payload["active_sri_implementation_authorization_count"] == 1
+        assert payload["active_sri_implementation_authorization"] in {
+            "AION-234-SRI-0003",
+            "AION-236-SRI-0004",
+        }
+        assert payload["active_sri_implementation_task"] in {"AION-235", "AION-237"}
     record = next(
         item for item in payload["records"] if item["authorization_transaction_id"] == AION232
     )

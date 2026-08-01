@@ -84,10 +84,15 @@ is_allowed_path() {
 	    docs/adr/0199-sandboxed-deterministic-capability-and-synthetic-connector-runtime.md|\
 	    docs/adr/0200-sandboxed-capability-runtime-evaluation-and-controlled-local-operator-console-integration-authorization.md|\
 	    docs/adr/0201-controlled-same-origin-loopback-operator-console-and-integrated-local-runtime.md|\
+	    docs/adr/0202-final-secure-runtime-integration-evaluation-and-v02-release-qualification-program-authorization.md|\
 	    docs/adr/README.md|\
+    docs/v02-release-qualification/*|\
+    docs/release/v02-release-qualification-*|\
     examples/secure-runtime-integration/*|\
+    examples/v02-release-qualification/*|\
 	    operator-console-static/index.html|operator-console-static/app.js|operator-console-static/live-console.js|operator-console-static/styles.css|operator-console-static/README.md|\
 	    operator-console-static/demo-data/secure-runtime-integration-*.json|\
+	    operator-console-static/demo-data/v02-release-qualification-*.json|\
 	    operator-console-static/demo-data/secure-runtime-foundation-operator-evaluation.json|\
 	    operator-console-static/demo-data/model-gateway-*.json|\
 		    operator-console-static/demo-data/capability-runtime-*.json|\
@@ -123,7 +128,10 @@ is_allowed_path() {
 		    scripts/production-auth-*.sh|\
 		    scripts/production-auth-architecture-check.sh|\
 	    scripts/static-console-safety-check.sh|\
+	    scripts/secure-runtime-integration-final-evaluation-check.sh|\
+	    scripts/secure-runtime-integration-final-evaluation-no-go-regression.sh|\
 	    scripts/secure-runtime-integration-program-authorization-check.sh|\
+	    scripts/secure-runtime-integration-program-complete-check.sh|\
 	    scripts/secure-runtime-integration-program-no-go-regression.sh|\
 	    scripts/secure-runtime-integration-runtime-hold.sh|\
 	    scripts/secure-runtime-foundation-check.sh|\
@@ -161,8 +169,10 @@ is_allowed_path() {
 	    scripts/lib/secure_runtime_foundation_operator_evaluation.py|\
 	    scripts/lib/model_gateway_operator_evaluation.py|\
 	    scripts/lib/capability_runtime_operator_evaluation.py|\
+	    scripts/lib/secure_runtime_integration_final_evaluation.py|\
 	    scripts/lib/v02_production_auth_authorization.py|\
 	    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+	    services/brain-api/tests/secure_runtime_integration_final_evaluation_test_support.py|\
 	    scripts/production-auth-actor-context-trust-boundary-no-go-regression.sh|\
 	    scripts/production-auth-core-no-go-regression.sh|\
 	    scripts/production-auth-core-stabilization-no-go-regression.sh|\

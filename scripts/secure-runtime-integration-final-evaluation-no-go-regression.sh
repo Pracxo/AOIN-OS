@@ -63,16 +63,21 @@ is_allowed_path() {
     operator-console-static/index.html|operator-console-static/app.js|operator-console-static/README.md|\
     operator-console-static/demo-data/secure-runtime-integration-*.json|\
     operator-console-static/demo-data/v02-release-qualification-*.json|\
+    scripts/operator-console-integration-authorization-check.sh|\
+    scripts/operator-console-integration-check.sh|\
+    scripts/operator-console-integration-runtime-hold.sh|\
     scripts/secure-runtime-integration-final-evaluation-check.sh|\
     scripts/secure-runtime-integration-final-evaluation-no-go-regression.sh|\
     scripts/secure-runtime-integration-program-complete-check.sh|\
     scripts/v02-release-qualification-program-authorization-check.sh|\
     scripts/v02-release-qualification-program-authorization-no-go-regression.sh|\
     scripts/v02-release-qualification-runtime-hold.sh|\
+    scripts/production-auth-core-no-go-regression.sh|\
     scripts/lib/secure_runtime_integration_final_evaluation.py|\
     scripts/lib/v02-production-auth-scan-exclusions.sh|\
     scripts/lib/cognitive_architecture_governance.py|\
     services/brain-api/tests/secure_runtime_integration_final_evaluation_test_support.py|\
+    services/brain-api/tests/test_secure_runtime_integration_final_closeout_aion238.py|\
     services/brain-api/tests/test_secure_runtime_integration_final_evaluation_aion238.py|\
     services/brain-api/tests/test_secure_runtime_current_state_after_aion232.py|\
     services/brain-api/tests/test_secure_runtime_current_state_after_aion234.py|\

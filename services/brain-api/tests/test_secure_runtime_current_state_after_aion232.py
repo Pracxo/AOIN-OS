@@ -7,20 +7,26 @@ def test_current_state_after_aion232_preserves_lineage_after_aion235() -> None:
         "sandboxed_capability_runtime_implemented_reference_only_pending_closeout",
         "capability_runtime_evaluated_operator_console_integration_authorized_not_implemented",
         "operator_console_integrated_local_runtime_implemented_pending_final_evaluation",
+        "secure_runtime_integration_program_complete",
     }
     assert state["secure_runtime_foundation_operator_evaluation_passed"] is True
     assert state["secure_runtime_foundation_operator_evaluation_id"] == "AION-SRIPE-001"
     assert state["secure_runtime_foundation_operator_evaluation_decision"] == PASS_DECISION
-    assert state["active_sri_implementation_authorization_count"] == 1
     active_state = (
         state["active_sri_implementation_authorization"],
         state["active_sri_implementation_task"],
         state["formal_closeout_task"],
     )
-    assert active_state in {
-        ("AION-234-SRI-0003", "AION-235", "AION-236"),
-        ("AION-236-SRI-0004", "AION-237", "AION-238"),
-    }
+    if state["program_state"] == "secure_runtime_integration_program_complete":
+        assert state["active_sri_implementation_authorization_count"] == 0
+        assert active_state == (None, None, None)
+        assert state["final_completed_task"] == "AION-238"
+    else:
+        assert state["active_sri_implementation_authorization_count"] == 1
+        assert active_state in {
+            ("AION-234-SRI-0003", "AION-235", "AION-236"),
+            ("AION-236-SRI-0004", "AION-237", "AION-238"),
+        }
     assert state["model_gateway_implemented"] is True
     assert state["model_gateway_state"] == "implemented_provider_neutral_reference_simulation_only"
     assert state["sandboxed_capability_runtime_authorized"] is True

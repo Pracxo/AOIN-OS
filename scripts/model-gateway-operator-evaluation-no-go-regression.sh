@@ -156,6 +156,15 @@ def aion235_implementation_state_active() -> bool:
     if not ledger.exists():
         return False
     payload = json.loads(ledger.read_text(encoding="utf-8"))
+    if payload.get("program_state") == "secure_runtime_integration_program_complete":
+        return (
+            payload.get("sandboxed_capability_runtime_implemented") is True
+            and payload.get("active_sri_implementation_authorization_count") == 0
+            and payload.get("active_sri_implementation_authorization") is None
+            and payload.get("active_sri_implementation_task") is None
+            and payload.get("formal_closeout_task") is None
+            and payload.get("final_completed_task") == "AION-238"
+        )
     expected = AION235_SOURCE_ALLOWED_STATES.get(payload.get("program_state"))
     return (
         expected is not None
@@ -171,6 +180,16 @@ def aion237_implementation_state_active() -> bool:
     if not ledger.exists():
         return False
     payload = json.loads(ledger.read_text(encoding="utf-8"))
+    if payload.get("program_state") == "secure_runtime_integration_program_complete":
+        return (
+            payload.get("operator_console_integration_implemented") is True
+            and payload.get("integrated_authenticated_local_pilot_completed") is True
+            and payload.get("active_sri_implementation_authorization_count") == 0
+            and payload.get("active_sri_implementation_authorization") is None
+            and payload.get("active_sri_implementation_task") is None
+            and payload.get("formal_closeout_task") is None
+            and payload.get("final_completed_task") == "AION-238"
+        )
     return (
         payload.get("program_state")
         == "operator_console_integrated_local_runtime_implemented_pending_final_evaluation"

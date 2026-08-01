@@ -2520,6 +2520,79 @@ aion237_is_scoped_operator_console_integrated_local_runtime_path() {
   esac
 }
 
+aion238_is_scoped_secure_runtime_final_closeout_path() {
+  if [[ ! -f docs/secure-runtime-integration/program-ledger.json ]] || \
+    ! grep -q '"program_state": "secure_runtime_integration_program_complete"' docs/secure-runtime-integration/program-ledger.json || \
+    ! grep -q '"active_sri_implementation_authorization_count": 0' docs/secure-runtime-integration/program-ledger.json || \
+    ! grep -q '"successor_authorization_id": "AION-238-V02RQ-0001"' docs/secure-runtime-integration/program-ledger.json; then
+    return 1
+  fi
+  case "$1" in
+    README.md|AGENTS.md|\
+    docs/project-status.md|docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/visual-brain.md|\
+    docs/secure-runtime-integration/*|\
+    docs/v02-release-qualification/*|\
+    docs/release/secure-runtime-integration-*|\
+    docs/release/operator-console-integration-implementation.md|\
+    docs/release/operator-console-integrated-local-pilot.md|\
+    docs/release/operator-console-integration-runtime-hold.md|\
+    docs/release/v02-release-readiness-delta.md|\
+    docs/release/v02-release-qualification-*|\
+    docs/adr/0202-final-secure-runtime-integration-evaluation-and-v02-release-qualification-program-authorization.md|\
+    docs/adr/README.md|\
+    examples/secure-runtime-integration/*|\
+    examples/v02-release-qualification/*|\
+    operator-console-static/README.md|\
+    operator-console-static/app.js|\
+    operator-console-static/index.html|\
+    operator-console-static/demo-data/secure-runtime-integration-*.json|\
+    operator-console-static/demo-data/v02-release-qualification-*.json|\
+    scripts/auth-design-check.sh|\
+    scripts/knowledge-intelligence-integrated-research-agent-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh|\
+    scripts/model-gateway-operator-evaluation-no-go-regression.sh|\
+    scripts/operator-console-integration-authorization-check.sh|\
+    scripts/operator-console-integration-check.sh|\
+    scripts/operator-console-integration-runtime-hold.sh|\
+    scripts/operator-console-static-check.sh|\
+    scripts/production-auth-actor-context-trust-boundary-no-go-regression.sh|\
+    scripts/static-console-safety-check.sh|\
+    scripts/secure-runtime-integration-final-evaluation-check.sh|\
+    scripts/secure-runtime-integration-final-evaluation-no-go-regression.sh|\
+    scripts/secure-runtime-integration-program-authorization-check.sh|\
+    scripts/secure-runtime-integration-program-complete-check.sh|\
+    scripts/secure-runtime-integration-program-no-go-regression.sh|\
+    scripts/secure-runtime-integration-runtime-hold.sh|\
+    scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh|\
+    scripts/v02-offline-identity-assertion-verification-authorization-no-go-regression.sh|\
+    scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh|\
+    scripts/v02-release-qualification-program-authorization-check.sh|\
+    scripts/v02-release-qualification-program-authorization-no-go-regression.sh|\
+    scripts/v02-release-qualification-runtime-hold.sh|\
+    scripts/lib/secure_runtime_integration_final_evaluation.py|\
+    scripts/lib/v02_production_auth_authorization.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    services/brain-api/tests/secure_runtime_integration_final_evaluation_test_support.py|\
+    services/brain-api/tests/test_secure_runtime_integration_final_closeout_aion238.py|\
+    services/brain-api/tests/test_secure_runtime_integration_final_evaluation_aion238.py|\
+    services/brain-api/tests/test_secure_runtime_current_state_after_aion232.py|\
+    services/brain-api/tests/test_secure_runtime_current_state_after_aion234.py|\
+    services/brain-api/tests/test_secure_runtime_current_state_after_aion236.py|\
+    services/brain-api/tests/test_secure_runtime_current_state_consistency.py|\
+    services/brain-api/tests/test_secure_runtime_integration_authorization.py|\
+    services/brain-api/tests/test_secure_runtime_integration_program_charter.py|\
+    services/brain-api/tests/test_secure_runtime_integration_project_status.py|\
+    services/brain-api/tests/test_capability_runtime_current_state_after_aion235.py|\
+    services/brain-api/tests/test_model_gateway_*.py|\
+    services/brain-api/tests/test_operator_console_integration_authorization.py)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
 aion151_validate_scoped_authorization_if_present() {
   if [[ -f examples/release/v02-production-auth-implementation-authorization.json ]]; then
     python3 scripts/lib/v02_production_auth_authorization.py --repo-root "$ROOT_DIR" --mode no-go

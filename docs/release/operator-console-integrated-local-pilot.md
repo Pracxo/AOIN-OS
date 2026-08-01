@@ -12,3 +12,8 @@ Runtime boundaries remain closed: public listening, DNS resolution, external egr
 
 Pilot evidence: `examples/secure-runtime-integration/operator-console-integrated-local-runtime-pilot-evidence.json`.
 Report fingerprint: `e54ea6886c6d7f56c1de568983515944b1b72b3dc2d8f59b310039bb96ed5035`.
+
+<!-- AION-238 FINAL SRI CLOSEOUT -->
+## AION-238 Final State
+
+`AION-SRIPE-004` returned the exact PASS decision and closes `AION-236-SRI-0004` as consumed by AION-237. The operator console remains same-origin loopback only, model output remains untrusted, connector writes remain preview-only, and all production, public-listener, external-egress, credential, token, deployment and release effects remain disabled. `AION-238-V02RQ-0001` is separate successor-program authorization for future disabled AION-239 qualification work.

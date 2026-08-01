@@ -1523,14 +1523,20 @@ def is_secure_runtime_integration_artifact(name: str) -> bool:
         == "docs/adr/0200-sandboxed-capability-runtime-evaluation-and-controlled-local-operator-console-integration-authorization.md"
         or name
         == "docs/adr/0201-controlled-same-origin-loopback-operator-console-and-integrated-local-runtime.md"
+        or name
+        == "docs/adr/0202-final-secure-runtime-integration-evaluation-and-v02-release-qualification-program-authorization.md"
         or name.startswith("docs/secure-runtime-integration/")
+        or name.startswith("docs/v02-release-qualification/")
         or name.startswith("docs/release/secure-runtime-integration-")
         or name.startswith("docs/release/secure-runtime-foundation-")
         or name.startswith("docs/release/model-gateway-")
         or name.startswith("docs/release/capability-runtime-")
         or name.startswith("docs/release/operator-console-")
+        or name.startswith("docs/release/v02-release-qualification-")
         or name.startswith("examples/secure-runtime-integration/")
+        or name.startswith("examples/v02-release-qualification/")
         or name.startswith("operator-console-static/demo-data/secure-runtime-integration-")
+        or name.startswith("operator-console-static/demo-data/v02-release-qualification-")
         or name.startswith("operator-console-static/demo-data/secure-runtime-foundation-operator-evaluation")
         or name.startswith("operator-console-static/demo-data/model-gateway-")
         or name.startswith("operator-console-static/demo-data/capability-runtime-")
@@ -1545,7 +1551,9 @@ def is_secure_runtime_integration_artifact(name: str) -> bool:
         or name == "scripts/lib/secure_runtime_foundation_operator_evaluation.py"
         or name == "scripts/lib/model_gateway_operator_evaluation.py"
         or name == "scripts/lib/capability_runtime_operator_evaluation.py"
+        or name == "scripts/lib/secure_runtime_integration_final_evaluation.py"
         or name == "scripts/secure-runtime-local-operator-run.py"
+        or name.startswith("scripts/v02-release-qualification-")
         or name == "services/brain-api/src/aion_brain/contracts/secure_runtime.py"
         or name == "services/brain-api/src/aion_brain/contracts/model_gateway.py"
         or name == "services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime.py"

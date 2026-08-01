@@ -306,6 +306,11 @@ for relative in run(["git", "ls-files"]).stdout.splitlines():
         raise SystemExit(f"tracked persistence file detected: {relative}")
 
 for relative in sorted(changed_paths):
+    if (
+        SRI_PROGRAM_STATE == "secure_runtime_integration_program_complete"
+        and relative == "scripts/lib/secure_runtime_integration_final_evaluation.py"
+    ):
+        continue
     if is_aion237_operator_console_local_runtime_path(relative):
         continue
     if relative in AION219_SOURCE_PATHS:

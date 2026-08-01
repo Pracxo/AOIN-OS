@@ -1,0 +1,15 @@
+{
+  "active_listeners_after_evaluation": 0,
+  "active_requests_after_evaluation": 0,
+  "active_sessions_after_evaluation": 0,
+  "decision": "CONTROLLED_OPERATOR_CONSOLE_INTEGRATED_LOCAL_RUNTIME_FINAL_EVALUATION_PASS_COMPLETE_SECURE_RUNTIME_INTEGRATION_PROGRAM_RECOMMEND_V02_RELEASE_QUALIFICATION_PROGRAM_AUTHORIZATION",
+  "evaluation_id": "AION-SRIPE-004",
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "report_fingerprint": "6e457d1a8bc226aa44697802d68b5d4cd5a272088a5ce6317048ab75503744ee",
+  "scenario_count": 28,
+  "synthetic": true,
+  "v02_release_ready": false
+}

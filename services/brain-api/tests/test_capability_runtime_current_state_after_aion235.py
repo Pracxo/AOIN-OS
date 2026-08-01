@@ -8,6 +8,7 @@ POST_AION236_STATE = (
 AION237_IMPLEMENTED_STATE = (
     "operator_console_integrated_local_runtime_implemented_pending_final_evaluation"
 )
+FINAL_COMPLETE_STATE = "secure_runtime_integration_program_complete"
 
 
 def test_secure_runtime_current_state_after_aion235() -> None:
@@ -16,8 +17,18 @@ def test_secure_runtime_current_state_after_aion235() -> None:
         "sandboxed_capability_runtime_implemented_reference_only_pending_closeout",
         POST_AION236_STATE,
         AION237_IMPLEMENTED_STATE,
+        FINAL_COMPLETE_STATE,
     }
-    if program["program_state"] in {POST_AION236_STATE, AION237_IMPLEMENTED_STATE}:
+    if program["program_state"] == FINAL_COMPLETE_STATE:
+        assert program["active_sri_implementation_authorization_count"] == 0
+        assert program["active_sri_implementation_authorization"] is None
+        assert program["active_sri_implementation_task"] is None
+        assert program["formal_closeout_task"] is None
+        assert program["final_completed_task"] == "AION-238"
+        assert program["successor_authorization_id"] == "AION-238-V02RQ-0001"
+        assert program["operator_console_integration_implemented"] is True
+        assert program["integrated_authenticated_local_pilot_completed"] is True
+    elif program["program_state"] in {POST_AION236_STATE, AION237_IMPLEMENTED_STATE}:
         assert program["active_sri_implementation_authorization"] == "AION-236-SRI-0004"
         assert program["active_sri_implementation_task"] == "AION-237"
         assert program["formal_closeout_task"] == "AION-238"

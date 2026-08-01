@@ -1296,3 +1296,7 @@ AION-229 final evaluation AION-GLMPE-004 passed all 28 deterministic hard-gated 
 ## AION-236 Secure Runtime Integration Status
 
 AION-SRIPE-003 passed with report fingerprint `61e50ce0829e85b27b61a7620bb1ca4a7f58ad0c6f8cad0b93f0250c89365a11`. `AION-234-SRI-0003` is closed and consumed by AION-235. `AION-236-SRI-0004` is active for AION-237. AION-237 is authorized but not implemented. Public listening, external egress, browser persistence, provider calls, external connectors, real tools, production writes, deployment, model training and v0.2 release readiness remain disabled.
+
+<!-- AION-238 FINAL SRI GUARDRAIL -->
+- AION-238 final SRI closeout work may update final evaluation reports, ledgers, docs, examples, static evidence, and local gates only. It must keep `services/brain-api/src/aion_brain` runtime source unchanged, keep AION-239 runtime source absent, close `AION-236-SRI-0004` only after `AION-SRIPE-004` PASS, and keep production runtime, public listeners, external egress, credentials, tokens, deployments, v0.2 tags, and v0.2 releases disabled or absent.
+- AION-239 work is authorized only by `AION-238-V02RQ-0001` and only for disabled v0.2 release-qualification foundation artifacts until AION-240 independently evaluates it.

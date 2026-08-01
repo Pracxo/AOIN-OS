@@ -1554,3 +1554,16 @@ These AION-236 panels remain static evidence. AION-237 adds the explicitly activ
 AION-237 adds an explicitly activated Live Local Runtime section. It uses relative same-origin `/aion/local/v1/` routes only after the operator activates the local session. The browser stores no cookies, credentials, tokens, or persistent browser state. Model output remains untrusted, connector writes are preview-only, and the offline static demo mode remains available when no local loopback listener is running.
 
 Offline AION-237 evidence is bundled under `demo-data/operator-console-*`.
+
+<!-- AION-238 FINAL STATIC EVIDENCE -->
+## AION-238 Final SRI and v0.2 Qualification Panels
+
+Static demo data now includes final SRI evaluation and program closeout evidence plus the disabled v0.2 Release Qualification authorization:
+
+- `demo-data/secure-runtime-integration-final-evaluation.json`
+- `demo-data/secure-runtime-integration-program-final-closeout.json`
+- `demo-data/v02-release-qualification-program-authorization.json`
+- `demo-data/v02-release-qualification-gap-matrix.json`
+- `demo-data/v02-release-qualification-runtime-hold.json`
+
+These files add final status evidence only. They do not enable runtime behavior, public listening, external egress, credentials, tokens, deployment, release candidates, v0.2 tags, or v0.2 releases.

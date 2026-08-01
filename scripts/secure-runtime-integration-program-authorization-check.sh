@@ -322,7 +322,82 @@ post_aion236_state = (
 post_aion237_state = (
     "operator_console_integrated_local_runtime_implemented_pending_final_evaluation"
 )
-if program.get("program_state") in {post_aion236_state, post_aion237_state}:
+final_complete_state = "secure_runtime_integration_program_complete"
+if program.get("program_state") == final_complete_state:
+    for payload in (program, auth):
+        require(payload["program_id"] == PROGRAM_ID, "program id mismatch")
+        require(payload["program_state"] == final_complete_state, "program state mismatch")
+        require(
+            payload["secure_runtime_integration_program_complete"] is True,
+            "SRI program completion flag missing",
+        )
+        require(
+            payload["secure_runtime_integration_final_evaluation_id"] == "AION-SRIPE-004",
+            "final evaluation id mismatch",
+        )
+        require(
+            payload["active_sri_implementation_authorization_count"] == 0,
+            "active SRI count must be zero after AION-238",
+        )
+        require(
+            payload["active_sri_implementation_authorization"] is None,
+            "active SRI authorization must be absent after AION-238",
+        )
+        require(
+            payload["active_sri_implementation_task"] is None,
+            "active SRI task must be absent after AION-238",
+        )
+        require(
+            payload["formal_closeout_task"] is None,
+            "formal closeout task must be absent after AION-238",
+        )
+        require(
+            payload["next_sri_implementation_task"] is None,
+            "next SRI implementation task must be absent after AION-238",
+        )
+        require(
+            payload["successor_authorization_id"] == "AION-238-V02RQ-0001",
+            "successor v0.2 qualification authorization mismatch",
+        )
+        require(payload["operator_console_integration_implemented"] is True, "operator console missing")
+        require(
+            payload["integrated_authenticated_local_pilot_completed"] is True,
+            "operator console pilot missing",
+        )
+        require(payload["sandboxed_capability_runtime_implemented"] is True, "capability runtime missing")
+        for key in (
+            "active_glm_implementation_authorization_count",
+            "active_knowledge_implementation_authorization_count",
+            "active_cognitive_implementation_authorization_count",
+            "active_self_improvement_implementation_authorization_count",
+        ):
+            require(payload[key] == 0, f"parent authorization count nonzero: {key}")
+        for key in (
+            "external_connector_execution_enabled",
+            "external_tool_execution_enabled",
+            "production_runtime_authorized",
+            "production_exposure",
+            "v02_release_ready",
+            "v02_tag_created",
+            "v02_release_created",
+        ):
+            require(payload[key] is False, f"runtime boundary flag true: {key}")
+    require(auth.get("active_authorizations") == [], "SRI active authorization list must be empty")
+    closed_aion236 = next(
+        item for item in auth["records"] if item.get("authorization_transaction_id") == "AION-236-SRI-0004"
+    )
+    require(closed_aion236["authorization_active"] is False, "AION-236 still active")
+    require(closed_aion236["authorization_consumed"] is True, "AION-236 not consumed")
+    require(closed_aion236["authorization_consumed_by_task"] == "AION-237", "AION-236 consumption task mismatch")
+    require(closed_aion236["authorization_closed_by_task"] == "AION-238", "AION-236 closeout mismatch")
+    require(closed_aion236["authorization_expired"] is True, "AION-236 not expired")
+    require(closed_aion236["authorization_reusable"] is False, "AION-236 reusable")
+    require(closed_aion236["final_sri_evaluation_id"] == "AION-SRIPE-004", "AION-236 final evaluation mismatch")
+    require("AION-238-V02RQ-0001" in text("docs/project-status.md"), "status missing successor authorization")
+    readme = text("README.md")
+    require("AION-238 Final SRI Status" in readme, "README missing AION-238 final status")
+    require("AION-238-V02RQ-0001" in readme, "README missing successor authorization")
+elif program.get("program_state") in {post_aion236_state, post_aion237_state}:
     aion237_implemented = program.get("program_state") == post_aion237_state
     for payload in (program, auth):
         require(payload["program_id"] == PROGRAM_ID, "program id mismatch")

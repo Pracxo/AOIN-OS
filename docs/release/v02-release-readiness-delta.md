@@ -333,3 +333,8 @@ These retained markers describe earlier v0.2 planning and production-auth author
 ## AION-236 Secure Runtime Integration Status
 
 AION-SRIPE-003 passed with report fingerprint `61e50ce0829e85b27b61a7620bb1ca4a7f58ad0c6f8cad0b93f0250c89365a11`. `AION-234-SRI-0003` is closed and consumed by AION-235. `AION-236-SRI-0004` remains active for AION-237 pending AION-238 closeout. AION-237 is implemented as a controlled same-origin loopback Operator Console integration and the integrated authenticated local pilot is complete. Public listening, external egress, DNS resolution, browser persistence, provider calls, external connectors, real tools, production writes, deployment, model training and v0.2 release readiness remain disabled.
+
+<!-- AION-238 V02 QUALIFICATION DELTA -->
+## AION-238 v0.2 Qualification Delta
+
+AION-238 completes SRI and authorizes `AION-V02-RELEASE-QUALIFICATION-001` through `AION-238-V02RQ-0001`. This does not make v0.2 release-ready: `v02_release_ready=false`, `v02_tag_created=false`, `v02_release_created=false`, and release-candidate creation remains false.

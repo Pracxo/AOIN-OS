@@ -35,6 +35,9 @@ root = Path(os.environ["AION_REPO_ROOT"])
 hold = json.loads(
     (root / "examples/secure-runtime-integration/operator-console-runtime-hold.json").read_text()
 )
+program = json.loads(
+    (root / "docs/secure-runtime-integration/program-ledger.json").read_text()
+)
 for key in (
     "public_listener_enabled",
     "external_network_egress_enabled",
@@ -56,12 +59,21 @@ for key in (
     "same_origin_static_asset_serving_available",
     "loopback_listener_absent",
     "listener_inactive_outside_explicit_runner_invocation",
-    "authorization_active",
 ):
     if hold[key] is not True:
         raise SystemExit(f"runtime hold true flag mismatch: {key}")
-if hold["authorization_consumed"] is not False:
-    raise SystemExit("AION-236-SRI-0004 must remain active pending AION-238")
+if program["program_state"] == "secure_runtime_integration_program_complete":
+    if hold.get("authorization_active") is not False:
+        raise SystemExit("AION-236-SRI-0004 must be inactive after AION-238")
+    if hold.get("authorization_consumed") is not True:
+        raise SystemExit("AION-236-SRI-0004 must be consumed after AION-238")
+    if hold.get("authorization_closed_by_task") != "AION-238":
+        raise SystemExit("AION-236-SRI-0004 closeout task mismatch")
+else:
+    if hold["authorization_active"] is not True:
+        raise SystemExit("runtime hold authorization must remain active before AION-238")
+    if hold["authorization_consumed"] is not False:
+        raise SystemExit("AION-236-SRI-0004 must remain active pending AION-238")
 PY
 
 if [[ "$nested_gate_context" == "1" ]]; then
