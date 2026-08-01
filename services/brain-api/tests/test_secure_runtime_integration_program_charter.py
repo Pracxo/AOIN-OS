@@ -11,6 +11,9 @@ PROGRAM_STATE = "sandboxed_capability_runtime_implemented_reference_only_pending
 POST_AION236_PROGRAM_STATE = (
     "capability_runtime_evaluated_operator_console_integration_authorized_not_implemented"
 )
+POST_AION237_PROGRAM_STATE = (
+    "operator_console_integrated_local_runtime_implemented_pending_final_evaluation"
+)
 AUTH_ID = "AION-230-SRI-0001"
 IMPLEMENTATION_TASK = "AION-231"
 CLOSEOUT_TASK = "AION-232"
@@ -267,7 +270,11 @@ def test_program_charter_creates_separate_sri_program() -> None:
     assert program["program_id"] == PROGRAM_ID
     assert program["program_name"] == "AION Secure Runtime Integration Program"
     assert program["created_by_task"] == "AION-230"
-    assert program["program_state"] in {PROGRAM_STATE, POST_AION236_PROGRAM_STATE}
+    assert program["program_state"] in {
+        PROGRAM_STATE,
+        POST_AION236_PROGRAM_STATE,
+        POST_AION237_PROGRAM_STATE,
+    }
     assert program["program_authorized"] is True
     assert program["secure_runtime_integration_program_authorized"] is True
     assert program["parent_completed_programs"] == PARENT_PROGRAMS

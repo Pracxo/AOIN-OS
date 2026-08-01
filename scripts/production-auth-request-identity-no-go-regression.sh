@@ -102,6 +102,9 @@ while IFS= read -r file; do
   if aion235_is_scoped_sandboxed_capability_runtime_path "$file"; then
     continue
   fi
+  if aion237_is_scoped_operator_console_integrated_local_runtime_path "$file"; then
+    continue
+  fi
   case "$file" in
     package.json|package-lock.json|pnpm-lock.yaml|yarn.lock|bun.lockb|\
     */package.json|*/package-lock.json|*/pnpm-lock.yaml|*/yarn.lock|*/bun.lockb)

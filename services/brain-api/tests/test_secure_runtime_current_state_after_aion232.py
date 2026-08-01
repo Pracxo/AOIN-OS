@@ -6,6 +6,7 @@ def test_current_state_after_aion232_preserves_lineage_after_aion235() -> None:
     assert state["program_state"] in {
         "sandboxed_capability_runtime_implemented_reference_only_pending_closeout",
         "capability_runtime_evaluated_operator_console_integration_authorized_not_implemented",
+        "operator_console_integrated_local_runtime_implemented_pending_final_evaluation",
     }
     assert state["secure_runtime_foundation_operator_evaluation_passed"] is True
     assert state["secure_runtime_foundation_operator_evaluation_id"] == "AION-SRIPE-001"

@@ -28,6 +28,11 @@ AION235_SOURCE_ALLOWED_STATES = {
         "AION-237",
         "AION-238",
     ),
+    "operator_console_integrated_local_runtime_implemented_pending_final_evaluation": (
+        "AION-236-SRI-0004",
+        "AION-237",
+        "AION-238",
+    ),
 }
 ALLOWED_PREFIXES = ("docs/", "examples/", "operator-console-static/", "scripts/", "services/brain-api/tests/")
 ALLOWED_EXACT = {"README.md", "AGENTS.md"}
@@ -38,6 +43,10 @@ AION233_EXACT = {"services/brain-api/src/aion_brain/contracts/model_gateway.py"}
 AION235_PREFIXES = ("services/brain-api/src/aion_brain/capability_runtime/",)
 AION235_EXACT = {
     "services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime.py",
+}
+AION237_PREFIXES = ("services/brain-api/src/aion_brain/operator_console_runtime/",)
+AION237_EXACT = {
+    "services/brain-api/src/aion_brain/contracts/operator_console_integration.py",
 }
 
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -95,7 +104,28 @@ def aion235_source_allowed(path: str) -> bool:
         and (path in AION235_EXACT or path.startswith(AION235_PREFIXES))
     )
 
+def aion237_implementation_state_active() -> bool:
+    if not PROGRAM_LEDGER.exists():
+        return False
+    payload = json.loads(PROGRAM_LEDGER.read_text(encoding="utf-8"))
+    return (
+        payload.get("program_state")
+        == "operator_console_integrated_local_runtime_implemented_pending_final_evaluation"
+        and payload.get("operator_console_integration_implemented") is True
+        and payload.get("integrated_authenticated_local_pilot_completed") is True
+        and payload.get("active_sri_implementation_authorization") == "AION-236-SRI-0004"
+        and payload.get("active_sri_implementation_task") == "AION-237"
+        and payload.get("formal_closeout_task") == "AION-238"
+    )
+
+def aion237_source_allowed(path: str) -> bool:
+    return (
+        aion237_active
+        and (path in AION237_EXACT or path.startswith(AION237_PREFIXES))
+    )
+
 aion235_active = aion235_implementation_state_active()
+aion237_active = aion237_implementation_state_active()
 for parts in changed_entries():
     status = parts[0]
     if status.startswith(("D", "R")):
@@ -107,6 +137,8 @@ for parts in changed_entries():
         if normalized in AION233_EXACT or normalized.startswith(AION233_PREFIXES):
             continue
         if aion235_source_allowed(normalized):
+            continue
+        if aion237_source_allowed(normalized):
             continue
         if normalized.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/dependency path changed: {normalized}")

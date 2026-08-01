@@ -277,6 +277,55 @@ aion236_is_scoped_operator_console_integration_authorization_path() {
   return 1
 }
 
+aion237_is_scoped_operator_console_integrated_local_runtime_path() {
+  case "$1" in
+    docs/adr/0201-controlled-same-origin-loopback-operator-console-and-integrated-local-runtime.md|\
+    docs/release/operator-console-*|\
+    docs/release/capability-runtime-*|\
+    docs/secure-runtime-integration/*|\
+    examples/secure-runtime-integration/operator-console-*.json|\
+    operator-console-static/README.md|\
+    operator-console-static/app.js|\
+    operator-console-static/index.html|\
+    operator-console-static/live-console.js|\
+    operator-console-static/styles.css|\
+    operator-console-static/demo-data/operator-console-*.json|\
+    scripts/auth-design-check.sh|\
+    scripts/auth-no-go-regression.sh|\
+    scripts/capability-runtime-*.sh|\
+    scripts/connector-*.sh|\
+    scripts/knowledge-intelligence-*-no-go-regression.sh|\
+    scripts/model-gateway-*.sh|\
+    scripts/operator-platform-*.sh|\
+    scripts/operator-console-integrated-local-run.py|\
+    scripts/operator-console-integrated-pilot-evidence-check.sh|\
+    scripts/operator-console-integration-*.sh|\
+    scripts/operator-console-static-check.sh|\
+    scripts/platform-integration-no-go-regression.sh|\
+    scripts/post-v01-release-candidate-no-go-regression.sh|\
+    scripts/production-auth-*.sh|\
+    scripts/secure-runtime-foundation-*.sh|\
+    scripts/secure-runtime-integration-*.sh|\
+    scripts/static-console-safety-check.sh|\
+    scripts/v02-*.sh|\
+    scripts/lib/cognitive_architecture_governance.py|\
+    scripts/lib/portable-search.sh|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    services/brain-api/src/aion_brain/contracts/operator_console_integration.py|\
+    services/brain-api/src/aion_brain/operator_console_runtime/*|\
+    services/brain-api/tests/operator_console_integration_test_support.py|\
+    services/brain-api/tests/test_operator_console_integration_*.py|\
+    services/brain-api/tests/test_operator_console_integrated_*.py|\
+    services/brain-api/tests/test_capability_runtime_current_state_after_aion235.py|\
+    services/brain-api/tests/test_model_gateway_*.py|\
+    services/brain-api/tests/test_secure_runtime_current_state_*.py|\
+    services/brain-api/tests/test_secure_runtime_integration_*.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 changed_entries() {
   local base
   if base="$(comparison_base)"; then
@@ -316,6 +365,9 @@ while IFS=$'\t' read -r status path extra; do
       continue
     fi
     if aion236_is_scoped_operator_console_integration_authorization_path "$changed"; then
+      continue
+    fi
+    if aion237_is_scoped_operator_console_integrated_local_runtime_path "$changed"; then
       continue
     fi
     if aion231_is_scoped_secure_runtime_foundation_path "$changed"; then

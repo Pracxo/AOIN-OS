@@ -1,8 +1,11 @@
 {
+  "accessible_operator_controls_available": true,
   "active_sri_implementation_authorization": "AION-236-SRI-0004",
   "active_sri_implementation_authorization_count": 1,
   "active_sri_implementation_task": "AION-237",
   "approval_record_id": "AION-236-SRI-0004",
+  "audit_projection_available": true,
+  "audit_read_projection_available": true,
   "authorization_active": true,
   "authorization_consumed": false,
   "authorization_expired": false,
@@ -10,8 +13,16 @@
   "authorization_scope": "authenticated-local-loopback-same-origin-operator-console-bridge-secure-session-bootstrap-live-read-projection-explicit-model-simulation-explicit-reference-capability-execution-synthetic-connector-preview-request-nonce-origin-host-csp-kill-switch-audit-receipt-integrity-integrated-pilot-no-external-effect-core",
   "authorization_transaction_approved": true,
   "authorization_transaction_id": "AION-236-SRI-0004",
+  "bounded_route_manifest_available": true,
   "candidate_id": "controlled-local-operator-console-integration-core",
+  "ephemeral_mutation_nonce_available": true,
+  "exact_static_asset_allowlist_available": true,
   "explicit_approval_record_approval": true,
+  "explicit_model_simulation_request_available": true,
+  "explicit_operator_confirmation_required": true,
+  "explicit_reference_capability_request_available": true,
+  "explicit_synthetic_connector_request_available": true,
+  "explicit_write_preview_request_available": true,
   "formal_closeout_task": "AION-238",
   "future_source_scope": [
     "services/brain-api/src/aion_brain/contracts/operator_console_integration.py",
@@ -33,11 +44,13 @@
     "operator-console-static/live-console.js"
   ],
   "future_uninstalled_runner": "scripts/operator-console-integrated-local-run.py",
+  "health_read_projection_available": true,
   "implementation_authorization_approved": true,
   "implementation_go_status": true,
   "implementation_no_go_status": false,
   "implementation_task": "AION-237",
-  "integrated_authenticated_local_pilot_completed": false,
+  "integrated_authenticated_local_pilot_authorized": true,
+  "integrated_authenticated_local_pilot_completed": true,
   "integrated_pilot_plan": {
     "authorized_not_executed_by_aion_236": true,
     "pilot_id": "AION-237-controlled-operator-console-integrated-local-runtime-pilot",
@@ -105,6 +118,10 @@
       "writes_applied": 0
     }
   },
+  "kill_switch_activation_available": true,
+  "live_mode_explicit_activation_required": true,
+  "local_loopback_listener_available": true,
+  "loopback_host_validation_available": true,
   "mutation_nonce_model": {
     "bound_to_host": true,
     "bound_to_origin": true,
@@ -117,6 +134,8 @@
     "not_refresh_token": true,
     "rotated_after_accepted_state_change": true
   },
+  "mutation_nonce_rotation_available": true,
+  "observability_read_projection_available": true,
   "operator_console_authorized_capabilities": {
     "accessible_operator_controls_approved": true,
     "audit_projection_approved": true,
@@ -157,7 +176,10 @@
     "strict_content_security_policy_approved": true,
     "strict_content_type_validation_approved": true
   },
-  "operator_console_integration_implemented": false,
+  "operator_console_health_readiness_available": true,
+  "operator_console_integration_implemented": true,
+  "operator_console_integration_state": "implemented_same_origin_loopback_integrated_local_runtime_pending_AION-238_closeout",
+  "operator_console_integrity_audit_available": true,
   "operator_console_prohibited_capabilities": {
     "access_token_issuance_enabled": false,
     "actual_belief_creation_enabled": false,
@@ -332,6 +354,7 @@
     "maximum_write_previews_per_session": 10,
     "maximum_zero_address_bindings": 0
   },
+  "operator_console_session_bootstrap_available": true,
   "parent_authorization_transaction_id": "AION-234-SRI-0003",
   "parent_evaluation_decision": "SANDBOXED_DETERMINISTIC_CAPABILITY_RUNTIME_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_OPERATOR_CONSOLE_INTEGRATED_LOCAL_RUNTIME_AUTHORIZATION",
   "parent_evaluation_id": "AION-SRIPE-003",
@@ -347,8 +370,12 @@
   ],
   "parent_implementation_task": "AION-235",
   "parent_main_commit": "9f2ba0003f27fc5b3f78e678f116eccba3f2bf8d",
+  "pilot_id": "AION-237-controlled-operator-console-integrated-local-runtime-pilot",
+  "pilot_report_fingerprint": "e54ea6886c6d7f56c1de568983515944b1b72b3dc2d8f59b310039bb96ed5035",
   "production_runtime_authorized": false,
   "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "receipt_projection_available": true,
+  "redacted_response_projection_available": true,
   "route_manifest": [
     {
       "method": "GET",
@@ -391,9 +418,13 @@
       "path": "/aion/local/v1/session/close"
     }
   ],
+  "route_manifest_fingerprint": "2416793202f55b3f890cae1cd73216bd485125253ab16cc40a405e2063ec5b6a",
+  "same_origin_static_asset_serving_available": true,
+  "same_origin_validation_available": true,
   "schema_version": "aion-operator-console-integration-authorization/v1",
   "security_headers": {
     "Cache-Control": "no-store",
+    "Connection": "close",
     "Content-Security-Policy": "default-src 'self'; connect-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'",
     "Cross-Origin-Opener-Policy": "same-origin",
     "Cross-Origin-Resource-Policy": "same-origin",
@@ -402,6 +433,8 @@
     "X-Content-Type-Options": "nosniff",
     "X-Frame-Options": "DENY"
   },
+  "security_headers_fingerprint": "0f3fe07655aa9e1b5f9f88d3758875fa71d85de402e647747d9fa0e017a25199",
+  "session_close_available": true,
   "static_asset_allowlist": [
     "/",
     "/index.html",
@@ -409,6 +442,12 @@
     "/app.js",
     "/live-console.js"
   ],
+  "static_asset_manifest_fingerprint": "fc550db840dfd2f6ff977ec2e55eeeb82737ef38ee40f0d6c95a11dec5463626",
+  "static_offline_fallback_mode_available": true,
+  "status_read_projection_available": true,
+  "strict_content_security_policy_available": true,
+  "strict_content_type_validation_available": true,
+  "strict_security_headers_available": true,
   "threat_model": [
     "binding to a public interface",
     "0.0.0.0 exposure",

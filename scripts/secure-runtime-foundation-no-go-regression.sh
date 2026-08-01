@@ -16,6 +16,18 @@ else
   AION235_IMPLEMENTATION_STATE_ACTIVE=0
 fi
 
+if [[ -f docs/secure-runtime-integration/program-ledger.json ]] && \
+  grep -q '"program_state": "operator_console_integrated_local_runtime_implemented_pending_final_evaluation"' docs/secure-runtime-integration/program-ledger.json && \
+  grep -q '"active_sri_implementation_authorization": "AION-236-SRI-0004"' docs/secure-runtime-integration/program-ledger.json && \
+  grep -q '"active_sri_implementation_task": "AION-237"' docs/secure-runtime-integration/program-ledger.json && \
+  grep -q '"formal_closeout_task": "AION-238"' docs/secure-runtime-integration/program-ledger.json && \
+  grep -q '"operator_console_integration_implemented": true' docs/secure-runtime-integration/program-ledger.json && \
+  grep -q '"integrated_authenticated_local_pilot_completed": true' docs/secure-runtime-integration/program-ledger.json; then
+  AION237_IMPLEMENTATION_STATE_ACTIVE=1
+else
+  AION237_IMPLEMENTATION_STATE_ACTIVE=0
+fi
+
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
 }
@@ -123,6 +135,29 @@ is_aion235_capability_runtime_source() {
   return 1
 }
 
+is_aion237_operator_console_source() {
+  [[ "$AION237_IMPLEMENTATION_STATE_ACTIVE" == "1" ]] || return 1
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/operator_console_integration.py|\
+    services/brain-api/src/aion_brain/operator_console_runtime/__init__.py|\
+    services/brain-api/src/aion_brain/operator_console_runtime/authorization.py|\
+    services/brain-api/src/aion_brain/operator_console_runtime/component_binding.py|\
+    services/brain-api/src/aion_brain/operator_console_runtime/origin_policy.py|\
+    services/brain-api/src/aion_brain/operator_console_runtime/request_nonce.py|\
+    services/brain-api/src/aion_brain/operator_console_runtime/session_bridge.py|\
+    services/brain-api/src/aion_brain/operator_console_runtime/request_router.py|\
+    services/brain-api/src/aion_brain/operator_console_runtime/view_models.py|\
+    services/brain-api/src/aion_brain/operator_console_runtime/local_http.py|\
+    services/brain-api/src/aion_brain/operator_console_runtime/audit.py|\
+    services/brain-api/src/aion_brain/operator_console_runtime/observability.py|\
+    services/brain-api/src/aion_brain/operator_console_runtime/integrity.py|\
+    services/brain-api/src/aion_brain/operator_console_runtime/evidence.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 is_allowed_change() {
   case "$1" in
     README.md|AGENTS.md|\
@@ -132,9 +167,10 @@ is_allowed_change() {
     docs/adr/0195-controlled-authenticated-local-operator-runtime-foundation.md|docs/adr/0196-secure-runtime-foundation-evaluation-and-controlled-model-gateway-authorization.md|\
 	    docs/adr/0197-controlled-provider-neutral-model-gateway-and-deterministic-reference-provider.md|docs/adr/0198-controlled-model-gateway-evaluation-and-sandboxed-capability-runtime-authorization.md|\
 	    docs/adr/0199-sandboxed-deterministic-capability-and-synthetic-connector-runtime.md|\
-	    docs/adr/0200-sandboxed-capability-runtime-evaluation-and-controlled-local-operator-console-integration-authorization.md|docs/adr/README.md|\
+	    docs/adr/0200-sandboxed-capability-runtime-evaluation-and-controlled-local-operator-console-integration-authorization.md|\
+	    docs/adr/0201-controlled-same-origin-loopback-operator-console-and-integrated-local-runtime.md|docs/adr/README.md|\
     examples/secure-runtime-integration/*|\
-    operator-console-static/index.html|operator-console-static/app.js|operator-console-static/README.md|\
+    operator-console-static/index.html|operator-console-static/app.js|operator-console-static/live-console.js|operator-console-static/styles.css|operator-console-static/README.md|\
     operator-console-static/demo-data/secure-runtime-integration-*.json|\
     operator-console-static/demo-data/secure-runtime-foundation-operator-evaluation.json|\
     operator-console-static/demo-data/model-gateway-*.json|\
@@ -148,7 +184,9 @@ is_allowed_change() {
 	    scripts/operator-console-static-check.sh|\
 	    scripts/role-filter-check.sh|\
 	    scripts/connector-no-go-regression.sh|\
+	    scripts/connector-*.sh|\
     scripts/connector-runtime-no-external-call-regression.sh|\
+    scripts/knowledge-intelligence-*-no-go-regression.sh|\
     scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh|\
     scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh|\
     scripts/knowledge-intelligence-domain-expert-mesh-operator-evaluation-no-go-regression.sh|\
@@ -160,8 +198,12 @@ is_allowed_change() {
 	    scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh|\
 	    scripts/knowledge-intelligence-verified-memory-operator-evaluation-no-go-regression.sh|\
 	    scripts/lib/cognitive_architecture_governance.py|\
+	    scripts/lib/portable-search.sh|\
 	    scripts/operator-action-write-path-no-go-regression.sh|\
+	    scripts/operator-platform-*.sh|\
+	    scripts/platform-integration-no-go-regression.sh|\
 	    scripts/post-v01-release-candidate-no-go-regression.sh|\
+    scripts/production-auth-*.sh|\
     scripts/production-auth-architecture-check.sh|\
     scripts/static-console-safety-check.sh|\
     scripts/secure-runtime-foundation-check.sh|scripts/secure-runtime-foundation-no-go-regression.sh|\
@@ -177,6 +219,9 @@ is_allowed_change() {
     scripts/capability-runtime-operator-evaluation-check.sh|scripts/capability-runtime-operator-evaluation-no-go-regression.sh|\
     scripts/operator-console-integration-authorization-check.sh|scripts/operator-console-integration-authorization-no-go-regression.sh|\
     scripts/operator-console-integration-runtime-hold.sh|\
+    scripts/operator-console-integrated-local-run.py|\
+    scripts/operator-console-integrated-pilot-evidence-check.sh|\
+    scripts/operator-console-integration-check.sh|scripts/operator-console-integration-no-go-regression.sh|\
     scripts/model-gateway-runtime-hold.sh|scripts/model-gateway-local-simulation-run.py|\
     scripts/secure-runtime-local-operator-run.py|\
     scripts/lib/secure_runtime_foundation_operator_evaluation.py|\
@@ -194,6 +239,7 @@ is_allowed_change() {
     scripts/production-auth-offline-identity-assertion-no-go-regression.sh|\
     scripts/production-auth-request-identity-no-go-regression.sh|\
     scripts/production-auth-request-identity-stabilization-no-go-regression.sh|\
+    scripts/v02-*.sh|\
     scripts/v02-actor-context-trust-boundary-authorization-check.sh|\
     scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh|\
     scripts/v02-identity-assertion-replay-protection-authorization-no-go-regression.sh|\
@@ -213,8 +259,12 @@ is_allowed_change() {
 	    services/brain-api/tests/capability_runtime_test_support.py|\
 	    services/brain-api/tests/capability_runtime_operator_evaluation_test_support.py|\
 	    services/brain-api/tests/operator_console_integration_test_support.py|\
+	    services/brain-api/tests/test_auth_prototype_review_docs.py|\
 	    services/brain-api/tests/test_capability_runtime_*.py|\
 	    services/brain-api/tests/test_operator_console_integration_*.py|\
+	    services/brain-api/tests/test_operator_console_integrated_*.py|\
+	    services/brain-api/tests/test_operator_platform_*.py|\
+	    services/brain-api/tests/test_static_console_ui_release_gate.py|\
 	    services/brain-api/tests/test_secure_runtime_current_state_after_aion236.py|\
     services/brain-api/tests/aion234_test_support.py)
       return 0
@@ -227,6 +277,9 @@ is_allowed_change() {
 	    return 0
 	  fi
 	  if is_aion235_capability_runtime_source "$1"; then
+	    return 0
+	  fi
+	  if is_aion237_operator_console_source "$1"; then
 	    return 0
 	  fi
   return 1

@@ -214,3 +214,4 @@ closure decision in ADR 0072.
 - [ADR 0199: Sandboxed Deterministic Capability and Synthetic Connector Runtime](0199-sandboxed-deterministic-capability-and-synthetic-connector-runtime.md)
 
 - [ADR 0200: Sandboxed Capability-Runtime Evaluation and Controlled Local Operator-Console Integration Authorization](0200-sandboxed-capability-runtime-evaluation-and-controlled-local-operator-console-integration-authorization.md)
+- [ADR 0201: Controlled Same-Origin Loopback Operator Console and Integrated Local Runtime](0201-controlled-same-origin-loopback-operator-console-and-integrated-local-runtime.md)

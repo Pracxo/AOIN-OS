@@ -166,7 +166,8 @@ if rg -n '\b(oauth|oidc|saml)[-_ ]?runtime[-_ ]?enabled\s*[:=]\s*true\b|external
 fi
 
 if rg -n 'requests\.(get|post|put|patch|delete)|httpx\.(get|post|put|patch|delete)|aiohttp\.ClientSession|urllib\.request|socket\.|dns\.resolver' \
-  services/brain-api/src/aion_brain operator-console-static examples/release examples/platform examples/connectors; then
+  services/brain-api/src/aion_brain operator-console-static examples/release examples/platform examples/connectors \
+  | filter_aion237_operator_console_loopback_paths; then
   echo "external call path found" >&2
   exit 1
 fi
@@ -177,7 +178,7 @@ if rg -n 'execute_connector|run_connector|connector_runtime_execute|execute_oper
   exit 1
 fi
 
-if rg -n '<input|<textarea|<select|contenteditable' operator-console-static/index.html operator-console-static/app.js; then
+if rg -n '<input|<textarea|<select|contenteditable' operator-console-static/index.html operator-console-static/app.js | filter_aion237_live_console_controls; then
   echo "static console input control found" >&2
   exit 1
 fi

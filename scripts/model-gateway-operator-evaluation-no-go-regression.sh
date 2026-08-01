@@ -32,6 +32,11 @@ AION235_SOURCE_ALLOWED_STATES = {
         "AION-237",
         "AION-238",
     ),
+    "operator_console_integrated_local_runtime_implemented_pending_final_evaluation": (
+        "AION-236-SRI-0004",
+        "AION-237",
+        "AION-238",
+    ),
 }
 ALLOWED_PREFIXES = (
     "docs/",
@@ -64,6 +69,24 @@ PROHIBITED_NAMES = {
 PROHIBITED_AION235_SOURCE = (
     "services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime.py",
     "services/brain-api/src/aion_brain/capability_runtime/",
+)
+AION237_SOURCE_EXACT = {
+    "services/brain-api/src/aion_brain/contracts/operator_console_integration.py",
+    "scripts/operator-console-integrated-local-run.py",
+    "scripts/operator-console-integration-check.sh",
+    "scripts/operator-console-integration-no-go-regression.sh",
+    "scripts/operator-console-integrated-pilot-evidence-check.sh",
+    "scripts/operator-console-integration-authorization-check.sh",
+    "scripts/operator-console-integration-authorization-no-go-regression.sh",
+    "scripts/operator-console-integration-runtime-hold.sh",
+    "scripts/operator-console-static-check.sh",
+    "scripts/static-console-safety-check.sh",
+}
+AION237_SOURCE_PREFIXES = (
+    "services/brain-api/src/aion_brain/operator_console_runtime/",
+    "operator-console-static/",
+    "docs/",
+    "examples/",
 )
 PROHIBITED_IMPORT_ROOTS = {
     "aiohttp",
@@ -143,7 +166,24 @@ def aion235_implementation_state_active() -> bool:
     )
 
 
+def aion237_implementation_state_active() -> bool:
+    ledger = ROOT / "docs/secure-runtime-integration/program-ledger.json"
+    if not ledger.exists():
+        return False
+    payload = json.loads(ledger.read_text(encoding="utf-8"))
+    return (
+        payload.get("program_state")
+        == "operator_console_integrated_local_runtime_implemented_pending_final_evaluation"
+        and payload.get("operator_console_integration_implemented") is True
+        and payload.get("integrated_authenticated_local_pilot_completed") is True
+        and payload.get("active_sri_implementation_authorization") == "AION-236-SRI-0004"
+        and payload.get("active_sri_implementation_task") == "AION-237"
+        and payload.get("formal_closeout_task") == "AION-238"
+    )
+
+
 aion235_active = aion235_implementation_state_active()
+aion237_active = aion237_implementation_state_active()
 changed_paths: set[str] = set()
 for parts in changed_entries():
     status = parts[0]
@@ -161,6 +201,10 @@ for parts in changed_entries():
                     f"AION-235 source is not authorized on AION-234 branch: {path}"
                 )
             continue
+        if path in AION237_SOURCE_EXACT or path.startswith(AION237_SOURCE_PREFIXES):
+            if not aion237_active:
+                raise SystemExit(f"AION-237 source is not authorized yet: {path}")
+            continue
         if path.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/dependency path changed: {path}")
         if not allowed_path(path):
@@ -173,6 +217,18 @@ if not aion235_active:
             raise SystemExit(
                 f"AION-235 source exists before authorization implementation task: {path}"
             )
+
+if not aion237_active:
+    for path in sorted(AION237_SOURCE_EXACT):
+        target = ROOT / path
+        if target.exists():
+            raise SystemExit(f"AION-237 source exists before implementation state: {path}")
+    for prefix in AION237_SOURCE_PREFIXES:
+        if not prefix.startswith("services/brain-api/src/aion_brain/"):
+            continue
+        target = ROOT / prefix
+        if target.exists():
+            raise SystemExit(f"AION-237 source exists before implementation state: {prefix}")
 
 harness = ROOT / "scripts/lib/model_gateway_operator_evaluation.py"
 if harness.exists():

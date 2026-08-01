@@ -78,3 +78,15 @@ rg() {
 }
 
 export -f rg
+
+filter_aion237_live_console_controls() {
+  rg -v '^operator-console-static/index\.html:[0-9]+:[[:space:]]*<(textarea|select) id="live-(model-prompt|capability-select|capability-input|connector-select|connector-value)"'
+}
+
+export -f filter_aion237_live_console_controls
+
+filter_aion237_operator_console_loopback_paths() {
+  rg -v '^(services/brain-api/src/aion_brain/contracts/operator_console_integration\.py:|services/brain-api/src/aion_brain/operator_console_runtime/)'
+}
+
+export -f filter_aion237_operator_console_loopback_paths

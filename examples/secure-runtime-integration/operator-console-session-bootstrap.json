@@ -1,9 +1,13 @@
 {
   "authorization_transaction_id": "AION-236-SRI-0004",
   "browser_persistence_enabled": false,
+  "browser_public_key_input_enabled": false,
+  "browser_supplies_assertion": false,
+  "browser_supplies_identity": false,
   "capability_runtime_component": "AION-235 sandboxed deterministic reference runtime",
   "model_gateway_component": "AION-233 deterministic reference provider",
   "mutation_nonce_ephemeral": true,
+  "raw_nonce_retained": false,
   "redacted_projection_only": true,
   "requires_aion_231_operator_session": true,
   "schema_version": "aion-operator-console-session-bootstrap/v1"

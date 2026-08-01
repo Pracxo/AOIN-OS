@@ -57,6 +57,10 @@ post_closeout_states = {
         "AION-236-SRI-0004",
         "AION-237",
     ),
+    "operator_console_integrated_local_runtime_implemented_pending_final_evaluation": (
+        "AION-236-SRI-0004",
+        "AION-237",
+    ),
 }
 if PROGRAM.get("program_state") in post_closeout_states:
     if closed_aion232["authorization_active"] is not False or closed_aion232["authorization_consumed"] is not True or closed_aion232["authorization_expired"] is not True or closed_aion232["authorization_reusable"] is not False:

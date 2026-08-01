@@ -15,6 +15,7 @@ export AION_REPO_ROOT="$ROOT_DIR"
 from __future__ import annotations
 
 import os
+import json
 import subprocess
 from pathlib import Path
 
@@ -42,6 +43,24 @@ PROHIBITED_AION_237_SOURCE = (
     "operator-console-static/live-console.js",
     "scripts/operator-console-integrated-local-run.py",
 )
+AION_237_ALLOWED_PREFIXES = (
+    "services/brain-api/src/aion_brain/operator_console_runtime/",
+    "operator-console-static/",
+    "docs/",
+    "examples/",
+)
+AION_237_ALLOWED_EXACT = {
+    "services/brain-api/src/aion_brain/contracts/operator_console_integration.py",
+    "scripts/operator-console-integrated-local-run.py",
+    "scripts/operator-console-integration-check.sh",
+    "scripts/operator-console-integration-no-go-regression.sh",
+    "scripts/operator-console-integrated-pilot-evidence-check.sh",
+    "scripts/operator-console-integration-authorization-check.sh",
+    "scripts/operator-console-integration-authorization-no-go-regression.sh",
+    "scripts/operator-console-integration-runtime-hold.sh",
+    "scripts/operator-console-static-check.sh",
+    "scripts/static-console-safety-check.sh",
+}
 
 
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -84,13 +103,28 @@ def changed_entries() -> list[list[str]]:
     return entries
 
 
-for path in PROHIBITED_AION_237_SOURCE:
-    candidate = ROOT / path
-    if path.endswith("/"):
-        if candidate.is_dir():
+def aion237_implemented() -> bool:
+    ledger = ROOT / "docs/secure-runtime-integration/program-ledger.json"
+    if not ledger.exists():
+        return False
+    payload = json.loads(ledger.read_text(encoding="utf-8"))
+    return (
+        payload.get("operator_console_integration_implemented") is True
+        and payload.get("integrated_authenticated_local_pilot_completed") is True
+        and payload.get("active_sri_implementation_authorization") == "AION-236-SRI-0004"
+        and payload.get("formal_closeout_task") == "AION-238"
+    )
+
+
+aion237_active = aion237_implemented()
+if not aion237_active:
+    for path in PROHIBITED_AION_237_SOURCE:
+        candidate = ROOT / path
+        if path.endswith("/"):
+            if candidate.is_dir():
+                raise SystemExit(f"AION-237 source must not exist on AION-236 branch: {path}")
+        elif candidate.exists():
             raise SystemExit(f"AION-237 source must not exist on AION-236 branch: {path}")
-    elif candidate.exists():
-        raise SystemExit(f"AION-237 source must not exist on AION-236 branch: {path}")
 
 for parts in changed_entries():
     if parts[0].startswith(("D", "R")):
@@ -102,8 +136,15 @@ for parts in changed_entries():
         if path.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited release path changed: {path}")
         if path.startswith("services/brain-api/src/aion_brain/"):
-            raise SystemExit(f"runtime source change is not authorized on AION-236 branch: {path}")
-        if path.startswith(PROHIBITED_AION_237_SOURCE):
+            allowed_aion237 = (
+                aion237_active
+                and (path in AION_237_ALLOWED_EXACT or path.startswith(AION_237_ALLOWED_PREFIXES))
+            )
+            if not allowed_aion237:
+                raise SystemExit(
+                    f"runtime source change is not authorized on AION-236 branch: {path}"
+                )
+        if path.startswith(PROHIBITED_AION_237_SOURCE) and not aion237_active:
             raise SystemExit(f"AION-237 implementation path changed too early: {path}")
 PY
 

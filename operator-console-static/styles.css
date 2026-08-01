@@ -685,6 +685,131 @@ pre {
   color: var(--accent);
 }
 
+.live-runtime-panel {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgb(10 14 20 / 86%);
+}
+
+.live-runtime-grid,
+.live-control-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.runtime-status-card,
+.live-control-card,
+.live-output-panel {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.runtime-status-card h3,
+.live-control-card h3,
+.live-output-panel h3 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.runtime-status-card output {
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.trust-warning {
+  margin: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--warn);
+  border-radius: 8px;
+  color: var(--warn);
+}
+
+.live-control-card label {
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.live-control-card textarea,
+.live-control-card select {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #070a0f;
+  color: var(--text);
+  font: inherit;
+}
+
+.live-control-card textarea {
+  resize: vertical;
+  padding: 10px;
+  line-height: 1.5;
+}
+
+.live-control-card select {
+  padding: 10px;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.live-action {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel-strong);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.live-action:hover,
+.live-action:focus-visible {
+  border-color: var(--accent);
+}
+
+.live-action.primary {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.live-action.secondary {
+  color: var(--muted);
+}
+
+.live-action.danger {
+  border-color: var(--blocked);
+  color: var(--blocked);
+}
+
+.live-action:disabled {
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.live-output-panel pre {
+  max-height: 280px;
+  margin: 0;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: var(--muted);
+}
+
 #v02-decision-package-final-review,
 #v02-runtime-decision-lock,
 #v02-approval-docket-preview,
@@ -733,7 +858,8 @@ pre {
   .role-tab,
   .view-tab,
   .group-tab,
-  .copy-command {
+  .copy-command,
+  .live-action {
     width: 100%;
   }
 

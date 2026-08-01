@@ -14,6 +14,7 @@ export AION_REPO_ROOT="$ROOT_DIR"
 from __future__ import annotations
 
 import ast
+import json
 import os
 import subprocess
 from pathlib import Path
@@ -39,6 +40,22 @@ SOURCE_SCOPE = {
     "services/brain-api/src/aion_brain/capability_runtime/observability.py",
     "services/brain-api/src/aion_brain/capability_runtime/integrity.py",
     "services/brain-api/src/aion_brain/capability_runtime/evidence.py",
+}
+AION237_SOURCE_SCOPE = {
+    "services/brain-api/src/aion_brain/contracts/operator_console_integration.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/__init__.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/authorization.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/component_binding.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/origin_policy.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/request_nonce.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/session_bridge.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/request_router.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/view_models.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/local_http.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/audit.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/observability.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/integrity.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/evidence.py",
 }
 PROHIBITED_SOURCE = {
     "services/brain-api/src/aion_brain/capability_runtime/network.py",
@@ -131,6 +148,20 @@ def changed_entries() -> list[list[str]]:
     return entries
 
 
+def aion237_source_allowed() -> bool:
+    ledger = ROOT / "docs/secure-runtime-integration/program-ledger.json"
+    if not ledger.exists():
+        return False
+    payload = json.loads(ledger.read_text(encoding="utf-8"))
+    return (
+        payload.get("operator_console_integration_implemented") is True
+        and payload.get("integrated_authenticated_local_pilot_completed") is True
+        and payload.get("active_sri_implementation_authorization") == "AION-236-SRI-0004"
+        and payload.get("formal_closeout_task") == "AION-238"
+    )
+
+
+aion237_allowed = aion237_source_allowed()
 for path in SOURCE_SCOPE:
     if not (ROOT / path).is_file():
         raise SystemExit(f"missing AION-235 runtime source: {path}")
@@ -148,7 +179,7 @@ for parts in changed_entries():
         if path.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited release path changed: {path}")
         if path.startswith("services/brain-api/src/aion_brain/"):
-            if path not in SOURCE_SCOPE:
+            if path not in SOURCE_SCOPE and not (aion237_allowed and path in AION237_SOURCE_SCOPE):
                 raise SystemExit(f"source change outside AION-235 scope: {path}")
         if path == "scripts/capability-runtime-local-sandbox-run.py":
             continue

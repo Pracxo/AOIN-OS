@@ -1,0 +1,21 @@
+{
+  "authorization_transaction_id": "AION-236-SRI-0004",
+  "browser_persistence_enabled": false,
+  "capability_runtime_component_binding_fingerprint": "706f3d8e740a4cd2593c50e4c09bd73956b6cfdf96c539120044bfe28fdbccfc",
+  "capability_runtime_implementation_task": "AION-235",
+  "current_authorization": "AION-236-SRI-0004",
+  "external_network_egress_enabled": false,
+  "model_gateway_component_binding_fingerprint": "48eb82139f07f51e752d6fd2cb9568e224e5dd8b0671c4dfcc1c6c33c735eb94",
+  "model_gateway_implementation_task": "AION-233",
+  "production_effect": false,
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "public_listener_enabled": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "schema_version": "aion-operator-console-component-binding/v1",
+  "secure_runtime_component_binding_fingerprint": "38f061df47ec7864edde1a476561bc8284676291288f6451b9556573658629a9",
+  "secure_runtime_implementation_task": "AION-231",
+  "synthetic": true
+}

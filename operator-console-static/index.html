@@ -1497,6 +1497,138 @@
           </p>
         </section>
       </section>
+
+      <section class="live-runtime-panel" id="live-local-runtime" aria-labelledby="live-runtime-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Live Local Runtime</p>
+            <h2 id="live-runtime-title">Live Local Runtime</h2>
+            <p class="panel-summary">
+              Same-origin loopback controls for a pre-authenticated local operator session.
+              Model output is untrusted, connector writes are preview-only, and offline static
+              mode remains available until live mode is explicitly activated.
+            </p>
+          </div>
+          <button
+            class="live-action primary"
+            type="button"
+            data-live-control="activate"
+            id="live-activate"
+          >
+            Activate Live Local Session
+          </button>
+        </div>
+
+        <div class="live-runtime-grid" aria-label="Live local runtime status">
+          <article class="runtime-status-card">
+            <h3>Local Session</h3>
+            <output id="live-session-status" aria-live="polite">offline static fallback</output>
+          </article>
+          <article class="runtime-status-card">
+            <h3>Authorization</h3>
+            <output id="live-authorization-status" aria-live="polite">not bootstrapped</output>
+          </article>
+          <article class="runtime-status-card">
+            <h3>Loopback and Same Origin</h3>
+            <output id="live-origin-status" aria-live="polite">inactive</output>
+          </article>
+          <article class="runtime-status-card">
+            <h3>Kill Switch</h3>
+            <output id="live-kill-status" aria-live="polite">clear until activated</output>
+          </article>
+        </div>
+
+        <p class="trust-warning" id="live-model-trust-warning">
+          Model output is untrusted proposal material and cannot trigger execution.
+        </p>
+
+        <div class="live-control-grid" aria-label="Live local runtime controls">
+          <article class="live-control-card">
+            <h3>Model Simulation</h3>
+            <label for="live-model-prompt">Bounded model prompt</label>
+            <textarea id="live-model-prompt" rows="4">Summarize the local runtime state.</textarea>
+            <div class="button-row">
+              <button class="live-action" type="button" data-live-control="model-text">
+                Run text simulation
+              </button>
+              <button class="live-action" type="button" data-live-control="model-json">
+                Run structured simulation
+              </button>
+            </div>
+          </article>
+
+          <article class="live-control-card">
+            <h3>Capability Execution</h3>
+            <label for="live-capability-select">Explicit capability selector</label>
+            <select id="live-capability-select">
+              <option value="capability.text.normalize">capability.text.normalize</option>
+              <option value="capability.hash.sha256">capability.hash.sha256</option>
+              <option value="capability.json.validate">capability.json.validate</option>
+            </select>
+            <label for="live-capability-input">Bounded capability input</label>
+            <textarea id="live-capability-input" rows="4">AION Runtime</textarea>
+            <button class="live-action" type="button" data-live-control="capability">
+              Run selected capability
+            </button>
+          </article>
+
+          <article class="live-control-card">
+            <h3>Synthetic Connector</h3>
+            <label for="live-connector-select">Synthetic connector selector</label>
+            <select id="live-connector-select">
+              <option value="connector.reference.read.simulate">reference read simulation</option>
+              <option value="connector.reference.write.preview">reference write preview</option>
+            </select>
+            <label for="live-connector-value">Synthetic write-preview value</label>
+            <textarea id="live-connector-value" rows="4">{"status":"previewed"}</textarea>
+            <div class="button-row">
+              <button class="live-action" type="button" data-live-control="connector-read">
+                Run connector read
+              </button>
+              <button class="live-action" type="button" data-live-control="connector-preview">
+                Preview connector write
+              </button>
+            </div>
+          </article>
+
+          <article class="live-control-card">
+            <h3>Read Projections</h3>
+            <div class="button-row">
+              <button class="live-action" type="button" data-live-control="status">Refresh status</button>
+              <button class="live-action" type="button" data-live-control="health">Refresh health</button>
+              <button class="live-action" type="button" data-live-control="observability">
+                Refresh observability
+              </button>
+              <button class="live-action" type="button" data-live-control="audit">Refresh audit</button>
+            </div>
+          </article>
+
+          <article class="live-control-card terminal-controls">
+            <h3>Terminal Controls</h3>
+            <div class="button-row">
+              <button class="live-action danger" type="button" data-live-control="kill">
+                Kill local session
+              </button>
+              <button class="live-action" type="button" data-live-control="close">
+                Close local session
+              </button>
+              <button class="live-action secondary" type="button" data-live-control="clear">
+                Clear Transient Output
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <section class="live-output-panel" aria-labelledby="live-receipt-title">
+          <h3 id="live-receipt-title">Redacted Receipt View</h3>
+          <pre id="live-receipt-view" tabindex="0">No live receipt yet.</pre>
+        </section>
+
+        <section class="live-output-panel" aria-labelledby="live-event-title">
+          <h3 id="live-event-title">Local Event View</h3>
+          <pre id="live-event-view" aria-live="polite" tabindex="0">Live mode inactive.</pre>
+        </section>
+      </section>
     </main>
 
     <footer class="safety-footer">
@@ -1514,6 +1646,7 @@
     </footer>
 
     <script src="app.js"></script>
+    <script src="live-console.js"></script>
   </body>
 </html>
 

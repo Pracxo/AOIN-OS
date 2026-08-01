@@ -220,9 +220,12 @@ allowed_connector_api_files = {
     "services/brain-api/src/aion_brain/api/connector_sandbox.py",
     "services/brain-api/src/aion_brain/api/connector_credentials.py",
 }
+allowed_non_api_router_files = {
+    "services/brain-api/src/aion_brain/operator_console_runtime/request_router.py",
+}
 
 for relative in sorted(changed):
-    if relative in allowed_connector_api_files:
+    if relative in allowed_connector_api_files or relative in allowed_non_api_router_files:
         continue
     parts = set(Path(relative).parts)
     if "migrations" in parts:

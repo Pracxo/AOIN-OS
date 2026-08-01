@@ -9,6 +9,7 @@ required_files=(
   operator-console-static/index.html
   operator-console-static/styles.css
   operator-console-static/app.js
+  operator-console-static/live-console.js
 )
 
 for file in "${required_files[@]}"; do
@@ -75,7 +76,8 @@ if rg -n '<form|<input|type=["'\'']password|name=["'\'']?(password|token|cookie|
   exit 1
 fi
 
-if rg -n 'localStorage|sessionStorage' operator-console-static/app.js; then
+if rg -n 'localStorage|sessionStorage|indexedDB|document\.cookie|serviceWorker|WebSocket|EventSource' \
+  operator-console-static/app.js operator-console-static/live-console.js; then
   echo "browser storage usage found" >&2
   exit 1
 fi
@@ -91,6 +93,12 @@ for key in raw_prompt hidden_reasoning secret credential token authorization bea
     exit 1
   }
 done
+
+if rg -n 'https?://|(^|[^:])//[A-Za-z0-9_.-]|credentials:[[:space:]]*["'\'']include["'\'']|eval\(|new Function|import\(' \
+  operator-console-static/live-console.js; then
+  echo "unsafe live-console.js runtime behavior found" >&2
+  exit 1
+fi
 
 grep -q "loadDemo" operator-console-static/app.js || {
   echo "demo fallback loader missing" >&2
@@ -156,6 +164,8 @@ for match in button_pattern.finditer(html):
     attrs = match.group("attrs").lower()
     text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", match.group("body"))).strip().lower()
     if any(word in text for word in danger_words):
+        if "data-live-control" in attrs:
+            continue
         if "disabled" not in attrs:
             raise SystemExit(f"dangerous enabled button found: {text}")
         if not text.startswith(safe_negative):
@@ -386,6 +396,22 @@ allowed_authorization_demo_names = {
     "operator-console-action-boundary.json",
     "operator-console-integration-authorization.json",
     "operator-console-integration-runtime-hold.json",
+    "operator-console-integration-component-binding.json",
+    "operator-console-static-asset-manifest.json",
+    "operator-console-mutation-nonce-state.json",
+    "operator-console-session-status.json",
+    "operator-console-health.json",
+    "operator-console-observability.json",
+    "operator-console-audit.json",
+    "operator-console-model-simulation.json",
+    "operator-console-capability-execution.json",
+    "operator-console-connector-read.json",
+    "operator-console-connector-write-preview.json",
+    "operator-console-kill-switch-result.json",
+    "operator-console-session-close-result.json",
+    "operator-console-receipt-projection.json",
+    "operator-console-integrity.json",
+    "operator-console-runtime-boundary.json",
     "operator-console-origin-policy.json",
     "operator-console-route-manifest.json",
     "operator-console-security-headers.json",
@@ -451,6 +477,22 @@ operator_console_demo_names = {
     "operator-console-action-boundary.json",
     "operator-console-integration-authorization.json",
     "operator-console-integration-runtime-hold.json",
+    "operator-console-integration-component-binding.json",
+    "operator-console-static-asset-manifest.json",
+    "operator-console-mutation-nonce-state.json",
+    "operator-console-session-status.json",
+    "operator-console-health.json",
+    "operator-console-observability.json",
+    "operator-console-audit.json",
+    "operator-console-model-simulation.json",
+    "operator-console-capability-execution.json",
+    "operator-console-connector-read.json",
+    "operator-console-connector-write-preview.json",
+    "operator-console-kill-switch-result.json",
+    "operator-console-session-close-result.json",
+    "operator-console-receipt-projection.json",
+    "operator-console-integrity.json",
+    "operator-console-runtime-boundary.json",
     "operator-console-origin-policy.json",
     "operator-console-route-manifest.json",
     "operator-console-security-headers.json",
@@ -594,7 +636,6 @@ for path in sorted((static_dir / "demo-data").glob("*.json")):
             "ipv6_unspecified_binding_enabled",
             "model_output_triggered_execution_enabled",
             "model_weight_training_enabled",
-            "operator_console_integration_implemented",
             "production_deployment_enabled",
             "production_runtime_authorized",
             "production_write_execution_enabled",
@@ -604,6 +645,16 @@ for path in sorted((static_dir / "demo-data").glob("*.json")):
         ):
             if key in payload and payload.get(key) is not False:
                 raise SystemExit(f"{key} must be false in {path}")
+        if (
+            "operator_console_integration_implemented" in payload
+            and payload.get("operator_console_integration_implemented") is not True
+        ):
+            raise SystemExit(f"operator console implementation flag mismatch in {path}")
+        if (
+            "integrated_authenticated_local_pilot_completed" in payload
+            and payload.get("integrated_authenticated_local_pilot_completed") is not True
+        ):
+            raise SystemExit(f"operator console pilot flag mismatch in {path}")
         for key in ("loopback_listener_absent", "same_origin_required"):
             if key in payload and payload.get(key) is not True:
                 raise SystemExit(f"{key} must be true in {path}")

@@ -1547,4 +1547,10 @@ AION-233 local gates:
 
 AION-236 adds static-only demo data for the capability-runtime operator evaluation and controlled Operator Console integration authorization. The panels are backed by `demo-data/capability-runtime-operator-evaluation.json`, `demo-data/operator-console-integration-authorization.json`, `demo-data/operator-console-route-manifest.json`, and `demo-data/operator-console-integration-runtime-hold.json`.
 
-These panels do not add live bridge behavior. AION-237 remains authorized but not implemented. Public listening, external egress, browser persistence, provider calls, external connectors, real tools, credentials, tokens and production writes remain disabled.
+These AION-236 panels remain static evidence. AION-237 adds the explicitly activated Live Local Runtime section below while keeping public listening, external egress, browser persistence, provider calls, external connectors, real tools, credentials, tokens and production writes disabled.
+
+## Live Local Runtime
+
+AION-237 adds an explicitly activated Live Local Runtime section. It uses relative same-origin `/aion/local/v1/` routes only after the operator activates the local session. The browser stores no cookies, credentials, tokens, or persistent browser state. Model output remains untrusted, connector writes are preview-only, and the offline static demo mode remains available when no local loopback listener is running.
+
+Offline AION-237 evidence is bundled under `demo-data/operator-console-*`.

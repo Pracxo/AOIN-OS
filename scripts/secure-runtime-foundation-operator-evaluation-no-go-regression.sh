@@ -74,6 +74,10 @@ AION235_SOURCE_EXACT = {
     "services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime.py",
 }
 AION235_SOURCE_PREFIXES = ("services/brain-api/src/aion_brain/capability_runtime/",)
+AION237_SOURCE_EXACT = {
+    "services/brain-api/src/aion_brain/contracts/operator_console_integration.py",
+}
+AION237_SOURCE_PREFIXES = ("services/brain-api/src/aion_brain/operator_console_runtime/",)
 
 
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -138,7 +142,31 @@ def aion235_source_allowed(path: str) -> bool:
     )
 
 
+def aion237_implementation_state_active() -> bool:
+    ledger = ROOT / "docs/secure-runtime-integration/program-ledger.json"
+    if not ledger.exists():
+        return False
+    payload = json.loads(ledger.read_text(encoding="utf-8"))
+    return (
+        payload.get("program_state")
+        == "operator_console_integrated_local_runtime_implemented_pending_final_evaluation"
+        and payload.get("operator_console_integration_implemented") is True
+        and payload.get("integrated_authenticated_local_pilot_completed") is True
+        and payload.get("active_sri_implementation_authorization") == "AION-236-SRI-0004"
+        and payload.get("active_sri_implementation_task") == "AION-237"
+        and payload.get("formal_closeout_task") == "AION-238"
+    )
+
+
+def aion237_source_allowed(path: str) -> bool:
+    return (
+        aion237_active
+        and (path in AION237_SOURCE_EXACT or path.startswith(AION237_SOURCE_PREFIXES))
+    )
+
+
 aion235_active = aion235_implementation_state_active()
+aion237_active = aion237_implementation_state_active()
 for parts in changed_entries():
     status = parts[0]
     paths = parts[1:]
@@ -151,6 +179,8 @@ for parts in changed_entries():
         if normalized in AION233_SOURCE_EXACT:
             continue
         if aion235_source_allowed(normalized):
+            continue
+        if aion237_source_allowed(normalized):
             continue
         if normalized.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/dependency path changed: {normalized}")

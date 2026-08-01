@@ -164,7 +164,7 @@ if rg -n 'execute_connector|run_connector|connector_runtime_execute|execute_oper
   exit 1
 fi
 
-if rg -n '<input|<textarea|<select|contenteditable' operator-console-static/index.html operator-console-static/app.js; then
+if rg -n '<input|<textarea|<select|contenteditable' operator-console-static/index.html operator-console-static/app.js | filter_aion237_live_console_controls; then
   echo "static console input control found" >&2
   exit 1
 fi

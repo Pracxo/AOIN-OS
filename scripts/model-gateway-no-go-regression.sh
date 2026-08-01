@@ -32,6 +32,11 @@ AION235_SOURCE_ALLOWED_STATES = {
         "AION-237",
         "AION-238",
     ),
+    "operator_console_integrated_local_runtime_implemented_pending_final_evaluation": (
+        "AION-236-SRI-0004",
+        "AION-237",
+        "AION-238",
+    ),
 }
 
 AION233_SOURCE = {
@@ -57,6 +62,10 @@ AION235_SOURCE_EXACT = {
     "services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime.py",
 }
 AION235_SOURCE_PREFIXES = ("services/brain-api/src/aion_brain/capability_runtime/",)
+AION237_SOURCE_EXACT = {
+    "services/brain-api/src/aion_brain/contracts/operator_console_integration.py",
+}
+AION237_SOURCE_PREFIXES = ("services/brain-api/src/aion_brain/operator_console_runtime/",)
 RUNNER = "scripts/model-gateway-local-simulation-run.py"
 ALLOWED_PREFIXES = (
     "docs/",
@@ -187,10 +196,17 @@ def aion235_source_allowed(path: str) -> bool:
     return path in AION235_SOURCE_EXACT or path.startswith(AION235_SOURCE_PREFIXES)
 
 
+def aion237_source_allowed(path: str) -> bool:
+    if not aion235_active:
+        return False
+    return path in AION237_SOURCE_EXACT or path.startswith(AION237_SOURCE_PREFIXES)
+
+
 def allowed(path: str) -> bool:
     return (
         path in AION233_SOURCE
         or aion235_source_allowed(path)
+        or aion237_source_allowed(path)
         or path in ALLOWED_EXACT
         or path.startswith(ALLOWED_PREFIXES)
     )
@@ -215,6 +231,7 @@ for parts in changed_entries():
             path.startswith("services/brain-api/src/aion_brain/")
             and path not in AION233_SOURCE
             and not aion235_source_allowed(path)
+            and not aion237_source_allowed(path)
         ):
             raise SystemExit(f"only exact AION-233 model-gateway source may change: {path}")
         if not allowed(path):

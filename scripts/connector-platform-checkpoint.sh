@@ -50,6 +50,10 @@ filter_aion219_public_research_scan_paths() {
   rg -v '^(services/brain-api/src/aion_brain/contracts/knowledge_public_research_pilot\.py|services/brain-api/src/aion_brain/knowledge_intelligence/public_research_(claims|dns|evidence|http_transport|integrity|pilot|policy|session)\.py):'
 }
 
+filter_aion237_operator_console_scan_paths() {
+  rg -v '^(services/brain-api/src/aion_brain/contracts/operator_console_integration\.py:|services/brain-api/src/aion_brain/operator_console_runtime/)'
+}
+
 checkpoint_docs=(
   docs/connectors/connector-platform-checkpoint.md
   docs/connectors/connector-phase-evidence-pack.md
@@ -168,7 +172,8 @@ fi
 if rg -n 'requests\.(get|post|put|patch|delete)|httpx\.(get|post|put|patch|delete)|aiohttp\.ClientSession|urllib\.request|socket\.|dns\.resolver' \
   services/brain-api/src/aion_brain operator-console-static examples/connectors \
   | filter_aion162_identity_assertion_scan_paths \
-  | filter_aion219_public_research_scan_paths; then
+  | filter_aion219_public_research_scan_paths \
+  | filter_aion237_operator_console_scan_paths; then
   echo "connector platform external call pattern found" >&2
   exit 1
 fi
@@ -185,7 +190,7 @@ if rg -n 'execute_connector|run_connector|connector_runtime_execute' \
   exit 1
 fi
 
-if rg -n '<input|<textarea|<select|contenteditable' operator-console-static/index.html operator-console-static/app.js; then
+if rg -n '<input|<textarea|<select|contenteditable' operator-console-static/index.html operator-console-static/app.js | filter_aion237_live_console_controls; then
   echo "static console input control found" >&2
   exit 1
 fi

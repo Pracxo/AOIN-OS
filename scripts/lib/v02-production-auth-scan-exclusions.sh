@@ -408,6 +408,9 @@ aion151_is_scoped_authorization_path() {
       if aion228_is_scoped_governed_learning_memory_continual_learning_path "$1"; then
         return 0
       fi
+      if aion237_is_scoped_operator_console_integrated_local_runtime_path "$1"; then
+        return 0
+      fi
       return 1
       ;;
   esac
@@ -2444,6 +2447,71 @@ aion235_is_scoped_sandboxed_capability_runtime_path() {
     services/brain-api/tests/test_secure_runtime_current_state_*.py|\
     services/brain-api/tests/test_secure_runtime_integration_*.py|\
     services/brain-api/tests/test_model_gateway_current_state_consistency.py)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+aion237_is_scoped_operator_console_integrated_local_runtime_path() {
+  if [[ ! -f docs/secure-runtime-integration/program-ledger.json ]] || \
+    ! grep -q '"program_state": "operator_console_integrated_local_runtime_implemented_pending_final_evaluation"' docs/secure-runtime-integration/program-ledger.json || \
+    ! grep -q '"active_sri_implementation_authorization": "AION-236-SRI-0004"' docs/secure-runtime-integration/program-ledger.json || \
+    ! grep -q '"active_sri_implementation_task": "AION-237"' docs/secure-runtime-integration/program-ledger.json || \
+    ! grep -q '"formal_closeout_task": "AION-238"' docs/secure-runtime-integration/program-ledger.json; then
+    return 1
+  fi
+  case "$1" in
+    README.md|AGENTS.md|\
+    docs/project-status.md|docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/visual-brain.md|\
+    docs/secure-runtime-integration/*|\
+    docs/release/operator-console-*|\
+    docs/release/capability-runtime-*|\
+    docs/release/v02-release-readiness-delta.md|\
+    docs/adr/0201-controlled-same-origin-loopback-operator-console-and-integrated-local-runtime.md|\
+    docs/adr/README.md|\
+    examples/secure-runtime-integration/operator-console-*.json|\
+    operator-console-static/README.md|\
+    operator-console-static/app.js|\
+    operator-console-static/index.html|\
+    operator-console-static/live-console.js|\
+    operator-console-static/styles.css|\
+    operator-console-static/demo-data/operator-console-*.json|\
+    scripts/operator-console-integrated-local-run.py|\
+    scripts/operator-console-integrated-pilot-evidence-check.sh|\
+    scripts/operator-console-integration-*.sh|\
+    scripts/operator-console-static-check.sh|\
+    scripts/static-console-safety-check.sh|\
+    scripts/auth-design-check.sh|\
+    scripts/auth-no-go-regression.sh|\
+    scripts/auth-runtime-check.sh|\
+    scripts/local-auth-check.sh|\
+    scripts/local-session-check.sh|\
+    scripts/role-filter-check.sh|\
+    scripts/capability-runtime-*.sh|\
+    scripts/connector-*.sh|\
+    scripts/knowledge-intelligence-*-no-go-regression.sh|\
+    scripts/model-gateway-*.sh|\
+    scripts/operator-platform-*.sh|\
+    scripts/platform-integration-no-go-regression.sh|\
+    scripts/post-v01-release-candidate-no-go-regression.sh|\
+    scripts/secure-runtime-foundation-*.sh|\
+    scripts/secure-runtime-integration-*.sh|\
+    scripts/v02-*.sh|\
+    scripts/lib/cognitive_architecture_governance.py|\
+    scripts/lib/portable-search.sh|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    services/brain-api/src/aion_brain/contracts/operator_console_integration.py|\
+    services/brain-api/src/aion_brain/operator_console_runtime/*|\
+    services/brain-api/tests/operator_console_integration_test_support.py|\
+    services/brain-api/tests/test_operator_console_integration_*.py|\
+    services/brain-api/tests/test_operator_console_integrated_*.py|\
+    services/brain-api/tests/test_capability_runtime_current_state_after_aion235.py|\
+    services/brain-api/tests/test_model_gateway_*.py|\
+    services/brain-api/tests/test_secure_runtime_current_state_*.py|\
+    services/brain-api/tests/test_secure_runtime_integration_*.py)
       return 0
       ;;
     *)
