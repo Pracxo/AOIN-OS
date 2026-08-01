@@ -631,6 +631,40 @@ def evaluate(
         not any(payload.get("prohibited_capabilities", {}).values())
         for payload in (program, authorization_ledger, program_authorization)
     )
+    authorization_closeout = program.get("aion_238_authorization_closeout", {})
+    authorization_pre_closeout = (
+        authorization_ledger.get("authorization_transaction_id") == CURRENT_AUTHORIZATION_ID
+        and authorization_ledger.get("program_id") == PROGRAM_ID
+        and authorization_ledger.get("implementation_task") == IMPLEMENTATION_TASK
+        and authorization_ledger.get("formal_closeout_task") == CLOSEOUT_TASK
+        and authorization_ledger.get("authorization_active") is True
+        and authorization_ledger.get("authorization_consumed") is False
+        and authorization_ledger.get("authorization_reusable") is False
+        and authorization_ledger.get("active_v02_release_qualification_authorization_count") == 1
+    )
+    authorization_post_closeout = (
+        authorization_ledger.get("authorization_transaction_id") == NEXT_AUTHORIZATION_ID
+        and authorization_ledger.get("program_id") == PROGRAM_ID
+        and authorization_ledger.get("parent_authorization_transaction_id") == CURRENT_AUTHORIZATION_ID
+        and authorization_ledger.get("parent_evaluation_id") == EVALUATION_ID
+        and authorization_ledger.get("parent_evaluation_decision") == PASS_DECISION
+        and authorization_ledger.get("implementation_task") == NEXT_IMPLEMENTATION_TASK
+        and authorization_ledger.get("formal_closeout_task") == NEXT_FORMAL_CLOSEOUT_TASK
+        and authorization_ledger.get("authorization_active") is True
+        and authorization_ledger.get("authorization_consumed") is False
+        and authorization_ledger.get("authorization_reusable") is False
+        and authorization_ledger.get("active_v02_release_qualification_authorization_count") == 1
+        and authorization_ledger.get("active_v02_release_qualification_authorization") == NEXT_AUTHORIZATION_ID
+        and authorization_ledger.get("controlled_staging_qualification_authorized") is True
+        and authorization_ledger.get("controlled_staging_qualification_implemented") is False
+        and authorization_closeout.get("authorization_transaction_id") == CURRENT_AUTHORIZATION_ID
+        and authorization_closeout.get("authorization_active") is False
+        and authorization_closeout.get("authorization_consumed") is True
+        and authorization_closeout.get("authorization_expired") is True
+        and authorization_closeout.get("authorization_reusable") is False
+        and authorization_closeout.get("authorization_consumed_by_task") == IMPLEMENTATION_TASK
+        and authorization_closeout.get("authorization_closed_by_task") == CLOSEOUT_TASK
+    )
     expected_positive_limits = {
         "maximum_readiness_gaps": 100,
         "maximum_identity_provider_manifests": 5,
@@ -670,12 +704,12 @@ def evaluate(
         scenario(
             "authorization_lineage_and_scope",
             (
-                check("authorization_id_exact", authorization_ledger.get("authorization_transaction_id") == CURRENT_AUTHORIZATION_ID),
+                check("authorization_lineage_valid", authorization_pre_closeout or authorization_post_closeout),
+                check("aion_238_active_or_closed_exact", authorization_pre_closeout or authorization_closeout.get("authorization_transaction_id") == CURRENT_AUTHORIZATION_ID),
                 check("program_id_exact", authorization_ledger.get("program_id") == PROGRAM_ID),
-                check("implementation_task_exact", authorization_ledger.get("implementation_task") == IMPLEMENTATION_TASK),
-                check("formal_closeout_task_exact", authorization_ledger.get("formal_closeout_task") == CLOSEOUT_TASK),
-                check("active_before_closeout", authorization_ledger.get("authorization_active") is True),
-                check("not_consumed_before_closeout", authorization_ledger.get("authorization_consumed") is False),
+                check("implementation_task_exact", authorization_ledger.get("implementation_task") in {IMPLEMENTATION_TASK, NEXT_IMPLEMENTATION_TASK}),
+                check("formal_closeout_task_exact", authorization_ledger.get("formal_closeout_task") in {CLOSEOUT_TASK, NEXT_FORMAL_CLOSEOUT_TASK}),
+                check("active_authorization_unconsumed", authorization_ledger.get("authorization_active") is True and authorization_ledger.get("authorization_consumed") is False),
                 check("not_reusable", authorization_ledger.get("authorization_reusable") is False),
                 check("active_count_one", authorization_ledger.get("active_v02_release_qualification_authorization_count") == 1),
             ),
@@ -1029,7 +1063,17 @@ def evaluate(
         },
         "authorization_lineage": {
             "current_authorization_id": CURRENT_AUTHORIZATION_ID,
-            "current_authorization_active_before_closeout": authorization_ledger.get("authorization_active"),
+            "authorization_lineage_state": (
+                "post_closeout" if authorization_post_closeout else "pre_closeout"
+            ),
+            "current_authorization_active_before_closeout": authorization_pre_closeout,
+            "current_authorization_closed_after_evaluation": (
+                authorization_closeout.get("authorization_active") is False
+                and authorization_closeout.get("authorization_consumed") is True
+            ),
+            "active_authorization_id_after_evaluation": authorization_ledger.get(
+                "authorization_transaction_id"
+            ),
             "parent_evaluation_id": authorization_ledger.get("parent_evaluation_id"),
             "parent_program_id": authorization_ledger.get("parent_program_id"),
             "active_sri_authorization_count": program.get("aion_238_delivery_reconciliation", {}).get("active_sri_authorization_count"),

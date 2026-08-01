@@ -1,0 +1,15 @@
+{
+  "authorization_transaction_id": "AION-240-V02RQ-0002",
+  "complete_cleanup_required": true,
+  "maximum_staging_rollbacks": 1,
+  "post_rollback_health_validation_approved": true,
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "production_rollback_enabled": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "rollback_drill_plan_id": "AION-241-controlled-local-staging-rollback-drill-plan",
+  "rollback_executions": 0,
+  "staging_rollback_drill_approved": true,
+  "synthetic": true
+}

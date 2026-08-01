@@ -6,7 +6,6 @@ from pathlib import Path
 
 from aion_brain.contracts import v02_release_qualification as c
 
-
 REPO_ROOT = Path(__file__).resolve().parents[3]
 HARNESS_PATH = (
     REPO_ROOT / "scripts/lib/v02_release_qualification_foundation_operator_evaluation.py"
@@ -41,7 +40,8 @@ def test_harness_executes_exact_twenty_eight_scenarios(tmp_path):
         implementation_main_commit=harness.IMPLEMENTATION_MERGE_COMMIT,
         evaluation_base_commit="test-evaluation-base",
         pilot_evidence_path=REPO_ROOT
-        / "examples/v02-release-qualification/v02-production-readiness-qualification-foundation-pilot-evidence.json",
+        / "examples/v02-release-qualification/"
+        "v02-production-readiness-qualification-foundation-pilot-evidence.json",
         temporary_output_directory=tmp_path,
     )
 

@@ -1,0 +1,16 @@
+{
+  "actual_builds_executed": 0,
+  "allowlisted_docker_cli_only": true,
+  "authorization_transaction_id": "AION-240-V02RQ-0002",
+  "build_plan_id": "AION-241-offline-local-build-plan",
+  "dns_resolution_enabled": false,
+  "offline_local_container_build_approved": true,
+  "public_network_access_enabled": false,
+  "read_only": true,
+  "redacted": true,
+  "registry_login_enabled": false,
+  "registry_pull_enabled": false,
+  "registry_push_enabled": false,
+  "shell_false_subprocess_required": true,
+  "synthetic": true
+}

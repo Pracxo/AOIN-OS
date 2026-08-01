@@ -83,7 +83,7 @@ is_allowed_path() {
       ;;
   esac
   case "$1" in
-    README.md|AGENTS.md|docs/*|examples/*|operator-console-static/*|scripts/auth-design-check.sh|scripts/operator-console-static-check.sh|scripts/secure-runtime-integration-*.sh|scripts/v02-release-qualification-local-run.py|scripts/knowledge-intelligence-program-*|scripts/lib/secure_runtime_integration_final_evaluation.py|scripts/lib/knowledge_intelligence_program_final_evaluation.py|scripts/lib/knowledge_intelligence_domain_expert_mesh_authorization.py|scripts/lib/knowledge_intelligence_public_research_pilot_authorization.py|scripts/lib/knowledge_intelligence_tool_verification_authorization.py|scripts/lib/knowledge_intelligence_verified_knowledge_authorization.py|services/brain-api/tests/*)
+    README.md|AGENTS.md|docs/*|examples/*|operator-console-static/*|scripts/auth-design-check.sh|scripts/operator-console-static-check.sh|scripts/secure-runtime-integration-*.sh|scripts/v02-release-qualification-local-run.py|scripts/knowledge-intelligence-program-*|scripts/lib/secure_runtime_integration_final_evaluation.py|scripts/lib/v02_release_qualification_foundation_operator_evaluation.py|scripts/lib/knowledge_intelligence_program_final_evaluation.py|scripts/lib/knowledge_intelligence_domain_expert_mesh_authorization.py|scripts/lib/knowledge_intelligence_public_research_pilot_authorization.py|scripts/lib/knowledge_intelligence_tool_verification_authorization.py|scripts/lib/knowledge_intelligence_verified_knowledge_authorization.py|services/brain-api/tests/*)
       return 0
       ;;
   esac

@@ -1215,11 +1215,13 @@ NON_PRODUCTION_AUTH_APPROVAL_RECORDS = frozenset(
         "examples/secure-runtime-integration/model-gateway-authorization.json",
         "examples/secure-runtime-integration/operator-console-integration-authorization.json",
         "operator-console-static/demo-data/model-gateway-authorization.json",
-    "operator-console-static/demo-data/operator-console-integration-authorization.json",
+        "operator-console-static/demo-data/operator-console-integration-authorization.json",
     }
 )
 NON_PRODUCTION_AUTH_APPROVAL_PREFIXES = (
     "operator-console-static/demo-data/v02-release-qualification-",
+    "operator-console-static/demo-data/v02-qualification-foundation-",
+    "operator-console-static/demo-data/v02-staging-",
     "operator-console-static/demo-data/model-gateway-",
     "examples/secure-runtime-integration/capability-runtime-",
     "operator-console-static/demo-data/capability-runtime-",

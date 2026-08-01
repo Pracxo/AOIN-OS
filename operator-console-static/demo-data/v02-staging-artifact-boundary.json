@@ -1,0 +1,17 @@
+{
+  "artifact_bytes_created": 0,
+  "artifact_manifest_id": "AION-241-local-artifact-sbom-provenance-plan",
+  "authorization_transaction_id": "AION-240-V02RQ-0002",
+  "local_artifact_digest_approved": true,
+  "local_artifact_provenance_approved": true,
+  "local_sbom_generation_approved": true,
+  "local_staging_artifact_creation_approved": true,
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "release_candidates_created": 0,
+  "synthetic": true,
+  "v02_releases_created": 0,
+  "v02_tags_created": 0
+}

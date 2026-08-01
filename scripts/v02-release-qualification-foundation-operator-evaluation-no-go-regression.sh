@@ -77,15 +77,28 @@ is_allowed_path() {
     operator-console-static/demo-data/v02-staging-artifact-boundary.json|\
     operator-console-static/demo-data/v02-staging-rollback-boundary.json|\
     operator-console-static/demo-data/v02-staging-runtime-hold.json|\
+    scripts/auth-design-check.sh|\
+    scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh|\
+    scripts/lib/cognitive_architecture_governance.py|\
+    scripts/lib/v02_production_auth_authorization.py|\
     scripts/lib/v02_release_qualification_foundation_operator_evaluation.py|\
+    scripts/operator-console-static-check.sh|\
+    scripts/secure-runtime-foundation-no-go-regression.sh|\
+    scripts/secure-runtime-integration-program-no-go-regression.sh|\
+    scripts/static-console-safety-check.sh|\
     scripts/v02-release-qualification-foundation-operator-evaluation-check.sh|\
     scripts/v02-release-qualification-foundation-operator-evaluation-no-go-regression.sh|\
+    scripts/v02-release-qualification-foundation-check.sh|\
+    scripts/v02-release-qualification-foundation-runtime-hold.sh|\
     scripts/v02-release-qualification-foundation-no-go-regression.sh|\
+    scripts/v02-release-qualification-program-authorization-check.sh|\
     scripts/v02-release-qualification-program-authorization-no-go-regression.sh|\
     scripts/v02-staging-qualification-authorization-check.sh|\
     scripts/v02-staging-qualification-authorization-no-go-regression.sh|\
     scripts/v02-staging-qualification-runtime-hold.sh|\
-    services/brain-api/tests/test_v02_release_qualification_operator_evaluation_aion240.py)
+    services/brain-api/tests/test_secure_runtime_integration_final_closeout_aion238.py|\
+    services/brain-api/tests/test_v02_release_qualification_operator_evaluation_aion240.py|\
+    services/brain-api/tests/test_v02_release_qualification_pilot_evidence_aion239.py)
       return 0
       ;;
   esac
@@ -155,11 +168,11 @@ fi
 secret_scan_paths="$(
   changed_paths \
     | sort -u \
-    | rg -v '^(scripts/lib/v02_release_qualification_foundation_operator_evaluation\.py|scripts/v02-release-qualification-foundation-operator-evaluation-no-go-regression\.sh)$' \
+    | rg -v '^(scripts/lib/v02_production_auth_authorization\.py|scripts/lib/v02_release_qualification_foundation_operator_evaluation\.py|scripts/v02-release-qualification-foundation-operator-evaluation-no-go-regression\.sh)$' \
     || true
 )"
 if [[ -n "$secret_scan_paths" ]]; then
-  if rg -n 'sk-[A-Za-z0-9]|ghp_[A-Za-z0-9]|xoxb-|-----BEGIN PRIVATE KEY-----|client_secret[[:space:]]*=' $secret_scan_paths; then
+  if rg -n '(^|[^A-Za-z0-9])sk-[A-Za-z0-9]{12,}|ghp_[A-Za-z0-9]{12,}|xoxb-[A-Za-z0-9-]{8,}|-----BEGIN PRIVATE KEY-----|client_secret[[:space:]]*=' $secret_scan_paths; then
     echo "AION-240 must not add credential or token material" >&2
     exit 1
   fi

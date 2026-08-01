@@ -17,13 +17,14 @@ is_nested_gate_context() {
   return 1
 }
 
-PYTHONPATH="$ROOT_DIR/services/brain-api/src:${PYTHONPATH:-}" "$PYTHON_BIN" - <<'PY'
+PYTHONPATH="$ROOT_DIR/scripts/lib:$ROOT_DIR/services/brain-api/src:${PYTHONPATH:-}" "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
 
 import json
 from pathlib import Path
 
 from aion_brain.contracts import v02_release_qualification as c
+import v02_release_qualification_foundation_operator_evaluation as aion240
 
 for label, path in (
     ("program", Path("docs/v02-release-qualification/program-ledger.json")),
@@ -38,7 +39,11 @@ for label, path in (
     for key in required_true:
         if payload.get(key) is not True:
             raise SystemExit(f"{label} runtime hold requires {key}=true")
-    required_false = (
+    post_closeout = (
+        payload.get("active_v02_release_qualification_authorization")
+        == aion240.NEXT_AUTHORIZATION_ID
+    )
+    required_false = [
         "production_auth_runtime_enabled",
         "external_identity_provider_call_enabled",
         "credential_generation_enabled",
@@ -49,7 +54,6 @@ for label, path in (
         "token_persistence_enabled",
         "live_replay_ledger_enabled",
         "production_database_provisioning_enabled",
-        "staging_runtime_authorized",
         "staging_deployment_enabled",
         "production_deployment_enabled",
         "rollback_execution_enabled",
@@ -61,17 +65,41 @@ for label, path in (
         "v02_release_ready",
         "v02_tag_created",
         "v02_release_created",
-    )
+    ]
+    if post_closeout:
+        expected_true = {
+            "staging_runtime_authorized": True,
+            "controlled_staging_qualification_authorized": True,
+        }
+        for key, expected in expected_true.items():
+            if payload.get(key) is not expected:
+                raise SystemExit(f"{label} runtime hold mismatch {key}: {payload.get(key)!r}")
+        if payload.get("controlled_staging_qualification_implemented") is not False:
+            raise SystemExit(f"{label} controlled staging implementation must remain absent")
+        if payload.get("active_v02_release_qualification_task") != aion240.NEXT_IMPLEMENTATION_TASK:
+            raise SystemExit(f"{label} active task mismatch")
+        if payload.get("formal_closeout_task") != aion240.NEXT_FORMAL_CLOSEOUT_TASK:
+            raise SystemExit(f"{label} closeout task mismatch")
+        closed = payload.get("aion_238_authorization_closeout", {})
+        if closed.get("authorization_active") is not False:
+            raise SystemExit(f"{label} AION-238 closeout active flag mismatch")
+        if closed.get("authorization_consumed") is not True:
+            raise SystemExit(f"{label} AION-238 closeout consumed flag mismatch")
+    else:
+        required_false.append("staging_runtime_authorized")
     for key in required_false:
         if payload.get(key) is not False:
             raise SystemExit(f"{label} runtime hold mismatch {key}: {payload.get(key)!r}")
-    if payload.get("active_v02_release_qualification_authorization") != c.AUTHORIZATION_TRANSACTION_ID:
+    expected_authorization = (
+        aion240.NEXT_AUTHORIZATION_ID if post_closeout else c.AUTHORIZATION_TRANSACTION_ID
+    )
+    if payload.get("active_v02_release_qualification_authorization") != expected_authorization:
         raise SystemExit(f"{label} active authorization mismatch")
     if payload.get("authorization_active") is not True:
         raise SystemExit(f"{label} authorization must remain active")
     if payload.get("authorization_consumed") is not False:
         raise SystemExit(f"{label} authorization must remain unconsumed")
-    if payload.get("formal_closeout_task") != c.FORMAL_CLOSEOUT_TASK:
+    if not post_closeout and payload.get("formal_closeout_task") != c.FORMAL_CLOSEOUT_TASK:
         raise SystemExit(f"{label} closeout task mismatch")
 PY
 

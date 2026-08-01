@@ -58,9 +58,10 @@ changed_paths() {
 is_allowed_path() {
   case "$1" in
     README.md|AGENTS.md|\
-    docs/adr/README.md|\
-    docs/adr/0202-final-secure-runtime-integration-evaluation-and-v02-release-qualification-program-authorization.md|\
-    docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md|\
+	    docs/adr/README.md|\
+	    docs/adr/0202-final-secure-runtime-integration-evaluation-and-v02-release-qualification-program-authorization.md|\
+	    docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md|\
+	    docs/adr/0204-v02-qualification-foundation-evaluation-and-controlled-isolated-staging-qualification-authorization.md|\
     docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/project-status.md|docs/visual-brain.md|\
     docs/v02-release-qualification/*|\
     docs/release/v02-release-qualification-*|\
@@ -103,11 +104,13 @@ is_allowed_path() {
     scripts/model-gateway-check.sh|\
     scripts/model-gateway-no-go-regression.sh|\
     scripts/model-gateway-operator-evaluation-no-go-regression.sh|\
-    scripts/operator-console-integration-authorization-no-go-regression.sh|\
-    scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh|\
+	    scripts/operator-console-integration-authorization-no-go-regression.sh|\
+	    scripts/operator-console-static-check.sh|\
+	    scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh|\
     scripts/secure-runtime-integration-program-no-go-regression.sh|\
     scripts/static-console-safety-check.sh|\
     scripts/lib/v02_release_qualification_foundation_operator_evaluation.py|\
+    scripts/lib/v02_production_auth_authorization.py|\
     scripts/secure-runtime-foundation-check.sh|\
     scripts/secure-runtime-foundation-no-go-regression.sh|\
     scripts/v02-release-qualification-program-authorization-check.sh|\

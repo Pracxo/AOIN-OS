@@ -174,17 +174,19 @@ is_allowed_change() {
     docs/project-status.md|docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/visual-brain.md|\
     docs/secure-runtime-integration/*|\
     docs/v02-release-qualification/*|\
-    docs/release/secure-runtime-integration-*|docs/release/secure-runtime-foundation-*|docs/release/model-gateway-*|docs/release/capability-runtime-*|docs/release/operator-console-*|docs/release/v02-release-readiness-delta.md|docs/release/v02-release-qualification-*|\
+    docs/release/secure-runtime-integration-*|docs/release/secure-runtime-foundation-*|docs/release/model-gateway-*|docs/release/capability-runtime-*|docs/release/operator-console-*|docs/release/v02-release-readiness-delta.md|docs/release/v02-release-qualification-*|docs/release/v02-qualification-foundation-operator-evaluation-*|docs/release/v02-staging-qualification-*|\
     docs/adr/0195-controlled-authenticated-local-operator-runtime-foundation.md|docs/adr/0196-secure-runtime-foundation-evaluation-and-controlled-model-gateway-authorization.md|\
 	    docs/adr/0197-controlled-provider-neutral-model-gateway-and-deterministic-reference-provider.md|docs/adr/0198-controlled-model-gateway-evaluation-and-sandboxed-capability-runtime-authorization.md|\
 	    docs/adr/0199-sandboxed-deterministic-capability-and-synthetic-connector-runtime.md|\
 	    docs/adr/0200-sandboxed-capability-runtime-evaluation-and-controlled-local-operator-console-integration-authorization.md|\
-	    docs/adr/0201-controlled-same-origin-loopback-operator-console-and-integrated-local-runtime.md|docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md|docs/adr/README.md|\
+		    docs/adr/0201-controlled-same-origin-loopback-operator-console-and-integrated-local-runtime.md|docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md|docs/adr/0204-v02-qualification-foundation-evaluation-and-controlled-isolated-staging-qualification-authorization.md|docs/adr/README.md|\
     examples/secure-runtime-integration/*|\
     examples/v02-release-qualification/*|\
     operator-console-static/index.html|operator-console-static/app.js|operator-console-static/live-console.js|operator-console-static/styles.css|operator-console-static/README.md|\
-    operator-console-static/demo-data/secure-runtime-integration-*.json|\
-    operator-console-static/demo-data/v02-release-qualification-*.json|\
+	    operator-console-static/demo-data/secure-runtime-integration-*.json|\
+	    operator-console-static/demo-data/v02-release-qualification-*.json|\
+	    operator-console-static/demo-data/v02-qualification-foundation-operator-evaluation.json|\
+	    operator-console-static/demo-data/v02-staging-*.json|\
     operator-console-static/demo-data/secure-runtime-foundation-operator-evaluation.json|\
     operator-console-static/demo-data/model-gateway-*.json|\
 	    operator-console-static/demo-data/capability-runtime-*.json|\
@@ -237,9 +239,10 @@ is_allowed_change() {
     scripts/operator-console-integration-check.sh|scripts/operator-console-integration-no-go-regression.sh|\
     scripts/model-gateway-runtime-hold.sh|scripts/model-gateway-local-simulation-run.py|\
     scripts/secure-runtime-local-operator-run.py|\
-    scripts/lib/secure_runtime_foundation_operator_evaluation.py|\
-    scripts/lib/model_gateway_operator_evaluation.py|\
-    scripts/lib/capability_runtime_operator_evaluation.py|\
+	    scripts/lib/secure_runtime_foundation_operator_evaluation.py|\
+	    scripts/lib/model_gateway_operator_evaluation.py|\
+	    scripts/lib/capability_runtime_operator_evaluation.py|\
+	    scripts/lib/v02_release_qualification_foundation_operator_evaluation.py|\
     scripts/lib/v02_production_auth_authorization.py|\
     scripts/secure-runtime-integration-program-authorization-check.sh|\
     scripts/secure-runtime-integration-final-evaluation-no-go-regression.sh|\

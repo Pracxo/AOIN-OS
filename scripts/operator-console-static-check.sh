@@ -1326,7 +1326,15 @@ for path in sorted(demo_dir.glob("*.json")):
             if key in payload and payload.get(key) is not True:
                 raise SystemExit(f"operator console demo flag must be true: {key}: {path}")
         continue
-    if path.name.startswith("v02-release-qualification-"):
+    if path.name.startswith("v02-release-qualification-") or path.name in {
+        "v02-qualification-foundation-operator-evaluation.json",
+        "v02-staging-artifact-boundary.json",
+        "v02-staging-build-plan.json",
+        "v02-staging-environment-profile.json",
+        "v02-staging-qualification-authorization.json",
+        "v02-staging-rollback-boundary.json",
+        "v02-staging-runtime-hold.json",
+    }:
         if payload.get("program_id") != "AION-V02-RELEASE-QUALIFICATION-001":
             raise SystemExit(f"v0.2 release qualification program id mismatch: {path}")
         for key in ("read_only", "redacted", "redaction_applied", "synthetic"):
