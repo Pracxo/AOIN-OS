@@ -30,16 +30,47 @@ for relative in (
     for key, value in prohibited.items():
         if value is not False:
             raise SystemExit(f"prohibited capability flag is not false in {relative}: {key}")
-    if payload.get("authorization_transaction_id") != "AION-234-SRI-0003":
+    if payload.get("authorization_transaction_id") == "AION-234-SRI-0003":
+        if payload.get("authorization_active") is not True:
+            raise SystemExit(f"authorization inactive in {relative}")
+        if payload.get("authorization_consumed") is not False:
+            raise SystemExit(f"authorization consumed in {relative}")
+        if payload.get("authorization_expired") is not False:
+            raise SystemExit(f"authorization expired in {relative}")
+        if payload.get("authorization_reusable") is not False:
+            raise SystemExit(f"authorization reusable in {relative}")
+        continue
+
+    if payload.get("active_sri_implementation_authorization") != "AION-236-SRI-0004":
         raise SystemExit(f"authorization id mismatch in {relative}")
-    if payload.get("authorization_active") is not True:
-        raise SystemExit(f"authorization inactive in {relative}")
-    if payload.get("authorization_consumed") is not False:
-        raise SystemExit(f"authorization consumed in {relative}")
-    if payload.get("authorization_expired") is not False:
-        raise SystemExit(f"authorization expired in {relative}")
-    if payload.get("authorization_reusable") is not False:
-        raise SystemExit(f"authorization reusable in {relative}")
+
+    if relative == "docs/secure-runtime-integration/program-ledger.json":
+        closed = payload.get("aion_234_record", {})
+        if closed.get("authorization_transaction") != "AION-234-SRI-0003":
+            raise SystemExit(f"AION-234 closeout record missing in {relative}")
+    else:
+        closed = next(
+            (
+                item
+                for item in payload.get("records", [])
+                if item.get("authorization_transaction_id") == "AION-234-SRI-0003"
+            ),
+            None,
+        )
+        if not closed:
+            raise SystemExit(f"AION-234 closeout record missing in {relative}")
+    if closed.get("authorization_active") is not False:
+        raise SystemExit(f"closed authorization active in {relative}")
+    if closed.get("authorization_consumed") is not True:
+        raise SystemExit(f"closed authorization not consumed in {relative}")
+    if closed.get("authorization_expired") is not True:
+        raise SystemExit(f"closed authorization not expired in {relative}")
+    if closed.get("authorization_reusable") is not False:
+        raise SystemExit(f"closed authorization reusable in {relative}")
+    if closed.get("authorization_consumed_by_task") != "AION-235":
+        raise SystemExit(f"closed authorization consumer mismatch in {relative}")
+    if closed.get("authorization_closed_by_task") != "AION-236":
+        raise SystemExit(f"closed authorization closeout mismatch in {relative}")
 PY
 
 aion_confirm_immutable_v01_tag_history >/dev/null

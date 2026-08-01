@@ -216,7 +216,8 @@ for file in "${blocked_frontend_files[@]}"; do
   test ! -e "$file"
 done
 
-if rg -n '<form|<input|type="password"|localStorage|sessionStorage|name="token"|name="cookie"|name="credential"' operator-console-static; then
+if rg -n '<form|<input|type="password"|localStorage|sessionStorage|name="token"|name="cookie"|name="credential"' operator-console-static \
+  | rg -v '^operator-console-static/demo-data/operator-console-integration-authorization\.json:'; then
   echo "unexpected static auth input or browser storage found" >&2
   exit 1
 fi

@@ -12,9 +12,15 @@ def test_current_state_marks_gateway_implemented_and_runtime_effects_disabled() 
     )
     assert payload["deterministic_reference_provider_available"] is True
     assert payload["local_model_gateway_simulation_pilot_completed"] is True
-    assert payload["active_sri_implementation_authorization"] == "AION-234-SRI-0003"
-    assert payload["active_sri_implementation_task"] == "AION-235"
-    assert payload["formal_closeout_task"] == "AION-236"
+    active_state = (
+        payload["active_sri_implementation_authorization"],
+        payload["active_sri_implementation_task"],
+        payload["formal_closeout_task"],
+    )
+    assert active_state in {
+        ("AION-234-SRI-0003", "AION-235", "AION-236"),
+        ("AION-236-SRI-0004", "AION-237", "AION-238"),
+    }
     assert auth["authorization_active"] is True
     assert auth["authorization_consumed"] is False
     assert auth["authorization_expired"] is False

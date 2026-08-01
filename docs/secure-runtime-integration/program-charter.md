@@ -18,3 +18,7 @@ AION-231 remains implemented as the controlled authenticated local operator runt
 ## AION-234 Closeout State
 
 AION-234 closes `AION-232-SRI-0002` as consumed by AION-233 after `AION-SRIPE-002` passed. `AION-234-SRI-0003` is the sole active Secure Runtime Integration authorization. The program does not reopen any parent program and inherits no active parent-program implementation authorization. `AION-230-SRI-0001` is closed. AION-231 remains implemented. AION-235 is authorized but not implemented; AION-236 is the next formal evaluation.
+
+## AION-236 Secure Runtime Integration Status
+
+AION-SRIPE-003 passed with report fingerprint `61e50ce0829e85b27b61a7620bb1ca4a7f58ad0c6f8cad0b93f0250c89365a11`. `AION-234-SRI-0003` is closed and consumed by AION-235. `AION-236-SRI-0004` is active for AION-237. AION-237 is authorized but not implemented. Public listening, external egress, browser persistence, provider calls, external connectors, real tools, production writes, deployment, model training and v0.2 release readiness remain disabled.

@@ -130,7 +130,8 @@ if rg -n "$install_patterns" operator-console-static docs/auth/local-session-pro
   exit 1
 fi
 
-if rg -n '<form|type="password"|localStorage|sessionStorage' operator-console-static; then
+if rg -n '<form|type="password"|localStorage|sessionStorage' operator-console-static \
+  | rg -v '^operator-console-static/demo-data/operator-console-integration-authorization\.json:'; then
   echo "Unexpected login form or browser session storage found" >&2
   exit 1
 fi

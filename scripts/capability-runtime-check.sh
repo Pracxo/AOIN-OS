@@ -50,17 +50,32 @@ def require(condition: bool, message: str) -> None:
         raise SystemExit(message)
 
 
+def is_post_aion236_payload(payload: dict) -> bool:
+    return payload.get("active_sri_implementation_authorization") == "AION-236-SRI-0004"
+
+
 for payload in (program, auth, example):
-    require(payload["authorization_transaction_id"] == AUTHORIZATION_TRANSACTION_ID, "authorization id mismatch")
-    require(payload["authorization_scope"] == AUTHORIZATION_SCOPE, "authorization scope mismatch")
-    require(payload["authorization_active"] is True, "authorization inactive")
-    require(payload["authorization_consumed"] is False, "authorization consumed")
-    require(payload["authorization_expired"] is False, "authorization expired")
-    require(payload["authorization_reusable"] is False, "authorization reusable")
-    require(payload["active_sri_implementation_authorization_count"] == 1, "active SRI auth count mismatch")
-    require(payload["active_sri_implementation_authorization"] == AUTHORIZATION_TRANSACTION_ID, "active SRI auth mismatch")
-    require(payload["active_sri_implementation_task"] == "AION-235", "active task mismatch")
-    require(payload["formal_closeout_task"] == "AION-236", "formal closeout mismatch")
+    if is_post_aion236_payload(payload):
+        require(payload["active_sri_implementation_authorization_count"] == 1, "post-closeout active SRI auth count mismatch")
+        require(payload["active_sri_implementation_task"] == "AION-237", "post-closeout active task mismatch")
+        require(payload["formal_closeout_task"] == "AION-238", "post-closeout formal closeout mismatch")
+        if "aion_234_record" in payload:
+            require(payload["aion_234_record"]["authorization_transaction"] == AUTHORIZATION_TRANSACTION_ID, "AION-234 record authorization mismatch")
+            require(payload["aion_234_record"]["authorization_state"] == "consumed_by_AION-235_closed_by_AION-236", "AION-234 record closeout mismatch")
+        else:
+            closed = payload.get("closed_authorizations", [])
+            require(any(item.get("authorization_transaction_id") == AUTHORIZATION_TRANSACTION_ID for item in closed), "AION-234 closeout record missing")
+    else:
+        require(payload["authorization_transaction_id"] == AUTHORIZATION_TRANSACTION_ID, "authorization id mismatch")
+        require(payload["authorization_scope"] == AUTHORIZATION_SCOPE, "authorization scope mismatch")
+        require(payload["authorization_active"] is True, "authorization inactive")
+        require(payload["authorization_consumed"] is False, "authorization consumed")
+        require(payload["authorization_expired"] is False, "authorization expired")
+        require(payload["authorization_reusable"] is False, "authorization reusable")
+        require(payload["active_sri_implementation_authorization_count"] == 1, "active SRI auth count mismatch")
+        require(payload["active_sri_implementation_authorization"] == AUTHORIZATION_TRANSACTION_ID, "active SRI auth mismatch")
+        require(payload["active_sri_implementation_task"] == "AION-235", "active task mismatch")
+        require(payload["formal_closeout_task"] == "AION-236", "formal closeout mismatch")
     require(payload["sandboxed_capability_runtime_implemented"] is True or payload["capability_runtime_implemented"] is True, "runtime not implemented")
     authorized = payload.get("capability_runtime_authorized_capabilities") or payload.get("authorized_capabilities")
     prohibited = payload.get("capability_runtime_prohibited_capabilities") or payload.get("prohibited_capabilities")
@@ -74,7 +89,18 @@ for payload in (program, auth, example):
 record = program["aion_234_record"]
 require(record["pull_requests"] == [153], "AION-234 PR not reconciled")
 require(record["merge_commits"] == ["74c6ecc93333518a353bd4c69ad8823d7a47afd8"], "AION-234 merge commit not reconciled")
-require(program["aion_235_record"]["runtime_state"] == "sandboxed_capability_runtime_implemented_reference_only_pending_closeout", "AION-235 record mismatch")
+aion_235_record = program["aion_235_record"]
+require(aion_235_record["pull_requests"] == [154], "AION-235 PR not reconciled")
+require(aion_235_record["feature_commits"] == ["03a86f5314b8e79e0d77e2657769be0b15f1c450"], "AION-235 feature commit not reconciled")
+require(aion_235_record["merge_commits"] == ["39eff73b76f8b68a956f0a852bf8fbd71d36654d"], "AION-235 merge commit not reconciled")
+require(
+    aion_235_record["runtime_state"]
+    in {
+        "sandboxed_capability_runtime_implemented_reference_only_pending_closeout",
+        "sandboxed_capability_runtime_implemented_reference_only",
+    },
+    "AION-235 record mismatch",
+)
 PY
 
 echo "sandboxed capability runtime PASS"

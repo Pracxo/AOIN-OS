@@ -50,11 +50,20 @@ closed = next(item for item in auth["records"] if item.get("authorization_transa
 require(closed["authorization_active"] is False and closed["authorization_consumed"] is True and closed["authorization_expired"] is True and closed["authorization_reusable"] is False, "AION-232 closeout mismatch")
 require(closed["authorization_consumed_by_task"] == h.IMPLEMENTATION_TASK and closed["authorization_closed_by_task"] == h.CLOSEOUT_TASK, "AION-232 lineage mismatch")
 
-for payload in (auth, example):
+capability_authorization = next(
+    item
+    for item in auth["records"]
+    if item.get("authorization_transaction_id") == h.NEXT_AUTHORIZATION_ID
+)
+for payload in (capability_authorization, example):
     require(payload["authorization_transaction_id"] == h.NEXT_AUTHORIZATION_ID, "auth id mismatch")
     require(payload["implementation_task"] == h.NEXT_IMPLEMENTATION_TASK and payload["formal_closeout_task"] == h.NEXT_CLOSEOUT_TASK, "task mismatch")
     require(payload["authorization_scope"] == expected_scope, "scope mismatch")
-    require(payload["authorization_active"] is True and payload["authorization_consumed"] is False and payload["authorization_expired"] is False and payload["authorization_reusable"] is False, "active auth state mismatch")
+    if payload["authorization_active"] is True:
+        require(payload["authorization_consumed"] is False and payload["authorization_expired"] is False and payload["authorization_reusable"] is False, "active auth state mismatch")
+    else:
+        require(payload["authorization_consumed"] is True and payload["authorization_expired"] is True and payload["authorization_reusable"] is False, "closed auth state mismatch")
+        require(payload["authorization_consumed_by_task"] == h.NEXT_IMPLEMENTATION_TASK and payload["authorization_closed_by_task"] == h.NEXT_CLOSEOUT_TASK, "closed auth lineage mismatch")
 
 for payload in (program, auth, example):
     runtime_authorized = payload.get(
@@ -76,9 +85,35 @@ for payload in (program, auth, example):
     for key in h.CAPABILITY_ZERO_RESOURCE_LIMITS:
         expected_limits[key] = 0
     require(limits == expected_limits, "resource limits mismatch")
-require(auth["active_authorizations"] == [{"authorization_active": True, "authorization_consumed": False, "authorization_expired": False, "authorization_reusable": False, "authorization_transaction_id": h.NEXT_AUTHORIZATION_ID, "formal_closeout_task": h.NEXT_CLOSEOUT_TASK, "implementation_task": h.NEXT_IMPLEMENTATION_TASK}], "active authorization list mismatch")
+active_authorizations = auth["active_authorizations"]
+legacy_active = [{
+    "authorization_active": True,
+    "authorization_consumed": False,
+    "authorization_expired": False,
+    "authorization_reusable": False,
+    "authorization_transaction_id": h.NEXT_AUTHORIZATION_ID,
+    "formal_closeout_task": h.NEXT_CLOSEOUT_TASK,
+    "implementation_task": h.NEXT_IMPLEMENTATION_TASK,
+}]
+post_aion236_active = [{
+    "authorization_active": True,
+    "authorization_consumed": False,
+    "authorization_expired": False,
+    "authorization_reusable": False,
+    "authorization_transaction_id": "AION-236-SRI-0004",
+    "formal_closeout_task": "AION-238",
+    "implementation_task": "AION-237",
+}]
+require(active_authorizations in (legacy_active, post_aion236_active), "active authorization list mismatch")
 require(program["aion_234_record"]["ci_result"] == "pass", "AION-234 record is not reconciled")
-require(program["aion_235_record"]["authorization_state"] == "implementation_complete_pending_AION-236_closeout", "AION-235 record state mismatch")
+require(
+    program["aion_235_record"]["authorization_state"]
+    in {
+        "implementation_complete_pending_AION-236_closeout",
+        "consumed_by_AION-235_closed_by_AION-236",
+    },
+    "AION-235 record state mismatch",
+)
 PY
 
 echo "sandboxed capability runtime authorization PASS"

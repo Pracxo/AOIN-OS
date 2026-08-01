@@ -329,3 +329,7 @@ These retained markers describe earlier v0.2 planning and production-auth author
 ## AION-234 Closeout
 
 `AION-SRIPE-002` passed all 28 model-gateway operator-evaluation scenarios. `AION-232-SRI-0002` is closed, consumed, expired, and non-reusable. `AION-234-SRI-0003` is active for AION-235 only. AION-235 is authorized to implement a sandboxed deterministic capability and synthetic connector runtime, but no AION-235 source is present in this closeout. Model output remains untrusted and cannot trigger execution. External connectors, real tools, network, credentials, filesystem, process, production runtime, v0.2 tags, and v0.2 releases remain disabled.
+
+## AION-236 Secure Runtime Integration Status
+
+AION-SRIPE-003 passed with report fingerprint `61e50ce0829e85b27b61a7620bb1ca4a7f58ad0c6f8cad0b93f0250c89365a11`. `AION-234-SRI-0003` is closed and consumed by AION-235. `AION-236-SRI-0004` is active for AION-237. AION-237 is authorized but not implemented. Public listening, external egress, browser persistence, provider calls, external connectors, real tools, production writes, deployment, model training and v0.2 release readiness remain disabled.

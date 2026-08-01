@@ -2517,3 +2517,7 @@ They do not create provider sessions, provider calls, connector sessions, tool e
 AION-234 records `AION-SRIPE-002` as a PASS evaluation of the merged AION-233 controlled provider-neutral model gateway. The gateway remains implemented as a deterministic reference-simulation plane. Model output is untrusted proposal material and cannot trigger execution.
 
 The next authorized layer is `AION-234-SRI-0003` for AION-235. It authorizes a sandboxed deterministic capability runtime only for closed, in-memory reference capabilities and synthetic reference connectors. External effects remain disabled. final Git evidence reconciliation is recorded by PR #147 for the completed Governed Learning and Memory parent program.
+
+## AION-236 Secure Runtime Integration Status
+
+AION-SRIPE-003 passed with report fingerprint `61e50ce0829e85b27b61a7620bb1ca4a7f58ad0c6f8cad0b93f0250c89365a11`. `AION-234-SRI-0003` is closed and consumed by AION-235. `AION-236-SRI-0004` is active for AION-237. AION-237 is authorized but not implemented. Public listening, external egress, browser persistence, provider calls, external connectors, real tools, production writes, deployment, model training and v0.2 release readiness remain disabled.

@@ -1213,13 +1213,17 @@ NON_PRODUCTION_AUTH_APPROVAL_RECORDS = frozenset(
         "docs/secure-runtime-integration/authorization-ledger.json",
         "examples/secure-runtime-integration/local-operator-runtime-authorization.json",
         "examples/secure-runtime-integration/model-gateway-authorization.json",
+        "examples/secure-runtime-integration/operator-console-integration-authorization.json",
         "operator-console-static/demo-data/model-gateway-authorization.json",
+        "operator-console-static/demo-data/operator-console-integration-authorization.json",
     }
 )
 NON_PRODUCTION_AUTH_APPROVAL_PREFIXES = (
     "operator-console-static/demo-data/model-gateway-",
     "examples/secure-runtime-integration/capability-runtime-",
     "operator-console-static/demo-data/capability-runtime-",
+    "examples/secure-runtime-integration/operator-console-",
+    "operator-console-static/demo-data/operator-console-",
 )
 AION213_KNOWLEDGE_INTELLIGENCE_JSON_PREFIXES = (
     "examples/knowledge-intelligence/",

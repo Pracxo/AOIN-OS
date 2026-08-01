@@ -128,19 +128,26 @@ is_allowed_change() {
     README.md|AGENTS.md|\
     docs/project-status.md|docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/visual-brain.md|\
     docs/secure-runtime-integration/*|\
-    docs/release/secure-runtime-integration-*|docs/release/secure-runtime-foundation-*|docs/release/model-gateway-*|docs/release/capability-runtime-*|docs/release/v02-release-readiness-delta.md|\
+    docs/release/secure-runtime-integration-*|docs/release/secure-runtime-foundation-*|docs/release/model-gateway-*|docs/release/capability-runtime-*|docs/release/operator-console-*|docs/release/v02-release-readiness-delta.md|\
     docs/adr/0195-controlled-authenticated-local-operator-runtime-foundation.md|docs/adr/0196-secure-runtime-foundation-evaluation-and-controlled-model-gateway-authorization.md|\
 	    docs/adr/0197-controlled-provider-neutral-model-gateway-and-deterministic-reference-provider.md|docs/adr/0198-controlled-model-gateway-evaluation-and-sandboxed-capability-runtime-authorization.md|\
-	    docs/adr/0199-sandboxed-deterministic-capability-and-synthetic-connector-runtime.md|docs/adr/README.md|\
+	    docs/adr/0199-sandboxed-deterministic-capability-and-synthetic-connector-runtime.md|\
+	    docs/adr/0200-sandboxed-capability-runtime-evaluation-and-controlled-local-operator-console-integration-authorization.md|docs/adr/README.md|\
     examples/secure-runtime-integration/*|\
     operator-console-static/index.html|operator-console-static/app.js|operator-console-static/README.md|\
     operator-console-static/demo-data/secure-runtime-integration-*.json|\
     operator-console-static/demo-data/secure-runtime-foundation-operator-evaluation.json|\
     operator-console-static/demo-data/model-gateway-*.json|\
-    operator-console-static/demo-data/capability-runtime-*.json|\
-    scripts/auth-design-check.sh|\
-    scripts/operator-console-static-check.sh|\
-    scripts/connector-no-go-regression.sh|\
+	    operator-console-static/demo-data/capability-runtime-*.json|\
+	    operator-console-static/demo-data/operator-console-*.json|\
+	    scripts/auth-design-check.sh|\
+	    scripts/auth-no-go-regression.sh|\
+	    scripts/auth-runtime-check.sh|\
+	    scripts/local-auth-check.sh|\
+	    scripts/local-session-check.sh|\
+	    scripts/operator-console-static-check.sh|\
+	    scripts/role-filter-check.sh|\
+	    scripts/connector-no-go-regression.sh|\
     scripts/connector-runtime-no-external-call-regression.sh|\
     scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh|\
     scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh|\
@@ -167,10 +174,14 @@ is_allowed_change() {
     scripts/capability-runtime-check.sh|scripts/capability-runtime-no-go-regression.sh|\
     scripts/capability-runtime-pilot-evidence-check.sh|scripts/capability-runtime-runtime-hold.sh|\
     scripts/capability-runtime-local-sandbox-run.py|\
+    scripts/capability-runtime-operator-evaluation-check.sh|scripts/capability-runtime-operator-evaluation-no-go-regression.sh|\
+    scripts/operator-console-integration-authorization-check.sh|scripts/operator-console-integration-authorization-no-go-regression.sh|\
+    scripts/operator-console-integration-runtime-hold.sh|\
     scripts/model-gateway-runtime-hold.sh|scripts/model-gateway-local-simulation-run.py|\
     scripts/secure-runtime-local-operator-run.py|\
     scripts/lib/secure_runtime_foundation_operator_evaluation.py|\
     scripts/lib/model_gateway_operator_evaluation.py|\
+    scripts/lib/capability_runtime_operator_evaluation.py|\
     scripts/lib/v02_production_auth_authorization.py|\
     scripts/secure-runtime-integration-program-authorization-check.sh|\
     scripts/secure-runtime-integration-program-no-go-regression.sh|scripts/secure-runtime-integration-runtime-hold.sh|\
@@ -200,7 +211,11 @@ is_allowed_change() {
     services/brain-api/tests/test_secure_runtime_*.py|\
     services/brain-api/tests/test_model_gateway_*.py|\
 	    services/brain-api/tests/capability_runtime_test_support.py|\
+	    services/brain-api/tests/capability_runtime_operator_evaluation_test_support.py|\
+	    services/brain-api/tests/operator_console_integration_test_support.py|\
 	    services/brain-api/tests/test_capability_runtime_*.py|\
+	    services/brain-api/tests/test_operator_console_integration_*.py|\
+	    services/brain-api/tests/test_secure_runtime_current_state_after_aion236.py|\
     services/brain-api/tests/aion234_test_support.py)
       return 0
       ;;

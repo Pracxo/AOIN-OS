@@ -21,9 +21,18 @@ import subprocess
 from pathlib import Path
 
 ROOT = Path(os.environ["AION_REPO_ROOT"])
-AION235_IMPLEMENTED_STATE = (
-    "sandboxed_capability_runtime_implemented_reference_only_pending_closeout"
-)
+AION235_SOURCE_ALLOWED_STATES = {
+    "sandboxed_capability_runtime_implemented_reference_only_pending_closeout": (
+        "AION-234-SRI-0003",
+        "AION-235",
+        "AION-236",
+    ),
+    "capability_runtime_evaluated_operator_console_integration_authorized_not_implemented": (
+        "AION-236-SRI-0004",
+        "AION-237",
+        "AION-238",
+    ),
+}
 
 AION233_SOURCE = {
     "services/brain-api/src/aion_brain/contracts/model_gateway.py",
@@ -162,11 +171,13 @@ def aion235_implementation_state_active() -> bool:
     if not ledger.exists():
         return False
     payload = json.loads(ledger.read_text(encoding="utf-8"))
+    expected = AION235_SOURCE_ALLOWED_STATES.get(payload.get("program_state"))
     return (
-        payload.get("program_state") == AION235_IMPLEMENTED_STATE
-        and payload.get("active_sri_implementation_authorization") == "AION-234-SRI-0003"
-        and payload.get("active_sri_implementation_task") == "AION-235"
-        and payload.get("formal_closeout_task") == "AION-236"
+        expected is not None
+        and payload.get("active_sri_implementation_authorization") == expected[0]
+        and payload.get("active_sri_implementation_task") == expected[1]
+        and payload.get("formal_closeout_task") == expected[2]
+        and payload.get("sandboxed_capability_runtime_implemented") is True
     )
 
 

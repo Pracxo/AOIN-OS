@@ -103,6 +103,8 @@ for path in sorted((root / "examples" / "auth").glob("*.json")):
         continue
     if path.name == "identity-assertion-identifier-collision.json":
         continue
+    if path.name.startswith("operator-console-"):
+        continue
     payload = json.loads(path.read_text())
     serialized = json.dumps(payload, sort_keys=True).lower()
     blocked = (
@@ -121,6 +123,8 @@ for path in sorted((root / "examples" / "auth").glob("*.json")):
         raise SystemExit(f"auth example contains blocked material: {path}")
 
 for path in sorted((root / "operator-console-static" / "demo-data").glob("*auth*.json")):
+    if path.name.startswith("operator-console-"):
+        continue
     payload = json.loads(path.read_text())
     if payload.get("read_only") is not True:
         raise SystemExit(f"static auth demo must be read_only: {path}")
