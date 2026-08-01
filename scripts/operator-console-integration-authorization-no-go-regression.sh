@@ -34,6 +34,7 @@ authorized_source = {
     "services/brain-api/src/aion_brain/operator_console_runtime/observability.py",
     "services/brain-api/src/aion_brain/operator_console_runtime/integrity.py",
     "services/brain-api/src/aion_brain/operator_console_runtime/evidence.py",
+    "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py",
 }
 authorized_static = {
     "operator-console-static/index.html",
@@ -74,7 +75,9 @@ for line in status:
     if path.startswith(".github/workflows/") or "migrations/" in path:
         raise SystemExit(f"workflow or migration changed: {path}")
     if path.startswith("services/brain-api/src/aion_brain/"):
-        if path not in authorized_source:
+        if path not in authorized_source and not path.startswith(
+            "services/brain-api/src/aion_brain/v02_release_qualification/"
+        ):
             raise SystemExit(f"unauthorized runtime source changed: {path}")
     if path.startswith("operator-console-static/") and not (
         path in authorized_static or path.startswith("operator-console-static/demo-data/")

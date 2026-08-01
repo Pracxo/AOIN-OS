@@ -91,12 +91,17 @@ PROGRAM_STATES = {
     "sandboxed_capability_runtime_implemented_reference_only_pending_closeout",
     "capability_runtime_evaluated_operator_console_integration_authorized_not_implemented",
     "operator_console_integrated_local_runtime_implemented_pending_final_evaluation",
+    "secure_runtime_integration_program_complete",
 }
 POST_CLOSEOUT_STATES = {
     "model_gateway_evaluated_sandboxed_capability_runtime_authorized_not_implemented",
     "sandboxed_capability_runtime_implemented_reference_only_pending_closeout",
     "capability_runtime_evaluated_operator_console_integration_authorized_not_implemented",
     "operator_console_integrated_local_runtime_implemented_pending_final_evaluation",
+    "secure_runtime_integration_program_complete",
+}
+FINAL_PROGRAM_STATES = {
+    "secure_runtime_integration_program_complete",
 }
 EXPECTED_ACTIVE_STATES = {
     "controlled_model_gateway_implemented_reference_simulation_only_pending_closeout": (
@@ -309,17 +314,27 @@ for payload in (program, auth):
         raise SystemExit("not every gateway capability is available")
     if any(payload["model_gateway_prohibited_capabilities"].values()):
         raise SystemExit("prohibited gateway capability enabled")
-    if payload["active_sri_implementation_authorization_count"] != 1:
-        raise SystemExit("there must be exactly one active SRI authorization")
-    expected_auth, expected_task, expected_closeout = EXPECTED_ACTIVE_STATES[
-        payload["program_state"]
-    ]
-    if payload["active_sri_implementation_authorization"] != expected_auth:
-        raise SystemExit("active SRI authorization mismatch")
-    if payload["active_sri_implementation_task"] != expected_task:
-        raise SystemExit("active SRI task mismatch")
-    if payload["formal_closeout_task"] != expected_closeout:
-        raise SystemExit("formal closeout task mismatch")
+    if payload["program_state"] in FINAL_PROGRAM_STATES:
+        if payload["active_sri_implementation_authorization_count"] != 0:
+            raise SystemExit("completed SRI program must not retain active authorization")
+        if payload["active_sri_implementation_authorization"] is not None:
+            raise SystemExit("completed SRI program active authorization mismatch")
+        if payload["active_sri_implementation_task"] is not None:
+            raise SystemExit("completed SRI program active task mismatch")
+        if payload["formal_closeout_task"] is not None:
+            raise SystemExit("completed SRI program formal closeout task mismatch")
+    else:
+        if payload["active_sri_implementation_authorization_count"] != 1:
+            raise SystemExit("there must be exactly one active SRI authorization")
+        expected_auth, expected_task, expected_closeout = EXPECTED_ACTIVE_STATES[
+            payload["program_state"]
+        ]
+        if payload["active_sri_implementation_authorization"] != expected_auth:
+            raise SystemExit("active SRI authorization mismatch")
+        if payload["active_sri_implementation_task"] != expected_task:
+            raise SystemExit("active SRI task mismatch")
+        if payload["formal_closeout_task"] != expected_closeout:
+            raise SystemExit("formal closeout task mismatch")
     for key in (
         "actual_model_provider_call_enabled",
         "provider_network_egress_enabled",

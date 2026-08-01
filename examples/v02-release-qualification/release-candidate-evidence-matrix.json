@@ -1,0 +1,134 @@
+{
+  "authorization_transaction_id": "AION-238-V02RQ-0001",
+  "matrix_fingerprint": "92067f17a6efd25e0099c5e47ed05ced0649ca2f0484876dfcc211395ad30e76",
+  "production_evidence_required": true,
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "release_candidate_authorized": false,
+  "release_candidate_created": false,
+  "release_candidate_evidence_matrix_available": true,
+  "required_evidence": [
+    {
+      "gate_id": "V02-GATE-001",
+      "gate_name": "SRI program complete",
+      "outcome": "pass_verified_local"
+    },
+    {
+      "gate_id": "V02-GATE-002",
+      "gate_name": "qualification authorization exact",
+      "outcome": "pass_verified_local"
+    },
+    {
+      "gate_id": "V02-GATE-003",
+      "gate_name": "source-tree integrity",
+      "outcome": "pass_verified_local"
+    },
+    {
+      "gate_id": "V02-GATE-004",
+      "gate_name": "production-auth composition design",
+      "outcome": "pass_design"
+    },
+    {
+      "gate_id": "V02-GATE-005",
+      "gate_name": "RequestIdentity integration design",
+      "outcome": "pass_design"
+    },
+    {
+      "gate_id": "V02-GATE-006",
+      "gate_name": "replay-ledger provisioning design",
+      "outcome": "pass_design"
+    },
+    {
+      "gate_id": "V02-GATE-007",
+      "gate_name": "IdP adapter design",
+      "outcome": "pass_design"
+    },
+    {
+      "gate_id": "V02-GATE-008",
+      "gate_name": "public-key lifecycle design",
+      "outcome": "pass_design"
+    },
+    {
+      "gate_id": "V02-GATE-009",
+      "gate_name": "protected-material design",
+      "outcome": "pass_design"
+    },
+    {
+      "gate_id": "V02-GATE-010",
+      "gate_name": "credential lifecycle design",
+      "outcome": "pass_design"
+    },
+    {
+      "gate_id": "V02-GATE-011",
+      "gate_name": "token lifecycle design",
+      "outcome": "pass_design"
+    },
+    {
+      "gate_id": "V02-GATE-012",
+      "gate_name": "session lifecycle design",
+      "outcome": "pass_design"
+    },
+    {
+      "gate_id": "V02-GATE-013",
+      "gate_name": "deployment-artifact manifest",
+      "outcome": "pass_design"
+    },
+    {
+      "gate_id": "V02-GATE-014",
+      "gate_name": "SBOM projection",
+      "outcome": "pass_design"
+    },
+    {
+      "gate_id": "V02-GATE-015",
+      "gate_name": "provenance design",
+      "outcome": "pass_design"
+    },
+    {
+      "gate_id": "V02-GATE-016",
+      "gate_name": "reproducibility design",
+      "outcome": "pass_design"
+    },
+    {
+      "gate_id": "V02-GATE-017",
+      "gate_name": "rollback design",
+      "outcome": "pass_design"
+    },
+    {
+      "gate_id": "V02-GATE-018",
+      "gate_name": "observability design",
+      "outcome": "pass_design"
+    },
+    {
+      "gate_id": "V02-GATE-019",
+      "gate_name": "health-readiness design",
+      "outcome": "pass_design"
+    },
+    {
+      "gate_id": "V02-GATE-020",
+      "gate_name": "threat-model design",
+      "outcome": "pass_design"
+    },
+    {
+      "gate_id": "V02-GATE-021",
+      "gate_name": "runtime-guard design",
+      "outcome": "pass_design"
+    },
+    {
+      "gate_id": "V02-GATE-022",
+      "gate_name": "staging-qualification plan",
+      "outcome": "pass_design"
+    },
+    {
+      "gate_id": "V02-GATE-023",
+      "gate_name": "staging execution evidence",
+      "outcome": "requires_staging_evidence"
+    },
+    {
+      "gate_id": "V02-GATE-024",
+      "gate_name": "release-candidate authorization",
+      "outcome": "blocked"
+    }
+  ],
+  "schema_version": "aion-v02-release-candidate-evidence-matrix/v1",
+  "staging_evidence_required": true,
+  "v02_release_ready": false
+}

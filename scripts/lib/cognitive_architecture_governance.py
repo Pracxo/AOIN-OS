@@ -1355,6 +1355,39 @@ AION236_ALLOWED_PREFIXES = (
     "services/brain-api/tests/test_operator_console_integrated_",
 )
 
+AION239_ALLOWED_EXACT_PATHS = {
+    "AGENTS.md",
+    "README.md",
+    "docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md",
+    "docs/adr/README.md",
+    "docs/architecture.md",
+    "docs/brain-contract.md",
+    "docs/policy-model.md",
+    "docs/project-status.md",
+    "docs/release/v02-release-readiness-delta.md",
+    "docs/visual-brain.md",
+    "operator-console-static/README.md",
+    "operator-console-static/app.js",
+    "operator-console-static/index.html",
+    "scripts/auth-design-check.sh",
+    "scripts/lib/cognitive_architecture_governance.py",
+    "scripts/lib/v02-production-auth-scan-exclusions.sh",
+    "scripts/operator-console-static-check.sh",
+    "scripts/static-console-safety-check.sh",
+    "scripts/v02-release-qualification-local-run.py",
+    "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py",
+}
+
+AION239_ALLOWED_PREFIXES = (
+    "docs/v02-release-qualification/",
+    "docs/release/v02-release-qualification-",
+    "examples/v02-release-qualification/",
+    "operator-console-static/demo-data/v02-release-qualification-",
+    "scripts/v02-release-qualification-",
+    "services/brain-api/src/aion_brain/v02_release_qualification/",
+    "services/brain-api/tests/test_v02_release_qualification_",
+)
+
 AION199_ALLOWED_EXACT_PATHS = set(AION199_REQUIRED_FILES) | {
     "scripts/connector-runtime-no-external-call-regression.sh",
     "scripts/cognitive-integrated-evaluation-check.sh",
@@ -11725,7 +11758,7 @@ def _aion202_path_allowed(relative: str) -> bool:
 def _aion203_path_allowed(relative: str) -> bool:
     return relative in AION203_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION203_ALLOWED_PREFIXES
-    ) or _aion205_path_allowed(relative) or _aion231_path_allowed(relative) or _aion232_path_allowed(relative) or _aion233_path_allowed(relative) or _aion236_path_allowed(relative)
+    ) or _aion205_path_allowed(relative) or _aion231_path_allowed(relative) or _aion232_path_allowed(relative) or _aion233_path_allowed(relative) or _aion236_path_allowed(relative) or _aion239_path_allowed(relative)
 
 
 def _aion205_path_allowed(relative: str) -> bool:
@@ -11779,6 +11812,12 @@ def _aion233_path_allowed(relative: str) -> bool:
 def _aion236_path_allowed(relative: str) -> bool:
     return relative in AION236_ALLOWED_EXACT_PATHS or any(
         relative.startswith(prefix) for prefix in AION236_ALLOWED_PREFIXES
+    )
+
+
+def _aion239_path_allowed(relative: str) -> bool:
+    return relative in AION239_ALLOWED_EXACT_PATHS or any(
+        relative.startswith(prefix) for prefix in AION239_ALLOWED_PREFIXES
     )
 
 

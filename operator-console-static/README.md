@@ -1567,3 +1567,30 @@ Static demo data now includes final SRI evaluation and program closeout evidence
 - `demo-data/v02-release-qualification-runtime-hold.json`
 
 These files add final status evidence only. They do not enable runtime behavior, public listening, external egress, credentials, tokens, deployment, release candidates, v0.2 tags, or v0.2 releases.
+
+## AION-239 v0.2 Release Qualification Foundation Evidence
+
+AION-239 adds static-only evidence for the disabled v0.2 production-readiness qualification foundation. The console data remains read-only and adds no runtime release action.
+
+- `demo-data/v02-release-qualification-parent-program-binding.json`
+- `demo-data/v02-release-qualification-production-auth-composition.json`
+- `demo-data/v02-release-qualification-request-identity-integration.json`
+- `demo-data/v02-release-qualification-replay-provisioning.json`
+- `demo-data/v02-release-qualification-identity-provider-manifest.json`
+- `demo-data/v02-release-qualification-key-lifecycle.json`
+- `demo-data/v02-release-qualification-protected-material.json`
+- `demo-data/v02-release-qualification-credential-lifecycle.json`
+- `demo-data/v02-release-qualification-token-lifecycle.json`
+- `demo-data/v02-release-qualification-session-lifecycle.json`
+- `demo-data/v02-release-qualification-deployment-manifest.json`
+- `demo-data/v02-release-qualification-sbom.json`
+- `demo-data/v02-release-qualification-provenance.json`
+- `demo-data/v02-release-qualification-reproducibility.json`
+- `demo-data/v02-release-qualification-rollback.json`
+- `demo-data/v02-release-qualification-observability.json`
+- `demo-data/v02-release-qualification-health-readiness.json`
+- `demo-data/v02-release-qualification-threat-model.json`
+- `demo-data/v02-release-qualification-runtime-guard.json`
+- `demo-data/v02-release-qualification-release-gates.json`
+- `demo-data/v02-release-qualification-staging-plan.json`
+- `demo-data/v02-release-qualification-pilot-evidence.json`

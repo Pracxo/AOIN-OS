@@ -1300,3 +1300,9 @@ AION-SRIPE-003 passed with report fingerprint `61e50ce0829e85b27b61a7620bb1ca4a7
 <!-- AION-238 FINAL SRI GUARDRAIL -->
 - AION-238 final SRI closeout work may update final evaluation reports, ledgers, docs, examples, static evidence, and local gates only. It must keep `services/brain-api/src/aion_brain` runtime source unchanged, keep AION-239 runtime source absent, close `AION-236-SRI-0004` only after `AION-SRIPE-004` PASS, and keep production runtime, public listeners, external egress, credentials, tokens, deployments, v0.2 tags, and v0.2 releases disabled or absent.
 - AION-239 work is authorized only by `AION-238-V02RQ-0001` and only for disabled v0.2 release-qualification foundation artifacts until AION-240 independently evaluates it.
+
+## AION-239 Disabled v0.2 Release Qualification Foundation
+
+AION-239 implements the AION-238-authorized disabled v0.2 production-readiness qualification foundation. The foundation represents production-readiness gaps, production-auth composition, verified RequestIdentity integration, replay provisioning, IdP adapter contracts, key and protected-material policy, credential/token/session lifecycle, artifact/SBOM/provenance/reproducibility, rollback, observability, health, threat-model, release-gate and staging-plan evidence as strict local contracts.
+
+The implementation is disabled and design-only. It performs no external identity-provider call, DNS lookup, credential generation, token issuance, replay-ledger write, database provisioning, staging or production deployment, rollback execution, observability export, release-candidate creation, tag creation or release publication. The deterministic pilot returns a release hold because staging and production evidence remain absent. AION-238-V02RQ-0001 remains active pending AION-240 closeout.

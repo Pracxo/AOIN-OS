@@ -1,0 +1,30 @@
+{
+  "aion_237_implementation_commit": "df1f89e1708638e32aef0532fb37ed150b85b600",
+  "aion_237_merge_commit": "55f2721bb036886a693a36d870d49f49f7ecc6d1",
+  "aion_238_task": "AION-238",
+  "authorization_transaction_id": "AION-238-V02RQ-0001",
+  "binding_fingerprint": "3e4ce84c3ff12c57c85b8e1c74ee449c370469471194cc1865adc571c9e2cf5c",
+  "binding_timestamp": "2026-08-01T15:00:00Z",
+  "capability_runtime_implementation_status": "implemented_disabled_local",
+  "component_fingerprints": {
+    "capability_runtime": "1107914b4a7752bb932e80f0bce40b79244f63e4d7d190e631e994439f06c7f4",
+    "model_gateway": "5928166bb9f7114e295617275b3c04a6be04ae20b186714d5cbeed850d961691",
+    "operator_console": "4e9551179be96a2324cb2a7d503af794f1b670fd727a34b0ccad059fa75240a7",
+    "secure_runtime": "6e457d1a8bc226aa44697802d68b5d4cd5a272088a5ce6317048ab75503744ee"
+  },
+  "current_main_commit": "81076eab86a90e2f2097508b654e7869a5d144bf",
+  "model_gateway_implementation_status": "implemented_disabled_local",
+  "operator_console_implementation_status": "implemented_loopback_only_local",
+  "parent_evaluation_id": "AION-SRIPE-004",
+  "parent_evaluation_report_fingerprint": "6e457d1a8bc226aa44697802d68b5d4cd5a272088a5ce6317048ab75503744ee",
+  "parent_program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "production_effect": false,
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "schema_version": "aion-v02-release-qualification-component-binding/v1",
+  "secure_runtime_implementation_status": "secure_runtime_integration_program_complete",
+  "synthetic": true
+}

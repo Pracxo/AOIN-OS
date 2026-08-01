@@ -86,7 +86,12 @@ def test_v02_release_qualification_successor_authorization_is_exact_and_disabled
 
     assert program["program_id"] == "AION-V02-RELEASE-QUALIFICATION-001"
     assert program["program_state"] == (
-        "v02_release_qualification_program_authorized_not_implemented"
+        "v02_release_qualification_foundation_implemented_disabled_pending_closeout"
+    )
+    assert program["v02_release_qualification_program_implemented"] is True
+    assert program["v02_release_qualification_foundation_implemented"] is True
+    assert program["v02_release_qualification_foundation_state"] == (
+        "implemented_disabled_design_and_local_simulation_pending_AION-240_closeout"
     )
     assert program["parent_evaluation_id"] == "AION-SRIPE-004"
     assert program["parent_evaluation_decision"] == module.PASS_DECISION
@@ -122,9 +127,11 @@ def test_v02_release_qualification_successor_authorization_is_exact_and_disabled
 
     for key in auth["zero_resource_limit_keys"]:
         assert auth["resource_limits"][key] == 0
-    for path in auth["future_source_scope"]:
-        assert not (REPO_ROOT / path).exists()
-    assert not (REPO_ROOT / "scripts/v02-release-qualification-local-run.py").exists()
+    for path in auth["implemented_source_scope"]:
+        assert (REPO_ROOT / path).exists()
+    assert (REPO_ROOT / "scripts/v02-release-qualification-local-run.py").exists()
+    assert auth["local_qualification_pilot_completed"] is True
+    assert auth["v02_release_ready"] is False
 
 
 def test_release_state_remains_false_and_fail_does_not_authorize_successor():

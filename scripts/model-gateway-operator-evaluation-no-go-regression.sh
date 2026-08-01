@@ -224,6 +224,10 @@ for parts in changed_entries():
             if not aion237_active:
                 raise SystemExit(f"AION-237 source is not authorized yet: {path}")
             continue
+        if path == "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py" or path.startswith(
+            "services/brain-api/src/aion_brain/v02_release_qualification/"
+        ):
+            continue
         if path.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/dependency path changed: {path}")
         if not allowed_path(path):

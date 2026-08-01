@@ -1,0 +1,195 @@
+{
+  "evidence": {
+    "actor_context_projection_policies": [
+      {
+        "anonymous_fallback_allowed": false,
+        "privilege_expansion_allowed": false,
+        "projection_code": "project-actor_id",
+        "projection_fingerprint": "ea4755ba61a26731102657b78ebb5e82ad1d8ef54444c2a55d60c2f7b1add736",
+        "source_fields": [
+          "actor_id"
+        ],
+        "target_actor_context_field": "actor_id",
+        "workspace_substitution_allowed": false
+      },
+      {
+        "anonymous_fallback_allowed": false,
+        "privilege_expansion_allowed": false,
+        "projection_code": "project-workspace_id",
+        "projection_fingerprint": "ffc6e7002174a34ab3ab28b696fc29b9d18f5f1f4df6e2ed5e1d520e9f8d7674",
+        "source_fields": [
+          "workspace_id"
+        ],
+        "target_actor_context_field": "workspace_id",
+        "workspace_substitution_allowed": false
+      },
+      {
+        "anonymous_fallback_allowed": false,
+        "privilege_expansion_allowed": false,
+        "projection_code": "project-roles",
+        "projection_fingerprint": "00ea3dddb60f0872fa1e2aa3f55c39ea26963d472d440ddd30e1a81b8e14009f",
+        "source_fields": [
+          "roles"
+        ],
+        "target_actor_context_field": "roles",
+        "workspace_substitution_allowed": false
+      },
+      {
+        "anonymous_fallback_allowed": false,
+        "privilege_expansion_allowed": false,
+        "projection_code": "project-permissions",
+        "projection_fingerprint": "b898e28b1897611faea5401aa65e940f9fdd589b56c6cb4641e8c3b5737d7cf7",
+        "source_fields": [
+          "permissions"
+        ],
+        "target_actor_context_field": "permissions",
+        "workspace_substitution_allowed": false
+      },
+      {
+        "anonymous_fallback_allowed": false,
+        "privilege_expansion_allowed": false,
+        "projection_code": "project-security_scopes",
+        "projection_fingerprint": "b01be840aba4949d310ffc6d92de9e9ce53197a7f0bda763919cbde9f77b80b1",
+        "source_fields": [
+          "security_scopes"
+        ],
+        "target_actor_context_field": "security_scopes",
+        "workspace_substitution_allowed": false
+      }
+    ],
+    "anonymous_fallback_for_production_auth_requests": false,
+    "bearer_tokens_create_identity_without_future_verified_path": false,
+    "browser_headers_create_identity": false,
+    "claim_mappings": [
+      {
+        "claim_code": "issuer",
+        "closed_allowlist": [],
+        "mapping_fingerprint": "360a42e576358d687d233b7db5aa3d52c18972d0c34689200bdca3b544097dc8",
+        "raw_claim_retained": false,
+        "target_field_code": "issuer",
+        "verified_claim_required": true
+      },
+      {
+        "claim_code": "audience",
+        "closed_allowlist": [],
+        "mapping_fingerprint": "b0436c56e738a96fe52dca5ec2a1b8a7ce7f91f6c02c469819a70f7f0c910c28",
+        "raw_claim_retained": false,
+        "target_field_code": "audience",
+        "verified_claim_required": true
+      },
+      {
+        "claim_code": "subject",
+        "closed_allowlist": [],
+        "mapping_fingerprint": "5cec9eb77597b2eb541e044f668f2bd29c5172b42d45c17fd0ef5f99fddcb664",
+        "raw_claim_retained": false,
+        "target_field_code": "subject",
+        "verified_claim_required": true
+      },
+      {
+        "claim_code": "actor_id",
+        "closed_allowlist": [],
+        "mapping_fingerprint": "bc8556d2035cc6f0bbe768d451b0b4753b600b3ea6b6a01865fcc8e0026c421f",
+        "raw_claim_retained": false,
+        "target_field_code": "actor_id",
+        "verified_claim_required": true
+      },
+      {
+        "claim_code": "workspace_id",
+        "closed_allowlist": [],
+        "mapping_fingerprint": "11e4a73792f2f24bc0cb0664c5bc4c5d536c99fb56275b4e55677ddd12baf03b",
+        "raw_claim_retained": false,
+        "target_field_code": "workspace_id",
+        "verified_claim_required": true
+      },
+      {
+        "claim_code": "roles",
+        "closed_allowlist": [
+          "operator",
+          "auditor"
+        ],
+        "mapping_fingerprint": "c4bd4b5a0588a341538e86a8bcabb8de44143b5c28f9b8329450063482c83d47",
+        "raw_claim_retained": false,
+        "target_field_code": "roles",
+        "verified_claim_required": true
+      },
+      {
+        "claim_code": "permissions",
+        "closed_allowlist": [
+          "operator",
+          "auditor"
+        ],
+        "mapping_fingerprint": "41a9cefd88edceca330037e786775d66e02623e7d9d9000d7e1458edcc68dc35",
+        "raw_claim_retained": false,
+        "target_field_code": "permissions",
+        "verified_claim_required": true
+      },
+      {
+        "claim_code": "security_scopes",
+        "closed_allowlist": [],
+        "mapping_fingerprint": "10e06e2d4ceff163ab960c37121e830b086e7d0935c1aeb0ef291f89b4e5c48f",
+        "raw_claim_retained": false,
+        "target_field_code": "security_scopes",
+        "verified_claim_required": true
+      },
+      {
+        "claim_code": "trace_id",
+        "closed_allowlist": [],
+        "mapping_fingerprint": "e3fd067e2f69d41d400a298aa35416ccec4e65a86d295f87759143fcdc36272b",
+        "raw_claim_retained": false,
+        "target_field_code": "trace_id",
+        "verified_claim_required": true
+      },
+      {
+        "claim_code": "correlation_id",
+        "closed_allowlist": [],
+        "mapping_fingerprint": "50b4dde730330f55181d0228b1ecb4f756c3e68247c20a84b969f11abbac512e",
+        "raw_claim_retained": false,
+        "target_field_code": "correlation_id",
+        "verified_claim_required": true
+      },
+      {
+        "claim_code": "assertion_id",
+        "closed_allowlist": [],
+        "mapping_fingerprint": "b274fc2de4f1a3d33f0c28bbdecb815251e925861892fb79a9580d072b893bf5",
+        "raw_claim_retained": false,
+        "target_field_code": "assertion_id",
+        "verified_claim_required": true
+      },
+      {
+        "claim_code": "assertion_fingerprint",
+        "closed_allowlist": [],
+        "mapping_fingerprint": "d217f253bd91b57926ecea2a6e1ddf2c91fa73754335a71d06d6690f4cd362fc",
+        "raw_claim_retained": false,
+        "target_field_code": "assertion_fingerprint",
+        "verified_claim_required": true
+      },
+      {
+        "claim_code": "authentication_time",
+        "closed_allowlist": [],
+        "mapping_fingerprint": "4b461786c38e095603eb9657f4f43c31288b5992b1287dde77dcf6b48096c3ed",
+        "raw_claim_retained": false,
+        "target_field_code": "authentication_time",
+        "verified_claim_required": true
+      },
+      {
+        "claim_code": "expiry_time",
+        "closed_allowlist": [],
+        "mapping_fingerprint": "676ab9da551198ac6dc5ac9e803ed13d1ac633037c887130bc10b5ff439d916a",
+        "raw_claim_retained": false,
+        "target_field_code": "expiry_time",
+        "verified_claim_required": true
+      }
+    ],
+    "cookies_create_identity": false,
+    "privilege_expansion_rejected": true,
+    "raw_claims_retained": false,
+    "request_identity_plan_fingerprint": "d358cb1ad4c98cf21193efae98adf54431050afae7545be6a3bb072258ba34bd",
+    "schema_version": "aion-v02-request-identity-integration/v1",
+    "workspace_substitution_rejected": true
+  },
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "synthetic": true
+}

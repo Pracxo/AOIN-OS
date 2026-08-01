@@ -1,0 +1,16 @@
+{
+  "changed_replay_rejected": true,
+  "checked_fingerprints": [
+    "3e4ce84c3ff12c57c85b8e1c74ee449c370469471194cc1865adc571c9e2cf5c",
+    "f2ec4b230e3857d041f4a416bfb69af79779e29c6419edc78d8d637569a86df0",
+    "b683ac101da2523c4e7b3dff7a86a8c374c375062a234526df2b37600663ebc6",
+    "a6673700f55e54ca97648264d1c3bd45861fba2ae4f5cd4f9396c8b7b4b7cd6d",
+    "b899e769da4024c005a876d6ecddc02b780c990e2d51fa7740bc79704ccde585"
+  ],
+  "exact_replay_passed": true,
+  "integrity_fingerprint": "d828a3ed936f52f6f18b217e7c1ead4c174d7dcad8e433adb3a5b8b9bf7cdd44",
+  "integrity_status": "passed",
+  "redaction_passed": true,
+  "schema_version": "aion-v02-qualification-integrity/v1",
+  "zero_effects_passed": true
+}

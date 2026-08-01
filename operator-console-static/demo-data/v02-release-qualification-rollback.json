@@ -1,0 +1,234 @@
+{
+  "evidence": {
+    "drill_plan": {
+      "change_configuration": false,
+      "deploy": false,
+      "drill_id": "V02-ROLLBACK-DRILL-001",
+      "drill_plan_fingerprint": "d885af50f0991ee1de267404bc45d7dadeaefb7d13fbb963c1525d61e8725f14",
+      "execute_commands": false,
+      "mutate_database": false,
+      "replace_artifact": false,
+      "restart_service": false,
+      "rollback_plan_ids": [
+        "V02-ROLLBACK-PLAN-001",
+        "V02-ROLLBACK-PLAN-002"
+      ],
+      "schema_version": "aion-v02-rollback-drill-plan/v1",
+      "validation_steps": [
+        "validate step ordering",
+        "validate dependencies",
+        "validate health references",
+        "validate evidence requirements"
+      ]
+    },
+    "drill_result": {
+      "commands_executed": 0,
+      "database_mutations": 0,
+      "dependencies_valid": true,
+      "deployments": 0,
+      "drill_id": "V02-ROLLBACK-DRILL-001",
+      "drill_result_fingerprint": "3d239c86884072ed3e0d2f5629e75a73dbdf681b17ca10f589bbc0d1d1a51179",
+      "evidence_requirements_valid": true,
+      "health_checks_referenced": true,
+      "preconditions_valid": true,
+      "rollback_plan_ids": [
+        "V02-ROLLBACK-PLAN-001",
+        "V02-ROLLBACK-PLAN-002"
+      ],
+      "schema_version": "aion-v02-rollback-drill-plan/v1"
+    },
+    "plans": [
+      {
+        "abort_conditions": [
+          "missing approval",
+          "unknown artifact lineage"
+        ],
+        "artifact_version_lineage": [
+          "previous",
+          "candidate"
+        ],
+        "configuration_compatibility": "requires explicit compatibility evidence",
+        "database_compatibility_assumptions": "no database mutation in AION-239",
+        "evidence_requirements": [
+          "future staging rollback drill"
+        ],
+        "health_validation": [
+          "V02-HEALTH-001"
+        ],
+        "maximum_rollback_executions": 0,
+        "operator_approvals": [
+          "release manager",
+          "security reviewer"
+        ],
+        "plan_id": "V02-ROLLBACK-PLAN-001",
+        "post_rollback_checks": [
+          "health check",
+          "audit check"
+        ],
+        "pre_rollback_checks": [
+          "operator approval",
+          "health snapshot"
+        ],
+        "rollback_execution_enabled": false,
+        "rollback_plan_fingerprint": "c82087016e59101e6a5546e580be585188af87819d9a14b51f62cab04a6a60fe",
+        "rollback_trigger": "failed health readiness gate",
+        "schema_version": "aion-v02-rollback-plan/v1",
+        "steps": [
+          {
+            "command_present": false,
+            "dependency_step_ids": [],
+            "evidence_requirements": [
+              "staging drill evidence"
+            ],
+            "health_check_references": [
+              "V02-HEALTH-001"
+            ],
+            "precondition_codes": [
+              "operator-approval",
+              "health-baseline"
+            ],
+            "sequence": 1,
+            "step_fingerprint": "b8027f6d0252a3b422e2a8f4d243721a4fc1e16b75b629e7fcc124b54599479f",
+            "step_id": "V02-ROLLBACK-001-STEP-001"
+          },
+          {
+            "command_present": false,
+            "dependency_step_ids": [
+              "V02-ROLLBACK-001-STEP-001"
+            ],
+            "evidence_requirements": [
+              "staging drill evidence"
+            ],
+            "health_check_references": [
+              "V02-HEALTH-001"
+            ],
+            "precondition_codes": [
+              "operator-approval",
+              "health-baseline"
+            ],
+            "sequence": 2,
+            "step_fingerprint": "acd0e487aa7c831a1bbba39aeeb165e849abfaa7844001a4d785c47689fa4813",
+            "step_id": "V02-ROLLBACK-001-STEP-002"
+          },
+          {
+            "command_present": false,
+            "dependency_step_ids": [
+              "V02-ROLLBACK-001-STEP-002"
+            ],
+            "evidence_requirements": [
+              "staging drill evidence"
+            ],
+            "health_check_references": [
+              "V02-HEALTH-001"
+            ],
+            "precondition_codes": [
+              "operator-approval",
+              "health-baseline"
+            ],
+            "sequence": 3,
+            "step_fingerprint": "2f63ef9715d447a2817426623b8f5b71c8e9b5e742c8aa5e64bf38596f4b05ce",
+            "step_id": "V02-ROLLBACK-001-STEP-003"
+          }
+        ]
+      },
+      {
+        "abort_conditions": [
+          "missing approval",
+          "unknown artifact lineage"
+        ],
+        "artifact_version_lineage": [
+          "previous",
+          "candidate"
+        ],
+        "configuration_compatibility": "requires explicit compatibility evidence",
+        "database_compatibility_assumptions": "no database mutation in AION-239",
+        "evidence_requirements": [
+          "future staging rollback drill"
+        ],
+        "health_validation": [
+          "V02-HEALTH-001"
+        ],
+        "maximum_rollback_executions": 0,
+        "operator_approvals": [
+          "release manager",
+          "security reviewer"
+        ],
+        "plan_id": "V02-ROLLBACK-PLAN-002",
+        "post_rollback_checks": [
+          "health check",
+          "audit check"
+        ],
+        "pre_rollback_checks": [
+          "operator approval",
+          "health snapshot"
+        ],
+        "rollback_execution_enabled": false,
+        "rollback_plan_fingerprint": "8d36ab2f4eaf72582a95d0325a66cc05c02eaf28eef0561c5a6c49a306625e1e",
+        "rollback_trigger": "failed health readiness gate",
+        "schema_version": "aion-v02-rollback-plan/v1",
+        "steps": [
+          {
+            "command_present": false,
+            "dependency_step_ids": [],
+            "evidence_requirements": [
+              "staging drill evidence"
+            ],
+            "health_check_references": [
+              "V02-HEALTH-001"
+            ],
+            "precondition_codes": [
+              "operator-approval",
+              "health-baseline"
+            ],
+            "sequence": 1,
+            "step_fingerprint": "d49bd46d24da543b078242b1d68a3f1e44631a1ef1e381bace686bab803454c9",
+            "step_id": "V02-ROLLBACK-002-STEP-001"
+          },
+          {
+            "command_present": false,
+            "dependency_step_ids": [
+              "V02-ROLLBACK-002-STEP-001"
+            ],
+            "evidence_requirements": [
+              "staging drill evidence"
+            ],
+            "health_check_references": [
+              "V02-HEALTH-001"
+            ],
+            "precondition_codes": [
+              "operator-approval",
+              "health-baseline"
+            ],
+            "sequence": 2,
+            "step_fingerprint": "9924623a658f6eb747236e5cd9cec53348b46fa6ac665af073ddd2b92c5b0d91",
+            "step_id": "V02-ROLLBACK-002-STEP-002"
+          },
+          {
+            "command_present": false,
+            "dependency_step_ids": [
+              "V02-ROLLBACK-002-STEP-002"
+            ],
+            "evidence_requirements": [
+              "staging drill evidence"
+            ],
+            "health_check_references": [
+              "V02-HEALTH-001"
+            ],
+            "precondition_codes": [
+              "operator-approval",
+              "health-baseline"
+            ],
+            "sequence": 3,
+            "step_fingerprint": "6373b648d501f180e673b413a11d0bed03b8214c2498926117cd23752c7b9400",
+            "step_id": "V02-ROLLBACK-002-STEP-003"
+          }
+        ]
+      }
+    ]
+  },
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "synthetic": true
+}

@@ -108,6 +108,16 @@ def aion237_implemented() -> bool:
     if not ledger.exists():
         return False
     payload = json.loads(ledger.read_text(encoding="utf-8"))
+    if payload.get("program_state") == "secure_runtime_integration_program_complete":
+        return (
+            payload.get("operator_console_integration_implemented") is True
+            and payload.get("integrated_authenticated_local_pilot_completed") is True
+            and payload.get("active_sri_implementation_authorization_count") == 0
+            and payload.get("active_sri_implementation_authorization") is None
+            and payload.get("active_sri_implementation_task") is None
+            and payload.get("formal_closeout_task") is None
+            and payload.get("final_completed_task") == "AION-238"
+        )
     return (
         payload.get("operator_console_integration_implemented") is True
         and payload.get("integrated_authenticated_local_pilot_completed") is True
@@ -140,7 +150,11 @@ for parts in changed_entries():
                 aion237_active
                 and (path in AION_237_ALLOWED_EXACT or path.startswith(AION_237_ALLOWED_PREFIXES))
             )
-            if not allowed_aion237:
+            allowed_aion239 = (
+                path == "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py"
+                or path.startswith("services/brain-api/src/aion_brain/v02_release_qualification/")
+            )
+            if not (allowed_aion237 or allowed_aion239):
                 raise SystemExit(
                     f"runtime source change is not authorized on AION-236 branch: {path}"
                 )

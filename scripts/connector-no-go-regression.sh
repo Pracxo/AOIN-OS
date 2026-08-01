@@ -367,6 +367,17 @@ allowed_aion231_prefixes = (
     "services/brain-api/tests/test_secure_runtime_",
     "services/brain-api/tests/test_secure_runtime_integration_",
 )
+allowed_aion239_files = {
+    "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py",
+}
+allowed_aion239_prefixes = (
+    "docs/v02-release-qualification/",
+    "docs/release/v02-release-qualification-",
+    "examples/v02-release-qualification/",
+    "operator-console-static/demo-data/v02-release-qualification-",
+    "services/brain-api/src/aion_brain/v02_release_qualification/",
+    "services/brain-api/tests/test_v02_release_qualification_",
+)
 runtime_prefixes = (
     "services/brain-api/src/",
     "packages/aion-sdk-python/src/",
@@ -422,6 +433,7 @@ for relative in sorted(changed):
         or relative in allowed_aion152_files
         or relative in allowed_aion205_files
         or relative in allowed_aion231_files
+        or relative in allowed_aion239_files
         or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)
         or relative.startswith(allowed_aion110_prefixes)
@@ -431,6 +443,7 @@ for relative in sorted(changed):
         or relative.startswith(allowed_aion152_prefixes)
         or relative.startswith(allowed_aion205_prefixes)
         or relative.startswith(allowed_aion231_prefixes)
+        or relative.startswith(allowed_aion239_prefixes)
     ):
         continue
     if not relative.startswith(runtime_prefixes):

@@ -95,6 +95,7 @@ if git diff --name-only --diff-filter=ACMRT HEAD -- services/brain-api/src packa
 				  | rg -v '^services/brain-api/src/aion_brain/contracts/model_gateway\.py$|^services/brain-api/src/aion_brain/model_gateway/' \
 				  | rg -v '^services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime\.py$|^services/brain-api/src/aion_brain/capability_runtime/' \
 				  | rg -v '^services/brain-api/src/aion_brain/contracts/operator_console_integration\.py$|^services/brain-api/src/aion_brain/operator_console_runtime/' \
+				  | rg -v '^services/brain-api/src/aion_brain/contracts/v02_release_qualification\.py$|^services/brain-api/src/aion_brain/v02_release_qualification/' \
 			  | rg -n '.'; then
   echo "AION-109 must not change runtime, SDK, CLI, or config source files" >&2
   exit 1
@@ -127,6 +128,7 @@ if git ls-files --others --exclude-standard services/brain-api/src packages/aion
 				  | rg -v '^services/brain-api/src/aion_brain/contracts/model_gateway\.py$|^services/brain-api/src/aion_brain/model_gateway/' \
 				  | rg -v '^services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime\.py$|^services/brain-api/src/aion_brain/capability_runtime/' \
 				  | rg -v '^services/brain-api/src/aion_brain/contracts/operator_console_integration\.py$|^services/brain-api/src/aion_brain/operator_console_runtime/' \
+				  | rg -v '^services/brain-api/src/aion_brain/contracts/v02_release_qualification\.py$|^services/brain-api/src/aion_brain/v02_release_qualification/' \
 			  | rg -n '.'; then
   echo "AION-109 must not add runtime, SDK, or CLI source files" >&2
   exit 1

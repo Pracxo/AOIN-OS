@@ -158,20 +158,33 @@ is_aion237_operator_console_source() {
   return 1
 }
 
+is_aion239_v02_release_qualification_source() {
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
+    services/brain-api/src/aion_brain/v02_release_qualification/*.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 is_allowed_change() {
   case "$1" in
     README.md|AGENTS.md|\
     docs/project-status.md|docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/visual-brain.md|\
     docs/secure-runtime-integration/*|\
-    docs/release/secure-runtime-integration-*|docs/release/secure-runtime-foundation-*|docs/release/model-gateway-*|docs/release/capability-runtime-*|docs/release/operator-console-*|docs/release/v02-release-readiness-delta.md|\
+    docs/v02-release-qualification/*|\
+    docs/release/secure-runtime-integration-*|docs/release/secure-runtime-foundation-*|docs/release/model-gateway-*|docs/release/capability-runtime-*|docs/release/operator-console-*|docs/release/v02-release-readiness-delta.md|docs/release/v02-release-qualification-*|\
     docs/adr/0195-controlled-authenticated-local-operator-runtime-foundation.md|docs/adr/0196-secure-runtime-foundation-evaluation-and-controlled-model-gateway-authorization.md|\
 	    docs/adr/0197-controlled-provider-neutral-model-gateway-and-deterministic-reference-provider.md|docs/adr/0198-controlled-model-gateway-evaluation-and-sandboxed-capability-runtime-authorization.md|\
 	    docs/adr/0199-sandboxed-deterministic-capability-and-synthetic-connector-runtime.md|\
 	    docs/adr/0200-sandboxed-capability-runtime-evaluation-and-controlled-local-operator-console-integration-authorization.md|\
-	    docs/adr/0201-controlled-same-origin-loopback-operator-console-and-integrated-local-runtime.md|docs/adr/README.md|\
+	    docs/adr/0201-controlled-same-origin-loopback-operator-console-and-integrated-local-runtime.md|docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md|docs/adr/README.md|\
     examples/secure-runtime-integration/*|\
+    examples/v02-release-qualification/*|\
     operator-console-static/index.html|operator-console-static/app.js|operator-console-static/live-console.js|operator-console-static/styles.css|operator-console-static/README.md|\
     operator-console-static/demo-data/secure-runtime-integration-*.json|\
+    operator-console-static/demo-data/v02-release-qualification-*.json|\
     operator-console-static/demo-data/secure-runtime-foundation-operator-evaluation.json|\
     operator-console-static/demo-data/model-gateway-*.json|\
 	    operator-console-static/demo-data/capability-runtime-*.json|\
@@ -229,6 +242,7 @@ is_allowed_change() {
     scripts/lib/capability_runtime_operator_evaluation.py|\
     scripts/lib/v02_production_auth_authorization.py|\
     scripts/secure-runtime-integration-program-authorization-check.sh|\
+    scripts/secure-runtime-integration-final-evaluation-no-go-regression.sh|\
     scripts/secure-runtime-integration-program-no-go-regression.sh|scripts/secure-runtime-integration-runtime-hold.sh|\
     scripts/lib/v02-production-auth-scan-exclusions.sh|\
     scripts/production-auth-actor-context-trust-boundary-no-go-regression.sh|\
@@ -240,6 +254,7 @@ is_allowed_change() {
     scripts/production-auth-request-identity-no-go-regression.sh|\
     scripts/production-auth-request-identity-stabilization-no-go-regression.sh|\
     scripts/v02-*.sh|\
+    scripts/v02-release-qualification-local-run.py|\
     scripts/v02-actor-context-trust-boundary-authorization-check.sh|\
     scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh|\
     scripts/v02-identity-assertion-replay-protection-authorization-no-go-regression.sh|\
@@ -265,7 +280,8 @@ is_allowed_change() {
 	    services/brain-api/tests/test_operator_console_integrated_*.py|\
 	    services/brain-api/tests/test_operator_platform_*.py|\
 	    services/brain-api/tests/test_static_console_ui_release_gate.py|\
-	    services/brain-api/tests/test_secure_runtime_current_state_after_aion236.py|\
+    services/brain-api/tests/test_secure_runtime_current_state_after_aion236.py|\
+    services/brain-api/tests/test_v02_release_qualification_*.py|\
     services/brain-api/tests/aion234_test_support.py)
       return 0
       ;;
@@ -280,6 +296,9 @@ is_allowed_change() {
 	    return 0
 	  fi
 	  if is_aion237_operator_console_source "$1"; then
+	    return 0
+	  fi
+	  if is_aion239_v02_release_qualification_source "$1"; then
 	    return 0
 	  fi
   return 1

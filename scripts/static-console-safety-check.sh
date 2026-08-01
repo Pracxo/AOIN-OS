@@ -423,9 +423,8 @@ secure_runtime_evaluation_demo_names = {
     "secure-runtime-integration-program-final-closeout.json",
 }
 v02_release_qualification_demo_names = {
-    "v02-release-qualification-gap-matrix.json",
-    "v02-release-qualification-program-authorization.json",
-    "v02-release-qualification-runtime-hold.json",
+    path.name
+    for path in (static_dir / "demo-data").glob("v02-release-qualification-*.json")
 }
 model_gateway_demo_names = {
     "model-gateway-audit.json",
@@ -537,6 +536,7 @@ def walk(value: object, path: Path) -> None:
             if marker in {
                 "authorization",
                 "credential",
+                "private_key",
                 "token",
                 "hidden_reasoning",
             } and path.name in (

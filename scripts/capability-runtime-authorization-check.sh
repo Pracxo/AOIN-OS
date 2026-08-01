@@ -104,7 +104,7 @@ post_aion236_active = [{
     "formal_closeout_task": "AION-238",
     "implementation_task": "AION-237",
 }]
-require(active_authorizations in (legacy_active, post_aion236_active), "active authorization list mismatch")
+require(active_authorizations in (legacy_active, post_aion236_active, []), "active authorization list mismatch")
 require(program["aion_234_record"]["ci_result"] == "pass", "AION-234 record is not reconciled")
 require(
     program["aion_235_record"]["authorization_state"]

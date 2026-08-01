@@ -1,0 +1,327 @@
+{
+  "evidence": {
+    "gates": [
+      {
+        "evidence_fingerprints": [
+          "92b4e94f5a365b96dc6425331f741070103c60345fa50b7ab8753323fb4de5d3"
+        ],
+        "evidence_maturity": "verified_local",
+        "gate_fingerprint": "4aca4692037867ef6a1ed53fa2a3bb05b39f0cef5cfd9e8e852b4b28b7fc82a8",
+        "gate_id": "V02-GATE-001",
+        "gate_name": "SRI program complete",
+        "outcome": "pass_verified_local",
+        "production_evidence_required": false,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "4ba835397e130f7aa62fa6a4b5a36f121df0294cc75030e3aac37446b37408f2"
+        ],
+        "evidence_maturity": "verified_local",
+        "gate_fingerprint": "cda54c5907321d4965e7e63c2dfadf9fb686f1d88fb895c33e57b1ad4694b367",
+        "gate_id": "V02-GATE-002",
+        "gate_name": "qualification authorization exact",
+        "outcome": "pass_verified_local",
+        "production_evidence_required": false,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "122d03847cd61c5d1f14b3772b126ba7187efdb0ec3574442de2dd1ee242eb9b"
+        ],
+        "evidence_maturity": "verified_local",
+        "gate_fingerprint": "61eb5de78e6062bf219865e8b21da75de89049ea96c159d807480670d19a3688",
+        "gate_id": "V02-GATE-003",
+        "gate_name": "source-tree integrity",
+        "outcome": "pass_verified_local",
+        "production_evidence_required": false,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "ee31ecf3ea3dfd8e3a43c93f3668bf15e157d138e64aab6035b89fd9a6161817"
+        ],
+        "evidence_maturity": "design_recorded",
+        "gate_fingerprint": "9913a5da31c180242d994ee63a20b6d9184a981afcb52e4d973ae26c33c9b68c",
+        "gate_id": "V02-GATE-004",
+        "gate_name": "production-auth composition design",
+        "outcome": "pass_design",
+        "production_evidence_required": true,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "7e6aa61f058b61a4c81c64684105a4b806191b0a6ba312b2492c56db87aff332"
+        ],
+        "evidence_maturity": "design_recorded",
+        "gate_fingerprint": "5083ceac484ce320bd396680edb6d2430e86953477973910540851c5f2191d5e",
+        "gate_id": "V02-GATE-005",
+        "gate_name": "RequestIdentity integration design",
+        "outcome": "pass_design",
+        "production_evidence_required": false,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "9eda96834601b6f549d7d2601a2ce88ed9d38389673cf1ae407b6e616a016b19"
+        ],
+        "evidence_maturity": "design_recorded",
+        "gate_fingerprint": "dc5f8d162ad8dbfbd9cea53dab80947d5f4bd438c137ec10a791b2c2b59f2cc2",
+        "gate_id": "V02-GATE-006",
+        "gate_name": "replay-ledger provisioning design",
+        "outcome": "pass_design",
+        "production_evidence_required": true,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "2d2e6c1e8da79aca80ab0b4a06c5c98787b3f48143845971f3e397f6d7b857ba"
+        ],
+        "evidence_maturity": "design_recorded",
+        "gate_fingerprint": "b38cf941fd094735905111bc1a8b92d15db3c0625c6826793c327b49928dcca1",
+        "gate_id": "V02-GATE-007",
+        "gate_name": "IdP adapter design",
+        "outcome": "pass_design",
+        "production_evidence_required": true,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "c9f29a0b846e83e5d6b5a8d92cd3a1b5f4be07ec8652ebfadc2a72a04234ddff"
+        ],
+        "evidence_maturity": "design_recorded",
+        "gate_fingerprint": "3cde68d47b86290916faac2c222369c37b32f6029acac9917e74bc88954d12fc",
+        "gate_id": "V02-GATE-008",
+        "gate_name": "public-key lifecycle design",
+        "outcome": "pass_design",
+        "production_evidence_required": true,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "66f603a18a2b4005e21227155ab05494265b080fe0648875da9cedd87d0dced9"
+        ],
+        "evidence_maturity": "design_recorded",
+        "gate_fingerprint": "dd18fefcbfb7e58ef5696a71e240f30488e46e9e009e071a4680538c37da7560",
+        "gate_id": "V02-GATE-009",
+        "gate_name": "protected-material design",
+        "outcome": "pass_design",
+        "production_evidence_required": false,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "e3d071efb588b68928f4ee427768a08bc919a09ed0e948fdb21bfbe1f29ebf13"
+        ],
+        "evidence_maturity": "design_recorded",
+        "gate_fingerprint": "f38fc3495c7d1426bcbe25fc16530f3e0e826e3994014329ba014882c2abcae0",
+        "gate_id": "V02-GATE-010",
+        "gate_name": "credential lifecycle design",
+        "outcome": "pass_design",
+        "production_evidence_required": true,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "848ae4813e6298c250fdc914fbfa6bd39282f7519e46b858722ea2f4e42772b0"
+        ],
+        "evidence_maturity": "design_recorded",
+        "gate_fingerprint": "a2f75716cefe30232518f358c87d35c950c31444bc8223dfdca3f8e2d192b872",
+        "gate_id": "V02-GATE-011",
+        "gate_name": "token lifecycle design",
+        "outcome": "pass_design",
+        "production_evidence_required": true,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "fb8ec020c7a01f15605e242a9369383db86abd02e2c7b0934cf45cbc12b0f490"
+        ],
+        "evidence_maturity": "design_recorded",
+        "gate_fingerprint": "ff16e95518b7e0752587f3fec08f98dd1583d13ea0d5df7e1990e1809c1d2fee",
+        "gate_id": "V02-GATE-012",
+        "gate_name": "session lifecycle design",
+        "outcome": "pass_design",
+        "production_evidence_required": true,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "b84d11e0de248403608529a63dcf790ff16a0b3201f028d6af5cb7b902917e0d"
+        ],
+        "evidence_maturity": "design_recorded",
+        "gate_fingerprint": "1ce3a26b3ec250cac0d8ac19e66dcc84c4ea1e61ccdf5c3a3fc2ed4d3ee4debe",
+        "gate_id": "V02-GATE-013",
+        "gate_name": "deployment-artifact manifest",
+        "outcome": "pass_design",
+        "production_evidence_required": false,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "9edea06804abab3757b4dc4dbe22f47027562be239c4546ae89d527fde342240"
+        ],
+        "evidence_maturity": "design_recorded",
+        "gate_fingerprint": "f0bad8bc1d737956ef0ccf891989c71367cdfa9e43b06b5157c3c3757f11afeb",
+        "gate_id": "V02-GATE-014",
+        "gate_name": "SBOM projection",
+        "outcome": "pass_design",
+        "production_evidence_required": false,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "c5468a92b5a47a266ddc79a33c4be2bea8f0e631ff565f1a84ab7153ab03fc27"
+        ],
+        "evidence_maturity": "design_recorded",
+        "gate_fingerprint": "680c6e6548a23f5ac368086aaf5f090458a22015ecdd1e5cc8d48cbbd936d7b3",
+        "gate_id": "V02-GATE-015",
+        "gate_name": "provenance design",
+        "outcome": "pass_design",
+        "production_evidence_required": false,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "c7739104951fa6d0d00d0e501edbb37a0956cc0da927e96623bdf10c3611c4db"
+        ],
+        "evidence_maturity": "design_recorded",
+        "gate_fingerprint": "cef87d9416d241be1579f706522fe3dd0b7a2da787eab1da8ab3b3a7e04a0491",
+        "gate_id": "V02-GATE-016",
+        "gate_name": "reproducibility design",
+        "outcome": "pass_design",
+        "production_evidence_required": false,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "854167ae84afb516e92f69ed819c3d21c38c6a2dc6ed62f93008be9fb4341980"
+        ],
+        "evidence_maturity": "design_recorded",
+        "gate_fingerprint": "db21e464ab37a657d7a12fa449591ba37ed61a5c81a3bae35309b6bcc9e5b926",
+        "gate_id": "V02-GATE-017",
+        "gate_name": "rollback design",
+        "outcome": "pass_design",
+        "production_evidence_required": false,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "09e9a602e6c1405e5f4c23c8f63ab0948d03c56849650a27863246084cedcbdc"
+        ],
+        "evidence_maturity": "design_recorded",
+        "gate_fingerprint": "297149cbb6b2f29e49c1312c684b5f3351e0e47c338fed2ab047accd154d0418",
+        "gate_id": "V02-GATE-018",
+        "gate_name": "observability design",
+        "outcome": "pass_design",
+        "production_evidence_required": false,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "ce693002d93cddfff3ff4e83792038dd04f3e5fb859964b0adf9e6803f1584d6"
+        ],
+        "evidence_maturity": "design_recorded",
+        "gate_fingerprint": "658c39af5c8a985a077c3befad59e765530a5ee788e0a892245b08aab60c3e76",
+        "gate_id": "V02-GATE-019",
+        "gate_name": "health-readiness design",
+        "outcome": "pass_design",
+        "production_evidence_required": false,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "1e0a22d1f907c391e4856d3f18a3c88e9cc192e64b988e364aba2002b3d3630a"
+        ],
+        "evidence_maturity": "design_recorded",
+        "gate_fingerprint": "dbeaf14752c791ff63bb4a856a933880e3a935d3bfdcdbc91d93d2258e54a8fe",
+        "gate_id": "V02-GATE-020",
+        "gate_name": "threat-model design",
+        "outcome": "pass_design",
+        "production_evidence_required": false,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "a93fff7f931b6e8a02696c98a1261fdf50acbda5809af9535c3dfb8ef5daab96"
+        ],
+        "evidence_maturity": "design_recorded",
+        "gate_fingerprint": "80b72251c64d5b2874d1a73c52a0453b4dbce28c5b645eff512f781db8da4441",
+        "gate_id": "V02-GATE-021",
+        "gate_name": "runtime-guard design",
+        "outcome": "pass_design",
+        "production_evidence_required": false,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "c5ab0332374c5f292361df4b552bf9af735ef2a37f86d68581f51e9ff3a95fcc"
+        ],
+        "evidence_maturity": "design_recorded",
+        "gate_fingerprint": "9d115e11345460efd6fe9f1c104c90897e753ed4b7514b3e9acba07a986907d2",
+        "gate_id": "V02-GATE-022",
+        "gate_name": "staging-qualification plan",
+        "outcome": "pass_design",
+        "production_evidence_required": false,
+        "release_ready_effect": false,
+        "staging_evidence_required": false
+      },
+      {
+        "evidence_fingerprints": [
+          "2c6389c869b50289de18c4ceb23c62d876fe640ab5eca8225195ce904bd62662"
+        ],
+        "evidence_maturity": "staging_required",
+        "gate_fingerprint": "0423e46bc830ae089e20403bdf8e5f0ae10b3afd82e6e012c3a5a97e720b8f81",
+        "gate_id": "V02-GATE-023",
+        "gate_name": "staging execution evidence",
+        "outcome": "requires_staging_evidence",
+        "production_evidence_required": false,
+        "release_ready_effect": false,
+        "staging_evidence_required": true
+      },
+      {
+        "evidence_fingerprints": [
+          "3d1c6347164c72cc4661348c742a695e18b864b1bd9a67952d208142d55c196b"
+        ],
+        "evidence_maturity": "production_required",
+        "gate_fingerprint": "81fc1d40aa9546f5e8bbc7c655eb4f6bc77fd62e80affdff507d8224ea9a0e57",
+        "gate_id": "V02-GATE-024",
+        "gate_name": "release-candidate authorization",
+        "outcome": "blocked",
+        "production_evidence_required": true,
+        "release_ready_effect": false,
+        "staging_evidence_required": true
+      }
+    ],
+    "release_gate_matrix_fingerprint": "a6673700f55e54ca97648264d1c3bd45861fba2ae4f5cd4f9396c8b7b4b7cd6d",
+    "schema_version": "aion-v02-release-gate-matrix/v1",
+    "v02_release_candidate_created": false,
+    "v02_release_ready": false
+  },
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "synthetic": true
+}

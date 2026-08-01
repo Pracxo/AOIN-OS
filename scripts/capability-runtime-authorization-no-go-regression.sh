@@ -41,7 +41,14 @@ for relative in (
             raise SystemExit(f"authorization reusable in {relative}")
         continue
 
-    if payload.get("active_sri_implementation_authorization") != "AION-236-SRI-0004":
+    active_sri = payload.get("active_sri_implementation_authorization")
+    completed_sri = (
+        payload.get("program_state") == "secure_runtime_integration_program_complete"
+        and payload.get("active_sri_implementation_authorization_count") == 0
+        and active_sri is None
+        and payload.get("final_completed_task") == "AION-238"
+    )
+    if active_sri != "AION-236-SRI-0004" and not completed_sri:
         raise SystemExit(f"authorization id mismatch in {relative}")
 
     if relative == "docs/secure-runtime-integration/program-ledger.json":

@@ -1,0 +1,40 @@
+[
+  {
+    "architecture_code": "amd64",
+    "artifact_built": false,
+    "artifact_bytes_present": false,
+    "artifact_evidence_requirements": [
+      "future build provenance",
+      "future scan evidence"
+    ],
+    "artifact_kind_code": "container-image-projection",
+    "artifact_pushed": false,
+    "build_configuration_fingerprint": "5e8993a960d4367cccaad4479f1a5ebd085f8a62771c227e66f423eea0dfc34a",
+    "components": [
+      {
+        "component_fingerprint": "edb47b9b249dbc642403f781ca80b06b9edaea1dc47edb7273a4cef094cfc054",
+        "component_kind_code": "service",
+        "component_name": "brain-api",
+        "expected_digest_algorithm": "sha256"
+      }
+    ],
+    "container_configuration_fingerprint": "b297e078192ceb0fe7be4bbd54226d3b0e52f84743061adc25f871910e2063d4",
+    "dependency_manifest_fingerprints": [
+      "ee4f34e40ced5993f74afd4531ba70eabda3e58e59c1f2b94d098cf22c2d6348"
+    ],
+    "expected_artifact_name": "aion-brain-v02-candidate-projection",
+    "expected_digest_algorithm": "sha256",
+    "manifest_fingerprint": "06f5caf81da6ee26aaba6fba8fba4ef02e6418149747277771ec8efcafb97d04",
+    "manifest_id": "V02-ARTIFACT-MANIFEST-001",
+    "release_candidate": false,
+    "required_environment_class_codes": [
+      "staging",
+      "release-candidate"
+    ],
+    "runtime_entrypoint_fingerprint": "00b0decb5b1e3f6778e5c456f6019fc5af5bc2338835e31275527a2b6cc5cfc2",
+    "schema_version": "aion-v02-deployment-artifact-manifest/v1",
+    "source_commit": "81076eab86a90e2f2097508b654e7869a5d144bf",
+    "source_tree_fingerprint": "049a0e48c66c5ec821edcbeee54a97a22436f6a4d4bd598a6ac613a5a0b7f4f0",
+    "target_platform_code": "future-staging-linux"
+  }
+]

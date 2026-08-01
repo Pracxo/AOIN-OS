@@ -1,0 +1,110 @@
+[
+  {
+    "audit_requirements": [
+      "session created",
+      "session closed",
+      "session revoked"
+    ],
+    "binding_requirements": [
+      "actor",
+      "workspace",
+      "trace"
+    ],
+    "cleanup_requirements": [
+      "remove references",
+      "retain redacted audit"
+    ],
+    "concurrency_limit": 2,
+    "creation_preconditions": [
+      "verified identity",
+      "replay check",
+      "policy allow"
+    ],
+    "idle_timeout_seconds": 900,
+    "lifecycle_kind": "session",
+    "logout_behavior": "future explicit logout invalidates server session",
+    "maximum_duration_seconds": 3600,
+    "policy_fingerprint": "471d1a1a02f0a8b2ad69c1363b7fac5a947a8dd6152fae8a0c3af83cd6c3ccd4",
+    "policy_id": "V02-SESSION-POLICY-001",
+    "revocation_conditions": [
+      "identity revoked",
+      "role removed",
+      "kill switch"
+    ],
+    "schema_version": "aion-v02-session-lifecycle/v1",
+    "session_kind_code": "operator",
+    "session_tokens_issued": 0
+  },
+  {
+    "audit_requirements": [
+      "session created",
+      "session closed",
+      "session revoked"
+    ],
+    "binding_requirements": [
+      "actor",
+      "workspace",
+      "trace"
+    ],
+    "cleanup_requirements": [
+      "remove references",
+      "retain redacted audit"
+    ],
+    "concurrency_limit": 2,
+    "creation_preconditions": [
+      "verified identity",
+      "replay check",
+      "policy allow"
+    ],
+    "idle_timeout_seconds": 900,
+    "lifecycle_kind": "session",
+    "logout_behavior": "future explicit logout invalidates server session",
+    "maximum_duration_seconds": 3600,
+    "policy_fingerprint": "bfc4ef2e2d58ca99507133057bed77234d3ce51d54d869d85bdfa8720a1975bc",
+    "policy_id": "V02-SESSION-POLICY-002",
+    "revocation_conditions": [
+      "identity revoked",
+      "role removed",
+      "kill switch"
+    ],
+    "schema_version": "aion-v02-session-lifecycle/v1",
+    "session_kind_code": "auditor",
+    "session_tokens_issued": 0
+  },
+  {
+    "audit_requirements": [
+      "session created",
+      "session closed",
+      "session revoked"
+    ],
+    "binding_requirements": [
+      "actor",
+      "workspace",
+      "trace"
+    ],
+    "cleanup_requirements": [
+      "remove references",
+      "retain redacted audit"
+    ],
+    "concurrency_limit": 2,
+    "creation_preconditions": [
+      "verified identity",
+      "replay check",
+      "policy allow"
+    ],
+    "idle_timeout_seconds": 900,
+    "lifecycle_kind": "session",
+    "logout_behavior": "future explicit logout invalidates server session",
+    "maximum_duration_seconds": 3600,
+    "policy_fingerprint": "19e14a343676edb70952e158c431977e7c0d4944b3c6baa85ebb58c6704a71aa",
+    "policy_id": "V02-SESSION-POLICY-003",
+    "revocation_conditions": [
+      "identity revoked",
+      "role removed",
+      "kill switch"
+    ],
+    "schema_version": "aion-v02-session-lifecycle/v1",
+    "session_kind_code": "break-glass-review",
+    "session_tokens_issued": 0
+  }
+]

@@ -83,7 +83,7 @@ is_allowed_path() {
       ;;
   esac
   case "$1" in
-    README.md|AGENTS.md|docs/*|examples/*|operator-console-static/*|scripts/auth-design-check.sh|scripts/operator-console-static-check.sh|scripts/secure-runtime-integration-*.sh|scripts/knowledge-intelligence-program-*|scripts/lib/secure_runtime_integration_final_evaluation.py|scripts/lib/knowledge_intelligence_program_final_evaluation.py|scripts/lib/knowledge_intelligence_domain_expert_mesh_authorization.py|scripts/lib/knowledge_intelligence_public_research_pilot_authorization.py|scripts/lib/knowledge_intelligence_tool_verification_authorization.py|scripts/lib/knowledge_intelligence_verified_knowledge_authorization.py|services/brain-api/tests/*)
+    README.md|AGENTS.md|docs/*|examples/*|operator-console-static/*|scripts/auth-design-check.sh|scripts/operator-console-static-check.sh|scripts/secure-runtime-integration-*.sh|scripts/v02-release-qualification-local-run.py|scripts/knowledge-intelligence-program-*|scripts/lib/secure_runtime_integration_final_evaluation.py|scripts/lib/knowledge_intelligence_program_final_evaluation.py|scripts/lib/knowledge_intelligence_domain_expert_mesh_authorization.py|scripts/lib/knowledge_intelligence_public_research_pilot_authorization.py|scripts/lib/knowledge_intelligence_tool_verification_authorization.py|scripts/lib/knowledge_intelligence_verified_knowledge_authorization.py|services/brain-api/tests/*)
       return 0
       ;;
   esac
@@ -326,6 +326,16 @@ aion237_is_scoped_operator_console_integrated_local_runtime_path() {
   return 1
 }
 
+aion239_is_scoped_v02_release_qualification_path() {
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
+    services/brain-api/src/aion_brain/v02_release_qualification/*)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 changed_entries() {
   local base
   if base="$(comparison_base)"; then
@@ -368,6 +378,9 @@ while IFS=$'\t' read -r status path extra; do
       continue
     fi
     if aion237_is_scoped_operator_console_integrated_local_runtime_path "$changed"; then
+      continue
+    fi
+    if aion239_is_scoped_v02_release_qualification_path "$changed"; then
       continue
     fi
     if aion231_is_scoped_secure_runtime_foundation_path "$changed"; then

@@ -2539,6 +2539,7 @@ aion238_is_scoped_secure_runtime_final_closeout_path() {
     docs/release/v02-release-readiness-delta.md|\
     docs/release/v02-release-qualification-*|\
     docs/adr/0202-final-secure-runtime-integration-evaluation-and-v02-release-qualification-program-authorization.md|\
+    docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md|\
     docs/adr/README.md|\
     examples/secure-runtime-integration/*|\
     examples/v02-release-qualification/*|\
@@ -2569,9 +2570,16 @@ aion238_is_scoped_secure_runtime_final_closeout_path() {
     scripts/v02-release-qualification-program-authorization-check.sh|\
     scripts/v02-release-qualification-program-authorization-no-go-regression.sh|\
     scripts/v02-release-qualification-runtime-hold.sh|\
+    scripts/v02-release-qualification-foundation-check.sh|\
+    scripts/v02-release-qualification-foundation-no-go-regression.sh|\
+    scripts/v02-release-qualification-foundation-pilot-evidence-check.sh|\
+    scripts/v02-release-qualification-foundation-runtime-hold.sh|\
+    scripts/v02-release-qualification-local-run.py|\
     scripts/lib/secure_runtime_integration_final_evaluation.py|\
     scripts/lib/v02_production_auth_authorization.py|\
     scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
+    services/brain-api/src/aion_brain/v02_release_qualification/*|\
     services/brain-api/tests/secure_runtime_integration_final_evaluation_test_support.py|\
     services/brain-api/tests/test_secure_runtime_integration_final_closeout_aion238.py|\
     services/brain-api/tests/test_secure_runtime_integration_final_evaluation_aion238.py|\
@@ -2584,7 +2592,8 @@ aion238_is_scoped_secure_runtime_final_closeout_path() {
     services/brain-api/tests/test_secure_runtime_integration_project_status.py|\
     services/brain-api/tests/test_capability_runtime_current_state_after_aion235.py|\
     services/brain-api/tests/test_model_gateway_*.py|\
-    services/brain-api/tests/test_operator_console_integration_authorization.py)
+    services/brain-api/tests/test_operator_console_integration_authorization.py|\
+    services/brain-api/tests/test_v02_release_qualification_*.py)
       return 0
       ;;
     *)

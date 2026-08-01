@@ -73,8 +73,14 @@ ALLOWED_PREFIXES = (
     "operator-console-static/",
     "scripts/",
     "services/brain-api/tests/",
+    "services/brain-api/src/aion_brain/v02_release_qualification/",
 )
-ALLOWED_EXACT = {"README.md", "AGENTS.md", RUNNER}
+ALLOWED_EXACT = {
+    "README.md",
+    "AGENTS.md",
+    RUNNER,
+    "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py",
+}
 PROHIBITED_PREFIXES = (
     ".github/workflows/",
     "migrations/",
@@ -232,6 +238,8 @@ for parts in changed_entries():
             and path not in AION233_SOURCE
             and not aion235_source_allowed(path)
             and not aion237_source_allowed(path)
+            and path != "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py"
+            and not path.startswith("services/brain-api/src/aion_brain/v02_release_qualification/")
         ):
             raise SystemExit(f"only exact AION-233 model-gateway source may change: {path}")
         if not allowed(path):

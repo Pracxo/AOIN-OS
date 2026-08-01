@@ -1,0 +1,1145 @@
+{
+  "evidence": {
+    "controls": [
+      {
+        "control_fingerprint": "b6a6b1696dc8e9daf7a268b323371f7c59510d4ac0c29837309d3ea840a4030a",
+        "control_id": "V02-CONTROL-001",
+        "control_summary": "fail-closed disabled qualification boundary",
+        "evidence_requirement": "operator review evidence"
+      },
+      {
+        "control_fingerprint": "0d2f0f0754c2e9b997a7f6086f63174663caf2f6319f67f00fe1fa68e68036f5",
+        "control_id": "V02-CONTROL-002",
+        "control_summary": "fail-closed disabled qualification boundary",
+        "evidence_requirement": "operator review evidence"
+      },
+      {
+        "control_fingerprint": "635bbcfbd22619341802a818e33b21ed870cff2636b670d9522f7e2d62cbf6df",
+        "control_id": "V02-CONTROL-003",
+        "control_summary": "fail-closed disabled qualification boundary",
+        "evidence_requirement": "operator review evidence"
+      },
+      {
+        "control_fingerprint": "379770b5c5cb09d69024fbfdceda5278b660809f869995e462a43361a35861db",
+        "control_id": "V02-CONTROL-004",
+        "control_summary": "fail-closed disabled qualification boundary",
+        "evidence_requirement": "operator review evidence"
+      },
+      {
+        "control_fingerprint": "79fb2c1ed6dd104a9c74d930ad0a38fcdbf32ff8be8fc38c4bf70e345f255abb",
+        "control_id": "V02-CONTROL-005",
+        "control_summary": "fail-closed disabled qualification boundary",
+        "evidence_requirement": "operator review evidence"
+      },
+      {
+        "control_fingerprint": "6ca46290d21f952b1d0b67f3a7200148b4742cc9d46abab6041673db16a0da70",
+        "control_id": "V02-CONTROL-006",
+        "control_summary": "fail-closed disabled qualification boundary",
+        "evidence_requirement": "operator review evidence"
+      },
+      {
+        "control_fingerprint": "c783629ccfa8c156d575f1bca5cbbcd79d3718939e273015954dd53a6be48047",
+        "control_id": "V02-CONTROL-007",
+        "control_summary": "fail-closed disabled qualification boundary",
+        "evidence_requirement": "operator review evidence"
+      },
+      {
+        "control_fingerprint": "89818203d9c4c472c70b10f195be82965a88e113d18d98a48e285a99edcb5e14",
+        "control_id": "V02-CONTROL-008",
+        "control_summary": "fail-closed disabled qualification boundary",
+        "evidence_requirement": "operator review evidence"
+      }
+    ],
+    "exploit_code_present": false,
+    "operational_secrets_present": false,
+    "scenarios": [
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "identity-provider-spoofing",
+        "category": "spoofing",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-001"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "0c82e4229ab209c1ca67a1ff513e4d7417b56363db2ee065de3caa64b2b636f0",
+        "scenario_id": "V02-THREAT-001"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "issuer-substitution",
+        "category": "tampering",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-002"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "20a8e215a5486e342bc33a3ba8bd9ebe939dda856d6cddb52e6d6c52e0cd801b",
+        "scenario_id": "V02-THREAT-002"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "audience-substitution",
+        "category": "repudiation",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-003"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "885628a7d41d5360d1976e761a2e0a9767c60a2dc093e65aaa20a27d9438e77c",
+        "scenario_id": "V02-THREAT-003"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "claim-escalation",
+        "category": "information_disclosure",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-004"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "d5b12cddcfe65271da3fb3b0f3bedc7db5510a9de9f5960e7e812b5db9da8f84",
+        "scenario_id": "V02-THREAT-004"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "public-key-compromise",
+        "category": "denial_of_service",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-005"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "3d1bee77d775c5d10758601c962f8a2fdefcbdf01827d41167581739acd668cd",
+        "scenario_id": "V02-THREAT-005"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "stale-key-acceptance",
+        "category": "elevation_of_privilege",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-006"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "823700f59b5899b0f53d4de04a398b04f399fc67c3755512f5491f7f0fcd2a03",
+        "scenario_id": "V02-THREAT-006"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "replay-ledger-outage",
+        "category": "supply_chain",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-007"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "cea0916939d1ab45ec72bee0ef76733c0767405082d9a4f78c71c98c4f1f38b6",
+        "scenario_id": "V02-THREAT-007"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "replay-ledger-collision",
+        "category": "operational_failure",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-008"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "144fd6b21e171ea9ba20e001a9c4c534083a9f31aff026452a3c10b686cbe705",
+        "scenario_id": "V02-THREAT-008"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "credential-leakage",
+        "category": "governance_bypass",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-009"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "bc1d19a84dbe499a6f1ab6c89f5632721888fb19b3214fe3dda0b70f4a5153f1",
+        "scenario_id": "V02-THREAT-009"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "token-theft",
+        "category": "spoofing",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-010"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "e5ea376441750f4dbba743cbbb0100a7c32e0e152d8f8dcd04c0373734f73b3c",
+        "scenario_id": "V02-THREAT-010"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "refresh-token-replay",
+        "category": "tampering",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-011"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "8022d64a544de4c5ab5ff6d0795e08aeba60c9adf4850c9ade135b417af0dc33",
+        "scenario_id": "V02-THREAT-011"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "session-fixation",
+        "category": "repudiation",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-012"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "2369e16f40d3ad63f7f8cc93fbf03b0f6230860763c558e9f4152070eb3cb1a3",
+        "scenario_id": "V02-THREAT-012"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "session-revocation-failure",
+        "category": "information_disclosure",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-013"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "8c2e3c0abee0f6d97bb0c47aa0de4195f55a412aec0d72f3d61fea914d94fa9f",
+        "scenario_id": "V02-THREAT-013"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "protected-material-logging",
+        "category": "denial_of_service",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-014"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "5a0e09f9943eac036100298c347de2c9c4eb6730e388d35a2f3fdede0754ab29",
+        "scenario_id": "V02-THREAT-014"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "audit-redaction-failure",
+        "category": "elevation_of_privilege",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-015"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "6e2c2c441106c5163d1d9bb2863d6ee0f522883d9f5e0958ee93bbbf6a9c4055",
+        "scenario_id": "V02-THREAT-015"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "sbom-tampering",
+        "category": "supply_chain",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-016"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "2d240e71775228be8d3821af962dc2b5893da607a62540f221577ef5bb7a7757",
+        "scenario_id": "V02-THREAT-016"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "dependency-substitution",
+        "category": "operational_failure",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-017"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "c332a2f0a09a29bd1f320c77cd7a6f3c247117cb03ca4e284abe548ab23f7bb3",
+        "scenario_id": "V02-THREAT-017"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "artifact-substitution",
+        "category": "governance_bypass",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-018"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "9c336a1d8e53ee6c3c08cf71c196d731defa03ff36d4593edd8ae7f31f974a28",
+        "scenario_id": "V02-THREAT-018"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "provenance-forgery",
+        "category": "spoofing",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-019"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "faed06d5f00d7a0a518aa0888ba86239407431a00c6da5932c731915f23efe5f",
+        "scenario_id": "V02-THREAT-019"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "build-non-reproducibility",
+        "category": "tampering",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-020"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "c6ba86effd8126a5dfd9de3e0841f7defb2e87438c95a2c5a9e82078fb021574",
+        "scenario_id": "V02-THREAT-020"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "rollback-failure",
+        "category": "repudiation",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-021"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "5e08a8023ac1db9aeb84cf7fb42eb4635e6bab47488f18e7a9f49ea33a7d2705",
+        "scenario_id": "V02-THREAT-021"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "rollback-data-incompatibility",
+        "category": "information_disclosure",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-022"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "61972927afa1150a87219bac318e59b6c4b10926768663c3fd4660f3dea56a8a",
+        "scenario_id": "V02-THREAT-022"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "health-check-bypass",
+        "category": "denial_of_service",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-023"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "913b93a380bc139534e90557c48ceeca994869cbe85c3f8b5f0a42a16f3485e2",
+        "scenario_id": "V02-THREAT-023"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "observability-blind-spot",
+        "category": "elevation_of_privilege",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-024"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "b0ffdd6a6e4be5b98204c7ed10721cd07335fdb67476781d002cd3e2e2f04418",
+        "scenario_id": "V02-THREAT-024"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "release-gate-bypass",
+        "category": "supply_chain",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-001"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "cfaec650a18b02b3b855370cdfd508e36f2bbf6324ebf35ba501658003494a84",
+        "scenario_id": "V02-THREAT-025"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "staging-to-production-drift",
+        "category": "operational_failure",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-002"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "fa8294f28997fbd20b223c57df3dadf5447c3c96839720b2b3ae5521ec8a725c",
+        "scenario_id": "V02-THREAT-026"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "configuration-drift",
+        "category": "governance_bypass",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-003"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "df305f25341ce768ab0c187f49ae94753ed2266a019bb10b4d91301a77797140",
+        "scenario_id": "V02-THREAT-027"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "secret-injection-failure",
+        "category": "spoofing",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-004"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "dd06e125758479f143b7271193abc82f24e71243b53f487d452b1fee8cd5159d",
+        "scenario_id": "V02-THREAT-028"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "public-listener-exposure",
+        "category": "tampering",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-005"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "500dd2c90eb29b3787a9e7f41d09ee69e9c653cc8b99bf9d5dc4975e5f4c2b9f",
+        "scenario_id": "V02-THREAT-029"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "external-egress-activation",
+        "category": "repudiation",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-006"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "8815a988fe6e75baf0965a4ad5174dacc70b66f426f9b3c850092119d8078d9c",
+        "scenario_id": "V02-THREAT-030"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "production-write-activation",
+        "category": "information_disclosure",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-007"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "c5eb010658997c496641bb58825e139e6e74b7027de4aa6e9de49f9f6d4d1a06",
+        "scenario_id": "V02-THREAT-031"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "release-tag-mutation",
+        "category": "denial_of_service",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-008"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "40a882efaec77947a988a1dae6bdc651ea17bdca2231e0c14c4741ceaa115c5b",
+        "scenario_id": "V02-THREAT-032"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "release-publication-without-authorization",
+        "category": "elevation_of_privilege",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-009"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "3d8178c63ab1df33cf2bd120d4e6625d7b9dc0063af079bbcaa05f016e993414",
+        "scenario_id": "V02-THREAT-033"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "identity-provider-spoofing",
+        "category": "supply_chain",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-010"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "155e3cc9efa6741ec09453b84b016eded4c2885cf2336dfbfee37ce33bf1fb18",
+        "scenario_id": "V02-THREAT-034"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "issuer-substitution",
+        "category": "operational_failure",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-011"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "6a94065f749301b0aa381cddb15c58a4102a9ee5887c42d288cea65ade2d3bb2",
+        "scenario_id": "V02-THREAT-035"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "audience-substitution",
+        "category": "governance_bypass",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-012"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "f291f9db4444f83d8d38a9bdc1a0563e09766ba78058e148e65c8fb817b79ab3",
+        "scenario_id": "V02-THREAT-036"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "claim-escalation",
+        "category": "spoofing",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-013"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "772d5097af9a1f7600533c575a5b774f14f247eeeed0b688fb62c6cf5d8f615a",
+        "scenario_id": "V02-THREAT-037"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "public-key-compromise",
+        "category": "tampering",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-014"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "5bcfa03f161a0b95d3bdb4f8b8dffbf7df88083af52eac10135689b140cf63ba",
+        "scenario_id": "V02-THREAT-038"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "stale-key-acceptance",
+        "category": "repudiation",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-015"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "b4c4d1531e777d18ff7130eb8464a4133b4c3df8d5dd41b5f8c5981181ab2668",
+        "scenario_id": "V02-THREAT-039"
+      },
+      {
+        "affected_assets": [
+          "identity",
+          "release",
+          "evidence"
+        ],
+        "attack_or_failure_code": "replay-ledger-outage",
+        "category": "information_disclosure",
+        "evidence_maturity": "design_recorded",
+        "existing_controls": [
+          "disabled runtime",
+          "no release authority"
+        ],
+        "preconditions": [
+          "future production integration exists"
+        ],
+        "release_gate_ids": [
+          "V02-GATE-016"
+        ],
+        "required_controls": [
+          "staging evidence",
+          "operator review"
+        ],
+        "residual_risk": "requires future evidence before release",
+        "scenario_fingerprint": "7448119a93896328c561f64f740522b7754a1b887752b8aa66c9fcaa044d4cb5",
+        "scenario_id": "V02-THREAT-040"
+      }
+    ],
+    "schema_version": "aion-v02-production-threat-model/v1",
+    "threat_model_fingerprint": "1d1a5654e32fa56617d04ca334de07802cd43612a47fee741a7d49b8ea83ca6e"
+  },
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "synthetic": true
+}

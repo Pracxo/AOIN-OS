@@ -115,6 +115,7 @@ for parts in changed_entries():
         if normalized == "services/brain-api/src/aion_brain/contracts/model_gateway.py" or normalized.startswith("services/brain-api/src/aion_brain/model_gateway/"): continue
         if normalized == "services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime.py" or normalized.startswith("services/brain-api/src/aion_brain/capability_runtime/"): continue
         if normalized == "services/brain-api/src/aion_brain/contracts/operator_console_integration.py" or normalized.startswith("services/brain-api/src/aion_brain/operator_console_runtime/"): continue
+        if normalized == "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py" or normalized.startswith("services/brain-api/src/aion_brain/v02_release_qualification/"): continue
         if any(normalized.startswith(prefix) for prefix in PROHIBITED_PREFIXES): raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")
         if normalized not in ALLOWED_EXACT and not any(normalized.startswith(prefix) for prefix in ALLOWED_PREFIXES): raise SystemExit(f"path outside AION-217 scope: {normalized}")
 for relative in run(["git", "ls-files"]).stdout.splitlines():

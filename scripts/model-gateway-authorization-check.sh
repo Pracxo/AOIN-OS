@@ -70,6 +70,13 @@ if PROGRAM.get("program_state") in post_closeout_states:
     expected_auth, expected_task = post_closeout_states[PROGRAM["program_state"]]
     if AUTH["active_sri_implementation_authorization_count"] != 1 or AUTH["active_sri_implementation_authorization"] != expected_auth or AUTH["active_sri_implementation_task"] != expected_task:
         raise SystemExit("sole active post-closeout SRI authorization mismatch")
+elif PROGRAM.get("program_state") == "secure_runtime_integration_program_complete":
+    if closed_aion232["authorization_active"] is not False or closed_aion232["authorization_consumed"] is not True or closed_aion232["authorization_expired"] is not True or closed_aion232["authorization_reusable"] is not False:
+        raise SystemExit("AION-232 closeout lifecycle mismatch")
+    if closed_aion232["authorization_consumed_by_task"] != "AION-233" or closed_aion232["authorization_closed_by_task"] != "AION-234":
+        raise SystemExit("AION-232 closeout lineage mismatch")
+    if AUTH["active_sri_implementation_authorization_count"] != 0 or AUTH["active_sri_implementation_authorization"] is not None or AUTH["active_sri_implementation_task"] is not None:
+        raise SystemExit("completed SRI authorization state mismatch")
 else:
     if AUTH["authorization_transaction_id"] != AION232 or AUTH["approval_record_id"] != AION232:
         raise SystemExit("AION-232-SRI-0002 missing")
@@ -77,7 +84,7 @@ else:
         raise SystemExit("AION-232 authorization lifecycle mismatch")
     if AUTH["active_sri_implementation_authorization_count"] != 1 or AUTH["active_sri_implementation_authorization"] != AION232 or AUTH["active_sri_implementation_task"] != "AION-233":
         raise SystemExit("sole active SRI authorization mismatch")
-if PROGRAM["formal_closeout_task"] not in {"AION-234", "AION-236", "AION-238"} or PROGRAM["model_gateway_authorized"] is not True or PROGRAM["model_gateway_implemented"] is not True:
+if PROGRAM["formal_closeout_task"] not in {"AION-234", "AION-236", "AION-238", None} or PROGRAM["model_gateway_authorized"] is not True or PROGRAM["model_gateway_implemented"] is not True:
     raise SystemExit("program model-gateway state mismatch")
 if PROGRAM.get("model_gateway_state") not in {
     "implemented_provider_neutral_reference_simulation_only_pending_AION-234_closeout",

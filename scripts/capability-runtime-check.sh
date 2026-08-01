@@ -54,8 +54,24 @@ def is_post_aion236_payload(payload: dict) -> bool:
     return payload.get("active_sri_implementation_authorization") == "AION-236-SRI-0004"
 
 
+def is_completed_sri_payload(payload: dict) -> bool:
+    return payload.get("program_state") == "secure_runtime_integration_program_complete"
+
+
 for payload in (program, auth, example):
-    if is_post_aion236_payload(payload):
+    if is_completed_sri_payload(payload):
+        require(payload["active_sri_implementation_authorization_count"] == 0, "completed active SRI auth count mismatch")
+        require(payload["active_sri_implementation_authorization"] is None, "completed active SRI auth mismatch")
+        require(payload["active_sri_implementation_task"] is None, "completed active task mismatch")
+        require(payload["formal_closeout_task"] is None, "completed formal closeout mismatch")
+        require(payload["final_completed_task"] == "AION-238", "completed final task mismatch")
+        if "aion_234_record" in payload:
+            require(payload["aion_234_record"]["authorization_transaction"] == AUTHORIZATION_TRANSACTION_ID, "AION-234 record authorization mismatch")
+            require(payload["aion_234_record"]["authorization_state"] == "consumed_by_AION-235_closed_by_AION-236", "AION-234 record closeout mismatch")
+        else:
+            closed = payload.get("closed_authorizations", [])
+            require(any(item.get("authorization_transaction_id") == AUTHORIZATION_TRANSACTION_ID for item in closed), "AION-234 closeout record missing")
+    elif is_post_aion236_payload(payload):
         require(payload["active_sri_implementation_authorization_count"] == 1, "post-closeout active SRI auth count mismatch")
         require(payload["active_sri_implementation_task"] == "AION-237", "post-closeout active task mismatch")
         require(payload["formal_closeout_task"] == "AION-238", "post-closeout formal closeout mismatch")

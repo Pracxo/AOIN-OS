@@ -1,46 +1,617 @@
 {
-  "authorization_id": "AION-238-V02RQ-0001",
-  "gaps": [
+  "authorization_transaction_id": "AION-238-V02RQ-0001",
+  "evidence_requirements": [
     {
-      "gap_id": "production-auth-composition",
-      "status": "authorized_for_disabled_design_only"
+      "evidence_code": "production_auth_composition-evidence",
+      "maturity_required": "design_recorded",
+      "production_evidence_required": false,
+      "staging_evidence_required": false
     },
     {
-      "gap_id": "verified-request-identity-integration",
-      "status": "authorized_for_disabled_design_only"
+      "evidence_code": "verified_request_identity-evidence",
+      "maturity_required": "design_recorded",
+      "production_evidence_required": false,
+      "staging_evidence_required": false
     },
     {
-      "gap_id": "replay-ledger-provisioning",
-      "status": "authorized_for_plan_only"
+      "evidence_code": "replay_ledger_provisioning-evidence",
+      "maturity_required": "design_recorded",
+      "production_evidence_required": false,
+      "staging_evidence_required": false
     },
     {
-      "gap_id": "idp-adapter-interface",
-      "status": "authorized_for_interface_only"
+      "evidence_code": "identity_provider_adapter-evidence",
+      "maturity_required": "design_recorded",
+      "production_evidence_required": false,
+      "staging_evidence_required": false
     },
     {
-      "gap_id": "credential-token-session-lifecycle",
-      "status": "authorized_for_contracts_only"
+      "evidence_code": "public_key_lifecycle-evidence",
+      "maturity_required": "design_recorded",
+      "production_evidence_required": false,
+      "staging_evidence_required": false
     },
     {
-      "gap_id": "deployment-artifact-provenance-rollback",
-      "status": "authorized_for_evidence_only"
+      "evidence_code": "protected_material-evidence",
+      "maturity_required": "design_recorded",
+      "production_evidence_required": false,
+      "staging_evidence_required": false
     },
     {
-      "gap_id": "observability-threat-model-runtime-guard",
-      "status": "authorized_for_schema_only"
+      "evidence_code": "credential_lifecycle-evidence",
+      "maturity_required": "design_recorded",
+      "production_evidence_required": false,
+      "staging_evidence_required": false
     },
     {
-      "gap_id": "release-gate-and-staging-plan",
-      "status": "authorized_without_activation"
+      "evidence_code": "token_lifecycle-evidence",
+      "maturity_required": "design_recorded",
+      "production_evidence_required": false,
+      "staging_evidence_required": false
+    },
+    {
+      "evidence_code": "session_lifecycle-evidence",
+      "maturity_required": "design_recorded",
+      "production_evidence_required": false,
+      "staging_evidence_required": false
+    },
+    {
+      "evidence_code": "deployment_artifact-evidence",
+      "maturity_required": "design_recorded",
+      "production_evidence_required": false,
+      "staging_evidence_required": false
+    },
+    {
+      "evidence_code": "software_bill_of_materials-evidence",
+      "maturity_required": "design_recorded",
+      "production_evidence_required": false,
+      "staging_evidence_required": false
+    },
+    {
+      "evidence_code": "artifact_provenance-evidence",
+      "maturity_required": "design_recorded",
+      "production_evidence_required": false,
+      "staging_evidence_required": false
+    },
+    {
+      "evidence_code": "reproducible_build-evidence",
+      "maturity_required": "design_recorded",
+      "production_evidence_required": false,
+      "staging_evidence_required": false
+    },
+    {
+      "evidence_code": "rollback-evidence",
+      "maturity_required": "design_recorded",
+      "production_evidence_required": false,
+      "staging_evidence_required": false
+    },
+    {
+      "evidence_code": "observability-evidence",
+      "maturity_required": "design_recorded",
+      "production_evidence_required": false,
+      "staging_evidence_required": false
+    },
+    {
+      "evidence_code": "health_readiness-evidence",
+      "maturity_required": "design_recorded",
+      "production_evidence_required": false,
+      "staging_evidence_required": false
+    },
+    {
+      "evidence_code": "threat_model-evidence",
+      "maturity_required": "design_recorded",
+      "production_evidence_required": false,
+      "staging_evidence_required": false
+    },
+    {
+      "evidence_code": "runtime_guard-evidence",
+      "maturity_required": "design_recorded",
+      "production_evidence_required": false,
+      "staging_evidence_required": false
+    },
+    {
+      "evidence_code": "release_gate_governance-evidence",
+      "maturity_required": "design_recorded",
+      "production_evidence_required": false,
+      "staging_evidence_required": false
+    },
+    {
+      "evidence_code": "staging_qualification-evidence",
+      "maturity_required": "staging_required",
+      "production_evidence_required": false,
+      "staging_evidence_required": true
     }
   ],
-  "implementation_task": "AION-239",
-  "production_runtime_authorized": false,
+  "gap_matrix_fingerprint": "b683ac101da2523c4e7b3dff7a86a8c374c375062a234526df2b37600663ebc6",
+  "gaps": [
+    {
+      "current_evidence_fingerprints": [],
+      "current_status": "production_evidence_required",
+      "dependency_gap_ids": [],
+      "design_fingerprint": "9e35fb0b3f62ee2e0aa0e37a703591f67789aa89699df17a2c9cd83ecbe351b2",
+      "evidence_maturity": "production_required",
+      "gap_fingerprint": "03275731afc3e0a6ea66869f089102dd5ee0c493e512f54b82441f0fef0d5a89",
+      "gap_id": "V02-GAP-001",
+      "minimum_severity": "major",
+      "operational_evidence_required": true,
+      "production_evidence_required": true,
+      "readiness_domain": "production_auth_composition",
+      "required_evidence_codes": [
+        "production_auth_composition-evidence"
+      ],
+      "responsible_role_code": "release-qualification-reviewer",
+      "schema_version": "aion-v02-readiness-gap/v1",
+      "severity": "critical",
+      "staging_evidence_required": false,
+      "target_task": "AION-240"
+    },
+    {
+      "current_evidence_fingerprints": [],
+      "current_status": "mitigation_designed_evidence_pending",
+      "dependency_gap_ids": [
+        "V02-GAP-001"
+      ],
+      "design_fingerprint": "863efb24ed4469acd1b302f930b6c844466167995109fa83fa1ea5945db745ac",
+      "evidence_maturity": "design_recorded",
+      "gap_fingerprint": "d2632fdc67a010379c3f825fc2b8f678822788343961eebcbdb6fc57e41f5254",
+      "gap_id": "V02-GAP-002",
+      "minimum_severity": "major",
+      "operational_evidence_required": true,
+      "production_evidence_required": false,
+      "readiness_domain": "verified_request_identity",
+      "required_evidence_codes": [
+        "verified_request_identity-evidence"
+      ],
+      "responsible_role_code": "release-qualification-reviewer",
+      "schema_version": "aion-v02-readiness-gap/v1",
+      "severity": "major",
+      "staging_evidence_required": false,
+      "target_task": "AION-240"
+    },
+    {
+      "current_evidence_fingerprints": [],
+      "current_status": "production_evidence_required",
+      "dependency_gap_ids": [
+        "V02-GAP-002"
+      ],
+      "design_fingerprint": "d62f45bc4691a87db1282a5770b49eecdf3ab538a3044e5b1f914426ab26671f",
+      "evidence_maturity": "production_required",
+      "gap_fingerprint": "f6ae49d98304691ddac5814d3cd188c0ec45a17d418b5be0a1f5068909581bd9",
+      "gap_id": "V02-GAP-003",
+      "minimum_severity": "major",
+      "operational_evidence_required": true,
+      "production_evidence_required": true,
+      "readiness_domain": "replay_ledger_provisioning",
+      "required_evidence_codes": [
+        "replay_ledger_provisioning-evidence"
+      ],
+      "responsible_role_code": "release-qualification-reviewer",
+      "schema_version": "aion-v02-readiness-gap/v1",
+      "severity": "critical",
+      "staging_evidence_required": false,
+      "target_task": "AION-240"
+    },
+    {
+      "current_evidence_fingerprints": [],
+      "current_status": "production_evidence_required",
+      "dependency_gap_ids": [
+        "V02-GAP-003"
+      ],
+      "design_fingerprint": "5a813cf1a6d75365319a83aca09a36536dc6591dd599cd1566b9ad15838d11ad",
+      "evidence_maturity": "production_required",
+      "gap_fingerprint": "7153f26149b1dd182b7bd66bf17974452cffbbba80da056ae3730d79b5f65df7",
+      "gap_id": "V02-GAP-004",
+      "minimum_severity": "major",
+      "operational_evidence_required": true,
+      "production_evidence_required": true,
+      "readiness_domain": "identity_provider_adapter",
+      "required_evidence_codes": [
+        "identity_provider_adapter-evidence"
+      ],
+      "responsible_role_code": "release-qualification-reviewer",
+      "schema_version": "aion-v02-readiness-gap/v1",
+      "severity": "critical",
+      "staging_evidence_required": false,
+      "target_task": "AION-240"
+    },
+    {
+      "current_evidence_fingerprints": [],
+      "current_status": "production_evidence_required",
+      "dependency_gap_ids": [
+        "V02-GAP-004"
+      ],
+      "design_fingerprint": "d894f8225e48d98891d4e2de3871f459089e07fd8b47e1f0136b74d3b8295890",
+      "evidence_maturity": "production_required",
+      "gap_fingerprint": "fbe0b4c48397f327ff9f149b6169cb5eea6cf3130d1ab590f85d9156cf599346",
+      "gap_id": "V02-GAP-005",
+      "minimum_severity": "major",
+      "operational_evidence_required": true,
+      "production_evidence_required": true,
+      "readiness_domain": "public_key_lifecycle",
+      "required_evidence_codes": [
+        "public_key_lifecycle-evidence"
+      ],
+      "responsible_role_code": "release-qualification-reviewer",
+      "schema_version": "aion-v02-readiness-gap/v1",
+      "severity": "critical",
+      "staging_evidence_required": false,
+      "target_task": "AION-240"
+    },
+    {
+      "current_evidence_fingerprints": [],
+      "current_status": "mitigation_designed_evidence_pending",
+      "dependency_gap_ids": [
+        "V02-GAP-005"
+      ],
+      "design_fingerprint": "6ac7400c5e424feb11e6e83e53e8d0080450bd10a2244292089cdd36c455e749",
+      "evidence_maturity": "design_recorded",
+      "gap_fingerprint": "5720e4b2231fee583c3e6010e820273267f2c27166aa238e981ac4ad1f44adf2",
+      "gap_id": "V02-GAP-006",
+      "minimum_severity": "major",
+      "operational_evidence_required": true,
+      "production_evidence_required": false,
+      "readiness_domain": "protected_material",
+      "required_evidence_codes": [
+        "protected_material-evidence"
+      ],
+      "responsible_role_code": "release-qualification-reviewer",
+      "schema_version": "aion-v02-readiness-gap/v1",
+      "severity": "major",
+      "staging_evidence_required": false,
+      "target_task": "AION-240"
+    },
+    {
+      "current_evidence_fingerprints": [],
+      "current_status": "production_evidence_required",
+      "dependency_gap_ids": [
+        "V02-GAP-006"
+      ],
+      "design_fingerprint": "26f60d4503e4e19528d880514ba1580eaec804ec728df7350bc66e736ed261ea",
+      "evidence_maturity": "production_required",
+      "gap_fingerprint": "8a2a5bea3a46aa2b27fd3462411fac50049ae8fd3f8b36ce9f61e986db7e3d39",
+      "gap_id": "V02-GAP-007",
+      "minimum_severity": "major",
+      "operational_evidence_required": true,
+      "production_evidence_required": true,
+      "readiness_domain": "credential_lifecycle",
+      "required_evidence_codes": [
+        "credential_lifecycle-evidence"
+      ],
+      "responsible_role_code": "release-qualification-reviewer",
+      "schema_version": "aion-v02-readiness-gap/v1",
+      "severity": "critical",
+      "staging_evidence_required": false,
+      "target_task": "AION-240"
+    },
+    {
+      "current_evidence_fingerprints": [],
+      "current_status": "production_evidence_required",
+      "dependency_gap_ids": [
+        "V02-GAP-007"
+      ],
+      "design_fingerprint": "964d6037a4c539f685d8c4b7dbf5c168a5fb2c66f3995b7757b3bf025ac87a0f",
+      "evidence_maturity": "production_required",
+      "gap_fingerprint": "5ae660c92f80292926bfac0fa6cde642d79aff067a37c761cf99b9eb5defca74",
+      "gap_id": "V02-GAP-008",
+      "minimum_severity": "major",
+      "operational_evidence_required": true,
+      "production_evidence_required": true,
+      "readiness_domain": "token_lifecycle",
+      "required_evidence_codes": [
+        "token_lifecycle-evidence"
+      ],
+      "responsible_role_code": "release-qualification-reviewer",
+      "schema_version": "aion-v02-readiness-gap/v1",
+      "severity": "critical",
+      "staging_evidence_required": false,
+      "target_task": "AION-240"
+    },
+    {
+      "current_evidence_fingerprints": [],
+      "current_status": "production_evidence_required",
+      "dependency_gap_ids": [
+        "V02-GAP-008"
+      ],
+      "design_fingerprint": "51e1073ebc5f2b1cda12607b6eb4ed99ae0f7c53ec93a3e007cee3143b5faec4",
+      "evidence_maturity": "production_required",
+      "gap_fingerprint": "1dd955c09f42b8d8df9200eafc080479ce8479d1c290040001f960e7f884b2aa",
+      "gap_id": "V02-GAP-009",
+      "minimum_severity": "major",
+      "operational_evidence_required": true,
+      "production_evidence_required": true,
+      "readiness_domain": "session_lifecycle",
+      "required_evidence_codes": [
+        "session_lifecycle-evidence"
+      ],
+      "responsible_role_code": "release-qualification-reviewer",
+      "schema_version": "aion-v02-readiness-gap/v1",
+      "severity": "critical",
+      "staging_evidence_required": false,
+      "target_task": "AION-240"
+    },
+    {
+      "current_evidence_fingerprints": [],
+      "current_status": "staging_evidence_required",
+      "dependency_gap_ids": [
+        "V02-GAP-009"
+      ],
+      "design_fingerprint": "e7a92e9b1d5fe7e57921191e8da5e60f81ff5668ef1fa3265e87fe1a15ed2248",
+      "evidence_maturity": "staging_required",
+      "gap_fingerprint": "7ec4e955543725ecafb90b14ddb49b8387398e1df78de564970f79719652d63e",
+      "gap_id": "V02-GAP-010",
+      "minimum_severity": "major",
+      "operational_evidence_required": true,
+      "production_evidence_required": false,
+      "readiness_domain": "deployment_artifact",
+      "required_evidence_codes": [
+        "deployment_artifact-evidence"
+      ],
+      "responsible_role_code": "release-qualification-reviewer",
+      "schema_version": "aion-v02-readiness-gap/v1",
+      "severity": "major",
+      "staging_evidence_required": true,
+      "target_task": "AION-240"
+    },
+    {
+      "current_evidence_fingerprints": [],
+      "current_status": "mitigation_designed_evidence_pending",
+      "dependency_gap_ids": [
+        "V02-GAP-010"
+      ],
+      "design_fingerprint": "1701c37dd653d03ad0e517f8e98acee6a442a1c06b7aa1a2fc2e1a033fcff444",
+      "evidence_maturity": "design_recorded",
+      "gap_fingerprint": "ca84412758b326a10596de66970506591c8e2f51decccb2ef202bdee22a70005",
+      "gap_id": "V02-GAP-011",
+      "minimum_severity": "major",
+      "operational_evidence_required": true,
+      "production_evidence_required": false,
+      "readiness_domain": "software_bill_of_materials",
+      "required_evidence_codes": [
+        "software_bill_of_materials-evidence"
+      ],
+      "responsible_role_code": "release-qualification-reviewer",
+      "schema_version": "aion-v02-readiness-gap/v1",
+      "severity": "major",
+      "staging_evidence_required": false,
+      "target_task": "AION-240"
+    },
+    {
+      "current_evidence_fingerprints": [],
+      "current_status": "mitigation_designed_evidence_pending",
+      "dependency_gap_ids": [
+        "V02-GAP-011"
+      ],
+      "design_fingerprint": "28560a62f816e3604717fc15c1c21a3767d26bde5271ee2f4dafa85a29458231",
+      "evidence_maturity": "design_recorded",
+      "gap_fingerprint": "dee6e9b42790bc0f597fd8aae063bdca06a0554885cc4e1000e5f88968001810",
+      "gap_id": "V02-GAP-012",
+      "minimum_severity": "major",
+      "operational_evidence_required": true,
+      "production_evidence_required": false,
+      "readiness_domain": "artifact_provenance",
+      "required_evidence_codes": [
+        "artifact_provenance-evidence"
+      ],
+      "responsible_role_code": "release-qualification-reviewer",
+      "schema_version": "aion-v02-readiness-gap/v1",
+      "severity": "major",
+      "staging_evidence_required": false,
+      "target_task": "AION-240"
+    },
+    {
+      "current_evidence_fingerprints": [],
+      "current_status": "staging_evidence_required",
+      "dependency_gap_ids": [
+        "V02-GAP-012"
+      ],
+      "design_fingerprint": "c0373c1e116f140e9c222f43ab5266db96e5fc31b93ae276dfe07c4bfb3ff8a1",
+      "evidence_maturity": "staging_required",
+      "gap_fingerprint": "8304808547a32213dd8dc58233971adaa5ef6e55c1b22959f325212eab0fef7c",
+      "gap_id": "V02-GAP-013",
+      "minimum_severity": "major",
+      "operational_evidence_required": true,
+      "production_evidence_required": false,
+      "readiness_domain": "reproducible_build",
+      "required_evidence_codes": [
+        "reproducible_build-evidence"
+      ],
+      "responsible_role_code": "release-qualification-reviewer",
+      "schema_version": "aion-v02-readiness-gap/v1",
+      "severity": "major",
+      "staging_evidence_required": true,
+      "target_task": "AION-240"
+    },
+    {
+      "current_evidence_fingerprints": [],
+      "current_status": "staging_evidence_required",
+      "dependency_gap_ids": [
+        "V02-GAP-013"
+      ],
+      "design_fingerprint": "c83b5a114fa5fa6eefca3240f3f664ac641414ecb60f08617fe32b4b1cdd3798",
+      "evidence_maturity": "staging_required",
+      "gap_fingerprint": "45f82e99bf9e340044d0ae91a666e07fb5711c768794ccfd13804d23e48f49f8",
+      "gap_id": "V02-GAP-014",
+      "minimum_severity": "major",
+      "operational_evidence_required": true,
+      "production_evidence_required": false,
+      "readiness_domain": "rollback",
+      "required_evidence_codes": [
+        "rollback-evidence"
+      ],
+      "responsible_role_code": "release-qualification-reviewer",
+      "schema_version": "aion-v02-readiness-gap/v1",
+      "severity": "major",
+      "staging_evidence_required": true,
+      "target_task": "AION-240"
+    },
+    {
+      "current_evidence_fingerprints": [],
+      "current_status": "staging_evidence_required",
+      "dependency_gap_ids": [
+        "V02-GAP-014"
+      ],
+      "design_fingerprint": "694c2d05cd06145c47ceb2540b0dac575831754972c312d515f5f56200fe99d3",
+      "evidence_maturity": "staging_required",
+      "gap_fingerprint": "a03b8726f30c7de5200856257df9480e5ba7c54e962f74b94ab077cd1f094586",
+      "gap_id": "V02-GAP-015",
+      "minimum_severity": "major",
+      "operational_evidence_required": true,
+      "production_evidence_required": false,
+      "readiness_domain": "observability",
+      "required_evidence_codes": [
+        "observability-evidence"
+      ],
+      "responsible_role_code": "release-qualification-reviewer",
+      "schema_version": "aion-v02-readiness-gap/v1",
+      "severity": "major",
+      "staging_evidence_required": true,
+      "target_task": "AION-240"
+    },
+    {
+      "current_evidence_fingerprints": [],
+      "current_status": "staging_evidence_required",
+      "dependency_gap_ids": [
+        "V02-GAP-015"
+      ],
+      "design_fingerprint": "c8072743d2687eba8e4bd38c2acd4b51932f5c35d584f98b4f4166467fd32696",
+      "evidence_maturity": "staging_required",
+      "gap_fingerprint": "948e960a843941efd259f4d367fe5929b3fb7f8faa70c2e2ffcdf3e40c2c2616",
+      "gap_id": "V02-GAP-016",
+      "minimum_severity": "major",
+      "operational_evidence_required": true,
+      "production_evidence_required": true,
+      "readiness_domain": "health_readiness",
+      "required_evidence_codes": [
+        "health_readiness-evidence"
+      ],
+      "responsible_role_code": "release-qualification-reviewer",
+      "schema_version": "aion-v02-readiness-gap/v1",
+      "severity": "critical",
+      "staging_evidence_required": true,
+      "target_task": "AION-240"
+    },
+    {
+      "current_evidence_fingerprints": [],
+      "current_status": "mitigation_designed_evidence_pending",
+      "dependency_gap_ids": [
+        "V02-GAP-016"
+      ],
+      "design_fingerprint": "d01bba40caf6c3d404a8d4064824de05aa70add02bb9d0ecda4389d087987565",
+      "evidence_maturity": "design_recorded",
+      "gap_fingerprint": "0b5b196bd36edaf8ca35e5dcc758d5f6494824665db969430644476c1c89aa65",
+      "gap_id": "V02-GAP-017",
+      "minimum_severity": "major",
+      "operational_evidence_required": true,
+      "production_evidence_required": false,
+      "readiness_domain": "threat_model",
+      "required_evidence_codes": [
+        "threat_model-evidence"
+      ],
+      "responsible_role_code": "release-qualification-reviewer",
+      "schema_version": "aion-v02-readiness-gap/v1",
+      "severity": "major",
+      "staging_evidence_required": false,
+      "target_task": "AION-240"
+    },
+    {
+      "current_evidence_fingerprints": [],
+      "current_status": "mitigation_designed_evidence_pending",
+      "dependency_gap_ids": [
+        "V02-GAP-017"
+      ],
+      "design_fingerprint": "f973dbc64a40c7bc1ec4025a5f9e7fe4f20b5f7c297648152b5d70109b173173",
+      "evidence_maturity": "design_recorded",
+      "gap_fingerprint": "645fff6e600cd59a4c6078cdb91735bf405272ee610f0af85f1babaacfb2355c",
+      "gap_id": "V02-GAP-018",
+      "minimum_severity": "major",
+      "operational_evidence_required": true,
+      "production_evidence_required": false,
+      "readiness_domain": "runtime_guard",
+      "required_evidence_codes": [
+        "runtime_guard-evidence"
+      ],
+      "responsible_role_code": "release-qualification-reviewer",
+      "schema_version": "aion-v02-readiness-gap/v1",
+      "severity": "major",
+      "staging_evidence_required": false,
+      "target_task": "AION-240"
+    },
+    {
+      "current_evidence_fingerprints": [],
+      "current_status": "staging_evidence_required",
+      "dependency_gap_ids": [
+        "V02-GAP-018"
+      ],
+      "design_fingerprint": "4c629ee470a75caf2c013f4e5dd643064b9a96b5dd5e1c578be65db99d12b41d",
+      "evidence_maturity": "staging_required",
+      "gap_fingerprint": "c7ea8692a8d8f0ac045d2e2ecce4ebf9eab963cf767247d70c7dbd6b0633d65e",
+      "gap_id": "V02-GAP-019",
+      "minimum_severity": "major",
+      "operational_evidence_required": true,
+      "production_evidence_required": false,
+      "readiness_domain": "release_gate_governance",
+      "required_evidence_codes": [
+        "release_gate_governance-evidence"
+      ],
+      "responsible_role_code": "release-qualification-reviewer",
+      "schema_version": "aion-v02-readiness-gap/v1",
+      "severity": "major",
+      "staging_evidence_required": true,
+      "target_task": "AION-240"
+    },
+    {
+      "current_evidence_fingerprints": [],
+      "current_status": "staging_evidence_required",
+      "dependency_gap_ids": [
+        "V02-GAP-019"
+      ],
+      "design_fingerprint": "3f6e99484c92afd4cbf7d10f9dededff12338dc10c189afd977415b03161e7c0",
+      "evidence_maturity": "staging_required",
+      "gap_fingerprint": "c52c3666064bdddd737b87f6de8ab6011bf660b0a9e44369fab6e7e5ef59d6f3",
+      "gap_id": "V02-GAP-020",
+      "minimum_severity": "major",
+      "operational_evidence_required": true,
+      "production_evidence_required": false,
+      "readiness_domain": "staging_qualification",
+      "required_evidence_codes": [
+        "staging_qualification-evidence"
+      ],
+      "responsible_role_code": "release-qualification-reviewer",
+      "schema_version": "aion-v02-readiness-gap/v1",
+      "severity": "major",
+      "staging_evidence_required": true,
+      "target_task": "AION-240"
+    }
+  ],
+  "production_evidence_required": true,
   "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
   "read_only": true,
+  "readiness_domains_represented": [
+    "production_auth_composition",
+    "verified_request_identity",
+    "replay_ledger_provisioning",
+    "identity_provider_adapter",
+    "public_key_lifecycle",
+    "protected_material",
+    "credential_lifecycle",
+    "token_lifecycle",
+    "session_lifecycle",
+    "deployment_artifact",
+    "software_bill_of_materials",
+    "artifact_provenance",
+    "reproducible_build",
+    "rollback",
+    "observability",
+    "health_readiness",
+    "threat_model",
+    "runtime_guard",
+    "release_gate_governance",
+    "staging_qualification"
+  ],
   "redacted": true,
   "redaction_applied": true,
-  "schema_version": "aion-v02-release-qualification-gap-matrix/v1",
+  "schema_version": "aion-v02-readiness-gap-matrix/v1",
+  "staging_evidence_required": true,
   "synthetic": true,
-  "v02_release_ready": false
+  "unresolved_operational_evidence": true
 }
