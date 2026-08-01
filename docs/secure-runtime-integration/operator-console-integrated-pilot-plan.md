@@ -4,7 +4,7 @@ Authorization: `AION-236-SRI-0004`
 Implementation task: `AION-237`
 Formal closeout: `AION-238`
 
-AION-236 records this authorization only. It creates no AION-237 runtime source, no loopback listener, no route registration and no live bridge behavior.
+AION-237 implements this authorization as a same-origin loopback-only local bridge with no public listener, external egress, browser persistence, production route registration or live-provider behavior. AION-238 remains the formal closeout.
 
 Authorized route count: `10`. Static asset allowlist: `/, /index.html, /styles.css, /app.js, /live-console.js`.
 

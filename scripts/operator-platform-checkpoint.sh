@@ -179,20 +179,40 @@ def git_lines(*args: str) -> set[str]:
     return {line.strip() for line in result.stdout.splitlines() if line.strip()}
 
 
+def git_ref_exists(ref: str) -> bool:
+    return subprocess.run(
+        ["git", "rev-parse", "--verify", "--quiet", ref],
+        cwd=root,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    ).returncode == 0
+
+
+def comparison_base() -> str:
+    candidates = ["origin/main", "main"]
+    for candidate in candidates:
+        if not git_ref_exists(candidate):
+            continue
+        result = subprocess.run(
+            ["git", "merge-base", "HEAD", candidate],
+            cwd=root,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            return result.stdout.strip()
+    if git_ref_exists("HEAD~1"):
+        return "HEAD~1"
+    return ""
+
+
 changed: set[str] = set()
 changed |= git_lines("diff", "--name-only", "--diff-filter=ACMRT", "HEAD", "--")
 changed |= git_lines("diff", "--cached", "--name-only", "--diff-filter=ACMRT", "--")
 changed |= git_lines("ls-files", "--others", "--exclude-standard")
-try:
-    base = subprocess.run(
-        ["git", "merge-base", "HEAD", "main"],
-        cwd=root,
-        check=True,
-        capture_output=True,
-        text=True,
-    ).stdout.strip()
-except subprocess.CalledProcessError:
-    base = ""
+base = comparison_base()
 if base:
     changed |= git_lines("diff", "--name-only", "--diff-filter=ACMRT", f"{base}..HEAD", "--")
 
@@ -203,8 +223,11 @@ aion108_allowed_files = {
     "services/brain-api/src/aion_brain/api/connector_sandbox.py",
     "services/brain-api/src/aion_brain/api/connector_credentials.py",
 }
+aion237_allowed_non_api_router_files = {
+    "services/brain-api/src/aion_brain/operator_console_runtime/request_router.py",
+}
 for relative in sorted(changed):
-    if relative in aion108_allowed_files:
+    if relative in aion108_allowed_files or relative in aion237_allowed_non_api_router_files:
         continue
     parts = set(Path(relative).parts)
     if "migrations" in parts:

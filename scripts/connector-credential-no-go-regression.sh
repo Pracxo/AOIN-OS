@@ -70,7 +70,7 @@ if rg -n '^\s*@connector_credentials_app\.command\("(store|read|rotate|revoke|to
   exit 1
 fi
 
-if rg -n '<input|<textarea|<select' operator-console-static/index.html operator-console-static/app.js; then
+if rg -n '<input|<textarea|<select' operator-console-static/index.html operator-console-static/app.js | filter_aion237_live_console_controls; then
   echo "static console exposes credential input control" >&2
   exit 1
 fi

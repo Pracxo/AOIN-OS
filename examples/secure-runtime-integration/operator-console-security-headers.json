@@ -1,7 +1,10 @@
 {
   "authorization_transaction_id": "AION-236-SRI-0004",
+  "cookies_emitted": false,
+  "cors_headers_emitted": false,
   "headers": {
     "Cache-Control": "no-store",
+    "Connection": "close",
     "Content-Security-Policy": "default-src 'self'; connect-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'",
     "Cross-Origin-Opener-Policy": "same-origin",
     "Cross-Origin-Resource-Policy": "same-origin",
@@ -10,5 +13,6 @@
     "X-Content-Type-Options": "nosniff",
     "X-Frame-Options": "DENY"
   },
-  "schema_version": "aion-operator-console-security-headers/v1"
+  "schema_version": "aion-operator-console-security-headers/v1",
+  "security_headers_fingerprint": "0f3fe07655aa9e1b5f9f88d3758875fa71d85de402e647747d9fa0e017a25199"
 }

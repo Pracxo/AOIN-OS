@@ -319,7 +319,11 @@ auth_example = load_json("examples/secure-runtime-integration/local-operator-run
 post_aion236_state = (
     "capability_runtime_evaluated_operator_console_integration_authorized_not_implemented"
 )
-if program.get("program_state") == post_aion236_state:
+post_aion237_state = (
+    "operator_console_integrated_local_runtime_implemented_pending_final_evaluation"
+)
+if program.get("program_state") in {post_aion236_state, post_aion237_state}:
+    aion237_implemented = program.get("program_state") == post_aion237_state
     for payload in (program, auth):
         require(payload["program_id"] == PROGRAM_ID, "program id mismatch")
         require(payload["active_sri_implementation_authorization_count"] == 1, "active SRI count mismatch")
@@ -351,8 +355,12 @@ if program.get("program_state") == post_aion236_state:
         )
         require(payload["operator_console_integration_authorized"] is True, "operator console auth missing")
         require(
-            payload["operator_console_integration_implemented"] is False,
-            "operator console implemented during AION-236",
+            payload["operator_console_integration_implemented"] is aion237_implemented,
+            "operator console implementation state mismatch",
+        )
+        require(
+            payload.get("integrated_authenticated_local_pilot_completed") is aion237_implemented,
+            "operator console integrated pilot state mismatch",
         )
     closed_aion232 = next(item for item in auth["records"] if item.get("authorization_transaction_id") == "AION-232-SRI-0002")
     require(closed_aion232["authorization_active"] is False, "AION-232 still active")

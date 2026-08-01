@@ -1,13 +1,14 @@
-# Operator Console Integration Component Composition
+# Component authority composition
 
-Authorization: `AION-236-SRI-0004`
-Implementation task: `AION-237`
-Formal closeout: `AION-238`
+Authorization: `AION-236-SRI-0004`.
+Implementation task: `AION-237`.
+Formal closeout: `AION-238`.
 
-AION-236 records this authorization only. It creates no AION-237 runtime source, no loopback listener, no route registration and no live bridge behavior.
+AION-237 implements a controlled same-origin loopback Operator Console bridge. It binds only to `127.0.0.1`, serves the five injected static assets, exposes only the ten authorized `/aion/local/v1/` routes, and requires exact Host, Origin, content type, operator confirmation and ephemeral mutation nonce checks for state-changing requests.
 
-Authorized route count: `10`. Static asset allowlist: `/, /index.html, /styles.css, /app.js, /live-console.js`.
+The bridge composes the already implemented AION-231 secure runtime, AION-233 deterministic reference model gateway and AION-235 sandboxed reference capability runtime through redacted local projections. Model output is untrusted proposal material only. Capability and connector requests require explicit operator selection and confirmation.
 
-Required boundary: loopback-only, same-origin, exact Host validation, ephemeral mutation nonce for POST requests, redacted projections, explicit operator confirmations for state-changing requests, and zero external or production effects.
+Runtime boundaries remain closed: public listening, DNS resolution, external egress, cookies, browser storage, credential input, token issuance, live provider calls, external connectors, real tools, filesystem writes, process execution, production memory, production policy, belief mutation, source rewrite, deployment, model training, v0.2 tags and v0.2 releases are not enabled.
 
-Prohibited capabilities remain false: public listening, external egress, DNS, browser persistence, provider calls, external connectors, real tools, filesystem writes, process execution, production writes, deployment, model training, v0.2 tag creation and v0.2 release creation.
+Pilot evidence: `examples/secure-runtime-integration/operator-console-integrated-local-runtime-pilot-evidence.json`.
+Report fingerprint: `e54ea6886c6d7f56c1de568983515944b1b72b3dc2d8f59b310039bb96ed5035`.

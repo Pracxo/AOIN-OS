@@ -9,6 +9,7 @@ def test_current_state_marks_aion235_implemented_pending_closeout() -> None:
     assert state["program_state"] in {
         "sandboxed_capability_runtime_implemented_reference_only_pending_closeout",
         "capability_runtime_evaluated_operator_console_integration_authorized_not_implemented",
+        "operator_console_integrated_local_runtime_implemented_pending_final_evaluation",
     }
     assert state["secure_runtime_foundation_implemented"] is True
     assert state["secure_runtime_implemented"] is True

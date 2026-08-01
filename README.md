@@ -5323,4 +5323,8 @@ AION-235 is authorized to implement a sandboxed deterministic capability and syn
 
 ## AION-236 Secure Runtime Integration Status
 
-AION-SRIPE-003 passed with report fingerprint `61e50ce0829e85b27b61a7620bb1ca4a7f58ad0c6f8cad0b93f0250c89365a11`. `AION-234-SRI-0003` is closed and consumed by AION-235. `AION-236-SRI-0004` is active for AION-237. AION-237 is authorized but not implemented. Public listening, external egress, browser persistence, provider calls, external connectors, real tools, production writes, deployment, model training and v0.2 release readiness remain disabled.
+AION-SRIPE-003 passed with report fingerprint `61e50ce0829e85b27b61a7620bb1ca4a7f58ad0c6f8cad0b93f0250c89365a11`. `AION-234-SRI-0003` is closed and consumed by AION-235. `AION-236-SRI-0004` remains active for AION-237 pending AION-238 final evaluation and closeout.
+
+## AION-237 Controlled Local Operator Console
+
+AION-237 implements a controlled same-origin loopback Operator Console integration and completed the integrated authenticated local-runtime pilot. The console binds only to `127.0.0.1`, serves exactly the approved static assets, exposes the bounded `/aion/local/v1/*` route manifest, requires same-origin Host and Origin validation, rotates in-memory mutation nonces, and projects only redacted runtime, model-gateway, capability-runtime, connector-simulation, audit, observability, receipt, health, kill-switch and session-close views. Public listening, external egress, DNS resolution, browser persistence, provider calls, external connectors, real tools, production writes, deployment, model training and v0.2 release readiness remain disabled.

@@ -1291,6 +1291,7 @@ AION233_ALLOWED_PREFIXES = (
 AION236_ALLOWED_EXACT_PATHS = {
     "AGENTS.md",
     "README.md",
+    "docs/adr/0201-controlled-same-origin-loopback-operator-console-and-integrated-local-runtime.md",
     "docs/adr/0200-sandboxed-capability-runtime-evaluation-and-controlled-local-operator-console-integration-authorization.md",
     "docs/adr/README.md",
     "docs/architecture.md",
@@ -1302,6 +1303,8 @@ AION236_ALLOWED_EXACT_PATHS = {
     "operator-console-static/README.md",
     "operator-console-static/app.js",
     "operator-console-static/index.html",
+    "operator-console-static/live-console.js",
+    "operator-console-static/styles.css",
     "scripts/capability-runtime-operator-evaluation-check.sh",
     "scripts/capability-runtime-operator-evaluation-no-go-regression.sh",
     "scripts/lib/capability_runtime_operator_evaluation.py",
@@ -1314,11 +1317,30 @@ AION236_ALLOWED_EXACT_PATHS = {
     "scripts/operator-console-integration-authorization-check.sh",
     "scripts/operator-console-integration-authorization-no-go-regression.sh",
     "scripts/operator-console-integration-runtime-hold.sh",
+    "scripts/operator-console-integrated-local-run.py",
+    "scripts/operator-console-integrated-pilot-evidence-check.sh",
+    "scripts/operator-console-integration-check.sh",
+    "scripts/operator-console-integration-no-go-regression.sh",
     "scripts/secure-runtime-foundation-no-go-regression.sh",
     "scripts/secure-runtime-integration-program-authorization-check.sh",
+    "scripts/secure-runtime-integration-program-no-go-regression.sh",
     "services/brain-api/tests/capability_runtime_operator_evaluation_test_support.py",
     "services/brain-api/tests/operator_console_integration_test_support.py",
     "services/brain-api/tests/test_secure_runtime_current_state_after_aion236.py",
+    "services/brain-api/src/aion_brain/contracts/operator_console_integration.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/__init__.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/audit.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/authorization.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/component_binding.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/evidence.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/integrity.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/local_http.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/observability.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/origin_policy.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/request_nonce.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/request_router.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/session_bridge.py",
+    "services/brain-api/src/aion_brain/operator_console_runtime/view_models.py",
 }
 
 AION236_ALLOWED_PREFIXES = (
@@ -1330,6 +1352,7 @@ AION236_ALLOWED_PREFIXES = (
     "operator-console-static/demo-data/operator-console-",
     "services/brain-api/tests/test_capability_runtime_",
     "services/brain-api/tests/test_operator_console_integration_",
+    "services/brain-api/tests/test_operator_console_integrated_",
 )
 
 AION199_ALLOWED_EXACT_PATHS = set(AION199_REQUIRED_FILES) | {

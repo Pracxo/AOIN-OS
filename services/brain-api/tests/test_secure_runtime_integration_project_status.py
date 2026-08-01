@@ -15,8 +15,11 @@ from test_secure_runtime_integration_program_charter import (
 def test_project_status_reconciles_current_secure_runtime_program_state() -> None:
     status = read_text("docs/project-status.md")
 
-    assert "Current milestone: AION-236 capability-runtime operator evaluation complete" in status
-    assert "Current task: AION-237 controlled Operator Console integration" in status
+    assert (
+        "Current milestone: AION-237 controlled same-origin loopback Operator Console "
+        "integration implemented"
+    ) in status
+    assert "Current task: AION-238 final Secure Runtime Integration Program evaluation" in status
     assert PROGRAM_ID in status
     assert AUTH_ID in status
     assert CURRENT_AUTH_ID in status

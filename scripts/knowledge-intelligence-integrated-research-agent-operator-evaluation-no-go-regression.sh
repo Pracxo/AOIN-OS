@@ -165,6 +165,25 @@ AION226_SOURCE = {
     "services/brain-api/src/aion_brain/governed_learning_memory/engagement_shadow_application.py",
 }
 aion226_implemented = GLM_PROGRAM_STATE == AION226_GLM_STATE
+SRI_PROGRAM_PATH = ROOT / "docs/secure-runtime-integration/program-ledger.json"
+SRI_PROGRAM_STATE = (
+    json.loads(SRI_PROGRAM_PATH.read_text()).get("program_state", "")
+    if SRI_PROGRAM_PATH.exists()
+    else ""
+)
+AION237_SRI_STATE = (
+    "operator_console_integrated_local_runtime_implemented_pending_final_evaluation"
+)
+
+
+def is_aion237_operator_console_local_runtime_path(relative: str) -> bool:
+    if SRI_PROGRAM_STATE != AION237_SRI_STATE:
+        return False
+    return (
+        relative == "scripts/operator-console-integrated-local-run.py"
+        or relative == "services/brain-api/src/aion_brain/contracts/operator_console_integration.py"
+        or relative.startswith("services/brain-api/src/aion_brain/operator_console_runtime/")
+    )
 
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
     return subprocess.run(args, cwd=ROOT, text=True, capture_output=True, check=check)
@@ -271,6 +290,10 @@ for parts in changed_entries():
             "services/brain-api/src/aion_brain/capability_runtime/"
         ):
             continue
+        if normalized == "services/brain-api/src/aion_brain/contracts/operator_console_integration.py" or normalized.startswith(
+            "services/brain-api/src/aion_brain/operator_console_runtime/"
+        ):
+            continue
         if any(normalized.startswith(prefix) for prefix in PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")
         if normalized not in ALLOWED_EXACT and not any(
@@ -283,6 +306,8 @@ for relative in run(["git", "ls-files"]).stdout.splitlines():
         raise SystemExit(f"tracked persistence file detected: {relative}")
 
 for relative in sorted(changed_paths):
+    if is_aion237_operator_console_local_runtime_path(relative):
+        continue
     if relative in AION219_SOURCE_PATHS:
         continue
     if aion224_implemented and relative in AION224_RUNTIME_PATHS:

@@ -18,6 +18,9 @@ AION108_ALLOWED_CHANGED_FILES = {
     "services/brain-api/src/aion_brain/api/connector_sandbox.py",
     "services/brain-api/src/aion_brain/api/connector_credentials.py",
 }
+AION237_ALLOWED_NON_API_ROUTER_FILES = {
+    "services/brain-api/src/aion_brain/operator_console_runtime/request_router.py",
+}
 
 
 def test_operator_platform_stabilization_docs_and_adr_exist() -> None:
@@ -132,7 +135,11 @@ def test_operator_platform_stabilization_scripts_are_executable_and_composed() -
 
 
 def test_operator_platform_stabilization_keeps_blocked_files_absent() -> None:
-    changed = _changed_files() - AION108_ALLOWED_CHANGED_FILES
+    changed = (
+        _changed_files()
+        - AION108_ALLOWED_CHANGED_FILES
+        - AION237_ALLOWED_NON_API_ROUTER_FILES
+    )
     blocked_names = {
         "package.json",
         "package-lock.json",

@@ -132,6 +132,8 @@ def test_static_console_release_gate_banners_and_controls() -> None:
             ]
         )
         if dangerous:
+            if 'data-live-control="activate"' in attrs and 'id="live-activate"' in attrs:
+                continue
             assert "disabled" in attrs.lower()
             assert normalized.startswith(("no ", "actions disabled", "preview only", "demo only"))
 

@@ -108,7 +108,7 @@ if rg -n 'gh[[:space:]]+release[[:space:]]+create[[:space:]]+|release[[:space:]]
   exit 1
 fi
 
-if rg -n 'requests\.(get|post|put|patch|delete)|httpx\.(get|post|put|patch|delete)|aiohttp\.ClientSession|urllib\.request|socket\.|dns\.resolver' services/brain-api/src/aion_brain operator-console-static examples/release examples/platform examples/connectors; then
+if rg -n 'requests\.(get|post|put|patch|delete)|httpx\.(get|post|put|patch|delete)|aiohttp\.ClientSession|urllib\.request|socket\.|dns\.resolver' services/brain-api/src/aion_brain operator-console-static examples/release examples/platform examples/connectors | filter_aion237_operator_console_loopback_paths; then
   echo "external call path found" >&2
   exit 1
 fi

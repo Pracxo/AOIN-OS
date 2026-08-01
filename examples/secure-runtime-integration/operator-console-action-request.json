@@ -1,4 +1,16 @@
 {
+  "accepted_connector_operations": [
+    "connector.reference.read.simulate",
+    "connector.reference.write.preview"
+  ],
+  "accepted_reference_capability_ids": [
+    "capability_runtime.health.read",
+    "capability_runtime.observability.read",
+    "capability_runtime.audit.read",
+    "capability.text.normalize",
+    "capability.hash.sha256",
+    "capability.json.validate"
+  ],
   "allowed_post_routes": [
     {
       "method": "POST",

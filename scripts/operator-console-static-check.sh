@@ -1259,16 +1259,34 @@ for path in sorted(demo_dir.glob("*.json")):
     if path.name.startswith("operator-console-"):
         allowed_names = {
             "operator-console-action-boundary.json",
+            "operator-console-audit.json",
+            "operator-console-capability-execution.json",
+            "operator-console-connector-read.json",
+            "operator-console-connector-write-preview.json",
+            "operator-console-health.json",
+            "operator-console-integrated-local-runtime-pilot-evidence.json",
             "operator-console-integration-authorization.json",
+            "operator-console-integration-component-binding.json",
             "operator-console-integration-runtime-hold.json",
+            "operator-console-integrity.json",
+            "operator-console-kill-switch-result.json",
+            "operator-console-model-simulation.json",
+            "operator-console-mutation-nonce-state.json",
+            "operator-console-observability.json",
             "operator-console-origin-policy.json",
+            "operator-console-receipt-projection.json",
             "operator-console-route-manifest.json",
+            "operator-console-runtime-boundary.json",
             "operator-console-security-headers.json",
             "operator-console-session-bootstrap.json",
+            "operator-console-session-close-result.json",
+            "operator-console-session-status.json",
+            "operator-console-static-asset-manifest.json",
         }
         if path.name not in allowed_names:
             raise SystemExit(f"unknown operator console integration demo: {path}")
-        if payload.get("authorization_transaction_id") != "AION-236-SRI-0004":
+        authorization = payload.get("authorization_transaction_id", payload.get("authorization_id"))
+        if authorization != "AION-236-SRI-0004":
             raise SystemExit(f"operator console demo authorization mismatch: {path}")
         for key in (
             "actual_model_provider_call_enabled",
@@ -1283,7 +1301,6 @@ for path in sorted(demo_dir.glob("*.json")):
             "ipv6_unspecified_binding_enabled",
             "model_output_triggered_execution_enabled",
             "model_weight_training_enabled",
-            "operator_console_integration_implemented",
             "production_deployment_enabled",
             "production_runtime_authorized",
             "production_write_execution_enabled",
@@ -1293,6 +1310,16 @@ for path in sorted(demo_dir.glob("*.json")):
         ):
             if key in payload and payload.get(key) is not False:
                 raise SystemExit(f"operator console demo flag must be false: {key}: {path}")
+        if (
+            "operator_console_integration_implemented" in payload
+            and payload.get("operator_console_integration_implemented") is not True
+        ):
+            raise SystemExit(f"operator console implementation flag mismatch: {path}")
+        if (
+            "integrated_authenticated_local_pilot_completed" in payload
+            and payload.get("integrated_authenticated_local_pilot_completed") is not True
+        ):
+            raise SystemExit(f"operator console pilot flag mismatch: {path}")
         for key in ("loopback_listener_absent", "same_origin_required"):
             if key in payload and payload.get(key) is not True:
                 raise SystemExit(f"operator console demo flag must be true: {key}: {path}")

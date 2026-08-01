@@ -1,0 +1,68 @@
+{
+  "assets": [
+    {
+      "arbitrary_file_read": false,
+      "asset_name": "index.html",
+      "byte_count": 118699,
+      "cache_control": "no-store",
+      "mime_type": "text/html; charset=utf-8",
+      "route_path": "/",
+      "sha256": "a2639fc2c68de79fbba017ea553683e5be8be2ae59be2dc397c68106b57821aa",
+      "symlink": false
+    },
+    {
+      "arbitrary_file_read": false,
+      "asset_name": "index.html",
+      "byte_count": 118699,
+      "cache_control": "no-store",
+      "mime_type": "text/html; charset=utf-8",
+      "route_path": "/index.html",
+      "sha256": "a2639fc2c68de79fbba017ea553683e5be8be2ae59be2dc397c68106b57821aa",
+      "symlink": false
+    },
+    {
+      "arbitrary_file_read": false,
+      "asset_name": "styles.css",
+      "byte_count": 16287,
+      "cache_control": "no-store",
+      "mime_type": "text/css; charset=utf-8",
+      "route_path": "/styles.css",
+      "sha256": "1deb3a62c5bd4d530a66cc094cca4babad0172c075fab94f4391f7da37aab229",
+      "symlink": false
+    },
+    {
+      "arbitrary_file_read": false,
+      "asset_name": "app.js",
+      "byte_count": 189918,
+      "cache_control": "no-store",
+      "mime_type": "text/javascript; charset=utf-8",
+      "route_path": "/app.js",
+      "sha256": "36b7dfc0c69e878e9f216a948184c8c5b7a43fa577a678db7dd1856ccf8881c8",
+      "symlink": false
+    },
+    {
+      "arbitrary_file_read": false,
+      "asset_name": "live-console.js",
+      "byte_count": 10074,
+      "cache_control": "no-store",
+      "mime_type": "text/javascript; charset=utf-8",
+      "route_path": "/live-console.js",
+      "sha256": "22d7369d43b3dc4a82c94cc9254815025fbbdd7f730d2ead697685b2ed1ddf7d",
+      "symlink": false
+    }
+  ],
+  "authorization_transaction_id": "AION-236-SRI-0004",
+  "browser_persistence_enabled": false,
+  "exact_asset_allowlist": true,
+  "external_network_egress_enabled": false,
+  "manifest_fingerprint": "fc550db840dfd2f6ff977ec2e55eeeb82737ef38ee40f0d6c95a11dec5463626",
+  "production_effect": false,
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "public_listener_enabled": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "schema_version": "aion-operator-console-static-asset-manifest/v1",
+  "synthetic": true
+}

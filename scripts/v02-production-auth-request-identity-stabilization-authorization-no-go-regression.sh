@@ -81,6 +81,9 @@ while IFS= read -r file; do
   if aion233_is_scoped_controlled_model_gateway_path "$file"; then
     continue
   fi
+  if aion237_is_scoped_operator_console_integrated_local_runtime_path "$file"; then
+    continue
+  fi
   case "$file" in
     package.json|package-lock.json|pnpm-lock.yaml|yarn.lock|bun.lockb|\
     */package.json|*/package-lock.json|*/pnpm-lock.yaml|*/yarn.lock|*/bun.lockb)
@@ -115,7 +118,8 @@ while IFS= read -r file; do
   if [[ -f "$file" ]] \
     && ! aion157_is_scoped_request_identity_stabilization_path "$file" \
     && ! aion158_is_scoped_request_identity_stabilization_path "$file" \
-    && ! aion164_is_scoped_identity_assertion_replay_protection_path "$file"; then
+    && ! aion164_is_scoped_identity_assertion_replay_protection_path "$file" \
+    && ! aion237_is_scoped_operator_console_integrated_local_runtime_path "$file"; then
     printf '%s\n' "$file" >> "$scan_file_list"
   fi
 done < "$changed_file_list"

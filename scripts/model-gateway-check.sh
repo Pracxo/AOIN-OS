@@ -90,11 +90,13 @@ PROGRAM_STATES = {
     "model_gateway_evaluated_sandboxed_capability_runtime_authorized_not_implemented",
     "sandboxed_capability_runtime_implemented_reference_only_pending_closeout",
     "capability_runtime_evaluated_operator_console_integration_authorized_not_implemented",
+    "operator_console_integrated_local_runtime_implemented_pending_final_evaluation",
 }
 POST_CLOSEOUT_STATES = {
     "model_gateway_evaluated_sandboxed_capability_runtime_authorized_not_implemented",
     "sandboxed_capability_runtime_implemented_reference_only_pending_closeout",
     "capability_runtime_evaluated_operator_console_integration_authorized_not_implemented",
+    "operator_console_integrated_local_runtime_implemented_pending_final_evaluation",
 }
 EXPECTED_ACTIVE_STATES = {
     "controlled_model_gateway_implemented_reference_simulation_only_pending_closeout": (
@@ -113,6 +115,11 @@ EXPECTED_ACTIVE_STATES = {
         "AION-236",
     ),
     "capability_runtime_evaluated_operator_console_integration_authorized_not_implemented": (
+        "AION-236-SRI-0004",
+        "AION-237",
+        "AION-238",
+    ),
+    "operator_console_integrated_local_runtime_implemented_pending_final_evaluation": (
         "AION-236-SRI-0004",
         "AION-237",
         "AION-238",

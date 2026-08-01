@@ -1,5 +1,6 @@
 {
   "authorization_transaction_id": "AION-236-SRI-0004",
+  "manifest_fingerprint": "2416793202f55b3f890cae1cd73216bd485125253ab16cc40a405e2063ec5b6a",
   "routes": [
     {
       "method": "GET",

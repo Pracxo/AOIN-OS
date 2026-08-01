@@ -26,7 +26,7 @@ def test_model_gateway_scope_and_task_flow_are_recorded() -> None:
         assert state["formal_closeout_task"] == "AION-238"
         assert state["sandboxed_capability_runtime_operator_evaluation_passed"] is True
         assert state["operator_console_integration_authorized"] is True
-        assert state["operator_console_integration_implemented"] is False
+        assert state["operator_console_integration_implemented"] is True
     assert state["model_gateway_authorized"] is True
     assert state["model_gateway_implemented"] is True
     assert state["sandboxed_capability_runtime_implemented"] is True

@@ -1,0 +1,18 @@
+{
+  "audit_projections_created": 1,
+  "authorization_transaction_id": "AION-236-SRI-0004",
+  "browser_persistence_enabled": false,
+  "console_audit_chain_head": "3b1208c4a6b3765e0eaba57e9a1896b50a6aecfc0882976628f818f25db3e788",
+  "external_network_egress_enabled": false,
+  "listener_audit_chain_head": "3b1208c4a6b3765e0eaba57e9a1896b50a6aecfc0882976628f818f25db3e788",
+  "payloads_retained": false,
+  "production_effect": false,
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "public_listener_enabled": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "schema_version": "aion-operator-console-audit/v1",
+  "synthetic": true
+}

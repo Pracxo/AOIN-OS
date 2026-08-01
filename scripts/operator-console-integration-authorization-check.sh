@@ -45,8 +45,14 @@ if any(auth["operator_console_prohibited_capabilities"].values()):
     raise SystemExit("prohibited capability true")
 if auth["operator_console_resource_limits"]["maximum_routes"] != 10:
     raise SystemExit("route limit mismatch")
-if any((root / item).exists() for item in auth["future_source_scope"]):
-    raise SystemExit("AION-237 source exists too early")
+if auth["operator_console_integration_implemented"] is not True:
+    raise SystemExit("operator console integration must be implemented")
+if auth["integrated_authenticated_local_pilot_completed"] is not True:
+    raise SystemExit("integrated pilot must be complete")
+if not all((root / item).is_file() for item in auth["future_source_scope"]):
+    raise SystemExit("AION-237 authorized source scope is incomplete")
+if not (root / auth["future_uninstalled_runner"]).is_file():
+    raise SystemExit("AION-237 uninstalled runner is missing")
 for key in (
     "public_listener_enabled",
     "external_network_egress_enabled",
@@ -62,6 +68,11 @@ for key in (
 closed = program["aion_234_record"]
 if closed["authorization_state"] != "consumed_by_AION-235_closed_by_AION-236":
     raise SystemExit("AION-234 closeout mismatch")
+record = program["aion_237_record"]
+if record["authorization_state"] != "implementation_complete_pending_AION-238_closeout":
+    raise SystemExit("AION-237 implementation state mismatch")
+if record["completion_timestamp"] is not None or record["ci_result"] != "pending":
+    raise SystemExit("AION-237 Git delivery must remain pending AION-238 reconciliation")
 PY
 
 echo "controlled operator console integration authorization PASS"

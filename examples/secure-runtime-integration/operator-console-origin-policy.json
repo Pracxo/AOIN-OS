@@ -3,7 +3,10 @@
     "127.0.0.1"
   ],
   "authorization_transaction_id": "AION-236-SRI-0004",
+  "bind_host": "127.0.0.1",
   "dns_resolution_enabled": false,
+  "fetch_metadata_cross_site_rejected": true,
+  "forwarded_headers_rejected": true,
   "host_header_must_match_bound_host_and_port": true,
   "ipv6_unspecified_binding_enabled": false,
   "loopback_only": true,

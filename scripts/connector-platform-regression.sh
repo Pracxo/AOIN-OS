@@ -37,6 +37,10 @@ changed_files() {
   git ls-files --others --exclude-standard
 }
 
+filter_aion237_operator_console_scan_paths() {
+  rg -v '^(services/brain-api/src/aion_brain/contracts/operator_console_integration\.py:|services/brain-api/src/aion_brain/operator_console_runtime/)'
+}
+
 required_docs=(
   docs/connectors/connector-platform-stabilization-runbook.md
   docs/connectors/connector-long-running-regression-matrix.md
@@ -149,7 +153,8 @@ if rg -n '\b(oauth|oidc|saml)[-_ ]?runtime[-_ ]?enabled\s*[:=]\s*true\b|external
 fi
 
 if rg -n 'requests\.(get|post|put|patch|delete)|httpx\.(get|post|put|patch|delete)|aiohttp\.ClientSession|urllib\.request|socket\.|dns\.resolver' \
-  services/brain-api/src/aion_brain operator-console-static examples/connectors; then
+  services/brain-api/src/aion_brain operator-console-static examples/connectors \
+  | filter_aion237_operator_console_scan_paths; then
   echo "connector platform external call pattern found" >&2
   exit 1
 fi
@@ -166,7 +171,7 @@ if rg -n 'execute_connector|run_connector|connector_runtime_execute' \
   exit 1
 fi
 
-if rg -n '<input|<textarea|<select|contenteditable' operator-console-static/index.html operator-console-static/app.js; then
+if rg -n '<input|<textarea|<select|contenteditable' operator-console-static/index.html operator-console-static/app.js | filter_aion237_live_console_controls; then
   echo "static console input control found" >&2
   exit 1
 fi

@@ -54,6 +54,7 @@ def test_aion230_sri_authorization_is_closed_and_current_aion232_auth_is_single_
     assert auth["program_state"] in {
         PROGRAM_STATE,
         "capability_runtime_evaluated_operator_console_integration_authorized_not_implemented",
+        "operator_console_integrated_local_runtime_implemented_pending_final_evaluation",
     }
 
     assert auth["active_authorizations"] == [

@@ -1521,6 +1521,8 @@ def is_secure_runtime_integration_artifact(name: str) -> bool:
         == "docs/adr/0198-controlled-model-gateway-evaluation-and-sandboxed-capability-runtime-authorization.md"
         or name
         == "docs/adr/0200-sandboxed-capability-runtime-evaluation-and-controlled-local-operator-console-integration-authorization.md"
+        or name
+        == "docs/adr/0201-controlled-same-origin-loopback-operator-console-and-integrated-local-runtime.md"
         or name.startswith("docs/secure-runtime-integration/")
         or name.startswith("docs/release/secure-runtime-integration-")
         or name.startswith("docs/release/secure-runtime-foundation-")
@@ -1538,6 +1540,8 @@ def is_secure_runtime_integration_artifact(name: str) -> bool:
         or name.startswith("scripts/model-gateway-")
         or name.startswith("scripts/capability-runtime-")
         or name.startswith("scripts/operator-console-integration-")
+        or name == "scripts/operator-console-integrated-local-run.py"
+        or name == "scripts/operator-console-integrated-pilot-evidence-check.sh"
         or name == "scripts/lib/secure_runtime_foundation_operator_evaluation.py"
         or name == "scripts/lib/model_gateway_operator_evaluation.py"
         or name == "scripts/lib/capability_runtime_operator_evaluation.py"
@@ -1545,8 +1549,10 @@ def is_secure_runtime_integration_artifact(name: str) -> bool:
         or name == "services/brain-api/src/aion_brain/contracts/secure_runtime.py"
         or name == "services/brain-api/src/aion_brain/contracts/model_gateway.py"
         or name == "services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime.py"
+        or name == "services/brain-api/src/aion_brain/contracts/operator_console_integration.py"
         or name.startswith("services/brain-api/src/aion_brain/model_gateway/")
         or name.startswith("services/brain-api/src/aion_brain/capability_runtime/")
+        or name.startswith("services/brain-api/src/aion_brain/operator_console_runtime/")
         or name == "services/brain-api/tests/model_gateway_aion233_test_support.py"
         or name.startswith("services/brain-api/src/aion_brain/secure_runtime/")
         or name == "services/brain-api/tests/capability_runtime_test_support.py"
@@ -1557,6 +1563,7 @@ def is_secure_runtime_integration_artifact(name: str) -> bool:
         or name == "services/brain-api/tests/capability_runtime_operator_evaluation_test_support.py"
         or name == "services/brain-api/tests/operator_console_integration_test_support.py"
         or name.startswith("services/brain-api/tests/test_operator_console_integration_")
+        or name.startswith("services/brain-api/tests/test_operator_console_integrated_")
         or name == "services/brain-api/tests/aion234_test_support.py"
         or name.startswith("services/brain-api/tests/test_secure_runtime_")
         or name.startswith("services/brain-api/tests/test_secure_runtime_integration_")
