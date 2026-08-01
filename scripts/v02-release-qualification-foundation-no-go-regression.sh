@@ -86,6 +86,7 @@ is_allowed_path() {
     scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh|\
     scripts/knowledge-intelligence-tool-verification-authorization-no-go-regression.sh|\
     scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-verified-memory-operator-evaluation-no-go-regression.sh|\
     scripts/lib/cognitive_architecture_governance.py|\
     scripts/lib/v02-production-auth-scan-exclusions.sh|\
     scripts/model-gateway-authorization-check.sh|\
@@ -111,6 +112,13 @@ is_allowed_path() {
     services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
     services/brain-api/src/aion_brain/v02_release_qualification/*.py|\
     services/brain-api/tests/test_secure_runtime_integration_final_closeout_aion238.py|\
+    services/brain-api/tests/test_governed_learning_memory_no_runtime_source.py|\
+    services/brain-api/tests/test_knowledge_epistemic_assessment_evaluation_repository_integrity.py|\
+    services/brain-api/tests/test_knowledge_intelligence_program_repository_integrity.py|\
+    services/brain-api/tests/test_knowledge_research_evaluation_repository_integrity.py|\
+    services/brain-api/tests/test_knowledge_source_registry_evaluation_no_side_effects.py|\
+    services/brain-api/tests/test_self_improvement_shadow_activation_evaluation_repository_integrity.py|\
+    services/brain-api/tests/test_self_improvement_shadow_activation_scope_spec.py|\
     services/brain-api/tests/test_v02_release_qualification_*.py)
       return 0
       ;;

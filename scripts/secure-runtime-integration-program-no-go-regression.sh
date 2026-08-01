@@ -220,6 +220,13 @@ is_allowed_path() {
 	    services/brain-api/tests/test_operator_console_integrated_*.py|\
 	    services/brain-api/tests/test_operator_platform_*.py|\
 	    services/brain-api/tests/test_static_console_ui_release_gate.py|\
+	    services/brain-api/tests/test_governed_learning_memory_no_runtime_source.py|\
+	    services/brain-api/tests/test_knowledge_epistemic_assessment_evaluation_repository_integrity.py|\
+	    services/brain-api/tests/test_knowledge_intelligence_program_repository_integrity.py|\
+	    services/brain-api/tests/test_knowledge_research_evaluation_repository_integrity.py|\
+	    services/brain-api/tests/test_knowledge_source_registry_evaluation_no_side_effects.py|\
+	    services/brain-api/tests/test_self_improvement_shadow_activation_evaluation_repository_integrity.py|\
+	    services/brain-api/tests/test_self_improvement_shadow_activation_scope_spec.py|\
 	    services/brain-api/tests/test_model_gateway_*.py|\
 	    services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
 	    services/brain-api/src/aion_brain/v02_release_qualification/*|\

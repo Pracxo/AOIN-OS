@@ -1,4 +1,5 @@
 import importlib.util
+import json
 import sys
 
 from knowledge_source_registry_test_helpers import (
@@ -26,6 +27,22 @@ def _aion217_source_paths() -> set[str]:
     return set(validator.AION217_SOURCE_PATHS) | set(validator.AION217_OPTIONAL_SOURCE_PATHS)
 
 
+def _aion239_source_paths() -> set[str]:
+    program = json.loads(
+        (ROOT / "docs/v02-release-qualification/program-ledger.json").read_text()
+    )
+    if (
+        program.get("active_v02_release_qualification_task") != "AION-239"
+        or program.get("v02_release_qualification_foundation_implemented") is not True
+        or program.get("foundation_runtime_state")
+        != "implemented_disabled_design_only_local_simulation"
+    ):
+        return set()
+    source_scope = program.get("implemented_source_scope")
+    assert isinstance(source_scope, list)
+    return {str(path) for path in source_scope}
+
+
 def _assert_aion217_boundaries() -> None:
     for relative in (
         "services/brain-api/src/aion_brain/api/verified_knowledge.py",
@@ -38,13 +55,24 @@ def _assert_aion217_boundaries() -> None:
         assert not (ROOT / relative).exists(), relative
 
 
+def _assert_aion239_boundaries() -> None:
+    assert not (
+        ROOT / "services/brain-api/src/aion_brain/api/v02_release_qualification.py"
+    ).exists()
+
+
 def test_aion_206_does_not_add_runtime_source_or_release_surfaces():
     changed = changed_files()
     aion217_source_paths = _aion217_source_paths()
+    aion239_source_paths = _aion239_source_paths()
     for path in changed:
         assert not path.startswith(".github/workflows/"), path
         if path.startswith("services/brain-api/src/aion_brain/"):
-            assert path in SOURCE_RUNTIME_PATHS or path in aion217_source_paths, path
+            assert (
+                path in SOURCE_RUNTIME_PATHS
+                or path in aion217_source_paths
+                or path in aion239_source_paths
+            ), path
         assert not path.startswith("packages/aion-sdk-python/src/"), path
         assert "migrations/" not in path, path
         assert not path.endswith((
@@ -63,5 +91,16 @@ def test_aion_206_does_not_add_runtime_source_or_release_surfaces():
         }
         assert changed_source_paths <= set(SOURCE_RUNTIME_PATHS) | aion217_source_paths
         _assert_aion217_boundaries()
+    if changed & aion239_source_paths:
+        changed_source_paths = {
+            path
+            for path in changed
+            if path.startswith("services/brain-api/src/aion_brain/")
+        }
+        assert (
+            changed_source_paths
+            <= set(SOURCE_RUNTIME_PATHS) | aion217_source_paths | aion239_source_paths
+        )
+        _assert_aion239_boundaries()
     for relative in PROHIBITED_SOURCE_RUNTIME_PATHS:
         assert not (ROOT / relative).exists(), relative

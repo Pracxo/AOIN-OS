@@ -116,6 +116,16 @@ is_aion235_capability_runtime_path() {
   return 1
 }
 
+is_aion239_v02_release_qualification_path() {
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
+    services/brain-api/src/aion_brain/v02_release_qualification/*)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
 }
@@ -152,6 +162,9 @@ is_allowed_path() {
   if is_aion235_capability_runtime_path "$path"; then
     return 0
   fi
+  if is_aion239_v02_release_qualification_path "$path"; then
+    return 0
+  fi
   for item in "${ALLOWED_EXACT[@]}"; do
     [[ "$path" == "$item" ]] && return 0
   done
@@ -177,6 +190,9 @@ is_prohibited_path() {
     return 1
   fi
   if is_aion235_capability_runtime_path "$path"; then
+    return 1
+  fi
+  if is_aion239_v02_release_qualification_path "$path"; then
     return 1
   fi
   for item in "${PROHIBITED_PREFIXES[@]}"; do

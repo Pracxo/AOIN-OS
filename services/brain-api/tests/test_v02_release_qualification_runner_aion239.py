@@ -2,13 +2,14 @@ from __future__ import annotations
 
 import json
 import subprocess
+import sys
 from pathlib import Path
 
 from aion_brain.contracts import v02_release_qualification as c
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 RUNNER = REPO_ROOT / "scripts/v02-release-qualification-local-run.py"
-PYTHON = REPO_ROOT / "services/brain-api/.venv/bin/python"
+PYTHON = sys.executable
 
 
 def test_uninstalled_runner_requires_secure_paths_and_writes_redacted_output(tmp_path):

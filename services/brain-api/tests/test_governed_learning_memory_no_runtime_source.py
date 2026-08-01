@@ -19,6 +19,31 @@ from scripts.lib.governed_learning_memory_local_persistence_authorization import
 )
 from test_governed_learning_memory_program_authorization import REPO_ROOT, load_json
 
+AION239_SOURCE_SCOPE = {
+    "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/__init__.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/artifact_provenance.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/authorization.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/credential_lifecycle.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/deployment_manifest.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/evidence.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/gap_matrix.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/identity_provider.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/integrity.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/key_lifecycle.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/observability.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/production_auth_composition.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/protected_material.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/release_gate.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/replay_provisioning.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/request_identity.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/rollback.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/runtime_guard.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/session_lifecycle.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/threat_model.py",
+    "services/brain-api/src/aion_brain/v02_release_qualification/token_lifecycle.py",
+}
+
 
 def _git_ref_exists(ref: str) -> bool:
     return (
@@ -79,6 +104,14 @@ def _aion226_implemented() -> bool:
     )
 
 
+def _aion239_implemented() -> bool:
+    try:
+        qualification = load_json("docs/v02-release-qualification/program-ledger.json")
+    except FileNotFoundError:
+        return False
+    return qualification.get("v02_release_qualification_foundation_implemented") is True
+
+
 def test_aion_222_runtime_source_exists_and_aion_224_source_matches_state() -> None:
     for relative in AION222_SOURCE_SCOPE:
         assert (REPO_ROOT / relative).exists(), relative
@@ -120,6 +153,8 @@ def test_aion_223_does_not_change_runtime_source_surface() -> None:
     if _aion226_implemented():
         allowed.update(AION226_SOURCE_SCOPE)
         allowed.update(AION226_SUPPORT_SCOPE)
+    if _aion239_implemented():
+        allowed.update(AION239_SOURCE_SCOPE)
     if allowed:
         assert changed <= allowed
     else:

@@ -1370,12 +1370,20 @@ AION239_ALLOWED_EXACT_PATHS = {
     "operator-console-static/app.js",
     "operator-console-static/index.html",
     "scripts/auth-design-check.sh",
+    "scripts/knowledge-intelligence-verified-memory-operator-evaluation-no-go-regression.sh",
     "scripts/lib/cognitive_architecture_governance.py",
     "scripts/lib/v02-production-auth-scan-exclusions.sh",
     "scripts/operator-console-static-check.sh",
     "scripts/static-console-safety-check.sh",
     "scripts/v02-release-qualification-local-run.py",
     "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py",
+    "services/brain-api/tests/test_governed_learning_memory_no_runtime_source.py",
+    "services/brain-api/tests/test_knowledge_epistemic_assessment_evaluation_repository_integrity.py",
+    "services/brain-api/tests/test_knowledge_intelligence_program_repository_integrity.py",
+    "services/brain-api/tests/test_knowledge_research_evaluation_repository_integrity.py",
+    "services/brain-api/tests/test_knowledge_source_registry_evaluation_no_side_effects.py",
+    "services/brain-api/tests/test_self_improvement_shadow_activation_evaluation_repository_integrity.py",
+    "services/brain-api/tests/test_self_improvement_shadow_activation_scope_spec.py",
 }
 
 AION239_ALLOWED_PREFIXES = (
