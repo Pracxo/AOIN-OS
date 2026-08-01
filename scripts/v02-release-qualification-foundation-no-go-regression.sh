@@ -58,16 +58,26 @@ changed_paths() {
 is_allowed_path() {
   case "$1" in
     README.md|AGENTS.md|\
-    docs/adr/README.md|\
-    docs/adr/0202-final-secure-runtime-integration-evaluation-and-v02-release-qualification-program-authorization.md|\
-    docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md|\
+	    docs/adr/README.md|\
+	    docs/adr/0202-final-secure-runtime-integration-evaluation-and-v02-release-qualification-program-authorization.md|\
+	    docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md|\
+	    docs/adr/0204-v02-qualification-foundation-evaluation-and-controlled-isolated-staging-qualification-authorization.md|\
     docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/project-status.md|docs/visual-brain.md|\
     docs/v02-release-qualification/*|\
     docs/release/v02-release-qualification-*|\
+    docs/release/v02-qualification-foundation-operator-evaluation-*|\
+    docs/release/v02-staging-qualification-*|\
     docs/release/v02-release-readiness-delta.md|\
     examples/v02-release-qualification/*|\
     operator-console-static/index.html|operator-console-static/app.js|operator-console-static/README.md|\
     operator-console-static/demo-data/v02-release-qualification-*.json|\
+    operator-console-static/demo-data/v02-qualification-foundation-operator-evaluation.json|\
+    operator-console-static/demo-data/v02-staging-qualification-authorization.json|\
+    operator-console-static/demo-data/v02-staging-environment-profile.json|\
+    operator-console-static/demo-data/v02-staging-build-plan.json|\
+    operator-console-static/demo-data/v02-staging-artifact-boundary.json|\
+    operator-console-static/demo-data/v02-staging-rollback-boundary.json|\
+    operator-console-static/demo-data/v02-staging-runtime-hold.json|\
     scripts/auth-design-check.sh|\
     scripts/capability-runtime-authorization-check.sh|\
     scripts/capability-runtime-authorization-no-go-regression.sh|\
@@ -94,10 +104,13 @@ is_allowed_path() {
     scripts/model-gateway-check.sh|\
     scripts/model-gateway-no-go-regression.sh|\
     scripts/model-gateway-operator-evaluation-no-go-regression.sh|\
-    scripts/operator-console-integration-authorization-no-go-regression.sh|\
-    scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh|\
+	    scripts/operator-console-integration-authorization-no-go-regression.sh|\
+	    scripts/operator-console-static-check.sh|\
+	    scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh|\
     scripts/secure-runtime-integration-program-no-go-regression.sh|\
     scripts/static-console-safety-check.sh|\
+    scripts/lib/v02_release_qualification_foundation_operator_evaluation.py|\
+    scripts/lib/v02_production_auth_authorization.py|\
     scripts/secure-runtime-foundation-check.sh|\
     scripts/secure-runtime-foundation-no-go-regression.sh|\
     scripts/v02-release-qualification-program-authorization-check.sh|\
@@ -105,9 +118,14 @@ is_allowed_path() {
     scripts/v02-release-qualification-runtime-hold.sh|\
     scripts/v02-release-qualification-foundation-check.sh|\
     scripts/v02-release-qualification-foundation-no-go-regression.sh|\
+    scripts/v02-release-qualification-foundation-operator-evaluation-check.sh|\
+    scripts/v02-release-qualification-foundation-operator-evaluation-no-go-regression.sh|\
     scripts/v02-release-qualification-foundation-pilot-evidence-check.sh|\
     scripts/v02-release-qualification-foundation-runtime-hold.sh|\
     scripts/v02-release-qualification-local-run.py|\
+    scripts/v02-staging-qualification-authorization-check.sh|\
+    scripts/v02-staging-qualification-authorization-no-go-regression.sh|\
+    scripts/v02-staging-qualification-runtime-hold.sh|\
     scripts/secure-runtime-integration-final-evaluation-no-go-regression.sh|\
     services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
     services/brain-api/src/aion_brain/v02_release_qualification/*.py|\

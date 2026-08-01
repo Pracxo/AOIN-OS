@@ -1,0 +1,37 @@
+# Staging Threat Model
+
+- build-context tampering
+- source-snapshot substitution
+- unpinned base-image substitution
+- registry pull bypass
+- hidden network egress during build
+- build-secret leakage
+- Docker socket exposure
+- privileged-container escape
+- host-network escape
+- host-filesystem mount escape
+- cloud-metadata access
+- public-port exposure
+- DNS leakage
+- ephemeral-key persistence
+- replay-fixture persistence
+- production-endpoint substitution
+- production-credential substitution
+- environment-variable leakage
+- artifact-digest substitution
+- SBOM omission
+- provenance forgery
+- non-reproducible build
+- staging-to-production configuration drift
+- health-check bypass
+- observability blind spot
+- rollback target substitution
+- rollback evidence forgery
+- incomplete cleanup
+- stale container
+- stale volume
+- stale network
+- stale image
+- release-candidate misclassification
+- v0.2 tag creation
+- release publication

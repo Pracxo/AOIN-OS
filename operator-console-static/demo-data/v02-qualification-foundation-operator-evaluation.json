@@ -1,0 +1,18 @@
+{
+  "aion_238_closed": true,
+  "aion_240_authorization_created": true,
+  "decision": "DISABLED_V02_PRODUCTION_READINESS_QUALIFICATION_FOUNDATION_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_ISOLATED_STAGING_ARTIFACT_AND_ROLLBACK_DRILL_QUALIFICATION_AUTHORIZATION",
+  "evaluation_id": "AION-V02RQPE-001",
+  "evaluation_passed": true,
+  "hard_gates_passed": true,
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "production_runtime_authorized": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "scenario_count": 28,
+  "staging_qualification_authorized": true,
+  "synthetic": true,
+  "v02_release_ready": false,
+  "view_id": "v02_qualification_foundation_operator_evaluation"
+}

@@ -1594,3 +1594,7 @@ AION-239 adds static-only evidence for the disabled v0.2 production-readiness qu
 - `demo-data/v02-release-qualification-release-gates.json`
 - `demo-data/v02-release-qualification-staging-plan.json`
 - `demo-data/v02-release-qualification-pilot-evidence.json`
+
+## AION-240 Qualification Evaluation And Staging Authorization Panels
+
+AION-240 adds static read-only demo panels for the foundation operator evaluation and the controlled isolated staging qualification authorization. The panels render local JSON only and add no build, deployment, credential, token, registry, network, release-candidate, tag or release controls.

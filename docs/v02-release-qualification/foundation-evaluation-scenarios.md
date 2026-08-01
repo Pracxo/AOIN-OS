@@ -1,0 +1,30 @@
+# Foundation Evaluation Scenarios
+
+- `aion_239_delivery_and_ci_integrity`
+- `authorization_lineage_and_scope`
+- `pilot_evidence_schema_and_fingerprint`
+- `exact_source_and_repository_boundary`
+- `parent_program_component_lineage`
+- `qualification_authorization_and_session_integrity`
+- `readiness_gap_matrix_completeness`
+- `gap_severity_status_and_evidence_maturity`
+- `production_auth_composition_integrity`
+- `verified_request_identity_integration_integrity`
+- `replay_ledger_provisioning_design_integrity`
+- `identity_provider_adapter_disabled_boundary`
+- `public_key_lifecycle_integrity`
+- `protected_material_lifecycle_integrity`
+- `credential_token_and_session_lifecycle_integrity`
+- `deployment_artifact_manifest_integrity`
+- `sbom_and_artifact_provenance_integrity`
+- `reproducible_build_evidence_honesty`
+- `rollback_plan_and_drill_simulation_integrity`
+- `observability_and_health_readiness_integrity`
+- `production_threat_model_completeness`
+- `runtime_release_guard_precedence`
+- `release_gate_matrix_integrity`
+- `staging_qualification_plan_integrity`
+- `idempotency_exact_replay_and_changed_replay`
+- `determinism_redaction_concurrency_and_performance`
+- `zero_operational_effects_and_release_boundary`
+- `controlled_isolated_staging_qualification_readiness`

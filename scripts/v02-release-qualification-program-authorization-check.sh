@@ -30,6 +30,7 @@ from secure_runtime_integration_final_evaluation import (
     SUCCESSOR_IMPLEMENTATION_TASK,
     SUCCESSOR_PROGRAM_ID,
 )
+import v02_release_qualification_foundation_operator_evaluation as aion240
 
 root = Path(os.environ["AION_REPO_ROOT"])
 program = json.loads(
@@ -42,6 +43,78 @@ auth = json.loads(
         encoding="utf-8"
     )
 )
+
+if auth.get("authorization_transaction_id") == aion240.NEXT_AUTHORIZATION_ID:
+    expected_program_state = (
+        "v02_qualification_foundation_evaluated_controlled_staging_qualification_"
+        "authorized_not_implemented"
+    )
+    for label, payload in (("program", program), ("authorization", auth)):
+        required = {
+            "program_id": aion240.PROGRAM_ID,
+            "program_state": expected_program_state,
+            "v02_release_qualification_foundation_implemented": True,
+            "v02_release_qualification_foundation_operator_evaluation_passed": True,
+            "v02_release_qualification_foundation_operator_evaluation_id": aion240.EVALUATION_ID,
+            "v02_release_qualification_foundation_operator_evaluation_decision": aion240.PASS_DECISION,
+            "active_v02_release_qualification_authorization_count": 1,
+            "active_v02_release_qualification_authorization": aion240.NEXT_AUTHORIZATION_ID,
+            "active_v02_release_qualification_task": aion240.NEXT_IMPLEMENTATION_TASK,
+            "formal_closeout_task": aion240.NEXT_FORMAL_CLOSEOUT_TASK,
+            "controlled_staging_qualification_authorized": True,
+            "controlled_staging_qualification_implemented": False,
+            "production_runtime_authorized": False,
+            "production_deployment_enabled": False,
+            "v02_release_candidate_created": False,
+            "v02_release_ready": False,
+            "v02_tag_created": False,
+            "v02_release_created": False,
+        }
+        for key, expected in required.items():
+            if payload.get(key) != expected:
+                raise SystemExit(f"{label} post-closeout mismatch {key}: {payload.get(key)!r}")
+        closed = payload.get("aion_238_authorization_closeout", {})
+        if closed.get("authorization_transaction_id") != aion240.CURRENT_AUTHORIZATION_ID:
+            raise SystemExit(f"{label} missing AION-238 closeout")
+        if closed.get("authorization_active") is not False:
+            raise SystemExit(f"{label} AION-238 closeout active flag mismatch")
+        if closed.get("authorization_consumed") is not True:
+            raise SystemExit(f"{label} AION-238 closeout consumed flag mismatch")
+        if closed.get("authorization_expired") is not True:
+            raise SystemExit(f"{label} AION-238 closeout expired flag mismatch")
+        if closed.get("authorization_reusable") is not False:
+            raise SystemExit(f"{label} AION-238 closeout reusable flag mismatch")
+        if payload.get("aion_239_record", {}).get("ci_result") != "pass":
+            raise SystemExit(f"{label} AION-239 delivery reconciliation missing")
+    required_auth = {
+        "program_id": aion240.PROGRAM_ID,
+        "authorization_transaction_id": aion240.NEXT_AUTHORIZATION_ID,
+        "approval_record_id": aion240.NEXT_AUTHORIZATION_ID,
+        "parent_authorization_transaction_id": aion240.CURRENT_AUTHORIZATION_ID,
+        "parent_evaluation_id": aion240.EVALUATION_ID,
+        "parent_evaluation_decision": aion240.PASS_DECISION,
+        "parent_implementation_task": aion240.IMPLEMENTATION_TASK,
+        "parent_implementation_prs": [aion240.IMPLEMENTATION_PR],
+        "parent_implementation_feature_commits": [
+            aion240.IMPLEMENTATION_COMMIT,
+            aion240.CI_FIX_COMMIT,
+        ],
+        "parent_implementation_merge_commits": [aion240.IMPLEMENTATION_MERGE_COMMIT],
+        "parent_implementation_main_commit": aion240.IMPLEMENTATION_MERGE_COMMIT,
+        "candidate_id": "controlled-isolated-local-staging-artifact-and-rollback-drill-core",
+        "workstream": "v02-controlled-staging-qualification",
+        "implementation_task": aion240.NEXT_IMPLEMENTATION_TASK,
+        "formal_closeout_task": aion240.NEXT_FORMAL_CLOSEOUT_TASK,
+        "authorization_scope": aion240.STAGING_AUTHORIZATION_SCOPE,
+        "authorization_active": True,
+        "authorization_consumed": False,
+        "authorization_expired": False,
+        "authorization_reusable": False,
+    }
+    for key, expected in required_auth.items():
+        if auth.get(key) != expected:
+            raise SystemExit(f"authorization post-closeout mismatch {key}: {auth.get(key)!r}")
+    raise SystemExit(0)
 
 expected_scope = (
     "disabled-production-readiness-qualification-production-auth-composition-request-"

@@ -84,16 +84,21 @@ is_allowed_path() {
 	    docs/adr/0199-sandboxed-deterministic-capability-and-synthetic-connector-runtime.md|\
 	    docs/adr/0200-sandboxed-capability-runtime-evaluation-and-controlled-local-operator-console-integration-authorization.md|\
 	    docs/adr/0201-controlled-same-origin-loopback-operator-console-and-integrated-local-runtime.md|\
-	    docs/adr/0202-final-secure-runtime-integration-evaluation-and-v02-release-qualification-program-authorization.md|\
-	    docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md|\
-	    docs/adr/README.md|\
-    docs/v02-release-qualification/*|\
-    docs/release/v02-release-qualification-*|\
+		    docs/adr/0202-final-secure-runtime-integration-evaluation-and-v02-release-qualification-program-authorization.md|\
+		    docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md|\
+		    docs/adr/0204-v02-qualification-foundation-evaluation-and-controlled-isolated-staging-qualification-authorization.md|\
+		    docs/adr/README.md|\
+	    docs/v02-release-qualification/*|\
+	    docs/release/v02-release-qualification-*|\
+	    docs/release/v02-qualification-foundation-operator-evaluation-*|\
+	    docs/release/v02-staging-qualification-*|\
     examples/secure-runtime-integration/*|\
     examples/v02-release-qualification/*|\
 	    operator-console-static/index.html|operator-console-static/app.js|operator-console-static/live-console.js|operator-console-static/styles.css|operator-console-static/README.md|\
-	    operator-console-static/demo-data/secure-runtime-integration-*.json|\
-	    operator-console-static/demo-data/v02-release-qualification-*.json|\
+		    operator-console-static/demo-data/secure-runtime-integration-*.json|\
+		    operator-console-static/demo-data/v02-release-qualification-*.json|\
+		    operator-console-static/demo-data/v02-qualification-foundation-operator-evaluation.json|\
+		    operator-console-static/demo-data/v02-staging-*.json|\
 	    operator-console-static/demo-data/secure-runtime-foundation-operator-evaluation.json|\
 	    operator-console-static/demo-data/model-gateway-*.json|\
 		    operator-console-static/demo-data/capability-runtime-*.json|\
@@ -170,7 +175,8 @@ is_allowed_path() {
 	    scripts/lib/secure_runtime_foundation_operator_evaluation.py|\
 	    scripts/lib/model_gateway_operator_evaluation.py|\
 	    scripts/lib/capability_runtime_operator_evaluation.py|\
-	    scripts/lib/secure_runtime_integration_final_evaluation.py|\
+		    scripts/lib/secure_runtime_integration_final_evaluation.py|\
+		    scripts/lib/v02_release_qualification_foundation_operator_evaluation.py|\
 	    scripts/lib/v02_production_auth_authorization.py|\
 	    scripts/lib/v02-production-auth-scan-exclusions.sh|\
 	    services/brain-api/tests/secure_runtime_integration_final_evaluation_test_support.py|\

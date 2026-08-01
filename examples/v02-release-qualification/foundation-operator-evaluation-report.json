@@ -1,0 +1,1660 @@
+{
+  "active_qualification_sessions_after_evaluation": 0,
+  "actual_builds_executed": 0,
+  "aion_241_authorization_preview": {
+    "approved_capabilities": {
+      "complete_container_cleanup_approved": true,
+      "complete_image_cleanup_approved": true,
+      "complete_network_cleanup_approved": true,
+      "complete_temporary_root_cleanup_approved": true,
+      "complete_volume_cleanup_approved": true,
+      "controlled_degradation_injection_approved": true,
+      "documentation_and_static_evidence_approved": true,
+      "ephemeral_in_memory_signing_key_approved": true,
+      "ephemeral_offline_identity_fixture_approved": true,
+      "ephemeral_replay_ledger_fixture_approved": true,
+      "identity_spoofing_negative_test_approved": true,
+      "immutable_source_snapshot_approved": true,
+      "isolated_internal_container_network_approved": true,
+      "local_artifact_digest_approved": true,
+      "local_artifact_provenance_approved": true,
+      "local_health_readiness_validation_approved": true,
+      "local_observability_capture_approved": true,
+      "local_reproducibility_comparison_approved": true,
+      "local_sbom_generation_approved": true,
+      "local_security_control_validation_approved": true,
+      "local_staging_artifact_creation_approved": true,
+      "loopback_only_staging_exposure_approved": true,
+      "offline_local_container_build_approved": true,
+      "post_rollback_health_validation_approved": true,
+      "protected_material_redaction_test_approved": true,
+      "qualification_foundation_component_composition_approved": true,
+      "read_only_git_archive_approved": true,
+      "replay_rejection_negative_test_approved": true,
+      "staging_configuration_drift_detection_approved": true,
+      "staging_evidence_bundle_approved": true,
+      "staging_qualification_authorization_envelope_approved": true,
+      "staging_qualification_contract_approved": true,
+      "staging_rollback_drill_approved": true,
+      "staging_runtime_session_approved": true,
+      "uninstalled_runner_allowlisted_docker_cli_approved": true,
+      "uninstalled_runner_shell_false_subprocess_approved": true
+    },
+    "authorization_scope": "controlled-isolated-local-staging-source-snapshot-offline-container-build-local-artifact-sbom-provenance-ephemeral-auth-replay-fixtures-loopback-health-observability-security-validation-rollback-drill-cleanup-no-public-egress-no-production-no-release-core",
+    "authorization_transaction_id": "AION-240-V02RQ-0002",
+    "candidate_id": "controlled-isolated-local-staging-artifact-and-rollback-drill-core",
+    "final_planned_task": "AION-244",
+    "formal_closeout_task": "AION-242",
+    "future_source_scope": [
+      "services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py",
+      "services/brain-api/src/aion_brain/v02_staging_qualification/__init__.py",
+      "services/brain-api/src/aion_brain/v02_staging_qualification/authorization.py",
+      "services/brain-api/src/aion_brain/v02_staging_qualification/component_binding.py",
+      "services/brain-api/src/aion_brain/v02_staging_qualification/source_snapshot.py",
+      "services/brain-api/src/aion_brain/v02_staging_qualification/build_plan.py",
+      "services/brain-api/src/aion_brain/v02_staging_qualification/artifact_manifest.py",
+      "services/brain-api/src/aion_brain/v02_staging_qualification/sbom.py",
+      "services/brain-api/src/aion_brain/v02_staging_qualification/provenance.py",
+      "services/brain-api/src/aion_brain/v02_staging_qualification/environment_profile.py",
+      "services/brain-api/src/aion_brain/v02_staging_qualification/identity_fixture.py",
+      "services/brain-api/src/aion_brain/v02_staging_qualification/replay_fixture.py",
+      "services/brain-api/src/aion_brain/v02_staging_qualification/deployment_plan.py",
+      "services/brain-api/src/aion_brain/v02_staging_qualification/health_readiness.py",
+      "services/brain-api/src/aion_brain/v02_staging_qualification/observability.py",
+      "services/brain-api/src/aion_brain/v02_staging_qualification/security_validation.py",
+      "services/brain-api/src/aion_brain/v02_staging_qualification/rollback.py",
+      "services/brain-api/src/aion_brain/v02_staging_qualification/cleanup.py",
+      "services/brain-api/src/aion_brain/v02_staging_qualification/integrity.py",
+      "services/brain-api/src/aion_brain/v02_staging_qualification/evidence.py"
+    ],
+    "future_threat_model": [
+      "build-context tampering",
+      "source-snapshot substitution",
+      "unpinned base-image substitution",
+      "registry pull bypass",
+      "hidden network egress during build",
+      "build-secret leakage",
+      "Docker socket exposure",
+      "privileged-container escape",
+      "host-network escape",
+      "host-filesystem mount escape",
+      "cloud-metadata access",
+      "public-port exposure",
+      "DNS leakage",
+      "ephemeral-key persistence",
+      "replay-fixture persistence",
+      "production-endpoint substitution",
+      "production-credential substitution",
+      "environment-variable leakage",
+      "artifact-digest substitution",
+      "SBOM omission",
+      "provenance forgery",
+      "non-reproducible build",
+      "staging-to-production configuration drift",
+      "health-check bypass",
+      "observability blind spot",
+      "rollback target substitution",
+      "rollback evidence forgery",
+      "incomplete cleanup",
+      "stale container",
+      "stale volume",
+      "stale network",
+      "stale image",
+      "release-candidate misclassification",
+      "v0.2 tag creation",
+      "release publication"
+    ],
+    "future_uninstalled_runner": "scripts/v02-staging-qualification-local-run.py",
+    "implementation_task": "AION-241",
+    "implemented": false,
+    "prohibited_capabilities": {
+      "actual_belief_mutation_enabled": false,
+      "actual_model_provider_call_enabled": false,
+      "arbitrary_docker_command_enabled": false,
+      "arbitrary_shell_execution_enabled": false,
+      "arbitrary_subprocess_execution_enabled": false,
+      "automatic_merge_enabled": false,
+      "cloud_api_call_enabled": false,
+      "cloud_deployment_enabled": false,
+      "dns_resolution_enabled": false,
+      "external_connector_execution_enabled": false,
+      "external_container_registry_enabled": false,
+      "external_identity_provider_call_enabled": false,
+      "external_log_export_enabled": false,
+      "external_metric_export_enabled": false,
+      "external_network_egress_enabled": false,
+      "external_tool_execution_enabled": false,
+      "external_trace_export_enabled": false,
+      "kubernetes_command_enabled": false,
+      "non_loopback_listener_enabled": false,
+      "production_authorization_header_creation_enabled": false,
+      "production_canary_enabled": false,
+      "production_credential_generation_enabled": false,
+      "production_credential_persistence_enabled": false,
+      "production_credential_read_enabled": false,
+      "production_database_operation_enabled": false,
+      "production_database_provisioning_enabled": false,
+      "production_deployment_enabled": false,
+      "production_exposure": false,
+      "production_identity_provider_enabled": false,
+      "production_key_rotation_enabled": false,
+      "production_memory_write_enabled": false,
+      "production_observability_export_enabled": false,
+      "production_policy_mutation_enabled": false,
+      "production_replay_ledger_enabled": false,
+      "production_rollback_enabled": false,
+      "production_runtime_authorized": false,
+      "production_token_generation_enabled": false,
+      "production_token_issuance_enabled": false,
+      "production_token_persistence_enabled": false,
+      "production_write_execution_enabled": false,
+      "public_listener_enabled": false,
+      "public_network_access_enabled": false,
+      "registry_login_enabled": false,
+      "registry_pull_enabled": false,
+      "registry_push_enabled": false,
+      "release_candidate_creation_enabled": false,
+      "runtime_git_mutation_enabled": false,
+      "runtime_pull_request_creation_enabled": false,
+      "source_rewrite_enabled": false,
+      "terraform_command_enabled": false,
+      "v02_release_created": false,
+      "v02_release_ready": false,
+      "v02_tag_created": false
+    },
+    "resource_limits": {
+      "maximum_active_staging_stacks": 1,
+      "maximum_allowlisted_docker_cli_invocations": 100,
+      "maximum_artifact_provenance_records": 5000,
+      "maximum_build_context_bytes": 1073741824,
+      "maximum_build_seconds": 3600,
+      "maximum_cloud_api_calls": 0,
+      "maximum_cloud_deployments": 0,
+      "maximum_concurrent_runner_processes": 2,
+      "maximum_deployment_seconds": 1800,
+      "maximum_dns_resolutions": 0,
+      "maximum_ephemeral_identity_keypairs": 1,
+      "maximum_ephemeral_replay_ledgers": 1,
+      "maximum_evidence_bytes": 104857600,
+      "maximum_evidence_records": 20000,
+      "maximum_external_identity_provider_calls": 0,
+      "maximum_external_log_exports": 0,
+      "maximum_external_metric_exports": 0,
+      "maximum_external_network_egress_calls": 0,
+      "maximum_external_trace_exports": 0,
+      "maximum_git_archive_operations": 2,
+      "maximum_health_readiness_checks": 500,
+      "maximum_internal_container_networks": 1,
+      "maximum_kubernetes_commands": 0,
+      "maximum_local_container_builds": 2,
+      "maximum_local_container_images": 3,
+      "maximum_local_container_volumes": 4,
+      "maximum_local_observability_records": 10000,
+      "maximum_local_staging_artifacts": 2,
+      "maximum_loopback_listeners": 4,
+      "maximum_non_loopback_listeners": 0,
+      "maximum_production_authorization_headers_created": 0,
+      "maximum_production_credentials_generated": 0,
+      "maximum_production_credentials_persisted": 0,
+      "maximum_production_credentials_read": 0,
+      "maximum_production_database_operations": 0,
+      "maximum_production_deployments": 0,
+      "maximum_production_key_rotations": 0,
+      "maximum_production_replay_ledger_writes": 0,
+      "maximum_production_rollbacks": 0,
+      "maximum_production_tokens_generated": 0,
+      "maximum_production_tokens_issued": 0,
+      "maximum_production_tokens_persisted": 0,
+      "maximum_public_listeners": 0,
+      "maximum_public_network_calls": 0,
+      "maximum_registry_logins": 0,
+      "maximum_registry_pulls": 0,
+      "maximum_registry_pushes": 0,
+      "maximum_release_candidates_created": 0,
+      "maximum_rollback_seconds": 1800,
+      "maximum_running_staging_containers": 6,
+      "maximum_sbom_components": 20000,
+      "maximum_security_validation_scenarios": 200,
+      "maximum_source_snapshots": 2,
+      "maximum_staging_artifact_bytes": 2147483648,
+      "maximum_staging_deployments": 2,
+      "maximum_staging_http_requests": 5000,
+      "maximum_staging_qualification_sessions": 1,
+      "maximum_staging_rollbacks": 1,
+      "maximum_staging_session_seconds": 10800,
+      "maximum_temporary_root_bytes": 5368709120,
+      "maximum_terraform_commands": 0,
+      "maximum_v02_releases_created": 0,
+      "maximum_v02_tags_created": 0
+    },
+    "workstream": "v02-controlled-staging-qualification"
+  },
+  "artifact_bytes_created": 0,
+  "authorization_headers_created": 0,
+  "authorization_lineage": {
+    "active_sri_authorization_count": 0,
+    "current_authorization_active_before_closeout": true,
+    "current_authorization_id": "AION-238-V02RQ-0001",
+    "parent_evaluation_id": "AION-SRIPE-004",
+    "parent_program_id": "AION-SECURE-RUNTIME-INTEGRATION-001"
+  },
+  "closeout_task": "AION-240",
+  "corrective_cycles": 0,
+  "corrective_prs": [],
+  "credentials_generated": 0,
+  "credentials_persisted": 0,
+  "credentials_read": 0,
+  "database_operations": 0,
+  "decision": "DISABLED_V02_PRODUCTION_READINESS_QUALIFICATION_FOUNDATION_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_ISOLATED_STAGING_ARTIFACT_AND_ROLLBACK_DRILL_QUALIFICATION_AUTHORIZATION",
+  "dns_resolutions": 0,
+  "evaluation_base_commit": "45b50d79edc6080e2e64e0566dc17ead9bcf0090",
+  "evaluation_id": "AION-V02RQPE-001",
+  "evaluation_passed": true,
+  "evaluation_type": "v02_release_qualification_foundation_operator_evaluation",
+  "external_identity_provider_calls": 0,
+  "external_log_exports": 0,
+  "external_metric_exports": 0,
+  "external_network_egress_calls": 0,
+  "external_trace_exports": 0,
+  "gap_matrix_integrity": {
+    "dependencies_acyclic": true,
+    "gap_count": 20,
+    "gap_ids": [
+      "V02-GAP-001",
+      "V02-GAP-002",
+      "V02-GAP-003",
+      "V02-GAP-004",
+      "V02-GAP-005",
+      "V02-GAP-006",
+      "V02-GAP-007",
+      "V02-GAP-008",
+      "V02-GAP-009",
+      "V02-GAP-010",
+      "V02-GAP-011",
+      "V02-GAP-012",
+      "V02-GAP-013",
+      "V02-GAP-014",
+      "V02-GAP-015",
+      "V02-GAP-016",
+      "V02-GAP-017",
+      "V02-GAP-018",
+      "V02-GAP-019",
+      "V02-GAP-020"
+    ],
+    "production_evidence_required": true,
+    "readiness_domains": [
+      "production_auth_composition",
+      "verified_request_identity",
+      "replay_ledger_provisioning",
+      "identity_provider_adapter",
+      "public_key_lifecycle",
+      "protected_material",
+      "credential_lifecycle",
+      "token_lifecycle",
+      "session_lifecycle",
+      "deployment_artifact",
+      "software_bill_of_materials",
+      "artifact_provenance",
+      "reproducible_build",
+      "rollback",
+      "observability",
+      "health_readiness",
+      "threat_model",
+      "runtime_guard",
+      "release_gate_governance",
+      "staging_qualification"
+    ],
+    "staging_evidence_required": true
+  },
+  "hard_gate_results": [
+    {
+      "gate_id": "pr_158_verified",
+      "passed": true
+    },
+    {
+      "gate_id": "implementation_commit_verified",
+      "passed": true
+    },
+    {
+      "gate_id": "ci_fix_commit_verified",
+      "passed": true
+    },
+    {
+      "gate_id": "merge_commit_verified",
+      "passed": true
+    },
+    {
+      "gate_id": "merged_timestamp_verified",
+      "passed": true
+    },
+    {
+      "gate_id": "required_ci_green",
+      "passed": true
+    },
+    {
+      "gate_id": "aion_239_delivery_evidence_reconciled",
+      "passed": true
+    },
+    {
+      "gate_id": "aion_238_authorization_exact_before_closeout",
+      "passed": true
+    },
+    {
+      "gate_id": "all_28_scenarios_executed",
+      "passed": true
+    },
+    {
+      "gate_id": "all_28_scenarios_passed",
+      "passed": true
+    },
+    {
+      "gate_id": "no_required_scenario_skipped",
+      "passed": true
+    },
+    {
+      "gate_id": "no_unknown_scenario",
+      "passed": true
+    },
+    {
+      "gate_id": "pilot_fingerprint_valid",
+      "passed": true
+    },
+    {
+      "gate_id": "readiness_domains_exact",
+      "passed": true
+    },
+    {
+      "gate_id": "gap_dependencies_acyclic",
+      "passed": true
+    },
+    {
+      "gate_id": "gap_severity_preserved",
+      "passed": true
+    },
+    {
+      "gate_id": "evidence_maturity_truthful",
+      "passed": true
+    },
+    {
+      "gate_id": "production_auth_composition_valid",
+      "passed": true
+    },
+    {
+      "gate_id": "request_identity_integration_valid",
+      "passed": true
+    },
+    {
+      "gate_id": "replay_ledger_provisioning_valid",
+      "passed": true
+    },
+    {
+      "gate_id": "identity_provider_disabled_boundary_valid",
+      "passed": true
+    },
+    {
+      "gate_id": "key_lifecycle_valid",
+      "passed": true
+    },
+    {
+      "gate_id": "protected_material_handling_valid",
+      "passed": true
+    },
+    {
+      "gate_id": "credential_token_session_lifecycle_valid",
+      "passed": true
+    },
+    {
+      "gate_id": "artifact_sbom_provenance_valid",
+      "passed": true
+    },
+    {
+      "gate_id": "reproducibility_honesty_valid",
+      "passed": true
+    },
+    {
+      "gate_id": "rollback_simulation_valid",
+      "passed": true
+    },
+    {
+      "gate_id": "observability_health_valid",
+      "passed": true
+    },
+    {
+      "gate_id": "threat_model_complete",
+      "passed": true
+    },
+    {
+      "gate_id": "runtime_guard_fail_closed",
+      "passed": true
+    },
+    {
+      "gate_id": "release_gates_exact",
+      "passed": true
+    },
+    {
+      "gate_id": "staging_plan_valid",
+      "passed": true
+    },
+    {
+      "gate_id": "zero_operational_effects",
+      "passed": true
+    },
+    {
+      "gate_id": "repository_release_boundary_valid",
+      "passed": true
+    },
+    {
+      "gate_id": "staging_qualification_readiness_valid",
+      "passed": true
+    }
+  ],
+  "implementation_branch": "phase/v02-release-qualification-foundation",
+  "implementation_feature_commits": [
+    "a1d5d1ee2b0d991f3074c796d664105225b51856",
+    "fa789d5c43709d606bb088a69451b7a43cf32a17"
+  ],
+  "implementation_main_commit": "154d58f182871ce18abad860f3bb76e5a006ebad",
+  "implementation_merge_commits": [
+    "154d58f182871ce18abad860f3bb76e5a006ebad"
+  ],
+  "implementation_merged_at": "2026-08-01T19:47:57Z",
+  "implementation_prs": [
+    158
+  ],
+  "implementation_task": "AION-239",
+  "live_key_rotations": 0,
+  "live_replay_ledger_writes": 0,
+  "next_architecture_decision": "controlled_isolated_staging_artifact_and_rollback_drill_qualification_authorized",
+  "pilot_validation": {
+    "fingerprint_valid": true,
+    "pilot_id": "AION-239-disabled-v02-production-readiness-qualification-pilot",
+    "production_evidence_required": true,
+    "prohibited_effect_counters": {
+      "access_tokens_issued": 0,
+      "actual_builds_executed": 0,
+      "artifact_bytes_created": 0,
+      "authorization_headers_created": 0,
+      "credentials_generated": 0,
+      "credentials_persisted": 0,
+      "credentials_read": 0,
+      "database_operations": 0,
+      "external_identity_provider_calls": 0,
+      "external_log_exports": 0,
+      "external_metric_exports": 0,
+      "external_trace_exports": 0,
+      "live_key_rotations": 0,
+      "live_replay_ledger_writes": 0,
+      "production_deployments": 0,
+      "refresh_tokens_issued": 0,
+      "release_candidates_created": 0,
+      "rollback_executions": 0,
+      "session_tokens_issued": 0,
+      "staging_deployments": 0,
+      "tokens_generated": 0,
+      "tokens_persisted": 0,
+      "tokens_read": 0,
+      "v02_releases_created": 0,
+      "v02_tags_created": 0,
+      "vulnerability_scans_executed": 0
+    },
+    "qualification_decision": "foundation_implemented_release_not_ready_staging_evidence_required",
+    "report_fingerprint": "6635d4d32533893e4549d3992c0a6b54e73a58a0904914da6defcc5e0deff2ab",
+    "staging_evidence_required": true
+  },
+  "production_deployments": 0,
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "public_network_calls": 0,
+  "qualification_foundation_integrity": {
+    "positive_resource_limits_exact": true,
+    "readiness_domains_evaluated": 20,
+    "release_gates_evaluated": 24,
+    "resource_limits": {
+      "maximum_access_tokens_issued": 0,
+      "maximum_actual_belief_mutations": 0,
+      "maximum_artifact_provenance_records": 1000,
+      "maximum_authorization_headers_created": 0,
+      "maximum_automatic_merges": 0,
+      "maximum_credential_lifecycle_policies": 20,
+      "maximum_credentials_generated": 0,
+      "maximum_credentials_persisted": 0,
+      "maximum_credentials_read": 0,
+      "maximum_deployment_artifact_manifests": 10,
+      "maximum_dns_resolutions": 0,
+      "maximum_external_connector_calls": 0,
+      "maximum_external_identity_provider_calls": 0,
+      "maximum_external_log_exports": 0,
+      "maximum_external_metric_exports": 0,
+      "maximum_external_tool_executions": 0,
+      "maximum_external_trace_exports": 0,
+      "maximum_git_operations": 0,
+      "maximum_health_readiness_checks": 200,
+      "maximum_identity_provider_manifests": 5,
+      "maximum_live_key_rotations": 0,
+      "maximum_live_replay_ledger_writes": 0,
+      "maximum_local_qualification_runs": 20,
+      "maximum_model_provider_calls": 0,
+      "maximum_model_weight_changes": 0,
+      "maximum_observability_signal_definitions": 500,
+      "maximum_production_canary_executions": 0,
+      "maximum_production_database_operations": 0,
+      "maximum_production_deployments": 0,
+      "maximum_production_memory_writes": 0,
+      "maximum_production_policy_mutations": 0,
+      "maximum_production_writes": 0,
+      "maximum_protected_material_classes": 50,
+      "maximum_public_key_lifecycle_policies": 20,
+      "maximum_public_network_calls": 0,
+      "maximum_readiness_gaps": 100,
+      "maximum_refresh_tokens_issued": 0,
+      "maximum_release_evidence_records": 10000,
+      "maximum_release_gates": 200,
+      "maximum_replay_ledger_provisioning_plans": 10,
+      "maximum_rollback_drill_plans": 10,
+      "maximum_rollback_executions": 0,
+      "maximum_rollback_plans": 20,
+      "maximum_runtime_created_pull_requests": 0,
+      "maximum_sbom_components": 10000,
+      "maximum_secrets_provisioned": 0,
+      "maximum_session_lifecycle_policies": 20,
+      "maximum_session_tokens_issued": 0,
+      "maximum_source_mutations": 0,
+      "maximum_staging_deployments": 0,
+      "maximum_staging_qualification_plans": 10,
+      "maximum_threat_scenarios": 500,
+      "maximum_token_lifecycle_policies": 20,
+      "maximum_tokens_generated": 0,
+      "maximum_tokens_persisted": 0,
+      "maximum_tokens_read": 0,
+      "maximum_v02_release_candidates_created": 0,
+      "maximum_v02_releases_created": 0,
+      "maximum_v02_tags_created": 0
+    },
+    "threat_scenarios_validated": 40
+  },
+  "read_only": true,
+  "redacted": true,
+  "release_candidates_created": 0,
+  "report_fingerprint": "6a9c94362fc9258db33ec41914080834b4af2811ac4b1d934ee43113779c72f4",
+  "repository_integrity": {
+    "exact_runtime_source_scope": true,
+    "expected_source_scope": [
+      "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/__init__.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/authorization.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/gap_matrix.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/production_auth_composition.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/request_identity.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/replay_provisioning.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/identity_provider.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/key_lifecycle.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/protected_material.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/credential_lifecycle.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/token_lifecycle.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/session_lifecycle.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/deployment_manifest.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/artifact_provenance.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/rollback.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/observability.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/threat_model.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/runtime_guard.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/release_gate.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/integrity.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/evidence.py"
+    ],
+    "future_aion_241_source_present": [],
+    "missing_source_scope": [],
+    "present_source_scope": [
+      "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/__init__.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/authorization.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/gap_matrix.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/production_auth_composition.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/request_identity.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/replay_provisioning.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/identity_provider.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/key_lifecycle.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/protected_material.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/credential_lifecycle.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/token_lifecycle.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/session_lifecycle.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/deployment_manifest.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/artifact_provenance.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/rollback.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/observability.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/threat_model.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/runtime_guard.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/release_gate.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/integrity.py",
+      "services/brain-api/src/aion_brain/v02_release_qualification/evidence.py"
+    ],
+    "prohibited_source_present": [],
+    "uninstalled_runner_present": true,
+    "v02_release_created": false,
+    "v02_release_ready": false,
+    "v02_tag_created": false
+  },
+  "repository_unchanged": true,
+  "required_ci_checks": [
+    "brain-api-quality",
+    "contract-check",
+    "docker-build-core",
+    "policy-check",
+    "repository-hygiene",
+    "sdk-cli-check",
+    "sdk-quality"
+  ],
+  "resource_state": {
+    "aion_239_resource_limits": {
+      "maximum_access_tokens_issued": 0,
+      "maximum_actual_belief_mutations": 0,
+      "maximum_artifact_provenance_records": 1000,
+      "maximum_authorization_headers_created": 0,
+      "maximum_automatic_merges": 0,
+      "maximum_credential_lifecycle_policies": 20,
+      "maximum_credentials_generated": 0,
+      "maximum_credentials_persisted": 0,
+      "maximum_credentials_read": 0,
+      "maximum_deployment_artifact_manifests": 10,
+      "maximum_dns_resolutions": 0,
+      "maximum_external_connector_calls": 0,
+      "maximum_external_identity_provider_calls": 0,
+      "maximum_external_log_exports": 0,
+      "maximum_external_metric_exports": 0,
+      "maximum_external_tool_executions": 0,
+      "maximum_external_trace_exports": 0,
+      "maximum_git_operations": 0,
+      "maximum_health_readiness_checks": 200,
+      "maximum_identity_provider_manifests": 5,
+      "maximum_live_key_rotations": 0,
+      "maximum_live_replay_ledger_writes": 0,
+      "maximum_local_qualification_runs": 20,
+      "maximum_model_provider_calls": 0,
+      "maximum_model_weight_changes": 0,
+      "maximum_observability_signal_definitions": 500,
+      "maximum_production_canary_executions": 0,
+      "maximum_production_database_operations": 0,
+      "maximum_production_deployments": 0,
+      "maximum_production_memory_writes": 0,
+      "maximum_production_policy_mutations": 0,
+      "maximum_production_writes": 0,
+      "maximum_protected_material_classes": 50,
+      "maximum_public_key_lifecycle_policies": 20,
+      "maximum_public_network_calls": 0,
+      "maximum_readiness_gaps": 100,
+      "maximum_refresh_tokens_issued": 0,
+      "maximum_release_evidence_records": 10000,
+      "maximum_release_gates": 200,
+      "maximum_replay_ledger_provisioning_plans": 10,
+      "maximum_rollback_drill_plans": 10,
+      "maximum_rollback_executions": 0,
+      "maximum_rollback_plans": 20,
+      "maximum_runtime_created_pull_requests": 0,
+      "maximum_sbom_components": 10000,
+      "maximum_secrets_provisioned": 0,
+      "maximum_session_lifecycle_policies": 20,
+      "maximum_session_tokens_issued": 0,
+      "maximum_source_mutations": 0,
+      "maximum_staging_deployments": 0,
+      "maximum_staging_qualification_plans": 10,
+      "maximum_threat_scenarios": 500,
+      "maximum_token_lifecycle_policies": 20,
+      "maximum_tokens_generated": 0,
+      "maximum_tokens_persisted": 0,
+      "maximum_tokens_read": 0,
+      "maximum_v02_release_candidates_created": 0,
+      "maximum_v02_releases_created": 0,
+      "maximum_v02_tags_created": 0
+    },
+    "aion_241_positive_resource_limits": {
+      "maximum_active_staging_stacks": 1,
+      "maximum_allowlisted_docker_cli_invocations": 100,
+      "maximum_artifact_provenance_records": 5000,
+      "maximum_build_context_bytes": 1073741824,
+      "maximum_build_seconds": 3600,
+      "maximum_concurrent_runner_processes": 2,
+      "maximum_deployment_seconds": 1800,
+      "maximum_ephemeral_identity_keypairs": 1,
+      "maximum_ephemeral_replay_ledgers": 1,
+      "maximum_evidence_bytes": 104857600,
+      "maximum_evidence_records": 20000,
+      "maximum_git_archive_operations": 2,
+      "maximum_health_readiness_checks": 500,
+      "maximum_internal_container_networks": 1,
+      "maximum_local_container_builds": 2,
+      "maximum_local_container_images": 3,
+      "maximum_local_container_volumes": 4,
+      "maximum_local_observability_records": 10000,
+      "maximum_local_staging_artifacts": 2,
+      "maximum_loopback_listeners": 4,
+      "maximum_rollback_seconds": 1800,
+      "maximum_running_staging_containers": 6,
+      "maximum_sbom_components": 20000,
+      "maximum_security_validation_scenarios": 200,
+      "maximum_source_snapshots": 2,
+      "maximum_staging_artifact_bytes": 2147483648,
+      "maximum_staging_deployments": 2,
+      "maximum_staging_http_requests": 5000,
+      "maximum_staging_qualification_sessions": 1,
+      "maximum_staging_rollbacks": 1,
+      "maximum_staging_session_seconds": 10800,
+      "maximum_temporary_root_bytes": 5368709120
+    },
+    "aion_241_zero_resource_limits": {
+      "maximum_cloud_api_calls": 0,
+      "maximum_cloud_deployments": 0,
+      "maximum_dns_resolutions": 0,
+      "maximum_external_identity_provider_calls": 0,
+      "maximum_external_log_exports": 0,
+      "maximum_external_metric_exports": 0,
+      "maximum_external_network_egress_calls": 0,
+      "maximum_external_trace_exports": 0,
+      "maximum_kubernetes_commands": 0,
+      "maximum_non_loopback_listeners": 0,
+      "maximum_production_authorization_headers_created": 0,
+      "maximum_production_credentials_generated": 0,
+      "maximum_production_credentials_persisted": 0,
+      "maximum_production_credentials_read": 0,
+      "maximum_production_database_operations": 0,
+      "maximum_production_deployments": 0,
+      "maximum_production_key_rotations": 0,
+      "maximum_production_replay_ledger_writes": 0,
+      "maximum_production_rollbacks": 0,
+      "maximum_production_tokens_generated": 0,
+      "maximum_production_tokens_issued": 0,
+      "maximum_production_tokens_persisted": 0,
+      "maximum_public_listeners": 0,
+      "maximum_public_network_calls": 0,
+      "maximum_registry_logins": 0,
+      "maximum_registry_pulls": 0,
+      "maximum_registry_pushes": 0,
+      "maximum_release_candidates_created": 0,
+      "maximum_terraform_commands": 0,
+      "maximum_v02_releases_created": 0,
+      "maximum_v02_tags_created": 0
+    }
+  },
+  "rollback_executions": 0,
+  "scenario_count": 28,
+  "scenario_ids": [
+    "aion_239_delivery_and_ci_integrity",
+    "authorization_lineage_and_scope",
+    "pilot_evidence_schema_and_fingerprint",
+    "exact_source_and_repository_boundary",
+    "parent_program_component_lineage",
+    "qualification_authorization_and_session_integrity",
+    "readiness_gap_matrix_completeness",
+    "gap_severity_status_and_evidence_maturity",
+    "production_auth_composition_integrity",
+    "verified_request_identity_integration_integrity",
+    "replay_ledger_provisioning_design_integrity",
+    "identity_provider_adapter_disabled_boundary",
+    "public_key_lifecycle_integrity",
+    "protected_material_lifecycle_integrity",
+    "credential_token_and_session_lifecycle_integrity",
+    "deployment_artifact_manifest_integrity",
+    "sbom_and_artifact_provenance_integrity",
+    "reproducible_build_evidence_honesty",
+    "rollback_plan_and_drill_simulation_integrity",
+    "observability_and_health_readiness_integrity",
+    "production_threat_model_completeness",
+    "runtime_release_guard_precedence",
+    "release_gate_matrix_integrity",
+    "staging_qualification_plan_integrity",
+    "idempotency_exact_replay_and_changed_replay",
+    "determinism_redaction_concurrency_and_performance",
+    "zero_operational_effects_and_release_boundary",
+    "controlled_isolated_staging_qualification_readiness"
+  ],
+  "scenario_results": [
+    {
+      "checks": [
+        {
+          "evidence": 158,
+          "name": "pr_number_exact",
+          "passed": true
+        },
+        {
+          "name": "branch_exact",
+          "passed": true
+        },
+        {
+          "name": "implementation_commit_exact",
+          "passed": true
+        },
+        {
+          "name": "ci_fix_commit_exact",
+          "passed": true
+        },
+        {
+          "name": "merge_commit_exact",
+          "passed": true
+        },
+        {
+          "name": "merged_timestamp_exact",
+          "passed": true
+        },
+        {
+          "name": "required_ci_checks_recorded",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "aion_239_delivery_and_ci_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "authorization_id_exact",
+          "passed": true
+        },
+        {
+          "name": "program_id_exact",
+          "passed": true
+        },
+        {
+          "name": "implementation_task_exact",
+          "passed": true
+        },
+        {
+          "name": "formal_closeout_task_exact",
+          "passed": true
+        },
+        {
+          "name": "active_before_closeout",
+          "passed": true
+        },
+        {
+          "name": "not_consumed_before_closeout",
+          "passed": true
+        },
+        {
+          "name": "not_reusable",
+          "passed": true
+        },
+        {
+          "name": "active_count_one",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "authorization_lineage_and_scope",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "pilot_id_exact",
+          "passed": true
+        },
+        {
+          "name": "authorization_exact",
+          "passed": true
+        },
+        {
+          "name": "mode_exact",
+          "passed": true
+        },
+        {
+          "name": "fingerprint_exact",
+          "passed": true
+        },
+        {
+          "name": "fingerprint_valid",
+          "passed": true
+        },
+        {
+          "name": "counters_exact",
+          "passed": true
+        },
+        {
+          "name": "zero_prohibited_effects",
+          "passed": true
+        },
+        {
+          "name": "release_hold_truthful",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "pilot_evidence_schema_and_fingerprint",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "evidence": [],
+          "name": "all_expected_source_present",
+          "passed": true
+        },
+        {
+          "name": "runtime_source_scope_exact",
+          "passed": true
+        },
+        {
+          "evidence": [],
+          "name": "prohibited_source_absent",
+          "passed": true
+        },
+        {
+          "name": "uninstalled_runner_present",
+          "passed": true
+        },
+        {
+          "evidence": [],
+          "name": "aion_241_source_absent",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "exact_source_and_repository_boundary",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "sri_parent_program_recorded",
+          "passed": true
+        },
+        {
+          "name": "parent_evaluation_exact",
+          "passed": true
+        },
+        {
+          "name": "aion_238_record_complete",
+          "passed": true
+        },
+        {
+          "name": "active_sri_zero",
+          "passed": true
+        },
+        {
+          "name": "aion_237_lineage_recorded",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "parent_program_component_lineage",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "authorization_envelope_active",
+          "passed": true
+        },
+        {
+          "name": "authorization_envelope_unconsumed",
+          "passed": true
+        },
+        {
+          "name": "domains_exact",
+          "passed": true
+        },
+        {
+          "name": "single_active_session_limit",
+          "passed": true
+        },
+        {
+          "name": "session_closed_no_persistence",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "qualification_authorization_and_session_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "twenty_gaps",
+          "passed": true
+        },
+        {
+          "name": "canonical_domains",
+          "passed": true
+        },
+        {
+          "name": "unique_gap_ids",
+          "passed": true
+        },
+        {
+          "name": "gap_dependencies_acyclic",
+          "passed": true
+        },
+        {
+          "name": "all_gap_fingerprints",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "readiness_gap_matrix_completeness",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "no_false_resolution",
+          "passed": true
+        },
+        {
+          "name": "severity_not_downgraded",
+          "passed": true
+        },
+        {
+          "name": "staging_gaps_required",
+          "passed": true
+        },
+        {
+          "name": "production_gaps_required",
+          "passed": true
+        },
+        {
+          "name": "design_evidence_not_operational",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "gap_severity_status_and_evidence_maturity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "component_order_fail_closed",
+          "passed": true
+        },
+        {
+          "name": "claim_verification_required",
+          "passed": true
+        },
+        {
+          "name": "replay_before_mutation",
+          "passed": true
+        },
+        {
+          "name": "redacted_audit_required",
+          "passed": true
+        },
+        {
+          "name": "production_runtime_disabled",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "production_auth_composition_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "verified_claims_only",
+          "passed": true
+        },
+        {
+          "name": "closed_mapping",
+          "passed": true
+        },
+        {
+          "name": "headers_cookies_browser_identity_disallowed",
+          "passed": true
+        },
+        {
+          "name": "privilege_expansion_disallowed",
+          "passed": true
+        },
+        {
+          "name": "workspace_substitution_disallowed",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "verified_request_identity_integration_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "backend_class_design_only",
+          "passed": true
+        },
+        {
+          "name": "unique_isolated_replay",
+          "passed": true
+        },
+        {
+          "name": "capacity_backup_restore",
+          "passed": true
+        },
+        {
+          "name": "migration_fail_closed",
+          "passed": true
+        },
+        {
+          "name": "no_live_writes",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "replay_ledger_provisioning_design_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "one_manifest",
+          "passed": true
+        },
+        {
+          "name": "all_disabled",
+          "passed": true
+        },
+        {
+          "name": "trust_plans_present",
+          "passed": true
+        },
+        {
+          "name": "claim_mappings_present",
+          "passed": true
+        },
+        {
+          "name": "external_idp_calls_zero",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "identity_provider_adapter_disabled_boundary",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "three_key_policies",
+          "passed": true
+        },
+        {
+          "name": "rotation_revocation_compromise",
+          "passed": true
+        },
+        {
+          "name": "private_key_bytes_absent",
+          "passed": true
+        },
+        {
+          "name": "audit_evidence_required",
+          "passed": true
+        },
+        {
+          "name": "no_live_rotation",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "public_key_lifecycle_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "canonical_classes",
+          "passed": true
+        },
+        {
+          "name": "redaction_required",
+          "passed": true
+        },
+        {
+          "name": "protected_value_not_stored",
+          "passed": true
+        },
+        {
+          "name": "class_fingerprints_present",
+          "passed": true
+        },
+        {
+          "name": "committed_evidence_redacted",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "protected_material_lifecycle_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "four_credential_policies",
+          "passed": true
+        },
+        {
+          "name": "four_token_policies",
+          "passed": true
+        },
+        {
+          "name": "three_session_policies",
+          "passed": true
+        },
+        {
+          "name": "expiry_revocation_cleanup",
+          "passed": true
+        },
+        {
+          "name": "no_live_credentials_tokens",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "credential_token_and_session_lifecycle_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "one_manifest",
+          "passed": true
+        },
+        {
+          "name": "source_commit_and_tree",
+          "passed": true
+        },
+        {
+          "name": "target_and_kind_present",
+          "passed": true
+        },
+        {
+          "name": "evidence_requirements_present",
+          "passed": true
+        },
+        {
+          "name": "no_artifact_bytes",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "deployment_artifact_manifest_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "sbom_component_count",
+          "passed": true
+        },
+        {
+          "name": "unique_sbom_components",
+          "passed": true
+        },
+        {
+          "name": "provenance_count",
+          "passed": true
+        },
+        {
+          "name": "tamper_fingerprints_present",
+          "passed": true
+        },
+        {
+          "name": "registry_credentials_absent",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "sbom_and_artifact_provenance_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "two_projections",
+          "passed": true
+        },
+        {
+          "name": "simulation_only",
+          "passed": true
+        },
+        {
+          "name": "actual_build_false",
+          "passed": true
+        },
+        {
+          "name": "artifact_created_false",
+          "passed": true
+        },
+        {
+          "name": "release_not_ready",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "reproducible_build_evidence_honesty",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "two_rollback_plans",
+          "passed": true
+        },
+        {
+          "name": "one_drill_plan",
+          "passed": true
+        },
+        {
+          "name": "simulation_completed",
+          "passed": true
+        },
+        {
+          "name": "zero_rollback_execution",
+          "passed": true
+        },
+        {
+          "name": "abort_conditions_present",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "rollback_plan_and_drill_simulation_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "observability_signal_count",
+          "passed": true
+        },
+        {
+          "name": "health_check_count",
+          "passed": true
+        },
+        {
+          "name": "observability_exports_disabled",
+          "passed": true
+        },
+        {
+          "name": "readiness_checks_fingerprinted",
+          "passed": true
+        },
+        {
+          "name": "no_exporters",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "observability_and_health_readiness_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "forty_scenarios",
+          "passed": true
+        },
+        {
+          "name": "categories_complete",
+          "passed": true
+        },
+        {
+          "name": "controls_present",
+          "passed": true
+        },
+        {
+          "name": "governance_bypass_present",
+          "passed": true
+        },
+        {
+          "name": "future_staging_threats_recorded",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "production_threat_model_completeness",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "allowed_outcome",
+          "passed": true
+        },
+        {
+          "name": "release_hold",
+          "passed": true
+        },
+        {
+          "name": "staging_required",
+          "passed": true
+        },
+        {
+          "name": "production_required",
+          "passed": true
+        },
+        {
+          "name": "release_candidate_false",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "runtime_release_guard_precedence",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "twenty_four_gates",
+          "passed": true
+        },
+        {
+          "name": "canonical_gate_ids",
+          "passed": true
+        },
+        {
+          "name": "staging_gate_required",
+          "passed": true
+        },
+        {
+          "name": "production_gate_required",
+          "passed": true
+        },
+        {
+          "name": "release_candidate_blocked",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "release_gate_matrix_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "staging_plan_design_only",
+          "passed": true
+        },
+        {
+          "name": "environment_isolated",
+          "passed": true
+        },
+        {
+          "name": "offline_identity_fixtures",
+          "passed": true
+        },
+        {
+          "name": "ephemeral_replay_fixture",
+          "passed": true
+        },
+        {
+          "name": "cleanup_acceptance",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "staging_qualification_plan_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "exact_replay_returned",
+          "passed": true
+        },
+        {
+          "name": "exact_replay_counter",
+          "passed": true
+        },
+        {
+          "name": "changed_replay_rejected",
+          "passed": true
+        },
+        {
+          "name": "no_second_evaluation_claim",
+          "passed": true
+        },
+        {
+          "name": "run_closed",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "idempotency_exact_replay_and_changed_replay",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "fixed_pilot_deterministic",
+          "passed": true
+        },
+        {
+          "name": "report_fingerprint_stable",
+          "passed": true
+        },
+        {
+          "name": "bounded_concurrency",
+          "passed": true
+        },
+        {
+          "name": "safe_repr_redacted",
+          "passed": true
+        },
+        {
+          "name": "performance_smoke_bounded",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "determinism_redaction_concurrency_and_performance",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "pilot_zero_effects",
+          "passed": true
+        },
+        {
+          "name": "ledger_zero_effects",
+          "passed": true
+        },
+        {
+          "name": "release_ready_false",
+          "passed": true
+        },
+        {
+          "name": "tag_release_false",
+          "passed": true
+        },
+        {
+          "name": "no_aion_241_source",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "zero_operational_effects_and_release_boundary",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "sri_program_complete",
+          "passed": true
+        },
+        {
+          "name": "foundation_implemented",
+          "passed": true
+        },
+        {
+          "name": "truthful_release_hold",
+          "passed": true
+        },
+        {
+          "name": "offline_artifact_possible_without_public_egress",
+          "passed": true
+        },
+        {
+          "name": "isolated_local_environment_possible",
+          "passed": true
+        },
+        {
+          "name": "docker_allowlist_can_be_bounded",
+          "passed": true
+        },
+        {
+          "name": "ephemeral_fixture_strategy",
+          "passed": true
+        },
+        {
+          "name": "aion_241_separate_package",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "controlled_isolated_staging_qualification_readiness",
+      "status": "pass"
+    }
+  ],
+  "schema_version": "aion-v02-release-qualification-foundation-operator-evaluation/v1",
+  "security_state": {
+    "credential_generation_enabled": false,
+    "external_identity_provider_call_enabled": false,
+    "live_replay_ledger_enabled": false,
+    "production_auth_runtime_enabled": false,
+    "production_deployment_enabled": false,
+    "token_generation_enabled": false,
+    "v02_release_candidate_created": false
+  },
+  "staging_deployments": 0,
+  "synthetic": true,
+  "temporary_evaluation_data_cleaned": true,
+  "tokens_generated": 0,
+  "tokens_persisted": 0,
+  "tokens_read": 0,
+  "v02_releases_created": 0,
+  "v02_tags_created": 0
+}

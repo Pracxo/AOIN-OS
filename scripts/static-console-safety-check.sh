@@ -426,6 +426,17 @@ v02_release_qualification_demo_names = {
     path.name
     for path in (static_dir / "demo-data").glob("v02-release-qualification-*.json")
 }
+v02_release_qualification_demo_names.update(
+    {
+        "v02-qualification-foundation-operator-evaluation.json",
+        "v02-staging-artifact-boundary.json",
+        "v02-staging-build-plan.json",
+        "v02-staging-environment-profile.json",
+        "v02-staging-qualification-authorization.json",
+        "v02-staging-rollback-boundary.json",
+        "v02-staging-runtime-hold.json",
+    }
+)
 model_gateway_demo_names = {
     "model-gateway-audit.json",
     "model-gateway-authorization.json",

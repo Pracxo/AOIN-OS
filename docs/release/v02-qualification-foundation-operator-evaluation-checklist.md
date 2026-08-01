@@ -1,0 +1,30 @@
+# v0.2 Qualification Foundation Operator Evaluation Checklist
+
+- [x] `aion_239_delivery_and_ci_integrity`
+- [x] `authorization_lineage_and_scope`
+- [x] `pilot_evidence_schema_and_fingerprint`
+- [x] `exact_source_and_repository_boundary`
+- [x] `parent_program_component_lineage`
+- [x] `qualification_authorization_and_session_integrity`
+- [x] `readiness_gap_matrix_completeness`
+- [x] `gap_severity_status_and_evidence_maturity`
+- [x] `production_auth_composition_integrity`
+- [x] `verified_request_identity_integration_integrity`
+- [x] `replay_ledger_provisioning_design_integrity`
+- [x] `identity_provider_adapter_disabled_boundary`
+- [x] `public_key_lifecycle_integrity`
+- [x] `protected_material_lifecycle_integrity`
+- [x] `credential_token_and_session_lifecycle_integrity`
+- [x] `deployment_artifact_manifest_integrity`
+- [x] `sbom_and_artifact_provenance_integrity`
+- [x] `reproducible_build_evidence_honesty`
+- [x] `rollback_plan_and_drill_simulation_integrity`
+- [x] `observability_and_health_readiness_integrity`
+- [x] `production_threat_model_completeness`
+- [x] `runtime_release_guard_precedence`
+- [x] `release_gate_matrix_integrity`
+- [x] `staging_qualification_plan_integrity`
+- [x] `idempotency_exact_replay_and_changed_replay`
+- [x] `determinism_redaction_concurrency_and_performance`
+- [x] `zero_operational_effects_and_release_boundary`
+- [x] `controlled_isolated_staging_qualification_readiness`
