@@ -11,15 +11,13 @@ progress on top of that baseline. The Cognitive Architecture Program, Knowledge
 Intelligence Program, Governed Learning and Memory Program, and governed
 self-improvement implementation program are complete.
 
-The active program is `AION-SECURE-RUNTIME-INTEGRATION-001`. AION-230 created
-`AION-230-SRI-0001` for AION-231. AION-231 implemented the controlled,
-authenticated, operator-invoked, local secure runtime foundation. AION-232
-evaluated AION-231 through `AION-SRIPE-001`, closed `AION-230-SRI-0001` as
-consumed, and created `AION-232-SRI-0002` as the sole active Secure Runtime
-Integration implementation authorization for AION-233. AION-233 is authorized
-but not implemented. AION-234 is the next formal evaluation task. AION-235
-through AION-238 remain planned and unauthorized.
-AION Secure Runtime Integration Program is the active program.
+The AION Secure Runtime Integration Program
+`AION-SECURE-RUNTIME-INTEGRATION-001` is complete. AION-238 evaluated the merged
+AION-237 controlled same-origin loopback Operator Console and integrated local
+runtime through `AION-SRIPE-004`, closed `AION-236-SRI-0004` as consumed, and created
+`AION-V02-RELEASE-QUALIFICATION-001` with `AION-238-V02RQ-0001` as the sole active authorization for
+AION-239. AION-239 is authorized only for disabled v0.2 release-qualification
+foundation work, with AION-240 as its formal closeout.
 
 The AION-231 foundation verifies short-lived offline Ed25519 operator
 assertions, rejects replay, binds secure request identity and ActorContext,
@@ -5328,3 +5326,9 @@ AION-SRIPE-003 passed with report fingerprint `61e50ce0829e85b27b61a7620bb1ca4a7
 ## AION-237 Controlled Local Operator Console
 
 AION-237 implements a controlled same-origin loopback Operator Console integration and completed the integrated authenticated local-runtime pilot. The console binds only to `127.0.0.1`, serves exactly the approved static assets, exposes the bounded `/aion/local/v1/*` route manifest, requires same-origin Host and Origin validation, rotates in-memory mutation nonces, and projects only redacted runtime, model-gateway, capability-runtime, connector-simulation, audit, observability, receipt, health, kill-switch and session-close views. Public listening, external egress, DNS resolution, browser persistence, provider calls, external connectors, real tools, production writes, deployment, model training and v0.2 release readiness remain disabled.
+
+<!-- AION-238 FINAL SRI STATUS -->
+
+## AION-238 Final SRI Status
+
+`AION-SRIPE-004` passed all 28 final scenarios. `AION-236-SRI-0004` is closed and no SRI implementation authorization remains active. `AION-238-V02RQ-0001` authorizes only disabled v0.2 release-qualification foundation work for AION-239. `v02_release_ready=false`; no v0.2 tag or release exists.

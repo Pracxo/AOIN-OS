@@ -27,16 +27,35 @@ route = json.loads((root / "examples/secure-runtime-integration/operator-console
 expected = "AION-236-SRI-0004"
 if auth["authorization_transaction_id"] != expected or ledger["authorization_transaction_id"] != expected:
     raise SystemExit("authorization id mismatch")
-if program["active_sri_implementation_authorization"] != expected:
-    raise SystemExit("active SRI authorization mismatch")
-if program["active_sri_implementation_task"] != "AION-237":
-    raise SystemExit("active SRI task mismatch")
+program_complete = program["program_state"] == "secure_runtime_integration_program_complete"
+if program_complete:
+    if program["active_sri_implementation_authorization"] is not None:
+        raise SystemExit("closed SRI authorization mismatch")
+    if program["active_sri_implementation_authorization_count"] != 0:
+        raise SystemExit("closed SRI authorization count mismatch")
+else:
+    if program["active_sri_implementation_authorization"] != expected:
+        raise SystemExit("active SRI authorization mismatch")
+    if program["active_sri_implementation_task"] != "AION-237":
+        raise SystemExit("active SRI task mismatch")
 if auth["parent_authorization_transaction_id"] != "AION-234-SRI-0003":
     raise SystemExit("parent authorization mismatch")
 if auth["parent_evaluation_decision"] != "SANDBOXED_DETERMINISTIC_CAPABILITY_RUNTIME_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_OPERATOR_CONSOLE_INTEGRATED_LOCAL_RUNTIME_AUTHORIZATION":
     raise SystemExit("evaluation decision mismatch")
-if auth["implementation_task"] != "AION-237" or auth["formal_closeout_task"] != "AION-238":
+if auth["implementation_task"] != "AION-237":
     raise SystemExit("task lineage mismatch")
+if program_complete:
+    if auth["formal_closeout_task"] is not None:
+        raise SystemExit("closed task lineage mismatch")
+    if auth["authorization_active"] is not False:
+        raise SystemExit("closed authorization active mismatch")
+    if auth["authorization_consumed"] is not True:
+        raise SystemExit("closed authorization consumed mismatch")
+    if auth["authorization_closed_by_task"] != "AION-238":
+        raise SystemExit("closed authorization task mismatch")
+else:
+    if auth["formal_closeout_task"] != "AION-238":
+        raise SystemExit("task lineage mismatch")
 if len(route["routes"]) != 10 or route["routes"] != auth["route_manifest"]:
     raise SystemExit("route manifest mismatch")
 if not all(auth["operator_console_authorized_capabilities"].values()):
@@ -69,10 +88,18 @@ closed = program["aion_234_record"]
 if closed["authorization_state"] != "consumed_by_AION-235_closed_by_AION-236":
     raise SystemExit("AION-234 closeout mismatch")
 record = program["aion_237_record"]
-if record["authorization_state"] != "implementation_complete_pending_AION-238_closeout":
-    raise SystemExit("AION-237 implementation state mismatch")
-if record["completion_timestamp"] is not None or record["ci_result"] != "pending":
-    raise SystemExit("AION-237 Git delivery must remain pending AION-238 reconciliation")
+if program_complete:
+    if record["authorization_state"] != "consumed_by_AION-237_closed_by_AION-238":
+        raise SystemExit("AION-237 final implementation state mismatch")
+    if record["completion_timestamp"] != "2026-08-01T11:32:50Z":
+        raise SystemExit("AION-237 final completion timestamp mismatch")
+    if record["ci_result"] != "pass":
+        raise SystemExit("AION-237 final CI reconciliation mismatch")
+else:
+    if record["authorization_state"] != "implementation_complete_pending_AION-238_closeout":
+        raise SystemExit("AION-237 implementation state mismatch")
+    if record["completion_timestamp"] is not None or record["ci_result"] != "pending":
+        raise SystemExit("AION-237 Git delivery must remain pending AION-238 reconciliation")
 PY
 
 echo "controlled operator console integration authorization PASS"

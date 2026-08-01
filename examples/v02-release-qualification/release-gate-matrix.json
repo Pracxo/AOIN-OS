@@ -1,0 +1,31 @@
+{
+  "authorization_id": "AION-238-V02RQ-0001",
+  "gates": [
+    {
+      "gate_id": "source-boundary",
+      "required_state": "no_AION_239_source_created_by_AION_238"
+    },
+    {
+      "gate_id": "runtime-hold",
+      "required_state": "all_production_and_staging_runtime_flags_false"
+    },
+    {
+      "gate_id": "credential-token-hold",
+      "required_state": "generation_read_persistence_disabled"
+    },
+    {
+      "gate_id": "release-hold",
+      "required_state": "no_candidate_tag_or_release"
+    },
+    {
+      "gate_id": "operator-review",
+      "required_state": "AION_240_independent_evaluation_required"
+    }
+  ],
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "schema_version": "aion-v02-release-qualification-release-gate-matrix/v1",
+  "v02_release_candidate_created": false,
+  "v02_release_created": false,
+  "v02_release_ready": false,
+  "v02_tag_created": false
+}

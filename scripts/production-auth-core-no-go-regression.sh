@@ -142,6 +142,9 @@ while IFS= read -r file; do
   if aion237_is_scoped_operator_console_integrated_local_runtime_path "$file"; then
     continue
   fi
+  if aion238_is_scoped_secure_runtime_final_closeout_path "$file"; then
+    continue
+  fi
   if aion221_is_scoped_governed_learning_memory_path "$file"; then
     continue
   fi
@@ -231,6 +234,9 @@ while IFS= read -r file; do
     continue
   fi
   if aion237_is_scoped_operator_console_integrated_local_runtime_path "$file"; then
+    continue
+  fi
+  if aion238_is_scoped_secure_runtime_final_closeout_path "$file"; then
     continue
   fi
   if aion221_is_scoped_governed_learning_memory_path "$file"; then
@@ -323,6 +329,9 @@ while IFS= read -r file; do
     continue
   fi
   if aion237_is_scoped_operator_console_integrated_local_runtime_path "$file"; then
+    continue
+  fi
+  if aion238_is_scoped_secure_runtime_final_closeout_path "$file"; then
     continue
   fi
   if aion221_is_scoped_governed_learning_memory_path "$file"; then

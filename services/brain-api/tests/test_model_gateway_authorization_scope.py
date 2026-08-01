@@ -19,7 +19,15 @@ def test_model_gateway_scope_and_task_flow_are_recorded() -> None:
             "local-runtime pilot."
         ),
     }
-    if state["active_implementation_task"] == "AION-235":
+    if state["program_state"] == "secure_runtime_integration_program_complete":
+        assert state["active_implementation_task"] is None
+        assert state["active_sri_implementation_authorization_count"] == 0
+        assert state["active_sri_implementation_authorization"] is None
+        assert state["formal_closeout_task"] is None
+        assert state["successor_authorization_id"] == "AION-238-V02RQ-0001"
+        assert state["operator_console_integration_authorized"] is True
+        assert state["operator_console_integration_implemented"] is True
+    elif state["active_implementation_task"] == "AION-235":
         assert state["formal_closeout_task"] == "AION-236"
     else:
         assert state["active_implementation_task"] == "AION-237"

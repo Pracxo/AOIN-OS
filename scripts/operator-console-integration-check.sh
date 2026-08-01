@@ -52,10 +52,20 @@ if auth["operator_console_integration_implemented"] is not True:
     raise SystemExit("implementation flag mismatch")
 if auth["integrated_authenticated_local_pilot_completed"] is not True:
     raise SystemExit("pilot completion flag mismatch")
-if program["active_sri_implementation_authorization"] != "AION-236-SRI-0004":
-    raise SystemExit("active authorization mismatch")
-if program["formal_closeout_task"] != "AION-238":
-    raise SystemExit("formal closeout mismatch")
+if program["program_state"] == "secure_runtime_integration_program_complete":
+    if program["active_sri_implementation_authorization"] is not None:
+        raise SystemExit("closed program active authorization mismatch")
+    if program["active_sri_implementation_authorization_count"] != 0:
+        raise SystemExit("closed program active authorization count mismatch")
+    if program["formal_closeout_task"] is not None:
+        raise SystemExit("closed program formal closeout mismatch")
+    if program.get("final_completed_task") != "AION-238":
+        raise SystemExit("closed program final task mismatch")
+else:
+    if program["active_sri_implementation_authorization"] != "AION-236-SRI-0004":
+        raise SystemExit("active authorization mismatch")
+    if program["formal_closeout_task"] != "AION-238":
+        raise SystemExit("formal closeout mismatch")
 if pilot["listener_closed"] is not True:
     raise SystemExit("pilot listener did not close")
 if pilot["all_prohibited_effect_counters_zero"] is not True:

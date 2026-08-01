@@ -25,7 +25,10 @@ def test_aion230_sri_authorization_is_closed_and_current_aion232_auth_is_single_
         assert auth["candidate_id"] == "controlled-local-operator-console-integration-core"
         assert auth["workstream"] == "secure-runtime-operator-console-integration"
         assert auth["implementation_task"] == "AION-237"
-        assert auth["formal_closeout_task"] == "AION-238"
+        if auth["program_state"] == "secure_runtime_integration_program_complete":
+            assert auth["formal_closeout_task"] is None
+        else:
+            assert auth["formal_closeout_task"] == "AION-238"
     else:
         assert auth["approval_record_id"] == "AION-234-SRI-0003"
         assert auth["candidate_id"] == "controlled-sandboxed-reference-capability-runtime-core"
@@ -37,37 +40,51 @@ def test_aion230_sri_authorization_is_closed_and_current_aion232_auth_is_single_
     assert auth["implementation_authorization_approved"] is True
     assert auth["implementation_go_status"] is True
     assert auth["implementation_no_go_status"] is False
-    assert auth["authorization_active"] is True
-    assert auth["authorization_consumed"] is False
-    assert auth["authorization_expired"] is False
+    if auth["program_state"] == "secure_runtime_integration_program_complete":
+        assert auth["authorization_active"] is False
+        assert auth["authorization_consumed"] is True
+        assert auth["authorization_expired"] is True
+        assert auth["authorization_closed_by_task"] == "AION-238"
+    else:
+        assert auth["authorization_active"] is True
+        assert auth["authorization_consumed"] is False
+        assert auth["authorization_expired"] is False
     assert auth["authorization_reusable"] is False
-    assert auth["active_sri_implementation_authorization_count"] == 1
     active_state = (
         auth["active_sri_implementation_authorization"],
         auth["active_sri_implementation_task"],
         auth["formal_closeout_task"],
     )
-    assert active_state in {
-        ("AION-234-SRI-0003", "AION-235", "AION-236"),
-        ("AION-236-SRI-0004", "AION-237", "AION-238"),
-    }
+    if auth["program_state"] == "secure_runtime_integration_program_complete":
+        assert auth["active_sri_implementation_authorization_count"] == 0
+        assert active_state == (None, None, None)
+    else:
+        assert auth["active_sri_implementation_authorization_count"] == 1
+        assert active_state in {
+            ("AION-234-SRI-0003", "AION-235", "AION-236"),
+            ("AION-236-SRI-0004", "AION-237", "AION-238"),
+        }
     assert auth["program_state"] in {
         PROGRAM_STATE,
         "capability_runtime_evaluated_operator_console_integration_authorized_not_implemented",
         "operator_console_integrated_local_runtime_implemented_pending_final_evaluation",
+        "secure_runtime_integration_program_complete",
     }
 
-    assert auth["active_authorizations"] == [
-        {
-            "authorization_transaction_id": active_state[0],
-            "implementation_task": active_state[1],
-            "formal_closeout_task": active_state[2],
-            "authorization_active": True,
-            "authorization_consumed": False,
-            "authorization_expired": False,
-            "authorization_reusable": False,
-        }
-    ]
+    if auth["program_state"] == "secure_runtime_integration_program_complete":
+        assert auth["active_authorizations"] == []
+    else:
+        assert auth["active_authorizations"] == [
+            {
+                "authorization_transaction_id": active_state[0],
+                "implementation_task": active_state[1],
+                "formal_closeout_task": active_state[2],
+                "authorization_active": True,
+                "authorization_consumed": False,
+                "authorization_expired": False,
+                "authorization_reusable": False,
+            }
+        ]
     assert len(auth["records"]) >= 3
     aion230 = next(
         item for item in auth["records"] if item["authorization_transaction_id"] == AUTH_ID

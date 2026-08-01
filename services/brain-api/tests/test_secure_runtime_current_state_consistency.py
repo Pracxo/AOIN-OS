@@ -10,6 +10,7 @@ def test_current_state_marks_aion235_implemented_pending_closeout() -> None:
         "sandboxed_capability_runtime_implemented_reference_only_pending_closeout",
         "capability_runtime_evaluated_operator_console_integration_authorized_not_implemented",
         "operator_console_integrated_local_runtime_implemented_pending_final_evaluation",
+        "secure_runtime_integration_program_complete",
     }
     assert state["secure_runtime_foundation_implemented"] is True
     assert state["secure_runtime_implemented"] is True
@@ -21,7 +22,11 @@ def test_current_state_marks_aion235_implemented_pending_closeout() -> None:
     assert active_state in {
         ("AION-234-SRI-0003", "AION-235", "AION-236"),
         ("AION-236-SRI-0004", "AION-237", "AION-238"),
+        (None, None, None),
     }
+    if state["program_state"] == "secure_runtime_integration_program_complete":
+        assert state["active_sri_implementation_authorization_count"] == 0
+        assert state["final_completed_task"] == "AION-238"
     assert state["model_gateway_implemented"] is True
     assert state["sandboxed_capability_runtime_implemented"] is True
     assert "AION-232" in status

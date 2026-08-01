@@ -18,9 +18,15 @@ def test_aion234_record_remains_reconciled_after_aion235() -> None:
         "consumed_by_AION-235_closed_by_AION-236",
     }
     if record["authorization_state"] == "consumed_by_AION-235_closed_by_AION-236":
-        assert program["active_sri_implementation_authorization"] == "AION-236-SRI-0004"
-        assert program["active_sri_implementation_task"] == "AION-237"
-        assert program["formal_closeout_task"] == "AION-238"
+        if program["program_state"] == "secure_runtime_integration_program_complete":
+            assert program["active_sri_implementation_authorization"] is None
+            assert program["active_sri_implementation_task"] is None
+            assert program["formal_closeout_task"] is None
+            assert program["final_completed_task"] == "AION-238"
+        else:
+            assert program["active_sri_implementation_authorization"] == "AION-236-SRI-0004"
+            assert program["active_sri_implementation_task"] == "AION-237"
+            assert program["formal_closeout_task"] == "AION-238"
     else:
         assert program["active_sri_implementation_authorization"] == "AION-234-SRI-0003"
         assert program["active_sri_implementation_task"] == "AION-235"

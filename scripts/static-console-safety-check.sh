@@ -419,6 +419,13 @@ allowed_authorization_demo_names = {
 }
 secure_runtime_evaluation_demo_names = {
     "secure-runtime-foundation-operator-evaluation.json",
+    "secure-runtime-integration-final-evaluation.json",
+    "secure-runtime-integration-program-final-closeout.json",
+}
+v02_release_qualification_demo_names = {
+    "v02-release-qualification-gap-matrix.json",
+    "v02-release-qualification-program-authorization.json",
+    "v02-release-qualification-runtime-hold.json",
 }
 model_gateway_demo_names = {
     "model-gateway-audit.json",
@@ -532,7 +539,13 @@ def walk(value: object, path: Path) -> None:
                 "credential",
                 "token",
                 "hidden_reasoning",
-            } and path.name in model_gateway_demo_names | capability_runtime_demo_names | operator_console_demo_names:
+            } and path.name in (
+                secure_runtime_evaluation_demo_names
+                | v02_release_qualification_demo_names
+                | model_gateway_demo_names
+                | capability_runtime_demo_names
+                | operator_console_demo_names
+            ):
                 continue
             if marker == "sk-" and not re.search(r"\bsk-[a-z0-9_-]{12,}", lowered):
                 continue
@@ -588,7 +601,7 @@ for path in sorted((static_dir / "demo-data").glob("*.json")):
             "deployments",
             "git_operations",
         ):
-            if payload.get(key) != 0:
+            if key in payload and payload.get(key) != 0:
                 raise SystemExit(f"{key} must be zero in {path}")
         if payload.get("program_id") != "AION-SECURE-RUNTIME-INTEGRATION-001":
             raise SystemExit(f"program_id mismatch in {path}")

@@ -274,26 +274,32 @@ def test_program_charter_creates_separate_sri_program() -> None:
         PROGRAM_STATE,
         POST_AION236_PROGRAM_STATE,
         POST_AION237_PROGRAM_STATE,
+        "secure_runtime_integration_program_complete",
     }
     assert program["program_authorized"] is True
     assert program["secure_runtime_integration_program_authorized"] is True
     assert program["parent_completed_programs"] == PARENT_PROGRAMS
     assert program["parent_glm_evaluation_id"] == "AION-GLMPE-004"
     assert program["parent_glm_evaluation_decision"] == GLM_DECISION
-    assert program["active_sri_implementation_authorization_count"] == 1
     active_state = (
         program["active_sri_implementation_authorization"],
         program["active_sri_implementation_task"],
         program["formal_closeout_task"],
     )
-    assert active_state in {
-        (CURRENT_AUTH_ID, CURRENT_IMPLEMENTATION_TASK, CURRENT_CLOSEOUT_TASK),
-        (
-            POST_AION236_AUTH_ID,
-            POST_AION236_IMPLEMENTATION_TASK,
-            POST_AION236_CLOSEOUT_TASK,
-        ),
-    }
+    if program["program_state"] == "secure_runtime_integration_program_complete":
+        assert program["active_sri_implementation_authorization_count"] == 0
+        assert active_state == (None, None, None)
+        assert program["final_completed_task"] == "AION-238"
+    else:
+        assert program["active_sri_implementation_authorization_count"] == 1
+        assert active_state in {
+            (CURRENT_AUTH_ID, CURRENT_IMPLEMENTATION_TASK, CURRENT_CLOSEOUT_TASK),
+            (
+                POST_AION236_AUTH_ID,
+                POST_AION236_IMPLEMENTATION_TASK,
+                POST_AION236_CLOSEOUT_TASK,
+            ),
+        }
     assert program["final_planned_task"] == FINAL_TASK
     assert program["secure_runtime_foundation_operator_evaluation_passed"] is True
     assert program["secure_runtime_foundation_operator_evaluation_id"] == "AION-SRIPE-001"

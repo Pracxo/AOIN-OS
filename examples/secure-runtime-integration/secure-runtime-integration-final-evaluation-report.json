@@ -1,0 +1,1315 @@
+{
+  "active_listeners_after_evaluation": 0,
+  "active_requests_after_evaluation": 0,
+  "active_sessions_after_evaluation": 0,
+  "actual_belief_creations": 0,
+  "actual_belief_mutations": 0,
+  "actual_tool_executions": 0,
+  "authorization_lineage": {
+    "authorization_active_before_evaluation": true,
+    "authorization_transaction_id": "AION-236-SRI-0004",
+    "formal_closeout_task": "AION-238",
+    "implementation_task": "AION-237"
+  },
+  "browser_automation_actions": 0,
+  "browser_storage_writes": 0,
+  "closeout_task": "AION-238",
+  "cognitive_memory_writes": 0,
+  "component_lineage": {
+    "capability_runtime": "AION-235",
+    "model_gateway": "AION-233",
+    "operator_console": "AION-237",
+    "secure_runtime": "AION-231"
+  },
+  "cookies_persisted": 0,
+  "corrective_cycles": 0,
+  "corrective_prs": [],
+  "created_at": "2026-08-01T00:00:00Z",
+  "credentials_persisted": 0,
+  "credentials_read": 0,
+  "decision": "CONTROLLED_OPERATOR_CONSOLE_INTEGRATED_LOCAL_RUNTIME_FINAL_EVALUATION_PASS_COMPLETE_SECURE_RUNTIME_INTEGRATION_PROGRAM_RECOMMEND_V02_RELEASE_QUALIFICATION_PROGRAM_AUTHORIZATION",
+  "deployments": 0,
+  "directory_mutations": 0,
+  "dns_resolutions": 0,
+  "dynamic_imports": 0,
+  "eval_executions": 0,
+  "evaluation_base_commit": "a0d262b245eb42d9f6e19709c0398e15af4832b8",
+  "evaluation_id": "AION-SRIPE-004",
+  "evaluation_passed": true,
+  "evaluation_type": "secure_runtime_integration_program_final_evaluation",
+  "exec_executions": 0,
+  "external_connector_calls": 0,
+  "external_network_egress_calls": 0,
+  "external_tool_executions": 0,
+  "filesystem_writes": 0,
+  "git_operations": 0,
+  "hard_gate_results": {
+    "aion_237_implementation_gate_passed": true,
+    "all_28_scenarios_executed": true,
+    "all_28_scenarios_passed": true,
+    "authorization_lineage_valid": true,
+    "cleanup_valid": true,
+    "final_ci_verified": true,
+    "host_origin_nonce_controls_valid": true,
+    "kill_and_close_semantics_valid": true,
+    "loopback_boundary_valid": true,
+    "model_and_capability_integration_valid": true,
+    "model_output_non_authority_valid": true,
+    "no_scenario_skipped": true,
+    "no_unknown_scenario": true,
+    "pilot_evidence_gate_passed": true,
+    "pilot_fingerprint_valid": true,
+    "pr_156_verified": true,
+    "release_qualification_authorization_readiness_valid": true,
+    "route_and_asset_manifests_valid": true,
+    "runtime_hold_gate_passed": true,
+    "scenario_01_aion_237_delivery_and_ci_integrity": true,
+    "scenario_02_authorization_lineage_and_scope": true,
+    "scenario_03_integrated_pilot_schema_and_fingerprint": true,
+    "scenario_04_exact_source_and_runtime_registration_boundary": true,
+    "scenario_05_component_authority_and_trust_chain_integrity": true,
+    "scenario_06_numeric_loopback_binding_and_listener_lifecycle": true,
+    "scenario_07_exact_route_and_static_asset_manifests": true,
+    "scenario_08_host_origin_and_fetch_metadata_policy": true,
+    "scenario_09_bounded_http_parser_and_protocol_smuggling": true,
+    "scenario_10_mutation_nonce_lifecycle": true,
+    "scenario_11_session_bootstrap_lifecycle_and_limits": true,
+    "scenario_12_security_headers_csp_and_browser_non_persistence": true,
+    "scenario_13_redacted_read_projection_integrity": true,
+    "scenario_14_deterministic_text_model_integration": true,
+    "scenario_15_deterministic_structured_model_integration": true,
+    "scenario_16_model_output_non_authority_and_operator_selection": true,
+    "scenario_17_reference_capability_integration": true,
+    "scenario_18_synthetic_connector_read_and_write_preview": true,
+    "scenario_19_policy_risk_guardrail_approval_and_budget_precedence": true,
+    "scenario_20_kill_switch_and_session_close_terminal_semantics": true,
+    "scenario_21_idempotency_and_replay_controls": true,
+    "scenario_22_receipt_audit_provenance_and_integrity_chains": true,
+    "scenario_23_concurrency_backpressure_and_performance": true,
+    "scenario_24_static_console_offline_fallback_live_activation_and_accessibility": true,
+    "scenario_25_complete_listener_session_request_nonce_and_fixture_cleanup": true,
+    "scenario_26_zero_external_and_production_effects": true,
+    "scenario_27_secure_runtime_integration_program_lineage_and_completion_readiness": true,
+    "scenario_28_v02_release_qualification_program_authorization_readiness": true,
+    "sri_completion_lineage_valid": true,
+    "zero_external_and_production_effects": true
+  },
+  "hard_gates": {
+    "aion_237_implementation_gate_passed": true,
+    "all_28_scenarios_executed": true,
+    "all_28_scenarios_passed": true,
+    "authorization_lineage_valid": true,
+    "cleanup_valid": true,
+    "final_ci_verified": true,
+    "host_origin_nonce_controls_valid": true,
+    "kill_and_close_semantics_valid": true,
+    "loopback_boundary_valid": true,
+    "model_and_capability_integration_valid": true,
+    "model_output_non_authority_valid": true,
+    "no_scenario_skipped": true,
+    "no_unknown_scenario": true,
+    "pilot_evidence_gate_passed": true,
+    "pilot_fingerprint_valid": true,
+    "pr_156_verified": true,
+    "release_qualification_authorization_readiness_valid": true,
+    "route_and_asset_manifests_valid": true,
+    "runtime_hold_gate_passed": true,
+    "scenario_01_aion_237_delivery_and_ci_integrity": true,
+    "scenario_02_authorization_lineage_and_scope": true,
+    "scenario_03_integrated_pilot_schema_and_fingerprint": true,
+    "scenario_04_exact_source_and_runtime_registration_boundary": true,
+    "scenario_05_component_authority_and_trust_chain_integrity": true,
+    "scenario_06_numeric_loopback_binding_and_listener_lifecycle": true,
+    "scenario_07_exact_route_and_static_asset_manifests": true,
+    "scenario_08_host_origin_and_fetch_metadata_policy": true,
+    "scenario_09_bounded_http_parser_and_protocol_smuggling": true,
+    "scenario_10_mutation_nonce_lifecycle": true,
+    "scenario_11_session_bootstrap_lifecycle_and_limits": true,
+    "scenario_12_security_headers_csp_and_browser_non_persistence": true,
+    "scenario_13_redacted_read_projection_integrity": true,
+    "scenario_14_deterministic_text_model_integration": true,
+    "scenario_15_deterministic_structured_model_integration": true,
+    "scenario_16_model_output_non_authority_and_operator_selection": true,
+    "scenario_17_reference_capability_integration": true,
+    "scenario_18_synthetic_connector_read_and_write_preview": true,
+    "scenario_19_policy_risk_guardrail_approval_and_budget_precedence": true,
+    "scenario_20_kill_switch_and_session_close_terminal_semantics": true,
+    "scenario_21_idempotency_and_replay_controls": true,
+    "scenario_22_receipt_audit_provenance_and_integrity_chains": true,
+    "scenario_23_concurrency_backpressure_and_performance": true,
+    "scenario_24_static_console_offline_fallback_live_activation_and_accessibility": true,
+    "scenario_25_complete_listener_session_request_nonce_and_fixture_cleanup": true,
+    "scenario_26_zero_external_and_production_effects": true,
+    "scenario_27_secure_runtime_integration_program_lineage_and_completion_readiness": true,
+    "scenario_28_v02_release_qualification_program_authorization_readiness": true,
+    "sri_completion_lineage_valid": true,
+    "zero_external_and_production_effects": true
+  },
+  "implementation_feature_commits": [
+    "df1f89e1708638e32aef0532fb37ed150b85b600"
+  ],
+  "implementation_main_commit": "55f2721bb036886a693a36d870d49f49f7ecc6d1",
+  "implementation_merge_commits": [
+    "55f2721bb036886a693a36d870d49f49f7ecc6d1"
+  ],
+  "implementation_merged_at": "2026-08-01T11:32:50Z",
+  "implementation_prs": [
+    156
+  ],
+  "implementation_task": "AION-237",
+  "model_provider_calls": 0,
+  "model_weight_changes": 0,
+  "modules_activated": 0,
+  "next_architecture_decision": "v02_release_qualification_program_authorized",
+  "operator_console_integrity": {
+    "host_origin_nonce_controls_valid": true,
+    "routes_exact": true,
+    "security_headers_exact": true,
+    "static_assets_exact": true
+  },
+  "packages_installed": 0,
+  "pilot_validation": {
+    "all_prohibited_effect_counters_zero": true,
+    "pilot_id": "AION-237-controlled-operator-console-integrated-local-runtime-pilot",
+    "report_fingerprint": "e54ea6886c6d7f56c1de568983515944b1b72b3dc2d8f59b310039bb96ed5035",
+    "report_fingerprint_valid": true
+  },
+  "process_spawns": 0,
+  "production_memory_writes": 0,
+  "production_policy_mutations": 0,
+  "production_writes": 0,
+  "program_completion_state": {
+    "active_sri_implementation_authorization_count_before_closeout": 1,
+    "eligible_to_complete_on_pass": true,
+    "final_completed_task": "AION-238"
+  },
+  "program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
+  "provider_sdk_calls": 0,
+  "public_network_calls": 0,
+  "read_only": true,
+  "redacted": true,
+  "report_fingerprint": "6e457d1a8bc226aa44697802d68b5d4cd5a272088a5ce6317048ab75503744ee",
+  "repository_integrity": {
+    "aion239_source_absent": true,
+    "repository_unchanged": true,
+    "runtime_source_modified": false,
+    "workflow_dependency_migration_changed": false
+  },
+  "repository_unchanged": true,
+  "resource_state": {
+    "active_listeners_after_evaluation": 0,
+    "active_requests_after_evaluation": 0,
+    "active_sessions_after_evaluation": 0,
+    "positive_resource_limits_exact": {
+      "maximum_audit_reads_per_session": true,
+      "maximum_audit_records_per_session": true,
+      "maximum_bootstrap_reads_per_session": true,
+      "maximum_capability_executions_per_session": true,
+      "maximum_concurrent_requests": true,
+      "maximum_console_event_records_per_session": true,
+      "maximum_health_reads_per_session": true,
+      "maximum_idle_seconds": true,
+      "maximum_json_depth": true,
+      "maximum_json_items_per_request": true,
+      "maximum_kill_switch_activations_per_session": true,
+      "maximum_loopback_bind_attempts": true,
+      "maximum_loopback_listeners": true,
+      "maximum_model_simulations_per_session": true,
+      "maximum_mutation_nonce_rotations_per_session": true,
+      "maximum_observability_reads_per_session": true,
+      "maximum_operator_confirmations_per_session": true,
+      "maximum_operator_console_sessions": true,
+      "maximum_pilot_action_requests": true,
+      "maximum_pilot_loopback_http_requests": true,
+      "maximum_receipt_projections_per_session": true,
+      "maximum_request_body_bytes": true,
+      "maximum_requests_per_session": true,
+      "maximum_response_body_bytes": true,
+      "maximum_routes": true,
+      "maximum_session_close_requests_per_session": true,
+      "maximum_session_seconds": true,
+      "maximum_sessions_per_operator_run": true,
+      "maximum_static_assets": true,
+      "maximum_status_reads_per_session": true,
+      "maximum_synthetic_connector_simulations_per_session": true,
+      "maximum_trace_bytes_per_session": true,
+      "maximum_write_previews_per_session": true
+    },
+    "prohibited_resource_limits_zero": {
+      "maximum_access_tokens_issued": true,
+      "maximum_actual_belief_creations": true,
+      "maximum_actual_belief_mutations": true,
+      "maximum_actual_tool_executions": true,
+      "maximum_arbitrary_filesystem_reads": true,
+      "maximum_automatic_capability_executions": true,
+      "maximum_automatic_capability_selections": true,
+      "maximum_automatic_connector_executions": true,
+      "maximum_automatic_merges": true,
+      "maximum_automatic_model_requests": true,
+      "maximum_browser_automation_actions": true,
+      "maximum_browser_cookies_persisted": true,
+      "maximum_browser_indexeddb_writes": true,
+      "maximum_browser_local_storage_writes": true,
+      "maximum_browser_session_storage_writes": true,
+      "maximum_cognitive_memory_writes": true,
+      "maximum_cors_wildcards": true,
+      "maximum_credential_inputs": true,
+      "maximum_cross_origin_action_requests": true,
+      "maximum_deployments": true,
+      "maximum_directory_mutations": true,
+      "maximum_dns_resolutions": true,
+      "maximum_dynamic_imports": true,
+      "maximum_eval_executions": true,
+      "maximum_exec_executions": true,
+      "maximum_external_connector_calls": true,
+      "maximum_external_fonts_loaded": true,
+      "maximum_external_images_loaded": true,
+      "maximum_external_network_egress_calls": true,
+      "maximum_external_scripts_loaded": true,
+      "maximum_external_styles_loaded": true,
+      "maximum_external_tool_executions": true,
+      "maximum_file_uploads": true,
+      "maximum_filesystem_writes": true,
+      "maximum_git_operations": true,
+      "maximum_glm_live_executions": true,
+      "maximum_ipv6_unspecified_bindings": true,
+      "maximum_login_forms": true,
+      "maximum_model_output_triggered_executions": true,
+      "maximum_model_provider_calls": true,
+      "maximum_model_weight_changes": true,
+      "maximum_modules_activated": true,
+      "maximum_non_loopback_listeners": true,
+      "maximum_packages_installed": true,
+      "maximum_password_inputs": true,
+      "maximum_process_spawns": true,
+      "maximum_production_canary_executions": true,
+      "maximum_production_memory_writes": true,
+      "maximum_production_policy_mutations": true,
+      "maximum_production_writes": true,
+      "maximum_provider_network_egress_calls": true,
+      "maximum_public_listeners": true,
+      "maximum_public_network_calls": true,
+      "maximum_refresh_tokens_issued": true,
+      "maximum_runtime_created_pull_requests": true,
+      "maximum_server_sent_event_connections": true,
+      "maximum_service_workers_registered": true,
+      "maximum_session_tokens_issued": true,
+      "maximum_shell_commands": true,
+      "maximum_source_mutations": true,
+      "maximum_subprocess_executions": true,
+      "maximum_token_inputs": true,
+      "maximum_websocket_connections": true,
+      "maximum_zero_address_bindings": true
+    }
+  },
+  "runtime_created_approvals": 0,
+  "scenario_count": 28,
+  "scenario_ids": [
+    "aion_237_delivery_and_ci_integrity",
+    "authorization_lineage_and_scope",
+    "integrated_pilot_schema_and_fingerprint",
+    "exact_source_and_runtime_registration_boundary",
+    "component_authority_and_trust_chain_integrity",
+    "numeric_loopback_binding_and_listener_lifecycle",
+    "exact_route_and_static_asset_manifests",
+    "host_origin_and_fetch_metadata_policy",
+    "bounded_http_parser_and_protocol_smuggling",
+    "mutation_nonce_lifecycle",
+    "session_bootstrap_lifecycle_and_limits",
+    "security_headers_csp_and_browser_non_persistence",
+    "redacted_read_projection_integrity",
+    "deterministic_text_model_integration",
+    "deterministic_structured_model_integration",
+    "model_output_non_authority_and_operator_selection",
+    "reference_capability_integration",
+    "synthetic_connector_read_and_write_preview",
+    "policy_risk_guardrail_approval_and_budget_precedence",
+    "kill_switch_and_session_close_terminal_semantics",
+    "idempotency_and_replay_controls",
+    "receipt_audit_provenance_and_integrity_chains",
+    "concurrency_backpressure_and_performance",
+    "static_console_offline_fallback_live_activation_and_accessibility",
+    "complete_listener_session_request_nonce_and_fixture_cleanup",
+    "zero_external_and_production_effects",
+    "secure_runtime_integration_program_lineage_and_completion_readiness",
+    "v02_release_qualification_program_authorization_readiness"
+  ],
+  "scenario_results": {
+    "aion_237_delivery_and_ci_integrity": "pass",
+    "authorization_lineage_and_scope": "pass",
+    "bounded_http_parser_and_protocol_smuggling": "pass",
+    "complete_listener_session_request_nonce_and_fixture_cleanup": "pass",
+    "component_authority_and_trust_chain_integrity": "pass",
+    "concurrency_backpressure_and_performance": "pass",
+    "deterministic_structured_model_integration": "pass",
+    "deterministic_text_model_integration": "pass",
+    "exact_route_and_static_asset_manifests": "pass",
+    "exact_source_and_runtime_registration_boundary": "pass",
+    "host_origin_and_fetch_metadata_policy": "pass",
+    "idempotency_and_replay_controls": "pass",
+    "integrated_pilot_schema_and_fingerprint": "pass",
+    "kill_switch_and_session_close_terminal_semantics": "pass",
+    "model_output_non_authority_and_operator_selection": "pass",
+    "mutation_nonce_lifecycle": "pass",
+    "numeric_loopback_binding_and_listener_lifecycle": "pass",
+    "policy_risk_guardrail_approval_and_budget_precedence": "pass",
+    "receipt_audit_provenance_and_integrity_chains": "pass",
+    "redacted_read_projection_integrity": "pass",
+    "reference_capability_integration": "pass",
+    "secure_runtime_integration_program_lineage_and_completion_readiness": "pass",
+    "security_headers_csp_and_browser_non_persistence": "pass",
+    "session_bootstrap_lifecycle_and_limits": "pass",
+    "static_console_offline_fallback_live_activation_and_accessibility": "pass",
+    "synthetic_connector_read_and_write_preview": "pass",
+    "v02_release_qualification_program_authorization_readiness": "pass",
+    "zero_external_and_production_effects": "pass"
+  },
+  "scenarios": [
+    {
+      "checks": [
+        {
+          "name": "pr_156_number_exact",
+          "passed": true
+        },
+        {
+          "name": "feature_commit_exact",
+          "passed": true
+        },
+        {
+          "name": "merge_commit_exact",
+          "passed": true
+        },
+        {
+          "name": "merge_timestamp_exact",
+          "passed": true
+        },
+        {
+          "name": "required_checks_recorded",
+          "passed": true
+        },
+        {
+          "name": "feature_commit_in_main",
+          "passed": true
+        },
+        {
+          "name": "merge_commit_in_main",
+          "passed": true
+        },
+        {
+          "name": "implementation_main_commit_exact",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "aion_237_delivery_and_ci_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "program_id",
+          "passed": true
+        },
+        {
+          "name": "authorization_id",
+          "passed": true
+        },
+        {
+          "name": "approval_record_id",
+          "passed": true
+        },
+        {
+          "name": "implementation_task",
+          "passed": true
+        },
+        {
+          "name": "formal_closeout_task",
+          "passed": true
+        },
+        {
+          "name": "authorization_active",
+          "passed": true
+        },
+        {
+          "name": "authorization_consumed",
+          "passed": true
+        },
+        {
+          "name": "authorization_expired",
+          "passed": true
+        },
+        {
+          "name": "authorization_reusable",
+          "passed": true
+        },
+        {
+          "name": "active_sri_count",
+          "passed": true
+        },
+        {
+          "name": "active_sri_authorization",
+          "passed": true
+        },
+        {
+          "name": "active_sri_task",
+          "passed": true
+        },
+        {
+          "name": "operator_console_implemented",
+          "passed": true
+        },
+        {
+          "name": "integrated_pilot_completed",
+          "passed": true
+        },
+        {
+          "name": "public_listener_false",
+          "passed": true
+        },
+        {
+          "name": "external_egress_false",
+          "passed": true
+        },
+        {
+          "name": "browser_persistence_false",
+          "passed": true
+        },
+        {
+          "name": "production_runtime_false",
+          "passed": true
+        },
+        {
+          "name": "v02_release_ready_false",
+          "passed": true
+        },
+        {
+          "name": "parent_authorization_exact",
+          "passed": true
+        },
+        {
+          "name": "parent_evaluation_exact",
+          "passed": true
+        },
+        {
+          "name": "parent_decision_exact",
+          "passed": true
+        },
+        {
+          "name": "parent_record_closed",
+          "passed": true
+        },
+        {
+          "name": "parent_program_auth_counts_zero",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "authorization_lineage_and_scope",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "required_pilot_fields_exact",
+          "passed": true
+        },
+        {
+          "name": "required_pilot_counters_exact",
+          "passed": true
+        },
+        {
+          "name": "report_fingerprint_valid",
+          "passed": true
+        },
+        {
+          "name": "redacted",
+          "passed": true
+        },
+        {
+          "name": "integrity_passed",
+          "passed": true
+        },
+        {
+          "name": "temporary_files_zero",
+          "passed": true
+        },
+        {
+          "name": "all_prohibited_effects_zero",
+          "passed": true
+        },
+        {
+          "name": "protected_material_absent",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "integrated_pilot_schema_and_fingerprint",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "expected_source_scope_present",
+          "passed": true
+        },
+        {
+          "name": "runtime_scope_exact",
+          "passed": true
+        },
+        {
+          "name": "no_runtime_source_change_on_aion238_branch",
+          "passed": true
+        },
+        {
+          "name": "no_workflow_dependency_or_migration_change",
+          "passed": true
+        },
+        {
+          "name": "prohibited_source_absent",
+          "passed": true
+        },
+        {
+          "name": "aion239_source_absent",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "exact_source_and_runtime_registration_boundary",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "aion_231_record_present",
+          "passed": true
+        },
+        {
+          "name": "aion_233_record_present",
+          "passed": true
+        },
+        {
+          "name": "aion_235_record_present",
+          "passed": true
+        },
+        {
+          "name": "aion_237_record_present",
+          "passed": true
+        },
+        {
+          "name": "model_output_untrusted",
+          "passed": true
+        },
+        {
+          "name": "browser_non_authoritative",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "component_authority_and_trust_chain_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "numeric_loopback_port",
+          "passed": true
+        },
+        {
+          "name": "public_binding_rejected",
+          "passed": true
+        },
+        {
+          "name": "ipv6_unspecified_rejected",
+          "passed": true
+        },
+        {
+          "name": "listener_closed",
+          "passed": true
+        },
+        {
+          "name": "active_sessions_after_shutdown_zero",
+          "passed": true
+        },
+        {
+          "name": "active_requests_after_shutdown_zero",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "numeric_loopback_binding_and_listener_lifecycle",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "ten_routes_exact",
+          "passed": true
+        },
+        {
+          "name": "five_static_assets_exact",
+          "passed": true
+        },
+        {
+          "name": "mime_types_exact",
+          "passed": true
+        },
+        {
+          "name": "static_asset_served",
+          "passed": true
+        },
+        {
+          "name": "traversal_rejected",
+          "passed": true
+        },
+        {
+          "name": "hidden_asset_rejected",
+          "passed": true
+        },
+        {
+          "name": "head_rejected",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "exact_route_and_static_asset_manifests",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "wrong_origin_rejected",
+          "passed": true
+        },
+        {
+          "name": "wrong_host_rejected",
+          "passed": true
+        },
+        {
+          "name": "missing_origin_rejected",
+          "passed": true
+        },
+        {
+          "name": "cross_site_rejected",
+          "passed": true
+        },
+        {
+          "name": "forwarded_header_rejected",
+          "passed": true
+        },
+        {
+          "name": "absolute_target_rejected",
+          "passed": true
+        },
+        {
+          "name": "no_cors_header",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "host_origin_and_fetch_metadata_policy",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "duplicate_host_rejected",
+          "passed": true
+        },
+        {
+          "name": "duplicate_content_length_rejected",
+          "passed": true
+        },
+        {
+          "name": "transfer_encoding_rejected",
+          "passed": true
+        },
+        {
+          "name": "content_encoding_rejected",
+          "passed": true
+        },
+        {
+          "name": "strict_json_content_type",
+          "passed": true
+        },
+        {
+          "name": "strict_utf8",
+          "passed": true
+        },
+        {
+          "name": "duplicate_key_rejected",
+          "passed": true
+        },
+        {
+          "name": "nan_rejected",
+          "passed": true
+        },
+        {
+          "name": "depth_limit_enforced",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "bounded_http_parser_and_protocol_smuggling",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "nonce_issued",
+          "passed": true
+        },
+        {
+          "name": "nonce_rotated",
+          "passed": true
+        },
+        {
+          "name": "stale_nonce_rejected",
+          "passed": true
+        },
+        {
+          "name": "host_binding_checked",
+          "passed": true
+        },
+        {
+          "name": "origin_binding_checked",
+          "passed": true
+        },
+        {
+          "name": "terminal_nonce_invalidated",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "mutation_nonce_lifecycle",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "bootstrap_ok",
+          "passed": true
+        },
+        {
+          "name": "status_ok",
+          "passed": true
+        },
+        {
+          "name": "health_ok",
+          "passed": true
+        },
+        {
+          "name": "observability_ok",
+          "passed": true
+        },
+        {
+          "name": "audit_ok",
+          "passed": true
+        },
+        {
+          "name": "two_sequential_sessions",
+          "passed": true
+        },
+        {
+          "name": "normal_close_ok",
+          "passed": true
+        },
+        {
+          "name": "kill_control_ok",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "session_bootstrap_lifecycle_and_limits",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "security_headers_exact",
+          "passed": true
+        },
+        {
+          "name": "csp_no_unsafe_inline",
+          "passed": true
+        },
+        {
+          "name": "csp_no_unsafe_eval",
+          "passed": true
+        },
+        {
+          "name": "no_set_cookie",
+          "passed": true
+        },
+        {
+          "name": "static_console_browser_storage_absent",
+          "passed": true
+        },
+        {
+          "name": "no_websocket_eventsource",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "security_headers_csp_and_browser_non_persistence",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "read_projection_payloads_present",
+          "passed": true
+        },
+        {
+          "name": "projection_payloads_redacted",
+          "passed": true
+        },
+        {
+          "name": "observability_safe",
+          "passed": true
+        },
+        {
+          "name": "audit_safe",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "redacted_read_projection_integrity",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "text_model_status_ok",
+          "passed": true
+        },
+        {
+          "name": "text_model_untrusted",
+          "passed": true
+        },
+        {
+          "name": "text_model_deterministic",
+          "passed": true
+        },
+        {
+          "name": "zero_provider_calls",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "deterministic_text_model_integration",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "structured_model_status_ok",
+          "passed": true
+        },
+        {
+          "name": "structured_model_untrusted",
+          "passed": true
+        },
+        {
+          "name": "structured_json_present",
+          "passed": true
+        },
+        {
+          "name": "zero_provider_calls",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "deterministic_structured_model_integration",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "model_trigger_blocked",
+          "passed": true
+        },
+        {
+          "name": "explicit_operator_selection_required",
+          "passed": true
+        },
+        {
+          "name": "automatic_capability_execution_false",
+          "passed": true
+        },
+        {
+          "name": "automatic_connector_execution_false",
+          "passed": true
+        },
+        {
+          "name": "runtime_created_approval_false",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "model_output_non_authority_and_operator_selection",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "three_reference_capabilities_ok",
+          "passed": true
+        },
+        {
+          "name": "normalization_output_present",
+          "passed": true
+        },
+        {
+          "name": "sha256_output_present",
+          "passed": true
+        },
+        {
+          "name": "json_validation_output_present",
+          "passed": true
+        },
+        {
+          "name": "capability_runtime_receipts",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "reference_capability_integration",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "connector_read_ok",
+          "passed": true
+        },
+        {
+          "name": "connector_preview_ok",
+          "passed": true
+        },
+        {
+          "name": "preview_has_zero_write",
+          "passed": true
+        },
+        {
+          "name": "writes_applied_zero",
+          "passed": true
+        },
+        {
+          "name": "external_connector_calls_zero",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "synthetic_connector_read_and_write_preview",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "policy_binding_available",
+          "passed": true
+        },
+        {
+          "name": "risk_binding_available",
+          "passed": true
+        },
+        {
+          "name": "guardrail_binding_available",
+          "passed": true
+        },
+        {
+          "name": "budget_limits_exact",
+          "passed": true
+        },
+        {
+          "name": "kill_switch_precedence",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "policy_risk_guardrail_approval_and_budget_precedence",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "kill_activation_ok",
+          "passed": true
+        },
+        {
+          "name": "post_kill_blocked",
+          "passed": true
+        },
+        {
+          "name": "normal_close_ok",
+          "passed": true
+        },
+        {
+          "name": "zero_active_sessions",
+          "passed": true
+        },
+        {
+          "name": "zero_active_requests",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "kill_switch_and_session_close_terminal_semantics",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "stale_nonce_rejected",
+          "passed": true
+        },
+        {
+          "name": "cross_session_replay_rejected",
+          "passed": true
+        },
+        {
+          "name": "changed_replay_not_executed",
+          "passed": true
+        },
+        {
+          "name": "no_duplicate_execution",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "idempotency_and_replay_controls",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "receipt_projections_created",
+          "passed": true
+        },
+        {
+          "name": "audit_projection_created",
+          "passed": true
+        },
+        {
+          "name": "listener_audit_chain_exact",
+          "passed": true
+        },
+        {
+          "name": "console_audit_chain_exact",
+          "passed": true
+        },
+        {
+          "name": "protected_material_excluded",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "receipt_audit_provenance_and_integrity_chains",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "concurrency_limit_exact",
+          "passed": true
+        },
+        {
+          "name": "request_budget_exact",
+          "passed": true
+        },
+        {
+          "name": "pilot_http_budget_within_limit",
+          "passed": true
+        },
+        {
+          "name": "pilot_action_budget_within_limit",
+          "passed": true
+        },
+        {
+          "name": "complete_thread_cleanup",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "concurrency_backpressure_and_performance",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "activation_control_present",
+          "passed": true
+        },
+        {
+          "name": "no_autostart_fetch",
+          "passed": true
+        },
+        {
+          "name": "relative_same_origin_fetch_only",
+          "passed": true
+        },
+        {
+          "name": "offline_fallback_present",
+          "passed": true
+        },
+        {
+          "name": "native_controls_present",
+          "passed": true
+        },
+        {
+          "name": "aria_live_present",
+          "passed": true
+        },
+        {
+          "name": "text_content_for_untrusted_output",
+          "passed": true
+        },
+        {
+          "name": "clear_transient_output_behavior",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "static_console_offline_fallback_live_activation_and_accessibility",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "listener_stopped",
+          "passed": true
+        },
+        {
+          "name": "sessions_closed_or_killed",
+          "passed": true
+        },
+        {
+          "name": "requests_closed",
+          "passed": true
+        },
+        {
+          "name": "nonce_terminal",
+          "passed": true
+        },
+        {
+          "name": "temporary_files_absent",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "complete_listener_session_request_nonce_and_fixture_cleanup",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "pilot_prohibited_counters_zero",
+          "passed": true
+        },
+        {
+          "name": "resource_limit_zeros",
+          "passed": true
+        },
+        {
+          "name": "runtime_production_flags_false",
+          "passed": true
+        },
+        {
+          "name": "release_state_false",
+          "passed": true
+        },
+        {
+          "name": "all_report_zero_effects_zero",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "zero_external_and_production_effects",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "aion_230_through_aion_237_present",
+          "passed": true
+        },
+        {
+          "name": "earlier_authorizations_closed",
+          "passed": true
+        },
+        {
+          "name": "current_authorization_final_current",
+          "passed": true
+        },
+        {
+          "name": "final_closeout_task_aion238",
+          "passed": true
+        },
+        {
+          "name": "program_can_complete_without_production",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "secure_runtime_integration_program_lineage_and_completion_readiness",
+      "status": "pass"
+    },
+    {
+      "checks": [
+        {
+          "name": "prior_scenarios_ready",
+          "passed": true
+        },
+        {
+          "name": "sri_completion_separate_from_release",
+          "passed": true
+        },
+        {
+          "name": "no_conflicting_v02_authorization",
+          "passed": true
+        },
+        {
+          "name": "successor_program_required",
+          "passed": true
+        },
+        {
+          "name": "aion239_disabled_foundation_only",
+          "passed": true
+        },
+        {
+          "name": "aion240_formal_closeout_planned",
+          "passed": true
+        },
+        {
+          "name": "production_activation_false",
+          "passed": true
+        },
+        {
+          "name": "release_boundary_false",
+          "passed": true
+        }
+      ],
+      "hard_gate": true,
+      "scenario_id": "v02_release_qualification_program_authorization_readiness",
+      "status": "pass"
+    }
+  ],
+  "schema_version": "aion-secure-runtime-integration-final-evaluation/v1",
+  "security_state": {
+    "browser_persistence_enabled": false,
+    "external_network_egress_enabled": false,
+    "production_runtime_authorized": false,
+    "public_listener_enabled": false,
+    "v02_release_ready": false
+  },
+  "server_sent_event_connections": 0,
+  "service_workers_registered": 0,
+  "shell_commands": 0,
+  "source_mutations": 0,
+  "subprocess_executions": 0,
+  "synthetic": true,
+  "temporary_evaluation_data_cleaned": true,
+  "tokens_persisted": 0,
+  "tokens_read": 0,
+  "websocket_connections": 0
+}

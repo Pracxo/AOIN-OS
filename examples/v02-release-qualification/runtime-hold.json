@@ -1,0 +1,19 @@
+{
+  "authorization_id": "AION-238-V02RQ-0001",
+  "credentials_disabled": true,
+  "external_idp_disabled": true,
+  "production_auth_disabled": true,
+  "production_deployment_disabled": true,
+  "production_observability_export_disabled": true,
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "qualification_foundation_implemented": false,
+  "qualification_program_authorized": true,
+  "release_candidate_absent": true,
+  "replay_writes_disabled": true,
+  "schema_version": "aion-v02-release-qualification-runtime-hold/v1",
+  "staging_deployment_disabled": true,
+  "tokens_disabled": true,
+  "v02_release_created": false,
+  "v02_release_ready": false,
+  "v02_tag_created": false
+}

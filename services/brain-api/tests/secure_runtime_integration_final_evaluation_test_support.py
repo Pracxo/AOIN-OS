@@ -1,0 +1,65 @@
+from __future__ import annotations
+
+import importlib.util
+import json
+from functools import cache
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+PILOT_EVIDENCE_PATH = (
+    REPO_ROOT
+    / "examples/secure-runtime-integration"
+    / "operator-console-integrated-local-runtime-pilot-evidence.json"
+)
+COMMITTED_REPORT = (
+    REPO_ROOT
+    / "examples/secure-runtime-integration/secure-runtime-integration-final-evaluation-report.json"
+)
+
+
+@cache
+def evaluation_module():
+    module_path = REPO_ROOT / "scripts/lib/secure_runtime_integration_final_evaluation.py"
+    spec = importlib.util.spec_from_file_location(
+        "secure_runtime_integration_final_evaluation",
+        module_path,
+    )
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+@cache
+def evaluation_report():
+    module = evaluation_module()
+    if COMMITTED_REPORT.exists():
+        report = json.loads(COMMITTED_REPORT.read_text(encoding="utf-8"))
+        module.validate_report(report)
+        return report
+    report = module.evaluate(
+        repo_root=REPO_ROOT,
+        evaluation_id=module.EVALUATION_ID,
+        implementation_main_commit=module.IMPLEMENTATION_MERGE_COMMIT,
+        evaluation_base_commit="unit-test-base",
+        pilot_evidence_path=PILOT_EVIDENCE_PATH,
+        temporary_output_directory=Path("/tmp/aion-sri-final-evaluation-tests"),
+    )
+    module.validate_report(report)
+    return report
+
+
+def scenario(scenario_id: str) -> dict:
+    for item in evaluation_report()["scenarios"]:
+        if item["scenario_id"] == scenario_id:
+            return item
+    raise AssertionError(f"missing scenario {scenario_id}")
+
+
+def assert_scenario_passes(scenario_id: str) -> dict:
+    item = scenario(scenario_id)
+    assert item["status"] == "pass"
+    failed = [check["name"] for check in item["checks"] if not check["passed"]]
+    assert failed == []
+    return item
