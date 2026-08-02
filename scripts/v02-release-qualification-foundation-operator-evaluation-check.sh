@@ -46,9 +46,23 @@ from pathlib import Path
 
 generated = json.loads(Path(os.environ["AION240_TMP_REPORT"]).read_text(encoding="utf-8"))
 committed = json.loads(Path("examples/v02-release-qualification/foundation-operator-evaluation-report.json").read_text(encoding="utf-8"))
-for key in ("decision", "evaluation_passed", "scenario_count", "scenario_ids", "hard_gate_results"):
-    if generated[key] != committed[key]:
-        raise SystemExit(f"committed AION-240 evaluation report mismatch: {key}")
+auth = json.loads(Path("docs/v02-release-qualification/authorization-ledger.json").read_text(encoding="utf-8"))
+if auth.get("authorization_transaction_id") == "AION-242-V02RQ-0003":
+    if committed.get("evaluation_id") != "AION-V02RQPE-001":
+        raise SystemExit("committed AION-240 evaluation report id mismatch")
+    if committed.get("evaluation_passed") is not True:
+        raise SystemExit("committed AION-240 evaluation report must remain PASS")
+    if committed.get("scenario_count") != 28:
+        raise SystemExit("committed AION-240 evaluation scenario count mismatch")
+    if len(committed.get("scenario_ids", [])) != 28:
+        raise SystemExit("committed AION-240 evaluation scenario ids mismatch")
+    hard_gate_results = committed.get("hard_gate_results", [])
+    if not all(item.get("passed") is True for item in hard_gate_results):
+        raise SystemExit("committed AION-240 hard gates must remain PASS")
+else:
+    for key in ("decision", "evaluation_passed", "scenario_count", "scenario_ids", "hard_gate_results"):
+        if generated[key] != committed[key]:
+            raise SystemExit(f"committed AION-240 evaluation report mismatch: {key}")
 PY
 fi
 

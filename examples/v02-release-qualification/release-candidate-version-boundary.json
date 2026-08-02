@@ -1,0 +1,7 @@
+{
+  "candidate_label": "aion-v0.2.0-rc.1",
+  "dependency_version_changes_allowed": false,
+  "python_package_version": "0.2.0rc1",
+  "runtime_logic_change_allowed": false,
+  "v02_tag_created": false
+}

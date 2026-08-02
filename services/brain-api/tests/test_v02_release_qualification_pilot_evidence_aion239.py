@@ -14,10 +14,22 @@ PILOT = REPO_ROOT / (
 HARNESS_PATH = (
     REPO_ROOT / "scripts/lib/v02_release_qualification_foundation_operator_evaluation.py"
 )
+AION242_HARNESS_PATH = (
+    REPO_ROOT / "scripts/lib/v02_staging_qualification_operator_evaluation.py"
+)
 
 
 def load_harness():
     spec = importlib.util.spec_from_file_location("aion240_eval", HARNESS_PATH)
+    assert spec is not None
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
+
+
+def load_aion242_harness():
+    spec = importlib.util.spec_from_file_location("aion242_eval", AION242_HARNESS_PATH)
     assert spec is not None
     module = importlib.util.module_from_spec(spec)
     assert spec.loader is not None
@@ -68,6 +80,7 @@ def test_committed_pilot_evidence_fingerprint_and_counters_are_exact():
 
 def test_ledgers_record_implemented_foundation_and_current_authorization_state():
     harness = load_harness()
+    aion242 = load_aion242_harness()
     program = load_json("docs/v02-release-qualification/program-ledger.json")
     auth = load_json("docs/v02-release-qualification/authorization-ledger.json")
     post_closeout_state = (
@@ -77,6 +90,10 @@ def test_ledgers_record_implemented_foundation_and_current_authorization_state()
     aion241_implemented_state = (
         "controlled_isolated_staging_qualification_implemented_pilot_complete_pending_"
         "closeout"
+    )
+    aion242_authorized_state = (
+        "controlled_staging_qualification_evaluated_release_candidate_build_"
+        "authorized_not_implemented"
     )
 
     for payload in (program, auth):
@@ -93,6 +110,59 @@ def test_ledgers_record_implemented_foundation_and_current_authorization_state()
         assert not any(payload["prohibited_capabilities"].values())
 
         if payload["active_v02_release_qualification_authorization"] == (
+            aion242.NEXT_AUTHORIZATION_ID
+        ):
+            assert payload["program_state"] == aion242_authorized_state
+            assert (
+                payload["v02_release_qualification_foundation_operator_evaluation_passed"]
+                is True
+            )
+            assert (
+                payload["v02_release_qualification_foundation_operator_evaluation_id"]
+                == harness.EVALUATION_ID
+            )
+            assert (
+                payload["v02_release_qualification_foundation_operator_evaluation_decision"]
+                == harness.PASS_DECISION
+            )
+            assert payload["controlled_staging_qualification_authorized"] is True
+            assert payload["controlled_staging_qualification_implemented"] is True
+            assert (
+                payload["controlled_staging_qualification_operator_evaluation_passed"]
+                is True
+            )
+            assert (
+                payload["controlled_staging_qualification_operator_evaluation_id"]
+                == aion242.EVALUATION_ID
+            )
+            assert (
+                payload["controlled_staging_qualification_operator_evaluation_decision"]
+                == aion242.PASS_DECISION
+            )
+            assert payload["active_v02_release_qualification_authorization_count"] == 1
+            assert payload["active_v02_release_qualification_task"] == (
+                aion242.NEXT_IMPLEMENTATION_TASK
+            )
+            assert payload["formal_closeout_task"] == aion242.NEXT_FORMAL_CLOSEOUT_TASK
+            assert payload["release_candidate_artifact_build_authorized"] is True
+            assert payload["release_candidate_artifact_build_implemented"] is False
+            assert payload["release_candidate_created"] is False
+            assert payload["release_candidate_published"] is False
+            assert payload["production_runtime_authorized"] is False
+            assert payload["production_deployment_enabled"] is False
+            closeout = payload["aion_240_authorization_closeout"]
+            assert closeout["authorization_transaction_id"] == aion242.CURRENT_AUTHORIZATION_ID
+            assert closeout["authorization_active"] is False
+            assert closeout["authorization_consumed"] is True
+            assert closeout["authorization_expired"] is True
+            assert closeout["authorization_reusable"] is False
+            assert payload["aion_239_resource_limits"] == c.resource_limits().model_dump()
+            expected_aion243_limits = {
+                **aion242.POSITIVE_AION243_LIMITS,
+                **dict.fromkeys(aion242.ZERO_AION243_LIMITS, 0),
+            }
+            assert resource_limit_map(payload) == expected_aion243_limits
+        elif payload["active_v02_release_qualification_authorization"] == (
             harness.NEXT_AUTHORIZATION_ID
         ):
             expected_program_state = (

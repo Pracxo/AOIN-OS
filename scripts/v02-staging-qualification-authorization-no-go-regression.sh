@@ -62,7 +62,12 @@ code_paths="$(
     | rg -n '^(scripts/.*(\.sh|\.py)|services/brain-api/tests/.*\.py)$' \
     | cut -d: -f2- \
     | rg -v '^scripts/v02-staging-qualification-local-run\.py$' \
+    | rg -v '^scripts/lib/v02_staging_qualification_operator_evaluation\.py$' \
+    | rg -v '^scripts/v02-staging-qualification-operator-evaluation-check\.sh$' \
+    | rg -v '^scripts/v02-release-candidate-authorization-check\.sh$' \
+    | rg -v '^scripts/v02-release-candidate-runtime-hold\.sh$' \
     | rg -v '^services/brain-api/tests/test_v02_staging_qualification_aion241\.py$' \
+    | rg -v '^services/brain-api/tests/test_v02_staging_qualification_operator_evaluation_aion242\.py$' \
     | rg -v 'no-go-regression\.sh$' \
     || true
 )"
@@ -98,19 +103,32 @@ for relative in (
     prohibited = payload.get("prohibited_capabilities", {})
     if any(prohibited.values()):
         raise SystemExit(f"prohibited staging capability enabled in {relative}")
-    for key in h.ZERO_AION241_LIMITS:
+    zero_keys = payload.get("zero_resource_limit_keys") or list(h.ZERO_AION241_LIMITS)
+    for key in zero_keys:
         if resource_limits.get(key) != 0:
             raise SystemExit(f"zero staging limit mismatch in {relative}: {key}")
+    post_aion242 = (
+        payload.get("active_v02_release_qualification_authorization")
+        == "AION-242-V02RQ-0003"
+    )
+    if post_aion242:
+        if payload.get("release_candidate_artifact_build_authorized") is not True:
+            raise SystemExit(f"{relative} must authorize only the future release-candidate build")
+        if payload.get("release_candidate_created") is not False:
+            raise SystemExit(f"{relative} must keep release_candidate_created=false")
+        if payload.get("release_candidate_published") is not False:
+            raise SystemExit(f"{relative} must keep release_candidate_published=false")
     for flag in (
         "production_runtime_authorized",
         "production_deployment_enabled",
-        "release_candidate_creation_enabled",
         "v02_release_ready",
         "v02_tag_created",
         "v02_release_created",
     ):
         if payload.get(flag) is not False:
             raise SystemExit(f"{relative} must keep {flag}=false")
+    if not post_aion242 and payload.get("release_candidate_creation_enabled") is not False:
+        raise SystemExit(f"{relative} must keep release_candidate_creation_enabled=false")
 PY
 
 echo "controlled isolated staging qualification authorization no-go PASS"

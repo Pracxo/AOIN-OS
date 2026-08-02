@@ -1,0 +1,10 @@
+{
+  "commit_only_redacted_fingerprints": true,
+  "directory_mode": "0700",
+  "maximum_retained_candidate_bundles": 1,
+  "maximum_retained_candidate_images": 1,
+  "preserve_final_candidate_until_AION_244": true,
+  "retain_no_private_qualification_key": true,
+  "retain_public_key_and_detached_signatures": true,
+  "secure_candidate_root_outside_repository": true
+}

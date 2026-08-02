@@ -22,6 +22,7 @@ from aion_brain.v02_release_qualification import (
     ControlledV02ReleaseQualificationService,
 )
 import v02_release_qualification_foundation_operator_evaluation as aion240
+import v02_staging_qualification_operator_evaluation as aion242
 
 root = Path.cwd()
 source_scope = [
@@ -72,8 +73,95 @@ aion241_final_state = (
     "controlled_isolated_staging_qualification_implemented_pilot_complete_"
     "pending_closeout"
 )
+aion242_final_state = (
+    "controlled_staging_qualification_evaluated_release_candidate_build_"
+    "authorized_not_implemented"
+)
 aion241_controlled_state = "implemented_isolated_local_pilot_complete_pending_AION-242_closeout"
 for label, payload in (("program", program), ("authorization", auth)):
+    if payload["program_state"] == aion242_final_state:
+        required = {
+            "program_id": aion240.PROGRAM_ID,
+            "v02_release_qualification_program_authorized": True,
+            "v02_release_qualification_program_implemented": True,
+            "v02_release_qualification_foundation_authorized": True,
+            "v02_release_qualification_foundation_implemented": True,
+            "v02_release_qualification_foundation_state": c.FOUNDATION_STATE,
+            "local_qualification_pilot_completed": True,
+            "disabled_local_qualification_simulator_available": True,
+            "v02_release_qualification_foundation_operator_evaluation_passed": True,
+            "v02_release_qualification_foundation_operator_evaluation_id": aion240.EVALUATION_ID,
+            "v02_release_qualification_foundation_operator_evaluation_decision": aion240.PASS_DECISION,
+            "controlled_staging_qualification_authorized": True,
+            "controlled_staging_qualification_implemented": True,
+            "controlled_staging_qualification_state": aion241_controlled_state,
+            "controlled_staging_qualification_operator_evaluation_passed": True,
+            "controlled_staging_qualification_operator_evaluation_id": aion242.EVALUATION_ID,
+            "controlled_staging_qualification_operator_evaluation_decision": aion242.PASS_DECISION,
+            "active_v02_release_qualification_authorization_count": 1,
+            "active_v02_release_qualification_authorization": aion242.NEXT_AUTHORIZATION_ID,
+            "active_v02_release_qualification_task": aion242.NEXT_IMPLEMENTATION_TASK,
+            "formal_closeout_task": aion242.NEXT_FORMAL_CLOSEOUT_TASK,
+            "final_planned_task": aion242.FINAL_PLANNED_TASK,
+            "authorization_active": True,
+            "authorization_consumed": False,
+            "authorization_expired": False,
+            "authorization_reusable": False,
+            "release_candidate_artifact_build_authorized": True,
+            "release_candidate_artifact_build_implemented": False,
+            "release_candidate_created": False,
+            "release_candidate_published": False,
+            "release_candidate_creation_enabled": True,
+            "production_runtime_authorized": False,
+            "production_deployment_enabled": False,
+            "v02_release_ready": False,
+            "v02_tag_created": False,
+            "v02_release_created": False,
+            "active_staging_resources": 0,
+        }
+        for key, expected in required.items():
+            if payload.get(key) != expected:
+                raise SystemExit(f"{label} AION-242 final mismatch {key}: {payload.get(key)!r}")
+        if payload.get("aion_239_resource_limits") != c.resource_limits().model_dump():
+            raise SystemExit(f"{label} AION-239 resource limits mismatch")
+        expected_aion241_limits = {
+            **aion240.POSITIVE_AION241_LIMITS,
+            **{key: 0 for key in aion240.ZERO_AION241_LIMITS},
+        }
+        if payload.get("aion_241_resource_limits") != expected_aion241_limits:
+            raise SystemExit(f"{label} AION-241 retained resource limits mismatch")
+        expected_aion243_limits = {
+            **aion242.POSITIVE_AION243_LIMITS,
+            **{key: 0 for key in aion242.ZERO_AION243_LIMITS},
+        }
+        resource_limits = payload.get("resource_limits", {})
+        if isinstance(resource_limits, dict) and isinstance(resource_limits.get("limits"), dict):
+            resource_limits = resource_limits["limits"]
+        if resource_limits != expected_aion243_limits:
+            raise SystemExit(f"{label} AION-243 resource limits mismatch")
+        closed = payload.get("aion_240_authorization_closeout", {})
+        if closed.get("authorization_transaction_id") != aion242.CURRENT_AUTHORIZATION_ID:
+            raise SystemExit(f"{label} missing AION-240 closeout")
+        if closed.get("authorization_active") is not False:
+            raise SystemExit(f"{label} AION-240 closeout active flag mismatch")
+        if closed.get("authorization_consumed") is not True:
+            raise SystemExit(f"{label} AION-240 closeout consumed flag mismatch")
+        if closed.get("authorization_expired") is not True:
+            raise SystemExit(f"{label} AION-240 closeout expired flag mismatch")
+        if closed.get("authorization_reusable") is not False:
+            raise SystemExit(f"{label} AION-240 closeout reusable flag mismatch")
+        record = payload.get("aion_241_record", {})
+        if record.get("ci_result") != "pass":
+            raise SystemExit(f"{label} AION-241 CI reconciliation mismatch")
+        if record.get("feature_commits") != [aion242.IMPLEMENTATION_COMMIT, aion242.EVIDENCE_COMMIT]:
+            raise SystemExit(f"{label} AION-241 feature commits mismatch")
+        if record.get("pull_requests") != [aion242.IMPLEMENTATION_PR]:
+            raise SystemExit(f"{label} AION-241 PR reconciliation mismatch")
+        if record.get("merge_commits") != [aion242.IMPLEMENTATION_MERGE_COMMIT]:
+            raise SystemExit(f"{label} AION-241 merge commit mismatch")
+        if any(payload["prohibited_capabilities"].values()):
+            raise SystemExit(f"{label} has enabled prohibited capability")
+        continue
     if payload["program_state"] in {post_closeout_state, aion241_final_state}:
         aion241_complete = payload["program_state"] == aion241_final_state
         required = {

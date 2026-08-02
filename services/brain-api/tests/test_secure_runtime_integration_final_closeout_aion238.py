@@ -9,10 +9,15 @@ from secure_runtime_integration_final_evaluation_test_support import (
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 AION240_AUTHORIZATION_ID = "AION-240-V02RQ-0002"
+AION242_AUTHORIZATION_ID = "AION-242-V02RQ-0003"
 AION240_PASS_DECISION = (
     "DISABLED_V02_PRODUCTION_READINESS_QUALIFICATION_FOUNDATION_OPERATOR_"
     "EVALUATION_PASS_RECOMMEND_CONTROLLED_ISOLATED_STAGING_ARTIFACT_AND_"
     "ROLLBACK_DRILL_QUALIFICATION_AUTHORIZATION"
+)
+AION242_PASS_DECISION = (
+    "CONTROLLED_ISOLATED_LOCAL_STAGING_QUALIFICATION_OPERATOR_EVALUATION_PASS_"
+    "RECOMMEND_DETERMINISTIC_V02_RELEASE_CANDIDATE_ARTIFACT_BUILD_AUTHORIZATION"
 )
 AION240_FAIL_DECISION = (
     "DISABLED_V02_PRODUCTION_READINESS_QUALIFICATION_FOUNDATION_OPERATOR_"
@@ -107,8 +112,12 @@ def test_v02_release_qualification_successor_authorization_is_exact_and_disabled
     assert program["v02_release_qualification_foundation_state"] == (
         "implemented_disabled_design_and_local_simulation_pending_AION-240_closeout"
     )
-    assert program["parent_evaluation_id"] == "AION-SRIPE-004"
-    assert program["parent_evaluation_decision"] == module.PASS_DECISION
+    if auth["authorization_transaction_id"] == AION242_AUTHORIZATION_ID:
+        assert program["parent_evaluation_id"] == "AION-V02RQPE-002"
+        assert program["parent_evaluation_decision"] == AION242_PASS_DECISION
+    else:
+        assert program["parent_evaluation_id"] == "AION-SRIPE-004"
+        assert program["parent_evaluation_decision"] == module.PASS_DECISION
     assert program["final_planned_task"] == "AION-244"
     assert auth["authorization_active"] is True
     assert auth["authorization_consumed"] is False
@@ -157,6 +166,55 @@ def test_v02_release_qualification_successor_authorization_is_exact_and_disabled
                 "authorization_transaction_id": AION240_AUTHORIZATION_ID,
                 "implementation_task": "AION-241",
                 "formal_closeout_task": "AION-242",
+                "authorization_active": True,
+                "authorization_consumed": False,
+                "authorization_expired": False,
+                "authorization_reusable": False,
+            }
+        ]
+    elif auth["authorization_transaction_id"] == AION242_AUTHORIZATION_ID:
+        assert program["program_state"] == (
+            "controlled_staging_qualification_evaluated_release_candidate_build_"
+            "authorized_not_implemented"
+        )
+        assert program["active_v02_release_qualification_authorization_count"] == 1
+        assert program["active_v02_release_qualification_authorization"] == (
+            AION242_AUTHORIZATION_ID
+        )
+        assert program["active_v02_release_qualification_task"] == "AION-243"
+        assert program["formal_closeout_task"] == "AION-244"
+        assert program["controlled_staging_qualification_implemented"] is True
+        assert (
+            program["controlled_staging_qualification_operator_evaluation_passed"]
+            is True
+        )
+        assert program["release_candidate_artifact_build_authorized"] is True
+        assert program["release_candidate_artifact_build_implemented"] is False
+        assert program["release_candidate_created"] is False
+        assert program["release_candidate_published"] is False
+        assert program["production_runtime_authorized"] is False
+        assert program["production_deployment_enabled"] is False
+        closeout = auth["aion_240_authorization_closeout"]
+        assert closeout["authorization_transaction_id"] == AION240_AUTHORIZATION_ID
+        assert closeout["authorization_active"] is False
+        assert closeout["authorization_consumed"] is True
+        assert closeout["authorization_expired"] is True
+        assert closeout["authorization_reusable"] is False
+        assert closeout["authorization_consumed_by_task"] == "AION-241"
+        assert closeout["authorization_closed_by_task"] == "AION-242"
+        assert closeout["staging_evaluation_id"] == "AION-V02RQPE-002"
+        assert closeout["staging_evaluation_decision"] == AION242_PASS_DECISION
+        assert auth["approval_record_id"] == AION242_AUTHORIZATION_ID
+        assert auth["parent_authorization_transaction_id"] == AION240_AUTHORIZATION_ID
+        assert auth["parent_evaluation_id"] == "AION-V02RQPE-002"
+        assert auth["parent_evaluation_decision"] == AION242_PASS_DECISION
+        assert auth["implementation_task"] == "AION-243"
+        assert auth["formal_closeout_task"] == "AION-244"
+        assert auth["active_authorizations"] == [
+            {
+                "authorization_transaction_id": AION242_AUTHORIZATION_ID,
+                "implementation_task": "AION-243",
+                "formal_closeout_task": "AION-244",
                 "authorization_active": True,
                 "authorization_consumed": False,
                 "authorization_expired": False,
@@ -215,6 +273,8 @@ def test_release_state_remains_false_and_fail_does_not_authorize_successor():
     assert v02_program["v02_release_created"] is False
     if v02_auth["authorization_transaction_id"] == AION240_AUTHORIZATION_ID:
         assert v02_auth["parent_evaluation_decision"] == AION240_PASS_DECISION
+    elif v02_auth["authorization_transaction_id"] == AION242_AUTHORIZATION_ID:
+        assert v02_auth["parent_evaluation_decision"] == AION242_PASS_DECISION
     else:
         assert v02_auth["parent_evaluation_decision"] == module.PASS_DECISION
     serialized = json.dumps((v02_program, v02_auth), sort_keys=True)

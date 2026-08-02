@@ -1,0 +1,7 @@
+{
+  "detached_signatures_required": true,
+  "private_qualification_key_retained": false,
+  "production_signing_key_enabled": false,
+  "qualification_public_key_record_approved": true,
+  "qualification_signature_approved": true
+}

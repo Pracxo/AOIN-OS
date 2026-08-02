@@ -59,6 +59,7 @@ is_allowed_path() {
   case "$1" in
     README.md|AGENTS.md|\
     docs/adr/0204-v02-qualification-foundation-evaluation-and-controlled-isolated-staging-qualification-authorization.md|\
+    docs/adr/0206-controlled-staging-evaluation-and-deterministic-v02-release-candidate-artifact-build-authorization.md|\
     docs/adr/README.md|\
     docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/project-status.md|docs/visual-brain.md|\
     docs/v02-release-qualification/*|\
@@ -79,6 +80,8 @@ is_allowed_path() {
     operator-console-static/demo-data/v02-staging-rollback-boundary.json|\
     operator-console-static/demo-data/v02-staging-runtime-hold.json|\
     operator-console-static/demo-data/v02-release-qualification-staging-*.json|\
+    operator-console-static/demo-data/v02-staging-operator-evaluation.json|\
+    operator-console-static/demo-data/v02-release-candidate-authorization.json|\
     scripts/auth-design-check.sh|\
     scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh|\
     scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh|\
@@ -94,6 +97,7 @@ is_allowed_path() {
     scripts/lib/cognitive_architecture_governance.py|\
     scripts/lib/v02_production_auth_authorization.py|\
     scripts/lib/v02_release_qualification_foundation_operator_evaluation.py|\
+    scripts/lib/v02_staging_qualification_operator_evaluation.py|\
     scripts/operator-console-static-check.sh|\
     scripts/secure-runtime-foundation-no-go-regression.sh|\
     scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh|\
@@ -113,6 +117,11 @@ is_allowed_path() {
     scripts/v02-staging-qualification-no-go-regression.sh|\
     scripts/v02-staging-qualification-pilot-evidence-check.sh|\
     scripts/v02-staging-qualification-runtime-hold.sh|\
+    scripts/v02-staging-qualification-operator-evaluation-check.sh|\
+    scripts/v02-staging-qualification-operator-evaluation-no-go-regression.sh|\
+    scripts/v02-release-candidate-authorization-check.sh|\
+    scripts/v02-release-candidate-authorization-no-go-regression.sh|\
+    scripts/v02-release-candidate-runtime-hold.sh|\
     services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py|\
     services/brain-api/src/aion_brain/v02_staging_qualification/*.py|\
     services/brain-api/tests/test_governed_learning_memory_no_runtime_source.py|\
@@ -126,7 +135,8 @@ is_allowed_path() {
     services/brain-api/tests/test_self_improvement_shadow_activation_scope_spec.py|\
     services/brain-api/tests/test_v02_release_qualification_operator_evaluation_aion240.py|\
     services/brain-api/tests/test_v02_release_qualification_pilot_evidence_aion239.py|\
-    services/brain-api/tests/test_v02_staging_qualification_aion241.py)
+    services/brain-api/tests/test_v02_staging_qualification_aion241.py|\
+    services/brain-api/tests/test_v02_staging_qualification_operator_evaluation_aion242.py)
       return 0
       ;;
   esac
@@ -172,6 +182,10 @@ code_changes="$(
     | rg -n '^(scripts/.*(\.sh|\.py)|services/brain-api/tests/.*\.py)$' \
     | cut -d: -f2- \
     | rg -v '^scripts/v02-staging-qualification-local-run\.py$' \
+    | rg -v '^scripts/lib/v02_staging_qualification_operator_evaluation\.py$' \
+    | rg -v '^scripts/v02-staging-qualification-operator-evaluation-check\.sh$' \
+    | rg -v '^scripts/v02-release-candidate-authorization-check\.sh$' \
+    | rg -v '^scripts/v02-release-candidate-runtime-hold\.sh$' \
     | rg -v '^services/brain-api/tests/test_v02_staging_qualification_aion241\.py$' \
     | rg -v 'no-go-regression\.sh$' \
     || true
@@ -191,6 +205,7 @@ secret_scan_paths="$(
   changed_paths \
     | sort -u \
     | rg -v '^(scripts/lib/v02_production_auth_authorization\.py|scripts/lib/v02_release_qualification_foundation_operator_evaluation\.py|scripts/v02-release-qualification-foundation-operator-evaluation-no-go-regression\.sh)$' \
+    | rg -v '^scripts/.*no-go-regression\.sh$' \
     || true
 )"
 if [[ -n "$secret_scan_paths" ]]; then

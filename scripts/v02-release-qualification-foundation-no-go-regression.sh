@@ -61,7 +61,8 @@ is_allowed_path() {
 	    docs/adr/README.md|\
 	    docs/adr/0202-final-secure-runtime-integration-evaluation-and-v02-release-qualification-program-authorization.md|\
 	    docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md|\
-	    docs/adr/0204-v02-qualification-foundation-evaluation-and-controlled-isolated-staging-qualification-authorization.md|\
+		    docs/adr/0204-v02-qualification-foundation-evaluation-and-controlled-isolated-staging-qualification-authorization.md|\
+		    docs/adr/0206-controlled-staging-evaluation-and-deterministic-v02-release-candidate-artifact-build-authorization.md|\
 	    docs/adr/0205-controlled-isolated-local-staging-artifact-build-and-rollback-drill.md|\
     docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/project-status.md|docs/visual-brain.md|\
     docs/v02-release-qualification/*|\
@@ -72,6 +73,8 @@ is_allowed_path() {
     examples/v02-release-qualification/*|\
     operator-console-static/index.html|operator-console-static/app.js|operator-console-static/README.md|\
     operator-console-static/demo-data/v02-release-qualification-*.json|\
+    operator-console-static/demo-data/v02-staging-operator-evaluation.json|\
+    operator-console-static/demo-data/v02-release-candidate-authorization.json|\
     operator-console-static/demo-data/v02-qualification-foundation-operator-evaluation.json|\
     operator-console-static/demo-data/v02-staging-qualification-authorization.json|\
     operator-console-static/demo-data/v02-staging-environment-profile.json|\
@@ -111,6 +114,7 @@ is_allowed_path() {
     scripts/secure-runtime-integration-program-no-go-regression.sh|\
     scripts/static-console-safety-check.sh|\
     scripts/lib/v02_release_qualification_foundation_operator_evaluation.py|\
+    scripts/lib/v02_staging_qualification_operator_evaluation.py|\
     scripts/lib/v02_production_auth_authorization.py|\
     scripts/secure-runtime-foundation-check.sh|\
     scripts/secure-runtime-foundation-no-go-regression.sh|\
@@ -131,6 +135,11 @@ is_allowed_path() {
     scripts/v02-staging-qualification-no-go-regression.sh|\
     scripts/v02-staging-qualification-pilot-evidence-check.sh|\
     scripts/v02-staging-qualification-runtime-hold.sh|\
+    scripts/v02-staging-qualification-operator-evaluation-check.sh|\
+    scripts/v02-staging-qualification-operator-evaluation-no-go-regression.sh|\
+    scripts/v02-release-candidate-authorization-check.sh|\
+    scripts/v02-release-candidate-authorization-no-go-regression.sh|\
+    scripts/v02-release-candidate-runtime-hold.sh|\
     scripts/secure-runtime-integration-final-evaluation-no-go-regression.sh|\
     services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
     services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py|\
@@ -146,7 +155,8 @@ is_allowed_path() {
     services/brain-api/tests/test_self_improvement_shadow_activation_evaluation_repository_integrity.py|\
     services/brain-api/tests/test_self_improvement_shadow_activation_scope_spec.py|\
     services/brain-api/tests/test_v02_release_qualification_*.py|\
-    services/brain-api/tests/test_v02_staging_qualification_aion241.py)
+    services/brain-api/tests/test_v02_staging_qualification_aion241.py|\
+    services/brain-api/tests/test_v02_staging_qualification_operator_evaluation_aion242.py)
       return 0
       ;;
   esac

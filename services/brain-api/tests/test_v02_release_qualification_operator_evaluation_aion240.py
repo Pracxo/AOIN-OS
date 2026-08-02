@@ -17,6 +17,11 @@ REPORT_PATH = (
 STAGING_AUTH_PATH = (
     REPO_ROOT / "examples/v02-release-qualification/staging-qualification-authorization.json"
 )
+AION242_AUTHORIZATION_ID = "AION-242-V02RQ-0003"
+AION242_PASS_DECISION = (
+    "CONTROLLED_ISOLATED_LOCAL_STAGING_QUALIFICATION_OPERATOR_EVALUATION_PASS_"
+    "RECOMMEND_DETERMINISTIC_V02_RELEASE_CANDIDATE_ARTIFACT_BUILD_AUTHORIZATION"
+)
 
 
 def load_harness():
@@ -34,6 +39,8 @@ def load_json(relative: str) -> dict:
 
 def test_harness_executes_exact_twenty_eight_scenarios(tmp_path):
     harness = load_harness()
+    auth = load_json("docs/v02-release-qualification/authorization-ledger.json")
+    post_aion242 = auth["authorization_transaction_id"] == AION242_AUTHORIZATION_ID
     report = harness.evaluate(
         repo_root=REPO_ROOT,
         evaluation_id=harness.EVALUATION_ID,
@@ -46,15 +53,20 @@ def test_harness_executes_exact_twenty_eight_scenarios(tmp_path):
     )
 
     harness.validate_report(report)
-    assert report["decision"] == harness.PASS_DECISION
-    assert report["evaluation_passed"] is True
+    assert report["decision"] == (
+        harness.FAIL_DECISION if post_aion242 else harness.PASS_DECISION
+    )
+    assert report["evaluation_passed"] is (not post_aion242)
     assert report["scenario_count"] == 28
     assert report["scenario_ids"] == list(harness.SCENARIO_IDS)
     assert [item["scenario_id"] for item in report["scenario_results"]] == list(
         harness.SCENARIO_IDS
     )
-    assert all(item["passed"] is True for item in report["scenario_results"])
-    assert all(item["passed"] is True for item in report["hard_gate_results"])
+    if post_aion242:
+        assert any(item["passed"] is False for item in report["hard_gate_results"])
+    else:
+        assert all(item["passed"] is True for item in report["scenario_results"])
+        assert all(item["passed"] is True for item in report["hard_gate_results"])
 
 
 def test_pilot_evidence_and_aion_239_delivery_are_reconciled():
@@ -120,18 +132,46 @@ def test_authorization_closeout_when_present_is_consistent():
     program = load_json("docs/v02-release-qualification/program-ledger.json")
     staging = json.loads(STAGING_AUTH_PATH.read_text(encoding="utf-8"))
 
-    assert auth["authorization_transaction_id"] == "AION-240-V02RQ-0002"
-    assert auth["parent_authorization_transaction_id"] == "AION-238-V02RQ-0001"
-    assert auth["parent_evaluation_id"] == "AION-V02RQPE-001"
-    assert auth["authorization_active"] is True
-    assert auth["authorization_consumed"] is False
-    assert auth["authorization_expired"] is False
-    assert auth["authorization_reusable"] is False
-    assert auth["implementation_task"] == "AION-241"
-    assert auth["formal_closeout_task"] == "AION-242"
-    assert program["active_v02_release_qualification_authorization_count"] == 1
-    assert program["active_v02_release_qualification_authorization"] == "AION-240-V02RQ-0002"
-    assert program["active_v02_release_qualification_task"] == "AION-241"
+    if auth["authorization_transaction_id"] == AION242_AUTHORIZATION_ID:
+        assert auth["parent_authorization_transaction_id"] == "AION-240-V02RQ-0002"
+        assert auth["parent_evaluation_id"] == "AION-V02RQPE-002"
+        assert auth["parent_evaluation_decision"] == AION242_PASS_DECISION
+        assert auth["authorization_active"] is True
+        assert auth["authorization_consumed"] is False
+        assert auth["authorization_expired"] is False
+        assert auth["authorization_reusable"] is False
+        assert auth["implementation_task"] == "AION-243"
+        assert auth["formal_closeout_task"] == "AION-244"
+        closeout = auth["aion_240_authorization_closeout"]
+        assert closeout["authorization_transaction_id"] == "AION-240-V02RQ-0002"
+        assert closeout["authorization_active"] is False
+        assert closeout["authorization_consumed"] is True
+        assert closeout["authorization_expired"] is True
+        assert closeout["authorization_reusable"] is False
+        assert closeout["authorization_closed_by_task"] == "AION-242"
+        assert closeout["staging_evaluation_id"] == "AION-V02RQPE-002"
+        assert program["active_v02_release_qualification_authorization_count"] == 1
+        assert (
+            program["active_v02_release_qualification_authorization"]
+            == AION242_AUTHORIZATION_ID
+        )
+        assert program["active_v02_release_qualification_task"] == "AION-243"
+    else:
+        assert auth["authorization_transaction_id"] == "AION-240-V02RQ-0002"
+        assert auth["parent_authorization_transaction_id"] == "AION-238-V02RQ-0001"
+        assert auth["parent_evaluation_id"] == "AION-V02RQPE-001"
+        assert auth["authorization_active"] is True
+        assert auth["authorization_consumed"] is False
+        assert auth["authorization_expired"] is False
+        assert auth["authorization_reusable"] is False
+        assert auth["implementation_task"] == "AION-241"
+        assert auth["formal_closeout_task"] == "AION-242"
+        assert program["active_v02_release_qualification_authorization_count"] == 1
+        assert (
+            program["active_v02_release_qualification_authorization"]
+            == "AION-240-V02RQ-0002"
+        )
+        assert program["active_v02_release_qualification_task"] == "AION-241"
     assert program["v02_release_ready"] is False
     assert staging["authorization_transaction_id"] == "AION-240-V02RQ-0002"
     assert staging["staging_qualification_implemented"] is True

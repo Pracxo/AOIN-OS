@@ -31,6 +31,7 @@ from secure_runtime_integration_final_evaluation import (
     SUCCESSOR_PROGRAM_ID,
 )
 import v02_release_qualification_foundation_operator_evaluation as aion240
+import v02_staging_qualification_operator_evaluation as aion242
 
 root = Path(os.environ["AION_REPO_ROOT"])
 program = json.loads(
@@ -43,6 +44,99 @@ auth = json.loads(
         encoding="utf-8"
     )
 )
+
+if auth.get("authorization_transaction_id") == aion242.NEXT_AUTHORIZATION_ID:
+    expected_program_state = (
+        "controlled_staging_qualification_evaluated_release_candidate_build_"
+        "authorized_not_implemented"
+    )
+    expected_limits = {
+        **aion242.POSITIVE_AION243_LIMITS,
+        **{key: 0 for key in aion242.ZERO_AION243_LIMITS},
+    }
+    for label, payload in (("program", program), ("authorization", auth)):
+        required = {
+            "program_id": aion242.PROGRAM_ID,
+            "program_state": expected_program_state,
+            "v02_release_qualification_foundation_implemented": True,
+            "v02_release_qualification_foundation_operator_evaluation_passed": True,
+            "v02_release_qualification_foundation_operator_evaluation_id": aion240.EVALUATION_ID,
+            "v02_release_qualification_foundation_operator_evaluation_decision": aion240.PASS_DECISION,
+            "controlled_staging_qualification_authorized": True,
+            "controlled_staging_qualification_implemented": True,
+            "controlled_staging_qualification_operator_evaluation_passed": True,
+            "controlled_staging_qualification_operator_evaluation_id": aion242.EVALUATION_ID,
+            "controlled_staging_qualification_operator_evaluation_decision": aion242.PASS_DECISION,
+            "active_v02_release_qualification_authorization_count": 1,
+            "active_v02_release_qualification_authorization": aion242.NEXT_AUTHORIZATION_ID,
+            "active_v02_release_qualification_task": aion242.NEXT_IMPLEMENTATION_TASK,
+            "formal_closeout_task": aion242.NEXT_FORMAL_CLOSEOUT_TASK,
+            "final_planned_task": aion242.FINAL_PLANNED_TASK,
+            "authorization_active": True,
+            "authorization_consumed": False,
+            "authorization_expired": False,
+            "authorization_reusable": False,
+            "release_candidate_artifact_build_authorized": True,
+            "release_candidate_artifact_build_implemented": False,
+            "release_candidate_created": False,
+            "release_candidate_published": False,
+            "production_runtime_authorized": False,
+            "production_deployment_enabled": False,
+            "v02_release_ready": False,
+            "v02_tag_created": False,
+            "v02_release_created": False,
+        }
+        for key, expected in required.items():
+            if payload.get(key) != expected:
+                raise SystemExit(f"{label} AION-242 mismatch {key}: {payload.get(key)!r}")
+        closed = payload.get("aion_240_authorization_closeout", {})
+        if closed.get("authorization_transaction_id") != aion242.CURRENT_AUTHORIZATION_ID:
+            raise SystemExit(f"{label} missing AION-240 closeout")
+        if closed.get("authorization_active") is not False:
+            raise SystemExit(f"{label} AION-240 closeout active flag mismatch")
+        if closed.get("authorization_consumed") is not True:
+            raise SystemExit(f"{label} AION-240 closeout consumed flag mismatch")
+        if closed.get("authorization_expired") is not True:
+            raise SystemExit(f"{label} AION-240 closeout expired flag mismatch")
+        if closed.get("authorization_reusable") is not False:
+            raise SystemExit(f"{label} AION-240 closeout reusable flag mismatch")
+        if payload.get("aion_241_record", {}).get("ci_result") != "pass":
+            raise SystemExit(f"{label} AION-241 delivery reconciliation missing")
+        limits = payload.get("resource_limits", {})
+        if isinstance(limits, dict) and isinstance(limits.get("limits"), dict):
+            limits = limits["limits"]
+        if limits != expected_limits:
+            raise SystemExit(f"{label} AION-243 resource limits mismatch")
+        if any(payload.get("prohibited_capabilities", {}).values()):
+            raise SystemExit(f"{label} has enabled prohibited capability")
+    required_auth = {
+        "program_id": aion242.PROGRAM_ID,
+        "authorization_transaction_id": aion242.NEXT_AUTHORIZATION_ID,
+        "approval_record_id": aion242.NEXT_AUTHORIZATION_ID,
+        "parent_authorization_transaction_id": aion242.CURRENT_AUTHORIZATION_ID,
+        "parent_evaluation_id": aion242.EVALUATION_ID,
+        "parent_evaluation_decision": aion242.PASS_DECISION,
+        "parent_implementation_task": aion242.IMPLEMENTATION_TASK,
+        "parent_implementation_prs": [aion242.IMPLEMENTATION_PR],
+        "parent_implementation_feature_commits": [
+            aion242.IMPLEMENTATION_COMMIT,
+            aion242.EVIDENCE_COMMIT,
+        ],
+        "parent_implementation_merge_commits": [aion242.IMPLEMENTATION_MERGE_COMMIT],
+        "parent_implementation_main_commit": aion242.IMPLEMENTATION_MERGE_COMMIT,
+        "candidate_id": "deterministic-v02-release-candidate-artifact-build-core",
+        "workstream": "v02-release-candidate-artifact-build",
+        "implementation_task": aion242.NEXT_IMPLEMENTATION_TASK,
+        "formal_closeout_task": aion242.NEXT_FORMAL_CLOSEOUT_TASK,
+        "authorization_active": True,
+        "authorization_consumed": False,
+        "authorization_expired": False,
+        "authorization_reusable": False,
+    }
+    for key, expected in required_auth.items():
+        if auth.get(key) != expected:
+            raise SystemExit(f"authorization AION-242 mismatch {key}: {auth.get(key)!r}")
+    raise SystemExit(0)
 
 if auth.get("authorization_transaction_id") == aion240.NEXT_AUTHORIZATION_ID:
     expected_program_state = (
