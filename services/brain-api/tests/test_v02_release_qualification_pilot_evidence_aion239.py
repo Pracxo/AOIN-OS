@@ -29,6 +29,13 @@ def load_json(relative: str) -> dict:
     return json.loads((REPO_ROOT / relative).read_text(encoding="utf-8"))
 
 
+def resource_limit_map(payload: dict) -> dict:
+    limits = payload["resource_limits"]
+    if isinstance(limits.get("limits"), dict):
+        return limits["limits"]
+    return limits
+
+
 def test_committed_pilot_evidence_fingerprint_and_counters_are_exact():
     evidence = json.loads(PILOT.read_text(encoding="utf-8"))
     expected = c.v02_qualification_fingerprint(
@@ -67,6 +74,10 @@ def test_ledgers_record_implemented_foundation_and_current_authorization_state()
         "v02_qualification_foundation_evaluated_controlled_staging_qualification_"
         "authorized_not_implemented"
     )
+    aion241_implemented_state = (
+        "controlled_isolated_staging_qualification_implemented_pilot_complete_pending_"
+        "closeout"
+    )
 
     for payload in (program, auth):
         assert payload["v02_release_qualification_program_authorized"] is True
@@ -84,7 +95,12 @@ def test_ledgers_record_implemented_foundation_and_current_authorization_state()
         if payload["active_v02_release_qualification_authorization"] == (
             harness.NEXT_AUTHORIZATION_ID
         ):
-            assert payload["program_state"] == post_closeout_state
+            expected_program_state = (
+                aion241_implemented_state
+                if payload.get("controlled_staging_qualification_implemented") is True
+                else post_closeout_state
+            )
+            assert payload["program_state"] == expected_program_state
             assert (
                 payload["v02_release_qualification_foundation_operator_evaluation_passed"]
                 is True
@@ -103,7 +119,9 @@ def test_ledgers_record_implemented_foundation_and_current_authorization_state()
             )
             assert payload["formal_closeout_task"] == harness.NEXT_FORMAL_CLOSEOUT_TASK
             assert payload["controlled_staging_qualification_authorized"] is True
-            assert payload["controlled_staging_qualification_implemented"] is False
+            assert payload["controlled_staging_qualification_implemented"] is (
+                payload["program_state"] == aion241_implemented_state
+            )
             closeout = payload["aion_238_authorization_closeout"]
             assert closeout["authorization_transaction_id"] == harness.CURRENT_AUTHORIZATION_ID
             assert closeout["authorization_active"] is False
@@ -123,8 +141,9 @@ def test_ledgers_record_implemented_foundation_and_current_authorization_state()
             )
             assert payload["active_v02_release_qualification_task"] == c.IMPLEMENTATION_TASK
             assert payload["formal_closeout_task"] == c.FORMAL_CLOSEOUT_TASK
+            limits = resource_limit_map(payload)
             for key in payload["zero_resource_limit_keys"]:
-                assert payload["resource_limits"][key] == 0
+                assert limits[key] == 0
         assert payload["final_planned_task"] == c.FINAL_PLANNED_TASK
         assert payload["authorization_active"] is True
         assert payload["authorization_consumed"] is False

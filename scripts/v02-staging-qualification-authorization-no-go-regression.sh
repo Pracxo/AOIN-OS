@@ -92,11 +92,14 @@ for relative in (
     "examples/v02-release-qualification/staging-qualification-authorization.json",
 ):
     payload = json.loads((root / relative).read_text(encoding="utf-8"))
+    resource_limits = payload.get("resource_limits", {})
+    if isinstance(resource_limits, dict) and isinstance(resource_limits.get("limits"), dict):
+        resource_limits = resource_limits["limits"]
     prohibited = payload.get("prohibited_capabilities", {})
     if any(prohibited.values()):
         raise SystemExit(f"prohibited staging capability enabled in {relative}")
     for key in h.ZERO_AION241_LIMITS:
-        if payload.get("resource_limits", {}).get(key) != 0:
+        if resource_limits.get(key) != 0:
             raise SystemExit(f"zero staging limit mismatch in {relative}: {key}")
     for flag in (
         "production_runtime_authorized",

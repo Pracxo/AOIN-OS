@@ -190,6 +190,20 @@ AION226_SOURCE = {
     "services/brain-api/src/aion_brain/governed_learning_memory/engagement_shadow_application.py",
 }
 
+
+def aion241_source_allowed(path: str) -> bool:
+    ledger = ROOT / "docs/v02-release-qualification/program-ledger.json"
+    if not ledger.exists():
+        return False
+    payload = json.loads(ledger.read_text(encoding="utf-8"))
+    if payload.get("controlled_staging_qualification_implemented") is not True:
+        return False
+    return path in set(payload.get("implemented_source_scope", ())) and (
+        path == "services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py"
+        or path.startswith("services/brain-api/src/aion_brain/v02_staging_qualification/")
+    )
+
+
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
     return subprocess.run(args, cwd=ROOT, text=True, capture_output=True, check=check)
 
@@ -289,6 +303,8 @@ for parts in changed_entries():
         if normalized == "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py" or normalized.startswith(
             "services/brain-api/src/aion_brain/v02_release_qualification/"
         ):
+            continue
+        if aion241_source_allowed(normalized):
             continue
         if normalized.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")

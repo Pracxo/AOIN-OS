@@ -204,6 +204,30 @@ is_prohibited_path() {
   return 1
 }
 
+aion241_is_scoped_v02_staging_qualification_path() {
+  python3 - "$1" <<'PY'
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+path = sys.argv[1]
+ledger = Path("docs/v02-release-qualification/program-ledger.json")
+if not ledger.exists():
+    raise SystemExit(1)
+payload = json.loads(ledger.read_text(encoding="utf-8"))
+if payload.get("controlled_staging_qualification_implemented") is not True:
+    raise SystemExit(1)
+scope = set(payload.get("implemented_source_scope", ()))
+allowed = path in scope and (
+    path == "services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py"
+    or path.startswith("services/brain-api/src/aion_brain/v02_staging_qualification/")
+)
+raise SystemExit(0 if allowed else 1)
+PY
+}
+
 changed_entries() {
   local base
   if base="$(comparison_base)"; then
@@ -224,6 +248,9 @@ while IFS=$'\t' read -r status path extra; do
   fi
   for changed in "$path" "${extra:-}"; do
     [[ -z "$changed" ]] && continue
+    if aion241_is_scoped_v02_staging_qualification_path "$changed"; then
+      continue
+    fi
     if is_prohibited_path "$changed"; then
       echo "ERROR: protected path changed: $changed" >&2
       exit 1

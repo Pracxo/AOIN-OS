@@ -62,6 +62,7 @@ is_allowed_path() {
 	    docs/adr/0202-final-secure-runtime-integration-evaluation-and-v02-release-qualification-program-authorization.md|\
 	    docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md|\
 	    docs/adr/0204-v02-qualification-foundation-evaluation-and-controlled-isolated-staging-qualification-authorization.md|\
+	    docs/adr/0205-controlled-isolated-local-staging-artifact-build-and-rollback-drill.md|\
     docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/project-status.md|docs/visual-brain.md|\
     docs/v02-release-qualification/*|\
     docs/release/v02-release-qualification-*|\
@@ -137,6 +138,7 @@ is_allowed_path() {
     services/brain-api/src/aion_brain/v02_staging_qualification/*.py|\
     services/brain-api/tests/test_secure_runtime_integration_final_closeout_aion238.py|\
     services/brain-api/tests/test_governed_learning_memory_no_runtime_source.py|\
+    services/brain-api/tests/test_identity_assertion_no_runtime_integration.py|\
     services/brain-api/tests/test_knowledge_epistemic_assessment_evaluation_repository_integrity.py|\
     services/brain-api/tests/test_knowledge_intelligence_program_repository_integrity.py|\
     services/brain-api/tests/test_knowledge_research_evaluation_repository_integrity.py|\
@@ -292,8 +294,11 @@ for ledger in (
     for key, expected_false in payload.get("prohibited_capabilities", {}).items():
         if expected_false is not False:
             raise SystemExit(f"{ledger} must keep {key}=false")
+    resource_limits = payload.get("resource_limits", {})
+    if isinstance(resource_limits, dict) and isinstance(resource_limits.get("limits"), dict):
+        resource_limits = resource_limits["limits"]
     for key in payload.get("zero_resource_limit_keys", []):
-        if payload["resource_limits"][key] != 0:
+        if resource_limits[key] != 0:
             raise SystemExit(f"{ledger} must keep {key}=0")
     if payload.get("v02_release_ready") is not False:
         raise SystemExit(f"{ledger} must keep v02_release_ready=false")

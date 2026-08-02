@@ -43,6 +43,28 @@ AION239_SOURCE_SCOPE = {
     "services/brain-api/src/aion_brain/v02_release_qualification/threat_model.py",
     "services/brain-api/src/aion_brain/v02_release_qualification/token_lifecycle.py",
 }
+AION241_SOURCE_SCOPE = {
+    "services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py",
+    "services/brain-api/src/aion_brain/v02_staging_qualification/__init__.py",
+    "services/brain-api/src/aion_brain/v02_staging_qualification/artifact_manifest.py",
+    "services/brain-api/src/aion_brain/v02_staging_qualification/authorization.py",
+    "services/brain-api/src/aion_brain/v02_staging_qualification/build_plan.py",
+    "services/brain-api/src/aion_brain/v02_staging_qualification/cleanup.py",
+    "services/brain-api/src/aion_brain/v02_staging_qualification/component_binding.py",
+    "services/brain-api/src/aion_brain/v02_staging_qualification/deployment_plan.py",
+    "services/brain-api/src/aion_brain/v02_staging_qualification/environment_profile.py",
+    "services/brain-api/src/aion_brain/v02_staging_qualification/evidence.py",
+    "services/brain-api/src/aion_brain/v02_staging_qualification/health_readiness.py",
+    "services/brain-api/src/aion_brain/v02_staging_qualification/identity_fixture.py",
+    "services/brain-api/src/aion_brain/v02_staging_qualification/integrity.py",
+    "services/brain-api/src/aion_brain/v02_staging_qualification/observability.py",
+    "services/brain-api/src/aion_brain/v02_staging_qualification/provenance.py",
+    "services/brain-api/src/aion_brain/v02_staging_qualification/replay_fixture.py",
+    "services/brain-api/src/aion_brain/v02_staging_qualification/rollback.py",
+    "services/brain-api/src/aion_brain/v02_staging_qualification/sbom.py",
+    "services/brain-api/src/aion_brain/v02_staging_qualification/security_validation.py",
+    "services/brain-api/src/aion_brain/v02_staging_qualification/source_snapshot.py",
+}
 
 
 def _git_ref_exists(ref: str) -> bool:
@@ -112,6 +134,14 @@ def _aion239_implemented() -> bool:
     return qualification.get("v02_release_qualification_foundation_implemented") is True
 
 
+def _aion241_implemented() -> bool:
+    try:
+        qualification = load_json("docs/v02-release-qualification/program-ledger.json")
+    except FileNotFoundError:
+        return False
+    return qualification.get("controlled_staging_qualification_implemented") is True
+
+
 def test_aion_222_runtime_source_exists_and_aion_224_source_matches_state() -> None:
     for relative in AION222_SOURCE_SCOPE:
         assert (REPO_ROOT / relative).exists(), relative
@@ -155,6 +185,8 @@ def test_aion_223_does_not_change_runtime_source_surface() -> None:
         allowed.update(AION226_SUPPORT_SCOPE)
     if _aion239_implemented():
         allowed.update(AION239_SOURCE_SCOPE)
+    if _aion241_implemented():
+        allowed.update(AION241_SOURCE_SCOPE)
     if allowed:
         assert changed <= allowed
     else:

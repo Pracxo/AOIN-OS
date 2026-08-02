@@ -42,7 +42,7 @@ def _aion239_source_paths() -> set[str]:
         (ROOT / "docs/v02-release-qualification/program-ledger.json").read_text()
     )
     if (
-        program.get("active_v02_release_qualification_task") != "AION-239"
+        program.get("active_v02_release_qualification_task") not in {"AION-239", "AION-241"}
         or program.get("v02_release_qualification_foundation_implemented") is not True
         or program.get("foundation_runtime_state")
         != "implemented_disabled_design_only_local_simulation"

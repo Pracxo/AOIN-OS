@@ -150,13 +150,22 @@ for label, payload in (("program", program), ("authorization", auth)):
             raise SystemExit(f"{label} AION-239 merge commit mismatch")
         if any(payload["prohibited_capabilities"].values()):
             raise SystemExit(f"{label} has enabled prohibited capability")
-        if payload.get("resource_limits") != payload.get("aion_241_resource_limits"):
+        resource_limits = payload.get("resource_limits", {})
+        if isinstance(resource_limits, dict) and isinstance(resource_limits.get("limits"), dict):
+            resource_limits = resource_limits["limits"]
+        aion_241_resource_limits = payload.get("aion_241_resource_limits", {})
+        if (
+            isinstance(aion_241_resource_limits, dict)
+            and isinstance(aion_241_resource_limits.get("limits"), dict)
+        ):
+            aion_241_resource_limits = aion_241_resource_limits["limits"]
+        if resource_limits != aion_241_resource_limits:
             raise SystemExit(f"{label} AION-241 resource limits mismatch")
         for key, expected in aion240.POSITIVE_AION241_LIMITS.items():
-            if payload["resource_limits"].get(key) != expected:
+            if resource_limits.get(key) != expected:
                 raise SystemExit(f"{label} AION-241 positive resource limit mismatch: {key}")
         for key in aion240.ZERO_AION241_LIMITS:
-            if payload["resource_limits"].get(key) != 0:
+            if resource_limits.get(key) != 0:
                 raise SystemExit(f"{label} AION-241 zero resource limit mismatch: {key}")
         continue
     if payload["program_state"] != c.FOUNDATION_PROGRAM_STATE:

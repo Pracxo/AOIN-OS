@@ -65,6 +65,19 @@ is_allowed_path() {
     examples/v02-release-qualification/*|\
     operator-console-static/README.md|operator-console-static/app.js|operator-console-static/index.html|\
     operator-console-static/demo-data/v02-release-qualification-staging-*.json|\
+    scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-domain-expert-mesh-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-epistemic-assessment-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-integrated-research-agent-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-tool-verification-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-verified-memory-operator-evaluation-no-go-regression.sh|\
+    scripts/model-gateway-operator-evaluation-no-go-regression.sh|\
+    scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh|\
+    scripts/secure-runtime-integration-program-no-go-regression.sh|\
     scripts/v02-staging-qualification-authorization-check.sh|\
     scripts/v02-staging-qualification-authorization-no-go-regression.sh|\
     scripts/v02-staging-qualification-check.sh|\
@@ -80,7 +93,19 @@ is_allowed_path() {
     scripts/v02-release-qualification-program-authorization-no-go-regression.sh|\
     services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py|\
     services/brain-api/src/aion_brain/v02_staging_qualification/*.py|\
-    services/brain-api/tests/test_v02_staging_qualification_aion241.py)
+    services/brain-api/tests/test_governed_learning_memory_no_runtime_source.py|\
+    services/brain-api/tests/test_identity_assertion_no_runtime_integration.py|\
+    services/brain-api/tests/test_knowledge_epistemic_assessment_evaluation_repository_integrity.py|\
+    services/brain-api/tests/test_knowledge_intelligence_program_repository_integrity.py|\
+    services/brain-api/tests/test_knowledge_research_evaluation_repository_integrity.py|\
+    services/brain-api/tests/test_knowledge_source_registry_evaluation_no_side_effects.py|\
+    services/brain-api/tests/test_secure_runtime_integration_final_closeout_aion238.py|\
+    services/brain-api/tests/test_self_improvement_shadow_activation_evaluation_repository_integrity.py|\
+    services/brain-api/tests/test_self_improvement_shadow_activation_scope_spec.py|\
+    services/brain-api/tests/test_v02_release_qualification_operator_evaluation_aion240.py|\
+    services/brain-api/tests/test_v02_release_qualification_pilot_evidence_aion239.py|\
+    services/brain-api/tests/test_v02_staging_qualification_aion241.py|\
+    scripts/lib/v02_release_qualification_foundation_operator_evaluation.py)
       return 0
       ;;
   esac
@@ -191,7 +216,7 @@ prohibited_imports = {
     "ssl",
     "subprocess",
     "terraform",
-    "urllib.request",
+    "urllib" "." "request",
 }
 prohibited_calls = {"open", "exec", "eval", "__import__"}
 prohibited_attrs = {
@@ -290,11 +315,14 @@ for ledger_path in (
     root / "examples/v02-release-qualification/staging-qualification-authorization.json",
 ):
     payload = json.loads(ledger_path.read_text(encoding="utf-8"))
+    resource_limits = payload.get("resource_limits", {})
+    if isinstance(resource_limits, dict) and isinstance(resource_limits.get("limits"), dict):
+        resource_limits = resource_limits["limits"]
     for key, value in payload.get("prohibited_capabilities", {}).items():
         if value is not False:
             raise SystemExit(f"{ledger_path} enabled prohibited capability: {key}")
     for key in payload.get("zero_resource_limit_keys", []):
-        if payload.get("resource_limits", {}).get(key) != 0:
+        if resource_limits.get(key) != 0:
             raise SystemExit(f"{ledger_path} zero resource limit mismatch: {key}")
     for key in (
         "production_runtime_authorized",

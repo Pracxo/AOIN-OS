@@ -185,6 +185,19 @@ def is_aion237_operator_console_local_runtime_path(relative: str) -> bool:
         or relative.startswith("services/brain-api/src/aion_brain/operator_console_runtime/")
     )
 
+
+def aion241_source_allowed(path: str) -> bool:
+    ledger = ROOT / "docs/v02-release-qualification/program-ledger.json"
+    if not ledger.exists():
+        return False
+    payload = json.loads(ledger.read_text(encoding="utf-8"))
+    if payload.get("controlled_staging_qualification_implemented") is not True:
+        return False
+    return path in set(payload.get("implemented_source_scope", ())) and (
+        path == "services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py"
+        or path.startswith("services/brain-api/src/aion_brain/v02_staging_qualification/")
+    )
+
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
     return subprocess.run(args, cwd=ROOT, text=True, capture_output=True, check=check)
 
@@ -298,6 +311,8 @@ for parts in changed_entries():
             "services/brain-api/src/aion_brain/v02_release_qualification/"
         ):
             continue
+        if aion241_source_allowed(normalized):
+            continue
         if any(normalized.startswith(prefix) for prefix in PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")
         if normalized not in ALLOWED_EXACT and not any(
@@ -324,6 +339,8 @@ for relative in sorted(changed_paths):
     if aion226_implemented and relative in AION226_SOURCE:
         continue
     if relative in AION225_LOCAL_PERSISTENCE_EVALUATION_PATHS:
+        continue
+    if relative == "scripts/v02-staging-qualification-local-run.py":
         continue
     if relative.startswith("services/brain-api/tests/") or not relative.endswith(".py"):
         continue

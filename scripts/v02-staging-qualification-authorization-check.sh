@@ -77,6 +77,8 @@ for payload_name, payload in (("authorization ledger", auth), ("staging example"
     if not all(prohibited.get(key) is False for key in h.PROHIBITED_AION241_CAPABILITIES):
         raise SystemExit(f"{payload_name} prohibited capabilities mismatch")
     limits = payload.get("resource_limits", {})
+    if isinstance(limits, dict) and isinstance(limits.get("limits"), dict):
+        limits = limits["limits"]
     if {key: limits.get(key) for key in h.POSITIVE_AION241_LIMITS} != h.POSITIVE_AION241_LIMITS:
         raise SystemExit(f"{payload_name} positive resource limits mismatch")
     if any(limits.get(key) != 0 for key in h.ZERO_AION241_LIMITS):

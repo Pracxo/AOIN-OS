@@ -504,6 +504,11 @@ def pilot_fingerprint_matches(api: Any, pilot: Mapping[str, Any]) -> bool:
 
 
 def source_scope_state(repo_root: Path) -> dict[str, Any]:
+    program_path = repo_root / "docs/v02-release-qualification/program-ledger.json"
+    program = load_json(program_path) if program_path.exists() else {}
+    aion241_implemented = (
+        program.get("controlled_staging_qualification_implemented") is True
+    )
     present = [path for path in EXPECTED_SOURCE_SCOPE if (repo_root / path).is_file()]
     runtime_root = repo_root / "services/brain-api/src/aion_brain/v02_release_qualification"
     actual_runtime = {
@@ -514,6 +519,11 @@ def source_scope_state(repo_root: Path) -> dict[str, Any]:
     future_source_present = [
         path for path in FUTURE_AION241_SOURCE_SCOPE if (repo_root / path).exists()
     ]
+    aion241_source_state_valid = (
+        sorted(future_source_present) == sorted(FUTURE_AION241_SOURCE_SCOPE)
+        if aion241_implemented
+        else not future_source_present
+    )
     return {
         "expected_source_scope": list(EXPECTED_SOURCE_SCOPE),
         "present_source_scope": present,
@@ -523,6 +533,8 @@ def source_scope_state(repo_root: Path) -> dict[str, Any]:
         ],
         "prohibited_source_present": prohibited_present,
         "future_aion_241_source_present": future_source_present,
+        "aion_241_source_scope_implemented": aion241_implemented,
+        "aion_241_source_scope_state_valid": aion241_source_state_valid,
         "uninstalled_runner_present": (
             repo_root / "scripts/v02-release-qualification-local-run.py"
         ).is_file(),
@@ -642,6 +654,16 @@ def evaluate(
         and authorization_ledger.get("authorization_reusable") is False
         and authorization_ledger.get("active_v02_release_qualification_authorization_count") == 1
     )
+    staging_implementation_state_valid = (
+        authorization_ledger.get("controlled_staging_qualification_implemented") is False
+        or (
+            authorization_ledger.get("controlled_staging_qualification_implemented") is True
+            and authorization_ledger.get("local_staging_pilot_completed") is True
+            and authorization_ledger.get("production_runtime_authorized") is False
+            and authorization_ledger.get("production_deployment_enabled") is False
+            and authorization_ledger.get("v02_release_ready") is False
+        )
+    )
     authorization_post_closeout = (
         authorization_ledger.get("authorization_transaction_id") == NEXT_AUTHORIZATION_ID
         and authorization_ledger.get("program_id") == PROGRAM_ID
@@ -656,7 +678,7 @@ def evaluate(
         and authorization_ledger.get("active_v02_release_qualification_authorization_count") == 1
         and authorization_ledger.get("active_v02_release_qualification_authorization") == NEXT_AUTHORIZATION_ID
         and authorization_ledger.get("controlled_staging_qualification_authorized") is True
-        and authorization_ledger.get("controlled_staging_qualification_implemented") is False
+        and staging_implementation_state_valid
         and authorization_closeout.get("authorization_transaction_id") == CURRENT_AUTHORIZATION_ID
         and authorization_closeout.get("authorization_active") is False
         and authorization_closeout.get("authorization_consumed") is True
@@ -734,7 +756,7 @@ def evaluate(
                 check("runtime_source_scope_exact", source["exact_runtime_source_scope"]),
                 check("prohibited_source_absent", not source["prohibited_source_present"], source["prohibited_source_present"]),
                 check("uninstalled_runner_present", source["uninstalled_runner_present"]),
-                check("aion_241_source_absent", not source["future_aion_241_source_present"], source["future_aion_241_source_present"]),
+                check("aion_241_source_scope_state_valid", source["aion_241_source_scope_state_valid"], source["future_aion_241_source_present"]),
             ),
         ),
         scenario(
@@ -964,7 +986,7 @@ def evaluate(
                 check("ledger_zero_effects", all_prohibited_ledgers_zero),
                 check("release_ready_false", program.get("v02_release_ready") is False and authorization_ledger.get("v02_release_ready") is False),
                 check("tag_release_false", program.get("v02_tag_created") is False and program.get("v02_release_created") is False),
-                check("no_aion_241_source", not source["future_aion_241_source_present"]),
+                check("aion_241_source_state_valid", source["aion_241_source_scope_state_valid"]),
             ),
         ),
         scenario(
@@ -1133,7 +1155,7 @@ def evaluate(
             "future_source_scope": list(FUTURE_AION241_SOURCE_SCOPE),
             "future_uninstalled_runner": "scripts/v02-staging-qualification-local-run.py",
             "future_threat_model": list(FUTURE_AION241_THREATS),
-            "implemented": False,
+            "implemented": source["aion_241_source_scope_implemented"],
         },
         "corrective_cycles": 0,
         "corrective_prs": [],
@@ -1228,8 +1250,8 @@ def validate_report(payload: Mapping[str, Any]) -> None:
         raise ValueError("aion_241_authorization_preview missing")
     if preview.get("authorization_transaction_id") != NEXT_AUTHORIZATION_ID:
         raise ValueError("next authorization id mismatch")
-    if preview.get("implemented") is not False:
-        raise ValueError("AION-241 must remain unimplemented")
+    if not isinstance(preview.get("implemented"), bool):
+        raise ValueError("AION-241 implemented marker must be boolean")
     if not all(preview.get("approved_capabilities", {}).get(key) is True for key in APPROVED_AION241_CAPABILITIES):
         raise ValueError("approved AION-241 capability mismatch")
     if not all(preview.get("prohibited_capabilities", {}).get(key) is False for key in PROHIBITED_AION241_CAPABILITIES):

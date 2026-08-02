@@ -232,6 +232,8 @@ for key, value in prohibited.items():
     if value is not False:
         raise SystemExit(f"prohibited capability not false: {key}")
 limits = auth.get("resource_limits", {})
+if isinstance(limits, dict) and isinstance(limits.get("limits"), dict):
+    limits = limits["limits"]
 for key, value in limits.items():
     if key.startswith("maximum_") and key in auth.get("zero_resource_limit_keys", []):
         if value != 0:

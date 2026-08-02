@@ -24,6 +24,13 @@ def load_json(relative: str) -> dict:
     return json.loads((REPO_ROOT / relative).read_text(encoding="utf-8"))
 
 
+def resource_limit_map(payload: dict) -> dict:
+    limits = payload["resource_limits"]
+    if isinstance(limits.get("limits"), dict):
+        return limits["limits"]
+    return limits
+
+
 def test_aion238_report_closes_sri_program_and_authorization():
     module = evaluation_module()
     report = load_json(
@@ -109,10 +116,20 @@ def test_v02_release_qualification_successor_authorization_is_exact_and_disabled
     assert auth["authorization_reusable"] is False
 
     if auth["authorization_transaction_id"] == AION240_AUTHORIZATION_ID:
-        assert program["program_state"] == (
+        post_closeout_state = (
             "v02_qualification_foundation_evaluated_controlled_staging_qualification_"
             "authorized_not_implemented"
         )
+        aion241_implemented_state = (
+            "controlled_isolated_staging_qualification_implemented_pilot_complete_pending_"
+            "closeout"
+        )
+        expected_program_state = (
+            aion241_implemented_state
+            if program.get("controlled_staging_qualification_implemented") is True
+            else post_closeout_state
+        )
+        assert program["program_state"] == expected_program_state
         assert program["active_v02_release_qualification_authorization_count"] == 1
         assert program["active_v02_release_qualification_authorization"] == (
             AION240_AUTHORIZATION_ID
@@ -174,8 +191,9 @@ def test_v02_release_qualification_successor_authorization_is_exact_and_disabled
     assert all(auth["approved_capabilities"].values())
     assert not any(auth["prohibited_capabilities"].values())
 
+    limits = resource_limit_map(auth)
     for key in auth["zero_resource_limit_keys"]:
-        assert auth["resource_limits"][key] == 0
+        assert limits[key] == 0
     for path in auth["implemented_source_scope"]:
         assert (REPO_ROOT / path).exists()
     assert (REPO_ROOT / "scripts/v02-release-qualification-local-run.py").exists()

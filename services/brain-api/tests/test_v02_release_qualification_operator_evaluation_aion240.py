@@ -79,14 +79,18 @@ def test_pilot_evidence_and_aion_239_delivery_are_reconciled():
     assert program["aion_239_record"]["task_id"] == "AION-239"
 
 
-def test_source_boundary_and_aion_241_source_absence_are_exact():
+def test_source_boundary_and_aion_241_source_state_is_exact():
     harness = load_harness()
     state = harness.source_scope_state(REPO_ROOT)
 
     assert state["missing_source_scope"] == []
     assert state["exact_runtime_source_scope"] is True
     assert state["prohibited_source_present"] == []
-    assert state["future_aion_241_source_present"] == []
+    assert state["aion_241_source_scope_implemented"] is True
+    assert sorted(state["future_aion_241_source_present"]) == sorted(
+        harness.FUTURE_AION241_SOURCE_SCOPE
+    )
+    assert state["aion_241_source_scope_state_valid"] is True
     assert state["uninstalled_runner_present"] is True
 
 
@@ -130,5 +134,5 @@ def test_authorization_closeout_when_present_is_consistent():
     assert program["active_v02_release_qualification_task"] == "AION-241"
     assert program["v02_release_ready"] is False
     assert staging["authorization_transaction_id"] == "AION-240-V02RQ-0002"
-    assert staging["staging_qualification_implemented"] is False
+    assert staging["staging_qualification_implemented"] is True
     assert not any(staging["prohibited_capabilities"].values())
