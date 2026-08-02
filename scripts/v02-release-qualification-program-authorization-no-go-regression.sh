@@ -61,6 +61,7 @@ is_allowed_path() {
     docs/adr/0202-final-secure-runtime-integration-evaluation-and-v02-release-qualification-program-authorization.md|\
     docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md|\
     docs/adr/0204-v02-qualification-foundation-evaluation-and-controlled-isolated-staging-qualification-authorization.md|\
+    docs/adr/0205-controlled-isolated-local-staging-artifact-build-and-rollback-drill.md|\
     docs/adr/README.md|\
     docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/project-status.md|docs/visual-brain.md|\
     docs/secure-runtime-integration/*|\
@@ -85,6 +86,7 @@ is_allowed_path() {
     operator-console-static/demo-data/v02-staging-artifact-boundary.json|\
     operator-console-static/demo-data/v02-staging-rollback-boundary.json|\
     operator-console-static/demo-data/v02-staging-runtime-hold.json|\
+    operator-console-static/demo-data/v02-release-qualification-staging-*.json|\
     scripts/auth-design-check.sh|\
     scripts/capability-runtime-authorization-check.sh|\
     scripts/capability-runtime-authorization-no-go-regression.sh|\
@@ -142,12 +144,27 @@ is_allowed_path() {
     scripts/v02-release-qualification-runtime-hold.sh|\
     scripts/v02-staging-qualification-authorization-check.sh|\
     scripts/v02-staging-qualification-authorization-no-go-regression.sh|\
+    scripts/v02-staging-qualification-check.sh|\
+    scripts/v02-staging-qualification-local-run.py|\
+    scripts/v02-staging-qualification-no-go-regression.sh|\
+    scripts/v02-staging-qualification-pilot-evidence-check.sh|\
     scripts/v02-staging-qualification-runtime-hold.sh|\
     scripts/lib/cognitive_architecture_governance.py|\
     scripts/lib/secure_runtime_integration_final_evaluation.py|\
     scripts/lib/v02_production_auth_authorization.py|\
     scripts/lib/v02-production-auth-scan-exclusions.sh|\
     services/brain-api/tests/secure_runtime_integration_final_evaluation_test_support.py|\
+    services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py|\
+    services/brain-api/src/aion_brain/v02_staging_qualification/*.py|\
+    services/brain-api/tests/test_governed_learning_memory_no_runtime_source.py|\
+    services/brain-api/tests/test_identity_assertion_no_runtime_integration.py|\
+    services/brain-api/tests/test_knowledge_epistemic_assessment_evaluation_repository_integrity.py|\
+    services/brain-api/tests/test_knowledge_intelligence_program_repository_integrity.py|\
+    services/brain-api/tests/test_knowledge_research_evaluation_repository_integrity.py|\
+    services/brain-api/tests/test_knowledge_source_registry_evaluation_no_side_effects.py|\
+    services/brain-api/tests/test_self_improvement_shadow_activation_evaluation_repository_integrity.py|\
+    services/brain-api/tests/test_self_improvement_shadow_activation_scope_spec.py|\
+    services/brain-api/tests/test_v02_staging_qualification_aion241.py|\
     services/brain-api/tests/test_capability_runtime_current_state_after_aion235.py|\
     services/brain-api/tests/test_model_gateway_authorization.py|\
     services/brain-api/tests/test_model_gateway_authorization_scope.py|\
@@ -172,7 +189,9 @@ is_allowed_path() {
     services/brain-api/tests/test_self_improvement_shadow_activation_evaluation_repository_integrity.py|\
     services/brain-api/tests/test_self_improvement_shadow_activation_scope_spec.py|\
     services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
+    services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py|\
     services/brain-api/src/aion_brain/v02_release_qualification/*.py|\
+    services/brain-api/src/aion_brain/v02_staging_qualification/*.py|\
     services/brain-api/tests/test_v02_release_qualification_*.py)
       return 0
       ;;
@@ -204,7 +223,9 @@ while IFS= read -r path; do
   [[ -z "$path" ]] && continue
   case "$path" in
     services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
-    services/brain-api/src/aion_brain/v02_release_qualification/*.py)
+    services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py|\
+    services/brain-api/src/aion_brain/v02_release_qualification/*.py|\
+    services/brain-api/src/aion_brain/v02_staging_qualification/*.py)
       ;;
     services/brain-api/src/aion_brain/*)
       echo "AION-239 must not modify completed runtime source: $path" >&2
@@ -255,6 +276,8 @@ for path in (
             if payload.get(key) is not False:
                 raise SystemExit(f"{path} must keep {key}=false")
         limits = payload.get("resource_limits", {})
+        if isinstance(limits, dict) and isinstance(limits.get("limits"), dict):
+            limits = limits["limits"]
         for key, value in limits.items():
             if key.startswith("maximum_") and key in {
                 "maximum_public_network_calls",

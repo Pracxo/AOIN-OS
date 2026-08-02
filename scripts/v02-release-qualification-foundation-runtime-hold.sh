@@ -74,8 +74,16 @@ for label, path in (
         for key, expected in expected_true.items():
             if payload.get(key) is not expected:
                 raise SystemExit(f"{label} runtime hold mismatch {key}: {payload.get(key)!r}")
-        if payload.get("controlled_staging_qualification_implemented") is not False:
-            raise SystemExit(f"{label} controlled staging implementation must remain absent")
+        if payload.get("controlled_staging_qualification_implemented") is True:
+            expected_state = "implemented_isolated_local_pilot_complete_pending_AION-242_closeout"
+            if payload.get("controlled_staging_qualification_state") != expected_state:
+                raise SystemExit(f"{label} controlled staging implementation state mismatch")
+            if payload.get("local_staging_pilot_completed") is not True:
+                raise SystemExit(f"{label} local staging pilot completion missing")
+            if payload.get("active_staging_resources") != 0:
+                raise SystemExit(f"{label} active staging resources must be zero")
+        elif payload.get("controlled_staging_qualification_implemented") is not False:
+            raise SystemExit(f"{label} controlled staging implementation flag mismatch")
         if payload.get("active_v02_release_qualification_task") != aion240.NEXT_IMPLEMENTATION_TASK:
             raise SystemExit(f"{label} active task mismatch")
         if payload.get("formal_closeout_task") != aion240.NEXT_FORMAL_CLOSEOUT_TASK:

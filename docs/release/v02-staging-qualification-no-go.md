@@ -1,3 +1,5 @@
-# v0.2 Staging Qualification No-Go
+# AION-241 V02 Staging Qualification No Go
 
-AION-240 creates no AION-241 source, build, deployment, rollback execution, release candidate, v0.2 tag or release.
+Lists the no-go conditions enforced by AION-241 gates, including runtime impurity, Docker command escape, registry activity, public network, production deployment and release publication.
+
+AION-240-V02RQ-0002 remains active for AION-242 closeout. AION-243 remains unauthorized. v0.2 remains unreleased.

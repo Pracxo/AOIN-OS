@@ -1,5 +1,5 @@
-# v0.2 Staging Qualification Checklist
+# AION-241 V02 Staging Qualification Checklist
 
-- [x] AION-240 authorization created.
-- [ ] AION-241 implementation not started in this task.
-- [ ] AION-242 evaluation pending.
+Checklist for implementation, pilot, evidence, validation, PR, CI, merge and cleanup.
+
+AION-240-V02RQ-0002 remains active for AION-242 closeout. AION-243 remains unauthorized. v0.2 remains unreleased.

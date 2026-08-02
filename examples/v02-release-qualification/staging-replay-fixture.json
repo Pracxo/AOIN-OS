@@ -1,0 +1,12 @@
+{
+  "assertion_fingerprint": "399ef6b7e033497a3d013bfced594ba46ff73fbe63d676f3ff4cf7e4c5e4d2b8",
+  "changed_replay_rejected": true,
+  "database_writes": 0,
+  "first_verification_accepted": true,
+  "fixture_id": "AION-241-replay-fixture",
+  "persistent_files": 0,
+  "replay_fixture_fingerprint": "6bfde60f3ac491e384f5593a3ed335c31fc64658679e57a4a2d8769231cc7ed5",
+  "replay_record_retained": false,
+  "schema_version": "aion-v02-staging-replay-fixture/v1",
+  "second_use_rejected": true
+}

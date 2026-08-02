@@ -1,0 +1,17 @@
+{
+  "active_run_owned_containers": 0,
+  "active_run_owned_images": 0,
+  "active_run_owned_networks": 0,
+  "active_run_owned_volumes": 0,
+  "cleanup_id": "AION-241-staging-cleanup",
+  "cleanup_result_fingerprint": "a31fab2e43f4fece6bdf90cc803a4ba2a6e54501b795b58f6475674092676955",
+  "containers_removed": 5,
+  "images_removed": 2,
+  "network_removed": true,
+  "pre_existing_resources_changed": 0,
+  "schema_version": "aion-v02-staging-cleanup/v1",
+  "status": "complete",
+  "temporary_files_removed": true,
+  "temporary_files_retained": 0,
+  "volumes_removed": 0
+}

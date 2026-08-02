@@ -106,6 +106,19 @@ PROHIBITED_IMPORT_ROOTS = {
 PROHIBITED_CALLS = {"eval", "exec", "__import__", "compile"}
 
 
+def aion241_source_allowed(path: str) -> bool:
+    ledger = ROOT / "docs/v02-release-qualification/program-ledger.json"
+    if not ledger.exists():
+        return False
+    payload = json.loads(ledger.read_text(encoding="utf-8"))
+    if payload.get("controlled_staging_qualification_implemented") is not True:
+        return False
+    return path in set(payload.get("implemented_source_scope", ())) and (
+        path == "services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py"
+        or path.startswith("services/brain-api/src/aion_brain/v02_staging_qualification/")
+    )
+
+
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
     return subprocess.run(args, cwd=ROOT, capture_output=True, text=True, check=check)
 
@@ -227,6 +240,8 @@ for parts in changed_entries():
         if path == "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py" or path.startswith(
             "services/brain-api/src/aion_brain/v02_release_qualification/"
         ):
+            continue
+        if aion241_source_allowed(path):
             continue
         if path.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/dependency path changed: {path}")

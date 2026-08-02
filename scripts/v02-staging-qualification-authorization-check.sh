@@ -77,6 +77,8 @@ for payload_name, payload in (("authorization ledger", auth), ("staging example"
     if not all(prohibited.get(key) is False for key in h.PROHIBITED_AION241_CAPABILITIES):
         raise SystemExit(f"{payload_name} prohibited capabilities mismatch")
     limits = payload.get("resource_limits", {})
+    if isinstance(limits, dict) and isinstance(limits.get("limits"), dict):
+        limits = limits["limits"]
     if {key: limits.get(key) for key in h.POSITIVE_AION241_LIMITS} != h.POSITIVE_AION241_LIMITS:
         raise SystemExit(f"{payload_name} positive resource limits mismatch")
     if any(limits.get(key) != 0 for key in h.ZERO_AION241_LIMITS):
@@ -90,13 +92,15 @@ if program.get("active_v02_release_qualification_task") != h.NEXT_IMPLEMENTATION
     raise SystemExit("active v0.2 qualification task mismatch")
 if program.get("formal_closeout_task") != h.NEXT_FORMAL_CLOSEOUT_TASK:
     raise SystemExit("formal closeout task mismatch")
-for future in h.FUTURE_AION241_SOURCE_SCOPE:
-    if (root / future).exists():
-        raise SystemExit(f"AION-241 source exists before implementation: {future}")
-if (root / "scripts/v02-staging-qualification-local-run.py").exists():
-    raise SystemExit("AION-241 runner exists before implementation")
+for relative in h.FUTURE_AION241_SOURCE_SCOPE:
+    path = root / relative
+    if path.exists() and not path.is_file():
+        raise SystemExit(f"AION-241 source scope path is not a file: {relative}")
+if (root / "scripts/v02-staging-qualification-local-run.py").exists() and not (
+    root / "scripts/v02-staging-qualification-local-run.py"
+).is_file():
+    raise SystemExit("AION-241 runner path is not a file")
 for flag in (
-    "controlled_staging_qualification_implemented",
     "production_runtime_authorized",
     "production_deployment_enabled",
     "release_candidate_creation_enabled",
@@ -106,6 +110,12 @@ for flag in (
 ):
     if program.get(flag) is not False:
         raise SystemExit(f"program must keep {flag}=false")
+if program.get("controlled_staging_qualification_implemented") is True:
+    expected_state = "implemented_isolated_local_pilot_complete_pending_AION-242_closeout"
+    if program.get("controlled_staging_qualification_state") != expected_state:
+        raise SystemExit("AION-241 implementation state mismatch")
+elif program.get("controlled_staging_qualification_implemented") is not False:
+    raise SystemExit("controlled staging implementation flag must be boolean")
 PY
 
 aion_confirm_immutable_v01_tag_history >/dev/null

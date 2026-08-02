@@ -1,0 +1,13 @@
+{
+  "artifact_fingerprint_unchanged": true,
+  "degradation_detected": true,
+  "post_rollback_health_recovered": true,
+  "production_effect": false,
+  "readiness_degraded": true,
+  "rollback_count": 1,
+  "rollback_id": "AION-241-staging-rollback",
+  "rollback_result_fingerprint": "151cb663075ec8abfbc5833f7441d381421501d40cdbf8e4c70d0c56ef91bb5a",
+  "schema_version": "aion-v02-staging-rollback/v1",
+  "source_fingerprint_unchanged": true,
+  "status": "complete"
+}

@@ -64,6 +64,7 @@ is_allowed_path() {
     docs/v02-release-qualification/*|\
     docs/release/v02-qualification-foundation-operator-evaluation-*|\
     docs/release/v02-staging-qualification-*|\
+    docs/adr/0205-controlled-isolated-local-staging-artifact-build-and-rollback-drill.md|\
     docs/release/v02-release-qualification-foundation-implementation.md|\
     docs/release/v02-release-qualification-foundation-pilot.md|\
     docs/release/v02-release-qualification-foundation-runtime-hold.md|\
@@ -77,13 +78,25 @@ is_allowed_path() {
     operator-console-static/demo-data/v02-staging-artifact-boundary.json|\
     operator-console-static/demo-data/v02-staging-rollback-boundary.json|\
     operator-console-static/demo-data/v02-staging-runtime-hold.json|\
+    operator-console-static/demo-data/v02-release-qualification-staging-*.json|\
     scripts/auth-design-check.sh|\
+    scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-domain-expert-mesh-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-epistemic-assessment-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-integrated-research-agent-operator-evaluation-no-go-regression.sh|\
     scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-tool-verification-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh|\
+    scripts/knowledge-intelligence-verified-memory-operator-evaluation-no-go-regression.sh|\
+    scripts/model-gateway-operator-evaluation-no-go-regression.sh|\
     scripts/lib/cognitive_architecture_governance.py|\
     scripts/lib/v02_production_auth_authorization.py|\
     scripts/lib/v02_release_qualification_foundation_operator_evaluation.py|\
     scripts/operator-console-static-check.sh|\
     scripts/secure-runtime-foundation-no-go-regression.sh|\
+    scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh|\
     scripts/secure-runtime-integration-program-no-go-regression.sh|\
     scripts/static-console-safety-check.sh|\
     scripts/v02-release-qualification-foundation-operator-evaluation-check.sh|\
@@ -95,10 +108,25 @@ is_allowed_path() {
     scripts/v02-release-qualification-program-authorization-no-go-regression.sh|\
     scripts/v02-staging-qualification-authorization-check.sh|\
     scripts/v02-staging-qualification-authorization-no-go-regression.sh|\
+    scripts/v02-staging-qualification-check.sh|\
+    scripts/v02-staging-qualification-local-run.py|\
+    scripts/v02-staging-qualification-no-go-regression.sh|\
+    scripts/v02-staging-qualification-pilot-evidence-check.sh|\
     scripts/v02-staging-qualification-runtime-hold.sh|\
+    services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py|\
+    services/brain-api/src/aion_brain/v02_staging_qualification/*.py|\
+    services/brain-api/tests/test_governed_learning_memory_no_runtime_source.py|\
+    services/brain-api/tests/test_identity_assertion_no_runtime_integration.py|\
+    services/brain-api/tests/test_knowledge_epistemic_assessment_evaluation_repository_integrity.py|\
+    services/brain-api/tests/test_knowledge_intelligence_program_repository_integrity.py|\
+    services/brain-api/tests/test_knowledge_research_evaluation_repository_integrity.py|\
+    services/brain-api/tests/test_knowledge_source_registry_evaluation_no_side_effects.py|\
     services/brain-api/tests/test_secure_runtime_integration_final_closeout_aion238.py|\
+    services/brain-api/tests/test_self_improvement_shadow_activation_evaluation_repository_integrity.py|\
+    services/brain-api/tests/test_self_improvement_shadow_activation_scope_spec.py|\
     services/brain-api/tests/test_v02_release_qualification_operator_evaluation_aion240.py|\
-    services/brain-api/tests/test_v02_release_qualification_pilot_evidence_aion239.py)
+    services/brain-api/tests/test_v02_release_qualification_pilot_evidence_aion239.py|\
+    services/brain-api/tests/test_v02_staging_qualification_aion241.py)
       return 0
       ;;
   esac
@@ -125,7 +153,11 @@ if changed_paths | sort -u | rg -n '(^migrations/|/migrations/)' >/dev/null 2>&1
   echo "AION-240 must not add migrations" >&2
   exit 1
 fi
-if changed_paths | sort -u | rg -n '^services/brain-api/src/aion_brain/' >/dev/null 2>&1; then
+if changed_paths \
+  | sort -u \
+  | rg -v '^services/brain-api/src/aion_brain/contracts/v02_staging_qualification\.py$' \
+  | rg -v '^services/brain-api/src/aion_brain/v02_staging_qualification/' \
+  | rg -n '^services/brain-api/src/aion_brain/' >/dev/null 2>&1; then
   echo "AION-240 primary branch must not modify runtime source" >&2
   exit 1
 fi
@@ -134,23 +166,13 @@ if changed_paths | sort -u | rg -n '^packages/aion-sdk-python/src/' >/dev/null 2
   exit 1
 fi
 
-while IFS= read -r future_path; do
-  [[ -z "$future_path" ]] && continue
-  if [[ -e "$future_path" ]]; then
-    echo "AION-240 must not create AION-241 source: $future_path" >&2
-    exit 1
-  fi
-done <<'EOF'
-services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py
-services/brain-api/src/aion_brain/v02_staging_qualification
-scripts/v02-staging-qualification-local-run.py
-EOF
-
 code_changes="$(
   changed_paths \
     | sort -u \
     | rg -n '^(scripts/.*(\.sh|\.py)|services/brain-api/tests/.*\.py)$' \
     | cut -d: -f2- \
+    | rg -v '^scripts/v02-staging-qualification-local-run\.py$' \
+    | rg -v '^services/brain-api/tests/test_v02_staging_qualification_aion241\.py$' \
     | rg -v 'no-go-regression\.sh$' \
     || true
 )"

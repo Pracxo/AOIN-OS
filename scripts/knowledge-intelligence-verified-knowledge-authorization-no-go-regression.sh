@@ -10,7 +10,7 @@ aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
 export AION_REPO_ROOT="$ROOT_DIR"
 "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
-import os, subprocess
+import json, os, subprocess
 from pathlib import Path
 ROOT = Path(os.environ["AION_REPO_ROOT"])
 EXPECTED_TAG = "105fe29348160a2218ac095cfffadcb6f234421f"
@@ -79,6 +79,18 @@ AION226_SOURCE = {
     "services/brain-api/src/aion_brain/governed_learning_memory/engagement_shadow_application.py",
 }
 
+def aion241_source_allowed(path: str) -> bool:
+    ledger = ROOT / "docs/v02-release-qualification/program-ledger.json"
+    if not ledger.exists():
+        return False
+    payload = json.loads(ledger.read_text(encoding="utf-8"))
+    if payload.get("controlled_staging_qualification_implemented") is not True:
+        return False
+    return path in set(payload.get("implemented_source_scope", ())) and (
+        path == "services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py"
+        or path.startswith("services/brain-api/src/aion_brain/v02_staging_qualification/")
+    )
+
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]: return subprocess.run(args, cwd=ROOT, text=True, capture_output=True, check=check)
 def ref_exists(ref: str) -> bool: return run(["git", "rev-parse", "--verify", "--quiet", ref], check=False).returncode == 0
 def comparison_base() -> str | None:
@@ -116,6 +128,7 @@ for parts in changed_entries():
         if normalized == "services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime.py" or normalized.startswith("services/brain-api/src/aion_brain/capability_runtime/"): continue
         if normalized == "services/brain-api/src/aion_brain/contracts/operator_console_integration.py" or normalized.startswith("services/brain-api/src/aion_brain/operator_console_runtime/"): continue
         if normalized == "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py" or normalized.startswith("services/brain-api/src/aion_brain/v02_release_qualification/"): continue
+        if aion241_source_allowed(normalized): continue
         if any(normalized.startswith(prefix) for prefix in PROHIBITED_PREFIXES): raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")
         if normalized not in ALLOWED_EXACT and not any(normalized.startswith(prefix) for prefix in ALLOWED_PREFIXES): raise SystemExit(f"path outside AION-217 scope: {normalized}")
 for relative in run(["git", "ls-files"]).stdout.splitlines():

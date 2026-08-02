@@ -49,10 +49,17 @@ if auth.get("authorization_transaction_id") == aion240.NEXT_AUTHORIZATION_ID:
         "v02_qualification_foundation_evaluated_controlled_staging_qualification_"
         "authorized_not_implemented"
     )
+    aion241_final_state = (
+        "controlled_isolated_staging_qualification_implemented_pilot_complete_"
+        "pending_closeout"
+    )
+    aion241_controlled_state = "implemented_isolated_local_pilot_complete_pending_AION-242_closeout"
     for label, payload in (("program", program), ("authorization", auth)):
+        if payload.get("program_state") not in {expected_program_state, aion241_final_state}:
+            raise SystemExit(f"{label} post-closeout program_state mismatch")
+        aion241_complete = payload.get("program_state") == aion241_final_state
         required = {
             "program_id": aion240.PROGRAM_ID,
-            "program_state": expected_program_state,
             "v02_release_qualification_foundation_implemented": True,
             "v02_release_qualification_foundation_operator_evaluation_passed": True,
             "v02_release_qualification_foundation_operator_evaluation_id": aion240.EVALUATION_ID,
@@ -62,7 +69,7 @@ if auth.get("authorization_transaction_id") == aion240.NEXT_AUTHORIZATION_ID:
             "active_v02_release_qualification_task": aion240.NEXT_IMPLEMENTATION_TASK,
             "formal_closeout_task": aion240.NEXT_FORMAL_CLOSEOUT_TASK,
             "controlled_staging_qualification_authorized": True,
-            "controlled_staging_qualification_implemented": False,
+            "controlled_staging_qualification_implemented": aion241_complete,
             "production_runtime_authorized": False,
             "production_deployment_enabled": False,
             "v02_release_candidate_created": False,
@@ -73,6 +80,23 @@ if auth.get("authorization_transaction_id") == aion240.NEXT_AUTHORIZATION_ID:
         for key, expected in required.items():
             if payload.get(key) != expected:
                 raise SystemExit(f"{label} post-closeout mismatch {key}: {payload.get(key)!r}")
+        if aion241_complete:
+            final_required = {
+                "controlled_staging_qualification_state": aion241_controlled_state,
+                "local_staging_pilot_completed": True,
+                "offline_local_build_completed": True,
+                "local_staging_artifact_created": True,
+                "local_sbom_created": True,
+                "local_provenance_created": True,
+                "isolated_staging_deployment_completed": True,
+                "staging_security_validation_completed": True,
+                "staging_rollback_drill_completed": True,
+                "staging_cleanup_completed": True,
+                "active_staging_resources": 0,
+            }
+            for key, expected in final_required.items():
+                if payload.get(key) != expected:
+                    raise SystemExit(f"{label} AION-241 final mismatch {key}: {payload.get(key)!r}")
         closed = payload.get("aion_238_authorization_closeout", {})
         if closed.get("authorization_transaction_id") != aion240.CURRENT_AUTHORIZATION_ID:
             raise SystemExit(f"{label} missing AION-238 closeout")
@@ -208,6 +232,8 @@ for key, value in prohibited.items():
     if value is not False:
         raise SystemExit(f"prohibited capability not false: {key}")
 limits = auth.get("resource_limits", {})
+if isinstance(limits, dict) and isinstance(limits.get("limits"), dict):
+    limits = limits["limits"]
 for key, value in limits.items():
     if key.startswith("maximum_") and key in auth.get("zero_resource_limit_keys", []):
         if value != 0:

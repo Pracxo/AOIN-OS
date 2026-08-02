@@ -1,0 +1,129 @@
+{
+  "authorization_transaction_id": "AION-240-V02RQ-0002",
+  "payload": {
+    "extracted_file_count": 20,
+    "file_manifest_fingerprint": "8b9ee3c0e54407215fdd784d003505440558eb0566c4aadbe9065cb9dae4b140",
+    "file_records": [
+      {
+        "byte_count": 72,
+        "relative_path": "services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py",
+        "sha256": "e7c636c5646062d08da84ab80d994bbe6e322827495f65514efa397d6f7782a1"
+      },
+      {
+        "byte_count": 71,
+        "relative_path": "services/brain-api/src/aion_brain/v02_staging_qualification/__init__.py",
+        "sha256": "4dca02b8e6c849fc43a39007655db431ce07fdedcf8f5d3cf438424a920dbd3e"
+      },
+      {
+        "byte_count": 76,
+        "relative_path": "services/brain-api/src/aion_brain/v02_staging_qualification/authorization.py",
+        "sha256": "63c3401c8dc4e0ce9f9d5552756d610c729417b415535fc03acb5e882c361f57"
+      },
+      {
+        "byte_count": 80,
+        "relative_path": "services/brain-api/src/aion_brain/v02_staging_qualification/component_binding.py",
+        "sha256": "c119c5836fb895b305b13b817a6da5bdb84a9ac13c08cc58cf13732922b0903f"
+      },
+      {
+        "byte_count": 78,
+        "relative_path": "services/brain-api/src/aion_brain/v02_staging_qualification/source_snapshot.py",
+        "sha256": "936713d69fbd173993fe8d83857c35a2f5650b0c95d19fe1e0dd1753088bb37a"
+      },
+      {
+        "byte_count": 73,
+        "relative_path": "services/brain-api/src/aion_brain/v02_staging_qualification/build_plan.py",
+        "sha256": "eeedcad19a118e954ed5b88293891ff9d63d30bc61b97d632f931fa77dc1d9d0"
+      },
+      {
+        "byte_count": 80,
+        "relative_path": "services/brain-api/src/aion_brain/v02_staging_qualification/artifact_manifest.py",
+        "sha256": "e8d9aab0bc1858c6f76b607b91e20589e5d742ce8aea1c6277e6f17670dd7ec9"
+      },
+      {
+        "byte_count": 67,
+        "relative_path": "services/brain-api/src/aion_brain/v02_staging_qualification/sbom.py",
+        "sha256": "302cddc2f18bf7fc95b986cc80ed2b749781f41c8c486274f0317d87d00053cf"
+      },
+      {
+        "byte_count": 73,
+        "relative_path": "services/brain-api/src/aion_brain/v02_staging_qualification/provenance.py",
+        "sha256": "ad4d4607e3f23b05f84af3d2f3af9f504c75b90381a7256d6697f1dfe030934a"
+      },
+      {
+        "byte_count": 82,
+        "relative_path": "services/brain-api/src/aion_brain/v02_staging_qualification/environment_profile.py",
+        "sha256": "acb4dc9931167a5c7cf4c3e5548370b0babaae05bc4d64fd18fa2e1f0ad84143"
+      },
+      {
+        "byte_count": 79,
+        "relative_path": "services/brain-api/src/aion_brain/v02_staging_qualification/identity_fixture.py",
+        "sha256": "b8035be1486709c01242c350d8bd85ba071218cc991ab0ef9bde25bd0fb1fb59"
+      },
+      {
+        "byte_count": 77,
+        "relative_path": "services/brain-api/src/aion_brain/v02_staging_qualification/replay_fixture.py",
+        "sha256": "15e37acf95c269aeca07e9dc7e413899ccfc6f2725496aac89103833b482425e"
+      },
+      {
+        "byte_count": 78,
+        "relative_path": "services/brain-api/src/aion_brain/v02_staging_qualification/deployment_plan.py",
+        "sha256": "fd5a0b8f696cc4c17d06d9ababab8e741500be534cd19d6c031df12d2a0a4629"
+      },
+      {
+        "byte_count": 79,
+        "relative_path": "services/brain-api/src/aion_brain/v02_staging_qualification/health_readiness.py",
+        "sha256": "04981c64d4868af3ada2cf5c2ccff6c764df6c8eb1f50c5241978875feed26f9"
+      },
+      {
+        "byte_count": 76,
+        "relative_path": "services/brain-api/src/aion_brain/v02_staging_qualification/observability.py",
+        "sha256": "9d4da1ee477653e2b3cf666bcfda1c697dd766df2e8ce5ef88b01d2fdc100eb9"
+      },
+      {
+        "byte_count": 82,
+        "relative_path": "services/brain-api/src/aion_brain/v02_staging_qualification/security_validation.py",
+        "sha256": "0b48859279e20a2a4fb89ad33ea050e409d804875e229008198f1e6e7893c546"
+      },
+      {
+        "byte_count": 71,
+        "relative_path": "services/brain-api/src/aion_brain/v02_staging_qualification/rollback.py",
+        "sha256": "b794360d32518d12afc2d539e60a3625f498efa7349b0654cb23e9269b41c2fd"
+      },
+      {
+        "byte_count": 70,
+        "relative_path": "services/brain-api/src/aion_brain/v02_staging_qualification/cleanup.py",
+        "sha256": "3211c09e00efa29f2114187efdce594728365bd94cd1a753b454d49b49bb0c16"
+      },
+      {
+        "byte_count": 72,
+        "relative_path": "services/brain-api/src/aion_brain/v02_staging_qualification/integrity.py",
+        "sha256": "0028ecbde834311fd4bf5b1d33a6c8dd3840a24ca98da29776ee169e120ee5b2"
+      },
+      {
+        "byte_count": 71,
+        "relative_path": "services/brain-api/src/aion_brain/v02_staging_qualification/evidence.py",
+        "sha256": "325e4517d726129a60c8efb9c9f1a4fc192a807a8080b998cd6d4a632a9e13af"
+      }
+    ],
+    "git_archive_fingerprint": "edfa8a41c1c501bc9265381e741d34ab273d5323f7d134d3e30459e96546c16d",
+    "git_tree_sha": "1b9655e3c215eeb86046eada3f0ecdc1b64b230ff89ffe79a097a4a935d8532a",
+    "schema_version": "aion-v02-staging-source-snapshot/v1",
+    "source_commit": "9f6b899f84ef8d9a53598871dbbd5b0cb3bacb38",
+    "source_snapshot_read_only": true,
+    "source_tree_fingerprint": "525be2ecd76133838e353093ef516bbd2443650bae15455072dc7fa98bfe0851",
+    "total_byte_count": 1507
+  },
+  "production_deployment_enabled": false,
+  "production_runtime_authorized": false,
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "release_candidate_creation_enabled": false,
+  "synthetic": true,
+  "task_id": "AION-241",
+  "v02_release_created": false,
+  "v02_release_ready": false,
+  "v02_tag_created": false,
+  "view_id": "v02-release-qualification-staging-source-snapshot"
+}

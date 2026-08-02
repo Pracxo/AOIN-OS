@@ -1598,3 +1598,16 @@ AION-239 adds static-only evidence for the disabled v0.2 production-readiness qu
 ## AION-240 Qualification Evaluation And Staging Authorization Panels
 
 AION-240 adds static read-only demo panels for the foundation operator evaluation and the controlled isolated staging qualification authorization. The panels render local JSON only and add no build, deployment, credential, token, registry, network, release-candidate, tag or release controls.
+
+## AION-241 Staging Qualification Evidence
+
+AION-241 adds read-only static evidence views for authorization, source
+snapshot, build plan, artifact manifest, SBOM, provenance, reproducibility,
+environment, identity, replay, deployment, health, readiness, security
+validation, observability, degradation, rollback, cleanup, pilot evidence and
+runtime hold.
+
+These views only render committed JSON. They do not invoke Docker, run the
+pilot, create artifacts, expose deployment controls, issue credentials or
+tokens, call a registry, call an identity provider, publish a release
+candidate, create a tag or create a release.

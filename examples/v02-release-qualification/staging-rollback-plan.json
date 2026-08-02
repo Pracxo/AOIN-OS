@@ -1,0 +1,24 @@
+{
+  "degradation_target": "redis",
+  "production_rollback": false,
+  "rollback_id": "AION-241-staging-rollback",
+  "rollback_plan_fingerprint": "683f05c1b69f947b5d458000ea460e2166c10f72eb4dde607ce2880de767c7be",
+  "schema_version": "aion-v02-staging-rollback/v1",
+  "steps": [
+    {
+      "action": "stop_redis",
+      "run_owned_resource_only": true,
+      "step_id": "AION-241-RB-001"
+    },
+    {
+      "action": "start_redis",
+      "run_owned_resource_only": true,
+      "step_id": "AION-241-RB-002"
+    },
+    {
+      "action": "verify_ready",
+      "run_owned_resource_only": true,
+      "step_id": "AION-241-RB-003"
+    }
+  ]
+}

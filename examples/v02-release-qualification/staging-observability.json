@@ -1,0 +1,41 @@
+{
+  "events": [
+    {
+      "count": 3,
+      "event_fingerprint": "cbb40eb3d5c1f5b4aa9cf16e86382c1f01a72f21b72bcf9c2e830d1db6e26d24",
+      "event_id": "AION-241-OBS-001",
+      "event_kind": "health-check-count"
+    },
+    {
+      "count": 3,
+      "event_fingerprint": "55f3b053d0c84986bc39dafb5039c436936458012ff320a8a6d8767151f5ce31",
+      "event_id": "AION-241-OBS-002",
+      "event_kind": "readiness-transition-count"
+    },
+    {
+      "count": 12,
+      "event_fingerprint": "31fa42a3cca9a855dcd9d6d2d1964bfb0f2194945a73be3c5376b01437a3ec65",
+      "event_id": "AION-241-OBS-003",
+      "event_kind": "security-finding-count"
+    },
+    {
+      "count": 1,
+      "event_fingerprint": "92c79a81ab512a36c89e9dc77563331ac3aa690456b86b6f003bd97624255204",
+      "event_id": "AION-241-OBS-004",
+      "event_kind": "rollback-duration-count"
+    }
+  ],
+  "external_log_exports": 0,
+  "external_metric_exports": 0,
+  "external_trace_exports": 0,
+  "local_observability_records_created": 4,
+  "log_projection": {
+    "log_line_count": 0,
+    "log_projection_fingerprint": "20e498e44da5d096826b0c58c3afd40d08c1116eb0b5f8b827aecfd8238332fb",
+    "protected_material_found": false,
+    "raw_logs_retained": false,
+    "safe_log_fingerprint": "fe94e848d0ade4b077c844aba1148dd46a87da0cbc246df9424c80aca11b11e5"
+  },
+  "observability_snapshot_fingerprint": "18876b453907c45ca1626cebcef4894cd95dc057b9681de74eeca558a0fc9278",
+  "schema_version": "aion-v02-staging-observability/v1"
+}

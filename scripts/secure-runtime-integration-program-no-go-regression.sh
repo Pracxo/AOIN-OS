@@ -176,10 +176,15 @@ is_allowed_path() {
 	    scripts/lib/model_gateway_operator_evaluation.py|\
 	    scripts/lib/capability_runtime_operator_evaluation.py|\
 		    scripts/lib/secure_runtime_integration_final_evaluation.py|\
-		    scripts/lib/v02_release_qualification_foundation_operator_evaluation.py|\
-	    scripts/lib/v02_production_auth_authorization.py|\
-	    scripts/lib/v02-production-auth-scan-exclusions.sh|\
-	    services/brain-api/tests/secure_runtime_integration_final_evaluation_test_support.py|\
+			    scripts/lib/v02_release_qualification_foundation_operator_evaluation.py|\
+		    scripts/lib/v02_production_auth_authorization.py|\
+		    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+		    docs/adr/0205-controlled-isolated-local-staging-artifact-build-and-rollback-drill.md|\
+		    docs/v02-release-qualification/*|\
+		    docs/release/v02-staging-qualification-*|\
+		    examples/v02-release-qualification/*|\
+		    operator-console-static/demo-data/v02-release-qualification-staging-*.json|\
+		    services/brain-api/tests/secure_runtime_integration_final_evaluation_test_support.py|\
 	    scripts/production-auth-actor-context-trust-boundary-no-go-regression.sh|\
 	    scripts/production-auth-core-no-go-regression.sh|\
 	    scripts/production-auth-core-stabilization-no-go-regression.sh|\
@@ -196,10 +201,23 @@ is_allowed_path() {
 	    scripts/v02-offline-identity-assertion-verification-authorization-no-go-regression.sh|\
 	    scripts/v02-production-auth-request-boundary-authorization-check.sh|\
 	    scripts/v02-production-auth-request-identity-stabilization-authorization-check.sh|\
-	    scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh|\
-	    scripts/v02-release-qualification-local-run.py|\
-	    scripts/governed-learning-memory-program-final-evaluation-no-go-regression.sh|\
-    services/brain-api/src/aion_brain/contracts/secure_runtime.py|\
+		    scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh|\
+		    scripts/v02-release-qualification-local-run.py|\
+		    scripts/v02-staging-qualification-local-run.py|\
+		    scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh|\
+		    scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh|\
+		    scripts/knowledge-intelligence-domain-expert-mesh-operator-evaluation-no-go-regression.sh|\
+		    scripts/knowledge-intelligence-epistemic-assessment-operator-evaluation-no-go-regression.sh|\
+		    scripts/knowledge-intelligence-integrated-research-agent-operator-evaluation-no-go-regression.sh|\
+		    scripts/governed-learning-memory-program-final-evaluation-no-go-regression.sh|\
+		    scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh|\
+		    scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh|\
+		    scripts/knowledge-intelligence-tool-verification-authorization-no-go-regression.sh|\
+		    scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh|\
+		    scripts/knowledge-intelligence-verified-memory-operator-evaluation-no-go-regression.sh|\
+		    scripts/model-gateway-operator-evaluation-no-go-regression.sh|\
+		    scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh|\
+	    services/brain-api/src/aion_brain/contracts/secure_runtime.py|\
     services/brain-api/src/aion_brain/secure_runtime/__init__.py|\
     services/brain-api/src/aion_brain/secure_runtime/authorization.py|\
     services/brain-api/src/aion_brain/secure_runtime/identity_binding.py|\
@@ -225,19 +243,23 @@ is_allowed_path() {
 	    services/brain-api/tests/test_operator_console_integration_*.py|\
 	    services/brain-api/tests/test_operator_console_integrated_*.py|\
 	    services/brain-api/tests/test_operator_platform_*.py|\
-	    services/brain-api/tests/test_static_console_ui_release_gate.py|\
-	    services/brain-api/tests/test_governed_learning_memory_no_runtime_source.py|\
-	    services/brain-api/tests/test_knowledge_epistemic_assessment_evaluation_repository_integrity.py|\
-	    services/brain-api/tests/test_knowledge_intelligence_program_repository_integrity.py|\
+		    services/brain-api/tests/test_static_console_ui_release_gate.py|\
+		    services/brain-api/tests/test_governed_learning_memory_no_runtime_source.py|\
+		    services/brain-api/tests/test_identity_assertion_no_runtime_integration.py|\
+		    services/brain-api/tests/test_knowledge_epistemic_assessment_evaluation_repository_integrity.py|\
+		    services/brain-api/tests/test_knowledge_intelligence_program_repository_integrity.py|\
 	    services/brain-api/tests/test_knowledge_research_evaluation_repository_integrity.py|\
 	    services/brain-api/tests/test_knowledge_source_registry_evaluation_no_side_effects.py|\
 	    services/brain-api/tests/test_self_improvement_shadow_activation_evaluation_repository_integrity.py|\
 	    services/brain-api/tests/test_self_improvement_shadow_activation_scope_spec.py|\
 	    services/brain-api/tests/test_model_gateway_*.py|\
-	    services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
-	    services/brain-api/src/aion_brain/v02_release_qualification/*|\
-	    services/brain-api/tests/test_v02_release_qualification_*.py)
-      return 0
+		    services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
+		    services/brain-api/src/aion_brain/v02_release_qualification/*|\
+		    services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py|\
+		    services/brain-api/src/aion_brain/v02_staging_qualification/*|\
+		    services/brain-api/tests/test_v02_staging_qualification_aion241.py|\
+		    services/brain-api/tests/test_v02_release_qualification_*.py)
+	      return 0
       ;;
   esac
   return 1
@@ -328,6 +350,30 @@ is_aion239_v02_release_qualification_source_path() {
   return 1
 }
 
+is_aion241_v02_staging_qualification_source_path() {
+  python3 - "$1" <<'PY'
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+path = sys.argv[1]
+ledger = Path("docs/v02-release-qualification/program-ledger.json")
+if not ledger.exists():
+    raise SystemExit(1)
+payload = json.loads(ledger.read_text(encoding="utf-8"))
+if payload.get("controlled_staging_qualification_implemented") is not True:
+    raise SystemExit(1)
+scope = set(payload.get("implemented_source_scope", ()))
+allowed = path in scope and (
+    path == "services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py"
+    or path.startswith("services/brain-api/src/aion_brain/v02_staging_qualification/")
+)
+raise SystemExit(0 if allowed else 1)
+PY
+}
+
 is_aion231_source_path() {
   case "$1" in
     services/brain-api/src/aion_brain/contracts/secure_runtime.py|\
@@ -382,12 +428,13 @@ fi
 
 while IFS= read -r path; do
   [[ -n "$path" ]] || continue
-	  if ! is_allowed_path "$path"; then
-	    if ! is_aion233_model_gateway_source_path "$path" && \
-	      ! is_aion235_capability_runtime_source_path "$path" && \
-	      ! is_aion237_operator_console_source_path "$path"; then
-	      echo "ERROR: AION-230 changed disallowed path: $path" >&2
-	      exit 1
+		  if ! is_allowed_path "$path"; then
+		    if ! is_aion233_model_gateway_source_path "$path" && \
+		      ! is_aion235_capability_runtime_source_path "$path" && \
+		      ! is_aion237_operator_console_source_path "$path" && \
+		      ! is_aion241_v02_staging_qualification_source_path "$path"; then
+		      echo "ERROR: AION-230 changed disallowed path: $path" >&2
+		      exit 1
 	    fi
 	  fi
   case "$path" in
@@ -396,11 +443,12 @@ while IFS= read -r path; do
     *poetry.lock|*Pipfile.lock|*requirements*.txt|*pyproject.toml)
 	      if ! is_aion231_source_path "$path" && \
 	        ! is_aion233_model_gateway_source_path "$path" && \
-	        ! is_aion235_capability_runtime_source_path "$path" && \
-	        ! is_aion237_operator_console_source_path "$path" && \
-	        ! is_aion239_v02_release_qualification_source_path "$path"; then
-	        echo "ERROR: prohibited runtime/dependency/migration path changed: $path" >&2
-	        exit 1
+		        ! is_aion235_capability_runtime_source_path "$path" && \
+		        ! is_aion237_operator_console_source_path "$path" && \
+		        ! is_aion239_v02_release_qualification_source_path "$path" && \
+		        ! is_aion241_v02_staging_qualification_source_path "$path"; then
+		        echo "ERROR: prohibited runtime/dependency/migration path changed: $path" >&2
+		        exit 1
 	      fi
       ;;
   esac

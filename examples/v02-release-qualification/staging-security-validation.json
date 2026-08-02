@@ -1,0 +1,160 @@
+{
+  "changed_replay_rejected": true,
+  "configuration_drift_detected": true,
+  "findings": [
+    {
+      "finding_id": "AION-241-FINDING-001",
+      "protected_material_redacted": true,
+      "result": "passed",
+      "scenario_id": "loopback_binding_only"
+    },
+    {
+      "finding_id": "AION-241-FINDING-002",
+      "protected_material_redacted": true,
+      "result": "passed",
+      "scenario_id": "internal_network_only"
+    },
+    {
+      "finding_id": "AION-241-FINDING-003",
+      "protected_material_redacted": true,
+      "result": "passed",
+      "scenario_id": "no_dependency_host_ports"
+    },
+    {
+      "finding_id": "AION-241-FINDING-004",
+      "protected_material_redacted": true,
+      "result": "passed",
+      "scenario_id": "no_registry_activity"
+    },
+    {
+      "finding_id": "AION-241-FINDING-005",
+      "protected_material_redacted": true,
+      "result": "passed",
+      "scenario_id": "dev_header_identity_spoofing_rejected"
+    },
+    {
+      "finding_id": "AION-241-FINDING-006",
+      "protected_material_redacted": true,
+      "result": "passed",
+      "scenario_id": "offline_signed_identity_verified"
+    },
+    {
+      "finding_id": "AION-241-FINDING-007",
+      "protected_material_redacted": true,
+      "result": "passed",
+      "scenario_id": "replay_rejected"
+    },
+    {
+      "finding_id": "AION-241-FINDING-008",
+      "protected_material_redacted": true,
+      "result": "passed",
+      "scenario_id": "changed_replay_rejected"
+    },
+    {
+      "finding_id": "AION-241-FINDING-009",
+      "protected_material_redacted": true,
+      "result": "passed",
+      "scenario_id": "protected_material_redacted"
+    },
+    {
+      "finding_id": "AION-241-FINDING-010",
+      "protected_material_redacted": true,
+      "result": "passed",
+      "scenario_id": "staging_configuration_drift_detected"
+    },
+    {
+      "finding_id": "AION-241-FINDING-011",
+      "protected_material_redacted": true,
+      "result": "passed",
+      "scenario_id": "read_only_runtime_boundary"
+    },
+    {
+      "finding_id": "AION-241-FINDING-012",
+      "protected_material_redacted": true,
+      "result": "passed",
+      "scenario_id": "no_production_activation"
+    }
+  ],
+  "identity_spoofing_rejected": true,
+  "no_production_activation": true,
+  "protected_material_redacted": true,
+  "read_only_runtime_boundary": true,
+  "replay_rejected": true,
+  "scenarios": [
+    {
+      "evidence_fingerprint": "b236d17b6163ff2928cf5a86060f303187135c8ac9f0845877304506e95e19cf",
+      "result": "passed",
+      "scenario_fingerprint": "b5f2d8a9d5dfc4e7c2d547c45cd661f959640ad2512071a5cc65d9f4332a51ba",
+      "scenario_id": "loopback_binding_only"
+    },
+    {
+      "evidence_fingerprint": "0c3fb42c841534e1a6df9ad7b0f9e8875bd2ea894f92ca3a1399419e6028f009",
+      "result": "passed",
+      "scenario_fingerprint": "693578c3871d90c4350042da77b4981ad285674b64047bccd69fa73b29f7764b",
+      "scenario_id": "internal_network_only"
+    },
+    {
+      "evidence_fingerprint": "d54864b317736bb56b17f613c43b36c339095ba00ca31004a9f6bf4347e258f0",
+      "result": "passed",
+      "scenario_fingerprint": "8e71b2f5ae90db7be2aa58755b1858ac90522cc0240381f61f1feaa80ad1a29a",
+      "scenario_id": "no_dependency_host_ports"
+    },
+    {
+      "evidence_fingerprint": "687ac8676ac5d36e92b94cfeb699927e536ec62ecf4d15ddf5ace2077f04e83d",
+      "result": "passed",
+      "scenario_fingerprint": "36a23e30683e63558afbc6c338b872f997fd1bb1d96b55966f284e301727c823",
+      "scenario_id": "no_registry_activity"
+    },
+    {
+      "evidence_fingerprint": "a7dfaf16ed30a9d0d42501b7defdf75ea385131298d6cb516294612468f33d48",
+      "result": "passed",
+      "scenario_fingerprint": "e77bd2f1ba21dff6d19772263c0542ab56967f964db41c58e1b79c725bd095d1",
+      "scenario_id": "dev_header_identity_spoofing_rejected"
+    },
+    {
+      "evidence_fingerprint": "6989c70add592450cc0a6da14eab3ce654de73811a4904df55829b42002c428a",
+      "result": "passed",
+      "scenario_fingerprint": "48c60ade8c659f33db1e7d48a24ee2cd29a3cb3ec9f85624fd90d62e1c168a3b",
+      "scenario_id": "offline_signed_identity_verified"
+    },
+    {
+      "evidence_fingerprint": "1568898adcaed416f2217b93277bebdf9a792c18d692a88d828dc20165779bb1",
+      "result": "passed",
+      "scenario_fingerprint": "75850063c928b4be3e10018b789112cd7e28e453b88908f2ddf4ff932c4dc8bf",
+      "scenario_id": "replay_rejected"
+    },
+    {
+      "evidence_fingerprint": "bffeb8546ed35f10714c2e40384ddf8193be5e89506892691e80ddb878e5d407",
+      "result": "passed",
+      "scenario_fingerprint": "d3b9aa30404dd21a33071fbb1a8ee3129f3aa2235bbe6fe22c789a53ebdfc22a",
+      "scenario_id": "changed_replay_rejected"
+    },
+    {
+      "evidence_fingerprint": "6852d2a80a393811645b6beb2a068555f370e9d0b729e82a506df822ed67f591",
+      "result": "passed",
+      "scenario_fingerprint": "8c80b637d239ec3ae1f181966db7e62022d6b503ab7eee228498b9623e714bf3",
+      "scenario_id": "protected_material_redacted"
+    },
+    {
+      "evidence_fingerprint": "9949afc79f0e649b156a7749c165ec9ee651074ab3d11a6f5f928358d1e9e90d",
+      "result": "passed",
+      "scenario_fingerprint": "aee71940291f05d98a235c835cec12b19b39b95509c2a9ca2b10885befb062f4",
+      "scenario_id": "staging_configuration_drift_detected"
+    },
+    {
+      "evidence_fingerprint": "8c832eb73e56f51437ecae7dfefdeb24e0c2acb8cac3bf4f7dd7664225fefca0",
+      "result": "passed",
+      "scenario_fingerprint": "dec48ebd7fb7d40c291b71281c14707b1cd7075d35779b6fda7075e54b57844b",
+      "scenario_id": "read_only_runtime_boundary"
+    },
+    {
+      "evidence_fingerprint": "d4cc6f3ef67da5f573dc00b4a3b55edafd678139604052bd344201aacb74c9a7",
+      "result": "passed",
+      "scenario_fingerprint": "17774ea081881be861f70bc61c9aaee486bf2950ab1f808711a2ed39bb9f8105",
+      "scenario_id": "no_production_activation"
+    }
+  ],
+  "schema_version": "aion-v02-staging-security-validation/v1",
+  "security_tests_passed": 12,
+  "security_validation_report_fingerprint": "8ef28934c3f62ffb6393be2dd96ef146c0bc5150cea06826d5b76eebd9d63a0c"
+}
