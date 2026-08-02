@@ -1,0 +1,43 @@
+{
+  "authorization_transaction_id": "AION-240-V02RQ-0002",
+  "payload": {
+    "base_image_id": "sha256:d55ed37f90d85ca0fc5973e6d3cdd849353e0549a7df95d39864506712b342ea",
+    "build_context_fingerprint": "c468d92e4ba564eac63994d30d2f6206f3bea9cec9dd3a1881345e4f44a65fd3",
+    "dependency_image_fingerprints": {
+      "nats:2-alpine": "c3410afdcc09a6ccf3e1f9003603c3ab5c75e46797a7246f030690667a6571fe",
+      "openpolicyagent/opa:latest": "085c0d5055c0063fa9b27033c3ea44160ebefe8b1bf9904130e0f483517a82fc",
+      "pgvector/pgvector:pg16": "afd06b687a0f6b6d59a29b7a8db0830b332141e0dacbf0749b0ce66e7edab87a",
+      "redis:7-alpine": "bbbe571bab5dd86d94df5f40b311be0ee43c20d051e7d60231bc790abe04d648"
+    },
+    "generated_dockerfile_fingerprint": "d2363dccc3bb9191c9a2d0626d0eb64595429e50d0f8470ffd3cdbe3670b53f5",
+    "git_archive_fingerprint": "edfa8a41c1c501bc9265381e741d34ab273d5323f7d134d3e30459e96546c16d",
+    "network_mode": "none",
+    "normalized_image_config_fingerprint": "063b3ed0b18507ea63cb8fe5bea4b3aa799a07fccb82af480dccaac8e2c5b2a1",
+    "production": false,
+    "provenance_fingerprint": "2d3491d41406504cea4947b30bde814e09f694107a62fdd49a34866be568aa0e",
+    "provenance_id": "AION-241-staging-provenance",
+    "pull_policy": "false",
+    "release_candidate": false,
+    "rootfs_layer_fingerprints": [
+      "17071b35a1dbf8a17c5e63a34b6e0fda17966c06555e65ec571cb90bdc6dd527"
+    ],
+    "sbom_fingerprint": "fa7f32bf1fcbc3178296a773832d083f09fe7dfa66b7ac5b27d48b2d45d79faf",
+    "schema_version": "aion-v02-staging-provenance/v1",
+    "source_commit": "9f6b899f84ef8d9a53598871dbbd5b0cb3bacb38",
+    "source_tree_fingerprint": "525be2ecd76133838e353093ef516bbd2443650bae15455072dc7fa98bfe0851",
+    "staging_image_id": "sha256:c3b0892510161afc4aae727c0e217734341881490c136a903b23eec264480bf1"
+  },
+  "production_deployment_enabled": false,
+  "production_runtime_authorized": false,
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "release_candidate_creation_enabled": false,
+  "synthetic": true,
+  "task_id": "AION-241",
+  "v02_release_created": false,
+  "v02_release_ready": false,
+  "v02_tag_created": false,
+  "view_id": "v02-release-qualification-staging-provenance"
+}

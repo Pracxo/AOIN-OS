@@ -85,6 +85,7 @@ is_allowed_path() {
     operator-console-static/demo-data/v02-staging-artifact-boundary.json|\
     operator-console-static/demo-data/v02-staging-rollback-boundary.json|\
     operator-console-static/demo-data/v02-staging-runtime-hold.json|\
+    operator-console-static/demo-data/v02-release-qualification-staging-*.json|\
     scripts/auth-design-check.sh|\
     scripts/capability-runtime-authorization-check.sh|\
     scripts/capability-runtime-authorization-no-go-regression.sh|\
@@ -142,12 +143,19 @@ is_allowed_path() {
     scripts/v02-release-qualification-runtime-hold.sh|\
     scripts/v02-staging-qualification-authorization-check.sh|\
     scripts/v02-staging-qualification-authorization-no-go-regression.sh|\
+    scripts/v02-staging-qualification-check.sh|\
+    scripts/v02-staging-qualification-local-run.py|\
+    scripts/v02-staging-qualification-no-go-regression.sh|\
+    scripts/v02-staging-qualification-pilot-evidence-check.sh|\
     scripts/v02-staging-qualification-runtime-hold.sh|\
     scripts/lib/cognitive_architecture_governance.py|\
     scripts/lib/secure_runtime_integration_final_evaluation.py|\
     scripts/lib/v02_production_auth_authorization.py|\
     scripts/lib/v02-production-auth-scan-exclusions.sh|\
     services/brain-api/tests/secure_runtime_integration_final_evaluation_test_support.py|\
+    services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py|\
+    services/brain-api/src/aion_brain/v02_staging_qualification/*.py|\
+    services/brain-api/tests/test_v02_staging_qualification_aion241.py|\
     services/brain-api/tests/test_capability_runtime_current_state_after_aion235.py|\
     services/brain-api/tests/test_model_gateway_authorization.py|\
     services/brain-api/tests/test_model_gateway_authorization_scope.py|\
@@ -172,7 +180,9 @@ is_allowed_path() {
     services/brain-api/tests/test_self_improvement_shadow_activation_evaluation_repository_integrity.py|\
     services/brain-api/tests/test_self_improvement_shadow_activation_scope_spec.py|\
     services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
+    services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py|\
     services/brain-api/src/aion_brain/v02_release_qualification/*.py|\
+    services/brain-api/src/aion_brain/v02_staging_qualification/*.py|\
     services/brain-api/tests/test_v02_release_qualification_*.py)
       return 0
       ;;
@@ -204,7 +214,9 @@ while IFS= read -r path; do
   [[ -z "$path" ]] && continue
   case "$path" in
     services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
-    services/brain-api/src/aion_brain/v02_release_qualification/*.py)
+    services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py|\
+    services/brain-api/src/aion_brain/v02_release_qualification/*.py|\
+    services/brain-api/src/aion_brain/v02_staging_qualification/*.py)
       ;;
     services/brain-api/src/aion_brain/*)
       echo "AION-239 must not modify completed runtime source: $path" >&2

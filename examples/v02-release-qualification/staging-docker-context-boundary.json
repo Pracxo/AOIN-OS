@@ -1,0 +1,12 @@
+{
+  "buildx_available": true,
+  "compose_v2_available": true,
+  "context_name": "desktop-linux",
+  "docker_context_fingerprint": "b34ff1367c4143254490872e4d6df3ca49a887802f11e407523b554f3e3d0252",
+  "docker_host_set": false,
+  "endpoint_kind": "local_unix_socket",
+  "remote_context": false,
+  "schema_version": "aion-v02-staging-environment-profile/v1",
+  "server_architecture": "arm64",
+  "server_os": "linux"
+}

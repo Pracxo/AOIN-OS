@@ -1,0 +1,69 @@
+{
+  "authorization_transaction_id": "AION-240-V02RQ-0002",
+  "payload": {
+    "base_image_fingerprint": "033947cc1e5bfe5275e7667529ef761a5d858b7fc775dc5d8cc06cc7d36e723f",
+    "component_count": 5,
+    "components": [
+      {
+        "component_fingerprint": "a18aa844023e02c63acb16eb62d1af978c1a7c887b0760822cc0497b2a199fae",
+        "name": "aion-brain-api",
+        "normalized_name": "aion-brain-api",
+        "scope": "installed_distribution",
+        "source_classification": "local_staging_projection",
+        "version": "0.0.0"
+      },
+      {
+        "component_fingerprint": "7d4b9faf77f11d6192f22b341bf85a5e7b5a23246e69780122233d7d08f8627d",
+        "name": "fastapi",
+        "normalized_name": "fastapi",
+        "scope": "installed_distribution",
+        "source_classification": "local_staging_projection",
+        "version": "0.0.0"
+      },
+      {
+        "component_fingerprint": "b6ac7b99afe6b135917083852cf482a83974a37ef2bc2badbade347d25f8ed95",
+        "name": "pydantic",
+        "normalized_name": "pydantic",
+        "scope": "installed_distribution",
+        "source_classification": "local_staging_projection",
+        "version": "0.0.0"
+      },
+      {
+        "component_fingerprint": "de4c837d80db7cc978df6248fa89edb284bf93d3b21fc6c4141b4366c1eb8e92",
+        "name": "sqlalchemy",
+        "normalized_name": "sqlalchemy",
+        "scope": "installed_distribution",
+        "source_classification": "local_staging_projection",
+        "version": "0.0.0"
+      },
+      {
+        "component_fingerprint": "89da8dc1617837dd47fd7a02b7bd3de0b64d2cced22d6a876288e29da2a8371d",
+        "name": "cryptography",
+        "normalized_name": "cryptography",
+        "scope": "installed_distribution",
+        "source_classification": "local_staging_projection",
+        "version": "0.0.0"
+      }
+    ],
+    "final_release_sbom": false,
+    "registry_called": false,
+    "sbom_fingerprint": "fa7f32bf1fcbc3178296a773832d083f09fe7dfa66b7ac5b27d48b2d45d79faf",
+    "sbom_kind": "local_staging_installed_distribution_projection",
+    "schema_version": "aion-v02-staging-sbom/v1",
+    "source_tree_fingerprint": "525be2ecd76133838e353093ef516bbd2443650bae15455072dc7fa98bfe0851",
+    "vulnerability_scan_performed": false
+  },
+  "production_deployment_enabled": false,
+  "production_runtime_authorized": false,
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "release_candidate_creation_enabled": false,
+  "synthetic": true,
+  "task_id": "AION-241",
+  "v02_release_created": false,
+  "v02_release_ready": false,
+  "v02_tag_created": false,
+  "view_id": "v02-release-qualification-staging-sbom"
+}

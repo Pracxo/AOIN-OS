@@ -1,0 +1,42 @@
+{
+  "authorization_transaction_id": "AION-240-V02RQ-0002",
+  "payload": {
+    "base_image_id": "sha256:d55ed37f90d85ca0fc5973e6d3cdd849353e0549a7df95d39864506712b342ea",
+    "build_context_fingerprint": "c468d92e4ba564eac63994d30d2f6206f3bea9cec9dd3a1881345e4f44a65fd3",
+    "byte_for_byte_reproducibility_confirmed": false,
+    "comparison_fingerprint": "d3d8465f46722e28a5436753800ec96e571c51b0429d4c75f5ed203cdbdaf4eb",
+    "first_image_id": "sha256:816d3a4c932fd668ca09729ecc264efd56d0eb6ef6f3539ed207722322393818",
+    "generated_dockerfile_fingerprint": "d2363dccc3bb9191c9a2d0626d0eb64595429e50d0f8470ffd3cdbe3670b53f5",
+    "invariant_checks": {
+      "application_source_manifest": true,
+      "base_image_id": true,
+      "build_context_fingerprint": true,
+      "environment_projection": true,
+      "generated_dockerfile_fingerprint": true,
+      "normalized_image_configuration": true,
+      "rootfs_layers": true,
+      "runtime_command": true,
+      "sbom_fingerprint": true,
+      "source_commit": true,
+      "source_tree_fingerprint": true
+    },
+    "reproducibility_invariants_passed": true,
+    "schema_version": "aion-v02-staging-provenance/v1",
+    "second_image_id": "sha256:9ad96eb85f6691543ef5baa96008b301cf54e7af9ecfc5d36780a57e220b39e3",
+    "source_commit": "9f6b899f84ef8d9a53598871dbbd5b0cb3bacb38",
+    "source_tree_fingerprint": "525be2ecd76133838e353093ef516bbd2443650bae15455072dc7fa98bfe0851"
+  },
+  "production_deployment_enabled": false,
+  "production_runtime_authorized": false,
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "release_candidate_creation_enabled": false,
+  "synthetic": true,
+  "task_id": "AION-241",
+  "v02_release_created": false,
+  "v02_release_ready": false,
+  "v02_tag_created": false,
+  "view_id": "v02-release-qualification-staging-reproducibility-comparison"
+}

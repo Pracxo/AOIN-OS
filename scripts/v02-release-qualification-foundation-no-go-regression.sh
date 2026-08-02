@@ -125,10 +125,16 @@ is_allowed_path() {
     scripts/v02-release-qualification-local-run.py|\
     scripts/v02-staging-qualification-authorization-check.sh|\
     scripts/v02-staging-qualification-authorization-no-go-regression.sh|\
+    scripts/v02-staging-qualification-check.sh|\
+    scripts/v02-staging-qualification-local-run.py|\
+    scripts/v02-staging-qualification-no-go-regression.sh|\
+    scripts/v02-staging-qualification-pilot-evidence-check.sh|\
     scripts/v02-staging-qualification-runtime-hold.sh|\
     scripts/secure-runtime-integration-final-evaluation-no-go-regression.sh|\
     services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
+    services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py|\
     services/brain-api/src/aion_brain/v02_release_qualification/*.py|\
+    services/brain-api/src/aion_brain/v02_staging_qualification/*.py|\
     services/brain-api/tests/test_secure_runtime_integration_final_closeout_aion238.py|\
     services/brain-api/tests/test_governed_learning_memory_no_runtime_source.py|\
     services/brain-api/tests/test_knowledge_epistemic_assessment_evaluation_repository_integrity.py|\
@@ -137,7 +143,8 @@ is_allowed_path() {
     services/brain-api/tests/test_knowledge_source_registry_evaluation_no_side_effects.py|\
     services/brain-api/tests/test_self_improvement_shadow_activation_evaluation_repository_integrity.py|\
     services/brain-api/tests/test_self_improvement_shadow_activation_scope_spec.py|\
-    services/brain-api/tests/test_v02_release_qualification_*.py)
+    services/brain-api/tests/test_v02_release_qualification_*.py|\
+    services/brain-api/tests/test_v02_staging_qualification_aion241.py)
       return 0
       ;;
   esac
@@ -169,7 +176,9 @@ while IFS= read -r path; do
   [[ -z "$path" ]] && continue
   case "$path" in
     services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
-    services/brain-api/src/aion_brain/v02_release_qualification/*.py)
+    services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py|\
+    services/brain-api/src/aion_brain/v02_release_qualification/*.py|\
+    services/brain-api/src/aion_brain/v02_staging_qualification/*.py)
       ;;
     services/brain-api/src/aion_brain/*)
       echo "AION-239 must not modify completed runtime source: $path" >&2

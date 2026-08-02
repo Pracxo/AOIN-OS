@@ -219,3 +219,4 @@ closure decision in ADR 0072.
 - [ADR 0202: Final Secure Runtime Integration Evaluation and v0.2 Release Qualification Program Authorization](0202-final-secure-runtime-integration-evaluation-and-v02-release-qualification-program-authorization.md)
 - [ADR 0203: Disabled v0.2 Production-Readiness Qualification Foundation](0203-disabled-v02-production-readiness-qualification-foundation.md)
 - [ADR 0204: v0.2 Qualification Foundation Evaluation and Controlled Isolated Staging Qualification Authorization](0204-v02-qualification-foundation-evaluation-and-controlled-isolated-staging-qualification-authorization.md)
+- [ADR 0205: Controlled Isolated Local Staging Artifact Build and Rollback Drill](0205-controlled-isolated-local-staging-artifact-build-and-rollback-drill.md)

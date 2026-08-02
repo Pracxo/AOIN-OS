@@ -1,0 +1,28 @@
+{
+  "authorization_transaction_id": "AION-240-V02RQ-0002",
+  "payload": {
+    "assertion_fingerprint": "399ef6b7e033497a3d013bfced594ba46ff73fbe63d676f3ff4cf7e4c5e4d2b8",
+    "external_identity_provider_calls": 0,
+    "fixture_id": "AION-241-identity-fixture",
+    "identity_fixture_fingerprint": "8cc857297096a4d55817c5804d7d5aa6010139889baf513b56bc7e1852035761",
+    "private_key_persisted": 0,
+    "production_identity": false,
+    "public_key_fingerprint": "45d0808b05fcddefdc3f18f7d811b49ca76c3a721dec976105742bb389cbd128",
+    "schema_version": "aion-v02-staging-identity-fixture/v1",
+    "signed_assertion_retained": false,
+    "verification_passed": true
+  },
+  "production_deployment_enabled": false,
+  "production_runtime_authorized": false,
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "release_candidate_creation_enabled": false,
+  "synthetic": true,
+  "task_id": "AION-241",
+  "v02_release_created": false,
+  "v02_release_ready": false,
+  "v02_tag_created": false,
+  "view_id": "v02-release-qualification-staging-identity-fixture"
+}

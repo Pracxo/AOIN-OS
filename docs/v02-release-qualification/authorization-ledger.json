@@ -11,6 +11,7 @@
       "implementation_task": "AION-241"
     }
   ],
+  "active_staging_resources": 0,
   "active_v02_release_qualification_authorization": "AION-240-V02RQ-0002",
   "active_v02_release_qualification_authorization_count": 1,
   "active_v02_release_qualification_task": "AION-241",
@@ -219,24 +220,72 @@
     "maximum_v02_tags_created": 0
   },
   "aion_240_record": {
+    "aion_241_source_created_by_aion_240": false,
     "authorization_state": "active_for_AION-241_formal_closeout_AION-242",
     "authorization_transaction": "AION-240-V02RQ-0002",
     "branch": "phase/v02-release-qualification-foundation-evaluation-staging-authorization",
-    "ci_result": "pending",
-    "closeout_commit": null,
-    "closeout_commit_recorded_by": "AION-241",
-    "completion_timestamp": null,
+    "ci_result": "pass",
+    "closeout_commit": "ab76a9fe4814e9a36a612cc768b343fd6117dcaa",
+    "completion_timestamp": "2026-08-01T23:23:06Z",
     "corrective_prs": [],
+    "evaluation_base_commit": "45b50d79edc6080e2e64e0566dc17ead9bcf0090",
     "evaluation_decision": "DISABLED_V02_PRODUCTION_READINESS_QUALIFICATION_FOUNDATION_OPERATOR_EVALUATION_PASS_RECOMMEND_CONTROLLED_ISOLATED_STAGING_ARTIFACT_AND_ROLLBACK_DRILL_QUALIFICATION_AUTHORIZATION",
     "evaluation_id": "AION-V02RQPE-001",
+    "evaluation_report_fingerprint": "6a9c94362fc9258db33ec41914080834b4af2811ac4b1d934ee43113779c72f4",
     "feature_commits": [
-      "45b50d79edc6080e2e64e0566dc17ead9bcf0090"
+      "45b50d79edc6080e2e64e0566dc17ead9bcf0090",
+      "ab76a9fe4814e9a36a612cc768b343fd6117dcaa"
     ],
+    "hard_gate_count": 35,
     "harness_commit": "45b50d79edc6080e2e64e0566dc17ead9bcf0090",
-    "merge_commits": [],
+    "merge_commits": [
+      "9f6b899f84ef8d9a53598871dbbd5b0cb3bacb38"
+    ],
     "next_task": "AION-241",
-    "pull_requests": [],
-    "task_id": "AION-240"
+    "prohibited_effect_counters": {
+      "dns_resolutions": 0,
+      "external_identity_provider_calls": 0,
+      "external_log_exports": 0,
+      "external_metric_exports": 0,
+      "external_network_egress_calls": 0,
+      "external_trace_exports": 0,
+      "production_authorization_headers_created": 0,
+      "production_credentials_generated": 0,
+      "production_credentials_persisted": 0,
+      "production_credentials_read": 0,
+      "production_database_operations": 0,
+      "production_deployments": 0,
+      "production_key_rotations": 0,
+      "production_replay_ledger_writes": 0,
+      "production_rollbacks": 0,
+      "production_tokens_generated": 0,
+      "production_tokens_issued": 0,
+      "production_tokens_persisted": 0,
+      "public_network_calls": 0,
+      "registry_logins": 0,
+      "registry_pulls": 0,
+      "registry_pushes": 0,
+      "release_candidates_created": 0,
+      "v02_releases_created": 0,
+      "v02_tags_created": 0
+    },
+    "pull_requests": [
+      159
+    ],
+    "required_checks_passed": [
+      "brain-api-quality",
+      "contract-check",
+      "docker-build-core",
+      "policy-check",
+      "repository-hygiene",
+      "sdk-cli-check",
+      "sdk-quality"
+    ],
+    "runtime_state": "controlled_isolated_staging_qualification_authorized_not_implemented",
+    "scenario_count": 28,
+    "task_id": "AION-240",
+    "v02_release_created": false,
+    "v02_tag_created": false
   },
   "aion_241_approved_capabilities": {
     "complete_container_cleanup_approved": true,
@@ -337,6 +386,7 @@
     "branch": "phase/v02-controlled-staging-qualification",
     "ci_result": "pending",
     "completion_timestamp": null,
+    "corrective_prs": [],
     "feature_commits": [],
     "merge_commits": [],
     "next_task": "AION-242",
@@ -645,6 +695,7 @@
   "local_qualification_pilot_completed": true,
   "local_qualification_pilot_id": "AION-239-disabled-v02-production-readiness-qualification-pilot",
   "local_qualification_pilot_report_fingerprint": "6635d4d32533893e4549d3992c0a6b54e73a58a0904914da6defcc5e0deff2ab",
+  "local_staging_pilot_completed": false,
   "model_weight_training_enabled": false,
   "operator_review_evidence_approved": true,
   "parent_authorization_transaction_id": "AION-238-V02RQ-0001",
@@ -794,6 +845,7 @@
   "public_key_provisioning_and_rotation_design_approved": true,
   "public_listener_enabled": false,
   "public_network_access_enabled": false,
+  "qualification_foundation_component_binding_available": true,
   "qualification_integrity_audit_available": true,
   "qualification_operator_review_available": true,
   "read_only": true,
@@ -922,7 +974,9 @@
   "source_rewrite_enabled": false,
   "staging_deployment_enabled": false,
   "staging_evidence_required": true,
+  "staging_qualification_authorization_envelope_available": true,
   "staging_qualification_authorized": true,
+  "staging_qualification_contract_available": true,
   "staging_qualification_implemented": false,
   "staging_qualification_plan_approved": true,
   "staging_qualification_plan_available": true,

@@ -1,0 +1,12 @@
+{
+  "authorization_transaction_id": "AION-240-V02RQ-0002",
+  "created_at": "2026-08-02T09:14:07.681591Z",
+  "expires_at": "2026-08-02T12:14:07.681591Z",
+  "local_confirmation_text_fingerprint": "8c22d080251f22e1a7ddb623d4863cfb5744f3116a15f3e4c0f550c83709e75d",
+  "maximum_session_seconds": 10800,
+  "mode": "controlled_local_docker",
+  "schema_version": "aion-v02-staging-session/v1",
+  "session_id": "aion-241-controlled-staging-session",
+  "session_plan_fingerprint": "47f775819f2e681c7ec05cb4a82d49b868546a526238a4235162cefcff7fa737",
+  "status": "authorized"
+}

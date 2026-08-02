@@ -1,0 +1,28 @@
+{
+  "authorization_transaction_id": "AION-240-V02RQ-0002",
+  "payload": {
+    "assertion_fingerprint": "399ef6b7e033497a3d013bfced594ba46ff73fbe63d676f3ff4cf7e4c5e4d2b8",
+    "changed_replay_rejected": true,
+    "database_writes": 0,
+    "first_verification_accepted": true,
+    "fixture_id": "AION-241-replay-fixture",
+    "persistent_files": 0,
+    "replay_fixture_fingerprint": "6bfde60f3ac491e384f5593a3ed335c31fc64658679e57a4a2d8769231cc7ed5",
+    "replay_record_retained": false,
+    "schema_version": "aion-v02-staging-replay-fixture/v1",
+    "second_use_rejected": true
+  },
+  "production_deployment_enabled": false,
+  "production_runtime_authorized": false,
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "release_candidate_creation_enabled": false,
+  "synthetic": true,
+  "task_id": "AION-241",
+  "v02_release_created": false,
+  "v02_release_ready": false,
+  "v02_tag_created": false,
+  "view_id": "v02-release-qualification-staging-replay-fixture"
+}

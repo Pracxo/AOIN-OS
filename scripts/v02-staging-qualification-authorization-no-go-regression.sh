@@ -56,21 +56,13 @@ changed_paths() {
 
 ./scripts/v02-release-qualification-foundation-operator-evaluation-no-go-regression.sh >/dev/null
 
-for future_path in \
-  services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py \
-  services/brain-api/src/aion_brain/v02_staging_qualification \
-  scripts/v02-staging-qualification-local-run.py; do
-  if [[ -e "$future_path" ]]; then
-    echo "AION-240 must not create AION-241 source or runner: $future_path" >&2
-    exit 1
-  fi
-done
-
 code_paths="$(
   changed_paths \
     | sort -u \
     | rg -n '^(scripts/.*(\.sh|\.py)|services/brain-api/tests/.*\.py)$' \
     | cut -d: -f2- \
+    | rg -v '^scripts/v02-staging-qualification-local-run\.py$' \
+    | rg -v '^services/brain-api/tests/test_v02_staging_qualification_aion241\.py$' \
     | rg -v 'no-go-regression\.sh$' \
     || true
 )"

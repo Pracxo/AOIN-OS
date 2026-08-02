@@ -1,0 +1,46 @@
+{
+  "aion_240_closeout_commit": "ab76a9fe4814e9a36a612cc768b343fd6117dcaa",
+  "aion_240_harness_commit": "45b50d79edc6080e2e64e0566dc17ead9bcf0090",
+  "aion_240_merge_commit": "9f6b899f84ef8d9a53598871dbbd5b0cb3bacb38",
+  "authorization_transaction_id": "AION-240-V02RQ-0002",
+  "base_image_fingerprint": "1016433bb0447433757344b9a150cb6c30aac6c4d4e0ba5e1cef352363988b82",
+  "base_image_id": "sha256:d55ed37f90d85ca0fc5973e6d3cdd849353e0549a7df95d39864506712b342ea",
+  "base_image_tag": "aoinos-brain-api:aion241-base-9f6b899f84ef",
+  "binding_timestamp": "2026-08-02T09:14:07.676654Z",
+  "component_binding_fingerprint": "123a1e9c5b78f375099c118388f610aa51dcf2a49367b6ab323d5231dec508ba",
+  "current_git_tree_sha": "1b9655e3c215eeb86046eada3f0ecdc1b64b230ff89ffe79a097a4a935d8532a",
+  "current_source_commit": "9f6b899f84ef8d9a53598871dbbd5b0cb3bacb38",
+  "dependency_image_fingerprints": {
+    "nats:2-alpine": "3c20b3784e6cf39bf540e3835bc8d41b685ab137a06ca8cc4bcec9913ca842a7",
+    "openpolicyagent/opa:latest": "6a07c39a696909e2a56c42c0e38e837cdcb9d0f3f8923970b556a92f378751a8",
+    "pgvector/pgvector:pg16": "0eb663e03886641d99277d10d06b704c844bf55600d3348b5e1b8bc1f3b9f068",
+    "redis:7-alpine": "864469f489fcce37b8ac87918c0073f811daa238a59bf0c1f2bb23b76c82b0fe"
+  },
+  "docker_context_fingerprint": "2c696e12b6ac6e483f5b222c4ceb66af75f2bb923d7ed24a33319dd0277ccd31",
+  "docker_server_fingerprint": "c84addf705faf1225196b4cea374755ce4390a46617e597ac60400e06c01e6da",
+  "operator_confirmation_fingerprint": "8c22d080251f22e1a7ddb623d4863cfb5744f3116a15f3e4c0f550c83709e75d",
+  "parent_authorization_transaction_id": "AION-238-V02RQ-0001",
+  "parent_evaluation_base_commit": "45b50d79edc6080e2e64e0566dc17ead9bcf0090",
+  "parent_evaluation_id": "AION-V02RQPE-001",
+  "parent_evaluation_report_fingerprint": "6a9c94362fc9258db33ec41914080834b4af2811ac4b1d934ee43113779c72f4",
+  "parent_implementation_feature_commits": [
+    "a1d5d1ee2b0d991f3074c796d664105225b51856",
+    "fa789d5c43709d606bb088a69451b7a43cf32a17"
+  ],
+  "parent_implementation_main_commit": "154d58f182871ce18abad860f3bb76e5a006ebad",
+  "parent_implementation_merge_commits": [
+    "154d58f182871ce18abad860f3bb76e5a006ebad"
+  ],
+  "parent_implementation_prs": [
+    158
+  ],
+  "parent_implementation_task": "AION-239",
+  "production_effect": false,
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "release_effect": false,
+  "resource_limit_fingerprint": "1466b263508ac83945d7c96970da4e1c0bc43420eed82677df0ac13649ca9b3c",
+  "schema_version": "aion-v02-staging-component-binding/v1",
+  "source_tree_fingerprint": "049a0e48c66c5ec821edcbeee54a97a22436f6a4d4bd598a6ac613a5a0b7f4f0"
+}

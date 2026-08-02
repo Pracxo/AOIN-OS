@@ -1,0 +1,19 @@
+{
+  "dependency_host_ports": 0,
+  "deployment_id": "AION-241-local-staging-deployment",
+  "deployment_plan_fingerprint": "415c498926cfdee90ddb1b32dd9cfd6db44cddc1d8252831fece94b1f8251c33",
+  "internal_network": true,
+  "loopback_host": "127.0.0.1",
+  "no_build": true,
+  "project_name_fingerprint": "9308282bf42d671e0473dd036175dcd3e4d02c3b6d21d877360ab3eb47707238",
+  "pull_policy": "never",
+  "schema_version": "aion-v02-staging-deployment-plan/v1",
+  "service_count": 5,
+  "service_names": [
+    "brain-api",
+    "postgres",
+    "redis",
+    "nats",
+    "opa"
+  ]
+}

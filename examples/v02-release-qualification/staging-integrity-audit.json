@@ -1,0 +1,14 @@
+{
+  "checked_fingerprints": [
+    "7e752d034c27884f7bb34052d7b15dc045084776dce26ab0ea59d702946c9ac3"
+  ],
+  "cleanup_passed": true,
+  "integrity_fingerprint": "9be900aabd8b164481f577ea6b3253572aef71e89f82aeb30ea6e8c3d795451d",
+  "integrity_status": "passed",
+  "production_effect": false,
+  "redaction_passed": true,
+  "release_effect": false,
+  "replay_passed": true,
+  "schema_version": "aion-v02-staging-integrity/v1",
+  "zero_effects_passed": true
+}

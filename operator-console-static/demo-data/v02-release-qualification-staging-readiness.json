@@ -1,0 +1,49 @@
+{
+  "authorization_transaction_id": "AION-240-V02RQ-0002",
+  "payload": {
+    "all_dependencies_ready": true,
+    "health_checks": [
+      {
+        "check_id": "AION-241-HEALTH-1",
+        "response_fingerprint": "6dc5cded53cf41ae6f2034c8ec4dbb1f95b579e4cb1fd8e237afc6c79dbbae50",
+        "route": "/health",
+        "status": "ok"
+      },
+      {
+        "check_id": "AION-241-HEALTH-2",
+        "response_fingerprint": "1516b91278b82680107a167b0269e9fc12a1abcd3d52f56e136e6e458d33c93e",
+        "route": "/health/live",
+        "status": "alive"
+      },
+      {
+        "check_id": "AION-241-HEALTH-3",
+        "response_fingerprint": "445720048bcefc00faf743139c9f10436891bc75144c17d9be35d45a814384fb",
+        "route": "/health/ready",
+        "status": "ready"
+      }
+    ],
+    "health_checks_passed": 3,
+    "health_readiness_report_fingerprint": "eefde5726501507c75899c825a0de2825859756966f5bc491ee68ea79c81611f",
+    "readiness_checks": {
+      "nats": "ok",
+      "opa": "ok",
+      "postgres": "ok",
+      "redis": "ok"
+    },
+    "readiness_checks_passed": 4,
+    "schema_version": "aion-v02-staging-health-readiness/v1"
+  },
+  "production_deployment_enabled": false,
+  "production_runtime_authorized": false,
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "release_candidate_creation_enabled": false,
+  "synthetic": true,
+  "task_id": "AION-241",
+  "v02_release_created": false,
+  "v02_release_ready": false,
+  "v02_tag_created": false,
+  "view_id": "v02-release-qualification-staging-readiness"
+}

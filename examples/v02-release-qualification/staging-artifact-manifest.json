@@ -1,15 +1,21 @@
 {
-  "artifact_bytes_created": 0,
-  "artifact_manifest_id": "AION-241-local-artifact-sbom-provenance-plan",
-  "authorization_transaction_id": "AION-240-V02RQ-0002",
-  "local_artifact_digest_approved": true,
-  "local_artifact_provenance_approved": true,
-  "local_sbom_generation_approved": true,
-  "local_staging_artifact_creation_approved": true,
-  "read_only": true,
-  "redacted": true,
-  "release_candidates_created": 0,
-  "synthetic": true,
-  "v02_releases_created": 0,
-  "v02_tags_created": 0
+  "artifact_kind": "local_staging_container_image",
+  "artifact_manifest_fingerprint": "a38d5552fe08d0c568270850f1f35c8bf41f65bba3f9b25e130031003779f53f",
+  "base_image_id": "sha256:d55ed37f90d85ca0fc5973e6d3cdd849353e0549a7df95d39864506712b342ea",
+  "components": [
+    {
+      "component_fingerprint": "bdf44d77954d49dc4fdf713875c745bda69cc3d34bb3117ff906fa5acf491ffd",
+      "component_kind": "local-staging-image",
+      "component_name": "brain-api",
+      "image_id": "sha256:c3b0892510161afc4aae727c0e217734341881490c136a903b23eec264480bf1",
+      "source_fingerprint": "525be2ecd76133838e353093ef516bbd2443650bae15455072dc7fa98bfe0851"
+    }
+  ],
+  "manifest_id": "AION-241-staging-artifact-manifest",
+  "production": false,
+  "release_candidate": false,
+  "schema_version": "aion-v02-staging-artifact-manifest/v1",
+  "source_commit": "9f6b899f84ef8d9a53598871dbbd5b0cb3bacb38",
+  "source_tree_fingerprint": "525be2ecd76133838e353093ef516bbd2443650bae15455072dc7fa98bfe0851",
+  "staging_image_id": "sha256:c3b0892510161afc4aae727c0e217734341881490c136a903b23eec264480bf1"
 }

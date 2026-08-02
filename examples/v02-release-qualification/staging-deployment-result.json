@@ -1,0 +1,13 @@
+{
+  "actual_port_retained": false,
+  "dependency_host_ports": 0,
+  "deployment_id": "AION-241-local-staging-deployment",
+  "deployment_result_fingerprint": "dfc74ef472fbe35d716076720d1c85ab969bdfcbed14ff9f4db33b56b95cf271",
+  "loopback_listener_created": true,
+  "non_loopback_listeners_created": 0,
+  "peak_container_count": 5,
+  "public_listeners_created": 0,
+  "schema_version": "aion-v02-staging-deployment-plan/v1",
+  "service_count": 5,
+  "status": "healthy"
+}
