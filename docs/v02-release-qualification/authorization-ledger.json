@@ -552,23 +552,29 @@
     "maximum_v02_tags_created": 0
   },
   "aion_242_record": {
+    "authorization_state": "active_for_AION-243_formal_closeout_AION-244",
     "authorization_transaction": "AION-242-V02RQ-0003",
     "branch": "phase/v02-staging-qualification-evaluation-release-candidate-authorization",
-    "ci_result": "pending",
-    "closeout_commit": null,
-    "completion_timestamp": null,
+    "ci_result": "pass",
+    "closeout_commit": "6288ba8e24cf4f3427d2087f1c7764cda08dbeed",
+    "completion_timestamp": "2026-08-02T17:37:14Z",
     "corrective_cycles": 0,
     "evaluation_decision": "CONTROLLED_ISOLATED_LOCAL_STAGING_QUALIFICATION_OPERATOR_EVALUATION_PASS_RECOMMEND_DETERMINISTIC_V02_RELEASE_CANDIDATE_ARTIFACT_BUILD_AUTHORIZATION",
     "evaluation_id": "AION-V02RQPE-002",
     "evaluation_report_fingerprint": "4d9326cb690e006442ca15035c8bbd225509fd2a1d1b05d4e47c2a30feab6230",
     "feature_commits": [
-      "cfc881c8e50b35852176221ff8635e1996f2591d"
+      "cfc881c8e50b35852176221ff8635e1996f2591d",
+      "6288ba8e24cf4f3427d2087f1c7764cda08dbeed"
     ],
     "hard_gate_count": 28,
     "harness_commit": "cfc881c8e50b35852176221ff8635e1996f2591d",
-    "merge_commits": [],
+    "merge_commits": [
+      "d01071f764227e356ada89422de1a4ff1261b2d4"
+    ],
     "next_task": "AION-243",
-    "pull_requests": [],
+    "pull_requests": [
+      161
+    ],
     "release_candidate_created": false,
     "runtime_state": "deterministic_v02_release_candidate_artifact_build_authorized_not_implemented",
     "scenario_count": 28,

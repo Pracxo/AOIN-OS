@@ -813,6 +813,17 @@ def evaluate(
     auth_state = authorization_lineage_state(program, auth)
     docker_state = local_docker_resource_state(repo_root)
     future_auth = future_authorization_projection(evaluation_base_commit)
+    aion243_implementation_started = (
+        auth.get("authorization_transaction_id") == NEXT_AUTHORIZATION_ID
+        and auth.get("active_v02_release_qualification_authorization") == NEXT_AUTHORIZATION_ID
+        and auth.get("active_v02_release_qualification_task") == NEXT_IMPLEMENTATION_TASK
+        and auth.get("authorization_active") is True
+        and auth.get("authorization_consumed") is False
+    )
+    aion243_source_state_ok = (
+        not source["future_aion_243_source_present"]
+        and not source["future_aion_243_runner_present"]
+    ) or aion243_implementation_started
     commits_available = {
         oid: git_object_exists(repo_root, oid)
         for oid in (IMPLEMENTATION_COMMIT, EVIDENCE_COMMIT, IMPLEMENTATION_MERGE_COMMIT)
@@ -894,8 +905,8 @@ def evaluate(
                 check("runtime_source_scope_exact", source["runtime_source_scope_exact"]),
                 check("prohibited_aion241_source_absent", not source["prohibited_source_present"]),
                 check("aion241_runner_present", source["aion_241_runner_present"]),
-                check("aion243_source_absent", not source["future_aion_243_source_present"]),
-                check("aion243_runner_absent", not source["future_aion_243_runner_present"]),
+                check("aion243_source_absent_or_authorized_started", aion243_source_state_ok),
+                check("aion243_runner_absent_or_authorized_started", aion243_source_state_ok),
             ),
         ),
         scenario(
@@ -1117,7 +1128,7 @@ def evaluate(
             "deterministic_release_candidate_build_authorization_readiness",
             (
                 check("all_prior_scenarios_passed", prior_passed),
-                check("future_candidate_source_scope_recorded_not_created", not source["future_aion_243_source_present"] and not source["future_aion_243_runner_present"]),
+                check("future_candidate_source_scope_recorded_or_authorized_started", aion243_source_state_ok),
                 check("immutable_source_snapshot_authorizable", future_auth["approved_capabilities"]["immutable_candidate_source_snapshot_approved"]),
                 check("bounded_release_metadata_authorizable", future_auth["approved_capabilities"]["bounded_package_version_update_approved"]),
                 check("single_local_candidate_bundle_authorizable", future_auth["resource_limits"]["maximum_retained_candidate_bundles"] == 1),
@@ -1225,7 +1236,7 @@ def evaluate(
         "repository_integrity": {
             "source_scope_state": source,
             "v02_tags_absent": v02_tags_absent(repo_root),
-            "release_candidate_source_absent": not source["future_aion_243_source_present"],
+            "release_candidate_source_absent": aion243_source_state_ok,
         },
         "resource_state": docker_state,
         "next_architecture_decision": NEXT_ARCHITECTURE_PASS

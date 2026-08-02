@@ -1,0 +1,15 @@
+{
+  "authorization_id": "AION-242-V02RQ-0003",
+  "candidate_id": "aion-v0.2.0-rc.1",
+  "candidate_state": "authorized_pending_local_build",
+  "package_version": "0.2.0rc1",
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "production_deployment": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "registry_push": false,
+  "release_candidate_published": false,
+  "synthetic": true,
+  "v02_release_ready": false
+}

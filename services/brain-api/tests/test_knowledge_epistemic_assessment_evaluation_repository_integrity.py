@@ -7,6 +7,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from aion243_release_candidate_scope import without_aion243_allowed_paths
+
 REPO_ROOT = Path(__file__).resolve().parents[3]
 VALIDATOR = (
     REPO_ROOT / "scripts/lib/knowledge_intelligence_verified_knowledge_authorization.py"
@@ -131,7 +133,9 @@ def _changed_forbidden_files() -> set[str]:
         ]
     )
     assert diff.returncode == 0, diff.stderr
-    return {line.strip() for line in diff.stdout.splitlines() if line.strip()}
+    return without_aion243_allowed_paths(
+        {line.strip() for line in diff.stdout.splitlines() if line.strip()}
+    )
 
 
 def test_aion_212_branch_does_not_add_aion_213_runtime_source():

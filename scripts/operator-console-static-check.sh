@@ -1336,6 +1336,7 @@ for path in sorted(demo_dir.glob("*.json")):
         "v02-staging-rollback-boundary.json",
         "v02-staging-runtime-hold.json",
         "v02-release-candidate-authorization.json",
+        "v02-release-candidate-artifact-build.json",
     }:
         if payload.get("program_id") != "AION-V02-RELEASE-QUALIFICATION-001":
             raise SystemExit(f"v0.2 release qualification program id mismatch: {path}")

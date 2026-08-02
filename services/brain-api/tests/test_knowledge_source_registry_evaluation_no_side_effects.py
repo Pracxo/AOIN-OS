@@ -4,6 +4,7 @@ import json
 import os
 import subprocess
 
+from aion243_release_candidate_scope import without_aion243_allowed_paths
 from knowledge_source_registry_test_helpers import ROOT, read_json
 
 PROTECTED_PATHS = (
@@ -148,7 +149,9 @@ def test_aion_208_does_not_change_runtime_or_package_surfaces():
             text=True,
             check=True,
         )
-        changed = {line.strip() for line in diff.stdout.splitlines() if line.strip()}
+        changed = without_aion243_allowed_paths(
+            {line.strip() for line in diff.stdout.splitlines() if line.strip()}
+        )
     if changed and changed <= AION217_SOURCE_PATHS:
         _assert_aion217_boundaries(changed)
         return

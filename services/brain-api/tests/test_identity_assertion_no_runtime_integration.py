@@ -8,6 +8,12 @@ ALLOWED_NON_SECRET_MARKERS = {
     ROOT / "services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py": (
         "ephemeral_in_memory_signing_key_approved",
     ),
+    ROOT / "services/brain-api/src/aion_brain/contracts/v02_release_candidate.py": (
+        "production_signing_key",
+    ),
+    ROOT / "services/brain-api/src/aion_brain/v02_release_candidate/integrity.py": (
+        "production_signing_key",
+    ),
 }
 
 

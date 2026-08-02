@@ -5,6 +5,8 @@ import os
 import subprocess
 from pathlib import Path
 
+from aion243_release_candidate_scope import without_aion243_allowed_paths
+
 REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
@@ -56,7 +58,9 @@ def test_program_final_evaluation_branch_does_not_modify_runtime_source() -> Non
         text=True,
         check=False,
     )
-    paths = {line.strip() for line in changed.stdout.splitlines() if line.strip()}
+    paths = without_aion243_allowed_paths(
+        {line.strip() for line in changed.stdout.splitlines() if line.strip()}
+    )
     aion239_source_paths = _aion239_source_paths()
     assert not {
         path

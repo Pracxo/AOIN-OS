@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from aion243_release_candidate_scope import without_aion243_allowed_paths
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "scripts/lib"))
@@ -358,7 +359,7 @@ def test_aion163_docs_status_and_release_readiness_are_current() -> None:
 
 
 def test_aion163_does_not_change_protected_sources_or_add_release_artifacts() -> None:
-    changed = _changed_files()
+    changed = without_aion243_allowed_paths(_changed_files())
     for forbidden in PROTECTED_SOURCE_PATHS:
         assert not any(
             (path == forbidden or path.startswith(f"{forbidden}/"))

@@ -18,6 +18,13 @@ ALLOWED_PREFIXES = ("docs/", "examples/", "operator-console-static/", "scripts/"
 ALLOWED_EXACT = {"README.md", "AGENTS.md"}
 PROHIBITED_PREFIXES = (".github/workflows/", "services/brain-api/src/aion_brain/", "services/brain-api/pyproject.toml", "packages/aion-sdk-python/src/", "migrations/", "services/brain-api/migrations/", "infra/postgres/migrations/")
 PROHIBITED_NAMES = {"package.json", "package-lock.json", "pnpm-lock.yaml", "yarn.lock", "bun.lockb", "poetry.lock", "uv.lock", "Pipfile", "Pipfile.lock"}
+AION243_ALLOWED_EXACT = {
+    "packages/aion-sdk-python/pyproject.toml",
+    "scripts/v02-release-candidate-local-run.py",
+    "services/brain-api/pyproject.toml",
+    "services/brain-api/src/aion_brain/contracts/v02_release_candidate.py",
+}
+AION243_ALLOWED_PREFIXES = ("services/brain-api/src/aion_brain/v02_release_candidate/",)
 PERSISTENCE_SUFFIXES = (".db", ".sqlite", ".sqlite3", ".jsonl", ".state")
 AION217_SOURCE_PATHS = {"services/brain-api/src/aion_brain/contracts/knowledge_verified_memory.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_candidates.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_memory.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_lineage.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_versioning.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_revalidation.py", "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_signal_policy.py", "services/brain-api/src/aion_brain/knowledge_intelligence/engagement_learning_candidates.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_integrity.py", "services/brain-api/src/aion_brain/knowledge_intelligence/verified_knowledge_evidence.py", "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py"}
 AION219_SOURCE_PATHS = {"services/brain-api/src/aion_brain/contracts/knowledge_public_research_pilot.py", "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_dns.py", "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_http_transport.py", "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_policy.py", "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_claims.py", "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_pilot.py", "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_session.py", "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_evidence.py", "services/brain-api/src/aion_brain/knowledge_intelligence/public_research_integrity.py", "services/brain-api/src/aion_brain/knowledge_intelligence/__init__.py"}
@@ -93,6 +100,7 @@ def aion241_source_allowed(path: str) -> bool:
 
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]: return subprocess.run(args, cwd=ROOT, text=True, capture_output=True, check=check)
 def ref_exists(ref: str) -> bool: return run(["git", "rev-parse", "--verify", "--quiet", ref], check=False).returncode == 0
+def aion243_source_allowed(path: str) -> bool: return path in AION243_ALLOWED_EXACT or path.startswith(AION243_ALLOWED_PREFIXES)
 def comparison_base() -> str | None:
     candidates: list[str] = []
     github_base = os.environ.get("GITHUB_BASE_REF")
@@ -117,6 +125,7 @@ for parts in changed_entries():
     if status.startswith(("D", "R")): raise SystemExit(f"destructive deletion or rename is not authorized: {parts}")
     for path in paths:
         normalized = path.replace("\\", "/"); changed_paths.add(normalized); name = Path(normalized).name
+        if aion243_source_allowed(normalized): continue
         if name in PROHIBITED_NAMES: raise SystemExit(f"package or dependency file changed: {normalized}")
         if normalized in AION217_SOURCE_PATHS or normalized in AION219_SOURCE_PATHS: continue
         if normalized in AION222_SOURCE: continue
