@@ -6,6 +6,7 @@ cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/python-selection.sh"
 source "$ROOT_DIR/scripts/lib/immutable-tags.sh"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
+source "$ROOT_DIR/scripts/lib/v02-production-auth-scan-exclusions.sh"
 
 PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 export AION_BRAIN_PYTHON="$PYTHON_BIN"
@@ -53,6 +54,15 @@ changed_paths() {
   git diff --name-only --diff-filter=ACMRT HEAD --
   git diff --cached --name-only --diff-filter=ACMRT --
   git ls-files --others --exclude-standard --
+}
+
+changed_paths_without_aion243() {
+  changed_paths | while IFS= read -r path; do
+    [[ -z "$path" ]] && continue
+    if ! aion243_is_scoped_v02_release_candidate_artifact_build_path "$path"; then
+      printf '%s\n' "$path"
+    fi
+  done
 }
 
 is_allowed_path() {
@@ -143,7 +153,7 @@ is_allowed_path() {
   return 1
 }
 
-changed_paths | sort -u | while IFS= read -r path; do
+changed_paths_without_aion243 | sort -u | while IFS= read -r path; do
   [[ -z "$path" ]] && continue
   if ! is_allowed_path "$path"; then
     echo "AION-240 changed path outside operator-evaluation boundary: $path" >&2
@@ -151,19 +161,19 @@ changed_paths | sort -u | while IFS= read -r path; do
   fi
 done
 
-if changed_paths | sort -u | rg -n '^\.github/workflows/' >/dev/null 2>&1; then
+if changed_paths_without_aion243 | sort -u | rg -n '^\.github/workflows/' >/dev/null 2>&1; then
   echo "AION-240 must not modify GitHub workflows" >&2
   exit 1
 fi
-if changed_paths | sort -u | rg -n '(^|/)(package(-lock)?\.json|pnpm-lock\.yaml|yarn\.lock|bun\.lockb|pyproject\.toml)$' >/dev/null 2>&1; then
+if changed_paths_without_aion243 | sort -u | rg -n '(^|/)(package(-lock)?\.json|pnpm-lock\.yaml|yarn\.lock|bun\.lockb|pyproject\.toml)$' >/dev/null 2>&1; then
   echo "AION-240 must not modify package manifests or lockfiles" >&2
   exit 1
 fi
-if changed_paths | sort -u | rg -n '(^migrations/|/migrations/)' >/dev/null 2>&1; then
+if changed_paths_without_aion243 | sort -u | rg -n '(^migrations/|/migrations/)' >/dev/null 2>&1; then
   echo "AION-240 must not add migrations" >&2
   exit 1
 fi
-if changed_paths \
+if changed_paths_without_aion243 \
   | sort -u \
   | rg -v '^services/brain-api/src/aion_brain/contracts/v02_staging_qualification\.py$' \
   | rg -v '^services/brain-api/src/aion_brain/v02_staging_qualification/' \
@@ -171,13 +181,13 @@ if changed_paths \
   echo "AION-240 primary branch must not modify runtime source" >&2
   exit 1
 fi
-if changed_paths | sort -u | rg -n '^packages/aion-sdk-python/src/' >/dev/null 2>&1; then
+if changed_paths_without_aion243 | sort -u | rg -n '^packages/aion-sdk-python/src/' >/dev/null 2>&1; then
   echo "AION-240 primary branch must not modify SDK runtime source" >&2
   exit 1
 fi
 
 code_changes="$(
-  changed_paths \
+  changed_paths_without_aion243 \
     | sort -u \
     | rg -n '^(scripts/.*(\.sh|\.py)|services/brain-api/tests/.*\.py)$' \
     | cut -d: -f2- \

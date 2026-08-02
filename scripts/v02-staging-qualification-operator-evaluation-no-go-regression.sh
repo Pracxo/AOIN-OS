@@ -6,6 +6,7 @@ cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/python-selection.sh"
 source "$ROOT_DIR/scripts/lib/immutable-tags.sh"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
+source "$ROOT_DIR/scripts/lib/v02-production-auth-scan-exclusions.sh"
 
 PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 export AION_BRAIN_PYTHON="$PYTHON_BIN"
@@ -53,6 +54,15 @@ changed_paths() {
   git diff --name-only --diff-filter=ACMRT HEAD --
   git diff --cached --name-only --diff-filter=ACMRT --
   git ls-files --others --exclude-standard --
+}
+
+changed_paths_without_aion243() {
+  changed_paths | while IFS= read -r path; do
+    [[ -z "$path" ]] && continue
+    if ! aion243_is_scoped_v02_release_candidate_artifact_build_path "$path"; then
+      printf '%s\n' "$path"
+    fi
+  done
 }
 
 is_allowed_path() {
@@ -104,7 +114,7 @@ is_allowed_path() {
   return 1
 }
 
-changed_paths | sort -u | while IFS= read -r path; do
+changed_paths_without_aion243 | sort -u | while IFS= read -r path; do
   [[ -z "$path" ]] && continue
   if ! is_allowed_path "$path"; then
     echo "AION-242 changed path outside staging operator-evaluation boundary: $path" >&2
@@ -112,33 +122,33 @@ changed_paths | sort -u | while IFS= read -r path; do
   fi
 done
 
-if changed_paths | sort -u | rg -n '^\.github/workflows/' >/dev/null 2>&1; then
+if changed_paths_without_aion243 | sort -u | rg -n '^\.github/workflows/' >/dev/null 2>&1; then
   echo "AION-242 must not modify GitHub workflows" >&2
   exit 1
 fi
-if changed_paths | sort -u | rg -n '(^|/)(package(-lock)?\.json|pnpm-lock\.yaml|yarn\.lock|bun\.lockb|pyproject\.toml)$' >/dev/null 2>&1; then
+if changed_paths_without_aion243 | sort -u | rg -n '(^|/)(package(-lock)?\.json|pnpm-lock\.yaml|yarn\.lock|bun\.lockb|pyproject\.toml)$' >/dev/null 2>&1; then
   echo "AION-242 must not modify package manifests, versions or lockfiles" >&2
   exit 1
 fi
-if changed_paths | sort -u | rg -n '(^migrations/|/migrations/)' >/dev/null 2>&1; then
+if changed_paths_without_aion243 | sort -u | rg -n '(^migrations/|/migrations/)' >/dev/null 2>&1; then
   echo "AION-242 must not add migrations" >&2
   exit 1
 fi
-if changed_paths | sort -u | rg -n '^services/brain-api/src/aion_brain/' >/dev/null 2>&1; then
+if changed_paths_without_aion243 | sort -u | rg -n '^services/brain-api/src/aion_brain/' >/dev/null 2>&1; then
   echo "AION-242 primary branch must not modify runtime source" >&2
   exit 1
 fi
-if changed_paths | sort -u | rg -n '^packages/aion-sdk-python/src/' >/dev/null 2>&1; then
+if changed_paths_without_aion243 | sort -u | rg -n '^packages/aion-sdk-python/src/' >/dev/null 2>&1; then
   echo "AION-242 primary branch must not modify SDK runtime source" >&2
   exit 1
 fi
-if changed_paths | sort -u | rg -n '^services/brain-api/src/aion_brain/(contracts/)?v02_release_candidate|^services/brain-api/src/aion_brain/v02_release_candidate/|^scripts/v02-release-candidate-local-run\.py$' >/dev/null 2>&1; then
+if changed_paths_without_aion243 | sort -u | rg -n '^services/brain-api/src/aion_brain/(contracts/)?v02_release_candidate|^services/brain-api/src/aion_brain/v02_release_candidate/|^scripts/v02-release-candidate-local-run\.py$' >/dev/null 2>&1; then
   echo "AION-242 must not create AION-243 release-candidate source" >&2
   exit 1
 fi
 
 code_changes="$(
-  changed_paths \
+  changed_paths_without_aion243 \
     | sort -u \
     | rg -n '^(scripts/.*(\.sh|\.py)|services/brain-api/tests/.*\.py)$' \
     | cut -d: -f2- \
@@ -178,6 +188,9 @@ from pathlib import Path
 import v02_staging_qualification_operator_evaluation as eval242
 
 root = Path.cwd()
+aion243_evidence_exists = (
+    root / "examples/v02-release-qualification/v02-release-candidate-artifact-build-evidence.json"
+).is_file()
 for relative in (
     "docs/v02-release-qualification/program-ledger.json",
     "docs/v02-release-qualification/authorization-ledger.json",
@@ -189,11 +202,19 @@ for relative in (
         raise SystemExit(f"{relative} must keep v02_tag_created=false")
     if payload.get("v02_release_created") is not False:
         raise SystemExit(f"{relative} must keep v02_release_created=false")
-for path in eval242.FUTURE_AION243_SOURCE_SCOPE:
-    if (root / path).exists():
-        raise SystemExit(f"AION-243 source exists before authorization is consumed: {path}")
-if (root / eval242.FUTURE_AION243_RUNNER).exists():
-    raise SystemExit("AION-243 runner exists before authorization is consumed")
+    if aion243_evidence_exists:
+        if payload.get("release_candidate_artifact_build_implemented") is not True:
+            raise SystemExit(f"{relative} AION-243 local release-candidate build state missing")
+        if payload.get("release_candidate_created") is not True:
+            raise SystemExit(f"{relative} AION-243 local release candidate state missing")
+        if payload.get("release_candidate_published") is not False:
+            raise SystemExit(f"{relative} AION-243 release candidate must remain unpublished")
+if not aion243_evidence_exists:
+    for path in eval242.FUTURE_AION243_SOURCE_SCOPE:
+        if (root / path).exists():
+            raise SystemExit(f"AION-243 source exists before authorization is consumed: {path}")
+    if (root / eval242.FUTURE_AION243_RUNNER).exists():
+        raise SystemExit("AION-243 runner exists before authorization is consumed")
 PY
 
 aion_confirm_immutable_v01_tag_history >/dev/null

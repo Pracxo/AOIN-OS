@@ -46,9 +46,17 @@ auth = json.loads(
 )
 
 if auth.get("authorization_transaction_id") == aion242.NEXT_AUTHORIZATION_ID:
+    aion243_evidence_exists = (
+        root / "examples/v02-release-qualification/v02-release-candidate-artifact-build-evidence.json"
+    ).is_file()
     expected_program_state = (
-        "controlled_staging_qualification_evaluated_release_candidate_build_"
-        "authorized_not_implemented"
+        "deterministic_v02_release_candidate_artifact_built_local_candidate_"
+        "retained_pending_final_evaluation"
+        if aion243_evidence_exists
+        else (
+            "controlled_staging_qualification_evaluated_release_candidate_build_"
+            "authorized_not_implemented"
+        )
     )
     expected_limits = {
         **aion242.POSITIVE_AION243_LIMITS,
@@ -77,8 +85,8 @@ if auth.get("authorization_transaction_id") == aion242.NEXT_AUTHORIZATION_ID:
             "authorization_expired": False,
             "authorization_reusable": False,
             "release_candidate_artifact_build_authorized": True,
-            "release_candidate_artifact_build_implemented": False,
-            "release_candidate_created": False,
+            "release_candidate_artifact_build_implemented": aion243_evidence_exists,
+            "release_candidate_created": aion243_evidence_exists,
             "release_candidate_published": False,
             "production_runtime_authorized": False,
             "production_deployment_enabled": False,
@@ -89,6 +97,11 @@ if auth.get("authorization_transaction_id") == aion242.NEXT_AUTHORIZATION_ID:
         for key, expected in required.items():
             if payload.get(key) != expected:
                 raise SystemExit(f"{label} AION-242 mismatch {key}: {payload.get(key)!r}")
+        if aion243_evidence_exists:
+            if payload.get("candidate_bundle_retained") is not True:
+                raise SystemExit(f"{label} AION-243 candidate bundle retention missing")
+            if payload.get("candidate_local_image_retained") is not True:
+                raise SystemExit(f"{label} AION-243 candidate image retention missing")
         closed = payload.get("aion_240_authorization_closeout", {})
         if closed.get("authorization_transaction_id") != aion242.CURRENT_AUTHORIZATION_ID:
             raise SystemExit(f"{label} missing AION-240 closeout")

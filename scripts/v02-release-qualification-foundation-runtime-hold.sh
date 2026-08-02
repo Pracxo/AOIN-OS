@@ -27,6 +27,10 @@ from aion_brain.contracts import v02_release_qualification as c
 import v02_release_qualification_foundation_operator_evaluation as aion240
 import v02_staging_qualification_operator_evaluation as aion242
 
+aion243_evidence_exists = Path(
+    "examples/v02-release-qualification/v02-release-candidate-artifact-build-evidence.json"
+).is_file()
+
 for label, path in (
     ("program", Path("docs/v02-release-qualification/program-ledger.json")),
     ("authorization", Path("docs/v02-release-qualification/authorization-ledger.json")),
@@ -108,10 +112,16 @@ for label, path in (
                 raise SystemExit(f"{label} AION-242 operator evaluation pass missing")
             if payload.get("release_candidate_artifact_build_authorized") is not True:
                 raise SystemExit(f"{label} release-candidate build authorization missing")
-            if payload.get("release_candidate_artifact_build_implemented") is not False:
-                raise SystemExit(f"{label} release-candidate build must remain unimplemented")
-            if payload.get("release_candidate_created") is not False:
-                raise SystemExit(f"{label} release candidate must remain absent")
+            if aion243_evidence_exists:
+                if payload.get("release_candidate_artifact_build_implemented") is not True:
+                    raise SystemExit(f"{label} AION-243 local release-candidate build state missing")
+                if payload.get("release_candidate_created") is not True:
+                    raise SystemExit(f"{label} AION-243 local release candidate state missing")
+            else:
+                if payload.get("release_candidate_artifact_build_implemented") is not False:
+                    raise SystemExit(f"{label} release-candidate build must remain unimplemented")
+                if payload.get("release_candidate_created") is not False:
+                    raise SystemExit(f"{label} release candidate must remain absent")
             if payload.get("release_candidate_published") is not False:
                 raise SystemExit(f"{label} release candidate must remain unpublished")
             closed = payload.get("aion_240_authorization_closeout", {})

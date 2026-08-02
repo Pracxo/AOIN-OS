@@ -77,9 +77,17 @@ aion242_final_state = (
     "controlled_staging_qualification_evaluated_release_candidate_build_"
     "authorized_not_implemented"
 )
+aion243_final_state = (
+    "deterministic_v02_release_candidate_artifact_built_local_candidate_"
+    "retained_pending_final_evaluation"
+)
+aion243_evidence_exists = (
+    root / "examples/v02-release-qualification/v02-release-candidate-artifact-build-evidence.json"
+).is_file()
 aion241_controlled_state = "implemented_isolated_local_pilot_complete_pending_AION-242_closeout"
 for label, payload in (("program", program), ("authorization", auth)):
-    if payload["program_state"] == aion242_final_state:
+    if payload["program_state"] in {aion242_final_state, aion243_final_state}:
+        aion243_complete = payload["program_state"] == aion243_final_state
         required = {
             "program_id": aion240.PROGRAM_ID,
             "v02_release_qualification_program_authorized": True,
@@ -108,8 +116,8 @@ for label, payload in (("program", program), ("authorization", auth)):
             "authorization_expired": False,
             "authorization_reusable": False,
             "release_candidate_artifact_build_authorized": True,
-            "release_candidate_artifact_build_implemented": False,
-            "release_candidate_created": False,
+            "release_candidate_artifact_build_implemented": aion243_complete,
+            "release_candidate_created": aion243_complete,
             "release_candidate_published": False,
             "release_candidate_creation_enabled": True,
             "production_runtime_authorized": False,
@@ -122,6 +130,13 @@ for label, payload in (("program", program), ("authorization", auth)):
         for key, expected in required.items():
             if payload.get(key) != expected:
                 raise SystemExit(f"{label} AION-242 final mismatch {key}: {payload.get(key)!r}")
+        if aion243_complete:
+            if not aion243_evidence_exists:
+                raise SystemExit(f"{label} AION-243 evidence file is required for local candidate state")
+            if payload.get("candidate_bundle_retained") is not True:
+                raise SystemExit(f"{label} AION-243 candidate bundle retention missing")
+            if payload.get("candidate_local_image_retained") is not True:
+                raise SystemExit(f"{label} AION-243 candidate image retention missing")
         if payload.get("aion_239_resource_limits") != c.resource_limits().model_dump():
             raise SystemExit(f"{label} AION-239 resource limits mismatch")
         expected_aion241_limits = {

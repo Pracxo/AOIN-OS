@@ -44,6 +44,9 @@ evidence = json.loads(
         "v02-controlled-isolated-staging-pilot-evidence.json"
     ).read_text(encoding="utf-8")
 )
+aion243_evidence_exists = Path(
+    "examples/v02-release-qualification/v02-release-candidate-artifact-build-evidence.json"
+).is_file()
 if authorization.get("authorization_transaction_id") == ev.NEXT_AUTHORIZATION_ID:
     for label, payload in (("program", program), ("authorization", authorization)):
         if payload.get("active_v02_release_qualification_authorization") != ev.NEXT_AUTHORIZATION_ID:
@@ -54,10 +57,17 @@ if authorization.get("authorization_transaction_id") == ev.NEXT_AUTHORIZATION_ID
             raise SystemExit(f"{label} active task mismatch after AION-242")
         if payload.get("release_candidate_artifact_build_authorized") is not True:
             raise SystemExit(f"{label} release-candidate build authorization missing")
-        if payload.get("release_candidate_artifact_build_implemented") is not False:
-            raise SystemExit(f"{label} release-candidate build must remain unimplemented")
+        if aion243_evidence_exists:
+            if payload.get("release_candidate_artifact_build_implemented") is not True:
+                raise SystemExit(f"{label} AION-243 local release-candidate build state missing")
+            if payload.get("release_candidate_created") is not True:
+                raise SystemExit(f"{label} AION-243 local release candidate state missing")
+        else:
+            if payload.get("release_candidate_artifact_build_implemented") is not False:
+                raise SystemExit(f"{label} release-candidate build must remain unimplemented")
+            if payload.get("release_candidate_created") is not False:
+                raise SystemExit(f"{label} release candidate must remain absent")
         for key in (
-            "release_candidate_created",
             "release_candidate_published",
             "production_runtime_authorized",
             "production_deployment_enabled",
