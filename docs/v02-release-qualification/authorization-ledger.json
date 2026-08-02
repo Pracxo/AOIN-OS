@@ -552,23 +552,29 @@
     "maximum_v02_tags_created": 0
   },
   "aion_242_record": {
+    "authorization_state": "active_for_AION-243_formal_closeout_AION-244",
     "authorization_transaction": "AION-242-V02RQ-0003",
     "branch": "phase/v02-staging-qualification-evaluation-release-candidate-authorization",
-    "ci_result": "pending",
-    "closeout_commit": null,
-    "completion_timestamp": null,
+    "ci_result": "pass",
+    "closeout_commit": "6288ba8e24cf4f3427d2087f1c7764cda08dbeed",
+    "completion_timestamp": "2026-08-02T17:37:14Z",
     "corrective_cycles": 0,
     "evaluation_decision": "CONTROLLED_ISOLATED_LOCAL_STAGING_QUALIFICATION_OPERATOR_EVALUATION_PASS_RECOMMEND_DETERMINISTIC_V02_RELEASE_CANDIDATE_ARTIFACT_BUILD_AUTHORIZATION",
     "evaluation_id": "AION-V02RQPE-002",
     "evaluation_report_fingerprint": "4d9326cb690e006442ca15035c8bbd225509fd2a1d1b05d4e47c2a30feab6230",
     "feature_commits": [
-      "cfc881c8e50b35852176221ff8635e1996f2591d"
+      "cfc881c8e50b35852176221ff8635e1996f2591d",
+      "6288ba8e24cf4f3427d2087f1c7764cda08dbeed"
     ],
     "hard_gate_count": 28,
     "harness_commit": "cfc881c8e50b35852176221ff8635e1996f2591d",
-    "merge_commits": [],
+    "merge_commits": [
+      "d01071f764227e356ada89422de1a4ff1261b2d4"
+    ],
     "next_task": "AION-243",
-    "pull_requests": [],
+    "pull_requests": [
+      161
+    ],
     "release_candidate_created": false,
     "runtime_state": "deterministic_v02_release_candidate_artifact_build_authorized_not_implemented",
     "scenario_count": 28,
@@ -633,15 +639,29 @@
     "v02_tag_created": false
   },
   "aion_243_record": {
-    "authorization_state": "implementation_in_progress_formal_closeout_AION-244",
+    "authorization_state": "implementation_complete_pending_AION-244_closeout",
     "authorization_transaction": "AION-242-V02RQ-0003",
     "branch": "phase/v02-release-candidate-artifact-build",
+    "candidate_evidence_path": "examples/v02-release-qualification/v02-release-candidate-artifact-build-evidence.json",
+    "candidate_id": "aion-v0.2.0-rc.1",
+    "candidate_image_id": "sha256:0247d4f8fc270f2eadbca256f1f48475289da6744393bd2fd278e43d9d565f0d",
+    "candidate_source_commit": "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e",
+    "ci_result": "pending",
+    "completion_timestamp": null,
+    "evidence_commit": null,
+    "feature_commits": [
+      "19da1991027ba702d9a382c42e3ad5ff10d60d93",
+      "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e"
+    ],
+    "implementation_commit": "19da1991027ba702d9a382c42e3ad5ff10d60d93",
+    "merge_commits": [],
     "next_task": "AION-244",
+    "pull_requests": [],
     "release_candidate_artifact_build_authorized": true,
-    "release_candidate_artifact_build_implemented": false,
-    "release_candidate_created": false,
+    "release_candidate_artifact_build_implemented": true,
+    "release_candidate_created": true,
     "release_candidate_published": false,
-    "runtime_state": "deterministic_v02_release_candidate_artifact_build_authorized_not_implemented",
+    "runtime_state": "deterministic_local_v02_release_candidate_bundle_retained_pending_final_evaluation",
     "task_id": "AION-243"
   },
   "aion_243_resource_limits": {
@@ -745,8 +765,12 @@
   "authorization_transaction_approved": true,
   "authorization_transaction_id": "AION-242-V02RQ-0003",
   "automatic_merge_enabled": false,
+  "candidate_bundle_count": 1,
+  "candidate_bundle_retained": true,
   "candidate_id": "deterministic-v02-release-candidate-artifact-build-core",
   "candidate_label": "aion-v0.2.0-rc.1",
+  "candidate_local_image_count": 1,
+  "candidate_local_image_retained": true,
   "candidate_python_package_version": "0.2.0rc1",
   "candidate_retention": {
     "commit_only_redacted_fingerprints": true,
@@ -1130,7 +1154,7 @@
   "production_write_execution_enabled": false,
   "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
   "program_name": "AION v0.2 Release Qualification Program",
-  "program_state": "controlled_staging_qualification_evaluated_release_candidate_build_authorized_not_implemented",
+  "program_state": "deterministic_v02_release_candidate_artifact_built_local_candidate_retained_pending_final_evaluation",
   "prohibited_capabilities": {
     "automatic_merge_enabled": false,
     "cloud_deployment_enabled": false,
@@ -1203,12 +1227,13 @@
   "registry_pull_enabled": false,
   "registry_push_enabled": false,
   "release_candidate_artifact_build_authorized": true,
-  "release_candidate_artifact_build_implemented": false,
-  "release_candidate_artifact_state": "authorized_not_implemented",
-  "release_candidate_created": false,
+  "release_candidate_artifact_build_implemented": true,
+  "release_candidate_artifact_state": "implemented_local_candidate_retained_pending_AION-244_closeout",
+  "release_candidate_created": true,
   "release_candidate_creation_enabled": true,
   "release_candidate_evidence_matrix_approved": true,
   "release_candidate_evidence_matrix_available": true,
+  "release_candidate_promoted": false,
   "release_candidate_published": false,
   "release_gate_matrix_approved": true,
   "release_gate_matrix_available": true,

@@ -173,10 +173,21 @@ def test_v02_release_qualification_successor_authorization_is_exact_and_disabled
             }
         ]
     elif auth["authorization_transaction_id"] == AION242_AUTHORIZATION_ID:
-        assert program["program_state"] == (
-            "controlled_staging_qualification_evaluated_release_candidate_build_"
-            "authorized_not_implemented"
+        aion243_evidence_exists = (
+            REPO_ROOT
+            / "examples/v02-release-qualification/"
+            "v02-release-candidate-artifact-build-evidence.json"
+        ).is_file()
+        expected_program_state = (
+            "deterministic_v02_release_candidate_artifact_built_local_candidate_"
+            "retained_pending_final_evaluation"
+            if aion243_evidence_exists
+            else (
+                "controlled_staging_qualification_evaluated_release_candidate_build_"
+                "authorized_not_implemented"
+            )
         )
+        assert program["program_state"] == expected_program_state
         assert program["active_v02_release_qualification_authorization_count"] == 1
         assert program["active_v02_release_qualification_authorization"] == (
             AION242_AUTHORIZATION_ID
@@ -189,8 +200,13 @@ def test_v02_release_qualification_successor_authorization_is_exact_and_disabled
             is True
         )
         assert program["release_candidate_artifact_build_authorized"] is True
-        assert program["release_candidate_artifact_build_implemented"] is False
-        assert program["release_candidate_created"] is False
+        assert program["release_candidate_artifact_build_implemented"] is (
+            aion243_evidence_exists
+        )
+        assert program["release_candidate_created"] is aion243_evidence_exists
+        if aion243_evidence_exists:
+            assert program["candidate_bundle_retained"] is True
+            assert program["candidate_local_image_retained"] is True
         assert program["release_candidate_published"] is False
         assert program["production_runtime_authorized"] is False
         assert program["production_deployment_enabled"] is False

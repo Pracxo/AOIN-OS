@@ -14,6 +14,10 @@ REPORT_PATH = (
     REPO_ROOT
     / "examples/v02-release-qualification/staging-qualification-operator-evaluation-report.json"
 )
+AION243_EVIDENCE_PATH = (
+    REPO_ROOT
+    / "examples/v02-release-qualification/v02-release-candidate-artifact-build-evidence.json"
+)
 
 
 def load_harness():
@@ -91,8 +95,14 @@ def test_source_scope_authorization_and_release_boundary_are_strict():
     assert source["missing_source_scope"] == []
     assert source["runtime_source_scope_exact"] is True
     assert source["prohibited_source_present"] == []
-    assert source["future_aion_243_source_present"] == []
-    assert source["future_aion_243_runner_present"] is False
+    if program["active_v02_release_qualification_task"] == "AION-243":
+        assert set(source["future_aion_243_source_present"]) == set(
+            harness.FUTURE_AION243_SOURCE_SCOPE
+        )
+        assert source["future_aion_243_runner_present"] is True
+    else:
+        assert source["future_aion_243_source_present"] == []
+        assert source["future_aion_243_runner_present"] is False
     assert auth_state["lineage_valid"] is True
     assert auth_state["sole_active_authorization_exact"] is True
     assert program["v02_release_ready"] is False
@@ -148,8 +158,14 @@ def test_release_candidate_authorization_when_present_stays_non_release():
     )
     assert program["active_v02_release_qualification_task"] == "AION-243"
     assert program["release_candidate_artifact_build_authorized"] is True
-    assert program["release_candidate_artifact_build_implemented"] is False
-    assert program["release_candidate_created"] is False
+    if AION243_EVIDENCE_PATH.exists():
+        assert program["release_candidate_artifact_build_implemented"] is True
+        assert program["release_candidate_created"] is True
+        assert program["candidate_bundle_retained"] is True
+        assert program["candidate_local_image_retained"] is True
+    else:
+        assert program["release_candidate_artifact_build_implemented"] is False
+        assert program["release_candidate_created"] is False
     assert program["release_candidate_published"] is False
     assert program["production_deployment_enabled"] is False
     assert program["v02_release_ready"] is False

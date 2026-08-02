@@ -66,6 +66,13 @@ PROHIBITED_NAMES = {
     "Pipfile",
     "Pipfile.lock",
 }
+AION243_ALLOWED_EXACT = {
+    "packages/aion-sdk-python/pyproject.toml",
+    "scripts/v02-release-candidate-local-run.py",
+    "services/brain-api/pyproject.toml",
+    "services/brain-api/src/aion_brain/contracts/v02_release_candidate.py",
+}
+AION243_ALLOWED_PREFIXES = ("services/brain-api/src/aion_brain/v02_release_candidate/",)
 PROHIBITED_AION235_SOURCE = (
     "services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime.py",
     "services/brain-api/src/aion_brain/capability_runtime/",
@@ -117,6 +124,10 @@ def aion241_source_allowed(path: str) -> bool:
         path == "services/brain-api/src/aion_brain/contracts/v02_staging_qualification.py"
         or path.startswith("services/brain-api/src/aion_brain/v02_staging_qualification/")
     )
+
+
+def aion243_source_allowed(path: str) -> bool:
+    return path in AION243_ALLOWED_EXACT or path.startswith(AION243_ALLOWED_PREFIXES)
 
 
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -224,6 +235,8 @@ for parts in changed_entries():
         raise SystemExit(f"source deletion or rename is not authorized: {parts}")
     for raw_path in paths:
         path = raw_path.replace("\\", "/")
+        if aion243_source_allowed(path):
+            continue
         changed_paths.add(path)
         if Path(path).name in PROHIBITED_NAMES:
             raise SystemExit(f"dependency/package file changed: {path}")

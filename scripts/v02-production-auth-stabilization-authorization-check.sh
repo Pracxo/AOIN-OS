@@ -61,6 +61,16 @@ changed_files() {
   } | sort -u
 }
 
+filtered_changed_files() {
+  changed_files "$@" | while IFS= read -r file; do
+    [[ -n "$file" ]] || continue
+    if aion243_is_scoped_v02_release_candidate_artifact_build_path "$file"; then
+      continue
+    fi
+    printf '%s\n' "$file"
+  done
+}
+
 required_docs=(
   docs/release/v02-production-auth-core-implementation-closeout.md
   docs/release/v02-production-auth-stabilization-authorization-transaction.md
@@ -143,6 +153,9 @@ while IFS= read -r file; do
   if aion162_is_scoped_offline_identity_assertion_verification_path "$file"; then
     continue
   fi
+  if aion243_is_scoped_v02_release_candidate_artifact_build_path "$file"; then
+    continue
+  fi
   echo "AION-153 must not modify production-auth source, config, or kernel wiring: $file" >&2
   exit 1
 done < <(
@@ -154,19 +167,19 @@ done < <(
     services/brain-api/src/aion_brain/kernel/diagnostics.py
 )
 
-if changed_files services/brain-api/src/aion_brain/api packages/aion-sdk-python/src | rg -n '.'; then
+if filtered_changed_files services/brain-api/src/aion_brain/api packages/aion-sdk-python/src | rg -n '.'; then
   echo "AION-153 must not modify API routes, SDK resources, or CLI source" >&2
   exit 1
 fi
 
-if changed_files \
+if filtered_changed_files \
   | rg -v '^services/brain-api/tests/test_identity_assertion_replay_no_dependency_or_migration\.py$' \
   | rg -n '(^|/)(migrations|alembic)/|(^|/).*migration.*\.(py|sql)$'; then
   echo "AION-153 must not add or change migrations" >&2
   exit 1
 fi
 
-if changed_files packages | rg -n '(^|/)(pyproject\.toml|package\.json|package-lock\.json|pnpm-lock\.yaml|yarn\.lock|bun\.lockb)$'; then
+if filtered_changed_files packages | rg -n '(^|/)(pyproject\.toml|package\.json|package-lock\.json|pnpm-lock\.yaml|yarn\.lock|bun\.lockb)$'; then
   echo "AION-153 must not add package files or lockfiles" >&2
   exit 1
 fi

@@ -4,11 +4,13 @@ import os
 import subprocess
 from pathlib import Path
 
+from aion243_release_candidate_scope import without_aion243_allowed_paths
+
 ROOT = Path(__file__).resolve().parents[3]
 
 
 def test_pyproject_package_files_and_migrations_are_unchanged() -> None:
-    changed = _changed_files()
+    changed = without_aion243_allowed_paths(_changed_files())
     migration_name_allowlist = {
         "services/brain-api/tests/test_identity_assertion_replay_no_dependency_or_migration.py",
     }

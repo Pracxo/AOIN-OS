@@ -1,0 +1,13 @@
+{
+  "authorization_id": "AION-242-V02RQ-0003",
+  "candidate_id": "aion-v0.2.0-rc.1",
+  "candidate_root_path_retained_in_committed_evidence": false,
+  "candidate_root_policy": "user-home/.aion/release-candidates/<candidate-label>",
+  "mode": "deterministic_local_release_candidate_build",
+  "package_version": "0.2.0rc1",
+  "production_deployment": false,
+  "registry_push": false,
+  "release_candidate_created": false,
+  "release_candidate_published": false,
+  "v02_release_ready": false
+}

@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from aion243_release_candidate_scope import without_aion243_allowed_paths
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "scripts/lib"))
@@ -251,7 +252,7 @@ def test_v02_production_auth_stabilization_scripts_are_executable_and_pass() -> 
 
 def test_v02_production_auth_stabilization_does_not_change_forbidden_sources() -> None:
     changed = (
-        _changed_files()
+        without_aion243_allowed_paths(_changed_files())
         - AION156_ALLOWED_CHANGED_PATHS
         - AION160_ALLOWED_CHANGED_PATHS
         - AION162_ALLOWED_CHANGED_PATHS

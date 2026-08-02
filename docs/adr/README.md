@@ -221,3 +221,4 @@ closure decision in ADR 0072.
 - [ADR 0204: v0.2 Qualification Foundation Evaluation and Controlled Isolated Staging Qualification Authorization](0204-v02-qualification-foundation-evaluation-and-controlled-isolated-staging-qualification-authorization.md)
 - [ADR 0205: Controlled Isolated Local Staging Artifact Build and Rollback Drill](0205-controlled-isolated-local-staging-artifact-build-and-rollback-drill.md)
 - [ADR 0206: Controlled Staging Evaluation and Deterministic v0.2 Release-Candidate Artifact Build Authorization](0206-controlled-staging-evaluation-and-deterministic-v02-release-candidate-artifact-build-authorization.md)
+- [ADR 0207: Deterministic Local v0.2 Release-Candidate Artifact Bundle Build and Retention](0207-deterministic-local-v02-release-candidate-artifact-bundle-build-and-retention.md)

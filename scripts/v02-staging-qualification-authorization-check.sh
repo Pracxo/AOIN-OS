@@ -28,6 +28,9 @@ program = json.loads((root / "docs/v02-release-qualification/program-ledger.json
 auth = json.loads((root / "docs/v02-release-qualification/authorization-ledger.json").read_text(encoding="utf-8"))
 staging = json.loads((root / "examples/v02-release-qualification/staging-qualification-authorization.json").read_text(encoding="utf-8"))
 report = json.loads((root / "examples/v02-release-qualification/foundation-operator-evaluation-report.json").read_text(encoding="utf-8"))
+aion243_evidence_exists = (
+    root / "examples/v02-release-qualification/v02-release-candidate-artifact-build-evidence.json"
+).is_file()
 h.validate_report(report)
 
 if report["decision"] != h.PASS_DECISION:
@@ -63,7 +66,10 @@ if auth.get("authorization_transaction_id") == ev.NEXT_AUTHORIZATION_ID:
             raise SystemExit(f"{payload_name} formal closeout mismatch after AION-242")
         if payload.get("release_candidate_artifact_build_authorized") is not True:
             raise SystemExit(f"{payload_name} release-candidate build not authorized after AION-242")
-        if payload.get("release_candidate_created") is not False:
+        if aion243_evidence_exists:
+            if payload.get("release_candidate_created") is not True:
+                raise SystemExit(f"{payload_name} AION-243 local release candidate state missing")
+        elif payload.get("release_candidate_created") is not False:
             raise SystemExit(f"{payload_name} release candidate must remain absent")
         if payload.get("v02_release_ready") is not False:
             raise SystemExit(f"{payload_name} v02_release_ready must remain false")

@@ -3,6 +3,7 @@ from __future__ import annotations
 import os
 import subprocess
 
+from aion243_release_candidate_scope import without_aion243_allowed_paths
 from scripts.lib.governed_learning_memory_engagement_application import (
     AION226_SOURCE_SCOPE,
     AION226_SUPPORT_SCOPE,
@@ -176,7 +177,9 @@ def test_aion_223_does_not_change_runtime_source_surface() -> None:
         text=True,
         check=True,
     )
-    changed = {line for line in diff.stdout.splitlines() if line}
+    changed = without_aion243_allowed_paths(
+        {line for line in diff.stdout.splitlines() if line}
+    )
     allowed = set()
     if _aion224_implemented():
         allowed.update(AION224_SOURCE_SCOPE)

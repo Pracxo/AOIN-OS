@@ -2,6 +2,7 @@ import importlib.util
 import json
 import sys
 
+from aion243_release_candidate_scope import is_aion243_allowed_path
 from knowledge_source_registry_test_helpers import (
     PROHIBITED_SOURCE_RUNTIME_PATHS,
     ROOT,
@@ -66,6 +67,8 @@ def test_aion_206_does_not_add_runtime_source_or_release_surfaces():
     aion217_source_paths = _aion217_source_paths()
     aion239_source_paths = _aion239_source_paths()
     for path in changed:
+        if is_aion243_allowed_path(path):
+            continue
         assert not path.startswith(".github/workflows/"), path
         if path.startswith("services/brain-api/src/aion_brain/"):
             assert (

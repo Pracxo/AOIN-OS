@@ -83,6 +83,9 @@ while IFS= read -r file; do
   if aion237_is_scoped_operator_console_integrated_local_runtime_path "$file"; then
     continue
   fi
+  if aion243_is_scoped_v02_release_candidate_artifact_build_path "$file"; then
+    continue
+  fi
   case "$file" in
     services/brain-api/pyproject.toml|\
     services/brain-api/src/aion_brain/contracts/identity_assertion.py|\

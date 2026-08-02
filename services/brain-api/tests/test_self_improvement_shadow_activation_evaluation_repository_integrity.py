@@ -9,6 +9,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from aion243_release_candidate_scope import without_aion243_allowed_paths
+
 ROOT = Path(__file__).resolve().parents[3]
 VALIDATOR = ROOT / "scripts/lib/knowledge_intelligence_verified_knowledge_authorization.py"
 
@@ -121,7 +123,7 @@ def _changed_files() -> set[str]:
 
 
 def test_aion_182_does_not_modify_protected_runtime_paths() -> None:
-    changed = _changed_files()
+    changed = without_aion243_allowed_paths(_changed_files())
     aion217_paths = _aion217_source_paths()
     aion239_paths = _aion239_source_paths()
     blocked = [

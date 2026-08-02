@@ -5,6 +5,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/immutable-tags.sh"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
+source "$ROOT_DIR/scripts/lib/v02-production-auth-scan-exclusions.sh"
 
 if [[ -f docs/secure-runtime-integration/program-ledger.json ]] && \
   grep -q '"program_state": "sandboxed_capability_runtime_implemented_reference_only_pending_closeout"' docs/secure-runtime-integration/program-ledger.json && \
@@ -434,6 +435,9 @@ fi
 
 while IFS= read -r path; do
   [[ -n "$path" ]] || continue
+  if aion243_is_scoped_v02_release_candidate_artifact_build_path "$path"; then
+    continue
+  fi
 		  if ! is_allowed_path "$path"; then
 		    if ! is_aion233_model_gateway_source_path "$path" && \
 		      ! is_aion235_capability_runtime_source_path "$path" && \
@@ -462,6 +466,9 @@ done < "$changed_file_list"
 
 while IFS=$'\t' read -r status path rest; do
   [[ -n "${status:-}" ]] || continue
+  if aion243_is_scoped_v02_release_candidate_artifact_build_path "$path"; then
+    continue
+  fi
   if [[ "$status" == D* || "$status" == R* ]]; then
     case "$path" in
       services/brain-api/src/*|packages/*|scripts/*)

@@ -5,6 +5,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/immutable-tags.sh"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
+source "$ROOT_DIR/scripts/lib/v02-production-auth-scan-exclusions.sh"
 
 ALLOWED_PREFIXES=(
   "docs/"
@@ -249,6 +250,9 @@ while IFS=$'\t' read -r status path extra; do
   for changed in "$path" "${extra:-}"; do
     [[ -z "$changed" ]] && continue
     if aion241_is_scoped_v02_staging_qualification_path "$changed"; then
+      continue
+    fi
+    if aion243_is_scoped_v02_release_candidate_artifact_build_path "$changed"; then
       continue
     fi
     if is_prohibited_path "$changed"; then

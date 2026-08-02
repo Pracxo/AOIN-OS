@@ -6,6 +6,7 @@ cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/python-selection.sh"
 source "$ROOT_DIR/scripts/lib/immutable-tags.sh"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
+source "$ROOT_DIR/scripts/lib/v02-production-auth-scan-exclusions.sh"
 
 PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 export AION_BRAIN_PYTHON="$PYTHON_BIN"
@@ -53,6 +54,15 @@ changed_paths() {
   git diff --name-only --diff-filter=ACMRT HEAD --
   git diff --cached --name-only --diff-filter=ACMRT --
   git ls-files --others --exclude-standard --
+}
+
+changed_paths_without_aion243() {
+  changed_paths | while IFS= read -r path; do
+    [[ -z "$path" ]] && continue
+    if ! aion243_is_scoped_v02_release_candidate_artifact_build_path "$path"; then
+      printf '%s\n' "$path"
+    fi
+  done
 }
 
 is_allowed_path() {
@@ -215,17 +225,17 @@ while IFS= read -r path; do
     echo "AION-238 changed path outside v0.2 qualification authorization boundary: $path" >&2
     exit 1
   fi
-done < <(changed_paths | sort -u)
+done < <(changed_paths_without_aion243 | sort -u)
 
-if changed_paths | sort -u | rg -n '^\.github/workflows/' >/dev/null 2>&1; then
+if changed_paths_without_aion243 | sort -u | rg -n '^\.github/workflows/' >/dev/null 2>&1; then
   echo "AION-238 must not modify GitHub workflows" >&2
   exit 1
 fi
-if changed_paths | sort -u | rg -n '(^|/)(package(-lock)?\.json|pnpm-lock\.yaml|yarn\.lock|pyproject\.toml)$' >/dev/null 2>&1; then
+if changed_paths_without_aion243 | sort -u | rg -n '(^|/)(package(-lock)?\.json|pnpm-lock\.yaml|yarn\.lock|pyproject\.toml)$' >/dev/null 2>&1; then
   echo "AION-238 must not modify package manifests or lockfiles" >&2
   exit 1
 fi
-if changed_paths | sort -u | rg -n '(^migrations/|/migrations/)' >/dev/null 2>&1; then
+if changed_paths_without_aion243 | sort -u | rg -n '(^migrations/|/migrations/)' >/dev/null 2>&1; then
   echo "AION-238 must not add migrations" >&2
   exit 1
 fi
@@ -242,7 +252,7 @@ while IFS= read -r path; do
       exit 1
       ;;
   esac
-done < <(changed_paths | sort -u)
+done < <(changed_paths_without_aion243 | sort -u)
 if git tag --list 'v0.2*' 'aion-v0.2*' | rg -n '.+' >/dev/null 2>&1; then
   echo "AION-238 must not create a v0.2 tag" >&2
   exit 1

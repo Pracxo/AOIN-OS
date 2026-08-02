@@ -9,6 +9,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from aion243_release_candidate_scope import without_aion243_allowed_paths
+
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "scripts/lib"))
 
@@ -57,12 +59,14 @@ def test_aion181_source_scope_is_exactly_recorded() -> None:
 
 
 def test_aion181_branch_modifies_only_authorized_runtime_or_package_surfaces() -> None:
-    changed = _changed_files(
-        ".github/workflows",
-        "services/brain-api/src/aion_brain",
-        "services/brain-api/pyproject.toml",
-        "packages/aion-sdk-python/src",
-        "migrations",
+    changed = without_aion243_allowed_paths(
+        _changed_files(
+            ".github/workflows",
+            "services/brain-api/src/aion_brain",
+            "services/brain-api/pyproject.toml",
+            "packages/aion-sdk-python/src",
+            "migrations",
+        )
     )
     aion239_source_paths = _aion239_source_paths()
     assert (

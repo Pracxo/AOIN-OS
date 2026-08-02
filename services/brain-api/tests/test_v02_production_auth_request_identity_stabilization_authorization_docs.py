@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from aion243_release_candidate_scope import without_aion243_allowed_paths
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "scripts/lib"))
@@ -408,7 +409,7 @@ def test_aion157_validator_rejects_bad_lifecycle(mutator: Any, match: str) -> No
 
 def test_aion157_does_not_change_protected_sources_or_add_release_artifacts() -> None:
     changed = (
-        _changed_files()
+        without_aion243_allowed_paths(_changed_files())
         - AION160_ALLOWED_CHANGED_PATHS
         - AION162_ALLOWED_CHANGED_PATHS
         - AION164_ALLOWED_CHANGED_PATHS

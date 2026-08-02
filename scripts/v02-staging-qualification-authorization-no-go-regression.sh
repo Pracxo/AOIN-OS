@@ -5,6 +5,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/python-selection.sh"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
+source "$ROOT_DIR/scripts/lib/v02-production-auth-scan-exclusions.sh"
 
 PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 export AION_BRAIN_PYTHON="$PYTHON_BIN"
@@ -54,10 +55,19 @@ changed_paths() {
   git ls-files --others --exclude-standard --
 }
 
+changed_paths_without_aion243() {
+  changed_paths | while IFS= read -r path; do
+    [[ -z "$path" ]] && continue
+    if ! aion243_is_scoped_v02_release_candidate_artifact_build_path "$path"; then
+      printf '%s\n' "$path"
+    fi
+  done
+}
+
 ./scripts/v02-release-qualification-foundation-operator-evaluation-no-go-regression.sh >/dev/null
 
 code_paths="$(
-  changed_paths \
+  changed_paths_without_aion243 \
     | sort -u \
     | rg -n '^(scripts/.*(\.sh|\.py)|services/brain-api/tests/.*\.py)$' \
     | cut -d: -f2- \
@@ -91,6 +101,9 @@ from pathlib import Path
 import v02_release_qualification_foundation_operator_evaluation as h
 
 root = Path.cwd()
+aion243_evidence_exists = (
+    root / "examples/v02-release-qualification/v02-release-candidate-artifact-build-evidence.json"
+).is_file()
 for relative in (
     "docs/v02-release-qualification/program-ledger.json",
     "docs/v02-release-qualification/authorization-ledger.json",
@@ -114,7 +127,10 @@ for relative in (
     if post_aion242:
         if payload.get("release_candidate_artifact_build_authorized") is not True:
             raise SystemExit(f"{relative} must authorize only the future release-candidate build")
-        if payload.get("release_candidate_created") is not False:
+        if aion243_evidence_exists and not relative.endswith("staging-qualification-authorization.json"):
+            if payload.get("release_candidate_created") is not True:
+                raise SystemExit(f"{relative} must record the AION-243 local release candidate")
+        elif payload.get("release_candidate_created") is not False:
             raise SystemExit(f"{relative} must keep release_candidate_created=false")
         if payload.get("release_candidate_published") is not False:
             raise SystemExit(f"{relative} must keep release_candidate_published=false")

@@ -95,6 +95,15 @@ def test_ledgers_record_implemented_foundation_and_current_authorization_state()
         "controlled_staging_qualification_evaluated_release_candidate_build_"
         "authorized_not_implemented"
     )
+    aion243_local_candidate_state = (
+        "deterministic_v02_release_candidate_artifact_built_local_candidate_"
+        "retained_pending_final_evaluation"
+    )
+    aion243_evidence_exists = (
+        REPO_ROOT
+        / "examples/v02-release-qualification/"
+        "v02-release-candidate-artifact-build-evidence.json"
+    ).is_file()
 
     for payload in (program, auth):
         assert payload["v02_release_qualification_program_authorized"] is True
@@ -112,7 +121,12 @@ def test_ledgers_record_implemented_foundation_and_current_authorization_state()
         if payload["active_v02_release_qualification_authorization"] == (
             aion242.NEXT_AUTHORIZATION_ID
         ):
-            assert payload["program_state"] == aion242_authorized_state
+            expected_program_state = (
+                aion243_local_candidate_state
+                if aion243_evidence_exists
+                else aion242_authorized_state
+            )
+            assert payload["program_state"] == expected_program_state
             assert (
                 payload["v02_release_qualification_foundation_operator_evaluation_passed"]
                 is True
@@ -145,9 +159,14 @@ def test_ledgers_record_implemented_foundation_and_current_authorization_state()
             )
             assert payload["formal_closeout_task"] == aion242.NEXT_FORMAL_CLOSEOUT_TASK
             assert payload["release_candidate_artifact_build_authorized"] is True
-            assert payload["release_candidate_artifact_build_implemented"] is False
-            assert payload["release_candidate_created"] is False
+            assert payload["release_candidate_artifact_build_implemented"] is (
+                aion243_evidence_exists
+            )
+            assert payload["release_candidate_created"] is aion243_evidence_exists
             assert payload["release_candidate_published"] is False
+            if aion243_evidence_exists:
+                assert payload["candidate_bundle_retained"] is True
+                assert payload["candidate_local_image_retained"] is True
             assert payload["production_runtime_authorized"] is False
             assert payload["production_deployment_enabled"] is False
             closeout = payload["aion_240_authorization_closeout"]
