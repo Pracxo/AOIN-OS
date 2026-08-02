@@ -59,12 +59,15 @@ is_allowed_path() {
   case "$1" in
     README.md|AGENTS.md|\
     docs/adr/README.md|docs/adr/0205-controlled-isolated-local-staging-artifact-build-and-rollback-drill.md|\
+    docs/adr/0206-controlled-staging-evaluation-and-deterministic-v02-release-candidate-artifact-build-authorization.md|\
     docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/project-status.md|docs/visual-brain.md|\
     docs/v02-release-qualification/*|\
     docs/release/v02-staging-qualification-*|\
     examples/v02-release-qualification/*|\
     operator-console-static/README.md|operator-console-static/app.js|operator-console-static/index.html|\
     operator-console-static/demo-data/v02-release-qualification-staging-*.json|\
+    operator-console-static/demo-data/v02-staging-operator-evaluation.json|\
+    operator-console-static/demo-data/v02-release-candidate-authorization.json|\
     scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh|\
     scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh|\
     scripts/knowledge-intelligence-domain-expert-mesh-operator-evaluation-no-go-regression.sh|\
@@ -85,6 +88,11 @@ is_allowed_path() {
     scripts/v02-staging-qualification-no-go-regression.sh|\
     scripts/v02-staging-qualification-pilot-evidence-check.sh|\
     scripts/v02-staging-qualification-runtime-hold.sh|\
+    scripts/v02-staging-qualification-operator-evaluation-check.sh|\
+    scripts/v02-staging-qualification-operator-evaluation-no-go-regression.sh|\
+    scripts/v02-release-candidate-authorization-check.sh|\
+    scripts/v02-release-candidate-authorization-no-go-regression.sh|\
+    scripts/v02-release-candidate-runtime-hold.sh|\
     scripts/v02-release-qualification-foundation-check.sh|\
     scripts/v02-release-qualification-foundation-no-go-regression.sh|\
     scripts/v02-release-qualification-foundation-operator-evaluation-no-go-regression.sh|\
@@ -105,7 +113,9 @@ is_allowed_path() {
     services/brain-api/tests/test_v02_release_qualification_operator_evaluation_aion240.py|\
     services/brain-api/tests/test_v02_release_qualification_pilot_evidence_aion239.py|\
     services/brain-api/tests/test_v02_staging_qualification_aion241.py|\
-    scripts/lib/v02_release_qualification_foundation_operator_evaluation.py)
+    services/brain-api/tests/test_v02_staging_qualification_operator_evaluation_aion242.py|\
+    scripts/lib/v02_release_qualification_foundation_operator_evaluation.py|\
+    scripts/lib/v02_staging_qualification_operator_evaluation.py)
       return 0
       ;;
   esac
@@ -324,16 +334,28 @@ for ledger_path in (
     for key in payload.get("zero_resource_limit_keys", []):
         if resource_limits.get(key) != 0:
             raise SystemExit(f"{ledger_path} zero resource limit mismatch: {key}")
+    post_aion242 = (
+        payload.get("active_v02_release_qualification_authorization")
+        == "AION-242-V02RQ-0003"
+    )
+    if post_aion242:
+        if payload.get("release_candidate_artifact_build_authorized") is not True:
+            raise SystemExit(f"{ledger_path} must authorize only the future release-candidate build")
+        if payload.get("release_candidate_created") is not False:
+            raise SystemExit(f"{ledger_path} must keep release_candidate_created=false")
+        if payload.get("release_candidate_published") is not False:
+            raise SystemExit(f"{ledger_path} must keep release_candidate_published=false")
     for key in (
         "production_runtime_authorized",
         "production_deployment_enabled",
-        "release_candidate_creation_enabled",
         "v02_release_ready",
         "v02_tag_created",
         "v02_release_created",
     ):
         if payload.get(key) is not False:
             raise SystemExit(f"{ledger_path} must keep {key}=false")
+    if not post_aion242 and payload.get("release_candidate_creation_enabled") is not False:
+        raise SystemExit(f"{ledger_path} must keep release_candidate_creation_enabled=false")
 PY
 
 aion_confirm_immutable_v01_tag_history >/dev/null

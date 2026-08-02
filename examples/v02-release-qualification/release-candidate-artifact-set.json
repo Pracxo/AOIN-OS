@@ -1,0 +1,25 @@
+{
+  "artifact_set": [
+    "deterministic_source_archive",
+    "brain_api_oci_image_archive_or_layout_projection",
+    "brain_api_artifact_manifest",
+    "sdk_wheel",
+    "sdk_source_distribution",
+    "operator_console_static_bundle",
+    "candidate_version_manifest",
+    "candidate_sbom",
+    "artifact_provenance",
+    "sha256_checksum_manifest",
+    "qualification_detached_signatures",
+    "qualification_public_key_record",
+    "reproducibility_comparison",
+    "compatibility_matrix",
+    "migration_manifest",
+    "release_notes_draft",
+    "candidate_evidence_bundle"
+  ],
+  "candidate_id": "aion-v0.2.0-rc.1",
+  "local_only": true,
+  "release_candidate_created": false,
+  "v02_release_ready": false
+}

@@ -360,6 +360,30 @@ raise SystemExit(0 if allowed else 1)
 PY
 }
 
+aion242_is_scoped_v02_staging_operator_evaluation_path() {
+  case "$1" in
+    docs/adr/0206-controlled-staging-evaluation-and-deterministic-v02-release-candidate-artifact-build-authorization.md|\
+    docs/v02-release-qualification/*|\
+    examples/v02-release-qualification/*|\
+    operator-console-static/demo-data/v02-release-candidate-authorization.json|\
+    operator-console-static/demo-data/v02-staging-operator-evaluation.json|\
+    scripts/auth-design-check.sh|\
+    scripts/operator-console-static-check.sh|\
+    scripts/static-console-safety-check.sh|\
+    scripts/v02-release-candidate-*.sh|\
+    scripts/v02-release-qualification-*.sh|\
+    scripts/v02-staging-qualification-*.sh|\
+    scripts/lib/v02_staging_qualification_operator_evaluation.py|\
+    services/brain-api/tests/test_secure_runtime_integration_final_closeout_aion238.py|\
+    services/brain-api/tests/test_v02_release_qualification_operator_evaluation_aion240.py|\
+    services/brain-api/tests/test_v02_release_qualification_pilot_evidence_aion239.py|\
+    services/brain-api/tests/test_v02_staging_qualification_operator_evaluation_aion242.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 changed_entries() {
   local base
   if base="$(comparison_base)"; then
@@ -408,6 +432,9 @@ while IFS=$'\t' read -r status path extra; do
       continue
     fi
     if aion241_is_scoped_v02_staging_qualification_path "$changed"; then
+      continue
+    fi
+    if aion242_is_scoped_v02_staging_operator_evaluation_path "$changed"; then
       continue
     fi
     if aion231_is_scoped_secure_runtime_foundation_path "$changed"; then

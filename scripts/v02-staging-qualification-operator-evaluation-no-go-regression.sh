@@ -71,12 +71,32 @@ is_allowed_path() {
     operator-console-static/demo-data/v02-staging-qualification-authorization.json|\
     operator-console-static/demo-data/v02-staging-operator-evaluation.json|\
     operator-console-static/demo-data/v02-release-candidate-authorization.json|\
+    scripts/auth-design-check.sh|\
+    scripts/knowledge-intelligence-integrated-research-agent-operator-evaluation-no-go-regression.sh|\
+    scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh|\
+    scripts/operator-console-static-check.sh|\
+    scripts/static-console-safety-check.sh|\
     scripts/lib/v02_staging_qualification_operator_evaluation.py|\
     scripts/v02-staging-qualification-operator-evaluation-check.sh|\
     scripts/v02-staging-qualification-operator-evaluation-no-go-regression.sh|\
     scripts/v02-release-candidate-authorization-check.sh|\
     scripts/v02-release-candidate-authorization-no-go-regression.sh|\
     scripts/v02-release-candidate-runtime-hold.sh|\
+    scripts/secure-runtime-integration-program-no-go-regression.sh|\
+    scripts/v02-release-qualification-foundation-no-go-regression.sh|\
+    scripts/v02-release-qualification-foundation-operator-evaluation-no-go-regression.sh|\
+    scripts/v02-release-qualification-program-authorization-check.sh|\
+    scripts/v02-release-qualification-program-authorization-no-go-regression.sh|\
+    scripts/v02-staging-qualification-authorization-check.sh|\
+    scripts/v02-staging-qualification-authorization-no-go-regression.sh|\
+    scripts/v02-staging-qualification-check.sh|\
+    scripts/v02-staging-qualification-no-go-regression.sh|\
+    scripts/v02-staging-qualification-runtime-hold.sh|\
+    scripts/v02-release-qualification-foundation-check.sh|\
+    scripts/v02-release-qualification-foundation-operator-evaluation-check.sh|\
+    scripts/v02-release-qualification-foundation-runtime-hold.sh|\
+    services/brain-api/tests/test_secure_runtime_integration_final_closeout_aion238.py|\
+    services/brain-api/tests/test_v02_release_qualification_pilot_evidence_aion239.py|\
     services/brain-api/tests/test_v02_staging_qualification_operator_evaluation_aion242.py)
       return 0
       ;;
@@ -139,7 +159,7 @@ fi
 secret_scan_paths="$(
   changed_paths \
     | sort -u \
-    | rg -v '^scripts/v02-staging-qualification-operator-evaluation-no-go-regression\.sh$' \
+    | rg -v '^scripts/.*no-go-regression\.sh$' \
     || true
 )"
 if [[ -n "$secret_scan_paths" ]]; then

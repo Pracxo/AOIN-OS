@@ -17,9 +17,11 @@ PYTHONPATH="$ROOT_DIR/scripts/lib:$ROOT_DIR/services/brain-api/src:${PYTHONPATH:
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 import v02_release_qualification_foundation_operator_evaluation as h
+import v02_staging_qualification_operator_evaluation as ev
 
 root = Path.cwd()
 program = json.loads((root / "docs/v02-release-qualification/program-ledger.json").read_text(encoding="utf-8"))
@@ -37,6 +39,41 @@ if closed.get("authorization_active") is not False or closed.get("authorization_
     raise SystemExit("AION-238 must be closed and consumed")
 if closed.get("authorization_expired") is not True or closed.get("authorization_reusable") is not False:
     raise SystemExit("AION-238 must be expired and non-reusable")
+
+if auth.get("authorization_transaction_id") == ev.NEXT_AUTHORIZATION_ID:
+    aion240 = program.get("aion_240_authorization_closeout", {})
+    if aion240.get("authorization_transaction_id") != ev.CURRENT_AUTHORIZATION_ID:
+        raise SystemExit("AION-240 closeout record missing after AION-242")
+    if aion240.get("authorization_active") is not False:
+        raise SystemExit("AION-240 must be closed after AION-242")
+    if aion240.get("authorization_consumed") is not True:
+        raise SystemExit("AION-240 must be consumed after AION-242")
+    if aion240.get("authorization_expired") is not True:
+        raise SystemExit("AION-240 must be expired after AION-242")
+    if aion240.get("authorization_reusable") is not False:
+        raise SystemExit("AION-240 must remain non-reusable after AION-242")
+    for payload_name, payload in (("program", program), ("authorization ledger", auth)):
+        if payload.get("active_v02_release_qualification_authorization_count") != 1:
+            raise SystemExit(f"{payload_name} active authorization count mismatch after AION-242")
+        if payload.get("active_v02_release_qualification_authorization") != ev.NEXT_AUTHORIZATION_ID:
+            raise SystemExit(f"{payload_name} active authorization mismatch after AION-242")
+        if payload.get("active_v02_release_qualification_task") != ev.NEXT_IMPLEMENTATION_TASK:
+            raise SystemExit(f"{payload_name} active task mismatch after AION-242")
+        if payload.get("formal_closeout_task") != ev.NEXT_FORMAL_CLOSEOUT_TASK:
+            raise SystemExit(f"{payload_name} formal closeout mismatch after AION-242")
+        if payload.get("release_candidate_artifact_build_authorized") is not True:
+            raise SystemExit(f"{payload_name} release-candidate build not authorized after AION-242")
+        if payload.get("release_candidate_created") is not False:
+            raise SystemExit(f"{payload_name} release candidate must remain absent")
+        if payload.get("v02_release_ready") is not False:
+            raise SystemExit(f"{payload_name} v02_release_ready must remain false")
+        if payload.get("v02_tag_created") is not False or payload.get("v02_release_created") is not False:
+            raise SystemExit(f"{payload_name} v0.2 tag/release must remain absent")
+    if staging.get("authorization_transaction_id") != ev.CURRENT_AUTHORIZATION_ID:
+        raise SystemExit("staging authorization closeout must still identify AION-240")
+    if staging.get("authorization_active") is not False:
+        raise SystemExit("staging authorization example must be closed after AION-242")
+    sys.exit(0)
 
 required = {
     "program_id": h.PROGRAM_ID,

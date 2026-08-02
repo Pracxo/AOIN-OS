@@ -18,6 +18,7 @@ PYTHONPATH="$ROOT_DIR/scripts/lib:$ROOT_DIR/services/brain-api/src:${PYTHONPATH:
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 from aion_brain.contracts import v02_staging_qualification as c
@@ -25,6 +26,7 @@ from aion_brain.v02_staging_qualification import (
     ControlledV02StagingQualificationService,
 )
 import v02_release_qualification_foundation_operator_evaluation as aion240
+import v02_staging_qualification_operator_evaluation as ev
 
 root = Path.cwd()
 required_docs = (
@@ -101,6 +103,41 @@ program = json.loads((root / "docs/v02-release-qualification/program-ledger.json
 auth = json.loads((root / "docs/v02-release-qualification/authorization-ledger.json").read_text(encoding="utf-8"))
 staging_auth = json.loads((root / "examples/v02-release-qualification/staging-qualification-authorization.json").read_text(encoding="utf-8"))
 evidence = json.loads((root / "examples/v02-release-qualification/v02-controlled-isolated-staging-pilot-evidence.json").read_text(encoding="utf-8"))
+if auth.get("authorization_transaction_id") == ev.NEXT_AUTHORIZATION_ID:
+    report = json.loads((root / "examples/v02-release-qualification/staging-qualification-operator-evaluation-report.json").read_text(encoding="utf-8"))
+    ev.validate_report(report)
+    if report["decision"] != ev.PASS_DECISION:
+        raise SystemExit("AION-242 staging operator evaluation must pass")
+    closeout = program.get("aion_240_authorization_closeout", {})
+    if closeout.get("authorization_transaction_id") != ev.CURRENT_AUTHORIZATION_ID:
+        raise SystemExit("AION-240 closeout record missing after AION-242")
+    if closeout.get("authorization_active") is not False or closeout.get("authorization_consumed") is not True:
+        raise SystemExit("AION-240 must be closed and consumed after AION-242")
+    if closeout.get("authorization_expired") is not True or closeout.get("authorization_reusable") is not False:
+        raise SystemExit("AION-240 must be expired and non-reusable after AION-242")
+    record = program.get("aion_241_record", {})
+    if record.get("ci_result") != "pass":
+        raise SystemExit("AION-241 CI reconciliation mismatch after AION-242")
+    if record.get("feature_commits") != [ev.IMPLEMENTATION_COMMIT, ev.EVIDENCE_COMMIT]:
+        raise SystemExit("AION-241 feature commit reconciliation mismatch after AION-242")
+    if record.get("pull_requests") != [ev.IMPLEMENTATION_PR]:
+        raise SystemExit("AION-241 PR reconciliation mismatch after AION-242")
+    if record.get("merge_commits") != [ev.IMPLEMENTATION_MERGE_COMMIT]:
+        raise SystemExit("AION-241 merge reconciliation mismatch after AION-242")
+    if record.get("pilot_report_fingerprint") != ev.EXPECTED_PILOT_FINGERPRINT:
+        raise SystemExit("AION-241 pilot fingerprint mismatch after AION-242")
+    for label, payload in (("program", program), ("authorization", auth)):
+        if payload.get("active_v02_release_qualification_authorization") != ev.NEXT_AUTHORIZATION_ID:
+            raise SystemExit(f"{label} active authorization mismatch after AION-242")
+        if payload.get("active_v02_release_qualification_task") != ev.NEXT_IMPLEMENTATION_TASK:
+            raise SystemExit(f"{label} active task mismatch after AION-242")
+        if payload.get("release_candidate_artifact_build_authorized") is not True:
+            raise SystemExit(f"{label} release-candidate authorization missing after AION-242")
+        if payload.get("release_candidate_created") is not False:
+            raise SystemExit(f"{label} release candidate must remain absent after AION-242")
+        if payload.get("v02_release_ready") is not False:
+            raise SystemExit(f"{label} v02_release_ready must remain false after AION-242")
+    sys.exit(0)
 final_state = (
     "controlled_isolated_staging_qualification_implemented_pilot_complete_pending_closeout"
 )

@@ -21,13 +21,15 @@ is_nested_gate_context() {
 ./scripts/v02-staging-qualification-no-go-regression.sh >/dev/null
 ./scripts/v02-staging-qualification-pilot-evidence-check.sh >/dev/null
 
-PYTHONPATH="$ROOT_DIR/services/brain-api/src:${PYTHONPATH:-}" "$PYTHON_BIN" - <<'PY'
+PYTHONPATH="$ROOT_DIR/scripts/lib:$ROOT_DIR/services/brain-api/src:${PYTHONPATH:-}" "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 from aion_brain.contracts import v02_staging_qualification as c
+import v02_staging_qualification_operator_evaluation as ev
 
 runtime_hold = json.loads(
     Path("examples/v02-release-qualification/staging-runtime-hold.json").read_text(
@@ -42,6 +44,39 @@ evidence = json.loads(
         "v02-controlled-isolated-staging-pilot-evidence.json"
     ).read_text(encoding="utf-8")
 )
+if authorization.get("authorization_transaction_id") == ev.NEXT_AUTHORIZATION_ID:
+    for label, payload in (("program", program), ("authorization", authorization)):
+        if payload.get("active_v02_release_qualification_authorization") != ev.NEXT_AUTHORIZATION_ID:
+            raise SystemExit(f"{label} active authorization mismatch after AION-242")
+        if payload.get("active_v02_release_qualification_authorization_count") != 1:
+            raise SystemExit(f"{label} active authorization count mismatch after AION-242")
+        if payload.get("active_v02_release_qualification_task") != ev.NEXT_IMPLEMENTATION_TASK:
+            raise SystemExit(f"{label} active task mismatch after AION-242")
+        if payload.get("release_candidate_artifact_build_authorized") is not True:
+            raise SystemExit(f"{label} release-candidate build authorization missing")
+        if payload.get("release_candidate_artifact_build_implemented") is not False:
+            raise SystemExit(f"{label} release-candidate build must remain unimplemented")
+        for key in (
+            "release_candidate_created",
+            "release_candidate_published",
+            "production_runtime_authorized",
+            "production_deployment_enabled",
+            "v02_release_ready",
+            "v02_tag_created",
+            "v02_release_created",
+        ):
+            if payload.get(key) is not False:
+                raise SystemExit(f"{label} runtime hold mismatch {key}: {payload.get(key)!r}")
+    for key in (
+        "active_qualification_sessions_after_close",
+        "active_containers_after_cleanup",
+        "active_volumes_after_cleanup",
+        "active_networks_after_cleanup",
+        "run_owned_images_after_cleanup",
+    ):
+        if evidence.get(key) != 0:
+            raise SystemExit(f"staging evidence cleanup counter must be zero after AION-242: {key}")
+    sys.exit(0)
 required_true = (
     "staging_qualification_authorized",
     "staging_qualification_implemented",

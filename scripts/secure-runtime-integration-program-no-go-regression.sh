@@ -87,6 +87,7 @@ is_allowed_path() {
 		    docs/adr/0202-final-secure-runtime-integration-evaluation-and-v02-release-qualification-program-authorization.md|\
 		    docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md|\
 		    docs/adr/0204-v02-qualification-foundation-evaluation-and-controlled-isolated-staging-qualification-authorization.md|\
+		    docs/adr/0206-controlled-staging-evaluation-and-deterministic-v02-release-candidate-artifact-build-authorization.md|\
 		    docs/adr/README.md|\
 	    docs/v02-release-qualification/*|\
 	    docs/release/v02-release-qualification-*|\
@@ -176,7 +177,8 @@ is_allowed_path() {
 	    scripts/lib/model_gateway_operator_evaluation.py|\
 	    scripts/lib/capability_runtime_operator_evaluation.py|\
 		    scripts/lib/secure_runtime_integration_final_evaluation.py|\
-			    scripts/lib/v02_release_qualification_foundation_operator_evaluation.py|\
+		    scripts/lib/v02_release_qualification_foundation_operator_evaluation.py|\
+		    scripts/lib/v02_staging_qualification_operator_evaluation.py|\
 		    scripts/lib/v02_production_auth_authorization.py|\
 		    scripts/lib/v02-production-auth-scan-exclusions.sh|\
 		    docs/adr/0205-controlled-isolated-local-staging-artifact-build-and-rollback-drill.md|\
@@ -184,6 +186,7 @@ is_allowed_path() {
 		    docs/release/v02-staging-qualification-*|\
 		    examples/v02-release-qualification/*|\
 		    operator-console-static/demo-data/v02-release-qualification-staging-*.json|\
+		    operator-console-static/demo-data/v02-release-candidate-authorization.json|\
 		    services/brain-api/tests/secure_runtime_integration_final_evaluation_test_support.py|\
 	    scripts/production-auth-actor-context-trust-boundary-no-go-regression.sh|\
 	    scripts/production-auth-core-no-go-regression.sh|\
@@ -259,7 +262,10 @@ is_allowed_path() {
 		    services/brain-api/src/aion_brain/v02_staging_qualification/*|\
 		    services/brain-api/tests/test_v02_staging_qualification_aion241.py|\
 		    services/brain-api/tests/test_v02_release_qualification_*.py)
-	      return 0
+      return 0
+      ;;
+    services/brain-api/tests/test_v02_staging_qualification_operator_evaluation_aion242.py)
+      return 0
       ;;
   esac
   return 1

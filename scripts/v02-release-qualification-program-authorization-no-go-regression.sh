@@ -62,6 +62,7 @@ is_allowed_path() {
     docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md|\
     docs/adr/0204-v02-qualification-foundation-evaluation-and-controlled-isolated-staging-qualification-authorization.md|\
     docs/adr/0205-controlled-isolated-local-staging-artifact-build-and-rollback-drill.md|\
+    docs/adr/0206-controlled-staging-evaluation-and-deterministic-v02-release-candidate-artifact-build-authorization.md|\
     docs/adr/README.md|\
     docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/project-status.md|docs/visual-brain.md|\
     docs/secure-runtime-integration/*|\
@@ -79,6 +80,8 @@ is_allowed_path() {
     operator-console-static/index.html|operator-console-static/app.js|operator-console-static/README.md|\
     operator-console-static/demo-data/secure-runtime-integration-*.json|\
     operator-console-static/demo-data/v02-release-qualification-*.json|\
+    operator-console-static/demo-data/v02-staging-operator-evaluation.json|\
+    operator-console-static/demo-data/v02-release-candidate-authorization.json|\
     operator-console-static/demo-data/v02-qualification-foundation-operator-evaluation.json|\
     operator-console-static/demo-data/v02-staging-qualification-authorization.json|\
     operator-console-static/demo-data/v02-staging-environment-profile.json|\
@@ -126,6 +129,7 @@ is_allowed_path() {
     scripts/secure-runtime-integration-runtime-hold.sh|\
     scripts/static-console-safety-check.sh|\
     scripts/lib/v02_release_qualification_foundation_operator_evaluation.py|\
+    scripts/lib/v02_staging_qualification_operator_evaluation.py|\
     scripts/secure-runtime-foundation-check.sh|\
     scripts/secure-runtime-foundation-no-go-regression.sh|\
     scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh|\
@@ -149,6 +153,11 @@ is_allowed_path() {
     scripts/v02-staging-qualification-no-go-regression.sh|\
     scripts/v02-staging-qualification-pilot-evidence-check.sh|\
     scripts/v02-staging-qualification-runtime-hold.sh|\
+    scripts/v02-staging-qualification-operator-evaluation-check.sh|\
+    scripts/v02-staging-qualification-operator-evaluation-no-go-regression.sh|\
+    scripts/v02-release-candidate-authorization-check.sh|\
+    scripts/v02-release-candidate-authorization-no-go-regression.sh|\
+    scripts/v02-release-candidate-runtime-hold.sh|\
     scripts/lib/cognitive_architecture_governance.py|\
     scripts/lib/secure_runtime_integration_final_evaluation.py|\
     scripts/lib/v02_production_auth_authorization.py|\
@@ -165,6 +174,7 @@ is_allowed_path() {
     services/brain-api/tests/test_self_improvement_shadow_activation_evaluation_repository_integrity.py|\
     services/brain-api/tests/test_self_improvement_shadow_activation_scope_spec.py|\
     services/brain-api/tests/test_v02_staging_qualification_aion241.py|\
+    services/brain-api/tests/test_v02_staging_qualification_operator_evaluation_aion242.py|\
     services/brain-api/tests/test_capability_runtime_current_state_after_aion235.py|\
     services/brain-api/tests/test_model_gateway_authorization.py|\
     services/brain-api/tests/test_model_gateway_authorization_scope.py|\
