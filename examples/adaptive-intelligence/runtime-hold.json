@@ -8,6 +8,7 @@
   "autonomous_background_cycles": 0,
   "belief_mutations": 0,
   "deterministic_fixture_only": true,
+  "deterministic_fixture_pilot_completed": true,
   "dns_resolutions": 0,
   "external_cognition_gateway_implemented": true,
   "external_cognition_gateway_state": "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout",
