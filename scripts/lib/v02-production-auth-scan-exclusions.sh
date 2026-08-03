@@ -2664,6 +2664,50 @@ aion243_is_scoped_v02_release_candidate_artifact_build_path() {
   esac
 }
 
+aion244_is_scoped_v02_release_candidate_final_evaluation_path() {
+  case "$1" in
+    README.md|\
+    AGENTS.md|\
+    docs/adr/0208-final-v02-rc1-candidate-evaluation-and-github-prerelease-publication.md|\
+    docs/adr/README.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/project-status.md|\
+    docs/visual-brain.md|\
+    docs/release/aion-v0.2.0-rc.1-*|\
+    docs/release/v02-release-qualification-program-final-closeout.md|\
+    docs/v02-release-qualification/*|\
+    examples/v02-release-qualification/*|\
+    operator-console-static/demo-data/v02-rc1-*.json|\
+    operator-console-static/demo-data/v02-release-candidate-final-evaluation.json|\
+    scripts/auth-design-check.sh|\
+    scripts/secure-runtime-foundation-no-go-regression.sh|\
+    scripts/secure-runtime-integration-final-evaluation-no-go-regression.sh|\
+    scripts/secure-runtime-integration-program-no-go-regression.sh|\
+    scripts/lib/v02_release_candidate_final_evaluation.py|\
+    scripts/lib/v02_release_qualification_foundation_operator_evaluation.py|\
+    scripts/lib/v02_staging_qualification_operator_evaluation.py|\
+    scripts/lib/v02-production-auth-scan-exclusions.sh|\
+    scripts/v02-rc1-release-*.sh|\
+    scripts/v02-release-candidate-final-evaluation-*.sh|\
+    scripts/v02-release-qualification-foundation-*.sh|\
+    scripts/v02-release-qualification-program-authorization-*.sh|\
+    scripts/v02-release-qualification-program-final-complete-check.sh|\
+    scripts/v02-staging-qualification-*.sh|\
+    services/brain-api/tests/test_secure_runtime_integration_final_closeout_aion238.py|\
+    services/brain-api/tests/test_v02_release_candidate_artifact_build_aion243.py|\
+    services/brain-api/tests/test_v02_release_qualification_pilot_evidence_aion239.py|\
+    services/brain-api/tests/test_v02_release_qualification_operator_evaluation_aion240.py|\
+    services/brain-api/tests/test_v02_staging_qualification_operator_evaluation_aion242.py|\
+    services/brain-api/tests/test_v02_release_candidate_final_evaluation_aion244.py)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
 aion151_validate_scoped_authorization_if_present() {
   if [[ -f examples/release/v02-production-auth-implementation-authorization.json ]]; then
     python3 scripts/lib/v02_production_auth_authorization.py --repo-root "$ROOT_DIR" --mode no-go

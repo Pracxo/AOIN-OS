@@ -87,3 +87,7 @@ The evaluation passed all 28 hard-gated scenarios, verified PR #158, commits `a1
 `AION-238-V02RQ-0001` is closed, consumed by AION-239, expired and non-reusable. `AION-240-V02RQ-0002` is closed, consumed by AION-241, expired and non-reusable. AION-241 passed AION-242 operator evaluation. `AION-242-V02RQ-0003` is the sole active v0.2 Release Qualification authorization for AION-243. AION-244 remains the final release-candidate evaluation and tag/release authorization decision.
 
 Production runtime, production authentication, external IdP calls, production credentials, production tokens, registry login, registry pull, registry push, public network access, DNS resolution, public listeners, production database provisioning, production deployment, release-candidate publication, v0.2 tags and v0.2 releases remain disabled or absent. Local release-candidate artifact build is authorized but not implemented. `v02_release_ready=false`.
+
+## AION-244 v0.2.0-rc.1 Publication Authorization
+
+Final evaluation `AION-V02RQPE-003` passed for `aion-v0.2.0-rc.1` with 32 hard gates and report fingerprint `8bb225c4f8e5055bc19d961e9a67e7347acf0896195ce4279ba65d597c044952`. The programme is pending PR merge, RC1 prerelease publication, and reconciliation before final completion.

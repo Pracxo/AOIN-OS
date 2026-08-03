@@ -66,16 +66,36 @@ for relative in (
     "docs/v02-release-qualification/authorization-ledger.json",
 ):
     payload = json.loads((root / relative).read_text(encoding="utf-8"))
-    if payload.get("active_v02_release_qualification_authorization") != c.AUTHORIZATION_TRANSACTION_ID:
+    active_authorization = payload.get("active_v02_release_qualification_authorization")
+    active_task = payload.get("active_v02_release_qualification_task")
+    publication_auth = payload.get("aion_244_publication_authorization", {})
+    if active_authorization == c.AUTHORIZATION_TRANSACTION_ID:
+        if active_task != c.IMPLEMENTATION_TASK:
+            raise SystemExit(f"{relative} active task mismatch")
+        if payload.get("authorization_active") is not True:
+            raise SystemExit(f"{relative} authorization must remain active")
+        if payload.get("authorization_consumed") is not False:
+            raise SystemExit(f"{relative} authorization must remain unconsumed")
+    elif active_authorization == "AION-244-V02REL-0001":
+        if active_task != "AION-244":
+            raise SystemExit(f"{relative} AION-244 active task mismatch")
+        closeout = payload.get("aion_242_authorization_closeout", {})
+        if closeout.get("authorization_transaction_id") != c.AUTHORIZATION_TRANSACTION_ID:
+            raise SystemExit(f"{relative} missing AION-242 closeout")
+        if closeout.get("authorization_active") is not False:
+            raise SystemExit(f"{relative} AION-242 closeout must be inactive")
+        if closeout.get("authorization_consumed") is not True:
+            raise SystemExit(f"{relative} AION-242 closeout must be consumed")
+        if publication_auth.get("authorization_transaction_id") != "AION-244-V02REL-0001":
+            raise SystemExit(f"{relative} missing AION-244 publication authorization")
+        if publication_auth.get("authorization_active") is not True:
+            raise SystemExit(f"{relative} AION-244 publication authorization must be active")
+        if publication_auth.get("authorization_consumed") is not False:
+            raise SystemExit(f"{relative} AION-244 publication authorization must be unconsumed")
+    else:
         raise SystemExit(f"{relative} active authorization mismatch")
-    if payload.get("active_v02_release_qualification_task") != c.IMPLEMENTATION_TASK:
-        raise SystemExit(f"{relative} active task mismatch")
     if payload.get("formal_closeout_task") != c.FORMAL_CLOSEOUT_TASK:
         raise SystemExit(f"{relative} closeout task mismatch")
-    if payload.get("authorization_active") is not True:
-        raise SystemExit(f"{relative} authorization must remain active")
-    if payload.get("authorization_consumed") is not False:
-        raise SystemExit(f"{relative} authorization must remain unconsumed")
     if payload.get("v02_release_ready") is not False:
         raise SystemExit(f"{relative} must keep v02_release_ready=false")
 PY

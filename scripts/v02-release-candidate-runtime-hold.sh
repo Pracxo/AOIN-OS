@@ -48,12 +48,23 @@ for relative in (
     ):
         if payload.get(key, False) is not False:
             raise SystemExit(f"{relative} runtime hold mismatch {key}: {payload.get(key)!r}")
-    if payload.get("active_v02_release_qualification_authorization") != c.AUTHORIZATION_TRANSACTION_ID:
+    active_authorization = payload.get("active_v02_release_qualification_authorization")
+    if active_authorization == c.AUTHORIZATION_TRANSACTION_ID:
+        if payload.get("authorization_active") is not True:
+            raise SystemExit(f"{relative} authorization must remain active")
+        if payload.get("authorization_consumed") is not False:
+            raise SystemExit(f"{relative} authorization must remain unconsumed")
+    elif active_authorization == "AION-244-V02REL-0001":
+        closeout = payload.get("aion_242_authorization_closeout", {})
+        publication_auth = payload.get("aion_244_publication_authorization", {})
+        if closeout.get("authorization_transaction_id") != c.AUTHORIZATION_TRANSACTION_ID:
+            raise SystemExit(f"{relative} missing AION-242 closeout")
+        if closeout.get("authorization_active") is not False or closeout.get("authorization_consumed") is not True:
+            raise SystemExit(f"{relative} AION-242 closeout state mismatch")
+        if publication_auth.get("authorization_active") is not True or publication_auth.get("authorization_consumed") is not False:
+            raise SystemExit(f"{relative} AION-244 publication authorization state mismatch")
+    else:
         raise SystemExit(f"{relative} active authorization mismatch")
-    if payload.get("authorization_active") is not True:
-        raise SystemExit(f"{relative} authorization must remain active")
-    if payload.get("authorization_consumed") is not False:
-        raise SystemExit(f"{relative} authorization must remain unconsumed")
     if payload.get("formal_closeout_task") != c.FORMAL_CLOSEOUT_TASK:
         raise SystemExit(f"{relative} formal closeout must remain AION-244")
 PY

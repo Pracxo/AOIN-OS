@@ -19,6 +19,7 @@ EVIDENCE_PATH = (
     / "v02-release-qualification"
     / "v02-release-candidate-artifact-build-evidence.json"
 )
+AION244_PUBLICATION_AUTHORIZATION_ID = "AION-244-V02REL-0001"
 
 
 def load_runner():
@@ -173,6 +174,39 @@ def test_current_state_keeps_release_hold_and_authorization_active() -> None:
     program = load_json("docs/v02-release-qualification/program-ledger.json")
     auth = load_json("docs/v02-release-qualification/authorization-ledger.json")
     evidence_exists = EVIDENCE_PATH.is_file()
+
+    if auth["authorization_transaction_id"] == AION244_PUBLICATION_AUTHORIZATION_ID:
+        closeout = auth["aion_242_authorization_closeout"]
+        for payload in (program, auth):
+            assert (
+                payload["active_v02_release_qualification_authorization"]
+                == AION244_PUBLICATION_AUTHORIZATION_ID
+            )
+            assert payload["active_v02_release_qualification_task"] == "AION-244"
+            assert payload["formal_closeout_task"] == "AION-244"
+            assert payload["authorization_active"] is True
+            assert payload["authorization_consumed"] is False
+            assert payload["authorization_expired"] is False
+            assert payload["authorization_reusable"] is False
+            assert payload["implementation_task"] == "AION-244"
+            assert payload["parent_authorization_transaction_id"] == c.AUTHORIZATION_TRANSACTION_ID
+            assert payload["parent_evaluation_id"] == "AION-V02RQPE-003"
+            assert payload["release_candidate_artifact_build_implemented"] is evidence_exists
+            assert payload["release_candidate_created"] is evidence_exists
+            assert payload["release_candidate_final_evaluation_passed"] is True
+            assert payload["release_candidate_published"] is False
+            assert payload["production_deployment_enabled"] is False
+            assert payload["v02_release_ready"] is False
+            assert payload["v02_tag_created"] is False
+            assert payload["v02_release_created"] is False
+        assert closeout["authorization_transaction_id"] == c.AUTHORIZATION_TRANSACTION_ID
+        assert closeout["authorization_active"] is False
+        assert closeout["authorization_consumed"] is True
+        assert closeout["authorization_expired"] is True
+        assert closeout["authorization_reusable"] is False
+        assert closeout["authorization_consumed_by_task"] == "AION-243"
+        assert closeout["authorization_closed_by_task"] == "AION-244"
+        return
 
     for payload in (program, auth):
         assert payload["active_v02_release_qualification_authorization"] == (

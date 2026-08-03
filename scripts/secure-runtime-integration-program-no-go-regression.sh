@@ -438,6 +438,9 @@ while IFS= read -r path; do
   if aion243_is_scoped_v02_release_candidate_artifact_build_path "$path"; then
     continue
   fi
+  if aion244_is_scoped_v02_release_candidate_final_evaluation_path "$path"; then
+    continue
+  fi
 		  if ! is_allowed_path "$path"; then
 		    if ! is_aion233_model_gateway_source_path "$path" && \
 		      ! is_aion235_capability_runtime_source_path "$path" && \

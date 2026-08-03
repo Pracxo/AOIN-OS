@@ -59,7 +59,8 @@ changed_paths() {
 changed_paths_without_aion243() {
   changed_paths | while IFS= read -r path; do
     [[ -z "$path" ]] && continue
-    if ! aion243_is_scoped_v02_release_candidate_artifact_build_path "$path"; then
+    if ! aion243_is_scoped_v02_release_candidate_artifact_build_path "$path" \
+      && ! aion244_is_scoped_v02_release_candidate_final_evaluation_path "$path"; then
       printf '%s\n' "$path"
     fi
   done

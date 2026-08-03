@@ -87,6 +87,36 @@ if authorization.get("authorization_transaction_id") == ev.NEXT_AUTHORIZATION_ID
         if evidence.get(key) != 0:
             raise SystemExit(f"staging evidence cleanup counter must be zero after AION-242: {key}")
     sys.exit(0)
+if authorization.get("authorization_transaction_id") == "AION-244-V02REL-0001":
+    for label, payload in (("program", program), ("authorization", authorization)):
+        if payload.get("active_v02_release_qualification_authorization") != "AION-244-V02REL-0001":
+            raise SystemExit(f"{label} active authorization mismatch after AION-244")
+        if payload.get("active_v02_release_qualification_authorization_count") != 1:
+            raise SystemExit(f"{label} active authorization count mismatch after AION-244")
+        if payload.get("active_v02_release_qualification_task") != "AION-244":
+            raise SystemExit(f"{label} active task mismatch after AION-244")
+        if payload.get("release_candidate_artifact_build_implemented") is not True:
+            raise SystemExit(f"{label} AION-243 local release-candidate build state missing")
+        if payload.get("release_candidate_created") is not True:
+            raise SystemExit(f"{label} AION-243 local release candidate state missing")
+        if payload.get("release_candidate_creation_enabled") is not False:
+            raise SystemExit(f"{label} release-candidate creation must remain disabled")
+        for key in (
+            "release_candidate_published",
+            "production_runtime_authorized",
+            "production_deployment_enabled",
+            "v02_release_ready",
+            "v02_tag_created",
+            "v02_release_created",
+        ):
+            if payload.get(key) is not False:
+                raise SystemExit(f"{label} runtime hold mismatch {key}: {payload.get(key)!r}")
+    publication = authorization.get("aion_244_publication_authorization", {})
+    if publication.get("authorization_active") is not True:
+        raise SystemExit("AION-244 publication authorization must be active")
+    if publication.get("authorization_consumed") is not False:
+        raise SystemExit("AION-244 publication authorization must be unconsumed")
+    sys.exit(0)
 required_true = (
     "staging_qualification_authorized",
     "staging_qualification_implemented",

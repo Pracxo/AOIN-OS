@@ -22,6 +22,8 @@ NEXT_FORMAL_CLOSEOUT_TASK = "AION-242"
 FINAL_PLANNED_TASK = "AION-244"
 CURRENT_AUTHORIZATION_ID = "AION-238-V02RQ-0001"
 NEXT_AUTHORIZATION_ID = "AION-240-V02RQ-0002"
+AION242_AUTHORIZATION_ID = "AION-242-V02RQ-0003"
+AION244_AUTHORIZATION_ID = "AION-244-V02REL-0001"
 IMPLEMENTATION_PR = 158
 IMPLEMENTATION_BRANCH = "phase/v02-release-qualification-foundation"
 IMPLEMENTATION_COMMIT = "a1d5d1ee2b0d991f3074c796d664105225b51856"
@@ -687,6 +689,52 @@ def evaluate(
         and authorization_closeout.get("authorization_consumed_by_task") == IMPLEMENTATION_TASK
         and authorization_closeout.get("authorization_closed_by_task") == CLOSEOUT_TASK
     )
+    aion240_closeout = program.get("aion_240_authorization_closeout", {})
+    aion242_closeout = program.get("aion_242_authorization_closeout", {})
+    aion244_publication = program.get("aion_244_publication_authorization", {})
+    authorization_final_evaluation_prepublication = (
+        authorization_ledger.get("authorization_transaction_id") == AION244_AUTHORIZATION_ID
+        and authorization_ledger.get("approval_record_id") == AION244_AUTHORIZATION_ID
+        and authorization_ledger.get("program_id") == PROGRAM_ID
+        and authorization_ledger.get("parent_authorization_transaction_id") == AION242_AUTHORIZATION_ID
+        and authorization_ledger.get("parent_evaluation_id") == "AION-V02RQPE-003"
+        and authorization_ledger.get("implementation_task") == FINAL_PLANNED_TASK
+        and authorization_ledger.get("authorization_active") is True
+        and authorization_ledger.get("authorization_consumed") is False
+        and authorization_ledger.get("authorization_expired") is False
+        and authorization_ledger.get("authorization_reusable") is False
+        and authorization_ledger.get("active_v02_release_qualification_authorization_count") == 1
+        and authorization_ledger.get("active_v02_release_qualification_authorization") == AION244_AUTHORIZATION_ID
+        and authorization_ledger.get("release_candidate_published") is False
+        and authorization_ledger.get("v02_tag_created") is False
+        and authorization_ledger.get("v02_release_created") is False
+        and authorization_ledger.get("production_deployment_enabled") is False
+        and authorization_closeout.get("authorization_transaction_id") == CURRENT_AUTHORIZATION_ID
+        and authorization_closeout.get("authorization_active") is False
+        and authorization_closeout.get("authorization_consumed") is True
+        and authorization_closeout.get("authorization_expired") is True
+        and authorization_closeout.get("authorization_reusable") is False
+        and aion240_closeout.get("authorization_transaction_id") == NEXT_AUTHORIZATION_ID
+        and aion240_closeout.get("authorization_active") is False
+        and aion240_closeout.get("authorization_consumed") is True
+        and aion240_closeout.get("authorization_expired") is True
+        and aion240_closeout.get("authorization_reusable") is False
+        and aion242_closeout.get("authorization_transaction_id") == AION242_AUTHORIZATION_ID
+        and aion242_closeout.get("authorization_active") is False
+        and aion242_closeout.get("authorization_consumed") is True
+        and aion242_closeout.get("authorization_expired") is True
+        and aion242_closeout.get("authorization_reusable") is False
+        and aion244_publication.get("authorization_transaction_id") == AION244_AUTHORIZATION_ID
+        and aion244_publication.get("authorization_active") is True
+        and aion244_publication.get("authorization_consumed") is False
+        and aion244_publication.get("authorization_reusable") is False
+    )
+    final_evaluation_parent_lineage_valid = (
+        authorization_final_evaluation_prepublication
+        and program.get("parent_evaluation_id") == "AION-V02RQPE-003"
+        and program.get("parent_implementation_task") == "AION-243"
+        and program.get("parent_authorization_transaction_id") == AION242_AUTHORIZATION_ID
+    )
     expected_positive_limits = {
         "maximum_readiness_gaps": 100,
         "maximum_identity_provider_manifests": 5,
@@ -726,11 +774,24 @@ def evaluate(
         scenario(
             "authorization_lineage_and_scope",
             (
-                check("authorization_lineage_valid", authorization_pre_closeout or authorization_post_closeout),
+                check(
+                    "authorization_lineage_valid",
+                    authorization_pre_closeout
+                    or authorization_post_closeout
+                    or authorization_final_evaluation_prepublication,
+                ),
                 check("aion_238_active_or_closed_exact", authorization_pre_closeout or authorization_closeout.get("authorization_transaction_id") == CURRENT_AUTHORIZATION_ID),
                 check("program_id_exact", authorization_ledger.get("program_id") == PROGRAM_ID),
-                check("implementation_task_exact", authorization_ledger.get("implementation_task") in {IMPLEMENTATION_TASK, NEXT_IMPLEMENTATION_TASK}),
-                check("formal_closeout_task_exact", authorization_ledger.get("formal_closeout_task") in {CLOSEOUT_TASK, NEXT_FORMAL_CLOSEOUT_TASK}),
+                check(
+                    "implementation_task_exact",
+                    authorization_ledger.get("implementation_task")
+                    in {IMPLEMENTATION_TASK, NEXT_IMPLEMENTATION_TASK, FINAL_PLANNED_TASK},
+                ),
+                check(
+                    "formal_closeout_task_exact",
+                    authorization_ledger.get("formal_closeout_task")
+                    in {CLOSEOUT_TASK, NEXT_FORMAL_CLOSEOUT_TASK, FINAL_PLANNED_TASK},
+                ),
                 check("active_authorization_unconsumed", authorization_ledger.get("authorization_active") is True and authorization_ledger.get("authorization_consumed") is False),
                 check("not_reusable", authorization_ledger.get("authorization_reusable") is False),
                 check("active_count_one", authorization_ledger.get("active_v02_release_qualification_authorization_count") == 1),
@@ -763,10 +824,18 @@ def evaluate(
             "parent_program_component_lineage",
             (
                 check("sri_parent_program_recorded", "AION-SECURE-RUNTIME-INTEGRATION-001" in program.get("parent_completed_programs", ())),
-                check("parent_evaluation_exact", program.get("parent_evaluation_id") == "AION-SRIPE-004"),
+                check(
+                    "parent_evaluation_exact",
+                    program.get("parent_evaluation_id") == "AION-SRIPE-004"
+                    or final_evaluation_parent_lineage_valid,
+                ),
                 check("aion_238_record_complete", program.get("aion_238_delivery_reconciliation", {}).get("ci_result") == "pass"),
                 check("active_sri_zero", program.get("aion_238_delivery_reconciliation", {}).get("active_sri_authorization_count") == 0),
-                check("aion_237_lineage_recorded", program.get("parent_implementation_task") == "AION-237"),
+                check(
+                    "aion_237_lineage_recorded",
+                    program.get("parent_implementation_task") == "AION-237"
+                    or final_evaluation_parent_lineage_valid,
+                ),
             ),
         ),
         scenario(

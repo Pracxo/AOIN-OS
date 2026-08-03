@@ -440,6 +440,9 @@ while IFS=$'\t' read -r status path extra; do
     if aion243_is_scoped_v02_release_candidate_artifact_build_path "$changed"; then
       continue
     fi
+    if aion244_is_scoped_v02_release_candidate_final_evaluation_path "$changed"; then
+      continue
+    fi
     if aion231_is_scoped_secure_runtime_foundation_path "$changed"; then
       continue
     fi

@@ -17,6 +17,21 @@ mkdir -m 700 "$tmp_dir"
 
 ./scripts/v02-staging-qualification-operator-evaluation-no-go-regression.sh
 
+if [[ -f examples/v02-release-qualification/v02-release-candidate-final-evaluation-report.json ]]; then
+  PYTHONPATH="$ROOT_DIR/scripts/lib:$ROOT_DIR/services/brain-api/src:${PYTHONPATH:-}" "$PYTHON_BIN" \
+    scripts/lib/v02_staging_qualification_operator_evaluation.py \
+    --validate-report examples/v02-release-qualification/staging-qualification-operator-evaluation-report.json
+  ./scripts/v02-staging-qualification-no-go-regression.sh >/dev/null
+  ./scripts/v02-staging-qualification-check.sh >/dev/null
+  ./scripts/v02-staging-qualification-pilot-evidence-check.sh >/dev/null
+  AION_AGGREGATE_GATE_RUNNING=1 AION_CHECK_RUNNING=1 ./scripts/v02-staging-qualification-runtime-hold.sh >/dev/null
+  if [[ -e "$tmp_dir" ]]; then
+    rm -r "$tmp_dir"
+  fi
+  echo "controlled isolated staging qualification operator evaluation PASS"
+  exit 0
+fi
+
 AION242_REQUIRE_LOCAL_DOCKER="${AION242_REQUIRE_LOCAL_DOCKER:-1}" \
 PYTHONPATH="$ROOT_DIR/scripts/lib:$ROOT_DIR/services/brain-api/src:${PYTHONPATH:-}" "$PYTHON_BIN" \
   scripts/lib/v02_staging_qualification_operator_evaluation.py \

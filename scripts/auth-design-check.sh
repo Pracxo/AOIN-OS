@@ -1546,6 +1546,7 @@ def is_secure_runtime_integration_artifact(name: str) -> bool:
         or name.startswith("operator-console-static/demo-data/secure-runtime-integration-")
         or name.startswith("operator-console-static/demo-data/v02-release-qualification-")
         or name.startswith("operator-console-static/demo-data/v02-release-candidate-")
+        or name.startswith("operator-console-static/demo-data/v02-rc1-")
         or name.startswith("operator-console-static/demo-data/v02-qualification-foundation-")
         or name.startswith("operator-console-static/demo-data/v02-staging-")
         or name.startswith("operator-console-static/demo-data/secure-runtime-foundation-operator-evaluation")
@@ -1566,6 +1567,7 @@ def is_secure_runtime_integration_artifact(name: str) -> bool:
         or name == "scripts/secure-runtime-local-operator-run.py"
         or name.startswith("scripts/v02-release-qualification-")
         or name.startswith("scripts/v02-release-candidate-")
+        or name == "scripts/lib/v02_release_candidate_final_evaluation.py"
         or name.startswith("scripts/v02-staging-qualification-")
         or name == "services/brain-api/src/aion_brain/contracts/secure_runtime.py"
         or name == "services/brain-api/src/aion_brain/contracts/model_gateway.py"

@@ -144,6 +144,34 @@ if auth.get("authorization_transaction_id") == ev.NEXT_AUTHORIZATION_ID:
         if payload.get("v02_release_ready") is not False:
             raise SystemExit(f"{label} v02_release_ready must remain false after AION-242")
     sys.exit(0)
+if auth.get("active_v02_release_qualification_authorization") == "AION-244-V02REL-0001":
+    for label, payload in (("program", program), ("authorization", auth)):
+        closeout = payload.get("aion_242_authorization_closeout", {})
+        publication_auth = payload.get("aion_244_publication_authorization", {})
+        if closeout.get("authorization_transaction_id") != ev.NEXT_AUTHORIZATION_ID:
+            raise SystemExit(f"{label} missing AION-242 authorization closeout after AION-244")
+        if closeout.get("authorization_active") is not False or closeout.get("authorization_consumed") is not True:
+            raise SystemExit(f"{label} AION-242 authorization closeout mismatch after AION-244")
+        if publication_auth.get("authorization_transaction_id") != "AION-244-V02REL-0001":
+            raise SystemExit(f"{label} missing AION-244 publication authorization")
+        if publication_auth.get("authorization_active") is not True:
+            raise SystemExit(f"{label} AION-244 publication authorization must be active")
+        if publication_auth.get("authorization_consumed") is not False:
+            raise SystemExit(f"{label} AION-244 publication authorization must be unconsumed")
+        for key, expected in {
+            "release_candidate_artifact_build_implemented": True,
+            "release_candidate_created": True,
+            "release_candidate_published": False,
+            "release_candidate_creation_enabled": False,
+            "v02_release_ready": False,
+            "v02_tag_created": False,
+            "v02_release_created": False,
+            "production_runtime_authorized": False,
+            "production_deployment_enabled": False,
+        }.items():
+            if payload.get(key) != expected:
+                raise SystemExit(f"{label} AION-244 carried-forward staging mismatch {key}: {payload.get(key)!r}")
+    sys.exit(0)
 final_state = (
     "controlled_isolated_staging_qualification_implemented_pilot_complete_pending_closeout"
 )

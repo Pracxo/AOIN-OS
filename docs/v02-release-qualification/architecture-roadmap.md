@@ -45,3 +45,7 @@ The evaluation passed all 28 hard-gated scenarios, verified PR #158, commits `a1
 `AION-238-V02RQ-0001` is closed, consumed by AION-239, expired and non-reusable. `AION-240-V02RQ-0002` remains active for AION-241 formal closeout by AION-242. AION-241 is implemented with controlled isolated local pilot evidence pending AION-242 closeout. AION-243 remains unauthorized. AION-244 remains the final release-candidate evaluation and tag/release authorization decision.
 
 Production runtime, production authentication, external IdP calls, production credentials, production tokens, registry login, registry pull, registry push, public network access, DNS resolution, public listeners, production database provisioning, production deployment, release-candidate creation, v0.2 tags and v0.2 releases remain disabled or absent. `v02_release_ready=false`.
+
+## AION-244 v0.2.0-rc.1 Publication Authorization
+
+AION-244 moves the v0.2 release qualification roadmap to final RC1 publication authorization. The only allowed publication target is the prerelease `aion-v0.2.0-rc.1` at `d35f1caa234d35dce1dfc0a80bc4c8e327a8373e`; stable v0.2.0 remains a future, separately evaluated release path.

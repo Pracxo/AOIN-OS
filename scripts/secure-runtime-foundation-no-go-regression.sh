@@ -5,6 +5,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/immutable-tags.sh"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
+source "$ROOT_DIR/scripts/lib/v02-production-auth-scan-exclusions.sh"
 
 if [[ -f docs/secure-runtime-integration/program-ledger.json ]] && \
   grep -q '"program_state": "sandboxed_capability_runtime_implemented_reference_only_pending_closeout"' docs/secure-runtime-integration/program-ledger.json && \
@@ -340,7 +341,8 @@ fi
 
 while IFS= read -r path; do
   [[ -n "$path" ]] || continue
-  if ! is_allowed_change "$path"; then
+  if ! is_allowed_change "$path" \
+    && ! aion244_is_scoped_v02_release_candidate_final_evaluation_path "$path"; then
     echo "ERROR: AION-231 changed disallowed path: $path" >&2
     exit 1
   fi

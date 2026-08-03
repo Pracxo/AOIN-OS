@@ -1,0 +1,21 @@
+{
+  "candidate_id": "aion-v0.2.0-rc.1",
+  "candidate_source_commit": "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e",
+  "decision": "DETERMINISTIC_LOCAL_V02_RELEASE_CANDIDATE_FINAL_EVALUATION_PASS_AUTHORIZE_AION_V0_2_0_RC_1_ANNOTATED_TAG_AND_GITHUB_PRERELEASE_PUBLICATION",
+  "evaluation_id": "AION-V02RQPE-003",
+  "evaluation_passed": true,
+  "hard_gate_count": 32,
+  "package_version": "0.2.0rc1",
+  "production_deployment": false,
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "release_candidate_published": false,
+  "report_fingerprint": "8bb225c4f8e5055bc19d961e9a67e7347acf0896195ce4279ba65d597c044952",
+  "scenario_count": 32,
+  "stable_release_created": false,
+  "status": "passed_pending_rc1_publication",
+  "synthetic": true,
+  "task_id": "AION-244"
+}

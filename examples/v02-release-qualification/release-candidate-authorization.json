@@ -1,8 +1,160 @@
 {
-  "active_v02_release_qualification_authorization": "AION-242-V02RQ-0003",
+  "active_authorizations": [
+    {
+      "approval_record_id": "AION-244-V02REL-0001",
+      "assets_downloaded_for_verification": 0,
+      "assets_uploaded": 0,
+      "authorization_active": true,
+      "authorization_consumed": false,
+      "authorization_expired": false,
+      "authorization_reusable": false,
+      "authorization_scope": "exact-single-use-aion-v0.2.0-rc.1-annotated-tag-github-prerelease-signed-candidate-asset-upload-download-verification-publication-reconciliation-no-stable-tag-no-production-deployment-core",
+      "authorization_transaction_id": "AION-244-V02REL-0001",
+      "candidate_bundle_manifest_fingerprint": "9da9f1bcc4fb5bb8ddd0a49f2bab3aec5424c9e55cb8c21bebc35abb117f9e9c",
+      "candidate_evidence_fingerprint": "a5e7430075cb05d5c08ea6fc068cc0b961560834227f32059a9be8856c8a8d54",
+      "candidate_id": "aion-v0.2.0-rc.1",
+      "candidate_source_commit": "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e",
+      "created_release_count": 0,
+      "created_tag_count": 0,
+      "final_evaluation_report_fingerprint": "8bb225c4f8e5055bc19d961e9a67e7347acf0896195ce4279ba65d597c044952",
+      "maximum_annotated_tags_created": 1,
+      "maximum_github_prereleases_created": 1,
+      "maximum_production_deployments": 0,
+      "maximum_public_package_uploads": 0,
+      "maximum_registry_logins": 0,
+      "maximum_registry_pushes": 0,
+      "maximum_release_assets_downloaded_for_verification": 24,
+      "maximum_release_assets_uploaded": 24,
+      "maximum_release_publication_attempts": 1,
+      "maximum_stable_releases_created": 0,
+      "maximum_stable_tags_created": 0,
+      "parent_authorization_transaction_id": "AION-242-V02RQ-0003",
+      "parent_evaluation_decision": "DETERMINISTIC_LOCAL_V02_RELEASE_CANDIDATE_FINAL_EVALUATION_PASS_AUTHORIZE_AION_V0_2_0_RC_1_ANNOTATED_TAG_AND_GITHUB_PRERELEASE_PUBLICATION",
+      "parent_evaluation_id": "AION-V02RQPE-003",
+      "production_deployment_authorized": false,
+      "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+      "read_only": true,
+      "redacted": true,
+      "release_draft_initially": true,
+      "release_kind": "github_prerelease",
+      "release_name": "AION OS v0.2.0-rc.1",
+      "release_prerelease": true,
+      "release_stable": false,
+      "stable_release_authorized": false,
+      "stable_tag_authorized": false,
+      "tag_name": "aion-v0.2.0-rc.1",
+      "tag_target_commit": "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e",
+      "task_id": "AION-244"
+    }
+  ],
+  "active_v02_release_qualification_authorization": "AION-244-V02REL-0001",
   "active_v02_release_qualification_authorization_count": 1,
-  "active_v02_release_qualification_task": "AION-243",
-  "approval_record_id": "AION-242-V02RQ-0003",
+  "active_v02_release_qualification_task": "AION-244",
+  "aion_242_authorization_closeout": {
+    "authorization_active": false,
+    "authorization_closed_by_task": "AION-244",
+    "authorization_consumed": true,
+    "authorization_consumed_by_feature_commits": [
+      "19da1991027ba702d9a382c42e3ad5ff10d60d93",
+      "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e",
+      "8a4e3f1de848018e347facd28875921229ba527c"
+    ],
+    "authorization_consumed_by_merge_commits": [
+      "c18ea935f29e06590b83fc23efba7ae49fc6efab"
+    ],
+    "authorization_consumed_by_prs": [
+      162
+    ],
+    "authorization_consumed_by_task": "AION-243",
+    "authorization_expired": true,
+    "authorization_reusable": false,
+    "authorization_transaction_id": "AION-242-V02RQ-0003",
+    "evaluation_used_as_production_deployment_approval": false,
+    "evaluation_used_as_stable_release_approval": false,
+    "final_candidate_evaluation_decision": "DETERMINISTIC_LOCAL_V02_RELEASE_CANDIDATE_FINAL_EVALUATION_PASS_AUTHORIZE_AION_V0_2_0_RC_1_ANNOTATED_TAG_AND_GITHUB_PRERELEASE_PUBLICATION",
+    "final_candidate_evaluation_id": "AION-V02RQPE-003",
+    "final_candidate_evaluation_report_fingerprint": "8bb225c4f8e5055bc19d961e9a67e7347acf0896195ce4279ba65d597c044952"
+  },
+  "aion_243_record": {
+    "authorization_state": "consumed_by_AION-243_closed_by_AION-244_after_final_evaluation_pass",
+    "authorization_transaction": "AION-242-V02RQ-0003",
+    "branch": "phase/v02-release-candidate-artifact-build",
+    "candidate_evidence_path": "examples/v02-release-qualification/v02-release-candidate-artifact-build-evidence.json",
+    "candidate_id": "aion-v0.2.0-rc.1",
+    "candidate_image_id": "sha256:0247d4f8fc270f2eadbca256f1f48475289da6744393bd2fd278e43d9d565f0d",
+    "candidate_report_fingerprint": "a5e7430075cb05d5c08ea6fc068cc0b961560834227f32059a9be8856c8a8d54",
+    "candidate_source_commit": "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e",
+    "ci_result": "passed",
+    "completion_timestamp": "2026-08-02T23:25:24Z",
+    "evidence_commit": "8a4e3f1de848018e347facd28875921229ba527c",
+    "feature_commits": [
+      "19da1991027ba702d9a382c42e3ad5ff10d60d93",
+      "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e",
+      "8a4e3f1de848018e347facd28875921229ba527c"
+    ],
+    "implementation_commit": "19da1991027ba702d9a382c42e3ad5ff10d60d93",
+    "merge_commits": [
+      "c18ea935f29e06590b83fc23efba7ae49fc6efab"
+    ],
+    "next_task": "AION-244",
+    "pull_requests": [
+      162
+    ],
+    "release_candidate_artifact_build_authorized": true,
+    "release_candidate_artifact_build_implemented": true,
+    "release_candidate_created": true,
+    "release_candidate_published": false,
+    "runtime_state": "deterministic_local_v02_release_candidate_bundle_retained_final_evaluation_passed_pending_publication",
+    "task_id": "AION-243",
+    "version_commit": "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e"
+  },
+  "aion_244_publication_authorization": {
+    "approval_record_id": "AION-244-V02REL-0001",
+    "assets_downloaded_for_verification": 0,
+    "assets_uploaded": 0,
+    "authorization_active": true,
+    "authorization_consumed": false,
+    "authorization_expired": false,
+    "authorization_reusable": false,
+    "authorization_scope": "exact-single-use-aion-v0.2.0-rc.1-annotated-tag-github-prerelease-signed-candidate-asset-upload-download-verification-publication-reconciliation-no-stable-tag-no-production-deployment-core",
+    "authorization_transaction_id": "AION-244-V02REL-0001",
+    "candidate_bundle_manifest_fingerprint": "9da9f1bcc4fb5bb8ddd0a49f2bab3aec5424c9e55cb8c21bebc35abb117f9e9c",
+    "candidate_evidence_fingerprint": "a5e7430075cb05d5c08ea6fc068cc0b961560834227f32059a9be8856c8a8d54",
+    "candidate_id": "aion-v0.2.0-rc.1",
+    "candidate_source_commit": "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e",
+    "created_release_count": 0,
+    "created_tag_count": 0,
+    "final_evaluation_report_fingerprint": "8bb225c4f8e5055bc19d961e9a67e7347acf0896195ce4279ba65d597c044952",
+    "maximum_annotated_tags_created": 1,
+    "maximum_github_prereleases_created": 1,
+    "maximum_production_deployments": 0,
+    "maximum_public_package_uploads": 0,
+    "maximum_registry_logins": 0,
+    "maximum_registry_pushes": 0,
+    "maximum_release_assets_downloaded_for_verification": 24,
+    "maximum_release_assets_uploaded": 24,
+    "maximum_release_publication_attempts": 1,
+    "maximum_stable_releases_created": 0,
+    "maximum_stable_tags_created": 0,
+    "parent_authorization_transaction_id": "AION-242-V02RQ-0003",
+    "parent_evaluation_decision": "DETERMINISTIC_LOCAL_V02_RELEASE_CANDIDATE_FINAL_EVALUATION_PASS_AUTHORIZE_AION_V0_2_0_RC_1_ANNOTATED_TAG_AND_GITHUB_PRERELEASE_PUBLICATION",
+    "parent_evaluation_id": "AION-V02RQPE-003",
+    "production_deployment_authorized": false,
+    "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+    "read_only": true,
+    "redacted": true,
+    "release_draft_initially": true,
+    "release_kind": "github_prerelease",
+    "release_name": "AION OS v0.2.0-rc.1",
+    "release_prerelease": true,
+    "release_stable": false,
+    "stable_release_authorized": false,
+    "stable_tag_authorized": false,
+    "tag_name": "aion-v0.2.0-rc.1",
+    "tag_target_commit": "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e",
+    "task_id": "AION-244"
+  },
+  "approval_record_id": "AION-244-V02REL-0001",
   "approved_capabilities": {
     "bounded_package_version_update_approved": true,
     "brain_api_oci_candidate_build_approved": true,
@@ -54,11 +206,11 @@
   "authorization_consumed": false,
   "authorization_expired": false,
   "authorization_reusable": false,
-  "authorization_scope": "deterministic-local-v02-release-candidate-source-archive-brain-api-oci-sdk-package-operator-console-bundle-sbom-provenance-checksum-qualification-signature-reproducibility-compatibility-release-notes-retention-no-production-deployment-no-git-tag-no-public-release-core",
-  "authorization_transaction_id": "AION-242-V02RQ-0003",
+  "authorization_scope": "exact-single-use-aion-v0.2.0-rc.1-annotated-tag-github-prerelease-signed-candidate-asset-upload-download-verification-publication-reconciliation-no-stable-tag-no-production-deployment-core",
+  "authorization_transaction_id": "AION-244-V02REL-0001",
   "candidate_bundle_count": 1,
   "candidate_bundle_retained": true,
-  "candidate_id": "deterministic-v02-release-candidate-artifact-build-core",
+  "candidate_id": "aion-v0.2.0-rc.1",
   "candidate_label": "aion-v0.2.0-rc.1",
   "candidate_local_image_count": 1,
   "candidate_local_image_retained": true,
@@ -73,6 +225,34 @@
     "retain_public_key_and_detached_signatures": true,
     "secure_candidate_root_outside_repository": true
   },
+  "candidate_source_commit": "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e",
+  "closed_authorizations": [
+    {
+      "authorization_active": false,
+      "authorization_closed_by_task": "AION-244",
+      "authorization_consumed": true,
+      "authorization_consumed_by_feature_commits": [
+        "19da1991027ba702d9a382c42e3ad5ff10d60d93",
+        "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e",
+        "8a4e3f1de848018e347facd28875921229ba527c"
+      ],
+      "authorization_consumed_by_merge_commits": [
+        "c18ea935f29e06590b83fc23efba7ae49fc6efab"
+      ],
+      "authorization_consumed_by_prs": [
+        162
+      ],
+      "authorization_consumed_by_task": "AION-243",
+      "authorization_expired": true,
+      "authorization_reusable": false,
+      "authorization_transaction_id": "AION-242-V02RQ-0003",
+      "evaluation_used_as_production_deployment_approval": false,
+      "evaluation_used_as_stable_release_approval": false,
+      "final_candidate_evaluation_decision": "DETERMINISTIC_LOCAL_V02_RELEASE_CANDIDATE_FINAL_EVALUATION_PASS_AUTHORIZE_AION_V0_2_0_RC_1_ANNOTATED_TAG_AND_GITHUB_PRERELEASE_PUBLICATION",
+      "final_candidate_evaluation_id": "AION-V02RQPE-003",
+      "final_candidate_evaluation_report_fingerprint": "8bb225c4f8e5055bc19d961e9a67e7347acf0896195ce4279ba65d597c044952"
+    }
+  ],
   "controlled_staging_qualification_operator_evaluation_decision": "CONTROLLED_ISOLATED_LOCAL_STAGING_QUALIFICATION_OPERATOR_EVALUATION_PASS_RECOMMEND_DETERMINISTIC_V02_RELEASE_CANDIDATE_ARTIFACT_BUILD_AUTHORIZATION",
   "controlled_staging_qualification_operator_evaluation_id": "AION-V02RQPE-002",
   "controlled_staging_qualification_operator_evaluation_passed": true,
@@ -98,27 +278,29 @@
     "services/brain-api/src/aion_brain/v02_release_candidate/evidence.py"
   ],
   "future_uninstalled_runner": "scripts/v02-release-candidate-local-run.py",
-  "implementation_task": "AION-243",
-  "parent_authorization_transaction_id": "AION-240-V02RQ-0002",
+  "implementation_task": "AION-244",
+  "parent_authorization_transaction_id": "AION-242-V02RQ-0003",
   "parent_evaluation_base_commit": "cfc881c8e50b35852176221ff8635e1996f2591d",
-  "parent_evaluation_decision": "CONTROLLED_ISOLATED_LOCAL_STAGING_QUALIFICATION_OPERATOR_EVALUATION_PASS_RECOMMEND_DETERMINISTIC_V02_RELEASE_CANDIDATE_ARTIFACT_BUILD_AUTHORIZATION",
-  "parent_evaluation_id": "AION-V02RQPE-002",
+  "parent_evaluation_decision": "DETERMINISTIC_LOCAL_V02_RELEASE_CANDIDATE_FINAL_EVALUATION_PASS_AUTHORIZE_AION_V0_2_0_RC_1_ANNOTATED_TAG_AND_GITHUB_PRERELEASE_PUBLICATION",
+  "parent_evaluation_id": "AION-V02RQPE-003",
   "parent_implementation_feature_commits": [
-    "b378162fde84fcadd3fc353ae1e95936690abbcd",
-    "1ac103875a2eb2a5f7f1a21d7891bc76ac63d587"
+    "19da1991027ba702d9a382c42e3ad5ff10d60d93",
+    "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e",
+    "8a4e3f1de848018e347facd28875921229ba527c"
   ],
-  "parent_implementation_main_commit": "24095a3fabe95b59f2607134199d160e8122e343",
+  "parent_implementation_main_commit": "c18ea935f29e06590b83fc23efba7ae49fc6efab",
   "parent_implementation_merge_commits": [
-    "24095a3fabe95b59f2607134199d160e8122e343"
+    "c18ea935f29e06590b83fc23efba7ae49fc6efab"
   ],
   "parent_implementation_prs": [
-    160
+    162
   ],
-  "parent_implementation_task": "AION-241",
+  "parent_implementation_task": "AION-243",
   "production_deployment_enabled": false,
+  "production_exposure": false,
   "production_runtime_authorized": false,
   "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
-  "program_state": "deterministic_v02_release_candidate_artifact_built_local_candidate_retained_pending_final_evaluation",
+  "program_state": "v02_release_candidate_final_evaluation_passed_pending_rc1_prerelease_publication",
   "prohibited_capabilities": {
     "automatic_merge_enabled": false,
     "cloud_deployment_enabled": false,
@@ -153,8 +335,15 @@
   "release_candidate_artifact_build_implemented": true,
   "release_candidate_artifact_state": "implemented_local_candidate_retained_pending_AION-244_closeout",
   "release_candidate_created": true,
-  "release_candidate_creation_enabled": true,
+  "release_candidate_creation_enabled": false,
+  "release_candidate_draft": true,
+  "release_candidate_final_evaluation_decision": "DETERMINISTIC_LOCAL_V02_RELEASE_CANDIDATE_FINAL_EVALUATION_PASS_AUTHORIZE_AION_V0_2_0_RC_1_ANNOTATED_TAG_AND_GITHUB_PRERELEASE_PUBLICATION",
+  "release_candidate_final_evaluation_id": "AION-V02RQPE-003",
+  "release_candidate_final_evaluation_passed": true,
+  "release_candidate_final_evaluation_report_fingerprint": "8bb225c4f8e5055bc19d961e9a67e7347acf0896195ce4279ba65d597c044952",
+  "release_candidate_prerelease": true,
   "release_candidate_promoted": false,
+  "release_candidate_publication_kind": "github_prerelease",
   "release_candidate_published": false,
   "resource_limits": {
     "maximum_allowlisted_docker_invocations": 150,
@@ -195,8 +384,9 @@
     "maximum_temporary_root_bytes": 10737418240,
     "maximum_v02_releases_created": 0
   },
+  "v02_release_candidate_ready": true,
   "v02_release_created": false,
   "v02_release_ready": false,
   "v02_tag_created": false,
-  "workstream": "v02-release-candidate-artifact-build"
+  "workstream": "v02-release-qualification-final-evaluation"
 }
