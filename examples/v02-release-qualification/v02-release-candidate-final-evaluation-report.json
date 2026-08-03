@@ -1,0 +1,739 @@
+{
+  "artifact_integrity": {
+    "oci_archive_fingerprint": "07d693d08c99bb2424615f1cd4df538a8303526b0bd008fdf8c2d5b4db3c6014",
+    "operator_console_bundle_fingerprint": "503e28f18821cef4df74812da99761917adf401b68630ccdfea9c2d25f33bd58",
+    "sdk_sdist_fingerprint": "5db9f9a39c67b9d988d24ccce980123d50bd2b7bd278c68c52c3528af3038fb4",
+    "sdk_wheel_fingerprint": "9cc5b5694c89c6792b165ff6757975353c5924489bfbc014a2e91b23083113c1"
+  },
+  "authorization_lineage": {
+    "aion_242_consumable": true,
+    "implementation_authorization": "AION-242-V02RQ-0003",
+    "publication_authorization": "AION-244-V02REL-0001"
+  },
+  "candidate_rebuilds_executed_by_evaluation": 0,
+  "candidate_source_commit": "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e",
+  "candidate_validation": {
+    "candidate_bundle_retained": true,
+    "candidate_id": "aion-v0.2.0-rc.1",
+    "candidate_image_id": "sha256:0247d4f8fc270f2eadbca256f1f48475289da6744393bd2fd278e43d9d565f0d",
+    "candidate_image_retained": true,
+    "candidate_python_package_version": "0.2.0rc1",
+    "candidate_report_fingerprint": "a5e7430075cb05d5c08ea6fc068cc0b961560834227f32059a9be8856c8a8d54"
+  },
+  "checksum_integrity": {
+    "checksum_manifest_fingerprint": "bfb9eda9b0eb6b3005eee8cd628376c03f2ce062ef937b2ca0a1a5c5d758a9d4",
+    "checksum_records_verified": 14
+  },
+  "closeout_task": "AION-244",
+  "compatibility_integrity": {
+    "compatibility_matrix_fingerprint": "b376f2902c4c1a2f8a49a7e9f1f43fd365077e42848d9c0b7c4d652313d4fb56"
+  },
+  "corrective_cycles": 0,
+  "corrective_prs": [],
+  "decision": "DETERMINISTIC_LOCAL_V02_RELEASE_CANDIDATE_FINAL_EVALUATION_PASS_AUTHORIZE_AION_V0_2_0_RC_1_ANNOTATED_TAG_AND_GITHUB_PRERELEASE_PUBLICATION",
+  "evaluation_base_commit": "5d47b9d8cb638a77569e905e06af37012f940d9e",
+  "evaluation_id": "AION-V02RQPE-003",
+  "evaluation_passed": true,
+  "evaluation_type": "deterministic_v02_release_candidate_final_evaluation",
+  "github_releases_created_by_evaluation": 0,
+  "hard_gate_count": 32,
+  "hard_gate_results": [
+    {
+      "details": {
+        "checks": [
+          "brain-api-quality",
+          "contract-check",
+          "docker-build-core",
+          "policy-check",
+          "repository-hygiene",
+          "sdk-cli-check",
+          "sdk-quality"
+        ],
+        "merged_at": "2026-08-02T23:25:24Z"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "aion_243_delivery_and_ci_integrity"
+    },
+    {
+      "details": {
+        "authorization": "AION-242-V02RQ-0003"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "authorization_lineage_and_scope"
+    },
+    {
+      "details": {
+        "report_fingerprint": "a5e7430075cb05d5c08ea6fc068cc0b961560834227f32059a9be8856c8a8d54"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "committed_candidate_evidence_schema_and_fingerprint"
+    },
+    {
+      "details": {
+        "candidate_bundle_count": 1,
+        "candidate_bundle_retained": true,
+        "candidate_file_count": 24,
+        "candidate_label": "aion-v0.2.0-rc.1",
+        "checksum_verification": "pass",
+        "signature_verification": "pass",
+        "signature_verification_count": 5
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "live_candidate_retention_and_locator_integrity"
+    },
+    {
+      "details": {
+        "tag_target_commit": "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "candidate_source_commit_and_tag_target_integrity"
+    },
+    {
+      "details": {
+        "version": "0.2.0rc1"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "package_version_and_dependency_integrity"
+    },
+    {
+      "details": {
+        "source_archive_file_count": 7593
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "deterministic_source_archive_integrity"
+    },
+    {
+      "details": {
+        "oci_archive_fingerprint": "07d693d08c99bb2424615f1cd4df538a8303526b0bd008fdf8c2d5b4db3c6014"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "brain_api_oci_archive_integrity"
+    },
+    {
+      "details": {
+        "candidate_image_id": "sha256:0247d4f8fc270f2eadbca256f1f48475289da6744393bd2fd278e43d9d565f0d",
+        "frozen_base_image_id": "sha256:d55ed37f90d85ca0fc5973e6d3cdd849353e0549a7df95d39864506712b342ea"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "retained_candidate_image_integrity"
+    },
+    {
+      "details": {
+        "sdk_wheel_fingerprint": "9cc5b5694c89c6792b165ff6757975353c5924489bfbc014a2e91b23083113c1"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "sdk_wheel_integrity"
+    },
+    {
+      "details": {
+        "sdk_sdist_file_count": 262
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "sdk_sdist_integrity"
+    },
+    {
+      "details": {
+        "operator_console_bundle_fingerprint": "503e28f18821cef4df74812da99761917adf401b68630ccdfea9c2d25f33bd58"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "operator_console_bundle_integrity"
+    },
+    {
+      "details": {
+        "asset_count": 24
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "candidate_content_and_bundle_manifest_integrity"
+    },
+    {
+      "details": {
+        "checksum_records": 14
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "checksum_manifest_integrity"
+    },
+    {
+      "details": {
+        "verified_signature_count": 5
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "qualification_public_key_and_signature_integrity"
+    },
+    {
+      "details": {
+        "private_key_files_found": 0
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "private_qualification_key_non_retention"
+    },
+    {
+      "details": {
+        "component_count": 66
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "candidate_sbom_integrity"
+    },
+    {
+      "details": {
+        "chain_head": "70a875688d43771ebc63393ae1e3cbca11f6b46f0db634438fec89f3f129f752"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "candidate_provenance_chain_integrity"
+    },
+    {
+      "details": {
+        "byte_for_byte_oci_reproducibility_confirmed": false
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "reproducibility_evidence_honesty"
+    },
+    {
+      "details": {
+        "compatibility_records": 11
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "compatibility_matrix_integrity"
+    },
+    {
+      "details": {
+        "migration_changes": 0
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "migration_manifest_truthfulness"
+    },
+    {
+      "details": {
+        "release_notes_draft_fingerprint": "2d976ae96bf3213331817ce6ee63a7e0c0bbc7ca85e6620db032f9c289078ec8"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "release_notes_accuracy_and_prerelease_semantics"
+    },
+    {
+      "details": {
+        "protected_material_hits": 0
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "protected_material_and_secret_exclusion"
+    },
+    {
+      "details": {
+        "candidate_file_count": 24
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "candidate_file_inventory_and_permission_integrity"
+    },
+    {
+      "details": {
+        "stdout": "No broken requirements found.\naion244 candidate image smoke PASS"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "candidate_image_package_and_application_smoke"
+    },
+    {
+      "details": {
+        "stdout": "aion244 sdk smoke PASS",
+        "temporary_target_removed": true
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "sdk_candidate_installation_and_entrypoint_smoke"
+    },
+    {
+      "details": {
+        "production_deployments": 0,
+        "registry_pushes": 0
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "zero_registry_package_upload_and_production_effects"
+    },
+    {
+      "details": {
+        "release_preexists": false
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "tag_and_release_preexistence_boundary"
+    },
+    {
+      "details": {
+        "asset_count": 24,
+        "largest_asset_bytes": 117021184
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "release_asset_inventory_and_upload_readiness"
+    },
+    {
+      "details": {
+        "tag_name": "aion-v0.2.0-rc.1",
+        "tag_target_commit": "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "annotated_tag_target_and_message_readiness"
+    },
+    {
+      "details": {
+        "draft_first": true,
+        "release_kind": "github_prerelease",
+        "rollback_before_publication_only": true
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "github_prerelease_transaction_and_rollback_readiness"
+    },
+    {
+      "details": {
+        "authorization_id": "AION-244-V02REL-0001",
+        "publication_authorization_ready": true
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "final_rc1_publication_authorization_readiness"
+    }
+  ],
+  "implementation_feature_commits": [
+    "19da1991027ba702d9a382c42e3ad5ff10d60d93",
+    "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e",
+    "8a4e3f1de848018e347facd28875921229ba527c"
+  ],
+  "implementation_main_commit": "c18ea935f29e06590b83fc23efba7ae49fc6efab",
+  "implementation_merge_commits": [
+    "c18ea935f29e06590b83fc23efba7ae49fc6efab"
+  ],
+  "implementation_prs": [
+    162
+  ],
+  "implementation_task": "AION-243",
+  "migration_integrity": {
+    "migration_manifest_fingerprint": "76ef5a423282639d6aaec7f50dc238141f29d5ca785d48c6fc09309d1326d1cc"
+  },
+  "next_architecture_decision": "aion_v0_2_0_rc_1_github_prerelease_publication_authorized",
+  "production_deployments": 0,
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "provenance_integrity": {
+    "candidate_provenance_chain_head": "70a875688d43771ebc63393ae1e3cbca11f6b46f0db634438fec89f3f129f752"
+  },
+  "public_package_uploads": 0,
+  "publication_plan": {
+    "release_draft_initially": true,
+    "release_kind": "github_prerelease",
+    "release_name": "AION OS v0.2.0-rc.1",
+    "release_prerelease": true,
+    "stable_release_created": false
+  },
+  "read_only": true,
+  "redacted": true,
+  "registry_logins": 0,
+  "registry_pulls": 0,
+  "registry_pushes": 0,
+  "release_asset_plan": {
+    "asset_count": 24,
+    "asset_paths": [
+      "source/aion-v0.2.0-rc.1-source.tar.gz",
+      "brain-api/aion-brain-api-0.2.0-rc.1.oci.tar",
+      "brain-api/brain-api-artifact-manifest.json",
+      "sdk/aion_sdk_python-0.2.0rc1-py3-none-any.whl",
+      "sdk/aion_sdk_python-0.2.0rc1.tar.gz",
+      "operator-console/aion-operator-console-0.2.0-rc.1.tar.gz",
+      "metadata/candidate-version-manifest.json",
+      "metadata/candidate-content-manifest.json",
+      "metadata/candidate-bundle-manifest.json",
+      "metadata/candidate-sbom.spdx.json",
+      "metadata/candidate-provenance.intoto.json",
+      "metadata/SHA256SUMS",
+      "signatures/qualification-public-key.json",
+      "signatures/candidate-content-manifest.sig",
+      "signatures/SHA256SUMS.sig",
+      "signatures/candidate-provenance.sig",
+      "signatures/candidate-sbom.sig",
+      "signatures/candidate-bundle-manifest.sig",
+      "evidence/reproducibility-comparison.json",
+      "evidence/compatibility-matrix.json",
+      "evidence/migration-manifest.json",
+      "evidence/release-notes-draft.md",
+      "evidence/candidate-integrity-report.json",
+      "evidence/candidate-evidence-bundle.json"
+    ],
+    "unique_basenames": true
+  },
+  "release_assets_uploaded_by_evaluation": 0,
+  "report_fingerprint": "8bb225c4f8e5055bc19d961e9a67e7347acf0896195ce4279ba65d597c044952",
+  "repository_integrity": {
+    "ending_status": "",
+    "repository_unchanged": true,
+    "starting_status": ""
+  },
+  "repository_unchanged": true,
+  "retention_integrity": {
+    "candidate_image": "aoinos-brain-api:aion-v0.2.0-rc.1",
+    "candidate_root": "user-home/.aion/release-candidates/aion-v0.2.0-rc.1",
+    "frozen_base_image": "aoinos-brain-api:aion241-base-9f6b899f84ef"
+  },
+  "sbom_integrity": {
+    "candidate_sbom_fingerprint": "52ba5138b1f01982f9357190739e029808744809d48f2365a4cdcf18afa68a7f",
+    "component_count": 66
+  },
+  "scenario_count": 32,
+  "scenario_ids": [
+    "aion_243_delivery_and_ci_integrity",
+    "authorization_lineage_and_scope",
+    "committed_candidate_evidence_schema_and_fingerprint",
+    "live_candidate_retention_and_locator_integrity",
+    "candidate_source_commit_and_tag_target_integrity",
+    "package_version_and_dependency_integrity",
+    "deterministic_source_archive_integrity",
+    "brain_api_oci_archive_integrity",
+    "retained_candidate_image_integrity",
+    "sdk_wheel_integrity",
+    "sdk_sdist_integrity",
+    "operator_console_bundle_integrity",
+    "candidate_content_and_bundle_manifest_integrity",
+    "checksum_manifest_integrity",
+    "qualification_public_key_and_signature_integrity",
+    "private_qualification_key_non_retention",
+    "candidate_sbom_integrity",
+    "candidate_provenance_chain_integrity",
+    "reproducibility_evidence_honesty",
+    "compatibility_matrix_integrity",
+    "migration_manifest_truthfulness",
+    "release_notes_accuracy_and_prerelease_semantics",
+    "protected_material_and_secret_exclusion",
+    "candidate_file_inventory_and_permission_integrity",
+    "candidate_image_package_and_application_smoke",
+    "sdk_candidate_installation_and_entrypoint_smoke",
+    "zero_registry_package_upload_and_production_effects",
+    "tag_and_release_preexistence_boundary",
+    "release_asset_inventory_and_upload_readiness",
+    "annotated_tag_target_and_message_readiness",
+    "github_prerelease_transaction_and_rollback_readiness",
+    "final_rc1_publication_authorization_readiness"
+  ],
+  "scenario_results": [
+    {
+      "details": {
+        "checks": [
+          "brain-api-quality",
+          "contract-check",
+          "docker-build-core",
+          "policy-check",
+          "repository-hygiene",
+          "sdk-cli-check",
+          "sdk-quality"
+        ],
+        "merged_at": "2026-08-02T23:25:24Z"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "aion_243_delivery_and_ci_integrity"
+    },
+    {
+      "details": {
+        "authorization": "AION-242-V02RQ-0003"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "authorization_lineage_and_scope"
+    },
+    {
+      "details": {
+        "report_fingerprint": "a5e7430075cb05d5c08ea6fc068cc0b961560834227f32059a9be8856c8a8d54"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "committed_candidate_evidence_schema_and_fingerprint"
+    },
+    {
+      "details": {
+        "candidate_bundle_count": 1,
+        "candidate_bundle_retained": true,
+        "candidate_file_count": 24,
+        "candidate_label": "aion-v0.2.0-rc.1",
+        "checksum_verification": "pass",
+        "signature_verification": "pass",
+        "signature_verification_count": 5
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "live_candidate_retention_and_locator_integrity"
+    },
+    {
+      "details": {
+        "tag_target_commit": "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "candidate_source_commit_and_tag_target_integrity"
+    },
+    {
+      "details": {
+        "version": "0.2.0rc1"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "package_version_and_dependency_integrity"
+    },
+    {
+      "details": {
+        "source_archive_file_count": 7593
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "deterministic_source_archive_integrity"
+    },
+    {
+      "details": {
+        "oci_archive_fingerprint": "07d693d08c99bb2424615f1cd4df538a8303526b0bd008fdf8c2d5b4db3c6014"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "brain_api_oci_archive_integrity"
+    },
+    {
+      "details": {
+        "candidate_image_id": "sha256:0247d4f8fc270f2eadbca256f1f48475289da6744393bd2fd278e43d9d565f0d",
+        "frozen_base_image_id": "sha256:d55ed37f90d85ca0fc5973e6d3cdd849353e0549a7df95d39864506712b342ea"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "retained_candidate_image_integrity"
+    },
+    {
+      "details": {
+        "sdk_wheel_fingerprint": "9cc5b5694c89c6792b165ff6757975353c5924489bfbc014a2e91b23083113c1"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "sdk_wheel_integrity"
+    },
+    {
+      "details": {
+        "sdk_sdist_file_count": 262
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "sdk_sdist_integrity"
+    },
+    {
+      "details": {
+        "operator_console_bundle_fingerprint": "503e28f18821cef4df74812da99761917adf401b68630ccdfea9c2d25f33bd58"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "operator_console_bundle_integrity"
+    },
+    {
+      "details": {
+        "asset_count": 24
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "candidate_content_and_bundle_manifest_integrity"
+    },
+    {
+      "details": {
+        "checksum_records": 14
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "checksum_manifest_integrity"
+    },
+    {
+      "details": {
+        "verified_signature_count": 5
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "qualification_public_key_and_signature_integrity"
+    },
+    {
+      "details": {
+        "private_key_files_found": 0
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "private_qualification_key_non_retention"
+    },
+    {
+      "details": {
+        "component_count": 66
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "candidate_sbom_integrity"
+    },
+    {
+      "details": {
+        "chain_head": "70a875688d43771ebc63393ae1e3cbca11f6b46f0db634438fec89f3f129f752"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "candidate_provenance_chain_integrity"
+    },
+    {
+      "details": {
+        "byte_for_byte_oci_reproducibility_confirmed": false
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "reproducibility_evidence_honesty"
+    },
+    {
+      "details": {
+        "compatibility_records": 11
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "compatibility_matrix_integrity"
+    },
+    {
+      "details": {
+        "migration_changes": 0
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "migration_manifest_truthfulness"
+    },
+    {
+      "details": {
+        "release_notes_draft_fingerprint": "2d976ae96bf3213331817ce6ee63a7e0c0bbc7ca85e6620db032f9c289078ec8"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "release_notes_accuracy_and_prerelease_semantics"
+    },
+    {
+      "details": {
+        "protected_material_hits": 0
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "protected_material_and_secret_exclusion"
+    },
+    {
+      "details": {
+        "candidate_file_count": 24
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "candidate_file_inventory_and_permission_integrity"
+    },
+    {
+      "details": {
+        "stdout": "No broken requirements found.\naion244 candidate image smoke PASS"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "candidate_image_package_and_application_smoke"
+    },
+    {
+      "details": {
+        "stdout": "aion244 sdk smoke PASS",
+        "temporary_target_removed": true
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "sdk_candidate_installation_and_entrypoint_smoke"
+    },
+    {
+      "details": {
+        "production_deployments": 0,
+        "registry_pushes": 0
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "zero_registry_package_upload_and_production_effects"
+    },
+    {
+      "details": {
+        "release_preexists": false
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "tag_and_release_preexistence_boundary"
+    },
+    {
+      "details": {
+        "asset_count": 24,
+        "largest_asset_bytes": 117021184
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "release_asset_inventory_and_upload_readiness"
+    },
+    {
+      "details": {
+        "tag_name": "aion-v0.2.0-rc.1",
+        "tag_target_commit": "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e"
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "annotated_tag_target_and_message_readiness"
+    },
+    {
+      "details": {
+        "draft_first": true,
+        "release_kind": "github_prerelease",
+        "rollback_before_publication_only": true
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "github_prerelease_transaction_and_rollback_readiness"
+    },
+    {
+      "details": {
+        "authorization_id": "AION-244-V02REL-0001",
+        "publication_authorization_ready": true
+      },
+      "hard_gate": true,
+      "result": "pass",
+      "scenario_id": "final_rc1_publication_authorization_readiness"
+    }
+  ],
+  "signature_integrity": {
+    "public_key_fingerprint": "b3a883a894da84cdef499acf87a43bea1fdfa4d4f5c04704c3916d6b5d49cf4c",
+    "signature_count": 5,
+    "verified_signature_count": 5
+  },
+  "source_integrity": {
+    "source_archive_fingerprint": "9110172942c24d24c7c459500730b896278b9f57fb5911d4aa6d3a12d591f2bc",
+    "source_commit": "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e",
+    "source_tree_fingerprint": "932a1893cfa440a088a1852627843fb2dbfa3bf8ae333f35384da1c47d5da1a7"
+  },
+  "stable_releases_created": 0,
+  "stable_tags_created": 0,
+  "tag_plan": {
+    "annotated": true,
+    "stable_tag_created": false,
+    "tag_name": "aion-v0.2.0-rc.1",
+    "tag_target_commit": "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e"
+  },
+  "tags_created_by_evaluation": 0,
+  "temporary_evaluation_data_cleaned": true
+}

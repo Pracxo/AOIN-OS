@@ -47,7 +47,10 @@ from pathlib import Path
 generated = json.loads(Path(os.environ["AION240_TMP_REPORT"]).read_text(encoding="utf-8"))
 committed = json.loads(Path("examples/v02-release-qualification/foundation-operator-evaluation-report.json").read_text(encoding="utf-8"))
 auth = json.loads(Path("docs/v02-release-qualification/authorization-ledger.json").read_text(encoding="utf-8"))
-if auth.get("authorization_transaction_id") == "AION-242-V02RQ-0003":
+if auth.get("authorization_transaction_id") in {
+    "AION-242-V02RQ-0003",
+    "AION-244-V02REL-0001",
+}:
     if committed.get("evaluation_id") != "AION-V02RQPE-001":
         raise SystemExit("committed AION-240 evaluation report id mismatch")
     if committed.get("evaluation_passed") is not True:

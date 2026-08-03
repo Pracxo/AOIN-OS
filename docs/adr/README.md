@@ -222,3 +222,4 @@ closure decision in ADR 0072.
 - [ADR 0205: Controlled Isolated Local Staging Artifact Build and Rollback Drill](0205-controlled-isolated-local-staging-artifact-build-and-rollback-drill.md)
 - [ADR 0206: Controlled Staging Evaluation and Deterministic v0.2 Release-Candidate Artifact Build Authorization](0206-controlled-staging-evaluation-and-deterministic-v02-release-candidate-artifact-build-authorization.md)
 - [ADR 0207: Deterministic Local v0.2 Release-Candidate Artifact Bundle Build and Retention](0207-deterministic-local-v02-release-candidate-artifact-bundle-build-and-retention.md)
+- [ADR 0208: Final v0.2.0-rc.1 Candidate Evaluation and GitHub Prerelease Publication](0208-final-v02-rc1-candidate-evaluation-and-github-prerelease-publication.md)

@@ -2680,11 +2680,25 @@ aion244_is_scoped_v02_release_candidate_final_evaluation_path() {
     examples/v02-release-qualification/*|\
     operator-console-static/demo-data/v02-rc1-*.json|\
     operator-console-static/demo-data/v02-release-candidate-final-evaluation.json|\
+    scripts/auth-design-check.sh|\
+    scripts/secure-runtime-foundation-no-go-regression.sh|\
+    scripts/secure-runtime-integration-final-evaluation-no-go-regression.sh|\
+    scripts/secure-runtime-integration-program-no-go-regression.sh|\
     scripts/lib/v02_release_candidate_final_evaluation.py|\
+    scripts/lib/v02_release_qualification_foundation_operator_evaluation.py|\
+    scripts/lib/v02_staging_qualification_operator_evaluation.py|\
     scripts/lib/v02-production-auth-scan-exclusions.sh|\
     scripts/v02-rc1-release-*.sh|\
     scripts/v02-release-candidate-final-evaluation-*.sh|\
+    scripts/v02-release-qualification-foundation-*.sh|\
+    scripts/v02-release-qualification-program-authorization-*.sh|\
     scripts/v02-release-qualification-program-final-complete-check.sh|\
+    scripts/v02-staging-qualification-*.sh|\
+    services/brain-api/tests/test_secure_runtime_integration_final_closeout_aion238.py|\
+    services/brain-api/tests/test_v02_release_candidate_artifact_build_aion243.py|\
+    services/brain-api/tests/test_v02_release_qualification_pilot_evidence_aion239.py|\
+    services/brain-api/tests/test_v02_release_qualification_operator_evaluation_aion240.py|\
+    services/brain-api/tests/test_v02_staging_qualification_operator_evaluation_aion242.py|\
     services/brain-api/tests/test_v02_release_candidate_final_evaluation_aion244.py)
       return 0
       ;;

@@ -45,6 +45,94 @@ auth = json.loads(
     )
 )
 
+if auth.get("authorization_transaction_id") == "AION-244-V02REL-0001":
+    expected_state = (
+        "v02_release_candidate_final_evaluation_passed_pending_rc1_prerelease_"
+        "publication"
+    )
+    pass_decision = (
+        "DETERMINISTIC_LOCAL_V02_RELEASE_CANDIDATE_FINAL_EVALUATION_PASS_AUTHORIZE_"
+        "AION_V0_2_0_RC_1_ANNOTATED_TAG_AND_GITHUB_PRERELEASE_PUBLICATION"
+    )
+    for label, payload in (("program", program), ("authorization", auth)):
+        required = {
+            "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+            "program_state": expected_state,
+            "v02_release_qualification_program_authorized": True,
+            "v02_release_qualification_program_implemented": True,
+            "v02_release_qualification_foundation_implemented": True,
+            "controlled_staging_qualification_implemented": True,
+            "release_candidate_artifact_build_implemented": True,
+            "release_candidate_created": True,
+            "release_candidate_creation_enabled": False,
+            "release_candidate_final_evaluation_passed": True,
+            "release_candidate_final_evaluation_id": "AION-V02RQPE-003",
+            "release_candidate_final_evaluation_decision": pass_decision,
+            "release_candidate_published": False,
+            "release_candidate_promoted": False,
+            "v02_release_candidate_ready": True,
+            "active_v02_release_qualification_authorization_count": 1,
+            "active_v02_release_qualification_authorization": "AION-244-V02REL-0001",
+            "active_v02_release_qualification_task": "AION-244",
+            "formal_closeout_task": "AION-244",
+            "final_planned_task": "AION-244",
+            "authorization_active": True,
+            "authorization_consumed": False,
+            "authorization_expired": False,
+            "authorization_reusable": False,
+            "production_runtime_authorized": False,
+            "production_deployment_enabled": False,
+            "v02_release_ready": False,
+            "v02_tag_created": False,
+            "v02_release_created": False,
+        }
+        for key, expected in required.items():
+            if payload.get(key) != expected:
+                raise SystemExit(f"{label} AION-244 mismatch {key}: {payload.get(key)!r}")
+        closeout = payload.get("aion_242_authorization_closeout", {})
+        if closeout.get("authorization_transaction_id") != aion242.NEXT_AUTHORIZATION_ID:
+            raise SystemExit(f"{label} missing AION-242 closeout")
+        if closeout.get("authorization_active") is not False or closeout.get("authorization_consumed") is not True:
+            raise SystemExit(f"{label} AION-242 closeout state mismatch")
+        publication = payload.get("aion_244_publication_authorization", {})
+        if publication.get("authorization_transaction_id") != "AION-244-V02REL-0001":
+            raise SystemExit(f"{label} missing AION-244 publication authorization")
+        if publication.get("authorization_active") is not True or publication.get("authorization_consumed") is not False:
+            raise SystemExit(f"{label} AION-244 publication authorization state mismatch")
+        if any(payload.get("prohibited_capabilities", {}).values()):
+            raise SystemExit(f"{label} has enabled prohibited capability")
+    required_auth = {
+        "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+        "authorization_transaction_id": "AION-244-V02REL-0001",
+        "approval_record_id": "AION-244-V02REL-0001",
+        "parent_authorization_transaction_id": aion242.NEXT_AUTHORIZATION_ID,
+        "parent_evaluation_id": "AION-V02RQPE-003",
+        "parent_evaluation_decision": pass_decision,
+        "parent_implementation_task": "AION-243",
+        "parent_implementation_prs": [162],
+        "parent_implementation_feature_commits": [
+            "19da1991027ba702d9a382c42e3ad5ff10d60d93",
+            "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e",
+            "8a4e3f1de848018e347facd28875921229ba527c",
+        ],
+        "parent_implementation_merge_commits": [
+            "c18ea935f29e06590b83fc23efba7ae49fc6efab",
+        ],
+        "parent_implementation_main_commit": "c18ea935f29e06590b83fc23efba7ae49fc6efab",
+        "candidate_id": "aion-v0.2.0-rc.1",
+        "workstream": "v02-release-qualification-final-evaluation",
+        "implementation_task": "AION-244",
+        "formal_closeout_task": "AION-244",
+        "authorization_active": True,
+        "authorization_consumed": False,
+        "authorization_expired": False,
+        "authorization_reusable": False,
+    }
+    for key, expected in required_auth.items():
+        if auth.get(key) != expected:
+            raise SystemExit(f"authorization AION-244 mismatch {key}: {auth.get(key)!r}")
+    raise SystemExit(0)
+
 if auth.get("authorization_transaction_id") == aion242.NEXT_AUTHORIZATION_ID:
     aion243_evidence_exists = (
         root / "examples/v02-release-qualification/v02-release-candidate-artifact-build-evidence.json"

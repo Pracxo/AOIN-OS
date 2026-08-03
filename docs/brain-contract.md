@@ -2544,3 +2544,7 @@ The evaluation passed all 28 hard-gated scenarios, verified PR #158, commits `a1
 `AION-238-V02RQ-0001` is closed, consumed by AION-239, expired and non-reusable. `AION-240-V02RQ-0002` is active only for AION-241 controlled isolated local staging qualification. AION-241 is authorized but not implemented. AION-242 is the next formal evaluation. AION-243 remains unauthorized. AION-244 remains the final release-candidate evaluation and tag/release authorization decision.
 
 Production runtime, production authentication, external IdP calls, production credentials, production tokens, registry login, registry pull, registry push, public network access, DNS resolution, public listeners, production database provisioning, production deployment, release-candidate creation, v0.2 tags and v0.2 releases remain disabled or absent. `v02_release_ready=false`.
+
+## AION-244 v0.2.0-rc.1 Contract Boundary
+
+The final evaluation contract fixes `aion-v0.2.0-rc.1`, package version `0.2.0rc1`, source commit `d35f1caa234d35dce1dfc0a80bc4c8e327a8373e`, 32 hard-gated scenarios, and 24 release assets. Any stable release requires a separate contract and candidate build.

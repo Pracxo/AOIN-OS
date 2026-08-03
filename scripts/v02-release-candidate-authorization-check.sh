@@ -33,6 +33,17 @@ expected_prohibited = dict.fromkeys(ev.PROHIBITED_AION243_CAPABILITIES, False)
 expected_limits = {**ev.POSITIVE_AION243_LIMITS, **dict.fromkeys(ev.ZERO_AION243_LIMITS, 0)}
 
 for label, payload in (("program", program), ("authorization", auth), ("candidate", candidate)):
+    if payload.get("active_v02_release_qualification_authorization") == "AION-244-V02REL-0001":
+        publication_auth = payload.get("aion_244_publication_authorization", {})
+        if publication_auth.get("authorization_transaction_id") != "AION-244-V02REL-0001":
+            raise SystemExit(f"{label} missing AION-244 publication authorization")
+        if publication_auth.get("authorization_active") is not True:
+            raise SystemExit(f"{label} AION-244 publication authorization must be active")
+        if publication_auth.get("authorization_consumed") is not False:
+            raise SystemExit(f"{label} AION-244 publication authorization must be unconsumed")
+        if payload.get("release_candidate_published") is not False:
+            raise SystemExit(f"{label} release candidate must remain unpublished before AION-244 publication")
+        continue
     required = {
         "controlled_staging_qualification_operator_evaluation_passed": True,
         "controlled_staging_qualification_operator_evaluation_id": ev.EVALUATION_ID,

@@ -11,9 +11,9 @@
       "implementation_task": "AION-243"
     }
   ],
-  "active_v02_release_qualification_authorization": "AION-242-V02RQ-0003",
+  "active_v02_release_qualification_authorization": "AION-244-V02REL-0001",
   "active_v02_release_qualification_authorization_count": 1,
-  "active_v02_release_qualification_task": "AION-243",
+  "active_v02_release_qualification_task": "AION-244",
   "actual_belief_mutation_enabled": false,
   "actual_model_provider_call_enabled": false,
   "aion_238_authorization_closeout": {
@@ -884,7 +884,7 @@
   "implementation_authorization_approved": true,
   "implementation_go_status": true,
   "implementation_no_go_status": false,
-  "implementation_task": "AION-243",
+  "implementation_task": "AION-244",
   "implemented_source_scope": [
     "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py",
     "services/brain-api/src/aion_brain/v02_release_qualification/__init__.py",
@@ -916,7 +916,7 @@
   "local_qualification_pilot_report_fingerprint": "6635d4d32533893e4549d3992c0a6b54e73a58a0904914da6defcc5e0deff2ab",
   "model_weight_training_enabled": false,
   "operator_review_evidence_approved": true,
-  "parent_authorization_transaction_id": "AION-240-V02RQ-0002",
+  "parent_authorization_transaction_id": "AION-242-V02RQ-0003",
   "parent_completed_programs": [
     "AION-COGNITIVE-ARCHITECTURE-001",
     "AION-KNOWLEDGE-INTELLIGENCE-001",
@@ -925,20 +925,21 @@
     "AION-SECURE-RUNTIME-INTEGRATION-001"
   ],
   "parent_evaluation_base_commit": "cfc881c8e50b35852176221ff8635e1996f2591d",
-  "parent_evaluation_decision": "CONTROLLED_ISOLATED_LOCAL_STAGING_QUALIFICATION_OPERATOR_EVALUATION_PASS_RECOMMEND_DETERMINISTIC_V02_RELEASE_CANDIDATE_ARTIFACT_BUILD_AUTHORIZATION",
-  "parent_evaluation_id": "AION-V02RQPE-002",
+  "parent_evaluation_decision": "DETERMINISTIC_LOCAL_V02_RELEASE_CANDIDATE_FINAL_EVALUATION_PASS_AUTHORIZE_AION_V0_2_0_RC_1_ANNOTATED_TAG_AND_GITHUB_PRERELEASE_PUBLICATION",
+  "parent_evaluation_id": "AION-V02RQPE-003",
   "parent_implementation_feature_commits": [
-    "b378162fde84fcadd3fc353ae1e95936690abbcd",
-    "1ac103875a2eb2a5f7f1a21d7891bc76ac63d587"
+    "19da1991027ba702d9a382c42e3ad5ff10d60d93",
+    "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e",
+    "8a4e3f1de848018e347facd28875921229ba527c"
   ],
-  "parent_implementation_main_commit": "24095a3fabe95b59f2607134199d160e8122e343",
+  "parent_implementation_main_commit": "c18ea935f29e06590b83fc23efba7ae49fc6efab",
   "parent_implementation_merge_commits": [
-    "24095a3fabe95b59f2607134199d160e8122e343"
+    "c18ea935f29e06590b83fc23efba7ae49fc6efab"
   ],
   "parent_implementation_prs": [
-    160
+    162
   ],
-  "parent_implementation_task": "AION-241",
+  "parent_implementation_task": "AION-243",
   "parent_program_id": "AION-SECURE-RUNTIME-INTEGRATION-001",
   "positive_resource_limit_keys": [
     "maximum_release_candidate_sessions",
@@ -990,7 +991,7 @@
   "production_write_execution_enabled": false,
   "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
   "program_name": "AION v0.2 Release Qualification Program",
-  "program_state": "controlled_staging_qualification_evaluated_release_candidate_build_authorized_not_implemented",
+  "program_state": "v02_release_candidate_final_evaluation_passed_pending_rc1_prerelease_publication",
   "prohibited_capabilities": {
     "automatic_merge_enabled": false,
     "cloud_deployment_enabled": false,
@@ -1060,9 +1061,12 @@
   "release_candidate_artifact_build_implemented": false,
   "release_candidate_artifact_state": "authorized_not_implemented",
   "release_candidate_created": false,
-  "release_candidate_creation_enabled": true,
+  "release_candidate_creation_enabled": false,
   "release_candidate_evidence_matrix_approved": true,
   "release_candidate_evidence_matrix_available": true,
+  "release_candidate_final_evaluation_decision": "DETERMINISTIC_LOCAL_V02_RELEASE_CANDIDATE_FINAL_EVALUATION_PASS_AUTHORIZE_AION_V0_2_0_RC_1_ANNOTATED_TAG_AND_GITHUB_PRERELEASE_PUBLICATION",
+  "release_candidate_final_evaluation_id": "AION-V02RQPE-003",
+  "release_candidate_final_evaluation_passed": true,
   "release_candidate_published": false,
   "release_gate_matrix_approved": true,
   "release_gate_matrix_available": true,
@@ -1161,7 +1165,7 @@
   "v02_tag_created": false,
   "verified_request_identity_integration_design_approved": true,
   "verified_request_identity_integration_design_available": true,
-  "workstream": "v02-release-candidate-artifact-build",
+  "workstream": "v02-release-qualification-final-evaluation",
   "zero_resource_limit_keys": [
     "maximum_registry_logins",
     "maximum_registry_pulls",

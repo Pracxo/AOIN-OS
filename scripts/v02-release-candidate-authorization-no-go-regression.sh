@@ -43,12 +43,20 @@ for relative in (
     "examples/v02-release-qualification/release-candidate-authorization.json",
 ):
     payload = json.loads((root / relative).read_text(encoding="utf-8"))
-    if payload.get("active_v02_release_qualification_authorization") != c.AUTHORIZATION_TRANSACTION_ID:
+    active_authorization = payload.get("active_v02_release_qualification_authorization")
+    if active_authorization not in (c.AUTHORIZATION_TRANSACTION_ID, "AION-244-V02REL-0001"):
         raise SystemExit(f"{relative} active authorization mismatch")
-    if payload.get("authorization_active") is not True:
-        raise SystemExit(f"{relative} authorization must remain active")
-    if payload.get("authorization_consumed") is not False:
-        raise SystemExit(f"{relative} authorization must remain unconsumed")
+    if active_authorization == c.AUTHORIZATION_TRANSACTION_ID:
+        if payload.get("authorization_active") is not True:
+            raise SystemExit(f"{relative} authorization must remain active")
+        if payload.get("authorization_consumed") is not False:
+            raise SystemExit(f"{relative} authorization must remain unconsumed")
+    else:
+        publication_auth = payload.get("aion_244_publication_authorization", {})
+        if publication_auth.get("authorization_active") is not True:
+            raise SystemExit(f"{relative} AION-244 authorization must remain active")
+        if publication_auth.get("authorization_consumed") is not False:
+            raise SystemExit(f"{relative} AION-244 authorization must remain unconsumed")
     if payload.get("v02_release_ready") is not False:
         raise SystemExit(f"{relative} must keep v02_release_ready=false")
     if payload.get("v02_tag_created") is not False:

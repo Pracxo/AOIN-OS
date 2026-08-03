@@ -1,0 +1,22 @@
+{
+  "authorization_active": true,
+  "authorization_consumed": false,
+  "authorization_id": "AION-244-V02REL-0001",
+  "authorized_release_count": 1,
+  "authorized_tag_count": 1,
+  "candidate_id": "aion-v0.2.0-rc.1",
+  "production_deployment_authorized": false,
+  "program_id": "AION-V02-RELEASE-QUALIFICATION-001",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "release_kind": "github_prerelease",
+  "release_name": "AION OS v0.2.0-rc.1",
+  "release_prerelease": true,
+  "release_stable": false,
+  "status": "authorized_pending_publication",
+  "synthetic": true,
+  "tag_name": "aion-v0.2.0-rc.1",
+  "tag_target_commit": "d35f1caa234d35dce1dfc0a80bc4c8e327a8373e",
+  "task_id": "AION-244"
+}

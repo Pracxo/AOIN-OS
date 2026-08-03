@@ -182,6 +182,32 @@ def test_ledgers_record_implemented_foundation_and_current_authorization_state()
             }
             assert resource_limit_map(payload) == expected_aion243_limits
         elif payload["active_v02_release_qualification_authorization"] == (
+            "AION-244-V02REL-0001"
+        ):
+            assert payload["program_state"] == (
+                "v02_release_candidate_final_evaluation_passed_pending_rc1_"
+                "prerelease_publication"
+            )
+            assert payload["active_v02_release_qualification_authorization_count"] == 1
+            assert payload["active_v02_release_qualification_task"] == "AION-244"
+            assert payload["formal_closeout_task"] == "AION-244"
+            assert payload["release_candidate_artifact_build_implemented"] is True
+            assert payload["release_candidate_created"] is True
+            assert payload["release_candidate_creation_enabled"] is False
+            assert payload["release_candidate_published"] is False
+            assert payload["release_candidate_final_evaluation_passed"] is True
+            assert payload["v02_release_candidate_ready"] is True
+            assert payload["production_runtime_authorized"] is False
+            assert payload["production_deployment_enabled"] is False
+            closeout = payload["aion_242_authorization_closeout"]
+            assert closeout["authorization_transaction_id"] == aion242.NEXT_AUTHORIZATION_ID
+            assert closeout["authorization_active"] is False
+            assert closeout["authorization_consumed"] is True
+            publication = payload["aion_244_publication_authorization"]
+            assert publication["authorization_transaction_id"] == "AION-244-V02REL-0001"
+            assert publication["authorization_active"] is True
+            assert publication["authorization_consumed"] is False
+        elif payload["active_v02_release_qualification_authorization"] == (
             harness.NEXT_AUTHORIZATION_ID
         ):
             expected_program_state = (

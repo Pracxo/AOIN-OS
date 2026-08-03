@@ -150,6 +150,9 @@ AION225_LOCAL_PERSISTENCE_EVALUATION_PATHS = {
 AION242_EVALUATION_PATHS = {
     "scripts/lib/v02_staging_qualification_operator_evaluation.py",
 }
+AION244_EVALUATION_PATHS = {
+    "scripts/lib/v02_release_candidate_final_evaluation.py",
+}
 GLM_PROGRAM_PATH = ROOT / "docs/governed-learning-memory/program-ledger.json"
 GLM_PROGRAM_STATE = (
     json.loads(GLM_PROGRAM_PATH.read_text()).get("program_state", "")
@@ -356,6 +359,8 @@ for relative in sorted(changed_paths):
     if relative in AION225_LOCAL_PERSISTENCE_EVALUATION_PATHS:
         continue
     if relative in AION242_EVALUATION_PATHS:
+        continue
+    if relative in AION244_EVALUATION_PATHS:
         continue
     if aion243_source_allowed(relative):
         continue
