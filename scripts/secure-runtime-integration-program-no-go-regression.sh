@@ -116,7 +116,7 @@ is_allowed_path() {
 		    scripts/connector-no-go-regression.sh|\
 		    scripts/connector-*.sh|\
 	    scripts/connector-runtime-no-external-call-regression.sh|\
-	    scripts/knowledge-intelligence-*-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-*.sh|\
 	    scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh|\
 	    scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh|\
 	    scripts/knowledge-intelligence-domain-expert-mesh-operator-evaluation-no-go-regression.sh|\
@@ -251,10 +251,12 @@ is_allowed_path() {
 		    services/brain-api/tests/test_governed_learning_memory_no_runtime_source.py|\
 		    services/brain-api/tests/test_identity_assertion_no_runtime_integration.py|\
 		    services/brain-api/tests/test_knowledge_epistemic_assessment_evaluation_repository_integrity.py|\
+		    services/brain-api/tests/test_knowledge_intelligence_program_release_boundary.py|\
 		    services/brain-api/tests/test_knowledge_intelligence_program_repository_integrity.py|\
 	    services/brain-api/tests/test_knowledge_research_evaluation_repository_integrity.py|\
 	    services/brain-api/tests/test_knowledge_source_registry_evaluation_no_side_effects.py|\
 	    services/brain-api/tests/test_self_improvement_shadow_activation_evaluation_repository_integrity.py|\
+	    services/brain-api/tests/test_self_improvement_postmerge_evidence_reconciliation.py|\
 	    services/brain-api/tests/test_self_improvement_shadow_activation_scope_spec.py|\
 	    services/brain-api/tests/test_model_gateway_*.py|\
 		    services/brain-api/src/aion_brain/contracts/v02_release_qualification.py|\
@@ -518,7 +520,7 @@ fi
 
 ./scripts/secure-runtime-integration-program-authorization-check.sh
 aion_confirm_immutable_v01_tag_history >/dev/null
-if git tag --list 'v0.2*' 'aion-v0.2*' | grep -q .; then
+if git tag --list 'v0.2*' 'aion-v0.2*' | grep -v '^aion-v0\.2\.0-rc\.1$' | grep -q .; then
   echo "ERROR: v0.2 tag exists" >&2
   exit 1
 fi

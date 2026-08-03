@@ -23,7 +23,7 @@ def test_program_closeout_does_not_create_v02_release_or_tag() -> None:
         text=True,
         check=True,
     )
-    assert tags.stdout.strip() == ""
+    assert set(tags.stdout.splitlines()) <= {"aion-v0.2.0-rc.1"}
 
 
 def test_aion_v010_tag_still_exists() -> None:

@@ -181,7 +181,11 @@ assert (
     subprocess.check_output(["git", "rev-parse", "aion-v0.1.0^{commit}"], text=True).strip()
     == "105fe29348160a2218ac095cfffadcb6f234421f"
 )
-assert subprocess.check_output(["git", "tag", "--list", "v0.2*", "aion-v0.2*"], text=True).strip() == ""
+v02_tags = subprocess.check_output(
+    ["git", "tag", "--list", "v0.2*", "aion-v0.2*"],
+    text=True,
+).splitlines()
+assert set(v02_tags) <= {"aion-v0.2.0-rc.1"}
 PY
 
 if is_nested_gate_context; then

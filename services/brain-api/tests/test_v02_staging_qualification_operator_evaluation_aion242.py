@@ -95,7 +95,14 @@ def test_source_scope_authorization_and_release_boundary_are_strict():
     assert source["missing_source_scope"] == []
     assert source["runtime_source_scope_exact"] is True
     assert source["prohibited_source_present"] == []
-    if program["active_v02_release_qualification_task"] in {"AION-243", "AION-244"}:
+    final_rc1_published = (
+        program["program_state"]
+        == "v02_release_qualification_program_complete_rc1_prerelease_published"
+    )
+    if program["active_v02_release_qualification_task"] in {
+        "AION-243",
+        "AION-244",
+    } or final_rc1_published:
         assert set(source["future_aion_243_source_present"]) == set(
             harness.FUTURE_AION243_SOURCE_SCOPE
         )
@@ -105,9 +112,13 @@ def test_source_scope_authorization_and_release_boundary_are_strict():
         assert source["future_aion_243_runner_present"] is False
     assert auth_state["lineage_valid"] is True
     assert auth_state["sole_active_authorization_exact"] is True
-    assert program["v02_release_ready"] is False
-    assert program["v02_tag_created"] is False
-    assert program["v02_release_created"] is False
+    assert program["v02_release_ready"] is final_rc1_published
+    assert program["v02_tag_created"] is final_rc1_published
+    assert program["v02_release_created"] is final_rc1_published
+    if final_rc1_published:
+        assert program["v02_tag_name"] == "aion-v0.2.0-rc.1"
+        assert program["v02_stable_tag_created"] is False
+        assert program["v02_stable_release_created"] is False
 
 
 def test_committed_report_when_present_is_schema_valid_and_zero_effect():

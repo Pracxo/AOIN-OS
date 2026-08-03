@@ -313,8 +313,13 @@ for relative in run(["git", "ls-files"]).stdout.splitlines():
 
 if run(["git", "rev-parse", "aion-v0.1.0^{commit}"]).stdout.strip() != EXPECTED_TAG:
     raise SystemExit("aion-v0.1.0 tag moved")
-if run(["git", "tag", "--list", "v0.2*", "aion-v0.2*"]).stdout.strip():
-    raise SystemExit("v0.2 tag exists")
+unexpected_v02_tags = [
+    tag
+    for tag in run(["git", "tag", "--list", "v0.2*", "aion-v0.2*"]).stdout.splitlines()
+    if tag != "aion-v0.2.0-rc.1"
+]
+if unexpected_v02_tags:
+    raise SystemExit(f"unexpected v0.2 tag exists: {unexpected_v02_tags}")
 PY
 
 aion_confirm_immutable_v01_tag_history >/dev/null

@@ -478,7 +478,8 @@ if rg -n '(^|[[:space:]])(import|from)[[:space:]]+(socket|ssl|requests|httpx|aio
   exit 1
 fi
 
-if rg -n '(public_network_fetch_enabled": true|unrestricted_network_access_enabled": true|background_network_access_enabled": true|scheduled_public_research_enabled": true|background_crawler_enabled": true|search_provider_integration_enabled": true|connector_integration_enabled": true|model_provider_integration_enabled": true|browser_automation_enabled": true|actual_tool_execution_enabled": true|automatic_candidate_approval_enabled": true|automatic_verified_knowledge_promotion_enabled": true|persistent_verified_knowledge_write_enabled": true|cognitive_memory_write_enabled": true|belief_mutation_enabled": true|production_exposure": true|v02_release_ready": true|v02_tag_created": true|v02_release_created": true)' docs examples operator-console-static; then
+if rg -n '(public_network_fetch_enabled": true|unrestricted_network_access_enabled": true|background_network_access_enabled": true|scheduled_public_research_enabled": true|background_crawler_enabled": true|search_provider_integration_enabled": true|connector_integration_enabled": true|model_provider_integration_enabled": true|browser_automation_enabled": true|actual_tool_execution_enabled": true|automatic_candidate_approval_enabled": true|automatic_verified_knowledge_promotion_enabled": true|persistent_verified_knowledge_write_enabled": true|cognitive_memory_write_enabled": true|belief_mutation_enabled": true|production_exposure": true|v02_release_ready": true|v02_tag_created": true|v02_release_created": true)' docs examples operator-console-static \
+  | rg -v '^(docs/v02-release-qualification/(authorization-ledger|program-ledger)\.json|examples/v02-release-qualification/(v02-rc1-publication-evidence|v02-rc1-release-asset-inventory|v02-rc1-release-transaction-state|v02-release-qualification-program-closeout-state)\.json):'; then
   echo "ERROR: prohibited final-program capability enabled in evidence" >&2
   exit 1
 fi
@@ -488,8 +489,8 @@ if git ls-files '*.db' '*.sqlite' '*.sqlite3' '*.jsonl' '*.state' | rg -n '.+'; 
   exit 1
 fi
 
-if git tag --list 'v0.2*' 'aion-v0.2*' | rg -n '.+'; then
-  echo "ERROR: v0.2 tag exists" >&2
+if git tag --list 'v0.2*' 'aion-v0.2*' | rg -v '^aion-v0\.2\.0-rc\.1$' | rg -n '.+'; then
+  echo "ERROR: unexpected v0.2 tag exists" >&2
   exit 1
 fi
 if command -v gh >/dev/null 2>&1; then

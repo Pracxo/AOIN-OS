@@ -328,8 +328,13 @@ for parts in changed_entries():
 
 if run(["git", "rev-parse", "aion-v0.1.0^{commit}"]).stdout.strip() != EXPECTED_TAG:
     raise SystemExit("aion-v0.1.0 tag moved")
-if run(["git", "tag", "--list", "v0.2*", "aion-v0.2*"]).stdout.strip():
-    raise SystemExit("v0.2 tag exists")
+unexpected_v02_tags = [
+    tag
+    for tag in run(["git", "tag", "--list", "v0.2*", "aion-v0.2*"]).stdout.splitlines()
+    if tag != "aion-v0.2.0-rc.1"
+]
+if unexpected_v02_tags:
+    raise SystemExit(f"unexpected v0.2 tag exists: {unexpected_v02_tags}")
 
 harness = ROOT / "scripts/lib/knowledge_intelligence_claim_graph_operator_evaluation.py"
 tree = ast.parse(harness.read_text(encoding="utf-8"), filename=str(harness))

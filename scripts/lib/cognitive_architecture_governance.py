@@ -4631,8 +4631,8 @@ def validate_no_go(root: Path) -> None:
         ["git", "tag", "--list", "v0.2*", "aion-v0.2*"],
         cwd=root,
         text=True,
-    ).strip()
-    _assert(tags == "", "v0.2 tag exists")
+    ).splitlines()
+    _assert(set(tags) <= {"aion-v0.2.0-rc.1"}, "unexpected v0.2 tag exists")
 
 
 def validate_persistent_state(root: Path) -> None:

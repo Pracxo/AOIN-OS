@@ -113,12 +113,37 @@ def test_ledgers_record_implemented_foundation_and_current_authorization_state()
         assert payload["v02_release_qualification_foundation_state"] == c.FOUNDATION_STATE
         assert payload["local_qualification_pilot_completed"] is True
         assert payload["disabled_local_qualification_simulator_available"] is True
-        assert payload["v02_release_ready"] is False
-        assert payload["v02_tag_created"] is False
-        assert payload["v02_release_created"] is False
+        final_rc1_published = (
+            payload["program_state"]
+            == "v02_release_qualification_program_complete_rc1_prerelease_published"
+        )
+        assert payload["v02_release_ready"] is final_rc1_published
+        assert payload["v02_tag_created"] is final_rc1_published
+        assert payload["v02_release_created"] is final_rc1_published
+        if final_rc1_published:
+            assert payload["v02_tag_name"] == "aion-v0.2.0-rc.1"
+            assert payload["v02_stable_tag_created"] is False
+            assert payload["v02_stable_release_created"] is False
         assert not any(payload["prohibited_capabilities"].values())
 
-        if payload["active_v02_release_qualification_authorization"] == (
+        if final_rc1_published:
+            assert payload["active_v02_release_qualification_authorization_count"] == 0
+            assert payload["active_v02_release_qualification_authorization"] is None
+            assert payload["active_v02_release_qualification_task"] is None
+            assert payload["formal_closeout_task"] is None
+            assert payload["release_candidate_artifact_build_implemented"] is True
+            assert payload["release_candidate_created"] is True
+            assert payload["release_candidate_published"] is True
+            assert payload["release_candidate_promoted"] is False
+            assert payload["production_runtime_authorized"] is False
+            assert payload["production_deployment_enabled"] is False
+            closeout = payload["aion_244_publication_authorization"]
+            assert closeout["authorization_transaction_id"] == "AION-244-V02REL-0001"
+            assert closeout["authorization_active"] is False
+            assert closeout["authorization_consumed"] is True
+            assert closeout["authorization_expired"] is True
+            assert closeout["authorization_reusable"] is False
+        elif payload["active_v02_release_qualification_authorization"] == (
             aion242.NEXT_AUTHORIZATION_ID
         ):
             expected_program_state = (
@@ -259,11 +284,18 @@ def test_ledgers_record_implemented_foundation_and_current_authorization_state()
             limits = resource_limit_map(payload)
             for key in payload["zero_resource_limit_keys"]:
                 assert limits[key] == 0
-        assert payload["final_planned_task"] == c.FINAL_PLANNED_TASK
-        assert payload["authorization_active"] is True
-        assert payload["authorization_consumed"] is False
-        assert payload["authorization_expired"] is False
-        assert payload["authorization_reusable"] is False
+        if final_rc1_published:
+            assert payload["final_planned_task"] is None
+            assert payload["authorization_active"] is False
+            assert payload["authorization_consumed"] is True
+            assert payload["authorization_expired"] is True
+            assert payload["authorization_reusable"] is False
+        else:
+            assert payload["final_planned_task"] == c.FINAL_PLANNED_TASK
+            assert payload["authorization_active"] is True
+            assert payload["authorization_consumed"] is False
+            assert payload["authorization_expired"] is False
+            assert payload["authorization_reusable"] is False
 
 
 def test_release_candidate_and_runtime_evidence_remain_holds():

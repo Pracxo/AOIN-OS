@@ -121,7 +121,7 @@ expect_rejected(
 print("self-improvement canary adaptation disabled-default checks PASS")
 PY
 
-if git tag --list 'v0.2*' 'aion-v0.2*' | grep -q .; then
+if git tag --list 'v0.2*' 'aion-v0.2*' | grep -v '^aion-v0\.2\.0-rc\.1$' | grep -q .; then
   echo "v0.2 tag exists" >&2
   exit 1
 fi
