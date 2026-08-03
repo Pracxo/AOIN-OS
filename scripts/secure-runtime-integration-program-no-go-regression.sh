@@ -70,7 +70,14 @@ comparison_base() {
 is_allowed_path() {
   case "$1" in
     README.md|AGENTS.md|\
+    services/brain-api/pyproject.toml|packages/aion-sdk-python/pyproject.toml|\
     docs/project-status.md|docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/visual-brain.md|\
+    docs/adaptive-intelligence/*|docs/release/adaptive-intelligence-*|docs/release/v03-development-baseline.md|\
+    docs/adr/0209-post-rc1-v03-development-baseline-and-adaptive-intelligence-programme-authorization.md|\
+    examples/adaptive-intelligence/*|\
+    operator-console-static/demo-data/adaptive-intelligence-*.json|operator-console-static/demo-data/external-cognition-authorization.json|\
+    scripts/adaptive-intelligence-*.sh|scripts/post-rc1-development-baseline-check.sh|\
+    services/brain-api/tests/test_adaptive_intelligence_program_authorization_aion245.py|\
     docs/secure-runtime-integration/*|\
     docs/release/secure-runtime-integration-*|docs/release/secure-runtime-foundation-*|\
     docs/release/model-gateway-*|\
@@ -274,6 +281,15 @@ is_allowed_path() {
   return 1
 }
 
+is_aion245_version_baseline_path() {
+  case "$1" in
+    services/brain-api/pyproject.toml|packages/aion-sdk-python/pyproject.toml)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 is_aion233_model_gateway_source_path() {
   case "$1" in
     services/brain-api/src/aion_brain/contracts/model_gateway.py|\
@@ -457,6 +473,7 @@ while IFS= read -r path; do
     *migrations*|*package.json|*package-lock.json|*pnpm-lock.yaml|*yarn.lock|\
     *poetry.lock|*Pipfile.lock|*requirements*.txt|*pyproject.toml)
 	      if ! is_aion231_source_path "$path" && \
+	        ! is_aion245_version_baseline_path "$path" && \
 	        ! is_aion233_model_gateway_source_path "$path" && \
 		        ! is_aion235_capability_runtime_source_path "$path" && \
 		        ! is_aion237_operator_console_source_path "$path" && \

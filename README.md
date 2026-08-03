@@ -6,60 +6,43 @@ policies, traces, and learning signals that every future module must follow.
 
 ## Current Project State
 
-AION Brain v0.1.0 remains the frozen release baseline. v0.2 work is in
-progress on top of that baseline. The Cognitive Architecture Program, Knowledge
-Intelligence Program, Governed Learning and Memory Program, and governed
-self-improvement implementation program are complete.
+AION OS has completed governed v0.2 release qualification and published the
+`aion-v0.2.0-rc.1` prerelease. The following development programme activates
+intelligence in controlled layers, starting with a provider-neutral
+external-cognition gateway foundation. Live provider access, internet research,
+persistent engagement learning, real tools and autonomous execution remain
+disabled.
 
-The AION Secure Runtime Integration Program
-`AION-SECURE-RUNTIME-INTEGRATION-001` is complete. AION-238 evaluated the merged
-AION-237 controlled same-origin loopback Operator Console and integrated local
-runtime through `AION-SRIPE-004`, closed `AION-236-SRI-0004` as consumed, and created
-`AION-V02-RELEASE-QUALIFICATION-001` with `AION-238-V02RQ-0001` as the sole active authorization for
-AION-239. AION-239 is authorized only for disabled v0.2 release-qualification
-foundation work, with AION-240 as its formal closeout.
+current_main_commit=`2a5db0760178698d783abcc63e53f08ff3583571`
 
-The AION-231 foundation verifies short-lived offline Ed25519 operator
-assertions, rejects replay, binds secure request identity and ActorContext,
-creates bounded ephemeral local sessions, validates capability plans through
-policy, risk, guardrails, existing approval evidence, side-effect budgets and
-kill-switch checks, and performs simulation-only dispatch. It does not create a
-public authentication service, store credentials, issue tokens, call model
-providers, execute connectors, execute tools, activate modules, mutate
-production memory or policy, perform GLM live execution, rewrite source,
-deploy, train model weights, or make v0.2 release-ready.
+current_released_prerelease=`aion-v0.2.0-rc.1`
 
-Knowledge Intelligence Program is complete. Governed Learning and Memory
-Program is complete.
-Governed Learning and Memory Program is complete.
+current_development_line=`v0.3`
 
-The repository contains a stabilized internal disabled production-auth core,
-an implemented-disabled request identity boundary, offline Ed25519 identity
-assertion verification, and persistent replay protection, but production
-authentication runtime remains disabled.
+current_development_version=`0.3.0.dev0`
 
-External connectors remain disabled. Operator write execution remains disabled.
-Module activation remains disabled. No v0.2 tag or release exists.
+current_program=`AION-ADAPTIVE-INTELLIGENCE-001`
 
-Knowledge Intelligence status: AION-220 completed the Knowledge Intelligence
-Program through `AION-KIPE-001` with decision
-`CONTROLLED_PUBLIC_RESEARCH_PILOT_PASS_COMPLETE_KNOWLEDGE_INTELLIGENCE_PROGRAM`.
-`AION-218-KI-0008` is closed, consumed, expired, inactive, and non-reusable.
-The active Knowledge Intelligence implementation authorization count is zero,
-and AION-220 created no successor Knowledge Intelligence task.
+current_task=`AION-246`
 
-Governed Learning and Memory status: AION-229 completed
-`AION-GOVERNED-LEARNING-MEMORY-001` through `AION-GLMPE-004` with decision
-`CONTROLLED_LOCAL_CONTINUAL_LEARNING_PILOT_FINAL_EVALUATION_PASS_COMPLETE_GOVERNED_LEARNING_MEMORY_PROGRAM`.
-There is no active GLM implementation authorization, active GLM implementation
-task, successor GLM task, successor GLM authorization, repeated live-pilot
-authorization, or production runtime authorization.
+current_authorization=`AION-245-AI-0001`
 
-Current authorization counts: active Knowledge Intelligence implementation
-authorizations: `0`; active GLM implementation authorizations: `0`; repeated
-live-pilot authorization: `false`; production runtime authorization: `false`;
-`v02_release_ready=false`; v0.2 remains unreleased.
-Status phrases: active Knowledge Intelligence implementation authorizations: `0`; active GLM implementation authorizations: `0`; repeated live-pilot authorization: `false`; production runtime authorization: `false`; v0.2 remains unreleased.
+production_runtime_authorized=`false`
+
+The Cognitive Architecture Program, Knowledge Intelligence Program, Governed
+Learning and Memory Program, governed self-improvement implementation program,
+Secure Runtime Integration Program, and v0.2 Release Qualification Program are
+complete. Knowledge Intelligence Program is complete. Active v0.2
+release-qualification authorization count is `0`.
+
+Governed Learning and Memory Program is complete. AION Secure Runtime Integration Program `AION-SECURE-RUNTIME-INTEGRATION-001` records `AION-230-SRI-0001`, `AION-231`, and `AION-232` as completed foundation lineage. active Knowledge Intelligence implementation authorizations: `0`; active GLM implementation authorizations: `0`; repeated live-pilot authorization: `false`; production runtime authorization: `false`. v0.2 remains unreleased.
+
+The repository contains a stabilized internal disabled production-auth core, an
+implemented-disabled request identity boundary, offline Ed25519 identity
+assertion verification, persistent replay protection, deterministic model
+gateway contracts, controlled local runtime contracts, and a local Operator
+Console. Production authentication runtime, external connectors, operator write
+execution and module activation remain disabled.
 
 Governed self-improvement is implemented-disabled. AION-OE-001 passed operator
 evaluation, AION-177 created `AION-177-SI-0006` for AION-178, AION-178
@@ -67,8 +50,8 @@ implemented the controlled shadow-mode plane, and AION-179 closed that
 authorization after `AION-SOE-001` passed. Shadow mode remains
 operator-invoked, read-only, advisory, non-influencing, and runtime-disabled.
 Source mutation and Git writes remain disabled, and production canary,
-deployment, provider calls, connector calls, model-weight training, v0.2 tags,
-and v0.2 releases remain absent.
+deployment, provider calls, connector calls, model-weight training, stable v0.2
+tags, and stable v0.2 releases remain absent.
 
 This repository does not implement finance, trading, IT automation, legal,
 healthcare, HR, procurement, business workflows, or any vertical module logic.
@@ -5331,7 +5314,7 @@ AION-237 implements a controlled same-origin loopback Operator Console integrati
 
 ## AION-238 Final SRI Status
 
-`AION-SRIPE-004` passed all 28 final scenarios. `AION-236-SRI-0004` is closed and no SRI implementation authorization remains active. `AION-238-V02RQ-0001` authorizes only disabled v0.2 release-qualification foundation work for AION-239. `v02_release_ready=false`; no v0.2 tag or release exists.
+Historical marker: `AION-SRIPE-004` passed all 28 final scenarios. `AION-236-SRI-0004` is closed and no SRI implementation authorization remains active. `AION-238-V02RQ-0001` authorized only disabled v0.2 release-qualification foundation work for AION-239. At that point `v02_release_ready=false` and no v0.2 tag or release existed.
 
 ## AION-239 Disabled v0.2 Release Qualification Foundation
 
@@ -5347,7 +5330,7 @@ Decision: `DISABLED_V02_PRODUCTION_READINESS_QUALIFICATION_FOUNDATION_OPERATOR_E
 
 The evaluation passed all 28 hard-gated scenarios, verified PR #158, commits `a1d5d1ee2b0d991f3074c796d664105225b51856` and `fa789d5c43709d606bb088a69451b7a43cf32a17`, merge commit `154d58f182871ce18abad860f3bb76e5a006ebad`, the AION-239 pilot fingerprint `6635d4d32533893e4549d3992c0a6b54e73a58a0904914da6defcc5e0deff2ab`, twenty readiness domains, twenty readiness gaps, twenty-four release gates, forty threat scenarios and zero prohibited operational effects.
 
-`AION-238-V02RQ-0001` is closed, consumed by AION-239, expired and non-reusable. `AION-240-V02RQ-0002` is active only for AION-241 controlled isolated local staging qualification. AION-241 is authorized but not implemented. AION-242 is the next formal evaluation. AION-243 remains unauthorized. AION-244 remains the final release-candidate evaluation and tag/release authorization decision.
+Historical marker: `AION-238-V02RQ-0001` is closed, consumed by AION-239, expired and non-reusable. `AION-240-V02RQ-0002` was active only for AION-241 controlled isolated local staging qualification. AION-241 was authorized but not implemented. AION-242 was the next formal evaluation. AION-243 was unauthorized. AION-244 was the final release-candidate evaluation and tag/release authorization decision.
 
 Production runtime, production authentication, external IdP calls, production credentials, production tokens, registry login, registry pull, registry push, public network access, DNS resolution, public listeners, production database provisioning, production deployment, release-candidate creation, v0.2 tags and v0.2 releases remain disabled or absent. `v02_release_ready=false`.
 

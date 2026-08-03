@@ -1,0 +1,28 @@
+{
+  "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+  "program_name": "AION Adaptive Intelligence Programme",
+  "program_state": "adaptive_intelligence_program_authorized_not_implemented",
+  "development_line": "v0.3",
+  "development_version": "0.3.0.dev0",
+  "authorized_task": "AION-246",
+  "formal_closeout_task": "AION-247",
+  "final_planned_task": "AION-260",
+  "roadmap": [
+    {"task_id": "AION-245", "state": "authorized", "summary": "Post-RC1 baseline reconciliation and Adaptive Intelligence Programme authorization."},
+    {"task_id": "AION-246", "state": "authorized_not_implemented", "summary": "Controlled provider-neutral external-cognition gateway foundation."},
+    {"task_id": "AION-247", "state": "planned_unauthorized", "summary": "External-cognition foundation evaluation and live-provider pilot authorization decision."},
+    {"task_id": "AION-248", "state": "planned_unauthorized", "summary": "Operator-invoked controlled live-model provider pilot."},
+    {"task_id": "AION-249", "state": "planned_unauthorized", "summary": "Live-provider pilot evaluation and governed internet-research authorization decision."},
+    {"task_id": "AION-250", "state": "planned_unauthorized", "summary": "Governed public-internet research acquisition runtime."},
+    {"task_id": "AION-251", "state": "planned_unauthorized", "summary": "Research evaluation and verified-knowledge promotion authorization decision."},
+    {"task_id": "AION-252", "state": "planned_unauthorized", "summary": "Verified knowledge consolidation into persistent semantic and episodic memory."},
+    {"task_id": "AION-253", "state": "planned_unauthorized", "summary": "Persistent-memory evaluation and engagement-learning authorization decision."},
+    {"task_id": "AION-254", "state": "planned_unauthorized", "summary": "Outcome, feedback and engagement-learning runtime."},
+    {"task_id": "AION-255", "state": "planned_unauthorized", "summary": "Learning evaluation and domain-expert router authorization decision."},
+    {"task_id": "AION-256", "state": "planned_unauthorized", "summary": "Multi-model domain-expert router, critic and verifier mesh."},
+    {"task_id": "AION-257", "state": "planned_unauthorized", "summary": "Domain-router evaluation and real-tool fabric authorization decision."},
+    {"task_id": "AION-258", "state": "planned_unauthorized", "summary": "Sandboxed real-tool and connector execution runtime."},
+    {"task_id": "AION-259", "state": "planned_unauthorized", "summary": "Integrated adaptive-intelligence pilot and benchmark programme."},
+    {"task_id": "AION-260", "state": "planned_unauthorized", "summary": "Final Adaptive Intelligence Programme evaluation and v0.3 release-candidate authorization decision."}
+  ]
+}

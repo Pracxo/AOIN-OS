@@ -1,0 +1,49 @@
+{
+  "view_id": "external-cognition-authorization",
+  "status": "authorized_not_implemented",
+  "redaction_applied": true,
+  "redacted": true,
+  "synthetic": true,
+  "authorization_transaction_id": "AION-245-AI-0001",
+  "implementation_task": "AION-246",
+  "formal_closeout_task": "AION-247",
+  "candidate_id": "controlled-provider-neutral-external-cognition-gateway-foundation",
+  "external_cognition_gateway_authorized": true,
+  "external_cognition_gateway_implemented": false,
+  "deterministic_fixture_provider_approved": true,
+  "actual_model_provider_call_enabled": false,
+  "public_network_access_enabled": false,
+  "provider_credential_read_enabled": false,
+  "external_tool_execution_enabled": false,
+  "read_only": true,
+  "runtime_effect": false,
+  "sections": [
+    {
+      "title": "External cognition authorization",
+      "status": "authorized_not_implemented",
+      "refs": ["examples/adaptive-intelligence/external-cognition-foundation-authorization.json"]
+    }
+  ],
+  "blockers": [
+    "provider_network_disabled",
+    "credential_access_disabled",
+    "token_access_disabled",
+    "tool_execution_disabled"
+  ],
+  "warnings": [
+    "provider_call_limit_zero",
+    "network_limit_zero"
+  ],
+  "refs": [
+    "docs/adaptive-intelligence/authorization-ledger.json",
+    "examples/adaptive-intelligence/external-cognition-foundation-authorization.json"
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module"},
+    {"action_key": "activate_capability"},
+    {"action_key": "load_code"},
+    {"action_key": "execute_tool"},
+    {"action_key": "enable_external_model_calls"},
+    {"action_key": "hard_delete"}
+  ]
+}

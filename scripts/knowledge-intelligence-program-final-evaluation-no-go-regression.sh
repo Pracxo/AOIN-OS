@@ -384,6 +384,71 @@ aion242_is_scoped_v02_staging_operator_evaluation_path() {
   return 1
 }
 
+aion245_is_version_baseline_path() {
+  case "$1" in
+    packages/aion-sdk-python/pyproject.toml|\
+    services/brain-api/pyproject.toml)
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+
+  local base
+  if ! base="$(comparison_base)"; then
+    return 1
+  fi
+  python3 - "$base" "$1" <<'PY'
+from __future__ import annotations
+
+import subprocess
+import sys
+
+base, path = sys.argv[1:]
+diff = subprocess.run(
+    ["git", "diff", "--unified=0", base, "HEAD", "--", path],
+    capture_output=True,
+    check=True,
+    text=True,
+)
+changed_lines = []
+for line in diff.stdout.splitlines():
+    if line.startswith(("diff --git ", "index ", "--- ", "+++ ", "@@ ")):
+        continue
+    if line.startswith(("+", "-")):
+        changed_lines.append(line)
+expected = ['-version = "0.2.0rc1"', '+version = "0.3.0.dev0"']
+raise SystemExit(0 if changed_lines == expected else 1)
+PY
+}
+
+aion245_is_scoped_adaptive_intelligence_authorization_path() {
+  case "$1" in
+    AGENTS.md|\
+    README.md|\
+    docs/adaptive-intelligence/*|\
+    docs/adr/0209-post-rc1-v03-development-baseline-and-adaptive-intelligence-programme-authorization.md|\
+    docs/adr/README.md|\
+    docs/architecture.md|\
+    docs/brain-contract.md|\
+    docs/project-status.md|\
+    docs/release/adaptive-intelligence-*|\
+    docs/release/v03-development-baseline.md|\
+    docs/v02-release-qualification/architecture-roadmap.md|\
+    docs/visual-brain.md|\
+    examples/adaptive-intelligence/*|\
+    operator-console-static/README.md|\
+    operator-console-static/demo-data/adaptive-intelligence-*.json|\
+    operator-console-static/demo-data/external-cognition-authorization.json|\
+    scripts/adaptive-intelligence-*.sh|\
+    scripts/post-rc1-development-baseline-check.sh|\
+    services/brain-api/tests/test_adaptive_intelligence_program_authorization_aion245.py)
+      return 0
+      ;;
+  esac
+  aion245_is_version_baseline_path "$1"
+}
+
 changed_entries() {
   local base
   if base="$(comparison_base)"; then
@@ -441,6 +506,9 @@ while IFS=$'\t' read -r status path extra; do
       continue
     fi
     if aion244_is_scoped_v02_release_candidate_final_evaluation_path "$changed"; then
+      continue
+    fi
+    if aion245_is_scoped_adaptive_intelligence_authorization_path "$changed"; then
       continue
     fi
     if aion231_is_scoped_secure_runtime_foundation_path "$changed"; then

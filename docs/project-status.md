@@ -1,22 +1,30 @@
 # Project Status
 
-Program: `AION-SECURE-RUNTIME-INTEGRATION-001`.
+Program: `AION-ADAPTIVE-INTELLIGENCE-001`.
 
-Current milestone: AION-238 final Secure Runtime Integration Program evaluation passed and v0.2 Release Qualification Program authorization created.
+Current released prerelease: `aion-v0.2.0-rc.1`.
 
-Current task: AION-239 disabled v0.2 production-readiness qualification foundation, authorized by AION-238-V02RQ-0001 and pending implementation.
+Current development line: `v0.3`.
 
-Current stage: AION OS now has a working local human-control plane. A pre-authenticated local operator can use the same-origin loopback console to inspect redacted runtime state, run deterministic model simulations, explicitly execute sandboxed reference capabilities, simulate synthetic connector reads, preview synthetic connector writes, activate the kill switch and close the local session.
+Current development version: `0.3.0.dev0`.
 
-Required flags: `secure_runtime_integration_program_authorized=true`, `active_sri_implementation_authorization_count=0`, `active_sri_implementation_authorization=null`, `active_sri_implementation_task=null`, `formal_closeout_task=null`, `model_gateway_implemented=true`, `model_gateway_operator_evaluation_passed=true`, `sandboxed_capability_runtime_implemented=true`, `sandboxed_capability_runtime_operator_evaluation_passed=true`, `operator_console_integration_authorized=true`, `operator_console_integration_implemented=true`, `integrated_authenticated_local_pilot_completed=true`, `local_loopback_listener_available=true`, `same_origin_static_asset_serving_available=true`, `model_output_is_untrusted=true`, `model_output_triggered_execution_enabled=false`, `operator_selection_required=true`, `public_listener_enabled=false`, `public_network_access_enabled=false`, `external_network_egress_enabled=false`, `dns_resolution_enabled=false`, `browser_persistence_enabled=false`, `credential_input_enabled=false`, `token_input_enabled=false`, `actual_model_provider_call_enabled=false`, `external_connector_execution_enabled=false`, `external_tool_execution_enabled=false`, `actual_tool_execution_enabled=false`, `production_runtime_authorized=false`, `production_memory_write_enabled=false`, `production_policy_mutation_enabled=false`, `actual_belief_mutation_enabled=false`, `source_rewrite_enabled=false`, `production_deployment_enabled=false`, `model_weight_training_enabled=false`, `production_exposure=false`, `v02_release_ready=false`, `v02_tag_created=false`, `v02_release_created=false`.
+Current programme: `AION-ADAPTIVE-INTELLIGENCE-001`.
 
-Secure Runtime Integration status: `AION-230-SRI-0001` is closed, consumed by AION-231, expired, and non-reusable. `AION-232-SRI-0002` is closed, consumed by AION-233, expired, and non-reusable. `AION-234-SRI-0003` is closed, consumed by AION-235, expired, and non-reusable. `AION-236-SRI-0004` is closed, consumed by AION-237, expired, and non-reusable after AION-238 final evaluation. The console is local only, binds only to `127.0.0.1`, keeps public listening, external egress, browser persistence, provider calls, external connectors, real tools, production writes, deployment, model training and v0.2 release readiness disabled. AION-238 is complete. `AION-238-V02RQ-0001` is the sole active v0.2 Release Qualification authorization for AION-239. v0.2 remains unreleased.
+Current task: `AION-246`.
+
+Current authorization: `AION-245-AI-0001`.
+
+Current stage: AION OS has completed its governed v0.2 release qualification and published RC1. The following development programme activates intelligence in controlled layers, starting with a provider-neutral external-cognition gateway foundation. Live provider access, internet research, persistent engagement learning, real tools and autonomous execution remain disabled.
+
+Current status flags: `v02_release_qualification_program_complete=true`, `v02_rc1_prerelease_published=true`, `v02_rc1_tag=aion-v0.2.0-rc.1`, `v02_rc1_candidate_source_commit=d35f1caa234d35dce1dfc0a80bc4c8e327a8373e`, `v02_rc1_asset_count=24`, `v02_stable_release_ready=false`, `v02_stable_tag_created=false`, `v02_stable_release_created=false`, `v02_tag_created=false`, `v02_release_created=false`, `v03_development_baseline=true`, `adaptive_intelligence_program_authorized=true`, `adaptive_intelligence_program_implemented=false`, `active_adaptive_intelligence_authorization_count=1`, `active_adaptive_intelligence_authorization=AION-245-AI-0001`, `active_adaptive_intelligence_task=AION-246`, `formal_closeout_task=AION-247`, `final_planned_task=AION-260`, `actual_model_provider_call_enabled=false`, `public_network_access_enabled=false`, `external_network_egress_enabled=false`, `dns_resolution_enabled=false`, `provider_credential_read_enabled=false`, `provider_token_read_enabled=false`, `persistent_verified_knowledge_write_enabled=false`, `external_tool_execution_enabled=false`, `external_connector_execution_enabled=false`, `autonomous_background_loop_enabled=false`, `production_runtime_authorized=false`, `production_deployment_enabled=false`.
+
+AION-218 verified-knowledge memory operator evaluation complete. Historical current-state compatibility markers retained: `active_knowledge_implementation_authorization=AION-218-KI-0008`, `active_knowledge_implementation_task=AION-219`, `formal_closeout_task=AION-220`, `verified_knowledge_memory_implemented=true`, `controlled_public_research_pilot_authorized=true`, `controlled_public_research_pilot_implemented=true`, `public_network_fetch_enabled=false`, `active_knowledge_implementation_task=AION-209`.
 
 AION-220 final Knowledge Intelligence Program evaluation and closeout complete. The AION Knowledge Intelligence Program is complete. `knowledge_intelligence_program_complete=true`, `controlled_public_research_pilot_passed=true`, `active_knowledge_implementation_authorization_count=0`, `active_knowledge_implementation_authorization=null`, `next_knowledge_implementation_task=null`, `v02_release_ready=false`.
 
-AION-218 verified-knowledge memory operator evaluation complete. Historical projection markers retained for compatibility: `active_knowledge_implementation_authorization=AION-218-KI-0008`, `active_knowledge_implementation_task=AION-219`, `formal_closeout_task=AION-220`, `verified_knowledge_memory_implemented=true`, `persistent_verified_knowledge_write_enabled=false`, `controlled_public_research_pilot_authorized=true`, `controlled_public_research_pilot_implemented=true`, `public_network_fetch_enabled=false`, `active_knowledge_implementation_task=AION-209`.
+AION-229 final Governed Learning and Memory Program closeout complete. Governed Learning and Memory Program complete. Governed Learning and Memory Program is complete.
 
-Governed Learning and Memory Program complete. AION-229 final governed-learning-memory closeout is complete, with `active_glm_implementation_authorization_count=0`, `formal_closeout_task=null`, and `v02_release_ready=false`.
+Secure Runtime Integration Program is complete. AION Secure Runtime Integration Program `AION-SECURE-RUNTIME-INTEGRATION-001` lineage retained: `AION-230-SRI-0001`, `AION-231`, `AION-232`, `AION-232-SRI-0002`, `AION-233`, `AION-234`, `AION-234-SRI-0003`, `AION-235`, `AION-236`, `AION-236-SRI-0004`, `AION-237`, `AION-238`, `AION-238-V02RQ-0001`. Current milestone: AION-238 final Secure Runtime Integration Program. Historical compatibility marker retained: Current task: AION-239 disabled v0.2 production-readiness. `model_output_triggered_execution_enabled=false`, `external_connector_execution_enabled=false`, `external_tool_execution_enabled=false`, `public_network_access_enabled=false`, `production_runtime_authorized=false`. Stable v0.2 remains unreleased. v0.2 remains unreleased. The v0.2 Release Qualification Program is complete with active v0.2 authorization count `0`.
 
 ## Historical Compatibility Markers
 
@@ -68,13 +76,13 @@ AION-SRIPE-003 passed with report fingerprint `61e50ce0829e85b27b61a7620bb1ca4a7
 
 `AION-SRIPE-004` passed all 28 final Secure Runtime Integration scenarios with report fingerprint `6e457d1a8bc226aa44697802d68b5d4cd5a272088a5ce6317048ab75503744ee`. `AION-236-SRI-0004` is closed, consumed by AION-237, expired and non-reusable. The Secure Runtime Integration Program is complete with active SRI authorization count `0`. `AION-V02-RELEASE-QUALIFICATION-001` is authorized but not implemented, and `AION-238-V02RQ-0001` is the sole active v0.2 Release Qualification authorization for AION-239. Production runtime, public listening, external egress, credentials, tokens, deployment, release candidates, v0.2 tags and v0.2 releases remain disabled or absent.
 
-## AION-239 Current Status
+## Historical AION-239 Status
 
 AION-239 implements the AION-238-authorized disabled v0.2 production-readiness qualification foundation. The foundation represents production-readiness gaps, production-auth composition, verified RequestIdentity integration, replay provisioning, IdP adapter contracts, key and protected-material policy, credential/token/session lifecycle, artifact/SBOM/provenance/reproducibility, rollback, observability, health, threat-model, release-gate and staging-plan evidence as strict local contracts.
 
 The implementation is disabled and design-only. It performs no external identity-provider call, DNS lookup, credential generation, token issuance, replay-ledger write, database provisioning, staging or production deployment, rollback execution, observability export, release-candidate creation, tag creation or release publication. The deterministic pilot returns a release hold because staging and production evidence remain absent. AION-238-V02RQ-0001 remains active pending AION-240 closeout.
 
-Current task: AION-243 deterministic local v0.2 release-candidate artifact build, authorized by AION-242 and pending AION-244 formal evaluation.
+Historical marker: AION-243 deterministic local v0.2 release-candidate artifact build was authorized by AION-242 pending AION-244 formal evaluation.
 
 ## AION-240 Foundation Evaluation And Staging Authorization
 
@@ -90,4 +98,4 @@ Production runtime, production authentication, external IdP calls, production cr
 
 ## AION-244 v0.2.0-rc.1 Publication Authorization
 
-Final evaluation `AION-V02RQPE-003` passed for `aion-v0.2.0-rc.1` with 32 hard gates and report fingerprint `8bb225c4f8e5055bc19d961e9a67e7347acf0896195ce4279ba65d597c044952`. The programme is pending PR merge, RC1 prerelease publication, and reconciliation before final completion.
+Final evaluation `AION-V02RQPE-003` passed for `aion-v0.2.0-rc.1` with 32 hard gates and report fingerprint `8bb225c4f8e5055bc19d961e9a67e7347acf0896195ce4279ba65d597c044952`. PR #163 and PR #164 are merged, the RC1 prerelease is published with 24 assets, and the v0.2 Release Qualification Program is complete.

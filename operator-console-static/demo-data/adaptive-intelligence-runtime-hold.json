@@ -1,0 +1,53 @@
+{
+  "view_id": "adaptive-intelligence-runtime-hold",
+  "status": "runtime_hold_active",
+  "redaction_applied": true,
+  "redacted": true,
+  "synthetic": true,
+  "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+  "active_authorization": "AION-245-AI-0001",
+  "current_task": "AION-246",
+  "formal_closeout_task": "AION-247",
+  "provider_calls": 0,
+  "network_calls": 0,
+  "dns_resolutions": 0,
+  "credential_reads": 0,
+  "token_reads": 0,
+  "memory_writes": 0,
+  "tool_executions": 0,
+  "connector_calls": 0,
+  "autonomous_cycles": 0,
+  "production_deployments": 0,
+  "read_only": true,
+  "runtime_effect": false,
+  "sections": [
+    {
+      "title": "Runtime hold",
+      "status": "active",
+      "refs": ["examples/adaptive-intelligence/runtime-hold.json"]
+    }
+  ],
+  "blockers": [
+    "provider_calls_zero",
+    "network_calls_zero",
+    "memory_writes_zero",
+    "tool_executions_zero",
+    "production_deployments_zero"
+  ],
+  "warnings": [
+    "manual_gate_required_before_runtime",
+    "aion246_source_absent"
+  ],
+  "refs": [
+    "examples/adaptive-intelligence/runtime-hold.json",
+    "scripts/adaptive-intelligence-runtime-hold.sh"
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module"},
+    {"action_key": "activate_capability"},
+    {"action_key": "load_code"},
+    {"action_key": "execute_tool"},
+    {"action_key": "enable_external_model_calls"},
+    {"action_key": "hard_delete"}
+  ]
+}

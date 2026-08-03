@@ -535,6 +535,11 @@ allowed_aion233_prefixes = (
 allowed_aion234_prefixes = (
     "operator-console-static/demo-data/capability-runtime-",
 )
+allowed_aion245_files = {
+    "operator-console-static/demo-data/adaptive-intelligence-program.json",
+    "operator-console-static/demo-data/adaptive-intelligence-runtime-hold.json",
+    "operator-console-static/demo-data/external-cognition-authorization.json",
+}
 runtime_prefixes = (
     "services/brain-api/src/",
     "packages/aion-sdk-python/src/",
@@ -614,6 +619,7 @@ for relative in sorted(changed):
 	        or relative in allowed_aion215_files
 	        or relative in allowed_aion222_files
         or relative in allowed_aion233_files
+        or relative in allowed_aion245_files
 	        or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)
         or relative.startswith(allowed_aion110_prefixes)

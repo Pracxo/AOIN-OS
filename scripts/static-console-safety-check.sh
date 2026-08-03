@@ -416,6 +416,9 @@ allowed_authorization_demo_names = {
     "operator-console-route-manifest.json",
     "operator-console-security-headers.json",
     "operator-console-session-bootstrap.json",
+    "adaptive-intelligence-program.json",
+    "adaptive-intelligence-runtime-hold.json",
+    "external-cognition-authorization.json",
 }
 secure_runtime_evaluation_demo_names = {
     "secure-runtime-foundation-operator-evaluation.json",

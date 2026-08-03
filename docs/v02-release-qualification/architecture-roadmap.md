@@ -4,6 +4,22 @@ Task: `AION-238`.
 
 Purpose: defines the AION-239 through AION-244 qualification roadmap without runtime activation.
 
+## Post-RC1 Current Projection
+
+Current released prerelease: `aion-v0.2.0-rc.1`.
+
+Current development line: `v0.3`.
+
+Current development version: `0.3.0.dev0`.
+
+Current programme: `AION-ADAPTIVE-INTELLIGENCE-001`.
+
+Current task: `AION-246`.
+
+Current authorization: `AION-245-AI-0001`.
+
+The v0.2 Release Qualification Program is complete. The RC1 prerelease is published with 24 assets, while stable v0.2.0 remains unpublished. The next programme is Adaptive Intelligence, with only AION-246 authorized.
+
 Final evaluation: `AION-SRIPE-004`.
 
 Decision: `CONTROLLED_OPERATOR_CONSOLE_INTEGRATED_LOCAL_RUNTIME_FINAL_EVALUATION_PASS_COMPLETE_SECURE_RUNTIME_INTEGRATION_PROGRAM_RECOMMEND_V02_RELEASE_QUALIFICATION_PROGRAM_AUTHORIZATION`.
@@ -25,8 +41,8 @@ Runtime and release boundary:
 - Public listeners remain disabled.
 - External egress, DNS, providers, connectors and real tools remain disabled.
 - Credentials, secrets, tokens, cookies and browser persistence remain absent.
-- `v02_release_ready=false`.
-- No v0.2 tag or release is approved or created.
+- Historical marker: `v02_release_ready=false` at AION-238 programme authorization time.
+- Historical marker: no v0.2 tag or release was approved or created at AION-238 programme authorization time.
 
 ## AION-239 Implemented Disabled Foundation
 
@@ -42,9 +58,9 @@ Decision: `DISABLED_V02_PRODUCTION_READINESS_QUALIFICATION_FOUNDATION_OPERATOR_E
 
 The evaluation passed all 28 hard-gated scenarios, verified PR #158, commits `a1d5d1ee2b0d991f3074c796d664105225b51856` and `fa789d5c43709d606bb088a69451b7a43cf32a17`, merge commit `154d58f182871ce18abad860f3bb76e5a006ebad`, the AION-239 pilot fingerprint `6635d4d32533893e4549d3992c0a6b54e73a58a0904914da6defcc5e0deff2ab`, twenty readiness domains, twenty readiness gaps, twenty-four release gates, forty threat scenarios and zero prohibited operational effects.
 
-`AION-238-V02RQ-0001` is closed, consumed by AION-239, expired and non-reusable. `AION-240-V02RQ-0002` remains active for AION-241 formal closeout by AION-242. AION-241 is implemented with controlled isolated local pilot evidence pending AION-242 closeout. AION-243 remains unauthorized. AION-244 remains the final release-candidate evaluation and tag/release authorization decision.
+Historical marker: `AION-238-V02RQ-0001` is closed, consumed by AION-239, expired and non-reusable. `AION-240-V02RQ-0002` remained active for AION-241 formal closeout by AION-242. AION-241 was implemented with controlled isolated local pilot evidence pending AION-242 closeout. AION-243 was unauthorized. AION-244 was the final release-candidate evaluation and tag/release authorization decision.
 
-Production runtime, production authentication, external IdP calls, production credentials, production tokens, registry login, registry pull, registry push, public network access, DNS resolution, public listeners, production database provisioning, production deployment, release-candidate creation, v0.2 tags and v0.2 releases remain disabled or absent. `v02_release_ready=false`.
+Historical marker: production runtime, production authentication, external IdP calls, production credentials, production tokens, registry login, registry pull, registry push, public network access, DNS resolution, public listeners, production database provisioning, production deployment, release-candidate creation, v0.2 tags and v0.2 releases remained disabled or absent at that stage. Stable v0.2.0 remains unpublished after RC1.
 
 ## AION-244 v0.2.0-rc.1 Publication Authorization
 
