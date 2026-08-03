@@ -50,12 +50,12 @@
     "corrective_prs": [],
     "deterministic_fixture_pilot_completed": true,
     "evidence_commit": "PENDING_AION_246_EVIDENCE_COMMIT",
-    "evidence_report_fingerprint": null,
+    "evidence_report_fingerprint": "2f9a05f78d4afb40f390ace3cafbb2f997e46525063cd80fe6cab131e8be9aad",
     "feature_commits": [
-      "PENDING_AION_246_IMPLEMENTATION_COMMIT",
+      "dd1f7b34cb2a25dfd409cf72667f073af9e8e965",
       "PENDING_AION_246_EVIDENCE_COMMIT"
     ],
-    "implementation_commit": "PENDING_AION_246_IMPLEMENTATION_COMMIT",
+    "implementation_commit": "dd1f7b34cb2a25dfd409cf72667f073af9e8e965",
     "merge_commits": [],
     "next_task": "AION-247",
     "pilot_id": "AION-246-deterministic-external-cognition-fixture-pilot",
