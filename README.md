@@ -8,12 +8,13 @@ policies, traces, and learning signals that every future module must follow.
 
 AION OS has completed governed v0.2 release qualification and published the
 `aion-v0.2.0-rc.1` prerelease. The following development programme activates
-intelligence in controlled layers, starting with a provider-neutral
-external-cognition gateway foundation. Live provider access, internet research,
+intelligence in controlled layers. AION-246 implements the provider-neutral
+external-cognition gateway foundation as disabled deterministic fixture-only
+contracts pending AION-247 closeout. Live provider access, internet research,
 persistent engagement learning, real tools and autonomous execution remain
 disabled.
 
-current_main_commit=`2a5db0760178698d783abcc63e53f08ff3583571`
+current_main_commit=`d7fe689bfe39a98688784758ceb2b7130ca949bd`
 
 current_released_prerelease=`aion-v0.2.0-rc.1`
 
@@ -28,6 +29,8 @@ current_task=`AION-246`
 current_authorization=`AION-245-AI-0001`
 
 production_runtime_authorized=`false`
+
+external_cognition_gateway_state=`implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout`
 
 The Cognitive Architecture Program, Knowledge Intelligence Program, Governed
 Learning and Memory Program, governed self-improvement implementation program,

@@ -1,49 +1,86 @@
 {
-  "view_id": "external-cognition-authorization",
-  "status": "authorized_not_implemented",
-  "redaction_applied": true,
-  "redacted": true,
-  "synthetic": true,
-  "authorization_transaction_id": "AION-245-AI-0001",
-  "implementation_task": "AION-246",
+  "authorization_active": true,
+  "authorization_consumed": false,
+  "authorization_expired": false,
+  "authorization_id": "AION-245-AI-0001",
+  "authorization_reusable": false,
+  "blockers": [
+    "provider_calls_zero",
+    "network_calls_zero",
+    "credential_reads_zero",
+    "token_reads_zero",
+    "memory_writes_zero",
+    "tool_executions_zero",
+    "production_runtime_disabled"
+  ],
+  "deterministic_fixture_pilot_completed": true,
+  "external_cognition_gateway_state": "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout",
+  "forbidden_actions": [
+    {
+      "action_key": "enable_external_model_calls"
+    },
+    {
+      "action_key": "read_provider_credentials"
+    },
+    {
+      "action_key": "execute_tool"
+    },
+    {
+      "action_key": "write_memory"
+    },
+    {
+      "action_key": "deploy_production"
+    }
+  ],
   "formal_closeout_task": "AION-247",
-  "candidate_id": "controlled-provider-neutral-external-cognition-gateway-foundation",
-  "external_cognition_gateway_authorized": true,
-  "external_cognition_gateway_implemented": false,
-  "deterministic_fixture_provider_approved": true,
-  "actual_model_provider_call_enabled": false,
-  "public_network_access_enabled": false,
-  "provider_credential_read_enabled": false,
-  "external_tool_execution_enabled": false,
+  "implementation_task": "AION-246",
+  "memory_effect": false,
+  "model_capability_record_count": 18,
+  "model_manifest_count": 6,
+  "network_effect": false,
+  "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+  "provider_effect": false,
+  "provider_manifest_count": 3,
   "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "refs": [
+    "docs/adaptive-intelligence/program-ledger.json",
+    "examples/adaptive-intelligence/external-cognition-contract-examples.json",
+    "scripts/external-cognition-runtime-hold.sh"
+  ],
+  "routing_policy_count": 6,
   "runtime_effect": false,
   "sections": [
     {
-      "title": "External cognition authorization",
-      "status": "authorized_not_implemented",
-      "refs": ["examples/adaptive-intelligence/external-cognition-foundation-authorization.json"]
+      "refs": [
+        "docs/adaptive-intelligence/authorization-ledger.json"
+      ],
+      "status": "active_unconsumed",
+      "title": "Authorization"
+    },
+    {
+      "refs": [
+        "examples/adaptive-intelligence/external-cognition-contract-examples.json"
+      ],
+      "status": "implemented_disabled",
+      "title": "Gateway"
+    },
+    {
+      "refs": [
+        "examples/adaptive-intelligence/external-cognition-fixture-pilot-evidence.json"
+      ],
+      "status": "pending_committed_evidence",
+      "title": "Pilot evidence"
     }
   ],
-  "blockers": [
-    "provider_network_disabled",
-    "credential_access_disabled",
-    "token_access_disabled",
-    "tool_execution_disabled"
-  ],
+  "status": "active_unconsumed_implemented_disabled",
+  "structured_output_schema_count": 2,
+  "synthetic": true,
+  "tool_effect": false,
+  "view_id": "external-cognition-authorization",
   "warnings": [
-    "provider_call_limit_zero",
-    "network_limit_zero"
-  ],
-  "refs": [
-    "docs/adaptive-intelligence/authorization-ledger.json",
-    "examples/adaptive-intelligence/external-cognition-foundation-authorization.json"
-  ],
-  "forbidden_actions": [
-    {"action_key": "activate_module"},
-    {"action_key": "activate_capability"},
-    {"action_key": "load_code"},
-    {"action_key": "execute_tool"},
-    {"action_key": "enable_external_model_calls"},
-    {"action_key": "hard_delete"}
+    "AION-247_closeout_required_before_live_provider_pilot_decision",
+    "AION-248_not_authorized"
   ]
 }

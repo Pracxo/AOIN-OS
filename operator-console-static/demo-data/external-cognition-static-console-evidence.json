@@ -1,0 +1,82 @@
+{
+  "authorization_id": "AION-245-AI-0001",
+  "blockers": [
+    "provider_calls_zero",
+    "network_calls_zero",
+    "credential_reads_zero",
+    "token_reads_zero",
+    "memory_writes_zero",
+    "tool_executions_zero",
+    "production_runtime_disabled"
+  ],
+  "deterministic_fixture_pilot_completed": true,
+  "external_cognition_gateway_state": "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout",
+  "forbidden_actions": [
+    {
+      "action_key": "enable_external_model_calls"
+    },
+    {
+      "action_key": "read_provider_credentials"
+    },
+    {
+      "action_key": "execute_tool"
+    },
+    {
+      "action_key": "write_memory"
+    },
+    {
+      "action_key": "deploy_production"
+    }
+  ],
+  "formal_closeout_task": "AION-247",
+  "implementation_task": "AION-246",
+  "memory_effect": false,
+  "model_capability_record_count": 18,
+  "model_manifest_count": 6,
+  "network_effect": false,
+  "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+  "provider_effect": false,
+  "provider_manifest_count": 3,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "refs": [
+    "docs/adaptive-intelligence/program-ledger.json",
+    "examples/adaptive-intelligence/external-cognition-contract-examples.json",
+    "scripts/external-cognition-runtime-hold.sh"
+  ],
+  "routing_policy_count": 6,
+  "runtime_effect": false,
+  "sections": [
+    {
+      "refs": [
+        "docs/adaptive-intelligence/authorization-ledger.json"
+      ],
+      "status": "active_unconsumed",
+      "title": "Authorization"
+    },
+    {
+      "refs": [
+        "examples/adaptive-intelligence/external-cognition-contract-examples.json"
+      ],
+      "status": "implemented_disabled",
+      "title": "Gateway"
+    },
+    {
+      "refs": [
+        "examples/adaptive-intelligence/external-cognition-fixture-pilot-evidence.json"
+      ],
+      "status": "pending_committed_evidence",
+      "title": "Pilot evidence"
+    }
+  ],
+  "status": "implemented_disabled_deterministic_fixture_only",
+  "structured_output_schema_count": 2,
+  "synthetic": true,
+  "tool_effect": false,
+  "view_id": "external-cognition-foundation",
+  "warnings": [
+    "AION-247_closeout_required_before_live_provider_pilot_decision",
+    "AION-248_not_authorized"
+  ]
+}

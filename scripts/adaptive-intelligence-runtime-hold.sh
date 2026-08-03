@@ -25,8 +25,15 @@ import json
 from pathlib import Path
 
 ROOT = Path.cwd()
+AUTHORIZED_STATE = "adaptive_intelligence_program_authorized_not_implemented"
+IMPLEMENTED_DISABLED_STATE = (
+    "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout"
+)
 program = json.loads((ROOT / "docs/adaptive-intelligence/program-ledger.json").read_text(encoding="utf-8"))
 hold = json.loads((ROOT / "examples/adaptive-intelligence/runtime-hold.json").read_text(encoding="utf-8"))
+
+if program.get("program_state") not in {AUTHORIZED_STATE, IMPLEMENTED_DISABLED_STATE}:
+    raise SystemExit("adaptive intelligence runtime hold program state mismatch")
 
 required = {
     "adaptive_intelligence_program_authorized": True,
@@ -39,6 +46,18 @@ required = {
 for key, value in required.items():
     if program.get(key) != value and hold.get(key) != value:
         raise SystemExit(f"runtime hold mismatch {key}")
+
+if program.get("program_state") == IMPLEMENTED_DISABLED_STATE:
+    for key, value in {
+        "external_cognition_gateway_implemented": True,
+        "external_cognition_gateway_state": "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout",
+        "deterministic_fixture_pilot_completed": True,
+    }.items():
+        if program.get(key) != value:
+            raise SystemExit(f"adaptive intelligence runtime hold mismatch {key}")
+else:
+    if program.get("external_cognition_gateway_implemented") is not False:
+        raise SystemExit("external cognition gateway cannot be implemented in pre-implementation hold")
 
 zero_keys = {
     "actual_provider_calls",
