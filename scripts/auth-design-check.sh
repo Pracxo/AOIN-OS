@@ -1596,6 +1596,22 @@ def is_secure_runtime_integration_artifact(name: str) -> bool:
     )
 
 
+def is_adaptive_intelligence_artifact(name: str) -> bool:
+    return (
+        name.startswith("docs/adaptive-intelligence/")
+        or name.startswith("examples/adaptive-intelligence/")
+        or name.startswith("operator-console-static/demo-data/adaptive-intelligence-")
+        or name == "operator-console-static/demo-data/external-cognition-authorization.json"
+        or name.startswith("docs/release/adaptive-intelligence-")
+        or name == "docs/release/v03-development-baseline.md"
+        or name
+        == "docs/adr/0209-post-rc1-v03-development-baseline-and-adaptive-intelligence-programme-authorization.md"
+        or name.startswith("scripts/adaptive-intelligence-")
+        or name == "scripts/post-rc1-development-baseline-check.sh"
+        or name == "services/brain-api/tests/test_adaptive_intelligence_program_authorization_aion245.py"
+    )
+
+
 for name in [*changed, *untracked]:
     path = Path(name)
     basename = path.name
@@ -1637,6 +1653,7 @@ for name in [*changed, *untracked]:
         and name not in aion223_auth_paths
         and not is_governed_learning_memory_artifact(name)
         and not is_secure_runtime_integration_artifact(name)
+        and not is_adaptive_intelligence_artifact(name)
     ):
         raise SystemExit(f"unexpected auth runtime or artifact path: {name}")
 

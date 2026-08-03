@@ -16,6 +16,24 @@ It is plain HTML, CSS, and JavaScript only.
 - no external calls
 - no stored protected values
 
+## Current Development Projection
+
+Current released prerelease: `aion-v0.2.0-rc.1`.
+
+Current development line: `v0.3`.
+
+Current development version: `0.3.0.dev0`.
+
+Current programme: `AION-ADAPTIVE-INTELLIGENCE-001`.
+
+Current task: `AION-246`.
+
+Current authorization: `AION-245-AI-0001`.
+
+Static console AION-245 evidence is read-only demo data. It does not enable live
+providers, internet research, credential input, token input, persistent
+learning, real tools, connectors, autonomous loops or production runtime.
+
 ## Run Locally
 
 Open the file directly:

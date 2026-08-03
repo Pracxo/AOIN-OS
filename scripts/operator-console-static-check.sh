@@ -1490,6 +1490,9 @@ for path in sorted(demo_dir.glob("*.json")):
         "capability-runtime-manifests.json",
         "capability-runtime-runtime-hold.json",
         "capability-runtime-sandbox.json",
+        "adaptive-intelligence-program.json",
+        "adaptive-intelligence-runtime-hold.json",
+        "external-cognition-authorization.json",
     }
     blocked = (
         "raw_prompt",

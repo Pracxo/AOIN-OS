@@ -1,0 +1,47 @@
+{
+  "view_id": "adaptive-intelligence-program",
+  "status": "authorized_not_implemented",
+  "redaction_applied": true,
+  "redacted": true,
+  "synthetic": true,
+  "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+  "program_name": "AION Adaptive Intelligence Programme",
+  "program_state": "adaptive_intelligence_program_authorized_not_implemented",
+  "current_released_prerelease": "aion-v0.2.0-rc.1",
+  "current_development_line": "v0.3",
+  "current_development_version": "0.3.0.dev0",
+  "current_task": "AION-246",
+  "current_authorization": "AION-245-AI-0001",
+  "read_only": true,
+  "runtime_effect": false,
+  "production_runtime_authorized": false,
+  "sections": [
+    {
+      "title": "Programme",
+      "status": "authorized_not_implemented",
+      "refs": ["docs/adaptive-intelligence/program-ledger.json"]
+    }
+  ],
+  "blockers": [
+    "provider_network_disabled",
+    "credential_access_disabled",
+    "tool_execution_disabled",
+    "production_runtime_disabled"
+  ],
+  "warnings": [
+    "implementation_not_started",
+    "runtime_hold_active"
+  ],
+  "refs": [
+    "docs/adaptive-intelligence/program-ledger.json",
+    "docs/adaptive-intelligence/authorization-ledger.json"
+  ],
+  "forbidden_actions": [
+    {"action_key": "activate_module"},
+    {"action_key": "activate_capability"},
+    {"action_key": "load_code"},
+    {"action_key": "execute_tool"},
+    {"action_key": "enable_external_model_calls"},
+    {"action_key": "hard_delete"}
+  ]
+}
