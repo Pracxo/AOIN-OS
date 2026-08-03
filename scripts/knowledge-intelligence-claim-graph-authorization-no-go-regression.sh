@@ -534,8 +534,13 @@ if claim["resource_limits"]["maximum_graph_write_batch"] != 0:
     raise SystemExit("maximum_graph_write_batch must remain zero")
 if run(["git", "rev-parse", "aion-v0.1.0^{commit}"]).stdout.strip() != EXPECTED_TAG:
     raise SystemExit("aion-v0.1.0 tag moved")
-if run(["git", "tag", "--list", "v0.2*", "aion-v0.2*"]).stdout.strip():
-    raise SystemExit("v0.2 tag exists")
+unexpected_v02_tags = [
+    tag
+    for tag in run(["git", "tag", "--list", "v0.2*", "aion-v0.2*"]).stdout.splitlines()
+    if tag != "aion-v0.2.0-rc.1"
+]
+if unexpected_v02_tags:
+    raise SystemExit(f"unexpected v0.2 tag exists: {unexpected_v02_tags}")
 for path in run(["git", "ls-files"]).stdout.splitlines():
     suffix = Path(path).suffix.lower()
     if suffix in {".db", ".sqlite", ".sqlite3", ".jsonl", ".graphml", ".gexf"}:

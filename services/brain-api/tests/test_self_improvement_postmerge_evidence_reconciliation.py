@@ -225,7 +225,7 @@ def test_no_v02_tag_exists_locally() -> None:
         text=True,
         check=True,
     )
-    assert tags.stdout.strip() == ""
+    assert set(tags.stdout.splitlines()) <= {"aion-v0.2.0-rc.1"}
 
 
 def _json(relative: str) -> dict[str, Any]:

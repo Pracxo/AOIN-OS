@@ -110,6 +110,10 @@ def test_v02_release_qualification_successor_authorization_is_exact_and_disabled
     module = evaluation_module()
     program = load_json("docs/v02-release-qualification/program-ledger.json")
     auth = load_json("docs/v02-release-qualification/authorization-ledger.json")
+    final_rc1_published = (
+        auth["authorization_transaction_id"] == AION244_AUTHORIZATION_ID
+        and program["release_candidate_published"] is True
+    )
 
     assert program["program_id"] == "AION-V02-RELEASE-QUALIFICATION-001"
     assert program["v02_release_qualification_program_implemented"] is True
@@ -124,14 +128,20 @@ def test_v02_release_qualification_successor_authorization_is_exact_and_disabled
         assert program["parent_evaluation_id"] == "AION-V02RQPE-003"
         assert program["parent_evaluation_decision"] == AION244_PASS_DECISION
         assert program["release_candidate_final_evaluation_passed"] is True
-        assert program["release_candidate_published"] is False
+        assert program["release_candidate_published"] is final_rc1_published
     else:
         assert program["parent_evaluation_id"] == "AION-SRIPE-004"
         assert program["parent_evaluation_decision"] == module.PASS_DECISION
-    assert program["final_planned_task"] == "AION-244"
-    assert auth["authorization_active"] is True
-    assert auth["authorization_consumed"] is False
-    assert auth["authorization_expired"] is False
+    if final_rc1_published:
+        assert program["final_planned_task"] is None
+        assert auth["authorization_active"] is False
+        assert auth["authorization_consumed"] is True
+        assert auth["authorization_expired"] is True
+    else:
+        assert program["final_planned_task"] == "AION-244"
+        assert auth["authorization_active"] is True
+        assert auth["authorization_consumed"] is False
+        assert auth["authorization_expired"] is False
     assert auth["authorization_reusable"] is False
 
     if auth["authorization_transaction_id"] == AION240_AUTHORIZATION_ID:
@@ -249,27 +259,32 @@ def test_v02_release_qualification_successor_authorization_is_exact_and_disabled
         ]
     elif auth["authorization_transaction_id"] == AION244_AUTHORIZATION_ID:
         assert program["program_state"] == (
-            "v02_release_candidate_final_evaluation_passed_pending_rc1_"
-            "prerelease_publication"
+            "v02_release_qualification_program_complete_rc1_prerelease_published"
         )
-        assert program["active_v02_release_qualification_authorization_count"] == 1
-        assert program["active_v02_release_qualification_authorization"] == (
-            AION244_AUTHORIZATION_ID
-        )
-        assert program["active_v02_release_qualification_task"] == "AION-244"
-        assert program["formal_closeout_task"] == "AION-244"
+        assert program["active_v02_release_qualification_authorization_count"] == 0
+        assert program["active_v02_release_qualification_authorization"] is None
+        assert program["active_v02_release_qualification_task"] is None
+        assert program["formal_closeout_task"] is None
         assert program["release_candidate_final_evaluation_passed"] is True
-        assert program["release_candidate_published"] is False
-        assert program["v02_tag_created"] is False
-        assert program["v02_release_created"] is False
+        assert program["release_candidate_published"] is True
+        assert program["release_candidate_promoted"] is False
+        assert program["v02_tag_created"] is True
+        assert program["v02_tag_name"] == "aion-v0.2.0-rc.1"
+        assert program["v02_release_created"] is True
+        assert program["v02_stable_tag_created"] is False
+        assert program["v02_stable_release_created"] is False
         assert auth["approval_record_id"] == AION244_AUTHORIZATION_ID
         assert auth["parent_authorization_transaction_id"] == AION242_AUTHORIZATION_ID
         assert auth["parent_evaluation_id"] == "AION-V02RQPE-003"
         assert auth["parent_evaluation_decision"] == AION244_PASS_DECISION
+        assert auth["authorization_active"] is False
+        assert auth["authorization_consumed"] is True
+        assert auth["authorization_expired"] is True
+        assert auth["authorization_reusable"] is False
         publication = auth["aion_244_publication_authorization"]
         assert publication["authorization_transaction_id"] == AION244_AUTHORIZATION_ID
-        assert publication["authorization_active"] is True
-        assert publication["authorization_consumed"] is False
+        assert publication["authorization_active"] is False
+        assert publication["authorization_consumed"] is True
     else:
         assert program["program_state"] == (
             "v02_release_qualification_foundation_implemented_disabled_pending_closeout"
@@ -305,7 +320,10 @@ def test_v02_release_qualification_successor_authorization_is_exact_and_disabled
         assert (REPO_ROOT / path).exists()
     assert (REPO_ROOT / "scripts/v02-release-qualification-local-run.py").exists()
     assert auth["local_qualification_pilot_completed"] is True
-    assert auth["v02_release_ready"] is False
+    assert auth["v02_release_ready"] is (
+        auth["authorization_transaction_id"] == AION244_AUTHORIZATION_ID
+        and auth.get("release_candidate_published") is True
+    )
 
 
 def test_release_state_remains_false_and_fail_does_not_authorize_successor():
@@ -317,16 +335,23 @@ def test_release_state_remains_false_and_fail_does_not_authorize_successor():
     assert sri_program["v02_release_ready"] is False
     assert sri_program["v02_tag_created"] is False
     assert sri_program["v02_release_created"] is False
-    assert v02_program["v02_release_ready"] is False
-    assert v02_program["v02_tag_created"] is False
-    assert v02_program["v02_release_created"] is False
+    final_rc1_published = (
+        v02_auth["authorization_transaction_id"] == AION244_AUTHORIZATION_ID
+        and v02_auth.get("release_candidate_published") is True
+    )
+    assert v02_program["v02_release_ready"] is final_rc1_published
+    assert v02_program["v02_tag_created"] is final_rc1_published
+    assert v02_program["v02_release_created"] is final_rc1_published
     if v02_auth["authorization_transaction_id"] == AION240_AUTHORIZATION_ID:
         assert v02_auth["parent_evaluation_decision"] == AION240_PASS_DECISION
     elif v02_auth["authorization_transaction_id"] == AION242_AUTHORIZATION_ID:
         assert v02_auth["parent_evaluation_decision"] == AION242_PASS_DECISION
     elif v02_auth["authorization_transaction_id"] == AION244_AUTHORIZATION_ID:
         assert v02_auth["parent_evaluation_decision"] == AION244_PASS_DECISION
-        assert v02_auth["release_candidate_published"] is False
+        assert v02_auth["release_candidate_published"] is True
+        assert v02_auth["release_candidate_promoted"] is False
+        assert v02_auth["v02_stable_tag_created"] is False
+        assert v02_auth["v02_stable_release_created"] is False
     else:
         assert v02_auth["parent_evaluation_decision"] == module.PASS_DECISION
     serialized = json.dumps((v02_program, v02_auth), sort_keys=True)

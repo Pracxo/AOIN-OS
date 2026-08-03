@@ -535,7 +535,8 @@ def v02_tags_absent(repo_root: Path) -> bool:
         text=True,
         check=False,
     )
-    return completed.returncode == 0 and not completed.stdout.strip()
+    tags = set(completed.stdout.splitlines())
+    return completed.returncode == 0 and tags <= {"aion-v0.2.0-rc.1"}
 
 
 def local_docker_resource_state(repo_root: Path) -> dict[str, Any]:
@@ -746,12 +747,54 @@ def authorization_lineage_state(program: Mapping[str, Any], auth: Mapping[str, A
         and aion244_publication.get("authorization_consumed") is False
         and aion244_publication.get("authorization_reusable") is False
     )
+    final_publication_complete = (
+        auth.get("authorization_transaction_id") == AION244_AUTHORIZATION_ID
+        and auth.get("approval_record_id") == AION244_AUTHORIZATION_ID
+        and auth.get("parent_authorization_transaction_id") == NEXT_AUTHORIZATION_ID
+        and auth.get("parent_evaluation_id") == "AION-V02RQPE-003"
+        and auth.get("implementation_task") == FINAL_PLANNED_TASK
+        and auth.get("authorization_active") is False
+        and auth.get("authorization_consumed") is True
+        and auth.get("authorization_expired") is True
+        and auth.get("authorization_reusable") is False
+        and auth.get("active_v02_release_qualification_authorization_count") == 0
+        and auth.get("active_v02_release_qualification_authorization") is None
+        and auth.get("release_candidate_published") is True
+        and auth.get("release_candidate_promoted") is False
+        and auth.get("v02_tag_created") is True
+        and auth.get("v02_tag_name") == "aion-v0.2.0-rc.1"
+        and auth.get("v02_release_created") is True
+        and auth.get("v02_stable_tag_created") is False
+        and auth.get("v02_stable_release_created") is False
+        and auth.get("production_deployment_enabled") is False
+        and closeout.get("authorization_transaction_id") == CURRENT_AUTHORIZATION_ID
+        and closeout.get("authorization_active") is False
+        and closeout.get("authorization_consumed") is True
+        and closeout.get("authorization_expired") is True
+        and closeout.get("authorization_reusable") is False
+        and aion242_closeout.get("authorization_transaction_id") == NEXT_AUTHORIZATION_ID
+        and aion242_closeout.get("authorization_active") is False
+        and aion242_closeout.get("authorization_consumed") is True
+        and aion242_closeout.get("authorization_expired") is True
+        and aion242_closeout.get("authorization_reusable") is False
+        and aion244_publication.get("authorization_transaction_id") == AION244_AUTHORIZATION_ID
+        and aion244_publication.get("authorization_active") is False
+        and aion244_publication.get("authorization_consumed") is True
+        and aion244_publication.get("authorization_expired") is True
+        and aion244_publication.get("authorization_reusable") is False
+    )
     active_id = program.get("active_v02_release_qualification_authorization")
     return {
         "pre_closeout_valid": pre_closeout,
         "post_closeout_valid": post_closeout,
         "final_evaluation_prepublication_valid": final_evaluation_prepublication,
-        "lineage_valid": pre_closeout or post_closeout or final_evaluation_prepublication,
+        "final_publication_complete_valid": final_publication_complete,
+        "lineage_valid": (
+            pre_closeout
+            or post_closeout
+            or final_evaluation_prepublication
+            or final_publication_complete
+        ),
         "active_authorization_id": active_id,
         "active_authorization_count": program.get(
             "active_v02_release_qualification_authorization_count"
@@ -772,6 +815,7 @@ def authorization_lineage_state(program: Mapping[str, Any], auth: Mapping[str, A
                 and active_id == AION244_AUTHORIZATION_ID
                 and AION244_AUTHORIZATION_ID in active
             )
+            or (final_publication_complete and active_id is None and not active)
         ),
         "closeout": closeout,
         "aion_242_closeout": aion242_closeout,
@@ -864,7 +908,9 @@ def evaluate(
     aion243_source_state_ok = (
         not source["future_aion_243_source_present"]
         and not source["future_aion_243_runner_present"]
-    ) or aion243_implementation_started or auth_state["final_evaluation_prepublication_valid"]
+    ) or aion243_implementation_started or auth_state["final_evaluation_prepublication_valid"] or auth_state[
+        "final_publication_complete_valid"
+    ]
     commits_available = {
         oid: git_object_exists(repo_root, oid)
         for oid in (IMPLEMENTATION_COMMIT, EVIDENCE_COMMIT, IMPLEMENTATION_MERGE_COMMIT)
@@ -923,7 +969,11 @@ def evaluate(
                 check("program_id_exact", auth.get("program_id") == PROGRAM_ID),
                 check("approved_capabilities_exact", auth.get("approved_capabilities") in ({key: True for key in api.APPROVED_CAPABILITIES}, future_auth["approved_capabilities"])),
                 check("prohibited_capabilities_false", all_prohibited_ledgers_false),
-                check("release_hold_preserved", program.get("v02_release_ready") is False),
+                check(
+                    "release_hold_preserved",
+                    program.get("v02_release_ready") is False
+                    or auth_state["final_publication_complete_valid"],
+                ),
             ),
         ),
         scenario(

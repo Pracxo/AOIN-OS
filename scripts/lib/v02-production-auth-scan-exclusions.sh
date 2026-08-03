@@ -2681,9 +2681,15 @@ aion244_is_scoped_v02_release_candidate_final_evaluation_path() {
     operator-console-static/demo-data/v02-rc1-*.json|\
     operator-console-static/demo-data/v02-release-candidate-final-evaluation.json|\
     scripts/auth-design-check.sh|\
+    scripts/cognitive-*-no-go-regression.sh|\
+    scripts/knowledge-intelligence-*.sh|\
     scripts/secure-runtime-foundation-no-go-regression.sh|\
     scripts/secure-runtime-integration-final-evaluation-no-go-regression.sh|\
+    scripts/secure-runtime-integration-program-authorization-check.sh|\
+    scripts/secure-runtime-integration-program-complete-check.sh|\
     scripts/secure-runtime-integration-program-no-go-regression.sh|\
+    scripts/secure-runtime-integration-runtime-hold.sh|\
+    scripts/self-improvement-*.sh|\
     scripts/lib/v02_release_candidate_final_evaluation.py|\
     scripts/lib/v02_release_qualification_foundation_operator_evaluation.py|\
     scripts/lib/v02_staging_qualification_operator_evaluation.py|\

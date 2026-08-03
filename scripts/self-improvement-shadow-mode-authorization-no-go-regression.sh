@@ -87,7 +87,7 @@ fi
 "$PYTHON_BIN" scripts/lib/self_improvement_governance.py --repo-root "$ROOT_DIR" --mode no-go
 aion_confirm_immutable_v01_tag_history >/dev/null
 
-if git tag --list 'v0.2*' 'aion-v0.2*' | grep -q .; then
+if git tag --list 'v0.2*' 'aion-v0.2*' | grep -v '^aion-v0\.2\.0-rc\.1$' | grep -q .; then
   echo "v0.2 tag exists" >&2
   exit 1
 fi

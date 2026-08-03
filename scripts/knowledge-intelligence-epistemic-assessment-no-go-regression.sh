@@ -727,7 +727,7 @@ if rg -n 'claim_true[[:space:]]*=[[:space:]]*true|claim_false[[:space:]]*=[[:spa
   exit 1
 fi
 
-if git tag --list 'v0.2*' 'aion-v0.2*' | rg -n '.+'; then
+if git tag --list 'v0.2*' 'aion-v0.2*' | rg -v '^aion-v0\.2\.0-rc\.1$' | rg -n '.+'; then
   echo "ERROR: v0.2 tag exists" >&2
   exit 1
 fi

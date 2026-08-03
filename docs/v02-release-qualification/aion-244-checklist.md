@@ -12,5 +12,11 @@
 - 32 final evaluation scenarios passed.
 - `AION-242-V02RQ-0003` closed as consumed by AION-243.
 - `AION-244-V02REL-0001` created as a single-use RC1 GitHub prerelease authorization.
-- No tag or release is created by the authorization PR.
+- Authorization PR #163 merged with green CI.
+- Annotated tag `aion-v0.2.0-rc.1` created and pushed at candidate source commit `d35f1caa234d35dce1dfc0a80bc4c8e327a8373e`.
+- GitHub prerelease `AION OS v0.2.0-rc.1` published.
+- 24 release assets uploaded and downloaded for verification.
+- 24 release asset hashes matched.
+- `AION-244-V02REL-0001` consumed, closed, expired, and marked non-reusable.
+- v0.2 Release Qualification Programme marked complete for the RC1 prerelease path.
 - Stable release and production deployment remain prohibited.

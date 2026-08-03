@@ -17,5 +17,5 @@ import knowledge_intelligence_public_research_pilot_authorization as auth
 auth.validate_authorization_files(Path(os.environ["AION_REPO_ROOT"]))
 PY
 aion_confirm_immutable_v01_tag_history >/dev/null
-if git tag --list 'v0.2*' 'aion-v0.2*' | rg -n '.+'; then echo "ERROR: v0.2 tag exists" >&2; exit 1; fi
+if git tag --list 'v0.2*' 'aion-v0.2*' | rg -v '^aion-v0\.2\.0-rc\.1$' | rg -n '.+'; then echo "ERROR: v0.2 tag exists" >&2; exit 1; fi
 echo "knowledge intelligence public research pilot authorization PASS"

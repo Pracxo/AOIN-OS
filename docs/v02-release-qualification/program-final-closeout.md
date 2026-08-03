@@ -2,6 +2,17 @@
 
 AION-244 is the final planned v0.2 Release Qualification Programme task.
 
-Current repository state is pending publication and reconciliation: the final evaluation has passed, AION-242 has been closed as consumed by AION-243, and `AION-244-V02REL-0001` is active for a single RC1 GitHub prerelease transaction.
+Current repository state is complete for the RC1 prerelease path: the final evaluation passed, AION-242 was closed as consumed by AION-243, `AION-244-V02REL-0001` was consumed by the single authorized RC1 GitHub prerelease transaction, and the actual tag/release metadata is reconciled.
 
-The programme is not marked complete until the RC1 tag/release exists, asset verification is reconciled, and the publication authorization is consumed and closed.
+Final state:
+
+- Programme complete: true
+- Final task: `AION-244`
+- Candidate ID: `aion-v0.2.0-rc.1`
+- Candidate package version: `0.2.0rc1`
+- Candidate source commit: `d35f1caa234d35dce1dfc0a80bc4c8e327a8373e`
+- GitHub prerelease: `https://github.com/Pracxo/AOIN-OS/releases/tag/aion-v0.2.0-rc.1`
+- Active v0.2 release qualification authorizations: 0
+- Stable v0.2.0 tag created: false
+- Stable v0.2.0 release created: false
+- Production deployment enabled: false

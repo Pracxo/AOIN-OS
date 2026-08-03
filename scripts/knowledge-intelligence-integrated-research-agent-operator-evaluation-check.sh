@@ -89,7 +89,7 @@ AION_AGGREGATE_GATE_RUNNING=1 ./scripts/self-improvement-final-check.sh
 ./scripts/boundary-check.sh
 
 aion_confirm_immutable_v01_tag_history >/dev/null
-if git tag --list 'v0.2*' 'aion-v0.2*' | rg -n '.+'; then echo "ERROR: v0.2 tag exists" >&2; exit 1; fi
+if git tag --list 'v0.2*' 'aion-v0.2*' | rg -v '^aion-v0\.2\.0-rc\.1$' | rg -n '.+'; then echo "ERROR: v0.2 tag exists" >&2; exit 1; fi
 if command -v gh >/dev/null 2>&1; then
   if gh release view v0.2 >/dev/null 2>&1 || gh release view aion-v0.2 >/dev/null 2>&1; then echo "ERROR: v0.2 release exists" >&2; exit 1; fi
 fi

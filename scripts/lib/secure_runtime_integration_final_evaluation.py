@@ -1117,10 +1117,11 @@ def static_console_evidence(repo_root: Path) -> dict[str, Any]:
 
 def no_v02_release(repo_root: Path) -> dict[str, bool]:
     tags = git(repo_root, ["tag", "-l", "aion-v0.2*", "v0.2*"]).stdout.splitlines()
+    unexpected_tags = [tag for tag in tags if tag != "aion-v0.2.0-rc.1"]
     return {
         "v02_release_ready_false": True,
-        "v02_tag_absent": tags == [],
-        "v02_release_absent": tags == [],
+        "v02_tag_absent": unexpected_tags == [],
+        "v02_release_absent": unexpected_tags == [],
     }
 
 

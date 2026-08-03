@@ -42,6 +42,10 @@ def test_harness_executes_exact_twenty_eight_scenarios(tmp_path):
     harness = load_harness()
     auth = load_json("docs/v02-release-qualification/authorization-ledger.json")
     post_aion242 = auth["authorization_transaction_id"] == AION242_AUTHORIZATION_ID
+    post_rc1_publication = (
+        auth["authorization_transaction_id"] == AION244_AUTHORIZATION_ID
+        and auth.get("release_candidate_published") is True
+    )
     report = harness.evaluate(
         repo_root=REPO_ROOT,
         evaluation_id=harness.EVALUATION_ID,
@@ -55,15 +59,17 @@ def test_harness_executes_exact_twenty_eight_scenarios(tmp_path):
 
     harness.validate_report(report)
     assert report["decision"] == (
-        harness.FAIL_DECISION if post_aion242 else harness.PASS_DECISION
+        harness.FAIL_DECISION
+        if post_aion242 or post_rc1_publication
+        else harness.PASS_DECISION
     )
-    assert report["evaluation_passed"] is (not post_aion242)
+    assert report["evaluation_passed"] is not (post_aion242 or post_rc1_publication)
     assert report["scenario_count"] == 28
     assert report["scenario_ids"] == list(harness.SCENARIO_IDS)
     assert [item["scenario_id"] for item in report["scenario_results"]] == list(
         harness.SCENARIO_IDS
     )
-    if post_aion242:
+    if post_aion242 or post_rc1_publication:
         assert any(item["passed"] is False for item in report["hard_gate_results"])
     else:
         assert all(item["passed"] is True for item in report["scenario_results"])
@@ -136,14 +142,17 @@ def test_authorization_closeout_when_present_is_consistent():
     if auth["authorization_transaction_id"] == AION244_AUTHORIZATION_ID:
         assert auth["parent_authorization_transaction_id"] == AION242_AUTHORIZATION_ID
         assert auth["parent_evaluation_id"] == "AION-V02RQPE-003"
-        assert auth["authorization_active"] is True
-        assert auth["authorization_consumed"] is False
-        assert auth["authorization_expired"] is False
+        assert auth["authorization_active"] is False
+        assert auth["authorization_consumed"] is True
+        assert auth["authorization_expired"] is True
         assert auth["authorization_reusable"] is False
         assert auth["implementation_task"] == "AION-244"
-        assert auth["release_candidate_published"] is False
-        assert auth["v02_tag_created"] is False
-        assert auth["v02_release_created"] is False
+        assert auth["release_candidate_published"] is True
+        assert auth["release_candidate_promoted"] is False
+        assert auth["v02_tag_created"] is True
+        assert auth["v02_release_created"] is True
+        assert auth["v02_stable_tag_created"] is False
+        assert auth["v02_stable_release_created"] is False
         assert auth["production_deployment_enabled"] is False
         closeout = auth["aion_240_authorization_closeout"]
         assert closeout["authorization_transaction_id"] == "AION-240-V02RQ-0002"
@@ -152,12 +161,9 @@ def test_authorization_closeout_when_present_is_consistent():
         assert closeout["authorization_expired"] is True
         assert closeout["authorization_reusable"] is False
         assert closeout["authorization_closed_by_task"] == "AION-242"
-        assert program["active_v02_release_qualification_authorization_count"] == 1
-        assert (
-            program["active_v02_release_qualification_authorization"]
-            == AION244_AUTHORIZATION_ID
-        )
-        assert program["active_v02_release_qualification_task"] == "AION-244"
+        assert program["active_v02_release_qualification_authorization_count"] == 0
+        assert program["active_v02_release_qualification_authorization"] is None
+        assert program["active_v02_release_qualification_task"] is None
     elif auth["authorization_transaction_id"] == AION242_AUTHORIZATION_ID:
         assert auth["parent_authorization_transaction_id"] == "AION-240-V02RQ-0002"
         assert auth["parent_evaluation_id"] == "AION-V02RQPE-002"
@@ -198,7 +204,10 @@ def test_authorization_closeout_when_present_is_consistent():
             == "AION-240-V02RQ-0002"
         )
         assert program["active_v02_release_qualification_task"] == "AION-241"
-    assert program["v02_release_ready"] is False
+    assert program["v02_release_ready"] is (
+        auth["authorization_transaction_id"] == AION244_AUTHORIZATION_ID
+        and auth.get("release_candidate_published") is True
+    )
     assert staging["authorization_transaction_id"] == "AION-240-V02RQ-0002"
     assert staging["staging_qualification_implemented"] is True
     assert not any(staging["prohibited_capabilities"].values())

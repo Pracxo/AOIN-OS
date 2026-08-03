@@ -59,4 +59,4 @@ def test_no_v02_tag_exists_locally() -> None:
         text=True,
         check=True,
     )
-    assert result.stdout.strip() == ""
+    assert set(result.stdout.splitlines()) <= {"aion-v0.2.0-rc.1"}

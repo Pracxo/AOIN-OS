@@ -176,4 +176,4 @@ def test_release_tags_remain_unchanged() -> None:
     ).stdout.strip()
 
     assert tag == "105fe29348160a2218ac095cfffadcb6f234421f"
-    assert v02_tags == ""
+    assert set(v02_tags.splitlines()) <= {"aion-v0.2.0-rc.1"}
