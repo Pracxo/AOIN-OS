@@ -1106,13 +1106,13 @@ class InMemoryExternalCognitionRequestRepository:
     """In-memory request repository with exact-replay detection."""
 
     def __init__(self) -> None:
-        self._requests: dict[str, ExternalCognitionRequestEnvelope] = {}
+        self._request_records: dict[str, ExternalCognitionRequestEnvelope] = {}
         self._safe_results: dict[str, str] = {}
 
     def check_request_idempotency(
         self, request: ExternalCognitionRequestEnvelope
     ) -> tuple[ExternalCognitionReplayOutcome, str | None]:
-        existing = self._requests.get(request.request_id)
+        existing = self._request_records.get(request.request_id)
         if existing is None:
             return ExternalCognitionReplayOutcome.new, None
         if existing.request_fingerprint == request.request_fingerprint:
@@ -1124,7 +1124,7 @@ class InMemoryExternalCognitionRequestRepository:
     def store_request(
         self, request: ExternalCognitionRequestEnvelope, safe_result_fingerprint: str
     ) -> None:
-        self._requests[request.request_id] = request
+        self._request_records[request.request_id] = request
         self._safe_results[request.request_id] = safe_result_fingerprint
 
 

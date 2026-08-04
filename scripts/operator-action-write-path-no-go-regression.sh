@@ -540,6 +540,32 @@ allowed_aion245_files = {
     "operator-console-static/demo-data/adaptive-intelligence-runtime-hold.json",
     "operator-console-static/demo-data/external-cognition-authorization.json",
 }
+adaptive_ledger_path = root / "docs/adaptive-intelligence/program-ledger.json"
+if adaptive_ledger_path.exists():
+    adaptive_ledger = json.loads(adaptive_ledger_path.read_text(encoding="utf-8"))
+else:
+    adaptive_ledger = {}
+aion246_state_active = (
+    adaptive_ledger.get("program_state")
+    == "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout"
+    and adaptive_ledger.get("active_adaptive_intelligence_authorization") == "AION-245-AI-0001"
+    and adaptive_ledger.get("active_adaptive_intelligence_task") == "AION-246"
+    and adaptive_ledger.get("formal_closeout_task") == "AION-247"
+    and adaptive_ledger.get("external_cognition_gateway_implemented") is True
+    and adaptive_ledger.get("external_cognition_gateway_state")
+    == "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout"
+)
+allowed_aion246_files = {
+    "operator-console-static/demo-data/adaptive-intelligence-program.json",
+    "operator-console-static/demo-data/adaptive-intelligence-runtime-hold.json",
+    "operator-console-static/demo-data/external-cognition-authorization.json",
+    "operator-console-static/demo-data/external-cognition-foundation.json",
+    "operator-console-static/demo-data/external-cognition-static-console-evidence.json",
+    "services/brain-api/src/aion_brain/contracts/external_cognition.py",
+} if aion246_state_active else set()
+allowed_aion246_prefixes = (
+    "services/brain-api/src/aion_brain/external_cognition/",
+) if aion246_state_active else ()
 runtime_prefixes = (
     "services/brain-api/src/",
     "packages/aion-sdk-python/src/",
@@ -617,9 +643,10 @@ for relative in sorted(changed):
 	        or relative in allowed_aion194_files
 	        or relative in allowed_aion213_files
 	        or relative in allowed_aion215_files
-	        or relative in allowed_aion222_files
+        or relative in allowed_aion222_files
         or relative in allowed_aion233_files
         or relative in allowed_aion245_files
+        or relative in allowed_aion246_files
 	        or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)
         or relative.startswith(allowed_aion110_prefixes)
@@ -630,6 +657,7 @@ for relative in sorted(changed):
         or relative.startswith(allowed_aion222_prefixes)
         or relative.startswith(allowed_aion233_prefixes)
         or relative.startswith(allowed_aion234_prefixes)
+        or relative.startswith(allowed_aion246_prefixes)
     ):
         continue
     if not relative.startswith(runtime_prefixes):

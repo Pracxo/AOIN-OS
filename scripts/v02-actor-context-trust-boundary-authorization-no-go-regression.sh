@@ -86,6 +86,9 @@ while IFS= read -r file; do
   if aion238_is_scoped_secure_runtime_final_closeout_path "$file"; then
     continue
   fi
+  if aion246_is_scoped_external_cognition_gateway_path "$file"; then
+    continue
+  fi
   case "$file" in
     package.json|package-lock.json|pnpm-lock.yaml|yarn.lock|bun.lockb|\
     */package.json|*/package-lock.json|*/pnpm-lock.yaml|*/yarn.lock|*/bun.lockb)

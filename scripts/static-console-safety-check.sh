@@ -419,6 +419,8 @@ allowed_authorization_demo_names = {
     "adaptive-intelligence-program.json",
     "adaptive-intelligence-runtime-hold.json",
     "external-cognition-authorization.json",
+    "external-cognition-foundation.json",
+    "external-cognition-static-console-evidence.json",
 }
 secure_runtime_evaluation_demo_names = {
     "secure-runtime-foundation-operator-evaluation.json",
@@ -519,6 +521,11 @@ operator_console_demo_names = {
     "operator-console-route-manifest.json",
     "operator-console-security-headers.json",
     "operator-console-session-bootstrap.json",
+}
+external_cognition_demo_names = {
+    "external-cognition-authorization.json",
+    "external-cognition-foundation.json",
+    "external-cognition-static-console-evidence.json",
 }
 aion161_allowed_policy_markers = {
     "runtime_private_key",
@@ -687,6 +694,26 @@ for path in sorted((static_dir / "demo-data").glob("*.json")):
         for key in ("loopback_listener_absent", "same_origin_required"):
             if key in payload and payload.get(key) is not True:
                 raise SystemExit(f"{key} must be true in {path}")
+    if path.name in external_cognition_demo_names:
+        for key in ("read_only", "redacted", "redaction_applied", "synthetic"):
+            if payload.get(key) is not True:
+                raise SystemExit(f"{key} must be true in {path}")
+        for key in (
+            "memory_effect",
+            "network_effect",
+            "provider_effect",
+            "runtime_effect",
+            "tool_effect",
+        ):
+            if key in payload and payload.get(key) is not False:
+                raise SystemExit(f"{key} must be false in {path}")
+        if payload.get("program_id") != "AION-ADAPTIVE-INTELLIGENCE-001":
+            raise SystemExit(f"program_id mismatch in {path}")
+        if (
+            payload.get("external_cognition_gateway_state")
+            != "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout"
+        ):
+            raise SystemExit(f"external cognition state mismatch in {path}")
     walk(payload, path)
 
 print("Static console safety JSON checks PASS")

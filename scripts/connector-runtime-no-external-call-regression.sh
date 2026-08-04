@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
+source "$ROOT_DIR/scripts/lib/v02-production-auth-scan-exclusions.sh"
 
 required_docs=(
   docs/connectors/connector-runtime-review-gate.md
@@ -96,6 +97,7 @@ if git diff --name-only --diff-filter=ACMRT HEAD -- services/brain-api/src packa
 				  | rg -v '^services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime\.py$|^services/brain-api/src/aion_brain/capability_runtime/' \
 				  | rg -v '^services/brain-api/src/aion_brain/contracts/operator_console_integration\.py$|^services/brain-api/src/aion_brain/operator_console_runtime/' \
 				  | rg -v '^services/brain-api/src/aion_brain/contracts/v02_release_qualification\.py$|^services/brain-api/src/aion_brain/v02_release_qualification/' \
+				  | aion246_filter_external_cognition_scan_lines \
 			  | rg -n '.'; then
   echo "AION-109 must not change runtime, SDK, CLI, or config source files" >&2
   exit 1
@@ -129,6 +131,7 @@ if git ls-files --others --exclude-standard services/brain-api/src packages/aion
 				  | rg -v '^services/brain-api/src/aion_brain/contracts/sandboxed_capability_runtime\.py$|^services/brain-api/src/aion_brain/capability_runtime/' \
 				  | rg -v '^services/brain-api/src/aion_brain/contracts/operator_console_integration\.py$|^services/brain-api/src/aion_brain/operator_console_runtime/' \
 				  | rg -v '^services/brain-api/src/aion_brain/contracts/v02_release_qualification\.py$|^services/brain-api/src/aion_brain/v02_release_qualification/' \
+				  | aion246_filter_external_cognition_scan_lines \
 			  | rg -n '.'; then
   echo "AION-109 must not add runtime, SDK, or CLI source files" >&2
   exit 1

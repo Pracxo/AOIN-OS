@@ -395,7 +395,8 @@ fi
 while IFS= read -r path; do
   [[ -n "$path" ]] || continue
   if ! is_allowed_change "$path" \
-    && ! aion244_is_scoped_v02_release_candidate_final_evaluation_path "$path"; then
+    && ! aion244_is_scoped_v02_release_candidate_final_evaluation_path "$path" \
+    && ! aion246_is_scoped_external_cognition_gateway_path "$path"; then
     echo "ERROR: AION-231 changed disallowed path: $path" >&2
     exit 1
   fi

@@ -6,6 +6,7 @@ cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/python-selection.sh"
 source "$ROOT_DIR/scripts/lib/immutable-tags.sh"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
+source "$ROOT_DIR/scripts/lib/v02-production-auth-scan-exclusions.sh"
 
 PYTHON_BIN="$(aion_select_brain_python "$ROOT_DIR")"
 aion_verify_brain_python_test_dependencies "$PYTHON_BIN"
@@ -40,6 +41,9 @@ comparison_base() {
 if base="$(comparison_base)"; then
   while IFS= read -r changed; do
     [[ -z "$changed" ]] && continue
+    if aion246_is_scoped_external_cognition_gateway_path "$changed"; then
+      continue
+    fi
     case "$changed" in
       services/brain-api/src/aion_brain/*)
         echo "blocked AION-181 runtime source change: $changed" >&2

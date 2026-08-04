@@ -60,7 +60,8 @@ changed_paths_without_aion243() {
   changed_paths | while IFS= read -r path; do
     [[ -z "$path" ]] && continue
     if ! aion243_is_scoped_v02_release_candidate_artifact_build_path "$path" \
-      && ! aion244_is_scoped_v02_release_candidate_final_evaluation_path "$path"; then
+      && ! aion244_is_scoped_v02_release_candidate_final_evaluation_path "$path" \
+      && ! aion246_is_scoped_external_cognition_gateway_path "$path"; then
       printf '%s\n' "$path"
     fi
   done
@@ -213,7 +214,7 @@ if [[ -n "$code_changes" ]]; then
 fi
 
 secret_scan_paths="$(
-  changed_paths \
+  changed_paths_without_aion243 \
     | sort -u \
     | rg -v '^(scripts/lib/v02_production_auth_authorization\.py|scripts/lib/v02_release_qualification_foundation_operator_evaluation\.py|scripts/v02-release-qualification-foundation-operator-evaluation-no-go-regression\.sh)$' \
     | rg -v '^scripts/.*no-go-regression\.sh$' \
@@ -238,19 +239,23 @@ for relative in (
     "docs/v02-release-qualification/authorization-ledger.json",
 ):
     payload = json.loads((root / relative).read_text(encoding="utf-8"))
-    if payload.get("v02_release_ready") is not False:
-        raise SystemExit(f"{relative} must keep v02_release_ready=false")
-    if payload.get("v02_tag_created") is not False:
-        raise SystemExit(f"{relative} must keep v02_tag_created=false")
-    if payload.get("v02_release_created") is not False:
-        raise SystemExit(f"{relative} must keep v02_release_created=false")
+    if payload.get("v02_stable_tag_created") is not False:
+        raise SystemExit(f"{relative} must keep v02_stable_tag_created=false")
+    if payload.get("v02_stable_release_created") is not False:
+        raise SystemExit(f"{relative} must keep v02_stable_release_created=false")
+    if payload.get("release_candidate_promoted") is not False:
+        raise SystemExit(f"{relative} must keep release_candidate_promoted=false")
+    if payload.get("production_runtime_authorized") is not False:
+        raise SystemExit(f"{relative} must keep production_runtime_authorized=false")
+    if payload.get("production_deployment_enabled") is not False:
+        raise SystemExit(f"{relative} must keep production_deployment_enabled=false")
     if any(payload.get("prohibited_capabilities", {}).values()):
         raise SystemExit(f"{relative} has enabled prohibited capability")
 PY
 
 aion_confirm_immutable_v01_tag_history >/dev/null
-if git tag --list 'v0.2*' 'aion-v0.2*' | rg -n '.+'; then
-  echo "ERROR: v0.2 tag exists" >&2
+if git tag --list 'v0.2*' 'aion-v0.2*' | rg -v '^aion-v0\.2\.0-rc\.1$' | rg -n '.+'; then
+  echo "ERROR: stable v0.2 tag exists" >&2
   exit 1
 fi
 

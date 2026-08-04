@@ -255,6 +255,9 @@ while IFS=$'\t' read -r status path extra; do
     if aion243_is_scoped_v02_release_candidate_artifact_build_path "$changed"; then
       continue
     fi
+    if aion246_is_scoped_external_cognition_gateway_path "$changed"; then
+      continue
+    fi
     if is_prohibited_path "$changed"; then
       echo "ERROR: protected path changed: $changed" >&2
       exit 1
