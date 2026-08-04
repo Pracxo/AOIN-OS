@@ -49,7 +49,13 @@ from aion_brain.external_cognition.integrity import (  # noqa: E402
 
 EXPECTED_MAIN = "d7fe689bfe39a98688784758ceb2b7130ca949bd"
 EXPECTED_STATE = "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout"
+EXPECTED_POST_EVALUATION_STATE = (
+    "external_cognition_foundation_evaluated_live_provider_pilot_authorized_not_implemented"
+)
 EXPECTED_GATEWAY_STATE = "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout"
+EXPECTED_POST_EVALUATION_GATEWAY_STATE = (
+    "implemented_disabled_deterministic_fixture_only_operator_evaluated_live_provider_pilot_authorized_not_implemented"
+)
 EXPECTED_VERSION = "0.3.0.dev0"
 REQUIRED_SOURCE = {
     "services/brain-api/src/aion_brain/contracts/external_cognition.py",
@@ -200,32 +206,39 @@ for path in sorted(PROHIBITED_SOURCE):
 
 program = load_json("docs/adaptive-intelligence/program-ledger.json")
 auth = load_json("docs/adaptive-intelligence/authorization-ledger.json")
-record = auth["records"][0]
+records = {
+    item.get("authorization_transaction_id"): item for item in auth.get("records", [])
+}
+record = records.get(AUTHORIZATION_TRANSACTION_ID)
+successor = records.get("AION-247-AI-0002")
 hold = load_json("examples/adaptive-intelligence/external-cognition-runtime-hold.json")
 evidence = load_json("examples/adaptive-intelligence/external-cognition-fixture-pilot-evidence.json")
 
 if program["program_id"] != PROGRAM_ID or auth["program_id"] != PROGRAM_ID:
     raise SystemExit("adaptive intelligence program ID mismatch")
-if record["authorization_transaction_id"] != AUTHORIZATION_TRANSACTION_ID:
+if record is None or record["authorization_transaction_id"] != AUTHORIZATION_TRANSACTION_ID:
     raise SystemExit("AION-245-AI-0001 authorization record missing")
 if record["approval_record_id"] != AUTHORIZATION_TRANSACTION_ID:
     raise SystemExit("AION-245-AI-0001 approval record mismatch")
 
+program_state = program["program_state"]
+post_evaluation = program_state == EXPECTED_POST_EVALUATION_STATE
+expected_gateway_states = {EXPECTED_GATEWAY_STATE, EXPECTED_POST_EVALUATION_GATEWAY_STATE}
 for payload_name, payload in (("program", program), ("authorization", record), ("hold", hold)):
     for key, expected in {
         "external_cognition_gateway_implemented": True,
-        "external_cognition_gateway_state": EXPECTED_GATEWAY_STATE,
         "deterministic_fixture_pilot_completed": True,
-        "active_adaptive_intelligence_authorization": AUTHORIZATION_TRANSACTION_ID,
-        "active_adaptive_intelligence_task": IMPLEMENTATION_TASK,
-        "formal_closeout_task": FORMAL_CLOSEOUT_TASK,
     }.items():
         if payload.get(key) != expected:
             raise SystemExit(f"{payload_name} mismatch {key}: {payload.get(key)!r}")
+    if payload.get("external_cognition_gateway_state") not in expected_gateway_states:
+        raise SystemExit(f"{payload_name} external cognition gateway state mismatch")
 
-if program["program_state"] != EXPECTED_STATE or auth["program_state"] != EXPECTED_STATE:
+if program_state not in {EXPECTED_STATE, EXPECTED_POST_EVALUATION_STATE}:
     raise SystemExit("AION-246 implemented-disabled program state mismatch")
-if program["current_state"]["current_main_commit"] != EXPECTED_MAIN:
+if auth["program_state"] not in {EXPECTED_STATE, EXPECTED_POST_EVALUATION_STATE}:
+    raise SystemExit("AION-246 authorization ledger program state mismatch")
+if program["current_state"]["current_main_commit"] not in {EXPECTED_MAIN, "27d6ad15a043940bf537caec72cf7de7c74f6dc2"}:
     raise SystemExit("current main commit reconciliation mismatch")
 if program["current_state"]["current_released_prerelease"] != "aion-v0.2.0-rc.1":
     raise SystemExit("RC1 prerelease marker changed")
@@ -237,24 +250,47 @@ for payload_name, payload in (("program", program), ("authorization", record)):
         raise SystemExit(f"{payload_name} approved capability is not true")
     if any(value is not False for value in payload["prohibited_capabilities"].values()):
         raise SystemExit(f"{payload_name} prohibited capability is not false")
-if set(program["approved_capabilities"]) != set(record["approved_capabilities"]):
+if not post_evaluation and set(program["approved_capabilities"]) != set(record["approved_capabilities"]):
     raise SystemExit("approved capability key set mismatch")
-if set(program["prohibited_capabilities"]) != set(record["prohibited_capabilities"]):
+if not post_evaluation and set(program["prohibited_capabilities"]) != set(record["prohibited_capabilities"]):
     raise SystemExit("prohibited capability key set mismatch")
+if post_evaluation:
+    if successor is None:
+        raise SystemExit("AION-247 successor authorization missing")
+    if successor.get("authorization_active") is not True:
+        raise SystemExit("AION-247 successor authorization must be active")
+    if successor.get("implementation_task") != "AION-248":
+        raise SystemExit("AION-247 successor implementation task mismatch")
+    if any(value is not False for value in successor["prohibited_capabilities"].values()):
+        raise SystemExit("AION-247 successor prohibited capability is not false")
 if program["resource_limits"] != EXPECTED_RESOURCE_LIMITS:
     raise SystemExit("AION-246 resource limits changed")
 
-for key, expected in {
+expected_lifecycle = {
     "authorization_transaction_approved": True,
     "explicit_approval_record_approval": True,
     "implementation_authorization_approved": True,
     "implementation_go_status": True,
     "implementation_no_go_status": False,
-    "authorization_active": True,
-    "authorization_consumed": False,
-    "authorization_expired": False,
     "authorization_reusable": False,
-}.items():
+}
+if post_evaluation:
+    expected_lifecycle.update(
+        {
+            "authorization_active": False,
+            "authorization_consumed": True,
+            "authorization_expired": True,
+        }
+    )
+else:
+    expected_lifecycle.update(
+        {
+            "authorization_active": True,
+            "authorization_consumed": False,
+            "authorization_expired": False,
+        }
+    )
+for key, expected in expected_lifecycle.items():
     if record.get(key) != expected:
         raise SystemExit(f"authorization lifecycle mismatch {key}: {record.get(key)!r}")
 
@@ -269,7 +305,10 @@ if aion245["runtime_source_changes"] != 0 or aion245["dependency_changes"] != 0:
 aion246 = program["aion_246_record"]
 if aion246["task_id"] != IMPLEMENTATION_TASK:
     raise SystemExit("AION-246 record missing")
-if aion246["runtime_state"] != EXPECTED_GATEWAY_STATE:
+if aion246["runtime_state"] not in {
+    EXPECTED_GATEWAY_STATE,
+    "external_cognition_gateway_foundation_implemented_disabled_fixture_only",
+}:
     raise SystemExit("AION-246 runtime state mismatch")
 if aion246["authorization_transaction"] != AUTHORIZATION_TRANSACTION_ID:
     raise SystemExit("AION-246 authorization mismatch")

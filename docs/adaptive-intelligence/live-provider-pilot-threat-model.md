@@ -1,0 +1,33 @@
+# AION-248 Live-Provider Pilot Threat Model
+
+- API-key leakage
+- authorization-header logging
+- credential-file substitution
+- environment-variable disclosure
+- endpoint substitution
+- DNS rebinding
+- TLS downgrade
+- certificate-verification bypass
+- redirect to another host
+- proxy interception
+- oversized provider response
+- request replay causing duplicate cost
+- changed replay under an existing request ID
+- model-ID substitution
+- tool injection
+- web-search activation
+- file-upload activation
+- persistent conversation-state activation
+- store=true drift
+- background-mode drift
+- response-body persistence
+- prompt-body persistence
+- hidden-reasoning retention
+- structured-output schema bypass
+- provider output treated as fact
+- provider output treated as execution authority
+- memory-write escalation
+- real-tool escalation
+- cost-budget bypass
+- retry amplification
+- incomplete cleanup

@@ -225,3 +225,4 @@ closure decision in ADR 0072.
 - [ADR 0208: Final v0.2.0-rc.1 Candidate Evaluation and GitHub Prerelease Publication](0208-final-v02-rc1-candidate-evaluation-and-github-prerelease-publication.md)
 - [ADR 0209: Post-RC1 v0.3 Development Baseline and Adaptive Intelligence Programme Authorization](0209-post-rc1-v03-development-baseline-and-adaptive-intelligence-programme-authorization.md)
 - [0210: Controlled Provider-Neutral External-Cognition Gateway Foundation](0210-controlled-provider-neutral-external-cognition-gateway-foundation.md) - Defines the AION-246 deterministic fixture-only external cognition gateway foundation.
+- [0211: External-Cognition Foundation Evaluation and Single OpenAI Responses API Live-Provider Pilot Authorization](0211-external-cognition-foundation-evaluation-and-single-openai-responses-api-live-provider-pilot-authorization.md) - Evaluates AION-246 and authorizes one future bounded OpenAI Responses API pilot without implementing it.

@@ -92,11 +92,24 @@ for relative in (
             raise SystemExit(f"{relative} AION-244 publication authorization must be active")
         if publication_auth.get("authorization_consumed") is not False:
             raise SystemExit(f"{relative} AION-244 publication authorization must be unconsumed")
+    elif active_authorization is None and payload.get(
+        "active_v02_release_qualification_authorization_count"
+    ) == 0:
+        if payload.get("program_state") != "v02_release_qualification_program_complete_rc1_prerelease_published":
+            raise SystemExit(f"{relative} complete RC1 publication state mismatch")
+        if payload.get("formal_closeout_task") is not None:
+            raise SystemExit(f"{relative} complete RC1 publication must not retain an active closeout task")
+        if payload.get("release_candidate_published") is not True and payload.get(
+            "v02_prerelease_created"
+        ) is not True:
+            raise SystemExit(f"{relative} RC1 prerelease publication must be recorded")
+        if payload.get("v02_stable_release_created") is not False:
+            raise SystemExit(f"{relative} stable v0.2 release must remain absent")
     else:
         raise SystemExit(f"{relative} active authorization mismatch")
-    if payload.get("formal_closeout_task") != c.FORMAL_CLOSEOUT_TASK:
+    if active_authorization is not None and payload.get("formal_closeout_task") != c.FORMAL_CLOSEOUT_TASK:
         raise SystemExit(f"{relative} closeout task mismatch")
-    if payload.get("v02_release_ready") is not False:
+    if active_authorization is not None and payload.get("v02_release_ready") is not False:
         raise SystemExit(f"{relative} must keep v02_release_ready=false")
 PY
 

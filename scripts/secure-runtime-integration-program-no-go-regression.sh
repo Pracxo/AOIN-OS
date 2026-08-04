@@ -41,6 +41,19 @@ else
   AION246_IMPLEMENTATION_STATE_ACTIVE=0
 fi
 
+if [[ -f docs/adaptive-intelligence/program-ledger.json ]] && \
+  grep -q '"program_state": "external_cognition_foundation_evaluated_live_provider_pilot_authorized_not_implemented"' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"active_adaptive_intelligence_authorization": "AION-247-AI-0002"' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"active_adaptive_intelligence_task": "AION-248"' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"formal_closeout_task": "AION-249"' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"external_cognition_gateway_operator_evaluation_passed": true' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"live_provider_pilot_authorized": true' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"live_provider_pilot_implemented": false' docs/adaptive-intelligence/program-ledger.json; then
+  AION247_EVALUATION_STATE_ACTIVE=1
+else
+  AION247_EVALUATION_STATE_ACTIVE=0
+fi
+
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
 }
@@ -415,14 +428,28 @@ PY
 }
 
 is_aion246_external_cognition_path() {
-  [[ "$AION246_IMPLEMENTATION_STATE_ACTIVE" == "1" ]] || return 1
+  if [[ "$AION246_IMPLEMENTATION_STATE_ACTIVE" != "1" && "$AION247_EVALUATION_STATE_ACTIVE" != "1" ]]; then
+    return 1
+  fi
   case "$1" in
+    docs/adaptive-intelligence/aion-247-checklist.md|\
+    docs/adaptive-intelligence/external-cognition-foundation-operator-evaluation.md|\
+    docs/adaptive-intelligence/live-provider-pilot-architecture.md|\
+    docs/adaptive-intelligence/live-provider-pilot-threat-model.md|\
     docs/release/v03-external-cognition-*|\
     docs/adr/0210-controlled-provider-neutral-external-cognition-gateway-foundation.md|\
+    docs/adr/0211-external-cognition-foundation-evaluation-and-single-openai-responses-api-live-provider-pilot-authorization.md|\
+    examples/adaptive-intelligence/external-cognition-foundation-operator-evaluation-report.json|\
+    examples/adaptive-intelligence/live-provider-pilot-authorization.json|\
+    examples/adaptive-intelligence/live-provider-pilot-runtime-hold.json|\
     operator-console-static/demo-data/external-cognition-*.json|\
+    operator-console-static/demo-data/live-provider-pilot-authorization.json|\
     scripts/external-cognition-*.sh|\
     scripts/external-cognition-fixture-local-run.py|\
+    scripts/lib/external_cognition_foundation_operator_evaluation.py|\
+    scripts/live-provider-pilot-*.sh|\
     services/brain-api/tests/test_external_cognition_foundation_aion246.py|\
+    services/brain-api/tests/test_external_cognition_operator_evaluation_aion247.py|\
     services/brain-api/src/aion_brain/contracts/external_cognition.py|\
     services/brain-api/src/aion_brain/external_cognition/__init__.py|\
     services/brain-api/src/aion_brain/external_cognition/authorization.py|\

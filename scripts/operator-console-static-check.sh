@@ -422,7 +422,9 @@ for path in sorted(demo_dir.glob("*.json")):
         "adaptive-intelligence-runtime-hold.json",
         "external-cognition-authorization.json",
         "external-cognition-foundation.json",
+        "external-cognition-operator-evaluation.json",
         "external-cognition-static-console-evidence.json",
+        "live-provider-pilot-authorization.json",
     }:
         if payload.get("program_id") != "AION-ADAPTIVE-INTELLIGENCE-001":
             raise SystemExit(f"adaptive intelligence program id mismatch: {path}")
@@ -438,10 +440,13 @@ for path in sorted(demo_dir.glob("*.json")):
         ):
             if key in payload and payload.get(key) is not False:
                 raise SystemExit(f"adaptive intelligence evidence flag must be false: {key}: {path}")
-        if path.name.startswith("external-cognition-") and (
-            payload.get("external_cognition_gateway_state")
-            != "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout"
-        ):
+        if path.name.startswith("external-cognition-") and payload.get(
+            "external_cognition_gateway_state"
+        ) not in {
+            "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout",
+            "implemented_disabled_deterministic_fixture_only_operator_evaluated_live_provider_pilot_authorized_not_implemented",
+            None,
+        }:
             raise SystemExit(f"external cognition state mismatch: {path}")
         continue
     if path.name.startswith("secure-runtime-integration-"):
@@ -1520,6 +1525,8 @@ for path in sorted(demo_dir.glob("*.json")):
         "adaptive-intelligence-program.json",
         "adaptive-intelligence-runtime-hold.json",
         "external-cognition-authorization.json",
+        "external-cognition-operator-evaluation.json",
+        "live-provider-pilot-authorization.json",
     }
     blocked = (
         "raw_prompt",
@@ -1535,7 +1542,7 @@ for path in sorted(demo_dir.glob("*.json")):
         "xoxb-",
     )
     for value in blocked:
-        if value == "authorization" and path.name in allowed_authorization_demo_names:
+        if value in {"api_key", "authorization", "private_key"} and path.name in allowed_authorization_demo_names:
             continue
         if value == "sk-" and not re.search(r"\bsk-[a-z0-9_-]{12,}", serialized):
             continue

@@ -42,19 +42,41 @@ hold = json.loads((ROOT / "examples/adaptive-intelligence/external-cognition-run
 
 required = {
     "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
-    "program_state": "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout",
     "adaptive_intelligence_program_authorized": True,
     "adaptive_intelligence_program_implemented": False,
     "external_cognition_gateway_implemented": True,
-    "external_cognition_gateway_state": "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout",
-    "active_adaptive_intelligence_authorization": "AION-245-AI-0001",
-    "active_adaptive_intelligence_task": "AION-246",
-    "formal_closeout_task": "AION-247",
     "production_runtime_authorized": False,
+}
+program_states = {
+    "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout",
+    "external_cognition_foundation_evaluated_live_provider_pilot_authorized_not_implemented",
+}
+gateway_states = {
+    "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout",
+    "implemented_disabled_deterministic_fixture_only_operator_evaluated_live_provider_pilot_authorized_not_implemented",
 }
 for key, value in required.items():
     if program.get(key) != value and hold.get(key) != value:
         raise SystemExit(f"external cognition runtime hold mismatch {key}")
+if program.get("program_state") not in program_states:
+    raise SystemExit("external cognition runtime hold program state mismatch")
+if program.get("external_cognition_gateway_state") not in gateway_states:
+    raise SystemExit("external cognition runtime hold gateway state mismatch")
+if program.get("program_state") == "external_cognition_foundation_evaluated_live_provider_pilot_authorized_not_implemented":
+    lineage = {
+        "active_adaptive_intelligence_authorization": "AION-247-AI-0002",
+        "active_adaptive_intelligence_task": "AION-248",
+        "formal_closeout_task": "AION-249",
+    }
+else:
+    lineage = {
+        "active_adaptive_intelligence_authorization": "AION-245-AI-0001",
+        "active_adaptive_intelligence_task": "AION-246",
+        "formal_closeout_task": "AION-247",
+    }
+for key, value in lineage.items():
+    if program.get(key) != value and hold.get(key) != value:
+        raise SystemExit(f"external cognition runtime hold lineage mismatch {key}")
 
 zero_keys = {
     "actual_provider_calls",

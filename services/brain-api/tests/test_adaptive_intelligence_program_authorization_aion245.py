@@ -10,6 +10,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 
 PROGRAM_ID = "AION-ADAPTIVE-INTELLIGENCE-001"
 AUTH_ID = "AION-245-AI-0001"
+SUCCESSOR_AUTH_ID = "AION-247-AI-0002"
 SCOPE = (
     "controlled-provider-neutral-external-cognition-contracts-provider-manifests-model-manifests-"
     "request-response-envelopes-routing-budgets-structured-output-redaction-trust-provenance-"
@@ -234,16 +235,16 @@ def test_program_charter_parent_lineage_and_roadmap_are_exact() -> None:
 
     assert program["program_id"] == PROGRAM_ID
     assert program["program_name"] == "AION Adaptive Intelligence Programme"
-    assert (
-        program["program_state"]
-        == "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout"
-    )
+    assert program["program_state"] in {
+        "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout",
+        "external_cognition_foundation_evaluated_live_provider_pilot_authorized_not_implemented",
+    }
     assert program["adaptive_intelligence_program_implemented"] is False
     assert program["external_cognition_gateway_implemented"] is True
-    assert (
-        program["external_cognition_gateway_state"]
-        == "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout"
-    )
+    assert program["external_cognition_gateway_state"] in {
+        "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout",
+        "implemented_disabled_deterministic_fixture_only_operator_evaluated_live_provider_pilot_authorized_not_implemented",
+    }
     assert program["parent_program_id"] == "AION-V02-RELEASE-QUALIFICATION-001"
     assert program["parent_final_task"] == "AION-244"
     assert program["parent_final_main_commit"] == "2a5db0760178698d783abcc63e53f08ff3583571"
@@ -256,51 +257,90 @@ def test_program_charter_parent_lineage_and_roadmap_are_exact() -> None:
     assert program["parent_release_asset_count"] == 24
     assert program["parent_release_asset_inventory_fingerprint"] == RC1_ASSET_FP
     assert [item["task_id"] for item in program["roadmap"]] == ROADMAP
-    assert (
-        program["roadmap"][1]["state"]
-        == "implemented_fixture_pilot_complete_pending_AION-247_closeout"
-    )
-    assert (
-        program["roadmap"][2]["state"]
-        == "active_foundation_evaluation_and_live_provider_pilot_authorization_decision"
-    )
-    assert {item["state"] for item in program["roadmap"][3:]} == {"planned_unauthorized"}
+    if program["program_state"] == (
+        "external_cognition_foundation_evaluated_live_provider_pilot_authorized_not_implemented"
+    ):
+        assert program["roadmap"][1]["state"] == "evaluated_complete"
+        assert program["roadmap"][2]["state"] == (
+            "evaluation_complete_live_provider_pilot_authorized"
+        )
+        assert program["roadmap"][3]["state"] == "authorized_not_implemented"
+        assert program["roadmap"][4]["state"] == (
+            "planned_live_provider_pilot_evaluation_and_research_authorization_decision"
+        )
+        assert {item["state"] for item in program["roadmap"][5:]} == {"planned_unauthorized"}
+    else:
+        assert (
+            program["roadmap"][1]["state"]
+            == "implemented_fixture_pilot_complete_pending_AION-247_closeout"
+        )
+        assert (
+            program["roadmap"][2]["state"]
+            == "active_foundation_evaluation_and_live_provider_pilot_authorization_decision"
+        )
+        assert {item["state"] for item in program["roadmap"][3:]} == {"planned_unauthorized"}
 
 
 def test_authorization_lifecycle_and_scope_authorize_aion246_only() -> None:
     ledger = load_json("docs/adaptive-intelligence/authorization-ledger.json")
-    record = ledger["records"][0]
+    records = {record["authorization_transaction_id"]: record for record in ledger["records"]}
+    record = records[AUTH_ID]
 
     assert ledger["active_adaptive_intelligence_authorization_count"] == 1
-    assert ledger["active_adaptive_intelligence_authorization"] == AUTH_ID
-    assert ledger["active_adaptive_intelligence_task"] == "AION-246"
     assert record["authorization_transaction_id"] == AUTH_ID
     assert record["approval_record_id"] == AUTH_ID
     assert record["implementation_task"] == "AION-246"
     assert record["formal_closeout_task"] == "AION-247"
     assert record["final_planned_task"] == "AION-260"
     assert record["authorization_scope"] == SCOPE
-    assert record["authorization_active"] is True
-    assert record["authorization_consumed"] is False
-    assert record["authorization_expired"] is False
     assert record["authorization_reusable"] is False
+    if ledger["active_adaptive_intelligence_authorization"] == SUCCESSOR_AUTH_ID:
+        assert ledger["active_adaptive_intelligence_task"] == "AION-248"
+        assert record["authorization_active"] is False
+        assert record["authorization_consumed"] is True
+        assert record["authorization_expired"] is True
+        successor = records[SUCCESSOR_AUTH_ID]
+        assert successor["authorization_active"] is True
+        assert successor["authorization_consumed"] is False
+        assert successor["authorization_expired"] is False
+        assert successor["authorization_reusable"] is False
+        assert successor["implementation_task"] == "AION-248"
+        assert successor["formal_closeout_task"] == "AION-249"
+        assert successor["provider_id"] == "openai"
+        assert successor["provider_api_family"] == "responses"
+        assert successor["allowed_endpoint_host"] == "api.openai.com"
+        assert successor["allowed_endpoint_path"] == "/v1/responses"
+    else:
+        assert ledger["active_adaptive_intelligence_authorization"] == AUTH_ID
+        assert ledger["active_adaptive_intelligence_task"] == "AION-246"
+        assert record["authorization_active"] is True
+        assert record["authorization_consumed"] is False
+        assert record["authorization_expired"] is False
 
 
 def test_approved_capabilities_prohibited_capabilities_and_resource_limits_are_exact() -> None:
     program = load_json("docs/adaptive-intelligence/program-ledger.json")
-    record = load_json("docs/adaptive-intelligence/authorization-ledger.json")["records"][0]
+    ledger = load_json("docs/adaptive-intelligence/authorization-ledger.json")
+    records = {record["authorization_transaction_id"]: record for record in ledger["records"]}
+    record = records[AUTH_ID]
 
-    assert set(program["approved_capabilities"]) == APPROVED
+    assert APPROVED <= set(program["approved_capabilities"])
     assert set(record["approved_capabilities"]) == APPROVED
-    assert all(program["approved_capabilities"][key] is True for key in APPROVED)
+    assert all(value is True for value in program["approved_capabilities"].values())
     assert all(record["approved_capabilities"][key] is True for key in APPROVED)
 
-    assert set(program["prohibited_capabilities"]) == PROHIBITED
+    assert PROHIBITED <= set(program["prohibited_capabilities"])
     assert set(record["prohibited_capabilities"]) == PROHIBITED
-    assert all(program["prohibited_capabilities"][key] is False for key in PROHIBITED)
+    assert all(value is False for value in program["prohibited_capabilities"].values())
     assert all(record["prohibited_capabilities"][key] is False for key in PROHIBITED)
 
     assert program["resource_limits"] == RESOURCE_LIMITS
+    if ledger["active_adaptive_intelligence_authorization"] == SUCCESSOR_AUTH_ID:
+        successor = records[SUCCESSOR_AUTH_ID]
+        assert successor["approved_capabilities"]["openai_responses_api_adapter_approved"] is True
+        assert all(value is False for value in successor["prohibited_capabilities"].values())
+        assert successor["resource_limits"]["maximum_live_provider_calls"] == 6
+        assert successor["resource_limits"]["maximum_provider_tool_calls"] == 0
 
 
 def test_current_status_blocks_are_reconciled() -> None:

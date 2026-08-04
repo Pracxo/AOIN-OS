@@ -1,0 +1,1058 @@
+{
+  "actual_model_provider_calls": 0,
+  "audit_integrity": {
+    "audit_evidence_available": true,
+    "integrity_reports_created": 1,
+    "observability_snapshots_created": 1
+  },
+  "authorization_headers_created": 0,
+  "authorization_lineage": {
+    "active_authorization_count_at_evaluation": 1,
+    "closeout_task": "AION-247",
+    "current_authorization": "AION-245-AI-0001",
+    "implementation_task": "AION-246",
+    "next_closeout_task": "AION-249",
+    "next_implementation_task": "AION-248",
+    "successor_authorization_on_pass": "AION-247-AI-0002"
+  },
+  "background_cycles": 0,
+  "belief_mutations": 0,
+  "budget_integrity": {
+    "context_budget_rejections": 1,
+    "cost_budget_rejections": 1,
+    "latency_budget_rejections": 1,
+    "output_budget_rejections": 1
+  },
+  "closeout_task": "AION-247",
+  "component_lineage": {
+    "existing_model_gateway_contract_fingerprint": "5de8c1b8706249f4e62e2c593c858012c7966df70adf37b7b89f6192de4c7c8a",
+    "network_effect": false,
+    "read_only": true,
+    "secure_runtime_contract_fingerprint": "5de8c1b8706249f4e62e2c593c858012c7966df70adf37b7b89f6192de4c7c8a"
+  },
+  "corrective_cycle_limit": 3,
+  "corrective_cycles": 0,
+  "corrective_prs": [],
+  "decision": "CONTROLLED_EXTERNAL_COGNITION_GATEWAY_FOUNDATION_OPERATOR_EVALUATION_PASS_RECOMMEND_SINGLE_OPENAI_RESPONSES_API_SYNTHETIC_LIVE_PROVIDER_PILOT_AUTHORIZATION",
+  "dns_resolutions": 0,
+  "evaluation_base_commit": "24cbdff50b1cd8cd59660f6ac8e713374b165eb5",
+  "evaluation_id": "AION-ECGPE-001",
+  "evaluation_passed": true,
+  "evaluation_runtime_ms": 361,
+  "evaluation_type": "controlled_external_cognition_gateway_foundation_operator_evaluation",
+  "external_connector_calls": 0,
+  "external_network_egress_calls": 0,
+  "external_tool_executions": 0,
+  "git_operations": 0,
+  "hard_gate_count": 32,
+  "hard_gate_results": [
+    {
+      "gate_id": "aion_246_delivery_and_ci_integrity",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "aion_246_delivery_and_ci_integrity",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "adaptive_intelligence_authorization_lineage",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "adaptive_intelligence_authorization_lineage",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "exact_source_and_repository_boundary",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "exact_source_and_repository_boundary",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "secure_runtime_component_binding_integrity",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "secure_runtime_component_binding_integrity",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "existing_model_gateway_component_binding_integrity",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "existing_model_gateway_component_binding_integrity",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "external_cognition_contract_immutability",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "external_cognition_contract_immutability",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "provider_manifest_integrity",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "provider_manifest_integrity",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "model_manifest_and_capability_integrity",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "model_manifest_and_capability_integrity",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "message_projection_and_raw_content_non_retention",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "message_projection_and_raw_content_non_retention",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "request_envelope_integrity",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "request_envelope_integrity",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "response_envelope_integrity",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "response_envelope_integrity",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "restricted_structured_output_schema_integrity",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "restricted_structured_output_schema_integrity",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "structured_output_validation_and_untrusted_classification",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "structured_output_validation_and_untrusted_classification",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "context_budget_fail_closed",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "context_budget_fail_closed",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "output_budget_fail_closed",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "output_budget_fail_closed",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "cost_budget_fail_closed",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "cost_budget_fail_closed",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "latency_budget_fail_closed",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "latency_budget_fail_closed",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "deterministic_capability_routing",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "deterministic_capability_routing",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "existing_model_gateway_route_compatibility",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "existing_model_gateway_route_compatibility",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "retry_and_fallback_boundedness",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "retry_and_fallback_boundedness",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "circuit_breaker_state_integrity",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "circuit_breaker_state_integrity",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "trust_and_uncertainty_integrity",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "trust_and_uncertainty_integrity",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "provider_error_normalization_integrity",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "provider_error_normalization_integrity",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "recursive_redaction_and_protected_material_exclusion",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "recursive_redaction_and_protected_material_exclusion",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "deterministic_fixture_provider_integrity",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "deterministic_fixture_provider_integrity",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "exact_replay_and_changed_replay_integrity",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "exact_replay_and_changed_replay_integrity",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "audit_chain_and_observability_integrity",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "audit_chain_and_observability_integrity",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "operator_review_integrity",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "operator_review_integrity",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "fixture_pilot_schema_counters_and_report_fingerprint",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "fixture_pilot_schema_counters_and_report_fingerprint",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "zero_operational_effects_and_release_boundary",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "zero_operational_effects_and_release_boundary",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "single_openai_responses_api_pilot_architecture_safety",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "single_openai_responses_api_pilot_architecture_safety",
+      "summary": "PASS"
+    },
+    {
+      "gate_id": "live_provider_pilot_authorization_readiness",
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "live_provider_pilot_authorization_readiness",
+      "summary": "PASS"
+    }
+  ],
+  "hidden_reasoning_records": 0,
+  "implementation_commit": "dd1f7b34cb2a25dfd409cf72667f073af9e8e965",
+  "implementation_feature_commits": [
+    "dd1f7b34cb2a25dfd409cf72667f073af9e8e965",
+    "afe4fc41d6737512287ad0bb00a0c2174dab8e9e",
+    "13c9fdf283a2f0c499497fd3aefb3ae70adc5f54",
+    "32f1eb57a48214e8280203d513277d47759c44bd",
+    "8d885ae9dbf32e6c79f1db1b0aed35374837090a"
+  ],
+  "implementation_main_commit": "27d6ad15a043940bf537caec72cf7de7c74f6dc2",
+  "implementation_merge_commits": [
+    "27d6ad15a043940bf537caec72cf7de7c74f6dc2"
+  ],
+  "implementation_prs": [
+    166
+  ],
+  "implementation_task": "AION-246",
+  "live_pilot_architecture_decision": {
+    "allowed_endpoint_host": "api.openai.com",
+    "allowed_endpoint_path": "/v1/responses",
+    "allowed_endpoint_scheme": "https",
+    "allowed_http_method": "POST",
+    "approved_capabilities": {
+      "audit_evidence_approved": true,
+      "background_false_request_approved": true,
+      "bounded_provider_usage_approved": true,
+      "changed_replay_rejection_approved": true,
+      "complete_transient_cleanup_approved": true,
+      "documentation_and_static_evidence_approved": true,
+      "environment_only_credential_read_approved": true,
+      "exact_endpoint_policy_approved": true,
+      "existing_model_gateway_component_binding_approved": true,
+      "external_cognition_component_binding_approved": true,
+      "file_free_request_approved": true,
+      "live_provider_pilot_authorization_envelope_approved": true,
+      "live_provider_pilot_contract_approved": true,
+      "live_response_fingerprint_approved": true,
+      "live_response_projection_approved": true,
+      "live_response_redaction_approved": true,
+      "live_uncertainty_projection_approved": true,
+      "live_usage_evidence_approved": true,
+      "local_exact_replay_approved": true,
+      "no_redirect_transport_approved": true,
+      "observability_evidence_approved": true,
+      "openai_responses_api_adapter_approved": true,
+      "operator_model_selection_record_approved": true,
+      "operator_review_record_approved": true,
+      "proxy_bypass_policy_approved": true,
+      "single_model_manifest_approved": true,
+      "single_provider_manifest_approved": true,
+      "store_false_request_approved": true,
+      "stream_false_request_approved": true,
+      "synthetic_text_request_approved": true,
+      "tls_certificate_verification_approved": true,
+      "tool_free_request_approved": true,
+      "transient_authorization_header_approved": true,
+      "untrusted_live_response_classification_approved": true
+    },
+    "authorization_transaction_id": "AION-247-AI-0002",
+    "candidate_id": "single-openai-responses-api-synthetic-live-provider-pilot",
+    "credential_source": "OPENAI_API_KEY_process_environment_only",
+    "formal_closeout_task": "AION-249",
+    "future_source_scope": [
+      "services/brain-api/src/aion_brain/contracts/live_provider_pilot.py",
+      "services/brain-api/src/aion_brain/live_provider_pilot/__init__.py",
+      "services/brain-api/src/aion_brain/live_provider_pilot/authorization.py",
+      "services/brain-api/src/aion_brain/live_provider_pilot/component_binding.py",
+      "services/brain-api/src/aion_brain/live_provider_pilot/provider_selection.py",
+      "services/brain-api/src/aion_brain/live_provider_pilot/operator_approval.py",
+      "services/brain-api/src/aion_brain/live_provider_pilot/credential_boundary.py",
+      "services/brain-api/src/aion_brain/live_provider_pilot/endpoint_policy.py",
+      "services/brain-api/src/aion_brain/live_provider_pilot/request_projection.py",
+      "services/brain-api/src/aion_brain/live_provider_pilot/response_projection.py",
+      "services/brain-api/src/aion_brain/live_provider_pilot/usage_budget.py",
+      "services/brain-api/src/aion_brain/live_provider_pilot/retention_policy.py",
+      "services/brain-api/src/aion_brain/live_provider_pilot/transport.py",
+      "services/brain-api/src/aion_brain/live_provider_pilot/openai_responses_adapter.py",
+      "services/brain-api/src/aion_brain/live_provider_pilot/trust.py",
+      "services/brain-api/src/aion_brain/live_provider_pilot/redaction.py",
+      "services/brain-api/src/aion_brain/live_provider_pilot/replay.py",
+      "services/brain-api/src/aion_brain/live_provider_pilot/audit.py",
+      "services/brain-api/src/aion_brain/live_provider_pilot/observability.py",
+      "services/brain-api/src/aion_brain/live_provider_pilot/integrity.py",
+      "services/brain-api/src/aion_brain/live_provider_pilot/evidence.py",
+      "scripts/live-provider-pilot-local-run.py"
+    ],
+    "future_uninstalled_runner": "scripts/live-provider-pilot-local-run.py",
+    "implementation_task": "AION-248",
+    "maximum_selected_models": 1,
+    "model_family_boundary": "gpt-5.6",
+    "model_selection_policy": "operator_supplied_single_model_bound_at_session_start",
+    "pilot_id": "AION-248-single-openai-responses-api-synthetic-live-provider-pilot",
+    "prohibited_capabilities": {
+      "actual_belief_mutation_enabled": false,
+      "adaptive_routing_runtime_enabled": false,
+      "audio_input_enabled": false,
+      "automatic_merge_enabled": false,
+      "autonomous_background_loop_enabled": false,
+      "background_mode_enabled": false,
+      "conversation_state_persistence_enabled": false,
+      "credential_cli_argument_enabled": false,
+      "credential_file_input_enabled": false,
+      "credential_fingerprinting_enabled": false,
+      "credential_logging_enabled": false,
+      "credential_persistence_enabled": false,
+      "engagement_learning_enabled": false,
+      "external_connector_execution_enabled": false,
+      "external_tool_execution_enabled": false,
+      "file_upload_enabled": false,
+      "hidden_reasoning_capture_enabled": false,
+      "image_input_enabled": false,
+      "model_output_tool_call_enabled": false,
+      "model_output_triggered_execution_enabled": false,
+      "model_weight_training_enabled": false,
+      "multiple_live_models_enabled": false,
+      "multiple_live_providers_enabled": false,
+      "persistent_memory_write_enabled": false,
+      "previous_response_id_enabled": false,
+      "production_deployment_enabled": false,
+      "production_runtime_authorized": false,
+      "provider_builtin_tools_enabled": false,
+      "provider_code_interpreter_enabled": false,
+      "provider_computer_use_enabled": false,
+      "provider_custom_tools_enabled": false,
+      "provider_endpoint_discovery_enabled": false,
+      "provider_file_search_enabled": false,
+      "provider_function_calling_enabled": false,
+      "provider_model_listing_call_enabled": false,
+      "provider_remote_mcp_enabled": false,
+      "provider_token_persistence_enabled": false,
+      "provider_web_search_enabled": false,
+      "proxy_use_enabled": false,
+      "raw_authorization_header_persistence_enabled": false,
+      "raw_prompt_persistence_enabled": false,
+      "raw_response_persistence_enabled": false,
+      "redirect_following_enabled": false,
+      "runtime_git_mutation_enabled": false,
+      "runtime_pull_request_creation_enabled": false,
+      "scheduled_provider_calls_enabled": false,
+      "source_rewrite_enabled": false,
+      "store_true_enabled": false,
+      "streaming_enabled": false,
+      "verified_knowledge_promotion_enabled": false
+    },
+    "provider_api_family": "responses",
+    "provider_id": "openai",
+    "request_policy": {
+      "background": false,
+      "files": false,
+      "previous_response_id": false,
+      "store": false,
+      "stream": false,
+      "synthetic_text_only": true,
+      "tools": false
+    },
+    "resource_limits": {
+      "maximum_audio_inputs": 0,
+      "maximum_audit_records": 500,
+      "maximum_authorization_headers_created": 6,
+      "maximum_automatic_retries": 0,
+      "maximum_background_cycles": 0,
+      "maximum_background_requests": 0,
+      "maximum_belief_mutations": 0,
+      "maximum_concurrency": 1,
+      "maximum_dns_resolutions": 8,
+      "maximum_endpoint_hosts": 1,
+      "maximum_endpoint_paths": 1,
+      "maximum_evidence_bytes": 20971520,
+      "maximum_evidence_records": 2000,
+      "maximum_external_connector_calls": 0,
+      "maximum_external_tool_executions": 0,
+      "maximum_file_uploads": 0,
+      "maximum_git_operations": 0,
+      "maximum_hidden_reasoning_records": 0,
+      "maximum_http_requests": 6,
+      "maximum_image_inputs": 0,
+      "maximum_live_models": 1,
+      "maximum_live_provider_calls": 6,
+      "maximum_live_provider_sessions": 1,
+      "maximum_live_providers": 1,
+      "maximum_memory_writes": 0,
+      "maximum_messages_per_request": 16,
+      "maximum_model_weight_changes": 0,
+      "maximum_observability_records": 500,
+      "maximum_operator_review_items": 12,
+      "maximum_previous_response_references": 0,
+      "maximum_production_deployments": 0,
+      "maximum_provider_code_interpreter_calls": 0,
+      "maximum_provider_computer_use_calls": 0,
+      "maximum_provider_credentials_generated": 0,
+      "maximum_provider_credentials_persisted": 0,
+      "maximum_provider_credentials_read": 1,
+      "maximum_provider_file_search_calls": 0,
+      "maximum_provider_mcp_calls": 0,
+      "maximum_provider_tokens_persisted": 0,
+      "maximum_provider_tool_calls": 0,
+      "maximum_provider_tool_definitions": 0,
+      "maximum_provider_web_search_calls": 0,
+      "maximum_raw_authorization_headers_persisted": 0,
+      "maximum_raw_prompts_persisted": 0,
+      "maximum_raw_responses_persisted": 0,
+      "maximum_redirects": 0,
+      "maximum_request_payload_bytes": 262144,
+      "maximum_request_timeout_seconds": 120,
+      "maximum_response_payload_bytes": 2097152,
+      "maximum_scheduled_provider_calls": 0,
+      "maximum_session_seconds": 1200,
+      "maximum_source_mutations": 0,
+      "maximum_store_true_requests": 0,
+      "maximum_streaming_requests": 0,
+      "maximum_successful_live_responses": 6,
+      "maximum_tls_connections": 6,
+      "maximum_total_input_tokens": 60000,
+      "maximum_total_output_tokens": 12000,
+      "maximum_verified_knowledge_promotions": 0
+    },
+    "threat_model": [
+      "API-key leakage",
+      "authorization-header logging",
+      "credential-file substitution",
+      "environment-variable disclosure",
+      "endpoint substitution",
+      "DNS rebinding",
+      "TLS downgrade",
+      "certificate-verification bypass",
+      "redirect to another host",
+      "proxy interception",
+      "oversized provider response",
+      "request replay causing duplicate cost",
+      "changed replay under an existing request ID",
+      "model-ID substitution",
+      "tool injection",
+      "web-search activation",
+      "file-upload activation",
+      "persistent conversation-state activation",
+      "store=true drift",
+      "background-mode drift",
+      "response-body persistence",
+      "prompt-body persistence",
+      "hidden-reasoning retention",
+      "structured-output schema bypass",
+      "provider output treated as fact",
+      "provider output treated as execution authority",
+      "memory-write escalation",
+      "real-tool escalation",
+      "cost-budget bypass",
+      "retry amplification",
+      "incomplete cleanup"
+    ],
+    "transport_policy": {
+      "endpoint_discovery_enabled": false,
+      "model_list_call_enabled": false,
+      "proxy_inheritance_enabled": false,
+      "redirects_enabled": false,
+      "standard_library_https_only": true,
+      "tls_certificate_verification": true
+    },
+    "workstream": "adaptive-intelligence-live-provider-pilot"
+  },
+  "manifest_integrity": {
+    "model_capability_record_count": 18,
+    "model_manifest_count": 6,
+    "provider_manifest_count": 3
+  },
+  "memory_writes": 0,
+  "model_weight_changes": 0,
+  "next_architecture_decision": "single_openai_responses_api_synthetic_live_provider_pilot_authorized",
+  "pilot_validation": {
+    "counters": {
+      "active_fixture_sessions_after_close": 0,
+      "capability_rejections": 1,
+      "changed_replays_rejected": 1,
+      "circuit_breaker_open_events": 1,
+      "context_budget_rejections": 1,
+      "cost_budget_rejections": 1,
+      "exact_replays_returned": 1,
+      "fallback_plans_created": 1,
+      "fallback_responses_generated": 1,
+      "fixture_provider_invocations": 11,
+      "fixture_requests_submitted": 16,
+      "fixture_responses_generated": 9,
+      "fixture_sessions_closed": 1,
+      "fixture_sessions_started": 1,
+      "integrity_reports_created": 1,
+      "latency_budget_rejections": 1,
+      "model_capability_records_loaded": 18,
+      "model_manifests_loaded": 6,
+      "normalized_provider_errors": 2,
+      "observability_snapshots_created": 1,
+      "operator_review_items_created": 8,
+      "output_budget_rejections": 1,
+      "provider_manifests_loaded": 3,
+      "retry_plans_created": 1,
+      "route_plans_created": 9,
+      "routing_policies_loaded": 6,
+      "structured_output_schemas_loaded": 2,
+      "structured_output_validation_failures": 1,
+      "structured_output_validations": 2,
+      "successful_response_projections": 8,
+      "temporary_files_retained": 0,
+      "trust_assessments_created": 9,
+      "uncertainty_projections_created": 9
+    },
+    "pilot_id": "AION-246-deterministic-external-cognition-fixture-pilot",
+    "prohibited_effect_counters": {
+      "actual_model_provider_calls": 0,
+      "authorization_headers_created": 0,
+      "automatic_merges": 0,
+      "background_cycles": 0,
+      "belief_mutations": 0,
+      "dns_resolutions": 0,
+      "external_connector_calls": 0,
+      "external_network_egress_calls": 0,
+      "external_tool_executions": 0,
+      "git_operations": 0,
+      "hidden_reasoning_records": 0,
+      "memory_writes": 0,
+      "model_output_tool_calls": 0,
+      "model_output_triggered_executions": 0,
+      "model_weight_changes": 0,
+      "production_deployments": 0,
+      "provider_credentials_generated": 0,
+      "provider_credentials_persisted": 0,
+      "provider_credentials_read": 0,
+      "provider_network_adapter_calls": 0,
+      "provider_tokens_persisted": 0,
+      "provider_tokens_read": 0,
+      "public_network_calls": 0,
+      "raw_prompts_persisted": 0,
+      "raw_responses_persisted": 0,
+      "runtime_created_pull_requests": 0,
+      "scheduled_provider_calls": 0,
+      "source_mutations": 0,
+      "verified_knowledge_promotions": 0
+    },
+    "report_fingerprint": "2f9a05f78d4afb40f390ace3cafbb2f997e46525063cd80fe6cab131e8be9aad"
+  },
+  "production_deployments": 0,
+  "production_runtime_authorized": false,
+  "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+  "provider_credentials_persisted": 0,
+  "provider_credentials_read": 0,
+  "provider_network_adapter_calls": 0,
+  "public_network_calls": 0,
+  "raw_prompts_persisted": 0,
+  "raw_responses_persisted": 0,
+  "read_only": true,
+  "redacted": true,
+  "redaction_integrity": {
+    "raw_prompt_persistence_enabled": false,
+    "raw_response_persistence_enabled": false,
+    "redacted": true
+  },
+  "replay_integrity": {
+    "changed_replays_rejected": 1,
+    "exact_replays_returned": 1
+  },
+  "report_fingerprint": "99c97ebd5bed4fff9149a0044364379953c40600611865cf5e0b5c26faaf09ee",
+  "repository_integrity": {
+    "aion_248_source_absent": true,
+    "package_versions_unchanged": true,
+    "primary_branch": "phase/v03-external-cognition-evaluation-live-provider-authorization",
+    "provider_runtime_source_absent": true,
+    "rc1_publication_unchanged": true
+  },
+  "repository_unchanged": true,
+  "request_response_integrity": {
+    "raw_prompt_retained": false,
+    "raw_response_absent": true,
+    "request_fingerprint": "d56c97f331ca1a08d1597f680513d3ef4e354f3ba5afed8ce42a70dbfa5a8543",
+    "response_fingerprint": "e2c6eecb2d95c9d5a208fb321383b0e05b87edda4d9740bb45bccf4ba5e3dbd7"
+  },
+  "routing_integrity": {
+    "deterministic_ordering": true,
+    "route_plans_created": 9,
+    "routing_policies_loaded": 6
+  },
+  "scenario_count": 32,
+  "scenario_ids": [
+    "aion_246_delivery_and_ci_integrity",
+    "adaptive_intelligence_authorization_lineage",
+    "exact_source_and_repository_boundary",
+    "secure_runtime_component_binding_integrity",
+    "existing_model_gateway_component_binding_integrity",
+    "external_cognition_contract_immutability",
+    "provider_manifest_integrity",
+    "model_manifest_and_capability_integrity",
+    "message_projection_and_raw_content_non_retention",
+    "request_envelope_integrity",
+    "response_envelope_integrity",
+    "restricted_structured_output_schema_integrity",
+    "structured_output_validation_and_untrusted_classification",
+    "context_budget_fail_closed",
+    "output_budget_fail_closed",
+    "cost_budget_fail_closed",
+    "latency_budget_fail_closed",
+    "deterministic_capability_routing",
+    "existing_model_gateway_route_compatibility",
+    "retry_and_fallback_boundedness",
+    "circuit_breaker_state_integrity",
+    "trust_and_uncertainty_integrity",
+    "provider_error_normalization_integrity",
+    "recursive_redaction_and_protected_material_exclusion",
+    "deterministic_fixture_provider_integrity",
+    "exact_replay_and_changed_replay_integrity",
+    "audit_chain_and_observability_integrity",
+    "operator_review_integrity",
+    "fixture_pilot_schema_counters_and_report_fingerprint",
+    "zero_operational_effects_and_release_boundary",
+    "single_openai_responses_api_pilot_architecture_safety",
+    "live_provider_pilot_authorization_readiness"
+  ],
+  "scenario_results": [
+    {
+      "evidence": {
+        "branch": "phase/v03-external-cognition-gateway-foundation",
+        "feature_commits": [
+          "dd1f7b34cb2a25dfd409cf72667f073af9e8e965",
+          "afe4fc41d6737512287ad0bb00a0c2174dab8e9e",
+          "13c9fdf283a2f0c499497fd3aefb3ae70adc5f54",
+          "32f1eb57a48214e8280203d513277d47759c44bd",
+          "8d885ae9dbf32e6c79f1db1b0aed35374837090a"
+        ],
+        "merge_commit": "27d6ad15a043940bf537caec72cf7de7c74f6dc2",
+        "merged_at": "2026-08-04T01:34:30Z",
+        "pr": 166,
+        "required_ci_checks": [
+          "brain-api-quality",
+          "contract-check",
+          "docker-build-core",
+          "policy-check",
+          "repository-hygiene",
+          "sdk-cli-check",
+          "sdk-quality"
+        ]
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "aion_246_delivery_and_ci_integrity",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "active_authorization": "AION-245-AI-0001",
+        "final_planned_task": "AION-260",
+        "formal_closeout_task": "AION-247",
+        "implementation_task": "AION-246"
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "adaptive_intelligence_authorization_lineage",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "aion_246_source_count": 22,
+        "aion_248_source_absent": true,
+        "provider_runtime_source_absent": true
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "exact_source_and_repository_boundary",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "secure_runtime_contract_fingerprint": "5de8c1b8706249f4e62e2c593c858012c7966df70adf37b7b89f6192de4c7c8a",
+        "secure_runtime_session_fingerprint": "5de8c1b8706249f4e62e2c593c858012c7966df70adf37b7b89f6192de4c7c8a"
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "secure_runtime_component_binding_integrity",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "existing_model_gateway_route_fingerprint": "8ab548831ab9d4cba7bc32974e07cc4b74ff48d1d9471cfd1b332bf5c2f8ca46"
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "existing_model_gateway_component_binding_integrity",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "schema_family": "aion-external-cognition"
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "external_cognition_contract_immutability",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "provider_manifest_count": 3
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "provider_manifest_integrity",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "capability_record_count": 18,
+        "model_manifest_count": 6
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "model_manifest_and_capability_integrity",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "message_projection_count": 1,
+        "raw_material_retained": false
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "message_projection_and_raw_content_non_retention",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "request_fingerprint": "d56c97f331ca1a08d1597f680513d3ef4e354f3ba5afed8ce42a70dbfa5a8543"
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "request_envelope_integrity",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "response_fingerprint": "e2c6eecb2d95c9d5a208fb321383b0e05b87edda4d9740bb45bccf4ba5e3dbd7"
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "response_envelope_integrity",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "structured_schema_count": 2
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "restricted_structured_output_schema_integrity",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "structured_output_validation_failures": 1,
+        "structured_output_validations": 2
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "structured_output_validation_and_untrusted_classification",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "context_budget_rejections": 1
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "context_budget_fail_closed",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "output_budget_rejections": 1
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "output_budget_fail_closed",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "cost_budget_rejections": 1
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "cost_budget_fail_closed",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "latency_budget_rejections": 1
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "latency_budget_fail_closed",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "route_plans_created": 9
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "deterministic_capability_routing",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "existing_model_gateway_compatible": true
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "existing_model_gateway_route_compatibility",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "fallback_plans_created": 1,
+        "retry_plans_created": 1
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "retry_and_fallback_boundedness",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "circuit_breaker_open_events": 1
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "circuit_breaker_state_integrity",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "trust_assessments_created": 9,
+        "uncertainty_projections_created": 9
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "trust_and_uncertainty_integrity",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "normalized_provider_errors": 2
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "provider_error_normalization_integrity",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "protected_material_excluded": true,
+        "redacted": true
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "recursive_redaction_and_protected_material_exclusion",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "fixture_provider_invocations": 11,
+        "fixture_responses_generated": 9
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "deterministic_fixture_provider_integrity",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "changed_replays_rejected": 1,
+        "exact_replays_returned": 1
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "exact_replay_and_changed_replay_integrity",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "integrity_reports_created": 1,
+        "observability_snapshots_created": 1
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "audit_chain_and_observability_integrity",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "operator_review_items_created": 8
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "operator_review_integrity",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "pilot_id": "AION-246-deterministic-external-cognition-fixture-pilot",
+        "report_fingerprint": "2f9a05f78d4afb40f390ace3cafbb2f997e46525063cd80fe6cab131e8be9aad"
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "fixture_pilot_schema_counters_and_report_fingerprint",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "prohibited_effect_counters": {
+          "actual_model_provider_calls": 0,
+          "authorization_headers_created": 0,
+          "automatic_merges": 0,
+          "background_cycles": 0,
+          "belief_mutations": 0,
+          "dns_resolutions": 0,
+          "external_connector_calls": 0,
+          "external_network_egress_calls": 0,
+          "external_tool_executions": 0,
+          "git_operations": 0,
+          "hidden_reasoning_records": 0,
+          "memory_writes": 0,
+          "model_output_tool_calls": 0,
+          "model_output_triggered_executions": 0,
+          "model_weight_changes": 0,
+          "production_deployments": 0,
+          "provider_credentials_generated": 0,
+          "provider_credentials_persisted": 0,
+          "provider_credentials_read": 0,
+          "provider_network_adapter_calls": 0,
+          "provider_tokens_persisted": 0,
+          "provider_tokens_read": 0,
+          "public_network_calls": 0,
+          "raw_prompts_persisted": 0,
+          "raw_responses_persisted": 0,
+          "runtime_created_pull_requests": 0,
+          "scheduled_provider_calls": 0,
+          "source_mutations": 0,
+          "verified_knowledge_promotions": 0
+        }
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "zero_operational_effects_and_release_boundary",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "api_family": "responses",
+        "maximum_live_provider_calls": 6,
+        "provider_id": "openai"
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "single_openai_responses_api_pilot_architecture_safety",
+      "summary": "PASS"
+    },
+    {
+      "evidence": {
+        "active_task_on_pass": "AION-248",
+        "formal_closeout_on_pass": "AION-249",
+        "successor_authorization": "AION-247-AI-0002"
+      },
+      "hard_gate": true,
+      "passed": true,
+      "scenario_id": "live_provider_pilot_authorization_readiness",
+      "summary": "PASS"
+    }
+  ],
+  "source_mutations": 0,
+  "structured_output_integrity": {
+    "schema_fingerprint": "353e6eaebfe693d5f5d1d0b710a6213fb349fbf2fb8f703052bffee8ce007c63",
+    "validation_failures": 1,
+    "validations": 2
+  },
+  "temporary_evaluation_data_cleaned": true,
+  "trust_integrity": {
+    "all_responses_untrusted": true,
+    "trust_assessments_created": 9,
+    "uncertainty_projections_created": 9
+  },
+  "verified_knowledge_promotions": 0
+}

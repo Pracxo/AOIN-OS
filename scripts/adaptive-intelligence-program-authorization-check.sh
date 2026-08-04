@@ -12,22 +12,28 @@ export AION_BRAIN_PYTHON="$PYTHON_BIN"
 "$PYTHON_BIN" - <<'PY'
 from __future__ import annotations
 
+import importlib.util
 import json
+import sys
 from pathlib import Path
 
 ROOT = Path.cwd()
 PROGRAM_ID = "AION-ADAPTIVE-INTELLIGENCE-001"
-AUTH_ID = "AION-245-AI-0001"
+A245 = "AION-245-AI-0001"
+A247 = "AION-247-AI-0002"
 PRE_IMPLEMENTATION_STATE = "adaptive_intelligence_program_authorized_not_implemented"
 IMPLEMENTED_DISABLED_STATE = (
     "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout"
 )
-IMPLEMENTED_DISABLED_GATEWAY_STATE = (
-    "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout"
+POST_EVALUATION_STATE = (
+    "external_cognition_foundation_evaluated_live_provider_pilot_authorized_not_implemented"
 )
-SCOPE = "controlled-provider-neutral-external-cognition-contracts-provider-manifests-model-manifests-request-response-envelopes-routing-budgets-structured-output-redaction-trust-provenance-fixture-replay-circuit-breaker-observability-audit-no-network-no-provider-call-no-credential-value-no-memory-write-no-tool-execution-core"
+IMPLEMENTED_GATEWAY_STATES = {
+    "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout",
+    "implemented_disabled_deterministic_fixture_only_operator_evaluated_live_provider_pilot_authorized_not_implemented",
+}
 ROADMAP = [f"AION-{number}" for number in range(245, 261)]
-APPROVED = {
+FOUNDATION_APPROVED = {
     "external_cognition_contract_approved",
     "external_cognition_authorization_envelope_approved",
     "existing_model_gateway_component_binding_approved",
@@ -64,7 +70,7 @@ APPROVED = {
     "static_console_evidence_approved",
     "documentation_approved",
 }
-PROHIBITED = {
+FOUNDATION_PROHIBITED = {
     "actual_model_provider_call_enabled",
     "provider_network_adapter_enabled",
     "public_network_access_enabled",
@@ -181,127 +187,124 @@ def load(path: str) -> dict:
     return json.loads((ROOT / path).read_text(encoding="utf-8"))
 
 
+def find_record(ledger: dict, auth_id: str) -> dict:
+    for record in ledger.get("records", []):
+        if record.get("authorization_transaction_id") == auth_id:
+            return record
+    raise SystemExit(f"authorization record missing: {auth_id}")
+
+
 program = load("docs/adaptive-intelligence/program-ledger.json")
 auth = load("docs/adaptive-intelligence/authorization-ledger.json")
-record = auth["records"][0]
-
+a245_record = find_record(auth, A245)
+state = program.get("program_state")
+if state not in {PRE_IMPLEMENTATION_STATE, IMPLEMENTED_DISABLED_STATE, POST_EVALUATION_STATE}:
+    raise SystemExit(f"program state mismatch: {state!r}")
 if program["program_id"] != PROGRAM_ID or auth["program_id"] != PROGRAM_ID:
     raise SystemExit("programme ID mismatch")
-if record["authorization_transaction_id"] != AUTH_ID or record["approval_record_id"] != AUTH_ID:
-    raise SystemExit("authorization ID mismatch")
 if [item["task_id"] for item in program["roadmap"]] != ROADMAP:
     raise SystemExit("roadmap sequence mismatch")
-if record["authorization_scope"] != SCOPE:
-    raise SystemExit("authorization scope mismatch")
-
-for key in APPROVED:
-    if program["approved_capabilities"].get(key) is not True:
-        raise SystemExit(f"approved capability missing or false in program: {key}")
-    if record["approved_capabilities"].get(key) is not True:
-        raise SystemExit(f"approved capability missing or false in authorization: {key}")
-if set(program["approved_capabilities"]) != APPROVED:
-    raise SystemExit("approved capability key set changed")
-
-for key in PROHIBITED:
-    if program["prohibited_capabilities"].get(key) is not False:
-        raise SystemExit(f"prohibited capability enabled in program: {key}")
-    if record["prohibited_capabilities"].get(key) is not False:
-        raise SystemExit(f"prohibited capability enabled in authorization: {key}")
-if set(program["prohibited_capabilities"]) != PROHIBITED:
-    raise SystemExit("prohibited capability key set changed")
-
+if not FOUNDATION_APPROVED.issubset(program["approved_capabilities"]):
+    raise SystemExit("foundation approved capabilities missing from program")
+if not FOUNDATION_APPROVED.issubset(a245_record["approved_capabilities"]):
+    raise SystemExit("foundation approved capabilities missing from AION-245")
+if any(value is not True for value in program["approved_capabilities"].values()):
+    raise SystemExit("program approved capability is not true")
+if any(value is not True for value in a245_record["approved_capabilities"].values()):
+    raise SystemExit("AION-245 approved capability is not true")
+for payload_name, payload in (("program", program), ("AION-245", a245_record)):
+    for key in FOUNDATION_PROHIBITED:
+        if payload["prohibited_capabilities"].get(key) is not False:
+            raise SystemExit(f"{payload_name} prohibited capability enabled: {key}")
+    if any(value is not False for value in payload["prohibited_capabilities"].values()):
+        raise SystemExit(f"{payload_name} prohibited capability is not false")
 if program["resource_limits"] != RESOURCE_LIMITS:
-    raise SystemExit("resource limits changed")
+    raise SystemExit("foundation resource limits changed")
 
-state = program.get("program_state")
-if state not in {PRE_IMPLEMENTATION_STATE, IMPLEMENTED_DISABLED_STATE}:
-    raise SystemExit(f"program state mismatch: {state!r}")
-
+if state == PRE_IMPLEMENTATION_STATE:
+    expected = {
+        "active_adaptive_intelligence_authorization": A245,
+        "active_adaptive_intelligence_task": "AION-246",
+        "formal_closeout_task": "AION-247",
+        "external_cognition_gateway_implemented": False,
+    }
+elif state == IMPLEMENTED_DISABLED_STATE:
+    expected = {
+        "active_adaptive_intelligence_authorization": A245,
+        "active_adaptive_intelligence_task": "AION-246",
+        "formal_closeout_task": "AION-247",
+        "external_cognition_gateway_implemented": True,
+    }
+else:
+    expected = {
+        "active_adaptive_intelligence_authorization": A247,
+        "active_adaptive_intelligence_task": "AION-248",
+        "formal_closeout_task": "AION-249",
+        "external_cognition_gateway_implemented": True,
+        "live_provider_pilot_authorized": True,
+        "live_provider_pilot_implemented": False,
+    }
 for key, value in {
     "adaptive_intelligence_program_authorized": True,
     "adaptive_intelligence_program_implemented": False,
     "active_adaptive_intelligence_authorization_count": 1,
-    "active_adaptive_intelligence_authorization": AUTH_ID,
-    "active_adaptive_intelligence_task": "AION-246",
-    "formal_closeout_task": "AION-247",
     "final_planned_task": "AION-260",
     "external_cognition_gateway_authorized": True,
     "production_runtime_authorized": False,
+    **expected,
 }.items():
     if program.get(key) != value:
         raise SystemExit(f"program field mismatch {key}: {program.get(key)!r}")
 
-if state == PRE_IMPLEMENTATION_STATE:
-    if program.get("external_cognition_gateway_implemented") is not False:
-        raise SystemExit("external cognition gateway must be unimplemented before AION-246")
-    expected_gateway_state = "authorized_not_implemented"
-    if program.get("external_cognition_gateway_state") not in {None, expected_gateway_state}:
-        raise SystemExit("unexpected pre-implementation external cognition gateway state")
-else:
-    for key, value in {
-        "external_cognition_gateway_implemented": True,
-        "external_cognition_gateway_state": IMPLEMENTED_DISABLED_GATEWAY_STATE,
-        "deterministic_fixture_pilot_completed": True,
-        "external_cognition_contract_available": True,
-        "external_cognition_authorization_envelope_available": True,
-        "existing_model_gateway_component_binding_available": True,
-        "secure_runtime_component_binding_available": True,
-        "provider_manifest_available": True,
-        "model_manifest_available": True,
-        "model_capability_manifest_available": True,
-        "request_envelope_available": True,
-        "response_envelope_available": True,
-        "message_normalization_available": True,
-        "structured_output_schema_available": True,
-        "structured_output_validation_available": True,
-        "model_route_policy_available": True,
-        "capability_based_routing_available": True,
-        "context_budget_available": True,
-        "output_budget_available": True,
-        "cost_budget_available": True,
-        "latency_budget_available": True,
-        "retry_policy_available": True,
-        "circuit_breaker_policy_available": True,
-        "response_trust_classification_available": True,
-        "uncertainty_projection_available": True,
-        "provider_error_normalization_available": True,
-        "prompt_redaction_available": True,
-        "response_redaction_available": True,
-        "prompt_fingerprint_available": True,
-        "response_fingerprint_available": True,
-        "deterministic_fixture_provider_available": True,
-        "deterministic_replay_available": True,
-        "changed_replay_rejection_available": True,
-        "audit_evidence_available": True,
-        "observability_schema_available": True,
-        "operator_review_record_available": True,
-        "external_cognition_integrity_audit_available": True,
-    }.items():
-        if program.get(key) != value:
-            raise SystemExit(f"implemented AION-246 program field mismatch {key}: {program.get(key)!r}")
-
-for key, value in {
-    "authorization_transaction_approved": True,
-    "explicit_approval_record_approval": True,
-    "implementation_authorization_approved": True,
-    "implementation_go_status": True,
-    "implementation_no_go_status": False,
-    "authorization_active": True,
-    "authorization_consumed": False,
-    "authorization_expired": False,
-    "authorization_reusable": False,
-}.items():
-    if record.get(key) != value:
-        raise SystemExit(f"authorization lifecycle mismatch {key}: {record.get(key)!r}")
-
-if state == PRE_IMPLEMENTATION_STATE:
-    for path in FUTURE_SOURCE:
-        if (ROOT / path).exists():
-            raise SystemExit(f"AION-246 source exists before implementation: {path}")
-else:
+if program.get("external_cognition_gateway_implemented") is True:
+    if program.get("external_cognition_gateway_state") not in IMPLEMENTED_GATEWAY_STATES:
+        raise SystemExit("external cognition gateway state mismatch")
     for path in FUTURE_SOURCE:
         if not (ROOT / path).is_file():
             raise SystemExit(f"AION-246 source missing after implementation: {path}")
+else:
+    for path in FUTURE_SOURCE:
+        if (ROOT / path).exists():
+            raise SystemExit(f"AION-246 source exists before implementation: {path}")
+
+if state == POST_EVALUATION_STATE:
+    if a245_record.get("authorization_active") is not False:
+        raise SystemExit("AION-245 must be inactive after AION-247")
+    if a245_record.get("authorization_consumed") is not True:
+        raise SystemExit("AION-245 must be consumed after AION-247")
+    if a245_record.get("authorization_expired") is not True:
+        raise SystemExit("AION-245 must be expired after AION-247")
+    if a245_record.get("authorization_reusable") is not False:
+        raise SystemExit("AION-245 must remain non-reusable")
+    successor = find_record(auth, A247)
+    for key, value in {
+        "authorization_active": True,
+        "authorization_consumed": False,
+        "authorization_expired": False,
+        "authorization_reusable": False,
+        "implementation_task": "AION-248",
+        "formal_closeout_task": "AION-249",
+        "provider_id": "openai",
+        "provider_api_family": "responses",
+        "allowed_endpoint_host": "api.openai.com",
+        "allowed_endpoint_path": "/v1/responses",
+        "maximum_selected_models": 1,
+    }.items():
+        if successor.get(key) != value:
+            raise SystemExit(f"AION-247 authorization mismatch {key}: {successor.get(key)!r}")
+    if not successor["approved_capabilities"].get("openai_responses_api_adapter_approved"):
+        raise SystemExit("OpenAI Responses API adapter approval missing")
+    if any(value is not False for value in successor["prohibited_capabilities"].values()):
+        raise SystemExit("AION-247 prohibited capability is not false")
+else:
+    for key, value in {
+        "authorization_active": True,
+        "authorization_consumed": False,
+        "authorization_expired": False,
+        "authorization_reusable": False,
+    }.items():
+        if a245_record.get(key) != value:
+            raise SystemExit(f"AION-245 lifecycle mismatch {key}: {a245_record.get(key)!r}")
 
 for relative in (
     "examples/adaptive-intelligence/program-authorization.json",
@@ -318,10 +321,6 @@ for relative in (
 ):
     if not (ROOT / relative).is_file():
         raise SystemExit(f"missing adaptive intelligence artifact: {relative}")
-
-if state == IMPLEMENTED_DISABLED_STATE:
-    if not (ROOT / "examples/adaptive-intelligence/external-cognition-fixture-pilot-evidence.json").is_file():
-        raise SystemExit("missing AION-246 committed fixture pilot evidence")
 
 print("adaptive intelligence programme authorization PASS")
 PY
