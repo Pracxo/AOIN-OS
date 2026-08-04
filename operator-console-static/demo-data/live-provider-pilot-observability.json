@@ -1,0 +1,21 @@
+{
+  "background_cycles": 0,
+  "external_connector_calls": 0,
+  "external_tool_executions": 0,
+  "latency_summary_state": "pending_live_execution",
+  "memory_effect": false,
+  "memory_writes": 0,
+  "network_effect": false,
+  "production_effect": false,
+  "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+  "provider_effect": false,
+  "provider_runtime_exporter_enabled": false,
+  "raw_content_in_metrics": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "synthetic": true,
+  "tool_effect": false,
+  "view_id": "live-provider-pilot-observability"
+}

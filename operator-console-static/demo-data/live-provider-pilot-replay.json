@@ -1,0 +1,19 @@
+{
+  "additional_provider_call_performed": false,
+  "changed_replay_rejected": true,
+  "exact_replay_returns_projection_only": true,
+  "memory_effect": false,
+  "network_effect": false,
+  "persistent_replay_store_created": false,
+  "production_effect": false,
+  "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+  "provider_effect": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "replay_state": "in_memory_only_until_evidence_projection",
+  "runtime_effect": false,
+  "synthetic": true,
+  "tool_effect": false,
+  "view_id": "live-provider-pilot-replay"
+}

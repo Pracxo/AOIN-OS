@@ -43,12 +43,37 @@ AION246_SOURCE = {
     "services/brain-api/src/aion_brain/external_cognition/integrity.py",
     "services/brain-api/src/aion_brain/external_cognition/evidence.py",
 }
+AION248_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/live_provider_pilot.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/__init__.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/authorization.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/component_binding.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/provider_selection.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/operator_approval.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/credential_boundary.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/endpoint_policy.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/request_projection.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/response_projection.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/usage_budget.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/retention_policy.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/transport.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/openai_responses_adapter.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/trust.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/redaction.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/replay.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/audit.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/observability.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/integrity.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/evidence.py",
+}
+AION248_RUNNER = "scripts/live-provider-pilot-local-run.py"
 AION246_RUNNER = "scripts/external-cognition-fixture-local-run.py"
 AION246_TESTS = {
     "services/brain-api/tests/aion243_release_candidate_scope.py",
     "services/brain-api/tests/test_adaptive_intelligence_program_authorization_aion245.py",
     "services/brain-api/tests/test_external_cognition_foundation_aion246.py",
     "services/brain-api/tests/test_external_cognition_operator_evaluation_aion247.py",
+    "services/brain-api/tests/test_live_provider_pilot_aion248.py",
 }
 AION246_SCRIPTS = {
     "scripts/adaptive-intelligence-program-authorization-check.sh",
@@ -67,6 +92,9 @@ AION246_SCRIPTS = {
     "scripts/lib/external_cognition_foundation_operator_evaluation.py",
     "scripts/live-provider-pilot-authorization-check.sh",
     "scripts/live-provider-pilot-authorization-no-go-regression.sh",
+    "scripts/live-provider-pilot-check.sh",
+    "scripts/live-provider-pilot-evidence-check.sh",
+    "scripts/live-provider-pilot-no-go-regression.sh",
     "scripts/live-provider-pilot-runtime-hold.sh",
     "scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh",
     "scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh",
@@ -105,17 +133,21 @@ ALLOWED_EXACT = {
     "docs/adr/README.md",
     "docs/adr/0210-controlled-provider-neutral-external-cognition-gateway-foundation.md",
     "docs/adr/0211-external-cognition-foundation-evaluation-and-single-openai-responses-api-live-provider-pilot-authorization.md",
+    "docs/adr/0212-single-openai-responses-api-synthetic-live-provider-pilot.md",
     "operator-console-static/README.md",
     "operator-console-static/app.js",
     "operator-console-static/index.html",
     AION246_RUNNER,
+    AION248_RUNNER,
     *AION246_SOURCE,
+    *AION248_SOURCE,
     *AION246_TESTS,
     *AION246_SCRIPTS,
 }
 ALLOWED_PREFIXES = (
     "docs/adaptive-intelligence/",
     "docs/release/v03-external-cognition-",
+    "docs/release/v03-live-provider-",
     "examples/adaptive-intelligence/",
     "operator-console-static/demo-data/",
 )
@@ -268,8 +300,12 @@ for parts in changed_entries():
             raise SystemExit(f"package/dependency file change is prohibited: {path}")
         if path.startswith(PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited path changed: {path}")
-        if path.startswith("services/brain-api/src/aion_brain/") and path not in AION246_SOURCE:
-            raise SystemExit(f"only exact AION-246 external cognition source may change: {path}")
+        if (
+            path.startswith("services/brain-api/src/aion_brain/")
+            and path not in AION246_SOURCE
+            and path not in AION248_SOURCE
+        ):
+            raise SystemExit(f"only exact AION-246/AION-248 source may change: {path}")
         if path.startswith("services/brain-api/src/aion_brain/api/"):
             raise SystemExit(f"API runtime route change is prohibited: {path}")
         if not allowed_path(path):

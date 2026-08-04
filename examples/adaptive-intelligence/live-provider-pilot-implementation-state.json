@@ -1,0 +1,13 @@
+{
+  "active_authorization": "AION-247-AI-0002",
+  "formal_closeout_task": "AION-249",
+  "implementation_task": "AION-248",
+  "installed_package_network_access": false,
+  "live_execution_state": "pending_OPENAI_API_KEY_in_runner_process",
+  "pilot_completed": false,
+  "pilot_id": "AION-248-single-openai-responses-api-synthetic-live-provider-pilot",
+  "provider_runtime_active": false,
+  "runner": "scripts/live-provider-pilot-local-run.py",
+  "runner_no_key_stop_before_dns": true,
+  "selected_model_id": "gpt-5.6-terra"
+}

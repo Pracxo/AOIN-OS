@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import os
 import subprocess
+import json
 from pathlib import Path
 
 root = Path(os.environ["AION_REPO_ROOT"])
@@ -36,6 +37,41 @@ authorized_source = {
     "services/brain-api/src/aion_brain/operator_console_runtime/evidence.py",
     "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py",
 }
+authorized_aion248_source = {
+    "services/brain-api/src/aion_brain/contracts/live_provider_pilot.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/__init__.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/authorization.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/component_binding.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/provider_selection.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/operator_approval.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/credential_boundary.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/endpoint_policy.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/request_projection.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/response_projection.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/usage_budget.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/retention_policy.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/transport.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/openai_responses_adapter.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/trust.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/redaction.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/replay.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/audit.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/observability.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/integrity.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/evidence.py",
+}
+adaptive_ledger = json.loads(
+    (root / "docs/adaptive-intelligence/program-ledger.json").read_text(encoding="utf-8")
+)
+aion248_active = (
+    adaptive_ledger.get("live_provider_pilot_authorized") is True
+    and adaptive_ledger.get("active_adaptive_intelligence_authorization") == "AION-247-AI-0002"
+    and adaptive_ledger.get("active_adaptive_intelligence_task") == "AION-248"
+    and adaptive_ledger.get("formal_closeout_task") == "AION-249"
+    and adaptive_ledger.get("aion_248_record", {}).get("task_id") == "AION-248"
+    and adaptive_ledger.get("aion_248_record", {}).get("authorization_transaction")
+    == "AION-247-AI-0002"
+)
 authorized_static = {
     "operator-console-static/index.html",
     "operator-console-static/app.js",
@@ -77,7 +113,7 @@ for line in status:
     if path.startswith("services/brain-api/src/aion_brain/"):
         if path not in authorized_source and not path.startswith(
             "services/brain-api/src/aion_brain/v02_release_qualification/"
-        ):
+        ) and not (aion248_active and path in authorized_aion248_source):
             raise SystemExit(f"unauthorized runtime source changed: {path}")
     if path.startswith("operator-console-static/") and not (
         path in authorized_static or path.startswith("operator-console-static/demo-data/")
@@ -96,7 +132,7 @@ if rg -n "<input[^>]+type=[\"']password|localStorage\.setItem|sessionStorage\.se
 fi
 
 aion_confirm_immutable_v01_tag_history >/dev/null
-if git tag --list 'v0.2*' 'aion-v0.2*' | grep -q .; then
+if git tag --list 'v0.2*' 'aion-v0.2*' | grep -Ev '^aion-v0\.2\.0-rc\.1$' | grep -q .; then
   echo "ERROR: v0.2 tag exists" >&2
   exit 1
 fi

@@ -66,6 +66,29 @@ AION241_SOURCE_SCOPE = {
     "services/brain-api/src/aion_brain/v02_staging_qualification/security_validation.py",
     "services/brain-api/src/aion_brain/v02_staging_qualification/source_snapshot.py",
 }
+AION248_SOURCE_SCOPE = {
+    "services/brain-api/src/aion_brain/contracts/live_provider_pilot.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/__init__.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/authorization.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/component_binding.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/provider_selection.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/operator_approval.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/credential_boundary.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/endpoint_policy.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/request_projection.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/response_projection.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/usage_budget.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/retention_policy.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/transport.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/openai_responses_adapter.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/trust.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/redaction.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/replay.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/audit.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/observability.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/integrity.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/evidence.py",
+}
 
 
 def _git_ref_exists(ref: str) -> bool:
@@ -143,6 +166,30 @@ def _aion241_implemented() -> bool:
     return qualification.get("controlled_staging_qualification_implemented") is True
 
 
+def _aion248_implemented() -> bool:
+    try:
+        adaptive = load_json("docs/adaptive-intelligence/program-ledger.json")
+    except FileNotFoundError:
+        return False
+    record = adaptive.get("aion_248_record", {})
+    return (
+        isinstance(record, dict)
+        and adaptive.get("live_provider_pilot_authorized") is True
+        and adaptive.get("active_adaptive_intelligence_authorization") == "AION-247-AI-0002"
+        and adaptive.get("active_adaptive_intelligence_task") == "AION-248"
+        and adaptive.get("formal_closeout_task") == "AION-249"
+        and record.get("task_id") == "AION-248"
+        and record.get("branch") == "phase/v03-openai-live-provider-pilot"
+        and record.get("authorization_transaction") == "AION-247-AI-0002"
+        and record.get("next_task") == "AION-249"
+        and record.get("runtime_state")
+        in {
+            "single_openai_responses_api_live_provider_pilot_implementation_ready_live_execution_pending",
+            "single_openai_responses_api_synthetic_live_provider_pilot_complete",
+        }
+    )
+
+
 def test_aion_222_runtime_source_exists_and_aion_224_source_matches_state() -> None:
     for relative in AION222_SOURCE_SCOPE:
         assert (REPO_ROOT / relative).exists(), relative
@@ -190,6 +237,8 @@ def test_aion_223_does_not_change_runtime_source_surface() -> None:
         allowed.update(AION239_SOURCE_SCOPE)
     if _aion241_implemented():
         allowed.update(AION241_SOURCE_SCOPE)
+    if _aion248_implemented():
+        allowed.update(AION248_SOURCE_SCOPE)
     if allowed:
         assert changed <= allowed
     else:

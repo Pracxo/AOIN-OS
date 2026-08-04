@@ -121,6 +121,25 @@ def aion246_source_allowed(path: str) -> bool:
             or path.startswith("services/brain-api/src/aion_brain/external_cognition/")
         )
     )
+def aion248_source_allowed(path: str) -> bool:
+    ledger = ROOT / "docs/adaptive-intelligence/program-ledger.json"
+    if not ledger.exists(): return False
+    payload = json.loads(ledger.read_text(encoding="utf-8"))
+    record = payload.get("aion_248_record")
+    return (
+        isinstance(record, dict)
+        and payload.get("active_adaptive_intelligence_authorization") == "AION-247-AI-0002"
+        and payload.get("active_adaptive_intelligence_task") == "AION-248"
+        and payload.get("formal_closeout_task") == "AION-249"
+        and payload.get("live_provider_pilot_authorized") is True
+        and record.get("task_id") == "AION-248"
+        and record.get("authorization_transaction") == "AION-247-AI-0002"
+        and (
+            path == "scripts/live-provider-pilot-local-run.py"
+            or path == "services/brain-api/src/aion_brain/contracts/live_provider_pilot.py"
+            or path.startswith("services/brain-api/src/aion_brain/live_provider_pilot/")
+        )
+    )
 def comparison_base() -> str | None:
     candidates: list[str] = []
     github_base = os.environ.get("GITHUB_BASE_REF")
@@ -158,12 +177,15 @@ for parts in changed_entries():
         if normalized == "services/brain-api/src/aion_brain/contracts/operator_console_integration.py" or normalized.startswith("services/brain-api/src/aion_brain/operator_console_runtime/"): continue
         if normalized == "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py" or normalized.startswith("services/brain-api/src/aion_brain/v02_release_qualification/"): continue
         if aion241_source_allowed(normalized): continue
+        if aion248_source_allowed(normalized): continue
         if any(normalized.startswith(prefix) for prefix in PROHIBITED_PREFIXES): raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")
         if normalized not in ALLOWED_EXACT and not any(normalized.startswith(prefix) for prefix in ALLOWED_PREFIXES): raise SystemExit(f"path outside AION-217 scope: {normalized}")
 for relative in run(["git", "ls-files"]).stdout.splitlines():
     if relative.endswith(PERSISTENCE_SUFFIXES): raise SystemExit(f"tracked state file detected: {relative}")
 for relative in sorted(changed_paths):
     if relative in {"scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh", "scripts/knowledge-intelligence-verified-knowledge-no-go-regression.sh"}:
+        continue
+    if aion248_source_allowed(relative):
         continue
     if not relative.endswith((".py", ".sh", ".js")) or relative.startswith("services/brain-api/tests/"): continue
     text = (ROOT / relative).read_text(encoding="utf-8")

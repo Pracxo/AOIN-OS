@@ -414,6 +414,9 @@ aion151_is_scoped_authorization_path() {
       if aion246_is_scoped_external_cognition_gateway_path "$1"; then
         return 0
       fi
+      if aion248_is_scoped_live_provider_pilot_path "$1"; then
+        return 0
+      fi
       return 1
       ;;
   esac
@@ -1539,7 +1542,11 @@ aion151_scan_files_excluding_scoped_authorization() {
           && ! aion228_is_scoped_governed_learning_memory_continual_learning_path "$file"; then
           printf '%s\n' "$file"
         fi
-      done < <(find "$path" -type f -print)
+      done < <(
+        find "$path" \
+          \( -path '*/__pycache__' -o -path '*/.mypy_cache' -o -path '*/.pytest_cache' -o -path '*/.ruff_cache' \) -prune \
+          -o -type f ! -name '*.pyc' ! -name '*.pyo' -print
+      )
     elif [[ -f "$path" ]]; then
       file="${path#./}"
       if ! aion151_is_scoped_authorization_path "$file" \
@@ -2459,12 +2466,17 @@ aion235_is_scoped_sandboxed_capability_runtime_path() {
 }
 
 aion237_is_scoped_operator_console_integrated_local_runtime_path() {
-  if [[ ! -f docs/secure-runtime-integration/program-ledger.json ]] || \
-    ! grep -q '"program_state": "operator_console_integrated_local_runtime_implemented_pending_final_evaluation"' docs/secure-runtime-integration/program-ledger.json || \
-    ! grep -q '"active_sri_implementation_authorization": "AION-236-SRI-0004"' docs/secure-runtime-integration/program-ledger.json || \
-    ! grep -q '"active_sri_implementation_task": "AION-237"' docs/secure-runtime-integration/program-ledger.json || \
-    ! grep -q '"formal_closeout_task": "AION-238"' docs/secure-runtime-integration/program-ledger.json; then
-    return 1
+  if [[ "${AION237_OPERATOR_CONSOLE_STATE_ACTIVE_CACHE:-}" != "1" ]]; then
+    if [[ "${AION237_OPERATOR_CONSOLE_STATE_ACTIVE_CACHE:-}" = "0" ]] || \
+      [[ ! -f docs/secure-runtime-integration/program-ledger.json ]] || \
+      ! grep -q '"program_state": "operator_console_integrated_local_runtime_implemented_pending_final_evaluation"' docs/secure-runtime-integration/program-ledger.json || \
+      ! grep -q '"active_sri_implementation_authorization": "AION-236-SRI-0004"' docs/secure-runtime-integration/program-ledger.json || \
+      ! grep -q '"active_sri_implementation_task": "AION-237"' docs/secure-runtime-integration/program-ledger.json || \
+      ! grep -q '"formal_closeout_task": "AION-238"' docs/secure-runtime-integration/program-ledger.json; then
+      AION237_OPERATOR_CONSOLE_STATE_ACTIVE_CACHE=0
+      return 1
+    fi
+    AION237_OPERATOR_CONSOLE_STATE_ACTIVE_CACHE=1
   fi
   case "$1" in
     README.md|AGENTS.md|\
@@ -2718,25 +2730,45 @@ aion244_is_scoped_v02_release_candidate_final_evaluation_path() {
 }
 
 aion246_external_cognition_gateway_state_active() {
+  if [[ "${AION246_EXTERNAL_COGNITION_STATE_ACTIVE_CACHE:-}" = "1" ]]; then
+    return 0
+  fi
+  if [[ "${AION246_EXTERNAL_COGNITION_STATE_ACTIVE_CACHE:-}" = "0" ]]; then
+    return 1
+  fi
   [[ -f docs/adaptive-intelligence/program-ledger.json ]] || return 1
-  grep -q '"program_state": "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout"' docs/adaptive-intelligence/program-ledger.json || return 1
-  grep -q '"active_adaptive_intelligence_authorization": "AION-245-AI-0001"' docs/adaptive-intelligence/program-ledger.json || return 1
-  grep -q '"active_adaptive_intelligence_task": "AION-246"' docs/adaptive-intelligence/program-ledger.json || return 1
-  grep -q '"formal_closeout_task": "AION-247"' docs/adaptive-intelligence/program-ledger.json || return 1
-  grep -q '"external_cognition_gateway_implemented": true' docs/adaptive-intelligence/program-ledger.json || return 1
-  grep -q '"external_cognition_gateway_state": "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout"' docs/adaptive-intelligence/program-ledger.json || return 1
+  if ! grep -q '"program_state": "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout"' docs/adaptive-intelligence/program-ledger.json || \
+    ! grep -q '"active_adaptive_intelligence_authorization": "AION-245-AI-0001"' docs/adaptive-intelligence/program-ledger.json || \
+    ! grep -q '"active_adaptive_intelligence_task": "AION-246"' docs/adaptive-intelligence/program-ledger.json || \
+    ! grep -q '"formal_closeout_task": "AION-247"' docs/adaptive-intelligence/program-ledger.json || \
+    ! grep -q '"external_cognition_gateway_implemented": true' docs/adaptive-intelligence/program-ledger.json || \
+    ! grep -q '"external_cognition_gateway_state": "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout"' docs/adaptive-intelligence/program-ledger.json; then
+    AION246_EXTERNAL_COGNITION_STATE_ACTIVE_CACHE=0
+    return 1
+  fi
+  AION246_EXTERNAL_COGNITION_STATE_ACTIVE_CACHE=1
   return 0
 }
 
 aion247_external_cognition_operator_evaluation_state_active() {
+  if [[ "${AION247_EXTERNAL_COGNITION_OPERATOR_EVALUATION_STATE_ACTIVE_CACHE:-}" = "1" ]]; then
+    return 0
+  fi
+  if [[ "${AION247_EXTERNAL_COGNITION_OPERATOR_EVALUATION_STATE_ACTIVE_CACHE:-}" = "0" ]]; then
+    return 1
+  fi
   [[ -f docs/adaptive-intelligence/program-ledger.json ]] || return 1
-  grep -q '"program_state": "external_cognition_foundation_evaluated_live_provider_pilot_authorized_not_implemented"' docs/adaptive-intelligence/program-ledger.json || return 1
-  grep -q '"active_adaptive_intelligence_authorization": "AION-247-AI-0002"' docs/adaptive-intelligence/program-ledger.json || return 1
-  grep -q '"active_adaptive_intelligence_task": "AION-248"' docs/adaptive-intelligence/program-ledger.json || return 1
-  grep -q '"formal_closeout_task": "AION-249"' docs/adaptive-intelligence/program-ledger.json || return 1
-  grep -q '"external_cognition_gateway_operator_evaluation_passed": true' docs/adaptive-intelligence/program-ledger.json || return 1
-  grep -q '"live_provider_pilot_authorized": true' docs/adaptive-intelligence/program-ledger.json || return 1
-  grep -q '"live_provider_pilot_implemented": false' docs/adaptive-intelligence/program-ledger.json || return 1
+  if ! grep -q '"program_state": "external_cognition_foundation_evaluated_live_provider_pilot_authorized_not_implemented"' docs/adaptive-intelligence/program-ledger.json || \
+    ! grep -q '"active_adaptive_intelligence_authorization": "AION-247-AI-0002"' docs/adaptive-intelligence/program-ledger.json || \
+    ! grep -q '"active_adaptive_intelligence_task": "AION-248"' docs/adaptive-intelligence/program-ledger.json || \
+    ! grep -q '"formal_closeout_task": "AION-249"' docs/adaptive-intelligence/program-ledger.json || \
+    ! grep -q '"external_cognition_gateway_operator_evaluation_passed": true' docs/adaptive-intelligence/program-ledger.json || \
+    ! grep -q '"live_provider_pilot_authorized": true' docs/adaptive-intelligence/program-ledger.json || \
+    ! grep -q '"live_provider_pilot_implemented": false' docs/adaptive-intelligence/program-ledger.json; then
+    AION247_EXTERNAL_COGNITION_OPERATOR_EVALUATION_STATE_ACTIVE_CACHE=0
+    return 1
+  fi
+  AION247_EXTERNAL_COGNITION_OPERATOR_EVALUATION_STATE_ACTIVE_CACHE=1
   return 0
 }
 
@@ -2872,6 +2904,94 @@ aion246_filter_external_cognition_scan_lines() {
   while IFS= read -r line; do
     path="${line%%:*}"
     if aion246_is_scoped_external_cognition_gateway_path "$path"; then
+      continue
+    fi
+    printf '%s\n' "$line"
+    emitted=0
+  done
+  return "$emitted"
+}
+
+aion248_live_provider_pilot_state_active() {
+  if [[ "${AION248_LIVE_PROVIDER_PILOT_STATE_ACTIVE_CACHE:-}" = "1" ]]; then
+    return 0
+  fi
+  if [[ "${AION248_LIVE_PROVIDER_PILOT_STATE_ACTIVE_CACHE:-}" = "0" ]]; then
+    return 1
+  fi
+  [[ -f docs/adaptive-intelligence/program-ledger.json ]] || return 1
+  if ! grep -q '"active_adaptive_intelligence_authorization": "AION-247-AI-0002"' docs/adaptive-intelligence/program-ledger.json || \
+    ! grep -q '"active_adaptive_intelligence_task": "AION-248"' docs/adaptive-intelligence/program-ledger.json || \
+    ! grep -q '"formal_closeout_task": "AION-249"' docs/adaptive-intelligence/program-ledger.json || \
+    ! grep -q '"live_provider_pilot_authorized": true' docs/adaptive-intelligence/program-ledger.json || \
+    ! grep -q '"task_id": "AION-248"' docs/adaptive-intelligence/program-ledger.json || \
+    ! grep -q '"authorization_transaction": "AION-247-AI-0002"' docs/adaptive-intelligence/program-ledger.json; then
+    AION248_LIVE_PROVIDER_PILOT_STATE_ACTIVE_CACHE=0
+    return 1
+  fi
+  AION248_LIVE_PROVIDER_PILOT_STATE_ACTIVE_CACHE=1
+  return 0
+}
+
+aion248_is_scoped_live_provider_pilot_path() {
+  aion248_live_provider_pilot_state_active || return 1
+  case "$1" in
+    docs/project-status.md|\
+    docs/adaptive-intelligence/aion-248-checklist.md|\
+    docs/adaptive-intelligence/live-provider-*.md|\
+    docs/adaptive-intelligence/openai-responses-api-boundary.md|\
+    docs/adaptive-intelligence/program-ledger.json|\
+    docs/adr/0212-single-openai-responses-api-synthetic-live-provider-pilot.md|\
+    docs/adr/README.md|\
+    docs/release/v03-live-provider-*.md|\
+    examples/adaptive-intelligence/live-provider-pilot-*.json|\
+    operator-console-static/demo-data/live-provider-pilot-*.json|\
+    scripts/live-provider-pilot-*.sh|\
+    scripts/live-provider-pilot-local-run.py|\
+	    scripts/auth-design-check.sh|\
+	    scripts/auth-prototype-review.sh|\
+	    scripts/connector-no-go-regression.sh|\
+	    scripts/connector-platform-checkpoint.sh|\
+	    scripts/connector-release-no-go-regression.sh|\
+	    scripts/connector-runtime-no-external-call-regression.sh|\
+	    scripts/knowledge-intelligence-claim-graph-operator-evaluation-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-domain-expert-mesh-authorization-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-domain-expert-mesh-operator-evaluation-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-epistemic-assessment-operator-evaluation-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-integrated-research-agent-operator-evaluation-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-research-operator-evaluation-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-tool-verification-authorization-no-go-regression.sh|\
+	    scripts/knowledge-intelligence-verified-knowledge-authorization-no-go-regression.sh|\
+	    scripts/model-gateway-authorization-no-go-regression.sh|\
+	    scripts/model-gateway-no-go-regression.sh|\
+	    scripts/model-gateway-operator-evaluation-no-go-regression.sh|\
+    scripts/operator-console-integration-authorization-no-go-regression.sh|\
+    scripts/production-auth-actor-context-trust-boundary-no-go-regression.sh|\
+    scripts/production-auth-core-no-go-regression.sh|\
+    scripts/secure-runtime-foundation-no-go-regression.sh|\
+    scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh|\
+    scripts/secure-runtime-integration-program-no-go-regression.sh|\
+	    scripts/static-console-safety-check.sh|\
+	    scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh|\
+	    scripts/v02-offline-identity-assertion-verification-authorization-no-go-regression.sh|\
+	    scripts/v02-production-auth-request-identity-stabilization-authorization-no-go-regression.sh|\
+	    services/brain-api/src/aion_brain/contracts/live_provider_pilot.py|\
+	    services/brain-api/src/aion_brain/live_provider_pilot/*.py|\
+    services/brain-api/tests/test_live_provider_pilot_aion248.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
+aion248_filter_live_provider_pilot_scan_lines() {
+  local emitted=1
+  local line
+  local path
+  while IFS= read -r line; do
+    path="${line%%:*}"
+    if aion248_is_scoped_live_provider_pilot_path "$path"; then
       continue
     fi
     printf '%s\n' "$line"

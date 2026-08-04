@@ -1,0 +1,23 @@
+{
+  "belief_mutations": 0,
+  "confidence_score_policy": "operator_review_required",
+  "memory_effect": false,
+  "memory_writes": 0,
+  "network_effect": false,
+  "production_effect": false,
+  "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+  "provider_effect": false,
+  "provider_output_promoted_to_knowledge": false,
+  "provider_output_promoted_to_memory": false,
+  "provider_output_promoted_to_truth": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "synthetic": true,
+  "tool_effect": false,
+  "trust_class": "untrusted_live_provider_output",
+  "uncertainty_label": "untrusted_candidate_reasoning_requires_operator_review",
+  "verified_knowledge_promotions": 0,
+  "view_id": "live-provider-pilot-trust-uncertainty"
+}

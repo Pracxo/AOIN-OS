@@ -1,0 +1,39 @@
+{
+  "authorization_id": "AION-247-AI-0002",
+  "contract_schema_version": "aion-live-provider-pilot/v1",
+  "endpoint": {
+    "host": "api.openai.com",
+    "method": "POST",
+    "path": "/v1/responses",
+    "scheme": "https"
+  },
+  "implementation_task": "AION-248",
+  "pilot_id": "AION-248-single-openai-responses-api-synthetic-live-provider-pilot",
+  "provider": {
+    "provider_api_family": "responses",
+    "provider_id": "openai",
+    "selected_model_id": "gpt-5.6-terra"
+  },
+  "request_policy": {
+    "background": false,
+    "files": false,
+    "previous_response_id": false,
+    "store": false,
+    "stream": false,
+    "synthetic_text_only": true,
+    "tools": false
+  },
+  "retention": {
+    "authorization_header_persisted": false,
+    "credential_fingerprint_created": false,
+    "credential_value_retained": false,
+    "raw_prompt_persisted": false,
+    "raw_response_persisted": false
+  },
+  "runtime_state": "implementation_ready_live_execution_pending",
+  "trust": {
+    "provider_output_promoted_to_knowledge": false,
+    "provider_output_promoted_to_memory": false,
+    "trust_class": "untrusted_live_provider_output"
+  }
+}

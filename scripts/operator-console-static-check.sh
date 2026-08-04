@@ -425,6 +425,19 @@ for path in sorted(demo_dir.glob("*.json")):
         "external-cognition-operator-evaluation.json",
         "external-cognition-static-console-evidence.json",
         "live-provider-pilot-authorization.json",
+        "live-provider-pilot-audit.json",
+        "live-provider-pilot-endpoint-policy.json",
+        "live-provider-pilot-evidence.json",
+        "live-provider-pilot-integrity.json",
+        "live-provider-pilot-observability.json",
+        "live-provider-pilot-provider-selection.json",
+        "live-provider-pilot-request-projection.json",
+        "live-provider-pilot-response-projection.json",
+        "live-provider-pilot-replay.json",
+        "live-provider-pilot-retention-policy.json",
+        "live-provider-pilot-runtime-hold.json",
+        "live-provider-pilot-trust-uncertainty.json",
+        "live-provider-pilot-usage-summary.json",
     }:
         if payload.get("program_id") != "AION-ADAPTIVE-INTELLIGENCE-001":
             raise SystemExit(f"adaptive intelligence program id mismatch: {path}")
