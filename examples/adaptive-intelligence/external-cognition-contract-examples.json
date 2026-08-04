@@ -1,0 +1,1072 @@
+{
+  "audit": {
+    "audit_fingerprint": "2ecdb9c03b9b41a2ef7f88f20c24f9cea071e7720099958cbff1f3e2b8e84af8",
+    "audit_id": "audit-external-cognition-fixture-session-2",
+    "created_at": "2026-08-03T20:45:00Z",
+    "event_type": "response_projected",
+    "outcome": "accepted",
+    "prior_audit_fingerprint": "bd43bc9c7752272d57cbc536eab4ed42632c8ec21fab7d6e74f6fcd8d84fc8fe",
+    "raw_payload_absent": true,
+    "schema_version": "aion-external-cognition-audit/v1",
+    "session_id": "external-cognition-fixture-session",
+    "subject_fingerprint": "e2c6eecb2d95c9d5a208fb321383b0e05b87edda4d9740bb45bccf4ba5e3dbd7"
+  },
+  "authorization": {
+    "approval_record_id": "AION-245-AI-0001",
+    "authorization_fingerprint": "565603400ff601602b108672876a01caabbd7a44bf8d65f19921015e777111ba",
+    "authorization_transaction_id": "AION-245-AI-0001",
+    "background_execution": false,
+    "created_at": "2026-08-03T20:45:00Z",
+    "credential_input_enabled": false,
+    "deterministic_fixture_only": true,
+    "existing_model_gateway_composed": true,
+    "expires_at": "2026-08-03T21:45:00Z",
+    "formal_closeout_task": "AION-247",
+    "implementation_task": "AION-246",
+    "memory_write": false,
+    "network_enabled": false,
+    "operator_identity_fingerprint": "0000000000000000000000000000000000000000000000000000000000000000",
+    "operator_invoked": true,
+    "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+    "provider_neutral": true,
+    "raw_prompt_persistence": false,
+    "raw_response_persistence": false,
+    "schema_version": "aion-external-cognition-authorization/v1",
+    "session_id": "external-cognition-fixture-session",
+    "tool_execution": false
+  },
+  "authorization_id": "AION-245-AI-0001",
+  "budgets": {
+    "circuit_breaker": {
+      "background_recovery_enabled": false,
+      "failure_threshold": 2,
+      "half_open_fixture_probe_allowed": true,
+      "live_provider_health_call_enabled": false,
+      "policy_fingerprint": "f10b5886dc92be42c722c84bfeaca47ca2c1228be8823bb727c5e6dff713f6f2",
+      "policy_id": "external-cognition-circuit-policy",
+      "scheduled_probe_enabled": false,
+      "schema_version": "aion-external-cognition-circuit-breaker/v1"
+    },
+    "context": {
+      "budget_fingerprint": "605a32acef1548d370458d85c047ff3fe893a807dea0d4dbcc3a25f2b3c83fda",
+      "maximum_declared_context_tokens": 2000000,
+      "maximum_messages": 256,
+      "maximum_payload_bytes": 2097152,
+      "schema_version": "aion-external-cognition-budget/v1"
+    },
+    "cost": {
+      "budget_fingerprint": "76332a0e832912e0021fca586865f81b10b5b671182c19a59cfc7c0fe1766c42",
+      "live_pricing_claimed": false,
+      "maximum_declared_cost_units": 1000000,
+      "schema_version": "aion-external-cognition-budget/v1"
+    },
+    "latency": {
+      "budget_fingerprint": "c5c4fdff44450eeff5c1229d6d31fd716a7c7fd2996c0dc7b38643ef08a91905",
+      "live_latency_claimed": false,
+      "maximum_declared_latency_units": 1000000,
+      "schema_version": "aion-external-cognition-budget/v1"
+    },
+    "output": {
+      "budget_fingerprint": "129c2fd0502e4715fe4f0f95ea01aaa813cbb82532776832628b18029bd91648",
+      "maximum_output_tokens": 262144,
+      "maximum_response_payload_bytes": 4194304,
+      "schema_version": "aion-external-cognition-budget/v1"
+    },
+    "retry": {
+      "automatic_live_retry_enabled": false,
+      "maximum_attempts": 3,
+      "policy_fingerprint": "8da20408546cda63c5706fdfed062c39cbccae6a485b2e6e5ca7ddcd5dcdc84d",
+      "policy_id": "external-cognition-retry-policy",
+      "retryable_error_classes": [
+        "timeout",
+        "rate_limited",
+        "unavailable",
+        "internal_error"
+      ],
+      "schema_version": "aion-external-cognition-budget/v1"
+    }
+  },
+  "capability_records": [
+    {
+      "capability_fingerprint": "591aab5a6c531e3cfb566d0a34c169b4e76fa7b631e7155ba4f6ef9fccce2a21",
+      "capability_kind": "code_reasoning",
+      "capability_record_id": "fixture-code-v1-code_reasoning",
+      "declared_context_tokens": 200000,
+      "declared_output_tokens": 8192,
+      "fixture_only": true,
+      "model_id": "fixture-code-v1",
+      "output_modes": [
+        "text"
+      ],
+      "provider_id": "fixture-provider-beta",
+      "schema_version": "aion-external-cognition-model-capability/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_fingerprint": "300621506e03f849de3b002334244f636cc1090c6de6efb6fcf9f292bf5d268c",
+      "capability_kind": "general_reasoning",
+      "capability_record_id": "fixture-code-v1-general_reasoning",
+      "declared_context_tokens": 200000,
+      "declared_output_tokens": 8192,
+      "fixture_only": true,
+      "model_id": "fixture-code-v1",
+      "output_modes": [
+        "text"
+      ],
+      "provider_id": "fixture-provider-beta",
+      "schema_version": "aion-external-cognition-model-capability/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_fingerprint": "0315cfb404718c066e8409db63c1ca56f65b2ca989c38626735472b4b591f088",
+      "capability_kind": "summarization",
+      "capability_record_id": "fixture-code-v1-summarization",
+      "declared_context_tokens": 200000,
+      "declared_output_tokens": 8192,
+      "fixture_only": true,
+      "model_id": "fixture-code-v1",
+      "output_modes": [
+        "text"
+      ],
+      "provider_id": "fixture-provider-beta",
+      "schema_version": "aion-external-cognition-model-capability/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_fingerprint": "f5f020eb4c7c333d601a0759244d41b097362dd1c1d6a6b0e69e63914f55dde6",
+      "capability_kind": "fact_verification",
+      "capability_record_id": "fixture-long-context-v1-fact_verification",
+      "declared_context_tokens": 200000,
+      "declared_output_tokens": 8192,
+      "fixture_only": true,
+      "model_id": "fixture-long-context-v1",
+      "output_modes": [
+        "text"
+      ],
+      "provider_id": "fixture-provider-gamma",
+      "schema_version": "aion-external-cognition-model-capability/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_fingerprint": "d8070833803b697f0464ff1de9985877d13a3b1e3102d0f731525e7db624771f",
+      "capability_kind": "general_reasoning",
+      "capability_record_id": "fixture-long-context-v1-general_reasoning",
+      "declared_context_tokens": 200000,
+      "declared_output_tokens": 8192,
+      "fixture_only": true,
+      "model_id": "fixture-long-context-v1",
+      "output_modes": [
+        "text"
+      ],
+      "provider_id": "fixture-provider-gamma",
+      "schema_version": "aion-external-cognition-model-capability/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_fingerprint": "ae5b84ae994bd73971a96b38887ff0302911aacaa0f0f53b18a4014a357ca287",
+      "capability_kind": "long_context",
+      "capability_record_id": "fixture-long-context-v1-long_context",
+      "declared_context_tokens": 500000,
+      "declared_output_tokens": 8192,
+      "fixture_only": true,
+      "model_id": "fixture-long-context-v1",
+      "output_modes": [
+        "text"
+      ],
+      "provider_id": "fixture-provider-gamma",
+      "schema_version": "aion-external-cognition-model-capability/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_fingerprint": "c9983a643e3508d654a3c66ccc9c82334d297aece7a471d8b1ba101a66c37cfc",
+      "capability_kind": "general_reasoning",
+      "capability_record_id": "fixture-multilingual-v1-general_reasoning",
+      "declared_context_tokens": 200000,
+      "declared_output_tokens": 8192,
+      "fixture_only": true,
+      "model_id": "fixture-multilingual-v1",
+      "output_modes": [
+        "text"
+      ],
+      "provider_id": "fixture-provider-gamma",
+      "schema_version": "aion-external-cognition-model-capability/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_fingerprint": "4aaf592ffebc5d45b38d37b6a2661e999e6a1ad9eecc5f8c579aeea248215584",
+      "capability_kind": "multilingual_reasoning",
+      "capability_record_id": "fixture-multilingual-v1-multilingual_reasoning",
+      "declared_context_tokens": 200000,
+      "declared_output_tokens": 8192,
+      "fixture_only": true,
+      "model_id": "fixture-multilingual-v1",
+      "output_modes": [
+        "text"
+      ],
+      "provider_id": "fixture-provider-gamma",
+      "schema_version": "aion-external-cognition-model-capability/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_fingerprint": "dc53c4e21752e8b2f5d2ce3bd1781a05742a69d6d65e5f9891677e08567bfa73",
+      "capability_kind": "summarization",
+      "capability_record_id": "fixture-multilingual-v1-summarization",
+      "declared_context_tokens": 200000,
+      "declared_output_tokens": 8192,
+      "fixture_only": true,
+      "model_id": "fixture-multilingual-v1",
+      "output_modes": [
+        "text"
+      ],
+      "provider_id": "fixture-provider-gamma",
+      "schema_version": "aion-external-cognition-model-capability/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_fingerprint": "0773c2519f697c2dd46bfdb6a9a41905ef96698d012078bcf6adebfe4d1b8696",
+      "capability_kind": "fact_verification",
+      "capability_record_id": "fixture-reasoner-large-v1-fact_verification",
+      "declared_context_tokens": 200000,
+      "declared_output_tokens": 8192,
+      "fixture_only": true,
+      "model_id": "fixture-reasoner-large-v1",
+      "output_modes": [
+        "text"
+      ],
+      "provider_id": "fixture-provider-alpha",
+      "schema_version": "aion-external-cognition-model-capability/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_fingerprint": "e33ed64595f96fd135dce93802a8078bea507f17a52baebf81651833a12162b1",
+      "capability_kind": "general_reasoning",
+      "capability_record_id": "fixture-reasoner-large-v1-general_reasoning",
+      "declared_context_tokens": 200000,
+      "declared_output_tokens": 8192,
+      "fixture_only": true,
+      "model_id": "fixture-reasoner-large-v1",
+      "output_modes": [
+        "text"
+      ],
+      "provider_id": "fixture-provider-alpha",
+      "schema_version": "aion-external-cognition-model-capability/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_fingerprint": "fb7c6c090666c3510e739335a3db6632bcfd57c060bf8699259bb17792fe42aa",
+      "capability_kind": "long_context",
+      "capability_record_id": "fixture-reasoner-large-v1-long_context",
+      "declared_context_tokens": 500000,
+      "declared_output_tokens": 8192,
+      "fixture_only": true,
+      "model_id": "fixture-reasoner-large-v1",
+      "output_modes": [
+        "text"
+      ],
+      "provider_id": "fixture-provider-alpha",
+      "schema_version": "aion-external-cognition-model-capability/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_fingerprint": "4e9c8ba41501cffe5aaf93473d8567a1e6a2278600dcb94688acfe2032e36080",
+      "capability_kind": "classification",
+      "capability_record_id": "fixture-reasoner-small-v1-classification",
+      "declared_context_tokens": 200000,
+      "declared_output_tokens": 8192,
+      "fixture_only": true,
+      "model_id": "fixture-reasoner-small-v1",
+      "output_modes": [
+        "text"
+      ],
+      "provider_id": "fixture-provider-alpha",
+      "schema_version": "aion-external-cognition-model-capability/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_fingerprint": "ef537833d32747bf65169aee78995c97375d8fd01b5b0e4c3cdc7282db44a264",
+      "capability_kind": "general_reasoning",
+      "capability_record_id": "fixture-reasoner-small-v1-general_reasoning",
+      "declared_context_tokens": 200000,
+      "declared_output_tokens": 8192,
+      "fixture_only": true,
+      "model_id": "fixture-reasoner-small-v1",
+      "output_modes": [
+        "text"
+      ],
+      "provider_id": "fixture-provider-alpha",
+      "schema_version": "aion-external-cognition-model-capability/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_fingerprint": "e625fc2363768cfa6b4664ba7fcae4f1d0b4a89b0cf5645f22dd92bee61c84f7",
+      "capability_kind": "summarization",
+      "capability_record_id": "fixture-reasoner-small-v1-summarization",
+      "declared_context_tokens": 200000,
+      "declared_output_tokens": 8192,
+      "fixture_only": true,
+      "model_id": "fixture-reasoner-small-v1",
+      "output_modes": [
+        "text"
+      ],
+      "provider_id": "fixture-provider-alpha",
+      "schema_version": "aion-external-cognition-model-capability/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_fingerprint": "2fc669bb46681e682584c90782692c17938a4660683bbd7e9898d396c64bbacd",
+      "capability_kind": "classification",
+      "capability_record_id": "fixture-structured-v1-classification",
+      "declared_context_tokens": 200000,
+      "declared_output_tokens": 8192,
+      "fixture_only": true,
+      "model_id": "fixture-structured-v1",
+      "output_modes": [
+        "text"
+      ],
+      "provider_id": "fixture-provider-beta",
+      "schema_version": "aion-external-cognition-model-capability/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_fingerprint": "b17a6b8e5137e8f3d43980107f8e2a4072cf8200030a678b5b1f6ab11f6d2e19",
+      "capability_kind": "restricted_structured_output",
+      "capability_record_id": "fixture-structured-v1-restricted_structured_output",
+      "declared_context_tokens": 200000,
+      "declared_output_tokens": 8192,
+      "fixture_only": true,
+      "model_id": "fixture-structured-v1",
+      "output_modes": [
+        "structured_json",
+        "text"
+      ],
+      "provider_id": "fixture-provider-beta",
+      "schema_version": "aion-external-cognition-model-capability/v1",
+      "structured_output_supported": true,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_fingerprint": "6e7d4722409ff0482b562b6640aa0cbcb2d5f1348c9f7878a0e1cdc806785718",
+      "capability_kind": "structured_extraction",
+      "capability_record_id": "fixture-structured-v1-structured_extraction",
+      "declared_context_tokens": 200000,
+      "declared_output_tokens": 8192,
+      "fixture_only": true,
+      "model_id": "fixture-structured-v1",
+      "output_modes": [
+        "structured_json",
+        "text"
+      ],
+      "provider_id": "fixture-provider-beta",
+      "schema_version": "aion-external-cognition-model-capability/v1",
+      "structured_output_supported": true,
+      "tool_calling_supported": false
+    }
+  ],
+  "circuit_breaker": {
+    "background_recovery_enabled": false,
+    "failure_threshold": 2,
+    "half_open_fixture_probe_allowed": true,
+    "live_provider_health_call_enabled": false,
+    "policy_fingerprint": "f10b5886dc92be42c722c84bfeaca47ca2c1228be8823bb727c5e6dff713f6f2",
+    "policy_id": "external-cognition-circuit-policy",
+    "scheduled_probe_enabled": false,
+    "schema_version": "aion-external-cognition-circuit-breaker/v1"
+  },
+  "component_binding": {
+    "authorization_transaction_id": "AION-245-AI-0001",
+    "binding_fingerprint": "54e1f8c8a61eb7ce4a2e6fdb77bd64363d169bd10e5b923ae919fed101cb700d",
+    "binding_id": "external-cognition-component-binding",
+    "created_at": "2026-08-03T20:45:00Z",
+    "current_main_commit": "d7fe689bfe39a98688784758ceb2b7130ca949bd",
+    "deterministic_fixture_only": true,
+    "existing_model_gateway_contract_fingerprint": "5de8c1b8706249f4e62e2c593c858012c7966df70adf37b7b89f6192de4c7c8a",
+    "existing_model_gateway_service_fingerprint": "61e3f01d0d7d49bdc8694666599128a003eeec20585a316de5c14844d4875641",
+    "existing_model_manifest_projection_fingerprint": "5de8c1b8706249f4e62e2c593c858012c7966df70adf37b7b89f6192de4c7c8a",
+    "existing_provider_manifest_projection_fingerprint": "5de8c1b8706249f4e62e2c593c858012c7966df70adf37b7b89f6192de4c7c8a",
+    "existing_route_policy_projection_fingerprint": "5de8c1b8706249f4e62e2c593c858012c7966df70adf37b7b89f6192de4c7c8a",
+    "memory_effect": false,
+    "network_effect": false,
+    "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+    "provider_effect": false,
+    "read_only": true,
+    "resource_limit_fingerprint": "5f24a2a8e5ed5dd9490e9ee6d70d7a975028343fef48084b4f6af776582f78f4",
+    "schema_version": "aion-external-cognition-component-binding/v1",
+    "secure_runtime_contract_fingerprint": "5de8c1b8706249f4e62e2c593c858012c7966df70adf37b7b89f6192de4c7c8a",
+    "secure_runtime_session_fingerprint": "5de8c1b8706249f4e62e2c593c858012c7966df70adf37b7b89f6192de4c7c8a",
+    "tool_effect": false
+  },
+  "example_id": "external-cognition-foundation-contract-examples",
+  "integrity": {
+    "audit_chain_head": "2ecdb9c03b9b41a2ef7f88f20c24f9cea071e7720099958cbff1f3e2b8e84af8",
+    "checked_categories": [
+      "audit_chain_integrity",
+      "authorization_lineage",
+      "budget_integrity",
+      "circuit_breaker_integrity",
+      "component_lineage",
+      "evidence_chain_integrity",
+      "manifest_referential_integrity",
+      "redaction_integrity",
+      "replay_integrity",
+      "route_determinism",
+      "trust_integrity",
+      "zero_prohibited_effects"
+    ],
+    "created_at": "2026-08-03T20:45:00Z",
+    "evidence_chain_head": "3266eccc6fc0baae1d5f40886aeff735f20790bee5c962f9677d2ed1cab81356",
+    "finding_codes": [],
+    "prohibited_effect_counters": {
+      "actual_model_provider_calls": 0,
+      "authorization_headers_created": 0,
+      "automatic_merges": 0,
+      "background_cycles": 0,
+      "belief_mutations": 0,
+      "dns_resolutions": 0,
+      "external_connector_calls": 0,
+      "external_network_egress_calls": 0,
+      "external_tool_executions": 0,
+      "git_operations": 0,
+      "hidden_reasoning_records": 0,
+      "memory_writes": 0,
+      "model_output_tool_calls": 0,
+      "model_output_triggered_executions": 0,
+      "model_weight_changes": 0,
+      "production_deployments": 0,
+      "provider_credentials_generated": 0,
+      "provider_credentials_persisted": 0,
+      "provider_credentials_read": 0,
+      "provider_network_adapter_calls": 0,
+      "provider_tokens_persisted": 0,
+      "provider_tokens_read": 0,
+      "public_network_calls": 0,
+      "raw_prompts_persisted": 0,
+      "raw_responses_persisted": 0,
+      "runtime_created_pull_requests": 0,
+      "scheduled_provider_calls": 0,
+      "source_mutations": 0,
+      "verified_knowledge_promotions": 0
+    },
+    "report_fingerprint": "257348629e54fea8a983aa13e9d645a0ed1457e9f618d5910fd55aee6c35ee9e",
+    "report_id": "external-cognition-example-integrity",
+    "schema_version": "aion-external-cognition-integrity/v1",
+    "status": "passed"
+  },
+  "memory_effect": false,
+  "message_normalization": [
+    {
+      "content_fingerprint": "91db1cb70f75fed3404dc6d9d2686cc22cc332c3d50eac1fead92a8969702b9e",
+      "deterministic_token_estimate": 10,
+      "message_fingerprint": "a43fdb1b00c9dade6114c97a52416ae284e14d48c54fea4c252740e26a94f74e",
+      "message_id": "message-example",
+      "normalized_at": "2026-08-03T20:45:00Z",
+      "protected_material_present": false,
+      "redaction_finding_count": 0,
+      "role": "user",
+      "schema_version": "aion-external-cognition-message-projection/v1",
+      "utf8_byte_count": 29
+    }
+  ],
+  "model_manifests": [
+    {
+      "capability_record_ids": [
+        "fixture-code-v1-code_reasoning",
+        "fixture-code-v1-general_reasoning",
+        "fixture-code-v1-summarization"
+      ],
+      "declared_context_token_limit": 200000,
+      "declared_cost_units": 5,
+      "declared_latency_units": 5,
+      "declared_output_token_limit": 8192,
+      "fixture_only": true,
+      "manifest_fingerprint": "1eeeb283df443f01a21c33443c49478699d3cb211e158ef3716d9a37c201dd2a",
+      "model_family_code": "code",
+      "model_id": "fixture-code-v1",
+      "model_version_code": "v1",
+      "network_enabled": false,
+      "provider_id": "fixture-provider-beta",
+      "schema_version": "aion-external-cognition-model-manifest/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_record_ids": [
+        "fixture-long-context-v1-fact_verification",
+        "fixture-long-context-v1-general_reasoning",
+        "fixture-long-context-v1-long_context"
+      ],
+      "declared_context_token_limit": 1000000,
+      "declared_cost_units": 8,
+      "declared_latency_units": 8,
+      "declared_output_token_limit": 8192,
+      "fixture_only": true,
+      "manifest_fingerprint": "df708564693b4786807a43ee0e2081d226b36689d92dc718a1beeedb8b405788",
+      "model_family_code": "long_context",
+      "model_id": "fixture-long-context-v1",
+      "model_version_code": "v1",
+      "network_enabled": false,
+      "provider_id": "fixture-provider-gamma",
+      "schema_version": "aion-external-cognition-model-manifest/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_record_ids": [
+        "fixture-multilingual-v1-general_reasoning",
+        "fixture-multilingual-v1-multilingual_reasoning",
+        "fixture-multilingual-v1-summarization"
+      ],
+      "declared_context_token_limit": 200000,
+      "declared_cost_units": 4,
+      "declared_latency_units": 5,
+      "declared_output_token_limit": 8192,
+      "fixture_only": true,
+      "manifest_fingerprint": "b17bff9e619dd3a673282d62e255cc278f2bf6b67ce4ef83264752cc0a5da055",
+      "model_family_code": "multilingual",
+      "model_id": "fixture-multilingual-v1",
+      "model_version_code": "v1",
+      "network_enabled": false,
+      "provider_id": "fixture-provider-gamma",
+      "schema_version": "aion-external-cognition-model-manifest/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_record_ids": [
+        "fixture-reasoner-large-v1-fact_verification",
+        "fixture-reasoner-large-v1-general_reasoning",
+        "fixture-reasoner-large-v1-long_context"
+      ],
+      "declared_context_token_limit": 500000,
+      "declared_cost_units": 12,
+      "declared_latency_units": 9,
+      "declared_output_token_limit": 8192,
+      "fixture_only": true,
+      "manifest_fingerprint": "1ea5c552a66aaa3b5dfc37757b8ac32602eaf3fc64b857a8ee656e7770088e96",
+      "model_family_code": "reasoner",
+      "model_id": "fixture-reasoner-large-v1",
+      "model_version_code": "v1",
+      "network_enabled": false,
+      "provider_id": "fixture-provider-alpha",
+      "schema_version": "aion-external-cognition-model-manifest/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_record_ids": [
+        "fixture-reasoner-small-v1-classification",
+        "fixture-reasoner-small-v1-general_reasoning",
+        "fixture-reasoner-small-v1-summarization"
+      ],
+      "declared_context_token_limit": 200000,
+      "declared_cost_units": 4,
+      "declared_latency_units": 4,
+      "declared_output_token_limit": 8192,
+      "fixture_only": true,
+      "manifest_fingerprint": "7fd7b3667a41093a31affaf3cd0da3fe51b287db2a67ce6c1209dac06dfabbf1",
+      "model_family_code": "reasoner",
+      "model_id": "fixture-reasoner-small-v1",
+      "model_version_code": "v1",
+      "network_enabled": false,
+      "provider_id": "fixture-provider-alpha",
+      "schema_version": "aion-external-cognition-model-manifest/v1",
+      "structured_output_supported": false,
+      "tool_calling_supported": false
+    },
+    {
+      "capability_record_ids": [
+        "fixture-structured-v1-classification",
+        "fixture-structured-v1-restricted_structured_output",
+        "fixture-structured-v1-structured_extraction"
+      ],
+      "declared_context_token_limit": 200000,
+      "declared_cost_units": 4,
+      "declared_latency_units": 4,
+      "declared_output_token_limit": 8192,
+      "fixture_only": true,
+      "manifest_fingerprint": "7ecac9c0e8092cbfac2defaebfc23d0ead36e24d600a5962bb296044621bfc74",
+      "model_family_code": "structured",
+      "model_id": "fixture-structured-v1",
+      "model_version_code": "v1",
+      "network_enabled": false,
+      "provider_id": "fixture-provider-beta",
+      "schema_version": "aion-external-cognition-model-manifest/v1",
+      "structured_output_supported": true,
+      "tool_calling_supported": false
+    }
+  ],
+  "network_effect": false,
+  "observability": {
+    "audit_chain_head": "2ecdb9c03b9b41a2ef7f88f20c24f9cea071e7720099958cbff1f3e2b8e84af8",
+    "circuit_states": {
+      "fixture-reasoner-large-v1": "closed"
+    },
+    "counters": {
+      "model_manifests_loaded": 6,
+      "provider_manifests_loaded": 3
+    },
+    "created_at": "2026-08-03T20:45:00Z",
+    "evidence_chain_head": "3266eccc6fc0baae1d5f40886aeff735f20790bee5c962f9677d2ed1cab81356",
+    "schema_version": "aion-external-cognition-observability/v1",
+    "session_id": "external-cognition-fixture-session",
+    "snapshot_fingerprint": "623110f7cc2a7f20b69ed6f9657512747411e0c5f33a52ed04698b41a5b10650",
+    "snapshot_id": "external-cognition-example-observability",
+    "trust_class_counts": {
+      "untrusted_fixture_output": 1
+    },
+    "uncertainty_counts": {
+      "operator_review_required": 1
+    }
+  },
+  "operator_review": {
+    "created_at": "2026-08-03T20:45:00Z",
+    "raw_output_absent": true,
+    "reason_codes": [
+      "fixture_output_untrusted"
+    ],
+    "response_fingerprint": "e2c6eecb2d95c9d5a208fb321383b0e05b87edda4d9740bb45bccf4ba5e3dbd7",
+    "review_fingerprint": "33390a8cf38dc1bd2e43f522b4ba9de0af6502eb80194f43d6ba34b8aa05fc8f",
+    "review_id": "external-cognition-example-review",
+    "schema_version": "aion-external-cognition-response/v1",
+    "trust_class": "untrusted_fixture_output"
+  },
+  "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+  "provider_effect": false,
+  "provider_manifests": [
+    {
+      "created_at": "2026-08-03T22:08:57.498399Z",
+      "credential_required": false,
+      "declared_availability_class": "fixture_available",
+      "declared_cost_class_code": "cost_class_1",
+      "declared_latency_class_code": "latency_class_1",
+      "endpoint_present": false,
+      "fixture_only": true,
+      "manifest_fingerprint": "186b48aa494a49ebd662e8ef4d8a054ce368b8eb8cfedcbd48c5bfd8b1d17950",
+      "network_required": false,
+      "provider_display_code": "fixture-provider-alpha",
+      "provider_id": "fixture-provider-alpha",
+      "provider_kind": "deterministic_fixture",
+      "schema_version": "aion-external-cognition-provider-manifest/v1",
+      "supported_capability_codes": [
+        "classification",
+        "code_reasoning",
+        "fact_verification",
+        "general_reasoning",
+        "long_context",
+        "multilingual_reasoning",
+        "restricted_structured_output",
+        "structured_extraction",
+        "summarization"
+      ],
+      "supported_output_modes": [
+        "structured_json",
+        "text"
+      ]
+    },
+    {
+      "created_at": "2026-08-03T22:08:57.498399Z",
+      "credential_required": false,
+      "declared_availability_class": "fixture_available",
+      "declared_cost_class_code": "cost_class_2",
+      "declared_latency_class_code": "latency_class_2",
+      "endpoint_present": false,
+      "fixture_only": true,
+      "manifest_fingerprint": "c8ec0b6e58af74d11c24e1a08e19b831e4de7d6dd998fca046ed01179d4bdc67",
+      "network_required": false,
+      "provider_display_code": "fixture-provider-beta",
+      "provider_id": "fixture-provider-beta",
+      "provider_kind": "deterministic_fixture",
+      "schema_version": "aion-external-cognition-provider-manifest/v1",
+      "supported_capability_codes": [
+        "classification",
+        "code_reasoning",
+        "fact_verification",
+        "general_reasoning",
+        "long_context",
+        "multilingual_reasoning",
+        "restricted_structured_output",
+        "structured_extraction",
+        "summarization"
+      ],
+      "supported_output_modes": [
+        "structured_json",
+        "text"
+      ]
+    },
+    {
+      "created_at": "2026-08-03T22:08:57.498399Z",
+      "credential_required": false,
+      "declared_availability_class": "fixture_available",
+      "declared_cost_class_code": "cost_class_3",
+      "declared_latency_class_code": "latency_class_3",
+      "endpoint_present": false,
+      "fixture_only": true,
+      "manifest_fingerprint": "412811128f51375d934fc9b72f2ca196354c060c7c9b1a2b00aa1739622761ea",
+      "network_required": false,
+      "provider_display_code": "fixture-provider-gamma",
+      "provider_id": "fixture-provider-gamma",
+      "provider_kind": "deterministic_fixture",
+      "schema_version": "aion-external-cognition-provider-manifest/v1",
+      "supported_capability_codes": [
+        "classification",
+        "code_reasoning",
+        "fact_verification",
+        "general_reasoning",
+        "long_context",
+        "multilingual_reasoning",
+        "restricted_structured_output",
+        "structured_extraction",
+        "summarization"
+      ],
+      "supported_output_modes": [
+        "structured_json",
+        "text"
+      ]
+    }
+  ],
+  "raw_material_retained": false,
+  "redacted": true,
+  "replay": {
+    "created_at": "2026-08-03T20:45:00Z",
+    "fixture_invoked": true,
+    "outcome": "new",
+    "replay_fingerprint": "28e06da528c55c13fbc7ecf23d8245f0ec3eb85aacbbf5c084bd406b2f28d180",
+    "request_fingerprint": "d56c97f331ca1a08d1597f680513d3ef4e354f3ba5afed8ce42a70dbfa5a8543",
+    "request_id": "external-cognition-example-request",
+    "safe_response_fingerprint": "e2c6eecb2d95c9d5a208fb321383b0e05b87edda4d9740bb45bccf4ba5e3dbd7",
+    "schema_version": "aion-external-cognition-replay/v1"
+  },
+  "request_envelope": {
+    "authorization_fingerprint": "565603400ff601602b108672876a01caabbd7a44bf8d65f19921015e777111ba",
+    "background_execution_requested": false,
+    "component_binding_fingerprint": "54e1f8c8a61eb7ce4a2e6fdb77bd64363d169bd10e5b923ae919fed101cb700d",
+    "context_budget_fingerprint": "605a32acef1548d370458d85c047ff3fe893a807dea0d4dbcc3a25f2b3c83fda",
+    "cost_budget_fingerprint": "76332a0e832912e0021fca586865f81b10b5b671182c19a59cfc7c0fe1766c42",
+    "created_at": "2026-08-03T20:45:00Z",
+    "credential_present": false,
+    "expires_at": "2026-08-03T20:50:00Z",
+    "function_call_present": false,
+    "idempotency_fingerprint": "35bc887b878817de5b21529d0a69dc2571b9db8ec2523cd5ed092fe4a0e5c1bf",
+    "latency_budget_fingerprint": "c5c4fdff44450eeff5c1229d6d31fd716a7c7fd2996c0dc7b38643ef08a91905",
+    "memory_write_requested": false,
+    "message_projection_fingerprints": [
+      "a43fdb1b00c9dade6114c97a52416ae284e14d48c54fea4c252740e26a94f74e"
+    ],
+    "output_budget_fingerprint": "129c2fd0502e4715fe4f0f95ea01aaa813cbb82532776832628b18029bd91648",
+    "provider_endpoint_present": false,
+    "provider_headers_present": false,
+    "raw_prompt_retained": false,
+    "request_fingerprint": "d56c97f331ca1a08d1597f680513d3ef4e354f3ba5afed8ce42a70dbfa5a8543",
+    "request_id": "external-cognition-example-request",
+    "request_intent": "reasoning",
+    "requested_capability_codes": [
+      "general_reasoning"
+    ],
+    "routing_policy_fingerprint": "7e399328e04f5452ccc0dfc34f0c05caf3076c1f324383e3846f9d493b14b0ac",
+    "safe_metadata": {
+      "purpose": "aion-246-example"
+    },
+    "schema_version": "aion-external-cognition-request/v1",
+    "session_id": "external-cognition-fixture-session",
+    "structured_output_schema_fingerprint": null,
+    "tool_execution_requested": false,
+    "tool_role_present": false
+  },
+  "response_envelope": {
+    "created_at": "2026-08-03T20:45:00Z",
+    "deterministic_token_usage": 128,
+    "fallback_plan_fingerprint": null,
+    "model_manifest_fingerprint": "1ea5c552a66aaa3b5dfc37757b8ac32602eaf3fc64b857a8ee656e7770088e96",
+    "normalized_error": null,
+    "operator_review_required": true,
+    "production_effect": false,
+    "provider_manifest_fingerprint": "186b48aa494a49ebd662e8ef4d8a054ce368b8eb8cfedcbd48c5bfd8b1d17950",
+    "raw_response_absent": true,
+    "request_fingerprint": "d56c97f331ca1a08d1597f680513d3ef4e354f3ba5afed8ce42a70dbfa5a8543",
+    "response_byte_count": 24,
+    "response_content_fingerprint": "df943fa7c6e082eb45f5c44626991bbe292442763877a556c420f7727724b8fe",
+    "response_fingerprint": "e2c6eecb2d95c9d5a208fb321383b0e05b87edda4d9740bb45bccf4ba5e3dbd7",
+    "response_id": "external-cognition-example-response",
+    "retry_plan_fingerprint": null,
+    "route_plan_fingerprint": "3d7029b549c4b4167f85aa99414c8d0eefba62c00c68b4bf3f99fc62046a0553",
+    "schema_version": "aion-external-cognition-response/v1",
+    "structured_output_validation_fingerprint": null,
+    "trust_assessment": {
+      "created_at": "2026-08-03T20:45:00Z",
+      "factual_truth_confirmed": false,
+      "memory_write_authorized": false,
+      "operator_review_required": true,
+      "schema_validation_fingerprint": null,
+      "schema_version": "aion-external-cognition-trust/v1",
+      "tool_execution_authorized": false,
+      "trust_assessment_id": "external-cognition-example-trust",
+      "trust_class": "untrusted_fixture_output",
+      "trust_fingerprint": "a39f95d7ae9d95769d91120411c0f0cbb1b87cbe5bd1c5734adb71b6eae55db2"
+    },
+    "uncertainty_projection": {
+      "calibration_status_code": "uncalibrated_fixture",
+      "confidence_source_code": "fixture_declared",
+      "declared_confidence": 0.42,
+      "disagreement_count": 0,
+      "missing_evidence_count": 1,
+      "operator_review_required": true,
+      "schema_version": "aion-external-cognition-uncertainty/v1",
+      "uncertainty_fingerprint": "b3ce4a6fdbe3323075219372ec1b21c0991bcab5efe2c55be1cf7761be29e36c",
+      "uncertainty_id": "fixture-default-uncertainty",
+      "unresolved_claim_count": 1
+    }
+  },
+  "route_plan": {
+    "candidates": [
+      {
+        "candidate_fingerprint": "76c22e6370ac1b725e4a020162f9e9b5468990fcc93c86323166a138cdf0ddb6",
+        "circuit_state": "closed",
+        "declared_context_tokens": 500000,
+        "declared_cost_units": 12,
+        "declared_latency_units": 9,
+        "declared_output_tokens": 8192,
+        "matched_capabilities": [
+          "general_reasoning"
+        ],
+        "model_id": "fixture-reasoner-large-v1",
+        "output_mode": "text",
+        "provider_id": "fixture-provider-alpha",
+        "rejection_reasons": [],
+        "schema_version": "aion-external-cognition-routing/v1"
+      },
+      {
+        "candidate_fingerprint": "a7ce0c4ca83a03962d01ac824c1711961d22d02bbaa3ec6bb89ba5d0f830dc9d",
+        "circuit_state": "closed",
+        "declared_context_tokens": 200000,
+        "declared_cost_units": 4,
+        "declared_latency_units": 4,
+        "declared_output_tokens": 8192,
+        "matched_capabilities": [
+          "general_reasoning"
+        ],
+        "model_id": "fixture-reasoner-small-v1",
+        "output_mode": "text",
+        "provider_id": "fixture-provider-alpha",
+        "rejection_reasons": [],
+        "schema_version": "aion-external-cognition-routing/v1"
+      },
+      {
+        "candidate_fingerprint": "4b651d1fc2c7050f7baa0c30fbe60f83c711a243268b7cabf1052914f457d91f",
+        "circuit_state": "closed",
+        "declared_context_tokens": 200000,
+        "declared_cost_units": 5,
+        "declared_latency_units": 5,
+        "declared_output_tokens": 8192,
+        "matched_capabilities": [
+          "general_reasoning"
+        ],
+        "model_id": "fixture-code-v1",
+        "output_mode": "text",
+        "provider_id": "fixture-provider-beta",
+        "rejection_reasons": [
+          "routing_policy_not_matched"
+        ],
+        "schema_version": "aion-external-cognition-routing/v1"
+      },
+      {
+        "candidate_fingerprint": "f792ebb3891618a1c510a53a651647f97ff6ae9a338d60fd364a1e56bdac79e6",
+        "circuit_state": "closed",
+        "declared_context_tokens": 1000000,
+        "declared_cost_units": 8,
+        "declared_latency_units": 8,
+        "declared_output_tokens": 8192,
+        "matched_capabilities": [
+          "general_reasoning"
+        ],
+        "model_id": "fixture-long-context-v1",
+        "output_mode": "text",
+        "provider_id": "fixture-provider-gamma",
+        "rejection_reasons": [
+          "routing_policy_not_matched"
+        ],
+        "schema_version": "aion-external-cognition-routing/v1"
+      },
+      {
+        "candidate_fingerprint": "c86a80b2831842454a9d118f3d34f8d69d054eb3f832959c2fb7ba429e86f946",
+        "circuit_state": "closed",
+        "declared_context_tokens": 200000,
+        "declared_cost_units": 4,
+        "declared_latency_units": 5,
+        "declared_output_tokens": 8192,
+        "matched_capabilities": [
+          "general_reasoning"
+        ],
+        "model_id": "fixture-multilingual-v1",
+        "output_mode": "text",
+        "provider_id": "fixture-provider-gamma",
+        "rejection_reasons": [
+          "routing_policy_not_matched"
+        ],
+        "schema_version": "aion-external-cognition-routing/v1"
+      },
+      {
+        "candidate_fingerprint": "e91b0d0fe723f243cc41ce7b9d682bb41e83beb1a2f848d618d35f3541243154",
+        "circuit_state": "closed",
+        "declared_context_tokens": 200000,
+        "declared_cost_units": 4,
+        "declared_latency_units": 4,
+        "declared_output_tokens": 8192,
+        "matched_capabilities": [],
+        "model_id": "fixture-structured-v1",
+        "output_mode": "text",
+        "provider_id": "fixture-provider-beta",
+        "rejection_reasons": [
+          "missing_required_capability",
+          "routing_policy_not_matched"
+        ],
+        "schema_version": "aion-external-cognition-routing/v1"
+      }
+    ],
+    "created_at": "2026-08-03T20:45:00Z",
+    "deterministic_ordering": true,
+    "existing_model_gateway_compatible": true,
+    "existing_model_gateway_route_fingerprint": "8ab548831ab9d4cba7bc32974e07cc4b74ff48d1d9471cfd1b332bf5c2f8ca46",
+    "outcome": "selected",
+    "policy_fingerprint": "7e399328e04f5452ccc0dfc34f0c05caf3076c1f324383e3846f9d493b14b0ac",
+    "rejection_reasons": [
+      "none"
+    ],
+    "request_fingerprint": "d56c97f331ca1a08d1597f680513d3ef4e354f3ba5afed8ce42a70dbfa5a8543",
+    "route_plan_fingerprint": "3d7029b549c4b4167f85aa99414c8d0eefba62c00c68b4bf3f99fc62046a0553",
+    "route_plan_id": "external-cognition-example-route",
+    "schema_version": "aion-external-cognition-routing/v1",
+    "selected_model_id": "fixture-reasoner-large-v1",
+    "selected_provider_id": "fixture-provider-alpha"
+  },
+  "route_policy": {
+    "automatic_live_invocation": false,
+    "deterministic_tie_break": "model_id",
+    "learned_routing": false,
+    "model_generated_routing": false,
+    "policy_fingerprint": "7e399328e04f5452ccc0dfc34f0c05caf3076c1f324383e3846f9d493b14b0ac",
+    "policy_id": "reasoning-policy",
+    "random_routing": false,
+    "rules": [
+      {
+        "allowed_model_ids": [
+          "fixture-reasoner-large-v1",
+          "fixture-reasoner-small-v1"
+        ],
+        "allowed_provider_ids": [
+          "fixture-provider-alpha",
+          "fixture-provider-beta",
+          "fixture-provider-gamma"
+        ],
+        "maximum_declared_cost_units": 100,
+        "maximum_declared_latency_units": 100,
+        "output_mode": "text",
+        "required_capabilities": [
+          "general_reasoning"
+        ],
+        "rule_fingerprint": "505be58a2687e99239cb36454dabee23f8fe04332bdba69430c48c91e103ef31",
+        "rule_id": "reasoning-policy-rule",
+        "schema_version": "aion-external-cognition-routing/v1"
+      }
+    ],
+    "schema_version": "aion-external-cognition-routing/v1"
+  },
+  "runtime_hold": {
+    "active_adaptive_intelligence_authorization": "AION-245-AI-0001",
+    "active_adaptive_intelligence_task": "AION-246",
+    "actual_provider_calls": 0,
+    "adaptive_intelligence_program_authorized": true,
+    "adaptive_intelligence_program_implemented": false,
+    "authorization_headers_created": 0,
+    "autonomous_background_cycles": 0,
+    "belief_mutations": 0,
+    "deterministic_fixture_only": true,
+    "dns_resolutions": 0,
+    "external_cognition_gateway_implemented": true,
+    "external_cognition_gateway_state": "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout",
+    "external_connector_calls": 0,
+    "external_network_egress_calls": 0,
+    "external_tool_executions": 0,
+    "formal_closeout_task": "AION-247",
+    "git_operations": 0,
+    "live_provider_access": false,
+    "model_weight_changes": 0,
+    "persistent_memory_writes": 0,
+    "production_deployments": 0,
+    "production_runtime_authorized": false,
+    "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+    "program_state": "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout",
+    "provider_credentials_read": 0,
+    "provider_tokens_read": 0,
+    "public_network_calls": 0,
+    "source_mutations": 0,
+    "verified_knowledge_promotions": 0
+  },
+  "structured_schema": {
+    "additional_properties_allowed": false,
+    "property_count": 2,
+    "schema_definition": {
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "maxLength": 32,
+          "minLength": 1,
+          "type": "string"
+        },
+        "score": {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "label",
+        "score"
+      ],
+      "type": "object"
+    },
+    "schema_depth": 3,
+    "schema_fingerprint": "353e6eaebfe693d5f5d1d0b710a6213fb349fbf2fb8f703052bffee8ce007c63",
+    "schema_id": "fixture-structured-extraction-schema",
+    "schema_version": "aion-external-cognition-structured-output/v1"
+  },
+  "tool_effect": false,
+  "trust_assessment": {
+    "created_at": "2026-08-03T20:45:00Z",
+    "factual_truth_confirmed": false,
+    "memory_write_authorized": false,
+    "operator_review_required": true,
+    "schema_validation_fingerprint": null,
+    "schema_version": "aion-external-cognition-trust/v1",
+    "tool_execution_authorized": false,
+    "trust_assessment_id": "external-cognition-example-trust",
+    "trust_class": "untrusted_fixture_output",
+    "trust_fingerprint": "a39f95d7ae9d95769d91120411c0f0cbb1b87cbe5bd1c5734adb71b6eae55db2"
+  },
+  "uncertainty_projection": {
+    "calibration_status_code": "uncalibrated_fixture",
+    "confidence_source_code": "fixture_declared",
+    "declared_confidence": 0.42,
+    "disagreement_count": 0,
+    "missing_evidence_count": 1,
+    "operator_review_required": true,
+    "schema_version": "aion-external-cognition-uncertainty/v1",
+    "uncertainty_fingerprint": "b3ce4a6fdbe3323075219372ec1b21c0991bcab5efe2c55be1cf7761be29e36c",
+    "uncertainty_id": "fixture-default-uncertainty",
+    "unresolved_claim_count": 1
+  }
+}

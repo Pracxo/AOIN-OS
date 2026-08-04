@@ -411,6 +411,9 @@ aion151_is_scoped_authorization_path() {
       if aion237_is_scoped_operator_console_integrated_local_runtime_path "$1"; then
         return 0
       fi
+      if aion246_is_scoped_external_cognition_gateway_path "$1"; then
+        return 0
+      fi
       return 1
       ;;
   esac
@@ -2712,6 +2715,134 @@ aion244_is_scoped_v02_release_candidate_final_evaluation_path() {
       return 1
       ;;
   esac
+}
+
+aion246_external_cognition_gateway_state_active() {
+  [[ -f docs/adaptive-intelligence/program-ledger.json ]] || return 1
+  grep -q '"program_state": "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout"' docs/adaptive-intelligence/program-ledger.json || return 1
+  grep -q '"active_adaptive_intelligence_authorization": "AION-245-AI-0001"' docs/adaptive-intelligence/program-ledger.json || return 1
+  grep -q '"active_adaptive_intelligence_task": "AION-246"' docs/adaptive-intelligence/program-ledger.json || return 1
+  grep -q '"formal_closeout_task": "AION-247"' docs/adaptive-intelligence/program-ledger.json || return 1
+  grep -q '"external_cognition_gateway_implemented": true' docs/adaptive-intelligence/program-ledger.json || return 1
+  grep -q '"external_cognition_gateway_state": "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout"' docs/adaptive-intelligence/program-ledger.json || return 1
+  return 0
+}
+
+aion246_is_scoped_external_cognition_gateway_path() {
+  aion246_external_cognition_gateway_state_active || return 1
+  case "$1" in
+    docs/adaptive-intelligence/aion-246-checklist.md|\
+    docs/adaptive-intelligence/authorization-ledger.json|\
+    docs/adaptive-intelligence/external-cognition-audit.md|\
+    docs/adaptive-intelligence/external-cognition-budgets.md|\
+    docs/adaptive-intelligence/external-cognition-circuit-breaker.md|\
+    docs/adaptive-intelligence/external-cognition-component-lineage.md|\
+    docs/adaptive-intelligence/external-cognition-contracts.md|\
+    docs/adaptive-intelligence/external-cognition-fixture-pilot.md|\
+    docs/adaptive-intelligence/external-cognition-foundation-implementation.md|\
+    docs/adaptive-intelligence/external-cognition-observability.md|\
+    docs/adaptive-intelligence/external-cognition-operator-runbook.md|\
+    docs/adaptive-intelligence/external-cognition-redaction.md|\
+    docs/adaptive-intelligence/external-cognition-replay.md|\
+    docs/adaptive-intelligence/external-cognition-routing.md|\
+    docs/adaptive-intelligence/external-cognition-security-review.md|\
+    docs/adaptive-intelligence/external-cognition-trust.md|\
+    docs/adaptive-intelligence/message-normalization.md|\
+    docs/adaptive-intelligence/model-manifests.md|\
+    docs/adaptive-intelligence/program-ledger.json|\
+    docs/adaptive-intelligence/provider-manifests.md|\
+    docs/adaptive-intelligence/request-response-envelopes.md|\
+    docs/adaptive-intelligence/structured-output-validation.md|\
+    docs/adr/0210-controlled-provider-neutral-external-cognition-gateway-foundation.md|\
+    docs/release/v03-external-cognition-checklist.md|\
+    docs/release/v03-external-cognition-fixture-pilot.md|\
+    docs/release/v03-external-cognition-foundation.md|\
+    docs/release/v03-external-cognition-runtime-hold.md|\
+    docs/release/v03-external-cognition-security-evidence.md|\
+    examples/adaptive-intelligence/external-cognition-contract-examples.json|\
+    examples/adaptive-intelligence/external-cognition-fixture-pilot-evidence.json|\
+    examples/adaptive-intelligence/external-cognition-foundation-authorization.json|\
+    examples/adaptive-intelligence/external-cognition-runtime-hold.json|\
+    examples/adaptive-intelligence/program-authorization.json|\
+    examples/adaptive-intelligence/program-roadmap.json|\
+    examples/adaptive-intelligence/runtime-hold.json|\
+    operator-console-static/demo-data/adaptive-intelligence-program.json|\
+    operator-console-static/demo-data/adaptive-intelligence-runtime-hold.json|\
+    operator-console-static/demo-data/external-cognition-authorization.json|\
+    operator-console-static/demo-data/external-cognition-foundation.json|\
+    operator-console-static/demo-data/external-cognition-static-console-evidence.json|\
+    scripts/adaptive-intelligence-program-authorization-check.sh|\
+    scripts/adaptive-intelligence-program-authorization-no-go-regression.sh|\
+    scripts/adaptive-intelligence-runtime-hold.sh|\
+    scripts/auth-prototype-review.sh|\
+    scripts/connector-platform-checkpoint.sh|\
+    scripts/connector-release-no-go-regression.sh|\
+    scripts/connector-runtime-no-external-call-regression.sh|\
+    scripts/external-cognition-fixture-local-run.py|\
+    scripts/external-cognition-fixture-pilot-evidence-check.sh|\
+    scripts/external-cognition-foundation-check.sh|\
+    scripts/external-cognition-foundation-no-go-regression.sh|\
+    scripts/external-cognition-runtime-hold.sh|\
+    scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh|\
+    scripts/model-gateway-authorization-no-go-regression.sh|\
+    scripts/model-gateway-no-go-regression.sh|\
+    scripts/operator-action-write-path-no-go-regression.sh|\
+    scripts/production-auth-actor-context-trust-boundary-no-go-regression.sh|\
+    scripts/secure-runtime-foundation-no-go-regression.sh|\
+    scripts/secure-runtime-foundation-operator-evaluation-no-go-regression.sh|\
+    scripts/secure-runtime-integration-program-no-go-regression.sh|\
+    scripts/self-improvement-shadow-activation-authorization-no-go-regression.sh|\
+    scripts/self-improvement-shadow-activation-operator-evaluation-no-go-regression.sh|\
+    scripts/self-improvement-shadow-mode-operator-evaluation-no-go-regression.sh|\
+    scripts/static-console-safety-check.sh|\
+    scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh|\
+    scripts/v02-release-candidate-no-go-regression.sh|\
+    scripts/v02-release-qualification-foundation-operator-evaluation-no-go-regression.sh|\
+    services/brain-api/src/aion_brain/contracts/external_cognition.py|\
+    services/brain-api/src/aion_brain/external_cognition/__init__.py|\
+    services/brain-api/src/aion_brain/external_cognition/audit.py|\
+    services/brain-api/src/aion_brain/external_cognition/authorization.py|\
+    services/brain-api/src/aion_brain/external_cognition/budgets.py|\
+    services/brain-api/src/aion_brain/external_cognition/circuit_breaker.py|\
+    services/brain-api/src/aion_brain/external_cognition/component_binding.py|\
+    services/brain-api/src/aion_brain/external_cognition/evidence.py|\
+    services/brain-api/src/aion_brain/external_cognition/fixture_provider.py|\
+    services/brain-api/src/aion_brain/external_cognition/integrity.py|\
+    services/brain-api/src/aion_brain/external_cognition/message_normalization.py|\
+    services/brain-api/src/aion_brain/external_cognition/model_manifest.py|\
+    services/brain-api/src/aion_brain/external_cognition/observability.py|\
+    services/brain-api/src/aion_brain/external_cognition/provider_manifest.py|\
+    services/brain-api/src/aion_brain/external_cognition/redaction.py|\
+    services/brain-api/src/aion_brain/external_cognition/replay.py|\
+    services/brain-api/src/aion_brain/external_cognition/request_envelope.py|\
+    services/brain-api/src/aion_brain/external_cognition/response_envelope.py|\
+    services/brain-api/src/aion_brain/external_cognition/routing_policy.py|\
+    services/brain-api/src/aion_brain/external_cognition/structured_output.py|\
+    services/brain-api/src/aion_brain/external_cognition/trust.py|\
+    services/brain-api/tests/aion243_release_candidate_scope.py|\
+    services/brain-api/tests/test_adaptive_intelligence_program_authorization_aion245.py|\
+    services/brain-api/tests/test_external_cognition_foundation_aion246.py)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+aion246_filter_external_cognition_scan_lines() {
+  local emitted=1
+  local line
+  local path
+  while IFS= read -r line; do
+    path="${line%%:*}"
+    if aion246_is_scoped_external_cognition_gateway_path "$path"; then
+      continue
+    fi
+    printf '%s\n' "$line"
+    emitted=0
+  done
+  return "$emitted"
 }
 
 aion151_validate_scoped_authorization_if_present() {

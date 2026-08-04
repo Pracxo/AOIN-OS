@@ -417,6 +417,33 @@ def validate_secure_runtime_integration_demo(payload: object, path: Path) -> Non
 
 for path in sorted(demo_dir.glob("*.json")):
     payload = json.loads(path.read_text())
+    if path.name in {
+        "adaptive-intelligence-program.json",
+        "adaptive-intelligence-runtime-hold.json",
+        "external-cognition-authorization.json",
+        "external-cognition-foundation.json",
+        "external-cognition-static-console-evidence.json",
+    }:
+        if payload.get("program_id") != "AION-ADAPTIVE-INTELLIGENCE-001":
+            raise SystemExit(f"adaptive intelligence program id mismatch: {path}")
+        for key in ("read_only", "redacted", "redaction_applied", "synthetic"):
+            if payload.get(key) is not True:
+                raise SystemExit(f"adaptive intelligence evidence flag must be true: {key}: {path}")
+        for key in (
+            "memory_effect",
+            "network_effect",
+            "provider_effect",
+            "runtime_effect",
+            "tool_effect",
+        ):
+            if key in payload and payload.get(key) is not False:
+                raise SystemExit(f"adaptive intelligence evidence flag must be false: {key}: {path}")
+        if path.name.startswith("external-cognition-") and (
+            payload.get("external_cognition_gateway_state")
+            != "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout"
+        ):
+            raise SystemExit(f"external cognition state mismatch: {path}")
+        continue
     if path.name.startswith("secure-runtime-integration-"):
         validate_secure_runtime_integration_demo(payload, path)
         continue

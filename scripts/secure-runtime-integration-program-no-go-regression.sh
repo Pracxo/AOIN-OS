@@ -29,6 +29,18 @@ else
   AION237_IMPLEMENTATION_STATE_ACTIVE=0
 fi
 
+if [[ -f docs/adaptive-intelligence/program-ledger.json ]] && \
+  grep -q '"program_state": "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout"' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"active_adaptive_intelligence_authorization": "AION-245-AI-0001"' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"active_adaptive_intelligence_task": "AION-246"' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"formal_closeout_task": "AION-247"' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"external_cognition_gateway_implemented": true' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"external_cognition_gateway_state": "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout"' docs/adaptive-intelligence/program-ledger.json; then
+  AION246_IMPLEMENTATION_STATE_ACTIVE=1
+else
+  AION246_IMPLEMENTATION_STATE_ACTIVE=0
+fi
+
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
 }
@@ -68,6 +80,9 @@ comparison_base() {
 }
 
 is_allowed_path() {
+  if is_aion246_external_cognition_path "$1"; then
+    return 0
+  fi
   case "$1" in
     README.md|AGENTS.md|\
     services/brain-api/pyproject.toml|packages/aion-sdk-python/pyproject.toml|\
@@ -399,6 +414,42 @@ raise SystemExit(0 if allowed else 1)
 PY
 }
 
+is_aion246_external_cognition_path() {
+  [[ "$AION246_IMPLEMENTATION_STATE_ACTIVE" == "1" ]] || return 1
+  case "$1" in
+    docs/release/v03-external-cognition-*|\
+    docs/adr/0210-controlled-provider-neutral-external-cognition-gateway-foundation.md|\
+    operator-console-static/demo-data/external-cognition-*.json|\
+    scripts/external-cognition-*.sh|\
+    scripts/external-cognition-fixture-local-run.py|\
+    services/brain-api/tests/test_external_cognition_foundation_aion246.py|\
+    services/brain-api/src/aion_brain/contracts/external_cognition.py|\
+    services/brain-api/src/aion_brain/external_cognition/__init__.py|\
+    services/brain-api/src/aion_brain/external_cognition/authorization.py|\
+    services/brain-api/src/aion_brain/external_cognition/component_binding.py|\
+    services/brain-api/src/aion_brain/external_cognition/provider_manifest.py|\
+    services/brain-api/src/aion_brain/external_cognition/model_manifest.py|\
+    services/brain-api/src/aion_brain/external_cognition/request_envelope.py|\
+    services/brain-api/src/aion_brain/external_cognition/response_envelope.py|\
+    services/brain-api/src/aion_brain/external_cognition/message_normalization.py|\
+    services/brain-api/src/aion_brain/external_cognition/structured_output.py|\
+    services/brain-api/src/aion_brain/external_cognition/routing_policy.py|\
+    services/brain-api/src/aion_brain/external_cognition/budgets.py|\
+    services/brain-api/src/aion_brain/external_cognition/trust.py|\
+    services/brain-api/src/aion_brain/external_cognition/redaction.py|\
+    services/brain-api/src/aion_brain/external_cognition/circuit_breaker.py|\
+    services/brain-api/src/aion_brain/external_cognition/fixture_provider.py|\
+    services/brain-api/src/aion_brain/external_cognition/replay.py|\
+    services/brain-api/src/aion_brain/external_cognition/observability.py|\
+    services/brain-api/src/aion_brain/external_cognition/audit.py|\
+    services/brain-api/src/aion_brain/external_cognition/integrity.py|\
+    services/brain-api/src/aion_brain/external_cognition/evidence.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 is_aion231_source_path() {
   case "$1" in
     services/brain-api/src/aion_brain/contracts/secure_runtime.py|\
@@ -463,7 +514,8 @@ while IFS= read -r path; do
 		    if ! is_aion233_model_gateway_source_path "$path" && \
 		      ! is_aion235_capability_runtime_source_path "$path" && \
 		      ! is_aion237_operator_console_source_path "$path" && \
-		      ! is_aion241_v02_staging_qualification_source_path "$path"; then
+		      ! is_aion241_v02_staging_qualification_source_path "$path" && \
+		      ! is_aion246_external_cognition_path "$path"; then
 		      echo "ERROR: AION-230 changed disallowed path: $path" >&2
 		      exit 1
 	    fi
@@ -478,7 +530,8 @@ while IFS= read -r path; do
 		        ! is_aion235_capability_runtime_source_path "$path" && \
 		        ! is_aion237_operator_console_source_path "$path" && \
 		        ! is_aion239_v02_release_qualification_source_path "$path" && \
-		        ! is_aion241_v02_staging_qualification_source_path "$path"; then
+		        ! is_aion241_v02_staging_qualification_source_path "$path" && \
+		        ! is_aion246_external_cognition_path "$path"; then
 		        echo "ERROR: prohibited runtime/dependency/migration path changed: $path" >&2
 		        exit 1
 	      fi

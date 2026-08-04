@@ -224,3 +224,4 @@ closure decision in ADR 0072.
 - [ADR 0207: Deterministic Local v0.2 Release-Candidate Artifact Bundle Build and Retention](0207-deterministic-local-v02-release-candidate-artifact-bundle-build-and-retention.md)
 - [ADR 0208: Final v0.2.0-rc.1 Candidate Evaluation and GitHub Prerelease Publication](0208-final-v02-rc1-candidate-evaluation-and-github-prerelease-publication.md)
 - [ADR 0209: Post-RC1 v0.3 Development Baseline and Adaptive Intelligence Programme Authorization](0209-post-rc1-v03-development-baseline-and-adaptive-intelligence-programme-authorization.md)
+- [0210: Controlled Provider-Neutral External-Cognition Gateway Foundation](0210-controlled-provider-neutral-external-cognition-gateway-foundation.md) - Defines the AION-246 deterministic fixture-only external cognition gateway foundation.

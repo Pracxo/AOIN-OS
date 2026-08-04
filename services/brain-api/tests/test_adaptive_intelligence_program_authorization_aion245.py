@@ -234,7 +234,16 @@ def test_program_charter_parent_lineage_and_roadmap_are_exact() -> None:
 
     assert program["program_id"] == PROGRAM_ID
     assert program["program_name"] == "AION Adaptive Intelligence Programme"
-    assert program["program_state"] == "adaptive_intelligence_program_authorized_not_implemented"
+    assert (
+        program["program_state"]
+        == "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout"
+    )
+    assert program["adaptive_intelligence_program_implemented"] is False
+    assert program["external_cognition_gateway_implemented"] is True
+    assert (
+        program["external_cognition_gateway_state"]
+        == "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout"
+    )
     assert program["parent_program_id"] == "AION-V02-RELEASE-QUALIFICATION-001"
     assert program["parent_final_task"] == "AION-244"
     assert program["parent_final_main_commit"] == "2a5db0760178698d783abcc63e53f08ff3583571"
@@ -247,8 +256,15 @@ def test_program_charter_parent_lineage_and_roadmap_are_exact() -> None:
     assert program["parent_release_asset_count"] == 24
     assert program["parent_release_asset_inventory_fingerprint"] == RC1_ASSET_FP
     assert [item["task_id"] for item in program["roadmap"]] == ROADMAP
-    assert program["roadmap"][1]["state"] == "authorized_not_implemented"
-    assert {item["state"] for item in program["roadmap"][2:]} == {"planned_unauthorized"}
+    assert (
+        program["roadmap"][1]["state"]
+        == "implemented_fixture_pilot_complete_pending_AION-247_closeout"
+    )
+    assert (
+        program["roadmap"][2]["state"]
+        == "active_foundation_evaluation_and_live_provider_pilot_authorization_decision"
+    )
+    assert {item["state"] for item in program["roadmap"][3:]} == {"planned_unauthorized"}
 
 
 def test_authorization_lifecycle_and_scope_authorize_aion246_only() -> None:
@@ -317,9 +333,9 @@ def test_current_status_blocks_are_reconciled() -> None:
     assert "Current task: AION-243" not in project_status
 
 
-def test_aion246_source_provider_runtime_network_credentials_memory_and_tools_are_absent() -> None:
+def test_aion246_source_is_disabled_and_no_provider_runtime_effects_exist() -> None:
     for relative in FUTURE_SOURCE:
-        assert not (REPO_ROOT / relative).exists(), relative
+        assert (REPO_ROOT / relative).exists(), relative
 
     for relative in (
         "services/brain-api/src/aion_brain/external_cognition/network.py",

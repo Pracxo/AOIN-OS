@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 source "$ROOT_DIR/scripts/lib/portable-search.sh"
+source "$ROOT_DIR/scripts/lib/v02-production-auth-scan-exclusions.sh"
 
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
@@ -52,6 +53,19 @@ filter_aion219_public_research_scan_paths() {
 
 filter_aion237_operator_console_scan_paths() {
   rg -v '^(services/brain-api/src/aion_brain/contracts/operator_console_integration\.py:|services/brain-api/src/aion_brain/operator_console_runtime/)'
+}
+
+filter_aion246_external_cognition_scan_paths() {
+  local emitted=1
+  while IFS= read -r line; do
+    local path="${line%%:*}"
+    if aion246_is_scoped_external_cognition_gateway_path "$path"; then
+      continue
+    fi
+    printf '%s\n' "$line"
+    emitted=0
+  done
+  return "$emitted"
 }
 
 checkpoint_docs=(
@@ -173,7 +187,8 @@ if rg -n 'requests\.(get|post|put|patch|delete)|httpx\.(get|post|put|patch|delet
   services/brain-api/src/aion_brain operator-console-static examples/connectors \
   | filter_aion162_identity_assertion_scan_paths \
   | filter_aion219_public_research_scan_paths \
-  | filter_aion237_operator_console_scan_paths; then
+  | filter_aion237_operator_console_scan_paths \
+  | filter_aion246_external_cognition_scan_paths; then
   echo "connector platform external call pattern found" >&2
   exit 1
 fi

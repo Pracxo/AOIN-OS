@@ -35,6 +35,11 @@ Instructions for future Codex runs in this repository:
 - Current task: `AION-246`.
 - Current authorization: `AION-245-AI-0001`.
 - Production runtime authorization remains `false`.
+- AION-246 external cognition work may touch only the exact authorized disabled
+  gateway scope. It must not enable live provider calls, network or DNS access,
+  credentials, tokens, raw prompt or raw response persistence, persistent
+  memory writes, tool execution, background loops, deployment, provider SDKs,
+  model weights, or public runtime routes.
 - Module developer kit work must remain generic and contract-only.
 - Never execute module package code during certification tests.
 - Future modules must pass Module Developer Kit certification before runtime registration.

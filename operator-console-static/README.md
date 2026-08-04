@@ -30,9 +30,18 @@ Current task: `AION-246`.
 
 Current authorization: `AION-245-AI-0001`.
 
-Static console AION-245 evidence is read-only demo data. It does not enable live
-providers, internet research, credential input, token input, persistent
-learning, real tools, connectors, autonomous loops or production runtime.
+Static console AION-246 evidence is read-only demo data for the implemented-
+disabled provider-neutral external-cognition gateway foundation. It does not
+enable live providers, internet research, credential input, token input,
+persistent learning, real tools, connectors, autonomous loops or production
+runtime.
+
+Offline AION-246 demo files:
+
+- `demo-data/external-cognition-authorization.json`
+- `demo-data/external-cognition-foundation.json`
+- `demo-data/external-cognition-static-console-evidence.json`
+- `demo-data/adaptive-intelligence-runtime-hold.json`
 
 ## Run Locally
 

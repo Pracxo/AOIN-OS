@@ -85,6 +85,29 @@ AION237_SOURCE_EXACT = {
     "services/brain-api/src/aion_brain/contracts/operator_console_integration.py",
 }
 AION237_SOURCE_PREFIXES = ("services/brain-api/src/aion_brain/operator_console_runtime/",)
+AION246_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/external_cognition.py",
+    "services/brain-api/src/aion_brain/external_cognition/__init__.py",
+    "services/brain-api/src/aion_brain/external_cognition/authorization.py",
+    "services/brain-api/src/aion_brain/external_cognition/component_binding.py",
+    "services/brain-api/src/aion_brain/external_cognition/provider_manifest.py",
+    "services/brain-api/src/aion_brain/external_cognition/model_manifest.py",
+    "services/brain-api/src/aion_brain/external_cognition/request_envelope.py",
+    "services/brain-api/src/aion_brain/external_cognition/response_envelope.py",
+    "services/brain-api/src/aion_brain/external_cognition/message_normalization.py",
+    "services/brain-api/src/aion_brain/external_cognition/structured_output.py",
+    "services/brain-api/src/aion_brain/external_cognition/routing_policy.py",
+    "services/brain-api/src/aion_brain/external_cognition/budgets.py",
+    "services/brain-api/src/aion_brain/external_cognition/trust.py",
+    "services/brain-api/src/aion_brain/external_cognition/redaction.py",
+    "services/brain-api/src/aion_brain/external_cognition/circuit_breaker.py",
+    "services/brain-api/src/aion_brain/external_cognition/fixture_provider.py",
+    "services/brain-api/src/aion_brain/external_cognition/replay.py",
+    "services/brain-api/src/aion_brain/external_cognition/observability.py",
+    "services/brain-api/src/aion_brain/external_cognition/audit.py",
+    "services/brain-api/src/aion_brain/external_cognition/integrity.py",
+    "services/brain-api/src/aion_brain/external_cognition/evidence.py",
+}
 
 
 def aion241_source_allowed(path: str) -> bool:
@@ -189,8 +212,30 @@ def aion237_source_allowed(path: str) -> bool:
     )
 
 
+def aion246_implementation_state_active() -> bool:
+    ledger = ROOT / "docs/adaptive-intelligence/program-ledger.json"
+    if not ledger.exists():
+        return False
+    payload = json.loads(ledger.read_text(encoding="utf-8"))
+    return (
+        payload.get("program_state")
+        == "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout"
+        and payload.get("external_cognition_gateway_implemented") is True
+        and payload.get("external_cognition_gateway_state")
+        == "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout"
+        and payload.get("active_adaptive_intelligence_authorization") == "AION-245-AI-0001"
+        and payload.get("active_adaptive_intelligence_task") == "AION-246"
+        and payload.get("formal_closeout_task") == "AION-247"
+    )
+
+
+def aion246_source_allowed(path: str) -> bool:
+    return aion246_active and path in AION246_SOURCE
+
+
 aion235_active = aion235_implementation_state_active()
 aion237_active = aion237_implementation_state_active()
+aion246_active = aion246_implementation_state_active()
 for parts in changed_entries():
     status = parts[0]
     paths = parts[1:]
@@ -207,6 +252,8 @@ for parts in changed_entries():
         if aion235_source_allowed(normalized):
             continue
         if aion237_source_allowed(normalized):
+            continue
+        if aion246_source_allowed(normalized):
             continue
         if normalized == "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py" or normalized.startswith(
             "services/brain-api/src/aion_brain/v02_release_qualification/"

@@ -100,7 +100,27 @@ def aion241_source_allowed(path: str) -> bool:
 
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]: return subprocess.run(args, cwd=ROOT, text=True, capture_output=True, check=check)
 def ref_exists(ref: str) -> bool: return run(["git", "rev-parse", "--verify", "--quiet", ref], check=False).returncode == 0
-def aion243_source_allowed(path: str) -> bool: return path in AION243_ALLOWED_EXACT or path.startswith(AION243_ALLOWED_PREFIXES)
+def aion243_source_allowed(path: str) -> bool:
+    return path in AION243_ALLOWED_EXACT or path.startswith(AION243_ALLOWED_PREFIXES) or aion246_source_allowed(path)
+
+def aion246_source_allowed(path: str) -> bool:
+    ledger = ROOT / "docs/adaptive-intelligence/program-ledger.json"
+    if not ledger.exists(): return False
+    payload = json.loads(ledger.read_text(encoding="utf-8"))
+    return (
+        payload.get("program_state")
+        == "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout"
+        and payload.get("active_adaptive_intelligence_authorization") == "AION-245-AI-0001"
+        and payload.get("active_adaptive_intelligence_task") == "AION-246"
+        and payload.get("formal_closeout_task") == "AION-247"
+        and payload.get("external_cognition_gateway_implemented") is True
+        and payload.get("external_cognition_gateway_state")
+        == "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout"
+        and (
+            path == "services/brain-api/src/aion_brain/contracts/external_cognition.py"
+            or path.startswith("services/brain-api/src/aion_brain/external_cognition/")
+        )
+    )
 def comparison_base() -> str | None:
     candidates: list[str] = []
     github_base = os.environ.get("GITHUB_BASE_REF")
