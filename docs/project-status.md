@@ -99,3 +99,4 @@ Production runtime, production authentication, external IdP calls, production cr
 ## AION-244 v0.2.0-rc.1 Publication Authorization
 
 Final evaluation `AION-V02RQPE-003` passed for `aion-v0.2.0-rc.1` with 32 hard gates and report fingerprint `8bb225c4f8e5055bc19d961e9a67e7347acf0896195ce4279ba65d597c044952`. PR #163 and PR #164 are merged, the RC1 prerelease is published with 24 assets, and the v0.2 Release Qualification Program is complete.
+- AION-247: external cognition foundation operator evaluation passed; AION-247-AI-0002 authorizes AION-248 for one bounded OpenAI Responses API synthetic pilot while production runtime remains disabled.

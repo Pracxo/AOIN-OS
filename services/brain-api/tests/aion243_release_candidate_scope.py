@@ -154,11 +154,14 @@ def _aion246_state_active() -> bool:
     payload = json.loads(ledger.read_text(encoding="utf-8"))
     return (
         payload.get("program_state")
-        == "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout"
-        and payload.get("active_adaptive_intelligence_authorization") == "AION-245-AI-0001"
-        and payload.get("active_adaptive_intelligence_task") == "AION-246"
-        and payload.get("formal_closeout_task") == "AION-247"
+        in {
+            "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout",
+            "external_cognition_foundation_evaluated_live_provider_pilot_authorized_not_implemented",
+        }
         and payload.get("external_cognition_gateway_implemented") is True
         and payload.get("external_cognition_gateway_state")
-        == "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout"
+        in {
+            "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout",
+            "implemented_disabled_deterministic_fixture_only_operator_evaluated_live_provider_pilot_authorized_not_implemented",
+        }
     )

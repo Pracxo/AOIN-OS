@@ -2728,9 +2728,24 @@ aion246_external_cognition_gateway_state_active() {
   return 0
 }
 
+aion247_external_cognition_operator_evaluation_state_active() {
+  [[ -f docs/adaptive-intelligence/program-ledger.json ]] || return 1
+  grep -q '"program_state": "external_cognition_foundation_evaluated_live_provider_pilot_authorized_not_implemented"' docs/adaptive-intelligence/program-ledger.json || return 1
+  grep -q '"active_adaptive_intelligence_authorization": "AION-247-AI-0002"' docs/adaptive-intelligence/program-ledger.json || return 1
+  grep -q '"active_adaptive_intelligence_task": "AION-248"' docs/adaptive-intelligence/program-ledger.json || return 1
+  grep -q '"formal_closeout_task": "AION-249"' docs/adaptive-intelligence/program-ledger.json || return 1
+  grep -q '"external_cognition_gateway_operator_evaluation_passed": true' docs/adaptive-intelligence/program-ledger.json || return 1
+  grep -q '"live_provider_pilot_authorized": true' docs/adaptive-intelligence/program-ledger.json || return 1
+  grep -q '"live_provider_pilot_implemented": false' docs/adaptive-intelligence/program-ledger.json || return 1
+  return 0
+}
+
 aion246_is_scoped_external_cognition_gateway_path() {
-  aion246_external_cognition_gateway_state_active || return 1
+  if ! aion246_external_cognition_gateway_state_active && ! aion247_external_cognition_operator_evaluation_state_active; then
+    return 1
+  fi
   case "$1" in
+    docs/adaptive-intelligence/aion-247-checklist.md|\
     docs/adaptive-intelligence/aion-246-checklist.md|\
     docs/adaptive-intelligence/authorization-ledger.json|\
     docs/adaptive-intelligence/external-cognition-audit.md|\
@@ -2740,6 +2755,9 @@ aion246_is_scoped_external_cognition_gateway_path() {
     docs/adaptive-intelligence/external-cognition-contracts.md|\
     docs/adaptive-intelligence/external-cognition-fixture-pilot.md|\
     docs/adaptive-intelligence/external-cognition-foundation-implementation.md|\
+    docs/adaptive-intelligence/external-cognition-foundation-operator-evaluation.md|\
+    docs/adaptive-intelligence/live-provider-pilot-architecture.md|\
+    docs/adaptive-intelligence/live-provider-pilot-threat-model.md|\
     docs/adaptive-intelligence/external-cognition-observability.md|\
     docs/adaptive-intelligence/external-cognition-operator-runbook.md|\
     docs/adaptive-intelligence/external-cognition-redaction.md|\
@@ -2754,15 +2772,20 @@ aion246_is_scoped_external_cognition_gateway_path() {
     docs/adaptive-intelligence/request-response-envelopes.md|\
     docs/adaptive-intelligence/structured-output-validation.md|\
     docs/adr/0210-controlled-provider-neutral-external-cognition-gateway-foundation.md|\
+    docs/adr/0211-external-cognition-foundation-evaluation-and-single-openai-responses-api-live-provider-pilot-authorization.md|\
     docs/release/v03-external-cognition-checklist.md|\
     docs/release/v03-external-cognition-fixture-pilot.md|\
     docs/release/v03-external-cognition-foundation.md|\
+    docs/release/v03-external-cognition-operator-evaluation.md|\
     docs/release/v03-external-cognition-runtime-hold.md|\
     docs/release/v03-external-cognition-security-evidence.md|\
     examples/adaptive-intelligence/external-cognition-contract-examples.json|\
     examples/adaptive-intelligence/external-cognition-fixture-pilot-evidence.json|\
     examples/adaptive-intelligence/external-cognition-foundation-authorization.json|\
+    examples/adaptive-intelligence/external-cognition-foundation-operator-evaluation-report.json|\
     examples/adaptive-intelligence/external-cognition-runtime-hold.json|\
+    examples/adaptive-intelligence/live-provider-pilot-authorization.json|\
+    examples/adaptive-intelligence/live-provider-pilot-runtime-hold.json|\
     examples/adaptive-intelligence/program-authorization.json|\
     examples/adaptive-intelligence/program-roadmap.json|\
     examples/adaptive-intelligence/runtime-hold.json|\
@@ -2770,10 +2793,13 @@ aion246_is_scoped_external_cognition_gateway_path() {
     operator-console-static/demo-data/adaptive-intelligence-runtime-hold.json|\
     operator-console-static/demo-data/external-cognition-authorization.json|\
     operator-console-static/demo-data/external-cognition-foundation.json|\
+    operator-console-static/demo-data/external-cognition-operator-evaluation.json|\
     operator-console-static/demo-data/external-cognition-static-console-evidence.json|\
+    operator-console-static/demo-data/live-provider-pilot-authorization.json|\
     scripts/adaptive-intelligence-program-authorization-check.sh|\
     scripts/adaptive-intelligence-program-authorization-no-go-regression.sh|\
     scripts/adaptive-intelligence-runtime-hold.sh|\
+    scripts/auth-design-check.sh|\
     scripts/auth-prototype-review.sh|\
     scripts/connector-platform-checkpoint.sh|\
     scripts/connector-release-no-go-regression.sh|\
@@ -2781,9 +2807,15 @@ aion246_is_scoped_external_cognition_gateway_path() {
     scripts/external-cognition-fixture-local-run.py|\
     scripts/external-cognition-fixture-pilot-evidence-check.sh|\
     scripts/external-cognition-foundation-check.sh|\
+    scripts/external-cognition-foundation-operator-evaluation-check.sh|\
+    scripts/external-cognition-foundation-operator-evaluation-no-go-regression.sh|\
     scripts/external-cognition-foundation-no-go-regression.sh|\
     scripts/external-cognition-runtime-hold.sh|\
+    scripts/lib/external_cognition_foundation_operator_evaluation.py|\
     scripts/knowledge-intelligence-program-final-evaluation-no-go-regression.sh|\
+    scripts/live-provider-pilot-authorization-check.sh|\
+    scripts/live-provider-pilot-authorization-no-go-regression.sh|\
+    scripts/live-provider-pilot-runtime-hold.sh|\
     scripts/model-gateway-authorization-no-go-regression.sh|\
     scripts/model-gateway-no-go-regression.sh|\
     scripts/operator-action-write-path-no-go-regression.sh|\
@@ -2796,7 +2828,9 @@ aion246_is_scoped_external_cognition_gateway_path() {
     scripts/self-improvement-shadow-mode-operator-evaluation-no-go-regression.sh|\
     scripts/static-console-safety-check.sh|\
     scripts/v02-actor-context-trust-boundary-authorization-no-go-regression.sh|\
+    scripts/v02-release-candidate-check.sh|\
     scripts/v02-release-candidate-no-go-regression.sh|\
+    scripts/v02-release-candidate-runtime-hold.sh|\
     scripts/v02-release-qualification-foundation-operator-evaluation-no-go-regression.sh|\
     services/brain-api/src/aion_brain/contracts/external_cognition.py|\
     services/brain-api/src/aion_brain/external_cognition/__init__.py|\
@@ -2821,7 +2855,8 @@ aion246_is_scoped_external_cognition_gateway_path() {
     services/brain-api/src/aion_brain/external_cognition/trust.py|\
     services/brain-api/tests/aion243_release_candidate_scope.py|\
     services/brain-api/tests/test_adaptive_intelligence_program_authorization_aion245.py|\
-    services/brain-api/tests/test_external_cognition_foundation_aion246.py)
+    services/brain-api/tests/test_external_cognition_foundation_aion246.py|\
+    services/brain-api/tests/test_external_cognition_operator_evaluation_aion247.py)
       return 0
       ;;
     *)

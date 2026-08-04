@@ -1,12 +1,13 @@
 {
-  "authorized_task": "AION-246",
+  "active_authorization": "AION-247-AI-0002",
+  "authorized_task": "AION-248",
   "development_line": "v0.3",
   "development_version": "0.3.0.dev0",
   "final_planned_task": "AION-260",
-  "formal_closeout_task": "AION-247",
+  "formal_closeout_task": "AION-249",
   "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
   "program_name": "AION Adaptive Intelligence Programme",
-  "program_state": "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout",
+  "program_state": "external_cognition_foundation_evaluated_live_provider_pilot_authorized_not_implemented",
   "roadmap": [
     {
       "state": "programme_authorization_complete",
@@ -14,22 +15,22 @@
       "task_id": "AION-245"
     },
     {
-      "state": "implemented_fixture_pilot_complete_pending_AION-247_closeout",
+      "state": "evaluated_complete",
       "summary": "Controlled provider-neutral external-cognition gateway foundation.",
       "task_id": "AION-246"
     },
     {
-      "state": "active_foundation_evaluation_and_live_provider_pilot_authorization_decision",
+      "state": "evaluation_complete_live_provider_pilot_authorized",
       "summary": "External-cognition foundation evaluation and live-provider pilot authorization decision.",
       "task_id": "AION-247"
     },
     {
-      "state": "planned_unauthorized",
+      "state": "authorized_not_implemented",
       "summary": "Operator-invoked controlled live-model provider pilot.",
       "task_id": "AION-248"
     },
     {
-      "state": "planned_unauthorized",
+      "state": "planned_live_provider_pilot_evaluation_and_research_authorization_decision",
       "summary": "Live-provider pilot evaluation and governed internet-research authorization decision.",
       "task_id": "AION-249"
     },

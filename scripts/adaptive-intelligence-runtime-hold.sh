@@ -29,32 +29,51 @@ AUTHORIZED_STATE = "adaptive_intelligence_program_authorized_not_implemented"
 IMPLEMENTED_DISABLED_STATE = (
     "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout"
 )
+POST_EVALUATION_STATE = (
+    "external_cognition_foundation_evaluated_live_provider_pilot_authorized_not_implemented"
+)
 program = json.loads((ROOT / "docs/adaptive-intelligence/program-ledger.json").read_text(encoding="utf-8"))
 hold = json.loads((ROOT / "examples/adaptive-intelligence/runtime-hold.json").read_text(encoding="utf-8"))
 
-if program.get("program_state") not in {AUTHORIZED_STATE, IMPLEMENTED_DISABLED_STATE}:
+if program.get("program_state") not in {AUTHORIZED_STATE, IMPLEMENTED_DISABLED_STATE, POST_EVALUATION_STATE}:
     raise SystemExit("adaptive intelligence runtime hold program state mismatch")
+
+if program.get("program_state") == POST_EVALUATION_STATE:
+    lineage = {
+        "active_adaptive_intelligence_authorization": "AION-247-AI-0002",
+        "active_adaptive_intelligence_task": "AION-248",
+        "formal_closeout_task": "AION-249",
+    }
+else:
+    lineage = {
+        "active_adaptive_intelligence_authorization": "AION-245-AI-0001",
+        "active_adaptive_intelligence_task": "AION-246",
+        "formal_closeout_task": "AION-247",
+    }
 
 required = {
     "adaptive_intelligence_program_authorized": True,
     "adaptive_intelligence_program_implemented": False,
-    "active_adaptive_intelligence_authorization": "AION-245-AI-0001",
-    "active_adaptive_intelligence_task": "AION-246",
-    "formal_closeout_task": "AION-247",
     "production_runtime_authorized": False,
+    **lineage,
 }
 for key, value in required.items():
     if program.get(key) != value and hold.get(key) != value:
         raise SystemExit(f"runtime hold mismatch {key}")
 
-if program.get("program_state") == IMPLEMENTED_DISABLED_STATE:
+if program.get("program_state") in {IMPLEMENTED_DISABLED_STATE, POST_EVALUATION_STATE}:
+    expected_gateway_states = {
+        "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout",
+        "implemented_disabled_deterministic_fixture_only_operator_evaluated_live_provider_pilot_authorized_not_implemented",
+    }
     for key, value in {
         "external_cognition_gateway_implemented": True,
-        "external_cognition_gateway_state": "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout",
         "deterministic_fixture_pilot_completed": True,
     }.items():
         if program.get(key) != value:
             raise SystemExit(f"adaptive intelligence runtime hold mismatch {key}")
+    if program.get("external_cognition_gateway_state") not in expected_gateway_states:
+        raise SystemExit("adaptive intelligence runtime hold external cognition gateway state mismatch")
 else:
     if program.get("external_cognition_gateway_implemented") is not False:
         raise SystemExit("external cognition gateway cannot be implemented in pre-implementation hold")

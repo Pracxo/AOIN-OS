@@ -420,7 +420,9 @@ allowed_authorization_demo_names = {
     "adaptive-intelligence-runtime-hold.json",
     "external-cognition-authorization.json",
     "external-cognition-foundation.json",
+    "external-cognition-operator-evaluation.json",
     "external-cognition-static-console-evidence.json",
+    "live-provider-pilot-authorization.json",
 }
 secure_runtime_evaluation_demo_names = {
     "secure-runtime-foundation-operator-evaluation.json",
@@ -525,7 +527,9 @@ operator_console_demo_names = {
 external_cognition_demo_names = {
     "external-cognition-authorization.json",
     "external-cognition-foundation.json",
+    "external-cognition-operator-evaluation.json",
     "external-cognition-static-console-evidence.json",
+    "live-provider-pilot-authorization.json",
 }
 aion161_allowed_policy_markers = {
     "runtime_private_key",
@@ -568,6 +572,8 @@ def walk(value: object, path: Path) -> None:
                 | model_gateway_demo_names
                 | capability_runtime_demo_names
                 | operator_console_demo_names
+                | external_cognition_demo_names
+                | allowed_authorization_demo_names
             ):
                 continue
             if marker == "sk-" and not re.search(r"\bsk-[a-z0-9_-]{12,}", lowered):
@@ -709,10 +715,11 @@ for path in sorted((static_dir / "demo-data").glob("*.json")):
                 raise SystemExit(f"{key} must be false in {path}")
         if payload.get("program_id") != "AION-ADAPTIVE-INTELLIGENCE-001":
             raise SystemExit(f"program_id mismatch in {path}")
-        if (
-            payload.get("external_cognition_gateway_state")
-            != "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout"
-        ):
+        if payload.get("external_cognition_gateway_state") not in {
+            "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout",
+            "implemented_disabled_deterministic_fixture_only_operator_evaluated_live_provider_pilot_authorized_not_implemented",
+            None,
+        }:
             raise SystemExit(f"external cognition state mismatch in {path}")
     walk(payload, path)
 

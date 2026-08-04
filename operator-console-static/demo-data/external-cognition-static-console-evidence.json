@@ -1,5 +1,5 @@
 {
-  "authorization_id": "AION-245-AI-0001",
+  "authorization_id": "AION-247-AI-0002",
   "blockers": [
     "provider_calls_zero",
     "network_calls_zero",
@@ -9,7 +9,11 @@
     "tool_executions_zero",
     "production_runtime_disabled"
   ],
+  "closed_authorization_id": "AION-245-AI-0001",
+  "credential_input_control_enabled": false,
   "deterministic_fixture_pilot_completed": true,
+  "evaluation_decision": "CONTROLLED_EXTERNAL_COGNITION_GATEWAY_FOUNDATION_OPERATOR_EVALUATION_PASS_RECOMMEND_SINGLE_OPENAI_RESPONSES_API_SYNTHETIC_LIVE_PROVIDER_PILOT_AUTHORIZATION",
+  "evaluation_id": "AION-ECGPE-001",
   "evidence_report_fingerprint": "2f9a05f78d4afb40f390ace3cafbb2f997e46525063cd80fe6cab131e8be9aad",
   "external_cognition_gateway_state": "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout",
   "forbidden_actions": [
@@ -29,14 +33,17 @@
       "action_key": "deploy_production"
     }
   ],
-  "formal_closeout_task": "AION-247",
+  "formal_closeout_task": "AION-249",
   "implementation_commit": "dd1f7b34cb2a25dfd409cf72667f073af9e8e965",
-  "implementation_task": "AION-246",
+  "implementation_task": "AION-248",
+  "live_execution_control_enabled": false,
   "memory_effect": false,
+  "memory_write_control_enabled": false,
   "model_capability_record_count": 18,
   "model_manifest_count": 6,
   "network_effect": false,
   "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+  "provider_call_control_enabled": false,
   "provider_effect": false,
   "provider_manifest_count": 3,
   "read_only": true,
@@ -74,7 +81,7 @@
       "title": "Pilot evidence"
     }
   ],
-  "status": "implemented_disabled_deterministic_fixture_only",
+  "status": "no_live_execution_control_enabled",
   "structured_output_schema_count": 2,
   "synthetic": true,
   "tool_effect": false,

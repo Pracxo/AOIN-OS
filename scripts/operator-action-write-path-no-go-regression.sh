@@ -566,6 +566,24 @@ allowed_aion246_files = {
 allowed_aion246_prefixes = (
     "services/brain-api/src/aion_brain/external_cognition/",
 ) if aion246_state_active else ()
+aion247_state_active = (
+    adaptive_ledger.get("program_state")
+    == "external_cognition_foundation_evaluated_live_provider_pilot_authorized_not_implemented"
+    and adaptive_ledger.get("active_adaptive_intelligence_authorization") == "AION-247-AI-0002"
+    and adaptive_ledger.get("active_adaptive_intelligence_task") == "AION-248"
+    and adaptive_ledger.get("formal_closeout_task") == "AION-249"
+    and adaptive_ledger.get("live_provider_pilot_authorized") is True
+    and adaptive_ledger.get("live_provider_pilot_implemented") is False
+)
+allowed_aion247_files = {
+    "operator-console-static/demo-data/adaptive-intelligence-program.json",
+    "operator-console-static/demo-data/adaptive-intelligence-runtime-hold.json",
+    "operator-console-static/demo-data/external-cognition-authorization.json",
+    "operator-console-static/demo-data/external-cognition-foundation.json",
+    "operator-console-static/demo-data/external-cognition-static-console-evidence.json",
+    "operator-console-static/demo-data/external-cognition-operator-evaluation.json",
+    "operator-console-static/demo-data/live-provider-pilot-authorization.json",
+} if aion247_state_active else set()
 runtime_prefixes = (
     "services/brain-api/src/",
     "packages/aion-sdk-python/src/",
@@ -647,7 +665,8 @@ for relative in sorted(changed):
         or relative in allowed_aion233_files
         or relative in allowed_aion245_files
         or relative in allowed_aion246_files
-	        or relative.startswith(allowed_review_prefixes)
+        or relative in allowed_aion247_files
+        or relative.startswith(allowed_review_prefixes)
         or relative.startswith(allowed_aion108_prefixes)
         or relative.startswith(allowed_aion110_prefixes)
         or relative.startswith(allowed_aion111_prefixes)

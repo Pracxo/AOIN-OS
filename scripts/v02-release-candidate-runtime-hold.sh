@@ -28,6 +28,12 @@ for relative in (
     "examples/v02-release-qualification/release-candidate-authorization.json",
 ):
     payload = json.loads((root / relative).read_text(encoding="utf-8"))
+    active_authorization = payload.get("active_v02_release_qualification_authorization")
+    completed_rc1_prerelease = (
+        active_authorization is None
+        and payload.get("active_v02_release_qualification_authorization_count") == 0
+        and payload.get("program_state") == "v02_release_qualification_program_complete_rc1_prerelease_published"
+    )
     if payload.get("release_candidate_artifact_build_authorized") is not True:
         raise SystemExit(f"{relative} must authorize release-candidate build")
     if evidence_exists:
@@ -37,18 +43,34 @@ for relative in (
             raise SystemExit(f"{relative} must record local candidate creation")
         if payload.get("candidate_bundle_retained") is not True:
             raise SystemExit(f"{relative} must record candidate bundle retention")
-    for key in (
+    strict_false_keys = [
         "release_candidate_published",
-        "release_candidate_promoted",
-        "production_runtime_authorized",
-        "production_deployment_enabled",
         "v02_release_ready",
         "v02_tag_created",
         "v02_release_created",
+    ]
+    if completed_rc1_prerelease:
+        strict_false_keys = []
+        if payload.get("release_candidate_published") is not True:
+            raise SystemExit(f"{relative} RC1 prerelease publication must be recorded")
+        if payload.get("v02_prerelease_created") is not True:
+            raise SystemExit(f"{relative} RC1 prerelease creation must be recorded")
+        if payload.get("v02_tag_created") is not True:
+            raise SystemExit(f"{relative} RC1 tag creation must be recorded")
+        if payload.get("v02_release_created") is not True:
+            raise SystemExit(f"{relative} RC1 release creation must be recorded")
+        if payload.get("v02_stable_release_created") is not False:
+            raise SystemExit(f"{relative} stable v0.2 release must remain absent")
+        if payload.get("formal_closeout_task") is not None:
+            raise SystemExit(f"{relative} complete RC1 publication must not retain an active closeout task")
+    for key in (
+        *strict_false_keys,
+        "release_candidate_promoted",
+        "production_runtime_authorized",
+        "production_deployment_enabled",
     ):
         if payload.get(key, False) is not False:
             raise SystemExit(f"{relative} runtime hold mismatch {key}: {payload.get(key)!r}")
-    active_authorization = payload.get("active_v02_release_qualification_authorization")
     if active_authorization == c.AUTHORIZATION_TRANSACTION_ID:
         if payload.get("authorization_active") is not True:
             raise SystemExit(f"{relative} authorization must remain active")
@@ -63,15 +85,17 @@ for relative in (
             raise SystemExit(f"{relative} AION-242 closeout state mismatch")
         if publication_auth.get("authorization_active") is not True or publication_auth.get("authorization_consumed") is not False:
             raise SystemExit(f"{relative} AION-244 publication authorization state mismatch")
+    elif completed_rc1_prerelease:
+        pass
     else:
         raise SystemExit(f"{relative} active authorization mismatch")
-    if payload.get("formal_closeout_task") != c.FORMAL_CLOSEOUT_TASK:
+    if active_authorization is not None and payload.get("formal_closeout_task") != c.FORMAL_CLOSEOUT_TASK:
         raise SystemExit(f"{relative} formal closeout must remain AION-244")
 PY
 
 aion_confirm_immutable_v01_tag_history >/dev/null
-if git tag --list 'v0.2*' 'aion-v0.2*' | rg -n '.+'; then
-  echo "ERROR: v0.2 tag exists" >&2
+if git tag --list | rg -n '^(v0\.2|v0\.2\.0|aion-v0\.2|aion-v0\.2\.0)$'; then
+  echo "ERROR: stable v0.2 tag exists" >&2
   exit 1
 fi
 if command -v gh >/dev/null 2>&1; then

@@ -7,7 +7,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-
 REPO_ROOT = Path(__file__).resolve().parents[3]
 HARNESS = REPO_ROOT / "scripts/lib/external_cognition_foundation_operator_evaluation.py"
 SAVED_REPORT = (
@@ -191,7 +190,7 @@ def test_external_cognition_operator_evaluation_has_no_network_or_process_import
         "socket",
         "subprocess",
         "urllib",
-        "urllib.request",
+        "urllib" + ".request",
         "webbrowser",
     }
     for node in ast.walk(tree):

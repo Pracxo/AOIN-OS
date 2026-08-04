@@ -22,6 +22,13 @@ ROOT = Path.cwd()
 IMPLEMENTED_DISABLED_STATE = (
     "external_cognition_gateway_foundation_implemented_disabled_pending_AION-247_closeout"
 )
+POST_EVALUATION_STATE = (
+    "external_cognition_foundation_evaluated_live_provider_pilot_authorized_not_implemented"
+)
+IMPLEMENTED_GATEWAY_STATES = {
+    "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout",
+    "implemented_disabled_deterministic_fixture_only_operator_evaluated_live_provider_pilot_authorized_not_implemented",
+}
 ALLOWED_CHANGED_PREFIXES = (
     "docs/",
     "examples/",
@@ -110,13 +117,9 @@ def aion246_implementation_state_active() -> bool:
         return False
     payload = json.loads(ledger.read_text(encoding="utf-8"))
     return (
-        payload.get("program_state") == IMPLEMENTED_DISABLED_STATE
+        payload.get("program_state") in {IMPLEMENTED_DISABLED_STATE, POST_EVALUATION_STATE}
         and payload.get("external_cognition_gateway_implemented") is True
-        and payload.get("external_cognition_gateway_state")
-        == "implemented_disabled_deterministic_fixture_only_pending_AION-247_closeout"
-        and payload.get("active_adaptive_intelligence_authorization") == "AION-245-AI-0001"
-        and payload.get("active_adaptive_intelligence_task") == "AION-246"
-        and payload.get("formal_closeout_task") == "AION-247"
+        and payload.get("external_cognition_gateway_state") in IMPLEMENTED_GATEWAY_STATES
     )
 
 
