@@ -1,5 +1,5 @@
 {
-  "active_authorization": "AION-247-AI-0002",
+  "active_authorization": "AION-248-AI-0003",
   "authorized_task": "AION-248",
   "development_line": "v0.3",
   "development_version": "0.3.0.dev0",
@@ -7,7 +7,7 @@
   "formal_closeout_task": "AION-249",
   "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
   "program_name": "AION Adaptive Intelligence Programme",
-  "program_state": "external_cognition_foundation_evaluated_live_provider_pilot_authorized_not_implemented",
+  "program_state": "openai_attempt_closed_local_ollama_provider_pilot_authorized",
   "roadmap": [
     {
       "state": "programme_authorization_complete",
