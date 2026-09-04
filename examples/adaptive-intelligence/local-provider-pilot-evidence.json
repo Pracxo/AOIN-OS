@@ -1,0 +1,92 @@
+{
+  "aggregate_input_tokens": 676,
+  "aggregate_output_tokens": 2032,
+  "aggregate_total_duration_ns": 46059652958,
+  "authorization_headers_created": 0,
+  "authorization_id": "AION-248-AI-0003",
+  "context_32768_requests": 6,
+  "dns_resolutions_during_pilot": 0,
+  "external_connector_calls": 0,
+  "implementation_commit": "8f64a19d6b3567a1f42f730e781f0dbf7e8ee05c",
+  "integrity_passed": true,
+  "latency_ns": [
+    31529756416,
+    5638851750,
+    1511666208,
+    1659158209,
+    4696440625,
+    1023779750
+  ],
+  "local_model_calls": 6,
+  "loopback_http_requests": 6,
+  "memory_writes": 0,
+  "mode": "operator_invoked_local_ollama",
+  "model_digest": "17052f91a42e97930aa6e28a6c6c06a983e6a58dbb00434885a0cf5313e376f7",
+  "model_size_bytes": 13793441244,
+  "model_tag": "gpt-oss:20b",
+  "ollama_cloud_disabled": true,
+  "ollama_version": "0.33.2",
+  "operator_review_items": 6,
+  "pilot_id": "AION-248-single-ollama-loopback-gpt-oss-20b-synthetic-local-provider-pilot",
+  "post_pilot_local_provider_session_active": false,
+  "post_pilot_model_loaded": false,
+  "production_effect": false,
+  "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+  "projections": [
+    {
+      "content_bytes": 5080,
+      "content_fingerprint": "a89a58b9558fe81da51e22f08511525b3b59555e983188f8e88beffa71ae355d",
+      "scenario": 1,
+      "trust": "untrusted_local_model_output"
+    },
+    {
+      "content_bytes": 819,
+      "content_fingerprint": "e16654bd787cb57eef0a219949a79f1db531cf64072ddcf3474dd1b3da366c2f",
+      "scenario": 2,
+      "trust": "untrusted_local_model_output"
+    },
+    {
+      "content_bytes": 5,
+      "content_fingerprint": "410083735735a10e658a19edd1704e606c9dd112e225825b63fafeded766c8b9",
+      "scenario": 3,
+      "trust": "untrusted_local_model_output"
+    },
+    {
+      "content_bytes": 68,
+      "content_fingerprint": "a78771642889846d8c19fe2848ca3e42e806d472c45f906c4746ad0006867f0f",
+      "scenario": 4,
+      "trust": "untrusted_local_model_output"
+    },
+    {
+      "content_bytes": 591,
+      "content_fingerprint": "2a5d9700d0067b4bcec2bbf38bbcb6256859acc285bf066d5d795eef731a54c0",
+      "scenario": 5,
+      "trust": "untrusted_local_model_output"
+    },
+    {
+      "content_bytes": 53,
+      "content_fingerprint": "e1ed349187a9bcce83323dd6ed684d6bbe1d126c346303dc2702afc8bbaa0f27",
+      "scenario": 6,
+      "trust": "untrusted_local_model_output"
+    }
+  ],
+  "provider_api_family": "native-chat",
+  "provider_credentials_read": 0,
+  "provider_id": "ollama-local",
+  "provider_tool_calls": 0,
+  "public_network_calls_during_pilot": 0,
+  "raw_prompts_persisted": 0,
+  "raw_responses_persisted": 0,
+  "raw_thinking_retained": false,
+  "report_fingerprint": "8b865058a674db65324ecf2af103fdcf7b05fc3b05fa2082e3c656ca2e712bea",
+  "response_projections": 6,
+  "stream_false_requests": 6,
+  "successful_local_model_responses": 6,
+  "temporary_files_retained": 0,
+  "think_low_requests": 6,
+  "thinking_payloads_persisted": 0,
+  "trust_assessments": 6,
+  "uncertainty_projections": 6,
+  "usage_records": 6,
+  "verified_knowledge_promotions": 0
+}
