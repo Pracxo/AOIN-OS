@@ -18,4 +18,8 @@ def test_digest_and_tool_calls_fail_closed() -> None:
     with pytest.raises(ValueError):
         build_chat_payload(prompt="x", model_digest="drift", frozen_digest="d")
     with pytest.raises(ValueError):
-        project_response({"model": "gpt-oss:20b", "message": {"content": "x", "tool_calls": [{"name": "x"}]}}, model_digest="d", frozen_digest="d")
+        project_response(
+            {"model": "gpt-oss:20b", "message": {"content": "x", "tool_calls": [{"name": "x"}]}},
+            model_digest="d",
+            frozen_digest="d",
+        )
