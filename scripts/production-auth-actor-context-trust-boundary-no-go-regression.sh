@@ -116,6 +116,9 @@ while IFS= read -r file; do
   if aion246_is_scoped_external_cognition_gateway_path "$file"; then
     continue
   fi
+  if aion248_is_scoped_live_provider_pilot_path "$file"; then
+    continue
+  fi
 
   if [[ -f "$file" ]] && ! aion160_is_scoped_actor_context_trust_boundary_remediation_path "$file"; then
     printf '%s\n' "$file" >> "$scan_file_list"

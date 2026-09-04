@@ -63,6 +63,7 @@
   "parent_authorization_transaction_id": "AION-245-AI-0001",
   "parent_evaluation_decision": "CONTROLLED_EXTERNAL_COGNITION_GATEWAY_FOUNDATION_OPERATOR_EVALUATION_PASS_RECOMMEND_SINGLE_OPENAI_RESPONSES_API_SYNTHETIC_LIVE_PROVIDER_PILOT_AUTHORIZATION",
   "parent_evaluation_id": "AION-ECGPE-001",
+  "production_effect": false,
   "production_runtime_authorized": false,
   "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
   "prohibited_capabilities": {

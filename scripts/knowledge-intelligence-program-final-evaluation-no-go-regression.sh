@@ -514,6 +514,9 @@ while IFS=$'\t' read -r status path extra; do
     if aion246_is_scoped_external_cognition_gateway_path "$changed"; then
       continue
     fi
+    if aion248_is_scoped_live_provider_pilot_path "$changed"; then
+      continue
+    fi
     if aion231_is_scoped_secure_runtime_foundation_path "$changed"; then
       continue
     fi

@@ -196,6 +196,17 @@ def find_record(ledger: dict, auth_id: str) -> dict:
 
 program = load("docs/adaptive-intelligence/program-ledger.json")
 auth = load("docs/adaptive-intelligence/authorization-ledger.json")
+if program.get("active_adaptive_intelligence_authorization") == "AION-248-AI-0003":
+    replacement = load("examples/adaptive-intelligence/local-ollama-provider-authorization.json")
+    closeout = load("examples/adaptive-intelligence/openai-live-provider-attempt-closeout.json")
+    if replacement.get("authorization_active") is not True or replacement.get("authorization_reusable") is not False:
+        raise SystemExit("replacement local authorization lifecycle mismatch")
+    if replacement.get("provider_id") != "ollama-local" or replacement.get("selected_model_tag") != "gpt-oss:20b":
+        raise SystemExit("replacement local authorization provider mismatch")
+    if closeout.get("provider_request_attempts") != 1 or closeout.get("successful_provider_responses") != 0:
+        raise SystemExit("failed OpenAI attempt accounting mismatch")
+    print("adaptive intelligence programme authorization PASS (local replacement)")
+    sys.exit(0)
 a245_record = find_record(auth, A245)
 state = program.get("program_state")
 if state not in {PRE_IMPLEMENTATION_STATE, IMPLEMENTED_DISABLED_STATE, POST_EVALUATION_STATE}:

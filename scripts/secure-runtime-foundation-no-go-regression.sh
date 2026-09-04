@@ -41,6 +41,18 @@ else
   AION246_IMPLEMENTATION_STATE_ACTIVE=0
 fi
 
+if [[ -f docs/adaptive-intelligence/program-ledger.json ]] && \
+  grep -q '"active_adaptive_intelligence_authorization": "AION-247-AI-0002"' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"active_adaptive_intelligence_task": "AION-248"' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"formal_closeout_task": "AION-249"' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"live_provider_pilot_authorized": true' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"task_id": "AION-248"' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"authorization_transaction": "AION-247-AI-0002"' docs/adaptive-intelligence/program-ledger.json; then
+  AION248_IMPLEMENTATION_STATE_ACTIVE=1
+else
+  AION248_IMPLEMENTATION_STATE_ACTIVE=0
+fi
+
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
 }
@@ -211,6 +223,36 @@ is_aion246_external_cognition_source() {
   return 1
 }
 
+is_aion248_live_provider_source() {
+  [[ "$AION248_IMPLEMENTATION_STATE_ACTIVE" == "1" ]] || return 1
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/live_provider_pilot.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/__init__.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/authorization.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/component_binding.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/provider_selection.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/operator_approval.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/credential_boundary.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/endpoint_policy.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/request_projection.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/response_projection.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/usage_budget.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/retention_policy.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/transport.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/openai_responses_adapter.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/trust.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/redaction.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/replay.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/audit.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/observability.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/integrity.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/evidence.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 is_allowed_change() {
   case "$1" in
     README.md|AGENTS.md|\
@@ -218,12 +260,12 @@ is_allowed_change() {
     docs/adaptive-intelligence/*|\
     docs/secure-runtime-integration/*|\
     docs/v02-release-qualification/*|\
-    docs/release/secure-runtime-integration-*|docs/release/secure-runtime-foundation-*|docs/release/model-gateway-*|docs/release/capability-runtime-*|docs/release/operator-console-*|docs/release/v03-external-cognition-*|docs/release/v02-release-readiness-delta.md|docs/release/v02-release-qualification-*|docs/release/v02-qualification-foundation-operator-evaluation-*|docs/release/v02-staging-qualification-*|\
+    docs/release/secure-runtime-integration-*|docs/release/secure-runtime-foundation-*|docs/release/model-gateway-*|docs/release/capability-runtime-*|docs/release/operator-console-*|docs/release/v03-external-cognition-*|docs/release/v03-live-provider-*|docs/release/v02-release-readiness-delta.md|docs/release/v02-release-qualification-*|docs/release/v02-qualification-foundation-operator-evaluation-*|docs/release/v02-staging-qualification-*|\
     docs/adr/0195-controlled-authenticated-local-operator-runtime-foundation.md|docs/adr/0196-secure-runtime-foundation-evaluation-and-controlled-model-gateway-authorization.md|\
 	    docs/adr/0197-controlled-provider-neutral-model-gateway-and-deterministic-reference-provider.md|docs/adr/0198-controlled-model-gateway-evaluation-and-sandboxed-capability-runtime-authorization.md|\
 	    docs/adr/0199-sandboxed-deterministic-capability-and-synthetic-connector-runtime.md|\
 	    docs/adr/0200-sandboxed-capability-runtime-evaluation-and-controlled-local-operator-console-integration-authorization.md|\
-		    docs/adr/0201-controlled-same-origin-loopback-operator-console-and-integrated-local-runtime.md|docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md|docs/adr/0204-v02-qualification-foundation-evaluation-and-controlled-isolated-staging-qualification-authorization.md|docs/adr/0210-controlled-provider-neutral-external-cognition-gateway-foundation.md|docs/adr/README.md|\
+		    docs/adr/0201-controlled-same-origin-loopback-operator-console-and-integrated-local-runtime.md|docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md|docs/adr/0204-v02-qualification-foundation-evaluation-and-controlled-isolated-staging-qualification-authorization.md|docs/adr/0210-controlled-provider-neutral-external-cognition-gateway-foundation.md|docs/adr/0212-single-openai-responses-api-synthetic-live-provider-pilot.md|docs/adr/README.md|\
     examples/adaptive-intelligence/*|\
     examples/secure-runtime-integration/*|\
     examples/v02-release-qualification/*|\
@@ -238,9 +280,12 @@ is_allowed_change() {
 	    operator-console-static/demo-data/operator-console-*.json|\
 	    operator-console-static/demo-data/adaptive-intelligence-*.json|\
 	    operator-console-static/demo-data/external-cognition-*.json|\
+	    operator-console-static/demo-data/live-provider-pilot-*.json|\
 	    scripts/adaptive-intelligence-*.sh|\
 	    scripts/external-cognition-*.sh|\
 	    scripts/external-cognition-fixture-local-run.py|\
+	    scripts/live-provider-pilot-*.sh|\
+	    scripts/live-provider-pilot-local-run.py|\
 	    scripts/auth-design-check.sh|\
 	    scripts/auth-no-go-regression.sh|\
 	    scripts/auth-runtime-check.sh|\
@@ -335,6 +380,7 @@ is_allowed_change() {
 	    services/brain-api/tests/test_static_console_ui_release_gate.py|\
     services/brain-api/tests/test_secure_runtime_current_state_after_aion236.py|\
     services/brain-api/tests/test_external_cognition_foundation_aion246.py|\
+    services/brain-api/tests/test_live_provider_pilot_aion248.py|\
     services/brain-api/tests/test_v02_release_qualification_*.py|\
     services/brain-api/tests/aion234_test_support.py)
       return 0
@@ -356,6 +402,9 @@ is_allowed_change() {
 	    return 0
 	  fi
 	  if is_aion246_external_cognition_source "$1"; then
+	    return 0
+	  fi
+	  if is_aion248_live_provider_source "$1"; then
 	    return 0
 	  fi
   return 1

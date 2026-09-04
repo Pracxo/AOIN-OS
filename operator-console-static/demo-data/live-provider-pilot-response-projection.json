@@ -1,0 +1,22 @@
+{
+  "file_or_media_received": false,
+  "local_validation_result": "pending_live_execution",
+  "memory_effect": false,
+  "network_effect": false,
+  "output_text_retained": false,
+  "production_effect": false,
+  "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+  "provider_effect": false,
+  "provider_output_promoted_to_truth": false,
+  "provider_response_model_id": "gpt-5.6-terra",
+  "raw_response_retained": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "synthetic": true,
+  "tool_call_received": false,
+  "tool_effect": false,
+  "trust_class": "untrusted_live_provider_output",
+  "view_id": "live-provider-pilot-response-projection"
+}

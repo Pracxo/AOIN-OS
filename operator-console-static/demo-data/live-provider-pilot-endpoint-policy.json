@@ -1,0 +1,22 @@
+{
+  "allowed_endpoint_host": "api.openai.com",
+  "allowed_endpoint_path": "/v1/responses",
+  "allowed_endpoint_scheme": "https",
+  "allowed_http_method": "POST",
+  "memory_effect": false,
+  "model_list_calls_allowed": false,
+  "network_effect": false,
+  "production_effect": false,
+  "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+  "provider_effect": false,
+  "proxy_allowed": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "redirects_allowed": false,
+  "runtime_effect": false,
+  "synthetic": true,
+  "tls_certificate_verification_required": true,
+  "tool_effect": false,
+  "view_id": "live-provider-pilot-endpoint-policy"
+}

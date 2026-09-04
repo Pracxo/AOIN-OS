@@ -151,6 +151,9 @@ while IFS= read -r file; do
   if aion224_is_scoped_governed_learning_memory_local_persistence_path "$file"; then
     continue
   fi
+  if aion248_is_scoped_live_provider_pilot_path "$file"; then
+    continue
+  fi
   case "$file" in
     package.json|package-lock.json|pnpm-lock.yaml|yarn.lock|bun.lockb|\
     */package.json|*/package-lock.json|*/pnpm-lock.yaml|*/yarn.lock|*/bun.lockb)
@@ -243,6 +246,9 @@ while IFS= read -r file; do
     continue
   fi
   if aion224_is_scoped_governed_learning_memory_local_persistence_path "$file"; then
+    continue
+  fi
+  if aion248_is_scoped_live_provider_pilot_path "$file"; then
     continue
   fi
   case "$file" in

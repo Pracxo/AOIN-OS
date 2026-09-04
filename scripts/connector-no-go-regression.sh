@@ -378,6 +378,13 @@ allowed_aion239_prefixes = (
     "services/brain-api/src/aion_brain/v02_release_qualification/",
     "services/brain-api/tests/test_v02_release_qualification_",
 )
+allowed_aion248_files = {
+    "services/brain-api/src/aion_brain/contracts/live_provider_pilot.py",
+}
+allowed_aion248_prefixes = (
+    "operator-console-static/demo-data/live-provider-pilot-",
+    "services/brain-api/src/aion_brain/live_provider_pilot/",
+)
 runtime_prefixes = (
     "services/brain-api/src/",
     "packages/aion-sdk-python/src/",
@@ -399,6 +406,25 @@ runtime_patterns = {
     "policy bypass": re.compile(r"\bpolicy_bypass(_enabled)?\s*[:=]\s*true\b", re.I),
     "audit bypass": re.compile(r"\baudit_bypass(_enabled)?\s*[:=]\s*true\b", re.I),
 }
+
+
+def aion248_live_provider_pilot_state_active() -> bool:
+    ledger = root / "docs/adaptive-intelligence/program-ledger.json"
+    if not ledger.exists():
+        return False
+    payload = json.loads(ledger.read_text(encoding="utf-8"))
+    record = payload.get("aion_248_record")
+    if not isinstance(record, dict):
+        return False
+    return (
+        payload.get("active_adaptive_intelligence_authorization") == "AION-247-AI-0002"
+        and payload.get("active_adaptive_intelligence_task") == "AION-248"
+        and payload.get("formal_closeout_task") == "AION-249"
+        and payload.get("live_provider_pilot_authorized") is True
+        and record.get("task_id") == "AION-248"
+        and record.get("authorization_transaction") == "AION-247-AI-0002"
+    )
+
 
 for relative in sorted(changed):
     path = root / relative
@@ -444,6 +470,13 @@ for relative in sorted(changed):
         or relative.startswith(allowed_aion205_prefixes)
         or relative.startswith(allowed_aion231_prefixes)
         or relative.startswith(allowed_aion239_prefixes)
+        or (
+            aion248_live_provider_pilot_state_active()
+            and (
+                relative in allowed_aion248_files
+                or relative.startswith(allowed_aion248_prefixes)
+            )
+        )
     ):
         continue
     if not relative.startswith(runtime_prefixes):

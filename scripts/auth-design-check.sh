@@ -1606,17 +1606,22 @@ def is_adaptive_intelligence_artifact(name: str) -> bool:
         or name == "operator-console-static/demo-data/external-cognition-authorization.json"
         or name.startswith("docs/release/adaptive-intelligence-")
         or name.startswith("docs/release/v03-external-cognition-")
+        or name.startswith("docs/release/v03-live-provider-")
         or name == "docs/release/v03-development-baseline.md"
         or name
         == "docs/adr/0209-post-rc1-v03-development-baseline-and-adaptive-intelligence-programme-authorization.md"
         or name.startswith("docs/adr/0211-external-cognition-foundation-evaluation-and-single-openai-responses-api-live-provider-pilot-authorization")
+        or name == "docs/adr/0212-single-openai-responses-api-synthetic-live-provider-pilot.md"
         or name.startswith("scripts/adaptive-intelligence-")
         or name.startswith("scripts/external-cognition-")
         or name.startswith("scripts/live-provider-pilot-")
         or name == "scripts/lib/external_cognition_foundation_operator_evaluation.py"
         or name == "scripts/post-rc1-development-baseline-check.sh"
+        or name == "services/brain-api/src/aion_brain/contracts/live_provider_pilot.py"
+        or name.startswith("services/brain-api/src/aion_brain/live_provider_pilot/")
         or name == "services/brain-api/tests/test_adaptive_intelligence_program_authorization_aion245.py"
         or name == "services/brain-api/tests/test_external_cognition_operator_evaluation_aion247.py"
+        or name == "services/brain-api/tests/test_live_provider_pilot_aion248.py"
     )
 
 

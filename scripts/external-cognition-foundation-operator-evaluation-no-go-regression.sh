@@ -19,9 +19,6 @@ from pathlib import Path
 
 ROOT = Path(os.environ["AION_REPO_ROOT"])
 PROHIBITED_PATHS = {
-    "services/brain-api/src/aion_brain/contracts/live_provider_pilot.py",
-    "services/brain-api/src/aion_brain/live_provider_pilot/__init__.py",
-    "scripts/live-provider-pilot-local-run.py",
     "services/brain-api/src/aion_brain/external_cognition/network.py",
     "services/brain-api/src/aion_brain/external_cognition/http_client.py",
     "services/brain-api/src/aion_brain/external_cognition/openai.py",
@@ -33,6 +30,30 @@ PROHIBITED_PATHS = {
     "services/brain-api/src/aion_brain/external_cognition/background_worker.py",
     "services/brain-api/src/aion_brain/external_cognition/scheduler.py",
     "services/brain-api/src/aion_brain/api/external_cognition.py",
+}
+AION248_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/live_provider_pilot.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/__init__.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/authorization.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/component_binding.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/provider_selection.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/operator_approval.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/credential_boundary.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/endpoint_policy.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/request_projection.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/response_projection.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/usage_budget.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/retention_policy.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/transport.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/openai_responses_adapter.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/trust.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/redaction.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/replay.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/audit.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/observability.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/integrity.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/evidence.py",
+    "scripts/live-provider-pilot-local-run.py",
 }
 PROHIBITED_FILE_NAMES = {
     "package.json",
@@ -97,7 +118,11 @@ for path in sorted(changed):
     if name in PROHIBITED_FILE_NAMES:
         raise SystemExit(f"package/dependency file change is not authorized: {path}")
     for prefix in PROHIBITED_PREFIXES:
-        if path.startswith(prefix) and not path.startswith(ALLOWED_RUNTIME_PREFIX):
+        if (
+            path.startswith(prefix)
+            and not path.startswith(ALLOWED_RUNTIME_PREFIX)
+            and path not in AION248_SOURCE
+        ):
             raise SystemExit(f"runtime/dependency/workflow path change is not authorized: {path}")
 
 print("external cognition foundation operator evaluation no-go PASS")

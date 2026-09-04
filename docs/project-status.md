@@ -100,3 +100,9 @@ Production runtime, production authentication, external IdP calls, production cr
 
 Final evaluation `AION-V02RQPE-003` passed for `aion-v0.2.0-rc.1` with 32 hard gates and report fingerprint `8bb225c4f8e5055bc19d961e9a67e7347acf0896195ce4279ba65d597c044952`. PR #163 and PR #164 are merged, the RC1 prerelease is published with 24 assets, and the v0.2 Release Qualification Program is complete.
 - AION-247: external cognition foundation operator evaluation passed; AION-247-AI-0002 authorizes AION-248 for one bounded OpenAI Responses API synthetic pilot while production runtime remains disabled.
+
+## AION-248 Live-Provider Pilot Implementation
+
+AION-248 source contracts, local validation, static evidence, runner and tests are implemented on `phase/v03-openai-live-provider-pilot`. The selected provider is OpenAI, the API family is Responses, the selected model is `gpt-5.6-terra`, and the endpoint policy is `POST https://api.openai.com/v1/responses`.
+
+Live execution remains pending until `OPENAI_API_KEY` is present in the final runner process. The installed Brain API package has no network or environment access; only `scripts/live-provider-pilot-local-run.py` may read the process environment key and make the six authorized synthetic requests. Provider tools, files, previous-response state, memory writes, knowledge promotion, connectors, actions, background loops and production runtime remain disabled.

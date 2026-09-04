@@ -54,6 +54,18 @@ else
   AION247_EVALUATION_STATE_ACTIVE=0
 fi
 
+if [[ -f docs/adaptive-intelligence/program-ledger.json ]] && \
+  grep -q '"active_adaptive_intelligence_authorization": "AION-247-AI-0002"' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"active_adaptive_intelligence_task": "AION-248"' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"formal_closeout_task": "AION-249"' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"live_provider_pilot_authorized": true' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"task_id": "AION-248"' docs/adaptive-intelligence/program-ledger.json && \
+  grep -q '"authorization_transaction": "AION-247-AI-0002"' docs/adaptive-intelligence/program-ledger.json; then
+  AION248_IMPLEMENTATION_STATE_ACTIVE=1
+else
+  AION248_IMPLEMENTATION_STATE_ACTIVE=0
+fi
+
 git_ref_exists() {
   git rev-parse --verify --quiet "$1" >/dev/null 2>&1
 }
@@ -100,12 +112,12 @@ is_allowed_path() {
     README.md|AGENTS.md|\
     services/brain-api/pyproject.toml|packages/aion-sdk-python/pyproject.toml|\
     docs/project-status.md|docs/architecture.md|docs/brain-contract.md|docs/policy-model.md|docs/visual-brain.md|\
-    docs/adaptive-intelligence/*|docs/release/adaptive-intelligence-*|docs/release/v03-development-baseline.md|\
+    docs/adaptive-intelligence/*|docs/release/adaptive-intelligence-*|docs/release/v03-development-baseline.md|docs/release/v03-live-provider-*|\
     docs/adr/0209-post-rc1-v03-development-baseline-and-adaptive-intelligence-programme-authorization.md|\
     examples/adaptive-intelligence/*|\
-    operator-console-static/demo-data/adaptive-intelligence-*.json|operator-console-static/demo-data/external-cognition-authorization.json|\
-    scripts/adaptive-intelligence-*.sh|scripts/post-rc1-development-baseline-check.sh|\
-    services/brain-api/tests/test_adaptive_intelligence_program_authorization_aion245.py|\
+    operator-console-static/demo-data/adaptive-intelligence-*.json|operator-console-static/demo-data/external-cognition-authorization.json|operator-console-static/demo-data/live-provider-pilot-*.json|\
+    scripts/adaptive-intelligence-*.sh|scripts/live-provider-pilot-*.sh|scripts/live-provider-pilot-local-run.py|scripts/post-rc1-development-baseline-check.sh|\
+    services/brain-api/tests/test_adaptive_intelligence_program_authorization_aion245.py|services/brain-api/tests/test_live_provider_pilot_aion248.py|\
     docs/secure-runtime-integration/*|\
     docs/release/secure-runtime-integration-*|docs/release/secure-runtime-foundation-*|\
     docs/release/model-gateway-*|\
@@ -124,6 +136,7 @@ is_allowed_path() {
 		    docs/adr/0203-disabled-v02-production-readiness-qualification-foundation.md|\
 		    docs/adr/0204-v02-qualification-foundation-evaluation-and-controlled-isolated-staging-qualification-authorization.md|\
 		    docs/adr/0206-controlled-staging-evaluation-and-deterministic-v02-release-candidate-artifact-build-authorization.md|\
+		    docs/adr/0212-single-openai-responses-api-synthetic-live-provider-pilot.md|\
 		    docs/adr/README.md|\
 	    docs/v02-release-qualification/*|\
 	    docs/release/v02-release-qualification-*|\
@@ -477,6 +490,36 @@ is_aion246_external_cognition_path() {
   return 1
 }
 
+is_aion248_live_provider_source_path() {
+  [[ "$AION248_IMPLEMENTATION_STATE_ACTIVE" == "1" ]] || return 1
+  case "$1" in
+    services/brain-api/src/aion_brain/contracts/live_provider_pilot.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/__init__.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/authorization.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/component_binding.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/provider_selection.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/operator_approval.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/credential_boundary.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/endpoint_policy.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/request_projection.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/response_projection.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/usage_budget.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/retention_policy.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/transport.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/openai_responses_adapter.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/trust.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/redaction.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/replay.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/audit.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/observability.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/integrity.py|\
+    services/brain-api/src/aion_brain/live_provider_pilot/evidence.py)
+      return 0
+      ;;
+  esac
+  return 1
+}
+
 is_aion231_source_path() {
   case "$1" in
     services/brain-api/src/aion_brain/contracts/secure_runtime.py|\
@@ -541,8 +584,9 @@ while IFS= read -r path; do
 		    if ! is_aion233_model_gateway_source_path "$path" && \
 		      ! is_aion235_capability_runtime_source_path "$path" && \
 		      ! is_aion237_operator_console_source_path "$path" && \
-		      ! is_aion241_v02_staging_qualification_source_path "$path" && \
-		      ! is_aion246_external_cognition_path "$path"; then
+			      ! is_aion241_v02_staging_qualification_source_path "$path" && \
+			      ! is_aion246_external_cognition_path "$path" && \
+			      ! is_aion248_live_provider_source_path "$path"; then
 		      echo "ERROR: AION-230 changed disallowed path: $path" >&2
 		      exit 1
 	    fi
@@ -557,8 +601,9 @@ while IFS= read -r path; do
 		        ! is_aion235_capability_runtime_source_path "$path" && \
 		        ! is_aion237_operator_console_source_path "$path" && \
 		        ! is_aion239_v02_release_qualification_source_path "$path" && \
-		        ! is_aion241_v02_staging_qualification_source_path "$path" && \
-		        ! is_aion246_external_cognition_path "$path"; then
+			        ! is_aion241_v02_staging_qualification_source_path "$path" && \
+			        ! is_aion246_external_cognition_path "$path" && \
+			        ! is_aion248_live_provider_source_path "$path"; then
 		        echo "ERROR: prohibited runtime/dependency/migration path changed: $path" >&2
 		        exit 1
 	      fi

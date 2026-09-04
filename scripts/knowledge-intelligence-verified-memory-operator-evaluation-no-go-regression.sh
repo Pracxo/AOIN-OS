@@ -258,6 +258,9 @@ while IFS=$'\t' read -r status path extra; do
     if aion246_is_scoped_external_cognition_gateway_path "$changed"; then
       continue
     fi
+    if aion248_is_scoped_live_provider_pilot_path "$changed"; then
+      continue
+    fi
     if is_prohibited_path "$changed"; then
       echo "ERROR: protected path changed: $changed" >&2
       exit 1

@@ -68,6 +68,19 @@ filter_aion246_external_cognition_scan_paths() {
   return "$emitted"
 }
 
+filter_aion248_live_provider_scan_paths() {
+  local emitted=1
+  while IFS= read -r line; do
+    local path="${line%%:*}"
+    if aion248_is_scoped_live_provider_pilot_path "$path"; then
+      continue
+    fi
+    printf '%s\n' "$line"
+    emitted=0
+  done
+  return "$emitted"
+}
+
 checkpoint_docs=(
   docs/connectors/connector-platform-checkpoint.md
   docs/connectors/connector-phase-evidence-pack.md
@@ -157,28 +170,32 @@ fi
 
 if rg -n '\b(connector_runtime_enabled|connector_external_calls_enabled|connector_credentials_enabled|connector_token_storage_enabled|connector_activation_enabled|connector_route_registration_enabled|external_calls_enabled|sandbox_execution_enabled|connector_activation_enabled|route_registration_enabled|implementation_approved|package_files_added|migrations_added)\s*[:=]\s*true\b' \
   .env.example services/brain-api/src operator-console-static/demo-data examples/connectors \
-  | filter_aion162_identity_assertion_scan_paths; then
+  | filter_aion162_identity_assertion_scan_paths \
+  | filter_aion248_live_provider_scan_paths; then
   echo "connector platform unsafe enablement found" >&2
   exit 1
 fi
 
 if rg -n '\b(connector_sandbox_runtime_execution_enabled|connector_sandbox_filesystem_enabled|connector_sandbox_network_enabled|connector_sandbox_process_spawn_enabled|connector_sandbox_dynamic_import_enabled|connector_sandbox_package_install_enabled|connector_sandbox_activation_enabled)\s*[:=]\s*true\b' \
   .env.example services/brain-api/src operator-console-static/demo-data examples/connectors \
-  | filter_aion162_identity_assertion_scan_paths; then
+  | filter_aion162_identity_assertion_scan_paths \
+  | filter_aion248_live_provider_scan_paths; then
   echo "connector sandbox unsafe enablement found" >&2
   exit 1
 fi
 
 if rg -n '\b(connector_credentials_storage_enabled|connector_tokens_storage_enabled|connector_secret_material_enabled|connector_external_identity_runtime_enabled|connector_runtime_credential_access_enabled|credential_storage_enabled|token_storage_enabled|secret_material_present|credentials_present)\s*[:=]\s*true\b' \
   .env.example services/brain-api/src operator-console-static/demo-data examples/connectors \
-  | filter_aion162_identity_assertion_scan_paths; then
+  | filter_aion162_identity_assertion_scan_paths \
+  | filter_aion248_live_provider_scan_paths; then
   echo "connector credential/token unsafe enablement found" >&2
   exit 1
 fi
 
 if rg -n '\b(oauth|oidc|saml)[-_ ]?runtime[-_ ]?enabled\s*[:=]\s*true\b|external_identity_runtime_enabled\s*[:=]\s*true\b' \
   .env.example services/brain-api/src operator-console-static/demo-data examples/connectors \
-  | filter_aion162_identity_assertion_scan_paths; then
+  | filter_aion162_identity_assertion_scan_paths \
+  | filter_aion248_live_provider_scan_paths; then
   echo "external identity runtime enablement found" >&2
   exit 1
 fi
@@ -188,7 +205,8 @@ if rg -n 'requests\.(get|post|put|patch|delete)|httpx\.(get|post|put|patch|delet
   | filter_aion162_identity_assertion_scan_paths \
   | filter_aion219_public_research_scan_paths \
   | filter_aion237_operator_console_scan_paths \
-  | filter_aion246_external_cognition_scan_paths; then
+  | filter_aion246_external_cognition_scan_paths \
+  | filter_aion248_live_provider_scan_paths; then
   echo "connector platform external call pattern found" >&2
   exit 1
 fi

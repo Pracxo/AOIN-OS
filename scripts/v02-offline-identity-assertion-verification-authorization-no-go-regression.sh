@@ -86,6 +86,9 @@ while IFS= read -r file; do
   if aion238_is_scoped_secure_runtime_final_closeout_path "$file"; then
     continue
   fi
+  if aion248_is_scoped_live_provider_pilot_path "$file"; then
+    continue
+  fi
   case "$file" in
     services/brain-api/pyproject.toml)
       if aion162_is_scoped_offline_identity_assertion_verification_path "$file"; then

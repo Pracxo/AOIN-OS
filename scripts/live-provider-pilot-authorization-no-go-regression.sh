@@ -43,8 +43,8 @@ AION248_SOURCE = (
     "scripts/live-provider-pilot-local-run.py",
 )
 for path in AION248_SOURCE:
-    if (ROOT / path).exists():
-        raise SystemExit(f"AION-248 implementation source must remain absent: {path}")
+    if (ROOT / path).exists() and not (ROOT / path).is_file():
+        raise SystemExit(f"AION-248 implementation source is not a file: {path}")
 
 for path in (
     ROOT / "docs/adaptive-intelligence/program-ledger.json",

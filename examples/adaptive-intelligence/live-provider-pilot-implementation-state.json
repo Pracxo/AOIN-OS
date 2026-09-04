@@ -1,0 +1,13 @@
+{
+  "active_authorization": "AION-248-AI-0003",
+  "formal_closeout_task": "AION-249",
+  "implementation_task": "AION-248",
+  "installed_package_network_access": false,
+  "live_execution_state": "local_ollama_pilot_authorized_pending_implementation",
+  "pilot_completed": false,
+  "pilot_id": "AION-248-single-ollama-loopback-gpt-oss-20b-synthetic-local-provider-pilot",
+  "provider_runtime_active": false,
+  "runner": "scripts/live-provider-pilot-local-run.py",
+  "runner_no_key_stop_before_dns": true,
+  "selected_model_id": "gpt-oss:20b"
+}

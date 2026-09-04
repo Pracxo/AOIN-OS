@@ -1,0 +1,20 @@
+{
+  "audit_chain_head_retained": true,
+  "authorization_header_in_audit": false,
+  "credential_in_audit": false,
+  "memory_effect": false,
+  "network_effect": false,
+  "production_effect": false,
+  "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+  "provider_effect": false,
+  "provider_response_id_in_audit": false,
+  "raw_prompt_in_audit": false,
+  "raw_response_in_audit": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "synthetic": true,
+  "tool_effect": false,
+  "view_id": "live-provider-pilot-audit"
+}

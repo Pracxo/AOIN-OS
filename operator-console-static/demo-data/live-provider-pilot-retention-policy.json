@@ -1,0 +1,23 @@
+{
+  "authorization_header_retained": false,
+  "credential_fingerprint_created": false,
+  "credential_value_retained": false,
+  "memory_effect": false,
+  "network_effect": false,
+  "production_effect": false,
+  "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+  "provider_application_state_storage_requested": false,
+  "provider_background_state_requested": false,
+  "provider_effect": false,
+  "provider_streaming_requested": false,
+  "provider_zero_data_retention_claimed": false,
+  "raw_prompt_persisted": false,
+  "raw_response_persisted": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "synthetic": true,
+  "tool_effect": false,
+  "view_id": "live-provider-pilot-retention-policy"
+}

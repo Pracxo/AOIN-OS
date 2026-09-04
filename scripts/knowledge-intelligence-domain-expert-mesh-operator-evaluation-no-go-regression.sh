@@ -225,6 +225,27 @@ def aion246_source_allowed(path: str) -> bool:
     )
 
 
+def aion248_source_allowed(path: str) -> bool:
+    ledger = ROOT / "docs/adaptive-intelligence/program-ledger.json"
+    if not ledger.exists():
+        return False
+    payload = json.loads(ledger.read_text(encoding="utf-8"))
+    record = payload.get("aion_248_record")
+    return (
+        isinstance(record, dict)
+        and payload.get("active_adaptive_intelligence_authorization") == "AION-247-AI-0002"
+        and payload.get("active_adaptive_intelligence_task") == "AION-248"
+        and payload.get("formal_closeout_task") == "AION-249"
+        and payload.get("live_provider_pilot_authorized") is True
+        and record.get("task_id") == "AION-248"
+        and record.get("authorization_transaction") == "AION-247-AI-0002"
+        and (
+            path == "services/brain-api/src/aion_brain/contracts/live_provider_pilot.py"
+            or path.startswith("services/brain-api/src/aion_brain/live_provider_pilot/")
+        )
+    )
+
+
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
     return subprocess.run(args, cwd=ROOT, text=True, capture_output=True, check=check)
 
@@ -330,6 +351,8 @@ for parts in changed_entries():
         ):
             continue
         if aion241_source_allowed(normalized):
+            continue
+        if aion248_source_allowed(normalized):
             continue
         if any(normalized.startswith(prefix) for prefix in PROHIBITED_PREFIXES):
             raise SystemExit(f"prohibited runtime/workflow/package/migration path changed: {normalized}")

@@ -72,6 +72,29 @@ AION246_SOURCE = {
     "services/brain-api/src/aion_brain/external_cognition/integrity.py",
     "services/brain-api/src/aion_brain/external_cognition/evidence.py",
 }
+AION248_SOURCE = {
+    "services/brain-api/src/aion_brain/contracts/live_provider_pilot.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/__init__.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/authorization.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/component_binding.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/provider_selection.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/operator_approval.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/credential_boundary.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/endpoint_policy.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/request_projection.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/response_projection.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/usage_budget.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/retention_policy.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/transport.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/openai_responses_adapter.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/trust.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/redaction.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/replay.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/audit.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/observability.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/integrity.py",
+    "services/brain-api/src/aion_brain/live_provider_pilot/evidence.py",
+}
 
 def run(args: list[str], check: bool = True) -> subprocess.CompletedProcess[str]:
     return subprocess.run(args, cwd=ROOT, text=True, capture_output=True, check=check)
@@ -166,9 +189,35 @@ def aion246_implementation_state_active() -> bool:
 def aion246_source_allowed(path: str) -> bool:
     return aion246_active and path in AION246_SOURCE
 
+def aion248_implementation_state_active() -> bool:
+    if not ADAPTIVE_PROGRAM_LEDGER.exists():
+        return False
+    payload = json.loads(ADAPTIVE_PROGRAM_LEDGER.read_text(encoding="utf-8"))
+    record = payload.get("aion_248_record", {})
+    return (
+        isinstance(record, dict)
+        and payload.get("live_provider_pilot_authorized") is True
+        and payload.get("active_adaptive_intelligence_authorization") == "AION-247-AI-0002"
+        and payload.get("active_adaptive_intelligence_task") == "AION-248"
+        and payload.get("formal_closeout_task") == "AION-249"
+        and record.get("task_id") == "AION-248"
+        and record.get("branch") == "phase/v03-openai-live-provider-pilot"
+        and record.get("authorization_transaction") == "AION-247-AI-0002"
+        and record.get("next_task") == "AION-249"
+        and record.get("runtime_state")
+        in {
+            "single_openai_responses_api_live_provider_pilot_implementation_ready_live_execution_pending",
+            "single_openai_responses_api_synthetic_live_provider_pilot_complete",
+        }
+    )
+
+def aion248_source_allowed(path: str) -> bool:
+    return aion248_active and path in AION248_SOURCE
+
 aion235_active = aion235_implementation_state_active()
 aion237_active = aion237_implementation_state_active()
 aion246_active = aion246_implementation_state_active()
+aion248_active = aion248_implementation_state_active()
 for parts in changed_entries():
     status = parts[0]
     if status.startswith(("D", "R")):
@@ -184,6 +233,8 @@ for parts in changed_entries():
         if aion237_source_allowed(normalized):
             continue
         if aion246_source_allowed(normalized):
+            continue
+        if aion248_source_allowed(normalized):
             continue
         if normalized == "services/brain-api/src/aion_brain/contracts/v02_release_qualification.py" or normalized.startswith(
             "services/brain-api/src/aion_brain/v02_release_qualification/"

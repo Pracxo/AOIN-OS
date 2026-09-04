@@ -1,0 +1,18 @@
+{
+  "evidence_path": "examples/adaptive-intelligence/live-provider-pilot-evidence.json",
+  "live_evidence_committed": false,
+  "memory_effect": false,
+  "network_effect": false,
+  "pilot_id": "AION-248-single-openai-responses-api-synthetic-live-provider-pilot",
+  "production_effect": false,
+  "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+  "provider_effect": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "state": "pending_authorized_runner_execution",
+  "synthetic": true,
+  "tool_effect": false,
+  "view_id": "live-provider-pilot-evidence"
+}

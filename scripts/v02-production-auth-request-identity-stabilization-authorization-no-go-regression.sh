@@ -87,6 +87,9 @@ while IFS= read -r file; do
   if aion238_is_scoped_secure_runtime_final_closeout_path "$file"; then
     continue
   fi
+  if aion248_is_scoped_live_provider_pilot_path "$file"; then
+    continue
+  fi
   case "$file" in
     package.json|package-lock.json|pnpm-lock.yaml|yarn.lock|bun.lockb|\
     */package.json|*/package-lock.json|*/pnpm-lock.yaml|*/yarn.lock|*/bun.lockb)

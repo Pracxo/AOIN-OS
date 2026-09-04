@@ -1,0 +1,25 @@
+{
+  "allowed_model_ids": [
+    "gpt-5.6-sol",
+    "gpt-5.6-terra",
+    "gpt-5.6-luna"
+  ],
+  "authorization_id": "AION-247-AI-0002",
+  "memory_effect": false,
+  "model_discovery_performed": false,
+  "network_effect": false,
+  "production_effect": false,
+  "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+  "provider_api_family": "responses",
+  "provider_effect": false,
+  "provider_id": "openai",
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "selected_model_id": "gpt-5.6-terra",
+  "synthetic": true,
+  "tool_effect": false,
+  "unapproved_alias_rejected": "gpt-5.6",
+  "view_id": "live-provider-pilot-provider-selection"
+}

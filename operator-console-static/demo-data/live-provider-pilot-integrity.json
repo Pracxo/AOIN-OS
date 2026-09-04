@@ -1,0 +1,21 @@
+{
+  "aion_247_authorization_reconciled": true,
+  "evidence_contains_credentials": false,
+  "evidence_contains_raw_content": false,
+  "installed_package_network_access": false,
+  "integrity_state": "implementation_ready_pending_live_evidence",
+  "memory_effect": false,
+  "network_effect": false,
+  "post_pilot_network_runtime_active": false,
+  "post_pilot_provider_runtime_active": false,
+  "production_effect": false,
+  "program_id": "AION-ADAPTIVE-INTELLIGENCE-001",
+  "provider_effect": false,
+  "read_only": true,
+  "redacted": true,
+  "redaction_applied": true,
+  "runtime_effect": false,
+  "synthetic": true,
+  "tool_effect": false,
+  "view_id": "live-provider-pilot-integrity"
+}
