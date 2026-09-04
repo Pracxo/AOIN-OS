@@ -40,6 +40,16 @@ ROOT = Path(os.environ["AION_REPO_ROOT"])
 program = json.loads((ROOT / "docs/adaptive-intelligence/program-ledger.json").read_text())
 hold = json.loads((ROOT / "examples/adaptive-intelligence/live-provider-pilot-runtime-hold.json").read_text())
 
+if program.get("active_adaptive_intelligence_authorization") == "AION-248-AI-0003":
+    replacement = json.loads((ROOT / "examples/adaptive-intelligence/local-ollama-provider-authorization.json").read_text())
+    closeout = json.loads((ROOT / "examples/adaptive-intelligence/openai-live-provider-attempt-closeout.json").read_text())
+    if replacement.get("authorization_active") is not True or replacement.get("provider_id") != "ollama-local":
+        raise SystemExit("local replacement authorization mismatch")
+    if closeout.get("authorization_active") is not False or closeout.get("authorization_reusable") is not False:
+        raise SystemExit("failed OpenAI authorization closeout mismatch")
+    print("Local Ollama provider pilot runtime hold PASS")
+    raise SystemExit(0)
+
 if program.get("active_adaptive_intelligence_authorization") != "AION-247-AI-0002":
     raise SystemExit("AION-248 runtime hold active authorization mismatch")
 if program.get("formal_closeout_task") != "AION-249":
